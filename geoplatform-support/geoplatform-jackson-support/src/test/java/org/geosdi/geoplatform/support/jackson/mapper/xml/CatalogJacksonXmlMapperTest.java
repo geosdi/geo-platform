@@ -43,7 +43,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
 import java.io.File;
 import java.io.StringReader;
 import java.util.List;
@@ -55,6 +54,7 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.iterate;
 import static java.util.stream.Stream.of;
+import static javax.annotation.meta.When.NEVER;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -182,7 +182,7 @@ public class CatalogJacksonXmlMapperTest {
      * @param theValue
      * @return {@link Cd}
      */
-     static Cd toCd(@Nonnull(when = When.NEVER) Integer theValue)  {
+     static Cd toCd(@Nonnull(when = NEVER) Integer theValue)  {
          checkArgument(theValue != null, "The Parameter value must not be null");
          return new Cd() {
              {

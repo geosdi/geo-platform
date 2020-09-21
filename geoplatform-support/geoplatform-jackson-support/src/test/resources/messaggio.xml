@@ -1,0 +1,789 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MESSAGGIO>
+    <INTESTAZIONE>
+        <DA>05779711000</DA>
+        <A>7865656445</A>
+        <ID/>
+        <DATA_INVIO>2007-02-05</DATA_INVIO>
+        <TIPO_DOC>LCL</TIPO_DOC>
+        <VERSIONE>1.0.0</VERSIONE>
+    </INTESTAZIONE>
+    <LCL>
+        <NUMERO_LCL>6300278565</NUMERO_LCL>
+        <DATA_EMISSIONE>2006-12-14</DATA_EMISSIONE>
+        <DESCRIZIONE>Partita lavori n 2 -Sistemazione BT Catanzaro Centro</DESCRIZIONE>
+        <DATA_INIZIO_LAVORI>2007-03-01</DATA_INIZIO_LAVORI>
+        <DATA_FINE_LAVORI>2007-08-31</DATA_FINE_LAVORI>
+        <VALORE_PUNTOA>7.05</VALORE_PUNTOA>
+        <VALORE_PUNTOB/>
+        <IMPORTO_PRESUNTO>78843.64</IMPORTO_PRESUNTO>
+        <CODICE_GO>QL0</CODICE_GO>
+        <DESCRIZIONE_GO>Prog.Lav. sede CAL</DESCRIZIONE_GO>
+        <OPERATORE_ENEL>A696496</OPERATORE_ENEL>
+        <PROGETTISTA/>
+        <CAPO_UNITA/>
+        <VERSIONE_MATERIALE>01.02.2004</VERSIONE_MATERIALE>
+        <CONTRATTO>
+            <NUMERO>5200002163</NUMERO>
+            <DESCRIZIONE/>
+            <DATA_EMISSIONE>2006-05-05</DATA_EMISSIONE>
+            <VALORE_PUNTOA/>
+            <VALORE_PUNTOB/>
+            <DATA_INIZIO>2006-07-01</DATA_INIZIO>
+            <DATA_FINE>2006-12-30</DATA_FINE>
+            <IMPORTO_MASSIMO>246558.02</IMPORTO_MASSIMO>
+        </CONTRATTO>
+        <EMITTENTE_FATTURA>
+            <PARTITA_IVA>7865656445</PARTITA_IVA>
+            <DENOMINAZIONE>Azienda Test</DENOMINAZIONE>
+            <INDIRIZZO>Zona Test</INDIRIZZO>
+            <CAP>16121</CAP>
+            <COMUNE>Genova</COMUNE>
+            <PROVINCIA>GE</PROVINCIA>
+            <NAZIONE>IT</NAZIONE>
+        </EMITTENTE_FATTURA>
+        <INTESTATARIO_ORDINE>
+            <PARTITA_IVA>7865656445</PARTITA_IVA>
+            <DENOMINAZIONE>Azienda Test</DENOMINAZIONE>
+            <INDIRIZZO>Zona Test</INDIRIZZO>
+            <CAP>16121</CAP>
+            <COMUNE>Genova</COMUNE>
+            <PROVINCIA>GE</PROVINCIA>
+            <NAZIONE>IT</NAZIONE>
+        </INTESTATARIO_ORDINE>
+        <INTESTATARIO_CONTRATTO>
+            <PARTITA_IVA>7865656445</PARTITA_IVA>
+            <DENOMINAZIONE>Azienda Test</DENOMINAZIONE>
+            <INDIRIZZO>Zona Test</INDIRIZZO>
+            <CAP>16121</CAP>
+            <COMUNE>Genova</COMUNE>
+            <PROVINCIA>GE</PROVINCIA>
+            <NAZIONE>IT</NAZIONE>
+        </INTESTATARIO_CONTRATTO>
+        <ZONA>
+            <CODICE>QL0</CODICE>
+            <DENOMINAZIONE>Progettazione Lavori CAL</DENOMINAZIONE>
+            <INDIRIZZO>Via Buccarelli, 53</INDIRIZZO>
+            <CAP>88100</CAP>
+            <COMUNE>Catanzaro</COMUNE>
+            <PROVINCIA>CZ</PROVINCIA>
+            <NAZIONE>IT</NAZIONE>
+        </ZONA>
+        <NOTE/>
+        <LAVORO>
+            <CODICE>000080573282</CODICE>
+            <DESCRIZIONE>POT. BT/S AFFER. CAB. PIAVE-CATANZARO</DESCRIZIONE>
+            <IMPORTO>3013.41</IMPORTO>
+            <CODICE_CFT>DQ1N216</CODICE_CFT>
+            <DESC_CFT>Catanzaro</DESC_CFT>
+            <ORDINE_MASTER/>
+            <CODICE_PREVENTIVO>813348</CODICE_PREVENTIVO>
+            <NUM_PROTOCOLLO/>
+            <ATTIVITA>
+                <TRATTA_PICCHETTO>001-002</TRATTA_PICCHETTO>
+                <PROGRESSIVO>0010</PROGRESSIVO>
+                <DESCRIZIONE>XM7 Posa cavo interrato Linee BT KM</DESCRIZIONE>
+                <CODICE>XM7</CODICE>
+                <WBE>GEDQ1N06QSR463</WBE>
+                <UNITA_MISURA>KM</UNITA_MISURA>
+                <TIPOLOGIA_IMPIANTO>463R</TIPOLOGIA_IMPIANTO>
+                <QTA_PROGETTO>0</QTA_PROGETTO>
+                <IMPORTO_PRESUNTO>2839.6</IMPORTO_PRESUNTO>
+                <PRESTAZIONE>
+                    <CODICE>EP1005</CODICE>
+                    <DESCRIZIONE>EXT - CANALIZ. TIPO B IN STRADA ASFALT. O CEMENTATA</DESCRIZIONE>
+                    <QTA_PROGETTO>80.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP1006</CODICE>
+                    <DESCRIZIONE>EXT - CANALIZ. TIPO B IN AREE PAVIMENTATE</DESCRIZIONE>
+                    <QTA_PROGETTO>20.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP1011</CODICE>
+                    <DESCRIZIONE>EXT - FORN. E POSA TUBO ACC. O CANAL. LAM. ZINCATA</DESCRIZIONE>
+                    <QTA_PROGETTO>6.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP3007</CODICE>
+                    <DESCRIZIONE>EXT - POSA CAVO BT INTERRATO SEZ. 50 MMQ.</DESCRIZIONE>
+                    <QTA_PROGETTO>86.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <MATERIALE>
+                    <CODICE>330656</CODICE>
+                    <QTA_PROGETTO>86.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+            </ATTIVITA>
+            <ATTIVITA>
+                <TRATTA_PICCHETTO>001-002</TRATTA_PICCHETTO>
+                <PROGRESSIVO>0020</PROGRESSIVO>
+                <DESCRIZIONE>XP7 Posa/sostit. cass.strad. sezion. NUM</DESCRIZIONE>
+                <CODICE>XP7</CODICE>
+                <WBE>GEDQ1N06QSR463</WBE>
+                <UNITA_MISURA>NR</UNITA_MISURA>
+                <TIPOLOGIA_IMPIANTO>463R</TIPOLOGIA_IMPIANTO>
+                <QTA_PROGETTO>1</QTA_PROGETTO>
+                <IMPORTO_PRESUNTO>173.81</IMPORTO_PRESUNTO>
+                <PRESTAZIONE>
+                    <CODICE>EP1015</CODICE>
+                    <DESCRIZIONE>EXT - MESSA IN OPERA CASSETTA O ARM. STRADALE</DESCRIZIONE>
+                    <QTA_PROGETTO>2.000</QTA_PROGETTO>
+                    <UNITA_MISURA>NUM</UNITA_MISURA>
+                    <VALORE_ZMED>7900</VALORE_ZMED>
+                </PRESTAZIONE>
+                <MATERIALE>
+                    <CODICE>286022</CODICE>
+                    <QTA_PROGETTO>2.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+                <MATERIALE>
+                    <CODICE>286032</CODICE>
+                    <QTA_PROGETTO>2.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+            </ATTIVITA>
+        </LAVORO>
+        <LAVORO>
+            <CODICE>000080573543</CODICE>
+            <DESCRIZIONE>POT. BT/S AFFER. CAB. LICEO-CATANZARO</DESCRIZIONE>
+            <IMPORTO>3761.89</IMPORTO>
+            <CODICE_CFT>DQ1N216</CODICE_CFT>
+            <DESC_CFT>Catanzaro</DESC_CFT>
+            <ORDINE_MASTER>000080573542</ORDINE_MASTER>
+            <CODICE_PREVENTIVO>813358</CODICE_PREVENTIVO>
+            <NUM_PROTOCOLLO/>
+            <ATTIVITA>
+                <TRATTA_PICCHETTO>003-004</TRATTA_PICCHETTO>
+                <PROGRESSIVO>0010</PROGRESSIVO>
+                <DESCRIZIONE>XM7 Posa cavo interrato Linee BT KM</DESCRIZIONE>
+                <CODICE>XM7</CODICE>
+                <WBE>GEDQ1N06QSR463</WBE>
+                <UNITA_MISURA>KM</UNITA_MISURA>
+                <TIPOLOGIA_IMPIANTO>463R</TIPOLOGIA_IMPIANTO>
+                <QTA_PROGETTO>0</QTA_PROGETTO>
+                <IMPORTO_PRESUNTO>3674.98</IMPORTO_PRESUNTO>
+                <PRESTAZIONE>
+                    <CODICE>EP1005</CODICE>
+                    <DESCRIZIONE>EXT - CANALIZ. TIPO B IN STRADA ASFALT. O CEMENTATA</DESCRIZIONE>
+                    <QTA_PROGETTO>120.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP1006</CODICE>
+                    <DESCRIZIONE>EXT - CANALIZ. TIPO B IN AREE PAVIMENTATE</DESCRIZIONE>
+                    <QTA_PROGETTO>15.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP1011</CODICE>
+                    <DESCRIZIONE>EXT - FORN. E POSA TUBO ACC. O CANAL. LAM. ZINCATA</DESCRIZIONE>
+                    <QTA_PROGETTO>6.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP3007</CODICE>
+                    <DESCRIZIONE>EXT - POSA CAVO BT INTERRATO SEZ. 50 MMQ.</DESCRIZIONE>
+                    <QTA_PROGETTO>150.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <MATERIALE>
+                    <CODICE>330656</CODICE>
+                    <QTA_PROGETTO>150.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+            </ATTIVITA>
+            <ATTIVITA>
+                <TRATTA_PICCHETTO>003-004</TRATTA_PICCHETTO>
+                <PROGRESSIVO>0020</PROGRESSIVO>
+                <DESCRIZIONE>XP7 Posa/sostit. cass.strad. sezion. NUM</DESCRIZIONE>
+                <CODICE>XP7</CODICE>
+                <WBE>GEDQ1N06QSR463</WBE>
+                <UNITA_MISURA>NR</UNITA_MISURA>
+                <TIPOLOGIA_IMPIANTO>463R</TIPOLOGIA_IMPIANTO>
+                <QTA_PROGETTO>1</QTA_PROGETTO>
+                <IMPORTO_PRESUNTO>86.91</IMPORTO_PRESUNTO>
+                <PRESTAZIONE>
+                    <CODICE>EP1015</CODICE>
+                    <DESCRIZIONE>EXT - MESSA IN OPERA CASSETTA O ARM. STRADALE</DESCRIZIONE>
+                    <QTA_PROGETTO>1.000</QTA_PROGETTO>
+                    <UNITA_MISURA>NUM</UNITA_MISURA>
+                    <VALORE_ZMED>7900</VALORE_ZMED>
+                </PRESTAZIONE>
+                <MATERIALE>
+                    <CODICE>286022</CODICE>
+                    <QTA_PROGETTO>1.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+                <MATERIALE>
+                    <CODICE>286032</CODICE>
+                    <QTA_PROGETTO>1.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+            </ATTIVITA>
+        </LAVORO>
+        <LAVORO>
+            <CODICE>000080573604</CODICE>
+            <DESCRIZIONE>POT. BT/S CAB. FITTANTE-ASST-SUDITALIA-C</DESCRIZIONE>
+            <IMPORTO>17309.86</IMPORTO>
+            <CODICE_CFT>DQ1N216</CODICE_CFT>
+            <DESC_CFT>Catanzaro</DESC_CFT>
+            <ORDINE_MASTER/>
+            <CODICE_PREVENTIVO>813363</CODICE_PREVENTIVO>
+            <NUM_PROTOCOLLO/>
+            <ATTIVITA>
+                <TRATTA_PICCHETTO>016-017</TRATTA_PICCHETTO>
+                <PROGRESSIVO>0010</PROGRESSIVO>
+                <DESCRIZIONE>XM7 Posa cavo interrato Linee BT KM</DESCRIZIONE>
+                <CODICE>XM7</CODICE>
+                <WBE>GEDQ1N06QSR463</WBE>
+                <UNITA_MISURA>KM</UNITA_MISURA>
+                <TIPOLOGIA_IMPIANTO>463R</TIPOLOGIA_IMPIANTO>
+                <QTA_PROGETTO>0</QTA_PROGETTO>
+                <IMPORTO_PRESUNTO>16440.85</IMPORTO_PRESUNTO>
+                <PRESTAZIONE>
+                    <CODICE>EP1005</CODICE>
+                    <DESCRIZIONE>EXT - CANALIZ. TIPO B IN STRADA ASFALT. O CEMENTATA</DESCRIZIONE>
+                    <QTA_PROGETTO>550.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP1006</CODICE>
+                    <DESCRIZIONE>EXT - CANALIZ. TIPO B IN AREE PAVIMENTATE</DESCRIZIONE>
+                    <QTA_PROGETTO>30.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP1007</CODICE>
+                    <DESCRIZIONE>EXT - SUPPL.DA EP1001 A EP1006 x TUBO IN PIU POS. ORIZZ.</DESCRIZIONE>
+                    <QTA_PROGETTO>200.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP1011</CODICE>
+                    <DESCRIZIONE>EXT - FORN. E POSA TUBO ACC. O CANAL. LAM. ZINCATA</DESCRIZIONE>
+                    <QTA_PROGETTO>6.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP3007</CODICE>
+                    <DESCRIZIONE>EXT - POSA CAVO BT INTERRATO SEZ. 50 MMQ.</DESCRIZIONE>
+                    <QTA_PROGETTO>660.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <MATERIALE>
+                    <CODICE>330627</CODICE>
+                    <QTA_PROGETTO>660.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+            </ATTIVITA>
+            <ATTIVITA>
+                <TRATTA_PICCHETTO>016-017</TRATTA_PICCHETTO>
+                <PROGRESSIVO>0020</PROGRESSIVO>
+                <DESCRIZIONE>XP7 Posa/sostit. cass.strad. sezion. NUM</DESCRIZIONE>
+                <CODICE>XP7</CODICE>
+                <WBE>GEDQ1N06QSR463</WBE>
+                <UNITA_MISURA>NR</UNITA_MISURA>
+                <TIPOLOGIA_IMPIANTO>463R</TIPOLOGIA_IMPIANTO>
+                <QTA_PROGETTO>1</QTA_PROGETTO>
+                <IMPORTO_PRESUNTO>869.01</IMPORTO_PRESUNTO>
+                <PRESTAZIONE>
+                    <CODICE>EP1015</CODICE>
+                    <DESCRIZIONE>EXT - MESSA IN OPERA CASSETTA O ARM. STRADALE</DESCRIZIONE>
+                    <QTA_PROGETTO>10.000</QTA_PROGETTO>
+                    <UNITA_MISURA>NUM</UNITA_MISURA>
+                    <VALORE_ZMED>7900</VALORE_ZMED>
+                </PRESTAZIONE>
+                <MATERIALE>
+                    <CODICE>286022</CODICE>
+                    <QTA_PROGETTO>10.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+                <MATERIALE>
+                    <CODICE>286032</CODICE>
+                    <QTA_PROGETTO>10.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+            </ATTIVITA>
+        </LAVORO>
+        <LAVORO>
+            <CODICE>000080573765</CODICE>
+            <DESCRIZIONE>POT. BT/S CAB. TRIBUNALE-GENIO CIV.-CATA</DESCRIZIONE>
+            <IMPORTO>9946.62</IMPORTO>
+            <CODICE_CFT>DQ1N216</CODICE_CFT>
+            <DESC_CFT>Catanzaro</DESC_CFT>
+            <ORDINE_MASTER/>
+            <CODICE_PREVENTIVO>813364</CODICE_PREVENTIVO>
+            <NUM_PROTOCOLLO/>
+            <ATTIVITA>
+                <TRATTA_PICCHETTO>009-010</TRATTA_PICCHETTO>
+                <PROGRESSIVO>0010</PROGRESSIVO>
+                <DESCRIZIONE>XM7 Posa cavo interrato Linee BT KM</DESCRIZIONE>
+                <CODICE>XM7</CODICE>
+                <WBE>GEDQ1N06QSR463</WBE>
+                <UNITA_MISURA>KM</UNITA_MISURA>
+                <TIPOLOGIA_IMPIANTO>463R</TIPOLOGIA_IMPIANTO>
+                <QTA_PROGETTO>0</QTA_PROGETTO>
+                <IMPORTO_PRESUNTO>9512.11</IMPORTO_PRESUNTO>
+                <PRESTAZIONE>
+                    <CODICE>EP1005</CODICE>
+                    <DESCRIZIONE>EXT - CANALIZ. TIPO B IN STRADA ASFALT. O CEMENTATA</DESCRIZIONE>
+                    <QTA_PROGETTO>345.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP1006</CODICE>
+                    <DESCRIZIONE>EXT - CANALIZ. TIPO B IN AREE PAVIMENTATE</DESCRIZIONE>
+                    <QTA_PROGETTO>20.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP1007</CODICE>
+                    <DESCRIZIONE>EXT - SUPPL.DA EP1001 A EP1006 x TUBO IN PIU POS. ORIZZ.</DESCRIZIONE>
+                    <QTA_PROGETTO>20.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP1011</CODICE>
+                    <DESCRIZIONE>EXT - FORN. E POSA TUBO ACC. O CANAL. LAM. ZINCATA</DESCRIZIONE>
+                    <QTA_PROGETTO>6.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP3007</CODICE>
+                    <DESCRIZIONE>EXT - POSA CAVO BT INTERRATO SEZ. 50 MMQ.</DESCRIZIONE>
+                    <QTA_PROGETTO>400.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <MATERIALE>
+                    <CODICE>330627</CODICE>
+                    <QTA_PROGETTO>400.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+            </ATTIVITA>
+            <ATTIVITA>
+                <TRATTA_PICCHETTO>009-010</TRATTA_PICCHETTO>
+                <PROGRESSIVO>0020</PROGRESSIVO>
+                <DESCRIZIONE>XP7 Posa/sostit. cass.strad. sezion. NUM</DESCRIZIONE>
+                <CODICE>XP7</CODICE>
+                <WBE>GEDQ1N06QSR463</WBE>
+                <UNITA_MISURA>NR</UNITA_MISURA>
+                <TIPOLOGIA_IMPIANTO>463R</TIPOLOGIA_IMPIANTO>
+                <QTA_PROGETTO>1</QTA_PROGETTO>
+                <IMPORTO_PRESUNTO>434.51</IMPORTO_PRESUNTO>
+                <PRESTAZIONE>
+                    <CODICE>EP1015</CODICE>
+                    <DESCRIZIONE>EXT - MESSA IN OPERA CASSETTA O ARM. STRADALE</DESCRIZIONE>
+                    <QTA_PROGETTO>5.000</QTA_PROGETTO>
+                    <UNITA_MISURA>NUM</UNITA_MISURA>
+                    <VALORE_ZMED>7900</VALORE_ZMED>
+                </PRESTAZIONE>
+                <MATERIALE>
+                    <CODICE>286022</CODICE>
+                    <QTA_PROGETTO>5.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+                <MATERIALE>
+                    <CODICE>286032</CODICE>
+                    <QTA_PROGETTO>5.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+            </ATTIVITA>
+        </LAVORO>
+        <LAVORO>
+            <CODICE>000080573798</CODICE>
+            <DESCRIZIONE>POT. BT/S CAB. PRIAMO-ROMEO-CONI-CATANZA</DESCRIZIONE>
+            <IMPORTO>15379.25</IMPORTO>
+            <CODICE_CFT>DQ1N216</CODICE_CFT>
+            <DESC_CFT>Catanzaro</DESC_CFT>
+            <ORDINE_MASTER/>
+            <CODICE_PREVENTIVO>813374</CODICE_PREVENTIVO>
+            <NUM_PROTOCOLLO/>
+            <ATTIVITA>
+                <TRATTA_PICCHETTO>013-014</TRATTA_PICCHETTO>
+                <PROGRESSIVO>0010</PROGRESSIVO>
+                <DESCRIZIONE>XM7 Posa cavo interrato Linee BT KM</DESCRIZIONE>
+                <CODICE>XM7</CODICE>
+                <WBE>GEDQ1N06QSR463</WBE>
+                <UNITA_MISURA>KM</UNITA_MISURA>
+                <TIPOLOGIA_IMPIANTO>463R</TIPOLOGIA_IMPIANTO>
+                <QTA_PROGETTO>0</QTA_PROGETTO>
+                <IMPORTO_PRESUNTO>14857.84</IMPORTO_PRESUNTO>
+                <PRESTAZIONE>
+                    <CODICE>EP1005</CODICE>
+                    <DESCRIZIONE>EXT - CANALIZ. TIPO B IN STRADA ASFALT. O CEMENTATA</DESCRIZIONE>
+                    <QTA_PROGETTO>550.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP1006</CODICE>
+                    <DESCRIZIONE>EXT - CANALIZ. TIPO B IN AREE PAVIMENTATE</DESCRIZIONE>
+                    <QTA_PROGETTO>10.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP1007</CODICE>
+                    <DESCRIZIONE>EXT - SUPPL.DA EP1001 A EP1006 x TUBO IN PIU POS. ORIZZ.</DESCRIZIONE>
+                    <QTA_PROGETTO>75.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP1011</CODICE>
+                    <DESCRIZIONE>EXT - FORN. E POSA TUBO ACC. O CANAL. LAM. ZINCATA</DESCRIZIONE>
+                    <QTA_PROGETTO>12.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP3007</CODICE>
+                    <DESCRIZIONE>EXT - POSA CAVO BT INTERRATO SEZ. 50 MMQ.</DESCRIZIONE>
+                    <QTA_PROGETTO>650.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <MATERIALE>
+                    <CODICE>330627</CODICE>
+                    <QTA_PROGETTO>600.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+                <MATERIALE>
+                    <CODICE>330656</CODICE>
+                    <QTA_PROGETTO>50.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+            </ATTIVITA>
+            <ATTIVITA>
+                <TRATTA_PICCHETTO>013-014</TRATTA_PICCHETTO>
+                <PROGRESSIVO>0020</PROGRESSIVO>
+                <DESCRIZIONE>XP7 Posa/sostit. cass.strad. sezion. NUM</DESCRIZIONE>
+                <CODICE>XP7</CODICE>
+                <WBE>GEDQ1N06QSR463</WBE>
+                <UNITA_MISURA>NR</UNITA_MISURA>
+                <TIPOLOGIA_IMPIANTO>463R</TIPOLOGIA_IMPIANTO>
+                <QTA_PROGETTO>1</QTA_PROGETTO>
+                <IMPORTO_PRESUNTO>521.41</IMPORTO_PRESUNTO>
+                <PRESTAZIONE>
+                    <CODICE>EP1015</CODICE>
+                    <DESCRIZIONE>EXT - MESSA IN OPERA CASSETTA O ARM. STRADALE</DESCRIZIONE>
+                    <QTA_PROGETTO>6.000</QTA_PROGETTO>
+                    <UNITA_MISURA>NUM</UNITA_MISURA>
+                    <VALORE_ZMED>7900</VALORE_ZMED>
+                </PRESTAZIONE>
+                <MATERIALE>
+                    <CODICE>286022</CODICE>
+                    <QTA_PROGETTO>6.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+                <MATERIALE>
+                    <CODICE>286032</CODICE>
+                    <QTA_PROGETTO>6.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+            </ATTIVITA>
+        </LAVORO>
+        <LAVORO>
+            <CODICE>000080573833</CODICE>
+            <DESCRIZIONE>POT. BT/S CAB. PRATICA-S.GIOVANNI-CATANZ</DESCRIZIONE>
+            <IMPORTO>13689.98</IMPORTO>
+            <CODICE_CFT>DQ1N216</CODICE_CFT>
+            <DESC_CFT>Catanzaro</DESC_CFT>
+            <ORDINE_MASTER/>
+            <CODICE_PREVENTIVO>813381</CODICE_PREVENTIVO>
+            <NUM_PROTOCOLLO/>
+            <ATTIVITA>
+                <TRATTA_PICCHETTO>019-018</TRATTA_PICCHETTO>
+                <PROGRESSIVO>0010</PROGRESSIVO>
+                <DESCRIZIONE>XM7 Posa cavo interrato Linee BT KM</DESCRIZIONE>
+                <CODICE>XM7</CODICE>
+                <WBE>GEDQ1N06QSR463</WBE>
+                <UNITA_MISURA>KM</UNITA_MISURA>
+                <TIPOLOGIA_IMPIANTO>463R</TIPOLOGIA_IMPIANTO>
+                <QTA_PROGETTO>0</QTA_PROGETTO>
+                <IMPORTO_PRESUNTO>13429.27</IMPORTO_PRESUNTO>
+                <PRESTAZIONE>
+                    <CODICE>EP1005</CODICE>
+                    <DESCRIZIONE>EXT - CANALIZ. TIPO B IN STRADA ASFALT. O CEMENTATA</DESCRIZIONE>
+                    <QTA_PROGETTO>340.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP1006</CODICE>
+                    <DESCRIZIONE>EXT - CANALIZ. TIPO B IN AREE PAVIMENTATE</DESCRIZIONE>
+                    <QTA_PROGETTO>140.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP3007</CODICE>
+                    <DESCRIZIONE>EXT - POSA CAVO BT INTERRATO SEZ. 50 MMQ.</DESCRIZIONE>
+                    <QTA_PROGETTO>500.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <MATERIALE>
+                    <CODICE>330627</CODICE>
+                    <QTA_PROGETTO>500.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+            </ATTIVITA>
+            <ATTIVITA>
+                <TRATTA_PICCHETTO>019-018</TRATTA_PICCHETTO>
+                <PROGRESSIVO>0020</PROGRESSIVO>
+                <DESCRIZIONE>XP7 Posa/sostit. cass.strad. sezion. NUM</DESCRIZIONE>
+                <CODICE>XP7</CODICE>
+                <WBE>GEDQ1N06QSR463</WBE>
+                <UNITA_MISURA>NR</UNITA_MISURA>
+                <TIPOLOGIA_IMPIANTO>463R</TIPOLOGIA_IMPIANTO>
+                <QTA_PROGETTO>1</QTA_PROGETTO>
+                <IMPORTO_PRESUNTO>260.71</IMPORTO_PRESUNTO>
+                <PRESTAZIONE>
+                    <CODICE>EP1015</CODICE>
+                    <DESCRIZIONE>EXT - MESSA IN OPERA CASSETTA O ARM. STRADALE</DESCRIZIONE>
+                    <QTA_PROGETTO>3.000</QTA_PROGETTO>
+                    <UNITA_MISURA>NUM</UNITA_MISURA>
+                    <VALORE_ZMED>7900</VALORE_ZMED>
+                </PRESTAZIONE>
+                <MATERIALE>
+                    <CODICE>286022</CODICE>
+                    <QTA_PROGETTO>3.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+                <MATERIALE>
+                    <CODICE>286032</CODICE>
+                    <QTA_PROGETTO>3.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+            </ATTIVITA>
+        </LAVORO>
+        <LAVORO>
+            <CODICE>000080573939</CODICE>
+            <DESCRIZIONE>POT. BT/S CAB. SANATORIO PROV.-CATANZARO</DESCRIZIONE>
+            <IMPORTO>3582.03</IMPORTO>
+            <CODICE_CFT>DQ1N216</CODICE_CFT>
+            <DESC_CFT>Catanzaro</DESC_CFT>
+            <ORDINE_MASTER/>
+            <CODICE_PREVENTIVO>813387</CODICE_PREVENTIVO>
+            <NUM_PROTOCOLLO/>
+            <ATTIVITA>
+                <TRATTA_PICCHETTO>011-012</TRATTA_PICCHETTO>
+                <PROGRESSIVO>0010</PROGRESSIVO>
+                <DESCRIZIONE>XM7 Posa cavo interrato Linee BT KM</DESCRIZIONE>
+                <CODICE>XM7</CODICE>
+                <WBE>GEDQ1N06QSR463</WBE>
+                <UNITA_MISURA>KM</UNITA_MISURA>
+                <TIPOLOGIA_IMPIANTO>463R</TIPOLOGIA_IMPIANTO>
+                <QTA_PROGETTO>0</QTA_PROGETTO>
+                <IMPORTO_PRESUNTO>3408.22</IMPORTO_PRESUNTO>
+                <PRESTAZIONE>
+                    <CODICE>EP1005</CODICE>
+                    <DESCRIZIONE>EXT - CANALIZ. TIPO B IN STRADA ASFALT. O CEMENTATA</DESCRIZIONE>
+                    <QTA_PROGETTO>140.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP3007</CODICE>
+                    <DESCRIZIONE>EXT - POSA CAVO BT INTERRATO SEZ. 50 MMQ.</DESCRIZIONE>
+                    <QTA_PROGETTO>150.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <MATERIALE>
+                    <CODICE>330656</CODICE>
+                    <QTA_PROGETTO>150.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+            </ATTIVITA>
+            <ATTIVITA>
+                <TRATTA_PICCHETTO>011-012</TRATTA_PICCHETTO>
+                <PROGRESSIVO>0020</PROGRESSIVO>
+                <DESCRIZIONE>XP7 Posa/sostit. cass.strad. sezion. NUM</DESCRIZIONE>
+                <CODICE>XP7</CODICE>
+                <WBE>GEDQ1N06QSR463</WBE>
+                <UNITA_MISURA>NR</UNITA_MISURA>
+                <TIPOLOGIA_IMPIANTO>463R</TIPOLOGIA_IMPIANTO>
+                <QTA_PROGETTO>1</QTA_PROGETTO>
+                <IMPORTO_PRESUNTO>173.81</IMPORTO_PRESUNTO>
+                <PRESTAZIONE>
+                    <CODICE>EP1015</CODICE>
+                    <DESCRIZIONE>EXT - MESSA IN OPERA CASSETTA O ARM. STRADALE</DESCRIZIONE>
+                    <QTA_PROGETTO>2.000</QTA_PROGETTO>
+                    <UNITA_MISURA>NUM</UNITA_MISURA>
+                    <VALORE_ZMED>7900</VALORE_ZMED>
+                </PRESTAZIONE>
+                <MATERIALE>
+                    <CODICE>286022</CODICE>
+                    <QTA_PROGETTO>2.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+                <MATERIALE>
+                    <CODICE>286032</CODICE>
+                    <QTA_PROGETTO>2.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+            </ATTIVITA>
+        </LAVORO>
+        <LAVORO>
+            <CODICE>000080573952</CODICE>
+            <DESCRIZIONE>POT. BT/S CAB. DOMUS MARIA-CATANZARO</DESCRIZIONE>
+            <IMPORTO>4792.98</IMPORTO>
+            <CODICE_CFT>DQ1N216</CODICE_CFT>
+            <DESC_CFT>Catanzaro</DESC_CFT>
+            <ORDINE_MASTER/>
+            <CODICE_PREVENTIVO>813393</CODICE_PREVENTIVO>
+            <NUM_PROTOCOLLO/>
+            <ATTIVITA>
+                <TRATTA_PICCHETTO>007-008</TRATTA_PICCHETTO>
+                <PROGRESSIVO>0010</PROGRESSIVO>
+                <DESCRIZIONE>XM7 Posa cavo interrato Linee BT KM</DESCRIZIONE>
+                <CODICE>XM7</CODICE>
+                <WBE>GEDQ1N06QSR463</WBE>
+                <UNITA_MISURA>KM</UNITA_MISURA>
+                <TIPOLOGIA_IMPIANTO>463R</TIPOLOGIA_IMPIANTO>
+                <QTA_PROGETTO>0</QTA_PROGETTO>
+                <IMPORTO_PRESUNTO>4619.17</IMPORTO_PRESUNTO>
+                <PRESTAZIONE>
+                    <CODICE>EP1005</CODICE>
+                    <DESCRIZIONE>EXT - CANALIZ. TIPO B IN STRADA ASFALT. O CEMENTATA</DESCRIZIONE>
+                    <QTA_PROGETTO>190.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP3007</CODICE>
+                    <DESCRIZIONE>EXT - POSA CAVO BT INTERRATO SEZ. 50 MMQ.</DESCRIZIONE>
+                    <QTA_PROGETTO>200.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <MATERIALE>
+                    <CODICE>330627</CODICE>
+                    <QTA_PROGETTO>200.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+            </ATTIVITA>
+            <ATTIVITA>
+                <TRATTA_PICCHETTO>007-008</TRATTA_PICCHETTO>
+                <PROGRESSIVO>0020</PROGRESSIVO>
+                <DESCRIZIONE>XP7 Posa/sostit. cass.strad. sezion. NUM</DESCRIZIONE>
+                <CODICE>XP7</CODICE>
+                <WBE>GEDQ1N06QSR463</WBE>
+                <UNITA_MISURA>NR</UNITA_MISURA>
+                <TIPOLOGIA_IMPIANTO>463R</TIPOLOGIA_IMPIANTO>
+                <QTA_PROGETTO>1</QTA_PROGETTO>
+                <IMPORTO_PRESUNTO>173.81</IMPORTO_PRESUNTO>
+                <PRESTAZIONE>
+                    <CODICE>EP1015</CODICE>
+                    <DESCRIZIONE>EXT - MESSA IN OPERA CASSETTA O ARM. STRADALE</DESCRIZIONE>
+                    <QTA_PROGETTO>2.000</QTA_PROGETTO>
+                    <UNITA_MISURA>NUM</UNITA_MISURA>
+                    <VALORE_ZMED>7900</VALORE_ZMED>
+                </PRESTAZIONE>
+                <MATERIALE>
+                    <CODICE>286022</CODICE>
+                    <QTA_PROGETTO>2.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+                <MATERIALE>
+                    <CODICE>286032</CODICE>
+                    <QTA_PROGETTO>2.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+            </ATTIVITA>
+        </LAVORO>
+        <LAVORO>
+            <CODICE>000080573971</CODICE>
+            <DESCRIZIONE>POT. BT/S CAB. POLIAMBULATORIO-CATANZARO</DESCRIZIONE>
+            <IMPORTO>7367.62</IMPORTO>
+            <CODICE_CFT>DQ1N216</CODICE_CFT>
+            <DESC_CFT>Catanzaro</DESC_CFT>
+            <ORDINE_MASTER/>
+            <CODICE_PREVENTIVO>813400</CODICE_PREVENTIVO>
+            <NUM_PROTOCOLLO/>
+            <ATTIVITA>
+                <TRATTA_PICCHETTO>007-008</TRATTA_PICCHETTO>
+                <PROGRESSIVO>0010</PROGRESSIVO>
+                <DESCRIZIONE>XM7 Posa cavo interrato Linee BT KM</DESCRIZIONE>
+                <CODICE>XM7</CODICE>
+                <WBE>GEDQ1N06QSR463</WBE>
+                <UNITA_MISURA>KM</UNITA_MISURA>
+                <TIPOLOGIA_IMPIANTO>463R</TIPOLOGIA_IMPIANTO>
+                <QTA_PROGETTO>0</QTA_PROGETTO>
+                <IMPORTO_PRESUNTO>7020.01</IMPORTO_PRESUNTO>
+                <PRESTAZIONE>
+                    <CODICE>EP1006</CODICE>
+                    <DESCRIZIONE>EXT - CANALIZ. TIPO B IN AREE PAVIMENTATE</DESCRIZIONE>
+                    <QTA_PROGETTO>190.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <PRESTAZIONE>
+                    <CODICE>EP3007</CODICE>
+                    <DESCRIZIONE>EXT - POSA CAVO BT INTERRATO SEZ. 50 MMQ.</DESCRIZIONE>
+                    <QTA_PROGETTO>200.000</QTA_PROGETTO>
+                    <UNITA_MISURA>M</UNITA_MISURA>
+                    <VALORE_ZMED>7020</VALORE_ZMED>
+                </PRESTAZIONE>
+                <MATERIALE>
+                    <CODICE>330656</CODICE>
+                    <QTA_PROGETTO>200.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+            </ATTIVITA>
+            <ATTIVITA>
+                <TRATTA_PICCHETTO>007-008</TRATTA_PICCHETTO>
+                <PROGRESSIVO>0020</PROGRESSIVO>
+                <DESCRIZIONE>XP7 Posa/sostit. cass.strad. sezion. NUM</DESCRIZIONE>
+                <CODICE>XP7</CODICE>
+                <WBE>GEDQ1N06QSR463</WBE>
+                <UNITA_MISURA>NR</UNITA_MISURA>
+                <TIPOLOGIA_IMPIANTO>463R</TIPOLOGIA_IMPIANTO>
+                <QTA_PROGETTO>1</QTA_PROGETTO>
+                <IMPORTO_PRESUNTO>347.61</IMPORTO_PRESUNTO>
+                <PRESTAZIONE>
+                    <CODICE>EP1015</CODICE>
+                    <DESCRIZIONE>EXT - MESSA IN OPERA CASSETTA O ARM. STRADALE</DESCRIZIONE>
+                    <QTA_PROGETTO>4.000</QTA_PROGETTO>
+                    <UNITA_MISURA>NUM</UNITA_MISURA>
+                    <VALORE_ZMED>7900</VALORE_ZMED>
+                </PRESTAZIONE>
+                <MATERIALE>
+                    <CODICE>286022</CODICE>
+                    <QTA_PROGETTO>4.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+                <MATERIALE>
+                    <CODICE>286032</CODICE>
+                    <QTA_PROGETTO>4.000</QTA_PROGETTO>
+                    <SEGNO>+</SEGNO>
+                </MATERIALE>
+            </ATTIVITA>
+        </LAVORO>
+    </LCL>
+</MESSAGGIO>

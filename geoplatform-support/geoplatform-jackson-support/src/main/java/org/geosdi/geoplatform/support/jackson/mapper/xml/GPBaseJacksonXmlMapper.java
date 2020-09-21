@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.support.jackson.reader.GPBaseJacksonReaderSupport;
 import org.geosdi.geoplatform.support.jackson.xml.JacksonXmlSupport;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.File;
 import java.io.Writer;
 
@@ -53,9 +54,16 @@ public class GPBaseJacksonXmlMapper<T extends Object> extends GPBaseJacksonReade
 
     /**
      * @param theEntityClass
+     */
+    public GPBaseJacksonXmlMapper(@Nonnull(when = NEVER) Class<T> theEntityClass) {
+        this(theEntityClass, null);
+    }
+
+    /**
+     * @param theEntityClass
      * @param theJacksonXmlSupport
      */
-    public GPBaseJacksonXmlMapper(@Nonnull(when = NEVER) Class<T> theEntityClass, JacksonXmlSupport theJacksonXmlSupport) {
+    public GPBaseJacksonXmlMapper(@Nonnull(when = NEVER) Class<T> theEntityClass, @Nullable JacksonXmlSupport theJacksonXmlSupport) {
         super(((theJacksonXmlSupport != null) ? theJacksonXmlSupport : DEFAULT_XML_MAPPER), theEntityClass);
     }
 

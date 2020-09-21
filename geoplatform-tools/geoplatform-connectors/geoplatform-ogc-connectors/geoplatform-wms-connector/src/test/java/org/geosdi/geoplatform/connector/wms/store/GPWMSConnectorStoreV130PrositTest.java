@@ -72,7 +72,6 @@ public class GPWMSConnectorStoreV130PrositTest {
                         .build()).build();
     }
 
-
     @Test
     public void wmsGetFeatureInfoV130Test() throws Exception {
         GPWMSGetFeatureInfoV130Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();

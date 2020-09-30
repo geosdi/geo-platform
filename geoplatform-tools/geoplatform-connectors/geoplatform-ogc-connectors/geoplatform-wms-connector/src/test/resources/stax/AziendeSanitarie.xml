@@ -7,31 +7,86 @@
         <gml:null>unknown</gml:null>
     </gml:boundedBy>
     <gml:featureMember>
-        <PNSRS:IT_sedi_ASL_2020 fid="IT_sedi_ASL_2020.83">
+        <PNSRS:IT_sedi_ASL_2020 fid="IT_sedi_ASL_2020.59">
             <PNSRS:geom>
                 <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
                     <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
-                        15.8089059,40.6370906
+                        12.4622736,41.9013136
                     </gml:coordinates>
                 </gml:Point>
             </PNSRS:geom>
             <PNSRS:anno>2020</PNSRS:anno>
-            <PNSRS:codice reg>170</PNSRS:codice reg>
-            <PNSRS:denominazi>BASILICATA</PNSRS:denominazi>
-            <PNSRS:codice azi>201</PNSRS:codice azi>
-            <PNSRS:denomina_1>AZIENDA SANITARIA LOCALE DI POTENZA ASP</PNSRS:denomina_1>
-            <PNSRS:indirizzo>VIA TORRACA 2</PNSRS:indirizzo>
-            <PNSRS:cap>85100</PNSRS:cap>
-            <PNSRS:comune>POTENZA</PNSRS:comune>
+            <PNSRS:codice_reg>120</PNSRS:codice_reg>
+            <PNSRS:denominazi>LAZIO</PNSRS:denominazi>
+            <PNSRS:codice_azi>201</PNSRS:codice_azi>
+            <PNSRS:denomina_1>ROMA 1</PNSRS:denomina_1>
+            <PNSRS:indirizzo>BORGO SANTO SPIRITO 3</PNSRS:indirizzo>
+            <PNSRS:cap>193</PNSRS:cap>
+            <PNSRS:comune>ROMA</PNSRS:comune>
             <PNSRS:stato>ITALIA</PNSRS:stato>
-            <PNSRS:sigla prov>PZ</PNSRS:sigla prov>
-            <PNSRS:telefono>0971/310278</PNSRS:telefono>
-            <PNSRS:fax>0971/310265</PNSRS:fax>
-            <PNSRS:e-mail>info@asl2.potenza.it</PNSRS:e-mail>
-            <PNSRS:sito web>www.asl2.potenza.it</PNSRS:sito web>
-            <PNSRS:partita iv>1722360763</PNSRS:partita iv>
-            <PNSRS:lon>15.8089059</PNSRS:lon>
-            <PNSRS:lat>40.6370906</PNSRS:lat>
+            <PNSRS:sigla_prov>RM</PNSRS:sigla_prov>
+            <PNSRS:telefono>668.352.461</PNSRS:telefono>
+            <PNSRS:fax>668352442</PNSRS:fax>
+            <PNSRS:e_mail>dir.gen@asl-rme.it</PNSRS:e_mail>
+            <PNSRS:sito_web>www.asl-rme.it</PNSRS:sito_web>
+            <PNSRS:lon>12.4622736</PNSRS:lon>
+            <PNSRS:lat>41.90131359999999</PNSRS:lat>
+        </PNSRS:IT_sedi_ASL_2020>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:IT_sedi_ASL_2020 fid="IT_sedi_ASL_2020.60">
+            <PNSRS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.5414669,41.9128494
+                    </gml:coordinates>
+                </gml:Point>
+            </PNSRS:geom>
+            <PNSRS:anno>2020</PNSRS:anno>
+            <PNSRS:codice_reg>120</PNSRS:codice_reg>
+            <PNSRS:denominazi>LAZIO</PNSRS:denominazi>
+            <PNSRS:codice_azi>202</PNSRS:codice_azi>
+            <PNSRS:denomina_1>ROMA 2</PNSRS:denomina_1>
+            <PNSRS:indirizzo>VIA FILIPPO MEDA 35</PNSRS:indirizzo>
+            <PNSRS:cap>157</PNSRS:cap>
+            <PNSRS:comune>ROMA</PNSRS:comune>
+            <PNSRS:stato>ITALIA</PNSRS:stato>
+            <PNSRS:sigla_prov>RM</PNSRS:sigla_prov>
+            <PNSRS:telefono>064143 3257</PNSRS:telefono>
+            <PNSRS:fax>064143 3256</PNSRS:fax>
+            <PNSRS:e_mail>direzione.generale@aslromab.it</PNSRS:e_mail>
+            <PNSRS:sito_web>www.aslromab.it</PNSRS:sito_web>
+            <PNSRS:partita_iv>13665151000</PNSRS:partita_iv>
+            <PNSRS:lon>12.5414669</PNSRS:lon>
+            <PNSRS:lat>41.9128494</PNSRS:lat>
+        </PNSRS:IT_sedi_ASL_2020>
+    </gml:featureMember>
+    <gml:featureMember>
+        <PNSRS:IT_sedi_ASL_2020 fid="IT_sedi_ASL_2020.61">
+            <PNSRS:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.3807513,41.7842178
+                    </gml:coordinates>
+                </gml:Point>
+            </PNSRS:geom>
+            <PNSRS:anno>2020</PNSRS:anno>
+            <PNSRS:codice_reg>120</PNSRS:codice_reg>
+            <PNSRS:denominazi>LAZIO</PNSRS:denominazi>
+            <PNSRS:codice_azi>203</PNSRS:codice_azi>
+            <PNSRS:denomina_1>ROMA 3</PNSRS:denomina_1>
+            <PNSRS:indirizzo>VIA CASAL BERNOCCHI 73</PNSRS:indirizzo>
+            <PNSRS:cap>125</PNSRS:cap>
+            <PNSRS:comune>ROMA</PNSRS:comune>
+            <PNSRS:stato>ITALIA</PNSRS:stato>
+            <PNSRS:sigla_prov>RM</PNSRS:sigla_prov>
+            <PNSRS:telefono>06 56487640</PNSRS:telefono>
+            <PNSRS:fax>06 56487635</PNSRS:fax>
+            <PNSRS:e_mail>direttoregenerale@aslromad.it</PNSRS:e_mail>
+            <PNSRS:sito_web>www.aslromad.it</PNSRS:sito_web>
+            <PNSRS:partita_iv>4733491007</PNSRS:partita_iv>
+            <PNSRS:lon>12.3807513</PNSRS:lon>
+            <PNSRS:lat>41.7842178</PNSRS:lat>
         </PNSRS:IT_sedi_ASL_2020>
     </gml:featureMember>
 </wfs:FeatureCollection>

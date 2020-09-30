@@ -135,4 +135,16 @@ public class GPWMSConnectorStoreV111PrositTest {
                 .withFeatureCount(8)
                 .withInfoFormat(GML).withX(50).withY(50).getResponse());
     }
+
+    @Test
+    public void f_wmsGetFeatureInfoV111Test() throws Exception {
+        GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
+        GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(15.686073303222658, 40.95721522257321, 15.765595436096193, 40.985891519320774);
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("admin:admin_shp_vigneti_catastali").collect(toSet()),
+                "EPSG:4326", "1853", "885");
+        logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("admin:admin_shp_vigneti_catastali")
+                .withWMSGetMapRequest(wmsGetMapBaseRequest)
+                .withFeatureCount(8)
+                .withInfoFormat(GML).withX(966).withY(481).getResponse());
+    }
 }

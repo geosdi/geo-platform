@@ -40,8 +40,6 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
-import javax.xml.stream.XMLStreamException;
-
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -335,7 +333,6 @@ public class GPWMSGetFeatureInfoStaxReaderTest extends WMSGetFeatureInfoStaxRead
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("ReteGas.xml"))));
     }
 
-    @Test(expected = XMLStreamException.class)
     public void c_d_wmsGetFeatureInfoStaxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_AZIENDE_SANITARIE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("AziendeSanitarie.xml"))));
@@ -369,11 +366,5 @@ public class GPWMSGetFeatureInfoStaxReaderTest extends WMSGetFeatureInfoStaxRead
     public void c_i_wmsGetFeatureInfoStaxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_BUILDING_VIGNETI_CATASTALI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("admin_vigneti_catastali.xml"))));
-    }
-
-    @Test
-    public void c_l_wmsGetFeatureInfoStaxReaderTest() throws Exception {
-        logger.info("#######################FEATURE_COLLECTION_BUILDING_AZIENDE_SANITARIE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
-                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("AziendeSanitarie.xml"))));
     }
 }

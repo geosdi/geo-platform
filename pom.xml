@@ -615,7 +615,7 @@
             <dependency>
                 <groupId>com.thoughtworks.xstream</groupId>
                 <artifactId>xstream</artifactId>
-                <version>1.4.12</version>
+                <version>1.4.13</version>
             </dependency>
             
             <dependency>
@@ -1445,7 +1445,7 @@
  
         <activemq-version>5.8.0</activemq-version>
         
-        <jettison>1.3.7</jettison>
+        <jettison>1.4.1</jettison>
         <joda-version>2.10.6</joda-version>
         
         <javax.ws.rs-api-version>2.1</javax.ws.rs-api-version>

@@ -35,8 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.widget.cql;
 
-import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleConstants;
+import org.geosdi.geoplatform.gui.client.puregwt.CQLFilterHandlerManager;
+import org.geosdi.geoplatform.gui.client.puregwt.CheckDataSourceHandler;
 import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabWidget;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
@@ -45,10 +46,12 @@ import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class CQLFilterTabWidget extends GeoPlatformTabWidget implements ICQLFilterTab {
+public class CQLFilterTabWidget extends GeoPlatformTabWidget implements ICQLFilterTab, CheckDataSourceHandler
+{
 
     public final static short TAB_WIDGET_WIDTH = CQLFilterWidget.WIDGET_WIDTH - 15;
     public final static short TAB_WIDGET_HEIGHT = CQLFilterWidget.WIDGET_HEIGHT - 97;
+
     public final static short TAB_FIELDSET_WIDTH = 350;
     private final GPTreePanel<GPBeanTreeModel> treePanel;
     private CQLFilterAdvancedTab advancedTab;
@@ -57,6 +60,7 @@ public class CQLFilterTabWidget extends GeoPlatformTabWidget implements ICQLFilt
     public CQLFilterTabWidget(boolean lazy, GPTreePanel<GPBeanTreeModel> treePanel) {
         super(lazy);
         this.treePanel = treePanel;
+        CQLFilterHandlerManager.addHandler(CheckDataSourceHandler.TYPE, this);
     }
 
     @Override
@@ -103,5 +107,15 @@ public class CQLFilterTabWidget extends GeoPlatformTabWidget implements ICQLFilt
             this.advancedTab.setCQLValue(cqlFilter);
             super.setSelection(this.advancedTab);
         }
+    }
+
+    /**
+     *
+     * @param checkDataSource
+     */
+    @Override
+    public void checkDataSource(boolean checkDataSource) {
+        this.basicTab.setEnabled(checkDataSource);
+        this.setSelection(checkDataSource ? this.basicTab : this.advancedTab);
     }
 }

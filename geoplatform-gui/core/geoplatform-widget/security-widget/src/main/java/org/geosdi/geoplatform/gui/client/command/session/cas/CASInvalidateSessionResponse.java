@@ -57,7 +57,8 @@ public class CASInvalidateSessionResponse extends InvalidateSessionResponse {
 
     @Override
     public void executeInvalidateSession() {
-        Window.Location.replace(super.result);
+        Window.Location.reload();
+      //  Window.Location.replace(super.result);
 //        Window.open(super.result, "_self", "logoutRequest");
     }
 

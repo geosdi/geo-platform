@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.command.session;
 
-import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.session.InvalidateSessionRequest;
 import org.geosdi.geoplatform.gui.client.command.session.InvalidateSessionResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -46,6 +45,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -69,12 +70,12 @@ public class InvalidateSessionCommand implements
     public InvalidateSessionResponse execute(InvalidateSessionRequest request,
             HttpServletRequest httpServletRequest) {
 
-        logger.debug("##################### Executing {} Command", this.
+        logger.info("##################### Executing {} Command", this.
                 getClass().getSimpleName());
 
         this.securityService.invalidateSession(httpServletRequest);
 
-        logger.debug("#################### Session Invalidate.");
+        logger.info("#################### Session Invalidate.");
 
         return isr;
     }

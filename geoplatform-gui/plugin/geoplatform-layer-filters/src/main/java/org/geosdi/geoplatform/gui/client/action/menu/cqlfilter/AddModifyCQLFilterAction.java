@@ -37,16 +37,14 @@ package org.geosdi.geoplatform.gui.client.action.menu.cqlfilter;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.json.client.JSONObject;
-import com.google.gwt.json.client.JSONParser;
-import com.google.gwt.json.client.JSONValue;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.LayerFiltersResources;
 import org.geosdi.geoplatform.gui.client.command.datasource.CheckDataSourceRequest;
 import org.geosdi.geoplatform.gui.client.command.datasource.CheckDataSourceResponse;
 import org.geosdi.geoplatform.gui.client.i18n.BasicWidgetModuleMessages;
-import org.geosdi.geoplatform.gui.client.i18n.LayerFiltersModuleMessages;
+import org.geosdi.geoplatform.gui.client.puregwt.CQLFilterHandlerManager;
+import org.geosdi.geoplatform.gui.client.puregwt.event.GPCheckDataSourceEvent;
 import org.geosdi.geoplatform.gui.client.widget.cql.CQLFilterWidget;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
@@ -55,8 +53,6 @@ import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
-
-import static org.geotools.gml3.GML.boundingBox;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -89,11 +85,14 @@ public class AddModifyCQLFilterAction extends MenuBaseAction {
 
             @Override
             public void onCommandSuccess(final CheckDataSourceResponse response) {
-                if(response.getResult())
+                cqlFilterWidget.show();
+                CQLFilterHandlerManager.fireEvent(new GPCheckDataSourceEvent(response.getResult()));
+
+/*                if(response.getResult())
                     cqlFilterWidget.show();
                 else
                     GeoPlatformMessage.errorMessage(BasicWidgetModuleMessages.INSTANCE.errorDataSource(),
-                            BasicWidgetModuleMessages.INSTANCE.datasourceNotMatches());
+                            BasicWidgetModuleMessages.INSTANCE.datasourceNotMatches());*/
             }
 
             @Override

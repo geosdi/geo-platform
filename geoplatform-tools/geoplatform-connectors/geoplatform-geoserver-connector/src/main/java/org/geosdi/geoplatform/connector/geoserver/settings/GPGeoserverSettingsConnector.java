@@ -111,8 +111,8 @@ public abstract class GPGeoserverSettingsConnector extends GPGeoserverSecurityCo
     @Override
     public GPGeoserverLoadGlobalSettingsRequest loadGeoserverGlobalSettingRequest() {
         switch (version) {
-            case V216x:
             case V217x:
+            case V218x:
                 return new GPGeoserverLoadGlobalSettingsRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
@@ -125,8 +125,8 @@ public abstract class GPGeoserverSettingsConnector extends GPGeoserverSecurityCo
     @Override
     public GeoserverUpdateGlobalSettingsRequest updateGlobalSettingsRequest() {
         switch (version) {
-            case V216x:
             case V217x:
+            case V218x:
                 return new GPGeoserverUpdateGlobalSettingsRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
@@ -139,8 +139,8 @@ public abstract class GPGeoserverSettingsConnector extends GPGeoserverSecurityCo
     @Override
     public GPGeoserverLoadContactSettingsRequest loadGeoserverContactSettingsRequest() {
         switch (version) {
-            case V216x:
             case V217x:
+            case V218x:
                 return new GPGeoserverLoadContactSettingsRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");

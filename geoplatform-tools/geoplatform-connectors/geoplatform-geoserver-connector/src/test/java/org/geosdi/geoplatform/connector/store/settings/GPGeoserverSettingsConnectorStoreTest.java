@@ -63,7 +63,7 @@ public class GPGeoserverSettingsConnectorStoreTest extends GPBaseGeoserverConnec
 
     @Test
     public void a_loadGeoserverGlobalSettingsRequestTest() throws Exception {
-        GPGeoserverLoadGlobalSettingsRequest loadGlobalSettingsRequest = geoserverConnectorStoreV2_17_x.loadGeoserverGlobalSettingRequest();
+        GPGeoserverLoadGlobalSettingsRequest loadGlobalSettingsRequest = geoserverConnectorStoreV2_18_x.loadGeoserverGlobalSettingRequest();
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_GLOBAL_SETTINGS_RESPONSE : {}\n", loadGlobalSettingsRequest.getResponse());
     }
 
@@ -72,14 +72,14 @@ public class GPGeoserverSettingsConnectorStoreTest extends GPBaseGeoserverConnec
         GPGeoserverGlobalSettings geoserverGlobalSettings = jacksonSupport.getDefaultMapper()
                 .readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "GeoserverGlobalSettings.json")
                         .collect(joining(separator, "", separator))), GPGeoserverGlobalSettings.class);
-        GeoserverUpdateGlobalSettingsRequest updateGlobalSettingsRequest = geoserverConnectorStoreV2_17_x.updateGlobalSettingsRequest();
+        GeoserverUpdateGlobalSettingsRequest updateGlobalSettingsRequest = geoserverConnectorStoreV2_18_x.updateGlobalSettingsRequest();
         updateGlobalSettingsRequest.withSettingsBody(geoserverGlobalSettings);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_UPDATE_GLOBAL_SETTINGS_RESPONSE : {}", updateGlobalSettingsRequest.getResponse());
     }
 
     @Test
     public void c_loadGeoserverGlobalSettingsRequestTest() throws Exception {
-        GPGeoserverLoadGlobalSettingsRequest loadGlobalSettingsRequest = geoserverConnectorStoreV2_17_x.loadGeoserverGlobalSettingRequest();
+        GPGeoserverLoadGlobalSettingsRequest loadGlobalSettingsRequest = geoserverConnectorStoreV2_18_x.loadGeoserverGlobalSettingRequest();
         GPGeoserverGlobalSettings geoserverGlobalSettings = loadGlobalSettingsRequest.getResponse();
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_GLOBAL_SETTINGS_RESPONSE : {}\n", geoserverGlobalSettings);
         IGPGeoserverSettings geoserverSettings = geoserverGlobalSettings.getSettings();
@@ -92,7 +92,7 @@ public class GPGeoserverSettingsConnectorStoreTest extends GPBaseGeoserverConnec
 
     @Test
     public void d_loadGeoserverContactSettingsRequestTest() throws Exception {
-        GPGeoserverLoadContactSettingsRequest contactSettingsRequest = geoserverConnectorStoreV2_17_x.loadGeoserverContactSettingsRequest();
+        GPGeoserverLoadContactSettingsRequest contactSettingsRequest = geoserverConnectorStoreV2_18_x.loadGeoserverContactSettingsRequest();
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_CONTACT_SETTINGS_RESPONSE : {}\n", contactSettingsRequest.getResponse());
     }
 }

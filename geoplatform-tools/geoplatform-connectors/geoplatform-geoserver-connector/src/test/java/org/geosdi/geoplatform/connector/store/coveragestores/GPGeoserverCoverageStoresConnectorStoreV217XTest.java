@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.connector.store.coveragestores;
 
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverLoadCoverageStoreRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverLoadCoverageStoresRequest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV216xTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV217xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
@@ -48,46 +48,46 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverCoverageStoresConnectorStoreV216xTest extends GPBaseGeoserverConnectorStoreV216xTest {
+public class GPGeoserverCoverageStoresConnectorStoreV217XTest extends GPBaseGeoserverConnectorStoreV217xTest {
 
     @Test
     public void a_loadCoverageStoresConnectorTest() throws Exception {
-        GeoserverLoadCoverageStoresRequest loadCoverageStoresRequest = geoserverConnectorStoreV2_16_x.loadCoverageStoresRequest();
+        GeoserverLoadCoverageStoresRequest loadCoverageStoresRequest = geoserverConnectorStoreV2_17_x.loadCoverageStoresRequest();
         loadCoverageStoresRequest.withWorkspace("nurc");
         logger.info("#############################LOAD_COVERAGE_STORES_RESPONSE : {}\n", loadCoverageStoresRequest.getResponse());
     }
 
     @Test
     public void b_loadEmptyCoverageStoresConnectorTest() throws Exception {
-        GeoserverLoadCoverageStoresRequest loadCoverageStoresRequest = geoserverConnectorStoreV2_16_x.loadCoverageStoresRequest();
+        GeoserverLoadCoverageStoresRequest loadCoverageStoresRequest = geoserverConnectorStoreV2_17_x.loadCoverageStoresRequest();
         loadCoverageStoresRequest.withWorkspace("topp");
         logger.info("############################LOAD_EMPTY_COVERAGE_STORES_RESPONSE : {}\n", loadCoverageStoresRequest.getResponse());
     }
 
     @Test
     public void c_loadArcGridSampleCoverageStoreConnectorTest() throws Exception {
-        GeoserverLoadCoverageStoreRequest loadCoverageStoreRequest = geoserverConnectorStoreV2_16_x.loadCoverageStoreRequest();
+        GeoserverLoadCoverageStoreRequest loadCoverageStoreRequest = geoserverConnectorStoreV2_17_x.loadCoverageStoreRequest();
         loadCoverageStoreRequest.withWorkspace("nurc").withStore("arcGridSample");
         logger.info("###############################LOAD_COVERAGE_RESPONSE : {}\n", loadCoverageStoreRequest.getResponse());
     }
 
     @Test
     public void d_loadImgSample2CoverageStoreConnectorTest() throws Exception {
-        GeoserverLoadCoverageStoreRequest loadCoverageStoreRequest = geoserverConnectorStoreV2_16_x.loadCoverageStoreRequest();
+        GeoserverLoadCoverageStoreRequest loadCoverageStoreRequest = geoserverConnectorStoreV2_17_x.loadCoverageStoreRequest();
         loadCoverageStoreRequest.withWorkspace("nurc").withStore("img_sample2");
         logger.info("###############################LOAD_COVERAGE_RESPONSE : {}\n", loadCoverageStoreRequest.getResponse());
     }
 
     @Test
     public void e_loadMosaicCoverageStoreConnectorTest() throws Exception {
-        GeoserverLoadCoverageStoreRequest loadCoverageStoreRequest = geoserverConnectorStoreV2_16_x.loadCoverageStoreRequest();
+        GeoserverLoadCoverageStoreRequest loadCoverageStoreRequest = geoserverConnectorStoreV2_17_x.loadCoverageStoreRequest();
         loadCoverageStoreRequest.withWorkspace("nurc").withStore("mosaic");
         logger.info("###############################LOAD_COVERAGE_RESPONSE : {}\n", loadCoverageStoreRequest.getResponse());
     }
 
     @Test
     public void f_loadWorldImageSampleStoreConnectorTest() throws Exception {
-        GeoserverLoadCoverageStoreRequest loadCoverageStoreRequest = geoserverConnectorStoreV2_16_x.loadCoverageStoreRequest();
+        GeoserverLoadCoverageStoreRequest loadCoverageStoreRequest = geoserverConnectorStoreV2_17_x.loadCoverageStoreRequest();
         loadCoverageStoreRequest.withWorkspace("nurc").withStore("worldImageSample");
         logger.info("###############################LOAD_COVERAGE_RESPONSE : {}\n", loadCoverageStoreRequest.getResponse());
     }

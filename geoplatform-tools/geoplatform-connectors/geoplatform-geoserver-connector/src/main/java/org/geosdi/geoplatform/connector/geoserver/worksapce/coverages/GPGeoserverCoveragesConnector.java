@@ -111,8 +111,8 @@ public abstract class GPGeoserverCoveragesConnector extends GPGeoserverWorkspace
     @Override
     public GeoserverLoadCoveragesRequest loadWorkspaceCoveragesRequest() {
         switch (version) {
-            case V216x:
             case V217x:
+            case V218x:
                 return new GPGeoserverLoadCoveragesRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
@@ -125,8 +125,8 @@ public abstract class GPGeoserverCoveragesConnector extends GPGeoserverWorkspace
     @Override
     public GeoserverLoadCoverageRequest loadWorkspaceCoverageRequest() {
         switch (version) {
-            case V216x:
             case V217x:
+            case V218x:
                 return new GPGeoserverLoadCoverageRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");

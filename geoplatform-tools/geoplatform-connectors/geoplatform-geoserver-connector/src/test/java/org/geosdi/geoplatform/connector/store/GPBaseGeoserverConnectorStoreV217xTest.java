@@ -15,20 +15,20 @@ import static org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStoreBu
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPBaseGeoserverConnectorStoreV216xTest {
+public abstract class GPBaseGeoserverConnectorStoreV217xTest {
 
-    protected static final Logger logger = LoggerFactory.getLogger(GPBaseGeoserverConnectorStoreV216xTest.class);
+    protected static final Logger logger = LoggerFactory.getLogger(GPBaseGeoserverConnectorStoreV217xTest.class);
     //
-    private static final String geoserverURLV2_16_3 = "http://150.145.141.180/geoserver/rest";
-    protected static GPGeoserverConnectorStore geoserverConnectorStoreV2_16_x;
+    private static final String geoserverURLV2_17_3 = "http://150.145.141.180/geoserver/rest";
+    protected static GPGeoserverConnectorStore geoserverConnectorStoreV2_17_x;
 
     /**
      * @throws Exception
      */
     @BeforeClass
     public static void beforeClass() throws Exception {
-        geoserverConnectorStoreV2_16_x = geoserverConnectorBuilder()
-                .withServerUrl(new URL(geoserverURLV2_16_3))
+        geoserverConnectorStoreV2_17_x = geoserverConnectorBuilder()
+                .withServerUrl(new URL(geoserverURLV2_17_3))
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(80)
                         .withDefaultMaxPerRoute(40)
@@ -43,6 +43,6 @@ public abstract class GPBaseGeoserverConnectorStoreV216xTest {
      */
     @AfterClass
     public static void afterClass() throws Exception {
-        geoserverConnectorStoreV2_16_x.dispose();
+        geoserverConnectorStoreV2_17_x.dispose();
     }
 }

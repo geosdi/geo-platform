@@ -40,10 +40,8 @@ import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.Dialog;
-import com.extjs.gxt.ui.client.widget.Window;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.Frame;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.command.session.InvalidateSessionRequest;
@@ -86,7 +84,10 @@ public class UserLogout extends MenuBaseAction {
     }
 
     private void invalidateSession() {
+        GWT.log("Invalidate Sessione");
         final InvalidateSessionRequest invalidateSessionRequest = GWT.create(InvalidateSessionRequest.class);
+        GWT.log(""+invalidateSessionRequest);
+
         ClientCommandDispatcher.getInstance().execute(
                 new GPClientCommand<InvalidateSessionResponse>() {
             private static final long serialVersionUID = 3838394981874885388L;
@@ -105,6 +106,7 @@ public class UserLogout extends MenuBaseAction {
 
             @Override
             public void onCommandFailure(Throwable exception) {
+                GWT.log(""+exception.getMessage());
                 System.out.println("Error on invalidating the session!!!");
                 //TODO: In case of fail... what is possible to do??
             }

@@ -35,14 +35,18 @@
  */
 package org.geosdi.geoplatform.services;
 
-import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * this test try to publish two shapefiles. the first only in the preview
@@ -55,17 +59,24 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
     "classpath*:applicationContext.xml"})
+@FixMethodOrder(value = NAME_ASCENDING)
 public class PublisherWSTest {
 
-    protected Logger logger = LoggerFactory.getLogger(
-            org.geosdi.geoplatform.services.PublisherWSTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(org.geosdi.geoplatform.services.PublisherWSTest.class);
     //
     @Autowired
     private GPPublisherService gppublisherService;
+    @Value(value = "configurator{geoserver_url}")
+    private String geoserverURL;
 
     @Test
-    public void testWS() {
-        Assert.assertNotNull(gppublisherService);
+    public void a_testWS() {
+        assertNotNull(this.geoserverURL);
+        assertNotNull(gppublisherService);
     }
 
+    @Test
+    public void b_loadStyleTest() throws Exception {
+        logger.info("################\n{}\n", this.gppublisherService.loadStyle(this.geoserverURL, "point"));
+    }
 }

@@ -33,24 +33,20 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.puregwt;
+package org.geosdi.geoplatform.gui.client.puregwt.binding;
 
 import com.google.gwt.event.shared.EventHandler;
-import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
 
 /**
  *
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface CheckDataSourceHandler extends EventHandler {
+public interface GPUpdateProjectHandler extends EventHandler {
 
-    GwtEvent.Type<CheckDataSourceHandler> TYPE = new GwtEvent.Type<CheckDataSourceHandler>();
+    Type<GPUpdateProjectHandler> TYPE = new Type<GPUpdateProjectHandler>();
 
-    /**
-     *
-     * @param checkDataSource
-     */
-    void checkDataSource(boolean checkDataSource);
+     void openProjectManagement();
 
 }

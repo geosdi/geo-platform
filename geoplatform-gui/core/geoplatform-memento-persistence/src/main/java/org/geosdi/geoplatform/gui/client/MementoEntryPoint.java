@@ -47,7 +47,7 @@ public class MementoEntryPoint implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-        GWT.create(MementoModuleInjector.class);
+        GWT.create(MementoModuleInjector.MainInjector.class);
     }
 
 }

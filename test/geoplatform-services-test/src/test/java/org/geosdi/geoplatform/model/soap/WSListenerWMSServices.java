@@ -35,14 +35,16 @@
  */
 package org.geosdi.geoplatform.model.soap;
 
-import javax.xml.ws.Endpoint;
 import org.apache.cxf.jaxws.EndpointImpl;
 import org.geosdi.geoplatform.connectors.ws.wms.soap.GPWMSClientTestConnector;
 import org.geosdi.geoplatform.cxf.bus.GPSpringBusConfigurator;
 import org.geosdi.geoplatform.model.BaseGPListenerServices;
 import org.geosdi.geoplatform.services.GPWMSService;
-import org.junit.Assert;
 import org.springframework.test.context.TestContext;
+
+import javax.xml.ws.Endpoint;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  *
@@ -60,30 +62,20 @@ class WSListenerWMSServices extends BaseGPListenerServices {
     @Override
     public void beforeTestClass(TestContext testContext) throws Exception {
         super.beforeTestClass(testContext);
-
-        GPWMSClientTestConnector wmsClientConnector = (GPWMSClientTestConnector) appContext.getBean(
-                "gpWMSClient");
-        Assert.assertNotNull("wmsClientConnector is NULL", wmsClientConnector);
+        GPWMSClientTestConnector wmsClientConnector = (GPWMSClientTestConnector) appContext.getBean("gpWMSClient");
+        assertNotNull("wmsClientConnector is NULL", wmsClientConnector);
         gpWMSClient = wmsClientConnector.getEndpointService();
-
-        GPWMSService geoPlatformWMSService = (GPWMSService) appContext.getBean(
-                "wmsService");
-        Assert.assertNotNull("geoPlatformWMSService is NULL",
-                geoPlatformWMSService);
-
+        GPWMSService geoPlatformWMSService = (GPWMSService) appContext.getBean("wmsService");
+        assertNotNull("geoPlatformWMSService is NULL", geoPlatformWMSService);
         appContext.getBean(GPSpringBusConfigurator.class).createBus();
-
         String wmsServerAddress = wmsClientConnector.getAddress();
-        this.gpWSClientImpl = (EndpointImpl) Endpoint.publish(wmsServerAddress,
-                geoPlatformWMSService);
-
+        this.gpWSClientImpl = (EndpointImpl) Endpoint.publish(wmsServerAddress, geoPlatformWMSService);
         logger.info("\n\t@@@ Server ready... @@@");
     }
 
     @Override
     public void prepareTestInstance(TestContext testContext) throws Exception {
         logger.info("\n\t@@@ WSListenerWMSServices.prepareTestInstance @@@");
-
         ServiceWMSTest testInstance = (ServiceWMSTest) testContext.getTestInstance();
         testInstance.setGpWMSClient(gpWMSClient);
     }
@@ -93,5 +85,4 @@ class WSListenerWMSServices extends BaseGPListenerServices {
         logger.info("\n\t@@@ WSListenerWMSServices.afterTestClass @@@");
         this.gpWSClientImpl.stop();
     }
-
 }

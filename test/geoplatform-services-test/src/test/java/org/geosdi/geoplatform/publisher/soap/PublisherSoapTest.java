@@ -52,6 +52,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.annotation.Resource;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
@@ -65,7 +67,8 @@ import static org.mockito.Mockito.when;
 @ActiveProfiles(profiles = {"dev", "jpa"})
 public abstract class PublisherSoapTest extends PublisherBaseTest {
 
-    private static final AtomicBoolean flag = new AtomicBoolean(Boolean.FALSE);
+    private static final AtomicBoolean flag = new AtomicBoolean(FALSE);
+    //
     @Value("configurator{webservice_test_publisher_endpoint_address}")
     private String basicSoapAddress;
     @Resource(name = "gpPublisherSOAPClient")
@@ -73,44 +76,35 @@ public abstract class PublisherSoapTest extends PublisherBaseTest {
 
     @Before
     public void setUp() {
-        if (flag.compareAndSet(Boolean.FALSE, Boolean.TRUE)) {
-            logger.debug(
-                    "\n\t@@@@@@@@@@@@@@@@@@@@ SetUp {} @@@@@@@@@@@@@@@@@@@@\n",
-                    getClass().getSimpleName());
+        if (flag.compareAndSet(FALSE, TRUE)) {
+            logger.debug("\n\t@@@@@@@@@@@@@@@@@@@@ SetUp {} @@@@@@@@@@@@@@@@@@@@\n", getClass().getSimpleName());
             PublisherSoapServerUtils.gpPublisherClient = gpPublisherSOAPClient.getEndpointService();
-            PublisherSoapServerUtils.server = GPPublisherSoapServerConfig.gpPublisherSoapServer(
-                    publisherService, basicSoapAddress, serverLogInInterceptor,
-                    serverLogOutInterceptor);
+            PublisherSoapServerUtils.server = GPPublisherSoapServerConfig.gpPublisherSoapServer(publisherService, basicSoapAddress,
+                    serverLogInInterceptor, serverLogOutInterceptor);
             PublisherSoapServerUtils.server.start();
-            logger.debug(
-                    "\n\n\t@@@@@@@@@@@@@@@@@@@@@ Start GP_PUBLISHER_SOAP Server"
-                            + " @@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n");
+            logger.debug("\n\n\t@@@@@@@@@@@@@@@@@@@@@ Start GP_PUBLISHER_SOAP Server @@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n");
         }
     }
 
     @AfterClass
     public static void afterClass() throws Exception {
         PublisherSoapServerUtils.server.stop();
-        logger.debug("\n\n\t@@@@@@@@@@@@@@@@@@@@@ Stop GP_PUBLISHER_SOAP Server"
-                + " @@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n");
+        logger.debug("\n\n\t@@@@@@@@@@@@@@@@@@@@@ Stop GP_PUBLISHER_SOAP Server @@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n");
     }
 
     @Override
     protected final void mockPublishAllofPreview() throws Exception {
-        when(publisherService.publishAllofPreview(any(PublishRequest.class)))
-                .thenReturn(Boolean.FALSE);
+        when(publisherService.publishAllofPreview(any(PublishRequest.class))).thenReturn(FALSE);
     }
 
     @Override
     protected final void mockPublish() throws Exception {
-        when(publisherService.publish(any(PublishLayerRequest.class))).thenReturn(
-                Boolean.FALSE);
+        when(publisherService.publish(any(PublishLayerRequest.class))).thenReturn(FALSE);
     }
 
     @Override
     protected final void mockGetPreviewDataStores() throws Exception {
-        when(publisherService.getPreviewDataStores(any(String.class))).thenReturn(
-                createInfoPreviewStore(25));
+        when(publisherService.getPreviewDataStores(any(String.class))).thenReturn(createInfoPreviewStore(25));
     }
 
     @Override
@@ -124,19 +118,19 @@ public abstract class PublisherSoapTest extends PublisherBaseTest {
     @Override
     protected final void mockExistsStyle() throws Exception {
         when(publisherService.existsStyle(any(String.class))).thenReturn(
-                Boolean.FALSE);
+                FALSE);
     }
 
     @Override
     protected final void mockPutStyle() throws Exception {
         when(publisherService.updateStyle(any(String.class), any(String.class),
-                any(Boolean.class))).thenReturn(Boolean.FALSE);
+                any(Boolean.class))).thenReturn(FALSE);
     }
 
     @Override
     protected final void mockPublishStyle() throws Exception {
         when(publisherService.publishStyle(any(String.class),
-                any(String.class), any(Boolean.class))).thenReturn(Boolean.FALSE);
+                any(String.class), any(Boolean.class))).thenReturn(FALSE);
     }
 
     @Override
@@ -163,5 +157,4 @@ public abstract class PublisherSoapTest extends PublisherBaseTest {
         when(publisherService.analyzeZIPEPSG(any(), any(), any(), any()))
                 .thenReturn(createInfoPreviewStore(60));
     }
-
 }

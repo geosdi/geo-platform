@@ -47,7 +47,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
 @GinModules(value = {MementoModuleGinConfigurator.class})
 public interface MementoModuleInjector extends Ginjector {
 
-    public static class MainInjector {
+    class MainInjector {
 
         private static MementoModuleInjector instance = GWT.create(
                 MementoModuleInjector.class);
@@ -60,5 +60,5 @@ public interface MementoModuleInjector extends Ginjector {
         }
     }
 
-    public IMementoSave getMementoSave();
+    IMementoSave getMementoSave();
 }

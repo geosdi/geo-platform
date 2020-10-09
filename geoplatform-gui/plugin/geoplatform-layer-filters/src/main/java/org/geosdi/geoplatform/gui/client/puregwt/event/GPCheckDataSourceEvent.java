@@ -40,8 +40,8 @@ import org.geosdi.geoplatform.gui.client.puregwt.CheckDataSourceHandler;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
 public class GPCheckDataSourceEvent extends GwtEvent<CheckDataSourceHandler> {
     

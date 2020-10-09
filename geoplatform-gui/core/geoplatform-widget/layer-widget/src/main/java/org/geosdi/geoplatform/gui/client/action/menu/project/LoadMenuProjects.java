@@ -40,7 +40,12 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
+import org.geosdi.geoplatform.gui.client.puregwt.binding.GPUpdateProjectHandler;
+import org.geosdi.geoplatform.gui.client.puregwt.binding.event.UpdateProjectEvent;
 import org.geosdi.geoplatform.gui.client.widget.form.GPProjectManagementWidget;
+import org.geosdi.geoplatform.gui.impl.map.event.GPSaveCacheEvent;
+import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.savecache.SaveCacheHandlerManager;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -50,9 +55,11 @@ import javax.inject.Singleton;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Singleton
-public class LoadMenuProjects extends MenuBaseAction {
+public class LoadMenuProjects extends MenuBaseAction implements GPUpdateProjectHandler {
 
     private final GPProjectManagementWidget searchWidget;
+    private final GPSaveCacheEvent saveCacheEvent;
+    private final UpdateProjectEvent updateProjectEvent = new UpdateProjectEvent();
 
     /**
      * @param searchWidget
@@ -61,10 +68,18 @@ public class LoadMenuProjects extends MenuBaseAction {
     public LoadMenuProjects(GPProjectManagementWidget searchWidget) {
         super(LayerModuleConstants.INSTANCE.LoadMenuProjects_titleText(), AbstractImagePrototype.create(BasicWidgetResources.ICONS.manageProjects()));
         this.searchWidget = searchWidget;
+        SaveCacheHandlerManager.addHandler(GPUpdateProjectHandler.TYPE, this);
+        this.saveCacheEvent = new GPSaveCacheEvent(this.updateProjectEvent);
+
     }
 
     @Override
     public void componentSelected(MenuEvent ce) {
+        GPHandlerManager.fireEvent(this.saveCacheEvent);
+    }
+
+    @Override
+    public void openProjectManagement() {
         this.searchWidget.showSearchProjectPanel();
     }
 }

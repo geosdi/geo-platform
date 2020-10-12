@@ -57,14 +57,16 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import static java.lang.Boolean.FALSE;
+import static org.junit.Assert.assertTrue;
+
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public abstract class ServiceTest {
 
-    protected final Logger logger = LoggerFactory.getLogger(
-            this.getClass());
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     protected GeoPlatformService gpWSClient;
     // Organization
@@ -90,9 +92,7 @@ public abstract class ServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        logger.trace("\n\n\t@@@@@@@ {}.setUp @@@@@@\n\n",
-                this.getClass().getSimpleName());
-
+        logger.trace("\n\n\t@@@@@@@ {}.setUp @@@@@@\n\n", this.getClass().getSimpleName());
         // Insert Organization
         this.setUpOrganization();
     }
@@ -117,22 +117,16 @@ public abstract class ServiceTest {
      *
      * @throws org.geosdi.geoplatform.exception.IllegalParameterFault
      */
-    protected Long createAndInsertUser(String username,
-            GPOrganization organization, GPRole... roles) throws
-            IllegalParameterFault {
-        GPUser user = this.createUser(username, organization,
-                roles);
+    protected Long createAndInsertUser(String username, GPOrganization organization, GPRole... roles) throws IllegalParameterFault {
+        GPUser user = this.createUser(username, organization, roles);
         logger.debug("\n*** GPUser to INSERT:\n{}\n***", user);
-
-        long idUser = gpWSClient.insertAccount(new InsertAccountRequest(user,
-                Boolean.FALSE));
+        long idUser = gpWSClient.insertAccount(new InsertAccountRequest(user, FALSE));
         logger.debug("\n*** Id ASSIGNED at the User in the DB: {} ***", idUser);
-        Assert.assertTrue("Id ASSIGNED at the User in the DB", idUser > 0);
+        assertTrue("Id ASSIGNED at the User in the DB", idUser > 0);
         return idUser;
     }
 
-    protected GPUser createUser(String username, GPOrganization organization,
-            GPRole... roles) {
+    protected GPUser createUser(String username, GPOrganization organization, GPRole... roles) {
         GPUser user = new GPUser();
         user.setOrganization(organization);
         user.setUsername(username);
@@ -182,7 +176,7 @@ public abstract class ServiceTest {
     protected void deleteAccount(long accountID) {
         try {
             boolean check = gpWSClient.deleteAccount(accountID);
-            Assert.assertTrue(
+            assertTrue(
                     "Account with ID = " + accountID + " has not been eliminated",
                     check);
         } catch (Exception e) {
@@ -196,7 +190,7 @@ public abstract class ServiceTest {
     protected void deleteOrganization(long organizationID) {
         try {
             boolean check = gpWSClient.deleteOrganization(organizationID);
-            Assert.assertTrue(
+            assertTrue(
                     "Organization with ID = " + organizationID + " has not been eliminated",
                     check);
         } catch (Exception e) {
@@ -213,7 +207,7 @@ public abstract class ServiceTest {
     protected void deleteFolder(long idFolder) {
         try {
             boolean check = gpWSClient.deleteFolder(idFolder);
-            Assert.assertTrue(
+            assertTrue(
                     "Folder with id = " + idFolder + " has not been eliminated",
                     check);
         } catch (Exception e) {
@@ -347,7 +341,7 @@ public abstract class ServiceTest {
         long idServer = gpWSClient.insertServer(server);
         logger.debug("\n*** Id ASSIGNED at the Server in the DB: {} ***",
                 idServer);
-        Assert.assertTrue("Id ASSIGNED at the Server in the DB", idServer > 0);
+        assertTrue("Id ASSIGNED at the Server in the DB", idServer > 0);
         return idServer;
     }
 
@@ -379,7 +373,7 @@ public abstract class ServiceTest {
     protected void deleteServer(long idServer) {
         try {
             boolean check = gpWSClient.deleteServer(idServer);
-            Assert.assertTrue(
+            assertTrue(
                     "Server with id = " + idServer + " has not been eliminated",
                     check);
         } catch (Exception e) {
@@ -393,7 +387,7 @@ public abstract class ServiceTest {
             viewports.add(new GPViewport("Viewport" + i + "-Rest",
                     "This is a Generic Viewport", i,
                     new GPBBox(i, i, i, i),
-                    (i == 0) ? Boolean.TRUE : Boolean.FALSE));
+                    (i == 0) ? Boolean.TRUE : FALSE));
         }
         return viewports;
     }

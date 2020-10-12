@@ -78,10 +78,8 @@ import java.util.List;
  */
 public class GPPublisherWidget extends AbstractPublisherWidget {
 
-    private PublishLayerPreviewRequest publishLayerRequest = GWT.
-            <PublishLayerPreviewRequest>create(PublishLayerPreviewRequest.class);
-    private GPPublishShapePreviewEvent publishShapePreviewEvent
-            = new GPPublishShapePreviewEvent();
+    private PublishLayerPreviewRequest publishLayerRequest = GWT.<PublishLayerPreviewRequest>create(PublishLayerPreviewRequest.class);
+    private GPPublishShapePreviewEvent publishShapePreviewEvent = new GPPublishShapePreviewEvent();
 
     private final TreePanel tree;
 
@@ -200,5 +198,4 @@ public class GPPublisherWidget extends AbstractPublisherWidget {
         }
         return super.finishButton;
     }
-
 }

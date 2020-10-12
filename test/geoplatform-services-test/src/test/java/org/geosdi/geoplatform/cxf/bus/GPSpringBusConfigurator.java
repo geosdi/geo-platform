@@ -45,6 +45,8 @@ import org.geosdi.geoplatform.support.cxf.server.ServerInterceptorStrategyFactor
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import static java.lang.Boolean.FALSE;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -76,7 +78,7 @@ public class GPSpringBusConfigurator implements Disposable {
     @Override
     public void dispose() {
         if (this.bus != null) {
-            this.bus.shutdown(Boolean.FALSE);
+            this.bus.shutdown(FALSE);
         }
     }
 }

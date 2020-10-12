@@ -35,12 +35,13 @@
  */
 package org.geosdi.geoplatform.services.utility;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * Configuration Object for the Ds2ds action. This action copies a feature from
@@ -48,9 +49,8 @@ import org.springframework.context.annotation.Configuration;
  *
  * Both source and output features options can be configured.
  */
-@Configuration
+@Component
 public class Ds2dsConfiguration {
-//public class Ds2dsConfiguration extends ActionConfiguration implements Cloneable {
 
     @Autowired
     private PostGISUtility postGISUtility;

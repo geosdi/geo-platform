@@ -36,19 +36,8 @@
 package org.geosdi.geoplatform.gui.server;
 
 import com.google.common.collect.Lists;
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import org.apache.commons.fileupload.FileUploadException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
@@ -63,8 +52,20 @@ import org.geosdi.geoplatform.responce.InfoPreview;
 import org.jasig.cas.client.util.AbstractCasFilter;
 import org.jasig.cas.client.validation.Assertion;
 import org.jasig.cas.client.validation.AssertionImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -77,8 +78,7 @@ public class UploadServlet extends HttpServlet {
 
     private static final long serialVersionUID = -1464439864247709647L;
     //
-    private static final Logger logger = LoggerFactory.getLogger(
-            UploadServlet.class);
+    private static final Logger logger = LoggerFactory.getLogger(UploadServlet.class);
     //
     private static Assertion receivedAssertion;
     //
@@ -121,18 +121,15 @@ public class UploadServlet extends HttpServlet {
 //        }
         String workspace = null;
         HttpSession session = req.getSession();
-        Object accountObj = session.getAttribute(
-                SessionProperty.LOGGED_ACCOUNT.toString());
+        Object accountObj = session.getAttribute(SessionProperty.LOGGED_ACCOUNT.toString());
         GPAccount account;
         if (accountObj != null && accountObj instanceof GPAccount) {
             account = (GPAccount) accountObj;
         } else {
-            resp.sendError(HttpServletResponse.SC_UNAUTHORIZED,
-                    "Session Timeout");
+            resp.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Session Timeout");
             return;
         }
-        receivedAssertion = (AssertionImpl) session.getAttribute(
-                AbstractCasFilter.CONST_CAS_ASSERTION);
+        receivedAssertion = (AssertionImpl) session.getAttribute(AbstractCasFilter.CONST_CAS_ASSERTION);
         // process only multipart requests
         if (ServletFileUpload.isMultipartContent(req)) {
             // Create a factory for disk-based file items
@@ -143,7 +140,6 @@ public class UploadServlet extends HttpServlet {
              * disk.
              */
             factory.setSizeThreshold(1 * 1024 * 1024); //1 MB
-
             ServletFileUpload upload = new ServletFileUpload(factory);
             File uploadedFile = null;
             // Parse the request
@@ -167,9 +163,7 @@ public class UploadServlet extends HttpServlet {
                         }
 
                         try {
-                            uploadedFile = this.publisherFileUtils.
-                                    createFileWithUniqueName(
-                                            fileName);
+                            uploadedFile = this.publisherFileUtils.createFileWithUniqueName(fileName);
                             item.write(uploadedFile);
                         } catch (Exception ex) {
                             logger.info("ERRORE : " + ex);
@@ -184,12 +178,10 @@ public class UploadServlet extends HttpServlet {
                         resp.flushBuffer();
                     }
                 }
-                List<InfoPreview> infoPreviews = this.manageUploadedFilePreview(
-                        uploadedFile, session.getId(), account.getNaturalID(), workspace);
+                List<InfoPreview> infoPreviews = this.manageUploadedFilePreview(uploadedFile, session.getId(), account.getNaturalID(), workspace);
                 resp.setContentType("text/x-json;charset=UTF-8");
                 resp.setHeader("Cache-Control", "no-cache");
-                String result = PublisherFileUtils.generateJSONObjects(
-                        infoPreviews);
+                String result = PublisherFileUtils.generateJSONObjects(infoPreviews);
                 resp.getWriter().write(result);
                 //geoPlatformPublishClient.publish("previews", "dataTest", infoPreview.getDataStoreName());
             } catch (FileUploadException ex) {
@@ -208,8 +200,7 @@ public class UploadServlet extends HttpServlet {
         }
     }
 
-    private List<InfoPreview> manageUploadedFilePreview(File uploadedFile,
-            String sessionID, String username, String workspace) {
+    private List<InfoPreview> manageUploadedFilePreview(File uploadedFile, String sessionID, String username, String workspace) {
         List<InfoPreview> previewList = null;
         String extension = uploadedFile.getAbsolutePath().substring(
                 uploadedFile.getAbsolutePath().lastIndexOf(".") + 1,
@@ -217,20 +208,15 @@ public class UploadServlet extends HttpServlet {
         logger.info("Extension: " + extension);
         if (extension.equalsIgnoreCase(GPExtensions.ZIP.toString())) {
             try {
-                previewList = this.gpPublisherUploader.
-                        analyzeZIPEPSG(sessionID, username, uploadedFile, workspace)
-                        .getInfoPreviews();
+                previewList = this.gpPublisherUploader.analyzeZIPEPSG(sessionID, username, uploadedFile, workspace).getInfoPreviews();
             } catch (ResourceNotFoundFault ex) {
                 logger.error("Error on uploading shape: " + ex);
                 throw new GeoPlatformException("Error on uploading shape.");
             }
-        } else if (extension.equalsIgnoreCase(GPExtensions.TIF.toString())
-                || extension.equalsIgnoreCase(GPExtensions.TIFF.toString())) {
+        } else if (extension.equalsIgnoreCase(GPExtensions.TIF.toString()) || extension.equalsIgnoreCase(GPExtensions.TIFF.toString())) {
             try {
                 previewList = Lists.<InfoPreview>newArrayList();
-                previewList.add(this.gpPublisherUploader.
-                        analyzeTIFInPreview(
-                                username, uploadedFile, true, workspace));
+                previewList.add(this.gpPublisherUploader.analyzeTIFInPreview(username, uploadedFile, true, workspace));
             } catch (ResourceNotFoundFault ex) {
                 logger.error("Error on uploading shape: " + ex);
                 throw new GeoPlatformException("Error on uploading shape.");

@@ -50,7 +50,6 @@ public abstract class BaseGPListenerServices implements TestExecutionListener {
     //
     protected ApplicationContext appContext;
 
-
     @Override
     public void beforeTestClass(TestContext testContext) throws Exception {
         logger.info("\n\t@@@ " + getClass().getSimpleName() + " beforeTestClass @@@");

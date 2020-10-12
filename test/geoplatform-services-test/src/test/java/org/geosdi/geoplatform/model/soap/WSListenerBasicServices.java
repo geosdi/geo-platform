@@ -35,15 +35,17 @@
  */
 package org.geosdi.geoplatform.model.soap;
 
-import javax.xml.ws.Endpoint;
 import org.apache.cxf.jaxws.EndpointImpl;
 import org.geosdi.geoplatform.connectors.ws.basic.soap.GPBasicWSClientTestConnector;
 import org.geosdi.geoplatform.cxf.bus.GPSpringBusConfigurator;
 import org.geosdi.geoplatform.model.BaseGPListenerServices;
 import org.geosdi.geoplatform.model.ServiceTest;
 import org.geosdi.geoplatform.services.GeoPlatformService;
-import org.junit.Assert;
 import org.springframework.test.context.TestContext;
+
+import javax.xml.ws.Endpoint;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  *
@@ -62,22 +64,14 @@ class WSListenerBasicServices extends BaseGPListenerServices {
     @Override
     public void beforeTestClass(TestContext testContext) throws Exception {
         super.beforeTestClass(testContext);
-
-        wsClientConnector = (GPBasicWSClientTestConnector) appContext.getBean(
-                "gpWSClient");
-        Assert.assertNotNull("geoPlatformWSClient is NULL", wsClientConnector);
+        wsClientConnector = (GPBasicWSClientTestConnector) appContext.getBean("gpWSClient");
+        assertNotNull("geoPlatformWSClient is NULL", wsClientConnector);
         gpWSClient = wsClientConnector.getEndpointService();
-
-        GeoPlatformService geoPlatformService = (GeoPlatformService) appContext.getBean(
-                "geoPlatformService");
-        Assert.assertNotNull("geoPlatformService is NULL", geoPlatformService);
-
+        GeoPlatformService geoPlatformService = (GeoPlatformService) appContext.getBean("geoPlatformService");
+        assertNotNull("geoPlatformService is NULL", geoPlatformService);
         appContext.getBean(GPSpringBusConfigurator.class).createBus();
-
         String wsServerAddress = wsClientConnector.getAddress();
-        this.gpWSClientImpl = (EndpointImpl) Endpoint.publish(wsServerAddress,
-                geoPlatformService);
-
+        this.gpWSClientImpl = (EndpointImpl) Endpoint.publish(wsServerAddress, geoPlatformService);
         logger.info("\n\t@@@ Server ready... @@@");
     }
 

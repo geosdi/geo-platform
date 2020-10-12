@@ -145,9 +145,4 @@ public class GPPublisherSoapTest extends PublisherSoapTest {
                                 "WORKSPACE_MOCK_TEST_SOAP",
                                 "DATA_STORE_MOCK_TEST_SOAP")));
     }
-
-    @Test
-    public void loadStyleProdTest() throws Exception {
-        logger.info("\n{}\n", PublisherSoapServerUtils.gpPublisherClient.loadStyle("http://150.145.141.92/geoserver", "point"));
-    }
 }

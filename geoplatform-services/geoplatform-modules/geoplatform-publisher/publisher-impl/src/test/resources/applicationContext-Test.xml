@@ -8,6 +8,7 @@
             http://www.springframework.org/schema/context/spring-context-3.2.xsd"
        default-autowire="byName">
 
-    <context:annotation-config/>
-    <import resource="classpath:applicationContext-jasypt.xml"/>
+    <context:annotation-config />
+            
+    <import resource="classpath:applicationContext-jasypt.xml" />
 </beans>

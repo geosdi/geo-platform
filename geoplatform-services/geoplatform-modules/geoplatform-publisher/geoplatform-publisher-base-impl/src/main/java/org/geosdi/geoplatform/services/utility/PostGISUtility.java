@@ -38,18 +38,19 @@ package org.geosdi.geoplatform.services.utility;
 import com.google.common.collect.Maps;
 import it.geosolutions.geoserver.rest.encoder.datastore.GSPostGISDatastoreEncoder;
 import it.geosolutions.geoserver.rest.manager.GeoServerRESTStoreManager;
-import java.io.Serializable;
-import java.util.Map;
-import javax.annotation.Resource;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import java.io.Serializable;
+import java.util.Map;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-@Service("postGISUtility")
+@Component("postGISUtility")
 public class PostGISUtility implements InitializingBean {
 
     @Resource(name = "sharedRestStoreManager")
@@ -113,6 +114,10 @@ public class PostGISUtility implements InitializingBean {
         return restStoreManager;
     }
 
+    public Map<String, Serializable> getOutputDataStoreMap() {
+        return outputDataStoreMap;
+    }
+
     @Override
     public void afterPropertiesSet() throws Exception {
         this.outputDataStoreMap = Maps.<String, Serializable>newHashMap();
@@ -126,31 +131,6 @@ public class PostGISUtility implements InitializingBean {
         outputDataStoreMap.put("charset", "UTF-8");
     }
 
-    public Map<String, Serializable> getOutputDataStoreMap() {
-        return outputDataStoreMap;
-    }
-
-//    public GSPostGISDatastoreEncoder generateEncoder(String storeName) {
-//        GSPostGISDatastoreEncoder encoder = new GSPostGISDatastoreEncoder();
-//        encoder.setName(storeName);
-//        encoder.setEnabled(true);
-//        encoder.setHost(hostPostgisDatastore);
-//        encoder.setPort(portPostgisDatastore);
-//        encoder.setDatabase(dbNamePostgisDatastore);
-//        encoder.setSchema("public");
-//        encoder.setUser(userNameDBPostgisDatastore);
-//        encoder.setPassword(passwordDBPostgisDatastore);
-//        encoder.setExposePrimaryKeys(Boolean.FALSE);
-//        encoder.setMaxConnections(20);
-//        encoder.setMinConnections(1);
-//        encoder.setFetchSize(1000);
-//        encoder.setConnectionTimeout(20);
-//        encoder.setValidateConnections(false);
-//        encoder.setLooseBBox(Boolean.TRUE);
-//        encoder.setPreparedStatements(false);
-//        encoder.setMaxOpenPreparedStatements(50);
-//        return encoder;
-//    }
     @Override
     public String toString() {
         return "PostGISUtility{ " + " hostPostgisDatastore = " + hostPostgisDatastore

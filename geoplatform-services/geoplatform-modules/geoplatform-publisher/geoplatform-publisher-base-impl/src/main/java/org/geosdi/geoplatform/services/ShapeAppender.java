@@ -85,24 +85,23 @@ import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.expression.AccessException;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.PropertyAccessor;
 import org.springframework.expression.TypedValue;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-@Configuration
+@Component
 public class ShapeAppender {
 
-    private Logger logger = LoggerFactory.getLogger(
-            ShapeAppender.class);
-
+    private static final Logger logger = LoggerFactory.getLogger(ShapeAppender.class);
+    //
     private List<PrimaryKeyColumn> pks;
     private Boolean isPkGenerated;
     private Filter filter;
@@ -182,16 +181,13 @@ public class ShapeAppender {
             // source
             sourceDataStore = createSourceDataStore(shpFile);
             Query query = buildSourceQuery(sourceDataStore);
-            FeatureStore<SimpleFeatureType, SimpleFeature> featureReader = createSourceReader(
-                    sourceDataStore, transaction, query);
+            FeatureStore<SimpleFeatureType, SimpleFeature> featureReader = createSourceReader(sourceDataStore, transaction, query);
 
             // output
             destDataStore = createOutputDataStore();
-            SimpleFeatureType schema = buildDestinationSchema(featureReader
-                    .getSchema());
+            SimpleFeatureType schema = buildDestinationSchema(featureReader.getSchema());
 
-            FeatureStore<SimpleFeatureType, SimpleFeature> featureWriter = createOutputWriter(
-                    destDataStore, schema, transaction);
+            FeatureStore<SimpleFeatureType, SimpleFeature> featureWriter = createOutputWriter(destDataStore, schema, transaction);
             SimpleFeatureType destSchema = featureWriter.getSchema();
 
             // check for schema case differences from input to output
@@ -201,8 +197,7 @@ public class ShapeAppender {
             purgeData(featureWriter);
             logger.debug("Reading data");
             int total = featureReader.getCount(query);
-            FeatureIterator<SimpleFeature> iterator = createSourceIterator(
-                    query, featureReader);
+            FeatureIterator<SimpleFeature> iterator = createSourceIterator(query, featureReader);
             int count = 0;
             try {
                 while (iterator.hasNext()) {
@@ -219,9 +214,7 @@ public class ShapeAppender {
                     logger.info("Reading data: 4.3");
                 }
                 logger.info("Reading data: 5");
-
                 logger.info("Data imported");
-
             } finally {
                 iterator.close();
             }
@@ -374,8 +367,7 @@ public class ShapeAppender {
             org.springframework.expression.Expression spelExpression = expressionParser
                     .parseExpression(expression);
 
-            return spelExpression
-                    .getValue(evaluationContext, sourceFeature);
+            return spelExpression.getValue(evaluationContext, sourceFeature);
         } else {
             return sourceFeature.getAttribute(attributeName);
         }

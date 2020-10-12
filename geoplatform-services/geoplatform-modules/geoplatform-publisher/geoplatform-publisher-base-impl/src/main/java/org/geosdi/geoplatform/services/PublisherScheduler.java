@@ -59,18 +59,18 @@ public class PublisherScheduler implements InitializingBean {
     private JobDetail cleanerJobShpDetail;
 
     private void generateCleanerJobs() {
-        this.cleanerJobTifDetail = JobBuilder.newJob(PublisherTifCleanerJob.class).
-                withIdentity(PublisherTifCleanerJob.PUBLISHER_TIF_CLEANER_JOB, PublisherScheduler.PUBLISHER_GROUP).
-                withDescription("Clean the unpublished tif from Geoserver and from the disk").
-                storeDurably(true).
-                requestRecovery().
-                build();
-        this.cleanerJobShpDetail = JobBuilder.newJob(PublisherShpCleanerJob.class).
-                withIdentity(PublisherShpCleanerJob.PUBLISHER_SHP_CLEANER_JOB, PublisherScheduler.PUBLISHER_GROUP).
-                withDescription("Clean the unpublished shp from Geoserver").
-                storeDurably(true).
-                requestRecovery().
-                build();
+        this.cleanerJobTifDetail = JobBuilder.newJob(PublisherTifCleanerJob.class)
+                .withIdentity(PublisherTifCleanerJob.PUBLISHER_TIF_CLEANER_JOB, PublisherScheduler.PUBLISHER_GROUP)
+                .withDescription("Clean the unpublished tif from Geoserver and from the disk")
+                .storeDurably(true)
+                .requestRecovery()
+                .build();
+        this.cleanerJobShpDetail = JobBuilder.newJob(PublisherShpCleanerJob.class)
+                .withIdentity(PublisherShpCleanerJob.PUBLISHER_SHP_CLEANER_JOB, PublisherScheduler.PUBLISHER_GROUP)
+                .withDescription("Clean the unpublished shp from Geoserver")
+                .storeDurably(true)
+                .requestRecovery()
+                .build();
         try {
             this.scheduler.addJob(this.cleanerJobTifDetail, true);
             this.scheduler.addJob(this.cleanerJobShpDetail, true);

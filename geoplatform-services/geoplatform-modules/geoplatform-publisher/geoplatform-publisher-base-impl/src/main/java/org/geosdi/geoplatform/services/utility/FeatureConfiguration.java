@@ -36,26 +36,19 @@
 package org.geosdi.geoplatform.services.utility;
 
 import com.google.common.collect.Maps;
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.geotools.referencing.CRS;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.NoSuchAuthorityCodeException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
+
+import java.io.Serializable;
+import java.util.Map;
 
 //import com.thoughtworks.xstream.XStream;
 /**
  * DAO for the input / output XML file used by the action.
  */
 public class FeatureConfiguration implements Cloneable {
-
-//	private static final XStream xstream = new XStream();
-    static {
-//		xstream.alias("feature", FeatureConfiguration.class);				
-//		xstream.omitField(FeatureConfiguration.class, "coordinateReferenceSystem");				
-    }
 
     // feature type (schema) name
     private String typeName;
@@ -103,7 +96,6 @@ public class FeatureConfiguration implements Cloneable {
      * @param dataStore
      */
     public void setDataStore(Map<String, Serializable> dataStore) {
-
         this.dataStore = dataStore;
     }
 
@@ -124,8 +116,7 @@ public class FeatureConfiguration implements Cloneable {
         this.crs = crs;
     }
 
-    public void setCoordinateReferenceSystem(
-            CoordinateReferenceSystem coordinateReferenceSystem) {
+    public void setCoordinateReferenceSystem(CoordinateReferenceSystem coordinateReferenceSystem) {
         this.coordinateReferenceSystem = coordinateReferenceSystem;
     }
 

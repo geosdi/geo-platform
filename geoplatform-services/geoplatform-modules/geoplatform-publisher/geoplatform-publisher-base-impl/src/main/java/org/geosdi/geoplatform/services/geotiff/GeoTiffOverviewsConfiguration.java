@@ -35,16 +35,17 @@
  */
 package org.geosdi.geoplatform.services.geotiff;
 
-import javax.media.jai.Interpolation;
 import org.geotools.utils.CoverageToolsConstants;
 import org.geotools.utils.imageoverviews.OverviewsEmbedder.SubsampleAlgorithm;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+
+import javax.media.jai.Interpolation;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-@Configuration("overviewConfiguration")
+@Component("overviewConfiguration")
 public class GeoTiffOverviewsConfiguration {
 
     private long JAICapacity;

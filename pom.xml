@@ -1586,7 +1586,7 @@
         
         <geoserver-manager-version>1.7</geoserver-manager-version>
         <geojson-jackson-version>1.14</geojson-jackson-version>
-        <junit.version>4.13</junit.version>
+        <junit.version>4.13.1</junit.version>
         <maven-surefire.version>3.0.0-M5</maven-surefire.version>
     </properties>
     

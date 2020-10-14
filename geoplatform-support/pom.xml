@@ -35,6 +35,7 @@
         <module>geoplatform-hibernate-validator-support</module>
         <module>geoplatform-executor-support</module>
         <module>geoplatform-jaxb-validation-support</module>
+        <module>geoplatform-websocket-server-support</module>
     </modules>
 
 </project>

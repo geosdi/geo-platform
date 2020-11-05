@@ -39,7 +39,6 @@ import org.geosdi.geoplatform.persistence.loader.PersistenceLoaderConfigurer;
 import org.geosdi.geoplatform.persistence.search.demo.dao.jpa.search.ICarSeachDAO;
 import org.geosdi.geoplatform.persistence.search.demo.model.CarSearch;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -49,6 +48,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -68,7 +69,7 @@ public class PersistenceJpaSearchTest {
     @Test
     public void testSearchLucene() throws Exception {
         insert();
-        Assert.assertEquals(100, jpaCarSearchDAO.findByModel("fi*").size());
+        assertEquals(100, jpaCarSearchDAO.findByModel("fi*").size());
     }
 
     @After

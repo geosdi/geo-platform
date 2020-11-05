@@ -72,7 +72,7 @@ public class GPGeocodingServiceTest extends GPBaseConfigTest {
 
     @Before
     public void setUp() {
-        Assert.assertNotNull(gpGeocodingService);
+        assertNotNull(gpGeocodingService);
     }
 
     @Test
@@ -162,7 +162,7 @@ public class GPGeocodingServiceTest extends GPBaseConfigTest {
         GeocodingResult[] results = gpGeocodingService.newRequest().address(
                 "Marsicovetere").bounds(new LatLng(40.373706, 15.821933),
                 new LatLng(40.378703, 15.830559)).await();
-        Assert.assertNotNull(results);
+        assertNotNull(results);
         Assert.assertEquals("85050 Marsicovetere, Province of Potenza, Italy",
                 results[0].formattedAddress);
     }
@@ -176,9 +176,9 @@ public class GPGeocodingServiceTest extends GPBaseConfigTest {
     }
 
     private void checkResult(GeocodingResult[] results) {
-        Assert.assertNotNull(results);
-        Assert.assertNotNull(results[0].geometry);
-        Assert.assertNotNull(results[0].geometry.location);
+        assertNotNull(results);
+        assertNotNull(results[0].geometry);
+        assertNotNull(results[0].geometry.location);
         Assert.assertEquals(40.6404067, results[0].geometry.location.lat,
                 0.000001);
         Assert.assertEquals(15.8056041, results[0].geometry.location.lng,

@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.jaxb.repository;
 
-import com.google.common.collect.Maps;
 import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
 import org.geosdi.geoplatform.jaxb.provider.GeoPlatformJAXBContextProvider;
@@ -45,6 +44,7 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.Nonnull;
 import java.awt.*;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -61,7 +61,7 @@ public abstract class GeoPlatformJAXBContextRepository implements JAXBContextRep
     //
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    private final Map<GeoPlatformJAXBContextKey, Object> values = Maps.newHashMap();
+    private final Map<GeoPlatformJAXBContextKey, Object> values = new ConcurrentHashMap<>();
 
     protected GeoPlatformJAXBContextRepository() {
     }
@@ -78,10 +78,8 @@ public abstract class GeoPlatformJAXBContextRepository implements JAXBContextRep
         if (!key.isCompatibleValue(provider)) {
             throw new IllegalArgumentException("The Provider : " + provider + " is incompatible with Key : " + key);
         }
-        synchronized (values) {
-            if (!values.containsKey(key)) {
-                values.put(key, provider);
-            }
+        if (!values.containsKey(key)) {
+            values.put(key, provider);
         }
     }
 
@@ -95,9 +93,7 @@ public abstract class GeoPlatformJAXBContextRepository implements JAXBContextRep
     public <P extends GPBaseJAXBContext> P getProvider(GeoPlatformJAXBContextKey key) {
         checkArgument(key != null, "GeoPlatformJAXBContextKey must not be null.");
         logger.debug("##################################CALLED getProvider for Key : {}\n", key);
-        synchronized (values) {
-            return (values.get(key) != null ? (P) values.get(key) : lookUpJAXBContext(key));
-        }
+        return (values.get(key) != null ? (P) values.get(key) : lookUpJAXBContext(key));
     }
 
     public abstract static class GeoPlatformJAXBContextKey extends RenderingHints.Key {
@@ -123,8 +119,9 @@ public abstract class GeoPlatformJAXBContextRepository implements JAXBContextRep
 
         @Override
         public String toString() {
-            return getClass().getName()
-                    + " : privatekey = " + super.intKey();
+            return getClass().getName() + "{\n"
+                    + " privatekey = " + super.intKey() + "\n"
+                    + "}";
         }
     }
 }

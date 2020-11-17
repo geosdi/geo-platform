@@ -10,6 +10,7 @@ import org.springframework.scheduling.TaskScheduler;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
 import javax.annotation.Resource;
@@ -56,5 +57,17 @@ class GPWebSocketMemConfig implements WebSocketMessageBrokerConfigurer {
         registry.addEndpoint(this.geoPlatformWebSocketMemBroker.getEndpoints())
                 .setAllowedOrigins("*")
                 .addInterceptors(this.geoPlatformSessionIdHandshakeInterceptor);
+    }
+
+    /**
+     * Configure options related to the processing of messages received from and
+     * sent to WebSocket clients.
+     *
+     * @param registry
+     */
+    @Override
+    public void configureWebSocketTransport(WebSocketTransportRegistration registry) {
+//        registry.setMessageSizeLimit(50 * 1024 * 1024);
+//        registry.setSendBufferSizeLimit(1024 * 1024);
     }
 }

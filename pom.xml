@@ -615,7 +615,7 @@
             <dependency>
                 <groupId>com.thoughtworks.xstream</groupId>
                 <artifactId>xstream</artifactId>
-                <version>1.4.13</version>
+                <version>1.4.14</version>
             </dependency>
             
             <dependency>
@@ -1180,7 +1180,7 @@
                         <dependency>
                             <groupId>org.ow2.asm</groupId>
                             <artifactId>asm</artifactId>
-                            <version>8.0.1</version>
+                            <version>9.0</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -1446,7 +1446,7 @@
         <activemq-version>5.8.0</activemq-version>
         
         <jettison>1.4.1</jettison>
-        <joda-version>2.10.6</joda-version>
+        <joda-version>2.10.8</joda-version>
         
         <javax.ws.rs-api-version>2.1</javax.ws.rs-api-version>
 
@@ -1454,7 +1454,7 @@
 
         <aspectj-version>1.8.9</aspectj-version>
         <ubl-version>2.0</ubl-version>
-        <jetty-version>9.4.31.v20200723</jetty-version>
+        <jetty-version>9.4.34.v20201102</jetty-version>
 
         <postgresql-version>42.2.16</postgresql-version>
         <postgis-jdbc-version>2.5.0</postgis-jdbc-version>
@@ -1476,7 +1476,7 @@
         <jasypt-version>1.9.3</jasypt-version>
         
         <guava-gwt-version>23.6-jre</guava-gwt-version>
-        <guava-version>29.0-jre</guava-version>
+        <guava-version>30.0-jre</guava-version>
         <guice-version>3.0</guice-version>
         
         <ehcache-version>2.10.6</ehcache-version>

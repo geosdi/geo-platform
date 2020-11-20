@@ -42,5 +42,4 @@ import org.locationtech.jts.geom.MultiPolygon;
  * @email francesco.izzi@geosdi.org
  */
 public class MultiPolygonAdapter extends GeometryAdapter<MultiPolygon> {
-
 }

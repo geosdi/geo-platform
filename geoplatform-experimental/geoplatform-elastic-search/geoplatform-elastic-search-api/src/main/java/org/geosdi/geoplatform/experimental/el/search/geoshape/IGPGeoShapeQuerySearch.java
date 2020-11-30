@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.experimental.el.search.geoshape;
 
-import jdk.nashorn.internal.ir.annotations.Immutable;
 import lombok.Getter;
+import net.jcip.annotations.Immutable;
 import org.elasticsearch.common.geo.builders.ShapeBuilder;
 import org.elasticsearch.index.query.GeoShapeQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;

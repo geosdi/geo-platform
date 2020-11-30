@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.experimental.el.query;
 
 
+import com.fasterxml.jackson.datatype.joda.JodaModule;
 import org.geosdi.geoplatform.experimental.el.query.mapper.GPElasticSearchQueryMapperTest;
 import org.geosdi.geoplatform.experimental.el.query.model.GPElasticSearchQuery;
 import org.geosdi.geoplatform.experimental.el.query.rest.request.GPElasticSearchQueryExecutionRequest;
@@ -65,6 +66,7 @@ public class GPElasticSearchQueryExecutionRequestTest {
     //
     private static final JacksonSupport jacksonSupport = new GPJacksonSupport()
             .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)
+            .registerModule(new JodaModule())
             .configure(GPJsonIncludeFeature.NON_NULL);
 
     @Test

@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.experimental.el.search.phrase;
 
-import jdk.nashorn.internal.ir.annotations.Immutable;
+import net.jcip.annotations.Immutable;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
 

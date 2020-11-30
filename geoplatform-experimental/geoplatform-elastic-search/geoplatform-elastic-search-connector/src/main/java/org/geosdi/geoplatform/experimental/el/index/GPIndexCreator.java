@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.experimental.el.index;
 
 import org.elasticsearch.client.Client;
-import org.elasticsearch.cluster.metadata.MappingMetaData;
+import org.elasticsearch.cluster.metadata.MappingMetadata;
 import org.elasticsearch.common.collect.ImmutableOpenMap;
 import org.springframework.core.Ordered;
 
@@ -69,15 +69,15 @@ public interface GPIndexCreator extends GPBaseIndexCreator, Ordered {
     }
 
     /**
-     * @return {@link MappingMetaData}
+     * @return {@link MappingMetadata}
      * @throws Exception
      */
-    default MappingMetaData loadMappingMetaData() throws Exception {
-        ImmutableOpenMap<String, ImmutableOpenMap<String, MappingMetaData>> indexMappings = client()
+    default MappingMetadata loadMappingMetaData() throws Exception {
+        ImmutableOpenMap<String, ImmutableOpenMap<String, MappingMetadata>> indexMappings = client()
                 .admin().indices().prepareGetMappings(getIndexName())
                 .setTypes(getIndexSettings().getIndexType())
                 .execute().actionGet().getMappings();
-        ImmutableOpenMap<String, MappingMetaData> typeMappings = indexMappings.get(getIndexName());
+        ImmutableOpenMap<String, MappingMetadata> typeMappings = indexMappings.get(getIndexName());
         return typeMappings.get(getIndexType());
     }
 

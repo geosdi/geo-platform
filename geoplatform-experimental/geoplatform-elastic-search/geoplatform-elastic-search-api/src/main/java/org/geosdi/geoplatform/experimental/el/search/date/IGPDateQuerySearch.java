@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.experimental.el.search.date;
 
-import jdk.nashorn.internal.ir.annotations.Immutable;
 import lombok.Getter;
+import net.jcip.annotations.Immutable;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
 import org.joda.time.DateTime;

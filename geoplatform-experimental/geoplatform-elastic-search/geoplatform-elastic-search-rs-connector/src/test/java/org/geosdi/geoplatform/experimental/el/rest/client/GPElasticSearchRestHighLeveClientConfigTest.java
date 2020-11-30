@@ -46,8 +46,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 
-import static org.elasticsearch.client.RequestOptions.DEFAULT;
-import static org.geosdi.geoplatform.experimental.el.rest.api.info.GPElasticSearchRestInfo.of;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -72,6 +70,6 @@ public class GPElasticSearchRestHighLeveClientConfigTest {
     @Test
     public void printElasticSearchRestHighLevelClientTest() throws Exception {
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@GP_ELASTICSEARCG_REST_HIGH_LEVEL_CLIENT : {}\n", this.elasticSearchRestHighLevelClient);
-        logger.info("#############################{}\n", of(this.elasticSearchRestHighLevelClient.info(DEFAULT)));
+//        logger.info("#############################{}\n", of(this.elasticSearchRestHighLevelClient.info(DEFAULT)));
     }
 }

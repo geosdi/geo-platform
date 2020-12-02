@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.response.RasterLayerDTO;
 import org.geosdi.geoplatform.services.builder.GPWMSCapabilitesBuilder;
 import org.geosdi.geoplatform.services.builder.IGPWMSCapabilitesBuilder;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
@@ -69,6 +70,7 @@ public class GPWMSCapabilitesBuilderTest {
     }
 
     @Test
+    @Ignore
     public void b_loadWMSCapabilitiesTest() throws Exception {
         List<RasterLayerDTO> rasterLayers = wmsCapabilitiesBuilder.loadWMSCapabilitiesAuth("https://servizi.protezionecivile.it/geoserver/wms", null, null, null);
         checkArgument(rasterLayers.size() > 0);

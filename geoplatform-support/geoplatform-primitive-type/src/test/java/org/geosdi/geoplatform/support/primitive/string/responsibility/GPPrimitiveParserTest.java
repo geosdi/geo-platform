@@ -143,4 +143,10 @@ public class GPPrimitiveParserTest {
         String className = primitiveParserHandlerManager.parseValue("2977").getSimpleName();
         logger.info("###########################PARSE_VALUE : {}\n", className);
     }
+
+    @Test
+    public void p_parseValueTest() throws Exception {
+        String className = primitiveParserHandlerManager.parseValue("0").getSimpleName();
+        logger.info("###########################PARSE_VALUE : {}\n", className);
+    }
 }

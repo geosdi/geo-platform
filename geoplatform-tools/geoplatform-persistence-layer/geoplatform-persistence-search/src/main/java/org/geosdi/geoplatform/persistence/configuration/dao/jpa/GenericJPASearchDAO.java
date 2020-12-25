@@ -38,7 +38,8 @@ package org.geosdi.geoplatform.persistence.configuration.dao.jpa;
 import org.geosdi.geoplatform.persistence.configuration.dao.GPBaseSearchDAO;
 import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
 import org.hibernate.Session;
-import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.mapper.orm.Search;
+import org.hibernate.search.mapper.orm.session.SearchSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,7 +52,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static java.lang.Boolean.FALSE;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.StreamSupport.stream;
-import static org.hibernate.search.jpa.Search.getFullTextEntityManager;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -66,7 +66,7 @@ public abstract class GenericJPASearchDAO<T extends Object> implements GPBaseSea
     //
     @PersistenceContext
     protected EntityManager entityManager;
-    private volatile FullTextEntityManager ftEntityManager;
+    private volatile SearchSession searchSession;
 
     /**
      * @param thePersistentClass
@@ -77,8 +77,8 @@ public abstract class GenericJPASearchDAO<T extends Object> implements GPBaseSea
     }
 
     @Override
-    public final FullTextEntityManager searchManager() throws Exception {
-        return this.ftEntityManager = ((this.ftEntityManager != null) ? this.ftEntityManager : getFullTextEntityManager(getSession()));
+    public final SearchSession searchSession() throws Exception {
+        return this.searchSession = ((this.searchSession != null) ? this.searchSession : Search.session(this.entityManager));
     }
 
     @Override

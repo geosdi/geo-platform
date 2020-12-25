@@ -35,17 +35,18 @@
  */
 package org.geosdi.geoplatform.persistence.search.demo.dao.jpa.search;
 
-import org.apache.lucene.search.Query;
 import org.geosdi.geoplatform.persistence.configuration.dao.jpa.GenericJPASearchDAO;
 import org.geosdi.geoplatform.persistence.search.demo.model.CarSearch;
-import org.hibernate.search.SearchFactory;
-import org.hibernate.search.jpa.FullTextEntityManager;
-import org.hibernate.search.jpa.FullTextQuery;
-import org.hibernate.search.query.dsl.QueryBuilder;
+import org.hibernate.search.engine.search.query.SearchResult;
+import org.hibernate.search.mapper.orm.session.SearchSession;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.Nonnull;
 import java.util.List;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -60,13 +61,14 @@ public class JPACarSearchDAO extends GenericJPASearchDAO<CarSearch> implements I
     }
 
     @Override
-    public List<CarSearch> findByModel(String model) throws Exception {
-        FullTextEntityManager ftEntityManager = super.searchManager();
-        SearchFactory searchFactory = ftEntityManager.getSearchFactory();
-        QueryBuilder queryBuilder = searchFactory.buildQueryBuilder().forEntity(persistentClass).get();
-        Query luceneQuery = queryBuilder.keyword().wildcard().onField("model").matching(
-                model).createQuery();
-        FullTextQuery query = ftEntityManager.createFullTextQuery(luceneQuery);
-        return query.getResultList();
+    public List<CarSearch> findByModel(@Nonnull(when = NEVER) String model) throws Exception {
+        checkArgument((model != null) && !(model.trim().isEmpty()), "The Parameter model must not be null or an empty String.");
+        SearchSession searchSession = super.searchSession();
+        SearchResult<CarSearch> result = searchSession.search(CarSearch.class)
+                .where(f -> f.wildcard()
+                        .field( "model" )
+                        .matching(model))
+                .fetchAll();
+        return result.hits();
     }
 }

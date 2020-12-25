@@ -16,7 +16,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>         
-        <hibernate-search-version>5.11.7.Final</hibernate-search-version>
+        <hibernate-search-version>6.0.0.Final</hibernate-search-version>
     </properties>
 
     <dependencies>
@@ -27,11 +27,17 @@
         </dependency>
         
         <!-- =========================================================== -->
-        <!-- ====================== HIBERNATE SEARCH===================== -->
+        <!-- ==================== HIBERNATE SEARCH ===================== -->
         <!-- =========================================================== -->
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-search-orm</artifactId>
+            <groupId>org.hibernate.search</groupId>
+            <artifactId>hibernate-search-mapper-orm</artifactId>
+            <version>${hibernate-search-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.search</groupId>
+            <artifactId>hibernate-search-backend-lucene</artifactId>
             <version>${hibernate-search-version}</version>
         </dependency>
 

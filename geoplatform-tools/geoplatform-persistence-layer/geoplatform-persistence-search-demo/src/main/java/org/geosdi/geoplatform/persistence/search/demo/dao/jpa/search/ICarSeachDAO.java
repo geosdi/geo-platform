@@ -38,7 +38,10 @@ package org.geosdi.geoplatform.persistence.search.demo.dao.jpa.search;
 import org.geosdi.geoplatform.persistence.configuration.dao.GPBaseSearchDAO;
 import org.geosdi.geoplatform.persistence.search.demo.model.CarSearch;
 
+import javax.annotation.Nonnull;
 import java.util.List;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -51,5 +54,5 @@ public interface ICarSeachDAO extends GPBaseSearchDAO<CarSearch> {
      * @return {@link List<CarSearch>}
      * @throws Exception
      */
-    List<CarSearch> findByModel(String model) throws Exception;
+    List<CarSearch> findByModel(@Nonnull(when = NEVER) String model) throws Exception;
 }

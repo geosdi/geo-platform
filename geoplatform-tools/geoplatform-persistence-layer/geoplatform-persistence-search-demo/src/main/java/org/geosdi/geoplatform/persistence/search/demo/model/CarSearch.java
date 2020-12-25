@@ -35,15 +35,15 @@
  */
 package org.geosdi.geoplatform.persistence.search.demo.model;
 
-import org.apache.lucene.analysis.core.LowerCaseFilterFactory;
-import org.apache.lucene.analysis.snowball.SnowballPorterFilterFactory;
-import org.apache.lucene.analysis.standard.StandardTokenizerFactory;
 import org.hibernate.annotations.NaturalId;
-import org.hibernate.search.annotations.*;
-import org.hibernate.search.annotations.Parameter;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.DocumentId;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 
 import javax.persistence.*;
 import java.io.Serializable;
+
+import static org.hibernate.search.engine.backend.types.Searchable.YES;
 
 /**
  *
@@ -51,15 +51,6 @@ import java.io.Serializable;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Entity
-@AnalyzerDef(name = "customanalyzer",
-        tokenizer =
-        @TokenizerDef(factory = StandardTokenizerFactory.class),
-        filters = {
-    @TokenFilterDef(factory = LowerCaseFilterFactory.class),
-    @TokenFilterDef(factory = SnowballPorterFilterFactory.class, params = {
-        @Parameter(name = "language", value = "English")
-    })
-})
 @Indexed(index = "CarSearchIndex")
 public class CarSearch implements Serializable {
 
@@ -108,8 +99,7 @@ public class CarSearch implements Serializable {
     /**
      * @return the model
      */
-    @Field(name = "model", store = Store.YES, analyze = Analyze.YES)
-    @Analyzer(definition = "customanalyzer")
+    @FullTextField(name = "model", searchable = YES)
     public String getModel() {
         return model;
     }

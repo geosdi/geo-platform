@@ -5,7 +5,7 @@
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2019 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -38,8 +38,8 @@ package org.geosdi.geoplatform.persistence.configuration.dao.jpa;
 import org.geosdi.geoplatform.persistence.configuration.dao.GPBaseSearchDAO;
 import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
 import org.hibernate.Session;
-import org.hibernate.search.jpa.FullTextEntityManager;
-import org.hibernate.search.jpa.Search;
+import org.hibernate.search.mapper.orm.Search;
+import org.hibernate.search.mapper.orm.session.SearchSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,12 +47,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Collection;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantLock;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.StreamSupport.stream;
 
@@ -69,8 +66,7 @@ public abstract class GenericJPASearchDAO<T extends Object> implements GPBaseSea
     //
     @PersistenceContext
     protected EntityManager entityManager;
-    private volatile FullTextEntityManager ftEntityManager;
-    private final ReentrantLock lock = new ReentrantLock(TRUE);
+    private volatile SearchSession searchSession;
 
     /**
      * @param thePersistentClass
@@ -81,8 +77,8 @@ public abstract class GenericJPASearchDAO<T extends Object> implements GPBaseSea
     }
 
     @Override
-    public final FullTextEntityManager searchManager() throws Exception {
-        return this.ftEntityManager = ((this.ftEntityManager != null) ? this.ftEntityManager : loadFullTextEntityManager());
+    public final SearchSession searchSession() throws Exception {
+        return this.searchSession = ((this.searchSession != null) ? this.searchSession : Search.session(this.entityManager));
     }
 
     @Override
@@ -160,14 +156,5 @@ public abstract class GenericJPASearchDAO<T extends Object> implements GPBaseSea
      */
     protected final Session getSession() {
         return (Session) this.entityManager.getDelegate();
-    }
-
-    private FullTextEntityManager loadFullTextEntityManager() throws Exception {
-        try {
-            this.lock.tryLock(3l, TimeUnit.SECONDS);
-            return Search.getFullTextEntityManager(entityManager);
-        } finally {
-            this.lock.unlock();
-        }
     }
 }

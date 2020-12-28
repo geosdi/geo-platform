@@ -673,6 +673,7 @@ public class GPProjectDelegate implements ProjectDelegate {
             throw new ResourceNotFoundFault(
                     "Project not found for with id:\"" + cloneProjectRequest.getGpProjectID());
         }
+        gpProject.setShared(false);
         try {
             // Root Folders
             List<GPFolder> rootFolders = folderDao.searchRootFolders(cloneProjectRequest.getGpProjectID());

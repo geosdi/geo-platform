@@ -724,6 +724,7 @@ public class GPProjectDelegate implements ProjectDelegate {
                     "Account not found for with id:\"" + cloneProjectRequest.getAccountID());
         }
         GPProject gpProject = projectDao.find(cloneProjectRequest.getGpProjectID());
+        gpProject.setShared(false);
         if (gpProject == null) {
             throw new ResourceNotFoundFault(
                     "Project not found for with id:\"" + cloneProjectRequest.getGpProjectID());

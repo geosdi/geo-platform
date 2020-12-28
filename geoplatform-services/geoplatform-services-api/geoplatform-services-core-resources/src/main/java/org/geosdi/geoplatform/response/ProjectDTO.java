@@ -35,13 +35,17 @@
  */
 package org.geosdi.geoplatform.response;
 
+import com.google.common.base.Preconditions;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.response.factory.AccountDTOFactory;
 
+import javax.annotation.Nonnull;
+import javax.annotation.meta.When;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -50,7 +54,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.stream.Collectors.toList;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -144,7 +150,8 @@ public class ProjectDTO implements GPProjectDTO {
      * Convert an instance of ProjectDTO to {@link GPProject}: will convert all
      * fields unless version and shared fields.
      */
-    public static GPProject convertToGPProject(ProjectDTO projectDTO) {
+    public static GPProject convertToGPProject(@Nonnull(when = NEVER) ProjectDTO projectDTO) {
+        checkArgument(projectDTO != null, "The Parameter ProjectDTO must not be null");
         GPProject project = new GPProject();
         project.setId(projectDTO.getId());
         project.setName(projectDTO.getName());
@@ -157,8 +164,9 @@ public class ProjectDTO implements GPProjectDTO {
         if (projectDTO.getImagePath() != null) {
             project.setImagePath(projectDTO.getImagePath());
         }
-        project.setInternalPublic(project.isInternalPublic());
-        project.setExternalPublic(project.isExternalPublic());
+        project.setInternalPublic(projectDTO.isInternalPublic());
+        project.setExternalPublic(projectDTO.isExternalPublic());
+        project.setShared(projectDTO.isShared());
         return project;
     }
 

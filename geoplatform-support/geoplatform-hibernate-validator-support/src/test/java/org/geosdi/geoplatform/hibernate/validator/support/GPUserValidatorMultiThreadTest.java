@@ -42,8 +42,15 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Locale;
+import javax.annotation.Nonnull;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.util.Locale.ENGLISH;
+import static java.util.Locale.ITALIAN;
+import static java.util.stream.Stream.iterate;
+import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.hibernate.validator.support.GPUserValidatorTest.createGPUser;
 
 /**
@@ -63,16 +70,24 @@ public class GPUserValidatorMultiThreadTest {
 
     @Test
     public void validateGPUserTest() throws Exception {
-        for (int i = 0; i < 10; i++) {
-            new GPUserValidatorTask(gpUserValidator, i).start();
-        }
-        Thread.sleep(500);
+        CountDownLatch startSignal = new CountDownLatch(1);
+        CountDownLatch doneSignal = new CountDownLatch(20);
+        AtomicInteger counter = new AtomicInteger(0);
+        iterate(0, n -> n + 1)
+                .limit(20)
+                .map(i -> new GPUserValidatorTask(gpUserValidator, startSignal, doneSignal, counter))
+                .forEach(Thread::start);
+        startSignal.countDown();
+        doneSignal.await();
+        logger.info("#####################EXECUTED {} VALIDATION TASKS.", counter.get());
     }
 
     static class GPUserValidatorTask extends Thread {
 
         private final GPUserValidator gpUserValidator;
-        private final int i;
+        private final CountDownLatch startSignal;
+        private final CountDownLatch doneSignal;
+        private final AtomicInteger counter;
 
         /**
          * Allocates a new {@code Thread} object. This constructor has the same
@@ -81,9 +96,16 @@ public class GPUserValidatorMultiThreadTest {
          * name. Automatically generated names are of the form
          * {@code "Thread-"+}<i>n</i>, where <i>n</i> is an integer.
          */
-        public GPUserValidatorTask(GPUserValidator gpUserValidator, int i) {
-            this.gpUserValidator = gpUserValidator;
-            this.i = i;
+        GPUserValidatorTask(@Nonnull(when = NEVER) GPUserValidator theGPUserValidator, @Nonnull(when = NEVER) CountDownLatch theStartSignal,
+                @Nonnull(when = NEVER) CountDownLatch theDoneSignal, @Nonnull(when = NEVER) AtomicInteger theCounter) {
+            checkArgument(theGPUserValidator != null, "The Parameter gpUserValidator must not be null.");
+            checkArgument(theStartSignal != null, "The Parameter startSignal must not be null.");
+            checkArgument(theDoneSignal != null, "The Parameter doneSignal must not be null.");
+            checkArgument(theCounter != null, "The Parameter counter must not be null.");
+            this.gpUserValidator = theGPUserValidator;
+            this.startSignal = theStartSignal;
+            this.doneSignal = theDoneSignal;
+            this.counter = theCounter;
         }
 
         /**
@@ -100,16 +122,20 @@ public class GPUserValidatorMultiThreadTest {
          */
         @Override
         public void run() {
-            GPUser gpUser = createGPUser();
-            gpUser.setUserName("");
-            gpUser.setPassword(null);
-            gpUser.setRegistrationDate(null);
-            if (i % 2 == 0) {
-                logger.info("########################IT_MESSAGE : {}\n", this.gpUserValidator
-                        .validate(gpUser, Locale.ITALIAN));
-            } else {
-                logger.info("########################EN_MESSAGE : {}\n", this.gpUserValidator
-                        .validate(gpUser, Locale.ENGLISH));
+            try {
+                startSignal.await();
+                GPUser gpUser = createGPUser();
+                gpUser.setUserName("");
+                gpUser.setPassword(null);
+                gpUser.setRegistrationDate(null);
+                if (this.counter.getAndIncrement() % 2 == 0) {
+                    logger.info("########################IT_MESSAGE : {}\n", this.gpUserValidator.validate(gpUser, ITALIAN));
+                } else {
+                    logger.info("########################EN_MESSAGE : {}\n", this.gpUserValidator.validate(gpUser, ENGLISH));
+                }
+                doneSignal.countDown();
+            } catch (Exception ex) {
+
             }
         }
     }

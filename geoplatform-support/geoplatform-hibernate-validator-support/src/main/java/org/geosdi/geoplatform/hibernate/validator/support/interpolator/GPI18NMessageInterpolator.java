@@ -33,29 +33,29 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.hibernate.validator.support.interpoletor;
+package org.geosdi.geoplatform.hibernate.validator.support.interpolator;
 
+import jakarta.el.ExpressionFactory;
 import org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator;
 import org.hibernate.validator.spi.resourceloading.ResourceBundleLocator;
 
-import javax.el.ExpressionFactory;
 import java.util.Locale;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPI18NMessageInterpoletor extends ResourceBundleMessageInterpolator implements IGPI18NMessageInterpolator {
+public class GPI18NMessageInterpolator extends ResourceBundleMessageInterpolator implements IGPI18NMessageInterpolator {
 
     private ThreadLocal<Locale> defaultLocale = ThreadLocal.withInitial(() -> Locale.ENGLISH);
 
-    public GPI18NMessageInterpoletor() {
+    public GPI18NMessageInterpolator() {
     }
 
     /**
      * @param userResourceBundleLocator
      */
-    public GPI18NMessageInterpoletor(ResourceBundleLocator userResourceBundleLocator) {
+    public GPI18NMessageInterpolator(ResourceBundleLocator userResourceBundleLocator) {
         super(userResourceBundleLocator);
     }
 
@@ -63,7 +63,7 @@ public class GPI18NMessageInterpoletor extends ResourceBundleMessageInterpolator
      * @param userResourceBundleLocator
      * @param contributorResourceBundleLocator
      */
-    public GPI18NMessageInterpoletor(ResourceBundleLocator userResourceBundleLocator, ResourceBundleLocator contributorResourceBundleLocator) {
+    public GPI18NMessageInterpolator(ResourceBundleLocator userResourceBundleLocator, ResourceBundleLocator contributorResourceBundleLocator) {
         super(userResourceBundleLocator, contributorResourceBundleLocator);
     }
 
@@ -72,7 +72,7 @@ public class GPI18NMessageInterpoletor extends ResourceBundleMessageInterpolator
      * @param contributorResourceBundleLocator
      * @param cachingEnabled
      */
-    public GPI18NMessageInterpoletor(ResourceBundleLocator userResourceBundleLocator,
+    public GPI18NMessageInterpolator(ResourceBundleLocator userResourceBundleLocator,
             ResourceBundleLocator contributorResourceBundleLocator, boolean cachingEnabled) {
         super(userResourceBundleLocator, contributorResourceBundleLocator, cachingEnabled);
     }
@@ -81,7 +81,7 @@ public class GPI18NMessageInterpoletor extends ResourceBundleMessageInterpolator
      * @param userResourceBundleLocator
      * @param cachingEnabled
      */
-    public GPI18NMessageInterpoletor(ResourceBundleLocator userResourceBundleLocator,
+    public GPI18NMessageInterpolator(ResourceBundleLocator userResourceBundleLocator,
             boolean cachingEnabled) {
         super(userResourceBundleLocator, cachingEnabled);
     }
@@ -91,8 +91,7 @@ public class GPI18NMessageInterpoletor extends ResourceBundleMessageInterpolator
      * @param cachingEnabled
      * @param expressionFactory
      */
-    public GPI18NMessageInterpoletor(ResourceBundleLocator userResourceBundleLocator, boolean cachingEnabled,
-            ExpressionFactory expressionFactory) {
+    public GPI18NMessageInterpolator(ResourceBundleLocator userResourceBundleLocator, boolean cachingEnabled, ExpressionFactory expressionFactory) {
         super(userResourceBundleLocator, cachingEnabled, expressionFactory);
     }
 

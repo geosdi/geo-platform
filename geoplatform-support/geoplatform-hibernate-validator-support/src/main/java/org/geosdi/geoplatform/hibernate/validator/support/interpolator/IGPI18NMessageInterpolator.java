@@ -33,10 +33,11 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.hibernate.validator.support.interpoletor;
+package org.geosdi.geoplatform.hibernate.validator.support.interpolator;
+
+import jakarta.validation.MessageInterpolator;
 
 import javax.annotation.Nullable;
-import javax.validation.MessageInterpolator;
 import java.util.Locale;
 
 /**

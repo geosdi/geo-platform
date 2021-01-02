@@ -35,21 +35,20 @@
  */
 package org.geosdi.geoplatform.hibernate.validator.support;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
 import org.geosdi.geoplatform.hibernate.validator.support.base.IGPBaseValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
 import java.util.Set;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPBaseValidator<P extends Object, MESSAGE extends Object>
-        implements IGPBaseValidator<P, MESSAGE> {
+public abstract class GPBaseValidator<P extends Object, MESSAGE extends Object> implements IGPBaseValidator<P, MESSAGE> {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //

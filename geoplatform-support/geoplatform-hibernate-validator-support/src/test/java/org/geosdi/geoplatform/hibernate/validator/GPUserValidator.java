@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.hibernate.validator;
 
+import jakarta.validation.ConstraintViolation;
 import org.geosdi.geoplatform.hibernate.validator.model.GPUser;
 import org.geosdi.geoplatform.hibernate.validator.support.GPI18NValidator;
-import org.geosdi.geoplatform.hibernate.validator.support.interpoletor.GPI18NMessageInterpoletor;
+import org.geosdi.geoplatform.hibernate.validator.support.interpolator.GPI18NMessageInterpolator;
 import org.hibernate.validator.resourceloading.PlatformResourceBundleLocator;
 
-import javax.validation.ConstraintViolation;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -51,7 +51,7 @@ import java.util.stream.Collectors;
 public class GPUserValidator extends GPI18NValidator<GPUser, String> {
 
     public GPUserValidator() {
-        super(new GPI18NMessageInterpoletor(new PlatformResourceBundleLocator("GPBaseMessages")));
+        super(new GPI18NMessageInterpolator(new PlatformResourceBundleLocator("GPBaseMessages")));
     }
 
     /**
@@ -70,7 +70,7 @@ public class GPUserValidator extends GPI18NValidator<GPUser, String> {
     protected String buildMessage(Set<ConstraintViolation<GPUser>> constraintViolations) {
         return constraintViolations.stream()
                 .map(ConstraintViolation::getMessage)
-                .filter(message -> ((message != null) && !(message.isEmpty())))
+                .filter(message -> ((message != null) && !(message.trim().isEmpty())))
                 .collect(Collectors.joining("\n"));
     }
 }

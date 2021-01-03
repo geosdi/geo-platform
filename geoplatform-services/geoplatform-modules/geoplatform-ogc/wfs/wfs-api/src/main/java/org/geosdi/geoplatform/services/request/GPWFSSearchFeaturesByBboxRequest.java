@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.services.request;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessorType;
 
 /**

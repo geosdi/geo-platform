@@ -35,9 +35,8 @@
  */
 package org.geosdi.geoplatform.rs.support.request;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
-
-import javax.validation.constraints.NotNull;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group

@@ -34,11 +34,11 @@
  */
 package org.geosdi.geoplatform.rs.support.request;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.rs.support.request.annotation.GPPageableFrom;
 
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**

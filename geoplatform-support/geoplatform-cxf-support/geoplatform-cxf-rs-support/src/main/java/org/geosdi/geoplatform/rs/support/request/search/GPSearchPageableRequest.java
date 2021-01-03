@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.rs.support.request.search;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.geosdi.geoplatform.rs.support.request.GPPageableRequest;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 

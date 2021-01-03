@@ -35,14 +35,14 @@
  */
 package org.geosdi.geoplatform.services.request;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.services.request.annotation.GPWMSGetFeatureInfoLayersAllowed;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 

@@ -35,12 +35,11 @@
  */
 package org.geosdi.geoplatform.services.request;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import javax.validation.constraints.NotNull;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

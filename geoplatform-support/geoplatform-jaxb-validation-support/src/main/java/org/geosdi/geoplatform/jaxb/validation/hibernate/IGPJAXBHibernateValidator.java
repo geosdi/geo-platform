@@ -35,14 +35,13 @@
  */
 package org.geosdi.geoplatform.jaxb.validation.hibernate;
 
+import jakarta.validation.ConstraintViolation;
 import org.geosdi.geoplatform.hibernate.validator.support.base.IGPBaseValidator;
 import org.geosdi.geoplatform.jaxb.validation.configuration.GPSeverityMessage;
 import org.geosdi.geoplatform.jaxb.validation.configuration.GPValidationMessage;
 import org.geosdi.geoplatform.jaxb.validation.configuration.ISeverityType;
 import org.geosdi.geoplatform.jaxb.validation.configuration.ValidationMessage;
 import org.geosdi.geoplatform.jaxb.validation.configuration.store.ValidationMessageStore;
-
-import javax.validation.ConstraintViolation;
 import java.io.Serializable;
 import java.util.function.Function;
 

@@ -35,19 +35,19 @@
  */
 package org.geosdi.geoplatform.jaxb.validation.hibernate;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
 import org.geosdi.geoplatform.hibernate.validator.support.GPBaseValidator;
 import org.geosdi.geoplatform.jaxb.validation.configuration.store.GPValidationMessageStore;
 import org.geosdi.geoplatform.jaxb.validation.configuration.store.ValidationMessageStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
 import java.util.Set;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static jakarta.validation.Validation.buildDefaultValidatorFactory;
 import static java.util.stream.Collectors.toList;
-import static javax.validation.Validation.buildDefaultValidatorFactory;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

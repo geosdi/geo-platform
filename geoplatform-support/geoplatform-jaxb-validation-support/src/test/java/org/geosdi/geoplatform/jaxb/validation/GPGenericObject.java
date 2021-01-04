@@ -35,9 +35,8 @@
  */
 package org.geosdi.geoplatform.jaxb.validation;
 
+import jakarta.validation.constraints.NotNull;
 import org.geosdi.geoplatform.jaxb.validation.hibernate.IGPJAXBHibernateValidator;
-
-import javax.validation.constraints.NotNull;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

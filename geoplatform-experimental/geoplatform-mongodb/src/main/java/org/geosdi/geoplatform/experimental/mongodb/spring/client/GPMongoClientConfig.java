@@ -44,10 +44,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Arrays;
-
 import static com.mongodb.MongoClientSettings.builder;
 import static com.mongodb.client.MongoClients.create;
+import static java.util.Arrays.asList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -60,16 +59,18 @@ class GPMongoClientConfig {
     @GeoPlatformLog
     static Logger logger;
 
+    /**
+     * @param gpSpringMongoProp
+     * @return {@link MongoClient}
+     * @throws Exception
+     */
     @Bean(name = "gpSpringMongoClient")
-    public MongoClient gpMongoClient(@Qualifier(value = "gpSpringMongoProp") MongoProperties gpSpringMongoProp)
-            throws Exception {
+    public MongoClient gpMongoClient(@Qualifier(value = "gpSpringMongoProp") MongoProperties gpSpringMongoProp) throws Exception {
         logger.debug("###################### GeoPlatform Experimental Version ::== Building MongoClient.\n");
         return (gpSpringMongoProp.getMongoAuth().isMongoAuthEnabled() ? create(builder().applyToClusterSettings(
-                builder -> builder.hosts(Arrays
-                        .asList(new ServerAddress(gpSpringMongoProp.getMongoHost(), gpSpringMongoProp.getMongoPort()))))
+                builder -> builder.hosts(asList(new ServerAddress(gpSpringMongoProp.getMongoHost(), gpSpringMongoProp.getMongoPort()))))
                 .credential(gpSpringMongoProp.getUserCredential()).build()) : create(builder().applyToClusterSettings(
-                builder -> builder.hosts(Arrays
-                        .asList(new ServerAddress(gpSpringMongoProp.getMongoHost(), gpSpringMongoProp.getMongoPort()))))
+                builder -> builder.hosts(asList(new ServerAddress(gpSpringMongoProp.getMongoHost(), gpSpringMongoProp.getMongoPort()))))
                 .build()));
     }
 }

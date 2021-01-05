@@ -45,6 +45,8 @@ import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.WriteResultChecking;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -57,8 +59,13 @@ class GPMongoTemplateConfig {
     @GeoPlatformLog
     static Logger logger;
 
+    /**
+     * @param gpSpringMongoDBFactory
+     * @return {@link MongoTemplate}
+     */
     @Bean(name = "mongoTemplate")
     public MongoTemplate gpMongoTemplate(@Qualifier(value = "gpSpringMongoDBFactory") MongoDatabaseFactory gpSpringMongoDBFactory) {
+        checkArgument(gpSpringMongoDBFactory != null, "The Parameter gpSpringMongoDBFactory must not be null.");
         logger.debug("###################### GeoPlatform Experimental ::== Initializing Mongo Template.\n");
         MongoTemplate mongoTemplate = new MongoTemplate(gpSpringMongoDBFactory);
         mongoTemplate.setWriteResultChecking(WriteResultChecking.NONE);

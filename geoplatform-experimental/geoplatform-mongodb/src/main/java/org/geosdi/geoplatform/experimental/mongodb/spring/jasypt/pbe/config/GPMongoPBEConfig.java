@@ -33,12 +33,20 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.mongodb.spring.jasypt.config;
+package org.geosdi.geoplatform.experimental.mongodb.spring.jasypt.pbe.config;
 
+import org.geosdi.geoplatform.experimental.mongodb.spring.jasypt.pbe.properties.GPMongoPBEProperties;
 import org.jasypt.encryption.pbe.config.PBEConfig;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  *
@@ -48,17 +56,25 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 class GPMongoPBEConfig {
 
+    private static final Logger logger = LoggerFactory.getLogger(GPMongoPBEConfig.class);
+
+    /**
+     * @param mongoPBEProperties
+     * @return {@link PBEConfig}
+     */
     @Bean(name = "mongoPBEConfig")
-    public PBEConfig mongoPBEConfig() {
+    public PBEConfig mongoPBEConfig(@Nonnull(when = NEVER) GPMongoPBEProperties mongoPBEProperties) {
+        checkArgument(mongoPBEProperties != null, "The Parameter mongoPBEProperties must not be null.");
+        checkArgument((mongoPBEProperties.getPassword() != null) && !(mongoPBEProperties.getPassword().trim().isEmpty()), "The Parameter password must not be null or an empty string.");
+        logger.debug("####################################GP_MONGO_DB_PBE_PASSWORD : {}\n\n", mongoPBEProperties.getPassword());
         return new SimpleStringPBEConfig() {
 
             {
-                super.setPassword("$-geosdi,0x");
+                super.setPassword(mongoPBEProperties.getPassword());
                 super.setPoolSize(2);
                 super.setAlgorithm("PBEWithMD5AndDES");
             }
 
         };
     }
-
 }

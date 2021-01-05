@@ -35,15 +35,13 @@
  */
 package org.geosdi.geoplatform.experimental.mongodb.spring.validate;
 
-import javax.validation.Validator;
+import jakarta.validation.Validator;
 import org.geosdi.geoplatform.experimental.mongodb.spring.annotation.GPMongoValidate;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.core.mapping.event.ValidatingMongoEventListener;
 
 /**
  *
@@ -57,15 +55,13 @@ class ValidatingMongoEventListenerConfig {
     @GeoPlatformLog
     static Logger logger;
 
+    /**
+     * @param gpMongoValidator
+     * @return {@link GPValidatingMongoEventListener}
+     */
     @Bean
-    @Autowired
-    public ValidatingMongoEventListener gpValidatingMongoEventListener(@Qualifier(
-            value = "gpMongoValidator") Validator gpMongoValidator) {
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Initializing "
-                + "ValidatingMongoEventListener for GeoPlatform Mongo "
-                + "Extensions.\n");
-
-        return new ValidatingMongoEventListener(gpMongoValidator);
+    public GPValidatingMongoEventListener gpValidatingMongoEventListener(@Qualifier(value = "gpMongoValidator") Validator gpMongoValidator) {
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Initializing ValidatingMongoEventListener for GeoPlatform Mongo Extensions.\n");
+        return new GPValidatingMongoEventListener(gpMongoValidator);
     }
-
 }

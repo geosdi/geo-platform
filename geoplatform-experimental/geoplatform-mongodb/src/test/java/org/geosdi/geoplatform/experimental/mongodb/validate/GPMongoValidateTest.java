@@ -35,17 +35,12 @@
  */
 package org.geosdi.geoplatform.experimental.mongodb.validate;
 
-import javax.validation.ConstraintViolationException;
+import jakarta.validation.ConstraintViolationException;
 import org.geosdi.geoplatform.experimental.mongodb.loader.GPMongoConfigLoader;
 import org.geosdi.geoplatform.experimental.mongodb.model.Address;
 import org.geosdi.geoplatform.experimental.mongodb.repositories.AddressRepository;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import static org.junit.Assert.assertEquals;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,14 +49,16 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {GPMongoConfigLoader.class},
-        loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {GPMongoConfigLoader.class}, loader = AnnotationConfigContextLoader.class)
 @ActiveProfiles(value = {"mongo_validate"})
 public class GPMongoValidateTest {
 
@@ -85,14 +82,12 @@ public class GPMongoValidateTest {
 
     @Before
     public void setUp() {
-        Assert.assertNotNull("Address Repo must not be NULL",
-                addressRepo);
+        assertNotNull("Address Repo must not be NULL", addressRepo);
     }
 
     @Test
     public void nameIsNull() {
         Address a = new Address(null, 34, 28);
-
         try {
             addressRepo.save(a);
         } catch (ConstraintViolationException cve) {
@@ -103,15 +98,11 @@ public class GPMongoValidateTest {
     @Test
     public void nameIsTooShort() {
         Address a = new Address("abc", 45, 37);
-
         try {
             addressRepo.save(a);
         } catch (ConstraintViolationException cve) {
             assertEquals(1, cve.getConstraintViolations().size());
-            assertEquals("The Field Name must contains almost 4 characters.",
-                    cve.getConstraintViolations().iterator().next().getMessage()
-            );
+            assertEquals("The Field Name must contains almost 4 characters.", cve.getConstraintViolations().iterator().next().getMessage());
         }
     }
-
 }

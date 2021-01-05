@@ -28,5 +28,6 @@
     <logger name="org.geosdi.geoplatform.experimental.mongodb.spring.template.GPMongoTemplateConfig" level="debug"/>
     <logger name="org.geosdi.geoplatform.experimental.mongodb.spring.validate.GPMongoValidatorConfig" level="debug"/>
     <logger name="org.geosdi.geoplatform.experimental.mongodb.spring.validate.ValidatingMongoEventListenerConfig" level="debug"/>
+    <logger name="org.geosdi.geoplatform.experimental.mongodb.spring.jasypt.pbe.config.GPMongoPBEConfig" level="debug"/>
 
 </configuration>

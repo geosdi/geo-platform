@@ -35,11 +35,13 @@
  */
 package org.geosdi.geoplatform.experimental.mongodb.configuration.auth;
 
+import java.io.Serializable;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface MongoAuth {
+public interface MongoAuth extends Serializable {
 
     /**
      * @return {@link String}

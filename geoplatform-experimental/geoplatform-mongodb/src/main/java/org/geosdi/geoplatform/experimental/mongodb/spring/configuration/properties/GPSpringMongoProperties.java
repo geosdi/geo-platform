@@ -39,13 +39,16 @@ import com.mongodb.MongoCredential;
 import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.experimental.mongodb.configuration.auth.MongoAuth;
 import org.geosdi.geoplatform.experimental.mongodb.configuration.properties.MongoProperties;
-import org.geosdi.geoplatform.experimental.mongodb.configuration.properties.MongoPropertiesEnum;
 import org.geosdi.geoplatform.experimental.mongodb.spring.annotation.GPMongoProp;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.inject.Named;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.mongodb.MongoCredential.createCredential;
+import static org.geosdi.geoplatform.experimental.mongodb.configuration.properties.MongoPropertiesEnum.*;
 
 /**
  *
@@ -55,13 +58,19 @@ import javax.inject.Named;
 @Immutable
 @GPMongoProp
 @Named(value = "gpSpringMongoProp")
-public class GPSpringMongoProperties implements MongoProperties {
+class GPSpringMongoProperties implements MongoProperties {
 
-    @Value("gpMongoConfigurator{gp.mongo.host:@null}")
+    private static final long serialVersionUID = 2164578284848305794L;
+    //
+    private static final String MONGO_HOST_VALUE = "gpMongoConfigurator{gp.mongo.host:@null}";
+    private static final String MONGO_PORT_VALUE = "gpMongoConfigurator{gp.mongo.port:@null}";
+    private static final String MONGO_DATABASE_NAME_VALUE = "gpMongoConfigurator{gp.mongo.dbname:@null}";
+    //
+    @Value(MONGO_HOST_VALUE)
     private String mongoHost;
-    @Value("gpMongoConfigurator{gp.mongo.port:@null}")
+    @Value(MONGO_PORT_VALUE)
     private Integer mongoPort;
-    @Value("gpMongoConfigurator{gp.mongo.dbname:@null}")
+    @Value(MONGO_DATABASE_NAME_VALUE)
     private String mongoDatabaseName;
     @Resource(name = "gpSpringMongoAuth")
     private MongoAuth mongoAuth;
@@ -69,21 +78,17 @@ public class GPSpringMongoProperties implements MongoProperties {
 
     @Override
     public String getMongoHost() {
-        return this.mongoHost = (StringUtils.hasText(this.mongoHost))
-                ? this.mongoHost : (String) MongoPropertiesEnum.MONGO_HOST.mongoProp();
+        return this.mongoHost = (StringUtils.hasText(this.mongoHost)) ? this.mongoHost : (String) MONGO_HOST.mongoProp();
     }
 
     @Override
     public Integer getMongoPort() {
-        return this.mongoPort = (this.mongoPort != null)
-                ? this.mongoPort : (Integer) MongoPropertiesEnum.MONGO_PORT.mongoProp();
+        return this.mongoPort = (this.mongoPort != null) ? this.mongoPort : (Integer) MONGO_PORT.mongoProp();
     }
 
     @Override
     public String getMongoDatabaseName() {
-        return this.mongoDatabaseName = (StringUtils.hasText(this.mongoDatabaseName))
-                ? this.mongoDatabaseName
-                : (String) MongoPropertiesEnum.MONGO_DBNAME.mongoProp();
+        return this.mongoDatabaseName = (StringUtils.hasText(this.mongoDatabaseName)) ? this.mongoDatabaseName : (String) MONGO_DBNAME.mongoProp();
     }
 
     @Override
@@ -96,19 +101,30 @@ public class GPSpringMongoProperties implements MongoProperties {
         return this.userCredentials;
     }
 
+    /**
+     * Invoked by the containing {@code BeanFactory} after it has set all bean properties
+     * and satisfied {@link org.springframework.beans.factory.BeanFactoryAware}, {@code ApplicationContextAware} etc.
+     * <p>This method allows the bean instance to perform validation of its overall
+     * configuration and final initialization when all bean properties have been set.
+     * @throws Exception in the event of misconfiguration (such as failure to set an
+     * essential property) or if initialization fails for any other reason
+     */
     @Override
     public void afterPropertiesSet() throws Exception {
-        this.userCredentials = this.mongoAuth.isMongoAuthEnabled()
-                ? MongoCredential.createCredential(mongoAuth.getMongoUserName(), this.mongoDatabaseName,
+        checkArgument(!this.mongoHost.equals(MONGO_HOST_VALUE), "The Parameter mongoHost must not be " + MONGO_HOST_VALUE);
+        checkArgument(!this.mongoDatabaseName.equals(MONGO_DATABASE_NAME_VALUE), "The Parameter mongoDatabaseName must not be " + MONGO_DATABASE_NAME_VALUE);
+        checkArgument(this.mongoAuth != null, "The Parameter mongoAuth must not be null.");
+        this.userCredentials = this.mongoAuth.isMongoAuthEnabled() ?
+                createCredential(mongoAuth.getMongoUserName(), this.mongoDatabaseName,
                         mongoAuth.getMongoPassword().toCharArray()) : null;
     }
 
     @Override
     public String toString() {
-        return "GPSpringMongoProperties{ " + "mongoHost = " + getMongoHost()
+        return this.getClass().getSimpleName() + "{ "
+                + "mongoHost = " + getMongoHost()
                 + ", mongoPort = " + getMongoPort()
                 + ", mongoDatabaseName = " + getMongoDatabaseName()
                 + ", userCredentials = " + userCredentials + '}';
     }
-
 }

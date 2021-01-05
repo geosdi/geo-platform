@@ -35,11 +35,13 @@
  */
 package org.geosdi.geoplatform.experimental.mongodb.spring.configuration.auth;
 
-import javax.inject.Named;
+import lombok.Getter;
 import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.experimental.mongodb.configuration.auth.MongoAuth;
 import org.geosdi.geoplatform.experimental.mongodb.spring.annotation.GPMongoProp;
 import org.springframework.beans.factory.annotation.Value;
+
+import javax.inject.Named;
 
 /**
  *
@@ -48,27 +50,23 @@ import org.springframework.beans.factory.annotation.Value;
  */
 @Immutable
 @GPMongoProp
+@Getter
 @Named(value = "gpSpringMongoAuth")
-public class GPSpringMongoAuth implements MongoAuth {
+class GPSpringMongoAuth implements MongoAuth {
 
+    private static final long serialVersionUID = 7862623782819344491L;
+    //
     @Value("gpMongoConfigurator{gp.mongo.username:@null}")
     private String mongoUserName;
     @Value("gpMongoConfigurator{gp.mongo.password:@null}")
     private String mongoPassword;
 
-    @Override
-    public String getMongoUserName() {
-        return this.mongoUserName;
-    }
-
-    @Override
-    public String getMongoPassword() {
-        return this.mongoPassword;
-    }
-
+    /**
+     * @return {@link Boolean}
+     */
     @Override
     public Boolean isMongoAuthEnabled() {
-        return (((this.mongoUserName != null) && !(this.mongoUserName.isEmpty()))
-                && ((this.mongoPassword != null) && !(this.mongoPassword.isEmpty())));
+        return (((this.mongoUserName != null) && !(this.mongoUserName.trim().isEmpty()))
+                && ((this.mongoPassword != null) && !(this.mongoPassword.trim().isEmpty())));
     }
 }

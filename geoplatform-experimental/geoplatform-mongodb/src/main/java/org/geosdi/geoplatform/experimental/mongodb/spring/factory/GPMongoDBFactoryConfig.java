@@ -46,6 +46,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -57,9 +59,16 @@ class GPMongoDBFactoryConfig {
     @GeoPlatformLog
     static Logger logger;
 
+    /**
+     * @param gpSpringMongoClient
+     * @param gpSpringMongoProp
+     * @return {@link MongoDatabaseFactory}
+     */
     @Bean(name = "gpSpringMongoDBFactory")
     public MongoDatabaseFactory gpMongoDBFactory(@Qualifier(value = "gpSpringMongoClient") MongoClient gpSpringMongoClient,
             @Qualifier(value = "gpSpringMongoProp") MongoProperties gpSpringMongoProp) {
+        checkArgument(gpSpringMongoClient != null, "The Parameter gpSpringMongoClient must not be null.");
+        checkArgument(gpSpringMongoProp != null, "The Parameter gpSpringMongoProp must not be null.");
         logger.debug("###################### GeoPlatform Experimental ::== Building MongoDBFactory.\n");
         return new SimpleMongoClientDatabaseFactory(gpSpringMongoClient, gpSpringMongoProp.getMongoDatabaseName());
     }

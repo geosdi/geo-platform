@@ -35,20 +35,19 @@
  */
 package org.geosdi.geoplatform.experimental.mongodb.properties;
 
-import javax.annotation.Resource;
 import org.geosdi.geoplatform.experimental.mongodb.configuration.properties.MongoProperties;
 import org.geosdi.geoplatform.experimental.mongodb.loader.GPMongoPropertiesLoader;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
+
+import javax.annotation.Resource;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  *
@@ -56,8 +55,7 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {GPMongoPropertiesLoader.class},
-        loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {GPMongoPropertiesLoader.class}, loader = AnnotationConfigContextLoader.class)
 public class GPMongoPropertiesTest {
 
     @GeoPlatformLog
@@ -80,13 +78,11 @@ public class GPMongoPropertiesTest {
 
     @Before
     public void setUp() {
-        Assert.assertNotNull(gpSpringMongoProp);
+        assertNotNull(gpSpringMongoProp);
     }
 
     @Test
     public void mongoPropertiesTest() {
-        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ MONGO_PROPERTIES : {}\n\n",
-                gpSpringMongoProp);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ MONGO_PROPERTIES : {}\n\n", gpSpringMongoProp);
     }
-
 }

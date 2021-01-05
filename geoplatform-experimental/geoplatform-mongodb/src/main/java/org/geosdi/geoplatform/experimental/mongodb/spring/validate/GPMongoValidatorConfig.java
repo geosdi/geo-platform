@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.experimental.mongodb.spring.validate;
 
-import javax.validation.Validation;
-import javax.validation.Validator;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
 import org.geosdi.geoplatform.experimental.mongodb.spring.annotation.GPMongoValidate;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.hibernate.validator.HibernateValidator;
@@ -58,14 +58,11 @@ class GPMongoValidatorConfig {
 
     @Bean
     public Validator gpMongoValidator() {
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Configuring Validator for "
-                + "GeoPlatform Mongo Extensions.\n");
-        
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Configuring Validator for GeoPlatform Mongo Extensions.\n");
         return Validation.byProvider(HibernateValidator.class)
                 .configure()
                 .failFast(Boolean.TRUE)
                 .buildValidatorFactory()
                 .getValidator();
     }
-
 }

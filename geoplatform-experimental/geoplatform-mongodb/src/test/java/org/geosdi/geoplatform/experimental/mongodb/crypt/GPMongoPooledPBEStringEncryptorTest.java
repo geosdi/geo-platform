@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.experimental.mongodb.crypt;
 
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -45,6 +46,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -52,6 +56,7 @@ import javax.annotation.Resource;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-Crypt-Test.xml"})
+@FixMethodOrder(value = NAME_ASCENDING)
 public class GPMongoPooledPBEStringEncryptorTest {
 
     @GeoPlatformLog
@@ -61,10 +66,10 @@ public class GPMongoPooledPBEStringEncryptorTest {
     private PooledPBEStringEncryptor gpMongoPooledPBEStringEncryptor;
 
     @Test
-    public void decryptMongoHostTest() {
-        String mongoHost = this.gpMongoPooledPBEStringEncryptor
-                .decrypt("uZMjBmXcDorta3OEqhYGLmKulmH9Jsfu");
-        logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@@GP_MONGO_HOST : {}\n\n", mongoHost);
+    public void a_cryptMongoHostTest() throws Exception {
+        String mongoDBHost = "150.145.141.76";
+        String mongoDBHostCrypt = this.gpMongoPooledPBEStringEncryptor.encrypt(mongoDBHost);
+        logger.info("####################MONGO_DB_HOST : {}\n", mongoDBHostCrypt);
+        assertTrue(mongoDBHost.equalsIgnoreCase(this.gpMongoPooledPBEStringEncryptor.decrypt(mongoDBHostCrypt)));
     }
-
 }

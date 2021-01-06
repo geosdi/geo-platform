@@ -46,6 +46,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Map;
 
 import static java.lang.Boolean.TRUE;
+import static org.geosdi.geoplatform.connector.WMSVersion.forValue;
 import static org.geotools.referencing.CRS.decode;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -69,5 +70,11 @@ public class SimpleTest {
         GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
         Map<String, GPWMSRequestKeyValuePair> values = wmsRequestKvpReader.read(value);
         values.entrySet().forEach(e -> logger.info("##########ENTRY : {} - VALUE : {}\n", e.getKey(), e.getValue()));
+    }
+
+    @Test
+    public void c_simpleTest() throws Exception {
+        logger.info("#####################Version : {}\n", forValue("aa"));
+        logger.info("#####################Version : {}\n", forValue("1.3.0"));
     }
 }

@@ -37,11 +37,13 @@ package org.geosdi.geoplatform.connector;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 import static java.util.Arrays.stream;
+import static java.util.Optional.empty;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -80,10 +82,10 @@ public enum WMSVersion implements GPServerConnector.GPServerConnectorVersion {
      * @param version
      * @return {@link WMSVersion} <p>Default value if no version is found is : {@link WMSVersion#V111}</p>
      */
-    public static WMSVersion forValue(String version) {
+    public static WMSVersion forValue(@Nullable String version) {
         Optional<WMSVersion> optional = stream(WMSVersion.values())
                 .filter(v -> ((version != null) && !(version.trim().isEmpty())) ?
                         v.getVersion().equalsIgnoreCase(version) : FALSE).findFirst();
-        return ((optional != null) && !(optional.equals(Optional.empty()))) ? optional.get() : null;
+        return ((optional.isPresent()) && !(optional.equals(empty())) ? optional.get() : WMSVersion.V111);
     }
 }

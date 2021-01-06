@@ -93,7 +93,8 @@ public class WMSV130UnmarshallTest {
         WMSCapabilities wmsCapabilities = (WMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(wmsGetCapabilitiesFile);
         logger.info("#######################WMSGetCapabilitiesV130 : {}\n", wmsCapabilities);
         StringWriter writer = new StringWriter();
-        wmsContext.acquireMarshaller().marshal(wmsCapabilities, new File("./target/WMSGetCapabilitiesV130.xml"));
+        wmsContext.acquireMarshaller().marshal(wmsCapabilities, new File(of(new File(".").getCanonicalPath(), "target", "WMSGetCapabilitiesV130.xml")
+                .collect(joining(separator))));
         logger.debug("######################WMSGetCapabilitiesV130-String : \n{}\n", writer);
     }
 
@@ -102,7 +103,8 @@ public class WMSV130UnmarshallTest {
         WMSCapabilities wmsCapabilities = (WMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(wmsGetCapabilitiesCartaFitoclimatica);
         logger.info("#######################WMSGetCapabilitiesCartaFitoclimaticaV130 : {}\n", wmsCapabilities);
         StringWriter writer = new StringWriter();
-        wmsContext.acquireMarshaller().marshal(wmsCapabilities, new File("./target/WMSGetCapabilitiesCartaFitoclimaticaV130.xml"));
+        wmsContext.acquireMarshaller().marshal(wmsCapabilities, new File( of(new File(".").getCanonicalPath(), "target", "WMSGetCapabilitiesCartaFitoclimaticaV130.xml")
+                .collect(joining(separator))));
         logger.debug("######################WMSGetCapabilitiesCartaFitoclimaticaV130-String : \n{}\n", writer);
     }
 
@@ -111,7 +113,8 @@ public class WMSV130UnmarshallTest {
         WMSCapabilities wmsCapabilities = (WMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(wmsGetCapabilitiesCartaGeolitologica);
         logger.info("#######################WMSGetCapabilitiesCartaGeologicaV130 : {}\n", wmsCapabilities);
         StringWriter writer = new StringWriter();
-        wmsContext.acquireMarshaller().marshal(wmsCapabilities, new File("./target/WMSGetCapabilitiesCartaGeologicaV130.xml"));
+        wmsContext.acquireMarshaller().marshal(wmsCapabilities, new File(of(new File(".").getCanonicalPath(), "target", "WMSGetCapabilitiesCartaGeologicaV130.xml")
+                .collect(joining(separator))));
         logger.debug("######################WMSGetCapabilitiesCartaGeologicaV130-String : \n{}\n", writer);
     }
 }

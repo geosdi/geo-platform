@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.jaxb.validation.configuration.store.ValidationMess
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Objects;
 import java.util.Set;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -53,8 +54,7 @@ import static java.util.stream.Collectors.toList;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPJAXBHibernateValidator extends GPBaseValidator<IGPJAXBHibernateValidator.GPJAXBValidationModel, ValidationMessageStore>
-        implements IGPJAXBHibernateValidator<IGPJAXBHibernateValidator.GPJAXBValidationModel> {
+public class GPJAXBHibernateValidator extends GPBaseValidator<IGPJAXBHibernateValidator.GPJAXBValidationModel, ValidationMessageStore> implements IGPJAXBHibernateValidator<IGPJAXBHibernateValidator.GPJAXBValidationModel> {
 
     private static final Logger logger = LoggerFactory.getLogger(GPJAXBHibernateValidator.class);
     //
@@ -85,7 +85,7 @@ public class GPJAXBHibernateValidator extends GPBaseValidator<IGPJAXBHibernateVa
         checkNotNull(constraintViolations, "The Parameter Set<ConstraintViolation<?>> must not be null");
         return new GPValidationMessageStore(constraintViolations.stream()
                 .map(VALIDATION_MESSAGE_FUNCTION)
-                .filter(validationMessage -> validationMessage != null)
+                .filter(Objects::nonNull)
                 .collect(toList()));
     }
 

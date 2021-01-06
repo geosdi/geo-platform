@@ -46,6 +46,7 @@ import java.io.Serializable;
 import java.util.function.Function;
 
 import static org.geosdi.geoplatform.jaxb.validation.configuration.GPSeverityMessage.WARNING_MESSAGE;
+import static org.geosdi.geoplatform.jaxb.validation.configuration.GPSeverityMessage.fromValue;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -68,7 +69,7 @@ public interface IGPJAXBHibernateValidator<P extends IGPJAXBHibernateValidator.G
          */
         @Override
         public ValidationMessage apply(ConstraintViolation<P> theConstraintViolation) {
-            GPSeverityMessage severityMessage = GPSeverityMessage.fromValue((ISeverityType.SeverityType) theConstraintViolation
+            GPSeverityMessage severityMessage = fromValue((ISeverityType.SeverityType) theConstraintViolation
                     .getConstraintDescriptor().getAttributes().get("severityType"));
             return new GPValidationMessage(theConstraintViolation.getMessage(), (severityMessage != null) ? severityMessage : WARNING_MESSAGE);
         }

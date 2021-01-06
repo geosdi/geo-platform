@@ -36,12 +36,16 @@
 package org.geosdi.geoplatform.jaxb.validation.xsd.message;
 
 
+import lombok.Getter;
+import lombok.Setter;
 import org.geosdi.geoplatform.jaxb.validation.configuration.GPValidationMessage;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Getter
+@Setter
 public class XSDValidationMessage extends GPValidationMessage implements IXSDValidationMessage {
 
     private static final long serialVersionUID = -7106030484216463993L;
@@ -56,38 +60,6 @@ public class XSDValidationMessage extends GPValidationMessage implements IXSDVal
             Integer theColumnNumber, Integer theLineNumber) {
         super(theMessage, theSeverityMessage);
         this.columnNumber = theColumnNumber;
-        this.lineNumber = theLineNumber;
-    }
-
-    /**
-     * @return {@link Integer}
-     */
-    @Override
-    public Integer getColumnNumber() {
-        return this.columnNumber;
-    }
-
-    /**
-     * @param theColumnNumber
-     */
-    @Override
-    public void setColumnNumber(Integer theColumnNumber) {
-        this.columnNumber = theColumnNumber;
-    }
-
-    /**
-     * @return {@link Integer}
-     */
-    @Override
-    public Integer getLineNumber() {
-        return this.lineNumber;
-    }
-
-    /**
-     * @param theLineNumber
-     */
-    @Override
-    public void setLineNumber(Integer theLineNumber) {
         this.lineNumber = theLineNumber;
     }
 

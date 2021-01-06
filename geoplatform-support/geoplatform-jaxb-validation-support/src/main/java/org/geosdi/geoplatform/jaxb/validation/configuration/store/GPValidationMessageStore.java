@@ -45,6 +45,7 @@ import static java.lang.Boolean.FALSE;
 import static java.util.Collections.sort;
 import static java.util.Comparator.naturalOrder;
 import static java.util.stream.StreamSupport.stream;
+import static javax.xml.bind.annotation.XmlAccessType.PUBLIC_MEMBER;
 import static org.geosdi.geoplatform.jaxb.validation.configuration.store.predicate.logic.ErrorWarningPredicate.toLogicErrorPredicate;
 import static org.geosdi.geoplatform.jaxb.validation.configuration.store.predicate.logic.LogicWarningPredicate.toLogicWarningPredicate;
 import static org.geosdi.geoplatform.jaxb.validation.configuration.store.predicate.xsd.XSDErrorPredicate.toXSDErrorPredicate;
@@ -55,7 +56,7 @@ import static org.geosdi.geoplatform.jaxb.validation.configuration.store.predica
  * @email giuseppe.lascaleia@geosdi.org
  */
 @XmlRootElement(name = "GPValidationMessageStore")
-@XmlAccessorType(XmlAccessType.PUBLIC_MEMBER)
+@XmlAccessorType(PUBLIC_MEMBER)
 @XmlType(propOrder = {"valid", "validationMessages"})
 public class GPValidationMessageStore implements ValidationMessageStore {
 
@@ -128,7 +129,7 @@ public class GPValidationMessageStore implements ValidationMessageStore {
         return this.errorMessagesXSD = (this.errorMessagesXSD == null ? (isSetValidationMessages()
                 ? this.validationMessages.stream()
                 .filter(toXSDErrorPredicate())
-                .count() : new Long(0)) : this.errorMessagesXSD);
+                .count() : 0l) : this.errorMessagesXSD);
     }
 
     /**
@@ -139,7 +140,7 @@ public class GPValidationMessageStore implements ValidationMessageStore {
         return this.warningMessagesXSD = (this.warningMessagesXSD == null ? (isSetValidationMessages()
                 ? this.validationMessages.stream()
                 .filter(toXSDWarningPredicate())
-                .count() : new Long(0)) : this.warningMessagesXSD);
+                .count() : 0l) : this.warningMessagesXSD);
     }
 
     /**
@@ -166,7 +167,7 @@ public class GPValidationMessageStore implements ValidationMessageStore {
         return this.errorMessagesLogic = (this.errorMessagesLogic == null ? (isSetValidationMessages()
                 ? this.validationMessages.stream()
                 .filter(toLogicErrorPredicate())
-                .count() : new Long(0)) : this.errorMessagesLogic);
+                .count() : 0l) : this.errorMessagesLogic);
     }
 
     /**
@@ -177,7 +178,7 @@ public class GPValidationMessageStore implements ValidationMessageStore {
         return this.warningMessagesLogic = (this.warningMessagesLogic == null ? (isSetValidationMessages()
                 ? this.validationMessages.stream()
                 .filter(toLogicWarningPredicate())
-                .count() : new Long(0)) : this.warningMessagesLogic);
+                .count() : 0l) : this.warningMessagesLogic);
     }
 
     /**

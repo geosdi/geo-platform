@@ -43,6 +43,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -58,9 +63,10 @@ class GPElasticSearchRestPBEConfig {
      * @return {@link PBEConfig}
      */
     @Bean
-    public PBEConfig elasticSearchRestPBEConfig(GPElasticSearchRestPBEProperties elasticSearchRestPBEProperties) {
-        logger.debug("####################################GP_ELASTICSEARCH_REST_PBE_PASSWORD : {}\n\n", elasticSearchRestPBEProperties
-                .getPassword());
+    public PBEConfig elasticSearchRestPBEConfig(@Nonnull(when = NEVER) GPElasticSearchRestPBEProperties elasticSearchRestPBEProperties) {
+        checkArgument(elasticSearchRestPBEProperties != null, "The Parameter elasticSearchRestPBEProperties must not be null.");
+        checkArgument((elasticSearchRestPBEProperties.getPassword() != null) && !(elasticSearchRestPBEProperties.getPassword().trim().isEmpty()), "The Parameter password must not be null or an empty string.");
+        logger.debug("####################################GP_ELASTICSEARCH_REST_PBE_PASSWORD : {}\n\n", elasticSearchRestPBEProperties.getPassword());
         return new SimpleStringPBEConfig() {
 
             {

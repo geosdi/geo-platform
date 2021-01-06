@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.jaxb.validation.xsd.builder;
 
-import org.geosdi.geoplatform.jaxb.validation.configuration.GPSeverityMessage;
 import org.geosdi.geoplatform.jaxb.validation.configuration.ValidationMessage;
 import org.geosdi.geoplatform.jaxb.validation.xsd.message.XSDValidationMessage;
 
 import javax.xml.bind.ValidationEvent;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static org.geosdi.geoplatform.jaxb.validation.configuration.GPSeverityMessage.fromValue;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -82,7 +82,7 @@ public interface ValidationMessageBuilder {
         @Override
         public ValidationMessageBuilder withValidationEvent(ValidationEvent theValidationEvent) {
             this.validationEvent = theValidationEvent;
-            return this;
+            return self();
         }
 
         /**
@@ -92,9 +92,15 @@ public interface ValidationMessageBuilder {
         @Override
         public ValidationMessage build() throws Exception {
             checkNotNull(this.validationEvent, "Validation Event must not be null");
-            return new XSDValidationMessage(validationEvent.getMessage(),
-                    GPSeverityMessage.fromValue(validationEvent.getSeverity()),
+            return new XSDValidationMessage(validationEvent.getMessage(), fromValue(validationEvent.getSeverity()),
                     validationEvent.getLocator().getColumnNumber(), validationEvent.getLocator().getLineNumber());
+        }
+
+        /**
+         * @return {@link ValidationMessageBuilder}
+         */
+        protected ValidationMessageBuilder self() {
+            return this;
         }
     }
 }

@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.experimental.mongodb.validate;
 
 import jakarta.validation.ConstraintViolationException;
-import org.geosdi.geoplatform.experimental.mongodb.loader.GPMongoConfigLoader;
+import org.geosdi.geoplatform.experimental.mongodb.loader.GPMongoConfigLoaderTest;
 import org.geosdi.geoplatform.experimental.mongodb.model.Address;
 import org.geosdi.geoplatform.experimental.mongodb.repositories.AddressRepository;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
@@ -58,7 +58,7 @@ import static org.junit.Assert.assertNotNull;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {GPMongoConfigLoader.class}, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {GPMongoConfigLoaderTest.class}, loader = AnnotationConfigContextLoader.class)
 @ActiveProfiles(value = {"mongo_validate"})
 public class GPMongoValidateTest {
 

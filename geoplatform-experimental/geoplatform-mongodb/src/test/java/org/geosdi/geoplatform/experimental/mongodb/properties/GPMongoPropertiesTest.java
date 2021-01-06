@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.experimental.mongodb.properties;
 
 import org.geosdi.geoplatform.experimental.mongodb.configuration.properties.MongoProperties;
-import org.geosdi.geoplatform.experimental.mongodb.loader.GPMongoPropertiesLoader;
+import org.geosdi.geoplatform.experimental.mongodb.loader.GPMongoPropertiesLoaderTest;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.junit.*;
 import org.junit.runner.RunWith;
@@ -55,7 +55,7 @@ import static org.junit.Assert.assertNotNull;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {GPMongoPropertiesLoader.class}, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {GPMongoPropertiesLoaderTest.class}, loader = AnnotationConfigContextLoader.class)
 public class GPMongoPropertiesTest {
 
     @GeoPlatformLog

@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.experimental.mongodb.template;
 
-import org.geosdi.geoplatform.experimental.mongodb.loader.GPMongoConfigLoader;
+import org.geosdi.geoplatform.experimental.mongodb.loader.GPMongoConfigLoaderTest;
 import org.geosdi.geoplatform.experimental.mongodb.model.Address;
 import org.geosdi.geoplatform.experimental.mongodb.repositories.AddressRepository;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
@@ -68,7 +68,7 @@ import static org.springframework.data.mongodb.core.index.GeoSpatialIndexType.GE
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {GPMongoConfigLoader.class}, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {GPMongoConfigLoaderTest.class}, loader = AnnotationConfigContextLoader.class)
 public class GPMongoConfigTest {
 
     @GeoPlatformLog

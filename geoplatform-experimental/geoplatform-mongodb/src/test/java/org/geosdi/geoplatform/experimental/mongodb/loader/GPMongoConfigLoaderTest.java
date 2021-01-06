@@ -35,10 +35,9 @@
  */
 package org.geosdi.geoplatform.experimental.mongodb.loader;
 
-import org.geosdi.geoplatform.experimental.mongodb.spring.annotation.GPMongoConfig;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
+import org.springframework.context.annotation.ImportResource;
 
 /**
  *
@@ -46,7 +45,8 @@ import org.springframework.context.annotation.FilterType;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
-@ComponentScan(value = {"org.geosdi.geoplatform.logger.support.spring.config", "org.geosdi.geoplatform.experimental.mongodb.spring"},
-        excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = {GPMongoConfig.class})})
-public class GPMongoPropertiesLoader {
+@ComponentScan(value = {"org.geosdi.geoplatform.logger.support.spring.config", "org.geosdi.geoplatform.experimental.mongodb.jasypt.pbe.properties",
+        "org.geosdi.geoplatform.experimental.mongodb.spring"})
+@ImportResource(value = {"classpath:mongoRepositories.xml", "classpath*:mongoRepositories.xml"})
+public class GPMongoConfigLoaderTest {
 }

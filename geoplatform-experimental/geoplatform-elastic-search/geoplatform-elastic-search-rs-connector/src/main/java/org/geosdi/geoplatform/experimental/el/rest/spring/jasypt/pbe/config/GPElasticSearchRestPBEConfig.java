@@ -65,7 +65,6 @@ class GPElasticSearchRestPBEConfig {
     @Bean
     public PBEConfig elasticSearchRestPBEConfig(@Nonnull(when = NEVER) GPElasticSearchRestPBEProperties elasticSearchRestPBEProperties) {
         checkArgument(elasticSearchRestPBEProperties != null, "The Parameter elasticSearchRestPBEProperties must not be null.");
-        checkArgument((elasticSearchRestPBEProperties.getPassword() != null) && !(elasticSearchRestPBEProperties.getPassword().trim().isEmpty()), "The Parameter password must not be null or an empty string.");
         logger.debug("####################################GP_ELASTICSEARCH_REST_PBE_PASSWORD : {}\n\n", elasticSearchRestPBEProperties.getPassword());
         return new SimpleStringPBEConfig() {
 

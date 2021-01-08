@@ -14,13 +14,6 @@
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Print Module</name>
-    
-    <repositories>
-        <repository>
-            <id>org.mapfish</id>
-            <url>http://dev.mapfish.org/maven/repository</url>
-        </repository>
-    </repositories>
 
     <dependencies>
         <dependency>
@@ -40,7 +33,7 @@
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
-        
+
         <!-- FOR PRINTING -->
         <dependency>
             <groupId>org.mapfish.print</groupId>
@@ -62,6 +55,10 @@
                 <exclusion>
                     <groupId>org.geotools</groupId>
                     <artifactId>gt-cql</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>xerces</groupId>
+                    <artifactId>xercesImpl</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>

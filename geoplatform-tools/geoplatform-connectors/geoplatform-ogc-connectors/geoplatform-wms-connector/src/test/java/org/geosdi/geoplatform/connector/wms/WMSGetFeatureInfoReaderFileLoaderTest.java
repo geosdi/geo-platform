@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.connector.wms;
 import org.geosdi.geoplatform.connector.GPConnectorFile;
 import org.geosdi.geoplatform.connector.IGPConnectorFile;
 import org.geosdi.geoplatform.connector.IGPConnectorFileStorage;
+import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.junit.BeforeClass;
 
 import java.io.File;
@@ -48,6 +50,8 @@ import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
+import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -55,6 +59,12 @@ import static java.util.stream.Stream.of;
  */
 public class WMSGetFeatureInfoReaderFileLoaderTest {
 
+    public static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
+            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
+            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
+            WRAP_ROOT_VALUE_DISABLE,
+            INDENT_OUTPUT_ENABLE, NON_NULL);
+    //
     protected static IGPConnectorFileStorage storage;
 
     @BeforeClass

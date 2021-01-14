@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
@@ -72,7 +74,11 @@ public class WMSBoundingBox implements GPWMSBoundingBox {
      * @param theMaxx
      * @param theMaxy
      */
-    public WMSBoundingBox(@Nonnull(when = NEVER) Double theMinx, @Nonnull(when = NEVER) Double theMiny, @Nonnull(when = NEVER) Double theMaxx, @Nonnull(when = NEVER) Double theMaxy) {
+    @JsonCreator
+    public WMSBoundingBox(@JsonProperty(value = "minx") @Nonnull(when = NEVER) Double theMinx,
+            @JsonProperty(value = "miny") @Nonnull(when = NEVER) Double theMiny,
+            @JsonProperty(value = "maxx") @Nonnull(when = NEVER) Double theMaxx,
+            @JsonProperty(value = "maxy") @Nonnull(when = NEVER) Double theMaxy) {
         checkArgument(theMinx != null, "The Parameter minx must not be null.");
         checkArgument(theMiny != null, "The Parameter miny must not be null.");
         checkArgument(theMaxx != null, "The Parameter maxx must not be null.");

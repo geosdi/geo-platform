@@ -52,11 +52,16 @@ import static javax.annotation.meta.When.NEVER;
  */
 public enum WMSRequestKey implements GPWMSRequestKey {
 
+    SERVICE("SERVICE"),
+    VERSION("VERSION"),
     LAYERS("LAYERS"),
+    REQUEST("REQUEST"),
     SRS("SRS"),
+    CRS("CRS"),
     WIDTH("WIDTH"),
     HEIGHT("HEIGHT"),
     BBOX("BBOX"),
+    STYLES("STYLES"),
     CHAIN("&"),
     KVP_SEPARATOR("="),
     URL_DELIMITER("?"),

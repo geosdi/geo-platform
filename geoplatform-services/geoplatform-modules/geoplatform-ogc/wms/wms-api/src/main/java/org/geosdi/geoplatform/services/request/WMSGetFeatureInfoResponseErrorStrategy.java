@@ -80,6 +80,7 @@ abstract class WMSGetFeatureInfoResponseErrorStrategy<V> implements GPWMSGetFeat
         Map<String, Object> properties = new LinkedHashMap<>();
         properties.put("LAYERS_IN_ERROR", wmsGetFeatureInfoElement.getLayers().stream().collect(joining(",")));
         properties.put("ERROR_MESSAGE", ex.getMessage());
+        feature.setProperties(properties);
         this.addFeatureError(feature);
     }
 

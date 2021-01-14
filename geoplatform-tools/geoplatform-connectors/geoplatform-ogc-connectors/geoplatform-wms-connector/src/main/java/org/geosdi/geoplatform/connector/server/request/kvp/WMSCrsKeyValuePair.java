@@ -35,85 +35,39 @@
  */
 package org.geosdi.geoplatform.connector.server.request.kvp;
 
-import org.geosdi.geoplatform.connector.server.request.GPWMSKeyValuePair;
-import org.geosdi.geoplatform.connector.server.request.kvp.GPWMSRequestKvpReader.WMSRequestKvpReader;
+import net.jcip.annotations.Immutable;
 
 import javax.annotation.Nonnull;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.connector.server.request.WMSRequestKey.SRS;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPWMSKeyValuePairBuilder<R, KVPBuilder extends GPWMSKeyValuePairBuilder> extends GPWMSKeyValuePair {
+@Immutable
+public class WMSCrsKeyValuePair extends WMSGetMapBaseRequestKeyValuePair<String> {
+
+    private static final long serialVersionUID = -4269904967598100556L;
+    //
+    private final String crs;
 
     /**
-     * @param theKeyValuePair
-     * @return {@link KVPBuilder}
+     * @param theValue
      */
-     KVPBuilder withKeyValuePair(@Nonnull(when = NEVER) String theKeyValuePair);
+    WMSCrsKeyValuePair(@Nonnull(when = NEVER) String theValue) {
+        super(SRS.toKey());
+        checkArgument((theValue != null) && !(theValue.trim().isEmpty()), "The Parameter value must not be null or an empty string.");
+        this.crs = theValue;
+    }
 
     /**
-     * @return {@link R}
-     * @throws Exception
+     * @return {@link String}
      */
-    R build() throws Exception;
-
-    abstract class GPWMSBaseKeyValuePairBuilder<R, KVPBuilder extends GPWMSKeyValuePairBuilder> implements GPWMSKeyValuePairBuilder<R, KVPBuilder> {
-
-        protected static final GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
-        //
-        protected ThreadLocal<String> keyValuePair = ThreadLocal.withInitial(() -> null);
-
-        protected GPWMSBaseKeyValuePairBuilder() {
-        }
-
-        /**
-         * @param theKeyValuePair
-         * @return {@link KVPBuilder}
-         */
-        @Override
-        public KVPBuilder withKeyValuePair(@Nonnull(when = NEVER) String theKeyValuePair) {
-            this.keyValuePair.set(theKeyValuePair);
-            return self();
-        }
-
-        /**
-         * @return {@link R}
-         * @throws Exception
-         */
-        @Override
-        public final R build() throws Exception {
-            checkArgument((this.keyValuePair.get() != null) && !(this.keyValuePair.get().trim().isEmpty()), "The Parameter keyValuePair must not be null or an empty string.");
-            return this.internalBuild();
-        }
-
-        /**
-         * @return {@link KVPBuilder}
-         */
-        protected KVPBuilder self() {
-            return (KVPBuilder) this;
-        }
-
-        /**
-         * @return {@link String}
-         */
-        @Override
-        public final String toWMSKeyValuePair() {
-            return this.keyValuePair.get();
-        }
-
-        @Override
-        public String toString() {
-            return this.getClass().getSimpleName();
-        }
-
-        /**
-         * @return
-         * @throws Exception
-         */
-        protected abstract R internalBuild() throws Exception;
+    @Override
+    public String toValue() {
+        return this.crs;
     }
 }

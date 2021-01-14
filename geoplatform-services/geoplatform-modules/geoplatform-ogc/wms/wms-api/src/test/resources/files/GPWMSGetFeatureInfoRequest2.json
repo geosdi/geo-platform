@@ -1,0 +1,21 @@
+{
+  "lang" : "en",
+  "crs" : "EPSG:4326",
+  "width" : "101",
+  "height" : "101",
+  "boundingBox" : {
+    "minx" : 14.403741359710693,
+    "miny" : 41.891523599624634,
+    "maxx" : 14.681146144866943,
+    "maxy" : 42.168928384780884
+  },
+  "point" : {
+    "x" : 50,
+    "y" : 50
+  },
+  "wmsFeatureInfoElements" : [ {
+    "wmsServerURL" : "https://servizi.protezionecivile.it/geoserver/PNSRS/wms",
+    "layers" : [ "PNSRS:ABR_4_5_comuni_aff_COM" ]
+  } ],
+  "format" : "FEATURE_STORE"
+}

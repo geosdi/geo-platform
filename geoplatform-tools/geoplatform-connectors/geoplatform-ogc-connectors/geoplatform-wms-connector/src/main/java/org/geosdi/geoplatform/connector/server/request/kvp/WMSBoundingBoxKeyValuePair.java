@@ -43,7 +43,6 @@ import javax.annotation.Nonnull;
 import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Double.valueOf;
 import static java.util.regex.Pattern.compile;
 import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.connector.server.request.WMSRequestKey.BBOX;
@@ -69,7 +68,7 @@ public class WMSBoundingBoxKeyValuePair extends WMSGetMapBaseRequestKeyValuePair
         Double[] boundingBoxValues = compile(COMMA_SEPARATOR.toKey()).splitAsStream(theValue)
                 .filter(Objects::nonNull)
                 .filter(v -> !v.trim().isEmpty())
-                .map(v -> valueOf(v))
+                .map(Double::valueOf)
                 .toArray(Double[]::new);
         checkArgument((boundingBoxValues != null) && (boundingBoxValues.length == 4), "The Parameter boundingBoxValues must not be null and must contains 4 elements.");
         this.wmsBoundingBox = new WMSBoundingBox(boundingBoxValues[0], boundingBoxValues[1], boundingBoxValues[2], boundingBoxValues[3]);

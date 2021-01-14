@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -34,46 +34,55 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.geosdi.geoplatform.connector.server.request.kvp.GPWMSRequestKeyValuePair;
+import lombok.Getter;
+import lombok.ToString;
+import net.jcip.annotations.Immutable;
 
+import javax.annotation.Nullable;
 import java.util.Collection;
+
+import static java.util.Collections.EMPTY_LIST;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
+import static lombok.AccessLevel.NONE;
+import static org.geosdi.geoplatform.connector.server.request.WMSRequestKey.STYLES;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = WMSGetMapBaseRequest.class)
-public interface GPWMSGetMapBaseRequest extends GPWMSKeyValuePair {
+@Getter
+@ToString(exclude = {"stylesKeyValuePair"})
+@Immutable
+public class WMSStyles implements GPWMSStyles {
+
+    private static final long serialVersionUID = -4735290634718692169L;
+    //
+    private final Collection<String> styles;
+    @Getter(NONE)
+    private String stylesKeyValuePair;
 
     /**
-     * @param <BoundingBox>
-     * @return {@link BoundingBox}
+     * @param theStyles
      */
-    <BoundingBox extends GPWMSBoundingBox> BoundingBox getBoundingBox();
-
-    /**
-     * @return {@link Collection<String>}
-     */
-    Collection<String> getLayers();
-
-    /**
-     * @return {@link String}
-     */
-    String getSrs();
-
-    /**
-     * @return {@link String}
-     */
-    String getWidth();
+    public WMSStyles(@Nullable Collection<String> theStyles) {
+        this.styles = ((theStyles != null) ? theStyles : EMPTY_LIST);
+    }
 
     /**
      * @return {@link String}
      */
-    String getHeight();
+    @Override
+    public String toWMSKeyValuePair() {
+        return this.stylesKeyValuePair = ((this.stylesKeyValuePair != null) ? this.stylesKeyValuePair : this.toInternalWMSKeyValuePair());
+    }
 
     /**
-     * @return {@link Collection<GPWMSRequestKeyValuePair>}
+     * @return {@link String}
      */
-    Collection<GPWMSRequestKeyValuePair> getExtraParams();
+    String toInternalWMSKeyValuePair() {
+        return of(STYLES.toKey(), this.styles.stream()
+                .collect(joining(",")))
+                .collect(joining("="));
+    }
 }

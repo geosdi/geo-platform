@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connector.wms.request.theories;
 
 import org.geosdi.geoplatform.connector.server.request.GPWMSGetMapBaseRequest;
+import org.geosdi.geoplatform.connector.server.request.GPWMSGetMapBaseRequestBuilder;
 import org.geosdi.geoplatform.connector.server.request.kvp.GPWMSKeyValuePairBuilder.GPWMSBaseKeyValuePairBuilder;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
@@ -59,7 +60,7 @@ public class GPWMSGetMapBaseRequestBuilderTheoriesTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPWMSGetMapBaseRequestBuilderTheoriesTest.class);
     //
-    private static final GPWMSBaseKeyValuePairBuilder<GPWMSGetMapBaseRequest> builder = builder();
+    private static final GPWMSBaseKeyValuePairBuilder<GPWMSGetMapBaseRequest, GPWMSGetMapBaseRequestBuilder> builder = builder();
 
     @DataPoints
     public static String[] data() {

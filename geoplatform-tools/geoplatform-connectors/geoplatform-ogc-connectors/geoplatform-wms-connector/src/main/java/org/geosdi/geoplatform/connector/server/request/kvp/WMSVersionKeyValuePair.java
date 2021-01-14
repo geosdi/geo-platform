@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,48 +32,41 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.server.request;
+package org.geosdi.geoplatform.connector.server.request.kvp;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.geosdi.geoplatform.connector.server.request.kvp.GPWMSRequestKeyValuePair;
+import net.jcip.annotations.Immutable;
 
-import java.util.Collection;
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.connector.server.request.WMSRequestKey.VERSION;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = WMSGetMapBaseRequest.class)
-public interface GPWMSGetMapBaseRequest extends GPWMSKeyValuePair {
+@Immutable
+public class WMSVersionKeyValuePair extends WMSGetMapBaseRequestKeyValuePair<String> implements GPWMSVersionKeyValuePair {
+
+    private static final long serialVersionUID = -4395330117515137157L;
+    //
+    private final String version;
 
     /**
-     * @param <BoundingBox>
-     * @return {@link BoundingBox}
+     * @param theVersion
      */
-    <BoundingBox extends GPWMSBoundingBox> BoundingBox getBoundingBox();
-
-    /**
-     * @return {@link Collection<String>}
-     */
-    Collection<String> getLayers();
-
-    /**
-     * @return {@link String}
-     */
-    String getSrs();
+    WMSVersionKeyValuePair(@Nonnull(when = NEVER) String theVersion) {
+        super(VERSION.toKey());
+        checkArgument((theVersion != null) && !(theVersion.trim().isEmpty()), "The Parameter version must not be null or an empty string.");
+        this.version = theVersion;
+    }
 
     /**
      * @return {@link String}
      */
-    String getWidth();
-
-    /**
-     * @return {@link String}
-     */
-    String getHeight();
-
-    /**
-     * @return {@link Collection<GPWMSRequestKeyValuePair>}
-     */
-    Collection<GPWMSRequestKeyValuePair> getExtraParams();
+    @Override
+    public String toValue() {
+        return this.version;
+    }
 }

@@ -45,7 +45,6 @@ import org.geosdi.geoplatform.connector.server.v111.IGPWMSConnectorStoreV111;
 import org.geosdi.geoplatform.connector.server.v111.WMSGetCapabilitiesV111Request;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,9 +53,9 @@ import java.net.URL;
 
 import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.of;
-import static org.geosdi.geoplatform.connector.pool.builder.v111.GPWMSConnectorBuilderPoolV111.wmsConnectorBuilderPoolV111;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML_AS_STRING;
+import static org.geosdi.geoplatform.connector.server.store.GPWMSConnectorBuilder.WMSConnectorBuilder.wmsConnectorBuilder;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -64,21 +63,23 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(value = NAME_ASCENDING)
-public class GPWMSConnectorStoreSnipcPoolV111Test {
+public class GPWMSConnectorStoreV111MappeDPCTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(GPWMSConnectorStoreSnipcPoolV111Test.class);
+    private static final Logger logger = LoggerFactory.getLogger(GPWMSConnectorStoreV111MappeDPCTest.class);
     //
     private static IGPWMSConnectorStoreV111 wmsServerConnector;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        wmsServerConnector = wmsConnectorBuilderPoolV111()
-                .withServerUrl(new URL("https://servizi.protezionecivile.it/geoserver/wms"))
+        wmsServerConnector = wmsConnectorBuilder()
+                .wmsConnectorBuilderV111()
+                .withServerUrl(new URL("http://mappe-dpc.protezionecivile.it/gssitdpc/wms"))
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
-                        .withMaxTotalConnections(150)
-                        .withDefaultMaxPerRoute(80)
-                        .withMaxRedirect(20)
-                        .build()).build();
+                        .withMaxTotalConnections(12)
+                        .withDefaultMaxPerRoute(8)
+                        .withMaxRedirect(5)
+                        .build())
+                .build();
     }
 
     @Test
@@ -87,53 +88,20 @@ public class GPWMSConnectorStoreSnipcPoolV111Test {
         logger.info("###############################WMS_GET_CAPABILITIES_V111_RESPONSE : {}\n", wmsGetCapabilitiesRequest.getResponseAsString());
     }
 
-    @Ignore
     @Test
-    public void b_wmsDescribeLayerV11Test() throws Exception {
+    public void b_wmsDescribeLayerV111Test() throws Exception {
         GPWMSDescribeLayerV111Request wmsDescribeLayerRequest = wmsServerConnector.createDescribeLayerRequest();
         logger.info("##########################WMS_DESCRIBE_LAYER_RESPONSE_V111 : {}\n", wmsDescribeLayerRequest
-                .withLayers("istat:ISTAT_2011_ace_propers").getResponse());
-    }
-
-    @Ignore
-    @Test
-    public void c_wmsDescribeLayerV11Test() throws Exception {
-        GPWMSDescribeLayerV111Request wmsDescribeLayerRequest = wmsServerConnector.createDescribeLayerRequest();
-        logger.info("##########################WMS_DESCRIBE_LAYER_RESPONSE_V111 : {}\n", wmsDescribeLayerRequest
-                .withLayers("PNSRS:IT_sedi_ASL_2020").getResponse());
+                .withLayers("PianoCampiFlegrei:CF_AreeIncontro", "PianoCampiFlegrei:CF_CentriCoordinamento").getResponse());
     }
 
     @Test
-    public void d_wmsGetFeatureInfoV111Test() throws Exception {
+    public void c_wmsGetFeatureInfoV111Test() throws Exception {
         GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
         GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(13.815994262695314, 40.72332345541451, 15.088348388671877, 40.99389273551914);
-        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("VULCANICO:CF_aree_attesa").collect(toSet()),
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("PianoCampiFlegrei:CF_AreeIncontro", "PianoCampiFlegrei:CF_CentriCoordinamento").collect(toSet()),
                 "EPSG:4326", "1853", "521");
-        logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("VULCANICO:CF_aree_attesa")
-                .withWMSGetMapRequest(wmsGetMapBaseRequest)
-                .withFeatureCount(2)
-                .withInfoFormat(GML_AS_STRING).withX(487).withY(305).getResponse());
-    }
-
-    @Test
-    public void e_wmsGetFeatureInfoV111Test() throws Exception {
-        GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
-        GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(13.815994262695314, 40.72332345541451, 15.088348388671877, 40.99389273551914);
-        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("VULCANICO:VES_aree_attesa").collect(toSet()),
-                "EPSG:4326", "1853", "521");
-        logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("VULCANICO:VES_aree_attesa")
-                .withWMSGetMapRequest(wmsGetMapBaseRequest)
-                .withFeatureCount(2)
-                .withInfoFormat(GML_AS_STRING).withX(487).withY(305).getResponse());
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void f_wmsGetFeatureInfoV111Test() throws Exception {
-        GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
-        GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(13.815994262695314, 40.72332345541451, 15.088348388671877, 40.99389273551914);
-        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("VULCANICO:CF_zona rossa_maplite").collect(toSet()),
-                "EPSG:4326", "1853", "521");
-        logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("VULCANICO:CF_zona rossa_maplite")
+        logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("PianoCampiFlegrei:CF_AreeIncontro", "PianoCampiFlegrei:CF_CentriCoordinamento")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(2)
                 .withInfoFormat(GML_AS_STRING).withX(487).withY(305).getResponse());

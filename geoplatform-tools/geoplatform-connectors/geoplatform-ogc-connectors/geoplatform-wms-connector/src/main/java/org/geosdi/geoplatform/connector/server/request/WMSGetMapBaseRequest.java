@@ -35,12 +35,17 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
+import org.geosdi.geoplatform.connector.server.request.kvp.GPWMSRequestKeyValuePair;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -68,6 +73,7 @@ public class WMSGetMapBaseRequest implements GPWMSGetMapBaseRequest {
     private final String srs;
     private final String width;
     private final String height;
+    private final Collection<GPWMSRequestKeyValuePair> extraParams;
     @Getter(NONE)
     private String wmsGetMapKeyValuePair;
 
@@ -80,6 +86,22 @@ public class WMSGetMapBaseRequest implements GPWMSGetMapBaseRequest {
      */
     public WMSGetMapBaseRequest(@Nonnull(when = NEVER) GPWMSBoundingBox theBoundingBox, @Nonnull(when = NEVER) Collection<String> theLayers,
             @Nonnull(when = NEVER) String theSrs, @Nonnull(when = NEVER) String theWitdth, @Nonnull(when = NEVER) String theHeight) {
+        this(theBoundingBox, theLayers, theSrs, theWitdth, theHeight, Collections.EMPTY_LIST);
+    }
+
+    /**
+     * @param theBoundingBox
+     * @param theLayers
+     * @param theSrs
+     * @param theWitdth
+     * @param theHeight
+     * @param theExtraParams
+     */
+    @JsonCreator
+    public WMSGetMapBaseRequest(@JsonProperty(value = "boundingBox") @Nonnull(when = NEVER) GPWMSBoundingBox theBoundingBox,
+            @JsonProperty(value = "layers") @Nonnull(when = NEVER) Collection<String> theLayers, @JsonProperty(value = "srs") @Nonnull(when = NEVER) String theSrs,
+            @JsonProperty(value = "width") @Nonnull(when = NEVER) String theWitdth, @JsonProperty(value = "height") @Nonnull(when = NEVER) String theHeight,
+            @JsonProperty(value = "extraParams") @Nullable Collection<GPWMSRequestKeyValuePair> theExtraParams) {
         checkArgument(theBoundingBox != null, "The Parameter boundingBox must not be null.");
         checkArgument((theLayers != null) && !(theLayers.isEmpty()), "The Parameter layers must not be null or an empty list.");
         checkArgument((theSrs != null) && !(theSrs.trim().isEmpty()), "The Parameter srs must not be null or an empty string.");
@@ -96,6 +118,7 @@ public class WMSGetMapBaseRequest implements GPWMSGetMapBaseRequest {
         this.srs = theSrs;
         this.width = theWitdth;
         this.height = theHeight;
+        this.extraParams = theExtraParams;
     }
 
     /**

@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,48 +32,47 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.server.request;
+package org.geosdi.geoplatform.connector.server.request.kvp;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.geosdi.geoplatform.connector.server.request.kvp.GPWMSRequestKeyValuePair;
+import net.jcip.annotations.Immutable;
+import org.geosdi.geoplatform.connector.server.request.WMSStyles;
 
-import java.util.Collection;
+import javax.annotation.Nullable;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+
+import static java.util.stream.Collectors.toCollection;
+import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.connector.server.request.WMSRequestKey.COMMA_SEPARATOR;
+import static org.geosdi.geoplatform.connector.server.request.WMSRequestKey.STYLES;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = WMSGetMapBaseRequest.class)
-public interface GPWMSGetMapBaseRequest extends GPWMSKeyValuePair {
+@Immutable
+public class WMSStylesKeyValuePair extends WMSGetMapBaseRequestKeyValuePair<WMSStyles> {
+
+    private static final long serialVersionUID = -4033005466211778288L;
+    //
+    private final WMSStyles wmsStyles;
 
     /**
-     * @param <BoundingBox>
-     * @return {@link BoundingBox}
+     * @param theValue
      */
-    <BoundingBox extends GPWMSBoundingBox> BoundingBox getBoundingBox();
+    WMSStylesKeyValuePair(@Nullable String theValue) {
+        super(STYLES.toKey());
+        this.wmsStyles = new WMSStyles(((theValue != null) && !(theValue.trim().isEmpty())) ? of(theValue.split(COMMA_SEPARATOR.toKey()))
+                .filter(Objects::nonNull)
+                .filter(v -> !(v.trim().isEmpty()))
+                .collect(toCollection(LinkedHashSet::new)) : null);
+    }
 
     /**
-     * @return {@link Collection<String>}
+     * @return {@link WMSStyles}
      */
-    Collection<String> getLayers();
-
-    /**
-     * @return {@link String}
-     */
-    String getSrs();
-
-    /**
-     * @return {@link String}
-     */
-    String getWidth();
-
-    /**
-     * @return {@link String}
-     */
-    String getHeight();
-
-    /**
-     * @return {@link Collection<GPWMSRequestKeyValuePair>}
-     */
-    Collection<GPWMSRequestKeyValuePair> getExtraParams();
+    @Override
+    public WMSStyles toValue() {
+        return this.wmsStyles;
+    }
 }

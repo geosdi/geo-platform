@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.server.request.kvp;
 
 import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.reader.GPConnectorReader;
+import org.geosdi.geoplatform.connector.server.request.GPWMSRequestKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,6 +60,10 @@ import static org.geosdi.geoplatform.connector.server.request.WMSRequestKey.*;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GPWMSRequestKvpReader extends GPConnectorReader<GPWMSRequestKeyValuePair, String, String> {
+
+    WMSServiceKeyValuePair WMS_SERVICE_KEY_VALUE_PAIR = new WMSServiceKeyValuePair();
+    WMSRequestKeyValuePair WMS_REQUEST_KEY_VALUE_PAIR = new WMSRequestKeyValuePair();
+    WMSStylesKeyValuePair WMS_STYLES_DEFAULT_VALUE = new WMSStylesKeyValuePair(null);
 
     /**
      * @param theValue
@@ -93,7 +98,7 @@ public interface GPWMSRequestKvpReader extends GPConnectorReader<GPWMSRequestKey
                     .filter(values -> values.length == 2)
                     .filter(values -> ((values[0] != null) && !(values[0].trim().isEmpty()) && (values[1] != null) && !(values[1].trim().isEmpty())))
                     .map(this::internalRead)
-                    .collect(toMap(k -> k.toKey(), identity(), (oldVal, newVal) -> oldVal, LinkedHashMap::new));
+                    .collect(toMap(GPWMSRequestKey::toKey, identity(), (oldVal, newVal) -> oldVal, LinkedHashMap::new));
         }
 
         /**
@@ -102,16 +107,26 @@ public interface GPWMSRequestKvpReader extends GPConnectorReader<GPWMSRequestKey
          */
         private GPWMSRequestKeyValuePair internalRead(String... theValues) {
             switch (theValues[0].toUpperCase()) {
+                case "SERVICE" :
+                    return WMS_SERVICE_KEY_VALUE_PAIR;
+                case "VERSION" :
+                    return new WMSVersionKeyValuePair(theValues[1]);
+                case "REQUEST" :
+                    return WMS_REQUEST_KEY_VALUE_PAIR;
                 case "LAYERS" :
                     return new WMSLayersKeyValuePair(theValues[1]);
                 case "SRS" :
                     return new WMSSrsKeyValuePair(theValues[1]);
-                case "WIDTH" :
+                case "CRS" :
+                    return new WMSCrsKeyValuePair(theValues[1]);
+                case "WIDTH":
                     return new WMSWidthKeyValuePair(theValues[1]);
                 case "HEIGHT" :
                     return new WMSHeightKeyValuePair(theValues[1]);
                 case "BBOX" :
                     return new WMSBoundingBoxKeyValuePair(theValues[1]);
+                case "STYLES" :
+                    return new WMSStylesKeyValuePair(theValues[1]);
                 default:
                     return new WMSGetMapBaseRequestKeyValuePair<String>(theValues[0].toUpperCase()) {
 

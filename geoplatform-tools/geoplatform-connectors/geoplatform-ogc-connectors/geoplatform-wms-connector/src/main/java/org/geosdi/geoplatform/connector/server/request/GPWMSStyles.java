@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -34,46 +34,16 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.geosdi.geoplatform.connector.server.request.kvp.GPWMSRequestKeyValuePair;
-
 import java.util.Collection;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = WMSGetMapBaseRequest.class)
-public interface GPWMSGetMapBaseRequest extends GPWMSKeyValuePair {
-
-    /**
-     * @param <BoundingBox>
-     * @return {@link BoundingBox}
-     */
-    <BoundingBox extends GPWMSBoundingBox> BoundingBox getBoundingBox();
+public interface GPWMSStyles extends GPWMSKeyValuePair {
 
     /**
      * @return {@link Collection<String>}
      */
-    Collection<String> getLayers();
-
-    /**
-     * @return {@link String}
-     */
-    String getSrs();
-
-    /**
-     * @return {@link String}
-     */
-    String getWidth();
-
-    /**
-     * @return {@link String}
-     */
-    String getHeight();
-
-    /**
-     * @return {@link Collection<GPWMSRequestKeyValuePair>}
-     */
-    Collection<GPWMSRequestKeyValuePair> getExtraParams();
+    Collection<String> getStyles();
 }

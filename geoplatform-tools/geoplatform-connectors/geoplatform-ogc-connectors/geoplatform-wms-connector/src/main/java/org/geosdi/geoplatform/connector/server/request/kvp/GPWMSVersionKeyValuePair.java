@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,48 +32,30 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.server.request;
+package org.geosdi.geoplatform.connector.server.request.kvp;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.geosdi.geoplatform.connector.server.request.kvp.GPWMSRequestKeyValuePair;
+import javax.annotation.Nonnull;
+import javax.annotation.meta.When;
+import java.util.List;
 
-import java.util.Collection;
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Stream.of;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = WMSGetMapBaseRequest.class)
-public interface GPWMSGetMapBaseRequest extends GPWMSKeyValuePair {
+public interface GPWMSVersionKeyValuePair extends GPWMSRequestKeyValuePair<String> {
+
+    List<String> WMS_VALID_VERSION = of("1.0.0", "1.1.0", "1.1.1", "1.3.0").collect(toList());
 
     /**
-     * @param <BoundingBox>
-     * @return {@link BoundingBox}
+     * @param theVersion
+     * @return {@link Boolean}
      */
-    <BoundingBox extends GPWMSBoundingBox> BoundingBox getBoundingBox();
-
-    /**
-     * @return {@link Collection<String>}
-     */
-    Collection<String> getLayers();
-
-    /**
-     * @return {@link String}
-     */
-    String getSrs();
-
-    /**
-     * @return {@link String}
-     */
-    String getWidth();
-
-    /**
-     * @return {@link String}
-     */
-    String getHeight();
-
-    /**
-     * @return {@link Collection<GPWMSRequestKeyValuePair>}
-     */
-    Collection<GPWMSRequestKeyValuePair> getExtraParams();
+     static boolean checkWMSVersion(@Nonnull(when = When.NEVER) String theVersion) {
+         checkArgument((theVersion != null) && !(theVersion.trim().isEmpty()), "The Parameter version must not be null.");
+         return WMS_VALID_VERSION.contains(theVersion);
+     }
 }

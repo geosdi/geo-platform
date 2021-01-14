@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.server.request.kvp;
 
+import net.jcip.annotations.Immutable;
+
 import javax.annotation.Nonnull;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -45,6 +47,7 @@ import static org.geosdi.geoplatform.connector.server.request.WMSRequestKey.WIDT
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Immutable
 public class WMSWidthKeyValuePair extends WMSGetMapBaseRequestKeyValuePair<String> {
 
     private static final long serialVersionUID = -6599369142784984394L;

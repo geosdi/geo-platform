@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.server.request.kvp;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import javax.annotation.Nonnull;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -44,6 +47,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@JsonPropertyOrder(value = {"key", "value"})
 public abstract class WMSGetMapBaseRequestKeyValuePair<V> implements GPWMSRequestKeyValuePair<V> {
 
     private static final long serialVersionUID = 2531861710995929420L;
@@ -61,14 +65,43 @@ public abstract class WMSGetMapBaseRequestKeyValuePair<V> implements GPWMSReques
     /**
      * @return {@link String}
      */
+    @JsonGetter(value = "key")
     @Override
     public final String toKey() {
         return this.key;
     }
 
+    /**
+     * @return {@link V}
+     */
+    @JsonGetter(value = "value")
+    public abstract V toValue();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        WMSGetMapBaseRequestKeyValuePair<?> that = (WMSGetMapBaseRequestKeyValuePair<?>) o;
+        if (key != null ? !key.equals(that.key) : that.key != null) {
+            return false;
+        }
+        return toValue() != null ? toValue().equals(that.toValue()) : that.toValue() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = key != null ? key.hashCode() : 0;
+        result = 31 * result + (toValue() != null ? toValue().hashCode() : 0);
+        return result;
+    }
+
     @Override
     public String toString() {
-        return this.getClass().getSimpleName() + "{" +
+        return (this.getClass().getSimpleName().equals("") ? "WMSGetMapBaseRequestKeyValuePair" : this.getClass().getSimpleName()) + "{" +
                 "key = " + this.toKey() +
                 ", value = " + ((this.toValue() != null) ? this.toValue() : "") +
                 "}";

@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.wms.request.mapper;
 
-import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoElement;
 import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoRequest;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.junit.FixMethodOrder;
@@ -46,10 +45,11 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.StringReader;
 import java.util.Arrays;
-import java.util.stream.Stream;
 
+import static io.reactivex.rxjava3.core.Observable.fromIterable;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.geosdi.geoplatform.wms.request.validator.GPWMSRequestValidatorTest.createWMSGetFeatureRequest;
@@ -105,22 +105,47 @@ public class GPWMSRequestMapperTest {
                         "  \"format\" : \"GEOJSON\"\n" +
                         "}"), GPWMSGetFeatureInfoRequest.class);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GP_WMS_GET_FEATURE_INFO_REQUEST_FROM_STRING : {}\n", wmsGetFeatureInfoRequest);
-        for (GPWMSGetFeatureInfoElement wmsGetFeatureInfoElement : wmsGetFeatureInfoRequest.getWmsFeatureInfoElements()) {
-            logger.info("{}\n", Arrays.toString(wmsGetFeatureInfoElement.toLayers()));
-        }
+        fromIterable(wmsGetFeatureInfoRequest.getWmsFeatureInfoElements())
+                .doOnComplete(() -> logger.info("##################RX Terminates its task.\n"))
+                .subscribe(v -> logger.info("{}\n", Arrays.toString(v.toLayers())), Throwable::printStackTrace);
     }
 
     @Test
     public void c_writeGPWMSGetFeatureInfoRequestAsFileTest() throws Exception {
-        jacksonSupport.getDefaultMapper().writeValue(new File("./target/GPWMSGetFeatureInfoRequest.json"), createWMSGetFeatureRequest());
+        jacksonSupport.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "GPWMSGetFeatureInfoRequest.json")
+                .collect(joining(separator))), createWMSGetFeatureRequest());
     }
 
     @Test
     public void d_readGPWMSGetFeatureInfoRequestFromFileTest() throws Exception {
-        String filePath = Stream.of(new File("./").getCanonicalPath(), "src", "test", "resources", "files", "GPWMSGetFeatureInfoRequest.json")
+        String filePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "files", "GPWMSGetFeatureInfoRequest.json")
                 .collect(joining(separator));
         GPWMSGetFeatureInfoRequest wmsGetFeatureInfoRequest = jacksonSupport.getDefaultMapper()
                 .readValue(new File(filePath), GPWMSGetFeatureInfoRequest.class);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GP_WMS_GET_FEATURE_INFO_REQUEST_FROM_FILE : {}\n", wmsGetFeatureInfoRequest);
+    }
+
+    @Test
+    public void e_readGPWMSGetFeatureInfoRequestFromFileTest() throws Exception {
+        String filePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "files", "GPWMSGetFeatureInfoRequest1.json")
+                .collect(joining(separator));
+        GPWMSGetFeatureInfoRequest wmsGetFeatureInfoRequest = jacksonSupport.getDefaultMapper()
+                .readValue(new File(filePath), GPWMSGetFeatureInfoRequest.class);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GP_WMS_GET_FEATURE_INFO_REQUEST_FROM_FILE : {}\n", wmsGetFeatureInfoRequest);
+        fromIterable(wmsGetFeatureInfoRequest.getWmsFeatureInfoElements())
+                .doOnComplete(() -> logger.info("##################RX Terminates its task.\n"))
+                .subscribe(v -> logger.info("{}\n", Arrays.toString(v.toLayers())), e -> e.printStackTrace());
+    }
+
+    @Test
+    public void f_readGPWMSGetFeatureInfoRequestFromFileTest() throws Exception {
+        String filePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "files", "GPWMSGetFeatureInfoRequest2.json")
+                .collect(joining(separator));
+        GPWMSGetFeatureInfoRequest wmsGetFeatureInfoRequest = jacksonSupport.getDefaultMapper()
+                .readValue(new File(filePath), GPWMSGetFeatureInfoRequest.class);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GP_WMS_GET_FEATURE_INFO_REQUEST_FROM_FILE : {}\n", wmsGetFeatureInfoRequest);
+        fromIterable(wmsGetFeatureInfoRequest.getWmsFeatureInfoElements())
+                .doOnComplete(() -> logger.info("##################RX Terminates its task.\n"))
+                .subscribe(v -> logger.info("{}\n", Arrays.toString(v.toLayers())), e -> e.printStackTrace());
     }
 }

@@ -46,6 +46,9 @@ import org.slf4j.LoggerFactory;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Stream.of;
+
+import static org.geosdi.geoplatform.connector.server.request.GPWMSGetMapBaseRequestBuilder.builder;
+import static org.geosdi.geoplatform.connector.wms.WMSGetFeatureInfoReaderFileLoaderTest.JACKSON_SUPPORT;
 import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -106,7 +109,15 @@ public class WMSGetMapBaseRequestTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void g_wmsGetMapKeyValuePairTest() throws Exception {
-        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(null, of("","", null, "", "", "", "", null, "", "", "", "", "").collect(toList()),
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest( null, of("","", null, "", "", "", "", null, "", "", "", "", "").collect(toList()),
                 "EPSG:32632", "550", "250");
+    }
+
+    @Test
+    public void h_wmsGetMapKeyValuePairTest() throws Exception {
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = builder().withKeyValuePair(
+                "SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=States,Cities&STYLES=&SRS=EPSG:4326&BBOX=-124,21,-66,49&WIDTH=600&HEIGHT=400&FORMAT=image/png&SERVICENAME=myservice&\n" + "TRANSPARENT=TRUE&BGCOLOR=0xFF0000&EXCEPTIONS=application/vnd.ogc.se_blank&REASPECT=TRUE&")
+                .build();
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@GET_MAP_JSON_STRING : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(wmsGetMapBaseRequest));
     }
 }

@@ -1,0 +1,50 @@
+{
+  "crs": "EPSG:4326",
+  "format": "FEATURE_STORE",
+  "width": 1853,
+  "height": 521,
+  "point": {
+    "x": 487,
+    "y": 305
+  },
+  "boundingBox": {
+    "minx": 13.815994262695314,
+    "miny": 40.72332345541451,
+    "maxx": 15.088348388671877,
+    "maxy": 40.99389273551914
+  },
+  "wmsFeatureInfoElements": [
+    {
+      "wmsServerURL": "http://mappe-dpc.protezionecivile.it/gssitdpc/wms",
+      "layers": "PianoCampiFlegrei:CF_AreeIncontro"
+    },
+    {
+      "wmsServerURL": "http://mappe-dpc.protezionecivile.it/gssitdpc/wms",
+      "layers": "PianoCampiFlegrei:CF_CentriCoordinamento"
+    },
+    {
+      "wmsServerURL": "https://servizi.protezionecivile.it/geoserver/wms",
+      "layers": "VULCANICO:CF_aree_attesa"
+    },
+    {
+      "wmsServerURL": "https://servizi.protezionecivile.it/geoserver/wms",
+      "layers": "VULCANICO:VES_aree_attesa"
+    },
+    {
+      "wmsServerURL": "https://servizi.protezionecivile.it/geoserver/wms",
+      "layers": "VULCANICO:CF_zona rossa_maplite"
+    },
+    {
+      "wmsServerURL": "https://servizi.protezionecivile.it/geoserver/wms",
+      "layers": "VULCANICO:CF_zona_gialla_maplite"
+    },
+    {
+      "wmsServerURL": "https://servizi.protezionecivile.it/geoserver/wms",
+      "layers": "VULCANICO:VES_zona_gialla_maplite"
+    },
+    {
+      "wmsServerURL": "https://servizi.protezionecivile.it/geoserver/wms",
+      "layers": "VULCANICO:VES_zona_rossa_maplite"
+    }
+  ]
+}

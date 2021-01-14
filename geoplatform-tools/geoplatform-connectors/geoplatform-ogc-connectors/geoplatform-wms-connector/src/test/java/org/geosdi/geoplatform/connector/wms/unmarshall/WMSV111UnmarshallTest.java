@@ -93,6 +93,7 @@ public class WMSV111UnmarshallTest {
     private static File wmsGetCapabilitiesIspraNatura;
     private static File wmsServiziProtezioneCivile;
     private static File wmsGetCapabilitiesProsit;
+    private static File wmsGetCapabilitiesFile1;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -114,6 +115,7 @@ public class WMSV111UnmarshallTest {
         wmsGetCapabilitiesIspraNatura = new File(basePath.concat("WMSIspraNatura.xml"));
         wmsServiziProtezioneCivile = new File(basePath.concat("serviziProtezioneCivileGetCapV1.1.1.xml"));
         wmsGetCapabilitiesProsit = new File(basePath.concat("WMSPrositGetCapabilities.xml"));
+        wmsGetCapabilitiesFile1 = new File(basePath.concat("WMSGetCapabilities_1.1.1.xml"));
         spf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", FALSE);
         spf.setFeature("http://xml.org/sax/features/validation", FALSE);
     }
@@ -272,5 +274,17 @@ public class WMSV111UnmarshallTest {
         StringWriter writer = new StringWriter();
         wmsContext.acquireMarshaller().marshal(wmsCapabilities, writer);
         logger.info("######################WMSGetCapabilitiesV111_PROSIT-String : \n{}\n", writer);
+    }
+
+    @Test
+    public void p_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+        XMLReader xmlReader = spf.newSAXParser().getXMLReader();
+        InputSource inputSource = new InputSource(new FileReader(wmsGetCapabilitiesFile1));
+        SAXSource source = new SAXSource(xmlReader, inputSource);
+        WMTMSCapabilities wmsCapabilities = (WMTMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(source);
+        logger.debug("#######################WMSGetCapabilitiesV111 : {}\n", wmsCapabilities);
+        StringWriter writer = new StringWriter();
+        wmsContext.acquireMarshaller().marshal(wmsCapabilities, writer);
+        logger.info("######################WMSGetCapabilitiesV111-String : \n{}\n", writer);
     }
 }

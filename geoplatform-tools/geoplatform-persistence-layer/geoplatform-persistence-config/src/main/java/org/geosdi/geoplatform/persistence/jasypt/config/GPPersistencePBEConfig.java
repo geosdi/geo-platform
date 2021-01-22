@@ -33,18 +33,45 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.persistence.loader;
+package org.geosdi.geoplatform.persistence.jasypt.config;
 
-import org.springframework.context.annotation.ComponentScan;
+import org.geosdi.geoplatform.persistence.configuration.jasypt.pbe.GPPersistencePBEProperties;
+import org.jasypt.encryption.pbe.config.PBEConfig;
+import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
+
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
-@ComponentScan(basePackages = {"org.geosdi.geoplatform.persistence.jasypt", "org.geosdi.geoplatform.persistence.configuration"})
-@ImportResource(value = {"classpath*:persistenceContext.xml"})
-public class PersistenceLoaderConfigurer {
+class GPPersistencePBEConfig {
+
+    private static final Logger logger = LoggerFactory.getLogger(GPPersistencePBEConfig.class);
+
+    /**
+     * @param persistencePBEProperties
+     * @return {@link PBEConfig}
+     */
+    @Bean
+    public PBEConfig persistencePBEConfig(@Nonnull(when = NEVER) GPPersistencePBEProperties persistencePBEProperties) {
+        checkArgument(persistencePBEProperties != null, "The Parameter persistencePBEProperties must not be null.");
+        logger.debug("####################################GP_PERSISTENCE_PBE_PASSWORD : {}\n\n", persistencePBEProperties.getPassword());
+        return new SimpleStringPBEConfig() {
+
+            {
+                super.setPassword(persistencePBEProperties.getPassword());
+                super.setPoolSize(2);
+                super.setAlgorithm("PBEWithMD5AndDES");
+            }
+        };
+    }
 }

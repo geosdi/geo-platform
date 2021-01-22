@@ -33,18 +33,24 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.persistence.loader;
+package org.geosdi.geoplatform.persistence.config.jasypt.pbe;
 
-import org.springframework.context.annotation.ComponentScan;
+import org.geosdi.geoplatform.persistence.configuration.jasypt.pbe.GPPersistencePBEProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
-@ComponentScan(basePackages = {"org.geosdi.geoplatform.persistence.jasypt", "org.geosdi.geoplatform.persistence.configuration"})
-@ImportResource(value = {"classpath*:persistenceContext.xml"})
-public class PersistenceLoaderConfigurer {
+class GPPersistencePBEPropertiesConfig {
+
+    /**
+     * @return {@link GPPersistencePBEProperties}
+     */
+    @Bean
+    public GPPersistencePBEProperties persistencePBEProperties() {
+        return new GPPersistencePBEProperties("GP_PERSISTENCE_PBE_KEY");
+    }
 }

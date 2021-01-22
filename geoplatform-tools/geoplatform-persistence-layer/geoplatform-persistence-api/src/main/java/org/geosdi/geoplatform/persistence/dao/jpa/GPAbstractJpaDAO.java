@@ -125,7 +125,7 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
         try {
             return stream(entities.spliterator(), FALSE)
                     .filter(Objects::nonNull)
-                    .map(e -> persist(e))
+                    .map(this::persist)
                     .collect(toList());
         } catch (Exception ex) {
             ex.printStackTrace();

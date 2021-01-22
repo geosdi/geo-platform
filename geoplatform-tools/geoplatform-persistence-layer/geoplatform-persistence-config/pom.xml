@@ -15,6 +15,15 @@
     <name>Geo-Platform :: == Persistence Layer Config Module</name>
 
     <dependencies>
+        <!-- =========================================================== -->
+        <!-- ================ GEOPLATFORM JASYPT SUPPORT =============== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-jasypt-support</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-persistence-api</artifactId>
@@ -48,7 +57,6 @@
             <artifactId>reflections</artifactId>
             <version>0.9.9</version>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -62,5 +70,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

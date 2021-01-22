@@ -33,18 +33,31 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.persistence.loader;
+package org.geosdi.geoplatform.persistence.configuration.jasypt.pbe;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
+import net.jcip.annotations.Immutable;
+import org.geosdi.geoplatform.jasypt.support.env.GPPBESystemEnvProperties;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Configuration
-@ComponentScan(basePackages = {"org.geosdi.geoplatform.persistence.jasypt", "org.geosdi.geoplatform.persistence.configuration"})
-@ImportResource(value = {"classpath*:persistenceContext.xml"})
-public class PersistenceLoaderConfigurer {
+@Immutable
+public class GPPersistencePBEProperties extends GPPBESystemEnvProperties.GPBasePBESystemEnvProperties {
+
+    /**
+     * @param thePropertyEnvName
+     */
+    public GPPersistencePBEProperties(@Nonnull(when = NEVER) String thePropertyEnvName) {
+        super(thePropertyEnvName);
+    }
+
+    @Override
+    public final String toString() {
+        return getClass().getSimpleName();
+    }
 }

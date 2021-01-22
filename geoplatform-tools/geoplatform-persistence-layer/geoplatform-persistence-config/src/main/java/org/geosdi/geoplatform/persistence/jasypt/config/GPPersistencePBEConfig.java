@@ -33,49 +33,45 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.persistence.demo;
+package org.geosdi.geoplatform.persistence.jasypt.config;
 
-import org.geosdi.geoplatform.persistence.demo.bootstrap.SpringDataAppConfig;
-import org.geosdi.geoplatform.persistence.demo.dao.spring.SpringCarDAO;
-import org.geosdi.geoplatform.persistence.demo.model.Car;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.geosdi.geoplatform.persistence.configuration.jasypt.pbe.GPPersistencePBEProperties;
+import org.jasypt.encryption.pbe.config.PBEConfig;
+import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {GPPersistenceLoaderDemoConfig.class, SpringDataAppConfig.class},
-        loader = AnnotationConfigContextLoader.class)
-@ActiveProfiles(value = {"jpa", "springData"})
-public class PersistenceSpringTest {
+@Configuration
+class GPPersistencePBEConfig {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    @Autowired
-    private SpringCarDAO springCarDAO;
-    private Car car;
+    private static final Logger logger = LoggerFactory.getLogger(GPPersistencePBEConfig.class);
 
-    @Before
-    public void setUp() {
-        car = new Car();
-        car.setPlate("AR793JJ");
-        car.setModel("Fiat Croma");
-        springCarDAO.save(car);
-    }
+    /**
+     * @param persistencePBEProperties
+     * @return {@link PBEConfig}
+     */
+    @Bean
+    public PBEConfig persistencePBEConfig(@Nonnull(when = NEVER) GPPersistencePBEProperties persistencePBEProperties) {
+        checkArgument(persistencePBEProperties != null, "The Parameter persistencePBEProperties must not be null.");
+        logger.debug("####################################GP_PERSISTENCE_PBE_PASSWORD : {}\n\n", persistencePBEProperties.getPassword());
+        return new SimpleStringPBEConfig() {
 
-    @Test
-    public void testSpringProfile() {
-        logger.info("Persistence Spring JPA DATA Test - Car Found @@@@@@@@@@@@@@@@@@@@@@@@@ " + springCarDAO.findByPlate("AR793JJ"));
-        this.springCarDAO.delete(car);
+            {
+                super.setPassword(persistencePBEProperties.getPassword());
+                super.setPoolSize(2);
+                super.setAlgorithm("PBEWithMD5AndDES");
+            }
+        };
     }
 }

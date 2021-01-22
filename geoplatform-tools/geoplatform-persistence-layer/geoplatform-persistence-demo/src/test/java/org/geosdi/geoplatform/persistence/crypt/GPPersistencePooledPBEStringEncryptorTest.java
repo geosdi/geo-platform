@@ -33,49 +33,56 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.persistence.demo;
+package org.geosdi.geoplatform.persistence.crypt;
 
-import org.geosdi.geoplatform.persistence.demo.bootstrap.SpringDataAppConfig;
-import org.geosdi.geoplatform.persistence.demo.dao.spring.SpringCarDAO;
-import org.geosdi.geoplatform.persistence.demo.model.Car;
+import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
+
+import javax.annotation.Resource;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {GPPersistenceLoaderDemoConfig.class, SpringDataAppConfig.class},
-        loader = AnnotationConfigContextLoader.class)
-@ActiveProfiles(value = {"jpa", "springData"})
-public class PersistenceSpringTest {
+@ContextConfiguration(locations = {"classpath:applicationContext-Crypt-Test.xml"})
+@FixMethodOrder(value = NAME_ASCENDING)
+public class GPPersistencePooledPBEStringEncryptorTest {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(GPPersistencePooledPBEStringEncryptorTest.class);
     //
-    @Autowired
-    private SpringCarDAO springCarDAO;
-    private Car car;
+    @Resource(name = "persistencePooledPBEStringEncryptor")
+    private PooledPBEStringEncryptor persistencePooledPBEStringEncryptor;
 
     @Before
-    public void setUp() {
-        car = new Car();
-        car.setPlate("AR793JJ");
-        car.setModel("Fiat Croma");
-        springCarDAO.save(car);
+    public void setUp() throws Exception {
+        assertNotNull(this.persistencePooledPBEStringEncryptor);
     }
 
     @Test
-    public void testSpringProfile() {
-        logger.info("Persistence Spring JPA DATA Test - Car Found @@@@@@@@@@@@@@@@@@@@@@@@@ " + springCarDAO.findByPlate("AR793JJ"));
-        this.springCarDAO.delete(car);
+    public void a_encryptedValueDBUrlTest() throws Exception {
+        String value = "jdbc:h2:mem:persistence;DB_CLOSE_DELAY=-1";
+        String encryptedValue = this.persistencePooledPBEStringEncryptor.encrypt(value);
+        assertTrue("Persistence DB Url / Encrypted Name doesn't match", this.persistencePooledPBEStringEncryptor.decrypt(encryptedValue).equals(value));
+        logger.info("@@@@@@@@@@@@@@PERSISTENCE_DB_URL_ENCRYPTED_VALUE : {}\n\n", encryptedValue);
+    }
+
+    @Test
+    public void b_encryptedValueDBUsernameTest() throws Exception {
+        String value = "sa";
+        String encryptedValue = this.persistencePooledPBEStringEncryptor.encrypt(value);
+        assertTrue("Persistence DB Username / Encrypted Name doesn't match", this.persistencePooledPBEStringEncryptor.decrypt(encryptedValue).equals(value));
+        logger.info("@@@@@@@@@@@@@@PERSISTENCE_DB_USERNAME_ENCRYPTED_VALUE : {}\n\n", encryptedValue);
     }
 }

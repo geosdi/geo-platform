@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.persistence.demo;
 
 import org.geosdi.geoplatform.persistence.demo.dao.ICarDAO;
 import org.geosdi.geoplatform.persistence.demo.model.Car;
-import org.geosdi.geoplatform.persistence.loader.PersistenceLoaderConfigurer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -57,8 +56,7 @@ import java.util.List;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PersistenceLoaderConfigurer.class},
-        loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {GPPersistenceLoaderDemoConfig.class}, loader = AnnotationConfigContextLoader.class)
 @ActiveProfiles(value = {"hibernate"})
 public class PersistenceHibernateTest {
 

@@ -40,14 +40,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
-@ComponentScan(basePackages = {"org.geosdi.geoplatform"
-        + ".persistence.configuration"})
-@ImportResource(value = {"classpath:persistenceConfigurer.xml",
-        "classpath*:persistenceContext.xml"})
+@ComponentScan(basePackages = {"org.geosdi.geoplatform.persistence.jasypt", "org.geosdi.geoplatform.persistence.configuration"})
+@ImportResource(value = {"classpath*:persistenceContext.xml"})
 public class PersistenceLoaderConfigurer {
 }

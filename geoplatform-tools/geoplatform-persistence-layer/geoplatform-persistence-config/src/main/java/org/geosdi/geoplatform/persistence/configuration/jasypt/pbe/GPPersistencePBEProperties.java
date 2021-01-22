@@ -33,49 +33,31 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.persistence.demo;
+package org.geosdi.geoplatform.persistence.configuration.jasypt.pbe;
 
-import org.geosdi.geoplatform.persistence.demo.bootstrap.SpringDataAppConfig;
-import org.geosdi.geoplatform.persistence.demo.dao.spring.SpringCarDAO;
-import org.geosdi.geoplatform.persistence.demo.model.Car;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
+import net.jcip.annotations.Immutable;
+import org.geosdi.geoplatform.jasypt.support.env.GPPBESystemEnvProperties;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {GPPersistenceLoaderDemoConfig.class, SpringDataAppConfig.class},
-        loader = AnnotationConfigContextLoader.class)
-@ActiveProfiles(value = {"jpa", "springData"})
-public class PersistenceSpringTest {
+@Immutable
+public class GPPersistencePBEProperties extends GPPBESystemEnvProperties.GPBasePBESystemEnvProperties {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    @Autowired
-    private SpringCarDAO springCarDAO;
-    private Car car;
-
-    @Before
-    public void setUp() {
-        car = new Car();
-        car.setPlate("AR793JJ");
-        car.setModel("Fiat Croma");
-        springCarDAO.save(car);
+    /**
+     * @param thePropertyEnvName
+     */
+    public GPPersistencePBEProperties(@Nonnull(when = NEVER) String thePropertyEnvName) {
+        super(thePropertyEnvName);
     }
 
-    @Test
-    public void testSpringProfile() {
-        logger.info("Persistence Spring JPA DATA Test - Car Found @@@@@@@@@@@@@@@@@@@@@@@@@ " + springCarDAO.findByPlate("AR793JJ"));
-        this.springCarDAO.delete(car);
+    @Override
+    public final String toString() {
+        return getClass().getSimpleName();
     }
 }

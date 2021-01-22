@@ -44,10 +44,7 @@ import org.springframework.context.annotation.ImportResource;
  * @email nazzareno.sileno@geosdi.org
  */
 @Configuration
-@ComponentScan(basePackages = {"org.geosdi.geoplatform"
-    + ".persistence.configuration"})
-@ImportResource(value = {"classpath:persistenceConfigurer.xml",
-    "classpath:applicationContext-TEST.xml",
-    "classpath*:persistenceContext.xml"})
+@ComponentScan(basePackages = {"org.geosdi.geoplatform.persistence.jasypt", "org.geosdi.geoplatform.persistence.configuration"})
+@ImportResource(value = {"classpath:applicationContext-TEST.xml", "classpath*:persistenceContext.xml"})
 public class PersistenceLoaderTestConfigurer extends PersistenceLoaderConfigurer {
 }

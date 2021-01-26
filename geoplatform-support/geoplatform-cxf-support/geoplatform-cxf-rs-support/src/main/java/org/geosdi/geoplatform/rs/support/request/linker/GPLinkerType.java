@@ -52,6 +52,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public enum GPLinkerType implements IGPLinkerType {
+
     L("link"),
     U("unlink");
 

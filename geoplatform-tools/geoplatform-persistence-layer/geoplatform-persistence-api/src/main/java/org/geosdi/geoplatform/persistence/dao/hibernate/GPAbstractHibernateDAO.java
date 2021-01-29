@@ -214,7 +214,7 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
             Root<T> root = criteriaQuery.from(super.getPersistentClass());
             criteriaQuery.select(root);
             return this.currentSession().createQuery(criteriaQuery)
-                    .setFirstResult(start)
+                    .setFirstResult((start == 0) ? 0 : ((start * end)))
                     .setMaxResults(end)
                     .getResultList();
         } catch (HibernateException ex) {

@@ -42,12 +42,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
-import java.net.URLDecoder;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.net.URLDecoder.decode;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.function.Function.identity;
 import static java.util.regex.Pattern.compile;
@@ -63,7 +63,6 @@ public interface GPWMSRequestKvpReader extends GPConnectorReader<GPWMSRequestKey
 
     WMSServiceKeyValuePair WMS_SERVICE_KEY_VALUE_PAIR = new WMSServiceKeyValuePair();
     WMSRequestKeyValuePair WMS_REQUEST_KEY_VALUE_PAIR = new WMSRequestKeyValuePair();
-    WMSStylesKeyValuePair WMS_STYLES_DEFAULT_VALUE = new WMSStylesKeyValuePair(null);
 
     /**
      * @param theValue
@@ -86,7 +85,7 @@ public interface GPWMSRequestKvpReader extends GPConnectorReader<GPWMSRequestKey
         public Map<String, GPWMSRequestKeyValuePair> read(@Nonnull(when = NEVER) String theValue) throws Exception {
             checkArgument(((theValue != null) && !(theValue.trim().isEmpty())), "The Parameter value must not be null.");
             logger.trace("########################{} trying to read : {}\n", this.getClass().getSimpleName(), theValue);
-            String value = URLDecoder.decode(theValue, UTF_8.name());
+            String value = decode(theValue, UTF_8.name());
             int pos = value.indexOf(URL_DELIMITER.toKey());
             value = ((pos > 0) ? value.substring(pos + 1) : value);
             checkArgument(((value != null) && !(value.trim().isEmpty())), "The Parameter value after removing special characters ? must not be null.");

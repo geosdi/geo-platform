@@ -200,7 +200,7 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
             Root<T> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
             return this.entityManager.createQuery(criteriaQuery)
-                    .setFirstResult(start)
+                    .setFirstResult((start == 0) ? 0 : ((start * end)))
                     .setMaxResults(end)
                     .getResultList();
         } catch (HibernateException ex) {

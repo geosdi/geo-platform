@@ -55,13 +55,12 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @JsonDeserialize(as = IGPCreationResponse.GPCreationResponse.class)
-public interface IGPCreationResponse extends Serializable {
+public interface IGPCreationResponse<V extends Object> extends Serializable {
 
     /**
-     * @return {@link String}
+     * @return {@link V}
      */
-    String getId();
-
+    V getId();
 
     /**
      * @return {@link Boolean}
@@ -72,18 +71,18 @@ public interface IGPCreationResponse extends Serializable {
     @Getter
     @ToString
     @XmlAccessorType(XmlAccessType.FIELD)
-    class GPCreationResponse implements IGPCreationResponse {
+    class GPCreationResponse<V extends Object> implements IGPCreationResponse<V> {
 
         private static final long serialVersionUID = 7024014926231450966L;
         //
-        private final String id;
+        private final V id;
 
         /**
          * @param theId
          */
         @JsonCreator
-        public GPCreationResponse(@Nonnull(when = NEVER) @JsonProperty(value = "id") String theId) {
-            checkArgument(((theId != null) && !(theId.trim().isEmpty())), "The Parameter id mut not be null or an empty string.");
+        public GPCreationResponse(@Nonnull(when = NEVER) @JsonProperty(value = "id") V theId) {
+            checkArgument((theId != null), "The Parameter id mut not be null.");
             this.id = theId;
         }
 
@@ -92,7 +91,7 @@ public interface IGPCreationResponse extends Serializable {
          */
         @Override
         public Boolean isIdSetted() {
-            return ((this.id != null) && !(this.id.trim().isEmpty()));
+            return (this.id != null);
         }
     }
 }

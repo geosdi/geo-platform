@@ -107,6 +107,19 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-        
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <systemPropertyVariables>
+                        <GP_PERSISTENCE_PBE_KEY>$-geosdi2021,??/08/1345786543ffFF,??-77</GP_PERSISTENCE_PBE_KEY>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

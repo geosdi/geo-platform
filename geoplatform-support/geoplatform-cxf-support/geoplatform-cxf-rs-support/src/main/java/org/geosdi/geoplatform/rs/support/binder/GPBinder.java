@@ -35,7 +35,10 @@
  */
 package org.geosdi.geoplatform.rs.support.binder;
 
+import javax.annotation.Nonnull;
+
 import static com.google.common.base.Preconditions.checkNotNull;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -69,7 +72,7 @@ public interface GPBinder<TO extends Object, FROM extends Object, B extends GPBi
          * @return {@link B}
          */
         @Override
-        public B withFrom(FROM theFrom) {
+        public B withFrom(@Nonnull(when = NEVER) FROM theFrom) {
             this.from = theFrom;
             return self();
         }
@@ -84,7 +87,7 @@ public interface GPBinder<TO extends Object, FROM extends Object, B extends GPBi
         /**
          * @return {@link B}
          */
-        protected B self() {
+        protected final B self() {
             return (B) this;
         }
     }

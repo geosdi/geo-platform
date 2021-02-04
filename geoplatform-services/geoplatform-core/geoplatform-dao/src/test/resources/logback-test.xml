@@ -18,6 +18,7 @@
         <appender-ref ref="STDOUT"/>
     </logger>
 
+    <logger name="org.geosdi.geoplatform.persistence.jasypt.config.GPPersistencePBEConfig" level="debug"/>
     <logger name="org.hibernate.SQL" level="info"/>
     <logger name="org.hibernate.type.descriptor.sql" level="info"/>
     <logger name="org.springframework.transaction" level="DEBUG"/>

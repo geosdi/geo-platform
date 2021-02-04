@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.persistence.configuration.jpa;
 
-import org.geosdi.geoplatform.persistence.configuration.properties.GPPersistenceHibProperties;
+import org.geosdi.geoplatform.persistence.configuration.properties.IGPPersistenceHibProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -55,12 +55,12 @@ import static javax.annotation.meta.When.NEVER;
 @Profile(value = "jpa")
 public class JpaVendorAdapterConfig {
 
-    private final GPPersistenceHibProperties gpHibernateProperties;
+    private final IGPPersistenceHibProperties gpHibernateProperties;
 
     /**
      * @param theGPHibernateProperties
      */
-    JpaVendorAdapterConfig(@Nonnull(when = NEVER) GPPersistenceHibProperties theGPHibernateProperties) {
+    JpaVendorAdapterConfig(@Nonnull(when = NEVER) IGPPersistenceHibProperties theGPHibernateProperties) {
         checkArgument(theGPHibernateProperties != null, "The Parameter gpHibernateProperties must not be null.");
         this.gpHibernateProperties = theGPHibernateProperties;
     }

@@ -813,6 +813,18 @@
                 <artifactId>jra</artifactId>
                 <version>1.0-alpha-4</version>
             </dependency>
+            
+            <dependency>
+                <groupId>org.opengeo</groupId>
+                <artifactId>geodb</artifactId>
+                <version>${geodb-version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.hsqldb</groupId>
+                <artifactId>hsqldb</artifactId>
+                <version>${hsqldb-version}</version>
+            </dependency>
 
             <!-- =========================================================== -->
             <!-- JUNIT -->
@@ -1446,7 +1458,7 @@
         <activemq-version>5.8.0</activemq-version>
         
         <jettison>1.4.1</jettison>
-        <joda-version>2.10.8</joda-version>
+        <joda-version>2.10.9</joda-version>
         
         <javax.ws.rs-api-version>2.1</javax.ws.rs-api-version>
 
@@ -1454,7 +1466,7 @@
 
         <aspectj-version>1.8.9</aspectj-version>
         <ubl-version>2.0</ubl-version>
-        <jetty-version>9.4.35.v20201120</jetty-version>
+        <jetty-version>9.4.36.v20210114</jetty-version>
 
         <postgresql-version>42.2.18</postgresql-version>
         <postgis-jdbc-version>2.5.0</postgis-jdbc-version>
@@ -1487,6 +1499,8 @@
         
         <geoserver-manager-version>1.7</geoserver-manager-version>
         <geojson-jackson-version>1.14</geojson-jackson-version>
+        <hsqldb-version>2.5.1</hsqldb-version>
+        <geodb-version>0.9</geodb-version>
         <junit.version>4.13.1</junit.version>
         <maven-surefire.version>3.0.0-M5</maven-surefire.version>
     </properties>

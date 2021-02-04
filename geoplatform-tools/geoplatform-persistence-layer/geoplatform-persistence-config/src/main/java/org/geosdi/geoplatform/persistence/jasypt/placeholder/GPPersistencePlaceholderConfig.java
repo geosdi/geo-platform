@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.persistence.jasypt.placeholder;
 
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.spring31.properties.EncryptablePropertySourcesPlaceholderConfigurer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -55,6 +57,7 @@ import static java.lang.Boolean.TRUE;
 @Configuration
 class GPPersistencePlaceholderConfig {
 
+    private static final Logger logger = LoggerFactory.getLogger(GPPersistencePlaceholderConfig.class);
     private static final GPPersistenceResourcesLoader persistenceResourcesLoader = new GPPersistenceResourcesLoader();
 
     /**
@@ -68,6 +71,7 @@ class GPPersistencePlaceholderConfig {
     public static PropertySourcesPlaceholderConfigurer persistencePropertyConfigurer(@Qualifier(value = "persistencePooledPBEStringEncryptor") PooledPBEStringEncryptor persistencePooledPBEStringEncryptor,
             @Value("#{systemProperties['GP_DATA_DIR']}") String gpConfigDataDir,
             @Value("#{systemProperties['GP_PERSISTENCE_FILE_PROP']}") String persistenceFileProp) throws MalformedURLException {
+        logger.trace("###############################Initializing GPPersistencePlaceholderConfig.\n\n");
         EncryptablePropertySourcesPlaceholderConfigurer persistenceGSPC = new EncryptablePropertySourcesPlaceholderConfigurer(persistencePooledPBEStringEncryptor);
         persistenceGSPC.setPlaceholderPrefix("persistence{");
         persistenceGSPC.setPlaceholderSuffix("}");

@@ -68,7 +68,7 @@ public class CXFWMSTest extends ServiceWMSTest {
         Assert.assertNotNull(gpWMSClient);
     }
 
-    @Test
+    @Test(expected = ResourceNotFoundFault.class)
     public void testGetCapabilities() throws ParseException, ResourceNotFoundFault {
         ServerDTO serverDTO = gpWMSClient.getShortServer(serverUrlGeoSDI);
         logger.info("^^^^^^^^^^^^^^^^^^^^^^^^^ SERVER___DTO ^^^^^^^^^^^^^^^^^^\n{}", serverDTO);

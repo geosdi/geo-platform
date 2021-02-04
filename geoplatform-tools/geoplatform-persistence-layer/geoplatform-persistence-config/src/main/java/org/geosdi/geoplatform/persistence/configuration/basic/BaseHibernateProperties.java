@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.persistence.configuration.basic;
 
 import org.geosdi.geoplatform.persistence.cache.api.GPHibernateCacheProvider;
 import org.geosdi.geoplatform.persistence.configuration.basic.strategy.PersistenceHibernateStrategy;
-import org.geosdi.geoplatform.persistence.configuration.properties.GPPersistenceHibProperties;
+import org.geosdi.geoplatform.persistence.configuration.properties.IGPPersistenceHibProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +59,7 @@ class BaseHibernateProperties implements PersistenceHibernateStrategy {
     private static final Logger logger = LoggerFactory.getLogger(BaseHibernateProperties.class);
     //
     @Autowired
-    private GPPersistenceHibProperties gpHibernateProperties;
+    private IGPPersistenceHibProperties gpHibernateProperties;
     //
     @Autowired(required = false)
     private GPHibernateCacheProvider gpCacheProviderSupport;

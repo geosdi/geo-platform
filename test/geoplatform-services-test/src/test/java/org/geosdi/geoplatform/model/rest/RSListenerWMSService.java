@@ -40,8 +40,9 @@ import org.geosdi.geoplatform.connectors.ws.wms.rest.GPWMSRestClientTestConnecto
 import org.geosdi.geoplatform.model.BaseGPListenerServices;
 import org.geosdi.geoplatform.model.soap.ServiceWMSTest;
 import org.geosdi.geoplatform.services.GPWMSService;
-import org.junit.Assert;
 import org.springframework.test.context.TestContext;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  *
@@ -56,25 +57,18 @@ class RSListenerWMSService extends BaseGPListenerServices {
     @Override
     public void beforeTestClass(TestContext tc) throws Exception {
         super.beforeTestClass(tc);
-
-        GPWMSRestClientTestConnector wmsRestClientConnector = (GPWMSRestClientTestConnector) appContext.getBean(
-                "gpWMSRestClient");
-        Assert.assertNotNull("wmsRestClientConnector is NULL",
-                wmsRestClientConnector);
+        GPWMSRestClientTestConnector wmsRestClientConnector = (GPWMSRestClientTestConnector) appContext.getBean("gpWMSRestClient");
+        assertNotNull("wmsRestClientConnector is NULL", wmsRestClientConnector);
         gpWMSClient = wmsRestClientConnector.getEndpointService();
-
         this.gpWMSRestServer = (Server) appContext.getBean("gpWMSRestServer");
-        Assert.assertNotNull("gpWMSRestServer is NULL", gpWMSRestServer);
-
+        assertNotNull("gpWMSRestServer is NULL", gpWMSRestServer);
         this.gpWMSRestServer.start();
-
         logger.info("\n\t@@@ Server ready... @@@");
     }
 
     @Override
     public void prepareTestInstance(TestContext tc) throws Exception {
         logger.info("\n\t@@@ RSListenerWMSService.prepareTestInstance @@@");
-
         ServiceWMSTest testInstance = (ServiceWMSTest) tc.getTestInstance();
         testInstance.setGpWMSClient(gpWMSClient);
     }
@@ -84,5 +78,4 @@ class RSListenerWMSService extends BaseGPListenerServices {
         logger.info("\n\t@@@ RSListenerWMSService.afterTestClass @@@");
         this.gpWMSRestServer.stop();
     }
-
 }

@@ -811,28 +811,21 @@ public abstract class BaseInitializerTest {
 
     private Map<String, GuiComponent> createGuiComponents() {
         Map<String, GuiComponent> gcMap = Maps.<String, GuiComponent>newHashMap();
-
         for (String ID : GuiComponentIDs.LIST_ALL) {
             gcMap.put(ID, new GuiComponent(ID));
         }
-
         guiComponentDAO.persist(gcMap.values());
-
         return gcMap;
     }
 
-    private Map<String, AclObjectIdentity> createObjectIdentities(
-            Map<String, GuiComponent> gcMap) {
+    private Map<String, AclObjectIdentity> createObjectIdentities(Map<String, GuiComponent> gcMap) {
         Map<String, AclObjectIdentity> objIdMap = Maps.<String, AclObjectIdentity>newHashMap();
-
         for (String componentID : GuiComponentIDs.LIST_ALL) {
             Long id = gcMap.get(componentID).getId();
             // SuperUser is the owner of all Object Identities
             objIdMap.put(componentID, new AclObjectIdentity(gcClass, id, superUser));
         }
-
         objectIdentityDAO.persist(objIdMap.values());
-
         return objIdMap;
     }
 

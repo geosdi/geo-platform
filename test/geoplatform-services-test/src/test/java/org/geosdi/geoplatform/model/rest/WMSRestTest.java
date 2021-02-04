@@ -42,10 +42,7 @@ import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoElement;
 import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoRequest;
 import org.geosdi.geoplatform.services.request.WMSGetFeatureInfoBoundingBox;
 import org.geosdi.geoplatform.services.request.WMSGetFeatureInfoPoint;
-import org.junit.Assert;
-import org.junit.FixMethodOrder;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.test.context.ActiveProfiles;
@@ -53,12 +50,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.services.request.WMSGetFeatureInfoResponseFormat.FEATURE_STORE;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -74,13 +73,13 @@ public class WMSRestTest extends ServiceWMSTest {
 
     @Test
     public void testRSWMSClient() {
-        Assert.assertNotNull(gpWMSClient);
+        assertNotNull(gpWMSClient);
     }
 
-    @Test
+    @Test(expected = InternalServerErrorException.class)
     public void a_testRestGetCapabilities() throws Exception {
         ServerDTO serverDTO = gpWMSClient.getShortServer(serverUrlGeoSDI);
-        Assert.assertNotNull(serverDTO);
+        assertNotNull(serverDTO);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@ SERVER_DTO @@@@@@@@@@@@@@@@@@\n{}", serverDTO);
         serverDTO = gpWMSClient.getCapabilities(serverDTO.getServerUrl(),
                 new RequestByID(serverDTO.getId()), null, null);

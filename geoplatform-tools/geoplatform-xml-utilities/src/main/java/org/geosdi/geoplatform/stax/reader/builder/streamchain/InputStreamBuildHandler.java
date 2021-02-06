@@ -55,10 +55,6 @@ public class InputStreamBuildHandler extends StreamReaderBuildHandler {
      */
     @Override
     public InputStream buildStream(Object o) throws IOException {
-        if (o instanceof InputStream) {
-            return (InputStream) o;
-        } else {
-            return super.forwardBuildStream(o);
-        }
+        return (o instanceof InputStream) ? (InputStream) o : super.forwardBuildStream(o);
     }
 }

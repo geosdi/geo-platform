@@ -56,8 +56,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPCriteriaJpaDAO<T extends Object, ID extends Serializable> extends GPAbstractBaseDAO<T, ID>
-        implements BaseCriteriaJpaDAO<T, ID> {
+public abstract class GPCriteriaJpaDAO<T extends Object, ID extends Serializable> extends GPAbstractBaseDAO<T, ID> implements BaseCriteriaJpaDAO<T, ID> {
 
     protected EntityManager entityManager;
 

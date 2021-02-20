@@ -71,7 +71,7 @@ public class GPGoogleGeocodingRestService implements IGPGoogleGeocodingRestServi
     @Resource(name = "googleGeocodingDelegate")
     private IGPGoogleGeocodingDelegate googleGeocodingDelegate;
 
-    GPGoogleGeocodingRestService() {
+    public GPGoogleGeocodingRestService() {
     }
 
     /**

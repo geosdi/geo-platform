@@ -217,7 +217,10 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
     @Override
     public Integer removeAll() throws GPDAOException {
         try {
-            return this.entityManager.createQuery("delete from " + persistentClass.getSimpleName()).executeUpdate();
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+            CriteriaDelete<T> delete = criteriaBuilder.createCriteriaDelete(this.persistentClass);
+            delete.from(this.persistentClass);
+            return entityManager.createQuery(delete).executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new GPDAOException(ex);

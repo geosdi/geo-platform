@@ -60,7 +60,7 @@ public abstract class GPCriteriaJpaDAO<T extends Object, ID extends Serializable
 
     protected EntityManager entityManager;
 
-    public GPCriteriaJpaDAO(Class<T> thePersistentClass) {
+    protected GPCriteriaJpaDAO(Class<T> thePersistentClass) {
         super(thePersistentClass);
     }
 

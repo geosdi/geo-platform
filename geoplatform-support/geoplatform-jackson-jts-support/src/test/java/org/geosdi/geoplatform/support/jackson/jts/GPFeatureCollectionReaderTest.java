@@ -49,6 +49,9 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
+import static java.io.File.separator;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
@@ -70,8 +73,10 @@ public class GPFeatureCollectionReaderTest {
 
     @Test
     public void a_readFeatureCollectionTest() throws Exception {
+
         GeometryCollection geometryCollection = JTS_JACKSON_SUPPORT.getDefaultMapper()
-                .readValue(new File("./src/test/resources/geojson/FeatureCollection.json"), GeometryCollection.class);
+                .readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "geojson", "FeatureCollection")
+                        .collect(joining(separator, "", ".json"))), GeometryCollection.class);
         JTS_JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/GeometryCollection.json"), geometryCollection);
     }
 

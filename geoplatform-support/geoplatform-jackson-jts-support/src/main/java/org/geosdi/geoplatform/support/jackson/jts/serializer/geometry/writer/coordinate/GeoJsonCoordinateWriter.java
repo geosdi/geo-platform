@@ -73,7 +73,7 @@ public class GeoJsonCoordinateWriter implements IGeoJsonCoordinateWriter {
     public List<LngLatAlt> buildLineStringCoordinate(AbstractJTSLineStringAdapter lineStringAdapter) {
         return stream(lineStringAdapter.getCoordinates())
                 .filter(Objects::nonNull)
-                .map(coordinate -> buildPointCoordinate(coordinate))
+                .map(this::buildPointCoordinate)
                 .collect(toList());
     }
 

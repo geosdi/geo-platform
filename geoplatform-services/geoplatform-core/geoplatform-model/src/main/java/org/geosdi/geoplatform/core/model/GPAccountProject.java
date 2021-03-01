@@ -56,7 +56,7 @@ import java.io.Serializable;
         @UniqueConstraint(columnNames = {"account_id", "project_id"})},
         indexes = {
                 @Index(columnList = "account_id", name = "ACCOUNT_ID_INDEX"),
-                @Index(columnList = "account_id", name = "PROJECT_ID_INDEX")})
+                @Index(columnList = "project_id", name = "PROJECT_ID_INDEX")})
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "account_project")
 public class GPAccountProject implements Serializable {
 

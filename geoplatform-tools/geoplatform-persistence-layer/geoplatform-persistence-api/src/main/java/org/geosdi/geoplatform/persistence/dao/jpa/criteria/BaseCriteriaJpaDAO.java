@@ -55,38 +55,14 @@ public interface BaseCriteriaJpaDAO<T extends Object, ID extends Serializable> e
     CriteriaQuery<T> createCriteriaQuery();
 
     /**
-     * @param classe
-     * @param <V>
-     * @return {@link CriteriaQuery<V>}
-     * @throws Exception
-     */
-    <V> CriteriaQuery<V> createCriteriaQuery(Class<V> classe) throws Exception;
-
-    /**
      * @return {@link CriteriaDelete<T>}
      */
     CriteriaDelete<T> createCriteriaDelete();
 
     /**
-     * @param classe
-     * @param <V>
-     * @return {@link CriteriaDelete<V>}
-     * @throws Exception
-     */
-    <V> CriteriaDelete<V> createCriteriaDelete(Class<V> classe) throws Exception;
-
-    /**
      * @return {@link CriteriaUpdate<T>}
      */
     CriteriaUpdate<T> createCriteriaUpdate();
-
-    /**
-     * @param classe
-     * @param <V>
-     * @return {@link CriteriaUpdate<V>}
-     * @throws Exception
-     */
-    <V> CriteriaUpdate<V> createCriteriaUpdate(Class<V> classe) throws Exception;
 
     /**
      * @return {@link CriteriaBuilder}

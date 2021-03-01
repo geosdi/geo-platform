@@ -88,7 +88,7 @@ public class GeometryWriterImplementorStore implements GPGeometryWriterImplement
      * @throws Exception
      */
     @Override
-    public GeometryWriterImplementor getImplementorByKey(@Nonnull(when = NEVER) GPImplementor.GPImplementorKey key) throws Exception {
+    public GeometryWriterImplementor<? extends GPJTSGeometryAdapter, ? extends GeoJsonObject> getImplementorByKey(@Nonnull(when = NEVER) GPImplementor.GPImplementorKey key) throws Exception {
         checkArgument(key != null, "The Key must not be null.");
         GeometryWriterImplementor implementor = geometryWriterImplementors.get(key);
         checkArgument(implementor != null, "Implementor not found for Key : " + key);

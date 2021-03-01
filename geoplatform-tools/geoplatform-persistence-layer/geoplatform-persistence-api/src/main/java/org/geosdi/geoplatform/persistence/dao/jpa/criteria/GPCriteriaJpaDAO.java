@@ -96,8 +96,7 @@ public abstract class GPCriteriaJpaDAO<T extends Object, ID extends Serializable
      * @return {@link CriteriaQuery <V>}
      * @throws Exception
      */
-    @Override
-    public <V> CriteriaQuery<V> createCriteriaQuery(Class<V> classe) throws Exception {
+    protected <V> CriteriaQuery<V> createCriteriaQuery(Class<V> classe) throws Exception {
         checkArgument(classe != null, "The Parameter classe must not be null.");
         return criteriaBuilder().createQuery(classe);
     }
@@ -115,8 +114,7 @@ public abstract class GPCriteriaJpaDAO<T extends Object, ID extends Serializable
      * @return {@link CriteriaDelete <V>}
      * @throws Exception
      */
-    @Override
-    public <V> CriteriaDelete<V> createCriteriaDelete(Class<V> classe) throws Exception {
+    protected <V> CriteriaDelete<V> createCriteriaDelete(Class<V> classe) throws Exception {
         checkArgument(classe != null, "The Parameter classe must not be null.");
         return criteriaBuilder().createCriteriaDelete(classe);
     }
@@ -134,8 +132,7 @@ public abstract class GPCriteriaJpaDAO<T extends Object, ID extends Serializable
      * @return {@link CriteriaUpdate <V>}
      * @throws Exception
      */
-    @Override
-    public <V> CriteriaUpdate<V> createCriteriaUpdate(Class<V> classe) throws Exception {
+    protected <V> CriteriaUpdate<V> createCriteriaUpdate(Class<V> classe) throws Exception {
         checkArgument(classe != null, "The Parameter classe must not be null.");
         return criteriaBuilder().createCriteriaUpdate(classe);
     }

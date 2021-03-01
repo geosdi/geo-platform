@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.support.jackson.jts.deserializer.theories;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 import org.geosdi.geoplatform.support.jackson.jts.GPJacksonJTSSupport;
@@ -49,12 +48,15 @@ import org.locationtech.jts.geom.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.IOException;
-import java.util.stream.Stream;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -70,7 +72,7 @@ public class JTSGeometryTheoriesDeserializerTest {
 
     @BeforeClass
     public static void buildDirFiles() throws IOException {
-        dirFiles = Stream.of(new File(".").getCanonicalPath(), "src", "test", "resources", "geojson")
+        dirFiles = of(new File(".").getCanonicalPath(), "src", "test", "resources", "geojson")
                 .collect(joining(separator, "", separator));
     }
 
@@ -79,8 +81,7 @@ public class JTSGeometryTheoriesDeserializerTest {
      */
     @DataPoints
     public static Entry[] data() {
-        return new Entry[]{
-                new Entry("Point.json", Point.class),
+        return of(new Entry("Point.json", Point.class),
                 new Entry("LineString.json", LineString.class),
                 new Entry("LinearRing.json", LinearRing.class),
                 new Entry("Polygon.json", Polygon.class),
@@ -89,8 +90,8 @@ public class JTSGeometryTheoriesDeserializerTest {
                 new Entry("MultiPolygon.json", MultiPolygon.class),
                 new Entry("GeometryCollection.json", GeometryCollection.class),
                 new Entry("GeometryCollectionComplex.json", GeometryCollection.class),
-                new Entry("PolygonWithoutHoles.json", Polygon.class)
-        };
+                new Entry("PolygonWithoutHoles.json", Polygon.class))
+                .toArray(Entry[]::new);
     }
 
     @Theory
@@ -101,12 +102,22 @@ public class JTSGeometryTheoriesDeserializerTest {
         logger.info("::::::::::::::::::::::::JTS_GEOMETRY : \n{}\n", mapper.readValue(geometryFile, entry.getGeometryClass()));
     }
 
-    @AllArgsConstructor
     @Getter
     @ToString
     static class Entry {
 
         private final String fileName;
         private final Class geometryClass;
+
+        /**
+         * @param theFileName
+         * @param theGeometryClass
+         */
+        Entry(@Nonnull(when = NEVER) String theFileName, @Nonnull(when = NEVER) Class theGeometryClass) {
+            checkArgument((theFileName != null) && !(theFileName.trim().isEmpty()), "The Parameter fileName must not be null or an empty string.");
+            checkArgument(theGeometryClass != null, "The Parameter geometryClass must not be null.");
+            this.fileName = theFileName;
+            this.geometryClass = theGeometryClass;
+        }
     }
 }

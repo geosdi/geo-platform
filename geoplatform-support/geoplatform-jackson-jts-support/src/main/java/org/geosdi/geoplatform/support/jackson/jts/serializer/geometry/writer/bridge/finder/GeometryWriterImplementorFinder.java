@@ -52,6 +52,7 @@ import java.util.Set;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.Thread.currentThread;
+import static java.util.ServiceLoader.load;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -62,8 +63,7 @@ public final class GeometryWriterImplementorFinder<I extends GeometryWriterImple
 
     private static final Logger logger = LoggerFactory.getLogger(GeometryWriterImplementorFinder.class);
     //
-    private volatile ServiceLoader<GeometryWriterImplementor> loader = ServiceLoader.load(GeometryWriterImplementor.class,
-            currentThread().getContextClassLoader());
+    private volatile ServiceLoader<GeometryWriterImplementor> loader = load(GeometryWriterImplementor.class, currentThread().getContextClassLoader());
 
     /**
      * @return {@link Set<JTSGeometryWriterImplementor>}
@@ -100,6 +100,9 @@ public final class GeometryWriterImplementorFinder<I extends GeometryWriterImple
 
             private I next;
 
+            /**
+             * @return {@link Boolean}
+             */
             @Override
             public boolean hasNext() {
                 if (next != null) {
@@ -118,6 +121,9 @@ public final class GeometryWriterImplementorFinder<I extends GeometryWriterImple
                 return FALSE;
             }
 
+            /**
+             * @return {@link I}
+             */
             @Override
             public I next() {
                 if (hasNext()) {

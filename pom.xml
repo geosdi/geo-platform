@@ -74,6 +74,9 @@
             <id>geosdi-snapshots</id>
             <name>repo.geosdi.org-snapshots</name>
             <url>https://repo.geosdi.org/artifactory/libs-snapshot-local</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
         </repository>
 
         <!-- Spring -->

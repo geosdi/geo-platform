@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector;
 
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.GPServerConnector.GPServerConnectorVersion;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -51,16 +51,16 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum GeoserverVersion implements GPServerConnector.GPServerConnectorVersion {
+public enum GeoserverVersion implements GPServerConnectorVersion {
 
     /**
      * <p>Maintenance Version.</p>
      */
-    V217x("2.17.3"),
+    V217x("2.17.5"),
     /**
      * <p>Stable Version.</p>
      */
-    V218x("2.18.0");
+    V218x("2.18.2");
 
     private final String version;
 
@@ -94,6 +94,6 @@ public enum GeoserverVersion implements GPServerConnector.GPServerConnectorVersi
                 .filter(Objects::nonNull)
                 .filter(v -> ((version != null) && !(version.trim().isEmpty())) ? v.getVersion().equalsIgnoreCase(version) : FALSE)
                 .findFirst();
-        return (((optional != null) && (optional.isPresent())) ? optional.get() : GeoserverVersion.V218x);
+        return optional.orElse(V218x);
     }
 }

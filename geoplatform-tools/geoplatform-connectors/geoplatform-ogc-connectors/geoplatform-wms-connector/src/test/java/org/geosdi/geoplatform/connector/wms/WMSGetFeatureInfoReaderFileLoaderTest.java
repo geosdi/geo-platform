@@ -86,7 +86,8 @@ public class WMSGetFeatureInfoReaderFileLoaderTest {
                 "exeflegrei_esiti_c_danni.xml", "ABR_Comuni.xml", "AereeUrbaneValoreStorico.xml", "PNSRS_Valanghe.xml",
                 "AreeAmmassamento.xml", "Ferrovie.xml", "MonumentiBizantini.xml", "ReteGas.xml", "AziendeSanitarie.xml",
                 "ABR_CaveAttive.xml", "AreeUrbaneValoreStorico.xml", "BaciniIdrogeografici.xml",
-                "geoserver-building_resonance_level.xml", "admin_vigneti_catastali.xml")
+                "geoserver-building_resonance_level.xml", "admin_vigneti_catastali.xml", "VulcanoCampiIstat.xml",
+                "CAMP_Lahars.xml", "rsdi_alt_600_a_700.xml", "rsdi_fiumi_basilicata.xml", "rsdi_sentieri_app_lucano.xml")
                 .map(value -> new GPConnectorFile(value, new File(basePath.concat(value))))
                 .collect(toMap(IGPConnectorFile::getKey, identity(), (v1, v2) -> v1, LinkedHashMap::new)));
     }

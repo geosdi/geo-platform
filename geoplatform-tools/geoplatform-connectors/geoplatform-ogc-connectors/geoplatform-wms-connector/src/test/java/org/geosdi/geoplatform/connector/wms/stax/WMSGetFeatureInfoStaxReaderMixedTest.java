@@ -79,7 +79,8 @@ public class WMSGetFeatureInfoStaxReaderMixedTest {
     public void a_wmsGetFeatureInfoStaxReaderTest() throws Exception {
         FeatureCollection featureCollection = wmsGetFeatureInfoStaxReader.read(file);
         logger.info("#######################FEATURE_COLLECTION_test : {}\n", featureCollection);
-        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/FeatureCollectionMIXED.json"), featureCollection);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "FeatureCollectionMIXED")
+                .collect(joining(separator, "", ".json"))), featureCollection);
     }
 
     @Test
@@ -101,7 +102,9 @@ public class WMSGetFeatureInfoStaxReaderMixedTest {
         assertNotNull(zonaPianificazione);
         assertTrue(zonaPianificazione.size() == 1);
         fromIterable(wmsFeatureStore.getStore().entrySet())
+                .doOnComplete(() -> logger.info("@@@@@@@@@@@@@@@@@@RX Terminated its work."))
                 .subscribe(k -> logger.info("###############{} - size : {}\n", k.getKey(), k.getValue().size()));
-        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StoreMIXED_FEATURES.json"), wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "Store_MIXED_FEATURES")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
     }
 }

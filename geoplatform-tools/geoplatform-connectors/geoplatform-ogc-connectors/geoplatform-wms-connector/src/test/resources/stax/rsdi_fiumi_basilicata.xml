@@ -1,0 +1,901 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:rsdi="http://www.opengeospatial.net/rsdi"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.opengeospatial.net/rsdi http://rsdi.regione.basilicata.it:80/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=rsdi:fiumi_basilicata http://www.opengis.net/wfs http://rsdi.regione.basilicata.it:80/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                579047.93735332,4458277.58913678 581477.66766395,4460949.56758791
+            </gml:coordinates>
+        </gml:Box>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <rsdi:fiumi_basilicata fid="fiumi_basilicata.597">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        580942.92225303,4460686.56970713 580996.92184929,4460949.56758791
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <rsdi:fnode_>961</rsdi:fnode_>
+            <rsdi:tnode_>978</rsdi:tnode_>
+            <rsdi:lpoly_>4</rsdi:lpoly_>
+            <rsdi:rpoly_>4</rsdi:rpoly_>
+            <rsdi:length>285.204</rsdi:length>
+            <rsdi:fiumi1_4_>597</rsdi:fiumi1_4_>
+            <rsdi:fiumi1_4_i>8799</rsdi:fiumi1_4_i>
+            <rsdi:cl>5</rsdi:cl>
+            <rsdi:lv>144</rsdi:lv>
+            <rsdi:entr>3.6018</rsdi:entr>
+            <rsdi:l_t_lk>73.295</rsdi:l_t_lk>
+            <rsdi:n_t_lk>307</rsdi:n_t_lk>
+            <rsdi:l_as>4.314</rsdi:l_as>
+            <rsdi:l_t_pr>42</rsdi:l_t_pr>
+            <rsdi:l_a_pr>7.778</rsdi:l_a_pr>
+            <rsdi:r_s>1.19579</rsdi:r_s>
+            <rsdi:asta_princ>0</rsdi:asta_princ>
+            <rsdi:sym>2</rsdi:sym>
+            <rsdi:nome>A g r i</rsdi:nome>
+            <rsdi:bacino>CAVONE - AGRI</rsdi:bacino>
+            <rsdi:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                580965.92212751,4460949.56758791 580979.92201274,4460937.56768126
+                                580985.92196046,4460918.56783265 580988.67193353,4460896.56800888
+                                580990.92191061,4460874.56818522 580993.92188235,4460855.56833728
+                                580995.92186199,4460836.06849358 580996.92184929,4460815.06866216
+                                580996.9218445,4460793.56883499 580991.92187985,4460772.56900491
+                                580983.92193922,4460751.5691755 580974.92200716,4460733.06932622
+                                580963.92209112,4460714.56947738 580952.92217563,4460698.56960844
+                                580942.92225303,4460686.56970713
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </rsdi:the_geom>
+        </rsdi:fiumi_basilicata>
+    </gml:featureMember>
+    <gml:featureMember>
+        <rsdi:fiumi_basilicata fid="fiumi_basilicata.612">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        579340.93501054,4460309.57303276 579614.93283508,4460463.07180479
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <rsdi:fnode_>998</rsdi:fnode_>
+            <rsdi:tnode_>995</rsdi:tnode_>
+            <rsdi:lpoly_>5</rsdi:lpoly_>
+            <rsdi:rpoly_>4</rsdi:rpoly_>
+            <rsdi:length>442.993</rsdi:length>
+            <rsdi:fiumi1_4_>612</rsdi:fiumi1_4_>
+            <rsdi:fiumi1_4_i>8888</rsdi:fiumi1_4_i>
+            <rsdi:cl>7</rsdi:cl>
+            <rsdi:lv>139</rsdi:lv>
+            <rsdi:entr>4.6817</rsdi:entr>
+            <rsdi:l_t_lk>1345.723</rsdi:l_t_lk>
+            <rsdi:n_t_lk>6079</rsdi:n_t_lk>
+            <rsdi:l_as>21.664</rsdi:l_as>
+            <rsdi:l_t_pr>139</rsdi:l_t_pr>
+            <rsdi:l_a_pr>20.912</rsdi:l_a_pr>
+            <rsdi:r_s>1.61064</rsdi:r_s>
+            <rsdi:asta_princ>1</rsdi:asta_princ>
+            <rsdi:sym>4</rsdi:sym>
+            <rsdi:nome>A g r i</rsdi:nome>
+            <rsdi:bacino>CAVONE - AGRI</rsdi:bacino>
+            <rsdi:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                579605.93287645,4460309.57303276 579598.93293712,4460330.57286545
+                                579596.9329573,4460349.57271314 579599.93293744,4460368.57255972
+                                579604.93290201,4460389.5723898 579610.9328579,4460407.57224377
+                                579614.93283069,4460429.57206603 579614.93283508,4460449.57190524
+                                579596.93298142,4460459.57182878 579577.93313434,4460463.07180479
+                                579556.9333023,4460462.07181742 579533.93348528,4460456.57186667
+                                579513.93364391,4460449.57192731 579494.93379475,4460443.5719797
+                                579476.93393693,4460434.57205598 579456.93409535,4460426.57212466
+                                579436.68425554,4460417.57220144 579412.93444312,4460405.57230309
+                                579394.68458686,4460394.57239551 579376.93472661,4460383.57248782
+                                579359.93486035,4460372.57257996 579340.93501054,4460363.57265646
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </rsdi:the_geom>
+        </rsdi:fiumi_basilicata>
+    </gml:featureMember>
+    <gml:featureMember>
+        <rsdi:fiumi_basilicata fid="fiumi_basilicata.614">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        579047.93735332,4460254.57357417 579340.93501054,4460363.57265646
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <rsdi:fnode_>995</rsdi:fnode_>
+            <rsdi:tnode_>996</rsdi:tnode_>
+            <rsdi:lpoly_>5</rsdi:lpoly_>
+            <rsdi:rpoly_>4</rsdi:rpoly_>
+            <rsdi:length>364.493</rsdi:length>
+            <rsdi:fiumi1_4_>614</rsdi:fiumi1_4_>
+            <rsdi:fiumi1_4_i>8905</rsdi:fiumi1_4_i>
+            <rsdi:cl>7</rsdi:cl>
+            <rsdi:lv>138</rsdi:lv>
+            <rsdi:entr>4.6696</rsdi:entr>
+            <rsdi:l_t_lk>1323.632</rsdi:l_t_lk>
+            <rsdi:n_t_lk>6007</rsdi:n_t_lk>
+            <rsdi:l_as>21.221</rsdi:l_as>
+            <rsdi:l_t_pr>138</rsdi:l_t_pr>
+            <rsdi:l_a_pr>20.468</rsdi:l_a_pr>
+            <rsdi:r_s>1.5896</rsdi:r_s>
+            <rsdi:asta_princ>1</rsdi:asta_princ>
+            <rsdi:sym>4</rsdi:sym>
+            <rsdi:nome>A g r i</rsdi:nome>
+            <rsdi:bacino>CAVONE - AGRI</rsdi:bacino>
+            <rsdi:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                579340.93501054,4460363.57265646 579327.93511115,4460347.57278793
+                                579303.93529943,4460329.57293787 579283.93545698,4460317.57303871
+                                579266.93559094,4460307.57312281 579245.93575737,4460299.5731917
+                                579227.68590113,4460288.57328411 579210.93603288,4460277.5733762
+                                579190.93619065,4460266.57346899 579171.93634107,4460258.57353744
+                                579150.93650838,4460254.57357417 579130.93666943,4460258.57354636
+                                579113.68681042,4460271.57344559 579098.93693116,4460283.57335231
+                                579084.93704655,4460298.57323475 579071.68715648,4460316.07309693
+                                579060.93724594,4460331.57297465 579047.93735332,4460346.57285687
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </rsdi:the_geom>
+        </rsdi:fiumi_basilicata>
+    </gml:featureMember>
+    <gml:featureMember>
+        <rsdi:fiumi_basilicata fid="fiumi_basilicata.616">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        579605.93287645,4460139.57437398 579723.93191958,4460317.5729551
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <rsdi:fnode_>1010</rsdi:fnode_>
+            <rsdi:tnode_>998</rsdi:tnode_>
+            <rsdi:lpoly_>5</rsdi:lpoly_>
+            <rsdi:rpoly_>4</rsdi:rpoly_>
+            <rsdi:length>284.269</rsdi:length>
+            <rsdi:fiumi1_4_>616</rsdi:fiumi1_4_>
+            <rsdi:fiumi1_4_i>8925</rsdi:fiumi1_4_i>
+            <rsdi:cl>7</rsdi:cl>
+            <rsdi:lv>140</rsdi:lv>
+            <rsdi:entr>4.6881</rsdi:entr>
+            <rsdi:l_t_lk>1349.1</rsdi:l_t_lk>
+            <rsdi:n_t_lk>6097</rsdi:n_t_lk>
+            <rsdi:l_as>21.948</rsdi:l_as>
+            <rsdi:l_t_pr>140</rsdi:l_t_pr>
+            <rsdi:l_a_pr>21.196</rsdi:l_a_pr>
+            <rsdi:r_s>1.60878</rsdi:r_s>
+            <rsdi:asta_princ>1</rsdi:asta_princ>
+            <rsdi:sym>4</rsdi:sym>
+            <rsdi:nome>A g r i</rsdi:nome>
+            <rsdi:bacino>CAVONE - AGRI</rsdi:bacino>
+            <rsdi:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                579722.93190211,4460139.57437398 579713.93197705,4460152.57427142
+                                579710.93200569,4460173.57410323 579710.9320103,4460194.57393439
+                                579715.93197508,4460216.57375641 579721.93193098,4460234.57361037
+                                579723.93191958,4460255.5734411 579722.93193187,4460275.07328453
+                                579719.93196029,4460295.07312439 579706.93206737,4460308.5730187
+                                579687.9322215,4460317.5729505 579666.93238968,4460317.5729551
+                                579647.93254075,4460312.57299946 579624.68272542,4460305.57306082
+                                579605.93287645,4460309.57303276
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </rsdi:the_geom>
+        </rsdi:fiumi_basilicata>
+    </gml:featureMember>
+    <gml:featureMember>
+        <rsdi:fiumi_basilicata fid="fiumi_basilicata.630">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        580819.92297568,4459385.58011337 581208.91983287,4459577.57861695
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <rsdi:fnode_>1065</rsdi:fnode_>
+            <rsdi:tnode_>1058</rsdi:tnode_>
+            <rsdi:lpoly_>5</rsdi:lpoly_>
+            <rsdi:rpoly_>4</rsdi:rpoly_>
+            <rsdi:length>518.674</rsdi:length>
+            <rsdi:fiumi1_4_>630</rsdi:fiumi1_4_>
+            <rsdi:fiumi1_4_i>9054</rsdi:fiumi1_4_i>
+            <rsdi:cl>7</rsdi:cl>
+            <rsdi:lv>146</rsdi:lv>
+            <rsdi:entr>4.7067</rsdi:entr>
+            <rsdi:l_t_lk>1359.554</rsdi:l_t_lk>
+            <rsdi:n_t_lk>6137</rsdi:n_t_lk>
+            <rsdi:l_as>24.273</rsdi:l_as>
+            <rsdi:l_t_pr>146</rsdi:l_t_pr>
+            <rsdi:l_a_pr>23.52</rsdi:l_a_pr>
+            <rsdi:r_s>1.64577</rsdi:r_s>
+            <rsdi:asta_princ>1</rsdi:asta_princ>
+            <rsdi:sym>4</rsdi:sym>
+            <rsdi:nome>A g r i</rsdi:nome>
+            <rsdi:bacino>CAVONE - AGRI</rsdi:bacino>
+            <rsdi:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                581208.91983287,4459389.58007651 581187.92000021,4459385.58011337
+                                581168.92015242,4459385.58011761 581148.9203142,4459392.58006577
+                                581130.92046153,4459406.57995719 581117.92056925,4459422.57983141
+                                581107.9206535,4459441.07968485 581099.9207215,4459458.5795459
+                                581093.92077381,4459477.57939443 581086.9208339,4459495.57925124
+                                581079.92089378,4459512.57911608 581072.67095654,4459533.57894881
+                                581064.92102309,4459553.5787897 581053.92111501,4459570.57865544
+                                581034.92126833,4459575.57861946 581015.92142097,4459577.5786076
+                                580994.92158897,4459576.57862032 580973.92175742,4459577.57861695
+                                580953.92191741,4459576.57862944 580931.9220923,4459570.57868259
+                                580909.92226653,4459561.57875985 580892.9224007,4459552.57883601
+                                580873.67255246,4459541.57892875 580856.92268441,4459531.57901289
+                                580837.92283394,4459519.57911361 580819.92297568,4459508.57920607
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </rsdi:the_geom>
+        </rsdi:fiumi_basilicata>
+    </gml:featureMember>
+    <gml:featureMember>
+        <rsdi:fiumi_basilicata fid="fiumi_basilicata.618">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        579713.9319575,4459831.57684265 579758.93154611,4460139.57437398
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <rsdi:fnode_>1022</rsdi:fnode_>
+            <rsdi:tnode_>1010</rsdi:tnode_>
+            <rsdi:lpoly_>5</rsdi:lpoly_>
+            <rsdi:rpoly_>4</rsdi:rpoly_>
+            <rsdi:length>316.45</rsdi:length>
+            <rsdi:fiumi1_4_>618</rsdi:fiumi1_4_>
+            <rsdi:fiumi1_4_i>8975</rsdi:fiumi1_4_i>
+            <rsdi:cl>7</rsdi:cl>
+            <rsdi:lv>141</rsdi:lv>
+            <rsdi:entr>4.6913</rsdi:entr>
+            <rsdi:l_t_lk>1351.428</rsdi:l_t_lk>
+            <rsdi:n_t_lk>6103</rsdi:n_t_lk>
+            <rsdi:l_as>22.264</rsdi:l_as>
+            <rsdi:l_t_pr>141</rsdi:l_t_pr>
+            <rsdi:l_a_pr>21.512</rsdi:l_a_pr>
+            <rsdi:r_s>1.59542</rsdi:r_s>
+            <rsdi:asta_princ>1</rsdi:asta_princ>
+            <rsdi:sym>4</rsdi:sym>
+            <rsdi:nome>A g r i</rsdi:nome>
+            <rsdi:bacino>CAVONE - AGRI</rsdi:bacino>
+            <rsdi:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                579758.93154611,4459831.57684265 579746.93164706,4459853.57666837
+                                579744.9316677,4459874.57649995 579745.93166386,4459893.57634695
+                                579746.93166068,4459915.57616983 579744.93168154,4459937.57599336
+                                579735.93175802,4459957.57583452 579729.93181069,4459978.57566698
+                                579724.93185611,4460003.07547107 579720.93189243,4460022.57531515
+                                579717.68192264,4460041.57516309 579713.9319575,4460063.57498702
+                                579713.93196244,4460086.07480611 579715.93195126,4460108.07462878
+                                579720.9319156,4460128.07446688 579722.93190211,4460139.57437398
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </rsdi:the_geom>
+        </rsdi:fiumi_basilicata>
+    </gml:featureMember>
+    <gml:featureMember>
+        <rsdi:fiumi_basilicata fid="fiumi_basilicata.619">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        579758.93154611,4459819.57693476 579817.93107242,4459831.57684265
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <rsdi:fnode_>1023</rsdi:fnode_>
+            <rsdi:tnode_>1022</rsdi:tnode_>
+            <rsdi:lpoly_>5</rsdi:lpoly_>
+            <rsdi:rpoly_>4</rsdi:rpoly_>
+            <rsdi:length>65.339</rsdi:length>
+            <rsdi:fiumi1_4_>619</rsdi:fiumi1_4_>
+            <rsdi:fiumi1_4_i>8978</rsdi:fiumi1_4_i>
+            <rsdi:cl>7</rsdi:cl>
+            <rsdi:lv>142</rsdi:lv>
+            <rsdi:entr>4.6987</rsdi:entr>
+            <rsdi:l_t_lk>1353.919</rsdi:l_t_lk>
+            <rsdi:n_t_lk>6123</rsdi:n_t_lk>
+            <rsdi:l_as>22.329</rsdi:l_as>
+            <rsdi:l_t_pr>142</rsdi:l_t_pr>
+            <rsdi:l_a_pr>21.576</rsdi:l_a_pr>
+            <rsdi:r_s>1.59811</rsdi:r_s>
+            <rsdi:asta_princ>1</rsdi:asta_princ>
+            <rsdi:sym>4</rsdi:sym>
+            <rsdi:nome>A g r i</rsdi:nome>
+            <rsdi:bacino>CAVONE - AGRI</rsdi:bacino>
+            <rsdi:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                579817.93107242,4459826.57686992 579797.93123284,4459827.57686627
+                                579778.93138327,4459819.57693476 579760.93152899,4459826.57688242
+                                579758.93154611,4459831.57684265
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </rsdi:the_geom>
+        </rsdi:fiumi_basilicata>
+    </gml:featureMember>
+    <gml:featureMember>
+        <rsdi:fiumi_basilicata fid="fiumi_basilicata.620">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        579817.93107242,4459799.57701079 580473.92582568,4459924.57604662
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <rsdi:fnode_>1020</rsdi:fnode_>
+            <rsdi:tnode_>1023</rsdi:tnode_>
+            <rsdi:lpoly_>5</rsdi:lpoly_>
+            <rsdi:rpoly_>4</rsdi:rpoly_>
+            <rsdi:length>800.124</rsdi:length>
+            <rsdi:fiumi1_4_>620</rsdi:fiumi1_4_>
+            <rsdi:fiumi1_4_i>8980</rsdi:fiumi1_4_i>
+            <rsdi:cl>7</rsdi:cl>
+            <rsdi:lv>143</rsdi:lv>
+            <rsdi:entr>4.7025</rsdi:entr>
+            <rsdi:l_t_lk>1356.065</rsdi:l_t_lk>
+            <rsdi:n_t_lk>6131</rsdi:n_t_lk>
+            <rsdi:l_as>23.128</rsdi:l_as>
+            <rsdi:l_t_pr>143</rsdi:l_t_pr>
+            <rsdi:l_a_pr>22.376</rsdi:l_a_pr>
+            <rsdi:r_s>1.64192</rsdi:r_s>
+            <rsdi:asta_princ>1</rsdi:asta_princ>
+            <rsdi:sym>4</rsdi:sym>
+            <rsdi:nome>A g r i</rsdi:nome>
+            <rsdi:bacino>CAVONE - AGRI</rsdi:bacino>
+            <rsdi:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                580473.92582568,4459861.57644405 580452.92599455,4459864.57642457
+                                580429.92617833,4459862.57644574 580410.92632985,4459859.57647405
+                                580390.92648949,4459857.07649858 580368.92666383,4459848.57657178
+                                580348.9268227,4459842.57662444 580328.92698168,4459837.07667308
+                                580308.92714044,4459830.57672977 580290.67728529,4459824.57678204
+                                580269.67745284,4459821.5768108 580247.92762606,4459817.07685178
+                                580229.92776902,4459811.57689997 580206.67795393,4459805.57695334
+                                580186.67811324,4459801.57698991 580164.92828702,4459799.57701079
+                                580145.67844253,4459805.57696677 580134.67853462,4459823.57682445
+                                580129.92857708,4459843.57666468 580130.92857371,4459864.57649559
+                                580129.92858613,4459884.57633499 580121.92865396,4459901.57620006
+                                580105.92878476,4459913.57610709 580085.92894341,4459906.57616777
+                                580067.92908516,4459895.57626018 580049.92922757,4459887.57632847
+                                580033.9293586,4459900.57622746 580013.92952033,4459907.57617556
+                                579997.92965069,4459917.57609867 579978.67980642,4459924.57604662
+                                579959.92995638,4459923.57605877 579939.93011635,4459922.57607121
+                                579921.93025877,4459914.57613949 579900.93042411,4459901.57624863
+                                579888.93051692,4459886.57637188 579876.93060908,4459868.57651925
+                                579859.93074107,4459849.57667576 579843.93086681,4459838.57676773
+                                579825.93100944,4459831.57682796 579817.93107242,4459826.57686992
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </rsdi:the_geom>
+        </rsdi:fiumi_basilicata>
+    </gml:featureMember>
+    <gml:featureMember>
+        <rsdi:fiumi_basilicata fid="fiumi_basilicata.621">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        580791.92338539,4459799.57680434 581096.92082172,4460686.56970713
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <rsdi:fnode_>1026</rsdi:fnode_>
+            <rsdi:tnode_>978</rsdi:tnode_>
+            <rsdi:lpoly_>4</rsdi:lpoly_>
+            <rsdi:rpoly_>4</rsdi:rpoly_>
+            <rsdi:length>1069.548</rsdi:length>
+            <rsdi:fiumi1_4_>621</rsdi:fiumi1_4_>
+            <rsdi:fiumi1_4_i>8982</rsdi:fiumi1_4_i>
+            <rsdi:cl>5</rsdi:cl>
+            <rsdi:lv>145</rsdi:lv>
+            <rsdi:entr>3.6176</rsdi:entr>
+            <rsdi:l_t_lk>74.946</rsdi:l_t_lk>
+            <rsdi:n_t_lk>309</rsdi:n_t_lk>
+            <rsdi:l_as>5.384</rsdi:l_as>
+            <rsdi:l_t_pr>43</rsdi:l_t_pr>
+            <rsdi:l_a_pr>8.848</rsdi:l_a_pr>
+            <rsdi:r_s>1.2267</rsdi:r_s>
+            <rsdi:asta_princ>0</rsdi:asta_princ>
+            <rsdi:sym>2</rsdi:sym>
+            <rsdi:nome>A g r i</rsdi:nome>
+            <rsdi:bacino>CAVONE - AGRI</rsdi:bacino>
+            <rsdi:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                581096.92082172,4459799.57680434 581080.92095233,4459810.57671945
+                                581063.92109118,4459822.57662675 581049.92120656,4459837.07651327
+                                581042.92126676,4459855.57636607 581031.92135844,4459871.57623986
+                                581014.92149728,4459883.57614715 581000.92161288,4459899.07602563
+                                580988.67171445,4459914.57590372 580985.92174117,4459935.57573547
+                                580989.92171359,4459955.57557377 580986.92174186,4459974.57542166
+                                580981.92178614,4459993.57527 580970.92187804,4460010.57513575
+                                580953.92201687,4460022.57504305 580945.92208251,4460029.57498854
+                                580938.92214014,4460036.57493381 580924.92225606,4460053.57480024
+                                580917.92231636,4460072.57464902 580904.67242605,4460088.57452332
+                                580885.92257845,4460098.57444708 580866.92273218,4460105.57439502
+                                580845.92290093,4460108.07437958 580830.92302385,4460120.57428241
+                                580819.92311573,4460137.57414817 580813.92316802,4460156.57399673
+                                580817.92314622,4460202.573626 580817.92315535,4460243.57329635
+                                580816.92316759,4460262.57314382 580809.9232281,4460282.57298457
+                                580801.67329862,4460302.57282561 580796.92334112,4460322.57266586
+                                580791.92338539,4460341.57251422 580795.92335781,4460361.57235254
+                                580797.92334691,4460384.57216718 580803.92330353,4460405.57199702
+                                580816.92320299,4460421.5718655 580830.92309399,4460435.57174984
+                                580838.9230346,4460456.57157923 580840.92302281,4460475.57142604
+                                580843.92300346,4460496.57125655 580847.92297589,4460516.57109487
+                                580857.92290071,4460538.57091579 580870.92279995,4460553.57079231
+                                580880.92272365,4460570.57065343 580881.9227201,4460590.57049242
+                                580894.67262112,4460604.57037704 580903.92255084,4460621.57023833
+                                580906.92253105,4460640.57008492 580912.92248724,4460659.56993085
+                                580923.92240294,4460676.56979174 580942.92225303,4460686.56970713
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </rsdi:the_geom>
+        </rsdi:fiumi_basilicata>
+    </gml:featureMember>
+    <gml:featureMember>
+        <rsdi:fiumi_basilicata fid="fiumi_basilicata.623">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        580473.92582568,4459546.57895833 580558.92507493,4459861.57644405
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <rsdi:fnode_>1051</rsdi:fnode_>
+            <rsdi:tnode_>1020</rsdi:tnode_>
+            <rsdi:lpoly_>5</rsdi:lpoly_>
+            <rsdi:rpoly_>4</rsdi:rpoly_>
+            <rsdi:length>338.147</rsdi:length>
+            <rsdi:fiumi1_4_>623</rsdi:fiumi1_4_>
+            <rsdi:fiumi1_4_i>9024</rsdi:fiumi1_4_i>
+            <rsdi:cl>7</rsdi:cl>
+            <rsdi:lv>144</rsdi:lv>
+            <rsdi:entr>4.7039</rsdi:entr>
+            <rsdi:l_t_lk>1357.14</rsdi:l_t_lk>
+            <rsdi:n_t_lk>6133</rsdi:n_t_lk>
+            <rsdi:l_as>23.466</rsdi:l_as>
+            <rsdi:l_t_pr>144</rsdi:l_t_pr>
+            <rsdi:l_a_pr>22.714</rsdi:l_a_pr>
+            <rsdi:r_s>1.62778</rsdi:r_s>
+            <rsdi:asta_princ>1</rsdi:asta_princ>
+            <rsdi:sym>4</rsdi:sym>
+            <rsdi:nome>A g r i</rsdi:nome>
+            <rsdi:bacino>CAVONE - AGRI</rsdi:bacino>
+            <rsdi:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                580558.92507493,4459546.57895833 580546.92517616,4459569.57877602
+                                580533.92528363,4459584.57865827 580521.92538419,4459604.57850009
+                                580514.92544548,4459628.07831265 580508.92549764,4459646.57816521
+                                580505.92552744,4459672.57795679 580503.92554812,4459693.57778836
+                                580501.92556836,4459712.57763601 580499.67559192,4459737.57743548
+                                580500.92558701,4459760.57725025 580501.9255841,4459783.57706507
+                                580500.92559655,4459803.57690447 580497.92562523,4459824.57673627
+                                580492.9256695,4459843.57658459 580480.92576883,4459858.07647065
+                                580473.92582568,4459861.57644405
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </rsdi:the_geom>
+        </rsdi:fiumi_basilicata>
+    </gml:featureMember>
+    <gml:featureMember>
+        <rsdi:fiumi_basilicata fid="fiumi_basilicata.628">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        580558.92507493,4459480.57945765 580819.92297568,4459546.57895833
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <rsdi:fnode_>1058</rsdi:fnode_>
+            <rsdi:tnode_>1051</rsdi:tnode_>
+            <rsdi:lpoly_>5</rsdi:lpoly_>
+            <rsdi:rpoly_>4</rsdi:rpoly_>
+            <rsdi:length>288.202</rsdi:length>
+            <rsdi:fiumi1_4_>628</rsdi:fiumi1_4_>
+            <rsdi:fiumi1_4_i>9040</rsdi:fiumi1_4_i>
+            <rsdi:cl>7</rsdi:cl>
+            <rsdi:lv>145</rsdi:lv>
+            <rsdi:entr>4.7053</rsdi:entr>
+            <rsdi:l_t_lk>1358.055</rsdi:l_t_lk>
+            <rsdi:n_t_lk>6135</rsdi:n_t_lk>
+            <rsdi:l_as>23.754</rsdi:l_as>
+            <rsdi:l_t_pr>145</rsdi:l_t_pr>
+            <rsdi:l_a_pr>23.002</rsdi:l_a_pr>
+            <rsdi:r_s>1.63569</rsdi:r_s>
+            <rsdi:asta_princ>1</rsdi:asta_princ>
+            <rsdi:sym>4</rsdi:sym>
+            <rsdi:nome>A g r i</rsdi:nome>
+            <rsdi:bacino>CAVONE - AGRI</rsdi:bacino>
+            <rsdi:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                580819.92297568,4459508.57920607 580796.9231577,4459498.5792916
+                                580776.92331658,4459492.57934429 580758.92345944,4459486.57939653
+                                580738.67362089,4459483.07942918 580719.9237712,4459483.57942931
+                                580700.92392274,4459480.57945765 580682.92406827,4459486.57941339
+                                580661.9242365,4459486.57941804 580641.9243976,4459490.57939031
+                                580620.92456672,4459494.57936279 580600.92472915,4459504.5792868
+                                580583.92486756,4459514.57921014 580569.92498282,4459528.57910065
+                                580558.92507493,4459546.57895833
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </rsdi:the_geom>
+        </rsdi:fiumi_basilicata>
+    </gml:featureMember>
+    <gml:featureMember>
+        <rsdi:fiumi_basilicata fid="fiumi_basilicata.629">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        581096.92082172,4459389.58007651 581208.91983287,4459799.57680434
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <rsdi:fnode_>1065</rsdi:fnode_>
+            <rsdi:tnode_>1026</rsdi:tnode_>
+            <rsdi:lpoly_>4</rsdi:lpoly_>
+            <rsdi:rpoly_>4</rsdi:rpoly_>
+            <rsdi:length>438.868</rsdi:length>
+            <rsdi:fiumi1_4_>629</rsdi:fiumi1_4_>
+            <rsdi:fiumi1_4_i>9053</rsdi:fiumi1_4_i>
+            <rsdi:cl>5</rsdi:cl>
+            <rsdi:lv>146</rsdi:lv>
+            <rsdi:entr>3.6751</rsdi:entr>
+            <rsdi:l_t_lk>78.307</rsdi:l_t_lk>
+            <rsdi:n_t_lk>327</rsdi:n_t_lk>
+            <rsdi:l_as>5.822</rsdi:l_as>
+            <rsdi:l_t_pr>44</rsdi:l_t_pr>
+            <rsdi:l_a_pr>9.286</rsdi:l_a_pr>
+            <rsdi:r_s>1.23198</rsdi:r_s>
+            <rsdi:asta_princ>0</rsdi:asta_princ>
+            <rsdi:sym>2</rsdi:sym>
+            <rsdi:nome>A g r i</rsdi:nome>
+            <rsdi:bacino>CAVONE - AGRI</rsdi:bacino>
+            <rsdi:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                581208.91983287,4459389.58007651 581201.91989409,4459412.5798931
+                                581193.91996265,4459432.57973404 581185.92003077,4459450.57959107
+                                581174.92012314,4459469.57944072 581161.92023108,4459486.5793069
+                                581145.67036416,4459499.57920598 581133.92046231,4459517.57906384
+                                581128.92050661,4459536.57891216 581126.92052733,4459557.57874372
+                                581127.92052401,4459578.57857462 581127.92052893,4459600.5783977
+                                581122.92057613,4459632.57814148 581120.92059729,4459655.57795696
+                                581119.92060955,4459674.5778044 581120.92060646,4459696.57762726
+                                581119.92061916,4459717.57745861 581118.92063164,4459737.57729801
+                                581114.92066837,4459758.57713003 581109.92071267,4459777.57697836
+                                581099.92079668,4459795.07683986 581096.92082172,4459799.57680434
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </rsdi:the_geom>
+        </rsdi:fiumi_basilicata>
+    </gml:featureMember>
+    <gml:featureMember>
+        <rsdi:fiumi_basilicata fid="fiumi_basilicata.631">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        581208.91983287,4459350.5803522 581378.91846224,4459389.58007651
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <rsdi:fnode_>1072</rsdi:fnode_>
+            <rsdi:tnode_>1065</rsdi:tnode_>
+            <rsdi:lpoly_>5</rsdi:lpoly_>
+            <rsdi:rpoly_>4</rsdi:rpoly_>
+            <rsdi:length>175.442</rsdi:length>
+            <rsdi:fiumi1_4_>631</rsdi:fiumi1_4_>
+            <rsdi:fiumi1_4_i>9057</rsdi:fiumi1_4_i>
+            <rsdi:cl>7</rsdi:cl>
+            <rsdi:lv>147</rsdi:lv>
+            <rsdi:entr>4.7383</rsdi:entr>
+            <rsdi:l_t_lk>1438.037</rsdi:l_t_lk>
+            <rsdi:n_t_lk>6465</rsdi:n_t_lk>
+            <rsdi:l_as>24.448</rsdi:l_as>
+            <rsdi:l_t_pr>147</rsdi:l_t_pr>
+            <rsdi:l_a_pr>23.695</rsdi:l_a_pr>
+            <rsdi:r_s>1.64764</rsdi:r_s>
+            <rsdi:asta_princ>1</rsdi:asta_princ>
+            <rsdi:sym>4</rsdi:sym>
+            <rsdi:nome>A g r i</rsdi:nome>
+            <rsdi:bacino>CAVONE - AGRI</rsdi:bacino>
+            <rsdi:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                581378.91846224,4459350.5803522 581359.91861647,4459359.58028406
+                                581339.91877826,4459366.58023224 581318.91894694,4459368.58022085
+                                581299.9190996,4459370.58020901 581280.66925449,4459373.58018918
+                                581259.66942396,4459379.08014963 581239.91958318,4459383.58011785
+                                581220.91973629,4459387.58008992 581208.91983287,4459389.58007651
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </rsdi:the_geom>
+        </rsdi:fiumi_basilicata>
+    </gml:featureMember>
+    <gml:featureMember>
+        <rsdi:fiumi_basilicata fid="fiumi_basilicata.634">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        581135.92034011,4459042.58288366 581477.66766395,4459318.58058747
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <rsdi:fnode_>1073</rsdi:fnode_>
+            <rsdi:tnode_>1086</rsdi:tnode_>
+            <rsdi:lpoly_>6</rsdi:lpoly_>
+            <rsdi:rpoly_>6</rsdi:rpoly_>
+            <rsdi:length>453.136</rsdi:length>
+            <rsdi:fiumi1_4_>634</rsdi:fiumi1_4_>
+            <rsdi:fiumi1_4_i>9098</rsdi:fiumi1_4_i>
+            <rsdi:cl>6</rsdi:cl>
+            <rsdi:lv>148</rsdi:lv>
+            <rsdi:entr>4.1812</rsdi:entr>
+            <rsdi:l_t_lk>208.859</rsdi:l_t_lk>
+            <rsdi:n_t_lk>1065</rsdi:n_t_lk>
+            <rsdi:l_as>2.799</rsdi:l_as>
+            <rsdi:l_t_pr>75</rsdi:l_t_pr>
+            <rsdi:l_a_pr>11.875</rsdi:l_a_pr>
+            <rsdi:r_s>1.23133</rsdi:r_s>
+            <rsdi:asta_princ>0</rsdi:asta_princ>
+            <rsdi:sym>3</rsdi:sym>
+            <rsdi:nome>A g r i</rsdi:nome>
+            <rsdi:bacino>CAVONE - AGRI</rsdi:bacino>
+            <rsdi:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                581477.66766395,4459318.58058747 581458.91781259,4459311.58064796
+                                581437.91797926,4459304.58070896 581401.91826453,4459290.58082961
+                                581380.9184312,4459283.5808906 581362.91857293,4459272.5809831
+                                581347.91869019,4459259.581091 581336.91877428,4459241.58123823
+                                581325.9188577,4459220.58140959 581314.91894202,4459203.58154877
+                                581301.66904459,4459187.58168042 581290.66912902,4459171.08181559
+                                581275.91924417,4459157.58192746 581256.91939393,4459146.58202018
+                                581239.9195279,4459136.5821044 581224.91964471,4459121.5822284
+                                581212.91973728,4459105.58235976 581198.91984542,4459087.58250767
+                                581183.91996246,4459073.58262362 581167.92008775,4459060.58273175
+                                581150.92022149,4459049.58282401 581135.92034011,4459042.58288366
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </rsdi:the_geom>
+        </rsdi:fiumi_basilicata>
+    </gml:featureMember>
+    <gml:featureMember>
+        <rsdi:fiumi_basilicata fid="fiumi_basilicata.637">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        579647.93211041,4458351.58877097 581378.91846224,4459350.5804031
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <rsdi:fnode_>1072</rsdi:fnode_>
+            <rsdi:tnode_>1168</rsdi:tnode_>
+            <rsdi:lpoly_>6</rsdi:lpoly_>
+            <rsdi:rpoly_>5</rsdi:rpoly_>
+            <rsdi:length>2410.635</rsdi:length>
+            <rsdi:fiumi1_4_>637</rsdi:fiumi1_4_>
+            <rsdi:fiumi1_4_i>9196</rsdi:fiumi1_4_i>
+            <rsdi:cl>6</rsdi:cl>
+            <rsdi:lv>147</rsdi:lv>
+            <rsdi:entr>4.7275</rsdi:entr>
+            <rsdi:l_t_lk>392.167</rsdi:l_t_lk>
+            <rsdi:n_t_lk>2293</rsdi:n_t_lk>
+            <rsdi:l_as>10.467</rsdi:l_as>
+            <rsdi:l_t_pr>135</rsdi:l_t_pr>
+            <rsdi:l_a_pr>24.506</rsdi:l_a_pr>
+            <rsdi:r_s>1.50463</rsdi:r_s>
+            <rsdi:asta_princ>0</rsdi:asta_princ>
+            <rsdi:sym>3</rsdi:sym>
+            <rsdi:nome>A g r i</rsdi:nome>
+            <rsdi:bacino>CAVONE - AGRI</rsdi:bacino>
+            <rsdi:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                581378.91846224,4459350.5803522 581362.91858751,4459337.58046033
+                                581345.91872145,4459327.58054455 581324.91888857,4459322.58058946
+                                581304.9190479,4459318.5806261 581283.9192158,4459317.08064285
+                                581263.91937614,4459317.5806433 581244.91952992,4459324.58059124
+                                581224.91969171,4459331.5805394 581204.91985082,4459326.58058408
+                                581185.92000393,4459330.58055615 581168.92014258,4459341.58047147
+                                581150.92028879,4459350.5804031 581131.92043989,4459345.58044755
+                                581113.67058453,4459338.58050792 581094.92073317,4459331.58056839
+                                581075.92088427,4459326.58061284 581054.92105206,4459324.5806336
+                                581035.92120405,4459323.58064587 581015.92136316,4459318.58069054
+                                580994.92153274,4459324.58064696 580942.92194955,4459325.58065048
+                                580926.67207683,4459312.58075865 580910.92220011,4459299.5808667
+                                580891.92234988,4459288.5809594 580874.67248629,4459280.58102757
+                                580853.67265341,4459275.58107245 580834.92280229,4459269.58112487
+                                580815.92295206,4459258.58121756 580803.92304419,4459240.58136499
+                                580791.92313588,4459220.58152851 580777.92324003,4459184.58182116
+                                580770.67329366,4459164.58198363 580766.92331925,4459144.58214533
+                                580754.92341139,4459126.58229276 580740.92352022,4459111.58241652
+                                580723.92365331,4459097.58253289 580705.92379496,4459086.08262938
+                                580689.92392082,4459075.58271738 580672.92405469,4459065.0828056
+                                580655.67419034,4459053.58290193 580636.92433768,4459040.58301064
+                                580619.92447144,4459029.58310289 580603.67459941,4459019.58318692
+                                580587.92472161,4459001.58333519 580583.92474899,4458980.58350499
+                                580581.67476147,4458955.58370658 580584.92473077,4458934.58387477
+                                580586.9247103,4458914.5840352 580586.92470564,4458893.58420412
+                                580592.67465513,4458873.58436372 580601.92457701,4458855.58450647
+                                580608.92451659,4458836.08466177 580609.92450414,4458816.08482243
+                                580607.92451494,4458792.58501191 580596.92459953,4458776.58514305
+                                580578.92474088,4458763.58525161 580556.92491738,4458764.58524843
+                                580536.9250783,4458767.58522873 580516.92523878,4458768.58522511
+                                580498.67538346,4458761.58528545 580479.92553148,4458751.58537004
+                                580460.92568151,4458741.58545469 580443.92581563,4458732.08553486
+                                580428.92593283,4458718.58564677 580423.92596802,4458696.58582485
+                                580422.92597182,4458677.58597792 580412.92604685,4458654.58616515
+                                580392.92620557,4458647.58622588 580373.67636048,4458650.586206
+                                580355.92650382,4458655.58616969 580316.92681921,4458668.58607372
+                                580297.9269739,4458679.58598943 580275.92714841,4458671.58605864
+                                580256.92729779,4458658.58616741 580240.9274239,4458649.08624736
+                                580228.67751819,4458631.58639084 580221.9275683,4458613.58653712
+                                580216.92760373,4458592.58670716 580206.67768166,4458573.58686227
+                                580191.92779522,4458552.58703446 580171.92795217,4458537.58715954
+                                580156.92806884,4458521.58729156 580150.11562189,4458514.58734937
+                                580140.92819352,4458505.5874238 580125.92831064,4458491.58753973
+                                580105.92846649,4458471.58770503 580087.92860864,4458462.08778542
+                                580065.92878373,4458456.58783451 580044.92894959,4458445.58792762
+                                580026.92909207,4458437.58799594 580008.67923656,4458429.58806431
+                                579988.67939507,4458421.58813307 579969.92954754,4458431.58805674
+                                579954.92967105,4458446.58793936 579942.92977118,4458464.58779719
+                                579930.92987043,4458478.58768719 579911.93002489,4458488.58761092
+                                579891.9301856,4458490.58759922 579870.93035345,4458488.58761992
+                                579847.93053754,4458487.58763301 579828.93068903,4458484.08766534
+                                579809.93084085,4458482.08768559 579790.6809939,4458476.58773406
+                                579768.93116501,4458462.08785548 579753.93128247,4458449.58795933
+                                579736.93141606,4458437.5880596 579717.68156813,4458427.58814427
+                                579700.93169995,4458416.58823643 579684.93182575,4458405.58832843
+                                579669.93194223,4458388.58846848 579657.93203466,4458371.58860788
+                                579649.93209482,4458353.58875444 579647.93211041,4458351.58877097
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </rsdi:the_geom>
+        </rsdi:fiumi_basilicata>
+    </gml:featureMember>
+    <gml:featureMember>
+        <rsdi:fiumi_basilicata fid="fiumi_basilicata.639">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        580689.92374339,4458277.58913679 581135.92034011,4459042.58288366
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <rsdi:fnode_>1086</rsdi:fnode_>
+            <rsdi:tnode_>1177</rsdi:tnode_>
+            <rsdi:lpoly_>6</rsdi:lpoly_>
+            <rsdi:rpoly_>6</rsdi:rpoly_>
+            <rsdi:length>987.638</rsdi:length>
+            <rsdi:fiumi1_4_>639</rsdi:fiumi1_4_>
+            <rsdi:fiumi1_4_i>9208</rsdi:fiumi1_4_i>
+            <rsdi:cl>6</rsdi:cl>
+            <rsdi:lv>147</rsdi:lv>
+            <rsdi:entr>4.1657</rsdi:entr>
+            <rsdi:l_t_lk>207.196</rsdi:l_t_lk>
+            <rsdi:n_t_lk>1057</rsdi:n_t_lk>
+            <rsdi:l_as>2.346</rsdi:l_as>
+            <rsdi:l_t_pr>74</rsdi:l_t_pr>
+            <rsdi:l_a_pr>11.422</rsdi:l_a_pr>
+            <rsdi:r_s>1.22735</rsdi:r_s>
+            <rsdi:asta_princ>0</rsdi:asta_princ>
+            <rsdi:sym>3</rsdi:sym>
+            <rsdi:nome>A g r i</rsdi:nome>
+            <rsdi:bacino>CAVONE - AGRI</rsdi:bacino>
+            <rsdi:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                581135.92034011,4459042.58288366 581114.9205059,4459031.58297682
+                                581101.92060648,4459015.58310841 581089.92069905,4458999.58323978
+                                581078.92078249,4458978.58341114 581074.92081008,4458958.58357291
+                                581078.92077389,4458940.08372082 581081.67074762,4458921.08387304
+                                581086.92070119,4458901.58402872 581091.92065689,4458882.58418044
+                                581091.92065219,4458861.58434936 581083.9207116,4458840.58452006
+                                581074.9207788,4458818.58469903 581066.92083888,4458800.58484561
+                                581059.92089095,4458782.58499196 581055.92091831,4458761.58516177
+                                581058.92088958,4458740.58533003 581063.92084505,4458720.58548981
+                                581067.92080808,4458698.58566588 581065.92081942,4458677.58583526
+                                581058.92087082,4458656.58600575 581044.92097943,4458640.58613758
+                                581028.92110429,4458625.58626181 581012.92122982,4458613.58636191
+                                580994.92137183,4458603.58644636 580977.67150783,4458593.58653064
+                                580964.92161,4458593.58653348 580945.92176203,4458592.58654575
+                                580926.67191427,4458583.58662243 580909.92204627,4458573.58670661
+                                580891.92218884,4458566.08677094 580874.6723245,4458554.58686729
+                                580855.92247164,4458540.58698408 580841.92258071,4458526.58709982
+                                580830.92266462,4458507.58725511 580819.92274787,4458485.58743454
+                                580804.92286384,4458466.58759073 580791.92296446,4458450.58772233
+                                580777.92307331,4458435.58784611 580763.92318228,4458421.08796588
+                                580747.92330683,4458404.58810217 580733.9234159,4458390.58821791
+                                580717.67354368,4458379.58831001 580701.92366679,4458365.58842613
+                                580692.92373469,4458346.58858099 580694.92371399,4458325.5887495
+                                580695.92370131,4458304.58891823 580692.9237209,4458284.5890798
+                                580689.92374339,4458277.58913679
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </rsdi:the_geom>
+        </rsdi:fiumi_basilicata>
+    </gml:featureMember>
+</wfs:FeatureCollection>

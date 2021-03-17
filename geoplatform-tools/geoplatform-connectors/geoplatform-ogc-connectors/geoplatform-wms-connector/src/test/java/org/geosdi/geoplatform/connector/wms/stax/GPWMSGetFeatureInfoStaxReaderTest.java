@@ -292,7 +292,7 @@ public class GPWMSGetFeatureInfoStaxReaderTest extends WMSGetFeatureInfoStaxRead
     }
 
     @Test
-    public void z_s_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+    public void b_s_wmsGetFeatureInfoStaxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_ABR_Comuni : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("ABR_Comuni.xml"))));
     }
@@ -366,5 +366,35 @@ public class GPWMSGetFeatureInfoStaxReaderTest extends WMSGetFeatureInfoStaxRead
     public void c_i_wmsGetFeatureInfoStaxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_BUILDING_VIGNETI_CATASTALI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("admin_vigneti_catastali.xml"))));
+    }
+
+    @Test
+    public void c_l_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_VULCANO_CAMPI_ISTAT : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("VulcanoCampiIstat.xml"))));
+    }
+
+    @Test
+    public void c_m_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_CAMP_LAHARS : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("CAMP_Lahars.xml"))));
+    }
+
+    @Test
+    public void c_n_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_RSDI_ALT_600_TO_700 : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("rsdi_alt_600_a_700.xml"))));
+    }
+
+    @Test
+    public void c_o_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_RSDI_FIUMI_BASILICATA : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("rsdi_fiumi_basilicata.xml"))));
+    }
+
+    @Test
+    public void c_p_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_RSDI_SENTIERI_APP_LUCANO : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("rsdi_sentieri_app_lucano.xml"))));
     }
 }

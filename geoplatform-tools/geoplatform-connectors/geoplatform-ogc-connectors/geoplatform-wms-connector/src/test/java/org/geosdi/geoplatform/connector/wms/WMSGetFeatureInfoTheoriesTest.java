@@ -69,6 +69,10 @@ public class WMSGetFeatureInfoTheoriesTest {
                 "comuniBasilicata-GetFeatureInfo.xml", "corine-GetFeatureInfo.xml", "airports.xml",
                 "geologia.xml", "livelloEdifici.xml", "volumetria.xml", "livelloEdifici1.xml", "masw.xml",
                 "CF_zonepianificazione_mappeinterattive.xml", "PianoCampiFlegrei.xml", "ABR_Comuni.xml",
-                "AereeUrbaneValoreStorico.xml", "PNSRS_Valanghe.xml"};
+                "AereeUrbaneValoreStorico.xml", "PNSRS_Valanghe.xml", "AreeAmmassamento.xml",
+                "Ferrovie.xml", "MonumentiBizantini.xml", "ReteGas.xml", "AziendeSanitarie.xml",
+                "ABR_CaveAttive.xml", "AreeUrbaneValoreStorico.xml", "BaciniIdrogeografici.xml",
+                "geoserver-building_resonance_level.xml", "admin_vigneti_catastali.xml", "VulcanoCampiIstat.xml",
+                 "rsdi_alt_600_a_700.xml", "rsdi_fiumi_basilicata.xml", "rsdi_sentieri_app_lucano.xml"};
     }
 }

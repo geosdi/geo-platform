@@ -82,13 +82,13 @@ public class GoogleStaxReaderTest {
     @Test
     public void a_staxReadFromFile() throws Exception {
         stopWatch.start("googleStaxReader");
-        logger.info("#################GoolgeStaxReader Result from File @@@@@@@@@@@@@@@@@@@@ {}\n", googleStaxReader.read(new File(pathFile)).toString());
+        logger.info("#################GoolgeStaxReader Result from File @@@@@@@@@@@@@@@@@@@@{}\n", googleStaxReader.read(new File(pathFile)).toString());
         stopWatch.stop();
         stopWatch.start("googleAaltoReader");
-        logger.info("#################GoolgeAaltoReader Result from File @@@@@@@@@@@@@@@@@@@@ {}\n", googleAaltoReader.read(new File(pathFile)).toString());
+        logger.info("#################GoolgeAaltoReader Result from File @@@@@@@@@@@@@@@@@@@@{}\n", googleAaltoReader.read(new File(pathFile)).toString());
         stopWatch.stop();
         stopWatch.start("googleWoodstoxReader");
-        logger.info("#################GoolgeWoodstoxReader Result from File @@@@@@@@@@@@@@@@@@@@ {}\n", googleWoodstoxReader.read(new File(pathFile)).toString());
+        logger.info("#################GoolgeWoodstoxReader Result from File @@@@@@@@@@@@@@@@@@@@{}\n", googleWoodstoxReader.read(new File(pathFile)).toString());
         stopWatch.stop();
 
     }

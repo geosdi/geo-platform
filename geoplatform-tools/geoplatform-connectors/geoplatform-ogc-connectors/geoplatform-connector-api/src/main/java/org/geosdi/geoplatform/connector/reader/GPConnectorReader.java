@@ -36,9 +36,10 @@
 package org.geosdi.geoplatform.connector.reader;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
 import java.io.Serializable;
 import java.util.Map;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -51,5 +52,5 @@ public interface GPConnectorReader<R, V, Key> extends Serializable {
      * @return {@link Map<Key, R>}
      * @throws Exception
      */
-    Map<Key, R> read(@Nonnull(when = When.NEVER) V theValue) throws Exception;
+    Map<Key, R> read(@Nonnull(when = NEVER) V theValue) throws Exception;
 }

@@ -95,7 +95,7 @@ public interface GPWMSRequestKvpReader extends GPConnectorReader<GPWMSRequestKey
                     .map(v -> v.split(KVP_SEPARATOR.toKey()))
                     .filter(Objects::nonNull)
                     .filter(values -> values.length == 2)
-                    .filter(values -> ((values[0] != null) && !(values[0].trim().isEmpty()) && (values[1] != null) && !(values[1].trim().isEmpty())))
+                    .filter(values -> (((values[0] != null) && !(values[0].trim().isEmpty())) && ((values[1] != null) && !(values[1].trim().isEmpty()))))
                     .map(this::internalRead)
                     .collect(toMap(GPWMSRequestKey::toKey, identity(), (oldVal, newVal) -> oldVal, LinkedHashMap::new));
         }

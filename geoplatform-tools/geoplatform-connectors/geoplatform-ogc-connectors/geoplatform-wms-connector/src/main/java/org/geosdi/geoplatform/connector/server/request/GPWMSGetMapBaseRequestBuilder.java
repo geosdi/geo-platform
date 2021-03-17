@@ -40,7 +40,6 @@ import org.geosdi.geoplatform.connector.server.request.kvp.GPWMSKeyValuePairBuil
 import org.geosdi.geoplatform.connector.server.request.kvp.GPWMSRequestKeyValuePair;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -49,6 +48,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.util.stream.Collectors.toCollection;
+import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.connector.server.request.WMSRequestKey.*;
 
 /**
@@ -96,7 +96,7 @@ public class GPWMSGetMapBaseRequestBuilder extends GPWMSBaseKeyValuePairBuilder<
      * @param theEntry
      * @return {@link Boolean}
      */
-    final Boolean check(@Nonnull(when = When.NEVER) Map.Entry<String, GPWMSRequestKeyValuePair> theEntry) {
+    final Boolean check(@Nonnull(when = NEVER) Map.Entry<String, GPWMSRequestKeyValuePair> theEntry) {
         checkArgument(theEntry != null, "The Parameter entry must not be null.");
         switch (theEntry.getKey()) {
             case "LAYERS":

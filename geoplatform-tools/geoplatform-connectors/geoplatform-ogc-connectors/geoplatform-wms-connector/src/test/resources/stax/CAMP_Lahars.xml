@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:VULCANICO="http://VULCANICO"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://VULCANICO https://servizi.protezionecivile.it/geoserver/VULCANICO/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=VULCANICO%3ACAMP_Lahars http://www.opengis.net/wfs https://servizi.protezionecivile.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <VULCANICO:CAMP_Lahars fid="CAMP_Lahars.236">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.25657225,40.85233515
+                    </gml:coordinates>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:sigla>Teatro_romano</VULCANICO:sigla>
+            <VULCANICO:x>437337</VULCANICO:x>
+            <VULCANICO:y>4522631</VULCANICO:y>
+            <VULCANICO:472sinmax>0.5</VULCANICO:472sinmax>
+            <VULCANICO:fonte_>Rilievi Mauro Di Vito altri enti</VULCANICO:fonte_>
+            <VULCANICO:comune>Napoli</VULCANICO:comune>
+            <VULCANICO:provincia>Napoli</VULCANICO:provincia>
+        </VULCANICO:CAMP_Lahars>
+    </gml:featureMember>
+    <gml:featureMember>
+        <VULCANICO:CAMP_Lahars fid="CAMP_Lahars.391">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.25459144,40.85017837
+                    </gml:coordinates>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:sigla>Pietrasanta</VULCANICO:sigla>
+            <VULCANICO:x>437168</VULCANICO:x>
+            <VULCANICO:y>4522393</VULCANICO:y>
+            <VULCANICO:fonte_>Rilievi Mauro Di Vito altri enti</VULCANICO:fonte_>
+            <VULCANICO:comune>Napoli</VULCANICO:comune>
+            <VULCANICO:provincia>Napoli</VULCANICO:provincia>
+        </VULCANICO:CAMP_Lahars>
+    </gml:featureMember>
+    <gml:featureMember>
+        <VULCANICO:CAMP_Lahars fid="CAMP_Lahars.397">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.24892395,40.84253855
+                    </gml:coordinates>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:sigla>Toledo</VULCANICO:sigla>
+            <VULCANICO:x>436683</VULCANICO:x>
+            <VULCANICO:y>4521549</VULCANICO:y>
+            <VULCANICO:fonte_>Rilievi Mauro Di Vito altri enti</VULCANICO:fonte_>
+            <VULCANICO:comune>Napoli</VULCANICO:comune>
+            <VULCANICO:provincia>Napoli</VULCANICO:provincia>
+        </VULCANICO:CAMP_Lahars>
+    </gml:featureMember>
+    <gml:featureMember>
+        <VULCANICO:CAMP_Lahars fid="CAMP_Lahars.406">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.2504549,40.85405219
+                    </gml:coordinates>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:sigla>Museo</VULCANICO:sigla>
+            <VULCANICO:x>436823</VULCANICO:x>
+            <VULCANICO:y>4522826</VULCANICO:y>
+            <VULCANICO:sumastprim>0.5</VULCANICO:sumastprim>
+            <VULCANICO:allu_astro>0.2</VULCANICO:allu_astro>
+            <VULCANICO:fonte_>Rilievi Mauro Di Vito altri enti</VULCANICO:fonte_>
+            <VULCANICO:comune>Napoli</VULCANICO:comune>
+            <VULCANICO:provincia>Napoli</VULCANICO:provincia>
+        </VULCANICO:CAMP_Lahars>
+    </gml:featureMember>
+    <gml:featureMember>
+        <VULCANICO:CAMP_Lahars fid="CAMP_Lahars.412">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.25416112,40.84729292
+                    </gml:coordinates>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:sigla>S.Chiara</VULCANICO:sigla>
+            <VULCANICO:x>437129</VULCANICO:x>
+            <VULCANICO:y>4522073</VULCANICO:y>
+            <VULCANICO:sumastprim>0.9</VULCANICO:sumastprim>
+            <VULCANICO:fonte_>Rilievi Mauro Di Vito altri enti</VULCANICO:fonte_>
+            <VULCANICO:comune>Napoli</VULCANICO:comune>
+            <VULCANICO:provincia>Napoli</VULCANICO:provincia>
+        </VULCANICO:CAMP_Lahars>
+    </gml:featureMember>
+</wfs:FeatureCollection>

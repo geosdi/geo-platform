@@ -33,46 +33,46 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.wms.stax.multithread;
+package org.geosdi.geoplatform.connector.wms;
 
 import org.junit.BeforeClass;
+import org.junit.experimental.theories.DataPoints;
 
 import java.io.File;
-import java.util.LinkedList;
-import java.util.List;
 
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Stream.of;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPWMSGetFeatureMultiThreadTest {
+public class WMSGetFeatureInfoTheoriesTest {
 
-    protected static List<String> files;
+    protected static String dirFiles;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
-        String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "stax")
+    public static void buildDirFiles() throws Exception {
+        dirFiles = of(new File(".").getCanonicalPath(), "src", "test", "resources", "stax")
                 .collect(joining(separator, "", separator));
-        files = of("geoserver-Vigneti-GetFeatureInfo.xml", "geoserver-GetFeatureInfo.xml",
-                "geoserver-GetFeatureInfo1.xml", "geoserver-GetFeatureInfo-Point.xml",
-                "geoserver-GetFeatureInfo-MultiLineString.xml", "spearfish-GetFeatureInfo.xml",
-                "tasmaniaRoads-GetFeatureInfo.xml", "tasmaniaStates-GetFeatureInfo.xml", "tiger_ny-GetFeatureInfo.xml",
-                "sfdem-GetFeatureInfo.xml", "nurcAPk50095-GetFeatureInfo.xml", "nurcArcSample-GetFeatureInfo.xml",
-                "comuni-GetFeatureInfo.xml", "parchiNaturali-GetFeatureInfo.xml", "retiRiserve-GetFeatureInfo.xml",
-                "linee-GetFeatureInfo.xml", "azioniPunto-GetFeatureInfo.xml", "comuniBasilicata-GetFeatureInfo.xml",
-                "corine-GetFeatureInfo.xml", "airports.xml", "geologia.xml", "livelloEdifici.xml", "volumetria.xml",
-                "livelloEdifici1.xml", "masw.xml", "PianoCampiFlegrei.xml",
-                "CF_zonepianificazione_mappeinterattive.xml", "aziende.xml", "centri_abitati.xml", "EneaClipFilled.xml",
-                "MixedFeatures.xml", "ParchiBasilicata.xml", "rsdi_alt_300_a_400.xml", "ABR_Comuni.xml",
-                "AereeUrbaneValoreStorico.xml", "PNSRS_Valanghe.xml", "AreeAmmassamento.xml", "Ferrovie.xml",
-                "MonumentiBizantini.xml", "ReteGas.xml", "ABR_CaveAttive.xml", "AreeUrbaneValoreStorico.xml",
-                "BaciniIdrogeografici.xml")
-                .map(basePath::concat)
-                .collect(toCollection(LinkedList::new));
+    }
+
+    @DataPoints
+    public static String[] data() {
+        return new String[]{"geoserver-Vigneti-GetFeatureInfo.xml", "geoserver-GetFeatureInfo.xml", "geoserver-GetFeatureInfo1.xml",
+                "geoserver-GetFeatureInfo-Point.xml", "geoserver-GetFeatureInfo-MultiLineString.xml",
+                "spearfish-GetFeatureInfo.xml", "tasmaniaRoads-GetFeatureInfo.xml", "tasmaniaStates-GetFeatureInfo.xml",
+                "tiger_ny-GetFeatureInfo.xml", "sfdem-GetFeatureInfo.xml", "nurcAPk50095-GetFeatureInfo.xml",
+                "nurcArcSample-GetFeatureInfo.xml", "comuni-GetFeatureInfo.xml", "parchiNaturali-GetFeatureInfo.xml",
+                "retiRiserve-GetFeatureInfo.xml", "linee-GetFeatureInfo.xml", "azioniPunto-GetFeatureInfo.xml",
+                "comuniBasilicata-GetFeatureInfo.xml", "corine-GetFeatureInfo.xml", "airports.xml",
+                "geologia.xml", "livelloEdifici.xml", "volumetria.xml", "livelloEdifici1.xml", "masw.xml",
+                "CF_zonepianificazione_mappeinterattive.xml", "PianoCampiFlegrei.xml", "ABR_Comuni.xml",
+                "AereeUrbaneValoreStorico.xml", "PNSRS_Valanghe.xml", "AreeAmmassamento.xml",
+                "Ferrovie.xml", "MonumentiBizantini.xml", "ReteGas.xml", "AziendeSanitarie.xml",
+                "ABR_CaveAttive.xml", "AreeUrbaneValoreStorico.xml", "BaciniIdrogeografici.xml",
+                "geoserver-building_resonance_level.xml", "admin_vigneti_catastali.xml", "VulcanoCampiIstat.xml",
+                 "rsdi_alt_600_a_700.xml", "rsdi_fiumi_basilicata.xml", "rsdi_sentieri_app_lucano.xml"};
     }
 }

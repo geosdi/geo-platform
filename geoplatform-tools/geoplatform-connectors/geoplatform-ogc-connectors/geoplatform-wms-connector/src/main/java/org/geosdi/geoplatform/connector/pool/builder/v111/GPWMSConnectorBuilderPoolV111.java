@@ -60,7 +60,7 @@ public class GPWMSConnectorBuilderPoolV111 extends GPWMSConnectorBuilderPool<GPW
 
     private static final GenericKeyedObjectPool<GPPoolConnectorKey, IGPWMSConnectorStoreV111> wmsConnectorPoolV111;
 
-    protected GPWMSConnectorBuilderPoolV111() {
+    GPWMSConnectorBuilderPoolV111() {
         this.withVersion(V111.getVersion());
     }
 

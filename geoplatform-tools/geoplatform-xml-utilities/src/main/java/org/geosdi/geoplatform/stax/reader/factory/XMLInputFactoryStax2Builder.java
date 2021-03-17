@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.stax.reader.factory;
 
 import com.ctc.wstx.stax.WstxInputFactory;
-import com.fasterxml.aalto.AsyncXMLInputFactory;
 import com.fasterxml.aalto.stax.InputFactoryImpl;
 import org.codehaus.stax2.XMLInputFactory2;
 import org.slf4j.Logger;
@@ -48,6 +47,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static io.reactivex.rxjava3.core.Observable.fromIterable;
 import static java.util.stream.Collectors.toMap;
 import static javax.annotation.meta.When.NEVER;
 
@@ -449,14 +449,16 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
         public <F extends XMLInputFactory> F withProp(@Nonnull(when = NEVER) Map<String, Object> theProp) {
             checkArgument((theProp != null) && !(theProp.isEmpty()), "The Parameter prop must not be null or an empty Map.");
             System.setProperty("javax.xml.stream.XMLInputFactory", "com.fasterxml.aalto.stax.InputFactoryImpl");
-            InputFactoryImpl factory = new InputFactoryImpl();
             Map<String, Object> properties = theProp.entrySet().stream()
                     .filter(Objects::nonNull)
                     .filter(entry -> (entry.getKey() != null) && !(entry.getKey().trim().isEmpty()))
                     .filter(entry -> entry.getValue() != null)
                     .collect(toMap(entry -> entry.getKey(), entry -> entry.getValue()));
             checkArgument((properties != null) && !(properties.isEmpty()), "The Parameter prop must not contains null keys or null values.");
-            properties.entrySet().forEach(entry -> factory.setProperty(entry.getKey(), entry.getValue()));
+            InputFactoryImpl factory = new InputFactoryImpl();
+            fromIterable(properties.entrySet())
+                    .doOnComplete(() -> logger.debug("###########RX terminated its work"))
+                    .subscribe(e -> factory.setProperty(e.getKey(), e.getValue()), e -> e.printStackTrace());
             logger.debug("###########################{}#Creates : {}, with Prop : \n{}\n", this.getClass().getSimpleName(), factory, theProp);
             return (F) factory;
         }

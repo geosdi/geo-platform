@@ -37,13 +37,11 @@ package org.geosdi.geoplatform.connector.server.request;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import java.util.Optional;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 import static java.util.Arrays.stream;
-import static java.util.Optional.empty;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -93,6 +91,6 @@ public enum WMSRequestKey implements GPWMSRequestKey {
         Optional<GPWMSRequestKey> optional = stream(WMSRequestKey.values())
                 .map(v -> (GPWMSRequestKey) v)
                 .filter(k -> ((theKey != null)) ? k.toKey().equalsIgnoreCase(theKey) : FALSE).findFirst();
-        return ((optional != null) && !(optional.equals(empty()))) ? optional.get() : null;
+        return optional.orElse(null);
     }
 }

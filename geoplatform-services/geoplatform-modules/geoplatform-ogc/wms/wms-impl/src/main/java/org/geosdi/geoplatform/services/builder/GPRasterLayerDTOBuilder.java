@@ -210,7 +210,9 @@ public interface GPRasterLayerDTOBuilder extends Serializable {
         private List<String> createStyleList(List<StyleImpl> stylesImpl) {
             return stylesImpl.stream()
                     .filter(Objects::nonNull)
-                    .map(style -> style.getName())
+                    .map(StyleImpl::getName)
+                    .filter(Objects::nonNull)
+                    .filter(n -> !n.trim().isEmpty())
                     .collect(toList());
         }
 

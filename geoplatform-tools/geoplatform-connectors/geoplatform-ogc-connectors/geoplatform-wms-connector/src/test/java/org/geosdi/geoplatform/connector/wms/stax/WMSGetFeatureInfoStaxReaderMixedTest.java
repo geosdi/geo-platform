@@ -101,6 +101,9 @@ public class WMSGetFeatureInfoStaxReaderMixedTest {
         List<Feature> zonaPianificazione = wmsFeatureStore.getFeaturesByKey("CF_zonepianificazione_mappeinterattive");
         assertNotNull(zonaPianificazione);
         assertTrue(zonaPianificazione.size() == 1);
+        List<Feature> alt600A700Features = wmsFeatureStore.getFeaturesByKey("alt_600_a_700");
+        assertNotNull(alt600A700Features);
+        assertTrue(alt600A700Features.size() == 3);
         fromIterable(wmsFeatureStore.getStore().entrySet())
                 .doOnComplete(() -> logger.info("@@@@@@@@@@@@@@@@@@RX Terminated its work."))
                 .subscribe(k -> logger.info("###############{} - size : {}\n", k.getKey(), k.getValue().size()));

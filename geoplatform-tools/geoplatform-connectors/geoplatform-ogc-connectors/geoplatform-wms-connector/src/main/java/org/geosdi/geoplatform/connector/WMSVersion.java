@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector;
 
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.GPServerConnector.GPServerConnectorVersion;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
@@ -49,7 +49,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum WMSVersion implements GPServerConnector.GPServerConnectorVersion {
+public enum WMSVersion implements GPServerConnectorVersion {
 
     V111("1.1.1"),
     V130("1.3.0");
@@ -85,6 +85,6 @@ public enum WMSVersion implements GPServerConnector.GPServerConnectorVersion {
         Optional<WMSVersion> optional = stream(WMSVersion.values())
                 .filter(v -> ((version != null) && !(version.trim().isEmpty())) ?
                         v.getVersion().equalsIgnoreCase(version) : FALSE).findFirst();
-        return ((optional != null) && !(optional.equals(Optional.empty()))) ? optional.get() : null;
+        return optional.orElse(V111);
     }
 }

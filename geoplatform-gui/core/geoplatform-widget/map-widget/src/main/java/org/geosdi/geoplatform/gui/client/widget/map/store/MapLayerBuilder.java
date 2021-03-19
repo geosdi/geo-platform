@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.client.widget.map.store;
 
 import com.extjs.gxt.ui.client.Registry;
-import java.util.logging.Level;
 import org.geosdi.geoplatform.gui.client.widget.viewport.ViewportUtility;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPCoordinateReferenceSystem;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
@@ -54,6 +53,8 @@ import org.gwtopenmaps.openlayers.client.Projection;
 import org.gwtopenmaps.openlayers.client.layer.WMS;
 import org.gwtopenmaps.openlayers.client.layer.WMSOptions;
 import org.gwtopenmaps.openlayers.client.layer.WMSParams;
+
+import java.util.logging.Level;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

@@ -79,7 +79,8 @@ public class WMSGetFeatureInfoWoodstoxReaderMixedTest {
     public void a_wmsGetFeatureInfoWoodstoxReaderTest() throws Exception {
         FeatureCollection featureCollection = wmsGetFeatureInfoWoodstoxReader.read(file);
         logger.info("#######################FEATURE_COLLECTION_test : {}\n", featureCollection);
-        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/FeatureCollectionMIXED.json"), featureCollection);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "FeatureCollectionWoodstoxMIXED")
+                .collect(joining(separator, "", ".json"))), featureCollection);
     }
 
     @Test
@@ -100,8 +101,12 @@ public class WMSGetFeatureInfoWoodstoxReaderMixedTest {
         List<Feature> zonaPianificazione = wmsFeatureStore.getFeaturesByKey("CF_zonepianificazione_mappeinterattive");
         assertNotNull(zonaPianificazione);
         assertTrue(zonaPianificazione.size() == 1);
+        List<Feature> alt600A700Features = wmsFeatureStore.getFeaturesByKey("alt_600_a_700");
+        assertNotNull(alt600A700Features);
+        assertTrue(alt600A700Features.size() == 3);
         fromIterable(wmsFeatureStore.getStore().entrySet())
                 .subscribe(k -> logger.info("###############{} - size : {}\n", k.getKey(), k.getValue().size()));
-        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StoreWoodstoxMIXED_FEATURES.json"), wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxMIXED_FEATURES")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
     }
 }

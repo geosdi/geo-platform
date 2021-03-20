@@ -70,7 +70,7 @@ public class WMSGetFeatureInfoMultiThreadWoodstoxReaderTest extends GPWMSGetFeat
                 .subscribe(Thread::start);
         startSignal.countDown();
         doneSignal.await();
-        assertTrue(counter.get() == 43);
+        assertTrue(counter.get() == 45);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@{} process {} files", this.getClass().getSimpleName(), counter.get());
     }
 

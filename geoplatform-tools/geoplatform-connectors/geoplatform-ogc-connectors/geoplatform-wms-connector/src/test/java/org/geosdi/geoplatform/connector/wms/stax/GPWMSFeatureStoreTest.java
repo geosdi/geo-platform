@@ -490,4 +490,20 @@ public class GPWMSFeatureStoreTest extends WMSGetFeatureInfoStaxReaderTest {
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreRSDI_SENTIERI_APP_LUCANO.json")
                 .collect(joining(separator))), wmsFeatureStore);
     }
+
+    @Test
+    public void c_h_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("dtsew_campania_20150324_20201122.xml"));
+        logger.info("#######################FEATURE_STORE_dtsew_campania_20150324_20201122 : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "Storedtsew_campania_20150324_20201122.json")
+                .collect(joining(separator))), wmsFeatureStore);
+    }
+
+    @Test
+    public void c_i_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("dtsup_campania_20150324_20201122.xml"));
+        logger.info("#######################FEATURE_STORE_dtsup_campania_20150324_20201122 : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "Storedtsup_campania_20150324_20201122.json")
+                .collect(joining(separator))), wmsFeatureStore);
+    }
 }

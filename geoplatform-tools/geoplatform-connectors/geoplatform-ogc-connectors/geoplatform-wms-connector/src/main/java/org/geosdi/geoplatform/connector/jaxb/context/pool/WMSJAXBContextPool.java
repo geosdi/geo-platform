@@ -129,8 +129,8 @@ public class WMSJAXBContextPool extends GeoPlatformJAXBContextPool {
 
     /**
      * @param classToBeBound list of java classes to be recognized by the new {@link JAXBContext}.
-     *                       Can be empty, in which case a {@link JAXBContext} that only knows about
-     *                       spec-defined classes will be returned.
+     * Can be empty, in which case a {@link JAXBContext} that only knows about
+     * spec-defined classes will be returned.
      * @throws JAXBException            if an error was encountered while creating the
      *                                  <tt>JAXBContext</tt>, such as (but not limited to):
      *                                  <ol>

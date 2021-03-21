@@ -111,7 +111,7 @@
 
         <dependency>
             <groupId>org.geotools</groupId>
-            <artifactId>gt-jts-wrapper</artifactId>
+            <artifactId>gt-main</artifactId>
             <scope>test</scope>
         </dependency>
 

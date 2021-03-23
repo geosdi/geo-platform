@@ -33,12 +33,12 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.server.command.auth;
+package org.geosdi.geoplatform.gui.server.command.servermanagement;
 
-import org.geosdi.geoplatform.gui.client.command.user.GetUserAuthoritiesRequest;
-import org.geosdi.geoplatform.gui.client.command.user.GetUserAuthoritiesResponse;
+import org.geosdi.geoplatform.gui.client.command.servermanagement.add.UpdateAddServerRequest;
+import org.geosdi.geoplatform.gui.client.command.servermanagement.add.UpdateAddServerResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
-import org.geosdi.geoplatform.gui.server.IServerService;
+import org.geosdi.geoplatform.gui.server.service.IOGCService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +46,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -55,29 +53,23 @@ import java.util.List;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Lazy
-@Component(value = "command.auth.GetUserAuthoritiesCommand")
-public class GetUserAuthoritiesCommand implements
-        GPCommand<GetUserAuthoritiesRequest, GetUserAuthoritiesResponse> {
+@Component(value = "command.servermanagement.UpdateAddServerCommand")
+public class UpdateAddServerCommand implements
+        GPCommand<UpdateAddServerRequest, UpdateAddServerResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(
-            GetUserAuthoritiesCommand.class);
+            UpdateAddServerCommand.class);
     //
     @Autowired
-    private IServerService serverService;
+    private IOGCService ogcService;
 
     @Override
-    public GetUserAuthoritiesResponse execute(GetUserAuthoritiesRequest request,
+    public UpdateAddServerResponse execute(UpdateAddServerRequest request,
             HttpServletRequest httpServletRequest) {
-
         logger.debug("##################### Executing {} Command", this.
                 getClass().getSimpleName());
-
-        List<String> authorities = this.serverService.getUserAuthorities(
-                httpServletRequest);
-
-        logger.debug("#################### Found {}\n", authorities);
-
-        return new GetUserAuthoritiesResponse(new ArrayList<>(authorities));
+        return new UpdateAddServerResponse( ogcService.saveServer(request.getServerID(), request.getAlias(), request.getUrl(),
+                request.getOrganitation()));
     }
 
 }

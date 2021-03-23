@@ -33,29 +33,44 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.i18n;
+package org.geosdi.geoplatform.gui.client.widget.form;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.i18n.client.Messages;
+import com.extjs.gxt.ui.client.data.ModelData;
+import com.extjs.gxt.ui.client.event.GridEvent;
+import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.widget.grid.CheckColumnConfig;
+import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface ServerModuleMessages extends Messages {
+public class GPCheckSecureColumnConfig extends CheckColumnConfig {
 
-    public final static ServerModuleMessages INSTANCE = GWT.create(ServerModuleMessages.class);
+//    private int selectedItems = 0;
+    ListStore<GPServerBeanModel> store;
 
-    String AddServerWidget_saveServerErrorMessage(String errorCaught);
+    public GPCheckSecureColumnConfig(String id, String name, int width,
+            ListStore<GPServerBeanModel> store) {
+        super(id, name, width);
+        this.store = store;
+    }
 
-    String ManageServerWidget_deleteServerErrorMessage(String errorCaught);
+    @Override
+    public String getCheckState(ModelData model, String property, int rowIndex, int colIndex) {
+        return super.getCheckState(model, property, rowIndex, colIndex);
+    }
 
-    String DisplayServerWidget_serverErrorMessage(String errorCaught);
+    @Override
+    protected void onMouseDown(GridEvent<ModelData> ge) {
+        super.onMouseDown(ge);
+    }
 
-    String AddServerWidget_serverAlreadyPresentMessage(String serverURL, String serverName);
-
-    String ManageServerWidget_errorDeletingBodyMessage(String caughtError, String serverURL);
-
-    String ManageServerWidget_errorPasswordOrUsernameInserting();
-
+//    public int getSelectedItems() {
+//        return this.selectedItems;
+//    }
+//
+//    public void setSelectedItems(int selectedItems) {
+//        this.selectedItems = selectedItems;
+//    }
 }

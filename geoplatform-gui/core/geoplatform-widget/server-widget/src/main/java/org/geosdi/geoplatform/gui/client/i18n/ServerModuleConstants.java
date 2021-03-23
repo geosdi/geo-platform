@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.client.i18n;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.Constants;
-import com.google.gwt.i18n.client.Constants.DefaultStringValue;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -69,8 +68,18 @@ public interface ServerModuleConstants extends Constants {
     @DefaultStringValue("Server Alias")
     String serverAliasText();
 
+    @DefaultStringValue("Username")
+    String usernameText();
+
+    @DefaultStringValue("Password")
+    String passwordText();
+
     @DefaultStringValue("URL Server")
     String serverURLText();
+
+    @DefaultStringValue("Secure")
+    String secureText();
+
 
     @DefaultStringValue("Google sign on required")
     String googleSignOnRequiredTitleText();

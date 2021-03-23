@@ -56,8 +56,7 @@ public final class GPRestProviderFactory {
 
     static final GPRestProviderType DEFAULT_TYPE = GPRestProviderType.JACKSON;
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            GPRestProviderFactory.class);
+    private static final Logger logger = LoggerFactory.getLogger(GPRestProviderFactory.class);
 
     private GPRestProviderFactory() {
     }
@@ -65,14 +64,10 @@ public final class GPRestProviderFactory {
     public static Object createProvider(GPRestProviderType type) {
         switch ((type != null) ? type : DEFAULT_TYPE) {
             case JACKSON:
-                logger.debug("\n\n############################### RestProviderFactory "
-                                + "is building an instance of {}\n\n",
-                        CXFJacksonProvider.class);
+                logger.debug("############################### RestProviderFactory is building an instance of {}\n\n", CXFJacksonProvider.class);
                 return new CXFJacksonProvider();
-
             case JACKSON_WITHOUT_ROOT:
-                logger.debug("\n\n############################### RestProviderFactory "
-                        + "is building an instance of {}\n\n", CXFJacksonProvider.class);
+                logger.debug("\n\n############################### RestProviderFactory is building an instance of {}\n\n", CXFJacksonProvider.class);
                 return new CXFJacksonProvider(new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
                         FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
                         ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
@@ -80,20 +75,15 @@ public final class GPRestProviderFactory {
                         INDENT_OUTPUT_ENABLE)
                         .configure(GPJsonIncludeFeature.NON_NULL)
                         .setLocale(Locale.getDefault()));
-
             case JACKSON_JODA_TIME:
-                logger.debug("\n\n############################### RestProviderFactory "
-                                + "is building an instance of {} with JODA_TIME SUPPORT\n\n",
+                logger.debug("############################### RestProviderFactory is building an instance of {} with JODA_TIME SUPPORT\n\n",
                         CXFJacksonProvider.class);
                 return new CXFJacksonProvider(new GPJacksonSupport().registerModule(new JodaModule())
                         .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)
                         .configure(GPJsonIncludeFeature.NON_NULL)
                         .setLocale(Locale.getDefault()));
-
             case JACKSON_JODA_TIME_WITHOUT_ROOT:
-                logger.debug("\n\n############################### RestProviderFactory "
-                                + "is building an instance of {} with JODA_TIME_WITHOUT_ROOT SUPPORT\n\n",
-                        CXFJacksonProvider.class);
+                logger.debug("############################### RestProviderFactory is building an instance of {} with JODA_TIME_WITHOUT_ROOT SUPPORT\n\n", CXFJacksonProvider.class);
                 return new CXFJacksonProvider(new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
                         FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
                         ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
@@ -103,19 +93,12 @@ public final class GPRestProviderFactory {
                         .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)
                         .configure(GPJsonIncludeFeature.NON_NULL)
                         .setLocale(Locale.getDefault()));
-
             case JETTYSON:
-                logger.debug("\n\n############################### "
-                                + "RestProviderFactory is building an instance of {}\n\n",
-                        GPJSONProvider.class);
+                logger.debug("###############################RestProviderFactory is building an instance of {}\n\n", GPJSONProvider.class);
                 return new GPJSONProvider<>();
-
             default:
-                logger.debug("\n\n############################### "
-                                + "RestProviderFactory DEFAULT Provider instance of {}\n\n",
-                        GPJSONProvider.class);
+                logger.debug("###############################RestProviderFactory DEFAULT Provider instance of {}\n\n", GPJSONProvider.class);
                 return new GPJSONProvider<>();
         }
     }
-
 }

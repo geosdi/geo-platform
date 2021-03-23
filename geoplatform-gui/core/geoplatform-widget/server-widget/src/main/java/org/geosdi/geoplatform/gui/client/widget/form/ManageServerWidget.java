@@ -36,9 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.form;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.event.*;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.store.Store;
@@ -46,31 +44,22 @@ import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.StoreFilterField;
-import com.extjs.gxt.ui.client.widget.grid.CellEditor;
-import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
-import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
+import com.extjs.gxt.ui.client.widget.grid.*;
 import com.extjs.gxt.ui.client.widget.grid.EditorGrid.ClicksToEdit;
-import com.extjs.gxt.ui.client.widget.grid.Grid;
-import com.extjs.gxt.ui.client.widget.grid.RowEditor;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.common.collect.Lists;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.RpcTokenException;
-import com.google.gwt.user.client.rpc.XsrfToken;
-import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
+import com.google.gwt.user.client.rpc.*;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Widget;
-import java.util.List;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
 import org.geosdi.geoplatform.gui.client.i18n.ServerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.ServerModuleMessages;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.widget.DisplayServerWidget;
-import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -83,6 +72,9 @@ import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
 import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemoteAsync;
 import org.geosdi.geoplatform.gui.utility.oauth2.EnumOAuth2;
 
+import java.util.List;
+import java.util.logging.Logger;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
@@ -91,6 +83,7 @@ public class ManageServerWidget extends Window {
 
     private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
     private static final GeoPlatformOGCRemoteAsync geoPlatformOGCRemote = GeoPlatformOGCRemote.Util.getInstance();
+    protected static final Logger logger = Logger.getLogger("ManageServerWidget");
     //
     private boolean initialized;
     private final PerformOperation operation = new PerformOperation();
@@ -99,6 +92,7 @@ public class ManageServerWidget extends Window {
             ServerModuleConstants.INSTANCE.ManageServerWidget_deleteButtonText());
     private final DisplayServerWidget displayServerWidget;
     private GPCheckColumnConfig checkColumn;
+    private CheckColumnConfig checkBoxSecure;
     private StoreFilterField<GPServerBeanModel> serverFilter;
 
     public ManageServerWidget(DisplayServerWidget displayServerWidget,
@@ -163,13 +157,74 @@ public class ManageServerWidget extends Window {
         urlColumn.setEditor(new CellEditor(urlTextfield));
         configs.add(urlColumn);
 
+        //SECURE
+        final GPSecureStringTextField passwordTextfield = new GPSecureStringTextField();
+        final GPSecureStringTextField usernameTextfield = new GPSecureStringTextField();
+
+        usernameTextfield.setAllowBlank(true);
+        usernameTextfield.setAutoValidate(true);
+        usernameTextfield.disable();
+        passwordTextfield.setAutoValidate(true);
+        passwordTextfield.setAllowBlank(true);
+        passwordTextfield.disable();
+
+        this.checkBoxSecure = new GPCheckSecureColumnConfig("secure", ServerModuleConstants.INSTANCE.
+                secureText(), 55, this.store);
+
+        ColumnConfig usernameColumn = new ColumnConfig();
+        usernameColumn.setId("username");
+        usernameColumn.setHeaderHtml(ServerModuleConstants.INSTANCE.
+                usernameText());
+        usernameColumn.setWidth(100);
+        usernameColumn.setEditor(new CellEditor(usernameTextfield));
+        configs.add(usernameColumn);
+
+
+        ColumnConfig passowrdColumn = new ColumnConfig();
+        passowrdColumn.setId("password");
+        passowrdColumn.setHeaderHtml(ServerModuleConstants.INSTANCE.
+                passwordText());
+        passowrdColumn.setWidth(100);
+
+        passowrdColumn.setEditor(new CellEditor(passwordTextfield));
+        configs.add(passowrdColumn);
+
         checkColumn = new GPCheckColumnConfig("delete",
                 ButtonsConstants.INSTANCE.deleteText(), 55, store,
                 this.deleteServerButton);
         CellEditor checkBoxEditor = new CellEditor(new CheckBox());
         checkColumn.setEditor(checkBoxEditor);
+
+        CheckBox checkBoxSecure = new CheckBox();
+        checkBoxSecure.addListener(Events.Change, new Listener<FieldEvent>() {
+            @Override
+            public void handleEvent(FieldEvent be) {
+                Boolean checked = (Boolean) be.getValue();
+                if(checked) {
+                    usernameTextfield.enable();
+                    usernameTextfield.setAllowBlank(false);
+                    passwordTextfield.enable();
+                    passwordTextfield.setAllowBlank(false);
+                }else {
+                    usernameTextfield.setValue(null);
+                    usernameTextfield.disable();
+                    usernameTextfield.setAllowBlank(true);
+                    passwordTextfield.setValue(null);
+                    passwordTextfield.disable();
+                    passwordTextfield.setAllowBlank(true);
+                    usernameTextfield.clearInvalid();
+                    passwordTextfield.clearInvalid();
+                }
+
+            }
+        });
+        CellEditor cellEditorSecure = new CellEditor(checkBoxSecure);
+
+        this.checkBoxSecure.setEditor(cellEditorSecure);
+
         //This is very important: add checkColumn to the zero position!
         configs.add(0, checkColumn);
+        configs.add( 3, this.checkBoxSecure);
         final ColumnModel columnModel = new ColumnModel(configs);
         final Grid<GPServerBeanModel> grid = new Grid<GPServerBeanModel>(store,
                 columnModel);
@@ -197,6 +252,8 @@ public class ManageServerWidget extends Window {
         grid.setAutoExpandColumn("urlServer");
         grid.setBorders(true);
         grid.addPlugin(checkColumn);
+        grid.addPlugin(this.checkBoxSecure);
+
         grid.addPlugin(rowEditor);
         grid.getAriaSupport().setLabelledBy(super.getHeader().getId() + "-label");
         grid.setHeight(200);
@@ -215,6 +272,7 @@ public class ManageServerWidget extends Window {
 
                     @Override
                     public void componentSelected(ButtonEvent ce) {
+
                         GPServerBeanModel server = new GPServerBeanModel();
 //                server.setUrlServer("http://");
                         rowEditor.stopEditing(false);

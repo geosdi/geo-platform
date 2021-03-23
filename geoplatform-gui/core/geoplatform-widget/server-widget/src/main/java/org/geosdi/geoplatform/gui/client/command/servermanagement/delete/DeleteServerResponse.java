@@ -33,51 +33,37 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.server.command.auth;
+package org.geosdi.geoplatform.gui.client.command.servermanagement.delete;
 
-import org.geosdi.geoplatform.gui.client.command.user.GetUserAuthoritiesRequest;
-import org.geosdi.geoplatform.gui.client.command.user.GetUserAuthoritiesResponse;
-import org.geosdi.geoplatform.gui.command.server.GPCommand;
-import org.geosdi.geoplatform.gui.server.IServerService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
+import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Lazy
-@Component(value = "command.auth.GetUserAuthoritiesCommand")
-public class GetUserAuthoritiesCommand implements
-        GPCommand<GetUserAuthoritiesRequest, GetUserAuthoritiesResponse> {
+public class DeleteServerResponse implements
+        GPCommandResponse<Boolean> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            GetUserAuthoritiesCommand.class);
+    private static final long serialVersionUID = -4934915077693937878L;
     //
-    @Autowired
-    private IServerService serverService;
+    private Boolean status;
+
+    public DeleteServerResponse() {
+    }
+
+    public DeleteServerResponse(Boolean status) {
+        this.status = status;
+    }
 
     @Override
-    public GetUserAuthoritiesResponse execute(GetUserAuthoritiesRequest request,
-            HttpServletRequest httpServletRequest) {
+    public Boolean getResult() {
+        return this.status;
+    }
 
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
-        List<String> authorities = this.serverService.getUserAuthorities(
-                httpServletRequest);
-
-        logger.debug("#################### Found {}\n", authorities);
-
-        return new GetUserAuthoritiesResponse(new ArrayList<>(authorities));
+    @Override
+    public String toString() {
+        return getClass().getName() + " {" + "result = " + status + '}';
     }
 
 }

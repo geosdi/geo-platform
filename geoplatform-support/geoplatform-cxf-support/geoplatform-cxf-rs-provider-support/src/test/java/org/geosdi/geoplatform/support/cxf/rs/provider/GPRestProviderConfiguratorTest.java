@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.support.cxf.rs.provider;
 
 import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
-import org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -44,6 +43,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import static org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory.createProvider;
 
 /**
  *
@@ -54,18 +55,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml"})
 public class GPRestProviderConfiguratorTest {
 
-    static final Logger logger = LoggerFactory.getLogger(
-            GPRestProviderConfiguratorTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(GPRestProviderConfiguratorTest.class);
 
     @Value("configurator{cxf_rest_provider_type}")
     private GPRestProviderType providerType;
 
     @Test
     public void restProviderConfigurationTest() {
-        logger.info(
-                "\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ PROVIDER CONFIGURATION : "
-                + "{} @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n",
-                GPRestProviderFactory.createProvider(providerType));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ PROVIDER CONFIGURATION : {} @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n", createProvider(providerType));
     }
-
 }

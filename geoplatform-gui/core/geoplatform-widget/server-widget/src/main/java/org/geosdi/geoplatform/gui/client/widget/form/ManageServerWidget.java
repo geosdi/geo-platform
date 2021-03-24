@@ -49,7 +49,6 @@ import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.common.collect.Lists;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Widget;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
@@ -73,13 +72,9 @@ import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.puregwt.oauth2.IGPOAuth2AddServerHandler;
 import org.geosdi.geoplatform.gui.puregwt.oauth2.OAuth2HandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.oauth2.event.GPOAuth2GEBLoginEvent;
-import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
-import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
-import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemoteAsync;
 import org.geosdi.geoplatform.gui.utility.oauth2.EnumOAuth2;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -87,9 +82,10 @@ import java.util.logging.Logger;
  */
 public class ManageServerWidget extends Window {
 
-    protected static final Logger logger = Logger.getLogger("ManageServerWidget");
-    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
-    private static final GeoPlatformOGCRemoteAsync geoPlatformOGCRemote = GeoPlatformOGCRemote.Util.getInstance();
+    private final DeleteServerRequest requestDelete = GWT.create(
+            DeleteServerRequest.class);
+   private final UpdateAddServerRequest requestAdd = GWT.create(
+            UpdateAddServerRequest.class);
     private final PerformOperation operation = new PerformOperation();
     private final Button deleteServerButton = new Button(
             ServerModuleConstants.INSTANCE.ManageServerWidget_deleteButtonText());
@@ -140,7 +136,7 @@ public class ManageServerWidget extends Window {
         aliasColumn.setId("alias");
         aliasColumn.setHeaderHtml(ServerModuleConstants.INSTANCE.
                 serverAliasText());
-        aliasColumn.setWidth(220);
+        aliasColumn.setWidth(100);
 
         GPSecureStringTextField aliasTextfield = new GPSecureStringTextField();
         aliasTextfield.setAllowBlank(false);
@@ -151,7 +147,7 @@ public class ManageServerWidget extends Window {
         urlColumn.setId("urlServer");
         urlColumn.setHeaderHtml(ServerModuleConstants.INSTANCE.
                 serverURLText());
-        urlColumn.setWidth(400);
+        urlColumn.setWidth(300);
 
         GPSecureStringTextField urlTextfield = new GPSecureStringTextField();
         urlTextfield.setAllowBlank(false);
@@ -177,7 +173,7 @@ public class ManageServerWidget extends Window {
         usernameColumn.setId("username");
         usernameColumn.setHeaderHtml(ServerModuleConstants.INSTANCE.
                 usernameText());
-        usernameColumn.setWidth(50);
+        usernameColumn.setWidth(100);
         usernameColumn.setEditor(new CellEditor(usernameTextfield));
         configs.add(usernameColumn);
 
@@ -186,7 +182,7 @@ public class ManageServerWidget extends Window {
         passowrdColumn.setId("password");
         passowrdColumn.setHeaderHtml(ServerModuleConstants.INSTANCE.
                 passwordText());
-        passowrdColumn.setWidth(50);
+        passowrdColumn.setWidth(100);
 
         passowrdColumn.setEditor(new CellEditor(passwordTextfield));
         configs.add(passowrdColumn);
@@ -348,7 +344,7 @@ public class ManageServerWidget extends Window {
         super.setModal(true);
         super.setHeadingHtml(ServerModuleConstants.INSTANCE.ManageServerWidget_headingText());
         super.setBorders(false);
-        super.setSize(600, 325);
+        super.setSize(650, 325);
     }
 
     @Override
@@ -392,10 +388,9 @@ public class ManageServerWidget extends Window {
                     private static final long serialVersionUID = -2316524074209342256L;
 
                     {
-                        final DeleteServerRequest request = GWT.create(
-                                DeleteServerRequest.class);
-                        request.setServerID(server.getId());
-                        super.setCommandRequest(request);
+
+                        requestDelete.setServerID(server.getId());
+                        super.setCommandRequest(requestDelete);
                     }
 
                     @Override
@@ -433,13 +428,12 @@ public class ManageServerWidget extends Window {
                 private static final long serialVersionUID = -2316524074209342256L;
 
                 {
-                    final UpdateAddServerRequest request = GWT.create(
-                            UpdateAddServerRequest.class);
-                    request.setServerID(server.getId());
-                    request.setAlias(record.get("alias").toString());
-                    request.setUrl(record.get("urlServer").toString().trim());
-                    request.setOrganitation( GPAccountLogged.getInstance().getOrganization());
-                    super.setCommandRequest(request);
+
+                    requestAdd.setServerID(server.getId());
+                    requestAdd.setAlias(record.get("alias").toString());
+                    requestAdd.setUrl(record.get("urlServer").toString().trim());
+                    requestAdd.setOrganitation( GPAccountLogged.getInstance().getOrganization());
+                    super.setCommandRequest(requestAdd);
                 }
 
                 @Override

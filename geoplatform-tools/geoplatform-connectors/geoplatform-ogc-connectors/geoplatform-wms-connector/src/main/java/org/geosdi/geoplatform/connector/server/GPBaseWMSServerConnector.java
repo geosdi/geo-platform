@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server;
 
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.geosdi.geoplatform.connector.WMSVersion;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.request.GPWMSGetCapabilitiesRequest;
@@ -102,6 +103,20 @@ public abstract class GPBaseWMSServerConnector<WMSGetCapabilities extends GPWMSG
     protected GPBaseWMSServerConnector(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
             @Nullable GPSecurityConnector securityConnector, @Nonnull(when = NEVER) WMSVersion theVersion) {
         super(server, securityConnector, pooledConnectorConfig);
+        checkArgument(theVersion != null, "The Parameter version must not be null.");
+        this.version = theVersion;
+    }
+
+    /**
+     * @param server
+     * @param pooledConnectorConfig
+     * @param securityConnector
+     * @param theVersion
+     */
+    protected GPBaseWMSServerConnector(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
+            @Nullable GPSecurityConnector securityConnector, @Nullable SSLConnectionSocketFactory theSSLConnectionSocketFactory,
+            @Nonnull(when = NEVER) WMSVersion theVersion) {
+        super(server, securityConnector, pooledConnectorConfig, theSSLConnectionSocketFactory);
         checkArgument(theVersion != null, "The Parameter version must not be null.");
         this.version = theVersion;
     }

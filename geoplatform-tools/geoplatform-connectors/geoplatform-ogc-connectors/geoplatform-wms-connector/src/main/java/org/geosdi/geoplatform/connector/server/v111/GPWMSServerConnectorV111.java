@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.v111;
 
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.geosdi.geoplatform.connector.server.GPBaseWMSServerConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -60,6 +61,16 @@ public class GPWMSServerConnectorV111 extends GPBaseWMSServerConnector<WMSGetCap
     protected GPWMSServerConnectorV111(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
             @Nullable GPSecurityConnector securityConnector) {
         super(server, pooledConnectorConfig, securityConnector, V111);
+    }
+
+    /**
+     * @param server
+     * @param pooledConnectorConfig
+     * @param securityConnector
+     */
+    protected GPWMSServerConnectorV111(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
+            @Nullable GPSecurityConnector securityConnector, @Nullable SSLConnectionSocketFactory theSslConnectionSocketFactory) {
+        super(server, pooledConnectorConfig, securityConnector, theSslConnectionSocketFactory, V111);
     }
 
     /**

@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,48 +32,41 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.api;
+package org.geosdi.geoplatform.connector.api.pool;
 
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
-import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfiguration;
+import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
+import org.geosdi.geoplatform.connector.api.GeoPlatformConnector;
 
-import java.net.URL;
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPConnectorBuilder<B extends AbstractConnectorBuilder> {
+public abstract class AbstractConnectorBuilderPool<B extends AbstractConnectorBuilderPool, C extends GeoPlatformConnector> extends AbstractConnectorBuilder<B, C> {
+
+    protected AbstractConnectorBuilderPool() {
+    }
 
     /**
-     * @param theServerUrl
-     * @return {@link B}
+     * @return {@link C}
+     * @throws Exception
      */
-    B withServerUrl(URL theServerUrl);
+    @Override
+    public C build() throws Exception {
+        checkNotNull(serverUrl, "WMS Server URL must not be null.");
+        checkArgument((this.version != null) && !(this.version.trim().isEmpty()), "The Parameter wmsVersion must not be null or an empty string.");
+        return this.internalBuild(new GPPoolConnectorKey(this.serverUrl, this.pooledConnectorConfig, this.securityConnector, this.proxyConfiguration, this.sslConnectionSocketFactory, this.version));
+    }
 
     /**
-     * @param thePooledConnectorConfig
-     * @return {@link B}
+     * @param key
+     * @return {@link C}
+     * @throws Exception
      */
-    B withPooledConnectorConfig(GPPooledConnectorConfig thePooledConnectorConfig);
-
-    /**
-     * @param theSecurityConnector
-     * @return {@link B}
-     */
-    B withClientSecurity(GPSecurityConnector theSecurityConnector);
-
-    /**
-     * @param theProxyConfiguration
-     * @return {@link B}
-     */
-    B withProxyConfiguration(HttpClientProxyConfiguration theProxyConfiguration);
-
-    /**
-     * @param theSslConnectionSocketFactory
-     * @return {@link B}
-     */
-    B withSslConnectionSocketFactory(SSLConnectionSocketFactory theSslConnectionSocketFactory);
+    protected abstract C internalBuild(@Nonnull(when = NEVER) GPPoolConnectorKey key) throws Exception;
 }

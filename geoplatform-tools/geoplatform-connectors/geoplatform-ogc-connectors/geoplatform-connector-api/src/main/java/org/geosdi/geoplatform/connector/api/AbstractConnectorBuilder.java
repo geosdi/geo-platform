@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.api;
 
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfiguration;
@@ -51,6 +52,7 @@ public abstract class AbstractConnectorBuilder<B extends AbstractConnectorBuilde
     protected GPPooledConnectorConfig pooledConnectorConfig;
     protected GPSecurityConnector securityConnector;
     protected HttpClientProxyConfiguration proxyConfiguration;
+    protected SSLConnectionSocketFactory sslConnectionSocketFactory;
     protected String version;
 
     protected AbstractConnectorBuilder() {
@@ -93,6 +95,16 @@ public abstract class AbstractConnectorBuilder<B extends AbstractConnectorBuilde
     @Override
     public B withProxyConfiguration(HttpClientProxyConfiguration theProxyConfiguration) {
         this.proxyConfiguration = theProxyConfiguration;
+        return self();
+    }
+
+    /**
+     * @param theSslConnectionSocketFactory
+     * @return {@link B}
+     */
+    @Override
+    public B withSslConnectionSocketFactory(SSLConnectionSocketFactory theSslConnectionSocketFactory) {
+        this.sslConnectionSocketFactory = theSslConnectionSocketFactory;
         return self();
     }
 

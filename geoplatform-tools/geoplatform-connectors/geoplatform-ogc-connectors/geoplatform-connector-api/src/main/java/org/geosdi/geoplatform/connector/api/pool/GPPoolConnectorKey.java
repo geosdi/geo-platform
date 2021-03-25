@@ -39,6 +39,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfiguration;
@@ -66,6 +67,7 @@ public class GPPoolConnectorKey implements IGPPoolConnectorKey {
     private final GPPooledConnectorConfig pooledConnectorConfig;
     private final GPSecurityConnector securityConnector;
     private final HttpClientProxyConfiguration proxyConfiguration;
+    private final SSLConnectionSocketFactory sslConnectionSocketFactory;
     private final String version;
 
     /**
@@ -76,7 +78,19 @@ public class GPPoolConnectorKey implements IGPPoolConnectorKey {
      */
     public GPPoolConnectorKey(@Nonnull(when = NEVER) URL theServerUrl, @Nullable GPPooledConnectorConfig thePooledConnectorConfig,
             @Nullable GPSecurityConnector theSecurityConnector, String theVersion) {
-        this(theServerUrl, thePooledConnectorConfig, theSecurityConnector, null, theVersion);
+        this(theServerUrl, thePooledConnectorConfig, theSecurityConnector, null, null, theVersion);
+    }
+
+    /**
+     * @param theServerUrl
+     * @param thePooledConnectorConfig
+     * @param theSecurityConnector
+     * @param theProxyConfiguration
+     * @param theVersion
+     */
+    public GPPoolConnectorKey(@Nonnull(when = NEVER) URL theServerUrl, @Nullable GPPooledConnectorConfig thePooledConnectorConfig,
+            @Nullable GPSecurityConnector theSecurityConnector, @Nullable HttpClientProxyConfiguration theProxyConfiguration, String theVersion) {
+        this(theServerUrl, thePooledConnectorConfig, theSecurityConnector, theProxyConfiguration, null, theVersion);
     }
 
     /**
@@ -88,12 +102,13 @@ public class GPPoolConnectorKey implements IGPPoolConnectorKey {
      */
     public GPPoolConnectorKey(@Nonnull(when = NEVER) URL theServerUrl, @Nullable GPPooledConnectorConfig thePooledConnectorConfig,
             @Nullable GPSecurityConnector theSecurityConnector, @Nullable HttpClientProxyConfiguration theProxyConfiguration,
-            String theVersion) {
+            @Nullable SSLConnectionSocketFactory theSslConnectionSocketFactory, String theVersion) {
         checkArgument(theServerUrl != null, "The Parameter serverURL must not be null.");
         this.serverUrl = theServerUrl;
         this.pooledConnectorConfig = thePooledConnectorConfig;
         this.securityConnector = theSecurityConnector;
         this.proxyConfiguration = theProxyConfiguration;
+        this.sslConnectionSocketFactory = theSslConnectionSocketFactory;
         this.version = theVersion;
     }
 

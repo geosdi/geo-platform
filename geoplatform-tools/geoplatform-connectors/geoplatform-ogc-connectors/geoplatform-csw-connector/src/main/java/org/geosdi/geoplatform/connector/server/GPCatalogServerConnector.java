@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server;
 
-import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.geosdi.geoplatform.connector.CatalogVersionException;
 import org.geosdi.geoplatform.connector.GPCatalogVersion;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
@@ -54,8 +54,7 @@ import java.net.URL;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPCatalogServerConnector extends GPAbstractServerConnector
-        implements GPCatalogConnector {
+public class GPCatalogServerConnector extends GPAbstractServerConnector implements GPCatalogConnector {
 
     private final GPCatalogVersion version;
 

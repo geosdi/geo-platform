@@ -39,10 +39,11 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.google.gwt.user.server.rpc.XsrfProtect;
-import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
+
+import java.util.ArrayList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -126,6 +127,6 @@ public interface GeoPlatformOGCRemote extends RemoteService {
      * @throws GeoPlatformException
      */
     public GPServerBeanModel saveServer(Long id, String aliasServerName,
-            String urlServer, String organization)
+            String urlServer, String organization, String username, String password, boolean proxy)
             throws GeoPlatformException;
 }

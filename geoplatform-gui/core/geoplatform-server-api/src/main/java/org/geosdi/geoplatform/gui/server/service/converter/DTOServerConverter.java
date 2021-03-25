@@ -74,7 +74,6 @@ public class DTOServerConverter {
     public ArrayList<GPServerBeanModel> convertServer(
             Collection<ServerDTO> serversWS) {
         ArrayList<GPServerBeanModel> serversDTO = new ArrayList<GPServerBeanModel>();
-
         if (serversWS != null) {
             for (ServerDTO serverDTO : serversWS) {
                 GPServerBeanModel server = new GPServerBeanModel();
@@ -83,6 +82,10 @@ public class DTOServerConverter {
                 server.setUrlServer(serverDTO.getServerUrl());
                 server.setName(serverDTO.getName());
                 server.setOrganization(serverDTO.getOrganization());
+                server.setServerProtected(serverDTO.isServerProtected());
+                server.setUsername(serverDTO.getUsername());
+                server.setPassword(serverDTO.getPassword());
+                server.setProxy(serverDTO.isProxy());
                 serversDTO.add(server);
             }
         }

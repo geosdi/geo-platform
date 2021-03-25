@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.core.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.OnDelete;
@@ -49,6 +51,8 @@ import java.io.Serializable;
  *
  */
 //@XmlRootElement(name = "Server")
+@Getter
+@Setter
 @Entity
 @Table(name = "gp_server", indexes = {
         @Index(columnList = "server_url", name = "SERVER_URL_INDEX"),
@@ -88,6 +92,10 @@ public class GeoPlatformServer implements Serializable {
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPOrganization organization;
+    @Embedded
+    private GPAuthServer authServer;
+    @Column
+    private boolean proxy;
 
     public GeoPlatformServer() {
     }
@@ -105,122 +113,14 @@ public class GeoPlatformServer implements Serializable {
     }
 
     /**
-     * @return the id
+     *
+     * @return
      */
-    public Long getId() {
-        return id;
+    public boolean isProtected() {
+        return this.authServer != null && (this.authServer.getPassword() != null && !this.authServer.getPassword().isEmpty())
+                && (this.authServer.getUsername() != null && !this.authServer.getUsername().isEmpty());
     }
 
-    /**
-     * @param id
-     *            the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the serverUrl
-     */
-    public String getServerUrl() {
-        return serverUrl;
-    }
-
-    /**
-     * @param serverUrl
-     *            the serverUrl to set
-     */
-    public void setServerUrl(String serverUrl) {
-        this.serverUrl = serverUrl;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name
-     *            the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @return the title
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * @param title
-     *            the title to set
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    /**
-     * @return the abstractServer
-     */
-    public String getAbstractServer() {
-        return abstractServer;
-    }
-
-    /**
-     * @param abstractServer
-     *            the abstractServer to set
-     */
-    public void setAbstractServer(String abstractServer) {
-        this.abstractServer = abstractServer;
-    }
-
-    /**
-     * @return the organization
-     */
-    public GPOrganization getOrganization() {
-        return organization;
-    }
-
-    /**
-     * @param organization the organization to set
-     */
-    public void setOrganization(GPOrganization organization) {
-        this.organization = organization;
-    }
-
-    /**
-     * @return the serverType
-     */
-    public GPCapabilityType getServerType() {
-        return serverType;
-    }
-
-    /**
-     * @param serverType
-     *            the serverType to set
-     */
-    public void setServerType(GPCapabilityType serverType) {
-        this.serverType = serverType;
-    }
-
-    /**
-     * @return the aliasName
-     */
-    public String getAliasName() {
-        return aliasName;
-    }
-
-    /**
-     * @param aliasName the aliasName to set
-     */
-    public void setAliasName(String aliasName) {
-        this.aliasName = aliasName;
-    }
 
     /**
      * (non-Javadoc)
@@ -238,6 +138,8 @@ public class GeoPlatformServer implements Serializable {
         str.append(", title=").append(title);
         str.append(", abstractServer=").append(abstractServer);
         str.append(", organization=").append(organization);
+        str.append(", authServer=").append(authServer);
+        str.append(", proxy=").append(proxy);
         return str.append("}").toString();
     }
 }

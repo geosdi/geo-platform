@@ -51,10 +51,18 @@ public class DeleteServerRequest implements GPCommandRequest {
     public DeleteServerRequest() {
     }
 
+    /**
+     *
+     * @return {@link long}
+     */
     public long getServerID() {
         return serverID;
     }
 
+    /**
+     *
+     * @param serverID
+     */
     public void setServerID(long serverID) {
         this.serverID = serverID;
     }

@@ -101,6 +101,8 @@ public class GPServerDelegate implements ServerDelegate {
         orig.setAbstractServer(server.getAbstractServer());
         orig.setOrganization(server.getOrganization());
         orig.setServerType(server.getServerType());
+        orig.setAuthServer(server.getAuthServer());
+        orig.setProxy(server.isProxy());
         serverDao.update(orig);
         return orig.getId();
     }
@@ -196,6 +198,8 @@ public class GPServerDelegate implements ServerDelegate {
         server.setAliasName(aliasServerName);
         server.setServerUrl(serverUrl);
         server.setOrganization(org);
+        server.setAuthServer(server.getAuthServer());
+        server.setProxy(server.isProxy());
         serverDao.persist(server);
         return new ServerDTO(server);
     }
@@ -207,10 +211,8 @@ public class GPServerDelegate implements ServerDelegate {
         return serverDao.findByServerUrl(serverUrl) != null;
     }
 
-    private List<ServerDTO> convertToServerList(
-            List<GeoPlatformServer> serverList) {
-        List<ServerDTO> shortServers = new ArrayList<ServerDTO>(
-                serverList.size());
+    private List<ServerDTO> convertToServerList(List<GeoPlatformServer> serverList) {
+        List<ServerDTO> shortServers = new ArrayList<ServerDTO>(serverList.size());
         ServerDTO serverDTOIth = null;
         for (GeoPlatformServer server : serverList) {
             serverDTOIth = new ServerDTO(server);

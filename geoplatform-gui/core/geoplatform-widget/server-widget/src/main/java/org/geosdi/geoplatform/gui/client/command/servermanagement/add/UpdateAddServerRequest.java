@@ -50,37 +50,120 @@ public class UpdateAddServerRequest implements GPCommandRequest {
     private  String alias;
     private  String url;
     private  String organitation;
+    private  String username;
+    private  String password;
+    private  boolean proxy;
 
     public UpdateAddServerRequest() { }
 
+    /**
+     *
+     * @return {@link Long}
+     */
     public Long getServerID() {
         return serverID;
     }
 
+    /**
+     *
+     * @param serverID
+     */
     public void setServerID(Long serverID) {
         this.serverID = serverID;
     }
 
+    /**
+     *
+     * @return {@link String}
+     */
     public String getAlias() {
         return alias;
     }
 
+    /**
+     *
+     * @param alias
+     */
     public void setAlias(String alias) {
         this.alias = alias;
     }
 
+    /**
+     *
+     * @return {@link String}
+     */
     public String getUrl() {
         return url;
     }
 
+    /**
+     *
+     * @param url
+     */
     public void setUrl(String url) {
         this.url = url;
     }
 
+    /**
+     *
+     * @return {@link String}
+     */
     public String getOrganitation() {
         return organitation;
     }
 
+    /**
+     *
+     * @return {@link String}
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     *
+     * @param username
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     *
+     * @return {@link String}
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     *
+     * @param password
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean isProxy() {
+        return proxy;
+    }
+
+    /**
+     *
+     * @param proxy
+     */
+    public void setProxy(boolean proxy) {
+        this.proxy = proxy;
+    }
+
+    /**
+     *
+     * @param organitation
+     */
     public void setOrganitation(String organitation) {
         this.organitation = organitation;
     }

@@ -100,8 +100,11 @@ public interface IOGCService {
      * @param aliasServerName
      * @param urlServer
      * @param organization
+     * @param username
+     * @param password
+     * @param proxy
      * @return {@link GPServerBeanModel}
      * @throws GeoPlatformException
      */
-    GPServerBeanModel saveServer(Long id, String aliasServerName, String urlServer, String organization) throws GeoPlatformException;
+    GPServerBeanModel saveServer(Long id, String aliasServerName, String urlServer, String organization, String username, String password, boolean proxy) throws GeoPlatformException;
 }

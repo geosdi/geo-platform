@@ -189,14 +189,14 @@ public class OGCService implements IOGCService {
 
     @Override
     public GPServerBeanModel saveServer(Long id, String aliasServerName,
-            String urlServer, String organization)
+            String urlServer, String organization, String username, String password, boolean proxy)
             throws GeoPlatformException {
         ServerDTO serverWS = null;
         try {
             serverWS = geoPlatformServiceClient.saveServer(
                     new WSSaveServerRequest(id, aliasServerName,
                             urlServer,
-                            organization));
+                            organization, username, password, proxy));
         } catch (IllegalParameterFault ex) {
             logger.error(ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());

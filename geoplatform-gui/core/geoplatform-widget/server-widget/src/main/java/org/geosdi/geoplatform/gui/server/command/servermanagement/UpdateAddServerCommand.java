@@ -66,10 +66,11 @@ public class UpdateAddServerCommand implements
     @Override
     public UpdateAddServerResponse execute(UpdateAddServerRequest request,
             HttpServletRequest httpServletRequest) {
-        logger.debug("##################### Executing {} Command", this.
+        logger.info("##################### Executing {} Command", this.
                 getClass().getSimpleName());
+        logger.info("@##########################REQUEST {}", request);
         return new UpdateAddServerResponse( ogcService.saveServer(request.getServerID(), request.getAlias(), request.getUrl(),
-                request.getOrganitation()));
+                request.getOrganitation(), request.getUsername(), request.getPassword(), request.isProxy()));
     }
 
 }

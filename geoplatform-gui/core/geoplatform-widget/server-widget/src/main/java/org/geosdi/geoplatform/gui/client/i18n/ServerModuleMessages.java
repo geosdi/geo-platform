@@ -55,4 +55,7 @@ public interface ServerModuleMessages extends Messages {
     String AddServerWidget_serverAlreadyPresentMessage(String serverURL, String serverName);
 
     String ManageServerWidget_errorDeletingBodyMessage(String caughtError, String serverURL);
+
+    String ManageServerWidget_errorPasswordOrUsernameInserting();
+
 }

@@ -33,51 +33,44 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.server.command.auth;
+package org.geosdi.geoplatform.gui.client.widget.form;
 
-import org.geosdi.geoplatform.gui.client.command.user.GetUserAuthoritiesRequest;
-import org.geosdi.geoplatform.gui.client.command.user.GetUserAuthoritiesResponse;
-import org.geosdi.geoplatform.gui.command.server.GPCommand;
-import org.geosdi.geoplatform.gui.server.IServerService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
+import com.extjs.gxt.ui.client.data.ModelData;
+import com.extjs.gxt.ui.client.event.GridEvent;
+import com.extjs.gxt.ui.client.store.ListStore;
+import com.extjs.gxt.ui.client.widget.grid.CheckColumnConfig;
+import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Nazzareno Sileno - CNR IMAA geoSDI Group
+ * @email nazzareno.sileno@geosdi.org
  */
-@Lazy
-@Component(value = "command.auth.GetUserAuthoritiesCommand")
-public class GetUserAuthoritiesCommand implements
-        GPCommand<GetUserAuthoritiesRequest, GetUserAuthoritiesResponse> {
+public class GPCheckSecureColumnConfig extends CheckColumnConfig {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            GetUserAuthoritiesCommand.class);
-    //
-    @Autowired
-    private IServerService serverService;
+//    private int selectedItems = 0;
+    ListStore<GPServerBeanModel> store;
 
-    @Override
-    public GetUserAuthoritiesResponse execute(GetUserAuthoritiesRequest request,
-            HttpServletRequest httpServletRequest) {
-
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
-        List<String> authorities = this.serverService.getUserAuthorities(
-                httpServletRequest);
-
-        logger.debug("#################### Found {}\n", authorities);
-
-        return new GetUserAuthoritiesResponse(new ArrayList<>(authorities));
+    public GPCheckSecureColumnConfig(String id, String name, int width,
+            ListStore<GPServerBeanModel> store) {
+        super(id, name, width);
+        this.store = store;
     }
 
+    @Override
+    public String getCheckState(ModelData model, String property, int rowIndex, int colIndex) {
+        return super.getCheckState(model, property, rowIndex, colIndex);
+    }
+
+    @Override
+    protected void onMouseDown(GridEvent<ModelData> ge) {
+        super.onMouseDown(ge);
+    }
+
+//    public int getSelectedItems() {
+//        return this.selectedItems;
+//    }
+//
+//    public void setSelectedItems(int selectedItems) {
+//        this.selectedItems = selectedItems;
+//    }
 }

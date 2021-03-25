@@ -35,13 +35,10 @@
  */
 package org.geosdi.geoplatform.core.delegate.impl.server;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import org.geosdi.geoplatform.core.dao.GPOrganizationDAO;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.delegate.api.server.ServerDelegate;
+import org.geosdi.geoplatform.core.model.GPAuthServer;
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
@@ -54,6 +51,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Server service delegate.
@@ -101,7 +103,8 @@ public class GPServerDelegate implements ServerDelegate {
         orig.setAbstractServer(server.getAbstractServer());
         orig.setOrganization(server.getOrganization());
         orig.setServerType(server.getServerType());
-        
+        orig.setAuthServer(server.getAuthServer());
+        orig.setProxy(server.isProxy());
         serverDao.merge(orig);
         return orig.getId();
     }
@@ -147,10 +150,11 @@ public class GPServerDelegate implements ServerDelegate {
             throw new ResourceNotFoundFault("Organization with name "
                     + organizationName + "was not found.");
         }
-        
+        logger.info("##############################getAllServers");
         List<GeoPlatformServer> found = serverDao.findAll(organization.getId(),
                 GPCapabilityType.WMS);
-        
+        logger.info("##############################found {}", found);
+
         return new ServerDTOContainer(convertToServerList(found));
     }
     
@@ -203,6 +207,8 @@ public class GPServerDelegate implements ServerDelegate {
         server.setAliasName(aliasServerName);
         server.setServerUrl(serverUrl);
         server.setOrganization(org);
+        server.setProxy(saveServerReq.isProxy());
+        server.setAuthServer(new GPAuthServer(saveServerReq.getUsername(), saveServerReq.getPassword()));
         serverDao.save(server);
         
         return new ServerDTO(server);

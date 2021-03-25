@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.request.server;
 
-import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 /**
  *
@@ -55,16 +55,27 @@ public class WSSaveServerRequest implements Serializable {
     private String aliasServerName;
     private String serverUrl;
     private String organization;
+    private String username;
+    private String password;
+    private boolean proxy;
 
     public WSSaveServerRequest() {
     }
 
     public WSSaveServerRequest(Long theId, String theAliasServerName,
-            String theServerUrl, String theOrganization) {
+            String theServerUrl, String theOrganization, String theUsername, String thePassword, boolean theProxy) {
         this.id = theId;
         this.aliasServerName = theAliasServerName;
         this.serverUrl = theServerUrl;
         this.organization = theOrganization;
+        this.username = theUsername;
+        this.password = thePassword;
+        this.proxy = theProxy;
+    }
+
+    public WSSaveServerRequest(Long theId, String theAliasServerName,
+            String theServerUrl, String theOrganization) {
+        this(theId, theAliasServerName, theServerUrl, theOrganization, null, null, false);
     }
 
     /**
@@ -123,12 +134,64 @@ public class WSSaveServerRequest implements Serializable {
         this.organization = organization;
     }
 
+    /**
+     *
+     * @return
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     *
+     * @param username
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     *
+     * @param password
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean isProxy() {
+        return proxy;
+    }
+
+    /**
+     *
+     * @param proxy
+     */
+    public void setProxy(boolean proxy) {
+        this.proxy = proxy;
+    }
+
     @Override
     public String toString() {
         return getClass().getSimpleName() + " {" + "id = " + id 
                 + ", aliasServerName = " + aliasServerName 
                 + ", serverUrl = " + serverUrl 
-                + ", organization = " + organization + '}';
+                + ", organization = " + organization
+                + ", username = " + username
+                + ", password = " + password
+                + ", proxy = " + proxy
+                + '}';
     }
 
 }

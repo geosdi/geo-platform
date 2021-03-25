@@ -313,7 +313,7 @@ public class AddServerWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
                     geoPlatformOGCRemote.saveServer(null,
                             serverNameTextField.getValue().trim(),
                             serverUrlTextField.getValue().trim(),
-                            GPAccountLogged.getInstance().getOrganization(),
+                            GPAccountLogged.getInstance().getOrganization(), null, null,
                             new AsyncCallback<GPServerBeanModel>() {
 
                                 @Override

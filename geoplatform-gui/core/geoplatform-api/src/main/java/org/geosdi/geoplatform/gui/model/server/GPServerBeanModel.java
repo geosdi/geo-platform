@@ -35,8 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.model.server;
 
-import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -47,7 +48,9 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
 
     public enum GPServerKeyValue {
 
-        URL_SERVER("urlServer"), NAME("name"), TITLE("title"), ALIAS("alias");
+        URL_SERVER("urlServer"), NAME("name"), TITLE("title"), ALIAS("alias"),
+        SERVER_PROTECTED("serverProtected"),
+        USERNAME("username"), PASSWORD("password"), PROXY("proxy");;
         private String value;
 
         GPServerKeyValue(String theValue) {
@@ -66,6 +69,10 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
     private String name;
     private String title;
     private String organization;
+    private boolean serverProtected;
+    private String username;
+    private String password;
+    private boolean proxy;
     private ArrayList<? extends GPLayerGrid> layers;
 
     /**
@@ -155,6 +162,71 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
     }
 
     /**
+     *
+     * @return
+     */
+    public boolean isServerProtected() {
+        return get(GPServerKeyValue.SERVER_PROTECTED.getValue());
+    }
+
+    /**
+     *
+     * @param serverProtected
+     */
+    public void setServerProtected(boolean serverProtected) {
+        this.serverProtected = serverProtected;
+        set(GPServerKeyValue.SERVER_PROTECTED.getValue(), this.serverProtected);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getUsername() {
+        return get(GPServerKeyValue.USERNAME.getValue());
+    }
+
+    /**
+     *
+     * @param username
+     */
+    public void setUsername(String username) {
+        this.username = username;
+        set(GPServerKeyValue.USERNAME.getValue(), this.username);
+
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getPassword() {
+        return get(GPServerKeyValue.PASSWORD.getValue());
+    }
+
+    /**
+     *
+     * @param password
+     */
+    public void setPassword(String password) {
+        this.password = password;
+        set(GPServerKeyValue.PASSWORD.getValue(), this.password);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean getProxy() {
+        return this.proxy;
+    }
+
+    public void setProxy(boolean proxy) {
+        this.proxy = proxy;
+        set(GPServerKeyValue.PROXY.getValue(), this.proxy);
+    }
+
+    /**
      * @return the layers
      */
     public ArrayList<? extends GPLayerGrid> getLayers() {
@@ -204,6 +276,11 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
                 + ", urlServer = " + getUrlServer()
                 + ", name =  " + name
                 + ", title = " + title
-                + ", organization = " + organization + '}';
+                + ", organization = " + organization
+                + ", serverProtected = " + serverProtected
+                + ", username = " + username
+                + ", password = " + password
+                + ", proxy = " + proxy
+                + '}';
     }
 }

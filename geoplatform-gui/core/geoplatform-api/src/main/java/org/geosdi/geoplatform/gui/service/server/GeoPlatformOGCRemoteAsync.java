@@ -36,10 +36,11 @@
 package org.geosdi.geoplatform.gui.service.server;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
+
+import java.util.ArrayList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -62,7 +63,7 @@ public interface GeoPlatformOGCRemoteAsync {
             AsyncCallback<ArrayList<? extends GPLayerGrid>> callback) throws GeoPlatformException;
 
     public void saveServer(Long id, String aliasServerName, String urlServer,
-            String organization, AsyncCallback<GPServerBeanModel> callback)
+            String organization, String username, String password, AsyncCallback<GPServerBeanModel> callback)
             throws GeoPlatformException;
 
     public void findDistinctLayersDataSource(

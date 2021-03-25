@@ -35,20 +35,28 @@
  */
 package org.geosdi.geoplatform.response;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.List;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 //@XmlRootElement(name = "ServerDTO")
+@Getter
+@Setter
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
-        propOrder = {"id", "serverUrl", "name", "alias", "layerList", "organization"})
+        propOrder = {"id", "serverUrl", "name", "alias", "layerList", "organization", "serverProtected", "username", "password", "proxy"})
 public class ServerDTO implements Serializable {
 
     private static final long serialVersionUID = -1916994804312224037L;
@@ -58,6 +66,10 @@ public class ServerDTO implements Serializable {
     private String name;
     private String alias;
     private String organization;
+    private boolean serverProtected;
+    private String username;
+    private String password;
+    private boolean proxy;
     //
     @XmlElementRefs(value = {
             @XmlElementRef(name = "rasterLayerDTO",
@@ -69,95 +81,19 @@ public class ServerDTO implements Serializable {
         super();
     }
 
-    public ServerDTO(GeoPlatformServer server) {
+    public ServerDTO(@Nonnull(when = NEVER) GeoPlatformServer server) {
+        checkArgument(server != null, "The Parameter server must not be null.");
         this.id = server.getId();
         this.serverUrl = server.getServerUrl();
         this.name = server.getName();
         this.alias = server.getAliasName();
-    }
+        this.proxy = server.isProxy();
+        this.serverProtected = server.isProtected();
+        if(server.isProtected()) {
+            this.username = server.getAuthServer().getUsername();
+            this.password = server.getAuthServer().getPassword();
+        }
 
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the serverUrl
-     */
-    public String getServerUrl() {
-        return serverUrl;
-    }
-
-    /**
-     * @param serverUrl the serverUrl to set
-     */
-    public void setServerUrl(String serverUrl) {
-        this.serverUrl = serverUrl;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @return the alias
-     */
-    public String getAlias() {
-        return alias;
-    }
-
-    /**
-     * @param alias the alias to set
-     */
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
-
-    /**
-     * @return the layersDTO
-     */
-    public List<? extends ShortLayerDTO> getLayerList() {
-        return layerList;
-    }
-
-    /**
-     * @param layerList the layersDTO to set
-     */
-    public void setLayerList(List<? extends ShortLayerDTO> layerList) {
-        this.layerList = layerList;
-    }
-
-    /**
-     * @return the organization
-     */
-    public String getOrganization() {
-        return organization;
-    }
-
-    /**
-     * @param organization the organization to set
-     */
-    public void setOrganization(String organization) {
-        this.organization = organization;
     }
 
     /**
@@ -173,6 +109,10 @@ public class ServerDTO implements Serializable {
                 + ", alias = " + alias
                 + ", name = " + name
                 + ", organization = " + organization
+                + ", serverProtected = " + serverProtected
+                + ", username = " + username
+                + ", password = " + password
+                + ", proxy = " + proxy
                 + ", layerList = " + layerList
                 + '}';
     }

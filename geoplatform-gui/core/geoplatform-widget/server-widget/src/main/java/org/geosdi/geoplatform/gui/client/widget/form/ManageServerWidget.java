@@ -76,6 +76,8 @@ import org.geosdi.geoplatform.gui.utility.oauth2.EnumOAuth2;
 
 import java.util.List;
 
+import static org.geosdi.geoplatform.gui.model.server.GPServerBeanModel.GPServerKeyValue.SERVER_PROTECTED;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
@@ -166,8 +168,8 @@ public class ManageServerWidget extends Window {
         passwordTextfield.setAllowBlank(true);
         passwordTextfield.disable();
 
-        this.checkBoxSecure = new GPCheckSecureColumnConfig("secure", ServerModuleConstants.INSTANCE.
-                secureText(), 55, this.store);
+        this.checkBoxSecure = new CheckColumnConfig(SERVER_PROTECTED.getValue(), ServerModuleConstants.INSTANCE.
+                secureText(), 55);
 
         ColumnConfig usernameColumn = new ColumnConfig();
         usernameColumn.setId("username");
@@ -274,6 +276,8 @@ public class ManageServerWidget extends Window {
                 record.set("alias", ServerModuleConstants.INSTANCE.
                         ManageServerWidget_newServerText());
                 record.set("urlServer", "");
+                record.set("username", null);
+                record.set("password", null);
                 store.update(server);
                 rowEditor.startEditing(store.indexOf(server), true);
             }
@@ -428,10 +432,13 @@ public class ManageServerWidget extends Window {
                 private static final long serialVersionUID = -2316524074209342256L;
 
                 {
-
                     requestAdd.setServerID(server.getId());
                     requestAdd.setAlias(record.get("alias").toString());
                     requestAdd.setUrl(record.get("urlServer").toString().trim());
+                        if(record.get("username") != null)
+                    requestAdd.setUsername(record.get("username").toString().trim());
+                    if(record.get("password") != null)
+                        requestAdd.setPassword(record.get("password").toString().trim());
                     requestAdd.setOrganitation( GPAccountLogged.getInstance().getOrganization());
                     super.setCommandRequest(requestAdd);
                 }

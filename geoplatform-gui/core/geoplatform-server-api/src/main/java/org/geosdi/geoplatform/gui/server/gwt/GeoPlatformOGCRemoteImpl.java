@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.gwt;
 
-import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
@@ -44,6 +43,8 @@ import org.geosdi.geoplatform.gui.server.service.IOGCService;
 import org.geosdi.geoplatform.gui.server.spring.xsrf.GPAutoInjectingXsrfTokenServiceServlet;
 import org.geosdi.geoplatform.gui.service.server.GeoPlatformOGCRemote;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -88,9 +89,9 @@ public class GeoPlatformOGCRemoteImpl extends GPAutoInjectingXsrfTokenServiceSer
 
     @Override
     public GPServerBeanModel saveServer(Long id, String aliasServerName,
-            String urlServer, String organization) throws GeoPlatformException {
+            String urlServer, String organization, String username, String password, boolean proxy) throws GeoPlatformException {
         return ogcService.saveServer(id, aliasServerName, urlServer,
-                organization);
+                organization, username, password, proxy);
     }
 
     @Override

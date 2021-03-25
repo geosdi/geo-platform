@@ -52,14 +52,13 @@ import static org.geosdi.geoplatform.connector.GPCatalogVersion.fromString;
 public class GPCSWConnectorBuilderPool extends AbstractConnectorBuilder<GPCSWConnectorBuilderPool, GPCatalogConnectorStore> {
 
     static {
-        catalogConnectoPool = new GenericKeyedObjectPool<>(
-                new GPCSWConnectorFactory(), new GPPoolConnectorConfig());
+        catalogConnectoPool = new GenericKeyedObjectPool<>(new GPCSWConnectorFactory(), new GPPoolConnectorConfig());
     }
 
     //
     private final static GenericKeyedObjectPool<GPPoolConnectorKey, GPCatalogConnectorStore> catalogConnectoPool;
 
-    protected GPCSWConnectorBuilderPool() {
+    GPCSWConnectorBuilderPool() {
     }
 
     public static GPCSWConnectorBuilderPool newConnector() {

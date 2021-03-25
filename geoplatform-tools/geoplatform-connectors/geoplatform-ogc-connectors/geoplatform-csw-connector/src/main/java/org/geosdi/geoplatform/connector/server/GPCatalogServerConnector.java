@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server;
 
+import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
 import org.geosdi.geoplatform.connector.CatalogVersionException;
 import org.geosdi.geoplatform.connector.GPCatalogVersion;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
@@ -165,7 +166,19 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector
      * @param theVersion
      */
     public GPCatalogServerConnector(URL server, GPSecurityConnector securityConnector, GPPooledConnectorConfig pooledConnectorConfig, HttpClientProxyConfiguration proxyConfiguration, GPCatalogVersion theVersion) {
-        super(server, securityConnector, pooledConnectorConfig, proxyConfiguration);
+        this(server, securityConnector, pooledConnectorConfig, proxyConfiguration, null, theVersion);
+    }
+
+    /**
+     * @param server
+     * @param securityConnector
+     * @param pooledConnectorConfig
+     * @param proxyConfiguration
+     * @param theVersion
+     */
+    public GPCatalogServerConnector(URL server, GPSecurityConnector securityConnector, GPPooledConnectorConfig pooledConnectorConfig, HttpClientProxyConfiguration proxyConfiguration,
+            SSLConnectionSocketFactory theSslConnectionSocketFactory, GPCatalogVersion theVersion) {
+        super(server, securityConnector, pooledConnectorConfig, proxyConfiguration, theSslConnectionSocketFactory);
         this.version = theVersion;
     }
 

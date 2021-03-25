@@ -63,6 +63,8 @@ public class GPWMSConnectorFactoryV111 extends GPWMSConnectorFactory<IGPWMSConne
                 .withServerUrl(key.getServerUrl())
                 .withPooledConnectorConfig(key.getPooledConnectorConfig())
                 .withClientSecurity(key.getSecurityConnector())
+                .withProxyConfiguration(key.getProxyConfiguration())
+                .withSslConnectionSocketFactory(key.getSslConnectionSocketFactory())
                 .build();
     }
 }

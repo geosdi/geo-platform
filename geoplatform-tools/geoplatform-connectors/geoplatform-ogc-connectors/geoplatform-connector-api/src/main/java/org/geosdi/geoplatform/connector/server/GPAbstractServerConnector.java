@@ -41,11 +41,14 @@ import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.socket.PlainConnectionSocketFactory;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+
+import org.apache.http.ssl.SSLContextBuilder;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.handler.ConnectorHttpRequestRetryHandler;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -74,6 +77,7 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
     private final GPSecurityConnector securityConnector;
     private final GPPooledConnectorConfig pooledConnectorConfig;
     private final HttpClientProxyConfiguration proxyConfiguration;
+    private final SSLConnectionSocketFactory sslConnectionSocketFactory;
     private volatile CloseableHttpClient httpClient;
 
     /**
@@ -81,7 +85,7 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
      * @param theSecurityConnector
      */
     protected GPAbstractServerConnector(URL theUrl, GPSecurityConnector theSecurityConnector) {
-        this(theUrl, theSecurityConnector, DEFAULT_POOLED, null);
+        this(theUrl, theSecurityConnector, DEFAULT_POOLED, null, null);
     }
 
     /**
@@ -89,9 +93,8 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
      * @param theSecurityConnector
      * @param theProxyConfiguration
      */
-    protected GPAbstractServerConnector(URL theUrl, GPSecurityConnector theSecurityConnector,
-            HttpClientProxyConfiguration theProxyConfiguration) {
-        this(theUrl, theSecurityConnector, DEFAULT_POOLED, theProxyConfiguration);
+    protected GPAbstractServerConnector(URL theUrl, GPSecurityConnector theSecurityConnector, HttpClientProxyConfiguration theProxyConfiguration) {
+        this(theUrl, theSecurityConnector, DEFAULT_POOLED, theProxyConfiguration, null);
     }
 
     /**
@@ -99,7 +102,7 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
      * @param thePooledConnectorConfig
      */
     protected GPAbstractServerConnector(URL theUrl, GPPooledConnectorConfig thePooledConnectorConfig) {
-        this(theUrl, null, thePooledConnectorConfig, null);
+        this(theUrl, null, thePooledConnectorConfig, null, null);
     }
 
     /**
@@ -107,9 +110,18 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
      * @param theSecurityConnector
      * @param thePooledConnectorConfig
      */
-    protected GPAbstractServerConnector(URL theUrl, GPSecurityConnector theSecurityConnector,
-            GPPooledConnectorConfig thePooledConnectorConfig) {
-        this(theUrl, theSecurityConnector, thePooledConnectorConfig, null);
+    protected GPAbstractServerConnector(URL theUrl, GPSecurityConnector theSecurityConnector, GPPooledConnectorConfig thePooledConnectorConfig) {
+        this(theUrl, theSecurityConnector, thePooledConnectorConfig, null, null);
+    }
+
+    /**
+     * @param theUrl
+     * @param theSecurityConnector
+     * @param thePooledConnectorConfig
+     * @param theSSLConnectionSocketFactory
+     */
+    protected GPAbstractServerConnector(URL theUrl, GPSecurityConnector theSecurityConnector, GPPooledConnectorConfig thePooledConnectorConfig, SSLConnectionSocketFactory theSSLConnectionSocketFactory) {
+        this(theUrl, theSecurityConnector, thePooledConnectorConfig, null, theSSLConnectionSocketFactory);
     }
 
     /**
@@ -118,13 +130,13 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
      * @param thePooledConnectorConfig
      * @param theProxyConfiguration
      */
-    protected GPAbstractServerConnector(URL theUrl, GPSecurityConnector theSecurityConnector,
-            GPPooledConnectorConfig thePooledConnectorConfig, HttpClientProxyConfiguration theProxyConfiguration) {
+    protected GPAbstractServerConnector(URL theUrl, GPSecurityConnector theSecurityConnector, GPPooledConnectorConfig thePooledConnectorConfig, HttpClientProxyConfiguration theProxyConfiguration, SSLConnectionSocketFactory theSSLConnectionSocketFactory) {
         this.url = theUrl;
         this.securityConnector = theSecurityConnector;
         this.pooledConnectorConfig = ((thePooledConnectorConfig != null)
                 ? thePooledConnectorConfig : DEFAULT_POOLED);
         this.proxyConfiguration = theProxyConfiguration;
+        this.sslConnectionSocketFactory = (theSSLConnectionSocketFactory != null) ? theSSLConnectionSocketFactory : this.createDefaultSSLConnectionSocketFactory();
     }
 
     /**
@@ -247,11 +259,25 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
     protected HttpClientConnectionManager createClientConnectionManager() {
         PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager(RegistryBuilder.<ConnectionSocketFactory>create()
                 .register("http", PlainConnectionSocketFactory.getSocketFactory())
-                .register("https", SSLConnectionSocketFactory.getSocketFactory())
-                .build());
+                .register("https", this.sslConnectionSocketFactory).build());
         cm.setMaxTotal(this.pooledConnectorConfig.getMaxTotalConnections());
         cm.setDefaultMaxPerRoute(this.pooledConnectorConfig.getDefaultMaxPerRoute());
         return cm;
+    }
+
+    /**
+     * @return {@link SSLConnectionSocketFactory}
+     */
+    protected SSLConnectionSocketFactory createDefaultSSLConnectionSocketFactory()  {
+        try {
+            SSLContextBuilder builder = new SSLContextBuilder();
+            builder.loadTrustMaterial(null, (chain, authType) -> true);
+            return new SSLConnectionSocketFactory(builder.build(), NoopHostnameVerifier.INSTANCE);
+        } catch (Exception ex) {
+            logger.warn("#####################Error to createDefaultSSLConnectionSocketFactory cause : {}\n", ex.getMessage());
+            ex.printStackTrace();
+        }
+        return SSLConnectionSocketFactory.getSocketFactory();
     }
 
     @Override

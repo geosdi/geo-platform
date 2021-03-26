@@ -97,7 +97,6 @@ public class ManageServerWidget extends Window {
     private GPCheckColumnConfig checkColumn;
     private CheckColumnConfig checkBoxSecureColumn;
     private StoreFilterField<GPServerBeanModel> serverFilter;
-    GPServerBeanModel newServer;
 
     public ManageServerWidget(DisplayServerWidget displayServerWidget, boolean lazy) {
         this.displayServerWidget = displayServerWidget;
@@ -234,9 +233,12 @@ public class ManageServerWidget extends Window {
         final Grid<GPServerBeanModel> grid = new Grid<GPServerBeanModel>(store, columnModel);
         RowEditor<GPServerBeanModel> rowEditor = new RowEditor<GPServerBeanModel>() {
 
+            int currentRowIndex;
+
             @Override
             public void startEditing(int rowIndex, boolean doFocus) {
                 super.startEditing(rowIndex, doFocus);
+                this.currentRowIndex = rowIndex;
             }
 
             @Override
@@ -251,9 +253,10 @@ public class ManageServerWidget extends Window {
             @Override
             protected void onHide() {
                 super.onHide();
-                    if(newServer.get(ALIAS.getValue()) == null  || newServer.get(ALIAS.getValue()).toString().isEmpty()
-                            || newServer.get(URL_SERVER.getValue()) == null || newServer.get(URL_SERVER.getValue()).toString().isEmpty()) {
-                        store.remove(newServer);
+                GPServerBeanModel currentBean = store.getModels().get(currentRowIndex);
+                    if(currentBean.get(ALIAS.getValue()) == null  || currentBean.get(ALIAS.getValue()).toString().isEmpty()
+                            || currentBean.get(URL_SERVER.getValue()) == null || currentBean.get(URL_SERVER.getValue()).toString().isEmpty()) {
+                        store.remove(currentBean);
                     }
 
                 //System.out.println("Hiding row editor and verifing the check status");
@@ -284,7 +287,7 @@ public class ManageServerWidget extends Window {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-                newServer =  new GPServerBeanModel();
+                GPServerBeanModel newServer =  new GPServerBeanModel();
                 //                server.setUrlServer("http://");
                 rowEditor.stopEditing(false);
                 store.insert(newServer, 0);

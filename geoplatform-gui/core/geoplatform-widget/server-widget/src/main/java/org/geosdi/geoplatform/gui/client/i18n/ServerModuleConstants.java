@@ -80,6 +80,8 @@ public interface ServerModuleConstants extends Constants {
     @DefaultStringValue("Secure")
     String secureText();
 
+    @DefaultStringValue("Proxy")
+    String proxyText();
 
     @DefaultStringValue("Google sign on required")
     String googleSignOnRequiredTitleText();

@@ -97,6 +97,7 @@ public class ManageServerWidget extends Window {
     private GPCheckColumnConfig checkColumn;
     private CheckColumnConfig checkBoxSecureColumn;
     private StoreFilterField<GPServerBeanModel> serverFilter;
+    GPServerBeanModel newServer;
 
     public ManageServerWidget(DisplayServerWidget displayServerWidget, boolean lazy) {
         this.displayServerWidget = displayServerWidget;
@@ -250,6 +251,11 @@ public class ManageServerWidget extends Window {
             @Override
             protected void onHide() {
                 super.onHide();
+                    if(newServer.get(ALIAS.getValue()) == null  || newServer.get(ALIAS.getValue()).toString().isEmpty()
+                            || newServer.get(URL_SERVER.getValue()) == null || newServer.get(URL_SERVER.getValue()).toString().isEmpty()) {
+                        store.remove(newServer);
+                    }
+
                 //System.out.println("Hiding row editor and verifing the check status");
                 checkColumn.manageDeleteButton();
             }
@@ -278,19 +284,18 @@ public class ManageServerWidget extends Window {
 
             @Override
             public void componentSelected(ButtonEvent ce) {
-
-                GPServerBeanModel server = new GPServerBeanModel();
+                newServer =  new GPServerBeanModel();
                 //                server.setUrlServer("http://");
                 rowEditor.stopEditing(false);
-                store.insert(server, 0);
-                Record record = store.getRecord(server);
+                store.insert(newServer, 0);
+                Record record = store.getRecord(newServer);
                 record.set(ALIAS.getValue(), ServerModuleConstants.INSTANCE.
                         ManageServerWidget_newServerText());
                 record.set(URL_SERVER.getValue(), "");
                 record.set(USERNAME.getValue(), null);
                 record.set(PASSWORD.getValue(), null);
-                store.update(server);
-                rowEditor.startEditing(store.indexOf(server), true);
+                store.update(newServer);
+                rowEditor.startEditing(store.indexOf(newServer), true);
             }
         });
         toolBar.add(addServerButton);

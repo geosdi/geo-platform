@@ -63,7 +63,7 @@ public interface GeoPlatformOGCRemoteAsync {
             AsyncCallback<ArrayList<? extends GPLayerGrid>> callback) throws GeoPlatformException;
 
     public void saveServer(Long id, String aliasServerName, String urlServer,
-            String organization, String username, String password, AsyncCallback<GPServerBeanModel> callback)
+            String organization, String username, String password, boolean proxy, AsyncCallback<GPServerBeanModel> callback)
             throws GeoPlatformException;
 
     public void findDistinctLayersDataSource(

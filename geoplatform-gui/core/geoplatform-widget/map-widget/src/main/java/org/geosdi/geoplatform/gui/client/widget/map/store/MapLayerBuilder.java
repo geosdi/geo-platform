@@ -56,6 +56,8 @@ import org.gwtopenmaps.openlayers.client.layer.WMSParams;
 
 import java.util.logging.Level;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -67,8 +69,13 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> {
         super(theMapWidget);
     }
 
+    /**
+     * @param rasterBean
+     * @return {@link WMS}
+     */
     @Override
     public WMS buildRaster(GPRasterBean rasterBean) {
+        checkArgument(rasterBean != null, "The Parameter rasterBean must not be null.");
         WMSParams wmsParams = new WMSParams();
         wmsParams.setFormat("image/png");
         this.addAuthTuple(wmsParams);
@@ -93,13 +100,11 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> {
         if (bbox != null) {
             wmsOption.setMaxExtent(bbox);
         }
-
         wmsOption.setIsBaseLayer(Boolean.FALSE);
         wmsOption.setDisplayInLayerSwitcher(Boolean.FALSE);
         wmsOption.setDisplayOutsideMaxExtent(Boolean.TRUE);
         wmsOption.setBuffer(0);
         wmsOption.setRatio(1);
-
         if (super.mapWidget.getMap().getProjection().equals(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode())) {
             wmsOption.setProjection(GPCoordinateReferenceSystem.GOOGLE_MERCATOR.getCode());
         } else if (super.mapWidget.getMap().getProjection().equals(GPCoordinateReferenceSystem.WGS_84.getCode())) {
@@ -113,30 +118,19 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> {
             logger.log(Level.FINE, "buildRaster Min Scale: " + rasterBean.getMinScale());
             wmsOption.setMinScale(rasterBean.getMinScale());
         }
-
-        WMS layer = new WMS(rasterBean.getLabel(), rasterBean.getDataSource(),
-                wmsParams, wmsOption);
-
+        WMS layer = new WMS(rasterBean.getLabel(), rasterBean.getDataSource(), wmsParams, wmsOption);
         layer.setOpacity(rasterBean.getOpacity());
-
         layer.setSingleTile(rasterBean.isSingleTileRequest());
-
         return layer;
     }
 
-    public Bounds generateBoundsTransformationFromMap(GPLayerBean layerBean) {
-        Bounds bounds = null;
-        if (layerBean.getBbox() != null) {
-            BBoxClientInfo bbox = layerBean.getBbox();
-            bounds = ViewportUtility.generateBoundsFromBBOX(bbox);
-            bounds.transform(new Projection(layerBean.getCrs()), new Projection(
-                    mapWidget.getMap().getProjection()));
-        }
-        return bounds;
-    }
-
+    /**
+     * @param vectorBean
+     * @return {@link WMS}
+     */
     @Override
     public WMS buildVector(GPVectorBean vectorBean) {
+        checkArgument(vectorBean != null, "The Parameter vectorBean must not be null.");
         WMSParams wmsParams = new WMSParams();
         wmsParams.setFormat("image/png");
         this.addAuthTuple(wmsParams);
@@ -163,11 +157,8 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> {
         wmsOption.setDisplayOutsideMaxExtent(true);
         wmsOption.setBuffer(0);
         wmsOption.setRatio(1);
-
         String dataSource = vectorBean.getDataSource();
-
         dataSource = dataSource.replaceAll("wfs", "wms");
-
         return new WMS(vectorBean.getLabel(), dataSource, wmsParams, wmsOption);
     }
 
@@ -182,5 +173,17 @@ public class MapLayerBuilder extends AbstractMapLayerBuilder<GPLayerBean> {
         if (authkey != null) {
             wmsParams.setParameter(GlobalRegistryEnum.AUTH_KEY.getValue(), authkey);
         }
+    }
+
+    Bounds generateBoundsTransformationFromMap(GPLayerBean layerBean) {
+        checkArgument(layerBean != null, "The Parameter layerBean must not be null.");
+        Bounds bounds = null;
+        if (layerBean.getBbox() != null) {
+            BBoxClientInfo bbox = layerBean.getBbox();
+            bounds = ViewportUtility.generateBoundsFromBBOX(bbox);
+            bounds.transform(new Projection(layerBean.getCrs()), new Projection(
+                    mapWidget.getMap().getProjection()));
+        }
+        return bounds;
     }
 }

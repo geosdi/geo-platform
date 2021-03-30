@@ -39,7 +39,6 @@ import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.response.RasterLayerDTO;
 import org.geosdi.geoplatform.response.ServerDTO;
 import org.geosdi.geoplatform.services.builder.GPRasterLayerDTOBuilder.RasterLayerDTOBuilder;
-import org.geosdi.geoplatform.services.httpclient.GeoSDIHttpClient;
 import org.geosdi.geoplatform.services.request.WMSHeaderParam;
 import org.geotools.data.ows.WMSCapabilities;
 import org.geotools.data.wms.WebMapServer;
@@ -78,13 +77,17 @@ public class GPWMSCapabilitesBuilder implements IGPWMSCapabilitesBuilder {
      * @throws ResourceNotFoundFault
      */
     @Override
-    public List<RasterLayerDTO> loadWMSCapabilities(@Nonnull(when = NEVER) String serverUrl, @Nullable String token, @Nullable String authkey) throws ResourceNotFoundFault {
+    public List<RasterLayerDTO> loadWMSCapabilities(@Nonnull(when = NEVER) String serverUrl, @Nullable String token,
+            @Nullable String authkey, @Nullable String userName, @Nullable String password) throws ResourceNotFoundFault {
         checkArgument((serverUrl != null) && !(serverUrl.trim().isEmpty()), "The Parameter serverURL must not be null or an empty string.");
         String urlServerEdited = this.editServerUrl(serverUrl, token, authkey);
         logger.debug("####################URL Server edited: {}\n", urlServerEdited);
         try {
             URL serverURL = new URL(urlServerEdited);
-            WebMapServer wms = new WebMapServer(serverURL);
+            GeoSDIHttpClient5 authClient = new GeoSDIHttpClient5();
+            authClient.setUser(userName);
+            authClient.setPassword(password);
+            WebMapServer wms = new WebMapServer(serverURL, authClient);
             WMSCapabilities wmsCapabilities = wms.getCapabilities();
             return rasterLayerDTOBuilder.convertToLayerList(wmsCapabilities.getLayer(), serverUrl);
         } catch (MalformedURLException e) {
@@ -112,14 +115,16 @@ public class GPWMSCapabilitesBuilder implements IGPWMSCapabilitesBuilder {
      */
     @Override
     public List<RasterLayerDTO> loadWMSCapabilitiesAuth(@Nonnull(when = NEVER) String serverUrl, @Nullable String token,
-            @Nullable String authkey, @Nullable List<WMSHeaderParam> headers) throws ResourceNotFoundFault {
+            @Nullable String authkey, @Nullable List<WMSHeaderParam> headers, @Nullable String userName, @Nullable String password) throws ResourceNotFoundFault {
         checkArgument((serverUrl != null) && !(serverUrl.trim().isEmpty()), "The Parameter serverURL must not be null or an empty string.");
         String urlServerEdited = this.editServerUrl(serverUrl, token, authkey);
         logger.debug("####################URL Server edited: {}\n", urlServerEdited);
         logger.info("Forward headers:  {}", headers);
         try {
             URL serverURL = new URL(urlServerEdited);
-            GeoSDIHttpClient authClient = new GeoSDIHttpClient();
+            GeoSDIHttpClient5 authClient = new GeoSDIHttpClient5();
+            authClient.setUser(userName);
+            authClient.setPassword(password);
             authClient.setHeaders(headers);
             WebMapServer wms = new WebMapServer(serverURL, authClient);
             WMSCapabilities wmsCapabilities = wms.getCapabilities();

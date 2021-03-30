@@ -59,7 +59,7 @@ public class GPWMSCapabilitesBuilderTest {
     private static final IGPWMSCapabilitesBuilder wmsCapabilitiesBuilder = new GPWMSCapabilitesBuilder();
     
     @Test
-    public void loadWMSCapabilitiesTest() throws Exception {
+    public void a_loadWMSCapabilitiesTest() throws Exception {
         List<RasterLayerDTO> rasterLayers = wmsCapabilitiesBuilder.loadWMSCapabilities("http://150.145.141.180/geoserver/wms", null, null);
         checkArgument(rasterLayers.size() > 0);
         for (RasterLayerDTO rasterLayerDTO : rasterLayers.get(0).getSubLayerList()) {
@@ -70,7 +70,7 @@ public class GPWMSCapabilitesBuilderTest {
     @Test
     @Ignore
     public void b_loadWMSCapabilitiesTest() throws Exception {
-        List<RasterLayerDTO> rasterLayers = wmsCapabilitiesBuilder.loadWMSCapabilitiesAuth("https://servizi.protezionecivile.it/geoserver/wms", null, null, null);
+        List<RasterLayerDTO> rasterLayers = wmsCapabilitiesBuilder.loadWMSCapabilitiesAuth("https://servizi.protezionecivile.it/geoserver/wms", null, null, null, null, null);
         checkArgument(rasterLayers.size() > 0);
         for (RasterLayerDTO rasterLayerDTO : rasterLayers.get(0).getSubLayerList()) {
             logger.info("######################LAYER : {} - STYLE_LIST : {}\n", rasterLayerDTO, rasterLayerDTO.getStyleList());
@@ -79,7 +79,16 @@ public class GPWMSCapabilitesBuilderTest {
 
     @Test
     public void c_loadWMSCapabilitiesTest() throws Exception {
-        List<RasterLayerDTO> rasterLayers = wmsCapabilitiesBuilder.loadWMSCapabilitiesAuth("https://prosit.geosdi.org/geoserver/wms", null, null, null);
+        List<RasterLayerDTO> rasterLayers = wmsCapabilitiesBuilder.loadWMSCapabilitiesAuth("https://prosit.geosdi.org/geoserver/wms", null, null, null, null, null);
+        checkArgument(rasterLayers.size() > 0);
+        for (RasterLayerDTO rasterLayerDTO : rasterLayers.get(0).getSubLayerList()) {
+            logger.info("######################LAYER : {} \n", rasterLayerDTO);
+        }
+    }
+
+    @Test
+    public void d_loadWMSCapabilitiesTest() throws Exception {
+        List<RasterLayerDTO> rasterLayers = wmsCapabilitiesBuilder.loadWMSCapabilities("https://insar.irea.cnr.it/geoserver/geonode/wms", null, null, "dpc", "4WzL06EA");
         checkArgument(rasterLayers.size() > 0);
         for (RasterLayerDTO rasterLayerDTO : rasterLayers.get(0).getSubLayerList()) {
             logger.info("######################LAYER : {} \n", rasterLayerDTO);

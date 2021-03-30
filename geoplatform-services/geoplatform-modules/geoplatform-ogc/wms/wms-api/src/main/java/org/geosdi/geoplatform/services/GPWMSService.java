@@ -116,8 +116,7 @@ public interface GPWMSService {
     @Get
     @HttpResource(location = "/server/{serverUrl}")
     @WebResult(name = "Servers")
-    ServerDTO getShortServer(@QueryParam(value = "serverUrl") @WebParam(name = "serverUrl") String serverUrl)
-            throws ResourceNotFoundFault;
+    ServerDTO getShortServer(@QueryParam(value = "serverUrl") @WebParam(name = "serverUrl") String serverUrl) throws ResourceNotFoundFault;
 
     /**
      * @param serverURL
@@ -128,8 +127,7 @@ public interface GPWMSService {
     @GET
     @Path(value = GPServiceRSPathConfig.GET_LAYER_TYPE)
     @Get
-    GPLayerTypeResponse getLayerType(@QueryParam(value = "serverURL") @WebParam(name = "serverURL") String serverURL,
-            @QueryParam(value = "layerName") @WebParam(name = "layerName") String layerName) throws Exception;
+    GPLayerTypeResponse getLayerType(@QueryParam(value = "serverURL") @WebParam(name = "serverURL") String serverURL, @QueryParam(value = "layerName") @WebParam(name = "layerName") String layerName) throws Exception;
 
     /**
      * @param request

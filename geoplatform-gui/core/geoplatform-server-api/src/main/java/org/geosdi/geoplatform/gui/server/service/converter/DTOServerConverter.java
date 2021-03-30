@@ -45,7 +45,6 @@ import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.model.temporal.dimension.GPTemporalDimensionBean;
 import org.geosdi.geoplatform.gui.model.temporal.extent.GPTemporalExtentBean;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
-import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.geosdi.geoplatform.response.RasterLayerDTO;
 import org.geosdi.geoplatform.response.ServerDTO;
 import org.geosdi.geoplatform.response.ShortLayerDTO;
@@ -56,6 +55,8 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import static org.geosdi.geoplatform.gui.shared.GPLayerType.WMS;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -118,6 +119,11 @@ public class DTOServerConverter {
         return this.createRasterLayerList(layers, new ArrayList<GPLayerGrid>());
     }
 
+    /**
+     * @param layers
+     * @param list
+     * @return {@link ArrayList<GPLayerGrid>}
+     */
     private ArrayList<? extends GPLayerGrid> createRasterLayerList(List<? extends ShortLayerDTO> layers, ArrayList<GPLayerGrid> list) {
         if (layers != null) {
             for (ShortLayerDTO layer : layers) {
@@ -129,7 +135,6 @@ public class DTOServerConverter {
                 }
             }
         }
-
         return list;
     }
 
@@ -160,7 +165,7 @@ public class DTOServerConverter {
         raster.setAlias(layer.getAlias());
         raster.setName(layer.getName());
         raster.setAbstractText(layer.getAbstractText());
-        raster.setLayerType(GPLayerType.WMS);
+        raster.setLayerType(WMS);
         raster.setDataSource(layer.getUrlServer());
         if (layer.getBbox() != null) {
             raster.setBbox(new BBoxClientInfo(layer.getBbox().getMinX(), layer.getBbox().getMinY(), layer.getBbox().getMaxX(),

@@ -101,17 +101,23 @@ class GPWMSDelegateImpl implements GPWMSDelagate {
     @Override
     public ServerDTO getCapabilities(String serverUrl, RequestByID request, String token, String authkey) throws ResourceNotFoundFault {
         ServerDTO serverDTO;
+        String userName = null;
+        String password = null;
         if (request.getId() != null) {
             GeoPlatformServer server = serverDao.find(request.getId());
             if (server == null) {
                 throw new ResourceNotFoundFault("Server has been deleted", request.getId());
             }
             serverDTO = new ServerDTO(server);
+            if (server.isProtected()) {
+                userName = server.getAuthServer().getUsername();
+                password = server.getAuthServer().getPassword();
+            }
         } else {
             serverDTO = new ServerDTO();
             serverDTO.setServerUrl(serverUrl);
         }
-        List<RasterLayerDTO> layers = this.wmsCapabilitiesBuilder.loadWMSCapabilities(serverUrl, token, authkey);
+        List<RasterLayerDTO> layers = this.wmsCapabilitiesBuilder.loadWMSCapabilities(serverUrl, token, authkey, userName, password);
         serverDTO.setLayerList(layers);
         return serverDTO;
     }
@@ -128,17 +134,23 @@ class GPWMSDelegateImpl implements GPWMSDelagate {
     @Override
     public ServerDTO getCapabilitiesAuth(String serverUrl, RequestByID request, String token, String authkey, List<WMSHeaderParam> headers) throws ResourceNotFoundFault {
         ServerDTO serverDTO;
+        String userName = null;
+        String password = null;
         if (request.getId() != null) {
             GeoPlatformServer server = serverDao.find(request.getId());
             if (server == null) {
                 throw new ResourceNotFoundFault("Server has been deleted", request.getId());
             }
             serverDTO = new ServerDTO(server);
+            if (server.isProtected()) {
+                userName = server.getAuthServer().getUsername();
+                password = server.getAuthServer().getPassword();
+            }
         } else {
             serverDTO = new ServerDTO();
             serverDTO.setServerUrl(serverUrl);
         }
-        List<RasterLayerDTO> layers = this.wmsCapabilitiesBuilder.loadWMSCapabilitiesAuth(serverUrl, token, authkey, headers);
+        List<RasterLayerDTO> layers = this.wmsCapabilitiesBuilder.loadWMSCapabilitiesAuth(serverUrl, token, authkey, headers, userName, password);
         serverDTO.setLayerList(layers);
         return serverDTO;
     }
@@ -165,12 +177,9 @@ class GPWMSDelegateImpl implements GPWMSDelagate {
      */
     @Override
     public GPLayerTypeResponse getLayerType(String serverURL, String layerName) throws Exception {
-        checkArgument((serverURL != null) && !(serverURL.trim().isEmpty()),
-                "The Parameter serverURL must not be null or an empty string.");
-        checkArgument((layerName != null) && !(layerName.trim().isEmpty()),
-                "The Parameter layerName must not be null or an empty string.");
-        logger.debug("###########################TRYING TO RETRIEVE LAYER_TYPE with serverURL : {} - layerName : {]\n",
-                serverURL, layerName);
+        checkArgument((serverURL != null) && !(serverURL.trim().isEmpty()), "The Parameter serverURL must not be null or an empty string.");
+        checkArgument((layerName != null) && !(layerName.trim().isEmpty()), "The Parameter layerName must not be null or an empty string.");
+        logger.debug("###########################TRYING TO RETRIEVE LAYER_TYPE with serverURL : {} - layerName : {]\n", serverURL, layerName);
         int index = serverURL.indexOf("?");
         if (index != -1) {
             serverURL = serverURL.substring(0, index);

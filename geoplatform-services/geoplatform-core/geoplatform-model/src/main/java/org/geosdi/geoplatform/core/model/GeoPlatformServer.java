@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.core.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 
@@ -53,6 +54,7 @@ import java.io.Serializable;
 //@XmlRootElement(name = "Server")
 @Getter
 @Setter
+@ToString
 @Entity
 @Table(name = "gp_server")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "server")
@@ -102,29 +104,6 @@ public class GeoPlatformServer implements Serializable {
      * @return
      */
     public boolean isProtected() {
-        return this.authServer != null && (this.authServer.getPassword() != null && !this.authServer.getPassword().isEmpty())
-                && (this.authServer.getUsername() != null && !this.authServer.getUsername().isEmpty());
-    }
-
-
-    /**
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        StringBuilder str = new StringBuilder("GeoPlatformServer {");
-        str.append("id=").append(id);
-        str.append(", serverType=").append(serverType);
-        str.append(", serverUrl=").append(serverUrl);
-        str.append(", name=").append(name);
-        str.append(", aliasName=").append(aliasName);
-        str.append(", title=").append(title);
-        str.append(", abstractServer=").append(abstractServer);
-        str.append(", organization=").append(organization);
-        str.append(", authServer=").append(authServer);
-        str.append(", proxy=").append(proxy);
-        return str.append("}").toString();
+        return ((this.authServer != null) && (this.authServer.isActive()));
     }
 }

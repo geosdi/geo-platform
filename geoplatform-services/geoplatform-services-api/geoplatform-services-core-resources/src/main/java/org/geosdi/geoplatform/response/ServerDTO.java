@@ -55,8 +55,7 @@ import static javax.annotation.meta.When.NEVER;
 @Getter
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(
-        propOrder = {"id", "serverUrl", "name", "alias", "layerList", "organization", "serverProtected", "username", "password", "proxy"})
+@XmlType(propOrder = {"id", "serverUrl", "name", "alias", "layerList", "organization", "serverProtected", "username", "password", "proxy"})
 public class ServerDTO implements Serializable {
 
     private static final long serialVersionUID = -1916994804312224037L;
@@ -71,9 +70,7 @@ public class ServerDTO implements Serializable {
     private String password;
     private boolean proxy;
     //
-    @XmlElementRefs(value = {
-            @XmlElementRef(name = "rasterLayerDTO",
-                    type = RasterLayerDTO.class),
+    @XmlElementRefs(value = {@XmlElementRef(name = "rasterLayerDTO", type = RasterLayerDTO.class),
             @XmlElementRef(name = "vectorLayerDTO", type = VectorLayerDTO.class)})
     private List<? extends ShortLayerDTO> layerList;
 
@@ -81,6 +78,9 @@ public class ServerDTO implements Serializable {
         super();
     }
 
+    /**
+     * @param server
+     */
     public ServerDTO(@Nonnull(when = NEVER) GeoPlatformServer server) {
         checkArgument(server != null, "The Parameter server must not be null.");
         this.id = server.getId();

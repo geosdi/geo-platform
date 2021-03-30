@@ -60,10 +60,8 @@ public abstract class AbstractSecurityConnector implements GPSecurityConnector {
      * @param thePassword
      */
     public AbstractSecurityConnector(@Nonnull(when = NEVER) String theUserName, @Nonnull(when = NEVER) String thePassword) {
-        checkArgument((theUserName != null) && !(theUserName.trim().isEmpty()),
-                "The Parameter username must not be null or an Empty String.");
-        checkArgument((thePassword != null) && !(thePassword.trim().isEmpty()),
-                "The Parameter password must not be null or an Empty String.");
+        checkArgument((theUserName != null) && !(theUserName.trim().isEmpty()), "The Parameter username must not be null or an Empty String.");
+        checkArgument((thePassword != null) && !(thePassword.trim().isEmpty()), "The Parameter password must not be null or an Empty String.");
         this.username = theUserName;
         this.password = thePassword;
     }

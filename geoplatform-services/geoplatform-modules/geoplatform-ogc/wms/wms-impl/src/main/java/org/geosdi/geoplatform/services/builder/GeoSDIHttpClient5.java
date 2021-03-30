@@ -35,35 +35,38 @@
 package org.geosdi.geoplatform.services.builder;
 
 import com.google.common.collect.Lists;
-import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
-import org.apache.hc.client5.http.classic.methods.HttpGet;
-import org.apache.hc.client5.http.classic.methods.HttpPost;
-import org.apache.hc.client5.http.config.RequestConfig;
-import org.apache.hc.client5.http.impl.auth.BasicCredentialsProvider;
-import org.apache.hc.client5.http.impl.auth.BasicScheme;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
-import org.apache.hc.client5.http.impl.classic.HttpClients;
-import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
-import org.apache.hc.client5.http.io.HttpClientConnectionManager;
-import org.apache.hc.client5.http.protocol.HttpClientContext;
-import org.apache.hc.client5.http.socket.ConnectionSocketFactory;
-import org.apache.hc.client5.http.socket.PlainConnectionSocketFactory;
-import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
-import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
-import org.apache.hc.core5.http.ContentType;
-import org.apache.hc.core5.http.Header;
-import org.apache.hc.core5.http.HttpEntity;
-import org.apache.hc.core5.http.HttpHost;
-import org.apache.hc.core5.http.config.RegistryBuilder;
-import org.apache.hc.core5.http.impl.DefaultConnectionReuseStrategy;
-import org.apache.hc.core5.http.impl.io.HttpRequestExecutor;
-import org.apache.hc.core5.http.io.entity.InputStreamEntity;
-import org.apache.hc.core5.ssl.SSLContextBuilder;
-import org.apache.hc.core5.util.TimeValue;
+import org.apache.http.Header;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.AuthCache;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.config.RegistryBuilder;
+import org.apache.http.conn.HttpClientConnectionManager;
+import org.apache.http.conn.socket.ConnectionSocketFactory;
+import org.apache.http.conn.socket.PlainConnectionSocketFactory;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.InputStreamEntity;
+import org.apache.http.impl.DefaultConnectionReuseStrategy;
+import org.apache.http.impl.auth.BasicScheme;
+import org.apache.http.impl.client.BasicAuthCache;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.apache.http.protocol.HttpRequestExecutor;
+import org.apache.http.ssl.SSLContextBuilder;
 import org.geosdi.geoplatform.services.request.WMSHeaderParam;
-import org.geotools.http.HTTPClient;
-import org.geotools.http.HTTPResponse;
+import org.geotools.data.ows.HTTPClient;
+import org.geotools.data.ows.HTTPResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -84,8 +87,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static java.util.stream.Collectors.toList;
-import static org.apache.hc.client5.http.protocol.HttpClientContext.create;
-import static org.apache.hc.core5.util.Timeout.of;
+import static org.apache.http.client.protocol.HttpClientContext.create;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -99,6 +101,7 @@ public class GeoSDIHttpClient5 implements HTTPClient {
     private String user;
     private String password;
     private boolean tryGzip = true;
+    private final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
     private List<WMSHeaderParam> headers;
 
     GeoSDIHttpClient5() {
@@ -111,12 +114,11 @@ public class GeoSDIHttpClient5 implements HTTPClient {
                 .setRequestExecutor(new HttpRequestExecutor())
                 .setConnectionManager(createClientConnectionManager())
                 .setDefaultRequestConfig(RequestConfig.custom()
-                        .setConnectTimeout(of(3l, MINUTES))
-                        .setConnectionRequestTimeout(of(3l, MINUTES))
-                        .setConnectionKeepAlive(TimeValue.of(1l, MINUTES))
+                        .setConnectTimeout(3 * 1000)
+                        .setConnectionRequestTimeout(3 * 1000)
                         .setMaxRedirects(3)
                         .build())
-                .setDefaultCredentialsProvider(new BasicCredentialsProvider())
+                .setDefaultCredentialsProvider(this.credentialsProvider)
                 .build();
     }
 
@@ -157,10 +159,12 @@ public class GeoSDIHttpClient5 implements HTTPClient {
             try {
                 URI uri = url.toURI();
                 HttpClientContext localContext = create();
-                HttpHost targetHost = new HttpHost(uri.getScheme(), uri.getHost(), this.retrieveNoSetPort(uri));
-                BasicScheme basicAuth = new BasicScheme();
-                basicAuth.initPreemptive(new UsernamePasswordCredentials(this.user, this.password.toCharArray()));
-                localContext.resetAuthExchange(targetHost, basicAuth);
+                AuthScope authScope = new AuthScope(uri.getHost(), uri.getPort());
+                this.credentialsProvider.setCredentials(authScope, new UsernamePasswordCredentials(this.user, this.password));
+                HttpHost targetHost = new HttpHost(uri.getHost(), this.retrieveNoSetPort(uri), uri.getScheme());
+                AuthCache authCache = new BasicAuthCache();
+                authCache.put(targetHost, new BasicScheme());
+                localContext.setAuthCache(authCache);
                 response = this.httpClient.execute(targetHost, httpPost, localContext);
             } catch (URISyntaxException ex) {
                 throw new IOException("URISyntaxException error : " + ex.getMessage() + " for URL " + url.toExternalForm());
@@ -168,7 +172,7 @@ public class GeoSDIHttpClient5 implements HTTPClient {
         } else {
             response = this.httpClient.execute(httpPost);
         }
-        int responseCode = response.getCode();
+        int responseCode = response.getStatusLine().getStatusCode();
         if (200 != responseCode) {
             response.close();
             throw new IOException("Server returned HTTP error code " + responseCode + " for URL " + url.toExternalForm());
@@ -212,10 +216,12 @@ public class GeoSDIHttpClient5 implements HTTPClient {
             try {
                 URI uri = url.toURI();
                 HttpClientContext localContext = create();
-                HttpHost targetHost = new HttpHost(uri.getScheme(), uri.getHost(), this.retrieveNoSetPort(uri));
-                BasicScheme basicAuth = new BasicScheme();
-                basicAuth.initPreemptive(new UsernamePasswordCredentials(this.user, this.password.toCharArray()));
-                localContext.resetAuthExchange(targetHost, basicAuth);
+                AuthScope authScope = new AuthScope(uri.getHost(), uri.getPort());
+                this.credentialsProvider.setCredentials(authScope, new UsernamePasswordCredentials(this.user, this.password));
+                HttpHost targetHost = new HttpHost(uri.getHost(), this.retrieveNoSetPort(uri), uri.getScheme());
+                AuthCache authCache = new BasicAuthCache();
+                authCache.put(targetHost, new BasicScheme());
+                localContext.setAuthCache(authCache);
                 response = this.httpClient.execute(targetHost, httpGet, localContext);
             } catch (URISyntaxException ex) {
                 throw new IOException("URISyntaxException error : " + ex.getMessage() + " for URL " + url.toExternalForm());
@@ -224,7 +230,7 @@ public class GeoSDIHttpClient5 implements HTTPClient {
             response = this.httpClient.execute(httpGet);
         }
 
-        int responseCode = response.getCode();
+        int responseCode = response.getStatusLine().getStatusCode();
         if (200 != responseCode) {
             response.close();
             throw new IOException("Server returned HTTP error code " + responseCode + " for URL " + url.toExternalForm());
@@ -406,7 +412,7 @@ public class GeoSDIHttpClient5 implements HTTPClient {
 
         public String getResponseHeader(String headerName) {
             try {
-                Header responseHeader = this.response.getHeader(headerName);
+                Header responseHeader = this.response.getFirstHeader(headerName);
                 return responseHeader == null ? null : responseHeader.getValue();
             } catch (Exception ex) {
                 return null;
@@ -417,7 +423,7 @@ public class GeoSDIHttpClient5 implements HTTPClient {
             if (this.responseBodyAsStream == null) {
                 this.responseBodyAsStream = this.response.getEntity().getContent();
                 try {
-                    Header header = this.response.getHeader("Content-Encoding");
+                    Header header = this.response.getFirstHeader("Content-Encoding");
                     if (header != null && "gzip".equals(header.getValue())) {
                         this.responseBodyAsStream = new GZIPInputStream(this.responseBodyAsStream);
                     }

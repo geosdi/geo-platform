@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.wms;
 import org.geosdi.geoplatform.response.RasterLayerDTO;
 import org.geosdi.geoplatform.services.builder.GPWMSCapabilitesBuilder;
 import org.geosdi.geoplatform.services.builder.IGPWMSCapabilitesBuilder;
-import org.junit.FixMethodOrder;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -60,7 +59,7 @@ public class GPWMSCapabilitesBuilderTest {
     
     @Test
     public void a_loadWMSCapabilitiesTest() throws Exception {
-        List<RasterLayerDTO> rasterLayers = wmsCapabilitiesBuilder.loadWMSCapabilities("http://150.145.141.180/geoserver/wms", null, null);
+        List<RasterLayerDTO> rasterLayers = wmsCapabilitiesBuilder.loadWMSCapabilities("http://150.145.141.180/geoserver/wms", null, null, null, null);
         checkArgument(rasterLayers.size() > 0);
         for (RasterLayerDTO rasterLayerDTO : rasterLayers.get(0).getSubLayerList()) {
             logger.info("######################LAYER : {} - STYLE_LIST : {}\n", rasterLayerDTO, rasterLayerDTO.getStyleList());

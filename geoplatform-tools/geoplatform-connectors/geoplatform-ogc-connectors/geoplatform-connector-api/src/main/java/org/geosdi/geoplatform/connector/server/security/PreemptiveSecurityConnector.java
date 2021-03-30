@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.server.security;
 
-import org.apache.hc.client5.http.auth.AuthCache;
 import org.apache.hc.client5.http.auth.AuthScheme;
 import org.apache.hc.client5.http.classic.methods.HttpUriRequest;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
@@ -57,7 +56,6 @@ import static org.apache.hc.client5.http.protocol.HttpClientContext.create;
 public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnector {
 
     private HttpHost httpHost;
-    protected AuthCache authCache;
     protected HttpClientContext localContext;
 
     /**

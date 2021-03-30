@@ -35,26 +35,31 @@
  */
 package org.geosdi.geoplatform.response;
 
-import com.google.common.collect.Lists;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
-import org.geosdi.geoplatform.gui.shared.util.GPSharedUtils;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 import java.util.List;
+import java.util.Objects;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.util.stream.Collectors.toList;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
  */
 //@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"id", "name", "position", "shared", "checked", "title", "alias", "urlServer", "srs", "abstractText", "layerType", "bbox", "cached", "cqlFilter", "timeFilter", "singleTileRequest"})
+@XmlType(propOrder = {"id", "name", "position", "shared", "checked", "title", "alias", "urlServer", "srs",
+        "abstractText", "layerType", "bbox", "cached", "cqlFilter", "timeFilter", "singleTileRequest"})
 @XmlSeeAlso(value = {RasterLayerDTO.class, VectorLayerDTO.class})
 public class ShortLayerDTO extends AbstractElementDTO {
 
@@ -245,19 +250,30 @@ public class ShortLayerDTO extends AbstractElementDTO {
      */
     @Override
     public String toString() {
-        String s = super
-                .toString() + ", title=" + title + ", alias=" + alias + ", urlServer=" + urlServer + ", srs=" + srs + ", abstractText=" + abstractText + ", cqlFilter=" + cqlFilter + ", timeFilter=" + timeFilter + ", layerType=" + layerType + ", " + bbox + ", cached=" + cached + ", singleTileRequest=" + singleTileRequest;
-        return s;
+        return super.toString()
+                + ", title = " + title
+                + ", alias = " + alias
+                + ", urlServer = " + urlServer
+                + ", srs = " + srs
+                + ", abstractText = " + abstractText
+                + ", cqlFilter = " + cqlFilter
+                + ", timeFilter = " + timeFilter
+                + ", layerType = " + layerType
+                + ", bbox = " + bbox
+                + ", cached = " + cached
+                + ", singleTileRequest = " + singleTileRequest;
     }
 
-    public static List<ShortLayerDTO> convertToShortLayerDTOList(List<GPLayer> layers) {
-        List<ShortLayerDTO> layersDTO = Lists.<ShortLayerDTO>newArrayListWithCapacity(layers.size());
-
-        for (GPLayer layer : GPSharedUtils.safeList(layers)) {
-            layersDTO.add(new ShortLayerDTO(layer));
-        }
-
-        return layersDTO;
+    /**
+     * @param layers
+     * @return {@link List<ShortLayerDTO>}
+     */
+    public static List<ShortLayerDTO> convertToShortLayerDTOList(@Nonnull(when = NEVER) List<GPLayer> layers) {
+        checkArgument(layers != null, "The Parameter layers must not be null.");
+        return layers.stream()
+                .filter(Objects::nonNull)
+                .map(ShortLayerDTO::new)
+                .collect(toList());
     }
 
     /**

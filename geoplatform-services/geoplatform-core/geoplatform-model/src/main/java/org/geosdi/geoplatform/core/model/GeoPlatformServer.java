@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.core.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.OnDelete;
@@ -53,6 +54,7 @@ import java.io.Serializable;
 //@XmlRootElement(name = "Server")
 @Getter
 @Setter
+@ToString
 @Entity
 @Table(name = "gp_server", indexes = {
         @Index(columnList = "server_url", name = "SERVER_URL_INDEX"),
@@ -97,49 +99,11 @@ public class GeoPlatformServer implements Serializable {
     @Column
     private boolean proxy;
 
-    public GeoPlatformServer() {
-    }
-
-    public GeoPlatformServer(Long id, String serverUrl, String name, String aliasName, String title,
-            String abstractServer, GPCapabilityType serverType, GPOrganization organization) {
-        this.id = id;
-        this.serverUrl = serverUrl;
-        this.name = name;
-        this.aliasName = aliasName;
-        this.title = title;
-        this.abstractServer = abstractServer;
-        this.serverType = serverType;
-        this.organization = organization;
-    }
-
     /**
      *
      * @return
      */
     public boolean isProtected() {
-        return this.authServer != null && (this.authServer.getPassword() != null && !this.authServer.getPassword().isEmpty())
-                && (this.authServer.getUsername() != null && !this.authServer.getUsername().isEmpty());
-    }
-
-
-    /**
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        StringBuilder str = new StringBuilder("GeoPlatformServer {");
-        str.append("id=").append(id);
-        str.append(", serverType=").append(serverType);
-        str.append(", serverUrl=").append(serverUrl);
-        str.append(", name=").append(name);
-        str.append(", aliasName=").append(aliasName);
-        str.append(", title=").append(title);
-        str.append(", abstractServer=").append(abstractServer);
-        str.append(", organization=").append(organization);
-        str.append(", authServer=").append(authServer);
-        str.append(", proxy=").append(proxy);
-        return str.append("}").toString();
+        return ((this.authServer != null) && (this.authServer.isActive()));
     }
 }

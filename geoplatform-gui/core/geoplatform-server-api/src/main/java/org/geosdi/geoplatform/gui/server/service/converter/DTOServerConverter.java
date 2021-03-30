@@ -151,6 +151,10 @@ public class DTOServerConverter {
         server.setLayers(serverDTO.getLayerList() != null
                 ? this.createRasterLayerList(serverDTO.getLayerList()) : null);
         server.setOrganization(serverDTO.getOrganization());
+        server.setProxy(serverDTO.isProxy());
+        server.setPassword(serverDTO.getPassword());
+        server.setUsername(serverDTO.getUsername());
+        server.setServerProtected(serverDTO.isServerProtected());
         return server;
     }
 

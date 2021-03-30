@@ -169,6 +169,11 @@ public class UpdateAddServerRequest implements GPCommandRequest {
     }
 
     @Override
+    public String toString() {
+        return "UpdateAddServerRequest{" + "serverID=" + serverID + ", alias='" + alias + '\'' + ", url='" + url + '\'' + ", organitation='" + organitation + '\'' + ", username='" + username + '\'' + ", password='" + password + '\'' + ", proxy=" + proxy + '}';
+    }
+
+    @Override
     public String getCommandName() {
         return "command.servermanagement.UpdateAddServerCommand";
     }

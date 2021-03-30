@@ -293,7 +293,6 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
                                 } else {
                                     setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
                                             EnumSearchServer.STATUS_MESSAGE_LOAD.toString());
-                                    GWT.log("" +result);
                                     store.add(result);
                                     store.sort(GPServerKeyValue.ALIAS.getValue(), Style.SortDir.ASC);
                                 }

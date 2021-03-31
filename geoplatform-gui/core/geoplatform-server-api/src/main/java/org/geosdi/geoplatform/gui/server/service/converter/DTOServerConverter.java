@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.service.converter;
 
+import org.geosdi.geoplatform.configurator.crypt.GPPooledPBEStringEncryptorDecorator;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.core.model.temporal.dimension.GPTemporalDimension;
 import org.geosdi.geoplatform.core.model.temporal.extent.GPTemporalExtent;
@@ -50,6 +51,7 @@ import org.geosdi.geoplatform.response.ServerDTO;
 import org.geosdi.geoplatform.response.ShortLayerDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -65,8 +67,10 @@ import static org.geosdi.geoplatform.gui.shared.GPLayerType.WMS;
 @Component(value = "dtoServerConverter")
 public class DTOServerConverter {
 
-    private final Logger logger = LoggerFactory.getLogger(
-            this.getClass().getName());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+    //
+    @Autowired
+    private GPPooledPBEStringEncryptorDecorator pooledPBEStringEncryptorDecorator;
 
     /**
      * @param serversWS
@@ -85,7 +89,8 @@ public class DTOServerConverter {
                 server.setOrganization(serverDTO.getOrganization());
                 server.setServerProtected(serverDTO.isServerProtected());
                 server.setUsername(serverDTO.getUsername());
-                server.setPassword(serverDTO.getPassword());
+                if(serverDTO.isServerProtected())
+                    server.setPassword(this.pooledPBEStringEncryptorDecorator.decrypt(serverDTO.getPassword()));
                 server.setProxy(serverDTO.isProxy());
                 serversDTO.add(server);
             }
@@ -152,7 +157,8 @@ public class DTOServerConverter {
                 ? this.createRasterLayerList(serverDTO.getLayerList()) : null);
         server.setOrganization(serverDTO.getOrganization());
         server.setProxy(serverDTO.isProxy());
-        server.setPassword(serverDTO.getPassword());
+        if(serverDTO.isServerProtected())
+            server.setPassword(this.pooledPBEStringEncryptorDecorator.decrypt(serverDTO.getPassword()));
         server.setUsername(serverDTO.getUsername());
         server.setServerProtected(serverDTO.isServerProtected());
         return server;

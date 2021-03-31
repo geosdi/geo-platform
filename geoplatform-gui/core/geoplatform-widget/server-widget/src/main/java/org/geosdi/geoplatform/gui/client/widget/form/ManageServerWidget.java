@@ -192,10 +192,25 @@ public class ManageServerWidget extends Window {
                 passwordText());
         passowrdColumn.setWidth(100);
 
+
+        GridCellRenderer<GPServerBeanModel> buttonRendered = new GridCellRenderer<GPServerBeanModel>()
+        {
+
+            private String convertPassword(String password) {
+
+                return password != null ? password.replaceAll(".", "*") : "";
+            }
+
+            public Object render(final GPServerBeanModel model, String property, ColumnData config,
+                    int rowIndex, int colIndex, ListStore<GPServerBeanModel> store, Grid<GPServerBeanModel> grid)
+            {
+                return "<span>" + convertPassword(model.getPassword()) +  "</span>";
+            }
+        };
+
+        passowrdColumn.setRenderer(buttonRendered);
         passowrdColumn.setEditor(new CellEditor(passwordTextfield));
         configs.add(passowrdColumn);
-
-
 
         final CheckBox checkBoxSecure = new CheckBox();
         checkBoxSecure.addListener(Events.Change, new Listener<FieldEvent>() {
@@ -211,6 +226,7 @@ public class ManageServerWidget extends Window {
                     passwordTextfield.setAllowBlank(false);
 
                 } else {
+                    checkBoxProxy.setValue(false);
                     usernameTextfield.setValue(null);
                     usernameTextfield.disable();
                     checkBoxProxy.enable();
@@ -281,6 +297,7 @@ public class ManageServerWidget extends Window {
         super.add(this.createServerFilter());
         this.addButtonsToTheWindow(rowEditor);
     }
+
 
     private void addButtonsToTheWindow(final RowEditor<GPServerBeanModel> rowEditor) {
         ToolBar toolBar = new ToolBar();

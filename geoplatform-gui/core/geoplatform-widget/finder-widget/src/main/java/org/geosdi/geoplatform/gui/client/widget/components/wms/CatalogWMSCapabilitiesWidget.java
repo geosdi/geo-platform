@@ -39,7 +39,6 @@ import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.WidgetListener;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
-import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
@@ -47,13 +46,14 @@ import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.URIDTO;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogWMSCapabilitiesWidget extends GeoPlatformWindow
-        implements GPCatalogWMSCapabilitiesWidget {
+public class CatalogWMSCapabilitiesWidget extends GeoPlatformWindow implements GPCatalogWMSCapabilitiesWidget {
 
     private CatalogGridLayersWidget catalogGridLayers;
     private final TreePanel tree;

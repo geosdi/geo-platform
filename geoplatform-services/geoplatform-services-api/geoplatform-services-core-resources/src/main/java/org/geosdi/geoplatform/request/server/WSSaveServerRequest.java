@@ -62,8 +62,17 @@ public class WSSaveServerRequest implements Serializable {
     public WSSaveServerRequest() {
     }
 
-    public WSSaveServerRequest(Long theId, String theAliasServerName,
-            String theServerUrl, String theOrganization, String theUsername, String thePassword, boolean theProxy) {
+    /**
+     * @param theId
+     * @param theAliasServerName
+     * @param theServerUrl
+     * @param theOrganization
+     * @param theUsername
+     * @param thePassword
+     * @param theProxy
+     */
+    public WSSaveServerRequest(Long theId, String theAliasServerName, String theServerUrl, String theOrganization,
+            String theUsername, String thePassword, boolean theProxy) {
         this.id = theId;
         this.aliasServerName = theAliasServerName;
         this.serverUrl = theServerUrl;
@@ -73,8 +82,13 @@ public class WSSaveServerRequest implements Serializable {
         this.proxy = theProxy;
     }
 
-    public WSSaveServerRequest(Long theId, String theAliasServerName,
-            String theServerUrl, String theOrganization) {
+    /**
+     * @param theId
+     * @param theAliasServerName
+     * @param theServerUrl
+     * @param theOrganization
+     */
+    public WSSaveServerRequest(Long theId, String theAliasServerName, String theServerUrl, String theOrganization) {
         this(theId, theAliasServerName, theServerUrl, theOrganization, null, null, false);
     }
 
@@ -193,5 +207,4 @@ public class WSSaveServerRequest implements Serializable {
                 + ", proxy = " + proxy
                 + '}';
     }
-
 }

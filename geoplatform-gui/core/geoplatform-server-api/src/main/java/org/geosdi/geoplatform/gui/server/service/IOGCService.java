@@ -83,8 +83,7 @@ public interface IOGCService {
      * @return {@link ArrayList<String>}
      * @throws GeoPlatformException
      */
-    ArrayList<? extends GPLayerGrid> getCapabilities(String serverUrl, HttpServletRequest httpServletRequest, Long idServer)
-            throws GeoPlatformException;
+    ArrayList<? extends GPLayerGrid> getCapabilities(String serverUrl, HttpServletRequest httpServletRequest, Long idServer) throws GeoPlatformException;
 
     /**
      * @param serverUrl

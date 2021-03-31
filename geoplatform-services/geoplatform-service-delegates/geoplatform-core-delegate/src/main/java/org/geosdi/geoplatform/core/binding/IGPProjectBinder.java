@@ -46,8 +46,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface IGPProjectBinder<TO extends GPProject, FROM extends GPProject, B extends IGPProjectBinder>
-        extends IBinder<TO, FROM, IGPProjectBinder<TO, FROM, B>> {
+public interface IGPProjectBinder<TO extends GPProject, FROM extends GPProject, B extends IGPProjectBinder> extends IBinder<TO, FROM, IGPProjectBinder<TO, FROM, B>> {
 
     /**
      * @param nameProject
@@ -55,13 +54,15 @@ public interface IGPProjectBinder<TO extends GPProject, FROM extends GPProject, 
      */
     IGPProjectBinder<TO, FROM, B> withNameProject(String nameProject);
 
-    class GPProjectBinder extends AbstractBinder<GPProject, GPProject, IGPProjectBinder<GPProject, GPProject, IGPProjectBinder>>
-            implements IGPProjectBinder<GPProject, GPProject, IGPProjectBinder> {
+    class GPProjectBinder extends AbstractBinder<GPProject, GPProject, IGPProjectBinder<GPProject, GPProject, IGPProjectBinder>> implements IGPProjectBinder<GPProject, GPProject, IGPProjectBinder> {
 
         private String projectName;
 
         protected GPProjectBinder(){super();}
 
+        /**
+         * @return {@link IGPProjectBinder<GPProject, GPProject, IGPProjectBinder>}
+         */
         public static IGPProjectBinder<GPProject, GPProject, IGPProjectBinder> newGProjectBinder() {
             return new GPProjectBinder();
         }

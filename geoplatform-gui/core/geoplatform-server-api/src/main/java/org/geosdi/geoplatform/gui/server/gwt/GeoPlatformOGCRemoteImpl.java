@@ -51,8 +51,7 @@ import java.util.ArrayList;
  * @email giuseppe.lascaleia@geosdi.org
  *
  */
-public class GeoPlatformOGCRemoteImpl extends GPAutoInjectingXsrfTokenServiceServlet
-        implements GeoPlatformOGCRemote {
+public class GeoPlatformOGCRemoteImpl extends GPAutoInjectingXsrfTokenServiceServlet implements GeoPlatformOGCRemote {
 
     private static final long serialVersionUID = 7340579377487014548L;
     //
@@ -60,8 +59,7 @@ public class GeoPlatformOGCRemoteImpl extends GPAutoInjectingXsrfTokenServiceSer
     private IOGCService ogcService;
 
     @Override
-    public ArrayList<GPServerBeanModel> loadServers(String organizationName)
-            throws GeoPlatformException {
+    public ArrayList<GPServerBeanModel> loadServers(String organizationName) throws GeoPlatformException {
         return ogcService.loadServers(organizationName);
     }
 
@@ -88,10 +86,9 @@ public class GeoPlatformOGCRemoteImpl extends GPAutoInjectingXsrfTokenServiceSer
     }
 
     @Override
-    public GPServerBeanModel saveServer(Long id, String aliasServerName,
-            String urlServer, String organization, String username, String password, boolean proxy) throws GeoPlatformException {
-        return ogcService.saveServer(id, aliasServerName, urlServer,
-                organization, username, password, proxy);
+    public GPServerBeanModel saveServer(Long id, String aliasServerName, String urlServer, String organization,
+            String username, String password, boolean proxy) throws GeoPlatformException {
+        return ogcService.saveServer(id, aliasServerName, urlServer, organization, username, password, proxy);
     }
 
     @Override

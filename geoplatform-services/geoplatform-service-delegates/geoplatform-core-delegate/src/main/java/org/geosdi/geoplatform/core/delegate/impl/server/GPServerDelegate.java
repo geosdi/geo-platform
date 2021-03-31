@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.core.delegate.impl.server;
 import org.geosdi.geoplatform.core.dao.GPOrganizationDAO;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.delegate.api.server.ServerDelegate;
+import org.geosdi.geoplatform.core.model.GPAuthServer;
 import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -88,8 +89,7 @@ public class GPServerDelegate implements ServerDelegate {
     }
 
     @Override
-    public Long updateServer(GeoPlatformServer server) throws
-            ResourceNotFoundFault, IllegalParameterFault {
+    public Long updateServer(GeoPlatformServer server) throws ResourceNotFoundFault, IllegalParameterFault {
         GeoPlatformServer orig = serverDao.find(server.getId());
         if (orig == null) {
             throw new ResourceNotFoundFault("Server not found", server.getId());
@@ -117,8 +117,7 @@ public class GPServerDelegate implements ServerDelegate {
     }
 
     @Override
-    public GeoPlatformServer getServerDetail(Long idServer) throws
-            ResourceNotFoundFault {
+    public GeoPlatformServer getServerDetail(Long idServer) throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.find(idServer);
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found", idServer);
@@ -127,8 +126,7 @@ public class GPServerDelegate implements ServerDelegate {
     }
 
     @Override
-    public ServerDTO getShortServer(String serverUrl) throws
-            ResourceNotFoundFault {
+    public ServerDTO getShortServer(String serverUrl) throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found " + serverUrl);
@@ -137,13 +135,10 @@ public class GPServerDelegate implements ServerDelegate {
     }
 
     @Override
-    public ServerDTOContainer getAllServers(String organizationName) throws
-            ResourceNotFoundFault {
-        GPOrganization organization = organizationDao.findByName(
-                organizationName);
+    public ServerDTOContainer getAllServers(String organizationName) throws ResourceNotFoundFault {
+        GPOrganization organization = organizationDao.findByName(organizationName);
         if (organization == null) {
-            throw new ResourceNotFoundFault("Organization with name "
-                    + organizationName + "was not found.");
+            throw new ResourceNotFoundFault("Organization with name " + organizationName + "was not found.");
         }
 
         List<GeoPlatformServer> found = serverDao.findAll(organization.getId(), WMS);
@@ -151,8 +146,7 @@ public class GPServerDelegate implements ServerDelegate {
     }
 
     @Override
-    public GeoPlatformServer getServerDetailByUrl(String serverUrl) throws
-            ResourceNotFoundFault {
+    public GeoPlatformServer getServerDetailByUrl(String serverUrl) throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found by URL");
@@ -161,8 +155,7 @@ public class GPServerDelegate implements ServerDelegate {
     }
 
     @Override
-    public ServerDTO saveServer(WSSaveServerRequest saveServerReq) throws
-            IllegalParameterFault {
+    public ServerDTO saveServer(WSSaveServerRequest saveServerReq) throws IllegalParameterFault {
         if (saveServerReq == null) {
             throw new IllegalParameterFault("The WSSaveServerRequest must "
                     + "not be null.");
@@ -181,8 +174,7 @@ public class GPServerDelegate implements ServerDelegate {
 
         GPOrganization org = organizationDao.findByName(organization);
         if (org == null) {
-            throw new IllegalParameterFault(
-                    "Server to save have an organization that does not exist");
+            throw new IllegalParameterFault("Server to save have an organization that does not exist");
         }
 
         GeoPlatformServer server;
@@ -197,9 +189,9 @@ public class GPServerDelegate implements ServerDelegate {
         }
         server.setAliasName(aliasServerName);
         server.setServerUrl(serverUrl);
+        server.setAuthServer(new GPAuthServer(saveServerReq.getUsername(), saveServerReq.getPassword()));
+        server.setProxy(saveServerReq.isProxy());
         server.setOrganization(org);
-        server.setAuthServer(server.getAuthServer());
-        server.setProxy(server.isProxy());
         serverDao.persist(server);
         return new ServerDTO(server);
     }

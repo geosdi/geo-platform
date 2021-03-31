@@ -39,8 +39,9 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.google.gwt.user.server.rpc.XsrfProtect;
-import java.util.List;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+
+import java.util.List;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -53,8 +54,7 @@ public interface ServerRemote extends RemoteService {
 
     public static class Util {
 
-        private static final ServerRemoteAsync instance = (ServerRemoteAsync) GWT.create(
-                ServerRemote.class);
+        private static final ServerRemoteAsync instance = (ServerRemoteAsync) GWT.create(ServerRemote.class);
 
         public static ServerRemoteAsync getInstance() {
             return instance;

@@ -34,6 +34,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.servermanagement;
 
+import org.geosdi.geoplatform.configurator.crypt.GPPooledPBEStringEncryptorDecorator;
 import org.geosdi.geoplatform.gui.client.command.servermanagement.add.UpdateAddServerRequest;
 import org.geosdi.geoplatform.gui.client.command.servermanagement.add.UpdateAddServerResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -58,11 +59,14 @@ public class UpdateAddServerCommand implements GPCommand<UpdateAddServerRequest,
     //
     @Autowired
     private IOGCService ogcService;
+    @Autowired
+    private GPPooledPBEStringEncryptorDecorator pooledPBEStringEncryptorDecorator;
 
     @Override
     public UpdateAddServerResponse execute(UpdateAddServerRequest request, HttpServletRequest httpServletRequest) {
         logger.info("##################### Executing {} Command", this.getClass().getSimpleName());
         logger.info("@##########################REQUEST {}", request);
+        request.setPassword(this.pooledPBEStringEncryptorDecorator.encrypt(request.getPassword()));
         return new UpdateAddServerResponse(ogcService.saveServer(request.getServerID(), request.getAlias(), request.getUrl(), request.getOrganitation(),
                         request.getUsername(), request.getPassword(), request.isProxy()));
     }

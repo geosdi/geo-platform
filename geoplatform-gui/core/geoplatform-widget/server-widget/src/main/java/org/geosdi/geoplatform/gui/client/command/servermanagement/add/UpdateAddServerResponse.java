@@ -40,8 +40,8 @@ import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 
 /**
  *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
 public class UpdateAddServerResponse implements
         GPCommandResponse<GPServerBeanModel> {

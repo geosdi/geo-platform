@@ -33,37 +33,43 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.command.servermanagement.delete;
+package org.geosdi.geoplatform.gui.client.command.servermanagement.load;
 
-import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
+import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 
 /**
  *
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class DeleteServerResponse implements
-        GPCommandResponse<Boolean> {
+public class LoadServerRequest implements GPCommandRequest {
 
-    private static final long serialVersionUID = -4934915077693937878L;
+    private static final long serialVersionUID = -9033692443947602480L;
     //
-    private Boolean status;
+    private  String organization;
 
-    public DeleteServerResponse() {
+    public LoadServerRequest() {
     }
 
-    public DeleteServerResponse(Boolean status) {
-        this.status = status;
+    /**
+     *
+     * @return
+     */
+    public String getOrganization() {
+        return organization;
+    }
+
+    /**
+     *
+     * @param organization
+     */
+    public void setOrganization(String organization) {
+        this.organization = organization;
     }
 
     @Override
-    public Boolean getResult() {
-        return this.status;
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getName() + " {" + "result = " + status + '}';
+    public String getCommandName() {
+        return "command.servermanagement.LoadServerCommand";
     }
 
 }

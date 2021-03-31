@@ -50,12 +50,11 @@ import com.extjs.gxt.ui.client.widget.toolbar.FillToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.XsrfToken;
 import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.ServerWidgetResources;
+import org.geosdi.geoplatform.gui.client.command.servermanagement.load.LoadServerRequest;
+import org.geosdi.geoplatform.gui.client.command.servermanagement.load.LoadServerResponse;
 import org.geosdi.geoplatform.gui.client.command.user.GetUserAuthoritiesRequest;
 import org.geosdi.geoplatform.gui.client.command.user.GetUserAuthoritiesResponse;
 import org.geosdi.geoplatform.gui.client.event.timeout.DisplayGetCapabilitiesEvent;
@@ -101,6 +100,7 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
     private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
     private static final GeoPlatformOGCRemoteAsync geoPlatformOGCRemote = GeoPlatformOGCRemote.Util.getInstance();
     //
+    private final LoadServerRequest loadServerRequest = GWT.create(LoadServerRequest.class);;
     private ToolBar toolbar;
     private ComboBox<GPServerBeanModel> comboServer;
     private final ListStore<GPServerBeanModel> store = new ListStore<GPServerBeanModel>();
@@ -259,45 +259,38 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
         this.comboServer.clear();
         this.gridWidget.cleanStore();
 
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+
+        GPClientCommandExecutor.executeCommand(new GPClientCommand<LoadServerResponse>() {
+
+            {
+                loadServerRequest.setOrganization(GPAccountLogged.getInstance().getOrganization());
+                super.setCommandRequest(loadServerRequest);
+            }
+
 
             @Override
-            public void onFailure(Throwable caught) {
-                throw new UnsupportedOperationException("Not supported yet.");
+            public void onCommandSuccess(LoadServerResponse response) {
+                if (response.getResult().isEmpty()) {
+                    setSearchStatus(EnumSearchStatus.STATUS_NO_SEARCH,
+                            SearchStatusConstants.INSTANCE.STATUS_MESSAGE_NOT_SEARCH());
+                    GeoPlatformMessage.alertMessage(ServerModuleConstants.INSTANCE.serverServiceText(),
+                            ServerModuleConstants.INSTANCE
+                                    .DisplayServerWidget_alerThereAreNoServerText());
+                } else {
+                    setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
+                            EnumSearchServer.STATUS_MESSAGE_LOAD.toString());
+                    store.add(response.getResult());
+                    store.sort(GPServerKeyValue.ALIAS.getValue(), Style.SortDir.ASC);
+                }
             }
 
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) geoPlatformOGCRemote).setRpcToken(token);
-                geoPlatformOGCRemote.loadServers(GPAccountLogged.getInstance().getOrganization(),
-                        new AsyncCallback<ArrayList<GPServerBeanModel>>() {
-
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
-                                        SearchStatusConstants.INSTANCE.STATUS_MESSAGE_SEARCH_ERROR());
-                                GeoPlatformMessage.errorMessage(ServerModuleConstants.INSTANCE.
-                                                serverServiceText(),
-                                        ServerModuleConstants.INSTANCE.errorLoadingServerBodyText());
-                            }
-
-                            @Override
-                            public void onSuccess(ArrayList<GPServerBeanModel> result) {
-                                if (result.isEmpty()) {
-                                    setSearchStatus(EnumSearchStatus.STATUS_NO_SEARCH,
-                                            SearchStatusConstants.INSTANCE.STATUS_MESSAGE_NOT_SEARCH());
-                                    GeoPlatformMessage.alertMessage(ServerModuleConstants.INSTANCE.serverServiceText(),
-                                            ServerModuleConstants.INSTANCE
-                                                    .DisplayServerWidget_alerThereAreNoServerText());
-                                } else {
-                                    setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
-                                            EnumSearchServer.STATUS_MESSAGE_LOAD.toString());
-                                    store.add(result);
-                                    store.sort(GPServerKeyValue.ALIAS.getValue(), Style.SortDir.ASC);
-                                }
-                            }
-
-                        });
+            public void onCommandFailure(Throwable exception) {
+                setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
+                        SearchStatusConstants.INSTANCE.STATUS_MESSAGE_SEARCH_ERROR());
+                GeoPlatformMessage.errorMessage(ServerModuleConstants.INSTANCE.
+                                serverServiceText(),
+                        ServerModuleConstants.INSTANCE.errorLoadingServerBodyText());
             }
         });
     }

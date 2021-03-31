@@ -64,6 +64,10 @@ public class CatalogWMSCapabilitiesAction extends SelectionListener<ButtonEvent>
 
     private final CatalogWMSCapabilitiesWidget wmsCapabilitiesWidget;
 
+    /**
+     * @param tree
+     * @param bus
+     */
     public CatalogWMSCapabilitiesAction(TreePanel tree, GPEventBus bus) {
         this.wmsCapabilitiesWidget = new CatalogWMSCapabilitiesWidget(tree, bus);
     }
@@ -72,16 +76,13 @@ public class CatalogWMSCapabilitiesAction extends SelectionListener<ButtonEvent>
     public void componentSelected(ButtonEvent ce) {
         final String serverURL = this.wmsCapabilitiesWidget.getWMSGetCapabilitiesURL();
         if (serverURL == null) {
-            GeoPlatformMessage.errorMessage("Error", "The WMS GetCapabilities "
-                    + "URL is null.");
+            GeoPlatformMessage.errorMessage("Error", "The WMS GetCapabilities URL is null.");
             return;
         }
-        LayoutManager.getInstance().getStatusMap().setBusy(
-                WindowsConstants.INSTANCE.loadingLayersText());
+        LayoutManager.getInstance().getStatusMap().setBusy(WindowsConstants.INSTANCE.loadingLayersText());
         this.wmsCapabilitiesWidget.show();
 
-        final BasicCapabilitiesRequest capabilitiesRequest = GWT.create(
-                BasicCapabilitiesRequest.class);
+        final BasicCapabilitiesRequest capabilitiesRequest = GWT.create(BasicCapabilitiesRequest.class);
         capabilitiesRequest.setServerUrl(serverURL);
 
         GPClientCommandExecutor.executeCommand(new GPClientCommand<BasicCapabilitiesResponse>() {

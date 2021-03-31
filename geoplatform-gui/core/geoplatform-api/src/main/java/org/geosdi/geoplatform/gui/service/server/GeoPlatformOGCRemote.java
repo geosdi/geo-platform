@@ -60,8 +60,7 @@ public interface GeoPlatformOGCRemote extends RemoteService {
 
         public static GeoPlatformOGCRemoteAsync getInstance() {
             if (instance == null) {
-                instance = (GeoPlatformOGCRemoteAsync) GWT.create(
-                        GeoPlatformOGCRemote.class);
+                instance = (GeoPlatformOGCRemoteAsync) GWT.create(GeoPlatformOGCRemote.class);
             }
 
             return instance;
@@ -74,8 +73,7 @@ public interface GeoPlatformOGCRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public ArrayList<String> findDistinctLayersDataSource()
-            throws GeoPlatformException;
+    public ArrayList<String> findDistinctLayersDataSource() throws GeoPlatformException;
 
     /**
      * Load All Server from GeoPlatform Web Services
@@ -84,8 +82,7 @@ public interface GeoPlatformOGCRemote extends RemoteService {
      *
      * @throws GeoPlatformException
      */
-    public ArrayList<GPServerBeanModel> loadServers(String organizationName)
-            throws GeoPlatformException;
+    public ArrayList<GPServerBeanModel> loadServers(String organizationName) throws GeoPlatformException;
 
     /**
      *
@@ -95,8 +92,7 @@ public interface GeoPlatformOGCRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public GPServerBeanModel getServerDetails(Long idServer)
-            throws GeoPlatformException;
+    public GPServerBeanModel getServerDetails(Long idServer) throws GeoPlatformException;
 
     /**
      *
@@ -114,8 +110,7 @@ public interface GeoPlatformOGCRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public ArrayList<? extends GPLayerGrid> getCapabilities(String serverUrl, Long idServer)
-            throws GeoPlatformException;
+    public ArrayList<? extends GPLayerGrid> getCapabilities(String serverUrl, Long idServer) throws GeoPlatformException;
 
     /**
      *
@@ -126,7 +121,5 @@ public interface GeoPlatformOGCRemote extends RemoteService {
      * @return
      * @throws GeoPlatformException
      */
-    public GPServerBeanModel saveServer(Long id, String aliasServerName,
-            String urlServer, String organization, String username, String password, boolean proxy)
-            throws GeoPlatformException;
+    public GPServerBeanModel saveServer(Long id, String aliasServerName, String urlServer, String organization, String username, String password, boolean proxy) throws GeoPlatformException;
 }

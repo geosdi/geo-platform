@@ -77,6 +77,5 @@ public interface GeoPlatformService extends RemoteService {
      *
      * @throws GeoPlatformException
      */
-    <Request extends GPCommandRequest, Response extends GPCommandResponse> Response execute(
-            Request request) throws GeoPlatformException;
+    <Request extends GPCommandRequest, Response extends GPCommandResponse> Response execute(Request request) throws GeoPlatformException;
 }

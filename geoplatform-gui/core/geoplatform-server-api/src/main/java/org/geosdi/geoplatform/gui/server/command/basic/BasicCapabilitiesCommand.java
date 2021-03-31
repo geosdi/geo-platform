@@ -65,7 +65,7 @@ public class BasicCapabilitiesCommand implements
 
     @Override
     public BasicCapabilitiesResponse execute(BasicCapabilitiesRequest request, HttpServletRequest httpServletRequest) {
-        logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
+        logger.debug("#####################Executing {} Command", this.getClass().getSimpleName());
         ArrayList<? extends GPLayerGrid> capabilitiesResult = this.ogcService.getCapabilitiesAuth(request.getServerUrl(), httpServletRequest, request.getIdServer());
         logger.debug("##################### FOUND {} ", capabilitiesResult);
         return new BasicCapabilitiesResponse(capabilitiesResult);

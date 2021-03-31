@@ -54,29 +54,23 @@ public interface ServerDelegate extends GPServerResource {
     Long insertServer(GeoPlatformServer server);
 
     @Override
-    Long updateServer(GeoPlatformServer server) throws ResourceNotFoundFault,
-            IllegalParameterFault;
+    Long updateServer(GeoPlatformServer server) throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Override
     Boolean deleteServer(Long idServer) throws ResourceNotFoundFault;
 
     @Override
-    GeoPlatformServer getServerDetail(Long idServer) throws
-            ResourceNotFoundFault;
+    GeoPlatformServer getServerDetail(Long idServer) throws ResourceNotFoundFault;
 
     @Override
     ServerDTO getShortServer(String serverUrl) throws ResourceNotFoundFault;
 
     @Override
-    ServerDTOContainer getAllServers(String organizationName) throws
-            ResourceNotFoundFault;
+    ServerDTOContainer getAllServers(String organizationName) throws ResourceNotFoundFault;
 
     @Override
-    GeoPlatformServer getServerDetailByUrl(String serverUrl)
-            throws ResourceNotFoundFault;
+    GeoPlatformServer getServerDetailByUrl(String serverUrl) throws ResourceNotFoundFault;
 
     @Override
-    ServerDTO saveServer(WSSaveServerRequest saveServerReq)
-            throws IllegalParameterFault;
-
+    ServerDTO saveServer(WSSaveServerRequest saveServerReq) throws IllegalParameterFault;
 }

@@ -84,12 +84,10 @@ import static org.geosdi.geoplatform.gui.model.server.GPServerBeanModel.GPServer
  */
 public class ManageServerWidget extends Window {
 
-    private final DeleteServerRequest requestDelete = GWT.create(
-            DeleteServerRequest.class);
-   private  UpdateAddServerRequest requestAdd;
+    private final DeleteServerRequest requestDelete = GWT.create(DeleteServerRequest.class);
+    private UpdateAddServerRequest requestAdd;
     private final PerformOperation operation = new PerformOperation();
-    private final Button deleteServerButton = new Button(
-            ServerModuleConstants.INSTANCE.ManageServerWidget_deleteButtonText());
+    private final Button deleteServerButton = new Button(ServerModuleConstants.INSTANCE.ManageServerWidget_deleteButtonText());
     private final DisplayServerWidget displayServerWidget;
     //
     private boolean initialized;
@@ -281,8 +279,7 @@ public class ManageServerWidget extends Window {
 
     private void addButtonsToTheWindow(final RowEditor<GPServerBeanModel> rowEditor) {
         ToolBar toolBar = new ToolBar();
-        Button addServerButton = new Button(ServerModuleConstants.INSTANCE.
-                addServerText());
+        Button addServerButton = new Button(ServerModuleConstants.INSTANCE.addServerText());
         addServerButton.addSelectionListener(new SelectionListener<ButtonEvent>() {
 
             @Override
@@ -430,13 +427,10 @@ public class ManageServerWidget extends Window {
 
                     @Override
                     public void onCommandFailure(Throwable caught) {
-                        GeoPlatformMessage.errorMessage(
-                                ServerModuleConstants.INSTANCE.ManageServerWidget_errorDeletingTitleText(),
-                                ServerModuleMessages.INSTANCE
-                                        .ManageServerWidget_errorDeletingBodyMessage(caught.getMessage(),
-                                                server.get(URL_SERVER.getValue()).toString()));
-                        LayoutManager.getInstance().getStatusMap().setStatus(ServerModuleMessages.INSTANCE.
-                                        ManageServerWidget_deleteServerErrorMessage(caught.getMessage()),
+                        GeoPlatformMessage.errorMessage(ServerModuleConstants.INSTANCE.ManageServerWidget_errorDeletingTitleText(),
+                                ServerModuleMessages.INSTANCE.ManageServerWidget_errorDeletingBodyMessage(caught.getMessage(),
+                                        server.get(URL_SERVER.getValue()).toString()));
+                        LayoutManager.getInstance().getStatusMap().setStatus(ServerModuleMessages.INSTANCE.ManageServerWidget_deleteServerErrorMessage(caught.getMessage()),
                                 EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
                     }
                 });

@@ -35,17 +35,17 @@
  */
 package org.geosdi.geoplatform.core.binding;
 
-import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.core.model.*;
 
 import java.util.function.Function;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface IGPLayerBinder<TO extends GPLayer, FROM extends GPLayer, B extends IGPLayerBinder>
-        extends IBinder<TO, FROM, IGPLayerBinder<TO, FROM, B>> {
+public interface IGPLayerBinder<TO extends GPLayer, FROM extends GPLayer, B extends IGPLayerBinder> extends IBinder<TO, FROM, IGPLayerBinder<TO, FROM, B>> {
 
     /**
      * @param projectCloned
@@ -59,8 +59,7 @@ public interface IGPLayerBinder<TO extends GPLayer, FROM extends GPLayer, B exte
      */
     IGPLayerBinder<TO, FROM, B> withFolderCloned(GPFolder folderCloned);
 
-    class GPLayerBinder extends AbstractBinder<GPLayer, GPLayer, IGPLayerBinder<GPLayer, GPLayer, IGPLayerBinder>>
-            implements IGPLayerBinder<GPLayer, GPLayer, IGPLayerBinder> {
+    class GPLayerBinder extends AbstractBinder<GPLayer, GPLayer, IGPLayerBinder<GPLayer, GPLayer, IGPLayerBinder>> implements IGPLayerBinder<GPLayer, GPLayer, IGPLayerBinder> {
 
         private GPProject projectCloned;
         private GPFolder folderCloned;
@@ -73,7 +72,7 @@ public interface IGPLayerBinder<TO extends GPLayer, FROM extends GPLayer, B exte
 
         protected void checkArguments() {
             super.checkArguments();
-            Preconditions.checkNotNull(projectCloned, "The Project Parameter must not be null.");
+            checkNotNull(projectCloned, "The Project Parameter must not be null.");
         }
 
         /**

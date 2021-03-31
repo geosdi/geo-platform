@@ -44,6 +44,7 @@ import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 public class BasicCapabilitiesRequest implements GPCommandRequest {
     
     private static final long serialVersionUID = -2103626001362046547L;
+    //
     private String serverUrl;
     private Long idServer;
 
@@ -78,6 +79,8 @@ public class BasicCapabilitiesRequest implements GPCommandRequest {
 
     @Override
     public String toString() {
-        return "BasicCapabilitiesRequest{" + "serverUrl=" + serverUrl + ", idServer=" + idServer + '}';
+        return "BasicCapabilitiesRequest{"
+                + "serverUrl = " + serverUrl
+                + ", idServer = " + idServer + '}';
     }
 }

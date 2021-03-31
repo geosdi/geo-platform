@@ -33,37 +33,40 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.command.servermanagement.delete;
+package org.geosdi.geoplatform.gui.client.command.servermanagement.load;
 
 import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
+import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
+
+import java.util.ArrayList;
 
 /**
  *
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class DeleteServerResponse implements
-        GPCommandResponse<Boolean> {
+public class LoadServerResponse implements
+        GPCommandResponse<ArrayList<GPServerBeanModel>> {
 
     private static final long serialVersionUID = -4934915077693937878L;
     //
-    private Boolean status;
+    private ArrayList<GPServerBeanModel> gpServerBeanModels;
 
-    public DeleteServerResponse() {
+    public LoadServerResponse() {
     }
 
-    public DeleteServerResponse(Boolean status) {
-        this.status = status;
+    public LoadServerResponse(ArrayList<GPServerBeanModel> gpServerBeanModels) {
+        this.gpServerBeanModels = gpServerBeanModels;
     }
 
     @Override
-    public Boolean getResult() {
-        return this.status;
+    public ArrayList<GPServerBeanModel> getResult() {
+        return this.gpServerBeanModels;
     }
 
     @Override
     public String toString() {
-        return getClass().getName() + " {" + "result = " + status + '}';
+        return getClass().getName() + " {" + "result = " + this.gpServerBeanModels + '}';
     }
 
 }

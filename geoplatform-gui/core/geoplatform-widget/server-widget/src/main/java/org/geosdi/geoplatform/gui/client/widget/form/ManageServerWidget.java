@@ -161,7 +161,8 @@ public class ManageServerWidget extends Window {
 
         //PROXY
         CheckColumnConfig checkBoxProxyColumn = new CheckColumnConfig(PROXY.getValue(), ServerModuleConstants.INSTANCE.proxyText(), 55);
-        checkBoxProxyColumn.setEditor(new CellEditor(new CheckBox()));
+        final CheckBox checkBoxProxy = new CheckBox();
+        checkBoxProxyColumn.setEditor(new CellEditor(checkBoxProxy));
 
         //SECURE
         final GPSecureStringTextField passwordTextfield = new GPSecureStringTextField();
@@ -202,13 +203,17 @@ public class ManageServerWidget extends Window {
             public void handleEvent(FieldEvent be) {
                 Boolean checked = (Boolean) be.getValue();
                 if (checked) {
+                    checkBoxProxy.setValue(true);
+                    checkBoxProxy.disable();
                     usernameTextfield.enable();
                     usernameTextfield.setAllowBlank(false);
                     passwordTextfield.enable();
                     passwordTextfield.setAllowBlank(false);
+
                 } else {
                     usernameTextfield.setValue(null);
                     usernameTextfield.disable();
+                    checkBoxProxy.enable();
                     usernameTextfield.setAllowBlank(true);
                     passwordTextfield.setValue(null);
                     passwordTextfield.disable();

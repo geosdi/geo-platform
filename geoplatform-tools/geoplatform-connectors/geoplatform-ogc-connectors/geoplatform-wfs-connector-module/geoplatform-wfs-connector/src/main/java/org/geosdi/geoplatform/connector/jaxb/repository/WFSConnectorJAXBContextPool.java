@@ -57,9 +57,7 @@ public final class WFSConnectorJAXBContextPool implements GeoPlatformJAXBContext
             jaxbContext = new WFSJAXBContextPool(WFS_CONTEXT_SERVICE_PROVIDER.getContextPath());
         } catch (JAXBException e) {
             e.printStackTrace();
-            logger.error("Failed to Initialize JAXBContext for Class "
-                    + WFSConnectorJAXBContextPool.class.getName()
-                    + ": @@@@@@@@@@@@@@@@@ " + e);
+            logger.error("Failed to Initialize JAXBContext for Class " + WFSConnectorJAXBContextPool.class.getName() + ": @@@@@@@@@@@@@@@@@ " + e);
         }
     }
 

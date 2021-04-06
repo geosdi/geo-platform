@@ -37,20 +37,21 @@ package org.geosdi.geoplatform.connector.pool.builder;
 
 import org.apache.commons.pool2.impl.GenericKeyedObjectPool;
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
-import org.geosdi.geoplatform.connector.WFSVersion;
-import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
+import org.geosdi.geoplatform.connector.api.pool.AbstractConnectorBuilderPool;
 import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorConfig;
 import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorKey;
 import org.geosdi.geoplatform.connector.pool.factory.GPWFSConnectorFactory;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static org.geosdi.geoplatform.connector.WFSVersion.fromString;
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPWFSConnectorBuilderPool extends AbstractConnectorBuilder<GPWFSConnectorBuilderPool, GPWFSConnectorStore> {
+public class GPWFSConnectorBuilderPool extends AbstractConnectorBuilderPool<GPWFSConnectorBuilderPool, GPWFSConnectorStore> {
 
     static {
         wfsConnectorPool = new GenericKeyedObjectPool<GPPoolConnectorKey, GPWFSConnectorStore>(new GPWFSConnectorFactory(), new GPPoolConnectorConfig());
@@ -61,21 +62,23 @@ public class GPWFSConnectorBuilderPool extends AbstractConnectorBuilder<GPWFSCon
     private GPWFSConnectorBuilderPool() {
     }
 
+    /**
+     * @return {@link GPWFSConnectorBuilderPool}
+     */
     public static GPWFSConnectorBuilderPool wfsConnectorBuilderPool() {
         return new GPWFSConnectorBuilderPool();
     }
 
     /**
+     * @param key
      * @return {@link GPWFSConnectorStore}
      * @throws Exception
      */
     @Override
-    public GPWFSConnectorStore build() throws Exception {
-        checkNotNull(serverUrl, "WFS_110 Server URL must not be null.");
-        WFSVersion v = fromString(this.version);
-        GPPoolConnectorKey keyConnector = new GPPoolConnectorKey(serverUrl, pooledConnectorConfig, securityConnector, v.getVersion());
-        GPWFSConnectorStore wfsStore = wfsConnectorPool.borrowObject(keyConnector);
-        wfsConnectorPool.returnObject(keyConnector, wfsStore);
+    protected GPWFSConnectorStore internalBuild(@Nonnull(when = NEVER) GPPoolConnectorKey key) throws Exception {
+        checkArgument(key != null, "The Parameter key must not be null.");
+        GPWFSConnectorStore wfsStore = wfsConnectorPool.borrowObject(key);
+        wfsConnectorPool.returnObject(key, wfsStore);
         return wfsStore;
     }
 }

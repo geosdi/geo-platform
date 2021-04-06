@@ -84,6 +84,6 @@ public enum WFSVersion implements GPServerConnector.GPServerConnectorVersion {
         Optional<WFSVersion> optional = stream(WFSVersion.values())
                 .filter(v -> ((theVersion != null) && !(theVersion.trim().isEmpty())) ? v.getVersion().equalsIgnoreCase(theVersion) : FALSE)
                 .findFirst();
-        return ((optional != null) && !(optional.equals(Optional.empty()))) ? optional.get() : WFSVersion.V110;
+        return optional.orElse(V110);
     }
 }

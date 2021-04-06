@@ -67,6 +67,6 @@ public class WFSConnectorBuilder extends AbstractConnectorBuilder<WFSConnectorBu
     public GPWFSConnectorStore build() throws Exception {
         checkArgument(this.serverUrl != null, "Error on WFS_110 Server Connector build: Server URL must not be null");
         WFSVersion v = fromString(version);
-        return new GPWFSConnectorStore(serverUrl, pooledConnectorConfig, securityConnector, v);
+        return new GPWFSConnectorStore(serverUrl, pooledConnectorConfig, securityConnector, sslConnectionSocketFactory, v);
     }
 }

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server;
 
+import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
 import org.geosdi.geoplatform.connector.WFSVersion;
 import org.geosdi.geoplatform.connector.WFSVersionException;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
@@ -48,7 +49,12 @@ import org.geosdi.geoplatform.connector.server.request.v110.WFSGetFeatureRequest
 import org.geosdi.geoplatform.connector.server.request.v110.WFSTransactionRequestV110;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.net.URL;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -65,7 +71,7 @@ public class GPWFSServerConnector extends GPAbstractServerConnector implements G
      * @param urlServer the String that represent WFS_110 server URL
      * @param version   the value of WFS_110 version. Must be 1.1.0
      */
-    public GPWFSServerConnector(String urlServer, String version) {
+    public GPWFSServerConnector(@Nonnull(when = NEVER) String urlServer, @Nullable String version) {
         this(urlServer, null, version);
     }
 
@@ -89,8 +95,8 @@ public class GPWFSServerConnector extends GPAbstractServerConnector implements G
      * @param securityConnector
      * @param version
      */
-    public GPWFSServerConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig,
-            GPSecurityConnector securityConnector, String version) {
+    public GPWFSServerConnector(@Nonnull(when = NEVER) String urlServer, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
+            @Nullable GPSecurityConnector securityConnector, @Nullable String version) {
         this(analyzesServerURL(urlServer), pooledConnectorConfig, securityConnector, toWFSVersion(version));
     }
 
@@ -104,8 +110,9 @@ public class GPWFSServerConnector extends GPAbstractServerConnector implements G
      * @param securityConnector {@link GPSecurityConnector}
      * @param theVersion        {@link WFSVersion} WFS_110 version. Must be 1.1.0
      */
-    public GPWFSServerConnector(URL server, GPSecurityConnector securityConnector, WFSVersion theVersion) {
+    public GPWFSServerConnector(@Nonnull(when = NEVER) URL server, @Nullable GPSecurityConnector securityConnector, @Nonnull(when = NEVER) WFSVersion theVersion) {
         super(server, securityConnector);
+        checkArgument(theVersion != null, "The Parameter WFSVersion must not be null.");
         this.version = theVersion;
     }
 
@@ -115,9 +122,24 @@ public class GPWFSServerConnector extends GPAbstractServerConnector implements G
      * @param securityConnector
      * @param theVersion
      */
-    public GPWFSServerConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig,
-            GPSecurityConnector securityConnector, WFSVersion theVersion) {
+    public GPWFSServerConnector(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
+            @Nullable GPSecurityConnector securityConnector, @Nonnull(when = NEVER) WFSVersion theVersion) {
         super(server, securityConnector, pooledConnectorConfig);
+        checkArgument(theVersion != null, "The Parameter WFSVersion must not be null.");
+        this.version = theVersion;
+    }
+
+    /**
+     * @param server
+     * @param pooledConnectorConfig
+     * @param securityConnector
+     * @param theVersion
+     */
+    public GPWFSServerConnector(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
+            @Nullable GPSecurityConnector securityConnector, @Nullable SSLConnectionSocketFactory theSslConnectionSocketFactory,
+            @Nonnull(when = NEVER) WFSVersion theVersion) {
+        super(server, securityConnector, pooledConnectorConfig, theSslConnectionSocketFactory);
+        checkArgument(theVersion != null, "The Parameter WFSVersion must not be null.");
         this.version = theVersion;
     }
 
@@ -197,13 +219,10 @@ public class GPWFSServerConnector extends GPAbstractServerConnector implements G
      * <p>
      * Method that convert String version in {@link WFSVersion} instance.</p>
      *
-     * @param version
+     * @param theVersion
      * @return {@link WFSVersion}
      */
-    private static WFSVersion toWFSVersion(String version) {
-        if (!version.equals("1.1.0")) {
-            throw new WFSVersionException("WFS_110 version must be 1.1.0");
-        }
-        return WFSVersion.V110;
+    private static WFSVersion toWFSVersion(@Nullable String theVersion) {
+        return WFSVersion.fromString(theVersion);
     }
 }

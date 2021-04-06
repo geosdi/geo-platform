@@ -36,12 +36,11 @@
 package org.geosdi.geoplatform.connector.pool.factory;
 
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
-import org.geosdi.geoplatform.connector.WFSVersion;
 import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorFactory;
 import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorKey;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static org.geosdi.geoplatform.connector.WFSVersion.fromString;
+import static org.geosdi.geoplatform.connector.WFSConnectorBuilder.newConnector;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -57,7 +56,11 @@ public class GPWFSConnectorFactory extends GPPoolConnectorFactory<GPPoolConnecto
     @Override
     public GPWFSConnectorStore create(GPPoolConnectorKey key) throws Exception {
         checkNotNull(key, "The GPPoolConnectorKey must not be null");
-        WFSVersion v = fromString(key.getVersion());
-        return new GPWFSConnectorStore(key.getServerUrl(), key.getPooledConnectorConfig(), key.getSecurityConnector(), v);
+        return newConnector()
+                .withServerUrl(key.getServerUrl())
+                .withPooledConnectorConfig(key.getPooledConnectorConfig())
+                .withClientSecurity(key.getSecurityConnector())
+                .withSslConnectionSocketFactory(key.getSslConnectionSocketFactory())
+                .build();
     }
 }

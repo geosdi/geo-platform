@@ -36,13 +36,11 @@
 package org.geosdi.geoplatform.connector.server.request;
 
 import javax.annotation.Nonnull;
-
 import java.util.Optional;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 import static java.util.Arrays.stream;
-import static java.util.Optional.empty;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -81,6 +79,6 @@ public enum TransactionIdGen implements GPTransactionIdGen {
         Optional<TransactionIdGen> optional = stream(TransactionIdGen.values())
                 .filter(v -> ((theValue != null) && !(theValue.trim().isEmpty())) ? v.value().equals(theValue) : FALSE)
                 .findFirst();
-        return (((optional != null) && !(optional.equals(empty()))) ? optional.get() : GENERATE_NEW);
+        return optional.orElse(GENERATE_NEW);
     }
 }

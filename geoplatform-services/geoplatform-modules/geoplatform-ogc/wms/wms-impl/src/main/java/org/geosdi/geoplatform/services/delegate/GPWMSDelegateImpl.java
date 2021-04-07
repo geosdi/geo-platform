@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.services.delegate;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.geosdi.geoplatform.configurator.crypt.GPPooledPBEStringEncryptorDecorator;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -56,6 +57,7 @@ import org.geosdi.geoplatform.services.response.WMSGetFeatureInfoResponse;
 import org.geosdi.geoplatform.wms.v111.WMSDescribeLayerResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
@@ -88,6 +90,8 @@ class GPWMSDelegateImpl implements GPWMSDelagate {
     private MessageSource wmsMessageSource;
     @Resource(name = "wmsRequestValidator")
     private GPI18NValidator<GPI18NRequestValidator, String> wmsRequestValidator;
+    @Autowired
+    private GPPooledPBEStringEncryptorDecorator pooledPBEStringEncryptorDecorator;
     private IGPWMSCapabilitesBuilder wmsCapabilitiesBuilder = new GPWMSCapabilitesBuilder();
 
     /**
@@ -144,7 +148,7 @@ class GPWMSDelegateImpl implements GPWMSDelagate {
             serverDTO = new ServerDTO(server);
             if (server.isProtected()) {
                 userName = server.getAuthServer().getUsername();
-                password = server.getAuthServer().getPassword();
+                password = this.pooledPBEStringEncryptorDecorator.decrypt(server.getAuthServer().getPassword());
             }
         } else {
             serverDTO = new ServerDTO();

@@ -35,25 +35,35 @@
  */
 package org.geosdi.geoplatform.response;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- * @author Michele Santomauro
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  */
+@ToString
 @XmlTransient
 @XmlSeeAlso(value = {FolderDTO.class, RasterLayerDTO.class,
     VectorLayerDTO.class, ShortLayerDTO.class})
 public abstract class AbstractElementDTO implements IElementDTO {
 
+    @Getter
+    @Setter
     private Long id; // Database identity
+    @Getter
+    @Setter
     private String name;
+    @Getter
+    @Setter
     private Integer position;
+    @Setter
     private Boolean shared;
+    @Setter
     private Boolean checked;
 
     //<editor-fold defaultstate="collapsed" desc="Constructor method">
@@ -80,53 +90,6 @@ public abstract class AbstractElementDTO implements IElementDTO {
         this.shared = shared;
         this.checked = checked;
     }
-    //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
-    /**
-     * @return the id
-     */
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the name
-     */
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @return the position
-     */
-    @Override
-    public Integer getPosition() {
-        return position;
-    }
-
-    /**
-     * @param position the position to set
-     */
-    public void setPosition(Integer position) {
-        this.position = position;
-    }
 
     /**
      * @return the shared state
@@ -136,26 +99,11 @@ public abstract class AbstractElementDTO implements IElementDTO {
     }
 
     /**
-     * @param shared the shared state to set
-     */
-    public void setShared(Boolean shared) {
-        this.shared = shared;
-    }
-
-    /**
      * @return the checked
      */
     public Boolean isChecked() {
         return checked;
     }
-
-    /**
-     * @param checked the checked to set
-     */
-    public void setChecked(Boolean checked) {
-        this.checked = checked;
-    }
-    //</editor-fold>
 
     /**
      * Sort IElementDTO object in the TreeFolderElements
@@ -167,19 +115,5 @@ public abstract class AbstractElementDTO implements IElementDTO {
     @Override
     public int compareTo(IElementDTO element) {
         return element.getPosition() - this.getPosition();
-    }
-
-    /**
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        return "id = " + id
-                + ", name = " + name
-                + ", position = " + position
-                + ", shared = " + shared
-                + ", checked = " + checked;
     }
 }

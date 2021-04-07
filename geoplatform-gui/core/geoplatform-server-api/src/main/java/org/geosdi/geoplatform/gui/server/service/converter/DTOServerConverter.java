@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.service.converter;
 
+import com.google.common.collect.Lists;
 import org.geosdi.geoplatform.configurator.crypt.GPPooledPBEStringEncryptorDecorator;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.core.model.temporal.dimension.GPTemporalDimension;
@@ -54,10 +55,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.util.stream.Collectors.toCollection;
+import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.gui.shared.GPLayerType.WMS;
 
 /**
@@ -65,9 +72,9 @@ import static org.geosdi.geoplatform.gui.shared.GPLayerType.WMS;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Component(value = "dtoServerConverter")
-public class DTOServerConverter {
+class DTOServerConverter implements GPDTOServerConverter {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+    private static final Logger logger = LoggerFactory.getLogger(DTOServerConverter.class);
     //
     @Autowired
     private GPPooledPBEStringEncryptorDecorator pooledPBEStringEncryptorDecorator;
@@ -76,34 +83,21 @@ public class DTOServerConverter {
      * @param serversWS
      * @return
      */
-    public ArrayList<GPServerBeanModel> convertServer(
-            Collection<ServerDTO> serversWS) {
-        ArrayList<GPServerBeanModel> serversDTO = new ArrayList<GPServerBeanModel>();
-        if (serversWS != null) {
-            for (ServerDTO serverDTO : serversWS) {
-                GPServerBeanModel server = new GPServerBeanModel();
-                server.setId(serverDTO.getId());
-                server.setAlias(serverDTO.getAlias());
-                server.setUrlServer(serverDTO.getServerUrl());
-                server.setName(serverDTO.getName());
-                server.setOrganization(serverDTO.getOrganization());
-                server.setServerProtected(serverDTO.isServerProtected());
-                server.setUsername(serverDTO.getUsername());
-                if(serverDTO.isServerProtected())
-                    server.setPassword(this.pooledPBEStringEncryptorDecorator.decrypt(serverDTO.getPassword()));
-                server.setProxy(serverDTO.isProxy());
-                serversDTO.add(server);
-            }
-        }
-
-        return serversDTO;
+    @Override
+    public ArrayList<GPServerBeanModel> convertServer(@Nullable Collection<ServerDTO> serversWS) {
+        return ((serversWS != null) ? serversWS.stream()
+                .filter(Objects::nonNull)
+                .map(this::fromServerDTO)
+                .collect(toCollection(ArrayList::new)) : Lists.newArrayList());
     }
 
     /**
      * @param server
-     * @return
+     * @return {@link GPServerBeanModel}
      */
-    public GPServerBeanModel getServerDetail(GeoPlatformServer server) {
+    @Override
+    public GPServerBeanModel getServerDetail(@Nonnull(when = NEVER) GeoPlatformServer server) throws Exception {
+        checkArgument(server != null, "The Parameter server must not be null.");
         GPServerBeanModel serverDTO = new GPServerBeanModel();
         serverDTO.setId(server.getId());
         serverDTO.setName(server.getName());
@@ -113,6 +107,11 @@ public class DTOServerConverter {
         if (server.getOrganization() != null) {
             serverDTO.setOrganization(server.getOrganization().getName());
         }
+        if (server.isProtected()) {
+            serverDTO.setUsername(server.getAuthServer().getUsername());
+            serverDTO.setPassword(server.getAuthServer().getPassword());
+        }
+        serverDTO.setProxy(server.isProxy());
         return serverDTO;
     }
 
@@ -120,8 +119,46 @@ public class DTOServerConverter {
      * @param layers
      * @return ArrayList<? extends GPLayerBeanModel>
      */
-    public ArrayList<? extends GPLayerGrid> createRasterLayerList(List<? extends ShortLayerDTO> layers) {
+    @Override
+    public ArrayList<? extends GPLayerGrid> createRasterLayerList(@Nullable List<? extends ShortLayerDTO> layers) {
         return this.createRasterLayerList(layers, new ArrayList<GPLayerGrid>());
+    }
+
+    /**
+     * @param serverDTO
+     * @return GPServerBeanModel
+     */
+    @Override
+    public GPServerBeanModel convertServerWS(@Nonnull(when = NEVER) ServerDTO serverDTO) throws Exception {
+        checkArgument(serverDTO != null, "The Parameter serverDTO must not be null.");
+        GPServerBeanModel server = new GPServerBeanModel();
+        server.setId(serverDTO.getId());
+        server.setAlias(serverDTO.getAlias());
+        server.setName(serverDTO.getName());
+        server.setUrlServer(serverDTO.getServerUrl());
+        server.setLayers(serverDTO.getLayerList() != null ? this.createRasterLayerList(serverDTO.getLayerList()) : null);
+        server.setOrganization(serverDTO.getOrganization());
+        server.setProxy(serverDTO.isProxy());
+        if (serverDTO.isServerProtected()) {
+            server.setPassword(this.pooledPBEStringEncryptorDecorator.decrypt(serverDTO.getPassword()));
+        }
+        server.setUsername(serverDTO.getUsername());
+        server.setServerProtected(serverDTO.isServerProtected());
+        return server;
+    }
+
+    /**
+     * Invoked by the containing {@code BeanFactory} after it has set all bean properties
+     * and satisfied {@link org.springframework.beans.factory.BeanFactoryAware}, {@code ApplicationContextAware} etc.
+     * <p>This method allows the bean instance to perform validation of its overall
+     * configuration and final initialization when all bean properties have been set.
+     *
+     * @throws Exception in the event of misconfiguration (such as failure to set an
+     *                   essential property) or if initialization fails for any other reason
+     */
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        checkArgument(this.pooledPBEStringEncryptorDecorator != null, "The Parameter pooledPBEStringEncryptorDecorator must not be null.");
     }
 
     /**
@@ -129,7 +166,7 @@ public class DTOServerConverter {
      * @param list
      * @return {@link ArrayList<GPLayerGrid>}
      */
-    private ArrayList<? extends GPLayerGrid> createRasterLayerList(List<? extends ShortLayerDTO> layers, ArrayList<GPLayerGrid> list) {
+    private ArrayList<? extends GPLayerGrid> createRasterLayerList(@Nullable List<? extends ShortLayerDTO> layers, ArrayList<GPLayerGrid> list) {
         if (layers != null) {
             for (ShortLayerDTO layer : layers) {
                 if (((RasterLayerDTO) layer).getSubLayerList().size() > 0) {
@@ -144,26 +181,9 @@ public class DTOServerConverter {
     }
 
     /**
-     * @param serverDTO
-     * @return GPServerBeanModel
+     * @param layer
+     * @return {@link GPRasterLayerGrid}
      */
-    public GPServerBeanModel convertServerWS(ServerDTO serverDTO) {
-        GPServerBeanModel server = new GPServerBeanModel();
-        server.setId(serverDTO.getId());
-        server.setAlias(serverDTO.getAlias());
-        server.setName(serverDTO.getName());
-        server.setUrlServer(serverDTO.getServerUrl());
-        server.setLayers(serverDTO.getLayerList() != null
-                ? this.createRasterLayerList(serverDTO.getLayerList()) : null);
-        server.setOrganization(serverDTO.getOrganization());
-        server.setProxy(serverDTO.isProxy());
-        if(serverDTO.isServerProtected())
-            server.setPassword(this.pooledPBEStringEncryptorDecorator.decrypt(serverDTO.getPassword()));
-        server.setUsername(serverDTO.getUsername());
-        server.setServerProtected(serverDTO.isServerProtected());
-        return server;
-    }
-
     private GPRasterLayerGrid convertToRasterLayerGrid(RasterLayerDTO layer) {
         GPRasterLayerGrid raster = new GPRasterLayerGrid();
         raster.setLabel(layer.getTitle());
@@ -180,7 +200,7 @@ public class DTOServerConverter {
         }
         raster.setMaxScale(layer.getMaxScale());
         raster.setMinScale(layer.getMinScale());
-        if(layer.isTemporalLayer()) {
+        if (layer.isTemporalLayer()) {
             logger.debug("##############Trying to read Temporal Information.");
             GPTemporalDimension dimension = layer.getTemporalLayer().getDimension();
             if (dimension != null) {
@@ -206,5 +226,25 @@ public class DTOServerConverter {
         }
         raster.setStyles(styles);
         return raster;
+    }
+
+    /**
+     * @param theServerDTO
+     * @return {@link GPServerBeanModel}
+     */
+    private GPServerBeanModel fromServerDTO(ServerDTO theServerDTO) {
+        GPServerBeanModel server = new GPServerBeanModel();
+        server.setId(theServerDTO.getId());
+        server.setAlias(theServerDTO.getAlias());
+        server.setUrlServer(theServerDTO.getServerUrl());
+        server.setName(theServerDTO.getName());
+        server.setOrganization(theServerDTO.getOrganization());
+        server.setServerProtected(theServerDTO.isServerProtected());
+        if (theServerDTO.isServerProtected()) {
+            server.setUsername(theServerDTO.getUsername());
+            server.setPassword(this.pooledPBEStringEncryptorDecorator.decrypt(theServerDTO.getPassword()));
+        }
+        server.setProxy(theServerDTO.isProxy());
+        return server;
     }
 }

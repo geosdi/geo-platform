@@ -36,18 +36,19 @@
 package org.geosdi.geoplatform.gui.client.model;
 
 import com.google.gwt.core.client.GWT;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import javax.persistence.Transient;
 import name.pehl.piriti.json.client.JsonReader;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
+
+import javax.persistence.Transient;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -59,8 +60,8 @@ public class PreviewLayer implements GPLayerBean, Serializable {
 
     public interface PreviewLayerReader extends JsonReader<PreviewLayer> {
     }
-    public static final PreviewLayerReader JSON = GWT.create(
-            PreviewLayerReader.class);
+    public static final PreviewLayerReader JSON = GWT.create(PreviewLayerReader.class);
+    //
     private String crs;
     private String title;
     private String dataSource;

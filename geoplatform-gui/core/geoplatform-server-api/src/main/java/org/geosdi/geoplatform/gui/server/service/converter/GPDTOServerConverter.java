@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,56 +32,52 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.core.model;
+package org.geosdi.geoplatform.gui.server.service.converter;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import org.geosdi.geoplatform.core.model.GeoPlatformServer;
+import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
+import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
+import org.geosdi.geoplatform.response.ServerDTO;
+import org.geosdi.geoplatform.response.ShortLayerDTO;
+import org.springframework.beans.factory.InitializingBean;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import java.io.Serializable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Francesco Izzi - geoSDI
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-//@XmlRootElement
-@Getter
-@Setter
-@ToString
-@XmlAccessorType(XmlAccessType.FIELD)
-@Embeddable
-public class GPBBox implements Serializable {
-
-    private static final long serialVersionUID = 2795112852068645206L;
-    //
-    @Column(name = "min_x")
-    private double minX;
-    //
-    @Column(name = "min_y")
-    private double minY;
-    //
-    @Column(name = "max_x")
-    private double maxX;
-    //
-    @Column(name = "max_y")
-    private double maxY;
-
-    public GPBBox() {
-    }
+public interface GPDTOServerConverter extends InitializingBean {
 
     /**
-     * @param minX
-     * @param minY
-     * @param maxX
-     * @param maxY
+     * @param serversWS
+     * @return {@link ArrayList<GPServerBeanModel>}
      */
-    public GPBBox(double minX, double minY, double maxX, double maxY) {
-        this.minX = minX;
-        this.minY = minY;
-        this.maxX = maxX;
-        this.maxY = maxY;
-    }
+    ArrayList<GPServerBeanModel> convertServer(@Nullable Collection<ServerDTO> serversWS);
+
+    /**
+     * @param server
+     * @return {@link GPServerBeanModel}
+     * @throws Exception
+     */
+    GPServerBeanModel getServerDetail(@Nonnull(when = NEVER) GeoPlatformServer server) throws Exception;
+
+    /**
+     * @param layers
+     * @return {@link ArrayList<GPLayerGrid>}
+     */
+    ArrayList<? extends GPLayerGrid> createRasterLayerList(@Nullable List<? extends ShortLayerDTO> layers);
+
+    /**
+     * @param serverDTO
+     * @return {@link GPServerBeanModel}
+     * @throws Exception
+     */
+    GPServerBeanModel convertServerWS(@Nonnull(when = NEVER) ServerDTO serverDTO) throws Exception;
 }

@@ -36,6 +36,9 @@
 package org.geosdi.geoplatform.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
 import org.geosdi.geoplatform.core.model.GPProject;
@@ -53,24 +56,22 @@ import static org.geosdi.geoplatform.gui.shared.GPLayerType.RASTER;
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
+@ToString(callSuper = true)
+@Getter
+@Setter
 @XmlRootElement(name = "RasterLayerDTO")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RasterLayerDTO extends ShortLayerDTO {
 
     private GPLayerInfo layerInfo;
-    //
     private float opacity;
-    //
     private Float maxScale;
-    //
     private Float minScale;
     private GPTemporalLayer temporalLayer;
-    //
     @XmlElementWrapper(name = "styleList")
     @XmlElement(name = "style")
     @JsonProperty(value = "styleList")
     private List<String> styleList;
-    //
     @XmlElementWrapper(name = "subLayerList")
     @XmlElement(name = "layer")
     private List<RasterLayerDTO> subLayerList;
@@ -98,29 +99,6 @@ public class RasterLayerDTO extends ShortLayerDTO {
     }
     //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
-
-    /**
-     * @return the layerInfo
-     */
-    public GPLayerInfo getLayerInfo() {
-        return layerInfo;
-    }
-
-    /**
-     * @param layerInfo the layerInfo to set
-     */
-    public void setLayerInfo(GPLayerInfo layerInfo) {
-        this.layerInfo = layerInfo;
-    }
-
-    /**
-     * @return the opacity
-     */
-    public float getOpacity() {
-        return opacity;
-    }
-
     /**
      * @param opacity the opacity to set
      */
@@ -132,83 +110,12 @@ public class RasterLayerDTO extends ShortLayerDTO {
     }
 
     /**
-     * @return the maxScale
-     */
-    public Float getMaxScale() {
-        return maxScale;
-    }
-
-    /**
-     * @param maxScale the maxScale to set
-     */
-    public void setMaxScale(Float maxScale) {
-        this.maxScale = maxScale;
-    }
-
-    /**
-     * @return the minScale
-     */
-    public Float getMinScale() {
-        return minScale;
-    }
-
-    /**
-     * @param minScale the minScale to set
-     */
-    public void setMinScale(Float minScale) {
-        this.minScale = minScale;
-    }
-
-    /**
-     * @return {@link GPTemporalLayer}
-     */
-    public GPTemporalLayer getTemporalLayer() {
-        return temporalLayer;
-    }
-
-    /**
-     * @param theTemporalLayer
-     */
-    public void setTemporalLayer(GPTemporalLayer theTemporalLayer) {
-        this.temporalLayer = theTemporalLayer;
-    }
-
-    /**
      * @return {@link Boolean}
      */
     @XmlTransient
     public boolean isTemporalLayer() {
         return ((this.temporalLayer != null) && (this.temporalLayer.isTemporalLayer()));
     }
-
-    /**
-     * @return the styleList
-     */
-    public List<String> getStyleList() {
-        return styleList;
-    }
-
-    /**
-     * @param styleList the styleList to set
-     */
-    public void setStyleList(List<String> styleList) {
-        this.styleList = styleList;
-    }
-
-    /**
-     * @return the subLayerList
-     */
-    public List<RasterLayerDTO> getSubLayerList() {
-        return subLayerList;
-    }
-
-    /**
-     * @param subLayerList the subLayerList to set
-     */
-    public void setSubLayerList(List<RasterLayerDTO> subLayerList) {
-        this.subLayerList = subLayerList;
-    }
-    //</editor-fold>
 
     /**
      * @param project
@@ -230,22 +137,5 @@ public class RasterLayerDTO extends ShortLayerDTO {
         raster.setMinScale(rasterDTO.getMinScale());
         raster.setTemporalLayer(rasterDTO.getTemporalLayer());
         return raster;
-    }
-
-    /**
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        return "RasterLayerDTO [" + super.toString()
-                + ", layerInfo = " + layerInfo
-                + ", opacity = " + opacity
-                + ", maxScale = " + maxScale
-                + ", minScale = " + minScale
-                + ", isTemporal = " + this.isTemporalLayer()
-                + ", styleList = " + styleList
-                + ", subLayerList = " + subLayerList + "]";
     }
 }

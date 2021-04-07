@@ -49,7 +49,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlJavaTypeAdapter(value = ElementDTOAdapter.class)
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
         property = "type")
 @JsonSubTypes({
     @JsonSubTypes.Type(value = FolderDTO.class, name = "FolderDTO"),
@@ -58,9 +57,53 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     @JsonSubTypes.Type(value = ShortLayerDTO.class, name = "ShortLayerDTO")})
 public interface IElementDTO extends Comparable<IElementDTO> {
 
+    /**
+     * @return {@link Long}
+     */
     Long getId();
 
+    /**
+     * @param theID
+     */
+    void setId(Long theID);
+
+    /**
+     * @return {@link String}
+     */
     String getName();
 
+    /**
+     * @param theName
+     */
+    void setName(String theName);
+
+    /**
+     * @return {@link Integer}
+     */
     Integer getPosition();
+
+    /**
+     * @param thePosition
+     */
+    void setPosition(Integer thePosition);
+
+    /**
+     * @return {@link Boolean}
+     */
+    Boolean isShared();
+
+    /**
+     * @param theShared
+     */
+    void setShared(Boolean theShared);
+
+    /**
+     * @return {@link Boolean}
+     */
+    Boolean isChecked();
+
+    /**
+     * @param theChecked
+     */
+    void setChecked(Boolean theChecked);
 }

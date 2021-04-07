@@ -36,6 +36,7 @@ package org.geosdi.geoplatform.gui.server;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.classic.methods.HttpPost;
 import org.apache.hc.client5.http.impl.auth.BasicCredentialsProvider;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
@@ -49,6 +50,7 @@ import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
 import org.apache.hc.core5.http.HttpHeaders;
 import org.apache.hc.core5.http.config.RegistryBuilder;
 import org.apache.hc.core5.http.impl.DefaultConnectionReuseStrategy;
+import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.apache.hc.core5.net.URIBuilder;
 import org.apache.hc.core5.ssl.SSLContextBuilder;
 import org.slf4j.Logger;
@@ -58,13 +60,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.URI;
-import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Enumeration;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.stream.Collectors.joining;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -79,6 +81,7 @@ public class GPServerProxy extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
+        System.setProperty("jsse.enableSNIExtension", "false");
     }
 
     /**
@@ -127,7 +130,7 @@ public class GPServerProxy extends HttpServlet {
                 logger.info("###########################STATUS_CODE : {}\n\n", httpClientResponse.getCode());
                 if (httpClientResponse.getCode() != 200) {
                     String exceptionMessage = IOUtils
-                            .toString(httpClientResponse.getEntity().getContent(), StandardCharsets.UTF_8);
+                            .toString(httpClientResponse.getEntity().getContent(), UTF_8);
                     logger.error("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ExecutionError : {}\n", exceptionMessage);
                     response.setStatus(500);
                 } else {
@@ -143,14 +146,73 @@ public class GPServerProxy extends HttpServlet {
     }
 
     /**
-     * @param req
-     * @param resp
+     * @param request
+     * @param response
      * @throws ServletException
      * @throws IOException
      */
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@Called {}#doPost.\n", this.getClass().getSimpleName());
+        try {
+            if ((request.getParameter("targetURL") != null) && (request.getParameter("targetURL") != "")) {
+                CloseableHttpClient httpClient =  HttpClients
+                        .custom()
+                        .setConnectionReuseStrategy(new DefaultConnectionReuseStrategy())
+                        .setConnectionManager(createClientConnectionManager())
+                        .setDefaultCredentialsProvider(new BasicCredentialsProvider())
+                        .build();
+                String targetUrl = request.getParameter("targetURL");
+                URIBuilder uriBuilder = new URIBuilder(targetUrl);
+                Enumeration<String> parametersName = request.getParameterNames();
+                while (parametersName.hasMoreElements()) {
+                    String requestParamName = parametersName.nextElement();
+                    switch (requestParamName) {
+                        case "targetURL":
+                        case "v":
+                        case "p":
+                            break;
+                        default:
+                            uriBuilder.addParameter(requestParamName, request.getParameter(requestParamName));
+                    }
+                }
+                URI uri = uriBuilder.build();
+                logger.info("############################URI to call : {}\n", uri.toString());
+                HttpPost httpPost = new HttpPost(uri);
+                if (request.getHeader("Content-Type") != null) {
+                    httpPost.setHeader("Content-Type", request.getContentType());
+                }
+                if(((request.getParameter("v") != null) && (request.getParameter("v") != "")) && ((request.getParameter("p") != null) && (request.getParameter("p") != ""))) {
+                    String userName = request.getParameter("v");
+                    String password = request.getParameter("p");
+                    String userpass = userName + ":" + password;
+                    logger.info("@@@@@@@@@@@@@@@@@Trying to inject basicAuth with parameter : {}\n", userpass);
+                    String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userpass.getBytes()));
+                    httpPost.setHeader(HttpHeaders.AUTHORIZATION, basicAuth);
+                }
+                int contentLength = request.getContentLength();
+                if (contentLength > 0) {
+                    httpPost.setEntity(new StringEntity(new BufferedReader(new InputStreamReader(request.getInputStream(), UTF_8))
+                            .lines()
+                            .collect(joining("\n"))));
+                }
+                CloseableHttpResponse httpClientResponse = httpClient.execute(httpPost);
+                logger.info("###########################STATUS_CODE : {}\n\n", httpClientResponse.getCode());
+                if (httpClientResponse.getCode() != 200) {
+                    String exceptionMessage = IOUtils
+                            .toString(httpClientResponse.getEntity().getContent(), UTF_8);
+                    logger.error("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ExecutionError : {}\n", exceptionMessage);
+                    response.setStatus(500);
+                } else {
+                    OutputStream ostream = response.getOutputStream();
+                    copy(httpClientResponse.getEntity().getContent(), ostream);
+                    logger.debug("#########################EXECUTE SUCCESS \n\n");
+                }
+            }
+        } catch (Exception ex) {
+            response.setStatus(500);
+            ex.printStackTrace();
+        }
     }
 
     @Override

@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.request;
 
-import java.io.Serializable;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -68,7 +68,7 @@ public class RequestByID implements Serializable {
 
     /**
      * @param id
-     * @param pag
+     * @param page
      * @param num
      */
     public RequestByID(Long id, int page, int num) {

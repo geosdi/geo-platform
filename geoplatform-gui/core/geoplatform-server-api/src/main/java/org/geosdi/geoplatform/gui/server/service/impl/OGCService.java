@@ -38,14 +38,13 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 import com.google.common.collect.Lists;
 import org.geosdi.geoplatform.core.model.GSAccount;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
-import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.service.IOGCService;
-import org.geosdi.geoplatform.gui.server.service.converter.DTOServerConverter;
+import org.geosdi.geoplatform.gui.server.service.converter.GPDTOServerConverter;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.request.server.WSSaveServerRequest;
@@ -62,7 +61,6 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 /**
@@ -79,7 +77,7 @@ public class OGCService implements IOGCService {
     private GPWMSService geoPlatformWMSServiceClient;
     //
     @Autowired
-    private DTOServerConverter dtoServerConverter;
+    private GPDTOServerConverter dtoServerConverter;
     //
     @Autowired
     private SessionUtility sessionUtility;
@@ -88,7 +86,7 @@ public class OGCService implements IOGCService {
     public ArrayList<GPServerBeanModel> loadServers(String organizationName) throws GeoPlatformException {
         try {
             return dtoServerConverter.convertServer(geoPlatformServiceClient.getAllServers(organizationName).getServers());
-        } catch (ResourceNotFoundFault ex) {
+        } catch (Exception ex) {
             logger.error("OGCService Error : " + ex);
             throw new GeoPlatformException(ex);
         }
@@ -99,7 +97,7 @@ public class OGCService implements IOGCService {
         try {
             GeoPlatformServer serverWS = geoPlatformServiceClient.getServerDetail(idServer);
             return dtoServerConverter.getServerDetail(serverWS);
-        } catch (ResourceNotFoundFault ex) {
+        } catch (Exception ex) {
             logger.error("The server with id " + idServer + " was bean deleted.");
             throw new GeoPlatformException("The server with id " + idServer + " was bean deleted.");
         }
@@ -145,7 +143,7 @@ public class OGCService implements IOGCService {
 
             /**@TODO think a way to have this configured**/
             String authValue = httpServletRequest.getHeader("iv-user");
-            Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
+//            Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
             List<WMSHeaderParam> headerParams = Lists.newArrayList();
             if((authValue != null) && !(authValue.trim().isEmpty())) {
                 headerParams.add(new WMSHeaderParam("iv-user", authValue));
@@ -180,11 +178,11 @@ public class OGCService implements IOGCService {
         try {
             serverWS = geoPlatformServiceClient.saveServer(new WSSaveServerRequest(id, aliasServerName, urlServer,
                     organization, username, password, proxy));
-        } catch (IllegalParameterFault ex) {
+            return dtoServerConverter.convertServerWS(serverWS);
+        } catch (Exception ex) {
             logger.error(ex.getMessage());
             throw new GeoPlatformException(ex.getMessage());
         }
-        return dtoServerConverter.convertServerWS(serverWS);
     }
 
     @Override

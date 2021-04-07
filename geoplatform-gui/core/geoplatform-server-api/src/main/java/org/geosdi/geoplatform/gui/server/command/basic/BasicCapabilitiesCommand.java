@@ -55,8 +55,7 @@ import java.util.ArrayList;
  */
 @Lazy(true)
 @Component(value = "command.capabilities.BasicCapabilitiesCommand")
-public class BasicCapabilitiesCommand implements
-        GPCommand<BasicCapabilitiesRequest, BasicCapabilitiesResponse> {
+public class BasicCapabilitiesCommand implements GPCommand<BasicCapabilitiesRequest, BasicCapabilitiesResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(BasicCapabilitiesCommand.class);
     //

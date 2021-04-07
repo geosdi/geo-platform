@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.server.service.impl;
 
 import com.google.common.collect.Lists;
+import org.geosdi.geoplatform.configurator.crypt.GPPooledPBEStringEncryptorDecorator;
 import org.geosdi.geoplatform.core.model.GSAccount;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -81,6 +82,8 @@ public class OGCService implements IOGCService {
     //
     @Autowired
     private SessionUtility sessionUtility;
+    @Autowired
+    private GPPooledPBEStringEncryptorDecorator pooledPBEStringEncryptorDecorator;
 
     @Override
     public ArrayList<GPServerBeanModel> loadServers(String organizationName) throws GeoPlatformException {
@@ -177,7 +180,7 @@ public class OGCService implements IOGCService {
         ServerDTO serverWS = null;
         try {
             serverWS = geoPlatformServiceClient.saveServer(new WSSaveServerRequest(id, aliasServerName, urlServer,
-                    organization, username, password, proxy));
+                    organization, username, this.pooledPBEStringEncryptorDecorator.encrypt(password), proxy));
             return dtoServerConverter.convertServerWS(serverWS);
         } catch (Exception ex) {
             logger.error(ex.getMessage());

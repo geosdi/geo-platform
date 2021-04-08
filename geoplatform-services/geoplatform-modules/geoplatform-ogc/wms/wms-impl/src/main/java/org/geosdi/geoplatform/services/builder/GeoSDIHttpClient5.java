@@ -103,7 +103,7 @@ public class GeoSDIHttpClient5 implements HTTPClient {
 
     GeoSDIHttpClient5() {
         System.setProperty("jsse.enableSNIExtension", "false");
-        System.setProperty("sun.security.ssl.allowUnsafeRenegotiation", "true");
+//        System.setProperty("sun.security.ssl.allowUnsafeRenegotiation", "true");
         this.httpClient = HttpClients
                 .custom()
                 .setConnectionManagerShared(TRUE)

@@ -215,14 +215,18 @@ public class GPServerBeanModel extends GeoPlatformBeanModel {
 
     /**
      *
-     * @return
+     * @return {@link Boolean}
      */
-    public boolean getProxy() {
+    public boolean isProxy() {
         return this.proxy;
     }
 
-    public void setProxy(boolean proxy) {
-        this.proxy = proxy;
+    /**
+     *
+     * @param theProxy
+     */
+    public void setProxy(boolean theProxy) {
+        this.proxy = theProxy;
         set(GPServerKeyValue.PROXY.getValue(), this.proxy);
     }
 

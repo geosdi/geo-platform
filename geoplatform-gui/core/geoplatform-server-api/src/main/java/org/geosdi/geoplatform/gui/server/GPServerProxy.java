@@ -116,18 +116,18 @@ public class GPServerProxy extends HttpServlet {
                     }
                 }
                 URI uri = uriBuilder.build();
-                logger.info("############################URI to call : {}\n", uri.toString());
+                logger.trace("############################URI to call : {}\n", uri.toString());
                 HttpGet httpGet = new HttpGet(uri);
                 if(((request.getParameter("v") != null) && (request.getParameter("v") != "")) && ((request.getParameter("p") != null) && (request.getParameter("p") != ""))) {
                     String userName = request.getParameter("v");
                     String password = request.getParameter("p");
                     String userpass = userName + ":" + password;
-                    logger.info("@@@@@@@@@@@@@@@@@Trying to inject basicAuth with parameter : {}\n", userpass);
+                    logger.trace("@@@@@@@@@@@@@@@@@Trying to inject basicAuth with parameter : {}\n", userpass);
                     String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userpass.getBytes()));
                     httpGet.setHeader(HttpHeaders.AUTHORIZATION, basicAuth);
                 }
                 CloseableHttpResponse httpClientResponse = httpClient.execute(httpGet);
-                logger.info("###########################STATUS_CODE : {}\n\n", httpClientResponse.getCode());
+                logger.trace("###########################STATUS_CODE : {}\n\n", httpClientResponse.getCode());
                 if (httpClientResponse.getCode() != 200) {
                     String exceptionMessage = IOUtils
                             .toString(httpClientResponse.getEntity().getContent(), UTF_8);

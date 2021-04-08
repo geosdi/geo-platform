@@ -391,6 +391,18 @@ public class DisplayServerWidget implements IDisplayGetCapabilitiesHandler {
                 public void onCommandSuccess(BasicCapabilitiesResponse response) {
                     selectedServer.setLayers(response.getResult());
                     fillGrid(response.getResult());
+                    for(GPLayerGrid grid : response.getResult()) {
+                        StringBuilder tmpUrl = new StringBuilder();
+                        if(selectedServer.isProxy()) {
+                            tmpUrl.append(GWT.getModuleBaseURL().concat("gpServerProxy?targetURL=".concat(grid.getDataSource())));
+                            if(selectedServer.isServerProtected()) {
+                                tmpUrl.append("&v=").append(selectedServer.getUsername()).append("&p=").append(selectedServer.getPassword());
+                            }
+//                            GWT.log(tmpUrl.toString());
+                            grid.setDataSource(tmpUrl.toString());
+                        }
+
+                    }
                 }
 
                 @Override

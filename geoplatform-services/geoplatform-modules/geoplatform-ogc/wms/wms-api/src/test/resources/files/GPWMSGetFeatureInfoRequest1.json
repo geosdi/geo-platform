@@ -32,7 +32,7 @@
     },
     {
       "wmsServerURL": "https://servizi.protezionecivile.it/geoserver/wms",
-      "layers": "VULCANICO:CF_zona rossa_maplite"
+      "layers": "VULCANICO:CF_zona_rossa_maplite"
     },
     {
       "wmsServerURL": "https://servizi.protezionecivile.it/geoserver/wms",

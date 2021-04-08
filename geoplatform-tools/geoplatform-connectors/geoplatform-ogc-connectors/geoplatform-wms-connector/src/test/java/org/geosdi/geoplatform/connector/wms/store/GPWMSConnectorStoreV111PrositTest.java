@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.wms.store;
 
+import org.geosdi.geoplatform.connector.server.exception.UnauthorizedException;
 import org.geosdi.geoplatform.connector.server.request.GPWMSBoundingBox;
 import org.geosdi.geoplatform.connector.server.request.GPWMSGetMapBaseRequest;
 import org.geosdi.geoplatform.connector.server.request.WMSBoundingBox;
@@ -112,7 +113,7 @@ public class GPWMSConnectorStoreV111PrositTest {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(response));
     }
 
-    @Test
+    @Test(expected = UnauthorizedException.class)
     public void d_wmsGetFeatureInfoV111Test() throws Exception {
         GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
         GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(-100.45903622648385, 29.975499908170573, -100.45893252351615, 29.975589739698282);

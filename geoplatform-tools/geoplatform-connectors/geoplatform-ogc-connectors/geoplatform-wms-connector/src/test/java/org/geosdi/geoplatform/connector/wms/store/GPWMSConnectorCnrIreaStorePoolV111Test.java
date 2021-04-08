@@ -64,7 +64,6 @@ public class GPWMSConnectorCnrIreaStorePoolV111Test {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        System.setProperty("jsse.enableSNIExtension", "false");
         wmsServerConnector = wmsConnectorBuilderPoolV111()
                 .withServerUrl(new URL("https://insar.irea.cnr.it/geoserver/geonode/wms"))
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()

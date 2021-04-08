@@ -67,5 +67,6 @@
     <logger name="org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxReader" level="trace"/>
     <logger name="org.geosdi.geoplatform.connector.server.request.v110.query.responsibility" level="trace"/>
     <logger name="org.geosdi.geoplatform.support.wfs.services.GPGetFeatureService" level="debug"/>
+    <logger name="org.geosdi.geoplatform.services.builder.GeoSDIHttpClient5" level="trace"/>
 
 </configuration>

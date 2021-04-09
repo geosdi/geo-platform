@@ -42,7 +42,6 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.List;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class RasterPropertiesDTO extends ShortLayerPropertiesDTO {

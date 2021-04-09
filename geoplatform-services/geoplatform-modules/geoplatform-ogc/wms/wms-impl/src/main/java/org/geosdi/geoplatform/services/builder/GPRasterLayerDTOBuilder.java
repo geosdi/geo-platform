@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.services.builder;
 import com.google.common.collect.Lists;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
+import org.geosdi.geoplatform.core.model.attribution.GPLayerAttribution;
+import org.geosdi.geoplatform.core.model.attribution.logo.GPAttributionLogoURL;
 import org.geosdi.geoplatform.core.model.temporal.GPTemporalLayer;
 import org.geosdi.geoplatform.core.model.temporal.dimension.GPTemporalDimension;
 import org.geosdi.geoplatform.core.model.temporal.extent.GPTemporalExtent;
@@ -45,6 +47,7 @@ import org.geosdi.geoplatform.response.RasterLayerDTO;
 import org.geotools.ows.wms.CRSEnvelope;
 import org.geotools.ows.wms.Layer;
 import org.geotools.ows.wms.StyleImpl;
+import org.geotools.ows.wms.xml.LogoURL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -194,6 +197,18 @@ public interface GPRasterLayerDTOBuilder extends Serializable {
                 GPTemporalLayer temporalLayer = new GPTemporalLayer(dimension, extent);
                 logger.debug("########################Build GPTemporalLayer : {}\n", temporalLayer);
                 raster.setTemporalLayer(temporalLayer);
+            }
+            if ((layer.getAttribution() != null) && (layer.getAttribution().getLogoURL() != null)) {
+                logger.debug("########################Build RasterLayerAttributionDTO");
+                LogoURL logoURL = layer.getAttribution().getLogoURL();
+                GPLayerAttribution layerAttribution = new GPLayerAttribution();
+                GPAttributionLogoURL attributionLogoURL = new GPAttributionLogoURL();
+                attributionLogoURL.setFormat(logoURL.getFormat());
+                attributionLogoURL.setWidth(logoURL.getWidth());
+                attributionLogoURL.setHeight(logoURL.getHeight());
+                attributionLogoURL.setOnlineResource(logoURL.getOnlineResource().toString());
+                layerAttribution.setLogoUrl(attributionLogoURL);
+                raster.setLayerAttribution(layerAttribution);
             }
             // Set Styles of Raster Ith
             List<StyleImpl> stylesImpl = layer.getStyles();

@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.core.model;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.geosdi.geoplatform.core.model.attribution.GPLayerAttribution;
 import org.geosdi.geoplatform.core.model.temporal.GPTemporalLayer;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -65,40 +68,50 @@ public class GPRasterLayer extends GPLayer {
      */
     private static final long serialVersionUID = -1852288981980627642L;
     //
+    @Getter
     @Column
     private float opacity = 1.0f;
     // The character , separated list of styles
     @Column(length = 500, columnDefinition = "TEXT")
     private String styles;
     //
+    @Getter
+    @Setter
     @Embedded
     private GPLayerInfo layerInfo;
     //
+    @Getter
+    @Setter
     @Column(name = "max_scale")
     private Float maxScale;
     //
+    @Getter
+    @Setter
     @Column(name = "min_scale")
     private Float minScale;
+    @Getter
+    @Setter
     @Embedded
     private GPTemporalLayer temporalLayer;
+    @Getter
+    @Setter
+    @Embedded
+    private GPLayerAttribution layerAttribution;
     //
+    @Getter
+    @Setter
     @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPFolder folder;
     //
+    @Getter
+    @Setter
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPProject project;
 
     public GPRasterLayer() {
         super.setLayerType(WMS);
-    }
-
-    /**
-     * @return the opacity
-     */
-    public float getOpacity() {
-        return opacity;
     }
 
     /**
@@ -126,62 +139,6 @@ public class GPRasterLayer extends GPLayer {
     }
 
     /**
-     * @return the layerInfo
-     */
-    public GPLayerInfo getLayerInfo() {
-        return layerInfo;
-    }
-
-    /**
-     * @param layerInfo the layerInfo to set
-     */
-    public void setLayerInfo(GPLayerInfo layerInfo) {
-        this.layerInfo = layerInfo;
-    }
-
-    /**
-     * @return the maxScale
-     */
-    public Float getMaxScale() {
-        return maxScale;
-    }
-
-    /**
-     * @param maxScale the maxScale to set
-     */
-    public void setMaxScale(Float maxScale) {
-        this.maxScale = maxScale;
-    }
-
-    /**
-     * @return the minScale
-     */
-    public Float getMinScale() {
-        return minScale;
-    }
-
-    /**
-     * @param minScale the minScale to set
-     */
-    public void setMinScale(Float minScale) {
-        this.minScale = minScale;
-    }
-
-    /**
-     * @return {@link GPTemporalLayer}
-     */
-    public GPTemporalLayer getTemporalLayer() {
-        return temporalLayer;
-    }
-
-    /**
-     * @param theTemporalLayer
-     */
-    public void setTemporalLayer(GPTemporalLayer theTemporalLayer) {
-        this.temporalLayer = theTemporalLayer;
-    }
-
-    /**
      * @return {@link Boolean}
      */
     @XmlTransient
@@ -190,35 +147,11 @@ public class GPRasterLayer extends GPLayer {
     }
 
     /**
-     * @return the folder
+     * @return {@link Boolean}
      */
-    @Override
-    public GPFolder getFolder() {
-        return this.folder;
-    }
-
-    /**
-     * @param folder the folder to set
-     */
-    @Override
-    public void setFolder(GPFolder folder) {
-        this.folder = folder;
-    }
-
-    /**
-     * @return the project
-     */
-    @Override
-    public GPProject getProject() {
-        return this.project;
-    }
-
-    /**
-     * @param project the project to set
-     */
-    @Override
-    public void setProject(GPProject project) {
-        this.project = project;
+    @XmlTransient
+    public boolean isSetAttribution() {
+        return ((this.layerAttribution != null) && (this.layerAttribution.isAvailable()));
     }
 
     @Override

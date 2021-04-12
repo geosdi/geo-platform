@@ -70,14 +70,14 @@ public class CloneProjectCommand implements
      */
     @Override
     public CloneProjectCommandResponse execute(CloneProjectCommandRequest request, HttpServletRequest httpServletRequest) {
-        logger.debug("##################### Executing {} Command", this.
+        logger.debug("#####################Executing {} Command", this.
                 getClass().getSimpleName());
 
         CloneProjectRequest projectRequest = new CloneProjectRequest(request.getProjectID(), request.getAccountID(),request.getNameProject());
 
         Long projectIDCloned = this.layerService.cloneProject(projectRequest);
 
-        logger.debug("#################### Found {} ", projectIDCloned);
+        logger.debug("####################Found {} ", projectIDCloned);
 
         return new CloneProjectCommandResponse(projectIDCloned);
     }

@@ -37,7 +37,7 @@
                 <prop key="hibernate.default_schema">public</prop>
                 <!--                <prop key="hibernate.cache.provider_configuration_file_resource_path">classpath:/ehcacheTerracotta.xml</prop>-->
                 <prop key="net.sf.ehcache.configurationResourceName">ehcache.xml</prop>
-                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <prop key="hibernate.hbm2ddl.auto">validate</prop>
             </props>
         </property>
     </bean>

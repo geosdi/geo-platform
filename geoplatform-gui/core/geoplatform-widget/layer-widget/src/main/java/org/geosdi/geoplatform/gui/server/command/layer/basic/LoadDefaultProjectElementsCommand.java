@@ -63,9 +63,9 @@ public class LoadDefaultProjectElementsCommand implements GPCommand<LoadDefaultP
 
     @Override
     public LoadDefaultProjectElementsResponse execute(LoadDefaultProjectElementsRequest request, HttpServletRequest httpServletRequest) {
-        logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
-        GPClientProject result = this.layerService.loadDefaultProjectElements(httpServletRequest);
-        logger.debug("#################### Found {} ", result);
-        return new LoadDefaultProjectElementsResponse(result);
+            logger.info("#####################Executing {} Command", this.getClass().getSimpleName());
+            GPClientProject result = this.layerService.loadDefaultProjectElements(httpServletRequest);
+            logger.info("####################Found {} ", result);
+            return new LoadDefaultProjectElementsResponse(result);
     }
 }

@@ -45,6 +45,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoFolder;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.*;
+import org.geosdi.geoplatform.gui.model.logo.GPAttributionLogoURLBean;
 import org.geosdi.geoplatform.gui.model.temporal.dimension.GPTemporalDimensionBean;
 import org.geosdi.geoplatform.gui.model.temporal.extent.GPTemporalExtentBean;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
@@ -264,6 +265,15 @@ public class DTOLayerConverter implements GPDTOLayerConverter {
                     convertTimeLayerDTO(raster, rasterDTO);
             }
         }
+        if(rasterDTO.isSetAttribution()) {
+            GPAttributionLogoURLBean logoURLBean = new GPAttributionLogoURLBean();
+            logoURLBean.setFormat(rasterDTO.getLayerAttribution().getLogoUrl().getFormat());
+            logoURLBean.setWidth(rasterDTO.getLayerAttribution().getLogoUrl().getWidth());
+            logoURLBean.setHeight(rasterDTO.getLayerAttribution().getLogoUrl().getHeight());
+            logoURLBean.setOnlineResource(rasterDTO.getLayerAttribution().getLogoUrl().getOnlineResource());
+            raster.setLogoURLBean(logoURLBean);
+        }
+
         ArrayList<GPStyleStringBeanModel> styles = Lists.<GPStyleStringBeanModel>newArrayList();
         GPStyleStringBeanModel style;
         for (String styleString : rasterDTO.getStyleList()) {

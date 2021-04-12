@@ -50,6 +50,7 @@ import org.geosdi.geoplatform.gui.client.widget.tree.store.GPTreeStoreOperations
 import org.geosdi.geoplatform.gui.client.widget.tree.store.executor.GenericTreeStoreExecutor;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.server.GPRasterLayerGrid;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
@@ -124,6 +125,9 @@ public abstract class BaseTreeStoreExecutor extends GenericTreeStoreExecutor<Mem
         raster.setName(layer.getName());
         raster.setStyles(layer.getStyles());
         if(layer instanceof GPRasterBean) {
+            if(((GPRasterBean) layer).isSetAttribution()){
+                raster.setLogoURLBean(((GPRasterLayerGrid) layer).getLogoURLBean());
+            }
             raster.setMaxScale(((GPRasterBean) layer).getMaxScale());
             raster.setMinScale(((GPRasterBean) layer).getMinScale());
             if (((GPRasterBean) layer).isTemporalLayer()) {
@@ -153,6 +157,9 @@ public abstract class BaseTreeStoreExecutor extends GenericTreeStoreExecutor<Mem
                 raster.setDimension(((GPRasterBean) layer).getDimension());
                 raster.setExtent(((GPRasterBean) layer).getExtent());
                 raster.getExtent().setRange(!((GPRasterBean) layer).getExtent().getValue().contains("/P"));
+            }
+            if (((GPRasterBean) layer).isSetAttribution()) {
+                raster.setLogoURLBean(((GPRasterBean) layer).getLogoURLBean());
             }
         }
         return raster;

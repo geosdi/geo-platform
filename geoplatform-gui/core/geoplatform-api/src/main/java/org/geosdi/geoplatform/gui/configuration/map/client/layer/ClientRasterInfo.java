@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.configuration.map.client.layer;
 
+import org.geosdi.geoplatform.gui.model.logo.GPAttributionLogoURLBean;
 import org.geosdi.geoplatform.gui.model.temporal.dimension.GPTemporalDimensionBean;
 import org.geosdi.geoplatform.gui.model.temporal.extent.GPTemporalExtentBean;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
@@ -55,6 +56,7 @@ public class ClientRasterInfo extends GPLayerClientInfo {
     private Float minScale;
     private GPTemporalDimensionBean dimension;
     private GPTemporalExtentBean extent;
+    private GPAttributionLogoURLBean logoURLBean;
     private ArrayList<GPStyleStringBeanModel> styles;
 
     /**
@@ -128,6 +130,22 @@ public class ClientRasterInfo extends GPLayerClientInfo {
     }
 
     /**
+     *
+     * @return
+     */
+    public GPAttributionLogoURLBean getLogoURLBean() {
+        return logoURLBean;
+    }
+
+    /**
+     *
+     * @param logoURLBean
+     */
+    public void setLogoURLBean(GPAttributionLogoURLBean logoURLBean) {
+        this.logoURLBean = logoURLBean;
+    }
+
+    /**
      * @return the styles
      */
     public ArrayList<GPStyleStringBeanModel> getStyles() {
@@ -157,6 +175,7 @@ public class ClientRasterInfo extends GPLayerClientInfo {
                 + ", opacity =  " + getOpacity()
                 + ", maxScale =  " + getMaxScale()
                 + ", minScale =  " + getMinScale()
+                + ", logoURLBean =  " + getLogoURLBean()
                 + ", isTemporalLayer = " + ((this.extent != null) ? "Y" : "N")
                 + ", getzIndex() = " + getzIndex()
                 + "}";

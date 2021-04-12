@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.gui.client.model.tree;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.widget.wfs.tree.visitor.GPWFSCompositeVisitor;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.logo.GPAttributionLogoURLBean;
 import org.geosdi.geoplatform.gui.model.temporal.dimension.GPTemporalDimensionBean;
 import org.geosdi.geoplatform.gui.model.temporal.extent.GPTemporalExtentBean;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
@@ -158,6 +159,21 @@ public class WFSLayerTreeNode extends GPLayerTreeModel implements GPWFSLayerTree
     @Override
     public void setMinScale(Float minScale) {
 
+    }
+
+    @Override
+    public GPAttributionLogoURLBean getLogoURLBean() {
+        return null;
+    }
+
+    @Override
+    public void setLogoURLBean(GPAttributionLogoURLBean theLogoURLBean) {
+
+    }
+
+    @Override
+    public boolean isSetAttribution() {
+        return false;
     }
 
     /**

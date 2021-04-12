@@ -62,6 +62,6 @@ public class GPAttributionLogoURL implements IGPAttributionLogoURL {
     private int width;
     @Column(name = "format")
     private String format;
-    @Column(name = "onlineResource")
+    @Column(name = "online_resource")
     private String onlineResource;
 }

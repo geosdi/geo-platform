@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.model.tree;
 
 import org.geosdi.geoplatform.gui.configuration.map.client.layer.GPLayerClientInfo;
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.logo.GPAttributionLogoURLBean;
 import org.geosdi.geoplatform.gui.model.temporal.dimension.GPTemporalDimensionBean;
 import org.geosdi.geoplatform.gui.model.temporal.extent.GPTemporalExtentBean;
 
@@ -50,6 +51,7 @@ public abstract class AbstractRasterTreeModel extends GPLayerTreeModel implement
     //
     private GPTemporalDimensionBean dimension;
     private GPTemporalExtentBean extent;
+    private GPAttributionLogoURLBean logoURLBean;
 
     protected AbstractRasterTreeModel() {
     }
@@ -101,12 +103,38 @@ public abstract class AbstractRasterTreeModel extends GPLayerTreeModel implement
         return ((this.extent != null) && (this.extent.isTemporal()));
     }
 
+    /**
+     *
+     * @return
+     */
+    public GPAttributionLogoURLBean getLogoURLBean() {
+        return logoURLBean;
+    }
+
+    /**
+     *
+     * @param logoURLBean
+     */
+    public void setLogoURLBean(GPAttributionLogoURLBean logoURLBean) {
+        this.logoURLBean = logoURLBean;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public boolean isSetAttribution() {
+        return this.logoURLBean != null && this.logoURLBean.getOnlineResource() != null;
+    }
+
     @Override
     public String toString() {
         return "AbstractRasterTreeModel{"
                 + super.toString()
                 + ", dimension = " + this.dimension
                 + ", extent = " + this.extent
+                + ", logoURLBean = " + this.logoURLBean
                 + '}';
     }
 }

@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.core.model.temporal.dimension.GPTemporalDimension;
 import org.geosdi.geoplatform.core.model.temporal.extent.GPTemporalExtent;
 import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
+import org.geosdi.geoplatform.gui.model.logo.GPAttributionLogoURLBean;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPRasterLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
@@ -217,6 +218,16 @@ class DTOServerConverter implements GPDTOServerConverter {
                 extentBean.setValue(extent.getValue());
                 raster.setExtent(extentBean);
             }
+
+        }
+        if(layer.isSetAttribution()) {
+            logger.info("##############Trying to read Logo Information.");
+            GPAttributionLogoURLBean logoURLBean = new GPAttributionLogoURLBean();
+            logoURLBean.setOnlineResource(layer.getLayerAttribution().getLogoUrl().getOnlineResource());
+            logoURLBean.setHeight(layer.getLayerAttribution().getLogoUrl().getHeight());
+            logoURLBean.setWidth(layer.getLayerAttribution().getLogoUrl().getWidth());
+            logoURLBean.setFormat(layer.getLayerAttribution().getLogoUrl().getFormat());
+            raster.setLogoURLBean(logoURLBean);
         }
         ArrayList<GPStyleStringBeanModel> styles = new ArrayList<GPStyleStringBeanModel>();
         for (String styleString : layer.getStyleList()) {

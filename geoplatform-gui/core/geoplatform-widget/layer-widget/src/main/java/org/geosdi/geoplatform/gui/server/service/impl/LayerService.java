@@ -151,6 +151,7 @@ public class LayerService implements ILayerService {
         try {
             return this.dtoLayerConverter.convertToGPClientProject(projectDTO);
         } catch (Exception ex) {
+            ex.printStackTrace();
             throw new GeoPlatformException(ex.getMessage());
         }
     }

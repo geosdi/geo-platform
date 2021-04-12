@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.model.server;
 
 import org.geosdi.geoplatform.gui.model.GPRasterBean;
+import org.geosdi.geoplatform.gui.model.logo.GPAttributionLogoURLBean;
 import org.geosdi.geoplatform.gui.model.temporal.dimension.GPTemporalDimensionBean;
 import org.geosdi.geoplatform.gui.model.temporal.extent.GPTemporalExtentBean;
 
@@ -53,6 +54,7 @@ public class GPRasterLayerGrid extends GPLayerGrid implements GPRasterBean {
     private float opacity = 1.0f;
     private GPTemporalDimensionBean dimension;
     private GPTemporalExtentBean extent;
+    private GPAttributionLogoURLBean logoURLBean;
 
     /**
      * @return the opacity
@@ -158,6 +160,32 @@ public class GPRasterLayerGrid extends GPLayerGrid implements GPRasterBean {
         return ((this.extent != null) && (this.extent.isTemporal()));
     }
 
+
+    /**
+     *
+     * @return
+     */
+    public GPAttributionLogoURLBean getLogoURLBean() {
+        return logoURLBean;
+    }
+
+    /**
+     *
+     * @param theLogoURLBean
+     */
+    public void setLogoURLBean(GPAttributionLogoURLBean theLogoURLBean) {
+        this.logoURLBean = theLogoURLBean;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public boolean isSetAttribution() {
+        return this.logoURLBean != null && this.logoURLBean.getOnlineResource() != null;
+    }
+
     @Override
     public String toString() {
         return "GPRasterLayerGrid{" + super.toString()
@@ -167,6 +195,7 @@ public class GPRasterLayerGrid extends GPLayerGrid implements GPRasterBean {
                 + ", opacity = " + opacity
                 + ", dimension = " + this.dimension
                 + ", extent = " + this.extent
+                + ", logoURLBean = " + this.logoURLBean
                 + '}';
     }
 }

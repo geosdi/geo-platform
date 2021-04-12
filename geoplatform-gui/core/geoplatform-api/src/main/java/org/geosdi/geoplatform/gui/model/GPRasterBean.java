@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.model;
 
+import org.geosdi.geoplatform.gui.model.logo.GPAttributionLogoURLBean;
 import org.geosdi.geoplatform.gui.model.temporal.GPTemporalLayerBean;
 
 /**
@@ -82,4 +83,22 @@ public interface GPRasterBean extends GPLayerBean, GPTemporalLayerBean {
      * @param minScale
      */
     void setMinScale(Float minScale);
+
+    /**
+     *
+     * @return
+     */
+    GPAttributionLogoURLBean getLogoURLBean();
+
+    /**
+     *
+     * @param theLogoURLBean
+     */
+    void setLogoURLBean(GPAttributionLogoURLBean theLogoURLBean);
+
+    /**
+     *
+     * @return
+     */
+    boolean isSetAttribution();
 }

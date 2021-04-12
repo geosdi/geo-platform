@@ -137,6 +137,7 @@ public interface IGPLayerBinder<TO extends GPLayer, FROM extends GPLayer, B exte
                     gpLayerCloned.setTimeFilter(gpLayer.getTimeFilter());
                     gpLayerCloned.setTitle(gpLayer.getTitle());
                     gpLayerCloned.setUrlServer(gpLayer.getUrlServer());
+                    ((GPRasterLayer)gpLayerCloned).setLayerAttribution(((GPRasterLayer) gpLayer).getLayerAttribution());
                     gpLayerCloned.setFolder(folderCloned);
                     ((GPRasterLayer) gpLayerCloned).setLayerInfo(((GPRasterLayer) gpLayer).getLayerInfo());
                     ((GPRasterLayer) gpLayerCloned).setMaxScale(((GPRasterLayer) gpLayer).getMaxScale());

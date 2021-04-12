@@ -41,6 +41,7 @@ import com.google.gwt.user.client.ui.Image;
 import org.geosdi.geoplatform.gui.client.widget.map.legend.scale.GPLegendScaleAdapter;
 import org.geosdi.geoplatform.gui.client.widget.map.legend.scale.IGPLegendScaleAdapter;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
+import org.geosdi.geoplatform.gui.model.GPRasterBean;
 import org.geosdi.geoplatform.gui.utility.GSAuthKeyManager;
 
 /**
@@ -81,28 +82,28 @@ public class GPLegendWidget {
             cp.add(new Html("<h3>" + layerBean.getLabel() + "</h3>"));
             Image image;
             String dataSource;
-            if (layerBean.getDataSource().contains("gwc/service/wms")) {
-                dataSource = layerBean.getDataSource().replaceAll("gwc/service/wms", "wms");
-            } else if (!(layerBean.getDataSource().startsWith("http://ows"))
-                    && (layerBean.getDataSource().contains("/ows"))) {
-                dataSource = layerBean.getDataSource().replaceAll("/ows", "/wms");
-            } else {
-                dataSource = layerBean.getDataSource().replaceAll("/wfs", "/wms");
-            }
             StringBuilder imageURL = new StringBuilder();
-            imageURL.append(dataSource)
-                    .append(!dataSource.contains("?") ? GET_LEGEND_REQUEST : GET_LEGEND_REQUEST.replaceAll("\\?", "&"))
-                    .append(layerBean.getName())
-                    .append(this.legendScaleAdapter.adaptScale(layerBean))
-                    .append("&service=WMS");
-            if (layerBean.getStyles() != null && layerBean.getStyles().size() > 0) {
-                imageURL.append("&STYLE=").append(layerBean.getStyles().get(0).getStyleString());
+            if(!((GPRasterBean)layerBean).isSetAttribution()) {
+                if (layerBean.getDataSource().contains("gwc/service/wms")) {
+                    dataSource = layerBean.getDataSource().replaceAll("gwc/service/wms", "wms");
+                } else if (!(layerBean.getDataSource().startsWith("http://ows")) && (layerBean.getDataSource().contains("/ows"))) {
+                    dataSource = layerBean.getDataSource().replaceAll("/ows", "/wms");
+                } else {
+                    dataSource = layerBean.getDataSource().replaceAll("/wfs", "/wms");
+                }
+                imageURL.append(dataSource).append(!dataSource.contains("?") ? GET_LEGEND_REQUEST : GET_LEGEND_REQUEST.replaceAll("\\?", "&")).append(layerBean.getName())
+                        .append(this.legendScaleAdapter.adaptScale(layerBean)).append("&service=WMS");
+                if (layerBean.getStyles() != null && layerBean.getStyles().size() > 0) {
+                    imageURL.append("&STYLE=").append(layerBean.getStyles().get(0).getStyleString());
+                }
+                String authkeyTuple = GSAuthKeyManager.getAuthKeyTuple();
+                if (!authkeyTuple.equals("")) {
+                    imageURL.append('&').append(authkeyTuple);
+                }
+                imageURL.append("&LEGEND_OPTIONS=forceRule:True;forceLabels:on");
+            } else {
+                imageURL.append(((GPRasterBean)layerBean).getLogoURLBean().getOnlineResource());
             }
-            String authkeyTuple = GSAuthKeyManager.getAuthKeyTuple();
-            if (!authkeyTuple.equals("")) {
-                imageURL.append('&').append(authkeyTuple);
-            }
-            imageURL.append("&LEGEND_OPTIONS=forceRule:True;forceLabels:on");
             image = new Image(imageURL.toString());
             cp.add(image);
             this.legendsStore.add(cp);

@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.model.memento.save.bean;
 
 import org.geosdi.geoplatform.gui.action.ISave;
+import org.geosdi.geoplatform.gui.model.logo.GPAttributionLogoURLBean;
 import org.geosdi.geoplatform.gui.model.temporal.dimension.GPTemporalDimensionBean;
 import org.geosdi.geoplatform.gui.model.temporal.extent.GPTemporalExtentBean;
 import org.geosdi.geoplatform.gui.model.tree.AbstractRasterTreeModel;
@@ -55,6 +56,7 @@ public class MementoRaster extends AbstractMementoLayer<AbstractRasterTreeModel>
     private GPTemporalDimensionBean dimension;
     private GPTemporalExtentBean extent;
     private List<String> styles;
+    private GPAttributionLogoURLBean logoURLBean;
 
     public MementoRaster() {
     }
@@ -115,8 +117,27 @@ public class MementoRaster extends AbstractMementoLayer<AbstractRasterTreeModel>
         return ((this.extent != null) && (this.extent.isTemporal()));
     }
 
+
+    public GPAttributionLogoURLBean getLogoURLBean() {
+        return logoURLBean;
+    }
+
+    public void setLogoURLBean(GPAttributionLogoURLBean logoURLBean) {
+        this.logoURLBean = logoURLBean;
+    }
+
+    public boolean isSetAttribution() {
+        return this.logoURLBean != null && this.logoURLBean.getOnlineResource() != null;
+    }
+
     @Override
     public void update(Observable o, Object arg) {
         super.setIdBaseElement((Long) arg);
+    }
+
+
+    @Override
+    public String toString() {
+        return "MementoRaster{" + "dimension=" + dimension + ", extent=" + extent + ", styles=" + styles + ", logoURLBean=" + logoURLBean + '}';
     }
 }

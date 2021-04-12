@@ -83,7 +83,10 @@ public class MementoSaveBuilder {
                     ((MementoRaster) memento).setDimension(((AbstractRasterTreeModel) beanModel).getDimension());
                     ((MementoRaster) memento).setExtent(((AbstractRasterTreeModel) beanModel).getExtent());
                 }
-                List<String> stringList = convertStyles(((AbstractRasterTreeModel) beanModel).getStyles());
+                if(((AbstractRasterTreeModel) beanModel).isSetAttribution()) {
+                    ((MementoRaster) memento).setLogoURLBean(((AbstractRasterTreeModel) beanModel).getLogoURLBean());
+                }
+                    List<String> stringList = convertStyles(((AbstractRasterTreeModel) beanModel).getStyles());
                 ((MementoRaster) memento).setStyles(stringList);
             } else if (beanModel instanceof AbstractVectorTreeModel) {
                 layer = ((AbstractVectorTreeModel) beanModel);

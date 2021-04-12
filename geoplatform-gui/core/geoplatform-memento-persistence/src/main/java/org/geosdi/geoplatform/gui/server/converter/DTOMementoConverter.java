@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.gui.server.converter;
 
 import com.google.common.collect.Lists;
 import org.geosdi.geoplatform.core.model.*;
+import org.geosdi.geoplatform.core.model.attribution.GPLayerAttribution;
+import org.geosdi.geoplatform.core.model.attribution.logo.GPAttributionLogoURL;
 import org.geosdi.geoplatform.core.model.temporal.GPTemporalLayer;
 import org.geosdi.geoplatform.core.model.temporal.dimension.GPTemporalDimension;
 import org.geosdi.geoplatform.core.model.temporal.extent.GPTemporalExtent;
@@ -44,6 +46,7 @@ import org.geosdi.geoplatform.gui.client.model.memento.save.bean.AbstractMemento
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoRaster;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoVector;
 import org.geosdi.geoplatform.gui.client.model.memento.save.storage.MementoLayerOriginalProperties;
+import org.geosdi.geoplatform.gui.model.logo.GPAttributionLogoURLBean;
 import org.geosdi.geoplatform.gui.model.temporal.dimension.GPTemporalDimensionBean;
 import org.geosdi.geoplatform.gui.model.temporal.extent.GPTemporalExtentBean;
 import org.geosdi.geoplatform.gui.model.tree.GPStyleStringBeanModel;
@@ -83,6 +86,12 @@ public class DTOMementoConverter {
                     GPTemporalExtentBean extent = ((MementoRaster) memento).getExtent();
                     ((GPRasterLayer) layer).setTemporalLayer(new GPTemporalLayer((dimension != null) ? new GPTemporalDimension(dimension.getName(), dimension.getUnits()) : null,
                             (extent != null) ? new GPTemporalExtent(extent.getName(), extent.getDefaultExtent(), extent.getValue()) : null));
+                }
+                if (((MementoRaster) memento).isSetAttribution()) {
+                    GPLayerAttribution layerAttribution = new GPLayerAttribution();
+                    GPAttributionLogoURLBean logoURLBean = ((MementoRaster) memento).getLogoURLBean();
+                    layerAttribution.setLogoUrl(new GPAttributionLogoURL(logoURLBean.getHeight(), logoURLBean.getWidth(), logoURLBean.getFormat(), logoURLBean.getOnlineResource()));
+                    ((GPRasterLayer) layer).setLayerAttribution(layerAttribution);
                 }
                 ((GPRasterLayer) layer).setStyles(((MementoRaster) memento).getStyles());
                 // layer.setLayerInfo();???

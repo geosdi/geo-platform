@@ -97,6 +97,7 @@ public class RasterLayerDTO extends ShortLayerDTO {
         this.maxScale = rasterLayer.getMaxScale();
         this.minScale = rasterLayer.getMinScale();
         this.temporalLayer = rasterLayer.getTemporalLayer();
+        this.layerAttribution = rasterLayer.getLayerAttribution();
     }
     //</editor-fold>
 

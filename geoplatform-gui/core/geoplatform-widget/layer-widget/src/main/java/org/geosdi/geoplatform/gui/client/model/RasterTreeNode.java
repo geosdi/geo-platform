@@ -98,6 +98,7 @@ public class RasterTreeNode extends AbstractRasterTreeModel implements GPRasterB
         this.setMinScale(layer.getMinScale());
         this.setSingleTileRequest(layer.isSingleTileRequest());
         this.setDimension(layer.getDimension());
+        this.setLogoURLBean(layer.getLogoURLBean());
         this.setExtent(layer.getExtent());
     }
 
@@ -199,6 +200,8 @@ public class RasterTreeNode extends AbstractRasterTreeModel implements GPRasterB
         this.getState().setTimeFilter(timeFilter, this);
     }
 
+
+
     @Override
     public TreeStatusEnum getTreeStatus() {
         return TreeStatusEnum.RASTER_SELECTED;
@@ -209,17 +212,8 @@ public class RasterTreeNode extends AbstractRasterTreeModel implements GPRasterB
         visitor.visitRaster(this);
     }
 
-    /**
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
     @Override
     public String toString() {
-        return "RasterTreeNode {" + super.toString()
-                + ", singleTileRequest = " + singleTileRequest
-                + ", opacity = " + opacity
-                + ", maxScale = " + maxScale
-                + ", minScale = " + minScale + "}";
+        return "RasterTreeNode{" + "opacity=" + opacity + ", maxScale=" + maxScale + ", minScale=" + minScale + ", singleTileRequest=" + singleTileRequest + '}';
     }
 }

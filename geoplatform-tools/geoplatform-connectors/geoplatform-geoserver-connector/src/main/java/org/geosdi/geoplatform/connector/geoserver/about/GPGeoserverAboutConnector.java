@@ -128,7 +128,7 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
     @Override
     public GPGeoserverAboutVersionRequest createAboutVersionRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverAboutVersionRequest(this, this.jacksonSupport);
             default:
@@ -142,7 +142,7 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
     @Override
     public GPGeoserverAboutStatusRequest createAboutStatusRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverAboutStatusRequest(this, this.jacksonSupport);
             default:

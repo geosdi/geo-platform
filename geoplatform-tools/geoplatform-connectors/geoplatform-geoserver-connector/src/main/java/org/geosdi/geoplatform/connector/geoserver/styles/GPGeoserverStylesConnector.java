@@ -110,7 +110,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     @Override
     public GPGeoserverStylesRequest loadStylesRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverStylesRequest(this, this.jacksonSupport);
             default:
@@ -124,7 +124,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     @Override
     public GeoserverStyleRequest loadStyleRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverStyleRequest(this, this.jacksonSupport);
             default:

@@ -111,7 +111,7 @@ public abstract class GPGeoserverCoveragesConnector extends GPGeoserverWorkspace
     @Override
     public GeoserverLoadCoveragesRequest loadWorkspaceCoveragesRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverLoadCoveragesRequest(this, this.jacksonSupport);
             default:
@@ -125,7 +125,7 @@ public abstract class GPGeoserverCoveragesConnector extends GPGeoserverWorkspace
     @Override
     public GeoserverLoadCoverageRequest loadWorkspaceCoverageRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverLoadCoverageRequest(this, this.jacksonSupport);
             default:

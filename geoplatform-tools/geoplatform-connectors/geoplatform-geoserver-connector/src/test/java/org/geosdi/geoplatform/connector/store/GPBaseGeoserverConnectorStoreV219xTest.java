@@ -50,11 +50,11 @@ import static org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStoreBu
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPBaseGeoserverConnectorStoreV217xTest {
+public abstract class GPBaseGeoserverConnectorStoreV219xTest {
 
-    protected static final Logger logger = LoggerFactory.getLogger(GPBaseGeoserverConnectorStoreV217xTest.class);
+    protected static final Logger logger = LoggerFactory.getLogger(GPBaseGeoserverConnectorStoreV219xTest.class);
     //
-    private static final String geoserverURLV2_17_3 = "http://150.145.141.180/geoserver/rest";
+    private static final String geoserverURLV2_19_X = "http://150.145.141.180/geoserver/rest";
     protected static GPGeoserverConnectorStore geoserverConnectorStoreV2_17_x;
 
     /**
@@ -63,7 +63,7 @@ public abstract class GPBaseGeoserverConnectorStoreV217xTest {
     @BeforeClass
     public static void beforeClass() throws Exception {
         geoserverConnectorStoreV2_17_x = geoserverConnectorBuilder()
-                .withServerUrl(new URL(geoserverURLV2_17_3))
+                .withServerUrl(new URL(geoserverURLV2_19_X))
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(80)
                         .withDefaultMaxPerRoute(40)

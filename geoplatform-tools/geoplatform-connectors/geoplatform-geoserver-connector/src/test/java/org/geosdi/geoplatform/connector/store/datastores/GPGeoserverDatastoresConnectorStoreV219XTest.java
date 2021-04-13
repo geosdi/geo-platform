@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverLo
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverUpdateDatastoreRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverLoadWorkspacesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverCreateWorkspaceRequest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV217xTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV219xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
@@ -58,7 +58,7 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverDatastoresConnectorStoreV217XTest extends GPBaseGeoserverConnectorStoreV217xTest {
+public class GPGeoserverDatastoresConnectorStoreV219XTest extends GPBaseGeoserverConnectorStoreV219xTest {
 
     @Test
     public void a_loadGeoserverDatastoresConnectorTest() throws Exception {

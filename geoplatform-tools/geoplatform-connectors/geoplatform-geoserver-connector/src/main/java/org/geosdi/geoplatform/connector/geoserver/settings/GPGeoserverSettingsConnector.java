@@ -111,7 +111,7 @@ public abstract class GPGeoserverSettingsConnector extends GPGeoserverSecurityCo
     @Override
     public GPGeoserverLoadGlobalSettingsRequest loadGeoserverGlobalSettingRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverLoadGlobalSettingsRequest(this, this.jacksonSupport);
             default:
@@ -125,7 +125,7 @@ public abstract class GPGeoserverSettingsConnector extends GPGeoserverSecurityCo
     @Override
     public GeoserverUpdateGlobalSettingsRequest updateGlobalSettingsRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverUpdateGlobalSettingsRequest(this, this.jacksonSupport);
             default:
@@ -139,7 +139,7 @@ public abstract class GPGeoserverSettingsConnector extends GPGeoserverSecurityCo
     @Override
     public GPGeoserverLoadContactSettingsRequest loadGeoserverContactSettingsRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverLoadContactSettingsRequest(this, this.jacksonSupport);
             default:

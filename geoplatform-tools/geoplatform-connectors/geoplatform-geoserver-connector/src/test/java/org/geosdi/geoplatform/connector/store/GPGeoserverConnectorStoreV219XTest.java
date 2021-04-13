@@ -64,7 +64,7 @@ import static java.lang.Thread.sleep;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class GPGeoserverConnectorStoreV217XTest extends GPBaseGeoserverConnectorStoreV217xTest {
+public class GPGeoserverConnectorStoreV219XTest extends GPBaseGeoserverConnectorStoreV219xTest {
 
     @Test
     public void a_aboutVersionGeoserverConnectorTest() throws Exception {

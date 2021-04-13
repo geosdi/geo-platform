@@ -108,7 +108,7 @@ public abstract class GPGeoserverLayersConnector extends GPGeoserverNamespacesCo
     @Override
     public GPGeoserverLayersRequest loadLayersRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverLayersRequest(this, this.jacksonSupport);
             default:
@@ -122,7 +122,7 @@ public abstract class GPGeoserverLayersConnector extends GPGeoserverNamespacesCo
     @Override
     public GPGeoserverLoadLayerRequest loadLayerRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverLoadLayerRequest(this, this.jacksonSupport);
             default:
@@ -136,7 +136,7 @@ public abstract class GPGeoserverLayersConnector extends GPGeoserverNamespacesCo
     @Override
     public GeoserverLoadWorkspaceLayersRequest loadWorkspaceLayersRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverLoadWorkspaceLayersRequest(this, this.jacksonSupport);
             default:
@@ -150,7 +150,7 @@ public abstract class GPGeoserverLayersConnector extends GPGeoserverNamespacesCo
     @Override
     public GeoserverLoadWorkspaceLayerRequest loadWorkspaceLayerRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverLoadWorkspaceLayerRequest(this, this.jacksonSupport);
             default:

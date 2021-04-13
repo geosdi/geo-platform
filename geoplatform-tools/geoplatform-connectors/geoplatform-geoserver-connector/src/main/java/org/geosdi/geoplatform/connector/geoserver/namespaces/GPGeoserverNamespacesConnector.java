@@ -109,7 +109,7 @@ public abstract class GPGeoserverNamespacesConnector extends GPGeoserverCoverage
     @Override
     public GPGeoserverNamespacesRequest createNamespacesRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverNamespacesRequest(this, this.jacksonSupport);
             default:
@@ -123,7 +123,7 @@ public abstract class GPGeoserverNamespacesConnector extends GPGeoserverCoverage
     @Override
     public GPGeoserverNamespaceRequest createNamespaceRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverNamespaceRequest(this, this.jacksonSupport);
             default:

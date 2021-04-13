@@ -56,11 +56,11 @@ public enum GeoserverVersion implements GPServerConnectorVersion {
     /**
      * <p>Maintenance Version.</p>
      */
-    V217x("2.17.5"),
+    V218x("2.18.2"),
     /**
      * <p>Stable Version.</p>
      */
-    V218x("2.18.2");
+    V219x("2.19.0");
 
     private final String version;
 
@@ -94,6 +94,6 @@ public enum GeoserverVersion implements GPServerConnectorVersion {
                 .filter(Objects::nonNull)
                 .filter(v -> ((version != null) && !(version.trim().isEmpty())) ? v.getVersion().equalsIgnoreCase(version) : FALSE)
                 .findFirst();
-        return optional.orElse(V218x);
+        return optional.orElse(V219x);
     }
 }

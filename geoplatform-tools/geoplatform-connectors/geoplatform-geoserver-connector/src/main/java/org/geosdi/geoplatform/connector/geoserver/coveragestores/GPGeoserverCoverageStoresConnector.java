@@ -108,7 +108,7 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
     @Override
     public GeoserverLoadCoverageStoresRequest loadCoverageStoresRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverLoadCoverageStoresRequest(this, this.jacksonSupport);
             default:
@@ -122,7 +122,7 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
     @Override
     public GeoserverLoadCoverageStoreRequest loadCoverageStoreRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverLoadCoverageStoreRequest(this, this.jacksonSupport);
             default:
@@ -136,7 +136,7 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
     @Override
     public GeoserverCreateCoverageStoreRequest createCoverageStoreRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverCreateCoverageStoreRequest(this, this.jacksonSupport);
             default:
@@ -150,7 +150,7 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
     @Override
     public GeoserverDeleteCoverageStoreRequest deleteCoverageStoreRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverDeleteCoverageStoreRequest(this, this.jacksonSupport);
             default:
@@ -164,7 +164,7 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
     @Override
     public GeoserverUpdateCoverageStoreRequest updateCoverageStoreRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverUpdateCoverageStoreRequest(this, this.jacksonSupport);
             default:

@@ -108,7 +108,7 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     @Override
     public GPGeoserverLoadWorkspacesRequest loadWorkspacesRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverLoadWorkspacesRequest(this, this.jacksonSupport);
             default:
@@ -122,7 +122,7 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     @Override
     public GPGeoserverLoadWorkspaceRequest loadWorkspaceRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverLoadWorkspaceRequest(this, this.jacksonSupport);
             default:
@@ -136,7 +136,7 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     @Override
     public GeoserverCreateWorkspaceRequest createWorkspaceRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverCreateWorkspaceRequest(this, this.jacksonSupport);
             default:
@@ -150,7 +150,7 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     @Override
     public GeoserverDeleteWorkspaceRequest deleteWorkspaceRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverDeleteWorkspaceRequest(this, this.jacksonSupport);
             default:
@@ -164,7 +164,7 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     @Override
     public GeoserverUpdateWorkspaceRequest updateWorkspaceRequest() {
         switch (version) {
-            case V217x:
+            case V219x:
             case V218x:
                 return new GPGeoserverUpdateWorkspaceRequest(this, this.jacksonSupport);
             default:

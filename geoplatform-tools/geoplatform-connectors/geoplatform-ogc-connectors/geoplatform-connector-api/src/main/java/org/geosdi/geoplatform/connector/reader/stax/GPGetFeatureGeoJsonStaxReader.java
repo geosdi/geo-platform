@@ -97,7 +97,7 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
                     .filter(values -> values.length == 2)
                     .filter(values -> ((values[0] != null) && !(values[0].trim().isEmpty()) && (values[1] != null) && !(values[1].trim().isEmpty())))
                     .map(values -> new GPFeatureType(values[0], values[1]))
-                    .collect(toMap(k -> k.getName(), identity(), (oldVal, newVal) -> oldVal, LinkedHashMap::new));
+                    .collect(toMap(GPFeatureType::getName, identity(), (oldVal, newVal) -> oldVal, LinkedHashMap::new));
         }
     };
     //

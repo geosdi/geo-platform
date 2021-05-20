@@ -86,7 +86,7 @@ public class GPGZIPWriterInterceptor implements WriterInterceptor {
         MultivaluedMap<String, Object> headers = context.getHeaders();
         headers.add("Content-Encoding", "gzip");
         OutputStream outputStream = context.getOutputStream();
-        context.setOutputStream(new GZIPOutputStream(outputStream, threshold));
+        context.setOutputStream(new GZIPOutputStream(outputStream, threshold, syncFlush));
         context.proceed();
     }
 }

@@ -49,7 +49,7 @@ import java.io.OutputStream;
 import java.util.Optional;
 import java.util.zip.GZIPOutputStream;
 
-import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import static java.util.Arrays.stream;
 
 /**
@@ -81,7 +81,7 @@ public class GPGZIPWriterInterceptor implements WriterInterceptor {
                 .map(a -> (GPCompress) a)
                 .findFirst();
         int threshold = ((value != null) && !(value.equals(Optional.empty())) ? value.get().thrushold() : 512);
-        boolean syncFlush = ((value != null) && !(value.equals(Optional.empty())) ? value.get().syncFlush() : FALSE);
+        boolean syncFlush = ((value != null) && !(value.equals(Optional.empty())) ? value.get().syncFlush() : TRUE);
         logger.trace("############################Threshold : {} - SyncFlush : {}\n", threshold, syncFlush);
         MultivaluedMap<String, Object> headers = context.getHeaders();
         headers.add("Content-Encoding", "gzip");

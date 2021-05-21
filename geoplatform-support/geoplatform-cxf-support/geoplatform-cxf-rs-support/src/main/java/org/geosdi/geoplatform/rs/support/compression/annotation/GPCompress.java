@@ -55,5 +55,5 @@ public @interface GPCompress {
     /**
      * @return {@link Boolean}
      */
-    boolean syncFlush() default false;
+    boolean syncFlush() default true;
 }

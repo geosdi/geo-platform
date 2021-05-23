@@ -104,6 +104,9 @@ public class WMSGetFeatureInfoStaxReaderMixedTest {
         List<Feature> alt600A700Features = wmsFeatureStore.getFeaturesByKey("alt_600_a_700");
         assertNotNull(alt600A700Features);
         assertTrue(alt600A700Features.size() == 3);
+        List<Feature> pozzuoliAcqueFeatures = wmsFeatureStore.getFeaturesByKey("admin_shp_pozzuoli447so_acque");
+        assertNotNull(pozzuoliAcqueFeatures);
+        assertTrue(pozzuoliAcqueFeatures.size() == 6);
         fromIterable(wmsFeatureStore.getStore().entrySet())
                 .doOnComplete(() -> logger.info("@@@@@@@@@@@@@@@@@@RX Terminated its work."))
                 .subscribe(k -> logger.info("###############{} - size : {}\n", k.getKey(), k.getValue().size()));

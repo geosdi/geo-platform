@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:ptpr="https://geoportale.regione.lazio.it/geoserver_nsit/ptpr"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="https://geoportale.regione.lazio.it/geoserver_nsit/ptpr https://geoportale.regione.lazio.it/geoserver_nsit/ptpr/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=ptpr%3Acosta_laghi http://www.opengis.net/wfs https://geoportale.regione.lazio.it/geoserver_nsit/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#23033">
+            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">358803.9203,4576067.1976
+                363102.9564,4577945.4998
+            </gml:coordinates>
+        </gml:Box>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <ptpr:costa_laghi fid="costa_laghi.fid--7fd11b74_17991cefb95_-303a">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#23033">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        358803.9203,4576067.1976 363102.9564,4577945.4998
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ptpr:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#23033">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:23033">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        358803.9203,4576721.4537 360104.2011,4577368.2106 361073.4002,4576914.3011
+                                        360986.0863,4577543.3049 361562.7498,4577945.4998 361912.9568,4577012.2677
+                                        363102.9564,4576485.1191 362730.5696,4576067.1976 361691.1922,4576633.0068
+                                        361565.4383,4577646.2691 361285.1383,4576425.2464 360361.0525,4576513.85
+                                        360154.7498,4577072.4999 359542.8074,4576491.876 358803.9203,4576721.4537
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ptpr:geom>
+            <ptpr:OBJECTID>25</ptpr:OBJECTID>
+            <ptpr:Comune>Monte San Biagio</ptpr:Comune>
+            <ptpr:Cod.ISTAT_PROV>059</ptpr:Cod.ISTAT_PROV>
+            <ptpr:Cod.ISTAT_COM>015</ptpr:Cod.ISTAT_COM>
+            <ptpr:ISTAT>12059015</ptpr:ISTAT>
+            <ptpr:ID_Regione_Lazio>b059015_208</ptpr:ID_Regione_Lazio>
+            <ptpr:allegati>PTPR_art34</ptpr:allegati>
+            <ptpr:shape_area>2310412.90443</ptpr:shape_area>
+            <ptpr:shape_len>17415.4553826</ptpr:shape_len>
+        </ptpr:costa_laghi>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ptpr:costa_laghi fid="costa_laghi.fid--7fd11b74_17991cefb95_-3035">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#23033">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        361939.2234,4576339.0476 362695.4136,4577001.3052
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ptpr:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#23033">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:23033">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        361939.2234,4576667.4792 362695.4136,4577001.3052 362563.9346,4576339.0476
+                                        361939.2234,4576667.4792
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ptpr:geom>
+            <ptpr:OBJECTID>190</ptpr:OBJECTID>
+            <ptpr:Comune>Monte San Biagio</ptpr:Comune>
+            <ptpr:Cod.ISTAT_PROV>059</ptpr:Cod.ISTAT_PROV>
+            <ptpr:Cod.ISTAT_COM>015</ptpr:Cod.ISTAT_COM>
+            <ptpr:ISTAT>12059015</ptpr:ISTAT>
+            <ptpr:ID_Regione_Lazio>b059015_203</ptpr:ID_Regione_Lazio>
+            <ptpr:allegati>PTPR_art34</ptpr:allegati>
+            <ptpr:shape_area>441642.259449</ptpr:shape_area>
+            <ptpr:shape_len>4230.37744758</ptpr:shape_len>
+        </ptpr:costa_laghi>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ptpr:costa_laghi fid="costa_laghi.fid--7fd11b74_17991cefb95_-301a">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#23033">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        336884.3677,4678788.8131 340798.9999,4683099.1322
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ptpr:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#23033">
+                    <gml:polygonMember>
+                        <gml:Polygon srsName="EPSG:23033">
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        339907.4482,4678788.8131 340087.4894,4679235.5244 339347.5859,4679835.6948
+                                        339531.6514,4680628.6036 338668.3677,4680606.8677 338854.4951,4681246.1873
+                                        337396.3677,4682004.8678 336884.3677,4683099.1322 337608.5001,4682217.0002
+                                        339825.2502,4681129.0002 338880.5001,4680819.0001 339877.7501,4680866.4998
+                                        339624.7499,4679950.5001 340798.9999,4679364.5002 339907.4482,4678788.8131
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ptpr:geom>
+            <ptpr:OBJECTID>92</ptpr:OBJECTID>
+            <ptpr:Comune>Varco Sabino</ptpr:Comune>
+            <ptpr:Cod.ISTAT_PROV>057</ptpr:Cod.ISTAT_PROV>
+            <ptpr:Cod.ISTAT_COM>073</ptpr:Cod.ISTAT_COM>
+            <ptpr:ISTAT>12057073</ptpr:ISTAT>
+            <ptpr:ID_Regione_Lazio>b057073_052</ptpr:ID_Regione_Lazio>
+            <ptpr:allegati>PTPR_art34</ptpr:allegati>
+            <ptpr:shape_area>2570479.54297</ptpr:shape_area>
+            <ptpr:shape_len>19345.3008155</ptpr:shape_len>
+        </ptpr:costa_laghi>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ptpr:costa_laghi fid="costa_laghi.fid--7fd11b74_17991cefb95_-3019">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#23033">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        337000.0362,4677290.0769 343784.7499,4684165.664
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ptpr:geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#23033">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        337000.0362,4683167.8933 338656.305,4684165.664 338667.2761,4683054.3593
+                                        339998.6318,4683159.1319 339862.3737,4682384.138 341115.8547,4681227.3656
+                                        340668.3437,4680221.94 341567.3819,4680109.6323 341677.213,4679454.5528
+                                        343215.75,4679588.5002 343681.5568,4679095.5379 341594.5,4679158.9998
+                                        341355.25,4679897.4999 340348.25,4679900 340337.2502,4681078.9998
+                                        340841.5,4681106.4998 339850.4999,4682086.5001 339411.0002,4681948.5002
+                                        339786.4999,4682947.0001 339127.2498,4682182.9998 338132.7502,4682782.9998
+                                        338541.4998,4683888.5 337895.2498,4682861.9999 337847.5001,4683417.4999
+                                        337000.0362,4683167.8933
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        343630.5535,4678525.09 342498.5563,4678317.578 342142.9113,4677290.0769
+                                        342164.0001,4678660 343784.7499,4678944.5 343630.5535,4678525.09
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ptpr:geom>
+            <ptpr:OBJECTID>94</ptpr:OBJECTID>
+            <ptpr:Comune>Petrella Salto</ptpr:Comune>
+            <ptpr:Cod.ISTAT_PROV>057</ptpr:Cod.ISTAT_PROV>
+            <ptpr:Cod.ISTAT_COM>050</ptpr:Cod.ISTAT_COM>
+            <ptpr:ISTAT>12057050</ptpr:ISTAT>
+            <ptpr:ID_Regione_Lazio>b057050_052</ptpr:ID_Regione_Lazio>
+            <ptpr:allegati>PTPR_art34</ptpr:allegati>
+            <ptpr:shape_area>5610225.19402</ptpr:shape_area>
+            <ptpr:shape_len>42075.6574809</ptpr:shape_len>
+        </ptpr:costa_laghi>
+    </gml:featureMember>
+</wfs:FeatureCollection>

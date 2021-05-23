@@ -96,13 +96,13 @@ public class GoogleStaxReaderTest {
     @Test
     public void b_readFromString() throws Exception {
         stopWatch.start("googleStaxReaderFromString");
-        logger.info("Result from String @@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", googleStaxReader.read(fileAsString()));
+        logger.info("Result from String @@@@@@@@@@@@@@@@@@@@@@@@@{}\n", googleStaxReader.read(fileAsString()));
         stopWatch.stop();
         stopWatch.start("googleAaltoReaderFromString");
-        logger.info("Result from String @@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", googleAaltoReader.read(fileAsString()));
+        logger.info("Result from String @@@@@@@@@@@@@@@@@@@@@@@@@{}\n", googleAaltoReader.read(fileAsString()));
         stopWatch.stop();
         stopWatch.start("googleWoodstoxReaderFromString");
-        logger.info("Result from String @@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", googleWoodstoxReader.read(fileAsString()));
+        logger.info("Result from String @@@@@@@@@@@@@@@@@@@@@@@@@{}\n", googleWoodstoxReader.read(fileAsString()));
         stopWatch.stop();
     }
 

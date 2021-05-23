@@ -88,6 +88,6 @@ class IntegerParserFromStringHandler extends AbstractPrimitiveParserFromStringHa
      */
     @Override
     public Class<Integer> getPrimitiveType() {
-        return Integer.class;
+        return Integer.TYPE;
     }
 }

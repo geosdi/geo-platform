@@ -282,4 +282,10 @@ public class GPWMSGetFeatureInfoAaltoReaderTest extends WMSGetFeatureInfoAaltoRe
         logger.info("#######################FEATURE_COLLECTION_exeflegrei_esiti_c_danni : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("exeflegrei_esiti_c_danni.xml"))));
     }
+
+    @Test
+    public void z_p_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_pozzuoli_acque : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("pozzuoliAcque.xml"))));
+    }
 }

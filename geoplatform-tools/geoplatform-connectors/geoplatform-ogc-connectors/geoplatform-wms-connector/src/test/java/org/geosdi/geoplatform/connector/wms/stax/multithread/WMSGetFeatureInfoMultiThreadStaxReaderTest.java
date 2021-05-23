@@ -79,7 +79,7 @@ public class WMSGetFeatureInfoMultiThreadStaxReaderTest extends GPWMSGetFeatureM
                 .subscribe(Thread::start);
         startSignal.countDown();
         doneSignal.await();
-        assertTrue(counter.get() == 45);
+        assertTrue(counter.get() == files.size());
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@{} process {} files", this.getClass().getSimpleName(), counter.get());
     }
 

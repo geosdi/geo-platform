@@ -506,4 +506,20 @@ public class GPWMSFeatureStoreTest extends WMSGetFeatureInfoStaxReaderTest {
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "Storedtsup_campania_20150324_20201122.json")
                 .collect(joining(separator))), wmsFeatureStore);
     }
+
+    @Test
+    public void c_l_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("pozzuoliAcque.xml"));
+        logger.info("#######################FEATURE_STORE_pozzuoli_acque : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StorePozzuoliAcque.json")
+                .collect(joining(separator))), wmsFeatureStore);
+    }
+
+    @Test
+    public void c_m_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("laghi.xml"));
+        logger.info("#######################FEATURE_STORE_laghi : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreLaghi.json")
+                .collect(joining(separator))), wmsFeatureStore);
+    }
 }

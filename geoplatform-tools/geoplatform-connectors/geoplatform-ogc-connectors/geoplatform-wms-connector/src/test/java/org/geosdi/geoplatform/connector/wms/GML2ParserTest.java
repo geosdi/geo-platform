@@ -70,6 +70,7 @@ public class GML2ParserTest {
     private static File file3;
     private static File file4;
     private static File file5;
+    private static File file6;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -81,6 +82,7 @@ public class GML2ParserTest {
         file3 = new File(basePath.concat("multyLineString.xml"));
         file4 = new File(basePath.concat("lineString.xml"));
         file5 = new File(basePath.concat("multiPolygon-Corine.xml"));
+        file6 = new File(basePath.concat("multiPolygonLaghi.xml"));
     }
 
     @Test
@@ -151,7 +153,13 @@ public class GML2ParserTest {
 
     @Test
     public void n_unmarshallerTest() throws Exception {
-        AbstractGeometryType multiPolygon = jaxbContextBuilder.unmarshal(new FileReader(file5), MultiPointType.class);
+        MultiPolygonType multiPolygon = jaxbContextBuilder.unmarshal(new FileReader(file5), MultiPolygonType.class);
+        logger.info("######################UNMARSHALL_GML2_GEOMETRY : {}\n", multiPolygon);
+    }
+
+    @Test
+    public void o_unmarshallerTest() throws Exception {
+        MultiPolygonType multiPolygon = jaxbContextBuilder.unmarshal(new FileReader(file6), MultiPolygonType.class);
         logger.info("######################UNMARSHALL_GML2_GEOMETRY : {}\n", multiPolygon);
     }
 }

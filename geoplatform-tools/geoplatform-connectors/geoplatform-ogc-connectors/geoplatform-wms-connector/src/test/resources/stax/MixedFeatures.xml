@@ -3,8 +3,9 @@
                        xmlns:PianoCampiFlegrei="http://PianoCampiFlegrei"
                        xmlns:gml="http://www.opengis.net/gml" xmlns:rsdi="http://www.opengeospatial.net/rsdi"
                        xmlns:PNSRS="http://servizi.protezionecivile.it/PNSRS/"
+                       xmlns:admin="http://www.geosdi.org/admin"
                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                       xsi:schemaLocation="http://www.opengeospatial.net/rsdi http://rsdi.regione.basilicata.it:80/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=rsdi:alt_300_a_400,typeName=PianoCampiFlegrei%3ACF_zonarossa_mappeinterattive,typeName=PNSRS%3AABR_1_4_1_aree_urb_val_storico,typeName=PNSRS%3AABR_4_5_comuni_aff_COM,typeName=PNSRS%3AABR_1_4_1_aree_urb_val_storico,typeName=rsdi:alt_600_a_700 http://www.opengis.net/wfs http://rsdi.regione.basilicata.it:80/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+                       xsi:schemaLocation="http://www.opengeospatial.net/rsdi http://rsdi.regione.basilicata.it:80/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=rsdi:alt_300_a_400,typeName=PianoCampiFlegrei%3ACF_zonarossa_mappeinterattive,typeName=PNSRS%3AABR_1_4_1_aree_urb_val_storico,typeName=PNSRS%3AABR_4_5_comuni_aff_COM,typeName=PNSRS%3AABR_1_4_1_aree_urb_val_storico,typeName=rsdi:alt_600_a_700,typeName=admin%3Aadmin_shp_pozzuoli447so_acque http://www.opengis.net/wfs http://rsdi.regione.basilicata.it:80/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
     <gml:boundedBy>
         <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
             <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
@@ -4736,5 +4737,116 @@
                 </gml:MultiPolygon>
             </rsdi:the_geom>
         </rsdi:alt_600_a_700>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_pozzuoli447so_acque fid="admin_shp_pozzuoli447so_acque.655">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:32633">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                421341.41,4524791.22 421341.41,4524791.22
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:ID>655</admin:ID>
+            <admin:Tipo>Depuratore</admin:Tipo>
+            <admin:Lun_ghe_zza>1.486360472571355</admin:Lun_ghe_zza>
+        </admin:admin_shp_pozzuoli447so_acque>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_pozzuoli447so_acque fid="admin_shp_pozzuoli447so_acque.658">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:32633">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                421341.91,4524791.22 421341.91,4524791.22
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:ID>658</admin:ID>
+            <admin:Tipo>Depuratore</admin:Tipo>
+            <admin:Lun_ghe_zza>4.500982486981472</admin:Lun_ghe_zza>
+        </admin:admin_shp_pozzuoli447so_acque>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_pozzuoli447so_acque fid="admin_shp_pozzuoli447so_acque.1389">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:32633">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                421313.26,4524801.9 421274.56,4524817.89 421290.18,4524856.74 421329.17,4524841.48
+                                421313.26,4524801.9
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:ID>1389</admin:ID>
+            <admin:Tipo>Vasca piscina</admin:Tipo>
+            <admin:Lun_ghe_zza>186.32759859328831</admin:Lun_ghe_zza>
+        </admin:admin_shp_pozzuoli447so_acque>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_pozzuoli447so_acque fid="admin_shp_pozzuoli447so_acque.1390">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:32633">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                421372.73,4524724.44 421333.07,4524746.18 421354.05,4524780.76 421390.55,4524760.92
+                                421372.73,4524724.44
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:ID>1390</admin:ID>
+            <admin:Tipo>Vasca piscina</admin:Tipo>
+            <admin:Lun_ghe_zza>186.07912258058988</admin:Lun_ghe_zza>
+        </admin:admin_shp_pozzuoli447so_acque>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_pozzuoli447so_acque fid="admin_shp_pozzuoli447so_acque.1394">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:32633">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                421257.86,4524813.17 421238.78,4524784.02 421257.86,4524813.17
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:ID>1394</admin:ID>
+            <admin:Tipo>Vasca piscina</admin:Tipo>
+            <admin:Lun_ghe_zza>93.93904676504663</admin:Lun_ghe_zza>
+        </admin:admin_shp_pozzuoli447so_acque>
+    </gml:featureMember>
+    <gml:featureMember>
+        <admin:admin_shp_pozzuoli447so_acque fid="admin_shp_pozzuoli447so_acque.1398">
+            <admin:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:lineStringMember>
+                        <gml:LineString srsName="EPSG:32633">
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                421300.61,4524729.33 421266.11,4524752.92 421288.74,4524787.54 421324.42,4524764.4
+                                421300.61,4524729.33
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </admin:the_geom>
+            <admin:ID>1398</admin:ID>
+            <admin:Tipo>Vasca piscina</admin:Tipo>
+            <admin:Lun_ghe_zza>186.10158922885444</admin:Lun_ghe_zza>
+        </admin:admin_shp_pozzuoli447so_acque>
     </gml:featureMember>
 </wfs:FeatureCollection>

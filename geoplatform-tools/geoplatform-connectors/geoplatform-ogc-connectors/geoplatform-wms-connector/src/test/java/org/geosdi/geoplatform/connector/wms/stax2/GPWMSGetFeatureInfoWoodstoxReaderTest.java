@@ -63,7 +63,6 @@ public class GPWMSGetFeatureInfoWoodstoxReaderTest extends WMSGetFeatureInfoWood
     public void c_wmsGetFeatureInfoWoodstoxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_STATES_1 : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("geoserver-GetFeatureInfo1.xml"))));
-
     }
 
     @Test
@@ -281,5 +280,11 @@ public class GPWMSGetFeatureInfoWoodstoxReaderTest extends WMSGetFeatureInfoWood
     public void z_0_wmsGetFeatureInfoWoodstoxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_exeflegrei_esiti_c_danni : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("exeflegrei_esiti_c_danni.xml"))));
+    }
+
+    @Test
+    public void z_p_wmsGetFeatureInfoWoodstoxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_pozzuoli_acque : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("pozzuoliAcque.xml"))));
     }
 }

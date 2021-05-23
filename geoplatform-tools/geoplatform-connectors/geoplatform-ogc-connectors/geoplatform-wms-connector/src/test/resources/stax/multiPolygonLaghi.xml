@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gml:MultiPolygon xmlns:gml="http://www.opengis.net/gml" srsName="http://www.opengis.net/gml/srs/epsg.xml#23033">
+    <gml:polygonMember>
+        <gml:Polygon>
+            <gml:outerBoundaryIs>
+                <gml:LinearRing>
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        337000.0362,4683167.8933 338656.305,4684165.664 338667.2761,4683054.3593
+                        339998.6318,4683159.1319 339862.3737,4682384.138 341115.8547,4681227.3656
+                        340668.3437,4680221.94 341567.3819,4680109.6323 341677.213,4679454.5528
+                        343215.75,4679588.5002 343681.5568,4679095.5379 341594.5,4679158.9998
+                        341355.25,4679897.4999 340348.25,4679900 340337.2502,4681078.9998
+                        340841.5,4681106.4998 339850.4999,4682086.5001 339411.0002,4681948.5002
+                        339786.4999,4682947.0001 339127.2498,4682182.9998 338132.7502,4682782.9998
+                        338541.4998,4683888.5 337895.2498,4682861.9999 337847.5001,4683417.4999
+                        337000.0362,4683167.8933
+                    </gml:coordinates>
+                </gml:LinearRing>
+            </gml:outerBoundaryIs>
+        </gml:Polygon>
+    </gml:polygonMember>
+    <gml:polygonMember>
+        <gml:Polygon>
+            <gml:outerBoundaryIs>
+                <gml:LinearRing>
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        343630.5535,4678525.09 342498.5563,4678317.578 342142.9113,4677290.0769
+                        342164.0001,4678660 343784.7499,4678944.5 343630.5535,4678525.09
+                    </gml:coordinates>
+                </gml:LinearRing>
+            </gml:outerBoundaryIs>
+        </gml:Polygon>
+    </gml:polygonMember>
+</gml:MultiPolygon>

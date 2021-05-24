@@ -67,7 +67,7 @@ public class GPPrimitiveParserTest {
     public void b_parseIntegerTest() throws Exception {
         String className = primitiveParserHandlerManager.parseValue("34").getSimpleName();
         logger.info("#######################PARSE_INTEGER : {}\n", className);
-        assertTrue(className.equalsIgnoreCase(Integer.class.getSimpleName()));
+        assertTrue(className.equalsIgnoreCase(Integer.TYPE.getSimpleName()));
     }
 
     @Test

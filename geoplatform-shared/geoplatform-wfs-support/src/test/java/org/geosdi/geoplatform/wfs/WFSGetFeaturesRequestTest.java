@@ -441,7 +441,7 @@ public class WFSGetFeaturesRequestTest {
         String wfsURL = "https://servizi.protezionecivile.it/geoserver/wfs";
         GPWFSConnectorStore serverConnector = WFSConnectorBuilder
                 .newConnector()
-                .withClientSecurity(new BasicPreemptiveSecurityConnector("mdonato", "mdonato"))
+                .withClientSecurity(new BasicPreemptiveSecurityConnector("MAIDNT78M23G942L", "mdonato"))
                 .withServerUrl(new URL(wfsURL))
                 .build();
         QName ospedali = new QName("PNSRS:CAL_4_6_ospedali");

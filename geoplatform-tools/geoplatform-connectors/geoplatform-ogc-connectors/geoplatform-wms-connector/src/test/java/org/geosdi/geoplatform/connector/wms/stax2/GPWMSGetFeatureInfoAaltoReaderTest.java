@@ -48,244 +48,268 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 public class GPWMSGetFeatureInfoAaltoReaderTest extends WMSGetFeatureInfoAaltoReaderTest {
 
     @Test
-    public void a_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_a_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_VIGNETI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("geoserver-Vigneti-GetFeatureInfo.xml"))));
     }
 
     @Test
-    public void b_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_b_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_STATES : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("geoserver-GetFeatureInfo.xml"))));
     }
 
     @Test
-    public void c_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_c_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_STATES_1 : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("geoserver-GetFeatureInfo1.xml"))));
 
     }
 
     @Test
-    public void d_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_d_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_ADMIN_TEMPO : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("geoserver-GetFeatureInfo-Point.xml"))));
     }
 
     @Test
-    public void e_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_e_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_TIGER_ROADS : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("geoserver-GetFeatureInfo-MultiLineString.xml"))));
     }
 
     @Test
-    public void f_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_f_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_SPEARFISH : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("spearfish-GetFeatureInfo.xml"))));
     }
 
     @Test
-    public void g_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_g_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_TASMANIA_ROADS : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("tasmaniaRoads-GetFeatureInfo.xml"))));
     }
 
     @Test
-    public void h_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_h_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_TASMANIA_STATES : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("tasmaniaStates-GetFeatureInfo.xml"))));
     }
 
     @Test
-    public void i_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_i_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_TYGER_NY : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("tiger_ny-GetFeatureInfo.xml"))));
     }
 
     @Test
-    public void l_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_l_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_SF_DEM : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("sfdem-GetFeatureInfo.xml"))));
     }
 
     @Test
-    public void m_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_m_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_NURC_APk50095 : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("nurcAPk50095-GetFeatureInfo.xml"))));
     }
 
     @Test
-    public void n_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_n_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_NURC_ARC_SAMPLE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("nurcArcSample-GetFeatureInfo.xml"))));
     }
 
     @Test
-    public void o_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_o_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_COMUNI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("comuni-GetFeatureInfo.xml"))));
     }
 
     @Test
-    public void p_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_p_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_PARCHI_NATURALI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("parchiNaturali-GetFeatureInfo.xml"))));
     }
 
     @Test
-    public void q_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_q_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_RETI_RISERVE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("retiRiserve-GetFeatureInfo.xml"))));
     }
 
     @Test
-    public void r_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_r_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_LINEE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("linee-GetFeatureInfo.xml"))));
     }
 
     @Test
-    public void s_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_s_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_AZIONI_PUNTO : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("azioniPunto-GetFeatureInfo.xml"))));
     }
 
     @Test
-    public void t_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_t_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_COMUNI_BASILICATA : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("comuniBasilicata-GetFeatureInfo.xml"))));
     }
 
     @Test
-    public void u_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_u_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_CORINE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("corine-GetFeatureInfo.xml"))));
     }
 
     @Test
-    public void v_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_v_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_AIRPORTS : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("airports.xml"))));
     }
 
     @Test
-    public void w_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_w_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_GEOLOGIA : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("geologia.xml"))));
     }
 
     @Test
-    public void x_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_x_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_LIVELLO_EDIFICI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("livelloEdifici.xml"))));
     }
 
     @Test
-    public void y_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_y_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_VOLUMETRIA : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("volumetria.xml"))));
     }
 
     @Test
-    public void z_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void a_z_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_LIVELLO_EDIFICI_1 : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("livelloEdifici1.xml"))));
     }
 
     @Test
-    public void z_a_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void b_a_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_MASW : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("masw.xml"))));
     }
 
     @Test
-    public void z_b_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void b_b_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_CF_zonepianificazione_mappeinterattive : {}\n", JACKSON_SUPPORT
                 .getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("CF_zonepianificazione_mappeinterattive.xml"))));
     }
 
     @Test
-    public void z_c_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void b_c_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_PianoCampiFlegrei : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("PianoCampiFlegrei.xml"))));
     }
 
     @Test
-    public void z_d_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void b_d_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_PianiCampiFlegrei : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("PianiCampiFlegrei.xml"))));
     }
 
     @Test
-    public void z_e_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void b_e_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_rsdi_alt_300_a_400 : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("rsdi_alt_300_a_400.xml"))));
     }
 
     @Test
-    public void z_f_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void b_f_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_aziende : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("aziende.xml"))));
     }
 
     @Test
-    public void z_g_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void b_g_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_EneaClipFilled : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("EneaClipFilled.xml"))));
     }
 
     @Test
-    public void z_h_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void b_h_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_test : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("test.xml"))));
     }
 
     @Test
-    public void z_i_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void b_i_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_ParchiBasilicata : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("ParchiBasilicata.xml"))));
     }
 
     @Test
-    public void z_j_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void b_j_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_CentriAbitati : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("centri_abitati.xml"))));
     }
 
     @Test
-    public void z_k_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void b_k_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_mobileBeni : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("mobileBeni.xml"))));
     }
 
     @Test
-    public void z_l_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void b_l_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_PercorsiNavette : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("PercorsiNavette.xml"))));
     }
 
     @Test
-    public void z_m_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void b_m_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_aggregatiStrutturali : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("aggregatiStrutturali.xml"))));
     }
 
     @Test
-    public void z_n_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void b_n_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_aggregati_zrvesuvioflegrei : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("aggregati_zrvesuvioflegrei.xml"))));
     }
 
     @Test
-    public void z_0_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void b_0_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_exeflegrei_esiti_c_danni : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("exeflegrei_esiti_c_danni.xml"))));
     }
 
     @Test
-    public void z_p_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void b_p_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_pozzuoli_acque : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("pozzuoliAcque.xml"))));
+    }
+
+    @Test
+    public void b_q_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_laghi : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("laghi.xml"))));
+    }
+
+    @Test
+    public void b_r_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_viabilità : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("viabilità.xml"))));
+    }
+
+    @Test
+    public void b_s_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_vincoli : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("vincoli.xml"))));
+    }
+
+    @Test
+    public void b_t_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_corsi_acque : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("CorsiAcque.xml"))));
     }
 }

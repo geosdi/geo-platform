@@ -72,6 +72,9 @@ public enum WMSVersion implements GPServerConnectorVersion {
         return this.version;
     }
 
+    /**
+     * @return {@link String}
+     */
     @Override
     public String toString() {
         return this.version;

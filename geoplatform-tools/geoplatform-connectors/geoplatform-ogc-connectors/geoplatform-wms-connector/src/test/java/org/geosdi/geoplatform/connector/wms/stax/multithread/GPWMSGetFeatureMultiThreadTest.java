@@ -72,7 +72,7 @@ public abstract class GPWMSGetFeatureMultiThreadTest {
                 "AereeUrbaneValoreStorico.xml", "PNSRS_Valanghe.xml", "AreeAmmassamento.xml", "Ferrovie.xml",
                 "MonumentiBizantini.xml", "ReteGas.xml", "ABR_CaveAttive.xml", "AreeUrbaneValoreStorico.xml",
                 "BaciniIdrogeografici.xml", "dtsew_campania_20150324_20201122.xml", "dtsup_campania_20150324_20201122.xml",
-                "pozzuoliAcque.xml")
+                "pozzuoliAcque.xml", "laghi.xml", "viabilità.xml", "vincoli.xml", "CorsiAcque.xml")
                 .map(basePath::concat)
                 .collect(toCollection(LinkedList::new));
     }

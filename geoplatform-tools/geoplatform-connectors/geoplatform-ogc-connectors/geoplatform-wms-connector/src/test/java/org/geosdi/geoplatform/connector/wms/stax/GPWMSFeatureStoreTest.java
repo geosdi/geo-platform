@@ -522,4 +522,28 @@ public class GPWMSFeatureStoreTest extends WMSGetFeatureInfoStaxReaderTest {
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreLaghi.json")
                 .collect(joining(separator))), wmsFeatureStore);
     }
+
+    @Test
+    public void c_n_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("viabilità.xml"));
+        logger.info("#######################FEATURE_STORE_viabilità : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreViabilita.json")
+                .collect(joining(separator))), wmsFeatureStore);
+    }
+
+    @Test
+    public void c_o_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("vincoli.xml"));
+        logger.info("#######################FEATURE_STORE_vincoli : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreVincoli.json")
+                .collect(joining(separator))), wmsFeatureStore);
+    }
+
+    @Test
+    public void c_p_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("CorsiAcque.xml"));
+        logger.info("#######################FEATURE_STORE_corsi_acque : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreCorsiAcque.xml.json")
+                .collect(joining(separator))), wmsFeatureStore);
+    }
 }

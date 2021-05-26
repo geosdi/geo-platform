@@ -159,6 +159,12 @@ public class GML2ParserTest {
 
     @Test
     public void o_unmarshallerTest() throws Exception {
+        GMLReader gmlReader = new GMLReader();
+        logger.info("#########################JTS_GEOMETRY : {}\n", gmlReader.read(new FileReader(file6), new GeometryFactory()));
+    }
+
+    @Test
+    public void p_unmarshallerTest() throws Exception {
         MultiPolygonType multiPolygon = jaxbContextBuilder.unmarshal(new FileReader(file6), MultiPolygonType.class);
         logger.info("######################UNMARSHALL_GML2_GEOMETRY : {}\n", multiPolygon);
     }

@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:genicivili="www.cfr.toscana.it/genicivili" xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.opengis.net/wfs https://wms.cfr.toscana.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd www.cfr.toscana.it/genicivili https://wms.cfr.toscana.it/geoserver/genicivili/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=genicivili%3Aait_corsi_acqua_2018">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <genicivili:ait_corsi_acqua_2018 fid="ait_corsi_acqua_2018.734">
+            <genicivili:id_a1x1>734</genicivili:id_a1x1>
+            <genicivili:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1707300,4841400
+                    </gml:coordinates>
+                </gml:Point>
+            </genicivili:geom>
+            <genicivili:ids_codice>FI00000034</genicivili:ids_codice>
+            <genicivili:ids_codice_origine>FI00042</genicivili:ids_codice_origine>
+            <genicivili:validita_anno>2018</genicivili:validita_anno>
+            <genicivili:gestore>Publiacqua SpA</genicivili:gestore>
+            <genicivili:descrizione>CCA_S. Antonio</genicivili:descrizione>
+            <genicivili:quota_slm>628</genicivili:quota_slm>
+            <genicivili:provincia_nome>Firenze</genicivili:provincia_nome>
+            <genicivili:comune_nome>Reggello</genicivili:comune_nome>
+            <genicivili:localita_nome>Case sparse</genicivili:localita_nome>
+            <genicivili:corso_acqua_nome>Borro S.Antonio</genicivili:corso_acqua_nome>
+            <genicivili:corso_acqua_classe>A3</genicivili:corso_acqua_classe>
+            <genicivili:bacino_nome>Arno</genicivili:bacino_nome>
+            <genicivili:concessione_estremi>in attesa di rilascio dal 28/02/2017 (data della richiesta)
+            </genicivili:concessione_estremi>
+            <genicivili:concessione_port_pota>5.99315</genicivili:concessione_port_pota>
+            <genicivili:concessione_port_indu>0.0</genicivili:concessione_port_indu>
+            <genicivili:concessione_port_irri>0.0</genicivili:concessione_port_irri>
+            <genicivili:concessione_port_iele>0.0</genicivili:concessione_port_iele>
+            <genicivili:concessione_port_altro>0.0</genicivili:concessione_port_altro>
+            <genicivili:anno_costruzione>1965</genicivili:anno_costruzione>
+            <genicivili:anno_ristrutturazione>1966</genicivili:anno_ristrutturazione>
+            <genicivili:conservazione>INSUFFICIENTE</genicivili:conservazione>
+            <genicivili:utilizzo_tipo>Continuo</genicivili:utilizzo_tipo>
+            <genicivili:utilizzo_annuo>100.0</genicivili:utilizzo_annuo>
+            <genicivili:area_bacino_monte>5.1</genicivili:area_bacino_monte>
+            <genicivili:volume_prelevato>83536.39374</genicivili:volume_prelevato>
+            <genicivili:volume_immesso>0.0</genicivili:volume_immesso>
+            <genicivili:portata_esercizio>2.64892</genicivili:portata_esercizio>
+            <genicivili:portata_derivata_max>8.0</genicivili:portata_derivata_max>
+            <genicivili:portata_derivata_min>4.0</genicivili:portata_derivata_min>
+            <genicivili:portata_derivabile_max>15.0</genicivili:portata_derivabile_max>
+            <genicivili:pres_traversa_fluviale>1</genicivili:pres_traversa_fluviale>
+            <genicivili:pres_camera_presa>0</genicivili:pres_camera_presa>
+            <genicivili:pres_psucchieruola>0</genicivili:pres_psucchieruola>
+            <genicivili:pres_griglia>1</genicivili:pres_griglia>
+            <genicivili:pres_filtro>0</genicivili:pres_filtro>
+            <genicivili:pres_dissabbiatore>0</genicivili:pres_dissabbiatore>
+            <genicivili:tipo_telecontrollo>ASSENTE</genicivili:tipo_telecontrollo>
+            <genicivili:pres_misura_portata>0</genicivili:pres_misura_portata>
+            <genicivili:zona_tutela_assoluta>0</genicivili:zona_tutela_assoluta>
+            <genicivili:zona_rispetto>1</genicivili:zona_rispetto>
+            <genicivili:zona_protezione>0</genicivili:zona_protezione>
+            <genicivili:tipo_clorazione>NESSUNA</genicivili:tipo_clorazione>
+            <genicivili:cloratore_anno_insta>9800</genicivili:cloratore_anno_insta>
+            <genicivili:cloratore_anno_ristru>9800</genicivili:cloratore_anno_ristru>
+            <genicivili:opera_stato>ATTIVO</genicivili:opera_stato>
+            <genicivili:idx_area_bacino_monte>B</genicivili:idx_area_bacino_monte>
+            <genicivili:idx_anno_costruzione>C</genicivili:idx_anno_costruzione>
+            <genicivili:idx_anno_ristrutturazione>C</genicivili:idx_anno_ristrutturazione>
+            <genicivili:idx_volume_prelevato>C</genicivili:idx_volume_prelevato>
+            <genicivili:idx_volume_immesso>A</genicivili:idx_volume_immesso>
+            <genicivili:idx_portata_esercizio>C</genicivili:idx_portata_esercizio>
+            <genicivili:idx_portata_derivata_max>A</genicivili:idx_portata_derivata_max>
+            <genicivili:idx_portata_derivata_min>A</genicivili:idx_portata_derivata_min>
+            <genicivili:idx_portata_derivabile_max>A</genicivili:idx_portata_derivabile_max>
+            <genicivili:data_ua>2018-11-26T23:00:00Z</genicivili:data_ua>
+        </genicivili:ait_corsi_acqua_2018>
+    </gml:featureMember>
+    <gml:featureMember>
+        <genicivili:ait_corsi_acqua_2018 fid="ait_corsi_acqua_2018.735">
+            <genicivili:id_a1x1>735</genicivili:id_a1x1>
+            <genicivili:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1707500,4841100
+                    </gml:coordinates>
+                </gml:Point>
+            </genicivili:geom>
+            <genicivili:ids_codice>FI00000035</genicivili:ids_codice>
+            <genicivili:ids_codice_origine>FI00043</genicivili:ids_codice_origine>
+            <genicivili:validita_anno>2018</genicivili:validita_anno>
+            <genicivili:gestore>Publiacqua SpA</genicivili:gestore>
+            <genicivili:descrizione>CCA_MACERETO-RESCO</genicivili:descrizione>
+            <genicivili:quota_slm>635</genicivili:quota_slm>
+            <genicivili:provincia_nome>Firenze</genicivili:provincia_nome>
+            <genicivili:comune_nome>Reggello</genicivili:comune_nome>
+            <genicivili:localita_nome>Case sparse</genicivili:localita_nome>
+            <genicivili:corso_acqua_nome>Torrente Resco</genicivili:corso_acqua_nome>
+            <genicivili:corso_acqua_classe>A3</genicivili:corso_acqua_classe>
+            <genicivili:bacino_nome>Arno</genicivili:bacino_nome>
+            <genicivili:concessione_estremi>in attesa di rilascio dal 28/02/2017 (data della richiesta)
+            </genicivili:concessione_estremi>
+            <genicivili:concessione_port_pota>14.99873</genicivili:concessione_port_pota>
+            <genicivili:concessione_port_indu>0.0</genicivili:concessione_port_indu>
+            <genicivili:concessione_port_irri>0.0</genicivili:concessione_port_irri>
+            <genicivili:concessione_port_iele>0.0</genicivili:concessione_port_iele>
+            <genicivili:concessione_port_altro>0.0</genicivili:concessione_port_altro>
+            <genicivili:anno_costruzione>1965</genicivili:anno_costruzione>
+            <genicivili:anno_ristrutturazione>1966</genicivili:anno_ristrutturazione>
+            <genicivili:conservazione>INSUFFICIENTE</genicivili:conservazione>
+            <genicivili:utilizzo_tipo>Continuo</genicivili:utilizzo_tipo>
+            <genicivili:utilizzo_annuo>100.0</genicivili:utilizzo_annuo>
+            <genicivili:area_bacino_monte>4.9</genicivili:area_bacino_monte>
+            <genicivili:volume_prelevato>209061.98009</genicivili:volume_prelevato>
+            <genicivili:volume_immesso>0.0</genicivili:volume_immesso>
+            <genicivili:portata_esercizio>6.62931</genicivili:portata_esercizio>
+            <genicivili:portata_derivata_max>20.0</genicivili:portata_derivata_max>
+            <genicivili:portata_derivata_min>8.0</genicivili:portata_derivata_min>
+            <genicivili:portata_derivabile_max>25.0</genicivili:portata_derivabile_max>
+            <genicivili:pres_traversa_fluviale>1</genicivili:pres_traversa_fluviale>
+            <genicivili:pres_camera_presa>0</genicivili:pres_camera_presa>
+            <genicivili:pres_psucchieruola>0</genicivili:pres_psucchieruola>
+            <genicivili:pres_griglia>1</genicivili:pres_griglia>
+            <genicivili:pres_filtro>0</genicivili:pres_filtro>
+            <genicivili:pres_dissabbiatore>0</genicivili:pres_dissabbiatore>
+            <genicivili:tipo_telecontrollo>ASSENTE</genicivili:tipo_telecontrollo>
+            <genicivili:pres_misura_portata>0</genicivili:pres_misura_portata>
+            <genicivili:zona_tutela_assoluta>0</genicivili:zona_tutela_assoluta>
+            <genicivili:zona_rispetto>1</genicivili:zona_rispetto>
+            <genicivili:zona_protezione>0</genicivili:zona_protezione>
+            <genicivili:tipo_clorazione>NESSUNA</genicivili:tipo_clorazione>
+            <genicivili:cloratore_anno_insta>9800</genicivili:cloratore_anno_insta>
+            <genicivili:cloratore_anno_ristru>9800</genicivili:cloratore_anno_ristru>
+            <genicivili:opera_stato>ATTIVO</genicivili:opera_stato>
+            <genicivili:idx_area_bacino_monte>B</genicivili:idx_area_bacino_monte>
+            <genicivili:idx_anno_costruzione>C</genicivili:idx_anno_costruzione>
+            <genicivili:idx_anno_ristrutturazione>C</genicivili:idx_anno_ristrutturazione>
+            <genicivili:idx_volume_prelevato>C</genicivili:idx_volume_prelevato>
+            <genicivili:idx_volume_immesso>A</genicivili:idx_volume_immesso>
+            <genicivili:idx_portata_esercizio>C</genicivili:idx_portata_esercizio>
+            <genicivili:idx_portata_derivata_max>A</genicivili:idx_portata_derivata_max>
+            <genicivili:idx_portata_derivata_min>A</genicivili:idx_portata_derivata_min>
+            <genicivili:idx_portata_derivabile_max>D</genicivili:idx_portata_derivabile_max>
+            <genicivili:data_ua>2018-11-26T23:00:00Z</genicivili:data_ua>
+        </genicivili:ait_corsi_acqua_2018>
+    </gml:featureMember>
+    <gml:featureMember>
+        <genicivili:ait_corsi_acqua_2018 fid="ait_corsi_acqua_2018.736">
+            <genicivili:id_a1x1>736</genicivili:id_a1x1>
+            <genicivili:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1706000,4840000
+                    </gml:coordinates>
+                </gml:Point>
+            </genicivili:geom>
+            <genicivili:ids_codice>FI00000036</genicivili:ids_codice>
+            <genicivili:ids_codice_origine>FI00045</genicivili:ids_codice_origine>
+            <genicivili:validita_anno>2018</genicivili:validita_anno>
+            <genicivili:gestore>Publiacqua SpA</genicivili:gestore>
+            <genicivili:descrizione>CCA_Ponte a Enna-Resco</genicivili:descrizione>
+            <genicivili:quota_slm>485</genicivili:quota_slm>
+            <genicivili:provincia_nome>Firenze</genicivili:provincia_nome>
+            <genicivili:comune_nome>Reggello</genicivili:comune_nome>
+            <genicivili:localita_nome>Case sparse</genicivili:localita_nome>
+            <genicivili:corso_acqua_nome>Torrente Resco</genicivili:corso_acqua_nome>
+            <genicivili:corso_acqua_classe>A3</genicivili:corso_acqua_classe>
+            <genicivili:bacino_nome>Arno</genicivili:bacino_nome>
+            <genicivili:concessione_estremi>in attesa di rilascio dal 28/02/2017 (data della richiesta)
+            </genicivili:concessione_estremi>
+            <genicivili:concessione_port_pota>13.00101</genicivili:concessione_port_pota>
+            <genicivili:concessione_port_indu>0.0</genicivili:concessione_port_indu>
+            <genicivili:concessione_port_irri>0.0</genicivili:concessione_port_irri>
+            <genicivili:concessione_port_iele>0.0</genicivili:concessione_port_iele>
+            <genicivili:concessione_port_altro>0.0</genicivili:concessione_port_altro>
+            <genicivili:anno_costruzione>1972</genicivili:anno_costruzione>
+            <genicivili:anno_ristrutturazione>9800</genicivili:anno_ristrutturazione>
+            <genicivili:conservazione>SUFFICIENTE</genicivili:conservazione>
+            <genicivili:utilizzo_tipo>Continuo</genicivili:utilizzo_tipo>
+            <genicivili:utilizzo_annuo>100.0</genicivili:utilizzo_annuo>
+            <genicivili:area_bacino_monte>12.7</genicivili:area_bacino_monte>
+            <genicivili:volume_prelevato>181216.51551</genicivili:volume_prelevato>
+            <genicivili:volume_immesso>0.0</genicivili:volume_immesso>
+            <genicivili:portata_esercizio>5.74634</genicivili:portata_esercizio>
+            <genicivili:portata_derivata_max>20.0</genicivili:portata_derivata_max>
+            <genicivili:portata_derivata_min>0.5</genicivili:portata_derivata_min>
+            <genicivili:portata_derivabile_max>25.0</genicivili:portata_derivabile_max>
+            <genicivili:pres_traversa_fluviale>0</genicivili:pres_traversa_fluviale>
+            <genicivili:pres_camera_presa>0</genicivili:pres_camera_presa>
+            <genicivili:pres_psucchieruola>1</genicivili:pres_psucchieruola>
+            <genicivili:pres_griglia>0</genicivili:pres_griglia>
+            <genicivili:pres_filtro>0</genicivili:pres_filtro>
+            <genicivili:pres_dissabbiatore>0</genicivili:pres_dissabbiatore>
+            <genicivili:tipo_telecontrollo>ASSENTE</genicivili:tipo_telecontrollo>
+            <genicivili:pres_misura_portata>0</genicivili:pres_misura_portata>
+            <genicivili:zona_tutela_assoluta>0</genicivili:zona_tutela_assoluta>
+            <genicivili:zona_rispetto>1</genicivili:zona_rispetto>
+            <genicivili:zona_protezione>0</genicivili:zona_protezione>
+            <genicivili:tipo_clorazione>NESSUNA</genicivili:tipo_clorazione>
+            <genicivili:cloratore_anno_insta>9800</genicivili:cloratore_anno_insta>
+            <genicivili:cloratore_anno_ristru>9800</genicivili:cloratore_anno_ristru>
+            <genicivili:opera_stato>ATTIVO</genicivili:opera_stato>
+            <genicivili:idx_area_bacino_monte>B</genicivili:idx_area_bacino_monte>
+            <genicivili:idx_anno_costruzione>C</genicivili:idx_anno_costruzione>
+            <genicivili:idx_anno_ristrutturazione>A</genicivili:idx_anno_ristrutturazione>
+            <genicivili:idx_volume_prelevato>C</genicivili:idx_volume_prelevato>
+            <genicivili:idx_volume_immesso>A</genicivili:idx_volume_immesso>
+            <genicivili:idx_portata_esercizio>C</genicivili:idx_portata_esercizio>
+            <genicivili:idx_portata_derivata_max>A</genicivili:idx_portata_derivata_max>
+            <genicivili:idx_portata_derivata_min>A</genicivili:idx_portata_derivata_min>
+            <genicivili:idx_portata_derivabile_max>D</genicivili:idx_portata_derivabile_max>
+            <genicivili:data_ua>2018-11-26T23:00:00Z</genicivili:data_ua>
+        </genicivili:ait_corsi_acqua_2018>
+    </gml:featureMember>
+    <gml:featureMember>
+        <genicivili:ait_corsi_acqua_2018 fid="ait_corsi_acqua_2018.737">
+            <genicivili:id_a1x1>737</genicivili:id_a1x1>
+            <genicivili:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1704900,4842100
+                    </gml:coordinates>
+                </gml:Point>
+            </genicivili:geom>
+            <genicivili:ids_codice>FI00000037</genicivili:ids_codice>
+            <genicivili:ids_codice_origine>FI00046</genicivili:ids_codice_origine>
+            <genicivili:validita_anno>2018</genicivili:validita_anno>
+            <genicivili:gestore>Publiacqua SpA</genicivili:gestore>
+            <genicivili:descrizione>CCA_BURCHIO - CHIESIMONE</genicivili:descrizione>
+            <genicivili:quota_slm>605</genicivili:quota_slm>
+            <genicivili:provincia_nome>Firenze</genicivili:provincia_nome>
+            <genicivili:comune_nome>Reggello</genicivili:comune_nome>
+            <genicivili:localita_nome>Case sparse</genicivili:localita_nome>
+            <genicivili:corso_acqua_nome>Torrente Chiesimone</genicivili:corso_acqua_nome>
+            <genicivili:corso_acqua_classe>A2</genicivili:corso_acqua_classe>
+            <genicivili:bacino_nome>Arno</genicivili:bacino_nome>
+            <genicivili:concessione_estremi>in attesa di rilascio dal 28/02/2017 (data della richiesta)
+            </genicivili:concessione_estremi>
+            <genicivili:concessione_port_pota>5.99315</genicivili:concessione_port_pota>
+            <genicivili:concessione_port_indu>0.0</genicivili:concessione_port_indu>
+            <genicivili:concessione_port_irri>0.0</genicivili:concessione_port_irri>
+            <genicivili:concessione_port_iele>0.0</genicivili:concessione_port_iele>
+            <genicivili:concessione_port_altro>0.0</genicivili:concessione_port_altro>
+            <genicivili:anno_costruzione>1972</genicivili:anno_costruzione>
+            <genicivili:anno_ristrutturazione>9800</genicivili:anno_ristrutturazione>
+            <genicivili:conservazione>INSUFFICIENTE</genicivili:conservazione>
+            <genicivili:utilizzo_tipo>Continuo</genicivili:utilizzo_tipo>
+            <genicivili:utilizzo_annuo>100.0</genicivili:utilizzo_annuo>
+            <genicivili:area_bacino_monte>2.35</genicivili:area_bacino_monte>
+            <genicivili:volume_prelevato>106971.16704</genicivili:volume_prelevato>
+            <genicivili:volume_immesso>0.0</genicivili:volume_immesso>
+            <genicivili:portata_esercizio>3.39203</genicivili:portata_esercizio>
+            <genicivili:portata_derivata_max>7.0</genicivili:portata_derivata_max>
+            <genicivili:portata_derivata_min>1.0</genicivili:portata_derivata_min>
+            <genicivili:portata_derivabile_max>9.0</genicivili:portata_derivabile_max>
+            <genicivili:pres_traversa_fluviale>1</genicivili:pres_traversa_fluviale>
+            <genicivili:pres_camera_presa>0</genicivili:pres_camera_presa>
+            <genicivili:pres_psucchieruola>0</genicivili:pres_psucchieruola>
+            <genicivili:pres_griglia>1</genicivili:pres_griglia>
+            <genicivili:pres_filtro>0</genicivili:pres_filtro>
+            <genicivili:pres_dissabbiatore>1</genicivili:pres_dissabbiatore>
+            <genicivili:tipo_telecontrollo>ASSENTE</genicivili:tipo_telecontrollo>
+            <genicivili:pres_misura_portata>0</genicivili:pres_misura_portata>
+            <genicivili:zona_tutela_assoluta>0</genicivili:zona_tutela_assoluta>
+            <genicivili:zona_rispetto>1</genicivili:zona_rispetto>
+            <genicivili:zona_protezione>0</genicivili:zona_protezione>
+            <genicivili:tipo_clorazione>NESSUNA</genicivili:tipo_clorazione>
+            <genicivili:cloratore_anno_insta>9800</genicivili:cloratore_anno_insta>
+            <genicivili:cloratore_anno_ristru>9800</genicivili:cloratore_anno_ristru>
+            <genicivili:opera_stato>ATTIVO</genicivili:opera_stato>
+            <genicivili:idx_area_bacino_monte>B</genicivili:idx_area_bacino_monte>
+            <genicivili:idx_anno_costruzione>C</genicivili:idx_anno_costruzione>
+            <genicivili:idx_anno_ristrutturazione>A</genicivili:idx_anno_ristrutturazione>
+            <genicivili:idx_volume_prelevato>C</genicivili:idx_volume_prelevato>
+            <genicivili:idx_volume_immesso>A</genicivili:idx_volume_immesso>
+            <genicivili:idx_portata_esercizio>C</genicivili:idx_portata_esercizio>
+            <genicivili:idx_portata_derivata_max>A</genicivili:idx_portata_derivata_max>
+            <genicivili:idx_portata_derivata_min>A</genicivili:idx_portata_derivata_min>
+            <genicivili:idx_portata_derivabile_max>D</genicivili:idx_portata_derivabile_max>
+            <genicivili:data_ua>2018-11-26T23:00:00Z</genicivili:data_ua>
+        </genicivili:ait_corsi_acqua_2018>
+    </gml:featureMember>
+    <gml:featureMember>
+        <genicivili:ait_corsi_acqua_2018 fid="ait_corsi_acqua_2018.740">
+            <genicivili:id_a1x1>740</genicivili:id_a1x1>
+            <genicivili:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1704700,4843100
+                    </gml:coordinates>
+                </gml:Point>
+            </genicivili:geom>
+            <genicivili:ids_codice>FI00000040</genicivili:ids_codice>
+            <genicivili:ids_codice_origine>FI00049</genicivili:ids_codice_origine>
+            <genicivili:validita_anno>2018</genicivili:validita_anno>
+            <genicivili:gestore>Publiacqua SpA</genicivili:gestore>
+            <genicivili:descrizione>CCA_PIATTELLO-MARNIA</genicivili:descrizione>
+            <genicivili:quota_slm>636</genicivili:quota_slm>
+            <genicivili:provincia_nome>Firenze</genicivili:provincia_nome>
+            <genicivili:comune_nome>Reggello</genicivili:comune_nome>
+            <genicivili:localita_nome>Case sparse</genicivili:localita_nome>
+            <genicivili:corso_acqua_nome>Torrente Marnia</genicivili:corso_acqua_nome>
+            <genicivili:corso_acqua_classe>A2</genicivili:corso_acqua_classe>
+            <genicivili:bacino_nome>Arno</genicivili:bacino_nome>
+            <genicivili:concessione_estremi>in attesa di rilascio dal 28/02/2017 (data della richiesta)
+            </genicivili:concessione_estremi>
+            <genicivili:concessione_port_pota>0.79909</genicivili:concessione_port_pota>
+            <genicivili:concessione_port_indu>0.0</genicivili:concessione_port_indu>
+            <genicivili:concessione_port_irri>0.0</genicivili:concessione_port_irri>
+            <genicivili:concessione_port_iele>0.0</genicivili:concessione_port_iele>
+            <genicivili:concessione_port_altro>0.0</genicivili:concessione_port_altro>
+            <genicivili:anno_costruzione>1973</genicivili:anno_costruzione>
+            <genicivili:anno_ristrutturazione>9800</genicivili:anno_ristrutturazione>
+            <genicivili:conservazione>INSUFFICIENTE</genicivili:conservazione>
+            <genicivili:utilizzo_tipo>Continuo</genicivili:utilizzo_tipo>
+            <genicivili:utilizzo_annuo>100.0</genicivili:utilizzo_annuo>
+            <genicivili:area_bacino_monte>1.36</genicivili:area_bacino_monte>
+            <genicivili:volume_prelevato>24436.02559</genicivili:volume_prelevato>
+            <genicivili:volume_immesso>0.0</genicivili:volume_immesso>
+            <genicivili:portata_esercizio>0.77486</genicivili:portata_esercizio>
+            <genicivili:portata_derivata_max>2.0</genicivili:portata_derivata_max>
+            <genicivili:portata_derivata_min>0.5</genicivili:portata_derivata_min>
+            <genicivili:portata_derivabile_max>5.0</genicivili:portata_derivabile_max>
+            <genicivili:pres_traversa_fluviale>1</genicivili:pres_traversa_fluviale>
+            <genicivili:pres_camera_presa>0</genicivili:pres_camera_presa>
+            <genicivili:pres_psucchieruola>0</genicivili:pres_psucchieruola>
+            <genicivili:pres_griglia>1</genicivili:pres_griglia>
+            <genicivili:pres_filtro>0</genicivili:pres_filtro>
+            <genicivili:pres_dissabbiatore>0</genicivili:pres_dissabbiatore>
+            <genicivili:tipo_telecontrollo>ASSENTE</genicivili:tipo_telecontrollo>
+            <genicivili:pres_misura_portata>0</genicivili:pres_misura_portata>
+            <genicivili:zona_tutela_assoluta>0</genicivili:zona_tutela_assoluta>
+            <genicivili:zona_rispetto>1</genicivili:zona_rispetto>
+            <genicivili:zona_protezione>0</genicivili:zona_protezione>
+            <genicivili:tipo_clorazione>NESSUNA</genicivili:tipo_clorazione>
+            <genicivili:cloratore_anno_insta>9800</genicivili:cloratore_anno_insta>
+            <genicivili:cloratore_anno_ristru>9800</genicivili:cloratore_anno_ristru>
+            <genicivili:opera_stato>ATTIVO</genicivili:opera_stato>
+            <genicivili:idx_area_bacino_monte>B</genicivili:idx_area_bacino_monte>
+            <genicivili:idx_anno_costruzione>C</genicivili:idx_anno_costruzione>
+            <genicivili:idx_anno_ristrutturazione>A</genicivili:idx_anno_ristrutturazione>
+            <genicivili:idx_volume_prelevato>C</genicivili:idx_volume_prelevato>
+            <genicivili:idx_volume_immesso>A</genicivili:idx_volume_immesso>
+            <genicivili:idx_portata_esercizio>C</genicivili:idx_portata_esercizio>
+            <genicivili:idx_portata_derivata_max>A</genicivili:idx_portata_derivata_max>
+            <genicivili:idx_portata_derivata_min>A</genicivili:idx_portata_derivata_min>
+            <genicivili:idx_portata_derivabile_max>D</genicivili:idx_portata_derivabile_max>
+            <genicivili:data_ua>2018-11-26T23:00:00Z</genicivili:data_ua>
+        </genicivili:ait_corsi_acqua_2018>
+    </gml:featureMember>
+    <gml:featureMember>
+        <genicivili:ait_corsi_acqua_2018 fid="ait_corsi_acqua_2018.763">
+            <genicivili:id_a1x1>763</genicivili:id_a1x1>
+            <genicivili:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1706200,4839700
+                    </gml:coordinates>
+                </gml:Point>
+            </genicivili:geom>
+            <genicivili:ids_codice>FI00000063</genicivili:ids_codice>
+            <genicivili:ids_codice_origine>FI00095</genicivili:ids_codice_origine>
+            <genicivili:validita_anno>2018</genicivili:validita_anno>
+            <genicivili:gestore>Publiacqua SpA</genicivili:gestore>
+            <genicivili:descrizione>CCA_Ponticelli</genicivili:descrizione>
+            <genicivili:quota_slm>549</genicivili:quota_slm>
+            <genicivili:provincia_nome>Firenze</genicivili:provincia_nome>
+            <genicivili:comune_nome>Reggello</genicivili:comune_nome>
+            <genicivili:localita_nome>Case sparse</genicivili:localita_nome>
+            <genicivili:corso_acqua_nome>BORRO DI PONTICELLI</genicivili:corso_acqua_nome>
+            <genicivili:corso_acqua_classe>Non Classificata</genicivili:corso_acqua_classe>
+            <genicivili:bacino_nome>TORRENTE RESCO</genicivili:bacino_nome>
+            <genicivili:concessione_estremi>in attesa di rilascio dal 28/02/2017</genicivili:concessione_estremi>
+            <genicivili:concessione_port_pota>0.0</genicivili:concessione_port_pota>
+            <genicivili:concessione_port_indu>0.0</genicivili:concessione_port_indu>
+            <genicivili:concessione_port_irri>0.0</genicivili:concessione_port_irri>
+            <genicivili:concessione_port_iele>0.0</genicivili:concessione_port_iele>
+            <genicivili:concessione_port_altro>0.0</genicivili:concessione_port_altro>
+            <genicivili:anno_costruzione>1970</genicivili:anno_costruzione>
+            <genicivili:anno_ristrutturazione>9800</genicivili:anno_ristrutturazione>
+            <genicivili:conservazione>SUFFICIENTE</genicivili:conservazione>
+            <genicivili:utilizzo_tipo>Occasionale</genicivili:utilizzo_tipo>
+            <genicivili:utilizzo_annuo>0.0</genicivili:utilizzo_annuo>
+            <genicivili:area_bacino_monte>0.0</genicivili:area_bacino_monte>
+            <genicivili:volume_prelevato>0.0</genicivili:volume_prelevato>
+            <genicivili:volume_immesso>0.0</genicivili:volume_immesso>
+            <genicivili:portata_esercizio>0.0</genicivili:portata_esercizio>
+            <genicivili:portata_derivata_max>0.0</genicivili:portata_derivata_max>
+            <genicivili:portata_derivata_min>0.0</genicivili:portata_derivata_min>
+            <genicivili:portata_derivabile_max>0.0</genicivili:portata_derivabile_max>
+            <genicivili:pres_traversa_fluviale>0</genicivili:pres_traversa_fluviale>
+            <genicivili:pres_camera_presa>0</genicivili:pres_camera_presa>
+            <genicivili:pres_psucchieruola>0</genicivili:pres_psucchieruola>
+            <genicivili:pres_griglia>0</genicivili:pres_griglia>
+            <genicivili:pres_filtro>0</genicivili:pres_filtro>
+            <genicivili:pres_dissabbiatore>0</genicivili:pres_dissabbiatore>
+            <genicivili:tipo_telecontrollo>ASSENTE</genicivili:tipo_telecontrollo>
+            <genicivili:pres_misura_portata>0</genicivili:pres_misura_portata>
+            <genicivili:zona_tutela_assoluta>0</genicivili:zona_tutela_assoluta>
+            <genicivili:zona_rispetto>1</genicivili:zona_rispetto>
+            <genicivili:zona_protezione>0</genicivili:zona_protezione>
+            <genicivili:tipo_clorazione>NESSUNA</genicivili:tipo_clorazione>
+            <genicivili:cloratore_anno_insta>9800</genicivili:cloratore_anno_insta>
+            <genicivili:cloratore_anno_ristru>9800</genicivili:cloratore_anno_ristru>
+            <genicivili:opera_stato>FERMO IMPIANTO</genicivili:opera_stato>
+            <genicivili:idx_area_bacino_monte>X</genicivili:idx_area_bacino_monte>
+            <genicivili:idx_anno_costruzione>D</genicivili:idx_anno_costruzione>
+            <genicivili:idx_anno_ristrutturazione>A</genicivili:idx_anno_ristrutturazione>
+            <genicivili:idx_volume_prelevato>A</genicivili:idx_volume_prelevato>
+            <genicivili:idx_volume_immesso>A</genicivili:idx_volume_immesso>
+            <genicivili:idx_portata_esercizio>A</genicivili:idx_portata_esercizio>
+            <genicivili:idx_portata_derivata_max>A</genicivili:idx_portata_derivata_max>
+            <genicivili:idx_portata_derivata_min>A</genicivili:idx_portata_derivata_min>
+            <genicivili:idx_portata_derivabile_max>D</genicivili:idx_portata_derivabile_max>
+            <genicivili:data_ua>2019-05-29T22:00:00Z</genicivili:data_ua>
+        </genicivili:ait_corsi_acqua_2018>
+    </gml:featureMember>
+</wfs:FeatureCollection>

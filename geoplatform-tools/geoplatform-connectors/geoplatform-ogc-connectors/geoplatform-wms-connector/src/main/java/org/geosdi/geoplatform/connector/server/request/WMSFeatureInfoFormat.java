@@ -42,7 +42,6 @@ import java.util.Optional;
 
 import static java.lang.Boolean.FALSE;
 import static java.util.Arrays.stream;
-import static java.util.Optional.empty;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -93,6 +92,6 @@ public enum WMSFeatureInfoFormat implements GPWMSFeatureInfoFormat {
                 .filter(v -> ((format != null) && !(format.trim().isEmpty()))
                         ? v.format.equalsIgnoreCase(format) : FALSE)
                 .findFirst();
-        return ((optional != null) && !(optional.equals(empty()))) ? optional.get() : null;
+        return optional.orElse(null);
     }
 }

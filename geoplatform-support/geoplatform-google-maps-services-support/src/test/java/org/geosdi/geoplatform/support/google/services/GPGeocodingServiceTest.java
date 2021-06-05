@@ -100,8 +100,7 @@ public class GPGeocodingServiceTest extends GPBaseConfigTest {
     @Test
     public void gpGeocodingAsyncTest() throws Exception {
         final List<GeocodingResult[]> resps = new ArrayList<>();
-        PendingResult.Callback<GeocodingResult[]> callback
-                = new PendingResult.Callback<GeocodingResult[]>() {
+        PendingResult.Callback<GeocodingResult[]> callback = new PendingResult.Callback<GeocodingResult[]>() {
 
             @Override
             public void onResult(GeocodingResult[] result) {
@@ -124,26 +123,21 @@ public class GPGeocodingServiceTest extends GPBaseConfigTest {
     public void gpReverseGeocodingTest() throws Exception {
         GeocodingResult[] results = gpGeocodingService.newRequest()
                 .latlng(new LatLng(40.6404067, 15.8056041)).await();
-        assertTrue("Address contain 'Potenza'",
-                results[0].formattedAddress.contains("Potenza"));
+        assertTrue("Address contain 'Potenza'", results[0].formattedAddress.contains("Potenza"));
     }
 
     @Test
     public void gpGeocodingWithRegionTest() throws Exception {
-        GeocodingResult[] results = gpGeocodingService.newRequest().address(
-                "Marsicovetere").region("it").await();
+        GeocodingResult[] results = gpGeocodingService.newRequest().address("Marsicovetere").region("it").await();
         assertNotNull(results);
-        assertEquals("85050 Marsicovetere, Province of Potenza, Italy",
-                results[0].formattedAddress);
+        assertEquals("85050 Marsicovetere, Province of Potenza, Italy", results[0].formattedAddress);
     }
 
     @Test
     public void gpGeocodingTheGoogleplexTest() throws Exception {
-        GeocodingResult[] results = gpGeocodingService.newRequest()
-                .address("1600 Amphitheatre Parkway, Mountain View, CA").await();
+        GeocodingResult[] results = gpGeocodingService.newRequest().address("1600 Amphitheatre Parkway, Mountain View, CA").await();
         assertNotNull(results);
-        assertEquals("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA",
-                results[0].formattedAddress);
+        assertEquals("1600 Amphitheatre Pkwy, Mountain View, CA 94043, United States", results[0].formattedAddress);
     }
 
     @Test

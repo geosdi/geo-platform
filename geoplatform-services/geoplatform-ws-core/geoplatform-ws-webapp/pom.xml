@@ -571,6 +571,13 @@
         </profile>
     </profiles>
     <build>
+        <extensions>
+            <extension>
+                <groupId>javax.annotation</groupId>
+                <artifactId>javax.annotation-api</artifactId>
+                <version>1.3.2</version>
+            </extension>
+        </extensions>
         <defaultGoal>jetty:run</defaultGoal>
         <!--Name of the generated WAR file-->
         <finalName>geoplatform-service</finalName>

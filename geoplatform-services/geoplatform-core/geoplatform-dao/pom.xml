@@ -156,6 +156,14 @@
             <artifactId>jakarta.el</artifactId>
         </dependency>
 
+        <!-- =========================================================== -->
+        <!-- =================  JAVAX VALIDATION API =================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>

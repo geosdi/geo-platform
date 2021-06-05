@@ -50,6 +50,14 @@
             <artifactId>geoplatform-ehcache-support</artifactId>
             <version>${project.version}</version>
         </dependency>
+        
+        <!-- =========================================================== -->
+        <!-- =================  JAVAX VALIDATION API =================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>jakarta.validation</groupId>
@@ -69,7 +77,6 @@
         <!-- ============================================================ -->
         <!-- =========================== H2 ============================= -->
         <!-- ============================================================ -->
-
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>

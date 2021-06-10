@@ -54,7 +54,6 @@ public class GPClientProject extends GeoPlatformBeanModel implements IGPClientPr
     //
     private Long id;
     private boolean shared;
-    private String message;
     private IGPUserSimpleDetail owner;
     private List<GPFolderClientInfo> rootFolders;
 
@@ -228,11 +227,6 @@ public class GPClientProject extends GeoPlatformBeanModel implements IGPClientPr
                 this.getDefaultProjectLabel());
     }
 
-    //    public void setLabelDefaultProject(boolean defaultProject){
-//        set(GPClientProjectKey.DEFAULT_PROJECT.toString(), defaultProject);
-//        set(GPClientProjectKey.DEFAULT_PROJECT_KEY_MESSAGE.toString(),
-//                this.getDefaultProjectLabel(defaultProject));
-//    }
     @Override
     public String getDefaultProjectLabel() {
         return this.isDefaultProject() ? "DEFAULT PROJECT" : "";
@@ -277,19 +271,6 @@ public class GPClientProject extends GeoPlatformBeanModel implements IGPClientPr
         super.set(GPClientProjectKey.PROJECT_DESCRIPTION.toString(), theDescription);
     }
 
-    //    /**
-//     * @return the message
-//     */
-//    public String getMessage() {
-//        return message;
-//    }
-//    /**
-//     * @param message the message to set
-//     */
-//    public void setMessage(String message) {
-//        this.message = message;
-//        set(GPClientProjectKey.DEFAULT_PROJECT_KEY_MESSAGE.toString(), this.message);
-//    }
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -315,17 +296,17 @@ public class GPClientProject extends GeoPlatformBeanModel implements IGPClientPr
     @Override
     public String toString() {
         return "GPClientProject {"
-                + "id=" + id
-                + ", name=" + this.getName()
-                + ", image=" + this.getImage()
-                + ", numberOfElements=" + this.getNumberOfElements()
-                + ", version=" + this.getVersion()
-                + ", shared=" + shared
-                + ", defaultProject=" + this.isDefaultProject()
-                + ", message=" + message
-                + ", internalPublic=" + this.isInternalPublic()
-                + ", externalPublic=" + this.isExternalPublic()
-                + ", owner=" + owner
-                + ", rootFolders=" + rootFolders + '}';
+                + "id = " + id
+                + ", name = " + this.getName()
+                + ", image = " + this.getImage()
+                + ", numberOfElements = " + this.getNumberOfElements()
+                + ", version = " + this.getVersion()
+                + ", shared = " + shared
+                + ", defaultProject = " + this.isDefaultProject()
+                + ", internalPublic = " + this.isInternalPublic()
+                + ", externalPublic = " + this.isExternalPublic()
+                + ", owner = " + (this.owner != null ? this.owner : "null")
+                + ", rootFolders = " + (this.rootFolders != null ? this.rootFolders : "null")
+                + '}';
     }
 }

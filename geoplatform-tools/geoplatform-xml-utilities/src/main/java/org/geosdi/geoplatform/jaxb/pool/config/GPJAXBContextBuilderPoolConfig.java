@@ -39,6 +39,9 @@ import org.apache.commons.pool2.impl.GenericKeyedObjectPoolConfig;
 
 import javax.xml.bind.JAXBContext;
 
+import static java.time.Duration.of;
+import static java.time.temporal.ChronoUnit.MINUTES;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -50,8 +53,8 @@ public class GPJAXBContextBuilderPoolConfig extends GenericKeyedObjectPoolConfig
         super.setMaxTotal(50);
         super.setMinIdlePerKey(1);
         super.setJmxEnabled(Boolean.FALSE);
-        super.setTimeBetweenEvictionRunsMillis(100L * 60L * 20L);
+        super.setTimeBetweenEvictionRuns(of(20, MINUTES));
         super.setNumTestsPerEvictionRun(15);
-        super.setMinEvictableIdleTimeMillis(100L * 60L * 10L);
+        super.setSoftMinEvictableIdleTime(of(10, MINUTES));
     }
 }

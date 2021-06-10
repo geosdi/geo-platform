@@ -48,6 +48,9 @@ import java.io.File;
 import java.io.StringReader;
 import java.io.StringWriter;
 
+import static java.io.File.separator;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilderTest.createAttributes;
 import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilderTest.createCarParts;
 
@@ -85,7 +88,8 @@ public class GPJAXBContextBuilderPoolTest {
     @Test
     public void c_readCarFromFilePoolTest() throws Exception {
         logger.info("###########################UNMARSHALL_CAR_FROM_FILE : {}\n", GP_JAXB_CONTEXT_BUILDER_POOL
-                .unmarshal(new File("./src/test/resources/Car.xml"), Car.class));
+                .unmarshal(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "Car")
+                        .collect(joining(separator, "", ".xml"))), Car.class));
     }
 
     @Test
@@ -188,14 +192,15 @@ public class GPJAXBContextBuilderPoolTest {
     public void f_writeAttributeStoreAsFilePoolTest() throws Exception {
         AttributeStore attributeStore = new AttributeStore();
         attributeStore.setAttributes(createAttributes(50));
-        GP_JAXB_CONTEXT_BUILDER_POOL.marshal(attributeStore, new File("./target/AttributeStorePool.xml"));
+        GP_JAXB_CONTEXT_BUILDER_POOL.marshal(attributeStore, new File(of(new File(".").getCanonicalPath(), "target", "AttributeStorePool")
+                .collect(joining(separator, "", ".xml"))));
     }
 
     @Test
     public void g_readAttributeStoreFromFilePoolTest() throws Exception {
-        logger.info("#######################UNMARSHALL_ATTRIBUTE_STORE_FROM_FILE : {}\n",
-                GP_JAXB_CONTEXT_BUILDER_POOL.unmarshal(new File("./src/test/resources/AttributeStore.xml"),
-                        AttributeStore.class));
+        logger.info("#######################UNMARSHALL_ATTRIBUTE_STORE_FROM_FILE : {}\n", GP_JAXB_CONTEXT_BUILDER_POOL
+                .unmarshal(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "AttributeStore")
+                        .collect(joining(separator, "", ".xml"))), AttributeStore.class));
     }
 
     @Test

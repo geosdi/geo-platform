@@ -69,8 +69,7 @@ public abstract class AbstractJAXBContextBuilder implements IGPJAXBContextBuilde
      */
     @Override
     public <T> T unmarshall(Path path, Class<T> type) throws Exception {
-        checkArgument((path != null) && (path.toFile().exists() && !(path.toFile().isDirectory())),
-                "The Parameter Path must not be null and relative File must exists and must not a Directory");
+        checkArgument((path != null) && (path.toFile().exists() && !(path.toFile().isDirectory())), "The Parameter Path must not be null and relative File must exists and must not a Directory");
         return unmarshal(path.toFile(), type);
     }
 
@@ -81,8 +80,7 @@ public abstract class AbstractJAXBContextBuilder implements IGPJAXBContextBuilde
      */
     @Override
     public <T> T unmarshal(File file, Class<T> type) {
-        checkArgument((file != null) && (file.exists()) && !(file.isDirectory()),
-                "The Parameter file must not be null, must exists and must not be a directory");
+        checkArgument((file != null) && (file.exists()) && !(file.isDirectory()), "The Parameter file must not be null, must exists and must not be a directory");
         try {
             Object item = getContext(type).createUnmarshaller().unmarshal(new StreamSource(file), type);
             return (item instanceof JAXBElement) ? ((JAXBElement<T>) item).getValue() : (T) item;

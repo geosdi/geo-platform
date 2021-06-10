@@ -38,8 +38,12 @@ package org.geosdi.geoplatform.jaxb.pool.factory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.JAXBContext;
 import java.util.Objects;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -52,7 +56,11 @@ public class GPJAXBContextCachePool implements IGPJAXBContextCachePool {
     private final Class type;
     private JAXBContext context;
 
-    public GPJAXBContextCachePool(Class theType) {
+    /**
+     * @param theType
+     */
+    public GPJAXBContextCachePool(@Nonnull(when = NEVER) Class theType) {
+        checkArgument(theType != null, "The Parameter classType must not be null.");
         this.type = theType;
     }
 
@@ -90,7 +98,6 @@ public class GPJAXBContextCachePool implements IGPJAXBContextCachePool {
 
     @Override
     public void dispose() {
-        logger.debug("#########################CALLED {}#dispose for ----------> class : {}\n",
-                this, this.type);
+        logger.debug("#########################CALLED {}#dispose for ----------> class : {}\n", this, this.type);
     }
 }

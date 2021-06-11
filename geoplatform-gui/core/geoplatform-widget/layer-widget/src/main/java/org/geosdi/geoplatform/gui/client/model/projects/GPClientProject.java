@@ -92,9 +92,12 @@ public class GPClientProject extends GeoPlatformBeanModel implements IGPClientPr
      */
     @Override
     public String getImage() {
-        return super.get(GPClientProjectKey.PROJECT_IMAGE.toString());
+        return super.get(GPClientProjectKey.PROJECT_IMAGE.toString(), "");
     }
 
+    /**
+     * @param image
+     */
     public void setImage(String image) {
         set(GPClientProjectKey.PROJECT_IMAGE.toString(), image);
     }

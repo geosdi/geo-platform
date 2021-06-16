@@ -68,6 +68,8 @@ import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.sax.SAXSource;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -192,7 +194,7 @@ class GPWMSDelegateImpl implements GPWMSDelagate {
         logger.info("#########################DESCRIBE_LAYER_URL : {}\n", decribeLayerUrl);
         try {
             HttpClient httpClient = new HttpClient();
-            GetMethod getMethod = new GetMethod(decribeLayerUrl);
+            GetMethod getMethod = new GetMethod(URLDecoder.decode(decribeLayerUrl, StandardCharsets.UTF_8.name()));
             httpClient.executeMethod(getMethod);
             InputStream inputStream = getMethod.getResponseBodyAsStream();
             SAXParserFactory spf = SAXParserFactory.newInstance();

@@ -183,12 +183,12 @@ class GPWMSDelegateImpl implements GPWMSDelagate {
     public GPLayerTypeResponse getLayerType(String serverURL, String layerName) throws Exception {
         checkArgument((serverURL != null) && !(serverURL.trim().isEmpty()), "The Parameter serverURL must not be null or an empty string.");
         checkArgument((layerName != null) && !(layerName.trim().isEmpty()), "The Parameter layerName must not be null or an empty string.");
-        logger.debug("###########################TRYING TO RETRIEVE LAYER_TYPE with serverURL : {} - layerName : {]\n", serverURL, layerName);
+        logger.debug("###########################TRYING TO RETRIEVE LAYER_TYPE with serverURL : {} - layerName : {}\n", serverURL, layerName);
         int index = serverURL.indexOf("?");
-        if (index != -1) {
-            serverURL = serverURL.substring(0, index);
-        }
-        String decribeLayerUrl = serverURL.concat("?service=WMS&request=DescribeLayer&version=1.1.1&layers=").concat(layerName);
+//        if (index != -1) {
+//            serverURL = serverURL.substring(0, index);
+//        }
+        String decribeLayerUrl = serverURL.concat(index != -1 ? "service=WMS&request=DescribeLayer&version=1.1.1&layers=" : "?service=WMS&request=DescribeLayer&version=1.1.1&layers=").concat(layerName);
         logger.info("#########################DESCRIBE_LAYER_URL : {}\n", decribeLayerUrl);
         try {
             HttpClient httpClient = new HttpClient();

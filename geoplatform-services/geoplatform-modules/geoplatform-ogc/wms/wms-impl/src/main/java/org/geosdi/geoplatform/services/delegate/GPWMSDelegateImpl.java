@@ -190,8 +190,8 @@ class GPWMSDelegateImpl implements GPWMSDelagate {
 //        if (index != -1) {
 //            serverURL = serverURL.substring(0, index);
 //        }
-        String decribeLayerUrl = serverURL.concat(index != -1 ? "service=WMS&request=DescribeLayer&version=1.1.1&layers=" : "?service=WMS&request=DescribeLayer&version=1.1.1&layers=").concat(layerName);
-        logger.info("#########################DESCRIBE_LAYER_URL : {}\n", decribeLayerUrl);
+        String decribeLayerUrl = serverURL.concat(index != -1 ? "&service=WMS&request=DescribeLayer&version=1.1.1&layers=" : "?service=WMS&request=DescribeLayer&version=1.1.1&layers=").concat(layerName);
+        logger.info("#########################DESCRIBE_LAYER_URL : {}\n", URLDecoder.decode(decribeLayerUrl, StandardCharsets.UTF_8.name()));
         try {
             HttpClient httpClient = new HttpClient();
             GetMethod getMethod = new GetMethod(URLDecoder.decode(decribeLayerUrl, StandardCharsets.UTF_8.name()));

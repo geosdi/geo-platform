@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.services.delegate;
 
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.methods.GetMethod;
 import org.geosdi.geoplatform.configurator.crypt.GPPooledPBEStringEncryptorDecorator;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
@@ -54,28 +52,17 @@ import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoRequest;
 import org.geosdi.geoplatform.services.request.WMSHeaderParam;
 import org.geosdi.geoplatform.services.response.GPLayerTypeResponse;
 import org.geosdi.geoplatform.services.response.WMSGetFeatureInfoResponse;
-import org.geosdi.geoplatform.wms.v111.WMSDescribeLayerResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.xml.sax.InputSource;
-import org.xml.sax.XMLReader;
 
 import javax.annotation.Resource;
-import javax.xml.bind.JAXBContext;
-import javax.xml.parsers.SAXParserFactory;
-import javax.xml.transform.sax.SAXSource;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Boolean.FALSE;
 import static java.util.Locale.ENGLISH;
 import static java.util.Locale.forLanguageTag;
+import static org.geosdi.geoplatform.services.builder.GPWMSDescribeLayerBuilder.WMSDescribeLayerBuilder.wmsDescribeLayerBuilder;
 import static org.geosdi.geoplatform.services.builder.WMSGetFeatureInfoResponseBuilder.wmsGetFeatureInfoResponseBuilder;
 
 /**
@@ -183,30 +170,8 @@ class GPWMSDelegateImpl implements GPWMSDelagate {
      */
     @Override
     public GPLayerTypeResponse getLayerType(String serverURL, String layerName) throws Exception {
-        checkArgument((serverURL != null) && !(serverURL.trim().isEmpty()), "The Parameter serverURL must not be null or an empty string.");
-        checkArgument((layerName != null) && !(layerName.trim().isEmpty()), "The Parameter layerName must not be null or an empty string.");
-        logger.debug("###########################TRYING TO RETRIEVE LAYER_TYPE with serverURL : {} - layerName : {}\n", serverURL, layerName);
-        int index = serverURL.indexOf("?");
-//        if (index != -1) {
-//            serverURL = serverURL.substring(0, index);
-//        }
-        String decribeLayerUrl = serverURL.concat(index != -1 ? "&service=WMS&request=DescribeLayer&version=1.1.1&layers=" : "?service=WMS&request=DescribeLayer&version=1.1.1&layers=").concat(layerName);
-        logger.info("#########################DESCRIBE_LAYER_URL : {}\n", URLDecoder.decode(decribeLayerUrl, StandardCharsets.UTF_8.name()));
         try {
-            HttpClient httpClient = new HttpClient();
-            GetMethod getMethod = new GetMethod(URLDecoder.decode(decribeLayerUrl, StandardCharsets.UTF_8.name()));
-            httpClient.executeMethod(getMethod);
-            InputStream inputStream = getMethod.getResponseBodyAsStream();
-            SAXParserFactory spf = SAXParserFactory.newInstance();
-            spf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", FALSE);
-            spf.setFeature("http://xml.org/sax/features/validation", FALSE);
-
-            XMLReader xmlReader = spf.newSAXParser().getXMLReader();
-            InputSource inputSource = new InputSource(new InputStreamReader(inputStream));
-            SAXSource source = new SAXSource(xmlReader, inputSource);
-            JAXBContext jaxbContext = JAXBContext.newInstance(WMSDescribeLayerResponse.class);
-            WMSDescribeLayerResponse describeLayerResponse = (WMSDescribeLayerResponse) jaxbContext.createUnmarshaller().unmarshal(source);
-            return new GPLayerTypeResponse(describeLayerResponse);
+           return wmsDescribeLayerBuilder().withServerURL(serverURL).withLayerName(layerName).build();
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new ServerInternalFault(ex.getMessage());

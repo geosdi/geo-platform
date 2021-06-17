@@ -92,7 +92,7 @@ public class GPServerProxy extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@Called {}#doGet.\n", this.getClass().getSimpleName());
+        logger.info("@@@@@@@@@@@@@@@@@@@@@Called {}#doGet.\n", this.getClass().getSimpleName());
         try {
             if ((request.getParameter("targetURL") != null) && (request.getParameter("targetURL") != "")) {
                 CloseableHttpClient httpClient =  HttpClients
@@ -116,18 +116,18 @@ public class GPServerProxy extends HttpServlet {
                     }
                 }
                 URI uri = uriBuilder.build();
-                logger.trace("############################URI to call : {}\n", uri.toString());
+                logger.info("############################URI to call : {}\n", uri.toString());
                 HttpGet httpGet = new HttpGet(uri);
                 if(((request.getParameter("v") != null) && (request.getParameter("v") != "")) && ((request.getParameter("p") != null) && (request.getParameter("p") != ""))) {
                     String userName = request.getParameter("v");
                     String password = request.getParameter("p");
                     String userpass = userName + ":" + password;
-                    logger.trace("@@@@@@@@@@@@@@@@@Trying to inject basicAuth with parameter : {}\n", userpass);
+                    logger.info("@@@@@@@@@@@@@@@@@Trying to inject basicAuth with parameter : {}\n", userpass);
                     String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userpass.getBytes()));
                     httpGet.setHeader(HttpHeaders.AUTHORIZATION, basicAuth);
                 }
                 CloseableHttpResponse httpClientResponse = httpClient.execute(httpGet);
-                logger.trace("###########################STATUS_CODE : {}\n\n", httpClientResponse.getCode());
+                logger.info("###########################STATUS_CODE : {}\n\n", httpClientResponse.getCode());
                 if (httpClientResponse.getCode() != 200) {
                     String exceptionMessage = IOUtils
                             .toString(httpClientResponse.getEntity().getContent(), UTF_8);

@@ -23,5 +23,6 @@
     <logger name="org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxReader" level="trace"/>
     <logger name="org.geosdi.geoplatform.connector.server.v111.WMSGetFeatureInfoV111Request" level="trace"/>
     <logger name="org.geosdi.geoplatform.services.builder.WMSGetFeatureInfoResponseBuilder" level="debug"/>
+    <logger name="org.geosdi.geoplatform.services.builder.GPWMSDescribeLayerBuilder" level="debug"/>
 
 </configuration>

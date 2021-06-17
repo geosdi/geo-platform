@@ -58,6 +58,8 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Map;
 
+import static java.net.URLDecoder.decode;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Locale.ENGLISH;
 import static java.util.Locale.forLanguageTag;
 
@@ -271,7 +273,7 @@ public class GPWFSServiceImpl implements GPWFSService {
         if (message != null)
             throw new IllegalParameterFault(message);
         try {
-            LayerSchemaDTO layerSchemaDTO = this.describeFeatureType(request.getServerURL(), request.getTypeName(), null);
+            LayerSchemaDTO layerSchemaDTO = this.describeFeatureType(decode(request.getServerURL(), UTF_8.name()), request.getTypeName(), null);
             return Response.ok(this.gpGetFeatureService.searchFeaturesByBboxAndQuery(layerSchemaDTO, request.getQueryDTO(),
                     request.getBBox(), request.getMaxFeatures())).build();
         } catch (Exception ex) {

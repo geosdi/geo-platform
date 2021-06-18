@@ -51,6 +51,8 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import java.io.StringWriter;
 import java.net.URL;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 import static org.geosdi.geoplatform.connector.WFSConnectorBuilder.newConnector;
@@ -155,4 +157,25 @@ public class WFSDescribeFeatureTest {
         gpJAXBContextBuilder.marshal(root, writer);
         logger.info("######################LAYER_SCHEMA_PERCORSI_NAVETTE_XML : \n{}\n", writer);
     }
+
+    @Test
+    public void e_describeLayerDtsupStromboliTest() throws Exception {
+        String serverURL = "http://localhost:8888/sitdpc/gpServerProxy?targetURL=https://insar.irea.cnr.it/geoserver/wms%26v=dpc%26p=4WzL06EA";
+        serverURL = URLDecoder.decode(serverURL.replaceAll("wms", "wfs"), StandardCharsets.UTF_8.name());
+        logger.info("########################SERVER_URL : {}\n", serverURL);
+        WFSDescribeFeatureTypeRequest<Schema> request = newConnector().withServerUrl(new URL(serverURL)).build()
+                .createDescribeFeatureTypeRequest();
+        QName dtsupStromboli = new QName("geonode:dtsup_stromboli");
+        String localPart = dtsupStromboli.getLocalPart();
+        request.setTypeName(Arrays.asList(dtsupStromboli));
+        logger.info("{}\n", request.showRequestAsString());
+        logger.info("#########################SCHEMA_AS_STRING : \n{}\n", request.getResponseAsString());
+//        Schema s = request.getResponse();
+//        String name = localPart.substring(localPart.indexOf(":") + 1);
+//        JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(dtsupStromboli, LayerSchemaDTO.class, schemaReader.getFeature(s, name));
+//        StringWriter writer = new StringWriter();
+//        gpJAXBContextBuilder.marshal(root, writer);
+//        logger.info("######################LAYER_SCHEMA_DTSUP_STROMBOLI_XML : \n{}\n", writer);
+    }
+
 }

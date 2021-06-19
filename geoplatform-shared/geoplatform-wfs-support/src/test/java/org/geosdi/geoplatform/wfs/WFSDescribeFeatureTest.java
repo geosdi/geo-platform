@@ -53,6 +53,8 @@ import java.io.StringWriter;
 import java.net.URL;
 import java.util.Arrays;
 
+import static java.net.URLDecoder.decode;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.geosdi.geoplatform.connector.WFSConnectorBuilder.newConnector;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 
@@ -90,7 +92,7 @@ public class WFSDescribeFeatureTest {
     private static final FeatureSchemaReader schemaReader = new GPFeatureSchemaReader();
 
     @Test
-    public void describeToppStatesTest() throws Exception {
+    public void a_describeToppStatesTest() throws Exception {
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         String localPart = statesName.getLocalPart();
         request.setTypeName(Arrays.asList(statesName));
@@ -105,7 +107,7 @@ public class WFSDescribeFeatureTest {
     }
 
     @Test
-    public void describeSFRoadTest() throws Exception {
+    public void b_describeSFRoadTest() throws Exception {
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         String localPart = sfRoads.getLocalPart();
         request.setTypeName(Arrays.asList(sfRoads));
@@ -120,7 +122,7 @@ public class WFSDescribeFeatureTest {
 
     @Ignore(value = "Geoserver is Down")
     @Test
-    public void describeSiteTrTest() throws Exception {
+    public void c_describeSiteTrTest() throws Exception {
         WFSDescribeFeatureTypeRequest<Schema> request =
                 newConnector()
                         .withServerUrl(new URL("http://150.145.141.241/geoserver/wfs"))
@@ -138,7 +140,7 @@ public class WFSDescribeFeatureTest {
     }
 
     @Test
-    public void describeLayerPercorsiNavetteTest() throws Exception {
+    public void d_describeLayerPercorsiNavetteTest() throws Exception {
         WFSDescribeFeatureTypeRequest<Schema> request =
                 newConnector()
                         .withServerUrl(new URL("http://mappe-dpc.protezionecivile.it/gssitdpc/wfs"))
@@ -154,5 +156,26 @@ public class WFSDescribeFeatureTest {
         StringWriter writer = new StringWriter();
         gpJAXBContextBuilder.marshal(root, writer);
         logger.info("######################LAYER_SCHEMA_PERCORSI_NAVETTE_XML : \n{}\n", writer);
+    }
+
+    @Test
+    @Ignore
+    public void e_describeLayerDtsupStromboliTest() throws Exception {
+        String serverURL = "https://servizi.protezionecivile.it/webgis/sitdpc/gpServerProxy?targetURL=https://insar.irea.cnr.it/geoserver/wms%26v=dpc%26p=4WzL06EA";
+        serverURL = decode(serverURL.replaceAll("wms", "wfs"), UTF_8.name());
+        logger.info("########################SERVER_URL : {}\n", serverURL);
+        WFSDescribeFeatureTypeRequest<Schema> request = newConnector().withServerUrl(new URL(serverURL)).build()
+                .createDescribeFeatureTypeRequest();
+        QName dtsupStromboli = new QName("geonode:dtsup_stromboli");
+        String localPart = dtsupStromboli.getLocalPart();
+        request.setTypeName(Arrays.asList(dtsupStromboli));
+        logger.info("{}\n", request.showRequestAsString());
+        logger.info("#########################SCHEMA_AS_STRING : \n{}\n", request.getResponseAsString());
+        Schema s = request.getResponse();
+        String name = localPart.substring(localPart.indexOf(":") + 1);
+        JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(dtsupStromboli, LayerSchemaDTO.class, schemaReader.getFeature(s, name));
+        StringWriter writer = new StringWriter();
+        gpJAXBContextBuilder.marshal(root, writer);
+        logger.info("######################LAYER_SCHEMA_DTSUP_STROMBOLI_XML : \n{}\n", writer);
     }
 }

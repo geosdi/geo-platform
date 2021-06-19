@@ -53,8 +53,6 @@ import org.apache.hc.core5.http.impl.DefaultConnectionReuseStrategy;
 import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.apache.hc.core5.net.URIBuilder;
 import org.apache.hc.core5.ssl.SSLContextBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -75,8 +73,6 @@ import static java.util.stream.Collectors.joining;
 public class GPServerProxy extends HttpServlet {
 
     private static final long serialVersionUID = -8296565872107565884L;
-    //
-    private static final Logger logger = LoggerFactory.getLogger(GPServerProxy.class);
 
     @Override
     public void init() throws ServletException {
@@ -91,8 +87,8 @@ public class GPServerProxy extends HttpServlet {
      * @throws IOException
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.info("@@@@@@@@@@@@@@@@@@@@@Called {}#doGet.\n", this.getClass().getSimpleName());
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        this.log("@@@@@@@@@@@@@@@@@@@@@Called " + this.getClass().getSimpleName() + "#doGet.");
         try {
             if ((request.getParameter("targetURL") != null) && (request.getParameter("targetURL") != "")) {
                 CloseableHttpClient httpClient =  HttpClients
@@ -116,27 +112,27 @@ public class GPServerProxy extends HttpServlet {
                     }
                 }
                 URI uri = uriBuilder.build();
-                logger.info("############################URI to call : {}\n", uri.toString());
+                this.log("############################URI to call : " + uri.toString());
                 HttpGet httpGet = new HttpGet(uri);
                 if(((request.getParameter("v") != null) && (request.getParameter("v") != "")) && ((request.getParameter("p") != null) && (request.getParameter("p") != ""))) {
                     String userName = request.getParameter("v");
                     String password = request.getParameter("p");
                     String userpass = userName + ":" + password;
-                    logger.info("@@@@@@@@@@@@@@@@@Trying to inject basicAuth with parameter : {}\n", userpass);
+                    this.log("@@@@@@@@@@@@@@@@@Trying to inject basicAuth with parameter : " + userpass);
                     String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userpass.getBytes()));
                     httpGet.setHeader(HttpHeaders.AUTHORIZATION, basicAuth);
                 }
                 CloseableHttpResponse httpClientResponse = httpClient.execute(httpGet);
-                logger.info("###########################STATUS_CODE : {}\n\n", httpClientResponse.getCode());
+                this.log("###########################STATUS_CODE : " + httpClientResponse.getCode());
                 if (httpClientResponse.getCode() != 200) {
                     String exceptionMessage = IOUtils
                             .toString(httpClientResponse.getEntity().getContent(), UTF_8);
-                    logger.error("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ExecutionError : {}\n", exceptionMessage);
+                    this.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ExecutionError : " + exceptionMessage);
                     response.setStatus(500);
                 } else {
                     OutputStream ostream = response.getOutputStream();
                     copy(httpClientResponse.getEntity().getContent(), ostream);
-                    logger.debug("#########################EXECUTE SUCCESS \n\n");
+                    this.log("#########################EXECUTE SUCCESS for GET.");
                 }
             }
         } catch (Exception ex) {
@@ -152,8 +148,8 @@ public class GPServerProxy extends HttpServlet {
      * @throws IOException
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@Called {}#doPost.\n", this.getClass().getSimpleName());
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        this.log("@@@@@@@@@@@@@@@@@@@@@Called " + this.getClass().getSimpleName() +" {}#doPost.");
         try {
             if ((request.getParameter("targetURL") != null) && (request.getParameter("targetURL") != "")) {
                 CloseableHttpClient httpClient =  HttpClients
@@ -177,7 +173,7 @@ public class GPServerProxy extends HttpServlet {
                     }
                 }
                 URI uri = uriBuilder.build();
-                logger.info("############################URI to call : {}\n", uri.toString());
+                this.log("############################URI to call : " + uri.toString());
                 HttpPost httpPost = new HttpPost(uri);
                 if (request.getHeader("Content-Type") != null) {
                     httpPost.setHeader("Content-Type", request.getContentType());
@@ -186,7 +182,7 @@ public class GPServerProxy extends HttpServlet {
                     String userName = request.getParameter("v");
                     String password = request.getParameter("p");
                     String userpass = userName + ":" + password;
-                    logger.info("@@@@@@@@@@@@@@@@@Trying to inject basicAuth with parameter : {}\n", userpass);
+                    this.log("@@@@@@@@@@@@@@@@@Trying to inject basicAuth with parameter : " + userpass);
                     String basicAuth = "Basic " + new String(Base64.getEncoder().encode(userpass.getBytes()));
                     httpPost.setHeader(HttpHeaders.AUTHORIZATION, basicAuth);
                 }
@@ -197,16 +193,16 @@ public class GPServerProxy extends HttpServlet {
                             .collect(joining("\n"))));
                 }
                 CloseableHttpResponse httpClientResponse = httpClient.execute(httpPost);
-                logger.info("###########################STATUS_CODE : {}\n\n", httpClientResponse.getCode());
+                this.log("###########################STATUS_CODE : " + httpClientResponse.getCode());
                 if (httpClientResponse.getCode() != 200) {
                     String exceptionMessage = IOUtils
                             .toString(httpClientResponse.getEntity().getContent(), UTF_8);
-                    logger.error("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ExecutionError : {}\n", exceptionMessage);
+                    this.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ExecutionError : " + exceptionMessage);
                     response.setStatus(500);
                 } else {
                     OutputStream ostream = response.getOutputStream();
                     copy(httpClientResponse.getEntity().getContent(), ostream);
-                    logger.debug("#########################EXECUTE SUCCESS \n\n");
+                    this.log("#########################EXECUTE SUCCESS for POST.");
                 }
             }
         } catch (Exception ex) {
@@ -218,7 +214,7 @@ public class GPServerProxy extends HttpServlet {
     @Override
     public void destroy() {
         super.destroy();
-        logger.debug("@@@@@@@@@@@@@@@@@@Called {}#destroy\n", this.getClass().getSimpleName());
+        this.log("@@@@@@@@@@@@@@@@@@Called " + this.getClass().getSimpleName() + "#destroy\n");
     }
 
     /**

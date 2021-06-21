@@ -158,6 +158,7 @@ public class WFSDescribeFeatureTest {
         logger.info("######################LAYER_SCHEMA_PERCORSI_NAVETTE_XML : \n{}\n", writer);
     }
 
+    @Ignore
     @Test
     public void e_describeLayerDtsupStromboliTest() throws Exception {
         String serverURL = "http://localhost:8888/sitdpc/gpServerProxy?targetURL=https://insar.irea.cnr.it/geoserver/wms%26v=dpc%26p=4WzL06EA";

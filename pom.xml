@@ -1313,7 +1313,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.2.0</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
                 </configuration>
@@ -1376,9 +1376,9 @@
             
             <!-- initialize git revision info -->
             <plugin>
-                <groupId>pl.project13.maven</groupId>
-                <artifactId>git-commit-id-plugin</artifactId>
-                <version>4.0.4</version>
+                <groupId>io.github.git-commit-id</groupId>
+                <artifactId>git-commit-id-maven-plugin</artifactId>
+                <version>5.0.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -1551,7 +1551,7 @@
 
         <aspectj-version>1.8.9</aspectj-version>
         <ubl-version>2.0</ubl-version>
-        <jetty-version>9.4.42.v20210604</jetty-version>
+        <jetty-version>9.4.43.v20210629</jetty-version>
 
         <postgresql-version>9.4-1200-jdbc41</postgresql-version>
         <postgis-jdbc-version>1.5.2</postgis-jdbc-version>

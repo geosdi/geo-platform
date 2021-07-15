@@ -58,6 +58,7 @@ import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -85,8 +86,8 @@ public class WFSGetFeatureToppTasmaniaRoadsStaxReaderTest {
                 .collect(joining(separator, "", separator));
         toppTasmaniaRoadsLayerSchema = jaxbContextBuilder.unmarshal(new File(basePath.concat("LayerSchemaToppTasmaniaRoads.xml")), LayerSchemaDTO.class);
         getFeatureToppTasmaniaRoads = Paths.get(basePath.concat("GetFeatureToppTasmaniaRoads.xml")).toFile();
-        Assert.assertNotNull("The LayerSchemaDTO for topp:tasmania_roads must not be null.", toppTasmaniaRoadsLayerSchema);
-        Assert.assertNotNull("The File getFeatureToppTasmaniaRoads must not be null.", getFeatureToppTasmaniaRoads);
+        assertNotNull("The LayerSchemaDTO for topp:tasmania_roads must not be null.", toppTasmaniaRoadsLayerSchema);
+        assertNotNull("The File getFeatureToppTasmaniaRoads must not be null.", getFeatureToppTasmaniaRoads);
     }
 
     @AfterClass

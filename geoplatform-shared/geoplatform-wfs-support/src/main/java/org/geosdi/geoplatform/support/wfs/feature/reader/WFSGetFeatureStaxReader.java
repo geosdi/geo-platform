@@ -62,7 +62,7 @@ import static org.geosdi.geoplatform.stax.reader.builder.XmlStreamReaderBuilder.
 
 /**
  * @author Giuseppe La Scaleia - <giuseppe.lascaleia@geosdi.org>
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Vincenzo Monteverde - <vincenzo.monteverde@geosdi.org>
  * @TODO Try to have this class @ThreadSafe
  */
 public class WFSGetFeatureStaxReader extends WFSBaseGetFeatureStaxReader<FeatureDTO, String, FeatureCollectionDTO> {

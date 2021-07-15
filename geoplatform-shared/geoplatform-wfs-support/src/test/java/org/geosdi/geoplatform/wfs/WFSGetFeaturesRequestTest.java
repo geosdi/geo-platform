@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityC
 import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
+import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
@@ -81,12 +82,13 @@ import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 import static java.io.File.separator;
 import static java.math.BigInteger.valueOf;
+import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder.newInstance;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.geosdi.geoplatform.wfs.WFSDescribeFeatureTest.gpJAXBContextBuilder;
@@ -124,7 +126,7 @@ public class WFSGetFeaturesRequestTest {
         String wfsURL = "http://geoserver.wfppal.org/geoserver/wfs";
         GPWFSConnectorStore serverConnector = WFSConnectorBuilder.newConnector().withServerUrl(new URL(wfsURL)).build();
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
-        request.setTypeName(Arrays.asList(information));
+        request.setTypeName(asList(information));
         Schema response = request.getResponse();
 
         LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, informationName);
@@ -159,7 +161,7 @@ public class WFSGetFeaturesRequestTest {
                 .withServerUrl(new URL(wfsURL))
                 .build();
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
-        request.setTypeName(Arrays.asList(states));
+        request.setTypeName(asList(states));
         Schema response = request.getResponse();
         LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, statesName);
         if(layerSchema == null) {
@@ -169,7 +171,7 @@ public class WFSGetFeaturesRequestTest {
         logger.debug("\n\t##################################LAYER_SCHEMA : {}", layerSchema);
         WFSGetFeatureRequest getFeatureRequest = serverConnector.createGetFeatureRequest();
         getFeatureRequest.setTypeName(new QName(layerSchema.getTypeName()));
-        getFeatureRequest.setPropertyNames(Arrays.asList(new String[]{"STATE_NAME", "PERSONS"}));
+        getFeatureRequest.setPropertyNames(asList(new String[]{"STATE_NAME", "PERSONS"}));
         getFeatureRequest.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
         getFeatureRequest.setSRS("EPSG:4326");
         getFeatureRequest.setResultType(RESULTS.value());
@@ -193,7 +195,7 @@ public class WFSGetFeaturesRequestTest {
                 .withServerUrl(new URL(wfsURL))
                 .build();
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
-        request.setTypeName(Arrays.asList(tigerRoads));
+        request.setTypeName(asList(tigerRoads));
         Schema response = request.getResponse();
 
         LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, tigerRoadsName);
@@ -228,7 +230,7 @@ public class WFSGetFeaturesRequestTest {
                 .withServerUrl(new URL(wfsURL))
                 .build();
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
-        request.setTypeName(Arrays.asList(siteTRCom));
+        request.setTypeName(asList(siteTRCom));
         Schema response = request.getResponse();
 
         String localPart = siteTRCom.getLocalPart();
@@ -278,7 +280,7 @@ public class WFSGetFeaturesRequestTest {
         QName layerQName = new QName("sf:restricted");
         GPWFSConnectorStore serverConnector = WFSConnectorBuilder.newConnector().withServerUrl(new URL(wfsURL)).build();
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
-        request.setTypeName(Arrays.asList(layerQName));
+        request.setTypeName(asList(layerQName));
         Schema response = request.getResponse();
 
         String localPart = layerQName.getLocalPart();
@@ -347,7 +349,7 @@ public class WFSGetFeaturesRequestTest {
                 .withServerUrl(new URL(wfsURL))
                 .build();
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
-        request.setTypeName(Arrays.asList(TASMANIA_ROADS));
+        request.setTypeName(asList(TASMANIA_ROADS));
         Schema response = request.getResponse();
 
         LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, TASMANIA_ROADS.getLocalPart());
@@ -404,7 +406,7 @@ public class WFSGetFeaturesRequestTest {
         String localPart = percorsiNavette.getLocalPart();
         String name = localPart.substring(localPart.indexOf(":") + 1);
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
-        request.setTypeName(Arrays.asList(percorsiNavette));
+        request.setTypeName(asList(percorsiNavette));
         Schema response = request.getResponse();
         logger.info("#################SCHEMA : {}\n", response);
 
@@ -419,7 +421,7 @@ public class WFSGetFeaturesRequestTest {
         getFeatureRequest.setSRS("EPSG:4326");
         getFeatureRequest.setResultType(RESULTS.value());
         getFeatureRequest.setMaxFeatures(valueOf(50));
-        logger.debug("@@@@@@@@@@@@@@@@@@RESPONSE_AS_STRING : \n{}\n", getFeatureRequest.showRequestAsString());
+        logger.debug("@@@@@@@@@@@@@@@@@@REQUEST_AS_STRING : \n{}\n", getFeatureRequest.showRequestAsString());
         InputStream is = getFeatureRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
@@ -428,12 +430,14 @@ public class WFSGetFeaturesRequestTest {
             featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
         }
         JAXBElement<FeatureCollectionDTO> root = new JAXBElement<>(percorsiNavette, FeatureCollectionDTO.class, featureCollection);
-        gpJAXBContextBuilder.marshal(root, new File("./target/PercorsiNavette.xml"));
+        gpJAXBContextBuilder.marshal(root, new File(of(new File(".").getCanonicalPath(), "target", "PercorsiNavette")
+                .collect(joining("", separator, ".xml"))));
         getFeatureRequest.setOutputFormat("json");
         InputStream isJson = getFeatureRequest.getResponseAsStream();
         FeatureCollection featureCollectionJson = JACKSON_SUPPORT
                 .getDefaultMapper().readValue(isJson, FeatureCollection.class);
-        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/PercorsiNavette.json"), featureCollectionJson);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "PercorsiNavette")
+                .collect(joining("", separator, ".json"))), featureCollectionJson);
     }
 
     @Test
@@ -448,7 +452,7 @@ public class WFSGetFeaturesRequestTest {
         String localPart = ospedali.getLocalPart();
         String name = localPart.substring(localPart.indexOf(":") + 1);
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
-        request.setTypeName(Arrays.asList(ospedali));
+        request.setTypeName(asList(ospedali));
         Schema response = request.getResponse();
         logger.info("#################SCHEMA : {}\n", response);
 
@@ -463,7 +467,7 @@ public class WFSGetFeaturesRequestTest {
         getFeatureRequest.setSRS("EPSG:4326");
         getFeatureRequest.setResultType(RESULTS.value());
         getFeatureRequest.setMaxFeatures(valueOf(2));
-        logger.debug("@@@@@@@@@@@@@@@@@@RESPONSE_AS_STRING : \n{}\n", getFeatureRequest.showRequestAsString());
+        logger.debug("@@@@@@@@@@@@@@@@@@REQUEST_AS_STRING : \n{}\n", getFeatureRequest.showRequestAsString());
         InputStream is = getFeatureRequest.getResponseAsStream();
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
         FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
@@ -472,11 +476,13 @@ public class WFSGetFeaturesRequestTest {
             featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
         }
         JAXBElement<FeatureCollectionDTO> root = new JAXBElement<>(ospedali, FeatureCollectionDTO.class, featureCollection);
-        gpJAXBContextBuilder.marshal(root, new File("./target/Ospedali.xml"));
+        gpJAXBContextBuilder.marshal(root, new File(of(new File(".").getCanonicalPath(), "target", "Ospedali")
+                .collect(joining(separator, "", ".xml"))));
         getFeatureRequest.setOutputFormat("json");
         InputStream isJson = getFeatureRequest.getResponseAsStream();
         FeatureCollection featureCollectionJson = JACKSON_SUPPORT.getDefaultMapper().readValue(isJson, FeatureCollection.class);
-        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/Ospedali.json"), featureCollectionJson);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "Ospedali")
+                .collect(joining(separator, "", ".json"))), featureCollectionJson);
     }
 
     @Test
@@ -495,6 +501,91 @@ public class WFSGetFeaturesRequestTest {
         for (FeatureDTO featureDTO : featureCollectionDTOWrapper.getFeatureCollectionDTO().getFeatures()) {
             logger.info("@@@@@@@@@@@@@@@@FeatureID : {} - attributes : {}\n", featureDTO.getFID(), featureDTO.getAttributes());
         }
+    }
+
+    @Test
+    public void p_itGrandiDigheTest() throws Exception {
+        String wfsURL = "https://servizi.protezionecivile.it/geoserver/wfs";
+        GPWFSConnectorStore serverConnector = WFSConnectorBuilder
+                .newConnector()
+                .withClientSecurity(new BasicPreemptiveSecurityConnector("MAIDNT78M23G942L", "mdonato"))
+                .withServerUrl(new URL(wfsURL))
+                .build();
+        QName grandiDighe = new QName("IDROGEOLOGICO:IT_grandi_dighe_MIT2019");
+        String localPart = grandiDighe.getLocalPart();
+        String name = localPart.substring(localPart.indexOf(":") + 1);
+        WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
+        request.setTypeName(asList(grandiDighe));
+        Schema response = request.getResponse();
+        logger.info("#################SCHEMA : {}\n", response);
+
+        LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, name);
+        if(layerSchema == null) {
+            throw new IllegalStateException("The Layer Schema is null.");
+        }
+        layerSchema.setScope(wfsURL);
+        logger.debug("\n\t##################################LAYER_SCHEMA : {}", layerSchema);
+        WFSGetFeatureRequest getFeatureRequest = serverConnector.createGetFeatureRequest();
+        getFeatureRequest.setTypeName(new QName(layerSchema.getTypeName()));
+        getFeatureRequest.setSRS("EPSG:4326");
+        getFeatureRequest.setBBox(new BBox(14.131237640976908, 36.56356461583572, 15.821758881211283, 37.143760728459014));
+        getFeatureRequest.setQueryDTO(newInstance().unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
+                + "<QueryDTO>\n"
+                + "    <matchOperator>ANY</matchOperator>\n"
+                + "    <queryRestrictionList>\n"
+                + "        <queryRestriction>\n"
+                + "            <attribute>\n"
+                + "                <type>string</type>\n"
+                + "                <name>diga</name>\n"
+                + "                <value></value>\n"
+                + "                <maxOccurs>1</maxOccurs>\n"
+                + "                <minOccurs>0</minOccurs>\n"
+                + "                <nillable>true</nillable>\n"
+                + "            </attribute>\n"
+                + "            <operator>EQUAL</operator>\n"
+                + "            <restriction>SANTA ROSALIA</restriction>\n"
+                + "        </queryRestriction>\n"
+                + "        <queryRestriction>\n"
+                + "            <attribute>\n"
+                + "                <type>string</type>\n"
+                + "                <name>diga</name>\n"
+                + "                <value></value>\n"
+                + "                <maxOccurs>1</maxOccurs>\n"
+                + "                <minOccurs>0</minOccurs>\n"
+                + "                <nillable>true</nillable>\n"
+                + "            </attribute>\n"
+                + "            <operator>EQUAL</operator>\n"
+                + "            <restriction>MONTE CAVALLARO</restriction>\n"
+                + "        </queryRestriction>\n"
+                + "    </queryRestrictionList>\n"
+                + "</QueryDTO>"), QueryDTO.class));
+        getFeatureRequest.setGeometryName(layerSchema.getGeometry().getName());
+        getFeatureRequest.setResultType(RESULTS.value());
+        getFeatureRequest.setMaxFeatures(valueOf(50));
+        logger.debug("@@@@@@@@@@@@@@@@@@REQUEST_AS_STRING : \n{}\n", getFeatureRequest.showRequestAsString());
+        InputStream is = getFeatureRequest.getResponseAsStream();
+        WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
+        FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
+
+        if(!featureCollection.isFeaturesLoaded()) {
+            featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
+        }
+        JAXBElement<FeatureCollectionDTO> root = new JAXBElement<>(grandiDighe, FeatureCollectionDTO.class, featureCollection);
+        gpJAXBContextBuilder.marshal(root, new File(of(new File(".").getCanonicalPath(), "target", "GrandiDighe")
+                .collect(joining(separator, "", ".xml"))));
+        getFeatureRequest.setOutputFormat("json");
+        InputStream isJson = getFeatureRequest.getResponseAsStream();
+        FeatureCollection featureCollectionJson = JACKSON_SUPPORT.getDefaultMapper().readValue(isJson, FeatureCollection.class);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "GrandiDighe")
+                .collect(joining(separator, "", ".json"))), featureCollectionJson);
+    }
+
+    @Test
+    public void q_unmarshallGrandiDigheTest() throws Exception {
+        String ospedaliBasePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader", "GrandiDighe.xml")
+                .collect(joining(separator));
+        FeatureCollectionDTOWrapper featureCollectionDTOWrapper = gpJAXBContextBuilder.unmarshal(new StreamSource(ospedaliBasePath), FeatureCollectionDTOWrapper.class);
+        logger.info("#####################GRANDI_DIGHE : {}\n", featureCollectionDTOWrapper.getFeatureCollectionDTO());
     }
 
     @Getter

@@ -36,8 +36,13 @@
 package org.geosdi.geoplatform.connector.wfs.jaxb.unmarshall.query;
 
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.gui.shared.bean.BBox;
+import org.geosdi.geoplatform.xml.filter.v110.BBOXType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
+import org.geosdi.geoplatform.xml.filter.v110.PropertyNameType;
+import org.geosdi.geoplatform.xml.gml.v311.DirectPositionType;
+import org.geosdi.geoplatform.xml.gml.v311.EnvelopeType;
+import org.geosdi.geoplatform.xml.gml.v311.ObjectFactory;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -46,11 +51,14 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.StringReader;
+import java.util.Arrays;
 
 import static java.io.File.separator;
+import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.server.request.v110.query.responsibility.ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder;
+import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder.newInstance;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -71,13 +79,13 @@ public class QueryRestrictionsBuilderTest {
         String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "unmarshall", "query")
                 .collect(joining(separator, "", separator));
         File queryDTOAndFile = new File(basePath.concat("wfsQueryAnd.xml"));
-        queryDTOAnd = GPJAXBContextBuilder.newInstance().unmarshal(queryDTOAndFile, QueryDTO.class);
+        queryDTOAnd = newInstance().unmarshal(queryDTOAndFile, QueryDTO.class);
         logger.info("####################QUERY_DTO_AND : {}\n\n", queryDTOAnd);
         File queryDTOOrFile = new File(basePath.concat("wfsQueryOr.xml"));
-        queryDTOOr = GPJAXBContextBuilder.newInstance().unmarshal(queryDTOOrFile, QueryDTO.class);
+        queryDTOOr = newInstance().unmarshal(queryDTOOrFile, QueryDTO.class);
         logger.info("####################QUERY_DTO_OR : {}\n\n", queryDTOOr);
         File queryDTONotFile = new File(basePath.concat("wfsQueryNot.xml"));
-        queryDTONot = GPJAXBContextBuilder.newInstance().unmarshal(queryDTONotFile, QueryDTO.class);
+        queryDTONot = newInstance().unmarshal(queryDTONotFile, QueryDTO.class);
         logger.info("####################QUERY_DTO_NOT : {}\n\n", queryDTOOr);
     }
 
@@ -105,7 +113,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void d_wfsQueryRestrictionsBuilderNotStringTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT_FROM_STRING : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                .withQueryDTO(newInstance()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -131,7 +139,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void e_wfsQueryRestrictionsBuilderAndGreatherTest() throws Exception {
         logger.info("##################FILTER_CREATED_GREATHER : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                .withQueryDTO(newInstance()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -157,7 +165,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void f_wfsQueryRestrictionsBuilderAndGreatherOrEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_GREATHER_OR_EQUAL : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                .withQueryDTO(newInstance()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -183,7 +191,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void g_wfsQueryRestrictionsBuilderOrGreatherTest() throws Exception {
         logger.info("##################FILTER_CREATED_GREATHER : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                .withQueryDTO(newInstance()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -209,7 +217,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void h_wfsQueryRestrictionsBuilderNotGreatherTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT_GREATHER : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                .withQueryDTO(newInstance()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -235,7 +243,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void i_wfsQueryRestrictionsBuilderOrGreatherOrEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_GREATHER_OR_EQUAL : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                .withQueryDTO(newInstance()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -261,7 +269,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void l_wfsQueryRestrictionsBuilderNotGreatherOrEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT_GREATHER_OR_EQUAL : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                .withQueryDTO(newInstance()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -287,7 +295,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void m_wfsQueryRestrictionsBuilderAndLessTest() throws Exception {
         logger.info("##################FILTER_CREATED_LESS : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                .withQueryDTO(newInstance()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -313,7 +321,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void n_wfsQueryRestrictionsBuilderAndLessOrEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_LESS_OR_EQUAL : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                .withQueryDTO(newInstance()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -339,7 +347,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void o_wfsQueryRestrictionsBuilderOrLessTest() throws Exception {
         logger.info("##################FILTER_CREATED_LESS : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                .withQueryDTO(newInstance()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -365,7 +373,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void p_wfsQueryRestrictionsBuilderNotLessTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT_LESS : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                .withQueryDTO(newInstance()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -391,7 +399,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void q_wfsQueryRestrictionsBuilderOrLessOrEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_LESS_OR_EQUAL : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                .withQueryDTO(newInstance()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -417,7 +425,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void r_wfsQueryRestrictionsBuilderNotLessOrEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT_LESS_OR_EQUAL : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                .withQueryDTO(newInstance()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -443,7 +451,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void s_wfsQueryRestrictionsBuilderAndEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_EQUAL : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                .withQueryDTO(newInstance()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -469,7 +477,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void t_wfsQueryRestrictionsBuilderOrEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_EQUAL : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                .withQueryDTO(newInstance()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -495,7 +503,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void u_wfsQueryRestrictionsBuilderAndContainsTest() throws Exception {
         logger.info("##################FILTER_CREATED_CONTAINS : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                .withQueryDTO(newInstance()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -521,7 +529,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void v_wfsQueryRestrictionsBuilderOrContainsTest() throws Exception {
         logger.info("##################FILTER_CREATED_CONTAINS : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                .withQueryDTO(newInstance()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -547,7 +555,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void w_wfsQueryRestrictionsBuilderNotContainsTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT_CONTAINS : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                .withQueryDTO(newInstance()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -573,7 +581,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void x_wfsQueryRestrictionsBuilderAndStartWithTest() throws Exception {
         logger.info("##################FILTER_CREATED_START_WITH : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                .withQueryDTO(newInstance()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -599,7 +607,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void y_wfsQueryRestrictionsBuilderOrStartWithTest() throws Exception {
         logger.info("##################FILTER_CREATED_START_WITH : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(GPJAXBContextBuilder.newInstance()
+                .withQueryDTO(newInstance()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -623,35 +631,92 @@ public class QueryRestrictionsBuilderTest {
     }
 
     @Test
-    public void z_wfsQueryRestrictionsBuilderNotStartWithTest() throws Exception {
+    public void z_a_wfsQueryRestrictionsBuilderNotStartWithTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT_START_WITH : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(GPJAXBContextBuilder.newInstance()
-                        .unmarshal(new StringReader(
-                                "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                                        "<QueryDTO>\n" +
-                                        "    <matchOperator>NONE</matchOperator>\n" +
-                                        "    <queryRestrictionList>\n" +
-                                        "        <queryRestriction>\n" +
-                                        "            <attribute>\n" +
-                                        "                <maxOccurs>1</maxOccurs>\n" +
-                                        "                <minOccurs>0</minOccurs>\n" +
-                                        "                <name>SUB_REGION</name>\n" +
-                                        "                <nillable>true</nillable>\n" +
-                                        "                <type>string</type>\n" +
-                                        "                <value></value>\n" +
-                                        "            </attribute>\n" +
-                                        "            <operator>STARTS_WITH</operator>\n" +
-                                        "            <restriction>Mtn</restriction>\n" +
-                                        "        </queryRestriction>\n" +
-                                        "    </queryRestrictionList>\n" +
-                                        "</QueryDTO>"), QueryDTO.class))
+                .withQueryDTO(newInstance().unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                        "<QueryDTO>\n" +
+                        "    <matchOperator>NONE</matchOperator>\n" +
+                        "    <queryRestrictionList>\n" +
+                        "        <queryRestriction>\n" +
+                        "            <attribute>\n" +
+                        "                <maxOccurs>1</maxOccurs>\n" +
+                        "                <minOccurs>0</minOccurs>\n" +
+                        "                <name>SUB_REGION</name>\n" +
+                        "                <nillable>true</nillable>\n" +
+                        "                <type>string</type>\n" +
+                        "                <value></value>\n" +
+                        "            </attribute>\n" +
+                        "            <operator>STARTS_WITH</operator>\n" +
+                        "            <restriction>Mtn</restriction>\n" +
+                        "        </queryRestriction>\n" +
+                        "    </queryRestrictionList>\n" +
+                        "</QueryDTO>"), QueryDTO.class))
                 .build());
     }
 
     @Test
-    public void j_wfsQueryRestrictionsBuilderEmptyQueryTest() throws Exception {
+    public void z_b_wfsQueryRestrictionsBuilderEmptyQueryTest() throws Exception {
         logger.info("##################FILTER_CREATED : {}\n", builder().withFilterType(new FilterType())
                 .withQueryDTO(new QueryDTO())
                 .build());
+    }
+
+    @Test
+    public void z_c_wfsQueryRestrictionsBuilderWithBBOXAndQueryTest() throws Exception {
+        logger.info("##################FILTER_CREATED_WITH_BBOX_AND_QUERY : {}\n", builder().withFilterType(createFilterType())
+                .withQueryDTO(newInstance().unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
+                                + "<QueryDTO>\n"
+                                + "    <matchOperator>ANY</matchOperator>\n"
+                                + "    <queryRestrictionList>\n"
+                                + "        <queryRestriction>\n"
+                                + "            <attribute>\n"
+                                + "                <type>string</type>\n"
+                                + "                <name>diga</name>\n"
+                                + "                <value></value>\n"
+                                + "                <maxOccurs>1</maxOccurs>\n"
+                                + "                <minOccurs>0</minOccurs>\n"
+                                + "                <nillable>true</nillable>\n"
+                                + "            </attribute>\n"
+                                + "            <operator>EQUAL</operator>\n"
+                                + "            <restriction>SANTA ROSALIA</restriction>\n"
+                                + "        </queryRestriction>\n"
+                                + "        <queryRestriction>\n"
+                                + "            <attribute>\n"
+                                + "                <type>string</type>\n"
+                                + "                <name>diga</name>\n"
+                                + "                <value></value>\n"
+                                + "                <maxOccurs>1</maxOccurs>\n"
+                                + "                <minOccurs>0</minOccurs>\n"
+                                + "                <nillable>true</nillable>\n"
+                                + "            </attribute>\n"
+                                + "            <operator>EQUAL</operator>\n"
+                                + "            <restriction>MONTE CAVALLARO</restriction>\n"
+                                + "        </queryRestriction>\n"
+                                + "    </queryRestrictionList>\n"
+                                + "</QueryDTO>"), QueryDTO.class))
+                .build());
+    }
+
+    /**
+     * @return {@link FilterType}
+     */
+    private FilterType createFilterType() {
+        FilterType filter = new FilterType();
+        BBox bbox = new BBox(14.131237640976908, 36.56356461583572, 15.821758881211283, 37.143760728459014);
+        BBOXType bBoxType = new BBOXType();
+        PropertyNameType propertyNameType = new PropertyNameType();
+        propertyNameType.setContent(Arrays.asList("the_geom"));
+        bBoxType.setPropertyName(propertyNameType);
+        EnvelopeType envelope = new EnvelopeType();
+        DirectPositionType lower = new DirectPositionType();
+        lower.setValue(asList(bbox.getMinX(), bbox.getMinY()));
+        envelope.setLowerCorner(lower);
+        DirectPositionType upper = new DirectPositionType();
+        upper.setValue(asList(bbox.getMaxX(), bbox.getMaxY()));
+        envelope.setUpperCorner(upper);
+        envelope.setSrsName("EPSG:4326");
+        bBoxType.setEnvelope(new ObjectFactory().createEnvelope(envelope));
+        filter.setSpatialOps(new org.geosdi.geoplatform.xml.filter.v110.ObjectFactory().createBBOX(bBoxType));
+        return filter;
     }
 }

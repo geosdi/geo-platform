@@ -42,8 +42,6 @@ import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryRestrictionDTO;
 import org.geosdi.geoplatform.gui.shared.wfs.OperatorType;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
-import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
-import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -56,6 +54,7 @@ import java.util.Arrays;
 
 import static org.geosdi.geoplatform.connector.WFSConnectorBuilder.newConnector;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
+import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.RESULTS;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -76,7 +75,8 @@ public class GPWFSGetFeatureLayerTempoTest {
                             .withMaxTotalConnections(40)
                             .withDefaultMaxPerRoute(20)
                             .withMaxRedirect(10)
-                            .build()).build();
+                            .build())
+                    .build();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -87,7 +87,7 @@ public class GPWFSGetFeatureLayerTempoTest {
     @Test
     public void a_searchStartWithLayerTempoTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(ResultTypeType.RESULTS.value());
+        request.setResultType(RESULTS.value());
         request.setTypeName(new QName("admin:tempo"));
         QueryDTO queryDTO = new QueryDTO();
         queryDTO.setMatchOperator("ALL");
@@ -105,7 +105,7 @@ public class GPWFSGetFeatureLayerTempoTest {
     @Test
     public void b_searchEndsWithLayerTempoTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(ResultTypeType.RESULTS.value());
+        request.setResultType(RESULTS.value());
         request.setTypeName(new QName("admin:tempo"));
         QueryDTO queryDTO = new QueryDTO();
         queryDTO.setMatchOperator("ALL");
@@ -123,7 +123,7 @@ public class GPWFSGetFeatureLayerTempoTest {
     @Test
     public void c_searchEndsWithLayerTempoTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(ResultTypeType.RESULTS.value());
+        request.setResultType(RESULTS.value());
         request.setTypeName(new QName("admin:tempo"));
         QueryDTO queryDTO = new QueryDTO();
         queryDTO.setMatchOperator("ALL");
@@ -141,7 +141,7 @@ public class GPWFSGetFeatureLayerTempoTest {
     @Test
     public void d_searchEndsWithLayerTempoTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(ResultTypeType.RESULTS.value());
+        request.setResultType(RESULTS.value());
         request.setTypeName(new QName("admin:tempo"));
         QueryDTO queryDTO = new QueryDTO();
         queryDTO.setMatchOperator("ALL");
@@ -159,7 +159,7 @@ public class GPWFSGetFeatureLayerTempoTest {
     @Test
     public void e_searchLikeLayerTempoTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
-        request.setResultType(ResultTypeType.RESULTS.value());
+        request.setResultType(RESULTS.value());
         request.setTypeName(new QName("admin:tempo"));
         QueryDTO queryDTO = new QueryDTO();
         queryDTO.setMatchOperator("ALL");

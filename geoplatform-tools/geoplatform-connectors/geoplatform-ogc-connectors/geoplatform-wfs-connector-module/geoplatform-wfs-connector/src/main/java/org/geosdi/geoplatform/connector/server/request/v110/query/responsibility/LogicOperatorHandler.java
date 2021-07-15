@@ -46,7 +46,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
 import javax.xml.bind.JAXBElement;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -89,25 +88,25 @@ public abstract class LogicOperatorHandler implements ILogicOperatorHandler {
      * @return {@link List<JAXBElement<?>>}
      */
     protected List<JAXBElement<?>> buildJAXBElementList(List<QueryRestrictionDTO> theQueryRestrictions) {
-        Collection<QueryRestrictionDTO> queryRestrictions = cleanUp(theQueryRestrictions);
-        List<JAXBElement<?>> elements = new ArrayList<>(queryRestrictions.size());
-        for (QueryRestrictionDTO queryRestrictionDTO : queryRestrictions) {
-            OperatorType operatorType = queryRestrictionDTO.getOperator();
-            QueryRestrictionStrategy<?> queryRestrictionStrategy = QUERY_RESTRICTION_REPOSITORY.getQueryRestrictionStrategy(operatorType);
-            if (queryRestrictionStrategy != null) {
-                elements.add(queryRestrictionStrategy.create(queryRestrictionDTO));
-            } else {
-                logger.debug("###############{} doesn't found QueryRestrictionStrategy<?> for OperatorType : {}\n", getFilterName(), operatorType);
-            }
-        }
-        return elements;
+        return cleanUp(theQueryRestrictions).stream()
+                .map(this::toJAXBElement)
+                .filter(Objects::nonNull)
+                .collect(toList());
+    }
+
+    /**
+     * @param queryRestrictionDTO
+     * @return {@link JAXBElement<?>}
+     */
+    protected JAXBElement<?> toJAXBElement(@Nullable QueryRestrictionDTO queryRestrictionDTO) {
+        return ((queryRestrictionDTO != null) ? toInternalJAXBElement(queryRestrictionDTO) : null);
     }
 
     /**
      * @param theQueryRestrictions
      * @return {@link Collection<QueryRestrictionDTO>}
      */
-    Collection<QueryRestrictionDTO> cleanUp(@Nullable Collection<QueryRestrictionDTO> theQueryRestrictions) {
+    protected Collection<QueryRestrictionDTO> cleanUp(@Nullable Collection<QueryRestrictionDTO> theQueryRestrictions) {
         return (theQueryRestrictions != null ? theQueryRestrictions.stream()
                 .filter(Objects::nonNull)
                 .filter(r -> r.getOperator() != null)
@@ -143,5 +142,20 @@ public abstract class LogicOperatorHandler implements ILogicOperatorHandler {
     @Override
     public String getFilterName() {
         return getClass().getSimpleName();
+    }
+
+    /**
+     * @param queryRestrictionDTO
+     * @return {@link JAXBElement<?>}
+     */
+    private JAXBElement<?> toInternalJAXBElement(QueryRestrictionDTO queryRestrictionDTO) {
+        OperatorType operatorType = queryRestrictionDTO.getOperator();
+        QueryRestrictionStrategy<?> queryRestrictionStrategy = QUERY_RESTRICTION_REPOSITORY.getQueryRestrictionStrategy(operatorType);
+        if (queryRestrictionStrategy != null) {
+            return queryRestrictionStrategy.create(queryRestrictionDTO);
+        } else {
+            logger.debug("###############{} doesn't found QueryRestrictionStrategy<?> for OperatorType : {}\n", getFilterName(), operatorType);
+        }
+        return null;
     }
 }

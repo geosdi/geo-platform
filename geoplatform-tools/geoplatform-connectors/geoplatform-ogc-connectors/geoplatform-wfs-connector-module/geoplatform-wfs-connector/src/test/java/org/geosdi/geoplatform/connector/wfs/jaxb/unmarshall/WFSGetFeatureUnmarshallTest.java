@@ -38,7 +38,12 @@ package org.geosdi.geoplatform.connector.wfs.jaxb.unmarshall;
 import org.geosdi.geoplatform.connector.jaxb.context.WFSJAXBContext;
 import org.geosdi.geoplatform.xml.wfs.v110.GetFeatureType;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.locationtech.jts.geom.Envelope;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.PrecisionModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,11 +56,13 @@ import java.io.StringWriter;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class WFSGetFeatureUnmarshallTest {
 
     private static final Logger logger = LoggerFactory.getLogger(WFSGetFeatureUnmarshallTest.class);
@@ -88,7 +95,7 @@ public class WFSGetFeatureUnmarshallTest {
     }
 
     @Test
-    public void wfsGetFeatureIsEqualTov110Test() throws Exception {
+    public void a_wfsGetFeatureIsEqualTov110Test() throws Exception {
         GetFeatureType getFeatureType = ((JAXBElement<GetFeatureType>) wfsJAXBContext.acquireUnmarshaller()
                 .unmarshal(wfsGetFeatureIsEqualToFile)).getValue();
         logger.info("#######################wfsGetFeatureIsEqualTov110Test : {}\n", getFeatureType);
@@ -98,7 +105,7 @@ public class WFSGetFeatureUnmarshallTest {
     }
 
     @Test
-    public void wfsMathGetFeaturev110Test() throws Exception {
+    public void b_wfsMathGetFeaturev110Test() throws Exception {
         GetFeatureType getFeatureType = ((JAXBElement<GetFeatureType>) wfsJAXBContext.acquireUnmarshaller()
                 .unmarshal(wfsMathGetFeatureFile)).getValue();
         logger.info("#######################wfsMathGetFeaturev110Test : {}\n", getFeatureType);
@@ -108,7 +115,7 @@ public class WFSGetFeatureUnmarshallTest {
     }
 
     @Test
-    public void wfsGetFeatureBBOXv110Test() throws Exception {
+    public void c_wfsGetFeatureBBOXv110Test() throws Exception {
         GetFeatureType getFeatureType = ((JAXBElement<GetFeatureType>) wfsJAXBContext.acquireUnmarshaller()
                 .unmarshal(wfsGetFeatureBBOXFile)).getValue();
         logger.info("#######################wfsGetFeatureBBOXv110Test : {}\n", getFeatureType);
@@ -118,7 +125,7 @@ public class WFSGetFeatureUnmarshallTest {
     }
 
     @Test
-    public void wfsGetFeatureBetweenv110Test() throws Exception {
+    public void d_wfsGetFeatureBetweenv110Test() throws Exception {
         GetFeatureType getFeatureType = ((JAXBElement<GetFeatureType>) wfsJAXBContext.acquireUnmarshaller()
                 .unmarshal(wfsGetFeatureBetweenFile)).getValue();
         logger.info("#######################wfsGetFeatureBetweenv110Test : {}\n", getFeatureType);
@@ -128,12 +135,19 @@ public class WFSGetFeatureUnmarshallTest {
     }
 
     @Test
-    public void wfsGetFeatureIntersectsv110Test() throws Exception {
+    public void e_wfsGetFeatureIntersectsv110Test() throws Exception {
         GetFeatureType getFeatureType = ((JAXBElement<GetFeatureType>) wfsJAXBContext.acquireUnmarshaller()
                 .unmarshal(wfsGetFeatureIntersectsFile)).getValue();
-        logger.info("#######################wfsGetFeatureIntersectsv110Test : {}\n", getFeatureType);
+        logger.info("#######################wfsGetFeatureIntersectsv110Test : {}\n", getFeatureType.getQuery());
         StringWriter writer = new StringWriter();
         wfsJAXBContext.acquireMarshaller().marshal(getFeatureType, writer);
         logger.debug("######################wfsGetFeatureIntersectsv110Test-String : \n{}\n", writer);
+    }
+
+    @Test
+    public void f_createPolygonFromBBOXTest() throws Exception {
+        Geometry geometry = new GeometryFactory(new PrecisionModel(), 4326).toGeometry(new Envelope(14.146270751953127, 15.836791992187502,
+                36.40691545663981, 36.988293947445975));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@POLYGON : {}\n", geometry);
     }
 }

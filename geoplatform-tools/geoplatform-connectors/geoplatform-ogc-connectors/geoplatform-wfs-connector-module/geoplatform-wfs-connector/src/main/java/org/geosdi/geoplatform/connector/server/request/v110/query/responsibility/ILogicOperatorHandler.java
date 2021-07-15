@@ -64,7 +64,7 @@ public interface ILogicOperatorHandler {
      * @param filter
      * @throws IllegalStateException
      */
-    void buildLogicFilterOperator(QueryDTO queryDTO, FilterType filter) throws IllegalStateException;
+    void buildLogicFilterOperator(@Nonnull(when = NEVER) QueryDTO queryDTO, @Nullable FilterType filter) throws IllegalStateException;
 
     /**
      * @return {@link String}

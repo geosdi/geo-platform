@@ -1,0 +1,98 @@
+{
+  "type" : "FeatureCollection",
+  "crs" : {
+    "type" : "name",
+    "properties" : {
+      "name" : "urn:ogc:def:crs:EPSG::4326"
+    }
+  },
+  "features" : [ {
+    "type" : "Feature",
+    "properties" : {
+      "diga" : "LICODIA EUBEA",
+      "util_prev" : "INDUSTRIALE",
+      "prov" : "CT",
+      "regione" : "SICILIA",
+      "alt_m_l584" : "61",
+      "vol_mql584" : "20.1",
+      "classifica" : "GRAVITÃ€ ORDINARIA IN CALCESTRUZZO",
+      "a_iniz_lav" : "1961",
+      "a_fine_lav" : "1962",
+      "lat" : 37.12524239843749,
+      "long" : 14.681733046875,
+      "fiume" : "VIZZINI E AMERILLO",
+      "lago" : "LAGO DIRILLO"
+    },
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ 14.68173305, 37.1252424 ]
+    },
+    "id" : "IT_grandi_dighe_MIT2019.245"
+  }, {
+    "type" : "Feature",
+    "properties" : {
+      "diga" : "MONTE CAVALLARO",
+      "util_prev" : "IDROELETTRICO",
+      "prov" : "SR",
+      "regione" : "SICILIA",
+      "alt_m_l584" : "31.5",
+      "vol_mql584" : "5.68",
+      "classifica" : "TERRA CON MANTO",
+      "a_iniz_lav" : "1981",
+      "a_fine_lav" : "1988",
+      "lat" : 37.126673,
+      "long" : 15.138314,
+      "fiume" : "ANAPO",
+      "lago" : "<NON SPECIFICATO>"
+    },
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ 15.138314, 37.126673 ]
+    },
+    "id" : "IT_grandi_dighe_MIT2019.289"
+  }, {
+    "type" : "Feature",
+    "properties" : {
+      "diga" : "PONTE DIDDINO",
+      "util_prev" : "IDROELETTRICO",
+      "prov" : "SR",
+      "regione" : "SICILIA",
+      "alt_m_l584" : "25.1",
+      "vol_mql584" : "7.45",
+      "classifica" : "PIETRAME CON MANTO",
+      "a_iniz_lav" : "1981",
+      "a_fine_lav" : "1986",
+      "lat" : 37.11161373244417,
+      "long" : 15.142427173219177,
+      "fiume" : "ANAPO",
+      "lago" : "<NON SPECIFICATO>"
+    },
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ 15.14242717, 37.11161373 ]
+    },
+    "id" : "IT_grandi_dighe_MIT2019.370"
+  }, {
+    "type" : "Feature",
+    "properties" : {
+      "diga" : "SANTA ROSALIA",
+      "util_prev" : "IRRIGUO",
+      "prov" : "RG",
+      "regione" : "SICILIA",
+      "alt_m_l584" : "53.5",
+      "vol_mql584" : "20",
+      "classifica" : "TERRA E/O PIETRAME CON NUCLEO VERTICALE",
+      "a_iniz_lav" : "1976",
+      "a_fine_lav" : "1981",
+      "lat" : 36.96990271248569,
+      "long" : 14.772583225760428,
+      "fiume" : "IRMINIO",
+      "lago" : "<NON SPECIFICATO>"
+    },
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [ 14.77258323, 36.96990271 ]
+    },
+    "id" : "IT_grandi_dighe_MIT2019.454"
+  } ]
+}

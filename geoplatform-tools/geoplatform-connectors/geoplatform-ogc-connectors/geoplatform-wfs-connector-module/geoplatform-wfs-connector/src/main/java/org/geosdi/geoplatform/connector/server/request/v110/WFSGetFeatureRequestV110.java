@@ -62,7 +62,7 @@ import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.fromValue;
 
 /**
  * @author Giuseppe La Scaleia - <giuseppe.lascaleia@geosdi.org>
- * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @author Vincenzo Monteverde - <vincenzo.monteverde@geosdi.org>
  */
 public class WFSGetFeatureRequestV110 extends AbstractGetFeatureRequest<FeatureCollectionType, GetFeatureType> {
 
@@ -100,7 +100,7 @@ public class WFSGetFeatureRequestV110 extends AbstractGetFeatureRequest<FeatureC
             fromIterable(this.propertyNames)
                     .filter(v -> ((v != null) && !(v.trim().isEmpty())))
                     .doOnComplete(() -> logger.debug("################### propertyNames processed."))
-                    .subscribe(v -> query.getPropertyNameOrXlinkPropertyNameOrFunction().add(v), e -> e.printStackTrace());
+                    .subscribe(v -> query.getPropertyNameOrXlinkPropertyNameOrFunction().add(v), Throwable::printStackTrace);
         }
         if (srs != null) {
             query.setSrsName(srs);

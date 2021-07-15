@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.geosdi.geoplatform.xml.filter.v110.UnaryLogicOpType;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.xml.bind.JAXBElement;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +67,8 @@ public class NotOperatorHandler extends LogicOperatorHandler {
      * @throws IllegalStateException
      */
     @Override
-    public void buildLogicFilterOperator(QueryDTO queryDTO, FilterType filter) throws IllegalStateException {
+    public void buildLogicFilterOperator(@Nonnull(when = NEVER) QueryDTO queryDTO, @Nullable FilterType filter) throws IllegalStateException {
+        checkArgument(queryDTO != null, "The Parameter queryDTO must not be null.");
         if (super.canBuildLogicOperator(queryDTO.getMatchOperator())) {
             this.processQueryRestrictions(filter, queryDTO.getQueryRestrictionList());
         } else {

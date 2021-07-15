@@ -42,9 +42,13 @@ import org.geosdi.geoplatform.xml.filter.v110.BinaryLogicOpType;
 import org.geosdi.geoplatform.xml.filter.v110.ComparisonOpsType;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.xml.bind.JAXBElement;
 import java.util.List;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.gui.shared.wfs.LogicOperatorType.ANY;
 
 /**
@@ -63,7 +67,8 @@ public class OrOperatorHandler extends LogicOperatorHandler {
      * @throws IllegalStateException
      */
     @Override
-    public void buildLogicFilterOperator(QueryDTO queryDTO, FilterType filter) throws IllegalStateException {
+    public void buildLogicFilterOperator(@Nonnull(when = NEVER) QueryDTO queryDTO, @Nullable FilterType filter) throws IllegalStateException {
+        checkArgument(queryDTO != null, "The Parameter queryDTO must not be null.");
         if (super.canBuildLogicOperator(queryDTO.getMatchOperator())) {
             this.processQueryRestrictions(filter, queryDTO.getQueryRestrictionList());
         } else {

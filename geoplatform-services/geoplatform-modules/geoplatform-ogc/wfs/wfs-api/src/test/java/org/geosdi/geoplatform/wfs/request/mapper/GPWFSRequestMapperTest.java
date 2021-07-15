@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.wfs.request.mapper;
 
+import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesByBboxAndQueryRequest;
 import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesByBboxRequest;
 import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesRequest;
@@ -47,6 +48,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.StringReader;
+import java.io.StringWriter;
 
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
@@ -208,5 +210,63 @@ public class GPWFSRequestMapperTest {
                         "}"), GPWFSSearchFeaturesByBboxAndQueryRequest.class);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GP_WFS_SEARCH_FEATURES_BY_BBOX_REQUEST_FROM_STRING : {}\n",
                 wfsSearchFeaturesByBboxAndQueryRequest);
+    }
+
+    @Test
+    public void m_readGPWFSSearchFeaturesByBboxAndQueryTest() throws Exception {
+        GPWFSSearchFeaturesByBboxAndQueryRequest wfsSearchFeaturesByBboxAndQueryRequest = jacksonSupport
+                .getDefaultMapper().readValue(new StringReader("{\n"
+                        + "   \"lang\":\"en\",\n"
+                        + "   \"maxFeatures\":200,\n"
+                        + "   \"bbox\":{\n"
+                        + "      \"minX\":14.131237640976908,\n"
+                        + "      \"minY\":36.56356461583572,\n"
+                        + "      \"maxX\":15.821758881211283,\n"
+                        + "      \"maxY\":37.143760728459014\n"
+                        + "   },\n"
+                        + "   \"serverURL\":\"https://servizi.protezionecivile.it/geoserver/wms\",\n"
+                        + "   \"typeName\":\"IDROGEOLOGICO:IT_grandi_dighe_MIT2019\",\n"
+                        + "   \"queryDTO\":{\n"
+                        + "      \"matchOperator\":\"ANY\",\n"
+                        + "      \"queryRestriction\":[\n"
+                        + "         {\n"
+                        + "            \"attribute\":{\n"
+                        + "               \"attribute\":{\n"
+                        + "                  \"type\":\"string\",\n"
+                        + "                  \"name\":\"diga\",\n"
+                        + "                  \"value\":\"\",\n"
+                        + "                  \"maxOccurs\":1,\n"
+                        + "                  \"minOccurs\":0,\n"
+                        + "                  \"nillable\":true,\n"
+                        + "                  \"dateType\":false\n"
+                        + "               }\n"
+                        + "            },\n"
+                        + "            \"operator\":\"EQUAL\",\n"
+                        + "            \"restriction\":\"SANTA ROSALIA\"\n"
+                        + "         },\n"
+                        + "         {\n"
+                        + "            \"attribute\":{\n"
+                        + "               \"attribute\":{\n"
+                        + "                  \"type\":\"string\",\n"
+                        + "                  \"name\":\"diga\",\n"
+                        + "                  \"value\":\"\",\n"
+                        + "                  \"maxOccurs\":1,\n"
+                        + "                  \"minOccurs\":0,\n"
+                        + "                  \"nillable\":true,\n"
+                        + "                  \"dateType\":false\n"
+                        + "               }\n"
+                        + "            },\n"
+                        + "            \"operator\":\"EQUAL\",\n"
+                        + "            \"restriction\":\"MONTE CAVALLARO\"\n"
+                        + "         }\n"
+                        + "      ]\n"
+                        + "   }\n"
+                        + "}"), GPWFSSearchFeaturesByBboxAndQueryRequest.class);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GP_WFS_SEARCH_FEATURES_BY_BBOX_REQUEST_FROM_STRING : {}\n",
+                wfsSearchFeaturesByBboxAndQueryRequest);
+        GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
+        StringWriter writer = new StringWriter();
+        jaxbContextBuilder.marshal(wfsSearchFeaturesByBboxAndQueryRequest.getQueryDTO(), writer);
+        logger.info("########################QUERY_DTO_XML : \n{}\n", writer);
     }
 }

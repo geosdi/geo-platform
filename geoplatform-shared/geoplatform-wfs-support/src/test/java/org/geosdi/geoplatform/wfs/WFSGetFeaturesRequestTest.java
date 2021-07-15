@@ -431,13 +431,13 @@ public class WFSGetFeaturesRequestTest {
         }
         JAXBElement<FeatureCollectionDTO> root = new JAXBElement<>(percorsiNavette, FeatureCollectionDTO.class, featureCollection);
         gpJAXBContextBuilder.marshal(root, new File(of(new File(".").getCanonicalPath(), "target", "PercorsiNavette")
-                .collect(joining("", separator, ".xml"))));
+                .collect(joining(separator, "", ".xml"))));
         getFeatureRequest.setOutputFormat("json");
         InputStream isJson = getFeatureRequest.getResponseAsStream();
         FeatureCollection featureCollectionJson = JACKSON_SUPPORT
                 .getDefaultMapper().readValue(isJson, FeatureCollection.class);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "PercorsiNavette")
-                .collect(joining("", separator, ".json"))), featureCollectionJson);
+                .collect(joining(separator, "", ".json"))), featureCollectionJson);
     }
 
     @Test

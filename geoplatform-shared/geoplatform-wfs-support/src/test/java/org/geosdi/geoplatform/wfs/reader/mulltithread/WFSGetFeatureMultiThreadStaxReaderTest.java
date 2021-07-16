@@ -80,7 +80,7 @@ public class WFSGetFeatureMultiThreadStaxReaderTest {
         basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader")
                 .collect(joining(separator, "", separator));
         files = of("GetFeaturePeUins.xml", "GetFeatureSFRestricted.xml", "GetFeatureSiteTR.xml",
-                "GetFeatureToppStates.xml", "GetFeatureToppTasmaniaRoads.xml")
+                "GetFeatureToppStates.xml", "GetFeatureToppTasmaniaRoads.xml", "GetFeatureGrandiDighe.xml")
                 .collect(toCollection(LinkedList::new));
     }
 
@@ -94,10 +94,10 @@ public class WFSGetFeatureMultiThreadStaxReaderTest {
                 .forEach(Thread::start);
         startSignal.countDown();
         doneSignal.await();
-        assertTrue(counter.get() == 5);
+        assertTrue(counter.get() == files.size());
     }
 
-    protected static class WFSGetFeatureStaxReaderTask implements Runnable {
+    static class WFSGetFeatureStaxReaderTask implements Runnable {
 
         private static final Logger logger = LoggerFactory.getLogger(WFSGetFeatureStaxReaderTask.class);
         //
@@ -111,7 +111,7 @@ public class WFSGetFeatureMultiThreadStaxReaderTest {
          * @param theStartSignal
          * @param theDoneSignal
          */
-        public WFSGetFeatureStaxReaderTask(@Nonnull(when = NEVER) String theFileName, @Nonnull(when = NEVER) CountDownLatch theStartSignal,
+        WFSGetFeatureStaxReaderTask(@Nonnull(when = NEVER) String theFileName, @Nonnull(when = NEVER) CountDownLatch theStartSignal,
                 @Nonnull(when = NEVER) CountDownLatch theDoneSignal, @Nonnull(when = NEVER) AtomicInteger theCounter) {
             checkArgument((theFileName != null) && !(theFileName.trim().isEmpty()), "The Parameter fileName must not be null or an empty string.");
             checkArgument(theStartSignal != null, "The Parameter startSignal must not be null.");
@@ -140,8 +140,8 @@ public class WFSGetFeatureMultiThreadStaxReaderTest {
                 startSignal.await();
                 String basePathFile = of(new File(".").getCanonicalPath(), "target")
                         .collect(joining(separator, "", separator));
-                JACKSON_SUPPORT.getDefaultMapper()
-                        .writeValue(new File(basePathFile.concat(fileName.replace(".xml", ".json"))), geoJsonStaxReader.read(new File(basePath.concat(fileName))));
+                JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(basePathFile.concat(fileName.replace(".xml", ".json"))),
+                        geoJsonStaxReader.read(new File(basePath.concat(fileName))));
                 logger.info("#######################WRITE_FEATURE_COLLECTION for File : {}\n", fileName);
                 this.counter.incrementAndGet();
                 doneSignal.countDown();

@@ -47,10 +47,10 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.stream.Stream;
 
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -66,22 +66,20 @@ public class WFSGetFeatureUnmarshallerTheoriesTest {
 
     @BeforeClass
     public static void buildDirFiles() throws IOException {
-        dirFiles = Stream.of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader")
+        dirFiles = of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader")
                 .collect(joining(separator, "", separator));
     }
 
     @DataPoints
     public static String[] data() {
         return new String[]{"GetFeatureCreateLayer.xml", "GetFeaturePeUins.xml", "GetFeatureSFRestricted.xml",
-                "GetFeatureSiteTR.xml", "GetFeatureToppStates.xml", "GetFeatureToppTasmaniaRoads.xml"
+                "GetFeatureSiteTR.xml", "GetFeatureToppStates.xml", "GetFeatureToppTasmaniaRoads.xml", "GetFeatureGrandiDighe.xml"
         };
     }
 
     @Theory
     public void unmarshallGetFeatureTest(String file) throws Exception {
-        String getFeatureFilePath = dirFiles.concat(file);
-        File getFeatureFile = new File(getFeatureFilePath);
-        FeatureCollectionType featureCollectionType = GPJAXB_CONTEXT_BUILDER.unmarshal(getFeatureFile, FeatureCollectionType.class);
+        FeatureCollectionType featureCollectionType = GPJAXB_CONTEXT_BUILDER.unmarshal(new File(dirFiles.concat(file)), FeatureCollectionType.class);
         logger.info("#############################FEATURE_COLLECTION_TYPE : {}\n", featureCollectionType);
     }
 }

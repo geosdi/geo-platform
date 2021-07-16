@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns:wfs="http://www.opengis.net/wfs" xmlns:IDROGEOLOGICO="http://IDROGEOLOGICO" xmlns:gml="http://www.opengis.net/gml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="4" timeStamp="2021-07-16T06:18:12.377Z" xsi:schemaLocation="http://www.opengis.net/wfs https://servizi.protezionecivile.it/geoserver/schemas/wfs/1.1.0/wfs.xsd http://IDROGEOLOGICO https://servizi.protezionecivile.it/geoserver/wfs?service=WFS&amp;version=1.1.0&amp;request=DescribeFeatureType&amp;typeName=IDROGEOLOGICO%3AIT_grandi_dighe_MIT2019">
+    <gml:featureMembers>
+        <IDROGEOLOGICO:IT_grandi_dighe_MIT2019 gml:id="IT_grandi_dighe_MIT2019.245">
+            <IDROGEOLOGICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.68173305 37.1252424</gml:pos>
+                </gml:Point>
+            </IDROGEOLOGICO:geom>
+            <IDROGEOLOGICO:diga>LICODIA EUBEA</IDROGEOLOGICO:diga>
+            <IDROGEOLOGICO:util_prev>INDUSTRIALE</IDROGEOLOGICO:util_prev>
+            <IDROGEOLOGICO:prov>CT</IDROGEOLOGICO:prov>
+            <IDROGEOLOGICO:regione>SICILIA</IDROGEOLOGICO:regione>
+            <IDROGEOLOGICO:alt_m_l584>61</IDROGEOLOGICO:alt_m_l584>
+            <IDROGEOLOGICO:vol_mql584>20.1</IDROGEOLOGICO:vol_mql584>
+            <IDROGEOLOGICO:classifica>GRAVITÃ€ ORDINARIA IN CALCESTRUZZO</IDROGEOLOGICO:classifica>
+            <IDROGEOLOGICO:a_iniz_lav>1961</IDROGEOLOGICO:a_iniz_lav>
+            <IDROGEOLOGICO:a_fine_lav>1962</IDROGEOLOGICO:a_fine_lav>
+            <IDROGEOLOGICO:lat>37.12524239843749</IDROGEOLOGICO:lat>
+            <IDROGEOLOGICO:long>14.681733046875</IDROGEOLOGICO:long>
+            <IDROGEOLOGICO:fiume>VIZZINI E AMERILLO</IDROGEOLOGICO:fiume>
+            <IDROGEOLOGICO:lago>LAGO DIRILLO</IDROGEOLOGICO:lago>
+        </IDROGEOLOGICO:IT_grandi_dighe_MIT2019>
+        <IDROGEOLOGICO:IT_grandi_dighe_MIT2019 gml:id="IT_grandi_dighe_MIT2019.289">
+            <IDROGEOLOGICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>15.138314 37.126673</gml:pos>
+                </gml:Point>
+            </IDROGEOLOGICO:geom>
+            <IDROGEOLOGICO:diga>MONTE CAVALLARO</IDROGEOLOGICO:diga>
+            <IDROGEOLOGICO:util_prev>IDROELETTRICO</IDROGEOLOGICO:util_prev>
+            <IDROGEOLOGICO:prov>SR</IDROGEOLOGICO:prov>
+            <IDROGEOLOGICO:regione>SICILIA</IDROGEOLOGICO:regione>
+            <IDROGEOLOGICO:alt_m_l584>31.5</IDROGEOLOGICO:alt_m_l584>
+            <IDROGEOLOGICO:vol_mql584>5.68</IDROGEOLOGICO:vol_mql584>
+            <IDROGEOLOGICO:classifica>TERRA CON MANTO</IDROGEOLOGICO:classifica>
+            <IDROGEOLOGICO:a_iniz_lav>1981</IDROGEOLOGICO:a_iniz_lav>
+            <IDROGEOLOGICO:a_fine_lav>1988</IDROGEOLOGICO:a_fine_lav>
+            <IDROGEOLOGICO:lat>37.126673</IDROGEOLOGICO:lat>
+            <IDROGEOLOGICO:long>15.138314</IDROGEOLOGICO:long>
+            <IDROGEOLOGICO:fiume>ANAPO</IDROGEOLOGICO:fiume>
+            <IDROGEOLOGICO:lago>&lt;NON SPECIFICATO&gt;</IDROGEOLOGICO:lago>
+        </IDROGEOLOGICO:IT_grandi_dighe_MIT2019>
+        <IDROGEOLOGICO:IT_grandi_dighe_MIT2019 gml:id="IT_grandi_dighe_MIT2019.370">
+            <IDROGEOLOGICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>15.14242717 37.11161373</gml:pos>
+                </gml:Point>
+            </IDROGEOLOGICO:geom>
+            <IDROGEOLOGICO:diga>PONTE DIDDINO</IDROGEOLOGICO:diga>
+            <IDROGEOLOGICO:util_prev>IDROELETTRICO</IDROGEOLOGICO:util_prev>
+            <IDROGEOLOGICO:prov>SR</IDROGEOLOGICO:prov>
+            <IDROGEOLOGICO:regione>SICILIA</IDROGEOLOGICO:regione>
+            <IDROGEOLOGICO:alt_m_l584>25.1</IDROGEOLOGICO:alt_m_l584>
+            <IDROGEOLOGICO:vol_mql584>7.45</IDROGEOLOGICO:vol_mql584>
+            <IDROGEOLOGICO:classifica>PIETRAME CON MANTO</IDROGEOLOGICO:classifica>
+            <IDROGEOLOGICO:a_iniz_lav>1981</IDROGEOLOGICO:a_iniz_lav>
+            <IDROGEOLOGICO:a_fine_lav>1986</IDROGEOLOGICO:a_fine_lav>
+            <IDROGEOLOGICO:lat>37.11161373244417</IDROGEOLOGICO:lat>
+            <IDROGEOLOGICO:long>15.142427173219177</IDROGEOLOGICO:long>
+            <IDROGEOLOGICO:fiume>ANAPO</IDROGEOLOGICO:fiume>
+            <IDROGEOLOGICO:lago>&lt;NON SPECIFICATO&gt;</IDROGEOLOGICO:lago>
+        </IDROGEOLOGICO:IT_grandi_dighe_MIT2019>
+        <IDROGEOLOGICO:IT_grandi_dighe_MIT2019 gml:id="IT_grandi_dighe_MIT2019.454">
+            <IDROGEOLOGICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.77258323 36.96990271</gml:pos>
+                </gml:Point>
+            </IDROGEOLOGICO:geom>
+            <IDROGEOLOGICO:diga>SANTA ROSALIA</IDROGEOLOGICO:diga>
+            <IDROGEOLOGICO:util_prev>IRRIGUO</IDROGEOLOGICO:util_prev>
+            <IDROGEOLOGICO:prov>RG</IDROGEOLOGICO:prov>
+            <IDROGEOLOGICO:regione>SICILIA</IDROGEOLOGICO:regione>
+            <IDROGEOLOGICO:alt_m_l584>53.5</IDROGEOLOGICO:alt_m_l584>
+            <IDROGEOLOGICO:vol_mql584>20</IDROGEOLOGICO:vol_mql584>
+            <IDROGEOLOGICO:classifica>TERRA E/O PIETRAME CON NUCLEO VERTICALE</IDROGEOLOGICO:classifica>
+            <IDROGEOLOGICO:a_iniz_lav>1976</IDROGEOLOGICO:a_iniz_lav>
+            <IDROGEOLOGICO:a_fine_lav>1981</IDROGEOLOGICO:a_fine_lav>
+            <IDROGEOLOGICO:lat>36.96990271248569</IDROGEOLOGICO:lat>
+            <IDROGEOLOGICO:long>14.772583225760428</IDROGEOLOGICO:long>
+            <IDROGEOLOGICO:fiume>IRMINIO</IDROGEOLOGICO:fiume>
+            <IDROGEOLOGICO:lago>&lt;NON SPECIFICATO&gt;</IDROGEOLOGICO:lago>
+        </IDROGEOLOGICO:IT_grandi_dighe_MIT2019>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

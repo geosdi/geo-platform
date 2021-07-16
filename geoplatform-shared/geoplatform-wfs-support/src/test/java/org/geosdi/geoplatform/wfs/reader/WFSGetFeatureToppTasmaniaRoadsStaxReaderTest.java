@@ -45,17 +45,20 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader;
 import org.geosdi.geoplatform.support.wfs.feature.reader.geojson.GPWFSGetFeatureGeoJsonStaxReader;
 import org.geosdi.geoplatform.support.wfs.feature.reader.geojson.WFSGetFeatureGeoJsonStaxReader;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StopWatch;
 
 import java.io.File;
 import java.nio.file.Paths;
-import java.util.stream.Stream;
 
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.junit.Assert.assertNotNull;
@@ -73,7 +76,7 @@ public class WFSGetFeatureToppTasmaniaRoadsStaxReaderTest {
     private static LayerSchemaDTO toppTasmaniaRoadsLayerSchema;
     private static GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
     private static File getFeatureToppTasmaniaRoads;
-    private static final StopWatch stopWatch = new StopWatch("wfsGetFeaturePeUins");
+    private static final StopWatch stopWatch = new StopWatch("wfsGetFeatureToppTasmaniaRoad");
     private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
             ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
@@ -82,7 +85,7 @@ public class WFSGetFeatureToppTasmaniaRoadsStaxReaderTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        String basePath = Stream.of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader")
+        String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader")
                 .collect(joining(separator, "", separator));
         toppTasmaniaRoadsLayerSchema = jaxbContextBuilder.unmarshal(new File(basePath.concat("LayerSchemaToppTasmaniaRoads.xml")), LayerSchemaDTO.class);
         getFeatureToppTasmaniaRoads = Paths.get(basePath.concat("GetFeatureToppTasmaniaRoads.xml")).toFile();

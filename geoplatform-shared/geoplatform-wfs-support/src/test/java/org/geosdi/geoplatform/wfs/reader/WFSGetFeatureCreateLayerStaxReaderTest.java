@@ -48,9 +48,9 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static java.io.File.separator;
+import static java.util.stream.Stream.of;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -67,7 +67,7 @@ public class WFSGetFeatureCreateLayerStaxReaderTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        String basePath = Stream.of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader")
+        String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader")
                 .collect(Collectors.joining(separator, "", separator));
         createLayerSchema = jaxbContextBuilder.unmarshal(new File(basePath.concat("LayerSchemaCreateLayer.xml")), LayerSchemaDTO.class);
         getFeatureCreateLayer = Paths.get(basePath.concat("GetFeatureCreateLayer.xml")).toFile();

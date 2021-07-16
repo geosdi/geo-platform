@@ -52,10 +52,10 @@ import org.springframework.util.StopWatch;
 
 import java.io.File;
 import java.nio.file.Paths;
-import java.util.stream.Stream;
 
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -81,7 +81,7 @@ public class WFSGetFeatureSFRestrictedTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        String basePath = Stream.of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader")
+        String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader")
                 .collect(joining(separator, "", separator));
         sfRestrictedLayerSchema = jaxbContextBuilder.unmarshal(new File(basePath.concat("LayerSchemaSFRestricted.xml")), LayerSchemaDTO.class);
         getFeatureSFRestricted = Paths.get(basePath.concat("GetFeatureSFRestricted.xml")).toFile();

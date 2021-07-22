@@ -58,6 +58,7 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -85,8 +86,8 @@ public class WFSGetFeatureSiteTRStaxReaderTest {
                 .collect(joining(separator, "", separator));
         siteTRLayerSchema = jaxbContextBuilder.unmarshal(new File(basePath.concat("LayerSchemaSiteTR.xml")), LayerSchemaDTO.class);
         getFeatureSiteTR = Paths.get(basePath.concat("GetFeatureSiteTR.xml")).toFile();
-        Assert.assertNotNull("The LayerSchemaDTO for SiteTR must not be null.", siteTRLayerSchema);
-        Assert.assertNotNull("The File getFeatureSiteTR must not be null.", getFeatureSiteTR);
+        assertNotNull("The LayerSchemaDTO for SiteTR must not be null.", siteTRLayerSchema);
+        assertNotNull("The File getFeatureSiteTR must not be null.", getFeatureSiteTR);
     }
 
     @AfterClass

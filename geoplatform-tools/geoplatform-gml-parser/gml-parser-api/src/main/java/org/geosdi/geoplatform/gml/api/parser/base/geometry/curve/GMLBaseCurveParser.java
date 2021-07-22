@@ -35,10 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.curve;
 
-import org.geosdi.geoplatform.gml.api.AbstractCurveSegment;
-import org.geosdi.geoplatform.gml.api.Curve;
-import org.geosdi.geoplatform.gml.api.CurveSegmentArrayProperty;
-import org.geosdi.geoplatform.gml.api.LineStringSegment;
+import org.geosdi.geoplatform.gml.api.*;
 import org.geosdi.geoplatform.gml.api.parser.base.AbstractGMLBaseSRSParser;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.locationtech.jts.geom.GeometryFactory;
@@ -79,10 +76,11 @@ public class GMLBaseCurveParser extends GMLCurveParser {
             CurveSegmentArrayProperty curveArrySegment = gmlGeometry.getSegments();
             for (AbstractCurveSegment curveSegment : curveArrySegment.getAbstractCurveSegment()) {
                 if (curveSegment instanceof LineStringSegment) {
-                    LineStringSegment lineStringSegment = (LineStringSegment) curveSegment;
-                    lines.add(coordCurveHandler.parseGeometry(geometryFactory, lineStringSegment, coordinateParser));
+                    lines.add(coordCurveHandler.parseGeometry(geometryFactory, (LineStringSegment) curveSegment, coordinateParser));
+                } else if (curveSegment instanceof ArcString) {
+                    lines.add(coordCurveHandler.parseGeometry(geometryFactory, (ArcString) curveSegment, coordinateParser));
                 } else {
-                    throw new IllegalArgumentException("In CurveType only LineStringSegment are allowed.");
+                    logger.warn("###################Impossible parse element : {}\n", curveSegment.getClass().getSimpleName());
                 }
             }
         }
@@ -102,10 +100,11 @@ public class GMLBaseCurveParser extends GMLCurveParser {
             CurveSegmentArrayProperty curveArrySegment = gmlGeometry.getSegments();
             for (AbstractCurveSegment curveSegment : curveArrySegment.getAbstractCurveSegment()) {
                 if (curveSegment instanceof LineStringSegment) {
-                    LineStringSegment lineStringSegment = (LineStringSegment) curveSegment;
-                    lines.add(coordCurveHandler.parseGeometryAsGeoJson(lineStringSegment, coordinateParser));
+                    lines.add(coordCurveHandler.parseGeometryAsGeoJson((LineStringSegment) curveSegment, coordinateParser));
+                } else if(curveSegment instanceof ArcString) {
+                    lines.add(coordCurveHandler.parseGeometryAsGeoJson((ArcString) curveSegment, coordinateParser));
                 } else {
-                    throw new IllegalArgumentException("In CurveType only LineStringSegment are allowed.");
+                    logger.warn("###################Impossible parse element : {}\n", curveSegment.getClass().getSimpleName());
                 }
             }
         }

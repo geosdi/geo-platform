@@ -84,7 +84,7 @@ public abstract class WFSBaseGetFeatureGeoJsonStaxReader extends GPGetFeatureGeo
             return sextanteParser.parseGeometryAsGeoJson(geometry);
         } catch (Exception ex) {
             ex.printStackTrace();
-            logger.error("########################Parse Exception : {}", ex);
+            logger.error("########################Parse Exception : {}", ex.getMessage());
         } finally {
             xmlStreamReader().nextTag();
         }

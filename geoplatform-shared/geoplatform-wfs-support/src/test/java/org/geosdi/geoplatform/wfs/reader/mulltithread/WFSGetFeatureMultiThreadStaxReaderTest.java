@@ -47,11 +47,15 @@ import javax.annotation.Nonnull;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static io.reactivex.rxjava3.core.Observable.fromIterable;
 import static java.io.File.separator;
+import static java.lang.Runtime.getRuntime;
+import static java.lang.System.currentTimeMillis;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Stream.of;
@@ -66,6 +70,8 @@ import static org.junit.Assert.assertTrue;
  */
 public class WFSGetFeatureMultiThreadStaxReaderTest {
 
+    private static final Logger logger = LoggerFactory.getLogger(WFSGetFeatureMultiThreadStaxReaderTest.class);
+    //
     private static List<String> files;
     private static String basePath;
     private static final GPWFSGetFeatureGeoJsonStaxReader geoJsonStaxReader = new GPWFSGetFeatureGeoJsonStaxReader();
@@ -74,27 +80,43 @@ public class WFSGetFeatureMultiThreadStaxReaderTest {
             ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
             WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE, NON_NULL);
+    private static File moveDir;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
         basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader")
                 .collect(joining(separator, "", separator));
         files = of("GetFeaturePeUins.xml", "GetFeatureSFRestricted.xml", "GetFeatureSiteTR.xml",
-                "GetFeatureToppStates.xml", "GetFeatureToppTasmaniaRoads.xml", "GetFeatureGrandiDighe.xml")
+                "GetFeatureToppStates.xml", "GetFeatureToppTasmaniaRoads.xml", "GetFeatureGrandiDighe.xml",
+                "GetFeatureSciamiCampiFlegrei.xml", "GetFeatureIndustrieARischio.xml", "GetFeatureCampReteGPS.xml",
+                "GetFeatureCampImpiantiRifiuto.xml", "GetFeatureDannoAutostrade.xml", "GetFeatureDannoReteFerroviarie.xml",
+                "GetFeatureCFZonaGialla.xml", "GetFeatureCFZonaRossa.xml", "GetFeatureNavteqStreet.xml", "GetFeatureColataEtna.xml",
+                "GetFeatureEtnaStructures.xml", "GetFeatureVVFi.xml", "GetFeatureAdbRisk.xml", "GetFeaturePaiFrane.xml",
+                "GetFeatureAmbitoUrbano.xml")
                 .collect(toCollection(LinkedList::new));
+        moveDir = new File(of(new File(".").getCanonicalPath(), "target", "MultiThreadStaxReader")
+                .collect(joining(separator)));
+        moveDir.mkdirs();
     }
-
+    
     @Test
     public void wfsGetFeatureMultiThreadStaxReaderTest() throws Exception {
+        final long startTime = currentTimeMillis();
         CountDownLatch startSignal = new CountDownLatch(1);
         CountDownLatch doneSignal = new CountDownLatch(files.size());
         AtomicInteger counter = new AtomicInteger(0);
-        files.stream()
+        fromIterable(files)
+                .filter(Objects::nonNull)
                 .map(v -> new Thread(new WFSGetFeatureStaxReaderTask(v, startSignal, doneSignal, counter)))
-                .forEach(Thread::start);
+                .subscribe(Thread::start, Throwable::printStackTrace);
         startSignal.countDown();
         doneSignal.await();
         assertTrue(counter.get() == files.size());
+        getRuntime().addShutdownHook(new Thread(() -> {
+            logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@ Shutdown Hook is running !");
+            final long endTime = currentTimeMillis();
+            logger.info("#################### Calculated in : {}", (double) (endTime - startTime) / 1000 + " seconds" );
+        }));
     }
 
     static class WFSGetFeatureStaxReaderTask implements Runnable {
@@ -138,9 +160,7 @@ public class WFSGetFeatureMultiThreadStaxReaderTest {
         public void run() {
             try {
                 startSignal.await();
-                String basePathFile = of(new File(".").getCanonicalPath(), "target")
-                        .collect(joining(separator, "", separator));
-                JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(basePathFile.concat(fileName.replace(".xml", ".json"))),
+                JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(moveDir, fileName.replace(".xml", ".json")),
                         geoJsonStaxReader.read(new File(basePath.concat(fileName))));
                 logger.info("#######################WRITE_FEATURE_COLLECTION for File : {}\n", fileName);
                 this.counter.incrementAndGet();

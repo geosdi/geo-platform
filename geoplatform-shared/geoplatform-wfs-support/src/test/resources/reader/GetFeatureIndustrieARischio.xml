@@ -1,0 +1,486 @@
+<wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:VULCANICO="http://VULCANICO" 
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="0" timeStamp="2021-07-19T14:23:33.727Z"
+                       xsi:schemaLocation="http://VULCANICO https://servizi.protezionecivile.it/geoserver/VULCANICO/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=VULCANICO%3ACAMP_Industrie_rischio_rilevante http://www.opengis.net/wfs https://servizi.protezionecivile.it/geoserver/schemas/wfs/1.1.0/wfs.xsd">
+    <gml:featureMembers>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.1">
+            <gml:name>VINGAS SRL</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.06147665 40.80229681</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>DQ025</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di gas liquefatti</VULCANICO:attivindu>
+            <VULCANICO:comune>BACOLI</VULCANICO:comune>
+            <VULCANICO:attivita>deposito di gas liquefatti</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.2">
+            <gml:name>BA.CO.GAS SRL</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.11175006 40.93057901</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ018</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di gas liquefatti</VULCANICO:attivindu>
+            <VULCANICO:comune>QUALIANO</VULCANICO:comune>
+            <VULCANICO:attivita>deposito di gas liquefatti</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.3">
+            <gml:name>ITALCOST SRL</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.29923762 40.86674243</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ007</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di gas liquefatti</VULCANICO:attivindu>
+            <VULCANICO:comune>NAPOLI</VULCANICO:comune>
+            <VULCANICO:attivita>deposito di gas liquefatti</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Superiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.4">
+            <gml:name>KUWAIT PETROLEUM ITALIA SPA</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.31169691 40.85773225</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ008</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di olii minerali</VULCANICO:attivindu>
+            <VULCANICO:comune>NAPOLI</VULCANICO:comune>
+            <VULCANICO:attivita>Stoccaggio di combustibili (anche per il riscaldamento, la vendita al dettaglio ecc.), FUEL_STORAGE</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Superiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.5">
+            <gml:name>PETROLCHIMICA PARTENOPEA SPA</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.30326464 40.85026178</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ010</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di gas liquefatti</VULCANICO:attivindu>
+            <VULCANICO:comune>NAPOLI</VULCANICO:comune>
+            <VULCANICO:attivita>Produzione, imbottigliamento e distribuzione all'ingrosso di gas di petrolio liquefatto (GPL), LPG_PRODD.Lgs 105/2015 Stabilimento di Soglia Superiore</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Superiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.6">
+            <gml:name>SONATRACH RAFFINERIA ITALIANA</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.30195266 40.85555587</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>DQ010</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di olii minerali</VULCANICO:attivindu>
+            <VULCANICO:comune>NAPOLI</VULCANICO:comune>
+            <VULCANICO:attivita>Stoccaggio di combustibili (anche per il riscaldamento, la vendita al dettaglio ecc.)</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Superiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.7">
+            <gml:name>ENERGAS SPA</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.30420927 40.84850262</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ002</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di gas liquefatti</VULCANICO:attivindu>
+            <VULCANICO:comune>NAPOLI</VULCANICO:comune>
+            <VULCANICO:attivita>deposito di gas liquefatti</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Superiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.8">
+            <gml:name>ENI S.P.A.</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.31216154 40.85336655</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ001</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di gas liquefatti</VULCANICO:attivindu>
+            <VULCANICO:comune>NAPOLI</VULCANICO:comune>
+            <VULCANICO:attivita>Produzione, imbottigliamento e distribuzione all'ingrosso di gas di petrolio liquefatto (GPL), LPG_PROD</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Superiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.9">
+            <gml:name>I.SE.CO.L.D. SPA</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.45141515 40.75077741</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ064</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di olii minerali</VULCANICO:attivindu>
+            <VULCANICO:comune>TORRE ANNUNZIATA</VULCANICO:comune>
+            <VULCANICO:attivita>Stoccaggio di combustibili (anche per il riscaldamento, la vendita al dettaglio ecc.), FUEL_STORAGE</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.10">
+            <gml:name>LUMAGAS</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.46659418 40.78243611</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>DQ015</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di gas liquefatti</VULCANICO:attivindu>
+            <VULCANICO:comune>BOSCOTRECASE</VULCANICO:comune>
+            <VULCANICO:attivita>deposito di gas liquefatti</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.11">
+            <gml:name>GIM GAS SRL</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.49908579 40.78588107</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ027</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di gas liquefatti</VULCANICO:attivindu>
+            <VULCANICO:comune>TERZIGNO</VULCANICO:comune>
+            <VULCANICO:attivita>deposito di gas liquefatti</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.12">
+            <gml:name>LA PIROTECNICA SRL</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.55401527 40.65179041</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ072</VULCANICO:ministero>
+            <VULCANICO:attivindu>produzione e deposito di esplosivi</VULCANICO:attivindu>
+            <VULCANICO:comune>AGEROLA</VULCANICO:comune>
+            <VULCANICO:attivita>Produzione e stoccaggio di articoli pirotecnici, FIREWORKS</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.13">
+            <gml:name>MERIDIONAL GPL SRL</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.50557108 40.76883821</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ058</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di gas liquefatti</VULCANICO:attivindu>
+            <VULCANICO:comune>POMPEI</VULCANICO:comune>
+            <VULCANICO:attivita>deposito di gas liquefatti</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.14">
+            <gml:name>LINCAR GAS SRL</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.54767906 40.83711549</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ047</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di gas liquefatti</VULCANICO:attivindu>
+            <VULCANICO:comune>PALMA CAMPANIA</VULCANICO:comune>
+            <VULCANICO:attivita>deposito di gas liquefatti</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.15">
+            <gml:name>RA.M.OIL SPA</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.35127108 40.89855496</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ060</VULCANICO:ministero>
+            <VULCANICO:attivindu>stab chimico e/o petrolchimico</VULCANICO:attivindu>
+            <VULCANICO:comune>CASALNUOVO</VULCANICO:comune>
+            <VULCANICO:attivita>Stoccaggio, trattamento e smaltimento dei rifiuti, WASTE_STORAGE</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.16">
+            <gml:name>SAMAGAS ITALIA SRL</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.4083479 40.90884765</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ024</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di gas liquefatti</VULCANICO:attivindu>
+            <VULCANICO:comune>CASTELLO DI CISTERNA</VULCANICO:comune>
+            <VULCANICO:attivita>Produzione, imbottigliamento e distribuzione all'ingrosso di gas di petrolio liquefatto (GPL), LPG_PROD</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Superiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.17">
+            <gml:name>ULTRAGAS CM SPA</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.32970559 40.95383897</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ011</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di gas liquefatti</VULCANICO:attivindu>
+            <VULCANICO:comune>CAIVANO</VULCANICO:comune>
+            <VULCANICO:attivita>Stoccaggio di GPL, LPG_STORAGE</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Superiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.18">
+            <gml:name>NAPOLETANA CALOR SRL</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.5560879 40.81319643</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ036</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di gas liquefatti</VULCANICO:attivindu>
+            <VULCANICO:comune>POGGIOMARINO</VULCANICO:comune>
+            <VULCANICO:attivita>deposito di gas liquefatti</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.19">
+            <gml:name>VESUVIO GAS SRL</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.26687376 40.95358575</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ083</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di gas liquefatti</VULCANICO:attivindu>
+            <VULCANICO:comune>FRATTAMAGGIORE</VULCANICO:comune>
+            <VULCANICO:attivita>deposito di gas liquefatti</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.20">
+            <gml:name>SO.VE.GAS SPA</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.52086341 40.89234382</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ081</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di gas liquefatti</VULCANICO:attivindu>
+            <VULCANICO:comune>SAVIANO</VULCANICO:comune>
+            <VULCANICO:attivita>deposito di gas liquefatti</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.21">
+            <gml:name>FIREWORKS SUD</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.10425755 40.95541539</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ065</VULCANICO:ministero>
+            <VULCANICO:attivindu>produzione e deposito di esplosivi</VULCANICO:attivindu>
+            <VULCANICO:comune>GIUGLIANO</VULCANICO:comune>
+            <VULCANICO:attivita>Produzione e/o deposito di esplosivi</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Superiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.22">
+            <gml:name>IMPE SPA</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.10902465 40.93327526</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ028</VULCANICO:ministero>
+            <VULCANICO:attivindu>stab chimico e/o petrolchimico</VULCANICO:attivindu>
+            <VULCANICO:comune>QUALIANO</VULCANICO:comune>
+            <VULCANICO:attivita>Stabilimento chimico o petrolchimico</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.23">
+            <gml:name>KUWAIT PETROLEUM ITALIA SPA</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.29781594 40.84575853</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ069</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di olii minerali</VULCANICO:attivindu>
+            <VULCANICO:comune>NAPOLI</VULCANICO:comune>
+            <VULCANICO:attivita>Stoccaggio di combustibili (anche per il riscaldamento, la vendita al dettaglio ecc.),</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Superiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.24">
+            <gml:name>GEAGAS SRL</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.41729743 40.75348319</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ084</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di gas liquefatti</VULCANICO:attivindu>
+            <VULCANICO:comune>TORRE DEL GRECO</VULCANICO:comune>
+            <VULCANICO:attivita>deposito di gas liquefatti</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.25">
+            <gml:name>ISO SRL</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.35521043 40.92912642</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ088</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di gas liquefatti</VULCANICO:attivindu>
+            <VULCANICO:comune>AFRAGOLA</VULCANICO:comune>
+            <VULCANICO:attivita>deposito di gas liquefatti</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.26">
+            <gml:name>LEONARDO - FINMECCANICA S.P.A</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.46275376 40.97469891</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ097</VULCANICO:ministero>
+            <VULCANICO:attivindu>stab chimico e/o petrolchimico</VULCANICO:attivindu>
+            <VULCANICO:comune>NOLA</VULCANICO:comune>
+            <VULCANICO:attivita>Ingegneria generale, fabbricazione e assemblaggio, GEN_ENG</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.27">
+            <gml:name>S.C.E. SOC CANTONE ENERGIA SRL</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.50155964 40.93861088</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ099</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di gas liquefatti</VULCANICO:attivindu>
+            <VULCANICO:comune>NOLA</VULCANICO:comune>
+            <VULCANICO:attivita>deposito di gas liquefatti</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.28">
+            <gml:name>GOIL PETROLI SPA</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.30522716 40.85070373</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ054</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di olii minerali</VULCANICO:attivindu>
+            <VULCANICO:comune>NAPOLI</VULCANICO:comune>
+            <VULCANICO:attivita>Deposito di olii minerali</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.29">
+            <gml:name>DARSENA Petroli</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.29228361 40.837118</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>nc</VULCANICO:ministero>
+            <VULCANICO:attivindu>darsena petroli del Porto di Napoli</VULCANICO:attivindu>
+            <VULCANICO:comune>NAPOLI</VULCANICO:comune>
+            <VULCANICO:attivita>Darsena petroli</VULCANICO:attivita>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.30">
+            <gml:name>OLEODOTTO</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.29854448 40.8480664</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>nc</VULCANICO:ministero>
+            <VULCANICO:attivindu>oleodotto e gasdotto</VULCANICO:attivindu>
+            <VULCANICO:comune>NAPOLI</VULCANICO:comune>
+            <VULCANICO:attivita>Oleodotto e gasdotto</VULCANICO:attivita>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.31">
+            <gml:name>GRS.CHEMICAL TECHNOLOGIES SRL</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.11237532 40.9331234</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ082</VULCANICO:ministero>
+            <VULCANICO:attivindu>stab chimico e/o petrolchimico</VULCANICO:attivindu>
+            <VULCANICO:comune>QUALIANO</VULCANICO:comune>
+            <VULCANICO:attivita>Impianti chimici , CHEMICAL_INSTALLATIONS</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.32">
+            <gml:name>GAROLLA SRL</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.28069383 40.84331784</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ113</VULCANICO:ministero>
+            <VULCANICO:attivindu>stoccaggio combustibili</VULCANICO:attivindu>
+            <VULCANICO:comune>NAPOLI</VULCANICO:comune>
+            <VULCANICO:attivita>Stoccaggio di combustibili (anche per il riscaldamento, la vendita al dettaglio ecc.)</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.33">
+            <gml:name>ALBA DE BIASE &amp; C. SAS</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.11844567 40.85453635</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ111</VULCANICO:ministero>
+            <VULCANICO:attivindu>stoccaggio combustibili</VULCANICO:attivindu>
+            <VULCANICO:comune>POZZUOLI</VULCANICO:comune>
+            <VULCANICO:attivita>Deposito di olii minerali</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.34">
+            <gml:name>ECO GPL SRL</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.05529435 40.90224925</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ106</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di gas liquefatti</VULCANICO:attivindu>
+            <VULCANICO:comune>GIUGLIANO</VULCANICO:comune>
+            <VULCANICO:attivita>deposito di gas liquefatti</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.35">
+            <gml:name>PPG INDUSTRIES</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.30541418 40.98815261</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ089</VULCANICO:ministero>
+            <VULCANICO:attivindu>stab chimico e/o petrolchimico</VULCANICO:attivindu>
+            <VULCANICO:comune>CAIVANO</VULCANICO:comune>
+            <VULCANICO:attivita>Stabilimento chimico o petrolchimico</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.36">
+            <gml:name>MANU GAS srl</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.495313 40.86297503</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ114</VULCANICO:ministero>
+            <VULCANICO:attivindu>deposito di gas liquefatti</VULCANICO:attivindu>
+            <VULCANICO:comune>OTTAVIANO</VULCANICO:comune>
+            <VULCANICO:attivita>deposito di gas liquefatti</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+        <VULCANICO:CAMP_Industrie_rischio_rilevante gml:id="CAMP_Industrie_rischio_rilevante.37">
+            <gml:name>POLIS 4 srl</gml:name>
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.30233856 40.84577169</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:ministero>NQ034</VULCANICO:ministero>
+            <VULCANICO:attivindu>stoccaggio combustibili</VULCANICO:attivindu>
+            <VULCANICO:comune>NAPOLI</VULCANICO:comune>
+            <VULCANICO:attivita>Stoccaggio di combustibili (anche per il riscaldamento, la vendita al dettaglio ecc.), FUEL_STORAGE</VULCANICO:attivita>
+            <VULCANICO:dlgs>D.Lgs 105/2015 Stabilimento di Soglia Inferiore</VULCANICO:dlgs>
+        </VULCANICO:CAMP_Industrie_rischio_rilevante>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

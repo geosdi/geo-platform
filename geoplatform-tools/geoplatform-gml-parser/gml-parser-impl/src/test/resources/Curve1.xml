@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gml:Curve xmlns:gml="http://www.opengis.net/gml" srsName="urn:x-ogc:def:crs:EPSG:4326">
+    <gml:segments>
+        <gml:LineStringSegment>
+            <gml:posList srsDimension="2">
+                -91.1716151689462 46.8441439939094
+                -91.1709825689471 46.8442585272425
+                -91.1703163689482 46.8442359272426
+                -91.1680853689517 46.8445793939087
+            </gml:posList>
+        </gml:LineStringSegment>
+        <gml:LineStringSegment>
+            <gml:posList srsDimension="2">
+                -91.1727139689444 46.843937927243
+                -91.1716151689462 46.8441439939094
+            </gml:posList>
+        </gml:LineStringSegment>
+    </gml:segments>
+</gml:Curve>

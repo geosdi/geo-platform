@@ -58,6 +58,7 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -85,8 +86,8 @@ public class WFSGetFeatureToppStatesStaxReaderTest {
                 .collect(joining(separator, "", separator));
         toppStatesLayerSchema = jaxbContextBuilder.unmarshal(new File(basePath.concat("LayerSchemaToppStates.xml")), LayerSchemaDTO.class);
         getFeatureToppStates = Paths.get(basePath.concat("GetFeatureToppStates.xml")).toFile();
-        Assert.assertNotNull("The LayerSchemaDTO for topp:states must not be null.", toppStatesLayerSchema);
-        Assert.assertNotNull("The File getFeatureToppStates must not be null.", getFeatureToppStates);
+        assertNotNull("The LayerSchemaDTO for topp:states must not be null.", toppStatesLayerSchema);
+        assertNotNull("The File getFeatureToppStates must not be null.", getFeatureToppStates);
     }
 
     @AfterClass

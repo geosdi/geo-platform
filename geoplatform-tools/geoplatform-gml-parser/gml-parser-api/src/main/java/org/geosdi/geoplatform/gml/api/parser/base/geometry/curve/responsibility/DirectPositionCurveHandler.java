@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.curve.responsibility;
 
+import org.geosdi.geoplatform.gml.api.ArcString;
 import org.geosdi.geoplatform.gml.api.LineStringSegment;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
@@ -76,5 +77,32 @@ public class DirectPositionCurveHandler extends AbstractCurveHandler {
         return lineStringSegment.isSetPosList()
                 ? new org.geojson.LineString(parser.parseCoordinatesAsGeoJson(lineStringSegment.getPosList()))
                 : super.forwardParseGeometryAsGeoJson(lineStringSegment, parser);
+    }
+
+    /**
+     * @param geometryFactory
+     * @param arcString
+     * @param parser
+     * @return {@link LineString}
+     * @throws ParserException
+     */
+    @Override
+    public LineString parseGeometry(GeometryFactory geometryFactory, ArcString arcString, CoordinateBaseParser parser) throws ParserException {
+        return arcString.isSetPosList()
+                ? geometryFactory.createLineString(parser.parseCoordinates(arcString.getPosList()))
+                : super.forwardParseGeometry(geometryFactory, arcString, parser);
+    }
+
+    /**
+     * @param arcString
+     * @param parser
+     * @return {@link LineString}
+     * @throws ParserException
+     */
+    @Override
+    public org.geojson.LineString parseGeometryAsGeoJson(ArcString arcString, CoordinateBaseParser parser) throws ParserException {
+        return arcString.isSetPosList()
+                ? new org.geojson.LineString(parser.parseCoordinatesAsGeoJson(arcString.getPosList()))
+                : super.forwardParseGeometryAsGeoJson(arcString, parser);
     }
 }

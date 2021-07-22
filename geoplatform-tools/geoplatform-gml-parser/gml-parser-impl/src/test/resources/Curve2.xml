@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Curve srsName="urn:ogc:def:crs:EPSG::28992" xmlns="http://www.opengis.net/gml">
+    <segments>
+        <LineStringSegment>
+            <posList srsDimension="2">168343.153 449846.404 168341.911 449843.424 168340.901 449841.832</posList>
+        </LineStringSegment>
+        <Arc>
+            <posList srsDimension="2">168340.901 449841.832 168335.828 449829.203 168330.801 449816.556</posList>
+        </Arc>
+        <LineStringSegment>
+            <posList srsDimension="2">168330.801 449816.556 168323.346 449795.591 168322.728 449793.771</posList>
+        </LineStringSegment>
+        <Arc>
+            <posList srsDimension="2">168322.728 449793.771 168318.423 449780.815 168314.308 449767.798</posList>
+        </Arc>
+        <Arc>
+            <posList srsDimension="2">168314.308 449767.798 168310.486 449755.177 168306.851 449742.500</posList>
+        </Arc>
+        <Arc>
+            <posList srsDimension="2">168306.851 449742.500 168304.954 449735.475 168303.402 449728.365</posList>
+        </Arc>
+        <Arc>
+            <posList srsDimension="2">168303.402 449728.365 168303.202 449727.504 168303.045 449726.635</posList>
+        </Arc>
+    </segments>
+</Curve>

@@ -1,0 +1,2019 @@
+<wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:VULCANICO="http://VULCANICO"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="0"
+                       timeStamp="2021-07-20T09:41:53.902Z"
+                       xsi:schemaLocation="http://VULCANICO https://servizi.protezionecivile.it/geoserver/VULCANICO/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=VULCANICO%3AETN_main_structures http://www.opengis.net/wfs https://servizi.protezionecivile.it/geoserver/schemas/wfs/1.1.0/wfs.xsd">
+    <gml:featureMembers>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.57">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01014167 37.71895054 15.01023429 37.71881734</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.1">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02213167 37.7318267 15.02237838 37.73157829 15.02266348 37.73137835
+                                15.02274049 37.73132994
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.2">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02160051 37.73196027 15.02176229 37.73183912 15.02198581 37.73165127
+                                15.02209378 37.73153626 15.02248666 37.73125754 15.02272553 37.73107572
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.3">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02444364 37.72986391 15.02469802 37.72961558 15.02495998 37.7293914
+                                15.02525281 37.72914306 15.02558418 37.7288583
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.4">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02416695 37.72967652 15.02446754 37.7293979 15.02474503 37.7291556
+                                15.02495317 37.72890728 15.02521529 37.72861659
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.5">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01403973 37.71902196 15.01409404 37.71875557 15.01415578 37.71866481
+                                15.01424071 37.71850736
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.6">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.05097599 37.71314702 15.05133015 37.71290462 15.05174581 37.71272258
+                                15.05220763 37.71257683
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.7">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.0525922 37.71261271 15.05300767 37.71256386 15.05354626 37.71249062
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.8">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.05571102 37.71575607 15.0558807 37.71544121 15.05623509 37.71501712
+                                15.05652785 37.71476266 15.05672828 37.71442354 15.05692863 37.71420544 15.05708271
+                                37.71406001
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.9">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.05589502 37.71619162 15.05609546 37.7158525 15.05628058 37.71553753
+                                15.05651156 37.71536782 15.05681992 37.71495601 15.0570972 37.71465307 15.05715894
+                                37.71451985
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.10">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02190954 37.73133812 15.02209452 37.73118669 15.0223026 37.73102921
+                                15.02249508 37.73093221
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.11">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02240312 37.73075073 15.02234907 37.73086573 15.0222794 37.73104733
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.12">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02396713 37.72961168 15.02426005 37.7293391 15.02456047 37.72912095
+                                15.02463764 37.72901198
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.13">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.0238287 37.72956944 15.02399072 37.72935141 15.02414497 37.72915762
+                                15.02434536 37.7289577 15.02438391 37.72892137
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.14">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01265486 37.72712507 15.01273143 37.72721059</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.15">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01279255 37.7272961 15.01294523 37.72757699</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.16">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01296022 37.72767458 15.0132812 37.7281875 15.01352517 37.72871242
+                                15.01378431 37.72929834
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.17">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01252658 37.7283197 15.01263339 37.72853949</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.18">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01267908 37.72864934 15.01309126 37.72941855</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.19">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01312178 37.72949172 15.01322886 37.72962617</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.20">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01438494 37.72354301 15.01447678 37.72376082 15.01449154 37.72408758
+                                15.01449077 37.72447492 15.01449026 37.72474122
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.21">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01450544 37.72485008 15.01450519 37.72499535</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.22">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01438503 37.72349462 15.01438528 37.72337359</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.23">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01438537 37.72331312 15.01440097 37.72320416</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.24">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01227049 37.7189817 15.01239303 37.71928422 15.01250012 37.71955645
+                                15.01262283 37.71978633
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.25">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01431509 37.719906 15.01477736 37.71958494</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.26">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01544668 37.71959044 15.01577036 37.71926335 15.01600171 37.71900901
+                                15.01616356 37.71886362
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.27">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01558516 37.71956609 15.01579331 37.71933599 15.01593204 37.71919664
+                                15.01619417 37.71892418
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.28">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01597017 37.71939031 15.01633991 37.71917217 15.01664023 37.71900243
+                                15.01729486 37.7186388
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.29">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01611624 37.71944463 15.01639371 37.71917207 15.01654012 37.71903282
+                                15.0167793 37.71869366 15.01699529 37.71839696
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.30">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01623929 37.71945669 15.01672449 37.71919608 15.01707095 37.71905049
+                                15.01727117 37.7189535
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.31">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01636234 37.7194929 15.01672424 37.71931099 15.01703224 37.71918369
+                                15.01721694 37.71913509 15.01754814 37.71896544
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.32">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.03151879 37.71022657 15.03196579 37.70971782 15.03225874 37.70933023
+                                15.03270633 37.70850678 15.03370843 37.70727123 15.03467919 37.70632623
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.33">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.03430647 37.70837205 15.03495361 37.70777842 15.03549307 37.70722114
+                                15.03592438 37.70686973
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.34">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.03599933 37.70806784 15.03653877 37.70746216 15.0370165 37.70696546
+                                15.037263 37.70674738
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.35">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.04082486 37.71124621 15.04127161 37.71090694 15.04151811 37.71068876
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.36">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.04179532 37.71050698 15.04213409 37.71031293 15.04261137 37.71005826
+                                15.04298106 37.70979164
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.37">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.04248883 37.70975586 15.04304308 37.70945268 15.04347423 37.70919803
+                                15.04381313 37.70893142
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.38">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.0505765 37.71290621 15.0510082 37.71222797 15.05137805 37.71181596
+                                15.0519019 37.71128286
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.39">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.05169967 37.71283237 15.05240776 37.71257738 15.05293106 37.71245575
+                                15.05330047 37.71235853
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.40">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02401988 37.75734377 15.02445136 37.75730763 15.02512987 37.75721016
+                                15.02537637 37.7571984 15.02642685 37.75689104
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.41">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02431271 37.75731965 15.02469667 37.757395 15.02492753 37.75739558
+                                15.02522109 37.75730954
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.42">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02337782 37.75697018 15.02376278 37.75695875 15.02414864 37.75687297
+                                15.02453378 37.75684909 15.02525744 37.75683858 15.02610413 37.75684065 15.0268118
+                                37.7568796 15.02753501 37.7569062 15.0281819 37.75688306 15.02853605 37.75687153
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.43">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02395177 37.75659968 15.02448854 37.75677467 15.02468805 37.75682473
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.44">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.03382559 37.75609106 15.03429924 37.75638976 15.03466695 37.75653943
+                                15.03515722 37.75673898
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.45">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.03418761 37.75672422 15.03463111 37.75697327 15.03510621 37.75714796
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.46">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.03543622 37.75657849 15.03554002 37.75691352 15.03572086 37.75724861
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.47">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.03549215 37.75706214 15.0355823 37.75724829 15.0356263 37.75743438
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.48">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02067552 37.73034956 15.02077573 37.73027078</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.49">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02082963 37.73024049 15.02104539 37.73008292</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.50">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02109928 37.73003452 15.02162332 37.72961646 15.0221859 37.72914395
+                                15.02247865 37.72891373 15.02297933 37.7286531 15.02349519 37.72845293
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.51">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01951358 37.73038076 15.0197679 37.73018696 15.02001444 37.73000515
+                                15.02051497 37.72979896 15.02104636 37.72956249 15.02147004 37.72930801 15.02175512
+                                37.72908383 15.02203261 37.72882946
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.52">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01302307 37.72855846 15.01322401 37.72814678</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.53">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01325497 37.7280499 15.01348669 37.72757765</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.54">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01275745 37.72672493 15.01303514 37.7263738 15.01328961 37.72605286
+                                15.01347485 37.7257622
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.55">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01633798 37.72528791 15.0166772 37.72489422 15.01694711 37.72458534
+                                15.01723235 37.72427043
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.56">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.00964764 37.71981023 15.0098633 37.71966485 15.01003283 37.71951947
+                                15.01021789 37.7193257 15.01031042 37.71924089 15.01063369 37.71913173 15.0111265
+                                37.71894982 15.01137311 37.71873171
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.58">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01028059 37.7187447 15.01052765 37.71830877 15.01065122 37.71806661
+                                15.01085179 37.71778812
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.59">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.05320379 37.71152695 15.05286456 37.71209621 15.05258705 37.71248384
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.60">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.05795194 37.71576986 15.0581984 37.71553958 15.05853747 37.71516397
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.61">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.05884548 37.71492158 15.05924595 37.71458226 15.05960052 37.71406137
+                                15.05973929 37.71384331
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.62">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.05723156 37.71379787 15.05761654 37.71351903 15.05812466 37.71325212
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.63">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.05977263 37.71364683 15.05957397 37.71385601 15.0592984 37.71405324
+                                15.05923705 37.71409022
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.64">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.0588687 37.7142263 15.05862338 37.7143497 15.05836294 37.71452223
+                                15.05827132 37.71462069
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.65">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.0579346 37.71489175 15.05775138 37.71510092 15.05750648 37.71529795
+                                15.05732294 37.71545809
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.66">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.05822743 37.71496451 15.05798264 37.71517389 15.05772229 37.71535876
+                                15.05744682 37.7155805
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.67">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.05500587 37.71406514 15.05470013 37.71436051 15.05440911 37.71456999
+                                15.05427168 37.71471767 15.05404212 37.71491478 15.05382799 37.71509944 15.0536289
+                                37.71524732 15.05330697 37.71542005
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.68">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.05422693 37.71493875 15.05398296 37.71527086 15.05381497 37.71546776
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.69">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.05506564 37.71379493 15.05449862 37.71414017 15.05400881 37.71452205
+                                15.0537639 37.71471908 15.05351931 37.71495296 15.05322796 37.71511341
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.70">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.05361238 37.71271868 15.05413612 37.71281541 15.05458349 37.71299833
+                                15.05478374 37.71303464
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.71">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.0514164 37.71099388 15.05112862 37.71169441</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.72">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.05106643 37.7115963 15.05082435 37.712223</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.73">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.05068525 37.71212519 15.05057986 37.71248148 15.05032013 37.71275222
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.74">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.04984535 37.71072816 15.04941731 37.71114668 15.04897403 37.71158971
+                                15.04876021 37.71182356
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.75">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.04758763 37.70894203 15.04742108 37.70934764 15.04720841 37.70977777
+                                15.04701056 37.71010976 15.04688898 37.71034331 15.04672107 37.71054019
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.76">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.04337867 37.70993533 15.04301053 37.71010813 15.04265854 37.71040367
+                                15.04235256 37.71066224 15.04212277 37.71082247 15.04206162 37.71088395
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.77">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.04173968 37.71105673 15.04135639 37.71126639</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.78">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.04318627 37.70872059 15.04317484 37.70934665</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.79">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01046559 37.71681848 15.01066525 37.71675664 15.01080364 37.71674401
+                                15.0109426 37.71681735 15.01112797 37.71693963 15.01131306 37.71702513
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.80">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01106607 37.71590678 15.01133561 37.71576139 15.01157419 37.71568855
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.81">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01148193 37.71565837 15.01165137 37.71559167 15.01183597 37.71557948
+                                15.01202825 37.71560352 15.01222821 37.71565784 15.01235893 37.71565774
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.82">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01549643 37.71630884 15.01538831 37.71650252 15.01533408 37.71669015
+                                15.01520276 37.71697477 15.01512551 37.7171442 15.01504835 37.71728354
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.83">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01550368 37.71651458 15.01539565 37.71671439 15.01533365 37.7169141
+                                15.0152564 37.71707759 15.0151945 37.71728334 15.01513268 37.71739843 15.0150324
+                                37.71754975
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.84">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01499437 37.71735014 15.0148321 37.71767702 15.0144928 37.71809486
+                                15.01426155 37.71835524 15.01417661 37.71847637
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.85">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01222984 37.71870486 15.01223699 37.71897107</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.86">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01413807 37.71853991 15.01403762 37.71875188 15.01398339 37.71897583
+                                15.01394424 37.71928449
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.87">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01223691 37.71900739 15.01223578 37.71957631</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.88">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01224337 37.71963678 15.01224311 37.71976997</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.89">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01402909 37.71917544 15.01399004 37.7194841 15.01398202 37.71965362
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.90">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.0165309 37.71839279 15.01622265 37.7186896 15.0159144 37.7189682 15.01571393
+                                37.7191983 15.01550578 37.71942245 15.0152283 37.71969492
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.91">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01726153 37.71853138 15.01678401 37.71881622 15.01636047 37.71904654
+                                15.01602918 37.71925863 15.01578266 37.71944638
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.92">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01724576 37.71871901 15.01703753 37.71900364 15.01693717 37.71917316
+                                15.01684449 37.71936081 15.01676716 37.71959693
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.93">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01660548 37.71965147 15.01662875 37.71951836 15.01667539 37.71928225
+                                15.01679894 37.71904612 15.01692241 37.71886451
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.94">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.0172672 37.71958442 15.01768357 37.71911808 15.0180382 37.71871835
+                                15.01832342 37.71842767 15.01847749 37.71827625
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.95">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.0187826 37.71966782 15.01902953 37.71929243 15.01939951 37.71891694
+                                15.01965403 37.71858391 15.01976998 37.71829938 15.01984713 37.71816004 15.02007078
+                                37.71788154
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.96">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01930625 37.71941324 15.01936823 37.71917117 15.0194841 37.71893504
+                                15.0195228 37.71878976
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.97">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01956795 37.71933434 15.01956061 37.71916492 15.01959172 37.71897125
+                                15.01967688 37.71869277 15.01983171 37.71820853
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.98">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01555932 37.72354052 15.01563641 37.72343759 15.01571367 37.72328627
+                                15.01616094 37.7227473 15.01642316 37.72242031 15.01649257 37.72234154
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.99">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01537046 37.725686 15.01525482 37.7258011 15.01497698 37.72626128 15.0148535
+                                37.72644892 15.01472976 37.7267758 15.01462947 37.72692118 15.01446751 37.72709071
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.100">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01094731 37.72910263 15.01094643 37.72953232 15.01095368 37.72978645
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.101">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01083611 37.73086978 15.01085791 37.73148709</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.102">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01093126 37.72945365 15.01057671 37.72973232</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.103">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01093815 37.72985909 15.01092969 37.73021614 15.01084413 37.73070036
+                                15.01084387 37.73080931
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.104">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01548668 37.72924433 15.01541667 37.72966195 15.01539296 37.72995853
+                                15.01533096 37.73017645 15.01528448 37.7303338 15.01522274 37.73046701
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.105">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.0186469 37.73037946 15.01922477 37.7299796 15.01950969 37.72982202
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.106">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02074202 37.72917945 15.02111162 37.72901573 15.02168948 37.72863406
+                                15.02206692 37.7283977
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.107">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02218191 37.72863361 15.02168116 37.72897894 15.02137296 37.72920313
+                                15.02118031 37.72933041 15.02065668 37.72956688
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.108">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01970186 37.72996708 15.01901652 37.73023999</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.109">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02221229 37.72883934 15.02174233 37.72918467 15.02137239 37.72949367
+                                15.02110274 37.72968747 15.02067898 37.72999648 15.02033998 37.73021462 15.02017821
+                                37.73033586 15.01993908 37.73061437
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.110">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02247402 37.72877251 15.0220965 37.72905123 15.02170354 37.72935419
+                                15.02124883 37.72973584 15.02098686 37.72994785 15.02080188 37.7300872 15.02057077
+                                37.73023864
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.111">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02160697 37.73163575 15.02190742 37.73142968 15.02220787 37.73124795
+                                15.02265465 37.73096309
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.112">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02176147 37.73129066 15.02197723 37.7311029 15.02226257 37.73078797
+                                15.0224321 37.73064258
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.113">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01955601 37.72978561 15.02001806 37.7295432 15.02038009 37.72936741
+                                15.02068812 37.72921586
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.114">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02352679 37.72952201 15.02384288 37.72914651 15.02407422 37.72885583
+                                15.02436714 37.72858325 15.02449821 37.7284621
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.115">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01467474 37.76236264 15.01515759 37.76253128</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.116">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01633168 37.76219958 15.01643594 37.76249119</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.117">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01633678 37.76241659 15.01650201 37.76275793</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.118">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01710238 37.76212098 15.01705866 37.76256094</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.119">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01775262 37.7618189 15.01825093 37.76198752 15.01871095 37.76214371
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.120">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01970018 37.76246239 15.02033642 37.76268713 15.02075797 37.76283701
+                                15.02085659 37.76295505 15.02090896 37.76308535
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.121">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.01968626 37.75976587 15.02009555 37.75965532 15.02039661 37.75958173
+                                15.02116107 37.7593791 15.02191017 37.75917647 15.02212632 37.7591274
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.122">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.0213573 37.75906347 15.02187169 37.75917638</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.123">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02013384 37.75966784 15.01987006 37.75984073 15.01964394 37.76008805
+                                15.01952639 37.76026137
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.124">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02199379 37.75797409 15.02287732 37.75811271 15.02365328 37.75823863
+                                15.0240376 37.75828298
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.125">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02393697 37.7583323 15.02433702 37.75835195</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.126">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02422844 37.75841361 15.02470581 37.75840865</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.127">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02506719 37.75844056 15.02305263 37.75890662 15.022134 37.7591274
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.128">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02520338 37.75863924 15.02553824 37.75831159</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.129">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02544293 37.75855926 15.02570769 37.75830579</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.130">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02557527 37.75843559 15.02558898 37.75857824</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.131">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02626696 37.75852411 15.02606957 37.75894519</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.132">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02332341 37.75750018 15.02378833 37.75724099</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.133">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.0238577 37.75723494 15.02398949 37.75715471 15.0242358 37.75715529
+                                15.02462962 37.75704472 15.02510934 37.7568414
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.134">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.0253944 37.75681728 15.02603734 37.75647181 15.02636992 37.75633619
+                                15.02698818 37.75612698 15.02713523 37.75605918
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.135">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.0237855 37.75747647 15.02410064 37.75751453 15.02446056 37.75767036
+                                15.02482149 37.75773949 15.02549864 37.75775981 15.02589137 37.75774215
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.136">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02589064 37.75780415 15.026607 37.75776254 15.02736969 37.75770865
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.137">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02590776 37.75830629 15.0272827 37.75790675 15.02769973 37.75779004
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.138">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.0272072 37.75777646 15.02792283 37.75779684 15.02870765 37.75782359
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.139">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02883094 37.75781149 15.02913118 37.75781222</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.140">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02924652 37.75781868 15.0295006 37.75781312</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.141">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02778454 37.75777164 15.02864127 37.75757542 15.03014634 37.75723206
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.142">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02893238 37.75769395 15.0294409 37.75765183 15.02981773 37.75768372
+                                15.03018706 37.75769084
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.143">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.02956961 37.75783807 15.02986975 37.7578388 15.03013069 37.75790146
+                                15.03033862 37.75789573
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.144">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.03046173 37.75789606 15.03076197 37.75789679</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.145">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.0343694 37.75485277 15.0345849 37.75484703 15.03479272 37.7548476
+                                15.03499983 37.75491008
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.146">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.0370244 37.75423303 15.03747601 37.75444494 15.03788326 37.75450167
+                                15.03821312 37.75460169 15.03868723 37.75486314 15.03907065 37.75498801 15.03920117
+                                37.75501311
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.147">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.03649068 37.75379783 15.03689595 37.75402823 15.03715662 37.75411565
+                                15.03740175 37.75421534 15.03757707 37.75435839
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.148">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.03710315 37.75408449 15.03738792 37.75408521 15.03766448 37.75412919
+                                15.03804745 37.75428515 15.0383083 37.75436014
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.149">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.03651466 37.75306652 15.03736314 37.75357064 15.03789134 37.75381361
+                                15.0384265 37.75412489 15.03861004 37.7542245
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+        <VULCANICO:ETN_main_structures gml:id="ETN_main_structures.150">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.038687 37.75423087 15.03926832 37.754536 15.03968164 37.7547353 15.03985741
+                                37.75484113
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:tipo>dicchi</VULCANICO:tipo>
+        </VULCANICO:ETN_main_structures>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

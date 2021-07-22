@@ -58,7 +58,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public abstract class AbstractGMLBaseParser<A extends AbstractGeometry, P extends PropertyType, G extends Geometry, GeoJson extends GeoJsonObject>
         extends AbstractGMLGeoJsonParser<A, P, GeoJson> implements GMLBaseParser<A, P, G>, AbstractParser {
 
-    protected static final Logger logger = LoggerFactory.getLogger(AbstractGMLBaseParser.class);
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     protected final GeometryFactory geometryFactory;
 

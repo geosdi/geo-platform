@@ -1,0 +1,523 @@
+<wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wfs="http://www.opengis.net/wfs" 
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:VULCANICO="http://VULCANICO" 
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="0" timeStamp="2021-07-19T14:33:30.913Z" 
+                       xsi:schemaLocation="http://VULCANICO https://servizi.protezionecivile.it/geoserver/VULCANICO/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=VULCANICO%3ACAMP_RETE_GPS http://www.opengis.net/wfs https://servizi.protezionecivile.it/geoserver/schemas/wfs/1.1.0/wfs.xsd">
+    <gml:featureMembers>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.1">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.14173955 40.82093238 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>427623.585639</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4519233.53711</VULCANICO:y_utm>
+            <VULCANICO:lat>40.820932375</VULCANICO:lat>
+            <VULCANICO:long>14.141739547</VULCANICO:long>
+            <VULCANICO:sigla>ACAE</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.2">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.34337008 40.81125207 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>444619.003498</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4518012.00592</VULCANICO:y_utm>
+            <VULCANICO:lat>40.811252072</VULCANICO:lat>
+            <VULCANICO:long>14.343370083</VULCANICO:long>
+            <VULCANICO:sigla>AGR1</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.3">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>13.93464275 40.73611273 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>410044.650011</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4510009.53652</VULCANICO:y_utm>
+            <VULCANICO:lat>40.736112726</VULCANICO:lat>
+            <VULCANICO:long>13.934642749</VULCANICO:long>
+            <VULCANICO:sigla>AQMO</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.4">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.09932645 40.83231656 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>424059.869303</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4520533.16619</VULCANICO:y_utm>
+            <VULCANICO:lat>40.832316562</VULCANICO:lat>
+            <VULCANICO:long>14.099326448</VULCANICO:long>
+            <VULCANICO:sigla>ARFE</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.5">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.08020573 40.80975364 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>422421.402579</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4518045.24574</VULCANICO:y_utm>
+            <VULCANICO:lat>40.809753638</VULCANICO:lat>
+            <VULCANICO:long>14.080205729</VULCANICO:long>
+            <VULCANICO:sigla>BAIA</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.6">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.17437778 40.80482778 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>430359.131824</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4517419.36392</VULCANICO:y_utm>
+            <VULCANICO:lat>40.804827778</VULCANICO:lat>
+            <VULCANICO:long>14.174377778</VULCANICO:long>
+            <VULCANICO:sigla>BAGN</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.7">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.43875238 40.8185493 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>452668.894366</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4518766.1659</VULCANICO:y_utm>
+            <VULCANICO:lat>40.818549304</VULCANICO:lat>
+            <VULCANICO:long>14.438752376</VULCANICO:long>
+            <VULCANICO:sigla>BKE1</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.8">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.42988126 40.82995907 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>451929.011541</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4520037.5573</VULCANICO:y_utm>
+            <VULCANICO:lat>40.829959073</VULCANICO:lat>
+            <VULCANICO:long>14.42988126</VULCANICO:long>
+            <VULCANICO:sigla>BKNO</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.9">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.33488326 40.58230526 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>443710.831323</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4492603.2143</VULCANICO:y_utm>
+            <VULCANICO:lat>40.582305259</VULCANICO:lat>
+            <VULCANICO:long>14.33488326</VULCANICO:long>
+            <VULCANICO:sigla>ENAV</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.10">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>13.85572926 40.73692279 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>403382.491858</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4510183.31777</VULCANICO:y_utm>
+            <VULCANICO:lat>40.736922791</VULCANICO:lat>
+            <VULCANICO:long>13.855729264</VULCANICO:long>
+            <VULCANICO:sigla>FORI</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.11">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.2252949 40.87788012 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>434725.718904</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4525489.55306</VULCANICO:y_utm>
+            <VULCANICO:lat>40.877880118</VULCANICO:lat>
+            <VULCANICO:long>14.225294896</VULCANICO:long>
+            <VULCANICO:sigla>FRUL</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.12">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.16789636 40.83711211 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>429846.447245</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4521008.34411</VULCANICO:y_utm>
+            <VULCANICO:lat>40.837112112</VULCANICO:lat>
+            <VULCANICO:long>14.167896361</VULCANICO:long>
+            <VULCANICO:sigla>IPPO</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.13">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.0238945 40.76509606 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>417616.678712</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4513139.2682</VULCANICO:y_utm>
+            <VULCANICO:lat>40.765096059</VULCANICO:lat>
+            <VULCANICO:long>14.023894495</VULCANICO:long>
+            <VULCANICO:sigla>IPRO</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.14">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.04960063 40.87642701 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>419920.327251</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4525474.10584</VULCANICO:y_utm>
+            <VULCANICO:lat>40.876427009</VULCANICO:lat>
+            <VULCANICO:long>14.049600631</VULCANICO:long>
+            <VULCANICO:sigla>LICO</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.15">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.25833171 40.84737432 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>437480.64209</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4522079.05175</VULCANICO:y_utm>
+            <VULCANICO:lat>40.847374322</VULCANICO:lat>
+            <VULCANICO:long>14.25833171</VULCANICO:long>
+            <VULCANICO:sigla>MAFE</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.16">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.08298731 40.85962664 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>422713.957704</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4523579.10858</VULCANICO:y_utm>
+            <VULCANICO:lat>40.859626635</VULCANICO:lat>
+            <VULCANICO:long>14.082987311</VULCANICO:long>
+            <VULCANICO:sigla>MORU</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.17">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.16300981 40.79721683 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>429392.173422</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4516583.58492</VULCANICO:y_utm>
+            <VULCANICO:lat>40.797216832</VULCANICO:lat>
+            <VULCANICO:long>14.16300981</VULCANICO:long>
+            <VULCANICO:sigla>NISI</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.18">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.41054315 40.77863731 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>450260.159694</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4514351.29197</VULCANICO:y_utm>
+            <VULCANICO:lat>40.778637307</VULCANICO:lat>
+            <VULCANICO:long>14.41054315</VULCANICO:long>
+            <VULCANICO:sigla>ONPI</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.19">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>13.90135717 40.74674579 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>407248.84436</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4511224.5278</VULCANICO:y_utm>
+            <VULCANICO:lat>40.746745793</VULCANICO:lat>
+            <VULCANICO:long>13.901357166</VULCANICO:long>
+            <VULCANICO:sigla>OSCM</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.20">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.39736958 40.8278992 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>449186.121087</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4519827.24011</VULCANICO:y_utm>
+            <VULCANICO:lat>40.827899198</VULCANICO:lat>
+            <VULCANICO:long>14.397369582</VULCANICO:long>
+            <VULCANICO:sigla>OSVE</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.21">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.55639679 40.87045731 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>462619.2877</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4524471.44707</VULCANICO:y_utm>
+            <VULCANICO:lat>40.870457313</VULCANICO:lat>
+            <VULCANICO:long>14.55639679</VULCANICO:long>
+            <VULCANICO:sigla>PACA</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.22">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.47719044 40.84937456 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>455930.881522</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4522167.93758</VULCANICO:y_utm>
+            <VULCANICO:lat>40.849374556</VULCANICO:lat>
+            <VULCANICO:long>14.477190441</VULCANICO:long>
+            <VULCANICO:sigla>PRET</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.23">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.14372201 40.87766992 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>427852.337761</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4525530.24504</VULCANICO:y_utm>
+            <VULCANICO:lat>40.877669916</VULCANICO:lat>
+            <VULCANICO:long>14.143722007</VULCANICO:long>
+            <VULCANICO:sigla>QUAR</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.24">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.1262428 40.82330048 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>426319.363126</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4519509.32844</VULCANICO:y_utm>
+            <VULCANICO:lat>40.823300477</VULCANICO:lat>
+            <VULCANICO:long>14.126242796</VULCANICO:long>
+            <VULCANICO:sigla>RITE</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.25">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.4122147 40.86877688 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>450468.318808</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4524356.46372</VULCANICO:y_utm>
+            <VULCANICO:lat>40.868776878</VULCANICO:lat>
+            <VULCANICO:long>14.412214703</VULCANICO:long>
+            <VULCANICO:sigla>SANA</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.26">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>13.94566389 40.72345556 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>410958.383533</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4508593.26594</VULCANICO:y_utm>
+            <VULCANICO:lat>40.723455556</VULCANICO:lat>
+            <VULCANICO:long>13.945663889</VULCANICO:long>
+            <VULCANICO:sigla>SANT</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.27">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>13.89520692 40.71158982 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>406680.503968</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4507328.47346</VULCANICO:y_utm>
+            <VULCANICO:lat>40.71158982</VULCANICO:lat>
+            <VULCANICO:long>13.895206917</VULCANICO:long>
+            <VULCANICO:sigla>SERR</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.28">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.13574862 40.83028954 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>427128.613462</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4520277.22227</VULCANICO:y_utm>
+            <VULCANICO:lat>40.830289544</VULCANICO:lat>
+            <VULCANICO:long>14.135748615</VULCANICO:long>
+            <VULCANICO:sigla>SOLO</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.29">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.11172455 40.83513817 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>425108.400469</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4520835.71596</VULCANICO:y_utm>
+            <VULCANICO:lat>40.835138165</VULCANICO:lat>
+            <VULCANICO:long>14.111724545</VULCANICO:long>
+            <VULCANICO:sigla>STRZ</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.30">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.47525708 40.8075592 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>455740.117278</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4517527.12038</VULCANICO:y_utm>
+            <VULCANICO:lat>40.807559197</VULCANICO:lat>
+            <VULCANICO:long>14.475257078</VULCANICO:long>
+            <VULCANICO:sigla>TERZ</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.31">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.12046343 40.8557799 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>425868.202251</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4523119.68943</VULCANICO:y_utm>
+            <VULCANICO:lat>40.855779901</VULCANICO:lat>
+            <VULCANICO:long>14.120463431</VULCANICO:long>
+            <VULCANICO:sigla>VICA</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.32">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.145978 40.830021 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>427990.847015</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4520238.955</VULCANICO:y_utm>
+            <VULCANICO:lat>40.830021</VULCANICO:lat>
+            <VULCANICO:long>14.145978</VULCANICO:long>
+            <VULCANICO:sigla>PIS1</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.33">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.089033 40.778216 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>423129.564542</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4514536.55393</VULCANICO:y_utm>
+            <VULCANICO:lat>40.778216</VULCANICO:lat>
+            <VULCANICO:long>14.089033</VULCANICO:long>
+            <VULCANICO:sigla>CMIS</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.34">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.25481649 40.83630007 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>437173.86514</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4520852.23813</VULCANICO:y_utm>
+            <VULCANICO:lat>40.83630007</VULCANICO:lat>
+            <VULCANICO:long>14.254816486</VULCANICO:long>
+            <VULCANICO:sigla>NAMM</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.35">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.12021111 40.80973055 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>425795.607747</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4518008.04832</VULCANICO:y_utm>
+            <VULCANICO:lat>40.809731</VULCANICO:lat>
+            <VULCANICO:long>14.120211</VULCANICO:long>
+            <VULCANICO:sigla>CFBA</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.36">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.132575 40.80352222 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>426831.613208</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4517308.48387</VULCANICO:y_utm>
+            <VULCANICO:lat>40.803522</VULCANICO:lat>
+            <VULCANICO:long>14.132575</VULCANICO:long>
+            <VULCANICO:sigla>CFBB</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.37">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.14324444 40.80825555 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>427736.738738</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4517825.06973</VULCANICO:y_utm>
+            <VULCANICO:lat>40.808256</VULCANICO:lat>
+            <VULCANICO:long>14.143244</VULCANICO:long>
+            <VULCANICO:sigla>CFBC</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.38">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.11983333 40.79783333 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>425750.485677</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4516687.68623</VULCANICO:y_utm>
+            <VULCANICO:lat>40.797833</VULCANICO:lat>
+            <VULCANICO:long>14.119833</VULCANICO:long>
+            <VULCANICO:sigla>CFBS</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.39">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.191139 40.826238 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>431794.879767</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4519782.88129</VULCANICO:y_utm>
+            <VULCANICO:lat>40.826238</VULCANICO:lat>
+            <VULCANICO:long>14.191139</VULCANICO:long>
+            <VULCANICO:sigla>ISMO</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.40">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.159 40.840111 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>429099.594583</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4521348.40663</VULCANICO:y_utm>
+            <VULCANICO:lat>40.840111</VULCANICO:lat>
+            <VULCANICO:long>14.159</VULCANICO:long>
+            <VULCANICO:sigla>ASTR</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.41">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>13.90180768 40.73090559 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>407264.88127</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4509465.67033</VULCANICO:y_utm>
+            <VULCANICO:lat>40.73090559</VULCANICO:lat>
+            <VULCANICO:long>13.90180768</VULCANICO:long>
+            <VULCANICO:sigla>MEPO</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.42">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.0587 40.848272 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>420653.44397</VULCANICO:x_utm>
+            <VULCANICO:y_utm>4522340.36209</VULCANICO:y_utm>
+            <VULCANICO:lat>40.848272</VULCANICO:lat>
+            <VULCANICO:long>14.0587</VULCANICO:long>
+            <VULCANICO:sigla>CUMA</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+        <VULCANICO:CAMP_RETE_GPS gml:id="CAMP_RETE_GPS.43">
+            <VULCANICO:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="3">
+                    <gml:pos>14.34759461 40.88281035 0</gml:pos>
+                </gml:Point>
+            </VULCANICO:geom>
+            <VULCANICO:x_utm>0.0</VULCANICO:x_utm>
+            <VULCANICO:y_utm>0.0</VULCANICO:y_utm>
+            <VULCANICO:lat>40.88281035</VULCANICO:lat>
+            <VULCANICO:long>14.34759461</VULCANICO:long>
+            <VULCANICO:sigla>VOLL</VULCANICO:sigla>
+        </VULCANICO:CAMP_RETE_GPS>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

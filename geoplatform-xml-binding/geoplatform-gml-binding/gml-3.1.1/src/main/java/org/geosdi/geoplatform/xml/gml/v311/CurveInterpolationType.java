@@ -43,6 +43,8 @@
 
 package org.geosdi.geoplatform.xml.gml.v311;
 
+import org.geosdi.geoplatform.gml.api.CurveInterpolation;
+
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlType;
@@ -74,7 +76,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlType(name = "CurveInterpolationType")
 @XmlEnum
-public enum CurveInterpolationType {
+public enum CurveInterpolationType implements CurveInterpolation {
 
     @XmlEnumValue("linear")
     LINEAR("linear"),
@@ -104,6 +106,10 @@ public enum CurveInterpolationType {
         value = v;
     }
 
+    /**
+     * @return {@link String}
+     */
+    @Override
     public String value() {
         return value;
     }

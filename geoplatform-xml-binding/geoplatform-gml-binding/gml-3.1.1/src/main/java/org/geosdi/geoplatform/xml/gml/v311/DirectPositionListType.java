@@ -41,20 +41,16 @@
 //
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
 import org.geosdi.geoplatform.gml.api.DirectPositionList;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+
+import javax.xml.bind.annotation.*;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * DirectPositionList instances hold the coordinates for a sequence of direct
@@ -82,8 +78,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 @XmlType(name = "DirectPositionListType", propOrder = {
     "value"
 })
-public class DirectPositionListType implements ToString,
-        DirectPositionList {
+public class DirectPositionListType implements ToString, DirectPositionList {
 
     @XmlValue
     protected List<Double> value;

@@ -39,7 +39,7 @@ import org.geosdi.geoplatform.gml.api.parser.base.geometry.curve.GMLBaseCurvePar
 import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.xml.gml.v311.CurveType;
-import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,28 +48,40 @@ import java.io.File;
 
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class GMLCurveParserTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GMLCurveParserTest.class);
     //
     private static final GMLBaseCurveParser curveParser = GMLBaseParametersRepo.getDefaultCurveParser();
-    private static File file;
 
-    @BeforeClass
-    public static void beforeClass() throws Exception {
-        String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "Curve.xml")
-                .collect(joining(File.separator));
-        file = new File(basePath);
+    @Test
+    public void a_curveJTSParserTest() throws Exception {
+        CurveType curveType = GPJAXBContextBuilder.newInstance().unmarshal(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "Curve.xml")
+                .collect(joining(File.separator))), CurveType.class);
+        logger.info("##########################MULTI_LINE_STRING_JTS : {}\n", curveParser.parseGeometry(curveType));
     }
 
     @Test
-    public void curveJTSParserTest() throws Exception {
-        CurveType curveType = GPJAXBContextBuilder.newInstance().unmarshal(file, CurveType.class);
+    public void b_curveJTSParserTest() throws Exception {
+        CurveType curveType = GPJAXBContextBuilder.newInstance().unmarshal(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "Curve1.xml")
+                .collect(joining(File.separator))), CurveType.class);
+        logger.info("##########################MULTI_LINE_STRING_JTS : {}\n", curveParser.parseGeometry(curveType));
+    }
+
+    @Test
+    public void c_curveJTSParserTest() throws Exception {
+        CurveType curveType = GPJAXBContextBuilder.newInstance().unmarshal(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "Curve2.xml")
+                .collect(joining(File.separator))), CurveType.class);
         logger.info("##########################MULTI_LINE_STRING_JTS : {}\n", curveParser.parseGeometry(curveType));
     }
 }

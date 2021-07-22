@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.curve;
 
+import org.geojson.Geometry;
 import org.geojson.LngLatAlt;
 import org.geosdi.geoplatform.gml.api.AbstractCurve;
 import org.geosdi.geoplatform.gml.api.Curve;
@@ -54,10 +55,10 @@ import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static java.util.stream.Collectors.toList;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -69,6 +70,10 @@ abstract class GMLCurveParser extends AbstractGMLBaseParser<AbstractCurve, Curve
     protected CoordinateBaseParser coordinateParser = GMLBaseParametersRepo.getDefaultCoordinateBaseParser();
     protected AbstractCurveHandler coordCurveHandler = new CoordCurveHandler();
 
+    /**
+     * @param theGeometryFactory
+     * @param theSrsParser
+     */
     GMLCurveParser(@Nonnull(when = NEVER) GeometryFactory theGeometryFactory, @Nonnull(when = NEVER) AbstractGMLBaseSRSParser theSrsParser) {
         super(theGeometryFactory, theSrsParser);
     }
@@ -83,7 +88,9 @@ abstract class GMLCurveParser extends AbstractGMLBaseParser<AbstractCurve, Curve
         checkArgument(theGMLlGeometry instanceof Curve, "For The moment only Curve can be parsed.");
         Curve gmlGeometry = (Curve) theGMLlGeometry;
         Collection<LineString> lines = this.parseGeometry(gmlGeometry);
-        MultiLineString multiLineString = geometryFactory.createMultiLineString(lines.stream().toArray(s -> new LineString[s]));
+        MultiLineString multiLineString = geometryFactory.createMultiLineString(lines.stream()
+                .filter(Objects::nonNull)
+                .toArray(LineString[]::new));
         this.srsParser.parseSRS(gmlGeometry, multiLineString);
         return multiLineString;
     }
@@ -114,10 +121,10 @@ abstract class GMLCurveParser extends AbstractGMLBaseParser<AbstractCurve, Curve
         Collection<org.geojson.LineString> lines = this.parseGeometryAsGeoJson(gmlGeometry);
         List<LngLatAlt> lngLatAlts = lines.stream()
                 .filter(Objects::nonNull)
-                .map(lineString -> lineString.getCoordinates())
+                .map(Geometry::getCoordinates)
                 .filter(Objects::nonNull)
                 .flatMap(Collection::stream)
-                .collect(Collectors.toList());
+                .collect(toList());
         org.geojson.MultiLineString multiLineString = new org.geojson.MultiLineString(lngLatAlts);
         multiLineString.setCrs(this.srsParser.parseSRS(gmlGeometry));
         return multiLineString;

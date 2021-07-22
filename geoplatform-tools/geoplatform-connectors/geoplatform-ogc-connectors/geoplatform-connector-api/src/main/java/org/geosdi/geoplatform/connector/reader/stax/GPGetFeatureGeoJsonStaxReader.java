@@ -80,6 +80,7 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
     protected static final String TYPE_NAME_SEPARATOR = ":";
     protected static final String FEATURE_NAME_KEY = "FEATURE_NAME";
     private static final String BOUNDING_BY_PREFIX = "boundedBy";
+    private static final String GML_NAME_PREFIX = "name";
     private static final GPFeatureTypeReader featureTypeReader = new GPFeatureTypeReader() {
 
         /**
@@ -209,6 +210,8 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
                     } else if (super.isTagPrefix(GML_PREFIX)) {
                         if (super.isTagName(GML_PREFIX, BOUNDING_BY_PREFIX)) {
                             super.goToEndTag(BOUNDING_BY_PREFIX);
+                        } else if(super.isTagName(GML_PREFIX, GML_NAME_PREFIX)){
+                            super.goToEndTag(GML_NAME_PREFIX);
                         } else {
                             this.readGeometry(feature, featureProperties);
                         }
@@ -216,6 +219,8 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
                 } else if (super.isTagPrefix(GML_PREFIX)) {
                     if (super.isTagName(GML_PREFIX, BOUNDING_BY_PREFIX)) {
                         super.goToEndTag(BOUNDING_BY_PREFIX);
+                    } else if(super.isTagName(GML_PREFIX, GML_NAME_PREFIX)){
+                        super.goToEndTag(GML_NAME_PREFIX);
                     } else {
                         this.readGeometry(feature, featureProperties);
                     }

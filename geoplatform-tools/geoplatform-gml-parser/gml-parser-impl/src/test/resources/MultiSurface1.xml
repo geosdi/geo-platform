@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gml:MultiSurface xmlns:gml="http://www.opengis.net/gml" srsDimension="2" srsName="urn:x-ogc:def:crs:EPSG:4326">
+    <gml:surfaceMember>
+        <gml:Polygon srsDimension="2">
+            <gml:exterior>
+                <gml:LinearRing srsDimension="2">
+                    <gml:posList>591265.4349653661 4488865.23102628 591267.0400311121 4488862.079258261
+                        591263.4398010054 4488859.319541049 591245.4981616959 4488857.762363863
+                        591257.7054849417 4488862.314243503 591265.4349653661 4488865.23102628
+                    </gml:posList>
+                </gml:LinearRing>
+            </gml:exterior>
+        </gml:Polygon>
+    </gml:surfaceMember>
+</gml:MultiSurface>

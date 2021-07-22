@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.curve.responsibility;
 
+import org.geosdi.geoplatform.gml.api.ArcString;
 import org.geosdi.geoplatform.gml.api.LineStringSegment;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.curve.responsibility.geojson.AbstractCurveGeoJsonHandler;
@@ -66,10 +67,32 @@ public abstract class AbstractCurveHandler extends AbstractCurveGeoJsonHandler {
      * @return {@link LineString}
      * @throws ParserException
      */
-    protected LineString forwardParseGeometry(GeometryFactory geometryFactory, LineStringSegment lineStringSegment,
-            CoordinateBaseParser parser) throws ParserException {
+    protected LineString forwardParseGeometry(GeometryFactory geometryFactory, LineStringSegment lineStringSegment, CoordinateBaseParser parser) throws ParserException {
         if (successor != null) {
             return successor.parseGeometry(geometryFactory, lineStringSegment, parser);
+        }
+        throw new ParserException("Unable to Buid LineString with Parser " + parser);
+    }
+
+    /**
+     * @param geometryFactory
+     * @param arcString
+     * @param parser
+     * @return {@link LineString}
+     * @throws ParserException
+     */
+    public abstract LineString parseGeometry(GeometryFactory geometryFactory, ArcString arcString, CoordinateBaseParser parser) throws ParserException;
+
+    /**
+     * @param geometryFactory
+     * @param arcString
+     * @param parser
+     * @return {@link LineString}
+     * @throws ParserException
+     */
+    protected LineString forwardParseGeometry(GeometryFactory geometryFactory, ArcString arcString, CoordinateBaseParser parser) throws ParserException {
+        if (successor != null) {
+            return successor.parseGeometry(geometryFactory, arcString, parser);
         }
         throw new ParserException("Unable to Buid LineString with Parser " + parser);
     }
@@ -84,6 +107,20 @@ public abstract class AbstractCurveHandler extends AbstractCurveGeoJsonHandler {
     protected org.geojson.LineString forwardParseGeometryAsGeoJson(LineStringSegment lineStringSegment, CoordinateBaseParser parser) throws ParserException {
         if (successor != null) {
             return successor.parseGeometryAsGeoJson(lineStringSegment, parser);
+        }
+        throw new ParserException("Unable to Buid LineString with Parser " + parser);
+    }
+
+    /**
+     * @param arcString
+     * @param parser
+     * @return {@link LineString}
+     * @throws ParserException
+     */
+    @Override
+    protected org.geojson.LineString forwardParseGeometryAsGeoJson(ArcString arcString, CoordinateBaseParser parser) throws ParserException {
+        if (successor != null) {
+            return successor.parseGeometryAsGeoJson(arcString, parser);
         }
         throw new ParserException("Unable to Buid LineString with Parser " + parser);
     }

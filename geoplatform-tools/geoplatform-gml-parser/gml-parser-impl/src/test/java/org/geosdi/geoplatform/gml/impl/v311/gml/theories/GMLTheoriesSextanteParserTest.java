@@ -72,7 +72,8 @@ public class GMLTheoriesSextanteParserTest extends AbstractGMLParserTest {
         return new String[]{
                 "MultiCurve.xml", "Point.xml", "GeometryCollection.xml", "LineString.xml",
                 "LinearRing.xml", "MultiLineString.xml", "MultiPoint.xml", "MultiPolygon.xml",
-                "Polygon.xml", "Polygon_1.xml", "MultiSurface.xml", "MultiLineString_srsDimension3.xml", "Curve.xml"
+                "Polygon.xml", "Polygon_1.xml", "MultiSurface.xml", "MultiLineString_srsDimension3.xml", "Curve.xml",
+                "Curve1.xml", "Curve2.xml", "MultiSurface1.xml", "MultiSurface2.xml"
         };
     }
 

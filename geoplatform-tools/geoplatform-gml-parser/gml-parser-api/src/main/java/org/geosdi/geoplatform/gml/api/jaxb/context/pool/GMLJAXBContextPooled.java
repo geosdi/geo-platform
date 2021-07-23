@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.gml.api.jaxb.context.GMLUnmarshaller;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.stream.XMLEventReader;
@@ -52,6 +53,8 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.net.URL;
 
+import static javax.annotation.meta.When.NEVER;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -60,11 +63,20 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
 
     private final GenericObjectPool<GMLUnmarshaller> gmlUnmarshallerPool;
 
-    public GMLJAXBContextPooled(JAXBContext theJaxbContext) {
+    /**
+     * @param theJaxbContext
+     */
+    public GMLJAXBContextPooled(@Nonnull(when = NEVER) JAXBContext theJaxbContext) {
         super(theJaxbContext);
         this.gmlUnmarshallerPool = new GenericObjectPool<GMLUnmarshaller>(new GMLUnmarshallerFactory(theJaxbContext), new PoolConfig());
     }
 
+    /**
+     * @param file
+     * @param <T>
+     * @return {@link T}
+     * @throws Exception
+     */
     @Override
     public <T> T unmarshal(File file) throws Exception {
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
@@ -73,6 +85,12 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
         return (T) ((result instanceof JAXBElement) ? ((JAXBElement) result).getValue() : result);
     }
 
+    /**
+     * @param is
+     * @param <T>
+     * @return {@link T}
+     * @throws Exception
+     */
     @Override
     public <T> T unmarshal(InputStream is) throws Exception {
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
@@ -81,6 +99,12 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
         return (T) ((result instanceof JAXBElement) ? ((JAXBElement) result).getValue() : result);
     }
 
+    /**
+     * @param reader
+     * @param <T>
+     * @return {@link T}
+     * @throws Exception
+     */
     @Override
     public <T> T unmarshal(Reader reader) throws Exception {
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
@@ -89,6 +113,12 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
         return (T) ((result instanceof JAXBElement) ? ((JAXBElement) result).getValue() : result);
     }
 
+    /**
+     * @param url
+     * @param <T>
+     * @return {@link T}
+     * @throws Exception
+     */
     @Override
     public <T> T unmarshal(URL url) throws Exception {
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
@@ -97,6 +127,12 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
         return (T) ((result instanceof JAXBElement) ? ((JAXBElement) result).getValue() : result);
     }
 
+    /**
+     * @param source
+     * @param <T>
+     * @return {@link T}
+     * @throws Exception
+     */
     @Override
     public <T> T unmarshal(InputSource source) throws Exception {
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
@@ -105,6 +141,12 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
         return (T) ((result instanceof JAXBElement) ? ((JAXBElement) result).getValue() : result);
     }
 
+    /**
+     * @param node
+     * @param <T>
+     * @return {@link T}
+     * @throws Exception
+     */
     @Override
     public <T> T unmarshal(Node node) throws Exception {
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
@@ -113,6 +155,12 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
         return (T) ((result instanceof JAXBElement) ? ((JAXBElement) result).getValue() : result);
     }
 
+    /**
+     * @param source
+     * @param <T>
+     * @return {@link T}
+     * @throws Exception
+     */
     @Override
     public <T> T unmarshal(Source source) throws Exception {
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
@@ -121,6 +169,12 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
         return (T) ((result instanceof JAXBElement) ? ((JAXBElement) result).getValue() : result);
     }
 
+    /**
+     * @param reader
+     * @param <T>
+     * @return {@link T}
+     * @throws Exception
+     */
     @Override
     public <T> T unmarshal(XMLStreamReader reader) throws Exception {
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
@@ -129,6 +183,12 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
         return (T) ((result instanceof JAXBElement) ? ((JAXBElement) result).getValue() : result);
     }
 
+    /**
+     * @param reader
+     * @param <T>
+     * @return {@link T}
+     * @throws Exception
+     */
     @Override
     public <T> T unmarshal(XMLEventReader reader) throws Exception {
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
@@ -137,6 +197,13 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
         return (T) ((result instanceof JAXBElement) ? ((JAXBElement) result).getValue() : result);
     }
 
+    /**
+     * @param node
+     * @param declaredType
+     * @param <T>
+     * @return {@link T}
+     * @throws Exception
+     */
     @Override
     public <T> JAXBElement<T> unmarshal(Node node, Class<T> declaredType) throws Exception {
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
@@ -145,6 +212,13 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
         return result;
     }
 
+    /**
+     * @param source
+     * @param declaredType
+     * @param <T>
+     * @return {@link T}
+     * @throws Exception
+     */
     @Override
     public <T> JAXBElement<T> unmarshal(Source source, Class<T> declaredType) throws Exception {
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
@@ -153,6 +227,13 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
         return result;
     }
 
+    /**
+     * @param reader
+     * @param declaredType
+     * @param <T>
+     * @return {@link T}
+     * @throws Exception
+     */
     @Override
     public <T> JAXBElement<T> unmarshal(XMLStreamReader reader, Class<T> declaredType) throws Exception {
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
@@ -161,6 +242,13 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
         return result;
     }
 
+    /**
+     * @param reader
+     * @param declaredType
+     * @param <T>
+     * @return {@link T}
+     * @throws Exception
+     */
     @Override
     public <T> JAXBElement<T> unmarshal(XMLEventReader reader, Class<T> declaredType) throws Exception {
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();

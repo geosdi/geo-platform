@@ -1,0 +1,2906 @@
+<wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:VULCANICO="http://VULCANICO"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="0"
+                       timeStamp="2021-07-23T13:20:06.025Z"
+                       xsi:schemaLocation="http://VULCANICO https://servizi.protezionecivile.it/geoserver/VULCANICO/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=VULCANICO%3AVES_danno_strade_statali http://www.opengis.net/wfs https://servizi.protezionecivile.it/geoserver/schemas/wfs/1.1.0/wfs.xsd">
+    <gml:featureMembers>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.1">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.771539 40.926554 14.771497 40.926631 14.771449 40.926716 14.771408 40.926779
+                                14.771306 40.926918 14.771121 40.927179 14.771092 40.927214 14.770919 40.927413
+                                14.770835 40.92753 14.77068 40.927737 14.77031 40.928191 14.770006 40.928623 14.769725
+                                40.928983 14.769403 40.929365 14.76898 40.929742 14.768593 40.930052 14.768129 40.930385
+                                14.767736 40.930627 14.767325 40.930843 14.766986 40.930977 14.766891 40.931044
+                                14.766838 40.931112 14.766813 40.931179 14.766807 40.931265 14.766825 40.931333
+                                14.766866 40.9314 14.766902 40.93145 14.766996 40.931504 14.767151 40.931563 14.767352
+                                40.931617 14.767519 40.931649 14.767884 40.931707 14.768183 40.931756 14.768373
+                                40.931795 14.768717 40.931872 14.769044 40.93195 14.769168 40.932004 14.769222 40.932044
+                                14.769251 40.93209 14.769275 40.932166 14.769286 40.932274 14.769298 40.932414 14.769303
+                                40.932612 14.76926 40.932981 14.769253 40.933216 14.769283 40.93331 14.769342 40.933383
+                                14.769395 40.933441 14.769454 40.933486 14.769561 40.933541 14.769697 40.933586
+                                14.769798 40.933609 14.769917 40.93364 14.770267 40.933718 14.771193 40.933895 14.77146
+                                40.93395 14.771573 40.933972 14.771733 40.934018 14.771881 40.93405 14.771982 40.934072
+                                14.772095 40.934113 14.772225 40.934158 14.772415 40.934271 14.77254 40.934375 14.772587
+                                40.934438 14.772669 40.934601 14.772716 40.934821 14.772722 40.934997 14.772708 40.93533
+                                14.7726 40.935839 14.772419 40.93651 14.772341 40.936744 14.772288 40.936879 14.772246
+                                40.936941 14.77218 40.937041
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>1</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.2">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.795171 40.915884 14.794892 40.915969 14.7945 40.916076 14.794137 40.916192
+                                14.793703 40.916336 14.79308 40.916492 14.79226 40.916585
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.3">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.791326 40.913269 14.791374 40.913287 14.791457 40.913341 14.791498 40.913391
+                                14.791569 40.913481 14.791707 40.913645 14.791794 40.913762 14.791845 40.913825
+                                14.791889 40.91387 14.79194 40.913906 14.791995 40.913932
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>3</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.4">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.792968 40.914272 14.79323 40.913759 14.793076 40.913704 14.793428
+                                40.913169
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>4</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.5">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.795299 40.914595 14.795617 40.914736 14.795852 40.91484</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>5</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.6">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.795434 40.915312 14.79525 40.915492 14.795208 40.915555 14.795171
+                                40.915884
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>6</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.7">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.791995 40.913932 14.792031 40.913853 14.792425 40.913001 14.792509 40.91287
+                                14.792598 40.912726 14.792682 40.912562 14.792775 40.9124 14.792816 40.91233 14.792897
+                                40.912209 14.792867 40.912141 14.792661 40.911771 14.792537 40.9116 14.792489 40.911519
+                                14.792424 40.911397 14.792466 40.911343 14.792579 40.911276 14.792775 40.911204
+                                14.793251 40.911025 14.793619 40.910904 14.794065 40.910774 14.794754 40.910559 14.79545
+                                40.910319 14.795658 40.91025 14.795795 40.909926 14.795969 40.909503 14.796136 40.909174
+                                14.796172 40.90908 14.796202 40.908972 14.796208 40.908796 14.796227 40.908697 14.796274
+                                40.90858 14.796358 40.90844 14.796453 40.908332 14.79662 40.908234 14.796947 40.908059
+                                14.797536 40.907686
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>7</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.8">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.786421 40.915255 14.786545 40.915521</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>8</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.9">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.786545 40.915521 14.787388 40.915698 14.78762 40.9156 14.787971 40.91547
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>9</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.10">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.786562 40.916021 14.78677 40.915931 14.786598 40.91567 14.786545 40.915521
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>10</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.11">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.790599 40.914283 14.791922 40.914472</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>11</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.12">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.791922 40.914472 14.79191 40.914662 14.792147 40.914734 14.792272 40.914739
+                                14.792438 40.914757 14.792515 40.914753 14.792723 40.914749 14.79283 40.914749 14.79321
+                                40.914731 14.793506 40.914768 14.793543 40.914489 14.792968 40.914272 14.792855
+                                40.914235 14.791995 40.913932
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>12</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.13">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.771539 40.926554 14.771593 40.926275 14.771588 40.926135 14.771565 40.926
+                                14.771518 40.925892 14.7714 40.925694 14.770767 40.92481 14.770159 40.92389 14.769864
+                                40.92338 14.769668 40.923109 14.76958 40.922943 14.769527 40.922803 14.769492 40.92265
+                                14.769486 40.922487 14.769523 40.922339 14.769577 40.92224 14.769672 40.922163 14.769803
+                                40.922092 14.769922 40.922056 14.769982 40.922049 14.770171 40.922047 14.770331 40.92207
+                                14.770426 40.922093 14.770539 40.922125 14.770782 40.922229 14.771108 40.922437
+                                14.771274 40.922531 14.771375 40.922595 14.771452 40.922622 14.771529 40.922645
+                                14.771789 40.92264 14.772087 40.922619 14.772479 40.922565 14.772681 40.922539 14.772818
+                                40.922531 14.772907 40.922535 14.773043 40.922544 14.773168 40.922558 14.773275
+                                40.922572 14.773376 40.922603 14.773488 40.922648 14.773607 40.922721 14.77369 40.922775
+                                14.773867 40.92291 14.773986 40.92301 14.774092 40.923087 14.774252 40.923172 14.77446
+                                40.923227 14.774769 40.923228 14.774983 40.92321 14.775173 40.923197 14.775398 40.92317
+                                14.775696 40.923144 14.776058 40.923108 14.776895 40.923043 14.777151 40.923034
+                                14.777424 40.922999 14.777632 40.922994 14.77778 40.923004 14.777917 40.923013 14.778516
+                                40.923077 14.778689 40.923096 14.778813 40.923109 14.779015 40.923146 14.779193
+                                40.923169 14.779452 40.923197 14.779609 40.923214 14.779781 40.923228 14.780327
+                                40.923265 14.780671 40.923289 14.781117 40.923303
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>13</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.14">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.781117 40.923303 14.781247 40.923254 14.781426 40.923177 14.781646 40.923079
+                                14.781771 40.923011 14.781812 40.922993 14.782015 40.922881 14.782271 40.922697
+                                14.782485 40.92254 14.782693 40.922342 14.782783 40.922212 14.782843 40.922086 14.782909
+                                40.92191 14.782957 40.92168 14.782993 40.921464 14.783072 40.920852 14.783084 40.92078
+                                14.783103 40.92055 14.783176 40.919947 14.783207 40.919726 14.783243 40.919537 14.783303
+                                40.91928 14.783393 40.918938 14.783423 40.918763 14.783442 40.918614 14.78346 40.91852
+                                14.78349 40.918403 14.783574 40.918168 14.7836 40.918093 14.783694 40.917885 14.783729
+                                40.917817 14.78398 40.917577 14.784057 40.917507 14.78414 40.917431 14.784313 40.91731
+                                14.784581 40.917089 14.784676 40.917017 14.784884 40.916878 14.785039 40.916784
+                                14.785182 40.916685 14.785438 40.916532
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>14</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.15">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.794048 40.914251 14.794399 40.914319 14.794649 40.914368</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>15</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.16">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.799132 40.896289 14.799089 40.896712 14.799088 40.896897 14.799105 40.897109
+                                14.799099 40.897208 14.79908 40.897595 14.799085 40.897811 14.799091 40.897951 14.799073
+                                40.898068 14.799037 40.898176 14.798971 40.89832 14.798876 40.898473 14.798739 40.898644
+                                14.798596 40.898851 14.798494 40.899107 14.798458 40.899247 14.79838 40.899585 14.798296
+                                40.899895 14.798265 40.900116 14.798187 40.900498 14.798073 40.900908 14.797995
+                                40.901246 14.797989 40.901297 14.797946 40.901665 14.797957 40.901849 14.797986
+                                40.902043 14.798044 40.902439 14.798085 40.902705 14.798132 40.902935 14.798173
+                                40.903007 14.798428 40.903242 14.7986 40.903368 14.798842 40.903563 14.798741 40.903837
+                                14.798627 40.904148 14.798489 40.904481 14.798441 40.904602 14.798352 40.904814 14.79825
+                                40.905075 14.798225 40.905584 14.798226 40.905626 14.798229 40.905844 14.798232
+                                40.905985 14.798239 40.906156 14.798234 40.906372 14.798139 40.906601 14.798013
+                                40.906858 14.797971 40.906993 14.797953 40.907101 14.797894 40.907203 14.797846
+                                40.907286 14.797691 40.90752 14.797577 40.907642 14.797536 40.907686
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>16</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.17">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.795488 40.915168 14.795434 40.915312</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>17</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.18">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.792064 40.916594 14.791767 40.916594 14.79153 40.916598 14.791298 40.91662
+                                14.790318 40.916694 14.789873 40.916746
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>18</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.19">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.790881 40.913187 14.790599 40.914283</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>19</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.20">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.795299 40.914595 14.794974 40.914451 14.794796 40.914396 14.794649
+                                40.914368
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>20</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.21">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.786562 40.916021 14.786696 40.916215 14.786727 40.916271 14.786959
+                                40.916657
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>21</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.22">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.762542 40.906561 14.762697 40.906583 14.763148 40.906548 14.763353 40.906523
+                                14.763646 40.906494 14.763811 40.906475 14.763888 40.906466 14.763966 40.906457
+                                14.764368 40.906411 14.764992 40.906331 14.765308 40.906295 14.765391 40.90625
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>47</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.23">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.802858 40.914911 14.802851 40.915109 14.802839 40.915181 14.802833 40.915302
+                                14.802821 40.915402 14.802785 40.915474 14.802737 40.915541 14.802683 40.915586
+                                14.802612 40.915626 14.802505 40.915671 14.802327 40.915743 14.802059 40.915851
+                                14.801661 40.916039 14.800668 40.916443 14.80049 40.91651 14.800377 40.916537 14.800288
+                                40.916541 14.800211 40.916536 14.800127 40.916518 14.800056 40.916496 14.799961
+                                40.916455 14.79989 40.916428 14.79973 40.916355 14.799564 40.916288 14.799392 40.916211
+                                14.799208 40.916143 14.799137 40.91612 14.799012 40.916111 14.798792 40.916187 14.798727
+                                40.916219 14.798424 40.916353 14.79617 40.9173 14.795505 40.917578 14.795011 40.917784
+                                14.794916 40.917824 14.794714 40.9179 14.794607 40.917945 14.794542 40.917972 14.794464
+                                40.918004 14.794351 40.91804 14.794268 40.918066 14.794149 40.918075 14.793906 40.918075
+                                14.793829 40.918069 14.793538 40.918047 14.793289 40.918029 14.793128 40.918019
+                                14.792576 40.917958 14.792173 40.917914 14.791823 40.917864 14.791644 40.917823
+                                14.791472 40.917796 14.791351 40.917733 14.791099 40.917601 14.790969 40.91752 14.790737
+                                40.917362 14.790358 40.917101 14.79028 40.917033 14.790123 40.916921 14.790077 40.916888
+                                14.789873 40.916746 14.789541 40.916513 14.789328 40.916341 14.788924 40.916091 14.78851
+                                40.915858 14.788201 40.915695 14.787971 40.91547
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>22</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.24">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.792682 40.912562 14.792754 40.91251 14.792819 40.912483 14.792908 40.912479
+                                14.792991 40.912484 14.793139 40.912515
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>23</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.25">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.793139 40.912515 14.793039 40.912353 14.792897 40.912209</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>24</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.26">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.793428 40.913169 14.793299 40.912795 14.793228 40.912669 14.793139
+                                40.912515
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>25</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.27">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.791472 40.917796 14.791693 40.917458 14.791843 40.917116 14.792064
+                                40.916594
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>26</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.28">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.799137 40.91612 14.799049 40.915917</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>27</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.29">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.799153 40.914909 14.799134 40.915269 14.799121 40.915526 14.799049
+                                40.915917
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>28</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.30">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.799049 40.915917 14.799012 40.916111</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>29</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.31">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.795488 40.915168 14.795536 40.915092 14.795596 40.915024 14.795625 40.914993
+                                14.795852 40.91484 14.796143 40.914701 14.796321 40.91462 14.796398 40.914589 14.796541
+                                40.914535 14.796767 40.914459 14.79688 40.914423 14.796993 40.9144 14.797135 40.914383
+                                14.797213 40.914369 14.797314 40.914365 14.797432 40.91437 14.797587 40.914379 14.797765
+                                40.914411 14.797925 40.914456 14.798008 40.914479 14.798168 40.914538 14.798263
+                                40.914574 14.798423 40.914642 14.798886 40.914845 14.799153 40.914909 14.799194
+                                40.914909 14.79923 40.914904 14.799313 40.914904 14.799449 40.914909 14.799829 40.914923
+                                14.800358 40.914915 14.801278 40.914917 14.802531 40.914919 14.802691 40.914915
+                                14.802858 40.914911
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>30</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.32">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.78851 40.915858 14.787939 40.91619 14.787879 40.916222 14.787576 40.91637
+                                14.787314 40.916504 14.787225 40.916549 14.787148 40.916585 14.786959 40.916657
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>31</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.33">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.794048 40.914251 14.793543 40.914489</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>32</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.34">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.820547 40.923141 14.820125 40.921985 14.820054 40.921821 14.820031 40.92176
+                                14.820007 40.921688 14.819934 40.921546 14.819804 40.921253 14.819609 40.920874
+                                14.819497 40.920649 14.819414 40.9205 14.819278 40.920297 14.819212 40.920214 14.819091
+                                40.920062 14.818986 40.919912 14.818792 40.919716 14.817632 40.918373 14.817584
+                                40.918318 14.816952 40.917587 14.816478 40.917037 14.816152 40.916761 14.815963
+                                40.916594 14.814964 40.91581 14.814658 40.91555 14.8145 40.915445 14.814405 40.915385
+                                14.814342 40.915357 14.814233 40.915308 14.814126 40.915263 14.814043 40.915235 14.8139
+                                40.915222 14.813782 40.915212 14.813544 40.915208 14.813028 40.915198 14.812202
+                                40.915183 14.810694 40.915158 14.810148 40.915139 14.81 40.91513 14.809305 40.915106
+                                14.80924 40.915106 14.808504 40.915073 14.804283 40.914927 14.803238 40.914898 14.802858
+                                40.914911
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>33</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.35">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.793128 40.918019 14.792987 40.91774 14.79226 40.916585</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>34</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.36">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.784884 40.916878 14.784938 40.916779 14.785051 40.916671 14.785117 40.916626
+                                14.78523 40.916564 14.785295 40.916528 14.785325 40.916465 14.785304 40.916367 14.785231
+                                40.916109 14.78509 40.915721
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>35</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.37">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.791897 40.914747 14.79191 40.914662</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>36</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.38">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.791897 40.914747 14.791827 40.914875 14.791832 40.914927 14.791884 40.915274
+                                14.791983 40.915752 14.791989 40.915864 14.792012 40.916117 14.792064 40.916594 14.79226
+                                40.916585
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>37</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.39">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.79226 40.916585 14.792178 40.916103 14.792143 40.915856 14.792138 40.915734
+                                14.792068 40.915279 14.792004 40.914937 14.791995 40.914875 14.791897 40.914747
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>38</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.40">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.790881 40.913187 14.791166 40.913233 14.791326 40.913269</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>39</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.41">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.786421 40.915255 14.786249 40.915241 14.785679 40.915303 14.785471 40.915316
+                                14.785257 40.915402 14.785198 40.915446 14.78515 40.915505 14.78512 40.915586 14.78509
+                                40.915721
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>40</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.42">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.785231 40.916109 14.785375 40.916278 14.785438 40.91633 14.785521 40.916375
+                                14.785551 40.916389 14.785592 40.916407 14.785696 40.916429
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>41</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.43">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.785438 40.916532 14.785696 40.916429</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>42</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.44">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.785696 40.916429 14.785795 40.916375 14.786086 40.916227 14.786562
+                                40.916021
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>43</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.45">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.768225 40.906167 14.767798 40.906067 14.767353 40.906039 14.767032 40.906043
+                                14.766896 40.906052 14.766629 40.906071 14.766528 40.906078 14.766017 40.906135
+                                14.765749 40.906184
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>44</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.46">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.768225 40.906167 14.768486 40.90623 14.768765 40.906317 14.769032 40.906412
+                                14.769275 40.906511 14.769494 40.906611 14.76969 40.906688 14.769974 40.90681 14.770241
+                                40.906914 14.770484 40.907014 14.770858 40.907109 14.771362 40.907223 14.772098
+                                40.907346 14.774358 40.907706 14.774982 40.907793 14.775777 40.907862 14.776376
+                                40.907876 14.776946 40.907864 14.777516 40.907825 14.777784 40.907798 14.778651 40.90771
+                                14.779809 40.907577 14.78013 40.907528 14.780361 40.907501 14.780581 40.907461 14.780741
+                                40.907439 14.781145 40.907372 14.781585 40.907287 14.781941 40.907207 14.782221
+                                40.907131 14.782678 40.906974 14.783451 40.90666 14.783808 40.90649 14.784272 40.906211
+                                14.784649 40.90598 14.78495 40.905789 14.786836 40.904491 14.787276 40.904226 14.787615
+                                40.904006 14.788537 40.903472 14.789358 40.903073 14.789955 40.902775 14.79016 40.902673
+                                14.79066 40.902422 14.791011 40.902238 14.791272 40.902081 14.792093 40.901546 14.792301
+                                40.901411 14.792676 40.901196 14.793075 40.900949 14.793794 40.900477 14.794401 40.90014
+                                14.794793 40.899979 14.795054 40.899912 14.795108 40.899903 14.795203 40.899881
+                                14.795309 40.899853 14.795749 40.899751 14.79588 40.89972 14.796361 40.899685 14.796464
+                                40.89968 14.796901 40.899663 14.797156 40.899672 14.797447 40.899705 14.798296 40.899895
+                                14.798764 40.900022 14.799274 40.90023 14.799855 40.900465 14.80046 40.900741 14.800958
+                                40.900922 14.801114 40.900986 14.801557 40.901169 14.801838 40.901284 14.802086
+                                40.901394 14.803027 40.90179 14.803383 40.901936 14.803885 40.90214 14.804314 40.902315
+                                14.805274 40.902749 14.805523 40.902867 14.805831 40.902984 14.806223 40.903161
+                                14.806478 40.903283 14.807207 40.90373 14.80752 40.903974 14.807955 40.90435 14.808042
+                                40.904425 14.808231 40.904619 14.808355 40.90475 14.808514 40.904929 14.80884 40.905318
+                                14.808905 40.905422
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>45</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.148">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.047078 41.027954 15.047479 41.027368 15.047699 41.027062 15.047771 41.026956
+                                15.047848 41.026841 15.048136 41.026462
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2716</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.47">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.762542 40.906561 14.762644 40.906493 14.763127 40.906442 14.763435 40.906407
+                                14.763732 40.906375 14.76391 40.906358 14.764343 40.906317 14.764957 40.906255 14.765308
+                                40.906222 14.765391 40.90625
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>46</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.48">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.749836 40.907307 14.749942 40.907319 14.750002 40.907326 14.750138 40.907341
+                                14.750254 40.907338 14.750345 40.907337 14.750654 40.907337 14.750826 40.907333
+                                14.751365 40.907322 14.751697 40.907314 14.752084 40.907316 14.7524 40.907319 14.75272
+                                40.907308 14.753302 40.907289 14.753421 40.907285 14.753902 40.907299 14.753993
+                                40.907304 14.754216 40.907304 14.754297 40.907304 14.754567 40.907302 14.754729
+                                40.907299 14.755196 40.907291 14.755273 40.907288 14.755558 40.907276 14.755608
+                                40.907274 14.755984 40.907269 14.756428 40.907248 14.756532 40.907233 14.756617
+                                40.907222 14.756853 40.907184 14.757187 40.907141 14.757398 40.907114 14.757542
+                                40.907095 14.758124 40.907033 14.758254 40.907017 14.758902 40.906938 14.758961
+                                40.906931 14.759906 40.906834 14.760155 40.906808 14.761319 40.906687 14.762542
+                                40.906561
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>48</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.49">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.765391 40.90625 14.765749 40.906184</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>49</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.50">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.751245 40.912694 14.751583 40.912951 14.751802 40.913087 14.751909 40.913148
+                                14.752015 40.913202 14.752199 40.913277 14.752736 40.913427 14.752819 40.913447
+                                14.752967 40.913486 14.754978 40.914035
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>50</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.51">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.772061 40.937176 14.772114 40.93714 14.77218 40.937041</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>51</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.52">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.781667 40.9672 14.781513 40.967029 14.781324 40.966871 14.781127 40.96676
+                                14.780962 40.966672 14.780766 40.966608 14.78054 40.96654 14.779357 40.966299 14.779293
+                                40.966286 14.779254 40.966274 14.779204 40.966259 14.77905 40.966168 14.778908 40.96606
+                                14.778754 40.96592 14.778659 40.965839 14.778544 40.965766 14.778519 40.965757 14.778428
+                                40.965721 14.778279 40.96568 14.778155 40.965648 14.77797 40.965621 14.777834 40.965614
+                                14.777549 40.965625 14.777358 40.965643 14.777115 40.96571 14.776974 40.965755 14.776823
+                                40.965806 14.776648 40.965862 14.776555 40.965886 14.776502 40.965897 14.776422
+                                40.965902 14.776318 40.965904 14.776285 40.965902 14.776196 40.965892 14.776074
+                                40.965861 14.775979 40.965829 14.775798 40.965714 14.775714 40.965655 14.77565 40.96561
+                                14.775383 40.965456 14.775268 40.965397 14.775164 40.965363 14.774864 40.965309
+                                14.774686 40.965268 14.774508 40.965209 14.774434 40.965175 14.774259 40.965087
+                                14.774205 40.965051 14.774057 40.964911 14.773968 40.964803 14.773905 40.964692 14.77388
+                                40.964568 14.773845 40.964361 14.773774 40.964185 14.773686 40.96396 14.773633 40.963811
+                                14.773545 40.963604 14.773462 40.963369 14.773421 40.963207 14.773433 40.963097
+                                14.773473 40.962964 14.773529 40.962843 14.773571 40.962748 14.773601 40.96268 14.773638
+                                40.962536 14.773703 40.962379 14.773733 40.96228 14.773754 40.962215 14.773772 40.962149
+                                14.77378 40.962075 14.773776 40.961996 14.773753 40.961899 14.773676 40.961735 14.773637
+                                40.961683 14.773605 40.961645 14.773507 40.961563 14.773436 40.961525 14.773291
+                                40.961459 14.773101 40.9614 14.772911 40.961324 14.772849 40.961275 14.772703 40.961161
+                                14.772585 40.961066 14.772496 40.960976 14.772413 40.960895 14.772182 40.960633 14.77191
+                                40.960353 14.771667 40.960177 14.771492 40.960083 14.771399 40.96003 14.771281 40.959981
+                                14.770973 40.959865 14.77083 40.959829 14.7707 40.959801 14.770617 40.95977 14.770462
+                                40.959693 14.77035 40.959611 14.770243 40.959512 14.770087 40.959316 14.770078 40.959305
+                                14.769974 40.959179 14.769806 40.958975 14.769741 40.95891 14.769592 40.958758 14.769576
+                                40.958744 14.769267 40.95847 14.769065 40.95833 14.768742 40.958131 14.76869 40.958097
+                                14.768591 40.958031 14.768315 40.957869 14.768253 40.957832 14.768086 40.957728
+                                14.768022 40.957688 14.767751 40.957559 14.767737 40.957552 14.767547 40.957453
+                                14.767411 40.957385 14.767344 40.957316 14.767292 40.957263 14.767073 40.957037
+                                14.766937 40.95688 14.766878 40.956812 14.766801 40.956699 14.766735 40.956573 14.76669
+                                40.956495 14.766683 40.956441 14.766678 40.956384 14.766684 40.956312 14.766708
+                                40.956122 14.766731 40.956003 14.766744 40.955933 14.766799 40.955677 14.766866
+                                40.955303 14.766934 40.955068 14.766956 40.954994 14.766998 40.954853 14.767286
+                                40.954016 14.767472 40.953543 14.767554 40.953358 14.767573 40.953314 14.767646 40.95312
+                                14.767652 40.95299 14.767605 40.952778 14.767552 40.952616 14.767434 40.952417 14.767322
+                                40.9523 14.767108 40.952083 14.766962 40.951936 14.766937 40.951912 14.766897 40.951866
+                                14.766653 40.951587 14.7666 40.951501 14.766598 40.951485 14.766576 40.951366 14.766577
+                                40.951231 14.766589 40.951145 14.766613 40.951069 14.766649 40.950961 14.766679
+                                40.950911 14.766727 40.950848 14.766789 40.950782 14.766798 40.950772 14.766882
+                                40.950686 14.767049 40.950561 14.76715 40.950489 14.767293 40.950386 14.767358 40.950332
+                                14.76743 40.950264 14.767489 40.950192 14.767508 40.950107 14.767467 40.94994 14.767319
+                                40.949746 14.767177 40.949593 14.767029 40.949444 14.766993 40.949401 14.766904
+                                40.949295 14.76684 40.949164 14.76681 40.949065 14.766805 40.948979 14.766841 40.94888
+                                14.766894 40.948799 14.766942 40.948723 14.767043 40.948642 14.767115 40.948606
+                                14.767204 40.948561 14.767311 40.948521 14.768488 40.948308 14.768646 40.948279
+                                14.768758 40.948252 14.768842 40.948227 14.768922 40.948195 14.769023 40.948148
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>52</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.53">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.772061 40.937176 14.772025 40.937198 14.771924 40.937257 14.771351 40.937466
+                                14.7712 40.937521 14.770919 40.937624 14.77033 40.937884 14.770045 40.937987 14.769688
+                                40.938085 14.769414 40.938161 14.769229 40.938229 14.76917 40.938251 14.76898 40.938354
+                                14.768814 40.938448 14.768786 40.938468 14.768563 40.938628 14.768426 40.938727
+                                14.768224 40.938871 14.767337 40.939477 14.767314 40.939491 14.767081 40.939638
+                                14.766748 40.939813 14.766456 40.939943 14.766115 40.94007 14.766105 40.940073 14.765861
+                                40.940172 14.765713 40.940221 14.76563 40.940242 14.765517 40.94027 14.765142 40.940333
+                                14.764863 40.940391 14.764661 40.940444 14.764631 40.940457 14.764548 40.940494 14.76447
+                                40.940548 14.764399 40.940624 14.764363 40.9407 14.764344 40.940813 14.764356 40.940903
+                                14.764391 40.940989 14.764486 40.941102 14.76464 40.941232 14.764776 40.941327 14.764889
+                                40.941427 14.765019 40.94153 14.765068 40.94156 14.765191 40.941634 14.765361 40.941706
+                                14.765559 40.941766 14.765713 40.941811 14.765867 40.941852 14.766057 40.941902
+                                14.766205 40.941952 14.766336 40.941997 14.766466 40.942078 14.766573 40.942169
+                                14.766644 40.942245 14.766672 40.942291 14.766697 40.942331 14.766762 40.942484
+                                14.766797 40.942615 14.766826 40.942746 14.766857 40.942876 14.766897 40.943048
+                                14.766926 40.943223 14.766961 40.943408 14.767019 40.943588 14.76712 40.943818 14.767261
+                                40.944116 14.767348 40.944278 14.767456 40.944481 14.767538 40.944661 14.767591
+                                40.944806 14.767609 40.944932 14.767597 40.945004 14.767567 40.945067 14.767495
+                                40.945157 14.767412 40.945233 14.767293 40.945323 14.767168 40.945399 14.767031
+                                40.945453 14.766888 40.945484 14.766716 40.945511 14.766454 40.945582 14.766282
+                                40.945636 14.766166 40.945693 14.766127 40.945712 14.766044 40.945775 14.765972
+                                40.945829 14.765877 40.945892 14.76577 40.945946 14.765657 40.945968 14.765544 40.945981
+                                14.765395 40.946013 14.765294 40.946039 14.765211 40.94608 14.765151 40.946134 14.765098
+                                40.946192 14.765068 40.946246 14.76505 40.946309 14.76505 40.946372 14.765067 40.946449
+                                14.765096 40.946553 14.765114 40.946607 14.765132 40.946647 14.765173 40.946697
+                                14.765215 40.946738 14.76528 40.946778 14.765369 40.946814 14.76547 40.946842 14.765594
+                                40.946851 14.765743 40.946847 14.765969 40.946838 14.766058 40.946847 14.766159 40.94687
+                                14.766337 40.946934 14.766675 40.947069 14.767362 40.947386 14.767629 40.947481 14.76776
+                                40.947508 14.767891 40.947527 14.768045 40.947536 14.768247 40.947523 14.768408
+                                40.947496 14.768651 40.947434 14.76877 40.947425 14.768853 40.94743 14.768943 40.947452
+                                14.769008 40.947493 14.769049 40.947534 14.769102 40.947628 14.769128 40.947726 14.76914
+                                40.947785 14.769148 40.947838 14.769149 40.947845 14.769143 40.947939 14.769113
+                                40.948025 14.769083 40.948079 14.769023 40.948148
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>53</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.54">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.830356 40.956118 14.830314 40.95604 14.830173 40.955742 14.82993 40.955242
+                                14.829593 40.954607 14.829281 40.953987 14.829234 40.953895 14.82915 40.953728 14.828388
+                                40.952119 14.828317 40.951911 14.828199 40.951569 14.82816 40.951451 14.828105 40.951285
+                                14.828046 40.951114 14.827916 40.950825 14.827839 40.950528 14.827458 40.949394
+                                14.827362 40.94905 14.827114 40.948311 14.826991 40.947941 14.826904 40.947686 14.826855
+                                40.94754 14.82677 40.947275 14.826672 40.946968 14.826556 40.946556 14.826438 40.946141
+                                14.826431 40.946116 14.826321 40.945786 14.826213 40.945459 14.826097 40.945185
+                                14.825925 40.94454 14.825907 40.944445
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>54</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.55">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.828173 40.938453 14.827876 40.938507 14.827663 40.938542 14.827306 40.938578
+                                14.826807 40.938613 14.82613 40.938594 14.826035 40.938612
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>55</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.56">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.826093 40.936734 14.825967 40.93727 14.82588 40.938594 14.825827 40.940792
+                                14.82613 40.938594 14.826104 40.93704
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>56</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.57">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.818968 40.912234 14.819109 40.912208 14.819604 40.912271 14.819881 40.91231
+                                14.81998 40.912333 14.820298 40.912408 14.821053 40.912706 14.821397 40.912837
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>104</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.58">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.825907 40.944445 14.825871 40.944377 14.825824 40.944156 14.825771 40.94394
+                                14.825778 40.943791 14.825766 40.943499 14.825761 40.943314 14.825762 40.943129
+                                14.825815 40.940904 14.825827 40.940792 14.826035 40.938612 14.826074 40.937432
+                                14.826104 40.93704 14.826093 40.936734 14.826082 40.936432 14.826053 40.93632 14.826017
+                                40.936216 14.82538 40.934584 14.82438 40.932253 14.824046 40.931475 14.823828 40.930889
+                                14.82361 40.930308 14.822453 40.92763 14.821857 40.926242
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>57</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.59">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.82588 40.938594 14.826035 40.938612</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>58</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.60">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.830077 40.937447 14.830155 40.937082 14.830209 40.936826 14.830269 40.936619
+                                14.830317 40.936466 14.830341 40.936375 14.830413 40.936114
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>59</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.61">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.830806 40.935439 14.830997 40.935106 14.831057 40.935007 14.831105 40.934935
+                                14.83126 40.934661
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>60</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.62">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.830413 40.936114 14.830639 40.935682 14.830806 40.935439</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>61</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.63">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.831494 40.935245 14.831519 40.935066 14.831525 40.934856 14.831519 40.934566
+                                14.83152 40.934459 14.831534 40.934406 14.831587 40.934301 14.8317 40.934261 14.831849
+                                40.934252 14.831985 40.934275 14.832074 40.934324 14.83214 40.934383 14.832186 40.934503
+                                14.832195 40.934561 14.832173 40.934677 14.832158 40.934768 14.832148 40.934813
+                                14.832099 40.934955 14.832055 40.935163 14.832048 40.935253 14.832057 40.935397
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>62</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.64">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.831742 40.936657 14.831854 40.936716 14.832003 40.93677 14.832092
+                                40.936792
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>63</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.65">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.832092 40.936792 14.832288 40.936766 14.832353 40.93673 14.832431 40.936644
+                                14.832466 40.936568 14.832502 40.936491 14.832556 40.936361 14.83258 40.936271 14.83261
+                                40.936145 14.832611 40.936019 14.832605 40.935906 14.832599 40.935829 14.832581
+                                40.935762 14.832558 40.935672 14.832522 40.935599 14.832457 40.935541 14.832368 40.9355
+                                14.832226 40.935495 14.832101 40.935527 14.83197 40.935572
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>64</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.66">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.832092 40.936792 14.832222 40.936878 14.832287 40.936959 14.832317 40.937076
+                                14.83231 40.937203
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>65</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.67">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.830077 40.937447 14.830405 40.937125 14.830434 40.937096 14.830857
+                                40.936687
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>66</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.68">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.830077 40.937447 14.830439 40.937285 14.83063 40.937232 14.830778 40.937218
+                                14.830944 40.937228 14.831087 40.937246 14.83136 40.937336 14.831514 40.937431 14.831627
+                                40.937535 14.831786 40.937774
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>67</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.69">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.828173 40.938453 14.828346 40.938404 14.828833 40.938238 14.828856 40.938228
+                                14.828977 40.938174 14.829121 40.938109 14.829154 40.938094 14.829357 40.937987
+                                14.829535 40.937865 14.829761 40.937694 14.82994 40.937546 14.830077 40.937447
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>68</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.70">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.832188 40.933832 14.832242 40.934047 14.832265 40.934113 14.832317 40.934559
+                                14.832494 40.934946 14.8326 40.935446 14.832653 40.935721 14.83267 40.935911 14.832682
+                                40.936037 14.832645 40.936383 14.832603 40.936523 14.832549 40.936662 14.832502
+                                40.936811 14.832436 40.936969 14.83231 40.937203 14.831988 40.938107
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>69</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.71">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.83111 40.933154 14.831178 40.93322 14.831339 40.933859 14.831445 40.934062
+                                14.831493 40.934116 14.831611 40.934175 14.831754 40.934193 14.831873 40.934184
+                                14.831986 40.934139 14.832077 40.934069 14.832133 40.934003 14.832148 40.933964
+                                14.832188 40.933832
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>70</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.72">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.834735 40.949603 14.834982 40.950313</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>71</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.73">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.834735 40.949603 14.834755 40.949513 14.83471 40.949358 14.834609 40.949092
+                                14.834315 40.94815 14.834144 40.947601
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>72</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.74">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.83419 40.948171 14.834485 40.949011 14.834585 40.949286 14.834652 40.949518
+                                14.834735 40.949603
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>73</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.75">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.834144 40.947601 14.834137 40.947462 14.834129 40.947321 14.833846 40.946778
+                                14.83371 40.946492
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>74</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.76">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.83419 40.948171 14.834013 40.947668 14.833889 40.947321 14.833695 40.946818
+                                14.833588 40.94651
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>75</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.77">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.830679 40.931186 14.830668 40.93112 14.830593 40.930642 14.830552 40.930431
+                                14.830517 40.930257 14.830487 40.930106 14.83034 40.929543 14.830212 40.929093 14.830211
+                                40.929088 14.830093 40.928718 14.830022 40.928538 14.829863 40.928128 14.829845
+                                40.928092 14.829828 40.928056 14.829504 40.927451 14.829473 40.927393 14.829331
+                                40.927141 14.829245 40.927015 14.829238 40.927007 14.829223 40.926987 14.829189
+                                40.926933 14.829133 40.926865 14.829065 40.926789 14.828467 40.926045 14.828372
+                                40.925946 14.828295 40.925869 14.828259 40.925828 14.827845 40.925436 14.827579
+                                40.925188 14.827487 40.925103 14.827418 40.925038 14.827104 40.924746 14.827009
+                                40.924643 14.826644 40.924249 14.826465 40.924056 14.826293 40.923853 14.826193 40.92374
+                                14.826098 40.92356 14.826015 40.92337 14.825927 40.922978 14.825904 40.922839 14.825875
+                                40.922532 14.825893 40.922298 14.825918 40.922087 14.826062 40.921335 14.826236
+                                40.920677 14.826333 40.920092 14.826339 40.919808 14.82634 40.919596 14.826317 40.919385
+                                14.8263 40.919155 14.82629 40.919116 14.826164 40.91861 14.826023 40.918204 14.825893
+                                40.917848 14.825814 40.917578 14.825716 40.917313 14.825609 40.917059 14.825563
+                                40.916934 14.825387 40.916554 14.825174 40.916177 14.825065 40.915999 14.824921
+                                40.915798 14.824785 40.915644 14.824717 40.91557 14.824607 40.915451 14.824463 40.915295
+                                14.824407 40.915238 14.824365 40.915199 14.824267 40.915109 14.824143 40.914995 14.82406
+                                40.914918 14.823915 40.914794 14.823859 40.914728 14.823823 40.914692 14.823779
+                                40.914647 14.823755 40.91462 14.823524 40.91441 14.823347 40.914243 14.823225 40.914128
+                                14.822994 40.913916 14.822923 40.913857 14.822597 40.913612 14.822372 40.913454
+                                14.822277 40.913393 14.822034 40.91323 14.82175 40.913077 14.821548 40.912982 14.821328
+                                40.912887
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>76</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.78">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.830802 40.931165 14.8308 40.931143 14.830793 40.931106 14.830659 40.930404
+                                14.830626 40.930248 14.830606 40.930151 14.830577 40.929899 14.830536 40.92971 14.830389
+                                40.929133 14.830359 40.92905 14.83033 40.928971 14.830289 40.928818 14.830159 40.928484
+                                14.830076 40.928281 14.83 40.92807 14.829633 40.927407 14.82945 40.927118 14.82932
+                                40.92694 14.829166 40.926708 14.828594 40.926005 14.828568 40.925973 14.828497 40.925892
+                                14.828473 40.925869 14.828438 40.925833 14.828236 40.925648 14.827699 40.92511 14.827691
+                                40.925102 14.827623 40.925044 14.827551 40.924979 14.827223 40.924683 14.827083
+                                40.924542 14.827075 40.924534 14.826791 40.924259 14.826732 40.924189 14.826637
+                                40.924074 14.826418 40.923799 14.826335 40.9237 14.826264 40.9236 14.826229 40.92351
+                                14.82614 40.923303 14.826058 40.923015 14.826011 40.922722 14.826018 40.92238 14.826054
+                                40.922145 14.826096 40.921875 14.826156 40.921592 14.826211 40.9212 14.826349 40.920718
+                                14.826462 40.920155 14.826482 40.919878 14.826482 40.919704 14.826483 40.919586
+                                14.826467 40.919413 14.826437 40.919176 14.826416 40.919069 14.826397 40.918972
+                                14.826335 40.918725 14.826262 40.918483 14.826135 40.918055 14.825975 40.91758 14.825898
+                                40.917374 14.825778 40.917106 14.825657 40.916843 14.825552 40.916605 14.825307
+                                40.916123 14.825038 40.915757 14.824889 40.915585 14.824833 40.915525 14.824788
+                                40.915478 14.824739 40.915426 14.824549 40.915225 14.824523 40.915194 14.824469
+                                40.915145 14.824358 40.915043 14.824069 40.91478 14.824007 40.914719 14.823942 40.914661
+                                14.823915 40.914635 14.823821 40.914546 14.823468 40.914211 14.823373 40.914124 14.82332
+                                40.91407 14.823083 40.913854 14.823 40.913785
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>77</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.431">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.18997 41.049642 15.189946 41.049611 15.18984 41.049489 15.189785 41.049426
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2714</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.79">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.832317 40.934559 14.83227 40.934833 14.832261 40.934865 14.832249 40.934922
+                                14.832216 40.935035 14.832197 40.9351 14.832149 40.935223 14.832057 40.935397 14.832025
+                                40.935462 14.83197 40.935572 14.831607 40.935936 14.831464 40.936089 14.831232 40.936341
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>78</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.80">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.834501 40.94738 14.83437 40.947407 14.834269 40.947443 14.834215 40.947484
+                                14.834144 40.947601
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>79</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.81">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.808905 40.905422 14.809219 40.905945 14.809425 40.90631 14.809732 40.907022
+                                14.809881 40.907427
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>105</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.82">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.831232 40.936341 14.831065 40.936404 14.830893 40.936444 14.830786 40.936439
+                                14.830661 40.93639 14.830614 40.936353 14.830573 40.936286 14.830549 40.936205 14.830603
+                                40.935988 14.830639 40.935899 14.830764 40.935718 14.830859 40.935642 14.830949
+                                40.935611 14.831061 40.935602 14.83118 40.935616 14.831269 40.935647 14.831334 40.935697
+                                14.831441 40.935864
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>80</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.83">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.831232 40.936341 14.831011 40.936545 14.830857 40.936687 14.830815 40.936881
+                                14.83082 40.936984 14.830891 40.937088 14.830974 40.937147 14.831111 40.937201 14.831247
+                                40.937206 14.831354 40.937179 14.83145 40.937138 14.831521 40.937089 14.831557 40.93703
+                                14.831598 40.9369
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>81</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.84">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.85228 40.934083 14.852524 40.934028 14.853451 40.933808 14.853795
+                                40.933723
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>82</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.85">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.834982 40.950313 14.835123 40.95072 14.835358 40.951395 14.835452 40.951746
+                                14.835528 40.952165 14.835563 40.952543 14.835586 40.952872 14.835585 40.953417
+                                14.835553 40.954142 14.835496 40.955498 14.835465 40.956291 14.835388 40.95834 14.835345
+                                40.959135 14.835353 40.959486
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>83</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.86">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.832188 40.933832 14.832155 40.933621 14.832148 40.933514 14.832095 40.933153
+                                14.832078 40.932865 14.832126 40.932631 14.83219 40.932459 14.832312 40.932131 14.832332
+                                40.932089 14.832908 40.930884 14.833066 40.930586 14.833389 40.929978 14.833513
+                                40.929743 14.833636 40.929511 14.83369 40.929408 14.833959 40.928908 14.834128 40.928651
+                                14.834328 40.928346 14.83451 40.928189 14.834703 40.928009 14.834952 40.92783 14.835128
+                                40.927703 14.835209 40.927645 14.835494 40.927483 14.835958 40.92724 14.836196 40.927151
+                                14.836362 40.927097 14.836701 40.927012 14.837069 40.926945 14.837277 40.92693 14.837556
+                                40.926909 14.837931 40.926932 14.838221 40.926964 14.838773 40.927064 14.839254
+                                40.927186 14.839551 40.927295 14.839598 40.927313 14.839859 40.927426 14.840031
+                                40.927513 14.840135 40.927589 14.84064 40.927878 14.840711 40.927944 14.840893 40.928073
+                                14.841035 40.928184 14.841186 40.928311 14.8413 40.928431 14.841432 40.928562 14.841516
+                                40.928643 14.841557 40.928689 14.841774 40.928996 14.842342 40.929699 14.842721 40.93015
+                                14.843077 40.930539 14.843195 40.930669 14.843408 40.930902 14.843752 40.931278
+                                14.843918 40.931467 14.843925 40.931475 14.844214 40.931774 14.844878 40.932468 14.84555
+                                40.933058 14.84566 40.933154 14.845932 40.933366 14.846095 40.933449 14.846324 40.933587
+                                14.846591 40.933714 14.846723 40.933769 14.846844 40.933819 14.846894 40.93384 14.847202
+                                40.933967 14.847493 40.934062 14.847538 40.934078 14.847819 40.934175 14.847857
+                                40.934182 14.847922 40.934197 14.848377 40.934279 14.848958 40.934364 14.849001 40.93437
+                                14.849369 40.934403 14.849518 40.934416 14.849547 40.934416 14.850141 40.934421
+                                14.850819 40.934347 14.851115 40.934314 14.851468 40.934254 14.851716 40.934212 14.85228
+                                40.934083
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>84</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.87">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.830759 40.931726 14.830827 40.932124 14.830891 40.932505 14.830932 40.932746
+                                14.831007 40.933169 14.831212 40.934381 14.83126 40.934661
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>85</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.88">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.83111 40.933154 14.830997 40.932489 14.830922 40.932048 14.830875 40.931728
+                                14.830863 40.931674 14.830818 40.931284 14.830802 40.931165
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>86</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.89">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.830679 40.931186 14.830698 40.931308 14.830759 40.931726</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>87</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.90">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.83371 40.946492 14.833935 40.946841 14.833988 40.946909 14.834113 40.947017
+                                14.834299 40.947155 14.83437 40.947196 14.834394 40.947204 14.834614 40.947331 14.835201
+                                40.947692 14.835476 40.947859 14.835876 40.948131 14.835917 40.948229
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>88</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.91">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.835917 40.948229 14.8366 40.948658</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>89</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.92">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.835917 40.948229 14.835805 40.948216 14.835682 40.94813 14.835278 40.947859
+                                14.835052 40.947705 14.834835 40.947572 14.834762 40.94752 14.834702 40.947484 14.834637
+                                40.947453 14.834501 40.94738 14.834412 40.947344 14.834346 40.947331 14.834239 40.94733
+                                14.834129 40.947321 14.834058 40.947319 14.83402 40.947312 14.833981 40.947301 14.833954
+                                40.94728 14.83394 40.94726 14.833907 40.947193 14.833875 40.9471 14.833833 40.94701
+                                14.833786 40.946906 14.833673 40.946651 14.833668 40.946638 14.833588 40.94651
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>90</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.93">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.8366 40.948658 14.836802 40.948915 14.836879 40.949028 14.836926 40.949145
+                                14.836938 40.949262 14.836931 40.949348 14.836896 40.949442 14.836806 40.949559
+                                14.836687 40.949653 14.836515 40.94973 14.836277 40.949761 14.835927 40.949734 14.835487
+                                40.949616
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>91</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.94">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.8366 40.948658 14.836968 40.94887 14.83711 40.948969 14.837223 40.94906
+                                14.837294 40.949136
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>92</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.95">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.837294 40.949136 14.837389 40.949474 14.837388 40.949632 14.837364 40.949767
+                                14.837316 40.949907 14.837257 40.950006 14.837149 40.950118 14.837042 40.950208
+                                14.836893 40.950307 14.836727 40.950415 14.83659 40.950509 14.836304 40.950698 14.836155
+                                40.950851 14.836084 40.950968 14.836048 40.951184 14.836083 40.951369 14.836154
+                                40.951495
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>93</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.96">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.837294 40.949136 14.837389 40.949231 14.837543 40.949439 14.83762 40.949583
+                                14.837732 40.949894 14.837743 40.950096 14.837743 40.9502 14.837712 40.950831 14.837712
+                                40.95102 14.837717 40.951177 14.837952 40.952119
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>94</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.97">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.83371 40.946492 14.833684 40.946409 14.833611 40.946171 14.833566 40.946019
+                                14.833441 40.945771 14.833179 40.94501 14.833176 40.945 14.833023 40.944315 14.832871
+                                40.943347 14.83282 40.943082 14.832637 40.942143 14.832596 40.941932 14.832549 40.941477
+                                14.832379 40.940558 14.832221 40.939581 14.832157 40.939184 14.832087 40.938828
+                                14.832075 40.938745 14.832031 40.938426 14.831988 40.938107 14.831742 40.936657
+                                14.831607 40.935936 14.831578 40.935756 14.831494 40.935245 14.831373 40.934609
+                                14.831327 40.934367 14.83111 40.933154
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>95</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.98">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.833588 40.94651 14.83355 40.946417 14.833472 40.946192 14.833423 40.946032
+                                14.833051 40.945005 14.832916 40.944347 14.832782 40.943549 14.832716 40.943097
+                                14.832694 40.942946 14.832546 40.942151 14.83229 40.94077 14.832282 40.94072 14.832208
+                                40.940216 14.832062 40.939346 14.831959 40.93876 14.831931 40.938601 14.831902 40.938433
+                                14.831786 40.937774 14.831598 40.9369 14.831561 40.936675 14.831464 40.936089 14.831441
+                                40.935864 14.831358 40.935244 14.831324 40.934994 14.83126 40.934661
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>96</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.99">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.820547 40.923141 14.821125 40.924394 14.821227 40.924652 14.821314 40.924874
+                                14.821804 40.926143 14.821857 40.926242
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>97</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.100">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.799855 40.900465 14.799269 40.900041 14.799044 40.899878 14.798884 40.899775
+                                14.798712 40.899689 14.798575 40.899634 14.79838 40.899585 14.79816 40.899535 14.797976
+                                40.89953 14.797751 40.899516 14.797347 40.899497 14.79686 40.899541 14.796755 40.899558
+                                14.79668 40.899576 14.796622 40.899595 14.796555 40.899625 14.796464 40.89968
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>98</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.101">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.796361 40.899685 14.796687 40.899753 14.79693 40.899798 14.797322 40.899866
+                                14.797648 40.899944 14.798028 40.900048 14.798265 40.900116 14.798467 40.900166
+                                14.798805 40.900229 14.799072 40.900306 14.799392 40.90041 14.799606 40.900478 14.799843
+                                40.900551 14.80046 40.900741
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>99</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.102">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.821053 40.912706 14.821295 40.912704 14.821392 40.912704 14.821458 40.912707
+                                14.821526 40.912712 14.821609 40.912726 14.821682 40.912747 14.821761 40.91279 14.821827
+                                40.912829 14.821889 40.912866 14.821932 40.912897 14.82229 40.91313 14.822344 40.913159
+                                14.822446 40.913169 14.822523 40.91318 14.82259 40.913186 14.822701 40.913204
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>100</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.103">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.821137 40.913451 14.821129 40.913522 14.821131 40.913562 14.821137 40.913648
+                                14.821222 40.913708 14.821293 40.913744 14.821333 40.913765 14.82137 40.913779 14.82146
+                                40.91381
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>101</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.104">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.824435 40.912562 14.82377 40.912863 14.823481 40.912981 14.822794 40.913268
+                                14.822536 40.913388 14.822479 40.913411 14.822372 40.913454 14.821655 40.913735 14.82146
+                                40.91381
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>102</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.105">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.81136 40.909654 14.811523 40.909795 14.811854 40.91006 14.812003 40.910179
+                                14.812388 40.910427 14.812678 40.910635 14.812689 40.910641
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>103</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.106">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.815034 40.911612 14.815394 40.911698</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>106</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.107">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.821008 40.91275 14.821008 40.912767 14.82101 40.912807 14.821011 40.912856
+                                14.821021 40.912944 14.821025 40.91298 14.82103 40.913015 14.821043 40.913052
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>107</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.108">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.823 40.913785 14.822805 40.913637 14.822714 40.913562 14.822592 40.913481
+                                14.822479 40.913411 14.822368 40.913349 14.822028 40.913136 14.821761 40.913 14.821397
+                                40.912837
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>108</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.109">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.821328 40.912887 14.821008 40.91275 14.820295 40.91251 14.82021 40.912491
+                                14.82004 40.912452 14.819814 40.912407 14.819628 40.91238 14.81907 40.912304 14.818968
+                                40.912234 14.818707 40.912204 14.817034 40.911955 14.816754 40.911914 14.815945
+                                40.911794 14.815845 40.911779 14.815448 40.911711 14.815394 40.911698
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>109</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.110">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.809881 40.907427 14.809991 40.907725 14.810694 40.908951 14.811043 40.909344
+                                14.81128 40.909583 14.81136 40.909654
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>110</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.111">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.815034 40.911612 14.814919 40.911584 14.814843 40.911566 14.814445 40.911439
+                                14.814119 40.911326 14.813609 40.911122 14.813336 40.910992 14.813063 40.910874
+                                14.812826 40.910729 14.812689 40.910641
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>111</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.112">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.824435 40.912562 14.82385 40.912962 14.82362 40.913119 14.823135 40.913458
+                                14.823069 40.913562 14.823033 40.913645 14.823 40.913785
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>112</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.113">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.821328 40.912887 14.821261 40.912884 14.821234 40.912892 14.821193 40.91291
+                                14.821166 40.912927 14.821072 40.91302 14.821043 40.913052 14.821033 40.913142 14.821034
+                                40.913166 14.821045 40.913233 14.821137 40.913451 14.821177 40.913477 14.821194 40.91349
+                                14.821246 40.913535 14.821291 40.913573 14.821344 40.91361 14.821394 40.913629 14.821457
+                                40.913639 14.821619 40.913659
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>113</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.114">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.822701 40.913204 14.822424 40.913325 14.822368 40.913349 14.822277 40.913393
+                                14.821619 40.913659
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>114</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.115">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.787528 41.039368 14.787597 41.039332 14.787636 41.039321 14.787765 41.039292
+                                14.788871 41.039079 14.789011 41.039063 14.78914 41.039061 14.789262 41.039066 14.78953
+                                41.039093 14.789616 41.039106 14.789771 41.039132 14.789884 41.039151 14.789972
+                                41.039158 14.790189 41.039154
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2426</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.116">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.198875 41.066188 15.199033 41.066125 15.199116 41.066086 15.199152 41.066055
+                                15.199211 41.065986 15.199247 41.065923 15.199259 41.065875
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2603</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.117">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.199259 41.065875 15.199256 41.065803 15.199254 41.065488</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2604</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.118">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.275894 41.03781 15.275731 41.03779</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2605</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.119">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.7787 40.990133 14.778881 40.990125 14.779101 40.990084 14.779274 40.990026
+                                14.779453 40.989919 14.779548 40.989829 14.779691 40.989667 14.779775 40.989532
+                                14.779883 40.989262 14.779937 40.98905 14.779934 40.988921 14.779932 40.988838 14.779931
+                                40.988741 14.779927 40.988456 14.779935 40.988221 14.77994 40.988064 14.779943 40.987807
+                                14.779951 40.987737 14.780006 40.987266 14.780014 40.987195 14.780014 40.987172
+                                14.780009 40.987028 14.780033 40.986893 14.780057 40.98678 14.780111 40.986681 14.780201
+                                40.986596 14.780332 40.986529 14.780582 40.986435 14.780897 40.986318 14.78195 40.986077
+                                14.783221 40.985806 14.783406 40.985766 14.783657 40.98572 14.784085 40.985585 14.784436
+                                40.985469 14.784776 40.985321 14.785187 40.985087 14.78552 40.984908 14.785746 40.98476
+                                14.785871 40.984665 14.786122 40.984409 14.786391 40.983946 14.786726 40.98328 14.787043
+                                40.982531
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2403</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.120">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.772685 41.009971 14.772875 41.010097 14.773414 41.010441 14.773767 41.010681
+                                14.773818 41.010738 14.773823 41.010873 14.773799 41.011099 14.773816 41.011261
+                                14.773863 41.011396 14.773964 41.011513 14.774142 41.011644 14.774249 41.011703
+                                14.774385 41.011802 14.77451 41.011879 14.774617 41.011929 14.774741 41.011947 14.775163
+                                41.012002 14.775487 41.012048 14.775618 41.012073 14.775726 41.012107 14.77576 41.012118
+                                14.775965 41.012209 14.776256 41.012365 14.776577 41.012536 14.776743 41.012613
+                                14.776903 41.012686 14.777604 41.013007 14.777711 41.013088 14.777847 41.013183 14.77796
+                                41.013264 14.77809 41.013341 14.778177 41.013387 14.778988 41.013811 14.779343 41.013998
+                                14.779556 41.014109 14.779979 41.014381
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2404</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.121">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.789402 41.041649 14.789335 41.041598 14.789225 41.041513 14.788899 41.041235
+                                14.788644 41.041028 14.788298 41.040741 14.788112 41.040538 14.788086 41.040499
+                                14.787994 41.040312 14.787987 41.040296 14.787937 41.04018 14.787869 41.040035 14.787798
+                                41.039909 14.787652 41.039708 14.787598 41.039642 14.787485 41.039489 14.78748 41.039458
+                                14.787487 41.039419 14.787504 41.039388 14.787528 41.039368
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2427</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.122">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.252885 40.788871 15.252781 40.788828 15.252671 40.788812 15.252597 40.788813
+                                15.252467 40.788829 15.252393 40.788845 15.252201 40.788881 15.25189 40.788949 15.251606
+                                40.789033 15.25154 40.789038 15.251486 40.789033 15.251436 40.789029 15.251336 40.789014
+                                15.251235 40.788978 15.251148 40.788935 15.251086 40.78889 15.250934 40.788737 15.250848
+                                40.788587 15.250791 40.788454 15.250711 40.788306 15.250654 40.788225 15.25055 40.788126
+                                15.250434 40.78804 15.250277 40.787955 15.250108 40.787861 15.249992 40.787796 15.249481
+                                40.787457 15.249347 40.787351 15.249225 40.787246 15.248981 40.787032 15.248262
+                                40.786383 15.247667 40.785844 15.247305 40.785525 15.246181 40.784559 15.245581
+                                40.784195 15.245053 40.783926 15.244613 40.783686
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2452</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.123">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>15.242034 40.785334 15.242036 40.785286 15.242041 40.785243 15.242047 40.785205
+                                15.242062 40.785151 15.242086 40.785091
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2453</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.124">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.987358 40.930926 14.987414 40.930932 14.98754 40.930947 14.988018 40.930987
+                                14.988819 40.931023 14.989104 40.93102 14.989544 40.931014 14.989974 40.931002
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2454</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.125">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.993058 40.929251 14.993137 40.929269 14.993588 40.929359 14.993654 40.929373
+                                14.993758 40.929407 14.993799 40.929431 14.993829 40.929472 14.993871 40.929591 14.99396
+                                40.929954 14.994043 40.930346 14.994123 40.930508 14.994158 40.93056 14.994271 40.930677
+                                14.994337 40.930749 14.994464 40.930875 14.994826 40.931159 14.995504 40.931663
+                                14.995836 40.931852 14.996222 40.931906
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2455</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.126">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.754069 40.848202 14.753803 40.848378 14.753499 40.848579 14.753054 40.848872
+                                14.752753 40.849073 14.751916 40.849614 14.751512 40.84989 14.751301 40.850051 14.751247
+                                40.850102 14.751204 40.850147
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2662</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.540">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.522635 41.216186 14.522647 41.216186 14.522773 41.216178</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>5186</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.127">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.7787 40.990133 14.778602 40.990138 14.77844 40.99012 14.77821 40.990101
+                                14.77796 40.990033 14.777877 40.989996 14.777776 40.989951 14.777569 40.989838 14.77726
+                                40.989658 14.77692 40.989461 14.776305 40.989106 14.776194 40.989058 14.775961 40.988932
+                                14.775777 40.988896 14.77561 40.9889 14.775512 40.988929 14.775458 40.988965 14.775408
+                                40.989023 14.775389 40.989145 14.775401 40.989285 14.775465 40.989591 14.775494
+                                40.989769 14.775576 40.990253 14.775569 40.99042 14.775551 40.990591 14.775479 40.990789
+                                14.775371 40.990924 14.775235 40.991014 14.775104 40.991063 14.77499 40.991099 14.774877
+                                40.991117 14.774741 40.991112 14.774598 40.991107 14.774443 40.991078 14.774069
+                                40.991007 14.773778 40.990988 14.773477 40.991021 14.773412 40.991032 14.773161
+                                40.991076 14.772672 40.991162 14.772214 40.991287 14.772041 40.991373 14.772023
+                                40.991381 14.771952 40.991458 14.77191 40.991584 14.771903 40.991728 14.771938 40.991881
+                                14.771947 40.991912 14.77197 40.991996 14.771979 40.99203 14.77212 40.99249 14.772151
+                                40.992602 14.772203 40.992796 14.772243 40.993012 14.772225 40.993192 14.772183 40.9933
+                                14.772052 40.993453 14.771927 40.993543 14.771849 40.993624 14.771587 40.993763
+                                14.771526 40.993792 14.771367 40.993866 14.770765 40.994207 14.770581 40.994347
+                                14.770378 40.99454 14.770318 40.994593 14.77028 40.994626 14.770002 40.994872 14.769573
+                                40.995259 14.769245 40.995528 14.769155 40.995618 14.769096 40.995699 14.76906 40.995789
+                                14.769077 40.996005 14.769118 40.996186 14.769147 40.996276 14.769174 40.996516
+                                14.769182 40.996587 14.769246 40.996884 14.769281 40.997042 14.769281 40.997163
+                                14.769239 40.997289 14.769185 40.997393 14.769089 40.997532 14.769025 40.997619
+                                14.768934 40.997744 14.768767 40.997897 14.767819 40.998651 14.767765 40.998741
+                                14.767711 40.998836 14.767669 40.998935 14.767654 40.999093 14.767632 40.999307
+                                14.767602 40.999615 14.767583 40.999799 14.767553 40.999921 14.767499 41.000033
+                                14.767415 41.000139 14.767356 41.000195 14.767189 41.000285 14.767016 41.000361
+                                14.766719 41.000451 14.765945 41.000774 14.765938 41.000779 14.765712 41.000944
+                                14.765569 41.001128 14.765551 41.001178 14.765485 41.001304 14.765461 41.001448
+                                14.765493 41.001895 14.765495 41.001921 14.765522 41.001973 14.765566 41.002056
+                                14.765678 41.002183 14.766364 41.00273 14.76668 41.002982 14.766917 41.003244 14.767011
+                                41.003358 14.767367 41.00379 14.767615 41.004213 14.767763 41.004421 14.767876 41.004466
+                                14.768072 41.004475 14.768262 41.00444 14.768369 41.004445 14.76847 41.004485 14.768536
+                                41.00454 14.768573 41.004599 14.768613 41.004703 14.768615 41.005729 14.768602 41.005895
+                                14.768608 41.00599 14.76862 41.006039 14.768637 41.006103 14.768678 41.006197 14.768761
+                                41.00631 14.768831 41.006409 14.76884 41.006419 14.768894 41.006475 14.768942 41.00652
+                                14.76906 41.006608 14.769152 41.006673 14.769218 41.006707 14.769414 41.006777 14.769628
+                                41.006821 14.770038 41.006862 14.770198 41.006867 14.770415 41.006892 14.770473 41.0069
+                                14.770567 41.006922 14.770626 41.006949 14.770656 41.006985 14.77072 41.007219 14.770732
+                                41.007309 14.770749 41.007408 14.77079 41.00751 14.770829 41.0076 14.770891 41.00771
+                                14.771033 41.007875 14.771163 41.008004 14.771359 41.008216 14.771632 41.008455
+                                14.771869 41.008669 14.771883 41.008699 14.771895 41.008737 14.771886 41.008888
+                                14.771882 41.009073 14.771897 41.00916 14.771917 41.00921 14.771991 41.009289 14.772187
+                                41.009456 14.772282 41.009551 14.772527 41.009771 14.772685 41.009971
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2405</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.128">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.781345 41.015697 14.781316 41.015551 14.781275 41.015413 14.781235 41.015329
+                                14.781158 41.015198 14.781034 41.015076 14.780921 41.014986 14.779979 41.014381
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2406</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.129">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.597303 40.952493 14.598286 40.952514</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2407</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.130">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.58242 40.949098 14.58276 40.949153 14.58355 40.949282 14.583936 40.949356
+                                14.584262 40.949442 14.584392 40.949485 14.585009 40.949688 14.586425 40.950302 14.58741
+                                40.950769 14.588519 40.951294
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2408</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.131">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.592991 40.952375 14.592602 40.952366 14.5921 40.952353 14.591845 40.952347
+                                14.591278 40.952332 14.591266 40.952332 14.591115 40.952311 14.590933 40.952286
+                                14.590494 40.952181 14.590287 40.952099 14.58992 40.951931 14.589712 40.951836 14.589078
+                                40.951559 14.588519 40.951294
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2409</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.132">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.593413 40.95239 14.59436 40.95242 14.594746 40.95243 14.597303 40.952493
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2410</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.133">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.592991 40.952375 14.593149 40.952379 14.593413 40.95239</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2411</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.134">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.619423 40.948478 14.620088 40.948548 14.620991 40.948596</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2412</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.135">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.617886 40.948343 14.618901 40.948432 14.619423 40.948478</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2413</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.136">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.613023 40.95193 14.613084 40.951789 14.613114 40.951687 14.613201 40.951181
+                                14.613283 40.95067
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2414</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.137">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.614763 40.94808 14.614507 40.948102 14.614317 40.948146 14.614031 40.948276
+                                14.613882 40.948366 14.613774 40.948464 14.613678 40.94859 14.613618 40.948689 14.613582
+                                40.948865 14.613563 40.949031 14.613526 40.94931
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2415</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.138">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.617886 40.948343 14.617623 40.948316 14.616941 40.948251 14.616306 40.948189
+                                14.616113 40.948171 14.615469 40.948109 14.61538 40.9481 14.614763 40.94808
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2416</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.139">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.617438 40.939406 14.617432 40.9395 14.617425 40.939595 14.617443 40.939653
+                                14.617454 40.939725 14.617495 40.939811 14.617542 40.939874 14.617613 40.939938
+                                14.617678 40.939974 14.617797 40.940006 14.617951 40.940015 14.618481 40.939945
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2417</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.140">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.617438 40.939406 14.617384 40.939468 14.61736 40.939536 14.617354 40.93963
+                                14.617365 40.939747 14.6174 40.939869 14.617423 40.939964 14.617452 40.940095 14.617446
+                                40.940207 14.617421 40.940293 14.617379 40.94036 14.61729 40.940454 14.617134 40.940612
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2418</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.141">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.619875 40.941125 14.619592 40.940809 14.61902 40.940158 14.618819 40.939915
+                                14.618725 40.939815 14.618477 40.939539 14.618329 40.939381 14.618276 40.939345
+                                14.618181 40.939286 14.618081 40.939246 14.617968 40.939227 14.617855 40.939222
+                                14.617748 40.939235 14.617635 40.939276 14.617563 40.939316 14.617474 40.93937 14.617438
+                                40.939406
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2419</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.142">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.619875 40.941125 14.619623 40.940548 14.619589 40.940408 14.619565 40.940277
+                                14.61956 40.940156 14.619567 40.940034 14.619597 40.939926 14.619628 40.939832 14.619699
+                                40.939715 14.619777 40.939602 14.619927 40.939463 14.620475 40.939051
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2420</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.143">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.619875 40.941125 14.619532 40.940912 14.619147 40.940672 14.618857 40.940554
+                                14.61865 40.940495 14.618495 40.940472 14.618222 40.940475 14.617705 40.940564 14.617401
+                                40.940653
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2421</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.144">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.625088 40.946099 14.625167 40.946122 14.625211 40.94616 14.625371
+                                40.946293
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2422</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.145">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.625281 40.946349 14.625101 40.946162 14.625088 40.946099</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2423</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.146">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.613283 40.95067 14.613342 40.950369 14.613526 40.94931</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2424</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+        <VULCANICO:VES_danno_strade_statali gml:id="VES_danno_strade_statali.147">
+            <VULCANICO:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>14.789402 41.041649 14.789515 41.041736 14.789844 41.041996 14.789999 41.042147
+                                14.790121 41.042297 14.79022 41.042429 14.790292 41.042542 14.790321 41.04262 14.790344
+                                41.042686 14.790363 41.042777 14.790386 41.042905 14.790405 41.043087 14.790416
+                                41.043222 14.790431 41.043369 14.790525 41.043683 14.790543 41.043746 14.790588
+                                41.043951 14.790592 41.043993 14.790574 41.04411 14.790548 41.044187 14.790532 41.044236
+                                14.79045 41.044408 14.790336 41.044644 14.790264 41.044784 14.79011 41.045085 14.790063
+                                41.045161 14.790021 41.045221 14.789986 41.045258 14.7899 41.045321 14.789746 41.045432
+                                14.789657 41.045506 14.789492 41.045663 14.789341 41.045821 14.789281 41.045882
+                                14.789038 41.04615 14.788875 41.046351 14.788686 41.046594 14.788522 41.046806 14.788428
+                                41.046918 14.788389 41.046946 14.788324 41.046979 14.788246 41.047008 14.788172
+                                41.047032 14.788158 41.047037 14.787951 41.047097 14.787701 41.047164 14.787622
+                                41.047183
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </VULCANICO:geom>
+            <VULCANICO:gid>2425</VULCANICO:gid>
+            <VULCANICO:tipologia>Statale</VULCANICO:tipologia>
+            <VULCANICO:prob>alta</VULCANICO:prob>
+            <VULCANICO:carico>1-5</VULCANICO:carico>
+        </VULCANICO:VES_danno_strade_statali>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

@@ -38,9 +38,11 @@ package org.geosdi.geoplatform.gml.impl.v311.jaxb.context;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContextSimple;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLMarshaller;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
+import static javax.annotation.meta.When.NEVER;
 import static javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT;
 
 /**
@@ -52,7 +54,7 @@ public class GMLJAXBContextSimpleV311 extends GMLJAXBContextSimple {
     /**
      * @param theJaxbContext
      */
-    public GMLJAXBContextSimpleV311(JAXBContext theJaxbContext) {
+    public GMLJAXBContextSimpleV311(@Nonnull(when = NEVER) JAXBContext theJaxbContext) {
         super(theJaxbContext);
 
     }

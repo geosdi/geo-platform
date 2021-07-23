@@ -40,7 +40,12 @@ import org.geosdi.geoplatform.support.xmpp.loader.GPXMPPLoader;
 import org.geosdi.geoplatform.support.xmpp.spring.connection.manager.XMPPConnectionManager;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jivesoftware.smack.packet.Message;
-import org.junit.*;
+import org.jivesoftware.smack.packet.StanzaFactory;
+import org.jivesoftware.smack.packet.id.UuidStanzaIdSource;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.jxmpp.jid.impl.JidCreate;
 import org.slf4j.Logger;
@@ -50,13 +55,16 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import javax.annotation.Resource;
 
+import static java.lang.Thread.sleep;
+import static org.jivesoftware.smack.packet.Message.Type.chat;
+import static org.junit.Assert.assertNotNull;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {GPXMPPLoader.class},
-        loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {GPXMPPLoader.class}, loader = AnnotationConfigContextLoader.class)
 public class SendPacketTest {
 
     @GeoPlatformLog
@@ -84,21 +92,21 @@ public class SendPacketTest {
 
     @Before
     public void setUp() throws Exception {
-        Assert.assertNotNull(gpXMPPConnectionManager);
-        this.message = new Message(JidCreate.entityBareFrom(this.gpXmppPooledPBEStringEncryptor.
-                decrypt(RECEIVER)), Message.Type.chat);
-        this.message.setSubject("Example XMPP Message");
+        assertNotNull(gpXMPPConnectionManager);
         String user = System.getProperty("user.name");
-        this.message.setBody((user != null) ? user + MESSAGE : "Someone"
-                + MESSAGE);
+        this.message = new StanzaFactory(UuidStanzaIdSource.INSTANCE)
+                .buildMessageStanza()
+                .ofType(chat)
+                .to(JidCreate.entityBareFrom(this.gpXmppPooledPBEStringEncryptor.decrypt(RECEIVER)))
+                .setSubject("Example XMPP Message")
+                .setBody((user != null) ? user + MESSAGE : "Someone" + MESSAGE)
+                .build();
     }
 
     @Test
     public void sendPacket() throws Exception {
         this.gpXMPPConnectionManager.login();
         this.gpXMPPConnectionManager.sendStanza(message);
-
-        Thread.sleep(3000);
+        sleep(1000);
     }
-
 }

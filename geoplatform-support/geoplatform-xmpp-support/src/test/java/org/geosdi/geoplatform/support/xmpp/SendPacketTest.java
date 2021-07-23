@@ -40,8 +40,6 @@ import org.geosdi.geoplatform.support.xmpp.loader.GPXMPPLoader;
 import org.geosdi.geoplatform.support.xmpp.spring.connection.manager.XMPPConnectionManager;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jivesoftware.smack.packet.Message;
-import org.jivesoftware.smack.packet.StanzaFactory;
-import org.jivesoftware.smack.packet.id.UuidStanzaIdSource;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -57,6 +55,7 @@ import javax.annotation.Resource;
 
 import static java.lang.Thread.sleep;
 import static org.jivesoftware.smack.packet.Message.Type.chat;
+import static org.jivesoftware.smack.packet.StanzaBuilder.buildMessage;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -94,8 +93,7 @@ public class SendPacketTest {
     public void setUp() throws Exception {
         assertNotNull(gpXMPPConnectionManager);
         String user = System.getProperty("user.name");
-        this.message = new StanzaFactory(UuidStanzaIdSource.INSTANCE)
-                .buildMessageStanza()
+        this.message = buildMessage()
                 .ofType(chat)
                 .to(JidCreate.entityBareFrom(this.gpXmppPooledPBEStringEncryptor.decrypt(RECEIVER)))
                 .setSubject("Example XMPP Message")

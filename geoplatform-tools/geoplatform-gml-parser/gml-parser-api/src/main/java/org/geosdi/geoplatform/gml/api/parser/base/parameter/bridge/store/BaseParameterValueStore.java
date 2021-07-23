@@ -45,14 +45,13 @@ import org.geosdi.geoplatform.support.bridge.store.GPImplementorStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.util.Collections.unmodifiableCollection;
+import static java.util.Collections.unmodifiableSet;
 import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.toMap;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -69,7 +68,8 @@ public class BaseParameterValueStore implements GPImplementorStore<BaseParameter
     static {
         baseParameterValueImplementors = finder.getValidImplementors()
                 .stream()
-                .collect(Collectors.toMap(GPImplementor::getKey, identity()));
+                .filter(Objects::nonNull)
+                .collect(toMap(GPImplementor::getKey, identity()));
         logger.debug("@@@@@@@@@@@@@@@@@@@@@@{} up with {} values.\n\n", BaseParameterValueStore.class.getSimpleName(),
                 baseParameterValueImplementors.size());
     }
@@ -90,7 +90,7 @@ public class BaseParameterValueStore implements GPImplementorStore<BaseParameter
      */
     @Override
     public Set<BaseParameterValue<? extends Object>> getAllImplementors() {
-        return Collections.unmodifiableSet(finder.getAllImplementors());
+        return unmodifiableSet(finder.getAllImplementors());
     }
 
     /**
@@ -98,6 +98,6 @@ public class BaseParameterValueStore implements GPImplementorStore<BaseParameter
      */
     @Override
     public Collection<BaseParameterValue<? extends Object>> getValidImplementors() {
-        return Collections.unmodifiableCollection(finder.getValidImplementors());
+        return unmodifiableCollection(finder.getValidImplementors());
     }
 }

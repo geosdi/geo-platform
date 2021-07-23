@@ -17,7 +17,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <smack.version>4.3.4</smack.version>
+        <smack.version>4.4.3</smack.version>
     </properties>
 
     <dependencies>
@@ -84,7 +84,7 @@
 
         <dependency>
             <groupId>org.igniterealtime.smack</groupId>
-            <artifactId>smack-java7</artifactId>
+            <artifactId>smack-java8</artifactId>
             <version>${smack.version}</version>
         </dependency>
 

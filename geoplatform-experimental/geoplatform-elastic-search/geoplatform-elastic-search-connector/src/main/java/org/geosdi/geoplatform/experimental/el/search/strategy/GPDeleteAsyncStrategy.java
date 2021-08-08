@@ -40,7 +40,7 @@ import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.core.TimeValue;
 import org.elasticsearch.rest.RestStatus;
 import org.geosdi.geoplatform.experimental.el.dao.ElasticSearchDAO;
 import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;

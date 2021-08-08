@@ -39,8 +39,10 @@ import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.core.TimeValue;
 import org.elasticsearch.rest.RestStatus;
+import org.elasticsearch.search.SearchHit;
+import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.dao.ElasticSearchDAO;
 import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;
 import org.geosdi.geoplatform.experimental.el.search.strategy.function.GPUpdateRequestFunction;
@@ -48,8 +50,10 @@ import org.geosdi.geoplatform.experimental.el.search.strategy.task.GPElasticSear
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -81,11 +85,12 @@ class GPUpdateAsyncStrategy extends IGPOperationAsyncStrategy.AbstractOperationA
         }
 
         BulkRequestBuilder bulkRequest = searchDAO.client().prepareBulk();
-        stream(searchResponse.getHits().getHits()).map(searchHit -> searchDAO.readDocument(searchHit))
+        stream(searchResponse.getHits().getHits())
+                .map((Function<SearchHit, Document>) searchDAO::readDocument)
                 .map(page::update)
                 .map(new GPUpdateRequestFunction(searchDAO))
-                .filter(updateRequest -> updateRequest != null)
-                .forEach(updateRequest -> bulkRequest.add(updateRequest));
+                .filter(Objects::nonNull)
+                .forEach(bulkRequest::add);
         BulkResponse bulkResponse = bulkRequest.get();
         if (bulkResponse.hasFailures()) {
             throw new IllegalStateException(bulkResponse.buildFailureMessage());

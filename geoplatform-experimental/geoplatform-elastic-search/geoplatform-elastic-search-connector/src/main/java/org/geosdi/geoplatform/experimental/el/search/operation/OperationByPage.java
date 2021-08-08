@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.experimental.el.search.operation;
 
 import net.jcip.annotations.Immutable;
 import org.elasticsearch.action.search.SearchRequestBuilder;
-import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.core.TimeValue;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.dao.GPElasticSearchUpdateHandler;
 import org.geosdi.geoplatform.experimental.el.dao.GPPageableAsyncElasticSearchDAO;

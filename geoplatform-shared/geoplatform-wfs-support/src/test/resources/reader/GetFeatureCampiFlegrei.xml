@@ -1,0 +1,1440 @@
+<wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:ExeFlegrei2019="http://ExeFlegrei2019" xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="0"
+                       timeStamp="2021-08-09T11:59:07.890Z"
+                       xsi:schemaLocation="http://ExeFlegrei2019 http://mappe-dpc.protezionecivile.it/gssitdpc/ExeFlegrei2019/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=ExeFlegrei2019%3Alcavarra_shp_exeflegrei_esiti_c_danni http://www.opengis.net/wfs http://mappe-dpc.protezionecivile.it/gssitdpc/schemas/wfs/1.1.0/wfs.xsd">
+    <gml:featureMembers>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.1">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.16391405 40.81767119 14.16389531 40.8175175 14.16367696 40.81753285
+                                        14.16371122 40.81781412 14.16388318 40.81780206 14.16386768 40.81767444
+                                        14.16391405 40.81767119
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10376</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10376</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>39</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>16504</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.2">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.0916505 40.83809041 14.09164654 40.83802051 14.09160965 40.83802169
+                                        14.09143934 40.83802718 14.09144266 40.83808655 14.09144277 40.83808845
+                                        14.09144802 40.83808829 14.09160916 40.83808306 14.09161232 40.83808296
+                                        14.09161281 40.83809162 14.0916505 40.83809041
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10385</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10385</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>92x</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>08295</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>A</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>p1</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.3">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.08600773 40.87301896 14.08600661 40.87316786 14.08600639 40.87321781
+                                        14.08628174 40.87321858 14.08628263 40.87303761 14.08628272 40.87301975
+                                        14.08610362 40.87301924 14.08604295 40.87301906 14.08600773 40.87301896
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                            <gml:interior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.08605791 40.8731723 14.08605775 40.87306995 14.08617523 40.87306983
+                                        14.08617538 40.87317217 14.08605791 40.8731723
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:interior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10334</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10334</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>2</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>03930</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>A</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>6</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.4">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.1681943 40.81808093 14.16817284 40.81796709 14.16795709 40.81799048
+                                        14.16797555 40.81808863 14.16788353 40.81809859 14.16789298 40.81814893
+                                        14.1680674 40.81812992 14.16806084 40.81809546 14.1681943 40.81808093
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10469</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10469</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>75</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>16576</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>B-F</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>2</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.5">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.16579745 40.8179371 14.16573156 40.81793532 14.16572807 40.81801016
+                                        14.16581447 40.81801251 14.16581637 40.81797234 14.16579581 40.81797177
+                                        14.16579745 40.8179371
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10468</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10468</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>6</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>35744</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>E-F</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>2</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.6">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.13204992 40.82627489 14.1321028 40.82622303 14.13198121 40.82612929
+                                        14.13186989 40.8262126 14.13187658 40.82621774 14.13199954 40.82631249
+                                        14.13199964 40.82631257 14.13204992 40.82627489
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                            <gml:interior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.1321028 40.82622303 14.13214897 40.82618847 14.13229267 40.82629913
+                                        14.13218558 40.82637935 14.13204992 40.82627489 14.1321028 40.82622303
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:interior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10338</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10338</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>4</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>06468</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>A</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>3</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.7">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.18689319 40.81754564 14.18691372 40.81753714 14.18695525 40.81759502
+                                        14.1870607 40.81755136 14.18701917 40.81749347 14.18710449 40.81745814
+                                        14.18714256 40.81752588 14.18724168 40.81748775 14.18728493 40.81709858
+                                        14.18729589 40.81699988 14.1872632 40.81699749 14.1871283 40.81706167
+                                        14.18712063 40.81711633 14.18710376 40.81723634 14.18715507 40.81723922
+                                        14.18714829 40.81729954 14.1870829 40.8173234 14.18694557 40.81714064
+                                        14.18681897 40.8171956 14.18693925 40.81737644 14.18682402 40.81742229
+                                        14.18668174 40.81721814 14.18654886 40.81727288 14.18681339 40.81765202
+                                        14.18693645 40.81760532 14.18689319 40.81754564
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10378</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10378</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>36x</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>23698</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.8">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.08398985 40.83379857 14.08411583 40.83356462 14.08406193 40.83355673
+                                        14.08405927 40.83357163 14.08402004 40.83356759 14.08392866 40.83378503
+                                        14.08398985 40.83379857
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10388</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10388</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>14x</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>04133</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>A</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>P18</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.9">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.08239506 40.8349911 14.0823113 40.83498411 14.08229445 40.83509108
+                                        14.08237875 40.83509863 14.08239506 40.8349911
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10396</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10396</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>155x</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>11417</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>A</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>P19</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.10">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.1869651 40.81859887 14.18680454 40.81839505 14.18668328 40.81845014
+                                        14.18680231 40.81860125 14.18684383 40.81865396 14.1869651 40.81859887
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10377</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10377</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>29</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>23688</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.11">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.08276341 40.83439602 14.08260757 40.83435749 14.08256823 40.83444923
+                                        14.08258979 40.83445456 14.08257246 40.83449496 14.08270544 40.83452785
+                                        14.08276341 40.83439602
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10401</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10401</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>196x</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>04226</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>A</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>P19</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.12">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.18025597 40.81854428 14.18010293 40.81849265 14.18004279 40.81861042
+                                        14.18007962 40.81859509 14.18017038 40.81859115 14.18018415 40.81857025
+                                        14.18025597 40.81854428
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10454</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10454</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>2</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>17488</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.13">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.08306589 40.83482273 14.08315622 40.83460964 14.08309202 40.83459142
+                                        14.08311018 40.83457162 14.0830932 40.83456345 14.0831169 40.8345307 14.08302157
+                                        40.83448614 14.08297358 40.83455264 14.08293378 40.83453586 14.0829052
+                                        40.83461591 14.08303786 40.83467186 14.0830555 40.83464306 14.08309353
+                                        40.83464997 14.08307844 40.83468281 14.08306148 40.83467663 14.08303504
+                                        40.83473173 14.08300531 40.83472442 14.08296494 40.83479862 14.08306589
+                                        40.83482273
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10399</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10399</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>31x</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>04141</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>A</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>P19</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.14">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.08458376 40.83323473 14.08459043 40.83322199 14.084626 40.83323263
+                                        14.08466413 40.83315914 14.08448396 40.83310526 14.08447363 40.83312519
+                                        14.0844651 40.83312262 14.08443083 40.83318862 14.08458376 40.83323473
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10386</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10386</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>18x</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>04135</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>A</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>P18</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.15">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.08398036 40.8335795 14.08385104 40.83354046 14.08375571 40.83373104
+                                        14.08375586 40.83373109 14.08388333 40.83376959 14.08398036 40.8335795
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10391</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10391</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>22x</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>04137</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>A</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>P18</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.16">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.09444431 40.84561963 14.09452352 40.84559151 14.09459577 40.84570902
+                                        14.09467083 40.84568238 14.0945798 40.84553444 14.09451145 40.84555873
+                                        14.09445768 40.84547132 14.09429439 40.84552931 14.09443745 40.84576177
+                                        14.09451489 40.84573428 14.09444431 40.84561963
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10359</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10359</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>15</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>05061</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>E-F</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>5</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.17">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.08326477 40.83070234 14.08332048 40.83064988 14.0833358 40.83065926
+                                        14.08333636 40.83065873 14.08336031 40.83063617 14.08332447 40.83061423
+                                        14.08329997 40.83063732 14.08327117 40.83061968 14.0833098 40.83058795
+                                        14.08326956 40.830556 14.08322351 40.8305905 14.08315169 40.8306582 14.08319855
+                                        40.83068693 14.08317302 40.83071101 14.08319631 40.83072527 14.08317636
+                                        40.83074411 14.08323875 40.83078223 14.0832587 40.83076342 14.08330037
+                                        40.83072415 14.08326477 40.83070234
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10342</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10342</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>11</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>04208</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>A</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>4</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.18">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.12680587 40.82889768 14.12674799 40.82882244 14.12660619 40.82888535
+                                        14.12689548 40.82926127 14.12703719 40.82919835 14.12680587 40.82889768
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10343</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10343</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>5</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>06423</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>B</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>3</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.19">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.16800606 40.81906338 14.16800071 40.81901703 14.16798415 40.81901812
+                                        14.16794754 40.81902052 14.16793169 40.81888085 14.16791475 40.81873166
+                                        14.16791261 40.81873182 14.16790994 40.81870784 14.1678741 40.8187102
+                                        14.16786673 40.81864564 14.16781712 40.81864889 14.1678245 40.81871308
+                                        14.16778487 40.81871568 14.16778764 40.81874002 14.16776699 40.8187414
+                                        14.16779552 40.81899249 14.16787479 40.8189873 14.16788441 40.81907142
+                                        14.16800606 40.81906338
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10471</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10471</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>74</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>16575</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>B-F</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>2</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.20">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.117342 40.83184157 14.11749556 40.83180855 14.11747511 40.83175379
+                                        14.11750815 40.83174669 14.11751427 40.83176317 14.1175775 40.83174957
+                                        14.11756659 40.83172021 14.11760222 40.8317126 14.11759596 40.83169581
+                                        14.11762468 40.83168966 14.11761591 40.83166614 14.11764043 40.83166089
+                                        14.11762514 40.83161961 14.11764697 40.83161494 14.11767699 40.83160851
+                                        14.11766071 40.8315647 14.11764734 40.83156755 14.1175716 40.83158372
+                                        14.11756498 40.83156583 14.11751661 40.83157616 14.11753214 40.83161808
+                                        14.11743275 40.83163933 14.11744707 40.83167782 14.11734472 40.83169976
+                                        14.11735595 40.83172984 14.11726293 40.83174984 14.11727488 40.83178189
+                                        14.11720612 40.83179672 14.11721882 40.83183084 14.11729372 40.83181474
+                                        14.11729935 40.8318299 14.11733481 40.83182227 14.117342 40.83184157
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10360</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10360</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>16</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>08267</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>A</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>2</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.21">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.16891606 40.81858528 14.16889455 40.81839001 14.16873292 40.81840028
+                                        14.16873452 40.8184148 14.16869998 40.81841698 14.16864646 40.81842038
+                                        14.16865594 40.81850648 14.16862532 40.81850842 14.16863022 40.81855341
+                                        14.16855261 40.81855825 14.16856515 40.8186741 14.16867587 40.81866715
+                                        14.16866864 40.81860089 14.16878292 40.81859369 14.16891606 40.81858528
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10472</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10472</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>71</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>16569</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>B-F</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>2</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.22">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.08236083 40.8312254 14.08236928 40.83115486 14.08222085 40.83115057
+                                        14.08222208 40.83122281 14.08236083 40.8312254
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10409</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10409</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>30x</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>08264</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>A</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>p13</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.23">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.08107042 40.83294195 14.08100894 40.8329321 14.08099995 40.83296448
+                                        14.08106143 40.83297432 14.08107042 40.83294195
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10390</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10390</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>111x</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>11400</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.24">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.08249779 40.83383975 14.0825104 40.83382011 14.08257862 40.83383719
+                                        14.08265344 40.83381946 14.08265462 40.83381919 14.0826929 40.83374165
+                                        14.08269144 40.83374126 14.08256929 40.83370868 14.08250049 40.83372852
+                                        14.08249771 40.83372776 14.08249764 40.83372774 14.08247732 40.83372215
+                                        14.08245192 40.83377288 14.08242182 40.8337895 14.08241188 40.8338108
+                                        14.08241959 40.83383654 14.08246523 40.83385189 14.08249764 40.83383981
+                                        14.0824977 40.83383978 14.08249779 40.83383975
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10392</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10392</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>71x</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>08286</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.25">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.16631987 40.8191403 14.1662887 40.81887351 14.16620527 40.81887913
+                                        14.16620719 40.81891526 14.16617643 40.81891918 14.16614928 40.81879602
+                                        14.16611234 40.81877252 14.16609426 40.81871032 14.16616251 40.81870495
+                                        14.16614549 40.81858709 14.16595058 40.81860334 14.16594655 40.81857529
+                                        14.16582968 40.81858148 14.16577503 40.81858441 14.16581877 40.81894675
+                                        14.16582955 40.81903604 14.16582959 40.81903637 14.16584438 40.8191583
+                                        14.16593914 40.81920421 14.16628986 40.81917845 14.16631987 40.8191403
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10473</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10473</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>118</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>25095</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.26">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.18768325 40.8170582 14.18768352 40.81705552 14.18771574 40.81673673
+                                        14.18771645 40.81672971 14.18767451 40.81672716 14.18752648 40.81679909
+                                        14.18749768 40.81705454 14.18749527 40.81707586 14.18746306 40.81736148
+                                        14.18747927 40.81740349 14.18765481 40.81733959 14.18768325 40.8170582
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10380</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10380</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>38</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>23699</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.27">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.1894509 40.81714729 14.18950257 40.81712567 14.18956883 40.81709793
+                                        14.18950669 40.81701102 14.18922603 40.81713706 14.18912751 40.81713573
+                                        14.18912543 40.81722841 14.18912719 40.8172285 14.18920317 40.8172322
+                                        14.18927839 40.81721949 14.18935164 40.81718884 14.1894509 40.81714729
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10384</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10384</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>42</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>23710</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.28">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.18754055 40.81842923 14.18760153 40.81807186 14.18755134 40.81807494
+                                        14.18753001 40.81809317 14.18742811 40.81812523 14.18738249 40.81844381
+                                        14.18753895 40.8184386 14.18754055 40.81842923
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10381</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10381</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>40</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>23700</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.29">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.0828496 40.8330613 14.08288489 40.83303243 14.08293357 40.83306669
+                                        14.08297242 40.83303484 14.08289924 40.8329834 14.08284509 40.8329453
+                                        14.08270864 40.83305722 14.08276723 40.83309854 14.08275504 40.83310851
+                                        14.08280469 40.83314346 14.08287939 40.83308224 14.0828496 40.8330613
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10394</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10394</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>118x</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>04186</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.30">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.18764126 40.81748858 14.18761582 40.81744499 14.18749796 40.81748361
+                                        14.18750155 40.81750039 14.18745226 40.81751643 14.18744334 40.81758727
+                                        14.18749525 40.81765673 14.18743447 40.81768189 14.1874305 40.81777428
+                                        14.18748788 40.81783316 14.18741126 40.81783523 14.18739284 40.81806229
+                                        14.18743352 40.81806131 14.18757622 40.81799872 14.18757358 40.81799149
+                                        14.18762959 40.81796847 14.18760878 40.81792517 14.18763162 40.8179093
+                                        14.1875997 40.81784294 14.18761259 40.81783628 14.18759856 40.8178097
+                                        14.18763861 40.81779332 14.18761305 40.81774972 14.18763589 40.81773394
+                                        14.18760874 40.81766537 14.1876247 40.81765999 14.18761666 40.81763831
+                                        14.1876475 40.81761808 14.18762333 40.81757809 14.18765569 40.81755904
+                                        14.18762499 40.81749991 14.18764126 40.81748858
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10383</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10383</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>41</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>23703</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.31">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.08249769 40.83263043 14.08249498 40.83260029 14.08245677 40.83260228
+                                        14.08235538 40.83260756 14.08236313 40.83269073 14.08240527 40.83268848
+                                        14.08240459 40.83268118 14.08245929 40.83267828 14.08245672 40.8326502
+                                        14.08249769 40.83264806 14.08249928 40.83264798 14.08249776 40.83263112
+                                        14.08249769 40.83263043
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10397</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10397</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>56x</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>08279</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.32">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.16811366 40.81744634 14.16809473 40.81729116 14.16791968 40.81730351
+                                        14.16793217 40.81740467 14.16804753 40.81739658 14.16805397 40.8174505
+                                        14.16811366 40.81744634
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10475</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10475</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>117</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>16614</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.33">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.08243406 40.83354077 14.08237024 40.83353332 14.08236196 40.83357425
+                                        14.08242579 40.83358169 14.08243406 40.83354077
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10398</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10398</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>116x</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>11402</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.34">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.09317811 40.83363592 14.09308763 40.83351416 14.09305808 40.83352683
+                                        14.09302391 40.83348082 14.09310597 40.83344567 14.09294633 40.83323062
+                                        14.09288417 40.83325728 14.09287048 40.83323889 14.09272634 40.83330082
+                                        14.09278239 40.83337614 14.09281422 40.83336249 14.09291076 40.83349232
+                                        14.09283754 40.83352371 14.09285875 40.83355221 14.09288168 40.83354235
+                                        14.09291612 40.83358855 14.09289831 40.83359619 14.09298853 40.83371723
+                                        14.09317811 40.83363592
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10410</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10410</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>590</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>04852</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.35">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.16775981 40.81862352 14.16774785 40.81851813 14.16763048 40.81852575
+                                        14.1676374 40.81858859 14.16765496 40.81874951 14.16771868 40.81874529
+                                        14.16770534 40.818627 14.16775981 40.81862352
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10477</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10477</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>116</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>16613</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.36">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.30346863 40.87565707 14.30357632 40.87555635 14.30352868 40.87552706
+                                        14.30351118 40.87554353 14.30348547 40.87552788 14.30349961 40.87551472
+                                        14.30320589 40.87533422 14.30310065 40.87543295 14.30321857 40.87550537
+                                        14.30318664 40.87554013 14.30323999 40.87556829 14.30327045 40.87553722
+                                        14.30339591 40.87561427 14.30341557 40.87559583 14.30343986 40.87561075
+                                        14.30342152 40.87562794 14.30346863 40.87565707
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10363</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10363</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>test</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>08979</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>C</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.37">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.09434133 40.84534903 14.09460399 40.84525235 14.09450446 40.84509644
+                                        14.09450092 40.84509089 14.09438285 40.84513434 14.09434476 40.84506738
+                                        14.09443068 40.84503579 14.09438781 40.84496859 14.09435763 40.84497969
+                                        14.09432792 40.84493308 14.09418298 40.84498641 14.09417091 40.8449675
+                                        14.09398966 40.84503419 14.09401367 40.84507182 14.09399136 40.84508004
+                                        14.09402035 40.84512545 14.09412848 40.84508564 14.09417566 40.84506827
+                                        14.09425238 40.84518841 14.09422717 40.84519769 14.09419089 40.84521105
+                                        14.09420541 40.84523381 14.09412168 40.84526464 14.09416514 40.84533274
+                                        14.09429941 40.84528332 14.09434133 40.84534903
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                            <gml:interior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.09433481 40.84519174 14.09440956 40.84516445 14.09445348 40.84522611
+                                        14.09437826 40.84525394 14.09433481 40.84519174
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:interior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10332</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10332</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>15</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>05087</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra>5</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.38">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.08344261 40.83103167 14.08343521 40.83094406 14.0833183 40.83094974
+                                        14.08332779 40.83106313 14.0833952 40.83105985 14.08339301 40.83103407
+                                        14.08344261 40.83103167
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10340</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10340</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>9</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>04178</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>A</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>4</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.39">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.16617861 40.81834744 14.16615867 40.81819739 14.16601149 40.81820867
+                                        14.16601994 40.81827251 14.16605472 40.81826988 14.16606621 40.81835599
+                                        14.16617861 40.81834744
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10458</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10458</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>24</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>35764</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>E-F</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>2</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.40">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.16493638 40.81790085 14.16488419 40.81781382 14.1647689 40.81787435
+                                        14.1647837 40.81799422 14.16493638 40.81790085
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10379</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10379</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>43</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>16515</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.41">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.1230998 40.82526779 14.12296419 40.82518878 14.12287805 40.82527828
+                                        14.12318814 40.82545702 14.12323398 40.82541289 14.12305976 40.82530727
+                                        14.1230998 40.82526779
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10335</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10335</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>13</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>07310</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>E</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>3</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.42">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.16873723 40.81818781 14.16872996 40.8181247 14.16866967 40.81812867
+                                        14.16866037 40.81804753 14.1686053 40.81805119 14.1686146 40.81813233
+                                        14.16853355 40.81813778 14.16855398 40.81831495 14.16863124 40.81830974
+                                        14.1686182 40.81819569 14.16873723 40.81818781
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10457</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10457</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>17</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>35758</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.43">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.16638875 40.81831734 14.1663801 40.81826917 14.16634579 40.81827271
+                                        14.16635444 40.81832096 14.16638875 40.81831734
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10456</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10456</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>16</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>36785</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>E-F</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>2</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.44">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.18696954 40.81884699 14.18711098 40.81878079 14.18710421 40.81876272
+                                        14.18712201 40.81875151 14.18709753 40.81871745 14.1871135 40.81871091
+                                        14.18707591 40.81866217 14.18684527 40.81875973 14.18688006 40.81880474
+                                        14.18690554 40.81879619 14.18692725 40.81882417 14.18693999 40.81881994
+                                        14.18696954 40.81884699
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10366</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10366</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>14</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>23676</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.45">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.08423848 40.87360233 14.08423983 40.87353227 14.08421841 40.87353203
+                                        14.08422018 40.87343817 14.08415056 40.87343744 14.08415122 40.87340385
+                                        14.08408747 40.87340316 14.08408682 40.87343796 14.08402401 40.87343728
+                                        14.08402224 40.87353099 14.08400027 40.87353075 14.08399895 40.87359946
+                                        14.08406672 40.87360018 14.08406715 40.87357579 14.08410126 40.87357617
+                                        14.08410199 40.87353657 14.08414079 40.87353699 14.08414004 40.87357767
+                                        14.08417017 40.87357798 14.08416976 40.87360161 14.08423848 40.87360233
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10476</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10476</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>1</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>00946</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.46">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.16794205 40.81864339 14.16793108 40.81854413 14.16788646 40.81854696
+                                        14.16788826 40.81856409 14.16787295 40.81856506 14.16787626 40.81859463
+                                        14.16790391 40.81859294 14.16790966 40.81864541 14.16794205 40.81864339
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10459</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10459</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>27</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>35765</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>A-F</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>2</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.47">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.16740426 40.81746212 14.16739239 40.81734042 14.16722484 40.81734975
+                                        14.1672366 40.81747145 14.16740426 40.81746212
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10466</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10466</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>31</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>16585</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito/>
+            <ExeFlegrei2019:n_squadra/>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.48">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.09392858 40.84418603 14.09367778 40.84408539 14.09366999 40.84409671
+                                        14.09365437 40.84409043 14.09359008 40.84418279 14.09370005 40.84422692
+                                        14.09386411 40.84429277 14.09387388 40.84429668 14.09393574 40.84420768
+                                        14.09391838 40.8442007 14.09392858 40.84418603
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10350</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10350</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>15</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>05112</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>A</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>5</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.49">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.12468505 40.82770895 14.12474421 40.82766973 14.12468465 40.82761789
+                                        14.12462549 40.82765711 14.12468505 40.82770895
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10344</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10344</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>6</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>06578</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>A-F</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>3</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063060</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+        <ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni gml:id="lcavarra_shp_exeflegrei_esiti_c_danni.50">
+            <ExeFlegrei2019:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>14.16611591 40.81758803 14.16611282 40.81755035 14.16606845 40.81755246
+                                        14.16606912 40.81756499 14.1660119 40.81757052 14.16601589 40.81759271
+                                        14.16611591 40.81758803
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </ExeFlegrei2019:the_geom>
+            <ExeFlegrei2019:gid>10460</ExeFlegrei2019:gid>
+            <ExeFlegrei2019:id_istanza>10460</ExeFlegrei2019:id_istanza>
+            <ExeFlegrei2019:istanza>30</ExeFlegrei2019:istanza>
+            <ExeFlegrei2019:id_aggrega>35768</ExeFlegrei2019:id_aggrega>
+            <ExeFlegrei2019:esito>E-F</ExeFlegrei2019:esito>
+            <ExeFlegrei2019:n_squadra>2</ExeFlegrei2019:n_squadra>
+            <ExeFlegrei2019:com_pre>15063049</ExeFlegrei2019:com_pre>
+            <ExeFlegrei2019:tipo>P</ExeFlegrei2019:tipo>
+            <ExeFlegrei2019:evento>1</ExeFlegrei2019:evento>
+        </ExeFlegrei2019:lcavarra_shp_exeflegrei_esiti_c_danni>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

@@ -122,13 +122,11 @@ public class WFSDescribeFeatureTest {
 
     @Ignore(value = "Geoserver is Down")
     @Test
-    public void describeSiteTrTest() throws Exception {
-        WFSDescribeFeatureTypeRequest<Schema> request =
-                newConnector()
-                        .withServerUrl(new URL("http://150.145.141.241/geoserver/wfs"))
-                        .build()
-                        .createDescribeFeatureTypeRequest();
-
+    public void c_describeSiteTrTest() throws Exception {
+        WFSDescribeFeatureTypeRequest<Schema> request = newConnector()
+                .withServerUrl(new URL("http://150.145.141.241/geoserver/wfs"))
+                .build()
+                .createDescribeFeatureTypeRequest();
         String localPart = siteTRCom.getLocalPart();
         request.setTypeName(Arrays.asList(siteTRCom));
         logger.debug("#########################SCHEMA_AS_STRING : \n{}\n", request.formatResponseAsString(2));
@@ -140,12 +138,11 @@ public class WFSDescribeFeatureTest {
     }
 
     @Test
-    public void describeLayerPercorsiNavetteTest() throws Exception {
-        WFSDescribeFeatureTypeRequest<Schema> request =
-                newConnector()
-                        .withServerUrl(new URL("http://mappe-dpc.protezionecivile.it/gssitdpc/wfs"))
-                        .build()
-                        .createDescribeFeatureTypeRequest();
+    public void d_describeLayerPercorsiNavetteTest() throws Exception {
+        WFSDescribeFeatureTypeRequest<Schema> request = newConnector()
+                .withServerUrl(new URL("http://mappe-dpc.protezionecivile.it/gssitdpc/wfs"))
+                .build()
+                .createDescribeFeatureTypeRequest();
         QName percorsiNavette = new QName("PianoCampiFlegrei:CF_PercorsiNavette");
         String localPart = percorsiNavette.getLocalPart();
         request.setTypeName(Arrays.asList(percorsiNavette));

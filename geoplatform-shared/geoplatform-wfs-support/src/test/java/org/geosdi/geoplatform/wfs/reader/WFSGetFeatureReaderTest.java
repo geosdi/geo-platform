@@ -268,4 +268,15 @@ public class WFSGetFeatureReaderTest {
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "GetFeatureVESDannoStradeStatali")
                 .collect(joining(separator, "", ".json"))), featureCollection);
     }
+
+    @Test
+    public void s_readGetFeatureCampiFlegreiTest() throws Exception {
+        File getFeatureCampiFlegrei = Paths.get(basePath.concat("GetFeatureCampiFlegrei.xml")).toFile();
+        assertNotNull("The File getFeatureCampiFlegrei must not be null.", getFeatureCampiFlegrei);
+        stopWatch.start("wfsGetFeatureGeoJsonCampiFlegrei");
+        FeatureCollection featureCollection = geoJsonStaxReader.read(getFeatureCampiFlegrei);
+        stopWatch.stop();
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "GetFeatureCampiFlegrei")
+                .collect(joining(separator, "", ".json"))), featureCollection);
+    }
 }

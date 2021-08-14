@@ -1472,7 +1472,7 @@
         <jetty-version>9.4.43.v20210629</jetty-version>
 
         <postgresql-version>42.2.23</postgresql-version>
-        <postgis-jdbc-version>2.5.0</postgis-jdbc-version>
+        <postgis-jdbc-version>2.5.1</postgis-jdbc-version>
 
         <cglib-version>3.3.0</cglib-version>
 

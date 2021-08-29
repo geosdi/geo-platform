@@ -70,9 +70,12 @@
         <oxm:class-to-be-bound name="org.geosdi.geoplatform.mock.ClassToXMLMap"/>
     </oxm:jaxb2-marshaller>
 
-    <bean id="xStreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
+    <bean id="xStreamMarshaller" class="org.geosdi.geoplatform.oxm.xtream.GPXStreamSpringMarshaller">
         <property name="autodetectAnnotations" value="true"/>
+        <property name="typePermission" ref="classToXmlTypePermission" />
     </bean>
+
+    <bean id="classToXmlTypePermission" class="org.geosdi.geoplatform.oxm.ClassToXmlTypePermission" />
 
     <oxm:jibx-marshaller id="jibxMarshaller" target-class="org.geosdi.geoplatform.mock.ClassToXMLMap"/>
 

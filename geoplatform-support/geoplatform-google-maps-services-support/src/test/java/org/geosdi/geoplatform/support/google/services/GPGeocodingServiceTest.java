@@ -137,7 +137,7 @@ public class GPGeocodingServiceTest extends GPBaseConfigTest {
     public void gpGeocodingTheGoogleplexTest() throws Exception {
         GeocodingResult[] results = gpGeocodingService.newRequest().address("1600 Amphitheatre Parkway, Mountain View, CA").await();
         assertNotNull(results);
-        assertEquals("1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA", results[0].formattedAddress);
+        assertEquals("Google Building 40, 1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA", results[0].formattedAddress);
     }
 
     @Test
@@ -147,8 +147,7 @@ public class GPGeocodingServiceTest extends GPBaseConfigTest {
                 .components(ComponentFilter.country("it"), ComponentFilter
                         .postalCode("85050")).await();
         assertNotNull(results);
-        assertEquals("85050 Marsicovetere, Province of Potenza, Italy",
-                results[0].formattedAddress);
+        assertEquals("85050 Marsicovetere, Province of Potenza, Italy", results[0].formattedAddress);
     }
 
     @Test

@@ -35,19 +35,7 @@
  */
 package org.geosdi.geoplatform.json;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.InputStreamReader;
-import java.lang.reflect.Type;
-import java.net.URL;
-import java.util.Date;
+import com.google.gson.*;
 import org.geosdi.geoplatform.GPGenericMarshaller;
 import org.geosdi.geoplatform.json.jaxb.GenericJsonJaxbMarshaller;
 import org.geosdi.geoplatform.mock.ClassToXMLMap;
@@ -64,14 +52,21 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.net.URL;
+import java.util.Date;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:"
-    + "applicationContext-Json-Test.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext-Json-Test.xml"})
 public class GeoPlatformJsonTest {
 
     private static final Logger logger = LoggerFactory.getLogger(

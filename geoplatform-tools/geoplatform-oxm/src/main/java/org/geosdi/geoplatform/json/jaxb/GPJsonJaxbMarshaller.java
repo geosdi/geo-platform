@@ -35,18 +35,6 @@
  */
 package org.geosdi.geoplatform.json.jaxb;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStreamWriter;
-import java.io.StringWriter;
-import java.io.Writer;
-import javax.xml.stream.XMLStreamReader;
-import javax.xml.stream.XMLStreamWriter;
-import javax.xml.transform.stax.StAXResult;
-import javax.xml.transform.stax.StAXSource;
-import javax.xml.transform.stream.StreamSource;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.codehaus.jettison.json.JSONObject;
@@ -55,6 +43,15 @@ import org.codehaus.jettison.mapped.MappedNamespaceConvention;
 import org.codehaus.jettison.mapped.MappedXMLStreamReader;
 import org.codehaus.jettison.mapped.MappedXMLStreamWriter;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+
+import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.XMLStreamWriter;
+import javax.xml.transform.stax.StAXResult;
+import javax.xml.transform.stax.StAXSource;
+import javax.xml.transform.stream.StreamSource;
+import java.io.*;
+
+import static java.nio.charset.Charset.defaultCharset;
 
 /**
  *
@@ -66,18 +63,11 @@ public class GPJsonJaxbMarshaller implements GenericJsonJaxbMarshaller {
     private Jaxb2Marshaller marshaller;
 
     @Override
-    public void setMarshaller(Jaxb2Marshaller theMarshaller) {
-        this.marshaller = theMarshaller;
-    }
-
-    @Override
     public void marshal(Object jaxbElement, File output) throws IOException {
         Configuration config = new Configuration();
         MappedNamespaceConvention con = new MappedNamespaceConvention(config);
         Writer writer = new OutputStreamWriter(new FileOutputStream(output));
-
         XMLStreamWriter xmlStreamWriter = new MappedXMLStreamWriter(con, writer);
-
         this.marshaller.marshal(jaxbElement, new StAXResult(xmlStreamWriter));
     }
 
@@ -85,9 +75,7 @@ public class GPJsonJaxbMarshaller implements GenericJsonJaxbMarshaller {
     public void marshal(Object jaxbElement, Writer writer) throws IOException {
         Configuration config = new Configuration();
         MappedNamespaceConvention con = new MappedNamespaceConvention(config);
-
         XMLStreamWriter xmlStreamWriter = new MappedXMLStreamWriter(con, writer);
-
         this.marshaller.marshal(jaxbElement, new StAXResult(xmlStreamWriter));
     }
 
@@ -97,20 +85,17 @@ public class GPJsonJaxbMarshaller implements GenericJsonJaxbMarshaller {
         Configuration config = new Configuration();
         MappedNamespaceConvention con = new MappedNamespaceConvention(config);
         XMLStreamReader xmlStreamReader = new MappedXMLStreamReader(obj, con);
-
         return this.marshaller.unmarshal(new StAXSource(xmlStreamReader));
     }
 
     @Override
     public Object unmarshal(InputStream is) throws Exception {
         StringWriter writer = new StringWriter();
-        IOUtils.copy(is, writer);
-
+        IOUtils.copy(is, writer, defaultCharset());
         JSONObject obj = new JSONObject(writer.toString());
         Configuration config = new Configuration();
         MappedNamespaceConvention con = new MappedNamespaceConvention(config);
         XMLStreamReader xmlStreamReader = new MappedXMLStreamReader(obj, con);
-
         return this.marshaller.unmarshal(new StAXSource(xmlStreamReader));
     }
 
@@ -120,7 +105,6 @@ public class GPJsonJaxbMarshaller implements GenericJsonJaxbMarshaller {
         Configuration config = new Configuration();
         MappedNamespaceConvention con = new MappedNamespaceConvention(config);
         XMLStreamReader xmlStreamReader = new MappedXMLStreamReader(obj, con);
-
         return this.marshaller.unmarshal(new StAXSource(xmlStreamReader));
     }
 
@@ -132,9 +116,12 @@ public class GPJsonJaxbMarshaller implements GenericJsonJaxbMarshaller {
     @Override
     public void afterPropertiesSet() throws Exception {
         if (this.marshaller == null) {
-            throw new IllegalArgumentException("The Marshaller property must "
-                    + "not be null");
+            throw new IllegalArgumentException("The Marshaller property must not be null");
         }
     }
 
+    @Override
+    public void setMarshaller(Jaxb2Marshaller theMarshaller) {
+        this.marshaller = theMarshaller;
+    }
 }

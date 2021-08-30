@@ -54,8 +54,9 @@
         <property name="marshaller" ref="xStreamMarshallerJson" />
     </bean>
 
-    <bean id="xStreamMarshallerJson" class="org.springframework.oxm.xstream.XStreamMarshaller">
+    <bean id="xStreamMarshallerJson" class="org.geosdi.geoplatform.oxm.xtream.GPXStreamSpringMarshaller">
         <property name="autodetectAnnotations" value="true" />
+        <property name="typePermission" ref="classToXmlJsonTypePermission" />
     </bean>
     
     <bean id="jaxbJson" class="org.geosdi.geoplatform.json.jaxb.GPJsonJaxbMarshaller">
@@ -66,5 +67,7 @@
         <oxm:class-to-be-bound
             name="org.geosdi.geoplatform.mock.ClassToXMLMap" />
     </oxm:jaxb2-marshaller>
+
+    <bean id="classToXmlJsonTypePermission" class="org.geosdi.geoplatform.oxm.ClassToXmlTypePermission" />
    
 </beans>

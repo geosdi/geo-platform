@@ -38,6 +38,7 @@ import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
 import org.hibernate.HibernateException;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Nonnull;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
@@ -52,6 +53,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static java.lang.Boolean.FALSE;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.StreamSupport.stream;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -60,7 +62,10 @@ import static java.util.stream.StreamSupport.stream;
 @Transactional(transactionManager = "transactionManager")
 public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serializable> extends GPHibernateCriteriaDAO<T, ID> {
 
-    public GPAbstractHibernateDAO(Class<T> thePersistentClass) {
+    /**
+     * @param thePersistentClass
+     */
+    public GPAbstractHibernateDAO(@Nonnull(when = NEVER) Class<T> thePersistentClass) {
         super(thePersistentClass);
     }
 

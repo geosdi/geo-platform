@@ -39,6 +39,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -81,6 +82,24 @@ public interface GPBaseDAO<T extends Object, ID extends Serializable> extends GP
      * @throws GPDAOException
      */
     List<T> findAll(int start, int end) throws GPDAOException;
+
+    /**
+     * @return {@link Stream<T>}
+     * @throws GPDAOException
+     */
+    default Stream<T> streamAll() throws GPDAOException {
+        return this.findAll().stream();
+    }
+
+    /**
+     * @param start
+     * @param end
+     * @return {@link Stream<T>}
+     * @throws GPDAOException
+     */
+    default Stream<T> streamAll(int start, int end) throws GPDAOException {
+        return this.findAll(start, end).stream();
+    }
 
     /**
      * @return {@link Number}

@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.persistence.demo;
 
 import org.geosdi.geoplatform.persistence.demo.dao.ICarDAO;
 import org.geosdi.geoplatform.persistence.demo.model.Car;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,6 +49,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import java.util.List;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -77,7 +78,7 @@ public class PersistenceHibernateTest {
     @Test
     public void testHibernateProfile() {
         List<Car> cars = this.hibCarDAO.findAll();
-        Assert.assertTrue(cars.size() == 1);
+        assertTrue(cars.size() == 1);
         logger.info("Persistence Hibernate Test - Car Found @@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", cars);
         logger.info("########################FIND_CAR_BY_ID : {}\n", this.hibCarDAO.find(car.getId()));
         this.hibCarDAO.removeAll();

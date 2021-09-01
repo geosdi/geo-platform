@@ -40,7 +40,6 @@ import org.geosdi.geoplatform.persistence.demo.dao.ICarPartDAO;
 import org.geosdi.geoplatform.persistence.demo.model.Car;
 import org.geosdi.geoplatform.persistence.demo.model.CarPart;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,6 +50,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
+
+import static org.junit.Assert.*;
 
 /**
  *
@@ -83,28 +84,21 @@ public class PersistenceJpaTest {
 
     @Test
     public void testJpaProfile() throws Exception {
-        Assert.assertEquals(100, this.jpaCarDAO.count().intValue());
-
-        logger.info("FOUND PART @@@@@@@@@@@@@@@@@@@@@@@@@@: "
-                + this.jpaCarPartDAO.findByPartName(PART_NAME + 0).getPartName());
-
+        assertEquals(100, this.jpaCarDAO.count().intValue());
+        logger.info("FOUND PART @@@@@@@@@@@@@@@@@@@@@@@@@@: {}", this.jpaCarPartDAO.findByPartName(PART_NAME + 0).getPartName());
         CarPart test = this.jpaCarPartDAO.findByPartName(PART_NAME + 0);
-
-        Assert.assertNotNull("The car part is not null", test);
-
-        Assert.assertEquals(100, this.jpaCarDAO.findAll().size());
+        assertNotNull("The car part is not null", test);
+        assertEquals(100, this.jpaCarDAO.findAll().size());
         Car car = this.jpaCarDAO.findByPlate("AR7930");
-        Assert.assertNotNull(car);
+        assertNotNull(car);
         car.setModel("MODEL_TEST");
         this.jpaCarDAO.update(car);
         logger.info("##################################UPDATE_CAR : {}\n", car.getModel());
-
         CarPart carPart = this.jpaCarPartDAO.findByPartName(PART_NAME + 20);
-        Assert.assertNotNull(carPart);
+        assertNotNull(carPart);
         carPart.setCar(car);
         this.jpaCarPartDAO.update(carPart);
-        Assert.assertTrue(carPart.getCar().getId().equals(car.getId()));
-
+        assertTrue(carPart.getCar().getId().equals(car.getId()));
         logger.info("########################################FIND_CAR_BY_ID : {}\n", this.jpaCarDAO.find(car.getId()));
     }
 

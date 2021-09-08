@@ -1,0 +1,110 @@
+/**
+ *
+ *    geo-platform
+ *    Rich webgis framework
+ *    http://geo-platform.org
+ *   ====================================================================
+ *
+ *   Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *
+ *   This program is free software: you can redistribute it and/or modify it
+ *   under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation, either version 3 of the License, or
+ *   (at your option) any later version. This program is distributed in the
+ *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ *   A PARTICULAR PURPOSE. See the GNU General Public License
+ *   for more details. You should have received a copy of the GNU General
+ *   Public License along with this program. If not, see http://www.gnu.org/licenses/
+ *
+ *   ====================================================================
+ *
+ *   Linking this library statically or dynamically with other modules is
+ *   making a combined work based on this library. Thus, the terms and
+ *   conditions of the GNU General Public License cover the whole combination.
+ *
+ *   As a special exception, the copyright holders of this library give you permission
+ *   to link this library with independent modules to produce an executable, regardless
+ *   of the license terms of these independent modules, and to copy and distribute
+ *   the resulting executable under terms of your choice, provided that you also meet,
+ *   for each linked independent module, the terms and conditions of the license of
+ *   that module. An independent module is a module which is not derived from or
+ *   based on this library. If you modify this library, you may extend this exception
+ *   to your version of the library, but you are not obligated to do so. If you do not
+ *   wish to do so, delete this exception statement from your version.
+ */
+package org.geosdi.geoplatform.connector.geoserver.model.about.manifest;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.ToString;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
+/**
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
+ */
+@Getter
+@ToString
+@XmlAccessorType(XmlAccessType.FIELD)
+public class GPGeoserverAboutManifestEntry implements IGPGeoserverAboutManifestEntry {
+
+    private static final long serialVersionUID = -9201236555135699778L;
+    //
+    @JsonProperty(value = "@name")
+    private String name;
+    @JsonProperty(value = "Archiver-Version")
+    private String archiverVersion;
+    @JsonProperty(value = "Bundle-License")
+    private String bundleLicense;
+    @JsonProperty(value = "Specification-Version")
+    private String specificationVersion;
+    @JsonProperty(value = "Bnd-LastModified")
+    private Long bndLastModified;
+    @JsonProperty(value = "Bundle-Name")
+    private String bundleName;
+    @JsonProperty(value = "Bundle-Description")
+    private String bundleDescription;
+    @JsonProperty(value = "Build-Jdk")
+    private String buildJdk;
+    @JsonProperty(value = "URL")
+    private String url;
+    @JsonProperty(value = "Bundle-SymbolicName")
+    private String bundleSymbolicName;
+    @JsonProperty(value = "Built-By")
+    private String builtBy;
+    @JsonProperty(value = "Require-Capability")
+    private String requireCapability;
+    @JsonProperty(value = "Tool")
+    private String tool;
+    @JsonProperty(value = "Extension-Name")
+    private String extensionName;
+    @JsonProperty(value = "Implementation-Title")
+    private String implementationTitle;
+    @JsonProperty(value = "Implementation-Version")
+    private String implementationVersion;
+    @JsonProperty(value = "Implementation-Build-Id")
+    private String implementationBuildId;
+    @JsonProperty(value = "Manifest-Version")
+    private Integer manifestVersion;
+    @JsonProperty(value = "Created-By")
+    private String createdBy;
+    @JsonProperty(value = "Implementation-Vendor-Id")
+    private String implementationVendorId;
+    @JsonProperty(value = "Bundle-DocURL")
+    private String bundleDocUrl;
+    @JsonProperty(value = "Bundle-Vendor")
+    private String bundleVendor;
+    @JsonProperty(value = "Implementation-Vendor")
+    private String implementationVendor;
+    @JsonProperty(value = "Bundle-ManifestVersion")
+    private Integer bundleManifestVersion;
+    @JsonProperty(value = "Bundle-Version")
+    private String bundleVersion;
+    @JsonProperty(value = "Specification-Title")
+    private String specificationTitle;
+    @JsonProperty(value = "Implementation-URL")
+    private String implementationUrl;
+}

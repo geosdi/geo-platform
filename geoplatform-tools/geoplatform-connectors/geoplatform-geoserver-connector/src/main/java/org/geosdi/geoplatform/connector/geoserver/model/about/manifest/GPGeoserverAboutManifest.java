@@ -33,31 +33,31 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.about;
+package org.geosdi.geoplatform.connector.geoserver.model.about.manifest;
 
-import org.geosdi.geoplatform.connector.api.GeoPlatformConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutManifestRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutStatusRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutVersionRequest;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.Getter;
+import lombok.ToString;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.List;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface GPGeoserverAboutConnectorStore extends GeoPlatformConnector {
+@Getter
+@ToString
+@XmlRootElement(name = "about")
+@XmlAccessorType(value = XmlAccessType.FIELD)
+public class GPGeoserverAboutManifest implements IGPGeoserverAboutManifest {
 
-    /**
-     * @return {@link GPGeoserverAboutVersionRequest}
-     */
-    GPGeoserverAboutVersionRequest createAboutVersionRequest();
-
-    /**
-     * @return {@link GPGeoserverAboutStatusRequest}
-     */
-    GPGeoserverAboutStatusRequest createAboutStatusRequest();
-
-    /**
-     * @return {@link GPGeoserverAboutManifestRequest}
-     */
-    GPGeoserverAboutManifestRequest createAboutManifestRequest();
+    private static final long serialVersionUID = -3849179561784167785L;
+    //
+    @XmlElement(name = "resource")
+    @JsonDeserialize(contentAs = GPGeoserverAboutManifestEntry.class)
+    private List<IGPGeoserverAboutManifestEntry> entries;
 }

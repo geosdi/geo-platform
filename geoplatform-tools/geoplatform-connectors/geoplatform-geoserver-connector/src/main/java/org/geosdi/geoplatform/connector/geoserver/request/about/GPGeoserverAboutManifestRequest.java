@@ -33,31 +33,45 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.about;
+package org.geosdi.geoplatform.connector.geoserver.request.about;
 
-import org.geosdi.geoplatform.connector.api.GeoPlatformConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutManifestRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutStatusRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutVersionRequest;
+import org.geosdi.geoplatform.connector.geoserver.model.about.manifest.GPGeoserverAboutManifest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface GPGeoserverAboutConnectorStore extends GeoPlatformConnector {
+public class GPGeoserverAboutManifestRequest extends GPJsonGetConnectorRequest<GPGeoserverAboutManifest> {
 
     /**
-     * @return {@link GPGeoserverAboutVersionRequest}
+     * @param server
+     * @param theJacksonSupport
      */
-    GPGeoserverAboutVersionRequest createAboutVersionRequest();
+    public GPGeoserverAboutManifestRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(server, theJacksonSupport);
+    }
 
     /**
-     * @return {@link GPGeoserverAboutStatusRequest}
+     * @return {@link String}
      */
-    GPGeoserverAboutStatusRequest createAboutStatusRequest();
+    @Override
+    protected String createUriPath() throws Exception {
+        String baseURI = this.serverURI.toString();
+        return ((baseURI.endsWith("/") ? baseURI.concat("about/manifest.json") : baseURI.concat("/about/manifest.json")));
+    }
 
     /**
-     * @return {@link GPGeoserverAboutManifestRequest}
+     * @return {@link Class< GPGeoserverAboutManifest >}
      */
-    GPGeoserverAboutManifestRequest createAboutManifestRequest();
+    @Override
+    protected Class<GPGeoserverAboutManifest> forClass() {
+        return GPGeoserverAboutManifest.class;
+    }
 }

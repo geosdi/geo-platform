@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.store.about;
 
 import org.geosdi.geoplatform.connector.api.GPConnectorStore;
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
+import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutManifestRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutStatusRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutVersionRequest;
 
@@ -67,5 +68,13 @@ public abstract class GeoserverAboutConnectorStore extends GPConnectorStore<GPGe
     @Override
     public GPGeoserverAboutStatusRequest createAboutStatusRequest() {
         return this.server.createAboutStatusRequest();
+    }
+
+    /**
+     * @return {@link GPGeoserverAboutManifestRequest}
+     */
+    @Override
+    public GPGeoserverAboutManifestRequest createAboutManifestRequest() {
+        return this.server.createAboutManifestRequest();
     }
 }

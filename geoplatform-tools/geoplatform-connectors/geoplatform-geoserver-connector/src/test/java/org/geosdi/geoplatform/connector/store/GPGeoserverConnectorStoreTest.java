@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.namespace.GPGeoserverNam
 import org.geosdi.geoplatform.connector.geoserver.model.namespace.IGPGeoserverNamespace;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverLoadWorkspace;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GeoserverCreateWorkspaceBody;
+import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutManifestRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutStatusRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutVersionRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLayersRequest;
@@ -190,5 +191,11 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
         deleteWorkspaceRequest.withWorkspaceName("workspace_test_1");
         deleteWorkspaceRequest.withRecurse(TRUE);
         logger.info("###########################DELETE_WORKSPACE_RESPONSE : {}\n", deleteWorkspaceRequest.getResponse());
+    }
+
+    @Test
+    public void t_aboutManifestGeoserverConnectorTest() throws Exception {
+        GPGeoserverAboutManifestRequest aboutManifestRequest = geoserverConnectorStoreV2_18_x.createAboutManifestRequest();
+        logger.info("#####################ABOUT_MANIFEST_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutManifestRequest.getResponseAsString());
     }
 }

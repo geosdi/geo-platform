@@ -33,31 +33,22 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.about;
+package org.geosdi.geoplatform.connector.geoserver.model.about.manifest;
 
-import org.geosdi.geoplatform.connector.api.GeoPlatformConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutManifestRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutStatusRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutVersionRequest;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface GPGeoserverAboutConnectorStore extends GeoPlatformConnector {
+@JsonDeserialize(as = GPGeoserverAboutManifest.class)
+public interface IGPGeoserverAboutManifest extends Serializable {
 
     /**
-     * @return {@link GPGeoserverAboutVersionRequest}
+     * @return {@link List<  IGPGeoserverAboutManifestEntry  >}
      */
-    GPGeoserverAboutVersionRequest createAboutVersionRequest();
-
-    /**
-     * @return {@link GPGeoserverAboutStatusRequest}
-     */
-    GPGeoserverAboutStatusRequest createAboutStatusRequest();
-
-    /**
-     * @return {@link GPGeoserverAboutManifestRequest}
-     */
-    GPGeoserverAboutManifestRequest createAboutManifestRequest();
+    List<IGPGeoserverAboutManifestEntry> getEntries();
 }

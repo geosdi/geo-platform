@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.jackson;
 
+import org.geosdi.geoplatform.connector.geoserver.model.about.manifest.GPGeoserverAboutManifest;
 import org.geosdi.geoplatform.connector.geoserver.model.about.status.GPGeoserverAboutStatus;
 import org.geosdi.geoplatform.connector.geoserver.model.about.version.GPGeoserverAboutVersion;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastore;
@@ -65,6 +66,8 @@ import java.io.File;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -1046,4 +1049,13 @@ public class GPGeoserverJacksonTest {
         jacksonXmlSupport.getDefaultMapper().writeValue(writer, featureTypeInfo);
         logger.info("\n{}\n", writer);
     }
+
+    @Test
+    public void manifestTest() throws Exception {
+        GPGeoserverAboutManifest response = jacksonSupport.getDefaultMapper().readValue(
+                new File(Stream.of(new File(".").getCanonicalPath() , "src", "test", "resources", "manifest.json")
+                        .collect(Collectors.joining(File.separator))), GPGeoserverAboutManifest.class);
+        logger.info("RESPONSE: {}", response);
+    }
+
 }

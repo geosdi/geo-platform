@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.geoserver.about;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
+import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutManifestRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutStatusRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutVersionRequest;
 import org.geosdi.geoplatform.connector.server.GPAbstractServerConnector;
@@ -145,6 +146,20 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
             case V219x:
             case V218x:
                 return new GPGeoserverAboutStatusRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
+        }
+    }
+
+    /**
+     * @return {@link GPGeoserverAboutManifestRequest}
+     */
+    @Override
+    public GPGeoserverAboutManifestRequest createAboutManifestRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverAboutManifestRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
         }

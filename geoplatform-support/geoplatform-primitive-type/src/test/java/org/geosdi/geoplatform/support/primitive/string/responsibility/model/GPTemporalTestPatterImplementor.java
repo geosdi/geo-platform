@@ -39,6 +39,8 @@ import org.geosdi.geoplatform.support.primitive.string.responsibility.bridge.GPB
 
 import java.util.Locale;
 
+import static java.util.Locale.ENGLISH;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -55,6 +57,6 @@ public class GPTemporalTestPatterImplementor extends GPBaseTemporalPatternImplem
      */
     @Override
     public Locale getLocale() {
-        return Locale.ENGLISH;
+        return ENGLISH;
     }
 }

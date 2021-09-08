@@ -53,7 +53,6 @@ public class GPTemporalPatternImplementorTest {
 
     @Test
     public void temporalPatternTest() {
-        logger.info("############################FOUND TEMPORAL_IMPLEMENTOR : {}\n",
-                TEMPORAL_IMPLEMENTOR_FINDER.findTemporalImplementor());
+        logger.info("############################FOUND TEMPORAL_IMPLEMENTOR : {}\n", TEMPORAL_IMPLEMENTOR_FINDER.findTemporalImplementor());
     }
 }

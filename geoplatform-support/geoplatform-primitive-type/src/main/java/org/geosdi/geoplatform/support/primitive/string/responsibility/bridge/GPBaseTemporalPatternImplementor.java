@@ -35,9 +35,10 @@
  */
 package org.geosdi.geoplatform.support.primitive.string.responsibility.bridge;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+
+import static java.util.Arrays.asList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -48,11 +49,13 @@ public class GPBaseTemporalPatternImplementor implements GPTemporalPatternImplem
     private final Set<String> patterns;
 
     public GPBaseTemporalPatternImplementor() {
-        this.patterns = new HashSet<>(Arrays.asList("yyyy.MM.dd G 'at' HH:mm:ss z", "EEE, MMM d, ''yy", "h:mm a",
-                "hh 'o''clock' a, zzzz", "K:mm a, z", "yyyyy.MMMMM.dd GGG hh:mm aaa",
+        this.patterns = new HashSet<>(asList("yyyy.MM.dd G 'at' HH:mm:ss z", "EEE, MMM d, ''yy", "h:mm a",
+                "hh 'o''clock' a, zzzz", "K:mm a, z", "yyyyy.MMMMM.dd GGG hh:mm aaa", "EEEEE dd MMMMM yyyy HH:mm:ss.SSSZ",
                 "EEE, d MMM yyyy HH:mm:ss Z", "yyMMddHHmmssZ", "yyyy-MM-dd'T'HH:mm:ss.SSSZ", "yyyy-MM-dd'T'HH:mm:ssZ",
-                "dd.MM.yy", "H:mm", "H:mm:ss:SSS", "dd/MM/YY", "dd/MM/YYYY", "dd-MM-YY", "dd-MM-YYYY",
-                "YYYY-MM-dd HH:mm:ss", "yyyy-MM-dd'T'HH:mm:ss", "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS"));
+                "dd.MM.yy", "H:mm", "H:mm:ss:SSS", "dd/MM/YY", "dd/MM/YYYY", "dd-MM-YY", "dd-MM-YYYY", "YYYY-MM-dd",
+                "YYYY-MM-dd HH:mm:ss", "yyyy-MM-dd'T'HH:mm:ss", "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS", "MM-dd-yyyy",
+                "yyyy-MM-dd HH:mm:ss.SSS", "yyyy-MM-dd HH:mm:ss.SSSZ", "EEEEE MMMMM yyyy HH:mm:ss.SSSZ",
+                "yyyy-MM-ddTHH:mm:ss:sssZ", "yyyy-MM-dd'T'HH:mm:ss'Z'"));
     }
 
     /**

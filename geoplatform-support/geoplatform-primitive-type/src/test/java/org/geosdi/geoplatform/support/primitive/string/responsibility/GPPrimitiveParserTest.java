@@ -149,4 +149,46 @@ public class GPPrimitiveParserTest {
         String className = primitiveParserHandlerManager.parseValue("0").getSimpleName();
         logger.info("###########################PARSE_VALUE : {}\n", className);
     }
+
+    @Test
+    public void q_parseValueTest() throws Exception {
+        String className = primitiveParserHandlerManager.parseValue("2018-09-24T17:48:00").getSimpleName();
+        logger.info("###########################PARSE_VALUE : {}\n", className);
+        assertTrue(className.equalsIgnoreCase(DateTime.class.getSimpleName()));
+    }
+
+    @Test
+    public void r_parseValueTest() throws Exception {
+        String className = primitiveParserHandlerManager.parseValue("2018-09-24T18:01:24Z").getSimpleName();
+        logger.info("###########################PARSE_VALUE : {}\n", className);
+        assertTrue(className.equalsIgnoreCase(DateTime.class.getSimpleName()));
+    }
+
+    @Test
+    public void s_parseValueTest() throws Exception {
+        String className = primitiveParserHandlerManager.parseValue("44.3 11.2").getSimpleName();
+        logger.info("###########################PARSE_VALUE : {}\n", className);
+        assertTrue(className.equalsIgnoreCase(Double[].class.getSimpleName()));
+    }
+
+    @Test
+    public void t_parseValueTest() throws Exception {
+        String className = primitiveParserHandlerManager.parseValue("88 15.2").getSimpleName();
+        logger.info("###########################PARSE_VALUE : {}\n", className);
+        assertTrue(className.equalsIgnoreCase(Double[].class.getSimpleName()));
+    }
+
+    @Test
+    public void u_parseValueTest() throws Exception {
+        String className = primitiveParserHandlerManager.parseValue("88 15.2 11.3").getSimpleName();
+        logger.info("###########################PARSE_VALUE : {}\n", className);
+        assertTrue(className.equalsIgnoreCase(Double[].class.getSimpleName()));
+    }
+
+    @Test
+    public void v_parseValueTest() throws Exception {
+        String className = primitiveParserHandlerManager.parseValue("88 15 11").getSimpleName();
+        logger.info("###########################PARSE_VALUE : {}\n", className);
+        assertTrue(className.equalsIgnoreCase(Integer[].class.getSimpleName()));
+    }
 }

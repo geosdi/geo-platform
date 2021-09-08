@@ -37,10 +37,11 @@ package org.geosdi.geoplatform.support.text.spi;
 
 import org.geosdi.geoplatform.support.text.spi.finder.GPBaseNumberFormatSupportFinder;
 import org.geosdi.geoplatform.support.text.spi.finder.GPNumberFormatSupportFinder;
-import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -55,6 +56,6 @@ public class GPBaseNumberFormatSupportFinderTest {
     @Test
     public void printNumberFormatSPISupportTest() throws Exception {
         GPNumberFormatSPISupport numberFormatSPISupport = finder.findNumberFormatSupport();
-        Assert.assertTrue(numberFormatSPISupport.getNumberFormatSPISupportName().equals(GPBaseNumberFormatSupport.class.getSimpleName()));
+        assertTrue(numberFormatSPISupport.getNumberFormatSPISupportName().equals(GPBaseNumberFormatSupport.class.getSimpleName()));
     }
 }

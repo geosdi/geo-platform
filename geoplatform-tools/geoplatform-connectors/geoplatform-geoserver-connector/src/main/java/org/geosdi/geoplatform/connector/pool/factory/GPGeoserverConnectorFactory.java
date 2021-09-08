@@ -64,6 +64,8 @@ public class GPGeoserverConnectorFactory extends GPPoolConnectorFactory<GPPoolGe
                 .withPooledConnectorConfig(key.getPooledConnectorConfig())
                 .withClientSecurity(key.getSecurityConnector())
                 .withJacksoSupport(key.getJacksonSupport())
+                .withSslConnectionSocketFactory(key.getSslConnectionSocketFactory())
+                .withProxyConfiguration(key.getProxyConfiguration())
                 .withVersion(key.getVersion())
                 .build();
     }

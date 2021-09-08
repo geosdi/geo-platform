@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.support.primitive.string.responsibility;
 
 import static java.lang.Boolean.FALSE;
+import static java.util.stream.Stream.of;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -60,6 +61,6 @@ abstract class ArrayPrimitiveParserFromStringHandler<Type extends Object> extend
      */
     protected Boolean canParseInternal(String value) throws Exception {
         String[] values = value.split(" ");
-        return (value.length() > 1 ? (this.canParseValue(values[0]) && (this.canParseValue(values[1]))) : FALSE);
+        return (value.length() > 1 ? (of(values).allMatch(this::canParseValue)) : FALSE);
     }
 }

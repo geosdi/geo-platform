@@ -68,7 +68,7 @@ public class GPGeoserverAboutManifestRequest extends GPJsonGetConnectorRequest<G
     }
 
     /**
-     * @return {@link Class< GPGeoserverAboutManifest >}
+     * @return {@link Class<GPGeoserverAboutManifest>}
      */
     @Override
     protected Class<GPGeoserverAboutManifest> forClass() {

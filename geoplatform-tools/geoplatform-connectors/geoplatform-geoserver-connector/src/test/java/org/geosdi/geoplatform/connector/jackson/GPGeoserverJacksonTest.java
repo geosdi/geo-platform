@@ -35,9 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.jackson;
 
-import org.geosdi.geoplatform.connector.geoserver.model.about.manifest.GPGeoserverAboutManifest;
 import org.geosdi.geoplatform.connector.geoserver.model.about.status.GPGeoserverAboutStatus;
-import org.geosdi.geoplatform.connector.geoserver.model.about.version.GPGeoserverAboutVersion;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastore;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastores;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.GPGeoserverCreateDatastoreBody;
@@ -67,8 +65,8 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
+import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -94,18 +92,7 @@ public class GPGeoserverJacksonTest {
     private static final GPJacksonXmlSupport jacksonXmlSupport = new GPJacksonXmlSupport();
 
     @Test
-    public void a_unmarshallGeoserverAboutVersionTest() throws Exception {
-        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_ABOUT_VERSION : {}\n", jacksonSupport.getDefaultMapper()
-                .readValue(new StringReader("{\"about\":{\"resource\":[{\"@name\":\"GeoServer\",\"Build-Timestamp\"" +
-                        ":\"21-Nov-2017 22:02\",\"Version\":\"2.12.1\",\"Git-Revision\":" +
-                        "\"5927e49e781ddcdbf9213d32a439418347c17480\"},{\"@name\":\"GeoTools\",\"Build-Timestamp\":" +
-                        "\"21-Nov-2017 14:18\",\"Version\":18.1,\"Git-Revision\":" +
-                        "\"306cf3bdde1bee0110dc1c3ba77819f1e294a45b\"},{\"@name\":\"GeoWebCache\",\"Version\":\"1.12.1\"," +
-                        "\"Git-Revision\":\"1.12.x\\/22d18b47c9e80316d563c28d280602cb3dde624c\"}]}}\n"), GPGeoserverAboutVersion.class));
-    }
-
-    @Test
-    public void b_unmarshallGeoserverWorkspacesTest() throws Exception {
+    public void a_unmarshallGeoserverWorkspacesTest() throws Exception {
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_WOKSPACES : {}\n", jacksonSupport.getDefaultMapper()
                 .readValue(new StringReader("{  \n" +
                         "   \"workspaces\":{  \n" +
@@ -144,14 +131,14 @@ public class GPGeoserverJacksonTest {
     }
 
     @Test
-    public void c_unmarshallGeoserverEmptyWorkspacesTest() throws Exception {
+    public void b_unmarshallGeoserverEmptyWorkspacesTest() throws Exception {
         logger.info("\n{}\n", emptyJacksonSupport.getDefaultMapper().readValue(new StringReader("{  \n" +
                 "   \"workspaces\":\"\"\n" +
                 "}"), GPGeoserverEmptyWorkspaces.class));
     }
 
     @Test
-    public void d_unmarshallGeoserverAboutStatusTest() throws Exception {
+    public void c_unmarshallGeoserverAboutStatusTest() throws Exception {
         logger.info("##############################GEOSERVER_ABOUT_STATUS : \n{}\n", jacksonSupport.getDefaultMapper()
                 .readValue(new StringReader("{  \n" +
                         "   \"statuss\":{  \n" +
@@ -909,7 +896,8 @@ public class GPGeoserverJacksonTest {
                         "  }\n" +
                         "}"), GPGeoserverFeatureTypeInfo.class);
         logger.info("##########################GEOSERVER_FEATURE_TYPE_INFO : {}\n", featureTypeInfo);
-        emptyJacksonSupport.getDefaultMapper().writeValue(new File("./target/FeatureType.json"), featureTypeInfo);
+        emptyJacksonSupport.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "FeatureTypeInfo")
+                .collect(Collectors.joining(File.separator, "", ".json"))), featureTypeInfo);
     }
 
     @Test
@@ -1044,18 +1032,10 @@ public class GPGeoserverJacksonTest {
                         "   }\n" +
                         "}"), GPGeoserverFeatureTypeInfo.class);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_FEATURE_TYPE_INFO : {}\n", featureTypeInfo);
-        jacksonSupport.getDefaultMapper().writeValue(new File("./target/FeatureType.json"), featureTypeInfo);
+        jacksonSupport.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "FeatureTypeInfo1")
+                .collect(Collectors.joining(File.separator, "", ".json"))), featureTypeInfo);
         Writer writer = new StringWriter();
         jacksonXmlSupport.getDefaultMapper().writeValue(writer, featureTypeInfo);
         logger.info("\n{}\n", writer);
     }
-
-    @Test
-    public void manifestTest() throws Exception {
-        GPGeoserverAboutManifest response = jacksonSupport.getDefaultMapper().readValue(
-                new File(Stream.of(new File(".").getCanonicalPath() , "src", "test", "resources", "manifest.json")
-                        .collect(Collectors.joining(File.separator))), GPGeoserverAboutManifest.class);
-        logger.info("RESPONSE: {}", response);
-    }
-
 }

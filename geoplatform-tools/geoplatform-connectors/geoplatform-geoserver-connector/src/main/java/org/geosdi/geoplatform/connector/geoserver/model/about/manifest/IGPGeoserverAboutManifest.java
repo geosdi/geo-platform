@@ -48,7 +48,7 @@ import java.util.List;
 public interface IGPGeoserverAboutManifest extends Serializable {
 
     /**
-     * @return {@link List<  IGPGeoserverAboutManifestEntry  >}
+     * @return {@link List<IGPGeoserverAboutManifestEntry>}
      */
     List<IGPGeoserverAboutManifestEntry> getEntries();
 }

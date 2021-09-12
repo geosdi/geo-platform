@@ -47,7 +47,13 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-expression</artifactId>
         </dependency>
-        
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-geoserver-connector</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -65,6 +71,6 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
         </dependency>
-        
+
     </dependencies>
 </project>

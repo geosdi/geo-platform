@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.store;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
+import org.geosdi.geoplatform.connector.geoserver.request.running.GeoserverRestRunningRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.connector.store.settings.GeoserverSettingsConnectorStore;
@@ -49,6 +50,8 @@ import java.net.URL;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPGeoserverConnectorStore extends GeoserverSettingsConnectorStore implements IGPGeoserverConnectorStore {
+
+    private final GeoserverRestRunningRequest restRunningRequest;
 
     /**
      * @param server
@@ -69,6 +72,15 @@ public class GPGeoserverConnectorStore extends GeoserverSettingsConnectorStore i
      */
     GPGeoserverConnectorStore(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(new GPGeoserverConnector(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion));
+        this.restRunningRequest = this.server.createGeoserverRestRunningRequest();
+    }
+
+    /**
+     * @return {@link Boolean}
+     */
+    @Override
+    public Boolean isGeoserverRestRunning() {
+       return this.restRunningRequest.isUp();
     }
 
     /**

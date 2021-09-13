@@ -36,12 +36,16 @@
 package org.geosdi.geoplatform.connector.geoserver;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
+import org.geosdi.geoplatform.connector.GeoserverVersionException;
+import org.geosdi.geoplatform.connector.geoserver.request.running.GeoserverRestRunningRequest;
 import org.geosdi.geoplatform.connector.geoserver.settings.GPGeoserverSettingsConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import java.net.URL;
+
+import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExceptionMessage;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -98,5 +102,19 @@ public class GPGeoserverConnector extends GPGeoserverSettingsConnector implement
      */
     public GPGeoserverConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion);
+    }
+
+    /**
+     * @return {@link GeoserverRestRunningRequest}
+     */
+    @Override
+    public GeoserverRestRunningRequest createGeoserverRestRunningRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverRestRunningRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
     }
 }

@@ -45,6 +45,8 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import java.net.URL;
 
+import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExceptionMessage;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -112,7 +114,7 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
             case V218x:
                 return new GPGeoserverLoadCoverageStoresRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
+                throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
 
@@ -126,7 +128,7 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
             case V218x:
                 return new GPGeoserverLoadCoverageStoreRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
+                throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
 
@@ -140,7 +142,7 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
             case V218x:
                 return new GPGeoserverCreateCoverageStoreRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
+                throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
 
@@ -154,7 +156,7 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
             case V218x:
                 return new GPGeoserverDeleteCoverageStoreRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
+                throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
 
@@ -168,7 +170,7 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
             case V218x:
                 return new GPGeoserverUpdateCoverageStoreRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
+                throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
 }

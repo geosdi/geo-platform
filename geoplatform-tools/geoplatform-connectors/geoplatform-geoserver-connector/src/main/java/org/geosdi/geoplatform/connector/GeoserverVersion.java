@@ -45,6 +45,8 @@ import java.util.Optional;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -95,5 +97,15 @@ public enum GeoserverVersion implements GPServerConnectorVersion {
                 .filter(v -> ((version != null) && !(version.trim().isEmpty())) ? v.getVersion().equalsIgnoreCase(version) : FALSE)
                 .findFirst();
         return optional.orElse(V219x);
+    }
+
+    /**
+     * @return {@link String}
+     */
+    public static String toVersionExceptionMessage() {
+        return of("The version for GPGeoserverConnector must be ", stream(GeoserverVersion.values())
+                .map(GeoserverVersion::getVersion)
+                .collect(joining(" OR ")))
+                .collect(joining());
     }
 }

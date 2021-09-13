@@ -47,6 +47,7 @@ import java.net.URL;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static org.geosdi.geoplatform.connector.GeoserverVersion.fromString;
+import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExceptionMessage;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
@@ -130,7 +131,7 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
             case V218x:
                 return new GPGeoserverAboutVersionRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
+                throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
 
@@ -144,7 +145,7 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
             case V218x:
                 return new GPGeoserverAboutStatusRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
+                throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
 
@@ -158,7 +159,7 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
             case V218x:
                 return new GPGeoserverAboutManifestRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
+                throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
 

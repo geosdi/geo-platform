@@ -44,6 +44,8 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import java.net.URL;
 
+import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExceptionMessage;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -111,7 +113,7 @@ public abstract class GPGeoserverSecurityConnector extends GPGeoserverFeatureTyp
             case V218x:
                 return new GPGeoserverGetMasterPasswordRequest(this, this.emptyJacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
+                throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
 
@@ -125,7 +127,7 @@ public abstract class GPGeoserverSecurityConnector extends GPGeoserverFeatureTyp
             case V218x:
                 return new GPGeoserverGetCatalogRequest(this, this.emptyJacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
+                throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
 
@@ -139,7 +141,7 @@ public abstract class GPGeoserverSecurityConnector extends GPGeoserverFeatureTyp
             case V218x:
                 return new GPGeoserverUpdateCatalogRequest(this, this.emptyJacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
+                throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
 }

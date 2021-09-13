@@ -45,7 +45,6 @@ import it.geosolutions.geoserver.rest.encoder.GSLayerEncoder;
 import it.geosolutions.geoserver.rest.encoder.GSResourceEncoder;
 import it.geosolutions.geoserver.rest.encoder.coverage.GSCoverageEncoder;
 import org.apache.commons.httpclient.NameValuePair;
-import org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
@@ -112,8 +111,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
     //
     @Resource(name = "sharedRestPublisher")
     private GeoServerRESTPublisher restPublisher;
-    @Autowired
-    private GPGeoserverConnectorStore geoserverConnectorStore;
     //
     @Resource(name = "sharedRestReader")
     private GeoServerRESTReader restReader;

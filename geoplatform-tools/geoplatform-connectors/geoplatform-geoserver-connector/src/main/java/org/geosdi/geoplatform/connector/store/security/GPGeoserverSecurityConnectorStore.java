@@ -35,9 +35,12 @@
  */
 package org.geosdi.geoplatform.connector.store.security;
 
-import org.geosdi.geoplatform.connector.geoserver.request.security.GPGeoserverGetMasterPasswordRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.GPGeoserverUpdateCatalogRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.catalog.GPGeoserverGetCatalogRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverGetMasterPasswordRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverUpdateCatalogRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.catalog.GeoserverGetCatalogRequest;
+import org.geosdi.geoplatform.connector.geoserver.security.GPGeoserverGetCatalogRequest;
+import org.geosdi.geoplatform.connector.geoserver.security.GPGeoserverGetMasterPasswordRequest;
+import org.geosdi.geoplatform.connector.geoserver.security.GPGeoserverUpdateCatalogRequest;
 import org.geosdi.geoplatform.connector.store.featuretypes.GPGeoserverFeatureTypesConnectorStore;
 
 /**
@@ -49,15 +52,15 @@ public interface GPGeoserverSecurityConnectorStore extends GPGeoserverFeatureTyp
     /**
      * @return {@link GPGeoserverGetMasterPasswordRequest}
      */
-    GPGeoserverGetMasterPasswordRequest loadMasterPasswordRequest();
+    GeoserverGetMasterPasswordRequest loadMasterPasswordRequest();
 
     /**
      * @return {@link GPGeoserverGetCatalogRequest}
      */
-    GPGeoserverGetCatalogRequest loadCatalogRequest();
+    GeoserverGetCatalogRequest loadCatalogRequest();
 
     /**
      * @return {@link GPGeoserverUpdateCatalogRequest}
      */
-    GPGeoserverUpdateCatalogRequest updateCatalogRequest();
+    GeoserverUpdateCatalogRequest updateCatalogRequest();
 }

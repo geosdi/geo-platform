@@ -36,9 +36,11 @@
 package org.geosdi.geoplatform.connector.store.settings;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.GPGeoserverLoadContactSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.GPGeoserverLoadGlobalSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.GeoserverLoadContactSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.GeoserverLoadGlobalSettingsRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.settings.GeoserverUpdateGlobalSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.settings.GPGeoserverLoadContactSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.settings.GPGeoserverLoadGlobalSettingsRequest;
 import org.geosdi.geoplatform.connector.store.security.GeoserverSecurityConnectorStore;
 
 /**
@@ -58,7 +60,7 @@ public abstract class GeoserverSettingsConnectorStore extends GeoserverSecurityC
      * @return {@link GPGeoserverLoadGlobalSettingsRequest}
      */
     @Override
-    public GPGeoserverLoadGlobalSettingsRequest loadGeoserverGlobalSettingRequest() {
+    public GeoserverLoadGlobalSettingsRequest loadGeoserverGlobalSettingRequest() {
         return this.server.loadGeoserverGlobalSettingRequest();
     }
 
@@ -74,7 +76,7 @@ public abstract class GeoserverSettingsConnectorStore extends GeoserverSecurityC
      * @return {@link GPGeoserverLoadContactSettingsRequest}
      */
     @Override
-    public GPGeoserverLoadContactSettingsRequest loadGeoserverContactSettingsRequest() {
+    public GeoserverLoadContactSettingsRequest loadGeoserverContactSettingsRequest() {
         return this.server.loadGeoserverContactSettingsRequest();
     }
 }

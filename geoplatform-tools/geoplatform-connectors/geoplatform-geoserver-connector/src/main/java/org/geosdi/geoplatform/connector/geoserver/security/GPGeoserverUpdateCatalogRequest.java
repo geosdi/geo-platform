@@ -33,20 +33,26 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.worksapce;
+package org.geosdi.geoplatform.connector.geoserver.security;
 
+import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.StringEntity;
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverCreateWorkspaceBody;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverUpdateWorkspaceRequest;
+import org.geosdi.geoplatform.connector.geoserver.model.security.catalog.GPGeoserverCatalog;
+import org.geosdi.geoplatform.connector.geoserver.model.security.catalog.IGPGeoserverCatalog;
+import org.geosdi.geoplatform.connector.geoserver.model.security.catalog.IGPGeoserverCatalogMode;
+import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverUpdateCatalogRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
+import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 import static org.apache.http.entity.ContentType.APPLICATION_JSON;
@@ -56,64 +62,27 @@ import static org.apache.http.entity.ContentType.APPLICATION_JSON;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverUpdateWorkspaceRequest extends GPJsonPutConnectorRequest<String> implements GeoserverUpdateWorkspaceRequest {
+public class GPGeoserverUpdateCatalogRequest extends GPJsonPutConnectorRequest<Boolean> implements GeoserverUpdateCatalogRequest {
 
-    private final ThreadLocal<String> workspaceName;
-    private final ThreadLocal<GPGeoserverCreateWorkspaceBody> workspaceBody;
+    private final ThreadLocal<IGPGeoserverCatalogMode> catalogMode;
 
     /**
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    GPGeoserverUpdateWorkspaceRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverUpdateCatalogRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
-        this.workspaceName = withInitial(() -> null);
-        this.workspaceBody = withInitial(() -> null);
+        this.catalogMode = withInitial(() -> null);
     }
 
     /**
-     * @return {@link String}
+     * @param theCatalogMode
+     * @return {@link GeoserverUpdateCatalogRequest}
      */
     @Override
-    public String getWorkspaceName() {
-        return this.workspaceName.get();
-    }
-
-    /**
-     * @param theWorkspaceName
-     */
-    @Override
-    public void setWorkspaceName(String theWorkspaceName) {
-        this.workspaceName.set(theWorkspaceName);
-    }
-
-    /**
-     * @return {@link GPGeoserverCreateWorkspaceBody}
-     */
-    @Override
-    public GPGeoserverCreateWorkspaceBody getWorkspaceBody() {
-        return this.workspaceBody.get();
-    }
-
-    /**
-     * @param theWorkspaceBody
-     */
-    @Override
-    public void setWorkspaceBody(GPGeoserverCreateWorkspaceBody theWorkspaceBody) {
-        this.workspaceBody.set(theWorkspaceBody);
-    }
-
-    /**
-     * @param statusCode
-     * @throws Exception
-     */
-    @Override
-    protected void checkHttpResponseStatus(int statusCode) throws Exception {
-        super.checkHttpResponseStatus(statusCode);
-        switch (statusCode) {
-            case 405:
-                throw new IllegalStateException("Forbidden to change the name of the workspace");
-        }
+    public <CatalogMode extends IGPGeoserverCatalogMode> GeoserverUpdateCatalogRequest withCatalogMode(@Nonnull(when = NEVER) CatalogMode theCatalogMode) {
+        this.catalogMode.set(theCatalogMode);
+        return this;
     }
 
     /**
@@ -121,11 +90,12 @@ public class GPGeoserverUpdateWorkspaceRequest extends GPJsonPutConnectorRequest
      */
     @Override
     protected HttpEntity prepareHttpEntity() throws Exception {
-        GPGeoserverCreateWorkspaceBody workspaceBody = this.workspaceBody.get();
-        checkArgument(workspaceBody != null, "The workspaceBody must not be null.");
-        String workspaceBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(workspaceBody);
-        logger.debug("#############################WORKSPACE_BODY : \n{}\n", workspaceBodyString);
-        return new StringEntity(workspaceBodyString, APPLICATION_JSON);
+        IGPGeoserverCatalogMode catalogMode = this.catalogMode.get();
+        checkArgument(catalogMode != null, "The Parameter catalogMode must not be null.");
+        IGPGeoserverCatalog geoserverCatalog = new GPGeoserverCatalog(catalogMode);
+        String geoserverCatalogAsString = this.jacksonSupport.getDefaultMapper().writeValueAsString(geoserverCatalog);
+        logger.debug("#############################CATALOG_MODE_BODY : \n{}\n", geoserverCatalogAsString);
+        return new StringEntity(geoserverCatalogAsString, APPLICATION_JSON);
     }
 
     /**
@@ -133,18 +103,26 @@ public class GPGeoserverUpdateWorkspaceRequest extends GPJsonPutConnectorRequest
      */
     @Override
     protected String createUriPath() throws Exception {
-        String workspaceName = this.workspaceName.get();
-        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspaceName must not be null or an Empty String.");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName)
-                : baseURI.concat("/workspaces/").concat(workspaceName)));
+        return ((baseURI.endsWith("/") ? baseURI.concat("security/acl/catalog.json") : baseURI.concat("/security/acl/catalog.json")));
     }
 
     /**
-     * @return {@link Class<String>}
+     * @param reader
+     * @return {@link Boolean}
+     * @throws Exception
      */
     @Override
-    protected Class<String> forClass() {
-        return String.class;
+    protected Boolean readInternal(BufferedReader reader) throws Exception {
+        String value = CharStreams.toString(reader);
+        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
+    }
+
+    /**
+     * @return {@link Class<Boolean>}
+     */
+    @Override
+    protected Class<Boolean> forClass() {
+        return Boolean.class;
     }
 }

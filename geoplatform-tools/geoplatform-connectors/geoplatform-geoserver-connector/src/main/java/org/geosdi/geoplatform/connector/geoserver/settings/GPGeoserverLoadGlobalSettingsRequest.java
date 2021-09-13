@@ -33,10 +33,11 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.security.catalog;
+package org.geosdi.geoplatform.connector.geoserver.settings;
 
 import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.model.security.catalog.GPGeoserverCatalog;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.GPGeoserverGlobalSettings;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.GeoserverLoadGlobalSettingsRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -50,13 +51,13 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverGetCatalogRequest extends GPJsonGetConnectorRequest<GPGeoserverCatalog> {
+public class GPGeoserverLoadGlobalSettingsRequest extends GPJsonGetConnectorRequest<GPGeoserverGlobalSettings> implements GeoserverLoadGlobalSettingsRequest {
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverGetCatalogRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverLoadGlobalSettingsRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
     }
 
@@ -66,14 +67,14 @@ public class GPGeoserverGetCatalogRequest extends GPJsonGetConnectorRequest<GPGe
     @Override
     protected String createUriPath() throws Exception {
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("security/acl/catalog.json") : baseURI.concat("/security/acl/catalog.json")));
+        return ((baseURI.endsWith("/") ? baseURI.concat("settings.json") : baseURI.concat("/settings.json")));
     }
 
     /**
-     * @return {@link Class<GPGeoserverCatalog>}
+     * @return {@link Class<GPGeoserverGlobalSettings>}
      */
     @Override
-    protected Class<GPGeoserverCatalog> forClass() {
-        return GPGeoserverCatalog.class;
+    protected Class<GPGeoserverGlobalSettings> forClass() {
+        return GPGeoserverGlobalSettings.class;
     }
 }

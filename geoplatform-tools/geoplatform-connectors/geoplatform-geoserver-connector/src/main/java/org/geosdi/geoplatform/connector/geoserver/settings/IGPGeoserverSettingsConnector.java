@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.settings;
 
-import org.geosdi.geoplatform.connector.geoserver.request.settings.GPGeoserverLoadContactSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.GPGeoserverLoadGlobalSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.GeoserverLoadContactSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.GeoserverLoadGlobalSettingsRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.settings.GeoserverUpdateGlobalSettingsRequest;
 import org.geosdi.geoplatform.connector.geoserver.security.IGPGeoserverSecurityConnector;
 
@@ -47,9 +47,9 @@ import org.geosdi.geoplatform.connector.geoserver.security.IGPGeoserverSecurityC
 public interface IGPGeoserverSettingsConnector extends IGPGeoserverSecurityConnector {
 
     /**
-     * @return {@link org.geosdi.geoplatform.connector.geoserver.request.settings.GPGeoserverLoadGlobalSettingsRequest}
+     * @return {@link GPGeoserverLoadGlobalSettingsRequest}
      */
-    GPGeoserverLoadGlobalSettingsRequest loadGeoserverGlobalSettingRequest();
+    GeoserverLoadGlobalSettingsRequest loadGeoserverGlobalSettingRequest();
 
     /**
      * @return {@link GeoserverUpdateGlobalSettingsRequest}
@@ -59,5 +59,5 @@ public interface IGPGeoserverSettingsConnector extends IGPGeoserverSecurityConne
     /**
      * @return {@link GPGeoserverLoadContactSettingsRequest}
      */
-    GPGeoserverLoadContactSettingsRequest loadGeoserverContactSettingsRequest();
+    GeoserverLoadContactSettingsRequest loadGeoserverContactSettingsRequest();
 }

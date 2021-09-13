@@ -36,9 +36,9 @@
 package org.geosdi.geoplatform.connector.geoserver.security;
 
 import org.geosdi.geoplatform.connector.geoserver.featuretypes.IGPGeoserverFeatureTypesConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.security.GPGeoserverGetMasterPasswordRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.GPGeoserverUpdateCatalogRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.catalog.GPGeoserverGetCatalogRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverGetMasterPasswordRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverUpdateCatalogRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.catalog.GeoserverGetCatalogRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -49,15 +49,15 @@ public interface IGPGeoserverSecurityConnector extends IGPGeoserverFeatureTypesC
     /**
      * @return {@link GPGeoserverGetMasterPasswordRequest}
      */
-    GPGeoserverGetMasterPasswordRequest loadMasterPasswordRequest();
+    GeoserverGetMasterPasswordRequest loadMasterPasswordRequest();
 
     /**
-     * @return {@link GPGeoserverGetCatalogRequest}
+     * @return {@link GeoserverGetCatalogRequest}
      */
-    GPGeoserverGetCatalogRequest loadCatalogRequest();
+    GeoserverGetCatalogRequest loadCatalogRequest();
 
     /**
      * @return {@link GPGeoserverUpdateCatalogRequest}
      */
-    GPGeoserverUpdateCatalogRequest updateCatalogRequest();
+    GeoserverUpdateCatalogRequest updateCatalogRequest();
 }

@@ -33,13 +33,14 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.settings;
+package org.geosdi.geoplatform.connector.geoserver.settings;
 
 import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.StringEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.settings.GPGeoserverGlobalSettings;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.GeoserverUpdateGlobalSettingsRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -67,7 +68,7 @@ public class GPGeoserverUpdateGlobalSettingsRequest extends GPJsonPutConnectorRe
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    public GPGeoserverUpdateGlobalSettingsRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverUpdateGlobalSettingsRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.settingsBody = withInitial(() -> null);
     }

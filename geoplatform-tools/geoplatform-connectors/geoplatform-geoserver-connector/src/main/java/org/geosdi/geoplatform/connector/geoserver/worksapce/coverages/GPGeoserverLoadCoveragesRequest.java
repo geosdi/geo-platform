@@ -33,13 +33,14 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages;
+package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 
 import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverAllCoverages;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverages;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverEmptyCoverages;
 import org.geosdi.geoplatform.connector.geoserver.request.GPGeoserverGetConnectorRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoveragesRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
@@ -65,7 +66,7 @@ public class GPGeoserverLoadCoveragesRequest extends GPGeoserverGetConnectorRequ
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverLoadCoveragesRequest(GPServerConnector server, JacksonSupport theJacksonSupport) {
+    GPGeoserverLoadCoveragesRequest(GPServerConnector server, JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
         this.workspace = withInitial(() -> null);
         this.queryList = withInitial(() -> "");
@@ -84,7 +85,7 @@ public class GPGeoserverLoadCoveragesRequest extends GPGeoserverGetConnectorRequ
     /**
      * <p>If the list parameter value is equal to “all” all the coverages available in the data source
      * (even the non published ones) will be returned. The Class returned is an istance
-     * of {@link org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverAllCoverages}  class.
+     * of {@link GPGeoserverAllCoverages}  class.
      * </p>
      *
      * @param theQueryList
@@ -111,7 +112,7 @@ public class GPGeoserverLoadCoveragesRequest extends GPGeoserverGetConnectorRequ
 
     /**
      * @param reader
-     * @return {@link org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverages}
+     * @return {@link GPGeoserverCoverages}
      * @throws Exception
      */
     @Override

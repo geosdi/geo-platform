@@ -33,25 +33,57 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.styles;
+package org.geosdi.geoplatform.connector.geoserver.styles;
 
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
+import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverEmptyStyles;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyles;
+import org.geosdi.geoplatform.connector.geoserver.request.GPGeoserverGetConnectorRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStylesRequest;
-import org.geosdi.geoplatform.connector.store.layers.GPGeoserverLayersConnectorStore;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverStylesConnectorStore extends GPGeoserverLayersConnectorStore {
+@ThreadSafe
+public class GPGeoserverStylesRequest extends GPGeoserverGetConnectorRequest<GPGeoserverStyles, GPGeoserverEmptyStyles> implements GeoserverStylesRequest {
 
     /**
-     * @return {@link GeoserverStylesRequest}
+     * @param server
+     * @param theJacksonSupport
      */
-    GeoserverStylesRequest loadStylesRequest();
+    GPGeoserverStylesRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(server, theJacksonSupport);
+    }
 
     /**
-     * @return {@link GeoserverStyleRequest}
+     * @return {@link String}
      */
-    GeoserverStyleRequest loadStyleRequest();
+    @Override
+    protected String createUriPath() throws Exception {
+        String baseURI = this.serverURI.toString();
+        return ((baseURI.endsWith("/") ? baseURI.concat("styles.json") : baseURI.concat("/styles.json")));
+    }
+
+    /**
+     * @return {@link Class<GPGeoserverStyles>}
+     */
+    @Override
+    protected Class<GPGeoserverStyles> forClass() {
+        return GPGeoserverStyles.class;
+    }
+
+    /**
+     * @return {@link Class<GPGeoserverEmptyStyles>}
+     */
+    @Override
+    protected Class<GPGeoserverEmptyStyles> forEmptyResponse() {
+        return GPGeoserverEmptyStyles.class;
+    }
 }

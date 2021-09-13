@@ -33,45 +33,99 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.workspaces;
+package org.geosdi.geoplatform.connector.geoserver.worksapce;
 
 import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverLoadWorkspace;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverCreateWorkspaceBody;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverUpdateWorkspaceRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.ThreadLocal.withInitial;
+import static javax.annotation.meta.When.NEVER;
+import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadWorkspaceRequest extends GPJsonGetConnectorRequest<GPGeoserverLoadWorkspace> implements GeoserverLoadWorkspaceRequest {
+public class GPGeoserverUpdateWorkspaceRequest extends GPJsonPutConnectorRequest<String> implements GeoserverUpdateWorkspaceRequest {
 
     private final ThreadLocal<String> workspaceName;
+    private final ThreadLocal<GPGeoserverCreateWorkspaceBody> workspaceBody;
 
     /**
-     * @param server
+     * @param theServerConnector
      * @param theJacksonSupport
      */
-    public GPGeoserverLoadWorkspaceRequest(@Nonnull(when = When.NEVER) GPServerConnector server, @Nonnull(when = When.NEVER) JacksonSupport theJacksonSupport) {
-        super(server, theJacksonSupport);
+    GPGeoserverUpdateWorkspaceRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(theServerConnector, theJacksonSupport);
         this.workspaceName = withInitial(() -> null);
+        this.workspaceBody = withInitial(() -> null);
+    }
+
+    /**
+     * @return {@link String}
+     */
+    @Override
+    public String getWorkspaceName() {
+        return this.workspaceName.get();
     }
 
     /**
      * @param theWorkspaceName
-     * @return {@link GeoserverLoadWorkspaceRequest}
      */
-    public GeoserverLoadWorkspaceRequest withWorkspaceName(String theWorkspaceName) {
+    @Override
+    public void setWorkspaceName(String theWorkspaceName) {
         this.workspaceName.set(theWorkspaceName);
-        return this;
+    }
+
+    /**
+     * @return {@link GPGeoserverCreateWorkspaceBody}
+     */
+    @Override
+    public GPGeoserverCreateWorkspaceBody getWorkspaceBody() {
+        return this.workspaceBody.get();
+    }
+
+    /**
+     * @param theWorkspaceBody
+     */
+    @Override
+    public void setWorkspaceBody(GPGeoserverCreateWorkspaceBody theWorkspaceBody) {
+        this.workspaceBody.set(theWorkspaceBody);
+    }
+
+    /**
+     * @param statusCode
+     * @throws Exception
+     */
+    @Override
+    protected void checkHttpResponseStatus(int statusCode) throws Exception {
+        super.checkHttpResponseStatus(statusCode);
+        switch (statusCode) {
+            case 405:
+                throw new IllegalStateException("Forbidden to change the name of the workspace");
+        }
+    }
+
+    /**
+     * @return {@link HttpEntity}
+     */
+    @Override
+    protected HttpEntity prepareHttpEntity() throws Exception {
+        GPGeoserverCreateWorkspaceBody workspaceBody = this.workspaceBody.get();
+        checkArgument(workspaceBody != null, "The workspaceBody must not be null.");
+        String workspaceBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(workspaceBody);
+        logger.debug("#############################WORKSPACE_BODY : \n{}\n", workspaceBodyString);
+        return new StringEntity(workspaceBodyString, APPLICATION_JSON);
     }
 
     /**
@@ -80,17 +134,17 @@ public class GPGeoserverLoadWorkspaceRequest extends GPJsonGetConnectorRequest<G
     @Override
     protected String createUriPath() throws Exception {
         String workspaceName = this.workspaceName.get();
-        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspaceName mut not be null or an Empty String.");
+        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspaceName must not be null or an Empty String.");
         String baseURI = this.serverURI.toString();
         return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName)
                 : baseURI.concat("/workspaces/").concat(workspaceName)));
     }
 
     /**
-     * @return {@link Class<GPGeoserverLoadWorkspace>}
+     * @return {@link Class<String>}
      */
     @Override
-    protected Class<GPGeoserverLoadWorkspace> forClass() {
-        return GPGeoserverLoadWorkspace.class;
+    protected Class<String> forClass() {
+        return String.class;
     }
 }

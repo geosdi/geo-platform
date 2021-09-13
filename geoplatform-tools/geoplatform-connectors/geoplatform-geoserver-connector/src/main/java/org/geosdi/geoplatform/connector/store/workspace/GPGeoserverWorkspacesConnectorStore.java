@@ -45,14 +45,14 @@ import org.geosdi.geoplatform.connector.store.about.GPGeoserverAboutConnectorSto
 public interface GPGeoserverWorkspacesConnectorStore extends GPGeoserverAboutConnectorStore {
 
     /**
-     * @return {@link GPGeoserverLoadWorkspacesRequest}
+     * @return {@link GeoserverLoadWorkspacesRequest}
      */
-    GPGeoserverLoadWorkspacesRequest loadWorkspacesRequest();
+    GeoserverLoadWorkspacesRequest loadWorkspacesRequest();
 
     /**
-     * @return {@link GPGeoserverLoadWorkspaceRequest}
+     * @return {@link GeoserverLoadWorkspaceRequest}
      */
-    GPGeoserverLoadWorkspaceRequest loadWorkspaceRequest();
+    GeoserverLoadWorkspaceRequest loadWorkspaceRequest();
 
     /**
      * @return {@link GeoserverCreateWorkspaceRequest}

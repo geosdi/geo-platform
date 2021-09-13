@@ -35,8 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.worksapce;
 
-import net.jcip.annotations.ThreadSafe;import org.apache.http.HttpEntity;
-import org.apache.http.entity.StringEntity;
+import net.jcip.annotations.ThreadSafe;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverCreateWorkspaceBody;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverCreateWorkspaceResponse;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverCreareWorkspaceResponse;
@@ -54,7 +55,7 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.ThreadLocal.withInitial;
 import static java.util.stream.Collectors.joining;
 import static javax.annotation.meta.When.NEVER;
-import static org.apache.http.entity.ContentType.APPLICATION_JSON;
+import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

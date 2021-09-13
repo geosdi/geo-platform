@@ -42,6 +42,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import static io.reactivex.rxjava3.core.Observable.fromIterable;
+
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
@@ -53,13 +55,9 @@ public class GPGeoserverStyleConnectorV219xTest extends GPBaseGeoserverConnector
     public void a_stylesGeoserverConnectorTest() throws Exception {
         GeoserverLoadWorkspacesRequest workspacesRequest = geoserverConnectorStoreV2_19_x.loadWorkspacesRequest();
         logger.info("####################WORKSPACES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", workspacesRequest.getResponse());
-        workspacesRequest.getResponse().getWorkspaces().stream().forEach(w -> {
-            try {
-                this.getWorkspaceStyles(w.getWorkspaceName());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+        fromIterable(workspacesRequest.getResponse().getWorkspaces()).map(w-> w.getWorkspaceName())
+                .doOnComplete(() -> logger.debug("################### workspaces processed."))
+                .subscribe(this::getWorkspaceStyles, Throwable::printStackTrace);
     }
 
     /**

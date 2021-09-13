@@ -33,29 +33,46 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.about;
+package org.geosdi.geoplatform.connector.geoserver.namespaces;
 
-import org.geosdi.geoplatform.connector.geoserver.model.about.version.GPGeoserverAboutVersion;
+import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.model.namespace.GPGeoserverSingleNamespace;
+import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespaceRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGeoserverAboutVersionRequest extends GPJsonGetConnectorRequest<GPGeoserverAboutVersion> {
+@ThreadSafe
+public class GPGeoserverNamespaceRequest extends GPJsonGetConnectorRequest<GPGeoserverSingleNamespace> implements GeoserverNamespaceRequest {
+
+    private final ThreadLocal<String> prefix;
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverAboutVersionRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    public GPGeoserverNamespaceRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
+        this.prefix = withInitial(() -> null);
+    }
+
+    /**
+     * @param thePrefix
+     * @return {@link GeoserverNamespaceRequest}
+     */
+    public GeoserverNamespaceRequest withPrefix(@Nonnull(when = NEVER) String thePrefix) {
+        this.prefix.set(thePrefix);
+        return this;
     }
 
     /**
@@ -63,15 +80,18 @@ public class GPGeoserverAboutVersionRequest extends GPJsonGetConnectorRequest<GP
      */
     @Override
     protected String createUriPath() throws Exception {
+        String prefix = this.prefix.get();
+        checkArgument(((prefix != null) && !(prefix.isEmpty())), "The Parameter prefix must not be null or an Empty String.");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("about/version.json") : baseURI.concat("/about/version.json")));
+        return ((baseURI.endsWith("/") ? baseURI.concat("namespaces/").concat(prefix).concat(".json")
+                : baseURI.concat("/namespaces/").concat(prefix).concat(".json")));
     }
 
     /**
-     * @return {@link Class<GPGeoserverAboutVersion>}
+     * @return {@link Class<GPGeoserverSingleNamespace>}
      */
     @Override
-    protected Class<GPGeoserverAboutVersion> forClass() {
-        return GPGeoserverAboutVersion.class;
+    protected Class<GPGeoserverSingleNamespace> forClass() {
+        return GPGeoserverSingleNamespace.class;
     }
 }

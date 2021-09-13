@@ -33,10 +33,11 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.layers;
+package org.geosdi.geoplatform.connector.geoserver.datastores;
 
 import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastore;
+import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverLoadDatastoreRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -44,6 +45,7 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import javax.annotation.Nonnull;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
@@ -52,24 +54,51 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadLayerRequest extends GPJsonGetConnectorRequest<GeoserverLayer> implements GeoserverLoadLayerRequest {
+public class GPGeoserverLoadDatastoreRequest extends GPJsonGetConnectorRequest<GPGeoserverLoadDatastore> implements GeoserverLoadDatastoreRequest {
 
-    private final ThreadLocal<String> name;
+    private final ThreadLocal<String> workspaceName;
+    private final ThreadLocal<String> storeName;
+    private final ThreadLocal<Boolean> quietNotFound;
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverLoadLayerRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverLoadDatastoreRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
-        this.name = withInitial(() -> null);
+        this.workspaceName = withInitial(() -> null);
+        this.storeName = withInitial(() -> null);
+        this.quietNotFound = withInitial(() -> FALSE);
     }
 
     /**
-     * @param theName
+     * @param theWorkspaceName
      */
-    public GeoserverLoadLayerRequest withName(@Nonnull(when = NEVER) String theName) {
-        this.name.set(theName);
+    @Override
+    public GeoserverLoadDatastoreRequest withWorkspaceName(String theWorkspaceName) {
+        this.workspaceName.set(theWorkspaceName);
+        return this;
+    }
+
+    /**
+     * @param theStoreName
+     */
+    @Override
+    public GeoserverLoadDatastoreRequest withStoreName(String theStoreName) {
+        this.storeName.set(theStoreName);
+        return this;
+    }
+
+    /**
+     * <p>The quietOnNotFound parameter avoids logging an exception when the data store is not present.
+     * Note that 404 status code will still be returned.
+     * </p>
+     *
+     * @param theQuietNotFound
+     */
+    @Override
+    public GeoserverLoadDatastoreRequest withQuietNotFound(Boolean theQuietNotFound) {
+        this.quietNotFound.set((theQuietNotFound != null) ? theQuietNotFound : FALSE);
         return this;
     }
 
@@ -78,17 +107,25 @@ public class GPGeoserverLoadLayerRequest extends GPJsonGetConnectorRequest<Geose
      */
     @Override
     protected String createUriPath() throws Exception {
-        String layerName = this.name.get();
-        checkArgument(((layerName != null) && !(layerName.trim().isEmpty())), "The Parameter Name must not be null or an Empty String.");
+        String workspaceName = this.workspaceName.get();
+        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()),
+                "The Parameter workspaceName must not be null or an Empty String.");
+        String storeName = this.storeName.get();
+        checkArgument((storeName != null) && !(storeName.trim().isEmpty()),
+                "The Parameter storeName must not be null or an Empty String.");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("layers/").concat(layerName) : baseURI.concat("/layers/").concat(layerName)));
+        String quietNotFound = this.quietNotFound.get().toString();
+        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/datastores/")
+                .concat(storeName).concat("?quietOnNotFound=").concat(quietNotFound)
+                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/datastores/")
+                .concat(storeName).concat("?quietOnNotFound=").concat(quietNotFound)));
     }
 
     /**
-     * @return {@link Class<GeoserverLayer>}
+     * @return {@link Class<GPGeoserverLoadDatastore>}
      */
     @Override
-    protected Class<GeoserverLayer> forClass() {
-        return GeoserverLayer.class;
+    protected Class<GPGeoserverLoadDatastore> forClass() {
+        return GPGeoserverLoadDatastore.class;
     }
 }

@@ -49,8 +49,11 @@ import javax.annotation.Nonnull;
 import java.net.URI;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.TRUE;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static javax.annotation.meta.When.NEVER;
+import static org.apache.hc.client5.http.config.RequestConfig.custom;
+import static org.apache.hc.client5.http.cookie.StandardCookieSpec.IGNORE;
 import static org.geosdi.geoplatform.connector.server.security.GPSecurityConnector.MOCK_SECURITY;
 
 /**
@@ -112,11 +115,14 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
      * @return {@link RequestConfig}
      */
     protected RequestConfig createRequestConfig() {
-        return RequestConfig.custom()
-                .setCookieSpec("default")
-//                .setSocketTimeout(8000)
-                .setConnectTimeout(8, SECONDS)
-                .setConnectionRequestTimeout(8, SECONDS).build();
+        return custom()
+                .setCookieSpec(IGNORE)
+                .setConnectTimeout(10, SECONDS)
+                .setConnectionRequestTimeout(10, SECONDS)
+                .setResponseTimeout(10, SECONDS)
+                .setRedirectsEnabled(TRUE)
+                .setMaxRedirects(15)
+                .build();
     }
 
     /**
@@ -141,13 +147,5 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
     @Override
     public CredentialsStore getCredentialsStore() {
         return this.credentialStore;
-    }
-
-    /**
-     * @throws Exception
-     */
-    @Override
-    public void shutdown() throws Exception {
-        this.serverConnector.dispose();
     }
 }

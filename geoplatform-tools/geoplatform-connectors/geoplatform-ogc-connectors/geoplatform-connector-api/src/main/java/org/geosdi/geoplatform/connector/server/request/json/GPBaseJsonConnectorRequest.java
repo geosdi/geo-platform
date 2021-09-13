@@ -131,8 +131,8 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
 
     /**
      * <p>
-     * Method to generate Response AS a {@link InputStream} Stream. Remember to
-     * close the Stream</p>
+     *     Method to generate Response AS a {@link InputStream} Stream. Remember to close the Stream.
+     * </p>
      *
      * @return {@link InputStream} stream
      * @throws Exception

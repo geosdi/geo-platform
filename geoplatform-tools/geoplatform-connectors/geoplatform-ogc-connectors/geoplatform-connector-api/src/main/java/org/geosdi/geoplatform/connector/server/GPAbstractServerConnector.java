@@ -187,7 +187,7 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
 
     @Override
     public void dispose() throws Exception {
-        if (this.dispose.compareAndSet(Boolean.FALSE, TRUE)) {
+        if (this.dispose.compareAndSet(FALSE, TRUE)) {
             this.httpClient.close();
             logger.debug("@@@@@@@@@@@@@@@@@@@@@@Called {}#dispose.\n", this);
         } else {

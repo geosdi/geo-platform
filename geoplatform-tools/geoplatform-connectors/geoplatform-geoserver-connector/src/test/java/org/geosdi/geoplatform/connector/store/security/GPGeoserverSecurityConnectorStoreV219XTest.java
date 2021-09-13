@@ -57,13 +57,13 @@ public class GPGeoserverSecurityConnectorStoreV219XTest extends GPBaseGeoserverC
 
     @Test
     public void a_loadGeoserverMasterPasswordTest() throws Exception {
-        GPGeoserverGetMasterPasswordRequest geoserverGetMasterPasswordRequest = geoserverConnectorStoreV2_17_x.loadMasterPasswordRequest();
+        GPGeoserverGetMasterPasswordRequest geoserverGetMasterPasswordRequest = geoserverConnectorStoreV2_19_x.loadMasterPasswordRequest();
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_LOAD_MASTER_PASSWORD_RESPONSE : {}\n", geoserverGetMasterPasswordRequest.getResponse());
     }
 
     @Test
     public void b_loadGeoserverCatalogRequestTest() throws Exception {
-        GPGeoserverGetCatalogRequest geoserverGetCatalogRequest = geoserverConnectorStoreV2_17_x.loadCatalogRequest();
+        GPGeoserverGetCatalogRequest geoserverGetCatalogRequest = geoserverConnectorStoreV2_19_x.loadCatalogRequest();
         GPGeoserverCatalog geoserverCatalog = geoserverGetCatalogRequest.getResponse();
         assertTrue(geoserverCatalog.getCatalogMode() == HIDE);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_LOAD_CATALOG_RESPONSE : {}\n", geoserverCatalog);
@@ -71,10 +71,10 @@ public class GPGeoserverSecurityConnectorStoreV219XTest extends GPBaseGeoserverC
 
     @Test
     public void c_updateGeoserverCatalogRequestTest() throws Exception {
-        GPGeoserverUpdateCatalogRequest updateCatalogRequest = geoserverConnectorStoreV2_17_x.updateCatalogRequest();
+        GPGeoserverUpdateCatalogRequest updateCatalogRequest = geoserverConnectorStoreV2_19_x.updateCatalogRequest();
         updateCatalogRequest.withCatalogMode(MIXED);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_UPDATE_CATALOG_RESPONSE : {}\n", updateCatalogRequest.getResponse());
-        GPGeoserverGetCatalogRequest geoserverGetCatalogRequest = geoserverConnectorStoreV2_17_x.loadCatalogRequest();
+        GPGeoserverGetCatalogRequest geoserverGetCatalogRequest = geoserverConnectorStoreV2_19_x.loadCatalogRequest();
         GPGeoserverCatalog geoserverCatalog = geoserverGetCatalogRequest.getResponse();
         assertTrue(geoserverCatalog.getCatalogMode() == MIXED);
         updateCatalogRequest.withCatalogMode(HIDE);

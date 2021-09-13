@@ -33,45 +33,29 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.featuretypes;
+package org.geosdi.geoplatform.connector.geoserver.about;
 
-import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.category.GPGeoserverFeatureTypeCategory;
+import org.geosdi.geoplatform.connector.geoserver.model.about.manifest.GPGeoserverAboutManifest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-@ThreadSafe
-public class GPGeoserverLoadWorkspaceDatastoreFeatureTypesRequest extends GPGeoserverLoadFeatureTypesRequest<GeoserverLoadWorkspaceDatastoreFeatureTypesRequest> implements GeoserverLoadWorkspaceDatastoreFeatureTypesRequest {
-
-    private final ThreadLocal<String> store;
+public class GPGeoserverAboutManifestRequest extends GPJsonGetConnectorRequest<GPGeoserverAboutManifest> {
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverLoadWorkspaceDatastoreFeatureTypesRequest(GPServerConnector server, JacksonSupport theJacksonSupport) {
+     GPGeoserverAboutManifestRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
-        this.store = ThreadLocal.withInitial(() -> null);
-    }
-
-
-    /**
-     * @param theStore the name of the Datastore
-     * @return {@link GeoserverLoadWorkspaceDatastoreFeatureTypesRequest}
-     */
-    @Override
-    public GeoserverLoadWorkspaceDatastoreFeatureTypesRequest withStore(@Nonnull(when = NEVER) String theStore) {
-        this.store.set(theStore);
-        return self();
     }
 
     /**
@@ -79,13 +63,15 @@ public class GPGeoserverLoadWorkspaceDatastoreFeatureTypesRequest extends GPGeos
      */
     @Override
     protected String createUriPath() throws Exception {
-        String workspace = this.workspace.get();
-        checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string.");
-        String store = this.store.get();
-        checkArgument((store != null) && !(store.trim().isEmpty()), "The Parameter store must not be null or an empty string.");
-        GPGeoserverFeatureTypeCategory featureTypeCategory = this.featureTypeCategory.get();
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/featuretypes.json?list=").concat(featureTypeCategory.toString())
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/featuretypes.json?list=").concat(featureTypeCategory.toString())));
+        return ((baseURI.endsWith("/") ? baseURI.concat("about/manifest.json") : baseURI.concat("/about/manifest.json")));
+    }
+
+    /**
+     * @return {@link Class<GPGeoserverAboutManifest>}
+     */
+    @Override
+    protected Class<GPGeoserverAboutManifest> forClass() {
+        return GPGeoserverAboutManifest.class;
     }
 }

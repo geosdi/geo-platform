@@ -33,19 +33,24 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.coveragestores;
+package org.geosdi.geoplatform.connector.geoserver.featuretypes;
 
+import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.StringEntity;
-import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.IGPGeoserverCoverageStoreBody;
+import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.IGPGeoserverFeatureTypeInfo;
+import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverCreateFeatureTypeRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
+import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
@@ -55,38 +60,50 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverCreateCoverageStoreRequest extends GPJsonPostConnectorRequest<String> implements GeoserverCreateCoverageStoreRequest {
+public class GPGeoserverCreateFeatureTypeRequest extends GPJsonPostConnectorRequest<Boolean> implements GeoserverCreateFeatureTypeRequest {
 
     private final ThreadLocal<String> workspace;
-    private final ThreadLocal<IGPGeoserverCoverageStoreBody> body;
+    private final ThreadLocal<String> store;
+    private final ThreadLocal<IGPGeoserverFeatureTypeInfo> featureTypeBody;
 
     /**
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    public GPGeoserverCreateCoverageStoreRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverCreateFeatureTypeRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.workspace = withInitial(() -> null);
-        this.body = withInitial(() -> null);
+        this.store = withInitial(() -> null);
+        this.featureTypeBody = withInitial(() -> null);
     }
 
     /**
      * @param theWorkspace
-     * @return {@link GeoserverCreateCoverageStoreRequest}
+     * @return {@link GeoserverCreateFeatureTypeRequest}
      */
     @Override
-    public GeoserverCreateCoverageStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
+    public GeoserverCreateFeatureTypeRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspace.set(theWorkspace);
         return this;
     }
 
     /**
-     * @param theBody
-     * @return {@link GeoserverCreateCoverageStoreRequest}
+     * @param theStore
+     * @return {@link GeoserverCreateFeatureTypeRequest}
      */
     @Override
-    public <CoverageStoreBody extends IGPGeoserverCoverageStoreBody> GeoserverCreateCoverageStoreRequest withBody(@Nonnull(when = NEVER) CoverageStoreBody theBody) {
-        this.body.set(theBody);
+    public GeoserverCreateFeatureTypeRequest withStore(@Nonnull(when = NEVER) String theStore) {
+        this.store.set(theStore);
+        return this;
+    }
+
+    /**
+     * @param theFeatureTypeBody
+     * @return {@link GeoserverCreateFeatureTypeRequest}
+     */
+    @Override
+    public <FeatureTypeBody extends IGPGeoserverFeatureTypeInfo> GeoserverCreateFeatureTypeRequest withFeatureTypeBody(@Nonnull(when = NEVER) FeatureTypeBody theFeatureTypeBody) {
+        this.featureTypeBody.set(theFeatureTypeBody);
         return this;
     }
 
@@ -95,11 +112,11 @@ public class GPGeoserverCreateCoverageStoreRequest extends GPJsonPostConnectorRe
      */
     @Override
     protected HttpEntity prepareHttpEntity() throws Exception {
-        IGPGeoserverCoverageStoreBody coverageStoreBody = this.body.get();
-        checkArgument(coverageStoreBody != null, "The Parameter coverageStoreBody must not be null.");
-        String coverageStoreBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(coverageStoreBody);
-        logger.debug("#############################COVERAGE_STORE_BODY : \n{}\n", coverageStoreBodyString);
-        return new StringEntity(coverageStoreBodyString, APPLICATION_JSON);
+        IGPGeoserverFeatureTypeInfo featureTypeBody = this.featureTypeBody.get();
+        checkArgument(featureTypeBody != null, "The Parameter featureTypeBody must not be null.");
+        String featureTypeBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(featureTypeBody);
+        logger.debug("#############################FEATURE_TYPE_BODY : \n{}\n", featureTypeBodyString);
+        return new StringEntity(featureTypeBodyString, APPLICATION_JSON);
     }
 
     /**
@@ -109,16 +126,29 @@ public class GPGeoserverCreateCoverageStoreRequest extends GPJsonPostConnectorRe
     protected String createUriPath() throws Exception {
         String workspace = this.workspace.get();
         checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string.");
+        String store = this.store.get();
+        checkArgument((store != null) && !(store.trim().isEmpty()), "The Parameter store must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores")
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores")));
+        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/featuretypes.json")
+                : baseURI.concat("/workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/featuretypes.json")));
     }
 
     /**
-     * @return {@link Class<String>}
+     * @param reader
+     * @return {@link Boolean}
+     * @throws Exception
      */
     @Override
-    protected Class<String> forClass() {
-        return String.class;
+    protected Boolean readInternal(BufferedReader reader) throws Exception {
+        String value = CharStreams.toString(reader);
+        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
+    }
+
+    /**
+     * @return {@link Class<Boolean>}
+     */
+    @Override
+    protected Class<Boolean> forClass() {
+        return Boolean.class;
     }
 }

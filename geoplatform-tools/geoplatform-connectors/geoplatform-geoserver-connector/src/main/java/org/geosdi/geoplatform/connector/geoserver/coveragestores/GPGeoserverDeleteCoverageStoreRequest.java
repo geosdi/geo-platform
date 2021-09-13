@@ -33,11 +33,12 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.coveragestores;
+package org.geosdi.geoplatform.connector.geoserver.coveragestores;
 
 import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.GPGeoserverPurgeParam;
+import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverDeleteCoverageStoreRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -69,7 +70,7 @@ public class GPGeoserverDeleteCoverageStoreRequest extends GPJsonDeleteConnector
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    public GPGeoserverDeleteCoverageStoreRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverDeleteCoverageStoreRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.workspace = withInitial(() -> null);
         this.coverageStore = withInitial(() -> null);

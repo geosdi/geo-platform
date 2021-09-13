@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.store.task;
 
-import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespaceRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespaceRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,7 +52,7 @@ public class GeoserverNamespaceTask extends Thread {
     private static final Logger logger = LoggerFactory.getLogger(GeoserverNamespaceTask.class);
     //
     private final AtomicInteger counter = new AtomicInteger(0);
-    private final GPGeoserverNamespaceRequest namespaceRequest;
+    private final GeoserverNamespaceRequest namespaceRequest;
     private final String prefix;
 
     /**
@@ -62,7 +62,7 @@ public class GeoserverNamespaceTask extends Thread {
      * name. Automatically generated names are of the form
      * {@code "Thread-"+}<i>n</i>, where <i>n</i> is an integer.
      */
-    public GeoserverNamespaceTask(GPGeoserverNamespaceRequest theNamespaceRequest, String thePrefix) {
+    public GeoserverNamespaceTask(GeoserverNamespaceRequest theNamespaceRequest, String thePrefix) {
         checkArgument(theNamespaceRequest != null, "The Parameter NameSpaceRequest must not be null.");
         checkArgument(((thePrefix != null) && !(thePrefix.isEmpty())), "The Parameter prefix must not be null or an Empty String.");
         this.namespaceRequest = theNamespaceRequest;
@@ -84,9 +84,8 @@ public class GeoserverNamespaceTask extends Thread {
     @Override
     public void run() {
         try {
-            this.namespaceRequest.setPrefix(this.prefix);
             logger.debug("#############################{} produces ---------> \n{}\n", currentThread().getName()
-                    .concat(" - ").concat("" + this.counter.getAndIncrement()), this.namespaceRequest.getResponseAsString());
+                    .concat(" - ").concat("" + this.counter.getAndIncrement()), this.namespaceRequest.withPrefix(this.prefix).getResponseAsString());
         } catch (Exception ex) {
             ex.printStackTrace();
         }

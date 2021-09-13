@@ -33,16 +33,17 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.featuretypes;
+package org.geosdi.geoplatform.connector.geoserver.datastores;
 
 import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverDeleteDatastoreRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import javax.annotation.meta.When;
 import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -56,64 +57,50 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverDeleteFeatureTypeRequest extends GPJsonDeleteConnectorRequest<Boolean> implements GeoserverDeleteFeatureTypeRequest {
+public class GPGeoserverDeleteDatastoreRequest extends GPJsonDeleteConnectorRequest<Boolean> implements GeoserverDeleteDatastoreRequest {
 
-    private final ThreadLocal<String> workspace;
-    private final ThreadLocal<String> store;
-    private final ThreadLocal<String> featureTypeName;
+    private final ThreadLocal<String> workspaceName;
+    private final ThreadLocal<String> datastoreName;
     private final ThreadLocal<Boolean> recurse;
 
     /**
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    public GPGeoserverDeleteFeatureTypeRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverDeleteDatastoreRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
-        this.workspace = withInitial(() -> null);
-        this.store = withInitial(() -> null);
-        this.featureTypeName = withInitial(() -> null);
+        this.workspaceName = withInitial(() -> null);
+        this.datastoreName = withInitial(() -> null);
         this.recurse = withInitial(() -> FALSE);
     }
 
     /**
-     * @param theWorkspace
-     * @return {@link GeoserverDeleteFeatureTypeRequest}
+     * @param theWorkspaceName
+     * @return {@link GeoserverDeleteDatastoreRequest}
      */
     @Override
-    public GeoserverDeleteFeatureTypeRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
-        this.workspace.set(theWorkspace);
+    public GeoserverDeleteDatastoreRequest withWorkspaceName(@Nonnull(when = When.NEVER) String theWorkspaceName) {
+        this.workspaceName.set(theWorkspaceName);
         return this;
     }
 
     /**
-     * @param theStore
-     * @return {@link GeoserverDeleteFeatureTypeRequest}
+     * @param theDatastoreName
+     * @return {@link GeoserverDeleteDatastoreRequest}
      */
     @Override
-    public GeoserverDeleteFeatureTypeRequest withStore(@Nonnull(when = NEVER) String theStore) {
-        this.store.set(theStore);
+    public GeoserverDeleteDatastoreRequest withDatastoreName(@Nonnull(when = When.NEVER) String theDatastoreName) {
+        this.datastoreName.set(theDatastoreName);
         return this;
     }
 
     /**
-     * @param theFeatureTypeName
-     * @return {@link GeoserverDeleteFeatureTypeRequest}
+     * @param theRecurce
+     * @return {@link GeoserverDeleteDatastoreRequest}
      */
     @Override
-    public GeoserverDeleteFeatureTypeRequest withFeatureTypeName(@Nonnull(when = NEVER) String theFeatureTypeName) {
-        this.featureTypeName.set(theFeatureTypeName);
-        return this;
-    }
-
-    /**
-     * <p>Default value is {@link Boolean#FALSE}</p>
-     *
-     * @param theRecurse
-     * @return {@link GeoserverDeleteFeatureTypeRequest}
-     */
-    @Override
-    public GeoserverDeleteFeatureTypeRequest withRecurse(@Nullable Boolean theRecurse) {
-        this.recurse.set((theRecurse != null) ? theRecurse : FALSE);
+    public GeoserverDeleteDatastoreRequest withRecurse(Boolean theRecurce) {
+        this.recurse.set((theRecurce != null) ? theRecurce : FALSE);
         return this;
     }
 
@@ -122,16 +109,14 @@ public class GPGeoserverDeleteFeatureTypeRequest extends GPJsonDeleteConnectorRe
      */
     @Override
     protected String createUriPath() throws Exception {
-        String workspaceName = this.workspace.get();
-        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspace mut not be null or an Empty String.");
-        String datastoreName = this.store.get();
-        checkArgument((datastoreName != null) && !(datastoreName.trim().isEmpty()), "The Parameter store mut not be null or an Empty String.");
-        String featureTypeName = this.featureTypeName.get();
-        checkArgument((featureTypeName != null) && !(featureTypeName.trim().isEmpty()), "The Parameter featureTypeName mut not be null or an Empty String.");
+        String workspaceName = this.workspaceName.get();
+        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspaceName mut not be null or an Empty String.");
+        String datastoreName = this.datastoreName.get();
+        checkArgument((datastoreName != null) && !(datastoreName.trim().isEmpty()), "The Parameter datastoreName mut not be null or an Empty String.");
         String recurse = this.recurse.get().toString();
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/datastores/").concat(datastoreName).concat("/featuretypes/").concat(featureTypeName).concat("?recurse=").concat(recurse)
-                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/datastores/").concat(datastoreName).concat("/featuretypes/").concat(featureTypeName).concat("?recurse=").concat(recurse)));
+        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/datastores/").concat(datastoreName).concat("?recurse=").concat(recurse)
+                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/datastores/").concat(datastoreName).concat("?recurse=").concat(recurse)));
     }
 
     /**

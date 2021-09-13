@@ -33,13 +33,13 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.layers;
+package org.geosdi.geoplatform.connector.geoserver.layers;
 
 import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.model.layers.GPGeoserverEmptyLayers;
-import org.geosdi.geoplatform.connector.geoserver.model.layers.GPGeoserverLayers;
-import org.geosdi.geoplatform.connector.geoserver.request.GPGeoserverGetConnectorRequest;
+import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
+import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadLayerRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -53,26 +53,24 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadWorkspaceLayersRequest extends GPGeoserverGetConnectorRequest<GPGeoserverLayers, GPGeoserverEmptyLayers> implements GeoserverLoadWorkspaceLayersRequest {
+public class GPGeoserverLoadLayerRequest extends GPJsonGetConnectorRequest<GeoserverLayer> implements GeoserverLoadLayerRequest {
 
-    private final ThreadLocal<String> workspaceName;
+    private final ThreadLocal<String> name;
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverLoadWorkspaceLayersRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverLoadLayerRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
-        this.workspaceName = withInitial(() -> null);
+        this.name = withInitial(() -> null);
     }
 
     /**
-     * @param theWorkspaceName
-     * @return {@link GeoserverLoadWorkspaceLayersRequest}
+     * @param theName
      */
-    @Override
-    public GeoserverLoadWorkspaceLayersRequest withWorkspaceName(@Nonnull(when = NEVER) String theWorkspaceName) {
-        this.workspaceName.set(theWorkspaceName);
+    public GeoserverLoadLayerRequest withName(@Nonnull(when = NEVER) String theName) {
+        this.name.set(theName);
         return this;
     }
 
@@ -81,27 +79,17 @@ public class GPGeoserverLoadWorkspaceLayersRequest extends GPGeoserverGetConnect
      */
     @Override
     protected String createUriPath() throws Exception {
-        String workspaceName = this.workspaceName.get();
-        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()),
-                "The Parameter workspaceName must not be null or an empty string.");
+        String layerName = this.name.get();
+        checkArgument(((layerName != null) && !(layerName.trim().isEmpty())), "The Parameter Name must not be null or an Empty String.");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/layers")
-                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/layers")));
+        return ((baseURI.endsWith("/") ? baseURI.concat("layers/").concat(layerName) : baseURI.concat("/layers/").concat(layerName)));
     }
 
     /**
-     * @return {@link Class<GPGeoserverLayers>}
+     * @return {@link Class<GeoserverLayer>}
      */
     @Override
-    protected Class<GPGeoserverLayers> forClass() {
-        return GPGeoserverLayers.class;
-    }
-
-    /**
-     * @return {@link Class<GPGeoserverEmptyLayers>}
-     */
-    @Override
-    protected Class<GPGeoserverEmptyLayers> forEmptyResponse() {
-        return GPGeoserverEmptyLayers.class;
+    protected Class<GeoserverLayer> forClass() {
+        return GeoserverLayer.class;
     }
 }

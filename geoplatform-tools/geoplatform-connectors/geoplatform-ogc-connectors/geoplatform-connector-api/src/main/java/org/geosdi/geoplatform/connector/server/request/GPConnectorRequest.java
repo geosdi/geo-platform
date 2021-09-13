@@ -98,14 +98,6 @@ public interface GPConnectorRequest<T> {
     InputStream getResponseAsStream() throws Exception;
 
     /**
-     * <p>
-     * Shuts down this connection manager and releases allocated resources.</p>
-     *
-     * @throws java.lang.Exception
-     */
-    void shutdown() throws Exception;
-
-    /**
      * Show the XML Object created for the Request to send to Server
      *
      * @return Request as a String

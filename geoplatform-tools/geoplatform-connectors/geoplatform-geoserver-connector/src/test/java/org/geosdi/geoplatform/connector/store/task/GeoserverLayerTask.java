@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.store.task;
 
-import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLoadLayerRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadLayerRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,7 +50,7 @@ public class GeoserverLayerTask extends Thread {
     private static final Logger logger = LoggerFactory.getLogger(GeoserverLayerTask.class);
     //
     private final AtomicInteger counter = new AtomicInteger(0);
-    private final GPGeoserverLoadLayerRequest layerRequest;
+    private final GeoserverLoadLayerRequest layerRequest;
     private final String layerName;
 
     /**
@@ -60,7 +60,7 @@ public class GeoserverLayerTask extends Thread {
      * name. Automatically generated names are of the form
      * {@code "Thread-"+}<i>n</i>, where <i>n</i> is an integer.
      */
-    public GeoserverLayerTask(GPGeoserverLoadLayerRequest theLayerRequest, String theLayerName) {
+    public GeoserverLayerTask(GeoserverLoadLayerRequest theLayerRequest, String theLayerName) {
         this.layerRequest = theLayerRequest;
         this.layerName = theLayerName;
     }

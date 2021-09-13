@@ -33,58 +33,90 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.coveragestores;
+package org.geosdi.geoplatform.connector.geoserver.coveragestores;
 
+import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.GPGeoserverCoverageStore;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.IGPGeoserverCoverageStoreBody;
+import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverUpdateCoverageStoreRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
+import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
+import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadCoverageStoreRequest extends GPJsonGetConnectorRequest<GPGeoserverCoverageStore> implements GeoserverLoadCoverageStoreRequest {
+public class GPGeoserverUpdateCoverageStoreRequest extends GPJsonPutConnectorRequest<Boolean> implements GeoserverUpdateCoverageStoreRequest {
 
     private final ThreadLocal<String> workspace;
     private final ThreadLocal<String> store;
+    private final ThreadLocal<IGPGeoserverCoverageStoreBody> body;
 
     /**
-     * @param server
+     * @param theServerConnector
      * @param theJacksonSupport
      */
-    public GPGeoserverLoadCoverageStoreRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
-        super(server, theJacksonSupport);
+    GPGeoserverUpdateCoverageStoreRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(theServerConnector, theJacksonSupport);
         this.workspace = withInitial(() -> null);
         this.store = withInitial(() -> null);
+        this.body = withInitial(() -> null);
     }
 
     /**
-     * @param theWorkspace
-     * @return {@link GeoserverLoadCoverageStoreRequest}
+     * @param theWorkspace The name of the worskpace containing the coverage stores.
+     * @return {@link GeoserverUpdateCoverageStoreRequest}
      */
     @Override
-    public GeoserverLoadCoverageStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
+    public GeoserverUpdateCoverageStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspace.set(theWorkspace);
         return this;
     }
 
     /**
      * @param theStore The name of the store to be retrieved.
-     * @return {@link GeoserverLoadCoverageStoreRequest}
+     * @return {@link GeoserverUpdateCoverageStoreRequest}
      */
     @Override
-    public GeoserverLoadCoverageStoreRequest withStore(@Nonnull(when = NEVER) String theStore) {
+    public GeoserverUpdateCoverageStoreRequest withStore(@Nonnull(when = NEVER) String theStore) {
         this.store.set(theStore);
         return this;
+    }
+
+    /**
+     * @param theBody The coverage store body information to upload. For a PUT, only values which should be changed need to be included.
+     * @return {@link GeoserverUpdateCoverageStoreRequest}
+     */
+    @Override
+    public <CoverageStoreBody extends IGPGeoserverCoverageStoreBody> GeoserverUpdateCoverageStoreRequest withBody(@Nonnull(when = NEVER) CoverageStoreBody theBody) {
+        this.body.set(theBody);
+        return this;
+    }
+
+    /**
+     * @return {@link HttpEntity}
+     */
+    @Override
+    protected HttpEntity prepareHttpEntity() throws Exception {
+        IGPGeoserverCoverageStoreBody coverageStoreBody = this.body.get();
+        checkArgument(coverageStoreBody != null, "The Parameter coverageStoreBody must not be null.");
+        String coverageStoreBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(coverageStoreBody);
+        logger.debug("#############################COVERAGE_STORE_BODY : \n{}\n", coverageStoreBodyString);
+        return new StringEntity(coverageStoreBodyString, APPLICATION_JSON);
     }
 
     /**
@@ -102,10 +134,21 @@ public class GPGeoserverLoadCoverageStoreRequest extends GPJsonGetConnectorReque
     }
 
     /**
-     * @return {@link Class<GPGeoserverCoverageStore>}
+     * @param reader
+     * @return {@link Boolean}
+     * @throws Exception
      */
     @Override
-    protected Class<GPGeoserverCoverageStore> forClass() {
-        return GPGeoserverCoverageStore.class;
+    protected Boolean readInternal(BufferedReader reader) throws Exception {
+        String value = CharStreams.toString(reader);
+        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
+    }
+
+    /**
+     * @return {@link Class<Boolean>}
+     */
+    @Override
+    protected Class<Boolean> forClass() {
+        return Boolean.class;
     }
 }

@@ -37,8 +37,6 @@ package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GPGeoserverLoadCoverageRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GPGeoserverLoadCoveragesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoveragesRequest;
 import org.geosdi.geoplatform.connector.geoserver.worksapce.GPGeoserverWorkspacesConnector;

@@ -39,7 +39,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverWor
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverWorkspace;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadWorkspaceLayerRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadWorkspaceLayersRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverLoadWorkspacesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverLoadWorkspacesRequest;
 import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreTest;
 import org.geosdi.geoplatform.connector.store.task.GeoserverWorkspaceLayersTask;
 import org.junit.FixMethodOrder;
@@ -113,7 +113,7 @@ public class GPGeoserverLayersConnectorStoreTest extends GPBaseGeoserverConnecto
 
     @Test
     public void h_loadGeoserverWorkspaceLayersTest() throws Exception {
-        GPGeoserverLoadWorkspacesRequest workspacesRequest = geoserverConnectorStoreV2_18_x.loadWorkspacesRequest();
+        GeoserverLoadWorkspacesRequest workspacesRequest = geoserverConnectorStoreV2_18_x.loadWorkspacesRequest();
         GPGeoserverWorkspaces geoserverWorkspaces = workspacesRequest.getResponse();
         GeoserverLoadWorkspaceLayersRequest loadWorkspaceLayersRequest = geoserverConnectorStoreV2_18_x.loadWorkspaceLayersRequest();
         for (IGPGeoserverWorkspace geoserverWorkspace : geoserverWorkspaces.getWorkspaces()) {

@@ -53,18 +53,18 @@ public abstract class GeoserverWorkspacesConnectorStore extends GeoserverAboutCo
     }
 
     /**
-     * @return {@link GPGeoserverLoadWorkspacesRequest}
+     * @return {@link GeoserverLoadWorkspacesRequest}
      */
     @Override
-    public GPGeoserverLoadWorkspacesRequest loadWorkspacesRequest() {
+    public GeoserverLoadWorkspacesRequest loadWorkspacesRequest() {
         return this.server.loadWorkspacesRequest();
     }
 
     /**
-     * @return {@link GPGeoserverLoadWorkspaceRequest}
+     * @return {@link GeoserverLoadWorkspaceRequest}
      */
     @Override
-    public GPGeoserverLoadWorkspaceRequest loadWorkspaceRequest() {
+    public GeoserverLoadWorkspaceRequest loadWorkspaceRequest() {
         return this.server.loadWorkspaceRequest();
     }
 

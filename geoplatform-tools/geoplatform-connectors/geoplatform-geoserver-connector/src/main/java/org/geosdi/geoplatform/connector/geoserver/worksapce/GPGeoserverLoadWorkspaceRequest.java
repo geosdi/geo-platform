@@ -35,37 +35,63 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.worksapce;
 
-import org.geosdi.geoplatform.connector.geoserver.about.IGPGeoserverAboutConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.*;
+import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverLoadWorkspace;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverLoadWorkspaceRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+
+import javax.annotation.Nonnull;
+import javax.annotation.meta.When;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.ThreadLocal.withInitial;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverWorkspacesConnector extends IGPGeoserverAboutConnector {
+@ThreadSafe
+public class GPGeoserverLoadWorkspaceRequest extends GPJsonGetConnectorRequest<GPGeoserverLoadWorkspace> implements GeoserverLoadWorkspaceRequest {
+
+    private final ThreadLocal<String> workspaceName;
 
     /**
-     * @return {@link GeoserverLoadWorkspacesRequest}
+     * @param server
+     * @param theJacksonSupport
      */
-    GeoserverLoadWorkspacesRequest loadWorkspacesRequest();
+    GPGeoserverLoadWorkspaceRequest(@Nonnull(when = When.NEVER) GPServerConnector server, @Nonnull(when = When.NEVER) JacksonSupport theJacksonSupport) {
+        super(server, theJacksonSupport);
+        this.workspaceName = withInitial(() -> null);
+    }
 
     /**
+     * @param theWorkspaceName
      * @return {@link GeoserverLoadWorkspaceRequest}
      */
-    GeoserverLoadWorkspaceRequest loadWorkspaceRequest();
+    public GeoserverLoadWorkspaceRequest withWorkspaceName(String theWorkspaceName) {
+        this.workspaceName.set(theWorkspaceName);
+        return this;
+    }
 
     /**
-     * @return {@link GeoserverCreateWorkspaceRequest}
+     * @return {@link String}
      */
-    GeoserverCreateWorkspaceRequest createWorkspaceRequest();
+    @Override
+    protected String createUriPath() throws Exception {
+        String workspaceName = this.workspaceName.get();
+        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspaceName mut not be null or an Empty String.");
+        String baseURI = this.serverURI.toString();
+        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName)
+                : baseURI.concat("/workspaces/").concat(workspaceName)));
+    }
 
     /**
-     * @return {@link GeoserverDeleteWorkspaceRequest}
+     * @return {@link Class<GPGeoserverLoadWorkspace>}
      */
-    GeoserverDeleteWorkspaceRequest deleteWorkspaceRequest();
-
-    /**
-     * @return {@link GeoserverUpdateWorkspaceRequest}
-     */
-    GeoserverUpdateWorkspaceRequest updateWorkspaceRequest();
+    @Override
+    protected Class<GPGeoserverLoadWorkspace> forClass() {
+        return GPGeoserverLoadWorkspace.class;
+    }
 }

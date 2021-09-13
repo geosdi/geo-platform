@@ -33,18 +33,18 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.styles;
+package org.geosdi.geoplatform.connector.geoserver.worksapce;
 
 import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverSingleStyle;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverEmptyWorkspaces;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverWorkspaces;
+import org.geosdi.geoplatform.connector.geoserver.request.GPGeoserverGetConnectorRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverLoadWorkspacesRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -52,25 +52,14 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverStyleRequest extends GPJsonGetConnectorRequest<GPGeoserverSingleStyle> implements GeoserverStyleRequest {
-
-    private final ThreadLocal<String> styleName;
+public class GPGeoserverLoadWorkspacesRequest extends GPGeoserverGetConnectorRequest<GPGeoserverWorkspaces, GPGeoserverEmptyWorkspaces> implements GeoserverLoadWorkspacesRequest {
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverStyleRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverLoadWorkspacesRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
-        this.styleName = withInitial(() -> null);
-    }
-
-    /**
-     * @param theStyleName
-     */
-    public GeoserverStyleRequest withStyleName(@Nonnull(when = NEVER) String theStyleName) {
-        this.styleName.set(theStyleName);
-        return this;
     }
 
     /**
@@ -78,18 +67,23 @@ public class GPGeoserverStyleRequest extends GPJsonGetConnectorRequest<GPGeoserv
      */
     @Override
     protected String createUriPath() throws Exception {
-        String styleName = this.styleName.get();
-        checkArgument(((styleName != null) && !(styleName.trim().isEmpty())), "The Parameter Style Name must not be null or an Empty String.");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("styles/").concat(styleName).concat(".json")
-                : baseURI.concat("/styles/").concat(styleName).concat(".json")));
+        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces.json") : baseURI.concat("/workspaces.json")));
     }
 
     /**
-     * @return {@link Class<GPGeoserverSingleStyle>}
+     * @return {@link Class<GPGeoserverWorkspaces>}
      */
     @Override
-    protected Class<GPGeoserverSingleStyle> forClass() {
-        return GPGeoserverSingleStyle.class;
+    protected Class<GPGeoserverWorkspaces> forClass() {
+        return GPGeoserverWorkspaces.class;
+    }
+
+    /**
+     * @return {@link Class<GPGeoserverEmptyWorkspaces>}
+     */
+    @Override
+    protected Class<GPGeoserverEmptyWorkspaces> forEmptyResponse() {
+        return GPGeoserverEmptyWorkspaces.class;
     }
 }

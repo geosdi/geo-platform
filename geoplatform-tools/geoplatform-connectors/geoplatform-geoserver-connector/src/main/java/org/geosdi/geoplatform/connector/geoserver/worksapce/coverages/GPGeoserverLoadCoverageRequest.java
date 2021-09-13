@@ -33,10 +33,11 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages;
+package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 
 import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -64,7 +65,7 @@ public class GPGeoserverLoadCoverageRequest extends GPJsonGetConnectorRequest<GP
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverLoadCoverageRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverLoadCoverageRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
         this.workspace = withInitial(() -> null);
         this.coverage = withInitial(() -> null);

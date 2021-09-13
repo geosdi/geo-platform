@@ -103,10 +103,10 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     }
 
     /**
-     * @return {@link GPGeoserverLoadWorkspacesRequest}
+     * @return {@link GeoserverLoadWorkspacesRequest}
      */
     @Override
-    public GPGeoserverLoadWorkspacesRequest loadWorkspacesRequest() {
+    public GeoserverLoadWorkspacesRequest loadWorkspacesRequest() {
         switch (version) {
             case V219x:
             case V218x:
@@ -117,10 +117,10 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     }
 
     /**
-     * @return {@link GPGeoserverLoadWorkspaceRequest}
+     * @return {@link GeoserverLoadWorkspaceRequest}
      */
     @Override
-    public GPGeoserverLoadWorkspaceRequest loadWorkspaceRequest() {
+    public GeoserverLoadWorkspaceRequest loadWorkspaceRequest() {
         switch (version) {
             case V219x:
             case V218x:

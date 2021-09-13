@@ -42,8 +42,8 @@ import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverCr
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverLoadDatastoreRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverLoadDatastoresRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverUpdateDatastoreRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GPGeoserverLoadWorkspacesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverCreateWorkspaceRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverLoadWorkspacesRequest;
 import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -77,7 +77,7 @@ public class GPGeoserverDatastoresConnectorStoreTest extends GPBaseGeoserverConn
 
     @Test
     public void c_loadAllGeoserverDatastoresConnectorTest() throws Exception {
-        GPGeoserverLoadWorkspacesRequest loadWorkspacesRequest = geoserverConnectorStoreV2_18_x.loadWorkspacesRequest();
+        GeoserverLoadWorkspacesRequest loadWorkspacesRequest = geoserverConnectorStoreV2_18_x.loadWorkspacesRequest();
         GPGeoserverWorkspaces geoserverWorkspaces = loadWorkspacesRequest.getResponse();
         for (IGPGeoserverWorkspace geoserverWorkspace : geoserverWorkspaces.getWorkspaces()) {
             GeoserverLoadDatastoresRequest loadDatastoresRequest = geoserverConnectorStoreV2_18_x.loadDatastoresRequest();

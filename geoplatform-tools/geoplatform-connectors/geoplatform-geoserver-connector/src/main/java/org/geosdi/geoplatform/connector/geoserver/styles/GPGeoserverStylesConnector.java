@@ -38,9 +38,8 @@ package org.geosdi.geoplatform.connector.geoserver.styles;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.layers.GPGeoserverLayersConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStyleRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStylesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStylesRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -105,10 +104,10 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     }
 
     /**
-     * @return {@link GPGeoserverStylesRequest}
+     * @return {@link GeoserverStylesRequest}
      */
     @Override
-    public GPGeoserverStylesRequest loadStylesRequest() {
+    public GeoserverStylesRequest loadStylesRequest() {
         switch (version) {
             case V219x:
             case V218x:

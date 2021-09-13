@@ -46,8 +46,8 @@ import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLayers
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadLayerRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespaceRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespacesRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStylesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStylesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.*;
 import org.geosdi.geoplatform.connector.store.task.GeoserverLayerTask;
 import org.geosdi.geoplatform.connector.store.task.GeoserverNamespaceTask;
@@ -80,7 +80,7 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void c_workspacesGeoserverConnectorTest() throws Exception {
-        GPGeoserverLoadWorkspacesRequest workspacesRequest = geoserverConnectorStoreV2_18_x.loadWorkspacesRequest();
+        GeoserverLoadWorkspacesRequest workspacesRequest = geoserverConnectorStoreV2_18_x.loadWorkspacesRequest();
         logger.info("####################WORKSPACES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", workspacesRequest.getResponse());
     }
 
@@ -116,7 +116,7 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void h_stylesGeoserverConnectorTest() throws Exception {
-        GPGeoserverStylesRequest stylesRequest = geoserverConnectorStoreV2_18_x.loadStylesRequest();
+        GeoserverStylesRequest stylesRequest = geoserverConnectorStoreV2_18_x.loadStylesRequest();
         logger.info("#################STYLES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", stylesRequest.getResponseAsString());
     }
 
@@ -129,7 +129,7 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void l_styleGeoserverConnectorMultiThreadTest() throws Exception {
-        GPGeoserverStylesRequest stylesRequest = geoserverConnectorStoreV2_18_x.loadStylesRequest();
+        GeoserverStylesRequest stylesRequest = geoserverConnectorStoreV2_18_x.loadStylesRequest();
         GeoserverStyleRequest styleRequest = geoserverConnectorStoreV2_18_x.loadStyleRequest();
         stylesRequest.getResponse().getStyles()
                 .stream()
@@ -171,8 +171,8 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void q_loadWorkspaceGeoserverConnectorTest() throws Exception {
-        GPGeoserverLoadWorkspaceRequest loadWorkspaceRequest = geoserverConnectorStoreV2_18_x.loadWorkspaceRequest();
-        loadWorkspaceRequest.setWorkspaceName("workspace_test");
+        GeoserverLoadWorkspaceRequest loadWorkspaceRequest = geoserverConnectorStoreV2_18_x.loadWorkspaceRequest();
+        loadWorkspaceRequest.withWorkspaceName("workspace_test");
         GPGeoserverLoadWorkspace loadWorkspace = loadWorkspaceRequest.getResponse();
         logger.info("#############################LOAD_WORKSPACE_RESPONSE : {}\n", loadWorkspace);
     }

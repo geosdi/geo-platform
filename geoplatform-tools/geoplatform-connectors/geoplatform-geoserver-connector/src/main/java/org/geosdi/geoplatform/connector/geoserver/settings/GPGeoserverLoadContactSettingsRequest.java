@@ -33,10 +33,11 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.settings;
+package org.geosdi.geoplatform.connector.geoserver.settings;
 
 import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.geoserver.model.settings.contact.GPGeoserverContactSettings;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.GeoserverLoadContactSettingsRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -50,13 +51,13 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadContactSettingsRequest extends GPJsonGetConnectorRequest<GPGeoserverContactSettings> {
+public class GPGeoserverLoadContactSettingsRequest extends GPJsonGetConnectorRequest<GPGeoserverContactSettings> implements GeoserverLoadContactSettingsRequest {
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverLoadContactSettingsRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverLoadContactSettingsRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
     }
 

@@ -37,9 +37,6 @@ package org.geosdi.geoplatform.connector.geoserver.settings;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.GPGeoserverLoadContactSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.GPGeoserverLoadGlobalSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.GPGeoserverUpdateGlobalSettingsRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.settings.GeoserverUpdateGlobalSettingsRequest;
 import org.geosdi.geoplatform.connector.geoserver.security.GPGeoserverSecurityConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;

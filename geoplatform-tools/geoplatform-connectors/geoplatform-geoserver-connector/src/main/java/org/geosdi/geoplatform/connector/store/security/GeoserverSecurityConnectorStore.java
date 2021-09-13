@@ -36,9 +36,12 @@
 package org.geosdi.geoplatform.connector.store.security;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.security.GPGeoserverGetMasterPasswordRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.GPGeoserverUpdateCatalogRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.catalog.GPGeoserverGetCatalogRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverGetMasterPasswordRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverUpdateCatalogRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.catalog.GeoserverGetCatalogRequest;
+import org.geosdi.geoplatform.connector.geoserver.security.GPGeoserverGetCatalogRequest;
+import org.geosdi.geoplatform.connector.geoserver.security.GPGeoserverGetMasterPasswordRequest;
+import org.geosdi.geoplatform.connector.geoserver.security.GPGeoserverUpdateCatalogRequest;
 import org.geosdi.geoplatform.connector.store.featuretypes.GeoserverFeatureTypesConnectorStore;
 
 /**
@@ -58,7 +61,7 @@ public abstract class GeoserverSecurityConnectorStore extends GeoserverFeatureTy
      * @return {@link GPGeoserverGetMasterPasswordRequest}
      */
     @Override
-    public GPGeoserverGetMasterPasswordRequest loadMasterPasswordRequest() {
+    public GeoserverGetMasterPasswordRequest loadMasterPasswordRequest() {
         return this.server.loadMasterPasswordRequest();
     }
 
@@ -66,7 +69,7 @@ public abstract class GeoserverSecurityConnectorStore extends GeoserverFeatureTy
      * @return {@link GPGeoserverGetCatalogRequest}
      */
     @Override
-    public GPGeoserverGetCatalogRequest loadCatalogRequest() {
+    public GeoserverGetCatalogRequest loadCatalogRequest() {
         return this.server.loadCatalogRequest();
     }
 
@@ -74,7 +77,7 @@ public abstract class GeoserverSecurityConnectorStore extends GeoserverFeatureTy
      * @return {@link GPGeoserverUpdateCatalogRequest}
      */
     @Override
-    public GPGeoserverUpdateCatalogRequest updateCatalogRequest() {
+    public GeoserverUpdateCatalogRequest updateCatalogRequest() {
         return this.server.updateCatalogRequest();
     }
 }

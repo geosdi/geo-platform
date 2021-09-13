@@ -21,7 +21,6 @@ class GeoServerConnectorConfig {
     @Bean(name = "geoserverConnectorStore")
     public GPGeoserverConnectorStore geoserverConnectorStore(@Value(value = "configurator{geoserver_url}") String geoserverUrl,
             @Value(value = "configurator{geoserver_username}") String username, @Value(value = "configurator{geoserver_password}") String password) throws Exception {
-        System.out.println("@@@@@@@@@ "+geoserverUrl);
         return geoserverConnectorBuilder().withServerUrl(new URL(geoserverUrl))
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(80)

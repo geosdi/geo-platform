@@ -33,10 +33,11 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.settings;
+package org.geosdi.geoplatform.connector.geoserver.security;
 
 import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.model.settings.GPGeoserverGlobalSettings;
+import org.geosdi.geoplatform.connector.geoserver.model.security.GPGeoserverMasterPassword;
+import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverGetMasterPasswordRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -50,13 +51,13 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadGlobalSettingsRequest extends GPJsonGetConnectorRequest<GPGeoserverGlobalSettings> {
+public class GPGeoserverGetMasterPasswordRequest extends GPJsonGetConnectorRequest<GPGeoserverMasterPassword> implements GeoserverGetMasterPasswordRequest {
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverLoadGlobalSettingsRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverGetMasterPasswordRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
     }
 
@@ -66,14 +67,14 @@ public class GPGeoserverLoadGlobalSettingsRequest extends GPJsonGetConnectorRequ
     @Override
     protected String createUriPath() throws Exception {
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("settings.json") : baseURI.concat("/settings.json")));
+        return ((baseURI.endsWith("/") ? baseURI.concat("security/masterpw.json") : baseURI.concat("/security/masterpw.json")));
     }
 
     /**
-     * @return {@link Class<GPGeoserverGlobalSettings>}
+     * @return {@link Class<GPGeoserverMasterPassword>}
      */
     @Override
-    protected Class<GPGeoserverGlobalSettings> forClass() {
-        return GPGeoserverGlobalSettings.class;
+    protected Class<GPGeoserverMasterPassword> forClass() {
+        return GPGeoserverMasterPassword.class;
     }
 }

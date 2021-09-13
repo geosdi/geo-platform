@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.connector.geoserver.styles;
 import org.geosdi.geoplatform.connector.geoserver.layers.IGPGeoserverLayersConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStylesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStyleRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStylesRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -54,4 +56,14 @@ public interface IGPGeoserverStylesConnector extends IGPGeoserverLayersConnector
      * @return {@link GeoserverStyleRequest}
      */
     GeoserverStyleRequest loadStyleRequest();
+
+    /**
+     * @return {@link GeoserverStylesRequest}
+     */
+    GeoserverWorkspaceStylesRequest loadWorkspaceStylesRequest();
+
+    /**
+     * @return {@link GeoserverStyleRequest}
+     */
+    GeoserverWorkspaceStyleRequest loadWorkspaceStyleRequest();
 }

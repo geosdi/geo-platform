@@ -33,37 +33,44 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.styles;
+package org.geosdi.geoplatform.connector.store.style;
 
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStylesRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStylesRequest;
-import org.geosdi.geoplatform.connector.store.layers.GPGeoserverLayersConnectorStore;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverLoadWorkspacesRequest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV219xTest;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface GPGeoserverStylesConnectorStore extends GPGeoserverLayersConnectorStore {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class GPGeoserverStyleConnectorV219xTest extends GPBaseGeoserverConnectorStoreV219xTest {
+
+    @Test
+    public void a_stylesGeoserverConnectorTest() throws Exception {
+        GeoserverLoadWorkspacesRequest workspacesRequest = geoserverConnectorStoreV2_19_x.loadWorkspacesRequest();
+        logger.info("####################WORKSPACES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", workspacesRequest.getResponse());
+        workspacesRequest.getResponse().getWorkspaces().stream().forEach(w -> {
+            try {
+                this.getWorkspaceStyles(w.getWorkspaceName());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
 
     /**
-     * @return {@link GeoserverStylesRequest}
+     * @param workspaceName
+     * @throws Exception
      */
-    GeoserverStylesRequest loadStylesRequest();
+    private void getWorkspaceStyles(String workspaceName) throws Exception {
+        logger.info("####################WORKSPACE_NAME : \n{}\n", workspaceName);
+        GeoserverWorkspaceStylesRequest gpGeoserverWorkspaceStylesRequest = geoserverConnectorStoreV2_19_x
+                .loadWorkspaceStyles().withWorkspaceName(workspaceName);
+        logger.info("####################STYLE_RESPONSE : \n{}\n", gpGeoserverWorkspaceStylesRequest.getResponse());
+    }
 
-    /**
-     * @return {@link GeoserverStyleRequest}
-     */
-    GeoserverStyleRequest loadStyleRequest();
-
-    /**
-     * @return {@link GeoserverStylesRequest}
-     */
-    GeoserverWorkspaceStylesRequest loadWorkspaceStyles();
-
-    /**
-     * @return {@link GeoserverStyleRequest}
-     */
-    GeoserverWorkspaceStyleRequest loadWorkspaceStyle();
 }

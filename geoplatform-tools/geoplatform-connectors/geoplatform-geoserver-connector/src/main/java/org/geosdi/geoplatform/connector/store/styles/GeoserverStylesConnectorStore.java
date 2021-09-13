@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.connector.store.styles;
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStylesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStyleRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStylesRequest;
 import org.geosdi.geoplatform.connector.store.layers.GeoserverLayersConnectorStore;
 
 /**
@@ -67,5 +69,21 @@ public abstract class GeoserverStylesConnectorStore extends GeoserverLayersConne
     @Override
     public GeoserverStyleRequest loadStyleRequest() {
         return this.server.loadStyleRequest();
+    }
+
+    /**
+     * @return {@link GeoserverWorkspaceStylesRequest}
+     */
+    @Override
+    public GeoserverWorkspaceStylesRequest loadWorkspaceStyles() {
+        return this.server.loadWorkspaceStylesRequest();
+    }
+
+    /**
+     * @return {@link GeoserverWorkspaceStyleRequest}
+     */
+    @Override
+    public GeoserverWorkspaceStyleRequest loadWorkspaceStyle() {
+        return this.server.loadWorkspaceStyleRequest();
     }
 }

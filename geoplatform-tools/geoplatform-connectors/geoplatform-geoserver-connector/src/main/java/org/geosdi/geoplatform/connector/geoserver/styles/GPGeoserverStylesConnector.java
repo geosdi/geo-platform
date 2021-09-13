@@ -40,6 +40,8 @@ import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.layers.GPGeoserverLayersConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStylesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStyleRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStylesRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -126,6 +128,34 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
             case V219x:
             case V218x:
                 return new GPGeoserverStyleRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
+        }
+    }
+
+    /**
+     * @return {@link GeoserverWorkspaceStylesRequest}
+     */
+    @Override
+    public GeoserverWorkspaceStylesRequest loadWorkspaceStylesRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverWorkspaceStylesRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
+        }
+    }
+
+    /**
+     * @return {@link GeoserverWorkspaceStyleRequest}
+     */
+    @Override
+    public GeoserverWorkspaceStyleRequest loadWorkspaceStyleRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverWorkspaceStyleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
         }

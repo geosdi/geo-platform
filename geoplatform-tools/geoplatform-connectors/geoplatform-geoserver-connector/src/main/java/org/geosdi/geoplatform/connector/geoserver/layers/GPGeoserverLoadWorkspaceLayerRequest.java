@@ -33,21 +33,18 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.datastores;
+package org.geosdi.geoplatform.connector.geoserver.layers;
 
-import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
+import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadWorkspaceLayerRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
-import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
@@ -56,50 +53,38 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverDeleteDatastoreRequest extends GPJsonDeleteConnectorRequest<Boolean> implements GeoserverDeleteDatastoreRequest {
+public class GPGeoserverLoadWorkspaceLayerRequest extends GPJsonGetConnectorRequest<GeoserverLayer> implements GeoserverLoadWorkspaceLayerRequest {
 
     private final ThreadLocal<String> workspaceName;
-    private final ThreadLocal<String> datastoreName;
-    private final ThreadLocal<Boolean> recurse;
+    private final ThreadLocal<String> layerName;
 
     /**
-     * @param theServerConnector
+     * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverDeleteDatastoreRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
-        super(theServerConnector, theJacksonSupport);
+    GPGeoserverLoadWorkspaceLayerRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(server, theJacksonSupport);
         this.workspaceName = withInitial(() -> null);
-        this.datastoreName = withInitial(() -> null);
-        this.recurse = withInitial(() -> FALSE);
+        this.layerName = withInitial(() -> null);
     }
 
     /**
      * @param theWorkspaceName
-     * @return {@link GeoserverDeleteDatastoreRequest}
+     * @return {@link GeoserverLoadWorkspaceLayerRequest}
      */
     @Override
-    public GeoserverDeleteDatastoreRequest withWorkspaceName(@Nonnull(when = When.NEVER) String theWorkspaceName) {
+    public GeoserverLoadWorkspaceLayerRequest withWorkspaceName(@Nonnull(when = NEVER) String theWorkspaceName) {
         this.workspaceName.set(theWorkspaceName);
         return this;
     }
 
     /**
-     * @param theDatastoreName
-     * @return {@link GeoserverDeleteDatastoreRequest}
+     * @param theLayerName
+     * @return {@link GeoserverLoadWorkspaceLayerRequest}
      */
     @Override
-    public GeoserverDeleteDatastoreRequest withDatastoreName(@Nonnull(when = When.NEVER) String theDatastoreName) {
-        this.datastoreName.set(theDatastoreName);
-        return this;
-    }
-
-    /**
-     * @param theRecurce
-     * @return {@link GeoserverDeleteDatastoreRequest}
-     */
-    @Override
-    public GeoserverDeleteDatastoreRequest withRecurse(Boolean theRecurce) {
-        this.recurse.set((theRecurce != null) ? theRecurce : FALSE);
+    public GeoserverLoadWorkspaceLayerRequest withLayerName(@Nonnull(when = NEVER) String theLayerName) {
+        this.layerName.set(theLayerName);
         return this;
     }
 
@@ -109,31 +94,21 @@ public class GPGeoserverDeleteDatastoreRequest extends GPJsonDeleteConnectorRequ
     @Override
     protected String createUriPath() throws Exception {
         String workspaceName = this.workspaceName.get();
-        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspaceName mut not be null or an Empty String.");
-        String datastoreName = this.datastoreName.get();
-        checkArgument((datastoreName != null) && !(datastoreName.trim().isEmpty()), "The Parameter datastoreName mut not be null or an Empty String.");
-        String recurse = this.recurse.get().toString();
+        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()),
+                "The Parameter workspaceName must not be null or an empty string.");
+        String layerName = this.layerName.get();
+        checkArgument((layerName != null) && !(layerName.trim().isEmpty()),
+                "The Parameter layerName must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/datastores/").concat(datastoreName).concat("?recurse=").concat(recurse)
-                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/datastores/").concat(datastoreName).concat("?recurse=").concat(recurse)));
+        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/layers/").concat(layerName)
+                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/layers/").concat(layerName)));
     }
 
     /**
-     * @param reader
-     * @return {@link Boolean}
-     * @throws Exception
+     * @return {@link Class<GeoserverLayer>}
      */
     @Override
-    protected Boolean readInternal(BufferedReader reader) throws Exception {
-        String value = CharStreams.toString(reader);
-        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
-    }
-
-    /**
-     * @return {@link Class<Boolean>}
-     */
-    @Override
-    protected Class<Boolean> forClass() {
-        return Boolean.class;
+    protected Class<GeoserverLayer> forClass() {
+        return GeoserverLayer.class;
     }
 }

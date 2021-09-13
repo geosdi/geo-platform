@@ -33,7 +33,7 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.featuretypes;
+package org.geosdi.geoplatform.connector.geoserver.featuretypes;
 
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.category.GPGeoserverFeatureTypeCategory;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.wrapper.GPGeoserverEmptyFeatureTypeWrapper;
@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.wrapper.GPG
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.wrapper.IGPGeoserverEmptyFeatureTypeWrapper;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.wrapper.IGPGeoserverFeatureTypeWrapper;
 import org.geosdi.geoplatform.connector.geoserver.request.GPGeoserverGetConnectorRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadFeatureTypesRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 

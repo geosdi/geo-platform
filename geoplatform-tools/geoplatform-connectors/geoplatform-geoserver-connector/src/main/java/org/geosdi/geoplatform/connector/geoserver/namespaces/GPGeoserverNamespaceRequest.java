@@ -33,10 +33,11 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.namespaces;
+package org.geosdi.geoplatform.connector.geoserver.namespaces;
 
 import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.geoserver.model.namespace.GPGeoserverSingleNamespace;
+import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespaceRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -52,7 +53,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverNamespaceRequest extends GPJsonGetConnectorRequest<GPGeoserverSingleNamespace> {
+public class GPGeoserverNamespaceRequest extends GPJsonGetConnectorRequest<GPGeoserverSingleNamespace> implements GeoserverNamespaceRequest {
 
     private final ThreadLocal<String> prefix;
 
@@ -67,16 +68,11 @@ public class GPGeoserverNamespaceRequest extends GPJsonGetConnectorRequest<GPGeo
 
     /**
      * @param thePrefix
+     * @return {@link GeoserverNamespaceRequest}
      */
-    public void setPrefix(String thePrefix) {
+    public GeoserverNamespaceRequest withPrefix(@Nonnull(when = NEVER) String thePrefix) {
         this.prefix.set(thePrefix);
-    }
-
-    /**
-     * @return {@link String}
-     */
-    public String getPrefix() {
-        return this.prefix.get();
+        return this;
     }
 
     /**

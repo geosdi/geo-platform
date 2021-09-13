@@ -33,88 +33,73 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.datastores;
+package org.geosdi.geoplatform.connector.geoserver.datastores;
 
-import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
-import org.apache.http.HttpEntity;
-import org.apache.http.entity.StringEntity;
-import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.IGPGeoserverCreateDatastoreBody;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastore;
+import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverLoadDatastoreRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
-import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
-import static org.apache.http.entity.ContentType.APPLICATION_JSON;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverUpdateDatastoreRequest extends GPJsonPutConnectorRequest<Boolean> implements GeoserverUpdateDatastoreRequest {
+public class GPGeoserverLoadDatastoreRequest extends GPJsonGetConnectorRequest<GPGeoserverLoadDatastore> implements GeoserverLoadDatastoreRequest {
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> storeName;
-    private final ThreadLocal<IGPGeoserverCreateDatastoreBody> datastoreBody;
+    private final ThreadLocal<Boolean> quietNotFound;
 
     /**
-     * @param theServerConnector
+     * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverUpdateDatastoreRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
-        super(theServerConnector, theJacksonSupport);
+    GPGeoserverLoadDatastoreRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(server, theJacksonSupport);
         this.workspaceName = withInitial(() -> null);
         this.storeName = withInitial(() -> null);
-        this.datastoreBody = withInitial(() -> null);
-    }
-
-    /**
-     * @param theStoreName
-     * @return {@link GeoserverUpdateDatastoreRequest}
-     */
-    @Override
-    public GeoserverUpdateDatastoreRequest withStoreName(@Nonnull(when = When.NEVER) String theStoreName) {
-        this.storeName.set(theStoreName);
-        return this;
+        this.quietNotFound = withInitial(() -> FALSE);
     }
 
     /**
      * @param theWorkspaceName
      */
     @Override
-    public GeoserverUpdateDatastoreRequest withWorkspaceName(@Nonnull(when = NEVER) String theWorkspaceName) {
+    public GeoserverLoadDatastoreRequest withWorkspaceName(String theWorkspaceName) {
         this.workspaceName.set(theWorkspaceName);
         return this;
     }
 
     /**
-     * @param theDatastoreBody
+     * @param theStoreName
      */
     @Override
-    public GeoserverUpdateDatastoreRequest withDatastoreBody(@Nonnull(when = NEVER) IGPGeoserverCreateDatastoreBody theDatastoreBody) {
-        this.datastoreBody.set(theDatastoreBody);
+    public GeoserverLoadDatastoreRequest withStoreName(String theStoreName) {
+        this.storeName.set(theStoreName);
         return this;
     }
 
     /**
-     * @return {@link HttpEntity}
+     * <p>The quietOnNotFound parameter avoids logging an exception when the data store is not present.
+     * Note that 404 status code will still be returned.
+     * </p>
+     *
+     * @param theQuietNotFound
      */
     @Override
-    protected HttpEntity prepareHttpEntity() throws Exception {
-        IGPGeoserverCreateDatastoreBody datastoreBody = this.datastoreBody.get();
-        checkArgument(datastoreBody != null, "The datastoreBody must not be null.");
-        String datastoreBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(datastoreBody);
-        logger.debug("#############################DATASTORE_BODY : \n{}\n", datastoreBodyString);
-        return new StringEntity(datastoreBodyString, APPLICATION_JSON);
+    public GeoserverLoadDatastoreRequest withQuietNotFound(Boolean theQuietNotFound) {
+        this.quietNotFound.set((theQuietNotFound != null) ? theQuietNotFound : FALSE);
+        return this;
     }
 
     /**
@@ -124,31 +109,23 @@ public class GPGeoserverUpdateDatastoreRequest extends GPJsonPutConnectorRequest
     protected String createUriPath() throws Exception {
         String workspaceName = this.workspaceName.get();
         checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()),
-                "The Parameter workspaceName must not be null or an empty string.");
+                "The Parameter workspaceName must not be null or an Empty String.");
         String storeName = this.storeName.get();
         checkArgument((storeName != null) && !(storeName.trim().isEmpty()),
-                "The Parameter storeName must not be null or an empty string.");
+                "The Parameter storeName must not be null or an Empty String.");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/datastores/").concat(storeName)
-                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/datastores/").concat(storeName)));
+        String quietNotFound = this.quietNotFound.get().toString();
+        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/datastores/")
+                .concat(storeName).concat("?quietOnNotFound=").concat(quietNotFound)
+                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/datastores/")
+                .concat(storeName).concat("?quietOnNotFound=").concat(quietNotFound)));
     }
 
     /**
-     * @param reader
-     * @return {@link Boolean}
-     * @throws Exception
+     * @return {@link Class<GPGeoserverLoadDatastore>}
      */
     @Override
-    protected Boolean readInternal(BufferedReader reader) throws Exception {
-        String value = CharStreams.toString(reader);
-        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
-    }
-
-    /**
-     * @return {@link Class<Boolean>}
-     */
-    @Override
-    protected Class<Boolean> forClass() {
-        return Boolean.class;
+    protected Class<GPGeoserverLoadDatastore> forClass() {
+        return GPGeoserverLoadDatastore.class;
     }
 }

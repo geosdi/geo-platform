@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.store.namespaces;
 
-import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespaceRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespacesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespaceRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespacesRequest;
 import org.geosdi.geoplatform.connector.store.workspace.GPGeoserverWorkspacesConnectorStore;
 
 /**
@@ -46,12 +46,12 @@ import org.geosdi.geoplatform.connector.store.workspace.GPGeoserverWorkspacesCon
 public interface GPGeoserverNamespacesConnectorStore extends GPGeoserverWorkspacesConnectorStore {
 
     /**
-     * @return {@link GPGeoserverNamespacesRequest}
+     * @return {@link GeoserverNamespacesRequest}
      */
-    GPGeoserverNamespacesRequest createNamespacesRequest();
+    GeoserverNamespacesRequest createNamespacesRequest();
 
     /**
-     * @return {@link GPGeoserverNamespaceRequest}
+     * @return {@link GeoserverNamespaceRequest}
      */
-    GPGeoserverNamespaceRequest createNamespaceRequest();
+    GeoserverNamespaceRequest createNamespaceRequest();
 }

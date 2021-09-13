@@ -33,17 +33,19 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.coveragestores;
+package org.geosdi.geoplatform.connector.geoserver.coveragestores;
 
 import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.GPGeoserverPurgeParam;
+import org.apache.http.HttpEntity;
+import org.apache.http.entity.StringEntity;
+import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.IGPGeoserverCoverageStoreBody;
+import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverUpdateCoverageStoreRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -51,84 +53,70 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.connector.geoserver.model.store.coverage.GPGeoserverPurgeParam.NONE;
+import static org.apache.http.entity.ContentType.APPLICATION_JSON;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverDeleteCoverageStoreRequest extends GPJsonDeleteConnectorRequest<Boolean> implements GeoserverDeleteCoverageStoreRequest {
+public class GPGeoserverUpdateCoverageStoreRequest extends GPJsonPutConnectorRequest<Boolean> implements GeoserverUpdateCoverageStoreRequest {
 
     private final ThreadLocal<String> workspace;
-    private final ThreadLocal<String> coverageStore;
-    private final ThreadLocal<GPGeoserverPurgeParam> purge;
-    private final ThreadLocal<Boolean> recurse;
+    private final ThreadLocal<String> store;
+    private final ThreadLocal<IGPGeoserverCoverageStoreBody> body;
 
     /**
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    public GPGeoserverDeleteCoverageStoreRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverUpdateCoverageStoreRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.workspace = withInitial(() -> null);
-        this.coverageStore = withInitial(() -> null);
-        this.purge = withInitial(() -> NONE);
-        this.recurse = withInitial(() -> FALSE);
+        this.store = withInitial(() -> null);
+        this.body = withInitial(() -> null);
     }
 
     /**
      * @param theWorkspace The name of the worskpace containing the coverage stores.
-     * @return {@link GeoserverDeleteCoverageStoreRequest}
+     * @return {@link GeoserverUpdateCoverageStoreRequest}
      */
     @Override
-    public GeoserverDeleteCoverageStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
+    public GeoserverUpdateCoverageStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspace.set(theWorkspace);
         return this;
     }
 
     /**
-     * @param theCoverageStore The name of the store to be retrieved.
-     * @return {@link GeoserverDeleteCoverageStoreRequest}
+     * @param theStore The name of the store to be retrieved.
+     * @return {@link GeoserverUpdateCoverageStoreRequest}
      */
     @Override
-    public GeoserverDeleteCoverageStoreRequest withCoverageStore(@Nonnull(when = NEVER) String theCoverageStore) {
-        this.coverageStore.set(theCoverageStore);
+    public GeoserverUpdateCoverageStoreRequest withStore(@Nonnull(when = NEVER) String theStore) {
+        this.store.set(theStore);
         return this;
     }
 
     /**
-     * <p>
-     * The purge parameter specifies if and how the underlying raster data source is deleted.
-     * Allowable values for this parameter are {@link GPGeoserverPurgeParam#NONE}, {@link GPGeoserverPurgeParam#METADATA},
-     * {@link GPGeoserverPurgeParam#ALL}. When set to {@link GPGeoserverPurgeParam#NONE}
-     * data and auxiliary files are preserved. When set to {@link GPGeoserverPurgeParam#METADATA} delete only auxiliary files and metadata.
-     * It’s recommended when data files (such as granules) should not be deleted from disk.
-     * Finally, when set to {@link GPGeoserverPurgeParam#ALL} both data and auxiliary files are removed.
-     * </p>
-     *
-     * @param thePurge
-     * @return {@link GeoserverDeleteCoverageStoreRequest}
+     * @param theBody The coverage store body information to upload. For a PUT, only values which should be changed need to be included.
+     * @return {@link GeoserverUpdateCoverageStoreRequest}
      */
     @Override
-    public <Purge extends GPGeoserverPurgeParam> GeoserverDeleteCoverageStoreRequest withPurge(Purge thePurge) {
-        this.purge.set((thePurge != null) ? thePurge : NONE);
+    public <CoverageStoreBody extends IGPGeoserverCoverageStoreBody> GeoserverUpdateCoverageStoreRequest withBody(@Nonnull(when = NEVER) CoverageStoreBody theBody) {
+        this.body.set(theBody);
         return this;
     }
 
     /**
-     * <p>
-     * The recurse controls recursive deletion. When set to true all resources contained in the store are also removed.
-     * The default value is {@link Boolean#FALSE}.
-     * </p>
-     *
-     * @param theRecurse
-     * @return {@link GeoserverDeleteCoverageStoreRequest}
+     * @return {@link HttpEntity}
      */
     @Override
-    public GeoserverDeleteCoverageStoreRequest withRecurse(@Nullable Boolean theRecurse) {
-        this.recurse.set((theRecurse != null) ? theRecurse : FALSE);
-        return this;
+    protected HttpEntity prepareHttpEntity() throws Exception {
+        IGPGeoserverCoverageStoreBody coverageStoreBody = this.body.get();
+        checkArgument(coverageStoreBody != null, "The Parameter coverageStoreBody must not be null.");
+        String coverageStoreBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(coverageStoreBody);
+        logger.debug("#############################COVERAGE_STORE_BODY : \n{}\n", coverageStoreBodyString);
+        return new StringEntity(coverageStoreBodyString, APPLICATION_JSON);
     }
 
     /**
@@ -137,16 +125,12 @@ public class GPGeoserverDeleteCoverageStoreRequest extends GPJsonDeleteConnector
     @Override
     protected String createUriPath() throws Exception {
         String workspace = this.workspace.get();
-        checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace mut not be null or an Empty String.");
-        String coverageStore = this.coverageStore.get();
-        checkArgument((coverageStore != null) && !(coverageStore.trim().isEmpty()), "The Parameter coverageStore mut not be null or an Empty String.");
-        GPGeoserverPurgeParam purgeParam = this.purge.get();
-        String recurse = this.recurse.get().toString();
+        checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string.");
+        String store = this.store.get();
+        checkArgument((store != null) && !(store.trim().isEmpty()), "The Parameter store must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/")
-                .concat(coverageStore).concat("?purge=").concat(purgeParam.toPurge()).concat("&recurse=").concat(recurse)
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore)
-                .concat("?purge=").concat(purgeParam.toPurge()).concat("&recurse=").concat(recurse)));
+        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(store)
+                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(store)));
     }
 
     /**

@@ -33,16 +33,19 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.featuretypes;
+package org.geosdi.geoplatform.connector.geoserver.featuretypes;
 
 import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
+import org.apache.http.HttpEntity;
+import org.apache.http.entity.StringEntity;
+import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.IGPGeoserverFeatureTypeInfo;
+import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverCreateFeatureTypeRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -50,71 +53,70 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
+import static org.apache.http.entity.ContentType.APPLICATION_JSON;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverDeleteFeatureTypeRequest extends GPJsonDeleteConnectorRequest<Boolean> implements GeoserverDeleteFeatureTypeRequest {
+public class GPGeoserverCreateFeatureTypeRequest extends GPJsonPostConnectorRequest<Boolean> implements GeoserverCreateFeatureTypeRequest {
 
     private final ThreadLocal<String> workspace;
     private final ThreadLocal<String> store;
-    private final ThreadLocal<String> featureTypeName;
-    private final ThreadLocal<Boolean> recurse;
+    private final ThreadLocal<IGPGeoserverFeatureTypeInfo> featureTypeBody;
 
     /**
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    public GPGeoserverDeleteFeatureTypeRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverCreateFeatureTypeRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.workspace = withInitial(() -> null);
         this.store = withInitial(() -> null);
-        this.featureTypeName = withInitial(() -> null);
-        this.recurse = withInitial(() -> FALSE);
+        this.featureTypeBody = withInitial(() -> null);
     }
 
     /**
      * @param theWorkspace
-     * @return {@link GeoserverDeleteFeatureTypeRequest}
+     * @return {@link GeoserverCreateFeatureTypeRequest}
      */
     @Override
-    public GeoserverDeleteFeatureTypeRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
+    public GeoserverCreateFeatureTypeRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspace.set(theWorkspace);
         return this;
     }
 
     /**
      * @param theStore
-     * @return {@link GeoserverDeleteFeatureTypeRequest}
+     * @return {@link GeoserverCreateFeatureTypeRequest}
      */
     @Override
-    public GeoserverDeleteFeatureTypeRequest withStore(@Nonnull(when = NEVER) String theStore) {
+    public GeoserverCreateFeatureTypeRequest withStore(@Nonnull(when = NEVER) String theStore) {
         this.store.set(theStore);
         return this;
     }
 
     /**
-     * @param theFeatureTypeName
-     * @return {@link GeoserverDeleteFeatureTypeRequest}
+     * @param theFeatureTypeBody
+     * @return {@link GeoserverCreateFeatureTypeRequest}
      */
     @Override
-    public GeoserverDeleteFeatureTypeRequest withFeatureTypeName(@Nonnull(when = NEVER) String theFeatureTypeName) {
-        this.featureTypeName.set(theFeatureTypeName);
+    public <FeatureTypeBody extends IGPGeoserverFeatureTypeInfo> GeoserverCreateFeatureTypeRequest withFeatureTypeBody(@Nonnull(when = NEVER) FeatureTypeBody theFeatureTypeBody) {
+        this.featureTypeBody.set(theFeatureTypeBody);
         return this;
     }
 
     /**
-     * <p>Default value is {@link Boolean#FALSE}</p>
-     *
-     * @param theRecurse
-     * @return {@link GeoserverDeleteFeatureTypeRequest}
+     * @return {@link HttpEntity}
      */
     @Override
-    public GeoserverDeleteFeatureTypeRequest withRecurse(@Nullable Boolean theRecurse) {
-        this.recurse.set((theRecurse != null) ? theRecurse : FALSE);
-        return this;
+    protected HttpEntity prepareHttpEntity() throws Exception {
+        IGPGeoserverFeatureTypeInfo featureTypeBody = this.featureTypeBody.get();
+        checkArgument(featureTypeBody != null, "The Parameter featureTypeBody must not be null.");
+        String featureTypeBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(featureTypeBody);
+        logger.debug("#############################FEATURE_TYPE_BODY : \n{}\n", featureTypeBodyString);
+        return new StringEntity(featureTypeBodyString, APPLICATION_JSON);
     }
 
     /**
@@ -122,16 +124,13 @@ public class GPGeoserverDeleteFeatureTypeRequest extends GPJsonDeleteConnectorRe
      */
     @Override
     protected String createUriPath() throws Exception {
-        String workspaceName = this.workspace.get();
-        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspace mut not be null or an Empty String.");
-        String datastoreName = this.store.get();
-        checkArgument((datastoreName != null) && !(datastoreName.trim().isEmpty()), "The Parameter store mut not be null or an Empty String.");
-        String featureTypeName = this.featureTypeName.get();
-        checkArgument((featureTypeName != null) && !(featureTypeName.trim().isEmpty()), "The Parameter featureTypeName mut not be null or an Empty String.");
-        String recurse = this.recurse.get().toString();
+        String workspace = this.workspace.get();
+        checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string.");
+        String store = this.store.get();
+        checkArgument((store != null) && !(store.trim().isEmpty()), "The Parameter store must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/datastores/").concat(datastoreName).concat("/featuretypes/").concat(featureTypeName).concat("?recurse=").concat(recurse)
-                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/datastores/").concat(datastoreName).concat("/featuretypes/").concat(featureTypeName).concat("?recurse=").concat(recurse)));
+        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/featuretypes.json")
+                : baseURI.concat("/workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/featuretypes.json")));
     }
 
     /**

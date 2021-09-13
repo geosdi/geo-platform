@@ -33,29 +33,26 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.layers;
+package org.geosdi.geoplatform.connector.geoserver.namespaces;
 
-import org.geosdi.geoplatform.connector.geoserver.model.layers.GPGeoserverEmptyLayers;
-import org.geosdi.geoplatform.connector.geoserver.model.layers.GPGeoserverLayers;
+import org.geosdi.geoplatform.connector.geoserver.model.namespace.GPGeoserverEmptyNamespaces;
+import org.geosdi.geoplatform.connector.geoserver.model.namespace.GPGeoserverNamespaces;
 import org.geosdi.geoplatform.connector.geoserver.request.GPGeoserverGetConnectorRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespacesRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
-
-import javax.annotation.Nonnull;
-
-import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGeoserverLayersRequest extends GPGeoserverGetConnectorRequest<GPGeoserverLayers, GPGeoserverEmptyLayers> {
+public class GPGeoserverNamespacesRequest extends GPGeoserverGetConnectorRequest<GPGeoserverNamespaces, GPGeoserverEmptyNamespaces> implements GeoserverNamespacesRequest {
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverLayersRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    public GPGeoserverNamespacesRequest(GPServerConnector server, JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
     }
 
@@ -65,22 +62,22 @@ public class GPGeoserverLayersRequest extends GPGeoserverGetConnectorRequest<GPG
     @Override
     protected String createUriPath() throws Exception {
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("layers.json") : baseURI.concat("/layers.json")));
+        return ((baseURI.endsWith("/") ? baseURI.concat("namespaces.json") : baseURI.concat("/namespaces.json")));
     }
 
     /**
-     * @return {@link Class<GPGeoserverLayers>}
+     * @return {@link Class<GPGeoserverNamespaces>}
      */
     @Override
-    protected Class<GPGeoserverLayers> forClass() {
-        return GPGeoserverLayers.class;
+    protected Class<GPGeoserverNamespaces> forClass() {
+        return GPGeoserverNamespaces.class;
     }
 
     /**
-     * @return {@link Class<GPGeoserverEmptyLayers>}
+     * @return {@link Class<GPGeoserverEmptyNamespaces>}
      */
     @Override
-    protected Class<GPGeoserverEmptyLayers> forEmptyResponse() {
-        return GPGeoserverEmptyLayers.class;
+    protected Class<GPGeoserverEmptyNamespaces> forEmptyResponse() {
+        return GPGeoserverEmptyNamespaces.class;
     }
 }

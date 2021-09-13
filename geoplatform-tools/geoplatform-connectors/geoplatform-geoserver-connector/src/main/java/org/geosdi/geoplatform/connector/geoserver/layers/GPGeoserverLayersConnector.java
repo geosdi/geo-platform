@@ -103,7 +103,7 @@ public abstract class GPGeoserverLayersConnector extends GPGeoserverNamespacesCo
     }
 
     /**
-     * @return {@link GPGeoserverLayersRequest}
+     * @return {@link GeoserverLayersRequest}
      */
     @Override
     public GPGeoserverLayersRequest loadLayersRequest() {
@@ -117,10 +117,10 @@ public abstract class GPGeoserverLayersConnector extends GPGeoserverNamespacesCo
     }
 
     /**
-     * @return {@link GPGeoserverLoadLayerRequest}
+     * @return {@link GeoserverLoadLayerRequest}
      */
     @Override
-    public GPGeoserverLoadLayerRequest loadLayerRequest() {
+    public GeoserverLoadLayerRequest loadLayerRequest() {
         switch (version) {
             case V219x:
             case V218x:

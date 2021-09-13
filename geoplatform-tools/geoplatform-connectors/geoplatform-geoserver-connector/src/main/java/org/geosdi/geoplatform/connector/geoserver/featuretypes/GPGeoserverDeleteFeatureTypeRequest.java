@@ -33,18 +33,17 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.coveragestores;
+package org.geosdi.geoplatform.connector.geoserver.featuretypes;
 
 import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
-import org.apache.http.HttpEntity;
-import org.apache.http.entity.StringEntity;
-import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.IGPGeoserverCoverageStoreBody;
+import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverDeleteFeatureTypeRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -52,70 +51,71 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
-import static org.apache.http.entity.ContentType.APPLICATION_JSON;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverUpdateCoverageStoreRequest extends GPJsonPutConnectorRequest<Boolean> implements GeoserverUpdateCoverageStoreRequest {
+public class GPGeoserverDeleteFeatureTypeRequest extends GPJsonDeleteConnectorRequest<Boolean> implements GeoserverDeleteFeatureTypeRequest {
 
     private final ThreadLocal<String> workspace;
     private final ThreadLocal<String> store;
-    private final ThreadLocal<IGPGeoserverCoverageStoreBody> body;
+    private final ThreadLocal<String> featureTypeName;
+    private final ThreadLocal<Boolean> recurse;
 
     /**
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    public GPGeoserverUpdateCoverageStoreRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverDeleteFeatureTypeRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.workspace = withInitial(() -> null);
         this.store = withInitial(() -> null);
-        this.body = withInitial(() -> null);
+        this.featureTypeName = withInitial(() -> null);
+        this.recurse = withInitial(() -> FALSE);
     }
 
     /**
-     * @param theWorkspace The name of the worskpace containing the coverage stores.
-     * @return {@link GeoserverUpdateCoverageStoreRequest}
+     * @param theWorkspace
+     * @return {@link GeoserverDeleteFeatureTypeRequest}
      */
     @Override
-    public GeoserverUpdateCoverageStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
+    public GeoserverDeleteFeatureTypeRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspace.set(theWorkspace);
         return this;
     }
 
     /**
-     * @param theStore The name of the store to be retrieved.
-     * @return {@link GeoserverUpdateCoverageStoreRequest}
+     * @param theStore
+     * @return {@link GeoserverDeleteFeatureTypeRequest}
      */
     @Override
-    public GeoserverUpdateCoverageStoreRequest withStore(@Nonnull(when = NEVER) String theStore) {
+    public GeoserverDeleteFeatureTypeRequest withStore(@Nonnull(when = NEVER) String theStore) {
         this.store.set(theStore);
         return this;
     }
 
     /**
-     * @param theBody The coverage store body information to upload. For a PUT, only values which should be changed need to be included.
-     * @return {@link GeoserverUpdateCoverageStoreRequest}
+     * @param theFeatureTypeName
+     * @return {@link GeoserverDeleteFeatureTypeRequest}
      */
     @Override
-    public <CoverageStoreBody extends IGPGeoserverCoverageStoreBody> GeoserverUpdateCoverageStoreRequest withBody(@Nonnull(when = NEVER) CoverageStoreBody theBody) {
-        this.body.set(theBody);
+    public GeoserverDeleteFeatureTypeRequest withFeatureTypeName(@Nonnull(when = NEVER) String theFeatureTypeName) {
+        this.featureTypeName.set(theFeatureTypeName);
         return this;
     }
 
     /**
-     * @return {@link HttpEntity}
+     * <p>Default value is {@link Boolean#FALSE}</p>
+     *
+     * @param theRecurse
+     * @return {@link GeoserverDeleteFeatureTypeRequest}
      */
     @Override
-    protected HttpEntity prepareHttpEntity() throws Exception {
-        IGPGeoserverCoverageStoreBody coverageStoreBody = this.body.get();
-        checkArgument(coverageStoreBody != null, "The Parameter coverageStoreBody must not be null.");
-        String coverageStoreBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(coverageStoreBody);
-        logger.debug("#############################COVERAGE_STORE_BODY : \n{}\n", coverageStoreBodyString);
-        return new StringEntity(coverageStoreBodyString, APPLICATION_JSON);
+    public GeoserverDeleteFeatureTypeRequest withRecurse(@Nullable Boolean theRecurse) {
+        this.recurse.set((theRecurse != null) ? theRecurse : FALSE);
+        return this;
     }
 
     /**
@@ -123,13 +123,16 @@ public class GPGeoserverUpdateCoverageStoreRequest extends GPJsonPutConnectorReq
      */
     @Override
     protected String createUriPath() throws Exception {
-        String workspace = this.workspace.get();
-        checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string.");
-        String store = this.store.get();
-        checkArgument((store != null) && !(store.trim().isEmpty()), "The Parameter store must not be null or an empty string.");
+        String workspaceName = this.workspace.get();
+        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspace mut not be null or an Empty String.");
+        String datastoreName = this.store.get();
+        checkArgument((datastoreName != null) && !(datastoreName.trim().isEmpty()), "The Parameter store mut not be null or an Empty String.");
+        String featureTypeName = this.featureTypeName.get();
+        checkArgument((featureTypeName != null) && !(featureTypeName.trim().isEmpty()), "The Parameter featureTypeName mut not be null or an Empty String.");
+        String recurse = this.recurse.get().toString();
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(store)
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(store)));
+        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/datastores/").concat(datastoreName).concat("/featuretypes/").concat(featureTypeName).concat("?recurse=").concat(recurse)
+                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/datastores/").concat(datastoreName).concat("/featuretypes/").concat(featureTypeName).concat("?recurse=").concat(recurse)));
     }
 
     /**

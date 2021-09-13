@@ -37,9 +37,9 @@ package org.geosdi.geoplatform.connector.store.about;
 
 import org.geosdi.geoplatform.connector.api.GPConnectorStore;
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutManifestRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutStatusRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutVersionRequest;
+import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutManifestRequest;
+import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutStatusRequest;
+import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutVersionRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

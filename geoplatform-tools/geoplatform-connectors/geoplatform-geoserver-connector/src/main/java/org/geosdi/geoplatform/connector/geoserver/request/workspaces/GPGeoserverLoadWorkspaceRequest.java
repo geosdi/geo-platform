@@ -85,8 +85,7 @@ public class GPGeoserverLoadWorkspaceRequest extends GPJsonGetConnectorRequest<G
     @Override
     protected String createUriPath() throws Exception {
         String workspaceName = this.workspaceName.get();
-        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()),
-                "The Parameter workspaceName mut not be null or an Empty String.");
+        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspaceName mut not be null or an Empty String.");
         String baseURI = this.serverURI.toString();
         return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName)
                 : baseURI.concat("/workspaces/").concat(workspaceName)));

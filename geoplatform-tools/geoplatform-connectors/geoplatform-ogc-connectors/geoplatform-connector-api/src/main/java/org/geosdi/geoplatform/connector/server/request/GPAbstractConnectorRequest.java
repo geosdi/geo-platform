@@ -142,12 +142,4 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
     public CredentialsProvider getCredentialsProvider() {
         return this.credentialProvider;
     }
-
-    /**
-     * @throws Exception
-     */
-    @Override
-    public void shutdown() throws Exception {
-        this.clientConnection.close();
-    }
 }

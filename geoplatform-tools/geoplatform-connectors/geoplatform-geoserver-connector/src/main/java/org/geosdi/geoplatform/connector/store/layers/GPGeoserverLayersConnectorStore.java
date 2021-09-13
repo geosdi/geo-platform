@@ -35,8 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.store.layers;
 
-import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLayersRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLoadLayerRequest;
+import org.geosdi.geoplatform.connector.geoserver.layers.GPGeoserverLoadLayerRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLayersRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadLayerRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadWorkspaceLayerRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadWorkspaceLayersRequest;
 import org.geosdi.geoplatform.connector.store.namespaces.GPGeoserverNamespacesConnectorStore;
@@ -48,14 +49,14 @@ import org.geosdi.geoplatform.connector.store.namespaces.GPGeoserverNamespacesCo
 public interface GPGeoserverLayersConnectorStore extends GPGeoserverNamespacesConnectorStore {
 
     /**
-     * @return {@link GPGeoserverLayersRequest}
+     * @return {@link GeoserverLayersRequest}
      */
-    GPGeoserverLayersRequest loadLayersRequest();
+    GeoserverLayersRequest loadLayersRequest();
 
     /**
      * @return {@link GPGeoserverLoadLayerRequest}
      */
-    GPGeoserverLoadLayerRequest loadLayerRequest();
+    GeoserverLoadLayerRequest loadLayerRequest();
 
     /**
      * @return {@link GeoserverLoadWorkspaceLayersRequest}

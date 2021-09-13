@@ -37,8 +37,8 @@ package org.geosdi.geoplatform.connector.geoserver.namespaces;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
-import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespaceRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespacesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespaceRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespacesRequest;
 import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.GPGeoserverCoveragesConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -104,10 +104,10 @@ public abstract class GPGeoserverNamespacesConnector extends GPGeoserverCoverage
     }
 
     /**
-     * @return {@link GPGeoserverNamespacesRequest}
+     * @return {@link GeoserverNamespacesRequest}
      */
     @Override
-    public GPGeoserverNamespacesRequest createNamespacesRequest() {
+    public GeoserverNamespacesRequest createNamespacesRequest() {
         switch (version) {
             case V219x:
             case V218x:
@@ -118,10 +118,10 @@ public abstract class GPGeoserverNamespacesConnector extends GPGeoserverCoverage
     }
 
     /**
-     * @return {@link GPGeoserverNamespaceRequest}
+     * @return {@link GeoserverNamespaceRequest}
      */
     @Override
-    public GPGeoserverNamespaceRequest createNamespaceRequest() {
+    public GeoserverNamespaceRequest createNamespaceRequest() {
         switch (version) {
             case V219x:
             case V218x:

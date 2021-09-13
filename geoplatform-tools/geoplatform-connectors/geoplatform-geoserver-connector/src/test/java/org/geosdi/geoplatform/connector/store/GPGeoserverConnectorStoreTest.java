@@ -35,17 +35,17 @@
  */
 package org.geosdi.geoplatform.connector.store;
 
+import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutManifestRequest;
+import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutStatusRequest;
+import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutVersionRequest;
 import org.geosdi.geoplatform.connector.geoserver.model.namespace.GPGeoserverNamespaces;
 import org.geosdi.geoplatform.connector.geoserver.model.namespace.IGPGeoserverNamespace;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverLoadWorkspace;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GeoserverCreateWorkspaceBody;
-import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutManifestRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutStatusRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.about.GPGeoserverAboutVersionRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLayersRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.layers.GPGeoserverLoadLayerRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespaceRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GPGeoserverNamespacesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLayersRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadLayerRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespaceRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespacesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GPGeoserverStylesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.*;
@@ -85,21 +85,20 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void d_namespacesGeoserverConnectorTest() throws Exception {
-        GPGeoserverNamespacesRequest namespacesRequest = geoserverConnectorStoreV2_18_x.createNamespacesRequest();
+        GeoserverNamespacesRequest namespacesRequest = geoserverConnectorStoreV2_18_x.createNamespacesRequest();
         logger.info("###################NAMESPACES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", namespacesRequest.getResponseAsString());
     }
 
     @Test
     public void e_namespaceGeoserverConnectorTest() throws Exception {
-        GPGeoserverNamespaceRequest namespaceRequest = geoserverConnectorStoreV2_18_x.createNamespaceRequest();
-        namespaceRequest.setPrefix("tiger");
-        logger.info("###################NAMESPACE_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", namespaceRequest.getResponseAsString());
+        GeoserverNamespaceRequest namespaceRequest = geoserverConnectorStoreV2_18_x.createNamespaceRequest();
+        logger.info("###################NAMESPACE_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", namespaceRequest.withPrefix("tiger").getResponseAsString());
     }
 
     @Test
     public void f_namespaceGeoserverConnectorMultiThreadTest() throws Exception {
-        GPGeoserverNamespacesRequest namespacesRequest = geoserverConnectorStoreV2_18_x.createNamespacesRequest();
-        GPGeoserverNamespaceRequest namespaceRequest = geoserverConnectorStoreV2_18_x.createNamespaceRequest();
+        GeoserverNamespacesRequest namespacesRequest = geoserverConnectorStoreV2_18_x.createNamespacesRequest();
+        GeoserverNamespaceRequest namespaceRequest = geoserverConnectorStoreV2_18_x.createNamespaceRequest();
         GPGeoserverNamespaces namespaces = namespacesRequest.getResponse();
         logger.info("#######################FOUND : {} namespaces.", namespaces.getNamespaces().size());
         for (IGPGeoserverNamespace namespace : namespaces.getNamespaces()) {
@@ -110,7 +109,7 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void g_layersGeoserverConnectorTest() throws Exception {
-        GPGeoserverLayersRequest layersRequest = geoserverConnectorStoreV2_18_x.loadLayersRequest();
+        GeoserverLayersRequest layersRequest = geoserverConnectorStoreV2_18_x.loadLayersRequest();
         logger.info("##################LAYERS_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", layersRequest.getResponseAsString());
     }
 
@@ -139,22 +138,22 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void m_layerVectorGeoserverConnectorTest() throws Exception {
-        GPGeoserverLoadLayerRequest layerRequest = geoserverConnectorStoreV2_18_x.loadLayerRequest();
+        GeoserverLoadLayerRequest layerRequest = geoserverConnectorStoreV2_18_x.loadLayerRequest();
         layerRequest.withName("giant_polygon");
         logger.info("##############VECTOR_LAYER_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", layerRequest.getResponseAsString());
     }
 
     @Test
     public void n_layerRasterGeoserverConnectorTest() throws Exception {
-        GPGeoserverLoadLayerRequest layerRequest = geoserverConnectorStoreV2_18_x.loadLayerRequest();
+        GeoserverLoadLayerRequest layerRequest = geoserverConnectorStoreV2_18_x.loadLayerRequest();
         layerRequest.withName("Arc_Sample");
         logger.info("############RASTER_LAYER_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", layerRequest.getResponseAsString());
     }
 
     @Test
     public void o_layerGeoserverConnectorMultiThreadTest() throws Exception {
-        GPGeoserverLayersRequest layersRequest = geoserverConnectorStoreV2_18_x.loadLayersRequest();
-        GPGeoserverLoadLayerRequest layerRequest = geoserverConnectorStoreV2_18_x.loadLayerRequest();
+        GeoserverLayersRequest layersRequest = geoserverConnectorStoreV2_18_x.loadLayersRequest();
+        GeoserverLoadLayerRequest layerRequest = geoserverConnectorStoreV2_18_x.loadLayerRequest();
         layersRequest.getResponse().getLayers()
                 .stream()
                 .forEach(value -> new GeoserverLayerTask(layerRequest, value.getLayerName()).start());

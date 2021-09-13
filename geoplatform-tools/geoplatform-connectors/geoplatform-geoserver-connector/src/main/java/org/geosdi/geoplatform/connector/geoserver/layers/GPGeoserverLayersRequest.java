@@ -33,11 +33,13 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.about;
+package org.geosdi.geoplatform.connector.geoserver.layers;
 
-import org.geosdi.geoplatform.connector.geoserver.model.about.version.GPGeoserverAboutVersion;
+import org.geosdi.geoplatform.connector.geoserver.model.layers.GPGeoserverEmptyLayers;
+import org.geosdi.geoplatform.connector.geoserver.model.layers.GPGeoserverLayers;
+import org.geosdi.geoplatform.connector.geoserver.request.GPGeoserverGetConnectorRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLayersRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -48,13 +50,13 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGeoserverAboutVersionRequest extends GPJsonGetConnectorRequest<GPGeoserverAboutVersion> {
+public class GPGeoserverLayersRequest extends GPGeoserverGetConnectorRequest<GPGeoserverLayers, GPGeoserverEmptyLayers> implements GeoserverLayersRequest {
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverAboutVersionRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverLayersRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
     }
 
@@ -64,14 +66,22 @@ public class GPGeoserverAboutVersionRequest extends GPJsonGetConnectorRequest<GP
     @Override
     protected String createUriPath() throws Exception {
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("about/version.json") : baseURI.concat("/about/version.json")));
+        return ((baseURI.endsWith("/") ? baseURI.concat("layers.json") : baseURI.concat("/layers.json")));
     }
 
     /**
-     * @return {@link Class<GPGeoserverAboutVersion>}
+     * @return {@link Class<GPGeoserverLayers>}
      */
     @Override
-    protected Class<GPGeoserverAboutVersion> forClass() {
-        return GPGeoserverAboutVersion.class;
+    protected Class<GPGeoserverLayers> forClass() {
+        return GPGeoserverLayers.class;
+    }
+
+    /**
+     * @return {@link Class<GPGeoserverEmptyLayers>}
+     */
+    @Override
+    protected Class<GPGeoserverEmptyLayers> forEmptyResponse() {
+        return GPGeoserverEmptyLayers.class;
     }
 }

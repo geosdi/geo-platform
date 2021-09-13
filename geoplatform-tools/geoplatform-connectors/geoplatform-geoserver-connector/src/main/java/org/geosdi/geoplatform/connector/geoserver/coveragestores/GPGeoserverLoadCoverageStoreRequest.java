@@ -33,10 +33,11 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.datastores;
+package org.geosdi.geoplatform.connector.geoserver.coveragestores;
 
 import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastore;
+import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.GPGeoserverCoverageStore;
+import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverLoadCoverageStoreRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -44,7 +45,6 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import javax.annotation.Nonnull;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Boolean.FALSE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
@@ -53,51 +53,38 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadDatastoreRequest extends GPJsonGetConnectorRequest<GPGeoserverLoadDatastore> implements GeoserverLoadDatastoreRequest {
+public class GPGeoserverLoadCoverageStoreRequest extends GPJsonGetConnectorRequest<GPGeoserverCoverageStore> implements GeoserverLoadCoverageStoreRequest {
 
-    private final ThreadLocal<String> workspaceName;
-    private final ThreadLocal<String> storeName;
-    private final ThreadLocal<Boolean> quietNotFound;
+    private final ThreadLocal<String> workspace;
+    private final ThreadLocal<String> store;
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverLoadDatastoreRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverLoadCoverageStoreRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
-        this.workspaceName = withInitial(() -> null);
-        this.storeName = withInitial(() -> null);
-        this.quietNotFound = withInitial(() -> FALSE);
+        this.workspace = withInitial(() -> null);
+        this.store = withInitial(() -> null);
     }
 
     /**
-     * @param theWorkspaceName
+     * @param theWorkspace
+     * @return {@link GeoserverLoadCoverageStoreRequest}
      */
     @Override
-    public GeoserverLoadDatastoreRequest withWorkspaceName(String theWorkspaceName) {
-        this.workspaceName.set(theWorkspaceName);
+    public GeoserverLoadCoverageStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
+        this.workspace.set(theWorkspace);
         return this;
     }
 
     /**
-     * @param theStoreName
+     * @param theStore The name of the store to be retrieved.
+     * @return {@link GeoserverLoadCoverageStoreRequest}
      */
     @Override
-    public GeoserverLoadDatastoreRequest withStoreName(String theStoreName) {
-        this.storeName.set(theStoreName);
-        return this;
-    }
-
-    /**
-     * <p>The quietOnNotFound parameter avoids logging an exception when the data store is not present.
-     * Note that 404 status code will still be returned.
-     * </p>
-     *
-     * @param theQuietNotFound
-     */
-    @Override
-    public GeoserverLoadDatastoreRequest withQuietNotFound(Boolean theQuietNotFound) {
-        this.quietNotFound.set((theQuietNotFound != null) ? theQuietNotFound : FALSE);
+    public GeoserverLoadCoverageStoreRequest withStore(@Nonnull(when = NEVER) String theStore) {
+        this.store.set(theStore);
         return this;
     }
 
@@ -106,25 +93,20 @@ public class GPGeoserverLoadDatastoreRequest extends GPJsonGetConnectorRequest<G
      */
     @Override
     protected String createUriPath() throws Exception {
-        String workspaceName = this.workspaceName.get();
-        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()),
-                "The Parameter workspaceName must not be null or an Empty String.");
-        String storeName = this.storeName.get();
-        checkArgument((storeName != null) && !(storeName.trim().isEmpty()),
-                "The Parameter storeName must not be null or an Empty String.");
+        String workspace = this.workspace.get();
+        checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string.");
+        String store = this.store.get();
+        checkArgument((store != null) && !(store.trim().isEmpty()), "The Parameter store must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
-        String quietNotFound = this.quietNotFound.get().toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/datastores/")
-                .concat(storeName).concat("?quietOnNotFound=").concat(quietNotFound)
-                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/datastores/")
-                .concat(storeName).concat("?quietOnNotFound=").concat(quietNotFound)));
+        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(store)
+                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(store)));
     }
 
     /**
-     * @return {@link Class<GPGeoserverLoadDatastore>}
+     * @return {@link Class<GPGeoserverCoverageStore>}
      */
     @Override
-    protected Class<GPGeoserverLoadDatastore> forClass() {
-        return GPGeoserverLoadDatastore.class;
+    protected Class<GPGeoserverCoverageStore> forClass() {
+        return GPGeoserverCoverageStore.class;
     }
 }

@@ -33,25 +33,28 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.namespaces;
+package org.geosdi.geoplatform.connector.geoserver.featuretypes;
 
-import org.geosdi.geoplatform.connector.geoserver.model.namespace.GPGeoserverEmptyNamespaces;
-import org.geosdi.geoplatform.connector.geoserver.model.namespace.GPGeoserverNamespaces;
-import org.geosdi.geoplatform.connector.geoserver.request.GPGeoserverGetConnectorRequest;
+import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.category.GPGeoserverFeatureTypeCategory;
+import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadWorkspaceFeatureTypesRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGeoserverNamespacesRequest extends GPGeoserverGetConnectorRequest<GPGeoserverNamespaces, GPGeoserverEmptyNamespaces> {
+@ThreadSafe
+public class GPGeoserverLoadWorkspaceFeatureTypesRequest extends GPGeoserverLoadFeatureTypesRequest<GeoserverLoadWorkspaceFeatureTypesRequest> implements GeoserverLoadWorkspaceFeatureTypesRequest {
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverNamespacesRequest(GPServerConnector server, JacksonSupport theJacksonSupport) {
+    GPGeoserverLoadWorkspaceFeatureTypesRequest(GPServerConnector server, JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
     }
 
@@ -60,23 +63,11 @@ public class GPGeoserverNamespacesRequest extends GPGeoserverGetConnectorRequest
      */
     @Override
     protected String createUriPath() throws Exception {
+        String workspace = this.workspace.get();
+        checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string.");
+        GPGeoserverFeatureTypeCategory featureTypeCategory = this.featureTypeCategory.get();
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("namespaces.json") : baseURI.concat("/namespaces.json")));
-    }
-
-    /**
-     * @return {@link Class<GPGeoserverNamespaces>}
-     */
-    @Override
-    protected Class<GPGeoserverNamespaces> forClass() {
-        return GPGeoserverNamespaces.class;
-    }
-
-    /**
-     * @return {@link Class<GPGeoserverEmptyNamespaces>}
-     */
-    @Override
-    protected Class<GPGeoserverEmptyNamespaces> forEmptyResponse() {
-        return GPGeoserverEmptyNamespaces.class;
+        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/featuretypes.json?list=").concat(featureTypeCategory.toString())
+                : baseURI.concat("/workspaces/").concat(workspace).concat("/featuretypes.json?list=").concat(featureTypeCategory.toString())));
     }
 }

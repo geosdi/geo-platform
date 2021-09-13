@@ -33,29 +33,48 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.about;
+package org.geosdi.geoplatform.connector.geoserver.layers;
 
-import org.geosdi.geoplatform.connector.geoserver.model.about.status.GPGeoserverAboutStatus;
+import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.model.layers.GPGeoserverEmptyLayers;
+import org.geosdi.geoplatform.connector.geoserver.model.layers.GPGeoserverLayers;
+import org.geosdi.geoplatform.connector.geoserver.request.GPGeoserverGetConnectorRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadWorkspaceLayersRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGeoserverAboutStatusRequest extends GPJsonGetConnectorRequest<GPGeoserverAboutStatus> {
+@ThreadSafe
+public class GPGeoserverLoadWorkspaceLayersRequest extends GPGeoserverGetConnectorRequest<GPGeoserverLayers, GPGeoserverEmptyLayers> implements GeoserverLoadWorkspaceLayersRequest {
+
+    private final ThreadLocal<String> workspaceName;
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverAboutStatusRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverLoadWorkspaceLayersRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
+        this.workspaceName = withInitial(() -> null);
+    }
+
+    /**
+     * @param theWorkspaceName
+     * @return {@link GeoserverLoadWorkspaceLayersRequest}
+     */
+    @Override
+    public GeoserverLoadWorkspaceLayersRequest withWorkspaceName(@Nonnull(when = NEVER) String theWorkspaceName) {
+        this.workspaceName.set(theWorkspaceName);
+        return this;
     }
 
     /**
@@ -63,15 +82,27 @@ public class GPGeoserverAboutStatusRequest extends GPJsonGetConnectorRequest<GPG
      */
     @Override
     protected String createUriPath() throws Exception {
+        String workspaceName = this.workspaceName.get();
+        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()),
+                "The Parameter workspaceName must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("about/status.json") : baseURI.concat("/about/status.json")));
+        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/layers")
+                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/layers")));
     }
 
     /**
-     * @return {@link Class<GPGeoserverAboutStatus>}
+     * @return {@link Class<GPGeoserverLayers>}
      */
     @Override
-    protected Class<GPGeoserverAboutStatus> forClass() {
-        return GPGeoserverAboutStatus.class;
+    protected Class<GPGeoserverLayers> forClass() {
+        return GPGeoserverLayers.class;
+    }
+
+    /**
+     * @return {@link Class<GPGeoserverEmptyLayers>}
+     */
+    @Override
+    protected Class<GPGeoserverEmptyLayers> forEmptyResponse() {
+        return GPGeoserverEmptyLayers.class;
     }
 }

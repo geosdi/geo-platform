@@ -33,37 +33,31 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.styles;
+package org.geosdi.geoplatform.connector.geoserver.request.styles;
 
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStylesRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStyleRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStylesRequest;
-import org.geosdi.geoplatform.connector.store.layers.GPGeoserverLayersConnectorStore;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverSingleStyle;
+import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface GPGeoserverStylesConnectorStore extends GPGeoserverLayersConnectorStore {
+public interface GeoserverWorkspaceStyleRequest extends GPConnectorRequest<GPGeoserverSingleStyle> {
 
     /**
-     * @return {@link GeoserverStylesRequest}
+     * @param theWorkspaceName
+     * @return
      */
-    GeoserverStylesRequest loadStylesRequest();
+    GeoserverWorkspaceStyleRequest withWorkspaceName(@Nonnull(when = NEVER) String theWorkspaceName);
 
     /**
-     * @return {@link GeoserverStyleRequest}
+     * @param theStyleName
+     * @return
      */
-    GeoserverStyleRequest loadStyleRequest();
+    GeoserverWorkspaceStyleRequest withStyleName(@Nonnull(when = NEVER) String theStyleName);
 
-    /**
-     * @return {@link GeoserverStylesRequest}
-     */
-    GeoserverWorkspaceStylesRequest loadWorkspaceStyles();
-
-    /**
-     * @return {@link GeoserverStyleRequest}
-     */
-    GeoserverWorkspaceStyleRequest loadWorkspaceStyle();
 }

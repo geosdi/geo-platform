@@ -18,6 +18,13 @@ import static org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStoreBu
 @Configuration
 class GeoServerConnectorConfig {
 
+    /**
+     * @param geoserverUrl
+     * @param username
+     * @param password
+     * @return {@link GPGeoserverConnectorStore}
+     * @throws Exception
+     */
     @Bean(name = "geoserverConnectorStore")
     public GPGeoserverConnectorStore geoserverConnectorStore(@Value(value = "configurator{geoserver_url}") String geoserverUrl,
             @Value(value = "configurator{geoserver_username}") String username, @Value(value = "configurator{geoserver_password}") String password) throws Exception {

@@ -51,7 +51,12 @@ public interface IGPGeoserverCoveragesConnector extends IGPGeoserverWorkspacesCo
     GeoserverLoadCoveragesRequest loadWorkspaceCoveragesRequest();
 
     /**
-     * @return {@@link GeoserverLoadCoverageRequest}
+     * @return {@link GeoserverLoadCoverageRequest}
      */
     GeoserverLoadCoverageRequest loadWorkspaceCoverageRequest();
+
+    /**
+     * @return {@link GPGeoserverLoadStoreCoverageRequest}
+     */
+    GPGeoserverLoadStoreCoverageRequest loadWorkspaceStoreCoverageRequest();
 }

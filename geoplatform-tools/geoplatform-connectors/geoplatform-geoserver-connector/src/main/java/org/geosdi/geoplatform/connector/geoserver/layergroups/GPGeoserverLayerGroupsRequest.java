@@ -33,63 +33,45 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store;
+package org.geosdi.geoplatform.connector.geoserver.layergroups;
 
-import org.geosdi.geoplatform.connector.GeoserverVersion;
-import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.running.GeoserverRestRunningRequest;
-import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
-import org.geosdi.geoplatform.connector.store.layergroups.GeoserverLayerGroupsConnectorStore;
+import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.model.layergroups.GPLayerGroups;
+import org.geosdi.geoplatform.connector.geoserver.request.layergroups.GeoserverLayerGroupsRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
-import java.net.URL;
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public class GPGeoserverConnectorStore extends GeoserverLayerGroupsConnectorStore implements IGPGeoserverConnectorStore {
+@ThreadSafe
+public class GPGeoserverLayerGroupsRequest extends GPJsonGetConnectorRequest<GPLayerGroups> implements GeoserverLayerGroupsRequest {
 
-    private final GeoserverRestRunningRequest restRunningRequest;
-
-    /**
-     * @param server
-     * @param securityConnector
-     * @param theJacksonSupport
-     * @param theVersion
-     */
-    GPGeoserverConnectorStore(URL server, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport,
-            GeoserverVersion theVersion) {
-        this(server, null, securityConnector, theJacksonSupport, theVersion);
+     GPGeoserverLayerGroupsRequest(@Nonnull(when = NEVER) GPServerConnector server,
+            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(server, theJacksonSupport);
     }
 
     /**
-     * @param server
-     * @param pooledConnectorConfig
-     * @param securityConnector
-     * @param theJacksonSupport
-     * @param theVersion
-     */
-    GPGeoserverConnectorStore(URL server, GPPooledConnectorConfig pooledConnectorConfig,
-            GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
-        super(new GPGeoserverConnector(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion));
-        this.restRunningRequest = this.server.createGeoserverRestRunningRequest();
-    }
-
-    /**
-     * @return {@link Boolean}
+     * @return {@link String}
      */
     @Override
-    public Boolean isGeoserverRestRunning() {
-       return this.restRunningRequest.isUp();
+    protected String createUriPath() throws Exception {
+        String baseURI = this.serverURI.toString();
+        return ((baseURI.endsWith("/") ? baseURI.concat("layergroups.json") : baseURI.concat("/layergroups.json")));
     }
 
     /**
-     * @return {@link GeoserverVersion}
+     * @return {@link Class<GPLayerGroups>}
      */
     @Override
-    public GeoserverVersion getVersion() {
-        return this.server.getVersion();
+    protected Class<GPLayerGroups> forClass() {
+        return GPLayerGroups.class;
     }
 }

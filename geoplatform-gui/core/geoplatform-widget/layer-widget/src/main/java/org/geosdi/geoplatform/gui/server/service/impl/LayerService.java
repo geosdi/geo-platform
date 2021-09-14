@@ -749,6 +749,7 @@ public class LayerService implements ILayerService {
     public String getLayerDimension(String layerName, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         try {
             this.sessionUtility.getLoggedAccount(httpServletRequest);
+            //TODO COVERAGES
             return this.sharedRestReader.getDimensions(layerName);
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);

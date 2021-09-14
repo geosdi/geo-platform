@@ -33,12 +33,11 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver;
+package org.geosdi.geoplatform.connector.geoserver.layergroups;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
-import org.geosdi.geoplatform.connector.geoserver.layergroups.GPGeoserverLayerGroupsConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.running.GeoserverRestRunningRequest;
+import org.geosdi.geoplatform.connector.geoserver.settings.GPGeoserverSettingsConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -48,17 +47,17 @@ import java.net.URL;
 import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExceptionMessage;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public class GPGeoserverConnector extends GPGeoserverLayerGroupsConnector implements IGPGeoserverConnector {
+public abstract class GPGeoserverLayerGroupsConnector extends GPGeoserverSettingsConnector implements IGPGeoserverLayerGroupsConnector {
 
     /**
      * @param urlServer
      * @param theJacksonSupport
      * @param version
      */
-    public GPGeoserverConnector(String urlServer, JacksonSupport theJacksonSupport, String version) {
+    protected GPGeoserverLayerGroupsConnector(String urlServer, JacksonSupport theJacksonSupport, String version) {
         super(urlServer, theJacksonSupport, version);
     }
 
@@ -68,7 +67,8 @@ public class GPGeoserverConnector extends GPGeoserverLayerGroupsConnector implem
      * @param theJacksonSupport
      * @param version
      */
-    public GPGeoserverConnector(String urlServer, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
+    protected GPGeoserverLayerGroupsConnector(String urlServer, GPSecurityConnector securityConnector,
+            JacksonSupport theJacksonSupport, String version) {
         super(urlServer, securityConnector, theJacksonSupport, version);
     }
 
@@ -79,7 +79,8 @@ public class GPGeoserverConnector extends GPGeoserverLayerGroupsConnector implem
      * @param theJacksonSupport
      * @param version
      */
-    public GPGeoserverConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
+    protected GPGeoserverLayerGroupsConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig,
+            GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
         super(urlServer, pooledConnectorConfig, securityConnector, theJacksonSupport, version);
     }
 
@@ -89,7 +90,8 @@ public class GPGeoserverConnector extends GPGeoserverLayerGroupsConnector implem
      * @param theJacksonSupport
      * @param theVersion
      */
-    public GPGeoserverConnector(URL server, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
+    protected GPGeoserverLayerGroupsConnector(URL server, GPSecurityConnector securityConnector,
+            JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, securityConnector, theJacksonSupport, theVersion);
     }
 
@@ -100,19 +102,20 @@ public class GPGeoserverConnector extends GPGeoserverLayerGroupsConnector implem
      * @param theJacksonSupport
      * @param theVersion
      */
-    public GPGeoserverConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
+    protected GPGeoserverLayerGroupsConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig,
+            GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion);
     }
 
     /**
-     * @return {@link GeoserverRestRunningRequest}
+     * @return {@link GPGeoserverLayerGroupsRequest}
      */
     @Override
-    public GeoserverRestRunningRequest createGeoserverRestRunningRequest() {
+    public GPGeoserverLayerGroupsRequest loadLayerGroupsRequest() {
         switch (version) {
             case V219x:
             case V218x:
-                return new GPGeoserverRestRunningRequest(this, this.jacksonSupport);
+                return new GPGeoserverLayerGroupsRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

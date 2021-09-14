@@ -33,61 +33,27 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store;
+package org.geosdi.geoplatform.connector.store.layergroups;
 
-import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.running.GeoserverRestRunningRequest;
-import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
-import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
-import org.geosdi.geoplatform.connector.store.layergroups.GeoserverLayerGroupsConnectorStore;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
-
-import java.net.URL;
+import org.geosdi.geoplatform.connector.geoserver.request.layergroups.GeoserverLayerGroupsRequest;
+import org.geosdi.geoplatform.connector.store.settings.GeoserverSettingsConnectorStore;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public class GPGeoserverConnectorStore extends GeoserverLayerGroupsConnectorStore implements IGPGeoserverConnectorStore {
+public abstract class GeoserverLayerGroupsConnectorStore extends GeoserverSettingsConnectorStore implements GPGeoserverLayerGroupsConnectorStore {
 
-    private final GeoserverRestRunningRequest restRunningRequest;
-
-    /**
-     * @param server
-     * @param securityConnector
-     * @param theJacksonSupport
-     * @param theVersion
-     */
-    GPGeoserverConnectorStore(URL server, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
-        this(server, null, securityConnector, theJacksonSupport, theVersion);
+    protected GeoserverLayerGroupsConnectorStore(GPGeoserverConnector theServer) {
+        super(theServer);
     }
 
     /**
-     * @param server
-     * @param pooledConnectorConfig
-     * @param securityConnector
-     * @param theJacksonSupport
-     * @param theVersion
-     */
-    GPGeoserverConnectorStore(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
-        super(new GPGeoserverConnector(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion));
-        this.restRunningRequest = this.server.createGeoserverRestRunningRequest();
-    }
-
-    /**
-     * @return {@link Boolean}
+     * @return {@link GeoserverLayerGroupsRequest}
      */
     @Override
-    public Boolean isGeoserverRestRunning() {
-       return this.restRunningRequest.isUp();
-    }
-
-    /**
-     * @return {@link GeoserverVersion}
-     */
-    @Override
-    public GeoserverVersion getVersion() {
-        return this.server.getVersion();
+    public GeoserverLayerGroupsRequest loadLayerGroups() {
+        return this.server.loadLayerGroupsRequest();
     }
 }

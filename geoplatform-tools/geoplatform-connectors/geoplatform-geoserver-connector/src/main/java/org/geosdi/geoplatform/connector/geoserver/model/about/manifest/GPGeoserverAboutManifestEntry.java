@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.about.manifest;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.ToString;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -53,58 +53,58 @@ public class GPGeoserverAboutManifestEntry implements IGPGeoserverAboutManifestE
 
     private static final long serialVersionUID = -9201236555135699778L;
     //
-    @JsonProperty(value = "@name")
+    @XmlElement(name = "@name")
     private String name;
-    @JsonProperty(value = "Archiver-Version")
+    @XmlElement(name = "Archiver-Version")
     private String archiverVersion;
-    @JsonProperty(value = "Bundle-License")
+    @XmlElement(name = "Bundle-License")
     private String bundleLicense;
-    @JsonProperty(value = "Specification-Version")
+    @XmlElement(name = "Specification-Version")
     private String specificationVersion;
-    @JsonProperty(value = "Bnd-LastModified")
+    @XmlElement(name = "Bnd-LastModified")
     private Long bndLastModified;
-    @JsonProperty(value = "Bundle-Name")
+    @XmlElement(name = "Bundle-Name")
     private String bundleName;
-    @JsonProperty(value = "Bundle-Description")
+    @XmlElement(name = "Bundle-Description")
     private String bundleDescription;
-    @JsonProperty(value = "Build-Jdk")
+    @XmlElement(name = "Build-Jdk")
     private String buildJdk;
-    @JsonProperty(value = "URL")
+    @XmlElement(name = "URL")
     private String url;
-    @JsonProperty(value = "Bundle-SymbolicName")
+    @XmlElement(name = "Bundle-SymbolicName")
     private String bundleSymbolicName;
-    @JsonProperty(value = "Built-By")
+    @XmlElement(name = "Built-By")
     private String builtBy;
-    @JsonProperty(value = "Require-Capability")
+    @XmlElement(name = "Require-Capability")
     private String requireCapability;
-    @JsonProperty(value = "Tool")
+    @XmlElement(name = "Tool")
     private String tool;
-    @JsonProperty(value = "Extension-Name")
+    @XmlElement(name = "Extension-Name")
     private String extensionName;
-    @JsonProperty(value = "Implementation-Title")
+    @XmlElement(name = "Implementation-Title")
     private String implementationTitle;
-    @JsonProperty(value = "Implementation-Version")
+    @XmlElement(name = "Implementation-Version")
     private String implementationVersion;
-    @JsonProperty(value = "Implementation-Build-Id")
+    @XmlElement(name = "Implementation-Build-Id")
     private String implementationBuildId;
-    @JsonProperty(value = "Manifest-Version")
+    @XmlElement(name = "Manifest-Version")
     private Integer manifestVersion;
-    @JsonProperty(value = "Created-By")
+    @XmlElement(name = "Created-By")
     private String createdBy;
-    @JsonProperty(value = "Implementation-Vendor-Id")
+    @XmlElement(name = "Implementation-Vendor-Id")
     private String implementationVendorId;
-    @JsonProperty(value = "Bundle-DocURL")
+    @XmlElement(name = "Bundle-DocURL")
     private String bundleDocUrl;
-    @JsonProperty(value = "Bundle-Vendor")
+    @XmlElement(name = "Bundle-Vendor")
     private String bundleVendor;
-    @JsonProperty(value = "Implementation-Vendor")
+    @XmlElement(name = "Implementation-Vendor")
     private String implementationVendor;
-    @JsonProperty(value = "Bundle-ManifestVersion")
+    @XmlElement(name = "Bundle-ManifestVersion")
     private Integer bundleManifestVersion;
-    @JsonProperty(value = "Bundle-Version")
+    @XmlElement(name = "Bundle-Version")
     private String bundleVersion;
-    @JsonProperty(value = "Specification-Title")
+    @XmlElement(name = "Specification-Title")
     private String specificationTitle;
-    @JsonProperty(value = "Implementation-URL")
+    @XmlElement(name = "Implementation-URL")
     private String implementationUrl;
 }

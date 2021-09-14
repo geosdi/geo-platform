@@ -34,14 +34,14 @@
  */
 package org.geosdi.geoplatform.connector.geoserver;
 
+import org.geosdi.geoplatform.connector.geoserver.layergroups.IGPGeoserverLayerGroupsConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.running.GeoserverRestRunningRequest;
-import org.geosdi.geoplatform.connector.geoserver.security.IGPGeoserverSecurityConnector;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverConnector extends IGPGeoserverSecurityConnector {
+public interface IGPGeoserverConnector extends IGPGeoserverLayerGroupsConnector {
 
     /**
      * @return {@link GeoserverRestRunningRequest}

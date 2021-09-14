@@ -35,13 +35,13 @@
 package org.geosdi.geoplatform.connector.store;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
-import org.geosdi.geoplatform.connector.store.settings.GPGeoserverSettingsConnectorStore;
+import org.geosdi.geoplatform.connector.store.layergroups.GPGeoserverLayerGroupsConnectorStore;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverConnectorStore extends GPGeoserverSettingsConnectorStore {
+public interface IGPGeoserverConnectorStore extends GPGeoserverLayerGroupsConnectorStore {
 
     /**
      * @return {@link Boolean}

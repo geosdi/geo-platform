@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.store.coverages;
 
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoveragesRequest;
+import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.GPGeoserverLoadStoreCoverageRequest;
 import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV219xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -69,5 +70,12 @@ public class GPGeoserverCoveragesConnectorStoreV219XTest extends GPBaseGeoserver
         GeoserverLoadCoverageRequest loadCoverageRequest = geoserverConnectorStoreV2_19_x.loadWorkspaceCoverageRequest();
         loadCoverageRequest.withWorkspace("sf").withCoverage("sfdem");
         logger.info("#######################LOAD_WORKSPACE_COVERAGE_RESPONSE : {}\n", loadCoverageRequest.getResponse());
+    }
+
+    @Test
+    public void d_loadWorkspaceStoreCoverageTest() throws Exception {
+        GPGeoserverLoadStoreCoverageRequest loadCoverageRequest = geoserverConnectorStoreV2_19_x.loadWorkspaceStoreCoverageRequest();
+        loadCoverageRequest.withWorkspace("sf").withCoverage("sfdem").withStore("sfdem");
+        logger.info("#######################LOAD_WORKSPACE_STORE_COVERAGE_RESPONSE : {}\n", loadCoverageRequest.getResponse());
     }
 }

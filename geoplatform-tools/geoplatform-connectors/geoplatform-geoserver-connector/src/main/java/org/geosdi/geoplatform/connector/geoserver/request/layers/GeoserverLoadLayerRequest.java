@@ -52,4 +52,9 @@ public interface GeoserverLoadLayerRequest extends GPConnectorRequest<GeoserverL
      * @return {@link GeoserverLoadLayerRequest}
      */
     GeoserverLoadLayerRequest withName(@Nonnull(when = When.NEVER) String theName);
+
+    /**
+     * @return {@link Boolean}
+     */
+    Boolean existLayer() throws Exception;
 }

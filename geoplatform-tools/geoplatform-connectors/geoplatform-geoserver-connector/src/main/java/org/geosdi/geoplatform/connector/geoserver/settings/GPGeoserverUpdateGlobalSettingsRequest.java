@@ -90,7 +90,7 @@ public class GPGeoserverUpdateGlobalSettingsRequest extends GPJsonPutConnectorRe
     protected HttpEntity prepareHttpEntity() throws Exception {
         GPGeoserverGlobalSettings settingsBody = this.settingsBody.get();
         checkArgument(settingsBody != null, "The Parameter settingsBody must not be null.");
-        String settingsBodyAsString = this.jacksonSupport.getDefaultMapper().writeValueAsString(settingsBody);
+        String settingsBodyAsString = this.jacksonSupport.get().getDefaultMapper().writeValueAsString(settingsBody);
         logger.debug("#############################SETTINGS_BODY : \n{}\n", settingsBodyAsString);
         return new StringEntity(settingsBodyAsString, APPLICATION_JSON);
     }

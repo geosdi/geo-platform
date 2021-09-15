@@ -114,7 +114,7 @@ public class GPGeoserverUpdateCoverageStoreRequest extends GPJsonPutConnectorReq
     protected HttpEntity prepareHttpEntity() throws Exception {
         IGPGeoserverCoverageStoreBody coverageStoreBody = this.body.get();
         checkArgument(coverageStoreBody != null, "The Parameter coverageStoreBody must not be null.");
-        String coverageStoreBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(coverageStoreBody);
+        String coverageStoreBodyString = jacksonSupport.get().getDefaultMapper().writeValueAsString(coverageStoreBody);
         logger.debug("#############################COVERAGE_STORE_BODY : \n{}\n", coverageStoreBodyString);
         return new StringEntity(coverageStoreBodyString, APPLICATION_JSON);
     }

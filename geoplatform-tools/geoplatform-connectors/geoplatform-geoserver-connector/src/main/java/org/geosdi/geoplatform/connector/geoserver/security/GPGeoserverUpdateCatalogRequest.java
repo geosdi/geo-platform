@@ -93,7 +93,7 @@ public class GPGeoserverUpdateCatalogRequest extends GPJsonPutConnectorRequest<B
         IGPGeoserverCatalogMode catalogMode = this.catalogMode.get();
         checkArgument(catalogMode != null, "The Parameter catalogMode must not be null.");
         IGPGeoserverCatalog geoserverCatalog = new GPGeoserverCatalog(catalogMode);
-        String geoserverCatalogAsString = this.jacksonSupport.get().getDefaultMapper().writeValueAsString(geoserverCatalog);
+        String geoserverCatalogAsString = this.jacksonSupport.getDefaultMapper().writeValueAsString(geoserverCatalog);
         logger.debug("#############################CATALOG_MODE_BODY : \n{}\n", geoserverCatalogAsString);
         return new StringEntity(geoserverCatalogAsString, APPLICATION_JSON);
     }

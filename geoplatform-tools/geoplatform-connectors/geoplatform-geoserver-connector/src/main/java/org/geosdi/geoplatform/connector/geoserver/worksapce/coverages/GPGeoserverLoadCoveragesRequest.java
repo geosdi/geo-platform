@@ -119,7 +119,7 @@ public class GPGeoserverLoadCoveragesRequest extends GPGeoserverGetConnectorRequ
     protected GPGeoserverCoverages readInternal(BufferedReader reader) throws Exception {
         String queryList = this.queryList.get();
         return ((queryList != null) && (queryList.equalsIgnoreCase("all"))
-                ? this.jacksonSupport.get().getDefaultMapper().readValue(reader, GPGeoserverAllCoverages.class) : super.readInternal(reader));
+                ? this.jacksonSupport.getDefaultMapper().readValue(reader, GPGeoserverAllCoverages.class) : super.readInternal(reader));
     }
 
     /**

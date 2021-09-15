@@ -114,7 +114,7 @@ public class GPGeoserverCreateFeatureTypeRequest extends GPJsonPostConnectorRequ
     protected HttpEntity prepareHttpEntity() throws Exception {
         IGPGeoserverFeatureTypeInfo featureTypeBody = this.featureTypeBody.get();
         checkArgument(featureTypeBody != null, "The Parameter featureTypeBody must not be null.");
-        String featureTypeBodyString = jacksonSupport.get().getDefaultMapper().writeValueAsString(featureTypeBody);
+        String featureTypeBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(featureTypeBody);
         logger.debug("#############################FEATURE_TYPE_BODY : \n{}\n", featureTypeBodyString);
         return new StringEntity(featureTypeBodyString, APPLICATION_JSON);
     }

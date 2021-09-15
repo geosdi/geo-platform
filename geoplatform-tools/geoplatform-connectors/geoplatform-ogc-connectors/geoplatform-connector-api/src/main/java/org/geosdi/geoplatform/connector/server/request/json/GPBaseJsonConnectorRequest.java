@@ -64,7 +64,7 @@ import static org.apache.hc.core5.http.io.entity.EntityUtils.consume;
  */
 abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends GPAbstractConnectorRequest<T> {
 
-    protected final AtomicReference<JacksonSupport> jacksonSupport;
+    protected final JacksonSupport jacksonSupport;
     protected final Class<T> classe;
 
     /**
@@ -73,7 +73,7 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
      */
     protected GPBaseJsonConnectorRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector);
-        checkArgument((this.jacksonSupport = new AtomicReference<>(theJacksonSupport)) != null, "The Parameter JacksonSupport must not be null.");
+        checkArgument((this.jacksonSupport = theJacksonSupport) != null, "The Parameter JacksonSupport must not be null.");
         checkArgument((this.classe = forClass()) != null, "The Parameter classe must not be null.");
     }
 
@@ -178,7 +178,7 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
      * @throws Exception
      */
     protected T readInternal(BufferedReader reader) throws Exception {
-        return this.jacksonSupport.get().getDefaultMapper().readValue(reader, this.classe);
+        return this.jacksonSupport.getDefaultMapper().readValue(reader, this.classe);
     }
 
     /**

@@ -36,24 +36,16 @@
 package org.geosdi.geoplatform.geoserver;
 
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
-import it.geosolutions.geoserver.rest.decoder.RESTLayer;
-import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadLayerRequest;
 import org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 
-import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -63,42 +55,16 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 @FixMethodOrder(NAME_ASCENDING)
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-Geoserver-Connector-Test.xml"})
-public class GeoserverConnectorTest {
+public abstract class GeoserverConnectorTest {
 
-    static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorTest.class);
-    //
-    static final JacksonSupport jacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_ENABLE,
-            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-            WRAP_ROOT_VALUE_ENABLE,
-            INDENT_OUTPUT_ENABLE);
-    //
     @Resource(name = "sharedRestReader")
-    private GeoServerRESTReader restReader;
+    protected GeoServerRESTReader restReader;
     @Resource(name = "geoserverConnectorStore")
-    private GPGeoserverConnectorStore geoserverConnectorStore;
+    protected GPGeoserverConnectorStore geoserverConnectorStore;
 
     @Before
     public void setUp() {
         Assert.assertNotNull(this.geoserverConnectorStore);
         Assert.assertNotNull(this.restReader);
     }
-
-    @Test
-    public void a_test() throws Exception {
-        RESTLayer restLayer = this.restReader.getLayer("poi");
-        logger.info("#######################REST LAYER: {}\n", restLayer.getResourceUrl());
-        GeoserverLoadLayerRequest geoserverLoadLayerRequest = this.geoserverConnectorStore.loadLayerRequest().withName("poigggtg");
-        logger.info("#######################REST LAYER: {}\n", geoserverLoadLayerRequest.getResponse());
-        logger.info("#####################EXSIST LAYER {}\n", geoserverLoadLayerRequest.existLayer());
-
-        geoserverLoadLayerRequest = geoserverLoadLayerRequest.withName("poi");
-
-        logger.info("#####################EXSIST LAYER {} \n", geoserverLoadLayerRequest.existLayer());
-        logger.info("#####################LAYER {}\n", geoserverLoadLayerRequest.getResponse());
-        //logger.info("###############\n {}\n", jacksonSupport.getDefaultMapper().writeValueAsString(restLayer) );
-    }
-
-
-
 }

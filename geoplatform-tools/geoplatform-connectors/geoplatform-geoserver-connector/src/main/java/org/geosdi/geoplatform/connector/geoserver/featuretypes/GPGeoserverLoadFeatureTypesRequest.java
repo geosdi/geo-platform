@@ -102,7 +102,7 @@ abstract class GPGeoserverLoadFeatureTypesRequest<Request extends GeoserverLoadF
     @Override
     protected GPGeoserverFeatureTypeWrapper readInternal(BufferedReader reader) throws Exception {
         GPGeoserverFeatureTypeCategory featureTypeCategory = this.featureTypeCategory.get();
-        return of(this.jacksonSupport.get().getDefaultMapper().readValue(reader, featureTypeCategory.toModel()));
+        return of(this.jacksonSupport.getDefaultMapper().readValue(reader, featureTypeCategory.toModel()));
     }
 
     /**

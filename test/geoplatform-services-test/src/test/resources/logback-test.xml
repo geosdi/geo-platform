@@ -25,6 +25,8 @@
         <level value="info" />
         <appender-ref ref="STDOUT" />
     </root>
+
+    <logger name="org.geosdi.geoplatform.connector.geoserver" level="debug"/>
     
     <!-- Tests -->
     <logger name="org.geosdi.geoplatform.model.ServiceTest" level="debug"/>

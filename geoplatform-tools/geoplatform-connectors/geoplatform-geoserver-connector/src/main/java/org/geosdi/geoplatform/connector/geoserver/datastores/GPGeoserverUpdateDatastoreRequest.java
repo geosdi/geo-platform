@@ -113,7 +113,7 @@ public class GPGeoserverUpdateDatastoreRequest extends GPJsonPutConnectorRequest
     protected HttpEntity prepareHttpEntity() throws Exception {
         IGPGeoserverCreateDatastoreBody datastoreBody = this.datastoreBody.get();
         checkArgument(datastoreBody != null, "The datastoreBody must not be null.");
-        String datastoreBodyString = jacksonSupport.get().getDefaultMapper().writeValueAsString(datastoreBody);
+        String datastoreBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(datastoreBody);
         logger.debug("#############################DATASTORE_BODY : \n{}\n", datastoreBodyString);
         return new StringEntity(datastoreBodyString, APPLICATION_JSON);
     }

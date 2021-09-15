@@ -177,7 +177,24 @@
             <groupId>javax.ws.rs</groupId>
             <artifactId>javax.ws.rs-api</artifactId>
         </dependency>
-        
+
+        <!-- =============================================================== -->
+        <!-- ==================== GEOSERVER-MANAGER====================== -->
+        <!-- =============================================================== -->
+        <dependency>
+            <groupId>it.geosolutions</groupId>
+            <artifactId>geoserver-manager</artifactId>
+            <version>${geoserver-manager-version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-publisher-base-impl</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
         <!-- =============================================================== -->
         <!-- ==================== GEOPLATFORM WFS ====================== -->
         <!-- =============================================================== -->

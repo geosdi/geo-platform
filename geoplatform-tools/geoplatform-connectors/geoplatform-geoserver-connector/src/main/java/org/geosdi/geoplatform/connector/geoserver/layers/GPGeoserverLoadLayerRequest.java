@@ -119,9 +119,7 @@ public class GPGeoserverLoadLayerRequest extends GPJsonGetConnectorRequest<Geose
     @Override
     protected GeoserverLayer readInternal(BufferedReader reader) throws Exception {
         try {
-            if (this.response.get() == null) {
-                this.response.set(super.readInternal(reader));
-            }
+            this.response.set(super.readInternal(reader));
             this.exist.set(TRUE);
             return this.response.get();
         } catch (Exception ex) {

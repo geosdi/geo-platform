@@ -128,7 +128,7 @@ public class GPGeoserverCreateWorkspaceRequest extends GPJsonPostConnectorReques
     protected HttpEntity prepareHttpEntity() throws Exception {
         GPGeoserverCreateWorkspaceBody workspaceBody = this.workspaceBody.get();
         checkArgument(workspaceBody != null, "The workspaceBody must not be null.");
-        String workspaceBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(workspaceBody);
+        String workspaceBodyString = jacksonSupport.get().getDefaultMapper().writeValueAsString(workspaceBody);
         logger.debug("#############################WORKSPACE_BODY : \n{}\n", workspaceBodyString);
         return new StringEntity(workspaceBodyString, APPLICATION_JSON);
     }

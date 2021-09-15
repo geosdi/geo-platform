@@ -49,6 +49,8 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static com.google.common.base.Charsets.UTF_8;
 import static com.google.common.base.Preconditions.checkArgument;
@@ -62,7 +64,7 @@ import static org.apache.hc.core5.http.io.entity.EntityUtils.consume;
  */
 abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends GPAbstractConnectorRequest<T> {
 
-    protected final JacksonSupport jacksonSupport;
+    protected final AtomicReference<JacksonSupport> jacksonSupport;
     protected final Class<T> classe;
 
     /**
@@ -71,7 +73,7 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
      */
     protected GPBaseJsonConnectorRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector);
-        checkArgument((this.jacksonSupport = theJacksonSupport) != null, "The Parameter JacksonSupport must not be null.");
+        checkArgument((this.jacksonSupport = new AtomicReference<>(theJacksonSupport)) != null, "The Parameter JacksonSupport must not be null.");
         checkArgument((this.classe = forClass()) != null, "The Parameter classe must not be null.");
     }
 
@@ -176,7 +178,7 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
      * @throws Exception
      */
     protected T readInternal(BufferedReader reader) throws Exception {
-        return this.jacksonSupport.getDefaultMapper().readValue(reader, this.classe);
+        return this.jacksonSupport.get().getDefaultMapper().readValue(reader, this.classe);
     }
 
     /**

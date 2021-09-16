@@ -33,46 +33,30 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.style;
+package org.geosdi.geoplatform.connector.geoserver.request.styles;
 
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverWorkspace;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStylesRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverLoadWorkspacesRequest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreTest;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runners.MethodSorters;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverSingleStyle;
+import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
 
-import java.util.Objects;
+import javax.annotation.Nonnull;
 
-import static io.reactivex.rxjava3.core.Observable.fromIterable;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class GPGeoserverStyleConnectorTest extends GPBaseGeoserverConnectorStoreTest {
-
-    private static final GeoserverLoadWorkspacesRequest workspacesRequest = geoserverConnectorStoreV2_18_x.loadWorkspacesRequest();
-    private static final GeoserverWorkspaceStylesRequest gpGeoserverWorkspaceStylesRequest = geoserverConnectorStoreV2_18_x.loadWorkspaceStyles();
-
-    @Test
-    public void a_stylesGeoserverConnectorTest() throws Exception {
-        logger.info("####################WORKSPACES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", workspacesRequest.getResponse());
-        fromIterable(workspacesRequest.getResponse().getWorkspaces())
-                .filter(Objects::nonNull)
-                .map(IGPGeoserverWorkspace::getWorkspaceName)
-                .doOnComplete(() -> logger.debug("################### workspaces processed."))
-                .subscribe(this::getWorkspaceStyles, Throwable::printStackTrace);
-    }
+public interface GeoserverWorkspaceStyleRequest extends GPConnectorRequest<GPGeoserverSingleStyle> {
 
     /**
-     * @param workspaceName
-     * @throws Exception
+     * @param theWorkspaceName
+     * @return
      */
-    private void getWorkspaceStyles(String workspaceName) throws Exception {
-        logger.info("####################WORKSPACE_NAME : {}\n", workspaceName);
-        logger.info("####################STYLE_RESPONSE : {}\n", gpGeoserverWorkspaceStylesRequest.withWorkspaceName(workspaceName).getResponse());
-    }
+    GeoserverWorkspaceStyleRequest withWorkspaceName(@Nonnull(when = NEVER) String theWorkspaceName);
+
+    /**
+     * @param theStyleName
+     * @return
+     */
+    GeoserverWorkspaceStyleRequest withStyleName(@Nonnull(when = NEVER) String theStyleName);
 }

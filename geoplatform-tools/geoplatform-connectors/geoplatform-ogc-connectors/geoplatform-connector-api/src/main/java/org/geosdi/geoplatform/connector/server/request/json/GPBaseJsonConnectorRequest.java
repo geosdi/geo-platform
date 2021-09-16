@@ -84,13 +84,14 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
         HttpUriRequest httpMethod = this.prepareHttpMethod();
         httpMethod.addHeader("Content-Type", "application/json");
         logger.debug("#############################Executing -------------> {}\n", httpMethod.getURI().toString());
+        this.addHeaderParams(httpMethod);
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpMethod);
         int statusCode = httpResponse.getStatusLine().getStatusCode();
         logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
         this.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(responseEntity.getContent(), UTF_8_CHARSERT))) {
-            return readInternal(reader);
+            return this.readInternal(reader);
         } catch (Exception ex) {
             throw new IncorrectResponseException(ex);
         } finally {
@@ -112,6 +113,7 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
         HttpUriRequest httpMethod = this.prepareHttpMethod();
         httpMethod.addHeader("Content-Type", "application/json");
         logger.debug("#############################Executing -------------> {}\n", httpMethod.getURI().toString());
+        this.addHeaderParams(httpMethod);
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpMethod);
         int statusCode = httpResponse.getStatusLine().getStatusCode();
         logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
@@ -142,6 +144,7 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
         HttpUriRequest httpMethod = this.prepareHttpMethod();
         httpMethod.addHeader("Content-Type", "application/json");
         logger.debug("#############################Executing -------------> {}\n", httpMethod.getURI().toString());
+        this.addHeaderParams(httpMethod);
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpMethod);
         int statusCode = httpResponse.getStatusLine().getStatusCode();
         logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
@@ -158,6 +161,12 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
             consume(responseEntity);
             httpResponse.close();
         }
+    }
+
+    /**
+     * @param httpMethod
+     */
+    protected void addHeaderParams(HttpUriRequest httpMethod) {
     }
 
     /**

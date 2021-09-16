@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.store.style;
 
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverWorkspace;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStylesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverLoadWorkspacesRequest;
 import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV219xTest;
@@ -42,7 +44,10 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import java.util.Objects;
+
 import static io.reactivex.rxjava3.core.Observable.fromIterable;
+import static org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyleHeaderParam.SLD_SE_XML;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -51,24 +56,39 @@ import static io.reactivex.rxjava3.core.Observable.fromIterable;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class GPGeoserverStyleConnectorV219xTest extends GPBaseGeoserverConnectorStoreV219xTest {
 
+    private static final GeoserverLoadWorkspacesRequest workspacesRequest = geoserverConnectorStoreV2_19_x.loadWorkspacesRequest();
+    private static final GeoserverWorkspaceStylesRequest gpGeoserverWorkspaceStylesRequest = geoserverConnectorStoreV2_19_x.loadWorkspaceStyles();
+
     @Test
     public void a_stylesGeoserverConnectorTest() throws Exception {
-        GeoserverLoadWorkspacesRequest workspacesRequest = geoserverConnectorStoreV2_19_x.loadWorkspacesRequest();
         logger.info("####################WORKSPACES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", workspacesRequest.getResponse());
-        fromIterable(workspacesRequest.getResponse().getWorkspaces()).map(w-> w.getWorkspaceName())
+        fromIterable(workspacesRequest.getResponse().getWorkspaces())
+                .filter(Objects::nonNull)
+                .map(IGPGeoserverWorkspace::getWorkspaceName)
                 .doOnComplete(() -> logger.debug("################### workspaces processed."))
-                .subscribe(this::getWorkspaceStyles, Throwable::printStackTrace);
+                .subscribe(this::toWorkspaceStyles, Throwable::printStackTrace);
+    }
+
+    @Test
+    public void b_geoserverStyleRequestTest() throws Exception {
+        GeoserverStyleRequest geoserverStyleRequest = geoserverConnectorStoreV2_19_x.loadStyleRequest();
+        logger.info("#####################GEOSERVER_STYLE_RESPONSE_AS_STRING : {}\n", geoserverStyleRequest
+                .withStyleName("pophatch")
+                .withAcceptHeaderParam(SLD_SE_XML)
+                .getResponseAsString());
+
+        logger.info("#####################GEOSERVER_STYLE_RESPONSE_AS_STRING : {}\n", geoserverStyleRequest
+                .withStyleName("population")
+                .withAcceptHeaderParam(SLD_SE_XML)
+                .getResponseAsString());
     }
 
     /**
      * @param workspaceName
      * @throws Exception
      */
-    private void getWorkspaceStyles(String workspaceName) throws Exception {
+    private void toWorkspaceStyles(String workspaceName) throws Exception {
         logger.info("####################WORKSPACE_NAME : \n{}\n", workspaceName);
-        GeoserverWorkspaceStylesRequest gpGeoserverWorkspaceStylesRequest = geoserverConnectorStoreV2_19_x
-                .loadWorkspaceStyles().withWorkspaceName(workspaceName);
-        logger.info("####################STYLE_RESPONSE : \n{}\n", gpGeoserverWorkspaceStylesRequest.getResponse());
+        logger.info("####################STYLE_RESPONSE : \n{}\n", gpGeoserverWorkspaceStylesRequest.withWorkspaceName(workspaceName).getResponse());
     }
-
 }

@@ -105,7 +105,7 @@ public class SLDTest {
     @Test
     public void testSLD() {
         String sldBody = this.restReader.getSLD("population");
-        logger.info("##################### Style: {} ", sldBody);
+        logger.info("###################Style: {} ", sldBody);
         String xmlToPublish = null;
         try {
             Reader reader = new StringReader(sldBody);
@@ -115,12 +115,10 @@ public class SLDTest {
                 for (Rule rule : fStyle.rules()) {
                     for (Symbolizer sym : rule.symbolizers()) {
                         for (String qwerty : sym.getOptions().keySet()) {
-                            logger.info("################ Qwerty: {} ", qwerty);
+                            logger.info("################Qwerty: {} ", qwerty);
                         }
                         StringBuilder stringa = new StringBuilder();
-
-                        logger.info("@@@@@@@@@@@@@@@@@@@@@ Stringa "
-                                + "generata: {} ", stringa);
+                        logger.info("@@@@@@@@@@@@@@@@@@@@@Stringa generata: {} ", stringa);
                     }
                 }
                 PolygonSymbolizer pointSymbolizer = SLD.polySymbolizer(fStyle);

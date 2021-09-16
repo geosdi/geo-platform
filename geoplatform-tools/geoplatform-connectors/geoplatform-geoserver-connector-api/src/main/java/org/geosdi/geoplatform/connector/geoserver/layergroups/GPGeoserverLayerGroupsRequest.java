@@ -33,46 +33,48 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.style;
+package org.geosdi.geoplatform.connector.geoserver.layergroups;
 
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverWorkspace;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStylesRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverLoadWorkspacesRequest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreTest;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runners.MethodSorters;
+import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.model.layergroups.GPLayerGroups;
+import org.geosdi.geoplatform.connector.geoserver.request.layergroups.GeoserverLayerGroupsRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
-import java.util.Objects;
+import javax.annotation.Nonnull;
 
-import static io.reactivex.rxjava3.core.Observable.fromIterable;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class GPGeoserverStyleConnectorTest extends GPBaseGeoserverConnectorStoreTest {
+@ThreadSafe
+public class GPGeoserverLayerGroupsRequest extends GPJsonGetConnectorRequest<GPLayerGroups> implements GeoserverLayerGroupsRequest {
 
-    private static final GeoserverLoadWorkspacesRequest workspacesRequest = geoserverConnectorStoreV2_18_x.loadWorkspacesRequest();
-    private static final GeoserverWorkspaceStylesRequest gpGeoserverWorkspaceStylesRequest = geoserverConnectorStoreV2_18_x.loadWorkspaceStyles();
-
-    @Test
-    public void a_stylesGeoserverConnectorTest() throws Exception {
-        logger.info("####################WORKSPACES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", workspacesRequest.getResponse());
-        fromIterable(workspacesRequest.getResponse().getWorkspaces())
-                .filter(Objects::nonNull)
-                .map(IGPGeoserverWorkspace::getWorkspaceName)
-                .doOnComplete(() -> logger.debug("################### workspaces processed."))
-                .subscribe(this::getWorkspaceStyles, Throwable::printStackTrace);
+    /**
+     * @param server
+     * @param theJacksonSupport
+     */
+     GPGeoserverLayerGroupsRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(server, theJacksonSupport);
     }
 
     /**
-     * @param workspaceName
-     * @throws Exception
+     * @return {@link String}
      */
-    private void getWorkspaceStyles(String workspaceName) throws Exception {
-        logger.info("####################WORKSPACE_NAME : {}\n", workspaceName);
-        logger.info("####################STYLE_RESPONSE : {}\n", gpGeoserverWorkspaceStylesRequest.withWorkspaceName(workspaceName).getResponse());
+    @Override
+    protected String createUriPath() throws Exception {
+        String baseURI = this.serverURI.toString();
+        return ((baseURI.endsWith("/") ? baseURI.concat("layergroups.json") : baseURI.concat("/layergroups.json")));
+    }
+
+    /**
+     * @return {@link Class<GPLayerGroups>}
+     */
+    @Override
+    protected Class<GPLayerGroups> forClass() {
+        return GPLayerGroups.class;
     }
 }

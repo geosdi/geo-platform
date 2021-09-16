@@ -96,6 +96,7 @@ public final class GPGeoserverConnectorStoreBuilder extends AbstractConnectorBui
      * @return {@link ObjectMapper}
      */
     ObjectMapper toJacksonSupport() {
-        return ((this.jacksonSupport != null) ? this.jacksonSupport.getDefaultMapper() : new GPJacksonSupport().configure(NON_NULL).getDefaultMapper());
+        this.jacksonSupport = ((this.jacksonSupport != null) ? this.jacksonSupport : new GPJacksonSupport().configure(NON_NULL));
+        return this.jacksonSupport.getDefaultMapper();
     }
 }

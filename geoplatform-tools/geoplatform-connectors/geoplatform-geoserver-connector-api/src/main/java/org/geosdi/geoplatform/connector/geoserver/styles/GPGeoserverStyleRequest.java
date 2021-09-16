@@ -36,16 +36,13 @@
 package org.geosdi.geoplatform.connector.geoserver.styles;
 
 import net.jcip.annotations.ThreadSafe;
-import org.apache.hc.client5.http.classic.methods.HttpUriRequest;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverSingleStyle;
-import org.geosdi.geoplatform.connector.geoserver.model.styles.GeoserverStyleHeaderParam;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.ThreadLocal.withInitial;
@@ -59,7 +56,6 @@ import static javax.annotation.meta.When.NEVER;
 public class GPGeoserverStyleRequest extends GPJsonGetConnectorRequest<GPGeoserverSingleStyle> implements GeoserverStyleRequest {
 
     private final ThreadLocal<String> styleName;
-    private final ThreadLocal<GeoserverStyleHeaderParam> acceptHeaderParam;
 
     /**
      * @param server
@@ -68,7 +64,6 @@ public class GPGeoserverStyleRequest extends GPJsonGetConnectorRequest<GPGeoserv
     GPGeoserverStyleRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
         this.styleName = withInitial(() -> null);
-        this.acceptHeaderParam = withInitial(() -> null);
     }
 
     /**
@@ -80,27 +75,6 @@ public class GPGeoserverStyleRequest extends GPJsonGetConnectorRequest<GPGeoserv
     }
 
     /**
-     * @return {@link GeoserverStyleRequest}
-     */
-    @Override
-    public  GeoserverStyleRequest withAcceptHeaderParam(@Nullable GeoserverStyleHeaderParam theAcceptHeaderParam) {
-        this.acceptHeaderParam.set(theAcceptHeaderParam);
-        return this;
-    }
-
-    /**
-     * @param httpMethod
-     */
-    @Override
-    protected void addHeaderParams(HttpUriRequest httpMethod) {
-        super.addHeaderParams(httpMethod);
-        GeoserverStyleHeaderParam styleHeaderParam = this.acceptHeaderParam.get();
-        if (styleHeaderParam != null && styleHeaderParam.isValid()) {
-            httpMethod.addHeader("Accept", styleHeaderParam.toHeaderParam());
-        }
-    }
-
-    /**
      * @return {@link String}
      */
     @Override
@@ -108,8 +82,8 @@ public class GPGeoserverStyleRequest extends GPJsonGetConnectorRequest<GPGeoserv
         String styleName = this.styleName.get();
         checkArgument(((styleName != null) && !(styleName.trim().isEmpty())), "The Parameter Style Name must not be null or an Empty String.");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("styles/").concat(styleName)//.concat(".ysld")
-                : baseURI.concat("/styles/").concat(styleName)));//.concat(".ysld")));
+        return ((baseURI.endsWith("/") ? baseURI.concat("styles/").concat(styleName).concat(".json")
+                : baseURI.concat("/styles/").concat(styleName).concat(".json")));
     }
 
     /**

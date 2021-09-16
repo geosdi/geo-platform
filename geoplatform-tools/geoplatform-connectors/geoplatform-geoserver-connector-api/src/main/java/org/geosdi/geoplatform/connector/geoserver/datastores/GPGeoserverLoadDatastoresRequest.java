@@ -54,7 +54,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadDatastoresRequest extends GPGeoserverGetConnectorRequest<GPGeoserverLoadDatastores, GPGeoserverEmptyDatastores> implements GeoserverLoadDatastoresRequest {
+public class GPGeoserverLoadDatastoresRequest extends GPGeoserverGetConnectorRequest<GPGeoserverLoadDatastores, GPGeoserverEmptyDatastores, GeoserverLoadDatastoresRequest> implements GeoserverLoadDatastoresRequest {
 
     private final ThreadLocal<String> workspaceName;
 
@@ -68,19 +68,12 @@ public class GPGeoserverLoadDatastoresRequest extends GPGeoserverGetConnectorReq
     }
 
     /**
-     * @return {@link String}
-     */
-    @Override
-    public String getWorkspaceName() {
-        return this.workspaceName.get();
-    }
-
-    /**
      * @param theWorkspaceName
      */
     @Override
-    public void setWorkspaceName(String theWorkspaceName) {
+    public GeoserverLoadDatastoresRequest withWorkspaceName(String theWorkspaceName) {
         this.workspaceName.set(theWorkspaceName);
+        return this.self();
     }
 
     /**

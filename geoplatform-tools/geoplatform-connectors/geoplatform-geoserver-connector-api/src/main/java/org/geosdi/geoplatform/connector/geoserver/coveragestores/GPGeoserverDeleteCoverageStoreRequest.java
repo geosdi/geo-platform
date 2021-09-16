@@ -59,7 +59,7 @@ import static org.geosdi.geoplatform.connector.geoserver.model.store.coverage.GP
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverDeleteCoverageStoreRequest extends GPJsonDeleteConnectorRequest<Boolean> implements GeoserverDeleteCoverageStoreRequest {
+public class GPGeoserverDeleteCoverageStoreRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteCoverageStoreRequest> implements GeoserverDeleteCoverageStoreRequest {
 
     private final ThreadLocal<String> workspace;
     private final ThreadLocal<String> coverageStore;
@@ -85,7 +85,7 @@ public class GPGeoserverDeleteCoverageStoreRequest extends GPJsonDeleteConnector
     @Override
     public GeoserverDeleteCoverageStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspace.set(theWorkspace);
-        return this;
+        return self();
     }
 
     /**
@@ -95,7 +95,7 @@ public class GPGeoserverDeleteCoverageStoreRequest extends GPJsonDeleteConnector
     @Override
     public GeoserverDeleteCoverageStoreRequest withCoverageStore(@Nonnull(when = NEVER) String theCoverageStore) {
         this.coverageStore.set(theCoverageStore);
-        return this;
+        return self();
     }
 
     /**
@@ -114,7 +114,7 @@ public class GPGeoserverDeleteCoverageStoreRequest extends GPJsonDeleteConnector
     @Override
     public <Purge extends GPGeoserverPurgeParam> GeoserverDeleteCoverageStoreRequest withPurge(Purge thePurge) {
         this.purge.set((thePurge != null) ? thePurge : NONE);
-        return this;
+        return self();
     }
 
     /**
@@ -129,7 +129,7 @@ public class GPGeoserverDeleteCoverageStoreRequest extends GPJsonDeleteConnector
     @Override
     public GeoserverDeleteCoverageStoreRequest withRecurse(@Nullable Boolean theRecurse) {
         this.recurse.set((theRecurse != null) ? theRecurse : FALSE);
-        return this;
+        return self();
     }
 
     /**

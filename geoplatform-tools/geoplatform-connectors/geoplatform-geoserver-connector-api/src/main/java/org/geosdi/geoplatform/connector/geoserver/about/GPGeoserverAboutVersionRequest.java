@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.geoserver.about;
 
 import org.geosdi.geoplatform.connector.geoserver.model.about.version.GPGeoserverAboutVersion;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
@@ -48,7 +49,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGeoserverAboutVersionRequest extends GPJsonGetConnectorRequest<GPGeoserverAboutVersion> {
+public class GPGeoserverAboutVersionRequest extends GPJsonGetConnectorRequest<GPGeoserverAboutVersion, GPGeoserverAboutVersionRequest> implements GPJsonConnectorRequest<GPGeoserverAboutVersion, GPGeoserverAboutVersionRequest> {
 
     /**
      * @param server

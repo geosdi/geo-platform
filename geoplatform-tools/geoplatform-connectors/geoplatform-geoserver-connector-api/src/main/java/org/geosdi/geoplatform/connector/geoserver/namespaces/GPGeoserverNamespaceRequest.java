@@ -53,7 +53,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverNamespaceRequest extends GPJsonGetConnectorRequest<GPGeoserverSingleNamespace> implements GeoserverNamespaceRequest {
+public class GPGeoserverNamespaceRequest extends GPJsonGetConnectorRequest<GPGeoserverSingleNamespace, GeoserverNamespaceRequest> implements GeoserverNamespaceRequest {
 
     private final ThreadLocal<String> prefix;
 
@@ -72,7 +72,7 @@ public class GPGeoserverNamespaceRequest extends GPJsonGetConnectorRequest<GPGeo
      */
     public GeoserverNamespaceRequest withPrefix(@Nonnull(when = NEVER) String thePrefix) {
         this.prefix.set(thePrefix);
-        return this;
+        return self();
     }
 
     /**

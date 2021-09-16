@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.datastores;
 
-import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
 import javax.annotation.meta.When;
@@ -44,7 +44,7 @@ import javax.annotation.meta.When;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverDeleteDatastoreRequest extends GPConnectorRequest<Boolean> {
+public interface GeoserverDeleteDatastoreRequest extends GPJsonConnectorRequest<Boolean, GeoserverDeleteDatastoreRequest> {
 
     /**
      * @param theWorkspaceName

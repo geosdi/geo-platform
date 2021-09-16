@@ -57,7 +57,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadLayerRequest extends GPJsonGetConnectorRequest<GeoserverLayer> implements GeoserverLoadLayerRequest {
+public class GPGeoserverLoadLayerRequest extends GPJsonGetConnectorRequest<GeoserverLayer, GeoserverLoadLayerRequest> implements GeoserverLoadLayerRequest {
 
     private final ThreadLocal<String> name;
     private final ThreadLocal<Boolean> exist = withInitial(() -> null);
@@ -79,7 +79,7 @@ public class GPGeoserverLoadLayerRequest extends GPJsonGetConnectorRequest<Geose
         this.name.set(theName);
         this.exist.set(null);
         this.response.set(null);
-        return this;
+        return self();
     }
 
     /**
@@ -127,8 +127,6 @@ public class GPGeoserverLoadLayerRequest extends GPJsonGetConnectorRequest<Geose
             return null;
         }
     }
-
-
 
     /**
      * @return {@link String}

@@ -62,7 +62,7 @@ import static org.apache.http.entity.ContentType.APPLICATION_JSON;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverUpdateCatalogRequest extends GPJsonPutConnectorRequest<Boolean> implements GeoserverUpdateCatalogRequest {
+public class GPGeoserverUpdateCatalogRequest extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateCatalogRequest> implements GeoserverUpdateCatalogRequest {
 
     private final ThreadLocal<IGPGeoserverCatalogMode> catalogMode;
 
@@ -82,7 +82,7 @@ public class GPGeoserverUpdateCatalogRequest extends GPJsonPutConnectorRequest<B
     @Override
     public <CatalogMode extends IGPGeoserverCatalogMode> GeoserverUpdateCatalogRequest withCatalogMode(@Nonnull(when = NEVER) CatalogMode theCatalogMode) {
         this.catalogMode.set(theCatalogMode);
-        return this;
+        return self();
     }
 
     /**

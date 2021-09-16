@@ -60,7 +60,7 @@ import static org.apache.http.util.EntityUtils.consume;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends GPAbstractConnectorRequest<T> {
+abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest, ConnectorRequest extends GPJsonConnectorRequest> extends GPAbstractConnectorRequest<T> implements GPJsonConnectorRequest<T, ConnectorRequest> {
 
     protected final JacksonSupport jacksonSupport;
     protected final Class<T> classe;
@@ -186,6 +186,13 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
      */
     protected T readInternal(BufferedReader reader) throws Exception {
         return this.jacksonSupport.getDefaultMapper().readValue(reader, this.classe);
+    }
+
+    /**
+     * @return {@link ConnectorRequest}
+     */
+    protected ConnectorRequest self() {
+        return (ConnectorRequest) this;
     }
 
     /**

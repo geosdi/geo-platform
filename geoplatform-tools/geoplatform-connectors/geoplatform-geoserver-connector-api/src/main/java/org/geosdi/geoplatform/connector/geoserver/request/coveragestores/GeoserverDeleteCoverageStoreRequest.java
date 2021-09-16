@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.geoserver.request.coveragestores;
 
 import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.GPGeoserverPurgeParam;
-import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -47,7 +47,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverDeleteCoverageStoreRequest extends GPConnectorRequest<Boolean> {
+public interface GeoserverDeleteCoverageStoreRequest extends GPJsonConnectorRequest<Boolean, GeoserverDeleteCoverageStoreRequest> {
 
     /**
      * @param theWorkspace The name of the worskpace containing the coverage stores.

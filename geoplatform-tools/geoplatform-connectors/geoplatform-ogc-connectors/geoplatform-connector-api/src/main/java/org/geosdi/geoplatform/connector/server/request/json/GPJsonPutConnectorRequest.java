@@ -51,7 +51,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPJsonPutConnectorRequest<T> extends GPBaseJsonConnectorRequest<T, HttpPut> {
+public abstract class GPJsonPutConnectorRequest<T, ConnectorRequest extends GPJsonConnectorRequest> extends GPBaseJsonConnectorRequest<T, HttpPut, ConnectorRequest> {
 
     /**
      * @param theServerConnector

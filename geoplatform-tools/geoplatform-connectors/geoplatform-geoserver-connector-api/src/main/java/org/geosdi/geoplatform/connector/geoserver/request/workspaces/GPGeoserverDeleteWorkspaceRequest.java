@@ -56,7 +56,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverDeleteWorkspaceRequest extends GPJsonDeleteConnectorRequest<Boolean> implements GeoserverDeleteWorkspaceRequest {
+public class GPGeoserverDeleteWorkspaceRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteWorkspaceRequest> implements GeoserverDeleteWorkspaceRequest {
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<Boolean> recurse;

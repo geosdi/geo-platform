@@ -51,7 +51,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverGetMasterPasswordRequest extends GPJsonGetConnectorRequest<GPGeoserverMasterPassword> implements GeoserverGetMasterPasswordRequest {
+public class GPGeoserverGetMasterPasswordRequest extends GPJsonGetConnectorRequest<GPGeoserverMasterPassword, GeoserverGetMasterPasswordRequest> implements GeoserverGetMasterPasswordRequest {
 
     /**
      * @param server

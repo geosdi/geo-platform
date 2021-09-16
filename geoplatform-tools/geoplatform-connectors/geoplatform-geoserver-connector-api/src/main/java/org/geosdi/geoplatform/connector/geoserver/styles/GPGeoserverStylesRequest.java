@@ -52,7 +52,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverStylesRequest extends GPGeoserverGetConnectorRequest<GPGeoserverStyles, GPGeoserverEmptyStyles> implements GeoserverStylesRequest {
+public class GPGeoserverStylesRequest extends GPGeoserverGetConnectorRequest<GPGeoserverStyles, GPGeoserverEmptyStyles, GeoserverStylesRequest> implements GeoserverStylesRequest {
 
     /**
      * @param server

@@ -57,7 +57,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverDeleteWorkspaceRequest extends GPJsonDeleteConnectorRequest<Boolean> implements GeoserverDeleteWorkspaceRequest {
+public class GPGeoserverDeleteWorkspaceRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteWorkspaceRequest> implements GeoserverDeleteWorkspaceRequest {
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<Boolean> recurse;
@@ -78,7 +78,7 @@ public class GPGeoserverDeleteWorkspaceRequest extends GPJsonDeleteConnectorRequ
     @Override
     public GeoserverDeleteWorkspaceRequest withWorkspaceName(String theWorkspaceName) {
         this.workspaceName.set(theWorkspaceName);
-        return this;
+        return self();
     }
 
     /**
@@ -87,7 +87,7 @@ public class GPGeoserverDeleteWorkspaceRequest extends GPJsonDeleteConnectorRequ
     @Override
     public GeoserverDeleteWorkspaceRequest withRecurse(Boolean theRecurse) {
         this.recurse.set((theRecurse != null) ? theRecurse : FALSE);
-        return this;
+        return self();
     }
 
     /**
@@ -96,8 +96,7 @@ public class GPGeoserverDeleteWorkspaceRequest extends GPJsonDeleteConnectorRequ
     @Override
     protected String createUriPath() throws Exception {
         String workspaceName = this.workspaceName.get();
-        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()),
-                "The Parameter workspaceName mut not be null or an Empty String.");
+        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspaceName mut not be null or an Empty String.");
         String recurse = this.recurse.get().toString();
         String baseURI = this.serverURI.toString();
         return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("?recurse=").concat(recurse)

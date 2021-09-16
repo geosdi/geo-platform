@@ -34,11 +34,13 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.running;
 
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverRestRunningRequest {
+public interface GeoserverRestRunningRequest extends GPJsonConnectorRequest<Boolean, GeoserverRestRunningRequest> {
 
     /**
      * @return {@link Boolean}

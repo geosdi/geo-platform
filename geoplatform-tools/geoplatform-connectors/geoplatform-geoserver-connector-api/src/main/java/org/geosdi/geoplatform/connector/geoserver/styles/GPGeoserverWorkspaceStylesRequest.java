@@ -54,7 +54,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverWorkspaceStylesRequest extends GPGeoserverGetConnectorRequest<GPGeoserverStyles, GPGeoserverEmptyStyles> implements GeoserverWorkspaceStylesRequest {
+public class GPGeoserverWorkspaceStylesRequest extends GPGeoserverGetConnectorRequest<GPGeoserverStyles, GPGeoserverEmptyStyles, GeoserverWorkspaceStylesRequest> implements GeoserverWorkspaceStylesRequest {
 
     private final ThreadLocal<String> workspaceName;
 
@@ -74,7 +74,7 @@ public class GPGeoserverWorkspaceStylesRequest extends GPGeoserverGetConnectorRe
     @Override
     public GeoserverWorkspaceStylesRequest withWorkspaceName(@Nonnull(when = NEVER) String theWorkspaceName) {
         this.workspaceName.set(theWorkspaceName);
-        return this;
+        return self();
     }
 
     /**

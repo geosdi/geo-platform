@@ -51,7 +51,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverLayerGroupsRequest extends GPJsonGetConnectorRequest<GPLayerGroups> implements GeoserverLayerGroupsRequest {
+public class GPGeoserverLayerGroupsRequest extends GPJsonGetConnectorRequest<GPLayerGroups, GeoserverLayerGroupsRequest> implements GeoserverLayerGroupsRequest {
 
     /**
      * @param server

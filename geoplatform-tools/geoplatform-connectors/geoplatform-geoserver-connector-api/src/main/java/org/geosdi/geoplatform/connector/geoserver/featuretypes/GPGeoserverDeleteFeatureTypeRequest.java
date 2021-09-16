@@ -57,7 +57,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverDeleteFeatureTypeRequest extends GPJsonDeleteConnectorRequest<Boolean> implements GeoserverDeleteFeatureTypeRequest {
+public class GPGeoserverDeleteFeatureTypeRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteFeatureTypeRequest> implements GeoserverDeleteFeatureTypeRequest {
 
     private final ThreadLocal<String> workspace;
     private final ThreadLocal<String> store;
@@ -83,7 +83,7 @@ public class GPGeoserverDeleteFeatureTypeRequest extends GPJsonDeleteConnectorRe
     @Override
     public GeoserverDeleteFeatureTypeRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspace.set(theWorkspace);
-        return this;
+        return self();
     }
 
     /**
@@ -93,7 +93,7 @@ public class GPGeoserverDeleteFeatureTypeRequest extends GPJsonDeleteConnectorRe
     @Override
     public GeoserverDeleteFeatureTypeRequest withStore(@Nonnull(when = NEVER) String theStore) {
         this.store.set(theStore);
-        return this;
+        return self();
     }
 
     /**
@@ -103,7 +103,7 @@ public class GPGeoserverDeleteFeatureTypeRequest extends GPJsonDeleteConnectorRe
     @Override
     public GeoserverDeleteFeatureTypeRequest withFeatureTypeName(@Nonnull(when = NEVER) String theFeatureTypeName) {
         this.featureTypeName.set(theFeatureTypeName);
-        return this;
+        return self();
     }
 
     /**
@@ -115,7 +115,7 @@ public class GPGeoserverDeleteFeatureTypeRequest extends GPJsonDeleteConnectorRe
     @Override
     public GeoserverDeleteFeatureTypeRequest withRecurse(@Nullable Boolean theRecurse) {
         this.recurse.set((theRecurse != null) ? theRecurse : FALSE);
-        return this;
+        return self();
     }
 
     /**

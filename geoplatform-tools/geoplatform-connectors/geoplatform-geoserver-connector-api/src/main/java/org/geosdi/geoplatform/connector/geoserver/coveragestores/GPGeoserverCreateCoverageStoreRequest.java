@@ -56,7 +56,7 @@ import static org.apache.http.entity.ContentType.APPLICATION_JSON;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverCreateCoverageStoreRequest extends GPJsonPostConnectorRequest<String> implements GeoserverCreateCoverageStoreRequest {
+public class GPGeoserverCreateCoverageStoreRequest extends GPJsonPostConnectorRequest<String, GeoserverCreateCoverageStoreRequest> implements GeoserverCreateCoverageStoreRequest {
 
     private final ThreadLocal<String> workspace;
     private final ThreadLocal<IGPGeoserverCoverageStoreBody> body;
@@ -78,7 +78,7 @@ public class GPGeoserverCreateCoverageStoreRequest extends GPJsonPostConnectorRe
     @Override
     public GeoserverCreateCoverageStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspace.set(theWorkspace);
-        return this;
+        return self();
     }
 
     /**
@@ -88,7 +88,7 @@ public class GPGeoserverCreateCoverageStoreRequest extends GPJsonPostConnectorRe
     @Override
     public <CoverageStoreBody extends IGPGeoserverCoverageStoreBody> GeoserverCreateCoverageStoreRequest withBody(@Nonnull(when = NEVER) CoverageStoreBody theBody) {
         this.body.set(theBody);
-        return this;
+        return self();
     }
 
     /**

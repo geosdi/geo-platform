@@ -52,7 +52,7 @@ import static java.lang.ThreadLocal.withInitial;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadWorkspaceRequest extends GPJsonGetConnectorRequest<GPGeoserverLoadWorkspace> implements GeoserverLoadWorkspaceRequest {
+public class GPGeoserverLoadWorkspaceRequest extends GPJsonGetConnectorRequest<GPGeoserverLoadWorkspace, GeoserverLoadWorkspaceRequest> implements GeoserverLoadWorkspaceRequest {
 
     private final ThreadLocal<String> workspaceName;
 
@@ -71,7 +71,7 @@ public class GPGeoserverLoadWorkspaceRequest extends GPJsonGetConnectorRequest<G
      */
     public GeoserverLoadWorkspaceRequest withWorkspaceName(String theWorkspaceName) {
         this.workspaceName.set(theWorkspaceName);
-        return this;
+        return self();
     }
 
     /**

@@ -32,23 +32,13 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.workspaces;
+package org.geosdi.geoplatform.connector.server.request.json;
 
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverLoadWorkspace;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
-
-import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
+import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverLoadWorkspaceRequest extends GPJsonConnectorRequest<GPGeoserverLoadWorkspace, GeoserverLoadWorkspaceRequest> {
-
-    /**
-     * @param theWorkspaceName
-     * @return {@link GeoserverLoadWorkspaceRequest}
-     */
-    GeoserverLoadWorkspaceRequest withWorkspaceName(@Nonnull(when = When.NEVER) String theWorkspaceName);
+public interface GPJsonConnectorRequest<T, ConnectorRequest extends GPJsonConnectorRequest> extends GPConnectorRequest<T> {
 }

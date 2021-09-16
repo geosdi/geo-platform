@@ -231,17 +231,20 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
     }
 
     @Override
-    public LayerAttributeStore describeFeatureType(String layerName) throws Exception {
+    public LayerAttributeStore describeFeatureType(String layerName) throws ResourceNotFoundFault {
         List<LayerAttribute> result = Lists.<LayerAttribute>newArrayList();
-
-        //new code
-        GeoserverLoadLayerRequest geoserverLoadLayerRequest = this.geoserverConnectorStore.loadLayerRequest().withName(layerName);
-        GeoserverLoadFeatureTypeWithUrlRequest geoserverLoadFeatureTypeWithUrlRequest = this.geoserverConnectorStore.loadFeatureTypeWithUrl().
-                withUrl(geoserverLoadLayerRequest.getResponse().getLayerResource().getHref());
-        GPGeoserverFeatureTypeInfo gpGeoserverFeatureTypeInfo = geoserverLoadFeatureTypeWithUrlRequest.getResponse();
-        result = gpGeoserverFeatureTypeInfo.getAttributes().getValues().stream()
-                .map(att -> new LayerAttribute(att.getName(), att.getBinding())).collect(Collectors.toList());
-
+        try {
+            //new code
+            GeoserverLoadLayerRequest geoserverLoadLayerRequest = this.geoserverConnectorStore.loadLayerRequest().withName(layerName);
+            GeoserverLoadFeatureTypeWithUrlRequest geoserverLoadFeatureTypeWithUrlRequest = null;
+            geoserverLoadFeatureTypeWithUrlRequest = this.geoserverConnectorStore.loadFeatureTypeWithUrl().
+                    withUrl(geoserverLoadLayerRequest.getResponse().getLayerResource().getHref());
+            GPGeoserverFeatureTypeInfo gpGeoserverFeatureTypeInfo = geoserverLoadFeatureTypeWithUrlRequest.getResponse();
+            result = gpGeoserverFeatureTypeInfo.getAttributes().getValues().stream()
+                    .map(att -> new LayerAttribute(att.getName(), att.getBinding())).collect(Collectors.toList());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //TODO old code
 //        RESTLayer restLayer = this.restReader.getLayer(layerName);
 //        for (Attribute att : this.restReader.getFeatureType(restLayer).getAttributes()) {
@@ -303,7 +306,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
 
     @Override
     public Boolean updateLayerStyle(String workspace, String layerName, String styleToPublish, String styleName, boolean isDefault
-            , boolean override) throws Exception {
+            , boolean override) throws ResourceNotFoundFault {
         //TODO
         //old code
         //RESTLayer restLayer = this.restReader.getLayer(workspace, layerName);
@@ -312,8 +315,13 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
 //        }
 
         //new code
-        GeoserverLayer geoserverLayer  = this.geoserverConnectorStore.loadWorkspaceLayerRequest()
-                .withLayerName("poi").withWorkspaceName("tiger").getResponse();
+        GeoserverLayer geoserverLayer  = null;
+        try {
+            geoserverLayer = this.geoserverConnectorStore.loadWorkspaceLayerRequest()
+                    .withLayerName("poi").withWorkspaceName("tiger").getResponse();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (geoserverLayer == null) {
             throw new ResourceNotFoundFault("The layer: " + layerName + " with workspace: "+ workspace +" does not exists");
         }
@@ -323,8 +331,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
             result =  this.publishStyle(styleToPublish, styleName, TRUE);
         else
             result =  this.updateStyle(styleToPublish, styleName, FALSE);
-
-
         if(!result){
             throw new IllegalParameterFault("The Style with name " + styleName + " is not published." );
         }

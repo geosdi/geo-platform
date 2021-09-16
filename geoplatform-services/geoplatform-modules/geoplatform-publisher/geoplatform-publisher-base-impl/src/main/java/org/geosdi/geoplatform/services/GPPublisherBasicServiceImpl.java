@@ -46,8 +46,11 @@ import it.geosolutions.geoserver.rest.encoder.coverage.GSCoverageEncoder;
 import org.apache.commons.httpclient.NameValuePair;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
+import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayerType;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadFeatureTypeWithUrlRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadLayerRequest;
+import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.GPGeoserverLoadCoverageWithUrlRequest;
 import org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -227,6 +230,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                     "The requested style can't be "
                             + "loaded from the rest url configured on the publisher service.");
         }
+        //TODO
         return this.restReader.getSLD(styleName);
     }
 
@@ -236,14 +240,19 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
         try {
             //new code
             GeoserverLoadLayerRequest geoserverLoadLayerRequest = this.geoserverConnectorStore.loadLayerRequest().withName(layerName);
-            GeoserverLoadFeatureTypeWithUrlRequest geoserverLoadFeatureTypeWithUrlRequest = null;
-            geoserverLoadFeatureTypeWithUrlRequest = this.geoserverConnectorStore.loadFeatureTypeWithUrl().
+            GeoserverLayer geoserverLayer = geoserverLoadLayerRequest.getResponse();
+            if(geoserverLayer.getLayerType().getType() != GeoserverLayerType.Vector.getType()) {
+                throw new ResourceNotFoundFault("Bad layer type for layer " + layerName);
+            }
+            GeoserverLoadFeatureTypeWithUrlRequest geoserverLoadFeatureTypeWithUrlRequest = this.geoserverConnectorStore.loadFeatureTypeWithUrl().
                     withUrl(geoserverLoadLayerRequest.getResponse().getLayerResource().getHref());
             GPGeoserverFeatureTypeInfo gpGeoserverFeatureTypeInfo = geoserverLoadFeatureTypeWithUrlRequest.getResponse();
             result = gpGeoserverFeatureTypeInfo.getAttributes().getValues().stream()
                     .map(att -> new LayerAttribute(att.getName(), att.getBinding())).collect(Collectors.toList());
         } catch (Exception e) {
-            e.printStackTrace();
+            final String error = "Error to load layer with layer name:" + layerName + " "  + e;
+            logger.error(error);
+            throw new IllegalArgumentException(error, e.getCause());
         }
         //TODO old code
 //        RESTLayer restLayer = this.restReader.getLayer(layerName);
@@ -318,10 +327,13 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
         GeoserverLayer geoserverLayer  = null;
         try {
             geoserverLayer = this.geoserverConnectorStore.loadWorkspaceLayerRequest()
-                    .withLayerName("poi").withWorkspaceName("tiger").getResponse();
+                    .withLayerName(layerName).withWorkspaceName(workspace).getResponse();
         } catch (Exception e) {
-            e.printStackTrace();
+            final String error = "Error to load layer with workspace name: " +workspace + " and layer name:" + layerName + " "  + e;
+            logger.error(error);
+            throw new IllegalArgumentException(error, e.getCause());
         }
+
         if (geoserverLayer == null) {
             throw new ResourceNotFoundFault("The layer: " + layerName + " with workspace: "+ workspace +" does not exists");
         }
@@ -405,20 +417,41 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
             userWorkspace = this.getWorkspace(workspace);
         }
         //TODO
-        RESTLayer layer = restReader.getLayer(userWorkspace, layerName);
+        //RESTLayer layer = restReader.getLayer(userWorkspace, layerName);
+
+        //new code
+        GeoserverLayer geoserverLayer  = null;
+        try {
+            geoserverLayer = this.geoserverConnectorStore.loadWorkspaceLayerRequest()
+                    .withLayerName(layerName).withWorkspaceName(workspace).getResponse();
+        } catch (Exception e) {
+            final String error = "Error to load layer with workspace name: " +workspace + " and layer name:" + layerName + " "  + e;
+            logger.error(error);
+            throw new IllegalArgumentException(error, e.getCause());
+        }
+        if (geoserverLayer == null) {
+            throw new ResourceNotFoundFault("The layer: " + layerName + " with workspace: "+ workspace +" does not exists");
+        }
+        if(geoserverLayer.getLayerType().getType() != GeoserverLayerType.Raster.getType()) {
+            throw new ResourceNotFoundFault("Bad layer type for layer " + layerName);
+        }
+
         //TODO
-        RESTCoverage featureType = restReader.getCoverage(layer);
+        //RESTCoverage featureType = restReader.getCoverage(layer);
         InfoPreview info = null;
         try {
-            Integer code = this.getEPSGCodeFromString(featureType.getCRS());
+            GPGeoserverLoadCoverageWithUrlRequest gpGeoserverLoadCoverageWithUrlRequest = this.geoserverConnectorStore.loadCoverageInfoWithUrl().
+                    withUrl(geoserverLayer.getLayerResource().getHref());
+            GPGeoserverCoverageInfo gpGeoserverFeatureTypeInfo = gpGeoserverLoadCoverageWithUrlRequest.getResponse();
+            Integer code = this.getEPSGCodeFromString(gpGeoserverFeatureTypeInfo.getLatLonBoundingBox().getCrs());
             String epsgCode = null;
             if (code != null) {
                 epsgCode = "EPSG:" + code.toString();
             }
             info = new InfoPreview(RESTURL, userWorkspace, layerName,
-                    featureType.getMinX(), featureType.getMinY(),
-                    featureType.getMaxX(), featureType.getMaxY(),
-                    epsgCode, layer.getDefaultStyle(), FALSE,
+                    gpGeoserverFeatureTypeInfo.getLatLonBoundingBox().getMinx(), gpGeoserverFeatureTypeInfo.getLatLonBoundingBox().getMiny(),
+                    gpGeoserverFeatureTypeInfo.getLatLonBoundingBox().getMaxx(), gpGeoserverFeatureTypeInfo.getLatLonBoundingBox().getMaxy(),
+                    epsgCode, geoserverLayer.getDefaultStyle().getName(), FALSE,
                     Lists.<LayerPublishAction>newArrayList(
                             LayerPublishAction.OVERRIDE, LayerPublishAction.RENAME));
         } catch (Exception e) {

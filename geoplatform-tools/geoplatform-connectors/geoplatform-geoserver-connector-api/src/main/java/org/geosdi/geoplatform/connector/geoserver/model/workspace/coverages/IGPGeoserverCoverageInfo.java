@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.connector.geoserver.model.IGPGeoserverResourceInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverNativeBoundingBox;
-import org.geosdi.geoplatform.connector.geoserver.model.crs.IGPGeoserverCRS;
 import org.geosdi.geoplatform.connector.geoserver.model.format.IGPGeoserverSupportedFormat;
 import org.geosdi.geoplatform.connector.geoserver.model.srs.GPGeoserverRequestSRS;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.dimension.IGPCoverageDimensions;
@@ -81,16 +80,16 @@ public interface IGPGeoserverCoverageInfo extends IGPGeoserverResourceInfo<GPGeo
      * @param theGrid
      */
     void setGrid(IGPCoverageGrid theGrid);
-
-    /**
-     * @return {@link IGPGeoserverCRS}
-     */
-    IGPGeoserverCRS getNativeCRS();
-
-    /**
-     * @param theNativeCRS
-     */
-    void setNativeCRS(IGPGeoserverCRS theNativeCRS);
+//
+//    /**
+//     * @return {@link IGPGeoserverCRS}
+//     */
+//    IGPGeoserverCRS getNativeCRS();
+//
+//    /**
+//     * @param theNativeCRS
+//     */
+//    void setNativeCRS(IGPGeoserverCRS theNativeCRS);
 
     /**
      * @return {@link IGPCoverageInterpolationMethod}

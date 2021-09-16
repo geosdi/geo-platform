@@ -35,33 +35,62 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoveragesRequest;
-import org.geosdi.geoplatform.connector.geoserver.worksapce.IGPGeoserverWorkspacesConnector;
+import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageWithUrlRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface IGPGeoserverCoveragesConnector extends IGPGeoserverWorkspacesConnector {
+@ThreadSafe
+public class GPGeoserverLoadCoverageWithUrlRequest extends GPJsonGetConnectorRequest<GPGeoserverCoverageInfo> implements GeoserverLoadCoverageWithUrlRequest {
+
+    private final ThreadLocal<String> urlPath;
 
     /**
-     * @return {@link GeoserverLoadCoveragesRequest}
+     * @param server
+     * @param theJacksonSupport
      */
-    GeoserverLoadCoveragesRequest loadWorkspaceCoveragesRequest();
+    GPGeoserverLoadCoverageWithUrlRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(server, theJacksonSupport);
+        this.urlPath = ThreadLocal.withInitial(() -> null);
+    }
 
     /**
-     * @return {@link GeoserverLoadCoverageRequest}
+     * @param theUrl
+     * @return {@link GPGeoserverFeatureTypeInfo}
      */
-    GeoserverLoadCoverageRequest loadWorkspaceCoverageRequest();
+    @Override
+    public GPGeoserverLoadCoverageWithUrlRequest withUrl(@Nonnull(when = NEVER) String theUrl) {
+        this.urlPath.set(theUrl);
+        return this;
+    }
 
     /**
-     * @return {@link GPGeoserverLoadStoreCoverageRequest}
+     * @return {@link String}
      */
-    GPGeoserverLoadStoreCoverageRequest loadWorkspaceStoreCoverageRequest();
+    @Override
+    protected String createUriPath() throws Exception {
+        String urlPath = this.urlPath.get();
+        checkArgument((urlPath != null) && !(urlPath.trim().isEmpty()), "The Parameter urlPath must not be null or an empty string.");
+        return urlPath;
+    }
 
     /**
-     * @return {@link GPGeoserverLoadCoverageWithUrlRequest}
+     * @return {@link Class<GPGeoserverFeatureTypeInfo>}
      */
-    GPGeoserverLoadCoverageWithUrlRequest loadCoverageInfoWithUrl();
+    @Override
+    protected Class<GPGeoserverCoverageInfo> forClass() {
+        return GPGeoserverCoverageInfo.class;
+    }
 }

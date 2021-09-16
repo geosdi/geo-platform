@@ -33,44 +33,24 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages;
+package org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.geosdi.geoplatform.connector.geoserver.model.GPGeoserverResourceInfo;
-import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverNativeBoundingBox;
-import org.geosdi.geoplatform.connector.geoserver.model.format.IGPGeoserverSupportedFormat;
-import org.geosdi.geoplatform.connector.geoserver.model.srs.GPGeoserverRequestSRS;
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.dimension.IGPCoverageDimensions;
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.grid.IGPCoverageGrid;
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.interpolation.IGPCoverageInterpolationMethod;
+import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.GPGeoserverLoadCoverageWithUrlRequest;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
+import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.annotation.Nonnull;
+import javax.annotation.meta.When;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-@Setter
-@Getter
-@ToString(callSuper = true)
-@XmlRootElement(name = "coverage")
-@XmlAccessorType(value = XmlAccessType.FIELD)
-public class GPGeoserverCoverageInfo extends GPGeoserverResourceInfo<GPGeoserverNativeBoundingBox> implements IGPGeoserverCoverageInfo {
+public interface GeoserverLoadCoverageWithUrlRequest extends GPConnectorRequest<GPGeoserverCoverageInfo> {
 
-    private static final long serialVersionUID = 2534762636718172525L;
-    //
-    private String defaultInterpolationMethod;
-    private IGPCoverageDimensions dimensions;
-    private IGPCoverageGrid grid;
-    //private IGPGeoserverCRS nativeCRS;
-    @XmlElement(name = "interpolationMethods")
-    private IGPCoverageInterpolationMethod interpolationMethod;
-    private String nativeFormat;
-    private GPGeoserverRequestSRS requestSRS;
-    private IGPGeoserverSupportedFormat supportedFormats;
+    /**
+     * @param theUrl
+     * @return {@link GPGeoserverLoadCoverageWithUrlRequest}
+     */
+    GPGeoserverLoadCoverageWithUrlRequest withUrl(@Nonnull(when = When.NEVER) String theUrl);
 }

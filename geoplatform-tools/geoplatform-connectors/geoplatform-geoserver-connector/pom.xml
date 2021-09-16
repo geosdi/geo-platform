@@ -23,68 +23,12 @@
 
     <dependencies>
         <!-- =========================================================== -->
-        <!-- ============== GEOPLATFORM CONNECTOR API ================== -->
+        <!-- ========== GEOPLATFORM GEOSERVER CONNECTOR API ============ -->
         <!-- =========================================================== -->
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-connector-api</artifactId>
+            <artifactId>geoplatform-geoserver-connector-api</artifactId>
             <version>${project.version}</version>
-        </dependency>
-
-        <!-- =========================================================== -->
-        <!-- ============== GEOPLATFORM WS BASE UTIL =================== -->
-        <!-- =========================================================== -->
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-ws-base-util</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <!-- =========================================================== -->
-        <!-- ===================== COMMONS-POOL ======================== -->
-        <!-- =========================================================== -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-pool2</artifactId>
-        </dependency>
-
-        <!-- =========================================================== -->
-        <!-- ========================== RX3Java ======================== -->
-        <!-- =========================================================== -->
-        <dependency>
-            <groupId>io.reactivex.rxjava3</groupId>
-            <artifactId>rxjava</artifactId>
-        </dependency>
-
-        <!-- =========================================================== -->
-        <!-- ================== APACHE HTTPCOMPONENTS ================== -->
-        <!-- =========================================================== -->
-        <dependency>
-            <groupId>org.apache.httpcomponents.client5</groupId>
-            <artifactId>httpclient5</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.httpcomponents.core5</groupId>
-            <artifactId>httpcore5</artifactId>
-        </dependency>
-
-        <!-- logging dependencies, delegate all to slf4j and use logback -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
         </dependency>
 
         <dependency>

@@ -49,8 +49,6 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.*;
-import java.util.concurrent.atomic.AtomicReference;
 
 import static com.google.common.base.Charsets.UTF_8;
 import static com.google.common.base.Preconditions.checkArgument;
@@ -85,6 +83,7 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
     public T getResponse() throws Exception {
         HttpUriRequest httpMethod = this.prepareHttpMethod();
         httpMethod.addHeader("Content-Type", "application/json");
+        this.addHeaderParams(httpMethod);
         logger.debug("#############################Executing -------------> {}\n", httpMethod.getUri().toString());
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpMethod);
         int statusCode = httpResponse.getCode();
@@ -92,7 +91,7 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
         this.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(responseEntity.getContent(), UTF_8_CHARSERT))) {
-            return readInternal(reader);
+            return this.readInternal(reader);
         } catch (Exception ex) {
             throw new IncorrectResponseException(ex);
         } finally {
@@ -113,6 +112,7 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
     public String getResponseAsString() throws Exception {
         HttpUriRequest httpMethod = this.prepareHttpMethod();
         httpMethod.addHeader("Content-Type", "application/json");
+        this.addHeaderParams(httpMethod);
         logger.debug("#############################Executing -------------> {}\n", httpMethod.getUri().toString());
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpMethod);
         int statusCode = httpResponse.getCode();
@@ -143,6 +143,7 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
     public InputStream getResponseAsStream() throws Exception {
         HttpUriRequest httpMethod = this.prepareHttpMethod();
         httpMethod.addHeader("Content-Type", "application/json");
+        this.addHeaderParams(httpMethod);
         logger.debug("#############################Executing -------------> {}\n", httpMethod.getUri().toString());
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpMethod);
         int statusCode = httpResponse.getCode();
@@ -160,6 +161,12 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest> extends G
             consume(responseEntity);
             httpResponse.close();
         }
+    }
+
+    /**
+     * @param httpMethod
+     */
+    protected void addHeaderParams(HttpUriRequest httpMethod) {
     }
 
     /**

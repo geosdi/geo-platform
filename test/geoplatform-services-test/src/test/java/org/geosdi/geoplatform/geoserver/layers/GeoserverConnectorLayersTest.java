@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.geoserver.layers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import it.geosolutions.geoserver.rest.decoder.RESTLayer;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
@@ -44,7 +43,6 @@ import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadLa
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadWorkspaceLayerRequest;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
 import org.geosdi.geoplatform.responce.LayerAttribute;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -54,7 +52,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.lang.Boolean.FALSE;
-import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -63,11 +60,6 @@ import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEn
 public class GeoserverConnectorLayersTest extends GeoserverConnectorTest {
 
     static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorLayersTest.class);
-    //
-    protected static final ObjectMapper mapper = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
-            FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
-            INDENT_OUTPUT_ENABLE).getDefaultMapper();
-
 
     @Test
     public void a_existLayer() throws Exception {
@@ -124,6 +116,20 @@ public class GeoserverConnectorLayersTest extends GeoserverConnectorTest {
                 Assert.assertTrue("###################STYLE NAME:",  styleNames.contains(styleName));
             }
         }
+    }
+
+    @Test
+    public void e_getLayerWithWorkspace() throws Exception {
+        RESTLayer restLayer = this.restReader.getLayer("nurc","mosaic");
+        GeoserverLoadWorkspaceLayerRequest geoserverLoadLayerRequest = this.geoserverConnectorStore.loadWorkspaceLayerRequest()
+                .withLayerName("mosaic").withWorkspaceName("nurc");
+        GeoserverLayer geoserverLayer = geoserverLoadLayerRequest.getResponse();
+        logger.info("##########################RESOURCE_URL_REST_READER {}\n", restLayer.getResourceUrl());
+        logger.info("##########################RESOURCE_URL_GEOSERVER_CONNECTOR {}\n", geoserverLayer.getLayerResource().getHref());
+        logger.info("#######################GEOSERVER_LAYER: {}\n", geoserverLayer);
+        logger.info("#######################REST_READER_DEFAULT_STYLE: {}\n", restLayer.getDefaultStyle());
+        Assert.assertTrue("###################STYLE NAME:",   restLayer.getDefaultStyle().equals(geoserverLayer.getDefaultStyle().getName()));
+
     }
 
 }

@@ -47,7 +47,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPJsonGetConnectorRequest<T> extends GPBaseJsonConnectorRequest<T, HttpGet> {
+public abstract class GPJsonGetConnectorRequest<T, ConnectorRequest extends GPJsonConnectorRequest> extends GPBaseJsonConnectorRequest<T, HttpGet, ConnectorRequest> {
 
     /**
      * @param server
@@ -69,7 +69,7 @@ public abstract class GPJsonGetConnectorRequest<T> extends GPBaseJsonConnectorRe
     }
 
     /**
-     * Show the XML Object created for the Request to send to Server
+     * <p>Show the REST Path called.</p>
      *
      * @return Request as a String
      * @throws Exception

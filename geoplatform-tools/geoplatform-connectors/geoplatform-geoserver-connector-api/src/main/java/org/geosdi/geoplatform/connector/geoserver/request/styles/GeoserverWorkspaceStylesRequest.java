@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.geoserver.request.styles;
 
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyles;
-import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
 
@@ -46,7 +46,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeoserverWorkspaceStylesRequest extends GPConnectorRequest<GPGeoserverStyles> {
+public interface GeoserverWorkspaceStylesRequest extends GPJsonConnectorRequest<GPGeoserverStyles, GeoserverWorkspaceStylesRequest> {
 
     /**
      * @param theWorkspaceName

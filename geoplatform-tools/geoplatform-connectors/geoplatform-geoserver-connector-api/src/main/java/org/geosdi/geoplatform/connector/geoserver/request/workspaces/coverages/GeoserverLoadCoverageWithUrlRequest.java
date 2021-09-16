@@ -35,9 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages;
 
-import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.GPGeoserverLoadCoverageWithUrlRequest;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
-import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
 import javax.annotation.meta.When;
@@ -46,11 +45,11 @@ import javax.annotation.meta.When;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeoserverLoadCoverageWithUrlRequest extends GPConnectorRequest<GPGeoserverCoverageInfo> {
+public interface GeoserverLoadCoverageWithUrlRequest extends GPJsonConnectorRequest<GPGeoserverCoverageInfo, GeoserverLoadCoverageWithUrlRequest> {
 
     /**
      * @param theUrl
-     * @return {@link GPGeoserverLoadCoverageWithUrlRequest}
+     * @return {@link GeoserverLoadCoverageWithUrlRequest}
      */
-    GPGeoserverLoadCoverageWithUrlRequest withUrl(@Nonnull(when = When.NEVER) String theUrl);
+    GeoserverLoadCoverageWithUrlRequest withUrl(@Nonnull(when = When.NEVER) String theUrl);
 }

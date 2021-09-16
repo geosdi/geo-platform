@@ -36,31 +36,21 @@
 package org.geosdi.geoplatform.connector.geoserver.request.workspaces;
 
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverCreateWorkspaceBody;
-import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverUpdateWorkspaceRequest extends GPConnectorRequest<String> {
-
-    /**
-     * @return {@link String}
-     */
-    String getWorkspaceName();
+public interface GeoserverUpdateWorkspaceRequest extends GPJsonConnectorRequest<String, GeoserverUpdateWorkspaceRequest> {
 
     /**
      * @param theWorkspaceName
      */
-    void setWorkspaceName(String theWorkspaceName);
-
-    /**
-     * @return {@link GPGeoserverCreateWorkspaceBody}
-     */
-    GPGeoserverCreateWorkspaceBody getWorkspaceBody();
+    GeoserverUpdateWorkspaceRequest withWorkspaceName(String theWorkspaceName);
 
     /**
      * @param theWorkspaceBody
      */
-    void setWorkspaceBody(GPGeoserverCreateWorkspaceBody theWorkspaceBody);
+    GeoserverUpdateWorkspaceRequest withWorkspaceBody(GPGeoserverCreateWorkspaceBody theWorkspaceBody);
 }

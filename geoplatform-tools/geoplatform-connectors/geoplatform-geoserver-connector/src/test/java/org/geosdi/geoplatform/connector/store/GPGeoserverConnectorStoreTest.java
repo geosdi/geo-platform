@@ -180,8 +180,8 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
     @Test
     public void r_updateWorkspaceGeoserverConnectorTest() throws Exception {
         GeoserverUpdateWorkspaceRequest updateWorkspaceRequest = geoserverConnectorStoreV2_18_x.updateWorkspaceRequest();
-        updateWorkspaceRequest.setWorkspaceName("workspace_test");
-        updateWorkspaceRequest.setWorkspaceBody(new GeoserverCreateWorkspaceBody("workspace_test_1"));
+        updateWorkspaceRequest.withWorkspaceName("workspace_test");
+        updateWorkspaceRequest.withWorkspaceBody(new GeoserverCreateWorkspaceBody("workspace_test_1"));
         logger.info("##########################UPDATE_WORKSPACE_RESPONSE : {}\n", updateWorkspaceRequest.getResponseAsString());
     }
 

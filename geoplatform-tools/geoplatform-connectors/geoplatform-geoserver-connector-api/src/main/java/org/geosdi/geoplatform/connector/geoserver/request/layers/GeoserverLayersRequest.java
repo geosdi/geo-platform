@@ -35,11 +35,11 @@
 package org.geosdi.geoplatform.connector.geoserver.request.layers;
 
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GPGeoserverLayers;
-import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverLayersRequest extends GPConnectorRequest<GPGeoserverLayers> {
+public interface GeoserverLayersRequest extends GPJsonConnectorRequest<GPGeoserverLayers, GeoserverLayersRequest> {
 }

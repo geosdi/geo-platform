@@ -59,7 +59,7 @@ import static org.geosdi.geoplatform.connector.geoserver.model.featuretypes.wrap
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-abstract class GPGeoserverLoadFeatureTypesRequest<Request extends GeoserverLoadFeatureTypesRequest> extends GPGeoserverGetConnectorRequest<GPGeoserverFeatureTypeWrapper, GPGeoserverEmptyFeatureTypeWrapper> implements GeoserverLoadFeatureTypesRequest<Request> {
+abstract class GPGeoserverLoadFeatureTypesRequest<Request extends GeoserverLoadFeatureTypesRequest> extends GPGeoserverGetConnectorRequest<GPGeoserverFeatureTypeWrapper, GPGeoserverEmptyFeatureTypeWrapper, Request> implements GeoserverLoadFeatureTypesRequest<Request> {
 
     protected final ThreadLocal<String> workspace;
     protected final ThreadLocal<GPGeoserverFeatureTypeCategory> featureTypeCategory;

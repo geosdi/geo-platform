@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.workspaces;
 
-import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverDeleteWorkspaceRequest extends GPConnectorRequest<Boolean> {
+public interface GeoserverDeleteWorkspaceRequest extends GPJsonConnectorRequest<Boolean, GeoserverDeleteWorkspaceRequest> {
 
     /**
      * @param theWorkspaceName

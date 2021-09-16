@@ -63,7 +63,7 @@ public class GPGeoserverDatastoresConnectorStoreV219XTest extends GPBaseGeoserve
     @Test
     public void a_loadGeoserverDatastoresConnectorTest() throws Exception {
         GeoserverLoadDatastoresRequest loadDatastoresRequest = geoserverConnectorStoreV2_19_x.loadDatastoresRequest();
-        loadDatastoresRequest.setWorkspaceName("topp");
+        loadDatastoresRequest.withWorkspaceName("topp");
         logger.info("############################LOAD_DATASTORES_RESPONSE : {}\n", loadDatastoresRequest.getResponse());
     }
 
@@ -81,7 +81,7 @@ public class GPGeoserverDatastoresConnectorStoreV219XTest extends GPBaseGeoserve
         GPGeoserverWorkspaces geoserverWorkspaces = loadWorkspacesRequest.getResponse();
         for (IGPGeoserverWorkspace geoserverWorkspace : geoserverWorkspaces.getWorkspaces()) {
             GeoserverLoadDatastoresRequest loadDatastoresRequest = geoserverConnectorStoreV2_19_x.loadDatastoresRequest();
-            loadDatastoresRequest.setWorkspaceName(geoserverWorkspace.getWorkspaceName());
+            loadDatastoresRequest.withWorkspaceName(geoserverWorkspace.getWorkspaceName());
             logger.info("############################LOAD_DATASTORES_RESPONSE : {}\n", loadDatastoresRequest.getResponse());
         }
     }

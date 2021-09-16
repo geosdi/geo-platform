@@ -62,7 +62,7 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverCreateWorkspaceRequest extends GPJsonPostConnectorRequest<IGPGeoserverCreareWorkspaceResponse> implements GeoserverCreateWorkspaceRequest {
+public class GPGeoserverCreateWorkspaceRequest extends GPJsonPostConnectorRequest<IGPGeoserverCreareWorkspaceResponse, GeoserverCreateWorkspaceRequest> implements GeoserverCreateWorkspaceRequest {
 
     private final ThreadLocal<GPGeoserverCreateWorkspaceBody> workspaceBody;
     private final ThreadLocal<Boolean> defaultWorkspace;
@@ -84,7 +84,7 @@ public class GPGeoserverCreateWorkspaceRequest extends GPJsonPostConnectorReques
     @Override
     public GeoserverCreateWorkspaceRequest withWorkspaceBody(GPGeoserverCreateWorkspaceBody theWorkspaceBody) {
         this.workspaceBody.set(theWorkspaceBody);
-        return this;
+        return self();
     }
 
     /**
@@ -93,7 +93,7 @@ public class GPGeoserverCreateWorkspaceRequest extends GPJsonPostConnectorReques
     @Override
     public GeoserverCreateWorkspaceRequest withDefaultWorkspace(Boolean theDefaultWorkspace) {
         this.defaultWorkspace.set(theDefaultWorkspace != null ? theDefaultWorkspace : FALSE);
-        return this;
+        return self();
     }
 
     /**

@@ -54,7 +54,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadWorkspaceLayersRequest extends GPGeoserverGetConnectorRequest<GPGeoserverLayers, GPGeoserverEmptyLayers> implements GeoserverLoadWorkspaceLayersRequest {
+public class GPGeoserverLoadWorkspaceLayersRequest extends GPGeoserverGetConnectorRequest<GPGeoserverLayers, GPGeoserverEmptyLayers, GeoserverLoadWorkspaceLayersRequest> implements GeoserverLoadWorkspaceLayersRequest {
 
     private final ThreadLocal<String> workspaceName;
 
@@ -74,7 +74,7 @@ public class GPGeoserverLoadWorkspaceLayersRequest extends GPGeoserverGetConnect
     @Override
     public GeoserverLoadWorkspaceLayersRequest withWorkspaceName(@Nonnull(when = NEVER) String theWorkspaceName) {
         this.workspaceName.set(theWorkspaceName);
-        return this;
+        return self();
     }
 
     /**
@@ -83,8 +83,7 @@ public class GPGeoserverLoadWorkspaceLayersRequest extends GPGeoserverGetConnect
     @Override
     protected String createUriPath() throws Exception {
         String workspaceName = this.workspaceName.get();
-        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()),
-                "The Parameter workspaceName must not be null or an empty string.");
+        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspaceName must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
         return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/layers")
                 : baseURI.concat("/workspaces/").concat(workspaceName).concat("/layers")));

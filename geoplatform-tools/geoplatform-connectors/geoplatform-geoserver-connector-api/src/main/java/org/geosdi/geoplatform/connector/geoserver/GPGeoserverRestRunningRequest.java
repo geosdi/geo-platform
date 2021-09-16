@@ -51,7 +51,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGeoserverRestRunningRequest extends GPJsonGetConnectorRequest<Boolean> implements GeoserverRestRunningRequest {
+public class GPGeoserverRestRunningRequest extends GPJsonGetConnectorRequest<Boolean, GeoserverRestRunningRequest> implements GeoserverRestRunningRequest {
 
     /**
      * @param server

@@ -53,7 +53,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadWorkspaceLayerRequest extends GPJsonGetConnectorRequest<GeoserverLayer> implements GeoserverLoadWorkspaceLayerRequest {
+public class GPGeoserverLoadWorkspaceLayerRequest extends GPJsonGetConnectorRequest<GeoserverLayer, GeoserverLoadWorkspaceLayerRequest> implements GeoserverLoadWorkspaceLayerRequest {
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> layerName;
@@ -75,7 +75,7 @@ public class GPGeoserverLoadWorkspaceLayerRequest extends GPJsonGetConnectorRequ
     @Override
     public GeoserverLoadWorkspaceLayerRequest withWorkspaceName(@Nonnull(when = NEVER) String theWorkspaceName) {
         this.workspaceName.set(theWorkspaceName);
-        return this;
+        return self();
     }
 
     /**
@@ -85,7 +85,7 @@ public class GPGeoserverLoadWorkspaceLayerRequest extends GPJsonGetConnectorRequ
     @Override
     public GeoserverLoadWorkspaceLayerRequest withLayerName(@Nonnull(when = NEVER) String theLayerName) {
         this.layerName.set(theLayerName);
-        return this;
+        return self();
     }
 
     /**
@@ -94,11 +94,9 @@ public class GPGeoserverLoadWorkspaceLayerRequest extends GPJsonGetConnectorRequ
     @Override
     protected String createUriPath() throws Exception {
         String workspaceName = this.workspaceName.get();
-        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()),
-                "The Parameter workspaceName must not be null or an empty string.");
+        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspaceName must not be null or an empty string.");
         String layerName = this.layerName.get();
-        checkArgument((layerName != null) && !(layerName.trim().isEmpty()),
-                "The Parameter layerName must not be null or an empty string.");
+        checkArgument((layerName != null) && !(layerName.trim().isEmpty()), "The Parameter layerName must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
         return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/layers/").concat(layerName)
                 : baseURI.concat("/workspaces/").concat(workspaceName).concat("/layers/").concat(layerName)));

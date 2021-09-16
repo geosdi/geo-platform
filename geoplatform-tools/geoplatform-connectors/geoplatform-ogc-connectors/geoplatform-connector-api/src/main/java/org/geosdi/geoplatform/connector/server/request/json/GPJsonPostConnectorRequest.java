@@ -51,7 +51,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPJsonPostConnectorRequest<T> extends GPBaseJsonConnectorRequest<T, HttpPost> {
+public abstract class GPJsonPostConnectorRequest<T, ConnectorRequest extends GPJsonConnectorRequest> extends GPBaseJsonConnectorRequest<T, HttpPost, ConnectorRequest> {
 
     /**
      * @param theServerConnector
@@ -81,7 +81,7 @@ public abstract class GPJsonPostConnectorRequest<T> extends GPBaseJsonConnectorR
     protected abstract HttpEntity prepareHttpEntity() throws Exception;
 
     /**
-     * Show the XML Object created for the Request to send to Server
+     * <p>Show the JSON Object created for the Request to send to Server.</p>
      *
      * @return Request as a String
      * @throws Exception

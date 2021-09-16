@@ -46,13 +46,13 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGeoserverNamespacesRequest extends GPGeoserverGetConnectorRequest<GPGeoserverNamespaces, GPGeoserverEmptyNamespaces> implements GeoserverNamespacesRequest {
+public class GPGeoserverNamespacesRequest extends GPGeoserverGetConnectorRequest<GPGeoserverNamespaces, GPGeoserverEmptyNamespaces, GeoserverNamespacesRequest> implements GeoserverNamespacesRequest {
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverNamespacesRequest(GPServerConnector server, JacksonSupport theJacksonSupport) {
+    GPGeoserverNamespacesRequest(GPServerConnector server, JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
     }
 

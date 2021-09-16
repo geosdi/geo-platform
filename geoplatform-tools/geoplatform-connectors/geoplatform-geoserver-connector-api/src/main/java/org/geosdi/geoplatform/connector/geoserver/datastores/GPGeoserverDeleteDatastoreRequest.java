@@ -57,7 +57,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverDeleteDatastoreRequest extends GPJsonDeleteConnectorRequest<Boolean> implements GeoserverDeleteDatastoreRequest {
+public class GPGeoserverDeleteDatastoreRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteDatastoreRequest> implements GeoserverDeleteDatastoreRequest {
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> datastoreName;
@@ -81,7 +81,7 @@ public class GPGeoserverDeleteDatastoreRequest extends GPJsonDeleteConnectorRequ
     @Override
     public GeoserverDeleteDatastoreRequest withWorkspaceName(@Nonnull(when = When.NEVER) String theWorkspaceName) {
         this.workspaceName.set(theWorkspaceName);
-        return this;
+        return self();
     }
 
     /**
@@ -91,7 +91,7 @@ public class GPGeoserverDeleteDatastoreRequest extends GPJsonDeleteConnectorRequ
     @Override
     public GeoserverDeleteDatastoreRequest withDatastoreName(@Nonnull(when = When.NEVER) String theDatastoreName) {
         this.datastoreName.set(theDatastoreName);
-        return this;
+        return self();
     }
 
     /**
@@ -101,7 +101,7 @@ public class GPGeoserverDeleteDatastoreRequest extends GPJsonDeleteConnectorRequ
     @Override
     public GeoserverDeleteDatastoreRequest withRecurse(Boolean theRecurce) {
         this.recurse.set((theRecurce != null) ? theRecurce : FALSE);
-        return this;
+        return self();
     }
 
     /**

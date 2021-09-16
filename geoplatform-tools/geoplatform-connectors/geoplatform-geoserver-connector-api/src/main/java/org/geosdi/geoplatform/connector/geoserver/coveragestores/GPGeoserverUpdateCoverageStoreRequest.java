@@ -60,7 +60,7 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverUpdateCoverageStoreRequest extends GPJsonPutConnectorRequest<Boolean> implements GeoserverUpdateCoverageStoreRequest {
+public class GPGeoserverUpdateCoverageStoreRequest extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateCoverageStoreRequest> implements GeoserverUpdateCoverageStoreRequest {
 
     private final ThreadLocal<String> workspace;
     private final ThreadLocal<String> store;
@@ -84,7 +84,7 @@ public class GPGeoserverUpdateCoverageStoreRequest extends GPJsonPutConnectorReq
     @Override
     public GeoserverUpdateCoverageStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspace.set(theWorkspace);
-        return this;
+        return self();
     }
 
     /**
@@ -94,7 +94,7 @@ public class GPGeoserverUpdateCoverageStoreRequest extends GPJsonPutConnectorReq
     @Override
     public GeoserverUpdateCoverageStoreRequest withStore(@Nonnull(when = NEVER) String theStore) {
         this.store.set(theStore);
-        return this;
+        return self();
     }
 
     /**
@@ -104,7 +104,7 @@ public class GPGeoserverUpdateCoverageStoreRequest extends GPJsonPutConnectorReq
     @Override
     public <CoverageStoreBody extends IGPGeoserverCoverageStoreBody> GeoserverUpdateCoverageStoreRequest withBody(@Nonnull(when = NEVER) CoverageStoreBody theBody) {
         this.body.set(theBody);
-        return this;
+        return self();
     }
 
     /**

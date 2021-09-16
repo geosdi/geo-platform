@@ -51,7 +51,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadContactSettingsRequest extends GPJsonGetConnectorRequest<GPGeoserverContactSettings> implements GeoserverLoadContactSettingsRequest {
+public class GPGeoserverLoadContactSettingsRequest extends GPJsonGetConnectorRequest<GPGeoserverContactSettings, GeoserverLoadContactSettingsRequest> implements GeoserverLoadContactSettingsRequest {
 
     /**
      * @param server

@@ -54,7 +54,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadDatastoreRequest extends GPJsonGetConnectorRequest<GPGeoserverLoadDatastore> implements GeoserverLoadDatastoreRequest {
+public class GPGeoserverLoadDatastoreRequest extends GPJsonGetConnectorRequest<GPGeoserverLoadDatastore, GeoserverLoadDatastoreRequest> implements GeoserverLoadDatastoreRequest {
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> storeName;
@@ -77,7 +77,7 @@ public class GPGeoserverLoadDatastoreRequest extends GPJsonGetConnectorRequest<G
     @Override
     public GeoserverLoadDatastoreRequest withWorkspaceName(String theWorkspaceName) {
         this.workspaceName.set(theWorkspaceName);
-        return this;
+        return self();
     }
 
     /**
@@ -86,7 +86,7 @@ public class GPGeoserverLoadDatastoreRequest extends GPJsonGetConnectorRequest<G
     @Override
     public GeoserverLoadDatastoreRequest withStoreName(String theStoreName) {
         this.storeName.set(theStoreName);
-        return this;
+        return self();
     }
 
     /**
@@ -99,7 +99,7 @@ public class GPGeoserverLoadDatastoreRequest extends GPJsonGetConnectorRequest<G
     @Override
     public GeoserverLoadDatastoreRequest withQuietNotFound(Boolean theQuietNotFound) {
         this.quietNotFound.set((theQuietNotFound != null) ? theQuietNotFound : FALSE);
-        return this;
+        return self();
     }
 
     /**
@@ -108,11 +108,9 @@ public class GPGeoserverLoadDatastoreRequest extends GPJsonGetConnectorRequest<G
     @Override
     protected String createUriPath() throws Exception {
         String workspaceName = this.workspaceName.get();
-        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()),
-                "The Parameter workspaceName must not be null or an Empty String.");
+        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspaceName must not be null or an Empty String.");
         String storeName = this.storeName.get();
-        checkArgument((storeName != null) && !(storeName.trim().isEmpty()),
-                "The Parameter storeName must not be null or an Empty String.");
+        checkArgument((storeName != null) && !(storeName.trim().isEmpty()), "The Parameter storeName must not be null or an Empty String.");
         String baseURI = this.serverURI.toString();
         String quietNotFound = this.quietNotFound.get().toString();
         return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/datastores/")

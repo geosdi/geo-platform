@@ -51,13 +51,13 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadWorkspacesRequest extends GPGeoserverGetConnectorRequest<GPGeoserverWorkspaces, GPGeoserverEmptyWorkspaces> implements GeoserverLoadWorkspacesRequest {
+public class GPGeoserverLoadWorkspacesRequest extends GPGeoserverGetConnectorRequest<GPGeoserverWorkspaces, GPGeoserverEmptyWorkspaces, GeoserverLoadWorkspacesRequest> implements GeoserverLoadWorkspacesRequest {
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    public GPGeoserverLoadWorkspacesRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverLoadWorkspacesRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
     }
 

@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.connector.geoserver.request.featuretypes;
 
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.category.GPGeoserverFeatureTypeCategory;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.wrapper.GPGeoserverFeatureTypeWrapper;
-import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -48,7 +48,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverLoadFeatureTypesRequest<Request extends GeoserverLoadFeatureTypesRequest> extends GPConnectorRequest<GPGeoserverFeatureTypeWrapper> {
+public interface GeoserverLoadFeatureTypesRequest<Request extends GeoserverLoadFeatureTypesRequest> extends GPJsonConnectorRequest<GPGeoserverFeatureTypeWrapper, Request> {
 
     /**
      * @param theWorkspace the name of the Workspace

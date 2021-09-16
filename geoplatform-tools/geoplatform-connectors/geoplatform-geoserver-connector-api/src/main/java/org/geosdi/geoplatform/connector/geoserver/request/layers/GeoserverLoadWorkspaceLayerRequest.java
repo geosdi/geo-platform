@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.geoserver.request.layers;
 
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
-import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
 
@@ -46,7 +46,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverLoadWorkspaceLayerRequest extends GPConnectorRequest<GeoserverLayer> {
+public interface GeoserverLoadWorkspaceLayerRequest extends GPJsonConnectorRequest<GeoserverLayer, GeoserverLoadWorkspaceLayerRequest> {
 
     /**
      * @param theWorkspaceName

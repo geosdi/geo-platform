@@ -56,7 +56,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverLoadStoreCoverageRequest extends GPJsonGetConnectorRequest<GPGeoserverCoverageInfo> implements GeoserverLoadStoreCoverageRequest {
+public class GPGeoserverLoadStoreCoverageRequest extends GPJsonGetConnectorRequest<GPGeoserverCoverageInfo, GeoserverLoadStoreCoverageRequest> implements GeoserverLoadStoreCoverageRequest {
 
     private final ThreadLocal<String> workspace;
     private final ThreadLocal<String> coverage;
@@ -80,9 +80,9 @@ public class GPGeoserverLoadStoreCoverageRequest extends GPJsonGetConnectorReque
      * @return {@link GeoserverLoadCoverageRequest}
      */
     @Override
-    public GPGeoserverLoadStoreCoverageRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
+    public GeoserverLoadStoreCoverageRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspace.set(theWorkspace);
-        return this;
+        return self();
     }
 
     /**
@@ -90,9 +90,9 @@ public class GPGeoserverLoadStoreCoverageRequest extends GPJsonGetConnectorReque
      * @return
      */
     @Override
-    public GPGeoserverLoadStoreCoverageRequest withCoverage(@Nonnull(when = NEVER) String theCoverage) {
+    public GeoserverLoadStoreCoverageRequest withCoverage(@Nonnull(when = NEVER) String theCoverage) {
         this.coverage.set(theCoverage);
-        return this;
+        return self();
     }
 
     /**
@@ -102,7 +102,7 @@ public class GPGeoserverLoadStoreCoverageRequest extends GPJsonGetConnectorReque
     @Override
     public GeoserverLoadStoreCoverageRequest withStore(@Nonnull(when = NEVER) String theStore) {
         this.store.set(theStore);
-        return this;
+        return self();
     }
 
     /**
@@ -110,9 +110,9 @@ public class GPGeoserverLoadStoreCoverageRequest extends GPJsonGetConnectorReque
      * @return {@link GeoserverLoadCoverageRequest}
      */
     @Override
-    public GPGeoserverLoadStoreCoverageRequest withQuietOnNotFound(@Nullable Boolean theQuietOnNotFound) {
+    public GeoserverLoadStoreCoverageRequest withQuietOnNotFound(@Nullable Boolean theQuietOnNotFound) {
         this.quietOnNotFound.set((theQuietOnNotFound != null) ? theQuietOnNotFound : TRUE);
-        return this;
+        return self();
     }
 
     /**

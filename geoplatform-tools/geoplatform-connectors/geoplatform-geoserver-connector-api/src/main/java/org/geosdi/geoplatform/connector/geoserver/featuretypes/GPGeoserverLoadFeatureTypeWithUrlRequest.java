@@ -52,7 +52,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverLoadFeatureTypeWithUrlRequest extends GPJsonGetConnectorRequest<GPGeoserverFeatureTypeInfo> implements GeoserverLoadFeatureTypeWithUrlRequest {
+public class GPGeoserverLoadFeatureTypeWithUrlRequest extends GPJsonGetConnectorRequest<GPGeoserverFeatureTypeInfo, GeoserverLoadFeatureTypeWithUrlRequest> implements GeoserverLoadFeatureTypeWithUrlRequest {
 
     private final ThreadLocal<String> urlPath;
 
@@ -67,12 +67,12 @@ public class GPGeoserverLoadFeatureTypeWithUrlRequest extends GPJsonGetConnector
 
     /**
      * @param theUrl
-     * @return {@link GPGeoserverFeatureTypeInfo}
+     * @return {@link GeoserverLoadFeatureTypeWithUrlRequest}
      */
     @Override
-    public GPGeoserverLoadFeatureTypeWithUrlRequest withUrl(@Nonnull(when = NEVER) String theUrl) {
+    public GeoserverLoadFeatureTypeWithUrlRequest withUrl(@Nonnull(when = NEVER) String theUrl) {
         this.urlPath.set(theUrl);
-        return this;
+        return self();
     }
 
     /**

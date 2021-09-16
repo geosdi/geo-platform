@@ -60,7 +60,7 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverUpdateGlobalSettingsRequest extends GPJsonPutConnectorRequest<Boolean> implements GeoserverUpdateGlobalSettingsRequest {
+public class GPGeoserverUpdateGlobalSettingsRequest extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateGlobalSettingsRequest> implements GeoserverUpdateGlobalSettingsRequest {
 
     private final ThreadLocal<GPGeoserverGlobalSettings> settingsBody;
 
@@ -80,7 +80,7 @@ public class GPGeoserverUpdateGlobalSettingsRequest extends GPJsonPutConnectorRe
     @Override
     public <SettingsBody extends GPGeoserverGlobalSettings> GeoserverUpdateGlobalSettingsRequest withSettingsBody(@Nonnull(when = NEVER) SettingsBody theSettingsBody) {
         this.settingsBody.set(theSettingsBody);
-        return this;
+        return self();
     }
 
     /**

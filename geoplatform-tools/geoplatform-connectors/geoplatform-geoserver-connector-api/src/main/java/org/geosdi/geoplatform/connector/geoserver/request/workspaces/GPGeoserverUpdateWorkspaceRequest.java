@@ -55,7 +55,7 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverUpdateWorkspaceRequest extends GPJsonPutConnectorRequest<String> implements GeoserverUpdateWorkspaceRequest {
+public class GPGeoserverUpdateWorkspaceRequest extends GPJsonPutConnectorRequest<String, GeoserverUpdateWorkspaceRequest> implements GeoserverUpdateWorkspaceRequest {
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<GPGeoserverCreateWorkspaceBody> workspaceBody;
@@ -71,35 +71,21 @@ public class GPGeoserverUpdateWorkspaceRequest extends GPJsonPutConnectorRequest
     }
 
     /**
-     * @return {@link String}
-     */
-    @Override
-    public String getWorkspaceName() {
-        return this.workspaceName.get();
-    }
-
-    /**
      * @param theWorkspaceName
      */
     @Override
-    public void setWorkspaceName(String theWorkspaceName) {
+    public GeoserverUpdateWorkspaceRequest withWorkspaceName(String theWorkspaceName) {
         this.workspaceName.set(theWorkspaceName);
-    }
-
-    /**
-     * @return {@link GPGeoserverCreateWorkspaceBody}
-     */
-    @Override
-    public GPGeoserverCreateWorkspaceBody getWorkspaceBody() {
-        return this.workspaceBody.get();
+        return this.self();
     }
 
     /**
      * @param theWorkspaceBody
      */
     @Override
-    public void setWorkspaceBody(GPGeoserverCreateWorkspaceBody theWorkspaceBody) {
+    public GeoserverUpdateWorkspaceRequest withWorkspaceBody(GPGeoserverCreateWorkspaceBody theWorkspaceBody) {
         this.workspaceBody.set(theWorkspaceBody);
+        return this.self();
     }
 
     /**

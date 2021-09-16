@@ -54,7 +54,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadCoverageStoresRequest extends GPGeoserverGetConnectorRequest<GPGeoserverCoverageStores, GPGeoserverEmptyCoverageStores> implements GeoserverLoadCoverageStoresRequest {
+public class GPGeoserverLoadCoverageStoresRequest extends GPGeoserverGetConnectorRequest<GPGeoserverCoverageStores, GPGeoserverEmptyCoverageStores, GeoserverLoadCoverageStoresRequest> implements GeoserverLoadCoverageStoresRequest {
 
     private final ThreadLocal<String> workspace;
 
@@ -74,7 +74,7 @@ public class GPGeoserverLoadCoverageStoresRequest extends GPGeoserverGetConnecto
     @Override
     public GeoserverLoadCoverageStoresRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspace.set(theWorkspace);
-        return this;
+        return self();
     }
 
     /**

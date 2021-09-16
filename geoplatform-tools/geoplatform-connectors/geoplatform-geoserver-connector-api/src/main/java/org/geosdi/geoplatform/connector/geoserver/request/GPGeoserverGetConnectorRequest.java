@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.connector.geoserver.request;
 import org.geosdi.geoplatform.connector.geoserver.model.GPGeoserverEmptyResponse;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.IncorrectResponseException;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -54,7 +55,7 @@ import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEn
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPGeoserverGetConnectorRequest<T, E extends GPGeoserverEmptyResponse<T>> extends GPJsonGetConnectorRequest<T> {
+public abstract class GPGeoserverGetConnectorRequest<T, E extends GPGeoserverEmptyResponse<T>, ConnectorRequest extends GPJsonConnectorRequest> extends GPJsonGetConnectorRequest<T, ConnectorRequest> {
 
     protected static final JacksonSupport emptyJacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE,

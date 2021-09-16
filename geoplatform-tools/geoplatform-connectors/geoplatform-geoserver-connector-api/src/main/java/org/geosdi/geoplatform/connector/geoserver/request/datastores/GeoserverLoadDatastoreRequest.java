@@ -36,13 +36,13 @@
 package org.geosdi.geoplatform.connector.geoserver.request.datastores;
 
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastore;
-import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverLoadDatastoreRequest extends GPConnectorRequest<GPGeoserverLoadDatastore> {
+public interface GeoserverLoadDatastoreRequest extends GPJsonConnectorRequest<GPGeoserverLoadDatastore, GeoserverLoadDatastoreRequest> {
 
     /**
      * @param theWorkspaceName

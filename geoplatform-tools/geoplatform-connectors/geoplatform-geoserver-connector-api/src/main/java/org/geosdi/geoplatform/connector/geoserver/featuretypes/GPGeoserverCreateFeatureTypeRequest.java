@@ -60,7 +60,7 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverCreateFeatureTypeRequest extends GPJsonPostConnectorRequest<Boolean> implements GeoserverCreateFeatureTypeRequest {
+public class GPGeoserverCreateFeatureTypeRequest extends GPJsonPostConnectorRequest<Boolean, GeoserverCreateFeatureTypeRequest> implements GeoserverCreateFeatureTypeRequest {
 
     private final ThreadLocal<String> workspace;
     private final ThreadLocal<String> store;
@@ -84,7 +84,7 @@ public class GPGeoserverCreateFeatureTypeRequest extends GPJsonPostConnectorRequ
     @Override
     public GeoserverCreateFeatureTypeRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspace.set(theWorkspace);
-        return this;
+        return self();
     }
 
     /**
@@ -94,7 +94,7 @@ public class GPGeoserverCreateFeatureTypeRequest extends GPJsonPostConnectorRequ
     @Override
     public GeoserverCreateFeatureTypeRequest withStore(@Nonnull(when = NEVER) String theStore) {
         this.store.set(theStore);
-        return this;
+        return self();
     }
 
     /**
@@ -104,7 +104,7 @@ public class GPGeoserverCreateFeatureTypeRequest extends GPJsonPostConnectorRequ
     @Override
     public <FeatureTypeBody extends IGPGeoserverFeatureTypeInfo> GeoserverCreateFeatureTypeRequest withFeatureTypeBody(@Nonnull(when = NEVER) FeatureTypeBody theFeatureTypeBody) {
         this.featureTypeBody.set(theFeatureTypeBody);
-        return this;
+        return self();
     }
 
     /**

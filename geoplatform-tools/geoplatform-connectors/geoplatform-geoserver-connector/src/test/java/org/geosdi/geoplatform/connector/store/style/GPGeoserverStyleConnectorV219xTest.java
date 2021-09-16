@@ -47,7 +47,6 @@ import org.junit.runners.MethodSorters;
 import java.util.Objects;
 
 import static io.reactivex.rxjava3.core.Observable.fromIterable;
-import static org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyleHeaderParam.SLD_SE_XML;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -74,12 +73,10 @@ public class GPGeoserverStyleConnectorV219xTest extends GPBaseGeoserverConnector
         GeoserverStyleRequest geoserverStyleRequest = geoserverConnectorStoreV2_19_x.loadStyleRequest();
         logger.info("#####################GEOSERVER_STYLE_RESPONSE_AS_STRING : {}\n", geoserverStyleRequest
                 .withStyleName("pophatch")
-                .withAcceptHeaderParam(SLD_SE_XML)
                 .getResponseAsString());
 
         logger.info("#####################GEOSERVER_STYLE_RESPONSE_AS_STRING : {}\n", geoserverStyleRequest
                 .withStyleName("population")
-                .withAcceptHeaderParam(SLD_SE_XML)
                 .getResponseAsString());
     }
 

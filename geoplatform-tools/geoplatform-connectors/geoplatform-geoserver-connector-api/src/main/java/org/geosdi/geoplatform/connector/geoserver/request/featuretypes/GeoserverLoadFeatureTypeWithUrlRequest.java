@@ -35,9 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.featuretypes;
 
-import org.geosdi.geoplatform.connector.geoserver.featuretypes.GPGeoserverLoadFeatureTypeWithUrlRequest;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
-import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
 import javax.annotation.meta.When;
@@ -46,11 +45,11 @@ import javax.annotation.meta.When;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeoserverLoadFeatureTypeWithUrlRequest extends GPConnectorRequest<GPGeoserverFeatureTypeInfo> {
+public interface GeoserverLoadFeatureTypeWithUrlRequest extends GPJsonConnectorRequest<GPGeoserverFeatureTypeInfo, GeoserverLoadFeatureTypeWithUrlRequest> {
 
     /**
      * @param theUrl
-     * @return {@link GPGeoserverLoadFeatureTypeWithUrlRequest}
+     * @return {@link GeoserverLoadFeatureTypeWithUrlRequest}
      */
-    GPGeoserverLoadFeatureTypeWithUrlRequest withUrl(@Nonnull(when = When.NEVER) String theUrl);
+    GeoserverLoadFeatureTypeWithUrlRequest withUrl(@Nonnull(when = When.NEVER) String theUrl);
 }

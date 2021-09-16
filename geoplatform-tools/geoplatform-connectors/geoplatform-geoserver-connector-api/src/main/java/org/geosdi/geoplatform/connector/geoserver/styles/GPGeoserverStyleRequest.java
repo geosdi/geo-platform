@@ -53,7 +53,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverStyleRequest extends GPJsonGetConnectorRequest<GPGeoserverSingleStyle> implements GeoserverStyleRequest {
+public class GPGeoserverStyleRequest extends GPJsonGetConnectorRequest<GPGeoserverSingleStyle, GeoserverStyleRequest> implements GeoserverStyleRequest {
 
     private final ThreadLocal<String> styleName;
 
@@ -71,7 +71,7 @@ public class GPGeoserverStyleRequest extends GPJsonGetConnectorRequest<GPGeoserv
      */
     public GeoserverStyleRequest withStyleName(@Nonnull(when = NEVER) String theStyleName) {
         this.styleName.set(theStyleName);
-        return this;
+        return self();
     }
 
     /**

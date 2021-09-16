@@ -48,7 +48,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverAboutManifestRequest extends GPJsonGetConnectorRequest<GPGeoserverAboutManifest> {
+public class GPGeoserverAboutManifestRequest extends GPJsonGetConnectorRequest<GPGeoserverAboutManifest, GeoserverAboutManifestRequest> implements GeoserverAboutManifestRequest{
 
     /**
      * @param server

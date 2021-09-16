@@ -116,6 +116,6 @@ public interface IGPPublisherService {
             throws ResourceNotFoundFault, FileNotFoundException;
 
     Boolean updateLayerStyle(String workspace, String layerName, String styleToPublish, String styleName, boolean isDefault, boolean override)
-            throws Exception;
+            throws ResourceNotFoundFault;
 
 }

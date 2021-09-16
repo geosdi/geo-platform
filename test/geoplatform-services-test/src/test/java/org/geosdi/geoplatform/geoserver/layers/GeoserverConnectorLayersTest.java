@@ -35,15 +35,26 @@
  */
 package org.geosdi.geoplatform.geoserver.layers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import it.geosolutions.geoserver.rest.decoder.RESTLayer;
+import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
+import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
+import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadFeatureTypeWithUrlRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadLayerRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadWorkspaceLayerRequest;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
+import org.geosdi.geoplatform.responce.LayerAttribute;
+import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static java.lang.Boolean.FALSE;
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -52,6 +63,11 @@ import static java.lang.Boolean.FALSE;
 public class GeoserverConnectorLayersTest extends GeoserverConnectorTest {
 
     static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorLayersTest.class);
+    //
+    protected static final ObjectMapper mapper = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
+            FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
+            INDENT_OUTPUT_ENABLE).getDefaultMapper();
+
 
     @Test
     public void a_existLayer() throws Exception {
@@ -60,32 +76,54 @@ public class GeoserverConnectorLayersTest extends GeoserverConnectorTest {
     }
 
     @Test
-    public void a_test() throws Exception {
+    public void b_getLayer() throws Exception {
         RESTLayer restLayer = this.restReader.getLayer("poi");
-        logger.info("#######################REST LAYER: {}\n", restLayer.getResourceUrl());
-        GeoserverLoadLayerRequest geoserverLoadLayerRequest = this.geoserverConnectorStore.loadLayerRequest().withName("poigggtg");
-        logger.info("#######################REST LAYER: {}\n", geoserverLoadLayerRequest.getResponse());
-        logger.info("#####################EXSIST LAYER {}\n", geoserverLoadLayerRequest.existLayer());
-
-        geoserverLoadLayerRequest = geoserverLoadLayerRequest.withName("poi");
-
-        logger.info("#####################EXSIST LAYER {} \n", geoserverLoadLayerRequest.existLayer());
-        logger.info("#####################LAYER {}\n", geoserverLoadLayerRequest.getResponse());
-        //logger.info("###############\n {}\n", jacksonSupport.getDefaultMapper().writeValueAsString(restLayer) );
+        GeoserverLoadLayerRequest geoserverLoadLayerRequest = this.geoserverConnectorStore.loadLayerRequest().withName("poi");
+        GeoserverLayer geoserverLayer = geoserverLoadLayerRequest.getResponse();
+        logger.info("##########################RESOURCE_URL_REST_READER {}\n", restLayer.getResourceUrl());
+        logger.info("##########################RESOURCE_URL_GEOSERVER_CONNECTOR {}\n", geoserverLayer.getLayerResource().getHref());
+        logger.info("#######################GEOSERVER_LAYER: {}\n", geoserverLayer);
+        List<String> styleNames = geoserverLoadLayerRequest.getResponse().getLayerStyle().getStyles().stream().map(s -> s.getName()).collect(Collectors.toList());
+        Assert.assertTrue("###################STYLES_LENGTH", styleNames.size() == restLayer.getStyles().getNames().size());
+        if(restLayer.getStyles() != null) {
+            for (String styleName : restLayer.getStyles().getNames()) {
+                logger.info("#######################STYLE_NAME: {}\n", styleName);
+                Assert.assertTrue("###################STYLE NAME:",  styleNames.contains(styleName));
+            }
+        }
     }
 
-//    @Test
-//    public void b_getLayer() throws Exception {
-//        RESTLayer restLayer = this.restReader.getLayer("poi");
-//        GeoserverLoadLayerRequest geoserverLoadLayerRequest = this.geoserverConnectorStore.loadLayerRequest().withName("poi");
-//        logger.info("#######################GEOSERVER_LAYER: {}\n", geoserverLoadLayerRequest.getResponse());
-//        logger.info("#######################REST_LAYER: {}\n", restLayer.getStyles().get(0).getName());
-//
-//        if(restLayer.getStyles() != null) {
-//            for (String styleName : restLayer.getStyles().getNames()) {
-//                Assert.assertTrue("###################STYLE NAME:", geoserverLoadLayerRequest.getResponse().getS);
-//            }
-//        }
-//
-//    }
+    /*
+    url: "http://${geoserver_url}/geoserver/rest/workspaces/${workspace_name}/datastores/${store_name}/featuretypes/${layer_name}.json
+     */
+    @Test()
+    public void c_readFeatureType() throws Exception {
+        GeoserverLoadFeatureTypeWithUrlRequest geoserverLoadFeatureTypeWithUrlRequest = this.geoserverConnectorStore.loadFeatureTypeWithUrl().
+                withUrl("http://150.145.141.180/geoserver/rest/workspaces/tiger/datastores/nyc/featuretypes/poi.json");
+        GPGeoserverFeatureTypeInfo gpGeoserverFeatureTypeInfo = geoserverLoadFeatureTypeWithUrlRequest.getResponse();
+        logger.info("########################ATTRIBUTES {}\n", gpGeoserverFeatureTypeInfo.getAttributes());
+        List<LayerAttribute> result = gpGeoserverFeatureTypeInfo.getAttributes().getValues().stream()
+                .map(att -> new LayerAttribute(att.getName(), att.getBinding())).collect(Collectors.toList());
+        logger.info("########################RESULT {}\n", result);
+    }
+
+    @Test
+    public void d_getLayerWithWorkspace() throws Exception {
+        RESTLayer restLayer = this.restReader.getLayer("tiger","poi");
+        GeoserverLoadWorkspaceLayerRequest geoserverLoadLayerRequest = this.geoserverConnectorStore.loadWorkspaceLayerRequest()
+                .withLayerName("poi").withWorkspaceName("tiger");
+        GeoserverLayer geoserverLayer = geoserverLoadLayerRequest.getResponse();
+        logger.info("##########################STYLES_REST_READER {}\n", restLayer.getStyles().getNames());
+        logger.info("#######################GEOSERVER_LAYER: {}\n", geoserverLayer);
+        List<String> styleNames = geoserverLoadLayerRequest.getResponse().getLayerStyle().getStyles().stream().map(s -> s.getName()).collect(Collectors.toList());
+        logger.info("#######################GEOSERVER_STYLE_NAMES: {}\n", styleNames);
+        Assert.assertTrue("###################STYLES_LENGTH", styleNames.size() == restLayer.getStyles().getNames().size());
+        if(restLayer.getStyles() != null) {
+            for (String styleName : restLayer.getStyles().getNames()) {
+                logger.info("#######################STYLE_NAME: {}\n", styleName);
+                Assert.assertTrue("###################STYLE NAME:",  styleNames.contains(styleName));
+            }
+        }
+    }
+
 }

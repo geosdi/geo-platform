@@ -39,12 +39,16 @@ import com.google.common.collect.Lists;
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
 import it.geosolutions.geoserver.rest.decoder.*;
-import it.geosolutions.geoserver.rest.decoder.RESTFeatureType.Attribute;
 import it.geosolutions.geoserver.rest.decoder.utils.NameLinkElem;
 import it.geosolutions.geoserver.rest.encoder.GSLayerEncoder;
 import it.geosolutions.geoserver.rest.encoder.GSResourceEncoder;
 import it.geosolutions.geoserver.rest.encoder.coverage.GSCoverageEncoder;
 import org.apache.commons.httpclient.NameValuePair;
+import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
+import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
+import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadFeatureTypeWithUrlRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadLayerRequest;
+import org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
@@ -85,6 +89,7 @@ import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -132,6 +137,8 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
     private Ds2dsConfiguration ds2dsConfiguration;
     @Autowired
     private SLDHandler sldHandler;
+    @Resource(name = "geoserverConnectorStore")
+    protected GPGeoserverConnectorStore geoserverConnectorStore;
 
     public GPPublisherBasicServiceImpl(String RESTURL, String RESTUSER,
             String RESTPW,
@@ -224,20 +231,30 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
     }
 
     @Override
-    public LayerAttributeStore describeFeatureType(String layerName) throws
-            ResourceNotFoundFault {
-        RESTLayer restLayer = this.restReader.getLayer(layerName);
+    public LayerAttributeStore describeFeatureType(String layerName) throws Exception {
         List<LayerAttribute> result = Lists.<LayerAttribute>newArrayList();
-        for (Attribute att : this.restReader.getFeatureType(restLayer).getAttributes()) {
-            LayerAttribute layerAttribute = new LayerAttribute(att.getName(),
-                    att.getBinding());
-            result.add(layerAttribute);
-        }
+
+        //new code
+        GeoserverLoadLayerRequest geoserverLoadLayerRequest = this.geoserverConnectorStore.loadLayerRequest().withName(layerName);
+        GeoserverLoadFeatureTypeWithUrlRequest geoserverLoadFeatureTypeWithUrlRequest = this.geoserverConnectorStore.loadFeatureTypeWithUrl().
+                withUrl(geoserverLoadLayerRequest.getResponse().getLayerResource().getHref());
+        GPGeoserverFeatureTypeInfo gpGeoserverFeatureTypeInfo = geoserverLoadFeatureTypeWithUrlRequest.getResponse();
+        result = gpGeoserverFeatureTypeInfo.getAttributes().getValues().stream()
+                .map(att -> new LayerAttribute(att.getName(), att.getBinding())).collect(Collectors.toList());
+
+        //TODO old code
+//        RESTLayer restLayer = this.restReader.getLayer(layerName);
+//        for (Attribute att : this.restReader.getFeatureType(restLayer).getAttributes()) {
+//            LayerAttribute layerAttribute = new LayerAttribute(att.getName(),
+//                    att.getBinding());
+//            result.add(layerAttribute);
+//        }
         return new LayerAttributeStore(result);
     }
 
     @Override
     public UniqueValuesInfo uniqueValues(String layerName, String layerAttribute) throws ResourceNotFoundFault {
+        //TODO not found
         RESTServiceUniqueValues restServiceUniqueValues = this.restReader.uniqueValues(layerName, layerAttribute);
         List<String> list = restServiceUniqueValues.getNames();
         return new UniqueValuesInfo(list, layerAttribute, list.size());
@@ -286,11 +303,21 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
 
     @Override
     public Boolean updateLayerStyle(String workspace, String layerName, String styleToPublish, String styleName, boolean isDefault
-            , boolean override) throws ResourceNotFoundFault {
-        RESTLayer restLayer = this.restReader.getLayer(workspace, layerName);
-        if (restLayer == null) {
+            , boolean override) throws Exception {
+        //TODO
+        //old code
+        //RESTLayer restLayer = this.restReader.getLayer(workspace, layerName);
+//        if (restLayer == null) {
+//            throw new ResourceNotFoundFault("The layer: " + layerName + " with workspace: "+ workspace +" does not exists");
+//        }
+
+        //new code
+        GeoserverLayer geoserverLayer  = this.geoserverConnectorStore.loadWorkspaceLayerRequest()
+                .withLayerName("poi").withWorkspaceName("tiger").getResponse();
+        if (geoserverLayer == null) {
             throw new ResourceNotFoundFault("The layer: " + layerName + " with workspace: "+ workspace +" does not exists");
         }
+
         boolean result;
         if(!override)
             result =  this.publishStyle(styleToPublish, styleName, TRUE);
@@ -306,12 +333,17 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
             gsLayerEncoder.setDefaultStyle(styleName);
         else
             gsLayerEncoder.addStyle(styleName);
-        RESTStyleList restStyleList = restLayer.getStyles();
-        if(restStyleList != null) {
-            for (String styleToAdd : restStyleList.getNames()) {
-                gsLayerEncoder.addStyle(styleToAdd);
-            }
-        }
+
+        //new code
+        geoserverLayer.getLayerStyle().getStyles().stream().forEach(s -> gsLayerEncoder.addStyle(s.getName()));
+
+        //old code
+        //        RESTStyleList restStyleList = restLayer.getStyles();
+//        if(restStyleList != null) {
+//            for (String styleToAdd : restStyleList.getNames()) {
+//                gsLayerEncoder.addStyle(styleToAdd);
+//            }
+//        }
         this.restPublisher.configureLayer(workspace, layerName, gsLayerEncoder);
         return TRUE;
     }
@@ -366,7 +398,9 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
         if (userWorkspace == null) {
             userWorkspace = this.getWorkspace(workspace);
         }
+        //TODO
         RESTLayer layer = restReader.getLayer(userWorkspace, layerName);
+        //TODO
         RESTCoverage featureType = restReader.getCoverage(layer);
         InfoPreview info = null;
         try {
@@ -408,7 +442,9 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
         if (userWorkspace == null) {
             userWorkspace = this.getWorkspace(workspace);
         }
+        //TODO
         RESTLayer layer = restReader.getLayer(userWorkspace, layerName);
+        //TODO
         RESTFeatureType featureType = restReader.getFeatureType(layer);
         InfoPreview infoPreview = null;
         try {
@@ -456,6 +492,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
         if (userWorkspace == null) {
             userWorkspace = this.getWorkspace(workspace);
         }
+        //TODO
         RESTDataStoreList list = restReader.getDatastores(userWorkspace);
         for (NameLinkElem element : list) {
             try {
@@ -471,6 +508,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
 
     @Override
     public Boolean createWorkspace(String workspaceName, boolean silent) throws ResourceNotFoundFault {
+        //TODO
         boolean exists = this.restReader.existsWorkspace(workspaceName, true);
         if (exists && !silent) {
             throw new ResourceNotFoundFault("The workspace: " + workspaceName + " already exists");
@@ -609,12 +647,13 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                     + "_" + origName;
             info.name = new String(idName);
             File oldGeotifFile = new File(tempUserTifDir, tifFileName);
-            //
+            //TODO
             if (this.restReader.getCoverage(workspace, idName, idName) != null) {
                 info.alreadyExists = Lists.<LayerPublishAction>newArrayList(
                         LayerPublishAction.OVERRIDE, LayerPublishAction.RENAME);
                 idName += System.currentTimeMillis();
                 info.fileName = idName;
+                //TODO
             } else if (this.restReader.getLayer(idName) != null
                     && this.restReader.getCoverage(this.restReader.getLayer(idName)) != null) {//Verificare se il coverage cn quel nome esiste
                 info.alreadyExists = Lists.<LayerPublishAction>newArrayList(LayerPublishAction.RENAME);
@@ -741,6 +780,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
             String origName = shpFileName.substring(0, shpFileName.length() - 4);
             info.name = PublishUtility.removeSpecialCharactersFromString(userName).concat("_shp_").concat(origName);
             //Test if layer already exists
+            //TODO
             if (this.restReader.getLayer(workspace, info.name) != null) {
                 info.alreadyExists = Lists.newArrayList(LayerPublishAction.values());
             } else if (this.restReader.getLayer(info.name) != null) {//Verificare se il coverage cn quel nome esiste
@@ -796,11 +836,13 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
      */
     @Override
     public Boolean existsStyle(String styleName) {
+        //TODO
         return restReader.existsStyle(styleName, TRUE);
     }
 
     @Override
     public List<String> getWorkspaceNames() {
+        //TODO
         return restReader.getWorkspaceNames();
     }
 
@@ -814,6 +856,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
      */
     public boolean existsLayerInWorkspace(String workspace, String dataStoreName,
             String layerName) {
+        //TODO
         return restReader.existsLayer(workspace, layerName, true);
     }
 
@@ -825,6 +868,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
      * @return check whether the dataStore exists in the workspace
      */
     public boolean existsDataStore(String workspace, String dataStoreName) {
+        //TODO
         return restReader.existsDatastore(workspace, dataStoreName, true);
     }
 
@@ -836,6 +880,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
      * @return check whether the coverageStore exists in the workspace
      */
     public boolean existsCoverageStore(String workspace, String csStoreName) {
+        //TODO
         return restReader.existsCoveragestore(workspace, csStoreName, true);
     }
 
@@ -857,6 +902,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
      * @return creates the workspace if not exists or returns the existing one
      */
     private String getWorkspace(String userName) {
+        //TODO
         List<String> workspaces = restReader.getWorkspaceNames();
         String userWorkspace = userName;
         userWorkspace = PublishUtility.removeSpecialCharactersFromString(userWorkspace);
@@ -1036,6 +1082,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                 if (infoPreview.getLayerPublishAction() != null) {
                     if (infoPreview.isIsShape()) {
                         if (GPSharedUtils.isNotEmpty(infoPreview.getNewName())
+                                //TODO
                                 && this.restReader.getLayer(
                                 PublishUtility.removeSpecialCharactersFromString(userName)
                                         + "_shp_" + infoPreview.getNewName()) != null) {
@@ -1049,8 +1096,10 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                         }
                     } else {
                         if (GPSharedUtils.isNotEmpty(infoPreview.getNewName())
+                                //TODO
                                 && this.restReader.getLayer(userWorkspace,
                                 userName + "_" + infoPreview.getNewName()) != null
+                                //TODO
                                 && this.restReader.getCoverage(this.restReader.getLayer(userWorkspace,
                                 userName + "_" + infoPreview.getNewName())) != null) {
                             throw new ResourceNotFoundFault(
@@ -1070,6 +1119,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                                     infoPreview.getDataStoreName());
                             logger.debug(
                                     "********** processEPSGResult Before removing coverage store: " + coverageStoreName);
+                            //TODO
                             if (restReader.getCoverage(userWorkspace,
                                     coverageStoreName, coverageStoreName) != null) {
                                 logger.debug(

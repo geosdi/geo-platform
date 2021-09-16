@@ -65,8 +65,7 @@ public interface IGPPublisherService {
     String loadStyle(String layerDatasource, String styleName)
             throws ResourceNotFoundFault;
 
-    LayerAttributeStore describeFeatureType(String layerName)
-            throws ResourceNotFoundFault;
+    LayerAttributeStore describeFeatureType(String layerName) throws Exception;
 
     UniqueValuesInfo uniqueValues(String layerName,String layerAttribute)
             throws ResourceNotFoundFault;
@@ -116,6 +115,7 @@ public interface IGPPublisherService {
     Boolean publishAllofPreview(PublishRequest publishRequest)
             throws ResourceNotFoundFault, FileNotFoundException;
 
-    Boolean updateLayerStyle(String workspace, String layerName, String styleToPublish, String styleName, boolean isDefault, boolean override) throws ResourceNotFoundFault;
+    Boolean updateLayerStyle(String workspace, String layerName, String styleToPublish, String styleName, boolean isDefault, boolean override)
+            throws Exception;
 
 }

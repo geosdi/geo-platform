@@ -33,62 +33,63 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.featuretypes;
+package org.geosdi.geoplatform.connector.geoserver.featuretypes;
 
-import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.*;
-import org.geosdi.geoplatform.connector.store.coveragestores.GeoserverCoverageStoresConnectorStore;
+import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
+import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadFeatureTypeWithUrlRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public abstract class GeoserverFeatureTypesConnectorStore extends GeoserverCoverageStoresConnectorStore implements GPGeoserverFeatureTypesConnectorStore {
+@ThreadSafe
+public class GPGeoserverLoadFeatureTypeWithUrlRequest extends GPJsonGetConnectorRequest<GPGeoserverFeatureTypeInfo> implements GeoserverLoadFeatureTypeWithUrlRequest {
+
+    private final ThreadLocal<String> urlPath;
 
     /**
-     * @param theServer
+     * @param server
+     * @param theJacksonSupport
      */
-    protected GeoserverFeatureTypesConnectorStore(GPGeoserverConnector theServer) {
-        super(theServer);
+    GPGeoserverLoadFeatureTypeWithUrlRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(server, theJacksonSupport);
+        this.urlPath = ThreadLocal.withInitial(() -> null);
     }
 
     /**
-     * @return {@link GeoserverLoadWorkspaceFeatureTypesRequest}
+     * @param theUrl
+     * @return {@link GPGeoserverFeatureTypeInfo}
      */
     @Override
-    public GeoserverLoadWorkspaceFeatureTypesRequest loadWorkspaceFeatureTypesRequest() {
-        return this.server.loadWorkspaceFeatureTypesRequest();
+    public GPGeoserverLoadFeatureTypeWithUrlRequest withUrl(@Nonnull(when = NEVER) String theUrl) {
+        this.urlPath.set(theUrl);
+        return this;
     }
 
     /**
-     * @return {@link GeoserverLoadWorkspaceDatastoreFeatureTypesRequest}
+     * @return {@link String}
      */
     @Override
-    public GeoserverLoadWorkspaceDatastoreFeatureTypesRequest loadWorkspaceDatastoreFeatureTypesRequest() {
-        return this.server.loadWorkspaceDatastoreFeatureTypesRequest();
+    protected String createUriPath() throws Exception {
+        String urlPath = this.urlPath.get();
+        checkArgument((urlPath != null) && !(urlPath.trim().isEmpty()), "The Parameter urlPath must not be null or an empty string.");
+        return urlPath;
     }
 
     /**
-     * @return {@link GeoserverCreateFeatureTypeRequest}
+     * @return {@link Class<GPGeoserverFeatureTypeInfo>}
      */
     @Override
-    public GeoserverCreateFeatureTypeRequest createFeatureTypeRequest() {
-        return this.server.createFeatureTypeRequest();
-    }
-
-    /**
-     * @return {@link GeoserverDeleteFeatureTypeRequest}
-     */
-    @Override
-    public GeoserverDeleteFeatureTypeRequest deleteFeatureTypeRequest() {
-        return this.server.deleteFeatureTypeRequest();
-    }
-
-    /**
-     * @return {@link GeoserverLoadFeatureTypeWithUrlRequest}
-     */
-    @Override
-    public GeoserverLoadFeatureTypeWithUrlRequest loadFeatureTypeWithUrl() {
-        return this.server.loadFeatureTypeWithUrl();
+    protected Class<GPGeoserverFeatureTypeInfo> forClass() {
+        return GPGeoserverFeatureTypeInfo.class;
     }
 }

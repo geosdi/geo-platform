@@ -33,62 +33,24 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.featuretypes;
+package org.geosdi.geoplatform.connector.geoserver.request.featuretypes;
 
-import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.*;
-import org.geosdi.geoplatform.connector.store.coveragestores.GeoserverCoverageStoresConnectorStore;
+import org.geosdi.geoplatform.connector.geoserver.featuretypes.GPGeoserverLoadFeatureTypeWithUrlRequest;
+import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
+import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
+
+import javax.annotation.Nonnull;
+import javax.annotation.meta.When;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public abstract class GeoserverFeatureTypesConnectorStore extends GeoserverCoverageStoresConnectorStore implements GPGeoserverFeatureTypesConnectorStore {
+public interface GeoserverLoadFeatureTypeWithUrlRequest extends GPConnectorRequest<GPGeoserverFeatureTypeInfo> {
 
     /**
-     * @param theServer
+     * @param theUrl
+     * @return {@link GPGeoserverLoadFeatureTypeWithUrlRequest}
      */
-    protected GeoserverFeatureTypesConnectorStore(GPGeoserverConnector theServer) {
-        super(theServer);
-    }
-
-    /**
-     * @return {@link GeoserverLoadWorkspaceFeatureTypesRequest}
-     */
-    @Override
-    public GeoserverLoadWorkspaceFeatureTypesRequest loadWorkspaceFeatureTypesRequest() {
-        return this.server.loadWorkspaceFeatureTypesRequest();
-    }
-
-    /**
-     * @return {@link GeoserverLoadWorkspaceDatastoreFeatureTypesRequest}
-     */
-    @Override
-    public GeoserverLoadWorkspaceDatastoreFeatureTypesRequest loadWorkspaceDatastoreFeatureTypesRequest() {
-        return this.server.loadWorkspaceDatastoreFeatureTypesRequest();
-    }
-
-    /**
-     * @return {@link GeoserverCreateFeatureTypeRequest}
-     */
-    @Override
-    public GeoserverCreateFeatureTypeRequest createFeatureTypeRequest() {
-        return this.server.createFeatureTypeRequest();
-    }
-
-    /**
-     * @return {@link GeoserverDeleteFeatureTypeRequest}
-     */
-    @Override
-    public GeoserverDeleteFeatureTypeRequest deleteFeatureTypeRequest() {
-        return this.server.deleteFeatureTypeRequest();
-    }
-
-    /**
-     * @return {@link GeoserverLoadFeatureTypeWithUrlRequest}
-     */
-    @Override
-    public GeoserverLoadFeatureTypeWithUrlRequest loadFeatureTypeWithUrl() {
-        return this.server.loadFeatureTypeWithUrl();
-    }
+    GPGeoserverLoadFeatureTypeWithUrlRequest withUrl(@Nonnull(when = When.NEVER) String theUrl);
 }

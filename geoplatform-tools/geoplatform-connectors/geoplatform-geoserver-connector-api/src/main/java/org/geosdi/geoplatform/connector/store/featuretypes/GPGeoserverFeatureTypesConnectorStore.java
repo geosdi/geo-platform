@@ -35,10 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.store.featuretypes;
 
-import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverCreateFeatureTypeRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverDeleteFeatureTypeRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadWorkspaceDatastoreFeatureTypesRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadWorkspaceFeatureTypesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.*;
 import org.geosdi.geoplatform.connector.store.coveragestores.GPGeoserverCoverageStoresConnectorStore;
 
 /**
@@ -66,4 +63,9 @@ public interface GPGeoserverFeatureTypesConnectorStore extends GPGeoserverCovera
      * @return {@link GeoserverDeleteFeatureTypeRequest}
      */
     GeoserverDeleteFeatureTypeRequest deleteFeatureTypeRequest();
+
+    /**
+     * @return {@link GeoserverLoadFeatureTypeWithUrlRequest}
+     */
+    GeoserverLoadFeatureTypeWithUrlRequest loadFeatureTypeWithUrl();
 }

@@ -36,10 +36,7 @@
 package org.geosdi.geoplatform.connector.geoserver.featuretypes;
 
 import org.geosdi.geoplatform.connector.geoserver.coveragestores.IGPGeoserverCoverageStoresConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverCreateFeatureTypeRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverDeleteFeatureTypeRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadWorkspaceDatastoreFeatureTypesRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadWorkspaceFeatureTypesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -66,4 +63,9 @@ public interface IGPGeoserverFeatureTypesConnector extends IGPGeoserverCoverageS
      * @return {@link GeoserverDeleteFeatureTypeRequest}
      */
     GeoserverDeleteFeatureTypeRequest deleteFeatureTypeRequest();
+
+    /**
+     * @return {@link GeoserverLoadFeatureTypeWithUrlRequest}
+     */
+    GeoserverLoadFeatureTypeWithUrlRequest loadFeatureTypeWithUrl();
 }

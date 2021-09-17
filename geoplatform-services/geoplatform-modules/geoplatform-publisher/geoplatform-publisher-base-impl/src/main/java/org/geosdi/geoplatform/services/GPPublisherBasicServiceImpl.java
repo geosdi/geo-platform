@@ -683,7 +683,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                         }
                         if(this.geoserverConnectorStore.loadCoverageInfoWithUrl().
                                 withUrl(geoserverLayer.getLayerResource().getHref())
-                                .existCoverage()) {
+                                .exsist()) {
                             info.alreadyExists = Lists.<LayerPublishAction>newArrayList(LayerPublishAction.RENAME);
                             idName += System.currentTimeMillis();
                             info.fileName = idName;

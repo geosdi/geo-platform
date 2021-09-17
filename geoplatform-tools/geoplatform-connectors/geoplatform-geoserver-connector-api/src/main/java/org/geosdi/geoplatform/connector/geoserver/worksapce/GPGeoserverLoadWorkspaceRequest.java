@@ -38,12 +38,14 @@ package org.geosdi.geoplatform.connector.geoserver.worksapce;
 import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverLoadWorkspace;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverLoadWorkspaceRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.UnauthorizedException;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.meta.When;
 import java.io.BufferedReader;
 
@@ -62,6 +64,7 @@ public class GPGeoserverLoadWorkspaceRequest extends GPJsonGetConnectorRequest<G
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<Boolean> exist = withInitial(() -> null);
     private final ThreadLocal<GPGeoserverLoadWorkspace> response = withInitial(() -> null);
+    private final ThreadLocal<Boolean> quietOnNotFound;
 
     /**
      * @param server
@@ -70,6 +73,7 @@ public class GPGeoserverLoadWorkspaceRequest extends GPJsonGetConnectorRequest<G
     GPGeoserverLoadWorkspaceRequest(@Nonnull(when = When.NEVER) GPServerConnector server, @Nonnull(when = When.NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
         this.workspaceName = withInitial(() -> null);
+        this.quietOnNotFound = withInitial(() -> TRUE);
     }
 
     /**
@@ -89,6 +93,16 @@ public class GPGeoserverLoadWorkspaceRequest extends GPJsonGetConnectorRequest<G
     @Override
     public Boolean existWorkspace() throws Exception {
         return (this.exist.get() != null ? this.exist.get() : this.getResponse() != null);
+    }
+
+    /**
+     * @param theQuietOnNotFound
+     * @return {@link GeoserverLoadCoverageRequest}
+     */
+    @Override
+    public GeoserverLoadWorkspaceRequest withQuietOnNotFound(@Nullable Boolean theQuietOnNotFound) {
+        this.quietOnNotFound.set((theQuietOnNotFound != null) ? theQuietOnNotFound : TRUE);
+        return self();
     }
 
     /**
@@ -137,8 +151,9 @@ public class GPGeoserverLoadWorkspaceRequest extends GPJsonGetConnectorRequest<G
         String workspaceName = this.workspaceName.get();
         checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspaceName mut not be null or an Empty String.");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName)
-                : baseURI.concat("/workspaces/").concat(workspaceName)));
+        String quietOnNotFound = this.quietOnNotFound.get().toString();
+        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("?quietOnNotFound=").concat(quietOnNotFound)
+                : baseURI.concat("/workspaces/").concat(workspaceName).concat("?quietOnNotFound=").concat(quietOnNotFound)));
     }
 
     /**

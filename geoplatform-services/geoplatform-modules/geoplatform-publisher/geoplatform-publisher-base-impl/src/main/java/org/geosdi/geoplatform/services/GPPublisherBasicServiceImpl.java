@@ -524,7 +524,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
     public Boolean createWorkspace(String workspaceName, boolean silent) throws ResourceNotFoundFault {
         try {
             boolean exists = this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName(workspaceName)
-                    .withQuietOnNotFound(TRUE).existWorkspace();
+                    .withQuietOnNotFound(TRUE).exsist();
             if (exists && !silent) {
                 throw new ResourceNotFoundFault("The workspace: " + workspaceName + " already exists");
             }
@@ -675,7 +675,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                     idName += System.currentTimeMillis();
                     info.fileName = idName;
                 }else {
-                    if(this.geoserverConnectorStore.loadLayerRequest().withName(idName).existLayer()) {
+                    if(this.geoserverConnectorStore.loadLayerRequest().withName(idName).exsist()) {
                         GeoserverLoadLayerRequest geoserverLoadLayerRequest = this.geoserverConnectorStore.loadLayerRequest().withName(idName);
                         GeoserverLayer geoserverLayer = geoserverLoadLayerRequest.getResponse();
                         if(geoserverLayer.getLayerType().getType() != GeoserverLayerType.Raster.getType()) {

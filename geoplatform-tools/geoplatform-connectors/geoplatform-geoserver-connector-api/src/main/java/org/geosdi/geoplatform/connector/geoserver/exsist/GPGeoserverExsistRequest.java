@@ -33,65 +33,92 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.layers;
+package org.geosdi.geoplatform.connector.geoserver.exsist;
 
-import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.exsist.GPGeoserverExsistRequest;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
-import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadLayerRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.exsist.GeoserverExsistRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.exception.UnauthorizedException;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
+import java.io.BufferedReader;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-@ThreadSafe
-public class GPGeoserverLoadLayerRequest extends GPGeoserverExsistRequest<GeoserverLayer, GeoserverLoadLayerRequest> implements GeoserverLoadLayerRequest {
+public abstract class GPGeoserverExsistRequest<T, ConnectorRequest extends GPJsonConnectorRequest> extends GPJsonGetConnectorRequest<T, ConnectorRequest> implements GeoserverExsistRequest {
 
-    private final ThreadLocal<String> name;
+    private final ThreadLocal<Boolean> exist = withInitial(() -> null);
+    private final ThreadLocal<T> response = withInitial(() -> null);
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    GPGeoserverLoadLayerRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    protected GPGeoserverExsistRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
-        this.name = withInitial(() -> null);
     }
 
     /**
-     * @param theName
      */
-    public GeoserverLoadLayerRequest withName(@Nonnull(when = NEVER) String theName) {
-        this.name.set(theName);
-        super.init();
-        return self();
+    public void init() {
+        this.exist.set(null);
+        this.response.set(null);
     }
 
-
     /**
-     * @return {@link String}
+     * @return {@link Boolean}
      */
     @Override
-    protected String createUriPath() throws Exception {
-        String layerName = this.name.get();
-        checkArgument(((layerName != null) && !(layerName.trim().isEmpty())), "The Parameter Name must not be null or an Empty String.");
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("layers/").concat(layerName) : baseURI.concat("/layers/").concat(layerName)));
+    public Boolean exsist() throws Exception {
+        return (this.exist.get() != null ? this.exist.get() : this.getResponse() != null);
     }
 
     /**
-     * @return {@link Class<GeoserverLayer>}
+     * @return {@link T}
+     * @throws Exception
      */
     @Override
-    protected Class<GeoserverLayer> forClass() {
-        return GeoserverLayer.class;
+    public T getResponse() throws Exception {
+        return  (this.response.get() != null ? this.response.get() : super.getResponse());
     }
+
+    /**
+     * @param statusCode
+     * @throws Exception
+     */
+    @Override
+    protected void checkHttpResponseStatus(int statusCode) throws Exception {
+        switch (statusCode) {
+            case 401:
+                throw new UnauthorizedException();
+        }
+    }
+
+    /**
+     * @param reader
+     * @return {@link GeoserverLayer}
+     * @throws Exception
+     */
+    @Override
+    protected T readInternal(BufferedReader reader) throws Exception {
+        try {
+            this.response.set(super.readInternal(reader));
+            this.exist.set(TRUE);
+            return this.response.get();
+        } catch (Exception ex) {
+            this.exist.set(FALSE);
+            return null;
+        }
+    }
+
 }

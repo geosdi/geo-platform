@@ -65,7 +65,7 @@ public class GeoserverConnectorLayersTest extends GeoserverConnectorTest {
     @Test
     public void a_existLayer() throws Exception {
         Assert.assertTrue("####################", this.restReader.existsLayer("tiger", "poi", FALSE) ==
-                this.geoserverConnectorStore.loadLayerRequest().withName("poi").existLayer());
+                this.geoserverConnectorStore.loadLayerRequest().withName("poi").exsist());
     }
 
     @Test

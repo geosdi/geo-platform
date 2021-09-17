@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connector.geoserver.request.layers;
 
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
+import org.geosdi.geoplatform.connector.geoserver.request.exsist.GeoserverExsistRequest;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
@@ -45,7 +46,7 @@ import javax.annotation.meta.When;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverLoadLayerRequest extends GPJsonConnectorRequest<GeoserverLayer, GeoserverLoadLayerRequest> {
+public interface GeoserverLoadLayerRequest extends GPJsonConnectorRequest<GeoserverLayer, GeoserverLoadLayerRequest>, GeoserverExsistRequest {
 
     /**
      * @param theName
@@ -53,8 +54,4 @@ public interface GeoserverLoadLayerRequest extends GPJsonConnectorRequest<Geoser
      */
     GeoserverLoadLayerRequest withName(@Nonnull(when = When.NEVER) String theName);
 
-    /**
-     * @return {@link Boolean}
-     */
-    Boolean existLayer() throws Exception;
 }

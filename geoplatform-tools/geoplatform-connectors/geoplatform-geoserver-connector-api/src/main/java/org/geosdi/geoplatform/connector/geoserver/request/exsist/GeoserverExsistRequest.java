@@ -33,25 +33,17 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages;
-
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
-import org.geosdi.geoplatform.connector.geoserver.request.exsist.GeoserverExsistRequest;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
-
-import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
+package org.geosdi.geoplatform.connector.geoserver.request.exsist;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeoserverLoadCoverageWithUrlRequest extends GPJsonConnectorRequest<GPGeoserverCoverageInfo, GeoserverLoadCoverageWithUrlRequest>, GeoserverExsistRequest {
+public interface GeoserverExsistRequest{
 
     /**
-     * @param theUrl
-     * @return {@link GeoserverLoadCoverageWithUrlRequest}
+     * @return {@link Boolean}
      */
-    GeoserverLoadCoverageWithUrlRequest withUrl(@Nonnull(when = When.NEVER) String theUrl);
+    Boolean exsist() throws Exception;
 
 }

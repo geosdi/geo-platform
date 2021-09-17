@@ -38,9 +38,12 @@ package org.geosdi.geoplatform.geoserver.workspace;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageWithUrlRequest;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
+import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static java.lang.Boolean.FALSE;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -60,6 +63,14 @@ public class GeoserverConnectorWorkspaceTest extends GeoserverConnectorTest {
         GPGeoserverCoverageInfo gpGeoserverFeatureTypeInfo = gpGeoserverLoadCoverageWithUrlRequest.getResponse();
         logger.info("########################BBOX {}\n", gpGeoserverFeatureTypeInfo.getLatLonBoundingBox());
         logger.info("########################BBOX {}\n", gpGeoserverFeatureTypeInfo.getLatLonBoundingBox().getCrs());
+    }
+
+    @Test
+    public void b_existWorkspace() throws Exception {
+        Assert.assertTrue("####################", this.restReader.existsWorkspace("tiger", FALSE) ==
+                this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("tiger").existWorkspace());
+        Assert.assertTrue("####################", this.restReader.existsWorkspace("tigeraa", FALSE) ==
+                this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("tigeraa").existWorkspace());
     }
 
 }

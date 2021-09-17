@@ -51,4 +51,9 @@ public interface GeoserverLoadWorkspaceRequest extends GPJsonConnectorRequest<GP
      * @return {@link GeoserverLoadWorkspaceRequest}
      */
     GeoserverLoadWorkspaceRequest withWorkspaceName(@Nonnull(when = When.NEVER) String theWorkspaceName);
+
+    /**
+     * @return {@link Boolean}
+     */
+    Boolean existWorkspace() throws Exception;
 }

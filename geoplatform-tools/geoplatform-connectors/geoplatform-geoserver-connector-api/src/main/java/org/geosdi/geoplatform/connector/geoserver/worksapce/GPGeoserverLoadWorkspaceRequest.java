@@ -39,13 +39,17 @@ import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverLoadWorkspace;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverLoadWorkspaceRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.exception.UnauthorizedException;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 import javax.annotation.meta.When;
+import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 
 /**
@@ -56,6 +60,8 @@ import static java.lang.ThreadLocal.withInitial;
 public class GPGeoserverLoadWorkspaceRequest extends GPJsonGetConnectorRequest<GPGeoserverLoadWorkspace, GeoserverLoadWorkspaceRequest> implements GeoserverLoadWorkspaceRequest {
 
     private final ThreadLocal<String> workspaceName;
+    private final ThreadLocal<Boolean> exist = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverLoadWorkspace> response = withInitial(() -> null);
 
     /**
      * @param server
@@ -72,7 +78,55 @@ public class GPGeoserverLoadWorkspaceRequest extends GPJsonGetConnectorRequest<G
      */
     public GeoserverLoadWorkspaceRequest withWorkspaceName(String theWorkspaceName) {
         this.workspaceName.set(theWorkspaceName);
+        this.exist.set(null);
+        this.response.set(null);
         return self();
+    }
+
+    /**
+     * @return {@link Boolean}
+     */
+    @Override
+    public Boolean existWorkspace() throws Exception {
+        return (this.exist.get() != null ? this.exist.get() : this.getResponse() != null);
+    }
+
+    /**
+     * @return {@link GPGeoserverLoadWorkspace}
+     * @throws Exception
+     */
+    @Override
+    public GPGeoserverLoadWorkspace getResponse() throws Exception {
+        return  (this.response.get() != null ? this.response.get() : super.getResponse());
+    }
+
+    /**
+     * @param statusCode
+     * @throws Exception
+     */
+    @Override
+    protected void checkHttpResponseStatus(int statusCode) throws Exception {
+        switch (statusCode) {
+            case 401:
+                throw new UnauthorizedException();
+        }
+    }
+
+    /**
+     * @param reader
+     * @return {@link GPGeoserverLoadWorkspace}
+     * @throws Exception
+     */
+    @Override
+    protected GPGeoserverLoadWorkspace readInternal(BufferedReader reader) throws Exception {
+        try {
+            this.response.set(super.readInternal(reader));
+            this.exist.set(TRUE);
+            return this.response.get();
+        } catch (Exception ex) {
+            this.exist.set(FALSE);
+            return null;
+        }
     }
 
     /**

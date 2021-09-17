@@ -65,7 +65,7 @@ public interface IGPPublisherService {
     String loadStyle(String layerDatasource, String styleName)
             throws ResourceNotFoundFault;
 
-    LayerAttributeStore describeFeatureType(String layerName) throws Exception;
+    LayerAttributeStore describeFeatureType(String layerName) throws ResourceNotFoundFault;
 
     UniqueValuesInfo uniqueValues(String layerName,String layerAttribute)
             throws ResourceNotFoundFault;

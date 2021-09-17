@@ -69,9 +69,9 @@ public class GeoserverConnectorWorkspaceTest extends GeoserverConnectorTest {
     @Test
     public void b_existWorkspace() throws Exception {
         Assert.assertTrue("####################", this.restReader.existsWorkspace("tiger", TRUE) ==
-                this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("tiger").withQuietOnNotFound(TRUE).existWorkspace());
+                this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("tiger").withQuietOnNotFound(TRUE).exsist());
         Assert.assertTrue("####################", this.restReader.existsWorkspace("tigeraa", TRUE) ==
-                this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("tigeraa").withQuietOnNotFound(TRUE).existWorkspace());
+                this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("tigeraa").withQuietOnNotFound(TRUE).exsist());
     }
 
     @Test
@@ -87,9 +87,9 @@ public class GeoserverConnectorWorkspaceTest extends GeoserverConnectorTest {
     @Test()
     public void d_exsistCoverageUrl() throws Exception {
         logger.info("########################EXSIST {}\n", this.geoserverConnectorStore.loadCoverageInfoWithUrl().
-                withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaic.json").existCoverage());
+                withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaic.json").exsist());
         logger.info("########################EXSIST {}\n", this.geoserverConnectorStore.loadCoverageInfoWithUrl().
-                withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaicww.json").existCoverage());
+                withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaicww.json").exsist());
     }
 
 }

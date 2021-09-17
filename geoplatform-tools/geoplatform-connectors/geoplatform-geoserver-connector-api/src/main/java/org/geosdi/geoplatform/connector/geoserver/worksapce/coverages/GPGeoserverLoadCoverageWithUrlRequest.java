@@ -36,22 +36,16 @@
 package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 
 import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.exsist.GPGeoserverExsistRequest;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverLoadWorkspace;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageWithUrlRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.exception.UnauthorizedException;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
-import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -59,11 +53,9 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverLoadCoverageWithUrlRequest extends GPJsonGetConnectorRequest<GPGeoserverCoverageInfo, GeoserverLoadCoverageWithUrlRequest> implements GeoserverLoadCoverageWithUrlRequest {
+public class GPGeoserverLoadCoverageWithUrlRequest extends GPGeoserverExsistRequest<GPGeoserverCoverageInfo, GeoserverLoadCoverageWithUrlRequest> implements GeoserverLoadCoverageWithUrlRequest {
 
     private final ThreadLocal<String> urlPath;
-    private final ThreadLocal<Boolean> exist = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverCoverageInfo> response = withInitial(() -> null);
 
     /**
      * @param server
@@ -81,57 +73,9 @@ public class GPGeoserverLoadCoverageWithUrlRequest extends GPJsonGetConnectorReq
     @Override
     public GeoserverLoadCoverageWithUrlRequest withUrl(@Nonnull(when = NEVER) String theUrl) {
         this.urlPath.set(theUrl);
-        this.exist.set(null);
-        this.response.set(null);
+        super.init();
         return self();
     }
-
-    /**
-     * @return {@link Boolean}
-     */
-    @Override
-    public Boolean existCoverage() throws Exception {
-        return (this.exist.get() != null ? this.exist.get() : this.getResponse() != null);
-    }
-
-    /**
-     * @return {@link GPGeoserverLoadWorkspace}
-     * @throws Exception
-     */
-    @Override
-    public GPGeoserverCoverageInfo getResponse() throws Exception {
-        return  (this.response.get() != null ? this.response.get() : super.getResponse());
-    }
-
-    /**
-     * @param statusCode
-     * @throws Exception
-     */
-    @Override
-    protected void checkHttpResponseStatus(int statusCode) throws Exception {
-        switch (statusCode) {
-            case 401:
-                throw new UnauthorizedException();
-        }
-    }
-
-    /**
-     * @param reader
-     * @return {@link GPGeoserverCoverageInfo}
-     * @throws Exception
-     */
-    @Override
-    protected GPGeoserverCoverageInfo readInternal(BufferedReader reader) throws Exception {
-        try {
-            this.response.set(super.readInternal(reader));
-            this.exist.set(TRUE);
-            return this.response.get();
-        } catch (Exception ex) {
-            this.exist.set(FALSE);
-            return null;
-        }
-    }
-
 
     /**
      * @return {@link String}

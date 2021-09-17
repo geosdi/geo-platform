@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.geoserver.workspace;
 
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
-import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.GPGeoserverLoadCoverageWithUrlRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageWithUrlRequest;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -55,7 +55,7 @@ public class GeoserverConnectorWorkspaceTest extends GeoserverConnectorTest {
      */
     @Test()
     public void a_readCoverageInfo() throws Exception {
-        GPGeoserverLoadCoverageWithUrlRequest gpGeoserverLoadCoverageWithUrlRequest = this.geoserverConnectorStore.loadCoverageInfoWithUrl().
+        GeoserverLoadCoverageWithUrlRequest gpGeoserverLoadCoverageWithUrlRequest = this.geoserverConnectorStore.loadCoverageInfoWithUrl().
                 withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaic.json");
         GPGeoserverCoverageInfo gpGeoserverFeatureTypeInfo = gpGeoserverLoadCoverageWithUrlRequest.getResponse();
         logger.info("########################BBOX {}\n", gpGeoserverFeatureTypeInfo.getLatLonBoundingBox());

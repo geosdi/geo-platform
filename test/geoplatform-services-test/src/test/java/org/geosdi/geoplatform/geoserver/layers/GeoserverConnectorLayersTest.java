@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.geoserver.layers;
 
 import it.geosolutions.geoserver.rest.decoder.RESTLayer;
+import it.geosolutions.geoserver.rest.decoder.RESTServiceUniqueValues;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
 import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadFeatureTypeWithUrlRequest;
@@ -129,7 +130,12 @@ public class GeoserverConnectorLayersTest extends GeoserverConnectorTest {
         logger.info("#######################GEOSERVER_LAYER: {}\n", geoserverLayer);
         logger.info("#######################REST_READER_DEFAULT_STYLE: {}\n", restLayer.getDefaultStyle());
         Assert.assertTrue("###################STYLE NAME:",   restLayer.getDefaultStyle().equals(geoserverLayer.getDefaultStyle().getName()));
+    }
 
+    @Test
+    public void f_getUniqueValues() throws Exception {
+        RESTServiceUniqueValues uniqueValues = this.restReader.uniqueValues("comuni2001", "maschi");
+        logger.info("####################UNIQUE_VALUES: {}\n", uniqueValues.getNames());
     }
 
 }

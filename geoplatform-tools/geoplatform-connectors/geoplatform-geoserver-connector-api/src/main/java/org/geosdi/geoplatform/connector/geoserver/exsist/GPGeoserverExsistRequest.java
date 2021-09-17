@@ -70,7 +70,7 @@ public abstract class GPGeoserverExsistRequest<T, ConnectorRequest extends GPJso
 
     /**
      */
-    public void init() {
+    protected void init() {
         this.exist.set(null);
         this.response.set(null);
     }

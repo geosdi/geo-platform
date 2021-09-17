@@ -38,19 +38,20 @@ package org.geosdi.geoplatform.services;
 import com.google.common.collect.Lists;
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
-import it.geosolutions.geoserver.rest.decoder.*;
-import it.geosolutions.geoserver.rest.decoder.utils.NameLinkElem;
+import it.geosolutions.geoserver.rest.decoder.RESTServiceUniqueValues;
 import it.geosolutions.geoserver.rest.encoder.GSLayerEncoder;
 import it.geosolutions.geoserver.rest.encoder.GSResourceEncoder;
 import it.geosolutions.geoserver.rest.encoder.coverage.GSCoverageEncoder;
 import org.apache.commons.httpclient.NameValuePair;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastores;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayerType;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
+import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverLoadDatastoresRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadFeatureTypeWithUrlRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadLayerRequest;
-import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.GPGeoserverLoadCoverageWithUrlRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageWithUrlRequest;
 import org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -238,7 +239,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
     public LayerAttributeStore describeFeatureType(String layerName) throws ResourceNotFoundFault {
         List<LayerAttribute> result = Lists.<LayerAttribute>newArrayList();
         try {
-            //new code
             GeoserverLoadLayerRequest geoserverLoadLayerRequest = this.geoserverConnectorStore.loadLayerRequest().withName(layerName);
             GeoserverLayer geoserverLayer = geoserverLoadLayerRequest.getResponse();
             if(geoserverLayer.getLayerType().getType() != GeoserverLayerType.Vector.getType()) {
@@ -252,15 +252,8 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
         } catch (Exception e) {
             final String error = "Error to load layer with layer name:" + layerName + " "  + e;
             logger.error(error);
-            throw new IllegalArgumentException(error, e.getCause());
+            throw new ResourceNotFoundFault(error, e.getCause());
         }
-        //TODO old code
-//        RESTLayer restLayer = this.restReader.getLayer(layerName);
-//        for (Attribute att : this.restReader.getFeatureType(restLayer).getAttributes()) {
-//            LayerAttribute layerAttribute = new LayerAttribute(att.getName(),
-//                    att.getBinding());
-//            result.add(layerAttribute);
-//        }
         return new LayerAttributeStore(result);
     }
 
@@ -316,14 +309,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
     @Override
     public Boolean updateLayerStyle(String workspace, String layerName, String styleToPublish, String styleName, boolean isDefault
             , boolean override) throws ResourceNotFoundFault {
-        //TODO
-        //old code
-        //RESTLayer restLayer = this.restReader.getLayer(workspace, layerName);
-//        if (restLayer == null) {
-//            throw new ResourceNotFoundFault("The layer: " + layerName + " with workspace: "+ workspace +" does not exists");
-//        }
-
-        //new code
         GeoserverLayer geoserverLayer  = null;
         try {
             geoserverLayer = this.geoserverConnectorStore.loadWorkspaceLayerRequest()
@@ -351,17 +336,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
             gsLayerEncoder.setDefaultStyle(styleName);
         else
             gsLayerEncoder.addStyle(styleName);
-
-        //new code
         geoserverLayer.getLayerStyle().getStyles().stream().forEach(s -> gsLayerEncoder.addStyle(s.getName()));
-
-        //old code
-        //        RESTStyleList restStyleList = restLayer.getStyles();
-//        if(restStyleList != null) {
-//            for (String styleToAdd : restStyleList.getNames()) {
-//                gsLayerEncoder.addStyle(styleToAdd);
-//            }
-//        }
         this.restPublisher.configureLayer(workspace, layerName, gsLayerEncoder);
         return TRUE;
     }
@@ -416,10 +391,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
         if (userWorkspace == null) {
             userWorkspace = this.getWorkspace(workspace);
         }
-        //TODO
-        //RESTLayer layer = restReader.getLayer(userWorkspace, layerName);
-
-        //new code
         GeoserverLayer geoserverLayer  = null;
         try {
             geoserverLayer = this.geoserverConnectorStore.loadWorkspaceLayerRequest()
@@ -435,12 +406,9 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
         if(geoserverLayer.getLayerType().getType() != GeoserverLayerType.Raster.getType()) {
             throw new ResourceNotFoundFault("Bad layer type for layer " + layerName);
         }
-
-        //TODO
-        //RESTCoverage featureType = restReader.getCoverage(layer);
         InfoPreview info = null;
         try {
-            GPGeoserverLoadCoverageWithUrlRequest gpGeoserverLoadCoverageWithUrlRequest = this.geoserverConnectorStore.loadCoverageInfoWithUrl().
+            GeoserverLoadCoverageWithUrlRequest gpGeoserverLoadCoverageWithUrlRequest = this.geoserverConnectorStore.loadCoverageInfoWithUrl().
                     withUrl(geoserverLayer.getLayerResource().getHref());
             GPGeoserverCoverageInfo gpGeoserverFeatureTypeInfo = gpGeoserverLoadCoverageWithUrlRequest.getResponse();
             Integer code = this.getEPSGCodeFromString(gpGeoserverFeatureTypeInfo.getLatLonBoundingBox().getCrs());
@@ -481,28 +449,37 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
         if (userWorkspace == null) {
             userWorkspace = this.getWorkspace(workspace);
         }
-        //TODO
-        RESTLayer layer = restReader.getLayer(userWorkspace, layerName);
-        //TODO
-        RESTFeatureType featureType = restReader.getFeatureType(layer);
+        GeoserverLayer geoserverLayer  = null;
+        try {
+            geoserverLayer = this.geoserverConnectorStore.loadWorkspaceLayerRequest()
+                    .withLayerName(layerName).withWorkspaceName(workspace).getResponse();
+        } catch (Exception e) {
+            final String error = "Error to load layer with workspace name: " +workspace + " and layer name:" + layerName + " "  + e;
+            logger.error(error);
+            throw new IllegalArgumentException(error, e.getCause());
+        }
+        GeoserverLoadFeatureTypeWithUrlRequest geoserverLoadFeatureTypeWithUrlRequest = this.geoserverConnectorStore.loadFeatureTypeWithUrl().
+                withUrl(geoserverLayer.getLayerResource().getHref());
         InfoPreview infoPreview = null;
         try {
+            GPGeoserverFeatureTypeInfo gpGeoserverFeatureTypeInfo = geoserverLoadFeatureTypeWithUrlRequest.getResponse();
+
             logger.info(
                     "Parameters: userWorkspace: " + userWorkspace + " - layerName: " + layerName
-                            + " - featureType: " + featureType + " - layer: " + layer + " - RESTURL: " + RESTURL);
+                            + " - featureType: " + gpGeoserverFeatureTypeInfo + " - layer: " + layerName + " - RESTURL: " + RESTURL);
 //            Map<String, String> parametersMap = Maps.newHashMap();
 //            parametersMap.put("url", layerName);
 //            featureType = DataStoreFinder.getDataStore(parametersMap).getFeatureSource(layerName);
 //            System.out.println("" + CRS.getGeographicBoundingBox());
-            Integer code = this.getEPSGCodeFromString(featureType.getCRS());
+            Integer code = this.getEPSGCodeFromString(gpGeoserverFeatureTypeInfo.getLatLonBoundingBox().getCrs());
             String epsgCode = null;
             if (code != null) {
                 epsgCode = "EPSG:" + code.toString();
             }
             infoPreview = new InfoPreview(RESTURL, userWorkspace, layerName,
-                    featureType.getMinX(), featureType.getMinY(),
-                    featureType.getMaxX(), featureType.getMaxY(), epsgCode,
-                    GPSharedUtils.isEmpty(styleName) ? layer.getDefaultStyle() : styleName,
+                    gpGeoserverFeatureTypeInfo.getLatLonBoundingBox().getMinx(), gpGeoserverFeatureTypeInfo.getLatLonBoundingBox().getMiny(),
+                    gpGeoserverFeatureTypeInfo.getLatLonBoundingBox().getMaxx(), gpGeoserverFeatureTypeInfo.getLatLonBoundingBox().getMaxy(), epsgCode,
+                    GPSharedUtils.isEmpty(styleName) ? geoserverLayer.getDefaultStyle().getName() : styleName,
                     TRUE, Lists.<LayerPublishAction>newArrayList(LayerPublishAction.values()));
         } catch (Exception e) {
             final String error = "The layer " + layerName + " is published in the " + userWorkspace + " workspace, but the server cannot provide info. " + e;
@@ -527,20 +504,18 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
             ResourceNotFoundFault {
         //reload();
         List<InfoPreview> listPreviews = Lists.<InfoPreview>newArrayList();
-        String userWorkspace = workspace;
-        if (userWorkspace == null) {
-            userWorkspace = this.getWorkspace(workspace);
-        }
-        //TODO
-        RESTDataStoreList list = restReader.getDatastores(userWorkspace);
-        for (NameLinkElem element : list) {
-            try {
-                String name = element.getName();
-                InfoPreview item = this.buildSHPInfoPreviewFromExistingWK(userWorkspace, name, null);
-                listPreviews.add(item);
-            } catch (IllegalArgumentException ex) {
-                throw new ResourceNotFoundFault(ex.getMessage());
-            }
+        String userWorkspace = workspace == null ? this.getWorkspace(workspace) : workspace;
+        GPGeoserverLoadDatastores gpGeoserverLoadDatastores = null;
+        try{
+            GeoserverLoadDatastoresRequest gpGeoserverLoadDatastoresRequest = this.geoserverConnectorStore.loadDatastoresRequest().withWorkspaceName("tiger");
+            gpGeoserverLoadDatastores = gpGeoserverLoadDatastoresRequest.getResponse();
+            listPreviews = gpGeoserverLoadDatastores.getDataStores().stream()
+                    .map(c -> this.buildSHPInfoPreviewFromExistingWK(userWorkspace, c.getName(), null)).collect(
+                            Collectors.toList());
+        }catch (Exception e) {
+            final String error = "Error to load datastores with workspace name: " +workspace + e;
+            logger.error(error);
+            throw new IllegalArgumentException(error, e.getCause());
         }
         return new InfoPreviewStore(listPreviews);
     }

@@ -52,4 +52,9 @@ public interface GeoserverLoadCoverageWithUrlRequest extends GPJsonConnectorRequ
      * @return {@link GeoserverLoadCoverageWithUrlRequest}
      */
     GeoserverLoadCoverageWithUrlRequest withUrl(@Nonnull(when = When.NEVER) String theUrl);
+
+    /**
+     * @return {@link Boolean}
+     */
+    Boolean existCoverage() throws Exception;
 }

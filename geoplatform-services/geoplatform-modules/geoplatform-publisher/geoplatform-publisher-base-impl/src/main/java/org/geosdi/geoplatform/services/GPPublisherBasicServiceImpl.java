@@ -523,9 +523,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
     @Override
     public Boolean createWorkspace(String workspaceName, boolean silent) throws ResourceNotFoundFault {
         try {
-            boolean exists = this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName(workspaceName)
-                    .withQuietOnNotFound(TRUE).exsist();
-            if (exists && !silent) {
+            if (this.exsistWorkspace(workspaceName, TRUE) && !silent) {
                 throw new ResourceNotFoundFault("The workspace: " + workspaceName + " already exists");
             }
         }catch (Exception e) {
@@ -675,15 +673,13 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                     idName += System.currentTimeMillis();
                     info.fileName = idName;
                 }else {
-                    if(this.geoserverConnectorStore.loadLayerRequest().withName(idName).exsist()) {
+                    if(this.exsistLayer(idName)) {
                         GeoserverLoadLayerRequest geoserverLoadLayerRequest = this.geoserverConnectorStore.loadLayerRequest().withName(idName);
                         GeoserverLayer geoserverLayer = geoserverLoadLayerRequest.getResponse();
                         if(geoserverLayer.getLayerType().getType() != GeoserverLayerType.Raster.getType()) {
                             throw new ResourceNotFoundFault("Bad layer type for layer " + idName);
                         }
-                        if(this.geoserverConnectorStore.loadCoverageInfoWithUrl().
-                                withUrl(geoserverLayer.getLayerResource().getHref())
-                                .exsist()) {
+                        if(this.exsistCoverageUrl(geoserverLayer.getLayerResource().getHref())) {
                             info.alreadyExists = Lists.<LayerPublishAction>newArrayList(LayerPublishAction.RENAME);
                             idName += System.currentTimeMillis();
                             info.fileName = idName;
@@ -1398,4 +1394,35 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
         infoPreview.setUrl(infoPreview.getUrl() + "/wms");
         return infoPreview;
     }
+
+    /**
+     *
+     * @param layerName
+     * @return {@link Boolean}
+     * @throws Exception
+     */
+    private Boolean exsistLayer(String layerName) throws Exception{
+        return this.geoserverConnectorStore.loadLayerRequest().withName(layerName).exsist();
+    }
+
+    /**
+     *
+     * @param workspaceName
+     * @return {@link Boolean}
+     * @throws Exception
+     */
+    private Boolean exsistWorkspace(String workspaceName, Boolean quietOnNotFound) throws Exception{
+        return this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName(workspaceName).withQuietOnNotFound(quietOnNotFound).exsist();
+    }
+
+    /**
+     *
+     * @param url
+     * @return {@link Boolean}
+     * @throws Exception
+     */
+    private Boolean exsistCoverageUrl(String url) throws Exception{
+        return this.geoserverConnectorStore.loadCoverageInfoWithUrl().withUrl(url).exsist();
+    }
+
 }

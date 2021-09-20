@@ -1,92 +1,173 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<bindings version="2.1" xmlns="http://java.sun.com/xml/ns/jaxb">
-  <!--
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb" if-exists="true" version="2.1">
+      
+    <!--
 
-Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
+Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
+Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
 Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-Generato il: 2015.08.25 alle 11:22:41 PM CEST 
+Generato il: 2021.09.20 alle 09:26:26 AM CEST 
 
   -->
-  <bindings scd="x-schema::tns" xmlns:tns="http://www.opengis.net/context">
-    <schemaBindings map="false">
-      <package name="org.geosdi.geoplatform.xml.wmc.v110"/>
-    </schemaBindings>
-    <bindings scd="~tns:ViewContextCollectionType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.ViewContextCollectionType"/>
+      
+    <bindings xmlns:tns="http://www.opengis.net/context" if-exists="true" scd="x-schema::tns">
+            
+        <schemaBindings map="false">
+                  
+            <package name="org.geosdi.geoplatform.xml.wmc.v110"/>
+                
+        </schemaBindings>
+            
+        <bindings if-exists="true" scd="~tns:ViewContextCollectionType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.ViewContextCollectionType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ViewContextType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.ViewContextType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ViewContextReferenceType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.ViewContextReferenceType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ContextURLType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.ContextURLType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:OnlineResourceType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.OnlineResourceType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:GeneralType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.GeneralType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:WindowType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.WindowType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:BoundingBoxType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.BoundingBoxType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:KeywordListType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.KeywordListType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:URLType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.URLType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ContactInformationType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.ContactInformationType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ContactPersonPrimaryType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.ContactPersonPrimaryType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:AddressType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.AddressType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:LayerListType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.LayerListType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:LayerType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.LayerType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ServerType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.ServerType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:FormatListType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.FormatListType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:FormatType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.FormatType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:StyleListType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.StyleListType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:StyleType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.StyleType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:SLDType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.SLDType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:DimensionListType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.DimensionListType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:DimensionType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.DimensionType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ExtensionType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.wmc.v110.ExtensionType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:serviceType">
+                  
+            <typesafeEnumClass ref="org.geosdi.geoplatform.xml.wmc.v110.ServiceType"/>
+                
+        </bindings>
+          
     </bindings>
-    <bindings scd="~tns:ViewContextType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.ViewContextType"/>
-    </bindings>
-    <bindings scd="~tns:LayerListType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.LayerListType"/>
-    </bindings>
-    <bindings scd="~tns:OnlineResourceType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.OnlineResourceType"/>
-    </bindings>
-    <bindings scd="~tns:ViewContextReferenceType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.ViewContextReferenceType"/>
-    </bindings>
-    <bindings scd="~tns:GeneralType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.GeneralType"/>
-    </bindings>
-    <bindings scd="~tns:KeywordListType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.KeywordListType"/>
-    </bindings>
-    <bindings scd="~tns:URLType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.URLType"/>
-    </bindings>
-    <bindings scd="~tns:ContextURLType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.ContextURLType"/>
-    </bindings>
-    <bindings scd="~tns:ExtensionType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.ExtensionType"/>
-    </bindings>
-    <bindings scd="~tns:DimensionType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.DimensionType"/>
-    </bindings>
-    <bindings scd="~tns:DimensionListType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.DimensionListType"/>
-    </bindings>
-    <bindings scd="~tns:WindowType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.WindowType"/>
-    </bindings>
-    <bindings scd="~tns:ContactPersonPrimaryType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.ContactPersonPrimaryType"/>
-    </bindings>
-    <bindings scd="~tns:FormatListType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.FormatListType"/>
-    </bindings>
-    <bindings scd="~tns:BoundingBoxType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.BoundingBoxType"/>
-    </bindings>
-    <bindings scd="~tns:AddressType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.AddressType"/>
-    </bindings>
-    <bindings scd="~tns:ServerType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.ServerType"/>
-    </bindings>
-    <bindings scd="~tns:LayerType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.LayerType"/>
-    </bindings>
-    <bindings scd="~tns:SLDType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.SLDType"/>
-    </bindings>
-    <bindings scd="~tns:StyleListType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.StyleListType"/>
-    </bindings>
-    <bindings scd="~tns:ContactInformationType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.ContactInformationType"/>
-    </bindings>
-    <bindings scd="~tns:StyleType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.StyleType"/>
-    </bindings>
-    <bindings scd="~tns:FormatType">
-      <class ref="org.geosdi.geoplatform.xml.wmc.v110.FormatType"/>
-    </bindings>
-    <bindings scd="~tns:serviceType">
-      <typesafeEnumClass ref="org.geosdi.geoplatform.xml.wmc.v110.ServiceType"/>
-    </bindings>
-  </bindings>
+    
 </bindings>
-

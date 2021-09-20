@@ -1,83 +1,155 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<bindings version="2.1" xmlns="http://java.sun.com/xml/ns/jaxb">
-  <!--
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb" if-exists="true" version="2.1">
+      
+    <!--
 
-Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
+Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
+Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
 Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-Generato il: 2015.08.25 alle 10:56:59 PM CEST 
+Generato il: 2021.09.20 alle 09:21:59 AM CEST 
 
   -->
-  <bindings scd="x-schema::tns" xmlns:tns="http://www.opengis.net/ogc">
-    <schemaBindings map="false">
-      <package name="org.geosdi.geoplatform.xml.filter.v100"/>
-    </schemaBindings>
-    <bindings scd="~tns:FeatureIdType">
-      <class ref="org.geosdi.geoplatform.xml.filter.v100.FeatureIdType"/>
+      
+    <bindings xmlns:tns="http://www.opengis.net/ogc" if-exists="true" scd="x-schema::tns">
+            
+        <schemaBindings map="false">
+                  
+            <package name="org.geosdi.geoplatform.xml.filter.v100"/>
+                
+        </schemaBindings>
+            
+        <bindings if-exists="true" scd="~tns:BinaryOperatorType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.filter.v100.BinaryOperatorType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ExpressionType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.filter.v100.ExpressionType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:PropertyNameType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.filter.v100.PropertyNameType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:FunctionType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.filter.v100.FunctionType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:LiteralType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.filter.v100.LiteralType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:FeatureIdType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.filter.v100.FeatureIdType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:FilterType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.filter.v100.FilterType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:ComparisonOpsType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.filter.v100.ComparisonOpsType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:BinaryComparisonOpType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.filter.v100.BinaryComparisonOpType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:PropertyIsLikeType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.filter.v100.PropertyIsLikeType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:PropertyIsNullType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.filter.v100.PropertyIsNullType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:PropertyIsBetweenType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.filter.v100.PropertyIsBetweenType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:SpatialOpsType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.filter.v100.SpatialOpsType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:BinarySpatialOpType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.filter.v100.BinarySpatialOpType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:DistanceBufferType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.filter.v100.DistanceBufferType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:BBOXType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.filter.v100.BBOXType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:LogicOpsType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.filter.v100.LogicOpsType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:BinaryLogicOpType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.filter.v100.BinaryLogicOpType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:UnaryLogicOpType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.filter.v100.UnaryLogicOpType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:LowerBoundaryType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.filter.v100.LowerBoundaryType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:UpperBoundaryType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.filter.v100.UpperBoundaryType"/>
+                
+        </bindings>
+            
+        <bindings if-exists="true" scd="~tns:DistanceType">
+                  
+            <class ref="org.geosdi.geoplatform.xml.filter.v100.DistanceType"/>
+                
+        </bindings>
+          
     </bindings>
-    <bindings scd="~tns:ExpressionType">
-      <class ref="org.geosdi.geoplatform.xml.filter.v100.ExpressionType"/>
-    </bindings>
-    <bindings scd="~tns:BinarySpatialOpType">
-      <class ref="org.geosdi.geoplatform.xml.filter.v100.BinarySpatialOpType"/>
-    </bindings>
-    <bindings scd="~tns:SpatialOpsType">
-      <class ref="org.geosdi.geoplatform.xml.filter.v100.SpatialOpsType"/>
-    </bindings>
-    <bindings scd="~tns:BinaryComparisonOpType">
-      <class ref="org.geosdi.geoplatform.xml.filter.v100.BinaryComparisonOpType"/>
-    </bindings>
-    <bindings scd="~tns:ComparisonOpsType">
-      <class ref="org.geosdi.geoplatform.xml.filter.v100.ComparisonOpsType"/>
-    </bindings>
-    <bindings scd="~tns:LogicOpsType">
-      <class ref="org.geosdi.geoplatform.xml.filter.v100.LogicOpsType"/>
-    </bindings>
-    <bindings scd="~tns:PropertyIsLikeType">
-      <class ref="org.geosdi.geoplatform.xml.filter.v100.PropertyIsLikeType"/>
-    </bindings>
-    <bindings scd="~tns:BinaryOperatorType">
-      <class ref="org.geosdi.geoplatform.xml.filter.v100.BinaryOperatorType"/>
-    </bindings>
-    <bindings scd="~tns:DistanceBufferType">
-      <class ref="org.geosdi.geoplatform.xml.filter.v100.DistanceBufferType"/>
-    </bindings>
-    <bindings scd="~tns:BBOXType">
-      <class ref="org.geosdi.geoplatform.xml.filter.v100.BBOXType"/>
-    </bindings>
-    <bindings scd="~tns:LiteralType">
-      <class ref="org.geosdi.geoplatform.xml.filter.v100.LiteralType"/>
-    </bindings>
-    <bindings scd="~tns:FunctionType">
-      <class ref="org.geosdi.geoplatform.xml.filter.v100.FunctionType"/>
-    </bindings>
-    <bindings scd="~tns:PropertyNameType">
-      <class ref="org.geosdi.geoplatform.xml.filter.v100.PropertyNameType"/>
-    </bindings>
-    <bindings scd="~tns:UnaryLogicOpType">
-      <class ref="org.geosdi.geoplatform.xml.filter.v100.UnaryLogicOpType"/>
-    </bindings>
-    <bindings scd="~tns:FilterType">
-      <class ref="org.geosdi.geoplatform.xml.filter.v100.FilterType"/>
-    </bindings>
-    <bindings scd="~tns:BinaryLogicOpType">
-      <class ref="org.geosdi.geoplatform.xml.filter.v100.BinaryLogicOpType"/>
-    </bindings>
-    <bindings scd="~tns:PropertyIsBetweenType">
-      <class ref="org.geosdi.geoplatform.xml.filter.v100.PropertyIsBetweenType"/>
-    </bindings>
-    <bindings scd="~tns:PropertyIsNullType">
-      <class ref="org.geosdi.geoplatform.xml.filter.v100.PropertyIsNullType"/>
-    </bindings>
-    <bindings scd="~tns:LowerBoundaryType">
-      <class ref="org.geosdi.geoplatform.xml.filter.v100.LowerBoundaryType"/>
-    </bindings>
-    <bindings scd="~tns:DistanceType">
-      <class ref="org.geosdi.geoplatform.xml.filter.v100.DistanceType"/>
-    </bindings>
-    <bindings scd="~tns:UpperBoundaryType">
-      <class ref="org.geosdi.geoplatform.xml.filter.v100.UpperBoundaryType"/>
-    </bindings>
-  </bindings>
+    
 </bindings>
-

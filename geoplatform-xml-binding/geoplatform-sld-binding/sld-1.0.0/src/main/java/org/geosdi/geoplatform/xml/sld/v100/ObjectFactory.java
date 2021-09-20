@@ -1,43 +1,8 @@
-/**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
- */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
+// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
+// Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
 // Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.08.25 alle 11:12:35 PM CEST 
+// Generato il: 2021.09.20 alle 09:31:16 AM CEST 
 //
 
 
@@ -66,42 +31,42 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _PerpendicularOffset_QNAME = new QName("http://www.opengis.net/sld", "PerpendicularOffset");
-    private final static QName _Symbolizer_QNAME = new QName("http://www.opengis.net/sld", "Symbolizer");
-    private final static QName _Size_QNAME = new QName("http://www.opengis.net/sld", "Size");
-    private final static QName _SourceChannelName_QNAME = new QName("http://www.opengis.net/sld", "SourceChannelName");
-    private final static QName _SemanticTypeIdentifier_QNAME = new QName("http://www.opengis.net/sld", "SemanticTypeIdentifier");
+    private final static QName _Name_QNAME = new QName("http://www.opengis.net/sld", "Name");
+    private final static QName _Title_QNAME = new QName("http://www.opengis.net/sld", "Title");
+    private final static QName _Abstract_QNAME = new QName("http://www.opengis.net/sld", "Abstract");
     private final static QName _FeatureTypeName_QNAME = new QName("http://www.opengis.net/sld", "FeatureTypeName");
-    private final static QName _PointSymbolizer_QNAME = new QName("http://www.opengis.net/sld", "PointSymbolizer");
-    private final static QName _DisplacementY_QNAME = new QName("http://www.opengis.net/sld", "DisplacementY");
-    private final static QName _DisplacementX_QNAME = new QName("http://www.opengis.net/sld", "DisplacementX");
-    private final static QName _PolygonSymbolizer_QNAME = new QName("http://www.opengis.net/sld", "PolygonSymbolizer");
-    private final static QName _GammaValue_QNAME = new QName("http://www.opengis.net/sld", "GammaValue");
-    private final static QName _WellKnownName_QNAME = new QName("http://www.opengis.net/sld", "WellKnownName");
-    private final static QName _MaxScaleDenominator_QNAME = new QName("http://www.opengis.net/sld", "MaxScaleDenominator");
-    private final static QName _BlueChannel_QNAME = new QName("http://www.opengis.net/sld", "BlueChannel");
-    private final static QName _LineSymbolizer_QNAME = new QName("http://www.opengis.net/sld", "LineSymbolizer");
-    private final static QName _ReliefFactor_QNAME = new QName("http://www.opengis.net/sld", "ReliefFactor");
-    private final static QName _Format_QNAME = new QName("http://www.opengis.net/sld", "Format");
-    private final static QName _Service_QNAME = new QName("http://www.opengis.net/sld", "Service");
+    private final static QName _Value_QNAME = new QName("http://www.opengis.net/sld", "Value");
     private final static QName _IsDefault_QNAME = new QName("http://www.opengis.net/sld", "IsDefault");
+    private final static QName _SemanticTypeIdentifier_QNAME = new QName("http://www.opengis.net/sld", "SemanticTypeIdentifier");
+    private final static QName _Format_QNAME = new QName("http://www.opengis.net/sld", "Format");
+    private final static QName _WellKnownName_QNAME = new QName("http://www.opengis.net/sld", "WellKnownName");
+    private final static QName _Opacity_QNAME = new QName("http://www.opengis.net/sld", "Opacity");
+    private final static QName _Size_QNAME = new QName("http://www.opengis.net/sld", "Size");
+    private final static QName _Rotation_QNAME = new QName("http://www.opengis.net/sld", "Rotation");
+    private final static QName _MinScaleDenominator_QNAME = new QName("http://www.opengis.net/sld", "MinScaleDenominator");
+    private final static QName _MaxScaleDenominator_QNAME = new QName("http://www.opengis.net/sld", "MaxScaleDenominator");
+    private final static QName _Symbolizer_QNAME = new QName("http://www.opengis.net/sld", "Symbolizer");
+    private final static QName _Service_QNAME = new QName("http://www.opengis.net/sld", "Service");
+    private final static QName _LineSymbolizer_QNAME = new QName("http://www.opengis.net/sld", "LineSymbolizer");
+    private final static QName _PolygonSymbolizer_QNAME = new QName("http://www.opengis.net/sld", "PolygonSymbolizer");
+    private final static QName _PointSymbolizer_QNAME = new QName("http://www.opengis.net/sld", "PointSymbolizer");
     private final static QName _TextSymbolizer_QNAME = new QName("http://www.opengis.net/sld", "TextSymbolizer");
     private final static QName _Label_QNAME = new QName("http://www.opengis.net/sld", "Label");
-    private final static QName _AnchorPointY_QNAME = new QName("http://www.opengis.net/sld", "AnchorPointY");
-    private final static QName _Rotation_QNAME = new QName("http://www.opengis.net/sld", "Rotation");
-    private final static QName _Abstract_QNAME = new QName("http://www.opengis.net/sld", "Abstract");
     private final static QName _AnchorPointX_QNAME = new QName("http://www.opengis.net/sld", "AnchorPointX");
-    private final static QName _Name_QNAME = new QName("http://www.opengis.net/sld", "Name");
-    private final static QName _RedChannel_QNAME = new QName("http://www.opengis.net/sld", "RedChannel");
+    private final static QName _AnchorPointY_QNAME = new QName("http://www.opengis.net/sld", "AnchorPointY");
+    private final static QName _DisplacementX_QNAME = new QName("http://www.opengis.net/sld", "DisplacementX");
+    private final static QName _DisplacementY_QNAME = new QName("http://www.opengis.net/sld", "DisplacementY");
+    private final static QName _PerpendicularOffset_QNAME = new QName("http://www.opengis.net/sld", "PerpendicularOffset");
     private final static QName _Radius_QNAME = new QName("http://www.opengis.net/sld", "Radius");
-    private final static QName _GreenChannel_QNAME = new QName("http://www.opengis.net/sld", "GreenChannel");
-    private final static QName _MinScaleDenominator_QNAME = new QName("http://www.opengis.net/sld", "MinScaleDenominator");
-    private final static QName _Opacity_QNAME = new QName("http://www.opengis.net/sld", "Opacity");
-    private final static QName _GrayChannel_QNAME = new QName("http://www.opengis.net/sld", "GrayChannel");
-    private final static QName _Title_QNAME = new QName("http://www.opengis.net/sld", "Title");
     private final static QName _RasterSymbolizer_QNAME = new QName("http://www.opengis.net/sld", "RasterSymbolizer");
-    private final static QName _Value_QNAME = new QName("http://www.opengis.net/sld", "Value");
+    private final static QName _RedChannel_QNAME = new QName("http://www.opengis.net/sld", "RedChannel");
+    private final static QName _GreenChannel_QNAME = new QName("http://www.opengis.net/sld", "GreenChannel");
+    private final static QName _BlueChannel_QNAME = new QName("http://www.opengis.net/sld", "BlueChannel");
+    private final static QName _GrayChannel_QNAME = new QName("http://www.opengis.net/sld", "GrayChannel");
+    private final static QName _SourceChannelName_QNAME = new QName("http://www.opengis.net/sld", "SourceChannelName");
+    private final static QName _GammaValue_QNAME = new QName("http://www.opengis.net/sld", "GammaValue");
     private final static QName _BrightnessOnly_QNAME = new QName("http://www.opengis.net/sld", "BrightnessOnly");
+    private final static QName _ReliefFactor_QNAME = new QName("http://www.opengis.net/sld", "ReliefFactor");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.geosdi.geoplatform.xml.sld.v100
@@ -111,11 +76,139 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DisplacementElement }
+     * Create an instance of {@link StyledLayerDescriptor }
      * 
      */
-    public DisplacementElement createDisplacementElement() {
-        return new DisplacementElement();
+    public StyledLayerDescriptor createStyledLayerDescriptor() {
+        return new StyledLayerDescriptor();
+    }
+
+    /**
+     * Create an instance of {@link NamedLayer }
+     * 
+     */
+    public NamedLayer createNamedLayer() {
+        return new NamedLayer();
+    }
+
+    /**
+     * Create an instance of {@link LayerFeatureConstraints }
+     * 
+     */
+    public LayerFeatureConstraints createLayerFeatureConstraints() {
+        return new LayerFeatureConstraints();
+    }
+
+    /**
+     * Create an instance of {@link FeatureTypeConstraint }
+     * 
+     */
+    public FeatureTypeConstraint createFeatureTypeConstraint() {
+        return new FeatureTypeConstraint();
+    }
+
+    /**
+     * Create an instance of {@link Extent }
+     * 
+     */
+    public Extent createExtent() {
+        return new Extent();
+    }
+
+    /**
+     * Create an instance of {@link NamedStyle }
+     * 
+     */
+    public NamedStyle createNamedStyle() {
+        return new NamedStyle();
+    }
+
+    /**
+     * Create an instance of {@link UserStyle }
+     * 
+     */
+    public UserStyle createUserStyle() {
+        return new UserStyle();
+    }
+
+    /**
+     * Create an instance of {@link FeatureTypeStyle }
+     * 
+     */
+    public FeatureTypeStyle createFeatureTypeStyle() {
+        return new FeatureTypeStyle();
+    }
+
+    /**
+     * Create an instance of {@link Rule }
+     * 
+     */
+    public Rule createRule() {
+        return new Rule();
+    }
+
+    /**
+     * Create an instance of {@link LegendGraphic }
+     * 
+     */
+    public LegendGraphic createLegendGraphic() {
+        return new LegendGraphic();
+    }
+
+    /**
+     * Create an instance of {@link Graphic }
+     * 
+     */
+    public Graphic createGraphic() {
+        return new Graphic();
+    }
+
+    /**
+     * Create an instance of {@link ExternalGraphic }
+     * 
+     */
+    public ExternalGraphic createExternalGraphic() {
+        return new ExternalGraphic();
+    }
+
+    /**
+     * Create an instance of {@link OnlineResource }
+     * 
+     */
+    public OnlineResource createOnlineResource() {
+        return new OnlineResource();
+    }
+
+    /**
+     * Create an instance of {@link Mark }
+     * 
+     */
+    public Mark createMark() {
+        return new Mark();
+    }
+
+    /**
+     * Create an instance of {@link Fill }
+     * 
+     */
+    public Fill createFill() {
+        return new Fill();
+    }
+
+    /**
+     * Create an instance of {@link GraphicFill }
+     * 
+     */
+    public GraphicFill createGraphicFill() {
+        return new GraphicFill();
+    }
+
+    /**
+     * Create an instance of {@link CssParameter }
+     * 
+     */
+    public CssParameter createCssParameter() {
+        return new CssParameter();
     }
 
     /**
@@ -127,43 +220,43 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ChannelSelectionElement }
+     * Create an instance of {@link Stroke }
      * 
      */
-    public ChannelSelectionElement createChannelSelectionElement() {
-        return new ChannelSelectionElement();
+    public Stroke createStroke() {
+        return new Stroke();
     }
 
     /**
-     * Create an instance of {@link SelectedChannelType }
+     * Create an instance of {@link GraphicStroke }
      * 
      */
-    public SelectedChannelType createSelectedChannelType() {
-        return new SelectedChannelType();
+    public GraphicStroke createGraphicStroke() {
+        return new GraphicStroke();
     }
 
     /**
-     * Create an instance of {@link NamedStyleElement }
+     * Create an instance of {@link ElseFilter }
      * 
      */
-    public NamedStyleElement createNamedStyleElement() {
-        return new NamedStyleElement();
+    public ElseFilter createElseFilter() {
+        return new ElseFilter();
     }
 
     /**
-     * Create an instance of {@link ExternalGraphicElement }
+     * Create an instance of {@link UserLayer }
      * 
      */
-    public ExternalGraphicElement createExternalGraphicElement() {
-        return new ExternalGraphicElement();
+    public UserLayer createUserLayer() {
+        return new UserLayer();
     }
 
     /**
-     * Create an instance of {@link OnlineResourceElement }
+     * Create an instance of {@link RemoteOWS }
      * 
      */
-    public OnlineResourceElement createOnlineResourceElement() {
-        return new OnlineResourceElement();
+    public RemoteOWS createRemoteOWS() {
+        return new RemoteOWS();
     }
 
     /**
@@ -175,19 +268,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link PointSymbolizer }
+     * Create an instance of {@link Geometry }
      * 
      */
-    public PointSymbolizer createPointSymbolizer() {
-        return new PointSymbolizer();
-    }
-
-    /**
-     * Create an instance of {@link LinePlacementElement }
-     * 
-     */
-    public LinePlacementElement createLinePlacementElement() {
-        return new LinePlacementElement();
+    public Geometry createGeometry() {
+        return new Geometry();
     }
 
     /**
@@ -199,179 +284,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link RANDOMElement }
+     * Create an instance of {@link PointSymbolizer }
      * 
      */
-    public RANDOMElement createRANDOMElement() {
-        return new RANDOMElement();
-    }
-
-    /**
-     * Create an instance of {@link GeometryElement }
-     * 
-     */
-    public GeometryElement createGeometryElement() {
-        return new GeometryElement();
-    }
-
-    /**
-     * Create an instance of {@link LegendGraphicElement }
-     * 
-     */
-    public LegendGraphicElement createLegendGraphicElement() {
-        return new LegendGraphicElement();
-    }
-
-    /**
-     * Create an instance of {@link GraphicElement }
-     * 
-     */
-    public GraphicElement createGraphicElement() {
-        return new GraphicElement();
-    }
-
-    /**
-     * Create an instance of {@link MarkElement }
-     * 
-     */
-    public MarkElement createMarkElement() {
-        return new MarkElement();
-    }
-
-    /**
-     * Create an instance of {@link FillElement }
-     * 
-     */
-    public FillElement createFillElement() {
-        return new FillElement();
-    }
-
-    /**
-     * Create an instance of {@link GraphicFillElement }
-     * 
-     */
-    public GraphicFillElement createGraphicFillElement() {
-        return new GraphicFillElement();
-    }
-
-    /**
-     * Create an instance of {@link CssParameterElement }
-     * 
-     */
-    public CssParameterElement createCssParameterElement() {
-        return new CssParameterElement();
-    }
-
-    /**
-     * Create an instance of {@link StrokeElement }
-     * 
-     */
-    public StrokeElement createStrokeElement() {
-        return new StrokeElement();
-    }
-
-    /**
-     * Create an instance of {@link GraphicStrokeElement }
-     * 
-     */
-    public GraphicStrokeElement createGraphicStrokeElement() {
-        return new GraphicStrokeElement();
-    }
-
-    /**
-     * Create an instance of {@link ImageOutlineElement }
-     * 
-     */
-    public ImageOutlineElement createImageOutlineElement() {
-        return new ImageOutlineElement();
-    }
-
-    /**
-     * Create an instance of {@link NamedLayerElement }
-     * 
-     */
-    public NamedLayerElement createNamedLayerElement() {
-        return new NamedLayerElement();
-    }
-
-    /**
-     * Create an instance of {@link LayerFeatureConstraintsElement }
-     * 
-     */
-    public LayerFeatureConstraintsElement createLayerFeatureConstraintsElement() {
-        return new LayerFeatureConstraintsElement();
-    }
-
-    /**
-     * Create an instance of {@link FeatureTypeConstraintElement }
-     * 
-     */
-    public FeatureTypeConstraintElement createFeatureTypeConstraintElement() {
-        return new FeatureTypeConstraintElement();
-    }
-
-    /**
-     * Create an instance of {@link ExtentElement }
-     * 
-     */
-    public ExtentElement createExtentElement() {
-        return new ExtentElement();
-    }
-
-    /**
-     * Create an instance of {@link UserStyleElement }
-     * 
-     */
-    public UserStyleElement createUserStyleElement() {
-        return new UserStyleElement();
-    }
-
-    /**
-     * Create an instance of {@link FeatureTypeStyleElement }
-     * 
-     */
-    public FeatureTypeStyleElement createFeatureTypeStyleElement() {
-        return new FeatureTypeStyleElement();
-    }
-
-    /**
-     * Create an instance of {@link RuleElement }
-     * 
-     */
-    public RuleElement createRuleElement() {
-        return new RuleElement();
-    }
-
-    /**
-     * Create an instance of {@link ElseFilterElement }
-     * 
-     */
-    public ElseFilterElement createElseFilterElement() {
-        return new ElseFilterElement();
-    }
-
-    /**
-     * Create an instance of {@link LabelPlacementElement }
-     * 
-     */
-    public LabelPlacementElement createLabelPlacementElement() {
-        return new LabelPlacementElement();
-    }
-
-    /**
-     * Create an instance of {@link PointPlacementElement }
-     * 
-     */
-    public PointPlacementElement createPointPlacementElement() {
-        return new PointPlacementElement();
-    }
-
-    /**
-     * Create an instance of {@link AnchorPointElement }
-     * 
-     */
-    public AnchorPointElement createAnchorPointElement() {
-        return new AnchorPointElement();
+    public PointSymbolizer createPointSymbolizer() {
+        return new PointSymbolizer();
     }
 
     /**
@@ -383,99 +300,59 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ColorMapEntryElement }
+     * Create an instance of {@link Font }
      * 
      */
-    public ColorMapEntryElement createColorMapEntryElement() {
-        return new ColorMapEntryElement();
+    public Font createFont() {
+        return new Font();
     }
 
     /**
-     * Create an instance of {@link RemoteOWSElement }
+     * Create an instance of {@link LabelPlacement }
      * 
      */
-    public RemoteOWSElement createRemoteOWSElement() {
-        return new RemoteOWSElement();
+    public LabelPlacement createLabelPlacement() {
+        return new LabelPlacement();
     }
 
     /**
-     * Create an instance of {@link NormalizeElement }
+     * Create an instance of {@link PointPlacement }
      * 
      */
-    public NormalizeElement createNormalizeElement() {
-        return new NormalizeElement();
+    public PointPlacement createPointPlacement() {
+        return new PointPlacement();
     }
 
     /**
-     * Create an instance of {@link ShadedReliefElement }
+     * Create an instance of {@link AnchorPoint }
      * 
      */
-    public ShadedReliefElement createShadedReliefElement() {
-        return new ShadedReliefElement();
+    public AnchorPoint createAnchorPoint() {
+        return new AnchorPoint();
     }
 
     /**
-     * Create an instance of {@link EARLIESTONTOPElement }
+     * Create an instance of {@link Displacement }
      * 
      */
-    public EARLIESTONTOPElement createEARLIESTONTOPElement() {
-        return new EARLIESTONTOPElement();
+    public Displacement createDisplacement() {
+        return new Displacement();
     }
 
     /**
-     * Create an instance of {@link FontElement }
+     * Create an instance of {@link LinePlacement }
      * 
      */
-    public FontElement createFontElement() {
-        return new FontElement();
+    public LinePlacement createLinePlacement() {
+        return new LinePlacement();
     }
 
     /**
-     * Create an instance of {@link OverlapBehaviorElement }
+     * Create an instance of {@link Halo }
      * 
      */
-    public OverlapBehaviorElement createOverlapBehaviorElement() {
-        return new OverlapBehaviorElement();
-    }
-
-    /**
-     * Create an instance of {@link LATESTONTOPElement }
-     * 
-     */
-    public LATESTONTOPElement createLATESTONTOPElement() {
-        return new LATESTONTOPElement();
-    }
-
-    /**
-     * Create an instance of {@link AVERAGEElement }
-     * 
-     */
-    public AVERAGEElement createAVERAGEElement() {
-        return new AVERAGEElement();
-    }
-
-    /**
-     * Create an instance of {@link StyledLayerDescriptorElement }
-     * 
-     */
-    public StyledLayerDescriptorElement createStyledLayerDescriptorElement() {
-        return new StyledLayerDescriptorElement();
-    }
-
-    /**
-     * Create an instance of {@link UserLayerElement }
-     * 
-     */
-    public UserLayerElement createUserLayerElement() {
-        return new UserLayerElement();
-    }
-
-    /**
-     * Create an instance of {@link HistogramElement }
-     * 
-     */
-    public HistogramElement createHistogramElement() {
-        return new HistogramElement();
+    public Halo createHalo() {
+        return new Halo();
     }
 
     /**
@@ -487,257 +364,124 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ContrastEnhancementElement }
+     * Create an instance of {@link ChannelSelection }
      * 
      */
-    public ContrastEnhancementElement createContrastEnhancementElement() {
-        return new ContrastEnhancementElement();
+    public ChannelSelection createChannelSelection() {
+        return new ChannelSelection();
     }
 
     /**
-     * Create an instance of {@link ColorMapElement }
+     * Create an instance of {@link SelectedChannelType }
      * 
      */
-    public ColorMapElement createColorMapElement() {
-        return new ColorMapElement();
+    public SelectedChannelType createSelectedChannelType() {
+        return new SelectedChannelType();
     }
 
     /**
-     * Create an instance of {@link HaloElement }
+     * Create an instance of {@link OverlapBehavior }
      * 
      */
-    public HaloElement createHaloElement() {
-        return new HaloElement();
+    public OverlapBehavior createOverlapBehavior() {
+        return new OverlapBehavior();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}}
+     * Create an instance of {@link LATESTONTOP }
      * 
      */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "PerpendicularOffset")
-    public JAXBElement<ParameterValueType> createPerpendicularOffset(ParameterValueType value) {
-        return new JAXBElement<ParameterValueType>(_PerpendicularOffset_QNAME, ParameterValueType.class, null, value);
+    public LATESTONTOP createLATESTONTOP() {
+        return new LATESTONTOP();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SymbolizerType }{@code >}}
+     * Create an instance of {@link EARLIESTONTOP }
      * 
      */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Symbolizer")
-    public JAXBElement<SymbolizerType> createSymbolizer(SymbolizerType value) {
-        return new JAXBElement<SymbolizerType>(_Symbolizer_QNAME, SymbolizerType.class, null, value);
+    public EARLIESTONTOP createEARLIESTONTOP() {
+        return new EARLIESTONTOP();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}}
+     * Create an instance of {@link AVERAGE }
      * 
      */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Size")
-    public JAXBElement<ParameterValueType> createSize(ParameterValueType value) {
-        return new JAXBElement<ParameterValueType>(_Size_QNAME, ParameterValueType.class, null, value);
+    public AVERAGE createAVERAGE() {
+        return new AVERAGE();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * Create an instance of {@link RANDOM }
      * 
      */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "SourceChannelName")
-    public JAXBElement<String> createSourceChannelName(String value) {
-        return new JAXBElement<String>(_SourceChannelName_QNAME, String.class, null, value);
+    public RANDOM createRANDOM() {
+        return new RANDOM();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * Create an instance of {@link ColorMap }
      * 
      */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "SemanticTypeIdentifier")
-    public JAXBElement<String> createSemanticTypeIdentifier(String value) {
-        return new JAXBElement<String>(_SemanticTypeIdentifier_QNAME, String.class, null, value);
+    public ColorMap createColorMap() {
+        return new ColorMap();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * Create an instance of {@link ColorMapEntry }
      * 
      */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "FeatureTypeName")
-    public JAXBElement<String> createFeatureTypeName(String value) {
-        return new JAXBElement<String>(_FeatureTypeName_QNAME, String.class, null, value);
+    public ColorMapEntry createColorMapEntry() {
+        return new ColorMapEntry();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link PointSymbolizer }{@code >}}
+     * Create an instance of {@link ContrastEnhancement }
      * 
      */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "PointSymbolizer", substitutionHeadNamespace = "http://www.opengis.net/sld", substitutionHeadName = "Symbolizer")
-    public JAXBElement<PointSymbolizer> createPointSymbolizer(PointSymbolizer value) {
-        return new JAXBElement<PointSymbolizer>(_PointSymbolizer_QNAME, PointSymbolizer.class, null, value);
+    public ContrastEnhancement createContrastEnhancement() {
+        return new ContrastEnhancement();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}}
+     * Create an instance of {@link Normalize }
      * 
      */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "DisplacementY")
-    public JAXBElement<ParameterValueType> createDisplacementY(ParameterValueType value) {
-        return new JAXBElement<ParameterValueType>(_DisplacementY_QNAME, ParameterValueType.class, null, value);
+    public Normalize createNormalize() {
+        return new Normalize();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}}
+     * Create an instance of {@link Histogram }
      * 
      */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "DisplacementX")
-    public JAXBElement<ParameterValueType> createDisplacementX(ParameterValueType value) {
-        return new JAXBElement<ParameterValueType>(_DisplacementX_QNAME, ParameterValueType.class, null, value);
+    public Histogram createHistogram() {
+        return new Histogram();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link PolygonSymbolizer }{@code >}}
+     * Create an instance of {@link ShadedRelief }
      * 
      */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "PolygonSymbolizer", substitutionHeadNamespace = "http://www.opengis.net/sld", substitutionHeadName = "Symbolizer")
-    public JAXBElement<PolygonSymbolizer> createPolygonSymbolizer(PolygonSymbolizer value) {
-        return new JAXBElement<PolygonSymbolizer>(_PolygonSymbolizer_QNAME, PolygonSymbolizer.class, null, value);
+    public ShadedRelief createShadedRelief() {
+        return new ShadedRelief();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Double }{@code >}}
+     * Create an instance of {@link ImageOutline }
      * 
      */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "GammaValue")
-    public JAXBElement<Double> createGammaValue(Double value) {
-        return new JAXBElement<Double>(_GammaValue_QNAME, Double.class, null, value);
+    public ImageOutline createImageOutline() {
+        return new ImageOutline();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
-     */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "WellKnownName")
-    public JAXBElement<String> createWellKnownName(String value) {
-        return new JAXBElement<String>(_WellKnownName_QNAME, String.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Double }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "MaxScaleDenominator")
-    public JAXBElement<Double> createMaxScaleDenominator(Double value) {
-        return new JAXBElement<Double>(_MaxScaleDenominator_QNAME, Double.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SelectedChannelType }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "BlueChannel")
-    public JAXBElement<SelectedChannelType> createBlueChannel(SelectedChannelType value) {
-        return new JAXBElement<SelectedChannelType>(_BlueChannel_QNAME, SelectedChannelType.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link LineSymbolizer }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "LineSymbolizer", substitutionHeadNamespace = "http://www.opengis.net/sld", substitutionHeadName = "Symbolizer")
-    public JAXBElement<LineSymbolizer> createLineSymbolizer(LineSymbolizer value) {
-        return new JAXBElement<LineSymbolizer>(_LineSymbolizer_QNAME, LineSymbolizer.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Double }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "ReliefFactor")
-    public JAXBElement<Double> createReliefFactor(Double value) {
-        return new JAXBElement<Double>(_ReliefFactor_QNAME, Double.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Format")
-    public JAXBElement<String> createFormat(String value) {
-        return new JAXBElement<String>(_Format_QNAME, String.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Service")
-    public JAXBElement<String> createService(String value) {
-        return new JAXBElement<String>(_Service_QNAME, String.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Boolean }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "IsDefault")
-    public JAXBElement<Boolean> createIsDefault(Boolean value) {
-        return new JAXBElement<Boolean>(_IsDefault_QNAME, Boolean.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link TextSymbolizer }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "TextSymbolizer", substitutionHeadNamespace = "http://www.opengis.net/sld", substitutionHeadName = "Symbolizer")
-    public JAXBElement<TextSymbolizer> createTextSymbolizer(TextSymbolizer value) {
-        return new JAXBElement<TextSymbolizer>(_TextSymbolizer_QNAME, TextSymbolizer.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Label")
-    public JAXBElement<ParameterValueType> createLabel(ParameterValueType value) {
-        return new JAXBElement<ParameterValueType>(_Label_QNAME, ParameterValueType.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "AnchorPointY")
-    public JAXBElement<ParameterValueType> createAnchorPointY(ParameterValueType value) {
-        return new JAXBElement<ParameterValueType>(_AnchorPointY_QNAME, ParameterValueType.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Rotation")
-    public JAXBElement<ParameterValueType> createRotation(ParameterValueType value) {
-        return new JAXBElement<ParameterValueType>(_Rotation_QNAME, ParameterValueType.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Abstract")
-    public JAXBElement<String> createAbstract(String value) {
-        return new JAXBElement<String>(_Abstract_QNAME, String.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "AnchorPointX")
-    public JAXBElement<ParameterValueType> createAnchorPointX(ParameterValueType value) {
-        return new JAXBElement<ParameterValueType>(_AnchorPointX_QNAME, ParameterValueType.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Name")
     public JAXBElement<String> createName(String value) {
@@ -745,62 +489,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SelectedChannelType }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
-     */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "RedChannel")
-    public JAXBElement<SelectedChannelType> createRedChannel(SelectedChannelType value) {
-        return new JAXBElement<SelectedChannelType>(_RedChannel_QNAME, SelectedChannelType.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Radius")
-    public JAXBElement<ParameterValueType> createRadius(ParameterValueType value) {
-        return new JAXBElement<ParameterValueType>(_Radius_QNAME, ParameterValueType.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SelectedChannelType }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "GreenChannel")
-    public JAXBElement<SelectedChannelType> createGreenChannel(SelectedChannelType value) {
-        return new JAXBElement<SelectedChannelType>(_GreenChannel_QNAME, SelectedChannelType.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Double }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "MinScaleDenominator")
-    public JAXBElement<Double> createMinScaleDenominator(Double value) {
-        return new JAXBElement<Double>(_MinScaleDenominator_QNAME, Double.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Opacity")
-    public JAXBElement<ParameterValueType> createOpacity(ParameterValueType value) {
-        return new JAXBElement<ParameterValueType>(_Opacity_QNAME, ParameterValueType.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SelectedChannelType }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "GrayChannel")
-    public JAXBElement<SelectedChannelType> createGrayChannel(SelectedChannelType value) {
-        return new JAXBElement<SelectedChannelType>(_GrayChannel_QNAME, SelectedChannelType.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Title")
     public JAXBElement<String> createTitle(String value) {
@@ -808,17 +502,38 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link RasterSymbolizer }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      */
-    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "RasterSymbolizer", substitutionHeadNamespace = "http://www.opengis.net/sld", substitutionHeadName = "Symbolizer")
-    public JAXBElement<RasterSymbolizer> createRasterSymbolizer(RasterSymbolizer value) {
-        return new JAXBElement<RasterSymbolizer>(_RasterSymbolizer_QNAME, RasterSymbolizer.class, null, value);
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Abstract")
+    public JAXBElement<String> createAbstract(String value) {
+        return new JAXBElement<String>(_Abstract_QNAME, String.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "FeatureTypeName")
+    public JAXBElement<String> createFeatureTypeName(String value) {
+        return new JAXBElement<String>(_FeatureTypeName_QNAME, String.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Value")
     public JAXBElement<String> createValue(String value) {
@@ -826,12 +541,406 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Boolean }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link Boolean }{@code >}
      * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Boolean }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "IsDefault")
+    public JAXBElement<Boolean> createIsDefault(Boolean value) {
+        return new JAXBElement<Boolean>(_IsDefault_QNAME, Boolean.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "SemanticTypeIdentifier")
+    public JAXBElement<String> createSemanticTypeIdentifier(String value) {
+        return new JAXBElement<String>(_SemanticTypeIdentifier_QNAME, String.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Format")
+    public JAXBElement<String> createFormat(String value) {
+        return new JAXBElement<String>(_Format_QNAME, String.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "WellKnownName")
+    public JAXBElement<String> createWellKnownName(String value) {
+        return new JAXBElement<String>(_WellKnownName_QNAME, String.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Opacity")
+    public JAXBElement<ParameterValueType> createOpacity(ParameterValueType value) {
+        return new JAXBElement<ParameterValueType>(_Opacity_QNAME, ParameterValueType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Size")
+    public JAXBElement<ParameterValueType> createSize(ParameterValueType value) {
+        return new JAXBElement<ParameterValueType>(_Size_QNAME, ParameterValueType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Rotation")
+    public JAXBElement<ParameterValueType> createRotation(ParameterValueType value) {
+        return new JAXBElement<ParameterValueType>(_Rotation_QNAME, ParameterValueType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Double }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Double }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "MinScaleDenominator")
+    public JAXBElement<Double> createMinScaleDenominator(Double value) {
+        return new JAXBElement<Double>(_MinScaleDenominator_QNAME, Double.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Double }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Double }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "MaxScaleDenominator")
+    public JAXBElement<Double> createMaxScaleDenominator(Double value) {
+        return new JAXBElement<Double>(_MaxScaleDenominator_QNAME, Double.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SymbolizerType }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link SymbolizerType }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Symbolizer")
+    public JAXBElement<SymbolizerType> createSymbolizer(SymbolizerType value) {
+        return new JAXBElement<SymbolizerType>(_Symbolizer_QNAME, SymbolizerType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Service")
+    public JAXBElement<String> createService(String value) {
+        return new JAXBElement<String>(_Service_QNAME, String.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link LineSymbolizer }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link LineSymbolizer }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "LineSymbolizer", substitutionHeadNamespace = "http://www.opengis.net/sld", substitutionHeadName = "Symbolizer")
+    public JAXBElement<LineSymbolizer> createLineSymbolizer(LineSymbolizer value) {
+        return new JAXBElement<LineSymbolizer>(_LineSymbolizer_QNAME, LineSymbolizer.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link PolygonSymbolizer }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link PolygonSymbolizer }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "PolygonSymbolizer", substitutionHeadNamespace = "http://www.opengis.net/sld", substitutionHeadName = "Symbolizer")
+    public JAXBElement<PolygonSymbolizer> createPolygonSymbolizer(PolygonSymbolizer value) {
+        return new JAXBElement<PolygonSymbolizer>(_PolygonSymbolizer_QNAME, PolygonSymbolizer.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link PointSymbolizer }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link PointSymbolizer }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "PointSymbolizer", substitutionHeadNamespace = "http://www.opengis.net/sld", substitutionHeadName = "Symbolizer")
+    public JAXBElement<PointSymbolizer> createPointSymbolizer(PointSymbolizer value) {
+        return new JAXBElement<PointSymbolizer>(_PointSymbolizer_QNAME, PointSymbolizer.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link TextSymbolizer }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link TextSymbolizer }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "TextSymbolizer", substitutionHeadNamespace = "http://www.opengis.net/sld", substitutionHeadName = "Symbolizer")
+    public JAXBElement<TextSymbolizer> createTextSymbolizer(TextSymbolizer value) {
+        return new JAXBElement<TextSymbolizer>(_TextSymbolizer_QNAME, TextSymbolizer.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Label")
+    public JAXBElement<ParameterValueType> createLabel(ParameterValueType value) {
+        return new JAXBElement<ParameterValueType>(_Label_QNAME, ParameterValueType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "AnchorPointX")
+    public JAXBElement<ParameterValueType> createAnchorPointX(ParameterValueType value) {
+        return new JAXBElement<ParameterValueType>(_AnchorPointX_QNAME, ParameterValueType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "AnchorPointY")
+    public JAXBElement<ParameterValueType> createAnchorPointY(ParameterValueType value) {
+        return new JAXBElement<ParameterValueType>(_AnchorPointY_QNAME, ParameterValueType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "DisplacementX")
+    public JAXBElement<ParameterValueType> createDisplacementX(ParameterValueType value) {
+        return new JAXBElement<ParameterValueType>(_DisplacementX_QNAME, ParameterValueType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "DisplacementY")
+    public JAXBElement<ParameterValueType> createDisplacementY(ParameterValueType value) {
+        return new JAXBElement<ParameterValueType>(_DisplacementY_QNAME, ParameterValueType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "PerpendicularOffset")
+    public JAXBElement<ParameterValueType> createPerpendicularOffset(ParameterValueType value) {
+        return new JAXBElement<ParameterValueType>(_PerpendicularOffset_QNAME, ParameterValueType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link ParameterValueType }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "Radius")
+    public JAXBElement<ParameterValueType> createRadius(ParameterValueType value) {
+        return new JAXBElement<ParameterValueType>(_Radius_QNAME, ParameterValueType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link RasterSymbolizer }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link RasterSymbolizer }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "RasterSymbolizer", substitutionHeadNamespace = "http://www.opengis.net/sld", substitutionHeadName = "Symbolizer")
+    public JAXBElement<RasterSymbolizer> createRasterSymbolizer(RasterSymbolizer value) {
+        return new JAXBElement<RasterSymbolizer>(_RasterSymbolizer_QNAME, RasterSymbolizer.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SelectedChannelType }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link SelectedChannelType }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "RedChannel")
+    public JAXBElement<SelectedChannelType> createRedChannel(SelectedChannelType value) {
+        return new JAXBElement<SelectedChannelType>(_RedChannel_QNAME, SelectedChannelType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SelectedChannelType }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link SelectedChannelType }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "GreenChannel")
+    public JAXBElement<SelectedChannelType> createGreenChannel(SelectedChannelType value) {
+        return new JAXBElement<SelectedChannelType>(_GreenChannel_QNAME, SelectedChannelType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SelectedChannelType }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link SelectedChannelType }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "BlueChannel")
+    public JAXBElement<SelectedChannelType> createBlueChannel(SelectedChannelType value) {
+        return new JAXBElement<SelectedChannelType>(_BlueChannel_QNAME, SelectedChannelType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SelectedChannelType }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link SelectedChannelType }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "GrayChannel")
+    public JAXBElement<SelectedChannelType> createGrayChannel(SelectedChannelType value) {
+        return new JAXBElement<SelectedChannelType>(_GrayChannel_QNAME, SelectedChannelType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link String }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "SourceChannelName")
+    public JAXBElement<String> createSourceChannelName(String value) {
+        return new JAXBElement<String>(_SourceChannelName_QNAME, String.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Double }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Double }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "GammaValue")
+    public JAXBElement<Double> createGammaValue(Double value) {
+        return new JAXBElement<Double>(_GammaValue_QNAME, Double.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Boolean }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Boolean }{@code >}
      */
     @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "BrightnessOnly")
     public JAXBElement<Boolean> createBrightnessOnly(Boolean value) {
         return new JAXBElement<Boolean>(_BrightnessOnly_QNAME, Boolean.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Double }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link Double }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.opengis.net/sld", name = "ReliefFactor")
+    public JAXBElement<Double> createReliefFactor(Double value) {
+        return new JAXBElement<Double>(_ReliefFactor_QNAME, Double.class, null, value);
     }
 
 }

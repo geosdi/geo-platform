@@ -1,43 +1,8 @@
-/**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
- */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
+// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
+// Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
 // Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.08.25 alle 11:12:35 PM CEST 
+// Generato il: 2021.09.20 alle 09:31:16 AM CEST 
 //
 
 
@@ -48,8 +13,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
+import org.jvnet.jaxb2_commons.lang.ToString2;
+import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
 
@@ -59,22 +24,22 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/sld}SymbolizerType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/sld}Geometry" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/sld}Opacity" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/sld}ChannelSelection" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/sld}OverlapBehavior" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/sld}ColorMap" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/sld}ContrastEnhancement" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/sld}ShadedRelief" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/sld}ImageOutline" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.opengis.net/sld}SymbolizerType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element ref="{http://www.opengis.net/sld}Geometry" minOccurs="0"/&gt;
+ *         &lt;element ref="{http://www.opengis.net/sld}Opacity" minOccurs="0"/&gt;
+ *         &lt;element ref="{http://www.opengis.net/sld}ChannelSelection" minOccurs="0"/&gt;
+ *         &lt;element ref="{http://www.opengis.net/sld}OverlapBehavior" minOccurs="0"/&gt;
+ *         &lt;element ref="{http://www.opengis.net/sld}ColorMap" minOccurs="0"/&gt;
+ *         &lt;element ref="{http://www.opengis.net/sld}ContrastEnhancement" minOccurs="0"/&gt;
+ *         &lt;element ref="{http://www.opengis.net/sld}ShadedRelief" minOccurs="0"/&gt;
+ *         &lt;element ref="{http://www.opengis.net/sld}ImageOutline" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -92,35 +57,35 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 })
 public class RasterSymbolizer
     extends SymbolizerType
-    implements ToString
+    implements ToString2
 {
 
     @XmlElement(name = "Geometry")
-    protected GeometryElement geometry;
+    protected Geometry geometry;
     @XmlElement(name = "Opacity")
     protected ParameterValueType opacity;
     @XmlElement(name = "ChannelSelection")
-    protected ChannelSelectionElement channelSelection;
+    protected ChannelSelection channelSelection;
     @XmlElement(name = "OverlapBehavior")
-    protected OverlapBehaviorElement overlapBehavior;
+    protected OverlapBehavior overlapBehavior;
     @XmlElement(name = "ColorMap")
-    protected ColorMapElement colorMap;
+    protected ColorMap colorMap;
     @XmlElement(name = "ContrastEnhancement")
-    protected ContrastEnhancementElement contrastEnhancement;
+    protected ContrastEnhancement contrastEnhancement;
     @XmlElement(name = "ShadedRelief")
-    protected ShadedReliefElement shadedRelief;
+    protected ShadedRelief shadedRelief;
     @XmlElement(name = "ImageOutline")
-    protected ImageOutlineElement imageOutline;
+    protected ImageOutline imageOutline;
 
     /**
      * Recupera il valore della proprietà geometry.
      * 
      * @return
      *     possible object is
-     *     {@link GeometryElement }
+     *     {@link Geometry }
      *     
      */
-    public GeometryElement getGeometry() {
+    public Geometry getGeometry() {
         return geometry;
     }
 
@@ -129,10 +94,10 @@ public class RasterSymbolizer
      * 
      * @param value
      *     allowed object is
-     *     {@link GeometryElement }
+     *     {@link Geometry }
      *     
      */
-    public void setGeometry(GeometryElement value) {
+    public void setGeometry(Geometry value) {
         this.geometry = value;
     }
 
@@ -173,10 +138,10 @@ public class RasterSymbolizer
      * 
      * @return
      *     possible object is
-     *     {@link ChannelSelectionElement }
+     *     {@link ChannelSelection }
      *     
      */
-    public ChannelSelectionElement getChannelSelection() {
+    public ChannelSelection getChannelSelection() {
         return channelSelection;
     }
 
@@ -185,10 +150,10 @@ public class RasterSymbolizer
      * 
      * @param value
      *     allowed object is
-     *     {@link ChannelSelectionElement }
+     *     {@link ChannelSelection }
      *     
      */
-    public void setChannelSelection(ChannelSelectionElement value) {
+    public void setChannelSelection(ChannelSelection value) {
         this.channelSelection = value;
     }
 
@@ -201,10 +166,10 @@ public class RasterSymbolizer
      * 
      * @return
      *     possible object is
-     *     {@link OverlapBehaviorElement }
+     *     {@link OverlapBehavior }
      *     
      */
-    public OverlapBehaviorElement getOverlapBehavior() {
+    public OverlapBehavior getOverlapBehavior() {
         return overlapBehavior;
     }
 
@@ -213,10 +178,10 @@ public class RasterSymbolizer
      * 
      * @param value
      *     allowed object is
-     *     {@link OverlapBehaviorElement }
+     *     {@link OverlapBehavior }
      *     
      */
-    public void setOverlapBehavior(OverlapBehaviorElement value) {
+    public void setOverlapBehavior(OverlapBehavior value) {
         this.overlapBehavior = value;
     }
 
@@ -229,10 +194,10 @@ public class RasterSymbolizer
      * 
      * @return
      *     possible object is
-     *     {@link ColorMapElement }
+     *     {@link ColorMap }
      *     
      */
-    public ColorMapElement getColorMap() {
+    public ColorMap getColorMap() {
         return colorMap;
     }
 
@@ -241,10 +206,10 @@ public class RasterSymbolizer
      * 
      * @param value
      *     allowed object is
-     *     {@link ColorMapElement }
+     *     {@link ColorMap }
      *     
      */
-    public void setColorMap(ColorMapElement value) {
+    public void setColorMap(ColorMap value) {
         this.colorMap = value;
     }
 
@@ -257,10 +222,10 @@ public class RasterSymbolizer
      * 
      * @return
      *     possible object is
-     *     {@link ContrastEnhancementElement }
+     *     {@link ContrastEnhancement }
      *     
      */
-    public ContrastEnhancementElement getContrastEnhancement() {
+    public ContrastEnhancement getContrastEnhancement() {
         return contrastEnhancement;
     }
 
@@ -269,10 +234,10 @@ public class RasterSymbolizer
      * 
      * @param value
      *     allowed object is
-     *     {@link ContrastEnhancementElement }
+     *     {@link ContrastEnhancement }
      *     
      */
-    public void setContrastEnhancement(ContrastEnhancementElement value) {
+    public void setContrastEnhancement(ContrastEnhancement value) {
         this.contrastEnhancement = value;
     }
 
@@ -285,10 +250,10 @@ public class RasterSymbolizer
      * 
      * @return
      *     possible object is
-     *     {@link ShadedReliefElement }
+     *     {@link ShadedRelief }
      *     
      */
-    public ShadedReliefElement getShadedRelief() {
+    public ShadedRelief getShadedRelief() {
         return shadedRelief;
     }
 
@@ -297,10 +262,10 @@ public class RasterSymbolizer
      * 
      * @param value
      *     allowed object is
-     *     {@link ShadedReliefElement }
+     *     {@link ShadedRelief }
      *     
      */
-    public void setShadedRelief(ShadedReliefElement value) {
+    public void setShadedRelief(ShadedRelief value) {
         this.shadedRelief = value;
     }
 
@@ -313,10 +278,10 @@ public class RasterSymbolizer
      * 
      * @return
      *     possible object is
-     *     {@link ImageOutlineElement }
+     *     {@link ImageOutline }
      *     
      */
-    public ImageOutlineElement getImageOutline() {
+    public ImageOutline getImageOutline() {
         return imageOutline;
     }
 
@@ -325,10 +290,10 @@ public class RasterSymbolizer
      * 
      * @param value
      *     allowed object is
-     *     {@link ImageOutlineElement }
+     *     {@link ImageOutline }
      *     
      */
-    public void setImageOutline(ImageOutlineElement value) {
+    public void setImageOutline(ImageOutline value) {
         this.imageOutline = value;
     }
 
@@ -337,60 +302,60 @@ public class RasterSymbolizer
     }
 
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE2;
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
         super.appendFields(locator, buffer, strategy);
         {
-            GeometryElement theGeometry;
+            Geometry theGeometry;
             theGeometry = this.getGeometry();
-            strategy.appendField(locator, this, "geometry", buffer, theGeometry);
+            strategy.appendField(locator, this, "geometry", buffer, theGeometry, this.isSetGeometry());
         }
         {
             ParameterValueType theOpacity;
             theOpacity = this.getOpacity();
-            strategy.appendField(locator, this, "opacity", buffer, theOpacity);
+            strategy.appendField(locator, this, "opacity", buffer, theOpacity, this.isSetOpacity());
         }
         {
-            ChannelSelectionElement theChannelSelection;
+            ChannelSelection theChannelSelection;
             theChannelSelection = this.getChannelSelection();
-            strategy.appendField(locator, this, "channelSelection", buffer, theChannelSelection);
+            strategy.appendField(locator, this, "channelSelection", buffer, theChannelSelection, this.isSetChannelSelection());
         }
         {
-            OverlapBehaviorElement theOverlapBehavior;
+            OverlapBehavior theOverlapBehavior;
             theOverlapBehavior = this.getOverlapBehavior();
-            strategy.appendField(locator, this, "overlapBehavior", buffer, theOverlapBehavior);
+            strategy.appendField(locator, this, "overlapBehavior", buffer, theOverlapBehavior, this.isSetOverlapBehavior());
         }
         {
-            ColorMapElement theColorMap;
+            ColorMap theColorMap;
             theColorMap = this.getColorMap();
-            strategy.appendField(locator, this, "colorMap", buffer, theColorMap);
+            strategy.appendField(locator, this, "colorMap", buffer, theColorMap, this.isSetColorMap());
         }
         {
-            ContrastEnhancementElement theContrastEnhancement;
+            ContrastEnhancement theContrastEnhancement;
             theContrastEnhancement = this.getContrastEnhancement();
-            strategy.appendField(locator, this, "contrastEnhancement", buffer, theContrastEnhancement);
+            strategy.appendField(locator, this, "contrastEnhancement", buffer, theContrastEnhancement, this.isSetContrastEnhancement());
         }
         {
-            ShadedReliefElement theShadedRelief;
+            ShadedRelief theShadedRelief;
             theShadedRelief = this.getShadedRelief();
-            strategy.appendField(locator, this, "shadedRelief", buffer, theShadedRelief);
+            strategy.appendField(locator, this, "shadedRelief", buffer, theShadedRelief, this.isSetShadedRelief());
         }
         {
-            ImageOutlineElement theImageOutline;
+            ImageOutline theImageOutline;
             theImageOutline = this.getImageOutline();
-            strategy.appendField(locator, this, "imageOutline", buffer, theImageOutline);
+            strategy.appendField(locator, this, "imageOutline", buffer, theImageOutline, this.isSetImageOutline());
         }
         return buffer;
     }

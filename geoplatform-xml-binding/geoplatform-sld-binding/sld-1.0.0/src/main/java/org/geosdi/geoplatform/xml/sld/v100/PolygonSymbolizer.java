@@ -1,43 +1,8 @@
-/**
- *
- *    geo-platform
- *    Rich webgis framework
- *    http://geo-platform.org
- *   ====================================================================
- *
- *   Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
- *
- *   This program is free software: you can redistribute it and/or modify it
- *   under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version. This program is distributed in the
- *   hope that it will be useful, but WITHOUT ANY WARRANTY; without
- *   even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License
- *   for more details. You should have received a copy of the GNU General
- *   Public License along with this program. If not, see http://www.gnu.org/licenses/
- *
- *   ====================================================================
- *
- *   Linking this library statically or dynamically with other modules is
- *   making a combined work based on this library. Thus, the terms and
- *   conditions of the GNU General Public License cover the whole combination.
- *
- *   As a special exception, the copyright holders of this library give you permission
- *   to link this library with independent modules to produce an executable, regardless
- *   of the license terms of these independent modules, and to copy and distribute
- *   the resulting executable under terms of your choice, provided that you also meet,
- *   for each linked independent module, the terms and conditions of the license of
- *   that module. An independent module is a module which is not derived from or
- *   based on this library. If you modify this library, you may extend this exception
- *   to your version of the library, but you are not obligated to do so. If you do not
- *   wish to do so, delete this exception statement from your version.
- */
 //
-// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.2.7 
-// Vedere <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
+// Questo file è stato generato dall'architettura JavaTM per XML Binding (JAXB) Reference Implementation, v2.3.0 
+// Vedere <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
 // Qualsiasi modifica a questo file andrà persa durante la ricompilazione dello schema di origine. 
-// Generato il: 2015.08.25 alle 11:12:35 PM CEST 
+// Generato il: 2021.09.20 alle 09:31:16 AM CEST 
 //
 
 
@@ -48,8 +13,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
+import org.jvnet.jaxb2_commons.lang.ToString2;
+import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
 
@@ -59,17 +24,17 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
  * 
  * <pre>
- * &lt;complexType>
- *   &lt;complexContent>
- *     &lt;extension base="{http://www.opengis.net/sld}SymbolizerType">
- *       &lt;sequence>
- *         &lt;element ref="{http://www.opengis.net/sld}Geometry" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/sld}Fill" minOccurs="0"/>
- *         &lt;element ref="{http://www.opengis.net/sld}Stroke" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/extension>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;extension base="{http://www.opengis.net/sld}SymbolizerType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element ref="{http://www.opengis.net/sld}Geometry" minOccurs="0"/&gt;
+ *         &lt;element ref="{http://www.opengis.net/sld}Fill" minOccurs="0"/&gt;
+ *         &lt;element ref="{http://www.opengis.net/sld}Stroke" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/extension&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -82,25 +47,25 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 })
 public class PolygonSymbolizer
     extends SymbolizerType
-    implements ToString
+    implements ToString2
 {
 
     @XmlElement(name = "Geometry")
-    protected GeometryElement geometry;
+    protected Geometry geometry;
     @XmlElement(name = "Fill")
-    protected FillElement fill;
+    protected Fill fill;
     @XmlElement(name = "Stroke")
-    protected StrokeElement stroke;
+    protected Stroke stroke;
 
     /**
      * Recupera il valore della proprietà geometry.
      * 
      * @return
      *     possible object is
-     *     {@link GeometryElement }
+     *     {@link Geometry }
      *     
      */
-    public GeometryElement getGeometry() {
+    public Geometry getGeometry() {
         return geometry;
     }
 
@@ -109,10 +74,10 @@ public class PolygonSymbolizer
      * 
      * @param value
      *     allowed object is
-     *     {@link GeometryElement }
+     *     {@link Geometry }
      *     
      */
-    public void setGeometry(GeometryElement value) {
+    public void setGeometry(Geometry value) {
         this.geometry = value;
     }
 
@@ -125,10 +90,10 @@ public class PolygonSymbolizer
      * 
      * @return
      *     possible object is
-     *     {@link FillElement }
+     *     {@link Fill }
      *     
      */
-    public FillElement getFill() {
+    public Fill getFill() {
         return fill;
     }
 
@@ -137,10 +102,10 @@ public class PolygonSymbolizer
      * 
      * @param value
      *     allowed object is
-     *     {@link FillElement }
+     *     {@link Fill }
      *     
      */
-    public void setFill(FillElement value) {
+    public void setFill(Fill value) {
         this.fill = value;
     }
 
@@ -153,10 +118,10 @@ public class PolygonSymbolizer
      * 
      * @return
      *     possible object is
-     *     {@link StrokeElement }
+     *     {@link Stroke }
      *     
      */
-    public StrokeElement getStroke() {
+    public Stroke getStroke() {
         return stroke;
     }
 
@@ -165,10 +130,10 @@ public class PolygonSymbolizer
      * 
      * @param value
      *     allowed object is
-     *     {@link StrokeElement }
+     *     {@link Stroke }
      *     
      */
-    public void setStroke(StrokeElement value) {
+    public void setStroke(Stroke value) {
         this.stroke = value;
     }
 
@@ -177,35 +142,35 @@ public class PolygonSymbolizer
     }
 
     public String toString() {
-        final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
+        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE2;
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();
     }
 
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
         strategy.appendStart(locator, this, buffer);
         appendFields(locator, buffer, strategy);
         strategy.appendEnd(locator, this, buffer);
         return buffer;
     }
 
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy strategy) {
+    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
         super.appendFields(locator, buffer, strategy);
         {
-            GeometryElement theGeometry;
+            Geometry theGeometry;
             theGeometry = this.getGeometry();
-            strategy.appendField(locator, this, "geometry", buffer, theGeometry);
+            strategy.appendField(locator, this, "geometry", buffer, theGeometry, this.isSetGeometry());
         }
         {
-            FillElement theFill;
+            Fill theFill;
             theFill = this.getFill();
-            strategy.appendField(locator, this, "fill", buffer, theFill);
+            strategy.appendField(locator, this, "fill", buffer, theFill, this.isSetFill());
         }
         {
-            StrokeElement theStroke;
+            Stroke theStroke;
             theStroke = this.getStroke();
-            strategy.appendField(locator, this, "stroke", buffer, theStroke);
+            strategy.appendField(locator, this, "stroke", buffer, theStroke, this.isSetStroke());
         }
         return buffer;
     }

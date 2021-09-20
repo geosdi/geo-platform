@@ -36,15 +36,17 @@
 package org.geosdi.geoplatform.connector.geoserver.layers;
 
 import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.exsist.GPGeoserverExsistRequest;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadWorkspaceLayerRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
@@ -53,10 +55,11 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadWorkspaceLayerRequest extends GPJsonGetConnectorRequest<GeoserverLayer, GeoserverLoadWorkspaceLayerRequest> implements GeoserverLoadWorkspaceLayerRequest {
+public class GPGeoserverLoadWorkspaceLayerRequest extends GPGeoserverExsistRequest<GeoserverLayer, GeoserverLoadWorkspaceLayerRequest> implements GeoserverLoadWorkspaceLayerRequest {
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> layerName;
+    private final ThreadLocal<Boolean> quietOnNotFound;
 
     /**
      * @param server
@@ -66,6 +69,7 @@ public class GPGeoserverLoadWorkspaceLayerRequest extends GPJsonGetConnectorRequ
         super(server, theJacksonSupport);
         this.workspaceName = withInitial(() -> null);
         this.layerName = withInitial(() -> null);
+        this.quietOnNotFound = withInitial(() -> TRUE);
     }
 
     /**
@@ -85,6 +89,17 @@ public class GPGeoserverLoadWorkspaceLayerRequest extends GPJsonGetConnectorRequ
     @Override
     public GeoserverLoadWorkspaceLayerRequest withLayerName(@Nonnull(when = NEVER) String theLayerName) {
         this.layerName.set(theLayerName);
+        super.init();
+        return self();
+    }
+
+    /**
+     * @param theQuietOnNotFound
+     * @return {@link GeoserverLoadWorkspaceLayerRequest}
+     */
+    @Override
+    public GeoserverLoadWorkspaceLayerRequest withQuietOnNotFound(@Nullable Boolean theQuietOnNotFound) {
+        this.quietOnNotFound.set(theQuietOnNotFound);
         return self();
     }
 
@@ -98,8 +113,11 @@ public class GPGeoserverLoadWorkspaceLayerRequest extends GPJsonGetConnectorRequ
         String layerName = this.layerName.get();
         checkArgument((layerName != null) && !(layerName.trim().isEmpty()), "The Parameter layerName must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
+        String quietOnNotFound = this.quietOnNotFound.get().toString();
+
         return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/layers/").concat(layerName)
-                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/layers/").concat(layerName)));
+                .concat("?quietOnNotFound=").concat(quietOnNotFound)
+                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/layers/").concat(layerName).concat("?quietOnNotFound=").concat(quietOnNotFound)));
     }
 
     /**

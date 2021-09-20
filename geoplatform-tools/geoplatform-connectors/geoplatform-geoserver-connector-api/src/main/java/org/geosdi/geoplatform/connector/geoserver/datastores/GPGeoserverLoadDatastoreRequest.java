@@ -36,10 +36,10 @@
 package org.geosdi.geoplatform.connector.geoserver.datastores;
 
 import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.exsist.GPGeoserverExsistRequest;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastore;
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverLoadDatastoreRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -54,7 +54,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadDatastoreRequest extends GPJsonGetConnectorRequest<GPGeoserverLoadDatastore, GeoserverLoadDatastoreRequest> implements GeoserverLoadDatastoreRequest {
+public class GPGeoserverLoadDatastoreRequest extends GPGeoserverExsistRequest<GPGeoserverLoadDatastore, GeoserverLoadDatastoreRequest> implements GeoserverLoadDatastoreRequest {
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> storeName;
@@ -77,6 +77,7 @@ public class GPGeoserverLoadDatastoreRequest extends GPJsonGetConnectorRequest<G
     @Override
     public GeoserverLoadDatastoreRequest withWorkspaceName(String theWorkspaceName) {
         this.workspaceName.set(theWorkspaceName);
+        super.init();
         return self();
     }
 

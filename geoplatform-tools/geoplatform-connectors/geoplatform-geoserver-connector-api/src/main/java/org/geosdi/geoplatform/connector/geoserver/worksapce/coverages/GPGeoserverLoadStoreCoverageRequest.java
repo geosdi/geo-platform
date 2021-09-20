@@ -36,20 +36,17 @@
 package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 
 import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.exsist.GPGeoserverExsistRequest;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadStoreCoverageRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.exception.UnauthorizedException;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
@@ -59,14 +56,12 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverLoadStoreCoverageRequest extends GPJsonGetConnectorRequest<GPGeoserverCoverageInfo, GeoserverLoadStoreCoverageRequest> implements GeoserverLoadStoreCoverageRequest {
+public class GPGeoserverLoadStoreCoverageRequest extends GPGeoserverExsistRequest<GPGeoserverCoverageInfo, GeoserverLoadStoreCoverageRequest> implements GeoserverLoadStoreCoverageRequest {
 
     private final ThreadLocal<String> workspace;
     private final ThreadLocal<String> coverage;
     private final ThreadLocal<String> store;
     private final ThreadLocal<Boolean> quietOnNotFound;
-    private final ThreadLocal<Boolean> exist = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverCoverageInfo> response = withInitial(() -> null);
 
     /**
      * @param server
@@ -87,18 +82,11 @@ public class GPGeoserverLoadStoreCoverageRequest extends GPJsonGetConnectorReque
     @Override
     public GeoserverLoadStoreCoverageRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspace.set(theWorkspace);
-        this.exist.set(null);
-        this.response.set(null);
+        super.init();
         return self();
     }
 
-    /**
-     * @return {@link Boolean}
-     */
-    @Override
-    public Boolean existCoverageStore() throws Exception {
-        return (this.exist.get() != null ? this.exist.get() : this.getResponse() != null);
-    }
+
 
     /**
      * @param theCoverage
@@ -128,44 +116,6 @@ public class GPGeoserverLoadStoreCoverageRequest extends GPJsonGetConnectorReque
     public GeoserverLoadStoreCoverageRequest withQuietOnNotFound(@Nullable Boolean theQuietOnNotFound) {
         this.quietOnNotFound.set((theQuietOnNotFound != null) ? theQuietOnNotFound : TRUE);
         return self();
-    }
-
-    /**
-     * @return {@link GeoserverLoadStoreCoverageRequest}
-     * @throws Exception
-     */
-    @Override
-    public GPGeoserverCoverageInfo getResponse() throws Exception {
-        return  (this.response.get() != null ? this.response.get() : super.getResponse());
-    }
-
-    /**
-     * @param statusCode
-     * @throws Exception
-     */
-    @Override
-    protected void checkHttpResponseStatus(int statusCode) throws Exception {
-        switch (statusCode) {
-            case 401:
-                throw new UnauthorizedException();
-        }
-    }
-
-    /**
-     * @param reader
-     * @return {@link GPGeoserverCoverageInfo}
-     * @throws Exception
-     */
-    @Override
-    protected GPGeoserverCoverageInfo readInternal(BufferedReader reader) throws Exception {
-        try {
-            this.response.set(super.readInternal(reader));
-            this.exist.set(TRUE);
-            return this.response.get();
-        } catch (Exception ex) {
-            this.exist.set(FALSE);
-            return null;
-        }
     }
 
     /**

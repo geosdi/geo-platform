@@ -15,6 +15,9 @@
 
     <import resource="classpath:applicationContext-jasypt.xml" />
 
+    <context:component-scan base-package="org.geosdi.geoplatform.logger.support.spring.config,
+                                          org.geosdi.geoplatform.shared"/>
+
     <bean id="sharedRestReader" class="it.geosolutions.geoserver.rest.GeoServerRESTReader">
         <constructor-arg type="java.lang.String" value="configurator{geoserver_url}"/>
         <!-- the login and the password of the REST geoserver instance -->
@@ -22,7 +25,13 @@
         <constructor-arg type="java.lang.String" value="configurator{geoserver_password}"/>
     </bean>
 
-    <context:component-scan base-package="org.geosdi.geoplatform.logger.support.spring.config,
-                                          org.geosdi.geoplatform.shared"/>
+    <bean id="sharedRestPublisher" class="it.geosolutions.geoserver.rest.GeoServerRESTPublisher">
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_url}"/>
+        <!-- the login and the password of the REST geoserver instance -->
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_username}"/>
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_password}"/>
+    </bean>
+
+
 
 </beans>

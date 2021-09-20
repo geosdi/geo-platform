@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.geoserver.workspace;
 
 import it.geosolutions.geoserver.rest.decoder.RESTCoverage;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GeoserverCreateWorkspaceBody;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageWithUrlRequest;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
@@ -99,6 +100,14 @@ public class GeoserverConnectorWorkspaceTest extends GeoserverConnectorTest {
         List<String> workspaces = restReader.getWorkspaceNames();
         logger.info("###################WORKSPACE_NAME: {}\n", workspaces);
         logger.info("###################WORKSPACE_NAME: {}\n", this.geoserverConnectorStore.loadWorkspacesRequest().getWorkpacesNames());
+    }
+
+    @Test
+    public void f_createWorkspace() throws Exception {
+        this.geoserverConnectorStore.createWorkspaceRequest().withWorkspaceBody(new GeoserverCreateWorkspaceBody("vito")).getResponse();
+        Assert.assertTrue("####################", this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("vito").exsist());
+        this.geoserverConnectorStore.deleteWorkspaceRequest().withWorkspaceName("vito").getResponse();
+        Assert.assertFalse("####################", this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("vito").exsist());
     }
 
 }

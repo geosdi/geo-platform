@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.connector.geoserver.styles;
 
 import net.jcip.annotations.ThreadSafe;
-import org.apache.http.client.methods.HttpUriRequest;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverSingleStyle;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.styles.base.GPGeoserverBaseStyleRequest;

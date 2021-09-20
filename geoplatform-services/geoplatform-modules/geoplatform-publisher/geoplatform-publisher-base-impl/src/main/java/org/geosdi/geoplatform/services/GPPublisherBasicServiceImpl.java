@@ -855,8 +855,14 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
      * @param layer the layer to remove
      * @return perform a REST call for deleting the layer
      */
-    private boolean removeLayer(String layer) {
-        return this.restPublisher.removeLayer(null, layer);
+    private boolean removeLayer(String layer) throws ResourceNotFoundFault {
+        try{
+            return this.geoserverConnectorStore.deleteLayerRequest().withLayerName(layer).getResponse();
+        } catch (Exception e) {
+            final String error = "Error to remove  layer with name : " + layer + " " + e;
+            logger.error(error);
+            throw new ResourceNotFoundFault(error);
+        }
 //        String sUrl = RESTURL + "/rest/layers/" + layer + "?purge=true";
 //        return HttpUtilsLocal.delete(sUrl, RESTUSER, RESTPW);
     }

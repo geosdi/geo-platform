@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLo
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayerType;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GeoserverCreateWorkspaceBody;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverLoadDatastoresRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadFeatureTypeWithUrlRequest;
@@ -526,7 +527,14 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
         if (this.checkIfExsistWorkspace(workspaceName, TRUE) && !silent) {
             throw new ResourceNotFoundFault("The workspace: " + workspaceName + " already exists");
         }
-        return restPublisher.createWorkspace(workspaceName);
+        try{
+            this.geoserverConnectorStore.createWorkspaceRequest().withWorkspaceBody(new GeoserverCreateWorkspaceBody(workspaceName)).getResponse();
+        }catch (Exception e) {
+            final String error = "Error to create workspace with name name:" + workspaceName + " "  + e;
+            logger.error(error);
+            throw new ResourceNotFoundFault(error);
+        }
+        return this.checkIfExsistWorkspace(workspaceName, TRUE);
     }
 
     /**
@@ -938,7 +946,12 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
             String userWorkspace = userName;
             userWorkspace = PublishUtility.removeSpecialCharactersFromString(userWorkspace);
             if (!workspaces.contains(userWorkspace)) {
-                restPublisher.createWorkspace(userWorkspace);
+                try{
+                    this.geoserverConnectorStore.createWorkspaceRequest().withWorkspaceBody(new GeoserverCreateWorkspaceBody(userWorkspace)).getResponse();
+                }catch (Exception e) {
+                    final String error = "Error to create workspace with name name:" + userWorkspace + " "  + e;
+                    logger.error(error);
+                }
             }
             return userWorkspace;
     }

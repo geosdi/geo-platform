@@ -45,6 +45,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadWo
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
 import org.geosdi.geoplatform.responce.LayerAttribute;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -142,9 +143,16 @@ public class GeoserverConnectorLayersTest extends GeoserverConnectorTest {
     public void g_existLayer() throws Exception {
         Assert.assertTrue("####################", this.restReader.existsLayer("tiger", "poi", FALSE) ==
                 this.geoserverConnectorStore.loadWorkspaceLayerRequest().withLayerName("poi").withWorkspaceName("tiger").exsist());
-
         Assert.assertTrue("####################", this.restReader.existsLayer("tigerr", "poi", FALSE) ==
                 this.geoserverConnectorStore.loadWorkspaceLayerRequest().withLayerName("poi").withWorkspaceName("tigerr").exsist());
+    }
+
+    @Ignore
+    @Test
+    public void h_deleteLayer() throws Exception {
+        logger.info("##################DELETE_LAYER {}\n", this.geoserverConnectorStore.deleteLayerRequest().withLayerName("poi_vito").getResponse());
+        Assert.assertFalse("####################",
+                this.geoserverConnectorStore.loadLayerRequest().withName("poi_vito").exsist());
     }
 
 }

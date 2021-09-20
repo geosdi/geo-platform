@@ -34,14 +34,16 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.styles.base;
 
+import org.geosdi.geoplatform.connector.geoserver.exsist.GPGeoserverExsistRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverBaseStyleRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
@@ -49,9 +51,11 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPGeoserverBaseStyleRequest<T, R extends GeoserverBaseStyleRequest> extends GPJsonGetConnectorRequest<T, R> implements GeoserverBaseStyleRequest<T, R> {
+public abstract class GPGeoserverBaseStyleRequest<T, R extends GeoserverBaseStyleRequest> extends GPGeoserverExsistRequest<T, R> implements GeoserverBaseStyleRequest<T, R> {
 
     private final ThreadLocal<String> styleName;
+    private final ThreadLocal<Boolean> quietOnNotFound;
+
 
     /**
      * @param server
@@ -60,6 +64,7 @@ public abstract class GPGeoserverBaseStyleRequest<T, R extends GeoserverBaseStyl
     protected GPGeoserverBaseStyleRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
         this.styleName = withInitial(() -> null);
+        this.quietOnNotFound = withInitial(() -> TRUE);
     }
 
     /**
@@ -73,6 +78,16 @@ public abstract class GPGeoserverBaseStyleRequest<T, R extends GeoserverBaseStyl
     }
 
     /**
+     * @param theQuietOnNotFound
+     * @return {@link R}
+     */
+    @Override
+    public R withQuietOnNotFound(@Nullable Boolean theQuietOnNotFound) {
+        this.quietOnNotFound.set(theQuietOnNotFound);
+        return self();
+    }
+
+    /**
      * @return {@link String}
      */
     @Override
@@ -80,7 +95,8 @@ public abstract class GPGeoserverBaseStyleRequest<T, R extends GeoserverBaseStyl
         String styleName = this.styleName.get();
         checkArgument(((styleName != null) && !(styleName.trim().isEmpty())), "The Parameter Style Name must not be null or an Empty String.");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("styles/").concat(styleName).concat(".json")
-                : baseURI.concat("/styles/").concat(styleName).concat(".json")));
+        String quietOnNotFound = this.quietOnNotFound.get().toString();
+        return ((baseURI.endsWith("/") ? baseURI.concat("styles/").concat(styleName).concat(".json").concat("?quietOnNotFound=").concat(quietOnNotFound)
+                : baseURI.concat("/styles/").concat(styleName).concat(".json").concat("?quietOnNotFound=").concat(quietOnNotFound)));
     }
 }

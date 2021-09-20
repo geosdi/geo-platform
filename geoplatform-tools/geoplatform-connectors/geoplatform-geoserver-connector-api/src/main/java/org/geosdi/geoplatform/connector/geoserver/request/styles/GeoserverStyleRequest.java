@@ -37,28 +37,12 @@ package org.geosdi.geoplatform.connector.geoserver.request.styles;
 
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverSingleStyle;
 import org.geosdi.geoplatform.connector.geoserver.request.exsist.GeoserverExsistRequest;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import static javax.annotation.meta.When.NEVER;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverBaseStyleRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverStyleRequest extends GPJsonConnectorRequest<GPGeoserverSingleStyle, GeoserverStyleRequest>, GeoserverExsistRequest {
+public interface GeoserverStyleRequest extends GeoserverBaseStyleRequest<GPGeoserverSingleStyle, GeoserverStyleRequest>, GeoserverExsistRequest {
 
-    /**
-     * @param theStyleName
-     * @return {@link GeoserverStyleRequest}
-     */
-    GeoserverStyleRequest withStyleName(@Nonnull(when = NEVER) String theStyleName);
-
-    /**
-     * @param theQuietOnNotFound
-     * @return {@link GeoserverStyleRequest}
-     */
-    GeoserverStyleRequest withQuietOnNotFound(@Nullable Boolean theQuietOnNotFound);
 }

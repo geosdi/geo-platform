@@ -23,9 +23,6 @@
 
         <jaxb:schemaBindings>
             <jaxb:package name="org.geosdi.geoplatform.xml.sld.v100"/>
-            <jaxb:nameXmlTransform>
-                <jaxb:elementName suffix="Element"/>
-            </jaxb:nameXmlTransform>
         </jaxb:schemaBindings>
     </jaxb:bindings>
     

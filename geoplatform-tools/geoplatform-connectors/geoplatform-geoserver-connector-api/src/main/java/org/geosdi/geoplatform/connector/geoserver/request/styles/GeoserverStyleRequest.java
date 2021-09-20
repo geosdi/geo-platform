@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.connector.geoserver.request.styles;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverSingleStyle;
 import org.geosdi.geoplatform.connector.geoserver.request.exsist.GeoserverExsistRequest;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverBaseStyleRequest;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -48,7 +49,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverStyleRequest extends GPJsonConnectorRequest<GPGeoserverSingleStyle, GeoserverStyleRequest>, GeoserverExsistRequest {
+public interface GeoserverStyleRequest extends GeoserverBaseStyleRequest<GPGeoserverSingleStyle, GeoserverStyleRequest>, GeoserverExsistRequest {
 
     /**
      * @param theStyleName

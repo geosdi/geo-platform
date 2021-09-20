@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.geoserver;
 
+import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
 import org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore;
 import org.junit.Assert;
@@ -61,10 +62,13 @@ public abstract class GeoserverConnectorTest {
     protected GeoServerRESTReader restReader;
     @Resource(name = "geoserverConnectorStore")
     protected GPGeoserverConnectorStore geoserverConnectorStore;
+    @Resource(name = "sharedRestPublisher")
+    protected GeoServerRESTPublisher restPublisher;
 
     @Before
     public void setUp() {
         Assert.assertNotNull(this.geoserverConnectorStore);
         Assert.assertNotNull(this.restReader);
+        Assert.assertNotNull(this.restPublisher);
     }
 }

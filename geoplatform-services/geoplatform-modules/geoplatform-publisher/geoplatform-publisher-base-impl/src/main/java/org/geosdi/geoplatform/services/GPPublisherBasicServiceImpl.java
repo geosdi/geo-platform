@@ -51,6 +51,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGe
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverLoadDatastoresRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadFeatureTypeWithUrlRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadLayerRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadWorkspaceLayerRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageWithUrlRequest;
 import org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -522,14 +523,8 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
 
     @Override
     public Boolean createWorkspace(String workspaceName, boolean silent) throws ResourceNotFoundFault {
-        try {
-            if (this.exsistWorkspace(workspaceName, TRUE) && !silent) {
-                throw new ResourceNotFoundFault("The workspace: " + workspaceName + " already exists");
-            }
-        }catch (Exception e) {
-            final String error = "Error to load workspace with  name:" + workspaceName + " "  + e;
-            logger.error(error);
-            throw new ResourceNotFoundFault(error, e.getCause());
+        if (this.checkIfExsistWorkspace(workspaceName, TRUE) && !silent) {
+            throw new ResourceNotFoundFault("The workspace: " + workspaceName + " already exists");
         }
         return restPublisher.createWorkspace(workspaceName);
     }
@@ -667,19 +662,19 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
             File oldGeotifFile = new File(tempUserTifDir, tifFileName);
             try{
                 if(this.geoserverConnectorStore.loadWorkspaceStoreCoverageRequest().withCoverage(idName)
-                        .withWorkspace(workspace).withStore(idName).existCoverageStore()) {
+                        .withWorkspace(workspace).withStore(idName).exsist()) {
                     info.alreadyExists = Lists.<LayerPublishAction>newArrayList(
                             LayerPublishAction.OVERRIDE, LayerPublishAction.RENAME);
                     idName += System.currentTimeMillis();
                     info.fileName = idName;
                 }else {
-                    if(this.exsistLayer(idName)) {
+                    if(this.checkIfExsistLayer(idName)) {
                         GeoserverLoadLayerRequest geoserverLoadLayerRequest = this.geoserverConnectorStore.loadLayerRequest().withName(idName);
                         GeoserverLayer geoserverLayer = geoserverLoadLayerRequest.getResponse();
                         if(geoserverLayer.getLayerType().getType() != GeoserverLayerType.Raster.getType()) {
                             throw new ResourceNotFoundFault("Bad layer type for layer " + idName);
                         }
-                        if(this.exsistCoverageUrl(geoserverLayer.getLayerResource().getHref())) {
+                        if(this.checkIfExsistCoverageUrl(geoserverLayer.getLayerResource().getHref())) {
                             info.alreadyExists = Lists.<LayerPublishAction>newArrayList(LayerPublishAction.RENAME);
                             idName += System.currentTimeMillis();
                             info.fileName = idName;
@@ -811,10 +806,9 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
             String origName = shpFileName.substring(0, shpFileName.length() - 4);
             info.name = PublishUtility.removeSpecialCharactersFromString(userName).concat("_shp_").concat(origName);
             //Test if layer already exists
-            //TODO
-            if (this.restReader.getLayer(workspace, info.name) != null) {
+            if(this.checkIfExsistLayerInWorkspace(workspace, info.name)) {
                 info.alreadyExists = Lists.newArrayList(LayerPublishAction.values());
-            } else if (this.restReader.getLayer(info.name) != null) {//Verificare se il coverage cn quel nome esiste
+            } else if(this.checkIfExsistLayer(info.name)) {
                 info.alreadyExists = Lists.newArrayList(LayerPublishAction.RENAME);
             }
             //
@@ -867,14 +861,24 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
      */
     @Override
     public Boolean existsStyle(String styleName) {
-        //TODO
-        return restReader.existsStyle(styleName, TRUE);
+        try{
+            return this.geoserverConnectorStore.loadStyleRequest().withStyleName(styleName).withQuietOnNotFound(TRUE).exsist();
+        }catch (Exception e) {
+            final String error = "Error to load  style with name : " + styleName + " " + e;
+            logger.error(error);
+            return null;
+        }
     }
 
     @Override
     public List<String> getWorkspaceNames() {
-        //TODO
-        return restReader.getWorkspaceNames();
+        try{
+            return geoserverConnectorStore.loadWorkspacesRequest().getWorkpacesNames();
+        }catch (Exception e) {
+            final String error = "Error to load  workspace names: "+ e;
+            logger.error(error);
+            return null;
+        }
     }
 
     /**
@@ -887,8 +891,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
      */
     public boolean existsLayerInWorkspace(String workspace, String dataStoreName,
             String layerName) {
-        //TODO
-        return restReader.existsLayer(workspace, layerName, true);
+        return this.checkIfExsistLayerInWorkspace(layerName, workspace);
     }
 
     /**
@@ -899,8 +902,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
      * @return check whether the dataStore exists in the workspace
      */
     public boolean existsDataStore(String workspace, String dataStoreName) {
-        //TODO
-        return restReader.existsDatastore(workspace, dataStoreName, true);
+        return this.checkIfExsistDatastore(workspace, dataStoreName);
     }
 
     /**
@@ -911,8 +913,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
      * @return check whether the coverageStore exists in the workspace
      */
     public boolean existsCoverageStore(String workspace, String csStoreName) {
-        //TODO
-        return restReader.existsCoveragestore(workspace, csStoreName, true);
+        return this.checkIfExsistCoverageStore(workspace, csStoreName);
     }
 
     /**
@@ -933,14 +934,13 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
      * @return creates the workspace if not exists or returns the existing one
      */
     private String getWorkspace(String userName) {
-        //TODO
-        List<String> workspaces = restReader.getWorkspaceNames();
-        String userWorkspace = userName;
-        userWorkspace = PublishUtility.removeSpecialCharactersFromString(userWorkspace);
-        if (!workspaces.contains(userWorkspace)) {
-            restPublisher.createWorkspace(userWorkspace);
-        }
-        return userWorkspace;
+            List<String> workspaces = this.getWorkspaceNames();
+            String userWorkspace = userName;
+            userWorkspace = PublishUtility.removeSpecialCharactersFromString(userWorkspace);
+            if (!workspaces.contains(userWorkspace)) {
+                restPublisher.createWorkspace(userWorkspace);
+            }
+            return userWorkspace;
     }
 
     private Integer getCRSFromGeotiff(File file) {
@@ -1113,10 +1113,8 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                 if (infoPreview.getLayerPublishAction() != null) {
                     if (infoPreview.isIsShape()) {
                         if (GPSharedUtils.isNotEmpty(infoPreview.getNewName())
-                                //TODO
-                                && this.restReader.getLayer(
-                                PublishUtility.removeSpecialCharactersFromString(userName)
-                                        + "_shp_" + infoPreview.getNewName()) != null) {
+                                && this.checkIfExsistLayer(PublishUtility.removeSpecialCharactersFromString(userName)
+                                + "_shp_" + infoPreview.getNewName())) {
                             throw new ResourceNotFoundFault(
                                     "A layer named: " + infoPreview.getNewName() + " already exists");
                         }
@@ -1126,13 +1124,15 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                                     tempUserDir);
                         }
                     } else {
+                        GeoserverLoadWorkspaceLayerRequest geoserverLoadLayerRequest = this.geoserverConnectorStore.loadWorkspaceLayerRequest()
+                                .withLayerName(userName + "_" + infoPreview.getNewName()).withWorkspaceName(userWorkspace);
+                        GeoserverLayer geoserverLayer = geoserverLoadLayerRequest.getResponse();
+                        if (geoserverLayer.getLayerType().getType()  != GeoserverLayerType.Raster.getType()) {
+                            throw new RuntimeException("Bad layer type for layer " + geoserverLayer.getName());
+                        }
                         if (GPSharedUtils.isNotEmpty(infoPreview.getNewName())
-                                //TODO
-                                && this.restReader.getLayer(userWorkspace,
-                                userName + "_" + infoPreview.getNewName()) != null
-                                //TODO
-                                && this.restReader.getCoverage(this.restReader.getLayer(userWorkspace,
-                                userName + "_" + infoPreview.getNewName())) != null) {
+                                && this.checkIfExsistLayerInWorkspace(userWorkspace, userName + "_" + infoPreview.getNewName())
+                                && this.checkIfExsistCoverageUrl(geoserverLayer.getLayerResource().getHref())) {
                             throw new ResourceNotFoundFault(
                                     "A layer named: " + infoPreview.getNewName() + " already exists");
                         }
@@ -1150,9 +1150,8 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                                     infoPreview.getDataStoreName());
                             logger.debug(
                                     "********** processEPSGResult Before removing coverage store: " + coverageStoreName);
-                            //TODO
-                            if (restReader.getCoverage(userWorkspace,
-                                    coverageStoreName, coverageStoreName) != null) {
+                            if(this.geoserverConnectorStore.loadWorkspaceStoreCoverageRequest().withStore(coverageStoreName).withWorkspace(userWorkspace)
+                            .withCoverage(coverageStoreName).exsist()){
                                 logger.debug(
                                         "********** processEPSGResult removing coverage store: " + coverageStoreName);
                                 restPublisher.removeCoverageStore(userWorkspace,
@@ -1401,8 +1400,29 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
      * @return {@link Boolean}
      * @throws Exception
      */
-    private Boolean exsistLayer(String layerName) throws Exception{
-        return this.geoserverConnectorStore.loadLayerRequest().withName(layerName).exsist();
+    private Boolean checkIfExsistLayer(String layerName) {
+        try{
+            return this.geoserverConnectorStore.loadLayerRequest().withName(layerName).exsist();
+        } catch (Exception e){
+            final String error = "Error to load layer  name:" + layerName + " "  + e;
+            logger.error(error);
+            return FALSE;
+        }
+    }
+
+    /**
+     * @param layerName
+     * @param workspace
+     * @throws Exception
+     */
+    private Boolean checkIfExsistLayerInWorkspace(String layerName, String workspace) {
+        try{
+            return this.geoserverConnectorStore.loadWorkspaceLayerRequest().withLayerName(layerName).withWorkspaceName(workspace).exsist();
+        } catch (Exception e){
+            final String error = "Error to load layer with  workspace name:" + workspace + " "  + e;
+            logger.error(error);
+            return FALSE;
+        }
     }
 
     /**
@@ -1411,8 +1431,14 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
      * @return {@link Boolean}
      * @throws Exception
      */
-    private Boolean exsistWorkspace(String workspaceName, Boolean quietOnNotFound) throws Exception{
-        return this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName(workspaceName).withQuietOnNotFound(quietOnNotFound).exsist();
+    private Boolean checkIfExsistWorkspace(String workspaceName, Boolean quietOnNotFound) {
+        try{
+            return this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName(workspaceName).withQuietOnNotFound(quietOnNotFound).exsist();
+        } catch (Exception e){
+            final String error = "Error to load layer with  workspace name:" + workspaceName + " "  + e;
+            logger.error(error);
+            return FALSE;
+        }
     }
 
     /**
@@ -1421,8 +1447,46 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
      * @return {@link Boolean}
      * @throws Exception
      */
-    private Boolean exsistCoverageUrl(String url) throws Exception{
-        return this.geoserverConnectorStore.loadCoverageInfoWithUrl().withUrl(url).exsist();
+    private Boolean checkIfExsistCoverageUrl(String url) {
+        try{
+            return this.geoserverConnectorStore.loadCoverageInfoWithUrl().withUrl(url).exsist();
+        } catch (Exception e){
+            final String error = "Error to load coverage with url:" + url + " "  + e;
+            logger.error(error);
+            return FALSE;
+        }
+    }
+
+    /**
+     *
+     * @param workspace
+     * @param datastore
+     * @return
+     */
+    private Boolean checkIfExsistDatastore(String workspace, String datastore) {
+        try{
+            return  this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName(workspace).withStoreName(datastore).withQuietNotFound(TRUE).exsist();
+        } catch (Exception e){
+            final String error = "Error to load datastore with workspaceName:" + workspace + " and datastore name " + datastore + " "  + e;
+            logger.error(error);
+            return FALSE;
+        }
+    }
+
+    /**
+     *
+     * @param workspace
+     * @param datastore
+     * @return
+     */
+    private Boolean checkIfExsistCoverageStore(String workspace, String datastore) {
+        try{
+            return  this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace(workspace).withStore(datastore).exsist();
+        } catch (Exception e){
+            final String error = "Error to load datastore with workspaceName:" + workspace + " and datastore name " + datastore + " "  + e;
+            logger.error(error);
+            return FALSE;
+        }
     }
 
 }

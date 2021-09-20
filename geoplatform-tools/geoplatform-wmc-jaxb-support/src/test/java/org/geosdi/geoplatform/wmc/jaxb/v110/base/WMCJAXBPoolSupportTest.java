@@ -36,10 +36,10 @@
 package org.geosdi.geoplatform.wmc.jaxb.v110.base;
 
 import org.geosdi.geoplatform.wmc.support.v110.jaxb.context.pool.WMCJAXBContextPoolV110;
-import org.geosdi.geoplatform.wmc.support.v110.jaxb.repository.WMCJAXBContextProviderPoolV110;
 import org.geosdi.geoplatform.wmc.support.v110.jaxb.repository.WMCJAXBContextSupport;
 import org.geosdi.geoplatform.xml.wmc.v110.*;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,16 +47,23 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.StringWriter;
 import java.net.URL;
+import java.util.stream.Collectors;
+
+import static java.io.File.separator;
+import static java.lang.String.join;
+import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.wmc.support.v110.jaxb.repository.WMCJAXBContextProviderPoolV110.WMC_CONTEXT_POOL_KEY_V110;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class WMCJAXBPoolSupportTest {
 
     static {
-        wmcJAXBContextPool = WMCJAXBContextSupport
-                .getProvider(WMCJAXBContextProviderPoolV110.WMC_CONTEXT_POOL_KEY_V110);
+        wmcJAXBContextPool = WMCJAXBContextSupport.getProvider(WMC_CONTEXT_POOL_KEY_V110);
     }
 
     private static final Logger logger = LoggerFactory.getLogger(WMCJAXBPoolSupportTest.class);
@@ -75,40 +82,22 @@ public class WMCJAXBPoolSupportTest {
 
     @BeforeClass
     public static void loadFile() throws Exception {
-        String wmcFileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/WMC-v110.xml";
-        wmcFile = new File(wmcFileString);
-        String wmc1FileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/WMC-1-v110.xml";
-        wmc1File = new File(wmc1FileString);
-        String wmc2FileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/WMC-1-v110.xml";
-        wmc2File = new File(wmc2FileString);
-        String wmcLayerListFileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/WMCLayerTypeList-v110.xml";
-        wmcLayerListFile = new File(wmcLayerListFileString);
-        String wmcGeneralTypeFileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/WMCGeneralType-v110.xml";
-        wmcGeneralTypeFile = new File(wmcGeneralTypeFileString);
-        String wmcFormatListFileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/WMC-FormatList-v110.xml";
-        wmcFormatListFile = new File(wmcFormatListFileString);
-        String wmcStyleListFileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/WMC-StyleList-v110.xml";
-        wmcStyleListFile = new File(wmcStyleListFileString);
-        String wmcServerFileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/WMC-Server-v110.xml";
-        wmcServerFile = new File(wmcServerFileString);
-        String wmcLayerTypeFileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/WMCLayerType-v110.xml";
-        wmcLayerTypeFile = new File(wmcLayerTypeFileString);
-        String wmcExtensionTypeFileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/WMC-Extension-v110.xml";
-        wmcExtensionTypeFile = new File(wmcExtensionTypeFileString);
+        String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources")
+                .collect(Collectors.joining(separator));
+        wmcFile = new File(join(separator, basePath, "WMC-v110.xml"));
+        wmc1File = new File(join(separator, basePath, "WMC-1-v110.xml"));
+        wmc2File = new File(join(separator, basePath, "WMC-1-v110.xml"));
+        wmcLayerListFile = new File(join(separator, basePath, "WMCLayerTypeList-v110.xml"));
+        wmcGeneralTypeFile = new File(join(separator, basePath, "WMCGeneralType-v110.xml"));
+        wmcFormatListFile = new File(join(separator, basePath, "WMC-FormatList-v110.xml"));
+        wmcStyleListFile = new File(join(separator, basePath, "WMC-StyleList-v110.xml"));
+        wmcServerFile = new File(join(separator, basePath, "WMC-Server-v110.xml"));
+        wmcLayerTypeFile = new File(join(separator, basePath, "WMCLayerType-v110.xml"));
+        wmcExtensionTypeFile = new File(join(separator, basePath, "WMC-Extension-v110.xml"));
     }
 
     @Test
-    public void wmcV110SupportPoolTest() throws Exception {
+    public void a_wmcV110SupportPoolTest() throws Exception {
         ViewContextType viewContextType = wmcJAXBContextPool.unmarshal(wmcFile);
         logger.info("#####################{}\n", viewContextType);
         StringWriter writer = new StringWriter();
@@ -117,7 +106,7 @@ public class WMCJAXBPoolSupportTest {
     }
 
     @Test
-    public void wmc1V110SupportPoolTest() throws Exception {
+    public void b_wmc1V110SupportPoolTest() throws Exception {
         ViewContextType viewContextType = wmcJAXBContextPool.unmarshal(wmc1File);
         logger.info("#####################{}\n", viewContextType);
         StringWriter writer = new StringWriter();
@@ -126,7 +115,7 @@ public class WMCJAXBPoolSupportTest {
     }
 
     @Test
-    public void wmc2V110SupportPoolTest() throws Exception {
+    public void c_wmc2V110SupportPoolTest() throws Exception {
         ViewContextType viewContextType = wmcJAXBContextPool.unmarshal(wmc2File);
         logger.info("#####################{}\n", viewContextType);
         StringWriter writer = new StringWriter();
@@ -135,7 +124,7 @@ public class WMCJAXBPoolSupportTest {
     }
 
     @Test
-    public void wmcGeneralTypeV110SupportPoolTest() throws Exception {
+    public void d_wmcGeneralTypeV110SupportPoolTest() throws Exception {
         GeneralType generalType = (GeneralType) wmcJAXBContextPool.unmarshal(wmcGeneralTypeFile);
         logger.info("#####################{}\n", generalType);
         StringWriter writer = new StringWriter();
@@ -144,7 +133,7 @@ public class WMCJAXBPoolSupportTest {
     }
 
     @Test
-    public void wmcFormatListV110SupportPoolTest() throws Exception {
+    public void e_wmcFormatListV110SupportPoolTest() throws Exception {
         FormatListType formatListType = (FormatListType) wmcJAXBContextPool.unmarshal(wmcFormatListFile);
         logger.info("#####################{}\n", formatListType);
         StringWriter writer = new StringWriter();
@@ -153,7 +142,7 @@ public class WMCJAXBPoolSupportTest {
     }
 
     @Test
-    public void wmcStyleListV110SupportPoolTest() throws Exception {
+    public void f_wmcStyleListV110SupportPoolTest() throws Exception {
         StyleListType styleListType = (StyleListType) wmcJAXBContextPool.unmarshal(wmcStyleListFile);
         logger.info("#####################{}\n", styleListType);
         StringWriter writer = new StringWriter();
@@ -162,7 +151,7 @@ public class WMCJAXBPoolSupportTest {
     }
 
     @Test
-    public void wmcServerV110SupportPoolTest() throws Exception {
+    public void g_wmcServerV110SupportPoolTest() throws Exception {
         ServerType serverType = (ServerType) wmcJAXBContextPool.unmarshal(wmcServerFile);
         logger.info("#####################{}\n", serverType);
         StringWriter writer = new StringWriter();
@@ -171,7 +160,7 @@ public class WMCJAXBPoolSupportTest {
     }
 
     @Test
-    public void wmcLayerTypeV110SupportPoolTest() throws Exception {
+    public void h_wmcLayerTypeV110SupportPoolTest() throws Exception {
         LayerType layerType = (LayerType) wmcJAXBContextPool.unmarshal(wmcLayerTypeFile);
         logger.info("#####################{}\n", layerType);
         StringWriter writer = new StringWriter();
@@ -180,7 +169,7 @@ public class WMCJAXBPoolSupportTest {
     }
 
     @Test
-    public void wmcExtensionTypeV110SupportPoolTest() throws Exception {
+    public void i_wmcExtensionTypeV110SupportPoolTest() throws Exception {
         ExtensionType extensionType = (ExtensionType) wmcJAXBContextPool.unmarshal(wmcExtensionTypeFile);
         logger.info("#####################{}\n", extensionType);
         StringWriter writer = new StringWriter();
@@ -189,7 +178,7 @@ public class WMCJAXBPoolSupportTest {
     }
 
     @Test
-    public void wmcV110SupportPoolURLTest() throws Exception {
+    public void l_wmcV110SupportPoolURLTest() throws Exception {
         ViewContextType viewContextType = wmcJAXBContextPool
                 .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMC-v110.xml"));
         logger.info("#####################{}\n", viewContextType);
@@ -199,7 +188,7 @@ public class WMCJAXBPoolSupportTest {
     }
 
     @Test
-    public void wmc1V110SupportPoolURLTest() throws Exception {
+    public void m_wmc1V110SupportPoolURLTest() throws Exception {
         ViewContextType viewContextType = wmcJAXBContextPool
                 .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMC-1-v110.xml"));
         logger.info("#####################{}\n", viewContextType);
@@ -209,7 +198,7 @@ public class WMCJAXBPoolSupportTest {
     }
 
     @Test
-    public void wmc2V110SupportPoolURLTest() throws Exception {
+    public void n_wmc2V110SupportPoolURLTest() throws Exception {
         ViewContextType viewContextType = wmcJAXBContextPool
                 .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMC-2-v110.xml"));
         logger.info("#####################{}\n", viewContextType);
@@ -219,7 +208,7 @@ public class WMCJAXBPoolSupportTest {
     }
 
     @Test
-    public void wmcLayerListV110SupportPoolTest() throws Exception {
+    public void o_wmcLayerListV110SupportPoolTest() throws Exception {
         LayerListType layerListType = (LayerListType) wmcJAXBContextPool.unmarshal(wmcLayerListFile);
         logger.info("#####################{}\n", layerListType);
         StringWriter writer = new StringWriter();
@@ -228,7 +217,7 @@ public class WMCJAXBPoolSupportTest {
     }
 
     @Test
-    public void wmcLayerListV110SupportPoolURLTest() throws Exception {
+    public void p_wmcLayerListV110SupportPoolURLTest() throws Exception {
         LayerListType layerListType = (LayerListType) wmcJAXBContextPool
                 .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMCLayerTypeList-v110.xml"));
         logger.info("#####################{}\n", layerListType);
@@ -238,7 +227,7 @@ public class WMCJAXBPoolSupportTest {
     }
 
     @Test
-    public void wmcGeneralTypeV110SupportPoolURLTest() throws Exception {
+    public void q_wmcGeneralTypeV110SupportPoolURLTest() throws Exception {
         GeneralType generalType = (GeneralType) wmcJAXBContextPool
                 .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMCGeneralType-v110.xml"));
         logger.info("#####################{}\n", generalType);
@@ -248,7 +237,7 @@ public class WMCJAXBPoolSupportTest {
     }
 
     @Test
-    public void wmcFormatListV110SupportPoolURLTest() throws Exception {
+    public void r_wmcFormatListV110SupportPoolURLTest() throws Exception {
         FormatListType formatListType = (FormatListType) wmcJAXBContextPool
                 .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMC-FormatList-v110.xml"));
         logger.info("#####################{}\n", formatListType);
@@ -258,7 +247,7 @@ public class WMCJAXBPoolSupportTest {
     }
 
     @Test
-    public void wmcStyleListV110SupportPoolURLTest() throws Exception {
+    public void s_wmcStyleListV110SupportPoolURLTest() throws Exception {
         StyleListType styleListType = (StyleListType) wmcJAXBContextPool
                 .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMC-StyleList-v110.xml"));
         logger.info("#####################{}\n", styleListType);
@@ -268,7 +257,7 @@ public class WMCJAXBPoolSupportTest {
     }
 
     @Test
-    public void wmcServerV110SupportPoolURLTest() throws Exception {
+    public void t_wmcServerV110SupportPoolURLTest() throws Exception {
         ServerType serverType = (ServerType) wmcJAXBContextPool
                 .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMC-Server-v110.xml"));
         logger.info("#####################{}\n", serverType);
@@ -278,7 +267,7 @@ public class WMCJAXBPoolSupportTest {
     }
 
     @Test
-    public void wmcLayerTypeV110SupportPoolURLTest() throws Exception {
+    public void u_wmcLayerTypeV110SupportPoolURLTest() throws Exception {
         LayerType layerType = (LayerType) wmcJAXBContextPool
                 .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMCLayerType-v110.xml"));
         logger.info("#####################{}\n", layerType);
@@ -288,7 +277,7 @@ public class WMCJAXBPoolSupportTest {
     }
 
     @Test
-    public void wmcExtensionTypeV110SupportPoolURLTest() throws Exception {
+    public void v_wmcExtensionTypeV110SupportPoolURLTest() throws Exception {
         ExtensionType extensionType = (ExtensionType) wmcJAXBContextPool
                 .unmarshal(new URL("http://150.145.141.124/GONFALONI-Upload/WMC-Extension-v110.xml"));
         logger.info("#####################{}\n", extensionType);

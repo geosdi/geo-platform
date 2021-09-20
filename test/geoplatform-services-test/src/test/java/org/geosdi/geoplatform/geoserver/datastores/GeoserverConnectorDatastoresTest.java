@@ -47,6 +47,8 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.lang.Boolean.TRUE;
+
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
@@ -67,6 +69,14 @@ public class GeoserverConnectorDatastoresTest extends GeoserverConnectorTest {
         List<String> names = gpGeoserverLoadDatastores.getDataStores().stream()
                 .map(c -> c.getName()).collect(Collectors.toList());
         store.getNames().stream().forEach(n -> Assert.assertTrue("##################", names.contains(n)));
+    }
+
+    @Test
+    public void b_existDatastores() throws Exception {
+        Assert.assertTrue("####################", this.restReader.existsDatastore("tiger", "nyc", TRUE) ==
+                this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName("tiger").withStoreName("nyc").withQuietNotFound(TRUE).exsist());
+        Assert.assertTrue("####################", this.restReader.existsDatastore("tiger", "nycc", TRUE) ==
+                this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName("tiger").withStoreName("nycc").withQuietNotFound(TRUE).exsist());
     }
 
 }

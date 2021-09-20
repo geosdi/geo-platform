@@ -138,4 +138,13 @@ public class GeoserverConnectorLayersTest extends GeoserverConnectorTest {
         logger.info("####################UNIQUE_VALUES: {}\n", uniqueValues.getNames());
     }
 
+    @Test
+    public void g_existLayer() throws Exception {
+        Assert.assertTrue("####################", this.restReader.existsLayer("tiger", "poi", FALSE) ==
+                this.geoserverConnectorStore.loadWorkspaceLayerRequest().withLayerName("poi").withWorkspaceName("tiger").exsist());
+
+        Assert.assertTrue("####################", this.restReader.existsLayer("tigerr", "poi", FALSE) ==
+                this.geoserverConnectorStore.loadWorkspaceLayerRequest().withLayerName("poi").withWorkspaceName("tigerr").exsist());
+    }
+
 }

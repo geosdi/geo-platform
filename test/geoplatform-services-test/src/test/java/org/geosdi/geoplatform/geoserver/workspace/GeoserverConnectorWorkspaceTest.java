@@ -44,6 +44,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 import static java.lang.Boolean.TRUE;
 
 /**
@@ -75,12 +77,12 @@ public class GeoserverConnectorWorkspaceTest extends GeoserverConnectorTest {
     }
 
     @Test
-    public void c_getCoverage() throws  Exception {
+    public void c_exsistCoverage() throws  Exception {
         RESTCoverage restCoverage = this.restReader.getCoverage("tiger", "nyc", "poi");
         logger.info("###################{}\n", restCoverage);
 
         Boolean exsist = this.geoserverConnectorStore.loadWorkspaceStoreCoverageRequest().withCoverage("poi")
-                .withWorkspace("tiger").withStore("nyc").existCoverageStore();
+                .withWorkspace("tiger").withStore("nyc").exsist();
         logger.info("###################{}\n", exsist);
     }
 
@@ -90,6 +92,13 @@ public class GeoserverConnectorWorkspaceTest extends GeoserverConnectorTest {
                 withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaic.json").exsist());
         logger.info("########################EXSIST {}\n", this.geoserverConnectorStore.loadCoverageInfoWithUrl().
                 withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaicww.json").exsist());
+    }
+
+    @Test
+    public void e_getWorkspaceNames() throws Exception {
+        List<String> workspaces = restReader.getWorkspaceNames();
+        logger.info("###################WORKSPACE_NAME: {}\n", workspaces);
+        logger.info("###################WORKSPACE_NAME: {}\n", this.geoserverConnectorStore.loadWorkspacesRequest().getWorkpacesNames());
     }
 
 }

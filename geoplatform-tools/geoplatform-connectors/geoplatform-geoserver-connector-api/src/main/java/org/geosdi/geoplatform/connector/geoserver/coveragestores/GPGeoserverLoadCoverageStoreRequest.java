@@ -36,10 +36,10 @@
 package org.geosdi.geoplatform.connector.geoserver.coveragestores;
 
 import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.exsist.GPGeoserverExsistRequest;
 import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.GPGeoserverCoverageStore;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverLoadCoverageStoreRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -53,7 +53,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadCoverageStoreRequest extends GPJsonGetConnectorRequest<GPGeoserverCoverageStore, GeoserverLoadCoverageStoreRequest> implements GeoserverLoadCoverageStoreRequest {
+public class GPGeoserverLoadCoverageStoreRequest extends GPGeoserverExsistRequest<GPGeoserverCoverageStore, GeoserverLoadCoverageStoreRequest> implements GeoserverLoadCoverageStoreRequest {
 
     private final ThreadLocal<String> workspace;
     private final ThreadLocal<String> store;
@@ -75,6 +75,7 @@ public class GPGeoserverLoadCoverageStoreRequest extends GPJsonGetConnectorReque
     @Override
     public GeoserverLoadCoverageStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspace.set(theWorkspace);
+        super.init();
         return self();
     }
 

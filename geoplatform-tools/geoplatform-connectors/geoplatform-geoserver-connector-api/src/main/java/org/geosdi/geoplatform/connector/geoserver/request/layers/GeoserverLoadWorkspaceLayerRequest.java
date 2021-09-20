@@ -36,9 +36,12 @@
 package org.geosdi.geoplatform.connector.geoserver.request.layers;
 
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
+import org.geosdi.geoplatform.connector.geoserver.request.exsist.GeoserverExsistRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import static javax.annotation.meta.When.NEVER;
 
@@ -46,7 +49,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverLoadWorkspaceLayerRequest extends GPJsonConnectorRequest<GeoserverLayer, GeoserverLoadWorkspaceLayerRequest> {
+public interface GeoserverLoadWorkspaceLayerRequest extends GPJsonConnectorRequest<GeoserverLayer, GeoserverLoadWorkspaceLayerRequest>, GeoserverExsistRequest {
 
     /**
      * @param theWorkspaceName
@@ -59,4 +62,10 @@ public interface GeoserverLoadWorkspaceLayerRequest extends GPJsonConnectorReque
      * @return {@link GeoserverLoadWorkspaceLayerRequest}
      */
     GeoserverLoadWorkspaceLayerRequest withLayerName(@Nonnull(when = NEVER) String theLayerName);
+
+    /**
+     * @param theQuietOnNotFound
+     * @return {@link GeoserverStyleRequest}
+     */
+    GeoserverLoadWorkspaceLayerRequest withQuietOnNotFound(@Nullable Boolean theQuietOnNotFound);
 }

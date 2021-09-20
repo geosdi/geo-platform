@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connector.geoserver.request.coveragestores;
 
 import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.GPGeoserverCoverageStore;
+import org.geosdi.geoplatform.connector.geoserver.request.exsist.GeoserverExsistRequest;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
@@ -46,7 +47,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverLoadCoverageStoreRequest extends GPJsonConnectorRequest<GPGeoserverCoverageStore, GeoserverLoadCoverageStoreRequest> {
+public interface GeoserverLoadCoverageStoreRequest extends GPJsonConnectorRequest<GPGeoserverCoverageStore, GeoserverLoadCoverageStoreRequest>, GeoserverExsistRequest {
 
     /**
      * @param theWorkspace

@@ -45,6 +45,9 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -85,5 +88,10 @@ public class GPGeoserverLoadWorkspacesRequest extends GPGeoserverGetConnectorReq
     @Override
     protected Class<GPGeoserverEmptyWorkspaces> forEmptyResponse() {
         return GPGeoserverEmptyWorkspaces.class;
+    }
+
+    @Override
+    public List<String> getWorkpacesNames() throws Exception {
+        return this.getResponse().getWorkspaces().stream().map(c -> c.getWorkspaceName()).collect(Collectors.toList());
     }
 }

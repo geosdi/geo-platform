@@ -10,7 +10,8 @@
 
     <context:annotation-config />
     
-    <context:component-scan base-package="org.geosdi.geoplatform.services"/>
+    <context:component-scan base-package="org.geosdi.geoplatform.services,
+                                          org.geosdi.geoplatform.shared"/>
     
     <bean id="casPublisherService" class="org.geosdi.geoplatform.services.GPPublisherBasicServiceImpl">
          <!--the server to connect--> 

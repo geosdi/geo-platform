@@ -159,4 +159,18 @@ public abstract class GPGeoserverLayersConnector extends GPGeoserverNamespacesCo
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
+
+    /**
+     * @return {@link GeoserverDeleteLayerRequest}
+     */
+    @Override
+    public GeoserverDeleteLayerRequest deleteLayerRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverDeleteLayerRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
 }

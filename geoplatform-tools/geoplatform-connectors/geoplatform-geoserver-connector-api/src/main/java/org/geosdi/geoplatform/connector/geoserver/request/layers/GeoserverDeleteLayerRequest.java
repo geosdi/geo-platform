@@ -33,62 +33,23 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.layers;
+package org.geosdi.geoplatform.connector.geoserver.request.layers;
 
-import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.layers.*;
-import org.geosdi.geoplatform.connector.store.namespaces.GeoserverNamespacesConnectorStore;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public abstract class GeoserverLayersConnectorStore extends GeoserverNamespacesConnectorStore implements GPGeoserverLayersConnectorStore {
+public interface GeoserverDeleteLayerRequest extends GPJsonConnectorRequest<Boolean, GeoserverDeleteLayerRequest> {
 
     /**
-     * @param theServer
+     * @param theLayerName
      */
-    protected GeoserverLayersConnectorStore(GPGeoserverConnector theServer) {
-        super(theServer);
-    }
+    GeoserverDeleteLayerRequest withLayerName(String theLayerName);
 
     /**
-     * @return {@link GeoserverLayersRequest}
+     * @param theRecurse
      */
-    @Override
-    public GeoserverLayersRequest loadLayersRequest() {
-        return this.server.loadLayersRequest();
-    }
-
-    /**
-     * @return {@link GeoserverLoadLayerRequest}
-     */
-    @Override
-    public GeoserverLoadLayerRequest loadLayerRequest() {
-        return this.server.loadLayerRequest();
-    }
-
-    /**
-     * @return {@link GeoserverLoadWorkspaceLayersRequest}
-     */
-    @Override
-    public GeoserverLoadWorkspaceLayersRequest loadWorkspaceLayersRequest() {
-        return this.server.loadWorkspaceLayersRequest();
-    }
-
-    /**
-     * @return {@link GeoserverLoadWorkspaceLayerRequest}
-     */
-    @Override
-    public GeoserverLoadWorkspaceLayerRequest loadWorkspaceLayerRequest() {
-        return this.server.loadWorkspaceLayerRequest();
-    }
-
-    /**
-     * @return {@link GeoserverDeleteLayerRequest}
-     */
-    @Override
-    public GeoserverDeleteLayerRequest deleteLayerRequest() {
-        return this.server.deleteLayerRequest();
-    }
+    GeoserverDeleteLayerRequest withRecurse(Boolean theRecurse);
 }

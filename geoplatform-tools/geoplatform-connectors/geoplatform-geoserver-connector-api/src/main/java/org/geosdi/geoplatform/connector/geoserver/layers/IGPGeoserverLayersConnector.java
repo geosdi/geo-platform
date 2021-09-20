@@ -36,10 +36,7 @@
 package org.geosdi.geoplatform.connector.geoserver.layers;
 
 import org.geosdi.geoplatform.connector.geoserver.namespaces.IGPGeoserverNamespacesConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLayersRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadLayerRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadWorkspaceLayerRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadWorkspaceLayersRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.layers.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -66,4 +63,9 @@ public interface IGPGeoserverLayersConnector extends IGPGeoserverNamespacesConne
      * @return {@link GeoserverLoadWorkspaceLayerRequest}
      */
     GeoserverLoadWorkspaceLayerRequest loadWorkspaceLayerRequest();
+
+    /**
+     * @return {@link GPGeoserverDeleteLayerRequest}
+     */
+    GeoserverDeleteLayerRequest deleteLayerRequest();
 }

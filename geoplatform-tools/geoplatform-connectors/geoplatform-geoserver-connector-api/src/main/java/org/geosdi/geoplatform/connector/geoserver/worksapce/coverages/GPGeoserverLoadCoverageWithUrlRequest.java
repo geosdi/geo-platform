@@ -36,11 +36,11 @@
 package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 
 import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.exsist.GPGeoserverExsistRequest;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageWithUrlRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -53,7 +53,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverLoadCoverageWithUrlRequest extends GPJsonGetConnectorRequest<GPGeoserverCoverageInfo, GeoserverLoadCoverageWithUrlRequest> implements GeoserverLoadCoverageWithUrlRequest {
+public class GPGeoserverLoadCoverageWithUrlRequest extends GPGeoserverExsistRequest<GPGeoserverCoverageInfo, GeoserverLoadCoverageWithUrlRequest> implements GeoserverLoadCoverageWithUrlRequest {
 
     private final ThreadLocal<String> urlPath;
 
@@ -73,6 +73,7 @@ public class GPGeoserverLoadCoverageWithUrlRequest extends GPJsonGetConnectorReq
     @Override
     public GeoserverLoadCoverageWithUrlRequest withUrl(@Nonnull(when = NEVER) String theUrl) {
         this.urlPath.set(theUrl);
+        super.init();
         return self();
     }
 

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.geoserver.workspace;
 
+import it.geosolutions.geoserver.rest.decoder.RESTCoverage;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageWithUrlRequest;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
@@ -43,7 +44,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -67,10 +68,28 @@ public class GeoserverConnectorWorkspaceTest extends GeoserverConnectorTest {
 
     @Test
     public void b_existWorkspace() throws Exception {
-        Assert.assertTrue("####################", this.restReader.existsWorkspace("tiger", FALSE) ==
-                this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("tiger").existWorkspace());
-        Assert.assertTrue("####################", this.restReader.existsWorkspace("tigeraa", FALSE) ==
-                this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("tigeraa").existWorkspace());
+        Assert.assertTrue("####################", this.restReader.existsWorkspace("tiger", TRUE) ==
+                this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("tiger").withQuietOnNotFound(TRUE).exsist());
+        Assert.assertTrue("####################", this.restReader.existsWorkspace("tigeraa", TRUE) ==
+                this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("tigeraa").withQuietOnNotFound(TRUE).exsist());
+    }
+
+    @Test
+    public void c_getCoverage() throws  Exception {
+        RESTCoverage restCoverage = this.restReader.getCoverage("tiger", "nyc", "poi");
+        logger.info("###################{}\n", restCoverage);
+
+        Boolean exsist = this.geoserverConnectorStore.loadWorkspaceStoreCoverageRequest().withCoverage("poi")
+                .withWorkspace("tiger").withStore("nyc").existCoverageStore();
+        logger.info("###################{}\n", exsist);
+    }
+
+    @Test()
+    public void d_exsistCoverageUrl() throws Exception {
+        logger.info("########################EXSIST {}\n", this.geoserverConnectorStore.loadCoverageInfoWithUrl().
+                withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaic.json").exsist());
+        logger.info("########################EXSIST {}\n", this.geoserverConnectorStore.loadCoverageInfoWithUrl().
+                withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaicww.json").exsist());
     }
 
 }

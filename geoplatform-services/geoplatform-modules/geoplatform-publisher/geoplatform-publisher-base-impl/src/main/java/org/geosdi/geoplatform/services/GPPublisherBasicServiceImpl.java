@@ -522,10 +522,14 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
 
     @Override
     public Boolean createWorkspace(String workspaceName, boolean silent) throws ResourceNotFoundFault {
-        //TODO
-        boolean exists = this.restReader.existsWorkspace(workspaceName, true);
-        if (exists && !silent) {
-            throw new ResourceNotFoundFault("The workspace: " + workspaceName + " already exists");
+        try {
+            if (this.exsistWorkspace(workspaceName, TRUE) && !silent) {
+                throw new ResourceNotFoundFault("The workspace: " + workspaceName + " already exists");
+            }
+        }catch (Exception e) {
+            final String error = "Error to load workspace with  name:" + workspaceName + " "  + e;
+            logger.error(error);
+            throw new ResourceNotFoundFault(error, e.getCause());
         }
         return restPublisher.createWorkspace(workspaceName);
     }
@@ -661,18 +665,31 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                     + "_" + origName;
             info.name = new String(idName);
             File oldGeotifFile = new File(tempUserTifDir, tifFileName);
-            //TODO
-            if (this.restReader.getCoverage(workspace, idName, idName) != null) {
-                info.alreadyExists = Lists.<LayerPublishAction>newArrayList(
-                        LayerPublishAction.OVERRIDE, LayerPublishAction.RENAME);
-                idName += System.currentTimeMillis();
-                info.fileName = idName;
-                //TODO
-            } else if (this.restReader.getLayer(idName) != null
-                    && this.restReader.getCoverage(this.restReader.getLayer(idName)) != null) {//Verificare se il coverage cn quel nome esiste
-                info.alreadyExists = Lists.<LayerPublishAction>newArrayList(LayerPublishAction.RENAME);
-                idName += System.currentTimeMillis();
-                info.fileName = idName;
+            try{
+                if(this.geoserverConnectorStore.loadWorkspaceStoreCoverageRequest().withCoverage(idName)
+                        .withWorkspace(workspace).withStore(idName).existCoverageStore()) {
+                    info.alreadyExists = Lists.<LayerPublishAction>newArrayList(
+                            LayerPublishAction.OVERRIDE, LayerPublishAction.RENAME);
+                    idName += System.currentTimeMillis();
+                    info.fileName = idName;
+                }else {
+                    if(this.exsistLayer(idName)) {
+                        GeoserverLoadLayerRequest geoserverLoadLayerRequest = this.geoserverConnectorStore.loadLayerRequest().withName(idName);
+                        GeoserverLayer geoserverLayer = geoserverLoadLayerRequest.getResponse();
+                        if(geoserverLayer.getLayerType().getType() != GeoserverLayerType.Raster.getType()) {
+                            throw new ResourceNotFoundFault("Bad layer type for layer " + idName);
+                        }
+                        if(this.exsistCoverageUrl(geoserverLayer.getLayerResource().getHref())) {
+                            info.alreadyExists = Lists.<LayerPublishAction>newArrayList(LayerPublishAction.RENAME);
+                            idName += System.currentTimeMillis();
+                            info.fileName = idName;
+                        }
+                    }
+                }
+            }catch (Exception e) {
+                final String error = "Error to load coverage with  workspace name:" + workspace + " "  + e;
+                logger.error(error);
+                throw new ResourceNotFoundFault(error, e.getCause());
             }
             File newGeoTifFile = PublishUtility.copyFile(oldGeotifFile,
                     tempUserTifDir, idName + ".tif", true);
@@ -1377,4 +1394,35 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
         infoPreview.setUrl(infoPreview.getUrl() + "/wms");
         return infoPreview;
     }
+
+    /**
+     *
+     * @param layerName
+     * @return {@link Boolean}
+     * @throws Exception
+     */
+    private Boolean exsistLayer(String layerName) throws Exception{
+        return this.geoserverConnectorStore.loadLayerRequest().withName(layerName).exsist();
+    }
+
+    /**
+     *
+     * @param workspaceName
+     * @return {@link Boolean}
+     * @throws Exception
+     */
+    private Boolean exsistWorkspace(String workspaceName, Boolean quietOnNotFound) throws Exception{
+        return this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName(workspaceName).withQuietOnNotFound(quietOnNotFound).exsist();
+    }
+
+    /**
+     *
+     * @param url
+     * @return {@link Boolean}
+     * @throws Exception
+     */
+    private Boolean exsistCoverageUrl(String url) throws Exception{
+        return this.geoserverConnectorStore.loadCoverageInfoWithUrl().withUrl(url).exsist();
+    }
+
 }

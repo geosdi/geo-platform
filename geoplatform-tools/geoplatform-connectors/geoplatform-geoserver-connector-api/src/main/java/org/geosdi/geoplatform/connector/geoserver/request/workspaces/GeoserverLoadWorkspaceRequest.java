@@ -35,16 +35,18 @@
 package org.geosdi.geoplatform.connector.geoserver.request.workspaces;
 
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverLoadWorkspace;
+import org.geosdi.geoplatform.connector.geoserver.request.exsist.GeoserverExsistRequest;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.meta.When;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverLoadWorkspaceRequest extends GPJsonConnectorRequest<GPGeoserverLoadWorkspace, GeoserverLoadWorkspaceRequest> {
+public interface GeoserverLoadWorkspaceRequest extends GPJsonConnectorRequest<GPGeoserverLoadWorkspace, GeoserverLoadWorkspaceRequest>, GeoserverExsistRequest {
 
     /**
      * @param theWorkspaceName
@@ -53,7 +55,8 @@ public interface GeoserverLoadWorkspaceRequest extends GPJsonConnectorRequest<GP
     GeoserverLoadWorkspaceRequest withWorkspaceName(@Nonnull(when = When.NEVER) String theWorkspaceName);
 
     /**
-     * @return {@link Boolean}
+     * @param theQuietOnNotFound
+     * @return {@link GeoserverLoadWorkspaceRequest}
      */
-    Boolean existWorkspace() throws Exception;
+    GeoserverLoadWorkspaceRequest withQuietOnNotFound(@Nullable Boolean theQuietOnNotFound);
 }

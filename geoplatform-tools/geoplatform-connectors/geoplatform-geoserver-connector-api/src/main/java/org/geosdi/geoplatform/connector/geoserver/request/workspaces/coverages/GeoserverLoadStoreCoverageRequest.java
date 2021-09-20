@@ -72,4 +72,12 @@ public interface GeoserverLoadStoreCoverageRequest extends GPJsonConnectorReques
      * @return {@link GeoserverLoadStoreCoverageRequest}
      */
     GeoserverLoadStoreCoverageRequest withQuietOnNotFound(@Nullable Boolean theQuietOnNotFound);
+
+    /**
+     *
+     * @return {@link Boolean}
+     * @throws Exception
+     */
+    Boolean existCoverageStore() throws Exception;
+
 }

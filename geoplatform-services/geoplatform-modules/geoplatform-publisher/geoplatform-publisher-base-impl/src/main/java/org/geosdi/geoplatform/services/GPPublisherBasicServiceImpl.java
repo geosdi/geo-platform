@@ -376,7 +376,13 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
         this.removeLayer(layerName);
         restPublisher.unpublishFeatureType(userWorkspace, layerName, layerName);
         //reload();
-        restPublisher.removeDatastore(userWorkspace, layerName, TRUE);
+        try{
+            this.geoserverConnectorStore.deleteDatastoreRequest().withDatastoreName(layerName).withWorkspaceName(userWorkspace).withRecurse(TRUE).getResponse();
+        }catch (Exception e) {
+            final String error = "Error to delete store with  name: " +layerName + e;
+            logger.error(error);
+            return FALSE;
+        }
         return TRUE;
     }
 

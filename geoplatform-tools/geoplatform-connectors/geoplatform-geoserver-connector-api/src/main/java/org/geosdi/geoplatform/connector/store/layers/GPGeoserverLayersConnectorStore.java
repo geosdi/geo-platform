@@ -69,4 +69,10 @@ public interface GPGeoserverLayersConnectorStore extends GPGeoserverNamespacesCo
      * @return {@link GeoserverDeleteLayerRequest}
      */
     GeoserverDeleteLayerRequest deleteLayerRequest();
+
+    /**
+     * @return {@link GeoserverUpdateLayerRequest}
+     */
+    GeoserverUpdateLayerRequest updateLayerRequest();
+
 }

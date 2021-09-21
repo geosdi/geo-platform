@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.geoserver.model.layers;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverStyle;
@@ -52,6 +53,7 @@ import java.util.List;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Getter
+@Setter
 @ToString
 @XmlAccessorType(XmlAccessType.FIELD)
 public class GeoserverLayerStyle implements Serializable {

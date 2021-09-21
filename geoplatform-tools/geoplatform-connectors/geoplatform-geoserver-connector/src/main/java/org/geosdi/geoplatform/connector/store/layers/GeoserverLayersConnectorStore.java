@@ -91,4 +91,12 @@ public abstract class GeoserverLayersConnectorStore extends GeoserverNamespacesC
     public GeoserverDeleteLayerRequest deleteLayerRequest() {
         return this.server.deleteLayerRequest();
     }
+
+    /**
+     * @return {@link GeoserverUpdateLayerRequest}
+     */
+    @Override
+    public GeoserverUpdateLayerRequest updateLayerRequest() {
+        return this.server.updateLayerRequest();
+    }
 }

@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connector.geoserver.model.layers;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.resource.GeoserverLayerResource;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
@@ -48,6 +49,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Getter
+@Setter
 @ToString
 @XmlTransient
 public abstract class GeoserverAbstractLayer implements GeoserverLayer {

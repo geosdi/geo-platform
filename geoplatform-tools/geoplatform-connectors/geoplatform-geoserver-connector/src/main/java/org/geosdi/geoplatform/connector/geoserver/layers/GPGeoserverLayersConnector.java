@@ -173,4 +173,18 @@ public abstract class GPGeoserverLayersConnector extends GPGeoserverNamespacesCo
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
+
+    /**
+     * @return {@link GeoserverUpdateLayerRequest}
+     */
+    @Override
+    public GeoserverUpdateLayerRequest updateLayerRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverUpdateLayerRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
 }

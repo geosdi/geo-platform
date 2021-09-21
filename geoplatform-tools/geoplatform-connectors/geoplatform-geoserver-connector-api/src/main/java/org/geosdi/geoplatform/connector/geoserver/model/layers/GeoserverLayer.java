@@ -80,9 +80,19 @@ public interface GeoserverLayer extends Serializable {
     GPGeoserverStyle getDefaultStyle();
 
     /**
+     * @param theGPGeoserverStyle
+     */
+    void setDefaultStyle(GPGeoserverStyle theGPGeoserverStyle);
+
+    /**
      * @return {@link GeoserverLayerStyle}
      */
     GeoserverLayerStyle getLayerStyle();
+
+    /**
+     * @param theGeoserverLayerStyle
+     */
+    void setLayerStyle(GeoserverLayerStyle theGeoserverLayerStyle);
 
     /**
      * @return {@link GeoserverLayerResource}
@@ -93,4 +103,15 @@ public interface GeoserverLayer extends Serializable {
      * @return {@link GeoserverLayerAttribution}
      */
     GeoserverLayerAttribution getLayerAttribution();
+
+    /**
+     * @param thePath
+     */
+    void setPath(String thePath);
+
+    /**
+     * @param theName
+     */
+    void setName(String theName);
+
 }

@@ -35,10 +35,14 @@
  */
 package org.geosdi.geoplatform.geoserver.layers;
 
+import com.google.common.collect.Lists;
 import it.geosolutions.geoserver.rest.decoder.RESTLayer;
 import it.geosolutions.geoserver.rest.decoder.RESTServiceUniqueValues;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
+import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayerStyle;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverStyle;
 import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadFeatureTypeWithUrlRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadLayerRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadWorkspaceLayerRequest;
@@ -140,19 +144,48 @@ public class GeoserverConnectorLayersTest extends GeoserverConnectorTest {
     }
 
     @Test
-    public void g_existLayer() throws Exception {
-        Assert.assertTrue("####################", this.restReader.existsLayer("tiger", "poi", FALSE) ==
-                this.geoserverConnectorStore.loadWorkspaceLayerRequest().withLayerName("poi").withWorkspaceName("tiger").exsist());
+    public void g_existLayerInWorkspace() throws Exception {
+        GeoserverLoadWorkspaceLayerRequest geoserverLoadWorkspaceLayerRequest = this.geoserverConnectorStore.loadWorkspaceLayerRequest().withLayerName("poi").withWorkspaceName("tiger");
+        Boolean result = geoserverLoadWorkspaceLayerRequest.exsist();
+        logger.info("################{}\n", geoserverLoadWorkspaceLayerRequest.getResponse());
+
+        Assert.assertTrue("####################", this.restReader.existsLayer("tiger", "poi", FALSE) == result);
         Assert.assertTrue("####################", this.restReader.existsLayer("tigerr", "poi", FALSE) ==
                 this.geoserverConnectorStore.loadWorkspaceLayerRequest().withLayerName("poi").withWorkspaceName("tigerr").exsist());
     }
 
-    @Ignore
+    @Ignore(value = "Layer poi_vito may be not present")
     @Test
     public void h_deleteLayer() throws Exception {
         logger.info("##################DELETE_LAYER {}\n", this.geoserverConnectorStore.deleteLayerRequest().withLayerName("poi_vito").getResponse());
         Assert.assertFalse("####################",
                 this.geoserverConnectorStore.loadLayerRequest().withName("poi_vito").exsist());
+    }
+
+    @Ignore(value = "Layer poi_vito may be not present")
+    @Test
+    public void i_updateLayer() throws Exception {
+
+        GeoserverLayer geoserverLayer = this.geoserverConnectorStore.loadWorkspaceLayerRequest().withWorkspaceName("tiger")
+                .withLayerName("poi_vito")
+                .getResponse();
+        logger.info("##################LAYER {}\n",geoserverLayer);
+        GeoserverLayerStyle layerStyle = geoserverLayer.getLayerStyle() != null ? geoserverLayer.getLayerStyle() : new GeoserverLayerStyle();
+        List<IGPGeoserverStyle> styles = layerStyle.getStyles() != null ? geoserverLayer.getLayerStyle().getStyles() : Lists.newArrayList();
+        GPGeoserverStyle gpGeoserverStyle = new GPGeoserverStyle();
+        gpGeoserverStyle.setName("burg");
+        styles.add(gpGeoserverStyle);
+        layerStyle.setStyles(styles);
+        geoserverLayer.setLayerStyle(layerStyle);
+        logger.info("##################RESPONSE {}\n", this.geoserverConnectorStore.updateLayerRequest()
+                .withWorkspaceName("tiger")
+                .withLayerBody(geoserverLayer)
+                .withLayerName("poi_vito").getResponse());
+
+        logger.info("##################UPDATED_LAYER {}\n",this.geoserverConnectorStore.loadWorkspaceLayerRequest().withWorkspaceName("tiger")
+                .withLayerName("poi_vito")
+                .getResponse());
+
     }
 
 }

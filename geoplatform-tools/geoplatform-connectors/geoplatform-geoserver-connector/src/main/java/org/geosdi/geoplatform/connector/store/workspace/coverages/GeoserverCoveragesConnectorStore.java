@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.connector.store.workspace.coverages;
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoveragesRequest;
+import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.GPGeoserverDeleteCoverageRequest;
 import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.GPGeoserverLoadCoverageWithUrlRequest;
 import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.GPGeoserverLoadStoreCoverageRequest;
 import org.geosdi.geoplatform.connector.store.workspace.GeoserverWorkspacesConnectorStore;
@@ -85,5 +86,13 @@ public abstract class GeoserverCoveragesConnectorStore extends GeoserverWorkspac
     @Override
     public GPGeoserverLoadCoverageWithUrlRequest loadCoverageInfoWithUrl() {
         return this.server.loadCoverageInfoWithUrl();
+    }
+
+    /**
+     * @return {@link GPGeoserverDeleteCoverageRequest}
+     */
+    @Override
+    public GPGeoserverDeleteCoverageRequest deleteCoverageInCoverageStore() {
+        return this.server.deleteCoverageInCoverageStoreRequest();
     }
 }

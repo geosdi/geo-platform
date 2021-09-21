@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.geoserver.workspace;
 
-import it.geosolutions.geoserver.rest.decoder.RESTCoverage;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GeoserverCreateWorkspaceBody;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageWithUrlRequest;
@@ -75,24 +74,6 @@ public class GeoserverConnectorWorkspaceTest extends GeoserverConnectorTest {
                 this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("tiger").withQuietOnNotFound(TRUE).exsist());
         Assert.assertTrue("####################", this.restReader.existsWorkspace("tigeraa", TRUE) ==
                 this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("tigeraa").withQuietOnNotFound(TRUE).exsist());
-    }
-
-    @Test
-    public void c_exsistCoverage() throws  Exception {
-        RESTCoverage restCoverage = this.restReader.getCoverage("tiger", "nyc", "poi");
-        logger.info("###################{}\n", restCoverage);
-
-        Boolean exsist = this.geoserverConnectorStore.loadWorkspaceStoreCoverageRequest().withCoverage("poi")
-                .withWorkspace("tiger").withStore("nyc").exsist();
-        logger.info("###################{}\n", exsist);
-    }
-
-    @Test()
-    public void d_exsistCoverageUrl() throws Exception {
-        logger.info("########################EXSIST {}\n", this.geoserverConnectorStore.loadCoverageInfoWithUrl().
-                withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaic.json").exsist());
-        logger.info("########################EXSIST {}\n", this.geoserverConnectorStore.loadCoverageInfoWithUrl().
-                withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaicww.json").exsist());
     }
 
     @Test

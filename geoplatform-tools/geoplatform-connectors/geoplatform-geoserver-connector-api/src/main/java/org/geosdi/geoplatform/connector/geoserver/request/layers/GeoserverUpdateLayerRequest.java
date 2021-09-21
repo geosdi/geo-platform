@@ -33,38 +33,11 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.styles;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
-import java.io.Serializable;
+package org.geosdi.geoplatform.connector.geoserver.request.layers;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-@JsonDeserialize(as = GPGeoserverStyle.class)
-public interface IGPGeoserverStyle extends Serializable {
-
-    /**
-     * @return {@link String}
-     */
-    String getName();
-
-    /**
-     * @return {@link String}
-     */
-    String getHref();
-
-    /**
-     * @param theName
-     * @return
-     */
-    void setName(String theName);
-
-    /**
-     * @param theHref
-     * @return
-     */
-    void setHref(String theHref);
+public interface GeoserverUpdateLayerRequest extends GeoserverBaseCreateLayerRequest<GeoserverUpdateLayerRequest, Boolean> {
 }

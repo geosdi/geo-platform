@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connector.geoserver.model.styles;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -46,6 +47,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Getter
+@Setter
 @ToString
 @XmlAccessorType(XmlAccessType.FIELD)
 public class GPGeoserverStyle implements IGPGeoserverStyle {

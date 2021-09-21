@@ -67,4 +67,14 @@ public interface GeoserverLayerResource extends Serializable {
      * @return {@link String}
      */
     String getHref();
+
+    /**
+     * @param theName
+     */
+    void setName(String theName);
+
+    /**
+     * @param theHref
+     */
+    void setHref(String theHref);
 }

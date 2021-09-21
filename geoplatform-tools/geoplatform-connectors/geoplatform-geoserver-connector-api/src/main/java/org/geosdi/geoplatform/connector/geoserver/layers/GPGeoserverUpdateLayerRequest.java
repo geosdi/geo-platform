@@ -126,11 +126,9 @@ public class GPGeoserverUpdateLayerRequest extends GPJsonPutConnectorRequest<Boo
     @Override
     protected String createUriPath() throws Exception {
         String workspaceName = this.workspaceName.get();
-        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()),
-                "The Parameter workspaceName must not be null or an empty string.");
+        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspaceName must not be null or an empty string.");
         String layerName = this.layerName.get();
-        checkArgument((layerName != null) && !(layerName.trim().isEmpty()),
-                "The Parameter layerName must not be null or an empty string.");
+        checkArgument((layerName != null) && !(layerName.trim().isEmpty()), "The Parameter layerName must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
         return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/layers/").concat(layerName)
                 : baseURI.concat("/workspaces/").concat(workspaceName).concat("/layers/").concat(layerName)));

@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.connector.jackson;
 import org.geosdi.geoplatform.connector.geoserver.model.metadata.GPGeoserverMetadataParam;
 import org.geosdi.geoplatform.support.jackson.mapper.xml.GPBaseJacksonXmlMapper;
 import org.geosdi.geoplatform.support.jackson.mapper.xml.GPJacksonXmlMapper;
-import org.geosdi.geoplatform.support.jackson.xml.GPJacksonXmlSupport;
+import org.geosdi.geoplatform.support.jackson.xml.jaxb.GPJacksonJAXBXmlSupport;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -61,7 +61,7 @@ public class GPGeoserverMetadataParamJacksonTest {
     private static final Logger logger = LoggerFactory.getLogger(GPGeoserverMetadataParamJacksonTest.class);
     //
     private static final GPJacksonXmlMapper<GPGeoserverMetadataParam> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(GPGeoserverMetadataParam.class,
-            new GPJacksonXmlSupport());
+            new GPJacksonJAXBXmlSupport());
 
     @Test
     public void a_marshalMetadataParamAsXmlStringTest() throws Exception {

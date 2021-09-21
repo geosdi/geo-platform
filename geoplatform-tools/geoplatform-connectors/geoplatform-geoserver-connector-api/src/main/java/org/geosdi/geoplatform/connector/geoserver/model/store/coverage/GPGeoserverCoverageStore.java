@@ -40,9 +40,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverWorkspace;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverWorkspace;
 
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -57,7 +59,7 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 @ToString
 @XmlRootElement(name = "coverageStore")
 @XmlAccessorType(FIELD)
-@XmlType(propOrder = {"name", "description", "type", "workspace", "enabled", "_default", "url", "coverages"})
+@XmlType(propOrder = {"name", "description", "type", "workspace", "enabled", "isDefault", "url", "coverages"})
 public class GPGeoserverCoverageStore implements IGPGeoserverCoverageStore {
 
     private static final long serialVersionUID = -6970625901177655105L;
@@ -66,8 +68,9 @@ public class GPGeoserverCoverageStore implements IGPGeoserverCoverageStore {
     private String description;
     private GPCoverageStoreType type;
     private boolean enabled;
+    @XmlElement(type = GPGeoserverWorkspace.class)
     private IGPGeoserverWorkspace workspace;
-    @JsonProperty(value = "_default")
+    @XmlElement(name = "_default")
     private boolean isDefault;
     private String url;
     private String coverages;

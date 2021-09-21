@@ -36,8 +36,10 @@
 package org.geosdi.geoplatform.connector.store.style;
 
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverWorkspace;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStylesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverLoadWorkspacesRequest;
+import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request;
 import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -65,6 +67,28 @@ public class GPGeoserverStyleConnectorTest extends GPBaseGeoserverConnectorStore
                 .map(IGPGeoserverWorkspace::getWorkspaceName)
                 .doOnComplete(() -> logger.debug("################### workspaces processed."))
                 .subscribe(this::toWorkspaceStyles, Throwable::printStackTrace);
+    }
+
+    @Test
+    public void b_geoserverStyleRequestTest() throws Exception {
+        GeoserverStyleRequest geoserverStyleRequest = geoserverConnectorStoreV2_18_x.loadStyleRequest();
+        logger.info("#####################GEOSERVER_STYLE_RESPONSE_AS_STRING : {}\n", geoserverStyleRequest
+                .withStyleName("tiger_roads")
+                .getResponseAsString());
+        logger.info("#####################GEOSERVER_STYLE_RESPONSE_AS_STRING : {}\n", geoserverStyleRequest
+                .withStyleName("simple_streams")
+                .getResponseAsString());
+    }
+
+    @Test
+    public void c_geoserverStyleSLDV100RequestTest() throws Exception {
+        GeoserverStyleSLDV100Request geoserverStyleSLDV100Request = geoserverConnectorStoreV2_18_x.loadStyleSLDV100Request();
+        logger.info("#####################GEOSERVER_STYLE_SLD_V100_RESPONSE_AS_STRING : {}\n", geoserverStyleSLDV100Request
+                .withStyleName("tiger_roads")
+                .getResponseAsString());
+        logger.info("#####################GEOSERVER_STYLE_SLD_V100_RESPONSE_AS_STRING : {}\n", geoserverStyleSLDV100Request
+                .withStyleName("simple_streams")
+                .getResponseAsString());
     }
 
     /**

@@ -48,7 +48,6 @@ import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNa
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStylesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.*;
-import org.geosdi.geoplatform.connector.server.exception.ResourceNotFoundException;
 import org.geosdi.geoplatform.connector.store.task.GeoserverLayerTask;
 import org.geosdi.geoplatform.connector.store.task.GeoserverNamespaceTask;
 import org.geosdi.geoplatform.connector.store.task.GeoserverStyleTask;
@@ -120,7 +119,7 @@ public class GPGeoserverConnectorStoreV219XTest extends GPBaseGeoserverConnector
         logger.info("#################STYLES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", stylesRequest.getResponseAsString());
     }
 
-    @Test(expected = ResourceNotFoundException.class)
+    @Test
     public void i_styleGeoserverConnectorTest() throws Exception {
         GeoserverStyleRequest styleRequest = geoserverConnectorStoreV2_19_x.loadStyleRequest();
         styleRequest.withStyleName("Frank");

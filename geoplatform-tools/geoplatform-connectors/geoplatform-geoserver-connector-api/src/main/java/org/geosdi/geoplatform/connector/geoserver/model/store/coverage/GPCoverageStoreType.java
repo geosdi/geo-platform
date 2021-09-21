@@ -38,22 +38,31 @@ package org.geosdi.geoplatform.connector.geoserver.model.store.coverage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlType;
 import java.util.Optional;
 
 import static java.lang.Boolean.FALSE;
 import static java.util.Arrays.stream;
-import static java.util.Optional.empty;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@XmlType(name = "GPCoverageStoreType")
+@XmlEnum
 public enum GPCoverageStoreType implements IGPCoverageStoreType {
 
+    @XmlEnumValue(value = "ArcGrid")
     ARCGRID("ArcGrid"),
+    @XmlEnumValue(value = "GeoPackage")
     GEOPACKAGE("GeoPackage"),
+    @XmlEnumValue(value = "GeoTIFF")
     GEOTIFF("GeoTIFF"),
+    @XmlEnumValue(value = "ImageMosaic")
     IMAGEMOSAIC("ImageMosaic"),
+    @XmlEnumValue(value = "WorldImage")
     WORKDIMAGE("WorldImage");
 
     private final String type;
@@ -89,6 +98,6 @@ public enum GPCoverageStoreType implements IGPCoverageStoreType {
                 .filter(v -> ((type != null) && !(type.trim().isEmpty()))
                         ? v.getType().equalsIgnoreCase(type) : FALSE)
                 .findFirst();
-        return ((optional != null) && !(optional.equals(empty()))) ? optional.get() : null;
+        return optional.orElse(null);
     }
 }

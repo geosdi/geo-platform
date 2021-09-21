@@ -64,8 +64,9 @@ import java.io.File;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.stream.Collectors;
 
+import static java.io.File.separator;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -897,7 +898,7 @@ public class GPGeoserverJacksonTest {
                         "}"), GPGeoserverFeatureTypeInfo.class);
         logger.info("##########################GEOSERVER_FEATURE_TYPE_INFO : {}\n", featureTypeInfo);
         emptyJacksonSupport.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "FeatureTypeInfo")
-                .collect(Collectors.joining(File.separator, "", ".json"))), featureTypeInfo);
+                .collect(joining(separator, "", ".json"))), featureTypeInfo);
     }
 
     @Test
@@ -1033,7 +1034,7 @@ public class GPGeoserverJacksonTest {
                         "}"), GPGeoserverFeatureTypeInfo.class);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_FEATURE_TYPE_INFO : {}\n", featureTypeInfo);
         jacksonSupport.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "FeatureTypeInfo1")
-                .collect(Collectors.joining(File.separator, "", ".json"))), featureTypeInfo);
+                .collect(joining(separator, "", ".json"))), featureTypeInfo);
         Writer writer = new StringWriter();
         jacksonXmlSupport.getDefaultMapper().writeValue(writer, featureTypeInfo);
         logger.info("\n{}\n", writer);

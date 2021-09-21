@@ -35,13 +35,12 @@
  */
 package org.geosdi.geoplatform.connector.jackson;
 
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.GPGeoserverCoverageStore;
 import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.GPGeoserverCoverageStoreBody;
 import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.GPGeoserverCoverageStores;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverWorkspace;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
-import org.geosdi.geoplatform.support.jackson.xml.GPJacksonXmlSupport;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -51,6 +50,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 
+import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -68,7 +68,6 @@ public class GPGeoserverJacksonStoreTest {
             ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
             WRAP_ROOT_VALUE_ENABLE,
             INDENT_OUTPUT_ENABLE);
-    private static final GPJacksonXmlSupport jacksonXmlSupport = new GPJacksonXmlSupport();
 
     @Test
     public void a_unmarshallCoverageStoresTest() throws Exception {
@@ -89,14 +88,13 @@ public class GPGeoserverJacksonStoreTest {
                         "}"), GPGeoserverCoverageStores.class);
         logger.info("########################GEOSERVER_COVERAGE_STORES : {}\n", coverageStores);
         Writer writer = new StringWriter();
-        jacksonXmlSupport.getDefaultMapper().writeValue(writer, coverageStores);
+        JACKSON_JAXB_XML_SUPPORT.getDefaultMapper().writeValue(writer, coverageStores);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_COVERAGE_STORES_XML : \n{}\n", writer);
     }
 
     @Test
     public void b_unmarshallCoverageStoreTest() throws Exception {
-        GPGeoserverCoverageStore coverageStores = jacksonSupport
-                .getDefaultMapper().readValue(new StringReader("{\n" +
+        GPGeoserverCoverageStore coverageStores = jacksonSupport.getDefaultMapper().readValue(new StringReader("{\n" +
                         "  \"coverageStore\": {\n" +
                         "    \"name\": \"arcGridSample\",\n" +
                         "    \"description\": \"Sample ASCII GRID coverage of Global rainfall.\",\n" +
@@ -113,9 +111,9 @@ public class GPGeoserverJacksonStoreTest {
                         "}"), GPGeoserverCoverageStore.class);
         logger.info("########################GEOSERVER_COVERAGE_STORE : {}\n", coverageStores);
         Writer writer = new StringWriter();
-        jacksonXmlSupport.getDefaultMapper().writeValue(writer, coverageStores);
+        JACKSON_JAXB_XML_SUPPORT.getDefaultMapper().writeValue(writer, coverageStores);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_COVERAGE_STORE_XML : \n{}\n", writer);
-        logger.info("\n{}\n", jacksonSupport.getDefaultMapper().writeValueAsString(coverageStores));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_COVERAGE_STORE_JSON \n{}\n", jacksonSupport.getDefaultMapper().writeValueAsString(coverageStores));
     }
 
     @Test
@@ -131,15 +129,14 @@ public class GPGeoserverJacksonStoreTest {
 
     @Test
     public void d_unmarshallCoverageStoreXmlTest() throws Exception {
-        XmlMapper xmlMapper = new XmlMapper();
-        GPGeoserverCoverageStore coverageStores = xmlMapper.readValue(new StringReader("<GPGeoserverCoverageStore>\n"
+        GPGeoserverCoverageStore coverageStores = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper().readValue(new StringReader("<GPGeoserverCoverageStore>\n"
                 + "  <name>arcGridSample</name>\n"
                 + "  <description>Sample ASCII GRID coverage of Global rainfall.</description>\n"
                 + "  <type>ArcGrid</type>\n"
                 + "  <enabled>true</enabled>\n"
                 + "  <workspace>\n"
-                + "    <workspaceName>nurc</workspaceName>\n"
-                + "    <workspaceHref>http://localhost:8080/geoserver/restng/workspaces/nurc.json</workspaceHref>\n"
+                + "    <name>nurc</name>\n"
+                + "    <href>http://localhost:8080/geoserver/restng/workspaces/nurc.json</href>\n"
                 + "  </workspace>\n"
                 + "  <_default>false</_default>\n"
                 + "  <url>file:coverages/arc_sample/precip30min.asc</url>\n"
@@ -147,5 +144,30 @@ public class GPGeoserverJacksonStoreTest {
                 + "  <_default>true</_default>\n"
                 + "</GPGeoserverCoverageStore>"), GPGeoserverCoverageStore.class);
         logger.info("########################GEOSERVER_COVERAGE_STORE : {}\n", coverageStores);
+    }
+
+    @Test
+    public void e_unmarshallGPGeoserverCoverageStoreFromStringTest() throws Exception {
+        logger.info("#############################GP_GEOSERVER_COVERAGE_STORE : {}\n", jacksonSupport.getDefaultMapper()
+                .readValue(new StringReader("{\n"
+                        + "  \"coverageStore\" : {\n"
+                        + "    \"name\" : \"arcGridSample\",\n"
+                        + "    \"description\" : \"Sample ASCII GRID coverage of Global rainfall.\",\n"
+                        + "    \"type\" : \"ArcGrid\",\n"
+                        + "    \"workspace\" : {\n"
+                        + "      \"name\" : \"nurc\",\n"
+                        + "      \"href\" : \"http://localhost:8080/geoserver/restng/workspaces/nurc.json\"\n"
+                        + "    },\n" + "    \"enabled\" : true,\n"
+                        + "    \"_default\" : true,\n"
+                        + "    \"url\" : \"file:coverages/arc_sample/precip30min.asc\",\n"
+                        + "    \"coverages\" : \"http://localhost:8080/geoserver/restng/workspaces/nurc/coveragestores/arcGridSample/coverages.json\"\n"
+                        + "  }\n"
+                        + "}"), GPGeoserverCoverageStore.class));
+    }
+
+    @Test
+    public void f_marshallGPGeoserverWorkspaceAsStringTest() throws Exception {
+        GPGeoserverWorkspace geoserverWorkspace = new GPGeoserverWorkspace("test", "test_unique");
+        logger.info("{}\n", JACKSON_JAXB_XML_SUPPORT.getDefaultMapper().writeValueAsString(geoserverWorkspace));
     }
 }

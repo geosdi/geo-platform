@@ -404,8 +404,13 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
         this.removeLayer(layerName);
         restPublisher.unpublishCoverage(userWorkspace, layerName, layerName);
         //reload();
-        restPublisher.removeCoverageStore(userWorkspace, layerName,
-                FALSE);
+        try{
+            this.geoserverConnectorStore.deleteCoverageStoreRequest().withCoverageStore(layerName).withWorkspace(userWorkspace).withRecurse(FALSE).getResponse();
+        }catch (Exception e) {
+            final String error = "Error to delete store with  name: " +layerName + e;
+            logger.error(error);
+            return FALSE;
+        }
         return TRUE;
     }
 

@@ -56,4 +56,13 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
         Assert.assertTrue("####################",  restReader.existsCoveragestore("burg", "test", TRUE) ==
                 this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace("burg").withStore("test").exsist());
     }
+
+    //@Ignore(value = "Store store_vito may be not present")
+    @Test
+    public void c_deleteCoverageStore() throws Exception {
+        Assert.assertTrue("####################", this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace("sf").withStore("store_vito").exsist());
+        this.geoserverConnectorStore.deleteCoverageStoreRequest().withCoverageStore("store_vito").withWorkspace("sf").withRecurse(TRUE).getResponse();
+        Assert.assertFalse("####################", this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName("sf").withStoreName("store_vito").withQuietNotFound(TRUE).exsist());
+    }
+
 }

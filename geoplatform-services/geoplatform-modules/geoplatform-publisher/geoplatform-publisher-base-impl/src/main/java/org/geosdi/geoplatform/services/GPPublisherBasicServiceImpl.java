@@ -235,8 +235,13 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                     "The requested style can't be "
                             + "loaded from the rest url configured on the publisher service.");
         }
-        //TODO
-        return this.restReader.getSLD(styleName);
+        try{
+            return this.geoserverConnectorStore.loadStyleSLDV100Request().withStyleName(styleName).getResponseAsString();
+        } catch (Exception e) {
+            final String error = "Error to load sld with style name:" + styleName + " "  + e;
+            logger.error(error);
+            throw new ResourceNotFoundFault(error, e.getCause());
+        }
     }
 
     @Override
@@ -1388,6 +1393,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                     datatStoreName, info.name);
             logger.info("Removing existing FeatureType: " + info.name + " with result: " + result);
         } else {
+            //TODO
             postGISUtility.generateEncoder(datatStoreName, userWorkspace);
         }
 

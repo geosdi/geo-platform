@@ -64,14 +64,14 @@ public class GPGeoserverStyleConnectorTest extends GPBaseGeoserverConnectorStore
                 .filter(Objects::nonNull)
                 .map(IGPGeoserverWorkspace::getWorkspaceName)
                 .doOnComplete(() -> logger.debug("################### workspaces processed."))
-                .subscribe(this::getWorkspaceStyles, Throwable::printStackTrace);
+                .subscribe(this::toWorkspaceStyles, Throwable::printStackTrace);
     }
 
     /**
      * @param workspaceName
      * @throws Exception
      */
-    private void getWorkspaceStyles(String workspaceName) throws Exception {
+    private void toWorkspaceStyles(String workspaceName) throws Exception {
         logger.info("####################WORKSPACE_NAME : {}\n", workspaceName);
         logger.info("####################STYLE_RESPONSE : {}\n", gpGeoserverWorkspaceStylesRequest.withWorkspaceName(workspaceName).getResponse());
     }

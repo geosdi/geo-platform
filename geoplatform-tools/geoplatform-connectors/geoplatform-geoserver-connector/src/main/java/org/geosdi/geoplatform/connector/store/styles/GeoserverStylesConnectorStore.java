@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleR
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStylesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStylesRequest;
+import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request;
 import org.geosdi.geoplatform.connector.store.layers.GeoserverLayersConnectorStore;
 
 /**
@@ -69,6 +70,14 @@ public abstract class GeoserverStylesConnectorStore extends GeoserverLayersConne
     @Override
     public GeoserverStyleRequest loadStyleRequest() {
         return this.server.loadStyleRequest();
+    }
+
+    /**
+     * @return {@link GeoserverStyleSLDV100Request}
+     */
+    @Override
+    public GeoserverStyleSLDV100Request loadStyleSLDV100Request() {
+        return this.server.loadStyleSLDV100Request();
     }
 
     /**

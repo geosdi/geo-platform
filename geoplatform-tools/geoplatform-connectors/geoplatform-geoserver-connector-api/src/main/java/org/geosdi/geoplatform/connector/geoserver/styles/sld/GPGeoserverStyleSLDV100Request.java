@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,43 +32,44 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.styles;
+package org.geosdi.geoplatform.connector.geoserver.styles.sld;
 
-import org.geosdi.geoplatform.connector.geoserver.layers.IGPGeoserverLayersConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStylesRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStyleRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStylesRequest;
-import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request;
+import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.styles.base.GPGeoserverBaseStyleRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverStylesConnector extends IGPGeoserverLayersConnector {
+@ThreadSafe
+class GPGeoserverStyleSLDV100Request extends GPGeoserverBaseStyleRequest<StyledLayerDescriptor, GeoserverStyleSLDV100Request> implements GeoserverStyleSLDV100Request {
 
     /**
-     * @return {@link GeoserverStylesRequest}
+     * @param server
      */
-    GeoserverStylesRequest loadStylesRequest();
+    GPGeoserverStyleSLDV100Request(@Nonnull(when = NEVER) GPServerConnector server) {
+        super(server, JACKSON_JAXB_XML_SUPPORT);
+    }
 
     /**
-     * @return {@link GeoserverStyleRequest}
+     * @return {@link String}
      */
-    GeoserverStyleRequest loadStyleRequest();
+    @Override
+    protected String createUriPath() throws Exception {
+        return super.createUriPath().replaceAll(".json", ".sld");
+    }
 
     /**
-     * @return {@link GeoserverStyleSLDV100Request}
+     * @return {@link Class<StyledLayerDescriptor>}
      */
-    GeoserverStyleSLDV100Request loadStyleSLDV100Request();
-
-    /**
-     * @return {@link GeoserverStylesRequest}
-     */
-    GeoserverWorkspaceStylesRequest loadWorkspaceStylesRequest();
-
-    /**
-     * @return {@link GeoserverStyleRequest}
-     */
-    GeoserverWorkspaceStyleRequest loadWorkspaceStyleRequest();
+    @Override
+    protected Class<StyledLayerDescriptor> forClass() {
+        return StyledLayerDescriptor.class;
+    }
 }

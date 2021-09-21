@@ -53,6 +53,7 @@ import java.util.Objects;
 import java.util.TimeZone;
 
 import static com.fasterxml.jackson.databind.type.TypeFactory.defaultInstance;
+import static com.fasterxml.jackson.dataformat.xml.XmlMapper.builder;
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Observable.fromArray;
 import static javax.annotation.meta.When.NEVER;
@@ -86,7 +87,7 @@ public class GPJacksonXmlSupport implements JacksonXmlSupport {
      */
     public GPJacksonXmlSupport(@Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {
         checkArgument(features != null, "The Parameter features must not be null.");
-        this.xmlMapper = new XmlMapper();
+        this.xmlMapper = builder().defaultUseWrapper(false).build();
         AnnotationIntrospector primary = new JaxbAnnotationIntrospector(defaultInstance());
         AnnotationIntrospector secondary = new JacksonAnnotationIntrospector();
         this.xmlMapper.setAnnotationIntrospector(new AnnotationIntrospectorPair(primary, secondary));

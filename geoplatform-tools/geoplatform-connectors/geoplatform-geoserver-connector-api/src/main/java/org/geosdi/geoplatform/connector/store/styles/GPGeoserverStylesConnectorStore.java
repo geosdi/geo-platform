@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleR
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStylesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStylesRequest;
+import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request;
 import org.geosdi.geoplatform.connector.store.layers.GPGeoserverLayersConnectorStore;
 
 /**
@@ -56,6 +57,11 @@ public interface GPGeoserverStylesConnectorStore extends GPGeoserverLayersConnec
      * @return {@link GeoserverStyleRequest}
      */
     GeoserverStyleRequest loadStyleRequest();
+
+    /**
+     * @return {@link GeoserverStyleSLDV100Request}
+     */
+    GeoserverStyleSLDV100Request loadStyleSLDV100Request();
 
     /**
      * @return {@link GeoserverStylesRequest}

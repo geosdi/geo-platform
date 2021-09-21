@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleR
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStylesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStylesRequest;
+import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -49,6 +50,7 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import java.net.URL;
 
 import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExceptionMessage;
+import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.of;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -130,6 +132,20 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
             case V219x:
             case V218x:
                 return new GPGeoserverStyleRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverStyleSLDV100Request}
+     */
+    @Override
+    public GeoserverStyleSLDV100Request loadStyleSLDV100Request() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return of(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

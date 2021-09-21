@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLo
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverLoadDatastoresRequest;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,6 +78,14 @@ public class GeoserverConnectorDatastoresTest extends GeoserverConnectorTest {
                 this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName("tiger").withStoreName("nyc").withQuietNotFound(TRUE).exsist());
         Assert.assertTrue("####################", this.restReader.existsDatastore("tiger", "nycc", TRUE) ==
                 this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName("tiger").withStoreName("nycc").withQuietNotFound(TRUE).exsist());
+    }
+
+    @Ignore(value = "Store store_vito may be not present")
+    @Test
+    public void c_deleteDatastore() throws Exception {
+        Assert.assertTrue("####################", this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName("sf").withStoreName("store_vito").withQuietNotFound(TRUE).exsist());
+        this.geoserverConnectorStore.deleteDatastoreRequest().withDatastoreName("store_vito").withWorkspaceName("sf").withRecurse(TRUE).getResponse();
+        Assert.assertFalse("####################", this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName("sf").withStoreName("store_vito").withQuietNotFound(TRUE).exsist());
     }
 
 }

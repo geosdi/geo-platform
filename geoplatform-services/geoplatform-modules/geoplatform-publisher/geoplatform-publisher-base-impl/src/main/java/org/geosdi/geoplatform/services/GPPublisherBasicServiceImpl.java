@@ -39,14 +39,16 @@ import com.google.common.collect.Lists;
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
 import it.geosolutions.geoserver.rest.decoder.RESTServiceUniqueValues;
-import it.geosolutions.geoserver.rest.encoder.GSLayerEncoder;
 import it.geosolutions.geoserver.rest.encoder.GSResourceEncoder;
 import it.geosolutions.geoserver.rest.encoder.coverage.GSCoverageEncoder;
 import org.apache.commons.httpclient.NameValuePair;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastores;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
+import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayerStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayerType;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GeoserverCreateWorkspaceBody;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverLoadDatastoresRequest;
@@ -312,6 +314,9 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
     public Boolean updateLayerStyle(String workspace, String layerName, String styleToPublish, String styleName, boolean isDefault
             , boolean override) throws ResourceNotFoundFault {
         GeoserverLayer geoserverLayer  = null;
+        if(!this.checkIfExsistLayerInWorkspace(layerName, workspace)) {
+            throw new ResourceNotFoundFault("The layer: " + layerName + " with workspace: "+ workspace +" does not exists");
+        }
         try {
             geoserverLayer = this.geoserverConnectorStore.loadWorkspaceLayerRequest()
                     .withLayerName(layerName).withWorkspaceName(workspace).getResponse();
@@ -320,11 +325,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
             logger.error(error);
             throw new IllegalArgumentException(error, e.getCause());
         }
-
-        if (geoserverLayer == null) {
-            throw new ResourceNotFoundFault("The layer: " + layerName + " with workspace: "+ workspace +" does not exists");
-        }
-
         boolean result;
         if(!override)
             result =  this.publishStyle(styleToPublish, styleName, TRUE);
@@ -333,13 +333,28 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
         if(!result){
             throw new IllegalParameterFault("The Style with name " + styleName + " is not published." );
         }
-        GSLayerEncoder gsLayerEncoder = new GSLayerEncoder();
-        if(isDefault)
-            gsLayerEncoder.setDefaultStyle(styleName);
-        else
-            gsLayerEncoder.addStyle(styleName);
-        geoserverLayer.getLayerStyle().getStyles().stream().forEach(s -> gsLayerEncoder.addStyle(s.getName()));
-        this.restPublisher.configureLayer(workspace, layerName, gsLayerEncoder);
+        GeoserverLayerStyle layerStyle = geoserverLayer.getLayerStyle() != null ? geoserverLayer.getLayerStyle() : new GeoserverLayerStyle();
+        List<IGPGeoserverStyle> styles = layerStyle.getStyles() != null ? geoserverLayer.getLayerStyle().getStyles() : Lists.newArrayList();
+        GPGeoserverStyle gpGeoserverStyle = new GPGeoserverStyle();
+        gpGeoserverStyle.setName(styleName);
+        if(isDefault) {
+            geoserverLayer.setDefaultStyle(gpGeoserverStyle);
+        }
+        else {
+            styles.add(gpGeoserverStyle);
+        }
+        layerStyle.setStyles(styles);
+        geoserverLayer.setLayerStyle(layerStyle);
+        try{
+            this.geoserverConnectorStore.updateLayerRequest()
+                    .withWorkspaceName(workspace)
+                    .withLayerBody(geoserverLayer)
+                    .withLayerName(layerName).getResponse();
+        }catch (Exception e) {
+            final String error = "Error to update layer with workspace name: "  + e;
+            logger.error(error);
+            return  FALSE;
+        }
         return TRUE;
     }
 

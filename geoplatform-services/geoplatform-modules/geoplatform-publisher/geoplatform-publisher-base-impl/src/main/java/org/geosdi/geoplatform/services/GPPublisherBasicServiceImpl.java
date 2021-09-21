@@ -402,10 +402,16 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
         }
         logger.info("Removing tif " + layerName + " from " + userWorkspace);
         this.removeLayer(layerName);
-        restPublisher.unpublishCoverage(userWorkspace, layerName, layerName);
         //reload();
         try{
-            this.geoserverConnectorStore.deleteCoverageStoreRequest().withCoverageStore(layerName).withWorkspace(userWorkspace).withRecurse(FALSE).getResponse();
+            this.geoserverConnectorStore.deleteCoverageInCoverageStore()
+                    .withCoverage(layerName)
+                    .withCoverageStore(layerName)
+                    .withWorkspace(userWorkspace).getResponse();
+            this.geoserverConnectorStore.deleteCoverageStoreRequest()
+                    .withCoverageStore(layerName)
+                    .withWorkspace(userWorkspace)
+                    .withRecurse(FALSE).getResponse();
         }catch (Exception e) {
             final String error = "Error to delete store with  name: " +layerName + e;
             logger.error(error);
@@ -957,17 +963,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
     }
 
     /**
-     * *****************
-     *
-     * @return reload the catalogue of geoserver
-     */
-    private boolean reload() {
-        return this.restPublisher.reload();
-//        String sUrl = RESTURL + "/rest/reload";
-//        return HttpUtilsLocal.post(sUrl, "", "text/html", RESTUSER, RESTPW);
-    }
-
-    /**
      * ******************
      *
      * @param userName
@@ -1199,8 +1194,14 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                             .withCoverage(coverageStoreName).exsist()){
                                 logger.debug(
                                         "********** processEPSGResult removing coverage store: " + coverageStoreName);
-                                restPublisher.removeCoverageStore(userWorkspace,
-                                        coverageStoreName, TRUE);
+                                try{
+                                    this.geoserverConnectorStore.deleteCoverageStoreRequest().withCoverageStore(coverageStoreName).withWorkspace(userWorkspace).withRecurse(FALSE).getResponse();
+                                }catch (Exception e) {
+                                    final String error = "Error to delete store with  name: " +coverageStoreName + e;
+                                    logger.error(error);
+                                    throw new ResourceNotFoundFault(error);
+                                }
+
                             }
                         }
                     }

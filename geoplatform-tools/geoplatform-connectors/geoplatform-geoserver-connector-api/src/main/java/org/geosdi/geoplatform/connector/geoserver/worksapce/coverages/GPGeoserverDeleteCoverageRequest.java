@@ -35,54 +35,64 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 
+import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.exsist.GPGeoserverExsistRequest;
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadStoreCoverageRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverDeleteCoverageRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Vito Salvia - CNR IMAA geoSDI Group
- * @email vito.salvia@gmail.com
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadStoreCoverageRequest extends GPGeoserverExsistRequest<GPGeoserverCoverageInfo, GeoserverLoadStoreCoverageRequest> implements GeoserverLoadStoreCoverageRequest {
+public class GPGeoserverDeleteCoverageRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteCoverageRequest> implements GeoserverDeleteCoverageRequest {
 
     private final ThreadLocal<String> workspace;
     private final ThreadLocal<String> coverage;
-    private final ThreadLocal<String> store;
-    private final ThreadLocal<Boolean> quietOnNotFound;
+    private final ThreadLocal<String> coverageStore;
+    private final ThreadLocal<Boolean> recurse;
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    GPGeoserverLoadStoreCoverageRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverDeleteCoverageRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
         this.workspace = withInitial(() -> null);
         this.coverage = withInitial(() -> null);
-        this.store = withInitial(() -> null);
-        this.quietOnNotFound = withInitial(() -> TRUE);
+        this.coverageStore = withInitial(() -> null);
+        this.recurse = withInitial(() -> TRUE);
     }
 
     /**
      * @param theWorkspace
-     * @return {@link GeoserverLoadCoverageRequest}
+     * @return {@link GeoserverDeleteCoverageRequest}
      */
     @Override
-    public GeoserverLoadStoreCoverageRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
+    public GeoserverDeleteCoverageRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspace.set(theWorkspace);
-        super.init();
+        return self();
+    }
+
+    /**
+     * @param theCoverageStore
+     * @return {@link GeoserverDeleteCoverageRequest}
+     */
+    @Override
+    public GeoserverDeleteCoverageRequest withCoverageStore(@Nonnull(when = NEVER) String theCoverageStore) {
+        this.coverageStore.set(theCoverageStore);
         return self();
     }
 
@@ -91,28 +101,18 @@ public class GPGeoserverLoadStoreCoverageRequest extends GPGeoserverExsistReques
      * @return
      */
     @Override
-    public GeoserverLoadStoreCoverageRequest withCoverage(@Nonnull(when = NEVER) String theCoverage) {
+    public GeoserverDeleteCoverageRequest withCoverage(@Nonnull(when = NEVER) String theCoverage) {
         this.coverage.set(theCoverage);
         return self();
     }
 
     /**
-     * @param theStore
-     * @return
-     */
-    @Override
-    public GeoserverLoadStoreCoverageRequest withStore(@Nonnull(when = NEVER) String theStore) {
-        this.store.set(theStore);
-        return self();
-    }
-
-    /**
      * @param theQuietOnNotFound
-     * @return {@link GeoserverLoadCoverageRequest}
+     * @return {@link GeoserverDeleteCoverageRequest}
      */
     @Override
-    public GeoserverLoadStoreCoverageRequest withQuietOnNotFound(@Nullable Boolean theQuietOnNotFound) {
-        this.quietOnNotFound.set((theQuietOnNotFound != null) ? theQuietOnNotFound : TRUE);
+    public GeoserverDeleteCoverageRequest withRecurse(@Nullable Boolean theQuietOnNotFound) {
+        this.recurse.set((theQuietOnNotFound != null) ? theQuietOnNotFound : TRUE);
         return self();
     }
 
@@ -126,19 +126,30 @@ public class GPGeoserverLoadStoreCoverageRequest extends GPGeoserverExsistReques
         String coverage = this.coverage.get();
         checkArgument((coverage != null) && !(coverage.trim().isEmpty()), "The Parameter coverage must not be null or an empty string.");
         coverage = coverage.concat(".json");
-        String store = this.store.get();
-        checkArgument((store != null) && !(store.trim().isEmpty()), "The Parameter store must not be null or an empty string.");
-        String quietOnNotFound = this.quietOnNotFound.get().toString();
+        String coverageStore = this.coverageStore.get();
+        checkArgument((coverageStore != null) && !(coverageStore.trim().isEmpty()), "The Parameter coverageStore must not be null or an empty string.");
+        String recurse = this.recurse.get().toString();
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/coverages/").concat(coverage).concat("?quietOnNotFound=").concat(quietOnNotFound)
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/coverages/").concat(coverage).concat("?quietOnNotFound=").concat(quietOnNotFound)));
+        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore).concat("/coverages/").concat(coverage).concat("?recurse=").concat(recurse)
+                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore).concat("/coverages/").concat(coverage).concat("?recurse=").concat(recurse)));
     }
 
     /**
-     * @return {@link Class<GPGeoserverCoverageInfo>}
+     * @param reader
+     * @return {@link Boolean}
+     * @throws Exception
      */
     @Override
-    protected Class<GPGeoserverCoverageInfo> forClass() {
-        return GPGeoserverCoverageInfo.class;
+    protected Boolean readInternal(BufferedReader reader) throws Exception {
+        String value = CharStreams.toString(reader);
+        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
+    }
+
+    /**
+     * @return {@link Class<Boolean>}
+     */
+    @Override
+    protected Class<Boolean> forClass() {
+        return Boolean.class;
     }
 }

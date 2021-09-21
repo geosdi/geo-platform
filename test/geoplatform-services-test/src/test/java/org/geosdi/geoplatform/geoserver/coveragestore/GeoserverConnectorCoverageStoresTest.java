@@ -35,8 +35,10 @@
  */
 package org.geosdi.geoplatform.geoserver.coveragestore;
 
+import it.geosolutions.geoserver.rest.decoder.RESTCoverage;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,12 +59,37 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
                 this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace("burg").withStore("test").exsist());
     }
 
-    //@Ignore(value = "Store store_vito may be not present")
+    @Ignore(value = "Store store_vito may be not present")
     @Test
-    public void c_deleteCoverageStore() throws Exception {
+    public void b_deleteCoverageStore() throws Exception {
         Assert.assertTrue("####################", this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace("sf").withStore("store_vito").exsist());
         this.geoserverConnectorStore.deleteCoverageStoreRequest().withCoverageStore("store_vito").withWorkspace("sf").withRecurse(TRUE).getResponse();
         Assert.assertFalse("####################", this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName("sf").withStoreName("store_vito").withQuietNotFound(TRUE).exsist());
+    }
+
+    @Test
+    public void c_exsistCoverage() throws  Exception {
+        RESTCoverage restCoverage = this.restReader.getCoverage("nurc", "mosaic", "mosaic");
+        logger.info("###################{}\n", restCoverage.getTitle());
+
+        Boolean exsist = this.geoserverConnectorStore.loadWorkspaceStoreCoverageRequest().withCoverage("mosaic")
+                .withWorkspace("nurc").withStore("mosaic").exsist();
+        logger.info("###################{}\n", exsist);
+    }
+
+    @Test()
+    public void d_exsistCoverageUrl() throws Exception {
+        logger.info("########################EXSIST : {}\n", this.geoserverConnectorStore.loadCoverageInfoWithUrl().
+                withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaic.json").exsist());
+        logger.info("########################EXSIST : {}\n", this.geoserverConnectorStore.loadCoverageInfoWithUrl().
+                withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaicww.json").exsist());
+    }
+
+    @Ignore(value = "Store layer_vito may be not present")
+    @Test
+    public void e_unpublishCoverage() throws Exception {
+                this.geoserverConnectorStore.deleteCoverageInCoverageStore().withCoverage("layer_vito")
+                        .withCoverageStore("mosaic").withWorkspace("nurc").getResponse();
     }
 
 }

@@ -160,4 +160,17 @@ public abstract class GPGeoserverCoveragesConnector extends GPGeoserverWorkspace
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
+
+    /**
+     * @return {@link GPGeoserverDeleteCoverageRequest}
+     */
+    @Override
+    public GPGeoserverDeleteCoverageRequest deleteCoverageInCoverageStoreRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverDeleteCoverageRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }    }
 }

@@ -64,4 +64,9 @@ public interface IGPGeoserverCoveragesConnector extends IGPGeoserverWorkspacesCo
      * @return {@link GPGeoserverLoadCoverageWithUrlRequest}
      */
     GPGeoserverLoadCoverageWithUrlRequest loadCoverageInfoWithUrl();
+
+    /**
+     * @return {@link GPGeoserverDeleteCoverageRequest}
+     */
+    GPGeoserverDeleteCoverageRequest deleteCoverageInCoverageStoreRequest();
 }

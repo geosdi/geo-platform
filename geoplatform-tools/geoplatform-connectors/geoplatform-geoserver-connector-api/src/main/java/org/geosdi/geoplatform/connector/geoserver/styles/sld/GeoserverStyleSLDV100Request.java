@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,43 +32,38 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.styles;
+package org.geosdi.geoplatform.connector.geoserver.styles.sld;
 
-import org.geosdi.geoplatform.connector.geoserver.layers.IGPGeoserverLayersConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStylesRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStyleRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStylesRequest;
-import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverBaseStyleRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.support.jackson.xml.jaxb.GPJacksonJAXBXmlSupport;
+import org.geosdi.geoplatform.support.jackson.xml.jaxb.JacksonJAXBXmlSupport;
+import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverStylesConnector extends IGPGeoserverLayersConnector {
+public interface GeoserverStyleSLDV100Request extends GeoserverBaseStyleRequest<StyledLayerDescriptor, GeoserverStyleSLDV100Request> {
+
+    JacksonJAXBXmlSupport JACKSON_JAXB_XML_SUPPORT = new GPJacksonJAXBXmlSupport();
 
     /**
-     * @return {@link GeoserverStylesRequest}
-     */
-    GeoserverStylesRequest loadStylesRequest();
-
-    /**
-     * @return {@link GeoserverStyleRequest}
-     */
-    GeoserverStyleRequest loadStyleRequest();
-
-    /**
+     * @param theStyleName
      * @return {@link GeoserverStyleSLDV100Request}
      */
-    GeoserverStyleSLDV100Request loadStyleSLDV100Request();
+    @Override
+    GeoserverStyleSLDV100Request withStyleName(@Nonnull(when = NEVER) String theStyleName);
 
     /**
-     * @return {@link GeoserverStylesRequest}
+     * @param theServer
+     * @return {@link GeoserverStyleSLDV100Request}
      */
-    GeoserverWorkspaceStylesRequest loadWorkspaceStylesRequest();
-
-    /**
-     * @return {@link GeoserverStyleRequest}
-     */
-    GeoserverWorkspaceStyleRequest loadWorkspaceStyleRequest();
+    static GeoserverStyleSLDV100Request of(@Nonnull(when = NEVER) GPServerConnector theServer) {
+        return new GPGeoserverStyleSLDV100Request(theServer);
+    }
 }

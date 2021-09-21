@@ -8,17 +8,14 @@
 
 package org.geosdi.geoplatform.xml.sld.v100;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString2;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+
+import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -45,7 +42,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
+@XmlType(name = "UserStyle", propOrder = {
     "name",
     "title",
     "_abstract",

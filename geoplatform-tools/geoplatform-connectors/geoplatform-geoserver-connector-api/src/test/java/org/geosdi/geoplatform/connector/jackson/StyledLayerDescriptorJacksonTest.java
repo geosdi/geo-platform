@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,43 +32,35 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.styles;
+package org.geosdi.geoplatform.connector.jackson;
 
-import org.geosdi.geoplatform.connector.geoserver.layers.IGPGeoserverLayersConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStylesRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStyleRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStylesRequest;
-import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request;
+import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+
+import static java.io.File.separator;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverStylesConnector extends IGPGeoserverLayersConnector {
+@FixMethodOrder(value = NAME_ASCENDING)
+public class StyledLayerDescriptorJacksonTest {
 
-    /**
-     * @return {@link GeoserverStylesRequest}
-     */
-    GeoserverStylesRequest loadStylesRequest();
+    private static final Logger logger = LoggerFactory.getLogger(StyledLayerDescriptorJacksonTest.class);
 
-    /**
-     * @return {@link GeoserverStyleRequest}
-     */
-    GeoserverStyleRequest loadStyleRequest();
-
-    /**
-     * @return {@link GeoserverStyleSLDV100Request}
-     */
-    GeoserverStyleSLDV100Request loadStyleSLDV100Request();
-
-    /**
-     * @return {@link GeoserverStylesRequest}
-     */
-    GeoserverWorkspaceStylesRequest loadWorkspaceStylesRequest();
-
-    /**
-     * @return {@link GeoserverStyleRequest}
-     */
-    GeoserverWorkspaceStyleRequest loadWorkspaceStyleRequest();
+    @Test
+    public void a_unmarshallStyledLayerDescriptorFromFileTest() throws Exception {
+        StyledLayerDescriptor styledLayerDescriptor = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper().readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "StyledLayerDescriptor")
+                        .collect(joining(separator, "", ".xml"))), StyledLayerDescriptor.class);
+        logger.info("##################STYLED_LAYER_DESCRIPTOR : \n {}\n", JACKSON_JAXB_XML_SUPPORT.getDefaultMapper().writeValueAsString(styledLayerDescriptor));
+    }
 }

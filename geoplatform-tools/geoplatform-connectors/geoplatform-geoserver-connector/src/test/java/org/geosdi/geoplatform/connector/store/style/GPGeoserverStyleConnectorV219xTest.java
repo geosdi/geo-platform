@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverWo
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStylesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverLoadWorkspacesRequest;
+import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request;
 import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV219xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -74,8 +75,18 @@ public class GPGeoserverStyleConnectorV219xTest extends GPBaseGeoserverConnector
         logger.info("#####################GEOSERVER_STYLE_RESPONSE_AS_STRING : {}\n", geoserverStyleRequest
                 .withStyleName("pophatch")
                 .getResponseAsString());
-
         logger.info("#####################GEOSERVER_STYLE_RESPONSE_AS_STRING : {}\n", geoserverStyleRequest
+                .withStyleName("population")
+                .getResponseAsString());
+    }
+
+    @Test
+    public void c_geoserverStyleSLDV100RequestTest() throws Exception {
+        GeoserverStyleSLDV100Request geoserverStyleSLDV100Request = geoserverConnectorStoreV2_19_x.loadStyleSLDV100Request();
+        logger.info("#####################GEOSERVER_STYLE_SLD_V100_RESPONSE_AS_STRING : {}\n", geoserverStyleSLDV100Request
+                .withStyleName("pophatch")
+                .getResponseAsString());
+        logger.info("#####################GEOSERVER_STYLE_SLD_V100_RESPONSE_AS_STRING : {}\n", geoserverStyleSLDV100Request
                 .withStyleName("population")
                 .getResponseAsString());
     }

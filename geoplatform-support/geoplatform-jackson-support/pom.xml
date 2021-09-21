@@ -84,6 +84,12 @@
             <artifactId>jackson-module-jaxb-annotations</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-xml-utilities</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>

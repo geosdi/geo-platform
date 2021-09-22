@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.geoserver.coveragestore;
 
 import it.geosolutions.geoserver.rest.decoder.RESTCoverage;
-import it.geosolutions.geoserver.rest.encoder.coverage.GSCoverageEncoder;
+import org.apache.commons.httpclient.NameValuePair;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -104,16 +104,62 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
 
     @Test
     public void f_updateCoverage() throws Exception {
-        GSCoverageEncoder gsCoverageEncoder = new GSCoverageEncoder();
-        gsCoverageEncoder.setName("test_vito");
-        gsCoverageEncoder.setTitle("test_vito");
-        logger.info(gsCoverageEncoder.getName());
+
+        NameValuePair[] names = {new NameValuePair("test1_n","test1_v"), new NameValuePair("test2_n","test2_v")
+                , new NameValuePair("test3_n","test3_v"), new NameValuePair("test4_n","test4_v")};
+        logger.info("########### {}\n", this.appendParameters(names));
+//        GSCoverageEncoder gsCoverageEncoder = new GSCoverageEncoder();
+//        gsCoverageEncoder.setName("test_vito");
+//        gsCoverageEncoder.setTitle("test_vito");
+//        logger.info(gsCoverageEncoder.getName());
 //        this.restPublisher.configureCoverage(gsCoverageEncoder, "nurc", "mosaic", "test_vito");
 //        logger.info("##################### {}\n",  this.geoserverConnectorStore.updateStoreCoverageRequest()
 //                .withStore("mosaic")
 //                .withWorkspace("nurc")
 //                .withBody(new GeoserverUpdateCoverageStoreBody("test_vito", "test_vito"))
 //                .withCoverage("test_vito").getResponseAsString());
+    }
+
+
+    private String appendParameters(NameValuePair... params) {
+        StringBuilder sbUrl = new StringBuilder();
+        if (params != null) {
+            int paramsSize = params.length;
+            if (paramsSize > 0) {
+                int i = 0;
+                NameValuePair param = params[i];
+
+                while(true) {
+                    String name;
+                    String value;
+                    while(param != null && i++ < paramsSize) {
+                        name = param.getName();
+                        value = param.getValue();
+                        if (name != null && !name.isEmpty() && value != null && !value.isEmpty()) {
+                            sbUrl.append(name).append("=").append(value);
+                            param = null;
+                        } else {
+                            param = params[i];
+                        }
+                    }
+
+                    for(; i < paramsSize; ++i) {
+                        param = params[i];
+                        if (param != null) {
+                            name = param.getName();
+                            value = param.getValue();
+                            sbUrl.append(name).append("=").append(value);
+                            if (name != null && !name.isEmpty() && value != null && !value.isEmpty()) {
+                                sbUrl.append("&").append(name).append("=").append(value);
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+        return sbUrl.toString();
     }
 
 }

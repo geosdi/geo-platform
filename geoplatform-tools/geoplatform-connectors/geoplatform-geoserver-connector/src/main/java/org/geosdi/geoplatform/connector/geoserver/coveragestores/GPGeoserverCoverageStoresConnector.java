@@ -173,4 +173,18 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
+
+    /**
+     * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
+     */
+    @Override
+    public GeoserverCreateCoverageStoreWithStoreNameRequest createCoverageStoreWithStoreName() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverCreateCoverageStoreWithStoreName(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
 }

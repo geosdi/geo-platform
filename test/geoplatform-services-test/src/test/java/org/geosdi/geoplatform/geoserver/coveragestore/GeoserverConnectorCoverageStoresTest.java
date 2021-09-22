@@ -102,6 +102,7 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
                         .withCoverageStore("mosaic").withWorkspace("nurc").getResponse();
     }
 
+    @Ignore(value = "Store layer_vito may be not present")
     @Test
     public void f_updateCoverage() throws Exception {
 

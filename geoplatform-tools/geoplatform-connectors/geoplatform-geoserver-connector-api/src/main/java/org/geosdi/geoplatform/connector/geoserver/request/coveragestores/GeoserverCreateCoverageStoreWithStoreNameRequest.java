@@ -33,70 +33,41 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.coveragestores;
+package org.geosdi.geoplatform.connector.geoserver.request.coveragestores;
 
-import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.*;
-import org.geosdi.geoplatform.connector.store.datastores.GeoserverDatastoresConnectorStore;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public abstract class GeoserverCoverageStoresConnectorStore extends GeoserverDatastoresConnectorStore implements GPGeoserverCoverageStoresConnectorStore {
+public interface GeoserverCreateCoverageStoreWithStoreNameRequest extends GPJsonConnectorRequest<Boolean, GeoserverCreateCoverageStoreWithStoreNameRequest> {
 
     /**
-     * @param theServer
-     */
-    protected GeoserverCoverageStoresConnectorStore(GPGeoserverConnector theServer) {
-        super(theServer);
-    }
-
-    /**
-     * @return {@link GeoserverLoadCoverageStoresRequest}
-     */
-    @Override
-    public GeoserverLoadCoverageStoresRequest loadCoverageStoresRequest() {
-        return this.server.loadCoverageStoresRequest();
-    }
-
-    /**
-     * @return {@link GeoserverLoadCoverageStoreRequest}
-     */
-    @Override
-    public GeoserverLoadCoverageStoreRequest loadCoverageStoreRequest() {
-        return this.server.loadCoverageStoreRequest();
-    }
-
-    /**
-     * @return {@link GeoserverCreateCoverageStoreRequest}
-     */
-    @Override
-    public GeoserverCreateCoverageStoreRequest createCoverageStoreRequest() {
-        return this.server.createCoverageStoreRequest();
-    }
-
-    /**
-     * @return {@link GeoserverDeleteCoverageStoreRequest}
-     */
-    @Override
-    public GeoserverDeleteCoverageStoreRequest deleteCoverageStoreRequest() {
-        return this.server.deleteCoverageStoreRequest();
-    }
-
-    /**
-     * @return {@link GeoserverUpdateCoverageStoreRequest}
-     */
-    @Override
-    public GeoserverUpdateCoverageStoreRequest updateCoverageStoreRequest() {
-        return this.server.updateCoverageStoreRequest();
-    }
-
-    /**
+     * @param theWorkspace
      * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
      */
-    @Override
-    public GeoserverCreateCoverageStoreWithStoreNameRequest createCoverageStoreWithStoreName() {
-        return this.server.createCoverageStoreWithStoreName();
-    }
+    GeoserverCreateCoverageStoreWithStoreNameRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
+
+    /**
+     * @param theStore
+     * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
+     */
+    GeoserverCreateCoverageStoreWithStoreNameRequest withStore(@Nonnull(when = NEVER) String theStore);
+
+    /**
+     * @param theMethod
+     * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
+     */
+    GeoserverCreateCoverageStoreWithStoreNameRequest withMethod(@Nonnull(when = NEVER) String theMethod);
+
+    /**
+     * @param theFormat
+     * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
+     */
+    GeoserverCreateCoverageStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) String theFormat);
 }

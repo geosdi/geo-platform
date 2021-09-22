@@ -35,11 +35,14 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.workspace;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
@@ -48,7 +51,10 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString
+@XmlRootElement(name = "workspace")
 @XmlAccessorType(value = FIELD)
 public class GPGeoserverWorkspace implements IGPGeoserverWorkspace {
 

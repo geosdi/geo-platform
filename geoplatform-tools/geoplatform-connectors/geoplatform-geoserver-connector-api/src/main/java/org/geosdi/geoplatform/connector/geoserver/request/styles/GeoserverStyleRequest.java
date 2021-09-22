@@ -44,5 +44,4 @@ import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverB
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GeoserverStyleRequest extends GeoserverBaseStyleRequest<GPGeoserverSingleStyle, GeoserverStyleRequest>, GeoserverExsistRequest {
-
 }

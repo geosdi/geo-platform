@@ -42,6 +42,7 @@ import lombok.ToString;
 
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import static javax.xml.bind.annotation.XmlAccessType.PROPERTY;
 
@@ -53,6 +54,7 @@ import static javax.xml.bind.annotation.XmlAccessType.PROPERTY;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@XmlRootElement(name = "GPGeoserverMetadataParam")
 @XmlAccessorType(PROPERTY)
 public class GPGeoserverMetadataParam implements IGPGeoserverMetadataParam {
 

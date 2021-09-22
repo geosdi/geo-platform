@@ -127,7 +127,7 @@ public class GPGeoserverCreateDatastoreBody implements IGPGeoserverCreateDatasto
                 .filter(Objects::nonNull)
                 .filter(param -> (param.getKey() != null) && !(param.getKey().trim().isEmpty()))
                 .filter(param -> (param.getValue() != null) && !(param.getValue().trim().isEmpty()))
-                .collect(toMap(k -> k.getKey(), v -> v.getValue())));
+                .collect(toMap(IGPGeoserverConnectionParam::getKey, IGPGeoserverConnectionParam::getValue)));
         return this;
     }
 }

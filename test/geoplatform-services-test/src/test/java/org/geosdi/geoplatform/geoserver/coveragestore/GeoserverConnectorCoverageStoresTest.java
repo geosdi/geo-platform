@@ -36,7 +36,10 @@
 package org.geosdi.geoplatform.geoserver.coveragestore;
 
 import it.geosolutions.geoserver.rest.decoder.RESTCoverage;
+import it.geosolutions.geoserver.rest.encoder.coverage.GSCoverageEncoder;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
+import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -44,6 +47,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static java.lang.Boolean.TRUE;
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -52,6 +56,12 @@ import static java.lang.Boolean.TRUE;
 public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest {
 
     static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorCoverageStoresTest.class);
+    //
+    public static final JacksonSupport jacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_ENABLE,
+            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
+            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
+            WRAP_ROOT_VALUE_ENABLE,
+            INDENT_OUTPUT_ENABLE);
 
     @Test
     public void a_exsistCoverageStores() throws Exception {
@@ -90,6 +100,20 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
     public void e_unpublishCoverage() throws Exception {
                 this.geoserverConnectorStore.deleteCoverageInCoverageStore().withCoverage("layer_vito")
                         .withCoverageStore("mosaic").withWorkspace("nurc").getResponse();
+    }
+
+    @Test
+    public void f_updateCoverage() throws Exception {
+        GSCoverageEncoder gsCoverageEncoder = new GSCoverageEncoder();
+        gsCoverageEncoder.setName("test_vito");
+        gsCoverageEncoder.setTitle("test_vito");
+        logger.info(gsCoverageEncoder.getName());
+//        this.restPublisher.configureCoverage(gsCoverageEncoder, "nurc", "mosaic", "test_vito");
+//        logger.info("##################### {}\n",  this.geoserverConnectorStore.updateStoreCoverageRequest()
+//                .withStore("mosaic")
+//                .withWorkspace("nurc")
+//                .withBody(new GeoserverUpdateCoverageStoreBody("test_vito", "test_vito"))
+//                .withCoverage("test_vito").getResponseAsString());
     }
 
 }

@@ -33,49 +33,23 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.workspace.coverages;
+package org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages;
 
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoveragesRequest;
-import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.GPGeoserverDeleteCoverageRequest;
-import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.GPGeoserverLoadCoverageWithUrlRequest;
-import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.GPGeoserverLoadStoreCoverageRequest;
-import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.GPGeoserverUpdateStoreCoverageRequest;
-import org.geosdi.geoplatform.connector.store.workspace.GPGeoserverWorkspacesConnectorStore;
+import java.io.Serializable;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface GPGeoserverCoveragesConnectorStore extends GPGeoserverWorkspacesConnectorStore {
+public interface GPGeoserverUpdateCoverageStoreBody extends Serializable {
 
     /**
-     * @return {@link GeoserverLoadCoveragesRequest}
+     * @return {@link String}
      */
-    GeoserverLoadCoveragesRequest loadWorkspaceCoveragesRequest();
+    String getName();
 
     /**
-     * @return {@link GeoserverLoadCoverageRequest}
+     * @return {@link String}
      */
-    GeoserverLoadCoverageRequest loadWorkspaceCoverageRequest();
-
-    /**
-     * @return {@link GPGeoserverLoadStoreCoverageRequest}
-     */
-    GPGeoserverLoadStoreCoverageRequest loadWorkspaceStoreCoverageRequest();
-
-    /**
-     * @return {@link GPGeoserverLoadCoverageWithUrlRequest}
-     */
-    GPGeoserverLoadCoverageWithUrlRequest loadCoverageInfoWithUrl();
-
-    /**
-     * @return {@link GPGeoserverDeleteCoverageRequest}
-     */
-    GPGeoserverDeleteCoverageRequest deleteCoverageInCoverageStore();
-
-    /**
-     * @return {@link GPGeoserverUpdateStoreCoverageRequest}
-     */
-    GPGeoserverUpdateStoreCoverageRequest updateStoreCoverageRequest();
+    String getTitle();
 }

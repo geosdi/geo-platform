@@ -33,49 +33,50 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.workspace.coverages;
+package org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages;
 
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoveragesRequest;
-import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.GPGeoserverDeleteCoverageRequest;
-import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.GPGeoserverLoadCoverageWithUrlRequest;
-import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.GPGeoserverLoadStoreCoverageRequest;
-import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.GPGeoserverUpdateStoreCoverageRequest;
-import org.geosdi.geoplatform.connector.store.workspace.GPGeoserverWorkspacesConnectorStore;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import net.jcip.annotations.Immutable;
+
+import javax.annotation.Nonnull;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.TRUE;
+import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface GPGeoserverCoveragesConnectorStore extends GPGeoserverWorkspacesConnectorStore {
+@Immutable
+@Getter
+@Setter
+@XmlRootElement(name = "coverage")
+@ToString
+public class GeoserverUpdateCoverageStoreBody implements GPGeoserverUpdateCoverageStoreBody {
+
+    private static final long serialVersionUID = -4977318205480633889L;
+    //
+    @XmlElement(name = "name")
+    private final String name;
+    @XmlElement(name = "title")
+    private final String title;
+    private final Boolean enabled = TRUE;
 
     /**
-     * @return {@link GeoserverLoadCoveragesRequest}
+     * @param theName
+     * @param theTitle
      */
-    GeoserverLoadCoveragesRequest loadWorkspaceCoveragesRequest();
-
-    /**
-     * @return {@link GeoserverLoadCoverageRequest}
-     */
-    GeoserverLoadCoverageRequest loadWorkspaceCoverageRequest();
-
-    /**
-     * @return {@link GPGeoserverLoadStoreCoverageRequest}
-     */
-    GPGeoserverLoadStoreCoverageRequest loadWorkspaceStoreCoverageRequest();
-
-    /**
-     * @return {@link GPGeoserverLoadCoverageWithUrlRequest}
-     */
-    GPGeoserverLoadCoverageWithUrlRequest loadCoverageInfoWithUrl();
-
-    /**
-     * @return {@link GPGeoserverDeleteCoverageRequest}
-     */
-    GPGeoserverDeleteCoverageRequest deleteCoverageInCoverageStore();
-
-    /**
-     * @return {@link GPGeoserverUpdateStoreCoverageRequest}
-     */
-    GPGeoserverUpdateStoreCoverageRequest updateStoreCoverageRequest();
+    public GeoserverUpdateCoverageStoreBody(@Nonnull(when = NEVER) String theName, @Nonnull(when = NEVER) String theTitle) {
+        checkArgument((theName != null) && !(theName.trim().isEmpty()),
+                "The Parameter name must not be null or an Empty String.");
+        checkArgument((theTitle != null) && !(theTitle.trim().isEmpty()),
+                "The Parameter title must not be null or an Empty String.");
+        this.name = theName;
+        this.title = theTitle;
+    }
 }

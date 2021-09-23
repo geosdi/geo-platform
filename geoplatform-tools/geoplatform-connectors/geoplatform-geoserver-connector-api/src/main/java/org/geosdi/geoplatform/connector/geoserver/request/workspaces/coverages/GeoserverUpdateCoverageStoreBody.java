@@ -39,14 +39,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
+import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPProjectionPolicy;
 
-import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.TRUE;
-import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -62,21 +60,11 @@ public class GeoserverUpdateCoverageStoreBody implements GPGeoserverUpdateCovera
     private static final long serialVersionUID = -4977318205480633889L;
     //
     @XmlElement(name = "name")
-    private final String name;
+    private  String name;
     @XmlElement(name = "title")
-    private final String title;
-    private final Boolean enabled = TRUE;
+    private String title;
+    private Boolean enabled = TRUE;
+    private String srs;
+    private GPProjectionPolicy projectionPolicy;
 
-    /**
-     * @param theName
-     * @param theTitle
-     */
-    public GeoserverUpdateCoverageStoreBody(@Nonnull(when = NEVER) String theName, @Nonnull(when = NEVER) String theTitle) {
-        checkArgument((theName != null) && !(theName.trim().isEmpty()),
-                "The Parameter name must not be null or an Empty String.");
-        checkArgument((theTitle != null) && !(theTitle.trim().isEmpty()),
-                "The Parameter title must not be null or an Empty String.");
-        this.name = theName;
-        this.title = theTitle;
-    }
 }

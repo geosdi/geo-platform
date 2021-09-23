@@ -35,9 +35,14 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.coveragestores;
 
+import org.apache.http.NameValuePair;
+import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPCoverateStoreExtension;
+import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPParameterConfigure;
+import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPUploadMethod;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
+import java.io.File;
 
 import static javax.annotation.meta.When.NEVER;
 
@@ -63,11 +68,47 @@ public interface GeoserverCreateCoverageStoreWithStoreNameRequest extends GPJson
      * @param theMethod
      * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
      */
-    GeoserverCreateCoverageStoreWithStoreNameRequest withMethod(@Nonnull(when = NEVER) String theMethod);
+    GeoserverCreateCoverageStoreWithStoreNameRequest withMethod(@Nonnull(when = NEVER) GPUploadMethod theMethod);
 
     /**
      * @param theFormat
      * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
      */
-    GeoserverCreateCoverageStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) String theFormat);
+    GeoserverCreateCoverageStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) GPCoverateStoreExtension theFormat);
+
+    /**
+     * @param theParameterConfigure
+     * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
+     */
+    GeoserverCreateCoverageStoreWithStoreNameRequest withConfigure(@Nonnull(when = NEVER) GPParameterConfigure theParameterConfigure);
+
+    /**
+     * @param theParams
+     * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
+     */
+    GeoserverCreateCoverageStoreWithStoreNameRequest withParams(@Nonnull(when = NEVER) NameValuePair... theParams);
+
+    /**
+     * @param theFile
+     * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
+     */
+    GeoserverCreateCoverageStoreWithStoreNameRequest withFile(@Nonnull(when = NEVER) File theFile);
+
+    /**
+     * @param theMymeType
+     * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
+     */
+    GeoserverCreateCoverageStoreWithStoreNameRequest withMimeType(@Nonnull(when = NEVER) String theMymeType);
+
+    /**
+     * @param theFileName
+     * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
+     */
+    GeoserverCreateCoverageStoreWithStoreNameRequest withFileName(@Nonnull(when = NEVER) String theFileName);
+
+    /**
+     * @param theCoverageName
+     * @return
+     */
+    GeoserverCreateCoverageStoreWithStoreNameRequest withCoverageName(@Nonnull(when = NEVER) String theCoverageName);
 }

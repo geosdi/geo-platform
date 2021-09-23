@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages;
 
+import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPProjectionPolicy;
+
 import java.io.Serializable;
 
 /**
@@ -52,4 +54,14 @@ public interface GPGeoserverUpdateCoverageStoreBody extends Serializable {
      * @return {@link String}
      */
     String getTitle();
+
+    /**
+     * @return {@link String}
+     */
+    String getSrs();
+
+    /**
+     * @return {@link GPProjectionPolicy}
+     */
+    GPProjectionPolicy getProjectionPolicy();
 }

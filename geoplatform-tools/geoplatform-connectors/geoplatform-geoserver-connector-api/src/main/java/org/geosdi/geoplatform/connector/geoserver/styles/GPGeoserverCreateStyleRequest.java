@@ -36,6 +36,7 @@ package org.geosdi.geoplatform.connector.geoserver.styles;
 
 import net.jcip.annotations.ThreadSafe;
 import org.apache.http.HttpEntity;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverCreareStyleResponse;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverCreareStyleResponse;
@@ -51,7 +52,6 @@ import java.io.BufferedReader;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.stream.Collectors.joining;
 import static javax.annotation.meta.When.NEVER;
-import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -77,7 +77,7 @@ public class GPGeoserverCreateStyleRequest extends GPGeoserverBaseCreateStyleReq
         checkArgument(geoserverStyleBody != null, "The Parameter styleBody must not be null.");
         String geoserverStyleBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(geoserverStyleBody);
         logger.debug("#############################STYLE_BODY : \n{}\n", geoserverStyleBodyString);
-        return new StringEntity(geoserverStyleBodyString, APPLICATION_JSON);
+        return new StringEntity(geoserverStyleBodyString, ContentType.APPLICATION_JSON);
     }
 
     /**

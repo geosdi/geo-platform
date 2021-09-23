@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.connector.server.request.json;
 
 import com.google.common.io.CharStreams;
-import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -54,6 +53,7 @@ import java.io.InputStreamReader;
 import static com.google.common.base.Charsets.UTF_8;
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
+import static org.apache.commons.io.IOUtils.toByteArray;
 import static org.apache.http.util.EntityUtils.consume;
 
 /**

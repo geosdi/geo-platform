@@ -82,7 +82,6 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest, Connector
     @Override
     public T getResponse() throws Exception {
         HttpUriRequest httpMethod = this.prepareHttpMethod();
-        httpMethod.addHeader("Content-Type", "application/json");
         logger.debug("#############################Executing -------------> {}\n", httpMethod.getURI().toString());
         this.addHeaderParams(httpMethod);
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpMethod);
@@ -111,7 +110,6 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest, Connector
     @Override
     public String getResponseAsString() throws Exception {
         HttpUriRequest httpMethod = this.prepareHttpMethod();
-        httpMethod.addHeader("Content-Type", "application/json");
         logger.debug("#############################Executing -------------> {}\n", httpMethod.getURI().toString());
         this.addHeaderParams(httpMethod);
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpMethod);
@@ -142,7 +140,6 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest, Connector
     @Override
     public InputStream getResponseAsStream() throws Exception {
         HttpUriRequest httpMethod = this.prepareHttpMethod();
-        httpMethod.addHeader("Content-Type", "application/json");
         logger.debug("#############################Executing -------------> {}\n", httpMethod.getURI().toString());
         this.addHeaderParams(httpMethod);
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpMethod);
@@ -152,8 +149,7 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest, Connector
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
             if (responseEntity != null) {
-                InputStream inputStream = responseEntity.getContent();
-                return new ByteArrayInputStream(IOUtils.toByteArray(inputStream));
+                return new ByteArrayInputStream(toByteArray(responseEntity.getContent()));
             } else {
                 throw new IncorrectResponseException(CONNECTION_PROBLEM_MESSAGE);
             }
@@ -167,6 +163,7 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest, Connector
      * @param httpMethod
      */
     protected void addHeaderParams(HttpUriRequest httpMethod) {
+        httpMethod.addHeader("Content-Type", "application/json");
     }
 
     /**

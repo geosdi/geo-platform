@@ -35,7 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.worksapce;
 
-import net.jcip.annotations.ThreadSafe;import org.apache.http.HttpEntity;
+import net.jcip.annotations.ThreadSafe;
+import org.apache.http.HttpEntity;
 import org.apache.http.entity.StringEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverCreateWorkspaceBody;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverCreateWorkspaceResponse;
@@ -70,8 +71,7 @@ public class GPGeoserverCreateWorkspaceRequest extends GPJsonPostConnectorReques
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    GPGeoserverCreateWorkspaceRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
-            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverCreateWorkspaceRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.workspaceBody = withInitial(() -> null);
         this.defaultWorkspace = withInitial(() -> FALSE);

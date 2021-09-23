@@ -33,79 +33,18 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.styles;
+package org.geosdi.geoplatform.connector.geoserver.model.styles;
 
-import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.*;
-import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request;
-import org.geosdi.geoplatform.connector.store.layers.GeoserverLayersConnectorStore;
+import java.io.Serializable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoserverStylesConnectorStore extends GeoserverLayersConnectorStore implements GPGeoserverStylesConnectorStore {
+public interface IGPGeoserverCreareStyleResponse extends Serializable {
 
     /**
-     * @param theServer
+     * @return {@link String}
      */
-    protected GeoserverStylesConnectorStore(GPGeoserverConnector theServer) {
-        super(theServer);
-    }
-
-    /**
-     * @return {@link GeoserverStylesRequest}
-     */
-    @Override
-    public GeoserverStylesRequest loadStylesRequest() {
-        return this.server.loadStylesRequest();
-    }
-
-    /**
-     * @return {@link GeoserverStyleRequest}
-     */
-    @Override
-    public GeoserverStyleRequest loadStyleRequest() {
-        return this.server.loadStyleRequest();
-    }
-
-    /**
-     * @return {@link GeoserverStyleSLDV100Request}
-     */
-    @Override
-    public GeoserverStyleSLDV100Request loadStyleSLDV100Request() {
-        return this.server.loadStyleSLDV100Request();
-    }
-
-    /**
-     * @return {@link GeoserverCreateStyleRequest}
-     */
-    @Override
-    public GeoserverCreateStyleRequest createStyleRequest() {
-        return this.server.createStyleRequest();
-    }
-
-    /**
-     * @return {@link GeoserverDeleteStyleRequest}
-     */
-    @Override
-    public GeoserverDeleteStyleRequest deleteStyleRequest() {
-        return this.server.deleteStyleRequest();
-    }
-
-    /**
-     * @return {@link GeoserverWorkspaceStylesRequest}
-     */
-    @Override
-    public GeoserverWorkspaceStylesRequest loadWorkspaceStyles() {
-        return this.server.loadWorkspaceStylesRequest();
-    }
-
-    /**
-     * @return {@link GeoserverWorkspaceStyleRequest}
-     */
-    @Override
-    public GeoserverWorkspaceStyleRequest loadWorkspaceStyle() {
-        return this.server.loadWorkspaceStyleRequest();
-    }
+    String getStyleName();
 }

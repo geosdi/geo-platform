@@ -63,7 +63,7 @@ public enum GPCoverageStoreType implements IGPCoverageStoreType {
     @XmlEnumValue(value = "ImageMosaic")
     IMAGEMOSAIC("ImageMosaic"),
     @XmlEnumValue(value = "WorldImage")
-    WORKDIMAGE("WorldImage");
+    WORLDIMAGE("WorldImage");
 
     private final String type;
 

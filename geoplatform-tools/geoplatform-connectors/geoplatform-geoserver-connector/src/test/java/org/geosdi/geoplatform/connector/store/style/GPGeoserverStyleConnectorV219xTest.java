@@ -48,6 +48,9 @@ import org.junit.runners.MethodSorters;
 import java.util.Objects;
 
 import static io.reactivex.rxjava3.core.Observable.fromIterable;
+import static java.lang.Boolean.TRUE;
+import static org.geosdi.geoplatform.connector.jackson.GPGeoserverStyleBodyJacksonTest.toGPGeoserverStyleBody;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -89,6 +92,20 @@ public class GPGeoserverStyleConnectorV219xTest extends GPBaseGeoserverConnector
         logger.info("#####################GEOSERVER_STYLE_SLD_V100_RESPONSE_AS_STRING : {}\n", geoserverStyleSLDV100Request
                 .withStyleName("population")
                 .getResponseAsString());
+    }
+
+    @Test
+    public void d_geoserverCreateStyleRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@GEOSERVER_CREATE_STYLE_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x.createStyleRequest()
+                .withStyleBody(toGPGeoserverStyleBody("roads_style_new", "roads33.sld"))
+                .getResponse());
+    }
+
+    @Test
+    public void e_geoserverDeleteStyleRequestTest() throws Exception {
+        assertTrue(geoserverConnectorStoreV2_19_x.deleteStyleRequest()
+                .withStyle("roads_style_new")
+                .getResponse() == TRUE);
     }
 
     /**

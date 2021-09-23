@@ -105,6 +105,8 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
                 throw new UnauthorizedException();
             case 404:
                 throw new ResourceNotFoundException();
+            case 405:
+                throw new IllegalStateException("Method not allowed");
         }
     }
 

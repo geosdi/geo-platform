@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,50 +32,40 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.styles;
+package org.geosdi.geoplatform.connector.geoserver.model.styles;
 
-import org.geosdi.geoplatform.connector.geoserver.request.styles.*;
-import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request;
-import org.geosdi.geoplatform.connector.store.layers.GPGeoserverLayersConnectorStore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import java.io.Serializable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverStylesConnectorStore extends GPGeoserverLayersConnectorStore {
+@JsonDeserialize(as = GPGeoserverStyleBody.class)
+@XmlRootElement(name = "style")
+@XmlSeeAlso(value = GPGeoserverStyleBody.class)
+public interface IGPGeoserverStyleBody extends Serializable {
 
     /**
-     * @return {@link GeoserverStylesRequest}
+     * @return {@link String}
      */
-    GeoserverStylesRequest loadStylesRequest();
+    String getStyleName();
 
     /**
-     * @return {@link GeoserverStyleRequest}
+     * @param theStyleName
      */
-    GeoserverStyleRequest loadStyleRequest();
+    void setStyleName(String theStyleName);
 
     /**
-     * @return {@link GeoserverStyleSLDV100Request}
+     * @return {@link String}
      */
-    GeoserverStyleSLDV100Request loadStyleSLDV100Request();
+    String getFileName();
 
     /**
-     * @return {@link GeoserverCreateStyleRequest}
+     * @param theFileName
      */
-    GeoserverCreateStyleRequest createStyleRequest();
-
-    /**
-     * @return {@link GeoserverDeleteStyleRequest}
-     */
-    GeoserverDeleteStyleRequest deleteStyleRequest();
-
-    /**
-     * @return {@link GeoserverStylesRequest}
-     */
-    GeoserverWorkspaceStylesRequest loadWorkspaceStyles();
-
-    /**
-     * @return {@link GeoserverStyleRequest}
-     */
-    GeoserverWorkspaceStyleRequest loadWorkspaceStyle();
+    void setFileName(String theFileName);
 }

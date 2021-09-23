@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,50 +32,30 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.styles;
+package org.geosdi.geoplatform.connector.geoserver.model.styles;
 
-import org.geosdi.geoplatform.connector.geoserver.request.styles.*;
-import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request;
-import org.geosdi.geoplatform.connector.store.layers.GPGeoserverLayersConnectorStore;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import javax.xml.bind.annotation.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverStylesConnectorStore extends GPGeoserverLayersConnectorStore {
+@Getter
+@Setter
+@ToString
+@XmlRootElement(name = "style")
+@XmlType(propOrder = {"styleName", "fileName"})
+@XmlAccessorType(XmlAccessType.FIELD)
+public class GPGeoserverStyleBody implements IGPGeoserverStyleBody {
 
-    /**
-     * @return {@link GeoserverStylesRequest}
-     */
-    GeoserverStylesRequest loadStylesRequest();
-
-    /**
-     * @return {@link GeoserverStyleRequest}
-     */
-    GeoserverStyleRequest loadStyleRequest();
-
-    /**
-     * @return {@link GeoserverStyleSLDV100Request}
-     */
-    GeoserverStyleSLDV100Request loadStyleSLDV100Request();
-
-    /**
-     * @return {@link GeoserverCreateStyleRequest}
-     */
-    GeoserverCreateStyleRequest createStyleRequest();
-
-    /**
-     * @return {@link GeoserverDeleteStyleRequest}
-     */
-    GeoserverDeleteStyleRequest deleteStyleRequest();
-
-    /**
-     * @return {@link GeoserverStylesRequest}
-     */
-    GeoserverWorkspaceStylesRequest loadWorkspaceStyles();
-
-    /**
-     * @return {@link GeoserverStyleRequest}
-     */
-    GeoserverWorkspaceStyleRequest loadWorkspaceStyle();
+    private static final long serialVersionUID = 8923278258287109702L;
+    //
+    @XmlElement(name = "name")
+    private String styleName;
+    @XmlElement(name = "filename")
+    private String fileName;
 }

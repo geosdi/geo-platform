@@ -71,8 +71,7 @@ public class GPGeoserverCreateWorkspaceRequest extends GPJsonPostConnectorReques
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    GPGeoserverCreateWorkspaceRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
-            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverCreateWorkspaceRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.workspaceBody = withInitial(() -> null);
         this.defaultWorkspace = withInitial(() -> FALSE);

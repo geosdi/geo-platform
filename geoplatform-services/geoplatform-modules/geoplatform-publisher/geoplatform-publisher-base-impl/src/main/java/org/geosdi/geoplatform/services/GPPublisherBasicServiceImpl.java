@@ -40,7 +40,6 @@ import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
 import it.geosolutions.geoserver.rest.decoder.RESTServiceUniqueValues;
 import it.geosolutions.geoserver.rest.encoder.GSResourceEncoder;
-import it.geosolutions.geoserver.rest.encoder.coverage.GSCoverageEncoder;
 import org.apache.commons.httpclient.NameValuePair;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastores;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
@@ -56,6 +55,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.Geoserver
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadLayerRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadWorkspaceLayerRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageWithUrlRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverUpdateCoverageStoreBody;
 import org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -1353,11 +1353,24 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                     fileName, fileInTifDir, fileName, epsg,
                     GSResourceEncoder.ProjectionPolicy.FORCE_DECLARED, sld);
             if (published) {
-                GSCoverageEncoder coverageEncoder = new GSCoverageEncoder();
-                coverageEncoder.setName(fileName);
-                coverageEncoder.setTitle(fileName);
-                this.restPublisher.configureCoverage(coverageEncoder,
-                        userWorkspace, fileName);
+                try{
+                    if(!this.geoserverConnectorStore.loadWorkspaceStoreCoverageRequest().withCoverage(fileName)
+                            .withWorkspace(userWorkspace).withStore(fileName).exsist()) {
+                        logger.error("No coverages found in new coveragestore " + userWorkspace + " called " + fileName);
+                    }else {
+                        GeoserverUpdateCoverageStoreBody geoserverUpdateCoverageStoreBody = new GeoserverUpdateCoverageStoreBody();
+                        geoserverUpdateCoverageStoreBody.setName(fileName);
+                        geoserverUpdateCoverageStoreBody.setTitle(fileName);
+                        this.geoserverConnectorStore.updateStoreCoverageRequest()
+                                .withStore(fileName)
+                                .withWorkspace(userWorkspace)
+                                .withBody(geoserverUpdateCoverageStoreBody)
+                                .withCoverage(fileName).getResponse();
+                    }
+                }catch (Exception e) {
+                    final String error = "Error to load coverage with  workspace name:" + userWorkspace + " "  + e;
+                    logger.error(error);
+                }
                 logger.info(
                         fileInTifDir + " correctly published in the " + userWorkspace + " workspace");
                 infoPreview = getTIFURLByLayerName(userWorkspace, fileName);

@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.coveragestores;
 
-import org.apache.http.NameValuePair;
+import org.apache.hc.core5.http.NameValuePair;
 import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPCoverateStoreExtension;
 import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPUploadMethod;

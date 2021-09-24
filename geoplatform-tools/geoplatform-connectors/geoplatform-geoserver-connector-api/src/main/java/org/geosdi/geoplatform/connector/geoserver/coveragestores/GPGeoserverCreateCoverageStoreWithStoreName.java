@@ -15,6 +15,9 @@ import javax.annotation.Nonnull;
 import java.io.BufferedReader;
 import java.io.File;
 import java.util.Arrays;
+import java.util.Objects;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
@@ -33,12 +36,9 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPutConnec
     private final ThreadLocal<String> storeName;
     private final ThreadLocal<GPUploadMethod> methodName;
     private final ThreadLocal<GPCoverateStoreExtension> formatName;
-    private final ThreadLocal<GPParameterConfigure> parameterConfigure;
-    private final ThreadLocal<String> params;
     private final ThreadLocal<File> file;
     private final ThreadLocal<String> mimeType;
-    private final ThreadLocal<String> coverageName;
-    private final ThreadLocal<String> fileName;
+    private final ThreadLocal<TreeMap<String, String>> queryStringMap;
 
      GPGeoserverCreateCoverageStoreWithStoreName(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
             @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
@@ -47,13 +47,10 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPutConnec
         this.storeName = withInitial(() -> null);
         this.methodName = withInitial(() -> null);
         this.formatName = withInitial(() -> null);
-        this.parameterConfigure = withInitial(() -> null);
-        this.params = withInitial(() -> null);
         this.file = withInitial(() -> null);
         this.mimeType = withInitial(() -> null);
-        this.coverageName = withInitial(() -> null);
-        this.fileName = withInitial(() -> null);
-    }
+         this.queryStringMap = withInitial(() -> new TreeMap<>());
+     }
 
     /**
      * @param theWorkspace
@@ -62,6 +59,7 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPutConnec
     @Override
     public GeoserverCreateCoverageStoreWithStoreNameRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspaceName.set(theWorkspace);
+        this.queryStringMap.set(new TreeMap<>());
         return self();
     }
 
@@ -102,7 +100,7 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPutConnec
     @Override
     public GeoserverCreateCoverageStoreWithStoreNameRequest withConfigure(
             @Nonnull(when = NEVER) GPParameterConfigure theParameterConfigure) {
-        this.parameterConfigure.set(theParameterConfigure);
+        this.queryStringMap.get().put("configure", theParameterConfigure.toString());
         return self();
     }
 
@@ -113,7 +111,7 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPutConnec
     @Override
     public GeoserverCreateCoverageStoreWithStoreNameRequest withParams(
             @Nonnull(when = NEVER) NameValuePair... theParams) {
-        this.params.set(this.buildParams(theParams));
+        this.queryStringMap.get().put("params", this.buildParams(theParams));
         return self();
     }
 
@@ -143,7 +141,7 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPutConnec
      */
     @Override
     public GeoserverCreateCoverageStoreWithStoreNameRequest withFileName(@Nonnull(when = NEVER) String theFileName) {
-        this.fileName.set(theFileName);
+        this.queryStringMap.get().put("filename", theFileName);
         return self();
     }
 
@@ -154,7 +152,7 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPutConnec
     @Override
     public GeoserverCreateCoverageStoreWithStoreNameRequest withCoverageName(
             @Nonnull(when = NEVER) String theCoverageName) {
-        this.coverageName.set(theCoverageName);
+        this.queryStringMap.get().put("coverageName", theCoverageName);
         return self();
     }
 
@@ -172,27 +170,13 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPutConnec
         GPCoverateStoreExtension format = this.formatName.get();
         checkArgument((format != null), "The Parameter format must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
-        GPParameterConfigure configure = this.parameterConfigure.get();
-        String params = this.params.get();
-        String fileName = this.fileName.get();
-        String coverageName = this.coverageName.get();
         String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())
                 : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())));
-        StringBuilder queryString = new StringBuilder();
-        if(configure != null) {
-            queryString = queryString.append("configure=").append(configure);
-            if(params != null) {
-                queryString = queryString.append("&").append(params);
-            }
-        }
-        if(fileName != null && !(fileName.trim().isEmpty())) {
-            queryString = queryString != null  ? queryString.append("&").append("filename=").append(fileName) : queryString.append("filename=").append(fileName);
-        }
-        if(coverageName != null && !(coverageName.trim().isEmpty())) {
-            queryString = queryString != null  ? queryString.append("&").append("coverageName=").append(coverageName) : queryString.append("coverageName=").append(coverageName);
-        }
-        queryString.insert(0, "?");
-        path = path.concat(queryString.toString());
+        String queryString = this.queryStringMap.get().entrySet().stream().filter(Objects::nonNull)
+                .map(e -> e.getKey().concat("=").concat(e.getValue()))
+                .map(Object::toString)
+                .collect(Collectors.joining("&"));
+        path = path.concat( queryString != null ? "?".concat(queryString) : "");
         return path;
     }
 

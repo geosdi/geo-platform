@@ -6,7 +6,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
-import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverCreateCoverageStoreWithStoreNameRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverUpdateCoverageStoreWithStoreNameRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -30,7 +30,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPutConnectorRequest<Boolean, GeoserverCreateCoverageStoreWithStoreNameRequest> implements GeoserverCreateCoverageStoreWithStoreNameRequest {
+public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateCoverageStoreWithStoreNameRequest> implements GeoserverUpdateCoverageStoreWithStoreNameRequest {
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> storeName;
@@ -40,7 +40,7 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPutConnec
     private final ThreadLocal<String> mimeType;
     private final ThreadLocal<TreeMap<String, String>> queryStringMap;
 
-     GPGeoserverCreateCoverageStoreWithStoreName(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
+     GPGeoserverUpdateCoverageStoreWithStoreName(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
             @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.workspaceName = withInitial(() -> null);
@@ -54,10 +54,10 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPutConnec
 
     /**
      * @param theWorkspace
-     * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
+     * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     @Override
-    public GeoserverCreateCoverageStoreWithStoreNameRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
+    public GeoserverUpdateCoverageStoreWithStoreNameRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspaceName.set(theWorkspace);
         this.queryStringMap.set(new TreeMap<>());
         return self();
@@ -65,40 +65,40 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPutConnec
 
     /**
      * @param theStore
-     * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
+     * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     @Override
-    public GeoserverCreateCoverageStoreWithStoreNameRequest withStore(@Nonnull(when = NEVER) String theStore) {
+    public GeoserverUpdateCoverageStoreWithStoreNameRequest withStore(@Nonnull(when = NEVER) String theStore) {
         this.storeName.set(theStore);
         return self();
     }
 
     /**
      * @param theMethod
-     * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
+     * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     @Override
-    public GeoserverCreateCoverageStoreWithStoreNameRequest withMethod(@Nonnull(when = NEVER) GPUploadMethod theMethod) {
+    public GeoserverUpdateCoverageStoreWithStoreNameRequest withMethod(@Nonnull(when = NEVER) GPUploadMethod theMethod) {
         this.methodName.set(theMethod);
         return self();
     }
 
     /**
      * @param theFormat
-     * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
+     * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     @Override
-    public GeoserverCreateCoverageStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) GPCoverateStoreExtension theFormat) {
+    public GeoserverUpdateCoverageStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) GPCoverateStoreExtension theFormat) {
         this.formatName.set(theFormat);
         return self();
     }
 
     /**
      * @param theParameterConfigure
-     * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
+     * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     @Override
-    public GeoserverCreateCoverageStoreWithStoreNameRequest withConfigure(
+    public GeoserverUpdateCoverageStoreWithStoreNameRequest withConfigure(
             @Nonnull(when = NEVER) GPParameterConfigure theParameterConfigure) {
         this.queryStringMap.get().put("configure", theParameterConfigure.toString());
         return self();
@@ -106,10 +106,10 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPutConnec
 
     /**
      * @param theParams
-     * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
+     * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     @Override
-    public GeoserverCreateCoverageStoreWithStoreNameRequest withParams(
+    public GeoserverUpdateCoverageStoreWithStoreNameRequest withParams(
             @Nonnull(when = NEVER) NameValuePair... theParams) {
         this.queryStringMap.get().put("params", this.buildParams(theParams));
         return self();
@@ -117,30 +117,30 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPutConnec
 
     /**
      * @param theFile
-     * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
+     * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     @Override
-    public GeoserverCreateCoverageStoreWithStoreNameRequest withFile(@Nonnull(when = NEVER) File theFile) {
+    public GeoserverUpdateCoverageStoreWithStoreNameRequest withFile(@Nonnull(when = NEVER) File theFile) {
         this.file.set(theFile);
         return self();
     }
 
     /**
      * @param theMimeType
-     * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
+     * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     @Override
-    public GeoserverCreateCoverageStoreWithStoreNameRequest withMimeType(@Nonnull(when = NEVER) String theMimeType) {
+    public GeoserverUpdateCoverageStoreWithStoreNameRequest withMimeType(@Nonnull(when = NEVER) String theMimeType) {
         this.mimeType.set(theMimeType);
         return self();
     }
 
     /**
      * @param theFileName
-     * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
+     * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     @Override
-    public GeoserverCreateCoverageStoreWithStoreNameRequest withFileName(@Nonnull(when = NEVER) String theFileName) {
+    public GeoserverUpdateCoverageStoreWithStoreNameRequest withFileName(@Nonnull(when = NEVER) String theFileName) {
         this.queryStringMap.get().put("filename", theFileName);
         return self();
     }
@@ -150,7 +150,7 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPutConnec
      * @return
      */
     @Override
-    public GeoserverCreateCoverageStoreWithStoreNameRequest withCoverageName(
+    public GeoserverUpdateCoverageStoreWithStoreNameRequest withCoverageName(
             @Nonnull(when = NEVER) String theCoverageName) {
         this.queryStringMap.get().put("coverageName", theCoverageName);
         return self();
@@ -176,8 +176,7 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPutConnec
                 .map(e -> e.getKey().concat("=").concat(e.getValue()))
                 .map(Object::toString)
                 .collect(Collectors.joining("&"));
-        path = path.concat( queryString != null ? "?".concat(queryString) : "");
-        return path;
+        return path.concat( queryString != null ? "?".concat(queryString) : "");
     }
 
     /**

@@ -93,10 +93,10 @@ public abstract class GeoserverCoverageStoresConnectorStore extends GeoserverDat
     }
 
     /**
-     * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
+     * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     @Override
-    public GeoserverCreateCoverageStoreWithStoreNameRequest createCoverageStoreWithStoreName() {
-        return this.server.createCoverageStoreWithStoreName();
+    public GeoserverUpdateCoverageStoreWithStoreNameRequest updateCoverageStoreWithStoreName() {
+        return this.server.updateCoverageStoreWithStoreName();
     }
 }

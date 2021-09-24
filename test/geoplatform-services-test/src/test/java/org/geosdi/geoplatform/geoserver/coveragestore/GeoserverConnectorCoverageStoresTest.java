@@ -118,9 +118,9 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
                 .collect(joining(separator)));
         Assert.assertTrue("#################FILE_EXSIST", file.exists());
 
-        logger.info("###############{}\n", this.geoserverConnectorStore.createCoverageStoreWithStoreName()
-                .withCoverageName("layer_vito")
+        logger.info("###############{}\n", this.geoserverConnectorStore.updateCoverageStoreWithStoreName()
                 .withWorkspace("sf")
+                .withCoverageName("layer_vito")
                 .withStore("store_vito")
                 .withFileName("VMI_20210923T1020Z.tif")
                 .withConfigure(GPParameterConfigure.NONE)

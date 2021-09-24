@@ -70,7 +70,7 @@ public interface GPGeoserverCoverageStoresConnectorStore extends GPGeoserverData
     GeoserverUpdateCoverageStoreRequest updateCoverageStoreRequest();
 
     /**
-     * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
+     * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
-    GeoserverCreateCoverageStoreWithStoreNameRequest createCoverageStoreWithStoreName();
+    GeoserverUpdateCoverageStoreWithStoreNameRequest updateCoverageStoreWithStoreName();
 }

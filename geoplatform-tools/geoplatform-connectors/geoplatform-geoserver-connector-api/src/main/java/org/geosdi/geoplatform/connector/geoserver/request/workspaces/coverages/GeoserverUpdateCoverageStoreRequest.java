@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages;
 
+import org.geosdi.geoplatform.connector.geoserver.model.coveragestores.GPGeoserverUpdateCoverageStoreBody;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 /**

@@ -39,7 +39,10 @@ import org.apache.http.NameValuePair;
 import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPCoverateStoreExtension;
 import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPUploadMethod;
+import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPcoverageResponse;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
+import org.geosdi.geoplatform.support.jackson.xml.jaxb.GPJacksonJAXBXmlSupport;
+import org.geosdi.geoplatform.support.jackson.xml.jaxb.JacksonJAXBXmlSupport;
 
 import javax.annotation.Nonnull;
 import java.io.File;
@@ -50,7 +53,9 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeoserverUpdateCoverageStoreWithStoreNameRequest extends GPJsonConnectorRequest<Boolean, GeoserverUpdateCoverageStoreWithStoreNameRequest> {
+public interface GeoserverUpdateCoverageStoreWithStoreNameRequest extends GPJsonConnectorRequest<GPcoverageResponse, GeoserverUpdateCoverageStoreWithStoreNameRequest> {
+
+    JacksonJAXBXmlSupport JACKSON_JAXB_XML_SUPPORT = new GPJacksonJAXBXmlSupport();
 
     /**
      * @param theWorkspace
@@ -93,12 +98,6 @@ public interface GeoserverUpdateCoverageStoreWithStoreNameRequest extends GPJson
      * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     GeoserverUpdateCoverageStoreWithStoreNameRequest withFile(@Nonnull(when = NEVER) File theFile);
-
-    /**
-     * @param theMymeType
-     * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
-     */
-    GeoserverUpdateCoverageStoreWithStoreNameRequest withMimeType(@Nonnull(when = NEVER) String theMymeType);
 
     /**
      * @param theFileName

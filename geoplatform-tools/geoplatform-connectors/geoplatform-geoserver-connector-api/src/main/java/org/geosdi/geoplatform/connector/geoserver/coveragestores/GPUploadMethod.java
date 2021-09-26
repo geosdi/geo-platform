@@ -20,15 +20,10 @@ public enum GPUploadMethod {
     external;
 
     /**
-     * Returns the name of this enum constant, as contained in the
-     * declaration.  This method may be overridden, though it typically
-     * isn't necessary or desirable.  An enum type should override this
-     * method when a more "programmer-friendly" string form exists.
-     *
-     * @return the name of this enum constant
+     * @return {@link String}
      */
     @Override
     public String toString() {
-        return super.toString().toLowerCase();
+        return this.name().toLowerCase();
     }
 }

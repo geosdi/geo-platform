@@ -73,4 +73,9 @@ public interface GPGeoserverCoverageStoresConnectorStore extends GPGeoserverData
      * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     GeoserverUpdateCoverageStoreWithStoreNameRequest updateCoverageStoreWithStoreName();
+
+    /**
+     * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
+     */
+    GeoserverCreateCoverageStoreWithStoreNameRequest createCoverageStoreWithStoreName();
 }

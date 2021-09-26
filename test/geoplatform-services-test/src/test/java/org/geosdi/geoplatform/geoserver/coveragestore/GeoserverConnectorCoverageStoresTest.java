@@ -35,7 +35,10 @@
  */
 package org.geosdi.geoplatform.geoserver.coveragestore;
 
+import it.geosolutions.geoserver.rest.HTTPUtils;
 import it.geosolutions.geoserver.rest.decoder.RESTCoverage;
+import it.geosolutions.geoserver.rest.encoder.GSResourceEncoder;
+import it.geosolutions.geoserver.rest.encoder.coverage.GSCoverageEncoder;
 import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPCoverateStoreExtension;
 import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPUploadMethod;
@@ -50,10 +53,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
-import static java.io.File.separator;
 import static java.lang.Boolean.TRUE;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
@@ -112,21 +112,50 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
    // @Ignore(value = "Store layer_vito may be not present")
     @Test
     public void f_updateCoverage() throws Exception {
-
-
-        File file = new File(of("src", "test", "resources", "VMI_20210923T1020Z.tif")
-                .collect(joining(separator)));
+//        File file = new File(of("src", "test", "resources", "VMI_20210923T1020Z.tif")
+//                .collect(joining(separator)));
+        File file = new File("/Users/vitosalvia/workspace/geo-platform/test/geoplatform-services-test/src/test/resources/VMI_20210923T1020Z.tif");
         Assert.assertTrue("#################FILE_EXSIST", file.exists());
-
+        logger.info("@@@@@@@@@@ {}\n", file.getAbsolutePath());
         logger.info("###############{}\n", this.geoserverConnectorStore.updateCoverageStoreWithStoreName()
                 .withWorkspace("sf")
-                .withCoverageName("layer_vito")
+                .withCoverageName("coverage_name")
                 .withStore("store_vito")
-                .withFileName("VMI_20210923T1020Z.tif")
-                .withConfigure(GPParameterConfigure.NONE)
+                .withFileName("layer_vito")
+                .withConfigure(GPParameterConfigure.FIRST)
                 .withMethod(GPUploadMethod.FILE)
                 .withFormat(GPCoverateStoreExtension.GEOTIFF)
-                .withFile(file).getResponseAsString());
+                .withFile(file).getResponse());
+
+        // http://150.145.141.180/geoserver/rest/workspaces/sf/coveragestores/store_vito/file.geotiff?configure=first
+        // http://150.145.141.180/geoserver/rest/workspaces/sf/coveragestores/store_vito/file.geotiff?configure=first
+
+        //logger.info("############{}\n", this.restPublisher.publishGeoTIFF("sf", "store_vito", file));
+
     }
 
+    @Test
+    public void g_createCoverage() throws Exception {
+//        logger.info("#############{}\n", this.geoserverConnectorStore.createCoverageStoreWithStoreName()
+//                .withStore("store_vito")
+//                .withWorkspace("sf")
+//                .withMethod()
+
+        GSCoverageEncoder re = new GSCoverageEncoder();
+        re.setName("layer_vito");
+        re.setTitle("layer_vito");
+        re.setSRS("EPSG:4326");
+        re.setProjectionPolicy(GSResourceEncoder.ProjectionPolicy.FORCE_DECLARED);
+
+            StringBuilder sbUrl = (new StringBuilder("http://150.145.141.180/geoserver")).append("/rest/workspaces/").append("sf").append("/").append("coveragestores").append("/").append("store_vito").append("/").append("coverages.json");
+            String resourceName = re.getName();
+            if (resourceName == null) {
+                throw new IllegalArgumentException("Unable to configure a coverage using unnamed coverage encoder");
+            } else {
+                String xmlBody = re.toString();
+                logger.info("################BODY: {}\n", xmlBody);
+                String sendResult = HTTPUtils.postXml(sbUrl.toString(), xmlBody, "admin", "geoservertest");
+                logger.info("#############SEND {}\n" + sendResult);
+            }
+        }
 }

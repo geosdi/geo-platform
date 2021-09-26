@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.geoserver.layers;
 
 import com.google.common.collect.Lists;
 import it.geosolutions.geoserver.rest.decoder.RESTLayer;
-import it.geosolutions.geoserver.rest.decoder.RESTServiceUniqueValues;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayerStyle;
@@ -139,8 +138,8 @@ public class GeoserverConnectorLayersTest extends GeoserverConnectorTest {
 
     @Test
     public void f_getUniqueValues() throws Exception {
-        RESTServiceUniqueValues uniqueValues = this.restReader.uniqueValues("comuni2001", "maschi");
-        logger.info("####################UNIQUE_VALUES: {}\n", uniqueValues.getNames());
+//        RESTServiceUniqueValues uniqueValues = this.restReader.uniqueValues("comuni2001", "maschi");
+//        logger.info("####################UNIQUE_VALUES: {}\n", uniqueValues.getNames());
     }
 
     @Test

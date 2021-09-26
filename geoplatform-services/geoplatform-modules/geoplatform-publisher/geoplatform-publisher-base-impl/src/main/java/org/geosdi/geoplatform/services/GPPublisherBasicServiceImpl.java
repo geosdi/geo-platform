@@ -38,9 +38,9 @@ package org.geosdi.geoplatform.services;
 import com.google.common.collect.Lists;
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
-import it.geosolutions.geoserver.rest.decoder.RESTServiceUniqueValues;
 import it.geosolutions.geoserver.rest.encoder.GSResourceEncoder;
 import org.apache.commons.httpclient.NameValuePair;
+import org.geosdi.geoplatform.connector.geoserver.model.coveragestores.GeoserverUpdateCoverageStoreBody;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastores;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
@@ -55,7 +55,6 @@ import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.Geoserver
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadLayerRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadWorkspaceLayerRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageWithUrlRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverUpdateCoverageStoreBody;
 import org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -269,9 +268,9 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
     @Override
     public UniqueValuesInfo uniqueValues(String layerName, String layerAttribute) throws ResourceNotFoundFault {
         //TODO not found
-        RESTServiceUniqueValues restServiceUniqueValues = this.restReader.uniqueValues(layerName, layerAttribute);
-        List<String> list = restServiceUniqueValues.getNames();
-        return new UniqueValuesInfo(list, layerAttribute, list.size());
+//        RESTServiceUniqueValues restServiceUniqueValues = this.restReader.uniqueValues(layerName, layerAttribute);
+//        List<String> list = restServiceUniqueValues.getNames();
+        return null;
     }
 
     /**

@@ -1,18 +1,13 @@
 package org.geosdi.geoplatform.connector.geoserver.coveragestores;
 
-import com.google.common.io.CharStreams;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.FileEntity;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverUpdateCoverageStoreWithStoreNameRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-import java.io.BufferedReader;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Objects;
@@ -20,8 +15,6 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static java.util.stream.IntStream.iterate;
 import static javax.annotation.meta.When.NEVER;
@@ -30,25 +23,22 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateCoverageStoreWithStoreNameRequest> implements GeoserverUpdateCoverageStoreWithStoreNameRequest {
+public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnectorRequest<GPcoverageResponse, GeoserverUpdateCoverageStoreWithStoreNameRequest> implements GeoserverUpdateCoverageStoreWithStoreNameRequest {
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> storeName;
     private final ThreadLocal<GPUploadMethod> methodName;
     private final ThreadLocal<GPCoverateStoreExtension> formatName;
     private final ThreadLocal<File> file;
-    private final ThreadLocal<String> mimeType;
     private final ThreadLocal<TreeMap<String, String>> queryStringMap;
 
-     GPGeoserverUpdateCoverageStoreWithStoreName(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
-            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
-        super(theServerConnector, theJacksonSupport);
+     GPGeoserverUpdateCoverageStoreWithStoreName(@Nonnull(when = NEVER) GPServerConnector theServerConnector) {
+        super(theServerConnector, JACKSON_JAXB_XML_SUPPORT);
         this.workspaceName = withInitial(() -> null);
         this.storeName = withInitial(() -> null);
         this.methodName = withInitial(() -> null);
         this.formatName = withInitial(() -> null);
         this.file = withInitial(() -> null);
-        this.mimeType = withInitial(() -> null);
          this.queryStringMap = withInitial(() -> new TreeMap<>());
      }
 
@@ -126,16 +116,6 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
     }
 
     /**
-     * @param theMimeType
-     * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
-     */
-    @Override
-    public GeoserverUpdateCoverageStoreWithStoreNameRequest withMimeType(@Nonnull(when = NEVER) String theMimeType) {
-        this.mimeType.set(theMimeType);
-        return self();
-    }
-
-    /**
      * @param theFileName
      * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
@@ -183,8 +163,8 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
      * @return {@link Class<Boolean>}
      */
     @Override
-    protected Class<Boolean> forClass() {
-        return Boolean.class;
+    protected Class<GPcoverageResponse> forClass() {
+        return GPcoverageResponse.class;
     }
 
     /**
@@ -192,11 +172,11 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
      * @return {@link Boolean}
      * @throws Exception
      */
-    @Override
-    protected Boolean readInternal(BufferedReader reader) throws Exception {
-        String value = CharStreams.toString(reader);
-        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
-    }
+//    @Override
+//    protected Boolean readInternal(BufferedReader reader) throws Exception {
+//        String value = CharStreams.toString(reader);
+//        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
+//    }
 
     /**
      * @return {@link HttpEntity}
@@ -207,9 +187,8 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
         if(method == GPUploadMethod.FILE){
             File fileToUpload = this.file.get();
             checkArgument(fileToUpload != null, "The Parameter file must not be null.");
-            MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-            builder.addPart("file", new FileBody(fileToUpload, ContentType.TEXT_PLAIN));
-            return builder.build();
+            FileEntity builder = new FileEntity(fileToUpload, "image/geotiff");
+            return builder;
         }
         return null;
     }

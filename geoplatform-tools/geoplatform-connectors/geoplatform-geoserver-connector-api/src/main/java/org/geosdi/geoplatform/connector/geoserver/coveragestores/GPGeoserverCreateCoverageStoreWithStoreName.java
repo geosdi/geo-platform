@@ -2,6 +2,7 @@ package org.geosdi.geoplatform.connector.geoserver.coveragestores;
 
 import com.google.common.io.CharStreams;
 import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.net.URIBuilder;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverCreateCoverageStoreWithStoreNameRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;

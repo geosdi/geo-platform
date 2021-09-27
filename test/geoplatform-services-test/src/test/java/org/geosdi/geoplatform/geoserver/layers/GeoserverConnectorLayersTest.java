@@ -69,7 +69,7 @@ public class GeoserverConnectorLayersTest extends GeoserverConnectorTest {
     @Test
     public void a_existLayer() throws Exception {
         Assert.assertTrue("####################", this.restReader.existsLayer("tiger", "poi", FALSE) ==
-                this.geoserverConnectorStore.loadLayerRequest().withName("poi").exsist());
+                this.geoserverConnectorStore.loadLayerRequest().withName("poi").exist());
     }
 
     @Test
@@ -145,12 +145,12 @@ public class GeoserverConnectorLayersTest extends GeoserverConnectorTest {
     @Test
     public void g_existLayerInWorkspace() throws Exception {
         GeoserverLoadWorkspaceLayerRequest geoserverLoadWorkspaceLayerRequest = this.geoserverConnectorStore.loadWorkspaceLayerRequest().withLayerName("poi").withWorkspaceName("tiger");
-        Boolean result = geoserverLoadWorkspaceLayerRequest.exsist();
+        Boolean result = geoserverLoadWorkspaceLayerRequest.exist();
         logger.info("################{}\n", geoserverLoadWorkspaceLayerRequest.getResponse());
 
         Assert.assertTrue("####################", this.restReader.existsLayer("tiger", "poi", FALSE) == result);
         Assert.assertTrue("####################", this.restReader.existsLayer("tigerr", "poi", FALSE) ==
-                this.geoserverConnectorStore.loadWorkspaceLayerRequest().withLayerName("poi").withWorkspaceName("tigerr").exsist());
+                this.geoserverConnectorStore.loadWorkspaceLayerRequest().withLayerName("poi").withWorkspaceName("tigerr").exist());
     }
 
     @Ignore(value = "Layer poi_vito may be not present")
@@ -158,7 +158,7 @@ public class GeoserverConnectorLayersTest extends GeoserverConnectorTest {
     public void h_deleteLayer() throws Exception {
         logger.info("##################DELETE_LAYER {}\n", this.geoserverConnectorStore.deleteLayerRequest().withLayerName("poi_vito").getResponse());
         Assert.assertFalse("####################",
-                this.geoserverConnectorStore.loadLayerRequest().withName("poi_vito").exsist());
+                this.geoserverConnectorStore.loadLayerRequest().withName("poi_vito").exist());
     }
 
     @Ignore(value = "Layer poi_vito may be not present")

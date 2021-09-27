@@ -39,7 +39,7 @@ import it.geosolutions.geoserver.rest.HTTPUtils;
 import it.geosolutions.geoserver.rest.decoder.RESTCoverage;
 import it.geosolutions.geoserver.rest.encoder.GSResourceEncoder;
 import it.geosolutions.geoserver.rest.encoder.coverage.GSCoverageEncoder;
-import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPCoverateStoreExtension;
+import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPCoverageStoreExtension;
 import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPUploadMethod;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
@@ -73,15 +73,15 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
     @Test
     public void a_exsistCoverageStores() throws Exception {
         Assert.assertTrue("####################",  restReader.existsCoveragestore("burg", "test", TRUE) ==
-                this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace("burg").withStore("test").exsist());
+                this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace("burg").withStore("test").exist());
     }
 
     @Ignore(value = "Store store_vito may be not present")
     @Test
     public void b_deleteCoverageStore() throws Exception {
-        Assert.assertTrue("####################", this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace("sf").withStore("store_vito").exsist());
+        Assert.assertTrue("####################", this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace("sf").withStore("store_vito").exist());
         this.geoserverConnectorStore.deleteCoverageStoreRequest().withCoverageStore("store_vito").withWorkspace("sf").withRecurse(TRUE).getResponse();
-        Assert.assertFalse("####################", this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName("sf").withStoreName("store_vito").withQuietNotFound(TRUE).exsist());
+        Assert.assertFalse("####################", this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName("sf").withStoreName("store_vito").withQuietNotFound(TRUE).exist());
     }
 
     @Test
@@ -90,16 +90,16 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
         logger.info("###################{}\n", restCoverage.getTitle());
 
         Boolean exsist = this.geoserverConnectorStore.loadWorkspaceStoreCoverageRequest().withCoverage("mosaic")
-                .withWorkspace("nurc").withStore("mosaic").exsist();
+                .withWorkspace("nurc").withStore("mosaic").exist();
         logger.info("###################{}\n", exsist);
     }
 
     @Test()
     public void d_exsistCoverageUrl() throws Exception {
         logger.info("########################EXSIST : {}\n", this.geoserverConnectorStore.loadCoverageInfoWithUrl().
-                withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaic.json").exsist());
+                withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaic.json").exist());
         logger.info("########################EXSIST : {}\n", this.geoserverConnectorStore.loadCoverageInfoWithUrl().
-                withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaicww.json").exsist());
+                withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaicww.json").exist());
     }
 
     @Ignore(value = "Store layer_vito may be not present")
@@ -124,7 +124,7 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
                 .withFileName("layer_vito")
                 .withConfigure(GPParameterConfigure.FIRST)
                 .withMethod(GPUploadMethod.FILE)
-                .withFormat(GPCoverateStoreExtension.GEOTIFF)
+                .withFormat(GPCoverageStoreExtension.GEOTIFF)
                 .withFile(file).getResponse());
 
         // http://150.145.141.180/geoserver/rest/workspaces/sf/coveragestores/store_vito/file.geotiff?configure=first

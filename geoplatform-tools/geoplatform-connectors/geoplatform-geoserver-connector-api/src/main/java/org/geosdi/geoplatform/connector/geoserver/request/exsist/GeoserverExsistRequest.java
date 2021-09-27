@@ -44,6 +44,5 @@ public interface GeoserverExsistRequest{
     /**
      * @return {@link Boolean}
      */
-    Boolean exsist() throws Exception;
-
+    Boolean exist() throws Exception;
 }

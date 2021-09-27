@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,56 +32,40 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.styles;
+package org.geosdi.geoplatform.connector.api.param.replacement;
 
-import org.geosdi.geoplatform.connector.geoserver.request.styles.*;
-import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverCreateStyleSLDV100Request;
-import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request;
-import org.geosdi.geoplatform.connector.store.layers.GPGeoserverLayersConnectorStore;
+import javax.annotation.Nullable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverStylesConnectorStore extends GPGeoserverLayersConnectorStore {
+public class GPConnectorParamReplacement implements ConnectorParamReplacement {
+
+    private static final long serialVersionUID = 3387113010373151180L;
+    //
+    private static final String SPECIAL_CHARACTERS = "[^A-Za-z0-9]|[�]]";
+    private static final String EMPTY_REPLACE = " ";
+    private static final String SPACE = "\\s+";
+    private static final String UNDERSCORE_BEGIN_AND_END = "^[_]+|[_]$";
+    private static final String DEFAULT_REPLACEMENT = "";
+    //
+    private final String spaceReplacement;
 
     /**
-     * @return {@link GeoserverStylesRequest}
+     * @param theSpaceReplacement
      */
-    GeoserverStylesRequest loadStylesRequest();
+    GPConnectorParamReplacement(@Nullable String theSpaceReplacement) {
+        this.spaceReplacement = ((theSpaceReplacement != null) ? theSpaceReplacement : DEFAULT_REPLACEMENT);
+    }
 
     /**
-     * @return {@link GeoserverStyleRequest}
+     * @param theValue
+     * @return {@link String}
      */
-    GeoserverStyleRequest loadStyleRequest();
-
-    /**
-     * @return {@link GeoserverStyleSLDV100Request}
-     */
-    GeoserverStyleSLDV100Request loadStyleSLDV100Request();
-
-    /**
-     * @return {@link GeoserverCreateStyleRequest}
-     */
-    GeoserverCreateStyleRequest createStyleRequest();
-
-    /**
-     * @return {@link GeoserverCreateStyleSLDV100Request}
-     */
-    GeoserverCreateStyleSLDV100Request createStyleSLDV100Request();
-
-    /**
-     * @return {@link GeoserverDeleteStyleRequest}
-     */
-    GeoserverDeleteStyleRequest deleteStyleRequest();
-
-    /**
-     * @return {@link GeoserverStylesRequest}
-     */
-    GeoserverWorkspaceStylesRequest loadWorkspaceStyles();
-
-    /**
-     * @return {@link GeoserverStyleRequest}
-     */
-    GeoserverWorkspaceStyleRequest loadWorkspaceStyle();
+    @Override
+    public String replace(@Nullable String theValue) {
+        return ((theValue != null) && !(theValue.trim().isEmpty())) ? theValue.replaceAll(SPECIAL_CHARACTERS, EMPTY_REPLACE)
+                .replaceAll(SPACE, this.spaceReplacement).replaceAll(UNDERSCORE_BEGIN_AND_END, "") : theValue;
+    }
 }

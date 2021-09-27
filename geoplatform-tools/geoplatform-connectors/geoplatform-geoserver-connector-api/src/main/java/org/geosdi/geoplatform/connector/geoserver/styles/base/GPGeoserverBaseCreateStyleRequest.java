@@ -34,6 +34,8 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.styles.base;
 
+import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverCreareStyleResponse;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverCreareStyleResponse;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverBaseCreateStyleRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.ResourceNotFoundException;
@@ -41,15 +43,17 @@ import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorR
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
+import java.io.BufferedReader;
 
 import static java.lang.ThreadLocal.withInitial;
+import static java.util.stream.Collectors.joining;
 import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPGeoserverBaseCreateStyleRequest<T, StyleBody, R extends GeoserverBaseCreateStyleRequest> extends GPJsonPostConnectorRequest<T, R> implements GeoserverBaseCreateStyleRequest<T, StyleBody, R> {
+public abstract class GPGeoserverBaseCreateStyleRequest<StyleBody, R extends GeoserverBaseCreateStyleRequest> extends GPJsonPostConnectorRequest<IGPGeoserverCreareStyleResponse, R> implements GeoserverBaseCreateStyleRequest<StyleBody, R> {
 
     protected final ThreadLocal<StyleBody> styleBody;
 
@@ -57,8 +61,7 @@ public abstract class GPGeoserverBaseCreateStyleRequest<T, StyleBody, R extends 
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    protected GPGeoserverBaseCreateStyleRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
-            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    protected GPGeoserverBaseCreateStyleRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.styleBody = withInitial(() -> null);
     }
@@ -80,6 +83,18 @@ public abstract class GPGeoserverBaseCreateStyleRequest<T, StyleBody, R extends 
     protected String createUriPath() throws Exception {
         String baseURI = this.serverURI.toString();
         return (baseURI.endsWith("/") ? baseURI.concat("styles") : baseURI.concat("/styles"));
+    }
+
+    /**
+     * @param reader
+     * @return {@link IGPGeoserverCreareStyleResponse}
+     * @throws Exception
+     */
+    @Override
+    protected IGPGeoserverCreareStyleResponse readInternal(BufferedReader reader) throws Exception {
+        return GPGeoserverCreareStyleResponse.builder()
+                .styleName(reader.lines().collect(joining()))
+                .build();
     }
 
     /**

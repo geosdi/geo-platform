@@ -36,6 +36,8 @@ package org.geosdi.geoplatform.connector.geoserver.styles;
 
 import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
+import org.apache.http.client.utils.URIBuilder;
+import org.geosdi.geoplatform.connector.api.param.replacement.ConnectorParamReplacement;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverDeleteStyleRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.UnauthorizedException;
@@ -51,6 +53,7 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.connector.api.param.replacement.ConnectorParamReplacement.of;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -59,6 +62,8 @@ import static javax.annotation.meta.When.NEVER;
 @ThreadSafe
 public class GPGeoserverDeleteStyleRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteStyleRequest> implements GeoserverDeleteStyleRequest {
 
+    private static final ConnectorParamReplacement REPLACEMENT = of("_");
+    //
     private final ThreadLocal<String> style;
     private final ThreadLocal<Boolean> purge;
     private final ThreadLocal<Boolean> recurse;
@@ -118,11 +123,14 @@ public class GPGeoserverDeleteStyleRequest extends GPJsonDeleteConnectorRequest<
     protected String createUriPath() throws Exception {
         String styleName = this.style.get();
         checkArgument((styleName != null) && !(styleName.trim().isEmpty()), "The Parameter styleName mut not be null or an Empty String.");
+//        styleName = REPLACEMENT.replace(styleName);
         String recurse = this.recurse.get().toString();
         String purge = this.purge.get().toString();
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("styles/").concat(styleName).concat("?recurse=").concat(recurse).concat("&purge=").concat(purge)
-                : baseURI.concat("/styles/").concat(styleName).concat("?recurse=").concat(recurse).concat("&purge=").concat(purge)));
+        return new URIBuilder((baseURI.endsWith("/") ? baseURI.concat("styles/").concat(styleName) : baseURI.concat("/styles/").concat(styleName)))
+                .addParameter("recurse", recurse)
+                .addParameter("purge", purge)
+                .build().toString();
     }
 
     /**

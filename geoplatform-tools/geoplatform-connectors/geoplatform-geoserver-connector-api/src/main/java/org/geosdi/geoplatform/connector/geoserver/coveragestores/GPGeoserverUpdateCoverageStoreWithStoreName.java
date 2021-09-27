@@ -35,13 +35,12 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> storeName;
     private final ThreadLocal<GPUploadMethod> methodName;
-    private final ThreadLocal<GPCoverateStoreExtension> formatName;
+    private final ThreadLocal<GPCoverageStoreExtension> formatName;
     private final ThreadLocal<File> file;
     private final ThreadLocal<String> mimeType;
     private final ThreadLocal<TreeMap<String, String>> queryStringMap;
 
-     GPGeoserverUpdateCoverageStoreWithStoreName(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
-            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+     GPGeoserverUpdateCoverageStoreWithStoreName(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.workspaceName = withInitial(() -> null);
         this.storeName = withInitial(() -> null);
@@ -88,7 +87,7 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
      * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     @Override
-    public GeoserverUpdateCoverageStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) GPCoverateStoreExtension theFormat) {
+    public GeoserverUpdateCoverageStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) GPCoverageStoreExtension theFormat) {
         this.formatName.set(theFormat);
         return self();
     }
@@ -98,8 +97,7 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
      * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     @Override
-    public GeoserverUpdateCoverageStoreWithStoreNameRequest withConfigure(
-            @Nonnull(when = NEVER) GPParameterConfigure theParameterConfigure) {
+    public GeoserverUpdateCoverageStoreWithStoreNameRequest withConfigure(@Nonnull(when = NEVER) GPParameterConfigure theParameterConfigure) {
         this.queryStringMap.get().put("configure", theParameterConfigure.toString());
         return self();
     }
@@ -109,8 +107,7 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
      * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     @Override
-    public GeoserverUpdateCoverageStoreWithStoreNameRequest withParams(
-            @Nonnull(when = NEVER) NameValuePair... theParams) {
+    public GeoserverUpdateCoverageStoreWithStoreNameRequest withParams(@Nonnull(when = NEVER) NameValuePair... theParams) {
         this.queryStringMap.get().put("params", this.buildParams(theParams));
         return self();
     }
@@ -150,8 +147,7 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
      * @return
      */
     @Override
-    public GeoserverUpdateCoverageStoreWithStoreNameRequest withCoverageName(
-            @Nonnull(when = NEVER) String theCoverageName) {
+    public GeoserverUpdateCoverageStoreWithStoreNameRequest withCoverageName(@Nonnull(when = NEVER) String theCoverageName) {
         this.queryStringMap.get().put("coverageName", theCoverageName);
         return self();
     }
@@ -167,7 +163,7 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
         checkArgument((store != null) && !(store.trim().isEmpty()), "The Parameter store must not be null or an empty string.");
         GPUploadMethod method = this.methodName.get();
         checkArgument((method != null), "The Parameter method must not be null or an empty string.");
-        GPCoverateStoreExtension format = this.formatName.get();
+        GPCoverageStoreExtension format = this.formatName.get();
         checkArgument((format != null), "The Parameter format must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
         String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())

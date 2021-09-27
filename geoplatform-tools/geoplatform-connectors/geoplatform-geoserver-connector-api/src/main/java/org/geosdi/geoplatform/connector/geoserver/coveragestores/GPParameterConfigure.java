@@ -5,9 +5,8 @@ package org.geosdi.geoplatform.connector.geoserver.coveragestores;
  * @email vito.salvia@gmail.com
  */
 public enum GPParameterConfigure {
-    FIRST,
-    NONE,
-    ALL;
+
+    FIRST, NONE, ALL;
 
     /**
      * Returns the name of this enum constant, as contained in the
@@ -21,5 +20,4 @@ public enum GPParameterConfigure {
     public String toString() {
         return super.toString().toLowerCase();
     }
-
 }

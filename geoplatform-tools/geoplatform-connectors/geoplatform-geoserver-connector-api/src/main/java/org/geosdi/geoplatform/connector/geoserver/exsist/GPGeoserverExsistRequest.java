@@ -79,7 +79,7 @@ public abstract class GPGeoserverExsistRequest<T, ConnectorRequest extends GPJso
      * @return {@link Boolean}
      */
     @Override
-    public Boolean exsist() throws Exception {
+    public Boolean exist() throws Exception {
         return (this.exist.get() != null ? this.exist.get() : this.getResponse() != null);
     }
 

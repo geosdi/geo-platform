@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.styles;
 
-import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverCreareStyleResponse;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverStyleBody;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverBaseCreateStyleRequest;
 
@@ -46,7 +45,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverCreateStyleRequest extends GeoserverBaseCreateStyleRequest<IGPGeoserverCreareStyleResponse, IGPGeoserverStyleBody, GeoserverCreateStyleRequest> {
+public interface GeoserverCreateStyleRequest extends GeoserverBaseCreateStyleRequest<IGPGeoserverStyleBody, GeoserverCreateStyleRequest> {
 
     /**
      * @param theStyleBody

@@ -34,6 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.version;
 
+import org.apache.hc.core5.net.URIBuilder;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,5 +52,17 @@ public class GeoserverVersionExceptionTest {
     @Test
     public void printGeoserverVersionExceptionMessageTest() {
         logger.info("########################GP_GEOSERVER_CONNECTOR_EXCEPTION_MESSAGE : {}\n", toVersionExceptionMessage());
+    }
+
+    @Test
+    public void simpleTest() throws Exception {
+        String baseURI = "http://150.145.141.180/geoserver/rest";
+        String styleName = "pippo";
+        String recurse = "true";
+        String purge = "false";
+        logger.info("{}\n", new URIBuilder((baseURI.endsWith("/") ? baseURI.concat("styles/").concat(styleName) : baseURI.concat("/styles/").concat(styleName)))
+                .addParameter("recurse", recurse)
+                .addParameter("purge", purge)
+                .build().toString());
     }
 }

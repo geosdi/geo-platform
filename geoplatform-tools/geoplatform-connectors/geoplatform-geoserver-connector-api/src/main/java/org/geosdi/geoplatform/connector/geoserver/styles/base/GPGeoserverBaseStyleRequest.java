@@ -94,6 +94,7 @@ public abstract class GPGeoserverBaseStyleRequest<T, R extends GeoserverBaseStyl
     protected String createUriPath() throws Exception {
         String styleName = this.styleName.get();
         checkArgument(((styleName != null) && !(styleName.trim().isEmpty())), "The Parameter Style Name must not be null or an Empty String.");
+        styleName = styleName.replaceAll("\\s", "+");
         String baseURI = this.serverURI.toString();
         String quietOnNotFound = this.quietOnNotFound.get().toString();
         return ((baseURI.endsWith("/") ? baseURI.concat("styles/").concat(styleName).concat(".json").concat("?quietOnNotFound=").concat(quietOnNotFound)

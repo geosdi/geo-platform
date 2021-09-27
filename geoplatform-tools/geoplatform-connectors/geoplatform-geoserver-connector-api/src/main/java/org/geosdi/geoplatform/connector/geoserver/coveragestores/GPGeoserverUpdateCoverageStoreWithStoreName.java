@@ -1,5 +1,6 @@
 package org.geosdi.geoplatform.connector.geoserver.coveragestores;
 
+import org.apache.hc.core5.http.ContentType;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.FileEntity;
 import org.apache.hc.core5.net.URIBuilder;
@@ -164,7 +165,7 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
         if(method == GPUploadMethod.FILE){
             File fileToUpload = this.file.get();
             checkArgument(fileToUpload != null, "The Parameter file must not be null.");
-            FileEntity builder = new FileEntity(fileToUpload, "image/geotiff");
+            FileEntity builder = new FileEntity(fileToUpload, ContentType.IMAGE_TIFF);
             return builder;
         }
         return null;

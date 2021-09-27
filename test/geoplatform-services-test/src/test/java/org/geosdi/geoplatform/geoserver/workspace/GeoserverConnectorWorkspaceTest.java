@@ -71,9 +71,9 @@ public class GeoserverConnectorWorkspaceTest extends GeoserverConnectorTest {
     @Test
     public void b_existWorkspace() throws Exception {
         Assert.assertTrue("####################", this.restReader.existsWorkspace("tiger", TRUE) ==
-                this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("tiger").withQuietOnNotFound(TRUE).exsist());
+                this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("tiger").withQuietOnNotFound(TRUE).exist());
         Assert.assertTrue("####################", this.restReader.existsWorkspace("tigeraa", TRUE) ==
-                this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("tigeraa").withQuietOnNotFound(TRUE).exsist());
+                this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("tigeraa").withQuietOnNotFound(TRUE).exist());
     }
 
     @Test
@@ -86,9 +86,9 @@ public class GeoserverConnectorWorkspaceTest extends GeoserverConnectorTest {
     @Test
     public void f_createWorkspace() throws Exception {
         this.geoserverConnectorStore.createWorkspaceRequest().withWorkspaceBody(new GeoserverCreateWorkspaceBody("vito")).getResponse();
-        Assert.assertTrue("####################", this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("vito").exsist());
+        Assert.assertTrue("####################", this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("vito").exist());
         this.geoserverConnectorStore.deleteWorkspaceRequest().withWorkspaceName("vito").getResponse();
-        Assert.assertFalse("####################", this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("vito").exsist());
+        Assert.assertFalse("####################", this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("vito").exist());
     }
 
 }

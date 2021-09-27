@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.*;
 @XmlType(name = "", propOrder = {"name", "type", "enabled", "__default", "dateCreated", "dateModified", "url"})
 @XmlRootElement(name = "coverageStore")
 @Getter
-public class GPcoverageResponse implements ToString2 {
+public class GPCoverageResponse implements ToString2 {
 
     @XmlElement(name = "name")
     protected String name;

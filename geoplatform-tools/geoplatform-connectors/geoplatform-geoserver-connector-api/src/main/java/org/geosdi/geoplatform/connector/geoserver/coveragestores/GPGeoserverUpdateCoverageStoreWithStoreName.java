@@ -1,8 +1,6 @@
 package org.geosdi.geoplatform.connector.geoserver.coveragestores;
 
-import org.apache.hc.core5.http.ContentType;
 import org.apache.hc.core5.http.HttpEntity;
-import org.apache.hc.core5.http.NameValuePair;
 import org.apache.hc.core5.http.io.entity.FileEntity;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverUpdateCoverageStoreWithStoreNameRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
@@ -24,7 +22,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnectorRequest<GPcoverageResponse, GeoserverUpdateCoverageStoreWithStoreNameRequest> implements GeoserverUpdateCoverageStoreWithStoreNameRequest {
+public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnectorRequest<GPCoverageResponse, GeoserverUpdateCoverageStoreWithStoreNameRequest> implements GeoserverUpdateCoverageStoreWithStoreNameRequest {
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> storeName;
@@ -97,12 +95,12 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
     }
 
     /**
-     * @param theParams
+     * @param theUpdate
      * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     @Override
-    public GeoserverUpdateCoverageStoreWithStoreNameRequest withParams(@Nonnull(when = NEVER) NameValuePair... theParams) {
-        this.queryStringMap.get().put("params", this.buildParams(theParams));
+    public GeoserverUpdateCoverageStoreWithStoreNameRequest withUpdate(@Nonnull(when = NEVER) String theUpdate) {
+        this.queryStringMap.get().put("update", theUpdate);
         return self();
     }
 
@@ -163,20 +161,9 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
      * @return {@link Class<Boolean>}
      */
     @Override
-    protected Class<GPcoverageResponse> forClass() {
-        return GPcoverageResponse.class;
+    protected Class<GPCoverageResponse> forClass() {
+        return GPCoverageResponse.class;
     }
-
-    /**
-     * @param reader
-     * @return {@link Boolean}
-     * @throws Exception
-     */
-//    @Override
-//    protected Boolean readInternal(BufferedReader reader) throws Exception {
-//        String value = CharStreams.toString(reader);
-//        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
-//    }
 
     /**
      * @return {@link HttpEntity}
@@ -187,36 +174,9 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
         if(method == GPUploadMethod.FILE){
             File fileToUpload = this.file.get();
             checkArgument(fileToUpload != null, "The Parameter file must not be null.");
-            FileEntity builder = new FileEntity(fileToUpload, ContentType.IMAGE_TIFF);
+            FileEntity builder = new FileEntity(fileToUpload, "image/geotiff");
             return builder;
         }
         return null;
     }
-
-    /**
-     * @param names
-     * @return {@link String}
-     */
-    private String buildParams(NameValuePair[] names) {
-        StringBuilder sbUrl = new StringBuilder();
-        int index = iterate(0, n -> n + 1)
-                .limit(names.length )
-                .boxed()
-                .filter(i -> {
-                    String name = names[i].getName();
-                    String value = names[i].getValue();
-                    return name != null && !name.isEmpty() && value != null && !value.isEmpty();
-                })
-                .findFirst().orElse(null);
-
-        sbUrl.append(names[index].getName()).append("=").append(names[index].getValue());
-        Arrays.asList(names).subList(index + 1, names.length).forEach(nameValuePair -> {
-            sbUrl.append(nameValuePair.getName()).append("=").append(nameValuePair.getValue());
-            if (nameValuePair.getName() != null && !nameValuePair.getName().isEmpty() && nameValuePair.getValue() != null && !nameValuePair.getValue().isEmpty()) {
-                sbUrl.append("&").append(nameValuePair.getName()).append("=").append(nameValuePair.getValue());
-            }
-        });
-        return sbUrl.toString();
-    }
-
 }

@@ -38,18 +38,23 @@ package org.geosdi.geoplatform.services;
 import com.google.common.collect.Lists;
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
-import it.geosolutions.geoserver.rest.encoder.GSResourceEncoder;
 import org.apache.commons.httpclient.NameValuePair;
+import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPCoverageStoreExtension;
+import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPParameterConfigure;
+import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPParameterUpdate;
+import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.coveragestores.GeoserverUpdateCoverageStoreBody;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastores;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayerStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayerType;
+import org.geosdi.geoplatform.connector.geoserver.model.layers.raster.GeoserverRasterLayer;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GeoserverCreateWorkspaceBody;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
+import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverLoadCoverageStoreRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverLoadDatastoresRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadFeatureTypeWithUrlRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadLayerRequest;
@@ -706,7 +711,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
             File oldGeotifFile = new File(tempUserTifDir, tifFileName);
             try{
                 if(this.geoserverConnectorStore.loadWorkspaceStoreCoverageRequest().withCoverage(idName)
-                        .withWorkspace(workspace).withStore(idName).exsist()) {
+                        .withWorkspace(workspace).withStore(idName).exist()) {
                     info.alreadyExists = Lists.<LayerPublishAction>newArrayList(
                             LayerPublishAction.OVERRIDE, LayerPublishAction.RENAME);
                     idName += System.currentTimeMillis();
@@ -912,7 +917,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
     @Override
     public Boolean existsStyle(String styleName) {
         try{
-            return this.geoserverConnectorStore.loadStyleRequest().withStyleName(styleName).withQuietOnNotFound(TRUE).exsist();
+            return this.geoserverConnectorStore.loadStyleRequest().withStyleName(styleName).withQuietOnNotFound(TRUE).exist();
         }catch (Exception e) {
             final String error = "Error to load  style with name : " + styleName + " " + e;
             logger.error(error);
@@ -1195,7 +1200,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                             logger.debug(
                                     "********** processEPSGResult Before removing coverage store: " + coverageStoreName);
                             if(this.geoserverConnectorStore.loadWorkspaceStoreCoverageRequest().withStore(coverageStoreName).withWorkspace(userWorkspace)
-                            .withCoverage(coverageStoreName).exsist()){
+                            .withCoverage(coverageStoreName).exist()){
                                 logger.debug(
                                         "********** processEPSGResult removing coverage store: " + coverageStoreName);
                                 try{
@@ -1347,14 +1352,10 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
 //                logger.info(
 //                        "\n INFO: CREATE DATASTORE " + userWorkspace + " NAME :" + info.name);
 //            RESTCoverageStore store = restPublisher.publishExternalGeoTIFF(userWorkspace, fileName, fileInTifDir, epsg, sld);
-            boolean published = restPublisher.publishExternalGeoTIFF(
-                    userWorkspace,
-                    fileName, fileInTifDir, fileName, epsg,
-                    GSResourceEncoder.ProjectionPolicy.FORCE_DECLARED, sld);
-            if (published) {
+            if (this.publishExternalGeoTiff(userWorkspace,fileInTifDir, fileName , epsg, sld)) {
                 try{
                     if(!this.geoserverConnectorStore.loadWorkspaceStoreCoverageRequest().withCoverage(fileName)
-                            .withWorkspace(userWorkspace).withStore(fileName).exsist()) {
+                            .withWorkspace(userWorkspace).withStore(fileName).exist()) {
                         logger.error("No coverages found in new coveragestore " + userWorkspace + " called " + fileName);
                     }else {
                         GeoserverUpdateCoverageStoreBody geoserverUpdateCoverageStoreBody = new GeoserverUpdateCoverageStoreBody();
@@ -1466,7 +1467,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
      */
     private Boolean checkIfExsistLayer(String layerName) {
         try{
-            return this.geoserverConnectorStore.loadLayerRequest().withName(layerName).exsist();
+            return this.geoserverConnectorStore.loadLayerRequest().withName(layerName).exist();
         } catch (Exception e){
             final String error = "Error to load layer  name:" + layerName + " "  + e;
             logger.error(error);
@@ -1481,7 +1482,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
      */
     private Boolean checkIfExsistLayerInWorkspace(String layerName, String workspace) {
         try{
-            return this.geoserverConnectorStore.loadWorkspaceLayerRequest().withLayerName(layerName).withWorkspaceName(workspace).exsist();
+            return this.geoserverConnectorStore.loadWorkspaceLayerRequest().withLayerName(layerName).withWorkspaceName(workspace).exist();
         } catch (Exception e){
             final String error = "Error to load layer with  workspace name:" + workspace + " "  + e;
             logger.error(error);
@@ -1497,7 +1498,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
      */
     private Boolean checkIfExsistWorkspace(String workspaceName, Boolean quietOnNotFound) {
         try{
-            return this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName(workspaceName).withQuietOnNotFound(quietOnNotFound).exsist();
+            return this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName(workspaceName).withQuietOnNotFound(quietOnNotFound).exist();
         } catch (Exception e){
             final String error = "Error to load layer with  workspace name:" + workspaceName + " "  + e;
             logger.error(error);
@@ -1513,7 +1514,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
      */
     private Boolean checkIfExsistCoverageUrl(String url) {
         try{
-            return this.geoserverConnectorStore.loadCoverageInfoWithUrl().withUrl(url).exsist();
+            return this.geoserverConnectorStore.loadCoverageInfoWithUrl().withUrl(url).exist();
         } catch (Exception e){
             final String error = "Error to load coverage with url:" + url + " "  + e;
             logger.error(error);
@@ -1529,7 +1530,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
      */
     private Boolean checkIfExsistDatastore(String workspace, String datastore) {
         try{
-            return  this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName(workspace).withStoreName(datastore).withQuietNotFound(TRUE).exsist();
+            return  this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName(workspace).withStoreName(datastore).withQuietNotFound(TRUE).exist();
         } catch (Exception e){
             final String error = "Error to load datastore with workspaceName:" + workspace + " and datastore name " + datastore + " "  + e;
             logger.error(error);
@@ -1545,11 +1546,57 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
      */
     private Boolean checkIfExsistCoverageStore(String workspace, String datastore) {
         try{
-            return  this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace(workspace).withStore(datastore).exsist();
+            return  this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace(workspace).withStore(datastore).exist();
         } catch (Exception e){
             final String error = "Error to load datastore with workspaceName:" + workspace + " and datastore name " + datastore + " "  + e;
             logger.error(error);
             return FALSE;
+        }
+    }
+
+    /**
+     * @param userWorkspace
+     * @param fileInTifDir
+     * @param fileName
+     * @param epsg
+     * @param sld
+     * @return {@link boolean}
+     */
+    private boolean publishExternalGeoTiff(String userWorkspace,
+            File fileInTifDir, String fileName, String epsg, String sld) throws IllegalArgumentException {
+        if (userWorkspace != null && fileInTifDir != null && fileName != null && fileInTifDir != null && epsg != null && sld != null) {
+            try {
+                GPGeoserverCoverageInfo theGPGeoserverCoverageInfo = new GPGeoserverCoverageInfo();
+                theGPGeoserverCoverageInfo.setName(fileName);
+                theGPGeoserverCoverageInfo.setTitle(fileName);
+                theGPGeoserverCoverageInfo.setSrs(epsg);
+                GeoserverLoadCoverageStoreRequest geoserverLoadCoverageStoreRequest = this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace(userWorkspace).withStore(fileName);
+                this.geoserverConnectorStore.updateCoverageStoreWithStoreName().withWorkspace(userWorkspace).withCoverageName(fileName).withStore(fileName)
+                        .withUpdate(GPParameterUpdate.OVERWRITE.toString()).withConfigure(GPParameterConfigure.FIRST).withMethod(GPUploadMethod.FILE).withFormat(
+                        GPCoverageStoreExtension.GEOTIFF)
+                        .withFile(fileInTifDir).getResponse();
+                if (!geoserverLoadCoverageStoreRequest.exist()) {
+                    return FALSE;
+                } else if (!this.geoserverConnectorStore.createCoverageRequest().withWorkspace(userWorkspace).withCoverageStore(fileName).withCoverageBody(theGPGeoserverCoverageInfo).getResponse()) {
+                    logger.error("Unable to create a coverage for the store:" + fileName);
+                    return FALSE;
+                } else {
+                    GeoserverRasterLayer geoserverRasterLayer = new GeoserverRasterLayer();
+                    GPGeoserverStyle gpGeoserverStyle = new GPGeoserverStyle();
+                    gpGeoserverStyle.setName("burg");
+                    geoserverRasterLayer.setDefaultStyle(gpGeoserverStyle);
+                    if (this.geoserverConnectorStore.updateLayerRequest().withWorkspaceName(userWorkspace).withLayerName(sld).withLayerBody(geoserverRasterLayer).getResponse()) {
+                        return TRUE;
+                    }
+                    return FALSE;
+                }
+            }catch (Exception e) {
+                final String error = "Error to load external GEOTIFF " + e;
+                logger.error(error);
+                throw new IllegalArgumentException(error);
+            }
+        } else {
+            throw new IllegalArgumentException("Unable to run: null parameter");
         }
     }
 

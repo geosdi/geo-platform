@@ -74,4 +74,9 @@ public interface IGPGeoserverCoveragesConnector extends IGPGeoserverWorkspacesCo
      * @return {@link GPGeoserverUpdateStoreCoverageRequest}
      */
     GPGeoserverUpdateStoreCoverageRequest updateStoreCoverageRequest();
+
+    /**
+     * @return {@link GPGeoserverCreateCoverageRequest}
+     */
+    GPGeoserverCreateCoverageRequest createCoverageRequest();
 }

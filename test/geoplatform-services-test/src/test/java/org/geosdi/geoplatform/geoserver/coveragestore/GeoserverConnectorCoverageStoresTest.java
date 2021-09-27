@@ -35,13 +35,12 @@
  */
 package org.geosdi.geoplatform.geoserver.coveragestore;
 
-import it.geosolutions.geoserver.rest.HTTPUtils;
 import it.geosolutions.geoserver.rest.decoder.RESTCoverage;
-import it.geosolutions.geoserver.rest.encoder.GSResourceEncoder;
-import it.geosolutions.geoserver.rest.encoder.coverage.GSCoverageEncoder;
-import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPCoverateStoreExtension;
-import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPParameterConfigure;
-import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPUploadMethod;
+import org.geosdi.geoplatform.connector.geoserver.coveragestores.*;
+import org.geosdi.geoplatform.connector.geoserver.model.layers.raster.GeoserverRasterLayer;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
+import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverLoadCoverageStoreRequest;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -53,7 +52,10 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
+import static java.io.File.separator;
 import static java.lang.Boolean.TRUE;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
@@ -73,15 +75,15 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
     @Test
     public void a_exsistCoverageStores() throws Exception {
         Assert.assertTrue("####################",  restReader.existsCoveragestore("burg", "test", TRUE) ==
-                this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace("burg").withStore("test").exsist());
+                this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace("burg").withStore("test").exist());
     }
 
     @Ignore(value = "Store store_vito may be not present")
     @Test
     public void b_deleteCoverageStore() throws Exception {
-        Assert.assertTrue("####################", this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace("sf").withStore("store_vito").exsist());
+        Assert.assertTrue("####################", this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace("sf").withStore("store_vito").exist());
         this.geoserverConnectorStore.deleteCoverageStoreRequest().withCoverageStore("store_vito").withWorkspace("sf").withRecurse(TRUE).getResponse();
-        Assert.assertFalse("####################", this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName("sf").withStoreName("store_vito").withQuietNotFound(TRUE).exsist());
+        Assert.assertFalse("####################", this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName("sf").withStoreName("store_vito").withQuietNotFound(TRUE).exist());
     }
 
     @Test
@@ -90,16 +92,16 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
         logger.info("###################{}\n", restCoverage.getTitle());
 
         Boolean exsist = this.geoserverConnectorStore.loadWorkspaceStoreCoverageRequest().withCoverage("mosaic")
-                .withWorkspace("nurc").withStore("mosaic").exsist();
+                .withWorkspace("nurc").withStore("mosaic").exist();
         logger.info("###################{}\n", exsist);
     }
 
     @Test()
     public void d_exsistCoverageUrl() throws Exception {
         logger.info("########################EXSIST : {}\n", this.geoserverConnectorStore.loadCoverageInfoWithUrl().
-                withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaic.json").exsist());
+                withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaic.json").exist());
         logger.info("########################EXSIST : {}\n", this.geoserverConnectorStore.loadCoverageInfoWithUrl().
-                withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaicww.json").exsist());
+                withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaicww.json").exist());
     }
 
     @Ignore(value = "Store layer_vito may be not present")
@@ -109,53 +111,73 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
                         .withCoverageStore("mosaic").withWorkspace("nurc").getResponse();
     }
 
-   // @Ignore(value = "Store layer_vito may be not present")
+    //@Ignore()
     @Test
     public void f_updateCoverage() throws Exception {
-//        File file = new File(of("src", "test", "resources", "VMI_20210923T1020Z.tif")
-//                .collect(joining(separator)));
-        File file = new File("/Users/vitosalvia/workspace/geo-platform/test/geoplatform-services-test/src/test/resources/VMI_20210923T1020Z.tif");
+        File file = new File(of("src", "test", "resources", "VMI_20210923T1020Z.tif").collect(joining(separator)));
         Assert.assertTrue("#################FILE_EXSIST", file.exists());
-        logger.info("@@@@@@@@@@ {}\n", file.getAbsolutePath());
         logger.info("###############{}\n", this.geoserverConnectorStore.updateCoverageStoreWithStoreName()
                 .withWorkspace("sf")
-                .withCoverageName("coverage_name")
+                .withCoverageName("store_vito")
                 .withStore("store_vito")
-                .withFileName("layer_vito")
+                .withUpdate(GPParameterUpdate.OVERWRITE.toString())
                 .withConfigure(GPParameterConfigure.FIRST)
                 .withMethod(GPUploadMethod.FILE)
-                .withFormat(GPCoverateStoreExtension.GEOTIFF)
+                .withFormat(GPCoverageStoreExtension.GEOTIFF)
                 .withFile(file).getResponse());
-
-        // http://150.145.141.180/geoserver/rest/workspaces/sf/coveragestores/store_vito/file.geotiff?configure=first
-        // http://150.145.141.180/geoserver/rest/workspaces/sf/coveragestores/store_vito/file.geotiff?configure=first
-
         //logger.info("############{}\n", this.restPublisher.publishGeoTIFF("sf", "store_vito", file));
-
     }
 
+    @Ignore
     @Test
     public void g_createCoverage() throws Exception {
-//        logger.info("#############{}\n", this.geoserverConnectorStore.createCoverageStoreWithStoreName()
-//                .withStore("store_vito")
-//                .withWorkspace("sf")
-//                .withMethod()
-
-        GSCoverageEncoder re = new GSCoverageEncoder();
-        re.setName("layer_vito");
-        re.setTitle("layer_vito");
-        re.setSRS("EPSG:4326");
-        re.setProjectionPolicy(GSResourceEncoder.ProjectionPolicy.FORCE_DECLARED);
-
-            StringBuilder sbUrl = (new StringBuilder("http://150.145.141.180/geoserver")).append("/rest/workspaces/").append("sf").append("/").append("coveragestores").append("/").append("store_vito").append("/").append("coverages.json");
-            String resourceName = re.getName();
-            if (resourceName == null) {
-                throw new IllegalArgumentException("Unable to configure a coverage using unnamed coverage encoder");
-            } else {
-                String xmlBody = re.toString();
-                logger.info("################BODY: {}\n", xmlBody);
-                String sendResult = HTTPUtils.postXml(sbUrl.toString(), xmlBody, "admin", "geoservertest");
-                logger.info("#############SEND {}\n" + sendResult);
-            }
+        GPGeoserverCoverageInfo theGPGeoserverCoverageInfo = new GPGeoserverCoverageInfo();
+        theGPGeoserverCoverageInfo.setName("layer_vito");
+        theGPGeoserverCoverageInfo.setTitle("layer_vito");
+        theGPGeoserverCoverageInfo.setSrs("EPSG:4326");
+        logger.info("#############{}\n", this.geoserverConnectorStore.createCoverageRequest()
+                .withWorkspace("sf")
+                .withCoverageStore("store_vito")
+                .withCoverageBody(theGPGeoserverCoverageInfo).getResponse());
         }
+
+    @Ignore
+    @Test
+    public void h_updateLayer() throws Exception {
+        GeoserverRasterLayer geoserverRasterLayer = new GeoserverRasterLayer();
+        GPGeoserverStyle gpGeoserverStyle = new GPGeoserverStyle();
+        gpGeoserverStyle.setName("burg");
+        geoserverRasterLayer.setDefaultStyle(gpGeoserverStyle);
+        logger.info("###############{}\n", this.geoserverConnectorStore.updateLayerRequest()
+                .withWorkspaceName("sf")
+                .withLayerName("layer_vito")
+                .withLayerBody(geoserverRasterLayer)
+                .getResponse());
+    }
+
+    @Ignore
+    @Test
+    public void i_createCoverage() throws Exception {
+        File file = new File(of("src", "test", "resources", "VMI_20210923T1020Z.tif").collect(joining(separator)));
+        Assert.assertTrue("#################FILE_EXSIST", file.exists());
+        GPGeoserverCoverageInfo theGPGeoserverCoverageInfo = new GPGeoserverCoverageInfo();
+        theGPGeoserverCoverageInfo.setName("layer_vito");
+        theGPGeoserverCoverageInfo.setTitle("layer_vito");
+        theGPGeoserverCoverageInfo.setSrs("EPSG:4326");
+        GeoserverLoadCoverageStoreRequest geoserverLoadCoverageStoreRequest = this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace("sf").withStore("store_vito");
+        this.geoserverConnectorStore.updateCoverageStoreWithStoreName().withWorkspace("sf").withCoverageName("layer_vito").withStore("store_vito").withUpdate(GPParameterUpdate.OVERWRITE.toString())
+                .withConfigure(GPParameterConfigure.FIRST).withMethod(GPUploadMethod.FILE).withFormat(GPCoverageStoreExtension.GEOTIFF).withFile(file).getResponse();
+        if (!geoserverLoadCoverageStoreRequest.exist()) {
+            logger.error("");
+        } else if (!this.geoserverConnectorStore.createCoverageRequest().withWorkspace("sf").withCoverageStore("layer_vito").withCoverageBody(theGPGeoserverCoverageInfo).getResponse()) {
+            logger.error("Unable to create a coverage for the store:" + "layer_vito");
+        } else {
+            GeoserverRasterLayer geoserverRasterLayer = new GeoserverRasterLayer();
+            GPGeoserverStyle gpGeoserverStyle = new GPGeoserverStyle();
+            gpGeoserverStyle.setName("burg");
+            geoserverRasterLayer.setDefaultStyle(gpGeoserverStyle);
+            logger.info("##############{}\n", this.geoserverConnectorStore.updateLayerRequest().withWorkspaceName("sf").withLayerName("layer_vito").withLayerBody(geoserverRasterLayer).getResponse());
+        }
+    }
+
 }

@@ -54,8 +54,8 @@ public class GeoserverConnectorStylesTest extends GeoserverConnectorTest {
     @Test
     public void a_existStyle() throws Exception {
         Assert.assertTrue("####################",  restReader.existsStyle("burg", TRUE) ==
-                this.geoserverConnectorStore.loadStyleRequest().withStyleName("burg").withQuietOnNotFound(TRUE).exsist());
+                this.geoserverConnectorStore.loadStyleRequest().withStyleName("burg").withQuietOnNotFound(TRUE).exist());
         Assert.assertTrue("####################",  restReader.existsStyle("burga", TRUE) ==
-                this.geoserverConnectorStore.loadStyleRequest().withStyleName("burga").withQuietOnNotFound(TRUE).exsist());
+                this.geoserverConnectorStore.loadStyleRequest().withStyleName("burga").withQuietOnNotFound(TRUE).exist());
     }
 }

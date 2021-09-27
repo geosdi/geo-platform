@@ -35,9 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.coveragestores;
 
+import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPCoverageResponse;
 import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPCoverageStoreExtension;
 import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPUploadMethod;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.xml.jaxb.GPJacksonJAXBXmlSupport;
 import org.geosdi.geoplatform.support.jackson.xml.jaxb.JacksonJAXBXmlSupport;
 

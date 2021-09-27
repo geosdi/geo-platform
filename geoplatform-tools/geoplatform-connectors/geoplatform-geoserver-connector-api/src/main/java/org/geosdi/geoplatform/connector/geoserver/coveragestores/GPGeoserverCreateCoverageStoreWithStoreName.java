@@ -1,7 +1,7 @@
 package org.geosdi.geoplatform.connector.geoserver.coveragestores;
 
 import com.google.common.io.CharStreams;
-import org.apache.http.HttpEntity;
+import org.apache.hc.core5.http.HttpEntity;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverCreateCoverageStoreWithStoreNameRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
@@ -28,7 +28,7 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPostConne
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> storeName;
     private final ThreadLocal<GPUploadMethod> methodName;
-    private final ThreadLocal<GPCoverateStoreExtension> formatName;
+    private final ThreadLocal<GPCoverageStoreExtension> formatName;
     private final ThreadLocal<TreeMap<String, Object>> queryStringMap;
 
      GPGeoserverCreateCoverageStoreWithStoreName(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
@@ -77,7 +77,7 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPostConne
      * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
      */
     @Override
-    public GeoserverCreateCoverageStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) GPCoverateStoreExtension theFormat) {
+    public GeoserverCreateCoverageStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) GPCoverageStoreExtension theFormat) {
         this.formatName.set(theFormat);
         return self();
     }
@@ -111,7 +111,7 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPostConne
         checkArgument((store != null) && !(store.trim().isEmpty()), "The Parameter store must not be null or an empty string.");
         GPUploadMethod method = this.methodName.get();
         checkArgument((method != null), "The Parameter method must not be null or an empty string.");
-        GPCoverateStoreExtension format = this.formatName.get();
+        GPCoverageStoreExtension format = this.formatName.get();
         checkArgument((format != null), "The Parameter format must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
         String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())

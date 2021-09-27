@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.coveragestores;
 
-import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPCoverateStoreExtension;
+import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPCoverageStoreExtension;
 import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPUploadMethod;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
@@ -71,7 +71,7 @@ public interface GeoserverCreateCoverageStoreWithStoreNameRequest extends GPJson
      * @param theFormat
      * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
      */
-    GeoserverCreateCoverageStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) GPCoverateStoreExtension theFormat);
+    GeoserverCreateCoverageStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) GPCoverageStoreExtension theFormat);
 
     /**
      * @param theFileName

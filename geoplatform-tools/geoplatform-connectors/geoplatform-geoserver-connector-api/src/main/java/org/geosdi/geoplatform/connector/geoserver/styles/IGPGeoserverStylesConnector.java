@@ -36,6 +36,7 @@ package org.geosdi.geoplatform.connector.geoserver.styles;
 
 import org.geosdi.geoplatform.connector.geoserver.layers.IGPGeoserverLayersConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.*;
+import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverCreateStyleSLDV100Request;
 import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request;
 
 /**
@@ -58,6 +59,11 @@ public interface IGPGeoserverStylesConnector extends IGPGeoserverLayersConnector
      * @return {@link GeoserverCreateStyleRequest}
      */
     GeoserverCreateStyleRequest createStyleRequest();
+
+    /**
+     * @return {@link GeoserverCreateStyleSLDV100Request}
+     */
+    GeoserverCreateStyleSLDV100Request createStyleSLDV100Request();
 
     /**
      * @return {@link GeoserverDeleteStyleRequest}

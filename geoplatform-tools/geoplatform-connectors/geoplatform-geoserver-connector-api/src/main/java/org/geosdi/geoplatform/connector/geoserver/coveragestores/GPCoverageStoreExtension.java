@@ -4,10 +4,9 @@ package org.geosdi.geoplatform.connector.geoserver.coveragestores;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public enum GPCoverateStoreExtension {
-    GEOTIFF,
-    IMAGEMOSAIC,
-    WORLDIMAGE;
+public enum GPCoverageStoreExtension {
+
+    GEOTIFF, IMAGEMOSAIC, WORLDIMAGE;
 
 
     /**

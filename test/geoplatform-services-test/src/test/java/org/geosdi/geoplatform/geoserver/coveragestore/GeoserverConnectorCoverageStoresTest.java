@@ -36,7 +36,10 @@
 package org.geosdi.geoplatform.geoserver.coveragestore;
 
 import it.geosolutions.geoserver.rest.decoder.RESTCoverage;
-import org.geosdi.geoplatform.connector.geoserver.coveragestores.*;
+import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPCoverageStoreExtension;
+import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPParameterConfigure;
+import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPParameterUpdate;
+import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.raster.GeoserverRasterLayer;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
@@ -165,8 +168,13 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
         theGPGeoserverCoverageInfo.setTitle("layer_vito");
         theGPGeoserverCoverageInfo.setSrs("EPSG:4326");
         GeoserverLoadCoverageStoreRequest geoserverLoadCoverageStoreRequest = this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace("sf").withStore("store_vito");
-        this.geoserverConnectorStore.updateCoverageStoreWithStoreName().withWorkspace("sf").withCoverageName("layer_vito").withStore("store_vito").withUpdate(GPParameterUpdate.OVERWRITE.toString())
-                .withConfigure(GPParameterConfigure.FIRST).withMethod(GPUploadMethod.FILE).withFormat(GPCoverageStoreExtension.GEOTIFF).withFile(file).getResponse();
+        this.geoserverConnectorStore.updateCoverageStoreWithStoreName().withWorkspace("sf").withStore("store_vito")
+                .withFormat(GPCoverageStoreExtension.GEOTIFF).withFile(file)
+                .withMethod(GPUploadMethod.FILE)
+                .withConfigure(GPParameterConfigure.FIRST)
+                .withCoverageName("layer_vito")
+                .withUpdate(GPParameterUpdate.OVERWRITE.toString())
+                .getResponse();
         if (!geoserverLoadCoverageStoreRequest.exist()) {
             logger.error("");
         } else if (!this.geoserverConnectorStore.createCoverageRequest().withWorkspace("sf").withCoverageStore("layer_vito").withCoverageBody(theGPGeoserverCoverageInfo).getResponse()) {

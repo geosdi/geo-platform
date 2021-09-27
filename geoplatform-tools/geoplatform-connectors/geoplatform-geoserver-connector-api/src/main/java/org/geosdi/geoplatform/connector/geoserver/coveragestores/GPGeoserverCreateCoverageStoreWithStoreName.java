@@ -9,9 +9,6 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 import java.io.BufferedReader;
-import java.util.Objects;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
@@ -29,7 +26,7 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPostConne
     private final ThreadLocal<String> storeName;
     private final ThreadLocal<GPUploadMethod> methodName;
     private final ThreadLocal<GPCoverageStoreExtension> formatName;
-    private final ThreadLocal<TreeMap<String, Object>> queryStringMap;
+    private final ThreadLocal<URIBuilder> uriBuilder;
 
      GPGeoserverCreateCoverageStoreWithStoreName(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
             @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
@@ -38,7 +35,7 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPostConne
         this.storeName = withInitial(() -> null);
         this.methodName = withInitial(() -> null);
         this.formatName = withInitial(() -> null);
-         this.queryStringMap = withInitial(() -> new TreeMap<>());
+         this.uriBuilder = withInitial(() -> null);
      }
 
     /**
@@ -48,7 +45,7 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPostConne
     @Override
     public GeoserverCreateCoverageStoreWithStoreNameRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspaceName.set(theWorkspace);
-        this.queryStringMap.set(new TreeMap<>());
+        this.uriBuilder.set(new URIBuilder());
         return self();
     }
 
@@ -88,7 +85,7 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPostConne
      */
     @Override
     public GeoserverCreateCoverageStoreWithStoreNameRequest withFileName(@Nonnull(when = NEVER) String theFileName) {
-        this.queryStringMap.get().put("filename", theFileName);
+        this.uriBuilder.get().addParameter("filename", theFileName);
         return self();
     }
 
@@ -96,7 +93,7 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPostConne
     @Override
     public GeoserverCreateCoverageStoreWithStoreNameRequest withUpdateBbox(
             @Nonnull(when = NEVER) Boolean theUpdateBbox) {
-        this.queryStringMap.get().put("updateBBox", theUpdateBbox);
+        this.uriBuilder.get().addParameter("updateBBox", theUpdateBbox.toString());
         return self();
     }
 
@@ -114,13 +111,9 @@ public class GPGeoserverCreateCoverageStoreWithStoreName extends GPJsonPostConne
         GPCoverageStoreExtension format = this.formatName.get();
         checkArgument((format != null), "The Parameter format must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
-        String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())));
-        String queryString = this.queryStringMap.get().entrySet().stream().filter(Objects::nonNull)
-                .map(e -> e.getKey().concat("=").concat(e.getValue().toString()))
-                .map(Object::toString)
-                .collect(Collectors.joining("&"));
-        return path.concat( queryString != null ? "?".concat(queryString) : "");
+        String path = ((baseURI.endsWith("/") ? ("workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())
+                : ("/workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())));
+        return this.uriBuilder.get().setScheme(this.serverURI.getScheme()).setHost(this.serverURI.getHost()).setPath(this.serverURI.getPath().concat(path)).build().toString();
     }
 
     /**

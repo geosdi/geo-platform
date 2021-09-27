@@ -3,7 +3,7 @@ package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 import com.google.common.io.CharStreams;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.StringEntity;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GPGeoserverUpdateCoverageStoreBody;
+import org.geosdi.geoplatform.connector.geoserver.model.coveragestores.GPGeoserverUpdateCoverageStoreBody;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverUpdateCoverageStoreRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;

@@ -187,4 +187,18 @@ public abstract class GPGeoserverCoveragesConnector extends GPGeoserverWorkspace
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
+
+    /**
+     * @return {@link GPGeoserverCreateCoverageRequest}
+     */
+    @Override
+    public GPGeoserverCreateCoverageRequest createCoverageRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverCreateCoverageRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
 }

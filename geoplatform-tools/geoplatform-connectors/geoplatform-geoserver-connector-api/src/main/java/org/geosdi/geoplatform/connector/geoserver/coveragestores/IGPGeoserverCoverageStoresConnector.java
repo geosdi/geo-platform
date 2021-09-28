@@ -73,9 +73,4 @@ public interface IGPGeoserverCoverageStoresConnector extends IGPGeoserverDatasto
      * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     GeoserverUpdateCoverageStoreWithStoreNameRequest updateCoverageStoreWithStoreName();
-
-    /**
-     * @return {@link GeoserverCreateCoverageStoreWithStoreNameRequest}
-     */
-    GeoserverCreateCoverageStoreWithStoreNameRequest createCoverageStoreWithStoreName();
 }

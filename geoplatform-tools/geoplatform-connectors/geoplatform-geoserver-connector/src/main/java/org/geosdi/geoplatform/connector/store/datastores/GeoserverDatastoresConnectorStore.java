@@ -91,4 +91,12 @@ public abstract class GeoserverDatastoresConnectorStore extends GeoserverStylesC
     public GeoserverDeleteDatastoreRequest deleteDatastoreRequest() {
         return this.server.deleteDatastoreRequest();
     }
+
+    /**
+     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
+     */
+    @Override
+    public GeoserverUpdateDataStoreWithStoreNameRequest updateDataStoreWithStoreName() {
+        return this.server.updateDataStoreWithStoreName();
+    }
 }

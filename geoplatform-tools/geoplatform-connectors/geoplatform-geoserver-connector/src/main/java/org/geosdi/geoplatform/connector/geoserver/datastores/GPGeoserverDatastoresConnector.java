@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.geoserver.datastores;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
+import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverUpdateCoverageStoreWithStoreNameRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.*;
 import org.geosdi.geoplatform.connector.geoserver.styles.GPGeoserverStylesConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
@@ -173,4 +174,17 @@ public abstract class GPGeoserverDatastoresConnector extends GPGeoserverStylesCo
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
+
+    /**
+     * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
+     */
+    @Override
+    public GeoserverUpdateDataStoreWithStoreNameRequest updateDataStoreWithStoreName() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverUpdateDataStoreWithStoreName(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }    }
 }

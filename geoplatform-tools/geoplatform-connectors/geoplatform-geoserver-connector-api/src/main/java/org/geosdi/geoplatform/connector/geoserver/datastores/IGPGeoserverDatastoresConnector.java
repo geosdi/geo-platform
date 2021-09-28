@@ -73,4 +73,9 @@ public interface IGPGeoserverDatastoresConnector extends IGPGeoserverStylesConne
      * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
      */
     GeoserverUpdateDataStoreWithStoreNameRequest updateDataStoreWithStoreName();
+
+    /**
+     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
+     */
+    GeoserverUpdateDatastoreResourceRequest updateDataStoreResource();
 }

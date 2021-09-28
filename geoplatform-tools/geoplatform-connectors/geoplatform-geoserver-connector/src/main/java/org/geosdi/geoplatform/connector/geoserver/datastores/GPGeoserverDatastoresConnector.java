@@ -186,5 +186,20 @@ public abstract class GPGeoserverDatastoresConnector extends GPGeoserverStylesCo
                 return new GPGeoserverUpdateDataStoreWithStoreName(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
-        }    }
+        }
+    }
+
+    /**
+     * @return {@link GeoserverUpdateDatastoreResourceRequest}
+     */
+    @Override
+    public GeoserverUpdateDatastoreResourceRequest updateDataStoreResource() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverUpdateDatastoreResourceRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
 }

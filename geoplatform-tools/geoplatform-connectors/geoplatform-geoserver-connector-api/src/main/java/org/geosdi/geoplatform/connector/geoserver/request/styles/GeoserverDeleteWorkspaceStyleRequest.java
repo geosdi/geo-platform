@@ -45,29 +45,38 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverDeleteStyleRequest extends GeoserverBaseDeleteStyleRequest<GeoserverDeleteStyleRequest> {
+public interface GeoserverDeleteWorkspaceStyleRequest extends GeoserverBaseDeleteStyleRequest<GeoserverDeleteWorkspaceStyleRequest> {
+
+    /**
+     * @param theWorkspace
+     * @return {@link GeoserverDeleteWorkspaceStyleRequest}
+     */
+    GeoserverDeleteWorkspaceStyleRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
 
     /**
      * <p>Name of the style to delete.</p>
      *
      * @param theStyle
-     * @return {@link GeoserverDeleteStyleRequest}
+     * @return {@link GeoserverDeleteWorkspaceStyleRequest}
      */
-    GeoserverDeleteStyleRequest withStyle(@Nonnull(when = NEVER) String theStyle);
+    @Override
+    GeoserverDeleteWorkspaceStyleRequest withStyle(@Nonnull(when = NEVER) String theStyle);
 
     /**
      * <p>Specifies whether the underlying file containing the style should be deleted on disk. Default Value is {@link Boolean#TRUE}</p>
      *
      * @param thePurge
-     * @return {@link GeoserverDeleteStyleRequest}
+     * @return {@link GeoserverDeleteWorkspaceStyleRequest}
      */
-    GeoserverDeleteStyleRequest withPurge(@Nullable Boolean thePurge);
+    @Override
+    GeoserverDeleteWorkspaceStyleRequest withPurge(@Nullable Boolean thePurge);
 
     /**
      * <p>Removes references to the specified style in existing layers. Default Value is {@link Boolean#TRUE}</p>
      *
      * @param theRecurse
-     * @return {@link GeoserverDeleteStyleRequest}
+     * @return {@link GeoserverDeleteWorkspaceStyleRequest}
      */
-    GeoserverDeleteStyleRequest withRecurse(@Nullable Boolean theRecurse);
+    @Override
+    GeoserverDeleteWorkspaceStyleRequest withRecurse(@Nullable Boolean theRecurse);
 }

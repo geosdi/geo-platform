@@ -100,8 +100,8 @@ public class GPGeoserverWorkspaceStyleRequest extends GPJsonGetConnectorRequest<
         String styleName = this.styleName.get();
         checkArgument(((styleName != null) && !(styleName.trim().isEmpty())), "The Parameter Style Name must not be null or an Empty String.");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("rest/workspaces/").concat(workspaceName).concat("/styles/").concat(styleName).concat("/styles.json") :
-                baseURI.concat("/rest/workspaces/").concat(workspaceName).concat("/styles/").concat(styleName).concat("/styles.json")));
+        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/styles/").concat(styleName).concat("/styles.json") :
+                baseURI.concat("/workspaces/").concat(workspaceName).concat("/styles/").concat(styleName).concat("/styles.json")));
     }
 
     /**

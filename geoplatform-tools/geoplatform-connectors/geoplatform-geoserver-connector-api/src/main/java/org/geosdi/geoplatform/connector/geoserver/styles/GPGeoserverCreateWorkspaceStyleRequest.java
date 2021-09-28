@@ -32,42 +32,47 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.styles;
+package org.geosdi.geoplatform.connector.geoserver.styles;
 
-import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverBaseDeleteStyleRequest;
+import net.jcip.annotations.ThreadSafe;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverStyleBody;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverCreateWorkspaceStyleRequest;
+import org.geosdi.geoplatform.connector.geoserver.styles.base.GPGeoserverBaseCreateWorkspaceStyleRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
+import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverDeleteStyleRequest extends GeoserverBaseDeleteStyleRequest<GeoserverDeleteStyleRequest> {
+@ThreadSafe
+public class GPGeoserverCreateWorkspaceStyleRequest extends GPGeoserverBaseCreateWorkspaceStyleRequest<IGPGeoserverStyleBody, GeoserverCreateWorkspaceStyleRequest> implements GeoserverCreateWorkspaceStyleRequest {
 
     /**
-     * <p>Name of the style to delete.</p>
-     *
-     * @param theStyle
-     * @return {@link GeoserverDeleteStyleRequest}
+     * @param theServerConnector
+     * @param theJacksonSupport
      */
-    GeoserverDeleteStyleRequest withStyle(@Nonnull(when = NEVER) String theStyle);
+    GPGeoserverCreateWorkspaceStyleRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(theServerConnector, theJacksonSupport);
+    }
 
     /**
-     * <p>Specifies whether the underlying file containing the style should be deleted on disk. Default Value is {@link Boolean#TRUE}</p>
-     *
-     * @param thePurge
-     * @return {@link GeoserverDeleteStyleRequest}
+     * @return {@link HttpEntity}
      */
-    GeoserverDeleteStyleRequest withPurge(@Nullable Boolean thePurge);
-
-    /**
-     * <p>Removes references to the specified style in existing layers. Default Value is {@link Boolean#TRUE}</p>
-     *
-     * @param theRecurse
-     * @return {@link GeoserverDeleteStyleRequest}
-     */
-    GeoserverDeleteStyleRequest withRecurse(@Nullable Boolean theRecurse);
+    @Override
+    protected HttpEntity prepareHttpEntity() throws Exception {
+        IGPGeoserverStyleBody geoserverStyleBody = this.styleBody.get();
+        checkArgument(geoserverStyleBody != null, "The Parameter styleBody must not be null.");
+        String geoserverStyleBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(geoserverStyleBody);
+        logger.debug("#############################STYLE_BODY : \n{}\n", geoserverStyleBodyString);
+        return new StringEntity(geoserverStyleBodyString, APPLICATION_JSON);
+    }
 }

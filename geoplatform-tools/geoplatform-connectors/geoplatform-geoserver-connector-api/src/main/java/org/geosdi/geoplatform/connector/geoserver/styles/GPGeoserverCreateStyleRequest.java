@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.connector.geoserver.styles;
 import net.jcip.annotations.ThreadSafe;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.StringEntity;
-import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverCreareStyleResponse;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverStyleBody;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverCreateStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.styles.base.GPGeoserverBaseCreateStyleRequest;
@@ -75,13 +74,5 @@ public class GPGeoserverCreateStyleRequest extends GPGeoserverBaseCreateStyleReq
         String geoserverStyleBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(geoserverStyleBody);
         logger.debug("#############################STYLE_BODY : \n{}\n", geoserverStyleBodyString);
         return new StringEntity(geoserverStyleBodyString, APPLICATION_JSON);
-    }
-
-    /**
-     * @return {@link Class<IGPGeoserverCreareStyleResponse>}
-     */
-    @Override
-    protected Class<IGPGeoserverCreareStyleResponse> forClass() {
-        return IGPGeoserverCreareStyleResponse.class;
     }
 }

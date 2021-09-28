@@ -164,6 +164,20 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     }
 
     /**
+     * @return {@link GeoserverCreateWorkspaceStyleRequest}
+     */
+    @Override
+    public GeoserverCreateWorkspaceStyleRequest createWorkspaceStyleRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverCreateWorkspaceStyleRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
      * @return {@link GeoserverDeleteStyleRequest}
      */
     @Override
@@ -172,6 +186,20 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
             case V219x:
             case V218x:
                 return new GPGeoserverDeleteStyleRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverDeleteWorkspaceStyleRequest}
+     */
+    @Override
+    public GeoserverDeleteWorkspaceStyleRequest deleteWorkspaceStyleRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverDeleteWorkspaceStyleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

@@ -1578,7 +1578,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                 GeoserverLoadCoverageStoreRequest geoserverLoadCoverageStoreRequest = this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace(userWorkspace).withStore(fileName);
                 this.geoserverConnectorStore.updateCoverageStoreWithStoreName().withWorkspace(userWorkspace).withCoverageName(fileName).withStore(fileName)
                         .withMimeType(ContentType.IMAGE_TIFF)
-                        .withUpdate(GPParameterUpdate.OVERWRITE.toString()).withConfigure(GPParameterConfigure.FIRST).withMethod(GPUploadMethod.FILE).withFormat(
+                        .withUpdate(GPParameterUpdate.OVERWRITE).withConfigure(GPParameterConfigure.FIRST).withMethod(GPUploadMethod.FILE).withFormat(
                         GPCoverageStoreFileExtension.GEOTIFF)
                         .withFile(fileInTifDir).getResponse();
                 if (!geoserverLoadCoverageStoreRequest.exist()) {

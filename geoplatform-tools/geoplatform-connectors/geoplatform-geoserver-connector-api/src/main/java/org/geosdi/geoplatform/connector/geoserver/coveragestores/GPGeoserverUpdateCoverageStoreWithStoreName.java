@@ -6,6 +6,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.FileEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.file.IGPFileExtension;
+import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
 import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverUpdateCoverageStoreWithStoreNameRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
@@ -30,7 +31,7 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
     private final ThreadLocal<IGPFileExtension> formatName;
     private final ThreadLocal<File> file;
     private final ThreadLocal<ContentType> mymeType;
-    private final ThreadLocal<String> update;
+    private final ThreadLocal<GPParameterUpdate> update;
     private final ThreadLocal<String> configure;
     private final ThreadLocal<String> filename;
     private final ThreadLocal<String> coverageName;
@@ -105,7 +106,7 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
      * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     @Override
-    public GeoserverUpdateCoverageStoreWithStoreNameRequest withUpdate(@Nonnull(when = NEVER) String theUpdate) {
+    public GeoserverUpdateCoverageStoreWithStoreNameRequest withUpdate(@Nonnull(when = NEVER) GPParameterUpdate theUpdate) {
         this.update.set(theUpdate);
         return self();
     }
@@ -168,12 +169,12 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
         String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())
                 : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())));
         URIBuilder uriBuilder = new URIBuilder(path);
-        String update = this.update.get();
+        GPParameterUpdate update = this.update.get();
         String configure = this.configure.get();
         String filename = this.filename.get();
         String coverageName = this.coverageName.get();
-        if(update != null && !(update.trim().isEmpty()))
-            uriBuilder.addParameter("update", update);
+        if(update != null)
+            uriBuilder.addParameter("update", update.toString());
         if(configure != null && !(configure.trim().isEmpty()))
             uriBuilder.addParameter("configure", configure);
         if(filename != null && !(filename.trim().isEmpty()))

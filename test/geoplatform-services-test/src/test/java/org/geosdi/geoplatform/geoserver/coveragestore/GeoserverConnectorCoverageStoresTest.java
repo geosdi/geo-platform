@@ -127,7 +127,7 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
                 .withWorkspace("sf")
                 .withCoverageName("store_vito")
                 .withStore("store_vito")
-                .withUpdate(GPParameterUpdate.OVERWRITE.toString())
+                .withUpdate(GPParameterUpdate.OVERWRITE)
                 .withConfigure(GPParameterConfigure.FIRST)
                 .withMethod(GPUploadMethod.FILE)
                 .withFormat(GPCoverageStoreFileExtension.GEOTIFF)
@@ -183,7 +183,7 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
                 .withConfigure(GPParameterConfigure.FIRST)
                 .withCoverageName("layer_vito")
                 .withMimeType(ContentType.IMAGE_TIFF)
-                .withUpdate(GPParameterUpdate.OVERWRITE.toString())
+                .withUpdate(GPParameterUpdate.OVERWRITE)
                 .getResponse();
         if (!geoserverLoadCoverageStoreRequest.exist()) {
             logger.error("");

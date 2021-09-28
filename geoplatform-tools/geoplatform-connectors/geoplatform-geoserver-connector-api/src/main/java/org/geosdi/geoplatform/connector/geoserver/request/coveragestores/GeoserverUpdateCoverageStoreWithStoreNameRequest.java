@@ -38,8 +38,9 @@ package org.geosdi.geoplatform.connector.geoserver.request.coveragestores;
 import org.apache.http.entity.ContentType;
 import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPCoverageResponse;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
-import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.file.IGPFileExtension;
+import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
+import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.xml.jaxb.GPJacksonJAXBXmlSupport;
 import org.geosdi.geoplatform.support.jackson.xml.jaxb.JacksonJAXBXmlSupport;
@@ -91,7 +92,7 @@ public interface GeoserverUpdateCoverageStoreWithStoreNameRequest extends GPJson
      * @param theUpdate
      * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
-    GeoserverUpdateCoverageStoreWithStoreNameRequest withUpdate(@Nonnull(when = NEVER) String theUpdate);
+    GeoserverUpdateCoverageStoreWithStoreNameRequest withUpdate(@Nonnull(when = NEVER) GPParameterUpdate theUpdate);
 
     /**
      * @param theFile

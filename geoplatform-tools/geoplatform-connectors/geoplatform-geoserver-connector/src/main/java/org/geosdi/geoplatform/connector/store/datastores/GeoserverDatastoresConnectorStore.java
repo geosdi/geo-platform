@@ -99,4 +99,12 @@ public abstract class GeoserverDatastoresConnectorStore extends GeoserverStylesC
     public GeoserverUpdateDataStoreWithStoreNameRequest updateDataStoreWithStoreName() {
         return this.server.updateDataStoreWithStoreName();
     }
+
+    /**
+     * @return {@link GeoserverUpdateDatastoreResourceRequest}
+     */
+    @Override
+    public GeoserverUpdateDatastoreResourceRequest updateDataStoreResource() {
+        return this.server.updateDataStoreResource();
+    }
 }

@@ -231,7 +231,7 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
         GPUploadMethod method = this.methodName.get();
         File fileToUpload = this.file.get();
         checkArgument(fileToUpload != null, "The Parameter file must not be null.");
-        FileEntity builder = new FileEntity(fileToUpload, "application/zip");
+        FileEntity builder = new FileEntity(fileToUpload, contentType);
         return builder;
     }
 }

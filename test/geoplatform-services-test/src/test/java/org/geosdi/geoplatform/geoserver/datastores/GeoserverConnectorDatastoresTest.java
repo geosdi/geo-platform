@@ -38,10 +38,11 @@ package org.geosdi.geoplatform.geoserver.datastores;
 import it.geosolutions.geoserver.rest.decoder.RESTDataStoreList;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.http.entity.ContentType;
-import org.geosdi.geoplatform.connector.geoserver.model.file.GPDataStoreFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
-import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastores;
+import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
+import org.geosdi.geoplatform.connector.geoserver.model.file.GPDataStoreFileExtension;
+import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverLoadDatastoresRequest;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
 import org.junit.Assert;
@@ -97,7 +98,7 @@ public class GeoserverConnectorDatastoresTest extends GeoserverConnectorTest {
         Assert.assertFalse("####################", this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName("sf").withStoreName("store_vito").withQuietNotFound(TRUE).exist());
     }
 
-    @Ignore
+    //@Ignore
     @Test
     public void d_updateDataStoreWithShape() throws Exception {
         File file = new File(of("src", "test", "resources", "admin_shp_comuni.zip").collect(joining(separator)));
@@ -105,13 +106,20 @@ public class GeoserverConnectorDatastoresTest extends GeoserverConnectorTest {
         logger.info("##################{}\n", FilenameUtils.getBaseName(file.toURI().toString()));
         logger.info("###############{}\n", this.geoserverConnectorStore.updateDataStoreWithStoreName()
                 .withWorkspace("sf")
-                .withStore("store_vito")
+                .withStore("admin_shp_comuni")
                 .withConfigure(GPParameterConfigure.NONE)
                 .withMethod(GPUploadMethod.FILE)
                 .withMimeType(ContentType.APPLICATION_OCTET_STREAM)
                 .withCharset("UTF-8")
                 .withFormat(GPDataStoreFileExtension.SHP)
                 .withFile(file).getResponse());
+
+        GPGeoserverFeatureTypeInfo gpGeoserverFeatureTypeInfo = new GPGeoserverFeatureTypeInfo();
+        gpGeoserverFeatureTypeInfo.setName("admin_shp_comuni");
+        gpGeoserverFeatureTypeInfo.setTitle("admin_shp_comuni");
+        gpGeoserverFeatureTypeInfo.setSrs("EPSG:4326");
+        //this.geoserverConnectorStore.createDatastoreRequest().withWorkspaceName("sf").withCoverageBody(theGPGeoserverCoverageInfo).getResponse()
+
     }
 
 

@@ -60,6 +60,9 @@ import static java.io.File.separator;
 import static java.lang.Boolean.TRUE;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension.JSON;
+import static org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy.FORCE_DECLARED;
+import static org.geosdi.geoplatform.connector.geoserver.model.store.GPStoreType.DATASTORES;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -99,7 +102,7 @@ public class GeoserverConnectorDatastoresTest extends GeoserverConnectorTest {
         Assert.assertFalse("####################", this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName("sf").withStoreName("store_vito").withQuietNotFound(TRUE).exist());
     }
 
-    //@Ignore
+    @Ignore
     @Test
     public void d_updateDataStoreWithShape() throws Exception {
         File file = new File(of("src", "test", "resources", "admin_shp_comuni.zip").collect(joining(separator)));
@@ -107,7 +110,7 @@ public class GeoserverConnectorDatastoresTest extends GeoserverConnectorTest {
         logger.info("##################{}\n", FilenameUtils.getBaseName(file.toURI().toString()));
         logger.info("###############{}\n", this.geoserverConnectorStore.updateDataStoreWithStoreName()
                 .withWorkspace("sf")
-                .withStore("admin_shp_comuni")
+                .withStore("store_vito")
                 .withConfigure(GPParameterConfigure.NONE)
                 .withMethod(GPUploadMethod.FILE)
                 .withMimeType(ContentType.APPLICATION_OCTET_STREAM)
@@ -117,9 +120,17 @@ public class GeoserverConnectorDatastoresTest extends GeoserverConnectorTest {
 
         GPGeoserverFeatureTypeInfo gpGeoserverFeatureTypeInfo = new GPGeoserverFeatureTypeInfo();
         gpGeoserverFeatureTypeInfo.setName("admin_shp_comuni");
+        gpGeoserverFeatureTypeInfo.setEnabled(TRUE);
         gpGeoserverFeatureTypeInfo.setTitle("admin_shp_comuni");
         gpGeoserverFeatureTypeInfo.setSrs("EPSG:4326");
-        //this.geoserverConnectorStore.createDatastoreRequest().withWorkspaceName("sf").withCoverageBody(theGPGeoserverCoverageInfo).getResponse()
+        gpGeoserverFeatureTypeInfo.setProjectionPolicy(FORCE_DECLARED);
+        logger.info("###############{}\n", this.geoserverConnectorStore.updateDataStoreResource()
+                .withWorkspace("sf")
+                .withMethod(DATASTORES)
+                .withFormat(JSON)
+                .withDataStoreBody(gpGeoserverFeatureTypeInfo)
+                .withDataStore("store_vito")
+                .getResponse());
 
     }
 

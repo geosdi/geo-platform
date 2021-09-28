@@ -118,7 +118,7 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
                         .withCoverageStore("mosaic").withWorkspace("nurc").getResponse();
     }
 
-    //@Ignore()
+    @Ignore()
     @Test
     public void f_updateCoverage() throws Exception {
         File file = new File(of("src", "test", "resources", "VMI_20210923T1020Z.tif").collect(joining(separator)));
@@ -166,7 +166,7 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
                 .getResponse());
     }
 
-   // @Ignore
+   @Ignore
     @Test
     public void i_createCoverage() throws Exception {
         File file = new File(of("src", "test", "resources", "VMI_20210923T1020Z.tif").collect(joining(separator)));

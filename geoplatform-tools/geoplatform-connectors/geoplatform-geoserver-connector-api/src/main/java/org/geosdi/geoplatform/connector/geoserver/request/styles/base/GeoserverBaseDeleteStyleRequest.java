@@ -32,9 +32,9 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.styles;
+package org.geosdi.geoplatform.connector.geoserver.request.styles.base;
 
-import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverBaseDeleteStyleRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -45,29 +45,29 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverDeleteStyleRequest extends GeoserverBaseDeleteStyleRequest<GeoserverDeleteStyleRequest> {
+public interface GeoserverBaseDeleteStyleRequest<R extends GeoserverBaseDeleteStyleRequest> extends GPJsonConnectorRequest<Boolean, R> {
 
     /**
      * <p>Name of the style to delete.</p>
      *
      * @param theStyle
-     * @return {@link GeoserverDeleteStyleRequest}
+     * @return {@link R}
      */
-    GeoserverDeleteStyleRequest withStyle(@Nonnull(when = NEVER) String theStyle);
+    R withStyle(@Nonnull(when = NEVER) String theStyle);
 
     /**
      * <p>Specifies whether the underlying file containing the style should be deleted on disk. Default Value is {@link Boolean#TRUE}</p>
      *
      * @param thePurge
-     * @return {@link GeoserverDeleteStyleRequest}
+     * @return {@link R}
      */
-    GeoserverDeleteStyleRequest withPurge(@Nullable Boolean thePurge);
+    R withPurge(@Nullable Boolean thePurge);
 
     /**
      * <p>Removes references to the specified style in existing layers. Default Value is {@link Boolean#TRUE}</p>
      *
      * @param theRecurse
-     * @return {@link GeoserverDeleteStyleRequest}
+     * @return {@link R}
      */
-    GeoserverDeleteStyleRequest withRecurse(@Nullable Boolean theRecurse);
+    R withRecurse(@Nullable Boolean theRecurse);
 }

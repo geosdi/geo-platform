@@ -34,10 +34,10 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.styles;
 
-import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverBaseDeleteStyleRequest;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverStyleBody;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverBaseCreateWorkspaceStyleRequest;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import static javax.annotation.meta.When.NEVER;
 
@@ -45,29 +45,19 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverDeleteStyleRequest extends GeoserverBaseDeleteStyleRequest<GeoserverDeleteStyleRequest> {
+public interface GeoserverCreateWorkspaceStyleRequest extends GeoserverBaseCreateWorkspaceStyleRequest<IGPGeoserverStyleBody, GeoserverCreateWorkspaceStyleRequest> {
 
     /**
-     * <p>Name of the style to delete.</p>
-     *
-     * @param theStyle
-     * @return {@link GeoserverDeleteStyleRequest}
+     * @param theWorkspace
+     * @return {@link GeoserverCreateWorkspaceStyleRequest}
      */
-    GeoserverDeleteStyleRequest withStyle(@Nonnull(when = NEVER) String theStyle);
+    @Override
+    GeoserverCreateWorkspaceStyleRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
 
     /**
-     * <p>Specifies whether the underlying file containing the style should be deleted on disk. Default Value is {@link Boolean#TRUE}</p>
-     *
-     * @param thePurge
-     * @return {@link GeoserverDeleteStyleRequest}
+     * @param theStyleBody
+     * @return {@link GeoserverCreateWorkspaceStyleRequest}
      */
-    GeoserverDeleteStyleRequest withPurge(@Nullable Boolean thePurge);
-
-    /**
-     * <p>Removes references to the specified style in existing layers. Default Value is {@link Boolean#TRUE}</p>
-     *
-     * @param theRecurse
-     * @return {@link GeoserverDeleteStyleRequest}
-     */
-    GeoserverDeleteStyleRequest withRecurse(@Nullable Boolean theRecurse);
+    @Override
+    GeoserverCreateWorkspaceStyleRequest withStyleBody(@Nonnull(when = NEVER) IGPGeoserverStyleBody theStyleBody);
 }

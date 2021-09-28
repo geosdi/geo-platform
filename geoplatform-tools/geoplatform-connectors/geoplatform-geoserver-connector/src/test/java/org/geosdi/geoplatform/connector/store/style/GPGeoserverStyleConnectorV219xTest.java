@@ -125,7 +125,7 @@ public class GPGeoserverStyleConnectorV219xTest extends GPBaseGeoserverConnector
     }
 
     @Test
-    public void g_simpleTest() throws Exception {
+    public void g_geoserverDeleteStyleSLDV100RequestTest() throws Exception {
         assertTrue(geoserverConnectorStoreV2_19_x.deleteStyleRequest()
                 .withStyle("style_sld_v100")
                 .getResponse() == TRUE);
@@ -133,6 +133,22 @@ public class GPGeoserverStyleConnectorV219xTest extends GPBaseGeoserverConnector
         logger.info("#####################GEOSERVER_STYLE_SLD_V100_RESPONSE_AS_STRING : {}\n", geoserverStyleSLDV100Request
                 .withStyleName("style_sld_v100")
                 .exist());
+    }
+
+    @Test
+    public void h_geoserverCreateWorkspaceStyleRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@GEOSERVER_CREATE_WORKSPACE_STYLE_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x.createWorkspaceStyleRequest()
+                .withWorkspace("sf")
+                .withStyleBody(toGPGeoserverStyleBody("roads_style_new_sf", "roads33_sf.sld"))
+                .getResponse());
+    }
+
+    @Test
+    public void i_geoserverDeleteWorkspaceStyleRequestTest() throws Exception {
+        assertTrue(geoserverConnectorStoreV2_19_x.deleteWorkspaceStyleRequest()
+                .withWorkspace("sf")
+                .withStyle("roads_style_new_sf")
+                .getResponse() == TRUE);
     }
 
     /**

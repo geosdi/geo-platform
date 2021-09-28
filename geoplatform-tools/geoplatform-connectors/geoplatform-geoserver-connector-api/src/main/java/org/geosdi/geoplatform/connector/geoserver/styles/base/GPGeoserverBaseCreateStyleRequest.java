@@ -112,4 +112,12 @@ public abstract class GPGeoserverBaseCreateStyleRequest<StyleBody, R extends Geo
                 throw new IllegalStateException("Method not allowed");
         }
     }
+
+    /**
+     * @return {@link Class<IGPGeoserverCreareStyleResponse>}
+     */
+    @Override
+    protected Class<IGPGeoserverCreareStyleResponse> forClass() {
+        return IGPGeoserverCreareStyleResponse.class;
+    }
 }

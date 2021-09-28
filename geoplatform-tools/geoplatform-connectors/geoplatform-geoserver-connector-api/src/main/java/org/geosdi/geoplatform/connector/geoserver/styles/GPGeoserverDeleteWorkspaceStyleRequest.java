@@ -32,50 +32,46 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.styles.sld;
+package org.geosdi.geoplatform.connector.geoserver.styles;
 
 import net.jcip.annotations.ThreadSafe;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.entity.StringEntity;
-import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverCreareStyleResponse;
-import org.geosdi.geoplatform.connector.geoserver.styles.base.GPGeoserverBaseCreateStyleRequest;
+import org.apache.hc.core5.net.URIBuilder;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverDeleteWorkspaceStyleRequest;
+import org.geosdi.geoplatform.connector.geoserver.styles.base.GPGeoserverBaseDeleteStyleRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
-import static org.apache.http.entity.ContentType.APPLICATION_XML;
-import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-class GPGeoserverCreateStyleSLDV100Request extends GPGeoserverBaseCreateStyleRequest<StyledLayerDescriptor, GeoserverCreateStyleSLDV100Request> implements GeoserverCreateStyleSLDV100Request {
+public class GPGeoserverDeleteWorkspaceStyleRequest extends GPGeoserverBaseDeleteStyleRequest<GeoserverDeleteWorkspaceStyleRequest> implements GeoserverDeleteWorkspaceStyleRequest {
 
-    private final ThreadLocal<String> style;
+    private final ThreadLocal<String> workspace;
 
     /**
      * @param theServerConnector
+     * @param theJacksonSupport
      */
-    GPGeoserverCreateStyleSLDV100Request(@Nonnull(when = NEVER) GPServerConnector theServerConnector) {
-        super(theServerConnector, JACKSON_JAXB_XML_SUPPORT);
-        this.style = withInitial(() -> null);
+    GPGeoserverDeleteWorkspaceStyleRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(theServerConnector, theJacksonSupport);
+        this.workspace = withInitial(() -> null);
     }
 
     /**
-     * @param theStyleName
-     * @return {@link GeoserverCreateStyleSLDV100Request}
+     * @param theWorkspace
+     * @return {@link GeoserverDeleteWorkspaceStyleRequest}
      */
     @Override
-    public GeoserverCreateStyleSLDV100Request withStyleName(@Nonnull(when = NEVER) String theStyleName) {
-        this.style.set(theStyleName);
+    public GeoserverDeleteWorkspaceStyleRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
+        this.workspace.set(theWorkspace);
         return self();
     }
 
@@ -84,29 +80,17 @@ class GPGeoserverCreateStyleSLDV100Request extends GPGeoserverBaseCreateStyleReq
      */
     @Override
     protected String createUriPath() throws Exception {
+        String workspaceName = this.workspace.get();
+        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspaceName mut not be null or an Empty String.");
         String styleName = this.style.get();
-        checkArgument((styleName != null) && !(styleName.trim().isEmpty()), "The Parameter styleName must not be null or an empty string");
-        String baseURI = super.createUriPath();
-        return new URIBuilder(baseURI).addParameter("name", styleName).build().toString();
-    }
-
-    /**
-     * @return {@link HttpEntity}
-     */
-    @Override
-    protected HttpEntity prepareHttpEntity() throws Exception {
-        StyledLayerDescriptor geoserverStyleBody = this.styleBody.get();
-        checkArgument(geoserverStyleBody != null, "The Parameter styleBody must not be null.");
-        String geoserverStyleBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(geoserverStyleBody);
-        logger.debug("#############################STYLE_BODY : \n{}\n", geoserverStyleBodyString);
-        return new StringEntity(geoserverStyleBodyString, APPLICATION_XML);
-    }
-
-    /**
-     * @param httpMethod
-     */
-    @Override
-    protected void addHeaderParams(HttpUriRequest httpMethod) {
-        httpMethod.addHeader("Content-Type", "application/vnd.ogc.sld+xml");
+        checkArgument((styleName != null) && !(styleName.trim().isEmpty()), "The Parameter styleName mut not be null or an Empty String.");
+        //        styleName = REPLACEMENT.replace(styleName);
+        String recurse = this.recurse.get().toString();
+        String purge = this.purge.get().toString();
+        String baseURI = this.serverURI.toString();
+        return new URIBuilder((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/styles/").concat(styleName) : baseURI.concat("/workspaces/").concat(workspaceName).concat("/styles/").concat(styleName)))
+                .addParameter("recurse", recurse)
+                .addParameter("purge", purge)
+                .build().toString();
     }
 }

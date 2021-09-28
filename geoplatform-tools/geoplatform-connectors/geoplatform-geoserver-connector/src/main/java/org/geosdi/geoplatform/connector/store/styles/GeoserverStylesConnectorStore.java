@@ -95,11 +95,27 @@ public abstract class GeoserverStylesConnectorStore extends GeoserverLayersConne
     }
 
     /**
+     * @return {@link GeoserverCreateWorkspaceStyleRequest}
+     */
+    @Override
+    public GeoserverCreateWorkspaceStyleRequest createWorkspaceStyleRequest() {
+        return this.server.createWorkspaceStyleRequest();
+    }
+
+    /**
      * @return {@link GeoserverDeleteStyleRequest}
      */
     @Override
     public GeoserverDeleteStyleRequest deleteStyleRequest() {
         return this.server.deleteStyleRequest();
+    }
+
+    /**
+     * @return {@link GeoserverDeleteWorkspaceStyleRequest}
+     */
+    @Override
+    public GeoserverDeleteWorkspaceStyleRequest deleteWorkspaceStyleRequest() {
+        return this.server.deleteWorkspaceStyleRequest();
     }
 
     /**

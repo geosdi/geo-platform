@@ -36,6 +36,11 @@
 package org.geosdi.geoplatform.geoserver.datastores;
 
 import it.geosolutions.geoserver.rest.decoder.RESTDataStoreList;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.http.entity.ContentType;
+import org.geosdi.geoplatform.connector.geoserver.model.file.GPDataStoreFileExtension;
+import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
+import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastores;
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverLoadDatastoresRequest;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
@@ -45,10 +50,14 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.io.File.separator;
 import static java.lang.Boolean.TRUE;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -87,5 +96,22 @@ public class GeoserverConnectorDatastoresTest extends GeoserverConnectorTest {
         this.geoserverConnectorStore.deleteDatastoreRequest().withDatastoreName("store_vito").withWorkspaceName("sf").withRecurse(TRUE).getResponse();
         Assert.assertFalse("####################", this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName("sf").withStoreName("store_vito").withQuietNotFound(TRUE).exist());
     }
+
+    @Test
+    public void d_updateDataStoreWithShape() throws Exception {
+        File file = new File(of("src", "test", "resources", "admin_shp_comuni.zip").collect(joining(separator)));
+        Assert.assertTrue("#################FILE_EXSIST", file.exists());
+        logger.info("##################{}\n", FilenameUtils.getBaseName(file.toURI().toString()));
+        logger.info("###############{}\n", this.geoserverConnectorStore.updateDataStoreWithStoreName()
+                .withWorkspace("sf")
+                .withStore("store_vito")
+                .withConfigure(GPParameterConfigure.NONE)
+                .withMethod(GPUploadMethod.FILE)
+                .withMimeType(ContentType.APPLICATION_OCTET_STREAM)
+                .withCharset("UTF-8")
+                .withFormat(GPDataStoreFileExtension.SHP)
+                .withFile(file).getResponse());
+    }
+
 
 }

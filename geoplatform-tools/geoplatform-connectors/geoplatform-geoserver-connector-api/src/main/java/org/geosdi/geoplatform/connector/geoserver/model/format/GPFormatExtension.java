@@ -1,14 +1,16 @@
-package org.geosdi.geoplatform.connector.geoserver.coveragestores;
+package org.geosdi.geoplatform.connector.geoserver.model.format;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public enum GPUploadMethod {
+public enum GPFormatExtension {
 
-    FILE,
-    URL,
-    EXTERNAL;
+    XML,
+    JSON,
+    HTML,
+    SLD,
+    SLD_1_1_0;
 
     /**
      * @return {@link String}

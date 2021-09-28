@@ -1,13 +1,13 @@
-package org.geosdi.geoplatform.connector.geoserver.model.coveragestores;
+package org.geosdi.geoplatform.connector.geoserver.model.file;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public enum GPProjectionPolicy {
-    REPROJECT_TO_DECLARED,
-    FORCE_DECLARED,
-    NONE;
+public enum GPCoverageStoreFileExtension implements IGPFileExtension {
+
+    GEOTIFF, IMAGEMOSAIC, WORLDIMAGE;
+
 
     /**
      * Returns the name of this enum constant, as contained in the

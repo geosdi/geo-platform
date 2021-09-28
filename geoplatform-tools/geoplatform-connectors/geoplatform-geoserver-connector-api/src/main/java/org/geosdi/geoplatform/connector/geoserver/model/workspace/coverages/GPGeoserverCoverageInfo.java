@@ -41,6 +41,7 @@ import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.GPGeoserverResourceInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverNativeBoundingBox;
 import org.geosdi.geoplatform.connector.geoserver.model.format.IGPGeoserverSupportedFormat;
+import org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy;
 import org.geosdi.geoplatform.connector.geoserver.model.srs.GPGeoserverRequestSRS;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.dimension.IGPCoverageDimensions;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.grid.IGPCoverageGrid;
@@ -73,4 +74,5 @@ public class GPGeoserverCoverageInfo extends GPGeoserverResourceInfo<GPGeoserver
     private String nativeFormat;
     private GPGeoserverRequestSRS requestSRS;
     private IGPGeoserverSupportedFormat supportedFormats;
+    private GPProjectionPolicy policy;
 }

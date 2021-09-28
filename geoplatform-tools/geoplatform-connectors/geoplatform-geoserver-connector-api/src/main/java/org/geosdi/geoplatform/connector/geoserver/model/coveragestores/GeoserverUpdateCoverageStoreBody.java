@@ -39,6 +39,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
+import org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -65,5 +66,4 @@ public class GeoserverUpdateCoverageStoreBody implements GPGeoserverUpdateCovera
     private Boolean enabled = TRUE;
     private String srs;
     private GPProjectionPolicy projectionPolicy;
-
 }

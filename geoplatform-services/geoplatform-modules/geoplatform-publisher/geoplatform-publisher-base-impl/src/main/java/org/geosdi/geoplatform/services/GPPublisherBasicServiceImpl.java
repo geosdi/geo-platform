@@ -109,6 +109,8 @@ import java.util.zip.ZipFile;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
+import static org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension.JSON;
+import static org.geosdi.geoplatform.connector.geoserver.model.store.GPStoreType.COVERAGES;
 
 public class GPPublisherBasicServiceImpl implements IGPPublisherService, InitializingBean {
 
@@ -1581,7 +1583,12 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                         .withFile(fileInTifDir).getResponse();
                 if (!geoserverLoadCoverageStoreRequest.exist()) {
                     return FALSE;
-                } else if (!this.geoserverConnectorStore.createCoverageRequest().withWorkspace(userWorkspace).withCoverageStore(fileName).withCoverageBody(theGPGeoserverCoverageInfo).getResponse()) {
+                } else if (!this.geoserverConnectorStore.createCoverageRequest()
+                        .withWorkspace(userWorkspace)
+                        .withCoverageStore(fileName)
+                        .withMethod(COVERAGES)
+                        .withFormat(JSON)
+                        .withCoverageBody(theGPGeoserverCoverageInfo).getResponse()) {
                     logger.error("Unable to create a coverage for the store:" + fileName);
                     return FALSE;
                 } else {

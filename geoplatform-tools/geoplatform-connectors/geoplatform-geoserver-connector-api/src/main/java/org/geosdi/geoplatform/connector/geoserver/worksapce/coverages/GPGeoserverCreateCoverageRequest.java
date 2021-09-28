@@ -3,6 +3,8 @@ package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 import com.google.common.io.CharStreams;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension;
+import org.geosdi.geoplatform.connector.geoserver.model.store.GPStoreType;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverCreateCoverageRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
@@ -28,6 +30,8 @@ public class GPGeoserverCreateCoverageRequest extends GPJsonPostConnectorRequest
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> coverageStoreName;
     private final ThreadLocal<GPGeoserverCoverageInfo> coverageBody;
+    private final ThreadLocal<GPStoreType> methodName;
+    private final ThreadLocal<GPFormatExtension> formatName;
 
     public GPGeoserverCreateCoverageRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
             @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
@@ -35,6 +39,8 @@ public class GPGeoserverCreateCoverageRequest extends GPJsonPostConnectorRequest
         this.workspaceName = withInitial(() -> null);
         this.coverageStoreName = withInitial(() -> null);
         this.coverageBody = withInitial(() -> null);
+        this.methodName = withInitial(() -> null);
+        this.formatName = withInitial(() -> null);
     }
 
     /**
@@ -68,6 +74,26 @@ public class GPGeoserverCreateCoverageRequest extends GPJsonPostConnectorRequest
     }
 
     /**
+     * @param theMethod
+     * @return {@link GeoserverCreateCoverageRequest}
+     */
+    @Override
+    public GeoserverCreateCoverageRequest withMethod(@Nonnull(when = NEVER) GPStoreType theMethod) {
+        this.methodName.set(theMethod);
+        return self();
+    }
+
+    /**
+     * @param theFormat
+     * @return {@link GeoserverCreateCoverageRequest}
+     */
+    @Override
+    public GeoserverCreateCoverageRequest withFormat(@Nonnull(when = NEVER) GPFormatExtension theFormat) {
+        this.formatName.set(theFormat);
+        return self();
+    }
+
+    /**
      * @return {@link String}
      */
     @Override
@@ -76,9 +102,13 @@ public class GPGeoserverCreateCoverageRequest extends GPJsonPostConnectorRequest
         checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string");
         String coverageStore = this.coverageStoreName.get();
         checkArgument((coverageStore != null) && !(coverageStore.trim().isEmpty()), "The Parameter coverageStore must not be null or an empty string.");
+        GPStoreType method = this.methodName.get();
+        checkArgument((method != null), "The Parameter method must not be null or an empty string.");
+        GPFormatExtension format = this.formatName.get();
+        checkArgument((format != null), "The Parameter format must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore).concat("/coverages.json")
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore).concat("/coverages.json")));
+        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore).concat("/").concat(method.toString()).concat(".").concat(format.toString())
+                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore).concat("/").concat(method.toString()).concat(".").concat(format.toString())));
     }
 
     /**

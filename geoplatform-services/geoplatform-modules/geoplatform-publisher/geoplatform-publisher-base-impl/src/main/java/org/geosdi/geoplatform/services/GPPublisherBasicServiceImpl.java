@@ -39,7 +39,7 @@ import com.google.common.collect.Lists;
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
 import org.apache.commons.httpclient.NameValuePair;
-import org.apache.http.entity.ContentType;
+import org.apache.hc.core5.http.ContentType;
 import org.geosdi.geoplatform.connector.geoserver.model.file.GPCoverageStoreFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;

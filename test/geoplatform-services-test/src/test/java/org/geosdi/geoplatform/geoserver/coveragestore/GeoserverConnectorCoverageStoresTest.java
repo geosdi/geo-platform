@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.geoserver.coveragestore;
 
 import it.geosolutions.geoserver.rest.decoder.RESTCoverage;
-import org.apache.http.entity.ContentType;
+import org.apache.hc.core5.http.ContentType;
 import org.geosdi.geoplatform.connector.geoserver.model.file.GPCoverageStoreFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
@@ -129,7 +129,7 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
                 .withConfigure(GPParameterConfigure.FIRST)
                 .withMethod(GPUploadMethod.FILE)
                 .withFormat(GPCoverageStoreFileExtension.GEOTIFF)
-                .withMimeType(ContentType.IMAGE_TIFF)
+                .withMimeType(org.apache.hc.core5.http.ContentType.IMAGE_TIFF)
                 .withFile(file).getResponse());
         //logger.info("############{}\n", this.restPublisher.publishGeoTIFF("sf", "store_vito", file));
     }

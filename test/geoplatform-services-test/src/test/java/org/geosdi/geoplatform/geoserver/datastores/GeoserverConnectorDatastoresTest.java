@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.geoserver.datastores;
 
 import it.geosolutions.geoserver.rest.decoder.RESTDataStoreList;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.http.entity.ContentType;
+import org.apache.hc.core5.http.ContentType;
 import org.geosdi.geoplatform.connector.geoserver.model.file.GPDataStoreFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;

@@ -1,13 +1,13 @@
 package org.geosdi.geoplatform.connector.geoserver.datastores;
 
 import com.google.common.io.CharStreams;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.FileEntity;
+import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.io.entity.FileEntity;
+import org.apache.hc.core5.net.URIBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
-import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.file.IGPFileExtension;
+import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverUpdateDataStoreWithStoreNameRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
@@ -231,7 +231,7 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
         GPUploadMethod method = this.methodName.get();
         File fileToUpload = this.file.get();
         checkArgument(fileToUpload != null, "The Parameter file must not be null.");
-        FileEntity builder = new FileEntity(fileToUpload, "application/zip");
+        FileEntity builder = new FileEntity(fileToUpload, contentType);
         return builder;
     }
 }

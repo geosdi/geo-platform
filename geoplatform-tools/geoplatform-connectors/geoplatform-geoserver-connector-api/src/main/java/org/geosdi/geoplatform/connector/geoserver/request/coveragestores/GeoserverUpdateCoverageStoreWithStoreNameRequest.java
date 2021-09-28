@@ -35,10 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.coveragestores;
 
+import org.apache.http.entity.ContentType;
 import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPCoverageResponse;
-import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPCoverageStoreExtension;
-import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPParameterConfigure;
-import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPUploadMethod;
+import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
+import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
+import org.geosdi.geoplatform.connector.geoserver.model.file.IGPFileExtension;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.xml.jaxb.GPJacksonJAXBXmlSupport;
 import org.geosdi.geoplatform.support.jackson.xml.jaxb.JacksonJAXBXmlSupport;
@@ -78,7 +79,7 @@ public interface GeoserverUpdateCoverageStoreWithStoreNameRequest extends GPJson
      * @param theFormat
      * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
-    GeoserverUpdateCoverageStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) GPCoverageStoreExtension theFormat);
+    GeoserverUpdateCoverageStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) IGPFileExtension theFormat);
 
     /**
      * @param theParameterConfigure
@@ -103,6 +104,12 @@ public interface GeoserverUpdateCoverageStoreWithStoreNameRequest extends GPJson
      * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     GeoserverUpdateCoverageStoreWithStoreNameRequest withFileName(@Nonnull(when = NEVER) String theFileName);
+
+    /**
+     * @param theMimeType
+     * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
+     */
+    GeoserverUpdateCoverageStoreWithStoreNameRequest withMimeType(@Nonnull(when = NEVER) ContentType theMimeType);
 
     /**
      * @param theCoverageName

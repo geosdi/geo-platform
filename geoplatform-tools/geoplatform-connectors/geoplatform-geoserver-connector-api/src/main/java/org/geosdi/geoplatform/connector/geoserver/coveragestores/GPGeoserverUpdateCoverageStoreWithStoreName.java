@@ -4,6 +4,9 @@ import org.apache.hc.core5.http.ContentType;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.FileEntity;
 import org.apache.hc.core5.net.URIBuilder;
+import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
+import org.geosdi.geoplatform.connector.geoserver.model.file.IGPFileExtension;
+import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverUpdateCoverageStoreWithStoreNameRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
@@ -24,9 +27,14 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> storeName;
     private final ThreadLocal<GPUploadMethod> methodName;
-    private final ThreadLocal<GPCoverageStoreExtension> formatName;
+    private final ThreadLocal<IGPFileExtension> formatName;
     private final ThreadLocal<File> file;
-    private final ThreadLocal<URIBuilder> uriBuilder;
+    private final ThreadLocal<ContentType> mymeType;
+    private final ThreadLocal<String> update;
+    private final ThreadLocal<String> configure;
+    private final ThreadLocal<String> filename;
+    private final ThreadLocal<String> coverageName;
+
 
     GPGeoserverUpdateCoverageStoreWithStoreName(@Nonnull(when = NEVER) GPServerConnector theServerConnector) {
         super(theServerConnector, JACKSON_JAXB_XML_SUPPORT);
@@ -35,7 +43,11 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
         this.methodName = withInitial(() -> null);
         this.formatName = withInitial(() -> null);
         this.file = withInitial(() -> null);
-        this.uriBuilder = withInitial(() -> null);
+        this.mymeType = withInitial(() -> null);
+        this.update = withInitial(() -> null);
+        this.configure = withInitial(() -> null);
+        this.filename = withInitial(() -> null);
+        this.coverageName = withInitial(() -> null);
     }
 
     /**
@@ -45,7 +57,6 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
     @Override
     public GeoserverUpdateCoverageStoreWithStoreNameRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspaceName.set(theWorkspace);
-        this.uriBuilder.set(new URIBuilder());
         return self();
     }
 
@@ -74,7 +85,7 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
      * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     @Override
-    public GeoserverUpdateCoverageStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) GPCoverageStoreExtension theFormat) {
+    public GeoserverUpdateCoverageStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) IGPFileExtension theFormat) {
         this.formatName.set(theFormat);
         return self();
     }
@@ -85,7 +96,7 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
      */
     @Override
     public GeoserverUpdateCoverageStoreWithStoreNameRequest withConfigure(@Nonnull(when = NEVER) GPParameterConfigure theParameterConfigure) {
-        this.uriBuilder.get().addParameter("configure", theParameterConfigure.toString());
+        this.configure.set(theParameterConfigure.toString());
         return self();
     }
 
@@ -95,7 +106,7 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
      */
     @Override
     public GeoserverUpdateCoverageStoreWithStoreNameRequest withUpdate(@Nonnull(when = NEVER) String theUpdate) {
-        this.uriBuilder.get().addParameter("update", theUpdate);
+        this.update.set(theUpdate);
         return self();
     }
 
@@ -115,7 +126,18 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
      */
     @Override
     public GeoserverUpdateCoverageStoreWithStoreNameRequest withFileName(@Nonnull(when = NEVER) String theFileName) {
-        this.uriBuilder.get().addParameter("filename", theFileName);
+        this.filename.set(theFileName);
+        return self();
+    }
+
+    /**
+     * @param theMimeType
+     * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
+     */
+    @Override
+    public GeoserverUpdateCoverageStoreWithStoreNameRequest withMimeType(
+            @Nonnull(when = NEVER) ContentType theMimeType) {
+        this.mymeType.set(theMimeType);
         return self();
     }
 
@@ -125,7 +147,7 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
      */
     @Override
     public GeoserverUpdateCoverageStoreWithStoreNameRequest withCoverageName(@Nonnull(when = NEVER) String theCoverageName) {
-        this.uriBuilder.get().addParameter("coverageName", theCoverageName);
+        this.coverageName.set(theCoverageName);
         return self();
     }
 
@@ -140,12 +162,25 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
         checkArgument((store != null) && !(store.trim().isEmpty()), "The Parameter store must not be null or an empty string.");
         GPUploadMethod method = this.methodName.get();
         checkArgument((method != null), "The Parameter method must not be null or an empty string.");
-        GPCoverageStoreExtension format = this.formatName.get();
+        IGPFileExtension format = this.formatName.get();
         checkArgument((format != null), "The Parameter format must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
-        String path = ((baseURI.endsWith("/") ? ("workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())
-                : ("/workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())));
-        return this.uriBuilder.get().setScheme(this.serverURI.getScheme()).setHost(this.serverURI.getHost()).setPath(this.serverURI.getPath().concat(path)).build().toString();
+        String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())
+                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())));
+        URIBuilder uriBuilder = new URIBuilder(path);
+        String update = this.update.get();
+        String configure = this.configure.get();
+        String filename = this.filename.get();
+        String coverageName = this.coverageName.get();
+        if(update != null && !(update.trim().isEmpty()))
+            uriBuilder.addParameter("update", update);
+        if(configure != null && !(configure.trim().isEmpty()))
+            uriBuilder.addParameter("configure", configure);
+        if(filename != null && !(filename.trim().isEmpty()))
+            uriBuilder.addParameter("filename", filename);
+        if(coverageName != null && !(coverageName.trim().isEmpty()))
+            uriBuilder.addParameter("coverageName", coverageName);
+        return uriBuilder.build().toString();
     }
 
     /**
@@ -161,13 +196,12 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
      */
     @Override
     protected HttpEntity prepareHttpEntity() throws Exception {
+        ContentType contentType = this.mymeType.get();
+        checkArgument(contentType != null, "The parameter contentType must not be null");
         GPUploadMethod method = this.methodName.get();
-        if(method == GPUploadMethod.FILE){
-            File fileToUpload = this.file.get();
-            checkArgument(fileToUpload != null, "The Parameter file must not be null.");
-            FileEntity builder = new FileEntity(fileToUpload, ContentType.IMAGE_TIFF);
-            return builder;
-        }
-        return null;
+        File fileToUpload = this.file.get();
+        checkArgument(fileToUpload != null, "The Parameter file must not be null.");
+        FileEntity builder = new FileEntity(fileToUpload, contentType);
+        return builder;
     }
 }

@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.connector.geoserver.coveragestores;
+package org.geosdi.geoplatform.connector.geoserver.model.configure;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group

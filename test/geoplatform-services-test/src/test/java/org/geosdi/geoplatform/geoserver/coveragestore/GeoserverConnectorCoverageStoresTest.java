@@ -36,11 +36,13 @@
 package org.geosdi.geoplatform.geoserver.coveragestore;
 
 import it.geosolutions.geoserver.rest.decoder.RESTCoverage;
-import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPCoverageStoreExtension;
-import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPParameterConfigure;
-import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPParameterUpdate;
-import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPUploadMethod;
+import org.apache.http.entity.ContentType;
+import org.geosdi.geoplatform.connector.geoserver.model.file.GPCoverageStoreFileExtension;
+import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
+import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
+import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.raster.GeoserverRasterLayer;
+import org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverLoadCoverageStoreRequest;
@@ -126,7 +128,8 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
                 .withUpdate(GPParameterUpdate.OVERWRITE.toString())
                 .withConfigure(GPParameterConfigure.FIRST)
                 .withMethod(GPUploadMethod.FILE)
-                .withFormat(GPCoverageStoreExtension.GEOTIFF)
+                .withFormat(GPCoverageStoreFileExtension.GEOTIFF)
+                .withMimeType(ContentType.IMAGE_TIFF)
                 .withFile(file).getResponse());
         //logger.info("############{}\n", this.restPublisher.publishGeoTIFF("sf", "store_vito", file));
     }
@@ -138,6 +141,7 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
         theGPGeoserverCoverageInfo.setName("layer_vito");
         theGPGeoserverCoverageInfo.setTitle("layer_vito");
         theGPGeoserverCoverageInfo.setSrs("EPSG:4326");
+        theGPGeoserverCoverageInfo.setPolicy(GPProjectionPolicy.FORCE_DECLARED);
         logger.info("#############{}\n", this.geoserverConnectorStore.createCoverageRequest()
                 .withWorkspace("sf")
                 .withCoverageStore("store_vito")
@@ -158,7 +162,7 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
                 .getResponse());
     }
 
-    @Ignore
+    //@Ignore
     @Test
     public void i_createCoverage() throws Exception {
         File file = new File(of("src", "test", "resources", "VMI_20210923T1020Z.tif").collect(joining(separator)));
@@ -166,13 +170,15 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
         GPGeoserverCoverageInfo theGPGeoserverCoverageInfo = new GPGeoserverCoverageInfo();
         theGPGeoserverCoverageInfo.setName("layer_vito");
         theGPGeoserverCoverageInfo.setTitle("layer_vito");
+        theGPGeoserverCoverageInfo.setPolicy(GPProjectionPolicy.FORCE_DECLARED);
         theGPGeoserverCoverageInfo.setSrs("EPSG:4326");
         GeoserverLoadCoverageStoreRequest geoserverLoadCoverageStoreRequest = this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace("sf").withStore("store_vito");
         this.geoserverConnectorStore.updateCoverageStoreWithStoreName().withWorkspace("sf").withStore("store_vito")
-                .withFormat(GPCoverageStoreExtension.GEOTIFF).withFile(file)
+                .withFormat(GPCoverageStoreFileExtension.GEOTIFF).withFile(file)
                 .withMethod(GPUploadMethod.FILE)
                 .withConfigure(GPParameterConfigure.FIRST)
                 .withCoverageName("layer_vito")
+                .withMimeType(ContentType.IMAGE_TIFF)
                 .withUpdate(GPParameterUpdate.OVERWRITE.toString())
                 .getResponse();
         if (!geoserverLoadCoverageStoreRequest.exist()) {
@@ -187,5 +193,4 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
             logger.info("##############{}\n", this.geoserverConnectorStore.updateLayerRequest().withWorkspaceName("sf").withLayerName("layer_vito").withLayerBody(geoserverRasterLayer).getResponse());
         }
     }
-
 }

@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.coveragestores;
 
+import org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy;
+
 import java.io.Serializable;
 
 /**

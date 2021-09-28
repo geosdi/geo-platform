@@ -39,10 +39,11 @@ import com.google.common.collect.Lists;
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
 import org.apache.commons.httpclient.NameValuePair;
-import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPCoverageStoreExtension;
-import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPParameterConfigure;
-import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPParameterUpdate;
-import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPUploadMethod;
+import org.apache.http.entity.ContentType;
+import org.geosdi.geoplatform.connector.geoserver.model.file.GPCoverageStoreFileExtension;
+import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
+import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
+import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.coveragestores.GeoserverUpdateCoverageStoreBody;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastores;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
@@ -50,6 +51,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayerStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayerType;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.raster.GeoserverRasterLayer;
+import org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GeoserverCreateWorkspaceBody;
@@ -1570,10 +1572,12 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                 theGPGeoserverCoverageInfo.setName(fileName);
                 theGPGeoserverCoverageInfo.setTitle(fileName);
                 theGPGeoserverCoverageInfo.setSrs(epsg);
+                theGPGeoserverCoverageInfo.setPolicy(GPProjectionPolicy.FORCE_DECLARED);
                 GeoserverLoadCoverageStoreRequest geoserverLoadCoverageStoreRequest = this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace(userWorkspace).withStore(fileName);
                 this.geoserverConnectorStore.updateCoverageStoreWithStoreName().withWorkspace(userWorkspace).withCoverageName(fileName).withStore(fileName)
+                        .withMimeType(ContentType.IMAGE_TIFF)
                         .withUpdate(GPParameterUpdate.OVERWRITE.toString()).withConfigure(GPParameterConfigure.FIRST).withMethod(GPUploadMethod.FILE).withFormat(
-                        GPCoverageStoreExtension.GEOTIFF)
+                        GPCoverageStoreFileExtension.GEOTIFF)
                         .withFile(fileInTifDir).getResponse();
                 if (!geoserverLoadCoverageStoreRequest.exist()) {
                     return FALSE;
@@ -1599,4 +1603,9 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
             throw new IllegalArgumentException("Unable to run: null parameter");
         }
     }
+
+//    private boolean publishShapeFile(String workspace, String dataStoreName, String charset, String dataSetName) {
+//
+//    }
+
 }

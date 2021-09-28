@@ -71,9 +71,19 @@ public interface GPGeoserverStylesConnectorStore extends GPGeoserverLayersConnec
     GeoserverCreateStyleSLDV100Request createStyleSLDV100Request();
 
     /**
+     * @return {@link GeoserverCreateWorkspaceStyleRequest}
+     */
+    GeoserverCreateWorkspaceStyleRequest createWorkspaceStyleRequest();
+
+    /**
      * @return {@link GeoserverDeleteStyleRequest}
      */
     GeoserverDeleteStyleRequest deleteStyleRequest();
+
+    /**
+     * @return {@link GeoserverDeleteWorkspaceStyleRequest}
+     */
+    GeoserverDeleteWorkspaceStyleRequest deleteWorkspaceStyleRequest();
 
     /**
      * @return {@link GeoserverStylesRequest}

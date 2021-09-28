@@ -32,42 +32,53 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.styles;
+package org.geosdi.geoplatform.connector.geoserver.styles.base;
 
-import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverBaseDeleteStyleRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverBaseCreateWorkspaceStyleRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverDeleteStyleRequest extends GeoserverBaseDeleteStyleRequest<GeoserverDeleteStyleRequest> {
+public abstract class GPGeoserverBaseCreateWorkspaceStyleRequest<StyleBody, R extends GeoserverBaseCreateWorkspaceStyleRequest> extends GPGeoserverBaseCreateStyleRequest<StyleBody, R> implements GeoserverBaseCreateWorkspaceStyleRequest<StyleBody, R> {
+
+    private final ThreadLocal<String> workspace;
 
     /**
-     * <p>Name of the style to delete.</p>
-     *
-     * @param theStyle
-     * @return {@link GeoserverDeleteStyleRequest}
+     * @param theServerConnector
+     * @param theJacksonSupport
      */
-    GeoserverDeleteStyleRequest withStyle(@Nonnull(when = NEVER) String theStyle);
+    protected GPGeoserverBaseCreateWorkspaceStyleRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(theServerConnector, theJacksonSupport);
+        this.workspace = withInitial(() -> null);
+    }
 
     /**
-     * <p>Specifies whether the underlying file containing the style should be deleted on disk. Default Value is {@link Boolean#TRUE}</p>
-     *
-     * @param thePurge
-     * @return {@link GeoserverDeleteStyleRequest}
+     * @param theWorkspace
+     * @return {@link R}
      */
-    GeoserverDeleteStyleRequest withPurge(@Nullable Boolean thePurge);
+    @Override
+    public R withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
+        this.workspace.set(theWorkspace);
+        return self();
+    }
 
     /**
-     * <p>Removes references to the specified style in existing layers. Default Value is {@link Boolean#TRUE}</p>
-     *
-     * @param theRecurse
-     * @return {@link GeoserverDeleteStyleRequest}
+     * @return {@link String}
      */
-    GeoserverDeleteStyleRequest withRecurse(@Nullable Boolean theRecurse);
+    @Override
+    protected String createUriPath() throws Exception {
+        String workspaceName = this.workspace.get();
+        checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspaceName must not be null or an empty string.");
+        String baseURI = this.serverURI.toString();
+        return (baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/styles") : baseURI.concat("/workspaces/").concat(workspaceName).concat("/styles"));
+    }
 }

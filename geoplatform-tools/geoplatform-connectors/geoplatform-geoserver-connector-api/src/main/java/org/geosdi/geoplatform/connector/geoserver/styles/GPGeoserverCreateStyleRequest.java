@@ -77,12 +77,4 @@ public class GPGeoserverCreateStyleRequest extends GPGeoserverBaseCreateStyleReq
         logger.debug("#############################STYLE_BODY : \n{}\n", geoserverStyleBodyString);
         return new StringEntity(geoserverStyleBodyString, ContentType.APPLICATION_JSON);
     }
-
-    /**
-     * @return {@link Class<IGPGeoserverCreareStyleResponse>}
-     */
-    @Override
-    protected Class<IGPGeoserverCreareStyleResponse> forClass() {
-        return IGPGeoserverCreareStyleResponse.class;
-    }
 }

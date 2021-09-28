@@ -1583,9 +1583,9 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                 } else {
                     GeoserverRasterLayer geoserverRasterLayer = new GeoserverRasterLayer();
                     GPGeoserverStyle gpGeoserverStyle = new GPGeoserverStyle();
-                    gpGeoserverStyle.setName("burg");
+                    gpGeoserverStyle.setName(sld);
                     geoserverRasterLayer.setDefaultStyle(gpGeoserverStyle);
-                    if (this.geoserverConnectorStore.updateLayerRequest().withWorkspaceName(userWorkspace).withLayerName(sld).withLayerBody(geoserverRasterLayer).getResponse()) {
+                    if (this.geoserverConnectorStore.updateLayerRequest().withWorkspaceName(userWorkspace).withLayerName(fileName).withLayerBody(geoserverRasterLayer).getResponse()) {
                         return TRUE;
                     }
                     return FALSE;
@@ -1599,6 +1599,4 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
             throw new IllegalArgumentException("Unable to run: null parameter");
         }
     }
-
-
 }

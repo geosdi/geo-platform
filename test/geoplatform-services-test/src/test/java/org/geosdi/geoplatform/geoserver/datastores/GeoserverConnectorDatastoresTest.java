@@ -35,7 +35,11 @@
  */
 package org.geosdi.geoplatform.geoserver.datastores;
 
+import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.decoder.RESTDataStoreList;
+import it.geosolutions.geoserver.rest.encoder.GSResourceEncoder;
+import it.geosolutions.geoserver.rest.encoder.feature.GSFeatureTypeEncoder;
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.http.entity.ContentType;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
@@ -61,7 +65,7 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension.JSON;
 import static org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy.FORCE_DECLARED;
-import static org.geosdi.geoplatform.connector.geoserver.model.store.GPStoreType.DATASTORES;
+import static org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverStoreInfoType.FEATURE;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -101,11 +105,24 @@ public class GeoserverConnectorDatastoresTest extends GeoserverConnectorTest {
         Assert.assertFalse("####################", this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName("sf").withStoreName("store_vito").withQuietNotFound(TRUE).exist());
     }
 
-    @Ignore
+    @Test
+    public void e_testRest() throws Exception {
+        NameValuePair[] params = new NameValuePair[1];
+        NameValuePair nameValuePair = new NameValuePair("charset", "UTF-8");
+        params[0] = nameValuePair;
+        File file = new File(of("src", "test", "resources", "admin_shp_comuni.zip").collect(joining(separator)));
+
+        this.restPublisher.publishShp("sf", "store_vito", params, "admin_shp_comuni", GeoServerRESTPublisher.UploadMethod.FILE,
+                        file.toURI(), "EPSG:32633", "burg");
+    }
+
+    //@Ignore
     @Test
     public void d_updateDataStoreWithShape() throws Exception {
         File file = new File(of("src", "test", "resources", "admin_shp_comuni.zip").collect(joining(separator)));
         Assert.assertTrue("#################FILE_EXSIST", file.exists());
+
+        logger.info("#############FILE: {}\n", file.toURI());
         logger.info("##################{}\n", FilenameUtils.getBaseName(file.toURI().toString()));
         logger.info("###############{}\n", this.geoserverConnectorStore.updateDataStoreWithStoreName()
                 .withWorkspace("sf")
@@ -115,21 +132,38 @@ public class GeoserverConnectorDatastoresTest extends GeoserverConnectorTest {
                 .withMimeType(ContentType.APPLICATION_OCTET_STREAM)
                 .withCharset("UTF-8")
                 .withFormat(GPDataStoreFileExtension.SHP)
+                //.withTarget(GPDataStoreFileExtension.SHP)
+                //.withFileName("admin_shp_comuni")
                 .withFile(file).getResponse());
 
+        final GSFeatureTypeEncoder featureTypeEncoder = new GSFeatureTypeEncoder();
+        featureTypeEncoder.setName("");
+        featureTypeEncoder.setTitle("shp_comuni");
+        featureTypeEncoder.setSRS("EPSG:32633");
+        featureTypeEncoder.setProjectionPolicy(GSResourceEncoder.ProjectionPolicy.FORCE_DECLARED );
+
+
         GPGeoserverFeatureTypeInfo gpGeoserverFeatureTypeInfo = new GPGeoserverFeatureTypeInfo();
-        gpGeoserverFeatureTypeInfo.setName("admin_shp_comuni");
-        gpGeoserverFeatureTypeInfo.setEnabled(TRUE);
-        gpGeoserverFeatureTypeInfo.setTitle("admin_shp_comuni");
-        gpGeoserverFeatureTypeInfo.setSrs("EPSG:4326");
+        gpGeoserverFeatureTypeInfo.setName("shp_comuni");
+        //gpGeoserverFeatureTypeInfo.setEnabled(TRUE);
+        gpGeoserverFeatureTypeInfo.setTitle("shp_comuni");
+//        GPFeatureTypeAttributes gpFeatureTypeAttributes = new GPFeatureTypeAttributes();
+//        gpFeatureTypeAttributes.setValues(Lists.newArrayList());
+//        gpGeoserverFeatureTypeInfo.setAttributes(gpFeatureTypeAttributes);
+        //gpGeoserverFeatureTypeInfo.setNativeCRS(TRUE);
+        gpGeoserverFeatureTypeInfo.setSrs("EPSG:32633");
         gpGeoserverFeatureTypeInfo.setProjectionPolicy(FORCE_DECLARED);
         logger.info("###############{}\n", this.geoserverConnectorStore.updateDataStoreResource()
                 .withWorkspace("sf")
-                .withMethod(DATASTORES)
+                .withMethod(FEATURE)
                 .withFormat(JSON)
+                //.withFileName("admin_shp_comuni")
+                //.withConfigure(GPParameterConfigure.NONE)
                 .withDataStoreBody(gpGeoserverFeatureTypeInfo)
+                //.withConfigure(GPParameterConfigure.FIRST)
                 .withDataStore("store_vito")
-                .getResponse());
+                .getResponseAsString());
+
 
     }
 

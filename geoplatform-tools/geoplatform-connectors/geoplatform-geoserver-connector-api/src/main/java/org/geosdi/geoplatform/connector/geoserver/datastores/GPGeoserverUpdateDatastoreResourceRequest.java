@@ -2,14 +2,15 @@ package org.geosdi.geoplatform.connector.geoserver.datastores;
 
 import com.google.common.io.CharStreams;
 import org.apache.http.HttpEntity;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension;
-import org.geosdi.geoplatform.connector.geoserver.model.store.GPStoreType;
+import org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverStoreInfoType;
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverUpdateDatastoreResourceRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -26,7 +27,7 @@ import static org.apache.http.entity.ContentType.APPLICATION_JSON;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverUpdateDatastoreResourceRequest extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateDatastoreResourceRequest> implements GeoserverUpdateDatastoreResourceRequest {
+public class GPGeoserverUpdateDatastoreResourceRequest extends GPJsonPostConnectorRequest<Boolean, GeoserverUpdateDatastoreResourceRequest> implements GeoserverUpdateDatastoreResourceRequest {
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> datsStoreName;
@@ -34,7 +35,7 @@ public class GPGeoserverUpdateDatastoreResourceRequest extends GPJsonPutConnecto
     private final ThreadLocal<String> update;
     private final ThreadLocal<String> target;
     private final ThreadLocal<String> filename;
-    private final ThreadLocal<GPStoreType> methodName;
+    private final ThreadLocal<GeoserverStoreInfoType> methodName;
     private final ThreadLocal<GPFormatExtension> formatName;
     private final ThreadLocal<GPGeoserverFeatureTypeInfo> datastoreBody;
     private final ThreadLocal<GPParameterConfigure> parameterConfigure;
@@ -79,7 +80,7 @@ public class GPGeoserverUpdateDatastoreResourceRequest extends GPJsonPutConnecto
      * @return {@link GeoserverUpdateDatastoreResourceRequest}
      */
     @Override
-    public GeoserverUpdateDatastoreResourceRequest withMethod(@Nonnull(when = NEVER) GPStoreType theMethod) {
+    public GeoserverUpdateDatastoreResourceRequest withMethod(@Nonnull(when = NEVER) GeoserverStoreInfoType theMethod) {
         this.methodName.set(theMethod);
         return self();
     }
@@ -167,13 +168,30 @@ public class GPGeoserverUpdateDatastoreResourceRequest extends GPJsonPutConnecto
         checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string");
         String dataStore = this.datsStoreName.get();
         checkArgument((dataStore != null) && !(dataStore.trim().isEmpty()), "The Parameter dataStore must not be null or an empty string.");
-        GPStoreType method = this.methodName.get();
+        GeoserverStoreInfoType method = this.methodName.get();
         checkArgument((method != null), "The Parameter method must not be null or an empty string.");
         GPFormatExtension format = this.formatName.get();
         checkArgument((format != null), "The Parameter format must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/datastores/").concat(dataStore).concat("/").concat(method.toString()).concat(".").concat(format.toString())
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/datastores/").concat(dataStore).concat("/").concat(method.toString()).concat(".").concat(format.toString())));
+        String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/datastores/").concat(dataStore).concat("/").concat(method.getMethod()).concat(".").concat(format.toString())
+                : baseURI.concat("/workspaces/").concat(workspace).concat("/datastores/").concat(dataStore).concat("/").concat(method.getMethod()).concat(".").concat(format.toString())));
+        URIBuilder uriBuilder = new URIBuilder(path);
+        GPParameterConfigure configure = this.parameterConfigure.get();
+        String target = this.target.get();
+        String update = this.update.get();
+        String charset = this.charSet.get();
+        String filename = this.filename.get();
+        if(configure != null)
+            uriBuilder.addParameter("configure", configure.toString());
+        if(target != null)
+            uriBuilder.addParameter("target", target);
+        if(update != null && !(update.trim().isEmpty()))
+            uriBuilder.addParameter("update", update);
+        if(charset != null && !(charset.trim().isEmpty()))
+            uriBuilder.addParameter("charset", charset);
+        if(filename != null && !(filename.trim().isEmpty()))
+            uriBuilder.addParameter("filename", filename);
+        return uriBuilder.build().toString();
     }
 
     /**

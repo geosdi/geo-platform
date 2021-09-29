@@ -3,7 +3,7 @@ package org.geosdi.geoplatform.connector.geoserver.request.datastores;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension;
-import org.geosdi.geoplatform.connector.geoserver.model.store.GPStoreType;
+import org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverStoreInfoType;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
@@ -32,7 +32,7 @@ public interface GeoserverUpdateDatastoreResourceRequest extends GPJsonConnector
      * @param theMethod
      * @return {@link GeoserverUpdateDatastoreResourceRequest}
      */
-    GeoserverUpdateDatastoreResourceRequest withMethod(@Nonnull(when = NEVER) GPStoreType theMethod);
+    GeoserverUpdateDatastoreResourceRequest withMethod(@Nonnull(when = NEVER) GeoserverStoreInfoType theMethod);
 
     /**
      * @param theFormat

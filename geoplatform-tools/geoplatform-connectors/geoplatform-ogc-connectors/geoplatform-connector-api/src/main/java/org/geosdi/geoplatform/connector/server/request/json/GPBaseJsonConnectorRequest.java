@@ -92,6 +92,7 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest, Connector
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(responseEntity.getContent(), UTF_8_CHARSERT))) {
             return this.readInternal(reader);
         } catch (Exception ex) {
+            ex.printStackTrace();
             throw new IncorrectResponseException(ex);
         } finally {
             consume(responseEntity);

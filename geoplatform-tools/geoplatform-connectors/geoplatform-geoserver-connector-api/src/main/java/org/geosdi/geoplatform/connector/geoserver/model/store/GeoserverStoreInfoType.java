@@ -49,13 +49,15 @@ import static java.util.Arrays.stream;
  */
 public enum GeoserverStoreInfoType {
 
-    COVERAGE("coverageStore"),
-    FEATURE("dataStore");
+    COVERAGE("coverageStore", "coverages"),
+    FEATURE("dataStore", "featuretypes");
 
     private final String type;
+    private final String method;
 
-    GeoserverStoreInfoType(String theType) {
+    GeoserverStoreInfoType(String theType, String theMethod) {
         this.type = theType;
+        this.method = theMethod;
     }
 
     /**
@@ -64,6 +66,14 @@ public enum GeoserverStoreInfoType {
     @JsonValue
     public String getType() {
         return this.type;
+    }
+
+    /**
+     * @return {@link String}
+     */
+    @JsonValue
+    public String getMethod() {
+        return this.method;
     }
 
     @Override

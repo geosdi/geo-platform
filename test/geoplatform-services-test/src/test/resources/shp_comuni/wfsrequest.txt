@@ -1,0 +1,1 @@
+https://prosit.geosdi.org/geoserver/admin/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=admin:admin_shp_comuni&maxFeatures=50&outputFormat=SHAPE-ZIP

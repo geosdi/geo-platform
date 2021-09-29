@@ -62,7 +62,7 @@ import static java.lang.Boolean.TRUE;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension.JSON;
-import static org.geosdi.geoplatform.connector.geoserver.model.store.GPStoreType.COVERAGES;
+import static org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverStoreInfoType.COVERAGE;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
@@ -146,7 +146,7 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
         theGPGeoserverCoverageInfo.setPolicy(GPProjectionPolicy.FORCE_DECLARED);
         logger.info("#############{}\n", this.geoserverConnectorStore.createCoverageRequest()
                 .withWorkspace("sf")
-                .withMethod(COVERAGES)
+                .withMethod(COVERAGE)
                 .withFormat(JSON)
                 .withCoverageStore("store_vito")
                 .withCoverageBody(theGPGeoserverCoverageInfo).getResponseAsString());
@@ -185,12 +185,21 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
                 .withMimeType(ContentType.IMAGE_TIFF)
                 .withUpdate(GPParameterUpdate.OVERWRITE)
                 .getResponse();
+
+       this.geoserverConnectorStore.createCoverageRequest()
+               .withWorkspace("sf")
+               .withCoverageStore("store_vito")
+               .withMethod(COVERAGE)
+               .withFormat(JSON)
+               .withCoverageBody(theGPGeoserverCoverageInfo).getResponse();
+
+
         if (!geoserverLoadCoverageStoreRequest.exist()) {
             logger.error("");
         } else if (!this.geoserverConnectorStore.createCoverageRequest()
                 .withWorkspace("sf")
                 .withCoverageStore("store_vito")
-                .withMethod(COVERAGES)
+                .withMethod(COVERAGE)
                 .withFormat(JSON)
                 .withCoverageBody(theGPGeoserverCoverageInfo).getResponse()) {
             logger.error("Unable to create a coverage for the store:" + "layer_vito");

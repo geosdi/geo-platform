@@ -5,7 +5,7 @@ import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.apache.hc.core5.net.URIBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension;
-import org.geosdi.geoplatform.connector.geoserver.model.store.GPStoreType;
+import org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverStoreInfoType;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverCreateCoverageStoreResourceRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
@@ -33,7 +33,7 @@ public class GPGeoserverCreateCoverageStoreResourceRequest extends GPJsonPostCon
     private final ThreadLocal<String> fileName;
     private final ThreadLocal<Boolean> updateBBox;
     private final ThreadLocal<GPGeoserverCoverageInfo> coverageBody;
-    private final ThreadLocal<GPStoreType> methodName;
+    private final ThreadLocal<GeoserverStoreInfoType> methodName;
     private final ThreadLocal<GPFormatExtension> formatName;
 
     public GPGeoserverCreateCoverageStoreResourceRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
@@ -83,7 +83,7 @@ public class GPGeoserverCreateCoverageStoreResourceRequest extends GPJsonPostCon
      * @return {@link GeoserverCreateCoverageStoreResourceRequest}
      */
     @Override
-    public GeoserverCreateCoverageStoreResourceRequest withMethod(@Nonnull(when = NEVER) GPStoreType theMethod) {
+    public GeoserverCreateCoverageStoreResourceRequest withMethod(@Nonnull(when = NEVER) GeoserverStoreInfoType theMethod) {
         this.methodName.set(theMethod);
         return self();
     }
@@ -127,13 +127,13 @@ public class GPGeoserverCreateCoverageStoreResourceRequest extends GPJsonPostCon
         checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string");
         String coverageStore = this.coverageStoreName.get();
         checkArgument((coverageStore != null) && !(coverageStore.trim().isEmpty()), "The Parameter coverageStore must not be null or an empty string.");
-        GPStoreType method = this.methodName.get();
+        GeoserverStoreInfoType method = this.methodName.get();
         checkArgument((method != null), "The Parameter method must not be null or an empty string.");
         GPFormatExtension format = this.formatName.get();
         checkArgument((format != null), "The Parameter format must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
-        String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore).concat("/").concat(method.toString()).concat(".").concat(format.toString())
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore).concat("/").concat(method.toString()).concat(".").concat(format.toString())));
+        String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore).concat("/").concat(method.getMethod()).concat(".").concat(format.toString())
+                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore).concat("/").concat(method.getMethod()).concat(".").concat(format.toString())));
         URIBuilder uriBuilder = new URIBuilder(path);
         String filename = this.fileName.get();
         Boolean update = this.updateBBox.get();

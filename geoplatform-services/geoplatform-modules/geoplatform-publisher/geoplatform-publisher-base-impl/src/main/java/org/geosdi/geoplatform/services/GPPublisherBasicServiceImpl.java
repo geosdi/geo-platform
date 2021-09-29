@@ -39,14 +39,12 @@ import com.google.common.collect.Lists;
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
 import org.apache.commons.httpclient.NameValuePair;
-import org.apache.hc.core5.http.ContentType;
-import org.geosdi.geoplatform.connector.geoserver.model.file.GPCoverageStoreFileExtension;
+import org.apache.http.entity.ContentType;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
-import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
-import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.coveragestores.GeoserverUpdateCoverageStoreBody;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastores;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
+import org.geosdi.geoplatform.connector.geoserver.model.file.GPCoverageStoreFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayerStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayerType;
@@ -54,6 +52,8 @@ import org.geosdi.geoplatform.connector.geoserver.model.layers.raster.GeoserverR
 import org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverStyle;
+import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
+import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GeoserverCreateWorkspaceBody;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverLoadCoverageStoreRequest;
@@ -84,9 +84,9 @@ import org.geotools.data.DataSourceException;
 import org.geotools.data.FileDataStore;
 import org.geotools.data.FileDataStoreFinder;
 import org.geotools.data.simple.SimpleFeatureSource;
+import org.geotools.factory.Hints;
 import org.geotools.gce.geotiff.GeoTiffReader;
 import org.geotools.referencing.CRS;
-import org.geotools.util.factory.Hints;
 import org.opengis.referencing.FactoryException;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.quartz.*;
@@ -110,7 +110,7 @@ import java.util.zip.ZipFile;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension.JSON;
-import static org.geosdi.geoplatform.connector.geoserver.model.store.GPStoreType.COVERAGES;
+import static org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverStoreInfoType.COVERAGE;
 
 public class GPPublisherBasicServiceImpl implements IGPPublisherService, InitializingBean {
 
@@ -1586,7 +1586,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                 } else if (!this.geoserverConnectorStore.createCoverageRequest()
                         .withWorkspace(userWorkspace)
                         .withCoverageStore(fileName)
-                        .withMethod(COVERAGES)
+                        .withMethod(COVERAGE)
                         .withFormat(JSON)
                         .withCoverageBody(theGPGeoserverCoverageInfo).getResponse()) {
                     logger.error("Unable to create a coverage for the store:" + fileName);

@@ -1,7 +1,7 @@
 package org.geosdi.geoplatform.connector.geoserver.request.coveragestores;
 
 import org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension;
-import org.geosdi.geoplatform.connector.geoserver.model.store.GPStoreType;
+import org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverStoreInfoType;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
@@ -31,7 +31,7 @@ public interface GeoserverCreateCoverageStoreResourceRequest extends GPJsonConne
      * @param theMethod
      * @return {@link GeoserverCreateCoverageStoreResourceRequest}
      */
-    GeoserverCreateCoverageStoreResourceRequest withMethod(@Nonnull(when = NEVER) GPStoreType theMethod);
+    GeoserverCreateCoverageStoreResourceRequest withMethod(@Nonnull(when = NEVER) GeoserverStoreInfoType theMethod);
 
     /**
      * @param theFormat

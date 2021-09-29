@@ -35,8 +35,8 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
     private final ThreadLocal<IGPFileExtension> formatName;
     private final ThreadLocal<File> file;
     private final ThreadLocal<ContentType> mymeType;
-    private final ThreadLocal<String> configure;
-    private final ThreadLocal<String> target;
+    private final ThreadLocal<GPParameterConfigure> configure;
+    private final ThreadLocal<GPDataStoreFileExtension> target;
     private final ThreadLocal<String> update;
     private final ThreadLocal<String> charset;
     private final ThreadLocal<String> filename;
@@ -103,7 +103,7 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
      */
     @Override
     public GeoserverUpdateDataStoreWithStoreNameRequest withConfigure(@Nonnull(when = NEVER) GPParameterConfigure theParameterConfigure) {
-        this.configure.set(theParameterConfigure.toString());
+        this.configure.set(theParameterConfigure);
         return self();
     }
 
@@ -112,7 +112,7 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
      * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
      */
     @Override
-    public GeoserverUpdateDataStoreWithStoreNameRequest withTarget(@Nonnull(when = NEVER) String theTarget) {
+    public GeoserverUpdateDataStoreWithStoreNameRequest withTarget(@Nonnull(when = NEVER) GPDataStoreFileExtension theTarget) {
         this.target.set(theTarget);
         return self();
     }
@@ -184,17 +184,17 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
         String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())
                 : baseURI.concat("/workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())));
         URIBuilder uriBuilder = new URIBuilder(path);
-        String configure = this.configure.get();
-        String target = this.target.get();
+        GPParameterConfigure configure = this.configure.get();
+        GPDataStoreFileExtension target = this.target.get();
         String update = this.update.get();
         String charset = this.charset.get();
         String filename = this.filename.get();
-        if(configure != null && !(configure.trim().isEmpty()))
-            uriBuilder.addParameter("configure", configure);
-        if(target != null && !(target.trim().isEmpty()))
-            uriBuilder.addParameter("target", target);
+        if(configure != null)
+            uriBuilder.addParameter("configure", configure.toString());
+        if(target != null)
+            uriBuilder.addParameter("target", target.toString());
         if(update != null && !(update.trim().isEmpty()))
-            uriBuilder.addParameter("update", configure);
+            uriBuilder.addParameter("update", update);
         if(charset != null && !(charset.trim().isEmpty()))
             uriBuilder.addParameter("charset", charset);
         if(filename != null && !(filename.trim().isEmpty()))
@@ -231,7 +231,8 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
         GPUploadMethod method = this.methodName.get();
         File fileToUpload = this.file.get();
         checkArgument(fileToUpload != null, "The Parameter file must not be null.");
-        FileEntity builder = new FileEntity(fileToUpload, contentType);
+        FileEntity fileEntity = new FileEntity(fileToUpload, contentType);
+        DecompressingEntity builder = new DecompressingEntity(new FileEntity(fileToUpload), null);
         return builder;
     }
 }

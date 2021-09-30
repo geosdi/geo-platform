@@ -60,8 +60,6 @@ import static java.io.File.separator;
 import static java.lang.Boolean.TRUE;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
-import static org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension.JSON;
-import static org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverStoreInfoType.COVERAGE;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
@@ -124,7 +122,7 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
         Assert.assertTrue("#################FILE_EXSIST", file.exists());
         logger.info("###############{}\n", this.geoserverConnectorStore.updateCoverageStoreWithStoreName()
                 .withWorkspace("sf")
-                .withCoverageName("store_vito")
+                .withCoverageName("layer_vito")
                 .withStore("store_vito")
                 .withUpdate(GPParameterUpdate.OVERWRITE)
                 .withConfigure(GPGeoserverParameterConfigure.FIRST)
@@ -139,13 +137,12 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
     public void g_createCoverage() throws Exception {
         GPGeoserverCoverageInfo theGPGeoserverCoverageInfo = new GPGeoserverCoverageInfo();
         theGPGeoserverCoverageInfo.setName("layer_vito");
-        theGPGeoserverCoverageInfo.setTitle("layer_vito");
+        theGPGeoserverCoverageInfo.setTitle("layer_vito2");
         theGPGeoserverCoverageInfo.setSrs("EPSG:4326");
+        theGPGeoserverCoverageInfo.setEnabled(TRUE);
         theGPGeoserverCoverageInfo.setPolicy(GPProjectionPolicy.FORCE_DECLARED);
-        logger.info("#############{}\n", this.geoserverConnectorStore.createCoverageRequest()
+        logger.info("#############{}\n", this.geoserverConnectorStore.updateCoverageRequest()
                 .withWorkspace("sf")
-                .withMethod(COVERAGE)
-                .withFormat(JSON)
                 .withCoverageStore("store_vito")
                 .withCoverageBody(theGPGeoserverCoverageInfo).getResponseAsString());
         }
@@ -172,9 +169,9 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
         GPGeoserverCoverageInfo theGPGeoserverCoverageInfo = new GPGeoserverCoverageInfo();
         theGPGeoserverCoverageInfo.setName("layer_vito");
         theGPGeoserverCoverageInfo.setTitle("layer_vito");
+        theGPGeoserverCoverageInfo.setEnabled(TRUE);
         theGPGeoserverCoverageInfo.setPolicy(GPProjectionPolicy.FORCE_DECLARED);
         theGPGeoserverCoverageInfo.setSrs("EPSG:4326");
-        GeoserverLoadCoverageStoreRequest geoserverLoadCoverageStoreRequest = this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace("sf").withStore("store_vito");
         this.geoserverConnectorStore.updateCoverageStoreWithStoreName().withWorkspace("sf").withStore("store_vito")
                 .withFormat(GPGeoserverCoverageStoreFileExtension.GEOTIFF).withFile(file)
                 .withMethod(GPGeoserverUploadMethod.FILE)
@@ -182,22 +179,12 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
                 .withCoverageName("layer_vito")
                 .withUpdate(GPParameterUpdate.OVERWRITE)
                 .getResponse();
-
-       this.geoserverConnectorStore.createCoverageRequest()
-               .withWorkspace("sf")
-               .withCoverageStore("store_vito")
-               .withMethod(COVERAGE)
-               .withFormat(JSON)
-               .withCoverageBody(theGPGeoserverCoverageInfo).getResponse();
-
-
+        GeoserverLoadCoverageStoreRequest geoserverLoadCoverageStoreRequest = this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace("sf").withStore("store_vito");
         if (!geoserverLoadCoverageStoreRequest.exist()) {
             logger.error("");
-        } else if (!this.geoserverConnectorStore.createCoverageRequest()
+        } else if (!this.geoserverConnectorStore.updateCoverageRequest()
                 .withWorkspace("sf")
                 .withCoverageStore("store_vito")
-                .withMethod(COVERAGE)
-                .withFormat(JSON)
                 .withCoverageBody(theGPGeoserverCoverageInfo).getResponse()) {
             logger.error("Unable to create a coverage for the store:" + "layer_vito");
         } else {

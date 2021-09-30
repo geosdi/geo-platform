@@ -75,7 +75,7 @@ public interface GPGeoserverDatastoresConnectorStore extends GPGeoserverStylesCo
     GeoserverUpdateDataStoreWithStoreNameRequest updateDataStoreWithStoreName();
 
     /**
-     * @return {@link GeoserverUpdateDatastoreResourceRequest}
+     * @return {@link GeoserverCreateDatastoreResourceRequest}
      */
-    GeoserverUpdateDatastoreResourceRequest updateDataStoreResource();
+    GeoserverCreateDatastoreResourceRequest createDataStoreResource();
 }

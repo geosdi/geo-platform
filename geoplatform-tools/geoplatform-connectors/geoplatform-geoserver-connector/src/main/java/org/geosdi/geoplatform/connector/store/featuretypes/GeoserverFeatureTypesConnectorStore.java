@@ -91,4 +91,12 @@ public abstract class GeoserverFeatureTypesConnectorStore extends GeoserverCover
     public GeoserverLoadFeatureTypeWithUrlRequest loadFeatureTypeWithUrl() {
         return this.server.loadFeatureTypeWithUrl();
     }
+
+    /**
+     * @return {@link GeoserverUpdateFeatureTypeRequest}
+     */
+    @Override
+    public GeoserverUpdateFeatureTypeRequest updateFeatureTypeRequest() {
+        return this.server.updateFeatureTypeRequest();
+    }
 }

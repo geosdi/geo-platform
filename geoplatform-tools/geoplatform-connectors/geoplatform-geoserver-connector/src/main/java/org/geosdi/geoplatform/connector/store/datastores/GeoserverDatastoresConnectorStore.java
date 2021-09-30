@@ -101,10 +101,10 @@ public abstract class GeoserverDatastoresConnectorStore extends GeoserverStylesC
     }
 
     /**
-     * @return {@link GeoserverUpdateDatastoreResourceRequest}
+     * @return {@link GeoserverCreateDatastoreResourceRequest}
      */
     @Override
-    public GeoserverUpdateDatastoreResourceRequest updateDataStoreResource() {
-        return this.server.updateDataStoreResource();
+    public GeoserverCreateDatastoreResourceRequest createDataStoreResource() {
+        return this.server.createDataStoreResource();
     }
 }

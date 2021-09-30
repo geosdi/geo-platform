@@ -37,16 +37,14 @@ package org.geosdi.geoplatform.geoserver.datastores;
 
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.decoder.RESTDataStoreList;
-import it.geosolutions.geoserver.rest.encoder.GSResourceEncoder;
-import it.geosolutions.geoserver.rest.encoder.feature.GSFeatureTypeEncoder;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.http.entity.ContentType;
-import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastores;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
-import org.geosdi.geoplatform.connector.geoserver.model.file.GPDataStoreFileExtension;
-import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
+import org.geosdi.geoplatform.connector.geoserver.model.file.GPGeoserverDataStoreFileExtension;
+import org.geosdi.geoplatform.connector.geoserver.model.layers.vector.GeoserverVectorLayer;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
+import org.geosdi.geoplatform.connector.geoserver.model.upload.GPGeoserverUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverLoadDatastoresRequest;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
 import org.junit.Assert;
@@ -63,9 +61,7 @@ import static java.io.File.separator;
 import static java.lang.Boolean.TRUE;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
-import static org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension.JSON;
 import static org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy.FORCE_DECLARED;
-import static org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverStoreInfoType.FEATURE;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -121,51 +117,44 @@ public class GeoserverConnectorDatastoresTest extends GeoserverConnectorTest {
     public void d_updateDataStoreWithShape() throws Exception {
         File file = new File(of("src", "test", "resources", "admin_shp_comuni.zip").collect(joining(separator)));
         Assert.assertTrue("#################FILE_EXSIST", file.exists());
-
         logger.info("#############FILE: {}\n", file.toURI());
         logger.info("##################{}\n", FilenameUtils.getBaseName(file.toURI().toString()));
-        logger.info("###############{}\n", this.geoserverConnectorStore.updateDataStoreWithStoreName()
+        if(this.geoserverConnectorStore.updateDataStoreWithStoreName()
                 .withWorkspace("sf")
                 .withStore("store_vito")
-                .withConfigure(GPParameterConfigure.NONE)
-                .withMethod(GPUploadMethod.FILE)
-                .withMimeType(ContentType.APPLICATION_OCTET_STREAM)
+                .withMethod(GPGeoserverUploadMethod.FILE)
                 .withCharset("UTF-8")
-                .withFormat(GPDataStoreFileExtension.SHP)
-                //.withTarget(GPDataStoreFileExtension.SHP)
-                //.withFileName("admin_shp_comuni")
-                .withFile(file).getResponse());
-
-        final GSFeatureTypeEncoder featureTypeEncoder = new GSFeatureTypeEncoder();
-        featureTypeEncoder.setName("");
-        featureTypeEncoder.setTitle("shp_comuni");
-        featureTypeEncoder.setSRS("EPSG:32633");
-        featureTypeEncoder.setProjectionPolicy(GSResourceEncoder.ProjectionPolicy.FORCE_DECLARED );
-
-
+                .withFormat(GPGeoserverDataStoreFileExtension.SHP)
+                .withFileName("admin_shp_comuni")
+                .withFile(file).getResponse()) {
+            logger.info("############ERRO TO CREATE STORE");
+        }
         GPGeoserverFeatureTypeInfo gpGeoserverFeatureTypeInfo = new GPGeoserverFeatureTypeInfo();
-        gpGeoserverFeatureTypeInfo.setName("shp_comuni");
-        //gpGeoserverFeatureTypeInfo.setEnabled(TRUE);
-        gpGeoserverFeatureTypeInfo.setTitle("shp_comuni");
-//        GPFeatureTypeAttributes gpFeatureTypeAttributes = new GPFeatureTypeAttributes();
-//        gpFeatureTypeAttributes.setValues(Lists.newArrayList());
-//        gpGeoserverFeatureTypeInfo.setAttributes(gpFeatureTypeAttributes);
-        //gpGeoserverFeatureTypeInfo.setNativeCRS(TRUE);
-        gpGeoserverFeatureTypeInfo.setSrs("EPSG:32633");
+        gpGeoserverFeatureTypeInfo.setName("admin_shp_comuni");
+        gpGeoserverFeatureTypeInfo.setTitle("admin_shp_comuni");
+        gpGeoserverFeatureTypeInfo.setEnabled(TRUE);
         gpGeoserverFeatureTypeInfo.setProjectionPolicy(FORCE_DECLARED);
-        logger.info("###############{}\n", this.geoserverConnectorStore.updateDataStoreResource()
-                .withWorkspace("sf")
-                .withMethod(FEATURE)
-                .withFormat(JSON)
-                //.withFileName("admin_shp_comuni")
-                //.withConfigure(GPParameterConfigure.NONE)
-                .withDataStoreBody(gpGeoserverFeatureTypeInfo)
-                //.withConfigure(GPParameterConfigure.FIRST)
-                .withDataStore("store_vito")
-                .getResponseAsString());
 
+        String srs = "EPSG:32633";
+        boolean srsNull = !(srs != null && srs.length() != 0);
+        if (!srsNull) {
+            gpGeoserverFeatureTypeInfo.setSrs(srs);
+        } else {
+            // this under the assumption that when the destination srs is null the nativeCRS has an EPSG one so we force them to be the same
+            gpGeoserverFeatureTypeInfo.setNativeCRS(null);
+        }
+        logger.info("###############{}\n", this.geoserverConnectorStore.updateFeatureTypeRequest()
+                .withWorkspace("sf")
+                .withFeatureTypeBody(gpGeoserverFeatureTypeInfo)
+                .withStore("store_vito")
+                .withFeatureName("admin_shp_comuni")
+                .getResponse());
+        String defaultStyle = "polygon";
+        GeoserverVectorLayer geoserverRasterLayer = new GeoserverVectorLayer();
+        GPGeoserverStyle gpGeoserverStyle = new GPGeoserverStyle();
+        gpGeoserverStyle.setName(defaultStyle.indexOf(":") != -1 ? defaultStyle.split(":")[0] : defaultStyle);
+        geoserverRasterLayer.setDefaultStyle(gpGeoserverStyle);
+        logger.info("##############{}\n", this.geoserverConnectorStore.updateLayerRequest().withWorkspaceName("sf").withLayerName("admin_shp_comuni").withLayerBody(geoserverRasterLayer).getResponse());
 
     }
-
-
 }

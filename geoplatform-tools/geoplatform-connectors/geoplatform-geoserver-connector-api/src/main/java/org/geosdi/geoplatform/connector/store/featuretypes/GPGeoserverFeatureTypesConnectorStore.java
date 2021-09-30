@@ -68,4 +68,9 @@ public interface GPGeoserverFeatureTypesConnectorStore extends GPGeoserverCovera
      * @return {@link GeoserverLoadFeatureTypeWithUrlRequest}
      */
     GeoserverLoadFeatureTypeWithUrlRequest loadFeatureTypeWithUrl();
+
+    /**
+     * @return {@link GeoserverUpdateFeatureTypeRequest}
+     */
+    GeoserverUpdateFeatureTypeRequest updateFeatureTypeRequest();
 }

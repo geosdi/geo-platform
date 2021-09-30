@@ -38,22 +38,23 @@ package org.geosdi.geoplatform.services;
 import com.google.common.collect.Lists;
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.GeoServerRESTReader;
-import org.apache.commons.httpclient.NameValuePair;
-import org.apache.http.entity.ContentType;
-import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
+import org.apache.commons.io.FilenameUtils;
+import org.geosdi.geoplatform.connector.geoserver.model.configure.GPGeoserverParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.coveragestores.GeoserverUpdateCoverageStoreBody;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastores;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
-import org.geosdi.geoplatform.connector.geoserver.model.file.GPCoverageStoreFileExtension;
+import org.geosdi.geoplatform.connector.geoserver.model.file.GPGeoserverCoverageStoreFileExtension;
+import org.geosdi.geoplatform.connector.geoserver.model.file.GPGeoserverDataStoreFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayerStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayerType;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.raster.GeoserverRasterLayer;
+import org.geosdi.geoplatform.connector.geoserver.model.layers.vector.GeoserverVectorLayer;
 import org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
-import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
+import org.geosdi.geoplatform.connector.geoserver.model.upload.GPGeoserverUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GeoserverCreateWorkspaceBody;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverLoadCoverageStoreRequest;
@@ -110,6 +111,7 @@ import java.util.zip.ZipFile;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension.JSON;
+import static org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy.FORCE_DECLARED;
 import static org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverStoreInfoType.COVERAGE;
 
 public class GPPublisherBasicServiceImpl implements IGPPublisherService, InitializingBean {
@@ -1422,13 +1424,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
         logger.info("\n INFO: CREATE DATASTORE " + userWorkspace + " NAME: " + info.name);
         try {
             logger.info("INFO EPSG: " + info.epsg);
-            NameValuePair[] params = new NameValuePair[1];
-            NameValuePair nameValuePair = new NameValuePair("charset", "UTF-8");
-            params[0] = nameValuePair;
-            boolean published = restPublisher.publishShp(userWorkspace,
-                    datatStoreName, params, info.name,
-                    GeoServerRESTPublisher.UploadMethod.FILE,
-                    tempFile.toURI(), info.epsg, info.sld);
+            boolean published = this.publishShapeFile(userWorkspace, datatStoreName, "UTF-8", info.name, info.sld, tempFile, info.epsg);
             if (published) {
                 logger.info(info.name + " correctly published in the "
                                 + userWorkspace + " workspace " + info.name);
@@ -1577,9 +1573,9 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                 theGPGeoserverCoverageInfo.setPolicy(GPProjectionPolicy.FORCE_DECLARED);
                 GeoserverLoadCoverageStoreRequest geoserverLoadCoverageStoreRequest = this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace(userWorkspace).withStore(fileName);
                 this.geoserverConnectorStore.updateCoverageStoreWithStoreName().withWorkspace(userWorkspace).withCoverageName(fileName).withStore(fileName)
-                        .withMimeType(ContentType.IMAGE_TIFF)
-                        .withUpdate(GPParameterUpdate.OVERWRITE).withConfigure(GPParameterConfigure.FIRST).withMethod(GPUploadMethod.FILE).withFormat(
-                        GPCoverageStoreFileExtension.GEOTIFF)
+                        .withUpdate(GPParameterUpdate.OVERWRITE).withConfigure(GPGeoserverParameterConfigure.FIRST).withMethod(
+                        GPGeoserverUploadMethod.FILE).withFormat(
+                        GPGeoserverCoverageStoreFileExtension.GEOTIFF)
                         .withFile(fileInTifDir).getResponse();
                 if (!geoserverLoadCoverageStoreRequest.exist()) {
                     return FALSE;
@@ -1611,8 +1607,63 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
         }
     }
 
-//    private boolean publishShapeFile(String workspace, String dataStoreName, String charset, String dataSetName) {
-//
-//    }
-
+    /**
+     * @param workspace
+     * @param dataStoreName
+     * @param charset
+     * @param dataSetName
+     * @param style
+     * @param shapeFile
+     * @param srs
+     * @return
+     * @throws IllegalArgumentException
+     */
+    private boolean publishShapeFile(String workspace, String dataStoreName, String charset, String dataSetName, String style, File shapeFile, String srs) throws IllegalArgumentException{
+        boolean srsNull = !(srs != null && srs.length() != 0);
+        if (srsNull) {
+            throw new IllegalArgumentException(
+                    "Unable to run: you can't force GeoServer to use an srs which is null");
+        }
+        try{
+            if(!this.geoserverConnectorStore.updateDataStoreWithStoreName()
+            .withWorkspace(workspace)
+            .withStore(dataStoreName)
+            .withMethod(GPGeoserverUploadMethod.FILE)
+            .withCharset(charset)
+            .withFormat(GPGeoserverDataStoreFileExtension.SHP)
+            .withFileName((dataStoreName != null) ? dataStoreName : FilenameUtils.getBaseName(shapeFile.toString()))
+            .withFile(shapeFile).getResponse()) {
+                logger.error("Unable to create data store for shapefile: {}\n", shapeFile.toURI());
+                return FALSE;
+            }
+            GPGeoserverFeatureTypeInfo gpGeoserverFeatureTypeInfo = new GPGeoserverFeatureTypeInfo();
+            gpGeoserverFeatureTypeInfo.setName(dataSetName);
+            gpGeoserverFeatureTypeInfo.setTitle(dataSetName);
+            gpGeoserverFeatureTypeInfo.setProjectionPolicy(FORCE_DECLARED);
+            if (!srsNull) {
+                gpGeoserverFeatureTypeInfo.setSrs(srs);
+            } else {
+                // this under the assumption that when the destination srs is null the nativeCRS has an EPSG one so we force them to be the same
+                gpGeoserverFeatureTypeInfo.setNativeCRS(null);
+            }
+            if (!this.geoserverConnectorStore.updateFeatureTypeRequest()
+                    .withWorkspace(workspace)
+                    .withFeatureTypeBody(gpGeoserverFeatureTypeInfo)
+                    .withStore(dataStoreName)
+                    .withFeatureName(dataSetName)
+                    .getResponse()) {
+                logger.error("Unable to create a coverage store for coverage: {}\n",  shapeFile.toURI());
+                return FALSE;
+            }
+            GeoserverVectorLayer geoserverRasterLayer = new GeoserverVectorLayer();
+            GPGeoserverStyle gpGeoserverStyle = new GPGeoserverStyle();
+            gpGeoserverStyle.setName(style.indexOf(":") != -1 ? style.split(":")[0] : style);
+            geoserverRasterLayer.setDefaultStyle(gpGeoserverStyle);
+            return this.geoserverConnectorStore.updateLayerRequest().withWorkspaceName(workspace).withLayerName(dataSetName).withLayerBody(geoserverRasterLayer).getResponse();
+        }catch (Exception e) {
+            final String error = "Error to load shape file " + e;
+            logger.error(error);
+            throw new IllegalArgumentException(error);
+        }
+    }
 }

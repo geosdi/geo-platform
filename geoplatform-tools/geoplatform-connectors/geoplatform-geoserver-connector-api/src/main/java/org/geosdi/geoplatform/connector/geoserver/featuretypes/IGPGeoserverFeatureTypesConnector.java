@@ -68,4 +68,9 @@ public interface IGPGeoserverFeatureTypesConnector extends IGPGeoserverCoverageS
      * @return {@link GeoserverLoadFeatureTypeWithUrlRequest}
      */
     GeoserverLoadFeatureTypeWithUrlRequest loadFeatureTypeWithUrl();
+
+    /**
+     * @return {@link GeoserverUpdateFeatureTypeRequest}
+     */
+    GeoserverUpdateFeatureTypeRequest updateFeatureTypeRequest();
 }

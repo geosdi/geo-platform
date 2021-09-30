@@ -8,7 +8,6 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.FileEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPGeoserverParameterConfigure;
 
-import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.file.IGPFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
 import org.geosdi.geoplatform.connector.geoserver.model.upload.GPGeoserverUploadMethod;

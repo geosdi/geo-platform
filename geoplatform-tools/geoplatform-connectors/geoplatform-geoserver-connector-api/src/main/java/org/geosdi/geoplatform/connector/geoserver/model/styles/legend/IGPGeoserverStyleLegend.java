@@ -32,55 +32,56 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.version;
+package org.geosdi.geoplatform.connector.geoserver.model.styles.legend;
 
-import org.apache.hc.core5.net.URIBuilder;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runners.MethodSorters;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-
-import static java.time.ZoneOffset.UTC;
-import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExceptionMessage;
+import java.io.Serializable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
-public class GeoserverVersionExceptionTest {
+@JsonDeserialize(as = GPGeoserverStyleLegend.class)
+public interface IGPGeoserverStyleLegend extends Serializable {
 
-    private static final Logger logger = LoggerFactory.getLogger(GeoserverVersionExceptionTest.class);
+    /**
+     * @return {@link Integer}
+     */
+    int getWidth();
 
-    @Test
-    public void a_printGeoserverVersionExceptionMessageTest() {
-        logger.info("########################GP_GEOSERVER_CONNECTOR_EXCEPTION_MESSAGE : {}\n", toVersionExceptionMessage());
-    }
+    /**
+     * @param theWidth
+     */
+    void setWidth(int theWidth);
 
-    @Test
-    public void b_simpleTest() throws Exception {
-        String baseURI = "http://150.145.141.180/geoserver/rest";
-        String styleName = "pippo";
-        String recurse = "true";
-        String purge = "false";
-        logger.info("{}\n", new URIBuilder((baseURI.endsWith("/") ? baseURI.concat("styles/").concat(styleName) : baseURI.concat("/styles/").concat(styleName)))
-                .addParameter("recurse", recurse)
-                .addParameter("purge", purge)
-                .build().toString());
-    }
+    /**
+     * @return {@link Integer}
+     */
+    int getHeight();
 
-    @Test
-    public void c_localDateTimeTest() throws Exception {
-        LocalDateTime localDateTime = LocalDateTime.parse("2021-09-29 13:45:10.979 UTC", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS z"));
-        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(localDateTime.toInstant(UTC), UTC);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS z");
-        String p = dtf.format(zonedDateTime);
-        logger.info("{}\n", p);
-        logger.info("###############{}\n", LocalDateTime.parse(p, dtf));
-    }
+    /**
+     * @param theHeight
+     */
+    void setHeight(int theHeight);
+
+    /**
+     * @return {@link String}
+     */
+    String getFormat();
+
+    /**
+     * @param theFormat
+     */
+    void setFormat(String theFormat);
+
+    /**
+     * @return {@link String}
+     */
+    String getOnLineResource();
+
+    /**
+     * @param theOnLineResource
+     */
+    void setOnLineResource(String theOnLineResource);
 }

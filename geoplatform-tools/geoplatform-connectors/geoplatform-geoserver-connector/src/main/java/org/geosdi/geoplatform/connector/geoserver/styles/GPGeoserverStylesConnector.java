@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.connector.geoserver.layers.GPGeoserverLayersConnec
 import org.geosdi.geoplatform.connector.geoserver.request.styles.*;
 import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverCreateStyleSLDV100Request;
 import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request;
+import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverUpdateStyleSLDV100Request;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -229,7 +230,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
             case V218x:
                 return new GPGeoserverWorkspaceStylesRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
+                throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
 
@@ -243,7 +244,35 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
             case V218x:
                 return new GPGeoserverWorkspaceStyleRequest(this, this.jacksonSupport);
             default:
-                throw new GeoserverVersionException("The version for GPGeoserverConnector must be 2.15.x");
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverUpdateStyleRequest}
+     */
+    @Override
+    public GeoserverUpdateStyleRequest updateStyleRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverUpdateStyleRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverUpdateStyleSLDV100Request}
+     */
+    @Override
+    public GeoserverUpdateStyleSLDV100Request updateStyleSLDV100Request() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return GeoserverUpdateStyleSLDV100Request.of(this);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
 }

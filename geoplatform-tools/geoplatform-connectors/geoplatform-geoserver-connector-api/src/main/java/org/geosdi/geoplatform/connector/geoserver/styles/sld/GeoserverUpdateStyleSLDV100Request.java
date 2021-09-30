@@ -32,55 +32,55 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.version;
+package org.geosdi.geoplatform.connector.geoserver.styles.sld;
 
-import org.apache.hc.core5.net.URIBuilder;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runners.MethodSorters;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverBaseUpdateStyleRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
 
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-import static java.time.ZoneOffset.UTC;
-import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExceptionMessage;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
-public class GeoserverVersionExceptionTest {
+public interface GeoserverUpdateStyleSLDV100Request extends GeoserverBaseUpdateStyleRequest<StyledLayerDescriptor, GeoserverUpdateStyleSLDV100Request> {
 
-    private static final Logger logger = LoggerFactory.getLogger(GeoserverVersionExceptionTest.class);
+    /**
+     * @param theStyleName
+     * @return {@link GeoserverUpdateStyleSLDV100Request}
+     */
+    @Override
+    GeoserverUpdateStyleSLDV100Request withStyleName(@Nonnull(when = NEVER) String theStyleName);
 
-    @Test
-    public void a_printGeoserverVersionExceptionMessageTest() {
-        logger.info("########################GP_GEOSERVER_CONNECTOR_EXCEPTION_MESSAGE : {}\n", toVersionExceptionMessage());
-    }
+    /**
+     * @param theStyleBody
+     * @return {@link GeoserverUpdateStyleSLDV100Request}
+     */
+    @Override
+    GeoserverUpdateStyleSLDV100Request withStyleBody(@Nonnull(when = NEVER) StyledLayerDescriptor theStyleBody);
 
-    @Test
-    public void b_simpleTest() throws Exception {
-        String baseURI = "http://150.145.141.180/geoserver/rest";
-        String styleName = "pippo";
-        String recurse = "true";
-        String purge = "false";
-        logger.info("{}\n", new URIBuilder((baseURI.endsWith("/") ? baseURI.concat("styles/").concat(styleName) : baseURI.concat("/styles/").concat(styleName)))
-                .addParameter("recurse", recurse)
-                .addParameter("purge", purge)
-                .build().toString());
-    }
+    /**
+     * <p>
+     *     When set to "true", will forgo parsing and encoding of the uploaded style content, and instead the style will be
+     *     streamed directly to the GeoServer configuration. Use this setting if the content and formatting of the style
+     *     is to be preserved exactly. May result in an invalid and unusable style if the payload is malformed.
+     *     Allowable values are {@link Boolean#TRUE} or {@link Boolean#FALSE} (default). Only used when uploading a style file.
+     * </p>
+     * 
+     * @param theRaw
+     * @return {@link GeoserverUpdateStyleSLDV100Request}
+     */
+    GeoserverUpdateStyleSLDV100Request withRaw(@Nullable Boolean theRaw);
 
-    @Test
-    public void c_localDateTimeTest() throws Exception {
-        LocalDateTime localDateTime = LocalDateTime.parse("2021-09-29 13:45:10.979 UTC", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS z"));
-        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(localDateTime.toInstant(UTC), UTC);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS z");
-        String p = dtf.format(zonedDateTime);
-        logger.info("{}\n", p);
-        logger.info("###############{}\n", LocalDateTime.parse(p, dtf));
+    /**
+     * @param theServer
+     * @return {@link GeoserverUpdateStyleSLDV100Request}
+     */
+    static GeoserverUpdateStyleSLDV100Request of(@Nonnull(when = NEVER) GPServerConnector theServer) {
+        return new GPGeoserverUpdateStyleSLDV100Request(theServer);
     }
 }

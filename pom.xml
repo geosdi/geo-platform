@@ -1543,7 +1543,7 @@
         <activemq-version>5.8.0</activemq-version>
         
         <jettison>1.4.1</jettison>
-        <joda-version>2.10.10</joda-version>
+        <joda-version>2.10.11</joda-version>
         
         <javax.ws.rs-api-version>2.1</javax.ws.rs-api-version>
 
@@ -1575,7 +1575,7 @@
         <jasypt-version>1.9.3</jasypt-version>
         
         <guava-gwt-version>23.6-jre</guava-gwt-version>
-        <guava-version>30.1.1-jre</guava-version>
+        <guava-version>31.0.1-jre</guava-version>
         <guice-version>3.0</guice-version>
         
         <ehcache-version>2.10.6</ehcache-version>

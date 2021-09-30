@@ -32,55 +32,47 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.version;
+package org.geosdi.geoplatform.connector.geoserver.styles;
 
-import org.apache.hc.core5.net.URIBuilder;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runners.MethodSorters;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.jcip.annotations.ThreadSafe;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverUpdateStyleBody;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverUpdateStyleRequest;
+import org.geosdi.geoplatform.connector.geoserver.styles.base.GPGeoserverBaseUpdateStyleRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
+import javax.annotation.Nonnull;
 
-import static java.time.ZoneOffset.UTC;
-import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExceptionMessage;
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
+import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
-public class GeoserverVersionExceptionTest {
+@ThreadSafe
+public class GPGeoserverUpdateStyleRequest extends GPGeoserverBaseUpdateStyleRequest<IGPGeoserverUpdateStyleBody, GeoserverUpdateStyleRequest> implements GeoserverUpdateStyleRequest {
 
-    private static final Logger logger = LoggerFactory.getLogger(GeoserverVersionExceptionTest.class);
-
-    @Test
-    public void a_printGeoserverVersionExceptionMessageTest() {
-        logger.info("########################GP_GEOSERVER_CONNECTOR_EXCEPTION_MESSAGE : {}\n", toVersionExceptionMessage());
+    /**
+     * @param theServerConnector
+     * @param theJacksonSupport
+     */
+    GPGeoserverUpdateStyleRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(theServerConnector, theJacksonSupport);
     }
 
-    @Test
-    public void b_simpleTest() throws Exception {
-        String baseURI = "http://150.145.141.180/geoserver/rest";
-        String styleName = "pippo";
-        String recurse = "true";
-        String purge = "false";
-        logger.info("{}\n", new URIBuilder((baseURI.endsWith("/") ? baseURI.concat("styles/").concat(styleName) : baseURI.concat("/styles/").concat(styleName)))
-                .addParameter("recurse", recurse)
-                .addParameter("purge", purge)
-                .build().toString());
-    }
-
-    @Test
-    public void c_localDateTimeTest() throws Exception {
-        LocalDateTime localDateTime = LocalDateTime.parse("2021-09-29 13:45:10.979 UTC", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS z"));
-        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(localDateTime.toInstant(UTC), UTC);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS z");
-        String p = dtf.format(zonedDateTime);
-        logger.info("{}\n", p);
-        logger.info("###############{}\n", LocalDateTime.parse(p, dtf));
+    /**
+     * @return {@link HttpEntity}
+     */
+    @Override
+    protected HttpEntity prepareHttpEntity() throws Exception {
+        IGPGeoserverUpdateStyleBody geoserverStyleBody = this.styleBody.get();
+        checkArgument(geoserverStyleBody != null, "The Parameter styleBody must not be null.");
+        String geoserverUpdateStyleBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(geoserverStyleBody);
+        logger.debug("#############################UPDATE_STYLE_BODY : \n{}\n", geoserverUpdateStyleBodyString);
+        return new StringEntity(geoserverUpdateStyleBodyString, APPLICATION_JSON);
     }
 }

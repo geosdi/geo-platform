@@ -34,7 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.version;
 
-import org.apache.hc.core5.net.URIBuilder;
+import org.apache.http.client.utils.URIBuilder;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;

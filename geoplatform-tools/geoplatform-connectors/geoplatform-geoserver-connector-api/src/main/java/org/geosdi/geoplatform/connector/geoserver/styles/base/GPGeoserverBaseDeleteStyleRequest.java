@@ -35,7 +35,7 @@
 package org.geosdi.geoplatform.connector.geoserver.styles.base;
 
 import com.google.common.io.CharStreams;
-import org.apache.hc.core5.net.URIBuilder;
+import org.apache.http.client.utils.URIBuilder;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverBaseDeleteStyleRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.UnauthorizedException;

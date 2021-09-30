@@ -61,7 +61,7 @@ class GPGeoserverStyleSLDV100Request extends GPGeoserverBaseStyleRequest<StyledL
      * @return {@link String}
      */
     @Override
-    protected String createUriPath() throws Exception {
+    protected final String createUriPath() throws Exception {
         return super.createUriPath().replaceAll(".json", ".sld");
     }
 
@@ -69,7 +69,7 @@ class GPGeoserverStyleSLDV100Request extends GPGeoserverBaseStyleRequest<StyledL
      * @return {@link Class<StyledLayerDescriptor>}
      */
     @Override
-    protected Class<StyledLayerDescriptor> forClass() {
+    protected final Class<StyledLayerDescriptor> forClass() {
         return StyledLayerDescriptor.class;
     }
 }

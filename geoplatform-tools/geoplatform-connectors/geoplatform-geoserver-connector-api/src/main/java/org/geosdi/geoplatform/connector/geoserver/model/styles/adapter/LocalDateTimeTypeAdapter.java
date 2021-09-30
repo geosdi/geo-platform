@@ -32,55 +32,51 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.version;
+package org.geosdi.geoplatform.connector.geoserver.model.styles.adapter;
 
-import org.apache.hc.core5.net.URIBuilder;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static java.time.ZoneOffset.UTC;
-import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExceptionMessage;
+import static java.time.ZonedDateTime.ofInstant;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
-public class GeoserverVersionExceptionTest {
+public class LocalDateTimeTypeAdapter extends XmlAdapter<String, LocalDateTime> {
 
-    private static final Logger logger = LoggerFactory.getLogger(GeoserverVersionExceptionTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(LocalDateTimeTypeAdapter.class);
+    //
+    private static final String PATTERN = "yyyy-MM-dd HH:mm:ss.SSS z";
+    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(PATTERN);
 
-    @Test
-    public void a_printGeoserverVersionExceptionMessageTest() {
-        logger.info("########################GP_GEOSERVER_CONNECTOR_EXCEPTION_MESSAGE : {}\n", toVersionExceptionMessage());
+    /**
+     * @param s
+     * @return {@link LocalDateTime}
+     * @throws Exception
+     */
+    @Override
+    public LocalDateTime unmarshal(String s) throws Exception {
+        try {
+            return ((s != null) && !(s.trim().isEmpty()) ? LocalDateTime.parse(s, dateTimeFormatter) : null);
+        } catch (Exception exception) {
+            logger.warn("###################Impossible format : {} with Pattern : {}\n", s, PATTERN);
+            return null;
+        }
     }
 
-    @Test
-    public void b_simpleTest() throws Exception {
-        String baseURI = "http://150.145.141.180/geoserver/rest";
-        String styleName = "pippo";
-        String recurse = "true";
-        String purge = "false";
-        logger.info("{}\n", new URIBuilder((baseURI.endsWith("/") ? baseURI.concat("styles/").concat(styleName) : baseURI.concat("/styles/").concat(styleName)))
-                .addParameter("recurse", recurse)
-                .addParameter("purge", purge)
-                .build().toString());
-    }
-
-    @Test
-    public void c_localDateTimeTest() throws Exception {
-        LocalDateTime localDateTime = LocalDateTime.parse("2021-09-29 13:45:10.979 UTC", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS z"));
-        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(localDateTime.toInstant(UTC), UTC);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS z");
-        String p = dtf.format(zonedDateTime);
-        logger.info("{}\n", p);
-        logger.info("###############{}\n", LocalDateTime.parse(p, dtf));
+    /**
+     * @param localDateTime
+     * @return {@link String}
+     * @throws Exception
+     */
+    @Override
+    public String marshal(LocalDateTime localDateTime) throws Exception {
+        return ((localDateTime != null) ? dateTimeFormatter.format(ofInstant(localDateTime.toInstant(UTC), UTC)) : null);
     }
 }

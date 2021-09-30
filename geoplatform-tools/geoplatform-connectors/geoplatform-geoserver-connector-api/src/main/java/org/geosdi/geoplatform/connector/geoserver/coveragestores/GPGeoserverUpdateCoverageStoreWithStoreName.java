@@ -1,5 +1,6 @@
 package org.geosdi.geoplatform.connector.geoserver.coveragestores;
 
+import net.jcip.annotations.ThreadSafe;
 import org.apache.hc.core5.http.ContentType;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.FileEntity;
@@ -22,6 +23,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
+@ThreadSafe
 public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnectorRequest<GPCoverageResponse, GeoserverUpdateCoverageStoreWithStoreNameRequest> implements GeoserverUpdateCoverageStoreWithStoreNameRequest {
 
     private final ThreadLocal<String> workspaceName;
@@ -35,7 +37,9 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
     private final ThreadLocal<String> filename;
     private final ThreadLocal<String> coverageName;
 
-
+    /**
+     * @param theServerConnector
+     */
     GPGeoserverUpdateCoverageStoreWithStoreName(@Nonnull(when = NEVER) GPServerConnector theServerConnector) {
         super(theServerConnector, JACKSON_JAXB_XML_SUPPORT);
         this.workspaceName = withInitial(() -> null);
@@ -135,8 +139,7 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
      * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     @Override
-    public GeoserverUpdateCoverageStoreWithStoreNameRequest withMimeType(
-            @Nonnull(when = NEVER) ContentType theMimeType) {
+    public GeoserverUpdateCoverageStoreWithStoreNameRequest withMimeType(@Nonnull(when = NEVER) ContentType theMimeType) {
         this.mymeType.set(theMimeType);
         return self();
     }
@@ -201,7 +204,6 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
         GPUploadMethod method = this.methodName.get();
         File fileToUpload = this.file.get();
         checkArgument(fileToUpload != null, "The Parameter file must not be null.");
-        FileEntity builder = new FileEntity(fileToUpload, contentType);
-        return builder;
+        return new FileEntity(fileToUpload, contentType);
     }
 }

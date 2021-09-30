@@ -32,55 +32,34 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.version;
+package org.geosdi.geoplatform.connector.geoserver.model.styles;
 
-import org.apache.hc.core5.net.URIBuilder;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runners.MethodSorters;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.legend.GPGeoserverStyleLegend;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.legend.IGPGeoserverStyleLegend;
 
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-
-import static java.time.ZoneOffset.UTC;
-import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExceptionMessage;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
-public class GeoserverVersionExceptionTest {
+@Getter
+@Setter
+@XmlRootElement(name = "style")
+@XmlAccessorType(XmlAccessType.FIELD)
+@ToString(callSuper = true)
+public class GPGeoserverUpdateStyleBody extends GPGeoserverStyleBody implements IGPGeoserverUpdateStyleBody {
 
-    private static final Logger logger = LoggerFactory.getLogger(GeoserverVersionExceptionTest.class);
-
-    @Test
-    public void a_printGeoserverVersionExceptionMessageTest() {
-        logger.info("########################GP_GEOSERVER_CONNECTOR_EXCEPTION_MESSAGE : {}\n", toVersionExceptionMessage());
-    }
-
-    @Test
-    public void b_simpleTest() throws Exception {
-        String baseURI = "http://150.145.141.180/geoserver/rest";
-        String styleName = "pippo";
-        String recurse = "true";
-        String purge = "false";
-        logger.info("{}\n", new URIBuilder((baseURI.endsWith("/") ? baseURI.concat("styles/").concat(styleName) : baseURI.concat("/styles/").concat(styleName)))
-                .addParameter("recurse", recurse)
-                .addParameter("purge", purge)
-                .build().toString());
-    }
-
-    @Test
-    public void c_localDateTimeTest() throws Exception {
-        LocalDateTime localDateTime = LocalDateTime.parse("2021-09-29 13:45:10.979 UTC", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS z"));
-        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(localDateTime.toInstant(UTC), UTC);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS z");
-        String p = dtf.format(zonedDateTime);
-        logger.info("{}\n", p);
-        logger.info("###############{}\n", LocalDateTime.parse(p, dtf));
-    }
+    private static final long serialVersionUID = 9217292491849178687L;
+    //
+    @XmlElement(name = "languageVersion", type = GPStyleVersion.class)
+    private IGPStyleVersion languageVersion;
+    @XmlElement(name = "legend", type = GPGeoserverStyleLegend.class)
+    private IGPGeoserverStyleLegend legend;
 }

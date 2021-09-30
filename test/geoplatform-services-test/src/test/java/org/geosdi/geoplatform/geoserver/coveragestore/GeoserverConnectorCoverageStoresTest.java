@@ -39,11 +39,11 @@ import it.geosolutions.geoserver.rest.decoder.RESTCoverage;
 import org.apache.hc.core5.http.ContentType;
 import org.geosdi.geoplatform.connector.geoserver.model.file.GPCoverageStoreFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
-import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
-import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.raster.GeoserverRasterLayer;
 import org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
+import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
+import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverLoadCoverageStoreRequest;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
@@ -61,6 +61,8 @@ import static java.io.File.separator;
 import static java.lang.Boolean.TRUE;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension.JSON;
+import static org.geosdi.geoplatform.connector.geoserver.model.store.GPStoreType.COVERAGES;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
@@ -116,7 +118,7 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
                         .withCoverageStore("mosaic").withWorkspace("nurc").getResponse();
     }
 
-    //@Ignore()
+    @Ignore()
     @Test
     public void f_updateCoverage() throws Exception {
         File file = new File(of("src", "test", "resources", "VMI_20210923T1020Z.tif").collect(joining(separator)));
@@ -125,11 +127,11 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
                 .withWorkspace("sf")
                 .withCoverageName("store_vito")
                 .withStore("store_vito")
-                .withUpdate(GPParameterUpdate.OVERWRITE.toString())
+                .withUpdate(GPParameterUpdate.OVERWRITE)
                 .withConfigure(GPParameterConfigure.FIRST)
                 .withMethod(GPUploadMethod.FILE)
                 .withFormat(GPCoverageStoreFileExtension.GEOTIFF)
-                .withMimeType(org.apache.hc.core5.http.ContentType.IMAGE_TIFF)
+                .withMimeType(ContentType.IMAGE_TIFF)
                 .withFile(file).getResponse());
         //logger.info("############{}\n", this.restPublisher.publishGeoTIFF("sf", "store_vito", file));
     }
@@ -144,8 +146,10 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
         theGPGeoserverCoverageInfo.setPolicy(GPProjectionPolicy.FORCE_DECLARED);
         logger.info("#############{}\n", this.geoserverConnectorStore.createCoverageRequest()
                 .withWorkspace("sf")
+                .withMethod(COVERAGES)
+                .withFormat(JSON)
                 .withCoverageStore("store_vito")
-                .withCoverageBody(theGPGeoserverCoverageInfo).getResponse());
+                .withCoverageBody(theGPGeoserverCoverageInfo).getResponseAsString());
         }
 
     @Ignore
@@ -162,7 +166,7 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
                 .getResponse());
     }
 
-    @Ignore
+   @Ignore
     @Test
     public void i_createCoverage() throws Exception {
         File file = new File(of("src", "test", "resources", "VMI_20210923T1020Z.tif").collect(joining(separator)));
@@ -179,11 +183,16 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
                 .withConfigure(GPParameterConfigure.FIRST)
                 .withCoverageName("layer_vito")
                 .withMimeType(ContentType.IMAGE_TIFF)
-                .withUpdate(GPParameterUpdate.OVERWRITE.toString())
+                .withUpdate(GPParameterUpdate.OVERWRITE)
                 .getResponse();
         if (!geoserverLoadCoverageStoreRequest.exist()) {
             logger.error("");
-        } else if (!this.geoserverConnectorStore.createCoverageRequest().withWorkspace("sf").withCoverageStore("layer_vito").withCoverageBody(theGPGeoserverCoverageInfo).getResponse()) {
+        } else if (!this.geoserverConnectorStore.createCoverageRequest()
+                .withWorkspace("sf")
+                .withCoverageStore("store_vito")
+                .withMethod(COVERAGES)
+                .withFormat(JSON)
+                .withCoverageBody(theGPGeoserverCoverageInfo).getResponse()) {
             logger.error("Unable to create a coverage for the store:" + "layer_vito");
         } else {
             GeoserverRasterLayer geoserverRasterLayer = new GeoserverRasterLayer();

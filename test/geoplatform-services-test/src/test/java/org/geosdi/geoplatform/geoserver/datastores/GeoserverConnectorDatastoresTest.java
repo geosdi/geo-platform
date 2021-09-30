@@ -40,8 +40,10 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.hc.core5.http.ContentType;
 import org.geosdi.geoplatform.connector.geoserver.model.file.GPDataStoreFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
-import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastores;
+import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
+import org.geosdi.geoplatform.connector.geoserver.model.file.GPDataStoreFileExtension;
+import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverLoadDatastoresRequest;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
 import org.junit.Assert;
@@ -58,6 +60,9 @@ import static java.io.File.separator;
 import static java.lang.Boolean.TRUE;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension.JSON;
+import static org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy.FORCE_DECLARED;
+import static org.geosdi.geoplatform.connector.geoserver.model.store.GPStoreType.DATASTORES;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -112,6 +117,21 @@ public class GeoserverConnectorDatastoresTest extends GeoserverConnectorTest {
                 .withCharset("UTF-8")
                 .withFormat(GPDataStoreFileExtension.SHP)
                 .withFile(file).getResponse());
+
+        GPGeoserverFeatureTypeInfo gpGeoserverFeatureTypeInfo = new GPGeoserverFeatureTypeInfo();
+        gpGeoserverFeatureTypeInfo.setName("admin_shp_comuni");
+        gpGeoserverFeatureTypeInfo.setEnabled(TRUE);
+        gpGeoserverFeatureTypeInfo.setTitle("admin_shp_comuni");
+        gpGeoserverFeatureTypeInfo.setSrs("EPSG:4326");
+        gpGeoserverFeatureTypeInfo.setProjectionPolicy(FORCE_DECLARED);
+        logger.info("###############{}\n", this.geoserverConnectorStore.updateDataStoreResource()
+                .withWorkspace("sf")
+                .withMethod(DATASTORES)
+                .withFormat(JSON)
+                .withDataStoreBody(gpGeoserverFeatureTypeInfo)
+                .withDataStore("store_vito")
+                .getResponse());
+
     }
 
 

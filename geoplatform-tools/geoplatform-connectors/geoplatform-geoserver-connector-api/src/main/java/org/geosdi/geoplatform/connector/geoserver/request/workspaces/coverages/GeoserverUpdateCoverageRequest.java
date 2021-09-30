@@ -32,14 +32,14 @@ public interface GeoserverUpdateCoverageRequest extends GPJsonConnectorRequest<B
     GeoserverUpdateCoverageRequest withCoverageBody(GPGeoserverCoverageInfo theGPGeoserverCoverageInfo);
 
     /**
-     * @param theFileName
+     * @param theCoverageName
      * @return {@link GeoserverUpdateCoverageRequest}
      */
-    GeoserverUpdateCoverageRequest withFileName(String theFileName);
+    GeoserverUpdateCoverageRequest withCoverageName(String theCoverageName);
 
     /**
-     * @param theUpdateBbox
+     * @param theCalculate
      * @return {@link GeoserverUpdateCoverageRequest}
      */
-    GeoserverUpdateCoverageRequest withUpdateBbox(Boolean theUpdateBbox);
+    GeoserverUpdateCoverageRequest withCalculate(String[] theCalculate);
 }

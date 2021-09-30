@@ -110,9 +110,7 @@ import java.util.zip.ZipFile;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
-import static org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension.JSON;
 import static org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy.FORCE_DECLARED;
-import static org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverStoreInfoType.COVERAGE;
 
 public class GPPublisherBasicServiceImpl implements IGPPublisherService, InitializingBean {
 
@@ -1570,6 +1568,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                 theGPGeoserverCoverageInfo.setName(fileName);
                 theGPGeoserverCoverageInfo.setTitle(fileName);
                 theGPGeoserverCoverageInfo.setSrs(epsg);
+                theGPGeoserverCoverageInfo.setEnabled(TRUE);
                 theGPGeoserverCoverageInfo.setPolicy(GPProjectionPolicy.FORCE_DECLARED);
                 GeoserverLoadCoverageStoreRequest geoserverLoadCoverageStoreRequest = this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace(userWorkspace).withStore(fileName);
                 this.geoserverConnectorStore.updateCoverageStoreWithStoreName().withWorkspace(userWorkspace).withCoverageName(fileName).withStore(fileName)
@@ -1579,11 +1578,9 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                         .withFile(fileInTifDir).getResponse();
                 if (!geoserverLoadCoverageStoreRequest.exist()) {
                     return FALSE;
-                } else if (!this.geoserverConnectorStore.createCoverageRequest()
+                } else if (!this.geoserverConnectorStore.updateCoverageRequest()
                         .withWorkspace(userWorkspace)
                         .withCoverageStore(fileName)
-                        .withMethod(COVERAGE)
-                        .withFormat(JSON)
                         .withCoverageBody(theGPGeoserverCoverageInfo).getResponse()) {
                     logger.error("Unable to create a coverage for the store:" + fileName);
                     return FALSE;
@@ -1639,6 +1636,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
             GPGeoserverFeatureTypeInfo gpGeoserverFeatureTypeInfo = new GPGeoserverFeatureTypeInfo();
             gpGeoserverFeatureTypeInfo.setName(dataSetName);
             gpGeoserverFeatureTypeInfo.setTitle(dataSetName);
+            gpGeoserverFeatureTypeInfo.setEnabled(TRUE);
             gpGeoserverFeatureTypeInfo.setProjectionPolicy(FORCE_DECLARED);
             if (!srsNull) {
                 gpGeoserverFeatureTypeInfo.setSrs(srs);

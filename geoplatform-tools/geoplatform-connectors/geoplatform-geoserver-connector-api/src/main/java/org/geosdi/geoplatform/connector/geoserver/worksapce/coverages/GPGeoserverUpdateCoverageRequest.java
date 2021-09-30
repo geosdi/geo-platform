@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.connector.geoserver.coveragestores;
+package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 
 import com.google.common.io.CharStreams;
 import org.apache.hc.core5.http.HttpEntity;
@@ -7,9 +7,9 @@ import org.apache.hc.core5.net.URIBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverStoreInfoType;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
-import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverCreateCoverageStoreResourceRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverUpdateCoverageRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -26,17 +26,15 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverCreateCoverageStoreResourceRequest extends GPJsonPostConnectorRequest<Boolean, GeoserverCreateCoverageStoreResourceRequest> implements GeoserverCreateCoverageStoreResourceRequest {
+public class GPGeoserverUpdateCoverageRequest extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateCoverageRequest> implements GeoserverUpdateCoverageRequest {
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> coverageStoreName;
     private final ThreadLocal<String> fileName;
     private final ThreadLocal<Boolean> updateBBox;
     private final ThreadLocal<GPGeoserverCoverageInfo> coverageBody;
-    private final ThreadLocal<GeoserverStoreInfoType> methodName;
-    private final ThreadLocal<GPFormatExtension> formatName;
 
-    public GPGeoserverCreateCoverageStoreResourceRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
+    public GPGeoserverUpdateCoverageRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
             @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.workspaceName = withInitial(() -> null);
@@ -44,76 +42,54 @@ public class GPGeoserverCreateCoverageStoreResourceRequest extends GPJsonPostCon
         this.updateBBox = withInitial(() -> null);
         this.fileName = withInitial(() -> null);
         this.coverageBody = withInitial(() -> null);
-        this.methodName = withInitial(() -> null);
-        this.formatName = withInitial(() -> null);
     }
 
     /**
      * @param theWorkspace
-     * @return {@link GeoserverCreateCoverageStoreResourceRequest}
+     * @return {@link GeoserverUpdateCoverageRequest}
      */
     @Override
-    public GeoserverCreateCoverageStoreResourceRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
+    public GeoserverUpdateCoverageRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspaceName.set(theWorkspace);
         return self();
     }
 
     /**
      * @param theStore
-     * @return {@link GeoserverCreateCoverageStoreResourceRequest}
+     * @return {@link GeoserverUpdateCoverageRequest}
      */
     @Override
-    public GeoserverCreateCoverageStoreResourceRequest withCoverageStore(@Nonnull(when = NEVER) String theStore) {
+    public GeoserverUpdateCoverageRequest withCoverageStore(@Nonnull(when = NEVER) String theStore) {
         this.coverageStoreName.set(theStore);
         return self();
     }
 
     /**
      * @param theGPGeoserverCoverageInfo
-     * @return {@link GeoserverCreateCoverageStoreResourceRequest}
+     * @return {@link GeoserverUpdateCoverageRequest}
      */
     @Override
-    public GeoserverCreateCoverageStoreResourceRequest withCoverageBody(GPGeoserverCoverageInfo theGPGeoserverCoverageInfo) {
+    public GeoserverUpdateCoverageRequest withCoverageBody(GPGeoserverCoverageInfo theGPGeoserverCoverageInfo) {
         this.coverageBody.set(theGPGeoserverCoverageInfo);
         return self();
     }
 
     /**
-     * @param theMethod
-     * @return {@link GeoserverCreateCoverageStoreResourceRequest}
-     */
-    @Override
-    public GeoserverCreateCoverageStoreResourceRequest withMethod(@Nonnull(when = NEVER) GeoserverStoreInfoType theMethod) {
-        this.methodName.set(theMethod);
-        return self();
-    }
-
-    /**
-     * @param theFormat
-     * @return {@link GeoserverCreateCoverageStoreResourceRequest}
-     */
-    @Override
-    public GeoserverCreateCoverageStoreResourceRequest withFormat(@Nonnull(when = NEVER) GPFormatExtension theFormat) {
-        this.formatName.set(theFormat);
-        return self();
-    }
-
-    /**
      * @param theFileName
-     * @return {@link GeoserverCreateCoverageStoreResourceRequest}
+     * @return {@link GeoserverUpdateCoverageRequest}
      */
     @Override
-    public GeoserverCreateCoverageStoreResourceRequest withFileName(String theFileName) {
+    public GeoserverUpdateCoverageRequest withFileName(String theFileName) {
         this.fileName.set(theFileName);
         return self();
     }
 
     /**
      * @param theUpdateBbox
-     * @return {@link GeoserverCreateCoverageStoreResourceRequest}
+     * @return {@link GeoserverUpdateCoverageRequest}
      */
     @Override
-    public GeoserverCreateCoverageStoreResourceRequest withUpdateBbox(Boolean theUpdateBbox) {
+    public GeoserverUpdateCoverageRequest withUpdateBbox(Boolean theUpdateBbox) {
         this.updateBBox.set(theUpdateBbox);
         return self();
     }
@@ -127,21 +103,10 @@ public class GPGeoserverCreateCoverageStoreResourceRequest extends GPJsonPostCon
         checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string");
         String coverageStore = this.coverageStoreName.get();
         checkArgument((coverageStore != null) && !(coverageStore.trim().isEmpty()), "The Parameter coverageStore must not be null or an empty string.");
-        GeoserverStoreInfoType method = this.methodName.get();
-        checkArgument((method != null), "The Parameter method must not be null or an empty string.");
-        GPFormatExtension format = this.formatName.get();
-        checkArgument((format != null), "The Parameter format must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
-        String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore).concat("/").concat(method.getMethod()).concat(".").concat(format.toString())
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore).concat("/").concat(method.getMethod()).concat(".").concat(format.toString())));
-        URIBuilder uriBuilder = new URIBuilder(path);
-        String filename = this.fileName.get();
-        Boolean update = this.updateBBox.get();
-        if(update != null)
-            uriBuilder.addParameter("updateBBox", update.toString());
-        if(filename != null && !(filename.trim().isEmpty()))
-            uriBuilder.addParameter("filename", filename);
-        return uriBuilder.build().toString();
+        String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore).concat("/coverages/layer_vito")
+                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore).concat("/coverages/layer_vito")));
+        return path;
     }
 
     /**

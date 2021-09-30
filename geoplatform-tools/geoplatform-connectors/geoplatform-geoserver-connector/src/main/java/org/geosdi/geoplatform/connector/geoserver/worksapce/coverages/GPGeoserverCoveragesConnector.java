@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
-import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPGeoserverCreateCoverageStoreResourceRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoveragesRequest;
 import org.geosdi.geoplatform.connector.geoserver.worksapce.GPGeoserverWorkspacesConnector;
@@ -190,14 +189,14 @@ public abstract class GPGeoserverCoveragesConnector extends GPGeoserverWorkspace
     }
 
     /**
-     * @return {@link GPGeoserverCreateCoverageStoreResourceRequest}
+     * @return {@link GPGeoserverUpdateCoverageRequest}
      */
     @Override
-    public GPGeoserverCreateCoverageStoreResourceRequest createCoverageRequest() {
+    public GPGeoserverUpdateCoverageRequest updateCoverageRequest() {
         switch (version) {
             case V219x:
             case V218x:
-                return new GPGeoserverCreateCoverageStoreResourceRequest(this, this.jacksonSupport);
+                return new GPGeoserverUpdateCoverageRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

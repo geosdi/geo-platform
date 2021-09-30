@@ -37,10 +37,10 @@ package org.geosdi.geoplatform.connector.geoserver.request.coveragestores;
 
 import org.apache.hc.core5.http.ContentType;
 import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPCoverageResponse;
-import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
+import org.geosdi.geoplatform.connector.geoserver.model.configure.GPGeoserverParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.file.IGPFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
-import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
+import org.geosdi.geoplatform.connector.geoserver.model.upload.GPGeoserverUploadMethod;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.xml.jaxb.GPJacksonJAXBXmlSupport;
 import org.geosdi.geoplatform.support.jackson.xml.jaxb.JacksonJAXBXmlSupport;
@@ -74,7 +74,7 @@ public interface GeoserverUpdateCoverageStoreWithStoreNameRequest extends GPJson
      * @param theMethod
      * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
-    GeoserverUpdateCoverageStoreWithStoreNameRequest withMethod(@Nonnull(when = NEVER) GPUploadMethod theMethod);
+    GeoserverUpdateCoverageStoreWithStoreNameRequest withMethod(@Nonnull(when = NEVER) GPGeoserverUploadMethod theMethod);
 
     /**
      * @param theFormat
@@ -86,7 +86,7 @@ public interface GeoserverUpdateCoverageStoreWithStoreNameRequest extends GPJson
      * @param theParameterConfigure
      * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
-    GeoserverUpdateCoverageStoreWithStoreNameRequest withConfigure(@Nonnull(when = NEVER) GPParameterConfigure theParameterConfigure);
+    GeoserverUpdateCoverageStoreWithStoreNameRequest withConfigure(@Nonnull(when = NEVER) GPGeoserverParameterConfigure theParameterConfigure);
 
     /**
      * @param theUpdate
@@ -105,12 +105,6 @@ public interface GeoserverUpdateCoverageStoreWithStoreNameRequest extends GPJson
      * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     GeoserverUpdateCoverageStoreWithStoreNameRequest withFileName(@Nonnull(when = NEVER) String theFileName);
-
-    /**
-     * @param theMimeType
-     * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
-     */
-    GeoserverUpdateCoverageStoreWithStoreNameRequest withMimeType(@Nonnull(when = NEVER) ContentType theMimeType);
 
     /**
      * @param theCoverageName

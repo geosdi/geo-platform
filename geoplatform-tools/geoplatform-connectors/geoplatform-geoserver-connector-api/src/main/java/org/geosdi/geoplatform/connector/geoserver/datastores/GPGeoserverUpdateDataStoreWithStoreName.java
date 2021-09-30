@@ -7,7 +7,7 @@ import org.apache.hc.core5.http.io.entity.FileEntity;
 import org.apache.hc.core5.net.URIBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.file.IGPFileExtension;
-import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
+import org.geosdi.geoplatform.connector.geoserver.model.upload.GPGeoserverUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverUpdateDataStoreWithStoreNameRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
@@ -31,12 +31,11 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> storeName;
-    private final ThreadLocal<GPUploadMethod> methodName;
+    private final ThreadLocal<GPGeoserverUploadMethod> methodName;
     private final ThreadLocal<IGPFileExtension> formatName;
     private final ThreadLocal<File> file;
-    private final ThreadLocal<ContentType> mymeType;
-    private final ThreadLocal<GPParameterConfigure> configure;
-    private final ThreadLocal<GPDataStoreFileExtension> target;
+    private final ThreadLocal<GPGeoserverParameterConfigure> configure;
+    private final ThreadLocal<GPGeoserverDataStoreFileExtension> target;
     private final ThreadLocal<String> update;
     private final ThreadLocal<String> charset;
     private final ThreadLocal<String> filename;
@@ -49,7 +48,6 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
         this.methodName = withInitial(() -> null);
         this.formatName = withInitial(() -> null);
         this.file = withInitial(() -> null);
-        this.mymeType = withInitial(() -> null);
         this.configure = withInitial(() -> null);
         this.target = withInitial(() -> null);
         this.update = withInitial(() -> null);
@@ -82,7 +80,7 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
      * @return {@link GPGeoserverUpdateDataStoreWithStoreName}
      */
     @Override
-    public GeoserverUpdateDataStoreWithStoreNameRequest withMethod(@Nonnull(when = NEVER) GPUploadMethod theMethod) {
+    public GeoserverUpdateDataStoreWithStoreNameRequest withMethod(@Nonnull(when = NEVER) GPGeoserverUploadMethod theMethod) {
         this.methodName.set(theMethod);
         return self();
     }
@@ -102,7 +100,7 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
      * @return {@link GPGeoserverUpdateDataStoreWithStoreName}
      */
     @Override
-    public GeoserverUpdateDataStoreWithStoreNameRequest withConfigure(@Nonnull(when = NEVER) GPParameterConfigure theParameterConfigure) {
+    public GeoserverUpdateDataStoreWithStoreNameRequest withConfigure(@Nonnull(when = NEVER) GPGeoserverParameterConfigure theParameterConfigure) {
         this.configure.set(theParameterConfigure);
         return self();
     }
@@ -148,16 +146,6 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
     }
 
     /**
-     * @param theMimeType
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
-     */
-    @Override
-    public GeoserverUpdateDataStoreWithStoreNameRequest withMimeType(@Nonnull(when = NEVER) ContentType theMimeType) {
-        this.mymeType.set(theMimeType);
-        return self();
-    }
-
-    /**
      * @param theFile
      * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
      */
@@ -176,7 +164,7 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
         checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string.");
         String store = this.storeName.get();
         checkArgument((store != null) && !(store.trim().isEmpty()), "The Parameter store must not be null or an empty string.");
-        GPUploadMethod method = this.methodName.get();
+        GPGeoserverUploadMethod method = this.methodName.get();
         checkArgument((method != null), "The Parameter method must not be null or an empty string.");
         IGPFileExtension format = this.formatName.get();
         checkArgument((format != null), "The Parameter format must not be null or an empty string.");
@@ -184,8 +172,8 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
         String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())
                 : baseURI.concat("/workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())));
         URIBuilder uriBuilder = new URIBuilder(path);
-        GPParameterConfigure configure = this.configure.get();
-        GPDataStoreFileExtension target = this.target.get();
+        GPGeoserverParameterConfigure configure = this.configure.get();
+        GPGeoserverDataStoreFileExtension target = this.target.get();
         String update = this.update.get();
         String charset = this.charset.get();
         String filename = this.filename.get();
@@ -226,13 +214,21 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
      */
     @Override
     protected HttpEntity prepareHttpEntity() throws Exception {
-        ContentType contentType = this.mymeType.get();
-        checkArgument(contentType != null, "The parameter contentType must not be null");
-        GPUploadMethod method = this.methodName.get();
+        String contentType = this.methodName.get().getContentType();
+        checkArgument(contentType != null && !(contentType.trim().isEmpty()), "The Parameter contentType must not be null.");
         File fileToUpload = this.file.get();
         checkArgument(fileToUpload != null, "The Parameter file must not be null.");
-        FileEntity fileEntity = new FileEntity(fileToUpload, contentType);
-        DecompressingEntity builder = new DecompressingEntity(new FileEntity(fileToUpload), null);
-        return builder;
+        FileEntity fileEntity = new FileEntity(fileToUpload, ContentType.create(contentType));
+        return fileEntity;
+    }
+
+    /**
+     * @param httpMethod
+     */
+    @Override
+    protected final void addHeaderParams(HttpUriRequest httpMethod) {
+        String contentType = this.methodName.get().getContentType();
+        checkArgument(contentType != null && !(contentType.trim().isEmpty()), "The Parameter contentType must not be null.");
+        httpMethod.addHeader("Content-Type", contentType);
     }
 }

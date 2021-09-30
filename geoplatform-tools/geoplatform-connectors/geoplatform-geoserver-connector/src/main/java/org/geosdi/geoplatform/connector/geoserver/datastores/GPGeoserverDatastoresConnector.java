@@ -190,14 +190,14 @@ public abstract class GPGeoserverDatastoresConnector extends GPGeoserverStylesCo
     }
 
     /**
-     * @return {@link GeoserverUpdateDatastoreResourceRequest}
+     * @return {@link GeoserverCreateDatastoreResourceRequest}
      */
     @Override
-    public GeoserverUpdateDatastoreResourceRequest updateDataStoreResource() {
+    public GeoserverCreateDatastoreResourceRequest createDataStoreResource() {
         switch (version) {
             case V219x:
             case V218x:
-                return new GPGeoserverUpdateDatastoreResourceRequest(this, this.jacksonSupport);
+                return new GPGeoserverCreateDatastoreResourceRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

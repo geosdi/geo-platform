@@ -39,11 +39,13 @@ import it.geosolutions.geoserver.rest.decoder.RESTCoverage;
 import org.apache.hc.core5.http.ContentType;
 import org.geosdi.geoplatform.connector.geoserver.model.file.GPCoverageStoreFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPParameterConfigure;
+import org.geosdi.geoplatform.connector.geoserver.model.configure.GPGeoserverParameterConfigure;
+import org.geosdi.geoplatform.connector.geoserver.model.file.GPGeoserverCoverageStoreFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.raster.GeoserverRasterLayer;
 import org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
-import org.geosdi.geoplatform.connector.geoserver.model.upload.GPUploadMethod;
+import org.geosdi.geoplatform.connector.geoserver.model.upload.GPGeoserverUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverLoadCoverageStoreRequest;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
@@ -128,10 +130,9 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
                 .withCoverageName("store_vito")
                 .withStore("store_vito")
                 .withUpdate(GPParameterUpdate.OVERWRITE)
-                .withConfigure(GPParameterConfigure.FIRST)
-                .withMethod(GPUploadMethod.FILE)
-                .withFormat(GPCoverageStoreFileExtension.GEOTIFF)
-                .withMimeType(ContentType.IMAGE_TIFF)
+                .withConfigure(GPGeoserverParameterConfigure.FIRST)
+                .withMethod(GPGeoserverUploadMethod.FILE)
+                .withFormat(GPGeoserverCoverageStoreFileExtension.GEOTIFF)
                 .withFile(file).getResponse());
         //logger.info("############{}\n", this.restPublisher.publishGeoTIFF("sf", "store_vito", file));
     }
@@ -178,11 +179,10 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
         theGPGeoserverCoverageInfo.setSrs("EPSG:4326");
         GeoserverLoadCoverageStoreRequest geoserverLoadCoverageStoreRequest = this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace("sf").withStore("store_vito");
         this.geoserverConnectorStore.updateCoverageStoreWithStoreName().withWorkspace("sf").withStore("store_vito")
-                .withFormat(GPCoverageStoreFileExtension.GEOTIFF).withFile(file)
-                .withMethod(GPUploadMethod.FILE)
-                .withConfigure(GPParameterConfigure.FIRST)
+                .withFormat(GPGeoserverCoverageStoreFileExtension.GEOTIFF).withFile(file)
+                .withMethod(GPGeoserverUploadMethod.FILE)
+                .withConfigure(GPGeoserverParameterConfigure.FIRST)
                 .withCoverageName("layer_vito")
-                .withMimeType(ContentType.IMAGE_TIFF)
                 .withUpdate(GPParameterUpdate.OVERWRITE)
                 .getResponse();
 

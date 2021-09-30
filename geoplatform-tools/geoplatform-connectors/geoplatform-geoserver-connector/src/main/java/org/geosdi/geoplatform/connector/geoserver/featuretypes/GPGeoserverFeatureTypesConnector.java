@@ -173,4 +173,18 @@ public abstract class GPGeoserverFeatureTypesConnector extends GPGeoserverCovera
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
+
+    /**
+     * @return {@link GeoserverUpdateFeatureTypeRequest}
+     */
+    @Override
+    public GeoserverUpdateFeatureTypeRequest updateFeatureTypeRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverUpdateFeatureTypeRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
 }

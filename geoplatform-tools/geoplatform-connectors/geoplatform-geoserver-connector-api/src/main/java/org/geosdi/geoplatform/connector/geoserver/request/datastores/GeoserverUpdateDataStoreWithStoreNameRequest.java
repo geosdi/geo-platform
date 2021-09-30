@@ -69,7 +69,7 @@ public interface GeoserverUpdateDataStoreWithStoreNameRequest extends GPJsonConn
      * @param theMethod
      * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
      */
-    GeoserverUpdateDataStoreWithStoreNameRequest withMethod(@Nonnull(when = NEVER) GPUploadMethod theMethod);
+    GeoserverUpdateDataStoreWithStoreNameRequest withMethod(@Nonnull(when = NEVER) GPGeoserverUploadMethod theMethod);
 
     /**
      * @param theFormat
@@ -81,13 +81,13 @@ public interface GeoserverUpdateDataStoreWithStoreNameRequest extends GPJsonConn
      * @param theParameterConfigure
      * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
      */
-    GeoserverUpdateDataStoreWithStoreNameRequest withConfigure(@Nonnull(when = NEVER) GPParameterConfigure theParameterConfigure);
+    GeoserverUpdateDataStoreWithStoreNameRequest withConfigure(@Nonnull(when = NEVER) GPGeoserverParameterConfigure theParameterConfigure);
 
     /**
      * @param theTarget
      * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
      */
-    GeoserverUpdateDataStoreWithStoreNameRequest withTarget(@Nonnull(when = NEVER) GPDataStoreFileExtension theTarget);
+    GeoserverUpdateDataStoreWithStoreNameRequest withTarget(@Nonnull(when = NEVER) GPGeoserverDataStoreFileExtension theTarget);
 
     /**
      * @param theUpdate
@@ -106,12 +106,6 @@ public interface GeoserverUpdateDataStoreWithStoreNameRequest extends GPJsonConn
      * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
      */
     GeoserverUpdateDataStoreWithStoreNameRequest withFileName(@Nonnull(when = NEVER) String theFileName);
-
-    /**
-     * @param theMimeType
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
-     */
-    GeoserverUpdateDataStoreWithStoreNameRequest withMimeType(@Nonnull(when = NEVER) ContentType theMimeType);
 
     /**
      * @param theFile

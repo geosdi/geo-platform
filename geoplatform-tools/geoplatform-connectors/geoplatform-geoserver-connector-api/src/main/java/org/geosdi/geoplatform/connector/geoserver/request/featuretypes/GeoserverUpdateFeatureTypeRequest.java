@@ -33,49 +33,42 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.datastores;
+package org.geosdi.geoplatform.connector.geoserver.request.featuretypes;
 
-import org.geosdi.geoplatform.connector.geoserver.request.datastores.*;
-import org.geosdi.geoplatform.connector.geoserver.styles.IGPGeoserverStylesConnector;
+import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.IGPGeoserverFeatureTypeInfo;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Salvia Vito - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface IGPGeoserverDatastoresConnector extends IGPGeoserverStylesConnector {
+public interface GeoserverUpdateFeatureTypeRequest extends GPJsonConnectorRequest<Boolean, GeoserverUpdateFeatureTypeRequest> {
 
     /**
-     * @return {@link GeoserverLoadDatastoresRequest}
+     * @param theWorkspace
+     * @return {@link GeoserverUpdateFeatureTypeRequest}
      */
-    GeoserverLoadDatastoresRequest loadDatastoresRequest();
+    GeoserverUpdateFeatureTypeRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
 
     /**
-     * @return {@link GeoserverLoadDatastoreRequest}
+     * @param theStore
+     * @return {@link GeoserverUpdateFeatureTypeRequest}
      */
-    GeoserverLoadDatastoreRequest loadDatastoreRequest();
+    GeoserverUpdateFeatureTypeRequest withStore(@Nonnull(when = NEVER) String theStore);
 
     /**
-     * @return {@link GeoserverCreateDatastoreRequest}
+     * @param theFeatureName
+     * @return {@link GeoserverUpdateFeatureTypeRequest}
      */
-    GeoserverCreateDatastoreRequest createDatastoreRequest();
+    GeoserverUpdateFeatureTypeRequest withFeatureName(@Nonnull(when = NEVER) String theFeatureName);
 
     /**
-     * @return {@link GeoserverUpdateDatastoreRequest}
+     * @param theFeatureTypeBody
+     * @return {@link GeoserverUpdateFeatureTypeRequest}
      */
-    GeoserverUpdateDatastoreRequest updateDatastoreRequest();
-
-    /**
-     * @return {@link GeoserverDeleteDatastoreRequest}
-     */
-    GeoserverDeleteDatastoreRequest deleteDatastoreRequest();
-
-    /**
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
-     */
-    GeoserverUpdateDataStoreWithStoreNameRequest updateDataStoreWithStoreName();
-
-    /**
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
-     */
-    GeoserverCreateDatastoreResourceRequest createDataStoreResource();
+    <FeatureTypeBody extends IGPGeoserverFeatureTypeInfo> GeoserverUpdateFeatureTypeRequest withFeatureTypeBody(@Nonnull(when = NEVER) FeatureTypeBody theFeatureTypeBody);
 }

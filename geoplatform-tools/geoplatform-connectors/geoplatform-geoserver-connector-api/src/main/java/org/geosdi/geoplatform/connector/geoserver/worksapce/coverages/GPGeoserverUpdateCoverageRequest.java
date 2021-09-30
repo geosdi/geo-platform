@@ -11,13 +11,14 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 import java.io.BufferedReader;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
-import static org.apache.http.entity.ContentType.APPLICATION_JSON;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -27,8 +28,8 @@ public class GPGeoserverUpdateCoverageRequest extends GPJsonPutConnectorRequest<
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> coverageStoreName;
-    private final ThreadLocal<String> fileName;
-    private final ThreadLocal<Boolean> updateBBox;
+    private final ThreadLocal<String> coverageName;
+    private final ThreadLocal<String[]> calculate;
     private final ThreadLocal<GPGeoserverCoverageInfo> coverageBody;
 
     public GPGeoserverUpdateCoverageRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
@@ -36,8 +37,8 @@ public class GPGeoserverUpdateCoverageRequest extends GPJsonPutConnectorRequest<
         super(theServerConnector, theJacksonSupport);
         this.workspaceName = withInitial(() -> null);
         this.coverageStoreName = withInitial(() -> null);
-        this.updateBBox = withInitial(() -> null);
-        this.fileName = withInitial(() -> null);
+        this.calculate = withInitial(() -> null);
+        this.coverageName = withInitial(() -> null);
         this.coverageBody = withInitial(() -> null);
     }
 
@@ -72,22 +73,22 @@ public class GPGeoserverUpdateCoverageRequest extends GPJsonPutConnectorRequest<
     }
 
     /**
-     * @param theFileName
+     * @param theCoverageName
      * @return {@link GeoserverUpdateCoverageRequest}
      */
     @Override
-    public GeoserverUpdateCoverageRequest withFileName(String theFileName) {
-        this.fileName.set(theFileName);
+    public GeoserverUpdateCoverageRequest withCoverageName(String theCoverageName) {
+        this.coverageName.set(theCoverageName);
         return self();
     }
 
     /**
-     * @param theUpdateBbox
+     * @param theCalculate
      * @return {@link GeoserverUpdateCoverageRequest}
      */
     @Override
-    public GeoserverUpdateCoverageRequest withUpdateBbox(Boolean theUpdateBbox) {
-        this.updateBBox.set(theUpdateBbox);
+    public GeoserverUpdateCoverageRequest withCalculate(String[] theCalculate) {
+        this.calculate.set(theCalculate);
         return self();
     }
 
@@ -100,10 +101,16 @@ public class GPGeoserverUpdateCoverageRequest extends GPJsonPutConnectorRequest<
         checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string");
         String coverageStore = this.coverageStoreName.get();
         checkArgument((coverageStore != null) && !(coverageStore.trim().isEmpty()), "The Parameter coverageStore must not be null or an empty string.");
+        String coverageName = this.coverageName.get();
+        checkArgument((coverageName != null) && !(coverageName.trim().isEmpty()), "The Parameter coverageName must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
-        String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore).concat("/coverages/layer_vito")
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore).concat("/coverages/layer_vito")));
-        return path;
+        String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore).concat("/coverages/".concat(coverageName))
+                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore).concat("/coverages/").concat(coverageName)));
+        URIBuilder uriBuilder = new URIBuilder(path);
+        String[] calculate = this.calculate.get();
+        if(calculate != null)
+            uriBuilder.addParameter("calculate", Arrays.stream(calculate).collect(Collectors.joining(",")));
+        return uriBuilder.build().toString();
     }
 
     /**

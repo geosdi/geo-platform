@@ -185,6 +185,7 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
         } else if (!this.geoserverConnectorStore.updateCoverageRequest()
                 .withWorkspace("sf")
                 .withCoverageStore("store_vito")
+                .withCoverageName("layer_vito")
                 .withCoverageBody(theGPGeoserverCoverageInfo).getResponse()) {
             logger.error("Unable to create a coverage for the store:" + "layer_vito");
         } else {

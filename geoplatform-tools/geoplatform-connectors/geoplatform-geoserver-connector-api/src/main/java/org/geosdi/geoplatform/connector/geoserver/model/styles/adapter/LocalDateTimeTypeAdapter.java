@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,26 +32,51 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.styles;
+package org.geosdi.geoplatform.connector.geoserver.model.styles.adapter;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.Serializable;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import static java.time.ZoneOffset.UTC;
+import static java.time.ZonedDateTime.ofInstant;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = GPStyleVersion.class)
-public interface IGPStyleVersion extends Serializable {
+public class LocalDateTimeTypeAdapter extends XmlAdapter<String, LocalDateTime> {
+
+    private static final Logger logger = LoggerFactory.getLogger(LocalDateTimeTypeAdapter.class);
+    //
+    private static final String PATTERN = "yyyy-MM-dd HH:mm:ss.SSS z";
+    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(PATTERN);
 
     /**
+     * @param s
+     * @return {@link LocalDateTime}
+     * @throws Exception
+     */
+    @Override
+    public LocalDateTime unmarshal(String s) throws Exception {
+        try {
+            return ((s != null) && !(s.trim().isEmpty()) ? LocalDateTime.parse(s, dateTimeFormatter) : null);
+        } catch (Exception exception) {
+            logger.warn("###################Impossible format : {} with Pattern : {}\n", s, PATTERN);
+            return null;
+        }
+    }
+
+    /**
+     * @param localDateTime
      * @return {@link String}
+     * @throws Exception
      */
-    String getVersion();
-
-    /**
-     * @param theVersion
-     */
-    void setVersion(String theVersion);
+    @Override
+    public String marshal(LocalDateTime localDateTime) throws Exception {
+        return ((localDateTime != null) ? dateTimeFormatter.format(ofInstant(localDateTime.toInstant(UTC), UTC)) : null);
+    }
 }

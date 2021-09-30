@@ -35,7 +35,7 @@
 package org.geosdi.geoplatform.connector.geoserver.styles;
 
 import net.jcip.annotations.ThreadSafe;
-import org.apache.hc.core5.net.URIBuilder;
+import org.apache.http.client.utils.URIBuilder;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverDeleteWorkspaceStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.styles.base.GPGeoserverBaseDeleteStyleRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;

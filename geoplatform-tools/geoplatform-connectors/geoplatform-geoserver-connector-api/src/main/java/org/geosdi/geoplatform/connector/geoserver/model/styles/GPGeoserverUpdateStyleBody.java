@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -34,24 +34,32 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.styles;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.legend.GPGeoserverStyleLegend;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.legend.IGPGeoserverStyleLegend;
 
-import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = GPStyleVersion.class)
-public interface IGPStyleVersion extends Serializable {
+@Getter
+@Setter
+@XmlRootElement(name = "style")
+@XmlAccessorType(XmlAccessType.FIELD)
+@ToString(callSuper = true)
+public class GPGeoserverUpdateStyleBody extends GPGeoserverStyleBody implements IGPGeoserverUpdateStyleBody {
 
-    /**
-     * @return {@link String}
-     */
-    String getVersion();
-
-    /**
-     * @param theVersion
-     */
-    void setVersion(String theVersion);
+    private static final long serialVersionUID = 9217292491849178687L;
+    //
+    @XmlElement(name = "languageVersion", type = GPStyleVersion.class)
+    private IGPStyleVersion languageVersion;
+    @XmlElement(name = "legend", type = GPGeoserverStyleLegend.class)
+    private IGPGeoserverStyleLegend legend;
 }

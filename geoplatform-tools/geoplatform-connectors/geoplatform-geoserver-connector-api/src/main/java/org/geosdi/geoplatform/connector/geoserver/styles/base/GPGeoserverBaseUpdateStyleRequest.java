@@ -35,15 +35,12 @@
 package org.geosdi.geoplatform.connector.geoserver.styles.base;
 
 import com.google.common.io.CharStreams;
-import org.apache.http.client.utils.URIBuilder;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverBaseDeleteStyleRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverBaseUpdateStyleRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.exception.UnauthorizedException;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -56,57 +53,51 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPGeoserverBaseDeleteStyleRequest<R extends GeoserverBaseDeleteStyleRequest> extends GPJsonDeleteConnectorRequest<Boolean, R> implements GeoserverBaseDeleteStyleRequest<R> {
+public abstract class GPGeoserverBaseUpdateStyleRequest<StyleBody, R extends GeoserverBaseUpdateStyleRequest> extends GPJsonPutConnectorRequest<Boolean, R> implements GeoserverBaseUpdateStyleRequest<StyleBody, R> {
 
     protected final ThreadLocal<String> style;
-    protected final ThreadLocal<Boolean> purge;
-    protected final ThreadLocal<Boolean> recurse;
+    protected final ThreadLocal<StyleBody> styleBody;
 
     /**
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    protected GPGeoserverBaseDeleteStyleRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    protected GPGeoserverBaseUpdateStyleRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.style = withInitial(() -> null);
-        this.purge = withInitial(() -> TRUE);
-        this.recurse = withInitial(() -> TRUE);
+        this.styleBody = withInitial(() -> null);
     }
 
     /**
-     * <p>Name of the style to delete.</p>
-     *
-     * @param theStyle
+     * @param theStyleName
      * @return {@link R}
      */
     @Override
-    public R withStyle(@Nonnull(when = NEVER) String theStyle) {
-        this.style.set(theStyle);
-        return this.self();
+    public R withStyleName(@Nonnull(when = NEVER) String theStyleName) {
+        this.style.set(theStyleName);
+        return self();
     }
 
     /**
-     * <p>Specifies whether the underlying file containing the style should be deleted on disk. Default Value is {@link Boolean#TRUE}</p>
-     *
-     * @param thePurge
+     * @param theStyleBody
      * @return {@link R}
      */
     @Override
-    public R withPurge(@Nullable Boolean thePurge) {
-        this.purge.set(thePurge != null ? thePurge : TRUE);
-        return this.self();
+    public R withStyleBody(@Nonnull(when = NEVER) StyleBody theStyleBody) {
+        this.styleBody.set(theStyleBody);
+        return self();
     }
 
     /**
-     * <p>Removes references to the specified style in existing layers. Default Value is {@link Boolean#TRUE}</p>
-     *
-     * @param theRecurse
-     * @return {@link R}
+     * @param statusCode
+     * @throws Exception
      */
-    @Override
-    public R withRecurse(@Nullable Boolean theRecurse) {
-        this.recurse.set(theRecurse != null ? theRecurse : TRUE);
-        return this.self();
+    protected void checkHttpResponseStatus(int statusCode) throws Exception {
+        super.checkHttpResponseStatus(statusCode);
+        switch (statusCode) {
+            case 500:
+                throw new IllegalStateException("The Style with name : " + this.style.get() + " doesn't exist.");
+        }
     }
 
     /**
@@ -115,29 +106,9 @@ public abstract class GPGeoserverBaseDeleteStyleRequest<R extends GeoserverBaseD
     @Override
     protected String createUriPath() throws Exception {
         String styleName = this.style.get();
-        checkArgument((styleName != null) && !(styleName.trim().isEmpty()), "The Parameter styleName mut not be null or an Empty String.");
-        //        styleName = REPLACEMENT.replace(styleName);
-        String recurse = this.recurse.get().toString();
-        String purge = this.purge.get().toString();
+        checkArgument((styleName != null) && !(styleName.trim().isEmpty()), "The Parameter styleName must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
-        return new URIBuilder((baseURI.endsWith("/") ? baseURI.concat("styles/").concat(styleName) : baseURI.concat("/styles/").concat(styleName)))
-                .addParameter("recurse", recurse)
-                .addParameter("purge", purge)
-                .build().toString();
-    }
-
-    /**
-     * @param statusCode
-     * @throws Exception
-     */
-    @Override
-    protected void checkHttpResponseStatus(int statusCode) throws Exception {
-        switch (statusCode) {
-            case 401:
-                throw new UnauthorizedException();
-            case 405:
-                throw new IllegalStateException("Method not allowed");
-        }
+        return (baseURI.endsWith("/") ? baseURI.concat("styles/").concat(styleName) : baseURI.concat("/styles/").concat(styleName));
     }
 
     /**

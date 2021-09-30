@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,26 +32,47 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.styles;
+package org.geosdi.geoplatform.connector.geoserver.styles;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import net.jcip.annotations.ThreadSafe;
+import org.apache.http.HttpEntity;
+import org.apache.http.entity.StringEntity;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverUpdateStyleBody;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverUpdateStyleRequest;
+import org.geosdi.geoplatform.connector.geoserver.styles.base.GPGeoserverBaseUpdateStyleRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
-import java.io.Serializable;
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
+import static org.apache.http.entity.ContentType.APPLICATION_JSON;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = GPStyleVersion.class)
-public interface IGPStyleVersion extends Serializable {
+@ThreadSafe
+public class GPGeoserverUpdateStyleRequest extends GPGeoserverBaseUpdateStyleRequest<IGPGeoserverUpdateStyleBody, GeoserverUpdateStyleRequest> implements GeoserverUpdateStyleRequest {
 
     /**
-     * @return {@link String}
+     * @param theServerConnector
+     * @param theJacksonSupport
      */
-    String getVersion();
+    GPGeoserverUpdateStyleRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(theServerConnector, theJacksonSupport);
+    }
 
     /**
-     * @param theVersion
+     * @return {@link HttpEntity}
      */
-    void setVersion(String theVersion);
+    @Override
+    protected HttpEntity prepareHttpEntity() throws Exception {
+        IGPGeoserverUpdateStyleBody geoserverStyleBody = this.styleBody.get();
+        checkArgument(geoserverStyleBody != null, "The Parameter styleBody must not be null.");
+        String geoserverUpdateStyleBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(geoserverStyleBody);
+        logger.debug("#############################UPDATE_STYLE_BODY : \n{}\n", geoserverUpdateStyleBodyString);
+        return new StringEntity(geoserverUpdateStyleBodyString, APPLICATION_JSON);
+    }
 }

@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,77 +32,56 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.styles;
+package org.geosdi.geoplatform.connector.geoserver.model.styles.legend;
 
-import org.geosdi.geoplatform.connector.geoserver.layers.IGPGeoserverLayersConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.*;
-import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverCreateStyleSLDV100Request;
-import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request;
-import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverUpdateStyleSLDV100Request;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import java.io.Serializable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverStylesConnector extends IGPGeoserverLayersConnector {
+@JsonDeserialize(as = GPGeoserverStyleLegend.class)
+public interface IGPGeoserverStyleLegend extends Serializable {
 
     /**
-     * @return {@link GeoserverStylesRequest}
+     * @return {@link Integer}
      */
-    GeoserverStylesRequest loadStylesRequest();
+    int getWidth();
 
     /**
-     * @return {@link GeoserverStyleRequest}
+     * @param theWidth
      */
-    GeoserverStyleRequest loadStyleRequest();
+    void setWidth(int theWidth);
 
     /**
-     * @return {@link GeoserverCreateStyleRequest}
+     * @return {@link Integer}
      */
-    GeoserverCreateStyleRequest createStyleRequest();
+    int getHeight();
 
     /**
-     * @return {@link GeoserverCreateStyleSLDV100Request}
+     * @param theHeight
      */
-    GeoserverCreateStyleSLDV100Request createStyleSLDV100Request();
+    void setHeight(int theHeight);
 
     /**
-     * @return {@link GeoserverCreateWorkspaceStyleRequest}
+     * @return {@link String}
      */
-    GeoserverCreateWorkspaceStyleRequest createWorkspaceStyleRequest();
+    String getFormat();
 
     /**
-     * @return {@link GeoserverDeleteStyleRequest}
+     * @param theFormat
      */
-    GeoserverDeleteStyleRequest deleteStyleRequest();
+    void setFormat(String theFormat);
 
     /**
-     * @return {@link GeoserverDeleteWorkspaceStyleRequest}
+     * @return {@link String}
      */
-    GeoserverDeleteWorkspaceStyleRequest deleteWorkspaceStyleRequest();
+    String getOnLineResource();
 
     /**
-     * @return {@link GeoserverStyleSLDV100Request}
+     * @param theOnLineResource
      */
-    GeoserverStyleSLDV100Request loadStyleSLDV100Request();
-
-    /**
-     * @return {@link GeoserverStylesRequest}
-     */
-    GeoserverWorkspaceStylesRequest loadWorkspaceStylesRequest();
-
-    /**
-     * @return {@link GeoserverStyleRequest}
-     */
-    GeoserverWorkspaceStyleRequest loadWorkspaceStyleRequest();
-
-    /**
-     * @return {@link GeoserverUpdateStyleRequest}
-     */
-    GeoserverUpdateStyleRequest updateStyleRequest();
-
-    /**
-     * @return {@link GeoserverUpdateStyleSLDV100Request}
-     */
-    GeoserverUpdateStyleSLDV100Request updateStyleSLDV100Request();
+    void setOnLineResource(String theOnLineResource);
 }

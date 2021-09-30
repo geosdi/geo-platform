@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,26 +32,28 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.styles;
+package org.geosdi.geoplatform.connector.geoserver.request.styles.base;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
-import java.io.Serializable;
+import javax.annotation.Nonnull;
+import javax.annotation.meta.When;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = GPStyleVersion.class)
-public interface IGPStyleVersion extends Serializable {
+public interface GeoserverBaseUpdateStyleRequest<StyleBody, R extends GeoserverBaseUpdateStyleRequest> extends GPJsonConnectorRequest<Boolean, R> {
 
     /**
-     * @return {@link String}
+     * @param theStyleName
+     * @return {@link R}
      */
-    String getVersion();
+    R withStyleName(@Nonnull(when = When.NEVER) String theStyleName);
 
     /**
-     * @param theVersion
+     * @param theStyleBody
+     * @return {@link R}
      */
-    void setVersion(String theVersion);
+    R withStyleBody(@Nonnull(when = When.NEVER) StyleBody theStyleBody);
 }

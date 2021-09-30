@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,26 +32,14 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.styles;
+package org.geosdi.geoplatform.connector.geoserver.request.styles;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
-import java.io.Serializable;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverUpdateStyleBody;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverBaseUpdateStyleRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = GPStyleVersion.class)
-public interface IGPStyleVersion extends Serializable {
-
-    /**
-     * @return {@link String}
-     */
-    String getVersion();
-
-    /**
-     * @param theVersion
-     */
-    void setVersion(String theVersion);
+public interface GeoserverUpdateStyleRequest extends GeoserverBaseUpdateStyleRequest<IGPGeoserverUpdateStyleBody, GeoserverUpdateStyleRequest> {
 }

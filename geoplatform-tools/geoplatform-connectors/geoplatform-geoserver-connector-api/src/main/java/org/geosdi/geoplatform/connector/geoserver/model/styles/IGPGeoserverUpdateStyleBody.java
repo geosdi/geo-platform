@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -35,23 +35,32 @@
 package org.geosdi.geoplatform.connector.geoserver.model.styles;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
-import java.io.Serializable;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.legend.IGPGeoserverStyleLegend;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = GPStyleVersion.class)
-public interface IGPStyleVersion extends Serializable {
+@JsonDeserialize(as = GPGeoserverUpdateStyleBody.class)
+public interface IGPGeoserverUpdateStyleBody extends IGPGeoserverStyleBody {
 
     /**
-     * @return {@link String}
+     * @return {@link IGPStyleVersion}
      */
-    String getVersion();
+    IGPStyleVersion getLanguageVersion();
 
     /**
-     * @param theVersion
+     * @param theLanguageVersion
      */
-    void setVersion(String theVersion);
+    void setLanguageVersion(IGPStyleVersion theLanguageVersion);
+
+    /**
+     * @return {@link IGPGeoserverStyleLegend}
+     */
+    IGPGeoserverStyleLegend getLegend();
+
+    /**
+     * @param theLegend
+     */
+    void setLegend(IGPGeoserverStyleLegend theLegend);
 }

@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.connector.geoserver.request.datastores;
 
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPGeoserverParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.file.GPGeoserverDataStoreFileExtension;
-import org.geosdi.geoplatform.connector.geoserver.model.file.IGPFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.upload.GPGeoserverUploadMethod;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
@@ -74,7 +73,7 @@ public interface GeoserverUpdateDataStoreWithStoreNameRequest extends GPJsonConn
      * @param theFormat
      * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
      */
-    GeoserverUpdateDataStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) IGPFileExtension theFormat);
+    GeoserverUpdateDataStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) GPGeoserverDataStoreFileExtension theFormat);
 
     /**
      * @param theParameterConfigure

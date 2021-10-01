@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.connector.geoserver.request.coveragestores;
 
 import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPCoverageResponse;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPGeoserverParameterConfigure;
-import org.geosdi.geoplatform.connector.geoserver.model.file.IGPFileExtension;
+import org.geosdi.geoplatform.connector.geoserver.model.file.GPGeoserverCoverageStoreFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
 import org.geosdi.geoplatform.connector.geoserver.model.upload.GPGeoserverUploadMethod;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
@@ -79,7 +79,7 @@ public interface GeoserverUpdateCoverageStoreWithStoreNameRequest extends GPJson
      * @param theFormat
      * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
-    GeoserverUpdateCoverageStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) IGPFileExtension theFormat);
+    GeoserverUpdateCoverageStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) GPGeoserverCoverageStoreFileExtension theFormat);
 
     /**
      * @param theParameterConfigure

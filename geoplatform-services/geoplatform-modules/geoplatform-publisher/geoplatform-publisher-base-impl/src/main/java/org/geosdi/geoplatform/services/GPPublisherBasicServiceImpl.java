@@ -1572,9 +1572,10 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                 theGPGeoserverCoverageInfo.setPolicy(GPProjectionPolicy.FORCE_DECLARED);
                 GeoserverLoadCoverageStoreRequest geoserverLoadCoverageStoreRequest = this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace(userWorkspace).withStore(fileName);
                 this.geoserverConnectorStore.updateCoverageStoreWithStoreName().withWorkspace(userWorkspace).withCoverageName(fileName).withStore(fileName)
-                        .withUpdate(GPParameterUpdate.OVERWRITE).withConfigure(GPGeoserverParameterConfigure.FIRST).withMethod(
-                        GPGeoserverUploadMethod.FILE).withFormat(
-                        GPGeoserverCoverageStoreFileExtension.GEOTIFF)
+                        .withUpdate(GPParameterUpdate.OVERWRITE)
+                        .withConfigure(GPGeoserverParameterConfigure.FIRST)
+                        .withMethod(GPGeoserverUploadMethod.FILE)
+                        .withFormat(GPGeoserverCoverageStoreFileExtension.GEOTIFF)
                         .withFile(fileInTifDir).getResponse();
                 if (!geoserverLoadCoverageStoreRequest.exist()) {
                     return FALSE;

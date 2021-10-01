@@ -1,9 +1,6 @@
 package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 
 import com.google.common.io.CharStreams;
-import org.apache.hc.core5.http.HttpEntity;
-import org.apache.hc.core5.http.io.entity.StringEntity;
-import org.apache.hc.core5.net.URIBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverUpdateCoverageRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
@@ -12,15 +9,15 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 import java.io.BufferedReader;
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static io.reactivex.rxjava3.core.Observable.fromIterable;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
+import static java.util.Arrays.asList;
 import static javax.annotation.meta.When.NEVER;
-import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -109,9 +106,10 @@ public class GPGeoserverUpdateCoverageRequest extends GPJsonPutConnectorRequest<
         String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore).concat("/coverages/".concat(coverageName))
                 : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore).concat("/coverages/").concat(coverageName)));
         URIBuilder uriBuilder = new URIBuilder(path);
-        String[] calculate = this.calculate.get();
-        if(calculate != null)
-            uriBuilder.addParameter("calculate", Arrays.stream(calculate).collect(Collectors.joining(",")));
+        fromIterable(asList(this.calculate))
+                .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
+                .filter(Objects::nonNull)
+                .subscribe(c -> c.get().addQueryParam(uriBuilder));
         return uriBuilder.build().toString();
     }
 

@@ -10,7 +10,9 @@ import org.apache.hc.core5.net.URIBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPGeoserverParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.file.GPGeoserverDataStoreFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.file.IGPFileExtension;
+import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
 import org.geosdi.geoplatform.connector.geoserver.model.upload.GPGeoserverUploadMethod;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverStringQueryParam;
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverUpdateDataStoreWithStoreNameRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
@@ -19,11 +21,14 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import javax.annotation.Nonnull;
 import java.io.BufferedReader;
 import java.io.File;
+import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static io.reactivex.rxjava3.core.Observable.fromIterable;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
+import static java.util.Arrays.asList;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -87,7 +92,7 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
      * @return {@link GPGeoserverUpdateDataStoreWithStoreName}
      */
     @Override
-    public GeoserverUpdateDataStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) IGPFileExtension theFormat) {
+    public GeoserverUpdateDataStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) GPGeoserverDataStoreFileExtension theFormat) {
         this.formatName.set(theFormat);
         return self();
     }
@@ -117,7 +122,7 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
      * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
      */
     @Override
-    public GeoserverUpdateDataStoreWithStoreNameRequest withUpdate(@Nonnull(when = NEVER) String theUpdate) {
+    public GeoserverUpdateDataStoreWithStoreNameRequest withUpdate(@Nonnull(when = NEVER) GPParameterUpdate theUpdate) {
         this.update.set(theUpdate);
         return self();
     }
@@ -128,7 +133,7 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
      */
     @Override
     public GeoserverUpdateDataStoreWithStoreNameRequest withCharset(@Nonnull(when = NEVER) String theCharset) {
-        this.charset.set(theCharset);
+        this.charset.set(new GPGeoserverStringQueryParam("charset", theCharset));
         return self();
     }
 
@@ -138,7 +143,7 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
      */
     @Override
     public GeoserverUpdateDataStoreWithStoreNameRequest withFileName(@Nonnull(when = NEVER) String theFileName) {
-        this.filename.set(theFileName);
+        this.filename.set(new GPGeoserverStringQueryParam("filename", theFileName));
         return self();
     }
 
@@ -169,21 +174,12 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
         String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())
                 : baseURI.concat("/workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())));
         URIBuilder uriBuilder = new URIBuilder(path);
-        GPGeoserverParameterConfigure configure = this.configure.get();
-        GPGeoserverDataStoreFileExtension target = this.target.get();
-        String update = this.update.get();
-        String charset = this.charset.get();
-        String filename = this.filename.get();
-        if(configure != null)
-            uriBuilder.addParameter("configure", configure.toString());
-        if(target != null)
-            uriBuilder.addParameter("target", target.toString());
-        if(update != null && !(update.trim().isEmpty()))
-            uriBuilder.addParameter("update", update);
-        if(charset != null && !(charset.trim().isEmpty()))
-            uriBuilder.addParameter("charset", charset);
-        if(filename != null && !(filename.trim().isEmpty()))
-            uriBuilder.addParameter("filename", filename);
+        logger.info("##########{}\n", asList(this.update, this.configure, this.filename, this.target, this.charset));
+
+        fromIterable(asList(this.update, this.configure, this.filename, this.target, this.charset))
+                .filter(Objects::nonNull)
+                .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
+                .subscribe(c -> c.get().addQueryParam(uriBuilder), ex -> logger.error("###################{}\n", ex.getMessage()));
         return uriBuilder.build().toString();
     }
 

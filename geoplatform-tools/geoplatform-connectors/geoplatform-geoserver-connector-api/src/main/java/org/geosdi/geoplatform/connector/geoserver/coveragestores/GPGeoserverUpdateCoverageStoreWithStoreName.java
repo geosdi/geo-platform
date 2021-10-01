@@ -17,7 +17,6 @@ import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRe
 
 import javax.annotation.Nonnull;
 import java.io.File;
-import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Observable.fromIterable;
@@ -167,7 +166,7 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
         URIBuilder uriBuilder = new URIBuilder(path);
         fromIterable(asList(this.update, this.configure, this.filename, this.coverageName))
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
-                .filter(Objects::nonNull)
+                .filter(c -> c.get() != null)
                 .subscribe(c -> c.get().addQueryParam(uriBuilder));
         return uriBuilder.build().toString();
     }

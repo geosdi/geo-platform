@@ -6,7 +6,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryPara
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public enum GPParameterUpdate implements GPGeoserverQueryParam {
+public enum GPParameterUpdate implements GPGeoserverQueryParam<String> {
 
     APPEND,
     OVERWRITE;
@@ -28,6 +28,16 @@ public enum GPParameterUpdate implements GPGeoserverQueryParam {
      */
     @Override
     public String getValue() {
-        return this.name().toLowerCase();
+        return this.getValue();
     }
+
+    /**
+     * @return {@link String}
+     */
+    @Override
+    public String formatValue() {
+        return super.toString().toLowerCase();
+    }
+
+
 }

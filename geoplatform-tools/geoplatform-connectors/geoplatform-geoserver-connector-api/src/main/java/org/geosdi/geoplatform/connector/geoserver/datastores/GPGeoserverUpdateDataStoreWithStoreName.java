@@ -1,11 +1,14 @@
 package org.geosdi.geoplatform.connector.geoserver.datastores;
 
 import com.google.common.io.CharStreams;
+
+import net.jcip.annotations.ThreadSafe;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.FileEntity;
+
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPGeoserverParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.file.GPGeoserverDataStoreFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
@@ -19,7 +22,6 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import javax.annotation.Nonnull;
 import java.io.BufferedReader;
 import java.io.File;
-import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Observable.fromIterable;
@@ -33,32 +35,26 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
+@ThreadSafe
 public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateDataStoreWithStoreNameRequest> implements GeoserverUpdateDataStoreWithStoreNameRequest {
 
-    private final ThreadLocal<String> workspaceName;
-    private final ThreadLocal<String> storeName;
-    private final ThreadLocal<GPGeoserverUploadMethod> methodName;
-    private final ThreadLocal<GPGeoserverDataStoreFileExtension> formatName;
-    private final ThreadLocal<File> file;
-    private final ThreadLocal<GPGeoserverParameterConfigure> configure;
-    private final ThreadLocal<GPGeoserverDataStoreFileExtension> target;
-    private final ThreadLocal<GPParameterUpdate> update;
-    private final ThreadLocal<GPGeoserverStringQueryParam> charset;
-    private final ThreadLocal<GPGeoserverStringQueryParam> filename;
+    private final ThreadLocal<String> workspaceName = withInitial(() -> null);
+    private final ThreadLocal<String> storeName = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverUploadMethod> methodName = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverDataStoreFileExtension> formatName = withInitial(() -> null);
+    private final ThreadLocal<File> file = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverParameterConfigure> configure = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverDataStoreFileExtension> target = withInitial(() -> null);
+    private final ThreadLocal<GPParameterUpdate> update = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverStringQueryParam> charset = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverStringQueryParam> filename = withInitial(() -> null);
 
-
+    /**
+     * @param theServerConnector
+     * @param theJacksonSupport
+     */
     GPGeoserverUpdateDataStoreWithStoreName(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
-        this.workspaceName = withInitial(() -> null);
-        this.storeName = withInitial(() -> null);
-        this.methodName = withInitial(() -> null);
-        this.formatName = withInitial(() -> null);
-        this.file = withInitial(() -> null);
-        this.configure = withInitial(() -> null);
-        this.target = withInitial(() -> null);
-        this.update = withInitial(() -> null);
-        this.charset = withInitial(() -> null);
-        this.filename = withInitial(() -> null);
     }
 
     /**
@@ -178,10 +174,8 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
         String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())
                 : baseURI.concat("/workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())));
         URIBuilder uriBuilder = new URIBuilder(path);
-        logger.info("##########{}\n", asList(this.update, this.configure, this.filename, this.target, this.charset));
-
         fromIterable(asList(this.update, this.configure, this.filename, this.target, this.charset))
-                .filter(Objects::nonNull)
+                .filter(c -> c.get() != null)
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
                 .subscribe(c -> c.get().addQueryParam(uriBuilder), ex -> logger.error("###################{}\n", ex.getMessage()));
         return uriBuilder.build().toString();
@@ -211,12 +205,11 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
      */
     @Override
     protected HttpEntity prepareHttpEntity() throws Exception {
-        String contentType = this.methodName.get().getContentType();
-        checkArgument(contentType != null && !(contentType.trim().isEmpty()), "The Parameter contentType must not be null.");
+        ContentType contentType = this.methodName.get().toContentType();
+        checkArgument(contentType != null, "The Parameter contentType must not be null.");
         File fileToUpload = this.file.get();
         checkArgument(fileToUpload != null, "The Parameter file must not be null.");
-        FileEntity fileEntity = new FileEntity(fileToUpload, ContentType.create(contentType));
-        return fileEntity;
+        return new FileEntity(fileToUpload, contentType);
     }
 
     /**
@@ -224,8 +217,8 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
      */
     @Override
     protected final void addHeaderParams(HttpUriRequest httpMethod) {
-        String contentType = this.methodName.get().getContentType();
-        checkArgument(contentType != null && !(contentType.trim().isEmpty()), "The Parameter contentType must not be null.");
-        httpMethod.addHeader("Content-Type", contentType);
+        ContentType contentType = this.methodName.get().toContentType();
+        checkArgument(contentType != null, "The Parameter contentType must not be null.");
+        httpMethod.addHeader("Content-Type", contentType.getMimeType());
     }
 }

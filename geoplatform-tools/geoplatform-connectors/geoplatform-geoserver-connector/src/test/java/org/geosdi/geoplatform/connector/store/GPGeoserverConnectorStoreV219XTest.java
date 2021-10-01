@@ -191,4 +191,9 @@ public class GPGeoserverConnectorStoreV219XTest extends GPBaseGeoserverConnector
         deleteWorkspaceRequest.withRecurse(TRUE);
         logger.info("###########################DELETE_WORKSPACE_RESPONSE : {}\n", deleteWorkspaceRequest.getResponse());
     }
+
+    @Test
+    public void t_reloadGeoserverCatalogTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_RELOAD_CATALOG_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x.reloadCatalog());
+    }
 }

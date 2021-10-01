@@ -10,15 +10,19 @@ import org.geosdi.geoplatform.connector.geoserver.model.configure.GPGeoserverPar
 import org.geosdi.geoplatform.connector.geoserver.model.file.GPGeoserverCoverageStoreFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
 import org.geosdi.geoplatform.connector.geoserver.model.upload.GPGeoserverUploadMethod;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverStringQueryParam;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverUpdateCoverageStoreWithStoreNameRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
 
 import javax.annotation.Nonnull;
 import java.io.File;
+import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static io.reactivex.rxjava3.core.Observable.fromIterable;
 import static java.lang.ThreadLocal.withInitial;
+import static java.util.Arrays.asList;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -34,9 +38,9 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
     private final ThreadLocal<GPGeoserverCoverageStoreFileExtension> formatName;
     private final ThreadLocal<File> file;
     private final ThreadLocal<GPParameterUpdate> update;
-    private final ThreadLocal<String> configure;
-    private final ThreadLocal<String> filename;
-    private final ThreadLocal<String> coverageName;
+    private final ThreadLocal<GPGeoserverStringQueryParam> configure;
+    private final ThreadLocal<GPGeoserverStringQueryParam> filename;
+    private final ThreadLocal<GPGeoserverStringQueryParam> coverageName;
 
     /**
      * @param theServerConnector
@@ -100,7 +104,7 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
      */
     @Override
     public GeoserverUpdateCoverageStoreWithStoreNameRequest withConfigure(@Nonnull(when = NEVER) GPGeoserverParameterConfigure theParameterConfigure) {
-        this.configure.set(theParameterConfigure.toString());
+        this.configure.set(new GPGeoserverStringQueryParam("configure", theParameterConfigure.toString()));
         return self();
     }
 
@@ -130,7 +134,7 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
      */
     @Override
     public GeoserverUpdateCoverageStoreWithStoreNameRequest withFileName(@Nonnull(when = NEVER) String theFileName) {
-        this.filename.set(theFileName);
+        this.filename.set(new GPGeoserverStringQueryParam("filename", theFileName));
         return self();
     }
 
@@ -140,7 +144,7 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
      */
     @Override
     public GeoserverUpdateCoverageStoreWithStoreNameRequest withCoverageName(@Nonnull(when = NEVER) String theCoverageName) {
-        this.coverageName.set(theCoverageName);
+        this.coverageName.set(new GPGeoserverStringQueryParam("coverageName", theCoverageName));
         return self();
     }
 
@@ -161,18 +165,10 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
         String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())
                 : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())));
         URIBuilder uriBuilder = new URIBuilder(path);
-        GPParameterUpdate update = this.update.get();
-        String configure = this.configure.get();
-        String filename = this.filename.get();
-        String coverageName = this.coverageName.get();
-        if(update != null)
-            uriBuilder.addParameter("update", update.toString());
-        if(configure != null && !(configure.trim().isEmpty()))
-            uriBuilder.addParameter("configure", configure);
-        if(filename != null && !(filename.trim().isEmpty()))
-            uriBuilder.addParameter("filename", filename);
-        if(coverageName != null && !(coverageName.trim().isEmpty()))
-            uriBuilder.addParameter("coverageName", coverageName);
+        fromIterable(asList(this.update, this.configure, this.filename, this.coverageName))
+                .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
+                .filter(Objects::nonNull)
+                .subscribe(c -> c.get().addQueryParam(uriBuilder));
         return uriBuilder.build().toString();
     }
 

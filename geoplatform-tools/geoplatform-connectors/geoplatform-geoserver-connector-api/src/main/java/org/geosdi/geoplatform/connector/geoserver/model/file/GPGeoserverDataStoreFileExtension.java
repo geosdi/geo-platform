@@ -1,10 +1,12 @@
 package org.geosdi.geoplatform.connector.geoserver.model.file;
 
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryParam;
+
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public enum GPGeoserverDataStoreFileExtension {
+public enum GPGeoserverDataStoreFileExtension implements GPGeoserverQueryParam {
 
     SHP,
     PROPERTIES,
@@ -12,6 +14,23 @@ public enum GPGeoserverDataStoreFileExtension {
     SPATIALITE;
 
     public String toString() {
+        return this.name().toLowerCase();
+    }
+
+
+    /**
+     * @return {@link String}
+     */
+    @Override
+    public String getKey() {
+        return "target";
+    }
+
+    /**
+     * @return {@link String}
+     */
+    @Override
+    public String getValue() {
         return this.name().toLowerCase();
     }
 }

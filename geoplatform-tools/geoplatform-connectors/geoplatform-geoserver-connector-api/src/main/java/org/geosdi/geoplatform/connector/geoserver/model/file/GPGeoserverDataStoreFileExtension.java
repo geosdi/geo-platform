@@ -30,7 +30,17 @@ public enum GPGeoserverDataStoreFileExtension implements GPGeoserverQueryParam {
      * @return {@link String}
      */
     @Override
-    public String getValue() {
-        return this.name().toLowerCase();
+    public Object getValue() {
+        return this.getValue();
     }
+
+    /**
+     * @return {@link String}
+     */
+    @Override
+    public String formatValue() {
+        return super.toString().toLowerCase();
+    }
+
+
 }

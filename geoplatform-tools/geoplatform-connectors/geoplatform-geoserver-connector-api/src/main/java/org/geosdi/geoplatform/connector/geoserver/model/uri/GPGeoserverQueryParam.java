@@ -12,7 +12,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GPGeoserverQueryParam extends Serializable {
+public interface GPGeoserverQueryParam<B extends Object> extends Serializable {
 
     /**
      * @return {@link String}
@@ -20,27 +20,29 @@ public interface GPGeoserverQueryParam extends Serializable {
     String getKey();
 
     /**
+     * @return {@link B}
+     */
+    B getValue();
+
+    /**
      * @return {@link String}
      */
-    String getValue();
+    String formatValue();
 
     default  void addQueryParam(URIBuilder uriBuilder) {
         checkArgument(uriBuilder != null , "The Parameter uriBuilder must not be null");
-        System.out.println("##################"+this.getKey());
-        System.out.println(this.getValue());
-        uriBuilder.addParameter(this.getKey(), this.getValue());
+        uriBuilder.addParameter(this.getKey(), this.formatValue());
     }
 
-    abstract class GeoserverQueryParam implements GPGeoserverQueryParam {
+    abstract class GeoserverQueryParam<B extends Object> implements GPGeoserverQueryParam<B> {
 
         private static final long serialVersionUID = 6543849896113392890L;
         //
         private final String key;
-        private final String value;
+        private final B value;
 
-        public GeoserverQueryParam(@Nonnull(when = NEVER) String theKey, @Nonnull(when = NEVER) String theValue) {
+        public GeoserverQueryParam(@Nonnull(when = NEVER) String theKey, @Nonnull(when = NEVER) B theValue) {
             checkArgument(theKey != null && !(theKey.trim().isEmpty()), "The Parameter key must not be null");
-            checkArgument(theValue != null && !(theValue.trim().isEmpty()), "The Parameter value must not be null");
             this.key = theKey;
             this.value = theValue;
         }
@@ -57,7 +59,7 @@ public interface GPGeoserverQueryParam extends Serializable {
          * @return {@link String}
          */
         @Override
-        public String getValue() {
+        public B getValue() {
             return value;
         }
     }

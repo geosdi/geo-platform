@@ -9,15 +9,15 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverStringQueryParam extends GPGeoserverQueryParam.GeoserverQueryParam<String> {
+public class GPGeoserverBooleanQueryParam extends GPGeoserverQueryParam.GeoserverQueryParam<Boolean> {
 
-    public GPGeoserverStringQueryParam(@Nonnull(when = NEVER) String theKey, @Nonnull(when = NEVER) String theValue) {
+    public GPGeoserverBooleanQueryParam(@Nonnull(when = NEVER) String theKey, @Nonnull(when = NEVER) Boolean theValue) {
         super(theKey, theValue);
-        checkArgument(theValue != null && !(theValue.trim().isEmpty()), "The Parameter value must not be null");
+        checkArgument(theValue != null, "The Parameter value must not be null");
     }
 
     @Override
     public String formatValue() {
-        return this.getValue();
+        return this.getValue().toString();
     }
 }

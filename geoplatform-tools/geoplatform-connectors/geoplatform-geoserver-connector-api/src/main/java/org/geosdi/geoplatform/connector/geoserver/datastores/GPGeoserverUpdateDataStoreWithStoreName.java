@@ -20,7 +20,6 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import javax.annotation.Nonnull;
 import java.io.BufferedReader;
 import java.io.File;
-import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Observable.fromIterable;
@@ -40,11 +39,11 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
     private final ThreadLocal<String> workspaceName = withInitial(() -> null);
     private final ThreadLocal<String> storeName = withInitial(() -> null);
     private final ThreadLocal<GPGeoserverUploadMethod> methodName = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverStringQueryParam> formatName = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverDataStoreFileExtension> formatName = withInitial(() -> null);
     private final ThreadLocal<File> file = withInitial(() -> null);
     private final ThreadLocal<GPGeoserverParameterConfigure> configure = withInitial(() -> null);
     private final ThreadLocal<GPGeoserverDataStoreFileExtension> target = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverStringQueryParam> update = withInitial(() -> null);
+    private final ThreadLocal<GPParameterUpdate> update = withInitial(() -> null);
     private final ThreadLocal<GPGeoserverStringQueryParam> charset = withInitial(() -> null);
     private final ThreadLocal<GPGeoserverStringQueryParam> filename = withInitial(() -> null);
 
@@ -173,10 +172,8 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
         String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())
                 : baseURI.concat("/workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())));
         URIBuilder uriBuilder = new URIBuilder(path);
-        logger.info("##########{}\n", asList(this.update, this.configure, this.filename, this.target, this.charset));
-
         fromIterable(asList(this.update, this.configure, this.filename, this.target, this.charset))
-                .filter(Objects::nonNull)
+                .filter(c -> c.get() != null)
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
                 .subscribe(c -> c.get().addQueryParam(uriBuilder), ex -> logger.error("###################{}\n", ex.getMessage()));
         return uriBuilder.build().toString();

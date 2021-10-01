@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.connector.geoserver;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.layergroups.GPGeoserverLayerGroupsConnector;
+import org.geosdi.geoplatform.connector.geoserver.request.reload.GeoserverReloadCatalogRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.reset.GeoserverResetRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.running.GeoserverRestRunningRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -113,6 +115,34 @@ public class GPGeoserverConnector extends GPGeoserverLayerGroupsConnector implem
             case V219x:
             case V218x:
                 return new GPGeoserverRestRunningRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverReloadCatalogRequest}
+     */
+    @Override
+    public GeoserverReloadCatalogRequest reloadGeoserverCatalogRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverReloadCatalogRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverResetRequest}
+     */
+    @Override
+    public GeoserverResetRequest resetGeoserverRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverResetRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

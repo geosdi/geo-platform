@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.connector.store;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
+import org.geosdi.geoplatform.connector.geoserver.request.reload.GeoserverReloadCatalogRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.reset.GeoserverResetRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.running.GeoserverRestRunningRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -45,6 +47,8 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import java.net.URL;
 
+import static java.lang.Boolean.FALSE;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -52,6 +56,8 @@ import java.net.URL;
 public class GPGeoserverConnectorStore extends GeoserverLayerGroupsConnectorStore implements IGPGeoserverConnectorStore {
 
     private final GeoserverRestRunningRequest restRunningRequest;
+    private final GeoserverReloadCatalogRequest reloadCatalogRequest;
+    private final GeoserverResetRequest resetRequest;
 
     /**
      * @param server
@@ -73,6 +79,8 @@ public class GPGeoserverConnectorStore extends GeoserverLayerGroupsConnectorStor
     GPGeoserverConnectorStore(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(new GPGeoserverConnector(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion));
         this.restRunningRequest = this.server.createGeoserverRestRunningRequest();
+        this.reloadCatalogRequest = this.server.reloadGeoserverCatalogRequest();
+        this.resetRequest = this.server.resetGeoserverRequest();
     }
 
     /**
@@ -81,6 +89,34 @@ public class GPGeoserverConnectorStore extends GeoserverLayerGroupsConnectorStor
     @Override
     public Boolean isGeoserverRestRunning() {
        return this.restRunningRequest.isUp();
+    }
+
+    /**
+     * <p>Reload the configuration from disk, and reset all caches.</p>
+     *
+     * @return {@link Boolean}
+     */
+    @Override
+    public Boolean reloadCatalog() {
+        try {
+            return this.reloadCatalogRequest.getResponse();
+        } catch (Exception ex) {
+            return FALSE;
+        }
+    }
+
+    /**
+     * <p>Reset all store, raster, and schema caches.</p>
+     *
+     * @return {@link Boolean}
+     */
+    @Override
+    public Boolean reset() {
+        try {
+            return this.resetRequest.getResponse();
+        } catch (Exception ex) {
+            return FALSE;
+        }
     }
 
     /**

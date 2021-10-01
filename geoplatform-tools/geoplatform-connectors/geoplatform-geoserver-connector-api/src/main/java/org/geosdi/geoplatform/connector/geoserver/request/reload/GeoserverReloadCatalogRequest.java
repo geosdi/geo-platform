@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,38 +32,19 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store;
+package org.geosdi.geoplatform.connector.geoserver.request.reload;
 
-import org.geosdi.geoplatform.connector.GeoserverVersion;
-import org.geosdi.geoplatform.connector.store.layergroups.GPGeoserverLayerGroupsConnectorStore;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 /**
+ * <p>
+ *     Reloads the GeoServer catalog and configuration from disk. This operation is used in cases where an external tool
+ *     has modified the on-disk configuration. This operation will also force GeoServer to drop any internal caches and
+ *     reconnect to all data stores.
+ * </p>
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverConnectorStore extends GPGeoserverLayerGroupsConnectorStore {
-
-    /**
-     * @return {@link Boolean}
-     */
-    Boolean isGeoserverRestRunning();
-
-    /**
-     * <p>Reload the configuration from disk, and reset all caches.</p>
-     *
-     * @return {@link Boolean}
-     */
-    Boolean reloadCatalog();
-
-    /**
-     * <p>Reset all store, raster, and schema caches.</p>
-     *
-     * @return {@link Boolean}
-     */
-    Boolean reset();
-
-    /**
-     * @return {@link GeoserverVersion}
-     */
-    GeoserverVersion getVersion();
+public interface GeoserverReloadCatalogRequest extends GPJsonConnectorRequest<Boolean, GeoserverReloadCatalogRequest> {
 }

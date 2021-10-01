@@ -1,26 +1,39 @@
 package org.geosdi.geoplatform.connector.geoserver.model.upload;
 
+import org.apache.hc.core5.http.ContentType;
+
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
+import static org.apache.hc.core5.http.ContentType.create;
+
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public enum GPGeoserverUploadMethod {
+public enum GPGeoserverUploadMethod implements GeoserverUploadMethod {
 
-    FILE("application/zip"),
-    URL("text/plain"),
-    EXTERNAL("text/plain");
+    FILE(create("application/zip")),
+    URL(create("text/plain")),
+    EXTERNAL(URL.contentType);
 
-    private final String contentType;
+    private final ContentType contentType;
 
-    GPGeoserverUploadMethod(String contentType) {
-        this.contentType = contentType;
+    /**
+     * @param theContentType
+     */
+    GPGeoserverUploadMethod(@Nonnull(when = NEVER) ContentType theContentType) {
+        checkArgument((theContentType != null), "The Parameter contentType must not be null.");
+        this.contentType = theContentType;
     }
 
     /**
-     * @return {@link String}
+     * @return {@link ContentType}
      */
-    public String getContentType() {
-        return contentType;
+    @Override
+    public ContentType toContentType() {
+        return this.contentType;
     }
 
     /**

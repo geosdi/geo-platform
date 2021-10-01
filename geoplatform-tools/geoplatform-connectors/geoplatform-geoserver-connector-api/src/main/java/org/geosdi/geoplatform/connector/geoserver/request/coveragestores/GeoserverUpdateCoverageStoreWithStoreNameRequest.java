@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.coveragestores;
 
-import org.apache.hc.core5.http.ContentType;
 import org.geosdi.geoplatform.connector.geoserver.coveragestores.GPCoverageResponse;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPGeoserverParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.file.IGPFileExtension;

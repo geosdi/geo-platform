@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,38 +32,71 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store;
+package org.geosdi.geoplatform.connector.geoserver;
 
-import org.geosdi.geoplatform.connector.GeoserverVersion;
-import org.geosdi.geoplatform.connector.store.layergroups.GPGeoserverLayerGroupsConnectorStore;
+import com.google.common.io.CharStreams;
+import net.jcip.annotations.ThreadSafe;
+import org.apache.hc.core5.http.HttpEntity;
+import org.geosdi.geoplatform.connector.geoserver.request.reset.GeoserverResetRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+
+import javax.annotation.Nonnull;
+import java.io.BufferedReader;
+
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverConnectorStore extends GPGeoserverLayerGroupsConnectorStore {
+@ThreadSafe
+class GPGeoserverResetRequest extends GPJsonPostConnectorRequest<Boolean, GeoserverResetRequest> implements GeoserverResetRequest {
 
     /**
+     * @param theServerConnector
+     * @param theJacksonSupport
+     */
+    GPGeoserverResetRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(theServerConnector, theJacksonSupport);
+    }
+
+    /**
+     * @return {@link String}
+     */
+    @Override
+    protected String createUriPath() throws Exception {
+        String baseURI = this.serverURI.toString();
+        return ((baseURI.endsWith("/") ? baseURI.concat("reset") : baseURI.concat("/reset")));
+    }
+
+    /**
+     * @param reader
      * @return {@link Boolean}
+     * @throws Exception
      */
-    Boolean isGeoserverRestRunning();
+    @Override
+    protected Boolean readInternal(BufferedReader reader) throws Exception {
+        String value = CharStreams.toString(reader);
+        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
+    }
 
     /**
-     * <p>Reload the configuration from disk, and reset all caches.</p>
-     *
-     * @return {@link Boolean}
+     * @return {@link Class<Boolean>}
      */
-    Boolean reloadCatalog();
+    @Override
+    protected Class<Boolean> forClass() {
+        return Boolean.class;
+    }
 
     /**
-     * <p>Reset all store, raster, and schema caches.</p>
-     *
-     * @return {@link Boolean}
+     * @return {@link HttpEntity}
      */
-    Boolean reset();
-
-    /**
-     * @return {@link GeoserverVersion}
-     */
-    GeoserverVersion getVersion();
+    @Override
+    protected HttpEntity prepareHttpEntity() throws Exception {
+        return null;
+    }
 }

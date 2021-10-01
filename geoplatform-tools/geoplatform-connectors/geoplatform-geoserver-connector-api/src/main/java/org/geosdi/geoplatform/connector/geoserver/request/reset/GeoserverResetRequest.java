@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,38 +32,20 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store;
+package org.geosdi.geoplatform.connector.geoserver.request.reset;
 
-import org.geosdi.geoplatform.connector.GeoserverVersion;
-import org.geosdi.geoplatform.connector.store.layergroups.GPGeoserverLayerGroupsConnectorStore;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 /**
+ * <p>
+ *     Resets all store, raster, and schema caches. This operation is used to force GeoServer to drop all caches and
+ *     store connections and reconnect to each of them the next time they are needed by a request.
+ *     This is useful in case the stores themselves cache some information about the data structures they manage
+ *     that may have changed in the meantime.
+ * </p>
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverConnectorStore extends GPGeoserverLayerGroupsConnectorStore {
-
-    /**
-     * @return {@link Boolean}
-     */
-    Boolean isGeoserverRestRunning();
-
-    /**
-     * <p>Reload the configuration from disk, and reset all caches.</p>
-     *
-     * @return {@link Boolean}
-     */
-    Boolean reloadCatalog();
-
-    /**
-     * <p>Reset all store, raster, and schema caches.</p>
-     *
-     * @return {@link Boolean}
-     */
-    Boolean reset();
-
-    /**
-     * @return {@link GeoserverVersion}
-     */
-    GeoserverVersion getVersion();
+public interface GeoserverResetRequest extends GPJsonConnectorRequest<Boolean, GeoserverResetRequest> {
 }

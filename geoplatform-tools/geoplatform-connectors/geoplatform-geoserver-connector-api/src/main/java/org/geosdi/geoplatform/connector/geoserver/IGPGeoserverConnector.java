@@ -35,6 +35,8 @@
 package org.geosdi.geoplatform.connector.geoserver;
 
 import org.geosdi.geoplatform.connector.geoserver.layergroups.IGPGeoserverLayerGroupsConnector;
+import org.geosdi.geoplatform.connector.geoserver.request.reload.GeoserverReloadCatalogRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.reset.GeoserverResetRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.running.GeoserverRestRunningRequest;
 
 /**
@@ -47,4 +49,14 @@ public interface IGPGeoserverConnector extends IGPGeoserverLayerGroupsConnector 
      * @return {@link GeoserverRestRunningRequest}
      */
     GeoserverRestRunningRequest createGeoserverRestRunningRequest();
+
+    /**
+     * @return {@link GeoserverReloadCatalogRequest}
+     */
+    GeoserverReloadCatalogRequest reloadGeoserverCatalogRequest();
+
+    /**
+     * @return {@link GeoserverResetRequest}
+     */
+    GeoserverResetRequest resetGeoserverRequest();
 }

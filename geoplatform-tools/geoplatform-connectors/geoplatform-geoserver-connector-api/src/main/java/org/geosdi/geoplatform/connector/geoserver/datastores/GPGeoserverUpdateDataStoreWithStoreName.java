@@ -1,11 +1,14 @@
 package org.geosdi.geoplatform.connector.geoserver.datastores;
 
 import com.google.common.io.CharStreams;
+
+import net.jcip.annotations.ThreadSafe;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.FileEntity;
+
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPGeoserverParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.file.GPGeoserverDataStoreFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.file.IGPFileExtension;
@@ -29,32 +32,26 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
+@ThreadSafe
 public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateDataStoreWithStoreNameRequest> implements GeoserverUpdateDataStoreWithStoreNameRequest {
 
-    private final ThreadLocal<String> workspaceName;
-    private final ThreadLocal<String> storeName;
-    private final ThreadLocal<GPGeoserverUploadMethod> methodName;
-    private final ThreadLocal<IGPFileExtension> formatName;
-    private final ThreadLocal<File> file;
-    private final ThreadLocal<GPGeoserverParameterConfigure> configure;
-    private final ThreadLocal<GPGeoserverDataStoreFileExtension> target;
-    private final ThreadLocal<String> update;
-    private final ThreadLocal<String> charset;
-    private final ThreadLocal<String> filename;
+    private final ThreadLocal<String> workspaceName = withInitial(() -> null);
+    private final ThreadLocal<String> storeName = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverUploadMethod> methodName = withInitial(() -> null);
+    private final ThreadLocal<IGPFileExtension> formatName = withInitial(() -> null);
+    private final ThreadLocal<File> file = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverParameterConfigure> configure = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverDataStoreFileExtension> target = withInitial(() -> null);
+    private final ThreadLocal<String> update = withInitial(() -> null);
+    private final ThreadLocal<String> charset = withInitial(() -> null);
+    private final ThreadLocal<String> filename = withInitial(() -> null);
 
-
+    /**
+     * @param theServerConnector
+     * @param theJacksonSupport
+     */
     GPGeoserverUpdateDataStoreWithStoreName(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
-        this.workspaceName = withInitial(() -> null);
-        this.storeName = withInitial(() -> null);
-        this.methodName = withInitial(() -> null);
-        this.formatName = withInitial(() -> null);
-        this.file = withInitial(() -> null);
-        this.configure = withInitial(() -> null);
-        this.target = withInitial(() -> null);
-        this.update = withInitial(() -> null);
-        this.charset = withInitial(() -> null);
-        this.filename = withInitial(() -> null);
     }
 
     /**
@@ -216,12 +213,11 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
      */
     @Override
     protected HttpEntity prepareHttpEntity() throws Exception {
-        String contentType = this.methodName.get().getContentType();
-        checkArgument(contentType != null && !(contentType.trim().isEmpty()), "The Parameter contentType must not be null.");
+        ContentType contentType = this.methodName.get().toContentType();
+        checkArgument(contentType != null, "The Parameter contentType must not be null.");
         File fileToUpload = this.file.get();
         checkArgument(fileToUpload != null, "The Parameter file must not be null.");
-        FileEntity fileEntity = new FileEntity(fileToUpload, ContentType.create(contentType));
-        return fileEntity;
+        return new FileEntity(fileToUpload, contentType);
     }
 
     /**
@@ -229,8 +225,8 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
      */
     @Override
     protected final void addHeaderParams(HttpUriRequest httpMethod) {
-        String contentType = this.methodName.get().getContentType();
-        checkArgument(contentType != null && !(contentType.trim().isEmpty()), "The Parameter contentType must not be null.");
+        ContentType contentType = this.methodName.get().toContentType();
+        checkArgument(contentType != null, "The Parameter contentType must not be null.");
         httpMethod.addHeader("Content-Type", contentType);
     }
 }

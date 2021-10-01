@@ -227,6 +227,6 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
     protected final void addHeaderParams(HttpUriRequest httpMethod) {
         ContentType contentType = this.methodName.get().toContentType();
         checkArgument(contentType != null, "The Parameter contentType must not be null.");
-        httpMethod.addHeader("Content-Type", contentType);
+        httpMethod.addHeader("Content-Type", contentType.getMimeType());
     }
 }

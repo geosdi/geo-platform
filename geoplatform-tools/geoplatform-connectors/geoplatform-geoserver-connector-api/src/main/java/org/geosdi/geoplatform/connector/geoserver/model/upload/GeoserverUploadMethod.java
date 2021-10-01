@@ -34,7 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.upload;
 
-import org.apache.hc.core5.http.ContentType;
+import org.apache.http.entity.ContentType;
 
 import java.io.Serializable;
 

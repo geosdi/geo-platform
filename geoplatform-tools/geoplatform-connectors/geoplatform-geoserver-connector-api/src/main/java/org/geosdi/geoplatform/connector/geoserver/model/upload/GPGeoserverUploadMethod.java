@@ -1,12 +1,12 @@
 package org.geosdi.geoplatform.connector.geoserver.model.upload;
 
-import org.apache.hc.core5.http.ContentType;
+import org.apache.http.entity.ContentType;
 
 import javax.annotation.Nonnull;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
-import static org.apache.hc.core5.http.ContentType.create;
+import static org.apache.http.entity.ContentType.create;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group

@@ -1,6 +1,10 @@
 package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 
 import com.google.common.io.CharStreams;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.apache.hc.core5.net.URIBuilder;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverStringQueryParam;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverUpdateCoverageRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
@@ -9,7 +13,9 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 import java.io.BufferedReader;
+import java.util.Arrays;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Observable.fromIterable;
@@ -18,6 +24,7 @@ import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static java.util.Arrays.asList;
 import static javax.annotation.meta.When.NEVER;
+import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -28,7 +35,7 @@ public class GPGeoserverUpdateCoverageRequest extends GPJsonPutConnectorRequest<
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> coverageStoreName;
     private final ThreadLocal<String> coverageName;
-    private final ThreadLocal<String[]> calculate;
+    private final ThreadLocal<GPGeoserverStringQueryParam> calculate;
     private final ThreadLocal<GPGeoserverCoverageInfo> coverageBody;
 
     public GPGeoserverUpdateCoverageRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
@@ -87,7 +94,7 @@ public class GPGeoserverUpdateCoverageRequest extends GPJsonPutConnectorRequest<
      */
     @Override
     public GeoserverUpdateCoverageRequest withCalculate(String[] theCalculate) {
-        this.calculate.set(theCalculate);
+        this.calculate.set(new GPGeoserverStringQueryParam("calculate", Arrays.stream(theCalculate).collect(Collectors.joining(","))));
         return self();
     }
 

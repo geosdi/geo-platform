@@ -9,7 +9,6 @@ import org.apache.hc.core5.http.io.entity.FileEntity;
 import org.apache.hc.core5.net.URIBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPGeoserverParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.file.GPGeoserverDataStoreFileExtension;
-import org.geosdi.geoplatform.connector.geoserver.model.file.IGPFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
 import org.geosdi.geoplatform.connector.geoserver.model.upload.GPGeoserverUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverStringQueryParam;
@@ -41,13 +40,13 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
     private final ThreadLocal<String> workspaceName = withInitial(() -> null);
     private final ThreadLocal<String> storeName = withInitial(() -> null);
     private final ThreadLocal<GPGeoserverUploadMethod> methodName = withInitial(() -> null);
-    private final ThreadLocal<IGPFileExtension> formatName = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverStringQueryParam> formatName = withInitial(() -> null);
     private final ThreadLocal<File> file = withInitial(() -> null);
     private final ThreadLocal<GPGeoserverParameterConfigure> configure = withInitial(() -> null);
     private final ThreadLocal<GPGeoserverDataStoreFileExtension> target = withInitial(() -> null);
-    private final ThreadLocal<String> update = withInitial(() -> null);
-    private final ThreadLocal<String> charset = withInitial(() -> null);
-    private final ThreadLocal<String> filename = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverStringQueryParam> update = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverStringQueryParam> charset = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverStringQueryParam> filename = withInitial(() -> null);
 
     /**
      * @param theServerConnector
@@ -93,7 +92,7 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
      */
     @Override
     public GeoserverUpdateDataStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) GPGeoserverDataStoreFileExtension theFormat) {
-        this.formatName.set(theFormat);
+        this.charset.set(new GPGeoserverStringQueryParam("format", theFormat.getValue()));
         return self();
     }
 
@@ -123,7 +122,7 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
      */
     @Override
     public GeoserverUpdateDataStoreWithStoreNameRequest withUpdate(@Nonnull(when = NEVER) GPParameterUpdate theUpdate) {
-        this.update.set(theUpdate);
+        this.charset.set(new GPGeoserverStringQueryParam("update", theUpdate.getValue()));
         return self();
     }
 
@@ -168,7 +167,7 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
         checkArgument((store != null) && !(store.trim().isEmpty()), "The Parameter store must not be null or an empty string.");
         GPGeoserverUploadMethod method = this.methodName.get();
         checkArgument((method != null), "The Parameter method must not be null or an empty string.");
-        IGPFileExtension format = this.formatName.get();
+        GPGeoserverStringQueryParam format = this.formatName.get();
         checkArgument((format != null), "The Parameter format must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
         String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())

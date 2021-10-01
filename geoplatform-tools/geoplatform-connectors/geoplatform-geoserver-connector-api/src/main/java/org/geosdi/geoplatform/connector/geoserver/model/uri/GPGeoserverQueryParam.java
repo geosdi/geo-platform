@@ -1,6 +1,6 @@
 package org.geosdi.geoplatform.connector.geoserver.model.uri;
 
-import org.apache.http.client.utils.URIBuilder;
+import org.apache.hc.core5.net.URIBuilder;
 
 import javax.annotation.Nonnull;
 import java.io.Serializable;

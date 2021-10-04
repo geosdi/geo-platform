@@ -59,6 +59,6 @@ public class GPPublisherSoapServiceTest extends PublisherServiceTest {
 
     @Test
     public void a_loadStyleProdTest() throws Exception {
-        logger.info("\n{}\n", publisherService.loadStyle("http://150.145.141.92/geoserver", "point"));
+        logger.info("\n{}\n", publisherService.loadStyle("http://150.145.141.180/geoserver", "point"));
     }
 }

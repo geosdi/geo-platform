@@ -1,28 +1,32 @@
 package org.geosdi.geoplatform.connector.geoserver.coveragestores;
 
+import io.reactivex.rxjava3.functions.Consumer;
 import net.jcip.annotations.ThreadSafe;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.entity.ContentType;
 import org.apache.http.entity.FileEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPGeoserverParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.file.GPGeoserverCoverageStoreFileExtension;
+import org.geosdi.geoplatform.connector.geoserver.model.file.IGPFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
 import org.geosdi.geoplatform.connector.geoserver.model.upload.GPGeoserverUploadMethod;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryParam;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverStringQueryParam;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GeoserverRXQueryParamConsumer;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverUpdateCoverageStoreWithStoreNameRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
 
 import javax.annotation.Nonnull;
 import java.io.File;
+import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static io.reactivex.rxjava3.core.Observable.fromIterable;
+import static io.reactivex.rxjava3.core.Observable.fromArray;
 import static java.lang.ThreadLocal.withInitial;
-import static java.util.Arrays.asList;
 import static javax.annotation.meta.When.NEVER;
+import static org.apache.http.entity.ContentType.create;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -31,30 +35,21 @@ import static javax.annotation.meta.When.NEVER;
 @ThreadSafe
 public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnectorRequest<GPCoverageResponse, GeoserverUpdateCoverageStoreWithStoreNameRequest> implements GeoserverUpdateCoverageStoreWithStoreNameRequest {
 
-    private final ThreadLocal<String> workspaceName;
-    private final ThreadLocal<String> storeName;
-    private final ThreadLocal<GPGeoserverUploadMethod> methodName;
-    private final ThreadLocal<GPGeoserverCoverageStoreFileExtension> formatName;
-    private final ThreadLocal<File> file;
-    private final ThreadLocal<GPParameterUpdate> update;
-    private final ThreadLocal<GPGeoserverStringQueryParam> configure;
-    private final ThreadLocal<GPGeoserverStringQueryParam> filename;
-    private final ThreadLocal<GPGeoserverStringQueryParam> coverageName;
+    private final ThreadLocal<String> workspaceName = withInitial(() -> null);
+    private final ThreadLocal<String> storeName = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverUploadMethod> methodName = withInitial(() -> null);
+    private final ThreadLocal<IGPFileExtension> formatName = withInitial(() -> null);
+    private final ThreadLocal<File> file = withInitial(() -> null);
+    private final ThreadLocal<GPParameterUpdate> update = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverStringQueryParam> configure = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverStringQueryParam> filename = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverStringQueryParam> coverageName = withInitial(() -> null);
 
     /**
      * @param theServerConnector
      */
     GPGeoserverUpdateCoverageStoreWithStoreName(@Nonnull(when = NEVER) GPServerConnector theServerConnector) {
         super(theServerConnector, JACKSON_JAXB_XML_SUPPORT);
-        this.workspaceName = withInitial(() -> null);
-        this.storeName = withInitial(() -> null);
-        this.methodName = withInitial(() -> null);
-        this.formatName = withInitial(() -> null);
-        this.file = withInitial(() -> null);
-        this.update = withInitial(() -> null);
-        this.configure = withInitial(() -> null);
-        this.filename = withInitial(() -> null);
-        this.coverageName = withInitial(() -> null);
     }
 
     /**
@@ -158,21 +153,22 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
         checkArgument((store != null) && !(store.trim().isEmpty()), "The Parameter store must not be null or an empty string.");
         GPGeoserverUploadMethod method = this.methodName.get();
         checkArgument((method != null), "The Parameter method must not be null or an empty string.");
-        GPGeoserverCoverageStoreFileExtension format = this.formatName.get();
+        IGPFileExtension format = this.formatName.get();
         checkArgument((format != null), "The Parameter format must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
         String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())
                 : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())));
         URIBuilder uriBuilder = new URIBuilder(path);
-        fromIterable(asList(this.update, this.configure, this.filename, this.coverageName))
+        Consumer<GPGeoserverQueryParam> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
+        fromArray(this.update.get(), this.configure.get(), this.filename.get(), this.coverageName.get())
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
-                .filter(c -> c.get() != null)
-                .subscribe(c -> c.get().addQueryParam(uriBuilder));
+                .filter(Objects::nonNull)
+                .subscribe(consumer, Throwable::printStackTrace);
         return uriBuilder.build().toString();
     }
 
     /**
-     * @return {@link Class<Boolean>}
+     * @return {@link Class<GPCoverageResponse>}
      */
     @Override
     protected Class<GPCoverageResponse> forClass() {
@@ -185,8 +181,8 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
     @Override
     protected HttpEntity prepareHttpEntity() throws Exception {
         File fileToUpload = this.file.get();
-        checkArgument(fileToUpload != null, "The Parameter file must not be null.");
-        FileEntity builder = new FileEntity(fileToUpload, ContentType.create("image/geotiff"));
+        checkArgument((fileToUpload != null) && (fileToUpload.exists() && !(fileToUpload.isDirectory())), "The Parameter file must not be null, must exist and must not be a directory.");
+        FileEntity builder = new FileEntity(fileToUpload, create("image/geotiff"));
         return builder;
     }
 

@@ -28,7 +28,7 @@ public enum GPParameterUpdate implements GPGeoserverQueryParam<String> {
      */
     @Override
     public String getValue() {
-        return this.getValue();
+        return this.name();
     }
 
     /**
@@ -36,8 +36,6 @@ public enum GPParameterUpdate implements GPGeoserverQueryParam<String> {
      */
     @Override
     public String formatValue() {
-        return super.toString().toLowerCase();
+        return this.toString();
     }
-
-
 }

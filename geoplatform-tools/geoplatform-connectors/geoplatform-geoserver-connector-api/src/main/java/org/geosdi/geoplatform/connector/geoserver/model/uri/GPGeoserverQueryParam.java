@@ -29,7 +29,10 @@ public interface GPGeoserverQueryParam<B extends Object> extends Serializable {
      */
     String formatValue();
 
-    default  void addQueryParam(URIBuilder uriBuilder) {
+    /**
+     * @param uriBuilder
+     */
+    default void addQueryParam(URIBuilder uriBuilder) {
         checkArgument(uriBuilder != null , "The Parameter uriBuilder must not be null");
         uriBuilder.addParameter(this.getKey(), this.formatValue());
     }
@@ -41,7 +44,11 @@ public interface GPGeoserverQueryParam<B extends Object> extends Serializable {
         private final String key;
         private final B value;
 
-        public GeoserverQueryParam(@Nonnull(when = NEVER) String theKey, @Nonnull(when = NEVER) B theValue) {
+        /**
+         * @param theKey
+         * @param theValue
+         */
+        protected GeoserverQueryParam(@Nonnull(when = NEVER) String theKey, @Nonnull(when = NEVER) B theValue) {
             checkArgument(theKey != null && !(theKey.trim().isEmpty()), "The Parameter key must not be null");
             this.key = theKey;
             this.value = theValue;

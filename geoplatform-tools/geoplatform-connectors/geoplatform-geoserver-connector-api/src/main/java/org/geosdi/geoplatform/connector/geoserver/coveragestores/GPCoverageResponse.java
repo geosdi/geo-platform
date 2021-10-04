@@ -1,12 +1,10 @@
 package org.geosdi.geoplatform.connector.geoserver.coveragestores;
 
 import lombok.Getter;
-import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
-import org.jvnet.jaxb2_commons.lang.ToString2;
-import org.jvnet.jaxb2_commons.lang.ToStringStrategy2;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import lombok.ToString;
 
 import javax.xml.bind.annotation.*;
+import java.io.Serializable;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -16,22 +14,25 @@ import javax.xml.bind.annotation.*;
 @XmlType(name = "", propOrder = {"name", "type", "enabled", "__default", "dateCreated", "dateModified", "url"})
 @XmlRootElement(name = "coverageStore")
 @Getter
-public class GPCoverageResponse implements ToString2 {
+@ToString
+public class GPCoverageResponse implements Serializable {
 
+    private static final long serialVersionUID = -4161438867237643692L;
+    //
     @XmlElement(name = "name")
-    protected String name;
+    private String name;
     @XmlElement(name = "type")
-    protected String type;
+    private String type;
     @XmlElement(name = "enabled")
-    protected Boolean enabled;
+    private Boolean enabled;
     @XmlElement(name = "__default")
-    protected String __default;
+    private String __default;
     @XmlElement(name = "dateCreated")
-    protected String dateCreated;
+    private String dateCreated;
     @XmlElement(name = "dateModified")
-    protected String dateModified;
+    private String dateModified;
     @XmlElement(name = "url")
-    protected String url;
+    private String url;
 
     public boolean isSetName() {
         return (this.name != null);
@@ -59,58 +60,5 @@ public class GPCoverageResponse implements ToString2 {
 
     public boolean isSetUrl() {
         return (this.url != null);
-    }
-
-    public String toString() {
-        final ToStringStrategy2 strategy = JAXBToStringStrategy.INSTANCE2;
-        final StringBuilder buffer = new StringBuilder();
-        append(null, buffer, strategy);
-        return buffer.toString();
-    }
-
-    public StringBuilder append(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
-        strategy.appendStart(locator, this, buffer);
-        appendFields(locator, buffer, strategy);
-        strategy.appendEnd(locator, this, buffer);
-        return buffer;
-    }
-
-    public StringBuilder appendFields(ObjectLocator locator, StringBuilder buffer, ToStringStrategy2 strategy) {
-        {
-            String theName;
-            theName = this.getName();
-            strategy.appendField(locator, this, "name", buffer, theName, this.isSetName());
-        }
-        {
-            String theType;
-            theType = this.getType();
-            strategy.appendField(locator, this, "type", buffer, theType, this.isSetType());
-        }
-        {
-            Boolean theEnabled;
-            theEnabled = this.getEnabled();
-            strategy.appendField(locator, this, "enabled", buffer, theEnabled, this.isSetEnabled());
-        }
-        {
-            String theDefault;
-            theDefault = this.get__default();
-            strategy.appendField(locator, this, "__default", buffer, theDefault, this.isSetDefault());
-        }
-        {
-            String theDateCreated;
-            theDateCreated = this.getDateCreated();
-            strategy.appendField(locator, this, "dateCreated", buffer, theDateCreated, this.isSetDateCreated());
-        }
-        {
-            String theDateModified;
-            theDateModified = this.getDateModified();
-            strategy.appendField(locator, this, "dateModified", buffer, theDateModified, this.isSetDateModified());
-        }
-        {
-            String theUrl;
-            theUrl = this.getUrl();
-            strategy.appendField(locator, this, "url", buffer, theUrl, this.isSetUrl());
-        }
-        return buffer;
     }
 }

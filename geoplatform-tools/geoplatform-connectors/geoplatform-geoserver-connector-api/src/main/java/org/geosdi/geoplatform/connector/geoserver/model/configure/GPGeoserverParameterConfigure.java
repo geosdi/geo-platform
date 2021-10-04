@@ -43,7 +43,4 @@ public enum GPGeoserverParameterConfigure implements GPGeoserverQueryParam<Strin
     public String formatValue() {
         return this.getValue();
     }
-
-
-
 }

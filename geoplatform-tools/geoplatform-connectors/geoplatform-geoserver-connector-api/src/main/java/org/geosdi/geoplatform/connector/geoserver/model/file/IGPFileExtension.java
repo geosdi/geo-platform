@@ -5,6 +5,4 @@ package org.geosdi.geoplatform.connector.geoserver.model.file;
  * @email vito.salvia@gmail.com
  */
 public interface IGPFileExtension {
-
-
 }

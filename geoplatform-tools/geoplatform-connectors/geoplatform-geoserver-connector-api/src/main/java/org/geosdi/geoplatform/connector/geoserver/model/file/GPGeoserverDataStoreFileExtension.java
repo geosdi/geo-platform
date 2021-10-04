@@ -17,7 +17,6 @@ public enum GPGeoserverDataStoreFileExtension implements GPGeoserverQueryParam {
         return this.name().toLowerCase();
     }
 
-
     /**
      * @return {@link String}
      */
@@ -39,8 +38,6 @@ public enum GPGeoserverDataStoreFileExtension implements GPGeoserverQueryParam {
      */
     @Override
     public String formatValue() {
-        return super.toString().toLowerCase();
+        return this.toString();
     }
-
-
 }

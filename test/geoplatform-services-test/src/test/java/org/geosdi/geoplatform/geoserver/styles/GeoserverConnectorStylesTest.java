@@ -36,26 +36,29 @@
 package org.geosdi.geoplatform.geoserver.styles;
 
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
-import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static java.lang.Boolean.TRUE;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
+@FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
 public class GeoserverConnectorStylesTest extends GeoserverConnectorTest {
 
     static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorStylesTest.class);
 
     @Test
     public void a_existStyle() throws Exception {
-        Assert.assertTrue("####################",  restReader.existsStyle("burg", TRUE) ==
+        assertTrue("####################",  restReader.existsStyle("burg", TRUE) ==
                 this.geoserverConnectorStore.loadStyleRequest().withStyleName("burg").withQuietOnNotFound(TRUE).exist());
-        Assert.assertTrue("####################",  restReader.existsStyle("burga", TRUE) ==
+        assertTrue("####################",  restReader.existsStyle("burga", TRUE) ==
                 this.geoserverConnectorStore.loadStyleRequest().withStyleName("burga").withQuietOnNotFound(TRUE).exist());
     }
 }

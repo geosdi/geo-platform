@@ -239,9 +239,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
         System.out.println("Data source: " + dataSource);
         if (!dataSource.startsWith(RESTURL)) {
             //The requested style can't be loaded from the rest url configured.
-            throw new ResourceNotFoundFault(
-                    "The requested style can't be "
-                            + "loaded from the rest url configured on the publisher service.");
+            throw new ResourceNotFoundFault("The requested style can't be loaded from the rest url configured on the publisher service.");
         }
         try{
             return this.geoserverConnectorStore.loadStyleSLDV100Request().withStyleName(styleName).getResponseAsString();

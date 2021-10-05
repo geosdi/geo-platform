@@ -63,7 +63,7 @@ import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverSty
 class GPGeoserverUpdateStyleSLDV100Request extends GPGeoserverBaseUpdateStyleRequest<StyledLayerDescriptor, GeoserverUpdateStyleSLDV100Request> implements GeoserverUpdateStyleSLDV100Request {
 
     private final ThreadLocal<Boolean> raw;
-    protected final ThreadLocal<String> stringStyleBody;
+    private final ThreadLocal<String> stringStyleBody;
 
     /**
      * @param theServerConnector

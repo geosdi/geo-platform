@@ -30,7 +30,7 @@
               <CssParameter name="fill">#AAAAAA</CssParameter>
             </Fill>
             <Stroke>
-              <CssParameter name="stroke">#FFFFFF</CssParameter>
+              <CssParameter name="stroke">#F00707</CssParameter>
               <CssParameter name="stroke-width">1</CssParameter>
             </Stroke>
           </PolygonSymbolizer>

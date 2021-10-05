@@ -56,7 +56,6 @@ public abstract class GPGeoserverBaseStyleRequest<T, R extends GeoserverBaseStyl
     private final ThreadLocal<String> styleName;
     private final ThreadLocal<Boolean> quietOnNotFound;
 
-
     /**
      * @param server
      * @param theJacksonSupport

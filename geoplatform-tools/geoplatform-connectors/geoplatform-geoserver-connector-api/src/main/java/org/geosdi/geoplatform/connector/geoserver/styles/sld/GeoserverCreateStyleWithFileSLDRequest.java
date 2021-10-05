@@ -32,47 +32,47 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.styles;
+package org.geosdi.geoplatform.connector.geoserver.styles.sld;
 
-import net.jcip.annotations.ThreadSafe;
-import org.apache.http.HttpEntity;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
-import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverStyleBody;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverCreateStyleRequest;
-import org.geosdi.geoplatform.connector.geoserver.styles.base.GPGeoserverBaseCreateStyleRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverBaseCreateStyleRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.io.File;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@ThreadSafe
-public class GPGeoserverCreateStyleRequest extends GPGeoserverBaseCreateStyleRequest<IGPGeoserverStyleBody, GeoserverCreateStyleRequest> implements GeoserverCreateStyleRequest {
+public interface GeoserverCreateStyleWithFileSLDRequest extends GeoserverBaseCreateStyleRequest<File, GeoserverCreateStyleWithFileSLDRequest> {
 
     /**
-     * @param theServerConnector
-     * @param theJacksonSupport
+     * @param theStyleName
+     * @return {@link GeoserverCreateStyleWithFileSLDRequest}
      */
-    GPGeoserverCreateStyleRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
-        super(theServerConnector, theJacksonSupport);
-    }
+    GeoserverCreateStyleWithFileSLDRequest withStyleName(@Nonnull(when = NEVER) String theStyleName);
 
     /**
-     * @return {@link HttpEntity}
+     * @param theStyleBody
+     * @return {@link GeoserverCreateStyleWithFileSLDRequest}
      */
     @Override
-    protected HttpEntity prepareHttpEntity() throws Exception {
-        IGPGeoserverStyleBody geoserverStyleBody = this.styleBody.get();
-        checkArgument(geoserverStyleBody != null, "The Parameter styleBody must not be null.");
-        String geoserverStyleBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(geoserverStyleBody);
-        logger.debug("#############################STYLE_BODY : \n{}\n", geoserverStyleBodyString);
-        return new StringEntity(geoserverStyleBodyString, ContentType.APPLICATION_JSON);
+    GeoserverCreateStyleWithFileSLDRequest withStyleBody(@Nonnull(when = NEVER) File theStyleBody);
+
+    /**
+     * @param theRaw
+     * @return {@link GeoserverCreateStyleWithFileSLDRequest}
+     */
+    GeoserverCreateStyleWithFileSLDRequest withRaw(@Nullable Boolean theRaw);
+
+    /**
+     * @param theServer
+     * @return {@link GeoserverUpdateStyleSLDV100Request}
+     */
+    static GeoserverCreateStyleWithFileSLDRequest of(@Nonnull(when = NEVER) GPServerConnector theServer) {
+        return new GPGeoserverCreateStyleWithFileSLDRequest(theServer);
     }
 }

@@ -208,16 +208,18 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
     @Override
     public Boolean publishStyle(String styleToPublish, String styleName,
             boolean validate) throws ResourceNotFoundFault {
-        boolean result = false;
         if (validate) {
             this.styleIsValid(styleToPublish);
         }
-        if (styleName != null) {
-            result = restPublisher.publishStyle(styleToPublish, styleName, TRUE);
-        } else {
-            result = restPublisher.publishStyle(styleToPublish);
+        try{
+            return this.geoserverConnectorStore.createStyleSLDV100Request()
+                    .withRaw(styleName != null)
+                    .withStyleName(styleName)
+                    .withStringStyleBody(styleToPublish)
+                    .getResponse() != null;
+        }catch (Exception e) {
+            throw new ResourceNotFoundFault("Error to publish style with name " + styleName);
         }
-        return result;
     }
 
     @Override
@@ -336,12 +338,13 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
             logger.error(error);
             throw new IllegalArgumentException(error, e.getCause());
         }
-        boolean result;
-        if(!override)
-            result =  this.publishStyle(styleToPublish, styleName, TRUE);
-        else
-            result =  this.updateStyle(styleToPublish, styleName, FALSE);
-        if(!result){
+        try{
+            this.geoserverConnectorStore.createStyleSLDV100Request()
+                    .withRaw(!override)
+                    .withStyleName(styleName)
+                    .withStringStyleBody(styleToPublish)
+                    .getResponse();
+        }catch (Exception e) {
             throw new IllegalParameterFault("The Style with name " + styleName + " is not published." );
         }
         GeoserverLayerStyle layerStyle = geoserverLayer.getLayerStyle() != null ? geoserverLayer.getLayerStyle() : new GeoserverLayerStyle();
@@ -773,15 +776,23 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
 
     private String publishSLD(File fileSLD, String layerName) throws ResourceNotFoundFault {
         //reload();
-        logger.info(
-                "\n INFO: FOUND STYLE FILE. TRYING TO PUBLISH WITH " + layerName + " NAME");
-        if (styleIsValid(fileSLD)) {
-            if (existsStyle(layerName)) {
-                restPublisher.updateStyle(fileSLD, layerName, true);
-            } else {
-                boolean returnPS = restPublisher.publishStyle(fileSLD, layerName, true);
-                logger.info("\n INFO: PUBLISH STYLE RESULT " + returnPS);
+        try {
+            logger.info("\n INFO: FOUND STYLE FILE. TRYING TO PUBLISH WITH " + layerName + " NAME");
+            if (styleIsValid(fileSLD)) {
+                if (existsStyle(layerName)) {
+                    restPublisher.updateStyle(fileSLD, layerName, true);
+                } else {
+                    this.geoserverConnectorStore.createStyleWithFileSLDRequest()
+                            .withStyleName(layerName)
+                            .withRaw(TRUE)
+                            .withStyleBody(fileSLD)
+                            .getResponse();
+
+                    logger.info("\n INFO: PUBLISH STYLE RESULT");
+                }
             }
+        }catch (Exception ex) {
+            throw new ResourceNotFoundFault(ex.getMessage());
         }
         return layerName;
     }
@@ -1652,11 +1663,11 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                 logger.error("Unable to create a coverage store for coverage: {}\n",  shapeFile.toURI());
                 return FALSE;
             }
-            GeoserverVectorLayer geoserverRasterLayer = new GeoserverVectorLayer();
+            GeoserverVectorLayer geoserverVectorLayer = new GeoserverVectorLayer();
             GPGeoserverStyle gpGeoserverStyle = new GPGeoserverStyle();
             gpGeoserverStyle.setName(style.indexOf(":") != -1 ? style.split(":")[0] : style);
-            geoserverRasterLayer.setDefaultStyle(gpGeoserverStyle);
-            return this.geoserverConnectorStore.updateLayerRequest().withWorkspaceName(workspace).withLayerName(dataSetName).withLayerBody(geoserverRasterLayer).getResponse();
+            geoserverVectorLayer.setDefaultStyle(gpGeoserverStyle);
+            return this.geoserverConnectorStore.updateLayerRequest().withWorkspaceName(workspace).withLayerName(dataSetName).withLayerBody(geoserverVectorLayer).getResponse();
         }catch (Exception e) {
             final String error = "Error to load shape file " + e;
             logger.error(error);

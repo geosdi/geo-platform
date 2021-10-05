@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.meta.When;
 
 import static javax.annotation.meta.When.NEVER;
 
@@ -62,6 +63,12 @@ public interface GeoserverUpdateStyleSLDV100Request extends GeoserverBaseUpdateS
      */
     @Override
     GeoserverUpdateStyleSLDV100Request withStyleBody(@Nonnull(when = NEVER) StyledLayerDescriptor theStyleBody);
+
+    /**
+     * @param theStringBody
+     * @return {@link GeoserverUpdateStyleSLDV100Request}
+     */
+    GeoserverUpdateStyleSLDV100Request withStringStyleBody(@Nonnull(when = When.NEVER) String theStringBody);
 
     /**
      * <p>

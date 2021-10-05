@@ -36,13 +36,23 @@
 package org.geosdi.geoplatform.geoserver.styles;
 
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
+import org.geosdi.geoplatform.support.jackson.xml.jaxb.GPJacksonJAXBXmlSupport;
+import org.geosdi.geoplatform.support.jackson.xml.jaxb.JacksonJAXBXmlSupport;
+import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
+import org.junit.Assert;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+
+import static java.io.File.separator;
 import static java.lang.Boolean.TRUE;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -53,6 +63,8 @@ import static org.junit.Assert.assertTrue;
 public class GeoserverConnectorStylesTest extends GeoserverConnectorTest {
 
     static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorStylesTest.class);
+    //
+    JacksonJAXBXmlSupport JACKSON_JAXB_XML_SUPPORT = new GPJacksonJAXBXmlSupport();
 
     @Test
     public void a_existStyle() throws Exception {
@@ -60,5 +72,76 @@ public class GeoserverConnectorStylesTest extends GeoserverConnectorTest {
                 this.geoserverConnectorStore.loadStyleRequest().withStyleName("burg").withQuietOnNotFound(TRUE).exist());
         assertTrue("####################",  restReader.existsStyle("burga", TRUE) ==
                 this.geoserverConnectorStore.loadStyleRequest().withStyleName("burga").withQuietOnNotFound(TRUE).exist());
+    }
+
+    //@Ignore
+    @Test
+    public void b_publishStyle() throws Exception {
+        StyledLayerDescriptor styledLayerDescriptor = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper()
+                .readValue(new File(of(new File(".").getCanonicalPath() , "src", "test", "resources", "default_polygon_test.sld")
+                        .collect(joining(separator))), StyledLayerDescriptor.class);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_STYLE_SLD : {}", styledLayerDescriptor);
+        logger.info("################{}\n", this.geoserverConnectorStore.createStyleSLDV100Request()
+                .withStyleBody(styledLayerDescriptor)
+                .withRaw(TRUE)
+                .withStyleName("Default_Polygon_Test").getResponseAsString());
+    }
+
+    @Ignore
+    @Test
+    public void c_publishStyle() throws Exception {
+        logger.info("################{}\n", this.geoserverConnectorStore.createStyleSLDV100Request()
+                //.withRaw(TRUE)
+                .withStringStyleBody("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
+                        + "<StyledLayerDescriptor version=\"1.0.0\" xmlns=\"http://www.opengis.net/sld\" xmlns:ns2=\"http://www.opengis.net/ogc\" xmlns:ns4=\"http://www.w3.org/1999/xlink\" xmlns:ns3=\"http://www.opengis.net/gml\">\n"
+                        + "    <NamedLayer>\n"
+                        + "        <Name>Default Polygon Test</Name>\n"
+                        + "        <UserStyle>\n"
+                        + "            <Title>A boring default style</Title>\n"
+                        + "            <Abstract>A sample style that just prints out a transparent red interior with a red outline</Abstract>\n"
+                        + "            <FeatureTypeStyle>\n"
+                        + "                <Rule>\n"
+                        + "                    <Name>Rule 1</Name>\n"
+                        + "                    <Title>RedFill RedOutline</Title>\n"
+                        + "                    <Abstract>50% transparent red fill with a red outline 1 pixel in width</Abstract>\n"
+                        + "                    <PolygonSymbolizer>\n"
+                        + "                        <Fill>\n"
+                        + "                            <CssParameter name=\"fill\">#AAAAAA</CssParameter>\n"
+                        + "                        </Fill>\n"
+                        + "                        <Stroke>\n"
+                        + "                            <CssParameter name=\"stroke\">#000000</CssParameter>\n"
+                        + "                            <CssParameter name=\"stroke-width\">1</CssParameter>\n"
+                        + "                        </Stroke>\n"
+                        + "                    </PolygonSymbolizer>\n"
+                        + "                </Rule>\n"
+                        + "            </FeatureTypeStyle>\n"
+                        + "        </UserStyle>\n"
+                        + "    </NamedLayer>\n"
+                        + "</StyledLayerDescriptor>")
+                .getResponse());
+    }
+
+    @Ignore
+    @Test
+    public void d_publishStyleFromFile() throws Exception {
+        File file = new File(of("src", "test", "resources", "default_polygon_test.sld").collect(joining(separator)));
+        Assert.assertTrue("#################FILE_EXSIST", file.exists());
+        logger.info("####################{}\n", this.geoserverConnectorStore.createStyleWithFileSLDRequest()
+                .withStyleName("default_polygon_test")
+                .withRaw(TRUE)
+                .withStyleBody(file).getResponse());
+        logger.info("###########{}\n", this.geoserverConnectorStore.loadStyleRequest().withStyleName("default_polygon_test").withQuietOnNotFound(TRUE).exist());
+    }
+
+    @Ignore
+    @Test
+    public void e_updateStyleFromFile() throws Exception {
+        File file = new File(of("src", "test", "resources", "default_polygon_test_update.sld").collect(joining(separator)));
+        Assert.assertTrue("#################FILE_EXSIST", file.exists());
+        logger.info("####################{}\n", this.geoserverConnectorStore.updateStyleWithFileSLDRequest()
+                .withStyleName("default_polygon_test")
+                .withRaw(TRUE)
+                .withStyleBody(file).getResponse());
+        logger.info("###########{}\n", this.geoserverConnectorStore.loadStyleRequest().withStyleName("default_polygon_test").withQuietOnNotFound(TRUE).exist());
     }
 }

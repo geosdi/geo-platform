@@ -45,12 +45,14 @@ import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.meta.When;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 import static org.apache.http.entity.ContentType.APPLICATION_XML;
+import static org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension.SLD;
 import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
 
 /**
@@ -61,6 +63,7 @@ import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverSty
 class GPGeoserverUpdateStyleSLDV100Request extends GPGeoserverBaseUpdateStyleRequest<StyledLayerDescriptor, GeoserverUpdateStyleSLDV100Request> implements GeoserverUpdateStyleSLDV100Request {
 
     private final ThreadLocal<Boolean> raw;
+    protected final ThreadLocal<String> stringStyleBody;
 
     /**
      * @param theServerConnector
@@ -68,6 +71,7 @@ class GPGeoserverUpdateStyleSLDV100Request extends GPGeoserverBaseUpdateStyleReq
     GPGeoserverUpdateStyleSLDV100Request(@Nonnull(when = NEVER) GPServerConnector theServerConnector) {
         super(theServerConnector, JACKSON_JAXB_XML_SUPPORT);
         this.raw = withInitial(() -> FALSE);
+        this.stringStyleBody = withInitial(() -> null);
     }
 
     /**
@@ -88,6 +92,16 @@ class GPGeoserverUpdateStyleSLDV100Request extends GPGeoserverBaseUpdateStyleReq
     }
 
     /**
+     * @param theStringBody
+     * @return {@link GeoserverUpdateStyleSLDV100Request}
+     */
+    @Override
+    public GeoserverUpdateStyleSLDV100Request withStringStyleBody(@Nonnull(when = When.NEVER) String theStringBody) {
+        this.stringStyleBody.set(theStringBody);
+        return self();
+    }
+
+    /**
      * @return {@link String}
      */
     @Override
@@ -102,10 +116,8 @@ class GPGeoserverUpdateStyleSLDV100Request extends GPGeoserverBaseUpdateStyleReq
      */
     @Override
     protected HttpEntity prepareHttpEntity() throws Exception {
-        StyledLayerDescriptor geoserverStyleBody = this.styleBody.get();
-        checkArgument(geoserverStyleBody != null, "The Parameter styleBody must not be null.");
-        String geoserverStyleBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(geoserverStyleBody);
-        logger.debug("#############################UPDATE_STYLE_BODY : \n{}\n", geoserverStyleBodyString);
+        checkArgument(this.stringStyleBody.get() != null  || this.styleBody.get() != null, "The style body must not be null");
+        String geoserverStyleBodyString = this.stringStyleBody.get() != null ? this.stringStyleBody.get() : jacksonSupport.getDefaultMapper().writeValueAsString(this.styleBody.get());
         return new StringEntity(geoserverStyleBodyString, APPLICATION_XML);
     }
 
@@ -114,6 +126,6 @@ class GPGeoserverUpdateStyleSLDV100Request extends GPGeoserverBaseUpdateStyleReq
      */
     @Override
     protected void addHeaderParams(HttpUriRequest httpMethod) {
-        httpMethod.addHeader("Content-Type", "application/vnd.ogc.sld+xml");
+        httpMethod.addHeader("Content-Type", SLD.getContentType());
     }
 }

@@ -36,9 +36,7 @@ package org.geosdi.geoplatform.connector.geoserver.styles;
 
 import org.geosdi.geoplatform.connector.geoserver.layers.IGPGeoserverLayersConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.*;
-import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverCreateStyleSLDV100Request;
-import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request;
-import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverUpdateStyleSLDV100Request;
+import org.geosdi.geoplatform.connector.geoserver.styles.sld.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -105,4 +103,14 @@ public interface IGPGeoserverStylesConnector extends IGPGeoserverLayersConnector
      * @return {@link GeoserverUpdateStyleSLDV100Request}
      */
     GeoserverUpdateStyleSLDV100Request updateStyleSLDV100Request();
+
+    /**
+     * @return {@link GeoserverCreateStyleWithFileSLDRequest}
+     */
+    GeoserverCreateStyleWithFileSLDRequest createStyleWithFileSLDRequest();
+
+    /**
+     * @return {@link GeoserverUpdateStyleWithFileSLDRequest}
+     */
+    GeoserverUpdateStyleWithFileSLDRequest updateStyleWithFileSLDRequest();
 }

@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import static javax.annotation.meta.When.NEVER;
 
@@ -60,6 +61,25 @@ public interface GeoserverCreateStyleSLDV100Request extends GeoserverBaseCreateS
      */
     @Override
     GeoserverCreateStyleSLDV100Request withStyleBody(@Nonnull(when = NEVER) StyledLayerDescriptor theStyleBody);
+
+    /**
+     * @param theStringStyleBody
+     * @return {@link GeoserverCreateStyleSLDV100Request}
+     */
+    GeoserverCreateStyleSLDV100Request withStringStyleBody(@Nonnull(when = NEVER) String theStringStyleBody);
+
+    /**
+     * <p>
+     *     When set to "true", will forgo parsing and encoding of the uploaded style content, and instead the style will be
+     *     streamed directly to the GeoServer configuration. Use this setting if the content and formatting of the style
+     *     is to be preserved exactly. May result in an invalid and unusable style if the payload is malformed.
+     *     Allowable values are {@link Boolean#TRUE} or {@link Boolean#FALSE} (default). Only used when uploading a style file.
+     * </p>
+     *
+     * @param theRaw
+     * @return {@link GeoserverUpdateStyleSLDV100Request}
+     */
+    GeoserverCreateStyleSLDV100Request withRaw(@Nullable Boolean theRaw);
 
     /**
      * @param theServer

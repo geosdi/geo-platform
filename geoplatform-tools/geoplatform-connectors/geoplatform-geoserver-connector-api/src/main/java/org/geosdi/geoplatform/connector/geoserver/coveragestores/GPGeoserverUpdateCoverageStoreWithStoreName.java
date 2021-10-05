@@ -10,7 +10,6 @@ import org.geosdi.geoplatform.connector.geoserver.model.configure.GPGeoserverPar
 import org.geosdi.geoplatform.connector.geoserver.model.file.IGPFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
 import org.geosdi.geoplatform.connector.geoserver.model.upload.GPGeoserverUploadMethod;
-import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryParam;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverStringQueryParam;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GeoserverRXQueryParamConsumer;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverUpdateCoverageStoreWithStoreNameRequest;
@@ -19,7 +18,6 @@ import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRe
 
 import javax.annotation.Nonnull;
 import java.io.File;
-import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Observable.fromArray;
@@ -158,10 +156,10 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
         String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())
                 : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())));
         URIBuilder uriBuilder = new URIBuilder(path);
-        Consumer<GPGeoserverQueryParam> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
-        fromArray(this.update.get(), this.configure.get(), this.filename.get(), this.coverageName.get())
+        Consumer<ThreadLocal> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
+        fromArray(this.update, this.configure, this.filename, this.coverageName)
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
-                .filter(Objects::nonNull)
+                .filter(c-> c.get() != null)
                 .subscribe(consumer, Throwable::printStackTrace);
         return uriBuilder.build().toString();
     }

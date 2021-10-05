@@ -113,7 +113,7 @@ public class GeoserverConnectorDatastoresTest extends GeoserverConnectorTest {
                         file.toURI(), "EPSG:32633", "burg");
     }
 
-    @Ignore
+    //@Ignore
     @Test
     public void d_updateDataStoreWithShape() throws Exception {
         File file = new File(of("src", "test", "resources", "admin_shp_comuni.zip").collect(joining(separator)));

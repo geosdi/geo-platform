@@ -144,13 +144,18 @@ public class GeoserverConnectorLayersTest extends GeoserverConnectorTest {
 
     @Test
     public void g_existLayerInWorkspace() throws Exception {
-        GeoserverLoadWorkspaceLayerRequest geoserverLoadWorkspaceLayerRequest = this.geoserverConnectorStore.loadWorkspaceLayerRequest().withLayerName("poi").withWorkspaceName("tiger");
+        GeoserverLoadWorkspaceLayerRequest geoserverLoadWorkspaceLayerRequest = this.geoserverConnectorStore.loadWorkspaceLayerRequest()
+                .withQuietOnNotFound(FALSE)
+                .withLayerName("poi")
+                .withWorkspaceName("tiger");
         Boolean result = geoserverLoadWorkspaceLayerRequest.exist();
         logger.info("################{}\n", geoserverLoadWorkspaceLayerRequest.getResponse());
 
         Assert.assertTrue("####################", this.restReader.existsLayer("tiger", "poi", FALSE) == result);
         Assert.assertTrue("####################", this.restReader.existsLayer("tigerr", "poi", FALSE) ==
-                this.geoserverConnectorStore.loadWorkspaceLayerRequest().withLayerName("poi").withWorkspaceName("tigerr").exist());
+                this.geoserverConnectorStore.loadWorkspaceLayerRequest()
+                        .withQuietOnNotFound(FALSE)
+                        .withLayerName("poi").withWorkspaceName("tigerr").exist());
     }
 
     @Ignore(value = "Layer poi_vito may be not present")

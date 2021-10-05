@@ -36,30 +36,35 @@ package org.geosdi.geoplatform.connector.geoserver.styles.sld;
 
 import io.reactivex.rxjava3.functions.Consumer;
 import net.jcip.annotations.ThreadSafe;
-import org.apache.hc.client5.http.classic.methods.HttpUriRequest;
-import org.apache.hc.core5.http.HttpEntity;
-import org.apache.hc.core5.http.io.entity.StringEntity;
-import org.apache.hc.core5.net.URIBuilder;
-import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverCreareStyleResponse;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.FileEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverBooleanQueryParam;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverStringQueryParam;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GeoserverRXQueryParamConsumer;
 import org.geosdi.geoplatform.connector.geoserver.styles.base.GPGeoserverBaseCreateStyleRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
+import org.w3c.dom.Document;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
+import java.io.File;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Observable.fromArray;
+import static java.lang.Boolean.FALSE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
-import static org.apache.hc.core5.http.ContentType.APPLICATION_XML;
+import static org.apache.http.entity.ContentType.create;
+import static org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension.SLD;
+import static org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension.SLD_1_1_0;
 import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
 
 /**
@@ -67,55 +72,46 @@ import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverSty
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-class GPGeoserverCreateStyleSLDV100Request extends GPGeoserverBaseCreateStyleRequest<StyledLayerDescriptor, GeoserverCreateStyleSLDV100Request> implements GeoserverCreateStyleSLDV100Request {
+public class GPGeoserverCreateStyleWithFileSLDRequest extends GPGeoserverBaseCreateStyleRequest<File, GeoserverCreateStyleWithFileSLDRequest> implements GeoserverCreateStyleWithFileSLDRequest {
 
     private final ThreadLocal<GPGeoserverStringQueryParam> style;
     private final ThreadLocal<GPGeoserverBooleanQueryParam> raw;
-    protected final ThreadLocal<String> stringStyleBody;
 
     /**
      * @param theServerConnector
      */
-    GPGeoserverCreateStyleSLDV100Request(@Nonnull(when = NEVER) GPServerConnector theServerConnector) {
+    GPGeoserverCreateStyleWithFileSLDRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector) {
         super(theServerConnector, JACKSON_JAXB_XML_SUPPORT);
         this.style = withInitial(() -> null);
         this.raw = withInitial(() -> null);
-        this.stringStyleBody = withInitial(() -> null);
     }
 
     /**
      * @param theStyleName
-     * @return {@link GeoserverCreateStyleSLDV100Request}
+     * @return {@link GPGeoserverCreateStyleWithFileSLDRequest}
      */
     @Override
-    public GeoserverCreateStyleSLDV100Request withStyleName(@Nonnull(when = NEVER) String theStyleName) {
+    public GeoserverCreateStyleWithFileSLDRequest withStyleName(@Nonnull(when = NEVER) String theStyleName) {
         this.style.set(new GPGeoserverStringQueryParam("name", theStyleName));
         return self();
     }
 
     /**
-     * @param theStringStyleBody
-     * @return {@link GeoserverCreateStyleSLDV100Request}
+     * @param theStyleBody
+     * @return {@link GeoserverCreateStyleWithFileSLDRequest}
      */
     @Override
-    public GeoserverCreateStyleSLDV100Request withStringStyleBody(@Nonnull(when = NEVER) String theStringStyleBody) {
-        this.stringStyleBody.set(theStringStyleBody);
+    public GeoserverCreateStyleWithFileSLDRequest withStyleBody(@Nonnull(when = NEVER) File theStyleBody) {
+        this.styleBody.set(theStyleBody);
         return self();
     }
 
     /**
-     * <p>
-     * When set to "true", will forgo parsing and encoding of the uploaded style content, and instead the style will be
-     * streamed directly to the GeoServer configuration. Use this setting if the content and formatting of the style
-     * is to be preserved exactly. May result in an invalid and unusable style if the payload is malformed.
-     * Allowable values are {@link Boolean#TRUE} or {@link Boolean#FALSE} (default). Only used when uploading a style file.
-     * </p>
-     *
      * @param theRaw
-     * @return {@link GeoserverCreateStyleSLDV100Request}
+     * @return {@link GeoserverCreateStyleWithFileSLDRequest}
      */
     @Override
-    public GeoserverCreateStyleSLDV100Request withRaw(@Nullable Boolean theRaw) {
+    public GeoserverCreateStyleWithFileSLDRequest withRaw(@Nullable Boolean theRaw) {
         this.raw.set(new GPGeoserverBooleanQueryParam("raw", theRaw));
         return self();
     }
@@ -140,10 +136,12 @@ class GPGeoserverCreateStyleSLDV100Request extends GPGeoserverBaseCreateStyleReq
      */
     @Override
     protected HttpEntity prepareHttpEntity() throws Exception {
-        checkArgument(this.stringStyleBody.get() != null  || this.styleBody.get() != null, "The style body must not be null");
-        String geoserverStyleBodyString = this.stringStyleBody.get() != null ? this.stringStyleBody.get() : jacksonSupport.getDefaultMapper().writeValueAsString(this.styleBody.get());
-        logger.debug("#############################STYLE_BODY : \n{}\n", geoserverStyleBodyString);
-        return new StringEntity(geoserverStyleBodyString, APPLICATION_XML);
+        File file = this.styleBody.get();
+        checkArgument(file != null, "The style file must not be null");
+        String contentType = this.checkSLD10Version(this.styleBody.get())  ? SLD.getContentType()  : SLD_1_1_0
+                .getContentType();
+        FileEntity builder = new FileEntity(file, create(contentType));
+        return builder;
     }
 
     /**
@@ -151,6 +149,27 @@ class GPGeoserverCreateStyleSLDV100Request extends GPGeoserverBaseCreateStyleReq
      */
     @Override
     protected void addHeaderParams(HttpUriRequest httpMethod) {
-        httpMethod.addHeader("Content-Type", SLD.getContentType());
+        String contentType = this.checkSLD10Version(this.styleBody.get())  ? SLD.getContentType()  : SLD_1_1_0
+                .getContentType();
+        httpMethod.addHeader("Content-Type", contentType);
+    }
+
+    /**
+     * @param fileSLD
+     * @return {@link Boolean}
+     */
+    private Boolean checkSLD10Version(File fileSLD) {
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(fileSLD);
+            XPathFactory xPathfactory = XPathFactory.newInstance();
+            XPath xpath = xPathfactory.newXPath();
+            XPathExpression expr = xpath.compile("//@version='1.0.0'");
+            return (Boolean)expr.evaluate(doc, XPathConstants.BOOLEAN);
+        } catch (Exception var6) {
+            logger.error("Error parsing SLD file: " + var6);
+            return FALSE;
+        }
     }
 }

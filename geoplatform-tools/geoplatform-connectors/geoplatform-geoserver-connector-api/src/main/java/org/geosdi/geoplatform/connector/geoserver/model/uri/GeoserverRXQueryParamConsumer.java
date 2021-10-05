@@ -46,7 +46,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GeoserverRXQueryParamConsumer implements Consumer<GPGeoserverQueryParam> {
+public class GeoserverRXQueryParamConsumer<B extends GPGeoserverQueryParam> implements Consumer<ThreadLocal<B>> {
 
     private final URIBuilder uriBuilder;
 
@@ -65,7 +65,7 @@ public class GeoserverRXQueryParamConsumer implements Consumer<GPGeoserverQueryP
      * @throws Throwable if the implementation wishes to throw any type of exception
      */
     @Override
-    public void accept(GPGeoserverQueryParam queryParam) throws Throwable {
-        queryParam.addQueryParam(this.uriBuilder);
+    public void accept(ThreadLocal<B> queryParam) throws Throwable {
+        queryParam.get().addQueryParam(this.uriBuilder);
     }
 }

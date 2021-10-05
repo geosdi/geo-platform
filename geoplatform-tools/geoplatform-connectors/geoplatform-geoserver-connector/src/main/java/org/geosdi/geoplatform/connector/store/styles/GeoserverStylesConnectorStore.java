@@ -37,9 +37,7 @@ package org.geosdi.geoplatform.connector.store.styles;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.*;
-import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverCreateStyleSLDV100Request;
-import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request;
-import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverUpdateStyleSLDV100Request;
+import org.geosdi.geoplatform.connector.geoserver.styles.sld.*;
 import org.geosdi.geoplatform.connector.store.layers.GeoserverLayersConnectorStore;
 
 /**
@@ -149,5 +147,21 @@ public abstract class GeoserverStylesConnectorStore extends GeoserverLayersConne
     @Override
     public GeoserverUpdateStyleSLDV100Request updateStyleSLDV100Request() {
         return this.server.updateStyleSLDV100Request();
+    }
+
+    /**
+     * @return {@link GeoserverCreateStyleWithFileSLDRequest}
+     */
+    @Override
+    public GeoserverCreateStyleWithFileSLDRequest createStyleWithFileSLDRequest() {
+        return this.server.createStyleWithFileSLDRequest();
+    }
+
+    /**
+     * @return {@link GeoserverUpdateStyleWithFileSLDRequest}
+     */
+    @Override
+    public GeoserverUpdateStyleWithFileSLDRequest updateStyleWithFileSLDRequest() {
+        return this.server.updateStyleWithFileSLDRequest();
     }
 }

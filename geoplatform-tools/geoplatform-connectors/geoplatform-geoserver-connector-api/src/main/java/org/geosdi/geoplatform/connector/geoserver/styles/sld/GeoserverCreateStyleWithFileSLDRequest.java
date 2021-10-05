@@ -32,71 +32,47 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.styles.base;
+package org.geosdi.geoplatform.connector.geoserver.styles.sld;
 
-import org.geosdi.geoplatform.connector.geoserver.exsist.GPGeoserverExsistRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverBaseStyleRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverBaseCreateStyleRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.io.File;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Boolean.TRUE;
-import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPGeoserverBaseStyleRequest<T, R extends GeoserverBaseStyleRequest> extends GPGeoserverExsistRequest<T, R> implements GeoserverBaseStyleRequest<T, R> {
-
-    private final ThreadLocal<String> styleName;
-    private final ThreadLocal<Boolean> quietOnNotFound;
-
-    /**
-     * @param server
-     * @param theJacksonSupport
-     */
-    protected GPGeoserverBaseStyleRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
-        super(server, theJacksonSupport);
-        this.styleName = withInitial(() -> null);
-        this.quietOnNotFound = withInitial(() -> TRUE);
-    }
+public interface GeoserverCreateStyleWithFileSLDRequest extends GeoserverBaseCreateStyleRequest<File, GeoserverCreateStyleWithFileSLDRequest> {
 
     /**
      * @param theStyleName
-     * @return {@link R}
+     * @return {@link GeoserverCreateStyleWithFileSLDRequest}
      */
-    @Override
-    public R withStyleName(@Nonnull(when = NEVER) String theStyleName) {
-        this.styleName.set(theStyleName);
-        return self();
-    }
+    GeoserverCreateStyleWithFileSLDRequest withStyleName(@Nonnull(when = NEVER) String theStyleName);
 
     /**
-     * @param theQuietOnNotFound
-     * @return {@link R}
+     * @param theStyleBody
+     * @return {@link GeoserverCreateStyleWithFileSLDRequest}
      */
     @Override
-    public R withQuietOnNotFound(@Nullable Boolean theQuietOnNotFound) {
-        this.quietOnNotFound.set(theQuietOnNotFound);
-        return self();
-    }
+    GeoserverCreateStyleWithFileSLDRequest withStyleBody(@Nonnull(when = NEVER) File theStyleBody);
 
     /**
-     * @return {@link String}
+     * @param theRaw
+     * @return {@link GeoserverCreateStyleWithFileSLDRequest}
      */
-    @Override
-    protected String createUriPath() throws Exception {
-        String styleName = this.styleName.get();
-        checkArgument(((styleName != null) && !(styleName.trim().isEmpty())), "The Parameter Style Name must not be null or an Empty String.");
-        styleName = styleName.replaceAll("\\s", "+");
-        String baseURI = this.serverURI.toString();
-        String quietOnNotFound = this.quietOnNotFound.get().toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("styles/").concat(styleName).concat(".json").concat("?quietOnNotFound=").concat(quietOnNotFound)
-                : baseURI.concat("/styles/").concat(styleName).concat(".json").concat("?quietOnNotFound=").concat(quietOnNotFound)));
+    GeoserverCreateStyleWithFileSLDRequest withRaw(@Nullable Boolean theRaw);
+
+    /**
+     * @param theServer
+     * @return {@link GeoserverUpdateStyleSLDV100Request}
+     */
+    static GeoserverCreateStyleWithFileSLDRequest of(@Nonnull(when = NEVER) GPServerConnector theServer) {
+        return new GPGeoserverCreateStyleWithFileSLDRequest(theServer);
     }
 }

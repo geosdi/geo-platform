@@ -39,9 +39,7 @@ import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.layers.GPGeoserverLayersConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.*;
-import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverCreateStyleSLDV100Request;
-import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request;
-import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverUpdateStyleSLDV100Request;
+import org.geosdi.geoplatform.connector.geoserver.styles.sld.*;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -271,6 +269,34 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
             case V219x:
             case V218x:
                 return GeoserverUpdateStyleSLDV100Request.of(this);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverCreateStyleWithFileSLDRequest}
+     */
+    @Override
+    public GeoserverCreateStyleWithFileSLDRequest createStyleWithFileSLDRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return GeoserverCreateStyleWithFileSLDRequest.of(this);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverUpdateStyleWithFileSLDRequest}
+     */
+    @Override
+    public GeoserverUpdateStyleWithFileSLDRequest updateStyleWithFileSLDRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return GeoserverUpdateStyleWithFileSLDRequest.of(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

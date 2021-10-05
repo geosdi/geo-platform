@@ -1,6 +1,7 @@
 package org.geosdi.geoplatform.connector.geoserver.datastores;
 
 import com.google.common.io.CharStreams;
+import io.reactivex.rxjava3.functions.Consumer;
 import net.jcip.annotations.ThreadSafe;
 import org.apache.hc.client5.http.classic.methods.HttpUriRequest;
 import org.apache.hc.core5.http.ContentType;
@@ -12,6 +13,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.file.GPGeoserverDataStor
 import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
 import org.geosdi.geoplatform.connector.geoserver.model.upload.GPGeoserverUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverStringQueryParam;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GeoserverRXQueryParamConsumer;
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverUpdateDataStoreWithStoreNameRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
@@ -22,11 +24,10 @@ import java.io.BufferedReader;
 import java.io.File;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static io.reactivex.rxjava3.core.Observable.fromIterable;
+import static io.reactivex.rxjava3.core.Observable.fromArray;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
-import static java.util.Arrays.asList;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -172,10 +173,11 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
         String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())
                 : baseURI.concat("/workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())));
         URIBuilder uriBuilder = new URIBuilder(path);
-        fromIterable(asList(this.update, this.configure, this.filename, this.target, this.charset))
-                .filter(c -> c.get() != null)
+        Consumer<ThreadLocal> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
+        fromArray(this.update, this.configure, this.filename, this.target, this.charset)
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
-                .subscribe(c -> c.get().addQueryParam(uriBuilder), ex -> logger.error("###################{}\n", ex.getMessage()));
+                .filter(c-> c.get() != null)
+                .subscribe(consumer, Throwable::printStackTrace);
         return uriBuilder.build().toString();
     }
 
@@ -217,6 +219,6 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
     protected final void addHeaderParams(HttpUriRequest httpMethod) {
         ContentType contentType = this.methodName.get().toContentType();
         checkArgument(contentType != null, "The Parameter contentType must not be null.");
-        httpMethod.addHeader("Content-Type", contentType);
+        httpMethod.addHeader("Content-Type", contentType.getMimeType());
     }
 }

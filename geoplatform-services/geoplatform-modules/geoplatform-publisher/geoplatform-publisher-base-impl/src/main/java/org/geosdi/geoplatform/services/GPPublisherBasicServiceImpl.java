@@ -225,10 +225,17 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
     @Override
     public Boolean updateStyle(String styleToPublish, String styleName,
             boolean validate) throws ResourceNotFoundFault {
-        if (validate) {
-            this.styleIsValid(styleToPublish);
+        try{
+            if (validate) {
+                this.styleIsValid(styleToPublish);
+            }
+            return this.geoserverConnectorStore.updateStyleSLDV100Request()
+                    .withStyleName(styleToPublish)
+                    .withRaw(TRUE)
+                    .withStringStyleBody(styleToPublish).getResponse();
+        }catch (Exception e) {
+            return FALSE;
         }
-        return restPublisher.updateStyle(styleToPublish, styleName, TRUE);
     }
 
     @Override
@@ -780,7 +787,10 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
             logger.info("\n INFO: FOUND STYLE FILE. TRYING TO PUBLISH WITH " + layerName + " NAME");
             if (styleIsValid(fileSLD)) {
                 if (existsStyle(layerName)) {
-                    restPublisher.updateStyle(fileSLD, layerName, true);
+                    this.geoserverConnectorStore.updateStyleWithFileSLDRequest()
+                            .withStyleName(layerName)
+                            .withRaw(TRUE)
+                            .withStyleBody(fileSLD).getResponse();
                 } else {
                     this.geoserverConnectorStore.createStyleWithFileSLDRequest()
                             .withStyleName(layerName)

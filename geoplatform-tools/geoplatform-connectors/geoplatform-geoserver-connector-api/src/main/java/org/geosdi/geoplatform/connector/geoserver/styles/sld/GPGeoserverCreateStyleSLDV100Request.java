@@ -40,11 +40,6 @@ import org.apache.hc.client5.http.classic.methods.HttpUriRequest;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.apache.hc.core5.net.URIBuilder;
-import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverCreareStyleResponse;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.entity.StringEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverBooleanQueryParam;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverStringQueryParam;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GeoserverRXQueryParamConsumer;
@@ -60,6 +55,7 @@ import static io.reactivex.rxjava3.core.Observable.fromArray;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 import static org.apache.hc.core5.http.ContentType.APPLICATION_XML;
+import static org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension.SLD;
 import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
 
 /**

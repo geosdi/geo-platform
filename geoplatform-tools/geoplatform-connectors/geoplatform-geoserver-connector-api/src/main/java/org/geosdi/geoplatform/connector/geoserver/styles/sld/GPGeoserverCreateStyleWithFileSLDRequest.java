@@ -35,11 +35,11 @@
 package org.geosdi.geoplatform.connector.geoserver.styles.sld;
 
 import io.reactivex.rxjava3.functions.Consumer;
-import net.jcip.annotations.ThreadSafe;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.entity.FileEntity;
+import net.jcip.annotations.ThreadSafe;import org.apache.hc.client5.http.classic.methods.HttpUriRequest;
+import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.io.entity.FileEntity;
+import org.apache.hc.core5.net.URIBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverBooleanQueryParam;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverStringQueryParam;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GeoserverRXQueryParamConsumer;
@@ -62,7 +62,6 @@ import static io.reactivex.rxjava3.core.Observable.fromArray;
 import static java.lang.Boolean.FALSE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
-import static org.apache.http.entity.ContentType.create;
 import static org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension.SLD;
 import static org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension.SLD_1_1_0;
 import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
@@ -140,7 +139,7 @@ public class GPGeoserverCreateStyleWithFileSLDRequest extends GPGeoserverBaseCre
         checkArgument(file != null, "The style file must not be null");
         String contentType = this.checkSLD10Version(this.styleBody.get())  ? SLD.getContentType()  : SLD_1_1_0
                 .getContentType();
-        FileEntity builder = new FileEntity(file, create(contentType));
+        FileEntity builder = new FileEntity(file, ContentType.create(contentType));
         return builder;
     }
 

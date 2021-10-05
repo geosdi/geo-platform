@@ -52,6 +52,7 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 import static org.apache.hc.core5.http.ContentType.APPLICATION_XML;
+import static org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatExtension.SLD;
 import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
 
 /**

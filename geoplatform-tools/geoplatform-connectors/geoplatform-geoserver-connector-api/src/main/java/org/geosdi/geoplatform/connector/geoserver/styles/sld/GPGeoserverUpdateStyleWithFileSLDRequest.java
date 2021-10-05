@@ -44,22 +44,14 @@ import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverBooleanQu
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GeoserverRXQueryParamConsumer;
 import org.geosdi.geoplatform.connector.geoserver.styles.base.GPGeoserverBaseUpdateStyleRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.w3c.dom.Document;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.meta.When;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathFactory;
 import java.io.File;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Observable.fromArray;
-import static java.lang.Boolean.FALSE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 import static org.apache.http.entity.ContentType.create;
@@ -68,8 +60,8 @@ import static org.geosdi.geoplatform.connector.geoserver.model.format.GPFormatEx
 import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
 @ThreadSafe
 public class GPGeoserverUpdateStyleWithFileSLDRequest extends GPGeoserverBaseUpdateStyleRequest<File, GeoserverUpdateStyleWithFileSLDRequest> implements GeoserverUpdateStyleWithFileSLDRequest {
@@ -127,7 +119,7 @@ public class GPGeoserverUpdateStyleWithFileSLDRequest extends GPGeoserverBaseUpd
     @Override
     protected HttpEntity prepareHttpEntity() throws Exception {
         File file = this.styleBody.get();
-        checkArgument(file != null, "The style file must not be null");
+        checkArgument(file != null && file.exists() && !file.isDirectory(), "The style file must not be null");
         String contentType = this.checkSLD10Version(this.styleBody.get())  ? SLD.getContentType()  : SLD_1_1_0
                 .getContentType();
         FileEntity builder = new FileEntity(file, create(contentType));
@@ -142,24 +134,5 @@ public class GPGeoserverUpdateStyleWithFileSLDRequest extends GPGeoserverBaseUpd
         String contentType = this.checkSLD10Version(this.styleBody.get())  ? SLD.getContentType()  : SLD_1_1_0
                 .getContentType();
         httpMethod.addHeader("Content-Type", contentType);
-    }
-
-    /**
-     * @param fileSLD
-     * @return {@link Boolean}
-     */
-    private Boolean checkSLD10Version(File fileSLD) {
-        try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document doc = builder.parse(fileSLD);
-            XPathFactory xPathfactory = XPathFactory.newInstance();
-            XPath xpath = xPathfactory.newXPath();
-            XPathExpression expr = xpath.compile("//@version='1.0.0'");
-            return (Boolean)expr.evaluate(doc, XPathConstants.BOOLEAN);
-        } catch (Exception var6) {
-            logger.error("Error parsing SLD file: " + var6);
-            return FALSE;
-        }
     }
 }

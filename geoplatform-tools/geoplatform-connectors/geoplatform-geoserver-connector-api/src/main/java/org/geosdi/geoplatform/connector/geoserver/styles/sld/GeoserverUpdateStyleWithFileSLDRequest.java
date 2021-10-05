@@ -47,7 +47,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverUpdateStyleWithFileSLDRequest extends GeoserverBaseUpdateStyleRequest<File, GeoserverUpdateStyleWithFileSLDRequest> {
+public interface GeoserverUpdateStyleWithFileSLDRequest extends GeoserverBaseUpdateStyleRequest<File, GeoserverUpdateStyleWithFileSLDRequest>, GeoserverCheckSLDVersion {
 
     /**
      * @param theStyleName

@@ -67,7 +67,7 @@ class GPGeoserverCreateStyleSLDV100Request extends GPGeoserverBaseCreateStyleReq
 
     private final ThreadLocal<GPGeoserverStringQueryParam> style;
     private final ThreadLocal<GPGeoserverBooleanQueryParam> raw;
-    protected final ThreadLocal<String> stringStyleBody;
+    private final ThreadLocal<String> stringStyleBody;
 
     /**
      * @param theServerConnector

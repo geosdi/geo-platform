@@ -87,41 +87,17 @@ public class GeoserverConnectorStylesTest extends GeoserverConnectorTest {
                 .withStyleName("Default_Polygon_Test").getResponseAsString());
     }
 
-    @Ignore
+   // @Ignore
     @Test
     public void c_publishStyle() throws Exception {
         logger.info("################{}\n", this.geoserverConnectorStore.createStyleSLDV100Request()
+                                .withStyleName("default_polygon_test")
                 //.withRaw(TRUE)
-                .withStringStyleBody("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
-                        + "<StyledLayerDescriptor version=\"1.0.0\" xmlns=\"http://www.opengis.net/sld\" xmlns:ns2=\"http://www.opengis.net/ogc\" xmlns:ns4=\"http://www.w3.org/1999/xlink\" xmlns:ns3=\"http://www.opengis.net/gml\">\n"
-                        + "    <NamedLayer>\n"
-                        + "        <Name>Default Polygon Test</Name>\n"
-                        + "        <UserStyle>\n"
-                        + "            <Title>A boring default style</Title>\n"
-                        + "            <Abstract>A sample style that just prints out a transparent red interior with a red outline</Abstract>\n"
-                        + "            <FeatureTypeStyle>\n"
-                        + "                <Rule>\n"
-                        + "                    <Name>Rule 1</Name>\n"
-                        + "                    <Title>RedFill RedOutline</Title>\n"
-                        + "                    <Abstract>50% transparent red fill with a red outline 1 pixel in width</Abstract>\n"
-                        + "                    <PolygonSymbolizer>\n"
-                        + "                        <Fill>\n"
-                        + "                            <CssParameter name=\"fill\">#AAAAAA</CssParameter>\n"
-                        + "                        </Fill>\n"
-                        + "                        <Stroke>\n"
-                        + "                            <CssParameter name=\"stroke\">#000000</CssParameter>\n"
-                        + "                            <CssParameter name=\"stroke-width\">1</CssParameter>\n"
-                        + "                        </Stroke>\n"
-                        + "                    </PolygonSymbolizer>\n"
-                        + "                </Rule>\n"
-                        + "            </FeatureTypeStyle>\n"
-                        + "        </UserStyle>\n"
-                        + "    </NamedLayer>\n"
-                        + "</StyledLayerDescriptor>")
+                .withStringStyleBody("<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n" + "<StyledLayerDescriptor version=\"1.0.0\"\n" + "    xsi:schemaLocation=\"http://www.opengis.net/sld StyledLayerDescriptor.xsd\"\n" + "    xmlns=\"http://www.opengis.net/sld\"\n" + "    xmlns:ogc=\"http://www.opengis.net/ogc\"\n" + "    xmlns:xlink=\"http://www.w3.org/1999/xlink\"\n" + "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" + "    <!-- a named layer is the basic building block of an sld document -->\n" + "\n" + "  <NamedLayer>\n" + "    <Name>Default Polygon Test</Name>\n" + "    <UserStyle>\n" + "        <!-- they have names, titles and abstracts -->\n" + "\n" + "      <Title>A boring default style</Title>\n" + "      <Abstract>A sample style that just prints out a transparent red interior with a red outline</Abstract>\n" + "      <!-- FeatureTypeStyles describe how to render different features -->\n" + "      <!-- a feature type for polygons -->\n" + "\n" + "      <FeatureTypeStyle>\n" + "        <!--FeatureTypeName>Feature</FeatureTypeName-->\n" + "        <Rule>\n" + "          <Name>Rule 1</Name>\n" + "          <Title>RedFill RedOutline</Title>\n" + "          <Abstract>50% transparent red fill with a red outline 1 pixel in width</Abstract>\n" + "\n" + "          <!-- like a linesymbolizer but with a fill too -->\n" + "          <PolygonSymbolizer>\n" + "            <Fill>\n" + "              <CssParameter name=\"fill\">#AAAAAA</CssParameter>\n" + "            </Fill>\n" + "            <Stroke>\n" + "              <CssParameter name=\"stroke\">#000000</CssParameter>\n" + "              <CssParameter name=\"stroke-width\">1</CssParameter>\n" + "            </Stroke>\n" + "          </PolygonSymbolizer>\n" + "        </Rule>\n" + "\n" + "        </FeatureTypeStyle>\n" + "    </UserStyle>\n" + "  </NamedLayer>\n" + "</StyledLayerDescriptor>")
                 .getResponse());
     }
 
-    @Ignore
+    //@Ignore
     @Test
     public void d_publishStyleFromFile() throws Exception {
         File file = new File(of("src", "test", "resources", "default_polygon_test.sld").collect(joining(separator)));
@@ -144,4 +120,38 @@ public class GeoserverConnectorStylesTest extends GeoserverConnectorTest {
                 .withStyleBody(file).getResponse());
         logger.info("###########{}\n", this.geoserverConnectorStore.loadStyleRequest().withStyleName("default_polygon_test").withQuietOnNotFound(TRUE).exist());
     }
+
+    @Test
+    public void  f_updateStyle() throws Exception {
+        logger.info("###############{}\n", this.geoserverConnectorStore.updateStyleSLDV100Request()
+                .withStyleName("default_polygon_test")
+                .withRaw(TRUE)
+                .withStringStyleBody("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
+                        + "<StyledLayerDescriptor version=\"1.0.0\" xmlns=\"http://www.opengis.net/sld\" xmlns:ns2=\"http://www.opengis.net/ogc\" xmlns:ns4=\"http://www.w3.org/1999/xlink\" xmlns:ns3=\"http://www.opengis.net/gml\">\n"
+                        + "    <NamedLayer>\n"
+                        + "        <Name>Default Polygon Test</Name>\n"
+                        + "        <UserStyle>\n"
+                        + "            <Title>A boring default style</Title>\n"
+                        + "            <Abstract>A sample style that just prints out a transparent red interior with a red outline</Abstract>\n"
+                        + "            <FeatureTypeStyle>\n"
+                        + "                <Rule>\n"
+                        + "                    <Name>Rule 1</Name>\n"
+                        + "                    <Title>RedFill RedOutline</Title>\n"
+                        + "                    <Abstract>50% transparent red fill with a red outline 1 pixel in width</Abstract>\n"
+                        + "                    <PolygonSymbolizer>\n"
+                        + "                        <Fill>\n"
+                        + "                            <CssParameter name=\"fill\">#AAAAAA</CssParameter>\n"
+                        + "                        </Fill>\n"
+                        + "                        <Stroke>\n"
+                        + "                            <CssParameter name=\"stroke\">#F00707</CssParameter>\n"
+                        + "                            <CssParameter name=\"stroke-width\">1</CssParameter>\n"
+                        + "                        </Stroke>\n"
+                        + "                    </PolygonSymbolizer>\n"
+                        + "                </Rule>\n"
+                        + "            </FeatureTypeStyle>\n"
+                        + "        </UserStyle>\n"
+                        + "    </NamedLayer>\n"
+                        + "</StyledLayerDescriptor>").getResponse());
+    }
+
 }

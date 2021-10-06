@@ -36,8 +36,9 @@
 package org.geosdi.geoplatform.services.utility;
 
 import com.google.common.collect.Maps;
-import it.geosolutions.geoserver.rest.encoder.datastore.GSPostGISDatastoreEncoder;
-import it.geosolutions.geoserver.rest.manager.GeoServerRESTStoreManager;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.IGPGeoserverCreateDatastoreResponse;
+import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverCreateDatastoreRequest;
+import org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -46,6 +47,8 @@ import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.Map;
 
+import static org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.postgis.IGPPostgisDatastoreBodyBuilder.GPPostgisDatastoreBodyBuilder.postgisDatastoreBodyBuilder;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
@@ -53,8 +56,6 @@ import java.util.Map;
 @Component("postGISUtility")
 public class PostGISUtility implements InitializingBean {
 
-    @Resource(name = "sharedRestStoreManager")
-    private GeoServerRESTStoreManager restStoreManager;
     private @Value("configurator{geoserver_url}")
     String geoserverUrl;
     private @Value("configurator{geoserver_username}")
@@ -77,41 +78,37 @@ public class PostGISUtility implements InitializingBean {
     String userNameDBPostgisDatastore;
     private @Value("configurator{password_db_postgis_datastore_publisher}")
     String passwordDBPostgisDatastore;
+    @Resource(name = "geoserverConnectorStore")
+    protected GPGeoserverConnectorStore geoserverConnectorStore;
 
     private Map<String, Serializable> outputDataStoreMap;
 
-    public GeoServerRESTStoreManager generateEncoder(String storeName, String workspace) {
-//        RESTDataStore store = reader.getDatastore(workspace, storeName);
-//        System.out.println("************ Store Retrieved: ");
-//        System.out.println(store);
-        //GeoServerRESTStoreManager manager = null;
-//        if (store == null) {
-        /**
-         * try { manager = new GeoServerRESTStoreManager( new URL(geoserverUrl),
-         * geoserverUser, geoserverPassword); } catch (MalformedURLException ex)
-         * { Logger.getLogger(PostGISUtility.class.getName()).log(Level.SEVERE,
-         * null, ex); }
-         */
-        GSPostGISDatastoreEncoder encoder = new GSPostGISDatastoreEncoder(storeName);
-        encoder.setEnabled(true);
-        encoder.setHost(hostPostgisDatastore);
-        encoder.setPort(portPostgisDatastore);
-        encoder.setDatabase(dbNamePostgisDatastore);
-        encoder.setSchema("public");
-        encoder.setUser(userNameDBPostgisDatastore);
-        encoder.setPassword(passwordDBPostgisDatastore);
-        encoder.setExposePrimaryKeys(Boolean.FALSE);
-        encoder.setMaxConnections(maxConnectionsPostgisDatastore);
-        encoder.setMinConnections(minConnectionsPostgisDatastore);
-        encoder.setConnectionTimeout(timeoutConnectionsPostgisDatastore);
-        encoder.setFetchSize(1000);
-        encoder.setValidateConnections(Boolean.TRUE);
-        encoder.setLooseBBox(Boolean.TRUE);
-        encoder.setPreparedStatements(false);
-        encoder.setMaxOpenPreparedStatements(50);
-        restStoreManager.create(workspace, encoder);
-//        }
-        return restStoreManager;
+    public IGPGeoserverCreateDatastoreResponse generateEncoder(String storeName, String workspace) {
+
+        try {
+            GeoserverCreateDatastoreRequest createDatastoreRequest = this.geoserverConnectorStore.createDatastoreRequest();
+            return createDatastoreRequest.withWorkspaceName(workspace).withDatastoreBody(
+                    postgisDatastoreBodyBuilder()
+                            .withName(storeName)
+                            .withHost(hostPostgisDatastore)
+                            .withPort(portPostgisDatastore)
+                            .withDatabase(dbNamePostgisDatastore)
+                            .withSchema("public")
+                            .withUser(userNameDBPostgisDatastore)
+                            .withPassword(passwordDBPostgisDatastore)
+                            .withExposePrimaryKeys(Boolean.FALSE)
+                            .withMaxConnections(maxConnectionsPostgisDatastore)
+                            .withMinConnections(minConnectionsPostgisDatastore)
+                            .withConnectionTimeout(timeoutConnectionsPostgisDatastore)
+                            .withFetchSize(1000)
+                            .withValidateConnections(Boolean.TRUE)
+                            .withLooseBbox(Boolean.TRUE)
+                            .withPreparedStatements(Boolean.FALSE)
+                            .withMaxOpenPreparedStatements(50).build()).getResponse();
+        }catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public Map<String, Serializable> getOutputDataStoreMap() {

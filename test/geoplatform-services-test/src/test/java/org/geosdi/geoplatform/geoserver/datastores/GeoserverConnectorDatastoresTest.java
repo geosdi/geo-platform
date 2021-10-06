@@ -113,7 +113,7 @@ public class GeoserverConnectorDatastoresTest extends GeoserverConnectorTest {
                         file.toURI(), "EPSG:32633", "burg");
     }
 
-    //@Ignore
+    @Ignore
     @Test
     public void d_updateDataStoreWithShape() throws Exception {
         File file = new File(of("src", "test", "resources", "admin_shp_comuni.zip").collect(joining(separator)));
@@ -157,7 +157,16 @@ public class GeoserverConnectorDatastoresTest extends GeoserverConnectorTest {
         gpGeoserverStyle.setName(defaultStyle.indexOf(":") != -1 ? defaultStyle.split(":")[0] : defaultStyle);
         geoserverRasterLayer.setDefaultStyle(gpGeoserverStyle);
         logger.info("##############{}\n", this.geoserverConnectorStore.updateLayerRequest().withWorkspaceName("sf").withLayerName("admin_shp_comuni").withLayerBody(geoserverRasterLayer).getResponse());
+    }
 
+    @Ignore
+    @Test
+    public void e_deleteFeature() throws Exception {
+        logger.info("##############{}\n", this.geoserverConnectorStore.deleteFeatureTypeRequest()
+                .withWorkspace("sf")
+                .withStore("store_vito")
+                .withRecurse(TRUE)
+                .withFeatureTypeName("admin_shp_comuni").getResponse());
     }
 
 

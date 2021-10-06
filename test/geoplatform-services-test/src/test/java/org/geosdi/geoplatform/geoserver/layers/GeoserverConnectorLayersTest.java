@@ -192,4 +192,14 @@ public class GeoserverConnectorLayersTest extends GeoserverConnectorTest {
 
     }
 
+    @Ignore(value = "Layer poi_vito may be not present")
+    @Test
+    public void l_deleteLayerWorkspace() throws Exception {
+        logger.info("##################DELETE_LAYER {}\n", this.geoserverConnectorStore.deleteLayerWorkspaceRequest()
+                .withWorkspaceName("sf")
+                .withLayerName("admin_shp_comuni").getResponse());
+        Assert.assertFalse("####################",
+                this.geoserverConnectorStore.loadLayerRequest().withName("admin_shp_comuni").exist());
+    }
+
 }

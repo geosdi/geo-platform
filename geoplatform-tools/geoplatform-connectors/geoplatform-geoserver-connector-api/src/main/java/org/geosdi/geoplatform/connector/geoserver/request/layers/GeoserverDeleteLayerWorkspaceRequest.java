@@ -33,50 +33,31 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.layers;
+package org.geosdi.geoplatform.connector.geoserver.request.layers;
 
-import org.geosdi.geoplatform.connector.geoserver.layers.GPGeoserverLoadLayerRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.layers.*;
-import org.geosdi.geoplatform.connector.store.namespaces.GPGeoserverNamespacesConnectorStore;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface GPGeoserverLayersConnectorStore extends GPGeoserverNamespacesConnectorStore {
+public interface GeoserverDeleteLayerWorkspaceRequest extends GPJsonConnectorRequest<Boolean, GeoserverDeleteLayerWorkspaceRequest> {
 
     /**
-     * @return {@link GeoserverLayersRequest}
-     */
-    GeoserverLayersRequest loadLayersRequest();
-
-    /**
-     * @return {@link GPGeoserverLoadLayerRequest}
-     */
-    GeoserverLoadLayerRequest loadLayerRequest();
-
-    /**
-     * @return {@link GeoserverLoadWorkspaceLayersRequest}
-     */
-    GeoserverLoadWorkspaceLayersRequest loadWorkspaceLayersRequest();
-
-    /**
-     * @return {@link GeoserverLoadWorkspaceLayerRequest}
-     */
-    GeoserverLoadWorkspaceLayerRequest loadWorkspaceLayerRequest();
-
-    /**
-     * @return {@link GeoserverDeleteLayerRequest}
-     */
-    GeoserverDeleteLayerRequest deleteLayerRequest();
-
-    /**
-     * @return {@link GeoserverUpdateLayerRequest}
-     */
-    GeoserverUpdateLayerRequest updateLayerRequest();
-
-    /**
+     * @param theWorkspaceName
      * @return {@link GeoserverDeleteLayerWorkspaceRequest}
      */
-    GeoserverDeleteLayerWorkspaceRequest deleteLayerWorkspaceRequest();
+    GeoserverDeleteLayerWorkspaceRequest withWorkspaceName(String theWorkspaceName);
+
+    /**
+     * @param theLayerName
+     * @return {@link GeoserverDeleteLayerWorkspaceRequest}
+     */
+    GeoserverDeleteLayerWorkspaceRequest withLayerName(String theLayerName);
+
+    /**
+     * @param theRecurse
+     * @return {@link GeoserverDeleteLayerWorkspaceRequest}
+     */
+    GeoserverDeleteLayerWorkspaceRequest withRecurse(Boolean theRecurse);
 }

@@ -36,8 +36,6 @@
 package org.geosdi.geoplatform.services;
 
 import com.google.common.collect.Lists;
-import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
-import it.geosolutions.geoserver.rest.GeoServerRESTReader;
 import org.apache.commons.io.FilenameUtils;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPGeoserverParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.coveragestores.GeoserverUpdateCoverageStoreBody;
@@ -129,12 +127,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
     private String RESTURL = "";
     private String RESTUSER = "";
     private String RESTPW = "";
-    //
-    @Resource(name = "sharedRestPublisher")
-    private GeoServerRESTPublisher restPublisher;
-    //
-    @Resource(name = "sharedRestReader")
-    private GeoServerRESTReader restReader;
     //
     private String geoportalDir = "";
     //
@@ -395,7 +387,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
         }
         logger.info("Removing shp " + layerName + " from " + userWorkspace);
         this.removeLayer(layerName);
-        restPublisher.unpublishFeatureType(userWorkspace, layerName, layerName);
+        this.unpublishFeature(userWorkspace, layerName, layerName);
         //reload();
         try{
             this.geoserverConnectorStore.deleteDatastoreRequest().withDatastoreName(layerName).withWorkspaceName(userWorkspace).withRecurse(TRUE).getResponse();
@@ -1425,7 +1417,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
         String datatStoreName = userWorkspace;
         // check if the dataStore already exists
         if (existsDataStore(userWorkspace, datatStoreName)) {
-            boolean result = restPublisher.unpublishFeatureType(userWorkspace,
+            Boolean result = this.unpublishFeature(userWorkspace,
                     datatStoreName, info.name);
             logger.info("Removing existing FeatureType: " + info.name + " with result: " + result);
         } else {
@@ -1682,6 +1674,41 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
             final String error = "Error to load shape file " + e;
             logger.error(error);
             throw new IllegalArgumentException(error);
+        }
+    }
+
+    /**
+     * @param workspace
+     * @param storeName
+     * @param layerName
+     * @return {@link Boolean}
+     * @throws IllegalArgumentException
+     */
+    private Boolean unpublishFeature(String workspace, String storeName, String layerName) throws IllegalArgumentException {
+        Boolean deleted;
+        try{
+            deleted = workspace != null ? this.geoserverConnectorStore.deleteLayerWorkspaceRequest()
+                    .withWorkspaceName(workspace)
+                    .withLayerName(layerName).getResponse() :
+                    this.geoserverConnectorStore.deleteLayerRequest().withLayerName(layerName).getResponse();
+            if(!deleted) {
+                logger.warn("Could not delete layer '" + layerName + "'");
+                return FALSE;
+            }else {
+                deleted = this.geoserverConnectorStore.deleteFeatureTypeRequest()
+                        .withWorkspace(workspace)
+                        .withStore(storeName)
+                        .withRecurse(TRUE)
+                        .withFeatureTypeName(layerName).getResponse();
+                if(deleted) {
+                    logger.info("FeatureType successfully deleted " + workspace + ":" + storeName + "/" + layerName);
+                }else {
+                    logger.warn("Could not delete featuretype " + workspace + ":" + storeName + "/" + layerName + ", but layer was deleted.");
+                }
+            }
+            return deleted;
+        }catch (Exception e) {
+            return FALSE;
         }
     }
 }

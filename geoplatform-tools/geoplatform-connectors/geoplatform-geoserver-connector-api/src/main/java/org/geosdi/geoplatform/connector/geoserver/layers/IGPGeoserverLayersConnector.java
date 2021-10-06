@@ -73,4 +73,9 @@ public interface IGPGeoserverLayersConnector extends IGPGeoserverNamespacesConne
      * @return {@link GeoserverUpdateLayerRequest}
      */
     GeoserverUpdateLayerRequest updateLayerRequest();
+
+    /**
+     * @return {@link GeoserverDeleteLayerWorkspaceRequest}
+     */
+    GeoserverDeleteLayerWorkspaceRequest deleteLayerWorkspaceRequest();
 }

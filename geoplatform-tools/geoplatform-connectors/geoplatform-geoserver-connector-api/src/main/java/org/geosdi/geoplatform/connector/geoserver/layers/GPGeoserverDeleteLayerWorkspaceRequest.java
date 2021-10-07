@@ -44,6 +44,7 @@ import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnecto
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -59,9 +60,9 @@ import static javax.annotation.meta.When.NEVER;
 @ThreadSafe
 public class GPGeoserverDeleteLayerWorkspaceRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteLayerWorkspaceRequest> implements GeoserverDeleteLayerWorkspaceRequest {
 
-    private final ThreadLocal<String> workspaceName;
-    private final ThreadLocal<String> layerName;
-    private final ThreadLocal<Boolean> recurse;
+    private final ThreadLocal<String> workspaceName = withInitial(() -> null);
+    private final ThreadLocal<String> layerName = withInitial(() -> null);
+    private final ThreadLocal<Boolean> recurse =  withInitial(() -> FALSE);
 
     /**
      * @param server
@@ -69,9 +70,6 @@ public class GPGeoserverDeleteLayerWorkspaceRequest extends GPJsonDeleteConnecto
      */
     GPGeoserverDeleteLayerWorkspaceRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
-        this.layerName = withInitial(() -> null);
-        this.workspaceName = withInitial(() -> null);
-        this.recurse = withInitial(() -> FALSE);
     }
 
     /**
@@ -79,7 +77,7 @@ public class GPGeoserverDeleteLayerWorkspaceRequest extends GPJsonDeleteConnecto
      * @return {@link GeoserverDeleteLayerWorkspaceRequest}
      */
     @Override
-    public GeoserverDeleteLayerWorkspaceRequest withWorkspaceName(String theWorkspaceName) {
+    public GeoserverDeleteLayerWorkspaceRequest withWorkspaceName(@Nonnull(when = NEVER) String theWorkspaceName) {
         this.workspaceName.set(theWorkspaceName);
         return self();
     }
@@ -88,7 +86,7 @@ public class GPGeoserverDeleteLayerWorkspaceRequest extends GPJsonDeleteConnecto
      * @param theWorkspaceName
      */
     @Override
-    public GeoserverDeleteLayerWorkspaceRequest withLayerName(String theWorkspaceName) {
+    public GeoserverDeleteLayerWorkspaceRequest withLayerName(@Nonnull(when = NEVER) String theWorkspaceName) {
         this.layerName.set(theWorkspaceName);
         return self();
     }
@@ -97,7 +95,7 @@ public class GPGeoserverDeleteLayerWorkspaceRequest extends GPJsonDeleteConnecto
      * @param theRecurse
      */
     @Override
-    public GeoserverDeleteLayerWorkspaceRequest withRecurse(Boolean theRecurse) {
+    public GeoserverDeleteLayerWorkspaceRequest withRecurse(@Nullable Boolean theRecurse) {
         this.recurse.set((theRecurse != null) ? theRecurse : FALSE);
         return self();
     }

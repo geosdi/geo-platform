@@ -37,6 +37,11 @@ package org.geosdi.geoplatform.connector.geoserver.request.layers;
 
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import static javax.annotation.meta.When.NEVER;
+
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
@@ -47,17 +52,17 @@ public interface GeoserverDeleteLayerWorkspaceRequest extends GPJsonConnectorReq
      * @param theWorkspaceName
      * @return {@link GeoserverDeleteLayerWorkspaceRequest}
      */
-    GeoserverDeleteLayerWorkspaceRequest withWorkspaceName(String theWorkspaceName);
+    GeoserverDeleteLayerWorkspaceRequest withWorkspaceName(@Nonnull(when = NEVER) String theWorkspaceName);
 
     /**
      * @param theLayerName
      * @return {@link GeoserverDeleteLayerWorkspaceRequest}
      */
-    GeoserverDeleteLayerWorkspaceRequest withLayerName(String theLayerName);
+    GeoserverDeleteLayerWorkspaceRequest withLayerName(@Nonnull(when = NEVER) String theLayerName);
 
     /**
      * @param theRecurse
      * @return {@link GeoserverDeleteLayerWorkspaceRequest}
      */
-    GeoserverDeleteLayerWorkspaceRequest withRecurse(Boolean theRecurse);
+    GeoserverDeleteLayerWorkspaceRequest withRecurse(@Nullable Boolean theRecurse);
 }

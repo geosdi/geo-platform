@@ -65,4 +65,10 @@ public class GPGeoserverConnectorReplaceTest {
         String v = "Value_Test";
         logger.info("#####################REPLACEMENT_VALUE : {}\n", REPLACEMENT.replace(v));
     }
+
+    @Test
+    public void c_replaceTest() {
+        String v = "          Hello             John        ";
+        logger.info("{}\n", REPLACEMENT.replace(v));
+    }
 }

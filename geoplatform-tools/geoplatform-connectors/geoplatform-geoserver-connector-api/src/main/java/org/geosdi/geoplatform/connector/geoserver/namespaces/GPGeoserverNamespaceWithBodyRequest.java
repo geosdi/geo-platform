@@ -35,10 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.namespaces;
 
-import net.jcip.annotations.ThreadSafe;
-import org.apache.http.HttpEntity;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
+import net.jcip.annotations.ThreadSafe;import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.namespace.GPGeoserverSingleNamespace;
 import org.geosdi.geoplatform.connector.geoserver.model.namespace.IGPGeoserverNamespaceBody;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverCreateWorkspaceResponse;

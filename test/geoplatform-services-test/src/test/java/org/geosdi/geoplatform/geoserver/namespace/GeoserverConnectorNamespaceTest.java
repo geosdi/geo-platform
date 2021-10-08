@@ -33,31 +33,32 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.namespaces;
+package org.geosdi.geoplatform.geoserver.namespace;
 
-import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespaceRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespaceWithBodyRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespacesRequest;
-import org.geosdi.geoplatform.connector.store.workspace.GPGeoserverWorkspacesConnectorStore;
+import org.geosdi.geoplatform.connector.geoserver.model.namespace.GPGeoserverNamespaceBody;
+import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface GPGeoserverNamespacesConnectorStore extends GPGeoserverWorkspacesConnectorStore {
+public class GeoserverConnectorNamespaceTest extends GeoserverConnectorTest {
 
-    /**
-     * @return {@link GeoserverNamespacesRequest}
-     */
-    GeoserverNamespacesRequest createNamespacesRequest();
+    static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorNamespaceTest.class);
 
-    /**
-     * @return {@link GeoserverNamespaceRequest}
-     */
-    GeoserverNamespaceRequest createNamespaceRequest();
-
-    /**
-     * @return {@link GeoserverNamespaceWithBodyRequest}
-     */
-    GeoserverNamespaceWithBodyRequest createNamespaceWithBodyRequest();
+    @Test
+    public void a_createNamespace() throws Exception {
+        logger.info("##############{}\n", this.geoserverConnectorStore.createNamespaceWithBodyRequest()
+                .withBody(new GPGeoserverNamespaceBody("ws_vito","http://www.geosdi.org/")).
+                        getResponse());
+        assertTrue("####################", this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("ws_vito").exist());
+        this.geoserverConnectorStore.deleteWorkspaceRequest().withWorkspaceName("ws_vito").getResponse();
+        assertFalse("####################", this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("ws_vito").exist());
+    }
 }

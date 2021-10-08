@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.connector.geoserver.namespaces;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespaceRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespaceWithBodyRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespacesRequest;
 import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.GPGeoserverCoveragesConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
@@ -128,6 +129,20 @@ public abstract class GPGeoserverNamespacesConnector extends GPGeoserverCoverage
             case V219x:
             case V218x:
                 return new GPGeoserverNamespaceRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverNamespaceWithBodyRequest}
+     */
+    @Override
+    public GeoserverNamespaceWithBodyRequest createNamespaceWithBodyRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverNamespaceWithBodyRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

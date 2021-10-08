@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.store.namespaces;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespaceRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespaceWithBodyRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespacesRequest;
 import org.geosdi.geoplatform.connector.store.workspace.coverages.GeoserverCoveragesConnectorStore;
 
@@ -67,5 +68,13 @@ public abstract class GeoserverNamespacesConnectorStore extends GeoserverCoverag
     @Override
     public GeoserverNamespaceRequest createNamespaceRequest() {
         return this.server.createNamespaceRequest();
+    }
+
+    /**
+     * @return {@link GeoserverNamespaceWithBodyRequest}
+     */
+    @Override
+    public GeoserverNamespaceWithBodyRequest createNamespaceWithBodyRequest() {
+        return this.server.createNamespaceWithBodyRequest();
     }
 }

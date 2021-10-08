@@ -90,5 +90,4 @@ public class GeoserverConnectorWorkspaceTest extends GeoserverConnectorTest {
         this.geoserverConnectorStore.deleteWorkspaceRequest().withWorkspaceName("vito").getResponse();
         Assert.assertFalse("####################", this.geoserverConnectorStore.loadWorkspaceRequest().withWorkspaceName("vito").exist());
     }
-
 }

@@ -45,6 +45,8 @@ public class GPConnectorParamReplacement implements ConnectorParamReplacement {
     private static final long serialVersionUID = 3387113010373151180L;
     //
     private static final String SPECIAL_CHARACTERS = "[^A-Za-z0-9]|[�]]";
+    private static final String EMPTY_SPACE_BEGINNING = "^\\s+";
+    private static final String EMPTY_SPACE_ENDING = "\\s+$";
     private static final String EMPTY_REPLACE = " ";
     private static final String SPACE = "\\s+";
     private static final String UNDERSCORE_BEGIN_AND_END = "^[_]+|[_]$";
@@ -66,6 +68,7 @@ public class GPConnectorParamReplacement implements ConnectorParamReplacement {
     @Override
     public String replace(@Nullable String theValue) {
         return ((theValue != null) && !(theValue.trim().isEmpty())) ? theValue.replaceAll(SPECIAL_CHARACTERS, EMPTY_REPLACE)
+                .replaceAll(EMPTY_SPACE_BEGINNING, DEFAULT_REPLACEMENT).replaceAll(EMPTY_SPACE_ENDING, DEFAULT_REPLACEMENT)
                 .replaceAll(SPACE, this.spaceReplacement).replaceAll(UNDERSCORE_BEGIN_AND_END, "") : theValue;
     }
 }

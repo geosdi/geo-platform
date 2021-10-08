@@ -18,7 +18,11 @@ import static java.lang.Boolean.FALSE;
  */
 public interface GeoserverCheckSLDVersion {
 
-    default  Boolean checkSLD10Version(File fileSLD) {
+    /**
+     * @param fileSLD
+     * @return {@link Boolean}
+     */
+    default Boolean checkSLD10Version(File fileSLD) {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -26,8 +30,9 @@ public interface GeoserverCheckSLDVersion {
             XPathFactory xPathfactory = XPathFactory.newInstance();
             XPath xpath = xPathfactory.newXPath();
             XPathExpression expr = xpath.compile("//@version='1.0.0'");
-            return (Boolean)expr.evaluate(doc, XPathConstants.BOOLEAN);
-        } catch (Exception var6) {
+            return (Boolean) expr.evaluate(doc, XPathConstants.BOOLEAN);
+        } catch (Exception e) {
+            e.printStackTrace();
             return FALSE;
         }
     }

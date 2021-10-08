@@ -129,8 +129,8 @@ public class GPGeoserverCreateStyleWithFileSLDRequest extends GPGeoserverBaseCre
     @Override
     protected HttpEntity prepareHttpEntity() throws Exception {
         File file = this.styleBody.get();
-        checkArgument(file != null && file.exists() && !file.isDirectory(), "The style file must not be null");
-        String contentType = this.checkSLD10Version(this.styleBody.get())  ? SLD.getContentType()  : SLD_1_1_0
+        checkArgument(((file != null) && (file.exists()) && !(file.isDirectory())), "The style file must not be null");
+        String contentType = this.checkSLD10Version(this.styleBody.get()) ? SLD.getContentType() : SLD_1_1_0
                 .getContentType();
         FileEntity builder = new FileEntity(file, create(contentType));
         return builder;
@@ -141,7 +141,7 @@ public class GPGeoserverCreateStyleWithFileSLDRequest extends GPGeoserverBaseCre
      */
     @Override
     protected void addHeaderParams(HttpUriRequest httpMethod) {
-        String contentType = this.checkSLD10Version(this.styleBody.get())  ? SLD.getContentType()  : SLD_1_1_0
+        String contentType = this.checkSLD10Version(this.styleBody.get()) ? SLD.getContentType() : SLD_1_1_0
                 .getContentType();
         httpMethod.addHeader("Content-Type", contentType);
     }

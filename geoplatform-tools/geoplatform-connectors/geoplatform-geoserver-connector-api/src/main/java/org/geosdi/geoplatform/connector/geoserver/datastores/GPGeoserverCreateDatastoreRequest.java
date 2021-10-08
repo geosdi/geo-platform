@@ -122,7 +122,7 @@ public class GPGeoserverCreateDatastoreRequest extends GPJsonPostConnectorReques
         IGPGeoserverCreateDatastoreBody datastoreBody = this.datastoreBody.get();
         checkArgument(datastoreBody != null, "The datastoreBody must not be null.");
         String datastoreBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(datastoreBody);
-        logger.debug("#############################DATASTORE_BODY : \n{}\n", datastoreBodyString);
+        logger.trace("#############################DATASTORE_BODY : \n{}\n", datastoreBodyString);
         return new StringEntity(datastoreBodyString, APPLICATION_JSON);
     }
 
@@ -156,5 +156,18 @@ public class GPGeoserverCreateDatastoreRequest extends GPJsonPostConnectorReques
     @Override
     protected Class<IGPGeoserverCreateDatastoreResponse> forClass() {
         return IGPGeoserverCreateDatastoreResponse.class;
+    }
+
+    /**
+     * @param statusCode
+     * @throws Exception
+     */
+    @Override
+    protected void checkHttpResponseStatus(int statusCode) throws Exception {
+        super.checkHttpResponseStatus(statusCode);
+        switch (statusCode) {
+            case 500 :
+                throw new IllegalStateException("DataStore already exists in workspace '".concat(this.workspaceName.get()).concat("'"));
+        }
     }
 }

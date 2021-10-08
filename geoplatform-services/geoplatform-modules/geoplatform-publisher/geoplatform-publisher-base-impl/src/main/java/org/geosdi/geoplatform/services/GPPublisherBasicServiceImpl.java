@@ -102,12 +102,12 @@ import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
+import static java.util.stream.Collectors.toList;
 import static org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy.FORCE_DECLARED;
 
 public class GPPublisherBasicServiceImpl implements IGPPublisherService, InitializingBean {
@@ -253,7 +253,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
 
     @Override
     public LayerAttributeStore describeFeatureType(String layerName) throws ResourceNotFoundFault {
-        List<LayerAttribute> result = Lists.<LayerAttribute>newArrayList();
         try {
             GeoserverLoadLayerRequest geoserverLoadLayerRequest = this.geoserverConnectorStore.loadLayerRequest().withName(layerName);
             GeoserverLayer geoserverLayer = geoserverLoadLayerRequest.getResponse();
@@ -263,14 +262,15 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
             GeoserverLoadFeatureTypeWithUrlRequest geoserverLoadFeatureTypeWithUrlRequest = this.geoserverConnectorStore.loadFeatureTypeWithUrl().
                     withUrl(geoserverLoadLayerRequest.getResponse().getLayerResource().getHref());
             GPGeoserverFeatureTypeInfo gpGeoserverFeatureTypeInfo = geoserverLoadFeatureTypeWithUrlRequest.getResponse();
-            result = gpGeoserverFeatureTypeInfo.getAttributes().getValues().stream()
-                    .map(att -> new LayerAttribute(att.getName(), att.getBinding())).collect(Collectors.toList());
+            List<LayerAttribute> result = gpGeoserverFeatureTypeInfo.getAttributes().getValues().stream()
+                    .map(att -> new LayerAttribute(att.getName(), att.getBinding()))
+                    .collect(toList());
+            return new LayerAttributeStore(result);
         } catch (Exception e) {
             final String error = "Error to load layer with layer name:" + layerName + " "  + e;
             logger.error(error);
             throw new ResourceNotFoundFault(error, e.getCause());
         }
-        return new LayerAttributeStore(result);
     }
 
     @Override
@@ -558,7 +558,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
             gpGeoserverLoadDatastores = gpGeoserverLoadDatastoresRequest.getResponse();
             listPreviews = gpGeoserverLoadDatastores.getDataStores().stream()
                     .map(c -> this.buildSHPInfoPreviewFromExistingWK(userWorkspace, c.getName(), null)).collect(
-                            Collectors.toList());
+                            toList());
         }catch (Exception e) {
             final String error = "Error to load datastores with workspace name: " +workspace + e;
             logger.error(error);
@@ -1421,7 +1421,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                     datatStoreName, info.name);
             logger.info("Removing existing FeatureType: " + info.name + " with result: " + result);
         } else {
-            //TODO
             postGISUtility.generateEncoder(datatStoreName, userWorkspace);
         }
 

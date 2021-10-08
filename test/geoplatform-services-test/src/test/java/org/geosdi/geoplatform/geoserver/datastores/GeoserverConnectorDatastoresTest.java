@@ -52,6 +52,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.File;
 import java.util.List;
@@ -61,6 +62,7 @@ import static java.io.File.separator;
 import static java.lang.Boolean.TRUE;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.postgis.IGPPostgisDatastoreBodyBuilder.GPPostgisDatastoreBodyBuilder.postgisDatastoreBodyBuilder;
 import static org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy.FORCE_DECLARED;
 
 /**
@@ -70,7 +72,23 @@ import static org.geosdi.geoplatform.connector.geoserver.model.projection.GPProj
 public class GeoserverConnectorDatastoresTest extends GeoserverConnectorTest {
 
     static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorDatastoresTest.class);
-
+    //
+    private @Value("configurator{host_postgis_datastore_publisher}")
+    String hostPostgisDatastore;
+    private @Value("configurator{port_postgis_datastore_publisher}")
+    int portPostgisDatastore;
+    private @Value("configurator{min_connections_postgis_datastore_publisher}")
+    int minConnectionsPostgisDatastore;
+    private @Value("configurator{max_connections_postgis_datastore_publisher}")
+    int maxConnectionsPostgisDatastore;
+    private @Value("configurator{timeout_connections_postgis_datastore_publisher}")
+    int timeoutConnectionsPostgisDatastore;
+    private @Value("configurator{db_name_postgis_datastore_publisher}")
+    String dbNamePostgisDatastore;
+    private @Value("configurator{username_db_postgis_datastore_publisher}")
+    String userNameDBPostgisDatastore;
+    private @Value("configurator{password_db_postgis_datastore_publisher}")
+    String passwordDBPostgisDatastore;
 
     @Test
     public void a_getDataStores() throws Exception {
@@ -167,5 +185,29 @@ public class GeoserverConnectorDatastoresTest extends GeoserverConnectorTest {
                 .withStore("store_vito")
                 .withRecurse(TRUE)
                 .withFeatureTypeName("admin_shp_comuni").getResponse());
+    }
+
+    @Ignore
+    @Test
+    public void f_createDatastore() throws Exception {
+        logger.info("###################{}\n", this.geoserverConnectorStore.createDatastoreRequest()
+                .withWorkspaceName("sf").withDatastoreBody(
+                        postgisDatastoreBodyBuilder()
+                                .withName("store_vito")
+                                .withHost(hostPostgisDatastore)
+                                .withPort(portPostgisDatastore)
+                                .withDatabase(dbNamePostgisDatastore)
+                                .withSchema("public")
+                                .withUser(userNameDBPostgisDatastore)
+                                .withPassword(passwordDBPostgisDatastore)
+                                .withExposePrimaryKeys(Boolean.FALSE)
+                                .withMaxConnections(maxConnectionsPostgisDatastore)
+                                .withMinConnections(minConnectionsPostgisDatastore)
+                                .withConnectionTimeout(timeoutConnectionsPostgisDatastore)
+                                .withFetchSize(1000)
+                                .withValidateConnections(Boolean.TRUE)
+                                .withLooseBbox(Boolean.TRUE)
+                                .withPreparedStatements(Boolean.FALSE)
+                                .withMaxOpenPreparedStatements(50).build()).getResponseAsString());
     }
 }

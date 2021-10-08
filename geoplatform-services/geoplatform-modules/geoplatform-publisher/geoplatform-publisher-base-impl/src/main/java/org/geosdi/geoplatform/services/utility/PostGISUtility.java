@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.services.utility;
 
 import com.google.common.collect.Maps;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.IGPGeoserverCreateDatastoreResponse;
-import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverCreateDatastoreRequest;
 import org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
@@ -56,12 +55,6 @@ import static org.geosdi.geoplatform.connector.geoserver.model.datastores.body.b
 @Component("postGISUtility")
 public class PostGISUtility implements InitializingBean {
 
-    private @Value("configurator{geoserver_url}")
-    String geoserverUrl;
-    private @Value("configurator{geoserver_username}")
-    String geoserverUser;
-    private @Value("configurator{geoserver_password}")
-    String geoserverPassword;
     private @Value("configurator{host_postgis_datastore_publisher}")
     String hostPostgisDatastore;
     private @Value("configurator{port_postgis_datastore_publisher}")
@@ -84,10 +77,9 @@ public class PostGISUtility implements InitializingBean {
     private Map<String, Serializable> outputDataStoreMap;
 
     public IGPGeoserverCreateDatastoreResponse generateEncoder(String storeName, String workspace) {
-
         try {
-            GeoserverCreateDatastoreRequest createDatastoreRequest = this.geoserverConnectorStore.createDatastoreRequest();
-            return createDatastoreRequest.withWorkspaceName(workspace).withDatastoreBody(
+            return this.geoserverConnectorStore.createDatastoreRequest()
+                    .withWorkspaceName(workspace).withDatastoreBody(
                     postgisDatastoreBodyBuilder()
                             .withName(storeName)
                             .withHost(hostPostgisDatastore)

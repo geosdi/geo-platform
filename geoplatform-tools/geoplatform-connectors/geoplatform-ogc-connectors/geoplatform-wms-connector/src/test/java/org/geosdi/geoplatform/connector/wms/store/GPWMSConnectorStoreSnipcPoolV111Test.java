@@ -81,6 +81,7 @@ public class GPWMSConnectorStoreSnipcPoolV111Test {
                         .build()).build();
     }
 
+    @Ignore
     @Test
     public void a_wmsGetCapabilitiesV111Test() throws Exception {
         WMSGetCapabilitiesV111Request wmsGetCapabilitiesRequest = wmsServerConnector.createGetCapabilitiesRequest();

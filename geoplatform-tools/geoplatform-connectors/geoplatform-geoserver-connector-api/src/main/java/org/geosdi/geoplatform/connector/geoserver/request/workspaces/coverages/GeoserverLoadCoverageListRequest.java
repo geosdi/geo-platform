@@ -33,57 +33,30 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.workspace.coverages;
+package org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages;
 
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageListRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoveragesRequest;
-import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.*;
-import org.geosdi.geoplatform.connector.store.workspace.GPGeoserverWorkspacesConnectorStore;
+import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.GPGeoserverListCoverageStores;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface GPGeoserverCoveragesConnectorStore extends GPGeoserverWorkspacesConnectorStore {
+public interface GeoserverLoadCoverageListRequest extends GPJsonConnectorRequest<GPGeoserverListCoverageStores, GeoserverLoadCoverageListRequest> {
 
     /**
-     * @return {@link GeoserverLoadCoveragesRequest}
-     */
-    GeoserverLoadCoveragesRequest loadWorkspaceCoveragesRequest();
-
-    /**
-     * @return {@link GeoserverLoadCoverageRequest}
-     */
-    GeoserverLoadCoverageRequest loadWorkspaceCoverageRequest();
-
-    /**
-     * @return {@link GPGeoserverLoadStoreCoverageRequest}
-     */
-    GPGeoserverLoadStoreCoverageRequest loadWorkspaceStoreCoverageRequest();
-
-    /**
-     * @return {@link GPGeoserverLoadCoverageWithUrlRequest}
-     */
-    GPGeoserverLoadCoverageWithUrlRequest loadCoverageInfoWithUrl();
-
-    /**
-     * @return {@link GPGeoserverDeleteCoverageRequest}
-     */
-    GPGeoserverDeleteCoverageRequest deleteCoverageInCoverageStore();
-
-    /**
-     * @return {@link GPGeoserverUpdateStoreCoverageRequest}
-     */
-    GPGeoserverUpdateStoreCoverageRequest updateStoreCoverageRequest();
-
-    /**
-     * @return {@link GPGeoserverUpdateCoverageRequest}
-     */
-    GPGeoserverUpdateCoverageRequest updateCoverageRequest();
-
-    /**
+     * @param theWorkspace
      * @return {@link GeoserverLoadCoverageListRequest}
      */
-    GeoserverLoadCoverageListRequest loadCoverageList();
+    GeoserverLoadCoverageListRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
+
+    /**
+     * @param theStore The name of the store to be retrieved.
+     * @return {@link GeoserverLoadCoverageListRequest}
+     */
+    GeoserverLoadCoverageListRequest withStore(@Nonnull(when = NEVER) String theStore);
 }

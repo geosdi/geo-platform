@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageListRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoveragesRequest;
 import org.geosdi.geoplatform.connector.geoserver.worksapce.GPGeoserverWorkspacesConnector;
@@ -197,6 +198,20 @@ public abstract class GPGeoserverCoveragesConnector extends GPGeoserverWorkspace
             case V219x:
             case V218x:
                 return new GPGeoserverUpdateCoverageRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverLoadCoverageListRequest}
+     */
+    @Override
+    public GeoserverLoadCoverageListRequest loadCoverageList() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverLoadCoverageListRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

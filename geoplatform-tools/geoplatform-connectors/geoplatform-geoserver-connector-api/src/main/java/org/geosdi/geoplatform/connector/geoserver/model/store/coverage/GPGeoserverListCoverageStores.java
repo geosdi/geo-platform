@@ -33,57 +33,30 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.workspace.coverages;
+package org.geosdi.geoplatform.connector.geoserver.model.store.coverage;
 
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageListRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoveragesRequest;
-import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.*;
-import org.geosdi.geoplatform.connector.store.workspace.GPGeoserverWorkspacesConnectorStore;
+import lombok.Getter;
+import lombok.ToString;
+import org.geosdi.geoplatform.connector.geoserver.model.store.GPGeoserverStore;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.List;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface GPGeoserverCoveragesConnectorStore extends GPGeoserverWorkspacesConnectorStore {
+@XmlRootElement(name = "coverages")
+@XmlAccessorType(XmlAccessType.FIELD)
+@Getter
+@ToString
+public class GPGeoserverListCoverageStores implements IGPGeoserverCoverageStores {
 
-    /**
-     * @return {@link GeoserverLoadCoveragesRequest}
-     */
-    GeoserverLoadCoveragesRequest loadWorkspaceCoveragesRequest();
-
-    /**
-     * @return {@link GeoserverLoadCoverageRequest}
-     */
-    GeoserverLoadCoverageRequest loadWorkspaceCoverageRequest();
-
-    /**
-     * @return {@link GPGeoserverLoadStoreCoverageRequest}
-     */
-    GPGeoserverLoadStoreCoverageRequest loadWorkspaceStoreCoverageRequest();
-
-    /**
-     * @return {@link GPGeoserverLoadCoverageWithUrlRequest}
-     */
-    GPGeoserverLoadCoverageWithUrlRequest loadCoverageInfoWithUrl();
-
-    /**
-     * @return {@link GPGeoserverDeleteCoverageRequest}
-     */
-    GPGeoserverDeleteCoverageRequest deleteCoverageInCoverageStore();
-
-    /**
-     * @return {@link GPGeoserverUpdateStoreCoverageRequest}
-     */
-    GPGeoserverUpdateStoreCoverageRequest updateStoreCoverageRequest();
-
-    /**
-     * @return {@link GPGeoserverUpdateCoverageRequest}
-     */
-    GPGeoserverUpdateCoverageRequest updateCoverageRequest();
-
-    /**
-     * @return {@link GeoserverLoadCoverageListRequest}
-     */
-    GeoserverLoadCoverageListRequest loadCoverageList();
+    private static final long serialVersionUID = -8165003725949281907L;
+    //
+    @XmlElement(name = "coverage")
+    private List<GPGeoserverStore> coverageStores;
 }

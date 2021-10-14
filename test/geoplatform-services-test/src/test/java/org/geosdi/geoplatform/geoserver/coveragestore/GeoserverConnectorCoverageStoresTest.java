@@ -36,15 +36,21 @@
 package org.geosdi.geoplatform.geoserver.coveragestore;
 
 import it.geosolutions.geoserver.rest.decoder.RESTCoverage;
+import it.geosolutions.geoserver.rest.decoder.RESTCoverageList;
+import it.geosolutions.geoserver.rest.decoder.RESTCoverageStoreList;
+import it.geosolutions.geoserver.rest.decoder.RESTLayer;
+import it.geosolutions.geoserver.rest.decoder.utils.NameLinkElem;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPGeoserverParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.file.GPGeoserverCoverageStoreFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.raster.GeoserverRasterLayer;
 import org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy;
+import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.GPGeoserverCoverageStores;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
 import org.geosdi.geoplatform.connector.geoserver.model.upload.GPGeoserverUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverLoadCoverageStoreRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageWithUrlRequest;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -55,6 +61,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import static java.io.File.separator;
 import static java.lang.Boolean.TRUE;
@@ -103,21 +113,37 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
     @Test()
     public void d_exsistCoverageUrl() throws Exception {
         logger.info("########################EXSIST : {}\n", this.geoserverConnectorStore.loadCoverageInfoWithUrl().
+                withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaic.json").getResponse());
+        logger.info("########################EXSIST : {}\n", this.geoserverConnectorStore.loadCoverageInfoWithUrl().
                 withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaic.json").exist());
         logger.info("########################EXSIST : {}\n", this.geoserverConnectorStore.loadCoverageInfoWithUrl().
                 withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaicww.json").exist());
     }
 
+    @Test
+    public void e_splitDimensions() throws Exception {
+        GPGeoserverCoverageInfo gpGeoserverCoverageInfo = this.geoserverConnectorStore.loadCoverageInfoWithUrl()
+                .withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaic.json").getResponse();
+        logger.info("################{}\n", gpGeoserverCoverageInfo.getDimensions().getCoverageDimension());
+        logger.info("##############{}\n", StreamSupport.stream(gpGeoserverCoverageInfo.getDimensions().getCoverageDimension().spliterator(), Boolean.FALSE)
+                .collect(Collectors.toList()));
+        RESTLayer restLayer = this.restReader.getLayer("nurc", "mosaic");
+        RESTCoverage coverage = this.restReader.getCoverage(restLayer);
+        StreamSupport
+                .stream(coverage.getEncodedDimensionsInfoList().spliterator(), Boolean.FALSE)
+                .forEach(c-> System.out.println(c.getName()));
+    }
+
     @Ignore(value = "Store layer_vito may be not present")
     @Test
-    public void e_unpublishCoverage() throws Exception {
+    public void f_unpublishCoverage() throws Exception {
                 this.geoserverConnectorStore.deleteCoverageInCoverageStore().withCoverage("layer_vito")
                         .withCoverageStore("mosaic").withWorkspace("nurc").getResponse();
     }
 
     @Ignore()
     @Test
-    public void f_updateCoverage() throws Exception {
+    public void g_updateCoverage() throws Exception {
         File file = new File(of("src", "test", "resources", "VMI_20210923T1020Z.tif").collect(joining(separator)));
         Assert.assertTrue("#################FILE_EXSIST", file.exists());
         logger.info("###############{}\n", this.geoserverConnectorStore.updateCoverageStoreWithStoreName()
@@ -134,7 +160,7 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
 
     @Ignore
     @Test
-    public void g_createCoverage() throws Exception {
+    public void h_createCoverage() throws Exception {
         GPGeoserverCoverageInfo theGPGeoserverCoverageInfo = new GPGeoserverCoverageInfo();
         theGPGeoserverCoverageInfo.setName("layer_vito");
         theGPGeoserverCoverageInfo.setTitle("layer_vito2");
@@ -149,7 +175,7 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
 
     @Ignore
     @Test
-    public void h_updateLayer() throws Exception {
+    public void i_updateLayer() throws Exception {
         GeoserverRasterLayer geoserverRasterLayer = new GeoserverRasterLayer();
         GPGeoserverStyle gpGeoserverStyle = new GPGeoserverStyle();
         gpGeoserverStyle.setName("burg");
@@ -163,7 +189,7 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
 
    @Ignore
     @Test
-    public void i_createCoverage() throws Exception {
+    public void l_createCoverage() throws Exception {
         File file = new File(of("src", "test", "resources", "VMI_20210923T1020Z.tif").collect(joining(separator)));
         Assert.assertTrue("#################FILE_EXSIST", file.exists());
         GPGeoserverCoverageInfo theGPGeoserverCoverageInfo = new GPGeoserverCoverageInfo();
@@ -195,5 +221,44 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
             geoserverRasterLayer.setDefaultStyle(gpGeoserverStyle);
             logger.info("##############{}\n", this.geoserverConnectorStore.updateLayerRequest().withWorkspaceName("sf").withLayerName("layer_vito").withLayerBody(geoserverRasterLayer).getResponse());
         }
+    }
+
+    @Test
+    public void m_loadWorkspaceCoveragesRequestTest() throws Exception {
+          Set<String> layerNames = new HashSet<>();
+        GPGeoserverCoverageStores geoserverConnectorStore = this.geoserverConnectorStore.loadCoverageStoresRequest().withWorkspace("sf").getResponse();
+        layerNames = geoserverConnectorStore.getCoverageStores().stream().map(c -> {
+                    try {
+                        return this.geoserverConnectorStore.loadCoverageList()
+                                .withWorkspace("sf")
+                                .withStore("sfdem").getResponse().getCoverageStores();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return null;
+                    }
+            }).collect(Collectors.toList())
+                .stream().flatMap(s -> s.stream())
+                .map(t -> t.getName())
+                .collect(Collectors.toSet());
+
+        logger.info("###########FIRST: {}\n", layerNames);
+        layerNames.clear();
+        RESTCoverageStoreList coverageStores = this.restReader.getCoverageStores("sf");
+        for (NameLinkElem csName : coverageStores) {
+            RESTCoverageList coverages = this.restReader.getCoverages("sf", csName.getName());
+            for (NameLinkElem coverage : coverages) {
+                layerNames.add(coverage.getName());
+            }
+        }
+        logger.info("###########SECOND: {}\n", layerNames);
+    }
+
+    @Test()
+    public void n_readCoverageInfo() throws Exception {
+        GeoserverLoadCoverageWithUrlRequest gpGeoserverLoadCoverageWithUrlRequest = this.geoserverConnectorStore.loadCoverageInfoWithUrl().
+                withUrl("http://150.145.141.180/geoserver/rest/workspaces/nurc/coveragestores/mosaic/coverages/mosaic.json");
+        GPGeoserverCoverageInfo gpGeoserverFeatureTypeInfo = gpGeoserverLoadCoverageWithUrlRequest.getResponse();
+        logger.info("########################BBOX {}\n", gpGeoserverFeatureTypeInfo.getLatLonBoundingBox());
+        logger.info("########################BBOX {}\n", gpGeoserverFeatureTypeInfo.getLatLonBoundingBox().getCrs());
     }
 }

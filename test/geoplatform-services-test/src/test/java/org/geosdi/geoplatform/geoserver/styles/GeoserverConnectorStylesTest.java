@@ -48,6 +48,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.util.List;
 
 import static java.io.File.separator;
 import static java.lang.Boolean.TRUE;
@@ -154,4 +155,14 @@ public class GeoserverConnectorStylesTest extends GeoserverConnectorTest {
                         + "</StyledLayerDescriptor>").getResponse());
     }
 
+    @Test
+    public void loadStyles() throws Exception {
+        logger.info("############{}\n", this.geoserverConnectorStore.loadStylesRequest().getResponse());
+        List<String> geoserverStyles = this.restReader.getStyles().getNames();
+
+        geoserverStyles.stream().forEach(style -> {
+            logger.info("#######{}\n", style);
+        });
+
+    }
 }

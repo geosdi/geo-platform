@@ -37,9 +37,11 @@ package org.geosdi.geoplatform.geoserver.datastores;
 
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.decoder.RESTDataStoreList;
+import it.geosolutions.geoserver.rest.encoder.datastore.GSPostGISDatastoreEncoder;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.io.FilenameUtils;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastores;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.IGPGeoserverCreateDatastoreBody;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.file.GPGeoserverDataStoreFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.vector.GeoserverVectorLayer;
@@ -59,11 +61,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.io.File.separator;
+import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.postgis.IGPPostgisDatastoreBodyBuilder.GPPostgisDatastoreBodyBuilder.postgisDatastoreBodyBuilder;
+import static org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.postgis.jndi.IGPPostgisJndiDatastoreBuilder.GPPostgisJndiDatastoreBuilder.postgisJndiDatastoreBuilder;
 import static org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy.FORCE_DECLARED;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -95,26 +100,26 @@ public class GeoserverConnectorDatastoresTest extends GeoserverConnectorTest {
         RESTDataStoreList store = restReader.getDatastores("tiger");
         GeoserverLoadDatastoresRequest gpGeoserverLoadDatastoresRequest = this.geoserverConnectorStore.loadDatastoresRequest().withWorkspaceName("tiger");
         GPGeoserverLoadDatastores gpGeoserverLoadDatastores = gpGeoserverLoadDatastoresRequest.getResponse();
-        Assert.assertTrue("#####################", store.getNames().size() == gpGeoserverLoadDatastores.getDataStores().size());
+        assertTrue("#####################", store.getNames().size() == gpGeoserverLoadDatastores.getDataStores().size());
         logger.info("##########################DATA_STORES: {}\n", gpGeoserverLoadDatastoresRequest.getResponse().getDataStores());
         logger.info("##########################DATA_STORES: {}\n", store.getNames());
         List<String> names = gpGeoserverLoadDatastores.getDataStores().stream()
                 .map(c -> c.getName()).collect(Collectors.toList());
-        store.getNames().stream().forEach(n -> Assert.assertTrue("##################", names.contains(n)));
+        store.getNames().stream().forEach(n -> assertTrue("##################", names.contains(n)));
     }
 
     @Test
     public void b_existDatastores() throws Exception {
-        Assert.assertTrue("####################", this.restReader.existsDatastore("tiger", "nyc", TRUE) ==
+        assertTrue("####################", this.restReader.existsDatastore("tiger", "nyc", TRUE) ==
                 this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName("tiger").withStoreName("nyc").withQuietNotFound(TRUE).exist());
-        Assert.assertTrue("####################", this.restReader.existsDatastore("tiger", "nycc", TRUE) ==
+        assertTrue("####################", this.restReader.existsDatastore("tiger", "nycc", TRUE) ==
                 this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName("tiger").withStoreName("nycc").withQuietNotFound(TRUE).exist());
     }
 
     @Ignore(value = "Store store_vito may be not present")
     @Test
     public void c_deleteDatastore() throws Exception {
-        Assert.assertTrue("####################", this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName("sf").withStoreName("store_vito").withQuietNotFound(TRUE).exist());
+        assertTrue("####################", this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName("sf").withStoreName("store_vito").withQuietNotFound(TRUE).exist());
         this.geoserverConnectorStore.deleteDatastoreRequest().withDatastoreName("store_vito").withWorkspaceName("sf").withRecurse(TRUE).getResponse();
         Assert.assertFalse("####################", this.geoserverConnectorStore.loadDatastoreRequest().withWorkspaceName("sf").withStoreName("store_vito").withQuietNotFound(TRUE).exist());
     }
@@ -131,11 +136,11 @@ public class GeoserverConnectorDatastoresTest extends GeoserverConnectorTest {
                         file.toURI(), "EPSG:32633", "burg");
     }
 
-    @Ignore
+    //@Ignore
     @Test
     public void d_updateDataStoreWithShape() throws Exception {
         File file = new File(of("src", "test", "resources", "admin_shp_comuni.zip").collect(joining(separator)));
-        Assert.assertTrue("#################FILE_EXSIST", file.exists());
+        assertTrue("#################FILE_EXSIST", file.exists());
         logger.info("#############FILE: {}\n", file.toURI());
         logger.info("##################{}\n", FilenameUtils.getBaseName(file.toURI().toString()));
         if(this.geoserverConnectorStore.updateDataStoreWithStoreName()
@@ -200,14 +205,36 @@ public class GeoserverConnectorDatastoresTest extends GeoserverConnectorTest {
                                 .withSchema("public")
                                 .withUser(userNameDBPostgisDatastore)
                                 .withPassword(passwordDBPostgisDatastore)
-                                .withExposePrimaryKeys(Boolean.FALSE)
+                                .withExposePrimaryKeys(FALSE)
                                 .withMaxConnections(maxConnectionsPostgisDatastore)
                                 .withMinConnections(minConnectionsPostgisDatastore)
                                 .withConnectionTimeout(timeoutConnectionsPostgisDatastore)
                                 .withFetchSize(1000)
                                 .withValidateConnections(Boolean.TRUE)
                                 .withLooseBbox(Boolean.TRUE)
-                                .withPreparedStatements(Boolean.FALSE)
                                 .withMaxOpenPreparedStatements(50).build()).getResponseAsString());
     }
+
+    @Ignore
+    @Test
+    public void g_createPostgisDatastore() throws Exception {
+        GSPostGISDatastoreEncoder postGISDatastoreEncoder = new GSPostGISDatastoreEncoder("ws_vito");
+        postGISDatastoreEncoder.setJndiReferenceName("java:comp/env/jdbc/postgres_layerbuilder");
+        postGISDatastoreEncoder.setLooseBBox(Boolean.TRUE);
+        postGISDatastoreEncoder.setEstimatedExtends(Boolean.TRUE);
+        postGISDatastoreEncoder.setEnabled(Boolean.TRUE);
+        logger.info("############{}\n", postGISDatastoreEncoder);
+
+        IGPGeoserverCreateDatastoreBody createDatastoreBody = postgisJndiDatastoreBuilder()
+                .withName("ws_vito")
+                .withJndiReferenceName("java:comp/env/jdbc/postgres_layerbuilder")
+                .withLooseBbox(TRUE)
+                .withEstimatedExtends(TRUE)
+                .withEnabled(TRUE)
+                .withFetchSize(1000)
+                .withPreparedStatements(FALSE)
+                .withEstimatedExtends(FALSE).build();
+        logger.info("#################\n{}", createDatastoreBody);
+    }
+
 }

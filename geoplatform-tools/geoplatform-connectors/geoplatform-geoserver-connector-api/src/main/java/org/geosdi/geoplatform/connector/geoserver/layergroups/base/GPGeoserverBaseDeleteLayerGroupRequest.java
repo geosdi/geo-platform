@@ -32,47 +32,79 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.styles;
+package org.geosdi.geoplatform.connector.geoserver.layergroups.base;
 
-import net.jcip.annotations.ThreadSafe;
-import org.apache.http.HttpEntity;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
-import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverStyleBody;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverCreateStyleRequest;
-import org.geosdi.geoplatform.connector.geoserver.styles.base.GPGeoserverBaseCreateStyleRequest;
+import com.google.common.io.CharStreams;
+import org.geosdi.geoplatform.connector.geoserver.request.layergroups.base.GeoserverBaseDeleteLayerGroupRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.exception.UnauthorizedException;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
+import java.io.BufferedReader;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@ThreadSafe
-class GPGeoserverCreateStyleRequest extends GPGeoserverBaseCreateStyleRequest<IGPGeoserverStyleBody, GeoserverCreateStyleRequest> implements GeoserverCreateStyleRequest {
+public abstract class GPGeoserverBaseDeleteLayerGroupRequest<R extends GeoserverBaseDeleteLayerGroupRequest> extends GPJsonDeleteConnectorRequest<Boolean, R> implements GeoserverBaseDeleteLayerGroupRequest<R> {
+
+    protected final ThreadLocal<String> name = withInitial(() -> null);
 
     /**
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    GPGeoserverCreateStyleRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    protected GPGeoserverBaseDeleteLayerGroupRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
     }
 
     /**
-     * @return {@link HttpEntity}
+     * @param theLayerGroupName
+     * @return {@link R}
      */
     @Override
-    protected HttpEntity prepareHttpEntity() throws Exception {
-        IGPGeoserverStyleBody geoserverStyleBody = this.styleBody.get();
-        checkArgument(geoserverStyleBody != null, "The Parameter styleBody must not be null.");
-        String geoserverStyleBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(geoserverStyleBody);
-        logger.debug("#############################STYLE_BODY : \n{}\n", geoserverStyleBodyString);
-        return new StringEntity(geoserverStyleBodyString, ContentType.APPLICATION_JSON);
+    public R withName(@Nonnull(when = NEVER) String theLayerGroupName) {
+        this.name.set(theLayerGroupName);
+        return self();
+    }
+
+    /**
+     * @param statusCode
+     * @throws Exception
+     */
+    @Override
+    protected void checkHttpResponseStatus(int statusCode) throws Exception {
+        switch (statusCode) {
+            case 401:
+                throw new UnauthorizedException();
+            case 405:
+                throw new IllegalStateException("Method not allowed");
+        }
+    }
+
+    /**
+     * @param reader
+     * @return {@link Boolean}
+     * @throws Exception
+     */
+    @Override
+    protected Boolean readInternal(BufferedReader reader) throws Exception {
+        String value = CharStreams.toString(reader);
+        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
+    }
+
+    /**
+     * @return {@link Class<Boolean>}
+     */
+    @Override
+    protected final Class<Boolean> forClass() {
+        return Boolean.class;
     }
 }

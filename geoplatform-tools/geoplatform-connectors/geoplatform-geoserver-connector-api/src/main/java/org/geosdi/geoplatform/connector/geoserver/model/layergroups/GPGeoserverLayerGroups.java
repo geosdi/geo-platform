@@ -18,9 +18,9 @@ import java.util.List;
 @ToString
 @XmlRootElement(name = "layerGroups")
 @XmlAccessorType(value = XmlAccessType.FIELD)
-public class GPLayerGroups implements IGPLayerGroups {
+public class GPGeoserverLayerGroups implements IGPGeoserverLayerGroups {
 
-    @XmlElement(name = "layerGroup")
-    @JsonDeserialize(contentAs = GPLayerGroupsEntry.class)
-    private List<IGPLayerGroupsEntry> entries;
+    @XmlElement(name = "layerGroup", type = GPGeoserverLayerGroup.class)
+    @JsonDeserialize(contentAs = GPGeoserverLayerGroup.class)
+    private List<IGPGeoserverLayerGroup> layers;
 }

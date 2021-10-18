@@ -55,6 +55,6 @@ public class GPGeoserverLayers implements IGPGeoserverLayers {
     private static final long serialVersionUID = 8313396633251792701L;
     //
     @JsonDeserialize(contentAs = GPGeoserverLayer.class)
-    @XmlElement(name = "layer")
+    @XmlElement(name = "layer", type = GPGeoserverLayer.class)
     private List<IGPGeoserverLayer> layers;
 }

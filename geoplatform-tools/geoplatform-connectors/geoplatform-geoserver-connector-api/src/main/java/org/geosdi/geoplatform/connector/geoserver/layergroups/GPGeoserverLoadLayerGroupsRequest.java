@@ -32,16 +32,48 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.exsist;
+package org.geosdi.geoplatform.connector.geoserver.layergroups;
+
+import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.exsist.GPGeoserverExsistRequest;
+import org.geosdi.geoplatform.connector.geoserver.model.layergroups.GPGeoserverLayerGroups;
+import org.geosdi.geoplatform.connector.geoserver.request.layergroups.GeoserverLoadLayerGroupsRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeoserverExsistRequest {
+@ThreadSafe
+class GPGeoserverLoadLayerGroupsRequest extends GPGeoserverExsistRequest<GPGeoserverLayerGroups, GeoserverLoadLayerGroupsRequest> implements GeoserverLoadLayerGroupsRequest {
 
     /**
-     * @return {@link Boolean}
+     * @param server
+     * @param theJacksonSupport
      */
-    Boolean exist() throws Exception;
+    GPGeoserverLoadLayerGroupsRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(server, theJacksonSupport);
+    }
+
+    /**
+     * @return {@link String}
+     */
+    @Override
+    protected String createUriPath() throws Exception {
+        String baseURI = this.serverURI.toString();
+        return ((baseURI.endsWith("/") ? baseURI.concat("layergroups.json") : baseURI.concat("/layergroups.json")));
+    }
+
+    /**
+     * @return {@link Class< GPGeoserverLayerGroups >}
+     */
+    @Override
+    protected Class<GPGeoserverLayerGroups> forClass() {
+        return GPGeoserverLayerGroups.class;
+    }
 }

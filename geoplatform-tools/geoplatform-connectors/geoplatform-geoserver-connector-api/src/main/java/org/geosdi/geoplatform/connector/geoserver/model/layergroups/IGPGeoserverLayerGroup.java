@@ -8,8 +8,8 @@ import java.io.Serializable;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-@JsonDeserialize(as = GPLayerGroupsEntry.class)
-public interface IGPLayerGroupsEntry extends Serializable {
+@JsonDeserialize(as = GPGeoserverLayerGroup.class)
+public interface IGPGeoserverLayerGroup extends Serializable {
 
     /**
      * @return {@link String}
@@ -20,5 +20,4 @@ public interface IGPLayerGroupsEntry extends Serializable {
      * @return {@link String}
      */
     String getHref();
-
 }

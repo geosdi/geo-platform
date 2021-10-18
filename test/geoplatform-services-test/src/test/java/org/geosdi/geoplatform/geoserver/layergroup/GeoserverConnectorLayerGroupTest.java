@@ -33,54 +33,39 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.layergroups;
+package org.geosdi.geoplatform.geoserver.layergroup;
 
-import org.geosdi.geoplatform.connector.geoserver.request.layergroups.*;
-import org.geosdi.geoplatform.connector.store.settings.GPGeoserverSettingsConnectorStore;
+import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GPGeoserverLayerGroupsConnectorStore extends GPGeoserverSettingsConnectorStore {
+public class GeoserverConnectorLayerGroupTest extends GeoserverConnectorTest {
 
-    /**
-     * @return {@link GeoserverLoadLayerGroupsRequest}
-     */
-    GeoserverLoadLayerGroupsRequest loadLayerGroups();
+    static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorLayerGroupTest.class);
 
-    /**
-     * @return {@link GeoserverLoadLayerGroupsRequest}
-     */
-    GeoserverLoadLayerGroupRequest loadLayerGroupRequest();
+    @Test
+    public void a_existLayerGroup() throws Exception {
+        logger.info("###############{}\n", this.geoserverConnectorStore.loadWorkspaceLayerGroupRequest()
+                .withLayerGroupName("layer_group_vito")
+                .withWorkspaceName("sf")
+                .exist());
+    }
 
-    /**
-     * @return {@link GeoserverLoadWorkspaceLayerGroupsRequest}
-     */
-    GeoserverLoadWorkspaceLayerGroupsRequest loadWorkspaceLayerGroupsRequest();
+    @Test
+    public void b_existLayerGroup() throws Exception {
+        logger.info("###############{}\n", this.geoserverConnectorStore.loadLayerGroupRequest()
+                .withLayerGroupName("layer_group_vito")
+                .exist());
+    }
 
-    /**
-     * @return {@link GeoserverCreateLayerGroupRequest}
-     */
-    GeoserverCreateLayerGroupRequest createLayerGroupRequest();
-
-    /**
-     * @return {@link GeoserverDeleteLayerGroupRequest}
-     */
-    GeoserverDeleteLayerGroupRequest deleteLayerGroupRequest();
-
-    /**
-     * @return {@link GeoserverCreateLayerGroupRequest}
-     */
-    GeoserverCreateWorkspaceLayerGroupRequest createWorkspaceLayerGroupRequest();
-
-    /**
-     * @return {@link GeoserverDeleteWorkspaceLayerGroupRequest}
-     */
-    GeoserverDeleteWorkspaceLayerGroupRequest deleteWorkspaceLayerGroupRequest();
-
-    /**
-     * @return {@link GeoserverLoadWorkspaceLayerGroupRequest}
-     */
-    GeoserverLoadWorkspaceLayerGroupRequest loadWorkspaceLayerGroupRequest();
+    @Test
+    public void c_loadLayerGroups() throws Exception {
+        logger.info("#############{}\n", this.geoserverConnectorStore.loadLayerGroups().getResponse().getLayers().size());
+        logger.info("#############{}\n", restReader.getLayerGroups().size());
+    }
 }

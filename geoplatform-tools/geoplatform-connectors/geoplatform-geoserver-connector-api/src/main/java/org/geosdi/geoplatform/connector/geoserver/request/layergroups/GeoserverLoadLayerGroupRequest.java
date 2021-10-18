@@ -35,6 +35,7 @@
 package org.geosdi.geoplatform.connector.geoserver.request.layergroups;
 
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.GPGeoserverLoadLayerGroup;
+import org.geosdi.geoplatform.connector.geoserver.request.exsist.GeoserverExsistRequest;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
@@ -45,7 +46,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverLoadLayerGroupRequest extends GPJsonConnectorRequest<GPGeoserverLoadLayerGroup, GeoserverLoadLayerGroupRequest> {
+public interface GeoserverLoadLayerGroupRequest extends GPJsonConnectorRequest<GPGeoserverLoadLayerGroup, GeoserverLoadLayerGroupRequest>, GeoserverExsistRequest {
 
     /**
      * @param theLayerGroupName

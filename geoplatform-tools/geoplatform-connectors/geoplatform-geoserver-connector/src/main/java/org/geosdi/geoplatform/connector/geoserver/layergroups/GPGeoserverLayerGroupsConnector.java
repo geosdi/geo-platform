@@ -205,4 +205,18 @@ public abstract class GPGeoserverLayerGroupsConnector extends GPGeoserverSetting
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
+
+    /**
+     * @return {@link GeoserverLoadWorkspaceLayerGroupsRequest}
+     */
+    @Override
+    public GeoserverLoadWorkspaceLayerGroupRequest loadWorkspaceLayerGroupRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverLoadWorkspaceLayerGroupRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
 }

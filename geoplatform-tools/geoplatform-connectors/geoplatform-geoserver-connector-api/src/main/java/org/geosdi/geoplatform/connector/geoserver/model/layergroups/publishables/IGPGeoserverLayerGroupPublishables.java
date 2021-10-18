@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,16 +32,27 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.exsist;
+package org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
- * @author Vito Salvia - CNR IMAA geoSDI Group
- * @email vito.salvia@gmail.com
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverExsistRequest {
+@JsonDeserialize(as = GPGeoserverLayerGroupPublishables.class)
+public interface IGPGeoserverLayerGroupPublishables extends Serializable {
 
     /**
-     * @return {@link Boolean}
+     * @return {@link List<GPGeoserverLayerPublished>}
      */
-    Boolean exist() throws Exception;
+    List<GPGeoserverLayerPublished> getLayers();
+
+    /**
+     * @param theLayers
+     */
+    void setLayers(List<GPGeoserverLayerPublished> theLayers);
 }

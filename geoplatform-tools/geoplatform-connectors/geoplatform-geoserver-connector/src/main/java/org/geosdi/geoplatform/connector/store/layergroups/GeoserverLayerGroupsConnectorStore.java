@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.store.layergroups;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.layergroups.GeoserverLayerGroupsRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.layergroups.*;
 import org.geosdi.geoplatform.connector.store.settings.GeoserverSettingsConnectorStore;
 
 /**
@@ -50,10 +50,58 @@ public abstract class GeoserverLayerGroupsConnectorStore extends GeoserverSettin
     }
 
     /**
-     * @return {@link GeoserverLayerGroupsRequest}
+     * @return {@link GeoserverLoadLayerGroupsRequest}
      */
     @Override
-    public GeoserverLayerGroupsRequest loadLayerGroups() {
+    public GeoserverLoadLayerGroupsRequest loadLayerGroups() {
         return this.server.loadLayerGroupsRequest();
+    }
+
+    /**
+     * @return {@link GeoserverLoadLayerGroupsRequest}
+     */
+    @Override
+    public GeoserverLoadLayerGroupRequest loadLayerGroupRequest() {
+        return this.server.loadLayerGroupRequest();
+    }
+
+    /**
+     * @return {@link GeoserverLoadWorkspaceLayerGroupsRequest}
+     */
+    @Override
+    public GeoserverLoadWorkspaceLayerGroupsRequest loadWorkspaceLayerGroupsRequest() {
+        return this.server.loadWorkspaceLayerGroupsRequest();
+    }
+
+    /**
+     * @return {@link GeoserverCreateLayerGroupRequest}
+     */
+    @Override
+    public GeoserverCreateLayerGroupRequest createLayerGroupRequest() {
+        return this.server.createLayerGroupRequest();
+    }
+
+    /**
+     * @return {@link GeoserverDeleteLayerGroupRequest}
+     */
+    @Override
+    public GeoserverDeleteLayerGroupRequest deleteLayerGroupRequest() {
+        return this.server.deleteLayerGroupRequest();
+    }
+
+    /**
+     * @return {@link GeoserverCreateLayerGroupRequest}
+     */
+    @Override
+    public GeoserverCreateWorkspaceLayerGroupRequest createWorkspaceLayerGroupRequest() {
+        return this.server.createWorkspaceLayerGroupRequest();
+    }
+
+    /**
+     * @return {@link GeoserverDeleteWorkspaceLayerGroupRequest}
+     */
+    @Override
+    public GeoserverDeleteWorkspaceLayerGroupRequest deleteWorkspaceLayerGroupRequest() {
+        return this.server.deleteWorkspaceLayerGroupRequest();
     }
 }

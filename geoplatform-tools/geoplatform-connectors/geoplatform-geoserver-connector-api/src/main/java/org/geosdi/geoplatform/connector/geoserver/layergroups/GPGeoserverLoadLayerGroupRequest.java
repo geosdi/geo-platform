@@ -32,47 +32,71 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.styles;
+package org.geosdi.geoplatform.connector.geoserver.layergroups;
 
 import net.jcip.annotations.ThreadSafe;
-import org.apache.hc.core5.http.HttpEntity;
-import org.apache.hc.core5.http.io.entity.StringEntity;
-import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverStyleBody;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverCreateStyleRequest;
-import org.geosdi.geoplatform.connector.geoserver.styles.base.GPGeoserverBaseCreateStyleRequest;
+import org.geosdi.geoplatform.connector.geoserver.exsist.GPGeoserverExsistRequest;
+import org.geosdi.geoplatform.connector.geoserver.model.layergroups.GPGeoserverLoadLayerGroup;
+import org.geosdi.geoplatform.connector.geoserver.request.layergroups.GeoserverLoadLayerGroupRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
-import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-class GPGeoserverCreateStyleRequest extends GPGeoserverBaseCreateStyleRequest<IGPGeoserverStyleBody, GeoserverCreateStyleRequest> implements GeoserverCreateStyleRequest {
+class GPGeoserverLoadLayerGroupRequest extends GPGeoserverExsistRequest<GPGeoserverLoadLayerGroup, GeoserverLoadLayerGroupRequest> implements GeoserverLoadLayerGroupRequest {
+
+    private final ThreadLocal<String> layerGroup = withInitial(() -> null);
 
     /**
-     * @param theServerConnector
+     * @param server
      * @param theJacksonSupport
      */
-    GPGeoserverCreateStyleRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
-        super(theServerConnector, theJacksonSupport);
+    GPGeoserverLoadLayerGroupRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(server, theJacksonSupport);
     }
 
     /**
-     * @return {@link HttpEntity}
+     * @param theLayerGroupName
+     * @return
      */
     @Override
-    protected HttpEntity prepareHttpEntity() throws Exception {
-        IGPGeoserverStyleBody geoserverStyleBody = this.styleBody.get();
-        checkArgument(geoserverStyleBody != null, "The Parameter styleBody must not be null.");
-        String geoserverStyleBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(geoserverStyleBody);
-        logger.debug("#############################STYLE_BODY : \n{}\n", geoserverStyleBodyString);
-        return new StringEntity(geoserverStyleBodyString, APPLICATION_JSON);
+    public GeoserverLoadLayerGroupRequest withLayerGroupName(@Nonnull(when = NEVER) String theLayerGroupName) {
+        this.layerGroup.set(theLayerGroupName);
+        return self();
+    }
+
+    /**
+     * @return {@link String}
+     */
+    @Override
+    protected String createUriPath() throws Exception {
+        String layerGroupName = this.layerGroup.get();
+        checkArgument((layerGroupName != null) && !(layerGroupName.trim().isEmpty()), "The Parameter layerGroupName must not be null or an empty string.");
+        String baseURI = this.serverURI.toString();
+        return ((baseURI.endsWith("/") ? baseURI.concat("layergroups/").concat(layerGroupName) : baseURI.concat("/layergroups/").concat(layerGroupName)));
+    }
+
+//    /**
+//     * @param httpMethod
+//     */
+//    protected void addHeaderParams(HttpUriRequest httpMethod) {
+//        httpMethod.addHeader("Accept", "application/json");
+//    }
+
+    /**
+     * @return {@link Class<GPGeoserverLoadLayerGroup>}
+     */
+    @Override
+    protected Class<GPGeoserverLoadLayerGroup> forClass() {
+        return GPGeoserverLoadLayerGroup.class;
     }
 }

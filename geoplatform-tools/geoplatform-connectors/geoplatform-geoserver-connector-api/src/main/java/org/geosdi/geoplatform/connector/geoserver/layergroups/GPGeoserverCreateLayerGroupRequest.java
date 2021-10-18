@@ -32,35 +32,41 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.styles;
+package org.geosdi.geoplatform.connector.geoserver.layergroups;
 
 import net.jcip.annotations.ThreadSafe;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.StringEntity;
-import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverStyleBody;
-import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverCreateStyleRequest;
-import org.geosdi.geoplatform.connector.geoserver.styles.base.GPGeoserverBaseCreateStyleRequest;
+import org.geosdi.geoplatform.connector.geoserver.layergroups.base.GPGeoserverBaseCreateLayerGroupRequest;
+import org.geosdi.geoplatform.connector.geoserver.model.layergroups.GPGeoserverLayerGroupBody;
+import org.geosdi.geoplatform.connector.geoserver.model.layergroups.response.GeoserverLayerGroupCreationResponse;
+import org.geosdi.geoplatform.connector.geoserver.request.layergroups.GeoserverCreateLayerGroupRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
+import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+import static java.util.stream.Collectors.joining;
 import static javax.annotation.meta.When.NEVER;
 import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
+import static org.geosdi.geoplatform.connector.geoserver.model.layergroups.response.GeoserverLayerGroupCreationResponse.toResponse;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-class GPGeoserverCreateStyleRequest extends GPGeoserverBaseCreateStyleRequest<IGPGeoserverStyleBody, GeoserverCreateStyleRequest> implements GeoserverCreateStyleRequest {
+class GPGeoserverCreateLayerGroupRequest extends GPGeoserverBaseCreateLayerGroupRequest<GPGeoserverLayerGroupBody, GeoserverCreateLayerGroupRequest> implements GeoserverCreateLayerGroupRequest {
 
     /**
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    GPGeoserverCreateStyleRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverCreateLayerGroupRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
     }
 
@@ -69,10 +75,22 @@ class GPGeoserverCreateStyleRequest extends GPGeoserverBaseCreateStyleRequest<IG
      */
     @Override
     protected HttpEntity prepareHttpEntity() throws Exception {
-        IGPGeoserverStyleBody geoserverStyleBody = this.styleBody.get();
-        checkArgument(geoserverStyleBody != null, "The Parameter styleBody must not be null.");
-        String geoserverStyleBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(geoserverStyleBody);
-        logger.debug("#############################STYLE_BODY : \n{}\n", geoserverStyleBodyString);
-        return new StringEntity(geoserverStyleBodyString, APPLICATION_JSON);
+        GPGeoserverLayerGroupBody layerGroupBody = this.body.get();
+        checkArgument(layerGroupBody != null, "The Parameter layerGroupBody must not be null.");
+        String layerGroupBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(layerGroupBody);
+        logger.debug("#############################LAYER_GROUP_BODY : \n{}\n", layerGroupBodyString);
+        return new StringEntity(layerGroupBodyString, APPLICATION_JSON);
+    }
+
+    /**
+     * @param reader
+     * @return {@link GeoserverLayerGroupCreationResponse}
+     * @throws Exception
+     */
+    @Override
+    protected GeoserverLayerGroupCreationResponse readInternal(BufferedReader reader) throws Exception {
+        String response = reader.lines().collect(joining());
+        return ((response != null) && !(response.trim().isEmpty()) && (response.equalsIgnoreCase(this.body.get().getName()))
+                ? toResponse(TRUE, "LayerGroup : " + response + " has been created.") : toResponse(FALSE, response));
     }
 }

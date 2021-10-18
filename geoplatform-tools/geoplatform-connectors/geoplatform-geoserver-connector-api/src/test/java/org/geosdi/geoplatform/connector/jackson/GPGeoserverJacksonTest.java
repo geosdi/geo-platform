@@ -84,6 +84,7 @@ public class GPGeoserverJacksonTest {
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
             ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
             WRAP_ROOT_VALUE_ENABLE,
+            ACCEPT_EMPTY_STRING_AS_NULL_OBJECT_ENABLE,
             INDENT_OUTPUT_ENABLE);
     public static final JacksonSupport emptyJacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE,

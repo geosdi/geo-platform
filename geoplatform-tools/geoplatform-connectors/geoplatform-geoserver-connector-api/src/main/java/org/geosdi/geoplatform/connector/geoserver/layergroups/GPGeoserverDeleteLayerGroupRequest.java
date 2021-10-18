@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,16 +32,42 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.exsist;
+package org.geosdi.geoplatform.connector.geoserver.layergroups;
+
+import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.layergroups.base.GPGeoserverBaseDeleteLayerGroupRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.layergroups.GeoserverDeleteLayerGroupRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Vito Salvia - CNR IMAA geoSDI Group
- * @email vito.salvia@gmail.com
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverExsistRequest {
+@ThreadSafe
+class GPGeoserverDeleteLayerGroupRequest extends GPGeoserverBaseDeleteLayerGroupRequest<GeoserverDeleteLayerGroupRequest> implements GeoserverDeleteLayerGroupRequest {
 
     /**
-     * @return {@link Boolean}
+     * @param theServerConnector
+     * @param theJacksonSupport
      */
-    Boolean exist() throws Exception;
+    GPGeoserverDeleteLayerGroupRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(theServerConnector, theJacksonSupport);
+    }
+
+    /**
+     * @return {@link String}
+     */
+    @Override
+    protected String createUriPath() throws Exception {
+        String layerGroupName = this.name.get();
+        checkArgument((layerGroupName != null) && !(layerGroupName.trim().isEmpty()), "The Parameter layerGroupName must not be null or an empty string.");
+        String baseURI = this.serverURI.toString();
+        return (baseURI.endsWith("/") ? baseURI.concat("layergroups/").concat(layerGroupName) : baseURI.concat("/layergroups/").concat(layerGroupName));
+    }
 }

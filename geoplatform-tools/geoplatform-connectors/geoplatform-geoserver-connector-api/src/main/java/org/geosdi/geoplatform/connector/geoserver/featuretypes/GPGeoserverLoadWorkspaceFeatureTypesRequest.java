@@ -48,7 +48,7 @@ import static com.google.common.base.Preconditions.checkArgument;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadWorkspaceFeatureTypesRequest extends GPGeoserverLoadFeatureTypesRequest<GeoserverLoadWorkspaceFeatureTypesRequest> implements GeoserverLoadWorkspaceFeatureTypesRequest {
+class GPGeoserverLoadWorkspaceFeatureTypesRequest extends GPGeoserverLoadFeatureTypesRequest<GeoserverLoadWorkspaceFeatureTypesRequest> implements GeoserverLoadWorkspaceFeatureTypesRequest {
 
     /**
      * @param server

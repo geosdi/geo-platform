@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.geoserver.layergroups;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
+import org.geosdi.geoplatform.connector.geoserver.request.layergroups.*;
 import org.geosdi.geoplatform.connector.geoserver.settings.GPGeoserverSettingsConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -108,14 +109,98 @@ public abstract class GPGeoserverLayerGroupsConnector extends GPGeoserverSetting
     }
 
     /**
-     * @return {@link GPGeoserverLayerGroupsRequest}
+     * @return {@link GeoserverLoadLayerGroupsRequest}
      */
     @Override
-    public GPGeoserverLayerGroupsRequest loadLayerGroupsRequest() {
+    public GeoserverLoadLayerGroupsRequest loadLayerGroupsRequest() {
         switch (version) {
             case V219x:
             case V218x:
-                return new GPGeoserverLayerGroupsRequest(this, this.jacksonSupport);
+                return new GPGeoserverLoadLayerGroupsRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverLoadLayerGroupsRequest}
+     */
+    @Override
+    public GeoserverLoadLayerGroupRequest loadLayerGroupRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverLoadLayerGroupRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverLoadWorkspaceLayerGroupsRequest}
+     */
+    @Override
+    public GeoserverLoadWorkspaceLayerGroupsRequest loadWorkspaceLayerGroupsRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverLoadWorkspaceLayerGroupsRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverCreateLayerGroupRequest}
+     */
+    @Override
+    public GeoserverCreateLayerGroupRequest createLayerGroupRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverCreateLayerGroupRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverDeleteLayerGroupRequest}
+     */
+    @Override
+    public GeoserverDeleteLayerGroupRequest deleteLayerGroupRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverDeleteLayerGroupRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverCreateWorkspaceLayerGroupRequest}
+     */
+    @Override
+    public GeoserverCreateWorkspaceLayerGroupRequest createWorkspaceLayerGroupRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverCreateWorkspaceLayerGroupRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverDeleteWorkspaceLayerGroupRequest}
+     */
+    @Override
+    public GeoserverDeleteWorkspaceLayerGroupRequest deleteWorkspaceLayerGroupRequest() {
+        switch (version) {
+            case V219x:
+            case V218x:
+                return new GPGeoserverDeleteWorkspaceLayerGroupRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

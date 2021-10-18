@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,16 +32,24 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.exsist;
+package org.geosdi.geoplatform.connector.geoserver.request.layergroups;
+
+import org.geosdi.geoplatform.connector.geoserver.request.layergroups.base.GeoserverBaseDeleteLayerGroupRequest;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Vito Salvia - CNR IMAA geoSDI Group
- * @email vito.salvia@gmail.com
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverExsistRequest {
+public interface GeoserverDeleteLayerGroupRequest extends GeoserverBaseDeleteLayerGroupRequest<GeoserverDeleteLayerGroupRequest> {
 
     /**
-     * @return {@link Boolean}
+     * @param theLayerGroupName
+     * @return {@link GeoserverDeleteLayerGroupRequest}
      */
-    Boolean exist() throws Exception;
+    @Override
+    GeoserverDeleteLayerGroupRequest withName(@Nonnull(when = NEVER) String theLayerGroupName);
 }

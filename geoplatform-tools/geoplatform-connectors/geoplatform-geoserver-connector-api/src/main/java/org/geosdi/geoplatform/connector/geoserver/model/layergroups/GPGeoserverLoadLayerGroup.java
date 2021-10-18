@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,16 +32,40 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.exsist;
+package org.geosdi.geoplatform.connector.geoserver.model.layergroups;
+
+import lombok.Getter;
+import lombok.ToString;
+import net.jcip.annotations.Immutable;
+import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverNativeBoundingBox;
+import org.geosdi.geoplatform.connector.geoserver.model.layergroups.base.GPGeoserverBaseLayerGroup;
+import org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables.GPGeoserverLayerGroupPublishables;
+import org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables.IGPGeoserverLayerGroupPublishables;
+import org.geosdi.geoplatform.connector.geoserver.model.metadata.adapter.GPGeoserverMetadataMapAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.util.Map;
 
 /**
- * @author Vito Salvia - CNR IMAA geoSDI Group
- * @email vito.salvia@gmail.com
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverExsistRequest {
+@Getter
+@Immutable
+@ToString(callSuper = true)
+@XmlRootElement(name = "layerGroup")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class GPGeoserverLoadLayerGroup extends GPGeoserverBaseLayerGroup implements GeoserverLoadLayerGroup {
 
-    /**
-     * @return {@link Boolean}
-     */
-    Boolean exist() throws Exception;
+    private static final long serialVersionUID = -2841837608539890295L;
+    //
+    @XmlElement(name = "publishables", type = GPGeoserverLayerGroupPublishables.class)
+    private IGPGeoserverLayerGroupPublishables publishables;
+    private GPGeoserverNativeBoundingBox bounds;
+    @XmlJavaTypeAdapter(value = GPGeoserverMetadataMapAdapter.class)
+    private Map<String, String> metadata;
 }

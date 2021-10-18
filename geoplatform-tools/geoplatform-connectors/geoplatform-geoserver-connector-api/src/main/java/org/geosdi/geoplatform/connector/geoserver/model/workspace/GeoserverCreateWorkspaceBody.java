@@ -65,8 +65,7 @@ public class GeoserverCreateWorkspaceBody implements GPGeoserverCreateWorkspaceB
      * @param theWorkspaceName
      */
     public GeoserverCreateWorkspaceBody(@Nonnull(when = NEVER) String theWorkspaceName) {
-        checkArgument((theWorkspaceName != null) && !(theWorkspaceName.trim().isEmpty()),
-                "The Parameter workspaceName must not be null or an Empty String.");
+        checkArgument((theWorkspaceName != null) && !(theWorkspaceName.trim().isEmpty()), "The Parameter workspaceName must not be null or an Empty String.");
         this.workspaceName = theWorkspaceName;
     }
 }

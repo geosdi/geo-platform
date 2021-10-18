@@ -55,7 +55,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadWorkspacesRequest extends GPGeoserverGetConnectorRequest<GPGeoserverWorkspaces, GPGeoserverEmptyWorkspaces, GeoserverLoadWorkspacesRequest> implements GeoserverLoadWorkspacesRequest {
+class GPGeoserverLoadWorkspacesRequest extends GPGeoserverGetConnectorRequest<GPGeoserverWorkspaces, GPGeoserverEmptyWorkspaces, GeoserverLoadWorkspacesRequest> implements GeoserverLoadWorkspacesRequest {
 
     /**
      * @param server

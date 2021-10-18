@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.store.layergroups;
 
-import org.geosdi.geoplatform.connector.geoserver.request.layergroups.GeoserverLayerGroupsRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.layergroups.*;
 import org.geosdi.geoplatform.connector.store.settings.GPGeoserverSettingsConnectorStore;
 
 /**
@@ -45,7 +45,37 @@ import org.geosdi.geoplatform.connector.store.settings.GPGeoserverSettingsConnec
 public interface GPGeoserverLayerGroupsConnectorStore extends GPGeoserverSettingsConnectorStore {
 
     /**
-     * @return {@link GeoserverLayerGroupsRequest}
+     * @return {@link GeoserverLoadLayerGroupsRequest}
      */
-    GeoserverLayerGroupsRequest loadLayerGroups();
+    GeoserverLoadLayerGroupsRequest loadLayerGroups();
+
+    /**
+     * @return {@link GeoserverLoadLayerGroupsRequest}
+     */
+    GeoserverLoadLayerGroupRequest loadLayerGroupRequest();
+
+    /**
+     * @return {@link GeoserverLoadWorkspaceLayerGroupsRequest}
+     */
+    GeoserverLoadWorkspaceLayerGroupsRequest loadWorkspaceLayerGroupsRequest();
+
+    /**
+     * @return {@link GeoserverCreateLayerGroupRequest}
+     */
+    GeoserverCreateLayerGroupRequest createLayerGroupRequest();
+
+    /**
+     * @return {@link GeoserverDeleteLayerGroupRequest}
+     */
+    GeoserverDeleteLayerGroupRequest deleteLayerGroupRequest();
+
+    /**
+     * @return {@link GeoserverCreateLayerGroupRequest}
+     */
+    GeoserverCreateWorkspaceLayerGroupRequest createWorkspaceLayerGroupRequest();
+
+    /**
+     * @return {@link GeoserverDeleteWorkspaceLayerGroupRequest}
+     */
+    GeoserverDeleteWorkspaceLayerGroupRequest deleteWorkspaceLayerGroupRequest();
 }

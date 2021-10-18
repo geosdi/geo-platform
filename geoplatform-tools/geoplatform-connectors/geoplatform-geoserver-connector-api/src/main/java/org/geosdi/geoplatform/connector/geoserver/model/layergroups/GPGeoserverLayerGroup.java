@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @Getter
 @ToString
 @XmlAccessorType(XmlAccessType.FIELD)
-public class GPLayerGroupsEntry implements IGPLayerGroupsEntry {
+public class GPGeoserverLayerGroup implements IGPGeoserverLayerGroup {
 
     private static final long serialVersionUID = 8968633650621214629L;
     //

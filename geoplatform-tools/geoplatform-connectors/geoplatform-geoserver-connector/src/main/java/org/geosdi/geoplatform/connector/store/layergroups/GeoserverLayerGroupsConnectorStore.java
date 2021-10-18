@@ -104,4 +104,12 @@ public abstract class GeoserverLayerGroupsConnectorStore extends GeoserverSettin
     public GeoserverDeleteWorkspaceLayerGroupRequest deleteWorkspaceLayerGroupRequest() {
         return this.server.deleteWorkspaceLayerGroupRequest();
     }
+
+    /**
+     * @return {@link GeoserverLoadWorkspaceLayerGroupRequest}
+     */
+    @Override
+    public GeoserverLoadWorkspaceLayerGroupRequest loadWorkspaceLayerGroupRequest() {
+        return this.server.loadWorkspaceLayerGroupRequest();
+    }
 }

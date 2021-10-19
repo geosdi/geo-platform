@@ -40,6 +40,7 @@ import it.geosolutions.geoserver.rest.cas.GeoServerCASRESTPublisher;
 import it.geosolutions.geoserver.rest.cas.GeoServerCASRESTReader;
 import it.geosolutions.geoserver.rest.sldservice.Ramp;
 import org.apache.commons.httpclient.NameValuePair;
+import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.services.IGPPublisherService;
 import org.junit.Before;
 import org.junit.Test;
@@ -86,12 +87,12 @@ public class GeoPlatformCasAopTest {
         logger.info("####################################EXISTS_STYLE_RESULT : {}\n", this.casPublisherService.existsStyle("polygon"));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test(expected = ResourceNotFoundFault.class)
     public void casAopUpdateStyleTest() throws Exception {
         logger.info("############################UPDATE_STYLE_RESULT : {}\n", this.casPublisherService.updateStyle("PIPPO", "pippo", FALSE));
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test(expected = ResourceNotFoundFault.class)
     public void casPublishStyleTest() throws Exception {
         logger.info("############################UPDATE_STYLE_RESULT : {}\n", this.casPublisherService.publishStyle("PIPPO", "pippo", FALSE));
     }

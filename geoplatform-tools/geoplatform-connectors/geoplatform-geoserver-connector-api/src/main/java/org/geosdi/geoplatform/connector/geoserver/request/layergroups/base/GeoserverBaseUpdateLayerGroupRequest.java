@@ -32,10 +32,9 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.layergroups;
+package org.geosdi.geoplatform.connector.geoserver.request.layergroups.base;
 
-import org.geosdi.geoplatform.connector.geoserver.model.layergroups.GPGeoserverLoadLayerGroup;
-import org.geosdi.geoplatform.connector.geoserver.request.exsist.GeoserverExsistRequest;
+import org.geosdi.geoplatform.connector.geoserver.model.layergroups.GPGeoserverLayerGroupBody;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
@@ -43,20 +42,20 @@ import javax.annotation.Nonnull;
 import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Vito Salvia - CNR IMAA geoSDI Group
- * @email vito.salvia@gmail.com
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverLoadWorkspaceLayerGroupRequest extends GPJsonConnectorRequest<GPGeoserverLoadLayerGroup, GeoserverLoadWorkspaceLayerGroupRequest>, GeoserverExsistRequest {
+public interface GeoserverBaseUpdateLayerGroupRequest<R extends GeoserverBaseUpdateLayerGroupRequest> extends GPJsonConnectorRequest<Boolean, R> {
 
     /**
      * @param theLayerGroupName
-     * @return {@link GeoserverLoadWorkspaceLayerGroupRequest}
+     * @return {@link R}
      */
-    GeoserverLoadWorkspaceLayerGroupRequest withLayerGroupName(@Nonnull(when = NEVER) String theLayerGroupName);
+    R withName(@Nonnull(when = NEVER) String theLayerGroupName);
 
     /**
-     * @param theWorkspaceName
-     * @return {@link GeoserverLoadWorkspaceLayerGroupRequest}
+     * @param theLayerGroupBody
+     * @return {@link R}
      */
-    GeoserverLoadWorkspaceLayerGroupRequest withWorkspaceName(@Nonnull(when = NEVER) String theWorkspaceName);
+    R withBody(@Nonnull(when = NEVER) GPGeoserverLayerGroupBody theLayerGroupBody);
 }

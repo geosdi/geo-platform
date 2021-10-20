@@ -65,6 +65,11 @@ public interface GPGeoserverLayerGroupsConnectorStore extends GPGeoserverSetting
     GeoserverCreateLayerGroupRequest createLayerGroupRequest();
 
     /**
+     * @return {@link GeoserverUpdateLayerGroupRequest}
+     */
+    GeoserverUpdateLayerGroupRequest updateLayerGroupRequest();
+
+    /**
      * @return {@link GeoserverDeleteLayerGroupRequest}
      */
     GeoserverDeleteLayerGroupRequest deleteLayerGroupRequest();
@@ -73,6 +78,11 @@ public interface GPGeoserverLayerGroupsConnectorStore extends GPGeoserverSetting
      * @return {@link GeoserverCreateLayerGroupRequest}
      */
     GeoserverCreateWorkspaceLayerGroupRequest createWorkspaceLayerGroupRequest();
+
+    /**
+     * @return {@link GeoserverUpdateWorkspaceLayerGroupRequest}
+     */
+    GeoserverUpdateWorkspaceLayerGroupRequest updateWorkspaceLayerGroupRequest();
 
     /**
      * @return {@link GeoserverDeleteWorkspaceLayerGroupRequest}

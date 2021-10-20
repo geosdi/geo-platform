@@ -196,23 +196,23 @@ public class GeoserverConnectorDatastoresTest extends GeoserverConnectorTest {
     @Test
     public void f_createDatastore() throws Exception {
         logger.info("###################{}\n", this.geoserverConnectorStore.createDatastoreRequest()
-                .withWorkspaceName("sf").withDatastoreBody(
-                        postgisDatastoreBodyBuilder()
-                                .withName("store_vito")
-                                .withHost(hostPostgisDatastore)
-                                .withPort(portPostgisDatastore)
-                                .withDatabase(dbNamePostgisDatastore)
-                                .withSchema("public")
-                                .withUser(userNameDBPostgisDatastore)
-                                .withPassword(passwordDBPostgisDatastore)
-                                .withExposePrimaryKeys(FALSE)
-                                .withMaxConnections(maxConnectionsPostgisDatastore)
-                                .withMinConnections(minConnectionsPostgisDatastore)
-                                .withConnectionTimeout(timeoutConnectionsPostgisDatastore)
-                                .withFetchSize(1000)
-                                .withValidateConnections(Boolean.TRUE)
-                                .withLooseBbox(Boolean.TRUE)
-                                .withMaxOpenPreparedStatements(50).build()).getResponseAsString());
+                .withWorkspaceName("sf")
+                .withDatastoreBody(postgisDatastoreBodyBuilder()
+                        .withName("store_vito")
+                        .withHost(hostPostgisDatastore)
+                        .withPort(portPostgisDatastore)
+                        .withDatabase(dbNamePostgisDatastore)
+                        .withSchema("public")
+                        .withUser(userNameDBPostgisDatastore)
+                        .withPassword(passwordDBPostgisDatastore)
+                        .withExposePrimaryKeys(FALSE)
+                        .withMaxConnections(maxConnectionsPostgisDatastore)
+                        .withMinConnections(minConnectionsPostgisDatastore)
+                        .withConnectionTimeout(timeoutConnectionsPostgisDatastore)
+                        .withFetchSize(1000)
+                        .withValidateConnections(Boolean.TRUE)
+                        .withLooseBbox(Boolean.TRUE)
+                        .withMaxOpenPreparedStatements(50).build()).getResponseAsString());
     }
 
     @Ignore

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.geosdi</groupId>
+        <artifactId>geoplatform-geoserver-rest</artifactId>
+        <version>1.8-SNAPSHOT</version>
+    </parent>
+
+    <groupId>org.geosdi</groupId>
+    <artifactId>geoplatform-geoserver-rest-support</artifactId>
+    <version>1.8-SNAPSHOT</version>
+
+    <name>Geo-Platform :: == Geoserver Connector Api Module</name>
+    <!-- FIXME change it to the project's website -->
+    <url>http://www.example.com</url>
+    <description>This module contains model and request</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+<dependencies>
+
+    <!-- =========================================================== -->
+    <!-- ========== GEOPLATFORM GEOSERVER CONNECTOR API ============ -->
+    <!-- =========================================================== -->
+    <dependency>
+        <groupId>org.geosdi</groupId>
+        <artifactId>geoplatform-connector-api</artifactId>
+        <version>${project.version}</version>
+    </dependency>
+
+    <!-- =========================================================== -->
+    <!-- ============== GEOPLATFORM WS BASE UTIL =================== -->
+    <!-- =========================================================== -->
+    <dependency>
+        <groupId>org.geosdi</groupId>
+        <artifactId>geoplatform-ws-base-util</artifactId>
+        <version>${project.version}</version>
+    </dependency>
+
+</dependencies>
+
+</project>

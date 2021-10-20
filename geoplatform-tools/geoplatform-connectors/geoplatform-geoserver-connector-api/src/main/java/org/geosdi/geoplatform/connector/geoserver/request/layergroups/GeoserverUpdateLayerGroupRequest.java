@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,64 +32,32 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.layergroups;
+package org.geosdi.geoplatform.connector.geoserver.request.layergroups;
 
-import org.geosdi.geoplatform.connector.geoserver.request.layergroups.*;
-import org.geosdi.geoplatform.connector.geoserver.settings.IGPGeoserverSettingsConnector;
+import org.geosdi.geoplatform.connector.geoserver.model.layergroups.GPGeoserverLayerGroupBody;
+import org.geosdi.geoplatform.connector.geoserver.request.layergroups.base.GeoserverBaseUpdateLayerGroupRequest;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Vito Salvia - CNR IMAA geoSDI Group
- * @email vito.salvia@gmail.com
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverLayerGroupsConnector extends IGPGeoserverSettingsConnector {
+public interface GeoserverUpdateLayerGroupRequest extends GeoserverBaseUpdateLayerGroupRequest<GeoserverUpdateLayerGroupRequest> {
 
     /**
-     * @return {@link GeoserverLoadLayerGroupsRequest}
-     */
-    GeoserverLoadLayerGroupsRequest loadLayerGroupsRequest();
-
-    /**
-     * @return {@link GeoserverLoadLayerGroupsRequest}
-     */
-    GeoserverLoadLayerGroupRequest loadLayerGroupRequest();
-
-    /**
-     * @return {@link GeoserverLoadWorkspaceLayerGroupsRequest}
-     */
-    GeoserverLoadWorkspaceLayerGroupsRequest loadWorkspaceLayerGroupsRequest();
-
-    /**
-     * @return {@link GeoserverCreateLayerGroupRequest}
-     */
-    GeoserverCreateLayerGroupRequest createLayerGroupRequest();
-
-    /**
+     * @param theLayerGroupName
      * @return {@link GeoserverUpdateLayerGroupRequest}
      */
-    GeoserverUpdateLayerGroupRequest updateLayerGroupRequest();
+    @Override
+    GeoserverUpdateLayerGroupRequest withName(@Nonnull(when = NEVER) String theLayerGroupName);
 
     /**
-     * @return {@link GeoserverDeleteLayerGroupRequest}
+     * @param theLayerGroupBody
+     * @return {@link GeoserverUpdateLayerGroupRequest}
      */
-    GeoserverDeleteLayerGroupRequest deleteLayerGroupRequest();
-
-    /**
-     * @return {@link GeoserverCreateLayerGroupRequest}
-     */
-    GeoserverCreateWorkspaceLayerGroupRequest createWorkspaceLayerGroupRequest();
-
-    /**
-     * @return {@link GeoserverUpdateWorkspaceLayerGroupRequest}
-     */
-    GeoserverUpdateWorkspaceLayerGroupRequest updateWorkspaceLayerGroupRequest();
-
-    /**
-     * @return {@link GeoserverDeleteWorkspaceLayerGroupRequest}
-     */
-    GeoserverDeleteWorkspaceLayerGroupRequest deleteWorkspaceLayerGroupRequest();
-
-    /**
-     * @return {@link GeoserverLoadWorkspaceLayerGroupsRequest}
-     */
-    GeoserverLoadWorkspaceLayerGroupRequest loadWorkspaceLayerGroupRequest();
+    @Override
+    GeoserverUpdateLayerGroupRequest withBody(@Nonnull(when = NEVER) GPGeoserverLayerGroupBody theLayerGroupBody);
 }

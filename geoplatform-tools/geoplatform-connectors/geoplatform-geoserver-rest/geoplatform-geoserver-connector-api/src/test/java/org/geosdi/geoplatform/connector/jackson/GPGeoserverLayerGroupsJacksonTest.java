@@ -34,6 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.jackson;
 
+import org.geosdi.geoplatform.connector.geoserver.model.layergroups.*;
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables.GPGeoserverLayerGroupPublishables;
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables.GPGeoserverLayerPublished;
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables.GPGeoserverLayerTypePublished;

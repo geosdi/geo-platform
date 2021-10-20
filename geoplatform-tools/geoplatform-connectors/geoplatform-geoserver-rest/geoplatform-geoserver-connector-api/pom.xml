@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.geosdi</groupId>
+        <artifactId>geoplatform-geoserver-rest</artifactId>
+        <version>1.8-SNAPSHOT</version>
+    </parent>
+
+    <groupId>org.geosdi</groupId>
+    <artifactId>geoplatform-geoserver-connector-api</artifactId>
+    <version>1.8-SNAPSHOT</version>
+
+    <name>Geo-Platform :: == Geoserver Connector Api Module</name>
+    <!-- FIXME change it to the project's website -->
+    <url>http://www.example.com</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+
+      <dependency>
+          <groupId>org.geosdi</groupId>
+          <artifactId>geoplatform-geoserver-rest-support</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <!-- =========================================================== -->
+      <!-- ============== GEOPLATFORM WS BASE UTIL =================== -->
+      <!-- =========================================================== -->
+      <dependency>
+        <groupId>org.geosdi</groupId>
+        <artifactId>geoplatform-ws-base-util</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <!-- =========================================================== -->
+      <!-- ===================== COMMONS-POOL ======================== -->
+      <!-- =========================================================== -->
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-pool2</artifactId>
+      </dependency>
+
+      <!-- =========================================================== -->
+      <!-- ========================== RX3Java ======================== -->
+      <!-- =========================================================== -->
+      <dependency>
+        <groupId>io.reactivex.rxjava3</groupId>
+        <artifactId>rxjava</artifactId>
+      </dependency>
+
+        <!-- =========================================================== -->
+        <!-- ======================== HTTP MIME   ====================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+        </dependency>
+
+        <!-- =========================================================== -->
+        <!-- ============== GEOPLATFORM SLD V1.0.0 ===================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>sld-1.0.0</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+      <!-- logging dependencies, delegate all to slf4j and use logback -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jcl-over-slf4j</artifactId>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>log4j-over-slf4j</artifactId>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+      </dependency>
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>**/*.xml</exclude>
+                        <exclude>**/*.properties</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>Jar Tests Package</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <inherited>true</inherited>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.txt</include>
+                    <include>**/*.sql</include>
+                    <include>**/*.html</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.utf</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.serialized</include>
+                    <include>**/*.xsd</include>
+                    <include>META-INF/*.jai</include>
+                    <include>META-INF/mailcap</include>
+                    <include>META-INF/services/**</include>
+                    <include>applicationContext.xml</include>
+                    <include>**/*.ftl</include>
+                    <include>**/*.css</include>
+                    <include>**/*.js</include>
+                    <include>**/*.png</include>
+                    <include>**/*.gif</include>
+                    <include>**/*.sld</include>
+                    <include>**/*.ico</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+</project>

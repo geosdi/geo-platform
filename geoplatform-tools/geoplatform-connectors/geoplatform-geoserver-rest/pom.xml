@@ -7,12 +7,12 @@
   <parent>
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-connectors</artifactId>
-    <version>1.8-SNAPSHOT</version>
+    <version>1.9-SNAPSHOT</version>
   </parent>
 
   <groupId>org.geosdi</groupId>
   <artifactId>geoplatform-geoserver-rest</artifactId>
-  <version>1.8-SNAPSHOT</version>
+  <version>1.9-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Geo-Platform :: == Connectors Rest</name>

@@ -1578,7 +1578,7 @@
         <guava-version>31.0.1-jre</guava-version>
         <guice-version>3.0</guice-version>
         
-        <ehcache-version>2.10.6</ehcache-version>
+        <ehcache-version>2.10.9.2</ehcache-version>
         
         <commons-pool-version>2.11.1</commons-pool-version>
         

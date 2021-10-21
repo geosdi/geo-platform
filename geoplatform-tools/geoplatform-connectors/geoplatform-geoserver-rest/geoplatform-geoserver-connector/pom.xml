@@ -4,7 +4,7 @@
 
     <parent>
         <groupId>org.geosdi</groupId>
-        <artifactId>geoplatform-connectors</artifactId>
+        <artifactId>geoplatform-geoserver-rest</artifactId>
         <version>1.9-SNAPSHOT</version>
     </parent>
 

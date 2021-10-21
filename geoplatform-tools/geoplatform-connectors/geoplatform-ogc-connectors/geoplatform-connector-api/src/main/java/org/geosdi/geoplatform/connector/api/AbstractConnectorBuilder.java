@@ -46,7 +46,7 @@ import java.net.URL;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractConnectorBuilder<B extends AbstractConnectorBuilder, C extends GeoPlatformConnector> implements GPConnectorBuilder<B> {
+public abstract class AbstractConnectorBuilder<B extends GPConnectorBuilder, C extends GeoPlatformConnector> implements GPConnectorBuilder<B> {
 
     protected URL serverUrl;
     protected GPPooledConnectorConfig pooledConnectorConfig;
@@ -112,7 +112,8 @@ public abstract class AbstractConnectorBuilder<B extends AbstractConnectorBuilde
      * @param theVersion
      * @return {@link B}
      */
-    protected B withVersion(String theVersion) {
+    @Override
+    public B withVersion(String theVersion) {
         this.version = theVersion;
         return self();
     }
@@ -121,6 +122,7 @@ public abstract class AbstractConnectorBuilder<B extends AbstractConnectorBuilde
      * @return {@link C}
      * @throws Exception
      */
+    @Override
     public abstract C build() throws Exception;
 
     /**

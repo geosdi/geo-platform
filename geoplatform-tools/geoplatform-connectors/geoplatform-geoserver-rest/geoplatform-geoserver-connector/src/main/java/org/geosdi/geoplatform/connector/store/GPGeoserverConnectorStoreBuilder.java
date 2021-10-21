@@ -41,6 +41,8 @@ import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
+import javax.annotation.Nullable;
+
 import static com.google.common.base.Preconditions.checkArgument;
 import static org.geosdi.geoplatform.connector.GeoserverVersion.fromString;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
@@ -49,7 +51,7 @@ import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeatu
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public final class GPGeoserverConnectorStoreBuilder extends AbstractConnectorBuilder<GPGeoserverConnectorStoreBuilder, GPGeoserverConnectorStore> {
+public final class GPGeoserverConnectorStoreBuilder extends AbstractConnectorBuilder<GeoserverConnectorStoreBuilder, GPGeoserverConnectorStore> implements GeoserverConnectorStoreBuilder {
 
     private JacksonSupport jacksonSupport;
 
@@ -57,9 +59,9 @@ public final class GPGeoserverConnectorStoreBuilder extends AbstractConnectorBui
     }
 
     /**
-     * @return {@link GPGeoserverConnectorStoreBuilder}
+     * @return {@link GeoserverConnectorStoreBuilder}
      */
-    public static GPGeoserverConnectorStoreBuilder geoserverConnectorBuilder() {
+    public static GeoserverConnectorStoreBuilder geoserverConnectorBuilder() {
         return new GPGeoserverConnectorStoreBuilder();
     }
 
@@ -67,17 +69,17 @@ public final class GPGeoserverConnectorStoreBuilder extends AbstractConnectorBui
      * @param theJacksoSupport
      * @return
      */
-    public GPGeoserverConnectorStoreBuilder withJacksoSupport(JacksonSupport theJacksoSupport) {
+    public GeoserverConnectorStoreBuilder withJacksonSupport(@Nullable JacksonSupport theJacksoSupport) {
         this.jacksonSupport = theJacksoSupport;
         return self();
     }
 
     /**
      * @param theVersion
-     * @return {@link GPGeoserverConnectorStoreBuilder}
+     * @return {@link GeoserverConnectorStoreBuilder}
      */
     @Override
-    public GPGeoserverConnectorStoreBuilder withVersion(String theVersion) {
+    public GeoserverConnectorStoreBuilder withVersion(String theVersion) {
         return super.withVersion(theVersion);
     }
 

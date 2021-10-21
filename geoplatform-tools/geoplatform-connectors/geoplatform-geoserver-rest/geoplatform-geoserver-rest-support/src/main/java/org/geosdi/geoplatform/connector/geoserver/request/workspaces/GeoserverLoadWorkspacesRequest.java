@@ -50,5 +50,4 @@ public interface GeoserverLoadWorkspacesRequest extends GPJsonConnectorRequest<G
      * @throws Exception
      */
     List<String> getWorkpacesNames() throws Exception;
-
 }

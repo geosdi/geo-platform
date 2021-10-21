@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNa
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespacesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStylesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.*;
 import org.geosdi.geoplatform.connector.store.task.GeoserverLayerTask;
 import org.geosdi.geoplatform.connector.store.task.GeoserverNamespaceTask;
 import org.geosdi.geoplatform.connector.store.task.GeoserverStyleTask;

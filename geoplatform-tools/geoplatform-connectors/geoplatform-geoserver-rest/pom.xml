@@ -20,7 +20,7 @@
   <modules>
     <module>geoplatform-geoserver-connector-api</module>
     <module>geoplatform-geoserver-connector</module>
-    <module>geoplatform-geoserver-rest-support</module>
+    <module>geoplatform-geoserver-request-support</module>
+    <module>geoplatform-geoserver-model-support</module>
   </modules>
-
 </project>

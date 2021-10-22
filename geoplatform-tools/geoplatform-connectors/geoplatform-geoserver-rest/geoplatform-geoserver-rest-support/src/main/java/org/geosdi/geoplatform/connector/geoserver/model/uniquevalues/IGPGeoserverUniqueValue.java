@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,38 +32,27 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store;
+package org.geosdi.geoplatform.connector.geoserver.model.uniquevalues;
 
-import org.geosdi.geoplatform.connector.GeoserverVersion;
-import org.geosdi.geoplatform.connector.store.uniquevalues.GPGeoserverUniqueValuesConnectorStore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface IGPGeoserverConnectorStore extends GPGeoserverUniqueValuesConnectorStore {
+@JsonDeserialize(as = GPGeoserverUniqueValue.class)
+public interface IGPGeoserverUniqueValue extends Serializable {
 
     /**
-     * @return {@link Boolean}
+     * @param theValues
      */
-    Boolean isGeoserverRestRunning();
+    void setValues(List<String> theValues);
 
     /**
-     * <p>Reload the configuration from disk, and reset all caches.</p>
-     *
-     * @return {@link Boolean}
+     * @return {@link List<String>}
      */
-    Boolean reloadCatalog();
-
-    /**
-     * <p>Reset all store, raster, and schema caches.</p>
-     *
-     * @return {@link Boolean}
-     */
-    Boolean reset();
-
-    /**
-     * @return {@link GeoserverVersion}
-     */
-    GeoserverVersion getVersion();
+    List<String> getValues();
 }

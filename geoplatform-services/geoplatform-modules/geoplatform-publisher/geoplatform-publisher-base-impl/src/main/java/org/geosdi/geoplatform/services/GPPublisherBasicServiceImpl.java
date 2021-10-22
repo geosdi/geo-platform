@@ -51,6 +51,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.layers.vector.GeoserverV
 import org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverStyle;
+import org.geosdi.geoplatform.connector.geoserver.model.uniquevalues.GPGeoserverUniqueValue;
 import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
 import org.geosdi.geoplatform.connector.geoserver.model.upload.GPGeoserverUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GeoserverCreateWorkspaceBody;
@@ -275,10 +276,17 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
 
     @Override
     public UniqueValuesInfo uniqueValues(String layerName, String layerAttribute) throws ResourceNotFoundFault {
-        //TODO not found
-//        RESTServiceUniqueValues restServiceUniqueValues = this.restReader.uniqueValues(layerName, layerAttribute);
-//        List<String> list = restServiceUniqueValues.getNames();
-        return null;
+        try {
+            GPGeoserverUniqueValue gpGeoserverUniqueValue = this.geoserverConnectorStore
+                    .loadUniqueValues()
+                    .withLayerName(layerName)
+                    .withLayerAttribute(layerAttribute).getResponse();
+            return new UniqueValuesInfo(gpGeoserverUniqueValue.getValues(), layerAttribute, gpGeoserverUniqueValue.getValues().size());
+        } catch (Exception e) {
+            final String error = "Error to load unique values for:" + layerName + " "  + e;
+            logger.error(error);
+            throw new ResourceNotFoundFault(error, e.getCause());
+        }
     }
 
     /**

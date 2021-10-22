@@ -7,12 +7,12 @@
   <parent>
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-geoserver-rest</artifactId>
-    <version>1.8-SNAPSHOT</version>
+    <version>1.9-SNAPSHOT</version>
   </parent>
 
   <groupId>org.geosdi</groupId>
   <artifactId>geoplatform-geoserver-model-support</artifactId>
-  <version>1.8-SNAPSHOT</version>
+  <version>1.9-SNAPSHOT</version>
 
   <name>Geo-Platform :: == Geoserver Connector Model Module</name>
   <!-- FIXME change it to the project's website -->

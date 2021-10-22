@@ -25,16 +25,7 @@
 
       <dependency>
           <groupId>org.geosdi</groupId>
-          <artifactId>geoplatform-geoserver-rest-support</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-
-      <!-- =========================================================== -->
-      <!-- ============== GEOPLATFORM WS BASE UTIL =================== -->
-      <!-- =========================================================== -->
-      <dependency>
-        <groupId>org.geosdi</groupId>
-        <artifactId>geoplatform-ws-base-util</artifactId>
+          <artifactId>geoplatform-geoserver-request-support</artifactId>
         <version>${project.version}</version>
       </dependency>
 

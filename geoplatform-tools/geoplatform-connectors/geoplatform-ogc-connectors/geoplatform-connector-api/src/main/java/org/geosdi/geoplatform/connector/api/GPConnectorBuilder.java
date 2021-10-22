@@ -45,7 +45,7 @@ import java.net.URL;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPConnectorBuilder<B extends AbstractConnectorBuilder> {
+public interface GPConnectorBuilder<B extends GPConnectorBuilder> {
 
     /**
      * @param theServerUrl
@@ -76,4 +76,17 @@ public interface GPConnectorBuilder<B extends AbstractConnectorBuilder> {
      * @return {@link B}
      */
     B withSslConnectionSocketFactory(SSLConnectionSocketFactory theSslConnectionSocketFactory);
+
+    /**
+     * @param theVersion
+     * @return {@link B}
+     */
+    B withVersion(String theVersion);
+
+    /**
+     * @param <C>
+     * @return {@link C}
+     * @throws Exception
+     */
+    <C extends GeoPlatformConnector> C build() throws Exception;
 }

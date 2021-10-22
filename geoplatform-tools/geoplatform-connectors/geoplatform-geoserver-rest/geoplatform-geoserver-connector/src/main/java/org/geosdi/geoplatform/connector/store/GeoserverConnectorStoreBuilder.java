@@ -32,22 +32,22 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.workspaces;
+package org.geosdi.geoplatform.connector.store;
 
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverWorkspaces;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
+import org.geosdi.geoplatform.connector.api.GPConnectorBuilder;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
-import java.util.List;
+import javax.annotation.Nullable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverLoadWorkspacesRequest extends GPJsonConnectorRequest<GPGeoserverWorkspaces, GeoserverLoadWorkspacesRequest> {
+public interface GeoserverConnectorStoreBuilder extends GPConnectorBuilder<GeoserverConnectorStoreBuilder> {
 
     /**
-     * @return {@link List<String>}
-     * @throws Exception
+     * @param theJacksoSupport
+     * @return {@link GeoserverConnectorStoreBuilder}
      */
-    List<String> getWorkpacesNames() throws Exception;
+    GeoserverConnectorStoreBuilder withJacksonSupport(@Nullable JacksonSupport theJacksoSupport);
 }

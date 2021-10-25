@@ -20,6 +20,16 @@
         <smack.version>4.4.3</smack.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>sonatype</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
     <dependencies>
         <!-- =========================================================== -->
         <!-- =========================== SPRING ======================== -->

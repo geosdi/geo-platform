@@ -227,7 +227,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                     .withRaw(TRUE)
                     .withStringStyleBody(styleToPublish).getResponse();
         }catch (Exception e) {
-            return FALSE;
+            throw new ResourceNotFoundFault("Error to update style with name " + styleName);
         }
     }
 

@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.connector.server.v130.WMSGetCapabilitiesV130Reques
 import org.geosdi.geoplatform.wms.v130.WMSCapabilities;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,6 +73,7 @@ public class GPWMSConnectorStoreV130Test {
     }
 
     @Test
+    @Ignore
     public void a_wmsGetCapabilitiesV130Test() throws Exception {
         WMSGetCapabilitiesV130Request wmsGetCapabilitiesRequest = wmsServerConnector.createGetCapabilitiesRequest();
         WMSCapabilities wmsCapabilities = wmsGetCapabilitiesRequest.getResponse();

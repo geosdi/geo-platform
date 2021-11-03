@@ -36,7 +36,7 @@ package org.geosdi.geoplatform.connector.geoserver.rasterize;
 
 import io.reactivex.rxjava3.functions.Consumer;
 import net.jcip.annotations.ThreadSafe;
-import org.apache.http.client.utils.URIBuilder;
+import org.apache.hc.core5.net.URIBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.rasterize.GeoserverRamp;
 import org.geosdi.geoplatform.connector.geoserver.model.rasterize.GeoserverRasterizeType;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryParam;

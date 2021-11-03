@@ -6,7 +6,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryPara
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public enum GPGeoserverDataStoreFileExtension implements GPGeoserverQueryParam {
+public enum GPGeoserverDataStoreFileExtension implements GPGeoserverQueryParam<String>  {
 
     SHP,
     PROPERTIES,
@@ -29,8 +29,8 @@ public enum GPGeoserverDataStoreFileExtension implements GPGeoserverQueryParam {
      * @return {@link String}
      */
     @Override
-    public Object getValue() {
-        return this.getValue();
+    public String getValue() {
+        return this.toString();
     }
 
     /**
@@ -38,6 +38,6 @@ public enum GPGeoserverDataStoreFileExtension implements GPGeoserverQueryParam {
      */
     @Override
     public String formatValue() {
-        return this.toString();
+        return this.getValue();
     }
 }

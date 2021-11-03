@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,31 +32,29 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver;
+package org.geosdi.geoplatform.connector.store.rasterize;
 
-import org.geosdi.geoplatform.connector.geoserver.rasterize.IGPGeoserverRasterizeConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.reload.GeoserverReloadCatalogRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.reset.GeoserverResetRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.running.GeoserverRestRunningRequest;
+import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
+import org.geosdi.geoplatform.connector.geoserver.rasterize.GPGeoserverRasterizeRequest;
+import org.geosdi.geoplatform.connector.store.uniquevalues.GeoserverUniqueValuesConnectorStore;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface IGPGeoserverConnector extends IGPGeoserverRasterizeConnector {
+public abstract class GoeserverRasterizeConnectorStore extends GeoserverUniqueValuesConnectorStore implements GPGeoserverRasterizeConnectorStore {
+    /**
+     * @param theServer
+     */
+    protected GoeserverRasterizeConnectorStore(GPGeoserverConnector theServer) {
+        super(theServer);
+    }
 
     /**
-     * @return {@link GeoserverRestRunningRequest}
+     * @return {@link GPGeoserverRasterizeRequest}
      */
-    GeoserverRestRunningRequest createGeoserverRestRunningRequest();
-
-    /**
-     * @return {@link GeoserverReloadCatalogRequest}
-     */
-    GeoserverReloadCatalogRequest reloadGeoserverCatalogRequest();
-
-    /**
-     * @return {@link GeoserverResetRequest}
-     */
-    GeoserverResetRequest resetGeoserverRequest();
+    @Override
+    public GPGeoserverRasterizeRequest rasterizeData() {
+        return this.server.rasterizeData();
+    }
 }

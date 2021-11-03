@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,31 +32,41 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver;
+package org.geosdi.geoplatform.connector.geoserver.model.rasterize;
 
-import org.geosdi.geoplatform.connector.geoserver.rasterize.IGPGeoserverRasterizeConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.reload.GeoserverReloadCatalogRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.reset.GeoserverResetRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.running.GeoserverRestRunningRequest;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryParam;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface IGPGeoserverConnector extends IGPGeoserverRasterizeConnector {
+public enum GeoserverRasterizeType implements GPGeoserverQueryParam<String> {
+
+    INTERVALS,
+    VALUES,
+    RAMP;
 
     /**
-     * @return {@link GeoserverRestRunningRequest}
+     * @return {@link String}
      */
-    GeoserverRestRunningRequest createGeoserverRestRunningRequest();
+    @Override
+    public String getKey() {
+        return "type";
+    }
 
     /**
-     * @return {@link GeoserverReloadCatalogRequest}
+     * @return {@link String}
      */
-    GeoserverReloadCatalogRequest reloadGeoserverCatalogRequest();
+    @Override
+    public String getValue() {
+        return this.name();
+    }
 
     /**
-     * @return {@link GeoserverResetRequest}
+     * @return {@link String}
      */
-    GeoserverResetRequest resetGeoserverRequest();
+    @Override
+    public String formatValue() {
+        return this.getValue();
+    }
 }

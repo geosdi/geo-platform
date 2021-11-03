@@ -35,13 +35,13 @@
 package org.geosdi.geoplatform.connector.store;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
-import org.geosdi.geoplatform.connector.store.uniquevalues.GPGeoserverUniqueValuesConnectorStore;
+import org.geosdi.geoplatform.connector.store.rasterize.GPGeoserverRasterizeConnectorStore;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverConnectorStore extends GPGeoserverUniqueValuesConnectorStore {
+public interface IGPGeoserverConnectorStore extends GPGeoserverRasterizeConnectorStore {
 
     /**
      * @return {@link Boolean}

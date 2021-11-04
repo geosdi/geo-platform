@@ -43,7 +43,6 @@ import org.geosdi.geoplatform.connector.geoserver.model.uri.*;
 import org.geosdi.geoplatform.connector.geoserver.request.classify.GeoserverClassifyRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
-import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
 
 import javax.annotation.Nonnull;
 import javax.annotation.meta.When;
@@ -58,7 +57,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<StyledLayerDescriptor, GeoserverClassifyRequest> implements GeoserverClassifyRequest {
+public class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, GeoserverClassifyRequest> implements GeoserverClassifyRequest {
 
     private final ThreadLocal<String> vectorName;
     private final ThreadLocal<GPGeoserverStringQueryParam> attribute;
@@ -73,6 +72,7 @@ public class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<Styled
     private final ThreadLocal<GPGeoserverStringQueryParam> midColor;
     private final ThreadLocal<GPGeoserverBooleanQueryParam> size;
     private final ThreadLocal<GPGeoserverStringQueryParam> symbol;
+    private final ThreadLocal<String> format;
 
     GPGeoserverClassifyRequest(@Nonnull(when = NEVER) GPServerConnector server) {
         super(server, JACKSON_JAXB_XML_SUPPORT);
@@ -89,6 +89,7 @@ public class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<Styled
         this.midColor = ThreadLocal.withInitial(() -> null);
         this.size = ThreadLocal.withInitial(() -> null);
         this.symbol = ThreadLocal.withInitial(() -> null);
+        this.format = ThreadLocal.withInitial(() -> "xml");
     }
 
     /**
@@ -221,6 +222,12 @@ public class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<Styled
         return self();
     }
 
+    @Override
+    public GeoserverClassifyRequest withFormat(@Nonnull(when = NEVER) String theFormat) {
+        this.format.set(theFormat);
+        return self();
+    }
+
     /**
      * @return {@link String}
      */
@@ -229,7 +236,7 @@ public class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<Styled
         String baseURI = this.serverURI.toString();
         String vectorName = this.vectorName.get();
         checkArgument((vectorName != null) && !(vectorName.trim().isEmpty()), "The Parameter vectorName must not be null or an empty string.");
-        String path =  (baseURI.endsWith("/") ? baseURI.concat("sld/").concat(vectorName).concat("/classifier.json") : baseURI.concat("/sld/").concat(vectorName).concat("/classifier.json"));
+        String path =  (baseURI.endsWith("/") ? baseURI.concat("sld/").concat(vectorName).concat("/classifier").concat(".").concat(this.format.get()) : baseURI.concat("/sld/").concat(vectorName).concat("/classifier").concat(".").concat(this.format.get()));
         URIBuilder uriBuilder = new URIBuilder(path);
         Consumer<ThreadLocal> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
         fromArray(this.attribute, this.geoserverRamp, this.intervals, this.method, this.open, this.reverse, this.normalize,
@@ -241,10 +248,10 @@ public class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<Styled
     }
 
     /**
-     * @return {@link Class<StyledLayerDescriptor>}
+     * @return {@link Class<String>}
      */
     @Override
-    protected Class<StyledLayerDescriptor> forClass() {
-        return StyledLayerDescriptor.class;
+    protected Class<String> forClass() {
+        return String.class;
     }
 }

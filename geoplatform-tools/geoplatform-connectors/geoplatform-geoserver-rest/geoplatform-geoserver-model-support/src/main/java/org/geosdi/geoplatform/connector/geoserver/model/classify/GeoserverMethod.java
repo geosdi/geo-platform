@@ -32,18 +32,47 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.rasterize;
+package org.geosdi.geoplatform.connector.geoserver.model.classify;
 
-import org.geosdi.geoplatform.connector.geoserver.uniquevalues.IGPGeoserverUniqueValuesConnector;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryParam;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface IGPGeoserverRasterizeConnector extends IGPGeoserverUniqueValuesConnector {
+public enum GeoserverMethod implements GPGeoserverQueryParam<String> {
+
+    equalInterval,
+    uniqueInterval,
+    quantile,
+    jenks;
 
     /**
-     * @return {@link GPGeoserverRasterizeRequest}
+     * @return {@link String}
      */
-    GPGeoserverRasterizeRequest rasterizeData();
+    @Override
+    public String getKey() {
+        return "ramp";
+    }
+
+    /**
+     * @return {@link String}
+     */
+    @Override
+    public String getValue() {
+        return this.name();
+    }
+
+    /**
+     * @return {@link String}
+     */
+    @Override
+    public String formatValue() {
+        return this.getValue();
+    }
+
+    @Override
+    public String toString() {
+        return this.name();
+    }
 }

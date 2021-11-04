@@ -35,13 +35,13 @@
 package org.geosdi.geoplatform.connector.store;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
-import org.geosdi.geoplatform.connector.store.rasterize.GPGeoserverRasterizeConnectorStore;
+import org.geosdi.geoplatform.connector.store.classify.GPGeoserverClassifyConnectorStore;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverConnectorStore extends GPGeoserverRasterizeConnectorStore {
+public interface IGPGeoserverConnectorStore extends GPGeoserverClassifyConnectorStore {
 
     /**
      * @return {@link Boolean}

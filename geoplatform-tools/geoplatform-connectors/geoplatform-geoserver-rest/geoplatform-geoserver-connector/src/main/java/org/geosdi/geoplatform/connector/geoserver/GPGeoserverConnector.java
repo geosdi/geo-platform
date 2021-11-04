@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.connector.geoserver;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
-import org.geosdi.geoplatform.connector.geoserver.rasterize.GPGeoserverRasterizeConnector;
+import org.geosdi.geoplatform.connector.geoserver.classify.GPGeoserverClassifyConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.reload.GeoserverReloadCatalogRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.reset.GeoserverResetRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.running.GeoserverRestRunningRequest;
@@ -53,7 +53,7 @@ import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExcepti
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGeoserverConnector extends GPGeoserverRasterizeConnector implements IGPGeoserverConnector {
+public class GPGeoserverConnector extends GPGeoserverClassifyConnector implements IGPGeoserverConnector {
 
     /**
      * @param urlServer

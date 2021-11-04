@@ -36,6 +36,7 @@ package org.geosdi.geoplatform.geoserver.rasterize;
 
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
 import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,6 +50,7 @@ public class GeoserverConnectorRasterizeTest extends GeoserverConnectorTest {
     static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorRasterizeTest.class);
 
     @Test
+    @Ignore
     public void a_rasterizeData() throws Exception {
         StyledLayerDescriptor styledLayerDescriptor = this.geoserverConnectorStore.rasterizeData()
                 .withRasterName("sfdem")

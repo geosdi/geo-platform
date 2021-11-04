@@ -36,6 +36,7 @@ package org.geosdi.geoplatform.geoserver.classify;
 
 import org.geosdi.geoplatform.connector.geoserver.model.rasterize.GeoserverRamp;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,6 +50,7 @@ public class GeoserverConnectorClassifyTest extends GeoserverConnectorTest {
     static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorClassifyTest.class);
 
     @Test
+    @Ignore
     public void a_classifyData() throws Exception {
 
 //        String result = this.restReader.classifyVectorData("poi",

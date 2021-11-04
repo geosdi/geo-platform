@@ -32,18 +32,41 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.rasterize;
+package org.geosdi.geoplatform.geoserver.classify;
 
-import org.geosdi.geoplatform.connector.geoserver.uniquevalues.IGPGeoserverUniqueValuesConnector;
+import org.geosdi.geoplatform.connector.geoserver.model.rasterize.GeoserverRamp;
+import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface IGPGeoserverRasterizeConnector extends IGPGeoserverUniqueValuesConnector {
+public class GeoserverConnectorClassifyTest extends GeoserverConnectorTest {
 
-    /**
-     * @return {@link GPGeoserverRasterizeRequest}
-     */
-    GPGeoserverRasterizeRequest rasterizeData();
+    static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorClassifyTest.class);
+
+    @Test
+    public void a_classifyData() throws Exception {
+
+//        String result = this.restReader.classifyVectorData("poi",
+//                "NAME", Ramp.red,null, null,
+//                null, null, null,
+//                null, null, null,
+//                null, null);
+//        logger.info("#####################RESULT CONNECTOR: {}\n\n\n", result);
+
+        String result2 = this.geoserverConnectorStore.classifyData()
+                .withVectorName("poi")
+                .withGeoserverRamp(GeoserverRamp.red)
+                .withSize(null)
+                .withOpen(null)
+                .withNormalize(null)
+                .withMethod(null)
+                .withReverse(null)
+                .withAttribute("NAME").getResponseAsString();
+        logger.info("#####################RESULT CONNECTOR: {}\n\n\n", result2);
+    }
 }

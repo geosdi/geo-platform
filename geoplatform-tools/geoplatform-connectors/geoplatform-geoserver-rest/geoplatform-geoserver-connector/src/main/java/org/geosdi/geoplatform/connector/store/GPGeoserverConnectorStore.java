@@ -42,7 +42,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.reset.GeoserverResetRe
 import org.geosdi.geoplatform.connector.geoserver.request.running.GeoserverRestRunningRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
-import org.geosdi.geoplatform.connector.store.rasterize.GoeserverRasterizeConnectorStore;
+import org.geosdi.geoplatform.connector.store.classify.GoeserverClassifyConnectorStore;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import java.net.URL;
@@ -53,7 +53,7 @@ import static java.lang.Boolean.FALSE;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGeoserverConnectorStore extends GoeserverRasterizeConnectorStore implements IGPGeoserverConnectorStore {
+public class GPGeoserverConnectorStore extends GoeserverClassifyConnectorStore implements IGPGeoserverConnectorStore {
 
     private final GeoserverRestRunningRequest restRunningRequest;
     private final GeoserverReloadCatalogRequest reloadCatalogRequest;

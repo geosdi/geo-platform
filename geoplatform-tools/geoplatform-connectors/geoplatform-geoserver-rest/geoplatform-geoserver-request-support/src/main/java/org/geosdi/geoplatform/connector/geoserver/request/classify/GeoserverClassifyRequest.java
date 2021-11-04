@@ -40,7 +40,6 @@ import org.geosdi.geoplatform.connector.geoserver.model.rasterize.GeoserverRamp;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.xml.jaxb.GPJacksonJAXBXmlSupport;
 import org.geosdi.geoplatform.support.jackson.xml.jaxb.JacksonJAXBXmlSupport;
-import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
 
 import javax.annotation.Nonnull;
 import javax.annotation.meta.When;
@@ -49,7 +48,7 @@ import javax.annotation.meta.When;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeoserverClassifyRequest extends GPJsonConnectorRequest<StyledLayerDescriptor, GeoserverClassifyRequest> {
+public interface GeoserverClassifyRequest extends GPJsonConnectorRequest<String, GeoserverClassifyRequest> {
 
     JacksonJAXBXmlSupport JACKSON_JAXB_XML_SUPPORT = new GPJacksonJAXBXmlSupport();
 
@@ -122,13 +121,19 @@ public interface GeoserverClassifyRequest extends GPJsonConnectorRequest<StyledL
 
     /**
      * @param theSize
-     * @return
+     * @return {@link GeoserverClassifyRequest}
      */
     GeoserverClassifyRequest withSize(@Nonnull(when = When.NEVER) Boolean theSize);
 
     /**
      * @param theSymbol
-     * @return
+     * @return {@link GeoserverClassifyRequest}
      */
     GeoserverClassifyRequest withSymbol(@Nonnull(when = When.NEVER) String theSymbol);
+
+    /**
+     * @param theFormat
+     * @return {@link GeoserverClassifyRequest}
+     */
+    GeoserverClassifyRequest withFormat(@Nonnull(when = When.NEVER) String theFormat);
 }

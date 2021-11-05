@@ -35,17 +35,19 @@
  */
 package org.geosdi.geoplatform.support.xmpp;
 
-import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.support.xmpp.configuration.properties.XMPPProperties;
 import org.geosdi.geoplatform.support.xmpp.loader.GPXMPPLoaderLazy;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import javax.annotation.Resource;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  *
@@ -57,9 +59,6 @@ import javax.annotation.Resource;
         loader = AnnotationConfigContextLoader.class)
 public class GPXMPPPropertiesTest {
 
-    @GeoPlatformLog
-    static Logger logger;
-    //
     static final String GP_XMPP_KEY = "GP_XMPP_FILE_PROP";
     //
     @Resource(name = "gpSpringXMPPProp")
@@ -75,14 +74,8 @@ public class GPXMPPPropertiesTest {
         System.clearProperty(GP_XMPP_KEY);
     }
 
-    @Before
-    public void setUp() {
-        Assert.assertNotNull(gpSpringXMPPProp);
-    }
-
     @Test
     public void xmppPropertiesTest() {
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ XMPP_PROPERTIES : {}\n\n",
-                gpSpringXMPPProp);
+        assertNotNull(gpSpringXMPPProp);
     }
 }

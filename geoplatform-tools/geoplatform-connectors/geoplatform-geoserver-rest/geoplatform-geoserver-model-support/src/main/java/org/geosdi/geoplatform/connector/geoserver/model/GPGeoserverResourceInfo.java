@@ -50,10 +50,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.srs.GPGeoserverResponseS
 import org.geosdi.geoplatform.connector.geoserver.model.store.GPGeoserverStoreInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.store.GPGeoserverCoverageStoreInfo;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Map;
 
@@ -86,6 +83,7 @@ public abstract class GPGeoserverResourceInfo<NativeBoundingBox extends GPGeoser
     @XmlElement(type = GPGeoserverKeyword.class)
     private IGPGeoserverKeyword keywords;
     private GPGeoserverLatLonBoundingBox latLonBoundingBox;
+    @XmlAnyElement(lax=true)
     private NativeBoundingBox nativeBoundingBox;
     private GPGeoserverResponseSRS responseSRS;
 }

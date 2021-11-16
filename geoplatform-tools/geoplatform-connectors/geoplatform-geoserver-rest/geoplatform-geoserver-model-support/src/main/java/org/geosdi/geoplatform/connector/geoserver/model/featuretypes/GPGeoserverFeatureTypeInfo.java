@@ -54,6 +54,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionP
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -82,6 +83,7 @@ public class GPGeoserverFeatureTypeInfo extends GPGeoserverResourceInfo<GPGeoser
     @XmlElement(type = GPGeoserverDataLinks.class)
     private IGPGeoserverDataLinks dataLinks;
     @JsonDeserialize(using = GPGeoserverCRSDeserializer.class)
+    @XmlElements(value = {@XmlElement(name = "nativeCRS", type = GPGeoserverCRS.class), @XmlElement(name = "nativeCRS", type = String.class)})
     private Object nativeCRS;
     private String cqlFilter;
     private Integer maxFeatures;

@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.GPGeoserverResourceInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverNativeBoundingBox;
 import org.geosdi.geoplatform.connector.geoserver.model.format.GPGeoserverSupportedFormat;
 import org.geosdi.geoplatform.connector.geoserver.model.format.IGPGeoserverSupportedFormat;
+import org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy;
 import org.geosdi.geoplatform.connector.geoserver.model.srs.GPGeoserverRequestSRS;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.dimension.GPCoverageDimensions;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.dimension.IGPCoverageDimensions;
@@ -79,4 +80,5 @@ public class GPGeoserverCoverageInfo extends GPGeoserverResourceInfo<GPGeoserver
     private GPGeoserverRequestSRS requestSRS;
     @XmlElement(type = GPGeoserverSupportedFormat.class)
     private IGPGeoserverSupportedFormat supportedFormats;
+    private GPProjectionPolicy policy;
 }

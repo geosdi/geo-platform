@@ -41,12 +41,12 @@
         <minx>-74.0118315772888</minx>
         <miny>40.70754683896324</miny>
     </latLonBoundingBox>
-    <nativeBoundingBox xsi:type="gpGeoserverNativeBoundingBox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-        <crs xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">EPSG:4326</crs>
+    <nativeBoundingBox>
         <maxx>-74.00153046439813</maxx>
         <maxy>40.719885123828675</maxy>
         <minx>-74.0118315772888</minx>
         <miny>40.70754683896324</miny>
+        <crs>EPSG:4326</crs>
     </nativeBoundingBox>
     <responseSRS>
         <string>4326</string>
@@ -64,8 +64,7 @@
             <content>http://www.google.com</content>
         </org.geoserver.catalog.impl.DataLinkInfoImpl>
     </dataLinks>
-    <nativeCRS xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">GEOGCS["WGS 84",
+    <nativeCRS>GEOGCS["WGS 84",
         DATUM["World Geodetic System 1984",
         SPHEROID["WGS 84", 6378137.0, 298.257223563, AUTHORITY["EPSG","7030"]],
         AUTHORITY["EPSG","6326"]],

@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.response.collection;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +52,7 @@ import static java.util.stream.Collectors.toList;
  */
 @Getter
 @Setter
+@XmlTransient
 public abstract class GPGenericMapType<K, V, Entry extends GPGenericEntryType<K, V>> implements Serializable {
 
     private static final long serialVersionUID = 8201121335219233924L;
@@ -66,7 +68,7 @@ public abstract class GPGenericMapType<K, V, Entry extends GPGenericEntryType<K,
     public GPGenericMapType(Map<K, V> map) {
         this.entry = map.entrySet()
                 .stream()
-                .map(entry -> toEntry(entry))
+                .map(this::toEntry)
                 .collect(toList());
     }
 

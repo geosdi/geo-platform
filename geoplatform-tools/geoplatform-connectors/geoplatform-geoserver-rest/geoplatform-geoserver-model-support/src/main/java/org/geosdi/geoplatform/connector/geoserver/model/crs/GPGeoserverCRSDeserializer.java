@@ -40,6 +40,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -111,6 +112,20 @@ public class GPGeoserverCRSDeserializer extends StdDeserializer<Object> {
     public Object deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
         String nodeValue = jsonParser.getText();
         return (!nodeValue.equals(JsonToken.START_OBJECT.asString()) ? jsonParser.getText() : loadGPGeoserverCRS(jsonParser));
+    }
+
+    /**
+     * Base implementation that does not assume specific type
+     * inclusion mechanism. Sub-classes are expected to override
+     * this method if they are to handle type information.
+     *
+     * @param jsonParser
+     * @param ctxt
+     * @param typeDeserializer
+     */
+    @Override
+    public Object deserializeWithType(JsonParser jsonParser, DeserializationContext ctxt, TypeDeserializer typeDeserializer) throws IOException {
+        return deserialize(jsonParser, ctxt);
     }
 
     /**

@@ -35,9 +35,13 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.dimension;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
+import javax.xml.bind.annotation.*;
 import java.util.List;
 
 /**
@@ -45,10 +49,16 @@ import java.util.List;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Getter
+@Setter
 @ToString
+@JsonSerialize(using = GPCoverageDimensionsSerializer.class)
+@JsonDeserialize(using = GPCoverageDimensionsDeserializer.class)
+@XmlRootElement(name = "dimensions")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class GPCoverageDimensions implements IGPCoverageDimensions {
 
     private static final long serialVersionUID = 6832744418663508323L;
     //
+    @XmlElements(value = {@XmlElement(name = "coverageDimension", type = GPCoverageDimension.class)})
     private List<IGPCoverageDimension> coverageDimension;
 }

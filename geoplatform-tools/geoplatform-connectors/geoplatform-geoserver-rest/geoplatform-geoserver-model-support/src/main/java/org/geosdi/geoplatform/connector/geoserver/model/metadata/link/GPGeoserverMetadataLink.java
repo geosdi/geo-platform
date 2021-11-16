@@ -38,6 +38,11 @@ package org.geosdi.geoplatform.connector.geoserver.model.metadata.link;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.geosdi.geoplatform.connector.geoserver.model.link.GPGeoserverDataLink;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -45,12 +50,12 @@ import lombok.ToString;
  */
 @Getter
 @Setter
-@ToString
-public class GPGeoserverMetadataLink implements IGPGeoserverMetadataLink {
+@ToString(callSuper = true)
+@XmlRootElement(name = "metadataLink")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class GPGeoserverMetadataLink extends GPGeoserverDataLink implements IGPGeoserverMetadataLink {
 
     private static final long serialVersionUID = 4690038103311980721L;
     //
-    private String type;
     private String metadataType;
-    private String content;
 }

@@ -37,13 +37,13 @@ package org.geosdi.geoplatform.connector.geoserver.model.crs;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Preconditions;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
+import javax.annotation.Nullable;
+import javax.xml.bind.annotation.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -52,22 +52,38 @@ import javax.annotation.meta.When;
 @Getter
 @ToString
 @Immutable
+@JsonSerialize(using = GPGeoserverCRSSerializer.class)
+@XmlRootElement(name = "crs")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class GPGeoserverCRS implements IGPGeoserverCRS {
 
     private static final long serialVersionUID = -2174733277323184810L;
     //
+    @XmlValue
     private final String value;
+    @XmlAttribute(name = "class", required = true)
     private final String type;
+
+    public GPGeoserverCRS() {
+        this(null, null);
+    }
 
     /**
      * @param theValue
      * @param theType
      */
-    @JsonCreator
-    public GPGeoserverCRS(@Nonnull(when = When.NEVER) @JsonProperty(value = "$") String theValue, @Nonnull(when = When.NEVER) @JsonProperty(value = "@class") String theType) {
-        Preconditions.checkArgument(((theValue != null) && !(theValue.trim().isEmpty())), "The Parameter value must not be null or an empty string.");
-        Preconditions.checkArgument(((theType != null) && !(theType.trim().isEmpty())), "The Parameter type must not be null or an empty string.");
+    public GPGeoserverCRS(String theValue, String theType) {
         this.value = theValue;
         this.type = theType;
+    }
+
+    /**
+     * @param theValue
+     * @param theType
+     * @return {@link GPGeoserverCRS}
+     */
+    @JsonCreator
+    protected static GPGeoserverCRS creator(@Nullable @JsonProperty(value = "$") String theValue, @Nullable @JsonProperty(value = "@class") String theType) {
+        return new GPGeoserverCRS(theValue, theType);
     }
 }

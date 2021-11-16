@@ -68,6 +68,7 @@ import java.io.Writer;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -773,6 +774,7 @@ public class GPGeoserverJacksonTest {
                         "   }\n" +
                         "}"), GPGeoserverCoverageInfo.class);
         logger.info("##########################GEOSERVER_COVERAGE_INFO : {}\n", coverageInfo);
+        logger.info("\n{}\n", JACKSON_JAXB_XML_SUPPORT.getDefaultMapper().writeValueAsString(coverageInfo));
     }
 
     @Test

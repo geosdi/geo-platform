@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.featuretypes.attribute;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.*;
 import java.util.List;
 
 /**
@@ -51,11 +51,14 @@ import java.util.List;
 @Setter
 @Getter
 @ToString
+@XmlRootElement(name = "attributes")
 @XmlAccessorType(XmlAccessType.FIELD)
+@JsonSerialize(using = GPFeatureTypeAttributesSerializer.class)
+@JsonDeserialize(using = GPFeatureTypeAttributesDeserializer.class)
 public class GPFeatureTypeAttributes implements IGPFeatureTypeAttributes {
 
     private static final long serialVersionUID = 4960738926410818073L;
     //
-    @XmlElement(name = "attribute")
+    @XmlElements(value = @XmlElement(name = "attribute", type = GPFeatureTypeAttribute.class))
     private List<IGPFeatureTypeAttribute> values;
 }

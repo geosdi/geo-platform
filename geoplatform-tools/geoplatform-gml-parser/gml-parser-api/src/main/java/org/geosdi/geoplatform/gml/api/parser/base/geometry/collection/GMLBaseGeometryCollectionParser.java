@@ -58,8 +58,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GMLBaseGeometryCollectionParser implements GMLBaseParser<AbstractGeometricAggregate, MultiGeometryProperty, GeometryCollection>,
-        GMLGeoJsonParser<AbstractGeometricAggregate, MultiGeometryProperty, org.geojson.GeometryCollection> {
+public class GMLBaseGeometryCollectionParser implements GMLBaseParser<AbstractGeometricAggregate, MultiGeometryProperty, GeometryCollection>, GMLGeoJsonParser<AbstractGeometricAggregate, MultiGeometryProperty, org.geojson.GeometryCollection> {
 
     private IGeometryCollectionHandler multiPointHandler = new MultiPointCollectionHandler();
 

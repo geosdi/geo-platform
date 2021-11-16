@@ -35,9 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.store;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

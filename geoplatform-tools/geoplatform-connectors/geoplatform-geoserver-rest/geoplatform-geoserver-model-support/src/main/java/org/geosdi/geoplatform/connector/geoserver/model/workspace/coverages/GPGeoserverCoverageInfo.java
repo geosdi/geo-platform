@@ -38,14 +38,17 @@ package org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.dimension.IGPCoverageDimensions;
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.grid.IGPCoverageGrid;
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.interpolation.IGPCoverageInterpolationMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.GPGeoserverResourceInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverNativeBoundingBox;
+import org.geosdi.geoplatform.connector.geoserver.model.format.GPGeoserverSupportedFormat;
 import org.geosdi.geoplatform.connector.geoserver.model.format.IGPGeoserverSupportedFormat;
-import org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy;
 import org.geosdi.geoplatform.connector.geoserver.model.srs.GPGeoserverRequestSRS;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.dimension.GPCoverageDimensions;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.dimension.IGPCoverageDimensions;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.grid.GPCoverageGrid;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.grid.IGPCoverageGrid;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.interpolation.GPCoverageInterpolationMethod;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.interpolation.IGPCoverageInterpolationMethod;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -66,13 +69,14 @@ public class GPGeoserverCoverageInfo extends GPGeoserverResourceInfo<GPGeoserver
     private static final long serialVersionUID = 2534762636718172525L;
     //
     private String defaultInterpolationMethod;
+    @XmlElement(type = GPCoverageDimensions.class)
     private IGPCoverageDimensions dimensions;
+    @XmlElement(type = GPCoverageGrid.class)
     private IGPCoverageGrid grid;
-    //private IGPGeoserverCRS nativeCRS;
-    @XmlElement(name = "interpolationMethods")
+    @XmlElement(name = "interpolationMethods", type = GPCoverageInterpolationMethod.class)
     private IGPCoverageInterpolationMethod interpolationMethod;
     private String nativeFormat;
     private GPGeoserverRequestSRS requestSRS;
+    @XmlElement(type = GPGeoserverSupportedFormat.class)
     private IGPGeoserverSupportedFormat supportedFormats;
-    private GPProjectionPolicy policy;
 }

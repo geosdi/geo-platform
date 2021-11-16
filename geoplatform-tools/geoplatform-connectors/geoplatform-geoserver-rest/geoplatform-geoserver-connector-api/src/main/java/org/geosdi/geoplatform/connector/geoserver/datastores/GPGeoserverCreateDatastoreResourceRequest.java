@@ -1,6 +1,7 @@
 package org.geosdi.geoplatform.connector.geoserver.datastores;
 
 import com.google.common.io.CharStreams;
+import net.jcip.annotations.ThreadSafe;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
@@ -23,14 +24,18 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverCreateDatastoreResourceRequest extends GPJsonPostConnectorRequest<Boolean, GeoserverCreateDatastoreResourceRequest> implements GeoserverCreateDatastoreResourceRequest {
+@ThreadSafe
+class GPGeoserverCreateDatastoreResourceRequest extends GPJsonPostConnectorRequest<Boolean, GeoserverCreateDatastoreResourceRequest> implements GeoserverCreateDatastoreResourceRequest {
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> datsStoreName;
     private final ThreadLocal<GPGeoserverFeatureTypeInfo> datastoreBody;
 
-    public GPGeoserverCreateDatastoreResourceRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
-            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    /**
+     * @param theServerConnector
+     * @param theJacksonSupport
+     */
+    GPGeoserverCreateDatastoreResourceRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.workspaceName = withInitial(() -> null);
         this.datsStoreName = withInitial(() -> null);

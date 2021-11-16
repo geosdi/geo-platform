@@ -46,6 +46,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.meta.When;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -53,10 +54,10 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverLoadUniqueValuesRequest extends GPJsonGetConnectorRequest<GPGeoserverUniqueValue, GeoserverLoadUniqueValuesRequest> implements GeoserverLoadUniqueValuesRequest {
+class GPGeoserverLoadUniqueValuesRequest extends GPJsonGetConnectorRequest<GPGeoserverUniqueValue, GeoserverLoadUniqueValuesRequest> implements GeoserverLoadUniqueValuesRequest {
 
-    private final ThreadLocal<String> layerName;
-    private final ThreadLocal<String> layerAttribute;
+    private final ThreadLocal<String> layerName = withInitial(() -> null);
+    private final ThreadLocal<String> layerAttribute = withInitial(() -> null);
 
     /**
      * @param server
@@ -64,8 +65,6 @@ public class GPGeoserverLoadUniqueValuesRequest extends GPJsonGetConnectorReques
      */
     GPGeoserverLoadUniqueValuesRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
-        this.layerName = ThreadLocal.withInitial(() -> null);
-        this.layerAttribute = ThreadLocal.withInitial(() -> null);
     }
 
     /**
@@ -93,13 +92,11 @@ public class GPGeoserverLoadUniqueValuesRequest extends GPJsonGetConnectorReques
      */
     @Override
     protected String createUriPath() throws Exception {
-        String urlPath = this.layerName.get();
-        checkArgument((urlPath != null) && !(urlPath.trim().isEmpty()), "The Parameter urlPath must not be null or an empty string.");
-        String baseURI = this.serverURI.toString();
         String layerName = this.layerName.get();
         checkArgument((layerName != null) && !(layerName.trim().isEmpty()), "The Parameter layerName must not be null or an empty string.");
         String layerAttribute = this.layerAttribute.get();
         checkArgument((layerAttribute != null) && !(layerAttribute.trim().isEmpty()), "The Parameter layerAttribute must not be null or an empty string.");
+        String baseURI = this.serverURI.toString();
         return (baseURI.endsWith("/") ? baseURI.concat("uniquevalue/").concat(layerName).concat("/").concat(layerAttribute).concat("/classify.json") : baseURI.concat("/uniquevalue/").concat(layerName).concat("/").concat(layerAttribute).concat("/classify.json"));
     }
 

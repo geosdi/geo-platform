@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<featureType>
+    <store class="dataStore">
+        <href>http://localhost:8080/geoserver/rest/workspaces/tiger/datastores/nyc.json</href>
+        <name>tiger:nyc</name>
+    </store>
+    <abstract>Points of interest in New York, New York (on Manhattan). One of the attributes contains the name of a file
+        with a picture of the point of interest.
+    </abstract>
+    <nativeName>poi</nativeName>
+    <name>poi</name>
+    <title>Manhattan (NY) points of interest</title>
+    <srs>EPSG:4326</srs>
+    <namespace>
+        <name>tiger</name>
+        <href>http://localhost:8080/geoserver/rest/namespaces/tiger.json</href>
+    </namespace>
+    <enabled>true</enabled>
+    <metadata>
+        <entry key="kml.regionateStrategy">external-sorting</entry>
+        <entry key="kml.regionateFeatureLimit">15</entry>
+        <entry key="cacheAgeMax">3000</entry>
+        <entry key="cachingEnabled">true</entry>
+        <entry key="kml.regionateAttribute">NAME</entry>
+        <entry key="indexingEnabled">false</entry>
+        <entry key="dirName">DS_poi_poi</entry>
+    </metadata>
+    <keywords>
+        <string>poi</string>
+        <string>Manhattan</string>
+        <string>DS_poi</string>
+        <string>points_of_interest</string>
+        <string>sampleKeyword\@language=ab\;</string>
+        <string>area of effect\@language=bg\;\@vocabulary=technical\;</string>
+        <string>Привет\@language=ru\;\@vocabulary=friendly\;</string>
+    </keywords>
+    <latLonBoundingBox>
+        <crs>EPSG:4326</crs>
+        <maxx>-74.00857344353275</maxx>
+        <maxy>40.711945649065406</maxy>
+        <minx>-74.0118315772888</minx>
+        <miny>40.70754683896324</miny>
+    </latLonBoundingBox>
+    <nativeBoundingBox xsi:type="gpGeoserverNativeBoundingBox" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <crs xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema">EPSG:4326</crs>
+        <maxx>-74.00153046439813</maxx>
+        <maxy>40.719885123828675</maxy>
+        <minx>-74.0118315772888</minx>
+        <miny>40.70754683896324</miny>
+    </nativeBoundingBox>
+    <responseSRS>
+        <string>4326</string>
+    </responseSRS>
+    <metadataLinks>
+        <metadataLink>
+            <type>text/plain</type>
+            <content>www.google.com</content>
+            <metadataType>FGDC</metadataType>
+        </metadataLink>
+    </metadataLinks>
+    <dataLinks>
+        <org.geoserver.catalog.impl.DataLinkInfoImpl>
+            <type>text/plain</type>
+            <content>http://www.google.com</content>
+        </org.geoserver.catalog.impl.DataLinkInfoImpl>
+    </dataLinks>
+    <nativeCRS xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">GEOGCS["WGS 84",
+        DATUM["World Geodetic System 1984",
+        SPHEROID["WGS 84", 6378137.0, 298.257223563, AUTHORITY["EPSG","7030"]],
+        AUTHORITY["EPSG","6326"]],
+        PRIMEM["Greenwich", 0.0, AUTHORITY["EPSG","8901"]],
+        UNIT["degree", 0.017453292519943295],
+        AXIS["Geodetic longitude", EAST],
+        AXIS["Geodetic latitude", NORTH],
+        AUTHORITY["EPSG","4326"]]
+    </nativeCRS>
+    <cqlFilter>INCLUDE</cqlFilter>
+    <maxFeatures>100</maxFeatures>
+    <numDecimals>6</numDecimals>
+    <overridingServiceSRS>true</overridingServiceSRS>
+    <skipNumberMatched>true</skipNumberMatched>
+    <circularArcPresent>true</circularArcPresent>
+    <linearizationTolerance>10</linearizationTolerance>
+    <projectionPolicy>REPROJECT_TO_DECLARED</projectionPolicy>
+    <attributes>
+        <attribute>
+            <name>the_geom</name>
+            <minOccurs>0</minOccurs>
+            <maxOccurs>1</maxOccurs>
+            <nillable>true</nillable>
+            <binding>org.locationtech.jts.geom.Point</binding>
+        </attribute>
+    </attributes>
+</featureType>

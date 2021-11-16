@@ -38,23 +38,35 @@ package org.geosdi.geoplatform.connector.geoserver.model.store;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import javax.annotation.Nonnull;
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
 import java.util.Optional;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 import static java.util.Arrays.stream;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@XmlEnum
 public enum GeoserverStoreInfoType {
 
+    @XmlEnumValue(value = "coverageStore")
     COVERAGE("coverageStore"),
+    @XmlEnumValue(value = "dataStore")
     FEATURE("dataStore");
 
     private final String type;
 
-    GeoserverStoreInfoType(String theType) {
+    /**
+     * @param theType
+     */
+    GeoserverStoreInfoType(@Nonnull(when = NEVER) String theType) {
+        checkArgument((theType != null) && !(theType.trim().isEmpty()), "The Parameter type must");
         this.type = theType;
     }
 
@@ -66,6 +78,9 @@ public enum GeoserverStoreInfoType {
         return this.type;
     }
 
+    /**
+     * @return {@link String}
+     */
     @Override
     public String toString() {
         return this.type;

@@ -80,16 +80,6 @@ public interface IGPGeoserverCoverageInfo extends IGPGeoserverResourceInfo<GPGeo
      * @param theGrid
      */
     void setGrid(IGPCoverageGrid theGrid);
-//
-//    /**
-//     * @return {@link IGPGeoserverCRS}
-//     */
-//    IGPGeoserverCRS getNativeCRS();
-//
-//    /**
-//     * @param theNativeCRS
-//     */
-//    void setNativeCRS(IGPGeoserverCRS theNativeCRS);
 
     /**
      * @return {@link IGPCoverageInterpolationMethod}

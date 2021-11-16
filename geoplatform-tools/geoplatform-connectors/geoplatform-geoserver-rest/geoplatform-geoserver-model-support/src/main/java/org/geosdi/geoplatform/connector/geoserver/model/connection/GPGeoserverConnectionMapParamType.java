@@ -37,13 +37,14 @@ package org.geosdi.geoplatform.connector.geoserver.model.connection;
 
 import org.geosdi.geoplatform.response.collection.GPGenericMapType;
 
+import java.util.List;
 import java.util.Map;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGeoserverConnectionMapParamType extends GPGenericMapType<String, String, IGPGeoserverConnectionParam> {
+public class GPGeoserverConnectionMapParamType extends GPGenericMapType<String, String, GPGeoserverConnectionParam> {
 
     public GPGeoserverConnectionMapParamType() {
     }
@@ -55,12 +56,22 @@ public class GPGeoserverConnectionMapParamType extends GPGenericMapType<String, 
         super(map);
     }
 
+    @Override
+    public List<GPGeoserverConnectionParam> getEntry() {
+        return super.getEntry();
+    }
+
+    @Override
+    public void setEntry(List<GPGeoserverConnectionParam> entry) {
+        super.setEntry(entry);
+    }
+
     /**
      * @param entry
      * @return {@link IGPGeoserverConnectionParam}
      */
     @Override
-    protected IGPGeoserverConnectionParam toEntry(Map.Entry<String, String> entry) {
+    protected GPGeoserverConnectionParam toEntry(Map.Entry<String, String> entry) {
         return new GPGeoserverConnectionParam(entry.getKey(), entry.getValue());
     }
 }

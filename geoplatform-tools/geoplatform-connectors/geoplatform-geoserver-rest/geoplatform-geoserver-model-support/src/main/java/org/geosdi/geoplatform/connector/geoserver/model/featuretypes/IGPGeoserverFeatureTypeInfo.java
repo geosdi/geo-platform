@@ -36,14 +36,13 @@
 package org.geosdi.geoplatform.connector.geoserver.model.featuretypes;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.attribute.IGPFeatureTypeAttributes;
-import org.geosdi.geoplatform.connector.geoserver.model.metadata.link.IGPGeoserverMetadataLink;
 import org.geosdi.geoplatform.connector.geoserver.model.IGPGeoserverResourceInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverNativeBoundingBox;
 import org.geosdi.geoplatform.connector.geoserver.model.crs.IGPGeoserverCRS;
+import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.attribute.IGPFeatureTypeAttributes;
+import org.geosdi.geoplatform.connector.geoserver.model.link.IGPGeoserverDataLinks;
+import org.geosdi.geoplatform.connector.geoserver.model.metadata.link.IGPGeoserverMetadataLinks;
 import org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy;
-
-import java.util.List;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -53,24 +52,24 @@ import java.util.List;
 public interface IGPGeoserverFeatureTypeInfo extends IGPGeoserverResourceInfo<GPGeoserverNativeBoundingBox> {
 
     /**
-     * @return {@link List<  IGPGeoserverMetadataLink  >}
+     * @return {@link IGPGeoserverMetadataLinks}
      */
-    List<IGPGeoserverMetadataLink> getMetadataLinks();
+    IGPGeoserverMetadataLinks getMetadataLinks();
 
     /**
      * @param theMetadataLinks
      */
-    void setMetadataLinks(List<IGPGeoserverMetadataLink> theMetadataLinks);
+    void setMetadataLinks(IGPGeoserverMetadataLinks theMetadataLinks);
 
     /**
-     * @return {@link List<IGPGeoserverMetadataLink>}
+     * @return {@link IGPGeoserverDataLinks}
      */
-    List<IGPGeoserverMetadataLink> getDataLinks();
+    IGPGeoserverDataLinks getDataLinks();
 
     /**
      * @param theDataLinks
      */
-    void setDataLinks(List<IGPGeoserverMetadataLink> theDataLinks);
+    void setDataLinks(IGPGeoserverDataLinks theDataLinks);
 
     /**
      * @return {@link Object}
@@ -166,12 +165,12 @@ public interface IGPGeoserverFeatureTypeInfo extends IGPGeoserverResourceInfo<GP
 
     /**
      * <p>
-     * Possible Values are :
-     * <ul>
-     * <li>{@link GPProjectionPolicy#FORCE_DECLARED} Use the declared CRS (ignore native).</li>
-     * <li>{@link GPProjectionPolicy#REPROJECT_TO_DECLARED} Reproject from native to declared CRS</li>
-     * <li>{@link GPProjectionPolicy#NONE} No reprojection (use native CRS)</li>
-     * </ul>
+     *     Possible Values are :
+     *     <ul>
+     *         <li>{@link GPProjectionPolicy#FORCE_DECLARED} Use the declared CRS (ignore native).</li>
+     *         <li>{@link GPProjectionPolicy#REPROJECT_TO_DECLARED} Reproject from native to declared CRS</li>
+     *         <li>{@link GPProjectionPolicy#NONE} No reprojection (use native CRS)</li>
+     *     </ul>
      * </p>
      *
      * @param theProjectionPolicy

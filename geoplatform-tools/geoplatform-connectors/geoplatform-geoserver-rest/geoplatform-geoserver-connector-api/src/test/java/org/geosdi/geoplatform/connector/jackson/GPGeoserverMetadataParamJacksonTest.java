@@ -35,7 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.jackson;
 
+import lombok.*;
 import org.geosdi.geoplatform.connector.geoserver.model.metadata.GPGeoserverMetadataParam;
+import org.geosdi.geoplatform.connector.geoserver.model.metadata.adapter.GPGeoserverMetadataMapAdapter;
 import org.geosdi.geoplatform.support.jackson.mapper.xml.GPBaseJacksonXmlMapper;
 import org.geosdi.geoplatform.support.jackson.mapper.xml.GPJacksonXmlMapper;
 import org.geosdi.geoplatform.support.jackson.xml.jaxb.GPJacksonJAXBXmlSupport;
@@ -44,11 +46,21 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.File;
+import java.io.Serializable;
+import java.io.StringReader;
+import java.util.Map;
 
+import static com.google.common.collect.Maps.newHashMap;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
+import static org.geosdi.geoplatform.connector.jackson.GPGeoserverJacksonTest.jacksonSupport;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -75,10 +87,119 @@ public class GPGeoserverMetadataParamJacksonTest {
                 .collect(joining(separator))), GPGeoserverMetadataParamJacksonTest::toMetadataParam);
     }
 
+    @Test
+    public void c_marshallGPGeoserverMetadataTest() throws Exception {
+        Map<String, String> values = newHashMap();
+        values.put("key_test", "value_test");
+        values.put("key_1_test", "value_1_test");
+        GPGeoserverMetadata metadata = new GPGeoserverMetadata(values);
+        logger.info("@@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_METADATA_AS_STRING : \n{}\n", JACKSON_JAXB_XML_SUPPORT.getDefaultMapper().writeValueAsString(metadata));
+    }
+
+    @Test
+    public void d_unmarshallGPGeoserverMetadataFromStringTest() throws Exception {
+        GPGeoserverMetadata metadata = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper().readValue(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
+                + "<GPGeoserverMetadata>\n"
+                + "    <metadata>\n"
+                + "        <entry key=\"key_test\">value_test</entry>\n"
+                + "        <entry key=\"key_1_test\">value_1_test</entry>\n"
+                + "    </metadata>\n"
+                + "</GPGeoserverMetadata>"), GPGeoserverMetadata.class);
+        logger.info("####################GP_GEOSERVER_METADATA : {}\n", metadata);
+    }
+
+    @Test
+    public void e_unmarshallGPGeoserverMetadataFromJsonStringTest() throws Exception {
+        GPGeoserverMetadata metadata = jacksonSupport.getDefaultMapper().readValue(new StringReader("{\n"
+                + "  \"GPGeoserverMetadata\" : {\n"
+                + "    \"metadata\" : {\n"
+                + "      \"entry\" : [ {\n"
+                + "        \"@key\" : \"key_test\",\n"
+                + "        \"$\" : \"value_test\"\n"
+                + "      }, {\n"
+                + "        \"@key\" : \"key_1_test\",\n"
+                + "        \"$\" : \"value_1_test\"\n"
+                + "      } ]\n"
+                + "    }\n"
+                + "  }\n"
+                + "}"), GPGeoserverMetadata.class );
+        logger.info("####################GP_GEOSERVER_METADATA : {}\n", metadata);
+    }
+
+    @Test
+    public void f_marshalGPGeoserverMetadataTest() throws Exception {
+        Map<String, String> values = newHashMap();
+        values.put("kml.regionateStrategy", "external-sorting");
+        values.put("kml.regionateFeatureLimit", "15");
+        values.put("cacheAgeMax", "3000");
+        values.put("cachingEnabled", "true");
+        values.put("kml.regionateAttribute", "NAME");
+        values.put("indexingEnabled", "false");
+        values.put("dirName", "DS_poi_poi");
+        GPGeoserverMetadata metadata = new GPGeoserverMetadata(values);
+        logger.info("@@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_METADATA_AS_STRING : \n{}\n", jacksonSupport.getDefaultMapper().writeValueAsString(metadata));
+    }
+
+    @Test
+    public void g_unmarshalGPGeoserverMetadataFromJsonStringTest() throws Exception {
+        GPGeoserverMetadata metadata = jacksonSupport.getDefaultMapper().readValue(new StringReader("{\n"
+                + "  \"GPGeoserverMetadata\" : {\n"
+                + "    \"metadata\" : {\n"
+                + "      \"entry\" : [ {\n"
+                + "        \"@key\" : \"kml.regionateStrategy\",\n"
+                + "        \"$\" : \"external-sorting\"\n"
+                + "      }, {\n"
+                + "        \"@key\" : \"kml.regionateFeatureLimit\",\n"
+                + "        \"$\" : \"15\"\n"
+                + "      }, {\n"
+                + "        \"@key\" : \"cacheAgeMax\",\n"
+                + "        \"$\" : \"3000\"\n"
+                + "      }, {\n"
+                + "        \"@key\" : \"cachingEnabled\",\n"
+                + "        \"$\" : \"true\"\n"
+                + "      }, {\n"
+                + "        \"@key\" : \"kml.regionateAttribute\",\n"
+                + "        \"$\" : \"NAME\"\n"
+                + "      }, {\n"
+                + "        \"@key\" : \"indexingEnabled\",\n"
+                + "        \"$\" : \"false\"\n"
+                + "      }, {\n"
+                + "        \"@key\" : \"dirName\",\n"
+                + "        \"$\" : \"DS_poi_poi\"\n"
+                + "      } ]\n"
+                + "    }\n"
+                + "  }\n"
+                + "}"), GPGeoserverMetadata.class);
+        logger.info("{}\n", metadata);
+    }
+
+    @Test
+    public void h_marshalGPGeoserverMetadataTest() throws Exception {
+        Map<String, String> values = newHashMap();
+        values.put("dirName", "sfdem_sfdem");
+        GPGeoserverMetadata metadata = new GPGeoserverMetadata(values);
+        logger.info("@@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_METADATA_AS_STRING : \n{}\n", jacksonSupport.getDefaultMapper().writeValueAsString(metadata));
+    }
+
     /**
      * @return {@link GPGeoserverMetadataParam}
      */
     public static GPGeoserverMetadataParam toMetadataParam() {
         return new GPGeoserverMetadataParam("key_test", "value_test");
+    }
+
+    @XmlRootElement(name = "GPGeoserverMetadata")
+    @XmlAccessorType(XmlAccessType.FIELD)
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @ToString
+    static class GPGeoserverMetadata implements Serializable {
+
+        private static final long serialVersionUID = 6064901869538161620L;
+        //
+        @XmlJavaTypeAdapter(value = GPGeoserverMetadataMapAdapter.class)
+        private Map<String, String> metadata;
     }
 }

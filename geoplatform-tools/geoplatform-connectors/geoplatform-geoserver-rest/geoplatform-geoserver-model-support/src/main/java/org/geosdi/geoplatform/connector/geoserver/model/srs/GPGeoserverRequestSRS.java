@@ -39,6 +39,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
@@ -49,6 +51,7 @@ import java.util.List;
 @Setter
 @Getter
 @ToString
+@XmlAccessorType(XmlAccessType.FIELD)
 public class GPGeoserverRequestSRS implements GPGeoserverSRS {
 
     private static final long serialVersionUID = 1237878436600718761L;

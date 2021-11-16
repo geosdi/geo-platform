@@ -36,8 +36,11 @@
 package org.geosdi.geoplatform.connector.geoserver.model.format;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
@@ -46,7 +49,9 @@ import java.util.List;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Getter
+@Setter
 @ToString
+@XmlAccessorType(XmlAccessType.FIELD)
 public class GPGeoserverSupportedFormat implements IGPGeoserverSupportedFormat {
 
     private static final long serialVersionUID = 4962015018019282648L;

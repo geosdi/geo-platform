@@ -35,24 +35,34 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.grid;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Getter
+@Setter
 @ToString
+@JsonSerialize(using = GPCoverageGridSerializer.class)
+@JsonDeserialize(using = GPCoverageGridDeserializer.class)
+@XmlRootElement(name = "grid")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class GPCoverageGrid implements IGPCoverageGrid {
 
     private static final long serialVersionUID = 3377494987884611704L;
     //
-    @XmlElement(name = "@dimension")
+    @XmlAttribute(name = "dimension")
     private String dimension;
     private String crs;
+    @XmlElement(type = GPCoverageGridRange.class)
     private IGPCoverageGridRange range;
+    @XmlElement(type = GPCoverageGridTransformation.class)
     private IGPCoverageGridTransformation transform;
 }

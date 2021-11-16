@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.response.collection;
 import javax.annotation.Nonnull;
 import javax.xml.bind.ValidationEventHandler;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -61,6 +62,6 @@ public abstract class GPGenericMapAdapter<K, V, Entry extends GPGenericEntryType
     public Map<K, V> unmarshal(@Nonnull(when = NEVER) MapType mapType) throws Exception {
         checkArgument(mapType != null, "The Parameter mapType must not be null.");
         return mapType.getEntry().stream()
-                .collect(toMap(GPGenericEntryType::getKey, GPGenericEntryType::getValue));
+                .collect(toMap(GPGenericEntryType::getKey, GPGenericEntryType::getValue, (v1, v2) -> v1, LinkedHashMap::new));
     }
 }

@@ -39,6 +39,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -49,6 +50,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Getter
 @ToString
 @XmlTransient
+@XmlSeeAlso(value = {GPGeoserverLatLonBoundingBox.class, GPGeoserverNativeBoundingBox.class})
 public abstract class GPGeoserverBoundingBox<CRS extends Object> implements IGPGeoserverBoundingBox<CRS> {
 
     private static final long serialVersionUID = 2844724464394541360L;

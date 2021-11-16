@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.connector.geoserver.model.featuretypes.attribute;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 
 /**
@@ -44,6 +46,8 @@ import java.io.Serializable;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @JsonDeserialize(as = GPFeatureTypeAttribute.class)
+@XmlTransient
+@XmlSeeAlso(value = GPFeatureTypeAttribute.class)
 public interface IGPFeatureTypeAttribute extends Serializable {
 
     /**

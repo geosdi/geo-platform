@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.connector.geoserver.model.datastores.body;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.connection.IGPGeoserverConnectionParam;
@@ -52,6 +51,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static java.lang.Boolean.TRUE;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toMap;
@@ -82,9 +83,8 @@ public class GPGeoserverCreateDatastoreBody implements IGPGeoserverCreateDatasto
     @JsonCreator
     GPGeoserverCreateDatastoreBody(@Nonnull(when = When.NEVER) @JsonProperty(value = "name") String theName, @Nullable @JsonProperty(value = "description") String theDescription,
             @Nullable @JsonProperty(value = "enabled") Boolean theEnabled, @Nonnull(when = When.NEVER) @JsonProperty(value = "connectionParameters") Map<String, String> theConnectionParameters) {
-        Preconditions.checkArgument((theName != null) && !(theName.trim().isEmpty()), "The Parameter name must not be null or an empty string.");
-        Preconditions
-                .checkArgument(theConnectionParameters != null, "The Parameter connectionParameters must not be null.");
+        checkArgument((theName != null) && !(theName.trim().isEmpty()), "The Parameter name must not be null or an empty string.");
+        checkArgument(theConnectionParameters != null, "The Parameter connectionParameters must not be null.");
         this.name = theName;
         this.description = theDescription;
         this.enabled = ((theEnabled != null) ? theEnabled : TRUE);
@@ -107,9 +107,9 @@ public class GPGeoserverCreateDatastoreBody implements IGPGeoserverCreateDatasto
      */
     @Override
     public <Param extends IGPGeoserverConnectionParam> GPGeoserverCreateDatastoreBody addParam(@Nonnull(when = When.NEVER) Param theParam) throws Exception {
-        Preconditions.checkNotNull(theParam, "The Parameter param must not be null.");
-        Preconditions.checkArgument((theParam.getKey() != null) && !(theParam.getKey().trim().isEmpty()), "The Parameter key must not be null or an empty string.");
-        Preconditions.checkArgument((theParam.getValue() != null) && !(theParam.getValue().trim().isEmpty()), "The Parameter value must not be null or an empty string.");
+        checkNotNull(theParam, "The Parameter param must not be null.");
+        checkArgument((theParam.getKey() != null) && !(theParam.getKey().trim().isEmpty()), "The Parameter key must not be null or an empty string.");
+        checkArgument((theParam.getValue() != null) && !(theParam.getValue().trim().isEmpty()), "The Parameter value must not be null or an empty string.");
         this.connectionParameters.put(theParam.getKey(), theParam.getValue());
         return this;
     }
@@ -121,7 +121,7 @@ public class GPGeoserverCreateDatastoreBody implements IGPGeoserverCreateDatasto
      */
     @Override
     public <Param extends IGPGeoserverConnectionParam> GPGeoserverCreateDatastoreBody addParams(@Nonnull(when = When.NEVER) Param... theParams) throws Exception {
-        Preconditions.checkNotNull(theParams, "The Parameter params must not be null");
+        checkNotNull(theParams, "The Parameter params must not be null");
         this.connectionParameters.putAll(stream(theParams)
                 .filter(Objects::nonNull)
                 .filter(param -> (param.getKey() != null) && !(param.getKey().trim().isEmpty()))

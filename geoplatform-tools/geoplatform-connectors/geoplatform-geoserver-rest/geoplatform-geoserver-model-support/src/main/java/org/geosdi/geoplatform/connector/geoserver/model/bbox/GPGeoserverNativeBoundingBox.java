@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.connector.geoserver.model.bbox;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -44,7 +43,9 @@ import org.geosdi.geoplatform.connector.geoserver.model.crs.GPGeoserverCRS;
 import org.geosdi.geoplatform.connector.geoserver.model.crs.GPGeoserverCRSDeserializer;
 
 import javax.annotation.Nullable;
+import javax.xml.bind.annotation.*;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.TRUE;
 
 /**
@@ -54,18 +55,21 @@ import static java.lang.Boolean.TRUE;
 @Setter
 @Getter
 @ToString(callSuper = true)
+@XmlRootElement(name = "nativeBoundingBox")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class GPGeoserverNativeBoundingBox extends GPGeoserverBoundingBox<Object> {
 
     private static final long serialVersionUID = 1782373136890658818L;
     //
     @JsonDeserialize(using = GPGeoserverCRSDeserializer.class)
+    @XmlElements(value = {@XmlElement(name = "crs", type = GPGeoserverCRS.class), @XmlElement(name = "crs", type = String.class)})
     private Object crs;
 
     /**
      * @param theCrs
      */
     public void setCrs(@Nullable Object theCrs) {
-        Preconditions.checkArgument(((theCrs != null) ? (theCrs instanceof String) || (theCrs instanceof GPGeoserverCRS) : TRUE), "The Parameter crs must be an instance of String or GPGeoserverCRS.");
+        checkArgument(((theCrs != null) ? (theCrs instanceof String) || (theCrs instanceof GPGeoserverCRS) : TRUE), "The Parameter crs must be an instance of String or GPGeoserverCRS.");
         this.crs = theCrs;
     }
 }

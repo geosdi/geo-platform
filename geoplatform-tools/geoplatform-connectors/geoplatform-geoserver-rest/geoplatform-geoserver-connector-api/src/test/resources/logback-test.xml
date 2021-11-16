@@ -24,5 +24,9 @@
             level="trace"/>
     <logger name="org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.wfs.IGPWFSDatastoreBodyBuilder"
             level="trace"/>
+    <logger name="org.geosdi.geoplatform.connector.geoserver.model.jackson.deserializer.GPGenericEntryTypeDeserializer" level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.geoserver.model.store.GPGeoserverStoreInfoDeserializer" level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.geoserver.model.featuretypes.attribute.GPFeatureTypeAttributesDeserializer" level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.geoserver.model.about.version.GPGeoserverVersionResourceDeserializer" level="debug"/>
 
 </configuration>

@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.geoserver.model.metadata.adapter;
 
 import org.geosdi.geoplatform.connector.geoserver.model.metadata.GPGeoserverMetadataMapType;
-import org.geosdi.geoplatform.connector.geoserver.model.metadata.IGPGeoserverMetadataParam;
+import org.geosdi.geoplatform.connector.geoserver.model.metadata.GPGeoserverMetadataParam;
 import org.geosdi.geoplatform.response.collection.GPGenericMapAdapter;
 
 import javax.xml.bind.ValidationEventHandler;
@@ -46,7 +46,7 @@ import java.util.Map;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGeoserverMetadataMapAdapter extends GPGenericMapAdapter<String, String, IGPGeoserverMetadataParam, GPGeoserverMetadataMapType> {
+public class GPGeoserverMetadataMapAdapter extends GPGenericMapAdapter<String, String, GPGeoserverMetadataParam, GPGeoserverMetadataMapType> {
 
     /**
      * Convert a bound type to a value type.

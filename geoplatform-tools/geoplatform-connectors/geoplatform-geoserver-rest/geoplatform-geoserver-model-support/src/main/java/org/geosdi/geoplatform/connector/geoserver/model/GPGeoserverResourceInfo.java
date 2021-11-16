@@ -40,13 +40,19 @@ import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverBoundingBox;
 import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverLatLonBoundingBox;
+import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypesStoreInfo;
+import org.geosdi.geoplatform.connector.geoserver.model.keyword.GPGeoserverKeyword;
 import org.geosdi.geoplatform.connector.geoserver.model.keyword.IGPGeoserverKeyword;
 import org.geosdi.geoplatform.connector.geoserver.model.metadata.adapter.GPGeoserverMetadataMapAdapter;
+import org.geosdi.geoplatform.connector.geoserver.model.namespace.GPGeoserverNamespace;
 import org.geosdi.geoplatform.connector.geoserver.model.namespace.IGPGeoserverNamespace;
 import org.geosdi.geoplatform.connector.geoserver.model.srs.GPGeoserverResponseSRS;
 import org.geosdi.geoplatform.connector.geoserver.model.store.GPGeoserverStoreInfo;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.store.GPGeoserverCoverageStoreInfo;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Map;
@@ -55,14 +61,16 @@ import java.util.Map;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlTransient
 @Getter
 @Setter
 @ToString
+@XmlTransient
 public abstract class GPGeoserverResourceInfo<NativeBoundingBox extends GPGeoserverBoundingBox<?>> implements IGPGeoserverResourceInfo<NativeBoundingBox> {
 
     private static final long serialVersionUID = -2589320136857111299L;
     //
+    @XmlElementRefs(value = {@XmlElementRef(name = "coverageStore", type = GPGeoserverCoverageStoreInfo.class),
+            @XmlElementRef(name = "dataStore", type = GPGeoserverFeatureTypesStoreInfo.class)})
     private GPGeoserverStoreInfo store;
     @XmlElement(name = "abstract")
     private String abstractText;
@@ -70,10 +78,12 @@ public abstract class GPGeoserverResourceInfo<NativeBoundingBox extends GPGeoser
     private String name;
     private String title;
     private String srs;
+    @XmlElement(type = GPGeoserverNamespace.class)
     private IGPGeoserverNamespace namespace;
     private boolean enabled;
     @XmlJavaTypeAdapter(value = GPGeoserverMetadataMapAdapter.class)
     private Map<String, String> metadata;
+    @XmlElement(type = GPGeoserverKeyword.class)
     private IGPGeoserverKeyword keywords;
     private GPGeoserverLatLonBoundingBox latLonBoundingBox;
     private NativeBoundingBox nativeBoundingBox;

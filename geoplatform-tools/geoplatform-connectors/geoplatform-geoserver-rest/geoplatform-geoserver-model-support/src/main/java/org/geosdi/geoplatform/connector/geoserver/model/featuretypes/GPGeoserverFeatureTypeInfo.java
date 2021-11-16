@@ -36,24 +36,27 @@
 package org.geosdi.geoplatform.connector.geoserver.model.featuretypes;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.attribute.IGPFeatureTypeAttributes;
-import org.geosdi.geoplatform.connector.geoserver.model.metadata.link.IGPGeoserverMetadataLink;
 import org.geosdi.geoplatform.connector.geoserver.model.GPGeoserverResourceInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverNativeBoundingBox;
 import org.geosdi.geoplatform.connector.geoserver.model.crs.GPGeoserverCRS;
 import org.geosdi.geoplatform.connector.geoserver.model.crs.GPGeoserverCRSDeserializer;
+import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.attribute.GPFeatureTypeAttributes;
+import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.attribute.IGPFeatureTypeAttributes;
+import org.geosdi.geoplatform.connector.geoserver.model.link.GPGeoserverDataLinks;
+import org.geosdi.geoplatform.connector.geoserver.model.link.IGPGeoserverDataLinks;
+import org.geosdi.geoplatform.connector.geoserver.model.metadata.link.GPGeoserverMetadataLinks;
+import org.geosdi.geoplatform.connector.geoserver.model.metadata.link.IGPGeoserverMetadataLinks;
 import org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy;
 
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-import java.util.List;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.TRUE;
 import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
@@ -66,16 +69,18 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 @ToString(callSuper = true)
 @XmlRootElement(name = "featureType")
 @XmlAccessorType(value = FIELD)
-@XmlType(propOrder = {"name", "nativeName", "namespace", "title", "abstract", "keywords", "metadataLinks", "dataLinks",
-        "nativeCRS", "srs", "nativeBoundingBox", "latLonBoundingBox", "projectionPolicy", "enabled", "metadata", "store",
-        "cqlFilter", "maxFeatures", "numDecimals", "responseSRS", "overridingServiceSRS", "skipNumberMatched",
-        "circularArcPresent", "linearizationTolerance", "attributes"})
+//@XmlType(propOrder = {"name", "nativeName", "namespace", "title", "abstract", "keywords", "metadataLinks", "dataLinks",
+//        "nativeCRS", "srs", "nativeBoundingBox", "latLonBoundingBox", "projectionPolicy", "enabled", "metadata", "store",
+//        "cqlFilter", "maxFeatures", "numDecimals", "responseSRS", "overridingServiceSRS", "skipNumberMatched",
+//        "circularArcPresent", "linearizationTolerance", "attributes"})
 public class GPGeoserverFeatureTypeInfo extends GPGeoserverResourceInfo<GPGeoserverNativeBoundingBox> implements IGPGeoserverFeatureTypeInfo {
 
     private static final long serialVersionUID = 1449200355815165256L;
     //
-    private List<IGPGeoserverMetadataLink> metadataLinks;
-    private List<IGPGeoserverMetadataLink> dataLinks;
+    @XmlElement(type = GPGeoserverMetadataLinks.class)
+    private IGPGeoserverMetadataLinks metadataLinks;
+    @XmlElement(type = GPGeoserverDataLinks.class)
+    private IGPGeoserverDataLinks dataLinks;
     @JsonDeserialize(using = GPGeoserverCRSDeserializer.class)
     private Object nativeCRS;
     private String cqlFilter;
@@ -86,13 +91,14 @@ public class GPGeoserverFeatureTypeInfo extends GPGeoserverResourceInfo<GPGeoser
     private boolean circularArcPresent;
     private Integer linearizationTolerance;
     private GPProjectionPolicy projectionPolicy;
+    @XmlElement(type = GPFeatureTypeAttributes.class)
     private IGPFeatureTypeAttributes attributes;
 
     /**
      * @param theNativeCRS
      */
     public void setNativeCRS(@Nullable Object theNativeCRS) {
-        Preconditions.checkArgument(((theNativeCRS != null) ? (theNativeCRS instanceof String) || (theNativeCRS instanceof GPGeoserverCRS) : TRUE), "The Parameter nativeCRS must be an Instance of String or GPGeoserverCRS.");
+        checkArgument(((theNativeCRS != null) ? (theNativeCRS instanceof String) || (theNativeCRS instanceof GPGeoserverCRS) : TRUE), "The Parameter nativeCRS must be an Instance of String or GPGeoserverCRS.");
         this.nativeCRS = theNativeCRS;
     }
 }

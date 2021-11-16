@@ -41,7 +41,10 @@ import org.geosdi.geoplatform.connector.geoserver.model.store.GPGeoserverStore;
 import org.geosdi.geoplatform.connector.geoserver.model.store.GPGeoserverStoreInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverStoreInfoType;
 
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import static org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverStoreInfoType.COVERAGE;
 
@@ -51,10 +54,12 @@ import static org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverSt
  */
 @Getter
 @ToString(callSuper = true)
+@XmlRootElement(name = "store")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class GPGeoserverCoverageStoreInfo extends GPGeoserverStore implements GPGeoserverStoreInfo {
 
     private static final long serialVersionUID = 2243349093423272966L;
     //
-    @XmlElement(name = "@class")
+    @XmlAttribute(name = "class", required = true)
     private final GeoserverStoreInfoType storeType = COVERAGE;
 }

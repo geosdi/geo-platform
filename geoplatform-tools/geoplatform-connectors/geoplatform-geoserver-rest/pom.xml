@@ -17,10 +17,10 @@
 
   <name>Geo-Platform :: == Connectors Rest</name>
 
-  <modules>
-    <module>geoplatform-geoserver-connector-api</module>
-    <module>geoplatform-geoserver-connector</module>
-    <module>geoplatform-geoserver-request-support</module>
-    <module>geoplatform-geoserver-model-support</module>
-  </modules>
+    <modules>
+        <module>geoplatform-geoserver-connector-api</module>
+        <module>geoplatform-geoserver-connector</module>
+        <module>geoplatform-geoserver-request-support</module>
+        <module>geoplatform-geoserver-model-support</module>
+    </modules>
 </project>

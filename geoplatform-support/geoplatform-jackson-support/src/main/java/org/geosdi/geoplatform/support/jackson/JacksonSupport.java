@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.support.jackson;
 
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.geosdi.geoplatform.support.jackson.function.GPJacksonCheck;
 import org.geosdi.geoplatform.support.jackson.property.JacksonSupportConfigFeature;
 
 import javax.annotation.Nonnull;
@@ -140,5 +141,15 @@ public interface JacksonSupport {
      */
     default String getProviderName() {
         return this.getClass().getSimpleName();
+    }
+
+    /**
+     * @param theCheck
+     * @return {@link String}
+     * @throws Exception
+     */
+    default String writeAsString(@Nonnull(when = NEVER) GPJacksonCheck<Object> theCheck) throws Exception {
+        checkArgument(theCheck != null, "The Parameter checkFunction must not be null.");
+        return getDefaultMapper().writeValueAsString(theCheck.apply());
     }
 }

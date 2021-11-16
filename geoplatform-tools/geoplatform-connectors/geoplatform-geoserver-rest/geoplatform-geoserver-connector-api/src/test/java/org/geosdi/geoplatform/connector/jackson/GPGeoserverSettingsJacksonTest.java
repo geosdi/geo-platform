@@ -36,6 +36,9 @@
 package org.geosdi.geoplatform.connector.jackson;
 
 import org.geosdi.geoplatform.connector.geoserver.model.settings.GPGeoserverGlobalSettings;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.version.GPGeoserverGeotoolsVersion;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wms.GPGeoserverWMSWatermark;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wms.GeoserverWMSWatermark;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -47,6 +50,7 @@ import java.io.StringReader;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
 import static org.geosdi.geoplatform.connector.jackson.GPGeoserverJacksonTest.jacksonSupport;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -118,5 +122,57 @@ public class GPGeoserverSettingsJacksonTest {
                         "GeoserverGlobalSettings.json")
                         .collect(joining(separator, "", separator))), GPGeoserverGlobalSettings.class);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_GLOBAL_SETTINGS : {}\n", geoserverGlobalSettings);
+    }
+
+    @Test
+    public void c_unmarshallGeoserverGeotoolsVersionFromXmlStringTest() throws Exception {
+        GPGeoserverGeotoolsVersion geotoolsVersion = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper().readValue(new StringReader("<versions>\n"
+                + "    <org.geotools.util.Version>\n"
+                + "      <version>1.1.1</version>\n"
+                + "    </org.geotools.util.Version>\n"
+                + "    <org.geotools.util.Version>\n"
+                + "      <version>1.3.0</version>\n"
+                + "    </org.geotools.util.Version>\n"
+                + "  </versions>"), GPGeoserverGeotoolsVersion.class);
+        logger.info("#######################GP_GEOSERVER_GEOTOOLS_VERSION : {}\n", geotoolsVersion);
+        logger.info("\n{}\n", jacksonSupport.getDefaultMapper().writeValueAsString(geotoolsVersion));
+    }
+
+    @Test
+    public void d_unmarshallGeoserverGeotoolsVersionFromJsonStringTest() throws Exception {
+        GPGeoserverGeotoolsVersion geotoolsVersion = jacksonSupport.getDefaultMapper().readValue(new StringReader("{\n" +
+                "" + "  \"versions\" : {\n"
+                + "    \"org.geotools.util.Version\" : [ {\n"
+                + "      \"version\" : \"1.1.1\"\n"
+                + "    }, {\n"
+                + "      \"version\" : \"1.3.0\"\n"
+                + "    } ]\n"
+                + "  }\n"
+                + "}"), GPGeoserverGeotoolsVersion.class);
+        logger.info("#######################GP_GEOSERVER_GEOTOOLS_VERSION : {}\n", geotoolsVersion);
+    }
+
+    @Test
+    public void e_unmarshallGeoserverWMSWatermarkFromXmlStringTest() throws Exception {
+        GPGeoserverWMSWatermark watermark = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper()
+                .readValue(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                        + "<watermark>\n"
+                        + "   <enabled>false</enabled>\n"
+                        + "   <position>BOT_RIGHT</position>\n"
+                        + "   <transparency>100</transparency>\n"
+                        + "</watermark>"), GPGeoserverWMSWatermark.class);
+        logger.info("@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_WMS_WATERMARK : {}\n", watermark);
+    }
+
+    @Test
+    public void f_unmarshallGeoserverWMSWatermarkFromJsonStringTest() throws Exception {
+        GeoserverWMSWatermark watermark = jacksonSupport.getDefaultMapper().readValue(new StringReader("{\n"
+                + "  \"watermark\" : {\n"
+                + "    \"enabled\" : false,\n"
+                + "    \"position\" : \"MID_CENTER\",\n"
+                + "    \"transparency\" : 100\n"
+                + "  }\n"
+                + "}"), GeoserverWMSWatermark.class);
+        logger.info("@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_WMS_WATERMARK : {}\n", watermark);
     }
 }

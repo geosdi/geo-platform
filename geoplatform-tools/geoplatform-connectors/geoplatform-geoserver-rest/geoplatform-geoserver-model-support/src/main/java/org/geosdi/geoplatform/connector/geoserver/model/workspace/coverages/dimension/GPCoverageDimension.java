@@ -36,20 +36,31 @@
 package org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.dimension;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.dimension.range.GPCoverageDimensionRange;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.dimension.range.IGPCoverageDimensionRange;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Getter
+@Setter
 @ToString
+@XmlRootElement(name = "coverageDimension")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class GPCoverageDimension implements IGPCoverageDimension {
 
     private static final long serialVersionUID = -7201883013566538628L;
     //
     private String description;
     private String name;
+    @XmlElement(name = "range", type = GPCoverageDimensionRange.class)
     private IGPCoverageDimensionRange range;
 }

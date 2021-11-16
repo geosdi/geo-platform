@@ -41,22 +41,42 @@ import lombok.ToString;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Getter
 @Setter
 @ToString
+@XmlRootElement(name = "attribute")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class GPFeatureTypeAttribute implements IGPFeatureTypeAttribute {
 
     private static final long serialVersionUID = -8984590320238278430L;
     //
+    @Getter
     private String name;
     private Integer minOccurs;
     private Integer maxOccurs;
+    @Getter
     private boolean nillable;
+    @Getter
     private String binding;
+
+    /**
+     * @return {@link Integer}
+     */
+    @Override
+    public Integer getMinOccurs() {
+        return ((this.minOccurs != null) ? this.minOccurs : 0);
+    }
+
+    /**
+     * @return {@link Integer}
+     */
+    @Override
+    public Integer getMaxOccurs() {
+        return ((this.maxOccurs != null) ? this.maxOccurs : 0);
+    }
 }

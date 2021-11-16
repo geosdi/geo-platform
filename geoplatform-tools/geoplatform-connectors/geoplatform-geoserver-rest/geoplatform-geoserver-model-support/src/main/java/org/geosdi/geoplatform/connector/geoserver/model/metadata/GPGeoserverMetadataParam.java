@@ -35,14 +35,18 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.metadata;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.geosdi.geoplatform.connector.geoserver.model.jackson.serializer.GPGenericEntryTypeSerializer;
 
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlValue;
 
 import static javax.xml.bind.annotation.XmlAccessType.PROPERTY;
 
@@ -54,7 +58,9 @@ import static javax.xml.bind.annotation.XmlAccessType.PROPERTY;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@XmlRootElement(name = "GPGeoserverMetadataParam")
+@JsonSerialize(using = GPGenericEntryTypeSerializer.class)
+@JsonDeserialize(using = GPGeoserverMetadataParamDeserializer.class)
+@XmlRootElement(name = "entry")
 @XmlAccessorType(PROPERTY)
 public class GPGeoserverMetadataParam implements IGPGeoserverMetadataParam {
 
@@ -66,7 +72,7 @@ public class GPGeoserverMetadataParam implements IGPGeoserverMetadataParam {
     /**
      * @return {@link String}
      */
-    @XmlElement(name = "@key")
+    @XmlAttribute(name = "key", required = true)
     @Override
     public String getKey() {
         return this.key;
@@ -75,7 +81,7 @@ public class GPGeoserverMetadataParam implements IGPGeoserverMetadataParam {
     /**
      * @return {@link String}
      */
-    @XmlElement(name = "$")
+    @XmlValue
     @Override
     public String getValue() {
         return this.value;

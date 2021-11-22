@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>demos</artifactId>
-        <version>1.8-SNAPSHOT</version>
+        <version>1.8.x_old</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>feature-demo</artifactId>
-    <version>1.8-SNAPSHOT</version>
+    <version>1.8.x_old</version>
     <packaging>war</packaging>
 
     <name>Geo-Platform :: == Feature Widget Demo</name>

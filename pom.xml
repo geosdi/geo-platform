@@ -1,4 +1,4 @@
- <?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     
@@ -8,7 +8,7 @@
 
     <groupId>org.geosdi</groupId>
     <artifactId>geo-platform</artifactId>
-    <version>1.8-SNAPSHOT</version>
+    <version>1.8.x_old</version>
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == GeoSDI Framework</name>
@@ -1553,7 +1553,7 @@
         <ubl-version>2.0</ubl-version>
         <jetty-version>9.4.43.v20210629</jetty-version>
 
-        <postgresql-version>9.4-1200-jdbc41</postgresql-version>
+        <postgresql-version>42.2.23</postgresql-version>
         <postgis-jdbc-version>1.5.2</postgis-jdbc-version>
 
         <hibernate-version>3.6.10.Final</hibernate-version>

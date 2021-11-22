@@ -6,12 +6,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-xml-binding</artifactId>
-        <version>1.8-SNAPSHOT</version>
+        <version>1.8.x_old</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-wps-binding</artifactId>
-    <version>1.8-SNAPSHOT</version>
+    <version>1.8.x_old</version>
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == Binding WPS XML Module</name>

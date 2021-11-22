@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-experimental</artifactId>
-        <version>1.8-SNAPSHOT</version>
+        <version>1.8.x_old</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-elastic-search</artifactId>
-    <version>1.8-SNAPSHOT</version>
+    <version>1.8.x_old</version>
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == Elastic Search Module</name>

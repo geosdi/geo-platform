@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-widget</artifactId>
-        <version>1.8-SNAPSHOT</version>
+        <version>1.8.x_old</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>routing-widget</artifactId>
-    <version>1.8-SNAPSHOT</version>
+    <version>1.8.x_old</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Routing Module</name>

@@ -6,12 +6,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-wms-binding</artifactId>
-        <version>1.8-SNAPSHOT</version>
+        <version>1.8.x_old</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>wms-1.1.1</artifactId>
-    <version>1.8-SNAPSHOT</version>
+    <version>1.8.x_old</version>
 
     <name>Geo-Platform :: == Binding WMS 1.1.1 XML Module</name>
     <!-- FIXME change it to the project's website -->

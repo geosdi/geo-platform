@@ -4,13 +4,13 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geo-platform</artifactId>
-        <version>1.8-SNAPSHOT</version>
+        <version>1.8.x_old</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <groupId>org.geosdi.geoplatform</groupId>
     <artifactId>geoplatform-services-test</artifactId>
-    <version>1.8-SNAPSHOT</version>
+    <version>1.8.x_old</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Web Services Module Test</name>

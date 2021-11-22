@@ -4,12 +4,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>gp-elasticsearch-query-rs</artifactId>
-        <version>1.8-SNAPSHOT</version>
+        <version>1.8.x_old</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>gp-elasticsearch-query-rs-impl</artifactId>
-    <version>1.8-SNAPSHOT</version>
+    <version>1.8.x_old</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Elastic Search Query REST Impl Module</name>
@@ -50,7 +50,7 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-logger-support</artifactId>
-            <version>1.8-SNAPSHOT</version>
+            <version>1.8.x_old</version>
         </dependency>
 
         <!-- =========================================================== -->

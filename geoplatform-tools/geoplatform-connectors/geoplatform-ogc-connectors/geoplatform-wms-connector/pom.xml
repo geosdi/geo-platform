@@ -6,12 +6,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-ogc-connectors</artifactId>
-        <version>1.8-SNAPSHOT</version>
+        <version>1.8.x_old</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-wms-connector</artifactId>
-    <version>1.8-SNAPSHOT</version>
+    <version>1.8.x_old</version>
 
     <name>Geo-Platform :: == WMS Connector Module</name>
     <!-- FIXME change it to the project's website -->

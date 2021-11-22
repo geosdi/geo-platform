@@ -6,12 +6,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-elastic-search</artifactId>
-        <version>1.8-SNAPSHOT</version>
+        <version>1.8.x_old</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-elastic-search-rs-connector</artifactId>
-    <version>1.8-SNAPSHOT</version>
+    <version>1.8.x_old</version>
 
     <name>Geo-Platform :: == Elastic Search Rest Connector Module</name>
     <description>This Module is a ElasticSearch Connector based on Java High Level REST Client.</description>

@@ -118,7 +118,7 @@ public abstract class PreemptiveSecurityConnector extends AbstractSecurityConnec
                 port = 443;
                 break;
             case "http":
-                port = 80;
+                port = -1;
                 break;
             default:
                 throw new IllegalStateException("Scheme doesn't recognize");

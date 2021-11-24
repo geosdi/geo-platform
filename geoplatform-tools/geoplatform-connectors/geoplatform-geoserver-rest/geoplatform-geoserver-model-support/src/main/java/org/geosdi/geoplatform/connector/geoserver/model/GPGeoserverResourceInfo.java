@@ -35,11 +35,14 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverBoundingBox;
 import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverLatLonBoundingBox;
+import org.geosdi.geoplatform.connector.geoserver.model.crs.GPGeoserverCRS;
+import org.geosdi.geoplatform.connector.geoserver.model.crs.GPGeoserverCRSDeserializer;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypesStoreInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.keyword.GPGeoserverKeyword;
 import org.geosdi.geoplatform.connector.geoserver.model.keyword.IGPGeoserverKeyword;
@@ -50,9 +53,13 @@ import org.geosdi.geoplatform.connector.geoserver.model.srs.GPGeoserverResponseS
 import org.geosdi.geoplatform.connector.geoserver.model.store.GPGeoserverStoreInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.store.GPGeoserverCoverageStoreInfo;
 
+import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Map;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.TRUE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -71,10 +78,14 @@ public abstract class GPGeoserverResourceInfo<NativeBoundingBox extends GPGeoser
     private GPGeoserverStoreInfo store;
     @XmlElement(name = "abstract")
     private String abstractText;
-    private String nativeName;
     private String name;
     private String title;
     private String srs;
+    private String nativeName;
+    @JsonDeserialize(using = GPGeoserverCRSDeserializer.class)
+    @XmlElements(value = {@XmlElement(name = "nativeCRS", type = GPGeoserverCRS.class),
+            @XmlElement(name = "nativeCRS", type = String.class)})
+    private Object nativeCRS;
     @XmlElement(type = GPGeoserverNamespace.class)
     private IGPGeoserverNamespace namespace;
     private boolean enabled;
@@ -86,4 +97,12 @@ public abstract class GPGeoserverResourceInfo<NativeBoundingBox extends GPGeoser
     @XmlAnyElement(lax=true)
     private NativeBoundingBox nativeBoundingBox;
     private GPGeoserverResponseSRS responseSRS;
+
+    /**
+     * @param theNativeCRS
+     */
+    public void setNativeCRS(@Nullable Object theNativeCRS) {
+        checkArgument(((theNativeCRS != null) ? (theNativeCRS instanceof String) || (theNativeCRS instanceof GPGeoserverCRS) : TRUE), "The Parameter nativeCRS must be an Instance of String or GPGeoserverCRS.");
+        this.nativeCRS = theNativeCRS;
+    }
 }

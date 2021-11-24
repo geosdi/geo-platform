@@ -170,4 +170,30 @@ public class GPGeoserverJacksonStoreTest {
         GPGeoserverWorkspace geoserverWorkspace = new GPGeoserverWorkspace("test", "test_unique");
         logger.info("{}\n", JACKSON_JAXB_XML_SUPPORT.getDefaultMapper().writeValueAsString(geoserverWorkspace));
     }
+
+    @Test
+    public void g_unmarshallGPGeoserverWorkspaceFromXmlStringTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@{}\n", JACKSON_JAXB_XML_SUPPORT.getDefaultMapper()
+                .readValue(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
+                        + "<workspace>\n"
+                        + "    <name>test</name>\n"
+                        + "    <href>test_unique</href>\n"
+                        + "</workspace>"), GPGeoserverWorkspace.class));
+    }
+
+    @Test
+    public void h_marshallGPGeoserverWorkspaceAsJsonStringTest() throws Exception {
+        GPGeoserverWorkspace geoserverWorkspace = new GPGeoserverWorkspace("test", "test_unique");
+        logger.info("############################\n{}\n", jacksonSupport.getDefaultMapper().writeValueAsString(geoserverWorkspace));
+    }
+
+    @Test
+    public void i_unmarshallGPGeoserverWorkspaceFromJsonStringTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@{}\n", jacksonSupport.getDefaultMapper()
+                .readValue(new StringReader("{\n"
+                        + "  \"workspace\" : {\n"
+                        + "    \"name\" : \"test\",\n"
+                        + "    \"href\" : \"test_unique\"\n"
+                        + "  }\n" + "}"), GPGeoserverWorkspace.class));
+    }
 }

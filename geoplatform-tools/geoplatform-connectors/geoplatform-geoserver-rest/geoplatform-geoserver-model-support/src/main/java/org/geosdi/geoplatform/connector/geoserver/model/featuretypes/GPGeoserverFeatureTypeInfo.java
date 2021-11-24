@@ -35,14 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.featuretypes;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.GPGeoserverResourceInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverNativeBoundingBox;
-import org.geosdi.geoplatform.connector.geoserver.model.crs.GPGeoserverCRS;
-import org.geosdi.geoplatform.connector.geoserver.model.crs.GPGeoserverCRSDeserializer;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.attribute.GPFeatureTypeAttributes;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.attribute.IGPFeatureTypeAttributes;
 import org.geosdi.geoplatform.connector.geoserver.model.link.GPGeoserverDataLinks;
@@ -51,14 +48,11 @@ import org.geosdi.geoplatform.connector.geoserver.model.metadata.link.GPGeoserve
 import org.geosdi.geoplatform.connector.geoserver.model.metadata.link.IGPGeoserverMetadataLinks;
 import org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy;
 
-import javax.annotation.Nullable;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Boolean.TRUE;
 import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
@@ -70,10 +64,10 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 @ToString(callSuper = true)
 @XmlRootElement(name = "featureType")
 @XmlAccessorType(value = FIELD)
-//@XmlType(propOrder = {"name", "nativeName", "namespace", "title", "abstract", "keywords", "metadataLinks", "dataLinks",
-//        "nativeCRS", "srs", "nativeBoundingBox", "latLonBoundingBox", "projectionPolicy", "enabled", "metadata", "store",
-//        "cqlFilter", "maxFeatures", "numDecimals", "responseSRS", "overridingServiceSRS", "skipNumberMatched",
-//        "circularArcPresent", "linearizationTolerance", "attributes"})
+@XmlType(propOrder = {"name", "namespace", "title", "nativeName", "abstractText", "store", "keywords", "enabled", "srs",
+        "cqlFilter", "maxFeatures", "numDecimals", "responseSRS", "overridingServiceSRS", "skipNumberMatched",
+        "circularArcPresent", "linearizationTolerance", "nativeCRS", "nativeBoundingBox", "latLonBoundingBox",
+        "projectionPolicy", "metadata", "metadataLinks", "dataLinks", "attributes"})
 public class GPGeoserverFeatureTypeInfo extends GPGeoserverResourceInfo<GPGeoserverNativeBoundingBox> implements IGPGeoserverFeatureTypeInfo {
 
     private static final long serialVersionUID = 1449200355815165256L;
@@ -82,9 +76,6 @@ public class GPGeoserverFeatureTypeInfo extends GPGeoserverResourceInfo<GPGeoser
     private IGPGeoserverMetadataLinks metadataLinks;
     @XmlElement(type = GPGeoserverDataLinks.class)
     private IGPGeoserverDataLinks dataLinks;
-    @JsonDeserialize(using = GPGeoserverCRSDeserializer.class)
-    @XmlElements(value = {@XmlElement(name = "nativeCRS", type = GPGeoserverCRS.class), @XmlElement(name = "nativeCRS", type = String.class)})
-    private Object nativeCRS;
     private String cqlFilter;
     private Integer maxFeatures;
     private Integer numDecimals;
@@ -95,12 +86,4 @@ public class GPGeoserverFeatureTypeInfo extends GPGeoserverResourceInfo<GPGeoser
     private GPProjectionPolicy projectionPolicy;
     @XmlElement(type = GPFeatureTypeAttributes.class)
     private IGPFeatureTypeAttributes attributes;
-
-    /**
-     * @param theNativeCRS
-     */
-    public void setNativeCRS(@Nullable Object theNativeCRS) {
-        checkArgument(((theNativeCRS != null) ? (theNativeCRS instanceof String) || (theNativeCRS instanceof GPGeoserverCRS) : TRUE), "The Parameter nativeCRS must be an Instance of String or GPGeoserverCRS.");
-        this.nativeCRS = theNativeCRS;
-    }
 }

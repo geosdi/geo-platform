@@ -34,7 +34,9 @@
  */
 package org.geosdi.geoplatform.connector.jackson;
 
+import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverLatLonBoundingBox;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
+import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypesStoreInfo;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -44,9 +46,19 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 
 import static java.io.File.separator;
+import static java.lang.Boolean.TRUE;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy.FORCE_DECLARED;
 import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
+import static org.geosdi.geoplatform.connector.jackson.GPFeatureTypeAttributesJacksonTest.toFeatureTypeAttributes;
+import static org.geosdi.geoplatform.connector.jackson.GPGeoserverDataLinkJacksonTest.toDataLinks;
+import static org.geosdi.geoplatform.connector.jackson.GPGeoserverJacksonTest.jacksonSupport;
+import static org.geosdi.geoplatform.connector.jackson.GPGeoserverKeywordJacksonTest.toKeyword;
+import static org.geosdi.geoplatform.connector.jackson.GPGeoserverMetadataLinkJacksonTest.toMetadataLinks;
+import static org.geosdi.geoplatform.connector.jackson.GPGeoserverMetadataParamJacksonTest.toMapParams;
+import static org.geosdi.geoplatform.connector.jackson.GPGeoserverNativeBoundingBoxJacksonTest.toNativeBoundingBox;
+import static org.geosdi.geoplatform.connector.jackson.GPGeoserverResponseSRSJacksonTest.toResponseSRS;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -63,5 +75,73 @@ public class GPGeoserverFeatureTypeInfoJacksonTest {
                 .readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "FeatureTypeInfo")
                 .collect(joining(separator, "", ".xml"))), GPGeoserverFeatureTypeInfo.class);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_FEATURE_TYPE_INFO : {}\n", featureTypeInfo);
+    }
+
+    @Test
+    public void b_marshallGPGeoserverFeatureTypeInfoAsXmlStringTest() throws Exception {
+        logger.info("######################GP_GEOSERVER_FEATURE_TYPE_INFO : \n{}\n", JACKSON_JAXB_XML_SUPPORT.writeAsString(GPGeoserverFeatureTypeInfoJacksonTest::toFeatureTypeInfo));
+    }
+
+    @Test
+    public void c_marshallGPGeoserverFeatureTypeInfoAsJsonStringTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_FEATURE_TYPE_INFO : \n{}\n", jacksonSupport.writeAsString(GPGeoserverFeatureTypeInfoJacksonTest::toFeatureTypeInfo));
+    }
+
+    @Test
+    public void d_unmarshallGPGeoserverFeatureTypeInfoFromJsonFileTest() throws Exception {
+        GPGeoserverFeatureTypeInfo featureTypeInfo = jacksonSupport.getDefaultMapper()
+                .readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "FeatureTypeInfo")
+                        .collect(joining(separator, "", ".json"))), GPGeoserverFeatureTypeInfo.class);
+        logger.info("#####################GP_GEOSERVER_FEATURE_TYPE_INFO : {}\n", featureTypeInfo);
+    }
+
+    @Test
+    public void e_unmarshallGPGeoserverFeatureTypeInfoFromXmlFileTest() throws Exception {
+        GPGeoserverFeatureTypeInfo featureTypeInfo = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper()
+                .readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "FeatureTypeInfo1")
+                        .collect(joining(separator, "", ".xml"))), GPGeoserverFeatureTypeInfo.class);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_FEATURE_TYPE_INFO : {}\n", featureTypeInfo);
+    }
+
+    /**
+     * @return {@link GPGeoserverFeatureTypeInfo}
+     */
+    public static GPGeoserverFeatureTypeInfo toFeatureTypeInfo() {
+        GPGeoserverFeatureTypeInfo featureType = new GPGeoserverFeatureTypeInfo();
+        featureType.setNativeCRS("GEOGCS[&quot;WGS 84&quot;, \n" +
+                "  DATUM[&quot;World Geodetic System 1984&quot;, \n" +
+                "    SPHEROID[&quot;WGS 84&quot;, 6378137.0, 298.257223563, AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]], \n" +
+                "    AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]], \n" +
+                "  PRIMEM[&quot;Greenwich&quot;, 0.0, AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]], \n" +
+                "  UNIT[&quot;degree&quot;, 0.017453292519943295], \n" +
+                "  AXIS[&quot;Geodetic longitude&quot;, EAST], \n" +
+                "  AXIS[&quot;Geodetic latitude&quot;, NORTH], \n" +
+                "  AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]");
+        featureType.setSrs("EPSG:4326");
+        featureType.setEnabled(TRUE);
+        featureType.setTitle("layer_test");
+        featureType.setName("test");
+        featureType.setAbstractText("ABSTRACT_TEXT");
+        featureType.setNativeBoundingBox(toNativeBoundingBox());
+        GPGeoserverLatLonBoundingBox latLonBoundingBox = new GPGeoserverLatLonBoundingBox();
+        latLonBoundingBox.setMinx(-74.0118315772888);
+        latLonBoundingBox.setMaxx(-74.00857344353275);
+        latLonBoundingBox.setMiny(40.70754683896324);
+        latLonBoundingBox.setMaxy(40.711945649065406);
+        latLonBoundingBox.setCrs("EPSG:4326");
+        featureType.setLatLonBoundingBox(latLonBoundingBox);
+        featureType.setAttributes(toFeatureTypeAttributes(15));
+        featureType.setDataLinks(toDataLinks(20));
+        featureType.setMetadataLinks(toMetadataLinks(25));
+        featureType.setMetadata(toMapParams());
+        featureType.setProjectionPolicy(FORCE_DECLARED);
+        featureType.setMaxFeatures(40);
+        featureType.setKeywords(toKeyword());
+        GPGeoserverFeatureTypesStoreInfo featureTypesStoreInfo = new GPGeoserverFeatureTypesStoreInfo();
+        featureTypesStoreInfo.setName("tiger:nyc");
+        featureTypesStoreInfo.setHref("http://localhost:8080/geoserver/rest/workspaces/tiger/datastores/nyc.xml");
+        featureType.setStore(featureTypesStoreInfo);
+        featureType.setResponseSRS(toResponseSRS());
+        return featureType;
     }
 }

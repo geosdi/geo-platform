@@ -57,7 +57,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadCoveragesRequest extends GPGeoserverGetConnectorRequest<GPGeoserverCoverages, GPGeoserverEmptyCoverages, GeoserverLoadCoveragesRequest> implements GeoserverLoadCoveragesRequest {
+class GPGeoserverLoadCoveragesRequest extends GPGeoserverGetConnectorRequest<GPGeoserverCoverages, GPGeoserverEmptyCoverages, GeoserverLoadCoveragesRequest> implements GeoserverLoadCoveragesRequest {
 
     private final ThreadLocal<String> workspace;
     private final ThreadLocal<String> queryList;

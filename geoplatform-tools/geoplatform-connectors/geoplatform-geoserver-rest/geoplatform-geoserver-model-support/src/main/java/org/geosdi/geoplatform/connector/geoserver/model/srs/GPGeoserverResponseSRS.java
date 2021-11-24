@@ -42,6 +42,7 @@ import lombok.ToString;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 /**
@@ -50,6 +51,7 @@ import java.util.List;
  */
 @Setter
 @Getter
+@XmlRootElement(name = "responseSRS")
 @XmlAccessorType(value = XmlAccessType.FIELD)
 @ToString
 public class GPGeoserverResponseSRS implements GPGeoserverSRS {

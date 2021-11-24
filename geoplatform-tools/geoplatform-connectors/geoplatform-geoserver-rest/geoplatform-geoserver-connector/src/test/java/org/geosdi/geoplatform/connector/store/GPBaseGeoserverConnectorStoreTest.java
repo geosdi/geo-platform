@@ -54,16 +54,16 @@ public abstract class GPBaseGeoserverConnectorStoreTest {
 
     protected static final Logger logger = LoggerFactory.getLogger(GPBaseGeoserverConnectorStoreTest.class);
     //
-    private static final String geoserverURLV2_18_x = "http://150.145.141.92/geoserver/rest";
-    protected static GPGeoserverConnectorStore geoserverConnectorStoreV2_18_x;
+    private static final String geoserverURLV2_19_x = "http://150.145.141.92/geoserver/rest";
+    protected static GPGeoserverConnectorStore geoserverConnectorStoreV2_19_x;
 
     /**
      * @throws Exception
      */
     @BeforeClass
     public static void beforeClass() throws Exception {
-        geoserverConnectorStoreV2_18_x = geoserverConnectorBuilder()
-                .withServerUrl(new URL(geoserverURLV2_18_x))
+        geoserverConnectorStoreV2_19_x = geoserverConnectorBuilder()
+                .withServerUrl(new URL(geoserverURLV2_19_x))
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(150)
                         .withDefaultMaxPerRoute(80)
@@ -78,6 +78,6 @@ public abstract class GPBaseGeoserverConnectorStoreTest {
      */
     @AfterClass
     public static void afterClass() throws Exception {
-        geoserverConnectorStoreV2_18_x.dispose();
+        geoserverConnectorStoreV2_19_x.dispose();
     }
 }

@@ -112,8 +112,8 @@ public abstract class GPGeoserverCoveragesConnector extends GPGeoserverWorkspace
     @Override
     public GeoserverLoadCoveragesRequest loadWorkspaceCoveragesRequest() {
         switch (version) {
+            case V220x:
             case V219x:
-            case V218x:
                 return new GPGeoserverLoadCoveragesRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -126,8 +126,8 @@ public abstract class GPGeoserverCoveragesConnector extends GPGeoserverWorkspace
     @Override
     public GeoserverLoadCoverageRequest loadWorkspaceCoverageRequest() {
         switch (version) {
+            case V220x:
             case V219x:
-            case V218x:
                 return new GPGeoserverLoadCoverageRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -140,8 +140,8 @@ public abstract class GPGeoserverCoveragesConnector extends GPGeoserverWorkspace
     @Override
     public GPGeoserverLoadStoreCoverageRequest loadWorkspaceStoreCoverageRequest() {
         switch (version) {
+            case V220x:
             case V219x:
-            case V218x:
                 return new GPGeoserverLoadStoreCoverageRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -154,8 +154,8 @@ public abstract class GPGeoserverCoveragesConnector extends GPGeoserverWorkspace
     @Override
     public GPGeoserverLoadCoverageWithUrlRequest loadCoverageInfoWithUrl() {
         switch (version) {
+            case V220x:
             case V219x:
-            case V218x:
                 return new GPGeoserverLoadCoverageWithUrlRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -168,8 +168,8 @@ public abstract class GPGeoserverCoveragesConnector extends GPGeoserverWorkspace
     @Override
     public GPGeoserverDeleteCoverageRequest deleteCoverageInCoverageStoreRequest() {
         switch (version) {
+            case V220x:
             case V219x:
-            case V218x:
                 return new GPGeoserverDeleteCoverageRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -181,8 +181,8 @@ public abstract class GPGeoserverCoveragesConnector extends GPGeoserverWorkspace
      */
     public GPGeoserverUpdateStoreCoverageRequest updateStoreCoverageRequest() {
         switch (version) {
+            case V220x:
             case V219x:
-            case V218x:
                 return new GPGeoserverUpdateStoreCoverageRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -195,8 +195,8 @@ public abstract class GPGeoserverCoveragesConnector extends GPGeoserverWorkspace
     @Override
     public GPGeoserverUpdateCoverageRequest updateCoverageRequest() {
         switch (version) {
+            case V220x:
             case V219x:
-            case V218x:
                 return new GPGeoserverUpdateCoverageRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -209,8 +209,8 @@ public abstract class GPGeoserverCoveragesConnector extends GPGeoserverWorkspace
     @Override
     public GeoserverLoadCoverageListRequest loadCoverageList() {
         switch (version) {
+            case V220x:
             case V219x:
-            case V218x:
                 return new GPGeoserverLoadCoverageListRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

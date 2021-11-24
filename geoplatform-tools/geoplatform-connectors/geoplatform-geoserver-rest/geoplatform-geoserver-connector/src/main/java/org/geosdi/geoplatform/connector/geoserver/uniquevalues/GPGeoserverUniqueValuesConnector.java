@@ -121,8 +121,8 @@ public abstract class GPGeoserverUniqueValuesConnector extends GPGeoserverLayerG
     @Override
     public GeoserverLoadUniqueValuesRequest loadUniqueValues() {
         switch (version) {
+            case V220x:
             case V219x:
-            case V218x:
                 return new GPGeoserverLoadUniqueValuesRequest(this, this.emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

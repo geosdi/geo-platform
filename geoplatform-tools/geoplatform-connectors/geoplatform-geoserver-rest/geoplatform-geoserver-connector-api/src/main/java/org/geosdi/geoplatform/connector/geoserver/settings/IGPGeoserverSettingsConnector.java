@@ -38,13 +38,13 @@ package org.geosdi.geoplatform.connector.geoserver.settings;
 import org.geosdi.geoplatform.connector.geoserver.request.settings.GeoserverLoadContactSettingsRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.settings.GeoserverLoadGlobalSettingsRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.settings.GeoserverUpdateGlobalSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.security.IGPGeoserverSecurityConnector;
+import org.geosdi.geoplatform.connector.geoserver.settings.services.wms.IGPGeoserverWMSServiceSettingsConnector;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverSettingsConnector extends IGPGeoserverSecurityConnector {
+public interface IGPGeoserverSettingsConnector extends IGPGeoserverWMSServiceSettingsConnector {
 
     /**
      * @return {@link GPGeoserverLoadGlobalSettingsRequest}

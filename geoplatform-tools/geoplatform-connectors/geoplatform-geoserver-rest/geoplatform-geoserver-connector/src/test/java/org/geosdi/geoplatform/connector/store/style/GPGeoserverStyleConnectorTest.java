@@ -56,8 +56,8 @@ import static io.reactivex.rxjava3.core.Observable.fromIterable;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class GPGeoserverStyleConnectorTest extends GPBaseGeoserverConnectorStoreTest {
 
-    private static final GeoserverLoadWorkspacesRequest workspacesRequest = geoserverConnectorStoreV2_18_x.loadWorkspacesRequest();
-    private static final GeoserverWorkspaceStylesRequest gpGeoserverWorkspaceStylesRequest = geoserverConnectorStoreV2_18_x.loadWorkspaceStyles();
+    private static final GeoserverLoadWorkspacesRequest workspacesRequest = geoserverConnectorStoreV2_19_x.loadWorkspacesRequest();
+    private static final GeoserverWorkspaceStylesRequest gpGeoserverWorkspaceStylesRequest = geoserverConnectorStoreV2_19_x.loadWorkspaceStyles();
 
     @Test
     public void a_stylesGeoserverConnectorTest() throws Exception {
@@ -71,7 +71,7 @@ public class GPGeoserverStyleConnectorTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void b_geoserverStyleRequestTest() throws Exception {
-        GeoserverStyleRequest geoserverStyleRequest = geoserverConnectorStoreV2_18_x.loadStyleRequest();
+        GeoserverStyleRequest geoserverStyleRequest = geoserverConnectorStoreV2_19_x.loadStyleRequest();
         logger.info("#####################GEOSERVER_STYLE_RESPONSE_AS_STRING : {}\n", geoserverStyleRequest
                 .withStyleName("tiger_roads")
                 .getResponseAsString());
@@ -82,7 +82,7 @@ public class GPGeoserverStyleConnectorTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void c_geoserverStyleSLDV100RequestTest() throws Exception {
-        GeoserverStyleSLDV100Request geoserverStyleSLDV100Request = geoserverConnectorStoreV2_18_x.loadStyleSLDV100Request();
+        GeoserverStyleSLDV100Request geoserverStyleSLDV100Request = geoserverConnectorStoreV2_19_x.loadStyleSLDV100Request();
         logger.info("#####################GEOSERVER_STYLE_SLD_V100_RESPONSE_AS_STRING : {}\n", geoserverStyleSLDV100Request
                 .withStyleName("tiger_roads")
                 .getResponseAsString());

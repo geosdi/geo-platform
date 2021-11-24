@@ -34,6 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.settings.service.wms;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.GeoserverServiceSettings;
 
 import java.util.Map;
@@ -42,6 +43,7 @@ import java.util.Map;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@JsonDeserialize(as = GPGeoserverWMSServiceSettings.class)
 public interface GeoserverWMSServiceSettings extends GeoserverServiceSettings {
 
     /**
@@ -53,6 +55,16 @@ public interface GeoserverWMSServiceSettings extends GeoserverServiceSettings {
      * @param theMetadata
      */
     void setMetadata(Map<String, String> theMetadata);
+
+    /**
+     * @return {@link GeoserverWMSWatermark}
+     */
+    GeoserverWMSWatermark getWatermark();
+
+    /**
+     * @param theWatermark
+     */
+    void setWatermark(GeoserverWMSWatermark theWatermark);
 
     /**
      * @return {@link GeoserverWMSInterpolation}

@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.settings.service.GPGeose
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Map;
@@ -61,6 +62,8 @@ public class GPGeoserverWMSServiceSettings extends GPGeoserverServiceSettings im
     //
     @XmlJavaTypeAdapter(value = GPGeoserverMetadataMapAdapter.class)
     private Map<String, String> metadata;
+    @XmlElement(name = "watermark", type = GPGeoserverWMSWatermark.class)
+    private GeoserverWMSWatermark watermark;
     private GeoserverWMSInterpolation interpolation;
     private boolean getFeatureInfoMimeTypeCheckingEnabled;
     private boolean getMapMimeTypeCheckingEnabled;

@@ -53,7 +53,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Setter
 @ToString
 @XmlTransient
-public abstract class GPGeoserverServiceSettings implements GeoserverServiceSettings {
+public class GPGeoserverServiceSettings implements GeoserverServiceSettings {
 
     private static final long serialVersionUID = -2992515080361782994L;
     //
@@ -72,4 +72,7 @@ public abstract class GPGeoserverServiceSettings implements GeoserverServiceSett
     private String onlineResource;
     private String schemaBaseURL;
     private boolean verbose;
+
+    protected GPGeoserverServiceSettings() {
+    }
 }

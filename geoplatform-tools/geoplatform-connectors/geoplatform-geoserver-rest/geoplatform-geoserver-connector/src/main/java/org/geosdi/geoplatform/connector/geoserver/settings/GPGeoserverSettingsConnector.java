@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.connector.geoserver.settings;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.request.settings.GeoserverUpdateGlobalSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.security.GPGeoserverSecurityConnector;
+import org.geosdi.geoplatform.connector.geoserver.settings.services.wms.GPGeoserverWMSServiceSettingsConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -51,7 +51,7 @@ import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExcepti
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPGeoserverSettingsConnector extends GPGeoserverSecurityConnector implements IGPGeoserverSettingsConnector {
+public abstract class GPGeoserverSettingsConnector extends GPGeoserverWMSServiceSettingsConnector implements IGPGeoserverSettingsConnector {
 
     /**
      * @param urlServer
@@ -110,8 +110,8 @@ public abstract class GPGeoserverSettingsConnector extends GPGeoserverSecurityCo
     @Override
     public GPGeoserverLoadGlobalSettingsRequest loadGeoserverGlobalSettingRequest() {
         switch (version) {
+            case V220x:
             case V219x:
-            case V218x:
                 return new GPGeoserverLoadGlobalSettingsRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -124,8 +124,8 @@ public abstract class GPGeoserverSettingsConnector extends GPGeoserverSecurityCo
     @Override
     public GeoserverUpdateGlobalSettingsRequest updateGlobalSettingsRequest() {
         switch (version) {
+            case V220x:
             case V219x:
-            case V218x:
                 return new GPGeoserverUpdateGlobalSettingsRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -138,8 +138,8 @@ public abstract class GPGeoserverSettingsConnector extends GPGeoserverSecurityCo
     @Override
     public GPGeoserverLoadContactSettingsRequest loadGeoserverContactSettingsRequest() {
         switch (version) {
+            case V220x:
             case V219x:
-            case V218x:
                 return new GPGeoserverLoadContactSettingsRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

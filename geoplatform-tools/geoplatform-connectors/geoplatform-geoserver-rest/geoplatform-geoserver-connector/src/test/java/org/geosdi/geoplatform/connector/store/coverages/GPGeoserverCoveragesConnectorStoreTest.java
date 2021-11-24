@@ -53,28 +53,28 @@ public class GPGeoserverCoveragesConnectorStoreTest extends GPBaseGeoserverConne
 
     @Test
     public void a_loadWorkspaceCoveragesTest() throws Exception {
-        GeoserverLoadCoveragesRequest loadCoveragesRequest = geoserverConnectorStoreV2_18_x.loadWorkspaceCoveragesRequest();
+        GeoserverLoadCoveragesRequest loadCoveragesRequest = geoserverConnectorStoreV2_19_x.loadWorkspaceCoveragesRequest();
         loadCoveragesRequest.withWorkspace("topp");
         logger.info("########################WORKSPACE_COVERAGES_RESPONSE : {}\n", loadCoveragesRequest.getResponse());
     }
 
     @Test
     public void b_loadAllCoveragesTest() throws Exception {
-        GeoserverLoadCoveragesRequest loadCoveragesRequest = geoserverConnectorStoreV2_18_x.loadWorkspaceCoveragesRequest();
+        GeoserverLoadCoveragesRequest loadCoveragesRequest = geoserverConnectorStoreV2_19_x.loadWorkspaceCoveragesRequest();
         loadCoveragesRequest.withWorkspace("topp").withQueryList("ALL");
         logger.info("########################ALL_COVERAGES_RESPONSE : {}\n", loadCoveragesRequest.getResponse());
     }
 
     @Test
     public void c_loadCoverageTest() throws Exception {
-        GeoserverLoadCoverageRequest loadCoverageRequest = geoserverConnectorStoreV2_18_x.loadWorkspaceCoverageRequest();
+        GeoserverLoadCoverageRequest loadCoverageRequest = geoserverConnectorStoreV2_19_x.loadWorkspaceCoverageRequest();
         loadCoverageRequest.withWorkspace("sf").withCoverage("sfdem");
         logger.info("#######################LOAD_WORKSPACE_COVERAGE_RESPONSE : {}\n", loadCoverageRequest.getResponse());
     }
 
     @Test
     public void d_loadWorkspaceStoreCoverageTest() throws Exception {
-        GPGeoserverLoadStoreCoverageRequest loadCoverageRequest = geoserverConnectorStoreV2_18_x.loadWorkspaceStoreCoverageRequest();
+        GPGeoserverLoadStoreCoverageRequest loadCoverageRequest = geoserverConnectorStoreV2_19_x.loadWorkspaceStoreCoverageRequest();
         loadCoverageRequest.withWorkspace("sf").withCoverage("sfdem").withStore("sfdem");
         logger.info("#######################LOAD_WORKSPACE_STORE_COVERAGE_RESPONSE : {}\n", loadCoverageRequest.getResponse());
     }

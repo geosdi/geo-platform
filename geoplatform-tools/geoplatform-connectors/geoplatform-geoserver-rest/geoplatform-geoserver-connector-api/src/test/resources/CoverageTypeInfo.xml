@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<coverage>
+    <store class="coverageStore">
+        <href>http://localhost:/geoserver/restng/workspaces/sf/coveragestores/sfdem.json</href>
+        <name>sf:sfdem</name>
+    </store>
+    <abstract>Digital elevation model for the Spearfish region. nsfdem is a Tagged Image File Format with Geographic
+        information
+    </abstract>
+    <title>Spearfish elevation</title>
+    <srs>EPSG:26713</srs>
+    <nativeCRS class="projected">PROJCS[\"NAD27 / UTM zone 13N\", \n GEOGCS[\"NAD27\", \n DATUM[\"North American Datum
+        1927\", \n SPHEROID[\"Clarke 1866\", 6378206.4, 294.9786982138982, AUTHORITY[\"EPSG\",\"7008\"]], \n
+        TOWGS84[2.478, 149.752, 197.726, 0.526, -0.498, 0.501, 0.685], \n AUTHORITY[\"EPSG\",\"6267\"]], \n
+        PRIMEM[\"Greenwich\", 0.0, AUTHORITY[\"EPSG\",\"8901\"]], \n UNIT[\"degree\", 0.017453292519943295], \n
+        AXIS[\"Geodetic longitude\", EAST], \n AXIS[\"Geodetic latitude\", NORTH], \n AUTHORITY[\"EPSG\",\"4267\"]], \n
+        PROJECTION[\"Transverse_Mercator\"], \n PARAMETER[\"central_meridian\", -105.0], \n
+        PARAMETER[\"latitude_of_origin\", 0.0], \n PARAMETER[\"scale_factor\", 0.9996], \n PARAMETER[\"false_easting\",
+        500000.0], \n PARAMETER[\"false_northing\", 0.0], \n UNIT[\"m\", 1.0], \n AXIS[\"Easting\", EAST], \n
+        AXIS[\"Northing\", NORTH], \n AUTHORITY[\"EPSG\",\"26713\"]]
+    </nativeCRS>
+    <enabled>true</enabled>
+    <metadata>
+        <entry key="kml.regionateStrategy">external-sorting</entry>
+        <entry key="kml.regionateFeatureLimit">15</entry>
+        <entry key="cacheAgeMax">3000</entry>
+        <entry key="cachingEnabled">true</entry>
+        <entry key="kml.regionateAttribute">NAME</entry>
+        <entry key="indexingEnabled">false</entry>
+        <entry key="dirName">DS_poi_poi</entry>
+    </metadata>
+    <keywords>
+        <string>0</string>
+        <string>1</string>
+        <string>2</string>
+        <string>3</string>
+        <string>4</string>
+        <string>5</string>
+        <string>6</string>
+        <string>7</string>
+        <string>8</string>
+        <string>9</string>
+        <string>10</string>
+        <string>11</string>
+        <string>12</string>
+        <string>13</string>
+        <string>14</string>
+        <string>15</string>
+        <string>16</string>
+        <string>17</string>
+        <string>18</string>
+        <string>19</string>
+    </keywords>
+    <latLonBoundingBox>
+        <crs>EPSG:4326</crs>
+        <maxx>-74.00857344353275</maxx>
+        <maxy>40.711945649065406</maxy>
+        <minx>-74.0118315772888</minx>
+        <miny>40.70754683896324</miny>
+    </latLonBoundingBox>
+    <nativeBoundingBox>
+        <maxx>609000.0</maxx>
+        <maxy>4928010.0</maxy>
+        <minx>589980.0</minx>
+        <miny>4913700.0</miny>
+        <crs class="projected">EPSG:26713</crs>
+    </nativeBoundingBox>
+    <responseSRS>
+        <string>0</string>
+        <string>1</string>
+        <string>2</string>
+        <string>3</string>
+        <string>4</string>
+        <string>5</string>
+        <string>6</string>
+        <string>7</string>
+        <string>8</string>
+        <string>9</string>
+        <string>10</string>
+        <string>11</string>
+        <string>12</string>
+        <string>13</string>
+        <string>14</string>
+    </responseSRS>
+    <defaultInterpolationMethod>nearest neighbor</defaultInterpolationMethod>
+    <grid dimension="2">
+        <crs>EPSG:26713</crs>
+        <range>
+            <high>634 477</high>
+            <low>0 0</low>
+        </range>
+        <transform>
+            <scaleX>30.0</scaleX>
+            <scaleY>-30.0</scaleY>
+            <shearX>0.0</shearX>
+            <shearY>0.0</shearY>
+            <translateX>589995.0</translateX>
+            <translateY>4927995.0</translateY>
+        </transform>
+    </grid>
+    <interpolationMethods>
+        <string>0</string>
+        <string>1</string>
+        <string>2</string>
+        <string>3</string>
+        <string>4</string>
+        <string>5</string>
+        <string>6</string>
+        <string>7</string>
+        <string>8</string>
+        <string>9</string>
+        <string>10</string>
+        <string>11</string>
+        <string>12</string>
+        <string>13</string>
+        <string>14</string>
+    </interpolationMethods>
+    <nativeFormat>GeoTIFF</nativeFormat>
+    <nativeName>sfdem</nativeName>
+    <requestSRS>
+        <string>0</string>
+        <string>1</string>
+        <string>2</string>
+        <string>3</string>
+        <string>4</string>
+        <string>5</string>
+        <string>6</string>
+        <string>7</string>
+        <string>8</string>
+        <string>9</string>
+        <string>10</string>
+        <string>11</string>
+        <string>12</string>
+        <string>13</string>
+        <string>14</string>
+    </requestSRS>
+    <supportedFormats>
+        <string>ARCGRID</string>
+        <string>IMAGEMOSAIC</string>
+        <string>GTOPO30</string>
+        <string>GEOTIFF</string>
+        <string>GIF</string>
+        <string>PNG</string>
+        <string>JPEG</string>
+        <string>TIFF</string>
+    </supportedFormats>
+    <policy>FORCE_DECLARED</policy>
+</coverage>

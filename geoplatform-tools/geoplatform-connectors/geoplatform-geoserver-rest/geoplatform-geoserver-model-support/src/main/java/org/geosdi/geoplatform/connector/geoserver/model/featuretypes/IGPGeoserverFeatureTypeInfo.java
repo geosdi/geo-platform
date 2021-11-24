@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.connector.geoserver.model.featuretypes;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.geosdi.geoplatform.connector.geoserver.model.IGPGeoserverResourceInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverNativeBoundingBox;
-import org.geosdi.geoplatform.connector.geoserver.model.crs.IGPGeoserverCRS;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.attribute.IGPFeatureTypeAttributes;
 import org.geosdi.geoplatform.connector.geoserver.model.link.IGPGeoserverDataLinks;
 import org.geosdi.geoplatform.connector.geoserver.model.metadata.link.IGPGeoserverMetadataLinks;
@@ -70,23 +69,6 @@ public interface IGPGeoserverFeatureTypeInfo extends IGPGeoserverResourceInfo<GP
      * @param theDataLinks
      */
     void setDataLinks(IGPGeoserverDataLinks theDataLinks);
-
-    /**
-     * @return {@link Object}
-     */
-    Object getNativeCRS();
-
-    /**
-     * <p>
-     *     Possible values are :
-     *     <ul>
-     *         <li>String as : EPSG:4326</li>
-     *         <li>{@link IGPGeoserverCRS}</li>
-     *     </ul>
-     * </p>
-     * @param theNativeCRS
-     */
-    void setNativeCRS(Object theNativeCRS);
 
     /**
      * @return {@link String}

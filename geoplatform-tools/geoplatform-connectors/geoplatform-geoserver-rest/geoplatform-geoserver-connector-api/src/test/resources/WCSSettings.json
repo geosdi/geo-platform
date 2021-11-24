@@ -1,0 +1,87 @@
+{
+  "wcs": {
+    "enabled": true,
+    "name": "My GeoServer WMS",
+    "title": "My GeoServer WMS",
+    "maintainer": "http://geoserver.org/comm",
+    "abstrct": "This is a description of your Web Map Server.",
+    "accessConstraints": "NONE",
+    "fees": "NONE",
+    "citeCompliant": true,
+    "onlineResource": "http://geoserver.org",
+    "schemaBaseURL": "http://schemas.opengis.net",
+    "verbose": false,
+    "gmlPrefixing": true,
+    "latLon": true,
+    "maxInputMemory": 0,
+    "maxOutputMemory": 0,
+    "versions": {
+      "org.geotools.util.Version": [
+        {
+          "version": "0"
+        },
+        {
+          "version": "1"
+        },
+        {
+          "version": "2"
+        },
+        {
+          "version": "3"
+        },
+        {
+          "version": "4"
+        },
+        {
+          "version": "5"
+        },
+        {
+          "version": "6"
+        },
+        {
+          "version": "7"
+        },
+        {
+          "version": "8"
+        },
+        {
+          "version": "9"
+        },
+        {
+          "version": "10"
+        },
+        {
+          "version": "11"
+        },
+        {
+          "version": "12"
+        },
+        {
+          "version": "13"
+        },
+        {
+          "version": "14"
+        }
+      ]
+    },
+    "keywords": {
+      "string": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    "metadataLink": {
+      "type": "undef",
+      "metadataType": "other",
+      "about": "http://geoserver.sourceforge.net/html/index.php"
+    }
+  }
+}

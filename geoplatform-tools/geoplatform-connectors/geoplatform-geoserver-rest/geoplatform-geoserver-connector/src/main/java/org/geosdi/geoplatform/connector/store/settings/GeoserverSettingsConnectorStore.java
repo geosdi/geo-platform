@@ -41,13 +41,13 @@ import org.geosdi.geoplatform.connector.geoserver.request.settings.GeoserverLoad
 import org.geosdi.geoplatform.connector.geoserver.request.settings.GeoserverUpdateGlobalSettingsRequest;
 import org.geosdi.geoplatform.connector.geoserver.settings.GPGeoserverLoadContactSettingsRequest;
 import org.geosdi.geoplatform.connector.geoserver.settings.GPGeoserverLoadGlobalSettingsRequest;
-import org.geosdi.geoplatform.connector.store.security.GeoserverSecurityConnectorStore;
+import org.geosdi.geoplatform.connector.store.settings.services.wms.GeoserverWMSServiceSettingsConnectorStore;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoserverSettingsConnectorStore extends GeoserverSecurityConnectorStore implements GPGeoserverSettingsConnectorStore {
+public abstract class GeoserverSettingsConnectorStore extends GeoserverWMSServiceSettingsConnectorStore implements GPGeoserverSettingsConnectorStore {
 
     /**
      * @param theServer

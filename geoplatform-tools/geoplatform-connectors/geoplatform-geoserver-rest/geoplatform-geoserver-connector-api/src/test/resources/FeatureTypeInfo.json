@@ -1,0 +1,439 @@
+{
+  "featureType": {
+    "name": "test",
+    "nativeName": null,
+    "namespace": null,
+    "title": "layer_test",
+    "abstract": "ABSTRACT_TEXT",
+    "store": {
+      "@class": "dataStore",
+      "name": "tiger:nyc",
+      "href": "http://localhost:8080/geoserver/rest/workspaces/tiger/datastores/nyc.xml"
+    },
+    "keywords": {
+      "string": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19"
+      ]
+    },
+    "enabled": true,
+    "srs": "EPSG:4326",
+    "cqlFilter": null,
+    "maxFeatures": 40,
+    "numDecimals": null,
+    "responseSRS": {
+      "string": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14"
+      ]
+    },
+    "overridingServiceSRS": false,
+    "skipNumberMatched": false,
+    "circularArcPresent": false,
+    "linearizationTolerance": null,
+    "nativeCRS": "GEOGCS[&quot;WGS 84&quot;, \n  DATUM[&quot;World Geodetic System 1984&quot;, \n    SPHEROID[&quot;WGS 84&quot;, 6378137.0, 298.257223563, AUTHORITY[&quot;EPSG&quot;,&quot;7030&quot;]], \n    AUTHORITY[&quot;EPSG&quot;,&quot;6326&quot;]], \n  PRIMEM[&quot;Greenwich&quot;, 0.0, AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]], \n  UNIT[&quot;degree&quot;, 0.017453292519943295], \n  AXIS[&quot;Geodetic longitude&quot;, EAST], \n  AXIS[&quot;Geodetic latitude&quot;, NORTH], \n  AUTHORITY[&quot;EPSG&quot;,&quot;4326&quot;]]",
+    "nativeBoundingBox": {
+      "maxx": 609000.0,
+      "maxy": 4928010.0,
+      "minx": 589980.0,
+      "miny": 4913700.0,
+      "crs": {
+        "$": "EPSG:26713",
+        "@class": "projected"
+      }
+    },
+    "latLonBoundingBox": {
+      "maxx": -74.00857344353275,
+      "maxy": 40.711945649065406,
+      "minx": -74.0118315772888,
+      "miny": 40.70754683896324,
+      "crs": "EPSG:4326"
+    },
+    "projectionPolicy": "FORCE_DECLARED",
+    "metadata": {
+      "entry": [
+        {
+          "@key": "kml.regionateStrategy",
+          "$": "external-sorting"
+        },
+        {
+          "@key": "kml.regionateFeatureLimit",
+          "$": "15"
+        },
+        {
+          "@key": "cacheAgeMax",
+          "$": "3000"
+        },
+        {
+          "@key": "cachingEnabled",
+          "$": "true"
+        },
+        {
+          "@key": "kml.regionateAttribute",
+          "$": "NAME"
+        },
+        {
+          "@key": "indexingEnabled",
+          "$": "false"
+        },
+        {
+          "@key": "dirName",
+          "$": "DS_poi_poi"
+        }
+      ]
+    },
+    "metadataLinks": {
+      "metadataLink": [
+        {
+          "type": "TYPE#0",
+          "content": "CONTENT#0",
+          "metadataType": "METADATA_TYPE#0"
+        },
+        {
+          "type": "TYPE#1",
+          "content": "CONTENT#1",
+          "metadataType": "METADATA_TYPE#1"
+        },
+        {
+          "type": "TYPE#2",
+          "content": "CONTENT#2",
+          "metadataType": "METADATA_TYPE#2"
+        },
+        {
+          "type": "TYPE#3",
+          "content": "CONTENT#3",
+          "metadataType": "METADATA_TYPE#3"
+        },
+        {
+          "type": "TYPE#4",
+          "content": "CONTENT#4",
+          "metadataType": "METADATA_TYPE#4"
+        },
+        {
+          "type": "TYPE#5",
+          "content": "CONTENT#5",
+          "metadataType": "METADATA_TYPE#5"
+        },
+        {
+          "type": "TYPE#6",
+          "content": "CONTENT#6",
+          "metadataType": "METADATA_TYPE#6"
+        },
+        {
+          "type": "TYPE#7",
+          "content": "CONTENT#7",
+          "metadataType": "METADATA_TYPE#7"
+        },
+        {
+          "type": "TYPE#8",
+          "content": "CONTENT#8",
+          "metadataType": "METADATA_TYPE#8"
+        },
+        {
+          "type": "TYPE#9",
+          "content": "CONTENT#9",
+          "metadataType": "METADATA_TYPE#9"
+        },
+        {
+          "type": "TYPE#10",
+          "content": "CONTENT#10",
+          "metadataType": "METADATA_TYPE#10"
+        },
+        {
+          "type": "TYPE#11",
+          "content": "CONTENT#11",
+          "metadataType": "METADATA_TYPE#11"
+        },
+        {
+          "type": "TYPE#12",
+          "content": "CONTENT#12",
+          "metadataType": "METADATA_TYPE#12"
+        },
+        {
+          "type": "TYPE#13",
+          "content": "CONTENT#13",
+          "metadataType": "METADATA_TYPE#13"
+        },
+        {
+          "type": "TYPE#14",
+          "content": "CONTENT#14",
+          "metadataType": "METADATA_TYPE#14"
+        },
+        {
+          "type": "TYPE#15",
+          "content": "CONTENT#15",
+          "metadataType": "METADATA_TYPE#15"
+        },
+        {
+          "type": "TYPE#16",
+          "content": "CONTENT#16",
+          "metadataType": "METADATA_TYPE#16"
+        },
+        {
+          "type": "TYPE#17",
+          "content": "CONTENT#17",
+          "metadataType": "METADATA_TYPE#17"
+        },
+        {
+          "type": "TYPE#18",
+          "content": "CONTENT#18",
+          "metadataType": "METADATA_TYPE#18"
+        },
+        {
+          "type": "TYPE#19",
+          "content": "CONTENT#19",
+          "metadataType": "METADATA_TYPE#19"
+        },
+        {
+          "type": "TYPE#20",
+          "content": "CONTENT#20",
+          "metadataType": "METADATA_TYPE#20"
+        },
+        {
+          "type": "TYPE#21",
+          "content": "CONTENT#21",
+          "metadataType": "METADATA_TYPE#21"
+        },
+        {
+          "type": "TYPE#22",
+          "content": "CONTENT#22",
+          "metadataType": "METADATA_TYPE#22"
+        },
+        {
+          "type": "TYPE#23",
+          "content": "CONTENT#23",
+          "metadataType": "METADATA_TYPE#23"
+        },
+        {
+          "type": "TYPE#24",
+          "content": "CONTENT#24",
+          "metadataType": "METADATA_TYPE#24"
+        }
+      ]
+    },
+    "dataLinks": {
+      "org.geoserver.catalog.impl.DataLinkInfoImpl": [
+        {
+          "type": "TYPE#0",
+          "content": "CONTENT#0"
+        },
+        {
+          "type": "TYPE#1",
+          "content": "CONTENT#1"
+        },
+        {
+          "type": "TYPE#2",
+          "content": "CONTENT#2"
+        },
+        {
+          "type": "TYPE#3",
+          "content": "CONTENT#3"
+        },
+        {
+          "type": "TYPE#4",
+          "content": "CONTENT#4"
+        },
+        {
+          "type": "TYPE#5",
+          "content": "CONTENT#5"
+        },
+        {
+          "type": "TYPE#6",
+          "content": "CONTENT#6"
+        },
+        {
+          "type": "TYPE#7",
+          "content": "CONTENT#7"
+        },
+        {
+          "type": "TYPE#8",
+          "content": "CONTENT#8"
+        },
+        {
+          "type": "TYPE#9",
+          "content": "CONTENT#9"
+        },
+        {
+          "type": "TYPE#10",
+          "content": "CONTENT#10"
+        },
+        {
+          "type": "TYPE#11",
+          "content": "CONTENT#11"
+        },
+        {
+          "type": "TYPE#12",
+          "content": "CONTENT#12"
+        },
+        {
+          "type": "TYPE#13",
+          "content": "CONTENT#13"
+        },
+        {
+          "type": "TYPE#14",
+          "content": "CONTENT#14"
+        },
+        {
+          "type": "TYPE#15",
+          "content": "CONTENT#15"
+        },
+        {
+          "type": "TYPE#16",
+          "content": "CONTENT#16"
+        },
+        {
+          "type": "TYPE#17",
+          "content": "CONTENT#17"
+        },
+        {
+          "type": "TYPE#18",
+          "content": "CONTENT#18"
+        },
+        {
+          "type": "TYPE#19",
+          "content": "CONTENT#19"
+        }
+      ]
+    },
+    "attributes": {
+      "attribute": [
+        {
+          "name": "NAME#0",
+          "minOccurs": 0,
+          "maxOccurs": 0,
+          "nillable": true,
+          "binding": "BINDING#0"
+        },
+        {
+          "name": "NAME#1",
+          "minOccurs": 1,
+          "maxOccurs": 1,
+          "nillable": false,
+          "binding": "BINDING#1"
+        },
+        {
+          "name": "NAME#2",
+          "minOccurs": 2,
+          "maxOccurs": 2,
+          "nillable": true,
+          "binding": "BINDING#2"
+        },
+        {
+          "name": "NAME#3",
+          "minOccurs": 3,
+          "maxOccurs": 3,
+          "nillable": false,
+          "binding": "BINDING#3"
+        },
+        {
+          "name": "NAME#4",
+          "minOccurs": 4,
+          "maxOccurs": 4,
+          "nillable": true,
+          "binding": "BINDING#4"
+        },
+        {
+          "name": "NAME#5",
+          "minOccurs": 5,
+          "maxOccurs": 5,
+          "nillable": false,
+          "binding": "BINDING#5"
+        },
+        {
+          "name": "NAME#6",
+          "minOccurs": 6,
+          "maxOccurs": 6,
+          "nillable": true,
+          "binding": "BINDING#6"
+        },
+        {
+          "name": "NAME#7",
+          "minOccurs": 7,
+          "maxOccurs": 7,
+          "nillable": false,
+          "binding": "BINDING#7"
+        },
+        {
+          "name": "NAME#8",
+          "minOccurs": 8,
+          "maxOccurs": 8,
+          "nillable": true,
+          "binding": "BINDING#8"
+        },
+        {
+          "name": "NAME#9",
+          "minOccurs": 9,
+          "maxOccurs": 9,
+          "nillable": false,
+          "binding": "BINDING#9"
+        },
+        {
+          "name": "NAME#10",
+          "minOccurs": 10,
+          "maxOccurs": 10,
+          "nillable": true,
+          "binding": "BINDING#10"
+        },
+        {
+          "name": "NAME#11",
+          "minOccurs": 11,
+          "maxOccurs": 11,
+          "nillable": false,
+          "binding": "BINDING#11"
+        },
+        {
+          "name": "NAME#12",
+          "minOccurs": 12,
+          "maxOccurs": 12,
+          "nillable": true,
+          "binding": "BINDING#12"
+        },
+        {
+          "name": "NAME#13",
+          "minOccurs": 13,
+          "maxOccurs": 13,
+          "nillable": false,
+          "binding": "BINDING#13"
+        },
+        {
+          "name": "NAME#14",
+          "minOccurs": 14,
+          "maxOccurs": 14,
+          "nillable": true,
+          "binding": "BINDING#14"
+        }
+      ]
+    }
+  }
+}

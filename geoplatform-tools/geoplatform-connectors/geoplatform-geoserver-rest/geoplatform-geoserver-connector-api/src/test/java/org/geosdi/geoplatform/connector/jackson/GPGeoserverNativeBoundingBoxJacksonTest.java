@@ -140,6 +140,20 @@ public class GPGeoserverNativeBoundingBoxJacksonTest {
     }
 
     /**
+     * @param simpleCRS
+     * @return {@link GPGeoserverNativeBoundingBox}
+     */
+    public static GPGeoserverNativeBoundingBox toNativeBoundingBox(boolean simpleCRS) {
+        GPGeoserverNativeBoundingBox nativeBoundingBox = new GPGeoserverNativeBoundingBox();
+        nativeBoundingBox.setMinx(589980.0);
+        nativeBoundingBox.setMaxx(609000.0);
+        nativeBoundingBox.setMiny(4913700.0);
+        nativeBoundingBox.setMaxy(4928010.0);
+        nativeBoundingBox.setCrs(simpleCRS ? "EPSG:32632" : toCrs());
+        return nativeBoundingBox;
+    }
+
+    /**
      * @return {@link GPGeoserverNativeBoundingBox}
      */
     public static GPGeoserverNativeBoundingBox toNativeBoundingBox() {

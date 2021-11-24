@@ -188,6 +188,21 @@ public class GPGeoserverMetadataParamJacksonTest {
         return new GPGeoserverMetadataParam("key_test", "value_test");
     }
 
+    /**
+     * @return {@link Map<String, String>}
+     */
+    public static Map<String, String> toMapParams() {
+        Map<String, String> values = newHashMap();
+        values.put("kml.regionateStrategy", "external-sorting");
+        values.put("kml.regionateFeatureLimit", "15");
+        values.put("cacheAgeMax", "3000");
+        values.put("cachingEnabled", "true");
+        values.put("kml.regionateAttribute", "NAME");
+        values.put("indexingEnabled", "false");
+        values.put("dirName", "DS_poi_poi");
+        return values;
+    }
+
     @XmlRootElement(name = "GPGeoserverMetadata")
     @XmlAccessorType(XmlAccessType.FIELD)
     @Getter

@@ -1,0 +1,123 @@
+{
+  "wms": {
+    "enabled": true,
+    "name": "My GeoServer WMS",
+    "title": "My GeoServer WMS",
+    "maintainer": "http://geoserver.org/comm",
+    "abstrct": "This is a description of your Web Map Server.",
+    "accessConstraints": "NONE",
+    "fees": "NONE",
+    "citeCompliant": true,
+    "onlineResource": "http://geoserver.org",
+    "schemaBaseURL": "http://schemas.opengis.net",
+    "verbose": false,
+    "metadata": {
+      "entry": [
+        {
+          "@key": "kml.regionateStrategy",
+          "$": "external-sorting"
+        },
+        {
+          "@key": "kml.regionateFeatureLimit",
+          "$": "15"
+        },
+        {
+          "@key": "cacheAgeMax",
+          "$": "3000"
+        },
+        {
+          "@key": "cachingEnabled",
+          "$": "true"
+        },
+        {
+          "@key": "kml.regionateAttribute",
+          "$": "NAME"
+        },
+        {
+          "@key": "indexingEnabled",
+          "$": "false"
+        },
+        {
+          "@key": "dirName",
+          "$": "DS_poi_poi"
+        }
+      ]
+    },
+    "interpolation": "Bicubic",
+    "getFeatureInfoMimeTypeCheckingEnabled": false,
+    "getMapMimeTypeCheckingEnabled": false,
+    "dynamicStylingDisabled": false,
+    "maxBuffer": 25,
+    "maxRequestMemory": 0,
+    "maxRenderingTime": 10,
+    "maxRenderingErrors": 0,
+    "versions": {
+      "org.geotools.util.Version": [
+        {
+          "version": "0"
+        },
+        {
+          "version": "1"
+        },
+        {
+          "version": "2"
+        },
+        {
+          "version": "3"
+        },
+        {
+          "version": "4"
+        },
+        {
+          "version": "5"
+        },
+        {
+          "version": "6"
+        },
+        {
+          "version": "7"
+        },
+        {
+          "version": "8"
+        },
+        {
+          "version": "9"
+        },
+        {
+          "version": "10"
+        },
+        {
+          "version": "11"
+        },
+        {
+          "version": "12"
+        },
+        {
+          "version": "13"
+        },
+        {
+          "version": "14"
+        }
+      ]
+    },
+    "keywords": {
+      "string": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ]
+    },
+    "watermark": {
+      "enabled": true,
+      "position": "BOT_LEFT",
+      "transparency": 100
+    }
+  }
+}

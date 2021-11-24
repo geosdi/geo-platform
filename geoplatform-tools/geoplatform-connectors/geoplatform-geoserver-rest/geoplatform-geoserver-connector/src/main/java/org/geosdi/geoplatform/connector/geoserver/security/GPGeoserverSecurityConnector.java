@@ -109,8 +109,8 @@ public abstract class GPGeoserverSecurityConnector extends GPGeoserverFeatureTyp
     @Override
     public GPGeoserverGetMasterPasswordRequest loadMasterPasswordRequest() {
         switch (version) {
+            case V220x:
             case V219x:
-            case V218x:
                 return new GPGeoserverGetMasterPasswordRequest(this, this.emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -123,8 +123,8 @@ public abstract class GPGeoserverSecurityConnector extends GPGeoserverFeatureTyp
     @Override
     public GPGeoserverGetCatalogRequest loadCatalogRequest() {
         switch (version) {
+            case V220x:
             case V219x:
-            case V218x:
                 return new GPGeoserverGetCatalogRequest(this, this.emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -137,8 +137,8 @@ public abstract class GPGeoserverSecurityConnector extends GPGeoserverFeatureTyp
     @Override
     public GPGeoserverUpdateCatalogRequest updateCatalogRequest() {
         switch (version) {
+            case V220x:
             case V219x:
-            case V218x:
                 return new GPGeoserverUpdateCatalogRequest(this, this.emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.connector.geoserver;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.classify.GPGeoserverClassifyConnector;
+import org.geosdi.geoplatform.connector.geoserver.model.metadata.link.GPGeoserverMetadataLinks;
 import org.geosdi.geoplatform.connector.geoserver.request.reload.GeoserverReloadCatalogRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.reset.GeoserverResetRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.running.GeoserverRestRunningRequest;
@@ -47,6 +48,8 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import java.net.URL;
 
+import static com.fasterxml.jackson.databind.cfg.CoercionAction.AsNull;
+import static com.fasterxml.jackson.databind.cfg.CoercionInputShape.EmptyString;
 import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExceptionMessage;
 
 /**
@@ -104,6 +107,7 @@ public class GPGeoserverConnector extends GPGeoserverClassifyConnector implement
      */
     public GPGeoserverConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion);
+        this.jacksonSupport.getDefaultMapper().coercionConfigFor(GPGeoserverMetadataLinks.class).setCoercion(EmptyString, AsNull);
     }
 
     /**
@@ -112,8 +116,8 @@ public class GPGeoserverConnector extends GPGeoserverClassifyConnector implement
     @Override
     public GeoserverRestRunningRequest createGeoserverRestRunningRequest() {
         switch (version) {
+            case V220x:
             case V219x:
-            case V218x:
                 return new GPGeoserverRestRunningRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -126,8 +130,8 @@ public class GPGeoserverConnector extends GPGeoserverClassifyConnector implement
     @Override
     public GeoserverReloadCatalogRequest reloadGeoserverCatalogRequest() {
         switch (version) {
+            case V220x:
             case V219x:
-            case V218x:
                 return new GPGeoserverReloadCatalogRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -140,8 +144,8 @@ public class GPGeoserverConnector extends GPGeoserverClassifyConnector implement
     @Override
     public GeoserverResetRequest resetGeoserverRequest() {
         switch (version) {
+            case V220x:
             case V219x:
-            case V218x:
                 return new GPGeoserverResetRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

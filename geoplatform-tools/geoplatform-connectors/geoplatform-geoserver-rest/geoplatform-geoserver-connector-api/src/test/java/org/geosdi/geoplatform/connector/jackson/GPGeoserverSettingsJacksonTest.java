@@ -48,8 +48,10 @@ import java.io.File;
 import java.io.StringReader;
 
 import static java.io.File.separator;
+import static java.lang.Boolean.TRUE;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.connector.geoserver.model.settings.service.wms.WatermarkPosition.BOT_LEFT;
 import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
 import static org.geosdi.geoplatform.connector.jackson.GPGeoserverJacksonTest.jacksonSupport;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -174,5 +176,16 @@ public class GPGeoserverSettingsJacksonTest {
                 + "  }\n"
                 + "}"), GeoserverWMSWatermark.class);
         logger.info("@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_WMS_WATERMARK : {}\n", watermark);
+    }
+
+    /**
+     * @return {@link GeoserverWMSWatermark}
+     */
+    public static GeoserverWMSWatermark toWMSWatermark() {
+        GeoserverWMSWatermark wmsWatermark = new GPGeoserverWMSWatermark();
+        wmsWatermark.setEnabled(TRUE);
+        wmsWatermark.setPosition(BOT_LEFT);
+        wmsWatermark.setTransparency(100);
+        return wmsWatermark;
     }
 }

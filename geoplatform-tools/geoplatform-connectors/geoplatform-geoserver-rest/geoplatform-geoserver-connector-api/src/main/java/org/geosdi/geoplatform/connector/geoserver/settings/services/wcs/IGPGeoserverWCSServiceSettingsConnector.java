@@ -36,13 +36,13 @@ package org.geosdi.geoplatform.connector.geoserver.settings.services.wcs;
 
 import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wcs.GeoserverLoadWCSServiceSettingsRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wcs.GeoserverLoadWCSWorkspaceServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.security.IGPGeoserverSecurityConnector;
+import org.geosdi.geoplatform.connector.geoserver.settings.services.wmts.IGPGeoserverWMTSServiceSettingsConnector;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverWCSServiceSettingsConnector extends IGPGeoserverSecurityConnector {
+public interface IGPGeoserverWCSServiceSettingsConnector extends IGPGeoserverWMTSServiceSettingsConnector {
 
     /**
      * @return {@link GeoserverLoadWCSServiceSettingsRequest}

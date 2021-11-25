@@ -32,25 +32,48 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.settings.services.wcs;
+package org.geosdi.geoplatform.connector.geoserver.settings.services.wmts;
 
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wcs.GeoserverLoadWCSServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wcs.GeoserverLoadWCSWorkspaceServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.store.settings.services.wmts.GPGeoserverWMTSServiceSettingsConnectorStore;
+import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wmts.GPGeoserverWMTSServiceSettings;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.GeoserverLoadWMTSServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverWCSServiceSettingsConnectorStore extends GPGeoserverWMTSServiceSettingsConnectorStore {
+@ThreadSafe
+class GPGeoserverLoadWMTSServiceSettingsRequest extends GPJsonGetConnectorRequest<GPGeoserverWMTSServiceSettings, GeoserverLoadWMTSServiceSettingsRequest> implements GeoserverLoadWMTSServiceSettingsRequest {
 
     /**
-     * @return {@link GeoserverLoadWCSServiceSettingsRequest}
+     * @param server
+     * @param theJacksonSupport
      */
-    GeoserverLoadWCSServiceSettingsRequest loadWCSServiceSettingsRequest();
+    GPGeoserverLoadWMTSServiceSettingsRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(server, theJacksonSupport);
+    }
 
     /**
-     * @return {@link GeoserverLoadWCSWorkspaceServiceSettingsRequest}
+     * @return {@link String}
      */
-    GeoserverLoadWCSWorkspaceServiceSettingsRequest loadWCSWorkspaceServiceSettingsRequest();
+    @Override
+    protected String createUriPath() throws Exception {
+        String baseURI = this.serverURI.toString();
+        return ((baseURI.endsWith("/") ? baseURI.concat("services/wmts/settings") : baseURI.concat("/services/wmts/settings")));
+    }
+
+    /**
+     * @return {@link Class<GPGeoserverWMTSServiceSettings>}
+     */
+    @Override
+    protected Class<GPGeoserverWMTSServiceSettings> forClass() {
+        return GPGeoserverWMTSServiceSettings.class;
+    }
 }

@@ -32,25 +32,35 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.settings.services.wcs;
+package org.geosdi.geoplatform.connector.geoserver.model.settings.service.wmts;
 
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wcs.GeoserverLoadWCSServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wcs.GeoserverLoadWCSWorkspaceServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.store.settings.services.wmts.GPGeoserverWMTSServiceSettingsConnectorStore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.GPGeoserverServiceSettings;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.metadata.GPGeoserverMetadataLinkSettings;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.metadata.GPGeoserverMetadataLinkSettingsDeserializer;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverWCSServiceSettingsConnectorStore extends GPGeoserverWMTSServiceSettingsConnectorStore {
+@Getter
+@Setter
+@ToString(callSuper = true)
+@XmlRootElement(name = "wmts")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class GPGeoserverWMTSServiceSettings extends GPGeoserverServiceSettings implements GeoserverWMTSServiceSettings {
 
-    /**
-     * @return {@link GeoserverLoadWCSServiceSettingsRequest}
-     */
-    GeoserverLoadWCSServiceSettingsRequest loadWCSServiceSettingsRequest();
-
-    /**
-     * @return {@link GeoserverLoadWCSWorkspaceServiceSettingsRequest}
-     */
-    GeoserverLoadWCSWorkspaceServiceSettingsRequest loadWCSWorkspaceServiceSettingsRequest();
+    private static final long serialVersionUID = -2853903868730153500L;
+    //
+    @XmlElement(name = "metadataLink")
+    @JsonDeserialize(using = GPGeoserverMetadataLinkSettingsDeserializer.class)
+    private GPGeoserverMetadataLinkSettings metadataLink;
 }

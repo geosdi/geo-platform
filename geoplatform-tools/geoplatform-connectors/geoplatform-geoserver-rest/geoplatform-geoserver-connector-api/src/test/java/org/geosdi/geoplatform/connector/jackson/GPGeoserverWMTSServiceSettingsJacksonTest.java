@@ -36,7 +36,7 @@ package org.geosdi.geoplatform.connector.jackson;
 
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.version.GPGeoserverGeotoolsVersion;
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.version.GeoserverGeotoolsVersion;
-import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wcs.GPGeoserverWCSServiceSettings;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wmts.GPGeoserverWMTSServiceSettings;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -62,65 +62,61 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(value = NAME_ASCENDING)
-public class GPGeoserverWCSServiceSettingsJacksonTest {
+public class GPGeoserverWMTSServiceSettingsJacksonTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(GPGeoserverWCSServiceSettingsJacksonTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(GPGeoserverWMTSServiceSettingsJacksonTest.class);
 
     @Test
-    public void a_marshallGPGeoserverWCSServiceSettingsTest() throws Exception {
-        logger.info("@@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_WCS_SERVICE_SETTINGS : \n{}\n", JACKSON_JAXB_XML_SUPPORT.writeAsString(GPGeoserverWCSServiceSettingsJacksonTest::toWCSServiceSettings));
+    public void a_marshallGPGeoserverWMTSServiceSettingsAsXmlStringTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@@GEOSERVER_WMTS_SERVICE_SETTINGS : \n{}\n", JACKSON_JAXB_XML_SUPPORT.writeAsString(GPGeoserverWMTSServiceSettingsJacksonTest::toWMTSServiceSettings));
     }
 
     @Test
-    public void b_unmarshallGPGeoserverWCSServiceSettingsFromXmlFileTest() throws Exception {
-        GPGeoserverWCSServiceSettings wcsServiceSettings = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper()
-                .readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "WCSSettings")
-                        .collect(joining(separator, "", ".xml"))), GPGeoserverWCSServiceSettings.class);
-        logger.info("####################GP_GEOSERVER_WCS_SERVICE_SETTINGS : {}\n", wcsServiceSettings);
+    public void b_unmarshallGPGeoserverWMTSServiceSettingsFromXmlFileTest() throws Exception {
+        GPGeoserverWMTSServiceSettings wmtsServiceSettings = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper()
+                .readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "WMTSSettings")
+                        .collect(joining(separator, "", ".xml"))), GPGeoserverWMTSServiceSettings.class);
+        logger.info("####################GP_GEOSERVER_WMTS_SERVICE_SETTINGS : {}\n", wmtsServiceSettings);
     }
 
     @Test
-    public void c_marshallGPGeoserverWCSServiceSettingsAsJsonStringTest() throws Exception {
-        logger.info("@@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_WCS_SERVICE_SETTINGS : \n{}\n", jacksonSupport.writeAsString(GPGeoserverWCSServiceSettingsJacksonTest::toWCSServiceSettings));
+    public void c_marshallGPGeoserverWMTSServiceSettingsAsJsonStringTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@@GEOSERVER_WMTS_SERVICE_SETTINGS : \n{}\n", jacksonSupport.writeAsString(GPGeoserverWMTSServiceSettingsJacksonTest::toWMTSServiceSettings));
     }
 
     @Test
-    public void d_unmarshallGPGeoserverWCSServiceSettingsFromJsonFileTest() throws Exception {
-        GPGeoserverWCSServiceSettings wcsServiceSettings = jacksonSupport.getDefaultMapper()
-                .readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "WCSSettings")
-                        .collect(joining(separator, "", ".json"))), GPGeoserverWCSServiceSettings.class);
-        logger.info("####################GP_GEOSERVER_WCS_SERVICE_SETTINGS : {}\n", wcsServiceSettings);
+    public void d_unmarshallGPGeoserverWMTSServiceSettingsFromJsonFileTest() throws Exception {
+        GPGeoserverWMTSServiceSettings wmtsServiceSettings = jacksonSupport.getDefaultMapper()
+                .readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "WMTSSettings")
+                        .collect(joining(separator, "", ".json"))), GPGeoserverWMTSServiceSettings.class);
+        logger.info("####################GP_GEOSERVER_WMTS_SERVICE_SETTINGS : {}\n", wmtsServiceSettings);
     }
 
     /**
-     * @return {@link GPGeoserverWCSServiceSettings}
+     * @return {@link GPGeoserverWMTSServiceSettings}
      */
-    public static GPGeoserverWCSServiceSettings toWCSServiceSettings() {
-        GPGeoserverWCSServiceSettings wcsServiceSettings = new GPGeoserverWCSServiceSettings();
-        wcsServiceSettings.setEnabled(TRUE);
-        wcsServiceSettings.setName("My GeoServer WMS");
-        wcsServiceSettings.setTitle("My GeoServer WMS");
-        wcsServiceSettings.setMaintainer("http://geoserver.org/comm");
-        wcsServiceSettings.setAbstrct("This is a description of your Web Map Server.");
-        wcsServiceSettings.setAccessConstraints("NONE");
-        wcsServiceSettings.setFees("NONE");
+    public static GPGeoserverWMTSServiceSettings toWMTSServiceSettings() {
+        GPGeoserverWMTSServiceSettings wmtsServiceSettings = new GPGeoserverWMTSServiceSettings();
+        wmtsServiceSettings.setEnabled(TRUE);
+        wmtsServiceSettings.setName("My GeoServer WMS");
+        wmtsServiceSettings.setTitle("My GeoServer WMS");
+        wmtsServiceSettings.setMaintainer("http://geoserver.org/comm");
+        wmtsServiceSettings.setAbstrct("This is a description of your Web Map Server.");
+        wmtsServiceSettings.setAccessConstraints("NONE");
+        wmtsServiceSettings.setFees("NONE");
         GeoserverGeotoolsVersion geotoolsVersion = new GPGeoserverGeotoolsVersion();
         geotoolsVersion.setVersions(IntStream.iterate(0, n -> n + 1)
                 .limit(15)
                 .boxed()
                 .map(GPGeoserverWMSServiceSettingsJacksonTest::toGeoserverVersion)
                 .collect(toList()));
-        wcsServiceSettings.setVersion(geotoolsVersion);
-        wcsServiceSettings.setKeyword(toKeyword(10));
-        wcsServiceSettings.setCiteCompliant(TRUE);
-        wcsServiceSettings.setOnlineResource("http://geoserver.org");
-        wcsServiceSettings.setSchemaBaseURL("http://schemas.opengis.net");
-        wcsServiceSettings.setVerbose(FALSE);
-        wcsServiceSettings.setMetadataLink(toMetadataLinkSettings());
-        wcsServiceSettings.setGmlPrefixing(TRUE);
-        wcsServiceSettings.setLatLon(TRUE);
-        wcsServiceSettings.setMaxInputMemory(0);
-        wcsServiceSettings.setMaxOutputMemory(0);
-        return wcsServiceSettings;
+        wmtsServiceSettings.setVersion(geotoolsVersion);
+        wmtsServiceSettings.setKeyword(toKeyword(10));
+        wmtsServiceSettings.setCiteCompliant(TRUE);
+        wmtsServiceSettings.setOnlineResource("http://geoserver.org");
+        wmtsServiceSettings.setSchemaBaseURL("http://schemas.opengis.net");
+        wmtsServiceSettings.setVerbose(FALSE);
+        wmtsServiceSettings.setMetadataLink(toMetadataLinkSettings());
+        return wmtsServiceSettings;
     }
 }

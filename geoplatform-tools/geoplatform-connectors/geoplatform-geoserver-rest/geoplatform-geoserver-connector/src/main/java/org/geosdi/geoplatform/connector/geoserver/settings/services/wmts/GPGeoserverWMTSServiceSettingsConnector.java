@@ -32,13 +32,12 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.settings.services.wcs;
+package org.geosdi.geoplatform.connector.geoserver.settings.services.wmts;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wcs.GeoserverLoadWCSServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wcs.GeoserverLoadWCSWorkspaceServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.settings.services.wmts.GPGeoserverWMTSServiceSettingsConnector;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.GeoserverLoadWMTSServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.security.GPGeoserverSecurityConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -51,14 +50,14 @@ import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExcepti
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPGeoserverWCSServiceSettingsConnector extends GPGeoserverWMTSServiceSettingsConnector implements IGPGeoserverWCSServiceSettingsConnector {
+public abstract class GPGeoserverWMTSServiceSettingsConnector extends GPGeoserverSecurityConnector implements IGPGeoserverWMTSServiceSettingsConnector{
 
     /**
      * @param urlServer
      * @param theJacksonSupport
      * @param version
      */
-    protected GPGeoserverWCSServiceSettingsConnector(String urlServer, JacksonSupport theJacksonSupport, String version) {
+    protected GPGeoserverWMTSServiceSettingsConnector(String urlServer, JacksonSupport theJacksonSupport, String version) {
         super(urlServer, theJacksonSupport, version);
     }
 
@@ -68,7 +67,7 @@ public abstract class GPGeoserverWCSServiceSettingsConnector extends GPGeoserver
      * @param theJacksonSupport
      * @param version
      */
-    protected GPGeoserverWCSServiceSettingsConnector(String urlServer, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
+    protected GPGeoserverWMTSServiceSettingsConnector(String urlServer, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
         super(urlServer, securityConnector, theJacksonSupport, version);
     }
 
@@ -79,7 +78,7 @@ public abstract class GPGeoserverWCSServiceSettingsConnector extends GPGeoserver
      * @param theJacksonSupport
      * @param version
      */
-    protected GPGeoserverWCSServiceSettingsConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
+    protected GPGeoserverWMTSServiceSettingsConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
         super(urlServer, pooledConnectorConfig, securityConnector, theJacksonSupport, version);
     }
 
@@ -89,7 +88,7 @@ public abstract class GPGeoserverWCSServiceSettingsConnector extends GPGeoserver
      * @param theJacksonSupport
      * @param theVersion
      */
-    protected GPGeoserverWCSServiceSettingsConnector(URL server, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
+    protected GPGeoserverWMTSServiceSettingsConnector(URL server, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, securityConnector, theJacksonSupport, theVersion);
     }
 
@@ -100,33 +99,19 @@ public abstract class GPGeoserverWCSServiceSettingsConnector extends GPGeoserver
      * @param theJacksonSupport
      * @param theVersion
      */
-    protected GPGeoserverWCSServiceSettingsConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
+    protected GPGeoserverWMTSServiceSettingsConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion);
     }
 
     /**
-     * @return {@link GeoserverLoadWCSServiceSettingsRequest}
+     * @return {@link GeoserverLoadWMTSServiceSettingsRequest}
      */
     @Override
-    public GeoserverLoadWCSServiceSettingsRequest loadWCSServiceSettingsRequest() {
+    public GeoserverLoadWMTSServiceSettingsRequest loadWMTSServiceSettingsRequest() {
         switch (version) {
             case V220x:
             case V219x:
-                return new GPGeoserverLoadWCSServiceSettingsRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
-    }
-
-    /**
-     * @return {@link GeoserverLoadWCSWorkspaceServiceSettingsRequest}
-     */
-    @Override
-    public GeoserverLoadWCSWorkspaceServiceSettingsRequest loadWCSWorkspaceServiceSettingsRequest() {
-        switch (version) {
-            case V220x:
-            case V219x:
-                return new GPGeoserverLoadWCSWorkspaceServiceSettingsRequest(this, this.jacksonSupport);
+                return new GPGeoserverLoadWMTSServiceSettingsRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

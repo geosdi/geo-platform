@@ -32,33 +32,45 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.settings.services.wmts;
+package org.geosdi.geoplatform.connector.jackson;
 
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.GeoserverLoadWMTSServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.GeoserverLoadWMTSWorkspaceServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreTest;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wmts.GPGeoserverWMTSWorkspaceServiceSettings;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.io.File;
+
+import static java.io.File.separator;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
+import static org.geosdi.geoplatform.connector.jackson.GPGeoserverJacksonTest.jacksonSupport;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverWMTSServiceSettingsConnectorStoreTest extends GPBaseGeoserverConnectorStoreTest {
+@FixMethodOrder(value = NAME_ASCENDING)
+public class GPGeoserverWMTSWorkspaceServiceSettingsJacksonTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(GPGeoserverWMTSWorkspaceServiceSettingsJacksonTest.class);
 
     @Test
-    public void a_loadWMTSServiceSettingsRequestTest() throws Exception {
-        GeoserverLoadWMTSServiceSettingsRequest wmtsServiceSettingsRequest = geoserverConnectorStoreV2_19_x.loadWMTSServiceSettingsRequest();
-        logger.info("########################GEOSERVER_WMTS_SERIVCE_SETTINGS_RESPONSE : {}\n", wmtsServiceSettingsRequest.getResponse());
+    public void a_unmarshallGPGeoserverWMTSWorkspaceServiceSettingsFromXmlFileTest() throws Exception {
+        GPGeoserverWMTSWorkspaceServiceSettings wmtsWorkspaceServiceSettings = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper()
+                .readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "WMTSWorkspaceServiceSettings")
+                        .collect(joining(separator, "", ".xml"))), GPGeoserverWMTSWorkspaceServiceSettings.class);
+        logger.info("@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_WMTS_WORKSPACE_SERVICE_SETTINGS : {}\n", wmtsWorkspaceServiceSettings);
     }
 
     @Test
-    public void b_loadWMTSWorkspaceServiceSettingsRequestTest() throws Exception {
-        GeoserverLoadWMTSWorkspaceServiceSettingsRequest wmtsWorkspaceServiceSettingsRequest = geoserverConnectorStoreV2_19_x.loadWMTSWorkspaceServiceSettingsRequest();
-        logger.info("########################GEOSERVER_WMTS_SERIVCE_SETTINGS_RESPONSE : {}\n", wmtsWorkspaceServiceSettingsRequest
-                .withWorkspace("topp").getResponse());
+    public void b_unmarshallGPGeoserverWMTSWorkspaceServiceSettingsFromJsonFileTest() throws Exception {
+        GPGeoserverWMTSWorkspaceServiceSettings wmtsWorkspaceServiceSettings = jacksonSupport.getDefaultMapper()
+                .readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "WMTSWorkspaceServiceSettings")
+                        .collect(joining(separator, "", ".json"))), GPGeoserverWMTSWorkspaceServiceSettings.class);
+        logger.info("@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_WMTS_WORKSPACE_SERVICE_SETTINGS : {}\n", wmtsWorkspaceServiceSettings);
     }
 }

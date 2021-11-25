@@ -32,25 +32,41 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.settings.services.wmts;
+package org.geosdi.geoplatform.connector.geoserver.settings.services.wms;
 
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.GeoserverLoadWMTSServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.GeoserverLoadWMTSWorkspaceServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.security.IGPGeoserverSecurityConnector;
+import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.GeoserverServiceType;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wms.GeoserverWMSServiceSettings;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wms.GeoserverUpdateWMSServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.settings.services.GPGeoserverUpdateServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.connector.geoserver.model.settings.service.GeoserverServiceType.wms;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverWMTSServiceSettingsConnector extends IGPGeoserverSecurityConnector {
+@ThreadSafe
+class GPGeoserverUpdateWMSServiceSettingsRequest extends GPGeoserverUpdateServiceSettingsRequest<GeoserverWMSServiceSettings, GeoserverUpdateWMSServiceSettingsRequest> implements GeoserverUpdateWMSServiceSettingsRequest {
 
     /**
-     * @return {@link GeoserverLoadWMTSServiceSettingsRequest}
+     * @param theServerConnector
+     * @param theJacksonSupport
      */
-    GeoserverLoadWMTSServiceSettingsRequest loadWMTSServiceSettingsRequest();
+    GPGeoserverUpdateWMSServiceSettingsRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(theServerConnector, theJacksonSupport);
+    }
 
     /**
-     * @return {@link GeoserverLoadWMTSWorkspaceServiceSettingsRequest}
+     * @return {@link GeoserverServiceType}
      */
-    GeoserverLoadWMTSWorkspaceServiceSettingsRequest loadWMTSWorkspaceServiceSettingsRequest();
+    @Override
+    protected GeoserverServiceType toService() {
+        return wms;
+    }
 }

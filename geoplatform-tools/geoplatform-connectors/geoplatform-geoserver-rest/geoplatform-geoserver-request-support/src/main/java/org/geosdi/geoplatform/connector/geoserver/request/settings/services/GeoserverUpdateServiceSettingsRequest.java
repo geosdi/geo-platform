@@ -32,25 +32,23 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.settings.services.wmts;
+package org.geosdi.geoplatform.connector.geoserver.request.settings.services;
 
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.GeoserverLoadWMTSServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.GeoserverLoadWMTSWorkspaceServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.security.IGPGeoserverSecurityConnector;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.GeoserverServiceSettings;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
+
+import javax.annotation.Nonnull;
+import javax.annotation.meta.When;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverWMTSServiceSettingsConnector extends IGPGeoserverSecurityConnector {
+public interface GeoserverUpdateServiceSettingsRequest<Body extends GeoserverServiceSettings, R extends GeoserverUpdateServiceSettingsRequest> extends GPJsonConnectorRequest<Boolean, R> {
 
     /**
-     * @return {@link GeoserverLoadWMTSServiceSettingsRequest}
+     * @param theBody
+     * @return {@link R}
      */
-    GeoserverLoadWMTSServiceSettingsRequest loadWMTSServiceSettingsRequest();
-
-    /**
-     * @return {@link GeoserverLoadWMTSWorkspaceServiceSettingsRequest}
-     */
-    GeoserverLoadWMTSWorkspaceServiceSettingsRequest loadWMTSWorkspaceServiceSettingsRequest();
+    R withBody(@Nonnull(when = When.NEVER) Body theBody);
 }

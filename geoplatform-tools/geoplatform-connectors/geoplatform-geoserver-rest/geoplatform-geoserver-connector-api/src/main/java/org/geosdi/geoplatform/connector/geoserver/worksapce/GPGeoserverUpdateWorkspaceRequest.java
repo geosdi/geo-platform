@@ -49,6 +49,7 @@ import javax.annotation.Nonnull;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
+
 import static org.apache.http.entity.ContentType.APPLICATION_JSON;
 
 /**
@@ -56,7 +57,7 @@ import static org.apache.http.entity.ContentType.APPLICATION_JSON;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverUpdateWorkspaceRequest extends GPJsonPutConnectorRequest<String, GeoserverUpdateWorkspaceRequest> implements GeoserverUpdateWorkspaceRequest {
+class GPGeoserverUpdateWorkspaceRequest extends GPJsonPutConnectorRequest<String, GeoserverUpdateWorkspaceRequest> implements GeoserverUpdateWorkspaceRequest {
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<GPGeoserverCreateWorkspaceBody> workspaceBody;

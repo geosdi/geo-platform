@@ -35,6 +35,7 @@
 package org.geosdi.geoplatform.connector.store.settings.services.wmts;
 
 import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.GeoserverLoadWMTSServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.GeoserverLoadWMTSWorkspaceServiceSettingsRequest;
 import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV22xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -52,5 +53,12 @@ public class GPGeoserverWMTSServiceSettingsConnectorStoreV22xTest extends GPBase
     public void a_loadWMTSServiceSettingsRequestTest() throws Exception {
         GeoserverLoadWMTSServiceSettingsRequest wmtsServiceSettingsRequest = geoserverConnectorStoreV2_20_x.loadWMTSServiceSettingsRequest();
         logger.info("########################GEOSERVER_WMTS_SERIVCE_SETTINGS_RESPONSE : {}\n", wmtsServiceSettingsRequest.getResponse());
+    }
+
+    @Test
+    public void b_loadWMTSWorkspaceServiceSettingsRequestTest() throws Exception {
+        GeoserverLoadWMTSWorkspaceServiceSettingsRequest wmtsWorkspaceServiceSettingsRequest = geoserverConnectorStoreV2_20_x.loadWMTSWorkspaceServiceSettingsRequest();
+        logger.info("########################GEOSERVER_WMTS_SERIVCE_SETTINGS_RESPONSE : {}\n", wmtsWorkspaceServiceSettingsRequest
+                .withWorkspace("topp").getResponse());
     }
 }

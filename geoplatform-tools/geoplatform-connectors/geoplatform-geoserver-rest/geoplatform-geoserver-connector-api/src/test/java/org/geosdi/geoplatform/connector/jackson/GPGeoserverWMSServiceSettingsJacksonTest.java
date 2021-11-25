@@ -45,13 +45,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.util.stream.IntStream;
 
 import static java.io.File.separator;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.IntStream.iterate;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.geoserver.model.settings.service.wms.GeoserverWMSInterpolation.Bicubic;
 import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
@@ -109,7 +109,7 @@ public class GPGeoserverWMSServiceSettingsJacksonTest {
         wmsServiceSettings.setAccessConstraints("NONE");
         wmsServiceSettings.setFees("NONE");
         GeoserverGeotoolsVersion geotoolsVersion = new GPGeoserverGeotoolsVersion();
-        geotoolsVersion.setVersions(IntStream.iterate(0, n -> n + 1)
+        geotoolsVersion.setVersions(iterate(0, n -> n + 1)
                 .limit(15)
                 .boxed()
                 .map(GPGeoserverWMSServiceSettingsJacksonTest::toGeoserverVersion)

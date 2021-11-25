@@ -32,25 +32,27 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.settings.services.wmts;
+package org.geosdi.geoplatform.connector.geoserver.model.settings.service.wmts;
 
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.GeoserverLoadWMTSServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.GeoserverLoadWMTSWorkspaceServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.security.IGPGeoserverSecurityConnector;
+import lombok.Getter;
+import lombok.ToString;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverBaseWorkspace;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverWMTSServiceSettingsConnector extends IGPGeoserverSecurityConnector {
+@Getter
+@ToString(callSuper = true)
+@XmlRootElement(name = "wmts")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class GPGeoserverWMTSWorkspaceServiceSettings extends GPGeoserverWMTSServiceSettings implements GeoserverWMTSWorkspaceServiceSettings {
 
-    /**
-     * @return {@link GeoserverLoadWMTSServiceSettingsRequest}
-     */
-    GeoserverLoadWMTSServiceSettingsRequest loadWMTSServiceSettingsRequest();
-
-    /**
-     * @return {@link GeoserverLoadWMTSWorkspaceServiceSettingsRequest}
-     */
-    GeoserverLoadWMTSWorkspaceServiceSettingsRequest loadWMTSWorkspaceServiceSettingsRequest();
+    private static final long serialVersionUID = 2476946019752596954L;
+    //
+    private GPGeoserverBaseWorkspace workspace;
 }

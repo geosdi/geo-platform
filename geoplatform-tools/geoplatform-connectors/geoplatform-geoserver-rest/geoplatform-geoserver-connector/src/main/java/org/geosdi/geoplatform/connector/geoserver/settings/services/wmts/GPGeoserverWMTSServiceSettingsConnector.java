@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.geoserver.settings.services.wmts;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.GeoserverLoadWMTSServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.GeoserverLoadWMTSWorkspaceServiceSettingsRequest;
 import org.geosdi.geoplatform.connector.geoserver.security.GPGeoserverSecurityConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -112,6 +113,20 @@ public abstract class GPGeoserverWMTSServiceSettingsConnector extends GPGeoserve
             case V220x:
             case V219x:
                 return new GPGeoserverLoadWMTSServiceSettingsRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverLoadWMTSWorkspaceServiceSettingsRequest}
+     */
+    @Override
+    public GeoserverLoadWMTSWorkspaceServiceSettingsRequest loadWMTSWorkspaceServiceSettingsRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverLoadWMTSWorkspaceServiceSettingsRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

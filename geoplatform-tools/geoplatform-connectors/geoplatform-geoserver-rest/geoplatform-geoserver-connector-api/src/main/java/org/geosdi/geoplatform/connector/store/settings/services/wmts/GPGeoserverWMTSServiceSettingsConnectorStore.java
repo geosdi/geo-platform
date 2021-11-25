@@ -35,6 +35,7 @@
 package org.geosdi.geoplatform.connector.store.settings.services.wmts;
 
 import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.GeoserverLoadWMTSServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.GeoserverLoadWMTSWorkspaceServiceSettingsRequest;
 import org.geosdi.geoplatform.connector.store.security.GPGeoserverSecurityConnectorStore;
 
 /**
@@ -47,4 +48,9 @@ public interface GPGeoserverWMTSServiceSettingsConnectorStore extends GPGeoserve
      * @return {@link GeoserverLoadWMTSServiceSettingsRequest}
      */
     GeoserverLoadWMTSServiceSettingsRequest loadWMTSServiceSettingsRequest();
+
+    /**
+     * @return {@link GeoserverLoadWMTSWorkspaceServiceSettingsRequest}
+     */
+    GeoserverLoadWMTSWorkspaceServiceSettingsRequest loadWMTSWorkspaceServiceSettingsRequest();
 }

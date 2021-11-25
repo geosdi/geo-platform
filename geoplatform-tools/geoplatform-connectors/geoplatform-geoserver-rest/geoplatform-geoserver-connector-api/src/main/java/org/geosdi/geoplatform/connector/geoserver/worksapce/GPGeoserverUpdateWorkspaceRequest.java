@@ -51,13 +51,12 @@ import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
 
-
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverUpdateWorkspaceRequest extends GPJsonPutConnectorRequest<String, GeoserverUpdateWorkspaceRequest> implements GeoserverUpdateWorkspaceRequest {
+class GPGeoserverUpdateWorkspaceRequest extends GPJsonPutConnectorRequest<String, GeoserverUpdateWorkspaceRequest> implements GeoserverUpdateWorkspaceRequest {
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<GPGeoserverCreateWorkspaceBody> workspaceBody;

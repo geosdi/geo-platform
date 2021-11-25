@@ -34,23 +34,47 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.settings.services.wmts;
 
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.GeoserverLoadWMTSServiceSettingsRequest;
+import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.GeoserverServiceType;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wmts.GPGeoserverWMTSWorkspaceServiceSettings;
 import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.GeoserverLoadWMTSWorkspaceServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.security.IGPGeoserverSecurityConnector;
+import org.geosdi.geoplatform.connector.geoserver.settings.services.GPGeoserverLoadWorkspaceServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.connector.geoserver.model.settings.service.GeoserverServiceType.wmts;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverWMTSServiceSettingsConnector extends IGPGeoserverSecurityConnector {
+@ThreadSafe
+class GPGeoserverLoadWMTSWorkspaceServiceSettingsRequest extends GPGeoserverLoadWorkspaceServiceSettingsRequest<GPGeoserverWMTSWorkspaceServiceSettings, GeoserverLoadWMTSWorkspaceServiceSettingsRequest> implements GeoserverLoadWMTSWorkspaceServiceSettingsRequest {
 
     /**
-     * @return {@link GeoserverLoadWMTSServiceSettingsRequest}
+     * @param server
+     * @param theJacksonSupport
      */
-    GeoserverLoadWMTSServiceSettingsRequest loadWMTSServiceSettingsRequest();
+    GPGeoserverLoadWMTSWorkspaceServiceSettingsRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(server, theJacksonSupport);
+    }
 
     /**
-     * @return {@link GeoserverLoadWMTSWorkspaceServiceSettingsRequest}
+     * @return {@link GeoserverServiceType}
      */
-    GeoserverLoadWMTSWorkspaceServiceSettingsRequest loadWMTSWorkspaceServiceSettingsRequest();
+    @Override
+    protected GeoserverServiceType toService() {
+        return wmts;
+    }
+
+    /**
+     * @return {@link Class<GPGeoserverWMTSWorkspaceServiceSettings>}
+     */
+    @Override
+    protected Class<GPGeoserverWMTSWorkspaceServiceSettings> forClass() {
+        return GPGeoserverWMTSWorkspaceServiceSettings.class;
+    }
 }

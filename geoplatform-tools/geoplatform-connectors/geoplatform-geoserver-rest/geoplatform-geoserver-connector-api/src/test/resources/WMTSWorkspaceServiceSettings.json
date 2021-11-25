@@ -1,0 +1,25 @@
+{
+  "wmts": {
+    "workspace": {
+      "name": "topp"
+    },
+    "enabled": true,
+    "name": "WMTS",
+    "title": "GeoServer Web Map Tile Service",
+    "maintainer": "http:\/\/geoserver.org\/com",
+    "abstrct": "A compliant implementation of WMTS service.",
+    "accessConstraints": "NONE",
+    "fees": "NONE",
+    "versions": {
+      "org.geotools.util.Version": [
+        {
+          "version": "1.0.0"
+        }
+      ]
+    },
+    "citeCompliant": false,
+    "onlineResource": "http:\/\/geoserver.org",
+    "schemaBaseURL": "http:\/\/schemas.opengis.net",
+    "verbose": false
+  }
+}

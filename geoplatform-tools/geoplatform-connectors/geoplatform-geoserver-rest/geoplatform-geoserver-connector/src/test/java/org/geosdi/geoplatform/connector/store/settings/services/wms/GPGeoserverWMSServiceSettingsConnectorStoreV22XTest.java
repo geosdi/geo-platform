@@ -34,12 +34,23 @@
  */
 package org.geosdi.geoplatform.connector.store.settings.services.wms;
 
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wms.GPGeoserverWMSServiceSettings;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wms.GeoserverWMSServiceSettings;
 import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wms.GeoserverLoadWMSServiceSettingsRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wms.GeoserverLoadWMSWorkspaceServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wms.GeoserverUpdateWMSServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.jackson.GPGeoserverWMSServiceSettingsJacksonTest;
 import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV22xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
+import java.io.File;
+import java.util.stream.Collectors;
+
+import static java.io.File.separator;
+import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.connector.geoserver.request.classify.GeoserverClassifyRequest.JACKSON_JAXB_XML_SUPPORT;
+import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -60,5 +71,26 @@ public class GPGeoserverWMSServiceSettingsConnectorStoreV22XTest extends GPBaseG
         GeoserverLoadWMSWorkspaceServiceSettingsRequest wmsWorkspaceServiceSettingsRequest = geoserverConnectorStoreV2_20_x.loadWMSWorkspaceServiceSettingsRequest();
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_WMS_WORKSPACE_SETTINGS_RESPONSE : {}\n", wmsWorkspaceServiceSettingsRequest
                 .withWorkspace("topp").getResponse());
+    }
+
+    @Test
+    public void c_updateWMSServiceSettingsRequestTest() throws Exception {
+        GeoserverUpdateWMSServiceSettingsRequest updateWMSServiceSettingsRequest = geoserverConnectorStoreV2_20_x.updateWMSServiceSettingsRequest();
+        GPGeoserverWMSServiceSettings wmsServiceSettings = GPGeoserverWMSServiceSettingsJacksonTest.toWMSServiceSettings();
+        wmsServiceSettings.setMaintainer("Giuseppe La Scaleia");
+        wmsServiceSettings.setAbstrct("This is a simple example");
+        assertTrue(updateWMSServiceSettingsRequest.withBody(wmsServiceSettings).getResponse());
+        GPGeoserverWMSServiceSettings retrieveWMSSettings = geoserverConnectorStoreV2_20_x.loadWMSServiceSettingRequest().getResponse();
+        assertTrue(retrieveWMSSettings.getMaintainer().equals("Giuseppe La Scaleia"));
+        assertTrue(retrieveWMSSettings.getAbstrct().equals("This is a simple example"));
+    }
+
+    @Test
+    public void d_updateWMSServiceSettingsRequestTest() throws Exception {
+        GeoserverWMSServiceSettings wmsServiceSettings = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper()
+                .readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "WMSServiceSettings")
+                        .collect(Collectors.joining(separator, "", ".xml"))), GPGeoserverWMSServiceSettings.class);
+        logger.info("###################WMS_UPDATE_SERVICE_SETTINGS_RESPONSE : {}\n", geoserverConnectorStoreV2_20_x.updateWMSServiceSettingsRequest()
+                .withBody(wmsServiceSettings).getResponse());
     }
 }

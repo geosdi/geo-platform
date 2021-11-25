@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -6,7 +7,7 @@
         <artifactId>geoplatform-ws-core</artifactId>
         <version>1.9-SNAPSHOT</version>
     </parent>
-    
+
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-ws-webapp</artifactId>
     <version>1.9-SNAPSHOT</version>
@@ -20,7 +21,7 @@
             <artifactId>bcprov-jdk15on</artifactId>
             <version>1.67</version>
         </dependency>
-        
+
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
@@ -159,7 +160,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
         </dependency>
-    
+
         <!-- =============================================================== -->
         <!-- CGLIB -->
         <!-- =============================================================== -->
@@ -613,8 +614,8 @@
                         <phase>clean</phase>
                         <configuration>
                             <target>
-                                <delete file="velocity.log" />
-                                <delete dir="target" />
+                                <delete file="velocity.log"/>
+                                <delete dir="target"/>
                             </target>
                         </configuration>
                         <goals>
@@ -650,6 +651,10 @@
                 </configuration>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 </project>

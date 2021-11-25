@@ -1,7 +1,8 @@
- <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <prerequisites>
         <maven>3.0.2</maven>
     </prerequisites>
@@ -18,9 +19,9 @@
         <url>https://github.com/geosdi/geo-platform</url>
         <connection>scm:git:git://github.com/geosdi/geo-platform.git</connection>
         <developerConnection>scm:git:git@github.com:geosdi/geo-platform.git</developerConnection>
-      <tag>HEAD</tag>
-  </scm>
-    
+        <tag>HEAD</tag>
+    </scm>
+
     <mailingLists>
         <mailingList>
             <name>GeoPlatform User List</name>
@@ -28,12 +29,12 @@
             <archive>https://groups.google.com/forum/?hl=it#!forum/geo-platform-devs</archive>
         </mailingList>
     </mailingLists>
-    
+
     <licenses>
         <license>
             <name>GPL v3 + CE</name>
             <url>http://www.gnu.org/licenses/</url>
-            <distribution>repo</distribution>            
+            <distribution>repo</distribution>
         </license>
     </licenses>
 
@@ -42,7 +43,7 @@
         <url>http://www.geosdi.org</url>
     </organization>
     <inceptionYear>2011</inceptionYear>
-    
+
     <distributionManagement>
         <!--.................................. -->
         <!-- geoSDI Repository -->
@@ -58,7 +59,7 @@
             <url>https://repo.geosdi.org/artifactory/libs-snapshot-local</url>
         </snapshotRepository>
     </distributionManagement>
- 
+
     <repositories>
         <!-- geoSDI -->
         <repository>
@@ -69,7 +70,7 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-        
+
         <repository>
             <id>geosdi-snapshots</id>
             <name>repo.geosdi.org-snapshots</name>
@@ -96,7 +97,7 @@
                 <enabled>false</enabled>
             </releases>
         </repository>
-        
+
         <repository>
             <id>sonatype-oss-public</id>
             <name>Nexus Release Repository</name>
@@ -124,7 +125,7 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository-->
-        
+
         <repository>
             <id>boundlessgeo</id>
             <name>Open Source Geospatial Foundation Repository</name>
@@ -133,7 +134,7 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-        
+
         <!-- GWTQUERY-UI PLUGIN -->
         <repository>
             <id>gwtquery-ui-repository</id>
@@ -154,7 +155,7 @@
         <module>geoplatform-rest-documentation</module>
         <module>test</module>
     </modules>
-    
+
     <profiles>
         <profile>
             <id>disable-java8-doclint</id>
@@ -296,7 +297,7 @@
 
     <dependencyManagement>
         <dependencies>
-            
+
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-slf4j-dependency</artifactId>
@@ -304,7 +305,7 @@
                 <scope>import</scope>
                 <version>${project.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-spring-dependency</artifactId>
@@ -312,7 +313,7 @@
                 <scope>import</scope>
                 <version>${project.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-httpclient-dependency</artifactId>
@@ -320,7 +321,7 @@
                 <scope>import</scope>
                 <version>${project.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-jackson-dependency</artifactId>
@@ -328,7 +329,7 @@
                 <scope>import</scope>
                 <version>${project.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-rxjava-dependency</artifactId>
@@ -336,7 +337,7 @@
                 <scope>import</scope>
                 <version>${project.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-lombok-dependency</artifactId>
@@ -344,7 +345,7 @@
                 <scope>import</scope>
                 <version>${project.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-geotools-dependency</artifactId>
@@ -352,8 +353,8 @@
                 <scope>import</scope>
                 <version>${project.version}</version>
             </dependency>
-            
-            
+
+
             <!-- =========================================================== -->
             <!-- GEOPLATFORM-WS MODULES -->
             <!-- =========================================================== -->
@@ -388,37 +389,37 @@
                 <artifactId>geoplatform-ws-util</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-wms-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-wms-impl</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-wfs-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-wfs-impl</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>layer-builder-service-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>layer-builder-service-impl</artifactId>
@@ -448,7 +449,7 @@
                 <artifactId>csv-importer-rs-impl</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-publisher-api</artifactId>
@@ -460,7 +461,7 @@
                 <artifactId>geoplatform-publisher-impl</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-tracking-api</artifactId>
@@ -483,7 +484,7 @@
                 <artifactId>geoplatform-scheduler-impl</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geonetwork-catalog-api</artifactId>
@@ -495,7 +496,7 @@
                 <artifactId>geonetwork-catalog-impl</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>csw-catalog-api</artifactId>
@@ -509,45 +510,45 @@
             </dependency>
 
             <!-- =========================================================== -->
-            
+
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-base-configurator</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-oxm</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            
+
             <!-- =========================================================== -->
             <!-- ========================== REST =========================== -->
             <!-- =========================================================== -->
-            
+
             <dependency>
                 <groupId>javax.ws.rs</groupId>
                 <artifactId>javax.ws.rs-api</artifactId>
                 <version>${javax.ws.rs-api-version}</version>
             </dependency>
-            
+
             <!-- =========================================================== -->
             <!-- ======================= ACTIVE MQ ========================= -->
             <!-- =========================================================== -->
-            
+
             <dependency>
                 <groupId>org.apache.activemq</groupId>
                 <artifactId>activemq-client</artifactId>
                 <version>${activemq-version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.apache.activemq</groupId>
                 <artifactId>activemq-broker</artifactId>
                 <version>${activemq-version}</version>
             </dependency>
-            
+
             <!-- =========================================================== -->
             <!-- QUARTZ -->
             <!-- =========================================================== -->
@@ -556,13 +557,13 @@
                 <artifactId>quartz</artifactId>
                 <version>2.3.2</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.apache.bcel</groupId>
                 <artifactId>bcel</artifactId>
                 <version>${bcel.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
@@ -577,13 +578,13 @@
                 <artifactId>log4j</artifactId>
                 <version>1.2.17</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-core</artifactId>
                 <version>2.13.2</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.dom4j</groupId>
                 <artifactId>dom4j</artifactId>
@@ -620,61 +621,61 @@
                 <artifactId>xstream</artifactId>
                 <version>1.4.18</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.codehaus.jettison</groupId>
                 <artifactId>jettison</artifactId>
                 <version>${jettison}</version>
             </dependency>
-            
+
             <!-- =========================================================== -->
             <!--                    Commons Pool                             -->
             <!-- =========================================================== -->
-            
+
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-pool2</artifactId>
                 <version>${commons-pool-version}</version>
             </dependency>
-            
+
             <!-- =========================================================== -->
             <!--                    XMLBEANS                                 -->
             <!-- =========================================================== -->
-            
+
             <dependency>
                 <groupId>org.apache.xmlbeans</groupId>
                 <artifactId>xmlbeans-xmlpublic</artifactId>
                 <version>2.6.0</version>
             </dependency>
-            
+
             <!-- =========================================================== -->
             <!--                    JIBX                                     -->
             <!-- =========================================================== -->
-            
+
             <dependency>
                 <groupId>org.jibx</groupId>
                 <artifactId>jibx-run</artifactId>
                 <version>${jibx-version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.jibx</groupId>
                 <artifactId>jibx-bind</artifactId>
                 <version>${jibx-version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.jibx</groupId>
                 <artifactId>jibx-tools</artifactId>
                 <version>${jibx-version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.jibx</groupId>
                 <artifactId>jibx-schema</artifactId>
                 <version>${jibx-version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.jibx</groupId>
                 <artifactId>jibx-extras</artifactId>
@@ -729,7 +730,7 @@
                 <artifactId>javax.mail</artifactId>
                 <version>1.6.2</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>javax.xml.ws</groupId>
                 <artifactId>jaxws-api</artifactId>
@@ -754,19 +755,19 @@
                 <artifactId>jaxb-impl</artifactId>
                 <version>2.3.4</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>com.sun.activation</groupId>
                 <artifactId>javax.activation</artifactId>
                 <version>1.2.0</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>javax.jws</groupId>
                 <artifactId>javax.jws-api</artifactId>
                 <version>1.1</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>javax.annotation</groupId>
                 <artifactId>javax.annotation-api</artifactId>
@@ -810,19 +811,19 @@
                 <artifactId>aspectjweaver</artifactId>
                 <version>${aspectj-version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.codehaus.jra</groupId>
                 <artifactId>jra</artifactId>
                 <version>1.0-alpha-4</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.opengeo</groupId>
                 <artifactId>geodb</artifactId>
                 <version>${geodb-version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.hsqldb</groupId>
                 <artifactId>hsqldb</artifactId>
@@ -838,11 +839,11 @@
                 <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
-            
+
             <!-- ============================================================ -->
             <!-- =========================== H2 ============================= -->
             <!-- ============================================================ -->
-        
+
             <dependency>
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
@@ -893,7 +894,7 @@
                 <artifactId>jsr-275</artifactId>
                 <version>1.0-beta-2</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.moxieapps.gwt</groupId>
                 <artifactId>org.moxieapps.gwt.uploader</artifactId>
@@ -907,14 +908,14 @@
                 <version>${gwtVersion}</version>
                 <scope>provided</scope>
             </dependency>
-            
+
             <dependency>
                 <groupId>com.google.gwt</groupId>
                 <artifactId>gwt-servlet</artifactId>
                 <version>${gwtVersion}</version>
                 <scope>runtime</scope>
             </dependency>
-            
+
             <dependency>
                 <groupId>com.google.web.bindery</groupId>
                 <artifactId>requestfactory-server</artifactId>
@@ -928,40 +929,40 @@
                 <artifactId>gxt</artifactId>
                 <version>${gxtVersion}</version>
             </dependency>
-            
+
             <!-- GWT-OPENLAYERS -->
-            
+
             <dependency>
                 <groupId>org.gwtopenmaps.openlayers</groupId>
                 <artifactId>gwt-openlayers-client</artifactId>
                 <version>${gwtOpenlayersVersion}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.gwtopenmaps.openlayers</groupId>
                 <artifactId>gwt-openlayers-server</artifactId>
                 <version>${gwtOpenlayersVersion}</version>
             </dependency>
-            
+
             <!-- =========================================================== -->
             <!-- ======================== GUAVA =========================== -->
             <!-- =========================================================== -->
-            
+
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava-version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava-gwt</artifactId>
                 <version>${guava-gwt-version}</version>
             </dependency>
-            
+
             <!-- =========================================================== -->
             <!-- ========================= GIN ============================= -->
-            <!-- =========================================================== -->            
+            <!-- =========================================================== -->
             <dependency>
                 <groupId>com.google.gwt.inject</groupId>
                 <artifactId>gin</artifactId>
@@ -985,26 +986,26 @@
                 <groupId>org.jasypt</groupId>
                 <artifactId>jasypt</artifactId>
                 <version>${jasypt-version}</version>
-            </dependency>            
+            </dependency>
             <dependency>
                 <groupId>org.jasypt</groupId>
                 <artifactId>jasypt-spring31</artifactId>
                 <version>${jasypt-version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>de.grundid.opendatalab</groupId>
                 <artifactId>geojson-jackson</artifactId>
                 <version>${geojson-jackson-version}</version>
             </dependency>
-            
+
             <!-- EHCACHE -->
             <dependency>
                 <groupId>net.sf.ehcache</groupId>
                 <artifactId>ehcache</artifactId>
                 <version>${ehcache-version}</version>
             </dependency>
-        
+
             <!-- GWTQUERY-UI PLUGIN -->
             <dependency>
                 <groupId>com.google.gwt</groupId>
@@ -1012,19 +1013,19 @@
                 <version>r147</version>
                 <!--                <scope>provided</scope>-->
             </dependency>
-            
+
             <dependency>
                 <groupId>name.pehl</groupId>
                 <artifactId>piriti-user</artifactId>
                 <version>0.10</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>name.pehl</groupId>
                 <artifactId>piriti-dev</artifactId>
                 <version>0.10</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>name.pehl</groupId>
                 <artifactId>totoe</artifactId>
@@ -1035,17 +1036,17 @@
                 <artifactId>javax.inject</artifactId>
                 <version>1</version>
             </dependency>
-            
+
             <!-- =========================================================== -->
             <!-- ====================== JODA-TIME ========================== -->
             <!-- =========================================================== -->
-            
+
             <dependency>
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>
                 <version>${joda-version}</version>
             </dependency>
-            
+
             <!-- =========================================================== -->
             <!-- ======================== MOKITO =========================== -->
             <!-- =========================================================== -->
@@ -1055,7 +1056,7 @@
                 <version>3.3.3</version>
                 <scope>test</scope>
             </dependency>
-            
+
         </dependencies>
     </dependencyManagement>
 
@@ -1069,7 +1070,7 @@
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>3.0.0-M1</version>
                 </plugin>
-                
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
@@ -1090,13 +1091,12 @@
                         </execution>
                     </executions>
                 </plugin>
-                
+
                 <plugin>
                     <inherited>true</inherited>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
                     <version>3.2.0</version>
-                    
                     <configuration>
                         <attach>true</attach>
                     </configuration>
@@ -1110,7 +1110,7 @@
                         </execution>
                     </executions>
                 </plugin>
-                
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
@@ -1130,18 +1130,19 @@
                             </goals>
                             <configuration>
                                 <pomFileName>
-                                    geo-platform/pom.xml</pomFileName>
+                                    geo-platform/pom.xml
+                                </pomFileName>
                             </configuration>
                         </execution>
                     </executions>
                 </plugin>
-                
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
                     <version>3.2.0</version>
                 </plugin>
-                
+
                 <plugin>
                     <groupId>com.mycila</groupId>
                     <artifactId>license-maven-plugin</artifactId>
@@ -1175,7 +1176,7 @@
                         <encoding>UTF-8</encoding>
                     </configuration>
                 </plugin>
-                
+
                 <!-- compilation -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -1199,12 +1200,12 @@
                         </dependency>
                     </dependencies>
                 </plugin>
-                
+
                 <plugin>
                     <artifactId>maven-antrun-plugin</artifactId>
                     <version>3.0.0</version>
                 </plugin>
-            
+
                 <plugin>
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <version>2.22.2</version>
@@ -1221,6 +1222,12 @@
                             </configuration>
                         </execution>
                     </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.3.2</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -1242,7 +1249,7 @@
                     <maxmem>1512M</maxmem>
                 </configuration>
             </plugin>
-            
+
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>3.1.0</version>
@@ -1256,7 +1263,7 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-            
+
             <!-- test -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -1276,7 +1283,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
@@ -1305,7 +1312,7 @@
                     <skipIfEmpty>true</skipIfEmpty>
                 </configuration>
             </plugin>
-            
+
             <!-- initialize git revision info -->
             <plugin>
                 <groupId>pl.project13.maven</groupId>
@@ -1325,7 +1332,7 @@
                 </configuration>
             </plugin>
         </plugins>
-        
+
         <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
@@ -1447,7 +1454,7 @@
             </plugin>
         </plugins>
     </reporting>
-    
+
     <properties>
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -1457,12 +1464,12 @@
         </maven.build.timestamp.format>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <netbeans.hint.license>geo-platform</netbeans.hint.license>
- 
+
         <activemq-version>5.8.0</activemq-version>
-        
+
         <jettison>1.4.1</jettison>
         <joda-version>2.10.11</joda-version>
-        
+
         <javax.ws.rs-api-version>2.1</javax.ws.rs-api-version>
 
         <jibx-version>1.3.3</jibx-version>
@@ -1482,24 +1489,24 @@
 
         <gwtVersion>2.7.0</gwtVersion>
         <gxtVersion>2.3.1a-gwt22</gxtVersion>
-        
+
         <gwtOpenlayersVersion>1.1.0</gwtOpenlayersVersion>
-        
+
         <cas-version>3.2.1</cas-version>
         <bcel.version>6.5.0</bcel.version>
-        
+
         <jasypt-version>1.9.3</jasypt-version>
-        
+
         <guava-gwt-version>23.6-jre</guava-gwt-version>
         <guava-version>31.0.1-jre</guava-version>
         <guice-version>3.0</guice-version>
-        
+
         <ehcache-version>2.10.9.2</ehcache-version>
-        
+
         <commons-pool-version>2.11.1</commons-pool-version>
-        
+
         <geonetwork-version>1.1</geonetwork-version>
-        
+
         <geoserver-manager-version>1.7</geoserver-manager-version>
         <geojson-jackson-version>1.14</geojson-jackson-version>
         <hsqldb-version>2.5.1</hsqldb-version>
@@ -1507,5 +1514,5 @@
         <junit.version>4.13.1</junit.version>
         <maven-surefire.version>3.0.0-M5</maven-surefire.version>
     </properties>
-    
+
 </project>

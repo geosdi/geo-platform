@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,31 +32,43 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver;
+package org.geosdi.geoplatform.connector.geoserver.request.extension.importer;
 
-import org.geosdi.geoplatform.connector.geoserver.extensions.importer.IGPGeoserverImporterConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.reload.GeoserverReloadCatalogRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.reset.GeoserverResetRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.running.GeoserverRestRunningRequest;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.GPFileExpandType;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface IGPGeoserverConnector extends IGPGeoserverImporterConnector {
+public interface GeoserverFileImporterRequest extends GPJsonConnectorRequest<String, GeoserverFileImporterRequest> {
 
     /**
-     * @return {@link GeoserverRestRunningRequest}
+     * @param theBody
+     * @return {@link GeoserverFileImporterRequest}
      */
-    GeoserverRestRunningRequest createGeoserverRestRunningRequest();
+    GeoserverFileImporterRequest withBody(@Nonnull(when = NEVER) String theBody);
 
     /**
-     * @return {@link GeoserverReloadCatalogRequest}
+     * @param theExec
+     * @return {@link GeoserverFileImporterRequest}
      */
-    GeoserverReloadCatalogRequest reloadGeoserverCatalogRequest();
+    GeoserverFileImporterRequest withExec(@Nonnull(when = NEVER) Boolean theExec);
 
     /**
-     * @return {@link GeoserverResetRequest}
+     * @param theExpand
+     * @return {@link GeoserverFileImporterRequest}
      */
-    GeoserverResetRequest resetGeoserverRequest();
+    GeoserverFileImporterRequest withExpand(@Nonnull(when = NEVER) GPFileExpandType theExpand);
+
+
+    /**
+     * @param theAsync
+     * @return {@link GeoserverFileImporterRequest}
+     */
+    GeoserverFileImporterRequest withAsync(@Nonnull(when = NEVER) Boolean theAsync);
 }

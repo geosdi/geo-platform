@@ -28,4 +28,11 @@
         <constructor-arg type="java.lang.String" value="configurator{geoserver_username}"/>
         <constructor-arg type="java.lang.String" value="configurator{geoserver_password}"/>
     </bean>
+
+    <bean id="geoServerRestImporterManager" class="it.geosolutions.geoserver.rest.manager.GeoServerRESTImporterManager">
+        <constructor-arg type="java.net.URL" value="configurator{geoserver_url}"/>
+        <!-- the login and the password of the REST geoserver instance -->
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_username}"/>
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_password}"/>
+    </bean>
 </beans>

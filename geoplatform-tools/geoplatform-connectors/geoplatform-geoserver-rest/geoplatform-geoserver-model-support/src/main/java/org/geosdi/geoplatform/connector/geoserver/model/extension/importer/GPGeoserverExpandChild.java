@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,31 +32,36 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver;
+package org.geosdi.geoplatform.connector.geoserver.model.extension.importer;
 
-import org.geosdi.geoplatform.connector.geoserver.extensions.importer.IGPGeoserverImporterConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.reload.GeoserverReloadCatalogRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.reset.GeoserverResetRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.running.GeoserverRestRunningRequest;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryParam;
+
+import javax.annotation.Nonnull;
+import javax.annotation.meta.When;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface IGPGeoserverConnector extends IGPGeoserverImporterConnector {
+public class GPGeoserverExpandChild extends GPGeoserverQueryParam.GeoserverQueryParam<Integer> implements GPFileExpandType<Integer>{
 
     /**
-     * @return {@link GeoserverRestRunningRequest}
+     * @param theKey
+     * @param theValue
      */
-    GeoserverRestRunningRequest createGeoserverRestRunningRequest();
+    protected GPGeoserverExpandChild(@Nonnull(when = When.NEVER) String theKey,
+            @Nonnull(when = When.NEVER) Integer theValue) {
+        super(theKey, theValue);
+    }
 
     /**
-     * @return {@link GeoserverReloadCatalogRequest}
+     * @return {@link String}
      */
-    GeoserverReloadCatalogRequest reloadGeoserverCatalogRequest();
-
-    /**
-     * @return {@link GeoserverResetRequest}
-     */
-    GeoserverResetRequest resetGeoserverRequest();
+    @Override
+    public String formatValue() {
+        checkArgument(this.getValue() >= 0, "The Parameter expand must a positive integer");
+        return this.getValue().toString();
+    }
 }

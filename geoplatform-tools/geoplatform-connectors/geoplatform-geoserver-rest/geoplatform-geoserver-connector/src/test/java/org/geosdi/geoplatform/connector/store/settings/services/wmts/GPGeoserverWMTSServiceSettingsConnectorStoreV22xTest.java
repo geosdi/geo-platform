@@ -32,25 +32,25 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.settings.services.wcs;
+package org.geosdi.geoplatform.connector.store.settings.services.wmts;
 
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wcs.GeoserverLoadWCSServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wcs.GeoserverLoadWCSWorkspaceServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.store.settings.services.wmts.GPGeoserverWMTSServiceSettingsConnectorStore;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.GeoserverLoadWMTSServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV22xTest;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverWCSServiceSettingsConnectorStore extends GPGeoserverWMTSServiceSettingsConnectorStore {
+@FixMethodOrder(NAME_ASCENDING)
+public class GPGeoserverWMTSServiceSettingsConnectorStoreV22xTest extends GPBaseGeoserverConnectorStoreV22xTest {
 
-    /**
-     * @return {@link GeoserverLoadWCSServiceSettingsRequest}
-     */
-    GeoserverLoadWCSServiceSettingsRequest loadWCSServiceSettingsRequest();
-
-    /**
-     * @return {@link GeoserverLoadWCSWorkspaceServiceSettingsRequest}
-     */
-    GeoserverLoadWCSWorkspaceServiceSettingsRequest loadWCSWorkspaceServiceSettingsRequest();
+    @Test
+    public void a_loadWMTSServiceSettingsRequestTest() throws Exception {
+        GeoserverLoadWMTSServiceSettingsRequest wmtsServiceSettingsRequest = geoserverConnectorStoreV2_20_x.loadWMTSServiceSettingsRequest();
+        logger.info("########################GEOSERVER_WMTS_SERIVCE_SETTINGS_RESPONSE : {}\n", wmtsServiceSettingsRequest.getResponse());
+    }
 }

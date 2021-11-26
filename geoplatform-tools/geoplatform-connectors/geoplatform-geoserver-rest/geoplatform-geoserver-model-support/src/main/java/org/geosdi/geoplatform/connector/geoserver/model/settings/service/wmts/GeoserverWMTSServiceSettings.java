@@ -32,25 +32,24 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.settings.services.wcs;
+package org.geosdi.geoplatform.connector.geoserver.model.settings.service.wmts;
 
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wcs.GeoserverLoadWCSServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wcs.GeoserverLoadWCSWorkspaceServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.store.settings.services.wmts.GPGeoserverWMTSServiceSettingsConnectorStore;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.GeoserverServiceSettings;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.metadata.GPGeoserverMetadataLinkSettings;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverWCSServiceSettingsConnectorStore extends GPGeoserverWMTSServiceSettingsConnectorStore {
+public interface GeoserverWMTSServiceSettings extends GeoserverServiceSettings {
 
     /**
-     * @return {@link GeoserverLoadWCSServiceSettingsRequest}
+     * @return {@link GPGeoserverMetadataLinkSettings}
      */
-    GeoserverLoadWCSServiceSettingsRequest loadWCSServiceSettingsRequest();
+    GPGeoserverMetadataLinkSettings getMetadataLink();
 
     /**
-     * @return {@link GeoserverLoadWCSWorkspaceServiceSettingsRequest}
+     * @param theMetadataLink
      */
-    GeoserverLoadWCSWorkspaceServiceSettingsRequest loadWCSWorkspaceServiceSettingsRequest();
+    void setMetadataLink(GPGeoserverMetadataLinkSettings theMetadataLink);
 }

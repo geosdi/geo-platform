@@ -32,25 +32,30 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.settings.services.wcs;
+package org.geosdi.geoplatform.connector.store.settings.services.wmts;
 
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wcs.GeoserverLoadWCSServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wcs.GeoserverLoadWCSWorkspaceServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.store.settings.services.wmts.GPGeoserverWMTSServiceSettingsConnectorStore;
+import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.GeoserverLoadWMTSServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.store.security.GeoserverSecurityConnectorStore;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverWCSServiceSettingsConnectorStore extends GPGeoserverWMTSServiceSettingsConnectorStore {
+public abstract class GeoserverWMTSServiceSettingsConnectorStore extends GeoserverSecurityConnectorStore implements GPGeoserverWMTSServiceSettingsConnectorStore {
 
     /**
-     * @return {@link GeoserverLoadWCSServiceSettingsRequest}
+     * @param theServer
      */
-    GeoserverLoadWCSServiceSettingsRequest loadWCSServiceSettingsRequest();
+    protected GeoserverWMTSServiceSettingsConnectorStore(GPGeoserverConnector theServer) {
+        super(theServer);
+    }
 
     /**
-     * @return {@link GeoserverLoadWCSWorkspaceServiceSettingsRequest}
+     * @return {@link GeoserverLoadWMTSServiceSettingsRequest}
      */
-    GeoserverLoadWCSWorkspaceServiceSettingsRequest loadWCSWorkspaceServiceSettingsRequest();
+    @Override
+    public GeoserverLoadWMTSServiceSettingsRequest loadWMTSServiceSettingsRequest() {
+        return this.server.loadWMTSServiceSettingsRequest();
+    }
 }

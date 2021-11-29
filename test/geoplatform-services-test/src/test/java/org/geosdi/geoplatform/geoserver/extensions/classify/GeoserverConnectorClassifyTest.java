@@ -32,57 +32,43 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.extensions.importer;
+package org.geosdi.geoplatform.geoserver.extensions.classify;
 
-import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.extensions.rasterize.GPGeoserverRasterizeRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverLoadImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task.GeoserverLoadTaskRequest;
-import org.geosdi.geoplatform.connector.store.extensions.classify.GoeserverClassifyConnectorStore;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.rasterize.GeoserverRamp;
+import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public abstract class GeoserverImporterConnectorStore extends GoeserverClassifyConnectorStore implements GPImporterConnectorStore {
-    /**
-     * @param theServer
-     */
-    protected GeoserverImporterConnectorStore(GPGeoserverConnector theServer) {
-        super(theServer);
-    }
+public class GeoserverConnectorClassifyTest extends GeoserverConnectorTest {
 
-    /**
-     * @return {@link GPGeoserverRasterizeRequest}
-     */
-    @Override
-    public GeoserverCreateImportRequest createImportRequest() {
-        return this.server.createImportRequest();
-    }
+    static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorClassifyTest.class);
 
-    /**
-     * @return {@link GeoserverLoadImportRequest}
-     */
-    @Override
-    public GeoserverLoadImportRequest loadImportRequest() {
-        return this.server.loadImportRequest();
-    }
+    @Test
+    @Ignore
+    public void a_classifyData() throws Exception {
 
-    /**
-     * @return {@link GeoserverLoadTaskRequest}
-     */
-    @Override
-    public GeoserverLoadTaskRequest loadTaskRequest() {
-        return this.server.loadTaskRequest();
-    }
+//        String result = this.restReader.classifyVectorData("poi",
+//                "NAME", Ramp.red,null, null,
+//                null, null, null,
+//                null, null, null,
+//                null, null);
+//        logger.info("#####################RESULT CONNECTOR: {}\n\n\n", result);
 
-    /**
-     * @return {@link GeoserverCreateImportRequest}
-     */
-    @Override
-    public GeoserverCreateImportWithIdRequest createImportWithIdRequest() {
-        return this.server.createImportWithIdRequest();
+        String result2 = this.geoserverConnectorStore.classifyData()
+                .withVectorName("poi")
+                .withGeoserverRamp(GeoserverRamp.red)
+                .withSize(null)
+                .withOpen(null)
+                .withNormalize(null)
+                .withMethod(null)
+                .withReverse(null)
+                .withAttribute("NAME").getResponseAsString();
+        logger.info("#####################RESULT CONNECTOR: {}\n\n\n", result2);
     }
 }

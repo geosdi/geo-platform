@@ -32,57 +32,30 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.extensions.importer;
+package org.geosdi.geoplatform.connector.geoserver.model.extension.uniquevalues;
 
-import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.extensions.rasterize.GPGeoserverRasterizeRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverLoadImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task.GeoserverLoadTaskRequest;
-import org.geosdi.geoplatform.connector.store.extensions.classify.GoeserverClassifyConnectorStore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.Lists;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import java.util.List;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public abstract class GeoserverImporterConnectorStore extends GoeserverClassifyConnectorStore implements GPImporterConnectorStore {
-    /**
-     * @param theServer
-     */
-    protected GeoserverImporterConnectorStore(GPGeoserverConnector theServer) {
-        super(theServer);
-    }
+@Setter
+@Getter
+@ToString
+@XmlAccessorType(XmlAccessType.FIELD)
+public class GPGeoserverUniqueValue implements IGPGeoserverUniqueValue{
 
-    /**
-     * @return {@link GPGeoserverRasterizeRequest}
-     */
-    @Override
-    public GeoserverCreateImportRequest createImportRequest() {
-        return this.server.createImportRequest();
-    }
-
-    /**
-     * @return {@link GeoserverLoadImportRequest}
-     */
-    @Override
-    public GeoserverLoadImportRequest loadImportRequest() {
-        return this.server.loadImportRequest();
-    }
-
-    /**
-     * @return {@link GeoserverLoadTaskRequest}
-     */
-    @Override
-    public GeoserverLoadTaskRequest loadTaskRequest() {
-        return this.server.loadTaskRequest();
-    }
-
-    /**
-     * @return {@link GeoserverCreateImportRequest}
-     */
-    @Override
-    public GeoserverCreateImportWithIdRequest createImportWithIdRequest() {
-        return this.server.createImportWithIdRequest();
-    }
+    private static final long serialVersionUID = -7480675606061888111L;
+    //
+    @JsonProperty(value = "values")
+    private List<String> values = Lists.newArrayList();
 }

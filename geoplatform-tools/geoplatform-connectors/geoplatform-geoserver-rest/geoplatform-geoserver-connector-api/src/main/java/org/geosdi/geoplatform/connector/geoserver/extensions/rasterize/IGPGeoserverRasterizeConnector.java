@@ -32,57 +32,18 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.extensions.importer;
+package org.geosdi.geoplatform.connector.geoserver.extensions.rasterize;
 
-import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.extensions.rasterize.GPGeoserverRasterizeRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverLoadImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task.GeoserverLoadTaskRequest;
-import org.geosdi.geoplatform.connector.store.extensions.classify.GoeserverClassifyConnectorStore;
+import org.geosdi.geoplatform.connector.geoserver.extensions.uniquevalues.IGPGeoserverUniqueValuesConnector;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public abstract class GeoserverImporterConnectorStore extends GoeserverClassifyConnectorStore implements GPImporterConnectorStore {
-    /**
-     * @param theServer
-     */
-    protected GeoserverImporterConnectorStore(GPGeoserverConnector theServer) {
-        super(theServer);
-    }
+public interface IGPGeoserverRasterizeConnector extends IGPGeoserverUniqueValuesConnector {
 
     /**
      * @return {@link GPGeoserverRasterizeRequest}
      */
-    @Override
-    public GeoserverCreateImportRequest createImportRequest() {
-        return this.server.createImportRequest();
-    }
-
-    /**
-     * @return {@link GeoserverLoadImportRequest}
-     */
-    @Override
-    public GeoserverLoadImportRequest loadImportRequest() {
-        return this.server.loadImportRequest();
-    }
-
-    /**
-     * @return {@link GeoserverLoadTaskRequest}
-     */
-    @Override
-    public GeoserverLoadTaskRequest loadTaskRequest() {
-        return this.server.loadTaskRequest();
-    }
-
-    /**
-     * @return {@link GeoserverCreateImportRequest}
-     */
-    @Override
-    public GeoserverCreateImportWithIdRequest createImportWithIdRequest() {
-        return this.server.createImportWithIdRequest();
-    }
+    GPGeoserverRasterizeRequest rasterizeData();
 }

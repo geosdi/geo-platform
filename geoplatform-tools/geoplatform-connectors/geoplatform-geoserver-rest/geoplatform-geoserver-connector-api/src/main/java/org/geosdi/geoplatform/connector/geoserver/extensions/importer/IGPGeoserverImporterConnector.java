@@ -34,7 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.extensions.importer;
 
-import org.geosdi.geoplatform.connector.geoserver.classify.IGPGeoserverClassifyConnector;
+import org.geosdi.geoplatform.connector.geoserver.extensions.classify.IGPGeoserverClassifyConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverLoadImportRequest;

@@ -34,7 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.store.classify;
 
-import org.geosdi.geoplatform.connector.geoserver.classify.GPGeoserverClassifyRequest;
+import org.geosdi.geoplatform.connector.geoserver.extensions.classify.GPGeoserverClassifyRequest;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group

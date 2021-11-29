@@ -66,4 +66,10 @@ public interface IGPGeoserverConnectorStore extends GPImporterConnectorStore {
      * @return {@link GeoserverVersion}
      */
     GeoserverVersion getVersion();
+
+    /**
+     * 
+     * @return
+     */
+    Boolean isImportsRunning();
 }

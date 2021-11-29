@@ -155,4 +155,18 @@ public class GPGeoserverConnector extends GPGeoserverImporterConnector implement
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
+
+    /**
+     * @return {@link GeoserverRestRunningRequest}
+     */
+    @Override
+    public GeoserverRestRunningRequest createImportsGeoserverRunningRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverImporterRunningRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
 }

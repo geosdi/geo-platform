@@ -58,6 +58,7 @@ public class GPGeoserverConnectorStore extends GeoserverImporterConnectorStore i
     private final GeoserverRestRunningRequest restRunningRequest;
     private final GeoserverReloadCatalogRequest reloadCatalogRequest;
     private final GeoserverResetRequest resetRequest;
+    private final GeoserverRestRunningRequest importerRunningRequest;
 
     /**
      * @param server
@@ -83,6 +84,7 @@ public class GPGeoserverConnectorStore extends GeoserverImporterConnectorStore i
         this.restRunningRequest = this.server.createGeoserverRestRunningRequest();
         this.reloadCatalogRequest = this.server.reloadGeoserverCatalogRequest();
         this.resetRequest = this.server.resetGeoserverRequest();
+        this.importerRunningRequest = this.server.createImportsGeoserverRunningRequest();
     }
 
     /**
@@ -127,5 +129,13 @@ public class GPGeoserverConnectorStore extends GeoserverImporterConnectorStore i
     @Override
     public GeoserverVersion getVersion() {
         return this.server.getVersion();
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public Boolean isImportsRunning() {
+        return this.importerRunningRequest.isUp();
     }
 }

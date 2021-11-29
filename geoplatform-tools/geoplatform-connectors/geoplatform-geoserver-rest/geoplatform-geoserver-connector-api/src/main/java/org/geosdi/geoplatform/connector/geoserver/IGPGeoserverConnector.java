@@ -59,4 +59,9 @@ public interface IGPGeoserverConnector extends IGPGeoserverImporterConnector {
      * @return {@link GeoserverResetRequest}
      */
     GeoserverResetRequest resetGeoserverRequest();
+
+    /**
+     * @return {@link GeoserverRestRunningRequest}
+     */
+    GeoserverRestRunningRequest createImportsGeoserverRunningRequest();
 }

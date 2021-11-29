@@ -35,10 +35,10 @@
 package org.geosdi.geoplatform.connector.geoserver.extensions.importer;
 
 import io.reactivex.rxjava3.functions.Consumer;
-import net.jcip.annotations.ThreadSafe;import org.apache.hc.core5.http.HttpEntity;
+import net.jcip.annotations.ThreadSafe;
+import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.apache.hc.core5.net.URIBuilder;
-import org.geosdi.geoplatform.connector.geoserver.model.empty.GPGeoserverNullResponse;
 import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.GPFileExpandType;
 import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.body.GPGeoserverCreateImportBody;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverBooleanQueryParam;
@@ -46,10 +46,10 @@ import org.geosdi.geoplatform.connector.geoserver.model.uri.GeoserverRXQueryPara
 import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
+import org.geosdi.geoplatform.connector.server.response.GPGeoserverNullResponse;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-
 import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;

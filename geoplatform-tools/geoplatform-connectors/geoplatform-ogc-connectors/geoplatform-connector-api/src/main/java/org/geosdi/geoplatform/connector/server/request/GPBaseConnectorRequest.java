@@ -79,9 +79,9 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
     public T getResponse() throws Exception {
         HttpUriRequest httpUriRequest = this.prepareHttpMethod();
         CloseableHttpResponse httpResponse = this.securityConnector.secure(this, httpUriRequest);
-        int statusCode = httpResponse.getStatusLine().getStatusCode();
+        int statusCode = httpResponse.getCode();
         logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
-        super.checkHttpResponseStatus(httpResponse.getStatusLine().getStatusCode());
+        super.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
             if(statusCode == 204 && responseEntity == null) {
@@ -105,9 +105,9 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
     public String getResponseAsString() throws Exception {
         HttpUriRequest httpUriRequest = this.prepareHttpMethod();
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpUriRequest);
-        int statusCode = httpResponse.getStatusLine().getStatusCode();
+        int statusCode = httpResponse.getCode();
         logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
-        super.checkHttpResponseStatus(httpResponse.getStatusLine().getStatusCode());
+        super.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
             if(statusCode == 204 && responseEntity == null) {
@@ -132,9 +132,9 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
     public InputStream getResponseAsStream() throws Exception {
         HttpUriRequest httpUriRequest = this.prepareHttpMethod();
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpUriRequest);
-        int statusCode = httpResponse.getStatusLine().getStatusCode();
+        int statusCode = httpResponse.getCode();
         logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
-        super.checkHttpResponseStatus(httpResponse.getStatusLine().getStatusCode());
+        super.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
             if(statusCode == 204 && responseEntity == null) {

@@ -60,8 +60,13 @@ public class GeoserverConnectorImporterTest extends GeoserverConnectorTest {
     private GeoServerRESTImporterManager geoServerRestImporterManager;
 
     @Test
-   // @Ignore
-    public void a_importerFile() throws Exception {
+    public void a_importRunning() throws  Exception {
+        logger.info("###########IMPORT RUNNING : {}\n", this.geoserverConnectorStore.isImportsRunning());
+    }
+
+    @Test
+    @Ignore
+    public void b_importerFile() throws Exception {
         GPGeoserverCreateImportBody gpGeoserverCreateImportBody = GPGeoserverCreateImportBody.builder()
                 .targetStore(new GPGeoserverTargetStoreBody(new GPGeoserverDataStoreBody("ds_vito")))
                 .targetWorkspace(new GPGeoserverTargetWorkspaceBody(new GPGeoserverWorkspaceBody("ws_vito")))

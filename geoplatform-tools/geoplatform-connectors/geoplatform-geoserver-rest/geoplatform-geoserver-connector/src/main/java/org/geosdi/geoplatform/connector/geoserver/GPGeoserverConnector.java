@@ -73,7 +73,8 @@ public class GPGeoserverConnector extends GPGeoserverImporterConnector implement
      * @param theJacksonSupport
      * @param version
      */
-    public GPGeoserverConnector(String urlServer, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
+    public GPGeoserverConnector(String urlServer, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport,
+            String version) {
         super(urlServer, securityConnector, theJacksonSupport, version);
     }
 
@@ -84,7 +85,8 @@ public class GPGeoserverConnector extends GPGeoserverImporterConnector implement
      * @param theJacksonSupport
      * @param version
      */
-    public GPGeoserverConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
+    public GPGeoserverConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig,
+            GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
         super(urlServer, pooledConnectorConfig, securityConnector, theJacksonSupport, version);
     }
 
@@ -94,7 +96,8 @@ public class GPGeoserverConnector extends GPGeoserverImporterConnector implement
      * @param theJacksonSupport
      * @param theVersion
      */
-    public GPGeoserverConnector(URL server, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
+    public GPGeoserverConnector(URL server, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport,
+            GeoserverVersion theVersion) {
         super(server, securityConnector, theJacksonSupport, theVersion);
     }
 
@@ -105,7 +108,8 @@ public class GPGeoserverConnector extends GPGeoserverImporterConnector implement
      * @param theJacksonSupport
      * @param theVersion
      */
-    public GPGeoserverConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
+    public GPGeoserverConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig,
+            GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion);
         this.jacksonSupport.getDefaultMapper().coercionConfigFor(GPGeoserverMetadataLinks.class).setCoercion(EmptyString, AsNull);
     }
@@ -147,6 +151,20 @@ public class GPGeoserverConnector extends GPGeoserverImporterConnector implement
             case V220x:
             case V219x:
                 return new GPGeoserverResetRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverRestRunningRequest}
+     */
+    @Override
+    public GeoserverRestRunningRequest createImportsGeoserverRunningRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverImporterRunningRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

@@ -34,8 +34,8 @@
  */
 package org.geosdi.geoplatform.connector.geoserver;
 
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.hc.client5.http.classic.methods.HttpUriRequest;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.geosdi.geoplatform.connector.geoserver.request.running.GeoserverRestRunningRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
@@ -81,9 +81,9 @@ class GPGeoserverImporterRunningRequest extends GPJsonGetConnectorRequest<Boolea
     public Boolean getResponse() throws Exception {
         HttpUriRequest httpMethod = this.prepareHttpMethod();
         httpMethod.addHeader("Content-Type", "application/json");
-        logger.debug("#############################Executing -------------> {}\n", httpMethod.getURI().toString());
+        logger.debug("#############################Executing -------------> {}\n", httpMethod.getUri().toString());
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpMethod);
-        int statusCode = httpResponse.getStatusLine().getStatusCode();
+        int statusCode = httpResponse.getCode();
         logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode,
                 this.getClass().getSimpleName());
         return ((statusCode == 200) ? TRUE : FALSE);

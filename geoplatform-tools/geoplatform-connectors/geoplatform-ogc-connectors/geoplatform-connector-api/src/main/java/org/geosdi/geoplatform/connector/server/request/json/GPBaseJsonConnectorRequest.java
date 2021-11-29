@@ -42,7 +42,6 @@ import org.apache.hc.core5.http.HttpEntity;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.IncorrectResponseException;
 import org.geosdi.geoplatform.connector.server.request.GPAbstractConnectorRequest;
-import org.geosdi.geoplatform.connector.server.response.GPGeoserverNullResponse;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -91,7 +90,7 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest, Connector
         this.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try  {
-            return statusCode == 204 || responseEntity == null ? (T) new GPGeoserverNullResponse()
+            return statusCode == 204 || responseEntity == null ? null
                     : this.readInternal(new BufferedReader(new InputStreamReader(responseEntity.getContent(), UTF_8_CHARSERT)));
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -121,11 +120,7 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest, Connector
         this.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
-            if(statusCode == 204 || responseEntity == null) {
-                return "";
-            } else {
-                return CharStreams.toString(new InputStreamReader(responseEntity.getContent(), UTF_8));
-            }
+            return statusCode == 204 || responseEntity == null ? "" : CharStreams.toString(new InputStreamReader(responseEntity.getContent(), UTF_8));
         } finally {
             consume(responseEntity);
             httpResponse.close();
@@ -151,11 +146,7 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest, Connector
         this.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
-            if(statusCode == 204 || responseEntity == null) {
-                return null;
-            } else {
-                return new ByteArrayInputStream(toByteArray(responseEntity.getContent()));
-            }
+            return statusCode == 204 || responseEntity == null ? null : new ByteArrayInputStream(toByteArray(responseEntity.getContent()));
         } finally {
             consume(responseEntity);
             httpResponse.close();

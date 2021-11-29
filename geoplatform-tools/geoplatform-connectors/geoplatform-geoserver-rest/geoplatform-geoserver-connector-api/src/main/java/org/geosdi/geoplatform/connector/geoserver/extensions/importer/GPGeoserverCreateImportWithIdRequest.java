@@ -46,11 +46,9 @@ import org.geosdi.geoplatform.connector.geoserver.model.uri.GeoserverRXQueryPara
 import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
-import org.geosdi.geoplatform.connector.server.response.GPGeoserverNullResponse;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Observable.fromArray;
@@ -63,7 +61,7 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverCreateImportWithIdRequest extends GPJsonPostConnectorRequest<GPGeoserverNullResponse, GeoserverCreateImportWithIdRequest> implements GeoserverCreateImportWithIdRequest {
+public class GPGeoserverCreateImportWithIdRequest extends GPJsonPostConnectorRequest<Object, GeoserverCreateImportWithIdRequest> implements GeoserverCreateImportWithIdRequest {
 
     private final ThreadLocal<Integer> id;
     private final ThreadLocal<GPGeoserverCreateImportBody> body;
@@ -156,8 +154,8 @@ public class GPGeoserverCreateImportWithIdRequest extends GPJsonPostConnectorReq
      * @return {@link Class<String>}
      */
     @Override
-    protected Class<GPGeoserverNullResponse> forClass() {
-        return GPGeoserverNullResponse.class;
+    protected Class<Object> forClass() {
+        return Object.class;
     }
 
     /**
@@ -170,15 +168,5 @@ public class GPGeoserverCreateImportWithIdRequest extends GPJsonPostConnectorReq
         String workspaceBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(body);
         logger.debug("#############################IMPORTER_BODY : \n{}\n", workspaceBodyString);
         return new StringEntity(workspaceBodyString, APPLICATION_JSON);
-    }
-
-    /**
-     * @param reader
-     * @return {@link GPGeoserverNullResponse}
-     * @throws Exception
-     */
-    @Override
-    protected GPGeoserverNullResponse readInternal(BufferedReader reader) throws Exception {
-        return new GPGeoserverNullResponse();
     }
 }

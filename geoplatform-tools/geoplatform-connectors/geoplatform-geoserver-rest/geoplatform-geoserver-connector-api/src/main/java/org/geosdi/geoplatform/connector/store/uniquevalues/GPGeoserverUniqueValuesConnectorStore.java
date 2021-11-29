@@ -34,7 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.store.uniquevalues;
 
-import org.geosdi.geoplatform.connector.geoserver.request.uniquevalue.GeoserverLoadUniqueValuesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.uniquevalue.GeoserverLoadUniqueValuesRequest;
 import org.geosdi.geoplatform.connector.store.layergroups.GPGeoserverLayerGroupsConnectorStore;
 
 /**

@@ -51,7 +51,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.layers.vector.GeoserverV
 import org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverStyle;
-import org.geosdi.geoplatform.connector.geoserver.model.uniquevalues.GPGeoserverUniqueValue;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.uniquevalues.GPGeoserverUniqueValue;
 import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
 import org.geosdi.geoplatform.connector.geoserver.model.upload.GPGeoserverUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GeoserverCreateWorkspaceBody;

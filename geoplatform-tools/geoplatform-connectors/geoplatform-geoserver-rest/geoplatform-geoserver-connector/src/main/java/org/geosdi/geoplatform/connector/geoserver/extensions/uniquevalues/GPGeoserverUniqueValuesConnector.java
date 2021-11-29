@@ -32,35 +32,40 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.extensions.importer;
+package org.geosdi.geoplatform.connector.geoserver.extensions.uniquevalues;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
-import org.geosdi.geoplatform.connector.geoserver.extensions.classify.GPGeoserverClassifyConnector;
-import org.geosdi.geoplatform.connector.geoserver.extensions.importer.task.GPGeoserverLoadTaskRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverLoadImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task.GeoserverLoadTaskRequest;
+import org.geosdi.geoplatform.connector.geoserver.layergroups.GPGeoserverLayerGroupsConnector;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.uniquevalue.GeoserverLoadUniqueValuesRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import java.net.URL;
 
 import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExceptionMessage;
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public abstract class GPGeoserverImporterConnector extends GPGeoserverClassifyConnector implements IGPGeoserverImporterConnector{
+public abstract class GPGeoserverUniqueValuesConnector extends GPGeoserverLayerGroupsConnector implements IGPGeoserverUniqueValuesConnector {
+
+    protected final JacksonSupport emptyJacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
+            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
+            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
+            WRAP_ROOT_VALUE_DISABLE,
+            INDENT_OUTPUT_ENABLE);
+
     /**
      * @param urlServer
      * @param theJacksonSupport
      * @param version
      */
-    public GPGeoserverImporterConnector(String urlServer, JacksonSupport theJacksonSupport, String version) {
+    public GPGeoserverUniqueValuesConnector(String urlServer, JacksonSupport theJacksonSupport, String version) {
         super(urlServer, theJacksonSupport, version);
     }
 
@@ -70,7 +75,7 @@ public abstract class GPGeoserverImporterConnector extends GPGeoserverClassifyCo
      * @param theJacksonSupport
      * @param version
      */
-    public GPGeoserverImporterConnector(String urlServer, GPSecurityConnector securityConnector,
+    public GPGeoserverUniqueValuesConnector(String urlServer, GPSecurityConnector securityConnector,
             JacksonSupport theJacksonSupport, String version) {
         super(urlServer, securityConnector, theJacksonSupport, version);
     }
@@ -82,7 +87,7 @@ public abstract class GPGeoserverImporterConnector extends GPGeoserverClassifyCo
      * @param theJacksonSupport
      * @param version
      */
-    public GPGeoserverImporterConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig,
+    public GPGeoserverUniqueValuesConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig,
             GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
         super(urlServer, pooledConnectorConfig, securityConnector, theJacksonSupport, version);
     }
@@ -93,7 +98,7 @@ public abstract class GPGeoserverImporterConnector extends GPGeoserverClassifyCo
      * @param theJacksonSupport
      * @param theVersion
      */
-    public GPGeoserverImporterConnector(URL server, GPSecurityConnector securityConnector,
+    public GPGeoserverUniqueValuesConnector(URL server, GPSecurityConnector securityConnector,
             JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, securityConnector, theJacksonSupport, theVersion);
     }
@@ -105,62 +110,20 @@ public abstract class GPGeoserverImporterConnector extends GPGeoserverClassifyCo
      * @param theJacksonSupport
      * @param theVersion
      */
-    public GPGeoserverImporterConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig,
+    public GPGeoserverUniqueValuesConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig,
             GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion);
     }
 
     /**
-     * @return {@link GeoserverCreateImportRequest}
+     * @return {@link GeoserverLoadUniqueValuesRequest}
      */
     @Override
-    public GeoserverCreateImportRequest createImportRequest() {
+    public GeoserverLoadUniqueValuesRequest loadUniqueValues() {
         switch (version) {
             case V220x:
             case V219x:
-                return new GPGeoserverCreateImportRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
-    }
-
-    /**
-     * @return {@link GeoserverLoadImportRequest}
-     */
-    @Override
-    public GeoserverLoadImportRequest loadImportRequest() {
-        switch (version) {
-            case V220x:
-            case V219x:
-                return new GPGeoserverLoadImportRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
-    }
-
-    /**
-     * @return {@link GeoserverLoadTaskRequest}
-     */
-    @Override
-    public GeoserverLoadTaskRequest loadTaskRequest() {
-        switch (version) {
-            case V220x:
-            case V219x:
-                return new GPGeoserverLoadTaskRequest(this, this.jacksonSupport);
-            default:
-                throw new GeoserverVersionException(toVersionExceptionMessage());
-        }
-    }
-
-    /**
-     * @return {@link GeoserverCreateImportRequest}
-     */
-    @Override
-    public GeoserverCreateImportWithIdRequest createImportWithIdRequest() {
-        switch (version) {
-            case V220x:
-            case V219x:
-                return new GPGeoserverCreateImportWithIdRequest(this, this.jacksonSupport);
+                return new GPGeoserverLoadUniqueValuesRequest(this, this.emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

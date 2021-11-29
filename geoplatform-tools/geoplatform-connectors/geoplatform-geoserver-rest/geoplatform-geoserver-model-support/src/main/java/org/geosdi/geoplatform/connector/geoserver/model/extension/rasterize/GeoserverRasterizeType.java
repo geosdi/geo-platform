@@ -32,57 +32,41 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.extensions.importer;
+package org.geosdi.geoplatform.connector.geoserver.model.extension.rasterize;
 
-import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.extensions.rasterize.GPGeoserverRasterizeRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverLoadImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task.GeoserverLoadTaskRequest;
-import org.geosdi.geoplatform.connector.store.extensions.classify.GoeserverClassifyConnectorStore;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryParam;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public abstract class GeoserverImporterConnectorStore extends GoeserverClassifyConnectorStore implements GPImporterConnectorStore {
+public enum GeoserverRasterizeType implements GPGeoserverQueryParam<String> {
+
+    INTERVALS,
+    VALUES,
+    RAMP;
+
     /**
-     * @param theServer
+     * @return {@link String}
      */
-    protected GeoserverImporterConnectorStore(GPGeoserverConnector theServer) {
-        super(theServer);
+    @Override
+    public String getKey() {
+        return "type";
     }
 
     /**
-     * @return {@link GPGeoserverRasterizeRequest}
+     * @return {@link String}
      */
     @Override
-    public GeoserverCreateImportRequest createImportRequest() {
-        return this.server.createImportRequest();
+    public String getValue() {
+        return this.name();
     }
 
     /**
-     * @return {@link GeoserverLoadImportRequest}
+     * @return {@link String}
      */
     @Override
-    public GeoserverLoadImportRequest loadImportRequest() {
-        return this.server.loadImportRequest();
-    }
-
-    /**
-     * @return {@link GeoserverLoadTaskRequest}
-     */
-    @Override
-    public GeoserverLoadTaskRequest loadTaskRequest() {
-        return this.server.loadTaskRequest();
-    }
-
-    /**
-     * @return {@link GeoserverCreateImportRequest}
-     */
-    @Override
-    public GeoserverCreateImportWithIdRequest createImportWithIdRequest() {
-        return this.server.createImportWithIdRequest();
+    public String formatValue() {
+        return this.getValue();
     }
 }

@@ -79,10 +79,9 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
     public T getResponse() throws Exception {
         HttpUriRequest httpUriRequest = this.prepareHttpMethod();
         CloseableHttpResponse httpResponse = this.securityConnector.secure(this, httpUriRequest);
-        super.checkHttpResponseStatus(httpResponse.getCode());
-        int statusCode = httpResponse.getCode();
+        int statusCode = httpResponse.getStatusLine().getStatusCode();
         logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
-        super.checkHttpResponseStatus(statusCode);
+        super.checkHttpResponseStatus(httpResponse.getStatusLine().getStatusCode());
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
             if(statusCode == 204 && responseEntity == null) {
@@ -106,10 +105,9 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
     public String getResponseAsString() throws Exception {
         HttpUriRequest httpUriRequest = this.prepareHttpMethod();
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpUriRequest);
-        super.checkHttpResponseStatus(httpResponse.getCode());
-        int statusCode = httpResponse.getCode();
+        int statusCode = httpResponse.getStatusLine().getStatusCode();
         logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
-        super.checkHttpResponseStatus(statusCode);
+        super.checkHttpResponseStatus(httpResponse.getStatusLine().getStatusCode());
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
             if(statusCode == 204 && responseEntity == null) {
@@ -134,10 +132,9 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
     public InputStream getResponseAsStream() throws Exception {
         HttpUriRequest httpUriRequest = this.prepareHttpMethod();
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpUriRequest);
-        super.checkHttpResponseStatus(httpResponse.getCode());
-        int statusCode = httpResponse.getCode();
+        int statusCode = httpResponse.getStatusLine().getStatusCode();
         logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
-        super.checkHttpResponseStatus(statusCode);
+        super.checkHttpResponseStatus(httpResponse.getStatusLine().getStatusCode());
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
             if(statusCode == 204 && responseEntity == null) {

@@ -84,12 +84,10 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
         super.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
-            if(statusCode == 204 && responseEntity == null) {
+            if(statusCode == 204 || responseEntity == null) {
                 return  (T) new GPGeoserverNullResponse();
-            } else if (responseEntity != null) {
-                return this.readInternal(responseEntity.getContent());
             } else {
-                throw new IncorrectResponseException(CONNECTION_PROBLEM_MESSAGE);
+                return this.readInternal(responseEntity.getContent());
             }
         } finally {
             consume(responseEntity);
@@ -110,13 +108,11 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
         super.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
-            if(statusCode == 204 && responseEntity == null) {
+            if(statusCode == 204 || responseEntity == null) {
                 return "";
-            } else if (responseEntity != null) {
+            } else {
                 InputStream is = responseEntity.getContent();
                 return CharStreams.toString(new InputStreamReader(is, UTF_8));
-            } else {
-                throw new IncorrectResponseException(CONNECTION_PROBLEM_MESSAGE);
             }
         } finally {
             consume(responseEntity);
@@ -137,13 +133,11 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
         super.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
-            if(statusCode == 204 && responseEntity == null) {
+            if(statusCode == 204 || responseEntity == null) {
                 return null;
-            } else if (responseEntity != null) {
+            } else {
                 InputStream inputStream = responseEntity.getContent();
                 return new ByteArrayInputStream(IOUtils.toByteArray(inputStream));
-            } else {
-                throw new IncorrectResponseException(CONNECTION_PROBLEM_MESSAGE);
             }
         } finally {
             consume(responseEntity);

@@ -42,7 +42,6 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.IncorrectResponseException;
-import org.geosdi.geoplatform.connector.server.response.GPGeoserverNullResponse;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.JAXBElement;
@@ -84,11 +83,7 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
         super.checkHttpResponseStatus(httpResponse.getStatusLine().getStatusCode());
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
-            if(statusCode == 204 || responseEntity == null) {
-                return  (T) new GPGeoserverNullResponse();
-            } else {
-                return this.readInternal(responseEntity.getContent());
-            }
+            return statusCode == 204 || responseEntity == null ? null : this.readInternal(responseEntity.getContent());
         } finally {
             consume(responseEntity);
             httpResponse.close();
@@ -108,12 +103,7 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
         super.checkHttpResponseStatus(httpResponse.getStatusLine().getStatusCode());
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
-            if(statusCode == 204 || responseEntity == null) {
-                return "";
-            } else {
-                InputStream is = responseEntity.getContent();
-                return CharStreams.toString(new InputStreamReader(is, UTF_8));
-            }
+            return statusCode == 204 || responseEntity == null ? "" : CharStreams.toString(new InputStreamReader(responseEntity.getContent(), UTF_8));
         } finally {
             consume(responseEntity);
             httpResponse.close();
@@ -133,12 +123,7 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
         super.checkHttpResponseStatus(httpResponse.getStatusLine().getStatusCode());
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
-            if(statusCode == 204 || responseEntity == null) {
-                return null;
-            } else {
-                InputStream inputStream = responseEntity.getContent();
-                return new ByteArrayInputStream(IOUtils.toByteArray(inputStream));
-            }
+            return statusCode == 204 || responseEntity == null ? null : new ByteArrayInputStream(IOUtils.toByteArray(responseEntity.getContent()));
         } finally {
             consume(responseEntity);
             httpResponse.close();

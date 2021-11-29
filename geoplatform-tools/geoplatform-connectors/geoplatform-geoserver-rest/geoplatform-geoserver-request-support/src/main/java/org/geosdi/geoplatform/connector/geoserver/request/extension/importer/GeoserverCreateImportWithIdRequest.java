@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.connector.geoserver.request.extension.importer;
 import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.GPFileExpandType;
 import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.body.GPGeoserverCreateImportBody;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
-import org.geosdi.geoplatform.connector.server.response.GPGeoserverNullResponse;
 
 import javax.annotation.Nonnull;
 
@@ -47,7 +46,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeoserverCreateImportWithIdRequest extends GPJsonConnectorRequest<GPGeoserverNullResponse, GeoserverCreateImportWithIdRequest> {
+public interface GeoserverCreateImportWithIdRequest extends GPJsonConnectorRequest<Object, GeoserverCreateImportWithIdRequest> {
 
     /**
      * @param theBody

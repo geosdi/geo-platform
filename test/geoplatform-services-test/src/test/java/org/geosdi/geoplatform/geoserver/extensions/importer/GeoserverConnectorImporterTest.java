@@ -87,7 +87,7 @@ public class GeoserverConnectorImporterTest extends GeoserverConnectorTest {
                         .withId(gpGeoserverCreateImportResponse.getId())
                 .withExec(Boolean.TRUE)
                 .withAsync(Boolean.TRUE)
-                .withBody(gpGeoserverCreateImportBody).getResponseAsStream());
+                .withBody(gpGeoserverCreateImportBody).getResponse());
     }
 
     @Test

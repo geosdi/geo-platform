@@ -49,6 +49,7 @@ import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorR
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
+
 import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;

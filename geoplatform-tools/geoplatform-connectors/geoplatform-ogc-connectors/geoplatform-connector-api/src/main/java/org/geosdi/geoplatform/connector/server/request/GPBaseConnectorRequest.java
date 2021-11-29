@@ -42,6 +42,7 @@ import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.core5.http.HttpEntity;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.IncorrectResponseException;
+import org.geosdi.geoplatform.connector.server.response.GPGeoserverNullResponse;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.JAXBElement;
@@ -79,9 +80,14 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
         HttpUriRequest httpUriRequest = this.prepareHttpMethod();
         CloseableHttpResponse httpResponse = this.securityConnector.secure(this, httpUriRequest);
         super.checkHttpResponseStatus(httpResponse.getCode());
+        int statusCode = httpResponse.getCode();
+        logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
+        super.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
-            if (responseEntity != null) {
+            if(statusCode == 204 && responseEntity == null) {
+                return  (T) new GPGeoserverNullResponse();
+            } else if (responseEntity != null) {
                 return this.readInternal(responseEntity.getContent());
             } else {
                 throw new IncorrectResponseException(CONNECTION_PROBLEM_MESSAGE);
@@ -101,9 +107,14 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
         HttpUriRequest httpUriRequest = this.prepareHttpMethod();
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpUriRequest);
         super.checkHttpResponseStatus(httpResponse.getCode());
+        int statusCode = httpResponse.getCode();
+        logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
+        super.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
-            if (responseEntity != null) {
+            if(statusCode == 204 && responseEntity == null) {
+                return "";
+            } else if (responseEntity != null) {
                 InputStream is = responseEntity.getContent();
                 return CharStreams.toString(new InputStreamReader(is, UTF_8));
             } else {
@@ -124,9 +135,14 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
         HttpUriRequest httpUriRequest = this.prepareHttpMethod();
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpUriRequest);
         super.checkHttpResponseStatus(httpResponse.getCode());
+        int statusCode = httpResponse.getCode();
+        logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
+        super.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
-            if (responseEntity != null) {
+            if(statusCode == 204 && responseEntity == null) {
+                return null;
+            } else if (responseEntity != null) {
                 InputStream inputStream = responseEntity.getContent();
                 return new ByteArrayInputStream(IOUtils.toByteArray(inputStream));
             } else {

@@ -42,6 +42,7 @@ import org.apache.hc.core5.http.HttpEntity;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.IncorrectResponseException;
 import org.geosdi.geoplatform.connector.server.request.GPAbstractConnectorRequest;
+import org.geosdi.geoplatform.connector.server.response.GPGeoserverNullResponse;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -90,12 +91,8 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest, Connector
         this.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try  {
-            if(statusCode == 204 && responseEntity == null) {
-                return this.readInternal(null);
-            } else {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(responseEntity.getContent(), UTF_8_CHARSERT));
-                return this.readInternal(reader);
-            }
+            return statusCode == 204 && responseEntity == null ? (T) new GPGeoserverNullResponse()
+                    : this.readInternal(new BufferedReader(new InputStreamReader(responseEntity.getContent(), UTF_8_CHARSERT)));
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new IncorrectResponseException(ex);

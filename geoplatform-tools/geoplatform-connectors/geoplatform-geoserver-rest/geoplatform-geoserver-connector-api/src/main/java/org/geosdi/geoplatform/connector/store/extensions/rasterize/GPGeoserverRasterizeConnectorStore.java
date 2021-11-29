@@ -32,18 +32,18 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.classify;
+package org.geosdi.geoplatform.connector.store.extensions.rasterize;
 
-import org.geosdi.geoplatform.connector.geoserver.request.extension.classify.GeoserverClassifyRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.rasterize.GeoserverRasterizeRequest;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GPGeoserverClassifyConnectorStore {
+public interface GPGeoserverRasterizeConnectorStore {
 
     /**
-     * @return {@link GeoserverClassifyRequest}
+     * @return {@link GeoserverRasterizeRequest}
      */
-    GeoserverClassifyRequest classifyData();
+    GeoserverRasterizeRequest rasterizeData();
 }

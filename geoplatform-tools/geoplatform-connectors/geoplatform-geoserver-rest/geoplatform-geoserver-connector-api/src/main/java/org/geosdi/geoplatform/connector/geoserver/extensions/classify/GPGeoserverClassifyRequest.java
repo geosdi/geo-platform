@@ -37,10 +37,10 @@ package org.geosdi.geoplatform.connector.geoserver.extensions.classify;
 import io.reactivex.rxjava3.functions.Consumer;
 import net.jcip.annotations.ThreadSafe;
 import org.apache.hc.core5.net.URIBuilder;
-import org.geosdi.geoplatform.connector.geoserver.model.classify.GeoserverMethod;
-import org.geosdi.geoplatform.connector.geoserver.model.rasterize.GeoserverRamp;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.classify.GeoserverMethod;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.rasterize.GeoserverRamp;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.*;
-import org.geosdi.geoplatform.connector.geoserver.request.classify.GeoserverClassifyRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.classify.GeoserverClassifyRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 

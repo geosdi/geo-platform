@@ -35,7 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.store.extensions.importer;
 
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverFileImporterRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverLoadImportRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task.GeoserverLoadTaskRequest;
 import org.geosdi.geoplatform.connector.store.coveragestores.GPGeoserverCoverageStoresConnectorStore;
 
 /**
@@ -45,7 +48,22 @@ import org.geosdi.geoplatform.connector.store.coveragestores.GPGeoserverCoverage
 public interface GPImporterConnectorStore extends GPGeoserverCoverageStoresConnectorStore {
 
     /**
-     * @return {@link GeoserverFileImporterRequest}
+     * @return {@link GeoserverCreateImportRequest}
      */
-    GeoserverFileImporterRequest loadFileImporterRequest();
+    GeoserverCreateImportRequest createImportRequest();
+
+    /**
+     * @return {@link GeoserverLoadImportRequest}
+     */
+    GeoserverLoadImportRequest loadImportRequest();
+
+    /**
+     * @return {@link GeoserverLoadTaskRequest}
+     */
+    GeoserverLoadTaskRequest loadTaskRequest();
+
+    /**
+     * @return {@link GeoserverCreateImportRequest}
+     */
+    GeoserverCreateImportWithIdRequest createImportWithIdRequest();
 }

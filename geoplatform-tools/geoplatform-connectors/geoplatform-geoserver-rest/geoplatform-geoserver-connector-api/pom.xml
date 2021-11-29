@@ -67,7 +67,17 @@
             <version>${project.version}</version>
         </dependency>
 
-      <!-- logging dependencies, delegate all to slf4j and use logback -->
+        <!-- =========================================================== -->
+        <!-- ============== JSON ===================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20210307</version>
+        </dependency>
+
+
+        <!-- logging dependencies, delegate all to slf4j and use logback -->
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>

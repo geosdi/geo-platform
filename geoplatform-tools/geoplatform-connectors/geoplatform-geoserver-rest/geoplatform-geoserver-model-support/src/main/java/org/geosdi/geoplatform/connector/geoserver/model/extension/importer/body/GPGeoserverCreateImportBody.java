@@ -32,37 +32,34 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.extensions.importer;
+package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.body;
 
-import org.geosdi.geoplatform.connector.geoserver.classify.IGPGeoserverClassifyConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverLoadImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task.GeoserverLoadTaskRequest;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface IGPGeoserverImporterConnector extends IGPGeoserverClassifyConnector {
+@Getter
+@Setter
+@XmlRootElement(name = "import")
+@XmlAccessorType(XmlAccessType.FIELD)
+@ToString(callSuper = true)
+@Builder
+public class GPGeoserverCreateImportBody implements IGPGeoserverCreateImportBody{
 
-    /**
-     * @return {@link GeoserverCreateImportRequest}
-     */
-    GeoserverCreateImportRequest createImportRequest();
-
-    /**
-     * @return {@link GeoserverLoadImportRequest}
-     */
-    GeoserverLoadImportRequest loadImportRequest();
-
-    /**
-     * @return {@link GeoserverLoadTaskRequest}
-     */
-    GeoserverLoadTaskRequest loadTaskRequest();
-
-    /**
-     * @return {@link GeoserverCreateImportRequest}
-     */
-    GeoserverCreateImportWithIdRequest createImportWithIdRequest();
+    @XmlElement(name = "targetWorkspace", type = GPGeoserverTargetWorkspaceBody.class)
+    private IGPGeoservertTargetWorkspaceBody targetWorkspace;
+    @XmlElement(name = "targetStore", type = GPGeoserverTargetStoreBody.class)
+    private IGPGeoserverTargetStoreBody targetStore;
+    @XmlElement(name = "data", type = GPGeoserverDataBody.class)
+    private IGPGeoserverDataBody data;
 }

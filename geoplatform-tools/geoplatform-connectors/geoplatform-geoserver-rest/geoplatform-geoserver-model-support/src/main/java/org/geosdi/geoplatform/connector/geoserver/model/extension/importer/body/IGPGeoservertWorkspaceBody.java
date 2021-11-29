@@ -32,43 +32,21 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.extension.importer;
+package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.body;
 
-import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.GPFileExpandType;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import javax.annotation.Nonnull;
-
-import static javax.annotation.meta.When.NEVER;
+import java.io.Serializable;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeoserverFileImporterRequest extends GPJsonConnectorRequest<String, GeoserverFileImporterRequest> {
+@JsonDeserialize(as = GPGeoserverWorkspaceBody.class)
+public interface IGPGeoservertWorkspaceBody extends Serializable {
 
     /**
-     * @param theBody
-     * @return {@link GeoserverFileImporterRequest}
+     * @return {@link String}
      */
-    GeoserverFileImporterRequest withBody(@Nonnull(when = NEVER) String theBody);
-
-    /**
-     * @param theExec
-     * @return {@link GeoserverFileImporterRequest}
-     */
-    GeoserverFileImporterRequest withExec(@Nonnull(when = NEVER) Boolean theExec);
-
-    /**
-     * @param theExpand
-     * @return {@link GeoserverFileImporterRequest}
-     */
-    GeoserverFileImporterRequest withExpand(@Nonnull(when = NEVER) GPFileExpandType theExpand);
-
-
-    /**
-     * @param theAsync
-     * @return {@link GeoserverFileImporterRequest}
-     */
-    GeoserverFileImporterRequest withAsync(@Nonnull(when = NEVER) Boolean theAsync);
+    String getName();
 }

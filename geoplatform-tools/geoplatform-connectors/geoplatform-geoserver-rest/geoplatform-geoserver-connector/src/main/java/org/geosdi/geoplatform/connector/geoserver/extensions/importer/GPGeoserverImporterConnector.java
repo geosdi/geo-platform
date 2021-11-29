@@ -37,7 +37,11 @@ package org.geosdi.geoplatform.connector.geoserver.extensions.importer;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.classify.GPGeoserverClassifyConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverFileImporterRequest;
+import org.geosdi.geoplatform.connector.geoserver.extensions.importer.task.GPGeoserverLoadTaskRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverLoadImportRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task.GeoserverLoadTaskRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -107,14 +111,56 @@ public abstract class GPGeoserverImporterConnector extends GPGeoserverClassifyCo
     }
 
     /**
-     * @return {@link GeoserverFileImporterRequest}
+     * @return {@link GeoserverCreateImportRequest}
      */
     @Override
-    public GeoserverFileImporterRequest importFile() {
+    public GeoserverCreateImportRequest createImportRequest() {
         switch (version) {
             case V220x:
             case V219x:
-                return new GPGeoserverFileImporterRequest(this, this.jacksonSupport);
+                return new GPGeoserverCreateImportRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverLoadImportRequest}
+     */
+    @Override
+    public GeoserverLoadImportRequest loadImportRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverLoadImportRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverLoadTaskRequest}
+     */
+    @Override
+    public GeoserverLoadTaskRequest loadTaskRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverLoadTaskRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverCreateImportRequest}
+     */
+    @Override
+    public GeoserverCreateImportWithIdRequest createImportWithIdRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverCreateImportWithIdRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

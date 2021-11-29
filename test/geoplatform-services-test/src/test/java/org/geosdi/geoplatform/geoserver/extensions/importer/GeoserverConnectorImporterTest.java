@@ -36,18 +36,17 @@ package org.geosdi.geoplatform.geoserver.extensions.importer;
 
 import it.geosolutions.geoserver.rest.manager.GeoServerRESTImporterManager;
 import net.sf.json.JSONObject;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.GPGeoserverCreateImportResponse;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.GPGeoserverLoadImportResponse;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.body.*;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task.IGPTaskImporter;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
-import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
-import java.io.File;
-
-import static java.io.File.separator;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Stream.of;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -63,25 +62,37 @@ public class GeoserverConnectorImporterTest extends GeoserverConnectorTest {
     @Test
    // @Ignore
     public void a_importerFile() throws Exception {
+        GPGeoserverCreateImportBody gpGeoserverCreateImportBody = GPGeoserverCreateImportBody.builder()
+                .targetStore(new GPGeoserverTargetStoreBody(new GPGeoserverDataStoreBody("ds_vito")))
+                .targetWorkspace(new GPGeoserverTargetWorkspaceBody(new GPGeoserverWorkspaceBody("ws_vito")))
+                .data(new GPGeoserverDataBody("file", "/home/geosdi/layer_importer1.kml")).build();
 
-        File file = new File(of("src", "test", "resources", "topp-tasmania_cities_importer.kml").collect(joining(separator)));
-        logger.info("############FILE: {}\n", file.getAbsolutePath() );
-        Assert.assertTrue("#################FILE_EXSIST", file.exists());
+        GPGeoserverCreateImportResponse gpGeoserverCreateImportResponse = this.geoserverConnectorStore.createImportRequest()
+                .withBody(gpGeoserverCreateImportBody).getResponse();
+        logger.info("###############CREATE TASK RESPONSE:{}\n", gpGeoserverCreateImportResponse);
 
-//        String jsonData = "{" +
-//                " \"targetWorkspace\": {\n" +
-//                " \"workspace\": {\n" +
-//                " \"name\": \" sf \"\n" +
-//                " }\n" +
-//                " },\n" +
-//                " \"data\": {\n" +
-//                " \"type\": \"file\",\n" +
-//                " \"format\": \"KML\", \n" +
-//                " \"file\": \"" + file.getAbsolutePath() + "\"\n" +
-//                " }\n" +
-//                " }\n" +
-//                "}";
+        GPGeoserverLoadImportResponse gpGeoserverLoadImportResponse = this.geoserverConnectorStore.loadImportRequest()
+                .withId(gpGeoserverCreateImportResponse.getId()).getResponse();
 
+        logger.info("################LOAD TASK : {}\n", gpGeoserverLoadImportResponse);
+
+        IGPTaskImporter createTaskImporter = gpGeoserverLoadImportResponse.getTasks().get(0);
+        logger.info("################LOAD TASK : {}\n", this.geoserverConnectorStore.loadTaskRequest()
+                .withImportId(gpGeoserverCreateImportResponse.getId())
+                .withTaskId(createTaskImporter.getId()).getResponse());
+
+        //Thread.sleep(1000);
+
+        logger.info("##############{}\n",this.geoserverConnectorStore.createImportWithIdRequest()
+                        .withId(gpGeoserverCreateImportResponse.getId())
+                .withExec(Boolean.TRUE)
+                .withAsync(Boolean.TRUE)
+                .withBody(gpGeoserverCreateImportBody).getResponseAsStream());
+    }
+
+    @Test
+    @Ignore
+    public void b_importFile() throws Exception {
         String jsonData = "{\n" +
                 " \"import\": {\n" +
                 " \"targetWorkspace\": {\n" +
@@ -100,19 +111,18 @@ public class GeoserverConnectorImporterTest extends GeoserverConnectorTest {
                 " }\n" +
                 " }\n" +
                 "}";
-    logger.info("#########JSON_DATA: {}\n", jsonData);
+         int i = this.geoServerRestImporterManager.postNewImport(jsonData);
+                logger.info("###############i:{}\n", i);
+                JSONObject importObject = this.geoServerRestImporterManager.getImport(i);
+                logger.info("###############RESPONSE:{}\n", importObject);
 
-        int i = this.geoServerRestImporterManager.postNewImport(jsonData);
-        logger.info("###############i:{}\n", i);
-        JSONObject importObject = this.geoServerRestImporterManager.getImport(i);
-        logger.info("###############RESPONSE:{}\n", importObject);
-
-        JSONObject tasks = importObject.getJSONArray("tasks").getJSONObject(0);
-        logger.info("#################{}\n", tasks);
-        int t = tasks.getInt("id");
-        logger.info("############t:{}\n", t);
-        JSONObject layer = this.geoServerRestImporterManager.getLayer(i, t);
-        logger.info("#####################LAYER: {}\n\n\n", layer);
-        geoServerRestImporterManager.postImport(i);
+                JSONObject tasks = importObject.getJSONArray("tasks").getJSONObject(0);
+                logger.info("#################{}\n", tasks);
+                int t = tasks.getInt("id");
+                logger.info("############t:{}\n", t);
+                JSONObject layer = this.geoServerRestImporterManager.getLayer(i, t);
+                logger.info("#####################LAYER: {}\n\n\n", layer);
+                Thread.sleep(1000);
+         geoServerRestImporterManager.postImport(i);
     }
 }

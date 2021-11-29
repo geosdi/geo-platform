@@ -35,8 +35,11 @@
 package org.geosdi.geoplatform.connector.geoserver.model.workspace;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
 /**
@@ -44,7 +47,9 @@ import javax.xml.bind.annotation.XmlElement;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Getter
+@Setter
 @ToString
+@XmlAccessorType(XmlAccessType.FIELD)
 public class GPGeoserverBaseWorkspace implements IGPGeoserverBaseWorkspace {
 
     private static final long serialVersionUID = -3566132290604598424L;

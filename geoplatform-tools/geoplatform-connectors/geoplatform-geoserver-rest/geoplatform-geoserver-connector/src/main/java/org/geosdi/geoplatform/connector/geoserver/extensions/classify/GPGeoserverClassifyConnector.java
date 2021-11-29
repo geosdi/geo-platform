@@ -37,7 +37,8 @@ package org.geosdi.geoplatform.connector.geoserver.extensions.classify;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.extensions.rasterize.GPGeoserverRasterizeConnector;
-import org.geosdi.geoplatform.connector.geoserver.extensions.rasterize.GPGeoserverRasterizeRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.classify.GeoserverClassifyRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.rasterize.GeoserverRasterizeRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -108,10 +109,10 @@ public abstract class GPGeoserverClassifyConnector extends GPGeoserverRasterizeC
     }
 
     /**
-     * @return {@link GPGeoserverRasterizeRequest}
+     * @return {@link GeoserverRasterizeRequest}
      */
     @Override
-    public GPGeoserverClassifyRequest classifyData() {
+    public GeoserverClassifyRequest classifyData() {
         switch (version) {
             case V220x:
             case V219x:

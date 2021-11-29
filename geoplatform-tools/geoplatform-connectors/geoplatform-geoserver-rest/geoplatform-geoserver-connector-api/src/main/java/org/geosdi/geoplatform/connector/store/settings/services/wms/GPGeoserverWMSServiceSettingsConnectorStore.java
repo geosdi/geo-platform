@@ -34,9 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.store.settings.services.wms;
 
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wms.GeoserverLoadWMSServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wms.GeoserverLoadWMSWorkspaceServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wms.GeoserverUpdateWMSServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wms.*;
 import org.geosdi.geoplatform.connector.store.settings.services.wfs.GPGeoserverWFSServiceSettingsConnectorStore;
 
 /**
@@ -59,4 +57,14 @@ public interface GPGeoserverWMSServiceSettingsConnectorStore extends GPGeoserver
      * @return {@link GeoserverUpdateWMSServiceSettingsRequest}
      */
     GeoserverUpdateWMSServiceSettingsRequest updateWMSServiceSettingsRequest();
+
+    /**
+     * @return {@link GeoserverUpdateWMSWorkspaceSettingsRequest}
+     */
+    GeoserverUpdateWMSWorkspaceSettingsRequest updateWMSWorkspaceServiceSettingsRequest();
+
+    /**
+     * @return {@link GeoserverDeleteWMSWorkspaceServiceSettingRequest}
+     */
+    GeoserverDeleteWMSWorkspaceServiceSettingRequest deleteWMSWorkspaceServiceSettingsRequest();
 }

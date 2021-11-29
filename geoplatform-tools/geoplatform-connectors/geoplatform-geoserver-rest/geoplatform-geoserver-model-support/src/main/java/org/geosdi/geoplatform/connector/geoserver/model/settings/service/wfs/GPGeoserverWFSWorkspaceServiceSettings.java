@@ -35,6 +35,7 @@
 package org.geosdi.geoplatform.connector.geoserver.model.settings.service.wfs;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverBaseWorkspace;
 
@@ -47,6 +48,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Getter
+@Setter
 @ToString(callSuper = true)
 @XmlRootElement(name = "wfs")
 @XmlAccessorType(XmlAccessType.FIELD)

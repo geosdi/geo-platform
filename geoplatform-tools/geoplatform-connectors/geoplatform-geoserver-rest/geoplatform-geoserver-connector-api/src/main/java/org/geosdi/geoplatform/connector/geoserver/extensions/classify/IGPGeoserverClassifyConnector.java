@@ -35,6 +35,7 @@
 package org.geosdi.geoplatform.connector.geoserver.extensions.classify;
 
 import org.geosdi.geoplatform.connector.geoserver.extensions.rasterize.IGPGeoserverRasterizeConnector;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.classify.GeoserverClassifyRequest;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -43,7 +44,7 @@ import org.geosdi.geoplatform.connector.geoserver.extensions.rasterize.IGPGeoser
 public interface IGPGeoserverClassifyConnector extends IGPGeoserverRasterizeConnector {
 
     /**
-     * @return {@link GPGeoserverClassifyRequest}
+     * @return {@link GeoserverClassifyRequest}
      */
-    GPGeoserverClassifyRequest classifyData();
+    GeoserverClassifyRequest classifyData();
 }

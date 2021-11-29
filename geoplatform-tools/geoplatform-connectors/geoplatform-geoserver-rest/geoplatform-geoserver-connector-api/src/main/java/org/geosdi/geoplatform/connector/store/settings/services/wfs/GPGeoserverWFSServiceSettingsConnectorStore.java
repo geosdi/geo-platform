@@ -34,8 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.store.settings.services.wfs;
 
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wfs.GeoserverLoadWFSServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wfs.GeoserverLoadWFSWorkspaceServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wfs.*;
 import org.geosdi.geoplatform.connector.store.settings.services.wcs.GPGeoserverWCSServiceSettingsConnectorStore;
 
 /**
@@ -53,4 +52,19 @@ public interface GPGeoserverWFSServiceSettingsConnectorStore extends GPGeoserver
      * @return {@link GeoserverLoadWFSWorkspaceServiceSettingsRequest}
      */
     GeoserverLoadWFSWorkspaceServiceSettingsRequest loadWFSWorkspaceServiceSettingsRequest();
+
+    /**
+     * @return {@link GeoserverUpdateWFSServiceSettingsRequest}
+     */
+    GeoserverUpdateWFSServiceSettingsRequest updateWFSServiceSettingsRequest();
+
+    /**
+     * @return {@link GeoserverUpdateWFSWorkspaceServiceSettingsRequest}
+     */
+    GeoserverUpdateWFSWorkspaceServiceSettingsRequest updateWFSWorkspaceServiceSettingsRequest();
+
+    /**
+     * @return {@link GeoserverDeleteWFSWorkspaceSettingsRequest}
+     */
+    GeoserverDeleteWFSWorkspaceSettingsRequest deleteWFSWorkspaceServiceSettingsRequest();
 }

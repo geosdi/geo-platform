@@ -36,9 +36,7 @@ package org.geosdi.geoplatform.connector.geoserver.settings.services.wms;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wms.GeoserverLoadWMSServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wms.GeoserverLoadWMSWorkspaceServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wms.GeoserverUpdateWMSServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wms.*;
 import org.geosdi.geoplatform.connector.geoserver.settings.services.wfs.GPGeoserverWFSServiceSettingsConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -142,6 +140,34 @@ public abstract class GPGeoserverWMSServiceSettingsConnector extends GPGeoserver
             case V220x:
             case V219x:
                 return new GPGeoserverUpdateWMSServiceSettingsRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverUpdateWMSWorkspaceSettingsRequest}
+     */
+    @Override
+    public GeoserverUpdateWMSWorkspaceSettingsRequest updateWMSWorkspaceServiceSettingsRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverUpdateWMSWorkspaceSettingsRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverDeleteWMSWorkspaceServiceSettingRequest}
+     */
+    @Override
+    public GeoserverDeleteWMSWorkspaceServiceSettingRequest deleteWMSWorkspaceServiceSettingsRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverDeleteWMSWorkspaceServiceSettingRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

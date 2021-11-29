@@ -38,8 +38,6 @@ package org.geosdi.geoplatform.connector.geoserver.request.extension.rasterize;
 import org.geosdi.geoplatform.connector.geoserver.model.extension.rasterize.GeoserverRamp;
 import org.geosdi.geoplatform.connector.geoserver.model.extension.rasterize.GeoserverRasterizeType;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
-import org.geosdi.geoplatform.support.jackson.xml.jaxb.GPJacksonJAXBXmlSupport;
-import org.geosdi.geoplatform.support.jackson.xml.jaxb.JacksonJAXBXmlSupport;
 import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
 
 import javax.annotation.Nonnull;
@@ -50,8 +48,6 @@ import javax.annotation.meta.When;
  * @email vito.salvia@gmail.com
  */
 public interface GeoserverRasterizeRequest extends GPJsonConnectorRequest<StyledLayerDescriptor, GeoserverRasterizeRequest> {
-
-    JacksonJAXBXmlSupport JACKSON_JAXB_XML_SUPPORT = new GPJacksonJAXBXmlSupport();
 
     /**
      *

@@ -34,7 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.store.classify;
 
-import org.geosdi.geoplatform.connector.geoserver.extensions.classify.GPGeoserverClassifyRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.classify.GeoserverClassifyRequest;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -43,7 +43,7 @@ import org.geosdi.geoplatform.connector.geoserver.extensions.classify.GPGeoserve
 public interface GPGeoserverClassifyConnectorStore {
 
     /**
-     * @return {@link GPGeoserverClassifyRequest}
+     * @return {@link GeoserverClassifyRequest}
      */
-    GPGeoserverClassifyRequest classifyData();
+    GeoserverClassifyRequest classifyData();
 }

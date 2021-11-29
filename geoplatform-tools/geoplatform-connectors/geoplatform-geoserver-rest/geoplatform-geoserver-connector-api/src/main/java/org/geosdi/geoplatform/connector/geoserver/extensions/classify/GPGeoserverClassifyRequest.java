@@ -51,13 +51,14 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Observable.fromArray;
 import static java.lang.Boolean.FALSE;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, GeoserverClassifyRequest> implements GeoserverClassifyRequest {
+class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, GeoserverClassifyRequest> implements GeoserverClassifyRequest {
 
     private final ThreadLocal<String> vectorName;
     private final ThreadLocal<GPGeoserverStringQueryParam> attribute;

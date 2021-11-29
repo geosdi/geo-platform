@@ -61,7 +61,7 @@ import static org.apache.http.entity.ContentType.APPLICATION_JSON;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverUpdateLayerRequest extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateLayerRequest> implements GeoserverUpdateLayerRequest {
+class GPGeoserverUpdateLayerRequest extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateLayerRequest> implements GeoserverUpdateLayerRequest {
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> layerName;

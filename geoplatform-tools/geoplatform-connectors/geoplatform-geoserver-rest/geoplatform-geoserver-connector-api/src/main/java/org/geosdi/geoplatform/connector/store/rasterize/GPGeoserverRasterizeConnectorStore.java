@@ -34,7 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.store.rasterize;
 
-import org.geosdi.geoplatform.connector.geoserver.extensions.rasterize.GPGeoserverRasterizeRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.rasterize.GeoserverRasterizeRequest;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -43,7 +43,7 @@ import org.geosdi.geoplatform.connector.geoserver.extensions.rasterize.GPGeoserv
 public interface GPGeoserverRasterizeConnectorStore {
 
     /**
-     * @return {@link GPGeoserverRasterizeRequest}
+     * @return {@link GeoserverRasterizeRequest}
      */
-    GPGeoserverRasterizeRequest rasterizeData();
+    GeoserverRasterizeRequest rasterizeData();
 }

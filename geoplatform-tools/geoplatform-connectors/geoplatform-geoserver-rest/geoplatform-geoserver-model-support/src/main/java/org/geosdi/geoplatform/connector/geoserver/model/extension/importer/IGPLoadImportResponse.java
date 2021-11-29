@@ -32,37 +32,57 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.extensions.importer;
+package org.geosdi.geoplatform.connector.geoserver.model.extension.importer;
 
-import org.geosdi.geoplatform.connector.geoserver.classify.IGPGeoserverClassifyConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverLoadImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task.GeoserverLoadTaskRequest;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetstore.IGPTargetStoreImporter;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetworkspace.IGPTargetWorkspaceImporter;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task.IGPTaskImporter;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface IGPGeoserverImporterConnector extends IGPGeoserverClassifyConnector {
+@JsonRootName(value = "import")
+@JsonDeserialize(as = GPGeoserverLoadImportResponse.class)
+public interface IGPLoadImportResponse extends Serializable {
 
     /**
-     * @return {@link GeoserverCreateImportRequest}
+     * @return {@link Long}
      */
-    GeoserverCreateImportRequest createImportRequest();
+    Integer getId();
 
     /**
-     * @return {@link GeoserverLoadImportRequest}
+     * @return {@link String}
      */
-    GeoserverLoadImportRequest loadImportRequest();
+    String getHref();
 
     /**
-     * @return {@link GeoserverLoadTaskRequest}
+     * @return {@link GeoserverStateImport}
      */
-    GeoserverLoadTaskRequest loadTaskRequest();
+    GeoserverStateImport getState();
 
     /**
-     * @return {@link GeoserverCreateImportRequest}
+     * @return {@link Boolean}
      */
-    GeoserverCreateImportWithIdRequest createImportWithIdRequest();
+    Boolean getArchive();
+
+    /**
+     * @return {@link IGPTargetWorkspaceImporter}
+     */
+    IGPTargetWorkspaceImporter getTargetWorkspace();
+
+    /**
+     * @return {@link IGPTargetStoreImporter}
+     */
+    IGPTargetStoreImporter getTargetStore();
+
+    /**
+     * @return {@link List< IGPTaskImporter >}
+     */
+    List<IGPTaskImporter> getTasks();
 }

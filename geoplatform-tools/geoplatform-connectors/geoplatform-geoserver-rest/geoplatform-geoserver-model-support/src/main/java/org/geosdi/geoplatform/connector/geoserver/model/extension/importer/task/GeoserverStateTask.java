@@ -32,37 +32,13 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.extensions.importer;
-
-import org.geosdi.geoplatform.connector.geoserver.classify.IGPGeoserverClassifyConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverLoadImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task.GeoserverLoadTaskRequest;
+package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface IGPGeoserverImporterConnector extends IGPGeoserverClassifyConnector {
+public enum GeoserverStateTask {
 
-    /**
-     * @return {@link GeoserverCreateImportRequest}
-     */
-    GeoserverCreateImportRequest createImportRequest();
-
-    /**
-     * @return {@link GeoserverLoadImportRequest}
-     */
-    GeoserverLoadImportRequest loadImportRequest();
-
-    /**
-     * @return {@link GeoserverLoadTaskRequest}
-     */
-    GeoserverLoadTaskRequest loadTaskRequest();
-
-    /**
-     * @return {@link GeoserverCreateImportRequest}
-     */
-    GeoserverCreateImportWithIdRequest createImportWithIdRequest();
+    PENDING, READY, RUNNING, NO_CRS, NO_BOUNDS, NO_FORMAT, BAD_FORMAT, ERROR, CANCELED, COMPLETE;
 }

@@ -32,37 +32,26 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.extensions.importer;
+package org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task;
 
-import org.geosdi.geoplatform.connector.geoserver.classify.IGPGeoserverClassifyConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverLoadImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task.GeoserverLoadTaskRequest;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task.GPLoadTaskResponse;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface IGPGeoserverImporterConnector extends IGPGeoserverClassifyConnector {
+public interface GeoserverLoadTaskRequest extends GPJsonConnectorRequest<GPLoadTaskResponse, GeoserverLoadTaskRequest> {
 
     /**
-     * @return {@link GeoserverCreateImportRequest}
-     */
-    GeoserverCreateImportRequest createImportRequest();
-
-    /**
-     * @return {@link GeoserverLoadImportRequest}
-     */
-    GeoserverLoadImportRequest loadImportRequest();
-
-    /**
+     * @param theImportId
      * @return {@link GeoserverLoadTaskRequest}
      */
-    GeoserverLoadTaskRequest loadTaskRequest();
+    GeoserverLoadTaskRequest withImportId(Integer theImportId);
 
     /**
-     * @return {@link GeoserverCreateImportRequest}
+     * @param theTaskId
+     * @return {@link GeoserverLoadTaskRequest}
      */
-    GeoserverCreateImportWithIdRequest createImportWithIdRequest();
+    GeoserverLoadTaskRequest withTaskId(Integer theTaskId);
 }

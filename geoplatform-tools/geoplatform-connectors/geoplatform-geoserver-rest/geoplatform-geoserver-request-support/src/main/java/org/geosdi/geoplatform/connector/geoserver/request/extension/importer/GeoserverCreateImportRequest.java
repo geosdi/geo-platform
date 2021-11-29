@@ -32,37 +32,45 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.extensions.importer;
+package org.geosdi.geoplatform.connector.geoserver.request.extension.importer;
 
-import org.geosdi.geoplatform.connector.geoserver.classify.IGPGeoserverClassifyConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverLoadImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task.GeoserverLoadTaskRequest;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.GPFileExpandType;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.GPGeoserverCreateImportResponse;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.body.GPGeoserverCreateImportBody;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface IGPGeoserverImporterConnector extends IGPGeoserverClassifyConnector {
+public interface GeoserverCreateImportRequest extends GPJsonConnectorRequest<GPGeoserverCreateImportResponse, GeoserverCreateImportRequest> {
 
     /**
+     * @param theBody
      * @return {@link GeoserverCreateImportRequest}
      */
-    GeoserverCreateImportRequest createImportRequest();
+    GeoserverCreateImportRequest withBody(@Nonnull(when = NEVER) GPGeoserverCreateImportBody theBody);
 
     /**
-     * @return {@link GeoserverLoadImportRequest}
-     */
-    GeoserverLoadImportRequest loadImportRequest();
-
-    /**
-     * @return {@link GeoserverLoadTaskRequest}
-     */
-    GeoserverLoadTaskRequest loadTaskRequest();
-
-    /**
+     * @param theExec
      * @return {@link GeoserverCreateImportRequest}
      */
-    GeoserverCreateImportWithIdRequest createImportWithIdRequest();
+    GeoserverCreateImportRequest withExec(@Nonnull(when = NEVER) Boolean theExec);
+
+    /**
+     * @param theExpand
+     * @return {@link GeoserverCreateImportRequest}
+     */
+    GeoserverCreateImportRequest withExpand(@Nonnull(when = NEVER) GPFileExpandType theExpand);
+
+
+    /**
+     * @param theAsync
+     * @return {@link GeoserverCreateImportRequest}
+     */
+    GeoserverCreateImportRequest withAsync(@Nonnull(when = NEVER) Boolean theAsync);
 }

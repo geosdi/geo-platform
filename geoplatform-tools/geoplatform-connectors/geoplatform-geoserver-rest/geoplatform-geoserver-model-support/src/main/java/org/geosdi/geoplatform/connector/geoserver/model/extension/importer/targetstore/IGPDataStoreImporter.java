@@ -32,37 +32,27 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.extensions.importer;
+package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetstore;
 
-import org.geosdi.geoplatform.connector.geoserver.classify.IGPGeoserverClassifyConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverLoadImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task.GeoserverLoadTaskRequest;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetworkspace.IGPWorkspaceImporter;
+
+import java.io.Serializable;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface IGPGeoserverImporterConnector extends IGPGeoserverClassifyConnector {
+@JsonDeserialize(as = GPGeoserverDataStoreImporter.class)
+public interface IGPDataStoreImporter extends Serializable {
 
     /**
-     * @return {@link GeoserverCreateImportRequest}
+     * @return {@link IGPWorkspaceImporter}
      */
-    GeoserverCreateImportRequest createImportRequest();
+    String getName();
 
     /**
-     * @return {@link GeoserverLoadImportRequest}
+     * @return {@link String}
      */
-    GeoserverLoadImportRequest loadImportRequest();
-
-    /**
-     * @return {@link GeoserverLoadTaskRequest}
-     */
-    GeoserverLoadTaskRequest loadTaskRequest();
-
-    /**
-     * @return {@link GeoserverCreateImportRequest}
-     */
-    GeoserverCreateImportWithIdRequest createImportWithIdRequest();
+    String getType();
 }

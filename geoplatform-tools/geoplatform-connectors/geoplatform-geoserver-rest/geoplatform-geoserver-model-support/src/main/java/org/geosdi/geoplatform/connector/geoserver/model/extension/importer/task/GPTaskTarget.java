@@ -32,37 +32,24 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.extensions.importer;
+package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task;
 
-import org.geosdi.geoplatform.connector.geoserver.classify.IGPGeoserverClassifyConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverLoadImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task.GeoserverLoadTaskRequest;
+import lombok.*;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetstore.IGPDataStoreImporter;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface IGPGeoserverImporterConnector extends IGPGeoserverClassifyConnector {
+@AllArgsConstructor
+@Getter
+@ToString
+@Builder
+@NoArgsConstructor
+public class GPTaskTarget implements IGPTaskTarget{
 
-    /**
-     * @return {@link GeoserverCreateImportRequest}
-     */
-    GeoserverCreateImportRequest createImportRequest();
-
-    /**
-     * @return {@link GeoserverLoadImportRequest}
-     */
-    GeoserverLoadImportRequest loadImportRequest();
-
-    /**
-     * @return {@link GeoserverLoadTaskRequest}
-     */
-    GeoserverLoadTaskRequest loadTaskRequest();
-
-    /**
-     * @return {@link GeoserverCreateImportRequest}
-     */
-    GeoserverCreateImportWithIdRequest createImportWithIdRequest();
+    private static final long serialVersionUID = 6191321266510725935L;
+    //
+    private String href;
+    private IGPDataStoreImporter dataStore;
 }

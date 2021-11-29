@@ -40,9 +40,11 @@ import org.apache.http.HttpEntity;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.GPFileExpandType;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.GPGeoserverCreateImportResponse;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.body.GPGeoserverCreateImportBody;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverBooleanQueryParam;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GeoserverRXQueryParamConsumer;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverFileImporterRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -60,9 +62,9 @@ import static org.apache.http.entity.ContentType.APPLICATION_JSON;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverFileImporterRequest extends GPJsonPostConnectorRequest<String, GeoserverFileImporterRequest> implements GeoserverFileImporterRequest {
+public class GPGeoserverCreateImportRequest extends GPJsonPostConnectorRequest<GPGeoserverCreateImportResponse, GeoserverCreateImportRequest> implements GeoserverCreateImportRequest {
 
-    private final ThreadLocal<String> body;
+    private final ThreadLocal<GPGeoserverCreateImportBody> body;
     private final ThreadLocal<GPGeoserverBooleanQueryParam> async;
     private final ThreadLocal<GPGeoserverBooleanQueryParam> exec;
     private final ThreadLocal<GPFileExpandType> expand;
@@ -71,50 +73,51 @@ public class GPGeoserverFileImporterRequest extends GPJsonPostConnectorRequest<S
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    protected GPGeoserverFileImporterRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    protected GPGeoserverCreateImportRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
-        this.body = withInitial(null);
-        this.async = withInitial(null);
-        this.exec = withInitial(null);
-        this.expand = withInitial(null);
+        this.body = withInitial(() -> null);
+        this.async = withInitial(() -> null);
+        this.exec = withInitial(() -> null);
+        this.expand = withInitial(() -> null);
     }
 
     /**
      * @param theBody
+     * @return {@link GeoserverCreateImportRequest}
      */
     @Override
-    public GeoserverFileImporterRequest withBody(@Nonnull(when = NEVER) String theBody) {
+    public GeoserverCreateImportRequest withBody(@Nonnull(when = NEVER) GPGeoserverCreateImportBody theBody) {
         this.body.set(theBody);
         return this;
     }
 
     /**
      * @param theExec
-     * @return {@link GeoserverFileImporterRequest}
+     * @return {@link GeoserverCreateImportRequest}
      */
     @Override
-    public GeoserverFileImporterRequest withExec(@Nonnull(when = NEVER) Boolean theExec) {
+    public GeoserverCreateImportRequest withExec(@Nonnull(when = NEVER) Boolean theExec) {
         this.exec.set(new GPGeoserverBooleanQueryParam("exec", theExec));
         return this;
     }
 
     /**
      * @param theExpand
-     * @return {@link GeoserverFileImporterRequest}
+     * @return {@link GeoserverCreateImportRequest}
      */
     @Override
-    public GeoserverFileImporterRequest withExpand(@Nonnull(when = NEVER) GPFileExpandType theExpand) {
+    public GeoserverCreateImportRequest withExpand(@Nonnull(when = NEVER) GPFileExpandType theExpand) {
         this.expand.set(theExpand);
         return this;
     }
 
     /**
      * @param theAsync
-     * @return {@link GeoserverFileImporterRequest}
+     * @return {@link GeoserverCreateImportRequest}
      */
     @Override
-    public GeoserverFileImporterRequest withAsync(@Nonnull(when = NEVER) Boolean theAsync) {
-        this.exec.set(new GPGeoserverBooleanQueryParam("async", theAsync));
+    public GeoserverCreateImportRequest withAsync(@Nonnull(when = NEVER) Boolean theAsync) {
+        this.async.set(new GPGeoserverBooleanQueryParam("async", theAsync));
         return this;
     }
 
@@ -138,8 +141,8 @@ public class GPGeoserverFileImporterRequest extends GPJsonPostConnectorRequest<S
      * @return {@link Class<String>}
      */
     @Override
-    protected Class<String> forClass() {
-        return String.class;
+    protected Class<GPGeoserverCreateImportResponse> forClass() {
+        return GPGeoserverCreateImportResponse.class;
     }
 
     /**
@@ -147,7 +150,7 @@ public class GPGeoserverFileImporterRequest extends GPJsonPostConnectorRequest<S
      */
     @Override
     protected HttpEntity prepareHttpEntity() throws Exception {
-        String body = this.body.get();
+        GPGeoserverCreateImportBody body = this.body.get();
         checkArgument(body != null, "The importerBody must not be null.");
         String workspaceBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(body);
         logger.debug("#############################IMPORTER_BODY : \n{}\n", workspaceBodyString);

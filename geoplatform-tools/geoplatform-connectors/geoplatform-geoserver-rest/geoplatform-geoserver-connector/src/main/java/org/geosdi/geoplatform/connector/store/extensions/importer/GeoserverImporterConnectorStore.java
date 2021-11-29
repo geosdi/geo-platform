@@ -36,7 +36,10 @@ package org.geosdi.geoplatform.connector.store.extensions.importer;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
 import org.geosdi.geoplatform.connector.geoserver.rasterize.GPGeoserverRasterizeRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverFileImporterRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverLoadImportRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task.GeoserverLoadTaskRequest;
 import org.geosdi.geoplatform.connector.store.classify.GoeserverClassifyConnectorStore;
 
 /**
@@ -55,7 +58,31 @@ public abstract class GeoserverImporterConnectorStore extends GoeserverClassifyC
      * @return {@link GPGeoserverRasterizeRequest}
      */
     @Override
-    public GeoserverFileImporterRequest loadFileImporterRequest() {
-        return this.server.importFile();
+    public GeoserverCreateImportRequest createImportRequest() {
+        return this.server.createImportRequest();
+    }
+
+    /**
+     * @return {@link GeoserverLoadImportRequest}
+     */
+    @Override
+    public GeoserverLoadImportRequest loadImportRequest() {
+        return this.server.loadImportRequest();
+    }
+
+    /**
+     * @return {@link GeoserverLoadTaskRequest}
+     */
+    @Override
+    public GeoserverLoadTaskRequest loadTaskRequest() {
+        return this.server.loadTaskRequest();
+    }
+
+    /**
+     * @return {@link GeoserverCreateImportRequest}
+     */
+    @Override
+    public GeoserverCreateImportWithIdRequest createImportWithIdRequest() {
+        return this.server.createImportWithIdRequest();
     }
 }

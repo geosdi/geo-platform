@@ -4,7 +4,7 @@ package org.geosdi.geoplatform.connector.geoserver.model.extension.importer;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public enum GPGeoserverExpandFileImporter implements GPFileExpandType<String>  {
+public enum GeoserverExpandFileImporter implements GPFileExpandType<String>  {
 
     SELF,
     ALL,

@@ -38,7 +38,8 @@ import org.geosdi.geoplatform.connector.geoserver.model.settings.service.Geoserv
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -50,5 +51,5 @@ public interface GeoserverUpdateServiceSettingsRequest<Body extends GeoserverSer
      * @param theBody
      * @return {@link R}
      */
-    R withBody(@Nonnull(when = When.NEVER) Body theBody);
+    R withBody(@Nonnull(when = NEVER) Body theBody);
 }

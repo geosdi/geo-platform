@@ -46,4 +46,9 @@ public interface IGPGeoserverBaseWorkspace extends Serializable {
      * @return {@link String}
      */
     String getWorkspaceName();
+
+    /**
+     * @param theWorkspaceName
+     */
+    void setWorkspaceName(String theWorkspaceName);
 }

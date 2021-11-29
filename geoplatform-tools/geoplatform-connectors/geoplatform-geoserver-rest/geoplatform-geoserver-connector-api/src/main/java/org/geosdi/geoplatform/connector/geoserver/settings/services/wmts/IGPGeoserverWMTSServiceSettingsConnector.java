@@ -34,8 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.settings.services.wmts;
 
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.GeoserverLoadWMTSServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.GeoserverLoadWMTSWorkspaceServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wmts.*;
 import org.geosdi.geoplatform.connector.geoserver.security.IGPGeoserverSecurityConnector;
 
 /**
@@ -53,4 +52,19 @@ public interface IGPGeoserverWMTSServiceSettingsConnector extends IGPGeoserverSe
      * @return {@link GeoserverLoadWMTSWorkspaceServiceSettingsRequest}
      */
     GeoserverLoadWMTSWorkspaceServiceSettingsRequest loadWMTSWorkspaceServiceSettingsRequest();
+
+    /**
+     * @return {@link GeoserverUpdateWMTSServiceSettingsRequest}
+     */
+    GeoserverUpdateWMTSServiceSettingsRequest updateWMTSServiceSettingsRequest();
+
+    /**
+     * @return {@link GeoserverUpdateWMTSWorkspaceServiceSettingsRequest}
+     */
+    GeoserverUpdateWMTSWorkspaceServiceSettingsRequest updateWMTSWorkspaceServiceSettingsRequest();
+
+    /**
+     * @return {@link GeoserverDeleteWMTSWorkspaceServiceSettingsRequest}
+     */
+    GeoserverDeleteWMTSWorkspaceServiceSettingsRequest deleteWMTSWorkspaceServiceSettingsRequest();
 }

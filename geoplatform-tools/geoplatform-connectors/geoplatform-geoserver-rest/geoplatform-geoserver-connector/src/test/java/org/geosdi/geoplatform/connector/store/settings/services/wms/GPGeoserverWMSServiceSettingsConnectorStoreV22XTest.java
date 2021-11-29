@@ -35,21 +35,24 @@
 package org.geosdi.geoplatform.connector.store.settings.services.wms;
 
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wms.GPGeoserverWMSServiceSettings;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wms.GPGeoserverWMSWorkspaceServiceSettings;
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wms.GeoserverWMSServiceSettings;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wms.GeoserverLoadWMSServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wms.GeoserverLoadWMSWorkspaceServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wms.GeoserverUpdateWMSServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wms.*;
 import org.geosdi.geoplatform.connector.jackson.GPGeoserverWMSServiceSettingsJacksonTest;
 import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV22xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.io.File.separator;
+import static java.lang.Thread.currentThread;
 import static java.util.stream.Stream.of;
-import static org.geosdi.geoplatform.connector.geoserver.request.classify.GeoserverClassifyRequest.JACKSON_JAXB_XML_SUPPORT;
+import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
 import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -92,5 +95,34 @@ public class GPGeoserverWMSServiceSettingsConnectorStoreV22XTest extends GPBaseG
                         .collect(Collectors.joining(separator, "", ".xml"))), GPGeoserverWMSServiceSettings.class);
         logger.info("###################WMS_UPDATE_SERVICE_SETTINGS_RESPONSE : {}\n", geoserverConnectorStoreV2_20_x.updateWMSServiceSettingsRequest()
                 .withBody(wmsServiceSettings).getResponse());
+    }
+
+    @Test
+    public void e_updateWMSWorkspaceServiceSettingsRequestTest() throws Exception {
+        try (InputStream wmsWorkspaceServiceSettingsStream = currentThread().getContextClassLoader().getResourceAsStream("WMSWorkspaceServiceSettings.xml")) {
+            checkArgument(wmsWorkspaceServiceSettingsStream != null, "The Parameter wmsWorkspaceServiceSettingsStream must not be null.");
+            GPGeoserverWMSWorkspaceServiceSettings wmsWorkspaceServiceSettings = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper()
+                    .readValue(new InputStreamReader(wmsWorkspaceServiceSettingsStream), GPGeoserverWMSWorkspaceServiceSettings.class);
+            wmsWorkspaceServiceSettings.getWorkspace().setWorkspaceName("nurc");
+            wmsWorkspaceServiceSettings.setMaintainer("Giuseppe La Scaleia");
+            wmsWorkspaceServiceSettings.setAbstrct("This is a simple Test.");
+            GeoserverUpdateWMSWorkspaceSettingsRequest updateWMSWorkspaceSettingsRequest = geoserverConnectorStoreV2_20_x.updateWMSWorkspaceServiceSettingsRequest();
+            logger.info("@@@@@@@@@@@@@@@@@WMS_UPDATE_WORKSPACE_SERVICE_SETTINGS_RESPONSE : {}\n", updateWMSWorkspaceSettingsRequest
+                    .withWorkspace("nurc").withBody(wmsWorkspaceServiceSettings).getResponse());
+        }
+    }
+
+    @Test
+    public void f_loadWMSWorkspaceServiceSettingsRequestTest() throws Exception {
+        GeoserverLoadWMSWorkspaceServiceSettingsRequest wmsWorkspaceServiceSettingsRequest = geoserverConnectorStoreV2_20_x.loadWMSWorkspaceServiceSettingsRequest();
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_WMS_WORKSPACE_SETTINGS_RESPONSE : {}\n", wmsWorkspaceServiceSettingsRequest
+                .withWorkspace("nurc").getResponse());
+    }
+
+    @Test
+    public void g_deleteWMSWorkspaceServiceSettingsRequestTest() throws Exception {
+        GeoserverDeleteWMSWorkspaceServiceSettingRequest deleteWMSWorkspaceServiceSettingRequest = geoserverConnectorStoreV2_20_x.deleteWMSWorkspaceServiceSettingsRequest();
+        logger.info("########################WMS_DELETE_WORKSPACE_SERVICE_SETTINGS : {}\n", deleteWMSWorkspaceServiceSettingRequest
+                .withWorkspace("nurc").getResponse());
     }
 }

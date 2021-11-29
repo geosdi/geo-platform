@@ -36,8 +36,7 @@ package org.geosdi.geoplatform.connector.geoserver.settings.services.wfs;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wfs.GeoserverLoadWFSServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wfs.GeoserverLoadWFSWorkspaceServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wfs.*;
 import org.geosdi.geoplatform.connector.geoserver.settings.services.wcs.GPGeoserverWCSServiceSettingsConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -127,6 +126,48 @@ public abstract class GPGeoserverWFSServiceSettingsConnector extends GPGeoserver
             case V220x:
             case V219x:
                 return new GPGeoserverLoadWFSWorkspaceServiceSettingsRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverUpdateWFSServiceSettingsRequest}
+     */
+    @Override
+    public GeoserverUpdateWFSServiceSettingsRequest updateWFSServiceSettingsRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverUpdateWFSServiceSettingsRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverUpdateWFSWorkspaceServiceSettingsRequest}
+     */
+    @Override
+    public GeoserverUpdateWFSWorkspaceServiceSettingsRequest updateWFSWorkspaceServiceSettingsRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverUpdateWFSWorkspaceServiceSettingsRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverDeleteWFSWorkspaceSettingsRequest}
+     */
+    @Override
+    public GeoserverDeleteWFSWorkspaceSettingsRequest deleteWFSWorkspaceServiceSettingsRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverDeleteWFSWorkspaceSettingsRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

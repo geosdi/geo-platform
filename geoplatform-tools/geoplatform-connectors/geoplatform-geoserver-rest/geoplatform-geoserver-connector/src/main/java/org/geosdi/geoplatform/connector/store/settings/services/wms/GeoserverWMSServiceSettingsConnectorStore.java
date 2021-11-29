@@ -35,9 +35,7 @@
 package org.geosdi.geoplatform.connector.store.settings.services.wms;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wms.GeoserverLoadWMSServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wms.GeoserverLoadWMSWorkspaceServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wms.GeoserverUpdateWMSServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wms.*;
 import org.geosdi.geoplatform.connector.store.settings.services.wfs.GeoserverWFSServiceSettingsConnectorStore;
 
 /**
@@ -75,5 +73,21 @@ public abstract class GeoserverWMSServiceSettingsConnectorStore extends Geoserve
     @Override
     public GeoserverUpdateWMSServiceSettingsRequest updateWMSServiceSettingsRequest() {
         return this.server.updateWMSServiceSettingsRequest();
+    }
+
+    /**
+     * @return {@link GeoserverUpdateWMSWorkspaceSettingsRequest}
+     */
+    @Override
+    public GeoserverUpdateWMSWorkspaceSettingsRequest updateWMSWorkspaceServiceSettingsRequest() {
+        return this.server.updateWMSWorkspaceServiceSettingsRequest();
+    }
+
+    /**
+     * @return {@link GeoserverDeleteWMSWorkspaceServiceSettingRequest}
+     */
+    @Override
+    public GeoserverDeleteWMSWorkspaceServiceSettingRequest deleteWMSWorkspaceServiceSettingsRequest() {
+        return this.server.deleteWMSWorkspaceServiceSettingsRequest();
     }
 }

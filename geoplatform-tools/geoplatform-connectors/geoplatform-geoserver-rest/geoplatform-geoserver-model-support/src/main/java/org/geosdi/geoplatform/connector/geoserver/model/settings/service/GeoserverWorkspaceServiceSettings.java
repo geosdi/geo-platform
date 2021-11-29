@@ -46,4 +46,9 @@ public interface GeoserverWorkspaceServiceSettings extends GeoserverServiceSetti
      * @return {@link GPGeoserverBaseWorkspace}
      */
     GPGeoserverBaseWorkspace getWorkspace();
+
+    /**
+     * @param theWorkspace
+     */
+    void setWorkspace(GPGeoserverBaseWorkspace theWorkspace);
 }

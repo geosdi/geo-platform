@@ -34,8 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.settings.services.wcs;
 
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wcs.GeoserverLoadWCSServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wcs.GeoserverLoadWCSWorkspaceServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wcs.*;
 import org.geosdi.geoplatform.connector.geoserver.settings.services.wmts.IGPGeoserverWMTSServiceSettingsConnector;
 
 /**
@@ -53,4 +52,19 @@ public interface IGPGeoserverWCSServiceSettingsConnector extends IGPGeoserverWMT
      * @return {@link GeoserverLoadWCSWorkspaceServiceSettingsRequest}
      */
     GeoserverLoadWCSWorkspaceServiceSettingsRequest loadWCSWorkspaceServiceSettingsRequest();
+
+    /**
+     * @return {@link GeoserverUpdateWCSServiceSettingsRequest}
+     */
+    GeoserverUpdateWCSServiceSettingsRequest updateWCSServiceSettingsRequest();
+
+    /**
+     * @return {@link GeoserverUpdateWCSWorkspaceServiceSettingsRequest}
+     */
+    GeoserverUpdateWCSWorkspaceServiceSettingsRequest updateWCSWorkspaceServiceSettingsRequest();
+
+    /**
+     * @return {@link GeoserverDeleteWCSWorkspaceServiceSettingsRequest}
+     */
+    GeoserverDeleteWCSWorkspaceServiceSettingsRequest deleteWCSWorkspaceServiceSettingsRequest();
 }

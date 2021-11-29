@@ -35,7 +35,6 @@
 package org.geosdi.geoplatform.connector.store.extensions.importer;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.extensions.rasterize.GPGeoserverRasterizeRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverLoadImportRequest;
@@ -55,7 +54,7 @@ public abstract class GeoserverImporterConnectorStore extends GoeserverClassifyC
     }
 
     /**
-     * @return {@link GPGeoserverRasterizeRequest}
+     * @return {@link GeoserverCreateImportRequest}
      */
     @Override
     public GeoserverCreateImportRequest createImportRequest() {
@@ -79,7 +78,7 @@ public abstract class GeoserverImporterConnectorStore extends GoeserverClassifyC
     }
 
     /**
-     * @return {@link GeoserverCreateImportRequest}
+     * @return {@link GeoserverCreateImportWithIdRequest}
      */
     @Override
     public GeoserverCreateImportWithIdRequest createImportWithIdRequest() {

@@ -35,8 +35,7 @@
 package org.geosdi.geoplatform.connector.store.settings.services.wfs;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wfs.GeoserverLoadWFSServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wfs.GeoserverLoadWFSWorkspaceServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wfs.*;
 import org.geosdi.geoplatform.connector.store.settings.services.wcs.GeoserverWCSServiceSettingsConnectorStore;
 
 /**
@@ -66,5 +65,29 @@ public abstract class GeoserverWFSServiceSettingsConnectorStore extends Geoserve
     @Override
     public GeoserverLoadWFSWorkspaceServiceSettingsRequest loadWFSWorkspaceServiceSettingsRequest() {
         return this.server.loadWFSWorkspaceServiceSettingsRequest();
+    }
+
+    /**
+     * @return {@link GeoserverUpdateWFSServiceSettingsRequest}
+     */
+    @Override
+    public GeoserverUpdateWFSServiceSettingsRequest updateWFSServiceSettingsRequest() {
+        return this.server.updateWFSServiceSettingsRequest();
+    }
+
+    /**
+     * @return {@link GeoserverUpdateWFSWorkspaceServiceSettingsRequest}
+     */
+    @Override
+    public GeoserverUpdateWFSWorkspaceServiceSettingsRequest updateWFSWorkspaceServiceSettingsRequest() {
+        return this.server.updateWFSWorkspaceServiceSettingsRequest();
+    }
+
+    /**
+     * @return {@link GeoserverDeleteWFSWorkspaceSettingsRequest}
+     */
+    @Override
+    public GeoserverDeleteWFSWorkspaceSettingsRequest deleteWFSWorkspaceServiceSettingsRequest() {
+        return this.server.deleteWFSWorkspaceServiceSettingsRequest();
     }
 }

@@ -52,13 +52,14 @@ import javax.annotation.Nonnull;
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Observable.fromArray;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverRasterizeRequest extends GPJsonGetConnectorRequest<StyledLayerDescriptor, GeoserverRasterizeRequest> implements GeoserverRasterizeRequest {
+class GPGeoserverRasterizeRequest extends GPJsonGetConnectorRequest<StyledLayerDescriptor, GeoserverRasterizeRequest> implements GeoserverRasterizeRequest {
 
     private final ThreadLocal<String> rasterName;
     private final ThreadLocal<GPGeoserverQueryParam> geoserverRamp;

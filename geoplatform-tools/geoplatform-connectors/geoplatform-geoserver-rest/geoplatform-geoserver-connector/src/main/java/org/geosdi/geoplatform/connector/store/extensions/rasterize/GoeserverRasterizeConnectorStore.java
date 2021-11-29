@@ -35,7 +35,7 @@
 package org.geosdi.geoplatform.connector.store.extensions.rasterize;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.extensions.rasterize.GPGeoserverRasterizeRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.rasterize.GeoserverRasterizeRequest;
 import org.geosdi.geoplatform.connector.store.extensions.uniquevalues.GeoserverUniqueValuesConnectorStore;
 import org.geosdi.geoplatform.connector.store.rasterize.GPGeoserverRasterizeConnectorStore;
 
@@ -52,10 +52,10 @@ public abstract class GoeserverRasterizeConnectorStore extends GeoserverUniqueVa
     }
 
     /**
-     * @return {@link GPGeoserverRasterizeRequest}
+     * @return {@link GeoserverRasterizeRequest}
      */
     @Override
-    public GPGeoserverRasterizeRequest rasterizeData() {
+    public GeoserverRasterizeRequest rasterizeData() {
         return this.server.rasterizeData();
     }
 }

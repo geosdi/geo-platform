@@ -89,8 +89,13 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest, Connector
         logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
         this.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(responseEntity.getContent(), UTF_8_CHARSERT))) {
-            return this.readInternal(reader);
+        try  {
+            if(statusCode == 204 && responseEntity == null) {
+                return this.readInternal(null);
+            } else {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(responseEntity.getContent(), UTF_8_CHARSERT));
+                return this.readInternal(reader);
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new IncorrectResponseException(ex);
@@ -119,7 +124,9 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest, Connector
         this.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
-            if (responseEntity != null) {
+            if(statusCode == 204 && responseEntity == null) {
+                return "";
+            } else if (responseEntity != null) {
                 return CharStreams.toString(new InputStreamReader(responseEntity.getContent(), UTF_8));
             } else {
                 throw new IncorrectResponseException(CONNECTION_PROBLEM_MESSAGE);
@@ -149,7 +156,9 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest, Connector
         this.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
-            if (responseEntity != null) {
+            if(statusCode == 204 && responseEntity == null) {
+                return null;
+            } else if (responseEntity != null) {
                 return new ByteArrayInputStream(toByteArray(responseEntity.getContent()));
             } else {
                 throw new IncorrectResponseException(CONNECTION_PROBLEM_MESSAGE);

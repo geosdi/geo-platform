@@ -32,24 +32,70 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task;
+package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.layer;
 
-import lombok.*;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetstore.IGPDataStoreImporter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverLatLonBoundingBox;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.IGPGeoserverImporterAttribute;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.layer.style.IGPGeoserverImporterLayerStyle;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-@AllArgsConstructor
-@Getter
-@ToString
-@Builder
-@NoArgsConstructor
-public class GPTaskTarget implements IGPTaskTarget{
+@JsonDeserialize(as = GPGeoserverImporterLayer.class)
+public interface IGPGeoserverImporterLayer extends Serializable {
 
-    private static final long serialVersionUID = 6191321266510725935L;
-    //
-    private String href;
-    private IGPDataStoreImporter dataStore;
+    /**
+     * @return {@link String}
+     */
+    String getName();
+
+    /**
+     * @return {@link String}
+     */
+    String getHref();
+
+    /**
+     * @return {@link String}
+     */
+    String getTitle();
+
+    /**
+     * @return {@link String}
+     */
+    String getAbstractText();
+
+    /**
+     * @return {@link String}
+     */
+    String getDescription();
+
+    /**
+     * @return {@link String}
+     */
+    String getOriginalName();
+
+    /**
+     * @return {@link String}
+     */
+    String getSrs();
+
+    /**
+     * @return {@link GPGeoserverLatLonBoundingBox}
+     */
+    GPGeoserverLatLonBoundingBox getBbox();
+
+    /**
+     * @return {@link List<   IGPGeoserverImporterAttribute   >}
+     */
+    List<IGPGeoserverImporterAttribute> getAttributes();
+
+    /**
+     * @return {@link IGPGeoserverImporterLayerStyle}
+     */
+    IGPGeoserverImporterLayerStyle getStyle();
 }

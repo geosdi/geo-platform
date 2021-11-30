@@ -32,13 +32,27 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task;
+package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetworkspace;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverBaseWorkspace;
+
+import java.io.Serializable;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public enum GPTaskUpdateMode {
+@JsonDeserialize(as = GPGeoserverWorkspaceImporter.class)
+public interface IGPGeoserverWorkspaceImporter extends Serializable, IGPGeoserverBaseWorkspace {
 
-    CREATE, REPLACE, APPEND, UPDATE;
+    /**
+     * @return {@link Boolean}
+     */
+    Boolean getIsolated();
+
+    /**
+     * @return {@link String}
+     */
+    String getDateCreated();
 }

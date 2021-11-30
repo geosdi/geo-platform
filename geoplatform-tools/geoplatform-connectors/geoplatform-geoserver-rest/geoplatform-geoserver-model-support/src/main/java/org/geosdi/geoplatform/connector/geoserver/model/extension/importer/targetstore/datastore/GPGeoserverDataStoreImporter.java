@@ -32,61 +32,37 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task;
+package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetstore.datastore;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.*;
+import org.geosdi.geoplatform.connector.geoserver.model.connection.adapter.GPGeoserverConnectionMapParamAdapter;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverBaseWorkspace;
 
-import java.io.Serializable;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.util.Map;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-@JsonDeserialize(as = GPLoadTaskResponse.class)
-public interface IGPLoadTaskResponse extends Serializable {
+@AllArgsConstructor
+@Getter
+@ToString
+@Builder
+@NoArgsConstructor
+public class GPGeoserverDataStoreImporter implements IGPGeoserverDataStoreImporter {
 
-    /**
-     * @return {@link Long}
-     */
-    Integer getId();
-
-    /**
-     * @return {@link String}
-     */
-    String getHref();
-
-    /**
-     * @return {@link GeoserverStateTask}
-     */
-    GeoserverStateTask getState();
-
-    /**
-     * @return {@link GPTaskUpdateMode}
-     */
-    GPTaskUpdateMode getUpdateMode();
-
-    /**
-     * @return {@link IGPTaskData}
-     */
-    IGPTaskData getData();
-
-    /**
-     * @return {@link IGPTaskTarget}
-     */
-    IGPTaskTarget getTarget();
-
-    /**
-     * @return {@link String}
-     */
-    String getProgress();
-
-    /**
-     * @return {@link IGPTaskLayer}
-     */
-    IGPTaskLayer getLayer();
-
-    /**
-     * @return {@link IGPTransormChain}
-     */
-    IGPTransormChain getTransformChain();
+    private static final long serialVersionUID = 6698581951143706200L;
+    //
+    private String name;
+    private String type;
+    @XmlElement(name = "_default")
+    private boolean isDefault;
+    private boolean enabled;
+    private GPGeoserverBaseWorkspace workspace;
+    private String dateCreated;
+    private String dateModified;
+    @XmlJavaTypeAdapter(value = GPGeoserverConnectionMapParamAdapter.class)
+    private Map<String, String> connectionParameters;
 }

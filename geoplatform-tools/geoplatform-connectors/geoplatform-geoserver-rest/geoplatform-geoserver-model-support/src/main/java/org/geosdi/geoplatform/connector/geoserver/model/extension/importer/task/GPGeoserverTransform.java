@@ -32,31 +32,24 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetworkspace;
+package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
-import java.io.Serializable;
+import lombok.*;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-@JsonDeserialize(as = GPGeoserverWorkspaceImporter.class)
-public interface IGPWorkspaceImporter extends Serializable {
+@AllArgsConstructor
+@Getter
+@ToString
+@Builder
+@NoArgsConstructor
+public class GPGeoserverTransform implements IGPGeoserverTransform {
 
-    /**
-     * @return {@link String}
-     */
-    String getName();
+    private static final long serialVersionUID = 3714474031596412280L;
+    //
+    private String type;
+    private String href;
 
-    /**
-     * @return {@link Boolean}
-     */
-    Boolean getIsolated();
-
-    /**
-     * @return {@link String}
-     */
-    String getDateCreated();
 }

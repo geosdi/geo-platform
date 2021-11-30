@@ -32,9 +32,13 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetworkspace;
+package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.GPTaskUpdateMode;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.IGPGeoserverImporterData;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.layer.IGPGeoserverImporterLayer;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetstore.IGPGeoserverTargetStoreImporter;
 
 import java.io.Serializable;
 
@@ -42,11 +46,51 @@ import java.io.Serializable;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-@JsonDeserialize(as = GPGeoserverTargetWorkspaceImporter.class)
-public interface IGPTargetWorkspaceImporter extends Serializable {
+@JsonDeserialize(as = GPGeoserverTaskImporter.class)
+public interface IGPGeoserverTaskImporter extends Serializable {
 
     /**
-     * @return {@link IGPWorkspaceImporter}
+     * @return {@link Long}
      */
-    IGPWorkspaceImporter getWorkspace();
+    Integer getId();
+
+    /**
+     * @return {@link String}
+     */
+    String getHref();
+
+    /**
+     * @return {@link GeoserverStateTask}
+     */
+    GeoserverStateTask getState();
+
+    /**
+     * @return
+     */
+    GPTaskUpdateMode getUpdateMode();
+
+    /**
+     * @return {@link IGPGeoserverImporterData}
+     */
+    IGPGeoserverImporterData getData();
+
+    /**
+     * @return {@link IGPGeoserverTargetStoreImporter}
+     */
+    IGPGeoserverTargetStoreImporter getTargetStore();
+
+    /**
+     * @return {@link String}
+     */
+    String getProgress();
+
+    /**
+     * @return {@link IGPGeoserverTransormChain}
+     */
+    IGPGeoserverTransormChain getTransformChain();
+
+    /**
+     * @return {@link IGPGeoserverImporterLayer}
+     */
+    IGPGeoserverImporterLayer getLayer();
 }

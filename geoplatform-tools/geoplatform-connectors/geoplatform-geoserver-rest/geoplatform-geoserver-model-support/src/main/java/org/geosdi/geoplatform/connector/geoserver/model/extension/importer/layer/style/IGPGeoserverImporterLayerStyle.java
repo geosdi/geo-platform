@@ -32,31 +32,36 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task;
+package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.layer.style;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
-import java.io.Serializable;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverStyle;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPStyleVersion;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-@JsonDeserialize(as = GPGeoserverTaskImporter.class)
-public interface IGPTaskImporter extends Serializable {
-
-    /**
-     * @return {@link Long}
-     */
-    Integer getId();
+@JsonDeserialize(as = GPGeoserverImporterLayerStyle.class)
+public interface IGPGeoserverImporterLayerStyle extends IGPGeoserverStyle {
 
     /**
      * @return {@link String}
      */
-    String getHref();
+    String getFormat();
 
     /**
-     * @return {@link GeoserverStateTask}
+     * @return {@link String}
      */
-    GeoserverStateTask getState();
+    String getFileName();
+
+    /**
+     * @return {@link String}
+     */
+    String getDateCreated();
+
+    /**
+     * @return {@link IGPStyleVersion}
+     */
+    IGPStyleVersion getLanguageVersion();
 }

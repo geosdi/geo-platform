@@ -32,9 +32,10 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task;
+package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetstore;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetstore.datastore.IGPGeoserverDataStoreImporter;
 
 import java.io.Serializable;
 
@@ -42,16 +43,16 @@ import java.io.Serializable;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-@JsonDeserialize(as = GPTaskLayer.class)
-public interface IGPTaskLayer  extends Serializable {
-
-    /**
-     * @return {@link String}
-     */
-    String getName();
+@JsonDeserialize(as = GPGeoserverTargetStore.class)
+public interface IGPGeoserverTargetStoreImporter extends Serializable {
 
     /**
      * @return {@link String}
      */
     String getHref();
+
+    /**
+     * @return {@link IGPGeoserverDataStoreImporter}
+     */
+    IGPGeoserverDataStoreImporter getDataStore();
 }

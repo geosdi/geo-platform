@@ -35,7 +35,6 @@
 package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetstore.IGPDataStoreImporter;
 
 import java.io.Serializable;
 
@@ -43,16 +42,16 @@ import java.io.Serializable;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-@JsonDeserialize(as = GPTaskTarget.class)
-public interface IGPTaskTarget extends Serializable {
+@JsonDeserialize(as = GPGeoserverTransform.class)
+public interface IGPGeoserverTransform extends Serializable {
+
+    /**
+     * @return {@link String}
+     */
+    String getType();
 
     /**
      * @return {@link String}
      */
     String getHref();
-
-    /**
-     * @return {@link IGPDataStoreImporter}
-     */
-    IGPDataStoreImporter getDataStore();
 }

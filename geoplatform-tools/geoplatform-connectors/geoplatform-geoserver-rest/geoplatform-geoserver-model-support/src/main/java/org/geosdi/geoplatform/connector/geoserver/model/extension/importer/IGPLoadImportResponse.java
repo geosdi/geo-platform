@@ -36,9 +36,9 @@ package org.geosdi.geoplatform.connector.geoserver.model.extension.importer;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetstore.IGPTargetStoreImporter;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetworkspace.IGPTargetWorkspaceImporter;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task.IGPTaskImporter;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetstore.IGPGeoserverTargetStoreImporter;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetworkspace.IGPGeoserverTargetWorkspaceImporter;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task.IGPGeoserverTaskImporter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -72,17 +72,17 @@ public interface IGPLoadImportResponse extends Serializable {
     Boolean getArchive();
 
     /**
-     * @return {@link IGPTargetWorkspaceImporter}
+     * @return {@link IGPGeoserverTargetWorkspaceImporter}
      */
-    IGPTargetWorkspaceImporter getTargetWorkspace();
+    IGPGeoserverTargetWorkspaceImporter getTargetWorkspace();
 
     /**
-     * @return {@link IGPTargetStoreImporter}
+     * @return {@link IGPGeoserverTargetStoreImporter}
      */
-    IGPTargetStoreImporter getTargetStore();
+    IGPGeoserverTargetStoreImporter getTargetStore();
 
     /**
-     * @return {@link List< IGPTaskImporter >}
+     * @return {@link List<  IGPGeoserverTaskImporter  >}
      */
-    List<IGPTaskImporter> getTasks();
+    List<IGPGeoserverTaskImporter> getTasks();
 }

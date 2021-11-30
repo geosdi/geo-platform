@@ -35,6 +35,7 @@
 package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetstore;
 
 import lombok.*;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetstore.datastore.IGPGeoserverDataStoreImporter;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -45,9 +46,10 @@ import lombok.*;
 @ToString
 @Builder
 @NoArgsConstructor
-public class GPGeoserverTargetStore implements IGPTargetStoreImporter{
+public class GPGeoserverTargetStore implements IGPGeoserverTargetStoreImporter {
 
     private static final long serialVersionUID = -6446215987582953320L;
     //
-    private IGPDataStoreImporter dataStore;
+    private String href;
+    private IGPGeoserverDataStoreImporter dataStore;
 }

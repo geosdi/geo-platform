@@ -34,8 +34,12 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.extensions.importer.task;
 
+import io.reactivex.rxjava3.functions.Consumer;
 import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task.GPLoadTaskResponse;
+import org.apache.http.client.utils.URIBuilder;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.GPFileExpandType;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task.GPGeoserverTaskImporter;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GeoserverRXQueryParamConsumer;
 import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task.GeoserverLoadTaskRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
@@ -44,6 +48,7 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import javax.annotation.Nonnull;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static io.reactivex.rxjava3.core.Observable.fromArray;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
@@ -52,10 +57,11 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-class GPGeoserverLoadTaskRequest extends GPJsonGetConnectorRequest<GPLoadTaskResponse, GeoserverLoadTaskRequest> implements GeoserverLoadTaskRequest {
+class GPGeoserverLoadTaskRequest extends GPJsonGetConnectorRequest<GPGeoserverTaskImporter, GeoserverLoadTaskRequest> implements GeoserverLoadTaskRequest {
 
     private final ThreadLocal<Integer> importId;
     private final ThreadLocal<Integer> taskId;
+    private final ThreadLocal<GPFileExpandType> expand;
 
     /**
      * @param server
@@ -65,6 +71,7 @@ class GPGeoserverLoadTaskRequest extends GPJsonGetConnectorRequest<GPLoadTaskRes
         super(server, theJacksonSupport);
         this.importId = withInitial(() -> null);
         this.taskId = withInitial(() -> null);
+        this.expand = withInitial(() -> null);
     }
 
     /**
@@ -88,6 +95,16 @@ class GPGeoserverLoadTaskRequest extends GPJsonGetConnectorRequest<GPLoadTaskRes
     }
 
     /**
+     * @param theExpand
+     * @return {@link GeoserverLoadTaskRequest}
+     */
+    @Override
+    public GeoserverLoadTaskRequest withExpand(@Nonnull(when = NEVER) GPFileExpandType theExpand) {
+        this.expand.set(theExpand);
+        return self();
+    }
+
+    /**
      * @return {@link String}
      * @throws Exception
      */
@@ -98,15 +115,22 @@ class GPGeoserverLoadTaskRequest extends GPJsonGetConnectorRequest<GPLoadTaskRes
         checkArgument(importId != null && importId >= 0, "The importId must not be null or less than 0");
         Integer taskId = this.taskId.get();
         checkArgument(taskId != null && taskId >= 0, "The taskId must not be null or less than 0");
-        return  (baseURI.endsWith("/") ? baseURI.concat("imports/").concat(importId.toString()).concat("/tasks/").concat(taskId.toString())
+        String path = (baseURI.endsWith("/") ? baseURI.concat("imports/").concat(importId.toString()).concat("/tasks/").concat(taskId.toString())
                 : baseURI.concat("/imports/").concat(importId.toString()).concat("/tasks/").concat(taskId.toString()));
+        URIBuilder uriBuilder = new URIBuilder(path);
+        Consumer<ThreadLocal> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
+        fromArray(this.expand)
+                .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
+                .filter(c-> c.get() != null)
+                .subscribe(consumer, Throwable::printStackTrace);
+        return uriBuilder.build().toString();
     }
 
     /**
-     * @return {@link GPLoadTaskResponse}
+     * @return {@link GPGeoserverTaskImporter}
      */
     @Override
-    protected Class<GPLoadTaskResponse> forClass() {
-        return GPLoadTaskResponse.class;
+    protected Class<GPGeoserverTaskImporter> forClass() {
+        return GPGeoserverTaskImporter.class;
     }
 }

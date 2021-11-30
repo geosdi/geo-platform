@@ -36,9 +36,9 @@ package org.geosdi.geoplatform.connector.geoserver.model.extension.importer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetstore.IGPTargetStoreImporter;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetworkspace.IGPTargetWorkspaceImporter;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task.IGPTaskImporter;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetstore.IGPGeoserverTargetStoreImporter;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetworkspace.IGPGeoserverTargetWorkspaceImporter;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task.IGPGeoserverTaskImporter;
 
 import java.util.List;
 
@@ -57,8 +57,8 @@ public class GPGeoserverLoadImportResponse implements IGPLoadImportResponse {
     private String href;
     private GeoserverStateImport state;
     private Boolean archive;
-    private IGPTargetWorkspaceImporter targetWorkspace;
-    private IGPTargetStoreImporter targetStore;
+    private IGPGeoserverTargetWorkspaceImporter targetWorkspace;
+    private IGPGeoserverTargetStoreImporter targetStore;
     @JsonProperty(value = "tasks")
-    private List<IGPTaskImporter> tasks;
+    private List<IGPGeoserverTaskImporter> tasks;
 }

@@ -45,9 +45,9 @@ import lombok.*;
 @ToString
 @Builder
 @NoArgsConstructor
-public class GPGeoserverTargetWorkspaceImporter implements IGPTargetWorkspaceImporter {
+public class GPGeoserverTargetWorkspaceImporter implements IGPGeoserverTargetWorkspaceImporter {
 
     private static final long serialVersionUID = 383673722174843337L;
     //
-    private IGPWorkspaceImporter workspace;
+    private IGPGeoserverWorkspaceImporter workspace;
 }

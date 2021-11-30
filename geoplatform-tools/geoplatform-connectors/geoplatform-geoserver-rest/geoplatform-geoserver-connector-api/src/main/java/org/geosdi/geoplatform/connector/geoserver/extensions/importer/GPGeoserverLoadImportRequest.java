@@ -57,13 +57,17 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverLoadImportRequest extends GPJsonGetConnectorRequest<GPGeoserverLoadImportResponse, GeoserverLoadImportRequest> implements GeoserverLoadImportRequest {
+class GPGeoserverLoadImportRequest extends GPJsonGetConnectorRequest<GPGeoserverLoadImportResponse, GeoserverLoadImportRequest> implements GeoserverLoadImportRequest {
 
     private final ThreadLocal<Integer> id;
     private final ThreadLocal<GPFileExpandType> expand;
 
-    protected GPGeoserverLoadImportRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
-            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    /**
+     *
+     * @param theServerConnector
+     * @param theJacksonSupport
+     */
+    GPGeoserverLoadImportRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.id = withInitial(() -> null);
         this.expand = withInitial(() -> null);
@@ -76,7 +80,7 @@ public class GPGeoserverLoadImportRequest extends GPJsonGetConnectorRequest<GPGe
     @Override
     public GeoserverLoadImportRequest withId(@Nonnull(when = NEVER) Integer theId) {
         this.id.set(theId);
-        return this;
+        return self();
     }
 
     /**
@@ -86,7 +90,7 @@ public class GPGeoserverLoadImportRequest extends GPJsonGetConnectorRequest<GPGe
     @Override
     public GeoserverLoadImportRequest withExpand(@Nonnull(when = NEVER) GPFileExpandType theExpand) {
         this.expand.set(theExpand);
-        return this;
+        return self();
     }
 
     @Override

@@ -61,7 +61,7 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverCreateImportWithIdRequest extends GPJsonPostConnectorRequest<Object, GeoserverCreateImportWithIdRequest> implements GeoserverCreateImportWithIdRequest {
+class GPGeoserverCreateImportWithIdRequest extends GPJsonPostConnectorRequest<Object, GeoserverCreateImportWithIdRequest> implements GeoserverCreateImportWithIdRequest {
 
     private final ThreadLocal<Integer> id;
     private final ThreadLocal<GPGeoserverCreateImportBody> body;
@@ -73,7 +73,7 @@ public class GPGeoserverCreateImportWithIdRequest extends GPJsonPostConnectorReq
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    protected GPGeoserverCreateImportWithIdRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverCreateImportWithIdRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.id = withInitial(() -> null);
         this.body = withInitial(() -> null);
@@ -99,7 +99,7 @@ public class GPGeoserverCreateImportWithIdRequest extends GPJsonPostConnectorReq
     @Override
     public GeoserverCreateImportWithIdRequest withBody(@Nonnull(when = NEVER) GPGeoserverCreateImportBody theBody) {
         this.body.set(theBody);
-        return this;
+        return self();
     }
 
     /**
@@ -109,7 +109,7 @@ public class GPGeoserverCreateImportWithIdRequest extends GPJsonPostConnectorReq
     @Override
     public GeoserverCreateImportWithIdRequest withExec(@Nonnull(when = NEVER) Boolean theExec) {
         this.exec.set(new GPGeoserverBooleanQueryParam("exec", theExec));
-        return this;
+        return self();
     }
 
     /**
@@ -119,7 +119,7 @@ public class GPGeoserverCreateImportWithIdRequest extends GPJsonPostConnectorReq
     @Override
     public GeoserverCreateImportWithIdRequest withExpand(@Nonnull(when = NEVER) GPFileExpandType theExpand) {
         this.expand.set(theExpand);
-        return this;
+        return self();
     }
 
     /**
@@ -129,7 +129,7 @@ public class GPGeoserverCreateImportWithIdRequest extends GPJsonPostConnectorReq
     @Override
     public GeoserverCreateImportWithIdRequest withAsync(@Nonnull(when = NEVER) Boolean theAsync) {
         this.async.set(new GPGeoserverBooleanQueryParam("async", theAsync));
-        return this;
+        return self();
     }
 
     /**

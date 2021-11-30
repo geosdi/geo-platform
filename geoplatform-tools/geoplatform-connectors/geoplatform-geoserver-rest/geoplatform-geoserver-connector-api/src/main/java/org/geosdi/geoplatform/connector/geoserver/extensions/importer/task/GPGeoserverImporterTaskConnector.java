@@ -32,30 +32,33 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task;
+package org.geosdi.geoplatform.connector.geoserver.extensions.importer.task;
 
-import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task.GPLoadTaskResponse;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task.GeoserverLoadTaskRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 
 import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Vito Salvia - CNR IMAA geoSDI Group
- * @email vito.salvia@gmail.com
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverLoadTaskRequest extends GPJsonConnectorRequest<GPLoadTaskResponse, GeoserverLoadTaskRequest> {
+public interface GPGeoserverImporterTaskConnector {
 
     /**
-     * @param theImportId
      * @return {@link GeoserverLoadTaskRequest}
      */
-    GeoserverLoadTaskRequest withImportId(@Nonnull(when = NEVER) Integer theImportId);
+    GeoserverLoadTaskRequest loadTaskRequest();
 
     /**
-     * @param theTaskId
+     * @param theServerConnector
+     * @param theJacksonSupport
      * @return {@link GeoserverLoadTaskRequest}
      */
-    GeoserverLoadTaskRequest withTaskId(@Nonnull(when = NEVER) Integer theTaskId);
+    static GeoserverLoadTaskRequest of(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        return new GPGeoserverLoadTaskRequest(theServerConnector, theJacksonSupport);
+    }
 }

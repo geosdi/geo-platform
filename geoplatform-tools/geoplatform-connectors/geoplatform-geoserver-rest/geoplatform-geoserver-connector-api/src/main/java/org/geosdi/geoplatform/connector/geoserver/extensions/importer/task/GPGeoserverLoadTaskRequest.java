@@ -52,30 +52,45 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverLoadTaskRequest extends GPJsonGetConnectorRequest<GPLoadTaskResponse, GeoserverLoadTaskRequest> implements GeoserverLoadTaskRequest {
+class GPGeoserverLoadTaskRequest extends GPJsonGetConnectorRequest<GPLoadTaskResponse, GeoserverLoadTaskRequest> implements GeoserverLoadTaskRequest {
 
     private final ThreadLocal<Integer> importId;
     private final ThreadLocal<Integer> taskId;
 
-    public GPGeoserverLoadTaskRequest(@Nonnull(when = NEVER) GPServerConnector server,
-            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    /**
+     * @param server
+     * @param theJacksonSupport
+     */
+    GPGeoserverLoadTaskRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
         this.importId = withInitial(() -> null);
         this.taskId = withInitial(() -> null);
     }
 
+    /**
+     * @param theImportId
+     * @return {@link GeoserverLoadTaskRequest}
+     */
     @Override
-    public GeoserverLoadTaskRequest withImportId(Integer theImportId) {
+    public GeoserverLoadTaskRequest withImportId(@Nonnull(when = NEVER) Integer theImportId) {
         this.importId.set(theImportId);
         return self();
     }
 
+    /**
+     * @param theTaskId
+     * @return {@link GeoserverLoadTaskRequest}
+     */
     @Override
-    public GeoserverLoadTaskRequest withTaskId(Integer theTaskId) {
+    public GeoserverLoadTaskRequest withTaskId(@Nonnull(when = NEVER) Integer theTaskId) {
         this.taskId.set(theTaskId);
         return self();
     }
 
+    /**
+     * @return {@link String}
+     * @throws Exception
+     */
     @Override
     protected String createUriPath() throws Exception {
         String baseURI = this.serverURI.toString();
@@ -87,6 +102,9 @@ public class GPGeoserverLoadTaskRequest extends GPJsonGetConnectorRequest<GPLoad
                 : baseURI.concat("/imports/").concat(importId.toString()).concat("/tasks/").concat(taskId.toString()));
     }
 
+    /**
+     * @return {@link GPLoadTaskResponse}
+     */
     @Override
     protected Class<GPLoadTaskResponse> forClass() {
         return GPLoadTaskResponse.class;

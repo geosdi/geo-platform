@@ -35,16 +35,16 @@
 package org.geosdi.geoplatform.connector.geoserver.extensions.importer;
 
 import org.geosdi.geoplatform.connector.geoserver.extensions.classify.IGPGeoserverClassifyConnector;
+import org.geosdi.geoplatform.connector.geoserver.extensions.importer.task.GPGeoserverImporterTaskConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverLoadImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task.GeoserverLoadTaskRequest;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface IGPGeoserverImporterConnector extends IGPGeoserverClassifyConnector {
+public interface IGPGeoserverImporterConnector extends IGPGeoserverClassifyConnector, GPGeoserverImporterTaskConnector {
 
     /**
      * @return {@link GeoserverCreateImportRequest}
@@ -55,11 +55,6 @@ public interface IGPGeoserverImporterConnector extends IGPGeoserverClassifyConne
      * @return {@link GeoserverLoadImportRequest}
      */
     GeoserverLoadImportRequest loadImportRequest();
-
-    /**
-     * @return {@link GeoserverLoadTaskRequest}
-     */
-    GeoserverLoadTaskRequest loadTaskRequest();
 
     /**
      * @return {@link GeoserverCreateImportRequest}

@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.connector.geoserver.extensions.importer;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.extensions.classify.GPGeoserverClassifyConnector;
-import org.geosdi.geoplatform.connector.geoserver.extensions.importer.task.GPGeoserverLoadTaskRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverLoadImportRequest;
@@ -49,6 +48,7 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import java.net.URL;
 
 import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExceptionMessage;
+import static org.geosdi.geoplatform.connector.geoserver.extensions.importer.task.GPGeoserverImporterTaskConnector.of;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -146,7 +146,7 @@ public abstract class GPGeoserverImporterConnector extends GPGeoserverClassifyCo
         switch (version) {
             case V220x:
             case V219x:
-                return new GPGeoserverLoadTaskRequest(this, this.jacksonSupport);
+                return of(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

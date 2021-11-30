@@ -35,6 +35,7 @@
 package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetworkspace;
 
 import lombok.*;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverBaseWorkspace;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -45,11 +46,10 @@ import lombok.*;
 @ToString
 @Builder
 @NoArgsConstructor
-public class GPGeoserverWorkspaceImporter implements IGPWorkspaceImporter{
+public class GPGeoserverWorkspaceImporter extends GPGeoserverBaseWorkspace implements IGPGeoserverWorkspaceImporter {
 
     private static final long serialVersionUID = -2753222963371653773L;
     //
-    private String name;
     private Boolean isolated;
     private String dateCreated;
 }

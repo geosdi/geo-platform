@@ -34,23 +34,25 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task;
 
-import lombok.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-@AllArgsConstructor
-@Getter
-@ToString
-@Builder
-@NoArgsConstructor
-public class GPTransformChain implements IGPTransormChain {
+@JsonDeserialize(as = GPGeoserverTransformChain.class)
+public interface IGPGeoserverTransormChain extends Serializable {
 
-    private static final long serialVersionUID = 1391017636049704464L;
-    //
-    private String type;
-    private List<IGPTransform> transforms;
- }
+    /**
+     * @return {@link String}
+     */
+    String getType();
+
+    /**
+     * @return {@link List< IGPGeoserverTransform >}
+     */
+    List<IGPGeoserverTransform> getTransforms();
+}

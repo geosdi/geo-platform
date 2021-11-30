@@ -32,19 +32,27 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task;
+package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetstore.datastore;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetworkspace.IGPGeoserverWorkspaceImporter;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverBaseWorkspace;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverBaseWorkspace;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Map;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-@JsonDeserialize(as = GPTransformChain.class)
-public interface IGPTransormChain extends Serializable {
+@JsonDeserialize(as = GPGeoserverDataStoreImporter.class)
+public interface IGPGeoserverDataStoreImporter extends Serializable {
+
+    /**
+     * @return {@link IGPGeoserverWorkspaceImporter}
+     */
+    String getName();
 
     /**
      * @return {@link String}
@@ -52,7 +60,32 @@ public interface IGPTransormChain extends Serializable {
     String getType();
 
     /**
-     * @return {@link List<IGPTransform>}
+     * @return {@link Boolean}
      */
-    List<IGPTransform> getTransforms();
+    boolean isEnabled();
+
+    /**
+     * @return {@link IGPGeoserverBaseWorkspace}
+     */
+    GPGeoserverBaseWorkspace getWorkspace();
+
+    /**
+     * @return {@link Boolean}
+     */
+    boolean isDefault();
+
+    /**
+     * @return {@link String}
+     */
+    String getDateCreated();
+
+    /**
+     * @return {@link String}
+     */
+    String getDateModified();
+
+    /**
+     * @return {@link Map<String, String>}
+     */
+    Map<String, String> getConnectionParameters();
 }

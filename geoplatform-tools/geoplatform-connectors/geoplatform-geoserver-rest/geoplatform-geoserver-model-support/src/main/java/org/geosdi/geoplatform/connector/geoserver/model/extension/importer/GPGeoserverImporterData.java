@@ -32,26 +32,27 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task;
+package org.geosdi.geoplatform.connector.geoserver.model.extension.importer;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
-import java.io.Serializable;
+import lombok.*;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-@JsonDeserialize(as = GPTransform.class)
-public interface IGPTransform extends Serializable {
+@AllArgsConstructor
+@Getter
+@ToString
+@Builder
+@NoArgsConstructor
+public class GPGeoserverImporterData implements IGPGeoserverImporterData {
 
-    /**
-     * @return {@link String}
-     */
-    String getType();
-
-    /**
-     * @return {@link String}
-     */
-    String getHref();
+    private static final long serialVersionUID = 1913638689286630487L;
+    //
+    private String type;
+    private String format;
+    private String file;
+    private String location;
+    private String href;
+    private String prj;
 }

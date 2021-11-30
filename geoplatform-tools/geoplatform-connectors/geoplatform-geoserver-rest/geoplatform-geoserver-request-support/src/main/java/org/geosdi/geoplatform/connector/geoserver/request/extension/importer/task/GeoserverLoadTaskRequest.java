@@ -34,7 +34,9 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task;
 
-import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task.GPLoadTaskResponse;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.GPFileExpandType;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task.GPGeoserverTaskImporter;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
@@ -45,7 +47,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeoserverLoadTaskRequest extends GPJsonConnectorRequest<GPLoadTaskResponse, GeoserverLoadTaskRequest> {
+public interface GeoserverLoadTaskRequest extends GPJsonConnectorRequest<GPGeoserverTaskImporter, GeoserverLoadTaskRequest> {
 
     /**
      * @param theImportId
@@ -58,4 +60,10 @@ public interface GeoserverLoadTaskRequest extends GPJsonConnectorRequest<GPLoadT
      * @return {@link GeoserverLoadTaskRequest}
      */
     GeoserverLoadTaskRequest withTaskId(@Nonnull(when = NEVER) Integer theTaskId);
+
+    /**
+     * @param theExpand
+     * @return {@link GeoserverCreateImportRequest}
+     */
+    GeoserverLoadTaskRequest withExpand(@Nonnull(when = NEVER) GPFileExpandType theExpand);
 }

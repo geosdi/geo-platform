@@ -32,9 +32,11 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task;
+package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.layer.style;
 
 import lombok.*;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPStyleVersion;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -42,14 +44,15 @@ import lombok.*;
  */
 @AllArgsConstructor
 @Getter
-@ToString
+@ToString(callSuper = true)
 @Builder
 @NoArgsConstructor
-public class GPTransform implements IGPTransform {
+public class GPGeoserverImporterLayerStyle extends GPGeoserverStyle implements IGPGeoserverImporterLayerStyle {
 
-    private static final long serialVersionUID = 3714474031596412280L;
+    private static final long serialVersionUID = 343990886701306936L;
     //
-    private String type;
-    private String href;
-
+    private String format;
+    private String fileName;
+    private String dateCreated;
+    private IGPStyleVersion languageVersion;
 }

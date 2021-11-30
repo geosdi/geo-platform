@@ -38,8 +38,10 @@ import it.geosolutions.geoserver.rest.manager.GeoServerRESTImporterManager;
 import net.sf.json.JSONObject;
 import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.GPGeoserverCreateImportResponse;
 import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.GPGeoserverLoadImportResponse;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.GeoserverExpandFileImporter;
 import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.body.*;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task.IGPTaskImporter;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task.GPGeoserverTaskImporter;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task.IGPGeoserverTaskImporter;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -71,8 +73,8 @@ public class GeoserverConnectorImporterTest extends GeoserverConnectorTest {
                 .targetStore(new GPGeoserverTargetStoreBody(new GPGeoserverDataStoreBody("ds_vito")))
                 .targetWorkspace(new GPGeoserverTargetWorkspaceBody(new GPGeoserverWorkspaceBody("ws_vito")))
                 .data(new GPGeoserverDataBody("file", "/home/geosdi/layer_importer1.kml")).build();
-
         GPGeoserverCreateImportResponse gpGeoserverCreateImportResponse = this.geoserverConnectorStore.createImportRequest()
+                .withExpand(GeoserverExpandFileImporter.ALL)
                 .withBody(gpGeoserverCreateImportBody).getResponse();
         logger.info("###############CREATE TASK RESPONSE:{}\n", gpGeoserverCreateImportResponse);
 
@@ -80,13 +82,14 @@ public class GeoserverConnectorImporterTest extends GeoserverConnectorTest {
                 .withId(gpGeoserverCreateImportResponse.getId()).getResponse();
 
         logger.info("################LOAD TASK : {}\n", gpGeoserverLoadImportResponse);
-
-        IGPTaskImporter createTaskImporter = gpGeoserverLoadImportResponse.getTasks().get(0);
-        logger.info("################LOAD TASK : {}\n", this.geoserverConnectorStore.loadTaskRequest()
+        IGPGeoserverTaskImporter createTaskImporter = gpGeoserverLoadImportResponse.getTasks().get(0);
+        GPGeoserverTaskImporter gpGeoserverLoadTaskResponse = this.geoserverConnectorStore.loadTaskRequest()
+                .withExpand(GeoserverExpandFileImporter.ALL)
                 .withImportId(gpGeoserverCreateImportResponse.getId())
-                .withTaskId(createTaskImporter.getId()).getResponse());
-
-        //Thread.sleep(1000);
+                .withTaskId(createTaskImporter.getId()).getResponse();
+        logger.info("###########NAME: {}\n", gpGeoserverLoadTaskResponse.getLayer().getName());
+        logger.info("###########TITLE: {}\n", gpGeoserverLoadTaskResponse.getLayer().getTitle());
+        logger.info("###########STYLE TITLE: {}\n", gpGeoserverLoadTaskResponse.getLayer().getStyle().getName());
 
         logger.info("##############{}\n",this.geoserverConnectorStore.createImportWithIdRequest()
                         .withId(gpGeoserverCreateImportResponse.getId())
@@ -97,7 +100,7 @@ public class GeoserverConnectorImporterTest extends GeoserverConnectorTest {
 
     @Test
     @Ignore
-    public void b_importFile() throws Exception {
+    public void c_importFile() throws Exception {
         String jsonData = "{\n" +
                 " \"import\": {\n" +
                 " \"targetWorkspace\": {\n" +

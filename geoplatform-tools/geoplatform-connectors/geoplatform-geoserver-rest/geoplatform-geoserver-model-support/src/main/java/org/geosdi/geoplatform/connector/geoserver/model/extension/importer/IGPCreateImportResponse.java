@@ -36,7 +36,8 @@ package org.geosdi.geoplatform.connector.geoserver.model.extension.importer;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task.IGPTaskImporter;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetstore.IGPGeoserverTargetStoreImporter;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task.IGPGeoserverTaskImporter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -70,7 +71,18 @@ public interface IGPCreateImportResponse extends Serializable {
     Boolean getArchive();
 
     /**
-     * @return {@link List< IGPTaskImporter >}
+     * @return {@link List<  IGPGeoserverTaskImporter  >}
      */
-    List<IGPTaskImporter> getTasks();
+    List<IGPGeoserverTaskImporter> getTasks();
+
+    /**
+     * @return {@link IGPGeoserverTargetStoreImporter}
+     */
+    IGPGeoserverTargetStoreImporter getTargetStore();
+
+    /**
+     * @return {@link IGPGeoserverImporterData}
+     */
+    IGPGeoserverImporterData getData();
+
 }

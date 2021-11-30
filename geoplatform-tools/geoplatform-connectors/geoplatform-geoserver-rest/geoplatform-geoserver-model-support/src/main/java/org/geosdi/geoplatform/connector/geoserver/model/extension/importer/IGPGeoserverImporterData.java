@@ -32,23 +32,46 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetstore;
+package org.geosdi.geoplatform.connector.geoserver.model.extension.importer;
 
-import lombok.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import java.io.Serializable;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-@AllArgsConstructor
-@Getter
-@ToString
-@Builder
-@NoArgsConstructor
-public class GPGeoserverDataStoreImporter implements IGPDataStoreImporter {
+@JsonDeserialize(as = GPGeoserverImporterData.class)
+public interface IGPGeoserverImporterData extends Serializable {
 
-    private static final long serialVersionUID = 6698581951143706200L;
-    //
-    private String name;
-    private String type;
+    /**
+     * @return {@link String}
+     */
+    String getType();
+
+    /**
+     * @return {@link String}
+     */
+    String getFormat();
+
+    /**
+     * @return {@link String}
+     */
+    String getFile();
+
+    /**
+     * @return {@link String}
+     */
+    String getLocation();
+
+    /**
+     * @return {@link String}
+     */
+    String getHref();
+
+    /**
+     * @return {@link String}
+     */
+    String getPrj();
 }

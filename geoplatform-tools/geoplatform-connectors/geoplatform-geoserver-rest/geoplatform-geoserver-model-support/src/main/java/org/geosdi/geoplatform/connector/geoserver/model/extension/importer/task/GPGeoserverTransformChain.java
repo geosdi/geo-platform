@@ -34,8 +34,9 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.*;
+
+import java.util.List;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -46,18 +47,10 @@ import lombok.*;
 @ToString
 @Builder
 @NoArgsConstructor
-@JsonRootName("task")
-public class GPLoadTaskResponse  implements  IGPLoadTaskResponse{
+public class GPGeoserverTransformChain implements IGPGeoserverTransormChain {
 
-    private static final long serialVersionUID = -4576527781364192604L;
+    private static final long serialVersionUID = 1391017636049704464L;
     //
-    private Integer id;
-    private String href;
-    private GeoserverStateTask state;
-    private GPTaskUpdateMode updateMode;
-    private IGPTaskData data;
-    private IGPTaskTarget target;
-    private String progress;
-    private IGPTaskLayer layer;
-    private IGPTransormChain transformChain;
-}
+    private String type;
+    private List<IGPGeoserverTransform> transforms;
+ }

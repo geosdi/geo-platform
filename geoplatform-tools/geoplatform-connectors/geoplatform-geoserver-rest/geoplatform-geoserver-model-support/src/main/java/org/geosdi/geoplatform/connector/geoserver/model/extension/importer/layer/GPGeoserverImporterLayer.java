@@ -32,21 +32,39 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.targetstore;
+package org.geosdi.geoplatform.connector.geoserver.model.extension.importer.layer;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.*;
+import org.geosdi.geoplatform.connector.geoserver.model.bbox.GPGeoserverLatLonBoundingBox;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.IGPGeoserverImporterAttribute;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.layer.style.IGPGeoserverImporterLayerStyle;
 
-import java.io.Serializable;
+import javax.xml.bind.annotation.XmlElement;
+import java.util.List;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-@JsonDeserialize(as = GPGeoserverTargetStore.class)
-public interface IGPTargetStoreImporter extends Serializable {
+@AllArgsConstructor
+@Getter
+@ToString
+@Builder
+@NoArgsConstructor
+public class GPGeoserverImporterLayer implements IGPGeoserverImporterLayer {
 
-    /**
-     * @return {@link IGPDataStoreImporter}
-     */
-    IGPDataStoreImporter getDataStore();
+    private static final long serialVersionUID = -1824955516070282042L;
+    //
+    private String name;
+    private String href;
+    private String title;
+    @XmlElement(name = "abstract")
+    private String abstractText;
+    private String description;
+    private String originalName;
+    private String nativeName;
+    private String srs;
+    private GPGeoserverLatLonBoundingBox bbox;
+    private List<IGPGeoserverImporterAttribute> attributes;
+    private IGPGeoserverImporterLayerStyle style;
 }

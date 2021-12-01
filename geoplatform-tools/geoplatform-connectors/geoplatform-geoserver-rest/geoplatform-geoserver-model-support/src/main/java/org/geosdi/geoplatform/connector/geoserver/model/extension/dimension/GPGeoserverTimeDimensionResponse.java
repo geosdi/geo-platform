@@ -36,8 +36,6 @@ package org.geosdi.geoplatform.connector.geoserver.model.extension.dimension;
 
 import lombok.*;
 
-import java.util.List;
-
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
@@ -51,5 +49,5 @@ public class GPGeoserverTimeDimensionResponse implements IGPLoadDimensionRespons
 
     private static final long serialVersionUID = -8768200907024666817L;
     //
-    private List<String> times;
+    private String times;
 }

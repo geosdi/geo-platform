@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.connector.geoserver.model.extension.dimension;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -47,7 +46,7 @@ import java.util.List;
 public interface IGPLoadDimensionResponse extends Serializable {
 
     /**
-     * @return {@link List<String>}
+     * @return {@link String}
      */
-    List<String> getTimes();
+    String getTimes();
 }

@@ -38,8 +38,8 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.google.common.collect.Lists;
-import it.geosolutions.geoserver.rest.GeoServerRESTReader;
 import org.apache.commons.io.IOUtils;
+import org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.core.model.GPProject;
@@ -89,6 +89,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -123,8 +124,8 @@ public class LayerService implements ILayerService {
     //
     @Autowired
     private SessionUtility sessionUtility;
-    //
-    private GeoServerRESTReader sharedRestReader;
+    @Resource(name = "geoserverConnectorStore")
+    protected GPGeoserverConnectorStore geoserverConnectorStore;
 
     @Override
     public GPClientProject loadDefaultProjectElements(HttpServletRequest httpServletRequest) throws GeoPlatformException {
@@ -749,12 +750,15 @@ public class LayerService implements ILayerService {
     public String getLayerDimension(String layerName, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         try {
             this.sessionUtility.getLoggedAccount(httpServletRequest);
-            //TODO COVERAGES
-            return this.sharedRestReader.getDimensions(layerName);
+            return this.geoserverConnectorStore
+                    .loadDimensionRequest()
+                    .withLayerName(layerName).getResponse().getTimes().trim();
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         } catch (MalformedURLException ex) {
             throw new GeoPlatformException(ex);
+        }catch (Exception e) {
+            throw new GeoPlatformException(e);
         }
     }
 
@@ -783,11 +787,6 @@ public class LayerService implements ILayerService {
             logger.error("An Error Occured : " + e.getMessage());
             throw new GeoPlatformException(e.getMessage());
         }
-    }
-
-    @Autowired
-    public void setRestReader(@Qualifier(value = "sharedRestReader") GeoServerRESTReader sharedRestReader) {
-        this.sharedRestReader = sharedRestReader;
     }
 
     /**
@@ -828,6 +827,6 @@ public class LayerService implements ILayerService {
         checkArgument(this.geoPlatformServiceClient != null, "The Parameter geoPlatformServiceClient must not be null.");
         checkArgument(this.geoPlatformTrackingClient != null, "The Parameter geoPlatformTrackingClient must not be null.");
         checkArgument(this.geoPlatformPublishClient != null, "The Parameter geoPlatformPublishClient must not be null.");
-        checkArgument(this.sharedRestReader != null, "The Parameter sharedRestReader must not be null.");
+        checkArgument(this.geoserverConnectorStore != null, "The Parameter geoserverConnectorStore must not be null.");
     }
 }

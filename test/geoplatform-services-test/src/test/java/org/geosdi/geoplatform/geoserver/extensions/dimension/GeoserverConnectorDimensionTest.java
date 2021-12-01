@@ -32,9 +32,10 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.geoserver.extensions.uniquevalues;
+package org.geosdi.geoplatform.geoserver.extensions.dimension;
 
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
+import org.geosdi.geoplatform.geoserver.extensions.importer.GeoserverConnectorImporterTest;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -44,18 +45,16 @@ import org.slf4j.LoggerFactory;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GeoserverConnectorUniqueValuesTest extends GeoserverConnectorTest {
+public class GeoserverConnectorDimensionTest extends GeoserverConnectorTest {
 
-    static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorUniqueValuesTest.class);
+    static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorImporterTest.class);
 
-    @Test
     @Ignore
-    public void a_loadUniqueValues() throws Exception {
-        //logger.info("####################{}\n", this.restReader.uniqueValues("topp:states", "STATE_NAME"));
-        logger.info("#####################{}\n", this.geoserverConnectorStore
-                .loadUniqueValues()
-                .withLayerName("topp:states")
-                .withLayerAttribute("STATE_NAME")
-                .getResponse());
+    @Test
+    public void a_getDimension() throws Exception {
+        //logger.info("##################{}\n", this.restReader.getDimensions("cite:fluids_rete_zk"));
+        logger.info("##################{}\n", this.geoserverConnectorStore
+                        .loadDimensionRequest()
+                        .withLayerName("cite:fluids_rete_zk").getResponse());
     }
 }

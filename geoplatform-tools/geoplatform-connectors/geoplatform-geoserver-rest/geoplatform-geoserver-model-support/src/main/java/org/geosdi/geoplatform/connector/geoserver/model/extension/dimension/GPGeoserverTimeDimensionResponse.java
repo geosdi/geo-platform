@@ -32,30 +32,24 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.geoserver.extensions.uniquevalues;
+package org.geosdi.geoplatform.connector.geoserver.model.extension.dimension;
 
-import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.*;
+
+import java.util.List;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GeoserverConnectorUniqueValuesTest extends GeoserverConnectorTest {
+@AllArgsConstructor
+@Getter
+@ToString
+@Builder
+@NoArgsConstructor
+public class GPGeoserverTimeDimensionResponse implements IGPLoadDimensionResponse{
 
-    static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorUniqueValuesTest.class);
-
-    @Test
-    @Ignore
-    public void a_loadUniqueValues() throws Exception {
-        //logger.info("####################{}\n", this.restReader.uniqueValues("topp:states", "STATE_NAME"));
-        logger.info("#####################{}\n", this.geoserverConnectorStore
-                .loadUniqueValues()
-                .withLayerName("topp:states")
-                .withLayerAttribute("STATE_NAME")
-                .getResponse());
-    }
+    private static final long serialVersionUID = -8768200907024666817L;
+    //
+    private List<String> times;
 }

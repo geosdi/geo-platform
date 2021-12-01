@@ -35,6 +35,7 @@
 package org.geosdi.geoplatform.connector.geoserver.model.extension.uniquevalues;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.common.collect.Lists;
 import lombok.Getter;
 import lombok.Setter;
@@ -52,10 +53,11 @@ import java.util.List;
 @Getter
 @ToString
 @XmlAccessorType(XmlAccessType.FIELD)
+@JsonRootName(value = "list")
 public class GPGeoserverUniqueValue implements IGPGeoserverUniqueValue{
 
     private static final long serialVersionUID = -7480675606061888111L;
     //
-    @JsonProperty(value = "values")
+    @JsonProperty(value = "string")
     private List<String> values = Lists.newArrayList();
 }

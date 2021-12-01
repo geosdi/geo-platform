@@ -32,30 +32,27 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.geoserver.extensions.uniquevalues;
+package org.geosdi.geoplatform.connector.store.extensions.dimension;
 
-import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.dimension.GeoserverLoadDimensionRequest;
+import org.geosdi.geoplatform.connector.store.extensions.importer.GeoserverImporterConnectorStore;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GeoserverConnectorUniqueValuesTest extends GeoserverConnectorTest {
+public abstract class GeoserverDimensionConnectorStore extends GeoserverImporterConnectorStore implements GPDimensionConnectorStore {
 
-    static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorUniqueValuesTest.class);
+    protected GeoserverDimensionConnectorStore(GPGeoserverConnector theServer) {
+        super(theServer);
+    }
 
-    @Test
-    @Ignore
-    public void a_loadUniqueValues() throws Exception {
-        //logger.info("####################{}\n", this.restReader.uniqueValues("topp:states", "STATE_NAME"));
-        logger.info("#####################{}\n", this.geoserverConnectorStore
-                .loadUniqueValues()
-                .withLayerName("topp:states")
-                .withLayerAttribute("STATE_NAME")
-                .getResponse());
+    /**
+     * @return {@link GeoserverLoadDimensionRequest}
+     */
+    @Override
+    public GeoserverLoadDimensionRequest loadDimensionRequest() {
+        return this.server.loadDimensionRequest();
     }
 }

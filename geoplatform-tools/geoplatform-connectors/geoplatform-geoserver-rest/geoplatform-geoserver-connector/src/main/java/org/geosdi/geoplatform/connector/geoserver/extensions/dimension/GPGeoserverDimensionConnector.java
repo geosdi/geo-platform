@@ -32,40 +32,32 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.extensions.uniquevalues;
+package org.geosdi.geoplatform.connector.geoserver.extensions.dimension;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
-import org.geosdi.geoplatform.connector.geoserver.layergroups.GPGeoserverLayerGroupsConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.uniquevalue.GeoserverLoadUniqueValuesRequest;
+import org.geosdi.geoplatform.connector.geoserver.extensions.importer.GPGeoserverImporterConnector;
+import org.geosdi.geoplatform.connector.geoserver.request.extension.dimension.GeoserverLoadDimensionRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import java.net.URL;
 
 import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExceptionMessage;
-import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public abstract class GPGeoserverUniqueValuesConnector extends GPGeoserverLayerGroupsConnector implements IGPGeoserverUniqueValuesConnector {
-
-    protected final JacksonSupport emptyJacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
-            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-            WRAP_ROOT_VALUE_DISABLE,
-            INDENT_OUTPUT_ENABLE);
+public abstract class GPGeoserverDimensionConnector extends GPGeoserverImporterConnector implements IGPGeoserverDimensionConnector{
 
     /**
      * @param urlServer
      * @param theJacksonSupport
      * @param version
      */
-    public GPGeoserverUniqueValuesConnector(String urlServer, JacksonSupport theJacksonSupport, String version) {
+    public GPGeoserverDimensionConnector(String urlServer, JacksonSupport theJacksonSupport, String version) {
         super(urlServer, theJacksonSupport, version);
     }
 
@@ -75,7 +67,7 @@ public abstract class GPGeoserverUniqueValuesConnector extends GPGeoserverLayerG
      * @param theJacksonSupport
      * @param version
      */
-    public GPGeoserverUniqueValuesConnector(String urlServer, GPSecurityConnector securityConnector,
+    public GPGeoserverDimensionConnector(String urlServer, GPSecurityConnector securityConnector,
             JacksonSupport theJacksonSupport, String version) {
         super(urlServer, securityConnector, theJacksonSupport, version);
     }
@@ -87,7 +79,7 @@ public abstract class GPGeoserverUniqueValuesConnector extends GPGeoserverLayerG
      * @param theJacksonSupport
      * @param version
      */
-    public GPGeoserverUniqueValuesConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig,
+    public GPGeoserverDimensionConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig,
             GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
         super(urlServer, pooledConnectorConfig, securityConnector, theJacksonSupport, version);
     }
@@ -98,7 +90,7 @@ public abstract class GPGeoserverUniqueValuesConnector extends GPGeoserverLayerG
      * @param theJacksonSupport
      * @param theVersion
      */
-    public GPGeoserverUniqueValuesConnector(URL server, GPSecurityConnector securityConnector,
+    public GPGeoserverDimensionConnector(URL server, GPSecurityConnector securityConnector,
             JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, securityConnector, theJacksonSupport, theVersion);
     }
@@ -110,20 +102,20 @@ public abstract class GPGeoserverUniqueValuesConnector extends GPGeoserverLayerG
      * @param theJacksonSupport
      * @param theVersion
      */
-    public GPGeoserverUniqueValuesConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig,
+    public GPGeoserverDimensionConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig,
             GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion);
     }
 
     /**
-     * @return {@link GeoserverLoadUniqueValuesRequest}
+     * @return {@link GPGeoserverDimensionConnector}
      */
     @Override
-    public GeoserverLoadUniqueValuesRequest loadUniqueValues() {
+    public GeoserverLoadDimensionRequest loadDimensionRequest() {
         switch (version) {
             case V220x:
             case V219x:
-                return new GPGeoserverLoadUniqueValuesRequest(this, this.jacksonSupport);
+                return new GPGeoserverLoadDimensionRequest(this, this.emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

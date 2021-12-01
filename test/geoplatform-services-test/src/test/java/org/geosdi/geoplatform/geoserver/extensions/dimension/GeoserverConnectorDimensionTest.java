@@ -55,6 +55,6 @@ public class GeoserverConnectorDimensionTest extends GeoserverConnectorTest {
         //logger.info("##################{}\n", this.restReader.getDimensions("cite:fluids_rete_zk"));
         logger.info("##################{}\n", this.geoserverConnectorStore
                         .loadDimensionRequest()
-                        .withLayerName("cite:fluids_rete_zk").getResponse());
+                        .withLayerName("cite:fluids_rete_zk").getResponse().getTimes());
     }
 }

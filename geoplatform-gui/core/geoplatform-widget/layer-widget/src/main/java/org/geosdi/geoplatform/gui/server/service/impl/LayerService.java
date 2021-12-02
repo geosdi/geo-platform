@@ -752,7 +752,7 @@ public class LayerService implements ILayerService {
             this.sessionUtility.getLoggedAccount(httpServletRequest);
             return this.geoserverConnectorStore
                     .loadDimensionRequest()
-                    .withLayerName(layerName).getResponse().getTimes().trim();
+                    .withLayerName(layerName).getResponse().getTimes();
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         } catch (MalformedURLException ex) {

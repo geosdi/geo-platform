@@ -23,7 +23,7 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-model</artifactId>
         </dependency>
-        
+
         <!-- GEONETWORK -->
         <dependency>
             <groupId>it.geosolutions</groupId>

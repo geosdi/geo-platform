@@ -142,12 +142,6 @@
             <version>${project.version}</version>
         </dependency>
         
-        <dependency>
-            <groupId>it.geosolutions</groupId>
-            <artifactId>geoserver-manager</artifactId>
-            <version>${geoserver-manager-version}</version>
-        </dependency>
-        
         <!-- GIN -->
         <dependency>
             <groupId>com.google.gwt.inject</groupId>

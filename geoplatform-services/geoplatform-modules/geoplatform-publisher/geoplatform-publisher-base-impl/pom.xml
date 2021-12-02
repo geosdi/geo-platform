@@ -91,12 +91,6 @@
         </dependency>-->
 
         <dependency>
-            <groupId>it.geosolutions</groupId>
-            <artifactId>geoserver-manager</artifactId>
-            <version>${geoserver-manager-version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>batik-ext</artifactId>
             <version>1.7</version>

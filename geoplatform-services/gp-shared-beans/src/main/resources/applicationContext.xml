@@ -9,30 +9,7 @@
        default-autowire="byName">
 
     <context:annotation-config />
-    
+
     <context:component-scan base-package="org.geosdi.geoplatform.shared"></context:component-scan>
-    
-    <bean id="sharedRestPublisher" class="it.geosolutions.geoserver.rest.GeoServerRESTPublisher">
-        <constructor-arg type="java.lang.String" value="configurator{geoserver_url}"/>
-        <!-- the login and the password of the REST geoserver instance -->
-        <constructor-arg type="java.lang.String" value="configurator{geoserver_username}"/>
-        <constructor-arg type="java.lang.String" value="configurator{geoserver_password}"/>
-    </bean>
-
-    <bean id="sharedRestReader" class="it.geosolutions.geoserver.rest.GeoServerRESTReader">
-        <constructor-arg type="java.lang.String" value="configurator{geoserver_url}"/>
-        <!-- the login and the password of the REST geoserver instance -->
-        <constructor-arg type="java.lang.String" value="configurator{geoserver_username}"/>
-        <constructor-arg type="java.lang.String" value="configurator{geoserver_password}"/>
-    </bean>
-
-    <bean id="sharedRestStoreManager" class="it.geosolutions.geoserver.rest.manager.GeoServerRESTStoreManager">
-        <constructor-arg type="java.net.URL" value="configurator{geoserver_url}"/>
-        <!-- the login and the password of the REST geoserver instance -->
-        <constructor-arg type="java.lang.String" value="configurator{geoserver_username}"/>
-        <constructor-arg type="java.lang.String" value="configurator{geoserver_password}"/>
-    </bean>
-
-    <!--===================================================================== -->
 
 </beans>

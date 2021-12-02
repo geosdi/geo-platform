@@ -207,7 +207,7 @@
             <groupId>it.geosolutions</groupId>
             <artifactId>geoserver-manager</artifactId>
             <version>${geoserver-manager-version}</version>
-            <scope>runtime</scope>
+            <scope>test</scope>
         </dependency>
 
         <dependency>

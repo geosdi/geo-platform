@@ -33,7 +33,17 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        
+
+        <!-- =============================================================== -->
+        <!-- ==================== GEOSERVER-MANAGER====================== -->
+        <!-- =============================================================== -->
+        <dependency>
+            <groupId>it.geosolutions</groupId>
+            <artifactId>geoserver-manager</artifactId>
+            <version>${geoserver-manager-version}</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>

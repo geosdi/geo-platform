@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-4.1.xsd"
+       default-autowire="byName">
+
+    <context:annotation-config />
+
+    <import resource="classpath:applicationContext-jasypt.xml" />
+
+    <context:component-scan base-package="org.geosdi.geoplatform.logger.support.spring.config,
+                                          org.geosdi.geoplatform.shared"/>
+
+    <bean id="sharedRestPublisher" class="it.geosolutions.geoserver.rest.GeoServerRESTPublisher">
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_url}"/>
+        <!-- the login and the password of the REST geoserver instance -->
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_username}"/>
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_password}"/>
+    </bean>
+
+    <bean id="casPublisherService" class="org.geosdi.geoplatform.services.GPPublisherBasicServiceImpl">
+        <!--the server to connect-->
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_url}"/>
+        <!--the login and the password of the REST geoserver instance-->
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_username}"/>
+        <constructor-arg type="java.lang.String" value="configurator{geoserver_password}"/>
+        <!--the workspace where publishing the shapefiles to preview-->
+        <constructor-arg type="java.lang.String" value="configurator{geoportal_dir_path}"/>
+    </bean>
+</beans>

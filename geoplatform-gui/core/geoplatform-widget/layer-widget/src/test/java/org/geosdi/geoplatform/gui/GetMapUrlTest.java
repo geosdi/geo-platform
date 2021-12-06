@@ -35,10 +35,11 @@
  */
 package org.geosdi.geoplatform.gui;
 
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,6 +60,6 @@ public class GetMapUrlTest {
         String url = "http://150.145.141.92/geoserver/wms?service=WMS&amp;version=1.1.0&amp;request=GetMap&amp;layers=topp:states&amp;styles=&amp;bbox=1724753.45766073,5099790.02370763,1725687.17361712,5100561.22571727&amp;width=512&amp;height=422&amp;srs=EPSG:3003&amp;format=image/png";
         HttpGet get = new HttpGet(url.replaceAll("&amp;", "&"));
         CloseableHttpResponse response = client.execute(get);
-        logger.info("###############################{}", response.getEntity().getContentType().getValue());
+        logger.info("###############################{}", response.getEntity().getContentType());
     }
 }

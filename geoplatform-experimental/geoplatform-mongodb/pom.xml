@@ -17,8 +17,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mongodb.version>4.3.3</mongodb.version>
-        <spring-data-mongodb-version>3.2.6</spring-data-mongodb-version>
+        <mongodb.version>4.3.4</mongodb.version>
+        <spring-data-mongodb-version>3.3.0</spring-data-mongodb-version>
     </properties>
 
     <dependencyManagement>

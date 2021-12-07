@@ -75,7 +75,8 @@ public class WFSDescribeFeatureTest {
                             .withMaxTotalConnections(150)
                             .withDefaultMaxPerRoute(80)
                             .withMaxRedirect(20)
-                            .build()).build();
+                            .build())
+                    .build();
         } catch (Exception ex) {
             ex.printStackTrace();
             logger.error("#######################EXCEPTION : {}", ex.getMessage());
@@ -137,6 +138,7 @@ public class WFSDescribeFeatureTest {
         logger.info("######################LAYER_SCHEMA_SITE_COM_XML : \n{}\n", writer);
     }
 
+    @Ignore
     @Test
     public void d_describeLayerPercorsiNavetteTest() throws Exception {
         WFSDescribeFeatureTypeRequest<Schema> request = newConnector()

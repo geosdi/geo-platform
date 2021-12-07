@@ -50,7 +50,9 @@ import java.net.URI;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
+
 import static org.apache.http.client.config.CookieSpecs.DEFAULT;
+
 import static org.geosdi.geoplatform.connector.server.security.GPSecurityConnector.MOCK_SECURITY;
 
 /**
@@ -118,7 +120,15 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
                 .setCookieSpec(DEFAULT)
                 .setSocketTimeout(8000)
                 .setConnectTimeout(8000)
-                .setConnectionRequestTimeout(8000).build();
+                .setConnectionRequestTimeout(8000)
+                .setCookieSpec(this.serverConnector.getPooledConnectorConfig().getCookieSpec().toCookieSpec())
+                .setConnectTimeout(this.serverConnector.getPooledConnectorConfig().getConnectionTimeout())
+                .setConnectionRequestTimeout(this.serverConnector.getPooledConnectorConfig().getRequestConnectionTimeout())
+//                .setResponseTimeout(this.serverConnector.getPooledConnectorConfig().getResponseConnectionTimeout())
+                .setRedirectsEnabled(this.serverConnector.getPooledConnectorConfig().isRedirectsEnabled())
+//                .setConnectionKeepAlive(this.serverConnector.getPooledConnectorConfig().getConnectionKeepAlive())
+                .setMaxRedirects(this.serverConnector.getPooledConnectorConfig().getMaxRedirect())
+                .build();
     }
 
     /**

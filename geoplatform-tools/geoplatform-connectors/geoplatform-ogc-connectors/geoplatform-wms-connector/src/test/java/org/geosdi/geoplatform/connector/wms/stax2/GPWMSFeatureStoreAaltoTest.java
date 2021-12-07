@@ -378,4 +378,20 @@ public class GPWMSFeatureStoreAaltoTest extends WMSGetFeatureInfoAaltoReaderTest
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreAaltoPozzuoliAcque")
                 .collect(joining(separator, "", ".json"))), wmsFeatureStore);
     }
+
+    @Test
+    public void z_s_wmsFeatureStoreAaltoReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoReader.readAsStore(storage.find("layer_importer148.xml"));
+        logger.info("#######################FEATURE_STORE_layer_importer : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreAaltoLayerImporter")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
+
+    @Test
+    public void z_t_wmsFeatureStoreAaltoReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoReader.readAsStore(storage.find("fluids_rete_zk.xml"));
+        logger.info("#######################FEATURE_STORE_fluids_rete_zk : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreAaltoFluidsRete")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
 }

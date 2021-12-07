@@ -1,0 +1,519 @@
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:ws_vito="http://www.geosdi.org/ws_vito" xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.opengis.net/wfs http://150.145.141.180/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd 
+                       http://www.geosdi.org/ws_vito http://150.145.141.180/geoserver/ws_vito/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=ws_vito%3Alayer_importer148">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <ws_vito:layer_importer148 fid="layer_importer148.1">
+            <ws_vito:Geometry>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.25949,40.85749
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:Geometry>
+            <ws_vito:name>1 - Via Foria, 105</ws_vito:name>
+            <ws_vito:open>true</ws_vito:open>
+            <ws_vito:description>
+                <img src="https://lh5.googleusercontent.com/Vxk8ZCmwCOjYYiqm-EwJaqmRQd9PRxk7EQBVwyZUywEfJKaRL9SCP1F3nPhP-vQjdDSgSwMQ66YoyklND00M30idYbJYh0XVvxg9rG1vwifg5FIWO2jduiKUeUof-g27Hg"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>Sito n.1 - Dome n.1 su via Foria altezza Caserma Garibaldi.<br/>n. 4 RT di cui due su via Foria e due
+                su via Piazzi (anche su tratta in controsenso)
+                <br/>
+                <br/>
+                <img src="https://lh4.googleusercontent.com/A5dM04xoujOaEvFl6PPp6gvzu67KEPtMhD4wf5p4UXuurSlTbO4rRuoTW59Oz8S2byqwhx6XAg51dsxbGN19DXhfn792Lm16l-um_frgbAEwoWr_UG7PMd6lMWAmOS34"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>
+                <img src="https://lh4.googleusercontent.com/IovYc9YhC_F3CjWgqTPbs_1xNAcgl41HEQx4DjKO_qPEpBJ35sZ4bogKrloywZusAV3zaO58a0S4ZR4TOTH9tYwe0rEicPAtZzIdGrZjMKTR-df7Or6TsMifqyccxX4"
+                     height="200" width="auto"/>
+            </ws_vito:description>
+            <ws_vito:tessellate>-1</ws_vito:tessellate>
+            <ws_vito:extrude>0</ws_vito:extrude>
+            <ws_vito:gx_media_links>
+                https://lh5.googleusercontent.com/Vxk8ZCmwCOjYYiqm-EwJaqmRQd9PRxk7EQBVwyZUywEfJKaRL9SCP1F3nPhP-vQjdDSgSwMQ66YoyklND00M30idYbJYh0XVvxg9rG1vwifg5FIWO2jduiKUeUof-g27Hg
+                https://lh4.googleusercontent.com/A5dM04xoujOaEvFl6PPp6gvzu67KEPtMhD4wf5p4UXuurSlTbO4rRuoTW59Oz8S2byqwhx6XAg51dsxbGN19DXhfn792Lm16l-um_frgbAEwoWr_UG7PMd6lMWAmOS34
+                https://lh4.googleusercontent.com/IovYc9YhC_F3CjWgqTPbs_1xNAcgl41HEQx4DjKO_qPEpBJ35sZ4bogKrloywZusAV3zaO58a0S4ZR4TOTH9tYwe0rEicPAtZzIdGrZjMKTR-df7Or6TsMifqyccxX4
+            </ws_vito:gx_media_links>
+            <ws_vito:Folder>layer_importer</ws_vito:Folder>
+        </ws_vito:layer_importer148>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:layer_importer148 fid="layer_importer148.2">
+            <ws_vito:Geometry>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.2625232,40.8595567
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:Geometry>
+            <ws_vito:name>2 - Via Tenore</ws_vito:name>
+            <ws_vito:open>true</ws_vito:open>
+            <ws_vito:description>
+                <img src="https://lh3.googleusercontent.com/xwXGpdS6eTTb-fEtodr1Vquuz-ElXWWZrsS03ihQHDKtwqwY4ri4R5eoOwnhYxrG5ieAE4wExaBwq-VsFhOmJZ9QNpGPEzuctP228k8nehItgeth__Krunj5DzZm0Fo"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>N.2 RT - Secondo lampione da via Foria<br/>N.1 Dome su incrocio con via Foria
+            </ws_vito:description>
+            <ws_vito:tessellate>-1</ws_vito:tessellate>
+            <ws_vito:extrude>0</ws_vito:extrude>
+            <ws_vito:gx_media_links>
+                https://lh3.googleusercontent.com/xwXGpdS6eTTb-fEtodr1Vquuz-ElXWWZrsS03ihQHDKtwqwY4ri4R5eoOwnhYxrG5ieAE4wExaBwq-VsFhOmJZ9QNpGPEzuctP228k8nehItgeth__Krunj5DzZm0Fo
+            </ws_vito:gx_media_links>
+            <ws_vito:Folder>layer_importer</ws_vito:Folder>
+        </ws_vito:layer_importer148>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:layer_importer148 fid="layer_importer148.3">
+            <ws_vito:Geometry>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.2657918,40.8552186
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:Geometry>
+            <ws_vito:name>4 - Via Cesare Rosaroll, 30</ws_vito:name>
+            <ws_vito:open>true</ws_vito:open>
+            <ws_vito:description>
+                <img src="https://lh3.googleusercontent.com/mYg6LGC8ij5O9ITkeph3CdRQkdriJy7pwyvzcEO_--1RXgSMQOPGIaLt4gF3zkmFoDRArKAdvvvFBQAGfN6s6IxaKzaf4sIq4gtKQc65IKjncrm3cp1G2WzURr_C4_FB"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>N.1 Dome<br/>N.1 RT
+                <br/>
+                <br/>
+                <img src="https://lh3.googleusercontent.com/iWpgxZay8A7i9Y6SZ28b-bfh3p9920zu3uq1XwuQJaU8fGvm54o5l_WKixXx9sfkerRyCmxqE0nCtgUoCatoM7FZcYfFacJPqbOCp9TkAtEMqR1D8Qc4OP0Msihhqkla"
+                     height="200" width="auto"/>
+            </ws_vito:description>
+            <ws_vito:tessellate>-1</ws_vito:tessellate>
+            <ws_vito:extrude>0</ws_vito:extrude>
+            <ws_vito:gx_media_links>
+                https://lh3.googleusercontent.com/mYg6LGC8ij5O9ITkeph3CdRQkdriJy7pwyvzcEO_--1RXgSMQOPGIaLt4gF3zkmFoDRArKAdvvvFBQAGfN6s6IxaKzaf4sIq4gtKQc65IKjncrm3cp1G2WzURr_C4_FB
+                https://lh3.googleusercontent.com/iWpgxZay8A7i9Y6SZ28b-bfh3p9920zu3uq1XwuQJaU8fGvm54o5l_WKixXx9sfkerRyCmxqE0nCtgUoCatoM7FZcYfFacJPqbOCp9TkAtEMqR1D8Qc4OP0Msihhqkla
+            </ws_vito:gx_media_links>
+            <ws_vito:Folder>layer_importer</ws_vito:Folder>
+        </ws_vito:layer_importer148>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:layer_importer148 fid="layer_importer148.4">
+            <ws_vito:Geometry>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.2475697,40.8602991
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:Geometry>
+            <ws_vito:name>5 - Via San Vincenzo, 20</ws_vito:name>
+            <ws_vito:open>true</ws_vito:open>
+            <ws_vito:description>
+                <img src="https://lh5.googleusercontent.com/OABTa2XGPsrebAV9CqsWZMClZFFYU-vDSmQ4Z51wRS9-LVzeVq0JK2ZAj3Ux0EDwLid5qxZkH8M9JumFUQA7nSVb-ojMrxZqQN3GVZc9DvWg0T6ihYNQEG9Yeax0v_w"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>N.1 Dome e N.2 RT per la Rampa San Gennaro dei Poveri su palo preesistente.<br/>N. 2 RT per Via
+                S.Gennaro dei Poveri direzione ospedale su un secondo palo preesistente.
+                <br/>
+                <br/>
+                <img src="https://lh4.googleusercontent.com/OdaeT-IjqgcoGlFOiUboCE5KmoXgCjb0mJqCevD4ybXjVxr_lf2TnMPdC_aoJRHGY7FuKtufgkPHOfft3SNvZImy9ssuvsEkZpheOVTC0Jozd-oqWkMYSn-Z31Hr0ws"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>
+                <img src="https://lh3.googleusercontent.com/QLUNMmOkDmchN75Eqks4wPlq5hc1N4XoQm_7tBd-MWToHoTYj-FiLNKKHVxGlRFBuXoFkgfidbNNRvVE52fd4m80rzIksRs6nERfz3kL6aAcmnHxP-LB0-oYmHOjKyo"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>
+                <img src="https://lh3.googleusercontent.com/_Egc2wPikTeNFOcbWihgduDaNaGo8LzD1RvvHMT1QTU-TQFpcbf9djPRxXR7IvdQY9P45V8MVY3VYg6tdRV5Jo9KkqknwlCITKwSpHH63ElbN9xexyuVd3pln1kTy9w"
+                     height="200" width="auto"/>
+            </ws_vito:description>
+            <ws_vito:tessellate>-1</ws_vito:tessellate>
+            <ws_vito:extrude>0</ws_vito:extrude>
+            <ws_vito:gx_media_links>
+                https://lh5.googleusercontent.com/OABTa2XGPsrebAV9CqsWZMClZFFYU-vDSmQ4Z51wRS9-LVzeVq0JK2ZAj3Ux0EDwLid5qxZkH8M9JumFUQA7nSVb-ojMrxZqQN3GVZc9DvWg0T6ihYNQEG9Yeax0v_w
+                https://lh4.googleusercontent.com/OdaeT-IjqgcoGlFOiUboCE5KmoXgCjb0mJqCevD4ybXjVxr_lf2TnMPdC_aoJRHGY7FuKtufgkPHOfft3SNvZImy9ssuvsEkZpheOVTC0Jozd-oqWkMYSn-Z31Hr0ws
+                https://lh3.googleusercontent.com/QLUNMmOkDmchN75Eqks4wPlq5hc1N4XoQm_7tBd-MWToHoTYj-FiLNKKHVxGlRFBuXoFkgfidbNNRvVE52fd4m80rzIksRs6nERfz3kL6aAcmnHxP-LB0-oYmHOjKyo
+                https://lh3.googleusercontent.com/_Egc2wPikTeNFOcbWihgduDaNaGo8LzD1RvvHMT1QTU-TQFpcbf9djPRxXR7IvdQY9P45V8MVY3VYg6tdRV5Jo9KkqknwlCITKwSpHH63ElbN9xexyuVd3pln1kTy9w
+            </ws_vito:gx_media_links>
+            <ws_vito:Folder>layer_importer</ws_vito:Folder>
+        </ws_vito:layer_importer148>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:layer_importer148 fid="layer_importer148.5">
+            <ws_vito:Geometry>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.2473681,40.8600678
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:Geometry>
+            <ws_vito:name>5Bis - Salita Principi</ws_vito:name>
+            <ws_vito:open>true</ws_vito:open>
+            <ws_vito:description>
+                <img src="https://lh3.googleusercontent.com/OB8K9S0EOj2_mx1xxSakmrsH_3iW3JJnQowgfHgdiXAkMWN4Fs_CSi_1k3uboZhgBqDolthTSw83j-DIfRfawv3kn_BIw_eCteIkNoofsDRqVP_1iNtOO6Xo_t5jMapu"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>N.1 RT nel senso di marcia in salita. Rimuovere n.1 dissuasore.
+            </ws_vito:description>
+            <ws_vito:tessellate>-1</ws_vito:tessellate>
+            <ws_vito:extrude>0</ws_vito:extrude>
+            <ws_vito:gx_media_links>
+                https://lh3.googleusercontent.com/OB8K9S0EOj2_mx1xxSakmrsH_3iW3JJnQowgfHgdiXAkMWN4Fs_CSi_1k3uboZhgBqDolthTSw83j-DIfRfawv3kn_BIw_eCteIkNoofsDRqVP_1iNtOO6Xo_t5jMapu
+            </ws_vito:gx_media_links>
+            <ws_vito:Folder>layer_importer</ws_vito:Folder>
+        </ws_vito:layer_importer148>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:layer_importer148 fid="layer_importer148.6">
+            <ws_vito:Geometry>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.2423919,40.8591558
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:Geometry>
+            <ws_vito:name>6 - Piazza Fontanelle, 94</ws_vito:name>
+            <ws_vito:open>true</ws_vito:open>
+            <ws_vito:description>
+                <img src="https://lh6.googleusercontent.com/n_4cgEryTE90StvDaJ3kahqsWHjJpk6m9KLuvZYhyWYGIEfttSlpl6U37zxN6Qq2Dib_PQEbRUZDYj3DbQj0RXfXVnK4f2OorHE7HUAKIWELLAI224LyAQ3SameJJiD0tg"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>N.1 Dome sulla piazza su palo esistente con angolo oscuro palazzo con civico n.57/A.<br/>N.1 RT in
+                ingresso alla Piazza.
+                <br/>
+                <br/>
+                <img src="https://lh5.googleusercontent.com/gOHMMVnQmUYj_42P65BkTYztC2pbmMq1F3L0JWjEeZO-at7NxoFLHeY0lQcNRcjSOKj7Ayl4lzCtF47r0mDBv2K_o8ZbA--ybROQjPlqURTeP8GhJkE9IPVjK3AzFj3i"
+                     height="200" width="auto"/>
+            </ws_vito:description>
+            <ws_vito:tessellate>-1</ws_vito:tessellate>
+            <ws_vito:extrude>0</ws_vito:extrude>
+            <ws_vito:gx_media_links>
+                https://lh6.googleusercontent.com/n_4cgEryTE90StvDaJ3kahqsWHjJpk6m9KLuvZYhyWYGIEfttSlpl6U37zxN6Qq2Dib_PQEbRUZDYj3DbQj0RXfXVnK4f2OorHE7HUAKIWELLAI224LyAQ3SameJJiD0tg
+                https://lh5.googleusercontent.com/gOHMMVnQmUYj_42P65BkTYztC2pbmMq1F3L0JWjEeZO-at7NxoFLHeY0lQcNRcjSOKj7Ayl4lzCtF47r0mDBv2K_o8ZbA--ybROQjPlqURTeP8GhJkE9IPVjK3AzFj3i
+            </ws_vito:gx_media_links>
+            <ws_vito:Folder>layer_importer</ws_vito:Folder>
+        </ws_vito:layer_importer148>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:layer_importer148 fid="layer_importer148.7">
+            <ws_vito:Geometry>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.2420152,40.8586178
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:Geometry>
+            <ws_vito:name>6Bis - Via Scipione Mazzella</ws_vito:name>
+            <ws_vito:open>true</ws_vito:open>
+            <ws_vito:description>
+                <img src="https://lh3.googleusercontent.com/pPp8CN5wfNJ5ISe_nPxjOyyoqGTMUzPjBPMrqrq75zn_vaEXOleNafVpivIUjg_MwQSzeVKmmrOQs4EklJBIOOhi0ya7NJLF-_cvtBgvO67r3HaswV3R-AbzCN4-R-Zg"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>N.2 RT per salita e discesa su via Scipione Mazzella.
+            </ws_vito:description>
+            <ws_vito:tessellate>-1</ws_vito:tessellate>
+            <ws_vito:extrude>0</ws_vito:extrude>
+            <ws_vito:gx_media_links>
+                https://lh3.googleusercontent.com/pPp8CN5wfNJ5ISe_nPxjOyyoqGTMUzPjBPMrqrq75zn_vaEXOleNafVpivIUjg_MwQSzeVKmmrOQs4EklJBIOOhi0ya7NJLF-_cvtBgvO67r3HaswV3R-AbzCN4-R-Zg
+            </ws_vito:gx_media_links>
+            <ws_vito:Folder>layer_importer</ws_vito:Folder>
+        </ws_vito:layer_importer148>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:layer_importer148 fid="layer_importer148.8">
+            <ws_vito:Geometry>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.245137,40.8579967
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:Geometry>
+            <ws_vito:name>7 - Calata Fontanelle</ws_vito:name>
+            <ws_vito:open>true</ws_vito:open>
+            <ws_vito:description>
+                <img src="https://lh4.googleusercontent.com/q9pfquH-9NM6H7o__ggEh67klsEOT3Z9RlqPPWKMfe9H3LIGXaF4M0Sb6zCwTbbqL4LxpjObajZyklAc5ZXq1E64tT_TQJ20ySW7BIQxq2DOPGGHxOerqGJ85GTDrw1lVA"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>Angolo Via Fontanelle 1<br/>Sito n.7 - Dome n.1 - RT n.2
+                <br/>
+                <br/>
+                <img src="https://lh3.googleusercontent.com/IpuFBWjeeb6U48ZLlvCvgZL-DtdGnOEsi5Ww6jVD1Wf0v-VbDS9g23BJj1pjhcP2XDl1I-5JgkQDsIrquvM5bwYbj7VvWSpA0Yg4huGCOrCN4ch0zgJ9j88hHwX0Sl_O"
+                     height="200" width="auto"/>
+            </ws_vito:description>
+            <ws_vito:tessellate>-1</ws_vito:tessellate>
+            <ws_vito:extrude>0</ws_vito:extrude>
+            <ws_vito:gx_media_links>
+                https://lh4.googleusercontent.com/q9pfquH-9NM6H7o__ggEh67klsEOT3Z9RlqPPWKMfe9H3LIGXaF4M0Sb6zCwTbbqL4LxpjObajZyklAc5ZXq1E64tT_TQJ20ySW7BIQxq2DOPGGHxOerqGJ85GTDrw1lVA
+                https://lh3.googleusercontent.com/IpuFBWjeeb6U48ZLlvCvgZL-DtdGnOEsi5Ww6jVD1Wf0v-VbDS9g23BJj1pjhcP2XDl1I-5JgkQDsIrquvM5bwYbj7VvWSpA0Yg4huGCOrCN4ch0zgJ9j88hHwX0Sl_O
+            </ws_vito:gx_media_links>
+            <ws_vito:Folder>layer_importer</ws_vito:Folder>
+        </ws_vito:layer_importer148>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:layer_importer148 fid="layer_importer148.9">
+            <ws_vito:Geometry>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.25563,40.85877
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:Geometry>
+            <ws_vito:name>8 - Piazza Miracoli, 24</ws_vito:name>
+            <ws_vito:open>true</ws_vito:open>
+            <ws_vito:description>
+                <img src="https://lh3.googleusercontent.com/jBATFsdmg3EwfY797pQapbF5nHK3wUxa-XUJFUG7Jj4DxUQ8RgOWsmW3ySVMZ5YNgiZlvIqke8IC05Vw3-QVjiM9zpVooZ4Hs-ZKJK6G9PaYRaq_VZN11hIjG_qN9rs7"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>N.1 Dome su parapetto<br/>N.1 RT su uscita Piazza nei pressi della Chiesa<br/>N.1 RT su Vico Croce ai
+                Miracoli
+                <br/>
+                <br/>
+                <img src="https://lh6.googleusercontent.com/C-MeljRI9vW_fKPyl53G1T4Pu5yVlI7XH88kOaRgazXSk7dwaAHMFwmtt56BAk-wMnKzLfkH7HgdKk1-5O8eXqJqFxaGnHAxb5j2D0gw5pr_ux8AzOBEROZWGBjzHzJm"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>
+                <img src="https://lh3.googleusercontent.com/llhi0RX6qYFa4e4Dvh0ho55L1oJQeyjNzcgq-KPH7s6F9C1Nqp4zjUQ3Ku4RQj0YtlFwmyk7xZ6l95lv_l71QJnMgfHXUxDoUjYYkdhOMj4ApRnwJwsefb9PukfAyqNSew"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>
+                <img src="https://lh6.googleusercontent.com/hUibfotK3Gl2FDcTox3X6SWxfmVy-CaK48FaIhmg06gxFeDZuWYU5TGAcKCQYfrdvsl9IhAmssD-g-hpbrn1aXRMSGcabX1JgP6SGpfMFBt1c8nTQUG-uMX3b9P5vEo"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>
+                <img src="https://lh5.googleusercontent.com/UJPAM4xoRl1aFZNLqCSZzdckN1fkxhwzvJOjnbCSn5VHbWVMzA7gEhLypyMr9GA1bqzuKd3xwfejpk6-nPoZCcZ2aO21CFGcMRBjBQW_JpmRyh4hPgNKx4yxIprFmoTN"
+                     height="200" width="auto"/>
+            </ws_vito:description>
+            <ws_vito:tessellate>-1</ws_vito:tessellate>
+            <ws_vito:extrude>0</ws_vito:extrude>
+            <ws_vito:gx_media_links>
+                https://lh3.googleusercontent.com/jBATFsdmg3EwfY797pQapbF5nHK3wUxa-XUJFUG7Jj4DxUQ8RgOWsmW3ySVMZ5YNgiZlvIqke8IC05Vw3-QVjiM9zpVooZ4Hs-ZKJK6G9PaYRaq_VZN11hIjG_qN9rs7
+                https://lh6.googleusercontent.com/C-MeljRI9vW_fKPyl53G1T4Pu5yVlI7XH88kOaRgazXSk7dwaAHMFwmtt56BAk-wMnKzLfkH7HgdKk1-5O8eXqJqFxaGnHAxb5j2D0gw5pr_ux8AzOBEROZWGBjzHzJm
+                https://lh3.googleusercontent.com/llhi0RX6qYFa4e4Dvh0ho55L1oJQeyjNzcgq-KPH7s6F9C1Nqp4zjUQ3Ku4RQj0YtlFwmyk7xZ6l95lv_l71QJnMgfHXUxDoUjYYkdhOMj4ApRnwJwsefb9PukfAyqNSew
+                https://lh6.googleusercontent.com/hUibfotK3Gl2FDcTox3X6SWxfmVy-CaK48FaIhmg06gxFeDZuWYU5TGAcKCQYfrdvsl9IhAmssD-g-hpbrn1aXRMSGcabX1JgP6SGpfMFBt1c8nTQUG-uMX3b9P5vEo
+                https://lh5.googleusercontent.com/UJPAM4xoRl1aFZNLqCSZzdckN1fkxhwzvJOjnbCSn5VHbWVMzA7gEhLypyMr9GA1bqzuKd3xwfejpk6-nPoZCcZ2aO21CFGcMRBjBQW_JpmRyh4hPgNKx4yxIprFmoTN
+            </ws_vito:gx_media_links>
+            <ws_vito:Folder>layer_importer</ws_vito:Folder>
+        </ws_vito:layer_importer148>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:layer_importer148 fid="layer_importer148.10">
+            <ws_vito:Geometry>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.253379,40.8651986
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:Geometry>
+            <ws_vito:name>Salita Capodimonte, 110</ws_vito:name>
+            <ws_vito:open>true</ws_vito:open>
+            <ws_vito:tessellate>-1</ws_vito:tessellate>
+            <ws_vito:extrude>0</ws_vito:extrude>
+            <ws_vito:Folder>layer_importer</ws_vito:Folder>
+        </ws_vito:layer_importer148>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:layer_importer148 fid="layer_importer148.11">
+            <ws_vito:Geometry>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.256596,40.8603831
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:Geometry>
+            <ws_vito:name>10 - Vico Pacella ai Miracoli, 50</ws_vito:name>
+            <ws_vito:open>true</ws_vito:open>
+            <ws_vito:description>
+                <img src="https://lh5.googleusercontent.com/TwmFi_jYS-iu2jFD_pxnYzLDBO-K4nPBWH14SFgRK8fQIvk0aHU11QEuc_N91PasWZ2qL2Wr9koUoGrNfB1zoWWbaowxqJrGUPEiztvmkRPRA6X6vtfH6p7poL5tvwcA"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>N.1 Dome<br/>N.2 RT sui due sensi del Vico
+                <br/>
+                <br/>
+                <img src="https://lh6.googleusercontent.com/U3gHtBC9CSpvTf0dLgKQvlyFDZkd9eJsLH6v41qu4bvz2tgZK9xDngkmiWh1XCcTr0Abi-re4_wiqV4jW7BqtTfu8jQfohr9qRzZO-zOVtbbWwCXOMCeZNf5OsO37jLqtw"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>
+                <img src="https://lh5.googleusercontent.com/iMBCoGjXlbmwn92nA3D4rsc6VdaZgLQ7-RkU3zR3E2c6sw6zhmEp0juJCruXJxCD1iQSh1yxNednLNHFQAswojwKYSaz9nUKHKsH2s9w7Yb3ImGnvNQskcCl1w1BHOq73Q"
+                     height="200" width="auto"/>
+            </ws_vito:description>
+            <ws_vito:tessellate>-1</ws_vito:tessellate>
+            <ws_vito:extrude>0</ws_vito:extrude>
+            <ws_vito:gx_media_links>
+                https://lh5.googleusercontent.com/TwmFi_jYS-iu2jFD_pxnYzLDBO-K4nPBWH14SFgRK8fQIvk0aHU11QEuc_N91PasWZ2qL2Wr9koUoGrNfB1zoWWbaowxqJrGUPEiztvmkRPRA6X6vtfH6p7poL5tvwcA
+                https://lh6.googleusercontent.com/U3gHtBC9CSpvTf0dLgKQvlyFDZkd9eJsLH6v41qu4bvz2tgZK9xDngkmiWh1XCcTr0Abi-re4_wiqV4jW7BqtTfu8jQfohr9qRzZO-zOVtbbWwCXOMCeZNf5OsO37jLqtw
+                https://lh5.googleusercontent.com/iMBCoGjXlbmwn92nA3D4rsc6VdaZgLQ7-RkU3zR3E2c6sw6zhmEp0juJCruXJxCD1iQSh1yxNednLNHFQAswojwKYSaz9nUKHKsH2s9w7Yb3ImGnvNQskcCl1w1BHOq73Q
+            </ws_vito:gx_media_links>
+            <ws_vito:Folder>layer_importer</ws_vito:Folder>
+        </ws_vito:layer_importer148>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:layer_importer148 fid="layer_importer148.12">
+            <ws_vito:Geometry>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.2590321,40.8604548
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:Geometry>
+            <ws_vito:name>11 - Vico Santa Maria Degli Angeli alle Croci</ws_vito:name>
+            <ws_vito:open>true</ws_vito:open>
+            <ws_vito:description>
+                <img src="https://lh5.googleusercontent.com/l3UgDF-p7eLQw4N5KXhtXAxkY2HlBQYrt8JZNeNGzZryrkRKhA4-S6HkuhqXSuGY_FIvWIbjIgjmLQVuY_bCr6FD3CTXzbAMz4C9VLTeuHA00KB3keHmpAfOubwApsSo"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>N.3 RT - due controsensi del Vico e discesa della "Salita ritiro della purità".
+                <br/>
+                <br/>
+                <img src="https://lh3.googleusercontent.com/K56ExI29aPDyZCd3kuL4sCBvY7pYupPAPLc7UCY0j86kWECAFRsRk5mPKVCD-FGZaRpCYfJ_rKMQmDrzckqI5XeZQ0fPO354zQClU-snnpN3ZETIWTbwPoMqpUW6aH6y"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>
+                <img src="https://lh5.googleusercontent.com/Jq-ewsBxL1Uh2Zbxwb9Q8esrlQyThKMXnHc2giCTwNur0OwzFr5JGigUBgYCEtnUxF7i0GueKLv1Iqv7yPjoaoKBL5rOeBB1On1VZys7MQ93WycQ-kFOUJuTC_7i9Vc"
+                     height="200" width="auto"/>
+            </ws_vito:description>
+            <ws_vito:tessellate>-1</ws_vito:tessellate>
+            <ws_vito:extrude>0</ws_vito:extrude>
+            <ws_vito:gx_media_links>
+                https://lh5.googleusercontent.com/l3UgDF-p7eLQw4N5KXhtXAxkY2HlBQYrt8JZNeNGzZryrkRKhA4-S6HkuhqXSuGY_FIvWIbjIgjmLQVuY_bCr6FD3CTXzbAMz4C9VLTeuHA00KB3keHmpAfOubwApsSo
+                https://lh3.googleusercontent.com/K56ExI29aPDyZCd3kuL4sCBvY7pYupPAPLc7UCY0j86kWECAFRsRk5mPKVCD-FGZaRpCYfJ_rKMQmDrzckqI5XeZQ0fPO354zQClU-snnpN3ZETIWTbwPoMqpUW6aH6y
+                https://lh5.googleusercontent.com/Jq-ewsBxL1Uh2Zbxwb9Q8esrlQyThKMXnHc2giCTwNur0OwzFr5JGigUBgYCEtnUxF7i0GueKLv1Iqv7yPjoaoKBL5rOeBB1On1VZys7MQ93WycQ-kFOUJuTC_7i9Vc
+            </ws_vito:gx_media_links>
+            <ws_vito:Folder>layer_importer</ws_vito:Folder>
+        </ws_vito:layer_importer148>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:layer_importer148 fid="layer_importer148.13">
+            <ws_vito:Geometry>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.2494325,40.8593978
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:Geometry>
+            <ws_vito:name>12 - Piazza Sanità</ws_vito:name>
+            <ws_vito:open>true</ws_vito:open>
+            <ws_vito:description>
+                <img src="https://lh4.googleusercontent.com/5A7p9QU6CGWivwNWU9VLOK38QMa4p9q6YBDCokQA1xmWArfdrj8a7g5-ruWzSQAKgS4yGzrIAZvRfvdBYVOq5apFJ4_4_gUdsowwmMudAosqav7w7IbWgTgQLJp9f1_ibg"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>N. 1 Dome + N.2 RT su sostituzione di palo esistente.
+                <br/>
+                <br/>
+                <img src="https://lh6.googleusercontent.com/gsOmufmPlvhGlCbb8p4KD1r5ngFMCI3s1JOnb153AaevT4_a92RVdzrmftA1L_mX_jH7GyAVusgCHOdjYEBu8VQ6Mtd2jqOERnwAEqg4teHmZYZMIsNNBQ-3vz0NGpk"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>
+                <img src="https://lh5.googleusercontent.com/hZGbfHqCkL5tNy26yapjjRqEbHWA4leGm4YHU1cGvwOWqNPYLM8kE-07wb4_ZXDJmmxz5HH5MwW_hCZIR3aybElbqxb5c8nPi-P9HsKyMazmeIOarAieQEVqn6OU2hEQ"
+                     height="200" width="auto"/>
+            </ws_vito:description>
+            <ws_vito:tessellate>-1</ws_vito:tessellate>
+            <ws_vito:extrude>0</ws_vito:extrude>
+            <ws_vito:gx_media_links>
+                https://lh4.googleusercontent.com/5A7p9QU6CGWivwNWU9VLOK38QMa4p9q6YBDCokQA1xmWArfdrj8a7g5-ruWzSQAKgS4yGzrIAZvRfvdBYVOq5apFJ4_4_gUdsowwmMudAosqav7w7IbWgTgQLJp9f1_ibg
+                https://lh6.googleusercontent.com/gsOmufmPlvhGlCbb8p4KD1r5ngFMCI3s1JOnb153AaevT4_a92RVdzrmftA1L_mX_jH7GyAVusgCHOdjYEBu8VQ6Mtd2jqOERnwAEqg4teHmZYZMIsNNBQ-3vz0NGpk
+                https://lh5.googleusercontent.com/hZGbfHqCkL5tNy26yapjjRqEbHWA4leGm4YHU1cGvwOWqNPYLM8kE-07wb4_ZXDJmmxz5HH5MwW_hCZIR3aybElbqxb5c8nPi-P9HsKyMazmeIOarAieQEVqn6OU2hEQ
+            </ws_vito:gx_media_links>
+            <ws_vito:Folder>layer_importer</ws_vito:Folder>
+        </ws_vito:layer_importer148>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:layer_importer148 fid="layer_importer148.14">
+            <ws_vito:Geometry>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.247905,40.8591926
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:Geometry>
+            <ws_vito:name>13 - Ascensore Sanità</ws_vito:name>
+            <ws_vito:open>true</ws_vito:open>
+            <ws_vito:description>
+                <img src="https://lh5.googleusercontent.com/6-o0eU8cR2rI82yi8H2h4aoeemE8oqUuzZtqhQOKYSpUet3t278szVbo6-lQBx19R5qogW0VTmklUNfmgR-qz8uMvAUMTD8EVC5BO2V-axsKx1KcB3rrv7zmH12myVBd"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>N.1 Dome e 1RT sul tratto in salita della "Discesa Sanità" su palo di nuova installazione
+                <br/>
+                <br/>
+                <img src="https://lh3.googleusercontent.com/QeoZFOEfRukwWVsm-ju-N4734GmUvyw9Zd-E6jBTmRBrxqQ8HIryg8o-W6cc8pOZMGEANX0gSaG5tmq4TjYMkfyjQxz-_9kmde7C25GprHjYgDI8CWsF88E2_EEd3HUT"
+                     height="200" width="auto"/>
+            </ws_vito:description>
+            <ws_vito:tessellate>-1</ws_vito:tessellate>
+            <ws_vito:extrude>0</ws_vito:extrude>
+            <ws_vito:gx_media_links>
+                https://lh5.googleusercontent.com/6-o0eU8cR2rI82yi8H2h4aoeemE8oqUuzZtqhQOKYSpUet3t278szVbo6-lQBx19R5qogW0VTmklUNfmgR-qz8uMvAUMTD8EVC5BO2V-axsKx1KcB3rrv7zmH12myVBd
+                https://lh3.googleusercontent.com/QeoZFOEfRukwWVsm-ju-N4734GmUvyw9Zd-E6jBTmRBrxqQ8HIryg8o-W6cc8pOZMGEANX0gSaG5tmq4TjYMkfyjQxz-_9kmde7C25GprHjYgDI8CWsF88E2_EEd3HUT
+            </ws_vito:gx_media_links>
+            <ws_vito:Folder>layer_importer</ws_vito:Folder>
+        </ws_vito:layer_importer148>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:layer_importer148 fid="layer_importer148.15">
+            <ws_vito:Geometry>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.2474342,40.859097
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:Geometry>
+            <ws_vito:name>13Bis - Via Sanità, 109</ws_vito:name>
+            <ws_vito:open>true</ws_vito:open>
+            <ws_vito:description>
+                <img src="https://lh4.googleusercontent.com/p7wnt25eVp1dxB7uPSYwWqVeMOmVcI-QJN0P8lFy6jsRm4ii8h-LOn1d7gUw9RSUK9WLA27Mcq3_g-OUru5dA6QMhuoQzclmpPIP40mJtXuYMePCTIV5R79vcMFkgyuw"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>N.2 RT su palo di nuova installazione
+                <br/>
+                <br/>
+                <img src="https://lh5.googleusercontent.com/eA36OrZEo4Je6yq8nou8-P04JSl4bbTE23bV-4l03GUQzelu9h8w6AJvr7U0CauuGQbkKOyLaw39TwmJ3CFHHj3Yst0Fw9mKuHEVUDmibvpiLEFwDGCSYeacfwRBtUs17Q"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>
+                <img src="https://lh3.googleusercontent.com/lrY6gUrzPZHMy9H7tM3cYFBfTqlGFqhqIfE7tpbLp4uzy9lO6aQSqPEEpbGmAnG6hyZgi-IEXCxwA-zKZvrYQ6HkH14nykFDvI3huN6qujE3xnDJ6FH7JnbSbc9_Atri"
+                     height="200" width="auto"/>
+            </ws_vito:description>
+            <ws_vito:tessellate>-1</ws_vito:tessellate>
+            <ws_vito:extrude>0</ws_vito:extrude>
+            <ws_vito:gx_media_links>
+                https://lh4.googleusercontent.com/p7wnt25eVp1dxB7uPSYwWqVeMOmVcI-QJN0P8lFy6jsRm4ii8h-LOn1d7gUw9RSUK9WLA27Mcq3_g-OUru5dA6QMhuoQzclmpPIP40mJtXuYMePCTIV5R79vcMFkgyuw
+                https://lh5.googleusercontent.com/eA36OrZEo4Je6yq8nou8-P04JSl4bbTE23bV-4l03GUQzelu9h8w6AJvr7U0CauuGQbkKOyLaw39TwmJ3CFHHj3Yst0Fw9mKuHEVUDmibvpiLEFwDGCSYeacfwRBtUs17Q
+                https://lh3.googleusercontent.com/lrY6gUrzPZHMy9H7tM3cYFBfTqlGFqhqIfE7tpbLp4uzy9lO6aQSqPEEpbGmAnG6hyZgi-IEXCxwA-zKZvrYQ6HkH14nykFDvI3huN6qujE3xnDJ6FH7JnbSbc9_Atri
+            </ws_vito:gx_media_links>
+            <ws_vito:Folder>layer_importer</ws_vito:Folder>
+        </ws_vito:layer_importer148>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:layer_importer148 fid="layer_importer148.16">
+            <ws_vito:Geometry>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.2646031,40.8540467
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:Geometry>
+            <ws_vito:name>3 - Piazza De Nicola</ws_vito:name>
+            <ws_vito:open>true</ws_vito:open>
+            <ws_vito:description>
+                <img src="https://lh4.googleusercontent.com/zxaX8VzR8FxmKisQVwXzmxkILg-eoKho6eo4tnvtr0yt0JWwEV6Zpskw9mL27jQWawzj5R4JpV0Zg1yKxlsM1ZLGeVwe8JNj80Sc0lTlRUbbNh7xn_vXeVc9S5wY2OM"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>N.1 Dome n.1<br/>N.1 RT
+                <br/>
+                <br/>
+                <img src="https://lh3.googleusercontent.com/7nV-i5ccqGX_kD9qYJimLTKp43H0A5pR6w2gMYtMn1mYQ-MPVCvBg0z-tCaaMNA72efSRY6PE73o9hVNTDIGg77IpB3qUcEA1hCtYLYluf8cbeT9UuX0dvXBkEVBV4k"
+                     height="200" width="auto"/>
+                <br/>
+                <br/>
+                <img src="https://lh4.googleusercontent.com/UdxC0Z0MoReXTs4hQCujxB9uOWFpWeanBO3zB5aCSbFJRL3De3G2JbVdZvxXnZL7c-MbnNyia8n6hdoD5ubBX9U6YP2CxfMnASWEXLGtGGiVwlCKoqfhikkLqDAOy0c"
+                     height="200" width="auto"/>
+            </ws_vito:description>
+            <ws_vito:tessellate>-1</ws_vito:tessellate>
+            <ws_vito:extrude>0</ws_vito:extrude>
+            <ws_vito:gx_media_links>
+                https://lh4.googleusercontent.com/zxaX8VzR8FxmKisQVwXzmxkILg-eoKho6eo4tnvtr0yt0JWwEV6Zpskw9mL27jQWawzj5R4JpV0Zg1yKxlsM1ZLGeVwe8JNj80Sc0lTlRUbbNh7xn_vXeVc9S5wY2OM
+                https://lh3.googleusercontent.com/7nV-i5ccqGX_kD9qYJimLTKp43H0A5pR6w2gMYtMn1mYQ-MPVCvBg0z-tCaaMNA72efSRY6PE73o9hVNTDIGg77IpB3qUcEA1hCtYLYluf8cbeT9UuX0dvXBkEVBV4k
+                https://lh4.googleusercontent.com/UdxC0Z0MoReXTs4hQCujxB9uOWFpWeanBO3zB5aCSbFJRL3De3G2JbVdZvxXnZL7c-MbnNyia8n6hdoD5ubBX9U6YP2CxfMnASWEXLGtGGiVwlCKoqfhikkLqDAOy0c
+            </ws_vito:gx_media_links>
+            <ws_vito:Folder>layer_importer</ws_vito:Folder>
+        </ws_vito:layer_importer148>
+    </gml:featureMember>
+</wfs:FeatureCollection>

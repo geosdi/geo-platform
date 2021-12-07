@@ -1,0 +1,1108 @@
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:ws_vito="http://www.geosdi.org/ws_vito" xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.opengis.net/wfs http://150.145.141.180/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd
+                       http://www.geosdi.org/ws_vito http://150.145.141.180/geoserver/ws_vito/wfs?service=WFS&amp;amp;version=1.0.0&amp;amp;request=DescribeFeatureType&amp;amp;typeName=ws_vito%3Afluids_rete_zk">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.1">
+            <ws_vito:elevation>829</ws_vito:elevation>
+            <ws_vito:site_name>Station Montemarano 1, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-12T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0101</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;amp;level=response&amp;amp;u=web&amp;amp;
+                start=2021-01-01&amp;amp;end=2023-12-31&amp;amp;sta=S0101
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.91993</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.99731,40.91993
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>14.99731</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.2">
+            <ws_vito:elevation>906</ws_vito:elevation>
+            <ws_vito:site_name>Station Morra De Sanctis 1, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-16T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0103</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0103
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.93496</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.24093,40.93496
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.24093</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.3">
+            <ws_vito:elevation>581</ws_vito:elevation>
+            <ws_vito:site_name>Station Lioni 1, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-15T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0104</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0104
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.88177</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.19381,40.88177
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.19381</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.4">
+            <ws_vito:elevation>1071</ws_vito:elevation>
+            <ws_vito:site_name>Station Laceno 1, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-13T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0105</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0105
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.80323</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.11395,40.80323
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.11395</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.5">
+            <ws_vito:elevation>448</ws_vito:elevation>
+            <ws_vito:site_name>Station Laviano Vammora, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-04T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0106</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0106
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.78531</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.28047,40.78531
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.28047</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.6">
+            <ws_vito:elevation>739</ws_vito:elevation>
+            <ws_vito:site_name>Station Romagnano al monte 3, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-26T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0314</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0314
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.62822509</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.4390975,40.62822509
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.4390975</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.7">
+            <ws_vito:elevation>611</ws_vito:elevation>
+            <ws_vito:site_name>Station Savoia di Lucania 3, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-05T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0315</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0315
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.56598</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.55571,40.56598
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.55571</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.8">
+            <ws_vito:elevation>583</ws_vito:elevation>
+            <ws_vito:site_name>Station Vietri di Potenza 3, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-30T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0316</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0316
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.59366157</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.50980702,40.59366157
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.50980702</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.9">
+            <ws_vito:elevation>685</ws_vito:elevation>
+            <ws_vito:site_name>Station Satriano di Lucania 3, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-01T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0317</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0317
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.55517895</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.62954177,40.55517895
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.62954177</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.10">
+            <ws_vito:elevation>1015</ws_vito:elevation>
+            <ws_vito:site_name>Station Sasso di Castalda 3, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-02T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0318</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0318
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.49169</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.68053,40.49169
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.68053</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.11">
+            <ws_vito:elevation>593</ws_vito:elevation>
+            <ws_vito:site_name>Station Tito Scalo 3, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-31T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0319</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0319
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.579257</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.67547,40.579257
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.67547</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.12">
+            <ws_vito:elevation>697</ws_vito:elevation>
+            <ws_vito:site_name>Station Rocca San Felice 1, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-09T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0102</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0102
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.97539</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.14601,40.97539
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.14601</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.13">
+            <ws_vito:elevation>644</ws_vito:elevation>
+            <ws_vito:site_name>Station Ruoti 3, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-07T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0320</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0320
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.70927</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.68612,40.70927
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.68612</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.14">
+            <ws_vito:elevation>447</ws_vito:elevation>
+            <ws_vito:site_name>Station Conza della Campania 1, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-14T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0107</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0107
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.87822</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.30147,40.87822
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.30147</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.15">
+            <ws_vito:elevation>864</ws_vito:elevation>
+            <ws_vito:site_name>Station Montemarano 4, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-12T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0401</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0401
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.907288</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.9899,40.907288
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>14.9899</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.16">
+            <ws_vito:elevation>306.8</ws_vito:elevation>
+            <ws_vito:site_name>Station Colliano Campolongo 1, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-06-07T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0108</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0108
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.70713985</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN, CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.27381983,40.70713985
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.27381983</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.17">
+            <ws_vito:elevation>765</ws_vito:elevation>
+            <ws_vito:site_name>Station Rocca San Felice 4, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-09T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0402</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0402
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.969532</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.150447,40.969532
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.150447</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.18">
+            <ws_vito:elevation>997</ws_vito:elevation>
+            <ws_vito:site_name>Station Colliano 1, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-23T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0109</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0109
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.722128</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.37431,40.722128
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.37431</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.19">
+            <ws_vito:elevation>825</ws_vito:elevation>
+            <ws_vito:site_name>Station Morra De Sanctis 4, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-16T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0403</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0403
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.92614</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.24359,40.92614
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.24359</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.20">
+            <ws_vito:elevation>725</ws_vito:elevation>
+            <ws_vito:site_name>Station Castelnuovo di Conza Municipio, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-27T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0110</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0110
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.81858837</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.32137644,40.81858837
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.32137644</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.21">
+            <ws_vito:elevation>589</ws_vito:elevation>
+            <ws_vito:site_name>Station Lioni 4, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-15T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0404</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0404
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.87133</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.16336,40.87133
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.16336</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.22">
+            <ws_vito:elevation>880</ws_vito:elevation>
+            <ws_vito:site_name>Station Castelgrande 1, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-06T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0111</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0111
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.78604</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.43244,40.78604
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.43244</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.23">
+            <ws_vito:elevation>1096</ws_vito:elevation>
+            <ws_vito:site_name>Station Laceno 4, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-13T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0405</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0405
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.80246</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.11596,40.80246
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.11596</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.24">
+            <ws_vito:elevation>677</ws_vito:elevation>
+            <ws_vito:site_name>Station Buccino 1, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-29T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0112</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0112
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.63337394</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.38400467,40.63337394
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.38400467</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.25">
+            <ws_vito:elevation>369</ws_vito:elevation>
+            <ws_vito:site_name>Station Laviano 4, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-24T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0406</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0406
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.79426802</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.27665108,40.79426802
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.27665108</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.26">
+            <ws_vito:elevation>500.1</ws_vito:elevation>
+            <ws_vito:site_name>Station San Gregorio Magno 1, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-25T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0113</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0113
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.66168066</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.41108835,40.66168066
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.41108835</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.27">
+            <ws_vito:elevation>483</ws_vito:elevation>
+            <ws_vito:site_name>Station Conza della Campania 4, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-14T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0407</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0407
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.86786</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.30528,40.86786
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.30528</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.28">
+            <ws_vito:elevation>691</ws_vito:elevation>
+            <ws_vito:site_name>Station Romagnano al monte 1, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-26T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0114</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0114
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.62153497</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.4460022,40.62153497
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.4460022</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.29">
+            <ws_vito:elevation>271.6</ws_vito:elevation>
+            <ws_vito:site_name>Station Colliano Bisigliano 3, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-06-08T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0408</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0408
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.7000931</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ, DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.27340949,40.7000931
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.27340949</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.31">
+            <ws_vito:elevation>1084</ws_vito:elevation>
+            <ws_vito:site_name>Station Colliano 4, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-23T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0409</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0409
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.72580228</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.3606728,40.72580228
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.3606728</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.32">
+            <ws_vito:elevation>634</ws_vito:elevation>
+            <ws_vito:site_name>Station Castelnuovo di Conza 4, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-26T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0410</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0410
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.81792143</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.31685986,40.81792143
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.31685986</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.34">
+            <ws_vito:elevation>890</ws_vito:elevation>
+            <ws_vito:site_name>Station Castelgrande 4, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-06T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0411</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0411
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.78056</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.42743,40.78056
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.42743</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.36">
+            <ws_vito:elevation>603</ws_vito:elevation>
+            <ws_vito:site_name>Station Buccino 4, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-29T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0412</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0412
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.631174</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.36255562,40.631174
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.36255562</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.38">
+            <ws_vito:elevation>481</ws_vito:elevation>
+            <ws_vito:site_name>Station San Gregorio Magno 4, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-25T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0413</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0413
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.66308616</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.42378404,40.66308616
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.42378404</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.40">
+            <ws_vito:elevation>606</ws_vito:elevation>
+            <ws_vito:site_name>Station Romagnano al monte 4, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-26T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0414</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0414
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.63316338</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.45434667,40.63316338
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.45434667</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.42">
+            <ws_vito:elevation>775</ws_vito:elevation>
+            <ws_vito:site_name>Station Savoia di Lucania 4, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-05T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0415</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0415
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.57285</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.55878,40.57285
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.55878</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.44">
+            <ws_vito:elevation>673</ws_vito:elevation>
+            <ws_vito:site_name>Station Vietri di Potenza 4, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-30T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0416</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0416
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.59132941</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.51489745,40.59132941
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.51489745</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.46">
+            <ws_vito:elevation>653</ws_vito:elevation>
+            <ws_vito:site_name>Station Satriano di Lucania 4, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-01T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0417</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0417
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.54479139</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.63358849,40.54479139
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.63358849</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.48">
+            <ws_vito:elevation>960</ws_vito:elevation>
+            <ws_vito:site_name>Station Sasso di Castalda 4, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-02T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0418</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0418
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.48597422</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.67653758,40.48597422
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.67653758</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.50">
+            <ws_vito:elevation>798</ws_vito:elevation>
+            <ws_vito:site_name>Station Tito Scalo 4, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-31T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0419</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0419
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.60646</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.69675,40.60646
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.69675</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.52">
+            <ws_vito:elevation>666</ws_vito:elevation>
+            <ws_vito:site_name>Station Ruoti 4, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-07T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0420</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0420
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.72217</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.67559,40.72217
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.67559</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.54">
+            <ws_vito:elevation>842</ws_vito:elevation>
+            <ws_vito:site_name>Station Montemarano 5, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-12T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0501</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0501
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.911</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">14.98956,40.911
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>14.98956</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.56">
+            <ws_vito:elevation>719</ws_vito:elevation>
+            <ws_vito:site_name>Station Rocca San Felice 5, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-09T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0502</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0502
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.97324</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.15152,40.97324
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.15152</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.58">
+            <ws_vito:elevation>809</ws_vito:elevation>
+            <ws_vito:site_name>Station Morra De Sanctis 5, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-16T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0503</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0503
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.92537</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.24529,40.92537
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.24529</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.60">
+            <ws_vito:elevation>570</ws_vito:elevation>
+            <ws_vito:site_name>Station Lioni 5, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-15T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0504</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0504
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.87827</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.19148,40.87827
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.19148</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.62">
+            <ws_vito:elevation>1073</ws_vito:elevation>
+            <ws_vito:site_name>Station Laceno 5, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-13T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0505</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0505
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.80591</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.11692,40.80591
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.11692</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.64">
+            <ws_vito:elevation>505</ws_vito:elevation>
+            <ws_vito:site_name>Station Laviano 5, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-24T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0506</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0506
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.78728532</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.28111423,40.78728532
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.28111423</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.66">
+            <ws_vito:elevation>429</ws_vito:elevation>
+            <ws_vito:site_name>Station Conza della Campania 5, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-14T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0507</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0507
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.87515</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.30797,40.87515
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.30797</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.68">
+            <ws_vito:elevation>377.3</ws_vito:elevation>
+            <ws_vito:site_name>Station Colliano Campolongo 3, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-06-07T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0508</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0508
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.71370039</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ, DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.27691263,40.71370039
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.27691263</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.70">
+            <ws_vito:elevation>1084</ws_vito:elevation>
+            <ws_vito:site_name>Station Colliano 5, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-23T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0509</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0509
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.727135</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.360578,40.727135
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.360578</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+</wfs:FeatureCollection>

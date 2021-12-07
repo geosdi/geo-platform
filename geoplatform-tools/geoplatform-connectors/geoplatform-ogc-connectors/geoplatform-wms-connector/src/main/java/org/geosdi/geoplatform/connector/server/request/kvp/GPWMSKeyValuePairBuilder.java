@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.connector.server.request.kvp.GPWMSRequestKvpReader
 import javax.annotation.Nonnull;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -65,7 +66,7 @@ public interface GPWMSKeyValuePairBuilder<R, KVPBuilder extends GPWMSKeyValuePai
 
         protected static final GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
         //
-        protected ThreadLocal<String> keyValuePair = ThreadLocal.withInitial(() -> null);
+        protected ThreadLocal<String> keyValuePair = withInitial(() -> null);
 
         protected GPWMSBaseKeyValuePairBuilder() {
         }

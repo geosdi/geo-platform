@@ -543,7 +543,39 @@ public class GPWMSFeatureStoreTest extends WMSGetFeatureInfoStaxReaderTest {
     public void c_p_wmsFeatureStoreReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("CorsiAcque.xml"));
         logger.info("#######################FEATURE_STORE_corsi_acque : {}\n", wmsFeatureStore);
-        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreCorsiAcque.xml.json")
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreCorsiAcque.json")
+                .collect(joining(separator))), wmsFeatureStore);
+    }
+
+    @Test
+    public void c_q_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("NavteqStreet.xml"));
+        logger.info("#######################FEATURE_STORE_navteq_street : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreNavteqStreet.json")
+                .collect(joining(separator))), wmsFeatureStore);
+    }
+
+    @Test
+    public void c_r_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("CAMPIndustrieARischio.xml"));
+        logger.info("#######################FEATURE_STORE_campi_industrie_rischio : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "CAMPIndustrieARischio.json")
+                .collect(joining(separator))), wmsFeatureStore);
+    }
+
+    @Test
+    public void c_s_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("layer_importer148.xml"));
+        logger.info("#######################FEATURE_STORE_layer_importer : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "layer_importer148.json")
+                .collect(joining(separator))), wmsFeatureStore);
+    }
+
+    @Test
+    public void c_t_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("fluids_rete_zk.xml"));
+        logger.info("#######################FEATURE_STORE_fluifs_rete_zk : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "layer_importer148.json")
                 .collect(joining(separator))), wmsFeatureStore);
     }
 }

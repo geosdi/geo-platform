@@ -75,6 +75,7 @@ public class WMSGetFeatureInfoTheoriesTest {
                 "geoserver-building_resonance_level.xml", "admin_vigneti_catastali.xml", "VulcanoCampiIstat.xml",
                  "rsdi_alt_600_a_700.xml", "rsdi_fiumi_basilicata.xml", "rsdi_sentieri_app_lucano.xml",
                 "dtsew_campania_20150324_20201122.xml", "dtsup_campania_20150324_20201122.xml", "pozzuoliAcque.xml",
-                "laghi.xml", "viabilità.xml", "vincoli.xml", "CorsiAcque.xml"};
+                "laghi.xml", "viabilità.xml", "vincoli.xml", "CorsiAcque.xml", "NavteqStreet.xml",
+                "CAMPIndustrieARischio.xml", "layer_importer148.xml", "fluids_rete_zk.xml"};
     }
 }

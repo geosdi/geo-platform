@@ -452,4 +452,16 @@ public class GPWMSGetFeatureInfoStaxReaderTest extends WMSGetFeatureInfoStaxRead
         logger.info("#######################FEATURE_COLLECTION_CAMP_INDUSTRIE_A_RISCHIO : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("CAMPIndustrieARischio.xml"))));
     }
+
+    @Test
+    public void d_a_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_LAYER_IMPORTER : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("layer_importer148.xml"))));
+    }
+
+    @Test
+    public void d_b_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_FLUIDS_RETE_ZK : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("fluids_rete_zk.xml"))));
+    }
 }

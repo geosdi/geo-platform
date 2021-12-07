@@ -32,40 +32,18 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.settings.services.wfs;
+package org.geosdi.geoplatform.connector.server.request.cookie;
 
-import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.model.settings.service.GeoserverServiceType;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wfs.GeoserverDeleteWFSWorkspaceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.settings.services.GPGeoserverDeleteWorkspaceServiceSettings;
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
-
-import javax.annotation.Nonnull;
-
-import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.connector.geoserver.model.settings.service.GeoserverServiceType.wfs;
+import java.io.Serializable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@ThreadSafe
-class GPGeoserverDeleteWFSWorkspaceSettingsRequest extends GPGeoserverDeleteWorkspaceServiceSettings<GeoserverDeleteWFSWorkspaceSettingsRequest> implements GeoserverDeleteWFSWorkspaceSettingsRequest {
+public interface GPConnectorCookieSpec extends Serializable {
 
     /**
-     * @param theServerConnector
-     * @param theJacksonSupport
+     * @return {@link String}
      */
-    GPGeoserverDeleteWFSWorkspaceSettingsRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
-        super(theServerConnector, theJacksonSupport);
-    }
-
-    /**
-     * @return {@link GeoserverServiceType}
-     */
-    @Override
-    protected GeoserverServiceType toService() {
-        return wfs;
-    }
+    String toCookieSpec();
 }

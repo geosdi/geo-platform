@@ -49,11 +49,8 @@ import javax.annotation.Nonnull;
 import java.net.URI;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Boolean.TRUE;
-import static java.util.concurrent.TimeUnit.SECONDS;
 import static javax.annotation.meta.When.NEVER;
 import static org.apache.hc.client5.http.config.RequestConfig.custom;
-import static org.apache.hc.client5.http.cookie.StandardCookieSpec.IGNORE;
 import static org.geosdi.geoplatform.connector.server.security.GPSecurityConnector.MOCK_SECURITY;
 
 /**
@@ -118,12 +115,13 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
      */
     protected RequestConfig createRequestConfig() {
         return custom()
-                .setCookieSpec(IGNORE)
-                .setConnectTimeout(10, SECONDS)
-                .setConnectionRequestTimeout(10, SECONDS)
-                .setResponseTimeout(10, SECONDS)
-                .setRedirectsEnabled(TRUE)
-                .setMaxRedirects(15)
+                .setCookieSpec(this.serverConnector.getPooledConnectorConfig().getCookieSpec().toCookieSpec())
+                .setConnectTimeout(this.serverConnector.getPooledConnectorConfig().getConnectionTimeout())
+                .setConnectionRequestTimeout(this.serverConnector.getPooledConnectorConfig().getRequestConnectionTimeout())
+                .setResponseTimeout(this.serverConnector.getPooledConnectorConfig().getResponseConnectionTimeout())
+                .setRedirectsEnabled(this.serverConnector.getPooledConnectorConfig().isRedirectsEnabled())
+                .setConnectionKeepAlive(this.serverConnector.getPooledConnectorConfig().getConnectionKeepAlive())
+                .setMaxRedirects(this.serverConnector.getPooledConnectorConfig().getMaxRedirect())
                 .build();
     }
 

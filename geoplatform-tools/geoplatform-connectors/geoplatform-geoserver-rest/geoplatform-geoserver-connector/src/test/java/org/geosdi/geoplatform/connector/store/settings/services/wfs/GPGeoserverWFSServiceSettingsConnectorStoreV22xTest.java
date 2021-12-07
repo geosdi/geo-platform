@@ -34,12 +34,26 @@
  */
 package org.geosdi.geoplatform.connector.store.settings.services.wfs;
 
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wfs.GeoserverLoadWFSServiceSettingsRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wfs.GeoserverLoadWFSWorkspaceServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wfs.GPGeoserverWFSServiceSettings;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wfs.GPGeoserverWFSWorkspaceServiceSettings;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wfs.GeoserverWFSServiceSettings;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wfs.*;
 import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV22xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.io.File.separator;
+import static java.lang.Thread.currentThread;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
+import static org.geosdi.geoplatform.connector.jackson.GPGeoserverWFSServiceSettingsJacksonTest.toWFSServiceSettings;
+import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -60,5 +74,55 @@ public class GPGeoserverWFSServiceSettingsConnectorStoreV22xTest extends GPBaseG
         GeoserverLoadWFSWorkspaceServiceSettingsRequest wfsWorkspaceServiceSettingsRequest = geoserverConnectorStoreV2_20_x.loadWFSWorkspaceServiceSettingsRequest();
         logger.info("########################GEOSERVER_WFS_WORKSPACE_SERIVCE_SETTINGS_RESPONSE : {}\n", wfsWorkspaceServiceSettingsRequest
                 .withWorkspace("topp").getResponse());
+    }
+
+    @Test
+    public void c_updateWFSServiceSettingsRequestTest() throws Exception {
+        GeoserverUpdateWFSServiceSettingsRequest updateWFSServiceSettingsRequest = geoserverConnectorStoreV2_20_x.updateWFSServiceSettingsRequest();
+        GPGeoserverWFSServiceSettings wfsServiceSettings = toWFSServiceSettings();
+        wfsServiceSettings.setMaintainer("Francesco Izzi");
+        wfsServiceSettings.setAbstrct("This is a simple example for Geoserver");
+        assertTrue(updateWFSServiceSettingsRequest.withBody(wfsServiceSettings).getResponse());
+        GPGeoserverWFSServiceSettings retrieveWFSSettings = geoserverConnectorStoreV2_20_x.loadWFSServiceSettingsRequest().getResponse();
+        assertTrue(retrieveWFSSettings.getMaintainer().equals("Francesco Izzi"));
+        assertTrue(retrieveWFSSettings.getAbstrct().equals("This is a simple example for Geoserver"));
+    }
+
+    @Test
+    public void d_updateWFSServiceSettingsRequestTest() throws Exception {
+        GeoserverWFSServiceSettings wfsServiceSettings = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper()
+                .readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "WFSServiceSettings")
+                        .collect(joining(separator, "", ".xml"))), GPGeoserverWFSServiceSettings.class);
+        logger.info("###################WFS_UPDATE_SERVICE_SETTINGS_RESPONSE : {}\n", geoserverConnectorStoreV2_20_x.updateWFSServiceSettingsRequest()
+                .withBody(wfsServiceSettings).getResponse());
+    }
+
+    @Test
+    public void e_updateWFSWorkspaceServiceSettingsRequestTest() throws Exception {
+        try (InputStream wfsWorkspaceServiceSettingsStream = currentThread().getContextClassLoader().getResourceAsStream("WFSWorkspaceServiceSettings.xml")) {
+            checkArgument(wfsWorkspaceServiceSettingsStream != null, "The Parameter wfsWorkspaceServiceSettingsStream must not be null.");
+            GPGeoserverWFSWorkspaceServiceSettings wfsWorkspaceServiceSettings = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper()
+                    .readValue(new InputStreamReader(wfsWorkspaceServiceSettingsStream), GPGeoserverWFSWorkspaceServiceSettings.class);
+            wfsWorkspaceServiceSettings.getWorkspace().setWorkspaceName("nurc");
+            wfsWorkspaceServiceSettings.setMaintainer("Giuseppe La Scaleia");
+            wfsWorkspaceServiceSettings.setAbstrct("This is a simple Test.");
+            GeoserverUpdateWFSWorkspaceServiceSettingsRequest updateWFSWorkspaceSettingsRequest = geoserverConnectorStoreV2_20_x.updateWFSWorkspaceServiceSettingsRequest();
+            logger.info("@@@@@@@@@@@@@@@@@WFS_UPDATE_WORKSPACE_SERVICE_SETTINGS_RESPONSE : {}\n", updateWFSWorkspaceSettingsRequest
+                    .withWorkspace("nurc").withBody(wfsWorkspaceServiceSettings).getResponse());
+        }
+    }
+
+    @Test
+    public void f_loadWFSWorkspaceServiceSettingsRequestTest() throws Exception {
+        GeoserverLoadWFSWorkspaceServiceSettingsRequest wfsWorkspaceServiceSettingsRequest = geoserverConnectorStoreV2_20_x.loadWFSWorkspaceServiceSettingsRequest();
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_WFS_WORKSPACE_SETTINGS_RESPONSE : {}\n", wfsWorkspaceServiceSettingsRequest
+                .withWorkspace("nurc").getResponse());
+    }
+
+    @Test
+    public void g_deleteWFSWorkspaceServiceSettingsRequestTest() throws Exception {
+        GeoserverDeleteWFSWorkspaceServiceSettingsRequest deleteWFSWorkspaceServiceSettingRequest = geoserverConnectorStoreV2_20_x.deleteWFSWorkspaceServiceSettingsRequest();
+        logger.info("########################WFS_DELETE_WORKSPACE_SERVICE_SETTINGS : {}\n", deleteWFSWorkspaceServiceSettingRequest
+                .withWorkspace("nurc").getResponse());
     }
 }

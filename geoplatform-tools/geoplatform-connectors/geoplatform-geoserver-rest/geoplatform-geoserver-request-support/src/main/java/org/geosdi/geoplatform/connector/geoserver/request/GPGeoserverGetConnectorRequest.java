@@ -43,12 +43,13 @@ import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorReque
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
-import org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.StringReader;
+
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -56,12 +57,9 @@ import java.io.StringReader;
  */
 public abstract class GPGeoserverGetConnectorRequest<T, E extends GPGeoserverEmptyResponse<T>, ConnectorRequest extends GPJsonConnectorRequest> extends GPJsonGetConnectorRequest<T, ConnectorRequest> {
 
-    protected static final JacksonSupport emptyJacksonSupport = new GPJacksonSupport(
-            GPJacksonSupportEnum.UNWRAP_ROOT_VALUE_DISABLE,
-            GPJacksonSupportEnum.FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-            GPJacksonSupportEnum.ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-            GPJacksonSupportEnum.WRAP_ROOT_VALUE_DISABLE,
-            GPJacksonSupportEnum.INDENT_OUTPUT_ENABLE);
+    protected static final JacksonSupport emptyJacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
+            FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
+            INDENT_OUTPUT_ENABLE);
     //
     private final Class<E> emptyResponse;
 

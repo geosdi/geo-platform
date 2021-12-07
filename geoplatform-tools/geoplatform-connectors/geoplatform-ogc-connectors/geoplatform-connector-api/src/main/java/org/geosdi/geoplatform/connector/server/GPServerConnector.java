@@ -37,16 +37,16 @@ package org.geosdi.geoplatform.connector.server;
 
 import org.apache.hc.client5.http.auth.CredentialsStore;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
-import org.apache.hc.core5.util.TimeValue;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
 import java.net.URI;
 import java.net.URL;
 
-import static java.util.concurrent.TimeUnit.MINUTES;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.apache.hc.core5.util.Timeout.of;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
+import static org.geosdi.geoplatform.connector.server.request.cookie.ConnectorCookieSpec.IGNORE;
 
 /**
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
@@ -58,9 +58,11 @@ public interface GPServerConnector {
             .withMaxTotalConnections(80)
             .withDefaultMaxPerRoute(30)
             .withMaxRedirect(20)
-            .withConnectionTimeout(of(3l, MINUTES))
-            .withRequestConnectionTimeout(of(3l, MINUTES))
-            .withConnectionKeepAlive(TimeValue.of(1l, MINUTES))
+            .withConnectionTimeout(of(30l, SECONDS))
+            .withRequestConnectionTimeout(of(10l, SECONDS))
+            .withResponseConnectionTimeout(of(10l, SECONDS))
+            .withConnectionKeepAlive(of(15l, SECONDS))
+            .withCookieSpec(IGNORE)
             .build();
 
     /**
@@ -98,6 +100,11 @@ public interface GPServerConnector {
      * @return {@link V}
      */
     <V extends GPServerConnectorVersion> V getVersion();
+
+    /**
+     * @return {@link  GPPooledConnectorConfig}
+     */
+    GPPooledConnectorConfig getPooledConnectorConfig();
 
     interface GPServerConnectorVersion {
 

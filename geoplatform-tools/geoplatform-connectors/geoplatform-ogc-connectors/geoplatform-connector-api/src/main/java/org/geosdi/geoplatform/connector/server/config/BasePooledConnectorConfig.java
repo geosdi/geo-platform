@@ -40,9 +40,11 @@ import lombok.ToString;
 import net.jcip.annotations.Immutable;
 import org.apache.hc.core5.util.TimeValue;
 import org.apache.hc.core5.util.Timeout;
+import org.geosdi.geoplatform.connector.server.request.cookie.GPConnectorCookieSpec;
 
-import static java.util.concurrent.TimeUnit.MINUTES;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.apache.hc.core5.util.Timeout.of;
+import static org.geosdi.geoplatform.connector.server.request.cookie.ConnectorCookieSpec.IGNORE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -57,24 +59,34 @@ public class BasePooledConnectorConfig implements GPPooledConnectorConfig {
     private final Integer defaultMaxPerRoute;
     private final Timeout connectionTimeout;
     private final Timeout requestConnectionTimeout;
+    private final Timeout responseConnectionTimeout;
     private final TimeValue connectionKeepAlive;
     private final Integer maxRedirect;
+    private final boolean redirectsEnabled;
+    private final GPConnectorCookieSpec cookieSpec;
 
     /**
      * @param theMaxTotalConnections
      * @param theDefaultMaxPerRoute
      * @param theConnectionTimeout
      * @param theRequestConnectionTimeout
+     * @param theResponseConnectionTimeout
      * @param theConnectionKeepAlive
      * @param theMaxRedirect
+     * @param theRedirectsEnabled
+     * @param theCookieSpec
      */
     BasePooledConnectorConfig(Integer theMaxTotalConnections, Integer theDefaultMaxPerRoute, Timeout theConnectionTimeout,
-            Timeout theRequestConnectionTimeout, TimeValue theConnectionKeepAlive, Integer theMaxRedirect) {
+            Timeout theRequestConnectionTimeout, Timeout theResponseConnectionTimeout, TimeValue theConnectionKeepAlive,
+            Integer theMaxRedirect, boolean theRedirectsEnabled, GPConnectorCookieSpec theCookieSpec) {
         this.maxTotalConnections = theMaxTotalConnections;
         this.defaultMaxPerRoute = theDefaultMaxPerRoute;
-        this.connectionTimeout = ((theConnectionTimeout == null) ? of(3l, MINUTES) : theConnectionTimeout);
-        this.requestConnectionTimeout = ((theRequestConnectionTimeout == null) ? of(3l, MINUTES) : theRequestConnectionTimeout);
-        this.connectionKeepAlive = ((theConnectionKeepAlive != null) ? theConnectionKeepAlive : TimeValue.of(1l, MINUTES));
-        this.maxRedirect = theMaxRedirect;
+        this.connectionTimeout = ((theConnectionTimeout == null) ? of(30l, SECONDS) : theConnectionTimeout);
+        this.requestConnectionTimeout = ((theRequestConnectionTimeout == null) ? of(30l, SECONDS) : theRequestConnectionTimeout);
+        this.responseConnectionTimeout = ((theResponseConnectionTimeout == null) ? of(30l, SECONDS) : theResponseConnectionTimeout);
+        this.connectionKeepAlive = ((theConnectionKeepAlive != null) ? theConnectionKeepAlive : TimeValue.of(10l, SECONDS));
+        this.maxRedirect = ((theMaxRedirect != null) && (theMaxRedirect <= 50) ? theMaxRedirect : 50);
+        this.redirectsEnabled = theRedirectsEnabled;
+        this.cookieSpec = ((theCookieSpec != null) ? theCookieSpec : IGNORE);
     }
 }

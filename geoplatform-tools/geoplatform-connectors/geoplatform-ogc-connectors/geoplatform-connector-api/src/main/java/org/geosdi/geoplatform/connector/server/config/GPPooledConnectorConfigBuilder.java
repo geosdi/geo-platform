@@ -37,8 +37,10 @@ package org.geosdi.geoplatform.connector.server.config;
 
 import org.apache.hc.core5.util.TimeValue;
 import org.apache.hc.core5.util.Timeout;
+import org.geosdi.geoplatform.connector.server.request.cookie.GPConnectorCookieSpec;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.TRUE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -71,6 +73,12 @@ public interface GPPooledConnectorConfigBuilder {
     GPPooledConnectorConfigBuilder withRequestConnectionTimeout(Timeout theRequestConnectionTimeout);
 
     /**
+     * @param theResponseConnectionTimeout
+     * @return {@link GPPooledConnectorConfigBuilder}
+     */
+    GPPooledConnectorConfigBuilder withResponseConnectionTimeout(Timeout theResponseConnectionTimeout);
+
+    /**
      * @param theConnectionKeepAlive
      * @return {@link GPPooledConnectorConfigBuilder}
      */
@@ -83,6 +91,18 @@ public interface GPPooledConnectorConfigBuilder {
     GPPooledConnectorConfigBuilder withMaxRedirect(Integer theMaxRedirect);
 
     /**
+     * @param theRedirectsEnabled
+     * @return {@link  GPPooledConnectorConfigBuilder}
+     */
+    GPPooledConnectorConfigBuilder withRedirectsEnabled(boolean theRedirectsEnabled);
+
+    /**
+     * @param theCookieSpec
+     * @return {@link  GPPooledConnectorConfigBuilder}
+     */
+    GPPooledConnectorConfigBuilder withCookieSpec(GPConnectorCookieSpec theCookieSpec);
+
+    /**
      * @return {@link GPPooledConnectorConfig}
      */
     GPPooledConnectorConfig build();
@@ -93,8 +113,11 @@ public interface GPPooledConnectorConfigBuilder {
         private Integer defaultMaxPerRoute;
         private Timeout connectionTimeout;
         private Timeout requestConnectionTimeout;
+        private Timeout responseConnectionTimeout;
         private TimeValue connectionKeepAlive;
         private Integer maxRedirect;
+        private boolean redirectsEnabled = TRUE;
+        private GPConnectorCookieSpec cookieSpec;
 
         private PooledConnectorConfigBuilder() {
         }
@@ -143,6 +166,16 @@ public interface GPPooledConnectorConfigBuilder {
         }
 
         /**
+         * @param theResponseConnectionTimeout
+         * @return {@link GPPooledConnectorConfigBuilder}
+         */
+        @Override
+        public GPPooledConnectorConfigBuilder withResponseConnectionTimeout(Timeout theResponseConnectionTimeout) {
+            this.responseConnectionTimeout = theResponseConnectionTimeout;
+            return self();
+        }
+
+        /**
          * @param theConnectionKeepAlive
          * @return {@link GPPooledConnectorConfig}
          */
@@ -163,6 +196,26 @@ public interface GPPooledConnectorConfigBuilder {
         }
 
         /**
+         * @param theRedirectsEnabled
+         * @return {@link  GPPooledConnectorConfigBuilder}
+         */
+        @Override
+        public GPPooledConnectorConfigBuilder withRedirectsEnabled(boolean theRedirectsEnabled) {
+            this.redirectsEnabled = theRedirectsEnabled;
+            return self();
+        }
+
+        /**
+         * @param theCookieSpec
+         * @return {@link  GPPooledConnectorConfigBuilder}
+         */
+        @Override
+        public GPPooledConnectorConfigBuilder withCookieSpec(GPConnectorCookieSpec theCookieSpec) {
+            this.cookieSpec = theCookieSpec;
+            return self();
+        }
+
+        /**
          * @return {@link GPPooledConnectorConfig}
          */
         @Override
@@ -170,7 +223,9 @@ public interface GPPooledConnectorConfigBuilder {
             checkArgument((maxTotalConnections > 0), "The Parameter MaxTotalConnections must be greater than zero.");
             checkArgument((defaultMaxPerRoute > 0), "The Parameter MaxTotalPerRoute must be greater than zero.");
             checkArgument(maxRedirect > 0, "The Parameter MaxRedirect must be greater than 0.");
-            return new BasePooledConnectorConfig(this.maxTotalConnections, this.defaultMaxPerRoute, this.connectionTimeout, this.requestConnectionTimeout, this.connectionKeepAlive, this.maxRedirect);
+            return new BasePooledConnectorConfig(this.maxTotalConnections, this.defaultMaxPerRoute, this.connectionTimeout,
+                    this.requestConnectionTimeout, this.responseConnectionTimeout, this.connectionKeepAlive,
+                    this.maxRedirect, this.redirectsEnabled, this.cookieSpec);
         }
 
         /**

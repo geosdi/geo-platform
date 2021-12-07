@@ -84,10 +84,10 @@ public abstract class GeoserverWFSServiceSettingsConnectorStore extends Geoserve
     }
 
     /**
-     * @return {@link GeoserverDeleteWFSWorkspaceSettingsRequest}
+     * @return {@link GeoserverDeleteWFSWorkspaceServiceSettingsRequest}
      */
     @Override
-    public GeoserverDeleteWFSWorkspaceSettingsRequest deleteWFSWorkspaceServiceSettingsRequest() {
+    public GeoserverDeleteWFSWorkspaceServiceSettingsRequest deleteWFSWorkspaceServiceSettingsRequest() {
         return this.server.deleteWFSWorkspaceServiceSettingsRequest();
     }
 }

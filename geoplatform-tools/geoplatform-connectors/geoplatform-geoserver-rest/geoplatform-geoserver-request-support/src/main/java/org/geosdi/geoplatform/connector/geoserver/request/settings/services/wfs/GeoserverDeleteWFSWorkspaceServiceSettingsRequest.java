@@ -32,39 +32,24 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.settings.services.wfs;
+package org.geosdi.geoplatform.connector.geoserver.request.settings.services.wfs;
 
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wfs.*;
-import org.geosdi.geoplatform.connector.geoserver.settings.services.wcs.IGPGeoserverWCSServiceSettingsConnector;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.services.GeoserverDeleteWorkspaceServiceSettings;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverWFSServiceSettingsConnector extends IGPGeoserverWCSServiceSettingsConnector {
+public interface GeoserverDeleteWFSWorkspaceServiceSettingsRequest extends GeoserverDeleteWorkspaceServiceSettings<GeoserverDeleteWFSWorkspaceServiceSettingsRequest> {
 
     /**
-     * @return {@link GeoserverLoadWFSServiceSettingsRequest}
-     */
-    GeoserverLoadWFSServiceSettingsRequest loadWFSServiceSettingsRequest();
-
-    /**
-     * @return {@link GeoserverLoadWFSWorkspaceServiceSettingsRequest}
-     */
-    GeoserverLoadWFSWorkspaceServiceSettingsRequest loadWFSWorkspaceServiceSettingsRequest();
-
-    /**
-     * @return {@link GeoserverUpdateWFSServiceSettingsRequest}
-     */
-    GeoserverUpdateWFSServiceSettingsRequest updateWFSServiceSettingsRequest();
-
-    /**
-     * @return {@link GeoserverUpdateWFSWorkspaceServiceSettingsRequest}
-     */
-    GeoserverUpdateWFSWorkspaceServiceSettingsRequest updateWFSWorkspaceServiceSettingsRequest();
-
-    /**
+     * @param theWorkspace
      * @return {@link GeoserverDeleteWFSWorkspaceServiceSettingsRequest}
      */
-    GeoserverDeleteWFSWorkspaceServiceSettingsRequest deleteWFSWorkspaceServiceSettingsRequest();
+    @Override
+    GeoserverDeleteWFSWorkspaceServiceSettingsRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
 }

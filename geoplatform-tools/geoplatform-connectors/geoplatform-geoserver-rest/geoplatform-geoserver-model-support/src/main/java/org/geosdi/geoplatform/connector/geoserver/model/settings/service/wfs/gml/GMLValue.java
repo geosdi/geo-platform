@@ -43,12 +43,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Getter
-@Setter
 @ToString
 @XmlRootElement(name = "gml")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -57,5 +58,14 @@ public class GMLValue implements IGMLValue {
     private static final long serialVersionUID = -7536056654159809849L;
     //
     private List<SRSNameStyle> srsNameStyle;
+    @Setter
     private boolean overrideGMLAttributes;
+
+    /**
+     * @param theSRSNameStyle
+     */
+    @Override
+    public void setSrsNameStyle(List<SRSNameStyle> theSRSNameStyle) {
+        this.srsNameStyle = ((theSRSNameStyle != null) && (theSRSNameStyle.size() > 1)) ? newArrayList(theSRSNameStyle.get(0)) : theSRSNameStyle;
+    }
 }

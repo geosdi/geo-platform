@@ -46,11 +46,11 @@ import org.junit.Test;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.io.File.separator;
 import static java.lang.Thread.currentThread;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
 import static org.junit.Assert.assertTrue;
@@ -92,7 +92,7 @@ public class GPGeoserverWMSServiceSettingsConnectorStoreTest extends GPBaseGeose
     public void d_updateWMSServiceSettingsRequestTest() throws Exception {
         GeoserverWMSServiceSettings wmsServiceSettings = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper()
                 .readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "WMSServiceSettings-2.19")
-                        .collect(Collectors.joining(separator, "", ".xml"))), GPGeoserverWMSServiceSettings.class);
+                        .collect(joining(separator, "", ".xml"))), GPGeoserverWMSServiceSettings.class);
         logger.info("###################WMS_UPDATE_SERVICE_SETTINGS_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x.updateWMSServiceSettingsRequest()
                 .withBody(wmsServiceSettings).getResponse());
     }

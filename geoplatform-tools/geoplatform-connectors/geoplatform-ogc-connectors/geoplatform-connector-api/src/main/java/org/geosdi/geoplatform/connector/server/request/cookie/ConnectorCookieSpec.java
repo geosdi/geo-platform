@@ -32,24 +32,38 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.settings.services.wfs;
-
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.GeoserverDeleteWorkspaceServiceSettings;
+package org.geosdi.geoplatform.connector.server.request.cookie;
 
 import javax.annotation.Nonnull;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverDeleteWFSWorkspaceSettingsRequest extends GeoserverDeleteWorkspaceServiceSettings<GeoserverDeleteWFSWorkspaceSettingsRequest> {
+public enum ConnectorCookieSpec implements GPConnectorCookieSpec {
+
+    RELAXED("relaxed"),
+    STRICT("strict"),
+    IGNORE("ignore");
+
+    private final String cookieSpec;
 
     /**
-     * @param theWorkspace
-     * @return {@link GeoserverDeleteWFSWorkspaceSettingsRequest}
+     * @param theCookieSpec
+     */
+    ConnectorCookieSpec(@Nonnull(when = NEVER) String theCookieSpec) {
+        checkArgument((theCookieSpec != null) && !(theCookieSpec.trim().isEmpty()), "The Parameter cookieSpec must not be null or an empty string.");
+        this.cookieSpec = theCookieSpec;
+    }
+
+    /**
+     * @return {@link String}
      */
     @Override
-    GeoserverDeleteWFSWorkspaceSettingsRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
+    public String toCookieSpec() {
+        return this.cookieSpec;
+    }
 }

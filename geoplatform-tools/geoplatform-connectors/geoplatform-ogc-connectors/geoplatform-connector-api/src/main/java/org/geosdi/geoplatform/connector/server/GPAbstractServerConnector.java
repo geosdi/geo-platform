@@ -201,6 +201,14 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
     }
 
     /**
+     * @return {@link  GPPooledConnectorConfig}
+     */
+    @Override
+    public GPPooledConnectorConfig getPooledConnectorConfig() {
+        return this.pooledConnectorConfig;
+    }
+
+    /**
      * <p>
      * Analyzes the url of the server by eliminating everything that comes after
      * the ? character </p>
@@ -258,6 +266,9 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
                         .setConnectionRequestTimeout(this.pooledConnectorConfig.getRequestConnectionTimeout())
                         .setConnectionKeepAlive(this.pooledConnectorConfig.getConnectionKeepAlive())
                         .setMaxRedirects(this.pooledConnectorConfig.getMaxRedirect())
+                        .setRedirectsEnabled(this.pooledConnectorConfig.isRedirectsEnabled())
+                        .setMaxRedirects(this.pooledConnectorConfig.getMaxRedirect())
+                        .setCookieSpec(this.pooledConnectorConfig.getCookieSpec().toCookieSpec())
                         .build())
                 .setDefaultCredentialsProvider(credentialsStore)
                 .setRetryStrategy(new DefaultHttpRequestRetryStrategy(5, of(10l, SECONDS)))

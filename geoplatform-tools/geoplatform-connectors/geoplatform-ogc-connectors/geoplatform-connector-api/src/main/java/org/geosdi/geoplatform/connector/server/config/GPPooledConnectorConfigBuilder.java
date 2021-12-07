@@ -224,8 +224,8 @@ public interface GPPooledConnectorConfigBuilder {
             checkArgument((defaultMaxPerRoute > 0), "The Parameter MaxTotalPerRoute must be greater than zero.");
             checkArgument(maxRedirect > 0, "The Parameter MaxRedirect must be greater than 0.");
             return new BasePooledConnectorConfig(this.maxTotalConnections, this.defaultMaxPerRoute, this.connectionTimeout,
-                    this.requestConnectionTimeout, this.responseConnectionTimeout, this.connectionKeepAlive,
-                    this.maxRedirect, this.redirectsEnabled, this.cookieSpec);
+                    this.maxRedirect,this.requestConnectionTimeout, this.responseConnectionTimeout, this.connectionKeepAlive,
+                    this.redirectsEnabled, this.cookieSpec);
         }
 
         /**

@@ -100,10 +100,10 @@ public class GPGeoserverWFSServiceSettingsJacksonTest {
     public static GPGeoserverWFSServiceSettings toWFSServiceSettings() {
         GPGeoserverWFSServiceSettings wfsServiceSettings = new GPGeoserverWFSServiceSettings();
         wfsServiceSettings.setEnabled(TRUE);
-        wfsServiceSettings.setName("My GeoServer WMS");
-        wfsServiceSettings.setTitle("My GeoServer WMS");
+        wfsServiceSettings.setName("My GeoServer WFS");
+        wfsServiceSettings.setTitle("My GeoServer WFS");
         wfsServiceSettings.setMaintainer("http://geoserver.org/comm");
-        wfsServiceSettings.setAbstrct("This is a description of your Web Map Server.");
+        wfsServiceSettings.setAbstrct("This is a description of your Web Feature Server.");
         wfsServiceSettings.setAccessConstraints("NONE");
         wfsServiceSettings.setFees("NONE");
         GeoserverGeotoolsVersion geotoolsVersion = new GPGeoserverGeotoolsVersion();

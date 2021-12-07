@@ -34,37 +34,38 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.settings.services.wfs;
 
-import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wfs.*;
-import org.geosdi.geoplatform.connector.geoserver.settings.services.wcs.IGPGeoserverWCSServiceSettingsConnector;
+import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.model.settings.service.GeoserverServiceType;
+import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wfs.GeoserverDeleteWFSWorkspaceServiceSettingsRequest;
+import org.geosdi.geoplatform.connector.geoserver.settings.services.GPGeoserverDeleteWorkspaceServiceSettings;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.connector.geoserver.model.settings.service.GeoserverServiceType.wfs;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverWFSServiceSettingsConnector extends IGPGeoserverWCSServiceSettingsConnector {
+@ThreadSafe
+class GPGeoserverDeleteWFSWorkspaceServiceSettingsRequest extends GPGeoserverDeleteWorkspaceServiceSettings<GeoserverDeleteWFSWorkspaceServiceSettingsRequest> implements GeoserverDeleteWFSWorkspaceServiceSettingsRequest {
 
     /**
-     * @return {@link GeoserverLoadWFSServiceSettingsRequest}
+     * @param theServerConnector
+     * @param theJacksonSupport
      */
-    GeoserverLoadWFSServiceSettingsRequest loadWFSServiceSettingsRequest();
+    GPGeoserverDeleteWFSWorkspaceServiceSettingsRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(theServerConnector, theJacksonSupport);
+    }
 
     /**
-     * @return {@link GeoserverLoadWFSWorkspaceServiceSettingsRequest}
+     * @return {@link GeoserverServiceType}
      */
-    GeoserverLoadWFSWorkspaceServiceSettingsRequest loadWFSWorkspaceServiceSettingsRequest();
-
-    /**
-     * @return {@link GeoserverUpdateWFSServiceSettingsRequest}
-     */
-    GeoserverUpdateWFSServiceSettingsRequest updateWFSServiceSettingsRequest();
-
-    /**
-     * @return {@link GeoserverUpdateWFSWorkspaceServiceSettingsRequest}
-     */
-    GeoserverUpdateWFSWorkspaceServiceSettingsRequest updateWFSWorkspaceServiceSettingsRequest();
-
-    /**
-     * @return {@link GeoserverDeleteWFSWorkspaceServiceSettingsRequest}
-     */
-    GeoserverDeleteWFSWorkspaceServiceSettingsRequest deleteWFSWorkspaceServiceSettingsRequest();
+    @Override
+    protected GeoserverServiceType toService() {
+        return wfs;
+    }
 }

@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.server;
 
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
+
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
@@ -44,6 +45,7 @@ import java.net.URI;
 import java.net.URL;
 
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
+import static org.geosdi.geoplatform.connector.server.request.cookie.ConnectorCookieSpec.IGNORE;
 
 /**
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
@@ -55,7 +57,11 @@ public interface GPServerConnector {
             .withMaxTotalConnections(80)
             .withDefaultMaxPerRoute(30)
             .withMaxRedirect(20)
-            .withConnectionTimeout(3).build();
+            .withConnectionTimeout(3)
+            .withRequestConnectionTimeout(10)
+            .withResponseConnectionTimeout(10)
+            .withCookieSpec(IGNORE)
+            .build();
 
     /**
      * @return {@link URL}
@@ -94,8 +100,10 @@ public interface GPServerConnector {
     <V extends GPServerConnectorVersion> V getVersion();
 
     /**
-     *
+     * @return {@link  GPPooledConnectorConfig}
      */
+    GPPooledConnectorConfig getPooledConnectorConfig();
+
     interface GPServerConnectorVersion {
 
         String getVersion();

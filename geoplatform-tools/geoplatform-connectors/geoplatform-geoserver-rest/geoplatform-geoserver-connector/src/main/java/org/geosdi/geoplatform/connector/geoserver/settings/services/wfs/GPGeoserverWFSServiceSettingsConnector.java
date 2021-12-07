@@ -160,14 +160,14 @@ public abstract class GPGeoserverWFSServiceSettingsConnector extends GPGeoserver
     }
 
     /**
-     * @return {@link GeoserverDeleteWFSWorkspaceSettingsRequest}
+     * @return {@link GeoserverDeleteWFSWorkspaceServiceSettingsRequest}
      */
     @Override
-    public GeoserverDeleteWFSWorkspaceSettingsRequest deleteWFSWorkspaceServiceSettingsRequest() {
+    public GeoserverDeleteWFSWorkspaceServiceSettingsRequest deleteWFSWorkspaceServiceSettingsRequest() {
         switch (version) {
             case V220x:
             case V219x:
-                return new GPGeoserverDeleteWFSWorkspaceSettingsRequest(this, this.jacksonSupport);
+                return new GPGeoserverDeleteWFSWorkspaceServiceSettingsRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

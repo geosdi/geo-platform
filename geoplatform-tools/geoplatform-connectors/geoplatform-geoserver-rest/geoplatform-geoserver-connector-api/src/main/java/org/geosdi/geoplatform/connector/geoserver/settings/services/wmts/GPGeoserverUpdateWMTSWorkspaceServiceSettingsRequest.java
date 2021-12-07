@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import javax.annotation.Nonnull;
 
 import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.connector.geoserver.model.settings.service.GeoserverServiceType.wcs;
+import static org.geosdi.geoplatform.connector.geoserver.model.settings.service.GeoserverServiceType.wmts;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -67,6 +67,6 @@ class GPGeoserverUpdateWMTSWorkspaceServiceSettingsRequest extends GPGeoserverUp
      */
     @Override
     protected GeoserverServiceType toService() {
-        return wcs;
+        return wmts;
     }
 }

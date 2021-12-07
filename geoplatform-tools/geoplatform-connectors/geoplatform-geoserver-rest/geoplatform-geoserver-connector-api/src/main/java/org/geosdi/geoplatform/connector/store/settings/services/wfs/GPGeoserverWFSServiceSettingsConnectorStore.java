@@ -64,7 +64,7 @@ public interface GPGeoserverWFSServiceSettingsConnectorStore extends GPGeoserver
     GeoserverUpdateWFSWorkspaceServiceSettingsRequest updateWFSWorkspaceServiceSettingsRequest();
 
     /**
-     * @return {@link GeoserverDeleteWFSWorkspaceSettingsRequest}
+     * @return {@link GeoserverDeleteWFSWorkspaceServiceSettingsRequest}
      */
-    GeoserverDeleteWFSWorkspaceSettingsRequest deleteWFSWorkspaceServiceSettingsRequest();
+    GeoserverDeleteWFSWorkspaceServiceSettingsRequest deleteWFSWorkspaceServiceSettingsRequest();
 }

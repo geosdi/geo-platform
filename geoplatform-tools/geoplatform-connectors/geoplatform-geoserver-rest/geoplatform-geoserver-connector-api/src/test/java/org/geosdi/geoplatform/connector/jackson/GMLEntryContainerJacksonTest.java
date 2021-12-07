@@ -43,8 +43,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.StringReader;
-import java.util.Arrays;
 
+import static java.util.Arrays.asList;
 import static org.geosdi.geoplatform.connector.geoserver.model.settings.service.wfs.gml.GMLVersion.*;
 import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
 import static org.geosdi.geoplatform.connector.jackson.GMLValueJacksonTest.toGMLValue;
@@ -146,7 +146,7 @@ public class GMLEntryContainerJacksonTest {
         GMLEntry gmlEntry2 = new GMLEntry();
         gmlEntry2.setVersion(V_20);
         gmlEntry2.setGmlValue(toGMLValue());
-        container.setEntries(Arrays.asList(gmlEntry, gmlEntry1, gmlEntry2));
+        container.setEntries(asList(gmlEntry, gmlEntry1, gmlEntry2));
         return container;
     }
 }

@@ -52,11 +52,8 @@ import org.slf4j.LoggerFactory;
 import javax.xml.bind.UnmarshalException;
 import java.net.URL;
 
-import static java.util.concurrent.TimeUnit.MINUTES;
-import static java.util.concurrent.TimeUnit.SECONDS;
 import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.of;
-import static org.apache.hc.core5.util.Timeout.of;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML_AS_STRING;
 import static org.geosdi.geoplatform.connector.server.store.GPWMSConnectorBuilder.WMSConnectorBuilder.wmsConnectorBuilder;
@@ -80,10 +77,10 @@ public class GPWMSConnectorStoreV111MappeDPCTest {
                 .withServerUrl(new URL("http://mappe-dpc.protezionecivile.it/gssitdpc/wms"))
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(12)
-                        .withConnectionTimeout(of(15l, SECONDS))
-                        .withRequestConnectionTimeout(of(5l, SECONDS))
-                        .withResponseConnectionTimeout(of(3l, SECONDS))
-                        .withConnectionKeepAlive(of(3l, MINUTES))
+                        .withConnectionTimeout(15)
+                        .withRequestConnectionTimeout(5)
+                        .withResponseConnectionTimeout(3)
+                        .withConnectionKeepAlive(3)
                         .withDefaultMaxPerRoute(8)
                         .withMaxRedirect(5)
                         .build())

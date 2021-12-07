@@ -395,6 +395,7 @@ public class WFSGetFeaturesRequestTest {
                 .getDefaultMapper().readValue(is, FeatureCollection.class));
     }
 
+    @Ignore
     @Test
     public void l_percorsiNavetteTest() throws Exception {
         String wfsURL = "http://mappe-dpc.protezionecivile.it/gssitdpc/wfs";

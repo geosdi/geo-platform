@@ -116,8 +116,10 @@ public class WMSGetMapBaseRequestTest {
 
     @Test
     public void h_wmsGetMapKeyValuePairTest() throws Exception {
-        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = builder().withKeyValuePair(
-                "SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=States,Cities&STYLES=&SRS=EPSG:4326&BBOX=-124,21,-66,49&WIDTH=600&HEIGHT=400&FORMAT=image/png&SERVICENAME=myservice&\n" + "TRANSPARENT=TRUE&BGCOLOR=0xFF0000&EXCEPTIONS=application/vnd.ogc.se_blank&REASPECT=TRUE&")
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = builder().withKeyValuePair("SERVICE=WMS&VERSION=1.1.1" +
+                        "&REQUEST=GetMap&LAYERS=States,Cities&STYLES=&SRS=EPSG:4326&BBOX=-124,21,-66,49&WIDTH=600&HEIGHT" +
+                        "=400&FORMAT=image/png&SERVICENAME=myservice&\n"
+                        + "TRANSPARENT=TRUE&BGCOLOR=0xFF0000&EXCEPTIONS=application/vnd.ogc.se_blank&REASPECT=TRUE&")
                 .build();
         logger.info("@@@@@@@@@@@@@@@@@@@@@@GET_MAP_JSON_STRING : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(wmsGetMapBaseRequest));
     }

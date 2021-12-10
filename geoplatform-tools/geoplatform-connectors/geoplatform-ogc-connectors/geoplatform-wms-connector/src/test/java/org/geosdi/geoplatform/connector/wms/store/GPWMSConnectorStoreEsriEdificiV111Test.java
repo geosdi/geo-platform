@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.connector.wms.store;
 
 import org.geosdi.geoplatform.connector.server.v111.GPWMSDescribeLayerV111Request;
+import org.geosdi.geoplatform.connector.server.v111.GPWMSGetCapabilitiesV111Request;
 import org.geosdi.geoplatform.connector.server.v111.IGPWMSConnectorStoreV111;
-import org.geosdi.geoplatform.connector.server.v111.WMSGetCapabilitiesV111Request;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
@@ -78,7 +78,7 @@ public class GPWMSConnectorStoreEsriEdificiV111Test {
     @Ignore(value = "Server is Down")
     @Test
     public void a_wmsGetCapabilitiesV111MinisteroAmbienteTest() throws Exception {
-        WMSGetCapabilitiesV111Request wmsGetCapabilitiesRequest = wmsServerConnectorMinisteroAmbiente.createGetCapabilitiesRequest();
+        GPWMSGetCapabilitiesV111Request wmsGetCapabilitiesRequest = wmsServerConnectorMinisteroAmbiente.createGetCapabilitiesRequest();
         logger.info("###############################WMS_GET_CAPABILITIES_V111_EDIFICI_RESPONSE : {}\n", wmsGetCapabilitiesRequest.getResponseAsString());
     }
 

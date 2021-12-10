@@ -41,9 +41,9 @@ import org.geosdi.geoplatform.connector.server.request.GPWMSGetMapBaseRequest;
 import org.geosdi.geoplatform.connector.server.request.WMSBoundingBox;
 import org.geosdi.geoplatform.connector.server.request.WMSGetMapBaseRequest;
 import org.geosdi.geoplatform.connector.server.v111.GPWMSDescribeLayerV111Request;
+import org.geosdi.geoplatform.connector.server.v111.GPWMSGetCapabilitiesV111Request;
 import org.geosdi.geoplatform.connector.server.v111.GPWMSGetFeatureInfoV111Request;
 import org.geosdi.geoplatform.connector.server.v111.IGPWMSConnectorStoreV111;
-import org.geosdi.geoplatform.connector.server.v111.WMSGetCapabilitiesV111Request;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -89,7 +89,7 @@ public class GPWMSConnectorStoreV111PrositTest {
 
     @Test
     public void a_wmsGetCapabilitiesV111Test() throws Exception {
-        WMSGetCapabilitiesV111Request wmsGetCapabilitiesRequest = wmsServerConnector.createGetCapabilitiesRequest();
+        GPWMSGetCapabilitiesV111Request wmsGetCapabilitiesRequest = wmsServerConnector.createGetCapabilitiesRequest();
         logger.debug("###############################WMS_GET_CAPABILITIES_V111_RESPONSE : {}\n", wmsGetCapabilitiesRequest.getResponseAsString());
     }
 

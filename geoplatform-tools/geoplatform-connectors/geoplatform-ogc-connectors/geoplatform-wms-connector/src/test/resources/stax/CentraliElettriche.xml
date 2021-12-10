@@ -1,0 +1,1310 @@
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:ppr2006="www.sardegnaterritorio.it" xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.opengis.net/wfs http://webgis.regione.sardegna.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd
+                       www.sardegnaterritorio.it http://webgis.regione.sardegna.it/geoserver/ppr2006/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=ppr2006%3ACENTRALEELETTRICA">
+    <gml:boundedBy>
+        <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1435415.7118,4310413.8336
+                1561646.9412,4565991.5445
+            </gml:coordinates>
+        </gml:Box>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.83">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1461968.0966,4508131.3437 1461968.0966,4508131.3437
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Sassari</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>5</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione F.S.</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1461968.0966,4508131.3437
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.84">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1540534.4504,4470493.2218 1540534.4504,4470493.2218
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Lula</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>6</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione Terzi</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1540534.4504,4470493.2218
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.64">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1561646.9412,4492603.8076 1561646.9412,4492603.8076
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Siniscola 1</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>4</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione Enel</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1561646.9412,4492603.8076
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.73">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1494855.3555,4360805.5319 1494855.3555,4360805.5319
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Villasor 2</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>4</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione Enel</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1494855.3555,4360805.5319
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.82">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1493818.0403,4360175.9538 1493818.0403,4360175.9538
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Villasor F.S.</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>5</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione F.S.</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1493818.0403,4360175.9538
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.85">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1519086.5748,4344711.9933 1519086.5748,4344711.9933
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Quartu S. Elena</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>6</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione Terzi</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1519086.5748,4344711.9933
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.86">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1475884.9143,4522163.6992 1475884.9143,4522163.6992
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Tergu</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>6</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione Terzi</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1475884.9143,4522163.6992
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.87">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1539215.1975,4546937.3891 1539215.1975,4546937.3891
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Arzachena</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>6</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione Terzi</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1539215.1975,4546937.3891
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.88">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1456720.8412,4366338.2067 1456720.8412,4366338.2067
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Flumini</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>6</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione Terzi</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1456720.8412,4366338.2067
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.89">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1507197.7319,4340048.8261 1507197.7319,4340048.8261
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Casic</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>6</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione Terzi</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1507197.7319,4340048.8261
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.90">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1558749.0303,4420813.2798 1558749.0303,4420813.2798
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Cartiera Arbatax</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>6</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione Terzi</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1558749.0303,4420813.2798
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.91">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1435415.7118,4501165.8303 1435415.7118,4501165.8303
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Alghero 2</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>6</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione Terzi</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1435415.7118,4501165.8303
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.92">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1464582.1622,4348975.1059 1464582.1622,4348975.1059
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Iglesias 2</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>6</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione Terzi</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1464582.1622,4348975.1059
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.93">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1440412.8597,4520619.2647 1440412.8597,4520619.2647
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Stintino</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>6</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione Terzi</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1440412.8597,4520619.2647
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.94">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1447622.5059,4520785.1076 1447622.5059,4520785.1076
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Enichem</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>7</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Utenza Industriale</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1447622.5059,4520785.1076
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.95">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1500735.3958,4369768.7597 1500735.3958,4369768.7597
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Cementeria</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>7</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Utenza Industriale</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1500735.3958,4369768.7597
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.96">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1501394.7076,4326385.5555 1501394.7076,4326385.5555
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Saras Petroli</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>7</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Utenza Industriale</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1501394.7076,4326385.5555
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.97">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1498424.9109,4344508.9303 1498424.9109,4344508.9303
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Gencord</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>7</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Utenza Industriale</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1498424.9109,4344508.9303
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.98">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1504466.0361,4345778.0748 1504466.0361,4345778.0748
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Fas</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>7</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Utenza Industriale</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1504466.0361,4345778.0748
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.99">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1501090.1134,4342630.5975 1501090.1134,4342630.5975
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Enichem</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>7</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Utenza Industriale</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1501090.1134,4342630.5975
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.100">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1501420.0908,4327806.9966 1501420.0908,4327806.9966
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Praoil</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>7</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Utenza Industriale</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1501420.0908,4327806.9966
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.101">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1460220.7269,4350792.8286 1460220.7269,4350792.8286
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Campopisano</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>7</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Utenza Industriale</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1460220.7269,4350792.8286
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.102">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1457333.8336,4351352.0773 1457333.8336,4351352.0773
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Samim</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>7</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Utenza Industriale</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1457333.8336,4351352.0773
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.103">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1501878.3655,4454145.1504 1501878.3655,4454145.1504
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Enichem</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>7</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Utenza Industriale</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1501878.3655,4454145.1504
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.104">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1450082.0538,4338481.2412 1450082.0538,4338481.2412
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Comsal</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>7</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Utenza Industriale</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1450082.0538,4338481.2412
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.105">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1449100.1084,4520564.9697 1449100.1084,4520564.9697
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Ferriera Sarda</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>7</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Utenza Industriale</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1449100.1084,4520564.9697
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.106">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1491268.437,4526615.6748 1491268.437,4526615.6748
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>CENTRALE ELETTRICA</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1491268.437,4526615.6748
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.10">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1447725.5966,4339282.5983 1447725.5966,4339282.5983
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Sulcis</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>2</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Centrale Termoelettrica</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>CENTRALE ELETTRICA</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1447725.5966,4339282.5983
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.1">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1488350.1185,4427631.0739 1488350.1185,4427631.0739
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Tirso</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>1</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Centrale Idroelettrica</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>CENTRALE ELETTRICA</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1488350.1185,4427631.0739
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.2">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1496716.6706,4376760.4597 1496716.6706,4376760.4597
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>S. Miali</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>1</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Centrale Idroelettrica</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>CENTRALE ELETTRICA</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1496716.6706,4376760.4597
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.3">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1545760.7655,4423445.0824 1545760.7655,4423445.0824
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Flumendosa</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>1</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Centrale Idroelettrica</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>CENTRALE ELETTRICA</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1545760.7655,4423445.0824
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.4">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1513050.2227,4441682.0311 1513050.2227,4441682.0311
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Taloro 1</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>1</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Centrale Idroelettrica</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>CENTRALE ELETTRICA</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1513050.2227,4441682.0311
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.5">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1522614.7336,4384886.5824 1522614.7336,4384886.5824
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Uvini</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>1</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Centrale Idroelettrica</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>CENTRALE ELETTRICA</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1522614.7336,4384886.5824
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.6">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1502154.5681,4493843.1277 1502154.5681,4493843.1277
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Ozieri</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>1</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Centrale Idroelettrica</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>CENTRALE ELETTRICA</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1502154.5681,4493843.1277
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.7">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1502746.1874,4516521.8664 1502746.1874,4516521.8664
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Coghinas</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>1</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Centrale Idroelettrica</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>CENTRALE ELETTRICA</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1502746.1874,4516521.8664
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.8">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1507380.5378,4341599.7739 1507380.5378,4341599.7739
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>S. Gilla</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>2</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Centrale Termoelettrica</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>CENTRALE ELETTRICA</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1507380.5378,4341599.7739
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.9">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1447774.8983,4340219.3294 1447774.8983,4340219.3294
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Portoscuso</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>2</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Centrale Termoelettrica</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>CENTRALE ELETTRICA</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1447774.8983,4340219.3294
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.11">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1502548.9807,4454007.4319 1502548.9807,4454007.4319
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Enichem</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>2</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Centrale Termoelettrica</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>CENTRALE ELETTRICA</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1502548.9807,4454007.4319
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.12">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1440576.8639,4522635.2647 1440576.8639,4522635.2647
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Fiume Santo</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>2</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Centrale Termoelettrica</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>CENTRALE ELETTRICA</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1440576.8639,4522635.2647
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.13">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1502154.5681,4326414.8798 1502154.5681,4326414.8798
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Saras Petroli</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>3</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Centrale Termoelettrica Terzi</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>CENTRALE ELETTRICA</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1502154.5681,4326414.8798
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.14">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1559393.7303,4420876.7538 1559393.7303,4420876.7538
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Cartiera Arbatax</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>3</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Centrale Termoelettrica Terzi</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>CENTRALE ELETTRICA</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1559393.7303,4420876.7538
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.15">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1524487.8765,4491787.5924 1524487.8765,4491787.5924
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Buddusò</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>4</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione Enel</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1524487.8765,4491787.5924
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.16">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1489302.9916,4434131.0429 1489302.9916,4434131.0429
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>S. Chiara Tirso</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>4</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione Enel</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1489302.9916,4434131.0429
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.17">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1478678.2891,4481066.8042 1478678.2891,4481066.8042
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Cheremule</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>4</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione Enel</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1478678.2891,4481066.8042
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.18">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1501486.6227,4494425.6286 1501486.6227,4494425.6286
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Ozieri</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>4</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione Enel</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1501486.6227,4494425.6286
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.19">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1475656.3647,4500085.7403 1475656.3647,4500085.7403
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Codrongianos</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>4</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione Enel</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1475656.3647,4500085.7403
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.20">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1481930.7387,4454854.8168 1481930.7387,4454854.8168
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Macomer</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>4</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione Enel</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1481930.7387,4454854.8168
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.21">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1444902.3294,4495215.4437 1444902.3294,4495215.4437
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Alghero</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>4</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione Enel</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1444902.3294,4495215.4437
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.22">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1448676.5748,4519221.0059 1448676.5748,4519221.0059
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Portotorres 1</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>4</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione Enel</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1448676.5748,4519221.0059
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:CENTRALEELETTRICA fid="CENTRALEELETTRICA.23">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1448234.5462,4519969.0546 1448234.5462,4519969.0546
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:NOME>Portotorres 2</ppr2006:NOME>
+            <ppr2006:TIPOCENTRALEELETTRICA_COD>4</ppr2006:TIPOCENTRALEELETTRICA_COD>
+            <ppr2006:TIPOCENTRALEELETTRICA_DESCR>Stazione Enel</ppr2006:TIPOCENTRALEELETTRICA_DESCR>
+            <ppr2006:CATEGORIACENTRALEELETTRICA>Stazione ENEL</ppr2006:CATEGORIACENTRALEELETTRICA>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1448234.5462,4519969.0546
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:CENTRALEELETTRICA>
+    </gml:featureMember>
+</wfs:FeatureCollection>

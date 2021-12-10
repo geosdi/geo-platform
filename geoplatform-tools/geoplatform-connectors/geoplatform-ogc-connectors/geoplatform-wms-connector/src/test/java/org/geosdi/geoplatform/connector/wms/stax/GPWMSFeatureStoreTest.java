@@ -580,4 +580,12 @@ public class GPWMSFeatureStoreTest extends WMSGetFeatureInfoStaxReaderTest {
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "layer_importer148.json")
                 .collect(joining(separator))), wmsFeatureStore);
     }
+
+    @Test
+    public void c_u_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("CentraliElettriche.xml"));
+        logger.info("#######################FEATURE_STORE_CENTRALI_ELETTRICHE : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "CentraliElettriche.json")
+                .collect(joining(separator))), wmsFeatureStore);
+    }
 }

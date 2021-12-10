@@ -47,14 +47,13 @@ import static org.geosdi.geoplatform.connector.WMSVersion.V111;
 public class WMSConnectorBuilderV111 extends AbstractConnectorBuilder<WMSConnectorBuilderV111, IGPWMSConnectorStoreV111> implements GPWMSConnectorBuilderV111 {
 
     WMSConnectorBuilderV111() {
-        this.withVersion(V111.getVersion());
     }
 
     /**
      * @return {@link WMSConnectorBuilderV111}
      */
     public static WMSConnectorBuilderV111 wmsConnectorBuilderV111() {
-        return new WMSConnectorBuilderV111();
+        return new WMSConnectorBuilderV111().withVersion(V111.getVersion());
     }
 
     /**

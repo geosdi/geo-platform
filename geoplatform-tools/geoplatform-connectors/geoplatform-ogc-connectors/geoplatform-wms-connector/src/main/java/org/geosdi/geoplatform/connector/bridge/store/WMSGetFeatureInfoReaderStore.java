@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat;
 import org.geosdi.geoplatform.support.bridge.store.GPImplementorStore;
 
 import javax.annotation.Nonnull;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -62,6 +63,6 @@ public interface WMSGetFeatureInfoReaderStore extends GPImplementorStore<GPWMSGe
         checkArgument(wmsFeatureInforReaders != null, "The Parameter wmsGetFeatureInfoReaders must not be null.");
         return wmsFeatureInforReaders.stream()
                 .filter(Objects::nonNull)
-                .collect(toMap(k -> k.getKey().getImplementorKey(), identity()));
+                .collect(toMap(k -> k.getKey().getImplementorKey(), identity(), (v1, v2) -> v1, LinkedHashMap::new));
     }
 }

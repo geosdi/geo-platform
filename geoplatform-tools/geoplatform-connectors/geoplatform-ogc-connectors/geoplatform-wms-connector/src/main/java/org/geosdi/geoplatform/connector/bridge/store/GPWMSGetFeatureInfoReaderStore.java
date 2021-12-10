@@ -43,6 +43,7 @@ import org.geosdi.geoplatform.support.bridge.implementor.GPImplementor.GPImpleme
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -50,6 +51,7 @@ import java.util.Set;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.Collections.unmodifiableCollection;
 import static java.util.Collections.unmodifiableSet;
+import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.connector.bridge.store.WMSGetFeatureInfoReaderStore.of;
 
 /**
@@ -75,7 +77,7 @@ public class GPWMSGetFeatureInfoReaderStore implements WMSGetFeatureInfoReaderSt
      * @throws Exception
      */
     @Override
-    public GPWMSGetFeatureInfoReader<?> getImplementorByKey(GPImplementorKey key) throws Exception {
+    public GPWMSGetFeatureInfoReader<?> getImplementorByKey(@Nonnull(when = NEVER) GPImplementorKey key) throws Exception {
         checkArgument((key != null), "The Parameter key must not be null");
         logger.trace("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Try to find WMSGetFeatureInfoReader with Key : {}\n", key);
         return wmsGetFeatureInfoReaders.get(key);

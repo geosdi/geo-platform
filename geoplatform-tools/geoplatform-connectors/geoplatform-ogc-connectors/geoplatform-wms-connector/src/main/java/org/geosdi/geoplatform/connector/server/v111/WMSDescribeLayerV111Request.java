@@ -52,12 +52,12 @@ import static org.geosdi.geoplatform.connector.server.v111.GPWMSJAXBContextV111.
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class WMSDescribeLayerV111Request extends GPBaseWMSDescribeLayerRequest<WMSDescribeLayerResponse> implements GPWMSDescribeLayerV111Request {
+class WMSDescribeLayerV111Request extends GPBaseWMSDescribeLayerRequest<WMSDescribeLayerResponse> implements GPWMSDescribeLayerV111Request {
 
     /**
      * @param server
      */
-    public WMSDescribeLayerV111Request(@Nonnull(when = NEVER) GPWMSServerConnector server) {
+    WMSDescribeLayerV111Request(@Nonnull(when = NEVER) GPWMSServerConnector server) {
         super(server, WMS_JAXB_CONTEXT_V111);
     }
 

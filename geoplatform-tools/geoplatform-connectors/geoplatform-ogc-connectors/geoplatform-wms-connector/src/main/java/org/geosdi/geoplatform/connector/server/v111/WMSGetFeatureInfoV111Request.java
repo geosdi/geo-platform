@@ -50,7 +50,7 @@ import static org.geosdi.geoplatform.connector.server.v111.GPWMSJAXBContextV111.
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class WMSGetFeatureInfoV111Request extends GPWMSBaseGetFeatureInfoRequest<Object, GPWMSGetFeatureInfoV111Request<Object>> implements GPWMSGetFeatureInfoV111Request<Object> {
+class WMSGetFeatureInfoV111Request extends GPWMSBaseGetFeatureInfoRequest<Object, GPWMSGetFeatureInfoV111Request<Object>> implements GPWMSGetFeatureInfoV111Request<Object> {
 
     /**
      * @param server

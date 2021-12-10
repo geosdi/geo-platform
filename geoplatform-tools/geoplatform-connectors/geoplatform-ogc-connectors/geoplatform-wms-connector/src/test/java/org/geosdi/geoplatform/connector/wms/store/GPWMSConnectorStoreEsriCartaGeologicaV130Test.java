@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.wms.store;
 
+import org.geosdi.geoplatform.connector.server.v130.GPWMSGetCapabilitiesV130Request;
 import org.geosdi.geoplatform.connector.server.v130.IGPWMSConnectorStoreV130;
-import org.geosdi.geoplatform.connector.server.v130.WMSGetCapabilitiesV130Request;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -73,7 +73,7 @@ public class GPWMSConnectorStoreEsriCartaGeologicaV130Test {
     @Ignore(value = "Server is Down")
     @Test
     public void wmsGetCapabilitiesV130CartaFitoclimaticaTest() throws Exception {
-        WMSGetCapabilitiesV130Request wmsGetCapabilitiesRequest = wmsServerConnectorMinisteroAmbiente.createGetCapabilitiesRequest();
+        GPWMSGetCapabilitiesV130Request wmsGetCapabilitiesRequest = wmsServerConnectorMinisteroAmbiente.createGetCapabilitiesRequest();
         logger.info("###############################WMS_GET_CAPABILITIES_V130_CARTA_GEOLOGICA_RESPONSE : \n{}\n", wmsGetCapabilitiesRequest.getResponseAsString());
     }
 }

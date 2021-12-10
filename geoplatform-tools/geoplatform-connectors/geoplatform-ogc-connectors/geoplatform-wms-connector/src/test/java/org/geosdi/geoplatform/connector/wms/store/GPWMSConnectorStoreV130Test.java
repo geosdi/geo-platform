@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.wms.store;
 
+import org.geosdi.geoplatform.connector.server.v130.GPWMSGetCapabilitiesV130Request;
 import org.geosdi.geoplatform.connector.server.v130.IGPWMSConnectorStoreV130;
-import org.geosdi.geoplatform.connector.server.v130.WMSGetCapabilitiesV130Request;
 import org.geosdi.geoplatform.wms.v130.WMSCapabilities;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -75,7 +75,7 @@ public class GPWMSConnectorStoreV130Test {
     @Test
     @Ignore
     public void a_wmsGetCapabilitiesV130Test() throws Exception {
-        WMSGetCapabilitiesV130Request wmsGetCapabilitiesRequest = wmsServerConnector.createGetCapabilitiesRequest();
+        GPWMSGetCapabilitiesV130Request wmsGetCapabilitiesRequest = wmsServerConnector.createGetCapabilitiesRequest();
         WMSCapabilities wmsCapabilities = wmsGetCapabilitiesRequest.getResponse();
         Assert.assertTrue(wmsCapabilities.getVersion().equalsIgnoreCase("1.3.0"));
         logger.info("###############################WMS_GET_CAPABILITIES_V130_RESPONSE : {}\n", wmsGetCapabilitiesRequest.getResponse());

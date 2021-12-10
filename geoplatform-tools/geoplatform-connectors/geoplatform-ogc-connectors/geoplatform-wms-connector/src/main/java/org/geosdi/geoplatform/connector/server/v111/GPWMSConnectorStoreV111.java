@@ -57,8 +57,7 @@ public class GPWMSConnectorStoreV111 extends GPWMSConnectorStore<WMSGetCapabilit
      * @param pooledConnectorConfig
      * @param securityConnector
      */
-    protected GPWMSConnectorStoreV111(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
-            @Nullable GPSecurityConnector securityConnector) {
+    protected GPWMSConnectorStoreV111(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig, @Nullable GPSecurityConnector securityConnector) {
         super(new GPWMSServerConnectorV111(server, pooledConnectorConfig, securityConnector));
     }
 
@@ -67,8 +66,7 @@ public class GPWMSConnectorStoreV111 extends GPWMSConnectorStore<WMSGetCapabilit
      * @param pooledConnectorConfig
      * @param securityConnector
      */
-    protected GPWMSConnectorStoreV111(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
-            @Nullable GPSecurityConnector securityConnector, @Nullable SSLConnectionSocketFactory theSslConnectionSocketFactory ) {
+    protected GPWMSConnectorStoreV111(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig, @Nullable GPSecurityConnector securityConnector, @Nullable SSLConnectionSocketFactory theSslConnectionSocketFactory ) {
         super(new GPWMSServerConnectorV111(server, pooledConnectorConfig, securityConnector, theSslConnectionSocketFactory));
     }
 

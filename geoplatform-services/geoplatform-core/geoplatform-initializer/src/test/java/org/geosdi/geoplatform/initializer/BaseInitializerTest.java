@@ -158,7 +158,7 @@ public abstract class BaseInitializerTest {
 
     protected void removeAll() {
 //        this.removeAllStyles();
-//        this.removeAllLayers();
+        this.removeAllLayers();
         this.removeAllFolders();
         this.removeAllAccountProject();
         this.removeAllProjects();

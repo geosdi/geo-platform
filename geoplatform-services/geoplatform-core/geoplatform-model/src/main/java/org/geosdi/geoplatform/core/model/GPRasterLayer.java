@@ -45,7 +45,6 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +60,7 @@ import static org.geosdi.geoplatform.gui.shared.GPLayerType.WMS;
 @XmlAccessorType(FIELD)
 @Entity(name = "RasterLayer")
 @Table(name = "gp_raster_layer", indexes = {@Index(columnList = "project_id", name = "RASTER_PROJECT_ID_INDEX")})
-public class GPRasterLayer extends GPLayer {
+public class GPRasterLayer extends GPLayer implements IGPRasterLayer {
 
     /**
      * serialVersionUID
@@ -127,6 +126,7 @@ public class GPRasterLayer extends GPLayer {
     /**
      * @return the styles
      */
+    @Override
     public List<String> getStyles() {
         return ((this.styles != null) ? asList(styles.split(",")) : new ArrayList<String>(0));
     }
@@ -134,24 +134,9 @@ public class GPRasterLayer extends GPLayer {
     /**
      * @param theStyles the styles to set
      */
+    @Override
     public void setStyles(List<String> theStyles) {
         this.styles = ((theStyles != null) ? theStyles.stream().collect(joining(",")) : null);
-    }
-
-    /**
-     * @return {@link Boolean}
-     */
-    @XmlTransient
-    public boolean isTemporalLayer() {
-        return ((this.temporalLayer != null) && (this.temporalLayer.isTemporalLayer()));
-    }
-
-    /**
-     * @return {@link Boolean}
-     */
-    @XmlTransient
-    public boolean isSetAttribution() {
-        return ((this.layerAttribution != null) && (this.layerAttribution.isAvailable()));
     }
 
     @Override

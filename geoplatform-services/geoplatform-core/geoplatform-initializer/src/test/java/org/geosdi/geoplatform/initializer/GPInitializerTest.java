@@ -46,6 +46,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * This test is not intended to test the business logic but only the correctness
@@ -125,17 +126,17 @@ public class GPInitializerTest extends BaseInitializerTest {
 
     @Test
     public void testCheckDAOs() {
-        Assert.assertNotNull("accountDAO is NULL", super.accountDAO);
-        Assert.assertNotNull("projectDAO is NULL", super.projectDAO);
-        Assert.assertNotNull("accountProjectsDAO is NULL", super.accountProjectDAO);
-        Assert.assertNotNull("folderDAO is NULL", super.folderDAO);
-        Assert.assertNotNull("layerDAO is NULL", super.layerDAO);
+        assertNotNull("accountDAO is NULL", super.accountDAO);
+        assertNotNull("projectDAO is NULL", super.projectDAO);
+        assertNotNull("accountProjectsDAO is NULL", super.accountProjectDAO);
+        assertNotNull("folderDAO is NULL", super.folderDAO);
+        assertNotNull("layerDAO is NULL", super.layerDAO);
 //        Assert.assertNotNull("styleDAO is NULL", super.styleDAO);
     }
 
     @Test
     public void testTransactionsOnLayers() {
-        List<String> layerInfoKeywords = new ArrayList<String>();
+        List<String> layerInfoKeywords = new ArrayList<>();
         layerInfoKeywords.add("keyword_test");
 
         GPLayerInfo layerInfo = new GPLayerInfo();

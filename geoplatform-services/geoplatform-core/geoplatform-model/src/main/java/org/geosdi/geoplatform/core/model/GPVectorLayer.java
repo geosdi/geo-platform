@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.core.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.locationtech.jts.geom.Geometry;
@@ -50,70 +52,29 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "gp_vector_layer", indexes = {
         @Index(columnList = "project_id", name = "VECTOR_PROJECT_ID_INDEX")
 })
-public class GPVectorLayer extends GPLayer {
+public class GPVectorLayer extends GPLayer implements IGPVectorLayer {
 
     /**
      * serialVersionUID
      */
     private static final long serialVersionUID = 3309979650712821228L;
     //
+    @Getter
+    @Setter
     @Column(name = "the_geom")
     private Geometry geometry;
     //
+    @Getter
+    @Setter
     @ManyToOne(optional = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPFolder folder;
     //
+    @Getter
+    @Setter
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPProject project;
-
-    /**
-     * @return the geometry
-     */
-//    @XmlTransient
-    public Geometry getGeometry() {
-        return geometry;
-    }
-
-    /**
-     * @param geometry the geometry to set
-     */
-    public void setGeometry(Geometry geometry) {
-        this.geometry = geometry;
-    }
-
-    /**
-     * @return the folder
-     */
-    @Override
-    public GPFolder getFolder() {
-        return this.folder;
-    }
-
-    /**
-     * @param folder the folder to set
-     */
-    @Override
-    public void setFolder(GPFolder folder) {
-        this.folder = folder;
-    }
-
-    /**
-     * @return the project
-     */
-    @Override
-    public GPProject getProject() {
-        return this.project;
-    }
-
-    /**
-     * @param project the project to set
-     */
-    @Override
-    public void setProject(GPProject project) {
-        this.project = project;
-    }
 
     /**
      * (non-Javadoc)

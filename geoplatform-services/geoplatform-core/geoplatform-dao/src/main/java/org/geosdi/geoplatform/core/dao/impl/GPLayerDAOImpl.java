@@ -81,8 +81,7 @@ class GPLayerDAOImpl extends GPAbstractJpaDAO<GPLayer, Long> implements GPLayerD
      */
     @Override
     public GPLayer findByLayerName(String layerName) throws GPDAOException {
-        checkArgument((layerName != null) && !(layerName.isEmpty()),
-                "The Parameter layerName must not be null or an empty string");
+        checkArgument((layerName != null) && !(layerName.trim().isEmpty()), "The Parameter layerName must not be null or an empty string");
         try {
             Query query = this.entityManager.createQuery("from GPLayer l where l.name=:name");
             query.setParameter("name", layerName);
@@ -134,12 +133,9 @@ class GPLayerDAOImpl extends GPAbstractJpaDAO<GPLayer, Long> implements GPLayerD
         checkArgument(projectID != null, "The Parameter projectID must be not null");
         checkArgument(beginPositionFirstRange > 0, "The Parameter beginPositionFirstRange must be greater than zero");
         checkArgument(beginPositionSecondRange > 0, "The Parameter beginPositionSecondRange must be greater than zero");
-        checkArgument(beginPositionFirstRange < endPositionFirstRange,
-                "The Parameter beginPositionFirstRange must be lesser than endPositionFirstRange");
-        checkArgument(beginPositionSecondRange < endPositionSecondRange,
-                "The Parameter beginPositionSecondRange must be lesser than endPositionSecondRange");
-        checkArgument(endPositionFirstRange > beginPositionSecondRange,
-                "The Parameter endPositionFirstRange must be greater than beginPositionSecondRange");
+        checkArgument(beginPositionFirstRange < endPositionFirstRange, "The Parameter beginPositionFirstRange must be lesser than endPositionFirstRange");
+        checkArgument(beginPositionSecondRange < endPositionSecondRange, "The Parameter beginPositionSecondRange must be lesser than endPositionSecondRange");
+        checkArgument(endPositionFirstRange > beginPositionSecondRange, "The Parameter endPositionFirstRange must be greater than beginPositionSecondRange");
         checkArgument(deltaValueFirstRange != 0, "The Parameter deltaValueFirstRange must not be 0");
         checkArgument(deltaValueSecondRange != 0, "The Parameter deltaValueSecondRange must not be 0");
         try {

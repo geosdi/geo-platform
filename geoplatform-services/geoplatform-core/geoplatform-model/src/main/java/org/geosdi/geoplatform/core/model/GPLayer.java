@@ -37,34 +37,32 @@ package org.geosdi.geoplatform.core.model;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import lombok.Getter;
+import lombok.Setter;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
-import java.io.Serializable;
 
 /**
  * @author Francesco Izzi - geoSDI
  *
  */
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "type")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = GPRasterLayer.class, name = "GPRaster"),
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
+@JsonSubTypes({@JsonSubTypes.Type(value = GPRasterLayer.class, name = "GPRaster"),
         @JsonSubTypes.Type(value = GPVectorLayer.class, name = "GPVector")})
 @XmlTransient
 @XmlSeeAlso(value = {GPRasterLayer.class, GPVectorLayer.class})
 @Entity
-@Table(name = "gp_layer", indexes = {
-        @Index(columnList = "name", name = "LAYER_NAME_INDEX")
+@Table(name = "gp_layer", indexes = {@Index(columnList = "name", name = "LAYER_NAME_INDEX")
 })
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "gp_layer")
-public abstract class GPLayer implements Serializable {
+@Getter
+@Setter
+public abstract class GPLayer implements IGPLayer {
 
     /**
      * serialVersionUID
@@ -121,232 +119,6 @@ public abstract class GPLayer implements Serializable {
     //
     @Column(name = "single_tile_request", nullable = false)
     private boolean singleTileRequest = false;
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the title
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * @param title the title to set
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @return the alias
-     */
-    public String getAlias() {
-        return alias;
-    }
-
-    /**
-     * @param alias the alias to set
-     */
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
-
-    public String getCqlFilter() {
-        return cqlFilter;
-    }
-
-    public void setCqlFilter(String cqlFilter) {
-        this.cqlFilter = cqlFilter;
-    }
-
-    public String getTimeFilter() {
-        return timeFilter;
-    }
-
-    public void setTimeFilter(String timeFilter) {
-        this.timeFilter = timeFilter;
-    }
-
-    /**
-     * @return the abstractText
-     */
-    public String getAbstractText() {
-        return abstractText;
-    }
-
-    /**
-     * @param abstractText the abstractText to set
-     */
-    public void setAbstractText(String abstractText) {
-        this.abstractText = abstractText;
-    }
-
-    /**
-     * @return the urlServer
-     */
-    public String getUrlServer() {
-        return urlServer;
-    }
-
-    /**
-     * @param urlServer the urlServer to set
-     */
-    public void setUrlServer(String urlServer) {
-        this.urlServer = urlServer;
-    }
-
-    /**
-     * @return the srs
-     */
-    public String getSrs() {
-        return srs;
-    }
-
-    /**
-     * @param srs the srs to set
-     */
-    public void setSrs(String srs) {
-        this.srs = srs;
-    }
-
-    /**
-     * @return the bbox
-     */
-    public GPBBox getBbox() {
-        return bbox;
-    }
-
-    /**
-     * @param bbox the bbox to set
-     */
-    public void setBbox(GPBBox bbox) {
-        this.bbox = bbox;
-    }
-
-    /**
-     * @return the layerType
-     */
-    public GPLayerType getLayerType() {
-        return layerType;
-    }
-
-    /**
-     * @param layerType the layerType to set
-     */
-    public void setLayerType(GPLayerType layerType) {
-        this.layerType = layerType;
-    }
-
-    /**
-     * @return the position
-     */
-    public int getPosition() {
-        return position;
-    }
-
-    /**
-     * @param position the position to set
-     */
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
-    /**
-     * @return the checked
-     */
-    public boolean isChecked() {
-        return checked;
-    }
-
-    /**
-     * @param checked the checked to set
-     */
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
-
-    /**
-     * @return the shared
-     */
-    public boolean isShared() {
-        return shared;
-    }
-
-    /**
-     * @param shared the shared to set
-     */
-    public void setShared(boolean shared) {
-        this.shared = shared;
-    }
-
-    /**
-     * @return the cached
-     */
-    public boolean isCached() {
-        return cached;
-    }
-
-    /**
-     * @param cached the cached to set
-     */
-    public void setCached(boolean cached) {
-        this.cached = cached;
-    }
-
-    public boolean isSingleTileRequest() {
-        return singleTileRequest;
-    }
-
-    public void setSingleTileRequest(boolean singleTileRequest) {
-        this.singleTileRequest = singleTileRequest;
-    }
-
-    /**
-     * @return the folder
-     */
-    public abstract GPFolder getFolder();
-
-    /**
-     * @param folder the folder to set
-     */
-    public abstract void setFolder(GPFolder folder);
-
-    /**
-     * @return the project
-     */
-    public abstract GPProject getProject();
-
-    /**
-     * @param project the project to set
-     */
-    public abstract void setProject(GPProject project);
 
     /**
      * (non-Javadoc)

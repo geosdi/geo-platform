@@ -45,13 +45,14 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 import java.io.File;
+import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static io.reactivex.rxjava3.core.Observable.fromArray;
 import static java.io.File.separator;
-import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
@@ -85,9 +86,11 @@ public class GPWMSFeatureStoreUnmarshallerMultiThreadTest {
         CountDownLatch startSignal = new CountDownLatch(1);
         CountDownLatch doneSignal = new CountDownLatch(files.length);
         AtomicInteger counter = new AtomicInteger(0);
-        stream(files)
+        fromArray(files)
+                .filter(Objects::nonNull)
+                .doOnComplete(() -> logger.info("#################RX terminated its work."))
                 .map(v -> new Thread(new WMSFeatureStoreUnmarshallerTask(v, startSignal, doneSignal, counter)))
-                .forEach(Thread::start);
+                .subscribe(Thread::start, Throwable::printStackTrace);
         startSignal.countDown();
         doneSignal.await();
         assertTrue(counter.get() == 28);

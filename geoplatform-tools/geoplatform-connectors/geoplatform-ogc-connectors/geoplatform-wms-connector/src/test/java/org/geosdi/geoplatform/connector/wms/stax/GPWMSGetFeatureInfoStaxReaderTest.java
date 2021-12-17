@@ -480,4 +480,16 @@ public class GPWMSGetFeatureInfoStaxReaderTest extends WMSGetFeatureInfoStaxRead
         logger.info("#######################FEATURE_COLLECTION_CENTRALI_ELETTRICHE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("CentraliElettriche.xml"))));
     }
+
+    @Test
+    public void d_f_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("features.xml"))));
+    }
+
+    @Test
+    public void d_g_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_GEOSITI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("Geositi.xml"))));
+    }
 }

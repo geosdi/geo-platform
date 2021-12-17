@@ -324,4 +324,16 @@ public class GPWMSGetFeatureInfoAaltoReaderTest extends WMSGetFeatureInfoAaltoRe
         logger.info("#######################FEATURE_COLLECTION_fluids_rete_zk : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("fluids_rete_zk.xml"))));
     }
+
+    @Test
+    public void b_w_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("features.xml"))));
+    }
+
+    @Test
+    public void b_x_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_GEOSITI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("Geositi.xml"))));
+    }
 }

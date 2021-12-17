@@ -93,6 +93,7 @@ public class WMSV111UnmarshallTest {
     private static File wmsGetCapabilitiesProsit;
     private static File wmsGetCapabilitiesFile1;
     private static File wmsGetCapabilitiesCnrIrea;
+    private static File wmsGetCapabilitiesPiemonte;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -116,6 +117,7 @@ public class WMSV111UnmarshallTest {
         wmsGetCapabilitiesProsit = new File(basePath.concat("WMSPrositGetCapabilities.xml"));
         wmsGetCapabilitiesFile1 = new File(basePath.concat("WMSGetCapabilities_1.1.1.xml"));
         wmsGetCapabilitiesCnrIrea = new File(basePath.concat("getcapabilitiesCnrIrea_1.1.1.xml"));
+        wmsGetCapabilitiesPiemonte = new File(basePath.concat("getCapabilities_1.1.1_piemonte.xml"));
         spf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", FALSE);
         spf.setFeature("http://xml.org/sax/features/validation", FALSE);
     }
@@ -292,6 +294,17 @@ public class WMSV111UnmarshallTest {
     public void q_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
         XMLReader xmlReader = spf.newSAXParser().getXMLReader();
         InputSource inputSource = new InputSource(new FileReader(wmsGetCapabilitiesCnrIrea));
+        SAXSource source = new SAXSource(xmlReader, inputSource);
+        WMTMSCapabilities wmsCapabilities = (WMTMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(source);
+        StringWriter writer = new StringWriter();
+        wmsContext.acquireMarshaller().marshal(wmsCapabilities, writer);
+        logger.info("######################WMSGetCapabilitiesV111-String : \n{}\n", writer);
+    }
+
+    @Test
+    public void r_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+        XMLReader xmlReader = spf.newSAXParser().getXMLReader();
+        InputSource inputSource = new InputSource(new FileReader(wmsGetCapabilitiesPiemonte));
         SAXSource source = new SAXSource(xmlReader, inputSource);
         WMTMSCapabilities wmsCapabilities = (WMTMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(source);
         StringWriter writer = new StringWriter();

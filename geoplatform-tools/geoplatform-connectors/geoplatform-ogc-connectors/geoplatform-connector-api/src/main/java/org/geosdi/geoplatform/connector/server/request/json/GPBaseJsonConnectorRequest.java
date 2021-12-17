@@ -90,8 +90,7 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest, Connector
         this.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try  {
-            return statusCode == 204 || responseEntity == null ? null
-                    : this.readInternal(new BufferedReader(new InputStreamReader(responseEntity.getContent(), UTF_8_CHARSERT)));
+            return (((statusCode == 204) || (responseEntity == null)) ? null : this.readInternal(new BufferedReader(new InputStreamReader(responseEntity.getContent(), UTF_8_CHARSERT))));
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new IncorrectResponseException(ex);

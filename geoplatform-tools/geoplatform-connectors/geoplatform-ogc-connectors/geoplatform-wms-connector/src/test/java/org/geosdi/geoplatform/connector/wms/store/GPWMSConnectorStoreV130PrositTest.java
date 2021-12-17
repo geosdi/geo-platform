@@ -69,7 +69,8 @@ public class GPWMSConnectorStoreV130PrositTest {
                         .withMaxTotalConnections(20)
                         .withDefaultMaxPerRoute(8)
                         .withMaxRedirect(5)
-                        .build()).build();
+                        .build())
+                .build();
     }
 
     @Test

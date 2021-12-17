@@ -98,7 +98,7 @@ public class WMSGetCapabilitiesV111UnmarshallTheoriesTest {
         return new String[]{"getcapabilities_1.1.1.xml", "ogc_v1.1.1.xml", "ogc.xml", "cartaFitoclimatica.xml",
                 "cartaGeolitologica.xml", "catalogoFrane.xml", "classificazioneSismica2012.xml", "WMSIspraCoste.xml",
                 "WMSIspraGetCapabilities.xml", "WMSIspraNatura.xml", "serviziProtezioneCivileGetCapV1.1.1.xml",
-                "WMSPrositGetCapabilities.xml"};
+                "WMSPrositGetCapabilities.xml", "getCapabilities_1.1.1_piemonte.xml"};
     }
 
     @Theory

@@ -35,21 +35,21 @@
  */
 package org.geosdi.geoplatform.model.rest;
 
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPMessage;
 import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
-import org.geosdi.geoplatform.gui.shared.GPRole;
-import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.request.message.MarkMessageReadByDateRequest;
 import org.geosdi.geoplatform.response.MessageDTO;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.*;
+
+import static org.geosdi.geoplatform.gui.shared.GPRole.USER;
+import static org.geosdi.geoplatform.gui.shared.GPRole.VIEWER;
+import static org.geosdi.geoplatform.request.LikePatternType.CONTENT_EQUALS;
+import static org.junit.Assert.*;
 
 /**
  *
@@ -70,19 +70,13 @@ public class RSMessageTest extends BasicRestServiceTest {
     public void setUp() throws Exception {
         // Insert Organization
         this.setUpOrganization();
-
         // Insert Users
-        idUserTest = this.createAndInsertUser(usernameTest, organizationTest,
-                GPRole.USER);
-        userTest = gpWSClient.getUserDetailByUsername(
-                new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
+        idUserTest = this.createAndInsertUser(usernameTest, organizationTest, USER);
+        userTest = gpWSClient.getUserDetailByUsername(new SearchRequest(usernameTest, CONTENT_EQUALS));
 
-        firstRecipientID = this.createAndInsertUser("first_recipient_RS",
-                organizationTest, GPRole.USER);
+        firstRecipientID = this.createAndInsertUser("first_recipient_RS", organizationTest, USER);
         firstRecipient = gpWSClient.getUserDetail(firstRecipientID);
-
-        latterRecipientID = this.createAndInsertUser("latter_recipient_RS",
-                organizationTest, GPRole.VIEWER);
+        latterRecipientID = this.createAndInsertUser("latter_recipient_RS", organizationTest, VIEWER);
 //        latterRecipient = gpWSClient.getUserDetail(latterRecipientID);
 
         // Create message
@@ -100,20 +94,18 @@ public class RSMessageTest extends BasicRestServiceTest {
     public void testInsertMessageRest() throws Exception {
         // Insert message
         Long messageID = gpWSClient.insertMessage(message);
-        Assert.assertNotNull(messageID);
+        assertNotNull(messageID);
 
         // Test
         GPMessage messageDetail = gpWSClient.getMessageDetail(messageID);
-        Assert.assertNotNull(messageDetail);
-        Assert.assertNotNull(messageDetail.getSender());
-        Assert.assertEquals(message.getSender().getId(),
-                messageDetail.getSender().getId());
-        Assert.assertNotNull(messageDetail.getRecipient());
-        Assert.assertEquals(message.getRecipient().getId(),
-                messageDetail.getRecipient().getId());
-        Assert.assertEquals(message.getSubject(), messageDetail.getSubject());
-        Assert.assertEquals(message.getText(), messageDetail.getText());
-        Assert.assertEquals(message.getCommands(), messageDetail.getCommands());
+        assertNotNull(messageDetail);
+        assertNotNull(messageDetail.getSender());
+        assertEquals(message.getSender().getId(), messageDetail.getSender().getId());
+        assertNotNull(messageDetail.getRecipient());
+        assertEquals(message.getRecipient().getId(), messageDetail.getRecipient().getId());
+        assertEquals(message.getSubject(), messageDetail.getSubject());
+        assertEquals(message.getText(), messageDetail.getText());
+        assertEquals(message.getCommands(), messageDetail.getCommands());
         Assert.assertFalse(messageDetail.isRead());
     }
 
@@ -122,72 +114,67 @@ public class RSMessageTest extends BasicRestServiceTest {
         // Insert message
         message.addCommand(GPMessageCommandType.OPEN_PROJECT);
         Long messageID = gpWSClient.insertMessage(message);
-        Assert.assertNotNull(messageID);
+        assertNotNull(messageID);
 
         // Test
         GPMessage messageDetail = gpWSClient.getMessageDetail(messageID);
-        Assert.assertNotNull(messageDetail);
+        assertNotNull(messageDetail);
         List<GPMessageCommandType> commands = messageDetail.getCommands();
-        Assert.assertNotNull(commands);
-        Assert.assertEquals(2, commands.size());
-        Assert.assertTrue(commands.contains(GPMessageCommandType.NONE));
-        Assert.assertTrue(commands.contains(GPMessageCommandType.OPEN_PROJECT));
+        assertNotNull(commands);
+        assertEquals(2, commands.size());
+        assertTrue(commands.contains(GPMessageCommandType.NONE));
+        assertTrue(commands.contains(GPMessageCommandType.OPEN_PROJECT));
     }
 
     @Test
     public void testInsertMultiMessageRest() throws Exception {
         // Insert messages
         MessageDTO messageDTO = new MessageDTO(message);
-        messageDTO.setRecipientIDs(Arrays.asList(firstRecipientID,
-                latterRecipientID));
+        messageDTO.setRecipientIDs(Arrays.asList(firstRecipientID, latterRecipientID));
         Boolean result = gpWSClient.insertMultiMessage(messageDTO);
-        Assert.assertTrue(result);
+        assertTrue(result);
 
         // Test first
-        List<GPMessage> firstAllMessages = gpWSClient.getAllMessagesByRecipient(
-                firstRecipientID).getMessages();
-        Assert.assertNotNull(firstAllMessages);
-        Assert.assertEquals(1, firstAllMessages.size());
+        List<GPMessage> firstAllMessages = gpWSClient.getAllMessagesByRecipient(firstRecipientID).getMessages();
+        assertNotNull(firstAllMessages);
+        assertEquals(1, firstAllMessages.size());
         GPMessage firstMessage = firstAllMessages.get(0);
-        Assert.assertNotNull(firstMessage);
-        Assert.assertEquals(firstRecipientID,
-                firstMessage.getRecipient().getId());
+        assertNotNull(firstMessage);
+        assertEquals(firstRecipientID, firstMessage.getRecipient().getId());
 
         // Test latter
-        List<GPMessage> latterAllMessages = gpWSClient.getAllMessagesByRecipient(
-                latterRecipientID).getMessages();
-        Assert.assertNotNull(latterAllMessages);
-        Assert.assertEquals(1, latterAllMessages.size());
+        List<GPMessage> latterAllMessages = gpWSClient.getAllMessagesByRecipient(latterRecipientID).getMessages();
+        assertNotNull(latterAllMessages);
+        assertEquals(1, latterAllMessages.size());
         GPMessage latterMessage = latterAllMessages.get(0);
-        Assert.assertNotNull(latterMessage);
-        Assert.assertEquals(latterRecipientID,
-                latterMessage.getRecipient().getId());
+        assertNotNull(latterMessage);
+        assertEquals(latterRecipientID, latterMessage.getRecipient().getId());
     }
 
     @Test
     public void testDeleteMessageRest() throws Exception {
         // Insert message
         Long messageID = gpWSClient.insertMessage(message);
-        Assert.assertNotNull(messageID);
+        assertNotNull(messageID);
 
         // Test
         Boolean result = gpWSClient.deleteMessage(messageID);
-        Assert.assertTrue(result);
+        assertTrue(result);
     }
 
     @Test
     public void testMarkMessageAsReadRest() throws Exception {
         // Insert message
         Long messageID = gpWSClient.insertMessage(message);
-        Assert.assertNotNull(messageID);
+        assertNotNull(messageID);
 
         // Test
         Boolean result = gpWSClient.markMessageAsRead(messageID);
-        Assert.assertTrue(result);
+        assertTrue(result);
 
         GPMessage messageDetail = gpWSClient.getMessageDetail(messageID);
-        Assert.assertNotNull(messageDetail);
-        Assert.assertTrue(messageDetail.isRead());
+        assertNotNull(messageDetail);
+        assertTrue(messageDetail.isRead());
     }
 
     @Test
@@ -197,29 +184,29 @@ public class RSMessageTest extends BasicRestServiceTest {
         // Test all messages
         List<GPMessage> allMessages = gpWSClient.getAllMessagesByRecipient(
                 firstRecipientID).getMessages();
-        Assert.assertNotNull(allMessages);
-        Assert.assertEquals(3, allMessages.size());
-        Assert.assertNotNull(allMessages.get(0));
-        Assert.assertNotNull(allMessages.get(1));
-        Assert.assertNotNull(allMessages.get(2));
-        Assert.assertNotNull(allMessages.get(0).getCreationDate());
-        Assert.assertNotNull(allMessages.get(1).getCreationDate());
-        Assert.assertNotNull(allMessages.get(2).getCreationDate());
-        Assert.assertTrue(allMessages.get(0).getCreationDate().after(
+        assertNotNull(allMessages);
+        assertEquals(3, allMessages.size());
+        assertNotNull(allMessages.get(0));
+        assertNotNull(allMessages.get(1));
+        assertNotNull(allMessages.get(2));
+        assertNotNull(allMessages.get(0).getCreationDate());
+        assertNotNull(allMessages.get(1).getCreationDate());
+        assertNotNull(allMessages.get(2).getCreationDate());
+        assertTrue(allMessages.get(0).getCreationDate().after(
                 allMessages.get(1).getCreationDate()));
-        Assert.assertTrue(allMessages.get(1).getCreationDate().after(
+        assertTrue(allMessages.get(1).getCreationDate().after(
                 allMessages.get(2).getCreationDate()));
 
         // Test unread messages
         List<GPMessage> unreadMessages = gpWSClient.getUnreadMessagesByRecipient(
                 firstRecipientID).getMessages();
-        Assert.assertNotNull(unreadMessages);
-        Assert.assertEquals(2, unreadMessages.size());
-        Assert.assertNotNull(unreadMessages.get(0));
-        Assert.assertNotNull(unreadMessages.get(1));
-        Assert.assertNotNull(unreadMessages.get(0).getCreationDate());
-        Assert.assertNotNull(unreadMessages.get(1).getCreationDate());
-        Assert.assertTrue(allMessages.get(0).getCreationDate().after(
+        assertNotNull(unreadMessages);
+        assertEquals(2, unreadMessages.size());
+        assertNotNull(unreadMessages.get(0));
+        assertNotNull(unreadMessages.get(1));
+        assertNotNull(unreadMessages.get(0).getCreationDate());
+        assertNotNull(unreadMessages.get(1).getCreationDate());
+        assertTrue(allMessages.get(0).getCreationDate().after(
                 allMessages.get(1).getCreationDate()));
     }
 
@@ -228,20 +215,16 @@ public class RSMessageTest extends BasicRestServiceTest {
         this.insertMessagesSortedRest();
 
         // Test unread messages intial
-        List<GPMessage> unreadMessages = gpWSClient.getUnreadMessagesByRecipient(
-                firstRecipientID).getMessages();
-        Assert.assertNotNull(unreadMessages);
-        Assert.assertEquals(2, unreadMessages.size());
-
+        List<GPMessage> unreadMessages = gpWSClient.getUnreadMessagesByRecipient(firstRecipientID).getMessages();
+        assertNotNull(unreadMessages);
+        assertEquals(2, unreadMessages.size());
         // Test mark messages as read
-        Boolean result = gpWSClient.markAllMessagesAsReadByRecipient(
-                firstRecipientID);
-        Assert.assertTrue(result);
+        Boolean result = gpWSClient.markAllMessagesAsReadByRecipient(firstRecipientID);
+        assertTrue(result);
 
         // Test unread messages final
-        unreadMessages = gpWSClient.getUnreadMessagesByRecipient(
-                firstRecipientID).getMessages();
-        Assert.assertEquals(0, unreadMessages.size());
+        unreadMessages = gpWSClient.getUnreadMessagesByRecipient(firstRecipientID).getMessages();
+        assertEquals(0, unreadMessages.size());
     }
 
     @Test
@@ -249,23 +232,19 @@ public class RSMessageTest extends BasicRestServiceTest {
         this.insertMessagesSortedRest();
 
         // Test unread messages intial
-        List<GPMessage> unreadMessages = gpWSClient.getUnreadMessagesByRecipient(
-                firstRecipientID).getMessages();
-        Assert.assertNotNull(unreadMessages);
-        Assert.assertEquals(2, unreadMessages.size());
+        List<GPMessage> unreadMessages = gpWSClient.getUnreadMessagesByRecipient(firstRecipientID).getMessages();
+        assertNotNull(unreadMessages);
+        assertEquals(2, unreadMessages.size());
 
         // Test mark messages as read
         Date toDate = new GregorianCalendar(2012, Calendar.JANUARY, 12 - 1).getTime();
-        Boolean result = gpWSClient.markMessagesAsReadByDate(
-                new MarkMessageReadByDateRequest(firstRecipientID,
-                        toDate));
-        Assert.assertTrue(result);
+        Boolean result = gpWSClient.markMessagesAsReadByDate(new MarkMessageReadByDateRequest(firstRecipientID, toDate));
+        assertTrue(result);
 
         // Test unread messages final
-        unreadMessages = gpWSClient.getUnreadMessagesByRecipient(
-                firstRecipientID).getMessages();
-        Assert.assertNotNull(unreadMessages);
-        Assert.assertEquals(1, unreadMessages.size());
+        unreadMessages = gpWSClient.getUnreadMessagesByRecipient(firstRecipientID).getMessages();
+        assertNotNull(unreadMessages);
+        assertEquals(1, unreadMessages.size());
     }
 
     /*
@@ -276,20 +255,20 @@ public class RSMessageTest extends BasicRestServiceTest {
         message.setCreationDate(
                 new GregorianCalendar(2012, Calendar.JANUARY, 1).getTime());
         Long messageID = gpWSClient.insertMessage(message);
-        Assert.assertNotNull(messageID);
+        assertNotNull(messageID);
         // Insert message 2
         message.setCreationDate(
                 new GregorianCalendar(2012, Calendar.JANUARY, 12).getTime());
         message.setText("Another message to read.");
         messageID = gpWSClient.insertMessage(message);
-        Assert.assertNotNull(messageID);
+        assertNotNull(messageID);
         // Insert message 3
         message.setCreationDate(
                 new GregorianCalendar(2012, Calendar.JANUARY, 23).getTime());
         message.setText("Message read.");
         message.setRead(true);
         messageID = gpWSClient.insertMessage(message);
-        Assert.assertNotNull(messageID);
+        assertNotNull(messageID);
     }
 
 }

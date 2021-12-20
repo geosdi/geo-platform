@@ -150,12 +150,14 @@ class GPMessageDAOImpl extends GPAbstractJpaDAO<GPMessage, Long> implements GPMe
     public Boolean markAllMessagesAsReadByRecipient(Long recipientID) throws GPDAOException {
         checkArgument(recipientID != null, "The Parameter recipientID must not be null.");
         try {
-            Query query = this.entityManager.createQuery("UPDATE Message m set m.isRead=true " +
-                    "where m.isRead=false and m.recipient.id IN (\n" +
+            Query query = this.entityManager.createQuery("UPDATE Message m set m.isRead=:isRead " +
+                    "where m.isRead=:notRead and m.recipient.id IN (\n" +
                     "  SELECT r.id \n" +
                     "  FROM GPAccount r \n" +
                     "  WHERE r.id=:recipientID)");
             query.setParameter("recipientID", recipientID);
+            query.setParameter("notRead", FALSE);
+            query.setParameter("isRead", TRUE);
             return (query.executeUpdate() != -1) ? TRUE : FALSE;
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -174,12 +176,14 @@ class GPMessageDAOImpl extends GPAbstractJpaDAO<GPMessage, Long> implements GPMe
         checkArgument(recipientID != null, "The Parameter recipientID must not be null.");
         checkArgument(toDate != null, "The Parameter toDate must not be null.");
         try {
-            Query query = this.entityManager.createQuery("UPDATE Message m set m.isRead=true " +
-                    "where m.isRead=false and m.creationDate<=:toDate and m.recipient.id IN (\n" +
+            Query query = this.entityManager.createQuery("UPDATE Message m set m.isRead=:isRead " +
+                    "where m.isRead=:notRead and m.creationDate<=:toDate and m.recipient.id IN (\n" +
                     "  SELECT r.id \n" +
                     "  FROM GPAccount r \n" +
                     "  WHERE r.id=:recipientID)");
             query.setParameter("toDate", toDate);
+            query.setParameter("notRead", FALSE);
+            query.setParameter("isRead", TRUE);
             query.setParameter("recipientID", recipientID);
             return (query.executeUpdate() != -1) ? TRUE : FALSE;
         } catch (Exception ex) {

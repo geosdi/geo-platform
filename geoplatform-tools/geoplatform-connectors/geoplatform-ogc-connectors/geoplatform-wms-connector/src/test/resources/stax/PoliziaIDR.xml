@@ -1,0 +1,958 @@
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:polizia_idr="http://polizia_idr" xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://polizia_idr http://microzonazione.regione.basilicata.it:80/geoserver/polizia_idr/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=polizia_idr%3Apolizia_2008_utm33 http://www.opengis.net/wfs http://microzonazione.regione.basilicata.it:80/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.15">
+            <polizia_idr:opera>16</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>572280</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4462240</polizia_idr:utm_y>
+            <polizia_idr:valore>2</polizia_idr:valore>
+            <polizia_idr:tipologia>Argine</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        572207.30729023,4462051.56430829
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>16.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.16">
+            <polizia_idr:opera>17</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>574004</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4461287</polizia_idr:utm_y>
+            <polizia_idr:valore>2</polizia_idr:valore>
+            <polizia_idr:tipologia>Argine</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        573931.29329523,4461098.57162214
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>17.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.17">
+            <polizia_idr:opera>18</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>575170</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4460790</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        575097.28385535,4460601.57537914
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>18.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.18">
+            <polizia_idr:opera>19</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>575181</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4460819</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        575108.28377324,4460630.57514371
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>19.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.19">
+            <polizia_idr:opera>20</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>609783</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4458849</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Argine</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        609710.00606903,4458660.58220303
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>20.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.20">
+            <polizia_idr:opera>21</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>590041</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4457950</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        589968.16405074,4457761.59485166
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>21.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.21">
+            <polizia_idr:opera>22</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>602749</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4457900</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Argine</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        602676.06216632,4457711.59189047
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>22.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.22">
+            <polizia_idr:opera>23</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>610809</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4458847</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        610735.99784696,4458658.58190843
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>23.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.23">
+            <polizia_idr:opera>24</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>613439</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4462700</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        613365.9779751,4462511.55012691
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>24.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.24">
+            <polizia_idr:opera>26</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>614429</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4462813</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        614355.97008836,4462624.54890975
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>26.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.25">
+            <polizia_idr:opera>27</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>604340</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4458244</polizia_idr:utm_y>
+            <polizia_idr:valore>2</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        604267.04951156,4458055.58867016
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>27.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.26">
+            <polizia_idr:opera>29</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>621581</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4463834</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        621507.91320086,4463645.53839481
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>29.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.27">
+            <polizia_idr:opera>30</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>620225</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4446991</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Sinni</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        620151.91847076,4446802.67447888
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>30.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.28">
+            <polizia_idr:opera>31</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>618019</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4448338</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Sinni</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        617945.93665723,4448149.66432559
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>31.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.29">
+            <polizia_idr:opera>34</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>565681</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4435508</polizia_idr:utm_y>
+            <polizia_idr:valore>2</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Noce</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        565608.35527992,4435319.78138099
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>34.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.30">
+            <polizia_idr:opera>35</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>639316</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4448287</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Sinni</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        639242.76538657,4448098.65719866
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>35.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.31">
+            <polizia_idr:opera>36</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>640316</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4447416</polizia_idr:utm_y>
+            <polizia_idr:valore>2</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Sinni</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        640242.75700892,4447227.66384516
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>36.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.32">
+            <polizia_idr:opera>37</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>638572</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4448667</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Sinni</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        638498.771514,4448478.65441612
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>37.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.33">
+            <polizia_idr:opera>38</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>611700</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4465808</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        611626.99284567,4465619.52571034
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>38.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.34">
+            <polizia_idr:opera>39</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>605439</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4466158</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        605366.04299778,4465969.5247656
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>39.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.35">
+            <polizia_idr:opera>40</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>589131</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4473804</polizia_idr:utm_y>
+            <polizia_idr:valore>2</polizia_idr:valore>
+            <polizia_idr:tipologia>Briglia</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        589058.17522845,4473615.46783899
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>40.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.36">
+            <polizia_idr:opera>41</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>603912</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4465570</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        603839.05503559,4465381.52992241
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>41.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.37">
+            <polizia_idr:opera>42</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>588860</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4475428</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        588787.17778497,4475239.45491084
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>42.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.38">
+            <polizia_idr:opera>43</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>588524</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4475718</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        588451.18053279,4475529.45267278
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>43.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.39">
+            <polizia_idr:opera>44</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>643602</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4454414</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        643528.73335056,4454225.60613126
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>44.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.40">
+            <polizia_idr:opera>45</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>643581</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4454371</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        643507.73350204,4454182.60648587
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>45.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.41">
+            <polizia_idr:opera>46</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>595194</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4466462</polizia_idr:utm_y>
+            <polizia_idr:valore>2</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        595121.12497037,4466273.52514396
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>46.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.42">
+            <polizia_idr:opera>47</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>643947</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4454361</polizia_idr:utm_y>
+            <polizia_idr:valore>2</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        643873.73056147,4454172.60642181
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>47.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.43">
+            <polizia_idr:opera>48</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>594869</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4466669</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        594796.127622,4466480.5235678
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>48.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.44">
+            <polizia_idr:opera>49</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>635729</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4457296</polizia_idr:utm_y>
+            <polizia_idr:valore>2</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        635655.79759804,4457107.58595119
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>49.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.45">
+            <polizia_idr:opera>50</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>589385</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4470052</polizia_idr:utm_y>
+            <polizia_idr:valore>2</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        589312.17228288,4469863.49782575
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>50.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.46">
+            <polizia_idr:opera>51</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>589364</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4472204</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Briglia</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        589291.17297842,4472015.4805913
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>51.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.47">
+            <polizia_idr:opera>52</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>589510</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4472509</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Briglia</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        589437.17188865,4472320.47811324
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>52.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.48">
+            <polizia_idr:opera>53</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>629207</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4460619</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        629133.85106114,4460430.56159903
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>53.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.49">
+            <polizia_idr:opera>54</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>589479</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4472611</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Briglia</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        589406.17216097,4472422.47730412
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>54.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.50">
+            <polizia_idr:opera>56</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>635025</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4450605</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Sinni</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        634951.80075229,4450416.64011532
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>56.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.51">
+            <polizia_idr:opera>63</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>600303</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4457654</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Soglia</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        600230.08170591,4457465.59455202
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>63.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.52">
+            <polizia_idr:opera>64</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>589515</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4473283</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Agri</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        589442.17203889,4473094.47191532
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>64.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.53">
+            <polizia_idr:opera>65</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>565375</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4499837</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Basento</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        565302.36929936,4499648.26541663
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>65.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.54">
+            <polizia_idr:opera>66</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>565402</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4499805</polizia_idr:utm_y>
+            <polizia_idr:valore>2</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Basento</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        565329.36908029,4499616.26566567
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>66.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.55">
+            <polizia_idr:opera>69</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>564952</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4500305</polizia_idr:utm_y>
+            <polizia_idr:valore>2</polizia_idr:valore>
+            <polizia_idr:tipologia>Argine</polizia_idr:tipologia>
+            <polizia_idr:bacino>Basento</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        564879.37272504,4500116.2617795
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>69.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.56">
+            <polizia_idr:opera>70</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>564786</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4500524</polizia_idr:utm_y>
+            <polizia_idr:valore>2</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Basento</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        564713.37407534,4500335.2600719
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>70.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.57">
+            <polizia_idr:opera>71</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>565995</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4499295</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Argine</polizia_idr:tipologia>
+            <polizia_idr:bacino>Basento</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        565922.36430226,4499106.26960563
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>71.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.58">
+            <polizia_idr:opera>72</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>566108</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4499273</polizia_idr:utm_y>
+            <polizia_idr:valore>2</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Basento</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        566035.36340515,4499084.26975985
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>72.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.59">
+            <polizia_idr:opera>73</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>565631</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4499482</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Argine</polizia_idr:tipologia>
+            <polizia_idr:bacino>Basento</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        565558.36721276,4499293.26818724
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>73.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.60">
+            <polizia_idr:opera>74</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>566405</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4498801</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Basento</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        566332.36097213,4498612.27345151
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>74.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.61">
+            <polizia_idr:opera>75</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>566616</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4498506</polizia_idr:utm_y>
+            <polizia_idr:valore>1</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Basento</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        566543.35925049,4498317.27575437
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>75.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.62">
+            <polizia_idr:opera>76</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>567090</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4497995</polizia_idr:utm_y>
+            <polizia_idr:valore>2</polizia_idr:valore>
+            <polizia_idr:tipologia>Argine</polizia_idr:tipologia>
+            <polizia_idr:bacino>Basento</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        567017.35540946,4497806.27972385
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>76.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.63">
+            <polizia_idr:opera>77</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>567254</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4497890</polizia_idr:utm_y>
+            <polizia_idr:valore>1</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Basento</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        567181.35409337,4497701.28052731
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>77.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+    <gml:featureMember>
+        <polizia_idr:polizia_2008_utm33 fid="polizia_2008_utm33.64">
+            <polizia_idr:opera>78</polizia_idr:opera>
+            <polizia_idr:anno>2008</polizia_idr:anno>
+            <polizia_idr:utm_x>567330</polizia_idr:utm_x>
+            <polizia_idr:utm_y>4497839</polizia_idr:utm_y>
+            <polizia_idr:valore>3</polizia_idr:valore>
+            <polizia_idr:tipologia>Attraversamento</polizia_idr:tipologia>
+            <polizia_idr:bacino>Basento</polizia_idr:bacino>
+            <polizia_idr:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        567257.35348301,4497650.28091821
+                    </gml:coordinates>
+                </gml:Point>
+            </polizia_idr:the_geom>
+            <polizia_idr:documento>78.zip</polizia_idr:documento>
+        </polizia_idr:polizia_2008_utm33>
+    </gml:featureMember>
+</wfs:FeatureCollection>

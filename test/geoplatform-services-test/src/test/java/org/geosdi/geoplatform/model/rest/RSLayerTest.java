@@ -412,10 +412,9 @@ public class RSLayerTest extends BasicRestServiceTest {
     }
     
     @Test
-    public void testTransactionOnRemoveAndAddLayerRest()
-            throws IllegalParameterFault, ResourceNotFoundFault {
+    public void testTransactionOnRemoveAndAddLayerRest() throws IllegalParameterFault, ResourceNotFoundFault {
         logger.trace("\n\t@@@ testTransactionOnRemoveAndAddLayerRest @@@");
-        Map<Long, Integer> map = new HashMap<Long, Integer>();
+        Map<Long, Integer> map = new HashMap();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
         descendantsMapData.setDescendantsMap(map);
         map.put(idRootFolderA, 3);
@@ -433,16 +432,14 @@ public class RSLayerTest extends BasicRestServiceTest {
                             rootFolderA.getId(), raster, descendantsMapData));
             Assert.fail("Add layer must fail because title value is null");
         } catch (ClientErrorException ex) {
-            GPRestExceptionMessage exMess = ex.getResponse().readEntity(
-                    GPRestExceptionMessage.class);
-            logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", exMess);
+            GPRestExceptionMessage exMess = ex.getResponse().readEntity(GPRestExceptionMessage.class);
+            logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@{}\n", exMess);
             try {
                 raster1 = gpWSClient.getRasterLayer(idRaster1).getRasterLayer();
                 Assert.fail("rasterLayer1 must not exist");
             } catch (NotFoundException rnf) {
-                GPRestExceptionMessage rnfMess = rnf.getResponse().readEntity(
-                        GPRestExceptionMessage.class);
-                logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {}\n", rnfMess);
+                GPRestExceptionMessage rnfMess = rnf.getResponse().readEntity(GPRestExceptionMessage.class);
+                logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@{}\n", rnfMess);
             }
         }
     }

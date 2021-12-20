@@ -289,32 +289,50 @@ public class GPWMSGetFeatureInfoWoodstoxReaderTest extends WMSGetFeatureInfoWood
     }
 
     @Test
-    public void b_q_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void b_q_wmsGetFeatureInfooWoodstoxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_laghi : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("laghi.xml"))));
     }
 
     @Test
-    public void b_r_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void b_r_wmsGetFeatureInfooWoodstoxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_viabilità : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("viabilità.xml"))));
     }
 
     @Test
-    public void b_s_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void b_s_wmsGetFeatureInfooWoodstoxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_vincoli : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("vincoli.xml"))));
     }
 
     @Test
-    public void b_t_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void b_t_wmsGetFeatureInfooWoodstoxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_corsi_acque : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("CorsiAcque.xml"))));
     }
 
     @Test
-    public void b_u_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+    public void b_u_wmsGetFeatureInfooWoodstoxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("features.xml"))));
+    }
+
+    @Test
+    public void b_v_wmsGetFeatureInfooWoodstoxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_GEOSITI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("Geositi.xml"))));
+    }
+
+    @Test
+    public void d_h_wmsGetFeatureInfooWoodstoxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_ADB_RISK : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("ADBRisk.xml"))));
+    }
+
+    @Test
+    public void d_i_wmsGetFeatureInfooWoodstoxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_POLIZIA_IDR : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("PoliziaIDR.xml"))));
     }
 }

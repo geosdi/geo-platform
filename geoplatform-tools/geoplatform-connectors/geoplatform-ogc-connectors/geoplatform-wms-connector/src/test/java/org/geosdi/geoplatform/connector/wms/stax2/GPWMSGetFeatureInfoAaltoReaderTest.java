@@ -336,4 +336,22 @@ public class GPWMSGetFeatureInfoAaltoReaderTest extends WMSGetFeatureInfoAaltoRe
         logger.info("#######################FEATURE_COLLECTION_GEOSITI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("Geositi.xml"))));
     }
+
+    @Test
+    public void c_a_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_GEOSITI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("Geositi.xml"))));
+    }
+
+    @Test
+    public void c_b_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_ADB_RISK : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("ADBRisk.xml"))));
+    }
+
+    @Test
+    public void c_c_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_POLIZIA_IDR : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("PoliziaIDR.xml"))));
+    }
 }

@@ -495,34 +495,28 @@ public class GPAccountDelegate implements AccountDelegate {
         return user;
     }
 
-    private GPApplication getApplicationByAppId(String appID) throws
-            ResourceNotFoundFault {
+    private GPApplication getApplicationByAppId(String appID) throws ResourceNotFoundFault {
         GPApplication application = accountDao.findByAppID(appID);
         if (application == null) {
-            throw new ResourceNotFoundFault(
-                    "Application not found (appID=" + appID + ")");
+            throw new ResourceNotFoundFault("Application not found (appID=" + appID + ")");
         }
         return application;
     }
 
-    private void checkDuplicateAccount(GPAccount account) throws
-            IllegalParameterFault {
+    private void checkDuplicateAccount(GPAccount account) throws IllegalParameterFault {
         if (account instanceof GPUser) { // User
             GPUser user = (GPUser) account;
             if (accountDao.findByUsername(user.getUsername()) != null) {
-                throw new IllegalParameterFault("User with username \""
-                        + user.getUsername() + "\" already exists");
+                throw new IllegalParameterFault("User with username " + user.getUsername() + " already exists");
             }
 
             if (accountDao.findByEmail(user.getEmailAddress()) != null) {
-                throw new IllegalParameterFault("User with email \""
-                        + user.getEmailAddress() + "\" already exists");
+                throw new IllegalParameterFault("User with email " + user.getEmailAddress() + " already exists");
             }
         } else { // Application
             GPApplication application = (GPApplication) account;
             if (accountDao.findByAppID(application.getAppID()) != null) {
-                throw new IllegalParameterFault("Application with AppId \""
-                        + application.getAppID() + "\" already exists");
+                throw new IllegalParameterFault("Application with AppId " + application.getAppID() + " already exists");
             }
         }
     }

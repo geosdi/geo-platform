@@ -189,7 +189,7 @@ public class GPPrimitiveImplementorStoreTest {
 
     @Test
     public void loadDatePrimitiveImplementorTest() throws Exception {
-        Date date = new Date();
+        Object date = new Date();
         PrimitiveImplementor dateTimePrimitiveImplementor = primitiveImplementorStore.getPrimitiveImplementorForClass(date.getClass());
         logger.info("########################DATE_IMPLEMENTOR : {}\n", dateTimePrimitiveImplementor);
         assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(date.getClass()));
@@ -197,7 +197,7 @@ public class GPPrimitiveImplementorStoreTest {
 
     @Test
     public void loadSQLDatePrimitiveImplementorTest() throws Exception {
-        java.sql.Date sqlDate = new java.sql.Date(1478183430660l);
+        Object sqlDate = new java.sql.Date(1478183430660l);
         PrimitiveImplementor dateTimePrimitiveImplementor = primitiveImplementorStore.getPrimitiveImplementorForClass(sqlDate.getClass());
         logger.info("########################SQL_DATE_IMPLEMENTOR : {}\n", dateTimePrimitiveImplementor);
         assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(sqlDate.getClass()));

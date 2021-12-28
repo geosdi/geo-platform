@@ -35,11 +35,9 @@
  */
 package org.geosdi.geoplatform.support.primitive.bridge.store.massive;
 
-import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.support.primitive.bridge.implementor.PrimitiveImplementor;
 import org.geosdi.geoplatform.support.primitive.bridge.store.GPPrimitiveImplementorStore;
 import org.geosdi.geoplatform.support.primitive.bridge.store.PrimitiveImplementorStore;
-import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,8 +48,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.util.stream.Collectors.toList;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -95,11 +96,12 @@ public abstract class AbstractMassiveImplementorStoreTest {
      * @return {@link Collection<Callable<Long>}
      */
     protected Collection<Callable<Long>> createPrimitiveTask(int numbers, PrimitiveTaskType primitiveTaskType) {
-        Preconditions.checkArgument((numbers > 0), "The Number of Users must be greather than 0.");
+        checkArgument((numbers > 0), "The Number of Users must be greather than 0.");
         return IntStream.iterate(0, n -> n + 1)
                 .limit(numbers)
                 .boxed()
-                .map(new PrimitiveTaskFunction(primitiveTaskType)).collect(Collectors.toList());
+                .map(new PrimitiveTaskFunction(primitiveTaskType))
+                .collect(toList());
     }
 
     /**
@@ -156,10 +158,10 @@ public abstract class AbstractMassiveImplementorStoreTest {
             long start = System.currentTimeMillis();
             PrimitiveImplementor primitiveImplementor = primitiveImplementorStore.getPrimitiveImplementorForClass(Integer.class);
             logger.info("###########################INTEGER_PRIMITIVE_IMPLEMENTORS : {}\n", primitiveImplementor);
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(int.class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(int[].class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Integer.class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Integer[].class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(int.class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(int[].class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Integer.class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Integer[].class));
             return System.currentTimeMillis() - start;
         }
     }
@@ -177,8 +179,8 @@ public abstract class AbstractMassiveImplementorStoreTest {
             long start = System.currentTimeMillis();
             PrimitiveImplementor primitiveImplementor = primitiveImplementorStore.getPrimitiveImplementorForClass(BigDecimal.class);
             logger.info("###########################BIG_DECIMAL_PRIMITIVE_IMPLEMENTORS : {}\n", primitiveImplementor);
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(BigDecimal.class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(BigDecimal[].class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(BigDecimal.class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(BigDecimal[].class));
             return System.currentTimeMillis() - start;
         }
     }
@@ -196,8 +198,8 @@ public abstract class AbstractMassiveImplementorStoreTest {
             long start = System.currentTimeMillis();
             PrimitiveImplementor primitiveImplementor = primitiveImplementorStore.getPrimitiveImplementorForClass(BigInteger.class);
             logger.info("###########################BIG_INTEGER_PRIMITIVE_IMPLEMENTORS : {}\n", primitiveImplementor);
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(BigInteger.class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(BigInteger[].class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(BigInteger.class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(BigInteger[].class));
             return System.currentTimeMillis() - start;
         }
     }
@@ -215,10 +217,10 @@ public abstract class AbstractMassiveImplementorStoreTest {
             long start = System.currentTimeMillis();
             PrimitiveImplementor primitiveImplementor = primitiveImplementorStore.getPrimitiveImplementorForClass(Boolean.class);
             logger.info("###########################BOOLEAN_PRIMITIVE_IMPLEMENTORS : {}\n", primitiveImplementor);
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Boolean.class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Boolean[].class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(boolean.class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(boolean[].class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Boolean.class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Boolean[].class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(boolean.class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(boolean[].class));
             return System.currentTimeMillis() - start;
         }
     }
@@ -236,10 +238,10 @@ public abstract class AbstractMassiveImplementorStoreTest {
             long start = System.currentTimeMillis();
             PrimitiveImplementor primitiveImplementor = primitiveImplementorStore.getPrimitiveImplementorForClass(Byte.class);
             logger.info("###########################BYTE_PRIMITIVE_IMPLEMENTORS : {}\n", primitiveImplementor);
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Byte.class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Byte[].class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(byte.class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(byte[].class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Byte.class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Byte[].class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(byte.class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(byte[].class));
             return System.currentTimeMillis() - start;
         }
     }
@@ -257,10 +259,10 @@ public abstract class AbstractMassiveImplementorStoreTest {
             long start = System.currentTimeMillis();
             PrimitiveImplementor primitiveImplementor = primitiveImplementorStore.getPrimitiveImplementorForClass(Double.class);
             logger.info("###########################DOUBLE_PRIMITIVE_IMPLEMENTORS : {}\n", primitiveImplementor);
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Double.class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Double[].class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(double.class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(double[].class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Double.class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Double[].class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(double.class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(double[].class));
             return System.currentTimeMillis() - start;
         }
     }
@@ -278,10 +280,10 @@ public abstract class AbstractMassiveImplementorStoreTest {
             long start = System.currentTimeMillis();
             PrimitiveImplementor primitiveImplementor = primitiveImplementorStore.getPrimitiveImplementorForClass(Float.class);
             logger.info("###########################FLOAT_PRIMITIVE_IMPLEMENTORS : {}\n", primitiveImplementor);
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Float.class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Float[].class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(float.class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(float[].class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Float.class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Float[].class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(float.class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(float[].class));
             return System.currentTimeMillis() - start;
         }
     }
@@ -299,10 +301,10 @@ public abstract class AbstractMassiveImplementorStoreTest {
             long start = System.currentTimeMillis();
             PrimitiveImplementor primitiveImplementor = primitiveImplementorStore.getPrimitiveImplementorForClass(Long.class);
             logger.info("###########################LONG_PRIMITIVE_IMPLEMENTORS : {}\n", primitiveImplementor);
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Long.class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Long[].class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(long.class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(long[].class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Long.class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Long[].class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(long.class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(long[].class));
             return System.currentTimeMillis() - start;
         }
     }
@@ -320,8 +322,8 @@ public abstract class AbstractMassiveImplementorStoreTest {
             long start = System.currentTimeMillis();
             PrimitiveImplementor primitiveImplementor = primitiveImplementorStore.getPrimitiveImplementorForClass(Number.class);
             logger.info("###########################NUMBER_PRIMITIVE_IMPLEMENTORS : {}\n", primitiveImplementor);
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Number.class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Number[].class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Number.class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Number[].class));
             return System.currentTimeMillis() - start;
         }
     }
@@ -339,10 +341,10 @@ public abstract class AbstractMassiveImplementorStoreTest {
             long start = System.currentTimeMillis();
             PrimitiveImplementor primitiveImplementor = primitiveImplementorStore.getPrimitiveImplementorForClass(Short.class);
             logger.info("###########################SHORT_PRIMITIVE_IMPLEMENTORS : {}\n", primitiveImplementor);
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Short.class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Short[].class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(short.class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(short[].class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Short.class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Short[].class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(short.class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(short[].class));
             return System.currentTimeMillis() - start;
         }
     }
@@ -360,10 +362,10 @@ public abstract class AbstractMassiveImplementorStoreTest {
             long start = System.currentTimeMillis();
             PrimitiveImplementor primitiveImplementor = primitiveImplementorStore.getPrimitiveImplementorForClass(Character.class);
             logger.info("###########################CHARACTER_PRIMITIVE_IMPLEMENTORS : {}\n", primitiveImplementor);
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Character.class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Character[].class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(char.class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(char[].class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Character.class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(Character[].class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(char.class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(char[].class));
             return System.currentTimeMillis() - start;
         }
     }
@@ -381,8 +383,8 @@ public abstract class AbstractMassiveImplementorStoreTest {
             long start = System.currentTimeMillis();
             PrimitiveImplementor primitiveImplementor = primitiveImplementorStore.getPrimitiveImplementorForClass(String.class);
             logger.info("###########################STRING_PRIMITIVE_IMPLEMENTORS : {}\n", primitiveImplementor);
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(String.class));
-            Assert.assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(String[].class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(String.class));
+            assertTrue(primitiveImplementorStore.isPrimitiveOrWrapper(String[].class));
             return System.currentTimeMillis() - start;
         }
     }

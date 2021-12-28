@@ -38,8 +38,8 @@ package org.geosdi.geoplatform.support.primitive.bridge.implementor.number;
 import org.geosdi.geoplatform.support.primitive.bridge.implementor.GPPrimitiveImplementor;
 import org.geosdi.geoplatform.support.primitive.operator.*;
 
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Stream.of;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -59,9 +59,10 @@ public abstract class WrapperNumberImplementor<P extends Number> extends GPPrimi
     @Override
     public GPOperator.GPOperatorLoader getOperatorLoader() {
         return this.operatorLoader = ((this.operatorLoader != null)
-                ? this.operatorLoader : () -> Stream.of(new EqualToOperator(),
+                ? this.operatorLoader : () -> of(new EqualToOperator(),
                 new NotEqualToOperator(), new GreaterThanOperator(),
                 new GreaterThanOrEqualToOperator(), new LessThanOperator(),
-                new LessThanOrEqualToOperator()).collect(Collectors.toList()));
+                new LessThanOrEqualToOperator())
+                .collect(toList()));
     }
 }

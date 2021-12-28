@@ -50,6 +50,7 @@ public class GPTemporalTestPatterImplementor extends GPBaseTemporalPatternImplem
     public GPTemporalTestPatterImplementor() {
         super();
         super.addPattern("YYYY");
+        super.addPattern("EEE MMM d yyyy");
     }
 
     /**

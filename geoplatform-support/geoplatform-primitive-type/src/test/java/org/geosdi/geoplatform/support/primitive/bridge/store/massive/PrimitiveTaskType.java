@@ -40,6 +40,7 @@ package org.geosdi.geoplatform.support.primitive.bridge.store.massive;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public enum PrimitiveTaskType {
+
     INTEGER,
     BIGDECIMAL,
     BIGINTEGER,

@@ -37,7 +37,8 @@ package org.geosdi.geoplatform.support.primitive.bridge.store.massive;
 
 import org.junit.Test;
 
-import java.util.concurrent.TimeUnit;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static org.geosdi.geoplatform.support.primitive.bridge.store.massive.PrimitiveTaskType.*;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -49,103 +50,90 @@ public class MassiveImplementorStoreTest extends AbstractMassiveImplementorStore
     public void massiveLoadAllImplementorsTest() throws Exception {
         logger.info("massiveLoadAllImplementorsTest : Executed {} threads for {} Tasks in {} s \n",
                 super.defineNumThreads(), super.defineNumTasks(),
-                TimeUnit.MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(),
-                        PrimitiveTaskType.ALL_IMPLEMENTORS)));
+                MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(), ALL_IMPLEMENTORS)));
     }
 
     @Test
     public void massiveIntegerImplementorTest() throws Exception {
         logger.info("massiveIntegerImplementorTest : Executed {} threads for {} Tasks in {} s \n",
                 super.defineNumThreads(), super.defineNumTasks(),
-                TimeUnit.MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(),
-                        PrimitiveTaskType.INTEGER)));
+                MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(), INTEGER)));
     }
 
     @Test
     public void massiveBigDecimalImplementorTest() throws Exception {
         logger.info("massiveBigDecimalImplementorTest : Executed {} threads for {} Tasks in {} s \n",
                 super.defineNumThreads(), super.defineNumTasks(),
-                TimeUnit.MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(),
-                        PrimitiveTaskType.BIGDECIMAL)));
+                MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(), BIGDECIMAL)));
     }
 
     @Test
     public void massiveBigIntegerImplementorTest() throws Exception {
         logger.info("massiveBigIntegerImplementorTest : Executed {} threads for {} Tasks in {} s \n",
                 super.defineNumThreads(), super.defineNumTasks(),
-                TimeUnit.MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(),
-                        PrimitiveTaskType.BIGINTEGER)));
+                MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(), BIGINTEGER)));
     }
 
     @Test
     public void massiveBooleanImplementorTest() throws Exception {
         logger.info("massiveBooleanImplementorTest : Executed {} threads for {} Tasks in {} s \n",
                 super.defineNumThreads(), super.defineNumTasks(),
-                TimeUnit.MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(),
-                        PrimitiveTaskType.BOOLEAN)));
+                MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(), BOOLEAN)));
     }
 
     @Test
     public void massiveByteImplementorTest() throws Exception {
         logger.info("massiveByteImplementorTest : Executed {} threads for {} Tasks in {} s \n",
                 super.defineNumThreads(), super.defineNumTasks(),
-                TimeUnit.MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(),
-                        PrimitiveTaskType.BYTE)));
+                MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(), BYTE)));
     }
 
     @Test
     public void massiveDoubleImplementorTest() throws Exception {
         logger.info("massiveDoubleImplementorTest : Executed {} threads for {} Tasks in {} s \n",
                 super.defineNumThreads(), super.defineNumTasks(),
-                TimeUnit.MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(),
-                        PrimitiveTaskType.DOUBLE)));
+                MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(), DOUBLE)));
     }
 
     @Test
     public void massiveFloatImplementorTest() throws Exception {
         logger.info("massiveFloatImplementorTest : Executed {} threads for {} Tasks in {} s \n",
                 super.defineNumThreads(), super.defineNumTasks(),
-                TimeUnit.MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(),
-                        PrimitiveTaskType.FLOAT)));
+                MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(), FLOAT)));
     }
 
     @Test
     public void massiveLongImplementorTest() throws Exception {
         logger.info("massiveLongImplementorTest : Executed {} threads for {} Tasks in {} s \n",
                 super.defineNumThreads(), super.defineNumTasks(),
-                TimeUnit.MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(),
-                        PrimitiveTaskType.LONG)));
+                MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(), LONG)));
     }
 
     @Test
     public void massiveNumberImplementorTest() throws Exception {
         logger.info("massiveNumberImplementorTest : Executed {} threads for {} Tasks in {} s \n",
                 super.defineNumThreads(), super.defineNumTasks(),
-                TimeUnit.MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(),
-                        PrimitiveTaskType.NUMBER)));
+                MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(), NUMBER)));
     }
 
     @Test
     public void massiveShortImplementorTest() throws Exception {
         logger.info("massiveShortImplementorTest : Executed {} threads for {} Tasks in {} s \n",
                 super.defineNumThreads(), super.defineNumTasks(),
-                TimeUnit.MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(),
-                        PrimitiveTaskType.SHORT)));
+                MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(), SHORT)));
     }
 
     @Test
     public void massiveCharacterImplementorTest() throws Exception {
         logger.info("massiveCharacterImplementorTest : Executed {} threads for {} Tasks in {} s \n",
                 super.defineNumThreads(), super.defineNumTasks(),
-                TimeUnit.MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(),
-                        PrimitiveTaskType.CHARACTER)));
+                MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(), CHARACTER)));
     }
 
     @Test
     public void massiveStringImplementorTest() throws Exception {
         logger.info("massiveStringImplementorTest : Executed {} threads for {} Tasks in {} s \n",
                 super.defineNumThreads(), super.defineNumTasks(),
-                TimeUnit.MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(),
-                        PrimitiveTaskType.STRING)));
+                MILLISECONDS.toSeconds(super.executePrimitiveTask(super.defineNumTasks(), STRING)));
     }
 }

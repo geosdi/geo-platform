@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.support.primitive.string.responsibility;
 
+import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.support.primitive.string.responsibility.GPPrimitiveParserFromStringHandler.IGPPrimitiveParserFromStringType.GPPrimitiveParserFromStringType.STRING;
 
 /**
@@ -77,6 +78,6 @@ class DefaultParserFromStringHandler extends AbstractPrimitiveParserFromStringHa
      */
     @Override
     protected Boolean canParseValue(String value) {
-        return Boolean.TRUE;
+        return TRUE;
     }
 }

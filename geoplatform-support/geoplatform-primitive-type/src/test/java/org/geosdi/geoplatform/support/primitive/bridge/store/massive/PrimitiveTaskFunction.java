@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.support.primitive.bridge.store.massive;
 
-import com.google.common.base.Preconditions;
-
 import java.util.concurrent.Callable;
 import java.util.function.Function;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -49,8 +49,7 @@ public class PrimitiveTaskFunction implements Function<Integer, Callable<Long>> 
     private final PrimitiveTaskType primitiveTaskType;
 
     public PrimitiveTaskFunction(PrimitiveTaskType thePrimitiveTaskType) {
-        Preconditions.checkArgument(thePrimitiveTaskType != null, "The Parameter Primitive Task Type must " +
-                "not be null.");
+        checkArgument(thePrimitiveTaskType != null, "The Parameter Primitive Task Type must not be null.");
         this.primitiveTaskType = thePrimitiveTaskType;
     }
 

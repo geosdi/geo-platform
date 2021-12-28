@@ -42,6 +42,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.Duration;
+import java.time.Instant;
+
 import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -57,138 +60,153 @@ public class GPPrimitiveParserTest {
     private static final IGPPrimitiveParserHandlerManager primitiveParserHandlerManager = new GPPrimitiveParserHandlerManager();
 
     @Test
-    public void a_parseStringTest() throws Exception {
+    public void a_a_parseStringTest() throws Exception {
         String className = primitiveParserHandlerManager.parseValue("This is a Simple Test").getSimpleName();
         logger.info("#######################PARSE_STRING : {}\n", className);
         assertTrue(className.equalsIgnoreCase(String.class.getSimpleName()));
     }
 
     @Test
-    public void b_parseIntegerTest() throws Exception {
+    public void a_b_parseIntegerTest() throws Exception {
         String className = primitiveParserHandlerManager.parseValue("34").getSimpleName();
         logger.info("#######################PARSE_INTEGER : {}\n", className);
         assertTrue(className.equalsIgnoreCase(Integer.TYPE.getSimpleName()));
     }
 
     @Test
-    public void c_parseDoubleTest() throws Exception {
+    public void a_c_parseDoubleTest() throws Exception {
         String className = primitiveParserHandlerManager.parseValue("34.89").getSimpleName();
         logger.info("#######################PARSE_DOUBLE : {}\n", className);
         assertTrue(className.equalsIgnoreCase(Double.class.getSimpleName()));
     }
 
     @Test
-    public void d_parseDateTimeTest() throws Exception {
+    public void a_d_parseDateTimeTest() throws Exception {
         String className = primitiveParserHandlerManager.parseValue("2001-07-04T12:08:56.235-0700").getSimpleName();
         logger.info("#######################PARSE_DATE_TIME : {}\n", className);
         assertTrue(className.equalsIgnoreCase(DateTime.class.getSimpleName()));
     }
 
     @Test
-    public void e_parseDateTimeAnotherTest() throws Exception {
+    public void a_e_parseDateTimeAnotherTest() throws Exception {
         String className = primitiveParserHandlerManager.parseValue("2016-08-28 14:36:15").getSimpleName();
         logger.info("#######################PARSE_DATE_TIME : {}\n", className);
         assertTrue(className.equalsIgnoreCase(DateTime.class.getSimpleName()));
     }
 
     @Test
-    public void f_parseDateTime1Test() throws Exception {
+    public void a_f_parseDateTime1Test() throws Exception {
         String className = primitiveParserHandlerManager.parseValue("2010-07-05T11:47:14Z").getSimpleName();
         logger.info("#######################PARSE_DATE_TIME : {}\n", className);
         assertTrue(className.equalsIgnoreCase(DateTime.class.getSimpleName()));
     }
 
     @Test
-    public void g_parseNumberTest() throws Exception {
+    public void a_g_parseNumberTest() throws Exception {
         String className = primitiveParserHandlerManager.parseValue("1,900,900.23").getSimpleName();
         logger.info("#######################PARSE_NUMBER : {}\n", className);
         assertTrue(className.equalsIgnoreCase(Number.class.getSimpleName()));
     }
 
     @Test
-    public void h_parseNumberTest() throws Exception {
+    public void a_h_parseNumberTest() throws Exception {
         String className = primitiveParserHandlerManager.parseValue("1.900.900,23").getSimpleName();
         logger.info("#######################PARSE_NUMBER : {}\n", className);
         assertTrue(className.equalsIgnoreCase(Number.class.getSimpleName()));
     }
 
     @Test
-    public void i_parseValueTest() throws Exception {
+    public void a_i_parseValueTest() throws Exception {
         String className = primitiveParserHandlerManager.parseValue("44.524768336 11.4832955249").getSimpleName();
         logger.info("###########################PARSE_VALUE : {}\n", className);
         assertTrue(className.equalsIgnoreCase(Double[].class.getSimpleName()));
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void l_parseValueTest() throws Exception {
+    public void a_l_parseValueTest() throws Exception {
         logger.info("###########################PARSE_VALUE : {}\n", primitiveParserHandlerManager.parseValue(null));
     }
 
     @Test
-    public void m_parseValueTest() throws Exception {
+    public void a_m_parseValueTest() throws Exception {
         String className = primitiveParserHandlerManager.parseValue("2019-05-21T08:13:33.250000").getSimpleName();
         logger.info("###########################PARSE_VALUE : {}\n", className);
         assertTrue(className.equalsIgnoreCase(DateTime.class.getSimpleName()));
     }
 
     @Test
-    public void n_parseValueTest() throws Exception {
+    public void a_n_parseValueTest() throws Exception {
         String className = primitiveParserHandlerManager.parseValue("44 11").getSimpleName();
         logger.info("###########################PARSE_VALUE : {}\n", className);
         assertTrue(className.equalsIgnoreCase(Integer[].class.getSimpleName()));
     }
 
     @Test
-    public void o_parseValueTest() throws Exception {
+    public void a_o_parseValueTest() throws Exception {
         String className = primitiveParserHandlerManager.parseValue("2977").getSimpleName();
         logger.info("###########################PARSE_VALUE : {}\n", className);
     }
 
     @Test
-    public void p_parseValueTest() throws Exception {
+    public void a_p_parseValueTest() throws Exception {
         String className = primitiveParserHandlerManager.parseValue("0").getSimpleName();
         logger.info("###########################PARSE_VALUE : {}\n", className);
     }
 
     @Test
-    public void q_parseValueTest() throws Exception {
+    public void a_q_parseValueTest() throws Exception {
         String className = primitiveParserHandlerManager.parseValue("2018-09-24T17:48:00").getSimpleName();
         logger.info("###########################PARSE_VALUE : {}\n", className);
         assertTrue(className.equalsIgnoreCase(DateTime.class.getSimpleName()));
     }
 
     @Test
-    public void r_parseValueTest() throws Exception {
+    public void a_r_parseValueTest() throws Exception {
         String className = primitiveParserHandlerManager.parseValue("2018-09-24T18:01:24Z").getSimpleName();
         logger.info("###########################PARSE_VALUE : {}\n", className);
         assertTrue(className.equalsIgnoreCase(DateTime.class.getSimpleName()));
     }
 
     @Test
-    public void s_parseValueTest() throws Exception {
+    public void a_s_parseValueTest() throws Exception {
         String className = primitiveParserHandlerManager.parseValue("44.3 11.2").getSimpleName();
         logger.info("###########################PARSE_VALUE : {}\n", className);
         assertTrue(className.equalsIgnoreCase(Double[].class.getSimpleName()));
     }
 
     @Test
-    public void t_parseValueTest() throws Exception {
+    public void a_t_parseValueTest() throws Exception {
         String className = primitiveParserHandlerManager.parseValue("88 15.2").getSimpleName();
         logger.info("###########################PARSE_VALUE : {}\n", className);
         assertTrue(className.equalsIgnoreCase(Double[].class.getSimpleName()));
     }
 
     @Test
-    public void u_parseValueTest() throws Exception {
+    public void a_u_parseValueTest() throws Exception {
         String className = primitiveParserHandlerManager.parseValue("88 15.2 11.3").getSimpleName();
         logger.info("###########################PARSE_VALUE : {}\n", className);
         assertTrue(className.equalsIgnoreCase(Double[].class.getSimpleName()));
     }
 
     @Test
-    public void v_parseValueTest() throws Exception {
+    public void a_v_parseValueTest() throws Exception {
         String className = primitiveParserHandlerManager.parseValue("88 15 11").getSimpleName();
         logger.info("###########################PARSE_VALUE : {}\n", className);
         assertTrue(className.equalsIgnoreCase(Integer[].class.getSimpleName()));
+    }
+
+    @Test
+    public void b_a_parseValueTest() throws Exception {
+        String className = primitiveParserHandlerManager.parseValue("Fri February 15 2019").getSimpleName();
+        logger.info("###########################PARSE_VALUE : {}\n", className);
+    }
+
+    @Test
+    public void b_b_parseValueTest() throws Exception {
+        Instant start = Instant.now();
+        String className = primitiveParserHandlerManager.parseValue("34.89 34.89 34.89 34.89 34.89 34.89 34.89 34.89 34.89 34.89 34.89 34.89 34.89 34.89").getSimpleName();
+        Instant finish = Instant.now();
+        logger.info("#############BASE_DOUBLE_PARSE_DOUBLE_JAVA : {}\n", Duration.between(start, finish).toMillis());
+        logger.info("###########################PARSE_VALUE : {}\n", className);
     }
 }

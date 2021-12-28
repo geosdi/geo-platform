@@ -81,6 +81,7 @@ public interface GPPrimitiveParserFromStringHandler<Type extends Object> {
         String getType();
 
         enum GPPrimitiveParserFromStringType implements IGPPrimitiveParserFromStringType {
+
             INTEGER("Interger"),
             INTEGER_ARRAY("Interger[]"),
             DOUBLE("Double"),
@@ -93,10 +94,12 @@ public interface GPPrimitiveParserFromStringHandler<Type extends Object> {
 
             private final String type;
 
+            /**
+             * @param theType
+             */
             GPPrimitiveParserFromStringType(String theType) {
                 this.type = theType;
             }
-
 
             /**
              * @return {@link String}
@@ -120,7 +123,7 @@ public interface GPPrimitiveParserFromStringHandler<Type extends Object> {
                         .filter(v -> (theType != null) && !(theType.trim().isEmpty()))
                         .filter(v -> v.getType().equalsIgnoreCase(theType))
                         .findFirst();
-                return (((optional != null) && (optional.isPresent())) ? optional.get() : null);
+                return optional.orElse(null);
             }
         }
     }

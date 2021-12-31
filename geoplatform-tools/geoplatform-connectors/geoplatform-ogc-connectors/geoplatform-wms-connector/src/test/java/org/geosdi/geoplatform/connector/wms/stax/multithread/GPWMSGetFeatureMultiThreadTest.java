@@ -74,7 +74,8 @@ public abstract class GPWMSGetFeatureMultiThreadTest {
                 "BaciniIdrogeografici.xml", "dtsew_campania_20150324_20201122.xml", "dtsup_campania_20150324_20201122.xml",
                 "pozzuoliAcque.xml", "laghi.xml", "viabilità.xml", "vincoli.xml", "CorsiAcque.xml", "NavteqStreet.xml",
                 "CAMPIndustrieARischio.xml", "layer_importer148.xml", "fluids_rete_zk.xml", "AreeBonifica.xml",
-                "CentraliElettriche.xml", "features.xml", "Geositi.xml", "ADBRisk.xml", "PoliziaIDR.xml")
+                "CentraliElettriche.xml", "features.xml", "Geositi.xml", "ADBRisk.xml", "PoliziaIDR.xml",
+                "ParchiRegionaliRiserve.xml")
                 .map(basePath::concat)
                 .collect(toCollection(LinkedList::new));
     }

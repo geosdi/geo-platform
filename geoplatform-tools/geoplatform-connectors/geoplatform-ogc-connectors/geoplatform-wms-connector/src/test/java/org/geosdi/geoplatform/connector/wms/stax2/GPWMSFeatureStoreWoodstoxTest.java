@@ -57,7 +57,7 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxReaderTest {
 
     @Test
-    public void a_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_a_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("geoserver-Vigneti-GetFeatureInfo.xml"));
         List<Feature> oliveti = wmsFeatureStore.getFeaturesByKey("admin_shp_oliveti_catastali");
         checkArgument((oliveti != null) && (oliveti.size() == 2), "For key : admin_shp_oliveti_catastali, store must contains a list of Features not null and with 2 features.");
@@ -67,14 +67,14 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void b_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_b_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("geoserver-GetFeatureInfo.xml"));
         logger.info("#######################FEATURE_STORE_STATES : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File("./target/StoreStatesWoodstox.json"), wmsFeatureStore);
     }
 
     @Test
-    public void c_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_c_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("geoserver-GetFeatureInfo1.xml"));
         logger.info("#######################FEATURE_STORE_STATES_1 : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreStates1Woodstox")
@@ -83,7 +83,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void d_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_d_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("geoserver-GetFeatureInfo-Point.xml"));
         logger.info("#######################FEATURE_STORE_ADMIN_TEMPO : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreAdminTempoWoodstox")
@@ -91,7 +91,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void e_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_e_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("geoserver-GetFeatureInfo-MultiLineString.xml"));
         logger.info("#######################FEATURE_STORE_TIGER_ROADS : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreTigerRoadsWoodstox")
@@ -99,7 +99,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void f_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_f_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("spearfish-GetFeatureInfo.xml"));
         logger.info("#######################FEATURE_STORE_SPEARFISH : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreSpearfishWoodstox")
@@ -107,7 +107,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void g_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_g_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("tasmaniaRoads-GetFeatureInfo.xml"));
         logger.info("#######################FEATURE_STORE_TASMANIA_ROADS : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File( of(new File(".").getCanonicalPath(), "target", "StoreTasmaniaRoadsWoodstox")
@@ -115,7 +115,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void h_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_h_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("tasmaniaStates-GetFeatureInfo.xml"));
         logger.info("#######################FEATURE_STORE_TASMANIA_STATES : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreTasmaniaStatesWoodstox")
@@ -123,7 +123,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void i_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_i_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("tiger_ny-GetFeatureInfo.xml"));
         logger.info("#######################FEATURE_STORE_TYGER_NY : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreTygerNYWoodstox")
@@ -131,7 +131,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void l_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_l_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("sfdem-GetFeatureInfo.xml"));
         logger.info("#######################FEATURE_STORE_SF_DEM : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreSfDemWoodstox")
@@ -139,7 +139,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void m_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_m_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("nurcAPk50095-GetFeatureInfo.xml"));
         logger.info("#######################FEATURE_STORE_NURC_APk50095 : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreNurkAPK50095Woodstox")
@@ -147,7 +147,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void n_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_n_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("nurcArcSample-GetFeatureInfo.xml"));
         logger.info("#######################FEATURE_STORE_NURC_ARC_SAMPLE : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreNurcArcSampleWoodstox")
@@ -155,7 +155,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void o_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_o_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("comuni-GetFeatureInfo.xml"));
         logger.info("#######################FEATURE_STORE_COMUNI : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreComuniWoodstox")
@@ -163,7 +163,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void p_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_p_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("parchiNaturali-GetFeatureInfo.xml"));
         logger.info("#######################FEATURE_STORE_PARCHI_NATURALI : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreParchiNaturaliWoodstox")
@@ -171,7 +171,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void q_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_q_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("retiRiserve-GetFeatureInfo.xml"));
         logger.info("#######################FEATURE_STORE_RETI_RISERVE : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreRetiRiserveWoodstox")
@@ -179,7 +179,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void r_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_r_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("linee-GetFeatureInfo.xml"));
         logger.info("#######################FEATURE_STORE_LINEE : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreLineeWoodstox")
@@ -187,7 +187,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void s_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_s_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("azioniPunto-GetFeatureInfo.xml"));
         logger.info("#######################FEATURE_STORE_AZIONI_PUNTO : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreAzioniPuntoWoodstox")
@@ -195,7 +195,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void t_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_t_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("comuniBasilicata-GetFeatureInfo.xml"));
         logger.info("#######################FEATURE_STORE_COMUNI_BASILICATA : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreComuniBasilicataWoodstox")
@@ -203,7 +203,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void u_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_u_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("corine-GetFeatureInfo.xml"));
         logger.info("#######################FEATURE_STORE_CORINE : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreCorineWoodstox")
@@ -211,7 +211,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void v_wmsGetFeatureInfoWoodstoxReaderTest() throws Exception {
+    public void a_v_wmsGetFeatureInfoWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("airports.xml"));
         logger.info("#######################FEATURE_STORE_AIRPORTS : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreAirportWoodstoxs")
@@ -219,7 +219,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void w_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_w_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("geologia.xml"));
         logger.info("#######################FEATURE_STORE_GEOLOGIA : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreGeologiaWoodstox")
@@ -227,7 +227,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void x_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_x_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("livelloEdifici.xml"));
         logger.info("#######################FEATURE_STORE_LIVELLO_EDIFICI : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreLivelloEdificiWoodstox")
@@ -235,7 +235,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void y_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_y_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("volumetria.xml"));
         logger.info("#######################FEATURE_STORE_VOLUMETRIA : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreVolumetriaWoodstox")
@@ -243,7 +243,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void z_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void a_z_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("livelloEdifici1.xml"));
         logger.info("#######################FEATURE_STORE_LIVELLO_EDIFICI_1 : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreLivelloEdifici1Woodstox")
@@ -251,7 +251,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void z_a_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void b_a_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("masw.xml"));
         logger.info("#######################FEATURE_STORE_MASW : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreMaswWoodstox")
@@ -259,7 +259,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void z_b_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void b_b_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("CF_zonepianificazione_mappeinterattive.xml"));
         logger.info("#######################FEATURE_STORE_CF_zonepianificazione_mappeinterattive : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreCF_zonepianificazione_mappeinterattiveWoodstox")
@@ -267,7 +267,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void z_c_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void b_c_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("PianoCampiFlegrei.xml"));
         logger.info("#######################FEATURE_STORE_PianoCampiFlegrei : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File( of(new File(".").getCanonicalPath(), "target", "StorePianoCampiFlegreiWoodstox")
@@ -275,7 +275,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void z_d_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void b_d_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("PianiCampiFlegrei.xml"));
         logger.info("#######################FEATURE_STORE_PianiCampiFlegrei : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StorePianiCampiFlegreiWoodstox")
@@ -283,7 +283,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void z_e_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void b_e_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("rsdi_alt_300_a_400.xml"));
         logger.info("#######################FEATURE_STORE_rsdi_alt_300_a_400 : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreRsdi_alt_300_a_400")
@@ -291,7 +291,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void z_f_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void b_f_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("aziende.xml"));
         logger.info("#######################FEATURE_STORE_aziende : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreAziende")
@@ -299,7 +299,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void z_g_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void b_g_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("EneaClipFilled.xml"));
         logger.info("#######################FEATURE_STORE_EneaClipFilled : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreEneaClipFilled")
@@ -307,7 +307,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void z_h_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void b_h_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("test.xml"));
         logger.info("#######################FEATURE_STORE_test : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreTest")
@@ -315,7 +315,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void z_i_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void b_i_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("ParchiBasilicata.xml"));
         logger.info("#######################FEATURE_STORE_ParchiBasilicata : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreParchiBasilicata")
@@ -323,7 +323,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void z_l_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void b_l_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("centri_abitati.xml"));
         logger.info("#######################FEATURE_STORE_CentriAbitati : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreCentriAbitati")
@@ -331,7 +331,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void z_m_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void b_m_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("mobileBeni.xml"));
         logger.info("#######################FEATURE_STORE_MobiliBeni : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreMobiliBeni")
@@ -339,7 +339,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void z_n_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void b_n_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("PercorsiNavette.xml"));
         logger.info("#######################FEATURE_STORE_PercorsiNavette : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StorePercorsiNavette")
@@ -347,7 +347,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void z_o_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void b_o_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("aggregatiStrutturali.xml"));
         logger.info("#######################FEATURE_STORE_AggregatiStrutturali : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreAggregatiStrutturali")
@@ -355,7 +355,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void z_p_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void b_p_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("aggregati_zrvesuvioflegrei.xml"));
         logger.info("#######################FEATURE_STORE_aggregati_zrvesuvioflegrei : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreAggregati_zrvesuvioflegrei")
@@ -363,7 +363,7 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void z_q_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void b_q_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("exeflegrei_esiti_c_danni.xml"));
         logger.info("#######################FEATURE_STORE_exeflegrei_esiti_c_danni : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreExeflegrei_esiti_c_danni")
@@ -371,10 +371,130 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
     }
 
     @Test
-    public void z_r_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+    public void b_r_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("pozzuoliAcque.xml"));
         logger.info("#######################FEATURE_STORE_pozzuoli_acque : {}\n", wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxPozzuoliAcque")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
+
+    @Test
+    public void b_s_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("laghi.xml"));
+        logger.info("#######################FEATURE_STORE_LAGHI : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxLaghi")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
+
+    @Test
+    public void b_t_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("viabilità.xml"));
+        logger.info("#######################FEATURE_STORE_VIABILITA : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxViabilità")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
+
+    @Test
+    public void b_u_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("vincoli.xml"));
+        logger.info("#######################FEATURE_STORE_VINCOLI : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxVincoli")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
+
+    @Test
+    public void b_v_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("CorsiAcque.xml"));
+        logger.info("#######################FEATURE_STORE_CORSI_ACQUE : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxCorsiAcque")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
+
+    @Test
+    public void b_z_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("NavteqStreet.xml"));
+        logger.info("#######################FEATURE_STORE_NAVTEQ_STREET : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxNavteqStreet")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
+
+    @Test
+    public void c_a_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("CAMPIndustrieARischio.xml"));
+        logger.info("#######################FEATURE_STORE_CAMPI_INDUSTRIE_RISCHIO : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxCAMPIndustrieARischio")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
+
+    @Test
+    public void c_b_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("layer_importer148.xml"));
+        logger.info("#######################FEATURE_STORE_LAYER_IMPORTER : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxLayerImporter")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
+
+    @Test
+    public void c_c_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("fluids_rete_zk.xml"));
+        logger.info("#######################FEATURE_STORE_FLUIDS_RETE_ZK : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxFluidsReteZK")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
+
+    @Test
+    public void c_d_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("AreeBonifica.xml"));
+        logger.info("#######################FEATURE_STORE_AREA_BONIFICA : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxAreaBonifica")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
+
+    @Test
+    public void c_e_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("CentraliElettriche.xml"));
+        logger.info("#######################FEATURE_STORE_CENTRALI_ELETTRICHE : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxCentraliElettriche")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
+
+    @Test
+    public void c_f_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("features.xml"));
+        logger.info("#######################FEATURE_STORE_FEATURES : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxFeatues")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
+
+    @Test
+    public void c_g_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("Geositi.xml"));
+        logger.info("#######################FEATURE_STORE_GEOSITI : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxGeositi")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
+
+    @Test
+    public void c_h_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("ADBRisk.xml"));
+        logger.info("#######################FEATURE_STORE_ADB_RISK : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxADBRisk")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
+
+    @Test
+    public void c_i_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("PoliziaIDR.xml"));
+        logger.info("#######################FEATURE_STORE_POLIZIA_IDR : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxPoliziaIDR")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
+
+    @Test
+    public void c_l_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("ParchiRegionaliRiserve.xml"));
+        logger.info("#######################FEATURE_STORE_PARCHI_REGIONALI_RISERVE : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxParchiRegionaliRiserve")
                 .collect(joining(separator, "", ".json"))), wmsFeatureStore);
     }
 }

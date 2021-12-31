@@ -354,4 +354,16 @@ public class GPWMSGetFeatureInfoAaltoReaderTest extends WMSGetFeatureInfoAaltoRe
         logger.info("#######################FEATURE_COLLECTION_POLIZIA_IDR : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("PoliziaIDR.xml"))));
     }
+
+    @Test
+    public void c_d_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_PARCHI_REGIONALI_RISERVE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("ParchiRegionaliRiserve.xml"))));
+    }
+
+    @Test
+    public void c_e_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_RETE_GEODETICA : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("ReteGeodetica.xml"))));
+    }
 }

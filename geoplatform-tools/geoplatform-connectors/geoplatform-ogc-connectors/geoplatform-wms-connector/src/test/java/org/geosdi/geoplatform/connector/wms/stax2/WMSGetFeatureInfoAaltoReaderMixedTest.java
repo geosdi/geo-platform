@@ -107,6 +107,12 @@ public class WMSGetFeatureInfoAaltoReaderMixedTest {
         List<Feature> pozzuoliAcqueFeatures = wmsFeatureStore.getFeaturesByKey("admin_shp_pozzuoli447so_acque");
         assertNotNull(pozzuoliAcqueFeatures);
         assertTrue(pozzuoliAcqueFeatures.size() == 6);
+        List<Feature> fluidsReteZKFeature = wmsFeatureStore.getFeaturesByKey("fluids_rete_zk");
+        assertNotNull(fluidsReteZKFeature);
+        assertTrue(fluidsReteZKFeature.size() == 20);
+        List<Feature> corsiAcque = wmsFeatureStore.getFeaturesByKey("ait_corsi_acqua_2018");
+        assertNotNull(corsiAcque);
+        assertTrue(corsiAcque.size() == 6);
         fromIterable(wmsFeatureStore.getStore().entrySet())
                 .subscribe(k -> logger.info("###############{} - size : {}\n", k.getKey(), k.getValue().size()));
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreAaltoMIXED_FEATURES")

@@ -73,14 +73,19 @@ public class GPWMSGetMapBaseRequestBuilderMultiThreadTest {
                 "&version=1.1.0&  &layers=test,prova,topp:states,siti_protetti:zsc,retenatura:zsc,topp%3Atasmania_roads,topp:states,siti_protetti:zsc,retenatura:zsc&bbox=145.19754%2C-43.423512%2C148.27298000000002%2C-40.852802&width=256&height=765&srs=EPSG%3A4326&format=application/openlayers",
                 "&layers=test,prova,admin:prova,admin:test,topp:states,siti_protetti:zsc,retenatura:zsc,topp%3Atasmania_roads,topp:states,siti_protetti:zsc,retenatura:zsc&bbox=145.19754%2C-43.423512%2C148.27298000000002%2C-40.852802&width=899&height=368&srs=EPSG%3A4326&format=application/openlayers",
                 "http://150.145.141.92/geoserver/topp/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=topp%3Atasmania_cities&STYLES&LAYERS=topp%3Atasmania_cities&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=text%2Fhtml&FEATURE_COUNT" +
-                        "=50&X=50&Y=50&SRS=EPSG%3A4326&WIDTH=101&HEIGHT=101&BBOX=147.00470186769962%2C-43.117031436413534%2C147.55951143801212%2C-42.562221866101034")
+                        "=50&X=50&Y=50&SRS=EPSG%3A4326&WIDTH=101&HEIGHT=101&BBOX=147.00470186769962%2C-43.117031436413534%2C147.55951143801212%2C-42.562221866101034",
+                "https://sit2.regione.campania.it/geoserver/RegioneCampania.Cartografia.Tematica/wms?service=WMS&version=1.1.0&" +
+                        "request=GetMap&layers=RegioneCampania.Cartografia.Tematica:sitdbo_curve_livello_25m&styles=&bbox=394273.34375,4426208.0,571791.3125,4601018.0&width=768&height=756&srs=EPSG:3045&format=application/openlayers",
+                "https://sit2.regione.campania.it/geoserver/RegioneCampania.Catalogo/wms?service=WMS&version=1.1.0&request=GetMap" +
+                        "&layers=RegioneCampania.Catalogo:sitdbo_corine_land_cover_90&styles=&bbox=395346.3125,4426030.5,569392.125,4596345.5" +
+                        "&width=768&height=751&srs=EPSG:3045&format=application/openlayers")
                 .collect(toList());
         CountDownLatch startSignal = new CountDownLatch(1);
         CountDownLatch doneSignal = new CountDownLatch(urls.size());
         AtomicInteger counter = new AtomicInteger(0);
         fromIterable(urls)
                 .map(url -> new Thread(new GPWMSGetMapBaseRequestBuilderTask(url, startSignal, doneSignal, counter)))
-                .subscribe(Thread::start);
+                .subscribe(Thread::start, Throwable::printStackTrace);
         startSignal.countDown();
         doneSignal.await();
         assertTrue(counter.get() == urls.size());

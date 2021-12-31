@@ -620,4 +620,20 @@ public class GPWMSFeatureStoreTest extends WMSGetFeatureInfoStaxReaderTest {
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "PoliziaIDR.json")
                 .collect(joining(separator))), wmsFeatureStore);
     }
+
+    @Test
+    public void d_b_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("ParchiRegionaliRiserve.xml"));
+        logger.info("#######################FEATURE_STORE_PARCHI_REGIONALI_RISERVER : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "ParchiRegionaliRiserve.json")
+                .collect(joining(separator))), wmsFeatureStore);
+    }
+
+    @Test
+    public void d_c_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("ReteGeodetica.xml"));
+        logger.info("#######################FEATURE_STORE_RETE_GEODETICA : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "ReteGeodetica.json")
+                .collect(joining(separator))), wmsFeatureStore);
+    }
 }

@@ -335,4 +335,10 @@ public class GPWMSGetFeatureInfoWoodstoxReaderTest extends WMSGetFeatureInfoWood
         logger.info("#######################FEATURE_COLLECTION_POLIZIA_IDR : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("PoliziaIDR.xml"))));
     }
+
+    @Test
+    public void d_l_wmsGetFeatureInfooWoodstoxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_PARCHI_REGIONALI_RISERVE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("ParchiRegionaliRiserve.xml"))));
+    }
 }

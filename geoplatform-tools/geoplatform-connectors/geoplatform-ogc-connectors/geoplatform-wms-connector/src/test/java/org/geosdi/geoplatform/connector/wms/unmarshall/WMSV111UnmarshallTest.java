@@ -94,6 +94,7 @@ public class WMSV111UnmarshallTest {
     private static File wmsGetCapabilitiesFile1;
     private static File wmsGetCapabilitiesCnrIrea;
     private static File wmsGetCapabilitiesPiemonte;
+    private static File wmsDescribeLayerFile1;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -118,6 +119,7 @@ public class WMSV111UnmarshallTest {
         wmsGetCapabilitiesFile1 = new File(basePath.concat("WMSGetCapabilities_1.1.1.xml"));
         wmsGetCapabilitiesCnrIrea = new File(basePath.concat("getcapabilitiesCnrIrea_1.1.1.xml"));
         wmsGetCapabilitiesPiemonte = new File(basePath.concat("getCapabilities_1.1.1_piemonte.xml"));
+        wmsDescribeLayerFile1 = new File(basePath.concat("describeLayer_1-111.xml"));
         spf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", FALSE);
         spf.setFeature("http://xml.org/sax/features/validation", FALSE);
     }
@@ -310,5 +312,18 @@ public class WMSV111UnmarshallTest {
         StringWriter writer = new StringWriter();
         wmsContext.acquireMarshaller().marshal(wmsCapabilities, writer);
         logger.info("######################WMSGetCapabilitiesV111-String : \n{}\n", writer);
+    }
+
+    @Test
+    public void s_unmarshallWMSDescribeLayerV111Test() throws Exception {
+        XMLReader xmlReader = spf.newSAXParser().getXMLReader();
+        InputSource inputSource = new InputSource(new FileReader(wmsDescribeLayerFile1));
+        SAXSource source = new SAXSource(xmlReader, inputSource);
+        WMSDescribeLayerResponse wmsDescribeLayerResponse = (WMSDescribeLayerResponse) wmsContext.acquireUnmarshaller()
+                .unmarshal(source);
+        logger.info("#######################WMSDescribeLayerResponseV111 : {}\n", wmsDescribeLayerResponse);
+        StringWriter writer = new StringWriter();
+        wmsContext.acquireMarshaller().marshal(wmsDescribeLayerResponse, writer);
+        logger.info("######################WMSDescribeLayerResponseV111-String : \n{}\n", writer);
     }
 }

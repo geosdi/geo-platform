@@ -2,10 +2,12 @@
 <wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
                        xmlns:PianoCampiFlegrei="http://PianoCampiFlegrei"
                        xmlns:gml="http://www.opengis.net/gml" xmlns:rsdi="http://www.opengeospatial.net/rsdi"
+                       xmlns:ws_vito="http://www.geosdi.org/ws_vito"
                        xmlns:PNSRS="http://servizi.protezionecivile.it/PNSRS/"
                        xmlns:admin="http://www.geosdi.org/admin"
+                       xmlns:genicivili="www.cfr.toscana.it/genicivili"
                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                       xsi:schemaLocation="http://www.opengeospatial.net/rsdi http://rsdi.regione.basilicata.it:80/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=rsdi:alt_300_a_400,typeName=PianoCampiFlegrei%3ACF_zonarossa_mappeinterattive,typeName=PNSRS%3AABR_1_4_1_aree_urb_val_storico,typeName=PNSRS%3AABR_4_5_comuni_aff_COM,typeName=PNSRS%3AABR_1_4_1_aree_urb_val_storico,typeName=rsdi:alt_600_a_700,typeName=admin%3Aadmin_shp_pozzuoli447so_acque http://www.opengis.net/wfs http://rsdi.regione.basilicata.it:80/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+                       xsi:schemaLocation="http://www.opengeospatial.net/rsdi http://rsdi.regione.basilicata.it:80/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=rsdi:alt_300_a_400,typeName=PianoCampiFlegrei%3ACF_zonarossa_mappeinterattive,typeName=PNSRS%3AABR_1_4_1_aree_urb_val_storico,typeName=PNSRS%3AABR_4_5_comuni_aff_COM,typeName=PNSRS%3AABR_1_4_1_aree_urb_val_storico,typeName=rsdi:alt_600_a_700,typeName=admin%3Aadmin_shp_pozzuoli447so_acque,typeName=ws_vito%3Afluids_rete_zk,typeName=genicivili%3Aait_corsi_acqua_2018 http://www.opengis.net/wfs http://rsdi.regione.basilicata.it:80/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
     <gml:boundedBy>
         <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
             <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
@@ -1463,6 +1465,407 @@
             <rsdi:area_300_a_400>94.2974316936035</rsdi:area_300_a_400>
             <rsdi:perc>55.78</rsdi:perc>
         </rsdi:alt_300_a_400>
+    </gml:featureMember>
+    <gml:featureMember>
+        <genicivili:ait_corsi_acqua_2018 fid="ait_corsi_acqua_2018.734">
+            <genicivili:id_a1x1>734</genicivili:id_a1x1>
+            <genicivili:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1707300,4841400
+                    </gml:coordinates>
+                </gml:Point>
+            </genicivili:geom>
+            <genicivili:ids_codice>FI00000034</genicivili:ids_codice>
+            <genicivili:ids_codice_origine>FI00042</genicivili:ids_codice_origine>
+            <genicivili:validita_anno>2018</genicivili:validita_anno>
+            <genicivili:gestore>Publiacqua SpA</genicivili:gestore>
+            <genicivili:descrizione>CCA_S. Antonio</genicivili:descrizione>
+            <genicivili:quota_slm>628</genicivili:quota_slm>
+            <genicivili:provincia_nome>Firenze</genicivili:provincia_nome>
+            <genicivili:comune_nome>Reggello</genicivili:comune_nome>
+            <genicivili:localita_nome>Case sparse</genicivili:localita_nome>
+            <genicivili:corso_acqua_nome>Borro S.Antonio</genicivili:corso_acqua_nome>
+            <genicivili:corso_acqua_classe>A3</genicivili:corso_acqua_classe>
+            <genicivili:bacino_nome>Arno</genicivili:bacino_nome>
+            <genicivili:concessione_estremi>in attesa di rilascio dal 28/02/2017 (data della richiesta)
+            </genicivili:concessione_estremi>
+            <genicivili:concessione_port_pota>5.99315</genicivili:concessione_port_pota>
+            <genicivili:concessione_port_indu>0.0</genicivili:concessione_port_indu>
+            <genicivili:concessione_port_irri>0.0</genicivili:concessione_port_irri>
+            <genicivili:concessione_port_iele>0.0</genicivili:concessione_port_iele>
+            <genicivili:concessione_port_altro>0.0</genicivili:concessione_port_altro>
+            <genicivili:anno_costruzione>1965</genicivili:anno_costruzione>
+            <genicivili:anno_ristrutturazione>1966</genicivili:anno_ristrutturazione>
+            <genicivili:conservazione>INSUFFICIENTE</genicivili:conservazione>
+            <genicivili:utilizzo_tipo>Continuo</genicivili:utilizzo_tipo>
+            <genicivili:utilizzo_annuo>100.0</genicivili:utilizzo_annuo>
+            <genicivili:area_bacino_monte>5.1</genicivili:area_bacino_monte>
+            <genicivili:volume_prelevato>83536.39374</genicivili:volume_prelevato>
+            <genicivili:volume_immesso>0.0</genicivili:volume_immesso>
+            <genicivili:portata_esercizio>2.64892</genicivili:portata_esercizio>
+            <genicivili:portata_derivata_max>8.0</genicivili:portata_derivata_max>
+            <genicivili:portata_derivata_min>4.0</genicivili:portata_derivata_min>
+            <genicivili:portata_derivabile_max>15.0</genicivili:portata_derivabile_max>
+            <genicivili:pres_traversa_fluviale>1</genicivili:pres_traversa_fluviale>
+            <genicivili:pres_camera_presa>0</genicivili:pres_camera_presa>
+            <genicivili:pres_psucchieruola>0</genicivili:pres_psucchieruola>
+            <genicivili:pres_griglia>1</genicivili:pres_griglia>
+            <genicivili:pres_filtro>0</genicivili:pres_filtro>
+            <genicivili:pres_dissabbiatore>0</genicivili:pres_dissabbiatore>
+            <genicivili:tipo_telecontrollo>ASSENTE</genicivili:tipo_telecontrollo>
+            <genicivili:pres_misura_portata>0</genicivili:pres_misura_portata>
+            <genicivili:zona_tutela_assoluta>0</genicivili:zona_tutela_assoluta>
+            <genicivili:zona_rispetto>1</genicivili:zona_rispetto>
+            <genicivili:zona_protezione>0</genicivili:zona_protezione>
+            <genicivili:tipo_clorazione>NESSUNA</genicivili:tipo_clorazione>
+            <genicivili:cloratore_anno_insta>9800</genicivili:cloratore_anno_insta>
+            <genicivili:cloratore_anno_ristru>9800</genicivili:cloratore_anno_ristru>
+            <genicivili:opera_stato>ATTIVO</genicivili:opera_stato>
+            <genicivili:idx_area_bacino_monte>B</genicivili:idx_area_bacino_monte>
+            <genicivili:idx_anno_costruzione>C</genicivili:idx_anno_costruzione>
+            <genicivili:idx_anno_ristrutturazione>C</genicivili:idx_anno_ristrutturazione>
+            <genicivili:idx_volume_prelevato>C</genicivili:idx_volume_prelevato>
+            <genicivili:idx_volume_immesso>A</genicivili:idx_volume_immesso>
+            <genicivili:idx_portata_esercizio>C</genicivili:idx_portata_esercizio>
+            <genicivili:idx_portata_derivata_max>A</genicivili:idx_portata_derivata_max>
+            <genicivili:idx_portata_derivata_min>A</genicivili:idx_portata_derivata_min>
+            <genicivili:idx_portata_derivabile_max>A</genicivili:idx_portata_derivabile_max>
+            <genicivili:data_ua>2018-11-26T23:00:00Z</genicivili:data_ua>
+        </genicivili:ait_corsi_acqua_2018>
+    </gml:featureMember>
+    <gml:featureMember>
+        <genicivili:ait_corsi_acqua_2018 fid="ait_corsi_acqua_2018.735">
+            <genicivili:id_a1x1>735</genicivili:id_a1x1>
+            <genicivili:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1707500,4841100
+                    </gml:coordinates>
+                </gml:Point>
+            </genicivili:geom>
+            <genicivili:ids_codice>FI00000035</genicivili:ids_codice>
+            <genicivili:ids_codice_origine>FI00043</genicivili:ids_codice_origine>
+            <genicivili:validita_anno>2018</genicivili:validita_anno>
+            <genicivili:gestore>Publiacqua SpA</genicivili:gestore>
+            <genicivili:descrizione>CCA_MACERETO-RESCO</genicivili:descrizione>
+            <genicivili:quota_slm>635</genicivili:quota_slm>
+            <genicivili:provincia_nome>Firenze</genicivili:provincia_nome>
+            <genicivili:comune_nome>Reggello</genicivili:comune_nome>
+            <genicivili:localita_nome>Case sparse</genicivili:localita_nome>
+            <genicivili:corso_acqua_nome>Torrente Resco</genicivili:corso_acqua_nome>
+            <genicivili:corso_acqua_classe>A3</genicivili:corso_acqua_classe>
+            <genicivili:bacino_nome>Arno</genicivili:bacino_nome>
+            <genicivili:concessione_estremi>in attesa di rilascio dal 28/02/2017 (data della richiesta)
+            </genicivili:concessione_estremi>
+            <genicivili:concessione_port_pota>14.99873</genicivili:concessione_port_pota>
+            <genicivili:concessione_port_indu>0.0</genicivili:concessione_port_indu>
+            <genicivili:concessione_port_irri>0.0</genicivili:concessione_port_irri>
+            <genicivili:concessione_port_iele>0.0</genicivili:concessione_port_iele>
+            <genicivili:concessione_port_altro>0.0</genicivili:concessione_port_altro>
+            <genicivili:anno_costruzione>1965</genicivili:anno_costruzione>
+            <genicivili:anno_ristrutturazione>1966</genicivili:anno_ristrutturazione>
+            <genicivili:conservazione>INSUFFICIENTE</genicivili:conservazione>
+            <genicivili:utilizzo_tipo>Continuo</genicivili:utilizzo_tipo>
+            <genicivili:utilizzo_annuo>100.0</genicivili:utilizzo_annuo>
+            <genicivili:area_bacino_monte>4.9</genicivili:area_bacino_monte>
+            <genicivili:volume_prelevato>209061.98009</genicivili:volume_prelevato>
+            <genicivili:volume_immesso>0.0</genicivili:volume_immesso>
+            <genicivili:portata_esercizio>6.62931</genicivili:portata_esercizio>
+            <genicivili:portata_derivata_max>20.0</genicivili:portata_derivata_max>
+            <genicivili:portata_derivata_min>8.0</genicivili:portata_derivata_min>
+            <genicivili:portata_derivabile_max>25.0</genicivili:portata_derivabile_max>
+            <genicivili:pres_traversa_fluviale>1</genicivili:pres_traversa_fluviale>
+            <genicivili:pres_camera_presa>0</genicivili:pres_camera_presa>
+            <genicivili:pres_psucchieruola>0</genicivili:pres_psucchieruola>
+            <genicivili:pres_griglia>1</genicivili:pres_griglia>
+            <genicivili:pres_filtro>0</genicivili:pres_filtro>
+            <genicivili:pres_dissabbiatore>0</genicivili:pres_dissabbiatore>
+            <genicivili:tipo_telecontrollo>ASSENTE</genicivili:tipo_telecontrollo>
+            <genicivili:pres_misura_portata>0</genicivili:pres_misura_portata>
+            <genicivili:zona_tutela_assoluta>0</genicivili:zona_tutela_assoluta>
+            <genicivili:zona_rispetto>1</genicivili:zona_rispetto>
+            <genicivili:zona_protezione>0</genicivili:zona_protezione>
+            <genicivili:tipo_clorazione>NESSUNA</genicivili:tipo_clorazione>
+            <genicivili:cloratore_anno_insta>9800</genicivili:cloratore_anno_insta>
+            <genicivili:cloratore_anno_ristru>9800</genicivili:cloratore_anno_ristru>
+            <genicivili:opera_stato>ATTIVO</genicivili:opera_stato>
+            <genicivili:idx_area_bacino_monte>B</genicivili:idx_area_bacino_monte>
+            <genicivili:idx_anno_costruzione>C</genicivili:idx_anno_costruzione>
+            <genicivili:idx_anno_ristrutturazione>C</genicivili:idx_anno_ristrutturazione>
+            <genicivili:idx_volume_prelevato>C</genicivili:idx_volume_prelevato>
+            <genicivili:idx_volume_immesso>A</genicivili:idx_volume_immesso>
+            <genicivili:idx_portata_esercizio>C</genicivili:idx_portata_esercizio>
+            <genicivili:idx_portata_derivata_max>A</genicivili:idx_portata_derivata_max>
+            <genicivili:idx_portata_derivata_min>A</genicivili:idx_portata_derivata_min>
+            <genicivili:idx_portata_derivabile_max>D</genicivili:idx_portata_derivabile_max>
+            <genicivili:data_ua>2018-11-26T23:00:00Z</genicivili:data_ua>
+        </genicivili:ait_corsi_acqua_2018>
+    </gml:featureMember>
+    <gml:featureMember>
+        <genicivili:ait_corsi_acqua_2018 fid="ait_corsi_acqua_2018.736">
+            <genicivili:id_a1x1>736</genicivili:id_a1x1>
+            <genicivili:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1706000,4840000
+                    </gml:coordinates>
+                </gml:Point>
+            </genicivili:geom>
+            <genicivili:ids_codice>FI00000036</genicivili:ids_codice>
+            <genicivili:ids_codice_origine>FI00045</genicivili:ids_codice_origine>
+            <genicivili:validita_anno>2018</genicivili:validita_anno>
+            <genicivili:gestore>Publiacqua SpA</genicivili:gestore>
+            <genicivili:descrizione>CCA_Ponte a Enna-Resco</genicivili:descrizione>
+            <genicivili:quota_slm>485</genicivili:quota_slm>
+            <genicivili:provincia_nome>Firenze</genicivili:provincia_nome>
+            <genicivili:comune_nome>Reggello</genicivili:comune_nome>
+            <genicivili:localita_nome>Case sparse</genicivili:localita_nome>
+            <genicivili:corso_acqua_nome>Torrente Resco</genicivili:corso_acqua_nome>
+            <genicivili:corso_acqua_classe>A3</genicivili:corso_acqua_classe>
+            <genicivili:bacino_nome>Arno</genicivili:bacino_nome>
+            <genicivili:concessione_estremi>in attesa di rilascio dal 28/02/2017 (data della richiesta)
+            </genicivili:concessione_estremi>
+            <genicivili:concessione_port_pota>13.00101</genicivili:concessione_port_pota>
+            <genicivili:concessione_port_indu>0.0</genicivili:concessione_port_indu>
+            <genicivili:concessione_port_irri>0.0</genicivili:concessione_port_irri>
+            <genicivili:concessione_port_iele>0.0</genicivili:concessione_port_iele>
+            <genicivili:concessione_port_altro>0.0</genicivili:concessione_port_altro>
+            <genicivili:anno_costruzione>1972</genicivili:anno_costruzione>
+            <genicivili:anno_ristrutturazione>9800</genicivili:anno_ristrutturazione>
+            <genicivili:conservazione>SUFFICIENTE</genicivili:conservazione>
+            <genicivili:utilizzo_tipo>Continuo</genicivili:utilizzo_tipo>
+            <genicivili:utilizzo_annuo>100.0</genicivili:utilizzo_annuo>
+            <genicivili:area_bacino_monte>12.7</genicivili:area_bacino_monte>
+            <genicivili:volume_prelevato>181216.51551</genicivili:volume_prelevato>
+            <genicivili:volume_immesso>0.0</genicivili:volume_immesso>
+            <genicivili:portata_esercizio>5.74634</genicivili:portata_esercizio>
+            <genicivili:portata_derivata_max>20.0</genicivili:portata_derivata_max>
+            <genicivili:portata_derivata_min>0.5</genicivili:portata_derivata_min>
+            <genicivili:portata_derivabile_max>25.0</genicivili:portata_derivabile_max>
+            <genicivili:pres_traversa_fluviale>0</genicivili:pres_traversa_fluviale>
+            <genicivili:pres_camera_presa>0</genicivili:pres_camera_presa>
+            <genicivili:pres_psucchieruola>1</genicivili:pres_psucchieruola>
+            <genicivili:pres_griglia>0</genicivili:pres_griglia>
+            <genicivili:pres_filtro>0</genicivili:pres_filtro>
+            <genicivili:pres_dissabbiatore>0</genicivili:pres_dissabbiatore>
+            <genicivili:tipo_telecontrollo>ASSENTE</genicivili:tipo_telecontrollo>
+            <genicivili:pres_misura_portata>0</genicivili:pres_misura_portata>
+            <genicivili:zona_tutela_assoluta>0</genicivili:zona_tutela_assoluta>
+            <genicivili:zona_rispetto>1</genicivili:zona_rispetto>
+            <genicivili:zona_protezione>0</genicivili:zona_protezione>
+            <genicivili:tipo_clorazione>NESSUNA</genicivili:tipo_clorazione>
+            <genicivili:cloratore_anno_insta>9800</genicivili:cloratore_anno_insta>
+            <genicivili:cloratore_anno_ristru>9800</genicivili:cloratore_anno_ristru>
+            <genicivili:opera_stato>ATTIVO</genicivili:opera_stato>
+            <genicivili:idx_area_bacino_monte>B</genicivili:idx_area_bacino_monte>
+            <genicivili:idx_anno_costruzione>C</genicivili:idx_anno_costruzione>
+            <genicivili:idx_anno_ristrutturazione>A</genicivili:idx_anno_ristrutturazione>
+            <genicivili:idx_volume_prelevato>C</genicivili:idx_volume_prelevato>
+            <genicivili:idx_volume_immesso>A</genicivili:idx_volume_immesso>
+            <genicivili:idx_portata_esercizio>C</genicivili:idx_portata_esercizio>
+            <genicivili:idx_portata_derivata_max>A</genicivili:idx_portata_derivata_max>
+            <genicivili:idx_portata_derivata_min>A</genicivili:idx_portata_derivata_min>
+            <genicivili:idx_portata_derivabile_max>D</genicivili:idx_portata_derivabile_max>
+            <genicivili:data_ua>2018-11-26T23:00:00Z</genicivili:data_ua>
+        </genicivili:ait_corsi_acqua_2018>
+    </gml:featureMember>
+    <gml:featureMember>
+        <genicivili:ait_corsi_acqua_2018 fid="ait_corsi_acqua_2018.737">
+            <genicivili:id_a1x1>737</genicivili:id_a1x1>
+            <genicivili:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1704900,4842100
+                    </gml:coordinates>
+                </gml:Point>
+            </genicivili:geom>
+            <genicivili:ids_codice>FI00000037</genicivili:ids_codice>
+            <genicivili:ids_codice_origine>FI00046</genicivili:ids_codice_origine>
+            <genicivili:validita_anno>2018</genicivili:validita_anno>
+            <genicivili:gestore>Publiacqua SpA</genicivili:gestore>
+            <genicivili:descrizione>CCA_BURCHIO - CHIESIMONE</genicivili:descrizione>
+            <genicivili:quota_slm>605</genicivili:quota_slm>
+            <genicivili:provincia_nome>Firenze</genicivili:provincia_nome>
+            <genicivili:comune_nome>Reggello</genicivili:comune_nome>
+            <genicivili:localita_nome>Case sparse</genicivili:localita_nome>
+            <genicivili:corso_acqua_nome>Torrente Chiesimone</genicivili:corso_acqua_nome>
+            <genicivili:corso_acqua_classe>A2</genicivili:corso_acqua_classe>
+            <genicivili:bacino_nome>Arno</genicivili:bacino_nome>
+            <genicivili:concessione_estremi>in attesa di rilascio dal 28/02/2017 (data della richiesta)
+            </genicivili:concessione_estremi>
+            <genicivili:concessione_port_pota>5.99315</genicivili:concessione_port_pota>
+            <genicivili:concessione_port_indu>0.0</genicivili:concessione_port_indu>
+            <genicivili:concessione_port_irri>0.0</genicivili:concessione_port_irri>
+            <genicivili:concessione_port_iele>0.0</genicivili:concessione_port_iele>
+            <genicivili:concessione_port_altro>0.0</genicivili:concessione_port_altro>
+            <genicivili:anno_costruzione>1972</genicivili:anno_costruzione>
+            <genicivili:anno_ristrutturazione>9800</genicivili:anno_ristrutturazione>
+            <genicivili:conservazione>INSUFFICIENTE</genicivili:conservazione>
+            <genicivili:utilizzo_tipo>Continuo</genicivili:utilizzo_tipo>
+            <genicivili:utilizzo_annuo>100.0</genicivili:utilizzo_annuo>
+            <genicivili:area_bacino_monte>2.35</genicivili:area_bacino_monte>
+            <genicivili:volume_prelevato>106971.16704</genicivili:volume_prelevato>
+            <genicivili:volume_immesso>0.0</genicivili:volume_immesso>
+            <genicivili:portata_esercizio>3.39203</genicivili:portata_esercizio>
+            <genicivili:portata_derivata_max>7.0</genicivili:portata_derivata_max>
+            <genicivili:portata_derivata_min>1.0</genicivili:portata_derivata_min>
+            <genicivili:portata_derivabile_max>9.0</genicivili:portata_derivabile_max>
+            <genicivili:pres_traversa_fluviale>1</genicivili:pres_traversa_fluviale>
+            <genicivili:pres_camera_presa>0</genicivili:pres_camera_presa>
+            <genicivili:pres_psucchieruola>0</genicivili:pres_psucchieruola>
+            <genicivili:pres_griglia>1</genicivili:pres_griglia>
+            <genicivili:pres_filtro>0</genicivili:pres_filtro>
+            <genicivili:pres_dissabbiatore>1</genicivili:pres_dissabbiatore>
+            <genicivili:tipo_telecontrollo>ASSENTE</genicivili:tipo_telecontrollo>
+            <genicivili:pres_misura_portata>0</genicivili:pres_misura_portata>
+            <genicivili:zona_tutela_assoluta>0</genicivili:zona_tutela_assoluta>
+            <genicivili:zona_rispetto>1</genicivili:zona_rispetto>
+            <genicivili:zona_protezione>0</genicivili:zona_protezione>
+            <genicivili:tipo_clorazione>NESSUNA</genicivili:tipo_clorazione>
+            <genicivili:cloratore_anno_insta>9800</genicivili:cloratore_anno_insta>
+            <genicivili:cloratore_anno_ristru>9800</genicivili:cloratore_anno_ristru>
+            <genicivili:opera_stato>ATTIVO</genicivili:opera_stato>
+            <genicivili:idx_area_bacino_monte>B</genicivili:idx_area_bacino_monte>
+            <genicivili:idx_anno_costruzione>C</genicivili:idx_anno_costruzione>
+            <genicivili:idx_anno_ristrutturazione>A</genicivili:idx_anno_ristrutturazione>
+            <genicivili:idx_volume_prelevato>C</genicivili:idx_volume_prelevato>
+            <genicivili:idx_volume_immesso>A</genicivili:idx_volume_immesso>
+            <genicivili:idx_portata_esercizio>C</genicivili:idx_portata_esercizio>
+            <genicivili:idx_portata_derivata_max>A</genicivili:idx_portata_derivata_max>
+            <genicivili:idx_portata_derivata_min>A</genicivili:idx_portata_derivata_min>
+            <genicivili:idx_portata_derivabile_max>D</genicivili:idx_portata_derivabile_max>
+            <genicivili:data_ua>2018-11-26T23:00:00Z</genicivili:data_ua>
+        </genicivili:ait_corsi_acqua_2018>
+    </gml:featureMember>
+    <gml:featureMember>
+        <genicivili:ait_corsi_acqua_2018 fid="ait_corsi_acqua_2018.740">
+            <genicivili:id_a1x1>740</genicivili:id_a1x1>
+            <genicivili:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1704700,4843100
+                    </gml:coordinates>
+                </gml:Point>
+            </genicivili:geom>
+            <genicivili:ids_codice>FI00000040</genicivili:ids_codice>
+            <genicivili:ids_codice_origine>FI00049</genicivili:ids_codice_origine>
+            <genicivili:validita_anno>2018</genicivili:validita_anno>
+            <genicivili:gestore>Publiacqua SpA</genicivili:gestore>
+            <genicivili:descrizione>CCA_PIATTELLO-MARNIA</genicivili:descrizione>
+            <genicivili:quota_slm>636</genicivili:quota_slm>
+            <genicivili:provincia_nome>Firenze</genicivili:provincia_nome>
+            <genicivili:comune_nome>Reggello</genicivili:comune_nome>
+            <genicivili:localita_nome>Case sparse</genicivili:localita_nome>
+            <genicivili:corso_acqua_nome>Torrente Marnia</genicivili:corso_acqua_nome>
+            <genicivili:corso_acqua_classe>A2</genicivili:corso_acqua_classe>
+            <genicivili:bacino_nome>Arno</genicivili:bacino_nome>
+            <genicivili:concessione_estremi>in attesa di rilascio dal 28/02/2017 (data della richiesta)
+            </genicivili:concessione_estremi>
+            <genicivili:concessione_port_pota>0.79909</genicivili:concessione_port_pota>
+            <genicivili:concessione_port_indu>0.0</genicivili:concessione_port_indu>
+            <genicivili:concessione_port_irri>0.0</genicivili:concessione_port_irri>
+            <genicivili:concessione_port_iele>0.0</genicivili:concessione_port_iele>
+            <genicivili:concessione_port_altro>0.0</genicivili:concessione_port_altro>
+            <genicivili:anno_costruzione>1973</genicivili:anno_costruzione>
+            <genicivili:anno_ristrutturazione>9800</genicivili:anno_ristrutturazione>
+            <genicivili:conservazione>INSUFFICIENTE</genicivili:conservazione>
+            <genicivili:utilizzo_tipo>Continuo</genicivili:utilizzo_tipo>
+            <genicivili:utilizzo_annuo>100.0</genicivili:utilizzo_annuo>
+            <genicivili:area_bacino_monte>1.36</genicivili:area_bacino_monte>
+            <genicivili:volume_prelevato>24436.02559</genicivili:volume_prelevato>
+            <genicivili:volume_immesso>0.0</genicivili:volume_immesso>
+            <genicivili:portata_esercizio>0.77486</genicivili:portata_esercizio>
+            <genicivili:portata_derivata_max>2.0</genicivili:portata_derivata_max>
+            <genicivili:portata_derivata_min>0.5</genicivili:portata_derivata_min>
+            <genicivili:portata_derivabile_max>5.0</genicivili:portata_derivabile_max>
+            <genicivili:pres_traversa_fluviale>1</genicivili:pres_traversa_fluviale>
+            <genicivili:pres_camera_presa>0</genicivili:pres_camera_presa>
+            <genicivili:pres_psucchieruola>0</genicivili:pres_psucchieruola>
+            <genicivili:pres_griglia>1</genicivili:pres_griglia>
+            <genicivili:pres_filtro>0</genicivili:pres_filtro>
+            <genicivili:pres_dissabbiatore>0</genicivili:pres_dissabbiatore>
+            <genicivili:tipo_telecontrollo>ASSENTE</genicivili:tipo_telecontrollo>
+            <genicivili:pres_misura_portata>0</genicivili:pres_misura_portata>
+            <genicivili:zona_tutela_assoluta>0</genicivili:zona_tutela_assoluta>
+            <genicivili:zona_rispetto>1</genicivili:zona_rispetto>
+            <genicivili:zona_protezione>0</genicivili:zona_protezione>
+            <genicivili:tipo_clorazione>NESSUNA</genicivili:tipo_clorazione>
+            <genicivili:cloratore_anno_insta>9800</genicivili:cloratore_anno_insta>
+            <genicivili:cloratore_anno_ristru>9800</genicivili:cloratore_anno_ristru>
+            <genicivili:opera_stato>ATTIVO</genicivili:opera_stato>
+            <genicivili:idx_area_bacino_monte>B</genicivili:idx_area_bacino_monte>
+            <genicivili:idx_anno_costruzione>C</genicivili:idx_anno_costruzione>
+            <genicivili:idx_anno_ristrutturazione>A</genicivili:idx_anno_ristrutturazione>
+            <genicivili:idx_volume_prelevato>C</genicivili:idx_volume_prelevato>
+            <genicivili:idx_volume_immesso>A</genicivili:idx_volume_immesso>
+            <genicivili:idx_portata_esercizio>C</genicivili:idx_portata_esercizio>
+            <genicivili:idx_portata_derivata_max>A</genicivili:idx_portata_derivata_max>
+            <genicivili:idx_portata_derivata_min>A</genicivili:idx_portata_derivata_min>
+            <genicivili:idx_portata_derivabile_max>D</genicivili:idx_portata_derivabile_max>
+            <genicivili:data_ua>2018-11-26T23:00:00Z</genicivili:data_ua>
+        </genicivili:ait_corsi_acqua_2018>
+    </gml:featureMember>
+    <gml:featureMember>
+        <genicivili:ait_corsi_acqua_2018 fid="ait_corsi_acqua_2018.763">
+            <genicivili:id_a1x1>763</genicivili:id_a1x1>
+            <genicivili:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1706200,4839700
+                    </gml:coordinates>
+                </gml:Point>
+            </genicivili:geom>
+            <genicivili:ids_codice>FI00000063</genicivili:ids_codice>
+            <genicivili:ids_codice_origine>FI00095</genicivili:ids_codice_origine>
+            <genicivili:validita_anno>2018</genicivili:validita_anno>
+            <genicivili:gestore>Publiacqua SpA</genicivili:gestore>
+            <genicivili:descrizione>CCA_Ponticelli</genicivili:descrizione>
+            <genicivili:quota_slm>549</genicivili:quota_slm>
+            <genicivili:provincia_nome>Firenze</genicivili:provincia_nome>
+            <genicivili:comune_nome>Reggello</genicivili:comune_nome>
+            <genicivili:localita_nome>Case sparse</genicivili:localita_nome>
+            <genicivili:corso_acqua_nome>BORRO DI PONTICELLI</genicivili:corso_acqua_nome>
+            <genicivili:corso_acqua_classe>Non Classificata</genicivili:corso_acqua_classe>
+            <genicivili:bacino_nome>TORRENTE RESCO</genicivili:bacino_nome>
+            <genicivili:concessione_estremi>in attesa di rilascio dal 28/02/2017</genicivili:concessione_estremi>
+            <genicivili:concessione_port_pota>0.0</genicivili:concessione_port_pota>
+            <genicivili:concessione_port_indu>0.0</genicivili:concessione_port_indu>
+            <genicivili:concessione_port_irri>0.0</genicivili:concessione_port_irri>
+            <genicivili:concessione_port_iele>0.0</genicivili:concessione_port_iele>
+            <genicivili:concessione_port_altro>0.0</genicivili:concessione_port_altro>
+            <genicivili:anno_costruzione>1970</genicivili:anno_costruzione>
+            <genicivili:anno_ristrutturazione>9800</genicivili:anno_ristrutturazione>
+            <genicivili:conservazione>SUFFICIENTE</genicivili:conservazione>
+            <genicivili:utilizzo_tipo>Occasionale</genicivili:utilizzo_tipo>
+            <genicivili:utilizzo_annuo>0.0</genicivili:utilizzo_annuo>
+            <genicivili:area_bacino_monte>0.0</genicivili:area_bacino_monte>
+            <genicivili:volume_prelevato>0.0</genicivili:volume_prelevato>
+            <genicivili:volume_immesso>0.0</genicivili:volume_immesso>
+            <genicivili:portata_esercizio>0.0</genicivili:portata_esercizio>
+            <genicivili:portata_derivata_max>0.0</genicivili:portata_derivata_max>
+            <genicivili:portata_derivata_min>0.0</genicivili:portata_derivata_min>
+            <genicivili:portata_derivabile_max>0.0</genicivili:portata_derivabile_max>
+            <genicivili:pres_traversa_fluviale>0</genicivili:pres_traversa_fluviale>
+            <genicivili:pres_camera_presa>0</genicivili:pres_camera_presa>
+            <genicivili:pres_psucchieruola>0</genicivili:pres_psucchieruola>
+            <genicivili:pres_griglia>0</genicivili:pres_griglia>
+            <genicivili:pres_filtro>0</genicivili:pres_filtro>
+            <genicivili:pres_dissabbiatore>0</genicivili:pres_dissabbiatore>
+            <genicivili:tipo_telecontrollo>ASSENTE</genicivili:tipo_telecontrollo>
+            <genicivili:pres_misura_portata>0</genicivili:pres_misura_portata>
+            <genicivili:zona_tutela_assoluta>0</genicivili:zona_tutela_assoluta>
+            <genicivili:zona_rispetto>1</genicivili:zona_rispetto>
+            <genicivili:zona_protezione>0</genicivili:zona_protezione>
+            <genicivili:tipo_clorazione>NESSUNA</genicivili:tipo_clorazione>
+            <genicivili:cloratore_anno_insta>9800</genicivili:cloratore_anno_insta>
+            <genicivili:cloratore_anno_ristru>9800</genicivili:cloratore_anno_ristru>
+            <genicivili:opera_stato>FERMO IMPIANTO</genicivili:opera_stato>
+            <genicivili:idx_area_bacino_monte>X</genicivili:idx_area_bacino_monte>
+            <genicivili:idx_anno_costruzione>D</genicivili:idx_anno_costruzione>
+            <genicivili:idx_anno_ristrutturazione>A</genicivili:idx_anno_ristrutturazione>
+            <genicivili:idx_volume_prelevato>A</genicivili:idx_volume_prelevato>
+            <genicivili:idx_volume_immesso>A</genicivili:idx_volume_immesso>
+            <genicivili:idx_portata_esercizio>A</genicivili:idx_portata_esercizio>
+            <genicivili:idx_portata_derivata_max>A</genicivili:idx_portata_derivata_max>
+            <genicivili:idx_portata_derivata_min>A</genicivili:idx_portata_derivata_min>
+            <genicivili:idx_portata_derivabile_max>D</genicivili:idx_portata_derivabile_max>
+            <genicivili:data_ua>2019-05-29T22:00:00Z</genicivili:data_ua>
+        </genicivili:ait_corsi_acqua_2018>
     </gml:featureMember>
     <gml:featureMember>
         <rsdi:alt_300_a_400 fid="alt_300_a_400.167">
@@ -4848,5 +5251,445 @@
             <admin:Tipo>Vasca piscina</admin:Tipo>
             <admin:Lun_ghe_zza>186.10158922885444</admin:Lun_ghe_zza>
         </admin:admin_shp_pozzuoli447so_acque>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.1">
+            <ws_vito:elevation>829</ws_vito:elevation>
+            <ws_vito:site_name>Station Montemarano 1, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-12T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0101</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;amp;level=response&amp;amp;u=web&amp;amp;
+                start=2021-01-01&amp;amp;end=2023-12-31&amp;amp;sta=S0101
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.91993</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.99731,40.91993
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>14.99731</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.2">
+            <ws_vito:elevation>906</ws_vito:elevation>
+            <ws_vito:site_name>Station Morra De Sanctis 1, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-16T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0103</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0103
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.93496</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.24093,40.93496
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.24093</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.3">
+            <ws_vito:elevation>581</ws_vito:elevation>
+            <ws_vito:site_name>Station Lioni 1, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-15T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0104</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0104
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.88177</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.19381,40.88177
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.19381</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.4">
+            <ws_vito:elevation>1071</ws_vito:elevation>
+            <ws_vito:site_name>Station Laceno 1, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-13T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0105</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0105
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.80323</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.11395,40.80323
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.11395</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.5">
+            <ws_vito:elevation>448</ws_vito:elevation>
+            <ws_vito:site_name>Station Laviano Vammora, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-04T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0106</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0106
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.78531</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.28047,40.78531
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.28047</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.6">
+            <ws_vito:elevation>739</ws_vito:elevation>
+            <ws_vito:site_name>Station Romagnano al monte 3, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-26T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0314</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0314
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.62822509</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.4390975,40.62822509
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.4390975</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.7">
+            <ws_vito:elevation>611</ws_vito:elevation>
+            <ws_vito:site_name>Station Savoia di Lucania 3, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-05T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0315</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0315
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.56598</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.55571,40.56598
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.55571</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.8">
+            <ws_vito:elevation>583</ws_vito:elevation>
+            <ws_vito:site_name>Station Vietri di Potenza 3, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-30T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0316</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0316
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.59366157</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.50980702,40.59366157
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.50980702</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.9">
+            <ws_vito:elevation>685</ws_vito:elevation>
+            <ws_vito:site_name>Station Satriano di Lucania 3, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-01T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0317</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0317
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.55517895</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.62954177,40.55517895
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.62954177</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.10">
+            <ws_vito:elevation>1015</ws_vito:elevation>
+            <ws_vito:site_name>Station Sasso di Castalda 3, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-02T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0318</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0318
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.49169</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.68053,40.49169
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.68053</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.11">
+            <ws_vito:elevation>593</ws_vito:elevation>
+            <ws_vito:site_name>Station Tito Scalo 3, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-31T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0319</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0319
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.579257</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.67547,40.579257
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.67547</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.12">
+            <ws_vito:elevation>697</ws_vito:elevation>
+            <ws_vito:site_name>Station Rocca San Felice 1, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-09T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0102</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0102
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.97539</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.14601,40.97539
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.14601</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.13">
+            <ws_vito:elevation>644</ws_vito:elevation>
+            <ws_vito:site_name>Station Ruoti 3, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-07T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0320</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0320
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.70927</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.68612,40.70927
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.68612</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.14">
+            <ws_vito:elevation>447</ws_vito:elevation>
+            <ws_vito:site_name>Station Conza della Campania 1, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-14T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0107</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0107
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.87822</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.30147,40.87822
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.30147</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.15">
+            <ws_vito:elevation>864</ws_vito:elevation>
+            <ws_vito:site_name>Station Montemarano 4, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-12T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0401</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0401
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.907288</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        14.9899,40.907288
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>14.9899</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.16">
+            <ws_vito:elevation>306.8</ws_vito:elevation>
+            <ws_vito:site_name>Station Colliano Campolongo 1, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-06-07T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0108</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0108
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.70713985</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN, CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.27381983,40.70713985
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.27381983</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.17">
+            <ws_vito:elevation>765</ws_vito:elevation>
+            <ws_vito:site_name>Station Rocca San Felice 4, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-09T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0402</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0402
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.969532</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.150447,40.969532
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.150447</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.18">
+            <ws_vito:elevation>997</ws_vito:elevation>
+            <ws_vito:site_name>Station Colliano 1, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-23T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0109</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0109
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.722128</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.37431,40.722128
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.37431</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.19">
+            <ws_vito:elevation>825</ws_vito:elevation>
+            <ws_vito:site_name>Station Morra De Sanctis 4, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-09-16T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0403</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0403
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.92614</ws_vito:latitude>
+            <ws_vito:stream_codes>DHN, DHE, DHZ</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.24359,40.92614
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.24359</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ws_vito:fluids_rete_zk fid="fluids_rete_zk.20">
+            <ws_vito:elevation>725</ws_vito:elevation>
+            <ws_vito:site_name>Station Castelnuovo di Conza Municipio, Italy</ws_vito:site_name>
+            <ws_vito:creationdate>2021-08-27T22:00:00Z</ws_vito:creationdate>
+            <ws_vito:code>S0110</ws_vito:code>
+            <ws_vito:station_file>https://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=ZK&amp;level=response&amp;u=web&amp;
+                start=2021-01-01&amp;end=2023-12-31&amp;sta=S0110
+            </ws_vito:station_file>
+            <ws_vito:latitude>40.81858837</ws_vito:latitude>
+            <ws_vito:stream_codes>CHZ, CHE, CHN</ws_vito:stream_codes>
+            <ws_vito:net_code>ZK</ws_vito:net_code>
+            <ws_vito:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        15.32137644,40.81858837
+                    </gml:coordinates>
+                </gml:Point>
+            </ws_vito:the_geom>
+            <ws_vito:longitude>15.32137644</ws_vito:longitude>
+        </ws_vito:fluids_rete_zk>
     </gml:featureMember>
 </wfs:FeatureCollection>

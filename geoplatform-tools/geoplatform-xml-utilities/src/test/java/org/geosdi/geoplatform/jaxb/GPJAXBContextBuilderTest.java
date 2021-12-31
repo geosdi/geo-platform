@@ -88,13 +88,15 @@ public class GPJAXBContextBuilderTest {
         car.setModel("MERCEDES BENZ");
         car.setPlat("yht6656");
         car.setCarParts(createCarParts(50));
-        GP_JAXB_CONTEXT_BUILDER.marshal(car, new File("./target/Car.xml"));
+        GP_JAXB_CONTEXT_BUILDER.marshal(car, new File(of(new File(".").getCanonicalPath(), "target", "Car")
+                .collect(joining(separator, "", ".xml"))));
     }
 
     @Test
     public void c_readCarFromFileTest() throws Exception {
         logger.info("###########################UNMARSHALL_CAR_FROM_FILE : {}\n", GP_JAXB_CONTEXT_BUILDER
-                .unmarshal(new File(of(".", "src", "test", "resources", "Car.xml").collect(joining(separator))), Car.class));
+                .unmarshal(new File(of(".", "src", "test", "resources", "Car.xml")
+                        .collect(joining(separator))), Car.class));
     }
 
     @Test
@@ -197,7 +199,8 @@ public class GPJAXBContextBuilderTest {
     public void f_writeAttributeStoreAsFileTest() throws Exception {
         AttributeStore attributeStore = new AttributeStore();
         attributeStore.setAttributes(createAttributes(50));
-        GP_JAXB_CONTEXT_BUILDER.marshal(attributeStore, new File("./target/AttributeStore.xml"));
+        GP_JAXB_CONTEXT_BUILDER.marshal(attributeStore, new File( of(new File(".").getCanonicalPath(), "target", "AttributeStore")
+                .collect(joining(separator, "", ".xml"))));
     }
 
     @Test

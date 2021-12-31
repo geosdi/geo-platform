@@ -138,4 +138,44 @@ public class GPWMSGetMapBaseRequestBuilderTest {
                         "-42.562221866101034")
                 .build());
     }
+
+    @Test
+    public void n_wmsGetMapBaseRequestBuilderTest() throws Exception {
+        logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
+                .withKeyValuePair("https://sit2.regione.campania.it/geoserver/RegioneCampania.Cartografia.Tematica/" +
+                        "wms?service=WMS&version=1.1.0&request=GetMap&layers=RegioneCampania.Cartografia.Tematica:sitdbo_curve_livello_25m" +
+                        "&styles=&bbox=394273.34375,4426208.0,571791.3125,4601018.0&width=768&height=756" +
+                        "&srs=EPSG:3045&format=application/openlayers")
+                .build());
+    }
+
+    @Test
+    public void o_wmsGetMapBaseRequestBuilderTest() throws Exception {
+        logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
+                .withKeyValuePair("https://sit2.regione.campania.it/geoserver/RegioneCampania.Cartografia.Tematica/wms" +
+                        "?service=WMS&version=1.1.0&request=GetMap&layers=RegioneCampania.Cartografia.Tematica:sitdbo_retegeodeticaregionale" +
+                        "&styles=&bbox=395940.25,4426882.0,568596.4375,4598768.5&width=768&height=764" +
+                        "&srs=EPSG:3045&format=application/openlayers")
+                .build());
+    }
+
+    @Test
+    public void p_wmsGetMapBaseRequestBuilderTest() throws Exception {
+        logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
+                .withKeyValuePair("https://sit2.regione.campania.it/geoserver/RegioneCampania.Catalogo/wms" +
+                        "?service=WMS&version=1.1.0&request=GetMap&layers=RegioneCampania.Catalogo:sitdbo_bio_italy" +
+                        "&styles=&bbox=395405.6875,4425042.0,568193.4375,4596016.0&width=768&height=759" +
+                        "&srs=EPSG:3045&format=application/openlayers&test=prova")
+                .build());
+    }
+
+    @Test
+    public void q_wmsGetMapBaseRequestBuilderTest() throws Exception {
+        logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
+                .withKeyValuePair("https://sit2.regione.campania.it/geoserver/RegioneCampania.Catalogo/wms" +
+                        "?service=WMS&version=1.1.0&request=GetMap&layers=RegioneCampania.Catalogo:sitdbo_corine_land_cover_90" +
+                        "&styles=&bbox=395346.3125,4426030.5,569392.125,4596345.5&width=768&height=751&srs=EPSG:3045" +
+                        "&format=application/openlayers")
+                .build());
+    }
 }

@@ -1,0 +1,1379 @@
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:RegioneCampania="regione.campania.it" xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="regione.campania.it https://sit2.regione.campania.it:443/geoserver/RegioneCampania/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=RegioneCampania%3Asitdbo_retegeodetica http://www.opengis.net/wfs https://sit2.regione.campania.it:443/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.1814">
+            <RegioneCampania:gid>1814</RegioneCampania:gid>
+            <RegioneCampania:objectid>1814</RegioneCampania:objectid>
+            <RegioneCampania:vertice>433452R</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>FLUMERI</RegioneCampania:comune>
+            <RegioneCampania:gbnord>4548409.37900</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2535289.83900</RegioneCampania:gbest>
+            <RegioneCampania:quota>0E-11</RegioneCampania:quota>
+            <RegioneCampania:collegamen>433452R.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/FLUMERI/433452R.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        515280.68969989,4548402.38958841
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.1827">
+            <RegioneCampania:gid>1827</RegioneCampania:gid>
+            <RegioneCampania:objectid>1827</RegioneCampania:objectid>
+            <RegioneCampania:vertice>172703</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete IGM95</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>CASERTA</RegioneCampania:provincia>
+            <RegioneCampania:comune>CARINOLA</RegioneCampania:comune>
+            <RegioneCampania:gbnord>4561777.60000</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2436721.56000</RegioneCampania:gbest>
+            <RegioneCampania:quota>0E-11</RegioneCampania:quota>
+            <RegioneCampania:collegamen>172703.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/CASERTA/CARINOLA/172703.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        416713.22340059,4561769.82658832
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.185">
+            <RegioneCampania:gid>185</RegioneCampania:gid>
+            <RegioneCampania:objectid>185</RegioneCampania:objectid>
+            <RegioneCampania:vertice>S036</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>NAPOLI</RegioneCampania:provincia>
+            <RegioneCampania:comune>VILLARICCA</RegioneCampania:comune>
+            <RegioneCampania:localita>Rotonda Maradona</RegioneCampania:localita>
+            <RegioneCampania:ubicazione>Centrino bordo strada di fronte spartitraffico rotondo direzione Licola
+            </RegioneCampania:ubicazione>
+            <RegioneCampania:gbnord>4528555.57300</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2445931.74800</RegioneCampania:gbest>
+            <RegioneCampania:quota>65.1800000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>S036.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/NAPOLI/VILLARICCA/S036.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        425923.77780052,4528547.99718856
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.318">
+            <RegioneCampania:gid>318</RegioneCampania:gid>
+            <RegioneCampania:objectid>318</RegioneCampania:objectid>
+            <RegioneCampania:vertice>S080</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>NAPOLI</RegioneCampania:provincia>
+            <RegioneCampania:comune>ACERRA</RegioneCampania:comune>
+            <RegioneCampania:ubicazione>Asse geometrico del pilastrino in acciaio</RegioneCampania:ubicazione>
+            <RegioneCampania:gbnord>4533306.28800</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2467055.99700</RegioneCampania:gbest>
+            <RegioneCampania:quota>31.4300000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>S080.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/NAPOLI/ACERRA/S080.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        447047.74050037,4533298.69608852
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.89">
+            <RegioneCampania:gid>89</RegioneCampania:gid>
+            <RegioneCampania:objectid>89</RegioneCampania:objectid>
+            <RegioneCampania:vertice>451008</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Primaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>CALITRI</RegioneCampania:comune>
+            <RegioneCampania:accesso>Da Lioni, al km 21+750 della Strada Statale n° 401, svoltare a sinistra e
+                proseguire per circa 1+200 km.
+            </RegioneCampania:accesso>
+            <RegioneCampania:ubicazione>Sulla sinistra al termine del lungo muro di sostegno.
+            </RegioneCampania:ubicazione>
+            <RegioneCampania:materiale>Borchia metallica regionale infissa sulla sommità</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4528016.49500</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2561799.61100</RegioneCampania:gbest>
+            <RegioneCampania:quota>342.900000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>451008.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/CALITRI/451008.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        541790.53479971,4528009.78458856
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.228">
+            <RegioneCampania:gid>228</RegioneCampania:gid>
+            <RegioneCampania:objectid>228</RegioneCampania:objectid>
+            <RegioneCampania:vertice>450173</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>ANDRETTA</RegioneCampania:comune>
+            <RegioneCampania:accesso>Da Andretta in direzione sud verso il torrente Sarda in prossimità dell'incrocio
+                con due strade poderali, circa 200 metri dopo aver attrversato il torrente.
+            </RegioneCampania:accesso>
+            <RegioneCampania:materiale>Borchia metallica regionale infissa sul cordolo.</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4530971.12900</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2545859.05000</RegioneCampania:gbest>
+            <RegioneCampania:quota>643.900000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>450173.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/ANDRETTA/450173.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        525849.97529982,4530964.38088853
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.229">
+            <RegioneCampania:gid>229</RegioneCampania:gid>
+            <RegioneCampania:objectid>229</RegioneCampania:objectid>
+            <RegioneCampania:vertice>450174</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>MORRA DE SANCTIS</RegioneCampania:comune>
+            <RegioneCampania:accesso>Al bivio di Contrada Santa Lucia tra Morra de Sanctis e Lioni.
+            </RegioneCampania:accesso>
+            <RegioneCampania:materiale>Borchia metallica regionale infissa sul cordolo.</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4528965.68700</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2540335.54700</RegioneCampania:gbest>
+            <RegioneCampania:quota>569.000000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>450174.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/MORRA DE SANCTIS/450174.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        520326.49969986,4528958.90168855
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.230">
+            <RegioneCampania:gid>230</RegioneCampania:gid>
+            <RegioneCampania:objectid>230</RegioneCampania:objectid>
+            <RegioneCampania:vertice>451175</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>CONZA DELLA CAMPANIA</RegioneCampania:comune>
+            <RegioneCampania:accesso>Slargo sulla destra per chi procede in direzione di Conza della Campania.
+            </RegioneCampania:accesso>
+            <RegioneCampania:materiale>Borchia metallica regionale infissa sulla sommità</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4528781.13200</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2548160.71600</RegioneCampania:gbest>
+            <RegioneCampania:quota>613.500000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>451175.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/CONZA DELLA CAMPANIA/451175.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        528151.6369998,4528774.38538855
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.231">
+            <RegioneCampania:gid>231</RegioneCampania:gid>
+            <RegioneCampania:objectid>231</RegioneCampania:objectid>
+            <RegioneCampania:vertice>451176</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>CALITRI</RegioneCampania:comune>
+            <RegioneCampania:accesso>Al km 11+150 della Strada Statale n° 399, Masseria Vitamore, svoltare in direzione
+                ovest e, al quadrivio, proseguire diritto. Iimboccare, quindi, la seconda strada sulla destra; il punto
+                è ubicato, sulla sinistra, dopo circa 150 metri.
+            </RegioneCampania:accesso>
+            <RegioneCampania:materiale>Borchia metallica regionale infissa sul muro paras</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4529841.53700</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2552626.76900</RegioneCampania:gbest>
+            <RegioneCampania:quota>678.200000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>451176.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/CALITRI/451176.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        532617.63939977,4529834.78968854
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.232">
+            <RegioneCampania:gid>232</RegioneCampania:gid>
+            <RegioneCampania:objectid>232</RegioneCampania:objectid>
+            <RegioneCampania:vertice>451177</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>CALITRI</RegioneCampania:comune>
+            <RegioneCampania:accesso>Da Croce Penta, al km 12+200 della Strada Statale n° 399, percorrere circa 3+000 km
+                in direzione di Masseria Guanciello-Pepponi; a sinistra prima del ponte in curva sul Torrente Cortino.
+            </RegioneCampania:accesso>
+            <RegioneCampania:materiale>Borchia metallica regionale infissa sulla parte su</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4530546.58000</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2556083.90500</RegioneCampania:gbest>
+            <RegioneCampania:quota>570.600000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>451177.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/CALITRI/451177.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        536074.72719975,4530539.82668854
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.233">
+            <RegioneCampania:gid>233</RegioneCampania:gid>
+            <RegioneCampania:objectid>233</RegioneCampania:objectid>
+            <RegioneCampania:vertice>451179</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>CALITRI</RegioneCampania:comune>
+            <RegioneCampania:accesso>Arrivando all'abitao di Pepponi dalla Strada Statale 401 alle prime case svoltare a
+                sinistra: Il punto è ubicato circa 100 metri dopo.
+            </RegioneCampania:accesso>
+            <RegioneCampania:materiale>Borchia metallica regionale infissa sul cordolo.</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4531147.86900</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2561110.28300</RegioneCampania:gbest>
+            <RegioneCampania:quota>554.200000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>451179.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/CALITRI/451179.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        541101.17849971,4531141.17108853
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.242">
+            <RegioneCampania:gid>242</RegioneCampania:gid>
+            <RegioneCampania:objectid>242</RegioneCampania:objectid>
+            <RegioneCampania:vertice>451189</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>CALITRI</RegioneCampania:comune>
+            <RegioneCampania:accesso>Al km 21+750 della Strada Statale n° 401 (provenendo da Lioni) svoltare a sinistra
+                proseguendo per circa 5+400 km.
+            </RegioneCampania:accesso>
+            <RegioneCampania:ubicazione>All'incrocio con due strade sterrate.</RegioneCampania:ubicazione>
+            <RegioneCampania:materiale>Borchia metallica regionale infissa sul bordo del</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4527662.65400</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2559185.25900</RegioneCampania:gbest>
+            <RegioneCampania:quota>454.000000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>451189.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/CALITRI/451189.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        539176.09839972,4527655.89138856
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.347">
+            <RegioneCampania:gid>347</RegioneCampania:gid>
+            <RegioneCampania:objectid>347</RegioneCampania:objectid>
+            <RegioneCampania:vertice>451188</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>CALITRI</RegioneCampania:comune>
+            <RegioneCampania:accesso>Al 4° tornante della strada in discesa; da Calitri seguire la direzione per il
+                poliambulatorio.
+            </RegioneCampania:accesso>
+            <RegioneCampania:ubicazione>Sulla destra all'imbocco del tornante.</RegioneCampania:ubicazione>
+            <RegioneCampania:materiale>Borchia metallica regionale infissa sul bordo dell</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4528205.24000</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2556834.66400</RegioneCampania:gbest>
+            <RegioneCampania:quota>501.100000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>451188.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/CALITRI/451188.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        536825.48129974,4528198.46548856
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.348">
+            <RegioneCampania:gid>348</RegioneCampania:gid>
+            <RegioneCampania:objectid>348</RegioneCampania:objectid>
+            <RegioneCampania:vertice>451197</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>CALITRI</RegioneCampania:comune>
+            <RegioneCampania:accesso>Dalla Strada Statale n° 40,1 km 25+740, imboccare la strada asfaltata sulla destra
+                (provenendo da Calitri) e proseguire per circa 2+400 km.
+            </RegioneCampania:accesso>
+            <RegioneCampania:ubicazione>All'ingresso di una azienda agricola sul muro a bordo strada.
+            </RegioneCampania:ubicazione>
+            <RegioneCampania:materiale>Borchia metallica regionale infissa sulla sommità</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4525036.20300</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2558936.48900</RegioneCampania:gbest>
+            <RegioneCampania:quota>517.600000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>451197.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/CALITRI/451197.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        538927.31129973,4525029.41338858
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.351">
+            <RegioneCampania:gid>351</RegioneCampania:gid>
+            <RegioneCampania:objectid>351</RegioneCampania:objectid>
+            <RegioneCampania:vertice>450201</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>NUSCO</RegioneCampania:comune>
+            <RegioneCampania:accesso>Dallo svincolo di Nusco della Strada Statale n° 7 in direzione di Lioni sulla
+                Strada Provinciale 134; dopo circa 2+600 km sulla sinistra all'incrocio passaggio a livello.
+            </RegioneCampania:accesso>
+            <RegioneCampania:materiale>Borchia metallica regionale infissa sul muro a bor</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4525378.49000</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2530806.15400</RegioneCampania:gbest>
+            <RegioneCampania:quota>608.200000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>450201.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/NUSCO/450201.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        510797.15369992,4525371.62978857
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.371">
+            <RegioneCampania:gid>371</RegioneCampania:gid>
+            <RegioneCampania:objectid>371</RegioneCampania:objectid>
+            <RegioneCampania:vertice>450222</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>BAGNOLI IRPINO</RegioneCampania:comune>
+            <RegioneCampania:accesso>Allo svincolo di Nusco della Strada Statale n° 7 in direzione di Bagnoli Irpino per
+                circa 3+000 km della Strada Provinciale 33, sulla destra.
+            </RegioneCampania:accesso>
+            <RegioneCampania:materiale>Borchia metallica regionale infissa sul parapetto</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4522858.53700</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2527376.02400</RegioneCampania:gbest>
+            <RegioneCampania:quota>646.500000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>450222.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/BAGNOLI IRPINO/450222.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        507367.03239995,4522851.64568859
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.1658">
+            <RegioneCampania:gid>1658</RegioneCampania:gid>
+            <RegioneCampania:objectid>1658</RegioneCampania:objectid>
+            <RegioneCampania:vertice>450194</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>MORRA DE SANCTIS</RegioneCampania:comune>
+            <RegioneCampania:accesso>Al km 4+900 circa della Strada Statale n° 7 dir\C svoltare in direzione Morra de
+                Sanctis e proseguire verso Lioni per circa 350 metri sulla destra.
+            </RegioneCampania:accesso>
+            <RegioneCampania:ubicazione>Sul parapetto del ponticello.</RegioneCampania:ubicazione>
+            <RegioneCampania:materiale>Borchia metallica regionale infissa sulla sommità</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4526970.22200</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2539927.27300</RegioneCampania:gbest>
+            <RegioneCampania:quota>468.100000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>450194.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/MORRA DE SANCTIS/450194.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        519918.22699986,4526963.42488856
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.1701">
+            <RegioneCampania:gid>1701</RegioneCampania:gid>
+            <RegioneCampania:objectid>1701</RegioneCampania:objectid>
+            <RegioneCampania:vertice>451178</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>CALITRI</RegioneCampania:comune>
+            <RegioneCampania:accesso>Da Croce Penta, al km 12+200 della Strada Statale n° 399, percorrere circa 7+400 km
+                la strada principale in direzione Masseria Guanciello-Pepponi, quindi svoltare a destra e prosegiuire
+                diritto per 2+600 km circa.
+            </RegioneCampania:accesso>
+            <RegioneCampania:ubicazione>Il punto è ubicato circa 80 metri prima del quadrivio, sulla destra, all'esterno
+                della carragiata.
+            </RegioneCampania:ubicazione>
+            <RegioneCampania:materiale>Borchia metallica regionale infissa sul bordo del</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4529904.58900</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2559719.38300</RegioneCampania:gbest>
+            <RegioneCampania:quota>529.500000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>451178.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/CALITRI/451178.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        539710.23759972,4529897.85648854
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.26">
+            <RegioneCampania:gid>26</RegioneCampania:gid>
+            <RegioneCampania:objectid>26</RegioneCampania:objectid>
+            <RegioneCampania:vertice>S118</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>SALERNO</RegioneCampania:provincia>
+            <RegioneCampania:comune>POSITANO</RegioneCampania:comune>
+            <RegioneCampania:ubicazione>Centrino posto sulla S.S. 163 da Positano a Praiano in corrispondenza della
+                pietra miliare al km 16
+            </RegioneCampania:ubicazione>
+            <RegioneCampania:gbnord>4497287.45000</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2477686.79200</RegioneCampania:gbest>
+            <RegioneCampania:quota>82.6500000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>S118.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/SALERNO/POSITANO/S118.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        457678.68790029,4497279.96058877
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.1293">
+            <RegioneCampania:gid>1293</RegioneCampania:gid>
+            <RegioneCampania:objectid>1293</RegioneCampania:objectid>
+            <RegioneCampania:vertice>449743R</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>SERINO</RegioneCampania:comune>
+            <RegioneCampania:gbnord>4521207.17800</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2510763.02600</RegioneCampania:gbest>
+            <RegioneCampania:quota>0E-11</RegioneCampania:quota>
+            <RegioneCampania:collegamen>449743R.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/SERINO/449743R.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        490754.21710006,4521200.0514886
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.843">
+            <RegioneCampania:gid>843</RegioneCampania:gid>
+            <RegioneCampania:objectid>843</RegioneCampania:objectid>
+            <RegioneCampania:vertice>504615</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>SALERNO</RegioneCampania:provincia>
+            <RegioneCampania:comune>ROFRANO</RegioneCampania:comune>
+            <RegioneCampania:accesso>Da Rofrano in direzione di Alfano per circa 1+200 km; al bivio voltare in direzione
+                di Provitera.
+            </RegioneCampania:accesso>
+            <RegioneCampania:ubicazione>A circa 1+050 km dal bivio nello slargo di fronte al numero civico 6 e alla
+                fontana con vasca.
+            </RegioneCampania:ubicazione>
+            <RegioneCampania:materiale>Borchia metallica regionale infissa sulla testata</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4450467.71700</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2557546.84000</RegioneCampania:gbest>
+            <RegioneCampania:quota>640.000000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>504615.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/SALERNO/ROFRANO/504615.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        537539.22439974,4450461.23068909
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.151">
+            <RegioneCampania:gid>151</RegioneCampania:gid>
+            <RegioneCampania:objectid>151</RegioneCampania:objectid>
+            <RegioneCampania:vertice>P080</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Primaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>CASERTA</RegioneCampania:provincia>
+            <RegioneCampania:comune>CASTELVOLTURNO</RegioneCampania:comune>
+            <RegioneCampania:localita>Torre di Patria</RegioneCampania:localita>
+            <RegioneCampania:accesso>S.S.7Q Domitiana</RegioneCampania:accesso>
+            <RegioneCampania:ubicazione>Centrino all'interno di tubo di ferro (ex segnale stradale tagliato all'altezza
+                suolo) in corrispondenza dell'ingresso di "Villa Assunta"
+            </RegioneCampania:ubicazione>
+            <RegioneCampania:gbnord>4530265.46800</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2437874.19400</RegioneCampania:gbest>
+            <RegioneCampania:quota>4.74000000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>P080.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/CASERTA/CASTELVOLTURNO/P080.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        417866.28970058,4530257.86528855
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.144">
+            <RegioneCampania:gid>144</RegioneCampania:gid>
+            <RegioneCampania:objectid>144</RegioneCampania:objectid>
+            <RegioneCampania:vertice>184801</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete IGM95</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>CASERTA</RegioneCampania:provincia>
+            <RegioneCampania:comune>AVERSA</RegioneCampania:comune>
+            <RegioneCampania:localita>Aversa</RegioneCampania:localita>
+            <RegioneCampania:accesso>Piazza Duomo</RegioneCampania:accesso>
+            <RegioneCampania:gbnord>4536409.29800</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2452851.99600</RegioneCampania:gbest>
+            <RegioneCampania:quota>40.5000000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>184801.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/CASERTA/AVERSA/184801.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        432843.78310047,4536401.7602885
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.27">
+            <RegioneCampania:gid>27</RegioneCampania:gid>
+            <RegioneCampania:objectid>27</RegioneCampania:objectid>
+            <RegioneCampania:vertice>S120</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>NAPOLI</RegioneCampania:provincia>
+            <RegioneCampania:comune>CAIVANO</RegioneCampania:comune>
+            <RegioneCampania:localita>Marcigliano</RegioneCampania:localita>
+            <RegioneCampania:ubicazione>Centrino all'imbocco del ponte sull'autostrada nei pressi del tabellone
+                pubblicitario
+            </RegioneCampania:ubicazione>
+            <RegioneCampania:gbnord>4535878.87600</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2463372.79900</RegioneCampania:gbest>
+            <RegioneCampania:quota>28.5000000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>S120.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/NAPOLI/CAIVANO/S120.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        443364.5229004,4535871.2951885
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.24">
+            <RegioneCampania:gid>24</RegioneCampania:gid>
+            <RegioneCampania:objectid>24</RegioneCampania:objectid>
+            <RegioneCampania:vertice>431142R</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>CASERTA</RegioneCampania:provincia>
+            <RegioneCampania:comune>CASERTA</RegioneCampania:comune>
+            <RegioneCampania:localita>Caserta</RegioneCampania:localita>
+            <RegioneCampania:accesso>Prendere strada da Villa di Briano a Caserta ed arrivati ad Ercole svoltare a SX.
+            </RegioneCampania:accesso>
+            <RegioneCampania:ubicazione>Su marciapiede in corrispondenza tetto fabbricato</RegioneCampania:ubicazione>
+            <RegioneCampania:materiale>Chiodo in acciaio con borchia</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4546047.43300</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2464825.87300</RegioneCampania:gbest>
+            <RegioneCampania:quota>74.4800000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>431142R.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/CASERTA/CASERTA/431142R.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        444817.41990039,4546039.79678843
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.30">
+            <RegioneCampania:gid>30</RegioneCampania:gid>
+            <RegioneCampania:objectid>30</RegioneCampania:objectid>
+            <RegioneCampania:vertice>S124</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>NAPOLI</RegioneCampania:provincia>
+            <RegioneCampania:comune>TORRE DEL GRECO</RegioneCampania:comune>
+            <RegioneCampania:ubicazione>Centrino vicino aiuola giardini pubblici in p.zza Santa Croce di fronte alla
+                Basilica Pontificia
+            </RegioneCampania:ubicazione>
+            <RegioneCampania:gbnord>4515312.82800</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2466683.73100</RegioneCampania:gbest>
+            <RegioneCampania:quota>40.6900000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>S124.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/NAPOLI/TORRE DEL GRECO/S124.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        446675.67730037,4515305.27318865
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.342">
+            <RegioneCampania:gid>342</RegioneCampania:gid>
+            <RegioneCampania:objectid>342</RegioneCampania:objectid>
+            <RegioneCampania:vertice>S110</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>NAPOLI</RegioneCampania:provincia>
+            <RegioneCampania:comune>ACERRA</RegioneCampania:comune>
+            <RegioneCampania:localita>Cimitero</RegioneCampania:localita>
+            <RegioneCampania:ubicazione>Centrino sul marciapiede nella piazzetta dell'ingresso del cimitero alla base
+                del palo Enel
+            </RegioneCampania:ubicazione>
+            <RegioneCampania:gbnord>4533714.00700</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2467628.11500</RegioneCampania:gbest>
+            <RegioneCampania:quota>27.3600000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>S110.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/NAPOLI/ACERRA/S110.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        447619.84440037,4533706.41238852
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.31">
+            <RegioneCampania:gid>31</RegioneCampania:gid>
+            <RegioneCampania:objectid>31</RegioneCampania:objectid>
+            <RegioneCampania:vertice>S125</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>NAPOLI</RegioneCampania:provincia>
+            <RegioneCampania:comune>ROCCARAINOLA</RegioneCampania:comune>
+            <RegioneCampania:localita>Caulicelle</RegioneCampania:localita>
+            <RegioneCampania:ubicazione>Centrino sulla strada per il ristorante Eolo in prossimità di un muretto in
+                cemento vicino al palo Enel
+            </RegioneCampania:ubicazione>
+            <RegioneCampania:gbnord>4535627.34600</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2483837.43100</RegioneCampania:gbest>
+            <RegioneCampania:quota>221.720000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>S125.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/NAPOLI/ROCCARAINOLA/S125.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        463828.98840025,4535619.7347885
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.1812">
+            <RegioneCampania:gid>1812</RegioneCampania:gid>
+            <RegioneCampania:objectid>1812</RegioneCampania:objectid>
+            <RegioneCampania:vertice>469360</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>SALERNO</RegioneCampania:provincia>
+            <RegioneCampania:comune>SAN GREGORIO MAGNO</RegioneCampania:comune>
+            <RegioneCampania:accesso>Da San Gregorio Magno, percorrere lo stradone in direzione di Oliveto
+                Citra-Palomonte per circa 1+200 km; al quadrivio svoltare a destra.
+            </RegioneCampania:accesso>
+            <RegioneCampania:ubicazione>Il vertice è materializzato sullo slargo pavimentato in calcestruzzo, sulla
+                destra, circa 15 metri dopo l'incrocio.
+            </RegioneCampania:ubicazione>
+            <RegioneCampania:materiale>Borchia metallica regionale infissa sul cordolo de</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4501309.18000</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2552691.13400</RegioneCampania:gbest>
+            <RegioneCampania:quota>522.400000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>469360.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/SALERNO/SAN GREGORIO MAGNO/469360.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        532682.49009977,4501302.46078874
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.1813">
+            <RegioneCampania:gid>1813</RegioneCampania:gid>
+            <RegioneCampania:objectid>1813</RegioneCampania:objectid>
+            <RegioneCampania:vertice>431661R</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>BENEVENTO</RegioneCampania:provincia>
+            <RegioneCampania:comune>MONTESARCHIO</RegioneCampania:comune>
+            <RegioneCampania:localita>Cirignano</RegioneCampania:localita>
+            <RegioneCampania:accesso>Da Montesarchio direzione Cirignano al bivio tenere la Dx e proseguire per 400 mt
+            </RegioneCampania:accesso>
+            <RegioneCampania:ubicazione>Su basamento in CLS in corrispondenza spigolo muretto
+            </RegioneCampania:ubicazione>
+            <RegioneCampania:materiale>Chiodo in acciaio con Borchia</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4547950.35700</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2489560.25200</RegioneCampania:gbest>
+            <RegioneCampania:quota>312.520000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>431661R.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/BENEVENTO/MONTESARCHIO/431661R.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        469551.54520022,4547942.75528841
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.1815">
+            <RegioneCampania:gid>1815</RegioneCampania:gid>
+            <RegioneCampania:objectid>1815</RegioneCampania:objectid>
+            <RegioneCampania:vertice>417094R</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>CASERTA</RegioneCampania:provincia>
+            <RegioneCampania:comune>AILANO</RegioneCampania:comune>
+            <RegioneCampania:localita>Limate</RegioneCampania:localita>
+            <RegioneCampania:accesso>Su S.S. 85 al KM 117 in prossimità dell'incrocio che porta a Mastrati
+            </RegioneCampania:accesso>
+            <RegioneCampania:ubicazione>Basamento in CLS del muretto in corrispondenza spigolo
+            </RegioneCampania:ubicazione>
+            <RegioneCampania:materiale>Chiodo in acciaio con borchia</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4579731.04400</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2449258.63000</RegioneCampania:gbest>
+            <RegioneCampania:quota>116.400000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>417094R.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/CASERTA/AILANO/417094R.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        429249.99080051,4579723.28618819
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.35">
+            <RegioneCampania:gid>35</RegioneCampania:gid>
+            <RegioneCampania:objectid>35</RegioneCampania:objectid>
+            <RegioneCampania:vertice>S135</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>NAPOLI</RegioneCampania:provincia>
+            <RegioneCampania:comune>AFRAGOLA</RegioneCampania:comune>
+            <RegioneCampania:ubicazione>Centrino vicino al marciapiede che divide le strade presso il centro commerciale
+                Pini
+            </RegioneCampania:ubicazione>
+            <RegioneCampania:gbnord>4530677.99900</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2460934.09800</RegioneCampania:gbest>
+            <RegioneCampania:quota>44.6100000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>S135.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/NAPOLI/AFRAGOLA/S135.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        440925.94330042,4530670.43828854
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.1397">
+            <RegioneCampania:gid>1397</RegioneCampania:gid>
+            <RegioneCampania:objectid>1397</RegioneCampania:objectid>
+            <RegioneCampania:vertice>434109V</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Primaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>BISACCIA</RegioneCampania:comune>
+            <RegioneCampania:gbnord>4545837.43000</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2549087.23000</RegioneCampania:gbest>
+            <RegioneCampania:quota>0E-11</RegioneCampania:quota>
+            <RegioneCampania:collegamen>434109V.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/BISACCIA/434109V.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        529078.01929979,4545830.64978843
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.1816">
+            <RegioneCampania:gid>1816</RegioneCampania:gid>
+            <RegioneCampania:objectid>1816</RegioneCampania:objectid>
+            <RegioneCampania:vertice>417060R</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>CASERTA</RegioneCampania:provincia>
+            <RegioneCampania:comune>PRESENZANO</RegioneCampania:comune>
+            <RegioneCampania:accesso>Dalla S.S. 85 procedere verso Venafro al KM 4 svoltare a SX e proseguire per circa
+                1+700 KM.
+            </RegioneCampania:accesso>
+            <RegioneCampania:ubicazione>Su soletta in CLS copertura camera manovra acquedotto (spigolo Nord - Est)
+            </RegioneCampania:ubicazione>
+            <RegioneCampania:materiale>Chiodo in acciaio con borchia</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4577964.48600</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2443533.63500</RegioneCampania:gbest>
+            <RegioneCampania:quota>159.930000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>417060R.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/CASERTA/PRESENZANO/417060R.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        423525.09900055,4577956.72228821
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.1818">
+            <RegioneCampania:gid>1818</RegioneCampania:gid>
+            <RegioneCampania:objectid>1818</RegioneCampania:objectid>
+            <RegioneCampania:vertice>449293R</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>CONTRADA</RegioneCampania:comune>
+            <RegioneCampania:gbnord>4525766.86700</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2502522.79000</RegioneCampania:gbest>
+            <RegioneCampania:quota>0E-11</RegioneCampania:quota>
+            <RegioneCampania:collegamen>449293R.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/CONTRADA/449293R.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        482514.09660012,4525759.59648857
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.1114">
+            <RegioneCampania:gid>1114</RegioneCampania:gid>
+            <RegioneCampania:objectid>1114</RegioneCampania:objectid>
+            <RegioneCampania:vertice>172705</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete IGM95</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>CASERTA</RegioneCampania:provincia>
+            <RegioneCampania:comune>FRANCOLISE</RegioneCampania:comune>
+            <RegioneCampania:gbnord>4558848.14000</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2443381.43000</RegioneCampania:gbest>
+            <RegioneCampania:quota>0E-11</RegioneCampania:quota>
+            <RegioneCampania:collegamen>172705.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/CASERTA/FRANCOLISE/172705.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        423372.95830054,4558840.35938834
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.1819">
+            <RegioneCampania:gid>1819</RegioneCampania:gid>
+            <RegioneCampania:objectid>1819</RegioneCampania:objectid>
+            <RegioneCampania:vertice>4491018R</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>SANTA LUCIA DI SERINO</RegioneCampania:comune>
+            <RegioneCampania:gbnord>4524728.50500</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2509111.47100</RegioneCampania:gbest>
+            <RegioneCampania:quota>0E-11</RegioneCampania:quota>
+            <RegioneCampania:collegamen>4491018R.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/SANTA LUCIA DI
+                SERINO/4491018R.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        489102.69190008,4524721.34958858
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.1820">
+            <RegioneCampania:gid>1820</RegioneCampania:gid>
+            <RegioneCampania:objectid>1820</RegioneCampania:objectid>
+            <RegioneCampania:vertice>449686R</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>MONTEMILETTO</RegioneCampania:comune>
+            <RegioneCampania:gbnord>4538544.96800</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2512764.16400</RegioneCampania:gbest>
+            <RegioneCampania:quota>0E-11</RegioneCampania:quota>
+            <RegioneCampania:collegamen>449686R.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/MONTEMILETTO/449686R.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        492755.39600005,4538537.83458848
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.1821">
+            <RegioneCampania:gid>1821</RegioneCampania:gid>
+            <RegioneCampania:objectid>1821</RegioneCampania:objectid>
+            <RegioneCampania:vertice>449671R</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>SIRIGNANO</RegioneCampania:comune>
+            <RegioneCampania:gbnord>4534669.50200</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2492788.35400</RegioneCampania:gbest>
+            <RegioneCampania:quota>0E-11</RegioneCampania:quota>
+            <RegioneCampania:collegamen>449671R.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/SIRIGNANO/449671R.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        472779.75490019,4534662.02948851
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.1822">
+            <RegioneCampania:gid>1822</RegioneCampania:gid>
+            <RegioneCampania:objectid>1822</RegioneCampania:objectid>
+            <RegioneCampania:vertice>450722R</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>ROCCA SAN FELICE</RegioneCampania:comune>
+            <RegioneCampania:gbnord>4535700.07600</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2531209.32400</RegioneCampania:gbest>
+            <RegioneCampania:quota>0E-11</RegioneCampania:quota>
+            <RegioneCampania:collegamen>450722R.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/ROCCA SAN FELICE/450722R.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        511200.29879992,4535693.1854885
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.1823">
+            <RegioneCampania:gid>1823</RegioneCampania:gid>
+            <RegioneCampania:objectid>1823</RegioneCampania:objectid>
+            <RegioneCampania:vertice>161702</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete IGM95</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>ISERNIA</RegioneCampania:provincia>
+            <RegioneCampania:comune>SESTO CAMPANO</RegioneCampania:comune>
+            <RegioneCampania:ubicazione>S.S.85</RegioneCampania:ubicazione>
+            <RegioneCampania:gbnord>4587235.35000</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2441787.87000</RegioneCampania:gbest>
+            <RegioneCampania:quota>0E-11</RegioneCampania:quota>
+            <RegioneCampania:collegamen>161702.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/ISERNIA/SESTO CAMPANO/161702.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        421779.35270056,4587227.57868814
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.39">
+            <RegioneCampania:gid>39</RegioneCampania:gid>
+            <RegioneCampania:objectid>39</RegioneCampania:objectid>
+            <RegioneCampania:vertice>S140</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>NAPOLI</RegioneCampania:provincia>
+            <RegioneCampania:comune>SORRENTO</RegioneCampania:comune>
+            <RegioneCampania:localita>Pantano</RegioneCampania:localita>
+            <RegioneCampania:ubicazione>Centrino nello slargo dell'incrocio nei pressi del muro di cinta del ristorante
+                Verdemare
+            </RegioneCampania:ubicazione>
+            <RegioneCampania:gbnord>4497457.97900</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2465896.87700</RegioneCampania:gbest>
+            <RegioneCampania:quota>84.8300000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>S140.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/NAPOLI/SORRENTO/S140.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        445888.91540038,4497450.47178877
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.1824">
+            <RegioneCampania:gid>1824</RegioneCampania:gid>
+            <RegioneCampania:objectid>1824</RegioneCampania:objectid>
+            <RegioneCampania:vertice>416011R</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>CASERTA</RegioneCampania:provincia>
+            <RegioneCampania:comune>SESSA AURUNCA</RegioneCampania:comune>
+            <RegioneCampania:localita>Carano</RegioneCampania:localita>
+            <RegioneCampania:accesso>Da Cellole prendere direzione Sorbello. Arrivati al paese svoltare a DX e
+                proseguire per strada sterrata fino ad edificio bianco immerso negli ulivi
+            </RegioneCampania:accesso>
+            <RegioneCampania:ubicazione>Su sommità manufatto in CLS</RegioneCampania:ubicazione>
+            <RegioneCampania:materiale>Chiodo in acciaio con borchia</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4562173.16100</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2429782.81500</RegioneCampania:gbest>
+            <RegioneCampania:quota>103.010000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>416011R.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/CASERTA/SESSA AURUNCA/416011R.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        409774.65030064,4562165.40878833
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.1825">
+            <RegioneCampania:gid>1825</RegioneCampania:gid>
+            <RegioneCampania:objectid>1825</RegioneCampania:objectid>
+            <RegioneCampania:vertice>431206R</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>CASERTA</RegioneCampania:provincia>
+            <RegioneCampania:comune>ARIENZO</RegioneCampania:comune>
+            <RegioneCampania:localita>Monte Vorrano</RegioneCampania:localita>
+            <RegioneCampania:accesso>Da S. Felice a Cancello proseguire per strada montana ed ancora per 2+500 km
+            </RegioneCampania:accesso>
+            <RegioneCampania:ubicazione>Spigolo cunetta in Cls</RegioneCampania:ubicazione>
+            <RegioneCampania:materiale>Chiodo in acciaio con borchia</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4539548.26600</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2479918.23100</RegioneCampania:gbest>
+            <RegioneCampania:quota>597.030000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>431206R.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/CASERTA/ARIENZO/431206R.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        459909.78490028,4539540.62438847
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.1826">
+            <RegioneCampania:gid>1826</RegioneCampania:gid>
+            <RegioneCampania:objectid>1826</RegioneCampania:objectid>
+            <RegioneCampania:vertice>417571R</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Secondaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>CASERTA</RegioneCampania:provincia>
+            <RegioneCampania:comune>PIETRAVAIRANO</RegioneCampania:comune>
+            <RegioneCampania:localita>Pietravairano - Raviscanina</RegioneCampania:localita>
+            <RegioneCampania:accesso>Da Pietravairano direzione S.S. 158 poco prima del ponte sul Volturno a DX della
+                strada si incontra un ponticello cavalcafosso in CLS.
+            </RegioneCampania:accesso>
+            <RegioneCampania:ubicazione>Spigolo ponticello in CLS</RegioneCampania:ubicazione>
+            <RegioneCampania:materiale>Chiodo in acciaio con borchia</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4577837.98800</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2453691.25100</RegioneCampania:gbest>
+            <RegioneCampania:quota>101.730000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>417571R.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/CASERTA/PIETRAVAIRANO/417571R.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        433682.54430047,4577830.23988821
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.1394">
+            <RegioneCampania:gid>1394</RegioneCampania:gid>
+            <RegioneCampania:objectid>1394</RegioneCampania:objectid>
+            <RegioneCampania:vertice>451114V</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Primaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>AQUILONIA</RegioneCampania:comune>
+            <RegioneCampania:gbnord>4534685.29000</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2562362.76000</RegioneCampania:gbest>
+            <RegioneCampania:quota>0E-11</RegioneCampania:quota>
+            <RegioneCampania:collegamen>451114V.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/AQUILONIA/451114V.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        542353.6733997,4534678.65158851
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.87">
+            <RegioneCampania:gid>87</RegioneCampania:gid>
+            <RegioneCampania:objectid>87</RegioneCampania:objectid>
+            <RegioneCampania:vertice>451006</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Primaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>AVELLINO</RegioneCampania:provincia>
+            <RegioneCampania:comune>AQUILONIA</RegioneCampania:comune>
+            <RegioneCampania:accesso>Dal bivio con la Strada Statale n° 401 percorrere la S P 156 in direzione di
+                Aquilonia per circa 7+200 km.
+            </RegioneCampania:accesso>
+            <RegioneCampania:materiale>Borchia metallica regionale infissa sulla canalina</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4534685.28500</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2562362.75800</RegioneCampania:gbest>
+            <RegioneCampania:quota>670.900000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>451006.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/AVELLINO/AQUILONIA/451006.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        542353.6733997,4534678.65158851
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.1316">
+            <RegioneCampania:gid>1316</RegioneCampania:gid>
+            <RegioneCampania:objectid>1316</RegioneCampania:objectid>
+            <RegioneCampania:vertice>430035V</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Primaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>CASERTA</RegioneCampania:provincia>
+            <RegioneCampania:comune>CAMIGLIANO</RegioneCampania:comune>
+            <RegioneCampania:gbnord>4559560.72000</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2453885.43000</RegioneCampania:gbest>
+            <RegioneCampania:quota>0E-11</RegioneCampania:quota>
+            <RegioneCampania:collegamen>430035V.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/CASERTA/CAMIGLIANO/430035V.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        433876.84470047,4559553.01248834
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.88">
+            <RegioneCampania:gid>88</RegioneCampania:gid>
+            <RegioneCampania:objectid>88</RegioneCampania:objectid>
+            <RegioneCampania:vertice>451007</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Primaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>POTENZA</RegioneCampania:provincia>
+            <RegioneCampania:comune>MONTICCHIO BAGNI</RegioneCampania:comune>
+            <RegioneCampania:accesso>Da Monticchio Bagni percorrere la Strada Statale n° 167 in direzione del lago.
+            </RegioneCampania:accesso>
+            <RegioneCampania:ubicazione>In prossimità del km 13+500, in corrispondenza di un passo carraio.
+            </RegioneCampania:ubicazione>
+            <RegioneCampania:materiale>Borchia metallica regionale infissa sul bordo dell</RegioneCampania:materiale>
+            <RegioneCampania:gbnord>4532220.30600</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2569004.67700</RegioneCampania:gbest>
+            <RegioneCampania:quota>626.200000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>451007.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/POTENZA/MONTICCHIO BAGNI/451007.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        548995.82299966,4532213.76808853
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+    <gml:featureMember>
+        <RegioneCampania:sitdbo_retegeodetica fid="sitdbo_retegeodetica.149">
+            <RegioneCampania:gid>149</RegioneCampania:gid>
+            <RegioneCampania:objectid>149</RegioneCampania:objectid>
+            <RegioneCampania:vertice>P001</RegioneCampania:vertice>
+            <RegioneCampania:vertice0>Vertice Rete Primaria</RegioneCampania:vertice0>
+            <RegioneCampania:provincia>NAPOLI</RegioneCampania:provincia>
+            <RegioneCampania:comune>SAN GENNARO VESUVIANO</RegioneCampania:comune>
+            <RegioneCampania:localita>S.Gennaro Vesuviano</RegioneCampania:localita>
+            <RegioneCampania:accesso>Via Ferrovia dello Stato</RegioneCampania:accesso>
+            <RegioneCampania:ubicazione>Centrino nei giardini pubblici di fronte alla chiesa
+            </RegioneCampania:ubicazione>
+            <RegioneCampania:gbnord>4523392.31400</RegioneCampania:gbnord>
+            <RegioneCampania:gbest>2480293.57200</RegioneCampania:gbest>
+            <RegioneCampania:quota>53.4400000000</RegioneCampania:quota>
+            <RegioneCampania:collegamen>P001.pdf</RegioneCampania:collegamen>
+            <RegioneCampania:data_ini>20041202</RegioneCampania:data_ini>
+            <RegioneCampania:hyperlink>/Vertici%20Trigonometrici%20Regionali/NAPOLI/SAN GENNARO VESUVIANO/P001.pdf
+            </RegioneCampania:hyperlink>
+            <RegioneCampania:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3045">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        460285.26530028,4523384.75068859
+                    </gml:coordinates>
+                </gml:Point>
+            </RegioneCampania:geom>
+        </RegioneCampania:sitdbo_retegeodetica>
+    </gml:featureMember>
+</wfs:FeatureCollection>

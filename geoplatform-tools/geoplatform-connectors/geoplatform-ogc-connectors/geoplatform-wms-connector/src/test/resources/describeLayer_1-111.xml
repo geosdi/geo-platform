@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE WMS_DescribeLayerResponse SYSTEM
+        "https://sit2.regione.campania.it:443/geoserver/schemas/wms/1.1.1/WMS_DescribeLayerResponse.dtd">
+<WMS_DescribeLayerResponse version="1.1.1">
+    <LayerDescription name="RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico"
+                      wfs="https://sit2.regione.campania.it:443/geoserver/wfs?"
+                      owsURL="https://sit2.regione.campania.it:443/geoserver/wfs?" owsType="WFS">
+        <Query typeName="RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico"/>
+    </LayerDescription>
+    <LayerDescription name="RegioneCampania.Cartografia.Tematica:sitdbo_aree_carsiche"
+                      wfs="https://sit2.regione.campania.it:443/geoserver/wfs?"
+                      owsURL="https://sit2.regione.campania.it:443/geoserver/wfs?" owsType="WFS">
+        <Query typeName="RegioneCampania.Cartografia.Tematica:sitdbo_aree_carsiche"/>
+    </LayerDescription>
+    <LayerDescription name="RegioneCampania.Ambiente:sitdbo_zps"
+                      wfs="https://sit2.regione.campania.it:443/geoserver/wfs?"
+                      owsURL="https://sit2.regione.campania.it:443/geoserver/wfs?" owsType="WFS">
+        <Query typeName="RegioneCampania.Ambiente:sitdbo_zps"/>
+    </LayerDescription>
+</WMS_DescribeLayerResponse>

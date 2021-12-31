@@ -45,11 +45,11 @@ import org.geosdi.geoplatform.connector.server.request.kvp.GPWMSRequestKeyValueP
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.util.Collections.EMPTY_LIST;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Stream.of;
@@ -85,7 +85,7 @@ public class WMSGetMapBaseRequest implements GPWMSGetMapBaseRequest {
      */
     public WMSGetMapBaseRequest(@Nonnull(when = NEVER) GPWMSBoundingBox theBoundingBox, @Nonnull(when = NEVER) Collection<String> theLayers,
             @Nonnull(when = NEVER) String theSrs, @Nonnull(when = NEVER) String theWitdth, @Nonnull(when = NEVER) String theHeight) {
-        this(theBoundingBox, theLayers, theSrs, theWitdth, theHeight, Collections.EMPTY_LIST);
+        this(theBoundingBox, theLayers, theSrs, theWitdth, theHeight, EMPTY_LIST);
     }
 
     /**

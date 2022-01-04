@@ -66,7 +66,6 @@ import static org.elasticsearch.action.DocWriteResponse.Result.CREATED;
 import static org.elasticsearch.client.RequestOptions.DEFAULT;
 
 import static org.elasticsearch.xcontent.XContentType.JSON;
-import static org.springframework.core.env.Profiles.of;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

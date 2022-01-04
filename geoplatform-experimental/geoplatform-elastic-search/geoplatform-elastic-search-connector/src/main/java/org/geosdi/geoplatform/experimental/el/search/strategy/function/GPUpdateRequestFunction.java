@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.function.Function;
 
-import static org.elasticsearch.common.xcontent.XContentType.JSON;
+import static org.elasticsearch.xcontent.XContentType.JSON;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group

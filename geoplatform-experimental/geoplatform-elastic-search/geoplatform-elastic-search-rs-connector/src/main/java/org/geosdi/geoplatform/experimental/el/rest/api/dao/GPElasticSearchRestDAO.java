@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.experimental.el.rest.api.dao;
 
 import org.elasticsearch.action.bulk.BulkResponse;
-import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.xcontent.XContentBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.reindex.BulkByScrollResponse;
 import org.elasticsearch.index.reindex.DeleteByQueryRequest;

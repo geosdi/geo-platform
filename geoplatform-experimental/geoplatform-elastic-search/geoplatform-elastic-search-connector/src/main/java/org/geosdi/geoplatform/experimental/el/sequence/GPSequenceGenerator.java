@@ -51,7 +51,7 @@ import javax.annotation.Resource;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
-import static org.elasticsearch.common.xcontent.XContentType.JSON;
+import static org.elasticsearch.xcontent.XContentType.JSON;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

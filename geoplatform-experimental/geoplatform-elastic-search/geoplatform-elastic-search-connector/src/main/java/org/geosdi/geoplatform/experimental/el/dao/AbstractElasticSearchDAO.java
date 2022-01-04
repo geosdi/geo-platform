@@ -65,7 +65,7 @@ import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 import static javax.annotation.meta.When.NEVER;
 import static org.elasticsearch.action.DocWriteResponse.Result.DELETED;
-import static org.elasticsearch.common.xcontent.XContentType.JSON;
+import static org.elasticsearch.xcontent.XContentType.JSON;
 import static org.geosdi.geoplatform.experimental.el.condition.PredicateCondition.EMPTY_PREDICATE;
 
 /**

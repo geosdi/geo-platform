@@ -43,7 +43,7 @@ import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.Cancellable;
 import org.elasticsearch.client.core.CountRequest;
 import org.elasticsearch.client.core.CountResponse;
-import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.xcontent.XContentBuilder;
 import org.elasticsearch.index.reindex.BulkByScrollResponse;
 import org.elasticsearch.index.reindex.DeleteByQueryRequest;
 import org.elasticsearch.index.reindex.UpdateByQueryRequest;
@@ -63,7 +63,7 @@ import static java.lang.Boolean.TRUE;
 import static javax.annotation.meta.When.NEVER;
 import static org.elasticsearch.action.DocWriteResponse.Result.CREATED;
 import static org.elasticsearch.client.RequestOptions.DEFAULT;
-import static org.elasticsearch.common.xcontent.XContentType.JSON;
+import static org.elasticsearch.xcontent.XContentType.JSON;
 import static org.elasticsearch.rest.RestStatus.OK;
 import static org.geosdi.geoplatform.experimental.el.api.response.IGPUpdateResponse.of;
 

@@ -48,7 +48,7 @@ import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.client.indices.GetIndexRequest;
 import org.elasticsearch.common.Strings;
-import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.xcontent.XContentBuilder;
 import org.geosdi.geoplatform.experimental.el.api.function.GPElasticSearchCheck;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.rest.api.dao.mapping.ElasticSeachRestMappingDAO;
@@ -64,7 +64,10 @@ import static javax.annotation.meta.When.NEVER;
 import static org.elasticsearch.action.DocWriteRequest.OpType.INDEX;
 import static org.elasticsearch.action.DocWriteResponse.Result.CREATED;
 import static org.elasticsearch.client.RequestOptions.DEFAULT;
-import static org.elasticsearch.common.xcontent.XContentType.JSON;
+
+import static org.elasticsearch.xcontent.XContentType.JSON;
+import static org.springframework.core.env.Profiles.of;
+>>>>>>> bcbdc559ad (Changing Api after Updating ElasticSearch Version)
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

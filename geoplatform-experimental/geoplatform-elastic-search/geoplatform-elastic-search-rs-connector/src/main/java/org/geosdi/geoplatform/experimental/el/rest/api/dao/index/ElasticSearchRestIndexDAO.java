@@ -67,7 +67,6 @@ import static org.elasticsearch.client.RequestOptions.DEFAULT;
 
 import static org.elasticsearch.xcontent.XContentType.JSON;
 import static org.springframework.core.env.Profiles.of;
->>>>>>> bcbdc559ad (Changing Api after Updating ElasticSearch Version)
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

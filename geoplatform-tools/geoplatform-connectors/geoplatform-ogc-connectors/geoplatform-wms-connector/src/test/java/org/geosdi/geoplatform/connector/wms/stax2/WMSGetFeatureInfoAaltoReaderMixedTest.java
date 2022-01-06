@@ -113,6 +113,9 @@ public class WMSGetFeatureInfoAaltoReaderMixedTest {
         List<Feature> corsiAcque = wmsFeatureStore.getFeaturesByKey("ait_corsi_acqua_2018");
         assertNotNull(corsiAcque);
         assertTrue(corsiAcque.size() == 6);
+        List<Feature> elementiRidotti = wmsFeatureStore.getFeaturesByKey("elem_ridotto_2");
+        assertNotNull(elementiRidotti);
+        assertTrue(elementiRidotti.size() == 7);
         fromIterable(wmsFeatureStore.getStore().entrySet())
                 .subscribe(k -> logger.info("###############{} - size : {}\n", k.getKey(), k.getValue().size()));
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreAaltoMIXED_FEATURES")

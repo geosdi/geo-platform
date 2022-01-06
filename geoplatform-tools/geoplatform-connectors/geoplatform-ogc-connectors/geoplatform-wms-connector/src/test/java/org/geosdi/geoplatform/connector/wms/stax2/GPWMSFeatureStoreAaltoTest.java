@@ -450,4 +450,12 @@ public class GPWMSFeatureStoreAaltoTest extends WMSGetFeatureInfoAaltoReaderTest
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreAaltoParchiRegionaliRiserve")
                 .collect(joining(separator, "", ".json"))), wmsFeatureStore);
     }
+
+    @Test
+    public void c_e_wmsFeatureStoreAaltoReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoReader.readAsStore(storage.find("ElementiRidotti.xml"));
+        logger.info("#######################FEATURE_STORE_ElementiRidotti : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreAaltoElementiRidotti")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
 }

@@ -113,6 +113,9 @@ public class WMSGetFeatureInfoStaxReaderMixedTest {
         List<Feature> corsiAcque = wmsFeatureStore.getFeaturesByKey("ait_corsi_acqua_2018");
         assertNotNull(corsiAcque);
         assertTrue(corsiAcque.size() == 6);
+        List<Feature> elementiRidotti = wmsFeatureStore.getFeaturesByKey("elem_ridotto_2");
+        assertNotNull(elementiRidotti);
+        assertTrue(elementiRidotti.size() == 7);
         fromIterable(wmsFeatureStore.getStore().entrySet())
                 .doOnComplete(() -> logger.info("@@@@@@@@@@@@@@@@@@RX Terminated its work."))
                 .subscribe(k -> logger.info("###############{} - size : {}\n", k.getKey(), k.getValue().size()));

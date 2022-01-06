@@ -73,7 +73,7 @@ public class GPJAXBContextBuilderPoolTest {
         car.setCarParts(createCarParts(25));
         StringWriter writer = new StringWriter();
         GP_JAXB_CONTEXT_BUILDER_POOL.marshal(car, writer);
-        logger.info("###########################MARSHALL_CAR_AS_STRING : \n{}\n", writer.toString());
+        logger.info("###########################MARSHALL_CAR_AS_STRING : \n{}\n", writer);
     }
 
     @Test
@@ -82,7 +82,8 @@ public class GPJAXBContextBuilderPoolTest {
         car.setModel("MERCEDES BENZ");
         car.setPlat("yht6656");
         car.setCarParts(createCarParts(50));
-        GP_JAXB_CONTEXT_BUILDER_POOL.marshal(car, new File("./target/CarPool.xml"));
+        GP_JAXB_CONTEXT_BUILDER_POOL.marshal(car, new File(of(new File(".").getCanonicalPath(), "target", "CarPool")
+                .collect(joining(separator, "", ".xml"))));
     }
 
     @Test

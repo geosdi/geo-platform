@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE WMS_DescribeLayerResponse SYSTEM
+        "http://mappe.regione.toscana.it:80/geoserver/schemas/wms/1.1.1/WMS_DescribeLayerResponse.dtd">
+<WMS_DescribeLayerResponse version="1.1.1">
+    <LayerDescription name="extra_rt_webgis:elem_ridotto_2" wfs="http://mappe.regione.toscana.it:80/geoserver/wfs?"
+                      owsURL="http://mappe.regione.toscana.it:80/geoserver/wfs?" owsType="WFS">
+        <Query typeName="extra_rt_webgis:elem_ridotto_2"/>
+    </LayerDescription>
+    <LayerDescription name="extra_rt_webgis:cen_abi_a_polygon" wfs="http://mappe.regione.toscana.it:80/geoserver/wfs?"
+                      owsURL="http://mappe.regione.toscana.it:80/geoserver/wfs?" owsType="WFS">
+        <Query typeName="extra_rt_webgis:cen_abi_a_polygon"/>
+    </LayerDescription>
+    <LayerDescription name="extra_rt_webgis:strade_regionali" wfs="http://mappe.regione.toscana.it:80/geoserver/wfs?"
+                      owsURL="http://mappe.regione.toscana.it:80/geoserver/wfs?" owsType="WFS">
+        <Query typeName="extra_rt_webgis:strade_regionali"/>
+    </LayerDescription>
+</WMS_DescribeLayerResponse>

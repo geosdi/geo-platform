@@ -123,4 +123,14 @@ public class WMSGetMapBaseRequestTest {
                 .build();
         logger.info("@@@@@@@@@@@@@@@@@@@@@@GET_MAP_JSON_STRING : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(wmsGetMapBaseRequest));
     }
+
+    @Test
+    public void i_wmsGetMapKeyValuePairTest() throws Exception {
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = builder().withKeyValuePair("service=WMS&version=1.1.0" +
+                        "&request=GetMap&layers=extra_rt_webgis:strade_comunali&styles=" +
+                        "&bbox=1557923.125,4690438.5,1771935.0,4923962.5&width=703&height=768&srs=EPSG:3003&format=application/openlayers&")
+                .build();
+        assertTrue(wmsGetMapBaseRequest.toWMSKeyValuePair().equalsIgnoreCase("LAYERS=extra_rt_webgis:strade_comunali&SRS=EPSG:3003&BBOX=1557923.125,4690438.5,1771935.0,4923962.5&WIDTH=703&HEIGHT=768"));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@GET_MAP_JSON_STRING : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(wmsGetMapBaseRequest));
+    }
 }

@@ -71,29 +71,20 @@ public class WMSV130UnmarshallTest {
     }
     //
     private static final GPBaseJAXBContext wmsContext;
-    private static File wmsGetCapabilitiesFile;
-    private static File wmsGetCapabilitiesCartaFitoclimatica;
-    private static File wmsGetCapabilitiesCartaGeolitologica;
-    private static File wmsGetCapabilitiesCnrIrea;
-    private static File wmsGetCapabilitiesPiemonte;
+    private static String basePath;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
         assertNotNull(wmsContext);
         assertTrue(wmsContext instanceof WMSJAXBContext);
         assertTrue(((WMSJAXBContext) wmsContext).getVersion() == V130);
-        String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources")
+        basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources")
                 .collect(joining(separator, "", separator));
-        wmsGetCapabilitiesFile = new File(basePath.concat("getcapabilities_1.3.0.xml"));
-        wmsGetCapabilitiesCartaFitoclimatica = new File(basePath.concat("cartaFitoclimaticaV130.xml"));
-        wmsGetCapabilitiesCartaGeolitologica = new File(basePath.concat("cartaGeolitologicaV130.xml"));
-        wmsGetCapabilitiesCnrIrea = new File(basePath.concat("getcapabilities_1.3.0_cnr_irea.xml"));
-        wmsGetCapabilitiesPiemonte = new File(basePath.concat("getCapabilities_1.3.0_piemonte.xml"));
     }
 
     @Test
     public void a_unmarshallWMSGetCapabilitiesV130Test() throws Exception {
-        WMSCapabilities wmsCapabilities = (WMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(wmsGetCapabilitiesFile);
+        WMSCapabilities wmsCapabilities = (WMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(new File(basePath.concat("getcapabilities_1.3.0.xml")));
         logger.info("#######################WMSGetCapabilitiesV130 : {}\n", wmsCapabilities);
         StringWriter writer = new StringWriter();
         wmsContext.acquireMarshaller().marshal(wmsCapabilities, new File(of(new File(".").getCanonicalPath(), "target", "WMSGetCapabilitiesV130.xml")
@@ -103,7 +94,7 @@ public class WMSV130UnmarshallTest {
 
     @Test
     public void b_unmarshallWMSGetCapabilitiesV130Test() throws Exception {
-        WMSCapabilities wmsCapabilities = (WMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(wmsGetCapabilitiesCartaFitoclimatica);
+        WMSCapabilities wmsCapabilities = (WMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(new File(basePath.concat("cartaFitoclimaticaV130.xml")));
         logger.info("#######################WMSGetCapabilitiesCartaFitoclimaticaV130 : {}\n", wmsCapabilities);
         StringWriter writer = new StringWriter();
         wmsContext.acquireMarshaller().marshal(wmsCapabilities, new File( of(new File(".").getCanonicalPath(), "target", "WMSGetCapabilitiesCartaFitoclimaticaV130.xml")
@@ -113,7 +104,7 @@ public class WMSV130UnmarshallTest {
 
     @Test
     public void c_unmarshallWMSGetCapabilitiesV130Test() throws Exception {
-        WMSCapabilities wmsCapabilities = (WMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(wmsGetCapabilitiesCartaGeolitologica);
+        WMSCapabilities wmsCapabilities = (WMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(new File(basePath.concat("cartaGeolitologicaV130.xml")));
         logger.info("#######################WMSGetCapabilitiesCartaGeologicaV130 : {}\n", wmsCapabilities);
         StringWriter writer = new StringWriter();
         wmsContext.acquireMarshaller().marshal(wmsCapabilities, new File(of(new File(".").getCanonicalPath(), "target", "WMSGetCapabilitiesCartaGeologicaV130.xml")
@@ -123,7 +114,7 @@ public class WMSV130UnmarshallTest {
 
     @Test
     public void d_unmarshallWMSGetCapabilitiesV130Test() throws Exception {
-        WMSCapabilities wmsCapabilities = (WMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(wmsGetCapabilitiesCnrIrea);
+        WMSCapabilities wmsCapabilities = (WMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(new File(basePath.concat("getcapabilities_1.3.0_cnr_irea.xml")));
         logger.info("#######################WMSGetCapabilitiesCnrIreaV130 : {}\n", wmsCapabilities);
         StringWriter writer = new StringWriter();
         wmsContext.acquireMarshaller().marshal(wmsCapabilities, new File(of(new File(".").getCanonicalPath(), "target", "WMSGetCapabilitiesCnrIreaV130.xml")
@@ -133,11 +124,21 @@ public class WMSV130UnmarshallTest {
 
     @Test
     public void e_unmarshallWMSGetCapabilitiesV130Test() throws Exception {
-        WMSCapabilities wmsCapabilities = (WMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(wmsGetCapabilitiesPiemonte);
+        WMSCapabilities wmsCapabilities = (WMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(new File(basePath.concat("getCapabilities_1.3.0_piemonte.xml")));
         logger.info("#######################WMSGetCapabilitiesPiemonteV130 : {}\n", wmsCapabilities);
         StringWriter writer = new StringWriter();
         wmsContext.acquireMarshaller().marshal(wmsCapabilities, new File(of(new File(".").getCanonicalPath(), "target", "WMSGetCapabilitiesPiemonteV130.xml")
                 .collect(joining(separator))));
         logger.debug("######################WMSGetCapabilitiesPiemonteV130-String : \n{}\n", writer);
+    }
+
+    @Test
+    public void f_unmarshallWMSGetCapabilitiesV130Test() throws Exception {
+        WMSCapabilities wmsCapabilities = (WMSCapabilities) wmsContext.acquireUnmarshaller().unmarshal(new File(basePath.concat("getCapabilities_1.3.0_toscana.xml")));
+        logger.info("#######################WMSGetCapabilitiesToscanaV130 : {}\n", wmsCapabilities);
+        StringWriter writer = new StringWriter();
+        wmsContext.acquireMarshaller().marshal(wmsCapabilities, new File(of(new File(".").getCanonicalPath(), "target", "WMSGetCapabilitiesToscanaV130.xml")
+                .collect(joining(separator))));
+        logger.debug("######################WMSGetCapabilitiesToscanaV130-String : \n{}\n", writer);
     }
 }

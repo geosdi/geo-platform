@@ -178,4 +178,14 @@ public class GPWMSGetMapBaseRequestBuilderTest {
                         "&format=application/openlayers")
                 .build());
     }
+
+    @Test
+    public void r_wmsGetMapBaseRequestBuilderTest() throws Exception {
+        logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
+                .withKeyValuePair("https://mappe.regione.toscana.it/geoserver/extra_rt_webgis/wms" +
+                        "?service=WMS&version=1.1.0&request=GetMap&layers=extra_rt_webgis:elem_ridotto_2&styles=" +
+                        "&bbox=1557289.25,4679916.5,1771408.5,4924609.5&width=672&height=768" +
+                        "&srs=EPSG:3003&format=application/openlayers")
+                .build());
+    }
 }

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.wms;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,24 +51,35 @@ import java.util.Map;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class XmlToMapTest {
 
     private static final Logger logger = LoggerFactory.getLogger(XmlToMapTest.class);
 
     @Test
-    public void readXmlAsMapTest() throws Exception {
+    public void a_readXmlAsMapTest() throws Exception {
         MapDataCollectorHandler handler = new MapDataCollectorHandler();
         SAXParserFactory.newInstance().newSAXParser().parse(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "stax", "ABR_Comuni.xml")
                 .collect(joining(separator))), handler);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@RESULT : {}\n", handler);
     }
 
+    @Test
+    public void b_readXmlAsMapTest() throws Exception {
+        MapDataCollectorHandler handler = new MapDataCollectorHandler();
+        SAXParserFactory.newInstance().newSAXParser().parse(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "stax", "ABR_CaveAttive.xml")
+                .collect(joining(separator))), handler);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@RESULT : {}\n", handler);
+    }
+
     static class MapDataCollectorHandler extends DefaultHandler {
+
         private final StringBuilder buffer = new StringBuilder();
         private final Map<String, Object> result = new LinkedHashMap();
 

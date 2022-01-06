@@ -497,4 +497,12 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxParchiRegionaliRiserve")
                 .collect(joining(separator, "", ".json"))), wmsFeatureStore);
     }
+
+    @Test
+    public void c_m_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("ElementiRidotti.xml"));
+        logger.info("#######################FEATURE_STORE_ELEMENTI_RIDOTTI : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxElementiRidotti")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
 }

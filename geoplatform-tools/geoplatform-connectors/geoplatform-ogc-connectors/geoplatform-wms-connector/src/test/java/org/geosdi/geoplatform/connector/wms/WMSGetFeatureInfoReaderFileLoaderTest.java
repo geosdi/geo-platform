@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.junit.BeforeClass;
 
+import javax.annotation.Nonnull;
 import java.io.File;
 import java.util.LinkedHashMap;
 
@@ -50,6 +51,7 @@ import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
 import static java.util.stream.Stream.of;
+import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
@@ -65,11 +67,12 @@ public class WMSGetFeatureInfoReaderFileLoaderTest {
             WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE, NON_NULL);
     //
+    private static String basePath;
     protected static IGPConnectorFileStorage storage;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "stax")
+        basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "stax")
                 .collect(joining(separator, "", separator));
         storage = IGPConnectorFileStorage.of(of("geoserver-Vigneti-GetFeatureInfo.xml", "geoserver-GetFeatureInfo.xml",
                 "geoserver-GetFeatureInfo1.xml", "geoserver-GetFeatureInfo-Point.xml",
@@ -92,8 +95,16 @@ public class WMSGetFeatureInfoReaderFileLoaderTest {
                 "laghi.xml", "viabilità.xml", "vincoli.xml", "CorsiAcque.xml", "NavteqStreet.xml",
                 "CAMPIndustrieARischio.xml", "layer_importer148.xml", "fluids_rete_zk.xml", "AreeBonifica.xml",
                 "CentraliElettriche.xml", "features.xml", "Geositi.xml", "ADBRisk.xml", "PoliziaIDR.xml",
-                "ParchiRegionaliRiserve.xml", "ReteGeodetica.xml")
-                .map(value -> new GPConnectorFile(value, new File(basePath.concat(value))))
+                "ParchiRegionaliRiserve.xml", "ReteGeodetica.xml", "ElementiRidotti.xml")
+                .map(WMSGetFeatureInfoReaderFileLoaderTest::toGPConnectorFile)
                 .collect(toMap(IGPConnectorFile::getKey, identity(), (v1, v2) -> v1, LinkedHashMap::new)));
+    }
+
+    /**
+     * @param theValue
+     * @return {@link  GPConnectorFile}
+     */
+    static GPConnectorFile toGPConnectorFile(@Nonnull(when = NEVER) String theValue) {
+        return new GPConnectorFile(theValue, new File(basePath.concat(theValue)));
     }
 }

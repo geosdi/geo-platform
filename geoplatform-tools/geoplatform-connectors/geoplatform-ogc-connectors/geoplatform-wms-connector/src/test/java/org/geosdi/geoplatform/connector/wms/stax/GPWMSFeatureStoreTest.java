@@ -642,4 +642,12 @@ public class GPWMSFeatureStoreTest extends WMSGetFeatureInfoStaxReaderTest {
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "ElementiRidotti.json")
                 .collect(joining(separator))), wmsFeatureStore);
     }
+
+    @Test
+    public void d_e_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("UsoSuoloRT.xml"));
+        logger.info("#######################FEATURE_STORE_USO_SUOLO_RT : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "UsoSuoloRT.json")
+                .collect(joining(separator))), wmsFeatureStore);
+    }
 }

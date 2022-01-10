@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE WMS_DescribeLayerResponse SYSTEM
+        "https://geoportale.lamma.rete.toscana.it/geoserver_clima/schemas/wms/1.1.1/WMS_DescribeLayerResponse.dtd">
+<WMS_DescribeLayerResponse version="1.1.1">
+    <LayerDescription name="MonUsoSuoloRT:lotto09"
+                      wfs="https://geoportale.lamma.rete.toscana.it/geoserver_clima/wfs/WfsDispatcher?"
+                      owsURL="https://geoportale.lamma.rete.toscana.it/geoserver_clima/wfs/WfsDispatcher?"
+                      owsType="WFS">
+        <Query typeName="MonUsoSuoloRT:lotto09"/>
+    </LayerDescription>
+    <LayerDescription name="MonUsoSuoloRT:lotto19"
+                      wfs="https://geoportale.lamma.rete.toscana.it/geoserver_clima/wfs/WfsDispatcher?"
+                      owsURL="https://geoportale.lamma.rete.toscana.it/geoserver_clima/wfs/WfsDispatcher?"
+                      owsType="WFS">
+        <Query typeName="MonUsoSuoloRT:lotto19"/>
+    </LayerDescription>
+    <LayerDescription name="MonUsoSuoloRT:lotto20"
+                      wfs="https://geoportale.lamma.rete.toscana.it/geoserver_clima/wfs/WfsDispatcher?"
+                      owsURL="https://geoportale.lamma.rete.toscana.it/geoserver_clima/wfs/WfsDispatcher?"
+                      owsType="WFS">
+        <Query typeName="MonUsoSuoloRT:lotto20"/>
+    </LayerDescription>
+    <LayerDescription name="MonUsoSuoloRT:lotto14"
+                      wfs="https://geoportale.lamma.rete.toscana.it/geoserver_clima/wfs/WfsDispatcher?"
+                      owsURL="https://geoportale.lamma.rete.toscana.it/geoserver_clima/wfs/WfsDispatcher?"
+                      owsType="WFS">
+        <Query typeName="MonUsoSuoloRT:lotto14"/>
+    </LayerDescription>
+    <LayerDescription name="MonUsoSuoloRT:lotto15"
+                      wfs="https://geoportale.lamma.rete.toscana.it/geoserver_clima/wfs/WfsDispatcher?"
+                      owsURL="https://geoportale.lamma.rete.toscana.it/geoserver_clima/wfs/WfsDispatcher?"
+                      owsType="WFS">
+        <Query typeName="MonUsoSuoloRT:lotto15"/>
+    </LayerDescription>
+    <LayerDescription name="MonUsoSuoloRT:lotto06"
+                      wfs="https://geoportale.lamma.rete.toscana.it/geoserver_clima/wfs/WfsDispatcher?"
+                      owsURL="https://geoportale.lamma.rete.toscana.it/geoserver_clima/wfs/WfsDispatcher?"
+                      owsType="WFS">
+        <Query typeName="MonUsoSuoloRT:lotto06"/>
+    </LayerDescription>
+</WMS_DescribeLayerResponse>

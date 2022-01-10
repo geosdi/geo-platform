@@ -95,7 +95,7 @@ public class WMSGetFeatureInfoReaderFileLoaderTest {
                 "laghi.xml", "viabilità.xml", "vincoli.xml", "CorsiAcque.xml", "NavteqStreet.xml",
                 "CAMPIndustrieARischio.xml", "layer_importer148.xml", "fluids_rete_zk.xml", "AreeBonifica.xml",
                 "CentraliElettriche.xml", "features.xml", "Geositi.xml", "ADBRisk.xml", "PoliziaIDR.xml",
-                "ParchiRegionaliRiserve.xml", "ReteGeodetica.xml", "ElementiRidotti.xml")
+                "ParchiRegionaliRiserve.xml", "ReteGeodetica.xml", "ElementiRidotti.xml", "UsoSuoloRT.xml")
                 .map(WMSGetFeatureInfoReaderFileLoaderTest::toGPConnectorFile)
                 .collect(toMap(IGPConnectorFile::getKey, identity(), (v1, v2) -> v1, LinkedHashMap::new)));
     }

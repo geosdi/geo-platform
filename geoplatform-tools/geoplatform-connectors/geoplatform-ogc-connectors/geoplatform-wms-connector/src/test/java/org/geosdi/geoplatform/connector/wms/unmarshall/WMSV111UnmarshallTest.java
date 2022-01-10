@@ -93,7 +93,7 @@ public class WMSV111UnmarshallTest {
     }
 
     @Test
-    public void a_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+    public void a_a_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
         XMLReader xmlReader = spf.newSAXParser().getXMLReader();
         InputSource inputSource = new InputSource(new FileReader(basePath.concat("getcapabilities_1.1.1.xml")));
         SAXSource source = new SAXSource(xmlReader, inputSource);
@@ -105,7 +105,7 @@ public class WMSV111UnmarshallTest {
     }
 
     @Test
-    public void b_unmarshallWMSDescribeLayerV111Test() throws Exception {
+    public void a_b_unmarshallWMSDescribeLayerV111Test() throws Exception {
         XMLReader xmlReader = spf.newSAXParser().getXMLReader();
         InputSource inputSource = new InputSource(new FileReader(basePath.concat("describeLayer-111.xml")));
         SAXSource source = new SAXSource(xmlReader, inputSource);
@@ -118,7 +118,7 @@ public class WMSV111UnmarshallTest {
     }
 
     @Test
-    public void c_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+    public void a_c_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
         XMLReader xmlReader = spf.newSAXParser().getXMLReader();
         InputSource inputSource = new InputSource(new FileReader(basePath.concat("ogc_v1.1.1.xml")));
         SAXSource source = new SAXSource(xmlReader, inputSource);
@@ -130,7 +130,7 @@ public class WMSV111UnmarshallTest {
     }
 
     @Test
-    public void d_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+    public void a_d_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
         XMLReader xmlReader = spf.newSAXParser().getXMLReader();
         InputSource inputSource = new InputSource(new FileReader(basePath.concat("ogc.xml")));
         SAXSource source = new SAXSource(xmlReader, inputSource);
@@ -142,7 +142,7 @@ public class WMSV111UnmarshallTest {
     }
 
     @Test
-    public void e_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+    public void a_e_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
         XMLReader xmlReader = spf.newSAXParser().getXMLReader();
         InputSource inputSource = new InputSource(new FileReader(basePath.concat("cartaFitoclimatica.xml")));
         SAXSource source = new SAXSource(xmlReader, inputSource);
@@ -154,7 +154,7 @@ public class WMSV111UnmarshallTest {
     }
 
     @Test
-    public void f_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+    public void a_f_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
         XMLReader xmlReader = spf.newSAXParser().getXMLReader();
         InputSource inputSource = new InputSource(new FileReader(basePath.concat("cartaGeolitologica.xml")));
         SAXSource source = new SAXSource(xmlReader, inputSource);
@@ -166,7 +166,7 @@ public class WMSV111UnmarshallTest {
     }
 
     @Test
-    public void g_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+    public void a_g_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
         XMLReader xmlReader = spf.newSAXParser().getXMLReader();
         InputSource inputSource = new InputSource(new FileReader(basePath.concat("catalogoFrane.xml")));
         SAXSource source = new SAXSource(xmlReader, inputSource);
@@ -178,7 +178,7 @@ public class WMSV111UnmarshallTest {
     }
 
     @Test
-    public void h_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+    public void a_h_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
         XMLReader xmlReader = spf.newSAXParser().getXMLReader();
         InputSource inputSource = new InputSource(new FileReader(basePath.concat("classificazioneSismica2012.xml")));
         SAXSource source = new SAXSource(xmlReader, inputSource);
@@ -190,7 +190,7 @@ public class WMSV111UnmarshallTest {
     }
 
     @Test
-    public void i_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+    public void a_i_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
         XMLReader xmlReader = spf.newSAXParser().getXMLReader();
         InputSource inputSource = new InputSource(new FileReader(basePath.concat("WMSIspraCoste.xml")));
         SAXSource source = new SAXSource(xmlReader, inputSource);
@@ -202,7 +202,7 @@ public class WMSV111UnmarshallTest {
     }
 
     @Test
-    public void l_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+    public void a_l_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
         XMLReader xmlReader = spf.newSAXParser().getXMLReader();
         InputSource inputSource = new InputSource(new FileReader(basePath.concat("WMSIspraGetCapabilities.xml")));
         SAXSource source = new SAXSource(xmlReader, inputSource);
@@ -214,7 +214,7 @@ public class WMSV111UnmarshallTest {
     }
 
     @Test
-    public void m_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+    public void a_m_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
         XMLReader xmlReader = spf.newSAXParser().getXMLReader();
         InputSource inputSource = new InputSource(new FileReader(basePath.concat("WMSIspraGetCapabilities.xml")));
         SAXSource source = new SAXSource(xmlReader, inputSource);
@@ -226,7 +226,7 @@ public class WMSV111UnmarshallTest {
     }
 
     @Test
-    public void n_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+    public void a_n_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
         XMLReader xmlReader = spf.newSAXParser().getXMLReader();
         InputSource inputSource = new InputSource(new FileReader(basePath.concat("serviziProtezioneCivileGetCapV1.1.1.xml")));
         SAXSource source = new SAXSource(xmlReader, inputSource);
@@ -238,7 +238,7 @@ public class WMSV111UnmarshallTest {
     }
 
     @Test
-    public void o_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+    public void a_o_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
         XMLReader xmlReader = spf.newSAXParser().getXMLReader();
         InputSource inputSource = new InputSource(new FileReader(basePath.concat("WMSPrositGetCapabilities.xml")));
         SAXSource source = new SAXSource(xmlReader, inputSource);
@@ -250,7 +250,7 @@ public class WMSV111UnmarshallTest {
     }
 
     @Test
-    public void p_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+    public void a_p_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
         XMLReader xmlReader = spf.newSAXParser().getXMLReader();
         InputSource inputSource = new InputSource(new FileReader(basePath.concat("WMSGetCapabilities_1.1.1.xml")));
         SAXSource source = new SAXSource(xmlReader, inputSource);
@@ -261,7 +261,7 @@ public class WMSV111UnmarshallTest {
     }
 
     @Test
-    public void q_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+    public void a_q_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
         XMLReader xmlReader = spf.newSAXParser().getXMLReader();
         InputSource inputSource = new InputSource(new FileReader(basePath.concat("getcapabilitiesCnrIrea_1.1.1.xml")));
         SAXSource source = new SAXSource(xmlReader, inputSource);
@@ -272,7 +272,7 @@ public class WMSV111UnmarshallTest {
     }
 
     @Test
-    public void r_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+    public void a_r_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
         XMLReader xmlReader = spf.newSAXParser().getXMLReader();
         InputSource inputSource = new InputSource(new FileReader(basePath.concat("getCapabilities_1.1.1_piemonte.xml")));
         SAXSource source = new SAXSource(xmlReader, inputSource);
@@ -283,7 +283,7 @@ public class WMSV111UnmarshallTest {
     }
 
     @Test
-    public void s_unmarshallWMSDescribeLayerV111Test() throws Exception {
+    public void a_s_unmarshallWMSDescribeLayerV111Test() throws Exception {
         XMLReader xmlReader = spf.newSAXParser().getXMLReader();
         InputSource inputSource = new InputSource(new FileReader(basePath.concat("describeLayer_1-111.xml")));
         SAXSource source = new SAXSource(xmlReader, inputSource);
@@ -296,7 +296,7 @@ public class WMSV111UnmarshallTest {
     }
 
     @Test
-    public void t_unmarshallWMSDescribeLayerV111Test() throws Exception {
+    public void a_t_unmarshallWMSDescribeLayerV111Test() throws Exception {
         XMLReader xmlReader = spf.newSAXParser().getXMLReader();
         InputSource inputSource = new InputSource(new FileReader(basePath.concat("describeLayer_2-111.xml")));
         SAXSource source = new SAXSource(xmlReader, inputSource);
@@ -309,7 +309,7 @@ public class WMSV111UnmarshallTest {
     }
 
     @Test
-    public void u_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
+    public void a_u_unmarshallWMSGetCapabilitiesV111Test() throws Exception {
         XMLReader xmlReader = spf.newSAXParser().getXMLReader();
         InputSource inputSource = new InputSource(new FileReader(basePath.concat("getCapabilities_1.1.1_toscana.xml")));
         SAXSource source = new SAXSource(xmlReader, inputSource);
@@ -317,5 +317,18 @@ public class WMSV111UnmarshallTest {
         StringWriter writer = new StringWriter();
         wmsContext.acquireMarshaller().marshal(wmsCapabilities, writer);
         logger.info("######################WMSGetCapabilitiesV111-String : \n{}\n", writer);
+    }
+
+    @Test
+    public void a_v_unmarshallWMSDescribeLayerV111Test() throws Exception {
+        XMLReader xmlReader = spf.newSAXParser().getXMLReader();
+        InputSource inputSource = new InputSource(new FileReader(basePath.concat("describeLayer_3-111.xml")));
+        SAXSource source = new SAXSource(xmlReader, inputSource);
+        WMSDescribeLayerResponse wmsDescribeLayerResponse = (WMSDescribeLayerResponse) wmsContext.acquireUnmarshaller()
+                .unmarshal(source);
+        logger.info("#######################WMSDescribeLayerResponseV111 : {}\n", wmsDescribeLayerResponse);
+        StringWriter writer = new StringWriter();
+        wmsContext.acquireMarshaller().marshal(wmsDescribeLayerResponse, writer);
+        logger.info("######################WMSDescribeLayerResponseV111-String : \n{}\n", writer);
     }
 }

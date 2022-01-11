@@ -45,6 +45,7 @@ import org.junit.BeforeClass;
 import javax.annotation.Nonnull;
 import java.io.File;
 import java.util.LinkedHashMap;
+import java.util.stream.Stream;
 
 import static java.io.File.separator;
 import static java.util.function.Function.identity;
@@ -74,7 +75,24 @@ public class WMSGetFeatureInfoReaderFileLoaderTest {
     public static void beforeClass() throws Exception {
         basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "stax")
                 .collect(joining(separator, "", separator));
-        storage = IGPConnectorFileStorage.of(of("geoserver-Vigneti-GetFeatureInfo.xml", "geoserver-GetFeatureInfo.xml",
+        storage = IGPConnectorFileStorage.of(toStreamFilesName()
+                .map(WMSGetFeatureInfoReaderFileLoaderTest::toGPConnectorFile)
+                .collect(toMap(IGPConnectorFile::getKey, identity(), (v1, v2) -> v1, LinkedHashMap::new)));
+    }
+
+    /**
+     * @param theValue
+     * @return {@link  GPConnectorFile}
+     */
+    static GPConnectorFile toGPConnectorFile(@Nonnull(when = NEVER) String theValue) {
+        return new GPConnectorFile(theValue, new File(basePath.concat(theValue)));
+    }
+
+    /**
+     * @return {@link  Stream<String>}
+     */
+    public static Stream<String> toStreamFilesName() {
+        return of("geoserver-Vigneti-GetFeatureInfo.xml", "geoserver-GetFeatureInfo.xml",
                 "geoserver-GetFeatureInfo1.xml", "geoserver-GetFeatureInfo-Point.xml",
                 "geoserver-GetFeatureInfo-MultiLineString.xml", "spearfish-GetFeatureInfo.xml",
                 "tasmaniaRoads-GetFeatureInfo.xml", "tasmaniaStates-GetFeatureInfo.xml", "tiger_ny-GetFeatureInfo.xml",
@@ -95,16 +113,14 @@ public class WMSGetFeatureInfoReaderFileLoaderTest {
                 "laghi.xml", "viabilità.xml", "vincoli.xml", "CorsiAcque.xml", "NavteqStreet.xml",
                 "CAMPIndustrieARischio.xml", "layer_importer148.xml", "fluids_rete_zk.xml", "AreeBonifica.xml",
                 "CentraliElettriche.xml", "features.xml", "Geositi.xml", "ADBRisk.xml", "PoliziaIDR.xml",
-                "ParchiRegionaliRiserve.xml", "ReteGeodetica.xml", "ElementiRidotti.xml", "UsoSuoloRT.xml")
-                .map(WMSGetFeatureInfoReaderFileLoaderTest::toGPConnectorFile)
-                .collect(toMap(IGPConnectorFile::getKey, identity(), (v1, v2) -> v1, LinkedHashMap::new)));
+                "ParchiRegionaliRiserve.xml", "ReteGeodetica.xml", "ElementiRidotti.xml", "UsoSuoloRT.xml",
+                "AlberiMonumentali.xml", "AcqueSecondarie.xml");
     }
 
     /**
-     * @param theValue
-     * @return {@link  GPConnectorFile}
+     * @return {@link String[]}
      */
-    static GPConnectorFile toGPConnectorFile(@Nonnull(when = NEVER) String theValue) {
-        return new GPConnectorFile(theValue, new File(basePath.concat(theValue)));
+    public static String[] toArrayFilesName() {
+        return toStreamFilesName().toArray(String[]::new);
     }
 }

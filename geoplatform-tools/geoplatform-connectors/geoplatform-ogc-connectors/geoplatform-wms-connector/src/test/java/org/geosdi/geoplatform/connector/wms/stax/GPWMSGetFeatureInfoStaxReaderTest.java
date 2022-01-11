@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.connector.wms.stax;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
@@ -374,7 +373,6 @@ public class GPWMSGetFeatureInfoStaxReaderTest extends WMSGetFeatureInfoStaxRead
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("VulcanoCampiIstat.xml"))));
     }
 
-    @Ignore(value = "Problem with jdk-11")
     @Test
     public void c_m_wmsGetFeatureInfoStaxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_CAMP_LAHARS : {}\n", JACKSON_SUPPORT.getDefaultMapper()
@@ -529,5 +527,17 @@ public class GPWMSGetFeatureInfoStaxReaderTest extends WMSGetFeatureInfoStaxRead
     public void d_o_wmsGetFeatureInfoStaxReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_USO_SUOLO_RT : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("UsoSuoloRT.xml"))));
+    }
+
+    @Test
+    public void d_p_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_ALBERI_MONUMENTALI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("AlberiMonumentali.xml"))));
+    }
+
+    @Test
+    public void d_q_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_ACQUE_SECONDARIE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("AcqueSecondarie.xml"))));
     }
 }

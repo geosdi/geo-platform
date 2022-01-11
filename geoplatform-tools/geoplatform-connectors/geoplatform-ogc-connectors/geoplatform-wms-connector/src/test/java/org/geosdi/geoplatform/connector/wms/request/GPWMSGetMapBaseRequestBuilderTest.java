@@ -188,4 +188,24 @@ public class GPWMSGetMapBaseRequestBuilderTest {
                         "&srs=EPSG:3003&format=application/openlayers")
                 .build());
     }
+
+    @Test
+    public void s_wmsGetMapBaseRequestBuilderTest() throws Exception {
+        logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
+                .withKeyValuePair("service=WMS&version=1.1.0&request=GetMap" +
+                        "&layers=Ospedale_maggiore:cessato_punti&styles=&bbox=8.920043852690128,45.323153911514," +
+                        "8.934401324999556,45.33530341761082&width=512&height=433" +
+                        "&srs=EPSG:4326&format=application/openlayers&test=prova")
+                .build());
+    }
+
+    @Test
+    public void t_wmsGetMapBaseRequestBuilderTest() throws Exception {
+        logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
+                .withKeyValuePair("service=WMS&version=1.1.0&request=GetMap" +
+                        "&layers=Ospedale_maggiore:punti&styles=&bbox=493440.1733799758,5018480.796821868," +
+                        "499690.55666285375,5024741.973964897&width=511&height=512" +
+                        "&srs=EPSG:32632&format=application/openlayers")
+                .build());
+    }
 }

@@ -505,4 +505,20 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxElementiRidotti")
                 .collect(joining(separator, "", ".json"))), wmsFeatureStore);
     }
+
+    @Test
+    public void c_n_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("AlberiMonumentali.xml"));
+        logger.info("#######################FEATURE_STORE_ALBERI_MONUMENTALI : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxAlberiMonumentali")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
+
+    @Test
+    public void c_o_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("AcqueSecondarie.xml"));
+        logger.info("#######################FEATURE_STORE_ACQUE_SECONDARIE : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxAcqueSecondarie")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
 }

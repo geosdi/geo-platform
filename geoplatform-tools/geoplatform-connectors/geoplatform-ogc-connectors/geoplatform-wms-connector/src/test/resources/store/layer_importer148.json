@@ -1,0 +1,356 @@
+{
+  "key" : "FEATURE_NAME",
+  "store" : {
+    "layer_importer148" : [ {
+      "type" : "Feature",
+      "properties" : {
+        "name" : "1 - Via Foria, 105",
+        "open" : "true",
+        "description" : "\n                ",
+        "tessellate" : "-1",
+        "extrude" : "0",
+        "gx_media_links" : "\n                https://lh5.googleusercontent.com/Vxk8ZCmwCOjYYiqm-EwJaqmRQd9PRxk7EQBVwyZUywEfJKaRL9SCP1F3nPhP-vQjdDSgSwMQ66YoyklND00M30idYbJYh0XVvxg9rG1vwifg5FIWO2jduiKUeUof-g27Hg\n                https://lh4.googleusercontent.com/A5dM04xoujOaEvFl6PPp6gvzu67KEPtMhD4wf5p4UXuurSlTbO4rRuoTW59Oz8S2byqwhx6XAg51dsxbGN19DXhfn792Lm16l-um_frgbAEwoWr_UG7PMd6lMWAmOS34\n                https://lh4.googleusercontent.com/IovYc9YhC_F3CjWgqTPbs_1xNAcgl41HEQx4DjKO_qPEpBJ35sZ4bogKrloywZusAV3zaO58a0S4ZR4TOTH9tYwe0rEicPAtZzIdGrZjMKTR-df7Or6TsMifqyccxX4\n            ",
+        "Folder" : "layer_importer"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.25949, 40.85749 ]
+      },
+      "id" : "layer_importer148.1"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "name" : "2 - Via Tenore",
+        "open" : "true",
+        "description" : "\n                ",
+        "tessellate" : "-1",
+        "extrude" : "0",
+        "gx_media_links" : "\n                https://lh3.googleusercontent.com/xwXGpdS6eTTb-fEtodr1Vquuz-ElXWWZrsS03ihQHDKtwqwY4ri4R5eoOwnhYxrG5ieAE4wExaBwq-VsFhOmJZ9QNpGPEzuctP228k8nehItgeth__Krunj5DzZm0Fo\n            ",
+        "Folder" : "layer_importer"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.2625232, 40.8595567 ]
+      },
+      "id" : "layer_importer148.2"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "name" : "4 - Via Cesare Rosaroll, 30",
+        "open" : "true",
+        "description" : "\n                ",
+        "tessellate" : "-1",
+        "extrude" : "0",
+        "gx_media_links" : "\n                https://lh3.googleusercontent.com/mYg6LGC8ij5O9ITkeph3CdRQkdriJy7pwyvzcEO_--1RXgSMQOPGIaLt4gF3zkmFoDRArKAdvvvFBQAGfN6s6IxaKzaf4sIq4gtKQc65IKjncrm3cp1G2WzURr_C4_FB\n                https://lh3.googleusercontent.com/iWpgxZay8A7i9Y6SZ28b-bfh3p9920zu3uq1XwuQJaU8fGvm54o5l_WKixXx9sfkerRyCmxqE0nCtgUoCatoM7FZcYfFacJPqbOCp9TkAtEMqR1D8Qc4OP0Msihhqkla\n            ",
+        "Folder" : "layer_importer"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.2657918, 40.8552186 ]
+      },
+      "id" : "layer_importer148.3"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "name" : "5 - Via San Vincenzo, 20",
+        "open" : "true",
+        "description" : "\n                ",
+        "tessellate" : "-1",
+        "extrude" : "0",
+        "gx_media_links" : "\n                https://lh5.googleusercontent.com/OABTa2XGPsrebAV9CqsWZMClZFFYU-vDSmQ4Z51wRS9-LVzeVq0JK2ZAj3Ux0EDwLid5qxZkH8M9JumFUQA7nSVb-ojMrxZqQN3GVZc9DvWg0T6ihYNQEG9Yeax0v_w\n                https://lh4.googleusercontent.com/OdaeT-IjqgcoGlFOiUboCE5KmoXgCjb0mJqCevD4ybXjVxr_lf2TnMPdC_aoJRHGY7FuKtufgkPHOfft3SNvZImy9ssuvsEkZpheOVTC0Jozd-oqWkMYSn-Z31Hr0ws\n                https://lh3.googleusercontent.com/QLUNMmOkDmchN75Eqks4wPlq5hc1N4XoQm_7tBd-MWToHoTYj-FiLNKKHVxGlRFBuXoFkgfidbNNRvVE52fd4m80rzIksRs6nERfz3kL6aAcmnHxP-LB0-oYmHOjKyo\n                https://lh3.googleusercontent.com/_Egc2wPikTeNFOcbWihgduDaNaGo8LzD1RvvHMT1QTU-TQFpcbf9djPRxXR7IvdQY9P45V8MVY3VYg6tdRV5Jo9KkqknwlCITKwSpHH63ElbN9xexyuVd3pln1kTy9w\n            ",
+        "Folder" : "layer_importer"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.2475697, 40.8602991 ]
+      },
+      "id" : "layer_importer148.4"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "name" : "5Bis - Salita Principi",
+        "open" : "true",
+        "description" : "\n                ",
+        "tessellate" : "-1",
+        "extrude" : "0",
+        "gx_media_links" : "\n                https://lh3.googleusercontent.com/OB8K9S0EOj2_mx1xxSakmrsH_3iW3JJnQowgfHgdiXAkMWN4Fs_CSi_1k3uboZhgBqDolthTSw83j-DIfRfawv3kn_BIw_eCteIkNoofsDRqVP_1iNtOO6Xo_t5jMapu\n            ",
+        "Folder" : "layer_importer"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.2473681, 40.8600678 ]
+      },
+      "id" : "layer_importer148.5"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "name" : "6 - Piazza Fontanelle, 94",
+        "open" : "true",
+        "description" : "\n                ",
+        "tessellate" : "-1",
+        "extrude" : "0",
+        "gx_media_links" : "\n                https://lh6.googleusercontent.com/n_4cgEryTE90StvDaJ3kahqsWHjJpk6m9KLuvZYhyWYGIEfttSlpl6U37zxN6Qq2Dib_PQEbRUZDYj3DbQj0RXfXVnK4f2OorHE7HUAKIWELLAI224LyAQ3SameJJiD0tg\n                https://lh5.googleusercontent.com/gOHMMVnQmUYj_42P65BkTYztC2pbmMq1F3L0JWjEeZO-at7NxoFLHeY0lQcNRcjSOKj7Ayl4lzCtF47r0mDBv2K_o8ZbA--ybROQjPlqURTeP8GhJkE9IPVjK3AzFj3i\n            ",
+        "Folder" : "layer_importer"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.2423919, 40.8591558 ]
+      },
+      "id" : "layer_importer148.6"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "name" : "6Bis - Via Scipione Mazzella",
+        "open" : "true",
+        "description" : "\n                ",
+        "tessellate" : "-1",
+        "extrude" : "0",
+        "gx_media_links" : "\n                https://lh3.googleusercontent.com/pPp8CN5wfNJ5ISe_nPxjOyyoqGTMUzPjBPMrqrq75zn_vaEXOleNafVpivIUjg_MwQSzeVKmmrOQs4EklJBIOOhi0ya7NJLF-_cvtBgvO67r3HaswV3R-AbzCN4-R-Zg\n            ",
+        "Folder" : "layer_importer"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.2420152, 40.8586178 ]
+      },
+      "id" : "layer_importer148.7"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "name" : "7 - Calata Fontanelle",
+        "open" : "true",
+        "description" : "\n                ",
+        "tessellate" : "-1",
+        "extrude" : "0",
+        "gx_media_links" : "\n                https://lh4.googleusercontent.com/q9pfquH-9NM6H7o__ggEh67klsEOT3Z9RlqPPWKMfe9H3LIGXaF4M0Sb6zCwTbbqL4LxpjObajZyklAc5ZXq1E64tT_TQJ20ySW7BIQxq2DOPGGHxOerqGJ85GTDrw1lVA\n                https://lh3.googleusercontent.com/IpuFBWjeeb6U48ZLlvCvgZL-DtdGnOEsi5Ww6jVD1Wf0v-VbDS9g23BJj1pjhcP2XDl1I-5JgkQDsIrquvM5bwYbj7VvWSpA0Yg4huGCOrCN4ch0zgJ9j88hHwX0Sl_O\n            ",
+        "Folder" : "layer_importer"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.245137, 40.8579967 ]
+      },
+      "id" : "layer_importer148.8"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "name" : "8 - Piazza Miracoli, 24",
+        "open" : "true",
+        "description" : "\n                ",
+        "tessellate" : "-1",
+        "extrude" : "0",
+        "gx_media_links" : "\n                https://lh3.googleusercontent.com/jBATFsdmg3EwfY797pQapbF5nHK3wUxa-XUJFUG7Jj4DxUQ8RgOWsmW3ySVMZ5YNgiZlvIqke8IC05Vw3-QVjiM9zpVooZ4Hs-ZKJK6G9PaYRaq_VZN11hIjG_qN9rs7\n                https://lh6.googleusercontent.com/C-MeljRI9vW_fKPyl53G1T4Pu5yVlI7XH88kOaRgazXSk7dwaAHMFwmtt56BAk-wMnKzLfkH7HgdKk1-5O8eXqJqFxaGnHAxb5j2D0gw5pr_ux8AzOBEROZWGBjzHzJm\n                https://lh3.googleusercontent.com/llhi0RX6qYFa4e4Dvh0ho55L1oJQeyjNzcgq-KPH7s6F9C1Nqp4zjUQ3Ku4RQj0YtlFwmyk7xZ6l95lv_l71QJnMgfHXUxDoUjYYkdhOMj4ApRnwJwsefb9PukfAyqNSew\n                https://lh6.googleusercontent.com/hUibfotK3Gl2FDcTox3X6SWxfmVy-CaK48FaIhmg06gxFeDZuWYU5TGAcKCQYfrdvsl9IhAmssD-g-hpbrn1aXRMSGcabX1JgP6SGpfMFBt1c8nTQUG-uMX3b9P5vEo\n                https://lh5.googleusercontent.com/UJPAM4xoRl1aFZNLqCSZzdckN1fkxhwzvJOjnbCSn5VHbWVMzA7gEhLypyMr9GA1bqzuKd3xwfejpk6-nPoZCcZ2aO21CFGcMRBjBQW_JpmRyh4hPgNKx4yxIprFmoTN\n            ",
+        "Folder" : "layer_importer"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.25563, 40.85877 ]
+      },
+      "id" : "layer_importer148.9"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "name" : "Salita Capodimonte, 110",
+        "open" : "true",
+        "tessellate" : "-1",
+        "extrude" : "0",
+        "Folder" : "layer_importer"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.253379, 40.8651986 ]
+      },
+      "id" : "layer_importer148.10"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "name" : "10 - Vico Pacella ai Miracoli, 50",
+        "open" : "true",
+        "description" : "\n                ",
+        "tessellate" : "-1",
+        "extrude" : "0",
+        "gx_media_links" : "\n                https://lh5.googleusercontent.com/TwmFi_jYS-iu2jFD_pxnYzLDBO-K4nPBWH14SFgRK8fQIvk0aHU11QEuc_N91PasWZ2qL2Wr9koUoGrNfB1zoWWbaowxqJrGUPEiztvmkRPRA6X6vtfH6p7poL5tvwcA\n                https://lh6.googleusercontent.com/U3gHtBC9CSpvTf0dLgKQvlyFDZkd9eJsLH6v41qu4bvz2tgZK9xDngkmiWh1XCcTr0Abi-re4_wiqV4jW7BqtTfu8jQfohr9qRzZO-zOVtbbWwCXOMCeZNf5OsO37jLqtw\n                https://lh5.googleusercontent.com/iMBCoGjXlbmwn92nA3D4rsc6VdaZgLQ7-RkU3zR3E2c6sw6zhmEp0juJCruXJxCD1iQSh1yxNednLNHFQAswojwKYSaz9nUKHKsH2s9w7Yb3ImGnvNQskcCl1w1BHOq73Q\n            ",
+        "Folder" : "layer_importer"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.256596, 40.8603831 ]
+      },
+      "id" : "layer_importer148.11"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "name" : "11 - Vico Santa Maria Degli Angeli alle Croci",
+        "open" : "true",
+        "description" : "\n                ",
+        "tessellate" : "-1",
+        "extrude" : "0",
+        "gx_media_links" : "\n                https://lh5.googleusercontent.com/l3UgDF-p7eLQw4N5KXhtXAxkY2HlBQYrt8JZNeNGzZryrkRKhA4-S6HkuhqXSuGY_FIvWIbjIgjmLQVuY_bCr6FD3CTXzbAMz4C9VLTeuHA00KB3keHmpAfOubwApsSo\n                https://lh3.googleusercontent.com/K56ExI29aPDyZCd3kuL4sCBvY7pYupPAPLc7UCY0j86kWECAFRsRk5mPKVCD-FGZaRpCYfJ_rKMQmDrzckqI5XeZQ0fPO354zQClU-snnpN3ZETIWTbwPoMqpUW6aH6y\n                https://lh5.googleusercontent.com/Jq-ewsBxL1Uh2Zbxwb9Q8esrlQyThKMXnHc2giCTwNur0OwzFr5JGigUBgYCEtnUxF7i0GueKLv1Iqv7yPjoaoKBL5rOeBB1On1VZys7MQ93WycQ-kFOUJuTC_7i9Vc\n            ",
+        "Folder" : "layer_importer"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.2590321, 40.8604548 ]
+      },
+      "id" : "layer_importer148.12"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "name" : "12 - Piazza Sanità",
+        "open" : "true",
+        "description" : "\n                ",
+        "tessellate" : "-1",
+        "extrude" : "0",
+        "gx_media_links" : "\n                https://lh4.googleusercontent.com/5A7p9QU6CGWivwNWU9VLOK38QMa4p9q6YBDCokQA1xmWArfdrj8a7g5-ruWzSQAKgS4yGzrIAZvRfvdBYVOq5apFJ4_4_gUdsowwmMudAosqav7w7IbWgTgQLJp9f1_ibg\n                https://lh6.googleusercontent.com/gsOmufmPlvhGlCbb8p4KD1r5ngFMCI3s1JOnb153AaevT4_a92RVdzrmftA1L_mX_jH7GyAVusgCHOdjYEBu8VQ6Mtd2jqOERnwAEqg4teHmZYZMIsNNBQ-3vz0NGpk\n                https://lh5.googleusercontent.com/hZGbfHqCkL5tNy26yapjjRqEbHWA4leGm4YHU1cGvwOWqNPYLM8kE-07wb4_ZXDJmmxz5HH5MwW_hCZIR3aybElbqxb5c8nPi-P9HsKyMazmeIOarAieQEVqn6OU2hEQ\n            ",
+        "Folder" : "layer_importer"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.2494325, 40.8593978 ]
+      },
+      "id" : "layer_importer148.13"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "name" : "13 - Ascensore Sanità",
+        "open" : "true",
+        "description" : "\n                ",
+        "tessellate" : "-1",
+        "extrude" : "0",
+        "gx_media_links" : "\n                https://lh5.googleusercontent.com/6-o0eU8cR2rI82yi8H2h4aoeemE8oqUuzZtqhQOKYSpUet3t278szVbo6-lQBx19R5qogW0VTmklUNfmgR-qz8uMvAUMTD8EVC5BO2V-axsKx1KcB3rrv7zmH12myVBd\n                https://lh3.googleusercontent.com/QeoZFOEfRukwWVsm-ju-N4734GmUvyw9Zd-E6jBTmRBrxqQ8HIryg8o-W6cc8pOZMGEANX0gSaG5tmq4TjYMkfyjQxz-_9kmde7C25GprHjYgDI8CWsF88E2_EEd3HUT\n            ",
+        "Folder" : "layer_importer"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.247905, 40.8591926 ]
+      },
+      "id" : "layer_importer148.14"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "name" : "13Bis - Via Sanità, 109",
+        "open" : "true",
+        "description" : "\n                ",
+        "tessellate" : "-1",
+        "extrude" : "0",
+        "gx_media_links" : "\n                https://lh4.googleusercontent.com/p7wnt25eVp1dxB7uPSYwWqVeMOmVcI-QJN0P8lFy6jsRm4ii8h-LOn1d7gUw9RSUK9WLA27Mcq3_g-OUru5dA6QMhuoQzclmpPIP40mJtXuYMePCTIV5R79vcMFkgyuw\n                https://lh5.googleusercontent.com/eA36OrZEo4Je6yq8nou8-P04JSl4bbTE23bV-4l03GUQzelu9h8w6AJvr7U0CauuGQbkKOyLaw39TwmJ3CFHHj3Yst0Fw9mKuHEVUDmibvpiLEFwDGCSYeacfwRBtUs17Q\n                https://lh3.googleusercontent.com/lrY6gUrzPZHMy9H7tM3cYFBfTqlGFqhqIfE7tpbLp4uzy9lO6aQSqPEEpbGmAnG6hyZgi-IEXCxwA-zKZvrYQ6HkH14nykFDvI3huN6qujE3xnDJ6FH7JnbSbc9_Atri\n            ",
+        "Folder" : "layer_importer"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.2474342, 40.859097 ]
+      },
+      "id" : "layer_importer148.15"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "name" : "3 - Piazza De Nicola",
+        "open" : "true",
+        "description" : "\n                ",
+        "tessellate" : "-1",
+        "extrude" : "0",
+        "gx_media_links" : "\n                https://lh4.googleusercontent.com/zxaX8VzR8FxmKisQVwXzmxkILg-eoKho6eo4tnvtr0yt0JWwEV6Zpskw9mL27jQWawzj5R4JpV0Zg1yKxlsM1ZLGeVwe8JNj80Sc0lTlRUbbNh7xn_vXeVc9S5wY2OM\n                https://lh3.googleusercontent.com/7nV-i5ccqGX_kD9qYJimLTKp43H0A5pR6w2gMYtMn1mYQ-MPVCvBg0z-tCaaMNA72efSRY6PE73o9hVNTDIGg77IpB3qUcEA1hCtYLYluf8cbeT9UuX0dvXBkEVBV4k\n                https://lh4.googleusercontent.com/UdxC0Z0MoReXTs4hQCujxB9uOWFpWeanBO3zB5aCSbFJRL3De3G2JbVdZvxXnZL7c-MbnNyia8n6hdoD5ubBX9U6YP2CxfMnASWEXLGtGGiVwlCKoqfhikkLqDAOy0c\n            ",
+        "Folder" : "layer_importer"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.2646031, 40.8540467 ]
+      },
+      "id" : "layer_importer148.16"
+    } ]
+  }
+}

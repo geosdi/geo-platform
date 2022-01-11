@@ -1,0 +1,906 @@
+{
+  "key" : "FEATURE_NAME",
+  "store" : {
+    "ALBERIMONUMENTALI" : [ {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Juniperus phoenicea L.",
+        "CIRCONFERENZAALBERO" : "290",
+        "ALTEZZAALBERO" : "10"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.652850071358914, 40.13589292291796 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.47"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Laurus nobilis",
+        "CIRCONFERENZAALBERO" : "208",
+        "ALTEZZAALBERO" : "10"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 8.570744058167465, 39.55626915397782 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.48"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Jacaranda mimosaefolia G. Don",
+        "CIRCONFERENZAALBERO" : "150",
+        "ALTEZZAALBERO" : "12"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.113237633525294, 39.227572902739304 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.41"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Libocedrus decurrens Torr.",
+        "CIRCONFERENZAALBERO" : "225",
+        "ALTEZZAALBERO" : "18"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 8.875247205781825, 40.35086730598246 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.49"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Magnolia grandiflora L.",
+        "CIRCONFERENZAALBERO" : "240",
+        "ALTEZZAALBERO" : "10"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.288268720900644, 39.3150814655323 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.50"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Morus nigra L.",
+        "CIRCONFERENZAALBERO" : "230",
+        "ALTEZZAALBERO" : "7"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.78089992009679, 40.5475127588244 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.51"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Myrtus communis L.",
+        "CIRCONFERENZAALBERO" : "58-90",
+        "ALTEZZAALBERO" : "5"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 8.573192707608031, 39.93547215965711 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.52"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Olea europea L. var. sativa Brot.",
+        "CIRCONFERENZAALBERO" : "940",
+        "ALTEZZAALBERO" : "10"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 8.689645012699263, 39.26322021966277 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.53"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Olea europea L. var. sativa Brot.",
+        "CIRCONFERENZAALBERO" : "540",
+        "ALTEZZAALBERO" : "6"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 8.763097464741348, 39.919123060775185 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.54"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Olea europea L. var. sativa Brot.",
+        "CIRCONFERENZAALBERO" : "154",
+        "ALTEZZAALBERO" : "9"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 8.891928257539261, 39.75457844758531 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.55"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Olea europea L. var. sylvestris (Miller) Brot.",
+        "CIRCONFERENZAALBERO" : "800",
+        "ALTEZZAALBERO" : "11"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 8.733034267307222, 39.423834277601316 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.56"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Olea europea L. var. sylvestris (Miller) Brot.",
+        "CIRCONFERENZAALBERO" : "410,430",
+        "ALTEZZAALBERO" : "12-13"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 8.573227706299726, 39.93549030796894 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.57"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Olea europea L. var. sylvestris (Miller) Brot.",
+        "CIRCONFERENZAALBERO" : "872",
+        "ALTEZZAALBERO" : "15"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 8.54454995094812, 40.194628862885494 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.58"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Olea europea L. var. sylvestris (Miller) Brot.",
+        "CIRCONFERENZAALBERO" : "560",
+        "ALTEZZAALBERO" : "13"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 8.750280173616057, 40.00073280735742 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.59"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Olea europea L. var. sylvestris (Miller) Brot.",
+        "CIRCONFERENZAALBERO" : "780",
+        "ALTEZZAALBERO" : "9"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.689310138679433, 39.98821557232633 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.60"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Olea europea L. var. sylvestris (Miller) Brot.",
+        "CIRCONFERENZAALBERO" : "595",
+        "ALTEZZAALBERO" : "13"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.667667956992773, 40.09072570879174 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.61"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Olea europea L. var. sylvestris (Miller) Brot.",
+        "CIRCONFERENZAALBERO" : "600",
+        "ALTEZZAALBERO" : "10"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.711167686806276, 40.66164206151388 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.62"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Olea europea L. var. sylvestris (Miller) Brot.",
+        "CIRCONFERENZAALBERO" : "1090",
+        "ALTEZZAALBERO" : "15"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.25534462220079, 41.00602637926997 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.63"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Phillyrea latifolia L.",
+        "CIRCONFERENZAALBERO" : "414",
+        "ALTEZZAALBERO" : "10"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.315676480573078, 39.38680701317437 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.64"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Phillyrea latifolia L.",
+        "CIRCONFERENZAALBERO" : "146",
+        "ALTEZZAALBERO" : "10"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 8.777147208878167, 39.848000578118736 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.65"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Phoenix dactylifera L.",
+        "CIRCONFERENZAALBERO" : "230",
+        "ALTEZZAALBERO" : "16"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.09905351373443, 39.24157057041479 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.66"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Pinus canariensis Smith.",
+        "CIRCONFERENZAALBERO" : "315",
+        "ALTEZZAALBERO" : "18"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.548241980886127, 39.87671689067043 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.67"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Pinus halepensis Mill.",
+        "CIRCONFERENZAALBERO" : "290",
+        "ALTEZZAALBERO" : "16"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.179406405210996, 39.384095964758096 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.68"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Pinus laricio Poiret",
+        "CIRCONFERENZAALBERO" : "310",
+        "ALTEZZAALBERO" : "25"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.401285919907542, 40.11115310826421 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.69"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Pinus laricio Poiret",
+        "CIRCONFERENZAALBERO" : "240",
+        "ALTEZZAALBERO" : "32-35"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.066378515263576, 40.51259083534531 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.70"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Pinus pinea L.",
+        "CIRCONFERENZAALBERO" : "485",
+        "ALTEZZAALBERO" : "17"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 8.472866685576959, 39.45139137494044 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.71"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Pinus pinea L.",
+        "CIRCONFERENZAALBERO" : "345",
+        "ALTEZZAALBERO" : "15"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.009891741784427, 39.112701929271964 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.72"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Pinus pinea L.",
+        "CIRCONFERENZAALBERO" : "410",
+        "ALTEZZAALBERO" : "15"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.299674056937748, 40.31770056631927 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.73"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Pinus pinea L.",
+        "CIRCONFERENZAALBERO" : "370",
+        "ALTEZZAALBERO" : "16"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.179077715567, 39.95288840878874 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.74"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Pinus pinea L.",
+        "CIRCONFERENZAALBERO" : "260",
+        "ALTEZZAALBERO" : "12"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.461888761783584, 41.21602406124265 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.75"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Pinus radiata",
+        "CIRCONFERENZAALBERO" : "292",
+        "ALTEZZAALBERO" : "32"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.416792209324495, 39.27358595224656 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.76"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Pinus sabiniana Dougl.",
+        "CIRCONFERENZAALBERO" : "278",
+        "ALTEZZAALBERO" : "18"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.044363488534236, 40.52874511348361 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.77"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Pistacia lentiscus",
+        "CIRCONFERENZAALBERO" : "470",
+        "ALTEZZAALBERO" : "9"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.267130671605702, 41.00943176860699 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.78"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Pistacia lentiscus L.",
+        "CIRCONFERENZAALBERO" : "180",
+        "ALTEZZAALBERO" : "8"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 8.931924132781853, 39.16956843565373 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.79"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Pistacia lentiscus L.",
+        "CIRCONFERENZAALBERO" : "101,74,100",
+        "ALTEZZAALBERO" : "5"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 8.50018777207588, 39.393304503560174 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.80"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Pistacia lentiscus L.",
+        "CIRCONFERENZAALBERO" : "230",
+        "ALTEZZAALBERO" : "7"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.66564640823587, 40.093935667179665 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.81"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Pistacia terebinthus L.",
+        "CIRCONFERENZAALBERO" : "220",
+        "ALTEZZAALBERO" : "8"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.685392554010773, 40.09658644629397 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.82"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Platanus acerifolia Willd.",
+        "CIRCONFERENZAALBERO" : "436",
+        "ALTEZZAALBERO" : "20"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 8.97475586087065, 39.00726074062724 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.83"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Platanus acerifolia Willd.",
+        "CIRCONFERENZAALBERO" : "435",
+        "ALTEZZAALBERO" : "30"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.057630893495572, 39.85467928777744 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.84"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Populus alba L.",
+        "CIRCONFERENZAALBERO" : "414",
+        "ALTEZZAALBERO" : "30"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.250330611901946, 39.757693653536975 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.85"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Populus alba L.",
+        "CIRCONFERENZAALBERO" : "476",
+        "ALTEZZAALBERO" : "30"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.399916871495822, 39.87460173655726 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.86"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Populus canscens Sm.",
+        "CIRCONFERENZAALBERO" : "208",
+        "ALTEZZAALBERO" : "16"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.692690843005114, 40.575875714393746 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.87"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Prosopis torquata DC.",
+        "CIRCONFERENZAALBERO" : "432",
+        "ALTEZZAALBERO" : "15"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.10049947940035, 39.23981222892133 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.88"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Pyrus amiygdaliformis Vill.",
+        "CIRCONFERENZAALBERO" : "270",
+        "ALTEZZAALBERO" : "7"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.665575676155838, 40.093900035903985 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.89"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Quercus ilex L.",
+        "CIRCONFERENZAALBERO" : "610",
+        "ALTEZZAALBERO" : "15"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 8.591989093756464, 40.1064782079227 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.90"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Quercus ilex L.",
+        "CIRCONFERENZAALBERO" : "700",
+        "ALTEZZAALBERO" : "30"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.249669323704532, 40.00748268412037 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.91"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Quercus ilex L.",
+        "CIRCONFERENZAALBERO" : "620",
+        "ALTEZZAALBERO" : "30"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.366477889164983, 39.87763127788652 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.92"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Quercus ilex L.",
+        "CIRCONFERENZAALBERO" : "475",
+        "ALTEZZAALBERO" : "18"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.25301332767765, 39.84964307998403 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.93"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Quercus ilex L.",
+        "CIRCONFERENZAALBERO" : "590",
+        "ALTEZZAALBERO" : "22"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.199719947062079, 39.897453882708476 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.94"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "SPECIEALBERO" : "Quercus ilex L.",
+        "CIRCONFERENZAALBERO" : "630",
+        "ALTEZZAALBERO" : "16"
+      },
+      "geometry" : {
+        "type" : "MultiPoint",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ [ 9.472028092656599, 40.11773376900835 ] ]
+      },
+      "id" : "ALBERIMONUMENTALI.95"
+    } ]
+  }
+}

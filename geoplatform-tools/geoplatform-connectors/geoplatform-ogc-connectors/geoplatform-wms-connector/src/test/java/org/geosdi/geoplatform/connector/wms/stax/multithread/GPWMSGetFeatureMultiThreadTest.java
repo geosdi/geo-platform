@@ -45,6 +45,7 @@ import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.connector.wms.WMSGetFeatureInfoReaderFileLoaderTest.toStreamFilesName;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -58,24 +59,7 @@ public abstract class GPWMSGetFeatureMultiThreadTest {
     public static void beforeClass() throws Exception {
         String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "stax")
                 .collect(joining(separator, "", separator));
-        files = of("geoserver-Vigneti-GetFeatureInfo.xml", "geoserver-GetFeatureInfo.xml",
-                "geoserver-GetFeatureInfo1.xml", "geoserver-GetFeatureInfo-Point.xml",
-                "geoserver-GetFeatureInfo-MultiLineString.xml", "spearfish-GetFeatureInfo.xml",
-                "tasmaniaRoads-GetFeatureInfo.xml", "tasmaniaStates-GetFeatureInfo.xml", "tiger_ny-GetFeatureInfo.xml",
-                "sfdem-GetFeatureInfo.xml", "nurcAPk50095-GetFeatureInfo.xml", "nurcArcSample-GetFeatureInfo.xml",
-                "comuni-GetFeatureInfo.xml", "parchiNaturali-GetFeatureInfo.xml", "retiRiserve-GetFeatureInfo.xml",
-                "linee-GetFeatureInfo.xml", "azioniPunto-GetFeatureInfo.xml", "comuniBasilicata-GetFeatureInfo.xml",
-                "corine-GetFeatureInfo.xml", "airports.xml", "geologia.xml", "livelloEdifici.xml", "volumetria.xml",
-                "livelloEdifici1.xml", "masw.xml", "PianoCampiFlegrei.xml",
-                "CF_zonepianificazione_mappeinterattive.xml", "aziende.xml", "centri_abitati.xml", "EneaClipFilled.xml",
-                "MixedFeatures.xml", "ParchiBasilicata.xml", "rsdi_alt_300_a_400.xml", "ABR_Comuni.xml",
-                "AereeUrbaneValoreStorico.xml", "PNSRS_Valanghe.xml", "AreeAmmassamento.xml", "Ferrovie.xml",
-                "MonumentiBizantini.xml", "ReteGas.xml", "ABR_CaveAttive.xml", "AreeUrbaneValoreStorico.xml",
-                "BaciniIdrogeografici.xml", "dtsew_campania_20150324_20201122.xml", "dtsup_campania_20150324_20201122.xml",
-                "pozzuoliAcque.xml", "laghi.xml", "viabilità.xml", "vincoli.xml", "CorsiAcque.xml", "NavteqStreet.xml",
-                "CAMPIndustrieARischio.xml", "layer_importer148.xml", "fluids_rete_zk.xml", "AreeBonifica.xml",
-                "CentraliElettriche.xml", "features.xml", "Geositi.xml", "ADBRisk.xml", "PoliziaIDR.xml",
-                "ParchiRegionaliRiserve.xml", "ElementiRidotti.xml", "ReteGeodetica.xml", "UsoSuoloRT.xml")
+        files = toStreamFilesName()
                 .map(basePath::concat)
                 .collect(toCollection(LinkedList::new));
     }

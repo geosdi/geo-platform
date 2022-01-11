@@ -1,0 +1,2140 @@
+{
+  "key" : "FEATURE_NAME",
+  "store" : {
+    "lotto17" : [ {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "269984",
+        "ucs2007" : "322",
+        "uso_2007" : "3.2.2",
+        "uso_2010" : "3.2.2",
+        "dem" : "662.47",
+        "lotto" : "lotto17",
+        "id_lotto" : "22",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2015-02-16T15:24:35.903",
+        "current_utente" : "Testi",
+        "scelto_1km" : "false",
+        "bool_iuti" : "true",
+        "prov" : "SI",
+        "clc06" : "321",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "1.1",
+        "uso_2007_reale" : "3.2.2",
+        "ex_id_lotto" : "82"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.695220796864703, 42.87878928402166 ]
+      },
+      "id" : "lotto17.269984"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "269995",
+        "ucs2007" : "322",
+        "uso_2007" : "3.1.1.2_a",
+        "uso_2010" : "3.1.1.2_a",
+        "dem" : "494.67",
+        "lotto" : "lotto17",
+        "id_lotto" : "2",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-10T16:14:36.587",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "SI",
+        "clc06" : "322",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.1.1.2_a",
+        "ex_id_lotto" : "16"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.760725193053856, 42.87968430416036 ]
+      },
+      "id" : "lotto17.269995"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "80426",
+        "ucs2007" : "125",
+        "uso_2007" : "3.1.1.2_a",
+        "uso_2010" : "1.3.3",
+        "dem" : "913.61",
+        "arrigoni" : "6",
+        "lotto" : "lotto17",
+        "id_lotto" : "3",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-10T16:42:22.807",
+        "current_utente" : "Testi",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "SI",
+        "clc06" : "3113",
+        "ince10" : "false",
+        "inclu07" : "true",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.1.1.2_a",
+        "ex_id_lotto" : "20"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.661905257571222, 42.88188995030314 ]
+      },
+      "id" : "lotto17.80426"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "364966",
+        "ucs2007" : "211",
+        "uso_2007" : "3.2.1",
+        "uso_2010" : "3.2.1",
+        "dem" : "449.83",
+        "lotto" : "lotto17",
+        "id_lotto" : "18",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-14T09:22:17.595",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "SI",
+        "clc06" : "231",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.2.1",
+        "ex_id_lotto" : "149"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.737568515705478, 42.878164201384045 ]
+      },
+      "id" : "lotto17.364966"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "80646",
+        "ucs2007" : "211",
+        "uso_2007" : "3.2.2",
+        "uso_2010" : "3.2.2",
+        "dem" : "481.12",
+        "lotto" : "lotto17",
+        "id_lotto" : "21",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-10T17:28:49.901",
+        "scelto_1km" : "true",
+        "bool_iuti" : "true",
+        "prov" : "SI",
+        "clc06" : "211",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "1.1",
+        "uso_2007_reale" : "3.2.2",
+        "ex_id_lotto" : "81"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.789458896890944, 42.876753324001065 ]
+      },
+      "id" : "lotto17.80646"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "269750",
+        "ucs2007" : "122",
+        "uso_2007" : "2.1.1",
+        "uso_2010" : "2.1.1",
+        "dem" : "593.7",
+        "lotto" : "lotto17",
+        "id_lotto" : "25",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-10T18:12:59.634",
+        "scelto_1km" : "false",
+        "bool_iuti" : "true",
+        "prov" : "GR",
+        "clc06" : "211",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "2.1",
+        "uso_2007_reale" : "2.1.1",
+        "ex_id_lotto" : "125"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.46113293684426, 42.8835182140633 ]
+      },
+      "id" : "lotto17.269750"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "80432",
+        "ucs2007" : "321",
+        "uso_2007" : "3.2.2",
+        "uso_2010" : "3.2.2",
+        "dem" : "616.07",
+        "lotto" : "lotto17",
+        "id_lotto" : "1",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2015-02-16T15:19:29.52",
+        "current_utente" : "Testi",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "SI",
+        "clc06" : "321",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.2.2",
+        "ex_id_lotto" : "2"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.698816784938884, 42.8811638739527 ]
+      },
+      "id" : "lotto17.80432"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "269992",
+        "ucs2007" : "211",
+        "uso_2007" : "3.3",
+        "uso_2010" : "3.3",
+        "dem" : "451.81",
+        "lotto" : "lotto17",
+        "id_lotto" : "10",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2015-02-16T15:21:39.089",
+        "current_utente" : "Testi",
+        "scelto_1km" : "true",
+        "bool_iuti" : "false",
+        "prov" : "SI",
+        "clc06" : "231",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "true",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.3",
+        "ex_id_lotto" : "33"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.74459737552099, 42.87914832319988 ]
+      },
+      "id" : "lotto17.269992"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "80627",
+        "ucs2007" : "141",
+        "uso_2007" : "1.4.1",
+        "uso_2010" : "1.4.1",
+        "dem" : "831.35",
+        "arrigoni" : "6",
+        "lotto" : "lotto17",
+        "id_lotto" : "31",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2015-02-16T15:27:12.894",
+        "current_utente" : "Testi",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "SI",
+        "clc06" : "112",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "1.4.1",
+        "ex_id_lotto" : "223"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.673250629020341, 42.87846182430024 ]
+      },
+      "id" : "lotto17.80627"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "175214",
+        "ucs2007" : "211",
+        "uso_2007" : "3.2.1",
+        "uso_2010" : "3.2.2",
+        "dem" : "426.41",
+        "lotto" : "lotto17",
+        "id_lotto" : "9",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-10T17:09:06.606",
+        "current_utente" : "Testi",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "SI",
+        "clc06" : "231",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.2.1",
+        "ex_id_lotto" : "41"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.73512965185471, 42.879462078593335 ]
+      },
+      "id" : "lotto17.175214"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "175208",
+        "ucs2007" : "311",
+        "uso_2007" : "3.2.2",
+        "uso_2010" : "3.2.2",
+        "dem" : "631.75",
+        "arrigoni" : "15",
+        "lotto" : "lotto17",
+        "id_lotto" : "12",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-10T17:27:59.666",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "SI",
+        "clc06" : "321",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.2.2",
+        "ex_id_lotto" : "78"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.697198190808098, 42.88002926306239 ]
+      },
+      "id" : "lotto17.175208"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "364971",
+        "ucs2007" : "311",
+        "uso_2007" : "3.2.2",
+        "uso_2010" : "3.2.2",
+        "dem" : "477.12",
+        "lotto" : "lotto17",
+        "id_lotto" : "13",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-10T17:51:14.638",
+        "scelto_1km" : "false",
+        "bool_iuti" : "true",
+        "prov" : "SI",
+        "clc06" : "322",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "true",
+        "su2e5_10" : "false",
+        "co1e2_10" : "true",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "1.1",
+        "uso_2007_reale" : "3.2.2",
+        "ex_id_lotto" : "110"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.768677766884243, 42.878320014006384 ]
+      },
+      "id" : "lotto17.364971"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "174980",
+        "ucs2007" : "211",
+        "uso_2007" : "3.2.2",
+        "uso_2010" : "3.2.2",
+        "dem" : "479.43",
+        "lotto" : "lotto17",
+        "id_lotto" : "15",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-10T17:27:41.523",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "GR",
+        "clc06" : "211",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.2.2",
+        "ex_id_lotto" : "77"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.500798610322589, 42.88410054584119 ]
+      },
+      "id" : "lotto17.174980"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "174983",
+        "ucs2007" : "122",
+        "uso_2007" : "3.1.1.2_a",
+        "uso_2010" : "3.1.1.2_a",
+        "dem" : "606.12",
+        "arrigoni" : "6",
+        "lotto" : "lotto17",
+        "id_lotto" : "17",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-10T17:14:56.006",
+        "current_utente" : "Testi",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "GR",
+        "clc06" : "3112",
+        "ince10" : "false",
+        "inclu07" : "true",
+        "inclu10" : "true",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.1.1.2_a",
+        "ex_id_lotto" : "59"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.520931573295675, 42.883275409841055 ]
+      },
+      "id" : "lotto17.174983"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "364964",
+        "ucs2007" : "322",
+        "uso_2007" : "3.2.1",
+        "uso_2010" : "3.2.1",
+        "dem" : "440.39",
+        "lotto" : "lotto17",
+        "id_lotto" : "32",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-14T09:24:50.369",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "SI",
+        "clc06" : "231",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.2.1",
+        "ex_id_lotto" : "162"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.725954344165066, 42.8771790566139 ]
+      },
+      "id" : "lotto17.364964"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "364958",
+        "ucs2007" : "322",
+        "uso_2007" : "3.3",
+        "uso_2010" : "3.2.1",
+        "dem" : "728.15",
+        "lotto" : "lotto17",
+        "id_lotto" : "35",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-14T09:34:44.655",
+        "current_utente" : "Testi",
+        "scelto_1km" : "true",
+        "bool_iuti" : "true",
+        "prov" : "SI",
+        "clc06" : "322",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "true",
+        "coll10" : "false",
+        "iuti_cls" : "3.2",
+        "uso_2007_reale" : "3.2.1",
+        "ex_id_lotto" : "201"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.689854676863412, 42.87745028402208 ]
+      },
+      "id" : "lotto17.364958"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "80630",
+        "ucs2007" : "211",
+        "uso_2007" : "2.1.1",
+        "uso_2010" : "2.1.1",
+        "dem" : "690.86",
+        "lotto" : "lotto17",
+        "id_lotto" : "27",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2015-02-16T15:25:48.885",
+        "current_utente" : "Testi",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "SI",
+        "clc06" : "321",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "2.1.1",
+        "ex_id_lotto" : "197"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.693200479886006, 42.87818436908628 ]
+      },
+      "id" : "lotto17.80630"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "175417",
+        "ucs2007" : "211",
+        "uso_2007" : "3.1.1.5_c",
+        "uso_2010" : "3.1.1.5_c",
+        "dem" : "405.14",
+        "lotto" : "lotto17",
+        "id_lotto" : "37",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2015-02-16T15:30:00.474",
+        "current_utente" : "Testi",
+        "scelto_1km" : "false",
+        "bool_iuti" : "true",
+        "prov" : "SI",
+        "clc06" : "211",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "1.1",
+        "uso_2007_reale" : "3.1.1.5_c",
+        "ex_id_lotto" : "235"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.757670016880459, 42.874822354007144 ]
+      },
+      "id" : "lotto17.175417"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "175181",
+        "ucs2007" : "112",
+        "uso_2007" : "2.1.1",
+        "uso_2010" : "2.1.1",
+        "dem" : "589.19",
+        "lotto" : "lotto17",
+        "id_lotto" : "45",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2015-02-16T15:37:05.903",
+        "current_utente" : "Testi",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "GR",
+        "clc06" : "211",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "2.1.1",
+        "ex_id_lotto" : "270"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.531661820026573, 42.87898099719568 ]
+      },
+      "id" : "lotto17.175181"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "270155",
+        "ucs2007" : "231",
+        "uso_2007" : "3.1.1.2_b",
+        "uso_2010" : "3.1.1.2_b",
+        "dem" : "692.72",
+        "lotto" : "lotto17",
+        "id_lotto" : "68",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2015-02-16T15:43:03.521",
+        "current_utente" : "Testi",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "GR",
+        "clc06" : "231",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.1.1.2_b",
+        "ex_id_lotto" : "499"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.524507652867218, 42.87505363620187 ]
+      },
+      "id" : "lotto17.270155"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "365381",
+        "ucs2007" : "324",
+        "uso_2007" : "3.2.2",
+        "uso_2010" : "3.2.2",
+        "dem" : "601.54",
+        "lotto" : "lotto17",
+        "id_lotto" : "65",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2015-02-16T15:42:06.383",
+        "current_utente" : "Testi",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "SI",
+        "clc06" : "33",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.2.2",
+        "ex_id_lotto" : "535"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.779277120760078, 42.86958647082848 ]
+      },
+      "id" : "lotto17.365381"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "269947",
+        "ucs2007" : "311",
+        "uso_2007" : "1.1.2",
+        "uso_2010" : "1.1.2",
+        "dem" : "670.95",
+        "arrigoni" : "6",
+        "lotto" : "lotto17",
+        "id_lotto" : "49",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-14T15:24:24.186",
+        "scelto_1km" : "true",
+        "bool_iuti" : "true",
+        "prov" : "GR",
+        "clc06" : "3113",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "3.2",
+        "uso_2007_reale" : "1.1.2",
+        "ex_id_lotto" : "339"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.468420346843693, 42.87948544406042 ]
+      },
+      "id" : "lotto17.269947"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "80838",
+        "ucs2007" : "322",
+        "uso_2007" : "2.2.5.2",
+        "uso_2010" : "2.2.5.2",
+        "dem" : "443.95",
+        "lotto" : "lotto17",
+        "id_lotto" : "53",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-14T15:37:29.232",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "SI",
+        "clc06" : "231",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "true",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "2.1.1",
+        "ex_id_lotto" : "379"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.728321586509853, 42.873200500022534 ]
+      },
+      "id" : "lotto17.80838"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "175379",
+        "ucs2007" : "324",
+        "uso_2007" : "3.2.2",
+        "uso_2010" : "3.2.2",
+        "dem" : "646.29",
+        "arrigoni" : "11",
+        "lotto" : "lotto17",
+        "id_lotto" : "63",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-14T16:11:35.047",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "GR",
+        "clc06" : "231",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.2.2",
+        "ex_id_lotto" : "496"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.525857518149627, 42.87598021721504 ]
+      },
+      "id" : "lotto17.175379"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "175374",
+        "ucs2007" : "122",
+        "uso_2007" : "3.1.1.2_b",
+        "uso_2010" : "3.1.1.2_b",
+        "dem" : "657.3",
+        "arrigoni" : "15",
+        "lotto" : "lotto17",
+        "id_lotto" : "72",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-14T16:18:06.986",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "GR",
+        "clc06" : "322",
+        "ince10" : "false",
+        "inclu07" : "true",
+        "inclu10" : "true",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.1.1.2_c",
+        "ex_id_lotto" : "525"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.496236964794564, 42.87541009885333 ]
+      },
+      "id" : "lotto17.175374"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "270385",
+        "ucs2007" : "122",
+        "uso_2007" : "2.1.1",
+        "uso_2010" : "2.1.1",
+        "dem" : "644.2",
+        "arrigoni" : "15",
+        "lotto" : "lotto17",
+        "id_lotto" : "78",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-14T16:17:57.096",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "SI",
+        "clc06" : "321",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "2.1.1",
+        "ex_id_lotto" : "524"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.694970169010093, 42.87002327647457 ]
+      },
+      "id" : "lotto17.270385"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "270361",
+        "ucs2007" : "311",
+        "uso_2007" : "2.1.1",
+        "uso_2010" : "2.1.1",
+        "dem" : "631.57",
+        "lotto" : "lotto17",
+        "id_lotto" : "103",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-14T18:06:46.966",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "GR",
+        "clc06" : "211",
+        "ince10" : "false",
+        "inclu07" : "true",
+        "inclu10" : "true",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "2.1.1",
+        "ex_id_lotto" : "696"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.546611215902436, 42.869853669136454 ]
+      },
+      "id" : "lotto17.270361"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "270152",
+        "ucs2007" : "324",
+        "uso_2007" : "3.1.1.2_a",
+        "uso_2010" : "3.1.1.2_a",
+        "dem" : "642.77",
+        "arrigoni" : "11",
+        "lotto" : "lotto17",
+        "id_lotto" : "64",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2015-02-16T15:41:39.065",
+        "current_utente" : "Testi",
+        "scelto_1km" : "false",
+        "bool_iuti" : "true",
+        "prov" : "GR",
+        "clc06" : "3112",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "3.2",
+        "uso_2007_reale" : "3.1.1.2_c",
+        "ex_id_lotto" : "517"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.505946976843301, 42.87615398405332 ]
+      },
+      "id" : "lotto17.270152"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "175367",
+        "ucs2007" : "231",
+        "uso_2007" : "2.3.1",
+        "uso_2010" : "1.1.2",
+        "dem" : "650.49",
+        "lotto" : "lotto17",
+        "id_lotto" : "83",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2015-02-16T15:47:42.382",
+        "current_utente" : "Testi",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "GR",
+        "clc06" : "211",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "2.3.1",
+        "ex_id_lotto" : "578"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.453751470135634, 42.87451930438291 ]
+      },
+      "id" : "lotto17.175367"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "270181",
+        "ucs2007" : "311",
+        "uso_2007" : "1.1.2",
+        "uso_2010" : "1.1.2",
+        "dem" : "806.35",
+        "lotto" : "lotto17",
+        "id_lotto" : "41",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-14T15:18:03.773",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "SI",
+        "clc06" : "112",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "1.1.2",
+        "ex_id_lotto" : "321"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.682644075543955, 42.87636699952714 ]
+      },
+      "id" : "lotto17.270181"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "270399",
+        "ucs2007" : "322",
+        "uso_2007" : "2.1.1",
+        "uso_2010" : "2.1.1",
+        "dem" : "573.72",
+        "lotto" : "lotto17",
+        "id_lotto" : "55",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-14T15:54:49.934",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "SI",
+        "clc06" : "33",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "2.1.1",
+        "ex_id_lotto" : "425"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.780623280296652, 42.87169327415186 ]
+      },
+      "id" : "lotto17.270399"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "365168",
+        "ucs2007" : "322",
+        "uso_2007" : "2.3.1",
+        "uso_2010" : "2.3.1",
+        "dem" : "368.03",
+        "lotto" : "lotto17",
+        "id_lotto" : "57",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-14T15:34:49.481",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "SI",
+        "clc06" : "231",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "2.3.1",
+        "ex_id_lotto" : "370"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.738097726324714, 42.87256287794138 ]
+      },
+      "id" : "lotto17.365168"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "364927",
+        "ucs2007" : "311",
+        "uso_2007" : "3.2.2",
+        "uso_2010" : "3.2.2",
+        "dem" : "607.33",
+        "lotto" : "lotto17",
+        "id_lotto" : "62",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-14T15:50:29.009",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "GR",
+        "clc06" : "322",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.2.2",
+        "ex_id_lotto" : "412"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.497529408763125, 42.87683130774257 ]
+      },
+      "id" : "lotto17.364927"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "270393",
+        "ucs2007" : "322",
+        "uso_2007" : "3.2.1",
+        "uso_2010" : "3.2.1",
+        "dem" : "383.17",
+        "lotto" : "lotto17",
+        "id_lotto" : "70",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-14T16:07:48.354",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "SI",
+        "clc06" : "3115",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.2.1",
+        "ex_id_lotto" : "475"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.742866915906204, 42.8698644168903 ]
+      },
+      "id" : "lotto17.270393"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "80809",
+        "ucs2007" : "324",
+        "uso_2007" : "2.1.1",
+        "uso_2010" : "2.1.1",
+        "dem" : "719.32",
+        "lotto" : "lotto17",
+        "id_lotto" : "76",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-14T16:33:47.876",
+        "scelto_1km" : "true",
+        "bool_iuti" : "true",
+        "prov" : "GR",
+        "clc06" : "211",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "2.1",
+        "uso_2007_reale" : "2.1.1",
+        "ex_id_lotto" : "583"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.550048786844684, 42.87347960404519 ]
+      },
+      "id" : "lotto17.80809"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "175605",
+        "ucs2007" : "311",
+        "uso_2007" : "3.2.2",
+        "uso_2010" : "3.2.2",
+        "dem" : "891.56",
+        "lotto" : "lotto17",
+        "id_lotto" : "79",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-14T16:24:57.397",
+        "current_utente" : "Testi",
+        "scelto_1km" : "false",
+        "bool_iuti" : "true",
+        "prov" : "SI",
+        "clc06" : "321",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "1.1",
+        "uso_2007_reale" : "3.2.2",
+        "ex_id_lotto" : "554"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.672771756859278, 42.87050810402227 ]
+      },
+      "id" : "lotto17.175605"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "365124",
+        "ucs2007" : "231",
+        "uso_2007" : "3.2.1",
+        "uso_2010" : "3.2.2",
+        "dem" : "780.6",
+        "lotto" : "lotto17",
+        "id_lotto" : "90",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2015-02-16T15:49:44.202",
+        "current_utente" : "Testi",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "GR",
+        "clc06" : "3113",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.2.1",
+        "ex_id_lotto" : "669"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.467054739916245, 42.87313385447954 ]
+      },
+      "id" : "lotto17.365124"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "270605",
+        "ucs2007" : "333",
+        "uso_2007" : "3.3",
+        "uso_2010" : "3.2.1",
+        "dem" : "510.07",
+        "lotto" : "lotto17",
+        "id_lotto" : "96",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2015-02-16T15:51:12.516",
+        "current_utente" : "Testi",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "SI",
+        "clc06" : "231",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.2.1",
+        "ex_id_lotto" : "645"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.780472018495704, 42.86538425408809 ]
+      },
+      "id" : "lotto17.270605"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "365352",
+        "ucs2007" : "311",
+        "uso_2007" : "3.1.1.4_a",
+        "uso_2010" : "3.1.1.4_a",
+        "dem" : "1311.08",
+        "arrigoni" : "8",
+        "lotto" : "lotto17",
+        "id_lotto" : "97",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2015-02-16T15:52:01.798",
+        "current_utente" : "Testi",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "GR",
+        "clc06" : "3113",
+        "ince10" : "false",
+        "inclu07" : "true",
+        "inclu10" : "true",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.1.1.4_a",
+        "ex_id_lotto" : "739"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.604589572818234, 42.8694984110959 ]
+      },
+      "id" : "lotto17.365352"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "369997",
+        "ucs2007" : "243",
+        "uso_2007" : "2.3.1",
+        "uso_2010" : "2.3.1",
+        "dem" : "665.24",
+        "lotto" : "lotto17",
+        "id_lotto" : "1048",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2015-02-17T11:25:15.514",
+        "current_utente" : "Testi",
+        "scelto_1km" : "false",
+        "bool_iuti" : "true",
+        "prov" : "GR",
+        "clc06" : "211",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "2.1",
+        "uso_2007_reale" : "2.3.1",
+        "ex_id_lotto" : "5278"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.70947085685589, 42.76985391396927 ]
+      },
+      "id" : "lotto17.369997"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "365364",
+        "ucs2007" : "112",
+        "uso_2007" : "3.2.2",
+        "uso_2010" : "3.2.2",
+        "dem" : "860.34",
+        "lotto" : "lotto17",
+        "id_lotto" : "84",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-14T17:58:11.704",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "SI",
+        "clc06" : "321",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.2.2",
+        "ex_id_lotto" : "660"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.675244768703577, 42.86955146743065 ]
+      },
+      "id" : "lotto17.365364"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "270594",
+        "ucs2007" : "322",
+        "uso_2007" : "3.2.1",
+        "uso_2010" : "3.2.1",
+        "dem" : "477.23",
+        "lotto" : "lotto17",
+        "id_lotto" : "110",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-14T18:13:57.793",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "SI",
+        "clc06" : "322",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.2.1",
+        "ex_id_lotto" : "726"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.714246685528929, 42.865205775320256 ]
+      },
+      "id" : "lotto17.270594"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "365333",
+        "ucs2007" : "311",
+        "uso_2007" : "3.2.2",
+        "uso_2010" : "3.2.2",
+        "dem" : "868.56",
+        "arrigoni" : "13",
+        "lotto" : "lotto17",
+        "id_lotto" : "123",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-17T20:45:30.901",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "GR",
+        "clc06" : "322",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "true",
+        "su2e5_10" : "false",
+        "co1e2_10" : "true",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.2.2",
+        "ex_id_lotto" : "866"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.488103231581288, 42.86917524112888 ]
+      },
+      "id" : "lotto17.365333"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "270801",
+        "ucs2007" : "322",
+        "uso_2007" : "3.1.1.5_b",
+        "uso_2010" : "3.1.1.5_b",
+        "dem" : "349.65",
+        "lotto" : "lotto17",
+        "id_lotto" : "127",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-17T22:10:45.795",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "SI",
+        "clc06" : "3115",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.1.1.5_b",
+        "ex_id_lotto" : "915"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.745329958467352, 42.86226871196393 ]
+      },
+      "id" : "lotto17.270801"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "175776",
+        "ucs2007" : "322",
+        "uso_2007" : "3.1.1.2_b",
+        "uso_2010" : "3.1.1.2_b",
+        "dem" : "888.05",
+        "lotto" : "lotto17",
+        "id_lotto" : "136",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-17T22:35:05.618",
+        "scelto_1km" : "false",
+        "bool_iuti" : "true",
+        "prov" : "GR",
+        "clc06" : "3112",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "1.1",
+        "uso_2007_reale" : "3.1.1.2_b",
+        "ex_id_lotto" : "1011"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.458820266842421, 42.866965934056175 ]
+      },
+      "id" : "lotto17.175776"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "81442",
+        "ucs2007" : "311",
+        "uso_2007" : "3.2.2",
+        "uso_2010" : "3.2.2",
+        "dem" : "518.99",
+        "lotto" : "lotto17",
+        "id_lotto" : "148",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-18T00:26:48.492",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "SI",
+        "clc06" : "322",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.2.2",
+        "ex_id_lotto" : "1066"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.704233239087818, 42.85976581430445 ]
+      },
+      "id" : "lotto17.81442"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "367760",
+        "ucs2007" : "322",
+        "uso_2007" : "3.1.1.2_c",
+        "uso_2010" : "3.1.1.2_c",
+        "dem" : "1001.63",
+        "lotto" : "lotto17",
+        "id_lotto" : "674",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-25T13:32:16.907",
+        "scelto_1km" : "true",
+        "bool_iuti" : "false",
+        "prov" : "GR",
+        "clc06" : "321",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.1.1.2_c",
+        "ex_id_lotto" : "3438"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.537679591454877, 42.815152532016015 ]
+      },
+      "id" : "lotto17.367760"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "178217",
+        "ucs2007" : "322",
+        "uso_2007" : "3.1.1.2_c",
+        "uso_2010" : "3.1.1.2_c",
+        "dem" : "617.97",
+        "lotto" : "lotto17",
+        "id_lotto" : "693",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-25T13:45:53.109",
+        "scelto_1km" : "false",
+        "bool_iuti" : "false",
+        "prov" : "GR",
+        "clc06" : "322",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "9999",
+        "uso_2007_reale" : "3.1.1.2_c",
+        "ex_id_lotto" : "3479"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.594796736304916, 42.811915983897684 ]
+      },
+      "id" : "lotto17.178217"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "367983",
+        "ucs2007" : "324",
+        "uso_2007" : "3.1.1.2_b",
+        "uso_2010" : "3.1.1.2_b",
+        "dem" : "933.93",
+        "arrigoni" : "13",
+        "lotto" : "lotto17",
+        "id_lotto" : "722",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2014-11-25T20:10:16.842",
+        "scelto_1km" : "false",
+        "bool_iuti" : "true",
+        "prov" : "GR",
+        "clc06" : "231",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "false",
+        "coll10" : "false",
+        "iuti_cls" : "3.2",
+        "uso_2007_reale" : "3.1.1.2_b",
+        "ex_id_lotto" : "3628"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.550375376837438, 42.81053296401654 ]
+      },
+      "id" : "lotto17.367983"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "id_rand" : "81433",
+        "ucs2007" : "311",
+        "uso_2007" : "2.3.1",
+        "uso_2010" : "2.3.1",
+        "dem" : "1041.78",
+        "arrigoni" : "18",
+        "lotto" : "lotto17",
+        "id_lotto" : "162",
+        "utiliz" : "false",
+        "att_par" : "false",
+        "frane" : "false",
+        "current_data" : "2015-02-16T16:07:19.896",
+        "current_utente" : "Testi",
+        "scelto_1km" : "false",
+        "bool_iuti" : "true",
+        "prov" : "SI",
+        "clc06" : "3122",
+        "ince10" : "false",
+        "inclu07" : "false",
+        "inclu10" : "false",
+        "su2e5_07" : "false",
+        "co1e2_07" : "false",
+        "su2e5_10" : "false",
+        "co1e2_10" : "false",
+        "coll07" : "true",
+        "coll10" : "false",
+        "iuti_cls" : "1.2",
+        "uso_2007_reale" : "2.3.1",
+        "ex_id_lotto" : "1135"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 11.648323356853671, 42.8590685640217 ]
+      },
+      "id" : "lotto17.81433"
+    } ]
+  }
+}

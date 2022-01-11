@@ -1,0 +1,1451 @@
+{
+  "key" : "FEATURE_NAME",
+  "store" : {
+    "sitdbo_retegeodetica" : [ {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "1814",
+        "objectid" : "1814",
+        "vertice" : "433452R",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "AVELLINO",
+        "comune" : "FLUMERI",
+        "gbnord" : "4548409.37900",
+        "gbest" : "2535289.83900",
+        "quota" : "0E-11",
+        "collegamen" : "433452R.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/FLUMERI/433452R.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.181932044307903, 41.08674317645002 ]
+      },
+      "id" : "sitdbo_retegeodetica.1814"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "1827",
+        "objectid" : "1827",
+        "vertice" : "172703",
+        "vertice0" : "Vertice Rete IGM95",
+        "provincia" : "CASERTA",
+        "comune" : "CARINOLA",
+        "gbnord" : "4561777.60000",
+        "gbest" : "2436721.56000",
+        "quota" : "0E-11",
+        "collegamen" : "172703.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/CASERTA/CARINOLA/172703.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.006640155241314, 41.20301644053876 ]
+      },
+      "id" : "sitdbo_retegeodetica.1827"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "185",
+        "objectid" : "185",
+        "vertice" : "S036",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "NAPOLI",
+        "comune" : "VILLARICCA",
+        "localita" : "Rotonda Maradona",
+        "ubicazione" : "Centrino bordo strada di fronte spartitraffico rotondo direzione Licola\n            ",
+        "gbnord" : "4528555.57300",
+        "gbest" : "2445931.74800",
+        "quota" : "65.1800000000",
+        "collegamen" : "S036.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/NAPOLI/VILLARICCA/S036.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.120475708113137, 40.9046797107762 ]
+      },
+      "id" : "sitdbo_retegeodetica.185"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "318",
+        "objectid" : "318",
+        "vertice" : "S080",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "NAPOLI",
+        "comune" : "ACERRA",
+        "ubicazione" : "Asse geometrico del pilastrino in acciaio",
+        "gbnord" : "4533306.28800",
+        "gbest" : "2467055.99700",
+        "quota" : "31.4300000000",
+        "collegamen" : "S080.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/NAPOLI/ACERRA/S080.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.370862416269244, 40.949113122579426 ]
+      },
+      "id" : "sitdbo_retegeodetica.318"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "89",
+        "objectid" : "89",
+        "vertice" : "451008",
+        "vertice0" : "Vertice Rete Primaria",
+        "provincia" : "AVELLINO",
+        "comune" : "CALITRI",
+        "accesso" : "Da Lioni, al km 21+750 della Strada Statale n° 401, svoltare a sinistra e\n                proseguire per circa 1+200 km.\n            ",
+        "ubicazione" : "Sulla sinistra al termine del lungo muro di sostegno.\n            ",
+        "materiale" : "Borchia metallica regionale infissa sulla sommità",
+        "gbnord" : "4528016.49500",
+        "gbest" : "2561799.61100",
+        "quota" : "342.900000000",
+        "collegamen" : "451008.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/CALITRI/451008.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.496171557203915, 40.90211785200028 ]
+      },
+      "id" : "sitdbo_retegeodetica.89"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "228",
+        "objectid" : "228",
+        "vertice" : "450173",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "AVELLINO",
+        "comune" : "ANDRETTA",
+        "accesso" : "Da Andretta in direzione sud verso il torrente Sarda in prossimità dell'incrocio\n                con due strade poderali, circa 200 metri dopo aver attrversato il torrente.\n            ",
+        "materiale" : "Borchia metallica regionale infissa sul cordolo.",
+        "gbnord" : "4530971.12900",
+        "gbest" : "2545859.05000",
+        "quota" : "643.900000000",
+        "collegamen" : "450173.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/ANDRETTA/450173.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.307038651652372, 40.92939251189161 ]
+      },
+      "id" : "sitdbo_retegeodetica.228"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "229",
+        "objectid" : "229",
+        "vertice" : "450174",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "AVELLINO",
+        "comune" : "MORRA DE SANCTIS",
+        "accesso" : "Al bivio di Contrada Santa Lucia tra Morra de Sanctis e Lioni.\n            ",
+        "materiale" : "Borchia metallica regionale infissa sul cordolo.",
+        "gbnord" : "4528965.68700",
+        "gbest" : "2540335.54700",
+        "quota" : "569.000000000",
+        "collegamen" : "450174.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/MORRA DE SANCTIS/450174.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.241367282565168, 40.91148260808858 ]
+      },
+      "id" : "sitdbo_retegeodetica.229"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "230",
+        "objectid" : "230",
+        "vertice" : "451175",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "AVELLINO",
+        "comune" : "CONZA DELLA CAMPANIA",
+        "accesso" : "Slargo sulla destra per chi procede in direzione di Conza della Campania.\n            ",
+        "materiale" : "Borchia metallica regionale infissa sulla sommità",
+        "gbnord" : "4528781.13200",
+        "gbest" : "2548160.71600",
+        "quota" : "613.500000000",
+        "collegamen" : "451175.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/CONZA DELLA CAMPANIA/451175.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.334277305841601, 40.90958853659418 ]
+      },
+      "id" : "sitdbo_retegeodetica.230"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "231",
+        "objectid" : "231",
+        "vertice" : "451176",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "AVELLINO",
+        "comune" : "CALITRI",
+        "accesso" : "Al km 11+150 della Strada Statale n° 399, Masseria Vitamore, svoltare in direzione\n                ovest e, al quadrivio, proseguire diritto. Iimboccare, quindi, la seconda strada sulla destra; il punto\n                è ubicato, sulla sinistra, dopo circa 150 metri.\n            ",
+        "materiale" : "Borchia metallica regionale infissa sul muro paras",
+        "gbnord" : "4529841.53700",
+        "gbest" : "2552626.76900",
+        "quota" : "678.200000000",
+        "collegamen" : "451176.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/CALITRI/451176.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.387362049774707, 40.918974934808716 ]
+      },
+      "id" : "sitdbo_retegeodetica.231"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "232",
+        "objectid" : "232",
+        "vertice" : "451177",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "AVELLINO",
+        "comune" : "CALITRI",
+        "accesso" : "Da Croce Penta, al km 12+200 della Strada Statale n° 399, percorrere circa 3+000 km\n                in direzione di Masseria Guanciello-Pepponi; a sinistra prima del ponte in curva sul Torrente Cortino.\n            ",
+        "materiale" : "Borchia metallica regionale infissa sulla parte su",
+        "gbnord" : "4530546.58000",
+        "gbest" : "2556083.90500",
+        "quota" : "570.600000000",
+        "collegamen" : "451177.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/CALITRI/451177.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.42845786094396, 40.92518077132005 ]
+      },
+      "id" : "sitdbo_retegeodetica.232"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "233",
+        "objectid" : "233",
+        "vertice" : "451179",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "AVELLINO",
+        "comune" : "CALITRI",
+        "accesso" : "Arrivando all'abitao di Pepponi dalla Strada Statale 401 alle prime case svoltare a\n                sinistra: Il punto è ubicato circa 100 metri dopo.\n            ",
+        "materiale" : "Borchia metallica regionale infissa sul cordolo.",
+        "gbnord" : "4531147.86900",
+        "gbest" : "2561110.28300",
+        "quota" : "554.200000000",
+        "collegamen" : "451179.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/CALITRI/451179.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.488194714793359, 40.930360436724904 ]
+      },
+      "id" : "sitdbo_retegeodetica.233"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "242",
+        "objectid" : "242",
+        "vertice" : "451189",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "AVELLINO",
+        "comune" : "CALITRI",
+        "accesso" : "Al km 21+750 della Strada Statale n° 401 (provenendo da Lioni) svoltare a sinistra\n                proseguendo per circa 5+400 km.\n            ",
+        "ubicazione" : "All'incrocio con due strade sterrate.",
+        "materiale" : "Borchia metallica regionale infissa sul bordo del",
+        "gbnord" : "4527662.65400",
+        "gbest" : "2559185.25900",
+        "quota" : "454.000000000",
+        "collegamen" : "451189.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/CALITRI/451189.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.465109496816957, 40.89905931255277 ]
+      },
+      "id" : "sitdbo_retegeodetica.242"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "347",
+        "objectid" : "347",
+        "vertice" : "451188",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "AVELLINO",
+        "comune" : "CALITRI",
+        "accesso" : "Al 4° tornante della strada in discesa; da Calitri seguire la direzione per il\n                poliambulatorio.\n            ",
+        "ubicazione" : "Sulla destra all'imbocco del tornante.",
+        "materiale" : "Borchia metallica regionale infissa sul bordo dell",
+        "gbnord" : "4528205.24000",
+        "gbest" : "2556834.66400",
+        "quota" : "501.100000000",
+        "collegamen" : "451188.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/CALITRI/451188.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.437235304910413, 40.90405605777567 ]
+      },
+      "id" : "sitdbo_retegeodetica.347"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "348",
+        "objectid" : "348",
+        "vertice" : "451197",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "AVELLINO",
+        "comune" : "CALITRI",
+        "accesso" : "Dalla Strada Statale n° 40,1 km 25+740, imboccare la strada asfaltata sulla destra\n                (provenendo da Calitri) e proseguire per circa 2+400 km.\n            ",
+        "ubicazione" : "All'ingresso di una azienda agricola sul muro a bordo strada.\n            ",
+        "materiale" : "Borchia metallica regionale infissa sulla sommità",
+        "gbnord" : "4525036.20300",
+        "gbest" : "2558936.48900",
+        "quota" : "517.600000000",
+        "collegamen" : "451197.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/CALITRI/451197.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.461991340973979, 40.8754115511269 ]
+      },
+      "id" : "sitdbo_retegeodetica.348"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "351",
+        "objectid" : "351",
+        "vertice" : "450201",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "AVELLINO",
+        "comune" : "NUSCO",
+        "accesso" : "Dallo svincolo di Nusco della Strada Statale n° 7 in direzione di Lioni sulla\n                Strada Provinciale 134; dopo circa 2+600 km sulla sinistra all'incrocio passaggio a livello.\n            ",
+        "materiale" : "Borchia metallica regionale infissa sul muro a bor",
+        "gbnord" : "4525378.49000",
+        "gbest" : "2530806.15400",
+        "quota" : "608.200000000",
+        "collegamen" : "450201.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/NUSCO/450201.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.128148956276629, 40.879348413465905 ]
+      },
+      "id" : "sitdbo_retegeodetica.351"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "371",
+        "objectid" : "371",
+        "vertice" : "450222",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "AVELLINO",
+        "comune" : "BAGNOLI IRPINO",
+        "accesso" : "Allo svincolo di Nusco della Strada Statale n° 7 in direzione di Bagnoli Irpino per\n                circa 3+000 km della Strada Provinciale 33, sulla destra.\n            ",
+        "materiale" : "Borchia metallica regionale infissa sul parapetto",
+        "gbnord" : "4522858.53700",
+        "gbest" : "2527376.02400",
+        "quota" : "646.500000000",
+        "collegamen" : "450222.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/BAGNOLI IRPINO/450222.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.087407828860306, 40.856685345919786 ]
+      },
+      "id" : "sitdbo_retegeodetica.371"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "1658",
+        "objectid" : "1658",
+        "vertice" : "450194",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "AVELLINO",
+        "comune" : "MORRA DE SANCTIS",
+        "accesso" : "Al km 4+900 circa della Strada Statale n° 7 dir\\C svoltare in direzione Morra de\n                Sanctis e proseguire verso Lioni per circa 350 metri sulla destra.\n            ",
+        "ubicazione" : "Sul parapetto del ponticello.",
+        "materiale" : "Borchia metallica regionale infissa sulla sommità",
+        "gbnord" : "4526970.22200",
+        "gbest" : "2539927.27300",
+        "quota" : "468.100000000",
+        "collegamen" : "450194.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/MORRA DE SANCTIS/450194.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.23645525357982, 40.893516769065826 ]
+      },
+      "id" : "sitdbo_retegeodetica.1658"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "1701",
+        "objectid" : "1701",
+        "vertice" : "451178",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "AVELLINO",
+        "comune" : "CALITRI",
+        "accesso" : "Da Croce Penta, al km 12+200 della Strada Statale n° 399, percorrere circa 7+400 km\n                la strada principale in direzione Masseria Guanciello-Pepponi, quindi svoltare a destra e prosegiuire\n                diritto per 2+600 km circa.\n            ",
+        "ubicazione" : "Il punto è ubicato circa 80 metri prima del quadrivio, sulla destra, all'esterno\n                della carragiata.\n            ",
+        "materiale" : "Borchia metallica regionale infissa sul bordo del",
+        "gbnord" : "4529904.58900",
+        "gbest" : "2559719.38300",
+        "quota" : "529.500000000",
+        "collegamen" : "451178.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/CALITRI/451178.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.47159420955837, 40.919229356401104 ]
+      },
+      "id" : "sitdbo_retegeodetica.1701"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "26",
+        "objectid" : "26",
+        "vertice" : "S118",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "SALERNO",
+        "comune" : "POSITANO",
+        "ubicazione" : "Centrino posto sulla S.S. 163 da Positano a Praiano in corrispondenza della\n                pietra miliare al km 16\n            ",
+        "gbnord" : "4497287.45000",
+        "gbest" : "2477686.79200",
+        "quota" : "82.6500000000",
+        "collegamen" : "S118.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/SALERNO/POSITANO/S118.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.499607362569776, 40.62526821081081 ]
+      },
+      "id" : "sitdbo_retegeodetica.26"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "1293",
+        "objectid" : "1293",
+        "vertice" : "449743R",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "AVELLINO",
+        "comune" : "SERINO",
+        "gbnord" : "4521207.17800",
+        "gbest" : "2510763.02600",
+        "quota" : "0E-11",
+        "collegamen" : "449743R.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/SERINO/449743R.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.890325878113025, 40.841787983428105 ]
+      },
+      "id" : "sitdbo_retegeodetica.1293"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "843",
+        "objectid" : "843",
+        "vertice" : "504615",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "SALERNO",
+        "comune" : "ROFRANO",
+        "accesso" : "Da Rofrano in direzione di Alfano per circa 1+200 km; al bivio voltare in direzione\n                di Provitera.\n            ",
+        "ubicazione" : "A circa 1+050 km dal bivio nello slargo di fronte al numero civico 6 e alla\n                fontana con vasca.\n            ",
+        "materiale" : "Borchia metallica regionale infissa sulla testata",
+        "gbnord" : "4450467.71700",
+        "gbest" : "2557546.84000",
+        "quota" : "640.000000000",
+        "collegamen" : "504615.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/SALERNO/ROFRANO/504615.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.441089736904333, 40.20371473157937 ]
+      },
+      "id" : "sitdbo_retegeodetica.843"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "151",
+        "objectid" : "151",
+        "vertice" : "P080",
+        "vertice0" : "Vertice Rete Primaria",
+        "provincia" : "CASERTA",
+        "comune" : "CASTELVOLTURNO",
+        "localita" : "Torre di Patria",
+        "accesso" : "S.S.7Q Domitiana",
+        "ubicazione" : "Centrino all'interno di tubo di ferro (ex segnale stradale tagliato all'altezza\n                suolo) in corrispondenza dell'ingresso di \"Villa Assunta\"\n            ",
+        "gbnord" : "4530265.46800",
+        "gbest" : "2437874.19400",
+        "quota" : "4.74000000000",
+        "collegamen" : "P080.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/CASERTA/CASTELVOLTURNO/P080.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.024593510092464, 40.9193113803992 ]
+      },
+      "id" : "sitdbo_retegeodetica.151"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "144",
+        "objectid" : "144",
+        "vertice" : "184801",
+        "vertice0" : "Vertice Rete IGM95",
+        "provincia" : "CASERTA",
+        "comune" : "AVERSA",
+        "localita" : "Aversa",
+        "accesso" : "Piazza Duomo",
+        "gbnord" : "4536409.29800",
+        "gbest" : "2452851.99600",
+        "quota" : "40.5000000000",
+        "collegamen" : "184801.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/CASERTA/AVERSA/184801.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.201779302133486, 40.97601946020677 ]
+      },
+      "id" : "sitdbo_retegeodetica.144"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "27",
+        "objectid" : "27",
+        "vertice" : "S120",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "NAPOLI",
+        "comune" : "CAIVANO",
+        "localita" : "Marcigliano",
+        "ubicazione" : "Centrino all'imbocco del ponte sull'autostrada nei pressi del tabellone\n                pubblicitario\n            ",
+        "gbnord" : "4535878.87600",
+        "gbest" : "2463372.79900",
+        "quota" : "28.5000000000",
+        "collegamen" : "S120.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/NAPOLI/CAIVANO/S120.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.326868679485948, 40.97203919256546 ]
+      },
+      "id" : "sitdbo_retegeodetica.27"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "24",
+        "objectid" : "24",
+        "vertice" : "431142R",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "CASERTA",
+        "comune" : "CASERTA",
+        "localita" : "Caserta",
+        "accesso" : "Prendere strada da Villa di Briano a Caserta ed arrivati ad Ercole svoltare a SX.\n            ",
+        "ubicazione" : "Su marciapiede in corrispondenza tetto fabbricato",
+        "materiale" : "Chiodo in acciaio con borchia",
+        "gbnord" : "4546047.43300",
+        "gbest" : "2464825.87300",
+        "quota" : "74.4800000000",
+        "collegamen" : "431142R.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/CASERTA/CASERTA/431142R.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.343226558521337, 41.0637327042821 ]
+      },
+      "id" : "sitdbo_retegeodetica.24"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "30",
+        "objectid" : "30",
+        "vertice" : "S124",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "NAPOLI",
+        "comune" : "TORRE DEL GRECO",
+        "ubicazione" : "Centrino vicino aiuola giardini pubblici in p.zza Santa Croce di fronte alla\n                Basilica Pontificia\n            ",
+        "gbnord" : "4515312.82800",
+        "gbest" : "2466683.73100",
+        "quota" : "40.6900000000",
+        "collegamen" : "S124.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/NAPOLI/TORRE DEL GRECO/S124.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.367985091778092, 40.78700604738055 ]
+      },
+      "id" : "sitdbo_retegeodetica.30"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "342",
+        "objectid" : "342",
+        "vertice" : "S110",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "NAPOLI",
+        "comune" : "ACERRA",
+        "localita" : "Cimitero",
+        "ubicazione" : "Centrino sul marciapiede nella piazzetta dell'ingresso del cimitero alla base\n                del palo Enel\n            ",
+        "gbnord" : "4533714.00700",
+        "gbest" : "2467628.11500",
+        "quota" : "27.3600000000",
+        "collegamen" : "S110.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/NAPOLI/ACERRA/S110.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.377624838131668, 40.952822630240476 ]
+      },
+      "id" : "sitdbo_retegeodetica.342"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "31",
+        "objectid" : "31",
+        "vertice" : "S125",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "NAPOLI",
+        "comune" : "ROCCARAINOLA",
+        "localita" : "Caulicelle",
+        "ubicazione" : "Centrino sulla strada per il ristorante Eolo in prossimità di un muretto in\n                cemento vicino al palo Enel\n            ",
+        "gbnord" : "4535627.34600",
+        "gbest" : "2483837.43100",
+        "quota" : "221.720000000",
+        "collegamen" : "S125.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/NAPOLI/ROCCARAINOLA/S125.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.57010192325575, 40.97093666743726 ]
+      },
+      "id" : "sitdbo_retegeodetica.31"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "1812",
+        "objectid" : "1812",
+        "vertice" : "469360",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "SALERNO",
+        "comune" : "SAN GREGORIO MAGNO",
+        "accesso" : "Da San Gregorio Magno, percorrere lo stradone in direzione di Oliveto\n                Citra-Palomonte per circa 1+200 km; al quadrivio svoltare a destra.\n            ",
+        "ubicazione" : "Il vertice è materializzato sullo slargo pavimentato in calcestruzzo, sulla\n                destra, circa 15 metri dopo l'incrocio.\n            ",
+        "materiale" : "Borchia metallica regionale infissa sul cordolo de",
+        "gbnord" : "4501309.18000",
+        "gbest" : "2552691.13400",
+        "quota" : "522.400000000",
+        "collegamen" : "469360.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/SALERNO/SAN GREGORIO MAGNO/469360.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.386638398411423, 40.661942822254915 ]
+      },
+      "id" : "sitdbo_retegeodetica.1812"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "1813",
+        "objectid" : "1813",
+        "vertice" : "431661R",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "BENEVENTO",
+        "comune" : "MONTESARCHIO",
+        "localita" : "Cirignano",
+        "accesso" : "Da Montesarchio direzione Cirignano al bivio tenere la Dx e proseguire per 400 mt\n            ",
+        "ubicazione" : "Su basamento in CLS in corrispondenza spigolo muretto\n            ",
+        "materiale" : "Chiodo in acciaio con Borchia",
+        "gbnord" : "4547950.35700",
+        "gbest" : "2489560.25200",
+        "quota" : "312.520000000",
+        "collegamen" : "431661R.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/BENEVENTO/MONTESARCHIO/431661R.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.637505740329711, 41.08217619140722 ]
+      },
+      "id" : "sitdbo_retegeodetica.1813"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "1815",
+        "objectid" : "1815",
+        "vertice" : "417094R",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "CASERTA",
+        "comune" : "AILANO",
+        "localita" : "Limate",
+        "accesso" : "Su S.S. 85 al KM 117 in prossimità dell'incrocio che porta a Mastrati\n            ",
+        "ubicazione" : "Basamento in CLS del muretto in corrispondenza spigolo\n            ",
+        "materiale" : "Chiodo in acciaio con borchia",
+        "gbnord" : "4579731.04400",
+        "gbest" : "2449258.63000",
+        "quota" : "116.400000000",
+        "collegamen" : "417094R.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/CASERTA/AILANO/417094R.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.154063090809602, 41.36591248995557 ]
+      },
+      "id" : "sitdbo_retegeodetica.1815"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "35",
+        "objectid" : "35",
+        "vertice" : "S135",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "NAPOLI",
+        "comune" : "AFRAGOLA",
+        "ubicazione" : "Centrino vicino al marciapiede che divide le strade presso il centro commerciale\n                Pini\n            ",
+        "gbnord" : "4530677.99900",
+        "gbest" : "2460934.09800",
+        "quota" : "44.6100000000",
+        "collegamen" : "S135.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/NAPOLI/AFRAGOLA/S135.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.298383464805642, 40.9250188725383 ]
+      },
+      "id" : "sitdbo_retegeodetica.35"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "1397",
+        "objectid" : "1397",
+        "vertice" : "434109V",
+        "vertice0" : "Vertice Rete Primaria",
+        "provincia" : "AVELLINO",
+        "comune" : "BISACCIA",
+        "gbnord" : "4545837.43000",
+        "gbest" : "2549087.23000",
+        "quota" : "0E-11",
+        "collegamen" : "434109V.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/BISACCIA/434109V.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.346079485019377, 41.063200598458494 ]
+      },
+      "id" : "sitdbo_retegeodetica.1397"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "1816",
+        "objectid" : "1816",
+        "vertice" : "417060R",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "CASERTA",
+        "comune" : "PRESENZANO",
+        "accesso" : "Dalla S.S. 85 procedere verso Venafro al KM 4 svoltare a SX e proseguire per circa\n                1+700 KM.\n            ",
+        "ubicazione" : "Su soletta in CLS copertura camera manovra acquedotto (spigolo Nord - Est)\n            ",
+        "materiale" : "Chiodo in acciaio con borchia",
+        "gbnord" : "4577964.48600",
+        "gbest" : "2443533.63500",
+        "quota" : "159.930000000",
+        "collegamen" : "417060R.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/CASERTA/PRESENZANO/417060R.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.08584297222459, 41.34947838707224 ]
+      },
+      "id" : "sitdbo_retegeodetica.1816"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "1818",
+        "objectid" : "1818",
+        "vertice" : "449293R",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "AVELLINO",
+        "comune" : "CONTRADA",
+        "gbnord" : "4525766.86700",
+        "gbest" : "2502522.79000",
+        "quota" : "0E-11",
+        "collegamen" : "449293R.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/CONTRADA/449293R.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.792453282987669, 40.88272783878661 ]
+      },
+      "id" : "sitdbo_retegeodetica.1818"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "1114",
+        "objectid" : "1114",
+        "vertice" : "172705",
+        "vertice0" : "Vertice Rete IGM95",
+        "provincia" : "CASERTA",
+        "comune" : "FRANCOLISE",
+        "gbnord" : "4558848.14000",
+        "gbest" : "2443381.43000",
+        "quota" : "0E-11",
+        "collegamen" : "172705.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/CASERTA/FRANCOLISE/172705.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.08642747764366, 41.1772890523675 ]
+      },
+      "id" : "sitdbo_retegeodetica.1114"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "1819",
+        "objectid" : "1819",
+        "vertice" : "4491018R",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "AVELLINO",
+        "comune" : "SANTA LUCIA DI SERINO",
+        "gbnord" : "4524728.50500",
+        "gbest" : "2509111.47100",
+        "quota" : "0E-11",
+        "collegamen" : "4491018R.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/SANTA LUCIA DI\n                SERINO/4491018R.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.870673737593696, 40.873489096089955 ]
+      },
+      "id" : "sitdbo_retegeodetica.1819"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "1820",
+        "objectid" : "1820",
+        "vertice" : "449686R",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "AVELLINO",
+        "comune" : "MONTEMILETTO",
+        "gbnord" : "4538544.96800",
+        "gbest" : "2512764.16400",
+        "quota" : "0E-11",
+        "collegamen" : "449686R.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/MONTEMILETTO/449686R.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.91386145083379, 40.99799300532906 ]
+      },
+      "id" : "sitdbo_retegeodetica.1820"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "1821",
+        "objectid" : "1821",
+        "vertice" : "449671R",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "AVELLINO",
+        "comune" : "SIRIGNANO",
+        "gbnord" : "4534669.50200",
+        "gbest" : "2492788.35400",
+        "quota" : "0E-11",
+        "collegamen" : "449671R.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/SIRIGNANO/449671R.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.676523416556488, 40.96265711176382 ]
+      },
+      "id" : "sitdbo_retegeodetica.1821"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "1822",
+        "objectid" : "1822",
+        "vertice" : "450722R",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "AVELLINO",
+        "comune" : "ROCCA SAN FELICE",
+        "gbnord" : "4535700.07600",
+        "gbest" : "2531209.32400",
+        "quota" : "0E-11",
+        "collegamen" : "450722R.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/ROCCA SAN FELICE/450722R.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.133120233641769, 40.97232298916237 ]
+      },
+      "id" : "sitdbo_retegeodetica.1822"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "1823",
+        "objectid" : "1823",
+        "vertice" : "161702",
+        "vertice0" : "Vertice Rete IGM95",
+        "provincia" : "ISERNIA",
+        "comune" : "SESTO CAMPANO",
+        "ubicazione" : "S.S.85",
+        "gbnord" : "4587235.35000",
+        "gbest" : "2441787.87000",
+        "quota" : "0E-11",
+        "collegamen" : "161702.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/ISERNIA/SESTO CAMPANO/161702.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.06378024299368, 41.432807993101555 ]
+      },
+      "id" : "sitdbo_retegeodetica.1823"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "39",
+        "objectid" : "39",
+        "vertice" : "S140",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "NAPOLI",
+        "comune" : "SORRENTO",
+        "localita" : "Pantano",
+        "ubicazione" : "Centrino nello slargo dell'incrocio nei pressi del muro di cinta del ristorante\n                Verdemare\n            ",
+        "gbnord" : "4497457.97900",
+        "gbest" : "2465896.87700",
+        "quota" : "84.8300000000",
+        "collegamen" : "S140.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/NAPOLI/SORRENTO/S140.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.360201852714242, 40.62611614408382 ]
+      },
+      "id" : "sitdbo_retegeodetica.39"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "1824",
+        "objectid" : "1824",
+        "vertice" : "416011R",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "CASERTA",
+        "comune" : "SESSA AURUNCA",
+        "localita" : "Carano",
+        "accesso" : "Da Cellole prendere direzione Sorbello. Arrivati al paese svoltare a DX e\n                proseguire per strada sterrata fino ad edificio bianco immerso negli ulivi\n            ",
+        "ubicazione" : "Su sommità manufatto in CLS",
+        "materiale" : "Chiodo in acciaio con borchia",
+        "gbnord" : "4562173.16100",
+        "gbest" : "2429782.81500",
+        "quota" : "103.010000000",
+        "collegamen" : "416011R.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/CASERTA/SESSA AURUNCA/416011R.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 13.923838986020105, 41.205835684941675 ]
+      },
+      "id" : "sitdbo_retegeodetica.1824"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "1825",
+        "objectid" : "1825",
+        "vertice" : "431206R",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "CASERTA",
+        "comune" : "ARIENZO",
+        "localita" : "Monte Vorrano",
+        "accesso" : "Da S. Felice a Cancello proseguire per strada montana ed ancora per 2+500 km\n            ",
+        "ubicazione" : "Spigolo cunetta in Cls",
+        "materiale" : "Chiodo in acciaio con borchia",
+        "gbnord" : "4539548.26600",
+        "gbest" : "2479918.23100",
+        "quota" : "597.030000000",
+        "collegamen" : "431206R.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/CASERTA/ARIENZO/431206R.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.523268727295205, 41.006072729017355 ]
+      },
+      "id" : "sitdbo_retegeodetica.1825"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "1826",
+        "objectid" : "1826",
+        "vertice" : "417571R",
+        "vertice0" : "Vertice Rete Secondaria",
+        "provincia" : "CASERTA",
+        "comune" : "PIETRAVAIRANO",
+        "localita" : "Pietravairano - Raviscanina",
+        "accesso" : "Da Pietravairano direzione S.S. 158 poco prima del ponte sul Volturno a DX della\n                strada si incontra un ponticello cavalcafosso in CLS.\n            ",
+        "ubicazione" : "Spigolo ponticello in CLS",
+        "materiale" : "Chiodo in acciaio con borchia",
+        "gbnord" : "4577837.98800",
+        "gbest" : "2453691.25100",
+        "quota" : "101.730000000",
+        "collegamen" : "417571R.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/CASERTA/PIETRAVAIRANO/417571R.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.207263713874696, 41.34923953924217 ]
+      },
+      "id" : "sitdbo_retegeodetica.1826"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "1394",
+        "objectid" : "1394",
+        "vertice" : "451114V",
+        "vertice0" : "Vertice Rete Primaria",
+        "provincia" : "AVELLINO",
+        "comune" : "AQUILONIA",
+        "gbnord" : "4534685.29000",
+        "gbest" : "2562362.76000",
+        "quota" : "0E-11",
+        "collegamen" : "451114V.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/AQUILONIA/451114V.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.503313044547328, 40.96216203137576 ]
+      },
+      "id" : "sitdbo_retegeodetica.1394"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "87",
+        "objectid" : "87",
+        "vertice" : "451006",
+        "vertice0" : "Vertice Rete Primaria",
+        "provincia" : "AVELLINO",
+        "comune" : "AQUILONIA",
+        "accesso" : "Dal bivio con la Strada Statale n° 401 percorrere la S P 156 in direzione di\n                Aquilonia per circa 7+200 km.\n            ",
+        "materiale" : "Borchia metallica regionale infissa sulla canalina",
+        "gbnord" : "4534685.28500",
+        "gbest" : "2562362.75800",
+        "quota" : "670.900000000",
+        "collegamen" : "451006.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/AVELLINO/AQUILONIA/451006.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.503313044547328, 40.96216203137576 ]
+      },
+      "id" : "sitdbo_retegeodetica.87"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "1316",
+        "objectid" : "1316",
+        "vertice" : "430035V",
+        "vertice0" : "Vertice Rete Primaria",
+        "provincia" : "CASERTA",
+        "comune" : "CAMIGLIANO",
+        "gbnord" : "4559560.72000",
+        "gbest" : "2453885.43000",
+        "quota" : "0E-11",
+        "collegamen" : "430035V.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/CASERTA/CAMIGLIANO/430035V.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.211568998965753, 41.184633192936275 ]
+      },
+      "id" : "sitdbo_retegeodetica.1316"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "88",
+        "objectid" : "88",
+        "vertice" : "451007",
+        "vertice0" : "Vertice Rete Primaria",
+        "provincia" : "POTENZA",
+        "comune" : "MONTICCHIO BAGNI",
+        "accesso" : "Da Monticchio Bagni percorrere la Strada Statale n° 167 in direzione del lago.\n            ",
+        "ubicazione" : "In prossimità del km 13+500, in corrispondenza di un passo carraio.\n            ",
+        "materiale" : "Borchia metallica regionale infissa sul bordo dell",
+        "gbnord" : "4532220.30600",
+        "gbest" : "2569004.67700",
+        "quota" : "626.200000000",
+        "collegamen" : "451007.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/POTENZA/MONTICCHIO BAGNI/451007.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.582046877562572, 40.93958714679288 ]
+      },
+      "id" : "sitdbo_retegeodetica.88"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "gid" : "149",
+        "objectid" : "149",
+        "vertice" : "P001",
+        "vertice0" : "Vertice Rete Primaria",
+        "provincia" : "NAPOLI",
+        "comune" : "SAN GENNARO VESUVIANO",
+        "localita" : "S.Gennaro Vesuviano",
+        "accesso" : "Via Ferrovia dello Stato",
+        "ubicazione" : "Centrino nei giardini pubblici di fronte alla chiesa\n            ",
+        "gbnord" : "4523392.31400",
+        "gbest" : "2480293.57200",
+        "quota" : "53.4400000000",
+        "collegamen" : "P001.pdf",
+        "data_ini" : "20041202",
+        "hyperlink" : "/Vertici%20Trigonometrici%20Regionali/NAPOLI/SAN GENNARO VESUVIANO/P001.pdf\n            "
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 14.528768815394724, 40.86055838974251 ]
+      },
+      "id" : "sitdbo_retegeodetica.149"
+    } ]
+  }
+}

@@ -458,4 +458,20 @@ public class GPWMSFeatureStoreAaltoTest extends WMSGetFeatureInfoAaltoReaderTest
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreAaltoElementiRidotti")
                 .collect(joining(separator, "", ".json"))), wmsFeatureStore);
     }
+
+    @Test
+    public void c_f_wmsFeatureStoreAaltoReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoReader.readAsStore(storage.find("AlberiMonumentali.xml"));
+        logger.info("#######################FEATURE_STORE_ALBERI_MONUMENTALI : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreAaltoAlberiMonumentali")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
+
+    @Test
+    public void c_g_wmsFeatureStoreAaltoReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoReader.readAsStore(storage.find("AcqueSecondarie.xml"));
+        logger.info("#######################FEATURE_STORE_ACQUE_SECONDARIE : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreAaltoAcqueSecondarie")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
 }

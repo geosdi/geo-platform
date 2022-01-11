@@ -1,0 +1,1156 @@
+{
+  "key" : "FEATURE_NAME",
+  "store" : {
+    "polizia_2008_utm33" : [ {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "16",
+        "anno" : "2008",
+        "utm_x" : "572280",
+        "utm_y" : "4462240",
+        "valore" : "2",
+        "tipologia" : "Argine",
+        "bacino" : "Agri",
+        "documento" : "16.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.849716153321745, 40.30585650597224 ]
+      },
+      "id" : "polizia_2008_utm33.15"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "17",
+        "anno" : "2008",
+        "utm_x" : "574004",
+        "utm_y" : "4461287",
+        "valore" : "2",
+        "tipologia" : "Argine",
+        "bacino" : "Agri",
+        "documento" : "17.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.869891242285652, 40.2971208949607 ]
+      },
+      "id" : "polizia_2008_utm33.16"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "18",
+        "anno" : "2008",
+        "utm_x" : "575170",
+        "utm_y" : "4460790",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Agri",
+        "documento" : "18.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.883550683237567, 40.29253986022326 ]
+      },
+      "id" : "polizia_2008_utm33.17"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "19",
+        "anno" : "2008",
+        "utm_x" : "575181",
+        "utm_y" : "4460819",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Agri",
+        "documento" : "19.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.88368349023541, 40.292800109664654 ]
+      },
+      "id" : "polizia_2008_utm33.18"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "20",
+        "anno" : "2008",
+        "utm_x" : "609783",
+        "utm_y" : "4458849",
+        "valore" : "3",
+        "tipologia" : "Argine",
+        "bacino" : "Agri",
+        "documento" : "20.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.290368829323384, 40.271231217796725 ]
+      },
+      "id" : "polizia_2008_utm33.19"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "21",
+        "anno" : "2008",
+        "utm_x" : "590041",
+        "utm_y" : "4457950",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Agri",
+        "documento" : "21.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.05808792171343, 40.26548953772575 ]
+      },
+      "id" : "polizia_2008_utm33.20"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "22",
+        "anno" : "2008",
+        "utm_x" : "602749",
+        "utm_y" : "4457900",
+        "valore" : "3",
+        "tipologia" : "Argine",
+        "bacino" : "Agri",
+        "documento" : "22.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.207504119286693, 40.26357622433914 ]
+      },
+      "id" : "polizia_2008_utm33.21"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "23",
+        "anno" : "2008",
+        "utm_x" : "610809",
+        "utm_y" : "4458847",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Agri",
+        "documento" : "23.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.30243288434001, 40.27107801745497 ]
+      },
+      "id" : "polizia_2008_utm33.22"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "24",
+        "anno" : "2008",
+        "utm_x" : "613439",
+        "utm_y" : "4462700",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Agri",
+        "documento" : "24.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.334040057852583, 40.3054290782716 ]
+      },
+      "id" : "polizia_2008_utm33.23"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "26",
+        "anno" : "2008",
+        "utm_x" : "614429",
+        "utm_y" : "4462813",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Agri",
+        "documento" : "26.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.345707012378522, 40.30631193292546 ]
+      },
+      "id" : "polizia_2008_utm33.24"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "27",
+        "anno" : "2008",
+        "utm_x" : "604340",
+        "utm_y" : "4458244",
+        "valore" : "2",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Agri",
+        "documento" : "27.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.22626658345026, 40.26647797816846 ]
+      },
+      "id" : "polizia_2008_utm33.25"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "29",
+        "anno" : "2008",
+        "utm_x" : "621581",
+        "utm_y" : "4463834",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Agri",
+        "documento" : "29.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.430038833156548, 40.314498029335304 ]
+      },
+      "id" : "polizia_2008_utm33.26"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "30",
+        "anno" : "2008",
+        "utm_x" : "620225",
+        "utm_y" : "4446991",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Sinni",
+        "documento" : "30.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.4109316284566, 40.162995790675154 ]
+      },
+      "id" : "polizia_2008_utm33.27"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "31",
+        "anno" : "2008",
+        "utm_x" : "618019",
+        "utm_y" : "4448338",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Sinni",
+        "documento" : "31.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.385280903340718, 40.175440729845256 ]
+      },
+      "id" : "polizia_2008_utm33.28"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "34",
+        "anno" : "2008",
+        "utm_x" : "565681",
+        "utm_y" : "4435508",
+        "valore" : "2",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Noce",
+        "documento" : "34.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.769342933627819, 40.06558227172602 ]
+      },
+      "id" : "polizia_2008_utm33.29"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "35",
+        "anno" : "2008",
+        "utm_x" : "639316",
+        "utm_y" : "4448287",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Sinni",
+        "documento" : "35.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.635313211110784, 40.17171893150174 ]
+      },
+      "id" : "polizia_2008_utm33.30"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "36",
+        "anno" : "2008",
+        "utm_x" : "640316",
+        "utm_y" : "4447416",
+        "valore" : "2",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Sinni",
+        "documento" : "36.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.646863243083192, 40.16370847861331 ]
+      },
+      "id" : "polizia_2008_utm33.31"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "37",
+        "anno" : "2008",
+        "utm_x" : "638572",
+        "utm_y" : "4448667",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Sinni",
+        "documento" : "37.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.626660565977183, 40.17526421385267 ]
+      },
+      "id" : "polizia_2008_utm33.32"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "38",
+        "anno" : "2008",
+        "utm_x" : "611700",
+        "utm_y" : "4465808",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Agri",
+        "documento" : "38.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.314124326376568, 40.333656531568316 ]
+      },
+      "id" : "polizia_2008_utm33.33"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "39",
+        "anno" : "2008",
+        "utm_x" : "605439",
+        "utm_y" : "4466158",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Agri",
+        "documento" : "39.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.24049213463571, 40.3376228442827 ]
+      },
+      "id" : "polizia_2008_utm33.34"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "40",
+        "anno" : "2008",
+        "utm_x" : "589131",
+        "utm_y" : "4473804",
+        "valore" : "2",
+        "tipologia" : "Briglia",
+        "bacino" : "Agri",
+        "documento" : "40.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.049598290553803, 40.40839485576052 ]
+      },
+      "id" : "polizia_2008_utm33.35"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "41",
+        "anno" : "2008",
+        "utm_x" : "603912",
+        "utm_y" : "4465570",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Agri",
+        "documento" : "41.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.22242296361684, 40.332518026867064 ]
+      },
+      "id" : "polizia_2008_utm33.36"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "42",
+        "anno" : "2008",
+        "utm_x" : "588860",
+        "utm_y" : "4475428",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Agri",
+        "documento" : "42.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.0466316084319, 40.4230521056144 ]
+      },
+      "id" : "polizia_2008_utm33.37"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "43",
+        "anno" : "2008",
+        "utm_x" : "588524",
+        "utm_y" : "4475718",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Agri",
+        "documento" : "43.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.042711804137106, 40.4257000878666 ]
+      },
+      "id" : "polizia_2008_utm33.38"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "44",
+        "anno" : "2008",
+        "utm_x" : "643602",
+        "utm_y" : "4454414",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Agri",
+        "documento" : "44.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.68699604396998, 40.22617388518936 ]
+      },
+      "id" : "polizia_2008_utm33.39"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "45",
+        "anno" : "2008",
+        "utm_x" : "643581",
+        "utm_y" : "4454371",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Agri",
+        "documento" : "45.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.686739711326865, 40.22579024705115 ]
+      },
+      "id" : "polizia_2008_utm33.40"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "46",
+        "anno" : "2008",
+        "utm_x" : "595194",
+        "utm_y" : "4466462",
+        "valore" : "2",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Agri",
+        "documento" : "46.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.119945283332015, 40.34159170593842 ]
+      },
+      "id" : "polizia_2008_utm33.41"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "47",
+        "anno" : "2008",
+        "utm_x" : "643947",
+        "utm_y" : "4454361",
+        "valore" : "2",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Agri",
+        "documento" : "47.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.691037502136407, 40.22563743015264 ]
+      },
+      "id" : "polizia_2008_utm33.42"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "48",
+        "anno" : "2008",
+        "utm_x" : "594869",
+        "utm_y" : "4466669",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Agri",
+        "documento" : "48.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.11615022389898, 40.34349323916882 ]
+      },
+      "id" : "polizia_2008_utm33.43"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "49",
+        "anno" : "2008",
+        "utm_x" : "635729",
+        "utm_y" : "4457296",
+        "valore" : "2",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Agri",
+        "documento" : "49.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.595103831495273, 40.253440398004024 ]
+      },
+      "id" : "polizia_2008_utm33.44"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "50",
+        "anno" : "2008",
+        "utm_x" : "589385",
+        "utm_y" : "4470052",
+        "valore" : "2",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Agri",
+        "documento" : "50.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.05206518016055, 40.3745711417411 ]
+      },
+      "id" : "polizia_2008_utm33.45"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "51",
+        "anno" : "2008",
+        "utm_x" : "589364",
+        "utm_y" : "4472204",
+        "valore" : "3",
+        "tipologia" : "Briglia",
+        "bacino" : "Agri",
+        "documento" : "51.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.052119439324944, 40.39395776623429 ]
+      },
+      "id" : "polizia_2008_utm33.46"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "52",
+        "anno" : "2008",
+        "utm_x" : "589510",
+        "utm_y" : "4472509",
+        "valore" : "3",
+        "tipologia" : "Briglia",
+        "bacino" : "Agri",
+        "documento" : "52.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.05388230798748, 40.39668941547078 ]
+      },
+      "id" : "polizia_2008_utm33.47"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "53",
+        "anno" : "2008",
+        "utm_x" : "629207",
+        "utm_y" : "4460619",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Agri",
+        "documento" : "53.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.519111467888187, 40.284399327146176 ]
+      },
+      "id" : "polizia_2008_utm33.48"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "54",
+        "anno" : "2008",
+        "utm_x" : "589479",
+        "utm_y" : "4472611",
+        "valore" : "3",
+        "tipologia" : "Briglia",
+        "bacino" : "Agri",
+        "documento" : "54.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.053531403521372, 40.39761151757368 ]
+      },
+      "id" : "polizia_2008_utm33.49"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "56",
+        "anno" : "2008",
+        "utm_x" : "635025",
+        "utm_y" : "4450605",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Sinni",
+        "documento" : "56.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.58542321976392, 40.193295565382776 ]
+      },
+      "id" : "polizia_2008_utm33.50"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "63",
+        "anno" : "2008",
+        "utm_x" : "600303",
+        "utm_y" : "4457654",
+        "valore" : "3",
+        "tipologia" : "Soglia",
+        "bacino" : "Agri",
+        "documento" : "63.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.178705958338067, 40.26165697214135 ]
+      },
+      "id" : "polizia_2008_utm33.51"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "64",
+        "anno" : "2008",
+        "utm_x" : "589515",
+        "utm_y" : "4473283",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Agri",
+        "documento" : "64.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 16.054049957103082, 40.40366074409257 ]
+      },
+      "id" : "polizia_2008_utm33.52"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "65",
+        "anno" : "2008",
+        "utm_x" : "565375",
+        "utm_y" : "4499837",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Basento",
+        "documento" : "65.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.77233922704026, 40.6451049928505 ]
+      },
+      "id" : "polizia_2008_utm33.53"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "66",
+        "anno" : "2008",
+        "utm_x" : "565402",
+        "utm_y" : "4499805",
+        "valore" : "2",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Basento",
+        "documento" : "66.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.772655204852772, 40.644814603831925 ]
+      },
+      "id" : "polizia_2008_utm33.54"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "69",
+        "anno" : "2008",
+        "utm_x" : "564952",
+        "utm_y" : "4500305",
+        "valore" : "2",
+        "tipologia" : "Argine",
+        "bacino" : "Basento",
+        "documento" : "69.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.767385111265893, 40.649354045701116 ]
+      },
+      "id" : "polizia_2008_utm33.55"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "70",
+        "anno" : "2008",
+        "utm_x" : "564786",
+        "utm_y" : "4500524",
+        "valore" : "2",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Basento",
+        "documento" : "70.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.76544440937245, 40.65133980865061 ]
+      },
+      "id" : "polizia_2008_utm33.56"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "71",
+        "anno" : "2008",
+        "utm_x" : "565995",
+        "utm_y" : "4499295",
+        "valore" : "3",
+        "tipologia" : "Argine",
+        "bacino" : "Basento",
+        "documento" : "71.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.779614531895634, 40.64017344118572 ]
+      },
+      "id" : "polizia_2008_utm33.57"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "72",
+        "anno" : "2008",
+        "utm_x" : "566108",
+        "utm_y" : "4499273",
+        "valore" : "2",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Basento",
+        "documento" : "72.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.78094846026885, 40.63996623828275 ]
+      },
+      "id" : "polizia_2008_utm33.58"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "73",
+        "anno" : "2008",
+        "utm_x" : "565631",
+        "utm_y" : "4499482",
+        "valore" : "3",
+        "tipologia" : "Argine",
+        "bacino" : "Basento",
+        "documento" : "73.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.775329677071937, 40.64188689940595 ]
+      },
+      "id" : "polizia_2008_utm33.59"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "74",
+        "anno" : "2008",
+        "utm_x" : "566405",
+        "utm_y" : "4498801",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Basento",
+        "documento" : "74.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.784410736313363, 40.63569070943298 ]
+      },
+      "id" : "polizia_2008_utm33.60"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "75",
+        "anno" : "2008",
+        "utm_x" : "566616",
+        "utm_y" : "4498506",
+        "valore" : "1",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Basento",
+        "documento" : "75.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.786874465690321, 40.63301640763813 ]
+      },
+      "id" : "polizia_2008_utm33.61"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "76",
+        "anno" : "2008",
+        "utm_x" : "567090",
+        "utm_y" : "4497995",
+        "valore" : "2",
+        "tipologia" : "Argine",
+        "bacino" : "Basento",
+        "documento" : "76.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.79242453881107, 40.6283750542622 ]
+      },
+      "id" : "polizia_2008_utm33.62"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "77",
+        "anno" : "2008",
+        "utm_x" : "567254",
+        "utm_y" : "4497890",
+        "valore" : "1",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Basento",
+        "documento" : "77.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.794352302394921, 40.62741590514097 ]
+      },
+      "id" : "polizia_2008_utm33.63"
+    }, {
+      "type" : "Feature",
+      "properties" : {
+        "opera" : "78",
+        "anno" : "2008",
+        "utm_x" : "567330",
+        "utm_y" : "4497839",
+        "valore" : "3",
+        "tipologia" : "Attraversamento",
+        "bacino" : "Basento",
+        "documento" : "78.zip"
+      },
+      "geometry" : {
+        "type" : "Point",
+        "crs" : {
+          "type" : "name",
+          "properties" : {
+            "name" : "EPSG:4326"
+          }
+        },
+        "coordinates" : [ 15.7952453872421, 40.626950318984456 ]
+      },
+      "id" : "polizia_2008_utm33.64"
+    } ]
+  }
+}

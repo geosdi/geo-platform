@@ -1,0 +1,2426 @@
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:Gorgonzola="Gorgonzola" xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="Gorgonzola http://geoserver.atlas.polimi.it:80/geoserver/Gorgonzola/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=Gorgonzola%3AAcque_secondarie http://www.opengis.net/wfs http://geoserver.atlas.polimi.it:80/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.1">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1531819.973,5041805.098,140.68800354 1531821.303,5041802.773,140.68800354
+                                1531822.297,5041801.215,140.68800354 1531823.387,5041799.93,140.68800354
+                                1531824.359,5041798.844,140.68800354 1531825.51,5041797.664,140.68800354
+                                1531826.211,5041796.125,140.68800354 1531826.832,5041794.773,140.68800354
+                                1531827.453,5041793.504,140.68800354 1531828.063,5041792.781,140.68800354
+                                1531828.947,5041791.695,140.68800354 1531829.92,5041790.07,140.68800354
+                                1531830.979,5041787.445,140.68800354 1531832.393,5041785.816,140.68800354
+                                1531834.158,5041783.734,140.68800354 1531835.486,5041781.656,140.68800354
+                                1531836.193,5041779.934,140.68800354 1531837.43,5041777.855,140.68800354
+                                1531839.018,5041775.773,140.68800354 1531840.783,5041773.879,140.68800354
+                                1531842.375,5041771.887,140.68800354 1531843.643,5041769.508,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>15A0</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.2">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1531845.998,5041765.375,140.68800354 1531851.322,5041756.828,140.68800354
+                                1531854.783,5041751.66,140.68800354 1531860.117,5041743.543,140.68800354
+                                1531867.324,5041732.766,140.68800354 1531871.416,5041726.629,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>15A2</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.3">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1531873.5,5041722.996,140.68800354 1531894.68,5041690.965,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Line</Gorgonzola:Entity>
+            <Gorgonzola:Handle>15A3</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.4">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532115.768,5043574.137,140.68800354 1532126.398,5043591.863,140.68800354
+                                1532130.787,5043593.746,140.68800354 1532138.787,5043595.996,140.68800354
+                                1532150.211,5043599.48,140.68800354 1532185.066,5043611.234,140.68800354
+                                1532214.977,5043622.477,140.68800354 1532226.301,5043627.773,140.68800354
+                                1532233.377,5043629.453,140.68800354 1532235.322,5043628.566,140.68800354
+                                1532239.336,5043610.578,140.68800354 1532241.756,5043600.285,140.68800354
+                                1532246.674,5043578.273,140.68800354 1532250.605,5043564.203,140.68800354
+                                1532251.922,5043559.469,140.68800354 1532252.438,5043557.617,140.68800354
+                                1532267.658,5043563.238,140.68800354 1532290.467,5043568.992,140.68800354
+                                1532326.549,5043580.359,140.68800354 1532369.055,5043591.355,140.68800354
+                                1532400,5043599.293,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D38</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.5">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532400,5043411.66,140.68800354 1532388.549,5043407.719,140.68800354
+                                1532363.334,5043398.465,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D39</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.6">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532214.127,5043391.121,140.68800354 1532188.553,5043475.449,140.68800354
+                                1532165.604,5043551.156,140.68800354 1532150.744,5043598.898,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D3A</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.7">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532243.057,5043418.457,140.68800354 1532209.986,5043525.199,140.68800354
+                                1532183.984,5043610.41,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D3B</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.8">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532285.176,5043412.594,140.68800354 1532245.998,5043531.676,140.68800354
+                                1532217.186,5043623.508,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D3C</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.9">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532291.154,5043428.844,140.68800354 1532248.447,5043553.938,140.68800354
+                                1532248.107,5043555.609,140.68800354 1532249.709,5043557.516,140.68800354
+                                1532251.922,5043559.469,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D3D</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.10">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532302.643,5043427.508,140.68800354 1532257.346,5043559.121,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Line</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D3E</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.11">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532324.248,5043429.992,140.68800354 1532278.951,5043565.973,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Line</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D3F</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.12">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532347.18,5043420.414,140.68800354 1532295.719,5043570.902,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Line</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D40</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.13">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532182.588,5043338.438,140.68800354 1532166.912,5043395.934,140.68800354
+                                1532145.736,5043465.926,140.68800354 1532120.738,5043552.031,140.68800354
+                                1532118.473,5043561.73,140.68800354 1532115.971,5043571.609,140.68800354
+                                1532113.781,5043576.086,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D41</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.14">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532075.369,5043502.781,140.68800354 1532053.076,5043566.543,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Line</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D42</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.15">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532063.973,5043441.941,140.68800354 1532025.91,5043555.469,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Line</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D43</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.16">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532057.34,5043400.66,140.68800354 1532008.057,5043549.887,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Line</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D44</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.17">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532057.369,5043345.641,140.68800354 1532031.443,5043427.508,140.68800354
+                                1532046.111,5043432.32,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D45</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.18">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532046.213,5043316.07,140.68800354 1532010.604,5043422.094,140.68800354
+                                1531972.789,5043412.656,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D46</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.19">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532021.236,5043316.648,140.68800354 1531989.66,5043416.77,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Line</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D47</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.20">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532015.271,5043271.84,140.68800354 1531974.256,5043412.754,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Line</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D48</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.21">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1531939.451,5043528.258,140.68800354 1531974.25,5043412.68,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Line</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D49</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.22">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1531974.23,5043412.426,140.68800354 1531933.391,5043399.727,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Line</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D4A</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.23">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1531979.359,5043289.754,140.68800354 1531943.506,5043400.137,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Line</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D4B</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.24">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1531996.643,5043297.691,140.68800354 1531962.98,5043408.203,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Line</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D4C</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.25">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532308.293,5043665.078,140.68800354 1532296.516,5043717.398,140.68800354
+                                1532279.615,5043791.539,140.68800354 1532266.635,5043841.68,140.68800354
+                                1532252.564,5043895.918,140.68800354 1532238.271,5043951.328,140.68800354
+                                1532225.064,5044004.281,140.68800354 1532223.701,5044012.012,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D4D</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.26">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532315.586,5043942.801,140.68800354 1532244.42,5043928.094,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Line</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D4E</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.27">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532338.852,5043948.164,140.68800354 1532395.783,5043959.586,140.68800354
+                                1532398.059,5043960.246,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D4F</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.28">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532356.904,5043673.645,140.68800354 1532400,5043688.52,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Line</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D52</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.29">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532400,5043865.273,140.68800354 1532348.623,5043851.516,140.68800354
+                                1532340.244,5043850.688,140.68800354 1532339.93,5043851.488,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D53</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.30">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532369.148,5043773.715,140.68800354 1532400,5043782.891,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Line</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D54</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.31">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532400,5043994.531,140.68800354 1532392.051,5043992.98,140.68800354
+                                1532388.908,5043992.762,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D55</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.32">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532397.801,5043310.121,140.68800354 1532367.031,5043389.387,140.68800354
+                                1532363.334,5043398.465,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D57</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.33">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532400,5043228.5,140.68800354 1532344.941,5043211.488,140.68800354
+                                1532343.504,5043211.164,140.68800354 1532342.066,5043210.867,140.68800354
+                                1532341.273,5043211.488,140.68800354 1532340.631,5043213.07,140.68800354
+                                1532338.35,5043218.914,140.68800354 1532337.199,5043220.184,140.68800354
+                                1532333.184,5043218.797,140.68800354 1532331.221,5043218.566,140.68800354
+                                1532325.959,5043217.129,140.68800354 1532320.371,5043215.195,140.68800354
+                                1532312.82,5043212.453,140.68800354 1532306.582,5043209.871,140.68800354
+                                1532296.748,5043205.332,140.68800354 1532292.711,5043203.23,140.68800354
+                                1532283.896,5043200.727,140.68800354 1532282.127,5043200,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D58</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.34">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532311.906,5043287.055,140.68800354 1532278.758,5043364.617,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Line</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D5A</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.35">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532288.162,5043267.602,140.68800354 1532270.756,5043319.754,140.68800354
+                                1532257.42,5043360.012,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D5B</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.36">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532250.838,5043284.727,140.68800354 1532229.598,5043349.383,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Line</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D5C</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.37">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532195.143,5043244.555,140.68800354 1532170.699,5043317.527,140.68800354
+                                1532168.236,5043324.063,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D5D</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.38">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532177.758,5043236.754,140.68800354 1532161.154,5043285.566,140.68800354
+                                1532150.314,5043317.203,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D5E</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.39">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532161.357,5043229.887,140.68800354 1532148.543,5043267.715,140.68800354
+                                1532133.625,5043310.207,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D5F</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.40">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532161.178,5043200,140.68800354 1532157.174,5043210.871,140.68800354
+                                1532144.945,5043250.039,140.68800354 1532128.145,5043300.211,140.68800354
+                                1532125.279,5043307.453,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D60</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.41">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532143.549,5043213.598,140.68800354 1532132.465,5043248.668,140.68800354
+                                1532117.445,5043292.609,140.68800354 1532114.469,5043302.875,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D61</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.42">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532122.346,5043222.125,140.68800354 1532107.543,5043267.117,140.68800354
+                                1532097.146,5043295.781,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D62</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.43">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532110.502,5043211.586,140.68800354 1532095.283,5043259.07,140.68800354
+                                1532085.42,5043290.676,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D63</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.44">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1532095.088,5043200,140.68800354 1532089.262,5043217.133,140.68800354
+                                1532068.52,5043275.676,140.68800354 1532065.664,5043285.496,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D64</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.45">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1531901.561,5043200,140.68800354 1531892.459,5043224.723,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Line</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D74</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.46">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1531924.209,5043200,140.68800354 1531923.943,5043200.727,140.68800354
+                                1531913.846,5043231.309,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D75</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.47">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1531969.26,5043252.23,140.68800354 1531964.523,5043251.148,140.68800354
+                                1531953.768,5043247.238,140.68800354 1531937.287,5043240.926,140.68800354
+                                1531916.223,5043232.23,140.68800354 1531912.26,5043230.691,140.68800354
+                                1531892.459,5043224.723,140.68800354 1531872.352,5043220.902,140.68800354
+                                1531866.465,5043219.816,140.68800354 1531854.016,5043217.488,140.68800354
+                                1531845.943,5043214.918,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D76</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.48">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1531843.805,5043200,140.68800354 1531838.945,5043212.723,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Line</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D77</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.49">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1531522.434,5043297.531,140.68800354 1531523.682,5043288.172,140.68800354
+                                1531526.232,5043271.824,140.68800354 1531529.838,5043257.184,140.68800354
+                                1531544.873,5043215.004,140.68800354 1531546.324,5043213.586,140.68800354
+                                1531548.119,5043213.609,140.68800354 1531550.09,5043207.738,140.68800354
+                                1531552.693,5043200,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Polyline</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D7B</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+    <gml:featureMember>
+        <Gorgonzola:Acque_secondarie fid="Acque_secondarie.50">
+            <Gorgonzola:the_geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1531845.943,5043214.918,140.68800354 1531838.945,5043212.723,140.68800354
+                            </gml:coordinates>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </Gorgonzola:the_geom>
+            <Gorgonzola:FID_>0</Gorgonzola:FID_>
+            <Gorgonzola:Entity>Line</Gorgonzola:Entity>
+            <Gorgonzola:Handle>1D7F</Gorgonzola:Handle>
+            <Gorgonzola:Layer>afgc-terreno scolina</Gorgonzola:Layer>
+            <Gorgonzola:LyrFrzn>0</Gorgonzola:LyrFrzn>
+            <Gorgonzola:LyrLock>0</Gorgonzola:LyrLock>
+            <Gorgonzola:LyrOn>1</Gorgonzola:LyrOn>
+            <Gorgonzola:LyrVPFrzn>0</Gorgonzola:LyrVPFrzn>
+            <Gorgonzola:LyrHandle>15A1</Gorgonzola:LyrHandle>
+            <Gorgonzola:Color>1</Gorgonzola:Color>
+            <Gorgonzola:EntColor>-1</Gorgonzola:EntColor>
+            <Gorgonzola:LyrColor>1</Gorgonzola:LyrColor>
+            <Gorgonzola:BlkColor>0</Gorgonzola:BlkColor>
+            <Gorgonzola:Linetype>CONTINUOUS</Gorgonzola:Linetype>
+            <Gorgonzola:EntLinetyp>CONTINUOUS</Gorgonzola:EntLinetyp>
+            <Gorgonzola:LyrLnType>CONTINUOUS</Gorgonzola:LyrLnType>
+            <Gorgonzola:BlkLinetyp/>
+            <Gorgonzola:Elevation>140.68800354</Gorgonzola:Elevation>
+            <Gorgonzola:Thickness>0.0</Gorgonzola:Thickness>
+            <Gorgonzola:LineWt>25</Gorgonzola:LineWt>
+            <Gorgonzola:EntLineWt>25</Gorgonzola:EntLineWt>
+            <Gorgonzola:LyrLineWt>-3</Gorgonzola:LyrLineWt>
+            <Gorgonzola:BlkLineWt>-1</Gorgonzola:BlkLineWt>
+            <Gorgonzola:RefName/>
+            <Gorgonzola:LTScale>1.0</Gorgonzola:LTScale>
+            <Gorgonzola:ExtX>0.0</Gorgonzola:ExtX>
+            <Gorgonzola:ExtY>0.0</Gorgonzola:ExtY>
+            <Gorgonzola:ExtZ>1.0</Gorgonzola:ExtZ>
+            <Gorgonzola:DocName>base 2000.dwg</Gorgonzola:DocName>
+            <Gorgonzola:DocPath>D:\Dati\Gorgonzola\DIIAR\Aereofotogrammetrico\base 2000.dwg</Gorgonzola:DocPath>
+            <Gorgonzola:DocType>DWG</Gorgonzola:DocType>
+            <Gorgonzola:DocVer>AC1021</Gorgonzola:DocVer>
+        </Gorgonzola:Acque_secondarie>
+    </gml:featureMember>
+</wfs:FeatureCollection>

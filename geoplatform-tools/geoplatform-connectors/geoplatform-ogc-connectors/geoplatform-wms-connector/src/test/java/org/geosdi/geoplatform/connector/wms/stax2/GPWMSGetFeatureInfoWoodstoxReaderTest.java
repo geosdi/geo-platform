@@ -347,4 +347,16 @@ public class GPWMSGetFeatureInfoWoodstoxReaderTest extends WMSGetFeatureInfoWood
         logger.info("#######################FEATURE_COLLECTION_PARCHI_ELEMENTI_RIDOTTI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("ElementiRidotti.xml"))));
     }
+
+    @Test
+    public void d_o_wmsGetFeatureInfooWoodstoxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_ALBERI_MONUMENTALI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("AlberiMonumentali.xml"))));
+    }
+
+    @Test
+    public void d_p_wmsGetFeatureInfooWoodstoxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_ACQUE_SECONDARIE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("AcqueSecondarie.xml"))));
+    }
 }

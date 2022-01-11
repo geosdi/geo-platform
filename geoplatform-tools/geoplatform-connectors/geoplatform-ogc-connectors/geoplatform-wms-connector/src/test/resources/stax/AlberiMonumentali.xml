@@ -1,0 +1,1262 @@
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:ppr2006="www.sardegnaterritorio.it" xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.opengis.net/wfs http://webgis.regione.sardegna.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd www.sardegnaterritorio.it http://webgis.regione.sardegna.it/geoserver/ppr2006/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=ppr2006%3AALBERIMONUMENTALI">
+    <gml:boundedBy>
+        <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1451316,4311236
+                1566149,4562852
+            </gml:coordinates>
+        </gml:Box>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.47">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1555643,4443053
+                        1555643,4443053
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Juniperus phoenicea L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>290</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>10</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1555643,4443053
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.48">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1463147,4378605
+                        1463147,4378605
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Laurus nobilis</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>208</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>10</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1463147,4378605
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.41">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1509799,4342044
+                        1509799,4342044
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Jacaranda mimosaefolia G. Don</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>150</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>12</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1509799,4342044
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.49">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1489431,4466718
+                        1489431,4466718
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Libocedrus decurrens Torr.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>225</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>18</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1489431,4466718
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.50">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1524876,4351789
+                        1524876,4351789
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Magnolia grandiflora L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>240</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>10</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1524876,4351789
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.51">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1566149,4488831
+                        1566149,4488831
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Morus nigra L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>230</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>7</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1566149,4488831
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.52">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1463558,4420691
+                        1463558,4420691
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Myrtus communis L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>58-90</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>5</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1463558,4420691
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.53">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1473250,4346040
+                        1473250,4346040
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Olea europea L. var. sativa Brot.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>940</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>10</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1473250,4346040
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.54">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1479779,4418816
+                        1479779,4418816
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Olea europea L. var. sativa Brot.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>540</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>6</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1479779,4418816
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.55">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1490767,4400532
+                        1490767,4400532
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Olea europea L. var. sativa Brot.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>154</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>9</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1490767,4400532
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.56">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1477046,4363853
+                        1477046,4363853
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Olea europea L. var. sylvestris (Miller) Brot.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>800</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>11</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1477046,4363853
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.57">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1463561,4420693
+                        1463561,4420693
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Olea europea L. var. sylvestris (Miller) Brot.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>410,430</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>12-13</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1463561,4420693
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.58">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1461258,4449468
+                        1461258,4449468
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Olea europea L. var. sylvestris (Miller) Brot.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>872</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>15</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1461258,4449468
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.59">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1478709,4427877
+                        1478709,4427877
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Olea europea L. var. sylvestris (Miller) Brot.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>560</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>13</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1478709,4427877
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.60">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1558876,4426685
+                        1558876,4426685
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Olea europea L. var. sylvestris (Miller) Brot.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>780</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>9</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1558876,4426685
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.61">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1556943,4438049
+                        1556943,4438049
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Olea europea L. var. sylvestris (Miller) Brot.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>595</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>13</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1556943,4438049
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.62">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1560142,4501450
+                        1560142,4501450
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Olea europea L. var. sylvestris (Miller) Brot.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>600</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>10</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1560142,4501450
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.63">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1521499,4539468
+                        1521499,4539468
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Olea europea L. var. sylvestris (Miller) Brot.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>1090</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>15</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1521499,4539468
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.64">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1527211,4359757
+                        1527211,4359757
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Phillyrea latifolia L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>414</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>10</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1527211,4359757
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.65">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1480960,4410919
+                        1480960,4410919
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Phillyrea latifolia L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>146</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>10</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1480960,4410919
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.66">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1508573,4343596
+                        1508573,4343596
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Phoenix dactylifera L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>230</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>16</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1508573,4343596
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.67">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1546908,4414226
+                        1546908,4414226
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pinus canariensis Smith.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>315</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>18</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1546908,4414226
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.68">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1515476,4359424
+                        1515476,4359424
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pinus halepensis Mill.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>290</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>16</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1515476,4359424
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.69">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1534224,4440180
+                        1534224,4440180
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pinus laricio Poiret</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>310</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>25</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1534224,4440180
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.70">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1505649,4484664
+                        1505649,4484664
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pinus laricio Poiret</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>240</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>32-35</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1505649,4484664
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.71">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1454670,4367010
+                        1454670,4367010
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pinus pinea L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>485</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>17</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1454670,4367010
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.72">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1500880,4329290
+                        1500880,4329290
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pinus pinea L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>345</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>15</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1500880,4329290
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.73">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1525487,4463072
+                        1525487,4463072
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pinus pinea L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>410</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>15</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1525487,4463072
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.74">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1515322,4422552
+                        1515322,4422552
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pinus pinea L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>370</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>16</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1515322,4422552
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.75">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1538745,4562852
+                        1538745,4562852
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pinus pinea L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>260</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>12</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1538745,4562852
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.76">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1535977,4347227
+                        1535977,4347227
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pinus radiata</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>292</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>32</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1535977,4347227
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.77">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1503783,4486456
+                        1503783,4486456
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pinus sabiniana Dougl.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>278</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>18</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1503783,4486456
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.78">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1522489,4539849
+                        1522489,4539849
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pistacia lentiscus</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>470</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>9</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1522489,4539849
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.79">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1494144,4335603
+                        1494144,4335603
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pistacia lentiscus L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>180</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>8</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1494144,4335603
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.80">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1456985,4360550
+                        1456985,4360550
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pistacia lentiscus L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>101,74,100</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>5</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1456985,4360550
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.81">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1556768,4438404
+                        1556768,4438404
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pistacia lentiscus L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>230</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>7</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1556768,4438404
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.82">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1558449,4438711
+                        1558449,4438711
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pistacia terebinthus L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>220</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>8</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1558449,4438711
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.83">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1497839,4317589
+                        1497839,4317589
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Platanus acerifolia Willd.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>436</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>20</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1497839,4317589
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.84">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1504955,4411638
+                        1504955,4411638
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Platanus acerifolia Willd.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>435</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>30</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1504955,4411638
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.85">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1521469,4400902
+                        1521469,4400902
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Populus alba L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>414</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>30</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1521469,4400902
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.86">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1534225,4413924
+                        1534225,4413924
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Populus alba L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>476</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>30</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1534225,4413924
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.87">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1558655,4491917
+                        1558655,4491917
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Populus canscens Sm.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>208</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>16</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1558655,4491917
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.88">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1508698,4343401
+                        1508698,4343401
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Prosopis torquata DC.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>432</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>15</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1508698,4343401
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.89">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1556762,4438400
+                        1556762,4438400
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pyrus amiygdaliformis Vill.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>270</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>7</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1556762,4438400
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.90">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1465251,4439664
+                        1465251,4439664
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus ilex L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>610</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>15</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1465251,4439664
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.91">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1521335,4428626
+                        1521335,4428626
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus ilex L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>700</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>30</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1521335,4428626
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.92">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1531364,4414248
+                        1531364,4414248
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus ilex L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>620</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>30</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1531364,4414248
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.93">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1521670,4411108
+                        1521670,4411108
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus ilex L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>475</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>18</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1521670,4411108
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.94">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1517099,4416403
+                        1517099,4416403
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus ilex L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>590</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>22</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1517099,4416403
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ppr2006:ALBERIMONUMENTALI fid="ALBERIMONUMENTALI.95">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1540249,4440940
+                        1540249,4440940
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus ilex L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>630</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>16</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                1540249,4440940
+                            </gml:coordinates>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMember>
+</wfs:FeatureCollection>

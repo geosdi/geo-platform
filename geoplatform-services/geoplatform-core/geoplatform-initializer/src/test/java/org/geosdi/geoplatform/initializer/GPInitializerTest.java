@@ -46,7 +46,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 /**
  * This test is not intended to test the business logic but only the correctness
@@ -195,18 +195,18 @@ public class GPInitializerTest extends BaseInitializerTest {
         // Increase
         boolean check = folderDAO.updatePositionsRange(userPositionTestProject.getId(),
                 beginPosition, endPosition, deltaValue);
-        Assert.assertTrue("Increase Position Folders NOT done", check);
+        assertTrue("Increase Position Folders NOT done", check);
 
         GPFolder userFolderUpdated = folderDAO.find(rootFolder.getId());
-        Assert.assertEquals("Position NOT increased for \"" + rootFolder.getName() + "\"",
+        assertEquals("Position NOT increased for \"" + rootFolder.getName() + "\"",
                 userFolderUpdated.getPosition(), rootFolder.getPosition() + deltaValue);
 
         GPFolder folderAUpdated = folderDAO.find(folderA.getId());
-        Assert.assertEquals("Position NOT increased for \"" + folderA.getName() + "\"",
+        assertEquals("Position NOT increased for \"" + folderA.getName() + "\"",
                 folderAUpdated.getPosition(), folderA.getPosition() + deltaValue);
 
         GPFolder folderBUpdated = folderDAO.find(folderB.getId());
-        Assert.assertEquals("Position NOT increased for \"" + folderB.getName() + "\"",
+        assertEquals("Position NOT increased for \"" + folderB.getName() + "\"",
                 folderBUpdated.getPosition(), folderB.getPosition() + deltaValue);
 
         // No Increase
@@ -221,18 +221,18 @@ public class GPInitializerTest extends BaseInitializerTest {
         // Decrease
         boolean check = folderDAO.updatePositionsRange(userPositionTestProject.getId(),
                 beginPosition, endPosition, deltaValue);
-        Assert.assertTrue("Decrease Position Folders NOT done", check);
+        assertTrue("Decrease Position Folders NOT done", check);
 
         GPFolder userFolderUpdated = folderDAO.find(rootFolder.getId());
-        Assert.assertEquals("Position NOT decreased for \"" + rootFolder.getName() + "\"",
+        assertEquals("Position NOT decreased for \"" + rootFolder.getName() + "\"",
                 userFolderUpdated.getPosition(), rootFolder.getPosition() + deltaValue);
 
         GPFolder folderAUpdated = folderDAO.find(folderA.getId());
-        Assert.assertEquals("Position NOT decreased for \"" + folderA.getName() + "\"",
+        assertEquals("Position NOT decreased for \"" + folderA.getName() + "\"",
                 folderAUpdated.getPosition(), folderA.getPosition() + deltaValue);
 
         GPFolder folderBUpdated = folderDAO.find(folderB.getId());
-        Assert.assertEquals("Position NOT decreased for \"" + folderB.getName() + "\"",
+        assertEquals("Position NOT decreased for \"" + folderB.getName() + "\"",
                 folderBUpdated.getPosition(), folderB.getPosition() + deltaValue);
 
         // No Decrease
@@ -250,14 +250,14 @@ public class GPInitializerTest extends BaseInitializerTest {
         // Increase
         boolean check = layerDAO.updatePositionsRange(userPositionTestProject.getId(),
                 beginPosition, endPosition, deltaValue);
-        Assert.assertTrue("Increase Position Layers NOT done", check);
+        assertTrue("Increase Position Layers NOT done", check);
 
         GPLayer rasterLayerUpdated = layerDAO.find(rasterLayer.getId());
-        Assert.assertEquals("Position NOT increased for \"" + rasterLayer.getName() + "\"",
+        assertEquals("Position NOT increased for \"" + rasterLayer.getName() + "\"",
                 rasterLayerUpdated.getPosition(), rasterLayer.getPosition() + deltaValue);
 
         GPLayer vectorLayerUpdated = layerDAO.find(vectorLayer.getId());
-        Assert.assertEquals("Position NOT increased for \"" + vectorLayer.getName() + "\"",
+        assertEquals("Position NOT increased for \"" + vectorLayer.getName() + "\"",
                 vectorLayerUpdated.getPosition(), vectorLayer.getPosition() + deltaValue);
 
         // No Increase
@@ -272,14 +272,14 @@ public class GPInitializerTest extends BaseInitializerTest {
         // Decrease
         boolean check = layerDAO.updatePositionsRange(userPositionTestProject.getId(),
                 beginPosition, endPosition, deltaValue);
-        Assert.assertTrue("Decrease Position Layers NOT done", check);
+        assertTrue("Decrease Position Layers NOT done", check);
 
         GPLayer rasterLayerUpdated = layerDAO.find(rasterLayer.getId());
-        Assert.assertEquals("Position NOT decreased for \"" + rasterLayer.getName() + "\"",
+        assertEquals("Position NOT decreased for \"" + rasterLayer.getName() + "\"",
                 rasterLayerUpdated.getPosition(), rasterLayer.getPosition() + deltaValue);
 
         GPLayer vectorLayerUpdated = layerDAO.find(vectorLayer.getId());
-        Assert.assertEquals("Position NOT decreased for \"" + vectorLayer.getName() + "\"",
+        assertEquals("Position NOT decreased for \"" + vectorLayer.getName() + "\"",
                 vectorLayerUpdated.getPosition(), vectorLayer.getPosition() + deltaValue);
 
         // No Decrease
@@ -300,18 +300,18 @@ public class GPInitializerTest extends BaseInitializerTest {
         // Shift
         boolean check = folderDAO.updatePositionsLowerBound(userPositionTestProject.getId(),
                 beginPosition, deltaValue);
-        Assert.assertTrue("Shift Position Folders NOT done", check);
+        assertTrue("Shift Position Folders NOT done", check);
 
         GPFolder userFolderUpdated = folderDAO.find(rootFolder.getId());
-        Assert.assertEquals("Shift Position NOT done for \"" + rootFolder.getName() + "\"",
+        assertEquals("Shift Position NOT done for \"" + rootFolder.getName() + "\"",
                 userFolderUpdated.getPosition(), rootFolder.getPosition() + deltaValue);
 
         GPFolder folderAUpdated = folderDAO.find(folderA.getId());
-        Assert.assertEquals("Shift Position NOT done for \"" + folderA.getName() + "\"",
+        assertEquals("Shift Position NOT done for \"" + folderA.getName() + "\"",
                 folderAUpdated.getPosition(), folderA.getPosition() + deltaValue);
 
         GPFolder folderBUpdated = folderDAO.find(folderB.getId());
-        Assert.assertEquals("Shift Position NOT done for \"" + folderB.getName() + "\"",
+        assertEquals("Shift Position NOT done for \"" + folderB.getName() + "\"",
                 folderBUpdated.getPosition(), folderB.getPosition() + deltaValue);
 
         // No Shift
@@ -329,14 +329,14 @@ public class GPInitializerTest extends BaseInitializerTest {
         // Shift
         boolean check = layerDAO.updatePositionsLowerBound(userPositionTestProject.getId(),
                 beginPosition, deltaValue);
-        Assert.assertTrue("Shift Position Layers NOT done", check);
+        assertTrue("Shift Position Layers NOT done", check);
 
         GPLayer rasterLayerUpdated = layerDAO.find(rasterLayer.getId());
-        Assert.assertEquals("Shift Position NOT done for \"" + rasterLayer.getName() + "\"",
+        assertEquals("Shift Position NOT done for \"" + rasterLayer.getName() + "\"",
                 rasterLayerUpdated.getPosition(), rasterLayer.getPosition() + deltaValue);
 
         GPLayer vectorLayerUpdated = layerDAO.find(vectorLayer.getId());
-        Assert.assertEquals("Shift Position NOT done for \"" + vectorLayer.getName() + "\"",
+        assertEquals("Shift Position NOT done for \"" + vectorLayer.getName() + "\"",
                 vectorLayerUpdated.getPosition(), vectorLayer.getPosition() + deltaValue);
 
         // No Shift
@@ -358,20 +358,20 @@ public class GPInitializerTest extends BaseInitializerTest {
 
         // Update
         boolean check = folderDAO.updateAncestorsDescendants(descendantsMap);
-        Assert.assertTrue("Update Ancestors Descendants NOT done", check);
+        assertTrue("Update Ancestors Descendants NOT done", check);
 
         GPFolder userFolderUpdated = folderDAO.find(rootFolder.getId());
-        Assert.assertEquals("Ancestors Descendants NOT updated for \"" + rootFolder.getName() + "\"",
+        assertEquals("Ancestors Descendants NOT updated for \"" + rootFolder.getName() + "\"",
                 userFolderUpdated.getNumberOfDescendants(),
                 Integer.parseInt(descendantsMap.get(userFolderUpdated.getId()).toString()));
 
         GPFolder folderBUpdated = folderDAO.find(folderB.getId());
-        Assert.assertEquals("Ancestors Descendants NOT updated for \"" + folderB.getName() + "\"",
+        assertEquals("Ancestors Descendants NOT updated for \"" + folderB.getName() + "\"",
                 folderBUpdated.getNumberOfDescendants(),
                 Integer.parseInt(descendantsMap.get(folderBUpdated.getId()).toString()));
 
         GPFolder folderAUpdated = folderDAO.find(folderA.getId());
-        Assert.assertEquals("Ancestors Descendants NOT updated for \"" + folderA.getName() + "\"",
+        assertEquals("Ancestors Descendants NOT updated for \"" + folderA.getName() + "\"",
                 folderAUpdated.getNumberOfDescendants(), folderA.getNumberOfDescendants());
 
         // No Update
@@ -397,37 +397,37 @@ public class GPInitializerTest extends BaseInitializerTest {
         // No Swith: false to false
         boolean checkSave = folderDAO.persistCheckStatusFolder(folderA.getId(),
                 beginIsChecked);
-        Assert.assertTrue("Save Check Status Folder NOT done (Not Swith: false to false)", checkSave);
+        assertTrue("Save Check Status Folder NOT done (Not Swith: false to false)", checkSave);
 
         GPFolder folderAUpdated = folderDAO.find(folderA.getId());
-        Assert.assertEquals("Checked Folder NOT updated (Not Swith: false to false)",
+        assertEquals("Checked Folder NOT updated (Not Swith: false to false)",
                 folderAUpdated.isChecked(), beginIsChecked);
 
         // Switch: false to true
         checkSave = folderDAO.persistCheckStatusFolder(folderA.getId(),
                 !beginIsChecked);
-        Assert.assertTrue("Save Check Status Folder NOT done (Switch: false to true)", checkSave);
+        assertTrue("Save Check Status Folder NOT done (Switch: false to true)", checkSave);
 
         folderAUpdated = folderDAO.find(folderA.getId());
-        Assert.assertEquals("Checked Folder NOT updated for (Not Swith: false to true)",
+        assertEquals("Checked Folder NOT updated for (Not Swith: false to true)",
                 folderAUpdated.isChecked(), !beginIsChecked);
 
         // No Swith: true to true
         checkSave = folderDAO.persistCheckStatusFolder(folderA.getId(),
                 !beginIsChecked);
-        Assert.assertTrue("Save Check Status Folder NOT done (Not Swith: true to true)", checkSave);
+        assertTrue("Save Check Status Folder NOT done (Not Swith: true to true)", checkSave);
 
         folderAUpdated = folderDAO.find(folderA.getId());
-        Assert.assertEquals("Checked Folder NOT updated for (Not Swith: true to true)",
+        assertEquals("Checked Folder NOT updated for (Not Swith: true to true)",
                 folderAUpdated.isChecked(), !beginIsChecked);
 
         // Swith: true to false
         checkSave = folderDAO.persistCheckStatusFolder(folderA.getId(),
                 beginIsChecked);
-        Assert.assertTrue("Save Check Status Folder NOT done (Swith: true to false)", checkSave);
+        assertTrue("Save Check Status Folder NOT done (Swith: true to false)", checkSave);
 
         folderAUpdated = folderDAO.find(folderA.getId());
-        Assert.assertEquals("Checked Folder NOT updated for (Swith: true to false)",
+        assertEquals("Checked Folder NOT updated for (Swith: true to false)",
                 folderAUpdated.isChecked(), beginIsChecked);
 
         // ID Folder NOT correct
@@ -435,7 +435,7 @@ public class GPInitializerTest extends BaseInitializerTest {
         Assert.assertFalse("Save Check Status Folder NOT done (ID Folder NOT correct)", checkSave);
 
         folderAUpdated = folderDAO.find(folderA.getId());
-        Assert.assertEquals("Checked Folder NOT updated for (ID Folder NOT correct)",
+        assertEquals("Checked Folder NOT updated for (ID Folder NOT correct)",
                 folderAUpdated.isChecked(), beginIsChecked);
     }
 
@@ -450,34 +450,34 @@ public class GPInitializerTest extends BaseInitializerTest {
 
         // Set all folders checked
         boolean checkSave = folderDAO.persistCheckStatusFolders(true, ids);
-        Assert.assertTrue("Save Check Status Folder to true NOT done", checkSave);
+        assertTrue("Save Check Status Folder to true NOT done", checkSave);
 
         GPFolder userFolderUpdated = folderDAO.find(rootFolder.getId());
-        Assert.assertEquals("NOT checked Folder \"" + rootFolder.getName() + "\"",
+        assertEquals("NOT checked Folder \"" + rootFolder.getName() + "\"",
                 userFolderUpdated.isChecked(), true);
 
         GPFolder folderAUpdated = folderDAO.find(folderA.getId());
-        Assert.assertEquals("NOT checked Folder \"" + folderA.getName() + "\"",
+        assertEquals("NOT checked Folder \"" + folderA.getName() + "\"",
                 folderAUpdated.isChecked(), true);
 
         GPFolder folderBUpdated = folderDAO.find(folderB.getId());
-        Assert.assertEquals("NOT checked Folder \"" + folderB.getName() + "\"",
+        assertEquals("NOT checked Folder \"" + folderB.getName() + "\"",
                 folderBUpdated.isChecked(), true);
 
         // Set all folders unchecked
         checkSave = folderDAO.persistCheckStatusFolders(false, ids);
-        Assert.assertTrue("Save Check Status Folder to false NOT done", checkSave);
+        assertTrue("Save Check Status Folder to false NOT done", checkSave);
 
         userFolderUpdated = folderDAO.find(rootFolder.getId());
-        Assert.assertEquals("NOT unchecked Folder \"" + rootFolder.getName() + "\"",
+        assertEquals("NOT unchecked Folder \"" + rootFolder.getName() + "\"",
                 userFolderUpdated.isChecked(), false);
 
         folderAUpdated = folderDAO.find(folderA.getId());
-        Assert.assertEquals("NOT unchecked Folder \"" + folderA.getName() + "\"",
+        assertEquals("NOT unchecked Folder \"" + folderA.getName() + "\"",
                 folderAUpdated.isChecked(), false);
 
         folderBUpdated = folderDAO.find(folderB.getId());
-        Assert.assertEquals("NOT unchecked Folder \"" + folderB.getName() + "\"",
+        assertEquals("NOT unchecked Folder \"" + folderB.getName() + "\"",
                 folderBUpdated.isChecked(), false);
     }
 
@@ -492,37 +492,37 @@ public class GPInitializerTest extends BaseInitializerTest {
         // No Swith: false to false
         boolean checkSave = layerDAO.persistCheckStatusLayer(rasterLayer.getId(),
                 beginIsChecked);
-        Assert.assertTrue("Save Check Status Layer NOT done (Not Swith: false to false)", checkSave);
+        assertTrue("Save Check Status Layer NOT done (Not Swith: false to false)", checkSave);
 
         GPLayer raster = layerDAO.find(rasterLayer.getId());
-        Assert.assertEquals("Checked Layer NOT updated (Not Swith: false to false)",
+        assertEquals("Checked Layer NOT updated (Not Swith: false to false)",
                 raster.isChecked(), beginIsChecked);
 
         // Switch: false to true
         checkSave = layerDAO.persistCheckStatusLayer(rasterLayer.getId(),
                 !beginIsChecked);
-        Assert.assertTrue("Save Check Status Layer NOT done (Switch: false to true)", checkSave);
+        assertTrue("Save Check Status Layer NOT done (Switch: false to true)", checkSave);
 
         raster = layerDAO.find(rasterLayer.getId());
-        Assert.assertEquals("Checked Layer NOT updated for (Not Swith: false to true)",
+        assertEquals("Checked Layer NOT updated for (Not Swith: false to true)",
                 raster.isChecked(), !beginIsChecked);
 
         // No Swith: true to true
         checkSave = layerDAO.persistCheckStatusLayer(rasterLayer.getId(),
                 !beginIsChecked);
-        Assert.assertTrue("Save Check Status Layer NOT done (Not Swith: true to true)", checkSave);
+        assertTrue("Save Check Status Layer NOT done (Not Swith: true to true)", checkSave);
 
         raster = layerDAO.find(rasterLayer.getId());
-        Assert.assertEquals("Checked Layer NOT updated for (Not Swith: true to true)",
+        assertEquals("Checked Layer NOT updated for (Not Swith: true to true)",
                 raster.isChecked(), !beginIsChecked);
 
         // Swith: true to false
         checkSave = layerDAO.persistCheckStatusLayer(rasterLayer.getId(),
                 beginIsChecked);
-        Assert.assertTrue("Save Check Status Layer NOT done (Swith: true to false)", checkSave);
+        assertTrue("Save Check Status Layer NOT done (Swith: true to false)", checkSave);
 
         raster = layerDAO.find(rasterLayer.getId());
-        Assert.assertEquals("Checked Layer NOT updated for (Swith: true to false)",
+        assertEquals("Checked Layer NOT updated for (Swith: true to false)",
                 raster.isChecked(), beginIsChecked);
 
         // ID Folder NOT correct
@@ -530,7 +530,7 @@ public class GPInitializerTest extends BaseInitializerTest {
         Assert.assertFalse("Save Check Status Layer NOT done (ID Folder NOT correct)", checkSave);
 
         raster = layerDAO.find(rasterLayer.getId());
-        Assert.assertEquals("Checked Layer NOT updated for (ID Folder NOT correct)",
+        assertEquals("Checked Layer NOT updated for (ID Folder NOT correct)",
                 raster.isChecked(), beginIsChecked);
     }
     //</editor-fold>

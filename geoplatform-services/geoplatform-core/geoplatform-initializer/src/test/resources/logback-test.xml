@@ -55,5 +55,7 @@
         <level value="info" />
         <appender-ref ref="STDOUT" />
     </root>
+
+    <logger name="org.geosdi.geoplatform.core.dao.impl.GPLayerDAOImpl" level="DEBUG"/>
     
 </configuration>

@@ -60,7 +60,7 @@ import static java.lang.Boolean.TRUE;
 @Profile(value = "jpa")
 class GPProjectDAOImpl extends GPAbstractJpaDAO<GPProject, Long> implements GPProjectDAO {
 
-    public GPProjectDAOImpl() {
+    GPProjectDAOImpl() {
         super(GPProject.class);
     }
 

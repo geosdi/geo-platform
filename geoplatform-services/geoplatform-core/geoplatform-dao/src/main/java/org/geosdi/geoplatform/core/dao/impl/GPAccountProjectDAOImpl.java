@@ -60,7 +60,7 @@ import static org.springframework.security.acls.domain.BasePermission.ADMINISTRA
 @Profile(value = "jpa")
 class GPAccountProjectDAOImpl extends GPAbstractJpaDAO<GPAccountProject, Long> implements GPAccountProjectDAO {
 
-    public GPAccountProjectDAOImpl() {
+    GPAccountProjectDAOImpl() {
         super(GPAccountProject.class);
     }
 

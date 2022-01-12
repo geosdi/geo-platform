@@ -45,7 +45,6 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -60,7 +59,7 @@ import static java.lang.Boolean.TRUE;
 @Profile(value = "jpa")
 class GSResourceDAOImpl extends GPAbstractJpaDAO<GSResource, Long> implements GSResourceDAO {
 
-    public GSResourceDAOImpl() {
+    GSResourceDAOImpl() {
         super(GSResource.class);
     }
 
@@ -82,10 +81,8 @@ class GSResourceDAOImpl extends GPAbstractJpaDAO<GSResource, Long> implements GS
      */
     @Override
     public GSResource findByLayerNameAndGsUser(String layerName, String gsUser) throws GPDAOException {
-        checkArgument(((layerName != null) && !(layerName.isEmpty())),
-                "The Parameter layerName must not be null or an empty string.");
-        checkArgument(((gsUser != null) && !(gsUser.isEmpty())),
-                "The Parameter gsUser must not be null or an empty string.");
+        checkArgument(((layerName != null) && !(layerName.isEmpty())), "The Parameter layerName must not be null or an empty string.");
+        checkArgument(((gsUser != null) && !(gsUser.isEmpty())), "The Parameter gsUser must not be null or an empty string.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GSResource> criteriaQuery = super.createCriteriaQuery();

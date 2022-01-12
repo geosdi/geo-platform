@@ -61,7 +61,7 @@ import static java.lang.Boolean.TRUE;
 @Profile(value = "jpa")
 class GPAuthorityDAOImpl extends GPAbstractJpaDAO<GPAuthority, Long> implements GPAuthorityDAO {
 
-    public GPAuthorityDAOImpl() {
+    GPAuthorityDAOImpl() {
         super(GPAuthority.class);
     }
 
@@ -81,8 +81,7 @@ class GPAuthorityDAOImpl extends GPAbstractJpaDAO<GPAuthority, Long> implements 
      */
     @Override
     public Integer removeAllUserAuthorities(String accountNaturalID) throws GPDAOException {
-        checkArgument((accountNaturalID != null) && !(accountNaturalID.isEmpty()),
-                "The Parameter accountNaturalID must not be null or an empty string.");
+        checkArgument((accountNaturalID != null) && !(accountNaturalID.isEmpty()), "The Parameter accountNaturalID must not be null or an empty string.");
         try {
             CriteriaDelete<GPAuthority> criteriaDelete = super.createCriteriaDelete();
             Root<GPAuthority> root = criteriaDelete.from(this.persistentClass);
@@ -101,8 +100,7 @@ class GPAuthorityDAOImpl extends GPAbstractJpaDAO<GPAuthority, Long> implements 
      */
     @Override
     public List<GPAuthority> findByAccountNaturalID(String accountNaturalID) throws GPDAOException {
-        checkArgument((accountNaturalID != null) && !(accountNaturalID.isEmpty()),
-                "The Parameter accountNaturalID must not be null or an empty string.");
+        checkArgument((accountNaturalID != null) && !(accountNaturalID.isEmpty()), "The Parameter accountNaturalID must not be null or an empty string.");
         try {
             CriteriaQuery<GPAuthority> criteriaQuery = super.createCriteriaQuery();
             Root<GPAuthority> root = criteriaQuery.from(this.persistentClass);

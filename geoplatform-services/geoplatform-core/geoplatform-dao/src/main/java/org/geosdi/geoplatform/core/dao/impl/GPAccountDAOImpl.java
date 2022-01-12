@@ -61,7 +61,7 @@ import static java.lang.Boolean.TRUE;
 @Profile(value = "jpa")
 class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAccountDAO {
 
-    public GPAccountDAOImpl() {
+    GPAccountDAOImpl() {
         super(GPAccount.class);
     }
 
@@ -82,8 +82,7 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
      */
     @Override
     public List<GPAccount> findByOrganization(String organization) throws GPDAOException {
-        checkArgument((organization != null) && !(organization.isEmpty()),
-                "The Paramater organization must not be null or an Empty String.");
+        checkArgument((organization != null) && !(organization.isEmpty()), "The Paramater organization must not be null or an Empty String.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPAccount> criteriaQuery = super.createCriteriaQuery();
@@ -104,8 +103,7 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
      */
     @Override
     public GPUser findByUsername(String username) throws GPDAOException {
-        checkArgument((username != null) && !(username.isEmpty()),
-                "The Parameter username must not be null or an empty String.");
+        checkArgument((username != null) && !(username.isEmpty()), "The Parameter username must not be null or an empty String.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPAccount> criteriaQuery = super.createCriteriaQuery();
@@ -128,8 +126,7 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
      */
     @Override
     public GPUser findByEmail(String email) throws GPDAOException {
-        checkArgument((email != null) && !(email.isEmpty()),
-                "The Parameter email must not be null or an empty String.");
+        checkArgument((email != null) && !(email.isEmpty()), "The Parameter email must not be null or an empty String.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPAccount> criteriaQuery = super.createCriteriaQuery();
@@ -152,8 +149,7 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
      */
     @Override
     public GPApplication findByAppID(String appID) throws GPDAOException {
-        checkArgument((appID != null) && !(appID.isEmpty()), "" +
-                "The Parameter appID must not be null or an empty String.");
+        checkArgument((appID != null) && !(appID.isEmpty()), "" + "The Parameter appID must not be null or an empty String.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPAccount> criteriaQuery = super.createCriteriaQuery();
@@ -176,8 +172,7 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
      */
     @Override
     public GPAccount findByNaturalID(String naturalID) throws GPDAOException {
-        checkArgument((naturalID != null) && !(naturalID.isEmpty()),
-                "The Parameter naturalID must not be null or an empty String.");
+        checkArgument((naturalID != null) && !(naturalID.isEmpty()), "The Parameter naturalID must not be null or an empty String.");
         try {
             GPAccount account = this.findByUsername(naturalID);
             return ((account != null) ? account : this.findByAppID(naturalID));
@@ -220,8 +215,7 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
     @Override
     public List<GPAccount> searchPagebleUsersByOrganization(Integer page, Integer size, String organizationName, Long userID,
             String nameLike) throws GPDAOException {
-        checkArgument((organizationName != null) && !(organizationName.isEmpty()),
-                "The Paramater organizationName must not be null or an Empty String.");
+        checkArgument((organizationName != null) && !(organizationName.isEmpty()), "The Paramater organizationName must not be null or an Empty String.");
         checkArgument(userID != null, "The Parameter userID must not be null.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
@@ -260,8 +254,7 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
     @Override
     public List<GPAccount> searchPagebleEnabledUsersByOrganization(Integer page, Integer size, String organizationName, Long userID,
             String nameLike) throws GPDAOException {
-        checkArgument((organizationName != null) && !(organizationName.isEmpty()),
-                "The Paramater organizationName must not be null or an Empty String.");
+        checkArgument((organizationName != null) && !(organizationName.isEmpty()), "The Paramater organizationName must not be null or an Empty String.");
         checkArgument(userID != null, "The Parameter userID must not be null.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
@@ -296,8 +289,7 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
      */
     @Override
     public Number countAccounts(String nameLike) throws GPDAOException {
-        checkArgument(((nameLike != null) && !(nameLike.isEmpty())),
-                "The Parameter nameLike must not be null or an empty string.");
+        checkArgument(((nameLike != null) && !(nameLike.isEmpty())), "The Parameter nameLike must not be null or an empty string.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
@@ -322,8 +314,7 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
      */
     @Override
     public Number countUsers(String organizationName, String nameLike) throws GPDAOException {
-        checkArgument((organizationName != null) && !(organizationName.isEmpty()),
-                "The Paramater organizationName must not be null or an Empty String.");
+        checkArgument((organizationName != null) && !(organizationName.isEmpty()), "The Paramater organizationName must not be null or an Empty String.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);

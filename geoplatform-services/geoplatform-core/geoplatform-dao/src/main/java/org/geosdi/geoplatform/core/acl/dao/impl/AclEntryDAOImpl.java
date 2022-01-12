@@ -59,7 +59,7 @@ import static java.lang.Boolean.TRUE;
 @Profile(value = "jpa")
 class AclEntryDAOImpl extends GPAbstractJpaDAO<AclEntry, Long> implements AclEntryDAO {
 
-    public AclEntryDAOImpl() {
+    AclEntryDAOImpl() {
         super(AclEntry.class);
     }
 

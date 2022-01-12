@@ -61,7 +61,7 @@ import static java.lang.Boolean.TRUE;
 @Profile(value = "jpa")
 class GPStyleDAOImpl extends GPAbstractJpaDAO<GPStyle, Long> implements GPStyleDAO {
 
-    public GPStyleDAOImpl() {
+    GPStyleDAOImpl() {
         super(GPStyle.class);
     }
 
@@ -82,8 +82,7 @@ class GPStyleDAOImpl extends GPAbstractJpaDAO<GPStyle, Long> implements GPStyleD
      */
     @Override
     public GPStyle findByStyleName(String styleName) throws GPDAOException {
-        checkArgument(((styleName != null) && !(styleName.isEmpty())),
-                "The Parameter styleName must not be null or an empty string.");
+        checkArgument(((styleName != null) && !(styleName.isEmpty())), "The Parameter styleName must not be null or an empty string.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPStyle> criteriaQuery = super.createCriteriaQuery();

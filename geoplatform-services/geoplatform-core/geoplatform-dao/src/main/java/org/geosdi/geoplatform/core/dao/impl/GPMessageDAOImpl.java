@@ -62,7 +62,7 @@ import static java.lang.Boolean.TRUE;
 @Profile(value = "jpa")
 class GPMessageDAOImpl extends GPAbstractJpaDAO<GPMessage, Long> implements GPMessageDAO {
 
-    public GPMessageDAOImpl() {
+    GPMessageDAOImpl() {
         super(GPMessage.class);
     }
 

@@ -41,10 +41,10 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 import org.locationtech.jts.geom.MultiPolygon;
 
-import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
@@ -55,7 +55,7 @@ import java.io.Serializable;
  */
 @Entity(name = "GSResource")
 @Table(name = "gs_resource", indexes = {
-        @Index(columnList = "layer_name", name = "LAYER_NAME_INDEX")
+        @Index(columnList = "layer_name", name = "LAYER_RESOURCE_NAME_INDEX")
 })
 @XmlRootElement(name = "GSResource")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "gs_resource")

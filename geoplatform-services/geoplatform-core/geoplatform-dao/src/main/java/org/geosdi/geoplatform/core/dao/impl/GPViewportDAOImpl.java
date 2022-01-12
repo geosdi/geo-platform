@@ -59,7 +59,7 @@ import static java.lang.Boolean.TRUE;
 @Profile(value = "jpa")
 class GPViewportDAOImpl extends GPAbstractJpaDAO<GPViewport, Long> implements GPViewportDAO {
 
-    public GPViewportDAOImpl() {
+    GPViewportDAOImpl() {
         super(GPViewport.class);
     }
 

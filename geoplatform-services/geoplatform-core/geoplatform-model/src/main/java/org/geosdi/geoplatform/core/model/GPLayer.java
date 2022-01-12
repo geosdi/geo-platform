@@ -39,12 +39,14 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Francesco Izzi - geoSDI
@@ -53,16 +55,18 @@ import javax.xml.bind.annotation.XmlTransient;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 @JsonSubTypes({@JsonSubTypes.Type(value = GPRasterLayer.class, name = "GPRaster"),
         @JsonSubTypes.Type(value = GPVectorLayer.class, name = "GPVector")})
-@XmlTransient
+//@XmlTransient
 @XmlSeeAlso(value = {GPRasterLayer.class, GPVectorLayer.class})
 @Entity
-@Table(name = "gp_layer", indexes = {@Index(columnList = "name", name = "LAYER_NAME_INDEX")
-})
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Table(name = "gp_layer", indexes = {@Index(columnList = "name", name = "LAYER_NAME_INDEX"),
+        @Index(columnList = "project_id", name = "LAYER_PROJECT_ID_INDEX")},
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"id", "project_id", "folder_id"})})
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "gp_layer")
 @Getter
 @Setter
-public abstract class GPLayer implements IGPLayer {
+@ToString
+public class GPLayer implements IGPLayer {
 
     /**
      * serialVersionUID
@@ -119,45 +123,16 @@ public abstract class GPLayer implements IGPLayer {
     //
     @Column(name = "single_tile_request", nullable = false)
     private boolean singleTileRequest = false;
-
-    /**
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
-        str.append("id=").append(id);
-        str.append(", title=").append(title);
-        str.append(", name=").append(name);
-        str.append(", alias=").append(alias);
-        str.append(", abstractText=").append(abstractText);
-        str.append(", urlServer=").append(urlServer);
-        str.append(", srs=").append(srs);
-        str.append(", bbox=").append(bbox);
-        str.append(", layerType=").append(layerType);
-        str.append(", position=").append(position);
-        str.append(", checked=").append(checked);
-        str.append(", shared=").append(shared);
-        str.append(", cached=").append(cached);
-        str.append(", singleTileRequest=").append(singleTileRequest);
-        str.append(", cqlFilter=").append(cqlFilter);
-        str.append(", timeFilter=").append(timeFilter);
-        if (this.getFolder() != null) {
-            str.append(", folder.name=").append(this.getFolder().getName());
-            str.append("(id=").append(this.getFolder().getId()).append(")");
-        } else {
-            str.append(", folder=NULL");
-        }
-        if (this.getProject() != null) {
-            str.append(", project.name=").append(this.getProject().getName());
-            str.append("(id=").append(this.getProject().getId()).append(")");
-        } else {
-            str.append(", project=NULL");
-        }
-        return str.append("}").toString();
-    }
+    //
+    @ManyToOne(optional = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "folder_id")
+    private GPFolder folder;
+    //
+    @ManyToOne(optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "project_id", nullable = false)
+    private GPProject project;
 
     /**
      * (non-Javadoc)

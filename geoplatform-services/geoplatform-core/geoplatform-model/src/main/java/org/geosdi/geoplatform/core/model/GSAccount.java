@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.core.model;
 
-import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
@@ -51,7 +50,7 @@ import java.io.Serializable;
         @Index(columnList = "gs_user", name = "GS_USER_INDEX")
 })
 @XmlRootElement(name = "GSAccount")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "gs_account")
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "gs_account")
 public class GSAccount implements Serializable {
 
     /**

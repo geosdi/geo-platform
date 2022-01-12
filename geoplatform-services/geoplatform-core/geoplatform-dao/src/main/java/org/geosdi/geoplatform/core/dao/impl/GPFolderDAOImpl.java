@@ -65,7 +65,7 @@ import static java.util.stream.Collectors.toList;
 @Profile(value = "jpa")
 class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFolderDAO {
 
-    public GPFolderDAOImpl() {
+    GPFolderDAOImpl() {
         super(GPFolder.class);
     }
 
@@ -86,8 +86,7 @@ class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFold
      */
     @Override
     public GPFolder findByFolderName(String folderName) throws GPDAOException {
-        checkArgument((folderName != null) && !(folderName.isEmpty()),
-                "The Parameter folderName must not be null or an empty string.");
+        checkArgument((folderName != null) && !(folderName.isEmpty()), "The Parameter folderName must not be null or an empty string.");
         try {
             CriteriaQuery<GPFolder> criteriaQuery = super.createCriteriaQuery();
             Root<GPFolder> root = criteriaQuery.from(this.persistentClass);
@@ -164,12 +163,9 @@ class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFold
         checkArgument(projectID != null, "The Parameter projectID must not be null.");
         checkArgument((beginPositionFirstRange > 0), "The Parameter beginPositionFirstRange must be greater than zero");
         checkArgument((beginPositionSecondRange > 0), "The Parameter beginPositionSecondRange must be greater than zero");
-        checkArgument((beginPositionFirstRange < endPositionFirstRange),
-                "The Parameter beginPositionFirstRange must be lesser than endPositionFirstRange");
-        checkArgument((beginPositionSecondRange < endPositionSecondRange),
-                "The Parameter beginPositionSecondRange must be lesser than endPositionSecondRange");
-        checkArgument((endPositionFirstRange > beginPositionSecondRange),
-                "The Parameter endPositionFirstRange must be greater than beginPositionSecondRange");
+        checkArgument((beginPositionFirstRange < endPositionFirstRange), "The Parameter beginPositionFirstRange must be lesser than endPositionFirstRange");
+        checkArgument((beginPositionSecondRange < endPositionSecondRange), "The Parameter beginPositionSecondRange must be lesser than endPositionSecondRange");
+        checkArgument((endPositionFirstRange > beginPositionSecondRange), "The Parameter endPositionFirstRange must be greater than beginPositionSecondRange");
         checkArgument((deltaValueFirstRange != 0), "The Parameter deltaValueFirstRange must not be 0");
         checkArgument((deltaValueSecondRange != 0), "The Parameter deltaValueSecondRange must not be 0");
         try {
@@ -405,8 +401,7 @@ class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFold
      * @throws GPDAOException
      */
     @Override
-    public List<GPFolder> findByPositionAndProjectID(Long projectID, Integer lessOrEqualTo, Integer greatherOrEqualTo)
-            throws GPDAOException {
+    public List<GPFolder> findByPositionAndProjectID(Long projectID, Integer lessOrEqualTo, Integer greatherOrEqualTo) throws GPDAOException {
         checkArgument(projectID != null, "The Parameter projectID must not be null.");
         checkArgument(lessOrEqualTo != null, "The Parameter lessOrEqualTo must not be null.");
         checkArgument(greatherOrEqualTo != null, "The Parameter greatherOrEqualTo must not be null.");

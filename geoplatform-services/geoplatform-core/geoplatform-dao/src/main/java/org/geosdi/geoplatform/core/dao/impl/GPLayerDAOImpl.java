@@ -60,7 +60,7 @@ import static java.lang.Boolean.TRUE;
 @Profile(value = "jpa")
 class GPLayerDAOImpl extends GPAbstractJpaDAO<GPLayer, Long> implements GPLayerDAO {
 
-    public GPLayerDAOImpl() {
+    GPLayerDAOImpl() {
         super(GPLayer.class);
     }
 
@@ -229,11 +229,31 @@ class GPLayerDAOImpl extends GPAbstractJpaDAO<GPLayer, Long> implements GPLayerD
             logger.debug("\n*** Layers with Position in range: {} to {} [# {}] *** deltaValue = {} ***",
                     beginPosition, endPosition, endPosition - beginPosition + 1, deltaValue);
             logger.debug("\n*** Matching Layers count: {} ***", matchingLayers.size());
-            // No updates (select 0 layers)
-            if (matchingLayers.isEmpty()) {
-                return TRUE;
-            }
             return (matchingLayers.isEmpty() ? TRUE : this.updatePositions(matchingLayers, deltaValue));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new GPDAOException(ex);
+        }
+    }
+
+    /**
+     * @param projectID
+     * @param beginPosition
+     * @param endPosition
+     * @return {@link List<GPLayer>}
+     * @throws GPDAOException
+     */
+    @Override
+    public List<GPLayer> find(Long projectID, int beginPosition, int endPosition) throws GPDAOException {
+        checkArgument(projectID != null, "The Parameter projectID must be not null");
+        checkArgument(beginPosition <= endPosition, "The Parameter beginPosition must be lesser than or equal endPosition");
+        try {
+            Query query = this.entityManager.createQuery("select l from GPLayer l join l.project as p where p.id=:id " +
+                    "and l.position >=:pStart and l.position <=:pEnd");
+            query.setParameter("id", projectID);
+            query.setParameter("pStart", beginPosition);
+            query.setParameter("pEnd", endPosition);
+            return query.getResultList();
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new GPDAOException(ex);

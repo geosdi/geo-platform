@@ -59,7 +59,7 @@ import static java.lang.Boolean.TRUE;
 @Profile(value = "jpa")
 class GuiComponentDAOImpl extends GPAbstractJpaDAO<GuiComponent, Long> implements GuiComponentDAO {
 
-    public GuiComponentDAOImpl() {
+    GuiComponentDAOImpl() {
         super(GuiComponent.class);
     }
 
@@ -80,8 +80,7 @@ class GuiComponentDAOImpl extends GPAbstractJpaDAO<GuiComponent, Long> implement
      */
     @Override
     public GuiComponent findByComponentId(String componentId) throws GPDAOException {
-        checkArgument(((componentId != null) && !(componentId.isEmpty())),
-                "The Parameter componentId must not be null or an empty string.");
+        checkArgument(((componentId != null) && !(componentId.isEmpty())), "The Parameter componentId must not be null or an empty string.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GuiComponent> criteriaQuery = super.createCriteriaQuery();

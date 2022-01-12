@@ -61,7 +61,7 @@ import static java.lang.Boolean.TRUE;
 @Profile(value = "jpa")
 class GPServerDAOImpl extends GPAbstractJpaDAO<GeoPlatformServer, Long> implements GPServerDAO {
 
-    public GPServerDAOImpl() {
+    GPServerDAOImpl() {
         super(GeoPlatformServer.class);
     }
 
@@ -148,8 +148,7 @@ class GPServerDAOImpl extends GPAbstractJpaDAO<GeoPlatformServer, Long> implemen
      */
     @Override
     public GeoPlatformServer findByServerUrl(String serverUrl) throws GPDAOException {
-        checkArgument(((serverUrl != null) && !(serverUrl.isEmpty())),
-                "The Parameter serverUrl must not be null or an empty string.");
+        checkArgument(((serverUrl != null) && !(serverUrl.isEmpty())), "The Parameter serverUrl must not be null or an empty string.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GeoPlatformServer> criteriaQuery = super.createCriteriaQuery();
@@ -173,8 +172,7 @@ class GPServerDAOImpl extends GPAbstractJpaDAO<GeoPlatformServer, Long> implemen
      */
     @Override
     public Number countServers(String organizationName, GPCapabilityType type, String titleOrAliasName) throws GPDAOException {
-        checkArgument((organizationName != null) && !(organizationName.isEmpty()),
-                "The Parameter organizationName must not ne null or an empty string.");
+        checkArgument((organizationName != null) && !(organizationName.isEmpty()), "The Parameter organizationName must not ne null or an empty string.");
         checkArgument(type != null, "The Parameter type must not ne null.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
@@ -206,10 +204,8 @@ class GPServerDAOImpl extends GPAbstractJpaDAO<GeoPlatformServer, Long> implemen
      * @throws GPDAOException
      */
     @Override
-    public List<GeoPlatformServer> searchPagebleServers(Integer page, Integer size, String organizationName, GPCapabilityType type,
-            String titleOrAliasName) throws GPDAOException {
-        checkArgument((organizationName != null) && !(organizationName.isEmpty()),
-                "The Parameter organizationName must not ne null or an empty string.");
+    public List<GeoPlatformServer> searchPagebleServers(Integer page, Integer size, String organizationName, GPCapabilityType type, String titleOrAliasName) throws GPDAOException {
+        checkArgument((organizationName != null) && !(organizationName.isEmpty()), "The Parameter organizationName must not ne null or an empty string.");
         checkArgument(type != null, "The Parameter type must not ne null.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();

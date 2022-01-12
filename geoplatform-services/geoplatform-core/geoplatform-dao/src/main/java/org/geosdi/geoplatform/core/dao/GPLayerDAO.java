@@ -96,6 +96,15 @@ public interface GPLayerDAO extends BaseCriteriaJpaDAO<GPLayer, Long> {
 
     /**
      * @param projectID
+     * @param beginPosition
+     * @param endPosition
+     * @return {@link List<GPLayer>}
+     * @throws GPDAOException
+     */
+    List<GPLayer> find(Long projectID, int beginPosition, int endPosition) throws GPDAOException;
+
+    /**
+     * @param projectID
      * @param lowerBoundPosition
      * @param deltaValue
      * @return {@link Boolean}
@@ -118,8 +127,7 @@ public interface GPLayerDAO extends BaseCriteriaJpaDAO<GPLayer, Long> {
      * @return {@link List<GPLayer>}
      * @throws GPDAOException
      */
-    List<GPLayer> findByPositionAndProjectID(Long projectID, Integer lessOrEqualTo, Integer greatherOrEqualTo)
-            throws GPDAOException;
+    List<GPLayer> findByPositionAndProjectID(Long projectID, Integer lessOrEqualTo, Integer greatherOrEqualTo) throws GPDAOException;
 
     /**
      * @param folderID

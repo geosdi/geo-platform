@@ -45,7 +45,6 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -60,7 +59,7 @@ import static java.lang.Boolean.TRUE;
 @Profile(value = "jpa")
 class GSAccountDAOImpl extends GPAbstractJpaDAO<GSAccount, Long> implements GSAccountDAO {
 
-    public GSAccountDAOImpl() {
+    GSAccountDAOImpl() {
         super(GSAccount.class);
     }
 
@@ -81,8 +80,7 @@ class GSAccountDAOImpl extends GPAbstractJpaDAO<GSAccount, Long> implements GSAc
      */
     @Override
     public GSAccount findGSUserNameByAuthkey(String authkey) throws GPDAOException {
-        checkArgument(((authkey != null) && !(authkey.isEmpty())),
-                "The Parameter authkey must not be null or an empty string.");
+        checkArgument(((authkey != null) && !(authkey.isEmpty())), "The Parameter authkey must not be null or an empty string.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GSAccount> criteriaQuery = super.createCriteriaQuery();

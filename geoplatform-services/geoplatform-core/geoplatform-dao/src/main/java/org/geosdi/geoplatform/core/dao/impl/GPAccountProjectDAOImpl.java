@@ -60,7 +60,7 @@ import static org.springframework.security.acls.domain.BasePermission.ADMINISTRA
 @Profile(value = "jpa")
 class GPAccountProjectDAOImpl extends GPAbstractJpaDAO<GPAccountProject, Long> implements GPAccountProjectDAO {
 
-    public GPAccountProjectDAOImpl() {
+    GPAccountProjectDAOImpl() {
         super(GPAccountProject.class);
     }
 
@@ -305,7 +305,7 @@ class GPAccountProjectDAOImpl extends GPAbstractJpaDAO<GPAccountProject, Long> i
             criteriaQuery.select(builder.count(root));
             List<Predicate> predicates = Lists.newArrayList();
             predicates.add(builder.equal(root.join("account").get("id"), accountID));
-            if ((nameProject != null) && !(nameProject.isEmpty()))
+            if ((nameProject != null) && !(nameProject.trim().isEmpty()))
                 predicates.add(builder.like(builder.lower(root.get("project").get("name")), nameProject.toLowerCase()));
             criteriaQuery.where(predicates.stream().toArray(size -> new Predicate[size]));
             return this.entityManager.createQuery(criteriaQuery).getSingleResult();
@@ -324,8 +324,7 @@ class GPAccountProjectDAOImpl extends GPAbstractJpaDAO<GPAccountProject, Long> i
      * @throws GPDAOException
      */
     @Override
-    public List<GPAccountProject> searchAccountProjectsByAccountID(Integer page, Integer size, Long accountID,
-            String projectName) throws GPDAOException {
+    public List<GPAccountProject> searchAccountProjectsByAccountID(Integer page, Integer size, Long accountID, String projectName) throws GPDAOException {
         checkArgument(accountID != null, "The Parameter accountID must not be null.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
@@ -334,9 +333,9 @@ class GPAccountProjectDAOImpl extends GPAbstractJpaDAO<GPAccountProject, Long> i
             criteriaQuery.select(root);
             List<Predicate> predicates = Lists.newArrayList();
             predicates.add(builder.equal(root.join("account").get("id"), accountID));
-            if ((projectName != null) && !(projectName.isEmpty()))
+            if ((projectName != null) && !(projectName.trim().isEmpty()))
                 predicates.add(builder.like(builder.lower(root.get("project").get("name")), projectName.toLowerCase()));
-            criteriaQuery.where(predicates.stream().toArray(s -> new Predicate[s]))
+            criteriaQuery.where(predicates.stream().toArray(Predicate[]::new))
                     .orderBy(builder.asc(root.get("defaultProject")));
             TypedQuery<GPAccountProject> typedQuery = this.entityManager.createQuery(criteriaQuery);
             if ((page != null) && (size != null)) {

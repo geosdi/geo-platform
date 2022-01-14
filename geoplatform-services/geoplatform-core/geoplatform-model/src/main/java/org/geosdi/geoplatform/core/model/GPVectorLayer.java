@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.core.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.locationtech.jts.geom.Geometry;
@@ -52,6 +53,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "gp_vector_layer", indexes = {
         @Index(columnList = "project_id", name = "VECTOR_PROJECT_ID_INDEX")
 })
+@ToString(callSuper = true)
 public class GPVectorLayer extends GPLayer implements IGPVectorLayer {
 
     /**
@@ -75,17 +77,4 @@ public class GPVectorLayer extends GPLayer implements IGPVectorLayer {
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private GPProject project;
-
-    /**
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
-        str.append(super.toString());
-        str.append(", geometry=").append(geometry);
-        return str.append("}").toString();
-    }
 }

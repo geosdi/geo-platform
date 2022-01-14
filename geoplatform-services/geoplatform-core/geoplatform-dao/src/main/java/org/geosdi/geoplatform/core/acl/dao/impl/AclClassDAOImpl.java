@@ -60,7 +60,7 @@ import static java.lang.Boolean.TRUE;
 @Profile(value = "jpa")
 class AclClassDAOImpl extends GPAbstractJpaDAO<AclClass, Long> implements AclClassDAO {
 
-    public AclClassDAOImpl() {
+    AclClassDAOImpl() {
         super(AclClass.class);
     }
 
@@ -81,8 +81,7 @@ class AclClassDAOImpl extends GPAbstractJpaDAO<AclClass, Long> implements AclCla
      */
     @Override
     public AclClass findByClass(String clazz) throws GPDAOException {
-        checkArgument(((clazz != null) && !(clazz.isEmpty())),
-                "The Parameter clazz must not be null or an empty string.");
+        checkArgument(((clazz != null) && !(clazz.trim().isEmpty())), "The Parameter clazz must not be null or an empty string.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<AclClass> criteriaQuery = super.createCriteriaQuery();

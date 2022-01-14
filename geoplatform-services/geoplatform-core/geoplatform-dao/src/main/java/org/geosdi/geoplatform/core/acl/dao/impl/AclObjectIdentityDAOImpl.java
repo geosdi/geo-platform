@@ -60,7 +60,7 @@ import static java.lang.Boolean.TRUE;
 @Profile(value = "jpa")
 class AclObjectIdentityDAOImpl extends GPAbstractJpaDAO<AclObjectIdentity, Long> implements AclObjectIdentityDAO {
 
-    public AclObjectIdentityDAOImpl() {
+    AclObjectIdentityDAOImpl() {
         super(AclObjectIdentity.class);
     }
 

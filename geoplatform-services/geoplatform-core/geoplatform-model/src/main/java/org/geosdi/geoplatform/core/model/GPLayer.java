@@ -39,6 +39,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -62,6 +63,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "gp_layer")
 @Getter
 @Setter
+@ToString
 public abstract class GPLayer implements IGPLayer {
 
     /**
@@ -119,45 +121,6 @@ public abstract class GPLayer implements IGPLayer {
     //
     @Column(name = "single_tile_request", nullable = false)
     private boolean singleTileRequest = false;
-
-    /**
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
-        str.append("id=").append(id);
-        str.append(", title=").append(title);
-        str.append(", name=").append(name);
-        str.append(", alias=").append(alias);
-        str.append(", abstractText=").append(abstractText);
-        str.append(", urlServer=").append(urlServer);
-        str.append(", srs=").append(srs);
-        str.append(", bbox=").append(bbox);
-        str.append(", layerType=").append(layerType);
-        str.append(", position=").append(position);
-        str.append(", checked=").append(checked);
-        str.append(", shared=").append(shared);
-        str.append(", cached=").append(cached);
-        str.append(", singleTileRequest=").append(singleTileRequest);
-        str.append(", cqlFilter=").append(cqlFilter);
-        str.append(", timeFilter=").append(timeFilter);
-        if (this.getFolder() != null) {
-            str.append(", folder.name=").append(this.getFolder().getName());
-            str.append("(id=").append(this.getFolder().getId()).append(")");
-        } else {
-            str.append(", folder=NULL");
-        }
-        if (this.getProject() != null) {
-            str.append(", project.name=").append(this.getProject().getName());
-            str.append("(id=").append(this.getProject().getId()).append(")");
-        } else {
-            str.append(", project=NULL");
-        }
-        return str.append("}").toString();
-    }
 
     /**
      * (non-Javadoc)

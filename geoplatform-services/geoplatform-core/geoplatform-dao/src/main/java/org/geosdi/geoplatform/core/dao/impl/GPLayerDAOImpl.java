@@ -60,7 +60,7 @@ import static java.lang.Boolean.TRUE;
 @Profile(value = "jpa")
 class GPLayerDAOImpl extends GPAbstractJpaDAO<GPLayer, Long> implements GPLayerDAO {
 
-    public GPLayerDAOImpl() {
+    GPLayerDAOImpl() {
         super(GPLayer.class);
     }
 
@@ -302,8 +302,7 @@ class GPLayerDAOImpl extends GPAbstractJpaDAO<GPLayer, Long> implements GPLayerD
      * @throws GPDAOException
      */
     @Override
-    public List<GPLayer> findByPositionAndProjectID(Long projectID, Integer lessOrEqualTo, Integer greatherOrEqualTo)
-            throws GPDAOException {
+    public List<GPLayer> findByPositionAndProjectID(Long projectID, Integer lessOrEqualTo, Integer greatherOrEqualTo) throws GPDAOException {
         checkArgument(projectID != null, "The Parameter projectID must not be null.");
         checkArgument(lessOrEqualTo != null, "The Parameter lessOrEqualTo must not be null.");
         checkArgument(greatherOrEqualTo != null, "The Parameter greatherOrEqualTo must not be null.");

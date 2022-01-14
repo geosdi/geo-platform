@@ -60,7 +60,7 @@ import static java.lang.Boolean.TRUE;
 @Profile(value = "jpa")
 class GPOrganizationDAOImpl extends GPAbstractJpaDAO<GPOrganization, Long> implements GPOrganizationDAO {
 
-    public GPOrganizationDAOImpl() {
+    GPOrganizationDAOImpl() {
         super(GPOrganization.class);
     }
 
@@ -91,8 +91,7 @@ class GPOrganizationDAOImpl extends GPAbstractJpaDAO<GPOrganization, Long> imple
      */
     @Override
     public GPOrganization findByName(String name) throws GPDAOException {
-        checkArgument((name != null) && !(name.isEmpty()),
-                "The Parameter name must not be null or an empty string.");
+        checkArgument((name != null) && !(name.trim().isEmpty()), "The Parameter name must not be null or an empty string.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GPOrganization> criteriaQuery = super.createCriteriaQuery();

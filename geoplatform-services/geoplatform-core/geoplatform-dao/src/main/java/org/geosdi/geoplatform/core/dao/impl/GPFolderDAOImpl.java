@@ -49,6 +49,7 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -65,7 +66,7 @@ import static java.util.stream.Collectors.toList;
 @Profile(value = "jpa")
 class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFolderDAO {
 
-    public GPFolderDAOImpl() {
+    GPFolderDAOImpl() {
         super(GPFolder.class);
     }
 
@@ -86,8 +87,7 @@ class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFold
      */
     @Override
     public GPFolder findByFolderName(String folderName) throws GPDAOException {
-        checkArgument((folderName != null) && !(folderName.isEmpty()),
-                "The Parameter folderName must not be null or an empty string.");
+        checkArgument((folderName != null) && !(folderName.trim().isEmpty()), "The Parameter folderName must not be null or an empty string.");
         try {
             CriteriaQuery<GPFolder> criteriaQuery = super.createCriteriaQuery();
             Root<GPFolder> root = criteriaQuery.from(this.persistentClass);
@@ -158,18 +158,14 @@ class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFold
      * @throws GPDAOException
      */
     @Override
-    public Boolean updatePositionsRangeInOppositeWay(Long projectID, int beginPositionFirstRange,
-            int endPositionFirstRange, int beginPositionSecondRange, int endPositionSecondRange,
-            int deltaValueFirstRange, int deltaValueSecondRange) throws GPDAOException {
+    public Boolean updatePositionsRangeInOppositeWay(Long projectID, int beginPositionFirstRange, int endPositionFirstRange,
+            int beginPositionSecondRange, int endPositionSecondRange, int deltaValueFirstRange, int deltaValueSecondRange) throws GPDAOException {
         checkArgument(projectID != null, "The Parameter projectID must not be null.");
         checkArgument((beginPositionFirstRange > 0), "The Parameter beginPositionFirstRange must be greater than zero");
         checkArgument((beginPositionSecondRange > 0), "The Parameter beginPositionSecondRange must be greater than zero");
-        checkArgument((beginPositionFirstRange < endPositionFirstRange),
-                "The Parameter beginPositionFirstRange must be lesser than endPositionFirstRange");
-        checkArgument((beginPositionSecondRange < endPositionSecondRange),
-                "The Parameter beginPositionSecondRange must be lesser than endPositionSecondRange");
-        checkArgument((endPositionFirstRange > beginPositionSecondRange),
-                "The Parameter endPositionFirstRange must be greater than beginPositionSecondRange");
+        checkArgument((beginPositionFirstRange < endPositionFirstRange), "The Parameter beginPositionFirstRange must be lesser than endPositionFirstRange");
+        checkArgument((beginPositionSecondRange < endPositionSecondRange), "The Parameter beginPositionSecondRange must be lesser than endPositionSecondRange");
+        checkArgument((endPositionFirstRange > beginPositionSecondRange), "The Parameter endPositionFirstRange must be greater than beginPositionSecondRange");
         checkArgument((deltaValueFirstRange != 0), "The Parameter deltaValueFirstRange must not be 0");
         checkArgument((deltaValueSecondRange != 0), "The Parameter deltaValueSecondRange must not be 0");
         try {
@@ -405,8 +401,7 @@ class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFold
      * @throws GPDAOException
      */
     @Override
-    public List<GPFolder> findByPositionAndProjectID(Long projectID, Integer lessOrEqualTo, Integer greatherOrEqualTo)
-            throws GPDAOException {
+    public List<GPFolder> findByPositionAndProjectID(Long projectID, Integer lessOrEqualTo, Integer greatherOrEqualTo) throws GPDAOException {
         checkArgument(projectID != null, "The Parameter projectID must not be null.");
         checkArgument(lessOrEqualTo != null, "The Parameter lessOrEqualTo must not be null.");
         checkArgument(greatherOrEqualTo != null, "The Parameter greatherOrEqualTo must not be null.");
@@ -439,7 +434,7 @@ class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFold
             CriteriaQuery<GPFolder> criteriaQuery = super.createCriteriaQuery();
             Root<GPFolder> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
-            if ((name != null) && !(name.isEmpty())) {
+            if ((name != null) && !(name.trim().isEmpty())) {
                 criteriaQuery.where(builder.like(builder.lower(root.get("name")), name.toLowerCase()));
             }
             criteriaQuery.orderBy(builder.asc(root.get("name")));
@@ -462,7 +457,7 @@ class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFold
             CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
             Root<GPFolder> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(builder.count(root));
-            if ((name != null) && !(name.isEmpty())) {
+            if ((name != null) && !(name.trim().isEmpty())) {
                 criteriaQuery.where(builder.like(builder.lower(root.get("name")), name.toLowerCase()));
             }
             return this.entityManager.createQuery(criteriaQuery).getSingleResult();
@@ -531,9 +526,10 @@ class GPFolderDAOImpl extends GPAbstractJpaDAO<GPFolder, Long> implements GPFold
     public List<GPFolder> find(Long... ids) throws GPDAOException {
         checkArgument(ids != null, "The Parameter ids must not be null.");
         try {
-            List<Long> values = Stream.of(ids).filter(id -> id != null).collect(toList());
-            checkArgument((values != null) && !(values.isEmpty()),
-                    "The Parameter ids must contains element.");
+            List<Long> values = Stream.of(ids)
+                    .filter(Objects::nonNull)
+                    .collect(toList());
+            checkArgument((values != null) && !(values.isEmpty()), "The Parameter ids must contains element.");
             CriteriaQuery<GPFolder> criteriaQuery = super.createCriteriaQuery();
             Root<GPFolder> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);

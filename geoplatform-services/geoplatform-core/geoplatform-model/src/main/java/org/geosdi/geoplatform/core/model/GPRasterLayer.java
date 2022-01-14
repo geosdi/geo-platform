@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.core.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.geosdi.geoplatform.core.model.attribution.GPLayerAttribution;
 import org.geosdi.geoplatform.core.model.temporal.GPTemporalLayer;
 import org.hibernate.annotations.OnDelete;
@@ -60,6 +61,7 @@ import static org.geosdi.geoplatform.gui.shared.GPLayerType.WMS;
 @XmlAccessorType(FIELD)
 @Entity(name = "RasterLayer")
 @Table(name = "gp_raster_layer", indexes = {@Index(columnList = "project_id", name = "RASTER_PROJECT_ID_INDEX")})
+@ToString(callSuper = true)
 public class GPRasterLayer extends GPLayer implements IGPRasterLayer {
 
     /**
@@ -137,18 +139,5 @@ public class GPRasterLayer extends GPLayer implements IGPRasterLayer {
     @Override
     public void setStyles(List<String> theStyles) {
         this.styles = ((theStyles != null) ? theStyles.stream().collect(joining(",")) : null);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
-        str.append(super.toString());
-        str.append(", opacity = ").append(opacity);
-        str.append(", styles = ").append(styles);
-        str.append(", layerInfo = ").append(layerInfo);
-        str.append(", maxScale = ").append(maxScale);
-        str.append(", minScale = ").append(minScale);
-        str.append(", isTemporal = ").append((this.isTemporalLayer() ? "YES" : "NO"));
-        return str.append("}").toString();
     }
 }

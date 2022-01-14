@@ -61,7 +61,7 @@ import static java.lang.Boolean.TRUE;
 @Profile(value = "jpa")
 class GPServerDAOImpl extends GPAbstractJpaDAO<GeoPlatformServer, Long> implements GPServerDAO {
 
-    public GPServerDAOImpl() {
+    GPServerDAOImpl() {
         super(GeoPlatformServer.class);
     }
 
@@ -127,7 +127,7 @@ class GPServerDAOImpl extends GPAbstractJpaDAO<GeoPlatformServer, Long> implemen
      */
     @Override
     public List<GeoPlatformServer> findByServerName(String serverName) throws GPDAOException {
-        checkArgument(((serverName != null) && !(serverName.isEmpty())), "The Parameter serveName must not be null or an empty string.");
+        checkArgument(((serverName != null) && !(serverName.trim().isEmpty())), "The Parameter serveName must not be null or an empty string.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GeoPlatformServer> criteriaQuery = super.createCriteriaQuery();
@@ -148,8 +148,7 @@ class GPServerDAOImpl extends GPAbstractJpaDAO<GeoPlatformServer, Long> implemen
      */
     @Override
     public GeoPlatformServer findByServerUrl(String serverUrl) throws GPDAOException {
-        checkArgument(((serverUrl != null) && !(serverUrl.isEmpty())),
-                "The Parameter serverUrl must not be null or an empty string.");
+        checkArgument(((serverUrl != null) && !(serverUrl.trim().isEmpty())), "The Parameter serverUrl must not be null or an empty string.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GeoPlatformServer> criteriaQuery = super.createCriteriaQuery();
@@ -173,15 +172,14 @@ class GPServerDAOImpl extends GPAbstractJpaDAO<GeoPlatformServer, Long> implemen
      */
     @Override
     public Number countServers(String organizationName, GPCapabilityType type, String titleOrAliasName) throws GPDAOException {
-        checkArgument((organizationName != null) && !(organizationName.isEmpty()),
-                "The Parameter organizationName must not ne null or an empty string.");
+        checkArgument((organizationName != null) && !(organizationName.trim().isEmpty()), "The Parameter organizationName must not ne null or an empty string.");
         checkArgument(type != null, "The Parameter type must not ne null.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
             Root<GeoPlatformServer> root = criteriaQuery.from(this.persistentClass);
             List<Predicate> predicates = Lists.newArrayList();
-            if ((titleOrAliasName != null) && !(titleOrAliasName.isEmpty())) {
+            if ((titleOrAliasName != null) && !(titleOrAliasName.trim().isEmpty())) {
                 predicates.add(builder.or(builder.like(builder.lower(root.get("title")), titleOrAliasName.toLowerCase()),
                         builder.like(builder.lower(root.get("aliasName")), titleOrAliasName.toLowerCase())));
             }
@@ -189,7 +187,7 @@ class GPServerDAOImpl extends GPAbstractJpaDAO<GeoPlatformServer, Long> implemen
             predicates.add(builder.equal(join.get("name"), organizationName));
             predicates.add(builder.equal(root.get("serverType"), type));
             criteriaQuery.select(builder.count(root));
-            criteriaQuery.where(predicates.stream().toArray(size -> new Predicate[size]));
+            criteriaQuery.where(predicates.stream().toArray(Predicate[]::new));
             return this.entityManager.createQuery(criteriaQuery).getSingleResult();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -206,10 +204,8 @@ class GPServerDAOImpl extends GPAbstractJpaDAO<GeoPlatformServer, Long> implemen
      * @throws GPDAOException
      */
     @Override
-    public List<GeoPlatformServer> searchPagebleServers(Integer page, Integer size, String organizationName, GPCapabilityType type,
-            String titleOrAliasName) throws GPDAOException {
-        checkArgument((organizationName != null) && !(organizationName.isEmpty()),
-                "The Parameter organizationName must not ne null or an empty string.");
+    public List<GeoPlatformServer> searchPagebleServers(Integer page, Integer size, String organizationName, GPCapabilityType type, String titleOrAliasName) throws GPDAOException {
+        checkArgument((organizationName != null) && !(organizationName.trim().isEmpty()), "The Parameter organizationName must not ne null or an empty string.");
         checkArgument(type != null, "The Parameter type must not ne null.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
@@ -217,14 +213,14 @@ class GPServerDAOImpl extends GPAbstractJpaDAO<GeoPlatformServer, Long> implemen
             Root<GeoPlatformServer> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
             List<Predicate> predicates = Lists.newArrayList();
-            if ((titleOrAliasName != null) && !(titleOrAliasName.isEmpty())) {
+            if ((titleOrAliasName != null) && !(titleOrAliasName.trim().isEmpty())) {
                 predicates.add(builder.or(builder.like(builder.lower(root.get("title")), titleOrAliasName.toLowerCase()),
                         builder.like(builder.lower(root.get("aliasName")), titleOrAliasName.toLowerCase())));
             }
             Join<GeoPlatformServer, GPOrganization> join = root.join("organization");
             predicates.add(builder.equal(join.get("name"), organizationName));
             predicates.add(builder.equal(root.get("serverType"), type));
-            criteriaQuery.where(predicates.stream().toArray(s -> new Predicate[s]))
+            criteriaQuery.where(predicates.stream().toArray(Predicate[]::new))
                     .orderBy(builder.asc(root.get("aliasName")));
             TypedQuery<GeoPlatformServer> typedQuery = this.entityManager.createQuery(criteriaQuery);
             Integer firstResult = (page == 0) ? 0 : ((page * size));

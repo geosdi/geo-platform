@@ -60,7 +60,7 @@ import static java.lang.Boolean.TRUE;
 @Profile(value = "jpa")
 class GSAccountDAOImpl extends GPAbstractJpaDAO<GSAccount, Long> implements GSAccountDAO {
 
-    public GSAccountDAOImpl() {
+    GSAccountDAOImpl() {
         super(GSAccount.class);
     }
 
@@ -81,8 +81,7 @@ class GSAccountDAOImpl extends GPAbstractJpaDAO<GSAccount, Long> implements GSAc
      */
     @Override
     public GSAccount findGSUserNameByAuthkey(String authkey) throws GPDAOException {
-        checkArgument(((authkey != null) && !(authkey.isEmpty())),
-                "The Parameter authkey must not be null or an empty string.");
+        checkArgument(((authkey != null) && !(authkey.trim().isEmpty())), "The Parameter authkey must not be null or an empty string.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<GSAccount> criteriaQuery = super.createCriteriaQuery();

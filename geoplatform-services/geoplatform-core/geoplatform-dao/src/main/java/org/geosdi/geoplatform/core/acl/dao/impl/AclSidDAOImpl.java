@@ -59,7 +59,7 @@ import static java.lang.Boolean.TRUE;
 @Profile(value = "jpa")
 class AclSidDAOImpl extends GPAbstractJpaDAO<AclSid, Long> implements AclSidDAO {
 
-    public AclSidDAOImpl() {
+    AclSidDAOImpl() {
         super(AclSid.class);
     }
 
@@ -81,8 +81,7 @@ class AclSidDAOImpl extends GPAbstractJpaDAO<AclSid, Long> implements AclSidDAO 
      */
     @Override
     public AclSid findBySid(String sid, boolean principal) throws GPDAOException {
-        checkArgument(((sid != null) && !(sid.isEmpty())),
-                "The Parameter sid must not be null or an empty string.");
+        checkArgument(((sid != null) && !(sid.trim().isEmpty())), "The Parameter sid must not be null or an empty string.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<AclSid> criteriaQuery = super.createCriteriaQuery();
@@ -106,10 +105,8 @@ class AclSidDAOImpl extends GPAbstractJpaDAO<AclSid, Long> implements AclSidDAO 
      */
     @Override
     public AclSid findBySid(String sid, boolean principal, String organization) throws GPDAOException {
-        checkArgument(((sid != null) && !(sid.isEmpty())),
-                "The Parameter sid must not be null or an empty string.");
-        checkArgument(((organization != null) && !(organization.isEmpty())),
-                "The Parameter organization must not be null or an empty string.");
+        checkArgument(((sid != null) && !(sid.trim().isEmpty())), "The Parameter sid must not be null or an empty string.");
+        checkArgument(((organization != null) && !(organization.trim().isEmpty())), "The Parameter organization must not be null or an empty string.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<AclSid> criteriaQuery = super.createCriteriaQuery();
@@ -133,8 +130,7 @@ class AclSidDAOImpl extends GPAbstractJpaDAO<AclSid, Long> implements AclSidDAO 
      */
     @Override
     public List<AclSid> findByPrincipal(boolean principal, String organization) throws GPDAOException {
-        checkArgument(((organization != null) && !(organization.isEmpty())),
-                "The Parameter organization must not be null or an empty string.");
+        checkArgument(((organization != null) && !(organization.trim().isEmpty())), "The Parameter organization must not be null or an empty string.");
         try {
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<AclSid> criteriaQuery = super.createCriteriaQuery();

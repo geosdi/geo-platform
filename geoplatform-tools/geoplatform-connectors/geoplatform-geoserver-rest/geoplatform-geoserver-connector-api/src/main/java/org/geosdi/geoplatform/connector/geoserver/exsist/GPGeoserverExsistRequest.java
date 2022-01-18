@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.exsist;
 
-import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
 import org.geosdi.geoplatform.connector.geoserver.request.exsist.GeoserverExsistRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.UnauthorizedException;
@@ -89,7 +88,7 @@ public abstract class GPGeoserverExsistRequest<T, ConnectorRequest extends GPJso
      */
     @Override
     public T getResponse() throws Exception {
-        return  (this.response.get() != null ? this.response.get() : super.getResponse());
+        return (this.response.get() != null ? this.response.get() : super.getResponse());
     }
 
     /**
@@ -106,7 +105,7 @@ public abstract class GPGeoserverExsistRequest<T, ConnectorRequest extends GPJso
 
     /**
      * @param reader
-     * @return {@link GeoserverLayer}
+     * @return {@link T}
      * @throws Exception
      */
     @Override

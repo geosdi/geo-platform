@@ -38,6 +38,10 @@ package org.geosdi.geoplatform.connector.geoserver.security;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.featuretypes.GPGeoserverFeatureTypesConnector;
+import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverCreateUserRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverDeleteUserRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverLoadUserRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverLoadUsersRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -140,6 +144,62 @@ public abstract class GPGeoserverSecurityConnector extends GPGeoserverFeatureTyp
             case V220x:
             case V219x:
                 return new GPGeoserverUpdateCatalogRequest(this, this.emptyJacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverLoadUsersRequest}
+     */
+    @Override
+    public GeoserverLoadUsersRequest loadUsersRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverLoadUsersRequest(this);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverCreateUserRequest}
+     */
+    @Override
+    public GeoserverCreateUserRequest createUserRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverCreateUserRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverDeleteUserRequest}
+     */
+    @Override
+    public GeoserverDeleteUserRequest deleteUserRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverDeleteUserRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverLoadUserRequest}
+     */
+    @Override
+    public GeoserverLoadUserRequest loadUserRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverLoadUserRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

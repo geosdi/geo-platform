@@ -36,15 +36,18 @@
 package org.geosdi.geoplatform.connector.store.security;
 
 import org.geosdi.geoplatform.connector.geoserver.model.security.catalog.GPGeoserverCatalog;
+import org.geosdi.geoplatform.connector.geoserver.model.security.user.GPGeoserverUserBody;
 import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverGetMasterPasswordRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverUpdateCatalogRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.security.catalog.GeoserverGetCatalogRequest;
 import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreTest;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.geosdi.geoplatform.connector.geoserver.model.security.catalog.GPGeoserverCatalogMode.HIDE;
 import static org.geosdi.geoplatform.connector.geoserver.model.security.catalog.GPGeoserverCatalogMode.MIXED;
+import static org.geosdi.geoplatform.connector.jackson.GPGeoserverUserBodyJacksonTest.toGeoserverUserBody;
 import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -79,5 +82,30 @@ public class GPGeoserverSecurityConnectorStoreTest extends GPBaseGeoserverConnec
         assertTrue(geoserverCatalog.getCatalogMode() == MIXED);
         updateCatalogRequest.withCatalogMode(HIDE);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_UPDATE_CATALOG_RESPONSE : {}\n", updateCatalogRequest.getResponse());
+    }
+
+    @Test
+    public void d_loadGeoserverUsersRequest() throws Exception {
+        logger.info("#####################GP_GEOSERVER_USERS_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x.loadUsersRequest().getResponse());
+    }
+
+    @Test
+    public void e_createGeoserverUserRequestTest() throws Exception {
+        GPGeoserverUserBody createUser = toGeoserverUserBody("glascaleia", "0x,77peppino77?!0x");
+        logger.info("@@@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_CREATE_USER_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x.createUserRequest()
+                .withBody(createUser).getResponse());
+    }
+
+    @Ignore
+    @Test
+    public void f_loadGeoserverUserRequestTest() throws Exception {
+        logger.info("#####################GP_GEOSERVER_LOAD_USER_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x.loadUserRequest()
+                .withUser("glascaleia").getResponse());
+    }
+
+    @Test
+    public void g_deleteGeoserverUserRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_DELETE_USER_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x.deleteUserRequest()
+                .withUser("glascaleia").getResponse());
     }
 }

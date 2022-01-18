@@ -39,7 +39,8 @@ import org.geosdi.geoplatform.connector.geoserver.model.security.catalog.IGPGeos
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -52,5 +53,5 @@ public interface GeoserverUpdateCatalogRequest extends GPJsonConnectorRequest<Bo
      * @param <CatalogMode>
      * @return {@link GeoserverUpdateCatalogRequest}
      */
-    <CatalogMode extends IGPGeoserverCatalogMode> GeoserverUpdateCatalogRequest withCatalogMode(@Nonnull(when = When.NEVER) CatalogMode theCatalogMode);
+    <CatalogMode extends IGPGeoserverCatalogMode> GeoserverUpdateCatalogRequest withCatalogMode(@Nonnull(when = NEVER) CatalogMode theCatalogMode);
 }

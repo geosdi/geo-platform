@@ -62,7 +62,7 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverUpdateCatalogRequest extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateCatalogRequest> implements GeoserverUpdateCatalogRequest {
+class GPGeoserverUpdateCatalogRequest extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateCatalogRequest> implements GeoserverUpdateCatalogRequest {
 
     private final ThreadLocal<IGPGeoserverCatalogMode> catalogMode;
 

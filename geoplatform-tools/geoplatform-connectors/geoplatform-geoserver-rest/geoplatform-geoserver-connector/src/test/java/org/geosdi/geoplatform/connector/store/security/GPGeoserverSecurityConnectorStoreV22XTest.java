@@ -80,4 +80,9 @@ public class GPGeoserverSecurityConnectorStoreV22XTest extends GPBaseGeoserverCo
         updateCatalogRequest.withCatalogMode(HIDE);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_UPDATE_CATALOG_RESPONSE : {}\n", updateCatalogRequest.getResponse());
     }
+
+    @Test
+    public void d_loadGeoserverUsersRequest() throws Exception {
+        logger.info("#####################GP_GEOSERVER_USERS_RESPONSE : {}\n", geoserverConnectorStoreV2_20_x.loadUsersRequest().getResponse());
+    }
 }

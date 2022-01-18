@@ -39,9 +39,9 @@ import io.reactivex.rxjava3.functions.Consumer;
 import org.apache.hc.core5.net.URIBuilder;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -54,7 +54,7 @@ public class GeoserverRXQueryParamConsumer<B extends GPGeoserverQueryParam> impl
     /**
      * @param theUriBuilder
      */
-    public GeoserverRXQueryParamConsumer(@Nonnull(when = When.NEVER) URIBuilder theUriBuilder) {
+    public GeoserverRXQueryParamConsumer(@Nonnull(when = NEVER) URIBuilder theUriBuilder) {
         checkArgument(theUriBuilder != null, "The Parameter uriBuilder must not be null.");
         this.uriBuilder = theUriBuilder;
     }

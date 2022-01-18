@@ -40,7 +40,8 @@ import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverCr
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -51,7 +52,7 @@ public interface GeoserverCreateWorkspaceRequest extends GPJsonConnectorRequest<
     /**
      * @param theWorkspaceBody
      */
-    GeoserverCreateWorkspaceRequest withWorkspaceBody(@Nonnull(when = When.NEVER) GPGeoserverCreateWorkspaceBody theWorkspaceBody);
+    GeoserverCreateWorkspaceRequest withWorkspaceBody(@Nonnull(when = NEVER) GPGeoserverCreateWorkspaceBody theWorkspaceBody);
 
     /**
      * @param theDefaultWorkspace

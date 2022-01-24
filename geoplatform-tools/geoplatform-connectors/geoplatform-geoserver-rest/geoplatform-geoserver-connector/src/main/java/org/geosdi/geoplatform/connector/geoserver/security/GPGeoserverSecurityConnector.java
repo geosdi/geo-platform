@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.connector.geoserver.security;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
-import org.geosdi.geoplatform.connector.geoserver.security.catalog.GPGeoserverCatalogConnector;
+import org.geosdi.geoplatform.connector.geoserver.security.layers.GPGeoserverCASLayersConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -50,7 +50,7 @@ import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExcepti
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPGeoserverSecurityConnector extends GPGeoserverCatalogConnector implements IGPGeoserverSecurityConnector {
+public abstract class GPGeoserverSecurityConnector extends GPGeoserverCASLayersConnector implements IGPGeoserverSecurityConnector {
 
     /**
      * @param urlServer

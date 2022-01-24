@@ -38,13 +38,13 @@ package org.geosdi.geoplatform.connector.store.security;
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverGetMasterPasswordRequest;
 import org.geosdi.geoplatform.connector.geoserver.security.GPGeoserverGetMasterPasswordRequest;
-import org.geosdi.geoplatform.connector.store.security.catalog.GeoserverCatalogConnectorStore;
+import org.geosdi.geoplatform.connector.store.security.layers.GeoserverACLLayersStore;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoserverSecurityConnectorStore extends GeoserverCatalogConnectorStore implements GPGeoserverSecurityConnectorStore {
+public abstract class GeoserverSecurityConnectorStore extends GeoserverACLLayersStore implements GPGeoserverSecurityConnectorStore {
 
     /**
      * @param theServer

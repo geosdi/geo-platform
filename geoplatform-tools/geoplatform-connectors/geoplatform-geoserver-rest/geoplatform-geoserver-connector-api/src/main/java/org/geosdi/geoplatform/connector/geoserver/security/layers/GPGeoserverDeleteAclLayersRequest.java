@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2022 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,14 +32,12 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.security.groups;
+package org.geosdi.geoplatform.connector.geoserver.security.layers;
 
 import com.google.common.io.CharStreams;
-import net.jcip.annotations.ThreadSafe;
-import org.apache.http.HttpEntity;
-import org.geosdi.geoplatform.connector.geoserver.request.security.groups.GeoserverCreateGroupRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.layers.GeoserverDeleteAclLayersRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -52,29 +50,30 @@ import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-@ThreadSafe
-class GPGeoserverCreateGroupRequest extends GPJsonPostConnectorRequest<Boolean, GeoserverCreateGroupRequest> implements GeoserverCreateGroupRequest {
+public class GPGeoserverDeleteAclLayersRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteAclLayersRequest> implements GeoserverDeleteAclLayersRequest {
 
-    private final ThreadLocal<String> groupName = withInitial(() -> null);
+    private final ThreadLocal<String> resource;
 
     /**
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    GPGeoserverCreateGroupRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    protected GPGeoserverDeleteAclLayersRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
+            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
+        this.resource = withInitial(() -> null);
     }
 
     /**
-     * @param theGroupName
-     * @return {@link GeoserverCreateGroupRequest}
+     * @param theResource
+     * @return {@link GeoserverDeleteAclLayersRequest}
      */
     @Override
-    public GeoserverCreateGroupRequest withGropuName(@Nonnull(when = NEVER) String theGroupName) {
-        this.groupName.set(theGroupName);
+    public GeoserverDeleteAclLayersRequest withResource(String theResource) {
+        this.resource.set(theResource);
         return self();
     }
 
@@ -83,36 +82,28 @@ class GPGeoserverCreateGroupRequest extends GPJsonPostConnectorRequest<Boolean, 
      */
     @Override
     protected String createUriPath() throws Exception {
-        String group = this.groupName.get();
-        checkArgument((group != null) && !(group.trim().isEmpty()), "The Parameter groupName must not be null or an empty string.");
+        String resource = this.resource.get();
+        checkArgument(resource != null, "The resource must not be null.");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("security/usergroup/group/").concat(group) : baseURI.concat("/security/usergroup/group/").concat(group)));
-    }
-
-    /**
-     * @param reader
-     * @return {@link Boolean}
-     * @throws Exception
-     */
-    @Override
-    protected final Boolean readInternal(BufferedReader reader) throws Exception {
-        String value = CharStreams.toString(reader);
-        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
+        return ((baseURI.endsWith("/") ? baseURI.concat("security/acl/layers/").concat(resource) :
+                baseURI.concat("/security/acl/layers/").concat(resource)));
     }
 
     /**
      * @return {@link Class<Boolean>}
      */
-    @Override
     protected Class<Boolean> forClass() {
         return Boolean.class;
     }
 
     /**
-     * @return {@link HttpEntity}
+     * @param reader
+     * @return
+     * @throws Exception
      */
     @Override
-    protected HttpEntity prepareHttpEntity() throws Exception {
-        return null;
+    protected Boolean readInternal(BufferedReader reader) throws Exception {
+        String value = CharStreams.toString(reader);
+        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
     }
 }

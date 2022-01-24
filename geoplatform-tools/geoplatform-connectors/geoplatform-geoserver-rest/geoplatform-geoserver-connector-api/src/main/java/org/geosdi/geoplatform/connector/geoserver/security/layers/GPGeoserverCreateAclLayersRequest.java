@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2022 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,12 +32,14 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.security.groups;
+package org.geosdi.geoplatform.connector.geoserver.security.layers;
 
 import com.google.common.io.CharStreams;
-import net.jcip.annotations.ThreadSafe;
 import org.apache.http.HttpEntity;
-import org.geosdi.geoplatform.connector.geoserver.request.security.groups.GeoserverCreateGroupRequest;
+import org.apache.http.entity.StringEntity;
+import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GPGeoserverRules;
+import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GeoserverRules;
+import org.geosdi.geoplatform.connector.geoserver.request.security.layers.GeoserverCreateAclLayersRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -50,31 +52,33 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
+import static org.apache.http.entity.ContentType.APPLICATION_JSON;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-@ThreadSafe
-class GPGeoserverCreateGroupRequest extends GPJsonPostConnectorRequest<Boolean, GeoserverCreateGroupRequest> implements GeoserverCreateGroupRequest {
+public class GPGeoserverCreateAclLayersRequest extends GPJsonPostConnectorRequest<Boolean, GeoserverCreateAclLayersRequest> implements GeoserverCreateAclLayersRequest {
 
-    private final ThreadLocal<String> groupName = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverRules> geoserverRulesBody;
 
     /**
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    GPGeoserverCreateGroupRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    protected GPGeoserverCreateAclLayersRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
+            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
+        this.geoserverRulesBody = withInitial(() -> null);
     }
 
     /**
-     * @param theGroupName
-     * @return {@link GeoserverCreateGroupRequest}
+     * @param theGeoserverRulesBody
+     * @return {@link GeoserverCreateAclLayersRequest}
      */
     @Override
-    public GeoserverCreateGroupRequest withGropuName(@Nonnull(when = NEVER) String theGroupName) {
-        this.groupName.set(theGroupName);
+    public GeoserverCreateAclLayersRequest withBody(GPGeoserverRules theGeoserverRulesBody) {
+        this.geoserverRulesBody.set(theGeoserverRulesBody);
         return self();
     }
 
@@ -83,29 +87,27 @@ class GPGeoserverCreateGroupRequest extends GPJsonPostConnectorRequest<Boolean, 
      */
     @Override
     protected String createUriPath() throws Exception {
-        String group = this.groupName.get();
-        checkArgument((group != null) && !(group.trim().isEmpty()), "The Parameter groupName must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("security/usergroup/group/").concat(group) : baseURI.concat("/security/usergroup/group/").concat(group)));
-    }
-
-    /**
-     * @param reader
-     * @return {@link Boolean}
-     * @throws Exception
-     */
-    @Override
-    protected final Boolean readInternal(BufferedReader reader) throws Exception {
-        String value = CharStreams.toString(reader);
-        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
+        return ((baseURI.endsWith("/") ? baseURI.concat("security/acl/layers.json") :
+                baseURI.concat("/security/acl/layers.json")));
     }
 
     /**
      * @return {@link Class<Boolean>}
      */
-    @Override
     protected Class<Boolean> forClass() {
         return Boolean.class;
+    }
+
+    /**
+     * @param reader
+     * @return
+     * @throws Exception
+     */
+    @Override
+    protected Boolean readInternal(BufferedReader reader) throws Exception {
+        String value = CharStreams.toString(reader);
+        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
     }
 
     /**
@@ -113,6 +115,10 @@ class GPGeoserverCreateGroupRequest extends GPJsonPostConnectorRequest<Boolean, 
      */
     @Override
     protected HttpEntity prepareHttpEntity() throws Exception {
-        return null;
+        GeoserverRules geoserverRulesBody = this.geoserverRulesBody.get();
+        checkArgument(geoserverRulesBody != null, "The geoserverRuleBody must not be null.");
+        String layerBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(geoserverRulesBody);
+        logger.debug("#############################LAYER : \n{}\n", layerBodyString);
+        return new StringEntity(layerBodyString, APPLICATION_JSON);
     }
 }

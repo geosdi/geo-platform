@@ -36,13 +36,13 @@
 package org.geosdi.geoplatform.connector.geoserver.security;
 
 import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverGetMasterPasswordRequest;
-import org.geosdi.geoplatform.connector.geoserver.security.catalog.IGPGeoserverCatalogConnector;
+import org.geosdi.geoplatform.connector.geoserver.security.layers.IGPGeoserverAclLayersConnector;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverSecurityConnector extends IGPGeoserverCatalogConnector {
+public interface IGPGeoserverSecurityConnector extends IGPGeoserverAclLayersConnector {
 
     /**
      * @return {@link GPGeoserverGetMasterPasswordRequest}

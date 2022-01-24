@@ -38,8 +38,8 @@ package org.geosdi.geoplatform.connector.store.security;
 import org.geosdi.geoplatform.connector.geoserver.model.security.catalog.GPGeoserverCatalog;
 import org.geosdi.geoplatform.connector.geoserver.model.security.user.GPGeoserverUserBody;
 import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverGetMasterPasswordRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverUpdateCatalogRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.security.catalog.GeoserverGetCatalogRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.catalog.GeoserverUpdateCatalogRequest;
 import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreTest;
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
@@ -107,5 +107,29 @@ public class GPGeoserverSecurityConnectorStoreTest extends GPBaseGeoserverConnec
     public void g_deleteGeoserverUserRequestTest() throws Exception {
         logger.info("@@@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_DELETE_USER_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x.deleteUserRequest()
                 .withUser("glascaleia").getResponse());
+    }
+
+    @Test
+    public void h_loadGeoserverGroupsRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_LOAD_GROUPS_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x.loadGroupsRequest()
+                .getResponse());
+    }
+
+    @Test
+    public void i_createGeoserverGroupRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_CREATE_GROUPS_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x.createGroupRequest()
+                .withGropuName("group_test").getResponse());
+    }
+
+    @Test
+    public void l_deleteGeoserverGroupRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_DELETE_GROUP_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x.deleteGroupRequest()
+                .withGropuName("group_test").getResponse());
+    }
+
+    @Test
+    public void m_loadGeoserverLayerRulesRequestTest() throws Exception {
+        logger.info("####################GP_GEOSERVER_LOAD_LAYER_RULES_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x.loadLayerRulesRequest()
+                .getResponse());
     }
 }

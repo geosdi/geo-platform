@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2022 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,30 +32,35 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.security;
+package org.geosdi.geoplatform.connector.geoserver.model.security.role;
 
-import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverDeleteUserRequest;
-import org.geosdi.geoplatform.connector.geoserver.security.base.GPGeoserverBaseDeleteUserRequest;
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import net.jcip.annotations.Immutable;
 
-import javax.annotation.Nonnull;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.List;
 
-import static javax.annotation.meta.When.NEVER;
+import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@ThreadSafe
-class GPGeoserverDeleteUserRequest extends GPGeoserverBaseDeleteUserRequest<GeoserverDeleteUserRequest> implements GeoserverDeleteUserRequest {
+@Getter
+@Setter
+@ToString
+@Immutable
+@XmlRootElement(name = "roles")
+@XmlAccessorType(value = FIELD)
+public class GPGeoserverRoles implements GeoserverRoles {
 
-    /**
-     * @param theServerConnector
-     * @param theJacksonSupport
-     */
-    GPGeoserverDeleteUserRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
-        super(theServerConnector, theJacksonSupport);
-    }
+    private static final long serialVersionUID = 899959510664892815L;
+    //
+    @XmlElements(value = {@XmlElement(name = "role", type = String.class)})
+    private List<String> roles;
 }

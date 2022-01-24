@@ -40,12 +40,11 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.google.common.base.Preconditions;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
 import java.util.Optional;
 
 import static java.lang.Boolean.FALSE;
 import static java.util.Arrays.stream;
-import static java.util.Optional.empty;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -62,7 +61,7 @@ public enum GPGeoserverCatalogMode implements IGPGeoserverCatalogMode {
     /**
      * @param theMode
      */
-    GPGeoserverCatalogMode(@Nonnull(when = When.NEVER) String theMode) {
+    GPGeoserverCatalogMode(@Nonnull(when = NEVER) String theMode) {
         Preconditions.checkArgument((theMode != null) && !(theMode.trim().isEmpty()), "The Parameter mode must not be null or an empty string.");
         this.mode = theMode;
     }
@@ -91,6 +90,6 @@ public enum GPGeoserverCatalogMode implements IGPGeoserverCatalogMode {
                 .filter(v -> ((theMode != null) && !(theMode.trim().isEmpty())) ? v.getMode().equalsIgnoreCase(theMode) : FALSE)
                 .map(v -> (IGPGeoserverCatalogMode) v)
                 .findFirst();
-        return ((optional != null) && !(optional.equals(empty()))) ? optional.get() : null;
+        return optional.orElse(null);
     }
 }

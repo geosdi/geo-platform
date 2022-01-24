@@ -181,11 +181,17 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
                 : createDefaultHttpClient();
     }
 
+    /**
+     * @throws Exception
+     */
     @Override
     public void dispose() throws Exception {
         this.httpClient.close();
     }
 
+    /**
+     * @return {@link CredentialsStore}
+     */
     @Override
     public CredentialsProvider getCredentialsProvider() {
         return this.credentialsProvider;

@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2022 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,47 +32,33 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.security;
+package org.geosdi.geoplatform.connector.geoserver.model.security.group;
 
-import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.model.security.user.GPGeoserverUsers;
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverLoadUsersRequest;
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-import javax.annotation.Nonnull;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.List;
 
-import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
+import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@ThreadSafe
-class GPGeoserverLoadUsersRequest extends GPJsonGetConnectorRequest<GPGeoserverUsers, GeoserverLoadUsersRequest> implements GeoserverLoadUsersRequest {
+@Getter
+@Setter
+@ToString
+@XmlRootElement(name = "groups")
+@XmlAccessorType(value = FIELD)
+public class GPGeoserverGroups implements GeoserverGroups {
 
-    /**
-     * @param server
-     */
-    GPGeoserverLoadUsersRequest(@Nonnull(when = NEVER) GPServerConnector server) {
-        super(server, JACKSON_JAXB_XML_SUPPORT);
-    }
-
-    /**
-     * @return {@link String}
-     */
-    @Override
-    protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("security/usergroup/users.xml") : baseURI.concat("/security/usergroup/users.xml")));
-    }
-
-    /**
-     * @return {@link Class<GPGeoserverUsers>}
-     */
-    @Override
-    protected Class<GPGeoserverUsers> forClass() {
-        return GPGeoserverUsers.class;
-    }
+    private static final long serialVersionUID = -7479056042319288061L;
+    //
+    @XmlElements(value = {@XmlElement(name = "group", type = String.class)})
+    private List<String> groups;
 }

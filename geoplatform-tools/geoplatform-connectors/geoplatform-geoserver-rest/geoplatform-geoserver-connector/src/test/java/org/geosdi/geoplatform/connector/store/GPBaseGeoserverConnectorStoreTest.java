@@ -43,6 +43,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 
+import static org.geosdi.geoplatform.connector.GeoserverVersion.V219x;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStoreBuilder.geoserverConnectorBuilder;
 
@@ -70,6 +71,7 @@ public abstract class GPBaseGeoserverConnectorStoreTest {
                         .withMaxRedirect(20)
                         .build())
                 .withClientSecurity(new BasicPreemptiveSecurityConnector("admin", "geoserver"))
+                .withVersion(V219x.getVersion())
                 .build();
     }
 

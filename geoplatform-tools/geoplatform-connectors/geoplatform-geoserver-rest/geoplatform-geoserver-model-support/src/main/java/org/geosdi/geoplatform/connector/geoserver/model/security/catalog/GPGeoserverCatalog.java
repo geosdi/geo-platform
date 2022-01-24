@@ -37,12 +37,13 @@ package org.geosdi.geoplatform.connector.geoserver.model.security.catalog;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Preconditions;
 import lombok.ToString;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
 import javax.xml.bind.annotation.XmlElement;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -59,8 +60,8 @@ public class GPGeoserverCatalog implements IGPGeoserverCatalog {
      * @param theCatalogMode
      */
     @JsonCreator
-    public GPGeoserverCatalog(@Nonnull(when = When.NEVER) @JsonProperty(value = "mode") IGPGeoserverCatalogMode theCatalogMode) {
-        Preconditions.checkArgument(theCatalogMode != null, "The Parameter catologMode must not be null");
+    public GPGeoserverCatalog(@Nonnull(when = NEVER) @JsonProperty(value = "mode") IGPGeoserverCatalogMode theCatalogMode) {
+        checkArgument(theCatalogMode != null, "The Parameter catologMode must not be null");
         this.catalogMode = theCatalogMode;
     }
 

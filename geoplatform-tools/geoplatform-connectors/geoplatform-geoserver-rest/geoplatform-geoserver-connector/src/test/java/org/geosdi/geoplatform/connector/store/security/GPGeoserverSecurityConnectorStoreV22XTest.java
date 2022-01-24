@@ -36,15 +36,18 @@
 package org.geosdi.geoplatform.connector.store.security;
 
 import org.geosdi.geoplatform.connector.geoserver.model.security.catalog.GPGeoserverCatalog;
+import org.geosdi.geoplatform.connector.geoserver.model.security.user.GPGeoserverUserBody;
 import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverGetMasterPasswordRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverUpdateCatalogRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.security.catalog.GeoserverGetCatalogRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.catalog.GeoserverUpdateCatalogRequest;
 import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV22xTest;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.geosdi.geoplatform.connector.geoserver.model.security.catalog.GPGeoserverCatalogMode.HIDE;
 import static org.geosdi.geoplatform.connector.geoserver.model.security.catalog.GPGeoserverCatalogMode.MIXED;
+import static org.geosdi.geoplatform.connector.jackson.GPGeoserverUserBodyJacksonTest.toGeoserverUserBody;
 import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -84,5 +87,49 @@ public class GPGeoserverSecurityConnectorStoreV22XTest extends GPBaseGeoserverCo
     @Test
     public void d_loadGeoserverUsersRequest() throws Exception {
         logger.info("#####################GP_GEOSERVER_USERS_RESPONSE : {}\n", geoserverConnectorStoreV2_20_x.loadUsersRequest().getResponse());
+    }
+
+    @Test
+    public void e_createGeoserverUserRequestTest() throws Exception {
+        GPGeoserverUserBody createUser = toGeoserverUserBody("glascaleia", "0x,77peppino77?!0x");
+        logger.info("@@@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_CREATE_USER_RESPONSE : {}\n", geoserverConnectorStoreV2_20_x.createUserRequest()
+                .withBody(createUser).getResponse());
+    }
+
+    @Ignore
+    @Test
+    public void f_loadGeoserverUserRequestTest() throws Exception {
+        logger.info("#####################GP_GEOSERVER_LOAD_USER_RESPONSE : {}\n", geoserverConnectorStoreV2_20_x.loadUserRequest()
+                .withUser("glascaleia").getResponse());
+    }
+
+    @Test
+    public void g_deleteGeoserverUserRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_DELETE_USER_RESPONSE : {}\n", geoserverConnectorStoreV2_20_x.deleteUserRequest()
+                .withUser("glascaleia").getResponse());
+    }
+
+    @Test
+    public void h_loadGeoserverGroupsRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_LOAD_GROUPS_RESPONSE : {}\n", geoserverConnectorStoreV2_20_x.loadGroupsRequest()
+                .getResponse());
+    }
+
+    @Test
+    public void i_createGeoserverGroupRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_CREATE_GROUPS_RESPONSE : {}\n", geoserverConnectorStoreV2_20_x.createGroupRequest()
+                .withGropuName("group_test").getResponse());
+    }
+
+    @Test
+    public void l_deleteGeoserverGroupRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@GP_GEOSERVER_DELETE_GROUP_RESPONSE : {}\n", geoserverConnectorStoreV2_20_x.deleteGroupRequest()
+                .withGropuName("group_test").getResponse());
+    }
+
+    @Test
+    public void m_loadGeoserverLayerRulesRequestTest() throws Exception {
+        logger.info("####################GP_GEOSERVER_LOAD_LAYER_RULES_RESPONSE : {}\n", geoserverConnectorStoreV2_20_x.loadLayerRulesRequest()
+                .getResponse());
     }
 }

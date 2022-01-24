@@ -35,53 +35,17 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.security;
 
-import org.geosdi.geoplatform.connector.geoserver.featuretypes.IGPGeoserverFeatureTypesConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverGetMasterPasswordRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverUpdateCatalogRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.catalog.GeoserverGetCatalogRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverCreateUserRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverDeleteUserRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverLoadUserRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverLoadUsersRequest;
+import org.geosdi.geoplatform.connector.geoserver.security.catalog.IGPGeoserverCatalogConnector;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverSecurityConnector extends IGPGeoserverFeatureTypesConnector {
+public interface IGPGeoserverSecurityConnector extends IGPGeoserverCatalogConnector {
 
     /**
      * @return {@link GPGeoserverGetMasterPasswordRequest}
      */
     GeoserverGetMasterPasswordRequest loadMasterPasswordRequest();
-
-    /**
-     * @return {@link GeoserverGetCatalogRequest}
-     */
-    GeoserverGetCatalogRequest loadCatalogRequest();
-
-    /**
-     * @return {@link GPGeoserverUpdateCatalogRequest}
-     */
-    GeoserverUpdateCatalogRequest updateCatalogRequest();
-
-    /**
-     * @return {@link  GeoserverLoadUsersRequest}
-     */
-    GeoserverLoadUsersRequest loadUsersRequest();
-
-    /**
-     * @return {@link GeoserverCreateUserRequest}
-     */
-    GeoserverCreateUserRequest createUserRequest();
-
-    /**
-     * @return {@link GeoserverDeleteUserRequest}
-     */
-    GeoserverDeleteUserRequest deleteUserRequest();
-
-    /**
-     * @return {@link GeoserverLoadUserRequest}
-     */
-    GeoserverLoadUserRequest loadUserRequest();
 }

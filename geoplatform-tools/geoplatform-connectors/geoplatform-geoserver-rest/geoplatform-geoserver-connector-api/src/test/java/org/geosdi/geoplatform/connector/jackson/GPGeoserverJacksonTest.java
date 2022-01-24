@@ -90,7 +90,7 @@ public class GPGeoserverJacksonTest {
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
             ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
             WRAP_ROOT_VALUE_DISABLE,
-            INDENT_OUTPUT_ENABLE);
+            INDENT_OUTPUT_ENABLE).configure(ACCEPT_SINGLE_VALUE_AS_ARRAY_DISABLE);
     private static final GPJacksonXmlSupport jacksonXmlSupport = new GPJacksonXmlSupport();
 
     @Test

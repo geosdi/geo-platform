@@ -65,7 +65,6 @@ import org.hibernate.annotations.Type;
  */
 @Entity(name = "GSResource")
 @Table(name = "gs_resource")
-@XmlRootElement(name = "GSResource")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "gs_resource")
 public class GSResource implements Serializable {
 

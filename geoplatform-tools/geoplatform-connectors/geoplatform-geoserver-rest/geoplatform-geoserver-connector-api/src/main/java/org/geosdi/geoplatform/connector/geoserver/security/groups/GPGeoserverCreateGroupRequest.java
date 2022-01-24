@@ -36,7 +36,7 @@ package org.geosdi.geoplatform.connector.geoserver.security.groups;
 
 import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
-import org.apache.http.HttpEntity;
+import org.apache.hc.core5.http.HttpEntity;
 import org.geosdi.geoplatform.connector.geoserver.request.security.groups.GeoserverCreateGroupRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;

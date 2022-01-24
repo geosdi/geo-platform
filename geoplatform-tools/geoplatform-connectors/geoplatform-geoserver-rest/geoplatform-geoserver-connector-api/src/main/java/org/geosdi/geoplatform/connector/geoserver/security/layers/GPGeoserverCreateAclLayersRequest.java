@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.geoserver.security.layers;
 import com.google.common.io.CharStreams;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.StringEntity;
+import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GPGeoserverRules;
 import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GeoserverRules;
 import org.geosdi.geoplatform.connector.geoserver.request.security.layers.GeoserverCreateAclLayersRequest;
@@ -58,7 +59,8 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverCreateAclLayersRequest extends GPJsonPostConnectorRequest<Boolean, GeoserverCreateAclLayersRequest> implements GeoserverCreateAclLayersRequest {
+@ThreadSafe
+class GPGeoserverCreateAclLayersRequest extends GPJsonPostConnectorRequest<Boolean, GeoserverCreateAclLayersRequest> implements GeoserverCreateAclLayersRequest {
 
     private final ThreadLocal<GPGeoserverRules> geoserverRulesBody;
 
@@ -66,7 +68,7 @@ public class GPGeoserverCreateAclLayersRequest extends GPJsonPostConnectorReques
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    protected GPGeoserverCreateAclLayersRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
+    GPGeoserverCreateAclLayersRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
             @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.geoserverRulesBody = withInitial(() -> null);

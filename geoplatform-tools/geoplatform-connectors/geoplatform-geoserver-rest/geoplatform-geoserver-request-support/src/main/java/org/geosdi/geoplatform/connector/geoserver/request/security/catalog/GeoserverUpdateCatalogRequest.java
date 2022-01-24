@@ -33,14 +33,10 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.security;
+package org.geosdi.geoplatform.connector.geoserver.request.security.catalog;
 
-import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.model.security.catalog.GPGeoserverCatalog;
-import org.geosdi.geoplatform.connector.geoserver.request.security.catalog.GeoserverGetCatalogRequest;
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import org.geosdi.geoplatform.connector.geoserver.model.security.catalog.IGPGeoserverCatalogMode;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
 
@@ -50,31 +46,12 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@ThreadSafe
-public class GPGeoserverGetCatalogRequest extends GPJsonGetConnectorRequest<GPGeoserverCatalog, GeoserverGetCatalogRequest> implements GeoserverGetCatalogRequest {
+public interface GeoserverUpdateCatalogRequest extends GPJsonConnectorRequest<Boolean, GeoserverUpdateCatalogRequest> {
 
     /**
-     * @param server
-     * @param theJacksonSupport
+     * @param theCatalogMode
+     * @param <CatalogMode>
+     * @return {@link GeoserverUpdateCatalogRequest}
      */
-    GPGeoserverGetCatalogRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
-        super(server, theJacksonSupport);
-    }
-
-    /**
-     * @return {@link String}
-     */
-    @Override
-    protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("security/acl/catalog.json") : baseURI.concat("/security/acl/catalog.json")));
-    }
-
-    /**
-     * @return {@link Class<GPGeoserverCatalog>}
-     */
-    @Override
-    protected Class<GPGeoserverCatalog> forClass() {
-        return GPGeoserverCatalog.class;
-    }
+    <CatalogMode extends IGPGeoserverCatalogMode> GeoserverUpdateCatalogRequest withCatalogMode(@Nonnull(when = NEVER) CatalogMode theCatalogMode);
 }

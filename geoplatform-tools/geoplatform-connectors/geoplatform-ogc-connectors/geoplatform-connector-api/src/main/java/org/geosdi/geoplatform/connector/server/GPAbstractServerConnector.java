@@ -185,6 +185,9 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
                 createDefaultHttpClient();
     }
 
+    /**
+     * @throws Exception
+     */
     @Override
     public void dispose() throws Exception {
         if (this.dispose.compareAndSet(FALSE, TRUE)) {
@@ -195,6 +198,9 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
         }
     }
 
+    /**
+     * @return {@link CredentialsStore}
+     */
     @Override
     public CredentialsStore getCredentialsStore() {
         return this.credentialsStore;

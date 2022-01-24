@@ -28,5 +28,7 @@
     <logger name="org.geosdi.geoplatform.connector.geoserver.model.store.GPGeoserverStoreInfoDeserializer" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.geoserver.model.featuretypes.attribute.GPFeatureTypeAttributesDeserializer" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.geoserver.model.about.version.GPGeoserverVersionResourceDeserializer" level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.geoserver.model.security.rule.deserializer.GeoserverRuleDeserializer" level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.geoserver.model.security.rule.deserializer.GeoserverRulesDeserializer" level="debug"/>
 
 </configuration>

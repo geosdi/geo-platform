@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2022 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,30 +32,31 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.security;
+package org.geosdi.geoplatform.connector.geoserver.security.groups;
 
-import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverLoadUserRequest;
-import org.geosdi.geoplatform.connector.geoserver.security.base.GPGeoserverBaseLoadUserRequest;
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
-
-import javax.annotation.Nonnull;
-
-import static javax.annotation.meta.When.NEVER;
+import org.geosdi.geoplatform.connector.geoserver.request.security.groups.GeoserverCreateGroupRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.groups.GeoserverDeleteGroupRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.groups.GeoserverLoadGroupsRequest;
+import org.geosdi.geoplatform.connector.geoserver.security.users.IGPGeoserverUsersConnector;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@ThreadSafe
-class GPGeoserverLoadUserRequest extends GPGeoserverBaseLoadUserRequest<GeoserverLoadUserRequest> implements GeoserverLoadUserRequest {
+public interface IGPGeoserverGroupsConnector extends IGPGeoserverUsersConnector {
 
     /**
-     * @param server
-     * @param theJacksonSupport
+     * @return {@link  GeoserverLoadGroupsRequest}
      */
-    GPGeoserverLoadUserRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
-        super(server, theJacksonSupport);
-    }
+    GeoserverLoadGroupsRequest loadGroupsRequest();
+
+    /**
+     * @return {@link GeoserverCreateGroupRequest}
+     */
+    GeoserverCreateGroupRequest createGroupRequest();
+
+    /**
+     * @return {@link GeoserverDeleteGroupRequest}
+     */
+    GeoserverDeleteGroupRequest deleteGroupRequest();
 }

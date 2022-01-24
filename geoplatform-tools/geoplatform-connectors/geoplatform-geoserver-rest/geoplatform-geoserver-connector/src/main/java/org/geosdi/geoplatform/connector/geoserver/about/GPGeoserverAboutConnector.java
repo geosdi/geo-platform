@@ -60,7 +60,7 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
     protected final JacksonSupport jacksonSupport;
     protected final JacksonSupport emptyJacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
+            ACCEPT_SINGLE_VALUE_AS_ARRAY_DISABLE,
             WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE);
 

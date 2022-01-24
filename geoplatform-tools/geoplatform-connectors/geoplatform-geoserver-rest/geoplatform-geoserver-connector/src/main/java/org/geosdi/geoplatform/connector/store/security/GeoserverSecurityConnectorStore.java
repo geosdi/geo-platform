@@ -37,21 +37,14 @@ package org.geosdi.geoplatform.connector.store.security;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverGetMasterPasswordRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverUpdateCatalogRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.catalog.GeoserverGetCatalogRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverCreateUserRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverDeleteUserRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverLoadUserRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverLoadUsersRequest;
-import org.geosdi.geoplatform.connector.geoserver.security.GPGeoserverGetCatalogRequest;
 import org.geosdi.geoplatform.connector.geoserver.security.GPGeoserverGetMasterPasswordRequest;
-import org.geosdi.geoplatform.connector.store.featuretypes.GeoserverFeatureTypesConnectorStore;
+import org.geosdi.geoplatform.connector.store.security.catalog.GeoserverCatalogConnectorStore;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoserverSecurityConnectorStore extends GeoserverFeatureTypesConnectorStore implements GPGeoserverSecurityConnectorStore {
+public abstract class GeoserverSecurityConnectorStore extends GeoserverCatalogConnectorStore implements GPGeoserverSecurityConnectorStore {
 
     /**
      * @param theServer
@@ -66,53 +59,5 @@ public abstract class GeoserverSecurityConnectorStore extends GeoserverFeatureTy
     @Override
     public GeoserverGetMasterPasswordRequest loadMasterPasswordRequest() {
         return this.server.loadMasterPasswordRequest();
-    }
-
-    /**
-     * @return {@link GPGeoserverGetCatalogRequest}
-     */
-    @Override
-    public GeoserverGetCatalogRequest loadCatalogRequest() {
-        return this.server.loadCatalogRequest();
-    }
-
-    /**
-     * @return {@link GeoserverUpdateCatalogRequest}
-     */
-    @Override
-    public GeoserverUpdateCatalogRequest updateCatalogRequest() {
-        return this.server.updateCatalogRequest();
-    }
-
-    /**
-     * @return {@link  GeoserverLoadUsersRequest}
-     */
-    @Override
-    public GeoserverLoadUsersRequest loadUsersRequest() {
-        return this.server.loadUsersRequest();
-    }
-
-    /**
-     * @return {@link GeoserverCreateUserRequest}
-     */
-    @Override
-    public GeoserverCreateUserRequest createUserRequest() {
-        return this.server.createUserRequest();
-    }
-
-    /**
-     * @return {@link GeoserverDeleteUserRequest}
-     */
-    @Override
-    public GeoserverDeleteUserRequest deleteUserRequest() {
-        return this.server.deleteUserRequest();
-    }
-
-    /**
-     * @return {@link  GeoserverLoadUserRequest}
-     */
-    @Override
-    public GeoserverLoadUserRequest loadUserRequest() {
-        return this.server.loadUserRequest();
     }
 }

@@ -55,7 +55,7 @@ import java.io.Serializable;
  */
 @Entity(name = "GSResource")
 @Table(name = "gs_resource", indexes = {
-        @Index(columnList = "layer_name", name = "LAYER_NAME_INDEX")
+        @Index(columnList = "layer_name", name = "RESOURCE_LAYER_NAME_INDEX")
 })
 @XmlRootElement(name = "GSResource")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "gs_resource")

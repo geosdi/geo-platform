@@ -37,7 +37,8 @@ package org.geosdi.geoplatform.connector.geoserver.request.security.users.base;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -49,5 +50,5 @@ public interface GeoserverBaseDeleteUserRequest<R extends GeoserverBaseDeleteUse
      * @param thUser
      * @return {@link R}
      */
-    R withUser(@Nonnull(when = When.NEVER) String thUser);
+    R withUser(@Nonnull(when = NEVER) String thUser);
 }

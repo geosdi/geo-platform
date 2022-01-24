@@ -36,54 +36,17 @@
 package org.geosdi.geoplatform.connector.store.security;
 
 import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverGetMasterPasswordRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverUpdateCatalogRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.catalog.GeoserverGetCatalogRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverCreateUserRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverDeleteUserRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverLoadUserRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverLoadUsersRequest;
-import org.geosdi.geoplatform.connector.geoserver.security.GPGeoserverGetCatalogRequest;
 import org.geosdi.geoplatform.connector.geoserver.security.GPGeoserverGetMasterPasswordRequest;
-import org.geosdi.geoplatform.connector.store.featuretypes.GPGeoserverFeatureTypesConnectorStore;
+import org.geosdi.geoplatform.connector.store.security.catalog.GPGeoserverCatalogConnectorStore;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverSecurityConnectorStore extends GPGeoserverFeatureTypesConnectorStore {
+public interface GPGeoserverSecurityConnectorStore extends GPGeoserverCatalogConnectorStore {
 
     /**
      * @return {@link GPGeoserverGetMasterPasswordRequest}
      */
     GeoserverGetMasterPasswordRequest loadMasterPasswordRequest();
-
-    /**
-     * @return {@link GPGeoserverGetCatalogRequest}
-     */
-    GeoserverGetCatalogRequest loadCatalogRequest();
-
-    /**
-     * @return {@link GeoserverUpdateCatalogRequest}
-     */
-    GeoserverUpdateCatalogRequest updateCatalogRequest();
-
-    /**
-     * @return {@link  GeoserverLoadUsersRequest}
-     */
-    GeoserverLoadUsersRequest loadUsersRequest();
-
-    /**
-     * @return {@link GeoserverCreateUserRequest}
-     */
-    GeoserverCreateUserRequest createUserRequest();
-
-    /**
-     * @return {@link GeoserverDeleteUserRequest}
-     */
-    GeoserverDeleteUserRequest deleteUserRequest();
-
-    /**
-     * @return {@link  GeoserverLoadUserRequest}
-     */
-    GeoserverLoadUserRequest loadUserRequest();
 }

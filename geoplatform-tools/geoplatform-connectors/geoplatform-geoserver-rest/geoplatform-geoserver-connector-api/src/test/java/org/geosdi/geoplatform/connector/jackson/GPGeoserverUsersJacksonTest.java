@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.connector.jackson;
 
-import org.geosdi.geoplatform.connector.geoserver.model.metadata.link.GPGeoserverMetadataLinks;
 import org.geosdi.geoplatform.connector.geoserver.model.security.user.GPGeoserverUsers;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -186,7 +185,7 @@ public class GPGeoserverUsersJacksonTest {
 
     /**
      * @param number
-     * @return {@link GPGeoserverMetadataLinks}
+     * @return {@link GPGeoserverUsers}
      */
     public static GPGeoserverUsers toGeoserverUsers(int number) {
         checkArgument(number > 0, "The Parameter number must be greather than zero.");

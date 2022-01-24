@@ -35,6 +35,7 @@
 package org.geosdi.geoplatform.connector.geoserver.security.layers;
 
 import com.google.common.io.CharStreams;
+import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.geoserver.request.security.layers.GeoserverDeleteAclLayersRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
@@ -53,7 +54,8 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverDeleteAclLayersRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteAclLayersRequest> implements GeoserverDeleteAclLayersRequest {
+@ThreadSafe
+class GPGeoserverDeleteAclLayersRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteAclLayersRequest> implements GeoserverDeleteAclLayersRequest {
 
     private final ThreadLocal<String> resource;
 
@@ -61,7 +63,7 @@ public class GPGeoserverDeleteAclLayersRequest extends GPJsonDeleteConnectorRequ
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    protected GPGeoserverDeleteAclLayersRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
+    GPGeoserverDeleteAclLayersRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
             @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.resource = withInitial(() -> null);

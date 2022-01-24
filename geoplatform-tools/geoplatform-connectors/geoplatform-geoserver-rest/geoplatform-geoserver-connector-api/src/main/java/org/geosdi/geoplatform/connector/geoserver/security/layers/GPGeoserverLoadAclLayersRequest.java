@@ -34,6 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.security.layers;
 
+import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GPGeoserverRules;
 import org.geosdi.geoplatform.connector.geoserver.request.security.layers.GeoserverLoadAclLayersRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
@@ -48,13 +49,14 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverLoadAclLayersRequest extends GPJsonGetConnectorRequest<GPGeoserverRules, GeoserverLoadAclLayersRequest> implements GeoserverLoadAclLayersRequest {
+@ThreadSafe
+class GPGeoserverLoadAclLayersRequest extends GPJsonGetConnectorRequest<GPGeoserverRules, GeoserverLoadAclLayersRequest> implements GeoserverLoadAclLayersRequest {
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    protected GPGeoserverLoadAclLayersRequest(@Nonnull(when = NEVER) GPServerConnector server,
+    GPGeoserverLoadAclLayersRequest(@Nonnull(when = NEVER) GPServerConnector server,
             @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
     }

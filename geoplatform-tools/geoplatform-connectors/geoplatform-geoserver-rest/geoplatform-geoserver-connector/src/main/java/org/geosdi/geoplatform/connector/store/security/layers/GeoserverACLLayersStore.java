@@ -35,10 +35,10 @@
 package org.geosdi.geoplatform.connector.store.security.layers;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.security.layers.GPGeoserverCreateAclLayersRequest;
-import org.geosdi.geoplatform.connector.geoserver.security.layers.GPGeoserverDeleteAclLayersRequest;
-import org.geosdi.geoplatform.connector.geoserver.security.layers.GPGeoserverLoadAclLayersRequest;
-import org.geosdi.geoplatform.connector.geoserver.security.layers.GPGeoserverUpdateAclLayersRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.layers.GeoserverCreateAclLayersRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.layers.GeoserverDeleteAclLayersRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.layers.GeoserverLoadAclLayersRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.layers.GeoserverUpdateAclLayersRequest;
 import org.geosdi.geoplatform.connector.store.security.catalog.GeoserverCatalogConnectorStore;
 
 /**
@@ -54,34 +54,34 @@ public abstract class GeoserverACLLayersStore extends GeoserverCatalogConnectorS
     }
 
     /**
-     * @return {@link GPGeoserverLoadAclLayersRequest}
+     * @return {@link GeoserverLoadAclLayersRequest}
      */
     @Override
-    public GPGeoserverLoadAclLayersRequest loadAclLayers() {
+    public GeoserverLoadAclLayersRequest loadAclLayers() {
         return this.server.loadAclLayers();
     }
 
     /**
-     * @return {@link GPGeoserverCreateAclLayersRequest}
+     * @return {@link GeoserverCreateAclLayersRequest}
      */
     @Override
-    public GPGeoserverCreateAclLayersRequest createAclLayers() {
+    public GeoserverCreateAclLayersRequest createAclLayers() {
         return this.server.createAclLayers();
     }
 
     /**
-     * @return {@link GPGeoserverUpdateAclLayersRequest}
+     * @return {@link GeoserverUpdateAclLayersRequest}
      */
     @Override
-    public GPGeoserverUpdateAclLayersRequest updateAclLayers() {
+    public GeoserverUpdateAclLayersRequest updateAclLayers() {
         return this.server.updateAclLayers();
     }
 
     /**
-     * @return {@link GPGeoserverDeleteAclLayersRequest}
+     * @return {@link GeoserverDeleteAclLayersRequest}
      */
     @Override
-    public GPGeoserverDeleteAclLayersRequest deleteAclLayers() {
+    public GeoserverDeleteAclLayersRequest deleteAclLayers() {
         return this.server.deleteAclLayers();
     }
 }

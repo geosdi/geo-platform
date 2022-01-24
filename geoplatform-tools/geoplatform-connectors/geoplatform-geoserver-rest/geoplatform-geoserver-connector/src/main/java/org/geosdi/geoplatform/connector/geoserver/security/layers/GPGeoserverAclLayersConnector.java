@@ -49,13 +49,13 @@ import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExcepti
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public abstract class GPGeoserverCASLayersConnector extends GPGeoserverCatalogConnector implements IGPGeoserverAclLayersConnector {
+public abstract class GPGeoserverAclLayersConnector extends GPGeoserverCatalogConnector implements IGPGeoserverAclLayersConnector {
     /**
      * @param urlServer
      * @param theJacksonSupport
      * @param version
      */
-    protected GPGeoserverCASLayersConnector(String urlServer, JacksonSupport theJacksonSupport, String version) {
+    protected GPGeoserverAclLayersConnector(String urlServer, JacksonSupport theJacksonSupport, String version) {
         super(urlServer, theJacksonSupport, version);
     }
 
@@ -65,7 +65,7 @@ public abstract class GPGeoserverCASLayersConnector extends GPGeoserverCatalogCo
      * @param theJacksonSupport
      * @param version
      */
-    protected GPGeoserverCASLayersConnector(String urlServer, GPSecurityConnector securityConnector,
+    protected GPGeoserverAclLayersConnector(String urlServer, GPSecurityConnector securityConnector,
             JacksonSupport theJacksonSupport, String version) {
         super(urlServer, securityConnector, theJacksonSupport, version);
     }
@@ -77,7 +77,7 @@ public abstract class GPGeoserverCASLayersConnector extends GPGeoserverCatalogCo
      * @param theJacksonSupport
      * @param version
      */
-    protected GPGeoserverCASLayersConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig,
+    protected GPGeoserverAclLayersConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig,
             GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
         super(urlServer, pooledConnectorConfig, securityConnector, theJacksonSupport, version);
     }
@@ -88,7 +88,7 @@ public abstract class GPGeoserverCASLayersConnector extends GPGeoserverCatalogCo
      * @param theJacksonSupport
      * @param theVersion
      */
-    protected GPGeoserverCASLayersConnector(URL server, GPSecurityConnector securityConnector,
+    protected GPGeoserverAclLayersConnector(URL server, GPSecurityConnector securityConnector,
             JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, securityConnector, theJacksonSupport, theVersion);
     }
@@ -100,7 +100,7 @@ public abstract class GPGeoserverCASLayersConnector extends GPGeoserverCatalogCo
      * @param theJacksonSupport
      * @param theVersion
      */
-    protected GPGeoserverCASLayersConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig,
+    protected GPGeoserverAclLayersConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig,
             GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion);
     }

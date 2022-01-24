@@ -35,6 +35,7 @@
 package org.geosdi.geoplatform.connector.geoserver.security.layers;
 
 import com.google.common.io.CharStreams;
+import net.jcip.annotations.ThreadSafe;
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.StringEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GPGeoserverRules;
@@ -58,7 +59,8 @@ import static org.apache.http.entity.ContentType.APPLICATION_JSON;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverUpdateAclLayersRequest extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateAclLayersRequest> implements GeoserverUpdateAclLayersRequest {
+@ThreadSafe
+class GPGeoserverUpdateAclLayersRequest extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateAclLayersRequest> implements GeoserverUpdateAclLayersRequest {
 
     private final ThreadLocal<GPGeoserverRules> geoserverRulesBody;
 
@@ -66,7 +68,7 @@ public class GPGeoserverUpdateAclLayersRequest extends GPJsonPutConnectorRequest
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    protected GPGeoserverUpdateAclLayersRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
+    GPGeoserverUpdateAclLayersRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
             @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.geoserverRulesBody = withInitial(() -> null);

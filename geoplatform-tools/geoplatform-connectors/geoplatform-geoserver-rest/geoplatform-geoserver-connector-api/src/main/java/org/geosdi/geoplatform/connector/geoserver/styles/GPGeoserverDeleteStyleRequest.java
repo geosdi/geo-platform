@@ -50,7 +50,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverDeleteStyleRequest extends GPGeoserverBaseDeleteStyleRequest<GeoserverDeleteStyleRequest> implements GeoserverDeleteStyleRequest {
+class GPGeoserverDeleteStyleRequest extends GPGeoserverBaseDeleteStyleRequest<GeoserverDeleteStyleRequest> implements GeoserverDeleteStyleRequest {
 
     /**
      * @param theServerConnector

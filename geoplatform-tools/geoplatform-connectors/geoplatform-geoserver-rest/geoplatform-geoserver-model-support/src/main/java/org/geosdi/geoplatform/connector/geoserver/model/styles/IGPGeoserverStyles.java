@@ -48,7 +48,7 @@ import java.util.List;
 public interface IGPGeoserverStyles extends Serializable {
 
     /**
-     * @return {@link List< IGPGeoserverStyle >}
+     * @return {@link List<IGPGeoserverStyle>}
      */
     List<IGPGeoserverStyle> getStyles();
 }

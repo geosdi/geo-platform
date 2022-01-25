@@ -51,7 +51,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverStyleRequest extends GPGeoserverBaseStyleRequest<GPGeoserverSingleStyle, GeoserverStyleRequest> implements GeoserverStyleRequest {
+class GPGeoserverStyleRequest extends GPGeoserverBaseStyleRequest<GPGeoserverSingleStyle, GeoserverStyleRequest> implements GeoserverStyleRequest {
 
     /**
      * @param server

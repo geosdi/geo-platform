@@ -164,4 +164,20 @@ public abstract class GeoserverStylesConnectorStore extends GeoserverLayersConne
     public GeoserverUpdateStyleWithFileSLDRequest updateStyleWithFileSLDRequest() {
         return this.server.updateStyleWithFileSLDRequest();
     }
+
+    /**
+     * @return {@link GeoserverLayerStylesRequest}
+     */
+    @Override
+    public GeoserverLayerStylesRequest loadLayerStylesRequest() {
+        return this.server.loadLayerStylesRequest();
+    }
+
+    /**
+     * @return {@link GeoserverAddStyleToLayerRequest}
+     */
+    @Override
+    public GeoserverAddStyleToLayerRequest addStyleToLayerRequest() {
+        return this.server.addStyleToLayerRequest();
+    }
 }

@@ -195,6 +195,37 @@ public class GPGeoserverStyleConnectorV22XTest extends GPBaseGeoserverConnectorS
                 .exist());
     }
 
+    @Test
+    public void p_geoserverLoadLayerStylesRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@GEOSERVER_LAYER_STYLES_RESPONSE : {}\n", geoserverConnectorStoreV2_20_x.loadLayerStylesRequest()
+                .withLayerName("topp:states").getResponse());
+    }
+
+    @Test
+    public void q_geoserverCreateStyleRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@GEOSERVER_CREATE_STYLE_RESPONSE : {}\n", geoserverConnectorStoreV2_20_x.createStyleRequest()
+                .withStyleBody(toGPGeoserverStyleBody("polygon_style_new_test", "polygon_24.sld"))
+                .getResponse());
+    }
+
+    @Test
+    public void r_geoserverAddStyleToLayerRequestTest() throws Exception {
+        logger.info("###################GEOSERVER_ADD_STYLE_TO_LAYER_RESPONSE : {}\n", geoserverConnectorStoreV2_20_x.addStyleToLayerRequest()
+                .withLayer("topp:states")
+                .withStyleBody(toGPGeoserverStyleBody("polygon_style_new_test", "polygon_24.sld")).getResponseAsString());
+    }
+
+    @Test
+    public void s_geoserverDeleteStyleSLDV100RequestTest() throws Exception {
+        assertTrue(geoserverConnectorStoreV2_20_x.deleteStyleRequest()
+                .withStyle("polygon_style_new_test")
+                .getResponse() == TRUE);
+        GeoserverStyleSLDV100Request geoserverStyleSLDV100Request = geoserverConnectorStoreV2_20_x.loadStyleSLDV100Request();
+        logger.info("#####################GEOSERVER_STYLE_SLD_V100_RESPONSE_AS_STRING : {}\n", geoserverStyleSLDV100Request
+                .withStyleName("polygon_style_new_test")
+                .exist());
+    }
+
     /**
      * @param workspaceName
      * @throws Exception

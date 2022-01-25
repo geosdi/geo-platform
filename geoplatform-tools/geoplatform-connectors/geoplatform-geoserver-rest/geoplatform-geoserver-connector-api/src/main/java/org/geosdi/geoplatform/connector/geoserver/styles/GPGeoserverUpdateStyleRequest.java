@@ -55,7 +55,7 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverUpdateStyleRequest extends GPGeoserverBaseUpdateStyleRequest<IGPGeoserverUpdateStyleBody, GeoserverUpdateStyleRequest> implements GeoserverUpdateStyleRequest {
+class GPGeoserverUpdateStyleRequest extends GPGeoserverBaseUpdateStyleRequest<IGPGeoserverUpdateStyleBody, GeoserverUpdateStyleRequest> implements GeoserverUpdateStyleRequest {
 
     /**
      * @param theServerConnector

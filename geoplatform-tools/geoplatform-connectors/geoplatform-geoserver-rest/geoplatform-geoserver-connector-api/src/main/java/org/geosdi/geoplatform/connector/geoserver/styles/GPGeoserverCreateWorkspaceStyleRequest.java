@@ -55,7 +55,7 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverCreateWorkspaceStyleRequest extends GPGeoserverBaseCreateWorkspaceStyleRequest<IGPGeoserverStyleBody, GeoserverCreateWorkspaceStyleRequest> implements GeoserverCreateWorkspaceStyleRequest {
+class GPGeoserverCreateWorkspaceStyleRequest extends GPGeoserverBaseCreateWorkspaceStyleRequest<IGPGeoserverStyleBody, GeoserverCreateWorkspaceStyleRequest> implements GeoserverCreateWorkspaceStyleRequest {
 
     /**
      * @param theServerConnector

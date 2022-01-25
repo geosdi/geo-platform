@@ -64,7 +64,7 @@ import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverSty
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverCreateStyleWithFileSLDRequest extends GPGeoserverBaseCreateStyleRequest<File, GeoserverCreateStyleWithFileSLDRequest> implements GeoserverCreateStyleWithFileSLDRequest {
+class GPGeoserverCreateStyleWithFileSLDRequest extends GPGeoserverBaseCreateStyleRequest<File, GeoserverCreateStyleWithFileSLDRequest> implements GeoserverCreateStyleWithFileSLDRequest {
 
     private final ThreadLocal<GPGeoserverStringQueryParam> style;
     private final ThreadLocal<GPGeoserverBooleanQueryParam> raw;

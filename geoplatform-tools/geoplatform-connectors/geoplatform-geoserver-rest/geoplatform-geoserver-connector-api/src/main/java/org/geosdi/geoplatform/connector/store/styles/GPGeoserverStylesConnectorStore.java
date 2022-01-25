@@ -114,4 +114,14 @@ public interface GPGeoserverStylesConnectorStore extends GPGeoserverLayersConnec
      * @return {@link GeoserverUpdateStyleWithFileSLDRequest}
      */
     GeoserverUpdateStyleWithFileSLDRequest updateStyleWithFileSLDRequest();
+
+    /**
+     * @return {@link GeoserverLayerStylesRequest}
+     */
+    GeoserverLayerStylesRequest loadLayerStylesRequest();
+
+    /**
+     * @return {@link GeoserverAddStyleToLayerRequest}
+     */
+    GeoserverAddStyleToLayerRequest addStyleToLayerRequest();
 }

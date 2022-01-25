@@ -53,7 +53,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverDeleteWorkspaceStyleRequest extends GPGeoserverBaseDeleteStyleRequest<GeoserverDeleteWorkspaceStyleRequest> implements GeoserverDeleteWorkspaceStyleRequest {
+class GPGeoserverDeleteWorkspaceStyleRequest extends GPGeoserverBaseDeleteStyleRequest<GeoserverDeleteWorkspaceStyleRequest> implements GeoserverDeleteWorkspaceStyleRequest {
 
     private final ThreadLocal<String> workspace;
 

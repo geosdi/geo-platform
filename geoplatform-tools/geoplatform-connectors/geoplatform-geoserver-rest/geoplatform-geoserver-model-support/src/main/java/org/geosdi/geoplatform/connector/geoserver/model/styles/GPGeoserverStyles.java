@@ -35,14 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.styles;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 import lombok.ToString;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.util.List;
 
 /**
@@ -57,7 +53,8 @@ public class GPGeoserverStyles implements IGPGeoserverStyles {
 
     private static final long serialVersionUID = -9119093243708708782L;
     //
-    @JsonDeserialize(contentAs = GPGeoserverStyle.class)
-    @XmlAttribute(name = "style")
+//    @JsonDeserialize(contentAs = GPGeoserverStyle.class)
+//    @XmlAttribute(name = "style")
+    @XmlElement(name = "style", type = GPGeoserverStyle.class)
     private List<IGPGeoserverStyle> styles;
 }

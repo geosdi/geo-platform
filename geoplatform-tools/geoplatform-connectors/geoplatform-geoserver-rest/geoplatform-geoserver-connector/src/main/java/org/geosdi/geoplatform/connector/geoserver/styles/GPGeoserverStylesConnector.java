@@ -301,4 +301,32 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
+
+    /**
+     * @return {@link GeoserverLayerStylesRequest}
+     */
+    @Override
+    public GeoserverLayerStylesRequest loadLayerStylesRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverLayerStylesRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverAddStyleToLayerRequest}
+     */
+    @Override
+    public GeoserverAddStyleToLayerRequest addStyleToLayerRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverAddStyleToLayerRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
 }

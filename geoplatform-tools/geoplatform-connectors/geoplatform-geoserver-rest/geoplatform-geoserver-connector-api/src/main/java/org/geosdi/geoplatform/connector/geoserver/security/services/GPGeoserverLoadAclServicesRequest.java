@@ -48,13 +48,13 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverLoadAclServicesRequest extends GPJsonGetConnectorRequest<GPGeoserverRules, GeoserverLoadAclServicesRequest> implements GeoserverLoadAclServicesRequest {
+class GPGeoserverLoadAclServicesRequest extends GPJsonGetConnectorRequest<GPGeoserverRules, GeoserverLoadAclServicesRequest> implements GeoserverLoadAclServicesRequest {
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    protected GPGeoserverLoadAclServicesRequest(@Nonnull(when = NEVER) GPServerConnector server,
+    GPGeoserverLoadAclServicesRequest(@Nonnull(when = NEVER) GPServerConnector server,
             @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
     }

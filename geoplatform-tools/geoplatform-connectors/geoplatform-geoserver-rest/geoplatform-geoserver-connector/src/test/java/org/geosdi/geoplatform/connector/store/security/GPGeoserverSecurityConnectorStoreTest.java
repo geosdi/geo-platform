@@ -129,7 +129,7 @@ public class GPGeoserverSecurityConnectorStoreTest extends GPBaseGeoserverConnec
 
     @Test
     public void m_loadGeoserverLayerRulesRequestTest() throws Exception {
-        logger.info("####################GP_GEOSERVER_LOAD_LAYER_RULES_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x.loadLayerRulesRequest()
-                .getResponse());
+        logger.info("####################GP_GEOSERVER_LOAD_LAYER_RULES_RESPONSE : {}\n",
+                geoserverConnectorStoreV2_19_x.loadAclLayers().getResponse());
     }
 }

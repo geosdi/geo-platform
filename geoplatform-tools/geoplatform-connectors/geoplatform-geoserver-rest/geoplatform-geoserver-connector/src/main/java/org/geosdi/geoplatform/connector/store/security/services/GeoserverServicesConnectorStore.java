@@ -32,19 +32,57 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.security.rules;
+package org.geosdi.geoplatform.connector.store.security.services;
 
-import org.geosdi.geoplatform.connector.geoserver.request.security.rules.GeoserverLoadLayerRulesRequest;
-import org.geosdi.geoplatform.connector.store.featuretypes.GPGeoserverFeatureTypesConnectorStore;
+import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
+import org.geosdi.geoplatform.connector.geoserver.request.security.services.GeoserverCreateAclServicesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.services.GeoserverDeleteAclServicesFromRuleRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.services.GeoserverLoadAclServicesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.services.GeoserverUpdateAclServicesRequest;
+import org.geosdi.geoplatform.connector.store.featuretypes.GeoserverFeatureTypesConnectorStore;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverRulesConnectorStore extends GPGeoserverFeatureTypesConnectorStore {
+public abstract class GeoserverServicesConnectorStore extends GeoserverFeatureTypesConnectorStore implements GPGeoserverServicesConnectorStore {
 
     /**
-     * @return {@link GeoserverLoadLayerRulesRequest}
+     * @param theServer
      */
-    GeoserverLoadLayerRulesRequest loadLayerRulesRequest();
+    protected GeoserverServicesConnectorStore(GPGeoserverConnector theServer) {
+        super(theServer);
+    }
+
+    /**
+     * @return {@link GeoserverLoadAclServicesRequest}
+     */
+    @Override
+    public GeoserverLoadAclServicesRequest loadAclServices() {
+        return this.server.loadAclServices();
+    }
+
+    /**
+     * @return {@link GeoserverCreateAclServicesRequest}
+     */
+    @Override
+    public GeoserverCreateAclServicesRequest createAclServices() {
+        return this.server.createAclServices();
+    }
+
+    /**
+     * @return {@link GeoserverUpdateAclServicesRequest}
+     */
+    @Override
+    public GeoserverUpdateAclServicesRequest updateAclServices() {
+        return this.server.updateAclServices();
+    }
+
+    /**
+     * @return {@link GeoserverDeleteAclServicesFromRuleRequest}
+     */
+    @Override
+    public GeoserverDeleteAclServicesFromRuleRequest deleteAclServicesFromRule() {
+        return this.server.deleteAclServicesFromRule();
+    }
 }

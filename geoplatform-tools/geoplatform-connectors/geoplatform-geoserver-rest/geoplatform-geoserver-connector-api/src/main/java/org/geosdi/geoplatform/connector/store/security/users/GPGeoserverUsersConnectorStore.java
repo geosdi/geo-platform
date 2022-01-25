@@ -38,13 +38,13 @@ import org.geosdi.geoplatform.connector.geoserver.request.security.users.Geoserv
 import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverDeleteUserRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverLoadUserRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverLoadUsersRequest;
-import org.geosdi.geoplatform.connector.store.security.rules.GPGeoserverRulesConnectorStore;
+import org.geosdi.geoplatform.connector.store.security.services.GPGeoserverServicesConnectorStore;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverUsersConnectorStore extends GPGeoserverRulesConnectorStore {
+public interface GPGeoserverUsersConnectorStore extends GPGeoserverServicesConnectorStore {
 
     /**
      * @return {@link  GeoserverLoadUsersRequest}

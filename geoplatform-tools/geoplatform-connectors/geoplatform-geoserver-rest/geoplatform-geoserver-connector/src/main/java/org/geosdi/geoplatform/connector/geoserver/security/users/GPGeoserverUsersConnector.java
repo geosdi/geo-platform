@@ -40,7 +40,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.security.users.Geoserv
 import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverDeleteUserRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverLoadUserRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverLoadUsersRequest;
-import org.geosdi.geoplatform.connector.geoserver.security.rules.GPGeoserverRulesConnector;
+import org.geosdi.geoplatform.connector.geoserver.security.services.GPGeoserverServicesConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -53,7 +53,7 @@ import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExcepti
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPGeoserverUsersConnector extends GPGeoserverRulesConnector implements IGPGeoserverUsersConnector {
+public abstract class GPGeoserverUsersConnector extends GPGeoserverServicesConnector implements IGPGeoserverUsersConnector {
 
     /**
      * @param urlServer

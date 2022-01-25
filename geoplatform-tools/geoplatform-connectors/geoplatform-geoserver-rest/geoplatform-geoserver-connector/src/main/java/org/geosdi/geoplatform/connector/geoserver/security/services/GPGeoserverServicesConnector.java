@@ -32,12 +32,11 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.security.rules;
+package org.geosdi.geoplatform.connector.geoserver.security.services;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.featuretypes.GPGeoserverFeatureTypesConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.security.rules.GeoserverLoadLayerRulesRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -50,14 +49,14 @@ import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExcepti
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPGeoserverRulesConnector extends GPGeoserverFeatureTypesConnector implements IGPGeoserverRulesConnector {
+public abstract class GPGeoserverServicesConnector extends GPGeoserverFeatureTypesConnector implements IGPGeoserverServicesConnector {
 
     /**
      * @param urlServer
      * @param theJacksonSupport
      * @param version
      */
-    protected GPGeoserverRulesConnector(String urlServer, JacksonSupport theJacksonSupport, String version) {
+    protected GPGeoserverServicesConnector(String urlServer, JacksonSupport theJacksonSupport, String version) {
         super(urlServer, theJacksonSupport, version);
     }
 
@@ -67,7 +66,8 @@ public abstract class GPGeoserverRulesConnector extends GPGeoserverFeatureTypesC
      * @param theJacksonSupport
      * @param version
      */
-    protected GPGeoserverRulesConnector(String urlServer, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
+    protected GPGeoserverServicesConnector(String urlServer, GPSecurityConnector securityConnector,
+            JacksonSupport theJacksonSupport, String version) {
         super(urlServer, securityConnector, theJacksonSupport, version);
     }
 
@@ -78,7 +78,8 @@ public abstract class GPGeoserverRulesConnector extends GPGeoserverFeatureTypesC
      * @param theJacksonSupport
      * @param version
      */
-    protected GPGeoserverRulesConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
+    protected GPGeoserverServicesConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig,
+            GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
         super(urlServer, pooledConnectorConfig, securityConnector, theJacksonSupport, version);
     }
 
@@ -88,7 +89,8 @@ public abstract class GPGeoserverRulesConnector extends GPGeoserverFeatureTypesC
      * @param theJacksonSupport
      * @param theVersion
      */
-    protected GPGeoserverRulesConnector(URL server, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
+    protected GPGeoserverServicesConnector(URL server, GPSecurityConnector securityConnector,
+            JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, securityConnector, theJacksonSupport, theVersion);
     }
 
@@ -99,19 +101,62 @@ public abstract class GPGeoserverRulesConnector extends GPGeoserverFeatureTypesC
      * @param theJacksonSupport
      * @param theVersion
      */
-    protected GPGeoserverRulesConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
+    protected GPGeoserverServicesConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig,
+            GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeoserverVersion theVersion) {
         super(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion);
     }
 
     /**
-     * @return {@link GeoserverLoadLayerRulesRequest}
+     * @return {@link GPGeoserverLoadAclServicesRequest}
      */
     @Override
-    public GeoserverLoadLayerRulesRequest loadLayerRulesRequest() {
+    public GPGeoserverLoadAclServicesRequest loadAclServices() {
         switch (version) {
             case V220x:
             case V219x:
-                return new GPGeoserverLoadLayerRulesRequest(this, emptyJacksonSupport);
+                return new GPGeoserverLoadAclServicesRequest(this, emptyJacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GPGeoserverCreateAclServicesRequest}
+     */
+    @Override
+    public GPGeoserverCreateAclServicesRequest createAclServices() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverCreateAclServicesRequest(this, emptyJacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GPGeoserverUpdateAclServicesRequest}
+     */
+    @Override
+    public GPGeoserverUpdateAclServicesRequest updateAclServices() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverUpdateAclServicesRequest(this, emptyJacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GPGeoserverDeleteAclServicesFromRuleRequest}
+     */
+    @Override
+    public GPGeoserverDeleteAclServicesFromRuleRequest deleteAclServicesFromRule() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverDeleteAclServicesFromRuleRequest(this, emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

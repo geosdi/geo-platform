@@ -32,7 +32,7 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.geoserver.acl;
+package org.geosdi.geoplatform.geoserver.acl.layers;
 
 import com.google.common.collect.Lists;
 import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GPGeoserverRule;
@@ -92,8 +92,8 @@ public class GeoserverConnectorAclLayersTest extends GeoserverConnectorTest {
     @Test
     public void d_deleteAclLayers() throws Exception {
         logger.info("################### {}\n",
-                this.geoserverConnectorStore.deleteAclLayers().withResource("*.*.a").getResponse());
+                this.geoserverConnectorStore.deleteAclLayersFromRule().withResource("*.*.a").getResponse());
         logger.info("################### {}\n",
-                this.geoserverConnectorStore.deleteAclLayers().withResource("cite.*.a").getResponse());
+                this.geoserverConnectorStore.deleteAclLayersFromRule().withResource("cite.*.a").getResponse());
     }
 }

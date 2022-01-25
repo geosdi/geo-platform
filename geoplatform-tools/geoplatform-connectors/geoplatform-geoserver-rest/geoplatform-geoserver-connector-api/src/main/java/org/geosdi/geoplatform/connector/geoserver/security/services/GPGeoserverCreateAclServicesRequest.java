@@ -32,13 +32,17 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.security.layers;
+package org.geosdi.geoplatform.connector.geoserver.security.services;
 
 import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.request.security.layers.GeoserverDeleteAclLayersRequest;
+import org.apache.http.HttpEntity;
+import org.apache.http.entity.StringEntity;
+import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GPGeoserverRules;
+import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GeoserverRules;
+import org.geosdi.geoplatform.connector.geoserver.request.security.services.GeoserverCreateAclServicesRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -49,33 +53,34 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
+import static org.apache.http.entity.ContentType.APPLICATION_JSON;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-class GPGeoserverDeleteAclLayersRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteAclLayersRequest> implements GeoserverDeleteAclLayersRequest {
+class GPGeoserverCreateAclServicesRequest extends GPJsonPostConnectorRequest<Boolean, GeoserverCreateAclServicesRequest> implements GeoserverCreateAclServicesRequest {
 
-    private final ThreadLocal<String> resource;
+    private final ThreadLocal<GPGeoserverRules> geoserverRulesBody;
 
     /**
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    GPGeoserverDeleteAclLayersRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
+    GPGeoserverCreateAclServicesRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
             @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
-        this.resource = withInitial(() -> null);
+        this.geoserverRulesBody = withInitial(() -> null);
     }
 
     /**
-     * @param theResource
-     * @return {@link GeoserverDeleteAclLayersRequest}
+     * @param theGeoserverRulesBody
+     * @return {@link GeoserverCreateAclServicesRequest}
      */
     @Override
-    public GeoserverDeleteAclLayersRequest withResource(String theResource) {
-        this.resource.set(theResource);
+    public GeoserverCreateAclServicesRequest withBody(GPGeoserverRules theGeoserverRulesBody) {
+        this.geoserverRulesBody.set(theGeoserverRulesBody);
         return self();
     }
 
@@ -84,11 +89,9 @@ class GPGeoserverDeleteAclLayersRequest extends GPJsonDeleteConnectorRequest<Boo
      */
     @Override
     protected String createUriPath() throws Exception {
-        String resource = this.resource.get();
-        checkArgument(resource != null, "The resource must not be null.");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("security/acl/layers/").concat(resource) :
-                baseURI.concat("/security/acl/layers/").concat(resource)));
+        return ((baseURI.endsWith("/") ? baseURI.concat("security/acl/services.json") :
+                baseURI.concat("/security/acl/services.json")));
     }
 
     /**
@@ -107,5 +110,17 @@ class GPGeoserverDeleteAclLayersRequest extends GPJsonDeleteConnectorRequest<Boo
     protected Boolean readInternal(BufferedReader reader) throws Exception {
         String value = CharStreams.toString(reader);
         return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
+    }
+
+    /**
+     * @return {@link HttpEntity}
+     */
+    @Override
+    protected HttpEntity prepareHttpEntity() throws Exception {
+        GeoserverRules geoserverRulesBody = this.geoserverRulesBody.get();
+        checkArgument(geoserverRulesBody != null, "The geoserverRuleBody must not be null.");
+        String layerBodyString = jacksonSupport.getDefaultMapper().writeValueAsString(geoserverRulesBody);
+        logger.debug("#############################LAYER : \n{}\n", layerBodyString);
+        return new StringEntity(layerBodyString, APPLICATION_JSON);
     }
 }

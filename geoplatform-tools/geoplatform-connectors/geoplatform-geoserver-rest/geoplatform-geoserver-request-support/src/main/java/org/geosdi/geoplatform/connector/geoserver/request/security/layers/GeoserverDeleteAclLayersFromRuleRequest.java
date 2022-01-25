@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2022 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,37 +32,19 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.security.users;
+package org.geosdi.geoplatform.connector.geoserver.request.security.layers;
 
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverCreateUserRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverDeleteUserRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverLoadUserRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverLoadUsersRequest;
-import org.geosdi.geoplatform.connector.geoserver.security.services.IGPGeoserverServicesConnector;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface IGPGeoserverUsersConnector extends IGPGeoserverServicesConnector {
+public interface GeoserverDeleteAclLayersFromRuleRequest extends GPJsonConnectorRequest<Boolean, GeoserverDeleteAclLayersFromRuleRequest> {
 
     /**
-     * @return {@link  GeoserverLoadUsersRequest}
+     * @param theResource
+     * @return {@link GeoserverDeleteAclLayersFromRuleRequest}
      */
-    GeoserverLoadUsersRequest loadUsersRequest();
-
-    /**
-     * @return {@link GeoserverCreateUserRequest}
-     */
-    GeoserverCreateUserRequest createUserRequest();
-
-    /**
-     * @return {@link GeoserverDeleteUserRequest}
-     */
-    GeoserverDeleteUserRequest deleteUserRequest();
-
-    /**
-     * @return {@link GeoserverLoadUserRequest}
-     */
-    GeoserverLoadUserRequest loadUserRequest();
+    GeoserverDeleteAclLayersFromRuleRequest withResource(String theResource);
 }

@@ -32,37 +32,33 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.security.users;
+package org.geosdi.geoplatform.connector.geoserver.security.services;
 
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverCreateUserRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverDeleteUserRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverLoadUserRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.users.GeoserverLoadUsersRequest;
-import org.geosdi.geoplatform.connector.geoserver.security.services.IGPGeoserverServicesConnector;
+import org.geosdi.geoplatform.connector.geoserver.featuretypes.IGPGeoserverFeatureTypesConnector;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverUsersConnector extends IGPGeoserverServicesConnector {
+public interface IGPGeoserverServicesConnector extends IGPGeoserverFeatureTypesConnector {
 
     /**
-     * @return {@link  GeoserverLoadUsersRequest}
+     * @return {@link GPGeoserverLoadAclServicesRequest}
      */
-    GeoserverLoadUsersRequest loadUsersRequest();
+    GPGeoserverLoadAclServicesRequest loadAclServices();
 
     /**
-     * @return {@link GeoserverCreateUserRequest}
+     * @return {@link GPGeoserverCreateAclServicesRequest}
      */
-    GeoserverCreateUserRequest createUserRequest();
+    GPGeoserverCreateAclServicesRequest createAclServices();
 
     /**
-     * @return {@link GeoserverDeleteUserRequest}
+     * @return {@link GPGeoserverUpdateAclServicesRequest}
      */
-    GeoserverDeleteUserRequest deleteUserRequest();
+    GPGeoserverUpdateAclServicesRequest updateAclServices();
 
     /**
-     * @return {@link GeoserverLoadUserRequest}
+     * @return {@link GPGeoserverDeleteAclServicesFromRuleRequest}
      */
-    GeoserverLoadUserRequest loadUserRequest();
+    GPGeoserverDeleteAclServicesFromRuleRequest deleteAclServicesFromRule();
 }

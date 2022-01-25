@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2022 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,11 +32,10 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.security.rules;
+package org.geosdi.geoplatform.connector.geoserver.security.services;
 
-import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GPGeoserverRules;
-import org.geosdi.geoplatform.connector.geoserver.request.security.rules.GeoserverLoadLayerRulesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.services.GeoserverLoadAclServicesRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -46,17 +45,17 @@ import javax.annotation.Nonnull;
 import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-@ThreadSafe
-class GPGeoserverLoadLayerRulesRequest extends GPJsonGetConnectorRequest<GPGeoserverRules, GeoserverLoadLayerRulesRequest> implements GeoserverLoadLayerRulesRequest {
+public class GPGeoserverLoadAclServicesRequest extends GPJsonGetConnectorRequest<GPGeoserverRules, GeoserverLoadAclServicesRequest> implements GeoserverLoadAclServicesRequest {
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    GPGeoserverLoadLayerRulesRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    protected GPGeoserverLoadAclServicesRequest(@Nonnull(when = NEVER) GPServerConnector server,
+            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
     }
 
@@ -66,7 +65,8 @@ class GPGeoserverLoadLayerRulesRequest extends GPJsonGetConnectorRequest<GPGeose
     @Override
     protected String createUriPath() throws Exception {
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("security/acl/layers.json") : baseURI.concat("/security/acl/layers.json")));
+        return ((baseURI.endsWith("/") ? baseURI.concat("security/acl/services.json") :
+                baseURI.concat("/security/acl/services.json")));
     }
 
     /**

@@ -32,19 +32,20 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.security.layers;
+package org.geosdi.geoplatform.connector.geoserver.request.security.services;
 
+import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GPGeoserverRules;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeoserverDeleteAclLayersRequest extends GPJsonConnectorRequest<Boolean, GeoserverDeleteAclLayersRequest> {
+public interface GeoserverUpdateAclServicesRequest extends GPJsonConnectorRequest<Boolean, GeoserverUpdateAclServicesRequest> {
 
     /**
-     * @param theResource
-     * @return {@link GeoserverDeleteAclLayersRequest}
+     * @param theGeoserverRulesBody
+     * @return {@link GeoserverUpdateAclServicesRequest}
      */
-    GeoserverDeleteAclLayersRequest withResource(String theResource);
+    GeoserverUpdateAclServicesRequest withBody(GPGeoserverRules theGeoserverRulesBody);
 }

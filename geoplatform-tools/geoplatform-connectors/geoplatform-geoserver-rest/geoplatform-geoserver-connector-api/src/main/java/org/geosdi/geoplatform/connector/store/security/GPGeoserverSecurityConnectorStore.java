@@ -37,13 +37,13 @@ package org.geosdi.geoplatform.connector.store.security;
 
 import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverGetMasterPasswordRequest;
 import org.geosdi.geoplatform.connector.geoserver.security.GPGeoserverGetMasterPasswordRequest;
-import org.geosdi.geoplatform.connector.store.security.layers.GPGeoserverAclLayersConnectorStore;
+import org.geosdi.geoplatform.connector.store.security.roles.GPGeoserverRolesConnectorStore;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverSecurityConnectorStore extends GPGeoserverAclLayersConnectorStore {
+public interface GPGeoserverSecurityConnectorStore extends GPGeoserverRolesConnectorStore {
 
     /**
      * @return {@link GPGeoserverGetMasterPasswordRequest}

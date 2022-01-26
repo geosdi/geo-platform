@@ -45,12 +45,12 @@ import org.geosdi.geoplatform.connector.store.security.catalog.GeoserverCatalogC
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public abstract class GeoserverACLLayersStore extends GeoserverCatalogConnectorStore implements GPGeoserverAclLayersConnectorStore {
+public abstract class GeoserverACLLayersConnectorStore extends GeoserverCatalogConnectorStore implements GPGeoserverAclLayersConnectorStore {
 
     /**
      * @param theServer
      */
-    protected GeoserverACLLayersStore(GPGeoserverConnector theServer) {
+    protected GeoserverACLLayersConnectorStore(GPGeoserverConnector theServer) {
         super(theServer);
     }
 

@@ -1,4 +1,4 @@
-/*
+/**
  *
  *    geo-platform
  *    Rich webgis framework
@@ -32,32 +32,29 @@
  *   based on this library. If you modify this library, you may extend this exception
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
- */
-package org.geosdi.geoplatform.connector.store.security;
+ */package org.geosdi.geoplatform.connector.store.security.roles;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverGetMasterPasswordRequest;
-import org.geosdi.geoplatform.connector.geoserver.security.GPGeoserverGetMasterPasswordRequest;
-import org.geosdi.geoplatform.connector.store.security.roles.GeoserverRolesConnectorStore;
+import org.geosdi.geoplatform.connector.geoserver.request.security.roles.GeoserverLoadRolesRequest;
+import org.geosdi.geoplatform.connector.store.security.layers.GeoserverACLLayersConnectorStore;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public abstract class GeoserverSecurityConnectorStore extends GeoserverRolesConnectorStore implements GPGeoserverSecurityConnectorStore {
-
+ public abstract class GeoserverRolesConnectorStore extends GeoserverACLLayersConnectorStore implements GPGeoserverRolesConnectorStore{
     /**
      * @param theServer
      */
-    protected GeoserverSecurityConnectorStore(GPGeoserverConnector theServer) {
+    protected GeoserverRolesConnectorStore(GPGeoserverConnector theServer) {
         super(theServer);
     }
 
     /**
-     * @return {@link GPGeoserverGetMasterPasswordRequest}
+     * @return {@link GeoserverLoadRolesRequest}
      */
     @Override
-    public GeoserverGetMasterPasswordRequest loadMasterPasswordRequest() {
-        return this.server.loadMasterPasswordRequest();
+    public GeoserverLoadRolesRequest loadRoles() {
+        return this.server.loadRoles();
     }
 }

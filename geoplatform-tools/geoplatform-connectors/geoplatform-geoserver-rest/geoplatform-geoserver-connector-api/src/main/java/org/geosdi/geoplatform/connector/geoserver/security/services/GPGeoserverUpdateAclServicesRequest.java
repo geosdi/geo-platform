@@ -79,7 +79,7 @@ class GPGeoserverUpdateAclServicesRequest extends GPJsonPutConnectorRequest<Bool
      * @return {@link GeoserverUpdateAclServicesRequest}
      */
     @Override
-    public GeoserverUpdateAclServicesRequest withBody(GPGeoserverRules theGeoserverRulesBody) {
+    public GeoserverUpdateAclServicesRequest withBody(@Nonnull(when = NEVER) GPGeoserverRules theGeoserverRulesBody) {
         this.geoserverRulesBody.set(theGeoserverRulesBody);
         return self();
     }

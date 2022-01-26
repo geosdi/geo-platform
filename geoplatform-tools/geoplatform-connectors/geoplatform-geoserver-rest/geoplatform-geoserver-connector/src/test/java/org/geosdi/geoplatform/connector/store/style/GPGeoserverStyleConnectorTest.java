@@ -41,13 +41,23 @@ import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorksp
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverLoadWorkspacesRequest;
 import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request;
 import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreTest;
+import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import java.io.File;
 import java.util.Objects;
 
 import static io.reactivex.rxjava3.core.Observable.fromIterable;
+import static java.io.File.separator;
+import static java.lang.Boolean.TRUE;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
+import static org.geosdi.geoplatform.connector.jackson.GPGeoserverStyleBodyJacksonTest.toGPGeoserverStyleBody;
+import static org.geosdi.geoplatform.connector.jackson.GPGeoserverUpdateStyleBodyJacksonTest.toGPGeoserverUpdateStyleBody;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -89,6 +99,131 @@ public class GPGeoserverStyleConnectorTest extends GPBaseGeoserverConnectorStore
         logger.info("#####################GEOSERVER_STYLE_SLD_V100_RESPONSE_AS_STRING : {}\n", geoserverStyleSLDV100Request
                 .withStyleName("simple_streams")
                 .getResponseAsString());
+    }
+
+    @Test
+    public void d_geoserverCreateStyleRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@GEOSERVER_CREATE_STYLE_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x.createStyleRequest()
+                .withStyleBody(toGPGeoserverStyleBody("roads_style_new", "roads33.sld"))
+                .getResponse());
+    }
+
+    @Test
+    public void e_geoserverUpdateStyleRequestTest() throws Exception {
+        assertTrue(geoserverConnectorStoreV2_19_x.updateStyleRequest()
+                .withStyleName("roads_style_new")
+                .withStyleBody(toGPGeoserverUpdateStyleBody())
+                .getResponse());
+        assertTrue(geoserverConnectorStoreV2_19_x.loadStyleRequest()
+                .withStyleName("STYLE_TEST")
+                .exist());
+    }
+
+    @Test
+    public void f_geoserverDeleteStyleRequestTest() throws Exception {
+        assertTrue(geoserverConnectorStoreV2_19_x.deleteStyleRequest()
+                .withStyle("STYLE_TEST")
+                .getResponse() == TRUE);
+    }
+
+    @Test
+    public void g_geoserverCreateStyleSLDV100RequestTest() throws Exception {
+        StyledLayerDescriptor styledLayerDescriptor = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper().readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "StyledLayerDescriptor-DefaultLine")
+                .collect(joining(separator, "", ".xml"))), StyledLayerDescriptor.class);
+        logger.info("#################GEOSERVER_CREATE_STYLE_SLD_V100_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x.createStyleSLDV100Request()
+                .withStyleName("style_sld_v100")
+                .withStyleBody(styledLayerDescriptor)
+                .getResponse());
+    }
+
+    @Test
+    public void h_geoserverDeleteStyleSLDV100RequestTest() throws Exception {
+        assertTrue(geoserverConnectorStoreV2_19_x.deleteStyleRequest()
+                .withStyle("style_sld_v100")
+                .getResponse() == TRUE);
+        GeoserverStyleSLDV100Request geoserverStyleSLDV100Request = geoserverConnectorStoreV2_19_x.loadStyleSLDV100Request();
+        logger.info("#####################GEOSERVER_STYLE_SLD_V100_RESPONSE_AS_STRING : {}\n", geoserverStyleSLDV100Request
+                .withStyleName("style_sld_v100")
+                .exist());
+    }
+
+    @Test
+    public void i_geoserverCreateWorkspaceStyleRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@GEOSERVER_CREATE_WORKSPACE_STYLE_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x.createWorkspaceStyleRequest()
+                .withWorkspace("sf")
+                .withStyleBody(toGPGeoserverStyleBody("roads_style_new_sf", "roads33_sf.sld"))
+                .getResponse());
+    }
+
+    @Test
+    public void l_geoserverDeleteWorkspaceStyleRequestTest() throws Exception {
+        assertTrue(geoserverConnectorStoreV2_19_x.deleteWorkspaceStyleRequest()
+                .withWorkspace("sf")
+                .withStyle("roads_style_new_sf")
+                .getResponse() == TRUE);
+    }
+
+    @Test
+    public void m_geoserverCreateStyleRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@GEOSERVER_CREATE_STYLE_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x.createStyleRequest()
+                .withStyleBody(toGPGeoserverStyleBody("roads_style_new_test", "roads33_24.sld"))
+                .getResponse());
+    }
+
+    @Test
+    public void n_geoserverUpdateStyleSLDV100RequestTest() throws Exception {
+        StyledLayerDescriptor styledLayerDescriptor = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper().readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "StyledLayerDescriptor-DefaultLine")
+                .collect(joining(separator, "", ".xml"))), StyledLayerDescriptor.class);
+        assertTrue(geoserverConnectorStoreV2_19_x.updateStyleSLDV100Request()
+                .withStyleName("roads_style_new_test")
+                .withStyleBody(styledLayerDescriptor)
+                .getResponse());
+        GeoserverStyleRequest styleRequest = geoserverConnectorStoreV2_19_x.loadStyleRequest()
+                .withStyleName("roads_style_new_test");
+        assertTrue(styleRequest.exist());
+        logger.info("######################GEOSERVER_LOAD_STYLE_RESPONSE : {}\n", styleRequest.getResponse());
+    }
+
+    @Test
+    public void o_geoserverDeleteStyleSLDV100RequestTest() throws Exception {
+        assertTrue(geoserverConnectorStoreV2_19_x.deleteStyleRequest()
+                .withStyle("roads_style_new_test")
+                .getResponse() == TRUE);
+        GeoserverStyleSLDV100Request geoserverStyleSLDV100Request = geoserverConnectorStoreV2_19_x.loadStyleSLDV100Request();
+        logger.info("#####################GEOSERVER_STYLE_SLD_V100_RESPONSE_AS_STRING : {}\n", geoserverStyleSLDV100Request
+                .withStyleName("roads_style_new_test")
+                .exist());
+    }
+
+    @Test
+    public void p_geoserverLoadLayerStylesRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@GEOSERVER_LAYER_STYLES_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x.loadLayerStylesRequest()
+                .withLayerName("topp:states").getResponse());
+    }
+
+    @Test
+    public void q_geoserverCreateStyleRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@GEOSERVER_CREATE_STYLE_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x.createStyleRequest()
+                .withStyleBody(toGPGeoserverStyleBody("polygon_style_new_test", "polygon_24.sld"))
+                .getResponse());
+    }
+
+    @Test
+    public void r_geoserverAddStyleToLayerRequestTest() throws Exception {
+        logger.info("###################GEOSERVER_ADD_STYLE_TO_LAYER_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x.addStyleToLayerRequest()
+                .withLayer("topp:states")
+                .withStyleBody(toGPGeoserverStyleBody("polygon_style_new_test", "polygon_24.sld")).getResponseAsString());
+    }
+
+    @Test
+    public void s_geoserverDeleteStyleSLDV100RequestTest() throws Exception {
+        assertTrue(geoserverConnectorStoreV2_19_x.deleteStyleRequest()
+                .withStyle("polygon_style_new_test")
+                .getResponse() == TRUE);
+        GeoserverStyleSLDV100Request geoserverStyleSLDV100Request = geoserverConnectorStoreV2_19_x.loadStyleSLDV100Request();
+        logger.info("#####################GEOSERVER_STYLE_SLD_V100_RESPONSE_AS_STRING : {}\n", geoserverStyleSLDV100Request
+                .withStyleName("polygon_style_new_test")
+                .exist());
     }
 
     /**

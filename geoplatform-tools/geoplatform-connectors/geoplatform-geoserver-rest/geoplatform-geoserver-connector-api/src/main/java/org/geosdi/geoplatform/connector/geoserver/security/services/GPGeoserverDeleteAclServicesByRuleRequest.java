@@ -74,7 +74,7 @@ class GPGeoserverDeleteAclServicesByRuleRequest extends GPJsonDeleteConnectorReq
      * @return {@link GeoserverDeleteAclServicesByRuleRequest}
      */
     @Override
-    public GeoserverDeleteAclServicesByRuleRequest withResource(String theResource) {
+    public GeoserverDeleteAclServicesByRuleRequest withResource(@Nonnull(when = NEVER) String theResource) {
         this.resource.set(theResource);
         return self();
     }

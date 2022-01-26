@@ -37,6 +37,10 @@ package org.geosdi.geoplatform.connector.geoserver.request.security.services;
 import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GPGeoserverRules;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
+
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
@@ -47,5 +51,5 @@ public interface GeoserverUpdateAclServicesRequest extends GPJsonConnectorReques
      * @param theGeoserverRulesBody
      * @return {@link GeoserverUpdateAclServicesRequest}
      */
-    GeoserverUpdateAclServicesRequest withBody(GPGeoserverRules theGeoserverRulesBody);
+    GeoserverUpdateAclServicesRequest withBody(@Nonnull(when = NEVER) GPGeoserverRules theGeoserverRulesBody);
 }

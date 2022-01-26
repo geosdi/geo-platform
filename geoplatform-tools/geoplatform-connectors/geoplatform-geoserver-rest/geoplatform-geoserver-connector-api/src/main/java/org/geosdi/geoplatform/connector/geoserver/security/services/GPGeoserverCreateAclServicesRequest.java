@@ -79,7 +79,7 @@ class GPGeoserverCreateAclServicesRequest extends GPJsonPostConnectorRequest<Boo
      * @return {@link GeoserverCreateAclServicesRequest}
      */
     @Override
-    public GeoserverCreateAclServicesRequest withBody(GPGeoserverRules theGeoserverRulesBody) {
+    public GeoserverCreateAclServicesRequest withBody(@Nonnull(when = NEVER) GPGeoserverRules theGeoserverRulesBody) {
         this.geoserverRulesBody.set(theGeoserverRulesBody);
         return self();
     }

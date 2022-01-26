@@ -148,14 +148,14 @@ public abstract class GPGeoserverAclLayersConnector extends GPGeoserverCatalogCo
     }
 
     /**
-     * @return {@link GPGeoserverDeleteAclLayersFromRuleRequest}
+     * @return {@link GPGeoserverDeleteAclLayersByRuleRequest}
      */
     @Override
-    public GPGeoserverDeleteAclLayersFromRuleRequest deleteAclLayersFromRule() {
+    public GPGeoserverDeleteAclLayersByRuleRequest deleteAclLayersByRule() {
         switch (version) {
             case V220x:
             case V219x:
-                return new GPGeoserverDeleteAclLayersFromRuleRequest(this, this.jacksonSupport);
+                return new GPGeoserverDeleteAclLayersByRuleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

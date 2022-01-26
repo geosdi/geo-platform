@@ -58,7 +58,7 @@ public interface IGPGeoserverServicesConnector extends IGPGeoserverFeatureTypesC
     GPGeoserverUpdateAclServicesRequest updateAclServices();
 
     /**
-     * @return {@link GPGeoserverDeleteAclServicesFromRuleRequest}
+     * @return {@link GPGeoserverDeleteAclServicesByRuleRequest}
      */
-    GPGeoserverDeleteAclServicesFromRuleRequest deleteAclServicesFromRule();
+    GPGeoserverDeleteAclServicesByRuleRequest deleteAclServicesByRule();
 }

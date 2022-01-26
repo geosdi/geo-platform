@@ -40,11 +40,11 @@ import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorReque
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeoserverDeleteAclLayersFromRuleRequest extends GPJsonConnectorRequest<Boolean, GeoserverDeleteAclLayersFromRuleRequest> {
+public interface GeoserverDeleteAclLayersByRuleRequest extends GPJsonConnectorRequest<Boolean, GeoserverDeleteAclLayersByRuleRequest> {
 
     /**
      * @param theResource
-     * @return {@link GeoserverDeleteAclLayersFromRuleRequest}
+     * @return {@link GeoserverDeleteAclLayersByRuleRequest}
      */
-    GeoserverDeleteAclLayersFromRuleRequest withResource(String theResource);
+    GeoserverDeleteAclLayersByRuleRequest withResource(String theResource);
 }

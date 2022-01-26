@@ -36,7 +36,7 @@ package org.geosdi.geoplatform.connector.store.security.services;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.security.services.GeoserverCreateAclServicesRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.services.GeoserverDeleteAclServicesFromRuleRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.services.GeoserverDeleteAclServicesByRuleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.security.services.GeoserverLoadAclServicesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.security.services.GeoserverUpdateAclServicesRequest;
 import org.geosdi.geoplatform.connector.store.featuretypes.GeoserverFeatureTypesConnectorStore;
@@ -79,10 +79,10 @@ public abstract class GeoserverServicesConnectorStore extends GeoserverFeatureTy
     }
 
     /**
-     * @return {@link GeoserverDeleteAclServicesFromRuleRequest}
+     * @return {@link GeoserverDeleteAclServicesByRuleRequest}
      */
     @Override
-    public GeoserverDeleteAclServicesFromRuleRequest deleteAclServicesFromRule() {
-        return this.server.deleteAclServicesFromRule();
+    public GeoserverDeleteAclServicesByRuleRequest deleteAclServicesByRule() {
+        return this.server.deleteAclServicesByRule();
     }
 }

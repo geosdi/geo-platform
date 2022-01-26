@@ -149,14 +149,14 @@ public abstract class GPGeoserverServicesConnector extends GPGeoserverFeatureTyp
     }
 
     /**
-     * @return {@link GPGeoserverDeleteAclServicesFromRuleRequest}
+     * @return {@link GPGeoserverDeleteAclServicesByRuleRequest}
      */
     @Override
-    public GPGeoserverDeleteAclServicesFromRuleRequest deleteAclServicesFromRule() {
+    public GPGeoserverDeleteAclServicesByRuleRequest deleteAclServicesByRule() {
         switch (version) {
             case V220x:
             case V219x:
-                return new GPGeoserverDeleteAclServicesFromRuleRequest(this, emptyJacksonSupport);
+                return new GPGeoserverDeleteAclServicesByRuleRequest(this, emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

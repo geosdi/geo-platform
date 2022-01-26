@@ -36,7 +36,7 @@ package org.geosdi.geoplatform.connector.store.security.layers;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.security.layers.GeoserverCreateAclLayersRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.layers.GeoserverDeleteAclLayersFromRuleRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.layers.GeoserverDeleteAclLayersByRuleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.security.layers.GeoserverLoadAclLayersRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.security.layers.GeoserverUpdateAclLayersRequest;
 import org.geosdi.geoplatform.connector.store.security.catalog.GeoserverCatalogConnectorStore;
@@ -79,10 +79,10 @@ public abstract class GeoserverACLLayersStore extends GeoserverCatalogConnectorS
     }
 
     /**
-     * @return {@link GeoserverDeleteAclLayersFromRuleRequest}
+     * @return {@link GeoserverDeleteAclLayersByRuleRequest}
      */
     @Override
-    public GeoserverDeleteAclLayersFromRuleRequest deleteAclLayersFromRule() {
-        return this.server.deleteAclLayersFromRule();
+    public GeoserverDeleteAclLayersByRuleRequest deleteAclLayersByRule() {
+        return this.server.deleteAclLayersByRule();
     }
 }

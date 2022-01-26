@@ -92,8 +92,8 @@ public class GeoserverConnectorAclServicesTest extends GeoserverConnectorTest {
     @Test
     public void d_deleteAclServices() throws Exception {
         logger.info("################### {}\n",
-                this.geoserverConnectorStore.deleteAclServicesFromRule().withResource("gwc.*").getResponse());
+                this.geoserverConnectorStore.deleteAclServicesByRule().withResource("gwc.*").getResponse());
         logger.info("################### {}\n",
-                this.geoserverConnectorStore.deleteAclServicesFromRule().withResource("WCS.*").getResponse());
+                this.geoserverConnectorStore.deleteAclServicesByRule().withResource("WCS.*").getResponse());
     }
 }

@@ -58,7 +58,7 @@ public interface IGPGeoserverAclLayersConnector extends IGPGeoserverCatalogConne
     GPGeoserverUpdateAclLayersRequest updateAclLayers();
 
     /**
-     * @return {@link GPGeoserverDeleteAclLayersFromRuleRequest}
+     * @return {@link GPGeoserverDeleteAclLayersByRuleRequest}
      */
-    GPGeoserverDeleteAclLayersFromRuleRequest deleteAclLayersFromRule();
+    GPGeoserverDeleteAclLayersByRuleRequest deleteAclLayersByRule();
 }

@@ -36,7 +36,7 @@ package org.geosdi.geoplatform.connector.geoserver.security.layers;
 
 import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.request.security.layers.GeoserverDeleteAclLayersFromRuleRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.layers.GeoserverDeleteAclLayersByRuleRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -55,7 +55,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-class GPGeoserverDeleteAclLayersFromRuleRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteAclLayersFromRuleRequest> implements GeoserverDeleteAclLayersFromRuleRequest {
+class GPGeoserverDeleteAclLayersByRuleRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteAclLayersByRuleRequest> implements GeoserverDeleteAclLayersByRuleRequest {
 
     private final ThreadLocal<String> resource;
 
@@ -63,7 +63,7 @@ class GPGeoserverDeleteAclLayersFromRuleRequest extends GPJsonDeleteConnectorReq
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    GPGeoserverDeleteAclLayersFromRuleRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
+    GPGeoserverDeleteAclLayersByRuleRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
             @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.resource = withInitial(() -> null);
@@ -71,10 +71,10 @@ class GPGeoserverDeleteAclLayersFromRuleRequest extends GPJsonDeleteConnectorReq
 
     /**
      * @param theResource
-     * @return {@link GeoserverDeleteAclLayersFromRuleRequest}
+     * @return {@link GeoserverDeleteAclLayersByRuleRequest}
      */
     @Override
-    public GeoserverDeleteAclLayersFromRuleRequest withResource(String theResource) {
+    public GeoserverDeleteAclLayersByRuleRequest withResource(String theResource) {
         this.resource.set(theResource);
         return self();
     }

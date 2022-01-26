@@ -36,7 +36,7 @@ package org.geosdi.geoplatform.connector.geoserver.security.services;
 
 import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.request.security.services.GeoserverDeleteAclServicesFromRuleRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.services.GeoserverDeleteAclServicesByRuleRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -55,7 +55,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-class GPGeoserverDeleteAclServicesFromRuleRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteAclServicesFromRuleRequest> implements GeoserverDeleteAclServicesFromRuleRequest {
+class GPGeoserverDeleteAclServicesByRuleRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteAclServicesByRuleRequest> implements GeoserverDeleteAclServicesByRuleRequest {
 
     private final ThreadLocal<String> resource;
 
@@ -63,7 +63,7 @@ class GPGeoserverDeleteAclServicesFromRuleRequest extends GPJsonDeleteConnectorR
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    GPGeoserverDeleteAclServicesFromRuleRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
+    GPGeoserverDeleteAclServicesByRuleRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
             @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.resource = withInitial(() -> null);
@@ -71,10 +71,10 @@ class GPGeoserverDeleteAclServicesFromRuleRequest extends GPJsonDeleteConnectorR
 
     /**
      * @param theResource
-     * @return {@link GeoserverDeleteAclServicesFromRuleRequest}
+     * @return {@link GeoserverDeleteAclServicesByRuleRequest}
      */
     @Override
-    public GeoserverDeleteAclServicesFromRuleRequest withResource(String theResource) {
+    public GeoserverDeleteAclServicesByRuleRequest withResource(String theResource) {
         this.resource.set(theResource);
         return self();
     }

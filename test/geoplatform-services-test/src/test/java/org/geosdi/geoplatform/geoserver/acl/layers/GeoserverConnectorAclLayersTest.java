@@ -92,8 +92,8 @@ public class GeoserverConnectorAclLayersTest extends GeoserverConnectorTest {
     @Test
     public void d_deleteAclLayers() throws Exception {
         logger.info("################### {}\n",
-                this.geoserverConnectorStore.deleteAclLayersFromRule().withResource("*.*.a").getResponse());
+                this.geoserverConnectorStore.deleteAclLayersByRule().withResource("*.*.a").getResponse());
         logger.info("################### {}\n",
-                this.geoserverConnectorStore.deleteAclLayersFromRule().withResource("cite.*.a").getResponse());
+                this.geoserverConnectorStore.deleteAclLayersByRule().withResource("cite.*.a").getResponse());
     }
 }

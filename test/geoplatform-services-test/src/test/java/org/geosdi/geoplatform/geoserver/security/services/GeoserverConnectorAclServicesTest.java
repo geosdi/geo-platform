@@ -32,7 +32,7 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.geoserver.acl.services;
+package org.geosdi.geoplatform.geoserver.security.services;
 
 import com.google.common.collect.Lists;
 import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GPGeoserverRule;

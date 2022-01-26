@@ -5,7 +5,7 @@
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2022 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -32,21 +32,29 @@
  *   based on this library. If you modify this library, you may extend this exception
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
- */
-package org.geosdi.geoplatform.connector.store.security;
+ */package org.geosdi.geoplatform.connector.store.security.roles;
 
-import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverGetMasterPasswordRequest;
-import org.geosdi.geoplatform.connector.geoserver.security.GPGeoserverGetMasterPasswordRequest;
-import org.geosdi.geoplatform.connector.store.security.roles.GPGeoserverRolesConnectorStore;
+import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
+import org.geosdi.geoplatform.connector.geoserver.request.security.roles.GeoserverLoadRolesRequest;
+import org.geosdi.geoplatform.connector.store.security.layers.GeoserverACLLayersConnectorStore;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface GPGeoserverSecurityConnectorStore extends GPGeoserverRolesConnectorStore {
+ public abstract class GeoserverRolesConnectorStore extends GeoserverACLLayersConnectorStore implements GPGeoserverRolesConnectorStore{
+    /**
+     * @param theServer
+     */
+    protected GeoserverRolesConnectorStore(GPGeoserverConnector theServer) {
+        super(theServer);
+    }
 
     /**
-     * @return {@link GPGeoserverGetMasterPasswordRequest}
+     * @return {@link GeoserverLoadRolesRequest}
      */
-    GeoserverGetMasterPasswordRequest loadMasterPasswordRequest();
+    @Override
+    public GeoserverLoadRolesRequest loadRoles() {
+        return this.server.loadRoles();
+    }
 }

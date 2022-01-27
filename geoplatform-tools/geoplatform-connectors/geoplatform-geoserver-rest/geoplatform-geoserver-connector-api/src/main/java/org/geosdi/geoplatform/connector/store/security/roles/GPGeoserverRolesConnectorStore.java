@@ -34,7 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.store.security.roles;
 
-import org.geosdi.geoplatform.connector.geoserver.request.security.roles.GeoserverLoadRolesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.roles.*;
 import org.geosdi.geoplatform.connector.store.security.layers.GPGeoserverAclLayersConnectorStore;
 
 /**
@@ -47,4 +47,84 @@ public interface GPGeoserverRolesConnectorStore extends GPGeoserverAclLayersConn
      * @return {@link GeoserverLoadRolesRequest}
      */
     GeoserverLoadRolesRequest loadRoles();
+
+    /**
+     * @return {@link GeoserverLoadRolesRequest}
+     */
+    GeoserverLoadUserRolesRequest loadUserRoles();
+
+    /**
+     * @return {@link GeoserverLoadGroupRolesRequest}
+     */
+    GeoserverLoadGroupRolesRequest loadGroupRoles();
+
+    /**
+     * @return {@link GeoserverLoadServiceUserRolesRequest}
+     */
+    GeoserverLoadServiceUserRolesRequest loadServiceUserRoles();
+
+    /**
+     * @return {@link GeoserverLoadServiceGroupRolesRequest}
+     */
+    GeoserverLoadServiceGroupRolesRequest loadServiceGroupRoles();
+
+    /**
+     * @return {@link GeoserverCreateRoleRequest}
+     */
+    GeoserverCreateRoleRequest createRole();
+
+    /**
+     * @return {@link GeoserverDeleteRoleRequest}
+     */
+    GeoserverDeleteRoleRequest deleteRole();
+
+    /**
+     * @return {@link GeoserverLinkUserToRoleRequest}
+     */
+    GeoserverLinkUserToRoleRequest linkUserToRole();
+
+    /**
+     * @return {@link GeoserverUnlinkUserToRoleRequest}
+     */
+    GeoserverUnlinkUserToRoleRequest unlinkUserToRole();
+
+    /**
+     * @return {@link GeoserverLinkGroupToRoleRequest}
+     */
+    GeoserverLinkGroupToRoleRequest linkGroupToRole();
+
+    /**
+     * @return {@link GeoserverUnlinkGroupToRoleRequest}
+     */
+    GeoserverUnlinkGroupToRoleRequest unlinkGroupToRole();
+
+    /**
+     * @return {@link GeoserverCreateServiceRoleRequest}
+     */
+    GeoserverCreateServiceRoleRequest createServiceRole();
+
+    /**
+     * @return {@link GeoserverDeleteServiceRoleRequest}
+     */
+    GeoserverDeleteServiceRoleRequest deleteServiceRole();
+
+    /**
+     * @return {@link GeoserverCreateServiceUserRoleRequest}
+     */
+    GeoserverCreateServiceUserRoleRequest createServiceUserRole();
+
+    /**
+     * @return {@link GeoserverDeleteServiceUserRoleRequest}
+     */
+    GeoserverDeleteServiceUserRoleRequest deleteServiceUserRole();
+
+    /**
+     * @return {@link GeoserverCreateServiceGroupRoleRequest}
+     */
+    GeoserverCreateServiceGroupRoleRequest createServiceGroupRole();
+
+    /**
+     * @return {@link GeoserverDeleteServiceGroupRoleRequest}
+     */
+    GeoserverDeleteServiceGroupRoleRequest deleteServiceGroupRole();
 }

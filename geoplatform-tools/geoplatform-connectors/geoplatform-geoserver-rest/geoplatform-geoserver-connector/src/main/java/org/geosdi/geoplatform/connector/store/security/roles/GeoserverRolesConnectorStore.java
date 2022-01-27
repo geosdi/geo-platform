@@ -35,14 +35,14 @@
  */package org.geosdi.geoplatform.connector.store.security.roles;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.security.roles.GeoserverLoadRolesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.roles.*;
 import org.geosdi.geoplatform.connector.store.security.layers.GeoserverACLLayersConnectorStore;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
- public abstract class GeoserverRolesConnectorStore extends GeoserverACLLayersConnectorStore implements GPGeoserverRolesConnectorStore{
+public abstract class GeoserverRolesConnectorStore extends GeoserverACLLayersConnectorStore implements GPGeoserverRolesConnectorStore{
     /**
      * @param theServer
      */
@@ -56,5 +56,133 @@ import org.geosdi.geoplatform.connector.store.security.layers.GeoserverACLLayers
     @Override
     public GeoserverLoadRolesRequest loadRoles() {
         return this.server.loadRoles();
+    }
+
+    /**
+     * @return {@link GeoserverLoadRolesRequest}
+     */
+    @Override
+    public GeoserverLoadUserRolesRequest loadUserRoles() {
+        return this.server.loadUserRoles();
+    }
+
+    /**
+     * @return {@link GeoserverLoadGroupRolesRequest}
+     */
+    @Override
+    public GeoserverLoadGroupRolesRequest loadGroupRoles() {
+        return this.server.loadGroupRoles();
+    }
+
+    /**
+     * @return {@link GeoserverLoadServiceUserRolesRequest}
+     */
+    @Override
+    public GeoserverLoadServiceUserRolesRequest loadServiceUserRoles() {
+        return this.server.loadServiceUserRoles();
+    }
+
+    /**
+     * @return {@link GeoserverLoadServiceGroupRolesRequest}
+     */
+    @Override
+    public GeoserverLoadServiceGroupRolesRequest loadServiceGroupRoles() {
+        return this.server.loadServiceGroupRoles();
+    }
+
+    /**
+     * @return {@link GeoserverCreateRoleRequest}
+     */
+    @Override
+    public GeoserverCreateRoleRequest createRole() {
+        return this.server.createRole();
+    }
+
+    /**
+     * @return {@link GeoserverDeleteRoleRequest}
+     */
+    @Override
+    public GeoserverDeleteRoleRequest deleteRole() {
+        return this.server.deleteRole();
+    }
+
+    /**
+     * @return {@link GeoserverLinkUserToRoleRequest}
+     */
+    @Override
+    public GeoserverLinkUserToRoleRequest linkUserToRole() {
+        return this.server.linkUserToRoleRequest();
+    }
+
+    /**
+     * @return {@link GeoserverUnlinkUserToRoleRequest}
+     */
+    @Override
+    public GeoserverUnlinkUserToRoleRequest unlinkUserToRole() {
+        return this.server.unlinkUserToRoleRequest();
+    }
+
+    /**
+     * @return {@link GeoserverLinkGroupToRoleRequest}
+     */
+    @Override
+    public GeoserverLinkGroupToRoleRequest linkGroupToRole() {
+        return this.server.linkGroupToRoleRequest();
+    }
+
+    /**
+     * @return {@link GeoserverUnlinkGroupToRoleRequest}
+     */
+    @Override
+    public GeoserverUnlinkGroupToRoleRequest unlinkGroupToRole() {
+        return this.server.unlinkGroupToRoleRequest();
+    }
+
+    /**
+     * @return {@link GeoserverCreateServiceRoleRequest}
+     */
+    @Override
+    public GeoserverCreateServiceRoleRequest createServiceRole() {
+        return this.server.createServiceRoleRequest();
+    }
+
+    /**
+     * @return {@link GeoserverDeleteServiceRoleRequest}
+     */
+    @Override
+    public GeoserverDeleteServiceRoleRequest deleteServiceRole() {
+        return this.server.deleteServiceRoleRequest();
+    }
+
+    /**
+     * @return {@link GeoserverCreateServiceUserRoleRequest}
+     */
+    @Override
+    public GeoserverCreateServiceUserRoleRequest createServiceUserRole() {
+        return this.server.createServiceUserRoleRequest();
+    }
+
+    /**
+     * @return {@link GeoserverDeleteServiceUserRoleRequest}
+     */
+    @Override
+    public GeoserverDeleteServiceUserRoleRequest deleteServiceUserRole() {
+        return this.server.deleteServiceUserRoleRequest();
+    }
+
+    /**
+     * @return {@link GeoserverCreateServiceGroupRoleRequest}
+     */
+    @Override
+    public GeoserverCreateServiceGroupRoleRequest createServiceGroupRole() {
+        return this.server.createServiceGroupRoleRequest();
+    }
+
+    /**
+     * @return {@link GeoserverDeleteServiceGroupRoleRequest}
+     */
+    @Override
+    public GeoserverDeleteServiceGroupRoleRequest deleteServiceGroupRole() {
+        return this.server.deleteServiceGroupRoleRequest();
     }
 }

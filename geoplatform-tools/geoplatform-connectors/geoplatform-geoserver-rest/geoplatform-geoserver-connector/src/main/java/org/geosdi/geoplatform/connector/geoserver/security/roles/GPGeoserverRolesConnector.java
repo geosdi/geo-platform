@@ -36,6 +36,7 @@ package org.geosdi.geoplatform.connector.geoserver.security.roles;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
+import org.geosdi.geoplatform.connector.geoserver.request.security.roles.*;
 import org.geosdi.geoplatform.connector.geoserver.security.layers.GPGeoserverAclLayersConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -115,6 +116,230 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
             case V220x:
             case V219x:
                 return new GPGeoserverLoadRolesRequest(this, emptyJacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GPGeoserverLoadUserRolesRequest}
+     */
+    @Override
+    public GPGeoserverLoadUserRolesRequest loadUserRoles() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverLoadUserRolesRequest(this, emptyJacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GPGeoserverLoadGroupRolesRequest}
+     */
+    @Override
+    public GPGeoserverLoadGroupRolesRequest loadGroupRoles() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverLoadGroupRolesRequest(this, emptyJacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GPGeoserverLoadServiceUserRolesRequest}
+     */
+    @Override
+    public GPGeoserverLoadServiceUserRolesRequest loadServiceUserRoles() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverLoadServiceUserRolesRequest(this, emptyJacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverLoadServiceGroupRolesRequest}
+     */
+    @Override
+    public GeoserverLoadServiceGroupRolesRequest loadServiceGroupRoles() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverLoadServiceGroupRolesRequest(this, emptyJacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverCreateRoleRequest}
+     */
+    @Override
+    public GeoserverCreateRoleRequest createRole() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverCreateRoleRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverDeleteRoleRequest}
+     */
+    @Override
+    public GeoserverDeleteRoleRequest deleteRole() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverDeleteRoleRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverLinkUserToRoleRequest}
+     */
+    @Override
+    public GeoserverLinkUserToRoleRequest linkUserToRoleRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverLinkUserToRoleRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverUnlinkUserToRoleRequest}
+     */
+    @Override
+    public GeoserverUnlinkUserToRoleRequest unlinkUserToRoleRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverUnlinkUserToRoleRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverLinkGroupToRoleRequest}
+     */
+    @Override
+    public GeoserverLinkGroupToRoleRequest linkGroupToRoleRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverLinkGroupToRoleRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverUnlinkGroupToRoleRequest}
+     */
+    @Override
+    public GeoserverUnlinkGroupToRoleRequest unlinkGroupToRoleRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverUnlinkGroupToRoleRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverCreateServiceRoleRequest}
+     */
+    @Override
+    public GeoserverCreateServiceRoleRequest createServiceRoleRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverCreateServiceRoleRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverDeleteServiceRoleRequest}
+     */
+    @Override
+    public GeoserverDeleteServiceRoleRequest deleteServiceRoleRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverDeleteServiceRoleRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverCreateServiceUserRoleRequest}
+     */
+    @Override
+    public GeoserverCreateServiceUserRoleRequest createServiceUserRoleRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverCreateServiceUserRoleRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverDeleteServiceUserRoleRequest}
+     */
+    @Override
+    public GeoserverDeleteServiceUserRoleRequest deleteServiceUserRoleRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverDeleteServiceUserRoleRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverCreateServiceGroupRoleRequest}
+     */
+    @Override
+    public GeoserverCreateServiceGroupRoleRequest createServiceGroupRoleRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverCreateServiceGroupRoleRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverDeleteServiceGroupRoleRequest}
+     */
+    @Override
+    public GeoserverDeleteServiceGroupRoleRequest deleteServiceGroupRoleRequest() {
+        switch (version) {
+            case V220x:
+            case V219x:
+                return new GPGeoserverDeleteServiceGroupRoleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

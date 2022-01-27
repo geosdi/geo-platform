@@ -78,7 +78,7 @@ class GPGeoserverLinkGroupToRoleRequest extends GPJsonPostConnectorRequest<Boole
      * @return {@link GeoserverLinkGroupToRoleRequest}
      */
     @Override
-    public GeoserverLinkGroupToRoleRequest withRole(String theRole) {
+    public GeoserverLinkGroupToRoleRequest withRole(@Nonnull(when = NEVER) String theRole) {
         this.role.set(theRole);
         return self();
     }
@@ -88,7 +88,7 @@ class GPGeoserverLinkGroupToRoleRequest extends GPJsonPostConnectorRequest<Boole
      * @return {@link GeoserverLinkGroupToRoleRequest}
      */
     @Override
-    public GeoserverLinkGroupToRoleRequest withGroup(String theGroup) {
+    public GeoserverLinkGroupToRoleRequest withGroup(@Nonnull(when = NEVER) String theGroup) {
         this.group.set(theGroup);
         return self();
     }

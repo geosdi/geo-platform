@@ -79,7 +79,7 @@ class GPGeoserverLinkUserToRoleRequest extends GPJsonPostConnectorRequest<Boolea
      * @return {@link GeoserverLoadUserRolesRequest}
      */
     @Override
-    public GeoserverLinkUserToRoleRequest withRole(String theRole) {
+    public GeoserverLinkUserToRoleRequest withRole(@Nonnull(when = NEVER) String theRole) {
         this.role.set(theRole);
         return self();
     }
@@ -89,7 +89,7 @@ class GPGeoserverLinkUserToRoleRequest extends GPJsonPostConnectorRequest<Boolea
      * @return {@link GeoserverLinkUserToRoleRequest}
      */
     @Override
-    public GeoserverLinkUserToRoleRequest withUser(String theUser) {
+    public GeoserverLinkUserToRoleRequest withUser(@Nonnull(when = NEVER) String theUser) {
         this.user.set(theUser);
         return self();
     }

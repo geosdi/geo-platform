@@ -72,7 +72,7 @@ class GPGeoserverLoadGroupRolesRequest extends GPJsonGetConnectorRequest<GPGeose
      * @return {@link GeoserverLoadUserRolesRequest}
      */
     @Override
-    public GeoserverLoadGroupRolesRequest withGroup(String theGroup) {
+    public GeoserverLoadGroupRolesRequest withGroup(@Nonnull(when = NEVER) String theGroup) {
         this.group.set(theGroup);
         return self();
     }

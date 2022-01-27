@@ -79,7 +79,7 @@ class GPGeoserverDeleteServiceRoleRequest extends GPJsonDeleteConnectorRequest<B
      * @return {@link GeoserverLoadUserRolesRequest}
      */
     @Override
-    public GeoserverDeleteServiceRoleRequest withRole(String theRole) {
+    public GeoserverDeleteServiceRoleRequest withRole(@Nonnull(when = NEVER) String theRole) {
         this.role.set(theRole);
         return self();
     }
@@ -89,7 +89,7 @@ class GPGeoserverDeleteServiceRoleRequest extends GPJsonDeleteConnectorRequest<B
      * @return {@link GeoserverCreateServiceRoleRequest}
      */
     @Override
-    public GeoserverDeleteServiceRoleRequest withService(String theService) {
+    public GeoserverDeleteServiceRoleRequest withService(@Nonnull(when = NEVER) String theService) {
         this.service.set(theService);
         return self();
     }

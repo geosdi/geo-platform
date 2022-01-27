@@ -80,7 +80,7 @@ class GPGeoserverCreateServiceGroupRoleRequest extends GPJsonPostConnectorReques
      * @return {@link GeoserverCreateServiceGroupRoleRequest}
      */
     @Override
-    public GeoserverCreateServiceGroupRoleRequest withRole(String theRole) {
+    public GeoserverCreateServiceGroupRoleRequest withRole(@Nonnull(when = NEVER) String theRole) {
         this.role.set(theRole);
         return self();
     }
@@ -90,7 +90,7 @@ class GPGeoserverCreateServiceGroupRoleRequest extends GPJsonPostConnectorReques
      * @return {@link GeoserverCreateServiceGroupRoleRequest}
      */
     @Override
-    public GeoserverCreateServiceGroupRoleRequest withService(String theService) {
+    public GeoserverCreateServiceGroupRoleRequest withService(@Nonnull(when = NEVER) String theService) {
         this.service.set(theService);
         return self();
     }
@@ -100,7 +100,7 @@ class GPGeoserverCreateServiceGroupRoleRequest extends GPJsonPostConnectorReques
      * @return {@link GeoserverCreateServiceGroupRoleRequest}
      */
     @Override
-    public GeoserverCreateServiceGroupRoleRequest withGroup(String theUser) {
+    public GeoserverCreateServiceGroupRoleRequest withGroup(@Nonnull(when = NEVER) String theUser) {
         this.group.set(theUser);
         return self();
     }

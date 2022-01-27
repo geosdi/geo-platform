@@ -76,7 +76,7 @@ class GPGeoserverDeleteRoleRequest extends GPJsonDeleteConnectorRequest<Boolean,
      * @return {@link GeoserverLoadUserRolesRequest}
      */
     @Override
-    public GeoserverDeleteRoleRequest withRole(String theRole) {
+    public GeoserverDeleteRoleRequest withRole(@Nonnull(when = NEVER) String theRole) {
         this.role.set(theRole);
         return self();
     }

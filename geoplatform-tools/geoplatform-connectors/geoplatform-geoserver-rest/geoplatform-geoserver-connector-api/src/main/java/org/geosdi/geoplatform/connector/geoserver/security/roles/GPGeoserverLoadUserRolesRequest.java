@@ -71,7 +71,7 @@ class GPGeoserverLoadUserRolesRequest extends GPJsonGetConnectorRequest<GPGeoser
      * @return {@link GeoserverLoadUserRolesRequest}
      */
     @Override
-    public GeoserverLoadUserRolesRequest withUser(String theUser) {
+    public GeoserverLoadUserRolesRequest withUser(@Nonnull(when = NEVER) String theUser) {
         this.user.set(theUser);
         return self();
     }

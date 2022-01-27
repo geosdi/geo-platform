@@ -74,7 +74,7 @@ class GPGeoserverLoadServiceUserRolesRequest extends GPJsonGetConnectorRequest<G
      * @return {@link GeoserverLoadUserRolesRequest}
      */
     @Override
-    public GeoserverLoadServiceUserRolesRequest withUser(String theUser) {
+    public GeoserverLoadServiceUserRolesRequest withUser(@Nonnull(when = NEVER) String theUser) {
         this.user.set(theUser);
         return self();
     }
@@ -84,7 +84,7 @@ class GPGeoserverLoadServiceUserRolesRequest extends GPJsonGetConnectorRequest<G
      * @return {@link GeoserverLoadServiceUserRolesRequest}
      */
     @Override
-    public GeoserverLoadServiceUserRolesRequest withService(String theService) {
+    public GeoserverLoadServiceUserRolesRequest withService(@Nonnull(when = NEVER) String theService) {
         this.service.set(theService);
         return self();
     }

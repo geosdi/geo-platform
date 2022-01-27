@@ -77,7 +77,7 @@ class GPGeoserverCreateRoleRequest extends GPJsonPostConnectorRequest<Boolean, G
      * @return {@link GeoserverLoadUserRolesRequest}
      */
     @Override
-    public GeoserverCreateRoleRequest withRole(String theRole) {
+    public GeoserverCreateRoleRequest withRole(@Nonnull(when = NEVER) String theRole) {
         this.role.set(theRole);
         return self();
     }

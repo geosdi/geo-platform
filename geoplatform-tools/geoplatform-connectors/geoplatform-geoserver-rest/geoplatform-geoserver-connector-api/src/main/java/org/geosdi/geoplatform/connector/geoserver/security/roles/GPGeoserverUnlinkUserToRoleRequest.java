@@ -79,7 +79,7 @@ class GPGeoserverUnlinkUserToRoleRequest extends GPJsonDeleteConnectorRequest<Bo
      * @return {@link GeoserverLoadUserRolesRequest}
      */
     @Override
-    public GeoserverUnlinkUserToRoleRequest withRole(String theRole) {
+    public GeoserverUnlinkUserToRoleRequest withRole(@Nonnull(when = NEVER) String theRole) {
         this.role.set(theRole);
         return self();
     }
@@ -89,7 +89,7 @@ class GPGeoserverUnlinkUserToRoleRequest extends GPJsonDeleteConnectorRequest<Bo
      * @return {@link GeoserverLinkUserToRoleRequest}
      */
     @Override
-    public GeoserverUnlinkUserToRoleRequest withUser(String theUser) {
+    public GeoserverUnlinkUserToRoleRequest withUser(@Nonnull(when = NEVER) String theUser) {
         this.user.set(theUser);
         return self();
     }

@@ -79,7 +79,7 @@ class GPGeoserverCreateServiceRoleRequest extends GPJsonPostConnectorRequest<Boo
      * @return {@link GeoserverLoadUserRolesRequest}
      */
     @Override
-    public GeoserverCreateServiceRoleRequest withRole(String theRole) {
+    public GeoserverCreateServiceRoleRequest withRole(@Nonnull(when = NEVER) String theRole) {
         this.role.set(theRole);
         return self();
     }
@@ -89,7 +89,7 @@ class GPGeoserverCreateServiceRoleRequest extends GPJsonPostConnectorRequest<Boo
      * @return {@link GeoserverCreateServiceRoleRequest}
      */
     @Override
-    public GeoserverCreateServiceRoleRequest withService(String theService) {
+    public GeoserverCreateServiceRoleRequest withService(@Nonnull(when = NEVER) String theService) {
         this.service.set(theService);
         return self();
     }

@@ -36,7 +36,7 @@ package org.geosdi.geoplatform.connector.geoserver.security.roles;
 
 import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
-import org.apache.http.HttpEntity;
+import org.apache.hc.core5.http.HttpEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.security.role.GPGeoserverRoles;
 import org.geosdi.geoplatform.connector.geoserver.request.security.roles.GeoserverLinkUserToRoleRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.security.roles.GeoserverLoadUserRolesRequest;

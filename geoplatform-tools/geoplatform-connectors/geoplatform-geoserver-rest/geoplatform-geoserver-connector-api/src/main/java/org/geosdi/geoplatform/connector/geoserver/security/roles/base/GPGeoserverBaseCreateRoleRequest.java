@@ -35,7 +35,7 @@
 package org.geosdi.geoplatform.connector.geoserver.security.roles.base;
 
 import com.google.common.io.CharStreams;
-import org.apache.http.HttpEntity;
+import org.apache.hc.core5.http.HttpEntity;
 import org.geosdi.geoplatform.connector.geoserver.request.security.roles.base.GeoserverBaseRoleRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;

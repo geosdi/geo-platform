@@ -35,8 +35,6 @@
 package org.geosdi.geoplatform.connector.geoserver.security.roles;
 
 import net.jcip.annotations.ThreadSafe;
-import org.apache.hc.core5.http.HttpEntity;
-import org.geosdi.geoplatform.connector.geoserver.model.security.role.GPGeoserverRoles;
 import org.geosdi.geoplatform.connector.geoserver.request.security.roles.GeoserverCreateRoleRequest;
 import org.geosdi.geoplatform.connector.geoserver.security.roles.base.GPGeoserverBaseCreateRoleRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;

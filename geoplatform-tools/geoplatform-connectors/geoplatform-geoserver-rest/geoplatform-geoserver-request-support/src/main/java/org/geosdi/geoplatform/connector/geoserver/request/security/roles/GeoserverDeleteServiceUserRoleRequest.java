@@ -34,29 +34,27 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.security.roles;
 
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.roles.base.GeoserverBaseRoleRequest;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeoserverDeleteServiceUserRoleRequest extends GPJsonConnectorRequest<Boolean, GeoserverDeleteServiceUserRoleRequest> {
-
-    /**
-     * @param theRole
-     * @return {@link GeoserverDeleteServiceUserRoleRequest}
-     */
-    GeoserverDeleteServiceUserRoleRequest withRole(String theRole);
+public interface GeoserverDeleteServiceUserRoleRequest extends GeoserverBaseRoleRequest<GeoserverDeleteServiceUserRoleRequest> {
 
     /**
      * @param theService
      * @return {@link GeoserverDeleteServiceUserRoleRequest}
      */
-    GeoserverDeleteServiceUserRoleRequest withService(String theService);
+    GeoserverDeleteServiceUserRoleRequest withService(@Nonnull(when = NEVER) String theService);
 
     /**
      * @param theUser
      * @return {@link GeoserverDeleteServiceUserRoleRequest}
      */
-    GeoserverDeleteServiceUserRoleRequest withUser(String theUser);
+    GeoserverDeleteServiceUserRoleRequest withUser(@Nonnull(when = NEVER) String theUser);
 }

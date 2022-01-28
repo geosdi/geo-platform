@@ -34,22 +34,17 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.security.roles;
 
-import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
 import org.apache.hc.core5.http.HttpEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.security.role.GPGeoserverRoles;
 import org.geosdi.geoplatform.connector.geoserver.request.security.roles.GeoserverCreateServiceRoleRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.security.roles.GeoserverLoadUserRolesRequest;
+import org.geosdi.geoplatform.connector.geoserver.security.roles.base.GPGeoserverBaseCreateRoleRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
@@ -58,9 +53,8 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-class GPGeoserverCreateServiceRoleRequest extends GPJsonPostConnectorRequest<Boolean, GeoserverCreateServiceRoleRequest> implements GeoserverCreateServiceRoleRequest {
+class GPGeoserverCreateServiceRoleRequest extends GPGeoserverBaseCreateRoleRequest<GeoserverCreateServiceRoleRequest> implements GeoserverCreateServiceRoleRequest {
 
-    private final ThreadLocal<String> role;
     private final ThreadLocal<String> service;
 
     /**
@@ -70,18 +64,7 @@ class GPGeoserverCreateServiceRoleRequest extends GPJsonPostConnectorRequest<Boo
     GPGeoserverCreateServiceRoleRequest(@Nonnull(when = NEVER) GPServerConnector server,
             @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
-        this.role = withInitial(() -> null);
         this.service = withInitial(() -> null);
-    }
-
-    /**
-     * @param theRole
-     * @return {@link GeoserverLoadUserRolesRequest}
-     */
-    @Override
-    public GeoserverCreateServiceRoleRequest withRole(@Nonnull(when = NEVER) String theRole) {
-        this.role.set(theRole);
-        return self();
     }
 
     /**
@@ -107,27 +90,5 @@ class GPGeoserverCreateServiceRoleRequest extends GPJsonPostConnectorRequest<Boo
         return ((baseURI.endsWith("/") ?
                 baseURI.concat("security/roles/service/").concat(service).concat("/role/").concat(role) :
                 baseURI.concat("/security/roles/service/").concat(service).concat("/role/").concat(role)));
-    }
-
-    @Override
-    protected Boolean readInternal(BufferedReader reader) throws Exception {
-        String value = CharStreams.toString(reader);
-        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
-    }
-
-    /**
-     * @return {@link Class<GPGeoserverRoles>}
-     */
-    @Override
-    protected Class<Boolean> forClass() {
-        return Boolean.class;
-    }
-
-    /**
-     * @return {@link HttpEntity}
-     */
-    @Override
-    protected HttpEntity prepareHttpEntity() throws Exception {
-        return null;
     }
 }

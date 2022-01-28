@@ -34,29 +34,27 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.security.roles;
 
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.roles.base.GeoserverBaseRoleRequest;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeoserverCreateServiceGroupRoleRequest extends GPJsonConnectorRequest<Boolean, GeoserverCreateServiceGroupRoleRequest> {
-
-    /**
-     * @param theRole
-     * @return {@link GeoserverCreateServiceGroupRoleRequest}
-     */
-    GeoserverCreateServiceGroupRoleRequest withRole(String theRole);
+public interface GeoserverCreateServiceGroupRoleRequest extends GeoserverBaseRoleRequest<GeoserverCreateServiceGroupRoleRequest> {
 
     /**
      * @param theService
      * @return {@link GeoserverCreateServiceGroupRoleRequest}
      */
-    GeoserverCreateServiceGroupRoleRequest withService(String theService);
+    GeoserverCreateServiceGroupRoleRequest withService(@Nonnull(when = NEVER) String theService);
 
     /**
      * @param theGroup
      * @return {@link GeoserverCreateServiceGroupRoleRequest}
      */
-    GeoserverCreateServiceGroupRoleRequest withGroup(String theGroup);
+    GeoserverCreateServiceGroupRoleRequest withGroup(@Nonnull(when = NEVER) String theGroup);
 }

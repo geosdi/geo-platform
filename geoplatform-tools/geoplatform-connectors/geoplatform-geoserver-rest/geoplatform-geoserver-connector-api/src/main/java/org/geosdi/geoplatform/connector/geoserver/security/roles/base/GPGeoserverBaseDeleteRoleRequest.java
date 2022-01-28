@@ -4,7 +4,7 @@
  * http://geo-platform.org
  * ====================================================================
  * <p>
- * Copyright (C) 2008-2020 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ * Copyright (C) 2008-2022 geoSDI Group (CNR IMAA - Potenza - ITALY).
  * <p>
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by
@@ -32,24 +32,61 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.security.layers;
+package org.geosdi.geoplatform.connector.geoserver.security.roles.base;
 
-import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GPGeoserverRules;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
+import com.google.common.io.CharStreams;
+import org.geosdi.geoplatform.connector.geoserver.request.security.roles.base.GeoserverBaseRoleRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
+import java.io.BufferedReader;
 
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeoserverCreateAclLayersRequest extends GPJsonConnectorRequest<Boolean, GeoserverCreateAclLayersRequest> {
+public abstract class GPGeoserverBaseDeleteRoleRequest<R extends GeoserverBaseRoleRequest> extends GPJsonDeleteConnectorRequest<Boolean, R> implements GeoserverBaseRoleRequest<R> {
+
+    protected final ThreadLocal<String> role;
 
     /**
-     * @param theGeoserverRulesBody
-     * @return {@link GeoserverCreateAclLayersRequest}
+     * @param theServerConnector
+     * @param theJacksonSupport
      */
-    GeoserverCreateAclLayersRequest withBody(@Nonnull(when = NEVER) GPGeoserverRules theGeoserverRulesBody);
+    public GPGeoserverBaseDeleteRoleRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
+            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(theServerConnector, theJacksonSupport);
+        this.role = withInitial(() -> null);
+    }
+
+    /**
+     * @param theRole
+     * @return {@link R}
+     */
+    @Override
+    public R withRole(@Nonnull(when = NEVER) String theRole) {
+        this.role.set(theRole);
+        return self();
+    }
+
+    @Override
+    protected Boolean readInternal(BufferedReader reader) throws Exception {
+        String value = CharStreams.toString(reader);
+        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
+    }
+
+    /**
+     * @return {@link Class<Boolean>}
+     */
+    @Override
+    protected Class<Boolean> forClass() {
+        return Boolean.class;
+    }
 }

@@ -36,6 +36,10 @@ package org.geosdi.geoplatform.connector.geoserver.request.security.layers;
 
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
+
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
@@ -46,5 +50,5 @@ public interface GeoserverDeleteAclLayersByRuleRequest extends GPJsonConnectorRe
      * @param theResource
      * @return {@link GeoserverDeleteAclLayersByRuleRequest}
      */
-    GeoserverDeleteAclLayersByRuleRequest withResource(String theResource);
+    GeoserverDeleteAclLayersByRuleRequest withResource(@Nonnull(when = NEVER) String theResource);
 }

@@ -37,6 +37,10 @@ package org.geosdi.geoplatform.connector.geoserver.request.security.roles;
 import org.geosdi.geoplatform.connector.geoserver.model.security.role.GPGeoserverRoles;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
+
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
@@ -47,5 +51,5 @@ public interface GeoserverLoadUserRolesRequest extends GPJsonConnectorRequest<GP
      * @param theUser
      * @return {@link GeoserverLoadUserRolesRequest}
      */
-    GeoserverLoadUserRolesRequest withUser(String theUser);
+    GeoserverLoadUserRolesRequest withUser(@Nonnull(when = NEVER) String theUser);
 }

@@ -34,23 +34,21 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.security.roles;
 
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.roles.base.GeoserverBaseRoleRequest;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeoserverUnlinkUserToRoleRequest extends GPJsonConnectorRequest<Boolean, GeoserverUnlinkUserToRoleRequest> {
-
-    /**
-     * @param theRole
-     * @return {@link GeoserverUnlinkUserToRoleRequest}
-     */
-    GeoserverUnlinkUserToRoleRequest withRole(String theRole);
+public interface GeoserverUnlinkUserToRoleRequest extends GeoserverBaseRoleRequest<GeoserverUnlinkUserToRoleRequest> {
 
     /**
      * @param theUser
      * @return {@link GeoserverUnlinkUserToRoleRequest}
      */
-    GeoserverUnlinkUserToRoleRequest withUser(String theUser);
+    GeoserverUnlinkUserToRoleRequest withUser(@Nonnull(when = NEVER) String theUser);
 }

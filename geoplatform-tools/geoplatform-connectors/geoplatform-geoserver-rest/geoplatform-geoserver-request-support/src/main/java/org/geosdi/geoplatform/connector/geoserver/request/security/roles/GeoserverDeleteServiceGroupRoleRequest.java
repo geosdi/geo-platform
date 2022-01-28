@@ -34,29 +34,27 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.security.roles;
 
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.security.roles.base.GeoserverBaseRoleRequest;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeoserverDeleteServiceGroupRoleRequest extends GPJsonConnectorRequest<Boolean, GeoserverDeleteServiceGroupRoleRequest> {
-
-    /**
-     * @param theRole
-     * @return {@link GeoserverDeleteServiceGroupRoleRequest}
-     */
-    GeoserverDeleteServiceGroupRoleRequest withRole(String theRole);
+public interface GeoserverDeleteServiceGroupRoleRequest extends GeoserverBaseRoleRequest<GeoserverDeleteServiceGroupRoleRequest> {
 
     /**
      * @param theService
      * @return {@link GeoserverDeleteServiceGroupRoleRequest}
      */
-    GeoserverDeleteServiceGroupRoleRequest withService(String theService);
+    GeoserverDeleteServiceGroupRoleRequest withService(@Nonnull(when = NEVER) String theService);
 
     /**
      * @param theGroup
      * @return {@link GeoserverDeleteServiceGroupRoleRequest}
      */
-    GeoserverDeleteServiceGroupRoleRequest withGroup(String theGroup);
+    GeoserverDeleteServiceGroupRoleRequest withGroup(@Nonnull(when = NEVER) String theGroup);
 }

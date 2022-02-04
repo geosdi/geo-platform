@@ -43,17 +43,13 @@
 
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import java.math.BigInteger;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+
+import javax.xml.bind.annotation.*;
+import java.math.BigInteger;
 
 
 /**
@@ -104,10 +100,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 @XmlSeeAlso({
     CircleByCenterPointType.class
 })
-public class ArcByCenterPointType
-    extends AbstractCurveSegmentType
-    implements ToString
-{
+public class ArcByCenterPointType extends AbstractCurveSegmentType implements ToString {
 
     protected DirectPositionType pos;
     protected PointPropertyType pointProperty;

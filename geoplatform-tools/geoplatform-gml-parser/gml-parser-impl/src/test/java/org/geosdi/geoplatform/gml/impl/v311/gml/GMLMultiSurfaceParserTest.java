@@ -85,4 +85,12 @@ public class GMLMultiSurfaceParserTest {
                 .collect(joining(separator))), MultiSurfaceType.class);
         logger.info("##########################MULTI_POLYGON_JTS_2 : {}\n", multiSurfaceParser.parseGeometry(multiSurfaceType));
     }
+
+    @Test
+    public void d_multiSurfaceJTSParserTest() throws Exception {
+        MultiSurfaceType multiSurfaceType = GPJAXBContextBuilder.newInstance().unmarshal(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "MultiSurface3.xml")
+                .collect(joining(separator))), MultiSurfaceType.class);
+        logger.info("##########################MULTI_POLYGON_JTS_2 : {}\n", multiSurfaceParser.parseGeometry(multiSurfaceType));
+    }
 }

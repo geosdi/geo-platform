@@ -37,20 +37,23 @@ package org.geosdi.geoplatform.gml.api.jaxb.context.pool;
 
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
+import static java.lang.Boolean.FALSE;
+import static java.time.Duration.of;
+import static java.time.temporal.ChronoUnit.MINUTES;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class PoolConfig extends GenericObjectPoolConfig {
+public class GPGMLPoolConfig extends GenericObjectPoolConfig {
 
     {
-        super.setMaxIdle(25);
-        super.setMaxTotal(150);
-        super.setMinIdle(16);
-        super.setTimeBetweenEvictionRunsMillis(1000L * 60L * 10L);
-        super.setNumTestsPerEvictionRun(50);
-        super.setMinEvictableIdleTimeMillis(1000L * 60L * 5L);
+        super.setMaxIdle(40);
+        super.setMaxTotal(100);
+        super.setMinIdle(10);
+        super.setJmxEnabled(FALSE);
+        super.setTimeBetweenEvictionRuns(of(5, MINUTES));
+        super.setNumTestsPerEvictionRun(25);
+        super.setMinEvictableIdleTime(of(3, MINUTES));
     }
-
 }

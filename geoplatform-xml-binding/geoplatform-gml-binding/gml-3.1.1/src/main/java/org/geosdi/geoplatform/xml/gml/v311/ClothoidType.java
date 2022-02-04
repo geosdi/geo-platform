@@ -43,15 +43,16 @@
 
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 
 
 /**
@@ -111,10 +112,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
     "startParameter",
     "endParameter"
 })
-public class ClothoidType
-    extends AbstractCurveSegmentType
-    implements ToString
-{
+public class ClothoidType extends AbstractCurveSegmentType implements ToString {
 
     @XmlElement(required = true)
     protected ClothoidType.RefLocation refLocation;

@@ -39,6 +39,7 @@ import org.apache.commons.pool2.impl.GenericKeyedObjectPoolConfig;
 
 import javax.xml.bind.JAXBContext;
 
+import static java.lang.Boolean.FALSE;
 import static java.time.Duration.of;
 import static java.time.temporal.ChronoUnit.MINUTES;
 
@@ -52,9 +53,9 @@ public class GPJAXBContextBuilderPoolConfig extends GenericKeyedObjectPoolConfig
         super.setMaxIdlePerKey(10);
         super.setMaxTotal(50);
         super.setMinIdlePerKey(1);
-        super.setJmxEnabled(Boolean.FALSE);
-        super.setTimeBetweenEvictionRuns(of(20, MINUTES));
+        super.setJmxEnabled(FALSE);
+        super.setTimeBetweenEvictionRuns(of(5, MINUTES));
         super.setNumTestsPerEvictionRun(15);
-        super.setSoftMinEvictableIdleTime(of(10, MINUTES));
+        super.setSoftMinEvictableIdleTime(of(2, MINUTES));
     }
 }

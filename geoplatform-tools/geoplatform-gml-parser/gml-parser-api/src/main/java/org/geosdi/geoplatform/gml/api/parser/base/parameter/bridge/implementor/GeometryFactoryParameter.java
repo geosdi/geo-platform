@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor;
 
 import org.locationtech.jts.geom.GeometryFactory;
 
+import static java.lang.Boolean.TRUE;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -66,6 +68,6 @@ public class GeometryFactoryParameter implements BaseParameterValue<GeometryFact
      */
     @Override
     public Boolean isValid() {
-        return Boolean.TRUE;
+        return TRUE;
     }
 }

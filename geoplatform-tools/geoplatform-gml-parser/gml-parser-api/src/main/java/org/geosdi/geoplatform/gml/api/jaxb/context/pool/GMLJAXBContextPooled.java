@@ -68,7 +68,7 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
      */
     public GMLJAXBContextPooled(@Nonnull(when = NEVER) JAXBContext theJaxbContext) {
         super(theJaxbContext);
-        this.gmlUnmarshallerPool = new GenericObjectPool<GMLUnmarshaller>(new GMLUnmarshallerFactory(theJaxbContext), new PoolConfig());
+        this.gmlUnmarshallerPool = new GenericObjectPool<GMLUnmarshaller>(new GMLUnmarshallerFactory(theJaxbContext), new GPGMLPoolConfig());
     }
 
     /**

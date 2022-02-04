@@ -88,9 +88,9 @@ public class CoordCurveHandler extends AbstractCurveHandler {
      */
     @Override
     public LineString parseGeometry(GeometryFactory geometryFactory, ArcString arcString, CoordinateBaseParser parser) throws ParserException {
-        return arcString.isSetCoordinates()
-                ? geometryFactory.createLineString(parser.parseCoordinate(arcString.getCoordinates()))
-                : super.forwardParseGeometry(geometryFactory, arcString, parser);
+        return arcString.isSetCoordinates() ?
+                geometryFactory.createLineString(parser.parseCoordinate(arcString.getCoordinates())) :
+                super.forwardParseGeometry(geometryFactory, arcString, parser);
     }
 
     /**
@@ -101,8 +101,8 @@ public class CoordCurveHandler extends AbstractCurveHandler {
      */
     @Override
     public org.geojson.LineString parseGeometryAsGeoJson(ArcString arcString, CoordinateBaseParser parser) throws ParserException {
-        return arcString.isSetCoordinates()
-                ? new org.geojson.LineString(parser.parseCoordinateAsGeoJson(arcString.getCoordinates()))
-                : super.forwardParseGeometryAsGeoJson(arcString, parser);
+        return arcString.isSetCoordinates() ?
+                new org.geojson.LineString(parser.parseCoordinateAsGeoJson(arcString.getCoordinates())) :
+                super.forwardParseGeometryAsGeoJson(arcString, parser);
     }
 }

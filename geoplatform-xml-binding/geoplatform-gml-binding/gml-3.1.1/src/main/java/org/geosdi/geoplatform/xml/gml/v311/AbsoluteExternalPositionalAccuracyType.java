@@ -43,23 +43,24 @@
 
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+
 
 /**
- * Closeness of reported coordinate values to values accepted as or being true. 
- * 
+ * Closeness of reported coordinate values to values accepted as or being true.
+ *
  * <p>Java class for AbsoluteExternalPositionalAccuracyType complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="AbsoluteExternalPositionalAccuracyType">
  *   &lt;complexContent>
@@ -71,28 +72,19 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "AbsoluteExternalPositionalAccuracyType", propOrder = {
-    "result"
-})
-public class AbsoluteExternalPositionalAccuracyType
-    extends AbstractPositionalAccuracyType
-    implements ToString
-{
+@XmlType(name = "AbsoluteExternalPositionalAccuracyType", propOrder = {"result"})
+public class AbsoluteExternalPositionalAccuracyType extends AbstractPositionalAccuracyType implements ToString {
 
     @XmlElement(required = true)
     protected MeasureType result;
 
     /**
      * Gets the value of the result property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link MeasureType }
-     *     
+     *
+     * @return possible object is
+     * {@link MeasureType }
      */
     public MeasureType getResult() {
         return result;
@@ -100,18 +92,16 @@ public class AbsoluteExternalPositionalAccuracyType
 
     /**
      * Sets the value of the result property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link MeasureType }
-     *     
+     *
+     * @param value allowed object is
+     * {@link MeasureType }
      */
     public void setResult(MeasureType value) {
         this.result = value;
     }
 
     public boolean isSetResult() {
-        return (this.result!= null);
+        return (this.result != null);
     }
 
     public String toString() {

@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor;
 
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.curve.GMLBaseMultiCurveParser;
 
+import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo.getDefaultGeometryFactory;
 import static org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo.getDefaultSRSParser;
 import static org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor.BaseParameterEnum.DEFAULT_MULTI_CURVE_PARSER;
@@ -71,6 +72,6 @@ public class MultiCurveParserParameter implements BaseParameterValue<GMLBaseMult
      */
     @Override
     public Boolean isValid() {
-        return Boolean.TRUE;
+        return TRUE;
     }
 }

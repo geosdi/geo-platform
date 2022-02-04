@@ -66,17 +66,11 @@ public class GMLGeoJsonCoordinateParser implements GeoJsonCoordinateParser {
         checkArgument(directPosition != null, "The Parameter directPosition must not be null.");
         List<Double> value = directPosition.getValue();
         int count = value.size();
-
         switch (count) {
             case 2:
-                double x2 = value.get(0);
-                double y2 = value.get(1);
-                return new LngLatAlt(x2, y2);
+                return new LngLatAlt(value.get(0), value.get(1));
             case 3:
-                double x3 = value.get(0);
-                double y3 = value.get(1);
-                double z3 = value.get(2);
-                return new LngLatAlt(x3, y3, z3);
+                return new LngLatAlt(value.get(0), value.get(1), value.get(2));
             default:
                 throw new ParserException("Direct position type is expected to have 2 or 3 items.");
         }
@@ -90,17 +84,15 @@ public class GMLGeoJsonCoordinateParser implements GeoJsonCoordinateParser {
     @Override
     public LngLatAlt[] parseCoordinatesAsGeoJson(@Nonnull(when = NEVER) DirectPositionList directPositionList) throws ParserException {
         checkArgument(directPositionList != null, "The Parameter directPositionList must not be null.");
-        int dimensions = directPositionList.isSetSrsDimension() ? directPositionList.getSrsDimension().intValue() : 2;
-
+        Integer dimensions = directPositionList.isSetSrsDimension() ? directPositionList.getSrsDimension().intValue() : null;
+        List<Double> values = directPositionList.getValue();
+        dimensions = ((dimensions != null) ? dimensions : ((values.size() % 2 == 0) ? 2 : 3));
         if (dimensions < 2 || dimensions > 3) {
             throw new ParserException("Only two or three dimensional coordinates are supported.");
         }
-
-        List<Double> values = directPositionList.getValue();
         if (values.size() % dimensions != 0) {
             throw new ParserException("The list contains a number of incorrect entries.");
         }
-
         LngLatAlt[] coordinates = new LngLatAlt[values.size() / dimensions];
         for (int index = 0; index < values.size() / dimensions; index++) {
             if (dimensions == 2) {

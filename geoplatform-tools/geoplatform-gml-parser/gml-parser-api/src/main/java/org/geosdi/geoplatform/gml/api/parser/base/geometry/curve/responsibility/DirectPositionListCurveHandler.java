@@ -35,18 +35,32 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.curve.responsibility;
 
+import org.geojson.LngLatAlt;
 import org.geosdi.geoplatform.gml.api.ArcString;
+import org.geosdi.geoplatform.gml.api.DirectPosition;
 import org.geosdi.geoplatform.gml.api.LineStringSegment;
+import org.geosdi.geoplatform.gml.api.PointProperty;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
+import org.geosdi.geoplatform.gml.api.parser.base.geometry.point.GMLBasePointParser;
+import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.LineString;
+
+import javax.xml.bind.JAXBElement;
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.Lists.newArrayList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class DirectPositionListCurveHandler extends AbstractCurveHandler {
+
+    private final GMLBasePointParser pointParser = GMLBaseParametersRepo.getDefaultPointParser();
 
     DirectPositionListCurveHandler() {
     }
@@ -83,7 +97,7 @@ public class DirectPositionListCurveHandler extends AbstractCurveHandler {
      */
     @Override
     public LineString parseGeometry(GeometryFactory geometryFactory, ArcString arcString, CoordinateBaseParser parser) throws ParserException {
-        return null;
+        return arcString.isSetPosOrPointPropertyOrPointRep() ? geometryFactory.createLineString(toJTSCoordinates(arcString, parser)) : null;
     }
 
     /**
@@ -94,6 +108,48 @@ public class DirectPositionListCurveHandler extends AbstractCurveHandler {
      */
     @Override
     public org.geojson.LineString parseGeometryAsGeoJson(ArcString arcString, CoordinateBaseParser parser) throws ParserException {
-        return null;
+        return arcString.isSetPosOrPointPropertyOrPointRep() ? new org.geojson.LineString(toGeoJsonCoordinates(arcString, parser)) : null;
+    }
+
+    /**
+     * @param arcString
+     * @param parser
+     * @return {@link Coordinate[]}
+     * @throws ParserException
+     */
+    private Coordinate[] toJTSCoordinates(ArcString arcString, CoordinateBaseParser parser) throws ParserException {
+        checkArgument((arcString.getPosOrPointPropertyOrPointRep().size() == 3), "The Parameter posOrPointPropertyOrPointRep must contains 3 elements");
+        List<Coordinate> coordinates = newArrayList();
+        for (JAXBElement jaxbElement : arcString.getPosOrPointPropertyOrPointRep()) {
+            if (jaxbElement.getValue() instanceof PointProperty) {
+                coordinates.add(pointParser.parseGeometry((PointProperty) jaxbElement.getValue()).getCoordinate());
+            } else if (jaxbElement.getValue() instanceof DirectPosition) {
+                coordinates.add(parser.parseCoordinate((DirectPosition) jaxbElement.getValue()));
+            } else {
+                logger.warn("###############Class not parsed correctly : {}\n", jaxbElement.getValue().getClass().getSimpleName());
+            }
+        }
+        return coordinates.toArray(new Coordinate[coordinates.size()]);
+    }
+
+    /**
+     * @param arcString
+     * @param parser
+     * @return {@link LngLatAlt[]}
+     * @throws ParserException
+     */
+    private LngLatAlt[] toGeoJsonCoordinates(ArcString arcString, CoordinateBaseParser parser) throws ParserException {
+        checkArgument((arcString.getPosOrPointPropertyOrPointRep().size() == 3), "The Parameter posOrPointPropertyOrPointRep must contains 3 elements");
+        List<LngLatAlt> coordinates = newArrayList();
+        for (JAXBElement jaxbElement : arcString.getPosOrPointPropertyOrPointRep()) {
+            if (jaxbElement.getValue() instanceof PointProperty) {
+                coordinates.add(pointParser.parseGeometryAsGeoJson((PointProperty) jaxbElement.getValue()).getCoordinates());
+            } else if (jaxbElement.getValue() instanceof DirectPosition) {
+                coordinates.add(parser.parseCoordinateAsGeoJson((DirectPosition) jaxbElement.getValue()));
+            } else {
+                logger.warn("###############Class not parsed correctly : {}\n", jaxbElement.getValue().getClass().getSimpleName());
+            }
+        }
+        return coordinates.toArray(new LngLatAlt[coordinates.size()]);
     }
 }

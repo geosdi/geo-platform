@@ -62,7 +62,7 @@ public interface IGPJAXBContextBuilder {
      * @return {@link T}
      * @throws Exception
      */
-    <T> T unmarshall(Path path, Class<T> type) throws Exception;
+    <T> T unmarshal(Path path, Class<T> type) throws Exception;
 
     /**
      * @param file

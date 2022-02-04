@@ -46,8 +46,7 @@ import org.locationtech.jts.geom.Geometry;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractJTSParser<A extends AbstractGeometry, P extends PropertyType, G extends Geometry>
-        implements JTSParser<A, P, G> {
+public abstract class AbstractJTSParser<A extends AbstractGeometry, P extends PropertyType, G extends Geometry> implements JTSParser<A, P, G> {
 
     protected final AbstractGMLObjectFactory gmlObjectFactory;
     protected final AbstractJTSSRSParser srsParser;
@@ -56,8 +55,7 @@ public abstract class AbstractJTSParser<A extends AbstractGeometry, P extends Pr
      * @param theGmlObjectFactory
      * @param theSrsParser
      */
-    public AbstractJTSParser(AbstractGMLObjectFactory theGmlObjectFactory,
-            AbstractJTSSRSParser theSrsParser) {
+    public AbstractJTSParser(AbstractGMLObjectFactory theGmlObjectFactory, AbstractJTSSRSParser theSrsParser) {
         this.gmlObjectFactory = theGmlObjectFactory;
         this.srsParser = theSrsParser;
     }

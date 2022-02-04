@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor;
 
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.linerarring.GMLBaseLinearRingParser;
 
+import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo.*;
 import static org.geosdi.geoplatform.gml.api.parser.base.parameter.bridge.implementor.BaseParameterEnum.DEFAULT_LINEAR_RING_PARSER;
 
@@ -71,6 +72,6 @@ public class LinearRingParserParameter implements BaseParameterValue<GMLBaseLine
      */
     @Override
     public Boolean isValid() {
-        return Boolean.TRUE;
+        return TRUE;
     }
 }

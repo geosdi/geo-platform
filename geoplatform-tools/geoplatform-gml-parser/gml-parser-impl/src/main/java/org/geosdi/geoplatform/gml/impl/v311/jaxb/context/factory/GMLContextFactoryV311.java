@@ -40,8 +40,11 @@ import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.GMLJAXBContextSimpleV31
 import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.pool.GMLJAXBContextPooledV311;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nullable;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+
+import static org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextType.SIMPLE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -68,8 +71,8 @@ public class GMLContextFactoryV311 {
      * @param type
      * @return {@link GMLJAXBContext}
      */
-    public static GMLJAXBContext createJAXBContext(GMLContextType type) {
-        switch (type) {
+    public static GMLJAXBContext createJAXBContext(@Nullable GMLContextType type) {
+        switch (type != null ? type : SIMPLE) {
             case SIMPLE:
                 return new GMLJAXBContextSimpleV311(jaxbContext);
             case POOLED:

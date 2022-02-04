@@ -35,14 +35,6 @@
             <version>${project.version}</version>
         </dependency>
 
-        <!-- =========================================================== -->
-        <!-- ========================== RX3Java ======================== -->
-        <!-- =========================================================== -->
-        <dependency>
-            <groupId>io.reactivex.rxjava3</groupId>
-            <artifactId>rxjava</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>net.jcip</groupId>
             <artifactId>jcip-annotations</artifactId>

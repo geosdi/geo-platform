@@ -39,6 +39,7 @@ package org.geosdi.geoplatform.gml.api.parameter;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FunctionalInterface
 public interface ParameterValue<V> {
 
     /**

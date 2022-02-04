@@ -43,13 +43,14 @@
 
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -72,11 +73,7 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CircleType")
-public class CircleType
-    extends ArcType
-    implements ToString
-{
-
+public class CircleType extends ArcType implements ToString {
 
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;

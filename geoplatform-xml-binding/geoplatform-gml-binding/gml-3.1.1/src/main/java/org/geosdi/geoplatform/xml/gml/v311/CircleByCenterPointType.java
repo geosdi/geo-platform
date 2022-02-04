@@ -43,22 +43,24 @@
 
 package org.geosdi.geoplatform.xml.gml.v311;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
 import org.jvnet.jaxb2_commons.lang.JAXBToStringStrategy;
 import org.jvnet.jaxb2_commons.lang.ToString;
 import org.jvnet.jaxb2_commons.lang.ToStringStrategy;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
 
 /**
  * A CircleByCenterPoint is an ArcByCenterPoint with identical start and end angle to form a full circle. Again, this represenation can be used only in 2D.
- * 
+ *
  * <p>Java class for CircleByCenterPointType complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType name="CircleByCenterPointType">
  *   &lt;complexContent>
@@ -67,16 +69,11 @@ import org.jvnet.jaxb2_commons.locator.ObjectLocator;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
+@XmlRootElement(name = "CircleByCenterPointType")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CircleByCenterPointType")
-public class CircleByCenterPointType
-    extends ArcByCenterPointType
-    implements ToString
-{
-
+public class CircleByCenterPointType extends ArcByCenterPointType implements ToString {
 
     public String toString() {
         final ToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;

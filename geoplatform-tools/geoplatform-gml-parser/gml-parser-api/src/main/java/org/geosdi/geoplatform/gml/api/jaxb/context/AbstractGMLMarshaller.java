@@ -40,6 +40,8 @@ import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.geosdi.geoplatform.gml.api.parser.jts.geometry.sextante.JTSSextanteParser;
 import org.locationtech.jts.geom.Geometry;
 
+import javax.annotation.Nonnull;
+import javax.annotation.meta.When;
 import javax.xml.bind.JAXBElement;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -53,7 +55,11 @@ public abstract class AbstractGMLMarshaller implements GMLMarshaller {
 
     private final JTSSextanteParser jtsSextanteParser;
 
-    public AbstractGMLMarshaller(JTSSextanteParser theJtsSextanteParser) {
+    /**
+     * @param theJtsSextanteParser
+     */
+    protected AbstractGMLMarshaller(@Nonnull(when = When.NEVER) JTSSextanteParser theJtsSextanteParser) {
+        checkArgument(theJtsSextanteParser != null, "The Parameter jtsSextanteParser must not be null.");
         this.jtsSextanteParser = theJtsSextanteParser;
     }
 
@@ -64,8 +70,7 @@ public abstract class AbstractGMLMarshaller implements GMLMarshaller {
      */
     protected JAXBElement<? extends AbstractGeometry> buildJAXBElement(Object object) throws ParserException {
         checkNotNull(object, "The Object to parse must not be null.");
-        checkArgument(object instanceof Geometry, "The GMLMarshaller ßmust marshall only objects that are instance "
-                + "of JTS Geometry.");
+        checkArgument(object instanceof Geometry, "The GMLMarshaller must marshall only objects that are instance of JTS Geometry.");
         return this.jtsSextanteParser.buildJAXBElement((Geometry) object);
     }
 }

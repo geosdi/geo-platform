@@ -45,7 +45,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.StringReader;
 
+import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -65,23 +67,36 @@ public class GMLCurveParserTest {
     public void a_curveJTSParserTest() throws Exception {
         CurveType curveType = GPJAXBContextBuilder.newInstance().unmarshal(new File(of(new File(".").getCanonicalPath(),
                 "src", "test", "resources", "Curve.xml")
-                .collect(joining(File.separator))), CurveType.class);
-        logger.info("##########################MULTI_LINE_STRING_JTS : {}\n", curveParser.parseGeometry(curveType));
+                .collect(joining(separator))), CurveType.class);
+        logger.info("##########################CURVE_STRING_JTS : {}\n", curveParser.parseGeometry(curveType));
     }
 
     @Test
     public void b_curveJTSParserTest() throws Exception {
         CurveType curveType = GPJAXBContextBuilder.newInstance().unmarshal(new File(of(new File(".").getCanonicalPath(),
                 "src", "test", "resources", "Curve1.xml")
-                .collect(joining(File.separator))), CurveType.class);
-        logger.info("##########################MULTI_LINE_STRING_JTS : {}\n", curveParser.parseGeometry(curveType));
+                .collect(joining(separator))), CurveType.class);
+        logger.info("##########################CURVE_STRING_JTS : {}\n", curveParser.parseGeometry(curveType));
     }
 
     @Test
     public void c_curveJTSParserTest() throws Exception {
         CurveType curveType = GPJAXBContextBuilder.newInstance().unmarshal(new File(of(new File(".").getCanonicalPath(),
                 "src", "test", "resources", "Curve2.xml")
-                .collect(joining(File.separator))), CurveType.class);
-        logger.info("##########################MULTI_LINE_STRING_JTS : {}\n", curveParser.parseGeometry(curveType));
+                .collect(joining(separator))), CurveType.class);
+        logger.info("##########################CURVE_STRING_JTS : {}\n", curveParser.parseGeometry(curveType));
+    }
+
+    @Test
+    public void d_curveJTSParserTest() throws Exception {
+        CurveType curveType = GPJAXBContextBuilder.newInstance().unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                + "<gml:Curve xmlns:gml=\"http://www.opengis.net/gml\" srsName=\"SDO:\">\n"
+                + "   <gml:segments>\n"
+                + "      <gml:LineStringSegment>\n"
+                + "         <gml:posList srsDimension=\"2\">2.0 2.0 2.0 4.0 8.0 4.0 12.0 4.0 12.0 10.0 8.0 10.0 5.0 14.0</gml:posList>\n"
+                + "      </gml:LineStringSegment>\n"
+                + "   </gml:segments>\n"
+                + "</gml:Curve>"), CurveType.class);
+        logger.info("##########################CURVE_STRING_JTS : {}\n", curveParser.parseGeometry(curveType));
     }
 }

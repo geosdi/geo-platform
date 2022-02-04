@@ -45,14 +45,11 @@ import org.geosdi.geoplatform.support.bridge.store.GPImplementorStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.toMap;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -69,7 +66,7 @@ public class JTSParameterValueStore implements GPImplementorStore<JTSParameterVa
     static {
         jtsParameterValueImplementors = finder.getValidImplementors()
                 .stream()
-                .collect(Collectors.toMap(GPImplementor::getKey, identity()));
+                .collect(toMap(GPImplementor::getKey, identity(), (v1, v2) -> v1, LinkedHashMap::new));
         logger.debug("@@@@@@@@@@@@@@@@@@@@@@{} up with {} values.\n\n", JTSParameterValueStore.class.getSimpleName(),
                 jtsParameterValueImplementors.size());
     }

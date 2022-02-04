@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api;
 
+import javax.xml.bind.JAXBElement;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -65,9 +66,14 @@ public interface ArcString extends AbstractCurveSegment {
     boolean isSetPosList();
 
     /**
-     * @return {@link List}
+     * @return {@link List<JAXBElement<?>}
      */
-    List getPosOrPointPropertyOrPointRep();
+    List<JAXBElement<?>> getPosOrPointPropertyOrPointRep();
+
+    /**
+     * @return {@link Boolean}
+     */
+    boolean isSetPosOrPointPropertyOrPointRep();
 
     /**
      * @return {@link BigInteger}

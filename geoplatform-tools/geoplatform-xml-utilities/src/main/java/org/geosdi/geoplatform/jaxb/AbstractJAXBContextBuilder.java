@@ -68,7 +68,7 @@ public abstract class AbstractJAXBContextBuilder implements IGPJAXBContextBuilde
      * @throws Exception
      */
     @Override
-    public <T> T unmarshall(Path path, Class<T> type) throws Exception {
+    public <T> T unmarshal(Path path, Class<T> type) throws Exception {
         checkArgument((path != null) && (path.toFile().exists() && !(path.toFile().isDirectory())), "The Parameter Path must not be null and relative File must exists and must not a Directory");
         return unmarshal(path.toFile(), type);
     }

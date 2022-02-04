@@ -40,12 +40,16 @@ import org.geosdi.geoplatform.gml.api.ArcString;
 import org.geosdi.geoplatform.gml.api.LineStringSegment;
 import org.geosdi.geoplatform.gml.api.parser.base.coordinate.CoordinateBaseParser;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class AbstractCurveGeoJsonHandler {
+
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * @param lineStringSegment

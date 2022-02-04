@@ -136,13 +136,14 @@ public class ArcStringType extends AbstractCurveSegmentType implements ToString,
     @Override
     public List<JAXBElement<?>> getPosOrPointPropertyOrPointRep() {
         if (posOrPointPropertyOrPointRep == null) {
-            posOrPointPropertyOrPointRep = new ArrayList<JAXBElement<?>>();
+            posOrPointPropertyOrPointRep = new ArrayList();
         }
         return this.posOrPointPropertyOrPointRep;
     }
 
+    @Override
     public boolean isSetPosOrPointPropertyOrPointRep() {
-        return ((this.posOrPointPropertyOrPointRep!= null)&&(!this.posOrPointPropertyOrPointRep.isEmpty()));
+        return ((this.posOrPointPropertyOrPointRep!= null) && (!this.posOrPointPropertyOrPointRep.isEmpty()));
     }
 
     public void unsetPosOrPointPropertyOrPointRep() {

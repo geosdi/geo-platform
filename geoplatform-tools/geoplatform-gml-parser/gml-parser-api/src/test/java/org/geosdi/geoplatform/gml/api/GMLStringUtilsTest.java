@@ -42,6 +42,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StopWatch;
 
 import java.util.Iterator;
@@ -54,6 +56,8 @@ import static org.junit.Assert.assertTrue;
 
 public class GMLStringUtilsTest {
 
+    private static final Logger logger = LoggerFactory.getLogger(GMLStringUtilsTest.class);
+    //
     private static int testDataCount = 5000;
     private static int testDataBlockCount = 100;
     private static String separator = "1234";
@@ -62,7 +66,7 @@ public class GMLStringUtilsTest {
     private static final List<String> testData = new LinkedList<String>();
     private static final List<Integer> testDataSize = new LinkedList<Integer>();
 
-    private static final StopWatch stopWatch = new StopWatch();
+    private static final StopWatch stopWatch = new StopWatch("SPLIT");
 
     @BeforeClass
     public static void generateTestData() {
@@ -84,7 +88,7 @@ public class GMLStringUtilsTest {
 
     @AfterClass
     public static void printTestSummery() {
-        System.out.println(stopWatch.prettyPrint());
+        logger.info("##################TOTAL_TIME : \n{}\n", stopWatch.prettyPrint());
     }
 
     @Test

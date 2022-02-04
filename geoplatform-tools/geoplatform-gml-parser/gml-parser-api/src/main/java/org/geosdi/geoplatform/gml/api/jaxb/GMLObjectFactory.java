@@ -89,37 +89,88 @@ public interface GMLObjectFactory {
      */
     Point createPointType();
 
+    /**
+     * @return {@link PointProperty}
+     */
     PointProperty createPointPropertyType();
 
+    /**
+     * @return {@link LineString}
+     */
     LineString createLineStringType();
 
+    /**
+     * @return {@link LineStringProperty}
+     */
     LineStringProperty createLineStringPropertyType();
 
+    /**
+     * @return {@link LinearRing}
+     */
     LinearRing createLinearRingType();
 
+    /**
+     * @return {@link LinearRingProperty}
+     */
     LinearRingProperty createLinearRingPropertyType();
 
+    /**
+     * @return {@link Polygon}
+     */
     Polygon createPolygonType();
 
+    /**
+     * @return {@link PolygonProperty}
+     */
     PolygonProperty createPolygonPropertyType();
 
+    /**
+     * @return {@link MultiPoint}
+     */
     MultiPoint createMultiPointType();
 
+    /**
+     * @return {@link MultiPointProperty}
+     */
     MultiPointProperty createMultiPointPropertyType();
 
+    /**
+     * @return {@link MultiLineString}
+     */
     MultiLineString createMultiLineStringType();
 
+    /**
+     * @return {@link MultiLineStringProperty}
+     */
     MultiLineStringProperty createMultiLineStringPropertyType();
 
+    /**
+     * @return {@link AbstractRingProperty}
+     */
     AbstractRingProperty createAbstractRingPropertyType();
 
+    /**
+     * @return {@link MultiPolygon}
+     */
     MultiPolygon createMultiPolygonType();
 
+    /**
+     * @return {@link MultiPolygonProperty}
+     */
     MultiPolygonProperty createMultiPolygonPropertyType();
 
+    /**
+     * @return {@link MultiGeometry}
+     */
     MultiGeometry createMultiGeometryType();
 
+    /**
+     * @return {@link MultiGeometryProperty}
+     */
     MultiGeometryProperty createMultiGeometryPropertyType();
 
+    /**
+     * @return {@link GeometryProperty}
+     */
     GeometryProperty createGeometryPropertyType();
 }

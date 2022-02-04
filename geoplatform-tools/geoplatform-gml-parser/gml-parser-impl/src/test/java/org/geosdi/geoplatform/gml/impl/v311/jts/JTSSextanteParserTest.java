@@ -79,7 +79,6 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
         lsc[5] = new Coordinate(8.0d, 7.0d);
         lsc[6] = new Coordinate(8.0d, 8.0d);
         lsc[7] = new Coordinate(9.0d, 9.0d);
-
         LineString lineString = geometryFactory.createLineString(lsc);
         lineString.setSRID(4326);
         StringWriter writer = new StringWriter();
@@ -100,13 +99,10 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
         lrc[7] = new Coordinate(13, 9);
         lrc[8] = new Coordinate(11, 7);
         lrc[9] = new Coordinate(7, 7);
-
         LinearRing linearRing = geometryFactory.createLinearRing(lrc);
         linearRing.setSRID(4326);
-
         StringWriter writer = new StringWriter();
         jaxbContext.acquireMarshaller().marshal(linearRing, writer);
-
         logger.info("GML V311 LinearRing : \n\n" + writer);
     }
 
@@ -121,8 +117,7 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
 
     @Test
     public void e_testMultiPoint() throws Exception {
-        Geometry multiPoint = reader.read("MULTIPOINT ((10 40), (40 30), "
-                + "(20 20), (30 10))");
+        Geometry multiPoint = reader.read("MULTIPOINT ((10 40), (40 30), (20 20), (30 10))");
         StringWriter writer = new StringWriter();
         jaxbContext.acquireMarshaller().marshal(multiPoint, writer);
         logger.info("GML V311 MultiPoint : \n\n" + writer);
@@ -130,8 +125,7 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
 
     @Test
     public void f_testMultiLineString() throws Exception {
-        Geometry multiLineString = reader.read(
-                "MULTILINESTRING ((10 10, 20 20, 10 40), "
+        Geometry multiLineString = reader.read("MULTILINESTRING ((10 10, 20 20, 10 40), "
                         + "(40 40, 30 30, 40 20, 30 10))");
         StringWriter writer = new StringWriter();
         jaxbContext.acquireMarshaller().marshal(multiLineString, writer);
@@ -150,13 +144,11 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
 
     @Test
     public void h_testGeometryCollection() throws Exception {
-        Geometry geometryCollection = reader.read(
-                "GEOMETRYCOLLECTION(POINT(0 0), "
+        Geometry geometryCollection = reader.read("GEOMETRYCOLLECTION(POINT(0 0), "
                         + "POINT(1 0), POINT(1 1), POINT(0 1), LINESTRING(4 6,7 10), "
                         + "POLYGON ((35 10, 10 20, 15 40, 45 45, 35 10),"
                         + "(20 30, 35 35, 30 20, 20 30)), LINEARRING (7 7, 6 9, 6 11,"
                         + " 7 12, 9 11, 11 12, 13 11, 13 9, 11 7, 7 7))");
-
         StringWriter writer = new StringWriter();
         jaxbContext.acquireMarshaller().marshal(geometryCollection, writer);
         logger.info("GML V311 Geometry Collection : \n\n" + writer);

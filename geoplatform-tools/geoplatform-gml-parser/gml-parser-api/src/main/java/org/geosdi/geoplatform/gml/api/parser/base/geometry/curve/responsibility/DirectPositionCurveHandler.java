@@ -61,9 +61,9 @@ public class DirectPositionCurveHandler extends AbstractCurveHandler {
      */
     @Override
     public LineString parseGeometry(GeometryFactory geometryFactory, LineStringSegment lineStringSegment, CoordinateBaseParser parser) throws ParserException {
-        return lineStringSegment.isSetPosList()
-                ? geometryFactory.createLineString(parser.parseCoordinates(lineStringSegment.getPosList()))
-                : super.forwardParseGeometry(geometryFactory, lineStringSegment, parser);
+        return lineStringSegment.isSetPosList() ?
+                geometryFactory.createLineString(parser.parseCoordinates(lineStringSegment.getPosList())) :
+                super.forwardParseGeometry(geometryFactory, lineStringSegment, parser);
     }
 
     /**
@@ -74,9 +74,9 @@ public class DirectPositionCurveHandler extends AbstractCurveHandler {
      */
     @Override
     public org.geojson.LineString parseGeometryAsGeoJson(LineStringSegment lineStringSegment, CoordinateBaseParser parser) throws ParserException {
-        return lineStringSegment.isSetPosList()
-                ? new org.geojson.LineString(parser.parseCoordinatesAsGeoJson(lineStringSegment.getPosList()))
-                : super.forwardParseGeometryAsGeoJson(lineStringSegment, parser);
+        return lineStringSegment.isSetPosList() ?
+                new org.geojson.LineString(parser.parseCoordinatesAsGeoJson(lineStringSegment.getPosList())) :
+                super.forwardParseGeometryAsGeoJson(lineStringSegment, parser);
     }
 
     /**
@@ -88,9 +88,9 @@ public class DirectPositionCurveHandler extends AbstractCurveHandler {
      */
     @Override
     public LineString parseGeometry(GeometryFactory geometryFactory, ArcString arcString, CoordinateBaseParser parser) throws ParserException {
-        return arcString.isSetPosList()
-                ? geometryFactory.createLineString(parser.parseCoordinates(arcString.getPosList()))
-                : super.forwardParseGeometry(geometryFactory, arcString, parser);
+        return arcString.isSetPosList() ?
+                geometryFactory.createLineString(parser.parseCoordinates(arcString.getPosList())) :
+                super.forwardParseGeometry(geometryFactory, arcString, parser);
     }
 
     /**
@@ -101,8 +101,8 @@ public class DirectPositionCurveHandler extends AbstractCurveHandler {
      */
     @Override
     public org.geojson.LineString parseGeometryAsGeoJson(ArcString arcString, CoordinateBaseParser parser) throws ParserException {
-        return arcString.isSetPosList()
-                ? new org.geojson.LineString(parser.parseCoordinatesAsGeoJson(arcString.getPosList()))
-                : super.forwardParseGeometryAsGeoJson(arcString, parser);
+        return arcString.isSetPosList() ?
+                new org.geojson.LineString(parser.parseCoordinatesAsGeoJson(arcString.getPosList())) :
+                super.forwardParseGeometryAsGeoJson(arcString, parser);
     }
 }

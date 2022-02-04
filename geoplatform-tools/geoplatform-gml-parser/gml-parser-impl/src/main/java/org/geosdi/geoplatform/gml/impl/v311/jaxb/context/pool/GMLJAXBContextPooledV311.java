@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.gml.impl.v311.jaxb.context.pool;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLMarshaller;
 import org.geosdi.geoplatform.gml.api.jaxb.context.pool.GMLJAXBContextPooled;
-import org.geosdi.geoplatform.gml.api.jaxb.context.pool.PoolConfig;
+import org.geosdi.geoplatform.gml.api.jaxb.context.pool.GPGMLPoolConfig;
 import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.GMLMarshallerV311;
 import org.w3c.dom.Node;
 import org.xml.sax.ContentHandler;
@@ -67,7 +67,7 @@ public class GMLJAXBContextPooledV311 extends GMLJAXBContextPooled {
      */
     public GMLJAXBContextPooledV311(@Nonnull(when = NEVER) JAXBContext theJaxbContext) {
         super(theJaxbContext);
-        this.gmlMarshallerPool = new GenericObjectPool<GMLMarshaller>(new GMLMarshallerFactoryV311(theJaxbContext), new PoolConfig());
+        this.gmlMarshallerPool = new GenericObjectPool<GMLMarshaller>(new GMLMarshallerFactoryV311(theJaxbContext), new GPGMLPoolConfig());
     }
 
     /**

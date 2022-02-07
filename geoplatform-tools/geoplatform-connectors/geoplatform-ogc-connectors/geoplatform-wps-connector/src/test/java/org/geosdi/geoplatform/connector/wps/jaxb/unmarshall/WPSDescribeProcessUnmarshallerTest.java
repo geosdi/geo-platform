@@ -48,6 +48,9 @@ import org.slf4j.LoggerFactory;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 
+import static java.io.File.separator;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.xml.wps.v100.context.WPSContextServiceProviderV100.WPS_CONTEXT_SERVICE_PROVIDER;
 
 /**
@@ -73,8 +76,8 @@ public class WPSDescribeProcessUnmarshallerTest {
 
     @BeforeClass
     public static void buildDirFiles() throws Exception {
-        dirFiles = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/unmarshall/describe/";
+        dirFiles = of(new File(".").getCanonicalPath(), "src", "test", "resources", "unmarshall", "describe")
+                .collect(joining(separator, "", separator));
     }
 
     @DataPoints

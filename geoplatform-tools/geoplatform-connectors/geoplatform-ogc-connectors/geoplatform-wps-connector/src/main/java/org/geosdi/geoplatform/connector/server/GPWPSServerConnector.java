@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server;
 
+import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
 import org.geosdi.geoplatform.connector.WPSVersion;
 import org.geosdi.geoplatform.connector.WPSVersionException;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
@@ -44,9 +45,12 @@ import org.geosdi.geoplatform.connector.server.request.v100.WPSDescribeProcessRe
 import org.geosdi.geoplatform.connector.server.request.v100.WPSGetCapabilitiesRequestV100;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.net.URL;
 
-import static org.geosdi.geoplatform.connector.WPSVersion.toWPSVersion;
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -57,37 +61,20 @@ public class GPWPSServerConnector extends GPAbstractServerConnector implements G
     private final WPSVersion version;
 
     /**
-     * <p>
-     * Create an Instance of {@link GPWPSServerConnector} with the server URL
-     * and the specific version.</p>
-     *
-     * @param urlServer the String that represent WPS_100 server URL
-     * @param version   the value of WPS_100 version. Must be 1.0.0
+     * @param urlServer
+     * @param version
      */
-    public GPWPSServerConnector(String urlServer, String version) {
+    protected GPWPSServerConnector(@Nonnull(when = NEVER) String urlServer, @Nonnull(when = NEVER) WPSVersion version) {
         this(urlServer, null, version);
     }
 
     /**
-     * <p>
-     * Create an instance of {@link GPWPSServerConnector} with the server URL,
-     * {@link GPSecurityConnector} for security and version.</p>
-     *
-     * @param urlServer         the String that represent WPS_100 server URL
-     * @param securityConnector {@link GPSecurityConnector}
-     * @param version           the value of WPS_100 version. Must be 1.0.0
+     * @param urlServer
+     * @param securityConnector
+     * @param version
      */
-    public GPWPSServerConnector(String urlServer, GPSecurityConnector securityConnector, String version) {
-        this(analyzesServerURL(urlServer), securityConnector, toWPSVersion(version));
-    }
-
-    /**
-     * @param theUrl
-     * @param theSecurityConnector
-     */
-    public GPWPSServerConnector(URL theUrl, GPSecurityConnector theSecurityConnector, WPSVersion version) {
-        super(theUrl, theSecurityConnector);
-        this.version = version;
+    protected GPWPSServerConnector(@Nonnull(when = NEVER) String urlServer, @Nullable GPSecurityConnector securityConnector, @Nonnull(when = NEVER) WPSVersion version) {
+        this(analyzesServerURL(urlServer), securityConnector, version);
     }
 
     /**
@@ -96,9 +83,18 @@ public class GPWPSServerConnector extends GPAbstractServerConnector implements G
      * @param securityConnector
      * @param version
      */
-    public GPWPSServerConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig,
-            GPSecurityConnector securityConnector, String version) {
-        this(analyzesServerURL(urlServer), pooledConnectorConfig, securityConnector, toWPSVersion(version));
+    protected GPWPSServerConnector(@Nonnull(when = NEVER) String urlServer, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
+            @Nullable GPSecurityConnector securityConnector, @Nonnull(when = NEVER) WPSVersion version) {
+        this(analyzesServerURL(urlServer), pooledConnectorConfig, securityConnector, version);
+    }
+
+    /**
+     * @param server
+     * @param securityConnector
+     * @param theVersion
+     */
+    protected GPWPSServerConnector(@Nonnull(when = NEVER) URL server, @Nullable GPSecurityConnector securityConnector, @Nonnull(when = NEVER) WPSVersion theVersion) {
+        this(server, null, securityConnector, theVersion);
     }
 
     /**
@@ -107,9 +103,24 @@ public class GPWPSServerConnector extends GPAbstractServerConnector implements G
      * @param securityConnector
      * @param theVersion
      */
-    public GPWPSServerConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig,
-            GPSecurityConnector securityConnector, WPSVersion theVersion) {
+    protected GPWPSServerConnector(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
+            @Nullable GPSecurityConnector securityConnector, @Nonnull(when = NEVER) WPSVersion theVersion) {
         super(server, securityConnector, pooledConnectorConfig);
+        checkArgument(theVersion != null, "The Parameter version must not be null.");
+        this.version = theVersion;
+    }
+
+    /**
+     * @param server
+     * @param pooledConnectorConfig
+     * @param securityConnector
+     * @param theVersion
+     */
+    protected GPWPSServerConnector(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
+            @Nullable GPSecurityConnector securityConnector, @Nullable SSLConnectionSocketFactory theSSLConnectionSocketFactory,
+            @Nonnull(when = NEVER) WPSVersion theVersion) {
+        super(server, securityConnector, pooledConnectorConfig, theSSLConnectionSocketFactory);
+        checkArgument(theVersion != null, "The Parameter version must not be null.");
         this.version = theVersion;
     }
 

@@ -47,8 +47,7 @@ import java.util.List;
  */
 @Setter
 @Getter
-public abstract class WPSBaseDescribeProcessRequest<T, Request> extends WPSBaseRequest<T, Request>
-        implements WPSDescribeProcessRequest<T> {
+public abstract class WPSBaseDescribeProcessRequest<T, Request> extends WPSBaseRequest<T, Request> implements WPSDescribeProcessRequest<T> {
 
     protected List<String> processIdentifiers;
 

@@ -41,7 +41,8 @@ import org.junit.Test;
 
 import java.io.BufferedWriter;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+
+import static java.nio.file.Paths.get;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -54,8 +55,7 @@ public class WPSGetCapabilitiesTest extends WPSTestConfigurator {
         WPSGetCapabilitiesRequest<WPSCapabilitiesType> request = wpsServerConnector.createGetCapabilitiesRequest();
         String responseAsString = request.formatResponseAsString(2);
         logger.info("WPS_100 GetCapabilities @@@@@@@@@@@@@@@@@@@@@@@ \n{}\n", responseAsString);
-
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("target/WPSGetCapabilitiesV100.xml"))) {
+        try (BufferedWriter writer = Files.newBufferedWriter(get("target/WPSGetCapabilitiesV100.xml"))) {
             writer.write(responseAsString);
         }
     }
@@ -66,8 +66,7 @@ public class WPSGetCapabilitiesTest extends WPSTestConfigurator {
         WPSGetCapabilitiesRequest<WPSCapabilitiesType> request = wpsHttpsServerConnector.createGetCapabilitiesRequest();
         String responseAsString = request.formatResponseAsString(2);
         logger.info("WPS_100 Https GetCapabilities @@@@@@@@@@@@@@@@@@@@@@@ \n{}\n", responseAsString);
-
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("target/WPSHttpsGetCapabilitiesV100.xml"))) {
+        try (BufferedWriter writer = Files.newBufferedWriter(get("target/WPSHttpsGetCapabilitiesV100.xml"))) {
             writer.write(responseAsString);
         }
     }

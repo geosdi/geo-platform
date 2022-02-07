@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.connector.wps;
 
-import org.geosdi.geoplatform.connector.GPWPSConnectorStore;
+import org.geosdi.geoplatform.connector.server.GPWPSConnectorStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 
-import static org.geosdi.geoplatform.connector.WPSConnectorBuilder.newWPSConnectorBuilder;
+import static org.geosdi.geoplatform.connector.server.WPSConnectorBuilder.wpsConnectorBuilder;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 
 /**
@@ -57,7 +57,7 @@ public class WPSTestConfigurator {
 
     static {
         try {
-            wpsServerConnector = newWPSConnectorBuilder()
+            wpsServerConnector = wpsConnectorBuilder()
                     .withServerUrl(new URL(wpsURL))
                     .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                             .withMaxTotalConnections(40)
@@ -65,7 +65,7 @@ public class WPSTestConfigurator {
                             .withMaxRedirect(10)
                             .build())
                     .build();
-            wpsHttpsServerConnector = newWPSConnectorBuilder()
+            wpsHttpsServerConnector = wpsConnectorBuilder()
                     .withServerUrl(new URL(wpsHttpsURL))
                     .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                             .withMaxTotalConnections(20)

@@ -40,7 +40,6 @@ import org.geosdi.geoplatform.connector.geoserver.request.security.roles.Geoserv
 import org.geosdi.geoplatform.connector.geoserver.request.security.roles.GeoserverLoadUserRolesRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 
@@ -59,11 +58,9 @@ class GPGeoserverLoadGroupRolesRequest extends GPJsonGetConnectorRequest<GPGeose
 
     /**
      * @param server
-     * @param theJacksonSupport
      */
-    GPGeoserverLoadGroupRolesRequest(@Nonnull(when = NEVER) GPServerConnector server,
-            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
-        super(server, theJacksonSupport);
+    GPGeoserverLoadGroupRolesRequest(@Nonnull(when = NEVER) GPServerConnector server) {
+        super(server, JACKSON_JAXB_XML_SUPPORT);
         this.group = withInitial(() -> null);
     }
 
@@ -85,9 +82,8 @@ class GPGeoserverLoadGroupRolesRequest extends GPJsonGetConnectorRequest<GPGeose
         String group = this.group.get();
         checkArgument(group != null && !group.trim().isEmpty(), "The group must not be null.");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ?
-                baseURI.concat("security/roles/").concat("group/").concat(group).concat(".json") :
-                baseURI.concat("/security/roles/").concat("group/").concat(group).concat(".json")));
+        return ((baseURI.endsWith("/") ? baseURI.concat("security/roles/").concat("group/").concat(group) :
+                baseURI.concat("/security/roles/").concat("group/").concat(group)));
     }
 
     /**

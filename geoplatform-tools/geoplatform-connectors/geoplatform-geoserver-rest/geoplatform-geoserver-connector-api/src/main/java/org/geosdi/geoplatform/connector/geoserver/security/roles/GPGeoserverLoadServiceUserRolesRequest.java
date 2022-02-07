@@ -40,7 +40,6 @@ import org.geosdi.geoplatform.connector.geoserver.request.security.roles.Geoserv
 import org.geosdi.geoplatform.connector.geoserver.request.security.roles.GeoserverLoadUserRolesRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 
@@ -60,11 +59,9 @@ class GPGeoserverLoadServiceUserRolesRequest extends GPJsonGetConnectorRequest<G
 
     /**
      * @param server
-     * @param theJacksonSupport
      */
-    GPGeoserverLoadServiceUserRolesRequest(@Nonnull(when = NEVER) GPServerConnector server,
-            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
-        super(server, theJacksonSupport);
+    GPGeoserverLoadServiceUserRolesRequest(@Nonnull(when = NEVER) GPServerConnector server) {
+        super(server, JACKSON_JAXB_XML_SUPPORT);
         this.user = withInitial(() -> null);
         this.service = withInitial(() -> null);
     }
@@ -100,10 +97,8 @@ class GPGeoserverLoadServiceUserRolesRequest extends GPJsonGetConnectorRequest<G
         checkArgument(service != null && !service.trim().isEmpty(), "The service must not be null.");
         String baseURI = this.serverURI.toString();
         return ((baseURI.endsWith("/") ?
-                baseURI.concat("security/roles/service/").concat(service).concat("/user/").concat(user)
-                        .concat(".json") :
-                baseURI.concat("/security/roles/service/").concat(service).concat("/user/").concat(user)
-                        .concat(".json")));
+                baseURI.concat("security/roles/service/").concat(service).concat("/user/").concat(user) :
+                baseURI.concat("/security/roles/service/").concat(service).concat("/user/").concat(user)));
     }
 
     /**

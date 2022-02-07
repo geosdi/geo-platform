@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.connector.store.roles;
 import org.geosdi.geoplatform.connector.geoserver.model.security.user.GPGeoserverUserBody;
 import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreTest;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,27 +55,23 @@ public class GeoserverConnectorRolesTest extends GPBaseGeoserverConnectorStoreTe
     //
 
     @Test
-    @Ignore
     public void a_loadRoles() throws Exception {
         logger.info("################### {}\n", this.geoserverConnectorStoreV2_19_x.loadRoles().getResponse());
     }
 
     @Test
-    @Ignore
     public void b_loadUserRoles() throws Exception {
         logger.info("################### {}\n",
                 this.geoserverConnectorStoreV2_19_x.loadUserRoles().withUser("admin").getResponse());
     }
 
     @Test
-    @Ignore
     public void c_loadGroupRoles() throws Exception {
         logger.info("################### {}\n",
                 this.geoserverConnectorStoreV2_19_x.loadGroupRoles().withGroup("test").getResponse());
     }
 
     @Test
-    @Ignore
     public void d_loadServiceUserRoles() throws Exception {
         logger.info("################### {}\n",
                 this.geoserverConnectorStoreV2_19_x.loadServiceUserRoles().withService("default").withUser("admin")
@@ -84,7 +79,6 @@ public class GeoserverConnectorRolesTest extends GPBaseGeoserverConnectorStoreTe
     }
 
     @Test
-    @Ignore
     public void e_loadServiceGroupRoles() throws Exception {
         logger.info("################### {}\n",
                 this.geoserverConnectorStoreV2_19_x.loadServiceGroupRoles().withService("default").withGroup("test")

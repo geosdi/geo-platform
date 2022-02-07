@@ -36,6 +36,8 @@ package org.geosdi.geoplatform.connector.geoserver.request.security.roles;
 
 import org.geosdi.geoplatform.connector.geoserver.model.security.role.GPGeoserverRoles;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
+import org.geosdi.geoplatform.support.jackson.xml.jaxb.GPJacksonJAXBXmlSupport;
+import org.geosdi.geoplatform.support.jackson.xml.jaxb.JacksonJAXBXmlSupport;
 
 import javax.annotation.Nonnull;
 
@@ -46,6 +48,8 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 public interface GeoserverLoadServiceGroupRolesRequest extends GPJsonConnectorRequest<GPGeoserverRoles, GeoserverLoadServiceGroupRolesRequest> {
+
+    JacksonJAXBXmlSupport JACKSON_JAXB_XML_SUPPORT = new GPJacksonJAXBXmlSupport();
 
     /**
      * @param theGroup

@@ -115,7 +115,7 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
         switch (version) {
             case V220x:
             case V219x:
-                return new GPGeoserverLoadRolesRequest(this, emptyJacksonSupport);
+                return new GPGeoserverLoadRolesRequest(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }
@@ -129,7 +129,7 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
         switch (version) {
             case V220x:
             case V219x:
-                return new GPGeoserverLoadUserRolesRequest(this, emptyJacksonSupport);
+                return new GPGeoserverLoadUserRolesRequest(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }
@@ -143,7 +143,7 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
         switch (version) {
             case V220x:
             case V219x:
-                return new GPGeoserverLoadGroupRolesRequest(this, emptyJacksonSupport);
+                return new GPGeoserverLoadGroupRolesRequest(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }
@@ -157,7 +157,7 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
         switch (version) {
             case V220x:
             case V219x:
-                return new GPGeoserverLoadServiceUserRolesRequest(this, emptyJacksonSupport);
+                return new GPGeoserverLoadServiceUserRolesRequest(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }
@@ -171,7 +171,7 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
         switch (version) {
             case V220x:
             case V219x:
-                return new GPGeoserverLoadServiceGroupRolesRequest(this, emptyJacksonSupport);
+                return new GPGeoserverLoadServiceGroupRolesRequest(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

@@ -39,7 +39,6 @@ import org.geosdi.geoplatform.connector.geoserver.model.security.role.GPGeoserve
 import org.geosdi.geoplatform.connector.geoserver.request.security.roles.GeoserverLoadRolesRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 
@@ -54,11 +53,9 @@ class GPGeoserverLoadRolesRequest extends GPJsonGetConnectorRequest<GPGeoserverR
 
     /**
      * @param server
-     * @param theJacksonSupport
      */
-    GPGeoserverLoadRolesRequest(@Nonnull(when = NEVER) GPServerConnector server,
-            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
-        super(server, theJacksonSupport);
+    GPGeoserverLoadRolesRequest(@Nonnull(when = NEVER) GPServerConnector server) {
+        super(server, JACKSON_JAXB_XML_SUPPORT);
     }
 
     /**
@@ -67,8 +64,7 @@ class GPGeoserverLoadRolesRequest extends GPJsonGetConnectorRequest<GPGeoserverR
     @Override
     protected String createUriPath() throws Exception {
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("security/roles.json")
-                : baseURI.concat("/security/roles.json")));
+        return ((baseURI.endsWith("/") ? baseURI.concat("security/roles") : baseURI.concat("/security/roles")));
     }
 
     /**

@@ -49,6 +49,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 
+import static java.io.File.separator;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
 import static javax.xml.bind.JAXBContext.newInstance;
 
 /**
@@ -74,8 +77,8 @@ public class WPSGetCapabilitiesUnmarshallTest {
 
     @BeforeClass
     public static void buildDirFiles() throws Exception {
-        dirFiles = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/unmarshall/capabilities/";
+        dirFiles = of(new File(".").getCanonicalPath(), "src", "test", "resources", "unmarshall", "capabilities")
+                .collect(joining(separator, "", separator));
     }
 
     @DataPoints

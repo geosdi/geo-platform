@@ -33,16 +33,22 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector;
+package org.geosdi.geoplatform.connector.server;
 
+import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
+import org.geosdi.geoplatform.connector.WPSConnector;
+import org.geosdi.geoplatform.connector.WPSVersion;
 import org.geosdi.geoplatform.connector.api.GPConnectorStore;
-import org.geosdi.geoplatform.connector.server.GPWPSServerConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.request.WPSDescribeProcessRequest;
 import org.geosdi.geoplatform.connector.server.request.WPSGetCapabilitiesRequest;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.net.URL;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -51,38 +57,21 @@ import java.net.URL;
 public class GPWPSConnectorStore extends GPConnectorStore<GPWPSServerConnector> implements WPSConnector {
 
     /**
-     * @param serverURL
-     */
-    public GPWPSConnectorStore(URL serverURL) {
-        this(serverURL, WPSVersion.WPS_100);
-    }
-
-    /**
-     * @param serverURL
-     * @param theVersion
-     */
-    public GPWPSConnectorStore(URL serverURL, WPSVersion theVersion) {
-        this(serverURL, null, theVersion);
-    }
-
-    /**
-     * @param serverURL
-     * @param security
-     * @param theVersion
-     */
-    public GPWPSConnectorStore(URL serverURL, GPSecurityConnector security, WPSVersion theVersion) {
-        super(new GPWPSServerConnector(serverURL, security, theVersion));
-    }
-
-    /**
-     * @param serverURL
+     * @param server
      * @param pooledConnectorConfig
-     * @param security
-     * @param theVersion
+     * @param securityConnector
      */
-    public GPWPSConnectorStore(URL serverURL, GPPooledConnectorConfig pooledConnectorConfig, GPSecurityConnector security,
-            WPSVersion theVersion) {
-        super(new GPWPSServerConnector(serverURL, pooledConnectorConfig, security, theVersion));
+    protected GPWPSConnectorStore(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig, @Nullable GPSecurityConnector securityConnector, WPSVersion theVersion) {
+        super(new GPWPSServerConnector(server, pooledConnectorConfig, securityConnector, theVersion));
+    }
+
+    /**
+     * @param server
+     * @param pooledConnectorConfig
+     * @param securityConnector
+     */
+    protected GPWPSConnectorStore(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig, @Nullable GPSecurityConnector securityConnector, @Nullable SSLConnectionSocketFactory theSslConnectionSocketFactory, WPSVersion theVersion ) {
+        super(new GPWPSServerConnector(server, pooledConnectorConfig, securityConnector, theSslConnectionSocketFactory, theVersion));
     }
 
     /**

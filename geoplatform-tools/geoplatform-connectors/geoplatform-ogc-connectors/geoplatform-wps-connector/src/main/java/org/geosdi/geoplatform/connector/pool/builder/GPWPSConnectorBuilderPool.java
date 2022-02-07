@@ -36,11 +36,11 @@
 package org.geosdi.geoplatform.connector.pool.builder;
 
 import org.apache.commons.pool2.impl.GenericKeyedObjectPool;
-import org.geosdi.geoplatform.connector.GPWPSConnectorStore;
 import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
 import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorConfig;
 import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorKey;
 import org.geosdi.geoplatform.connector.pool.factory.GPWPSPoolConnectorFactory;
+import org.geosdi.geoplatform.connector.server.GPWPSConnectorStore;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -73,8 +73,7 @@ public class GPWPSConnectorBuilderPool extends AbstractConnectorBuilder<GPWPSCon
     @Override
     public GPWPSConnectorStore build() throws Exception {
         checkNotNull(serverUrl, "WPS Server URL must not be null.");
-        GPPoolConnectorKey keyConnector = new GPPoolConnectorKey(serverUrl, pooledConnectorConfig,
-                securityConnector, version);
+        GPPoolConnectorKey keyConnector = new GPPoolConnectorKey(serverUrl, pooledConnectorConfig, securityConnector, version);
         GPWPSConnectorStore wpsConnectorStore = wpsConnectorPool.borrowObject(keyConnector);
         wpsConnectorPool.returnObject(keyConnector, wpsConnectorStore);
         return wpsConnectorStore;

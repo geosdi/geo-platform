@@ -33,7 +33,7 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector;
+package org.geosdi.geoplatform.connector.server;
 
 import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
 
@@ -47,7 +47,7 @@ import static org.geosdi.geoplatform.connector.WPSVersion.toWPSVersion;
  */
 public final class WPSConnectorBuilder extends AbstractConnectorBuilder<WPSConnectorBuilder, GPWPSConnectorStore> {
 
-    protected WPSConnectorBuilder() {
+    WPSConnectorBuilder() {
         this.withVersion(WPS_100.getVersion());
     }
 
@@ -57,13 +57,13 @@ public final class WPSConnectorBuilder extends AbstractConnectorBuilder<WPSConne
      *
      * @return {@link WPSConnectorBuilder}
      */
-    public static WPSConnectorBuilder newWPSConnectorBuilder() {
+    public static WPSConnectorBuilder wpsConnectorBuilder() {
         return new WPSConnectorBuilder();
     }
 
     @Override
     public GPWPSConnectorStore build() throws Exception {
         checkArgument((this.serverUrl != null), "The Parameter ServerURL must not be null.");
-        return new GPWPSConnectorStore(serverUrl, pooledConnectorConfig, securityConnector, toWPSVersion(this.version));
+        return new GPWPSConnectorStore(serverUrl, pooledConnectorConfig, securityConnector, this.sslConnectionSocketFactory, toWPSVersion(this.version));
     }
 }

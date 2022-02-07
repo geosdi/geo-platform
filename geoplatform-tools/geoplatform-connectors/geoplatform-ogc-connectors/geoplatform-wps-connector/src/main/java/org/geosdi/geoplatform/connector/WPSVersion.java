@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.connector.server.GPServerConnector;
 
 import java.util.Optional;
 
+import static java.lang.Boolean.FALSE;
 import static java.util.Arrays.stream;
 
 /**
@@ -76,7 +77,7 @@ public enum WPSVersion implements GPServerConnector.GPServerConnectorVersion {
     public static WPSVersion toWPSVersion(String version) throws WPSVersionException {
         Optional<WPSVersion> optional = stream(WPSVersion.values())
                 .filter(v -> ((version != null) && !(version.trim().isEmpty()))
-                        ? v.getVersion().equalsIgnoreCase(version) : Boolean.FALSE)
+                        ? v.getVersion().equalsIgnoreCase(version) : FALSE)
                 .findFirst();
         if ((optional == null) || (optional.equals(Optional.empty())))
             throw new WPSVersionException("The WPS Version must be 1.0.0");

@@ -69,14 +69,12 @@ public class WPSDescribeProcessRequestV100 extends WPSBaseDescribeProcessRequest
      */
     @Override
     protected DescribeProcess createRequest() throws Exception {
-        checkArgument(this.isSetProcessIdentifiers(),
-                "The Parameter ProcessIdentifiers must not be null or Empty.");
+        checkArgument(this.isSetProcessIdentifiers(), "The Parameter ProcessIdentifiers must not be null or Empty.");
         List<CodeType> processCodeTypes = this.processIdentifiers.stream()
                 .filter(value -> ((value != null) && !(value.trim().isEmpty())))
                 .map(PROCESS_IDENTIFIER)
                 .collect(toList());
-        checkArgument((processCodeTypes != null) && !(processCodeTypes.isEmpty()),
-                "The Parameter ProcessCodeTypes must not be null or an Empty List.");
+        checkArgument((processCodeTypes != null) && !(processCodeTypes.isEmpty()), "The Parameter ProcessCodeTypes must not be null or an Empty List.");
         DescribeProcess describeProcess = new DescribeProcess();
         describeProcess.setIdentifier(processCodeTypes);
         if (this.isLanguageSet())

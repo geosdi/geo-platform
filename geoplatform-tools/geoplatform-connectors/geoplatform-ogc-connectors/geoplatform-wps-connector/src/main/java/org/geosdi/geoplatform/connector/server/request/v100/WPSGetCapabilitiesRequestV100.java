@@ -45,8 +45,7 @@ import org.geosdi.geoplatform.xml.wps.v100.WPSCapabilitiesType;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WPSGetCapabilitiesRequestV100 extends WPSBaseRequest<WPSCapabilitiesType, GetCapabilities>
-        implements WPSGetCapabilitiesRequest<WPSCapabilitiesType> {
+public class WPSGetCapabilitiesRequestV100 extends WPSBaseRequest<WPSCapabilitiesType, GetCapabilities> implements WPSGetCapabilitiesRequest<WPSCapabilitiesType> {
 
     /**
      * @param server

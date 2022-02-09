@@ -112,8 +112,7 @@ public abstract class AbstractConnectorBuilder<B extends GPConnectorBuilder, C e
      * @param theVersion
      * @return {@link B}
      */
-    @Override
-    public B withVersion(String theVersion) {
+    protected B withVersion(String theVersion) {
         this.version = theVersion;
         return self();
     }

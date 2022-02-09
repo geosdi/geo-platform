@@ -52,7 +52,7 @@ import static org.geosdi.geoplatform.connector.WMSVersion.V111;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPWMSConnectorBuilderPoolV111 extends GPWMSConnectorBuilderPool<GPWMSConnectorBuilderPoolV111, IGPWMSConnectorStoreV111> {
+class GPWMSConnectorBuilderPoolV111 extends GPWMSConnectorBuilderPool<WMSConnectorBuilderPoolV111, IGPWMSConnectorStoreV111> implements WMSConnectorBuilderPoolV111 {
 
     static {
         wmsConnectorPoolV111 = new GenericKeyedObjectPool<GPPoolConnectorKey, IGPWMSConnectorStoreV111>(new GPWMSConnectorFactoryV111(), new GPPoolConnectorConfig());
@@ -62,13 +62,6 @@ public class GPWMSConnectorBuilderPoolV111 extends GPWMSConnectorBuilderPool<GPW
 
     GPWMSConnectorBuilderPoolV111() {
         this.withVersion(V111.getVersion());
-    }
-
-    /**
-     * @return {@link GPWMSConnectorBuilderPoolV111}
-     */
-    public static GPWMSConnectorBuilderPoolV111 wmsConnectorBuilderPoolV111() {
-        return new GPWMSConnectorBuilderPoolV111();
     }
 
     /**

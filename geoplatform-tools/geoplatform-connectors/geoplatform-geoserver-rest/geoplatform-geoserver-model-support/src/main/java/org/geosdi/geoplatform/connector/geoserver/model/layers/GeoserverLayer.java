@@ -45,16 +45,15 @@ import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.EXISTING_PROPERTY;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.EXISTING_PROPERTY,
-        property = "type")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = GeoserverRasterLayer.class, name = "RASTER"),
+@JsonTypeInfo(use = NAME, include = EXISTING_PROPERTY, property = "type")
+@JsonSubTypes({@JsonSubTypes.Type(value = GeoserverRasterLayer.class, name = "RASTER"),
         @JsonSubTypes.Type(value = GeoserverVectorLayer.class, name = "VECTOR")})
 @XmlRootElement(name = "layer")
 public interface GeoserverLayer extends Serializable {
@@ -113,5 +112,4 @@ public interface GeoserverLayer extends Serializable {
      * @param theName
      */
     void setName(String theName);
-
 }

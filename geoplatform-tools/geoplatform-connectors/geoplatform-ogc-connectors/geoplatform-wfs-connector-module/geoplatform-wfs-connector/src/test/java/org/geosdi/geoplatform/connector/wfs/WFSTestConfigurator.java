@@ -67,8 +67,8 @@ public class WFSTestConfigurator {
                             .withDefaultMaxPerRoute(80)
                             .withMaxRedirect(20)
                             .build()).build();
-            secureServerConnector = newConnector().withServerUrl(
-                    new URL(wfsSecureURL))
+            secureServerConnector = newConnector()
+                    .withServerUrl(new URL(wfsSecureURL))
                     .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                             .withMaxTotalConnections(150)
                             .withDefaultMaxPerRoute(80)

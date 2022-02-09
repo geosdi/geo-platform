@@ -52,7 +52,7 @@ import java.net.URL;
 
 import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.of;
-import static org.geosdi.geoplatform.connector.pool.builder.v130.GPWMSConnectorBuilderPoolV130.wmsConnectorBuilderPoolV130;
+import static org.geosdi.geoplatform.connector.pool.builder.v130.WMSConnectorBuilderPoolV130.wmsConnectorBuilderPoolV130;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.*;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;

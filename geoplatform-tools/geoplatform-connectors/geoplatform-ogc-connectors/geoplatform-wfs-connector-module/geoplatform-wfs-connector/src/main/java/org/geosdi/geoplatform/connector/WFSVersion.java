@@ -51,7 +51,8 @@ import static javax.annotation.meta.When.NEVER;
  */
 public enum WFSVersion implements GPServerConnector.GPServerConnectorVersion {
 
-    V110("1.1.0"), V200("2.0.0");
+    V110("1.1.0"),
+    V200("2.0.0");
 
     private final String version;
 

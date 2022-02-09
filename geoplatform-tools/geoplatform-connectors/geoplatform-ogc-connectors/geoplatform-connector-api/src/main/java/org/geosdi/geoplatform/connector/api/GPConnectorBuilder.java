@@ -79,12 +79,6 @@ public interface GPConnectorBuilder<B extends GPConnectorBuilder> {
     B withSslConnectionSocketFactory(SSLConnectionSocketFactory theSslConnectionSocketFactory);
 
     /**
-     * @param theVersion
-     * @return {@link B}
-     */
-    B withVersion(String theVersion);
-
-    /**
      * @param <C>
      * @return {@link C}
      * @throws Exception

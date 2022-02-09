@@ -39,7 +39,7 @@ import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorKey;
 import org.geosdi.geoplatform.connector.pool.factory.GPWMSConnectorFactory;
 import org.geosdi.geoplatform.connector.server.v130.IGPWMSConnectorStoreV130;
 
-import static org.geosdi.geoplatform.connector.server.v130.WMSConnectorBuilderV130.wmsConnectorBuilderV130;
+import static org.geosdi.geoplatform.connector.server.v130.GPWMSConnectorBuilderV130.wmsConnectorBuilderV130;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

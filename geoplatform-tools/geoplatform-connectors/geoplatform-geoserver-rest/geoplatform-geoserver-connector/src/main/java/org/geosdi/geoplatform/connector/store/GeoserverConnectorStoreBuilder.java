@@ -51,4 +51,10 @@ public interface GeoserverConnectorStoreBuilder extends GPConnectorBuilder<Geose
      * @return {@link GeoserverConnectorStoreBuilder}
      */
     GeoserverConnectorStoreBuilder withJacksonSupport(@Nullable JacksonSupport theJacksoSupport);
+
+    /**
+     * @param theVersion
+     * @return {@link GeoserverConnectorStoreBuilder}
+     */
+    GeoserverConnectorStoreBuilder withVersion(String theVersion);
 }

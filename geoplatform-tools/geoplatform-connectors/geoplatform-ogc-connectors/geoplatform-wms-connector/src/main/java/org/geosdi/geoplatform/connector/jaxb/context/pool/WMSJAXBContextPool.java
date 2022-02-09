@@ -149,6 +149,10 @@ public class WMSJAXBContextPool extends GeoPlatformJAXBContextPool {
         this.version = theVersion;
     }
 
+    /**
+     * @param theJaxbContext
+     * @param theVersion
+     */
     public WMSJAXBContextPool(JAXBContext theJaxbContext, @Nonnull(when = NEVER) WMSVersion theVersion) {
         super(theJaxbContext);
         checkArgument(theVersion != null, "The Parameter version must not be null.");

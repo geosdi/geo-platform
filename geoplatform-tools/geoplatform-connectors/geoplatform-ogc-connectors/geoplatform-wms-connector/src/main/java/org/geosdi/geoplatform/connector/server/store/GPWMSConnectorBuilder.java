@@ -36,9 +36,7 @@
 package org.geosdi.geoplatform.connector.server.store;
 
 import org.geosdi.geoplatform.connector.server.v111.GPWMSConnectorBuilderV111;
-import org.geosdi.geoplatform.connector.server.v111.WMSConnectorBuilderV111;
 import org.geosdi.geoplatform.connector.server.v130.GPWMSConnectorBuilderV130;
-import org.geosdi.geoplatform.connector.server.v130.WMSConnectorBuilderV130;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -75,7 +73,7 @@ public interface GPWMSConnectorBuilder {
          */
         @Override
         public GPWMSConnectorBuilderV111 wmsConnectorBuilderV111() {
-            return WMSConnectorBuilderV111.wmsConnectorBuilderV111();
+            return GPWMSConnectorBuilderV111.wmsConnectorBuilderV111();
         }
 
         /**
@@ -83,7 +81,7 @@ public interface GPWMSConnectorBuilder {
          */
         @Override
         public GPWMSConnectorBuilderV130 wmsConnectorBuilderV130() {
-            return WMSConnectorBuilderV130.wmsConnectorBuilderV130();
+            return GPWMSConnectorBuilderV130.wmsConnectorBuilderV130();
         }
     }
 }

@@ -42,7 +42,7 @@ import org.geosdi.geoplatform.connector.server.store.GPWMSConnector;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPWMSConnectorBuilderPool<Builder extends GPWMSConnectorBuilderPool, Store extends GPWMSConnector> extends AbstractConnectorBuilderPool<Builder, Store> {
+public abstract class GPWMSConnectorBuilderPool<Builder extends WMSConnectorBuilderPool, C extends GPWMSConnector> extends AbstractConnectorBuilderPool<Builder, C> implements WMSConnectorBuilderPool<Builder, C> {
 
     protected GPWMSConnectorBuilderPool() {
     }

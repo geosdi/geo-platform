@@ -41,5 +41,12 @@ import org.geosdi.geoplatform.connector.api.GPConnectorBuilder;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPWMSConnectorBuilderV111 extends GPConnectorBuilder<WMSConnectorBuilderV111> {
+public interface GPWMSConnectorBuilderV111 extends GPConnectorBuilder<GPWMSConnectorBuilderV111> {
+
+    /**
+     * @return {@link GPWMSConnectorBuilderV111}
+     */
+    static GPWMSConnectorBuilderV111 wmsConnectorBuilderV111() {
+        return new WMSConnectorBuilderV111();
+    }
 }

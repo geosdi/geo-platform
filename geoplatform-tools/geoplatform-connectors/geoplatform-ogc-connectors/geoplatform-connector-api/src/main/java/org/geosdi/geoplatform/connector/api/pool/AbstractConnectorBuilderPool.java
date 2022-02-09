@@ -48,7 +48,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractConnectorBuilderPool<B extends AbstractConnectorBuilderPool, C extends GeoPlatformConnector> extends AbstractConnectorBuilder<B, C> {
+public abstract class AbstractConnectorBuilderPool<B extends GPConnectorBuilderPool, C extends GeoPlatformConnector> extends AbstractConnectorBuilder<B, C> implements GPConnectorBuilderPool<B, C> {
 
     protected AbstractConnectorBuilderPool() {
     }

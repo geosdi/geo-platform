@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.connector;
 import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static org.geosdi.geoplatform.connector.WFSVersion.V110;
 import static org.geosdi.geoplatform.connector.WFSVersion.fromString;
 
 /**
@@ -56,7 +57,7 @@ public class WFSConnectorBuilder extends AbstractConnectorBuilder<WFSConnectorBu
      * @return {@link WFSConnectorBuilder}
      */
     public static WFSConnectorBuilder newConnector() {
-        return new WFSConnectorBuilder();
+        return new WFSConnectorBuilder().withVersion(V110.getVersion());
     }
 
     /**

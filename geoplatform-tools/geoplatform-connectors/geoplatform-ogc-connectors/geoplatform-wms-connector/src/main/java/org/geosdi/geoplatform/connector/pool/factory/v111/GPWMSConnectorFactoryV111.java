@@ -41,7 +41,7 @@ import org.geosdi.geoplatform.connector.server.v111.IGPWMSConnectorStoreV111;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.geosdi.geoplatform.connector.server.v111.WMSConnectorBuilderV111.wmsConnectorBuilderV111;
+import static org.geosdi.geoplatform.connector.server.v111.GPWMSConnectorBuilderV111.wmsConnectorBuilderV111;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

@@ -44,16 +44,10 @@ import static org.geosdi.geoplatform.connector.WMSVersion.V111;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class WMSConnectorBuilderV111 extends AbstractConnectorBuilder<WMSConnectorBuilderV111, IGPWMSConnectorStoreV111> implements GPWMSConnectorBuilderV111 {
+class WMSConnectorBuilderV111 extends AbstractConnectorBuilder<GPWMSConnectorBuilderV111, IGPWMSConnectorStoreV111> implements GPWMSConnectorBuilderV111 {
 
     WMSConnectorBuilderV111() {
-    }
-
-    /**
-     * @return {@link WMSConnectorBuilderV111}
-     */
-    public static WMSConnectorBuilderV111 wmsConnectorBuilderV111() {
-        return new WMSConnectorBuilderV111().withVersion(V111.getVersion());
+        this.withVersion(V111.getVersion());
     }
 
     /**

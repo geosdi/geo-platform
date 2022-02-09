@@ -45,7 +45,7 @@ import java.util.List;
 public interface IGPGeoserverLayers extends Serializable {
 
     /**
-     * @return {@link List< IGPGeoserverLayer >}
+     * @return {@link List<IGPGeoserverLayer>}
      */
     List<IGPGeoserverLayer> getLayers();
 }

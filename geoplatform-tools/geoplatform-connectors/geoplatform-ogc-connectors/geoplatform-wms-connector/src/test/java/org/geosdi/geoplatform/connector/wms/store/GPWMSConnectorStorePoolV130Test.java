@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 
-import static org.geosdi.geoplatform.connector.pool.builder.v130.GPWMSConnectorBuilderPoolV130.wmsConnectorBuilderPoolV130;
+import static org.geosdi.geoplatform.connector.pool.builder.v130.WMSConnectorBuilderPoolV130.wmsConnectorBuilderPoolV130;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 

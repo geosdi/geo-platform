@@ -34,7 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.pool.builder.v130;
 
-import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.geosdi.geoplatform.connector.pool.builder.WMSConnectorBuilderPool;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;

@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.services.delegate;
 
 import com.google.common.collect.Lists;
 import org.geosdi.geoplatform.connector.CatalogGetCapabilitiesBean;
-import org.geosdi.geoplatform.connector.CatalogVersionException;
 import org.geosdi.geoplatform.connector.GPCSWConnectorBuilder;
 import org.geosdi.geoplatform.connector.GPCatalogConnectorStore;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities;
@@ -155,9 +154,7 @@ class CSWServiceDelegate implements CSWDelegate {
         }
 
         try {
-            CatalogCapabilities capabilities = catalogCapabilitiesBean.bindUrl(
-                    serverUrl);
-
+            CatalogCapabilities capabilities = catalogCapabilitiesBean.bindUrl(serverUrl);
             server = new GeoPlatformServer();
             server.setServerType(GPCapabilityType.CSW);
             server.setServerUrl(serverUrl);
@@ -172,17 +169,10 @@ class CSWServiceDelegate implements CSWDelegate {
             CSWEntityCorrectness.checkCSWServer(server); // TODO assert
             serverDao.persist(server);
 
-        } catch (MalformedURLException ex) {
+        } catch (Exception ex) {
             logger.error("### MalformedURLException: {}", ex.getMessage());
-            throw new IllegalParameterFault("Malformed URL");
-        } catch (IOException ex) {
-            logger.error("### IOException: {}", ex.getMessage());
-            throw new IllegalParameterFault("Error on parse response stream");
-        } catch (CatalogVersionException ex) {
-            logger.error("### CatalogVersionException: {}", ex.getMessage());
-            throw new IllegalParameterFault("The catalog version must be 2.0.2");
+            throw new IllegalParameterFault("Exception : " + ex.getMessage());
         }
-
         return new ServerCSWDTO(server);
     }
 

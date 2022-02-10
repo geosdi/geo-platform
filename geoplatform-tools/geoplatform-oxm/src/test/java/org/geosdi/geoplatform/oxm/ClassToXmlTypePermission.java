@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.mock.ClassToXMLMap;
  */
 public class ClassToXmlTypePermission implements TypePermission {
 
-    /**
+    /**x
      * @param type
      * @return {@link Boolean}
      */

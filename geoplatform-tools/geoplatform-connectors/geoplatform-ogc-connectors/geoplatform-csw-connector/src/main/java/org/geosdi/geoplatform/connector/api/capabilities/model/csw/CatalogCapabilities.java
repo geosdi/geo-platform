@@ -36,53 +36,27 @@
 package org.geosdi.geoplatform.connector.api.capabilities.model.csw;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import java.io.Serializable;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
+@Getter
+@Setter
+@ToString
 @XStreamAlias(value = "csw:Capabilities")
-public class CatalogCapabilities {
+public class CatalogCapabilities implements Serializable {
 
+    private static final long serialVersionUID = -3899907519951510066L;
+    //
     @XStreamAlias(value = "ows:ServiceIdentification")
     private CatalogServiceIdentification serviceIdentification;
     //
     @XStreamAlias(value = "ows:ServiceProvider")
     private CatalogServiceProvider serviceProvider;
-
-    /**
-     * @return the serviceIdentification
-     */
-    public CatalogServiceIdentification getServiceIdentification() {
-        return serviceIdentification;
-    }
-
-    /**
-     * @param serviceIdentification the serviceIdentification to set
-     */
-    public void setServiceIdentification(CatalogServiceIdentification serviceIdentification) {
-        this.serviceIdentification = serviceIdentification;
-    }
-
-    /**
-     * @return the serviceProvider
-     */
-    public CatalogServiceProvider getServiceProvider() {
-        return serviceProvider;
-    }
-
-    /**
-     * @param serviceProvider the serviceProvider to set
-     */
-    public void setServiceProvider(CatalogServiceProvider serviceProvider) {
-        this.serviceProvider = serviceProvider;
-    }
-
-    @Override
-    public String toString() {
-        return "CatalogCapabilities{" + "serviceIdentification = "
-                + serviceIdentification + ", serviceProvider = "
-                + serviceProvider + '}';
-    }
 }

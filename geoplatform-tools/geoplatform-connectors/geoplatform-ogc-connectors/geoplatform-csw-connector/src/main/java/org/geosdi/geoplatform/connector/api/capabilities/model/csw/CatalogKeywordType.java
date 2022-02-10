@@ -36,31 +36,24 @@
 package org.geosdi.geoplatform.connector.api.capabilities.model.csw;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
+@Setter
+@ToString(callSuper = true)
 @XStreamAlias(value = "ows:Type")
 public class CatalogKeywordType extends AbstractCatalogKeyword {
 
+    private static final long serialVersionUID = 218783385639022795L;
+    //
     private String type;
 
     @Override
     public String getValue() {
         return type;
-    }
-
-    /**
-     * @param type the type to set
-     */
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    @Override
-    public String toString() {
-        return "CatalogKeywordType {" + "type = " + type + '}';
     }
 }

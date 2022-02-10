@@ -51,8 +51,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
@@ -63,8 +61,7 @@ import static org.geosdi.geoplatform.connector.GPCSWConnectorBuilder.newConnecto
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml",
-        "classpath:applicationContext-Logger.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext.xml", "classpath:applicationContext-Logger.xml"})
 public class CatalogCapabilitiesTest {
 
     @GeoPlatformLog
@@ -87,70 +84,39 @@ public class CatalogCapabilitiesTest {
 
     @Test
     @Ignore(value = "Server is DOWN")
-    public void testCapabilitiesV201WithoutVersionControl() {
-        try {
-            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrlWithoutVersionControl("http://catalogocentrale.nsdi.it/geonetwork/srv/eng/csw?SERVICE");
-            logger.info("@@@@@@@@@@@@@@@ CATALOG CAPABILITIES BEAN V_2.0.1 WITHOUT VERSION CONTROL@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
-        } catch (MalformedURLException ex) {
-            logger.error("MalformedURLException @@@@@@@@@@@@@@ " + ex);
-        } catch (IOException es) {
-            logger.error("IOException @@@@@@@@@@@@@@ " + es);
-        }
+    public void testCapabilitiesV201WithoutVersionControl() throws Exception {
+        CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrlWithoutVersionControl("http://catalogocentrale.nsdi.it/geonetwork/srv/eng/csw?SERVICE");
+        logger.info("@@@@@@@@@@@@@@@ CATALOG CAPABILITIES BEAN V_2.0.1 WITHOUT VERSION CONTROL@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
     }
 
     @Test
     @Ignore(value = "Server is DOWN")
-    public void testCapabilitiesV201() {
-        try {
-            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl("http://catalogocentrale.nsdi.it/geonetwork/srv/en/csw");
-            logger.info("@@@@@@@@@@@@@@@ CATALOG CAPABILITIES BEAN V_2.0.1@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
-        } catch (MalformedURLException ex) {
-            logger.error("MalformedURLException @@@@@@@@@@@@@@ " + ex);
-        } catch (IOException es) {
-            logger.error("IOException @@@@@@@@@@@@@@ " + es);
-        } catch (CatalogVersionException ve) {
-            logger.error("CatalogVersionException @@@@@@@@@@@@ " + ve);
-        }
+    public void testCapabilitiesV201() throws Exception {
+        CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl("http://catalogocentrale.nsdi.it/geonetwork/srv/en/csw");
+        logger.info("@@@@@@@@@@@@@@@ CATALOG CAPABILITIES BEAN V_2.0.1@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
     }
 
     @Test
-    @Ignore("SERVER IS DOWN")
+//    @Ignore("SERVER IS DOWN")
     public void testCapabilitiesV202() throws Exception {
-        try {
-
-            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl("http://rsdi.regione.basilicata.it/Catalogo/srv/en/csw");
-            logger.info("CATALOG CAPABILITIES BEAN V_2.0.2 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
-        } catch (MalformedURLException ex) {
-            logger.error("MalformedURLException @@@@@@@@@@@@@@ " + ex);
-        } catch (IOException es) {
-            logger.error("IOException @@@@@@@@@@@@@@ " + es);
-        } catch (CatalogVersionException ve) {
-            logger.error("CatalogVersionException @@@@@@@@@@@@ " + ve);
-        }
+        CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl("http://rsdi.regione.basilicata.it/Catalogo/srv/en/csw");
+        logger.info("CATALOG CAPABILITIES BEAN V_2.0.2 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
     }
 
     @Test
     @Ignore(value = "There some problems.")
-    public void testCSW_ESRI() {
-        try {
-            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl("https://snipc.protezionecivile.it/geoportal/csw/discovery");
-            logger.info("CATALOG CAPABILITIES ESRI @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+    public void testCSW_ESRI() throws Exception {
+        CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl("https://snipc.protezionecivile.it/geoportal/csw/discovery");
+        logger.info("CATALOG CAPABILITIES ESRI @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
     }
 
     @Test
     public void testGetCapabilitiesWithConnector() throws Exception {
         URL url = new URL("http://catalog.geosdi.org/geonetwork/srv/eng/csw");
-        GPCatalogConnectorStore serverConnector = newConnector().
-                withServerUrl(url).build();
-
+        GPCatalogConnectorStore serverConnector = newConnector().withServerUrl(url).build();
         CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
         CapabilitiesType response = request.getResponse();
-        logger.info("CSW GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ {}",
-                response.getVersion());
-
+        logger.info("CSW GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ {}", response.getVersion());
         List<Operation> operationList = response.getOperationsMetadata().getOperation();
         for (Operation operation : operationList) {
             String operationName = operation.getName();
@@ -160,9 +126,9 @@ public class CatalogCapabilitiesTest {
                     String parameterName = parameter.getName();
                     if ("outputSchema".equals(parameterName)) {
                         List<String> valueList = parameter.getValue();
-                        logger.info("\n########################### outputSchema");
+                        logger.info("########################### outputSchema\n");
                         for (String value : valueList) {
-                            logger.info("\n*** {}", value);
+                            logger.info("*** {}", value);
                         }
                     }
                 }
@@ -182,18 +148,14 @@ public class CatalogCapabilitiesTest {
         logger.info("CSW SECURE GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ {}", response.getVersion());
     }
 
-    @Ignore(value = "Server is Down")
+//    @Ignore(value = "Server is Down")
     @Test
     public void testGetCapabilitiesRNDTWithConnector() throws Exception {
-        try {
-            CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrlWithoutVersionControl(
-                    "http://www.rndt.gov.it/RNDT/CSW?request=GetCapabilities&service=CSW");
-            logger.info("@@@@@@@@@@@@@@@ CATALOG CAPABILITIES BEAN V_2.0.1 WITHOUT VERSION CONTROL"
-                    + "@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);
-        } catch (MalformedURLException ex) {
-            ex.printStackTrace();
-        } catch (IOException es) {
-            es.printStackTrace();
-        }
+        GPCatalogConnectorStore serverConnector = newConnector()
+                .withServerUrl(new URL("https://geodati.gov.it/RNDT/csw"))
+                .build();
+        CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
+        CapabilitiesType response = request.getResponse();
+        logger.info("##################CSW GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ {}", response.getVersion());
     }
 }

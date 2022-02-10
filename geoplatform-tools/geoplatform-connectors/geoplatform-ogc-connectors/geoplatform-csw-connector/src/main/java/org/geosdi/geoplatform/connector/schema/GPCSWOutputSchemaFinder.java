@@ -35,9 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.schema;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import org.geosdi.geoplatform.connector.GPCatalogConnectorStore;
 import org.geosdi.geoplatform.connector.server.request.CatalogGetCapabilitiesRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -48,8 +45,11 @@ import org.geosdi.geoplatform.xml.ows.v100.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -63,21 +63,15 @@ class GPCSWOutputSchemaFinder implements CSWOutputSchemaFinder {
      * @throws java.lang.Exception
      */
     @Override
-    public OutputSchema retrieveBestOutputSchemaForRequest(
-            GPCatalogConnectorStore serverConnector, String requestType)
-            throws Exception {
-        List<String> schemas = this.retrieveRequestOutputSchemas(
-                serverConnector, requestType);
-
+    public OutputSchema retrieveBestOutputSchemaForRequest(GPCatalogConnectorStore serverConnector, String requestType) throws Exception {
+        List<String> schemas = this.retrieveRequestOutputSchemas(serverConnector, requestType);
         OutputSchema outputSchema = null;
         if (schemas.contains(OutputSchema.GMD.toString())) {
             outputSchema = OutputSchema.GMD;
         } else if (schemas.contains(OutputSchema.ORIGINAL.toString())) {
             outputSchema = OutputSchema.ORIGINAL;
         }
-
-        logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@ OutputSchema: {}\n\n",
-                outputSchema);
+        logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@ OutputSchema: {}\n\n", outputSchema);
         return outputSchema;
     }
 
@@ -85,26 +79,20 @@ class GPCSWOutputSchemaFinder implements CSWOutputSchemaFinder {
      * Retrieve for a Catalog server the OutputSchema supported from Request
      * operation. This information in present into GetCapabilities request.
      */
-    private List<String> retrieveRequestOutputSchemas(
-            GPCatalogConnectorStore serverConnector, String requestType)
-            throws Exception {
+    private List<String> retrieveRequestOutputSchemas(GPCatalogConnectorStore serverConnector, String requestType) throws Exception {
         List<String> schemas = null;
         try {
             CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
-
             CapabilitiesType response = request.getResponse();
-
             List<Operation> operationList = response.getOperationsMetadata().getOperation();
             for (Operation operation : operationList) {
-
                 if (requestType.equals(operation.getName())) {
                     List<DomainType> parameterList = operation.getParameter();
                     schemas = new ArrayList<>(parameterList.size());
                     for (DomainType parameter : parameterList) {
                         if ("outputSchema".equals(parameter.getName())) {
                             for (String outputSchemaValue : parameter.getValue()) {
-                                logger.trace("\n*** outputSchema available: {}",
-                                        outputSchemaValue);
+                                logger.trace("\n*** outputSchema available: {}", outputSchemaValue);
                                 schemas.add(outputSchemaValue.trim());
                             }
                             break;
@@ -120,5 +108,4 @@ class GPCSWOutputSchemaFinder implements CSWOutputSchemaFinder {
 
         return schemas;
     }
-
 }

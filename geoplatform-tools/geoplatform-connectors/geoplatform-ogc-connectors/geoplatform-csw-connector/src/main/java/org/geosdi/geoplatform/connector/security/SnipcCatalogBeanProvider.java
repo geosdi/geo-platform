@@ -35,14 +35,17 @@
  */
 package org.geosdi.geoplatform.connector.security;
 
+import lombok.Getter;
+import lombok.ToString;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Getter
+@ToString
 @Component(value = "snipcCatalogBeanProvider")
 public class SnipcCatalogBeanProvider {
 
@@ -52,32 +55,4 @@ public class SnipcCatalogBeanProvider {
     String snipcUsername;
     private @Value("configurator{snipc_catalog_password}")
     String snipcPassword;
-
-    /**
-     * @return the snipcUrl
-     */
-    public String getSnipcUrl() {
-        return snipcUrl;
-    }
-
-    /**
-     * @return the snipcUsername
-     */
-    public String getSnipcUsername() {
-        return snipcUsername;
-    }
-
-    /**
-     * @return the snipcPassword
-     */
-    public String getSnipcPassword() {
-        return snipcPassword;
-    }
-
-    @Override
-    public String toString() {
-        return "SnipcBeanProvider {" + "snipcUrl = " + snipcUrl
-                + ", snipcUsername = " + snipcUsername
-                + ", snipcPassword = " + snipcPassword + '}';
-    }
 }

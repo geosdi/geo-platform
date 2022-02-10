@@ -3,11 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:oxm="http://www.springframework.org/schema/oxm"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-           http://www.springframework.org/schema/oxm
-           http://www.springframework.org/schema/oxm/spring-oxm-3.2.xsd
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.2.xsd
            http://www.springframework.org/schema/util 
@@ -15,35 +12,42 @@
        default-autowire="byName">
 
     <context:annotation-config />
-    
+
     <context:component-scan base-package="org.geosdi.geoplatform.connector.proxy, 
                             org.geosdi.geoplatform.connector.security,
                             org.geosdi.geoplatform.connector.schema, 
                             org.geosdi.geoplatform.connector.repository"/>
-    
+
     <import resource="classpath:applicationContext-jasypt.xml" />
-    
+
     <bean id="xStreamCatalog" class="org.geosdi.geoplatform.oxm.xtream.GPXStreamMarshaller">
         <property name="marshaller" ref="xStreamCatalogMarshaller" />
     </bean>
-    
+
     <bean id="xStreamCatalogMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
         <property name="annotatedClasses" value="org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities,
                         org.geosdi.geoplatform.connector.api.capabilities.model.csw.exception.CatalogExceptionReport" />
         <property name="omittedFields">
             <util:map>
-                <entry key="org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogServiceIdentification" 
+                <entry key="org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogServiceIdentification"
                        value="ows:Fees,ows:AccessConstraints"/>
-                    
-                <entry key="org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogServiceProvider" 
+
+                <entry key="org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogServiceProvider"
                        value="ows:ProviderSite,ows:ServiceContact"/>
-                    
-                <entry key="org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities" 
+
+                <entry key="org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities"
                        value="ows:OperationsMetadata,ogc:Filter_Capabilities,ows:ExtendedCapabilities"/>
             </util:map>
         </property>
+        <property name="typePermissions" ref="typePermissions" />
     </bean>
-    
-    <bean id="catalogCapabilitiesBean" class="org.geosdi.geoplatform.connector.CatalogGetCapabilitiesBean" />
 
+    <util:list id="typePermissions">
+        <array>
+            <ref bean="catalogCapabilitiesTypePermission" />
+        </array>
+    </util:list>
+
+    <bean id="catalogCapabilitiesTypePermission" class="org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilitiesTypePermission" />
+    <bean id="catalogCapabilitiesBean" class="org.geosdi.geoplatform.connector.CatalogGetCapabilitiesBean" />
 </beans>

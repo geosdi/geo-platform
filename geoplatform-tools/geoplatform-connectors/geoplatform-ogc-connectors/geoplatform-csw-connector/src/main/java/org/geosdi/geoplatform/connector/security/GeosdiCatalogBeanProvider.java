@@ -35,30 +35,24 @@
  */
 package org.geosdi.geoplatform.connector.security;
 
+import lombok.Getter;
+import lombok.ToString;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Getter
+@ToString
 @Component(value = "geosdiCatalogBeanProvider")
 public class GeosdiCatalogBeanProvider {
 
     private @Value("configurator{geosdi_catalog_url}")
     String geosdiUrl;
-//    private @Value("configurator{geosdi_catalog_username}")
-//    String geosdiUsername;
-//    private @Value("configurator{geosdi_catalog_password}")
-//    String geosdiPassword;
-
-    public String getGeosdiUrl() {
-        return geosdiUrl;
-    }
-
-    @Override
-    public String toString() {
-        return "GeosdiCatalogBeanProvider{" + "geosdiUrl=" + geosdiUrl + '}';
-    }
+    //    private @Value("configurator{geosdi_catalog_username}")
+    //    String geosdiUsername;
+    //    private @Value("configurator{geosdi_catalog_password}")
+    //    String geosdiPassword;
 }

@@ -117,7 +117,7 @@ public class WMSGetFeatureInfoResponseBuilderTest {
         logger.info("########################WMS_GET_FEATURE_INFO_REQUEST : {}\n", wmsGetFeatureInfoRequest);
         fromIterable(wmsGetFeatureInfoRequest.getWmsFeatureInfoElements())
                 .doOnComplete(() -> logger.info("##################RX Terminates its task.\n"))
-                .subscribe(v -> logger.info("{}\n", Arrays.toString(v.toLayers())), e -> e.printStackTrace());
+                .subscribe(v -> logger.info("{}\n", Arrays.toString(v.toLayers())), Throwable::printStackTrace);
         logger.info("#####################{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(wmsGetFeatureInfoResponseBuilder()
                 .withRequest(wmsGetFeatureInfoRequest)
                 .build()));

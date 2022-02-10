@@ -38,24 +38,27 @@ package org.geosdi.geoplatform.connector.security;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nonnull;
 import javax.net.ssl.*;
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.util.Base64;
+import java.util.Arrays;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.TRUE;
+import static java.util.Base64.getEncoder;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogSecurityConnection {
+public class CatalogSecurityConnection implements GPCatalogSecurityConnection {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(CatalogSecurityConnection.class);
 
     public CatalogSecurityConnection() {
         try {
@@ -70,26 +73,35 @@ public class CatalogSecurityConnection {
 
     }
 
-    public HttpURLConnection getSecureConnection(URL url) throws IOException {
+    /**
+     * @param url
+     * @return {@link HttpURLConnection}
+     * @throws Exception
+     */
+    @Override
+    public HttpURLConnection getSecureConnection(@Nonnull(when = NEVER) URL url) throws Exception {
+        checkArgument(url != null, "The Parameter url must not be null.");
         HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
-        conn.setHostnameVerifier(new HostnameVerifier() {
-
-            @Override
-            public boolean verify(String arg0, SSLSession arg1) {
-                return true;
-            }
-        });
-
+        conn.setHostnameVerifier((arg, arg1) -> TRUE);
         return conn;
     }
 
-    public HttpURLConnection getSecureConnectionWithAuth(URL url, String user,
-            String pass) throws IOException {
+    /**
+     * @param url
+     * @param user
+     * @param pass
+     * @return {@link HttpURLConnection}
+     * @throws Exception
+     */
+    @Override
+    public HttpURLConnection getSecureConnectionWithAuth(@Nonnull(when = NEVER) URL url, @Nonnull(when = NEVER) String user, @Nonnull(when = NEVER) String pass) throws Exception {
+        checkArgument(url != null, "The Parameter url must not be null.");
+        checkArgument((user != null) && !(user.trim().isEmpty()), "The Parameter user must not be null or an empty string.");
+        checkArgument((pass != null) && !(pass.trim().isEmpty()), "The Parameter password must not be null or an empty string.");
         HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
         conn.setHostnameVerifier((arg, arg1) -> TRUE);
-
         String userpass = user + ":" + pass;
-        String basicAuth = "Basic " + Base64.getEncoder().encode(userpass.getBytes());
+        String basicAuth = "Basic " + Arrays.toString(getEncoder().encode(userpass.getBytes()));
         conn.setRequestProperty("Authorization", basicAuth);
         return conn;
     }
@@ -97,13 +109,11 @@ public class CatalogSecurityConnection {
     private static class DefaultTrustManager implements X509TrustManager {
 
         @Override
-        public void checkClientTrusted(X509Certificate[] arg0, String arg1)
-                throws CertificateException {
+        public void checkClientTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
         }
 
         @Override
-        public void checkServerTrusted(X509Certificate[] arg0, String arg1)
-                throws CertificateException {
+        public void checkServerTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
         }
 
         @Override

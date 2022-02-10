@@ -37,14 +37,21 @@ package org.geosdi.geoplatform.connector.api.capabilities.model.csw;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.converter.CatalogKeywordsConverter;
 
+import java.io.Serializable;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogServiceIdentification {
+@Getter
+@Setter
+@ToString
+public class CatalogServiceIdentification implements Serializable {
 
     @XStreamAlias(value = "ows:Title")
     private String title;
@@ -61,83 +68,4 @@ public class CatalogServiceIdentification {
     //
     @XStreamAlias(value = "ows:ServiceTypeVersion")
     private String serviceTypeVersion;
-
-    /**
-     * @return the title
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * @param title the title to set
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    /**
-     * @return the abstractText
-     */
-    public String getAbstractText() {
-        return abstractText;
-    }
-
-    /**
-     * @param abstractText the abstractText to set
-     */
-    public void setAbstractText(String abstractText) {
-        this.abstractText = abstractText;
-    }
-
-    /**
-     * @return the catalogKeywords
-     */
-    public CatalogKeywords getCatalogKeywords() {
-        return catalogKeywords;
-    }
-
-    /**
-     * @param catalogKeywords the catalogKeywords to set
-     */
-    public void setCatalogKeywords(CatalogKeywords catalogKeywords) {
-        this.catalogKeywords = catalogKeywords;
-    }
-
-    /**
-     * @return the serviceType
-     */
-    public String getServiceType() {
-        return serviceType;
-    }
-
-    /**
-     * @param serviceType the serviceType to set
-     */
-    public void setServiceType(String serviceType) {
-        this.serviceType = serviceType;
-    }
-
-    /**
-     * @return the serviceTypeVersion
-     */
-    public String getServiceTypeVersion() {
-        return serviceTypeVersion;
-    }
-
-    /**
-     * @param serviceTypeVersion the serviceTypeVersion to set
-     */
-    public void setServiceTypeVersion(String serviceTypeVersion) {
-        this.serviceTypeVersion = serviceTypeVersion;
-    }
-
-    @Override
-    public String toString() {
-        return "CatalogServiceIdentification {" + "title = " + title
-                + ", abstractText = " + abstractText
-                + ", catalogKeywords = " + catalogKeywords
-                + ", serviceType = " + serviceType
-                + ", serviceTypeVersion = " + serviceTypeVersion + '}';
-    }
 }

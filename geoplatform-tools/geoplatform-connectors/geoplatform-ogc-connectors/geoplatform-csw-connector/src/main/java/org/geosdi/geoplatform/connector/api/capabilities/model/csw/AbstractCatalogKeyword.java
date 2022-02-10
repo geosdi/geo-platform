@@ -37,13 +37,17 @@ package org.geosdi.geoplatform.connector.api.capabilities.model.csw;
 
 import com.thoughtworks.xstream.annotations.XStreamInclude;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email  giuseppe.lascaleia@geosdi.org
  */
 @XStreamInclude(value = {CatalogKeyword.class, CatalogKeywordType.class})
-public abstract class AbstractCatalogKeyword {
+public abstract class AbstractCatalogKeyword implements Serializable {
 
+    private static final long serialVersionUID = -3153983693545420951L;
+    //
     public abstract String getValue();
 }

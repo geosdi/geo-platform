@@ -38,21 +38,22 @@ package org.geosdi.geoplatform.connector;
 import org.geosdi.geoplatform.GPGenericMarshaller;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilities;
 import org.geosdi.geoplatform.connector.security.CatalogSecurityConnection;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import java.io.IOException;
+import javax.annotation.Nonnull;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.connector.GPCatalogVersion.V202;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogGetCapabilitiesBean implements InitializingBean {
+public class CatalogGetCapabilitiesBean implements GPCatalogGetCapabilitiesBean {
 
     private static final String CSW_CABABILITIES_REQUEST = "?SERVICE=CSW&REQUEST=GetCapabilities";
     /**
@@ -68,81 +69,77 @@ public class CatalogGetCapabilitiesBean implements InitializingBean {
     //
     private CatalogSecurityConnection securityConnection;
 
+    /**
+     * <p>
+     *      Bind CSW_202 Server URL with Control for Server Version. The standard CSW_202 Server version must be 2.0.2.
+     * </p>
+     *
+     * @param urlServer
+     * @return CatalogCapabilities
+     * @throws Exception
+     */
+    @Override
+    public CatalogCapabilities bindUrl(@Nonnull(when = NEVER) String urlServer) throws Exception {
+        checkArgument((urlServer != null) && !(urlServer.trim().isEmpty()), "The Parameter urlServer must not be null or an empty string.");
+        CatalogCapabilities catalogGetCapabilities = this.connect(urlServer);
+        this.checkCSWServerVersion(catalogGetCapabilities);
+        return catalogGetCapabilities;
+    }
+
+    /**
+     * @param urlServer
+     * @return {@link CatalogGetCapabilitiesBean}
+     * @throws Exception
+     */
+    @Override
+    public CatalogCapabilities bindUrlWithoutVersionControl(String urlServer) throws Exception {
+        checkArgument((urlServer != null) && !(urlServer.trim().isEmpty()), "The Parameter urlServer must not be null or an empty string.");
+        return this.connect(urlServer);
+
+    }
+
+    /**
+     * Invoked by the containing {@code BeanFactory} after it has set all bean properties
+     * and satisfied {@link org.springframework.beans.factory.BeanFactoryAware}, {@code ApplicationContextAware} etc.
+     * <p>This method allows the bean instance to perform validation of its overall
+     * configuration and final initialization when all bean properties have been set.
+     *
+     * @throws Exception in the event of misconfiguration (such as failure to set an
+     *                   essential property) or if initialization fails for any other reason
+     */
     @Override
     public void afterPropertiesSet() throws Exception {
         this.securityConnection = new CatalogSecurityConnection();
     }
 
-    /**
-     * Bind CSW_202 Server URL with Control for Server Version. The standard CSW_202
-     * Server version must be 2.0.2
-     *
-     * @param urlServer
-     * @return CatalogCapabilities
-     *
-     * @throws MalformedURLException
-     * @throws IOException
-     * @throws CatalogVersionException
-     */
-    public CatalogCapabilities bindUrl(String urlServer)
-            throws MalformedURLException, IOException, CatalogVersionException {
-
-        CatalogCapabilities catalogGetCapabilities = this.connect(urlServer);
-        this.checkCSWServerVersion(catalogGetCapabilities);
-
-        return catalogGetCapabilities;
-    }
-
-    public CatalogCapabilities bindUrlWithoutVersionControl(String urlServer)
-            throws MalformedURLException, IOException {
-
-        return this.connect(urlServer);
-
-    }
-
-    private CatalogCapabilities connect(String urlServer)
-            throws MalformedURLException, IOException {
-
-        CatalogCapabilities catalogGetCapabilities = null;
+    private CatalogCapabilities connect(String urlServer) throws Exception {
         HttpURLConnection conn = null;
         try {
-            URL url = new URL(
-                    this.convertUrl(urlServer) + CSW_CABABILITIES_REQUEST);
-
+            URL url = new URL(this.convertUrl(urlServer) + CSW_CABABILITIES_REQUEST);
             if (urlServer.startsWith("https")) {
                 /**
                  * @@@@@@@@@@@@@@@ TODO FIX ME
                  * @@@@@@@@@@@@@@@@@@@@ *
                  */
                 if (urlServer.contains("snipc.protezionecivile.it")) {
-                    conn = this.securityConnection.getSecureConnectionWithAuth(
-                            url, snipcUsername, snipcPassword);
+                    conn = this.securityConnection.getSecureConnectionWithAuth(url, snipcUsername, snipcPassword);
                 } else {
                     conn = this.securityConnection.getSecureConnection(url);
                 }
             } else {
                 conn = (HttpURLConnection) url.openConnection();
             }
-
-            catalogGetCapabilities = (CatalogCapabilities) this.xStreamCatalog.
-                    unmarshal(conn.getInputStream());
-
+            return  (CatalogCapabilities) this.xStreamCatalog.unmarshal(conn.getInputStream());
         } finally {
             if (conn != null) {
                 conn.disconnect();
             }
         }
-
-        return catalogGetCapabilities;
     }
 
-    private void checkCSWServerVersion(CatalogCapabilities capabilitiesBean)
-            throws CatalogVersionException {
-        if (!capabilitiesBean.getServiceIdentification().getServiceTypeVersion().
-                equals(
-                GPCatalogVersion.V202.toString())) {
-            throw new CatalogVersionException("The version of CSW_202 Service "
-                    + "must be 2.0.2");
+    private void checkCSWServerVersion(CatalogCapabilities capabilitiesBean) throws CatalogVersionException {
+        if (!capabilitiesBean.getServiceIdentification().getServiceTypeVersion().equals(V202.toString())) {
+            throw new CatalogVersionException("The version of CSW_202 Service must be 2.0.2");
         }
     }
 
@@ -153,5 +150,4 @@ public class CatalogGetCapabilitiesBean implements InitializingBean {
         }
         return urlServer;
     }
-
 }

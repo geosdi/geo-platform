@@ -39,22 +39,16 @@ import org.geosdi.geoplatform.connector.GPCatalogConnectorStore;
 import org.geosdi.geoplatform.xml.csw.OutputSchema;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface CSWOutputSchemaFinder {
 
     /**
-     *
      * @param serverConnector
      * @param requestType
-     *
      * @return {@link OutputSchema} to use
      * @throws Exception
      */
-    OutputSchema retrieveBestOutputSchemaForRequest(
-            GPCatalogConnectorStore serverConnector, String requestType)
-            throws Exception;
-
+    OutputSchema retrieveBestOutputSchemaForRequest(GPCatalogConnectorStore serverConnector, String requestType) throws Exception;
 }

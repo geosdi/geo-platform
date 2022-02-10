@@ -61,6 +61,6 @@ class WMSGeoJsonResponseErrorStrategy extends WMSGetFeatureInfoResponseErrorStra
      */
     @Override
     public boolean hasErrors() {
-        return !this.value.getFeatures().isEmpty();
+        return ((this.value.getFeatures() != null) && !(this.value.getFeatures().isEmpty()));
     }
 }

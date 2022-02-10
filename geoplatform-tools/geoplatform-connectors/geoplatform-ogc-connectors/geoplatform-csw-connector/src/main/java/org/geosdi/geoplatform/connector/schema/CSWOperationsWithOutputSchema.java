@@ -42,11 +42,12 @@ package org.geosdi.geoplatform.connector.schema;
  */
 public enum CSWOperationsWithOutputSchema {
 
-    GET_RECORDS("GetRecords"), GET_RECORD_BY_ID("GetRecordById");
+    GET_RECORDS("GetRecords"),
+    GET_RECORD_BY_ID("GetRecordById");
 
     private final String value;
 
-    private CSWOperationsWithOutputSchema(String value) {
+    CSWOperationsWithOutputSchema(String value) {
         this.value = value;
     }
 
@@ -54,5 +55,4 @@ public enum CSWOperationsWithOutputSchema {
     public String toString() {
         return this.value;
     }
-
 }

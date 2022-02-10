@@ -35,33 +35,23 @@
  */
 package org.geosdi.geoplatform.connector.api.capabilities.model.csw;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class CatalogKeywords {
+@Getter
+@Setter
+@ToString
+public class CatalogKeywords implements Serializable {
 
+    private static final long serialVersionUID = -2145869859540283285L;
+    //
     private List<AbstractCatalogKeyword> keywords;
-
-    /**
-     * @return the keywords
-     */
-    public List<AbstractCatalogKeyword> getKeywords() {
-        return keywords;
-    }
-
-    /**
-     * @param keywords the keywords to set
-     */
-    public void setKeywords(List<AbstractCatalogKeyword> keywords) {
-        this.keywords = keywords;
-    }
-
-    @Override
-    public String toString() {
-        return "CatalogKeywords{" + "keywords=" + keywords + '}';
-    }
 }

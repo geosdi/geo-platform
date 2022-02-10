@@ -40,34 +40,47 @@ import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
-import java.util.ArrayList;
-import java.util.List;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.AbstractCatalogKeyword;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogKeyword;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogKeywordType;
 import org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogKeywords;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class CatalogKeywordsConverter implements Converter {
 
+    /**
+     * Convert an object to textual data.
+     *
+     * @param source The object to be marshalled.
+     * @param writer A stream to write to.
+     * @param context A context that allows nested objects to be processed by XStream.
+     */
     @Override
     public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * Convert textual data back into an object.
+     *
+     * @param reader The stream to read the text from.
+     * @param context
+     * @return The resulting object.
+     */
     @Override
     public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
         CatalogKeywords catalogKeywords = new CatalogKeywords();
-        List<AbstractCatalogKeyword> keywords = new ArrayList<AbstractCatalogKeyword>();
+        List<AbstractCatalogKeyword> keywords = new ArrayList();
         while (reader.hasMoreChildren()) {
             reader.moveDown();
             if (reader.getNodeName().equals("ows:Keyword")) {
                 CatalogKeyword keyword = new CatalogKeyword();
-
                 keyword.setKeyword(reader.getValue());
                 keywords.add(keyword);
             } else if (reader.getNodeName().equals("ows:Type")) {
@@ -77,12 +90,15 @@ public class CatalogKeywordsConverter implements Converter {
             }
             reader.moveUp();
         }
-
         catalogKeywords.setKeywords(keywords);
-
         return catalogKeywords;
     }
 
+    /**
+     * Determines whether the converter can marshall a particular type.
+     *
+     * @param type the Class representing the object type to be converted
+     */
     @Override
     public boolean canConvert(Class type) {
         return type.equals(CatalogKeywords.class);

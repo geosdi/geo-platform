@@ -43,9 +43,9 @@ import org.geosdi.geoplatform.connector.pool.factory.v111.GPWMSConnectorFactoryV
 import org.geosdi.geoplatform.connector.server.v111.IGPWMSConnectorStoreV111;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.connector.WMSVersion.V111;
 
 /**
@@ -70,7 +70,7 @@ class GPWMSConnectorBuilderPoolV111 extends GPWMSConnectorBuilderPool<WMSConnect
      * @throws Exception
      */
     @Override
-    protected IGPWMSConnectorStoreV111 internalBuild(@Nonnull(when = When.NEVER) GPPoolConnectorKey key) throws Exception {
+    protected IGPWMSConnectorStoreV111 internalBuild(@Nonnull(when = NEVER) GPPoolConnectorKey key) throws Exception {
         checkArgument(key != null, "The Parameter key must not be null.");
         IGPWMSConnectorStoreV111 wmsConnectorStoreV111 = wmsConnectorPoolV111.borrowObject(key);
         wmsConnectorPoolV111.returnObject(key, wmsConnectorStoreV111);

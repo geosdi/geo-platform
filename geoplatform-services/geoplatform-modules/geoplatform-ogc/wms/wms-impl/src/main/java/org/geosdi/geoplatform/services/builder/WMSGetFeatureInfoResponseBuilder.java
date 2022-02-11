@@ -51,10 +51,7 @@ import javax.annotation.Nonnull;
 import java.net.URL;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.util.concurrent.TimeUnit.MINUTES;
-import static java.util.concurrent.TimeUnit.SECONDS;
 import static javax.annotation.meta.When.NEVER;
-import static org.apache.hc.core5.util.Timeout.of;
 import static org.geosdi.geoplatform.connector.pool.builder.v111.WMSConnectorBuilderPoolV111.wmsConnectorBuilderPoolV111;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML;
@@ -106,14 +103,10 @@ public class WMSGetFeatureInfoResponseBuilder implements GPWMSGetFeatureInfoResp
             try {
                 IGPWMSConnectorStoreV111 wmsServerConnector = wmsConnectorBuilderPoolV111()
                         .withServerUrl(new URL(wmsGetFeatureInfoElement.getWmsServerURL()))
-                        .withPooledConnectorConfig(pooledConnectorConfigBuilder()
-                                .withMaxTotalConnections(60)
-                                .withDefaultMaxPerRoute(30)
-                                .withMaxRedirect(15)
-                                .withConnectionTimeout(of(15l, SECONDS))
-                                .withRequestConnectionTimeout(of(5l, SECONDS))
-                                .withResponseConnectionTimeout(of(3l, SECONDS))
-                                .withConnectionKeepAlive(of(3l, MINUTES))
+                        .withPooledConnectorConfig(pooledConnectorConfigBuilder().withMaxTotalConnections(60)
+                                .withDefaultMaxPerRoute(30).withMaxRedirect(15).withConnectionTimeout(15000)
+                                .withRequestConnectionTimeout(5000).withResponseConnectionTimeout(3000)
+                                .withConnectionKeepAlive(180000)
                                 .build()).build();
                 GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoV111Request = wmsServerConnector.createGetFeatureInfoRequest();
                 GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(request.getBoundingBox().toWMSBoundingBox(),

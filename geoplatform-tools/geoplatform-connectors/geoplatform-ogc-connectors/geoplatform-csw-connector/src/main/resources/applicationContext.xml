@@ -39,15 +39,7 @@
                        value="ows:OperationsMetadata,ogc:Filter_Capabilities,ows:ExtendedCapabilities"/>
             </util:map>
         </property>
-        <property name="typePermissions" ref="typePermissions" />
     </bean>
 
-    <util:list id="typePermissions">
-        <array>
-            <ref bean="catalogCapabilitiesTypePermission" />
-        </array>
-    </util:list>
-
-    <bean id="catalogCapabilitiesTypePermission" class="org.geosdi.geoplatform.connector.api.capabilities.model.csw.CatalogCapabilitiesTypePermission" />
     <bean id="catalogCapabilitiesBean" class="org.geosdi.geoplatform.connector.CatalogGetCapabilitiesBean" />
 </beans>

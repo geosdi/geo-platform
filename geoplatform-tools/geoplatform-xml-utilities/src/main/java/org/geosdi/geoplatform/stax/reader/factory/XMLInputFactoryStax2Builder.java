@@ -252,9 +252,11 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
                     .filter(Objects::nonNull)
                     .filter(entry -> (entry.getKey() != null) && !(entry.getKey().trim().isEmpty()))
                     .filter(entry -> entry.getValue() != null)
-                    .collect(toMap(entry -> entry.getKey(), entry -> entry.getValue()));
+                    .collect(toMap(Map.Entry::getKey, Map.Entry::getValue));
             checkArgument((properties != null) && !(properties.isEmpty()), "The Parameter prop must not contains null keys or null values.");
-            properties.entrySet().forEach(entry -> factory.setProperty(entry.getKey(), entry.getValue()));
+            fromIterable(properties.entrySet())
+                    .doOnComplete(() -> logger.debug("###########RX terminated its work"))
+                    .subscribe(e -> factory.setProperty(e.getKey(), e.getValue()), Throwable::printStackTrace);
             logger.debug("###########################{}#Creates : {}, with Prop : \n{}\n", this.getClass().getSimpleName(), factory, theProp);
             return (F) factory;
         }
@@ -453,12 +455,12 @@ public enum XMLInputFactoryStax2Builder implements GPXMLInputFactoryStax2Builder
                     .filter(Objects::nonNull)
                     .filter(entry -> (entry.getKey() != null) && !(entry.getKey().trim().isEmpty()))
                     .filter(entry -> entry.getValue() != null)
-                    .collect(toMap(entry -> entry.getKey(), entry -> entry.getValue()));
+                    .collect(toMap(Map.Entry::getKey, Map.Entry::getValue));
             checkArgument((properties != null) && !(properties.isEmpty()), "The Parameter prop must not contains null keys or null values.");
             InputFactoryImpl factory = new InputFactoryImpl();
             fromIterable(properties.entrySet())
                     .doOnComplete(() -> logger.debug("###########RX terminated its work"))
-                    .subscribe(e -> factory.setProperty(e.getKey(), e.getValue()), e -> e.printStackTrace());
+                    .subscribe(e -> factory.setProperty(e.getKey(), e.getValue()), Throwable::printStackTrace);
             logger.debug("###########################{}#Creates : {}, with Prop : \n{}\n", this.getClass().getSimpleName(), factory, theProp);
             return (F) factory;
         }

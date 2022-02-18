@@ -47,8 +47,11 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.StringWriter;
+import java.io.Writer;
 
 import static java.io.File.separator;
+import static java.math.BigDecimal.valueOf;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder.newInstance;
@@ -71,6 +74,7 @@ public class GML2ParserTest {
     private static File file4;
     private static File file5;
     private static File file6;
+    private static File file7;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -83,6 +87,7 @@ public class GML2ParserTest {
         file4 = new File(basePath.concat("lineString.xml"));
         file5 = new File(basePath.concat("multiPolygon-Corine.xml"));
         file6 = new File(basePath.concat("multiPolygonLaghi.xml"));
+        file7 = new File(basePath.concat("point_1.xml"));
     }
 
     @Test
@@ -167,5 +172,31 @@ public class GML2ParserTest {
     public void p_unmarshallerTest() throws Exception {
         MultiPolygonType multiPolygon = jaxbContextBuilder.unmarshal(new FileReader(file6), MultiPolygonType.class);
         logger.info("######################UNMARSHALL_GML2_GEOMETRY : {}\n", multiPolygon);
+    }
+
+    @Test
+    public void q_unmarshallerTest() throws Exception {
+        GMLReader gmlReader = new GMLReader();
+        logger.info("#########################JTS_GEOMETRY : {}\n", gmlReader.read(new FileReader(file7), new GeometryFactory()));
+    }
+
+    @Test
+    public void r_unmarshallerTest() throws Exception {
+        PointType point = jaxbContextBuilder.unmarshal(new FileReader(file7), PointType.class);
+        logger.info("######################UNMARSHALL_GML2_GEOMETRY : {}\n", point);
+    }
+
+    @Test
+    public void s_marshallerTest() throws Exception {
+        PointType point = new PointType();
+        point.setGid("P1");
+        point.setSrsName("http://www.opengis.net/gml/srs/epsg.xml#4326");
+        CoordType coordType = new CoordType();
+        coordType.setX(valueOf(56.1));
+        coordType.setY(valueOf(0.45));
+        point.setCoord(coordType);
+        Writer writer = new StringWriter();
+        jaxbContextBuilder.marshal(point, writer);
+        logger.info("\n{}\n", writer);
     }
 }

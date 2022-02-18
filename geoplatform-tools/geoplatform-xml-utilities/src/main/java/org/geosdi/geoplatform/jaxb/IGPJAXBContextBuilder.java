@@ -155,7 +155,7 @@ public interface IGPJAXBContextBuilder {
      * @param path
      * @throws Exception
      */
-    void marshall(Object jaxbObject, Path path) throws Exception;
+    void marshal(Object jaxbObject, Path path) throws Exception;
 
     /**
      * @param jaxbObject

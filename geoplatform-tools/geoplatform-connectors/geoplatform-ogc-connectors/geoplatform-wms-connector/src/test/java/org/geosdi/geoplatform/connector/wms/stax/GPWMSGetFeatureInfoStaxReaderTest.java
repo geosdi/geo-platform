@@ -540,4 +540,10 @@ public class GPWMSGetFeatureInfoStaxReaderTest extends WMSGetFeatureInfoStaxRead
         logger.info("#######################FEATURE_COLLECTION_ACQUE_SECONDARIE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("AcqueSecondarie.xml"))));
     }
+
+    @Test
+    public void d_r_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_ADMIN_GEO : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("AdminGeo.xml"))));
+    }
 }

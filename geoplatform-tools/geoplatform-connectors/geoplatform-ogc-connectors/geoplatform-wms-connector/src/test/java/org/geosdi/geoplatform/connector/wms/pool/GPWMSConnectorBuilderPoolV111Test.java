@@ -41,6 +41,8 @@ import org.junit.runners.MethodSorters;
 
 import java.net.URL;
 
+import static org.geosdi.geoplatform.connector.pool.builder.v111.WMSConnectorBuilderPoolV111.wmsConnectorBuilderPoolV111;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -48,7 +50,7 @@ import java.net.URL;
 @FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
 public class GPWMSConnectorBuilderPoolV111Test {
 
-    private static final WMSConnectorBuilderPoolV111 wmsConnectorBuilderPoolV11 = WMSConnectorBuilderPoolV111.wmsConnectorBuilderPoolV111();
+    private static final WMSConnectorBuilderPoolV111 wmsConnectorBuilderPoolV11 = wmsConnectorBuilderPoolV111();
 
     @Test
     public void a_simplePoolTest() throws Exception {

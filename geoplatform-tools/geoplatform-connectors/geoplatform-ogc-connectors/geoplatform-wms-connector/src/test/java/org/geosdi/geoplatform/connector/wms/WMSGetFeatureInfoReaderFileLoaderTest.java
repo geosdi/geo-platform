@@ -114,7 +114,7 @@ public class WMSGetFeatureInfoReaderFileLoaderTest {
                 "CAMPIndustrieARischio.xml", "layer_importer148.xml", "fluids_rete_zk.xml", "AreeBonifica.xml",
                 "CentraliElettriche.xml", "features.xml", "Geositi.xml", "ADBRisk.xml", "PoliziaIDR.xml",
                 "ParchiRegionaliRiserve.xml", "ReteGeodetica.xml", "ElementiRidotti.xml", "UsoSuoloRT.xml",
-                "AlberiMonumentali.xml", "AcqueSecondarie.xml");
+                "AlberiMonumentali.xml", "AcqueSecondarie.xml", "AdminGeo.xml");
     }
 
     /**

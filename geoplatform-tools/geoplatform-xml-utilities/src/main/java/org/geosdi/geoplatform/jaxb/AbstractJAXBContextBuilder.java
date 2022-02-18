@@ -51,6 +51,9 @@ import java.net.URL;
 import java.nio.file.Path;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.TRUE;
+import static javax.xml.bind.Marshaller.JAXB_ENCODING;
+import static javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -245,7 +248,7 @@ public abstract class AbstractJAXBContextBuilder implements IGPJAXBContextBuilde
      * @throws Exception
      */
     @Override
-    public void marshall(Object jaxbObject, Path path) throws Exception {
+    public void marshal(Object jaxbObject, Path path) throws Exception {
         checkArgument(path != null, "The Parameter path must not be null");
         marshal(jaxbObject, path.toFile());
     }
@@ -317,8 +320,8 @@ public abstract class AbstractJAXBContextBuilder implements IGPJAXBContextBuilde
         try {
             JAXBContext context = ((jaxbObject instanceof JAXBElement) ? getContext(((JAXBElement<?>) jaxbObject).getDeclaredType()) : getContext(jaxbObject.getClass()));
             Marshaller marshaller = context.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+            marshaller.setProperty(JAXB_FORMATTED_OUTPUT, TRUE);
+            marshaller.setProperty(JAXB_ENCODING, "UTF-8");
             return marshaller;
         } catch (JAXBException e) {
             throw new DataBindingException(e);

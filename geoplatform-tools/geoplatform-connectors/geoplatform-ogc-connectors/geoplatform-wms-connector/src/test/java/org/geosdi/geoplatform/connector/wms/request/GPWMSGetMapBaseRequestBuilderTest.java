@@ -208,4 +208,33 @@ public class GPWMSGetMapBaseRequestBuilderTest {
                         "&srs=EPSG:32632&format=application/openlayers")
                 .build());
     }
+
+    @Test
+    public void u_wmsGetMapBaseRequestBuilderTest() throws Exception {
+        logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
+                .withKeyValuePair("SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Oceans,Countries,Cities" +
+                        "&STYLES=&SRS=EPSG:4326&BBOX=-124,21,-66,49&WIDTH=600&HEIGHT=400&FORMAT=image/png&")
+                .build());
+    }
+
+    @Test
+    public void v_wmsGetMapBaseRequestBuilderTest() throws Exception {
+        logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
+                .withKeyValuePair("SSERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=States,Cities" +
+                        "&STYLES=&SRS=EPSG:4326&BBOX=-124,21,-66,49&WIDTH=600&HEIGHT=400&FORMAT=image/png" +
+                        "&SERVICENAME=myservice&TRANSPARENT=TRUE&BGCOLOR=0xFF0000&EXCEPTIONS=application/vnd.ogc.se_blank" +
+                        "&REASPECT=TRUE&")
+                .build());
+    }
+
+    @Test
+    public void w_wmsGetMapBaseRequestBuilderTest() throws Exception {
+        logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
+                .withKeyValuePair("http://your.server.address/wms/liegenschaftsentwaesserung/abwasser_werkplan" +
+                        "?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=Haltungen,Normschacht,Spezialbauwerke" +
+                        "&STYLES=&CRS=EPSG%3A21781&BBOX=696136.28844801,245797.12108743,696318.91114315," +
+                        "245939.25832905&WIDTH=1042&HEIGHT=811&FORMAT=application/dxf&FORMAT_OPTIONS=MODE:SYMBOLLAYERSYMBOLOGY;" +
+                        "SCALE:250&FILE_NAME=werkplan_abwasser.dxf")
+                .build());
+    }
 }

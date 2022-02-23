@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.wms.store;
 
+import org.apache.hc.core5.util.Timeout;
 import org.geosdi.geoplatform.connector.server.request.GPWMSBoundingBox;
 import org.geosdi.geoplatform.connector.server.request.GPWMSGetMapBaseRequest;
 import org.geosdi.geoplatform.connector.server.request.WMSBoundingBox;
@@ -51,6 +52,8 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 
+import static java.util.concurrent.TimeUnit.MINUTES;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.pool.builder.v111.WMSConnectorBuilderPoolV111.wmsConnectorBuilderPoolV111;
@@ -74,9 +77,13 @@ public class GPWMSConnectorStoreSit2PoolV111Test {
         wmsServerConnector = wmsConnectorBuilderPoolV111()
                 .withServerUrl(new URL("https://sit2.regione.campania.it/geoserver/wms"))
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
-                        .withMaxTotalConnections(150)
-                        .withDefaultMaxPerRoute(80)
-                        .withMaxRedirect(20)
+                        .withMaxTotalConnections(20)
+                        .withConnectionTimeout(Timeout.of(15l, SECONDS))
+                        .withRequestConnectionTimeout(Timeout.of(5l, SECONDS))
+                        .withResponseConnectionTimeout(Timeout.of(3l, SECONDS))
+                        .withConnectionKeepAlive(Timeout.of(3l, MINUTES))
+                        .withDefaultMaxPerRoute(10)
+                        .withMaxRedirect(5)
                         .build())
                 .build();
     }
@@ -91,14 +98,14 @@ public class GPWMSConnectorStoreSit2PoolV111Test {
     public void b_wmsDescribeLayerV11Test() throws Exception {
         GPWMSDescribeLayerV111Request wmsDescribeLayerRequest = wmsServerConnector.createDescribeLayerRequest();
         logger.info("##########################WMS_DESCRIBE_LAYER_RESPONSE_V111 : {}\n", wmsDescribeLayerRequest
-                .withLayers("RegioneCampania.Cartografia.Tematica:sitdbo_zps").getResponse());
+                .withLayers("RegioneCampania.Cartografia.Tematica:sitdbo_zps").getResponseAsString());
     }
 
     @Test
     public void c_wmsDescribeLayerV11Test() throws Exception {
         GPWMSDescribeLayerV111Request wmsDescribeLayerRequest = wmsServerConnector.createDescribeLayerRequest();
         logger.info("##########################WMS_DESCRIBE_LAYER_RESPONSE_V111 : {}\n", wmsDescribeLayerRequest
-                .withLayers("RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico").getResponse());
+                .withLayers("RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico").getResponseAsString());
     }
 
     @Test
@@ -118,6 +125,6 @@ public class GPWMSConnectorStoreSit2PoolV111Test {
         GPWMSDescribeLayerV111Request wmsDescribeLayerRequest = wmsServerConnector.createDescribeLayerRequest();
         logger.info("##########################WMS_DESCRIBE_LAYER_RESPONSE_V111 : {}\n", wmsDescribeLayerRequest
                 .withLayers("RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico",
-                        "RegioneCampania.Cartografia.Tematica:sitdbo_aree_carsiche", "RegioneCampania.Ambiente:sitdbo_zps").getResponse());
+                        "RegioneCampania.Cartografia.Tematica:sitdbo_aree_carsiche", "RegioneCampania.Ambiente:sitdbo_zps").getResponseAsString());
     }
 }

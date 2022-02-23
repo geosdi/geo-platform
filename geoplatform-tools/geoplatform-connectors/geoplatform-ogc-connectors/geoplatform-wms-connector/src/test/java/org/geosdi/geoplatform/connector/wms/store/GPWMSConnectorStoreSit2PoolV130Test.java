@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.wms.store;
 
+import org.apache.hc.core5.util.Timeout;
 import org.geosdi.geoplatform.connector.server.request.GPWMSBoundingBox;
 import org.geosdi.geoplatform.connector.server.request.GPWMSGetMapBaseRequest;
 import org.geosdi.geoplatform.connector.server.request.WMSBoundingBox;
@@ -50,6 +51,8 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 
+import static java.util.concurrent.TimeUnit.MINUTES;
+import static java.util.concurrent.TimeUnit.SECONDS;
 import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.pool.builder.v130.WMSConnectorBuilderPoolV130.wmsConnectorBuilderPoolV130;
@@ -73,9 +76,13 @@ public class GPWMSConnectorStoreSit2PoolV130Test {
         wmsServerConnector = wmsConnectorBuilderPoolV130()
                 .withServerUrl(new URL("https://sit2.regione.campania.it/geoserver/wms"))
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
-                        .withMaxTotalConnections(150)
-                        .withDefaultMaxPerRoute(80)
-                        .withMaxRedirect(20)
+                        .withMaxTotalConnections(20)
+                        .withConnectionTimeout(Timeout.of(15l, SECONDS))
+                        .withRequestConnectionTimeout(Timeout.of(5l, SECONDS))
+                        .withResponseConnectionTimeout(Timeout.of(3l, SECONDS))
+                        .withConnectionKeepAlive(Timeout.of(3l, MINUTES))
+                        .withDefaultMaxPerRoute(10)
+                        .withMaxRedirect(5)
                         .build())
                 .build();
     }

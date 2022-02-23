@@ -54,7 +54,7 @@ import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.pool.builder.v130.WMSConnectorBuilderPoolV130.wmsConnectorBuilderPoolV130;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
-import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.*;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML_AS_STRING;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -73,9 +73,13 @@ public class GPWMSConnectorStoreSit2PoolV130Test {
         wmsServerConnector = wmsConnectorBuilderPoolV130()
                 .withServerUrl(new URL("https://sit2.regione.campania.it/geoserver/wms"))
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
-                        .withMaxTotalConnections(150)
-                        .withDefaultMaxPerRoute(80)
-                        .withMaxRedirect(20)
+                        .withMaxTotalConnections(20)
+                        .withConnectionTimeout(15)
+                        .withRequestConnectionTimeout(5)
+                        .withResponseConnectionTimeout(3)
+                        .withConnectionKeepAlive(3)
+                        .withDefaultMaxPerRoute(10)
+                        .withMaxRedirect(5)
                         .build())
                 .build();
     }

@@ -384,4 +384,10 @@ public class GPWMSGetFeatureInfoAaltoReaderTest extends WMSGetFeatureInfoAaltoRe
         logger.info("#######################FEATURE_COLLECTION_ACQUE_SECONDARIE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("AcqueSecondarie.xml"))));
     }
+
+    @Test
+    public void c_i_wmsGetFeatureInfoAaltoReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_IDT_SU20G_ZONIZZAZIONE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoReader.read(storage.find("IDT_SU20G_ZONIZZAZIONE.xml"))));
+    }
 }

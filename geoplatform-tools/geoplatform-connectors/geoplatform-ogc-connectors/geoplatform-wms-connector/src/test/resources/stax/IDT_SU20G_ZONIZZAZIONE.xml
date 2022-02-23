@@ -1,0 +1,2662 @@
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:ras="http://www.regione.sardegna.it" xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.regione.sardegna.it https://webgis.regione.sardegna.it/geoserver/ras/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=ras%3AIDT_SU20G_ZONIZZAZIONE http://www.opengis.net/wfs https://webgis.regione.sardegna.it/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">1426651.996097,4301755
+                1570228.998566,4573602.503298
+            </gml:coordinates>
+        </gml:Box>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.447">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1431559.610959,4510588.656253 1431617.01021,4510646.055503
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>E</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>E</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>2561.131</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1431586.045413,4510588.656253 1431595.02495,4510589.360936
+                                        1431603.347239,4510592.805959 1431610.197635,4510598.654099
+                                        1431614.905574,4510606.3329 1431617.01021,4510615.090706
+                                        1431616.305527,4510624.070243 1431612.860504,4510632.392532
+                                        1431607.012363,4510639.242928 1431599.333563,4510643.950867
+                                        1431590.575756,4510646.055503 1431581.596219,4510645.35082
+                                        1431573.273931,4510641.905797 1431566.423535,4510636.057657
+                                        1431561.715596,4510628.378856 1431559.610959,4510619.62105
+                                        1431560.315643,4510610.641512 1431563.760666,4510602.319224
+                                        1431569.608806,4510595.468828 1431577.287606,4510590.760889
+                                        1431586.045413,4510588.656253
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>E_2</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.448">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1462826.166903,4510178.870211 1463355.048004,4510634.890586
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>C</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>C</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>145992.782</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1462859.179781,4510541.192478 1462873.93601,4510462.094479
+                                        1462884.890629,4510418.946563 1462922.354644,4510216.634686
+                                        1462925.265187,4510191.092506 1462956.592002,4510196.750713
+                                        1462996.313581,4510188.71777 1463059.018941,4510178.870211
+                                        1463092.330041,4510180.029781 1463134.979053,4510198.760212
+                                        1463175.850074,4510246.880473 1463225.976604,4510310.984717
+                                        1463277.776973,4510371.10321 1463311.733635,4510394.484073
+                                        1463355.048004,4510400.208719 1463354.025794,4510401.089565
+                                        1463247.392699,4510492.976142 1463184.940404,4510544.529441
+                                        1463119.691603,4510588.373448 1463044.18276,4510625.061459
+                                        1462990.09218,4510629.730639 1462919.853557,4510634.890586
+                                        1462826.166903,4510620.59738 1462846.248665,4510586.61321
+                                        1462859.179781,4510541.192478
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>C_6</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.449">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1462808.22264,4510462.094479 1462873.93601,4510620.59738
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>3761.824</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1462808.22264,4510564.020207 1462853.033057,4510543.946081
+                                        1462829.03559,4510477.478471 1462873.93601,4510462.094479
+                                        1462859.179781,4510541.192478 1462846.248665,4510586.61321
+                                        1462826.166903,4510620.59738 1462819.561237,4510597.49501
+                                        1462808.22264,4510564.020207
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_3</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.450">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1462581.741799,4509487.328038 1463431.091148,4510579.835547
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>298341.313</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1462611.508916,4510549.934558 1462602.849024,4510524.950536
+                                        1462581.741799,4510463.537686 1462684.279747,4510426.179244
+                                        1462677.961971,4510418.404538 1462658.76617,4510388.959466
+                                        1462645.281559,4510363.738147 1462638.712162,4510358.210181
+                                        1462625.227551,4510356.482614 1462617.96668,4510352.336639
+                                        1462619.783593,4510340.439 1462623.596398,4510321.735737
+                                        1462622.494337,4510283.502338 1462726.289624,4510160.919982
+                                        1462734.334739,4510148.973872 1462744.985489,4510186.22777
+                                        1462777.067549,4510204.774741 1462791.719945,4510186.173171
+                                        1462787.619844,4510180.755966 1462787.480839,4510141.858921
+                                        1462799.549806,4510142.235562 1462801.136899,4510107.408136
+                                        1462781.852802,4510079.275791 1462770.985804,4510047.413891
+                                        1462769.487638,4510043.021288 1462765.489862,4509975.088726
+                                        1462771.923236,4509927.8757 1462772.901328,4509920.697717
+                                        1462773.321889,4509907.243127 1462772.696305,4509905.53539
+                                        1462757.045949,4509902.917773 1462759.449419,4509877.535774
+                                        1462759.009698,4509840.249934 1462750.573927,4509809.348972
+                                        1462733.746512,4509778.471783 1462678.952965,4509730.170102
+                                        1462640.48128,4509691.833016 1462837.599946,4509695.87403
+                                        1462932.310645,4509693.959786 1463080.844801,4509703.222345
+                                        1463110.271687,4509778.327975 1463139.897753,4509848.126293
+                                        1463219.415895,4509836.006734 1463198.896599,4509761.142634
+                                        1463195.563629,4509748.617545 1463189.230122,4509715.100476
+                                        1463188.119556,4509701.271316 1463236.578294,4509697.4348
+                                        1463239.275798,4509554.574812 1463241.940285,4509487.328038
+                                        1463269.515564,4509489.741475 1463350.123091,4509529.485574
+                                        1463431.091148,4509569.407435 1463419.51766,4509601.01031
+                                        1463337.184985,4509612.846753 1463308.169434,4509670.168555
+                                        1463304.453847,4509677.508901 1463278.540855,4509731.255842
+                                        1463237.010516,4509746.932093 1463275.189602,4509855.714696
+                                        1463160.614979,4509910.174197 1463169.844706,4509926.105969
+                                        1463176.128761,4509937.649526 1463054.226859,4509982.026913
+                                        1463079.81124,4510012.489357 1463113.672809,4510035.430106
+                                        1463157.270548,4510086.211017 1463186.548649,4510101.60039
+                                        1463219.72558,4510130.6451 1463244.852568,4510178.424652
+                                        1463277.194397,4510242.902952 1463318.03962,4510326.746504
+                                        1463355.048004,4510400.208719 1463311.733635,4510394.484073
+                                        1463277.776973,4510371.10321 1463225.976604,4510310.984717
+                                        1463175.850074,4510246.880473 1463134.979053,4510198.760212
+                                        1463092.330041,4510180.029781 1463059.018941,4510178.870211
+                                        1462996.313581,4510188.71777 1462956.592002,4510196.750713
+                                        1462925.265187,4510191.092506 1462922.354644,4510216.634686
+                                        1462884.890629,4510418.946563 1462863.368836,4510421.336121
+                                        1462864.542686,4510407.673173 1462854.834927,4510391.182648
+                                        1462847.6529,4510383.38763 1462874.496713,4510247.275823
+                                        1462834.193826,4510261.367576 1462834.393004,4510270.097907
+                                        1462694.031806,4510316.23676 1462703.91847,4510355.632948
+                                        1462692.499375,4510358.921073 1462691.873504,4510393.856444
+                                        1462713.444924,4510424.80189 1462762.488943,4510410.425372
+                                        1462770.632315,4510420.115439 1462756.704436,4510431.986194
+                                        1462734.362859,4510462.495992 1462705.948856,4510500.494562
+                                        1462726.488047,4510566.794221 1462688.969828,4510579.835547
+                                        1462685.200983,4510572.231997 1462667.139813,4510578.661852
+                                        1462652.043708,4510534.440454 1462611.508916,4510549.934558
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_7</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.451">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1463433.789645,4510290.888777 1463744.346956,4510577.978055
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>C</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>C</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>50529.91</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1463433.789645,4510378.753698 1463460.954997,4510375.035636
+                                        1463540.033201,4510339.859091 1463564.177495,4510324.291915
+                                        1463661.93212,4510290.888777 1463666.448915,4510301.599841
+                                        1463711.237612,4510403.259845 1463744.346956,4510480.933097
+                                        1463611.967118,4510537.876838 1463526.365372,4510577.978055
+                                        1463458.419104,4510436.081843 1463433.789645,4510378.753698
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1463561.800304,4510429.367389 1463535.871087,4510442.27574
+                                        1463548.138759,4510466.836272 1463574.015476,4510454.559446
+                                        1463561.800304,4510429.367389
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>C_5</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.452">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1461485.649059,4510484.318449 1461552.586259,4510569.389728
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>E</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>E</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>3486.414</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1461552.586259,4510551.770519 1461507.194927,4510569.389728
+                                        1461485.649059,4510501.877862 1461532.817812,4510484.318449
+                                        1461552.586259,4510551.770519
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>E_3</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.453">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1453314.736188,4509830.726064 1453895.889939,4510539.736652
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>G</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>G</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>343037.737</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1453497.128587,4510515.605613 1453314.736188,4510539.736652
+                                        1453316.915265,4510031.945349 1453390.387633,4509936.294489
+                                        1453497.128587,4509912.630155 1453866.567285,4509830.726064
+                                        1453895.889939,4510462.848338 1453497.128587,4510515.605613
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>G_7</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.454">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1460900.359743,4509802.238862 1461891.50278,4510521.950352
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>82677.099</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1460900.359743,4510463.119477 1460918.649881,4510455.63992
+                                        1460967.038184,4510422.975788 1461032.82258,4510376.913012
+                                        1461095.744313,4510332.101407 1461167.025731,4510289.834397
+                                        1461222.610397,4510262.126332 1461280.770255,4510232.346623
+                                        1461320.152881,4510214.101388 1461390.89779,4510188.393875
+                                        1461420.712335,4510172.251218 1461437.592899,4510154.264572
+                                        1461436.13719,4510105.832255 1461522.261143,4510046.138389
+                                        1461612.544002,4509986.242043 1461623.208045,4509975.015901
+                                        1461653.084001,4509955.863999 1461664.629803,4509947.018943
+                                        1461686.909836,4509935.571212 1461709.647606,4509918.404996
+                                        1461778.671251,4509866.79204 1461793.285827,4509855.221774
+                                        1461813.617915,4509850.844947 1461822.921057,4509802.238862
+                                        1461855.63716,4509840.391238 1461875.024451,4509884.599457
+                                        1461891.50278,4509912.857528 1461788.132159,4509974.003667
+                                        1461608.001834,4510090.889708 1461444.488929,4510194.711695
+                                        1461375.867811,4510240.043007 1461305.625685,4510284.993401
+                                        1461225.991924,4510333.608825 1461155.456966,4510377.569803
+                                        1461059.900268,4510440.631653 1461001.102451,4510480.20983
+                                        1460934.353594,4510521.950352 1460914.70077,4510490.977741
+                                        1460900.359743,4510463.119477
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_5</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.455">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1459328.528553,4510129.199776 1459658.657046,4510487.565911
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>86652.813</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1459329.133664,4510284.56472 1459333.800845,4510259.448298
+                                        1459444.579081,4510208.515111 1459532.809431,4510160.520453
+                                        1459585.747798,4510133.094875 1459641.59302,4510129.199776
+                                        1459638.892767,4510308.382987 1459637.291349,4510402.899546
+                                        1459658.657046,4510474.089173 1459535.26951,4510487.565911
+                                        1459524.273937,4510453.198641 1459377.228222,4510483.011596
+                                        1459333.008436,4510363.294309 1459328.528553,4510337.617619
+                                        1459329.133664,4510284.56472
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_5</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.628">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1463827.063585,4508744.36036 1464004.61506,4508842.904454
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>G</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>G</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>11423.507</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1463849.602559,4508744.36036 1463909.233133,4508753.416539
+                                        1464004.61506,4508768.997084 1463985.825706,4508835.896818
+                                        1463984.350942,4508842.904454 1463827.063585,4508808.463917
+                                        1463849.602559,4508744.36036
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>G_4</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.629">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1462410.324863,4508731.112337 1462496.639832,4508830.86416
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>5608.061</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1462496.639832,4508823.357297 1462480.55278,4508829.488845
+                                        1462454.022671,4508830.86416 1462445.028458,4508829.488845
+                                        1462423.030887,4508792.75363 1462410.324863,4508772.869228
+                                        1462437.334739,4508758.215999 1462469.51851,4508739.160734
+                                        1462490.742074,4508731.112337 1462494.524008,4508792.516676
+                                        1462495.15277,4508803.191507 1462496.639832,4508823.357297
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_3</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.630">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1463380.331093,4508685.848071 1463567.113506,4508828.712902
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>G</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>G</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>13482.253</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1463446.655231,4508824.223971 1463380.331093,4508771.522994
+                                        1463449.463057,4508685.848071 1463567.113506,4508778.121107
+                                        1463526.804488,4508828.712902 1463477.076619,4508786.800235
+                                        1463446.655231,4508824.223971
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>G_4</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.631">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1463007.067328,4508791.370581 1463040.9023,4508820.956005
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>451.346</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1463040.9023,4508808.336072 1463032.716846,4508820.956005
+                                        1463007.067328,4508799.206361 1463013.093324,4508792.302218
+                                        1463016.008605,4508794.769296 1463019.586041,4508791.370581
+                                        1463031.154556,4508800.527577 1463040.9023,4508808.336072
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_1</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.632">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1462814.47698,4508789.104332 1462847.081378,4508818.366914
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>393.104</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1462841.054814,4508789.104332 1462844.222605,4508792.112455
+                                        1462841.845429,4508794.336816 1462847.081378,4508799.938311
+                                        1462822.351889,4508818.366914 1462814.47698,4508808.444257
+                                        1462816.273084,4508807.138157 1462841.054814,4508789.104332
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_1</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.633">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1464021.928977,4508731.49993 1464194.056462,4508817.735833
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>8772.217</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1464154.459485,4508731.49993 1464169.631112,4508739.158963
+                                        1464194.056462,4508794.200096 1464115.764309,4508809.050768
+                                        1464023.952216,4508817.735833 1464021.928977,4508794.762658
+                                        1464023.517377,4508774.974031 1464144.295623,4508743.11713
+                                        1464154.459485,4508731.49993
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_4</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.634">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1463116.355996,4508048.279872 1463653.198705,4508799.338431
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>H</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>H</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>59206.683</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1463461.536358,4508342.3319 1463474.357948,4508334.482886
+                                        1463525.303601,4508255.131749 1463536.323912,4508257.989215
+                                        1463574.949793,4508193.510609 1463596.294285,4508128.097363
+                                        1463601.024161,4508048.279872 1463623.470898,4508051.553635
+                                        1463629.128384,4508052.378755 1463653.198705,4508061.832682
+                                        1463644.240345,4508086.894418 1463625.820897,4508176.496236
+                                        1463619.319567,4508192.994898 1463610.168025,4508212.411852
+                                        1463618.529287,4508215.992141 1463573.438317,4508282.687062
+                                        1463550.634231,4508318.372869 1463543.779035,4508312.557533
+                                        1463524.6677,4508340.006168 1463535.534246,4508347.76115
+                                        1463513.955281,4508378.266231 1463480.47279,4508409.224362
+                                        1463495.474625,4508417.120277 1463477.585878,4508432.892491
+                                        1463456.886158,4508417.238838 1463441.622186,4508432.159019
+                                        1463443.089942,4508434.665116 1463435.180271,4508451.894931
+                                        1463423.919706,4508463.613302 1463398.607889,4508489.928645
+                                        1463401.181271,4508491.809684 1463366.944541,4508535.371272
+                                        1463371.430767,4508541.876281 1463346.364703,4508570.515111
+                                        1463358.709734,4508584.684874 1463317.47155,4508628.562165
+                                        1463295.880393,4508614.137269 1463275.011502,4508639.065182
+                                        1463269.901207,4508648.356552 1463289.261284,4508668.484426
+                                        1463235.063215,4508731.089983 1463176.094105,4508799.338431
+                                        1463116.355996,4508753.755977 1463141.469143,4508716.616082
+                                        1463150.497963,4508721.630854 1463165.681501,4508696.794954
+                                        1463159.840778,4508693.954854 1463219.830174,4508603.831971
+                                        1463229.326362,4508612.178584 1463271.732109,4508559.984481
+                                        1463296.036112,4508534.090225 1463277.540216,4508516.781799
+                                        1463297.120262,4508488.029369 1463306.710547,4508495.969683
+                                        1463315.674451,4508480.847883 1463338.019191,4508447.800556
+                                        1463323.71609,4508437.609053 1463375.784078,4508358.543334
+                                        1463419.092648,4508394.272281 1463425.923284,4508384.649487
+                                        1463457.888087,4508344.565268 1463461.536358,4508342.3319
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>H_5</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.635">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1463021.296911,4508722.297941 1463084.857431,4508772.479273
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>G</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>G</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>1322.391</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1463084.857431,4508740.566404 1463084.656607,4508740.877817
+                                        1463071.128635,4508761.734584 1463070.254907,4508761.286257
+                                        1463066.031646,4508759.046053 1463070.398123,4508751.393766
+                                        1463064.471575,4508746.764194 1463049.698166,4508762.890829
+                                        1463043.616256,4508758.011942 1463036.159604,4508764.86561
+                                        1463038.720235,4508767.238563 1463033.810408,4508772.479273
+                                        1463021.296911,4508761.218876 1463058.653815,4508722.297941
+                                        1463076.14796,4508734.494393 1463084.857431,4508740.566404
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>G_2</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.636">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1464334.463535,4508169.428937 1465084.80832,4508763.922455
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>144619.477</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1464499.972724,4508763.922455 1464505.559313,4508705.033725
+                                        1464504.502805,4508686.539302 1464486.262196,4508655.220154
+                                        1464468.027962,4508624.578855 1464464.173303,4508610.951407
+                                        1464468.575826,4508599.411386 1464481.915432,4508578.832461
+                                        1464483.362653,4508565.875999 1464470.601639,4508533.269356
+                                        1464465.154064,4508517.104701 1464486.835156,4508497.149785
+                                        1464474.74282,4508493.937567 1464444.543424,4508483.643753
+                                        1464390.950284,4508465.904619 1464341.032906,4508449.690072
+                                        1464334.463535,4508358.030067 1464334.979328,4508357.930648
+                                        1464382.809,4508348.801129 1464397.483759,4508436.742239
+                                        1464399.046091,4508445.328187 1464456.744876,4508425.852472
+                                        1464488.857849,4508415.629455 1464516.823588,4508317.817592
+                                        1464422.313675,4508334.415033 1464408.810664,4508274.671659
+                                        1464399.302759,4508233.644416 1464471.393212,4508196.805139
+                                        1464508.933812,4508179.299688 1464531.531826,4508169.428937
+                                        1464579.177523,4508302.204745 1464670.279661,4508282.423155
+                                        1464656.933796,4508243.684799 1464690.753366,4508233.882269
+                                        1464701.196051,4508237.42103 1464708.124056,4508259.034598
+                                        1464731.64487,4508290.59684 1464789.982443,4508277.756903
+                                        1464959.400587,4508236.703491 1464972.703277,4508249.41808
+                                        1465046.017854,4508211.016974 1465059.287641,4508227.813849
+                                        1465077.868139,4508248.471938 1465084.80832,4508263.553978
+                                        1464932.772299,4508332.106937 1464914.43774,4508318.591883
+                                        1464903.645059,4508314.54396 1464898.434034,4508328.439916
+                                        1464891.032972,4508331.627099 1464875.480761,4508351.985314
+                                        1464858.492133,4508361.020038 1464857.390981,4508373.37213
+                                        1464797.26435,4508419.895737 1464765.645181,4508441.631661
+                                        1464743.202469,4508450.785751 1464702.12521,4508459.794882
+                                        1464677.512446,4508469.568188 1464645.139656,4508491.918831
+                                        1464615.993643,4508531.914664 1464607.88181,4508551.73899
+                                        1464626.097536,4508749.165743 1464591.278317,4508752.737045
+                                        1464553.370992,4508755.972732 1464499.972724,4508763.922455
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_6</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.637">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1463871.925332,4508561.217236 1464024.231353,4508756.309111
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>15982.176</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1463902.277648,4508672.682982 1463871.925332,4508662.403039
+                                        1463892.933746,4508604.192642 1463949.400077,4508561.217236
+                                        1464010.13021,4508576.751808 1464000.227423,4508597.587441
+                                        1463972.757871,4508695.529824 1464024.231353,4508716.383304
+                                        1464016.348138,4508756.309111 1463922.998275,4508739.910197
+                                        1463925.162809,4508728.530566 1463926.260925,4508724.505488
+                                        1463937.17459,4508684.502132 1463902.277648,4508672.682982
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_4</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.638">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1462548.062459,4508727.574313 1462584.846831,4508752.495877
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>575.593</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1462576.948301,4508727.574313 1462584.846831,4508745.181627
+                                        1462571.121346,4508750.15044 1462570.008421,4508747.887705
+                                        1462558.480891,4508752.495877 1462557.577936,4508750.811844
+                                        1462553.330862,4508752.294106 1462548.062459,4508736.375342
+                                        1462576.948301,4508727.574313
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_1</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.639">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1462640.105109,4508685.587658 1462706.830564,4508752.217992
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>G</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>G</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>2457.659</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1462683.463876,4508685.587658 1462706.830564,4508718.477349
+                                        1462693.755017,4508729.389912 1462695.755187,4508734.548781
+                                        1462690.010801,4508738.089901 1462687.939853,4508734.79933
+                                        1462663.493763,4508752.217992 1462640.105109,4508706.058502
+                                        1462673.106597,4508687.753818 1462674.605716,4508689.995722
+                                        1462683.463876,4508685.587658
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>G_2</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.640">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1462837.427935,4508690.933921 1462883.709675,4508738.36566
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>1134.651</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1462862.790263,4508690.933921 1462883.709675,4508722.163112
+                                        1462857.876244,4508738.36566 1462837.427935,4508707.088297
+                                        1462862.790263,4508690.933921
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_1</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.641">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1463058.653815,4508690.812762 1463095.714448,4508734.494393
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>732.962</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1463058.653815,4508722.297941 1463082.127438,4508690.812762
+                                        1463095.714448,4508700.80436 1463083.461825,4508716.832274
+                                        1463087.225506,4508718.728072 1463078.242036,4508731.009967
+                                        1463076.14796,4508734.494393 1463058.653815,4508722.297941
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_1</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.642">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1463889.238329,4508672.682982 1463937.17459,4508724.505488
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>G</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>G</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>1595.011</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1463902.277648,4508672.682982 1463937.17459,4508684.502132
+                                        1463926.260925,4508724.505488 1463915.361752,4508721.64106
+                                        1463889.238329,4508713.230871 1463902.277648,4508672.682982
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>G_2</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.643">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1462853.406937,4508662.529235 1462895.312604,4508707.739085
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>G</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>G</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>756.15</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1462867.003624,4508662.529235 1462877.15859,4508674.714125
+                                        1462895.312604,4508697.939844 1462881.492704,4508707.739085
+                                        1462853.406937,4508670.546772 1462867.003624,4508662.529235
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>G_1</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.77">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1482362.721888,4529858.77091 1482456.883927,4529910.663394
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090079</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>1594.606</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1482450.980206,4529910.663394 1482439.658302,4529906.165669
+                                        1482423.027089,4529898.631971 1482411.8387,4529894.207536
+                                        1482396.696956,4529888.230516 1482383.655371,4529883.018721
+                                        1482362.721888,4529873.224483 1482363.555588,4529870.60224
+                                        1482364.783136,4529866.923126 1482366.010683,4529863.704007
+                                        1482367.731232,4529858.77091 1482380.157732,4529863.568641
+                                        1482393.89109,4529869.241125 1482407.692361,4529874.895382
+                                        1482421.163413,4529880.415448 1482438.999058,4529887.029426
+                                        1482456.883927,4529894.075828 1482454.388068,4529902.180103
+                                        1482450.980206,4529910.663394
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_2</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.78">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1482453.846028,4529742.567823 1482503.717258,4529801.30573
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090079</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>1329.981</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1482453.846028,4529792.619623 1482456.721456,4529788.373054
+                                        1482462.114847,4529778.802556 1482470.865658,4529763.815113
+                                        1482477.651343,4529751.748392 1482482.41049,4529742.567823
+                                        1482488.797181,4529744.783393 1482503.717258,4529752.068465
+                                        1482499.734444,4529759.042082 1482492.883451,4529772.021707
+                                        1482485.145757,4529785.87063 1482475.372354,4529801.30573
+                                        1482453.846028,4529792.619623
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_2</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.79">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1482424.876549,4529721.934497 1482476.669666,4529787.455399
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090079</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>1379.016</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1482442.850893,4529787.455399 1482434.349541,4529783.087353
+                                        1482424.876549,4529777.991299 1482436.882102,4529757.533482
+                                        1482444.551164,4529744.017467 1482452.231254,4529732.601305
+                                        1482459.124967,4529721.934497 1482466.897689,4529725.817276
+                                        1482476.669666,4529731.148668 1482464.384759,4529753.652265
+                                        1482442.850893,4529787.455399
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_2</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.80">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1481717.897702,4529655.581944 1481905.480432,4529759.173784
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090079</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>10241.957</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1481831.267107,4529759.173784 1481825.848488,4529755.852325
+                                        1481814.94935,4529748.711036 1481802.170101,4529740.773325
+                                        1481788.902549,4529733.52209 1481776.621751,4529727.375461
+                                        1481763.244927,4529720.70828 1481749.672597,4529713.854597
+                                        1481741.260357,4529710.613695 1481730.221949,4529706.053767
+                                        1481717.897702,4529702.811009 1481721.493202,4529697.849947
+                                        1481728.290061,4529691.525938 1481736.026063,4529684.470689
+                                        1481743.276393,4529677.249408 1481748.636611,4529668.989863
+                                        1481753.126526,4529663.123019 1481759.22622,4529655.581944
+                                        1481768.910375,4529660.684603 1481781.102327,4529665.154693
+                                        1481795.180742,4529670.082152 1481811.5441,4529675.582367
+                                        1481825.709295,4529680.153998 1481833.772611,4529682.806338
+                                        1481847.569876,4529686.699993 1481858.037531,4529691.03904
+                                        1481860.273181,4529692.105465 1481862.321309,4529686.273066
+                                        1481868.11825,4529676.002328 1481872.299722,4529668.565428
+                                        1481876.469388,4529661.760037 1481884.824421,4529663.595252
+                                        1481889.89955,4529665.788664 1481899.090682,4529669.618387
+                                        1481905.480432,4529673.942908 1481898.60278,4529684.778499
+                                        1481893.841297,4529697.199652 1481889.344185,4529710.677987
+                                        1481885.376216,4529719.399213 1481882.730903,4529726.270475
+                                        1481879.55685,4529730.763395 1481872.943569,4529737.634658
+                                        1481868.975599,4529740.277402 1481866.85943,4529743.713139
+                                        1481858.774772,4529748.034494 1481849.192996,4529752.62057
+                                        1481839.852676,4529757.126139 1481831.267107,4529759.173784
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_4</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.81">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1482132.735944,4529690.485841 1482214.989087,4529743.290663
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090079</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>2038.837</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1482200.811879,4529742.067582 1482185.65536,4529735.625831
+                                        1482170.518364,4529729.253113 1482154.856757,4529722.575559
+                                        1482132.735944,4529712.952401 1482141.726433,4529690.485841
+                                        1482153.320628,4529693.761545 1482169.175796,4529700.090059
+                                        1482192.128078,4529710.71556 1482214.989087,4529721.922601
+                                        1482211.227699,4529733.813059 1482207.185816,4529743.290663
+                                        1482200.811879,4529742.067582
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_2</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.82">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1481395.81402,4529590.486643 1481624.685635,4529732.475544
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090079</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>10339.697</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1481484.365676,4529732.475544 1481469.289497,4529731.843344
+                                        1481449.565565,4529726.944637 1481435.107414,4529721.970712
+                                        1481424.361827,4529713.640028 1481415.59394,4529703.672472
+                                        1481406.556298,4529691.633131 1481398.076883,4529682.576849
+                                        1481402.853276,4529678.055896 1481404.110243,4529672.781451
+                                        1481403.356224,4529665.748786 1481401.093361,4529656.204411
+                                        1481398.579428,4529646.91127 1481395.81402,4529638.120599
+                                        1481396.065494,4529629.831972 1481397.070987,4529620.790066
+                                        1481399.58492,4529613.757402 1481403.356224,4529604.464261
+                                        1481409.671633,4529592.816077 1481421.852687,4529590.486643
+                                        1481414.058833,4529600.888822 1481409.076,4529610.863396
+                                        1481405.264328,4529624.322301 1481405.814015,4529636.22237
+                                        1481406.701172,4529650.455555 1481413.34124,4529662.104958
+                                        1481430.563468,4529670.526276 1481446.539707,4529673.451365
+                                        1481462.974663,4529676.114312 1481474.523408,4529679.221319
+                                        1481486.960555,4529682.328325 1481495.253158,4529690.573716
+                                        1481502.901229,4529688.864496 1481506.478871,4529681.367033
+                                        1481509.511718,4529670.651463 1481511.825471,4529662.826114
+                                        1481513.611652,4529651.703167 1481525.160397,4529650.81533
+                                        1481535.820739,4529651.259107 1481542.483755,4529650.81533
+                                        1481551.811495,4529650.371552 1481545.148962,4529662.355236
+                                        1481539.374348,4529670.788419 1481532.711815,4529681.440488
+                                        1481532.267614,4529691.649062 1481534.937748,4529700.566665
+                                        1481539.624226,4529706.190434 1481545.046475,4529706.960533
+                                        1481550.39697,4529704.497119 1481556.928618,4529700.572533
+                                        1481561.99631,4529695.449421 1481566.777155,4529689.811496
+                                        1481572.279987,4529684.128664 1481577.355855,4529680.925401
+                                        1481584.052562,4529680.172457 1481592.123139,4529677.722079
+                                        1481599.33956,4529676.114312 1481603.781087,4529669.456804
+                                        1481609.1115,4529660.136067 1481614.441913,4529654.366114
+                                        1481616.18291,4529660.845659 1481605.423857,4529678.251562
+                                        1481598.763743,4529684.522919 1481594.665287,4529687.594333
+                                        1481590.438118,4529692.201877 1481601.958314,4529694.351556
+                                        1481610.165389,4529694.666805 1481619.319415,4529695.297867
+                                        1481624.054173,4529695.613116 1481624.370146,4529702.867788
+                                        1481624.685635,4529706.3375 1481624.370146,4529712.330331
+                                        1481624.370146,4529717.692382 1481619.319415,4529718.323444
+                                        1481614.584657,4529718.323444 1481607.008561,4529718.323444
+                                        1481602.589292,4529718.323444 1481593.435266,4529718.323444
+                                        1481586.806121,4529717.692382 1481579.545998,4529718.007913
+                                        1481571.515669,4529716.009302 1481568.723004,4529711.949805
+                                        1481562.152629,4529714.517129 1481555.085188,4529717.956404
+                                        1481543.587653,4529723.058932 1481533.308758,4529726.838129
+                                        1481522.178327,4529731.805686 1481518.211444,4529729.90779
+                                        1481508.770627,4529731.504242 1481498.05857,4529731.665906
+                                        1481484.365676,4529732.475544
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_4</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.83">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1481388.575185,4529507.536537 1481674.933591,4529706.960533
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090079</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>C</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>C</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>25689.538</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1481545.046475,4529706.960533 1481539.624226,4529706.190434
+                                        1481534.937748,4529700.566665 1481532.267614,4529691.649062
+                                        1481532.711815,4529681.440488 1481539.374348,4529670.788419
+                                        1481545.148962,4529662.355236 1481551.811495,4529650.371552
+                                        1481542.483755,4529650.81533 1481535.820739,4529651.259107
+                                        1481525.160397,4529650.81533 1481513.611652,4529651.703167
+                                        1481511.825471,4529662.826114 1481509.511718,4529670.651463
+                                        1481506.478871,4529681.367033 1481502.901229,4529688.864496
+                                        1481495.253158,4529690.573716 1481486.960555,4529682.328325
+                                        1481474.523408,4529679.221319 1481462.974663,4529676.114312
+                                        1481446.539707,4529673.451365 1481430.563468,4529670.526276
+                                        1481413.34124,4529662.104958 1481406.701172,4529650.455555
+                                        1481405.814015,4529636.22237 1481405.264328,4529624.322301
+                                        1481409.076,4529610.863396 1481414.058833,4529600.888822
+                                        1481421.852687,4529590.486643 1481409.671633,4529592.816077
+                                        1481408.699541,4529591.085887 1481400.150751,4529585.349615
+                                        1481388.802001,4529578.913507 1481388.575185,4529578.778043
+                                        1481393.500486,4529566.009903 1481395.537873,4529554.267905
+                                        1481396.47805,4529537.829498 1481395.81562,4529524.892159
+                                        1481395.81562,4529507.536537 1481403.993662,4529509.326618
+                                        1481417.312436,4529516.48666 1481427.137119,4529525.542712
+                                        1481435.549359,4529532.858401 1481440.760253,4529536.596797
+                                        1481440.356215,4529551.919076 1481437.33197,4529558.97008
+                                        1481434.307725,4529569.042781 1481430.318141,4529574.340144
+                                        1481426.222588,4529579.309547 1481449.643064,4529588.870237
+                                        1481458.378247,4529591.158391 1481471.546416,4529594.628608
+                                        1481485.724244,4529599.381677 1481490.290127,4529599.772175
+                                        1481494.093418,4529600.35691 1481496.141194,4529596.849064
+                                        1481496.726204,4529591.587293 1481496.954001,4529588.030108
+                                        1481501.399236,4529582.473461 1481516.81526,4529587.770512
+                                        1481538.289743,4529592.009766 1481541.643535,4529589.947856
+                                        1481544.997327,4529573.194973 1481548.350717,4529559.534849
+                                        1481550.763988,4529550.570846 1481551.656001,4529547.249439
+                                        1481551.971397,4529544.81429 1481581.492644,4529554.331745
+                                        1481604.654973,4529561.212696 1481645.137273,4529572.472381
+                                        1481661.204965,4529577.893753 1481674.933591,4529588.678861
+                                        1481666.64759,4529599.555491 1481660.163858,4529608.537232
+                                        1481653.589889,4529618.746129 1481648.445989,4529624.675967
+                                        1481642.90595,4529632.582323 1481636.970846,4529641.675098
+                                        1481632.222548,4529649.976927 1481623.161416,4529662.976129
+                                        1481618.428594,4529672.056193 1481620.510726,4529684.541562
+                                        1481624.054173,4529695.613116 1481619.319415,4529695.297867
+                                        1481610.165389,4529694.666805 1481601.958314,4529694.351556
+                                        1481590.438118,4529692.201877 1481594.665287,4529687.594333
+                                        1481598.763743,4529684.522919 1481605.423857,4529678.251562
+                                        1481616.18291,4529660.845659 1481614.441913,4529654.366114
+                                        1481609.1115,4529660.136067 1481603.781087,4529669.456804
+                                        1481599.33956,4529676.114312 1481592.123139,4529677.722079
+                                        1481584.052562,4529680.172457 1481577.355855,4529680.925401
+                                        1481572.279987,4529684.128664 1481566.777155,4529689.811496
+                                        1481561.99631,4529695.449421 1481556.928618,4529700.572533
+                                        1481550.39697,4529704.497119 1481545.046475,4529706.960533
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1481439.420392,4529666.322679 1481446.920036,4529665.965624
+                                        1481457.990708,4529665.787378 1481466.149625,4529664.876326
+                                        1481474.975917,4529664.181033 1481477.275229,4529657.044597
+                                        1481478.70364,4529648.301815 1481471.011772,4529647.147515
+                                        1481458.543773,4529648.116211 1481447.593348,4529647.515481
+                                        1481437.460857,4529645.251956 1481428.745539,4529639.380517
+                                        1481424.439887,4529631.566208 1481423.171245,4529629.92446
+                                        1481420.72471,4529638.512603 1481413.634686,4529637.920793
+                                        1481410.850714,4529640.272863 1481410.850714,4529643.662915
+                                        1481412.999659,4529647.455222 1481416.029189,4529653.654544
+                                        1481421.20718,4529659.899348 1481429.242478,4529666.144151
+                                        1481439.420392,4529666.322679
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>C_4</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.263">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1455636.128858,4514341.800588 1455832.930562,4514587.384988
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>22551.836</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1455832.930562,4514460.379783 1455709.145282,4514587.384988
+                                        1455650.858992,4514532.702806 1455636.128858,4514519.345205
+                                        1455670.212187,4514484.474423 1455692.682389,4514461.728155
+                                        1455698.83606,4514452.808528 1455685.77205,4514440.083473
+                                        1455694.667448,4514431.928257 1455672.811501,4514411.791503
+                                        1455690.923853,4514392.162857 1455683.598698,4514383.79542
+                                        1455724.863648,4514341.800588 1455742.532433,4514361.137399
+                                        1455733.723952,4514368.853189 1455741.382112,4514378.065714
+                                        1455726.424704,4514391.460684 1455733.550625,4514400.019474
+                                        1455757.968551,4514378.282469 1455814.101674,4514440.971135
+                                        1455832.930562,4514460.379783
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_4</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.264">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1431070.131501,4514341.976977 1431233.895372,4514552.368367
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>B</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>B</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>19267.619</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1431227.295337,4514497.384022 1431225.605888,4514500.84487
+                                        1431217.153916,4514510.166121 1431207.853189,4514523.421358
+                                        1431196.277037,4514539.648545 1431177.483462,4514548.68768
+                                        1431161.438405,4514549.242229 1431130.100943,4514552.368367
+                                        1431123.328286,4514518.77226 1431070.131501,4514485.738583
+                                        1431074.729296,4514474.290849 1431096.784889,4514476.190052
+                                        1431108.784078,4514471.828961 1431105.827674,4514459.522415
+                                        1431102.378778,4514451.646 1431117.397134,4514446.737883
+                                        1431104.310576,4514427.549906 1431095.493338,4514408.001068
+                                        1431095.913742,4514388.583639 1431103.830812,4514384.652362
+                                        1431149.373499,4514358.948657 1431156.725809,4514355.723102
+                                        1431179.215975,4514343.43478 1431190.24873,4514355.278459
+                                        1431206.587721,4514341.976977 1431214.242739,4514354.733214
+                                        1431206.457243,4514370.195711 1431188.427757,4514410.443853
+                                        1431210.195491,4514422.858973 1431183.165035,4514450.906895
+                                        1431183.137512,4514455.146155 1431233.895372,4514475.966724
+                                        1431231.080627,4514486.525689 1431230.223422,4514487.364139
+                                        1431227.971148,4514491.666181 1431227.158511,4514496.453656
+                                        1431227.295337,4514497.384022
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>B_4</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.265">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1431206.457243,4514226.446042 1431422.484198,4514534.340831
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>H</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>H</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>22597.403</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1431231.080627,4514486.525689 1431233.895372,4514475.966724
+                                        1431219.775537,4514398.964057 1431213.014899,4514367.474653
+                                        1431206.457243,4514370.195711 1431214.242739,4514354.733214
+                                        1431206.587721,4514341.976977 1431308.61045,4514298.325252
+                                        1431310.822276,4514296.280442 1431386.360639,4514226.446042
+                                        1431422.484198,4514259.435816 1431343.836717,4514355.030573
+                                        1431332.271255,4514374.504725 1431322.96344,4514390.362813
+                                        1431310.822276,4514414.788108 1431256.659401,4514523.75165
+                                        1431238.426219,4514534.340831 1431216.174888,4514529.991693
+                                        1431215.391111,4514526.364097 1431230.230098,4514505.82187
+                                        1431233.417123,4514509.080183 1431237.719164,4514511.332457
+                                        1431242.50664,4514512.145094 1431247.310918,4514511.438546
+                                        1431251.661722,4514509.281975 1431255.133166,4514505.886482
+                                        1431257.385441,4514501.584441 1431258.198077,4514496.796965
+                                        1431257.491529,4514491.992687 1431255.334959,4514487.641883
+                                        1431251.939466,4514484.170439 1431247.637425,4514481.918164
+                                        1431242.849949,4514481.105528 1431238.045671,4514481.812076
+                                        1431233.694867,4514483.968646 1431231.080627,4514486.525689
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1431282.916805,4514351.067423 1431278.60175,4514351.852503
+                                        1431274.740492,4514353.932584 1431271.710998,4514357.104052
+                                        1431269.809815,4514361.056463 1431269.223045,4514365.402927
+                                        1431270.008125,4514369.717982 1431272.088206,4514373.57924
+                                        1431275.259674,4514376.608734 1431279.212085,4514378.509916
+                                        1431283.558549,4514379.096686 1431287.873604,4514378.311607
+                                        1431291.734862,4514376.231526 1431294.764356,4514373.060058
+                                        1431296.665539,4514369.107647 1431297.252309,4514364.761183
+                                        1431296.467229,4514360.446128 1431294.387148,4514356.58487
+                                        1431291.21568,4514353.555376 1431287.263269,4514351.654193
+                                        1431282.916805,4514351.067423
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>H_4</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.266">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1431227.158511,4514481.105528 1431258.198077,4514512.145094
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>E</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>E</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>744.401</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1431230.230098,4514505.82187 1431230.02163,4514505.608739
+                                        1431227.865059,4514501.257934 1431227.295337,4514497.384022
+                                        1431227.158511,4514496.453656 1431227.971148,4514491.666181
+                                        1431230.223422,4514487.364139 1431231.080627,4514486.525689
+                                        1431233.694867,4514483.968646 1431238.045671,4514481.812076
+                                        1431242.849949,4514481.105528 1431247.637425,4514481.918164
+                                        1431251.939466,4514484.170439 1431255.334959,4514487.641883
+                                        1431257.491529,4514491.992687 1431258.198077,4514496.796965
+                                        1431257.385441,4514501.584441 1431255.133166,4514505.886482
+                                        1431251.661722,4514509.281975 1431247.310918,4514511.438546
+                                        1431242.50664,4514512.145094 1431237.719164,4514511.332457
+                                        1431233.417123,4514509.080183 1431230.230098,4514505.82187
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>E_1</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.267">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1431062.148123,4514404.831241 1431117.397134,4514476.190052
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>1770.258</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1431062.148123,4514412.953395 1431073.750144,4514404.831241
+                                        1431088.928352,4514408.33499 1431095.493338,4514408.001068
+                                        1431104.310576,4514427.549906 1431117.397134,4514446.737883
+                                        1431102.378778,4514451.646 1431105.827674,4514459.522415
+                                        1431108.784078,4514471.828961 1431096.784889,4514476.190052
+                                        1431074.729296,4514474.290849 1431090.007494,4514433.249091
+                                        1431090.097522,4514429.529081 1431062.148123,4514412.953395
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_2</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.268">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1431183.137512,4514367.474653 1431233.895372,4514475.966724
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>2654.886</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1431183.137512,4514455.146155 1431183.165035,4514450.906895
+                                        1431210.195491,4514422.858973 1431188.427757,4514410.443853
+                                        1431206.457243,4514370.195711 1431213.014899,4514367.474653
+                                        1431219.775537,4514398.964057 1431233.895372,4514475.966724
+                                        1431183.137512,4514455.146155
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_2</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.269">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1457920.301753,4512995.619417 1458973.254943,4514427.906039
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>E</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>E</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>802552.508</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1458822.128587,4513941.332709 1458813.037826,4513951.772537
+                                        1458736.643794,4514052.188006 1458653.693396,4514140.845331
+                                        1458578.712017,4514182.389416 1458562.639629,4514198.911925
+                                        1458577.457492,4514220.303626 1458574.17621,4514228.56197
+                                        1458486.57968,4514303.735333 1458493.71728,4514311.777185
+                                        1458476.427483,4514327.811948 1458405.121659,4514388.766465
+                                        1458364.921379,4514339.784211 1458283.860668,4514409.169552
+                                        1458223.451089,4514334.54434 1458187.732296,4514362.8165
+                                        1458162.55441,4514393.878761 1458132.237485,4514427.906039
+                                        1458100.027211,4514393.172565 1458066.154547,4514352.140934
+                                        1458037.374008,4514315.965488 1458109.934162,4514289.989506
+                                        1458146.36595,4514262.411248 1458176.417643,4514233.90151
+                                        1458207.758379,4514216.206026 1458240.642957,4514202.303395
+                                        1458267.059494,4514189.375303 1458290.370265,4514166.254815
+                                        1458304.647049,4514109.646289 1458317.817384,4514083.129642
+                                        1458321.92089,4514057.156732 1458331.306828,4514025.2723
+                                        1458333.809799,4513999.014408 1458335.687027,4513964.629156
+                                        1458336.31277,4513930.869025 1458297.087369,4513909.501176
+                                        1458252.464204,4513879.217573 1458223.162622,4513870.019258
+                                        1458200.605184,4513899.648575 1458169.501543,4513922.35467
+                                        1458159.524043,4513869.52599 1458139.536222,4513861.226427
+                                        1458106.559207,4513890.971978 1458084.028197,4513924.411075
+                                        1458070.872467,4513953.033127 1458055.16957,4513949.89955
+                                        1458008.808966,4513931.667143 1457974.968355,4513924.4245
+                                        1457956.410257,4513874.298432 1457944.850346,4513826.701191
+                                        1457929.016639,4513775.542081 1457920.301753,4513729.717874
+                                        1457954.818755,4513688.625184 1457996.960761,4513667.500459
+                                        1458033.898353,4513639.916558 1458050.362867,4513621.584903
+                                        1458055.13128,4513594.359862 1458052.075147,4513547.570144
+                                        1458043.274401,4513503.952727 1458029.562987,4513452.469147
+                                        1458010.61978,4513434.331949 1457994.516095,4513446.342876
+                                        1457991.171439,4513429.593098 1457986.86498,4513408.026686
+                                        1458023.951342,4513372.720712 1458055.451281,4513348.807014
+                                        1458091.934851,4513314.109355 1458112.139476,4513266.157767
+                                        1458123.162102,4513221.717622 1458162.376639,4513172.35079
+                                        1458201.586307,4513122.282157 1458282.486741,4513044.376068
+                                        1458317.39416,4513015.812163 1458366.268154,4512995.619417
+                                        1458400.458169,4513015.952981 1458435.776866,4513047.177987
+                                        1458447.420233,4513106.806112 1458498.34383,4513111.953151
+                                        1458544.873373,4513125.370947 1458597.70341,4513142.829328
+                                        1458643.871746,4513147.929149 1458695.523638,4513155.975752
+                                        1458746.955821,4513161.518178 1458796.776005,4513153.44253
+                                        1458839.546219,4513149.957458 1458897.073474,4513173.680143
+                                        1458930.599853,4513193.960757 1458945.126848,4513227.304856
+                                        1458943.947136,4513305.092282 1458926.252872,4513369.915212
+                                        1458893.998697,4513429.593098 1458862.553074,4513487.774972
+                                        1458845.657793,4513511.546206 1458778.586558,4513470.129465
+                                        1458721.508261,4513432.457319 1458646.883049,4513555.290247
+                                        1458601.863608,4513639.030722 1458572.585211,4513699.494051
+                                        1458689.233102,4513772.784524 1458705.894112,4513729.718961
+                                        1458711.167739,4513713.248782 1458728.067746,4513673.349386
+                                        1458761.075412,4513629.033932 1458798.869694,4513595.715073
+                                        1458830.302761,4513632.799643 1458854.90602,4513657.829475
+                                        1458886.929341,4513688.678504 1458916.291331,4513713.823913
+                                        1458937.264124,4513746.65274 1458950.547054,4513775.989125
+                                        1458973.254943,4513847.646983 1458886.002879,4513882.076446
+                                        1458855.092519,4513903.476938 1458822.128587,4513941.332709
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1458341.869139,4513777.473879 1458320.301259,4513788.074665
+                                        1458314.206485,4513805.328018 1458303.032919,4513876.371381
+                                        1458346.747104,4513894.404157 1458368.310542,4513903.836337
+                                        1458346.048269,4514006.019203 1458388.869347,4514024.78892
+                                        1458404.282705,4514045.777319 1458418.339892,4514029.456605
+                                        1458434.25819,4514045.317126 1458452.965367,4514028.508009
+                                        1458477.489626,4514054.243743 1458549.01267,4513962.94456
+                                        1458522.236589,4513931.668467 1458486.865977,4513915.669906
+                                        1458466.758917,4513872.790114 1458444.290721,4513843.503279
+                                        1458432.296921,4513846.53769 1458389.467629,4513797.05751
+                                        1458364.853622,4513792.098283 1458357.572757,4513777.58166
+                                        1458341.869139,4513777.473879
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>E_9</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.270">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1430998.315247,4514373.516594 1431041.360793,4514416.562139
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>E</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>E</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>1431.509</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1431019.966276,4514373.516594 1431026.610902,4514374.609627
+                                        1431032.59255,4514377.702465 1431037.325696,4514382.49236
+                                        1431040.347026,4514388.510443 1431041.360793,4514395.167623
+                                        1431040.26776,4514401.812248 1431037.174922,4514407.793896
+                                        1431032.385027,4514412.527043 1431026.366943,4514415.548373
+                                        1431019.709764,4514416.562139 1431013.065138,4514415.469106
+                                        1431007.08349,4514412.376268 1431002.350344,4514407.586373
+                                        1430999.329013,4514401.56829 1430998.315247,4514394.91111
+                                        1430999.40828,4514388.266485 1431002.501118,4514382.284837
+                                        1431007.291013,4514377.551691 1431013.309097,4514374.53036
+                                        1431019.966276,4514373.516594
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>E_2</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.456">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1428017.613566,4510058.912007 1428667.608951,4510473.902982
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>84821.841</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1428134.716541,4510434.680447 1428179.280727,4510409.474564
+                                        1428206.077395,4510406.763138 1428254.792709,4510415.441827
+                                        1428259.814312,4510381.903238 1428228.124335,4510336.266212
+                                        1428146.89785,4510337.338918 1428147.177244,4510320.667634
+                                        1428148.777764,4510310.356831 1428143.177431,4510301.143195
+                                        1428138.301574,4510295.152377 1428135.838632,4510285.999242
+                                        1428137.60796,4510279.865181 1428142.842089,4510270.487418
+                                        1428146.149878,4510264.713954 1428131.476926,4510250.316249
+                                        1428113.6625,4510231.19497 1428091.073634,4510228.534203
+                                        1428051.941856,4510226.558964 1428039.232109,4510221.40501
+                                        1428022.261617,4510213.080751 1428018.750761,4510198.585388
+                                        1428017.613566,4510191.497068 1428026.256792,4510177.508683
+                                        1428033.389919,4510164.426045 1428022.799944,4510146.859073
+                                        1428035.750521,4510135.07551 1428055.245444,4510115.045182
+                                        1428103.453141,4510072.466389 1428119.371822,4510093.074434
+                                        1428127.9017,4510103.470938 1428112.902467,4510117.015314
+                                        1428133.143937,4510143.737154 1428152.451967,4510127.964581
+                                        1428196.458092,4510101.881324 1428214.060819,4510087.98001
+                                        1428225.545752,4510075.193848 1428237.418858,4510058.912007
+                                        1428237.967053,4510084.098098 1428239.545785,4510097.458706
+                                        1428245.938775,4510106.218371 1428260.226575,4510114.62092
+                                        1428272.10709,4510118.620853 1428283.597475,4510122.447639
+                                        1428295.007332,4510124.419584 1428291.396998,4510149.297636
+                                        1428238.871555,4510162.867985 1428175.378094,4510162.82383
+                                        1428135.245611,4510163.836762 1428123.815496,4510174.161014
+                                        1428070.816588,4510147.626446 1428063.343517,4510170.02099
+                                        1428070.816588,4510187.439006 1428089.002148,4510196.995743
+                                        1428120.49006,4510201.302263 1428169.313298,4510193.9862
+                                        1428211.401873,4510184.941254 1428266.234259,4510174.673011
+                                        1428283.241371,4510169.18443 1428312.303354,4510172.50219
+                                        1428350.952252,4510182.875393 1428378.510563,4510190.930665
+                                        1428377.17685,4510193.676312 1428377.096724,4510204.39128
+                                        1428344.215377,4510204.180321 1428337.010977,4510204.549935
+                                        1428337.265366,4510205.118139 1428304.392657,4510206.925832
+                                        1428300.363854,4510207.513753 1428296.548905,4510199.197739
+                                        1428265.545685,4510208.06225 1428262.917185,4510217.934887
+                                        1428240.37803,4510232.989271 1428233.550374,4510225.316583
+                                        1428199.839089,4510250.1879 1428201.367417,4510254.062965
+                                        1428199.685316,4510255.468265 1428173.26298,4510275.000406
+                                        1428188.278463,4510298.27565 1428217.842785,4510276.995039
+                                        1428235.538378,4510302.457802 1428247.821198,4510293.601829
+                                        1428273.206214,4510328.500897 1428273.066286,4510328.683329
+                                        1428265.838631,4510358.945228 1428295.458877,4510365.593452
+                                        1428303.495593,4510333.732735 1428319.066854,4510322.192622
+                                        1428342.172543,4510325.704831 1428353.725388,4510335.990555
+                                        1428354.518919,4510333.355091 1428358.503086,4510298.786051
+                                        1428344.534509,4510296.417572 1428333.571647,4510295.439102
+                                        1428334.343723,4510287.79446 1428332.971826,4510267.484447
+                                        1428367.951136,4510281.040176 1428367.233483,4510254.645192
+                                        1428376.955194,4510253.746376 1428398.899257,4510253.41243
+                                        1428415.915737,4510237.935093 1428413.881453,4510215.920005
+                                        1428423.990174,4510217.141622 1428428.163004,4510208.995881
+                                        1428428.819518,4510185.777895 1428388.562663,4510181.278816
+                                        1428384.976323,4510181.794317 1428369.571639,4510168.363296
+                                        1428378.41274,4510146.878365 1428378.847926,4510123.992036
+                                        1428415.866488,4510132.428501 1428423.441739,4510136.085877
+                                        1428426.039617,4510124.945228 1428432.295845,4510120.853162
+                                        1428452.591807,4510118.09402 1428463.647592,4510122.779287
+                                        1428472.723972,4510124.160941 1428479.860263,4510131.426439
+                                        1428488.136986,4510140.239527 1428520.137442,4510146.562381
+                                        1428524.68643,4510149.776524 1428516.881608,4510157.033161
+                                        1428517.361924,4510163.294073 1428525.801502,4510168.94897
+                                        1428519.315526,4510172.343315 1428500.070898,4510173.493016
+                                        1428480.25852,4510177.388682 1428468.143095,4510184.14755
+                                        1428449.862033,4510180.841339 1428441.981293,4510188.020684
+                                        1428444.423794,4510199.448698 1428455.759773,4510210.732247
+                                        1428474.28847,4510224.803678 1428498.58721,4510238.926189
+                                        1428520.787214,4510251.298476 1428555.993392,4510264.879041
+                                        1428571.311825,4510270.631674 1428590.355279,4510275.461335
+                                        1428610.98847,4510280.853052 1428636.104145,4510291.581434
+                                        1428643.260649,4510309.457915 1428646.981689,4510313.850015
+                                        1428659.619731,4510328.76723 1428667.608951,4510341.049652
+                                        1428651.568783,4510347.645211 1428647.143176,4510345.334367
+                                        1428620.412846,4510331.377041 1428598.462091,4510318.291858
+                                        1428585.031555,4510309.053076 1428566.952127,4510310.865097
+                                        1428557.746946,4510306.9749 1428534.677884,4510297.354796
+                                        1428530.824642,4510287.946262 1428505.564809,4510272.978083
+                                        1428465.748438,4510263.141889 1428441.773019,4510267.418495
+                                        1428425.503968,4510281.103692 1428408.378602,4510305.052687
+                                        1428415.737774,4510325.878441 1428418.135865,4510338.704216
+                                        1428415.641538,4510362.267111 1428411.62935,4510390.28847
+                                        1428445.849812,4510403.148915 1428466.598956,4510400.310044
+                                        1428490.048423,4510422.045382 1428491.071684,4510431.538879
+                                        1428496.691443,4510443.573402 1428506.754481,4510451.783012
+                                        1428511.331544,4510455.669923 1428511.630288,4510460.715279
+                                        1428505.478496,4510465.660927 1428497.249563,4510473.902982
+                                        1428490.89726,4510473.207566 1428467.579861,4510464.670764
+                                        1428449.278698,4510462.555156 1428432.332874,4510459.216918
+                                        1428416.358588,4510453.286139 1428386.765302,4510438.359821
+                                        1428363.742715,4510428.061775 1428345.876572,4510421.622092
+                                        1428320.759792,4510434.186322 1428295.2802,4510444.397081
+                                        1428276.460847,4510450.720958 1428244.189834,4510451.827103
+                                        1428219.180201,4510448.215419 1428188.689578,4510441.445643
+                                        1428155.540108,4510437.45734 1428134.716541,4510434.680447
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_5</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.457">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1463535.871087,4510429.367389 1463574.015476,4510466.836272
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>B</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>B</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>798.521</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1463561.800304,4510429.367389 1463574.015476,4510454.559446
+                                        1463548.138759,4510466.836272 1463535.871087,4510442.27574
+                                        1463561.800304,4510429.367389
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>B_1</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.458">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1460544.75239,4509701.27092 1461686.909836,4510463.119477
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>G</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>G</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>361803.252</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1460546.498547,4510319.410508 1460659.58944,4510176.260248
+                                        1460701.958222,4510210.958682 1460728.543473,4510169.013096
+                                        1460758.538056,4510153.993283 1460794.410718,4510123.867421
+                                        1460841.727642,4510099.107381 1460926.334996,4510054.322077
+                                        1460987.282864,4510021.967605 1460990.0172,4509996.92175
+                                        1460996.192584,4509957.01478 1461023.959858,4509911.785287
+                                        1461049.468488,4509896.193332 1461030.883549,4509872.038501
+                                        1461129.825566,4509804.251607 1461158.394844,4509844.136962
+                                        1461325.977786,4509701.27092 1461396.497811,4509759.060345
+                                        1461432.305384,4509777.890038 1461479.420596,4509780.714521
+                                        1461563.576146,4509787.690657 1461602.612538,4509850.709956
+                                        1461651.356926,4509900.416907 1461665.288972,4509919.527691
+                                        1461686.909836,4509935.571212 1461664.629803,4509947.018943
+                                        1461653.084001,4509955.863999 1461623.208045,4509975.015901
+                                        1461612.544002,4509986.242043 1461522.261143,4510046.138389
+                                        1461436.13719,4510105.832255 1461437.592899,4510154.264572
+                                        1461420.712335,4510172.251218 1461390.89779,4510188.393875
+                                        1461320.152881,4510214.101388 1461280.770255,4510232.346623
+                                        1461222.610397,4510262.126332 1461167.025731,4510289.834397
+                                        1461095.744313,4510332.101407 1461032.82258,4510376.913012
+                                        1460967.038184,4510422.975788 1460918.649881,4510455.63992
+                                        1460900.359743,4510463.119477 1460885.858684,4510448.527705
+                                        1460840.97912,4510417.73262 1460799.502989,4510404.102538
+                                        1460749.872449,4510402.878879 1460709.811792,4510409.516657
+                                        1460643.867682,4510418.261444 1460601.958624,4510411.026098
+                                        1460567.901014,4510396.358845 1460549.065109,4510380.643464
+                                        1460544.75239,4510353.288725 1460546.498547,4510319.410508
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1461044.449234,4510046.442773 1460999.935863,4510069.124699
+                                        1460994.107163,4510063.787834 1460960.371165,4510084.505857
+                                        1460957.185568,4510078.70252 1460922.629434,4510103.650526
+                                        1460891.559961,4510130.669314 1460854.041574,4510152.847191
+                                        1460827.057066,4510155.483885 1460922.491067,4510204.545968
+                                        1460997.4679,4510177.763072 1461078.708938,4510101.582223
+                                        1461044.449234,4510046.442773
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>G_8</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.459">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1461182.805352,4506315.473782 1462844.882088,4510450.850603
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>G</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>G</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>1924159.088</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1462326.436349,4510450.850603 1462304.374395,4510359.676991
+                                        1462280.526009,4510274.835439 1462278.75598,4510268.538493
+                                        1462280.960217,4510203.917572 1462271.242269,4510184.167388
+                                        1462264.688427,4510146.425215 1462258.194929,4510120.490895
+                                        1462242.023723,4510105.071345 1462228.868046,4510100.735855
+                                        1462089.065481,4510117.496917 1462053.470864,4510120.32912
+                                        1461999.233841,4509968.085498 1462070.23679,4509938.119393
+                                        1462120.914165,4509916.848385 1462206.189912,4509877.883179
+                                        1462260.093597,4509823.012402 1462337.783101,4509721.096511
+                                        1462419.014988,4509612.457741 1462451.93792,4509526.165179
+                                        1462469.772626,4509445.251304 1462488.952435,4509401.30661
+                                        1462499.655636,4509358.498648 1462505.232578,4509289.894724
+                                        1462503.154755,4509216.351505 1462497.215087,4509134.477476
+                                        1462483.001958,4509077.061165 1462482.585421,4509076.334733
+                                        1462474.607552,4509062.421512 1462471.123875,4509022.584214
+                                        1462442.564447,4508970.557181 1462408.38969,4508935.693391
+                                        1462378.357932,4508886.720162 1462298.179644,4508854.967304
+                                        1462252.953129,4508837.056332 1462232.850493,4508859.200778
+                                        1462213.235314,4508878.86808 1462151.925734,4508897.163027
+                                        1462112.694244,4508952.826172 1462086.989007,4508958.160671
+                                        1462038.763511,4508972.319506 1461768.423504,4509043.649313
+                                        1461514.295398,4509110.392226 1461479.125493,4508965.314915
+                                        1461700.509737,4508829.69783 1461966.296464,4508765.768039
+                                        1461960.184734,4508740.834966 1461998.819759,4508727.936119
+                                        1462215.894518,4508669.166655 1462186.813889,4508599.22763
+                                        1462165.854026,4508571.040721 1462158.810223,4508561.568186
+                                        1462102.802997,4508523.908743 1462016.638073,4508485.173292
+                                        1461989.711581,4508475.4894 1461917.935673,4508458.226491
+                                        1461801.108795,4508465.949954 1461709.19348,4508498.560095
+                                        1461676.185261,4508449.252928 1461642.096975,4508420.35059
+                                        1461608.662187,4508408.619302 1461627.705775,4508369.224486
+                                        1461629.304065,4508360.913514 1461644.606108,4508342.39341
+                                        1461631.346113,4508327.431163 1461645.722256,4508307.813136
+                                        1461690.666086,4508290.469091 1461706.540778,4508241.722523
+                                        1461732.285225,4508176.355803 1461861.340691,4508221.02617
+                                        1461897.870853,4508195.216903 1461812.861364,4508168.891215
+                                        1461754.670569,4508144.288899 1461715.722884,4508128.900278
+                                        1461674.984994,4508122.532927 1461604.186196,4508093.065002
+                                        1461577.380613,4508078.30426 1461627.259491,4507955.073459
+                                        1461633.847579,4507935.268098 1461535.853507,4507892.055861
+                                        1461426.473143,4507823.646104 1461363.528031,4507743.125411
+                                        1461332.227543,4507690.330647 1461308.149548,4507626.614661
+                                        1461271.252584,4507557.429823 1461222.471504,4507512.373792
+                                        1461182.805352,4507464.872412 1461203.964336,4507420.564952
+                                        1461267.05819,4507304.88266 1461335.811246,4507221.175876
+                                        1461515.790938,4506976.904335 1461801.363565,4506597.336961
+                                        1462012.852224,4506315.473782 1462069.588115,4506341.592648
+                                        1462167.030652,4506366.804601 1462191.921072,4506451.175058
+                                        1462180.974758,4506572.062547 1462147.81864,4506613.059016
+                                        1462134.170888,4506654.003187 1462130.039689,4506683.712042
+                                        1462108.83608,4506684.307182 1462082.942691,4506685.033954
+                                        1462078.501819,4506641.872598 1462056.844411,4506640.420143
+                                        1462060.082209,4506611.843215 1461972.743701,4506617.311931
+                                        1461970.188614,4506689.013705 1461942.103915,4506691.529318
+                                        1461937.184363,4506750.483231 1461952.041442,4506785.649119
+                                        1462035.651214,4506798.514522 1462033.79024,4506858.126031
+                                        1462020.380105,4506857.850434 1462014.354617,4506962.091581
+                                        1462105.478899,4506969.346147 1462119.848533,4507027.966503
+                                        1462106.565296,4507188.004756 1462098.689835,4507282.889381
+                                        1462087.525326,4507295.298153 1462074.297281,4507311.818873
+                                        1462057.762119,4507332.469788 1462014.770868,4507382.857999
+                                        1461981.399656,4507428.334291 1462110.845684,4507405.99813
+                                        1462110.00043,4507419.005612 1462117.597546,4507490.53183
+                                        1462141.104494,4507493.170277 1462152.047229,4507521.689097
+                                        1462156.433425,4507535.020988 1462184.657643,4507611.539502
+                                        1462256.934525,4507589.034678 1462237.272925,4507540.58386
+                                        1462241.203946,4507524.524483 1462314.192119,4507435.522228
+                                        1462330.317491,4507465.384813 1462402.229658,4507444.527997
+                                        1462417.293828,4507467.635416 1462480.687732,4507548.933445
+                                        1462542.398294,4507492.63144 1462498.251586,4507429.579764
+                                        1462509.255285,4507419.669257 1462515.948933,4507413.640606
+                                        1462573.475036,4507505.276588 1462565.483119,4507518.671481
+                                        1462534.953779,4507560.864809 1462513.39903,4507580.488562
+                                        1462498.885121,4507590.608682 1462465.77138,4507614.95224
+                                        1462452.836868,4507643.341333 1462432.243154,4507659.514636
+                                        1462402.558374,4507669.288817 1462423.024411,4507697.933965
+                                        1462374.546668,4507738.697042 1462387.54334,4507753.843662
+                                        1462442.135957,4507808.391047 1462512.077156,4507761.209521
+                                        1462552.113583,4507816.805165 1462488.017751,4507873.040322
+                                        1462490.096639,4507876.950868 1462528.146171,4507917.613817
+                                        1462503.567105,4507938.075944 1462483.891033,4507916.154705
+                                        1462473.106863,4507890.645037 1462466.868774,4507885.78573
+                                        1462352.040762,4507950.658527 1462346.482391,4507936.895533
+                                        1462326.54344,4507935.47407 1462299.696934,4507939.646574
+                                        1462208.61371,4507953.802797 1462123.135629,4507964.877524
+                                        1462083.628868,4507792.444752 1462021.065214,4507807.92858
+                                        1462022.720623,4507796.584857 1461975.18898,4507712.19659
+                                        1461964.173485,4507712.562584 1461962.774356,4507706.721723
+                                        1461958.150141,4507698.472165 1461938.27527,4507706.415205
+                                        1461849.024849,4507560.153918 1461781.014598,4507436.876433
+                                        1461766.732218,4507434.888356 1461779.869552,4507369.905454
+                                        1461784.069158,4507321.621281 1461784.691372,4507294.409056
+                                        1461749.817745,4507275.422991 1461722.124241,4507299.449416
+                                        1461705.823611,4507279.837685 1461635.85061,4507335.552116
+                                        1461689.031186,4507395.125304 1461590.085522,4507471.538845
+                                        1461629.896559,4507533.068692 1461653.73897,4507563.968582
+                                        1461713.387719,4507633.320278 1461778.360383,4507707.241691
+                                        1461833.174568,4507777.878068 1461894.996004,4507857.60697
+                                        1461931.904493,4507892.733283 1461974.954301,4507919.076787
+                                        1462007.605269,4507941.026047 1462008.34227,4507941.521488
+                                        1462061.484765,4507994.496644 1462101.282219,4508019.675771
+                                        1462183.818693,4508035.830848 1462235.167811,4508055.784963
+                                        1462248.241756,4508071.861675 1462236.669733,4508103.565591
+                                        1462177.903598,4508150.827887 1462161.350491,4508180.685698
+                                        1462208.587669,4508265.684726 1462210.41419,4508272.936867
+                                        1462221.140259,4508315.524357 1462142.792941,4508413.912817
+                                        1462203.667419,4508475.936413 1462180.588679,4508495.850726
+                                        1462211.010702,4508533.58309 1462250.873998,4508600.662889
+                                        1462266.609454,4508620.577202 1462326.156055,4508591.886382
+                                        1462338.800658,4508592.30466 1462354.28795,4508587.601978
+                                        1462398.027069,4508601.178873 1462411.135812,4508588.639296
+                                        1462398.650195,4508541.803651 1462420.271163,4508521.448346
+                                        1462440.979165,4508541.291443 1462471.221905,4508541.669179
+                                        1462486.006347,4508541.234732 1462491.407638,4508651.017709
+                                        1462503.966002,4508653.956112 1462502.694238,4508703.348655
+                                        1462489.49621,4508710.884205 1462490.742074,4508731.112337
+                                        1462469.51851,4508739.160734 1462437.334739,4508758.215999
+                                        1462410.324863,4508772.869228 1462397.333741,4508779.91709
+                                        1462388.230136,4508786.621634 1462438.444295,4508881.682712
+                                        1462493.239588,4508978.899035 1462494.741311,4508990.661298
+                                        1462498.030425,4509016.423337 1462498.313819,4509018.195077
+                                        1462503.96458,4509053.522743 1462504.965002,4509056.232028
+                                        1462507.845316,4509064.032331 1462519.341976,4509104.234284
+                                        1462529.41921,4509138.040938 1462537.842058,4509175.594291
+                                        1462537.959039,4509176.115851 1462544.961973,4509198.851994
+                                        1462545.275852,4509262.315118 1462569.731451,4509261.445997
+                                        1462589.085827,4509257.418735 1462590.595117,4509312.677942
+                                        1462571.599653,4509313.566901 1462567.078849,4509357.39459
+                                        1462557.053701,4509356.330965 1462550.710489,4509413.930381
+                                        1462565.791627,4509449.886717 1462593.625983,4509521.631892
+                                        1462640.347228,4509564.090918 1462674.967248,4509580.857742
+                                        1462731.184558,4509587.90439 1462740.54615,4509605.956531
+                                        1462844.882088,4509612.388425 1462837.599946,4509695.87403
+                                        1462640.48128,4509691.833016 1462678.952965,4509730.170102
+                                        1462733.746512,4509778.471783 1462750.573927,4509809.348972
+                                        1462759.009698,4509840.249934 1462759.449419,4509877.535774
+                                        1462757.045949,4509902.917773 1462772.696305,4509905.53539
+                                        1462773.321889,4509907.243127 1462772.901328,4509920.697717
+                                        1462771.923236,4509927.8757 1462761.577882,4509924.424492
+                                        1462699.027875,4509914.659556 1462696.804421,4509928.029562
+                                        1462689.438739,4509946.836848 1462683.79077,4509970.221338
+                                        1462716.455278,4509991.233423 1462664.067601,4510067.857532
+                                        1462750.256913,4510052.621159 1462750.16837,4510076.735083
+                                        1462739.9463,4510140.641322 1462734.334739,4510148.973872
+                                        1462726.289624,4510160.919982 1462622.494337,4510283.502338
+                                        1462595.963838,4510259.353539 1462552.058556,4510260.481643
+                                        1462550.322282,4510269.628006 1462530.662918,4510273.791335
+                                        1462551.170658,4510367.461059 1462326.436349,4510450.850603
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>G_9</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.460">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1428063.836218,4510369.595101 1428134.716541,4510434.680447
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>1962.075</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1428126.554934,4510369.595101 1428113.012742,4510391.067903
+                                        1428134.716541,4510434.680447 1428122.128276,4510431.037461
+                                        1428103.78752,4510425.557548 1428075.432899,4510411.583112
+                                        1428064.210548,4510403.301198 1428063.836218,4510398.256189
+                                        1428078.574106,4510386.102069 1428101.179448,4510387.214396
+                                        1428126.554934,4510369.595101
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_2</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.461">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1428113.012742,4510336.266212 1428259.814312,4510434.680447
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>C</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>C</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>9657.919</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1428126.554934,4510369.595101 1428146.89785,4510337.338918
+                                        1428228.124335,4510336.266212 1428259.814312,4510381.903238
+                                        1428254.792709,4510415.441827 1428206.077395,4510406.763138
+                                        1428179.280727,4510409.474564 1428134.716541,4510434.680447
+                                        1428113.012742,4510391.067903 1428126.554934,4510369.595101
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>C_4</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.462">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1461798.475045,4510177.578458 1461908.454263,4510422.677785
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>S</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>S</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>5607.538</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1461840.841508,4510177.578458 1461848.367458,4510202.931514
+                                        1461822.180068,4510211.860327 1461832.46939,4510250.692686
+                                        1461845.645242,4510292.947091 1461864.733644,4510343.973096
+                                        1461903.88675,4510331.846766 1461908.454263,4510341.510366
+                                        1461864.070462,4510355.62643 1461882.731903,4510419.148718
+                                        1461871.635992,4510422.677785 1461851.937419,4510359.070603
+                                        1461800.492541,4510377.219828 1461798.475045,4510367.641122
+                                        1461855.467958,4510347.97941 1461844.90361,4510320.254295
+                                        1461828.384647,4510325.180463 1461807.602702,4510262.572643
+                                        1461823.188815,4510257.737483 1461813.101653,4510224.463904
+                                        1461802.510037,4510189.173744 1461840.841508,4510177.578458
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>S_3</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.644">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1455723.248869,4507422.71055 1457324.654819,4508704.209389
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>E</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>E</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>982120.157</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1456210.775349,4508629.593098 1456061.066055,4508704.209389
+                                        1455999.063036,4508629.593098 1455975.978013,4508601.811889
+                                        1455904.973363,4508535.142813 1455786.132012,4508563.381449
+                                        1455723.248869,4508385.685846 1455798.879801,4508363.358921
+                                        1455900.506821,4508328.260388 1455985.291857,4508298.944706
+                                        1456099.663829,4508249.673895 1456141.624236,4508230.999488
+                                        1456155.234306,4508225.474079 1456151.887906,4508234.716374
+                                        1456178.8233,4508310.827362 1456208.352006,4508400.625477
+                                        1456222.457762,4508427.120367 1456247.283577,4508441.777186
+                                        1456285.499217,4508440.036616 1456365.589628,4508426.310588
+                                        1456407.402649,4508419.502502 1456446.058817,4508410.638833
+                                        1456452.465459,4508402.474525 1456450.952111,4508396.285303
+                                        1456366.654572,4508292.513937 1456335.376962,4508254.138144
+                                        1456347.969802,4508239.449667 1456318.474559,4508226.684743
+                                        1456249.248178,4508199.906838 1456232.9473,4508196.04141
+                                        1456272.137351,4508192.077348 1456276.201837,4508198.041139
+                                        1456318.77044,4508215.080415 1456328.709781,4508193.816525
+                                        1456353.145911,4508204.289454 1456344.943356,4508221.397272
+                                        1456415.610826,4508248.941617 1456509.386823,4508287.924011
+                                        1456556.173488,4508174.933618 1456452.781191,4508124.762565
+                                        1456445.870294,4508105.679965 1456439.070187,4508091.708257
+                                        1456446.17872,4508084.508645 1456494.026685,4508032.652263
+                                        1456511.057391,4508002.672734 1456495.891512,4507985.123357
+                                        1456527.077776,4507952.060786 1456543.220191,4507958.047506
+                                        1456668.576273,4507844.259054 1456700.8897,4507813.332177
+                                        1456690.03008,4507809.870183 1456679.419819,4507807.011629
+                                        1456666.137698,4507803.059965 1456639.74791,4507796.803634
+                                        1456608.438159,4507789.206499 1456561.025893,4507783.84393
+                                        1456515.850371,4507779.822003 1456476.936566,4507769.990464
+                                        1456436.233657,4507757.924683 1456424.227603,4507749.630749
+                                        1456418.444502,4507737.258075 1456406.90015,4507730.235131
+                                        1456402.12312,4507729.23148 1456405.236486,4507682.075568
+                                        1456319.125064,4507659.898332 1456322.69562,4507604.200108
+                                        1456319.436615,4507577.065114 1456318.35028,4507544.503088
+                                        1456319.436615,4507500.001464 1456312.918313,4507454.414628
+                                        1456390.694641,4507452.73266 1456488.553888,4507448.187272
+                                        1456607.175258,4507442.136077 1456755.550137,4507435.344232
+                                        1456866.382491,4507429.593098 1456901.174444,4507427.78773
+                                        1457007.254795,4507422.71055 1457046.896399,4507430.739489
+                                        1457047.128587,4507430.786516 1457100.879538,4507441.673137
+                                        1457165.043014,4507484.599654 1457265.269221,4507545.228351
+                                        1457317.189041,4507556.720442 1457258.924901,4507792.461483
+                                        1457324.654819,4507820.825332 1457271.079807,4507918.052428
+                                        1457300.247641,4507974.063995 1457179.401957,4508205.225395
+                                        1457126.212365,4508272.151604 1457091.086071,4508302.494221
+                                        1457069.930363,4508335.379512 1457047.128587,4508340.22219
+                                        1457017.423059,4508346.531097 1456877.886583,4508436.120649
+                                        1456830.299941,4508470.520709 1456734.212845,4508508.895715
+                                        1456756.615196,4508565.514522 1456453.598432,4508616.904305
+                                        1456421.927794,4508548.009277 1456405.715572,4508532.433356
+                                        1456210.775349,4508629.593098
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>E_9</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.645">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1457047.128587,4507429.956001 1458822.128587,4508629.593098
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>E</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>E</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>1955579.227</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1457047.128587,4508629.593098 1457047.128587,4508340.22219
+                                        1457069.930363,4508335.379512 1457091.086071,4508302.494221
+                                        1457126.212365,4508272.151604 1457179.401957,4508205.225395
+                                        1457300.247641,4507974.063995 1457271.079807,4507918.052428
+                                        1457324.654819,4507820.825332 1457258.924901,4507792.461483
+                                        1457317.189041,4507556.720442 1457265.269221,4507545.228351
+                                        1457165.043014,4507484.599654 1457100.879538,4507441.673137
+                                        1457047.128587,4507430.786516 1457047.128587,4507430.739387
+                                        1458822.128587,4507429.956001 1458822.128587,4508629.593098
+                                        1457047.128587,4508629.593098
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>E_9</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+    <gml:featureMember>
+        <ras:IDT_SU20G_ZONIZZAZIONE fid="IDT_SU20G_ZONIZZAZIONE.646">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        1458822.128587,4507429.593131 1459869.973305,4508629.593098
+                    </gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <ras:SU20_COD_COM_ISTAT>090064</ras:SU20_COD_COM_ISTAT>
+            <ras:SU20_ZONA>E</ras:SU20_ZONA>
+            <ras:SU20_ZONA_LEG>E</ras:SU20_ZONA_LEG>
+            <ras:SU20_AREA_GEOM>930066.297</ras:SU20_AREA_GEOM>
+            <ras:SU20_AREA_NOM>0</ras:SU20_AREA_NOM>
+            <ras:SU20_VOLUMI>0</ras:SU20_VOLUMI>
+            <ras:SU20_GEOMETRIA>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1458822.128587,4508629.593098 1458822.128587,4507429.956001
+                                        1459644.322313,4507429.593131 1459639.636622,4507463.749264
+                                        1459626.834424,4507502.263999 1459619.498643,4507519.45
+                                        1459615.34267,4507536.962177 1459609.980017,4507574.588765
+                                        1459613.049865,4507583.389604 1459629.168721,4507601.994779
+                                        1459646.374882,4507624.686629 1459641.809189,4507677.200056
+                                        1459722.035304,4507684.437343 1459665.534289,4507766.70499
+                                        1459643.212697,4507805.305081 1459736.448491,4507830.774221
+                                        1459742.820002,4507842.575913 1459743.929449,4507863.544112
+                                        1459723.137465,4507924.832059 1459748.079104,4507936.208595
+                                        1459783.900156,4507949.056567 1459730.271541,4508070.731378
+                                        1459669.797098,4508155.263628 1459728.105708,4508214.661495
+                                        1459764.213232,4508253.695075 1459753.148981,4508303.708932
+                                        1459742.891703,4508362.704584 1459754.484647,4508437.996067
+                                        1459751.357435,4508468.160418 1459869.973305,4508625.577761
+                                        1459864.06995,4508629.593098 1458822.128587,4508629.593098
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                            <gml:innerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                                        1459423.54382,4508090.179863 1459093.909507,4508326.361861
+                                        1459304.70985,4508615.767661 1459636.795157,4508380.138308
+                                        1459423.54382,4508090.179863
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:innerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </ras:SU20_GEOMETRIA>
+            <ras:SU20_ZONA_CAT>E_9</ras:SU20_ZONA_CAT>
+            <ras:SU20_IND_TERR>0</ras:SU20_IND_TERR>
+        </ras:IDT_SU20G_ZONIZZAZIONE>
+    </gml:featureMember>
+</wfs:FeatureCollection>

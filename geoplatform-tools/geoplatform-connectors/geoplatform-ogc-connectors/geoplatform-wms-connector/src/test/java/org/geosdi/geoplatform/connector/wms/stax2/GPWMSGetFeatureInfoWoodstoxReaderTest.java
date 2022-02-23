@@ -359,4 +359,10 @@ public class GPWMSGetFeatureInfoWoodstoxReaderTest extends WMSGetFeatureInfoWood
         logger.info("#######################FEATURE_COLLECTION_ACQUE_SECONDARIE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("AcqueSecondarie.xml"))));
     }
+
+    @Test
+    public void d_q_wmsGetFeatureInfooWoodstoxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_IDT_SU20G_ZONIZZAZIONE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxReader.read(storage.find("IDT_SU20G_ZONIZZAZIONE.xml"))));
+    }
 }

@@ -674,4 +674,12 @@ public class GPWMSFeatureStoreTest extends WMSGetFeatureInfoStaxReaderTest {
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "AdminGeo.json")
                 .collect(joining(separator))), wmsFeatureStore);
     }
+
+    @Test
+    public void d_i_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("IDT_SU20G_ZONIZZAZIONE.xml"));
+        logger.info("#######################FEATURE_STORE_IDT_SU20G_ZONIZZAZIONE : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "IDT_SU20G_ZONIZZAZIONE.json")
+                .collect(joining(separator))), wmsFeatureStore);
+    }
 }

@@ -474,4 +474,12 @@ public class GPWMSFeatureStoreAaltoTest extends WMSGetFeatureInfoAaltoReaderTest
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreAaltoAcqueSecondarie")
                 .collect(joining(separator, "", ".json"))), wmsFeatureStore);
     }
+
+    @Test
+    public void c_h_wmsFeatureStoreAaltoReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoReader.readAsStore(storage.find("IDT_SU20G_ZONIZZAZIONE.xml"));
+        logger.info("#######################FEATURE_STORE_IDT_SU20G_ZONIZZAZIONE : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreAaltoIDT_SU20G_ZONIZZAZIONE")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
 }

@@ -65,10 +65,11 @@ public abstract class WMSGetFeatureInfoStaxReader extends GPGetFeatureGeoJsonSta
     }
 
     /**
+     * @param feature
      * @throws Exception
      */
     @Override
-    protected void readFeatures(Feature feature) throws Exception {
+    protected void readFeatures(@Nonnull(when = NEVER) Feature feature) throws Exception {
         super.readFeatures(feature);
         super.goToEndTag(FEATURE_MEMBER_LOCAL_NAME);
     }
@@ -81,7 +82,7 @@ public abstract class WMSGetFeatureInfoStaxReader extends GPGetFeatureGeoJsonSta
     @Override
     protected GeoJsonObject internalReadGeometry(@Nonnull(when = NEVER) XMLStreamReader streamReader) throws Exception {
         checkArgument(streamReader != null, "The Parameter streamReader must not be null.");
-        return GML2_GEO_JSON_PARSER.parse(xmlStreamReader());
+        return GML2_GEO_JSON_PARSER.parse(streamReader);
     }
 
     /**

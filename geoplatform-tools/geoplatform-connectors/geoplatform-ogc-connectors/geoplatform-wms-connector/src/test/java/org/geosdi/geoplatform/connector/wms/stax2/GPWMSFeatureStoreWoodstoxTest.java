@@ -521,4 +521,12 @@ public class GPWMSFeatureStoreWoodstoxTest extends WMSGetFeatureInfoWoodstoxRead
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxAcqueSecondarie")
                 .collect(joining(separator, "", ".json"))), wmsFeatureStore);
     }
+
+    @Test
+    public void c_p_wmsFeatureStoreWoodstoxReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoWoodstoxReader.readAsStore(storage.find("IDT_SU20G_ZONIZZAZIONE.xml"));
+        logger.info("#######################FEATURE_STORE_IDT_SU20G_ZONIZZAZIONE : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreWoodstoxIDT_SU20G_ZONIZZAZIONE")
+                .collect(joining(separator, "", ".json"))), wmsFeatureStore);
+    }
 }

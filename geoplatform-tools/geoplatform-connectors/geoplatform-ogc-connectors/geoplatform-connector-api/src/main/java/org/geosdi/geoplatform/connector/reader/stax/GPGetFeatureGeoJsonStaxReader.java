@@ -152,9 +152,11 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
     }
 
     /**
+     * @param feature
      * @throws Exception
      */
-    protected void readFeatures(Feature feature) throws Exception {
+    protected void readFeatures(@Nonnull(when = NEVER) Feature feature) throws Exception {
+        checkArgument(feature != null, "The Parameter feature must not be null.");
         int eventType = xmlStreamReader().nextTag();
         if (eventType == XMLEvent.START_ELEMENT) {
             logger.debug("################TRYING TO READ XML.");

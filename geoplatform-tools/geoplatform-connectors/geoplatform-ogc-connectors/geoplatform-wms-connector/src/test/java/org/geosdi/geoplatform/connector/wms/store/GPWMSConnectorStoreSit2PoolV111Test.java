@@ -74,9 +74,13 @@ public class GPWMSConnectorStoreSit2PoolV111Test {
         wmsServerConnector = wmsConnectorBuilderPoolV111()
                 .withServerUrl(new URL("https://sit2.regione.campania.it/geoserver/wms"))
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
-                        .withMaxTotalConnections(150)
-                        .withDefaultMaxPerRoute(80)
-                        .withMaxRedirect(20)
+                        .withMaxTotalConnections(20)
+                        .withConnectionTimeout(15)
+                        .withRequestConnectionTimeout(5)
+                        .withResponseConnectionTimeout(3)
+                        .withConnectionKeepAlive(3)
+                        .withDefaultMaxPerRoute(10)
+                        .withMaxRedirect(5)
                         .build())
                 .build();
     }
@@ -91,14 +95,14 @@ public class GPWMSConnectorStoreSit2PoolV111Test {
     public void b_wmsDescribeLayerV11Test() throws Exception {
         GPWMSDescribeLayerV111Request wmsDescribeLayerRequest = wmsServerConnector.createDescribeLayerRequest();
         logger.info("##########################WMS_DESCRIBE_LAYER_RESPONSE_V111 : {}\n", wmsDescribeLayerRequest
-                .withLayers("RegioneCampania.Cartografia.Tematica:sitdbo_zps").getResponse());
+                .withLayers("RegioneCampania.Cartografia.Tematica:sitdbo_zps").getResponseAsString());
     }
 
     @Test
     public void c_wmsDescribeLayerV11Test() throws Exception {
         GPWMSDescribeLayerV111Request wmsDescribeLayerRequest = wmsServerConnector.createDescribeLayerRequest();
         logger.info("##########################WMS_DESCRIBE_LAYER_RESPONSE_V111 : {}\n", wmsDescribeLayerRequest
-                .withLayers("RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico").getResponse());
+                .withLayers("RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico").getResponseAsString());
     }
 
     @Test
@@ -118,6 +122,6 @@ public class GPWMSConnectorStoreSit2PoolV111Test {
         GPWMSDescribeLayerV111Request wmsDescribeLayerRequest = wmsServerConnector.createDescribeLayerRequest();
         logger.info("##########################WMS_DESCRIBE_LAYER_RESPONSE_V111 : {}\n", wmsDescribeLayerRequest
                 .withLayers("RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico",
-                        "RegioneCampania.Cartografia.Tematica:sitdbo_aree_carsiche", "RegioneCampania.Ambiente:sitdbo_zps").getResponse());
+                        "RegioneCampania.Cartografia.Tematica:sitdbo_aree_carsiche", "RegioneCampania.Ambiente:sitdbo_zps").getResponseAsString());
     }
 }

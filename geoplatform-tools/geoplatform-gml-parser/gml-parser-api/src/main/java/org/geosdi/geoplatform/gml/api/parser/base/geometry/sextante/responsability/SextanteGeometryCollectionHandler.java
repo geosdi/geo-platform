@@ -87,7 +87,9 @@ class SextanteGeometryCollectionHandler extends SextanteGeometryHandler {
      */
     @Override
     public GeoJsonObject parseGeometryAsGeoJson(AbstractGeometry gmlGeometry) throws ParserException {
-        return null;
+        return isCompatibleGeometry(gmlGeometry)
+                ? geometryCollectionParser.parseGeometryAsGeoJson((AbstractGeometricAggregate) gmlGeometry)
+                : super.forwardParseGeometryAsGeoJson(gmlGeometry);
     }
 
     /**
@@ -97,7 +99,9 @@ class SextanteGeometryCollectionHandler extends SextanteGeometryHandler {
      */
     @Override
     public GeoJsonObject parseGeometryAsGeoJson(PropertyType propertyType) throws ParserException {
-        return null;
+        return isCompatibleProperty(propertyType)
+                ? geometryCollectionParser.parseGeometryAsGeoJson((MultiGeometryProperty) propertyType)
+                : super.forwardParseGeometryAsGeoJson(propertyType);
     }
 
     /**

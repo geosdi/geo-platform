@@ -39,6 +39,7 @@ import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.geosdi.geoplatform.gml.api.jaxb.DefaultGMLUnmarshaller;
 import org.geosdi.geoplatform.gml.api.jaxb.context.AbstractGMLJAXBContext;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLUnmarshaller;
+import org.locationtech.jts.geom.Geometry;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
@@ -53,6 +54,7 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.net.URL;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -78,7 +80,8 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
      * @throws Exception
      */
     @Override
-    public <T> T unmarshal(File file) throws Exception {
+    public <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) File file) throws Exception {
+        checkArgument(file != null && !file.isDirectory() && file.exists(), "The Parameter file must not be null, must not be a directory and must exists.");
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
         Object result = unmarshaller.unmarshal(file);
         this.gmlUnmarshallerPool.returnObject(unmarshaller);
@@ -92,7 +95,8 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
      * @throws Exception
      */
     @Override
-    public <T> T unmarshal(InputStream is) throws Exception {
+    public <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) InputStream is) throws Exception {
+        checkArgument(is != null, "The Parameter InputStream must not be null.");
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
         Object result = unmarshaller.unmarshal(is);
         this.gmlUnmarshallerPool.returnObject(unmarshaller);
@@ -106,7 +110,8 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
      * @throws Exception
      */
     @Override
-    public <T> T unmarshal(Reader reader) throws Exception {
+    public <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) Reader reader) throws Exception {
+        checkArgument(reader != null, "The Parameter reader must not be null.");
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
         Object result = unmarshaller.unmarshal(reader);
         this.gmlUnmarshallerPool.returnObject(unmarshaller);
@@ -120,7 +125,8 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
      * @throws Exception
      */
     @Override
-    public <T> T unmarshal(URL url) throws Exception {
+    public <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) URL url) throws Exception {
+        checkArgument(url != null, "The Parameter url must not be null.");
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
         Object result = unmarshaller.unmarshal(url);
         this.gmlUnmarshallerPool.returnObject(unmarshaller);
@@ -134,7 +140,8 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
      * @throws Exception
      */
     @Override
-    public <T> T unmarshal(InputSource source) throws Exception {
+    public <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) InputSource source) throws Exception {
+        checkArgument(source != null, "The Parameter inputSource must not be null.");
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
         Object result = unmarshaller.unmarshal(source);
         this.gmlUnmarshallerPool.returnObject(unmarshaller);
@@ -148,7 +155,8 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
      * @throws Exception
      */
     @Override
-    public <T> T unmarshal(Node node) throws Exception {
+    public <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) Node node) throws Exception {
+        checkArgument(node != null, "The Parameter node must not be null.");
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
         Object result = unmarshaller.unmarshal(node);
         this.gmlUnmarshallerPool.returnObject(unmarshaller);
@@ -162,7 +170,8 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
      * @throws Exception
      */
     @Override
-    public <T> T unmarshal(Source source) throws Exception {
+    public <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) Source source) throws Exception {
+        checkArgument(source != null, "The Parameter source must not be null");
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
         Object result = unmarshaller.unmarshal(source);
         this.gmlUnmarshallerPool.returnObject(unmarshaller);
@@ -176,7 +185,8 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
      * @throws Exception
      */
     @Override
-    public <T> T unmarshal(XMLStreamReader reader) throws Exception {
+    public <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) XMLStreamReader reader) throws Exception {
+        checkArgument(reader != null, "The Parameter xmlStreamReader must not be null.");
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
         Object result = unmarshaller.unmarshal(reader);
         this.gmlUnmarshallerPool.returnObject(unmarshaller);
@@ -190,7 +200,8 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
      * @throws Exception
      */
     @Override
-    public <T> T unmarshal(XMLEventReader reader) throws Exception {
+    public <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) XMLEventReader reader) throws Exception {
+        checkArgument(reader != null, "The Parameter xmlEventReader must not be null.");
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
         Object result = unmarshaller.unmarshal(reader);
         this.gmlUnmarshallerPool.returnObject(unmarshaller);
@@ -205,7 +216,9 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
      * @throws Exception
      */
     @Override
-    public <T> JAXBElement<T> unmarshal(Node node, Class<T> declaredType) throws Exception {
+    public <T extends Geometry> JAXBElement<T> unmarshal(@Nonnull(when = NEVER) Node node, @Nonnull(when = NEVER) Class<T> declaredType) throws Exception {
+        checkArgument(node != null, "The Parameter node must not be null.");
+        checkArgument(declaredType != null, "The Parameter declaredType must not be null.");
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
         JAXBElement<T> result = unmarshaller.unmarshal(node, declaredType);
         this.gmlUnmarshallerPool.returnObject(unmarshaller);
@@ -220,7 +233,9 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
      * @throws Exception
      */
     @Override
-    public <T> JAXBElement<T> unmarshal(Source source, Class<T> declaredType) throws Exception {
+    public <T extends Geometry> JAXBElement<T> unmarshal(@Nonnull(when = NEVER) Source source, @Nonnull(when = NEVER) Class<T> declaredType) throws Exception {
+        checkArgument(source != null, "The Parameter source must not be null.");
+        checkArgument(declaredType != null, "The Parameter declaredType must not be null.");
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
         JAXBElement<T> result = unmarshaller.unmarshal(source, declaredType);
         this.gmlUnmarshallerPool.returnObject(unmarshaller);
@@ -235,7 +250,9 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
      * @throws Exception
      */
     @Override
-    public <T> JAXBElement<T> unmarshal(XMLStreamReader reader, Class<T> declaredType) throws Exception {
+    public <T extends Geometry> JAXBElement<T> unmarshal(@Nonnull(when = NEVER) XMLStreamReader reader, @Nonnull(when = NEVER) Class<T> declaredType) throws Exception {
+        checkArgument(reader != null, "The Parameter xmlStreamReader must not be null.");
+        checkArgument(declaredType != null, "The Parameter declaredType must not be null.");
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
         JAXBElement<T> result = unmarshaller.unmarshal(reader, declaredType);
         this.gmlUnmarshallerPool.returnObject(unmarshaller);
@@ -250,7 +267,9 @@ public abstract class GMLJAXBContextPooled extends AbstractGMLJAXBContext implem
      * @throws Exception
      */
     @Override
-    public <T> JAXBElement<T> unmarshal(XMLEventReader reader, Class<T> declaredType) throws Exception {
+    public <T extends Geometry> JAXBElement<T> unmarshal(@Nonnull(when = NEVER) XMLEventReader reader, @Nonnull(when = NEVER) Class<T> declaredType) throws Exception {
+        checkArgument(reader != null, "The Parameter xmlEventReader must not be null.");
+        checkArgument(declaredType != null, "The Parameter declaredType must not be null.");
         GMLUnmarshaller unmarshaller = this.gmlUnmarshallerPool.borrowObject();
         JAXBElement<T> result = unmarshaller.unmarshal(reader, declaredType);
         this.gmlUnmarshallerPool.returnObject(unmarshaller);

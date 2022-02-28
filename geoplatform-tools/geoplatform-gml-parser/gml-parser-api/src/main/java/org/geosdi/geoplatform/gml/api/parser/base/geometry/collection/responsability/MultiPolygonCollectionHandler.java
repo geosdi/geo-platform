@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.collection.responsability;
 
+import org.geojson.GeoJsonObject;
 import org.geosdi.geoplatform.gml.api.AbstractGeometricAggregate;
 import org.geosdi.geoplatform.gml.api.MultiPolygon;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.polygon.GMLBaseMultiPolygonParser;
@@ -67,11 +68,11 @@ public class MultiPolygonCollectionHandler extends GeometryCollectionHandler {
 
     /**
      * @param gmlGeometry
-     * @return {@link GeometryCollection}
+     * @return {@link GeoJsonObject}
      * @throws ParserException
      */
     @Override
-    public org.geojson.MultiPolygon parseGeometryAsGeoJson(AbstractGeometricAggregate gmlGeometry) throws ParserException {
+    public GeoJsonObject parseGeometryAsGeoJson(AbstractGeometricAggregate gmlGeometry) throws ParserException {
         return isCompatibleGeometry(gmlGeometry) ? multiPolygonParser.parseGeometryAsGeoJson((MultiPolygon) gmlGeometry)
                 : super.forwardParseGeometryAsGeoJson(gmlGeometry);
     }

@@ -39,9 +39,7 @@ import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.connector.wfs.response.collection.FeatureAttributesMap;
-import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
-import org.geosdi.geoplatform.xml.gml.v311.AbstractGeometryType;
 import org.locationtech.jts.io.WKTWriter;
 
 import javax.annotation.Nonnull;
@@ -149,16 +147,14 @@ public class WFSGetFeatureStaxReader extends WFSBaseGetFeatureStaxReader<Feature
         String geometryWKT = null;
         int eventType = xmlStreamReader().nextTag();
         if (eventType == XMLEvent.START_ELEMENT) {
-            AbstractGeometry geometry = jaxbContextBuilder.unmarshal(xmlStreamReader(), AbstractGeometryType.class);
             /**@TODO The Geometry will always must 2d Dimension??
              * otherwise the code must be :
              * <code>WKTWriter wktWriter = new WKTWriter(geometry.isSetSrsDimension() ? geometry.getSrsDimension().intValue() : 2)</code>
              **/
             WKTWriter wktWriter = new WKTWriter(2);
-            logger.trace("@@@@@@@@@@@@@@Geometry : {}\n", geometry);
             wktWriter.setFormatted(TRUE);
             try {
-                geometryWKT = wktWriter.writeFormatted(this.sextanteParser.parseGeometry(geometry));
+                geometryWKT = wktWriter.writeFormatted(gmlJAXBContext.acquireUnmarshaller().unmarshal(xmlStreamReader()));
                 logger.trace("@@@@@@@@@@@@@@@@@@@@@@WKT_GEOMETRY : {}\n" + geometryWKT);
             } catch (ParserException ex) {
                 ex.printStackTrace();

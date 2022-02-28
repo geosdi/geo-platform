@@ -37,11 +37,11 @@ package org.geosdi.geoplatform.gml.api.jaxb;
 
 import org.geosdi.geoplatform.gml.api.jaxb.context.AbstractGMLUnmarshaller;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.locationtech.jts.geom.Geometry;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -53,18 +53,20 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.net.URL;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class DefaultGMLUnmarshaller extends AbstractGMLUnmarshaller {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    private final Unmarshaller unmarshaller;
-
-    public DefaultGMLUnmarshaller(Unmarshaller theUnmarshaller) {
-        this.unmarshaller = theUnmarshaller;
+    /**
+     * @param theUnmarshaller
+     */
+    public DefaultGMLUnmarshaller(@Nonnull(when = NEVER) Unmarshaller theUnmarshaller) {
+        super(theUnmarshaller);
     }
 
     /**
@@ -75,7 +77,8 @@ public class DefaultGMLUnmarshaller extends AbstractGMLUnmarshaller {
      * @throws ParserException
      */
     @Override
-    public <T> T unmarshal(File f) throws JAXBException, ParserException {
+    public <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) File f) throws JAXBException, ParserException {
+        checkArgument(f != null && !f.isDirectory() && f.exists(), "The Parameter file must not be null, must not be a directory and must exists.");
         return (T) super.parseElement(this.unmarshaller.unmarshal(f));
     }
 
@@ -87,7 +90,8 @@ public class DefaultGMLUnmarshaller extends AbstractGMLUnmarshaller {
      * @throws ParserException
      */
     @Override
-    public <T> T unmarshal(InputStream is) throws JAXBException, ParserException {
+    public <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) InputStream is) throws JAXBException, ParserException {
+        checkArgument(is != null, "The Parameter InputStream must not be null.");
         return (T) super.parseElement(this.unmarshaller.unmarshal(is));
     }
 
@@ -99,7 +103,8 @@ public class DefaultGMLUnmarshaller extends AbstractGMLUnmarshaller {
      * @throws ParserException
      */
     @Override
-    public <T> T unmarshal(Reader reader) throws JAXBException, ParserException {
+    public <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) Reader reader) throws JAXBException, ParserException {
+        checkArgument(reader != null, "The Parameter reader must not be null.");
         return (T) super.parseElement(this.unmarshaller.unmarshal(reader));
     }
 
@@ -111,7 +116,8 @@ public class DefaultGMLUnmarshaller extends AbstractGMLUnmarshaller {
      * @throws ParserException
      */
     @Override
-    public <T> T unmarshal(URL url) throws JAXBException, ParserException {
+    public <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) URL url) throws JAXBException, ParserException {
+        checkArgument(url != null, "The Parameter url must not be null.");
         return (T) super.parseElement(this.unmarshaller.unmarshal(url));
     }
 
@@ -123,7 +129,8 @@ public class DefaultGMLUnmarshaller extends AbstractGMLUnmarshaller {
      * @throws ParserException
      */
     @Override
-    public <T> T unmarshal(InputSource source) throws JAXBException, ParserException {
+    public <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) InputSource source) throws JAXBException, ParserException {
+        checkArgument(source != null, "The Parameter inputSource must not be null.");
         return (T) super.parseElement(this.unmarshaller.unmarshal(source));
     }
 
@@ -134,7 +141,8 @@ public class DefaultGMLUnmarshaller extends AbstractGMLUnmarshaller {
      * @throws Exception
      */
     @Override
-    public <T> T unmarshal(Source source) throws Exception {
+    public <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) Source source) throws Exception {
+        checkArgument(source != null, "The Parameter source must not be null");
         return (T) super.parseElement(this.unmarshaller.unmarshal(source));
     }
 
@@ -145,7 +153,8 @@ public class DefaultGMLUnmarshaller extends AbstractGMLUnmarshaller {
      * @throws Exception
      */
     @Override
-    public <T> T unmarshal(XMLStreamReader reader) throws Exception {
+    public <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) XMLStreamReader reader) throws Exception {
+        checkArgument(reader != null, "The Parameter xmlStreamReader must not be null.");
         return (T) super.parseElement(this.unmarshaller.unmarshal(reader));
     }
 
@@ -156,7 +165,8 @@ public class DefaultGMLUnmarshaller extends AbstractGMLUnmarshaller {
      * @throws Exception
      */
     @Override
-    public <T> T unmarshal(XMLEventReader reader) throws Exception {
+    public <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) XMLEventReader reader) throws Exception {
+        checkArgument(reader != null, "The Parameter xmlEventReader must not be null.");
         return (T) super.parseElement(this.unmarshaller.unmarshal(reader));
     }
 
@@ -168,7 +178,8 @@ public class DefaultGMLUnmarshaller extends AbstractGMLUnmarshaller {
      * @throws ParserException
      */
     @Override
-    public <T> T unmarshal(Node node) throws JAXBException, ParserException {
+    public <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) Node node) throws JAXBException, ParserException {
+        checkArgument(node != null, "The Parameter node must not be null.");
         return (T) super.parseElement(this.unmarshaller.unmarshal(node));
     }
 
@@ -181,7 +192,9 @@ public class DefaultGMLUnmarshaller extends AbstractGMLUnmarshaller {
      * @throws ParserException
      */
     @Override
-    public <T> JAXBElement<T> unmarshal(Node node, Class<T> declaredType) throws JAXBException, ParserException {
+    public <T extends Geometry> JAXBElement<T> unmarshal(@Nonnull(when = NEVER) Node node, @Nonnull(when = NEVER) Class<T> declaredType) throws JAXBException, ParserException {
+        checkArgument(node != null, "The Parameter node must not be null.");
+        checkArgument(declaredType != null, "The Parameter declaredType must not be null.");
         return super.parseElement(this.unmarshaller.unmarshal(node), declaredType);
     }
 
@@ -194,7 +207,9 @@ public class DefaultGMLUnmarshaller extends AbstractGMLUnmarshaller {
      * @throws ParserException
      */
     @Override
-    public <T> JAXBElement<T> unmarshal(Source source, Class<T> declaredType) throws JAXBException, ParserException {
+    public <T extends Geometry> JAXBElement<T> unmarshal(@Nonnull(when = NEVER) Source source, @Nonnull(when = NEVER) Class<T> declaredType) throws JAXBException, ParserException {
+        checkArgument(source != null, "The Parameter source must not be null.");
+        checkArgument(declaredType != null, "The Parameter declaredType must not be null.");
         return super.parseElement(this.unmarshaller.unmarshal(source), declaredType);
     }
 
@@ -207,7 +222,9 @@ public class DefaultGMLUnmarshaller extends AbstractGMLUnmarshaller {
      * @throws ParserException
      */
     @Override
-    public <T> JAXBElement<T> unmarshal(XMLStreamReader reader, Class<T> declaredType) throws JAXBException, ParserException {
+    public <T extends Geometry> JAXBElement<T> unmarshal(@Nonnull(when = NEVER) XMLStreamReader reader, @Nonnull(when = NEVER) Class<T> declaredType) throws JAXBException, ParserException {
+        checkArgument(reader != null, "The Parameter xmlStreamReader must not be null.");
+        checkArgument(declaredType != null, "The Parameter declaredType must not be null.");
         return super.parseElement(this.unmarshaller.unmarshal(reader), declaredType);
     }
 
@@ -220,7 +237,9 @@ public class DefaultGMLUnmarshaller extends AbstractGMLUnmarshaller {
      * @throws ParserException
      */
     @Override
-    public <T> JAXBElement<T> unmarshal(XMLEventReader reader, Class<T> declaredType) throws JAXBException, ParserException {
+    public <T extends Geometry> JAXBElement<T> unmarshal(@Nonnull(when = NEVER) XMLEventReader reader, @Nonnull(when = NEVER) Class<T> declaredType) throws JAXBException, ParserException {
+        checkArgument(reader != null, "The Parameter xmlEventReader must not be null.");
+        checkArgument(declaredType != null, "The Parameter declaredType must not be null.");
         return super.parseElement(this.unmarshaller.unmarshal(reader), declaredType);
     }
 

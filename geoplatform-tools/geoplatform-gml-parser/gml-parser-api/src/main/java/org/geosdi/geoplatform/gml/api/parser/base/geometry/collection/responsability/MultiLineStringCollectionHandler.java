@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.collection.responsability;
 
+import org.geojson.GeoJsonObject;
 import org.geosdi.geoplatform.gml.api.AbstractGeometricAggregate;
 import org.geosdi.geoplatform.gml.api.MultiLineString;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.line.GMLBaseMultiLineStringParser;
@@ -67,11 +68,11 @@ public class MultiLineStringCollectionHandler extends GeometryCollectionHandler 
 
     /**
      * @param gmlGeometry
-     * @return {@link GeometryCollection}
+     * @return {@link GeoJsonObject}
      * @throws ParserException
      */
     @Override
-    public org.geojson.MultiLineString parseGeometryAsGeoJson(AbstractGeometricAggregate gmlGeometry) throws ParserException {
+    public GeoJsonObject parseGeometryAsGeoJson(AbstractGeometricAggregate gmlGeometry) throws ParserException {
         return isCompatibleGeometry(gmlGeometry) ? multiLineStringParser.parseGeometryAsGeoJson((MultiLineString) gmlGeometry)
                 : super.forwardParseGeometryAsGeoJson(gmlGeometry);
     }

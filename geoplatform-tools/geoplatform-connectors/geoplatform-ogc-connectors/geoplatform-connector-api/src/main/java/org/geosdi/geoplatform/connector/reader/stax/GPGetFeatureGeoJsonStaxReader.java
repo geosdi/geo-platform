@@ -79,7 +79,7 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
     protected static final String TYPES_NAME_SEPARATOR = ",";
     protected static final String TYPE_NAME_SEPARATOR = ":";
     protected static final String FEATURE_NAME_KEY = "FEATURE_NAME";
-    private static final String BOUNDING_BY_PREFIX = "boundedBy";
+    protected static final String BOUNDING_BY_PREFIX = "boundedBy";
     private static final String GML_NAME_PREFIX = "name";
     private static final GPFeatureTypeReader featureTypeReader = new GPFeatureTypeReader() {
 
@@ -174,6 +174,7 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
         String name = xmlStreamReader().getLocalName();
         logger.trace("##############################PREFIX : {} - NAME : {}\n", prefix, name);
         IGPFeatureType featureType = featureTypes.computeIfAbsent(name, value -> new GPFeatureType(prefix, name));
+        logger.trace("########################################FEATURE_TYPE : {}\n\n", featureType);
         if ((featureType != null) && (super.isTagName(prefix, name))) {
             String featureID = xmlStreamReader().getAttributeValue(null, this.fidLocalName);
             feature.setId((featureID != null) && !(featureID.trim().isEmpty()) ? featureID : of(prefix, name).collect(joining(":")));

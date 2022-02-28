@@ -35,23 +35,25 @@
  */
 package org.geosdi.geoplatform.gml.api.jaxb.context.pool;
 
+import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.locationtech.jts.geom.Geometry;
 import org.w3c.dom.Node;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.InputSource;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Reader;
-import java.io.Writer;
+import java.io.*;
 import java.net.URL;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -63,116 +65,103 @@ public interface IGMLJAXBContextPooled {
     // ==========================================================================
     // === Unmarshaller Section
     // ==========================================================================
-
     /**
-     * @param file
-     * @param <T>
+     * @param f
      * @return {@link T}
      * @throws Exception
      */
-    <T> T unmarshal(File file) throws Exception;
+    <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) File f) throws Exception;
 
     /**
      * @param is
-     * @param <T>
      * @return {@link T}
      * @throws Exception
      */
-    <T> T unmarshal(InputStream is) throws Exception;
+    <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) InputStream is) throws Exception;
 
     /**
      * @param reader
-     * @param <T>
      * @return {@link T}
      * @throws Exception
      */
-    <T> T unmarshal(Reader reader) throws Exception;
+    <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) Reader reader) throws Exception;
 
     /**
      * @param url
-     * @param <T>
      * @return {@link T}
      * @throws Exception
      */
-    <T> T unmarshal(URL url) throws Exception;
+    <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) URL url) throws Exception;
 
     /**
      * @param source
-     * @param <T>
+     * @return {@link T}
+     * @throws JAXBException
+     * @throws ParserException
+     */
+    <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) InputSource source) throws Exception;
+
+    /**
+     * @param source
      * @return {@link T}
      * @throws Exception
      */
-    <T> T unmarshal(InputSource source) throws Exception;
+    <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) Source source) throws Exception;
+
+    /**
+     * @param reader
+     * @return {@link T}
+     * @throws Exception
+     */
+    <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) XMLStreamReader reader) throws Exception;
+
+    /**
+     * @param reader
+     * @return {@link T}
+     * @throws Exception
+     */
+    <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) XMLEventReader reader) throws Exception;
 
     /**
      * @param node
-     * @param <T>
      * @return {@link T}
      * @throws Exception
      */
-    <T> T unmarshal(Node node) throws Exception;
-
-    /**
-     * @param source
-     * @param <T>
-     * @return {@link T}
-     * @throws Exception
-     */
-    <T> T unmarshal(Source source) throws Exception;
-
-    /**
-     * @param reader
-     * @param <T>
-     * @return {@link T}
-     * @throws Exception
-     */
-    <T> T unmarshal(XMLStreamReader reader) throws Exception;
-
-    /**
-     * @param reader
-     * @param <T>
-     * @return {@link T}
-     * @throws Exception
-     */
-    <T> T unmarshal(XMLEventReader reader) throws Exception;
+    <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) Node node) throws Exception;
 
     /**
      * @param node
      * @param declaredType
-     * @param <T>
-     * @return {@link JAXBElement<T>}
+     * @return {@link JAXBElement <T>}
      * @throws Exception
      */
-    <T> JAXBElement<T> unmarshal(Node node, Class<T> declaredType) throws Exception;
+    <T extends Geometry> JAXBElement<T> unmarshal(@Nonnull(when = NEVER) Node node, @Nonnull(when = NEVER) Class<T> declaredType) throws Exception;
 
     /**
      * @param source
      * @param declaredType
-     * @param <T>
      * @return {@link JAXBElement<T>}
      * @throws Exception
      */
-    <T> JAXBElement<T> unmarshal(Source source, Class<T> declaredType) throws Exception;
+    <T extends Geometry> JAXBElement<T> unmarshal(@Nonnull(when = NEVER) Source source, @Nonnull(when = NEVER) Class<T> declaredType) throws Exception;
 
     /**
      * @param reader
      * @param declaredType
-     * @param <T>
      * @return {@link JAXBElement<T>}
      * @throws Exception
      */
-    <T> JAXBElement<T> unmarshal(XMLStreamReader reader, Class<T> declaredType) throws Exception;
+    <T extends Geometry> JAXBElement<T> unmarshal(@Nonnull(when = NEVER) XMLStreamReader reader, @Nonnull(when = NEVER) Class<T> declaredType) throws Exception;
 
     /**
      * @param reader
      * @param declaredType
-     * @param <T>
      * @return {@link JAXBElement<T>}
      * @throws Exception
      */
-    <T> JAXBElement<T> unmarshal(XMLEventReader reader, Class<T> declaredType) throws Exception;
+    <T extends Geometry> JAXBElement<T> unmarshal(@Nonnull(when = NEVER) XMLEventReader reader, @Nonnull(when = NEVER) Class<T> declaredType) throws Exception;
+
     // </editor-fold>
-
     // <editor-fold defaultstate="collapsed" desc="Marshaller Section">
     // ==========================================================================
     // === Marshaller Section

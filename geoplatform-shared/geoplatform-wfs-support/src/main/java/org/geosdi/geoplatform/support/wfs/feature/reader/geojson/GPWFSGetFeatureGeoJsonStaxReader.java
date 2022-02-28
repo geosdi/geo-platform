@@ -49,6 +49,8 @@ import static org.geosdi.geoplatform.stax.reader.builder.XmlStreamReaderBuilder.
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
+ *
+ * <p>This Stax Reader is for GML 3.1.1 Geometry</p>
  */
 @ThreadSafe
 public class GPWFSGetFeatureGeoJsonStaxReader extends WFSBaseGetFeatureGeoJsonStaxReader {
@@ -72,13 +74,17 @@ public class GPWFSGetFeatureGeoJsonStaxReader extends WFSBaseGetFeatureGeoJsonSt
                 if (evenType == XMLEvent.START_ELEMENT) {
                     if (super.isTagName(WFS_PREFIX, FEATURE_COLLECTION_LOCAL_NAME)) {
                         this.loadTypeNames();
+                    } else if (super.isTagName(GML_PREFIX, BOUNDING_BY_PREFIX)) {
+                        super.goToEndTag(BOUNDING_BY_PREFIX);
                     } else if (super.isTagName(GML_PREFIX, FEATURE_MEMBERS_LOCAL_NAME)) {
                         Feature feature = new Feature();
                         this.readFeatures(feature);
+                        feature.getProperties().remove(FEATURE_NAME_KEY);
                         featureCollection.add(feature);
-                    } else {
+                    } else {//if (super.isFeatureTag()) {
                         Feature feature = new Feature();
                         this.readFeatureID(feature);
+                        feature.getProperties().remove(FEATURE_NAME_KEY);
                         featureCollection.add(feature);
                     }
                 }

@@ -35,13 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.wms.stax;
 
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
-import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
-import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -50,10 +46,6 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  */
 @FixMethodOrder(value = NAME_ASCENDING)
 public class GPWMSGetFeatureInfoStaxReaderTest extends WMSGetFeatureInfoStaxReaderTest {
-
-    protected static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
-            FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-            WRAP_ROOT_VALUE_DISABLE, INDENT_OUTPUT_ENABLE, NON_NULL);
 
     @Test
     public void a_b_wmsGetFeatureInfoStaxReaderTest() throws Exception {

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.impl.v311.jts;
 
+import org.geojson.GeoJsonObject;
 import org.geosdi.geoplatform.gml.impl.v311.AbstractGMLParserTest;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -42,8 +43,12 @@ import org.junit.Test;
 import org.locationtech.jts.geom.*;
 import org.locationtech.jts.io.WKTReader;
 
+import java.io.File;
 import java.io.StringWriter;
 
+import static java.io.File.separator;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -59,7 +64,7 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
     }
 
     @Test
-    public void a_testPoint() throws Exception {
+    public void a_a_testPoint() throws Exception {
         Coordinate ptc = new Coordinate(10, 20);
         Point point = geometryFactory.createPoint(ptc);
         point.setSRID(4326);
@@ -69,7 +74,7 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
     }
 
     @Test
-    public void b_testLineString() throws Exception {
+    public void a_b_testLineString() throws Exception {
         Coordinate[] lsc = new Coordinate[8];
         lsc[0] = new Coordinate(5.0d, 5.0d);
         lsc[1] = new Coordinate(6.0d, 5.0d);
@@ -87,7 +92,7 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
     }
 
     @Test
-    public void c_testLinearRing() throws Exception {
+    public void a_c_testLinearRing() throws Exception {
         Coordinate[] lrc = new Coordinate[10];
         lrc[0] = new Coordinate(7, 7);
         lrc[1] = new Coordinate(6, 9);
@@ -107,7 +112,7 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
     }
 
     @Test
-    public void d_testPolygon() throws Exception {
+    public void a_d_testPolygon() throws Exception {
         Geometry polygon = reader.read("POLYGON ((35 10, 10 20, 15 40,"
                 + " 45 45, 35 10), (20 30, 35 35, 30 20, 20 30))");
         StringWriter writer = new StringWriter();
@@ -116,7 +121,7 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
     }
 
     @Test
-    public void e_testMultiPoint() throws Exception {
+    public void a_e_testMultiPoint() throws Exception {
         Geometry multiPoint = reader.read("MULTIPOINT ((10 40), (40 30), (20 20), (30 10))");
         StringWriter writer = new StringWriter();
         jaxbContext.acquireMarshaller().marshal(multiPoint, writer);
@@ -124,7 +129,7 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
     }
 
     @Test
-    public void f_testMultiLineString() throws Exception {
+    public void a_f_testMultiLineString() throws Exception {
         Geometry multiLineString = reader.read("MULTILINESTRING ((10 10, 20 20, 10 40), "
                         + "(40 40, 30 30, 40 20, 30 10))");
         StringWriter writer = new StringWriter();
@@ -133,7 +138,7 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
     }
 
     @Test
-    public void g_testMultiPolygon() throws Exception {
+    public void a_g_testMultiPolygon() throws Exception {
         Geometry multiPolygon = reader.read("MULTIPOLYGON (((40 40, 20 45,"
                 + " 45 30, 40 40)), ((20 35, 45 20, 30 5, "
                 + "10 10, 10 30, 20 35), (30 20, 20 25, 20 15, 30 20)))");
@@ -143,7 +148,7 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
     }
 
     @Test
-    public void h_testGeometryCollection() throws Exception {
+    public void a_h_testGeometryCollection() throws Exception {
         Geometry geometryCollection = reader.read("GEOMETRYCOLLECTION(POINT(0 0), "
                         + "POINT(1 0), POINT(1 1), POINT(0 1), LINESTRING(4 6,7 10), "
                         + "POLYGON ((35 10, 10 20, 15 40, 45 45, 35 10),"
@@ -152,5 +157,261 @@ public class JTSSextanteParserTest extends AbstractGMLParserTest {
         StringWriter writer = new StringWriter();
         jaxbContext.acquireMarshaller().marshal(geometryCollection, writer);
         logger.info("GML V311 Geometry Collection : \n\n" + writer);
+    }
+
+    @Test
+    public void a_i_unmarshalGMLGeometryTest() throws Exception {
+        Point geometry = jaxbContext.acquireUnmarshaller().unmarshal(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "Point.xml")
+                .collect(joining(separator))));
+        logger.info("#################JTS_POINT_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void a_l_unmarshalGMLGeometryTest() throws Exception {
+        Polygon geometry = jaxbContext.acquireUnmarshaller().unmarshal(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "Polygon.xml")
+                .collect(joining(separator))));
+        logger.info("#################JTS_POLYGON_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void a_m_unmarshalGMLGeometryTest() throws Exception {
+        LinearRing geometry = jaxbContext.acquireUnmarshaller().unmarshal(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "LinearRing.xml")
+                .collect(joining(separator))));
+        logger.info("#################JTS_LINEAR_RING_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void a_n_unmarshalGMLGeometryTest() throws Exception {
+        LineString geometry = jaxbContext.acquireUnmarshaller().unmarshal(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "LineString.xml")
+                .collect(joining(separator))));
+        logger.info("#################JTS_LINESTRING_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void a_o_unmarshalGMLGeometryTest() throws Exception {
+        MultiPoint geometry = jaxbContext.acquireUnmarshaller().unmarshal(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "MultiPoint.xml")
+                .collect(joining(separator))));
+        logger.info("#################JTS_MULTI_POINT_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void a_p_unmarshalGMLGeometryTest() throws Exception {
+        MultiPolygon geometry = jaxbContext.acquireUnmarshaller().unmarshal(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "MultiPolygon.xml")
+                .collect(joining(separator))));
+        logger.info("#################JTS_MULTI_POLYGON_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void a_q_unmarshalGMLGeometryTest() throws Exception {
+        MultiLineString geometry = jaxbContext.acquireUnmarshaller().unmarshal(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "MultiLineString.xml")
+                .collect(joining(separator))));
+        logger.info("#################JTS_MULTI_LINESTRING_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void a_r_unmarshalGMLGeometryTest() throws Exception {
+        MultiLineString geometry = jaxbContext.acquireUnmarshaller().unmarshal(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "MultiLineString_srsDimension3.xml")
+                .collect(joining(separator))));
+        logger.info("#################JTS_MULTI_LINESTRING_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void a_s_unmarshalGMLGeometryTest() throws Exception {
+        Geometry geometry = jaxbContext.acquireUnmarshaller().unmarshal(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "MultiCurve.xml")
+                .collect(joining(separator))));
+        logger.info("#################JTS_MULTI_CURVE_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void a_t_unmarshalGMLGeometryTest() throws Exception {
+        Geometry geometry = jaxbContext.acquireUnmarshaller().unmarshal(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "MultiSurface.xml")
+                .collect(joining(separator))));
+        logger.info("#################JTS_MULTI_SURFACE_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void a_u_unmarshalGMLGeometryTest() throws Exception {
+        GeometryCollection geometry = jaxbContext.acquireUnmarshaller().unmarshal(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "GeometryCollection.xml")
+                .collect(joining(separator))));
+        logger.info("#################JTS_GEOMETRY_COLLECTION : {}\n", geometry);
+    }
+
+    @Test
+    public void a_v_unmarshalGMLGeometryTest() throws Exception {
+        Geometry geometry = jaxbContext.acquireUnmarshaller().unmarshal(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "MultiSurface1.xml")
+                .collect(joining(separator))));
+        logger.info("#################JTS_MULTI_SURFACE_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void a_w_unmarshalGMLGeometryTest() throws Exception {
+        Geometry geometry = jaxbContext.acquireUnmarshaller().unmarshal(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "MultiSurface2.xml")
+                .collect(joining(separator))));
+        logger.info("#################JTS_MULTI_SURFACE_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void a_x_unmarshalGMLGeometryTest() throws Exception {
+        Geometry geometry = jaxbContext.acquireUnmarshaller().unmarshal(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "MultiSurface3.xml")
+                .collect(joining(separator))));
+        logger.info("#################JTS_MULTI_SURFACE_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void a_y_unmarshalGMLGeometryTest() throws Exception {
+        Geometry geometry = jaxbContext.acquireUnmarshaller().unmarshal(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "Curve1.xml")
+                .collect(joining(separator))));
+        logger.info("#################JTS_CURVE_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void a_z_unmarshalGMLGeometryTest() throws Exception {
+        Geometry geometry = jaxbContext.acquireUnmarshaller().unmarshal(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "Curve2.xml")
+                .collect(joining(separator))));
+        logger.info("#################JTS_CURVE_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void b_a_unmarshalGMLGeometryTest() throws Exception {
+        org.geojson.Point geometry = jaxbContext.acquireUnmarshaller().unmarshalAsGeoJson(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "Point.xml")
+                .collect(joining(separator))));
+        logger.info("#################GEOJSON_POINT_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void b_b_unmarshalGMLGeometryTest() throws Exception {
+        org.geojson.Polygon geometry = jaxbContext.acquireUnmarshaller().unmarshalAsGeoJson(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "Polygon.xml")
+                .collect(joining(separator))));
+        logger.info("#################GEOJSON_POLYGON_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void b_c_unmarshalGMLGeometryTest() throws Exception {
+        org.geojson.LineString geometry = jaxbContext.acquireUnmarshaller().unmarshalAsGeoJson(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "LinearRing.xml")
+                .collect(joining(separator))));
+        logger.info("#################GEOJSON_LINESTRING_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void b_d_unmarshalGMLGeometryTest() throws Exception {
+        org.geojson.LineString geometry = jaxbContext.acquireUnmarshaller().unmarshalAsGeoJson(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "LineString.xml")
+                .collect(joining(separator))));
+        logger.info("#################GEOJSON_LINESTRING_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void b_e_unmarshalGMLGeometryTest() throws Exception {
+        org.geojson.MultiPoint geometry = jaxbContext.acquireUnmarshaller().unmarshalAsGeoJson(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "MultiPoint.xml")
+                .collect(joining(separator))));
+        logger.info("#################GEOJSON_MULTI_POINT_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void b_f_unmarshalGMLGeometryTest() throws Exception {
+        org.geojson.MultiPolygon geometry = jaxbContext.acquireUnmarshaller().unmarshalAsGeoJson(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "MultiPolygon.xml")
+                .collect(joining(separator))));
+        logger.info("#################GEOJSON_MULTI_POLYGON_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void b_g_unmarshalGMLGeometryTest() throws Exception {
+        org.geojson.MultiLineString geometry = jaxbContext.acquireUnmarshaller().unmarshalAsGeoJson(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "MultiLineString.xml")
+                .collect(joining(separator))));
+        logger.info("#################GEOJSON_MULTI_LINESTRING_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void b_h_unmarshalGMLGeometryTest() throws Exception {
+        org.geojson.MultiLineString geometry = jaxbContext.acquireUnmarshaller().unmarshalAsGeoJson(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "MultiLineString_srsDimension3.xml")
+                .collect(joining(separator))));
+        logger.info("#################GEOJSON_MULTI_LINESTRING_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void b_i_unmarshalGMLGeometryTest() throws Exception {
+        org.geojson.MultiLineString geometry = jaxbContext.acquireUnmarshaller().unmarshalAsGeoJson(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "MultiCurve.xml")
+                .collect(joining(separator))));
+        logger.info("#################GEOJSON_MULTI_LINESTRING_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void b_l_unmarshalGMLGeometryTest() throws Exception {
+        org.geojson.MultiPolygon geometry = jaxbContext.acquireUnmarshaller().unmarshalAsGeoJson(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "MultiSurface.xml")
+                .collect(joining(separator))));
+        logger.info("#################GEOJSON_MULTI_SURFACE_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void b_m_unmarshalGMLGeometryTest() throws Exception {
+        org.geojson.GeometryCollection geometry = jaxbContext.acquireUnmarshaller().unmarshalAsGeoJson(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "GeometryCollection.xml")
+                .collect(joining(separator))));
+        logger.info("#################GEOJSON_GEOMETRY_COLLECTION : {}\n", geometry);
+    }
+
+    @Test
+    public void b_n_unmarshalGMLGeometryTest() throws Exception {
+        GeoJsonObject geometry = jaxbContext.acquireUnmarshaller().unmarshalAsGeoJson(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "MultiSurface1.xml")
+                .collect(joining(separator))));
+        logger.info("#################GEOJSON_MULTI_POLYGON_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void b_o_unmarshalGMLGeometryTest() throws Exception {
+        GeoJsonObject geometry = jaxbContext.acquireUnmarshaller().unmarshalAsGeoJson(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "MultiSurface2.xml")
+                .collect(joining(separator))));
+        logger.info("#################JTS_MULTI_POLYGON_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void b_p_unmarshalGMLGeometryTest() throws Exception {
+        GeoJsonObject geometry = jaxbContext.acquireUnmarshaller().unmarshalAsGeoJson(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "MultiSurface3.xml")
+                .collect(joining(separator))));
+        logger.info("#################JTS_MULTI_POLYGON_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void b_q_unmarshalGMLGeometryTest() throws Exception {
+        GeoJsonObject geometry = jaxbContext.acquireUnmarshaller().unmarshalAsGeoJson(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "Curve1.xml")
+                .collect(joining(separator))));
+        logger.info("#################GEOJSON_MULTI_LINESTRING_GEOMETRY : {}\n", geometry);
+    }
+
+    @Test
+    public void b_r_unmarshalGMLGeometryTest() throws Exception {
+        GeoJsonObject geometry = jaxbContext.acquireUnmarshaller().unmarshalAsGeoJson(new File(of(new File(".").getCanonicalPath(),
+                "src", "test", "resources", "Curve2.xml")
+                .collect(joining(separator))));
+        logger.info("#################GEOJSON_MULTI_LINESTRING_GEOMETRY : {}\n", geometry);
     }
 }

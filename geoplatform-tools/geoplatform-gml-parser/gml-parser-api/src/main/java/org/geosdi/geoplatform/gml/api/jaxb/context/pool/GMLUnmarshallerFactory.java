@@ -41,7 +41,11 @@ import org.apache.commons.pool2.impl.DefaultPooledObject;
 import org.geosdi.geoplatform.gml.api.jaxb.DefaultGMLUnmarshaller;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLUnmarshaller;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.JAXBContext;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -51,7 +55,11 @@ public class GMLUnmarshallerFactory extends BasePooledObjectFactory<GMLUnmarshal
 
     private final JAXBContext jaxbContext;
 
-    public GMLUnmarshallerFactory(JAXBContext theJaxbContext) {
+    /**
+     * @param theJaxbContext
+     */
+    public GMLUnmarshallerFactory(@Nonnull(when = NEVER) JAXBContext theJaxbContext) {
+        checkArgument(theJaxbContext != null, "The Parameter jaxbContext must not be null.");
         this.jaxbContext = theJaxbContext;
     }
 
@@ -70,7 +78,7 @@ public class GMLUnmarshallerFactory extends BasePooledObjectFactory<GMLUnmarshal
      */
     @Override
     public PooledObject<GMLUnmarshaller> wrap(GMLUnmarshaller obj) {
-        return new DefaultPooledObject<GMLUnmarshaller>(obj);
+        return new DefaultPooledObject<>(obj);
     }
 
     /**

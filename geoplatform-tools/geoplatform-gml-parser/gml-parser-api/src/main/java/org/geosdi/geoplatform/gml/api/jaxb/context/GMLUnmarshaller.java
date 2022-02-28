@@ -35,10 +35,13 @@
  */
 package org.geosdi.geoplatform.gml.api.jaxb.context;
 
+import org.geosdi.geoplatform.gml.api.jaxb.context.geojson.IGMLGeoJsonUnmarshaller;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
+import org.locationtech.jts.geom.Geometry;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLEventReader;
@@ -49,11 +52,13 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.net.URL;
 
+import static javax.annotation.meta.When.NEVER;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GMLUnmarshaller {
+public interface GMLUnmarshaller extends IGMLGeoJsonUnmarshaller {
 
     /**
      * @param f
@@ -62,7 +67,7 @@ public interface GMLUnmarshaller {
      * @throws JAXBException
      * @throws ParserException
      */
-    <T> T unmarshal(File f) throws JAXBException, ParserException;
+    <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) File f) throws JAXBException, ParserException;
 
     /**
      * @param is
@@ -71,7 +76,7 @@ public interface GMLUnmarshaller {
      * @throws JAXBException
      * @throws ParserException
      */
-    <T> T unmarshal(InputStream is) throws JAXBException, ParserException;
+    <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) InputStream is) throws JAXBException, ParserException;
 
     /**
      * @param reader
@@ -80,7 +85,7 @@ public interface GMLUnmarshaller {
      * @throws JAXBException
      * @throws ParserException
      */
-    <T> T unmarshal(Reader reader) throws JAXBException, ParserException;
+    <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) Reader reader) throws JAXBException, ParserException;
 
     /**
      * @param url
@@ -89,7 +94,7 @@ public interface GMLUnmarshaller {
      * @throws JAXBException
      * @throws ParserException
      */
-    <T> T unmarshal(URL url) throws JAXBException, ParserException;
+    <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) URL url) throws JAXBException, ParserException;
 
     /**
      * @param source
@@ -98,7 +103,7 @@ public interface GMLUnmarshaller {
      * @throws JAXBException
      * @throws ParserException
      */
-    <T> T unmarshal(InputSource source) throws JAXBException, ParserException;
+    <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) InputSource source) throws JAXBException, ParserException;
 
     /**
      * @param source
@@ -106,7 +111,7 @@ public interface GMLUnmarshaller {
      * @return {@link T}
      * @throws Exception
      */
-    <T> T unmarshal(Source source) throws Exception;
+    <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) Source source) throws Exception;
 
     /**
      * @param reader
@@ -114,7 +119,7 @@ public interface GMLUnmarshaller {
      * @return {@link T}
      * @throws Exception
      */
-    <T> T unmarshal(XMLStreamReader reader) throws Exception;
+    <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) XMLStreamReader reader) throws Exception;
 
     /**
      * @param reader
@@ -122,7 +127,7 @@ public interface GMLUnmarshaller {
      * @return {@link T}
      * @throws Exception
      */
-    <T> T unmarshal(XMLEventReader reader) throws Exception;
+    <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) XMLEventReader reader) throws Exception;
 
     /**
      * @param node
@@ -131,7 +136,7 @@ public interface GMLUnmarshaller {
      * @throws JAXBException
      * @throws ParserException
      */
-    <T> T unmarshal(Node node) throws JAXBException, ParserException;
+    <T extends Geometry> T unmarshal(@Nonnull(when = NEVER) Node node) throws JAXBException, ParserException;
 
     /**
      * @param node
@@ -141,7 +146,7 @@ public interface GMLUnmarshaller {
      * @throws JAXBException
      * @throws ParserException
      */
-    <T> JAXBElement<T> unmarshal(Node node, Class<T> declaredType) throws JAXBException, ParserException;
+    <T extends Geometry> JAXBElement<T> unmarshal(@Nonnull(when = NEVER) Node node, @Nonnull(when = NEVER) Class<T> declaredType) throws JAXBException, ParserException;
 
     /**
      * @param source
@@ -151,7 +156,7 @@ public interface GMLUnmarshaller {
      * @throws JAXBException
      * @throws ParserException
      */
-    <T> JAXBElement<T> unmarshal(Source source, Class<T> declaredType) throws JAXBException, ParserException;
+    <T extends Geometry> JAXBElement<T> unmarshal(@Nonnull(when = NEVER) Source source, @Nonnull(when = NEVER) Class<T> declaredType) throws JAXBException, ParserException;
 
     /**
      * @param reader
@@ -161,7 +166,7 @@ public interface GMLUnmarshaller {
      * @throws JAXBException
      * @throws ParserException
      */
-    <T> JAXBElement<T> unmarshal(XMLStreamReader reader, Class<T> declaredType) throws JAXBException, ParserException;
+    <T extends Geometry> JAXBElement<T> unmarshal(@Nonnull(when = NEVER) XMLStreamReader reader, @Nonnull(when = NEVER) Class<T> declaredType) throws JAXBException, ParserException;
 
     /**
      * @param reader
@@ -171,7 +176,7 @@ public interface GMLUnmarshaller {
      * @throws JAXBException
      * @throws ParserException
      */
-    <T> JAXBElement<T> unmarshal(XMLEventReader reader, Class<T> declaredType) throws JAXBException, ParserException;
+    <T extends Geometry> JAXBElement<T> unmarshal(@Nonnull(when = NEVER) XMLEventReader reader, @Nonnull(when = NEVER) Class<T> declaredType) throws JAXBException, ParserException;
 
     /**
      * @throws Exception

@@ -39,11 +39,8 @@ import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -52,6 +49,7 @@ import java.util.stream.Collectors;
 import static java.io.File.separator;
 import static java.util.stream.Stream.of;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -59,8 +57,6 @@ import static org.junit.Assert.assertNotNull;
  */
 public class WFSGetFeatureCreateLayerStaxReaderTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(WFSGetFeatureCreateLayerStaxReaderTest.class);
-    //
     private static LayerSchemaDTO createLayerSchema;
     private static GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
     private static File getFeatureCreateLayer;
@@ -79,6 +75,6 @@ public class WFSGetFeatureCreateLayerStaxReaderTest {
     public void createLayerStaxReaderTest() throws Exception {
         WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(createLayerSchema);
         FeatureCollectionDTO featureCollectionDTO = featureReaderStAX.read(getFeatureCreateLayer);
-        Assert.assertTrue(!(featureCollectionDTO == null));
+        assertTrue(!(featureCollectionDTO == null));
     }
 }

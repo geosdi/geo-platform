@@ -38,10 +38,8 @@ package org.geosdi.geoplatform.support.wfs.feature.reader.geojson;
 import org.geojson.Feature;
 import org.geojson.GeoJsonObject;
 import org.geosdi.geoplatform.connector.reader.stax.GPGetFeatureGeoJsonStaxReader;
-import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.stax.reader.builder.GPXmlStreamReaderBuilder;
 import org.geosdi.geoplatform.support.wfs.feature.reader.GPWFSGetFeatureStaxReader;
-import org.geosdi.geoplatform.xml.gml.v311.AbstractGeometryType;
 
 import javax.annotation.Nonnull;
 import javax.xml.stream.XMLStreamReader;
@@ -73,6 +71,14 @@ public abstract class WFSBaseGetFeatureGeoJsonStaxReader extends GPGetFeatureGeo
     }
 
     /**
+     * @return {@link Boolean}
+     * @throws Exception
+     */
+    protected boolean isFeatureTag() throws Exception {
+        return this.typeNames.get().containsKey(xmlStreamReader().getLocalName());
+    }
+
+    /**
      * @param streamReader
      * @return {@link GeoJsonObject}
      * @throws Exception
@@ -80,8 +86,7 @@ public abstract class WFSBaseGetFeatureGeoJsonStaxReader extends GPGetFeatureGeo
     @Override
     protected GeoJsonObject internalReadGeometry(@Nonnull(when = NEVER) XMLStreamReader streamReader) throws Exception {
         try {
-            AbstractGeometry geometry = jaxbContextBuilder.unmarshal(xmlStreamReader(), AbstractGeometryType.class);
-            return sextanteParser.parseGeometryAsGeoJson(geometry);
+            return gmlJAXBContext.acquireUnmarshaller().unmarshalAsGeoJson(xmlStreamReader());
         } catch (Exception ex) {
             ex.printStackTrace();
             logger.error("########################Parse Exception : {}", ex.getMessage());

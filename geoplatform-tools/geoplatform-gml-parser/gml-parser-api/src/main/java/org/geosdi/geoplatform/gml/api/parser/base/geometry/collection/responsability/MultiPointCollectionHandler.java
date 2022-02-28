@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gml.api.parser.base.geometry.collection.responsability;
 
+import org.geojson.GeoJsonObject;
 import org.geosdi.geoplatform.gml.api.AbstractGeometricAggregate;
 import org.geosdi.geoplatform.gml.api.MultiPoint;
 import org.geosdi.geoplatform.gml.api.parser.base.geometry.multi.point.GMLBaseMultiPointParser;
@@ -71,7 +72,7 @@ public class MultiPointCollectionHandler extends GeometryCollectionHandler {
      * @throws ParserException
      */
     @Override
-    public org.geojson.MultiPoint parseGeometryAsGeoJson(AbstractGeometricAggregate gmlGeometry) throws ParserException {
+    public GeoJsonObject parseGeometryAsGeoJson(AbstractGeometricAggregate gmlGeometry) throws ParserException {
         return isCompatibleGeometry(gmlGeometry) ? multiPointParser.parseGeometryAsGeoJson((MultiPoint) gmlGeometry)
                 : super.forwardParseGeometryAsGeoJson(gmlGeometry);
     }

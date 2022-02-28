@@ -35,25 +35,198 @@
  */
 package org.geosdi.geoplatform.gml.api.jaxb.context;
 
+import org.geojson.GeoJsonObject;
 import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.PropertyType;
-import org.geosdi.geoplatform.gml.api.parser.base.geometry.sextante.GMLBaseSextanteParser;
-import org.geosdi.geoplatform.gml.api.parser.base.parameter.GMLBaseParametersRepo;
+import org.geosdi.geoplatform.gml.api.jaxb.context.geojson.GMLGeoJsonUnmarshaller;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.locationtech.jts.geom.Geometry;
+import org.w3c.dom.Node;
+import org.xml.sax.InputSource;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBIntrospector;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.stream.XMLEventReader;
+import javax.xml.stream.XMLStreamReader;
+import javax.xml.transform.Source;
 
+import java.io.File;
+import java.io.InputStream;
+import java.io.Reader;
+import java.net.URL;
+
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class AbstractGMLUnmarshaller implements GMLUnmarshaller {
+public abstract class AbstractGMLUnmarshaller extends GMLGeoJsonUnmarshaller implements GMLUnmarshaller {
 
-    protected GMLBaseSextanteParser sextanteParser = GMLBaseParametersRepo.getDefaultSextanteParser();
+    protected final Unmarshaller unmarshaller;
+
+    /**
+     * @param theUnmarshaller
+     */
+    protected AbstractGMLUnmarshaller(@Nonnull(when = NEVER) Unmarshaller theUnmarshaller) {
+        checkArgument(theUnmarshaller != null, "The Parameter unmarshaller must not be null.");
+        this.unmarshaller = theUnmarshaller;
+    }
+
+    /**
+     * @param file
+     * @return {@link GeoJsonObject}
+     * @throws Exception
+     */
+    @Override
+    public GeoJsonObject unmarshalAsGeoJson(@Nonnull(when = NEVER) File file) throws Exception {
+        checkArgument(file != null && !file.isDirectory() && file.exists(), "The Parameter file must not be null, must not be a directory and must exists.");
+        return super.parseElementAsGeoJson(this.unmarshaller.unmarshal(file));
+    }
+
+    /**
+     * @param is
+     * @return {@link GeoJsonObject}
+     * @throws Exception
+     */
+    @Override
+    public GeoJsonObject unmarshalAsGeoJson(@Nonnull(when = NEVER) InputStream is) throws Exception {
+        checkArgument(is != null, "The Parameter InputStream must not be null.");
+        return super.parseElementAsGeoJson(this.unmarshaller.unmarshal(is));
+    }
+
+    /**
+     * @param reader
+     * @return {@link GeoJsonObject}
+     * @throws Exception
+     */
+    @Override
+    public GeoJsonObject unmarshalAsGeoJson(@Nonnull(when = NEVER) Reader reader) throws Exception {
+        checkArgument(reader != null, "The Parameter reader must not be null.");
+        return super.parseElementAsGeoJson(this.unmarshaller.unmarshal(reader));
+    }
+
+    /**
+     * @param url
+     * @return {@link GeoJsonObject}
+     * @throws Exception
+     */
+    @Override
+    public GeoJsonObject unmarshalAsGeoJson(@Nonnull(when = NEVER) URL url) throws Exception {
+        checkArgument(url != null, "The Parameter url must not be null.");
+        return super.parseElementAsGeoJson(this.unmarshaller.unmarshal(url));
+    }
+
+    /**
+     * @param source
+     * @return {@link GeoJsonObject}
+     * @throws Exception
+     */
+    @Override
+    public GeoJsonObject unmarshalAsGeoJson(@Nonnull(when = NEVER) InputSource source) throws Exception {
+        checkArgument(source != null, "The Parameter inputSource must not be null.");
+        return super.parseElementAsGeoJson(this.unmarshaller.unmarshal(source));
+    }
+
+    /**
+     * @param source
+     * @return {@link GeoJsonObject}
+     * @throws Exception
+     */
+    @Override
+    public GeoJsonObject unmarshalAsGeoJson(@Nonnull(when = NEVER) Source source) throws Exception {
+        checkArgument(source != null, "The Parameter source must not be null");
+        return super.parseElementAsGeoJson(this.unmarshaller.unmarshal(source));
+    }
+
+    /**
+     * @param reader
+     * @return {@link GeoJsonObject}
+     * @throws Exception
+     */
+    @Override
+    public GeoJsonObject unmarshalAsGeoJson(@Nonnull(when = NEVER) XMLStreamReader reader) throws Exception {
+        checkArgument(reader != null, "The Parameter xmlStreamReader must not be null.");
+        return super.parseElementAsGeoJson(this.unmarshaller.unmarshal(reader));
+    }
+
+    /**
+     * @param reader
+     * @return {@link GeoJsonObject}
+     * @throws Exception
+     */
+    @Override
+    public GeoJsonObject unmarshalAsGeoJson(@Nonnull(when = NEVER) XMLEventReader reader) throws Exception {
+        checkArgument(reader != null, "The Parameter xmlEventReader must not be null.");
+        return super.parseElementAsGeoJson(this.unmarshaller.unmarshal(reader));
+    }
+
+    /**
+     * @param node
+     * @return {@link GeoJsonObject}
+     * @throws Exception
+     */
+    @Override
+    public GeoJsonObject unmarshalAsGeoJson(@Nonnull(when = NEVER) Node node) throws Exception {
+        checkArgument(node != null, "The Parameter node must not be null.");
+        return super.parseElementAsGeoJson(this.unmarshaller.unmarshal(node));
+    }
+
+    /**
+     * @param node
+     * @param declaredType
+     * @return {@link JAXBElement<G>}
+     * @throws Exception
+     */
+    @Override
+    public <G extends GeoJsonObject> JAXBElement<G> unmarshalAsGeoJson(@Nonnull(when = NEVER) Node node, @Nonnull(when = NEVER) Class<G> declaredType) throws Exception {
+        checkArgument(node != null, "The Parameter node must not be null.");
+        checkArgument(declaredType != null, "The Parameter declaredType must not be null.");
+        return super.parseElementAsGeoJson(this.unmarshaller.unmarshal(node), declaredType);
+    }
+
+    /**
+     * @param source
+     * @param declaredType
+     * @return {@link JAXBElement<G>}
+     * @throws Exception
+     */
+    @Override
+    public <G extends GeoJsonObject> JAXBElement<G> unmarshalAsGeoJson(@Nonnull(when = NEVER) Source source, @Nonnull(when = NEVER) Class<G> declaredType) throws Exception {
+        checkArgument(source != null, "The Parameter source must not be null.");
+        checkArgument(declaredType != null, "The Parameter declaredType must not be null.");
+        return super.parseElementAsGeoJson(this.unmarshaller.unmarshal(source), declaredType);
+    }
+
+    /**
+     * @param reader
+     * @param declaredType
+     * @return {@link JAXBElement<G>}
+     * @throws Exception
+     */
+    @Override
+    public <G extends GeoJsonObject> JAXBElement<G> unmarshalAsGeoJson(@Nonnull(when = NEVER) XMLStreamReader reader, @Nonnull(when = NEVER) Class<G> declaredType) throws Exception {
+        checkArgument(reader != null, "The Parameter xmlStreamReader must not be null.");
+        checkArgument(declaredType != null, "The Parameter declaredType must not be null.");
+        return super.parseElementAsGeoJson(this.unmarshaller.unmarshal(reader), declaredType);
+    }
+
+    /**
+     * @param reader
+     * @param declaredType
+     * @return {@link JAXBElement<G>}
+     * @throws Exception
+     */
+    @Override
+    public <G extends GeoJsonObject> JAXBElement<G> unmarshalAsGeoJson(@Nonnull(when = NEVER) XMLEventReader reader, @Nonnull(when = NEVER) Class<G> declaredType) throws Exception {
+        checkArgument(reader != null, "The Parameter xmlEventReader must not be null.");
+        checkArgument(declaredType != null, "The Parameter declaredType must not be null.");
+        return super.parseElementAsGeoJson(this.unmarshaller.unmarshal(reader), declaredType);
+    }
 
     /**
      * @param element
@@ -62,7 +235,6 @@ public abstract class AbstractGMLUnmarshaller implements GMLUnmarshaller {
      */
     protected Geometry parseElement(Object element) throws ParserException {
         Object value = JAXBIntrospector.getValue(element);
-
         if (value instanceof PropertyType) {
             return sextanteParser.parseGeometry((PropertyType) value);
         } else if (value instanceof AbstractGeometry) {
@@ -78,21 +250,18 @@ public abstract class AbstractGMLUnmarshaller implements GMLUnmarshaller {
      * @return {@link JAXBElement<T>}
      * @throws ParserException
      */
-    protected <T> JAXBElement<T> parseElement(Object element, Class<T> type) throws ParserException {
+    protected <T extends Geometry> JAXBElement<T> parseElement(Object element, Class<T> type) throws ParserException {
         checkNotNull(element, "The Object Element must not be null.");
         if (element instanceof JAXBElement) {
             Geometry geom = parseElement(element);
             if (type.isAssignableFrom(geom.getClass())) {
                 T value = (T) geom;
-                return new JAXBElement<T>(((JAXBElement<?>) element).getName(),
-                        type, value);
+                return new JAXBElement(((JAXBElement<?>) element).getName(), type, value);
             } else {
-                throw new ParserException("Geometry class " + geom.getClass().getName()
-                        + " not match " + type.getName());
+                throw new ParserException("Geometry class " + geom.getClass().getName() + " not match " + type.getName());
             }
         } else {
-            throw new ParserException("The Object element is not an instance"
-                    + " of JAXBElement class");
+            throw new ParserException("The Object element is not an instance of JAXBElement class");
         }
     }
 }

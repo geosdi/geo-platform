@@ -40,10 +40,8 @@ import org.geojson.FeatureCollection;
 import org.geojson.GeoJsonObject;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.connector.wfs.response.collection.FeatureAttributesMap;
-import org.geosdi.geoplatform.gml.api.AbstractGeometry;
 import org.geosdi.geoplatform.gml.api.parser.exception.ParserException;
 import org.geosdi.geoplatform.support.wfs.feature.reader.WFSBaseGetFeatureStaxReader;
-import org.geosdi.geoplatform.xml.gml.v311.AbstractGeometryType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -134,10 +132,9 @@ public class WFSGetFeatureGeoJsonStaxReader extends WFSBaseGetFeatureStaxReader<
         GeoJsonObject geoJsonGeometry = null;
         int eventType = xmlStreamReader().nextTag();
         if (eventType == XMLEvent.START_ELEMENT) {
-            AbstractGeometry geometry = jaxbContextBuilder.unmarshal(xmlStreamReader(), AbstractGeometryType.class);
             try {
-                geoJsonGeometry = this.sextanteParser.parseGeometryAsGeoJson(geometry);
-                logger.trace("@@@@@@@@@@@@@@@@@@@@@@GEO_JSON_GEOMETRY : {}\n", geometry);
+                geoJsonGeometry = gmlJAXBContext.acquireUnmarshaller().unmarshalAsGeoJson(xmlStreamReader());
+                logger.trace("@@@@@@@@@@@@@@@@@@@@@@GEO_JSON_GEOMETRY : {}\n", geoJsonGeometry);
             } catch (ParserException ex) {
                 ex.printStackTrace();
                 logger.error("########################Parse Exception : " + ex);

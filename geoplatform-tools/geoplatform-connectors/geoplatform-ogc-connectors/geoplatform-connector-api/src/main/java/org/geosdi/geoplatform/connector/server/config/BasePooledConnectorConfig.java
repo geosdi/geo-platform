@@ -42,6 +42,7 @@ import org.apache.hc.core5.util.TimeValue;
 import org.apache.hc.core5.util.Timeout;
 import org.geosdi.geoplatform.connector.server.request.cookie.GPConnectorCookieSpec;
 
+import static java.lang.Boolean.TRUE;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.apache.hc.core5.util.Timeout.of;
 import static org.geosdi.geoplatform.connector.server.request.cookie.ConnectorCookieSpec.IGNORE;
@@ -50,19 +51,26 @@ import static org.geosdi.geoplatform.connector.server.request.cookie.ConnectorCo
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Getter
 @ToString
 @Immutable
 public class BasePooledConnectorConfig implements GPPooledConnectorConfig {
 
+    @Getter
     private final Integer maxTotalConnections;
+    @Getter
     private final Integer defaultMaxPerRoute;
+    @Getter
     private final Timeout connectionTimeout;
+    @Getter
     private final Timeout requestConnectionTimeout;
+    @Getter
     private final Timeout responseConnectionTimeout;
+    @Getter
     private final TimeValue connectionKeepAlive;
+    @Getter
     private final Integer maxRedirect;
-    private final boolean redirectsEnabled;
+    private final Boolean redirectsEnabled;
+    @Getter
     private final GPConnectorCookieSpec cookieSpec;
 
     /**
@@ -78,7 +86,7 @@ public class BasePooledConnectorConfig implements GPPooledConnectorConfig {
      */
     BasePooledConnectorConfig(Integer theMaxTotalConnections, Integer theDefaultMaxPerRoute, Timeout theConnectionTimeout,
             Timeout theRequestConnectionTimeout, Timeout theResponseConnectionTimeout, TimeValue theConnectionKeepAlive,
-            Integer theMaxRedirect, boolean theRedirectsEnabled, GPConnectorCookieSpec theCookieSpec) {
+            Integer theMaxRedirect, Boolean theRedirectsEnabled, GPConnectorCookieSpec theCookieSpec) {
         this.maxTotalConnections = theMaxTotalConnections;
         this.defaultMaxPerRoute = theDefaultMaxPerRoute;
         this.connectionTimeout = ((theConnectionTimeout == null) ? of(30l, SECONDS) : theConnectionTimeout);
@@ -86,7 +94,15 @@ public class BasePooledConnectorConfig implements GPPooledConnectorConfig {
         this.responseConnectionTimeout = ((theResponseConnectionTimeout == null) ? of(30l, SECONDS) : theResponseConnectionTimeout);
         this.connectionKeepAlive = ((theConnectionKeepAlive != null) ? theConnectionKeepAlive : TimeValue.of(10l, SECONDS));
         this.maxRedirect = ((theMaxRedirect != null) && (theMaxRedirect <= 50) ? theMaxRedirect : 50);
-        this.redirectsEnabled = theRedirectsEnabled;
+        this.redirectsEnabled = ((theRedirectsEnabled != null) ? theRedirectsEnabled : TRUE);
         this.cookieSpec = ((theCookieSpec != null) ? theCookieSpec : IGNORE);
+    }
+
+    /**
+     * @return {@link Boolean}
+     */
+    @Override
+    public Boolean isRedirectsEnabled() {
+        return this.redirectsEnabled;
     }
 }

@@ -81,9 +81,9 @@ public interface GPPooledConnectorConfig {
     Integer getMaxRedirect();
 
     /**
-     * @return {@link  Boolean}
+     * @return {@link Boolean}
      */
-    boolean isRedirectsEnabled();
+    Boolean isRedirectsEnabled();
 
     /**
      * @return {@link GPConnectorCookieSpec}

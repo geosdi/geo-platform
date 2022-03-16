@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.threadpool.support.builder.executor;
 import org.geosdi.geoplatform.threadpool.support.builder.GPThreadPoolConfigBuilder;
 
 import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
@@ -56,13 +55,12 @@ public interface GPThreadPoolExecutorBuilder<E extends Executor, Builder extends
     <ThreadPoolConfig extends GPThreadPoolConfigBuilder.GPThreadPoolConfig> Builder withConfigBuilder(ThreadPoolConfig theThreadPoolConfig);
 
     /**
-     * @return {@link ExecutorService}
+     * @return {@link E}
      * @throws Exception
      */
     E build() throws Exception;
 
-    abstract class GPBaseThreadPoolExecutorBuilder<E extends Executor, Builder extends GPThreadPoolExecutorBuilder>
-            implements GPThreadPoolExecutorBuilder<E, Builder> {
+    abstract class GPBaseThreadPoolExecutorBuilder<E extends Executor, Builder extends GPThreadPoolExecutorBuilder> implements GPThreadPoolExecutorBuilder<E, Builder> {
 
         protected GPThreadPoolConfigBuilder.GPThreadPoolConfig threadPoolConfig;
 

@@ -106,10 +106,8 @@ public class GPThreadPoolSupportConfigBuilder extends GPDefaultThreadPoolConfigB
      * @return {@link ConfigBuilder}
      */
     @Override
-    public <ConfigBuilder extends GPThreadPoolConfigBuilder> ConfigBuilder withKeepAlive(Long theKeepAlive,
-            TimeUnit theTimeUnit) {
-        this.keepAlive = ((theKeepAlive != null) && (theKeepAlive > 0)) ?
-                SECONDS.convert(theKeepAlive, theTimeUnit) :
+    public <ConfigBuilder extends GPThreadPoolConfigBuilder> ConfigBuilder withKeepAlive(Long theKeepAlive, TimeUnit theTimeUnit) {
+        this.keepAlive = ((theKeepAlive != null) && (theKeepAlive > 0)) ? SECONDS.convert(theKeepAlive, theTimeUnit) :
                 ((theKeepAlive != null) && (theKeepAlive < 0)) ? SECONDS.convert(60000l, MILLISECONDS) :
                         defaultKeepAlive();
         return self();

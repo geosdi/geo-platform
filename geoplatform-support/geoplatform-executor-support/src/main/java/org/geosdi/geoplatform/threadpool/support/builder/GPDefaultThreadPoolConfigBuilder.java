@@ -191,7 +191,18 @@ abstract class GPDefaultThreadPoolConfigBuilder implements GPThreadPoolConfigBui
         private final Boolean isDaemon;
         private final Integer priority;
 
-        public GPDefaultThreadPoolConfig(String theThreadNamePrefix, Integer theCorePoolSize,
+        /**
+         * @param theThreadNamePrefix
+         * @param theCorePoolSize
+         * @param theMaxPoolSize
+         * @param theQueueCapacity
+         * @param theQueue
+         * @param theKeepAlive
+         * @param theThreadFactory
+         * @param theIsDaemon
+         * @param thePriority
+         */
+        GPDefaultThreadPoolConfig(String theThreadNamePrefix, Integer theCorePoolSize,
                 Integer theMaxPoolSize, Integer theQueueCapacity, BlockingQueue<Runnable> theQueue, Long theKeepAlive,
                 ThreadFactory theThreadFactory, Boolean theIsDaemon, Integer thePriority) {
             this.threadNamePrefix = theThreadNamePrefix;

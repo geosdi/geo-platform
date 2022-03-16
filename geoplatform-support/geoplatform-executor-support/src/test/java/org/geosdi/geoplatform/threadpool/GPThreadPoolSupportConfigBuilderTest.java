@@ -45,6 +45,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.*;
 
+import static org.junit.Assert.assertTrue;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -57,7 +59,7 @@ public class GPThreadPoolSupportConfigBuilderTest {
     public void createThreadPoolWithQueueCapacityConfigTest() throws Exception {
         GPThreadPoolConfigBuilder.GPThreadPoolConfig threadPoolConfig = GPThreadPoolSupportConfigBuilder
                 .threadPoolConfigBuilder().withQueueCapacity(60).build();
-        Assert.assertTrue(threadPoolConfig.getQueue() instanceof LinkedBlockingDeque);
+        assertTrue(threadPoolConfig.getQueue() instanceof LinkedBlockingDeque);
         Assert.assertEquals(60, ((BlockingDeque) threadPoolConfig.getQueue()).remainingCapacity());
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@THREAD_POOL_CONFIG : {}\n", threadPoolConfig);
     }
@@ -66,7 +68,7 @@ public class GPThreadPoolSupportConfigBuilderTest {
     public void createThreadPoolWithoutQueueCapacityConfigTest() throws Exception {
         GPThreadPoolConfigBuilder.GPThreadPoolConfig threadPoolConfig = GPThreadPoolSupportConfigBuilder
                 .threadPoolConfigBuilder().withQueueCapacity(null).build();
-        Assert.assertTrue(threadPoolConfig.getQueue() instanceof SynchronousQueue);
+        assertTrue(threadPoolConfig.getQueue() instanceof SynchronousQueue);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@THREAD_POOL_CONFIG : {}\n", threadPoolConfig);
     }
 
@@ -95,7 +97,7 @@ public class GPThreadPoolSupportConfigBuilderTest {
     public void createThreadPoolWithThreadFactoryConfigTest() throws Exception {
         GPThreadPoolConfigBuilder.GPThreadPoolConfig threadPoolConfig = GPThreadPoolSupportConfigBuilder
                 .threadPoolConfigBuilder().withThreadFactory(r -> Executors.privilegedThreadFactory().newThread(r)).build();
-        Assert.assertTrue(threadPoolConfig.getThreadFactory() instanceof GPDecoratorThreadFactory);
+        assertTrue(threadPoolConfig.getThreadFactory() instanceof GPDecoratorThreadFactory);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@THREAD_POOL_CONFIG : {}\n", threadPoolConfig);
     }
 
@@ -107,14 +109,14 @@ public class GPThreadPoolSupportConfigBuilderTest {
                 .withQueueCapacity(1000).withKeepAlive(60000l, TimeUnit.MILLISECONDS)
                 .withIsDaemon(Boolean.TRUE).withPriority(Thread.MAX_PRIORITY)
                 .withThreadFactory(r -> Executors.privilegedThreadFactory().newThread(r)).build();
-        Assert.assertTrue(threadPoolConfig.getThreadFactory() instanceof GPDecoratorThreadFactory);
-        Assert.assertTrue(threadPoolConfig.getThreadNamePrefix().equals("Test-"));
-        Assert.assertTrue(threadPoolConfig.getCorePoolSize().equals(4));
-        Assert.assertTrue(threadPoolConfig.getMaxPoolSize().equals(1000));
-        Assert.assertTrue(threadPoolConfig.getQueueCapacity().equals(1000));
-        Assert.assertTrue(threadPoolConfig.getKeepAlive().intValue() == 60);
-        Assert.assertTrue(threadPoolConfig.isDaemon() == Boolean.TRUE);
-        Assert.assertTrue(threadPoolConfig.getPriority() == Thread.MAX_PRIORITY);
+        assertTrue(threadPoolConfig.getThreadFactory() instanceof GPDecoratorThreadFactory);
+        assertTrue(threadPoolConfig.getThreadNamePrefix().equals("Test-"));
+        assertTrue(threadPoolConfig.getCorePoolSize().equals(4));
+        assertTrue(threadPoolConfig.getMaxPoolSize().equals(1000));
+        assertTrue(threadPoolConfig.getQueueCapacity().equals(1000));
+        assertTrue(threadPoolConfig.getKeepAlive().intValue() == 60);
+        assertTrue(threadPoolConfig.isDaemon() == Boolean.TRUE);
+        assertTrue(threadPoolConfig.getPriority() == Thread.MAX_PRIORITY);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@THREAD_POOL_CONFIG : {}\n", threadPoolConfig);
     }
 }

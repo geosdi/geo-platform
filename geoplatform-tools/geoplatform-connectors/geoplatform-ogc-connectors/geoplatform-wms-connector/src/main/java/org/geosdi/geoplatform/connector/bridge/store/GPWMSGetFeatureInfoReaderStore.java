@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.connector.bridge.store;
 
 import org.geosdi.geoplatform.connector.bridge.finder.GPWMSGetFeatureInfoReaderFinder;
 import org.geosdi.geoplatform.connector.bridge.implementor.GPWMSGetFeatureInfoReader;
-import org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat;
+import org.geosdi.geoplatform.connector.server.request.GPWMSFeatureInfoFormat;
 import org.geosdi.geoplatform.support.bridge.finder.GPImplementorFinder;
 import org.geosdi.geoplatform.support.bridge.implementor.GPImplementor.GPImplementorKey;
 import org.slf4j.Logger;
@@ -64,7 +64,7 @@ public class GPWMSGetFeatureInfoReaderStore implements WMSGetFeatureInfoReaderSt
     //
     private static final Logger logger = LoggerFactory.getLogger(GPWMSGetFeatureInfoReaderStore.class);
     private static final GPImplementorFinder<GPWMSGetFeatureInfoReader<?>> finder = new GPWMSGetFeatureInfoReaderFinder<>();
-    private static final Map<WMSFeatureInfoFormat, GPWMSGetFeatureInfoReader<?>> wmsGetFeatureInfoReaders;
+    private static final Map<GPWMSFeatureInfoFormat, GPWMSGetFeatureInfoReader<?>> wmsGetFeatureInfoReaders;
 
     static {
         wmsGetFeatureInfoReaders = of(finder.getValidImplementors());

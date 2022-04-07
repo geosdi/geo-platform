@@ -42,13 +42,29 @@ import org.geosdi.geoplatform.rs.support.response.GPStore;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPStoreBinder<E extends Object, TO extends GPStore<E>, FROM extends Object, B extends GPStoreBinder>
-        extends GPBinder<TO, FROM, B> {
+public interface GPStoreBinder<E extends Object, TO extends GPStore<E>, FROM extends Object, B extends GPStoreBinder> extends GPBinder<TO, FROM, B> {
 
-    abstract class GPBaseStoreBinder<E extends Object, TO extends GPStore<E>, FROM extends Object, B extends GPStoreBinder>
-            extends GPBaseBinder<TO, FROM, B> implements GPStoreBinder<E, TO, FROM, B> {
+    /**
+     * @param theTotal
+     * @return {@link B}
+     */
+    B withTotal(long theTotal);
+
+    abstract class GPBaseStoreBinder<E extends Object, TO extends GPStore<E>, FROM extends Object, B extends GPStoreBinder> extends GPBaseBinder<TO, FROM, B> implements GPStoreBinder<E, TO, FROM, B> {
+
+        protected long total;
 
         protected GPBaseStoreBinder() {
+        }
+
+        /**
+         * @param theTotal
+         * @return {@link B}
+         */
+        @Override
+        public B withTotal(long theTotal) {
+            this.total = theTotal;
+            return self();
         }
     }
 }

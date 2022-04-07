@@ -44,6 +44,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.*;
+import static org.geosdi.geoplatform.connector.wms.bridge.implementor.GPWMSGetFeatureInfoMockReader.MOCK_FORMAT;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -98,5 +99,12 @@ public class GPWMSGetFeatureInfoReaderStoreTest {
         GPWMSGetFeatureInfoReader<?> gmlGetFeatureReader = store.getImplementorByKey(GML_AS_STORE);
         assertNotNull(gmlGetFeatureReader);
         logger.info("################################GML_STORE_READER : {}\n", gmlGetFeatureReader);
+    }
+
+    @Test
+    public void g_loadWMSGetFeatureReaderASGmlStoreTest() throws Exception {
+        GPWMSGetFeatureInfoReader<?> mockGetFeatureReader = store.getImplementorByKey(MOCK_FORMAT);
+        assertNotNull(mockGetFeatureReader);
+        logger.info("################################MOCK_STORE_READER : {}\n", mockGetFeatureReader);
     }
 }

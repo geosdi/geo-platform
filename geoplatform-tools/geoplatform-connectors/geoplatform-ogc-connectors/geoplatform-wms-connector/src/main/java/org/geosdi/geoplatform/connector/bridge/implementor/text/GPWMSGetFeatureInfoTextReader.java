@@ -67,4 +67,11 @@ public abstract class GPWMSGetFeatureInfoTextReader implements GPWMSGetFeatureIn
         logger.debug("##########################Executing {}#read.", this);
         return CharStreams.toString(new InputStreamReader(inputStream, UTF_8));
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName()
+                + " { key = " + getKey() +
+                "}";
+    }
 }

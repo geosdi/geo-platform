@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.bridge.store;
 
 import org.geosdi.geoplatform.connector.bridge.implementor.GPWMSGetFeatureInfoReader;
-import org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat;
+import org.geosdi.geoplatform.connector.server.request.GPWMSFeatureInfoFormat;
 import org.geosdi.geoplatform.support.bridge.store.GPImplementorStore;
 
 import javax.annotation.Nonnull;
@@ -57,9 +57,9 @@ import static javax.annotation.meta.When.NEVER;
 public interface WMSGetFeatureInfoReaderStore extends GPImplementorStore<GPWMSGetFeatureInfoReader<?>> {
 
     /**
-     * @return {@link Map<WMSFeatureInfoFormat, GPWMSGetFeatureInfoReader<?>}
+     * @return {@link Map<GPWMSFeatureInfoFormat, GPWMSGetFeatureInfoReader<?>}
      */
-    static Map<WMSFeatureInfoFormat, GPWMSGetFeatureInfoReader<?>> of(@Nonnull(when = NEVER) Set<GPWMSGetFeatureInfoReader<?>> wmsFeatureInforReaders) {
+    static Map<GPWMSFeatureInfoFormat, GPWMSGetFeatureInfoReader<?>> of(@Nonnull(when = NEVER) Set<GPWMSGetFeatureInfoReader<?>> wmsFeatureInforReaders) {
         checkArgument(wmsFeatureInforReaders != null, "The Parameter wmsGetFeatureInfoReaders must not be null.");
         return wmsFeatureInforReaders.stream()
                 .filter(Objects::nonNull)

@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.wfs.reader.mulltithread;
 
+import org.geosdi.geoplatform.connector.reader.stax.GetFeatureGeoJsonStaxGml3Reader;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
-import org.geosdi.geoplatform.support.wfs.feature.reader.geojson.GPWFSGetFeatureGeoJsonStaxReader;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -74,7 +74,7 @@ public class WFSGetFeatureMultiThreadStaxReaderTest {
     //
     private static List<String> files;
     private static String basePath;
-    private static final GPWFSGetFeatureGeoJsonStaxReader geoJsonStaxReader = new GPWFSGetFeatureGeoJsonStaxReader();
+    private static final GetFeatureGeoJsonStaxGml3Reader geoJsonStaxReader = new GetFeatureGeoJsonStaxGml3Reader();
     private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
             ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,

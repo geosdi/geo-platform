@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.wms.stax2;
 
-import org.geosdi.geoplatform.connector.reader.stax2.GPWMSGetFeatureInfoStax2Reader;
+import org.geosdi.geoplatform.connector.reader.stax2.GPWMSGetFeatureInfoStax2Gml2Reader;
 import org.geosdi.geoplatform.connector.wms.WMSGetFeatureInfoReaderFileLoaderTest;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;

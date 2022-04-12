@@ -51,7 +51,7 @@ import static io.reactivex.rxjava3.core.Flowable.fromIterable;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
-import static org.geosdi.geoplatform.connector.wms.stax.GPWMSGetFeatureInfoStaxReaderTest.JACKSON_SUPPORT;
+import static org.geosdi.geoplatform.connector.wms.stax.GPWMSGetFeatureInfoStaxGml2ReaderTest.JACKSON_SUPPORT;
 import static org.geosdi.geoplatform.connector.wms.stax.WMSGetFeatureInfoStaxReaderTest.wmsGetFeatureInfoStaxReader;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -62,9 +62,9 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(value = NAME_ASCENDING)
-public class WMSGetFeatureInfoStaxReaderMixedTest {
+public class WMSGetFeatureInfoStaxGml2ReaderMixedTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(WMSGetFeatureInfoStaxReaderMixedTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(WMSGetFeatureInfoStaxGml2ReaderMixedTest.class);
     //
     private static File file;
 

@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.wms.stax.multithread;
 
-import org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxReader;
+import org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxGml2Reader;
 import org.geosdi.geoplatform.connector.wms.stax.multithread.WMSGetFeatureInfoMultiThreadStaxReaderTest.WMSGetFeatureInfoStaxReaderTask;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -59,7 +59,7 @@ public class GPWMSFeatureStoreMultiThreadStaxReaderTest extends GPWMSGetFeatureM
 
     private static final Logger logger = LoggerFactory.getLogger(GPWMSFeatureStoreMultiThreadStaxReaderTest.class);
     //
-    private static final GPWMSGetFeatureInfoStaxReader wmsGetFeatureInfoStaxReader = new GPWMSGetFeatureInfoStaxReader();
+    private static final GPWMSGetFeatureInfoStaxGml2Reader wmsGetFeatureInfoStaxReader = new GPWMSGetFeatureInfoStaxGml2Reader();
 
     @Test
     public void wmsFeatureStoreMultiThreadStaxReaderTest() throws Exception {

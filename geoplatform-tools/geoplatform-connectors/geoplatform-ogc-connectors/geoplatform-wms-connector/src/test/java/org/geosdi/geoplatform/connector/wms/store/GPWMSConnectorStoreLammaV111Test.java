@@ -52,7 +52,7 @@ import java.net.URL;
 import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
-import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.*;
 import static org.geosdi.geoplatform.connector.server.store.GPWMSConnectorBuilder.WMSConnectorBuilder.wmsConnectorBuilder;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -102,7 +102,7 @@ public class GPWMSConnectorStoreLammaV111Test {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("MonUsoSuoloRT:lotto14")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(50)
-                .withInfoFormat(GML).withX(54).withY(238).getResponse());
+                .withInfoFormat(GML2).withX(54).withY(238).getResponse());
     }
 
     @Test
@@ -114,6 +114,30 @@ public class GPWMSConnectorStoreLammaV111Test {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("MonUsoSuoloRT:lotto17")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(50)
-                .withInfoFormat(GML).withX(178).withY(194).getResponse());
+                .withInfoFormat(GML2).withX(178).withY(194).getResponse());
+    }
+
+    @Test
+    public void e_wmsGetFeatureInfoV111Test() throws Exception {
+        GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
+        GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(1674427.609375, 4657276.5, 1708880.515625, 4809344.5);
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("MonUsoSuoloRT:lotto14").collect(toSet()),
+                "EPSG:3003", "116", "512");
+        logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("MonUsoSuoloRT:lotto14")
+                .withWMSGetMapRequest(wmsGetMapBaseRequest)
+                .withFeatureCount(50)
+                .withInfoFormat(GML3).withX(54).withY(238).getResponse());
+    }
+
+    @Test
+    public void f_wmsGetFeatureInfoV111Test() throws Exception {
+        GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
+        GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(1686535.966797, 4666829d, 1741664.783203, 4779283d);
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("MonUsoSuoloRT:lotto17").collect(toSet()),
+                "EPSG:3003", "251", "512");
+        logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("MonUsoSuoloRT:lotto17")
+                .withWMSGetMapRequest(wmsGetMapBaseRequest)
+                .withFeatureCount(50)
+                .withInfoFormat(GML3).withX(178).withY(194).getResponse());
     }
 }

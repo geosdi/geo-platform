@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.support.wfs.services;
 
 import org.geojson.FeatureCollection;
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
+import org.geosdi.geoplatform.connector.reader.stax.GetFeatureGeoJsonStaxGml3Reader;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureDTO;
@@ -44,7 +45,6 @@ import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader;
-import org.geosdi.geoplatform.support.wfs.feature.reader.geojson.GPWFSGetFeatureGeoJsonStaxReader;
 import org.geosdi.geoplatform.support.wfs.feature.reader.geojson.WFSGetFeatureGeoJsonStaxReader;
 
 import javax.annotation.Nonnull;
@@ -67,7 +67,7 @@ import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.RESULTS;
  */
 public class GPGetFeatureService extends AbstractFeatureService implements GetFeaureService {
 
-    private static final GPWFSGetFeatureGeoJsonStaxReader wfsGetFeatureGeoJsonStaxReader = new GPWFSGetFeatureGeoJsonStaxReader();
+    private static final GetFeatureGeoJsonStaxGml3Reader wfsGetFeatureGeoJsonStaxReader = new GetFeatureGeoJsonStaxGml3Reader();
 
     /**
      * @param layerSchema

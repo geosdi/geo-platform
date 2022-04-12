@@ -102,7 +102,7 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
         }
     };
     //
-    protected final ThreadLocal<Map<String, IGPFeatureType>> typeNames = withInitial(() -> null);
+    protected final ThreadLocal<Map<String, IGPFeatureType>> typeNames = withInitial(LinkedHashMap::new);
     private final ThreadLocal<String> previousGeometry = withInitial(() -> null);
     private final String fidLocalName;
 
@@ -131,7 +131,6 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
                 logger.trace("########################TYPES_NAME : {}", this.typeNames.get());
             } else {
                 logger.debug("#####################TYPE_NAME NOT FOUND.\n");
-                this.typeNames.set(new LinkedHashMap<>());
             }
         } else {
             logger.trace("#######################SCHEMA_LOCATION IS NULL.\n");
@@ -232,6 +231,13 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
             eventType = xmlStreamReader().next();
         }
         feature.setProperties(featureProperties);
+    }
+
+    /**
+     * @return {@link Boolean}
+     */
+    protected final boolean isLoadedTypeNames() {
+        return !this.typeNames.get().isEmpty();
     }
 
     /**

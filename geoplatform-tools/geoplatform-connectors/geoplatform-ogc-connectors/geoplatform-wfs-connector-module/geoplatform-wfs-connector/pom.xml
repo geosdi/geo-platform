@@ -89,18 +89,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>gml-parser-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>gml-parser-impl</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-expression</artifactId>
         </dependency>

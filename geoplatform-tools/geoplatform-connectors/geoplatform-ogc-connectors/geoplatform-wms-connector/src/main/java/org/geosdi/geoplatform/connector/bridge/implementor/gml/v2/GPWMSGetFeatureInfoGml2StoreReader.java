@@ -33,19 +33,42 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.support.wfs.feature.reader;
+package org.geosdi.geoplatform.connector.bridge.implementor.gml.v2;
 
-import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
-import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextFactoryV311;
-import org.geosdi.geoplatform.stax.reader.GeoPlatformStaxReader;
+import org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat;
 
-import static org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextType.SIMPLE;
+import javax.annotation.Nonnull;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import static com.google.common.base.Charsets.UTF_8;
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML2_AS_STORE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPWFSGetFeatureStaxReader extends GeoPlatformStaxReader {
+public class GPWMSGetFeatureInfoGml2StoreReader extends GPWMSGetFeatureInfoGml2Reader {
 
-    GMLJAXBContext gmlJAXBContext = GMLContextFactoryV311.createJAXBContext(SIMPLE);
+    /**
+     * @param inputStream
+     * @return {@link Object}
+     * @throws Exception
+     */
+    @Override
+    public Object read(@Nonnull(when = NEVER) InputStream inputStream) throws Exception {
+        checkArgument(inputStream != null, "The Parameter inputStream must not be null.");
+        logger.debug("##########################Executing {}#read.", this);
+        return wmsGetFeatureInfoStaxGml2Reader.readAsStore(new InputStreamReader(inputStream, UTF_8));
+    }
+
+    /**
+     * @return {@link WMSFeatureInfoFormat}
+     */
+    @Override
+    public WMSFeatureInfoFormat getKey() {
+        return GML2_AS_STORE;
+    }
 }

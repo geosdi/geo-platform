@@ -49,12 +49,12 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class WMSBaseGetFeatureInfoStaxReader extends WMSGetFeatureInfoStaxReader {
+public abstract class WMSBaseGetFeatureInfoStaxGml2Reader extends WMSGetFeatureInfoStaxGml2Reader {
 
     /**
      * @param theXmlStreamBuilder
      */
-    protected WMSBaseGetFeatureInfoStaxReader(@Nonnull(when = NEVER) GPXmlStreamReaderBuilder theXmlStreamBuilder) {
+    protected WMSBaseGetFeatureInfoStaxGml2Reader(@Nonnull(when = NEVER) GPXmlStreamReaderBuilder theXmlStreamBuilder) {
         super(theXmlStreamBuilder);
     }
 
@@ -70,10 +70,10 @@ public abstract class WMSBaseGetFeatureInfoStaxReader extends WMSGetFeatureInfoS
         try {
             while (reader.hasNext()) {
                 int evenType = reader.getEventType();
-                if(evenType == XMLEvent.START_ELEMENT) {
-                    if(super.isTagName(WFS_PREFIX, FEATURE_COLLECTION_LOCAL_NAME)) {
+                if (evenType == XMLEvent.START_ELEMENT) {
+                    if (super.isTagName(WFS_PREFIX, FEATURE_COLLECTION_LOCAL_NAME)) {
                         this.loadTypeNames();
-                    } else if(super.isTagName(GML_PREFIX, FEATURE_MEMBER_LOCAL_NAME)) {
+                    } else if (super.isTagName(GML_PREFIX, FEATURE_MEMBER_LOCAL_NAME)) {
                         Feature feature = new Feature();
                         this.readFeatures(feature);
                         feature.getProperties().remove(FEATURE_NAME_KEY);
@@ -100,10 +100,10 @@ public abstract class WMSBaseGetFeatureInfoStaxReader extends WMSGetFeatureInfoS
         try {
             while (reader.hasNext()) {
                 int evenType = reader.getEventType();
-                if(evenType == XMLEvent.START_ELEMENT) {
-                    if(super.isTagName(WFS_PREFIX, FEATURE_COLLECTION_LOCAL_NAME)) {
+                if (evenType == XMLEvent.START_ELEMENT) {
+                    if (super.isTagName(WFS_PREFIX, FEATURE_COLLECTION_LOCAL_NAME)) {
                         this.loadTypeNames();
-                    } else if(super.isTagName(GML_PREFIX, FEATURE_MEMBER_LOCAL_NAME)) {
+                    } else if (super.isTagName(GML_PREFIX, FEATURE_MEMBER_LOCAL_NAME)) {
                         Feature feature = new Feature();
                         this.readFeatures(feature);
                         store.addFeature(feature);

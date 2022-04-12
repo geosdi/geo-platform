@@ -33,18 +33,23 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.support.wfs.feature.reader.geojson;
+package org.geosdi.geoplatform.connector.reader.stax;
 
 import net.jcip.annotations.ThreadSafe;
 import org.geojson.Feature;
 import org.geojson.FeatureCollection;
+import org.geosdi.geoplatform.stax.reader.builder.GPXmlStreamReaderBuilder;
 
 import javax.annotation.Nonnull;
+import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
 
+import java.util.Map;
+
 import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.stax.reader.builder.XmlStreamReaderBuilder.jdkDefaultInstance;
+import static org.geosdi.geoplatform.stax.reader.builder.XmlStreamReaderBuilder.jdkWithProp;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -53,10 +58,35 @@ import static org.geosdi.geoplatform.stax.reader.builder.XmlStreamReaderBuilder.
  * <p>This Stax Reader is for GML 3.1.1 Geometry</p>
  */
 @ThreadSafe
-public class GPWFSGetFeatureGeoJsonStaxReader extends WFSBaseGetFeatureGeoJsonStaxReader {
+public class GetFeatureGeoJsonStaxGml3Reader extends BaseGetFeatureGeoJsonStaxGml3Reader {
 
-    public GPWFSGetFeatureGeoJsonStaxReader() {
-        super(jdkDefaultInstance());
+    /**
+     * Create a {@link GetFeatureGeoJsonStaxGml3Reader} with {@link XMLInputFactory} with these properties :
+     * <p>
+     *     <ul>
+     *         <li>Enable {@link XMLInputFactory#IS_COALESCING} property.</li>
+     *         <li>Enable {@link XMLInputFactory#IS_NAMESPACE_AWARE} property.</li>
+     *         <li>Enable "http://java.sun.com/xml/stream/properties/report-cdata-event" property.</li>
+     *     </ul>
+     * </p>
+     */
+    public GetFeatureGeoJsonStaxGml3Reader() {
+        this(jdkDefaultInstance());
+    }
+
+    /**
+     *
+     * @param theXmlStreamBuilder
+     */
+    public GetFeatureGeoJsonStaxGml3Reader(@Nonnull(when = NEVER) GPXmlStreamReaderBuilder theXmlStreamBuilder) {
+        super(theXmlStreamBuilder);
+    }
+
+    /**
+     * @param theProp
+     */
+    public GetFeatureGeoJsonStaxGml3Reader(@Nonnull(when = NEVER) Map<String, Object> theProp) {
+        super(jdkWithProp(theProp));
     }
 
     /**
@@ -81,7 +111,7 @@ public class GPWFSGetFeatureGeoJsonStaxReader extends WFSBaseGetFeatureGeoJsonSt
                         this.readFeatures(feature);
                         feature.getProperties().remove(FEATURE_NAME_KEY);
                         featureCollection.add(feature);
-                    } else {//if (super.isFeatureTag()) {
+                    } else if (super.isLoadedTypeNames()){//if (super.isFeatureTag()) {
                         Feature feature = new Feature();
                         this.readFeatureID(feature);
                         feature.getProperties().remove(FEATURE_NAME_KEY);

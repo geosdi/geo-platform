@@ -36,15 +36,9 @@
 package org.geosdi.geoplatform.connector.reader.stax;
 
 import net.jcip.annotations.ThreadSafe;
-import org.geojson.Feature;
-import org.geojson.FeatureCollection;
-import org.geosdi.geoplatform.stax.reader.builder.GPXmlStreamReaderBuilder;
-import org.geosdi.geoplatform.stax.reader.builder.XmlStreamReaderBuilder;
 
 import javax.annotation.Nonnull;
 import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamReader;
-import javax.xml.stream.events.XMLEvent;
 
 import java.util.Map;
 
@@ -57,10 +51,10 @@ import static org.geosdi.geoplatform.stax.reader.builder.XmlStreamReaderBuilder.
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPWMSGetFeatureInfoStaxReader extends WMSBaseGetFeatureInfoStaxReader {
+public class GPWMSGetFeatureInfoStaxGml2Reader extends WMSBaseGetFeatureInfoStaxGml2Reader {
 
     /**
-     * Create a {@link GPWMSGetFeatureInfoStaxReader} with {@link XMLInputFactory} with these properties :
+     * Create a {@link GPWMSGetFeatureInfoStaxGml2Reader} with {@link XMLInputFactory} with these properties :
      * <p>
      *     <ul>
      *         <li>Enable {@link XMLInputFactory#IS_COALESCING} property.</li>
@@ -69,14 +63,14 @@ public class GPWMSGetFeatureInfoStaxReader extends WMSBaseGetFeatureInfoStaxRead
      *     </ul>
      * </p>
      */
-    public GPWMSGetFeatureInfoStaxReader() {
+    public GPWMSGetFeatureInfoStaxGml2Reader() {
         super(jdkDefaultInstance());
     }
 
     /**
      * @param theProp
      */
-    public GPWMSGetFeatureInfoStaxReader(@Nonnull(when = NEVER) Map<String, Object> theProp) {
+    public GPWMSGetFeatureInfoStaxGml2Reader(@Nonnull(when = NEVER) Map<String, Object> theProp) {
         super(jdkWithProp(theProp));
     }
 }

@@ -81,24 +81,24 @@ public class GPWMSGetFeatureInfoReaderStoreTest {
     }
 
     @Test
-    public void d_loadWMSGetFeatureReaderASGmlTest() throws Exception {
-        GPWMSGetFeatureInfoReader<?> gmlGetFeatureReader = store.getImplementorByKey(GML);
-        assertNotNull(gmlGetFeatureReader);
-        logger.info("################################GML_READER : {}\n", gmlGetFeatureReader);
+    public void d_loadWMSGetFeatureReaderASGml2Test() throws Exception {
+        GPWMSGetFeatureInfoReader<?> gml2GetFeatureReader = store.getImplementorByKey(GML2);
+        assertNotNull(gml2GetFeatureReader);
+        logger.info("################################GML2_READER : {}\n", gml2GetFeatureReader);
     }
 
     @Test
-    public void e_loadWMSGetFeatureReaderASGmlStringTest() throws Exception {
-        GPWMSGetFeatureInfoReader<?> gmlGetFeatureReader = store.getImplementorByKey(GML_AS_STRING);
-        assertNotNull(gmlGetFeatureReader);
-        logger.info("################################GML_STRING_READER : {}\n", gmlGetFeatureReader);
+    public void e_loadWMSGetFeatureReaderASGml2StringTest() throws Exception {
+        GPWMSGetFeatureInfoReader<?> gml2GetFeatureReader = store.getImplementorByKey(GML2_AS_STRING);
+        assertNotNull(gml2GetFeatureReader);
+        logger.info("################################GML2_STRING_READER : {}\n", gml2GetFeatureReader);
     }
 
     @Test
-    public void f_loadWMSGetFeatureReaderASGmlStoreTest() throws Exception {
-        GPWMSGetFeatureInfoReader<?> gmlGetFeatureReader = store.getImplementorByKey(GML_AS_STORE);
-        assertNotNull(gmlGetFeatureReader);
-        logger.info("################################GML_STORE_READER : {}\n", gmlGetFeatureReader);
+    public void f_loadWMSGetFeatureReaderASGml2StoreTest() throws Exception {
+        GPWMSGetFeatureInfoReader<?> gml2GetFeatureReader = store.getImplementorByKey(GML2_AS_STORE);
+        assertNotNull(gml2GetFeatureReader);
+        logger.info("################################GML2_STORE_READER : {}\n", gml2GetFeatureReader);
     }
 
     @Test
@@ -106,5 +106,26 @@ public class GPWMSGetFeatureInfoReaderStoreTest {
         GPWMSGetFeatureInfoReader<?> mockGetFeatureReader = store.getImplementorByKey(MOCK_FORMAT);
         assertNotNull(mockGetFeatureReader);
         logger.info("################################MOCK_STORE_READER : {}\n", mockGetFeatureReader);
+    }
+
+    @Test
+    public void h_loadWMSGetFeatureReaderASGml3Test() throws Exception {
+        GPWMSGetFeatureInfoReader<?> gml3GetFeatureReader = store.getImplementorByKey(GML3);
+        assertNotNull(gml3GetFeatureReader);
+        logger.info("################################GML3_READER : {}\n", gml3GetFeatureReader);
+    }
+
+    @Test
+    public void i_loadWMSGetFeatureReaderASGml3StringTest() throws Exception {
+        GPWMSGetFeatureInfoReader<?> gml3GetFeatureReader = store.getImplementorByKey(GML3_AS_STRING);
+        assertNotNull(gml3GetFeatureReader);
+        logger.info("################################GML3_STRING_READER : {}\n", gml3GetFeatureReader);
+    }
+
+    @Test
+    public void l_loadWMSGetFeatureReaderASGml3StoreTest() throws Exception {
+        GPWMSGetFeatureInfoReader<?> gml3GetFeatureReader = store.getImplementorByKey(GML3_AS_STORE);
+        assertNotNull(gml3GetFeatureReader);
+        logger.info("################################GML3_STORE_READER : {}\n", gml3GetFeatureReader);
     }
 }

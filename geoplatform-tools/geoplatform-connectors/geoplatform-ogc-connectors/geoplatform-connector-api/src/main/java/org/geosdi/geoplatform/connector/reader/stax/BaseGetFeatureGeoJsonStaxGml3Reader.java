@@ -37,41 +37,43 @@ package org.geosdi.geoplatform.connector.reader.stax;
 
 import org.geojson.Feature;
 import org.geojson.GeoJsonObject;
-import org.geosdi.geoplatform.connector.parser.GPWMSGml2GeoJsonParser;
-import org.geosdi.geoplatform.connector.parser.WMSGml2GeoJsonParser;
 import org.geosdi.geoplatform.stax.reader.builder.GPXmlStreamReaderBuilder;
 
 import javax.annotation.Nonnull;
 import javax.xml.stream.XMLStreamReader;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class WMSGetFeatureInfoStaxReader extends GPGetFeatureGeoJsonStaxReader {
+public abstract class BaseGetFeatureGeoJsonStaxGml3Reader extends GPGetFeatureGeoJsonStaxReader implements GPGetFeatureStaxGml3Reader {
 
-    protected static final String FEATURE_MEMBER_LOCAL_NAME = "featureMember";
-    private static final String FID_LOCAL_NAME = "fid";
-    private static final GPWMSGml2GeoJsonParser GML2_GEO_JSON_PARSER = new WMSGml2GeoJsonParser();
+    protected static final String FEATURE_MEMBERS_LOCAL_NAME = "featureMembers";
+    private static final String ID_LOCAL_NAME = "id";
 
     /**
      * @param theXmlStreamBuilder
      */
-    WMSGetFeatureInfoStaxReader(@Nonnull(when = NEVER) GPXmlStreamReaderBuilder theXmlStreamBuilder) {
-        super(theXmlStreamBuilder, FID_LOCAL_NAME);
+    protected BaseGetFeatureGeoJsonStaxGml3Reader(@Nonnull(when = NEVER) GPXmlStreamReaderBuilder theXmlStreamBuilder) {
+        super(theXmlStreamBuilder, ID_LOCAL_NAME);
     }
 
     /**
      * @param feature
      * @throws Exception
      */
-    @Override
-    protected void readFeatures(@Nonnull(when = NEVER) Feature feature) throws Exception {
-        super.readFeatures(feature);
-        super.goToEndTag(FEATURE_MEMBER_LOCAL_NAME);
+    void readFeatureID(Feature feature) throws Exception {
+        this.readFeatureID(this.typeNames.get(), feature);
+    }
+
+    /**
+     * @return {@link Boolean}
+     * @throws Exception
+     */
+    protected boolean isFeatureTag() throws Exception {
+        return this.typeNames.get().containsKey(xmlStreamReader().getLocalName());
     }
 
     /**
@@ -81,14 +83,12 @@ public abstract class WMSGetFeatureInfoStaxReader extends GPGetFeatureGeoJsonSta
      */
     @Override
     protected GeoJsonObject internalReadGeometry(@Nonnull(when = NEVER) XMLStreamReader streamReader) throws Exception {
-        checkArgument(streamReader != null, "The Parameter streamReader must not be null.");
-        return GML2_GEO_JSON_PARSER.parse(streamReader);
+        try {
+            return gmlJAXBContext.acquireUnmarshaller().unmarshalAsGeoJson(xmlStreamReader());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            logger.error("########################Parse Exception : {}", ex.getMessage());
+        }
+        return null;
     }
-
-    /**
-     * @param object
-     * @return {@link GPStaxFeatureStore}
-     * @throws Exception
-     */
-    public abstract <FeatureStore extends GPStaxFeatureStore> FeatureStore readAsStore(@Nonnull(when = NEVER) Object object) throws Exception;
 }

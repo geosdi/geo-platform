@@ -54,7 +54,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.connector.pool.builder.v111.WMSConnectorBuilderPoolV111.wmsConnectorBuilderPoolV111;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
-import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML2;
 import static org.geosdi.geoplatform.services.request.WMSGetFeatureInfoResponseFormat.GEOJSON;
 
 /**
@@ -117,7 +117,7 @@ public class WMSGetFeatureInfoResponseBuilder implements GPWMSGetFeatureInfoResp
                         .withQueryLayers(wmsGetFeatureInfoElement.toLayers())
                         .withX(request.getPoint().getX())
                         .withY(request.getPoint().getY())
-                        .withInfoFormat((format != null) ? format.toWMSFeatureInfoFormat() : GML).getResponse();
+                        .withInfoFormat((format != null) ? format.toWMSFeatureInfoFormat() : GML2).getResponse();
                 logger.trace("########################FOUND : {}\n", response);
                 wmsGetFeatureInfoResponse.addFeature(response);
             } catch (Exception ex) {

@@ -35,9 +35,9 @@
 package org.geosdi.geoplatform.wfs.reader.geojson;
 
 import org.geojson.FeatureCollection;
+import org.geosdi.geoplatform.connector.reader.stax.GetFeatureGeoJsonStaxGml3Reader;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
-import org.geosdi.geoplatform.support.wfs.feature.reader.geojson.GPWFSGetFeatureGeoJsonStaxReader;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -68,7 +68,7 @@ public class GPWFSGetFeatureGeoJsonStaxReaderTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPWFSGetFeatureGeoJsonStaxReaderTest.class);
     //
-    private static final GPWFSGetFeatureGeoJsonStaxReader WFS_GET_FEATURE_GEO_JSON_STAX_READER = new GPWFSGetFeatureGeoJsonStaxReader();
+    private static final GetFeatureGeoJsonStaxGml3Reader WFS_GET_FEATURE_GEO_JSON_STAX_READER = new GetFeatureGeoJsonStaxGml3Reader();
     private static Map<String, File> repoFiles;
     private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE,

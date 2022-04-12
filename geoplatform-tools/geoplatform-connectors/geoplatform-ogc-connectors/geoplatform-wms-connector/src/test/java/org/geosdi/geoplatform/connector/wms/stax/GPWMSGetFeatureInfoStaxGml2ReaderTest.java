@@ -45,7 +45,7 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(value = NAME_ASCENDING)
-public class GPWMSGetFeatureInfoStaxReaderTest extends WMSGetFeatureInfoStaxReaderTest {
+public class GPWMSGetFeatureInfoStaxGml2ReaderTest extends WMSGetFeatureInfoStaxReaderTest {
 
     @Test
     public void a_b_wmsGetFeatureInfoStaxReaderTest() throws Exception {

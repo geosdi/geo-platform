@@ -82,6 +82,6 @@ public class GPWMSConnectorStoreV130PrositTest {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("admin:admin_shp_vigneti_catastali", "admin:admin_shp_oliveti_catastali")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(8)
-                .withInfoFormat(WMSFeatureInfoFormat.GML).withX(154).withY(230).showRequestAsString());
+                .withInfoFormat(WMSFeatureInfoFormat.GML2).withX(154).withY(230).showRequestAsString());
     }
 }

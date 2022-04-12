@@ -36,9 +36,9 @@
 package org.geosdi.geoplatform.wfs.reader;
 
 import org.geojson.FeatureCollection;
+import org.geosdi.geoplatform.connector.reader.stax.GetFeatureGeoJsonStaxGml3Reader;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
-import org.geosdi.geoplatform.support.wfs.feature.reader.geojson.GPWFSGetFeatureGeoJsonStaxReader;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -76,7 +76,7 @@ public class WFSGetFeatureReaderTest {
             WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE, NON_NULL);
     private static final long startTime = System.currentTimeMillis();
-    private static final GPWFSGetFeatureGeoJsonStaxReader geoJsonStaxReader = new GPWFSGetFeatureGeoJsonStaxReader();
+    private static final GetFeatureGeoJsonStaxGml3Reader geoJsonStaxReader = new GetFeatureGeoJsonStaxGml3Reader();
 
     @BeforeClass
     public static void beforeClass() throws Exception {

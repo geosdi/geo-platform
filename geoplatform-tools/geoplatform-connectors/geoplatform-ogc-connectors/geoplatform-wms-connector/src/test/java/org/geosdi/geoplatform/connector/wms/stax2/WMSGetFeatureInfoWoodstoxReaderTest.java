@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.connector.wms.stax2;
 
-import org.geosdi.geoplatform.connector.reader.stax2.GPWMSGetFeatureInfoStax2Reader;
+import org.geosdi.geoplatform.connector.reader.stax2.GPWMSGetFeatureInfoStax2Gml2Reader;
 import org.geosdi.geoplatform.connector.wms.WMSGetFeatureInfoReaderFileLoaderTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.geosdi.geoplatform.connector.reader.stax2.GPWMSGetFeatureInfoStax2Reader.woodstoxConfigureForSpeed;
+import static org.geosdi.geoplatform.connector.reader.stax2.GPWMSGetFeatureInfoStax2Gml2Reader.woodstoxConfigureForSpeed;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -50,5 +50,5 @@ public class WMSGetFeatureInfoWoodstoxReaderTest extends WMSGetFeatureInfoReader
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    public static final GPWMSGetFeatureInfoStax2Reader wmsGetFeatureInfoWoodstoxReader = woodstoxConfigureForSpeed();
+    public static final GPWMSGetFeatureInfoStax2Gml2Reader wmsGetFeatureInfoWoodstoxReader = woodstoxConfigureForSpeed();
 }

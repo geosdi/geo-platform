@@ -43,8 +43,8 @@ import java.util.Optional;
 import static java.lang.Boolean.FALSE;
 import static java.util.Arrays.stream;
 import static java.util.Optional.empty;
-import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML;
-import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML_AS_STORE;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML2;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML2_AS_STORE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -58,7 +58,7 @@ public enum WMSGetFeatureInfoResponseFormat implements GPWMSGetFeatureInfoRespon
          */
         @Override
         public WMSFeatureInfoFormat toWMSFeatureInfoFormat() {
-            return GML;
+            return GML2;
         }
 
         /**
@@ -75,7 +75,7 @@ public enum WMSGetFeatureInfoResponseFormat implements GPWMSGetFeatureInfoRespon
          */
         @Override
         public WMSFeatureInfoFormat toWMSFeatureInfoFormat() {
-            return GML_AS_STORE;
+            return GML2_AS_STORE;
         }
 
         /**

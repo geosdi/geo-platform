@@ -56,7 +56,7 @@ import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.pool.builder.v111.WMSConnectorBuilderPoolV111.wmsConnectorBuilderPoolV111;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
-import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML_AS_STRING;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML2_AS_STRING;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -113,7 +113,7 @@ public class GPWMSConnectorStoreSnipcPoolV111Test {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("VULCANICO:CF_aree_attesa")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(2)
-                .withInfoFormat(GML_AS_STRING).withX(487).withY(305).getResponse());
+                .withInfoFormat(GML2_AS_STRING).withX(487).withY(305).getResponse());
     }
 
     @Test
@@ -125,7 +125,7 @@ public class GPWMSConnectorStoreSnipcPoolV111Test {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("VULCANICO:VES_aree_attesa")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(2)
-                .withInfoFormat(GML_AS_STRING).withX(487).withY(305).getResponse());
+                .withInfoFormat(GML2_AS_STRING).withX(487).withY(305).getResponse());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -137,6 +137,6 @@ public class GPWMSConnectorStoreSnipcPoolV111Test {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("VULCANICO:CF_zona rossa_maplite")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(2)
-                .withInfoFormat(GML_AS_STRING).withX(487).withY(305).getResponse());
+                .withInfoFormat(GML2_AS_STRING).withX(487).withY(305).getResponse());
     }
 }

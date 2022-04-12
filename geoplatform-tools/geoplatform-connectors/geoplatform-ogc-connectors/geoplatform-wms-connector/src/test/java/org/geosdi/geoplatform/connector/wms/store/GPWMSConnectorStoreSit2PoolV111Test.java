@@ -58,7 +58,7 @@ import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.pool.builder.v111.WMSConnectorBuilderPoolV111.wmsConnectorBuilderPoolV111;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
-import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML_AS_STRING;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.*;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -117,7 +117,7 @@ public class GPWMSConnectorStoreSit2PoolV111Test {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(50)
-                .withInfoFormat(GML_AS_STRING).withX(50).withY(50).getResponse());
+                .withInfoFormat(GML2_AS_STRING).withX(50).withY(50).getResponse());
     }
 
     @Test
@@ -126,5 +126,17 @@ public class GPWMSConnectorStoreSit2PoolV111Test {
         logger.info("##########################WMS_DESCRIBE_LAYER_RESPONSE_V111 : {}\n", wmsDescribeLayerRequest
                 .withLayers("RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico",
                         "RegioneCampania.Cartografia.Tematica:sitdbo_aree_carsiche", "RegioneCampania.Ambiente:sitdbo_zps").getResponseAsString());
+    }
+
+    @Test
+    public void f_wmsGetFeatureInfoV111Test() throws Exception {
+        GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
+        GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(443799.21368173225, 4486229.492994551, 474645.2038931505, 4517075.4832059685);
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico").collect(toSet()),
+                "EPSG:3045", "101", "101");
+        logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico")
+                .withWMSGetMapRequest(wmsGetMapBaseRequest)
+                .withFeatureCount(50)
+                .withInfoFormat(GML3).withX(50).withY(50).getResponse());
     }
 }

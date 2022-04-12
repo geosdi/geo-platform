@@ -33,65 +33,44 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.bridge.implementor.gml;
+package org.geosdi.geoplatform.connector.reader.stax;
 
-import org.geosdi.geoplatform.connector.bridge.implementor.GPWMSGetFeatureInfoReader;
-import org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxReader;
-import org.geosdi.geoplatform.connector.reader.stax.WMSGetFeatureInfoStaxReader;
-import org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.jcip.annotations.ThreadSafe;
 
 import javax.annotation.Nonnull;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import javax.xml.stream.XMLInputFactory;
 
-import static com.google.common.base.Charsets.UTF_8;
-import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Boolean.TRUE;
+import java.util.Map;
+
 import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML;
+import static org.geosdi.geoplatform.stax.reader.builder.XmlStreamReaderBuilder.jdkDefaultInstance;
+import static org.geosdi.geoplatform.stax.reader.builder.XmlStreamReaderBuilder.jdkWithProp;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPWMSGetFeatureInfoGmlReader implements GPWMSGetFeatureInfoReader<Object> {
-
-    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //
-    protected static final WMSGetFeatureInfoStaxReader wmsGetFeatureInfoStaxReader = new GPWMSGetFeatureInfoStaxReader();
+@ThreadSafe
+public class GPWMSGetFeatureInfoStaxGml2Reader extends WMSBaseGetFeatureInfoStaxGml2Reader {
 
     /**
-     * @param inputStream
-     * @return {@link Object}
-     * @throws Exception
+     * Create a {@link GPWMSGetFeatureInfoStaxGml2Reader} with {@link XMLInputFactory} with these properties :
+     * <p>
+     *     <ul>
+     *         <li>Enable {@link XMLInputFactory#IS_COALESCING} property.</li>
+     *         <li>Enable {@link XMLInputFactory#IS_NAMESPACE_AWARE} property.</li>
+     *         <li>Enable "http://java.sun.com/xml/stream/properties/report-cdata-event" property.</li>
+     *     </ul>
+     * </p>
      */
-    @Override
-    public Object read(@Nonnull(when = NEVER) InputStream inputStream) throws Exception {
-        checkArgument(inputStream != null, "The Parameter inputStream must not be null.");
-        logger.debug("##########################Executing {}#read.", this);
-        return wmsGetFeatureInfoStaxReader.read(new InputStreamReader(inputStream, UTF_8));
+    public GPWMSGetFeatureInfoStaxGml2Reader() {
+        super(jdkDefaultInstance());
     }
 
     /**
-     * @return {@link WMSFeatureInfoFormat}
+     * @param theProp
      */
-    @Override
-    public WMSFeatureInfoFormat getKey() {
-        return GML;
-    }
-
-    /**
-     * @return {@link Boolean}
-     */
-    @Override
-    public Boolean isValid() {
-        return TRUE;
-    }
-
-    @Override
-    public String toString() {
-        return this.getClass().getSimpleName();
+    public GPWMSGetFeatureInfoStaxGml2Reader(@Nonnull(when = NEVER) Map<String, Object> theProp) {
+        super(jdkWithProp(theProp));
     }
 }

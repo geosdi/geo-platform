@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.support.wfs.feature.reader;
 
+import org.geosdi.geoplatform.connector.reader.stax.GPGetFeatureStaxGml3Reader;
 import org.geosdi.geoplatform.connector.wfs.response.GeometryAttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.stax.reader.AbstractStaxStreamReader;
@@ -52,7 +53,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class WFSBaseGetFeatureStaxReader<F, G, R> extends AbstractStaxStreamReader<R> implements GPWFSGetFeatureStaxReader {
+public abstract class WFSBaseGetFeatureStaxReader<F, G, R> extends AbstractStaxStreamReader<R> implements GPGetFeatureStaxGml3Reader {
 
     protected final LayerSchemaDTO layerSchema;
 

@@ -54,8 +54,7 @@ import java.net.URL;
 import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
-import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML;
-import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML_AS_STRING;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.*;
 import static org.geosdi.geoplatform.connector.server.store.GPWMSConnectorBuilder.WMSConnectorBuilder.wmsConnectorBuilder;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -105,7 +104,7 @@ public class GPWMSConnectorStoreV111InternalTest {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("topp:states", "topp:states")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(2)
-                .withInfoFormat(GML_AS_STRING).withX(170).withY(160).getResponse());
+                .withInfoFormat(GML2_AS_STRING).withX(170).withY(160).getResponse());
     }
 
     @Test
@@ -117,7 +116,7 @@ public class GPWMSConnectorStoreV111InternalTest {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("tiger:tiger_roads")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(12)
-                .withInfoFormat(GML).withX(50).withY(50).getResponse());
+                .withInfoFormat(GML2).withX(50).withY(50).getResponse());
     }
 
     @Test
@@ -129,7 +128,7 @@ public class GPWMSConnectorStoreV111InternalTest {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("ws_vito:fluids_rete_zk")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(12)
-                .withInfoFormat(GML).withX(50).withY(50).getResponse());
+                .withInfoFormat(GML2).withX(50).withY(50).getResponse());
     }
 
     @Test
@@ -141,6 +140,18 @@ public class GPWMSConnectorStoreV111InternalTest {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("ws_vito:layer_importer148")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(12)
-                .withInfoFormat(GML).withX(50).withY(50).getResponse());
+                .withInfoFormat(GML2).withX(50).withY(50).getResponse());
+    }
+
+    @Test
+    public void g_wmsGetFeatureInfoV111Test() throws Exception {
+        GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
+        GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(14.245262672702665, 40.858065563297714, 14.249597122470732, 40.86240001306578);
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("ws_vito:layer_importer148").collect(toSet()),
+                "EPSG:4326", "101", "101");
+        logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("ws_vito:layer_importer148")
+                .withWMSGetMapRequest(wmsGetMapBaseRequest)
+                .withFeatureCount(12)
+                .withInfoFormat(GML3).withX(50).withY(50).getResponse());
     }
 }

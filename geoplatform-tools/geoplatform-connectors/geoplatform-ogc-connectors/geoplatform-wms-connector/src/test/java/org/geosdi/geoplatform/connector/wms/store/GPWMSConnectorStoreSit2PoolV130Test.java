@@ -102,7 +102,7 @@ public class GPWMSConnectorStoreSit2PoolV130Test {
         logger.info("##################################WMS_GET_FEATURE_INFO_V130_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(50)
-                .withInfoFormat(GML_AS_STRING).withX(50).withY(50).getResponse());
+                .withInfoFormat(GML2_AS_STRING).withX(50).withY(50).getResponse());
     }
 
     @Test
@@ -114,6 +114,30 @@ public class GPWMSConnectorStoreSit2PoolV130Test {
         logger.info("##################################WMS_GET_FEATURE_INFO_V130_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("RegioneCampania.Cartografia.Base:sitdbo_rete_stradale_rc")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(50)
-                .withInfoFormat(GML_AS_STRING).withX(50).withY(50).getResponse());
+                .withInfoFormat(GML2_AS_STRING).withX(50).withY(50).getResponse());
+    }
+
+    @Test
+    public void d_wmsGetFeatureInfoV130Test() throws Exception {
+        GPWMSGetFeatureInfoV130Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
+        GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(4486229.492994551,443799.21368173225,4517075.4832059685,474645.2038931505);
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico").collect(toSet()),
+                "EPSG:3045", "101", "101");
+        logger.info("##################################WMS_GET_FEATURE_INFO_V130_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico")
+                .withWMSGetMapRequest(wmsGetMapBaseRequest)
+                .withFeatureCount(50)
+                .withInfoFormat(GML3).withX(50).withY(50).getResponse());
+    }
+
+    @Test
+    public void e_wmsGetFeatureInfoV130Test() throws Exception {
+        GPWMSGetFeatureInfoV130Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
+        GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(4529593.958572989,424639.1351805072,4560439.948784407,455485.12539192545);
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("RegioneCampania.Cartografia.Base:sitdbo_rete_stradale_rc").collect(toSet()),
+                "EPSG:3045", "101", "101");
+        logger.info("##################################WMS_GET_FEATURE_INFO_V130_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("RegioneCampania.Cartografia.Base:sitdbo_rete_stradale_rc")
+                .withWMSGetMapRequest(wmsGetMapBaseRequest)
+                .withFeatureCount(50)
+                .withInfoFormat(GML3).withX(50).withY(50).getResponse());
     }
 }

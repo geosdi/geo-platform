@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.wfs.reader;
 
 import org.geojson.FeatureCollection;
+import org.geosdi.geoplatform.connector.reader.stax.GetFeatureGeoJsonStaxGml3Reader;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
@@ -43,9 +44,11 @@ import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader;
-import org.geosdi.geoplatform.support.wfs.feature.reader.geojson.GPWFSGetFeatureGeoJsonStaxReader;
 import org.geosdi.geoplatform.support.wfs.feature.reader.geojson.WFSGetFeatureGeoJsonStaxReader;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StopWatch;
@@ -119,7 +122,7 @@ public class WFSGetFeatureSiteTRStaxReaderTest {
     @Test
     public void c_siteTRWithoutSchemaGeoJsonStaxReaderTest() throws Exception {
         stopWatch.start("wfsGetFeatureGeoJsonWithoutSchema");
-        GPWFSGetFeatureGeoJsonStaxReader geoJsonStaxReader = new GPWFSGetFeatureGeoJsonStaxReader();
+        GetFeatureGeoJsonStaxGml3Reader geoJsonStaxReader = new GetFeatureGeoJsonStaxGml3Reader();
         FeatureCollection featureCollection = geoJsonStaxReader.read(getFeatureSiteTR);
         stopWatch.stop();
         logger.info("####################FEATURE_COLLECTION_WITHOUT_LAYER_SCHEMA : \n{}\n", JACKSON_SUPPORT

@@ -33,66 +33,65 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.support.wfs.feature.reader.geojson;
+package org.geosdi.geoplatform.connector.bridge.implementor.gml.v2;
 
-import org.geojson.Feature;
-import org.geojson.GeoJsonObject;
-import org.geosdi.geoplatform.connector.reader.stax.GPGetFeatureGeoJsonStaxReader;
-import org.geosdi.geoplatform.stax.reader.builder.GPXmlStreamReaderBuilder;
-import org.geosdi.geoplatform.support.wfs.feature.reader.GPWFSGetFeatureStaxReader;
+import org.geosdi.geoplatform.connector.bridge.implementor.GPWMSGetFeatureInfoReader;
+import org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxGml2Reader;
+import org.geosdi.geoplatform.connector.reader.stax.WMSGetFeatureInfoStaxGml2Reader;
+import org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
-import javax.xml.stream.XMLStreamReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
+import static com.google.common.base.Charsets.UTF_8;
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.TRUE;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML2;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class WFSBaseGetFeatureGeoJsonStaxReader extends GPGetFeatureGeoJsonStaxReader implements GPWFSGetFeatureStaxReader {
+public class GPWMSGetFeatureInfoGml2Reader implements GPWMSGetFeatureInfoReader<Object> {
 
-    protected static final String FEATURE_MEMBERS_LOCAL_NAME = "featureMembers";
-    private static final String ID_LOCAL_NAME = "id";
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    protected static final WMSGetFeatureInfoStaxGml2Reader wmsGetFeatureInfoStaxGml2Reader = new GPWMSGetFeatureInfoStaxGml2Reader();
 
     /**
-     * @param theXmlStreamBuilder
+     * @param inputStream
+     * @return {@link Object}
+     * @throws Exception
      */
-    protected WFSBaseGetFeatureGeoJsonStaxReader(@Nonnull(when = NEVER) GPXmlStreamReaderBuilder theXmlStreamBuilder) {
-        super(theXmlStreamBuilder, ID_LOCAL_NAME);
+    @Override
+    public Object read(@Nonnull(when = NEVER) InputStream inputStream) throws Exception {
+        checkArgument(inputStream != null, "The Parameter inputStream must not be null.");
+        logger.debug("##########################Executing {}#read.", this);
+        return wmsGetFeatureInfoStaxGml2Reader.read(new InputStreamReader(inputStream, UTF_8));
     }
 
     /**
-     * @param feature
-     * @throws Exception
+     * @return {@link WMSFeatureInfoFormat}
      */
-    void readFeatureID(Feature feature) throws Exception {
-        this.readFeatureID(this.typeNames.get(), feature);
+    @Override
+    public WMSFeatureInfoFormat getKey() {
+        return GML2;
     }
 
     /**
      * @return {@link Boolean}
-     * @throws Exception
-     */
-    protected boolean isFeatureTag() throws Exception {
-        return this.typeNames.get().containsKey(xmlStreamReader().getLocalName());
-    }
-
-    /**
-     * @param streamReader
-     * @return {@link GeoJsonObject}
-     * @throws Exception
      */
     @Override
-    protected GeoJsonObject internalReadGeometry(@Nonnull(when = NEVER) XMLStreamReader streamReader) throws Exception {
-        try {
-            return gmlJAXBContext.acquireUnmarshaller().unmarshalAsGeoJson(xmlStreamReader());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            logger.error("########################Parse Exception : {}", ex.getMessage());
-        } finally {
-            xmlStreamReader().nextTag();
-        }
-        return null;
+    public Boolean isValid() {
+        return TRUE;
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName();
     }
 }

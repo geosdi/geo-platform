@@ -36,12 +36,11 @@
 package org.geosdi.geoplatform.connector.reader.stax;
 
 import org.geojson.Feature;
-import org.geojson.FeatureCollection;
+import org.geojson.GeoJsonObject;
 import org.geosdi.geoplatform.stax.reader.builder.GPXmlStreamReaderBuilder;
 
 import javax.annotation.Nonnull;
 import javax.xml.stream.XMLStreamReader;
-import javax.xml.stream.events.XMLEvent;
 
 import static javax.annotation.meta.When.NEVER;
 
@@ -49,71 +48,47 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class WMSBaseGetFeatureInfoStaxReader extends WMSGetFeatureInfoStaxReader {
+public abstract class BaseGetFeatureGeoJsonStaxGml3Reader extends GPGetFeatureGeoJsonStaxReader implements GPGetFeatureStaxGml3Reader {
+
+    protected static final String FEATURE_MEMBERS_LOCAL_NAME = "featureMembers";
+    private static final String ID_LOCAL_NAME = "id";
 
     /**
      * @param theXmlStreamBuilder
      */
-    protected WMSBaseGetFeatureInfoStaxReader(@Nonnull(when = NEVER) GPXmlStreamReaderBuilder theXmlStreamBuilder) {
-        super(theXmlStreamBuilder);
+    protected BaseGetFeatureGeoJsonStaxGml3Reader(@Nonnull(when = NEVER) GPXmlStreamReaderBuilder theXmlStreamBuilder) {
+        super(theXmlStreamBuilder, ID_LOCAL_NAME);
     }
 
     /**
-     * @param object
-     * @return {@link FeatureCollection}
+     * @param feature
      * @throws Exception
      */
-    @Override
-    public FeatureCollection read(@Nonnull(when = NEVER) Object object) throws Exception {
-        XMLStreamReader reader = this.acquireReader(object);
-        FeatureCollection featureCollection = new FeatureCollection();
-        try {
-            while (reader.hasNext()) {
-                int evenType = reader.getEventType();
-                if(evenType == XMLEvent.START_ELEMENT) {
-                    if(super.isTagName(WFS_PREFIX, FEATURE_COLLECTION_LOCAL_NAME)) {
-                        this.loadTypeNames();
-                    } else if(super.isTagName(GML_PREFIX, FEATURE_MEMBER_LOCAL_NAME)) {
-                        Feature feature = new Feature();
-                        this.readFeatures(feature);
-                        feature.getProperties().remove(FEATURE_NAME_KEY);
-                        featureCollection.add(feature);
-                    }
-                }
-                reader.next();
-            }
-            return featureCollection;
-        } finally {
-            this.dispose();
-        }
+    void readFeatureID(Feature feature) throws Exception {
+        this.readFeatureID(this.typeNames.get(), feature);
     }
 
     /**
-     * @param object
-     * @return {@link GPStaxFeatureStore}
+     * @return {@link Boolean}
+     * @throws Exception
+     */
+    protected boolean isFeatureTag() throws Exception {
+        return this.typeNames.get().containsKey(xmlStreamReader().getLocalName());
+    }
+
+    /**
+     * @param streamReader
+     * @return {@link GeoJsonObject}
      * @throws Exception
      */
     @Override
-    public GPWMSFeatureStore readAsStore(@Nonnull(when = NEVER) Object object) throws Exception {
-        XMLStreamReader reader = this.acquireReader(object);
-        GPWMSFeatureStore store = new GPWMSFeatureStore();
+    protected GeoJsonObject internalReadGeometry(@Nonnull(when = NEVER) XMLStreamReader streamReader) throws Exception {
         try {
-            while (reader.hasNext()) {
-                int evenType = reader.getEventType();
-                if(evenType == XMLEvent.START_ELEMENT) {
-                    if(super.isTagName(WFS_PREFIX, FEATURE_COLLECTION_LOCAL_NAME)) {
-                        this.loadTypeNames();
-                    } else if(super.isTagName(GML_PREFIX, FEATURE_MEMBER_LOCAL_NAME)) {
-                        Feature feature = new Feature();
-                        this.readFeatures(feature);
-                        store.addFeature(feature);
-                    }
-                }
-                reader.next();
-            }
-            return store;
-        } finally {
-            this.dispose();
+            return gmlJAXBContext.acquireUnmarshaller().unmarshalAsGeoJson(xmlStreamReader());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            logger.error("########################Parse Exception : {}", ex.getMessage());
         }
+        return null;
     }
 }

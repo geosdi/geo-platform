@@ -33,35 +33,19 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.bridge.implementor.gml;
+package org.geosdi.geoplatform.connector.reader.stax;
 
-import org.geosdi.geoplatform.connector.bridge.implementor.text.GPWMSGetFeatureInfoTextReader;
-import org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat;
+import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
+import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextFactoryV311;
+import org.geosdi.geoplatform.stax.reader.GeoPlatformStaxReader;
 
-import static java.lang.Boolean.TRUE;
-import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML_AS_STRING;
+import static org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextType.SIMPLE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPWMSGetFeatureInfoGmlStringReader extends GPWMSGetFeatureInfoTextReader {
+public interface GPGetFeatureStaxGml3Reader extends GeoPlatformStaxReader {
 
-    /**
-     * @return {@link WMSFeatureInfoFormat}
-     */
-    @Override
-    public WMSFeatureInfoFormat getKey() {
-        return GML_AS_STRING;
-    }
-
-    @Override
-    public Boolean isValid() {
-        return TRUE;
-    }
-
-    @Override
-    public String toString() {
-        return this.getClass().getSimpleName();
-    }
+    GMLJAXBContext gmlJAXBContext = GMLContextFactoryV311.createJAXBContext(SIMPLE);
 }

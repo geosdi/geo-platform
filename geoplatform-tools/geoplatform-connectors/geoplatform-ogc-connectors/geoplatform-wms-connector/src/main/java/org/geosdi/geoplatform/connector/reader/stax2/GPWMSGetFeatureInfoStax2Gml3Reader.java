@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.connector.reader.stax2;
 
 import net.jcip.annotations.ThreadSafe;
 import org.codehaus.stax2.XMLInputFactory2;
-import org.geosdi.geoplatform.connector.reader.stax.WMSBaseGetFeatureInfoStaxReader;
+import org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxGml3Reader;
 import org.geosdi.geoplatform.stax.reader.builder.GPXmlStreamReaderBuilder;
 import org.geosdi.geoplatform.stax.reader.builder.XmlStreamReaderStax2Builder;
 
@@ -51,17 +51,17 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPWMSGetFeatureInfoStax2Reader extends WMSBaseGetFeatureInfoStaxReader {
+public class GPWMSGetFeatureInfoStax2Gml3Reader extends GPWMSGetFeatureInfoStaxGml3Reader {
 
     /**
      * @param theXmlStreamBuilder
      */
-    GPWMSGetFeatureInfoStax2Reader(@Nonnull(when = NEVER) GPXmlStreamReaderBuilder theXmlStreamBuilder) {
+    GPWMSGetFeatureInfoStax2Gml3Reader(@Nonnull(when = NEVER) GPXmlStreamReaderBuilder theXmlStreamBuilder) {
         super(theXmlStreamBuilder);
     }
 
     /**
-     * Create {@link GPWMSGetFeatureInfoStax2Reader} with {@link XMLInputFactory2} using Woodstox Implementation with these properties :
+     * Create {@link GPWMSGetFeatureInfoStax2Gml3Reader} with {@link XMLInputFactory2} using Woodstox Implementation with these properties :
      * <p>
      * Regarding the default StAX property settings,
      * implementations are suggested to do following:
@@ -74,14 +74,14 @@ public class GPWMSGetFeatureInfoStax2Reader extends WMSBaseGetFeatureInfoStaxRea
      * All the other standard settings should be left as is.
      * <p>
      *
-     * @return {@link GPWMSGetFeatureInfoStax2Reader}
+     * @return {@link GPWMSGetFeatureInfoStax2Gml3Reader}
      */
-    public static GPWMSGetFeatureInfoStax2Reader woodstoxConfigureForXmlConformance() {
-        return new GPWMSGetFeatureInfoStax2Reader(XmlStreamReaderStax2Builder.woodstoxConfigureForXmlConformance());
+    public static GPWMSGetFeatureInfoStax2Gml3Reader woodstoxConfigureForXmlConformance() {
+        return new GPWMSGetFeatureInfoStax2Gml3Reader(XmlStreamReaderStax2Builder.woodstoxConfigureForXmlConformance());
     }
 
     /**
-     * Create {@link GPWMSGetFeatureInfoStax2Reader} with {@link XMLInputFactory2} using Woodstox Implementation with these properties :
+     * Create {@link GPWMSGetFeatureInfoStax2Gml3Reader} with {@link XMLInputFactory2} using Woodstox Implementation with these properties :
      * <p>
      * Regarding the default StAX property settings,
      * implementations are suggested to do following:
@@ -100,14 +100,14 @@ public class GPWMSGetFeatureInfoStax2Reader extends WMSBaseGetFeatureInfoStaxRea
      * In addition, implementations should set implementation-dependant
      * settings appropriately as well.
      *
-     * @return {@link GPWMSGetFeatureInfoStax2Reader}
+     * @return {@link GPWMSGetFeatureInfoStax2Gml3Reader}
      */
-    public static GPWMSGetFeatureInfoStax2Reader woodstoxConfigureForConvenience() {
-        return new GPWMSGetFeatureInfoStax2Reader(XmlStreamReaderStax2Builder.woodstoxConfigureForConvenience());
+    public static GPWMSGetFeatureInfoStax2Gml3Reader woodstoxConfigureForConvenience() {
+        return new GPWMSGetFeatureInfoStax2Gml3Reader(XmlStreamReaderStax2Builder.woodstoxConfigureForConvenience());
     }
 
     /**
-     * Create {@link GPWMSGetFeatureInfoStax2Reader} with {@link XMLInputFactory2} using Woodstox Implementation with these properties :
+     * Create {@link GPWMSGetFeatureInfoStax2Gml3Reader} with {@link XMLInputFactory2} using Woodstox Implementation with these properties :
      * <p>
      * Regarding the default StAX property settings,
      * implementations are suggested to do following:
@@ -123,14 +123,14 @@ public class GPWMSGetFeatureInfoStax2Reader extends WMSBaseGetFeatureInfoStaxRea
      * In addition, implementations should set implementation-dependant
      * settings appropriately as well.
      *
-     * @return {@link GPWMSGetFeatureInfoStax2Reader}
+     * @return {@link GPWMSGetFeatureInfoStax2Gml3Reader}
      */
-    public static GPWMSGetFeatureInfoStax2Reader woodstoxConfigureForSpeed() {
-        return new GPWMSGetFeatureInfoStax2Reader(XmlStreamReaderStax2Builder.woodstoxConfigureForSpeed());
+    public static GPWMSGetFeatureInfoStax2Gml3Reader woodstoxConfigureForSpeed() {
+        return new GPWMSGetFeatureInfoStax2Gml3Reader(XmlStreamReaderStax2Builder.woodstoxConfigureForSpeed());
     }
 
     /**
-     * Create {@link GPWMSGetFeatureInfoStax2Reader} using Woodstox Implementation with these properties :
+     * Create {@link GPWMSGetFeatureInfoStax2Gml3Reader} using Woodstox Implementation with these properties :
      * <p>
      * Regarding the default StAX property settings,
      * implementations are suggested to do following:
@@ -147,14 +147,14 @@ public class GPWMSGetFeatureInfoStax2Reader extends WMSBaseGetFeatureInfoStaxRea
      * In addition, implementations should set implementation-dependant
      * settings appropriately so that the memory usage is minimized.
      *
-     * @return {@link GPWMSGetFeatureInfoStax2Reader}
+     * @return {@link GPWMSGetFeatureInfoStax2Gml3Reader}
      */
-    public static GPWMSGetFeatureInfoStax2Reader woodstoxConfigureForLowMemUsage() {
-        return new GPWMSGetFeatureInfoStax2Reader(XmlStreamReaderStax2Builder.woodstoxConfigureForLowMemUsage());
+    public static GPWMSGetFeatureInfoStax2Gml3Reader woodstoxConfigureForLowMemUsage() {
+        return new GPWMSGetFeatureInfoStax2Gml3Reader(XmlStreamReaderStax2Builder.woodstoxConfigureForLowMemUsage());
     }
 
     /**
-     * Create {@link GPWMSGetFeatureInfoStax2Reader} with {@link XMLInputFactory2} using Woodstox Implementation with these properties :
+     * Create {@link GPWMSGetFeatureInfoStax2Gml3Reader} with {@link XMLInputFactory2} using Woodstox Implementation with these properties :
      * <p>
      * Regarding the default StAX property settings,
      * implementations are suggested to do following:
@@ -177,22 +177,22 @@ public class GPWMSGetFeatureInfoStax2Reader extends WMSBaseGetFeatureInfoStaxRea
      * In addition, implementations should set implementation-dependant
      * settings appropriately as well.
      *
-     * @return {@link GPWMSGetFeatureInfoStax2Reader}
+     * @return {@link GPWMSGetFeatureInfoStax2Gml3Reader}
      */
-    public static GPWMSGetFeatureInfoStax2Reader woodstoxConfigureForRoundTripping() {
-        return new GPWMSGetFeatureInfoStax2Reader(XmlStreamReaderStax2Builder.woodstoxConfigureForRoundTripping());
+    public static GPWMSGetFeatureInfoStax2Gml3Reader woodstoxConfigureForRoundTripping() {
+        return new GPWMSGetFeatureInfoStax2Gml3Reader(XmlStreamReaderStax2Builder.woodstoxConfigureForRoundTripping());
     }
 
     /**
      * @param theProp
-     * @return {@link GPWMSGetFeatureInfoStax2Reader}
+     * @return {@link GPWMSGetFeatureInfoStax2Gml3Reader}
      */
-    public static GPWMSGetFeatureInfoStax2Reader woodstoxWithProp(@Nonnull(when = NEVER) Map<String, Object> theProp) {
-        return new GPWMSGetFeatureInfoStax2Reader(XmlStreamReaderStax2Builder.woodstoxWithProp(theProp));
+    public static GPWMSGetFeatureInfoStax2Gml3Reader woodstoxWithProp(@Nonnull(when = NEVER) Map<String, Object> theProp) {
+        return new GPWMSGetFeatureInfoStax2Gml3Reader(XmlStreamReaderStax2Builder.woodstoxWithProp(theProp));
     }
 
     /**
-     * Create {@link GPWMSGetFeatureInfoStax2Reader} with {@link XMLInputFactory2} using Aalto Implementation with these properties :
+     * Create {@link GPWMSGetFeatureInfoStax2Gml3Reader} with {@link XMLInputFactory2} using Aalto Implementation with these properties :
      * <p>
      * Regarding the default StAX property settings,
      * implementations are suggested to do following:
@@ -205,14 +205,14 @@ public class GPWMSGetFeatureInfoStax2Reader extends WMSBaseGetFeatureInfoStaxRea
      * All the other standard settings should be left as is.
      * <p>
      *
-     * @return {@link GPWMSGetFeatureInfoStax2Reader}
+     * @return {@link GPWMSGetFeatureInfoStax2Gml3Reader}
      */
-    public static GPWMSGetFeatureInfoStax2Reader aaltoConfigureForXmlConformance() {
-        return new GPWMSGetFeatureInfoStax2Reader(XmlStreamReaderStax2Builder.aaltoConfigureForXmlConformance());
+    public static GPWMSGetFeatureInfoStax2Gml3Reader aaltoConfigureForXmlConformance() {
+        return new GPWMSGetFeatureInfoStax2Gml3Reader(XmlStreamReaderStax2Builder.aaltoConfigureForXmlConformance());
     }
 
     /**
-     * Create {@link GPWMSGetFeatureInfoStax2Reader} with {@link XMLInputFactory2} using Aalto Implementation with these properties :
+     * Create {@link GPWMSGetFeatureInfoStax2Gml3Reader} with {@link XMLInputFactory2} using Aalto Implementation with these properties :
      * <p>
      * Regarding the default StAX property settings,
      * implementations are suggested to do following:
@@ -231,14 +231,14 @@ public class GPWMSGetFeatureInfoStax2Reader extends WMSBaseGetFeatureInfoStaxRea
      * In addition, implementations should set implementation-dependant
      * settings appropriately as well.
      *
-     * @return {@link GPWMSGetFeatureInfoStax2Reader}
+     * @return {@link GPWMSGetFeatureInfoStax2Gml3Reader}
      */
-    public static GPWMSGetFeatureInfoStax2Reader aaltoConfigureForConvenience() {
-        return new GPWMSGetFeatureInfoStax2Reader(XmlStreamReaderStax2Builder.aaltoConfigureForConvenience());
+    public static GPWMSGetFeatureInfoStax2Gml3Reader aaltoConfigureForConvenience() {
+        return new GPWMSGetFeatureInfoStax2Gml3Reader(XmlStreamReaderStax2Builder.aaltoConfigureForConvenience());
     }
 
     /**
-     * Create {@link GPWMSGetFeatureInfoStax2Reader} with {@link XMLInputFactory2} using Aalto Implementation with these properties :
+     * Create {@link GPWMSGetFeatureInfoStax2Gml3Reader} with {@link XMLInputFactory2} using Aalto Implementation with these properties :
      * <p>
      * Regarding the default StAX property settings,
      * implementations are suggested to do following:
@@ -254,14 +254,14 @@ public class GPWMSGetFeatureInfoStax2Reader extends WMSBaseGetFeatureInfoStaxRea
      * In addition, implementations should set implementation-dependant
      * settings appropriately as well.
      *
-     * @return {@link GPWMSGetFeatureInfoStax2Reader}
+     * @return {@link GPWMSGetFeatureInfoStax2Gml3Reader}
      */
-    public static GPWMSGetFeatureInfoStax2Reader aaltoConfigureForSpeed() {
-        return new GPWMSGetFeatureInfoStax2Reader(XmlStreamReaderStax2Builder.aaltoConfigureForSpeed());
+    public static GPWMSGetFeatureInfoStax2Gml3Reader aaltoConfigureForSpeed() {
+        return new GPWMSGetFeatureInfoStax2Gml3Reader(XmlStreamReaderStax2Builder.aaltoConfigureForSpeed());
     }
 
     /**
-     * Create {@link GPWMSGetFeatureInfoStax2Reader} with {@link XMLInputFactory2} using Aalto Implementation with these properties :
+     * Create {@link GPWMSGetFeatureInfoStax2Gml3Reader} with {@link XMLInputFactory2} using Aalto Implementation with these properties :
      * <p>
      * Regarding the default StAX property settings,
      * implementations are suggested to do following:
@@ -278,14 +278,14 @@ public class GPWMSGetFeatureInfoStax2Reader extends WMSBaseGetFeatureInfoStaxRea
      * In addition, implementations should set implementation-dependant
      * settings appropriately so that the memory usage is minimized.
      *
-     * @return {@link GPWMSGetFeatureInfoStax2Reader}
+     * @return {@link GPWMSGetFeatureInfoStax2Gml3Reader}
      */
-    public static GPWMSGetFeatureInfoStax2Reader aaltoConfigureForLowMemUsage() {
-        return new GPWMSGetFeatureInfoStax2Reader(XmlStreamReaderStax2Builder.aaltoConfigureForLowMemUsage());
+    public static GPWMSGetFeatureInfoStax2Gml3Reader aaltoConfigureForLowMemUsage() {
+        return new GPWMSGetFeatureInfoStax2Gml3Reader(XmlStreamReaderStax2Builder.aaltoConfigureForLowMemUsage());
     }
 
     /**
-     * Create {@link GPWMSGetFeatureInfoStax2Reader} with {@link XMLInputFactory2} using Aalto Implementation with these properties :
+     * Create {@link GPWMSGetFeatureInfoStax2Gml3Reader} with {@link XMLInputFactory2} using Aalto Implementation with these properties :
      * <p>
      * Regarding the default StAX property settings,
      * implementations are suggested to do following:
@@ -308,17 +308,17 @@ public class GPWMSGetFeatureInfoStax2Reader extends WMSBaseGetFeatureInfoStaxRea
      * In addition, implementations should set implementation-dependant
      * settings appropriately as well.
      *
-     * @return {@link GPWMSGetFeatureInfoStax2Reader}
+     * @return {@link GPWMSGetFeatureInfoStax2Gml3Reader}
      */
-    public static GPWMSGetFeatureInfoStax2Reader aaltoConfigureForRoundTripping() {
-        return new GPWMSGetFeatureInfoStax2Reader(XmlStreamReaderStax2Builder.aaltoConfigureForRoundTripping());
+    public static GPWMSGetFeatureInfoStax2Gml3Reader aaltoConfigureForRoundTripping() {
+        return new GPWMSGetFeatureInfoStax2Gml3Reader(XmlStreamReaderStax2Builder.aaltoConfigureForRoundTripping());
     }
 
     /**
      * @param theProp
-     * @return {@link GPWMSGetFeatureInfoStax2Reader}
+     * @return {@link GPWMSGetFeatureInfoStax2Gml3Reader}
      */
-    public static GPWMSGetFeatureInfoStax2Reader aaltoWithProp(@Nonnull(when = NEVER) Map<String, Object> theProp) {
-        return new GPWMSGetFeatureInfoStax2Reader(XmlStreamReaderStax2Builder.aaltoWithProp(theProp));
+    public static GPWMSGetFeatureInfoStax2Gml3Reader aaltoWithProp(@Nonnull(when = NEVER) Map<String, Object> theProp) {
+        return new GPWMSGetFeatureInfoStax2Gml3Reader(XmlStreamReaderStax2Builder.aaltoWithProp(theProp));
     }
 }

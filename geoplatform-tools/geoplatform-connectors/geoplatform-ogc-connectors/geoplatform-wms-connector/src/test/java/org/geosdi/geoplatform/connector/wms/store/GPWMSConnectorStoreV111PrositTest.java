@@ -56,7 +56,7 @@ import java.net.URL;
 import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
-import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML2;
 import static org.geosdi.geoplatform.connector.server.store.GPWMSConnectorBuilder.WMSConnectorBuilder.wmsConnectorBuilder;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -109,7 +109,7 @@ public class GPWMSConnectorStoreV111PrositTest {
         Object response = wmsGetFeatureInfoRequest.withQueryLayers("admin:admin_shp_vigneti_catastali", "admin:admin_shp_oliveti_catastali")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(8)
-                .withInfoFormat(GML).withX(154).withY(230).getResponse();
+                .withInfoFormat(GML2).withX(154).withY(230).getResponse();
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(response));
     }
 
@@ -122,7 +122,7 @@ public class GPWMSConnectorStoreV111PrositTest {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("topp:states")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(8)
-                .withInfoFormat(GML).withX(61).withY(209).getResponse());
+                .withInfoFormat(GML2).withX(61).withY(209).getResponse());
     }
 
     @Test
@@ -134,7 +134,7 @@ public class GPWMSConnectorStoreV111PrositTest {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("admin:tempo")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(8)
-                .withInfoFormat(GML).withX(50).withY(50).getResponse());
+                .withInfoFormat(GML2).withX(50).withY(50).getResponse());
     }
 
     @Test
@@ -146,6 +146,6 @@ public class GPWMSConnectorStoreV111PrositTest {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("admin:admin_shp_vigneti_catastali")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(8)
-                .withInfoFormat(GML).withX(966).withY(481).getResponse());
+                .withInfoFormat(GML2).withX(966).withY(481).getResponse());
     }
 }

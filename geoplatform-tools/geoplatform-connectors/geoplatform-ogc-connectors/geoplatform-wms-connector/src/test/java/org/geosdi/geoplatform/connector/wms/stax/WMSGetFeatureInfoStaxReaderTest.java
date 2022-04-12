@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.wms.stax;
 
-import org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxReader;
+import org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxGml2Reader;
 import org.geosdi.geoplatform.connector.wms.WMSGetFeatureInfoReaderFileLoaderTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,5 +48,5 @@ public abstract class WMSGetFeatureInfoStaxReaderTest extends WMSGetFeatureInfoR
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    public static final GPWMSGetFeatureInfoStaxReader wmsGetFeatureInfoStaxReader = new GPWMSGetFeatureInfoStaxReader();
+    public static final GPWMSGetFeatureInfoStaxGml2Reader wmsGetFeatureInfoStaxReader = new GPWMSGetFeatureInfoStaxGml2Reader();
 }

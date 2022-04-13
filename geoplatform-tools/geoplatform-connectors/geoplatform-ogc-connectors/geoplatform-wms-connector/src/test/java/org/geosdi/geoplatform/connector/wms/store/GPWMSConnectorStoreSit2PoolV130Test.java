@@ -35,10 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.wms.store;
 
-import org.geosdi.geoplatform.connector.server.request.GPWMSBoundingBox;
-import org.geosdi.geoplatform.connector.server.request.GPWMSGetMapBaseRequest;
-import org.geosdi.geoplatform.connector.server.request.WMSBoundingBox;
-import org.geosdi.geoplatform.connector.server.request.WMSGetMapBaseRequest;
+import org.geosdi.geoplatform.connector.server.request.*;
 import org.geosdi.geoplatform.connector.server.v130.GPWMSGetCapabilitiesV130Request;
 import org.geosdi.geoplatform.connector.server.v130.GPWMSGetFeatureInfoV130Request;
 import org.geosdi.geoplatform.connector.server.v130.IGPWMSConnectorStoreV130;
@@ -54,7 +51,8 @@ import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.pool.builder.v130.WMSConnectorBuilderPoolV130.wmsConnectorBuilderPoolV130;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
-import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML_AS_STRING;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML2_AS_STRING;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML3;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**

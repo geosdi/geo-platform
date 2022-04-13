@@ -42,7 +42,7 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.geosdi.geoplatform.connector.reader.stax2.GPWMSGetFeatureInfoStax2Reader.woodstoxConfigureForSpeed;
+import static org.geosdi.geoplatform.connector.reader.stax2.GPWMSGetFeatureInfoStax2Gml2Reader.woodstoxConfigureForSpeed;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
@@ -60,5 +60,5 @@ public class WMSGetFeatureInfoWoodstoxReaderTest extends WMSGetFeatureInfoReader
             WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE, NON_NULL);
     //
-    protected static final GPWMSGetFeatureInfoStax2Reader wmsGetFeatureInfoWoodstoxReader = woodstoxConfigureForSpeed();
+    protected static final GPWMSGetFeatureInfoStax2Gml2Reader wmsGetFeatureInfoWoodstoxReader = woodstoxConfigureForSpeed();
 }

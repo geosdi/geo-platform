@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.wms.stax.theories;
 
-import org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxReader;
+import org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxGml2Reader;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.junit.BeforeClass;
@@ -70,7 +70,7 @@ public class WMSGetFeatureInfoTheoriesStaxReaderTest {
             ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
             WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE, NON_NULL);
-    private static final GPWMSGetFeatureInfoStaxReader wmsGetFeatureInfoStaxReader = new GPWMSGetFeatureInfoStaxReader();
+    private static final GPWMSGetFeatureInfoStaxGml2Reader wmsGetFeatureInfoStaxReader = new GPWMSGetFeatureInfoStaxGml2Reader();
 
     @BeforeClass
     public static void buildDirFiles() throws Exception {

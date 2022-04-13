@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.wms.stax.theories;
 
-import org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxReader;
+import org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxGml2Reader;
 import org.junit.BeforeClass;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
@@ -61,7 +61,7 @@ public class GPWMSFeatureStoreTheoriesTest {
     private static final Logger logger = LoggerFactory.getLogger(GPWMSFeatureStoreTheoriesTest.class);
     //
     private static String dirFiles;
-    private static final GPWMSGetFeatureInfoStaxReader wmsGetFeatureInfoStaxReader = new GPWMSGetFeatureInfoStaxReader();
+    private static final GPWMSGetFeatureInfoStaxGml2Reader wmsGetFeatureInfoStaxReader = new GPWMSGetFeatureInfoStaxGml2Reader();
 
     @BeforeClass
     public static void buildDirFiles() throws Exception {

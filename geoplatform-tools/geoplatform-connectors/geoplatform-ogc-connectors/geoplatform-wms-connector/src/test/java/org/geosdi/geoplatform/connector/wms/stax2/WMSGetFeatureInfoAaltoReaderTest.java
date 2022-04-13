@@ -42,7 +42,7 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.geosdi.geoplatform.connector.reader.stax2.GPWMSGetFeatureInfoStax2Reader.aaltoConfigureForSpeed;
+import static org.geosdi.geoplatform.connector.reader.stax2.GPWMSGetFeatureInfoStax2Gml2Reader.aaltoConfigureForSpeed;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
@@ -59,5 +59,5 @@ public class WMSGetFeatureInfoAaltoReaderTest extends WMSGetFeatureInfoReaderFil
             ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
             WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE, NON_NULL);
-    protected static final GPWMSGetFeatureInfoStax2Reader wmsGetFeatureInfoAaltoReader = aaltoConfigureForSpeed();
+    protected static final GPWMSGetFeatureInfoStax2Gml2Reader wmsGetFeatureInfoAaltoReader = aaltoConfigureForSpeed();
 }

@@ -101,12 +101,10 @@ public class GPWMSGetFeatureInfoStaxGml3Reader extends GetFeatureGeoJsonStaxGml3
                     } else if (super.isTagName(GML_PREFIX, FEATURE_MEMBERS_LOCAL_NAME)) {
                         Feature feature = new Feature();
                         this.readFeatures(feature);
-                        feature.getProperties().remove(FEATURE_NAME_KEY);
                         store.addFeature(feature);
                     } else if (super.isLoadedTypeNames()) {//if (super.isFeatureTag()) {
                         Feature feature = new Feature();
                         this.readFeatureID(feature);
-                        feature.getProperties().remove(FEATURE_NAME_KEY);
                         store.addFeature(feature);
                     }
                 }

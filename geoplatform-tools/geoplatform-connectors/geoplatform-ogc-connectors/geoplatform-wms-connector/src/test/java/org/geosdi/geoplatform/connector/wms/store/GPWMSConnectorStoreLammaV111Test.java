@@ -126,7 +126,7 @@ public class GPWMSConnectorStoreLammaV111Test {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("MonUsoSuoloRT:lotto14")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(50)
-                .withInfoFormat(GML3).withX(54).withY(238).getResponse());
+                .withInfoFormat(GML3_AS_STRING).withX(54).withY(238).getResponse());
     }
 
     @Test
@@ -138,6 +138,18 @@ public class GPWMSConnectorStoreLammaV111Test {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("MonUsoSuoloRT:lotto17")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(50)
-                .withInfoFormat(GML3).withX(178).withY(194).getResponse());
+                .withInfoFormat(GML3_AS_STRING).withX(178).withY(194).getResponse());
+    }
+
+    @Test
+    public void g_wmsGetFeatureInfoV111Test() throws Exception {
+        GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
+        GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(1674427.609375, 4657276.5, 1708880.515625, 4809344.5);
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("MonUsoSuoloRT:lotto14").collect(toSet()),
+                "EPSG:3003", "116", "512");
+        logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("MonUsoSuoloRT:lotto14")
+                .withWMSGetMapRequest(wmsGetMapBaseRequest)
+                .withFeatureCount(50)
+                .withInfoFormat(GML3_AS_STRING).withX(54).withY(238).getResponse());
     }
 }

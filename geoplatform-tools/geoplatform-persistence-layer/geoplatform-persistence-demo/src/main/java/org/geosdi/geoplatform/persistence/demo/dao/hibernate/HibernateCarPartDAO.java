@@ -48,7 +48,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -56,7 +55,7 @@ import javax.persistence.criteria.Root;
 @Profile(value = "hibernate")
 public class HibernateCarPartDAO extends GPAbstractHibernateDAO<CarPart, Long> implements ICarPartDAO {
 
-    public HibernateCarPartDAO() {
+    HibernateCarPartDAO() {
         super(CarPart.class);
     }
 

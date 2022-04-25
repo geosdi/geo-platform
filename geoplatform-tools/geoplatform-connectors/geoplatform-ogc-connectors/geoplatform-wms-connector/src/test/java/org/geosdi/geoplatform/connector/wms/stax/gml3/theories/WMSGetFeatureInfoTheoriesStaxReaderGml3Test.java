@@ -33,25 +33,39 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.persistence.dao.spring;
+package org.geosdi.geoplatform.connector.wms.stax.gml3.theories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.transaction.annotation.Transactional;
+import org.geosdi.geoplatform.connector.wms.WMSGetFeatureInfoTheoriesGml3Test;
+import org.junit.experimental.theories.Theories;
+import org.junit.experimental.theories.Theory;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.Serializable;
-import java.util.Optional;
+import java.io.File;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static org.geosdi.geoplatform.connector.wms.WMSGetFeatureInfoReaderFileLoaderTest.JACKSON_SUPPORT;
+import static org.geosdi.geoplatform.connector.wms.stax.gml3.WMSGetFeatureInfoStaxReaderGml3Test.wmsGetFeatureInfoStaxGml3Reader;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Transactional(transactionManager = "gpTransactionManager")
-public interface GeoPlatformJpaRepository<T extends Object, ID extends Serializable> extends JpaRepository<T, ID> {
+@RunWith(Theories.class)
+public class WMSGetFeatureInfoTheoriesStaxReaderGml3Test extends WMSGetFeatureInfoTheoriesGml3Test {
+
+    private static final Logger logger = LoggerFactory.getLogger(WMSGetFeatureInfoTheoriesStaxReaderGml3Test.class);
 
     /**
-     * @param id
-     * @return {@link Optional<T>}
+     * @param fileName
+     * @throws Exception
      */
-    @Override
-    Optional<T> findById(ID id);
+    @Theory
+    public void wmsGetFeatureInfoStaxFeatureReaderTest(String fileName) throws Exception {
+        checkArgument((fileName != null) && !(fileName.trim().isEmpty()), "The Parameter fileName must not be null or an empty string.");
+        File file = new File(dirFiles.concat(fileName));
+        logger.info("#######################FEATURE_COLLECTION : \n{}\n for File : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(file)), fileName);
+    }
 }

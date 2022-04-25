@@ -1,0 +1,2291 @@
+<wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ppr2006="www.sardegnaterritorio.it"
+                       xmlns:wfs="http://www.opengis.net/wfs" xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="0"
+                       timeStamp="2022-04-14T08:38:36.256Z"
+                       xsi:schemaLocation="http://www.opengis.net/wfs https://webgis.regione.sardegna.it/geoserver/schemas/wfs/1.1.0/wfs.xsd www.sardegnaterritorio.it https://webgis.regione.sardegna.it/geoserver/ppr2006/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=ppr2006%3AALBERIMONUMENTALI">
+    <gml:boundedBy>
+        <gml:Envelope srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+            <gml:lowerCorner>1451316 4311236</gml:lowerCorner>
+            <gml:upperCorner>1566149 4562852</gml:upperCorner>
+        </gml:Envelope>
+    </gml:boundedBy>
+    <gml:featureMembers>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.47">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1555643 4443053</gml:lowerCorner>
+                    <gml:upperCorner>1555643 4443053</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Juniperus phoenicea L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>290</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>10</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1555643 4443053</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.48">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1463147 4378605</gml:lowerCorner>
+                    <gml:upperCorner>1463147 4378605</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Laurus nobilis</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>208</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>10</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1463147 4378605</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.41">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1509799 4342044</gml:lowerCorner>
+                    <gml:upperCorner>1509799 4342044</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Jacaranda mimosaefolia G. Don</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>150</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>12</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1509799 4342044</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.49">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1489431 4466718</gml:lowerCorner>
+                    <gml:upperCorner>1489431 4466718</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Libocedrus decurrens Torr.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>225</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>18</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1489431 4466718</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.50">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1524876 4351789</gml:lowerCorner>
+                    <gml:upperCorner>1524876 4351789</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Magnolia grandiflora L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>240</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>10</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1524876 4351789</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.51">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1566149 4488831</gml:lowerCorner>
+                    <gml:upperCorner>1566149 4488831</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Morus nigra L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>230</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>7</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1566149 4488831</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.52">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1463558 4420691</gml:lowerCorner>
+                    <gml:upperCorner>1463558 4420691</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Myrtus communis L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>58-90</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>5</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1463558 4420691</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.53">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1473250 4346040</gml:lowerCorner>
+                    <gml:upperCorner>1473250 4346040</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Olea europea L. var. sativa Brot.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>940</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>10</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1473250 4346040</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.54">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1479779 4418816</gml:lowerCorner>
+                    <gml:upperCorner>1479779 4418816</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Olea europea L. var. sativa Brot.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>540</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>6</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1479779 4418816</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.55">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1490767 4400532</gml:lowerCorner>
+                    <gml:upperCorner>1490767 4400532</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Olea europea L. var. sativa Brot.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>154</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>9</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1490767 4400532</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.56">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1477046 4363853</gml:lowerCorner>
+                    <gml:upperCorner>1477046 4363853</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Olea europea L. var. sylvestris (Miller) Brot.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>800</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>11</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1477046 4363853</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.57">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1463561 4420693</gml:lowerCorner>
+                    <gml:upperCorner>1463561 4420693</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Olea europea L. var. sylvestris (Miller) Brot.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>410,430</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>12-13</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1463561 4420693</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.58">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1461258 4449468</gml:lowerCorner>
+                    <gml:upperCorner>1461258 4449468</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Olea europea L. var. sylvestris (Miller) Brot.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>872</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>15</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1461258 4449468</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.59">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1478709 4427877</gml:lowerCorner>
+                    <gml:upperCorner>1478709 4427877</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Olea europea L. var. sylvestris (Miller) Brot.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>560</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>13</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1478709 4427877</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.60">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1558876 4426685</gml:lowerCorner>
+                    <gml:upperCorner>1558876 4426685</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Olea europea L. var. sylvestris (Miller) Brot.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>780</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>9</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1558876 4426685</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.61">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1556943 4438049</gml:lowerCorner>
+                    <gml:upperCorner>1556943 4438049</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Olea europea L. var. sylvestris (Miller) Brot.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>595</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>13</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1556943 4438049</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.62">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1560142 4501450</gml:lowerCorner>
+                    <gml:upperCorner>1560142 4501450</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Olea europea L. var. sylvestris (Miller) Brot.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>600</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>10</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1560142 4501450</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.63">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1521499 4539468</gml:lowerCorner>
+                    <gml:upperCorner>1521499 4539468</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Olea europea L. var. sylvestris (Miller) Brot.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>1090</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>15</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1521499 4539468</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.64">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1527211 4359757</gml:lowerCorner>
+                    <gml:upperCorner>1527211 4359757</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Phillyrea latifolia L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>414</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>10</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1527211 4359757</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.65">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1480960 4410919</gml:lowerCorner>
+                    <gml:upperCorner>1480960 4410919</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Phillyrea latifolia L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>146</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>10</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1480960 4410919</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.66">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1508573 4343596</gml:lowerCorner>
+                    <gml:upperCorner>1508573 4343596</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Phoenix dactylifera L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>230</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>16</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1508573 4343596</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.67">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1546908 4414226</gml:lowerCorner>
+                    <gml:upperCorner>1546908 4414226</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pinus canariensis Smith.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>315</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>18</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1546908 4414226</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.68">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1515476 4359424</gml:lowerCorner>
+                    <gml:upperCorner>1515476 4359424</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pinus halepensis Mill.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>290</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>16</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1515476 4359424</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.69">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1534224 4440180</gml:lowerCorner>
+                    <gml:upperCorner>1534224 4440180</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pinus laricio Poiret</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>310</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>25</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1534224 4440180</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.70">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1505649 4484664</gml:lowerCorner>
+                    <gml:upperCorner>1505649 4484664</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pinus laricio Poiret</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>240</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>32-35</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1505649 4484664</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.71">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1454670 4367010</gml:lowerCorner>
+                    <gml:upperCorner>1454670 4367010</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pinus pinea L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>485</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>17</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1454670 4367010</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.72">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1500880 4329290</gml:lowerCorner>
+                    <gml:upperCorner>1500880 4329290</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pinus pinea L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>345</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>15</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1500880 4329290</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.73">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1525487 4463072</gml:lowerCorner>
+                    <gml:upperCorner>1525487 4463072</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pinus pinea L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>410</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>15</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1525487 4463072</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.74">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1515322 4422552</gml:lowerCorner>
+                    <gml:upperCorner>1515322 4422552</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pinus pinea L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>370</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>16</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1515322 4422552</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.75">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1538745 4562852</gml:lowerCorner>
+                    <gml:upperCorner>1538745 4562852</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pinus pinea L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>260</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>12</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1538745 4562852</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.76">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1535977 4347227</gml:lowerCorner>
+                    <gml:upperCorner>1535977 4347227</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pinus radiata</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>292</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>32</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1535977 4347227</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.77">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1503783 4486456</gml:lowerCorner>
+                    <gml:upperCorner>1503783 4486456</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pinus sabiniana Dougl.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>278</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>18</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1503783 4486456</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.78">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1522489 4539849</gml:lowerCorner>
+                    <gml:upperCorner>1522489 4539849</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pistacia lentiscus</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>470</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>9</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1522489 4539849</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.79">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1494144 4335603</gml:lowerCorner>
+                    <gml:upperCorner>1494144 4335603</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pistacia lentiscus L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>180</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>8</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1494144 4335603</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.80">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1456985 4360550</gml:lowerCorner>
+                    <gml:upperCorner>1456985 4360550</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pistacia lentiscus L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>101,74,100</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>5</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1456985 4360550</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.81">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1556768 4438404</gml:lowerCorner>
+                    <gml:upperCorner>1556768 4438404</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pistacia lentiscus L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>230</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>7</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1556768 4438404</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.82">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1558449 4438711</gml:lowerCorner>
+                    <gml:upperCorner>1558449 4438711</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pistacia terebinthus L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>220</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>8</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1558449 4438711</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.83">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1497839 4317589</gml:lowerCorner>
+                    <gml:upperCorner>1497839 4317589</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Platanus acerifolia Willd.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>436</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>20</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1497839 4317589</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.84">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1504955 4411638</gml:lowerCorner>
+                    <gml:upperCorner>1504955 4411638</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Platanus acerifolia Willd.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>435</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>30</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1504955 4411638</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.85">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1521469 4400902</gml:lowerCorner>
+                    <gml:upperCorner>1521469 4400902</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Populus alba L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>414</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>30</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1521469 4400902</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.86">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1534225 4413924</gml:lowerCorner>
+                    <gml:upperCorner>1534225 4413924</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Populus alba L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>476</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>30</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1534225 4413924</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.87">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1558655 4491917</gml:lowerCorner>
+                    <gml:upperCorner>1558655 4491917</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Populus canscens Sm.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>208</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>16</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1558655 4491917</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.88">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1508698 4343401</gml:lowerCorner>
+                    <gml:upperCorner>1508698 4343401</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Prosopis torquata DC.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>432</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>15</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1508698 4343401</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.89">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1556762 4438400</gml:lowerCorner>
+                    <gml:upperCorner>1556762 4438400</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Pyrus amiygdaliformis Vill.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>270</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>7</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1556762 4438400</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.90">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1465251 4439664</gml:lowerCorner>
+                    <gml:upperCorner>1465251 4439664</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus ilex L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>610</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>15</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1465251 4439664</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.91">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1521335 4428626</gml:lowerCorner>
+                    <gml:upperCorner>1521335 4428626</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus ilex L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>700</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>30</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1521335 4428626</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.92">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1531364 4414248</gml:lowerCorner>
+                    <gml:upperCorner>1531364 4414248</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus ilex L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>620</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>30</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1531364 4414248</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.93">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1521670 4411108</gml:lowerCorner>
+                    <gml:upperCorner>1521670 4411108</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus ilex L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>475</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>18</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1521670 4411108</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.94">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1517099 4416403</gml:lowerCorner>
+                    <gml:upperCorner>1517099 4416403</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus ilex L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>590</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>22</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1517099 4416403</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.95">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1540249 4440940</gml:lowerCorner>
+                    <gml:upperCorner>1540249 4440940</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus ilex L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>630</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>16</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1540249 4440940</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.96">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1462044 4507595</gml:lowerCorner>
+                    <gml:upperCorner>1462044 4507595</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus ilex L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>405</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>15</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1462044 4507595</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.97">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1539482 4445475</gml:lowerCorner>
+                    <gml:upperCorner>1539482 4445475</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus ilex L. (+)</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>770</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>24</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1539482 4445475</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.98">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1521097 4428771</gml:lowerCorner>
+                    <gml:upperCorner>1521097 4428771</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus pubescens Willd.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>540</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>14</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1521097 4428771</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.99">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1505068 4431048</gml:lowerCorner>
+                    <gml:upperCorner>1505068 4431048</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus pubescens Willd.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>495</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>15</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1505068 4431048</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.100">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1544522 4428825</gml:lowerCorner>
+                    <gml:upperCorner>1544522 4428825</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus pubescens Willd.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>630</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>25</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1544522 4428825</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.101">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1493400 4471706</gml:lowerCorner>
+                    <gml:upperCorner>1493400 4471706</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus pubescens Willd.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>750</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>20</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1493400 4471706</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.102">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1530271 4381229</gml:lowerCorner>
+                    <gml:upperCorner>1530271 4381229</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus suber L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>390</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>16</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1530271 4381229</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.103">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1485686 4319161</gml:lowerCorner>
+                    <gml:upperCorner>1485686 4319161</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus suber L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>490</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>13</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1485686 4319161</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.104">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1512768 4513810</gml:lowerCorner>
+                    <gml:upperCorner>1512768 4513810</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus suber L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>510</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>15</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1512768 4513810</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.105">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1496857 4474973</gml:lowerCorner>
+                    <gml:upperCorner>1496857 4474973</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus suber L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>440-450</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>18</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1496857 4474973</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.106">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1470403 4507876</gml:lowerCorner>
+                    <gml:upperCorner>1470403 4507876</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Quercus suber L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>480</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>12</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1470403 4507876</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.107">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1508213 4527490</gml:lowerCorner>
+                    <gml:upperCorner>1508213 4527490</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Sambucus nigra L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>160</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>7</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1508213 4527490</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.108">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1465367 4416829</gml:lowerCorner>
+                    <gml:upperCorner>1465367 4416829</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Schinus molle L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>300</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>10</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1465367 4416829</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.109">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1518869 4423872</gml:lowerCorner>
+                    <gml:upperCorner>1518869 4423872</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Taxus baccata L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>350</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>8</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1518869 4423872</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.110">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1530551 4424626</gml:lowerCorner>
+                    <gml:upperCorner>1530551 4424626</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Taxus baccata L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>465</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>8</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1530551 4424626</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.111">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1541620 4446273</gml:lowerCorner>
+                    <gml:upperCorner>1541620 4446273</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Taxus baccata L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>400</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>10</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1541620 4446273</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.112">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1499667 4474629</gml:lowerCorner>
+                    <gml:upperCorner>1499667 4474629</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Taxus baccata L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>195</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>11</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1499667 4474629</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.113">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1516810 4463072</gml:lowerCorner>
+                    <gml:upperCorner>1516810 4463072</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Ulmus montana Witch.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>390</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>27</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1516810 4463072</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.114">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1512743 4385319</gml:lowerCorner>
+                    <gml:upperCorner>1512743 4385319</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Vitis vinifera L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>102</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1512743 4385319</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.1">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1498179 4475673</gml:lowerCorner>
+                    <gml:upperCorner>1498179 4475673</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Abies alba Miller</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>219</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>25</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1498179 4475673</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.2">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1489429 4466725</gml:lowerCorner>
+                    <gml:upperCorner>1489429 4466725</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Abies pinsapo Boiss.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>354</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>23</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1489429 4466725</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.3">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1525796 4421807</gml:lowerCorner>
+                    <gml:upperCorner>1525796 4421807</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Acer monspessulanum L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>415</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>13</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1525796 4421807</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.4">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1523013 4415599</gml:lowerCorner>
+                    <gml:upperCorner>1523013 4415599</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Acer monspessulanum L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>395</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>12</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1523013 4415599</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.5">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1504927 4411607</gml:lowerCorner>
+                    <gml:upperCorner>1504927 4411607</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Aesculum hippocastanum L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>315</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>21</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1504927 4411607</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.6">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1500201 4492705</gml:lowerCorner>
+                    <gml:upperCorner>1500201 4492705</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Ailanthus altissima Miller</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>320</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>11</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1500201 4492705</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.7">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1509204 4341167</gml:lowerCorner>
+                    <gml:upperCorner>1509204 4341167</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Araucaria execelsa R.Br.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>310</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>28</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1509204 4341167</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.8">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1479471 4366506</gml:lowerCorner>
+                    <gml:upperCorner>1479471 4366506</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Arbutus unedo L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>195</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>17</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1479471 4366506</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.9">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1530754 4415043</gml:lowerCorner>
+                    <gml:upperCorner>1530754 4415043</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Arbutus unedo L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>247</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>7</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1530754 4415043</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.10">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1552059 4503657</gml:lowerCorner>
+                    <gml:upperCorner>1552059 4503657</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Arbutus unedo L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>220</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>8</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1552059 4503657</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.11">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1471390 4447583</gml:lowerCorner>
+                    <gml:upperCorner>1471390 4447583</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Castanea sativa Miller</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>495</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>18</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1471390 4447583</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.12">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1517587 4424863</gml:lowerCorner>
+                    <gml:upperCorner>1517587 4424863</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Castanea sativa Miller</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>540</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>17</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1517587 4424863</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.13">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1521687 4432586</gml:lowerCorner>
+                    <gml:upperCorner>1521687 4432586</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Castanea sativa Miller</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>536</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>18</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1521687 4432586</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.14">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1517909 4430745</gml:lowerCorner>
+                    <gml:upperCorner>1517909 4430745</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Castanea sativa Miller</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>850</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>15</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1517909 4430745</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.15">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1504911 4411621</gml:lowerCorner>
+                    <gml:upperCorner>1504911 4411621</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Cedrus deodara G. Don.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>415</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>25</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1504911 4411621</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.16">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1504932 4411644</gml:lowerCorner>
+                    <gml:upperCorner>1504932 4411644</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Cedrus libani A. Rich.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>415</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>25</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1504932 4411644</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.17">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1489891 4442417</gml:lowerCorner>
+                    <gml:upperCorner>1489891 4442417</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Celtis australis L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>90</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>10</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1489891 4442417</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.18">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1558778 4426854</gml:lowerCorner>
+                    <gml:upperCorner>1558778 4426854</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Celtis australis L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>334</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>16</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1558778 4426854</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.19">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1556951 4438044</gml:lowerCorner>
+                    <gml:upperCorner>1556951 4438044</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Celtis australis L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>510</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>20</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1556951 4438044</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.20">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1508991 4527927</gml:lowerCorner>
+                    <gml:upperCorner>1508991 4527927</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Celtis australis L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>285</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>18</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1508991 4527927</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.21">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1543124 4343132</gml:lowerCorner>
+                    <gml:upperCorner>1543124 4343132</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Ceratonia siliqua L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>300</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>12</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1543124 4343132</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.22">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1490303 4316336</gml:lowerCorner>
+                    <gml:upperCorner>1490303 4316336</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Ceratonia siliqua L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>364</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>10</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1490303 4316336</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.23">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1470319 4414220</gml:lowerCorner>
+                    <gml:upperCorner>1470319 4414220</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Cinnamonum camphora Nees. et. Eberm.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>440</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>12</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1470319 4414220</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.24">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1480943 4457473</gml:lowerCorner>
+                    <gml:upperCorner>1480943 4457473</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Crataegus azarolus L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>140</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>10</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1480943 4457473</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.25">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1483896 4349775</gml:lowerCorner>
+                    <gml:upperCorner>1483896 4349775</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Erythrina crista-galli L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>173,150</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>6</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1483896 4349775</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.26">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1501054 4331841</gml:lowerCorner>
+                    <gml:upperCorner>1501054 4331841</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Eucalyptus camaldulensis Dehn.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>675</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>28</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1501054 4331841</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.27">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1483017 4325783</gml:lowerCorner>
+                    <gml:upperCorner>1483017 4325783</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Eucalyptus camaldulensis Dehn.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>569</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>28-30</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1483017 4325783</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.28">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1500874 4329286</gml:lowerCorner>
+                    <gml:upperCorner>1500874 4329286</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Eucalyptus camaldulensis Dehn.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>585</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>30</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1500874 4329286</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.29">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1503251 4396194</gml:lowerCorner>
+                    <gml:upperCorner>1503251 4396194</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Eucalyptus globulus Labill.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>500</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>33</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1503251 4396194</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.30">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1463563 4420697</gml:lowerCorner>
+                    <gml:upperCorner>1463563 4420697</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Eucalyptus globulus Labill.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>560</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>18</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1463563 4420697</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.31">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1489434 4466733</gml:lowerCorner>
+                    <gml:upperCorner>1489434 4466733</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Fagus sylvatica L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>226</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>18</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1489434 4466733</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.32">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1502403 4478127</gml:lowerCorner>
+                    <gml:upperCorner>1502403 4478127</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Fagus sylvatica L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>209</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>19</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1502403 4478127</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.33">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1504904 4411630</gml:lowerCorner>
+                    <gml:upperCorner>1504904 4411630</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Fagus sylvatica L. var. pendula</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>225</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>12</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1504904 4411630</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.34">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1508228 4342451</gml:lowerCorner>
+                    <gml:upperCorner>1508228 4342451</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Ficus magnoloides Borzì</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>745</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>17</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1508228 4342451</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.35">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1476331 4311236</gml:lowerCorner>
+                    <gml:upperCorner>1476331 4311236</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Fraxinus angustifolia Vahl.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>520</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>18</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1476331 4311236</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.36">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1520075 4507934</gml:lowerCorner>
+                    <gml:upperCorner>1520075 4507934</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Genista aetniensis D.C.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>215</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>9</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1520075 4507934</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.37">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1489429 4466725</gml:lowerCorner>
+                    <gml:upperCorner>1489429 4466725</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Giardino montano</ppr2006:SPECIEALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1489429 4466725</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.38">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1497837 4317584</gml:lowerCorner>
+                    <gml:upperCorner>1497837 4317584</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Gleditsia triacanthos L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>347</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>20</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1497837 4317584</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.39">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1521654 4432633</gml:lowerCorner>
+                    <gml:upperCorner>1521654 4432633</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Ilex aquifolium L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>525</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>5</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1521654 4432633</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.40">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1523123 4415656</gml:lowerCorner>
+                    <gml:upperCorner>1523123 4415656</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Ilex aquifolium L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>155</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>7</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1523123 4415656</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.42">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1507914 4435424</gml:lowerCorner>
+                    <gml:upperCorner>1507914 4435424</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Juglans regia L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>300</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>14</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1507914 4435424</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.43">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1516446 4425561</gml:lowerCorner>
+                    <gml:upperCorner>1516446 4425561</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Juglans regia L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>304</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>15</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1516446 4425561</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.44">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1496339 4335629</gml:lowerCorner>
+                    <gml:upperCorner>1496339 4335629</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Juniperus oxicedrus L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>180</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>10</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1496339 4335629</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.45">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1530899 4422578</gml:lowerCorner>
+                    <gml:upperCorner>1530899 4422578</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Juniperus oxicedrus L.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>560</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>6</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1530899 4422578</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+        <ppr2006:ALBERIMONUMENTALI gml:id="ALBERIMONUMENTALI.46">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1451316 4360210</gml:lowerCorner>
+                    <gml:upperCorner>1451316 4360210</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ppr2006:SPECIEALBERO>Juniperus oxicedrus sp. macrocarpa S. et S.</ppr2006:SPECIEALBERO>
+            <ppr2006:CIRCONFERENZAALBERO>150</ppr2006:CIRCONFERENZAALBERO>
+            <ppr2006:ALTEZZAALBERO>6</ppr2006:ALTEZZAALBERO>
+            <ppr2006:PUNTO>
+                <gml:MultiPoint srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pointMember>
+                        <gml:Point>
+                            <gml:pos>1451316 4360210</gml:pos>
+                        </gml:Point>
+                    </gml:pointMember>
+                </gml:MultiPoint>
+            </ppr2006:PUNTO>
+        </ppr2006:ALBERIMONUMENTALI>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

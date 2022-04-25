@@ -152,6 +152,8 @@ public abstract class GPWMSBaseGetFeatureInfoRequest<T, R extends GPWMSGetFeatur
         GPWMSGetMapBaseRequest wmsGetMapBaseRequest = this.wmsGetMapBaseRequest.get();
         checkArgument(wmsGetMapBaseRequest != null, "The Parameter wmsGetMapBaseRequest must not be null.");
         String[] queryLayers = this.queryLayers.get();
+        if (queryLayers == null)
+            queryLayers = wmsGetMapBaseRequest.getLayers().toArray(new String[wmsGetMapBaseRequest.getLayers().size()]);
         checkArgument(queryLayers != null, "The Parameter queryLayers must not be null.");
         String querylayersKVP = stream(queryLayers)
                 .filter(Objects::nonNull)

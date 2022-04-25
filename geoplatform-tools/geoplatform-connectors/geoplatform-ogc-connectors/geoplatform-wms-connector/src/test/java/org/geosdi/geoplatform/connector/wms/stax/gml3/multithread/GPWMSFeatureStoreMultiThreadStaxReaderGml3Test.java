@@ -33,9 +33,9 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.wms.stax.multithread;
+package org.geosdi.geoplatform.connector.wms.stax.gml3.multithread;
 
-import org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxGml2Reader;
+import org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxGml3Reader;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,11 +54,11 @@ import static org.junit.Assert.assertTrue;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPWMSFeatureStoreMultiThreadStaxReaderTest extends GPWMSGetFeatureMultiThreadTest {
+public class GPWMSFeatureStoreMultiThreadStaxReaderGml3Test extends GPWMSGetFeatureMultiThreadGml3Test {
 
-    private static final Logger logger = LoggerFactory.getLogger(GPWMSFeatureStoreMultiThreadStaxReaderTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(GPWMSFeatureStoreMultiThreadStaxReaderGml3Test.class);
     //
-    private static final GPWMSGetFeatureInfoStaxGml2Reader wmsGetFeatureInfoStaxReader = new GPWMSGetFeatureInfoStaxGml2Reader();
+    private static final GPWMSGetFeatureInfoStaxGml3Reader wmsGetFeatureInfoStaxReader = new GPWMSGetFeatureInfoStaxGml3Reader();
 
     @Test
     public void wmsFeatureStoreMultiThreadStaxReaderTest() throws Exception {
@@ -66,7 +66,7 @@ public class GPWMSFeatureStoreMultiThreadStaxReaderTest extends GPWMSGetFeatureM
         CountDownLatch doneSignal = new CountDownLatch(files.size());
         AtomicInteger counter = new AtomicInteger(0);
         fromIterable(files)
-                .map(f -> new Thread(new WMSFeatureStoreStaxReaderTask(f, startSignal, doneSignal, counter)))
+                .map(f -> new Thread(new WMSFeatureStoreStaxReaderGml3Task(f, startSignal, doneSignal, counter)))
                 .subscribe(Thread::start, Throwable::printStackTrace);
         startSignal.countDown();
         doneSignal.await();
@@ -74,9 +74,9 @@ public class GPWMSFeatureStoreMultiThreadStaxReaderTest extends GPWMSGetFeatureM
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@{} process {} files", this.getClass().getSimpleName(), counter.get());
     }
 
-    static class WMSFeatureStoreStaxReaderTask implements Runnable {
+    static class WMSFeatureStoreStaxReaderGml3Task implements Runnable {
 
-        private static final Logger logger = LoggerFactory.getLogger(WMSFeatureStoreStaxReaderTask.class);
+        private static final Logger logger = LoggerFactory.getLogger(WMSFeatureStoreStaxReaderGml3Task.class);
         //
         private final String fileName;
         private final CountDownLatch startSignal;
@@ -88,7 +88,7 @@ public class GPWMSFeatureStoreMultiThreadStaxReaderTest extends GPWMSGetFeatureM
          * @param theStartSignal
          * @param theDoneSignal
          */
-        WMSFeatureStoreStaxReaderTask(@Nonnull(when = NEVER) String theFileName, @Nonnull(when = NEVER) CountDownLatch theStartSignal,
+        WMSFeatureStoreStaxReaderGml3Task(@Nonnull(when = NEVER) String theFileName, @Nonnull(when = NEVER) CountDownLatch theStartSignal,
                 @Nonnull(when = NEVER) CountDownLatch theDoneSignal, @Nonnull(when = NEVER) AtomicInteger theCounter) {
             checkArgument((theFileName != null) && !(theFileName.trim().isEmpty()), "The Parameter fileName must not be null or an empty string.");
             checkArgument(theStartSignal != null, "The Parameter startSignal must not be null.");

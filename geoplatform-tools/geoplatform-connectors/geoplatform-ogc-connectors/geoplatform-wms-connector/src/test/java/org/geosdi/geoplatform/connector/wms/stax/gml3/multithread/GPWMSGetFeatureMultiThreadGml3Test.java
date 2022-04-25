@@ -33,25 +33,34 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.persistence.dao.spring;
+package org.geosdi.geoplatform.connector.wms.stax.gml3.multithread;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.transaction.annotation.Transactional;
+import org.junit.BeforeClass;
 
-import java.io.Serializable;
-import java.util.Optional;
+import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
+
+import static java.io.File.separator;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toCollection;
+import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.connector.wms.stax.gml3.WMSGetFeatureInfoReaderGml3FileLoaderTest.toStreamFilesName;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Transactional(transactionManager = "gpTransactionManager")
-public interface GeoPlatformJpaRepository<T extends Object, ID extends Serializable> extends JpaRepository<T, ID> {
+public abstract class GPWMSGetFeatureMultiThreadGml3Test {
 
-    /**
-     * @param id
-     * @return {@link Optional<T>}
-     */
-    @Override
-    Optional<T> findById(ID id);
+    protected static List<String> files;
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "stax", "gml3")
+                .collect(joining(separator, "", separator));
+        files = toStreamFilesName()
+                .map(basePath::concat)
+                .collect(toCollection(LinkedList::new));
+    }
 }

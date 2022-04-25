@@ -33,25 +33,34 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.persistence.dao.spring;
+package org.geosdi.geoplatform.connector.wms;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.transaction.annotation.Transactional;
+import org.junit.BeforeClass;
+import org.junit.experimental.theories.DataPoints;
 
-import java.io.Serializable;
-import java.util.Optional;
+import java.io.File;
+
+import static java.io.File.separator;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.connector.wms.stax.gml3.WMSGetFeatureInfoReaderGml3FileLoaderTest.toArrayFilesName;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Transactional(transactionManager = "gpTransactionManager")
-public interface GeoPlatformJpaRepository<T extends Object, ID extends Serializable> extends JpaRepository<T, ID> {
+public class WMSGetFeatureInfoTheoriesGml3Test {
 
-    /**
-     * @param id
-     * @return {@link Optional<T>}
-     */
-    @Override
-    Optional<T> findById(ID id);
+    protected static String dirFiles;
+
+    @BeforeClass
+    public static void buildDirFiles() throws Exception {
+        dirFiles = of(new File(".").getCanonicalPath(), "src", "test", "resources", "stax", "gml3")
+                .collect(joining(separator, "", separator));
+    }
+
+    @DataPoints
+    public static String[] data() {
+        return toArrayFilesName();
+    }
 }

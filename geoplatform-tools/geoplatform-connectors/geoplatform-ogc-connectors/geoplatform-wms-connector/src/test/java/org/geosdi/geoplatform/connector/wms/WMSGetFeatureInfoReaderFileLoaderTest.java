@@ -68,7 +68,7 @@ public class WMSGetFeatureInfoReaderFileLoaderTest {
             WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE, NON_NULL);
     //
-    private static String basePath;
+    protected static String basePath;
     protected static IGPConnectorFileStorage storage;
 
     @BeforeClass
@@ -82,14 +82,14 @@ public class WMSGetFeatureInfoReaderFileLoaderTest {
 
     /**
      * @param theValue
-     * @return {@link  GPConnectorFile}
+     * @return {@link GPConnectorFile}
      */
-    static GPConnectorFile toGPConnectorFile(@Nonnull(when = NEVER) String theValue) {
+    protected static GPConnectorFile toGPConnectorFile(@Nonnull(when = NEVER) String theValue) {
         return new GPConnectorFile(theValue, new File(basePath.concat(theValue)));
     }
 
     /**
-     * @return {@link  Stream<String>}
+     * @return {@link Stream<String>}
      */
     public static Stream<String> toStreamFilesName() {
         return of("geoserver-Vigneti-GetFeatureInfo.xml", "geoserver-GetFeatureInfo.xml",

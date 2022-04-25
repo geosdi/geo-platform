@@ -1,0 +1,1286 @@
+<wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:tmp="www.sir.toscana.it/sitc" xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="0"
+                       timeStamp="2022-04-15T06:00:09.891Z"
+                       xsi:schemaLocation="www.sir.toscana.it/sitc https://wms.cfr.toscana.it/geoserver/tmp/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=tmp%3Afrea_covid_010420_160420 http://www.opengis.net/wfs https://wms.cfr.toscana.it/geoserver/schemas/wfs/1.1.0/wfs.xsd">
+    <gml:featureMembers>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6636">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1692277.63 4874794.28</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000039</tmp:idstazione>
+            <tmp:nome>Pozzo S.Piero</tmp:nome>
+            <tmp:cis>Corpo Idrico della Sieve</tmp:cis>
+            <tmp:codice_ci>11AR050</tmp:codice_ci>
+            <tmp:liv_data1>-8.17</tmp:liv_data1>
+            <tmp:liv_data2>-9.045</tmp:liv_data2>
+            <tmp:delta>-0.875</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6635">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1732583 4818207</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000064</tmp:idstazione>
+            <tmp:nome>Piez. Arezzo</tmp:nome>
+            <tmp:cis>Corpo Idrico del Valdarno Superiore, Arezzo e Casentino - Zona Arezzo</tmp:cis>
+            <tmp:codice_ci>11AR042</tmp:codice_ci>
+            <tmp:liv_data1>-5.07</tmp:liv_data1>
+            <tmp:liv_data2>-5.68</tmp:liv_data2>
+            <tmp:delta>-0.610</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6634">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1732316 4785303</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000068</tmp:idstazione>
+            <tmp:nome>Piez. Le Chianacce</tmp:nome>
+            <tmp:cis>Corpo Idrico della Val di Chiana</tmp:cis>
+            <tmp:codice_ci>11AR030</tmp:codice_ci>
+            <tmp:liv_data1>-2.834</tmp:liv_data1>
+            <tmp:liv_data2>-3.422</tmp:liv_data2>
+            <tmp:delta>-0.588</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6633">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1728235 4803358</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000638</tmp:idstazione>
+            <tmp:nome>Frassineto</tmp:nome>
+            <tmp:cis>Corpo Idrico della Val di Chiana</tmp:cis>
+            <tmp:codice_ci>11AR030</tmp:codice_ci>
+            <tmp:liv_data1>-4.372</tmp:liv_data1>
+            <tmp:liv_data2>-4.946</tmp:liv_data2>
+            <tmp:delta>-0.574</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6632">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1666443 4863185</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000036</tmp:idstazione>
+            <tmp:nome>Maliseti</tmp:nome>
+            <tmp:cis>Corpo Idrico della Piana Firenze, Prato, Pistoia - Zona Prato</tmp:cis>
+            <tmp:codice_ci>11AR012</tmp:codice_ci>
+            <tmp:liv_data1>-5.721</tmp:liv_data1>
+            <tmp:liv_data2>-6.293</tmp:liv_data2>
+            <tmp:delta>-0.572</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6631">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1729055 4798241</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000627</tmp:idstazione>
+            <tmp:nome>Cesa_L1</tmp:nome>
+            <tmp:cis>Corpo Idrico della Val di Chiana</tmp:cis>
+            <tmp:codice_ci>11AR030</tmp:codice_ci>
+            <tmp:liv_data1>-2.938</tmp:liv_data1>
+            <tmp:liv_data2>-3.491</tmp:liv_data2>
+            <tmp:delta>-0.553</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6630">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1604797 4866062</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000628</tmp:idstazione>
+            <tmp:nome>Via Romboni</tmp:nome>
+            <tmp:cis>corpo idrico della Versilia e Riviera Apuana</tmp:cis>
+            <tmp:codice_ci>33TN010</tmp:codice_ci>
+            <tmp:liv_data1>-6.21</tmp:liv_data1>
+            <tmp:liv_data2>-6.718</tmp:liv_data2>
+            <tmp:delta>-0.508</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-662f">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1625288.22 4829734.01</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000003</tmp:idstazione>
+            <tmp:nome>Torre a Cenaia</tmp:nome>
+            <tmp:cis>Corpo Idrico del Valdarno Inferiore e Piana Costiera Pisana - Zona Lavaiano, Mortaiolo</tmp:cis>
+            <tmp:codice_ci>11AR023</tmp:codice_ci>
+            <tmp:liv_data1>-9.856</tmp:liv_data1>
+            <tmp:liv_data2>-10.361</tmp:liv_data2>
+            <tmp:delta>-0.505</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-662e">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1736401 4801784</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000643</tmp:idstazione>
+            <tmp:nome>Castiglionfiorentino</tmp:nome>
+            <tmp:cis>Corpo Idrico della Val di Chiana</tmp:cis>
+            <tmp:codice_ci>11AR030</tmp:codice_ci>
+            <tmp:liv_data1>-1.937</tmp:liv_data1>
+            <tmp:liv_data2>-2.286</tmp:liv_data2>
+            <tmp:delta>-0.349</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-662d">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1667883 4747724</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000072</tmp:idstazione>
+            <tmp:nome>Piez. C Braccagni</tmp:nome>
+            <tmp:cis>Corpo Idrico della Pianura di Grosseto</tmp:cis>
+            <tmp:codice_ci>31OM010</tmp:codice_ci>
+            <tmp:liv_data1>-0.748</tmp:liv_data1>
+            <tmp:liv_data2>-1.075</tmp:liv_data2>
+            <tmp:delta>-0.327</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-662c">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1628204 4783711</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000032</tmp:idstazione>
+            <tmp:nome>10745 - Campi al Mare</tmp:nome>
+            <tmp:cis>Acquifero costiero tra Fiume Cecina e S. Vincenzo</tmp:cis>
+            <tmp:codice_ci>32CT010</tmp:codice_ci>
+            <tmp:liv_data1>-2.544</tmp:liv_data1>
+            <tmp:liv_data2>-2.815</tmp:liv_data2>
+            <tmp:delta>-0.271</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-662b">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1632777 4765356</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000011</tmp:idstazione>
+            <tmp:nome>Montioncello</tmp:nome>
+            <tmp:cis>Corpo Idrico della Pianura del Fiume Cornia</tmp:cis>
+            <tmp:codice_ci>32CT020</tmp:codice_ci>
+            <tmp:liv_data1>-12.145</tmp:liv_data1>
+            <tmp:liv_data2>-12.406</tmp:liv_data2>
+            <tmp:delta>-0.261</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-662a">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1729055 4798241</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000673</tmp:idstazione>
+            <tmp:nome>Cesa_L2</tmp:nome>
+            <tmp:cis>Corpo Idrico della Val di Chiana</tmp:cis>
+            <tmp:codice_ci>11AR030</tmp:codice_ci>
+            <tmp:liv_data1>-1.505</tmp:liv_data1>
+            <tmp:liv_data2>-1.748</tmp:liv_data2>
+            <tmp:delta>-0.243</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6629">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1673465.24 4737847.34</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000024</tmp:idstazione>
+            <tmp:nome>Europa</tmp:nome>
+            <tmp:cis>Corpo Idrico della Pianura di Grosseto</tmp:cis>
+            <tmp:codice_ci>31OM010</tmp:codice_ci>
+            <tmp:liv_data1>-7.285</tmp:liv_data1>
+            <tmp:liv_data2>-7.526</tmp:liv_data2>
+            <tmp:delta>-0.241</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6628">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1630611 4850734</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000655</tmp:idstazione>
+            <tmp:nome>Corte Spagni</tmp:nome>
+            <tmp:cis>corpo idrico della Pianura di Lucca - zona Bientina</tmp:cis>
+            <tmp:codice_ci>11AR028</tmp:codice_ci>
+            <tmp:liv_data1>-4.627</tmp:liv_data1>
+            <tmp:liv_data2>-4.858</tmp:liv_data2>
+            <tmp:delta>-0.231</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6627">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1616059 4840153</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000647</tmp:idstazione>
+            <tmp:nome>Campo sportivo</tmp:nome>
+            <tmp:cis>Corpo Idrico del Valdarno Inferiore e Piana Costiera Pisana - Zona Pisa - falda profonda</tmp:cis>
+            <tmp:codice_ci>11AR020-1</tmp:codice_ci>
+            <tmp:liv_data1>-5.638</tmp:liv_data1>
+            <tmp:liv_data2>-5.862</tmp:liv_data2>
+            <tmp:delta>-0.224</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6626">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1651206.85 4842208.17</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000008</tmp:idstazione>
+            <tmp:nome>Isola Bocca d'Elsa</tmp:nome>
+            <tmp:cis>Corpo Idrico del Valdarno Inferiore e Piana Costiera Pisana - Zona S. Croce</tmp:cis>
+            <tmp:codice_ci>11AR024</tmp:codice_ci>
+            <tmp:liv_data1>-11.747</tmp:liv_data1>
+            <tmp:liv_data2>-11.963</tmp:liv_data2>
+            <tmp:delta>-0.216</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6625">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1613665 4853692</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000656</tmp:idstazione>
+            <tmp:nome>Nozzano</tmp:nome>
+            <tmp:cis>corpo idrico della pianura di Lucca - zona freatica e del Serchio</tmp:cis>
+            <tmp:codice_ci>12SE011</tmp:codice_ci>
+            <tmp:liv_data1>-2.956</tmp:liv_data1>
+            <tmp:liv_data2>-3.167</tmp:liv_data2>
+            <tmp:delta>-0.211</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6624">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1673590 4727556</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000074</tmp:idstazione>
+            <tmp:nome>Piez. F Alberese</tmp:nome>
+            <tmp:cis>Corpo Idrico della Pianura di Grosseto</tmp:cis>
+            <tmp:codice_ci>31OM010</tmp:codice_ci>
+            <tmp:liv_data1>-1.96</tmp:liv_data1>
+            <tmp:liv_data2>-2.171</tmp:liv_data2>
+            <tmp:delta>-0.211</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6623">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1627124 4854875</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000614</tmp:idstazione>
+            <tmp:nome>PAGANICO - Piez Est</tmp:nome>
+            <tmp:cis>corpo idrico della Pianura di Lucca - zona Bientina</tmp:cis>
+            <tmp:codice_ci>11AR028</tmp:codice_ci>
+            <tmp:liv_data1>-1.817</tmp:liv_data1>
+            <tmp:liv_data2>-2.004</tmp:liv_data2>
+            <tmp:delta>-0.187</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6622">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1577290 4897004</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000619</tmp:idstazione>
+            <tmp:nome>BANDITA 7</tmp:nome>
+            <tmp:cis>Acquifero del Magra</tmp:cis>
+            <tmp:codice_ci>21MA010</tmp:codice_ci>
+            <tmp:liv_data1>-3.026</tmp:liv_data1>
+            <tmp:liv_data2>-3.209</tmp:liv_data2>
+            <tmp:delta>-0.183</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6621">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1619798 4856586</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000657</tmp:idstazione>
+            <tmp:nome>S.Alessio</tmp:nome>
+            <tmp:cis>corpo idrico della pianura di Lucca - zona freatica e del Serchio</tmp:cis>
+            <tmp:codice_ci>12SE011</tmp:codice_ci>
+            <tmp:liv_data1>-5.122</tmp:liv_data1>
+            <tmp:liv_data2>-5.304</tmp:liv_data2>
+            <tmp:delta>-0.182</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6620">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1594607 4870355</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000624</tmp:idstazione>
+            <tmp:nome>Cugnia</tmp:nome>
+            <tmp:cis>corpo idrico della Versilia e Riviera Apuana</tmp:cis>
+            <tmp:codice_ci>33TN010</tmp:codice_ci>
+            <tmp:liv_data1>-1.61</tmp:liv_data1>
+            <tmp:liv_data2>-1.788</tmp:liv_data2>
+            <tmp:delta>-0.178</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-661f">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1671335.66 4730065.85</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000023</tmp:idstazione>
+            <tmp:nome>Pozzo Corsica</tmp:nome>
+            <tmp:cis>Corpo Idrico della Pianura di Grosseto</tmp:cis>
+            <tmp:codice_ci>31OM010</tmp:codice_ci>
+            <tmp:liv_data1>-4.413</tmp:liv_data1>
+            <tmp:liv_data2>-4.583</tmp:liv_data2>
+            <tmp:delta>-0.170</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-661e">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1708081 4823144</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000010</tmp:idstazione>
+            <tmp:nome>Liceo Scientifico Montevarchi</tmp:nome>
+            <tmp:cis>Corpo Idrico del Valdarno Superiore, Arezzo e Casentino - Zona Valdarno Superiore</tmp:cis>
+            <tmp:codice_ci>11AR041</tmp:codice_ci>
+            <tmp:liv_data1>-6.607</tmp:liv_data1>
+            <tmp:liv_data2>-6.777</tmp:liv_data2>
+            <tmp:delta>-0.170</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-661d">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1725925.5 4841348.3</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000040</tmp:idstazione>
+            <tmp:nome>Pozzo Le Chiane</tmp:nome>
+            <tmp:cis>Corpo Idrico del Valdarno Superiore, Arezzo e Casentino - Zona Casentino</tmp:cis>
+            <tmp:codice_ci>11AR043</tmp:codice_ci>
+            <tmp:liv_data1>-2.834</tmp:liv_data1>
+            <tmp:liv_data2>-3.002</tmp:liv_data2>
+            <tmp:delta>-0.168</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-661c">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1655716.8 4842371.17</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000020</tmp:idstazione>
+            <tmp:nome>Giardino Val Gardena</tmp:nome>
+            <tmp:cis>Corpo Idrico del Valdarno Inferiore e Piana Costiera Pisana - Zona Empoli</tmp:cis>
+            <tmp:codice_ci>11AR025</tmp:codice_ci>
+            <tmp:liv_data1>-11.438</tmp:liv_data1>
+            <tmp:liv_data2>-11.6</tmp:liv_data2>
+            <tmp:delta>-0.162</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-661b">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1667003.17 4740346.92</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000021</tmp:idstazione>
+            <tmp:nome>Pozzo Aquilani</tmp:nome>
+            <tmp:cis>Corpo Idrico della Pianura di Grosseto</tmp:cis>
+            <tmp:codice_ci>31OM010</tmp:codice_ci>
+            <tmp:liv_data1>0.312</tmp:liv_data1>
+            <tmp:liv_data2>0.15</tmp:liv_data2>
+            <tmp:delta>-0.162</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-661a">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1629720 4759963</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000049</tmp:idstazione>
+            <tmp:nome>La Sdriscia</tmp:nome>
+            <tmp:cis>Corpo Idrico della Pianura del Fiume Cornia</tmp:cis>
+            <tmp:codice_ci>32CT020</tmp:codice_ci>
+            <tmp:liv_data1>-2.278</tmp:liv_data1>
+            <tmp:liv_data2>-2.438</tmp:liv_data2>
+            <tmp:delta>-0.160</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6619">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1621293 4798576</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000601</tmp:idstazione>
+            <tmp:nome>5A</tmp:nome>
+            <tmp:cis>Corpo idrico costiero tra Fiume Fine e Fiume Cecina</tmp:cis>
+            <tmp:codice_ci>32CT030</tmp:codice_ci>
+            <tmp:liv_data1>-6.105</tmp:liv_data1>
+            <tmp:liv_data2>-6.256</tmp:liv_data2>
+            <tmp:delta>-0.151</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6618">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1729774.81 4820545.74</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000015</tmp:idstazione>
+            <tmp:nome>Pozzo Triangolo Cave Quarata</tmp:nome>
+            <tmp:cis>Corpo Idrico del Valdarno Superiore, Arezzo e Casentino - Zona Arezzo</tmp:cis>
+            <tmp:codice_ci>11AR042</tmp:codice_ci>
+            <tmp:liv_data1>-4.03</tmp:liv_data1>
+            <tmp:liv_data2>-4.178</tmp:liv_data2>
+            <tmp:delta>-0.148</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6617">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1653300.93 4839434.92</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000017</tmp:idstazione>
+            <tmp:nome>Cefalonia</tmp:nome>
+            <tmp:cis>Corpo Idrico dell'Elsa</tmp:cis>
+            <tmp:codice_ci>11AR060</tmp:codice_ci>
+            <tmp:liv_data1>-1.715</tmp:liv_data1>
+            <tmp:liv_data2>-1.86</tmp:liv_data2>
+            <tmp:delta>-0.145</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6616">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1594940 4867725</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000631</tmp:idstazione>
+            <tmp:nome>Percorso Vita</tmp:nome>
+            <tmp:cis>corpo idrico della Versilia e Riviera Apuana</tmp:cis>
+            <tmp:codice_ci>33TN010</tmp:codice_ci>
+            <tmp:liv_data1>-0.542</tmp:liv_data1>
+            <tmp:liv_data2>-0.685</tmp:liv_data2>
+            <tmp:delta>-0.143</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6615">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1621598 4857376</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000659</tmp:idstazione>
+            <tmp:nome>Salicchi</tmp:nome>
+            <tmp:cis>corpo idrico della pianura di Lucca - zona freatica e del Serchio</tmp:cis>
+            <tmp:codice_ci>12SE011</tmp:codice_ci>
+            <tmp:liv_data1>-5.258</tmp:liv_data1>
+            <tmp:liv_data2>-5.401</tmp:liv_data2>
+            <tmp:delta>-0.143</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6614">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1604383.74 4833463.32</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000059</tmp:idstazione>
+            <tmp:nome>D2_P_S_Rossore</tmp:nome>
+            <tmp:cis>Corpo Idrico del Valdarno Inferiore e Piana Costiera Pisana - Zona Pisa</tmp:cis>
+            <tmp:codice_ci>11AR020</tmp:codice_ci>
+            <tmp:liv_data1>-0.451</tmp:liv_data1>
+            <tmp:liv_data2>-0.594</tmp:liv_data2>
+            <tmp:delta>-0.143</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6613">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1665111.62 4822804.2</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000016</tmp:idstazione>
+            <tmp:nome>Certaldo</tmp:nome>
+            <tmp:cis>Corpo Idrico dell'Elsa</tmp:cis>
+            <tmp:codice_ci>11AR060</tmp:codice_ci>
+            <tmp:liv_data1>-4.938</tmp:liv_data1>
+            <tmp:liv_data2>-5.079</tmp:liv_data2>
+            <tmp:delta>-0.141</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6612">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1588594 4875413</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000629</tmp:idstazione>
+            <tmp:nome>Unimin</tmp:nome>
+            <tmp:cis>corpo idrico della Versilia e Riviera Apuana</tmp:cis>
+            <tmp:codice_ci>33TN010</tmp:codice_ci>
+            <tmp:liv_data1>-14.526</tmp:liv_data1>
+            <tmp:liv_data2>-14.666</tmp:liv_data2>
+            <tmp:delta>-0.140</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6611">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1591180 4870859</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000625</tmp:idstazione>
+            <tmp:nome>Sat 1</tmp:nome>
+            <tmp:cis>corpo idrico della Versilia e Riviera Apuana</tmp:cis>
+            <tmp:codice_ci>33TN010</tmp:codice_ci>
+            <tmp:liv_data1>-0.783</tmp:liv_data1>
+            <tmp:liv_data2>-0.915</tmp:liv_data2>
+            <tmp:delta>-0.132</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6610">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1620021 4853656</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000658</tmp:idstazione>
+            <tmp:nome>Ronco</tmp:nome>
+            <tmp:cis>corpo idrico della pianura di Lucca - zona freatica e del Serchio</tmp:cis>
+            <tmp:codice_ci>12SE011</tmp:codice_ci>
+            <tmp:liv_data1>0.085</tmp:liv_data1>
+            <tmp:liv_data2>-0.043</tmp:liv_data2>
+            <tmp:delta>-0.128</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-660f">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1627662 4791230</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000041</tmp:idstazione>
+            <tmp:nome>13588 - Doccioni</tmp:nome>
+            <tmp:cis>Acquifero costiero tra Fiume Cecina e S. Vincenzo</tmp:cis>
+            <tmp:codice_ci>32CT010</tmp:codice_ci>
+            <tmp:liv_data1>-12.73</tmp:liv_data1>
+            <tmp:liv_data2>-12.852</tmp:liv_data2>
+            <tmp:delta>-0.122</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-660e">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1639252 4798360</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000609</tmp:idstazione>
+            <tmp:nome>Rufione</tmp:nome>
+            <tmp:cis>Corpo Idrico del Cecina</tmp:cis>
+            <tmp:codice_ci>32CT050</tmp:codice_ci>
+            <tmp:liv_data1>-3.175</tmp:liv_data1>
+            <tmp:liv_data2>-3.29</tmp:liv_data2>
+            <tmp:delta>-0.115</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-660d">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1645454.723 4801602.429</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000603</tmp:idstazione>
+            <tmp:nome>Canova</tmp:nome>
+            <tmp:cis>Corpo Idrico del Cecina</tmp:cis>
+            <tmp:codice_ci>32CT050</tmp:codice_ci>
+            <tmp:liv_data1>-1.88</tmp:liv_data1>
+            <tmp:liv_data2>-1.993</tmp:liv_data2>
+            <tmp:delta>-0.113</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-660c">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1619902 4836681</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000646</tmp:idstazione>
+            <tmp:nome>Depuratore Cascina</tmp:nome>
+            <tmp:cis>Corpo Idrico del Valdarno Inferiore e Piana Costiera Pisana - Zona Pisa</tmp:cis>
+            <tmp:codice_ci>11AR020</tmp:codice_ci>
+            <tmp:liv_data1>-3.12</tmp:liv_data1>
+            <tmp:liv_data2>-3.232</tmp:liv_data2>
+            <tmp:delta>-0.112</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-660b">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1674308.37 4857506.12</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000019</tmp:idstazione>
+            <tmp:nome>Terna</tmp:nome>
+            <tmp:cis>Corpo Idrico della Piana Firenze, Prato, Pistoia - Zona Firenze</tmp:cis>
+            <tmp:codice_ci>11AR011</tmp:codice_ci>
+            <tmp:liv_data1>-2.9</tmp:liv_data1>
+            <tmp:liv_data2>-3.002</tmp:liv_data2>
+            <tmp:delta>-0.102</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-660a">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1644382 4801452</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000602</tmp:idstazione>
+            <tmp:nome>Ginori S7</tmp:nome>
+            <tmp:cis>Corpo Idrico del Cecina</tmp:cis>
+            <tmp:codice_ci>32CT050</tmp:codice_ci>
+            <tmp:liv_data1>-2.998</tmp:liv_data1>
+            <tmp:liv_data2>-3.097</tmp:liv_data2>
+            <tmp:delta>-0.099</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6609">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1647214 4754398</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000050</tmp:idstazione>
+            <tmp:nome>La Botte</tmp:nome>
+            <tmp:cis>Corpo Idrico della Pianura di Follonica</tmp:cis>
+            <tmp:codice_ci>32CT040</tmp:codice_ci>
+            <tmp:liv_data1>-2.435</tmp:liv_data1>
+            <tmp:liv_data2>-2.53</tmp:liv_data2>
+            <tmp:delta>-0.095</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6608">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1605751.11609195 4841784.84724744</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000048</tmp:idstazione>
+            <tmp:nome>San Rossore</tmp:nome>
+            <tmp:cis>Corpo Idrico del Valdarno Inferiore e Piana Costiera Pisana - Zona Pisa</tmp:cis>
+            <tmp:codice_ci>11AR020</tmp:codice_ci>
+            <tmp:liv_data1>-1.795</tmp:liv_data1>
+            <tmp:liv_data2>-1.89</tmp:liv_data2>
+            <tmp:delta>-0.095</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6607">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1666389 4734552</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000012</tmp:idstazione>
+            <tmp:nome>Piez.14 Strillaie</tmp:nome>
+            <tmp:cis>Corpo Idrico della Pianura di Grosseto</tmp:cis>
+            <tmp:codice_ci>31OM010</tmp:codice_ci>
+            <tmp:liv_data1>-0.81</tmp:liv_data1>
+            <tmp:liv_data2>-0.9</tmp:liv_data2>
+            <tmp:delta>-0.090</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6606">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1603093 4855298</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000053</tmp:idstazione>
+            <tmp:nome>Flor Export</tmp:nome>
+            <tmp:cis>corpo idrico della Versilia e Riviera Apuana</tmp:cis>
+            <tmp:codice_ci>33TN010</tmp:codice_ci>
+            <tmp:liv_data1>-0.908</tmp:liv_data1>
+            <tmp:liv_data2>-0.998</tmp:liv_data2>
+            <tmp:delta>-0.090</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6605">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1641864.56 4799848.437</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000695</tmp:idstazione>
+            <tmp:nome>Piano Cortolla bis</tmp:nome>
+            <tmp:cis>Corpo Idrico del Cecina</tmp:cis>
+            <tmp:codice_ci>32CT050</tmp:codice_ci>
+            <tmp:liv_data1>-3.132</tmp:liv_data1>
+            <tmp:liv_data2>-3.22</tmp:liv_data2>
+            <tmp:delta>-0.088</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6604">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1671674.19 4858595.66</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000035</tmp:idstazione>
+            <tmp:nome>La Querce</tmp:nome>
+            <tmp:cis>Corpo Idrico della Piana Firenze, Prato, Pistoia - Zona Prato</tmp:cis>
+            <tmp:codice_ci>11AR012</tmp:codice_ci>
+            <tmp:liv_data1>-2.877</tmp:liv_data1>
+            <tmp:liv_data2>-2.965</tmp:liv_data2>
+            <tmp:delta>-0.088</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6603">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1694367.03 4869253.64</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000034</tmp:idstazione>
+            <tmp:nome>La Gracchia</tmp:nome>
+            <tmp:cis>Corpo Idrico della Sieve</tmp:cis>
+            <tmp:codice_ci>11AR050</tmp:codice_ci>
+            <tmp:liv_data1>-2.763</tmp:liv_data1>
+            <tmp:liv_data2>-2.85</tmp:liv_data2>
+            <tmp:delta>-0.087</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6602">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1652676 4798878</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000604</tmp:idstazione>
+            <tmp:nome>S.Dionisa</tmp:nome>
+            <tmp:cis>Corpo Idrico del Cecina</tmp:cis>
+            <tmp:codice_ci>32CT050</tmp:codice_ci>
+            <tmp:liv_data1>-2.423</tmp:liv_data1>
+            <tmp:liv_data2>-2.51</tmp:liv_data2>
+            <tmp:delta>-0.087</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6601">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1679020 4851110</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000644</tmp:idstazione>
+            <tmp:nome>Novoli</tmp:nome>
+            <tmp:cis>Corpo Idrico della Piana Firenze, Prato, Pistoia - Zona Firenze</tmp:cis>
+            <tmp:codice_ci>11AR011</tmp:codice_ci>
+            <tmp:liv_data1>-13.797</tmp:liv_data1>
+            <tmp:liv_data2>-13.872</tmp:liv_data2>
+            <tmp:delta>-0.075</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-6600">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1607182.62 4836821</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000030</tmp:idstazione>
+            <tmp:nome>Podere Cipollini</tmp:nome>
+            <tmp:cis>Corpo Idrico del Valdarno Inferiore e Piana Costiera Pisana - Zona Pisa - falda profonda</tmp:cis>
+            <tmp:codice_ci>11AR020-1</tmp:codice_ci>
+            <tmp:liv_data1>-0.746</tmp:liv_data1>
+            <tmp:liv_data2>-0.818</tmp:liv_data2>
+            <tmp:delta>-0.072</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65ff">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1626128.74 4770662.87</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000027</tmp:idstazione>
+            <tmp:nome>Piez.Guardamare</tmp:nome>
+            <tmp:cis>corpo idrico del terrazzo di San Vincenzo</tmp:cis>
+            <tmp:codice_ci>32CT021</tmp:codice_ci>
+            <tmp:liv_data1>-23.878</tmp:liv_data1>
+            <tmp:liv_data2>-23.948</tmp:liv_data2>
+            <tmp:delta>-0.070</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65fe">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1606217.75 4827770.28</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000061</tmp:idstazione>
+            <tmp:nome>D6_P_S_Rossore</tmp:nome>
+            <tmp:cis>Corpo Idrico del Valdarno Inferiore e Piana Costiera Pisana - Zona Pisa</tmp:cis>
+            <tmp:codice_ci>11AR020</tmp:codice_ci>
+            <tmp:liv_data1>0.662</tmp:liv_data1>
+            <tmp:liv_data2>0.598</tmp:liv_data2>
+            <tmp:delta>-0.064</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65fd">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1655419 4797146</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000610</tmp:idstazione>
+            <tmp:nome>Puretta 15</tmp:nome>
+            <tmp:cis>Corpo Idrico del Cecina</tmp:cis>
+            <tmp:codice_ci>32CT050</tmp:codice_ci>
+            <tmp:liv_data1>-2.165</tmp:liv_data1>
+            <tmp:liv_data2>-2.223</tmp:liv_data2>
+            <tmp:delta>-0.058</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65fc">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1631371 4843523</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000047</tmp:idstazione>
+            <tmp:nome>La Tura 2</tmp:nome>
+            <tmp:cis>corpo idrico della Pianura di Lucca - zona Bientina</tmp:cis>
+            <tmp:codice_ci>11AR028</tmp:codice_ci>
+            <tmp:liv_data1>-12.185</tmp:liv_data1>
+            <tmp:liv_data2>-12.243</tmp:liv_data2>
+            <tmp:delta>-0.058</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65fb">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1735628 4795363</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000066</tmp:idstazione>
+            <tmp:nome>Piez. La Fratta</tmp:nome>
+            <tmp:cis>Corpo Idrico della Val di Chiana</tmp:cis>
+            <tmp:codice_ci>11AR030</tmp:codice_ci>
+            <tmp:liv_data1>-2.185</tmp:liv_data1>
+            <tmp:liv_data2>-2.242</tmp:liv_data2>
+            <tmp:delta>-0.057</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65fa">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1652383.58 4866517.54</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000004</tmp:idstazione>
+            <tmp:nome>P13</tmp:nome>
+            <tmp:cis>Corpo Idrico della Piana Firenze, Prato, Pistoia - Zona Pistoia</tmp:cis>
+            <tmp:codice_ci>11AR013</tmp:codice_ci>
+            <tmp:liv_data1>-4.901</tmp:liv_data1>
+            <tmp:liv_data2>-4.955</tmp:liv_data2>
+            <tmp:delta>-0.054</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65f9">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1652436.7 4864766.27</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000005</tmp:idstazione>
+            <tmp:nome>P26</tmp:nome>
+            <tmp:cis>Corpo Idrico della Piana Firenze, Prato, Pistoia - Zona Pistoia</tmp:cis>
+            <tmp:codice_ci>11AR013</tmp:codice_ci>
+            <tmp:liv_data1>-1.216</tmp:liv_data1>
+            <tmp:liv_data2>-1.267</tmp:liv_data2>
+            <tmp:delta>-0.051</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65f8">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1606031.4 4830799.33</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000037</tmp:idstazione>
+            <tmp:nome>RMS 51</tmp:nome>
+            <tmp:cis>Corpo Idrico del Valdarno Inferiore e Piana Costiera Pisana - Zona Pisa</tmp:cis>
+            <tmp:codice_ci>11AR020</tmp:codice_ci>
+            <tmp:liv_data1>-1.67</tmp:liv_data1>
+            <tmp:liv_data2>-1.72</tmp:liv_data2>
+            <tmp:delta>-0.050</tmp:delta>
+            <tmp:trend>delta negativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65f7">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1730293.98 4786323.75</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000007</tmp:idstazione>
+            <tmp:nome>ex Campo Pozzi CIGAF</tmp:nome>
+            <tmp:cis>Corpo Idrico della Val di Chiana</tmp:cis>
+            <tmp:codice_ci>11AR030</tmp:codice_ci>
+            <tmp:liv_data1>-2.03</tmp:liv_data1>
+            <tmp:liv_data2>-2.076</tmp:liv_data2>
+            <tmp:delta>-0.046</tmp:delta>
+            <tmp:trend>delta stabile</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65f6">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1665794.39 4731570.95</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000013</tmp:idstazione>
+            <tmp:nome>Piez.19 Strillaie</tmp:nome>
+            <tmp:cis>Corpo Idrico della Pianura di Grosseto</tmp:cis>
+            <tmp:codice_ci>31OM010</tmp:codice_ci>
+            <tmp:liv_data1>-1.957</tmp:liv_data1>
+            <tmp:liv_data2>-2.0</tmp:liv_data2>
+            <tmp:delta>-0.043</tmp:delta>
+            <tmp:trend>delta stabile</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65f5">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1659990.782 4795541.215</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000611</tmp:idstazione>
+            <tmp:nome>Tormentaia</tmp:nome>
+            <tmp:cis>Corpo Idrico del Cecina</tmp:cis>
+            <tmp:codice_ci>32CT050</tmp:codice_ci>
+            <tmp:liv_data1>-2.12</tmp:liv_data1>
+            <tmp:liv_data2>-2.163</tmp:liv_data2>
+            <tmp:delta>-0.043</tmp:delta>
+            <tmp:trend>delta stabile</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65f4">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1699060.08 4833173.33</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000006</tmp:idstazione>
+            <tmp:nome>IP - Figline</tmp:nome>
+            <tmp:cis>Corpo Idrico del Valdarno Superiore, Arezzo e Casentino - Zona Valdarno Superiore</tmp:cis>
+            <tmp:codice_ci>11AR041</tmp:codice_ci>
+            <tmp:liv_data1>-6.529</tmp:liv_data1>
+            <tmp:liv_data2>-6.57</tmp:liv_data2>
+            <tmp:delta>-0.041</tmp:delta>
+            <tmp:trend>delta stabile</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65f3">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1606497 4851106</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000054</tmp:idstazione>
+            <tmp:nome>Costanza</tmp:nome>
+            <tmp:cis>corpo idrico della Versilia e Riviera Apuana</tmp:cis>
+            <tmp:codice_ci>33TN010</tmp:codice_ci>
+            <tmp:liv_data1>-1.07</tmp:liv_data1>
+            <tmp:liv_data2>-1.11</tmp:liv_data2>
+            <tmp:delta>-0.040</tmp:delta>
+            <tmp:trend>delta stabile</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65f2">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1627943.037 4799921.476</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000672</tmp:idstazione>
+            <tmp:nome>Steccaia sub</tmp:nome>
+            <tmp:cis>Corpo Idrico del Cecina</tmp:cis>
+            <tmp:codice_ci>32CT050</tmp:codice_ci>
+            <tmp:liv_data1>-1.64</tmp:liv_data1>
+            <tmp:liv_data2>-1.68</tmp:liv_data2>
+            <tmp:delta>-0.040</tmp:delta>
+            <tmp:trend>delta stabile</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65f1">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1612688.427 4841488.424</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000063</tmp:idstazione>
+            <tmp:nome>Piazza Dante</tmp:nome>
+            <tmp:cis>Corpo Idrico del Valdarno Inferiore e Piana Costiera Pisana - Zona Pisa</tmp:cis>
+            <tmp:codice_ci>11AR020</tmp:codice_ci>
+            <tmp:liv_data1>-2.021</tmp:liv_data1>
+            <tmp:liv_data2>-2.06</tmp:liv_data2>
+            <tmp:delta>-0.039</tmp:delta>
+            <tmp:trend>delta stabile</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65f0">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1674698 4813778</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000635</tmp:idstazione>
+            <tmp:nome>Ferrovia bis</tmp:nome>
+            <tmp:cis>Corpo Idrico dell'Elsa</tmp:cis>
+            <tmp:codice_ci>11AR060</tmp:codice_ci>
+            <tmp:liv_data1>-4.409</tmp:liv_data1>
+            <tmp:liv_data2>-4.447</tmp:liv_data2>
+            <tmp:delta>-0.038</tmp:delta>
+            <tmp:trend>delta stabile</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65ef">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1634710 4763430</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000639</tmp:idstazione>
+            <tmp:nome>Amatello 47</tmp:nome>
+            <tmp:cis>Corpo Idrico della Pianura del Fiume Cornia</tmp:cis>
+            <tmp:codice_ci>32CT020</tmp:codice_ci>
+            <tmp:liv_data1>-16.635</tmp:liv_data1>
+            <tmp:liv_data2>-16.672</tmp:liv_data2>
+            <tmp:delta>-0.037</tmp:delta>
+            <tmp:trend>delta stabile</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65ee">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1630053.25 4764493.03</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000045</tmp:idstazione>
+            <tmp:nome>Venturina ex aeroporto</tmp:nome>
+            <tmp:cis>Corpo Idrico della Pianura del Fiume Cornia</tmp:cis>
+            <tmp:codice_ci>32CT020</tmp:codice_ci>
+            <tmp:liv_data1>-8.42</tmp:liv_data1>
+            <tmp:liv_data2>-8.455</tmp:liv_data2>
+            <tmp:delta>-0.035</tmp:delta>
+            <tmp:trend>delta stabile</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65ed">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1662072 4735116</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000073</tmp:idstazione>
+            <tmp:nome>Piez. D Casotto Pescatori</tmp:nome>
+            <tmp:cis>Corpo Idrico della Pianura di Grosseto</tmp:cis>
+            <tmp:codice_ci>31OM010</tmp:codice_ci>
+            <tmp:liv_data1>-1.67</tmp:liv_data1>
+            <tmp:liv_data2>-1.705</tmp:liv_data2>
+            <tmp:delta>-0.035</tmp:delta>
+            <tmp:trend>delta stabile</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65ec">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1663636 4731480</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000075</tmp:idstazione>
+            <tmp:nome>Piez. G La Trappola</tmp:nome>
+            <tmp:cis>Corpo Idrico della Pianura di Grosseto</tmp:cis>
+            <tmp:codice_ci>31OM010</tmp:codice_ci>
+            <tmp:liv_data1>-2.711</tmp:liv_data1>
+            <tmp:liv_data2>-2.74</tmp:liv_data2>
+            <tmp:delta>-0.029</tmp:delta>
+            <tmp:trend>delta stabile</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65eb">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1679391 4849897</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000630</tmp:idstazione>
+            <tmp:nome>Via Paisiello</tmp:nome>
+            <tmp:cis>Corpo Idrico della Piana Firenze, Prato, Pistoia - Zona Firenze</tmp:cis>
+            <tmp:codice_ci>11AR011</tmp:codice_ci>
+            <tmp:liv_data1>-4.59</tmp:liv_data1>
+            <tmp:liv_data2>-4.617</tmp:liv_data2>
+            <tmp:delta>-0.027</tmp:delta>
+            <tmp:trend>delta stabile</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65ea">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1622734.29301085 4796145.0587791</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000076</tmp:idstazione>
+            <tmp:nome>Pozzo Pomodorificio</tmp:nome>
+            <tmp:cis>Corpo idrico costiero tra Fiume Fine e Fiume Cecina</tmp:cis>
+            <tmp:codice_ci>32CT010</tmp:codice_ci>
+            <tmp:liv_data1>-4.4</tmp:liv_data1>
+            <tmp:liv_data2>-4.421</tmp:liv_data2>
+            <tmp:delta>-0.021</tmp:delta>
+            <tmp:trend>delta stabile</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65e9">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1681247 4849091</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000696</tmp:idstazione>
+            <tmp:nome>Palazzo Strozzi</tmp:nome>
+            <tmp:cis>Corpo Idrico della Piana Firenze, Prato, Pistoia - Zona Firenze</tmp:cis>
+            <tmp:codice_ci>11AR011</tmp:codice_ci>
+            <tmp:liv_data1>-4.33</tmp:liv_data1>
+            <tmp:liv_data2>-4.35</tmp:liv_data2>
+            <tmp:delta>-0.020</tmp:delta>
+            <tmp:trend>delta stabile</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65e8">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1634571.06 4840347.09</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000029</tmp:idstazione>
+            <tmp:nome>I Gofi</tmp:nome>
+            <tmp:cis>corpo idrico delle Cerbaie e falda profonda multistrato</tmp:cis>
+            <tmp:codice_ci>11AR027</tmp:codice_ci>
+            <tmp:liv_data1>-33.316</tmp:liv_data1>
+            <tmp:liv_data2>-33.331</tmp:liv_data2>
+            <tmp:delta>-0.015</tmp:delta>
+            <tmp:trend>delta stabile</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65e7">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1615178.71 4836748.33</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000057</tmp:idstazione>
+            <tmp:nome>Ospedaletto</tmp:nome>
+            <tmp:cis>Corpo Idrico del Valdarno Inferiore e Piana Costiera Pisana - Zona Pisa - falda profonda</tmp:cis>
+            <tmp:codice_ci>11AR020-1</tmp:codice_ci>
+            <tmp:liv_data1>-3.28</tmp:liv_data1>
+            <tmp:liv_data2>-3.275</tmp:liv_data2>
+            <tmp:delta>0.005</tmp:delta>
+            <tmp:trend>delta stabile</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65e6">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1620934 4831003</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000674</tmp:idstazione>
+            <tmp:nome>ASA 34</tmp:nome>
+            <tmp:cis>Corpo Idrico del Valdarno Inferiore e Piana Costiera Pisana - Zona Lavaiano, Mortaiolo</tmp:cis>
+            <tmp:codice_ci>11AR023</tmp:codice_ci>
+            <tmp:liv_data1>0.174</tmp:liv_data1>
+            <tmp:liv_data2>0.238</tmp:liv_data2>
+            <tmp:delta>0.064</tmp:delta>
+            <tmp:trend>delta positivo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65e5">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1620934 4831003</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS19000650</tmp:idstazione>
+            <tmp:nome>ASA 34 bis</tmp:nome>
+            <tmp:cis>Corpo Idrico del Valdarno Inferiore e Piana Costiera Pisana - Zona Lavaiano, Mortaiolo - falda
+                profonda
+            </tmp:cis>
+            <tmp:codice_ci>11AR023-1</tmp:codice_ci>
+            <tmp:liv_data1>-4.768</tmp:liv_data1>
+            <tmp:liv_data2>-4.681</tmp:liv_data2>
+            <tmp:delta>0.087</tmp:delta>
+            <tmp:trend>delta positivo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65e4">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1603967.27 4834475.12</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000042</tmp:idstazione>
+            <tmp:nome>RMS 18</tmp:nome>
+            <tmp:cis>Corpo Idrico del Valdarno Inferiore e Piana Costiera Pisana - Zona Pisa</tmp:cis>
+            <tmp:codice_ci>11AR020</tmp:codice_ci>
+            <tmp:liv_data1>-1.625</tmp:liv_data1>
+            <tmp:liv_data2>-1.53</tmp:liv_data2>
+            <tmp:delta>0.095</tmp:delta>
+            <tmp:trend>delta positivo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65e3">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1640626.99 4840702.94</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000001</tmp:idstazione>
+            <tmp:nome>Stadio Martini</tmp:nome>
+            <tmp:cis>Corpo Idrico del Valdarno Inferiore e Piana Costiera Pisana - Zona S. Croce - falda profonda
+            </tmp:cis>
+            <tmp:codice_ci>11AR024-1</tmp:codice_ci>
+            <tmp:liv_data1>-6.633</tmp:liv_data1>
+            <tmp:liv_data2>-6.451</tmp:liv_data2>
+            <tmp:delta>0.182</tmp:delta>
+            <tmp:trend>delta positivo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+        <tmp:frea_covid_010420_160420 gml:id="frea_covid_010420_160420.fid--3e790268_1802a03e294_-65e2">
+            <tmp:geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:pos>1640847.8 4842111.52</gml:pos>
+                </gml:Point>
+            </tmp:geom>
+            <tmp:idstazione>TOS29000014</tmp:idstazione>
+            <tmp:nome>Via Iale Castelfranco</tmp:nome>
+            <tmp:cis>Corpo Idrico del Valdarno Inferiore e Piana Costiera Pisana - Zona S. Croce</tmp:cis>
+            <tmp:codice_ci>11AR024</tmp:codice_ci>
+            <tmp:liv_data1>-14.013</tmp:liv_data1>
+            <tmp:liv_data2>-13.697</tmp:liv_data2>
+            <tmp:delta>0.316</tmp:delta>
+            <tmp:trend>delta positivo significativo</tmp:trend>
+        </tmp:frea_covid_010420_160420>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

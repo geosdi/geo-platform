@@ -58,70 +58,70 @@ public class GPWMSGetMapBaseRequestBuilderTest {
     private static final GPWMSBaseKeyValuePairBuilder<GPWMSGetMapBaseRequest, GPWMSGetMapBaseRequestBuilder> builder = builder();
 
     @Test
-    public void a_wmsGetMapBaseRequestBuilderTest() throws Exception {
+    public void a_a_wmsGetMapBaseRequestBuilderTest() throws Exception {
         logger.info("######################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
                 .withKeyValuePair("http://150.145.141.180/geoserver/topp/wms?service=WMS&version=1.1.0&request=GetMap&layers=topp%3Atasmania_roads&bbox=145.19754%2C-43.423512%2C148.27298000000002%2C-40.852802&width=768&height=641&srs=EPSG%3A4326&format=application/openlayers")
                 .build());
     }
 
     @Test
-    public void b_wmsGetMapBaseRequestBuilderTest() throws Exception {
+    public void a_b_wmsGetMapBaseRequestBuilderTest() throws Exception {
         logger.info("######################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
                 .withKeyValuePair("service=WMS&version=1.1.0&request=GetMap&layers=topp%3Atasmania_roads,topp:states,siti_protetti:zsc,retenatura:zsc&bbox=145.19754%2C-43.423512%2C148.27298000000002%2C-40.852802&width=768&height=641&srs=EPSG%3A4326&format=application/openlayers")
                 .build());
     }
 
     @Test
-    public void c_wmsGetMapBaseRequestBuilderTest() throws Exception {
+    public void a_c_wmsGetMapBaseRequestBuilderTest() throws Exception {
         logger.info("######################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
                 .withKeyValuePair("service=WMS&version=1.1.0&request=GetMap&layers=test,prova,topp:states,siti_protetti:zsc,retenatura:zsc,topp%3Atasmania_roads,topp:states,siti_protetti:zsc,retenatura:zsc&bbox=145.19754%2C-43.423512%2C148.27298000000002%2C-40.852802&width=768&height=641&srs=EPSG%3A4326&format=application/openlayers")
                 .build());
     }
 
     @Test
-    public void d_wmsGetMapBaseRequestBuilderTest() throws Exception {
+    public void a_d_wmsGetMapBaseRequestBuilderTest() throws Exception {
         logger.info("######################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
                 .withKeyValuePair("&version=1.1.0&  &layers=test,prova,topp:states,siti_protetti:zsc,retenatura:zsc,topp%3Atasmania_roads,topp:states,siti_protetti:zsc,retenatura:zsc&bbox=145.19754%2C-43.423512%2C148.27298000000002%2C-40.852802&width=768&height=641&srs=EPSG%3A4326&format=application/openlayers")
                 .build());
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void e_wmsGetMapBaseRequestBuilderTest() throws Exception {
+    public void a_e_wmsGetMapBaseRequestBuilderTest() throws Exception {
         logger.info("######################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
                 .withKeyValuePair("&version=1.1.0&  &layers=,   ,,  ,   ,   ,,,   &bbox=145.19754%2C-43.423512%2C148.27298000000002%2C-40.852802&width=768&height=641&srs=EPSG%3A4326&format=application/openlayers")
                 .build());
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void f_wmsGetMapBaseRequestBuilderTest() throws Exception {
+    public void a_f_wmsGetMapBaseRequestBuilderTest() throws Exception {
         logger.info("######################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
                 .withKeyValuePair("service=WMS&version=1.1.0&request=GetMap&bbox=145.19754%2C-43.423512%2C148.27298000000002%2C-40.852802&width=768&height=641&srs=EPSG%3A4326&format=application/openlayers")
                 .build());
     }
 
     @Test
-    public void g_wmsGetMapBaseRequestBuilderTest() throws Exception {
+    public void a_g_wmsGetMapBaseRequestBuilderTest() throws Exception {
         logger.info("######################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
                 .withKeyValuePair("http://sampleserver1.arcgisonline.com/ArcGIS/services/Specialty/ESRI_StatesCitiesRivers_USA/MapServer/WMSServer?version=1.3.0&request=GetMap&CRS=CRS:84&bbox=-178.217598,18.924782,-66.969271,71.406235&width=760&height=360&layers=0&styles=defaul")
                 .build());
     }
 
     @Test
-    public void h_wmsGetMapBaseRequestBuilderTest() throws Exception {
+    public void a_h_wmsGetMapBaseRequestBuilderTest() throws Exception {
         logger.info("######################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
                 .withKeyValuePair("http://gisserver.domain.com:6080/arcgis/services/folder/service/ImageServer/WMSServer?REQUEST=GetMap&SERVICE=WMS&VERSION=1.3.0&LAYERS=0&STYLES=&FORMAT=image/png&BGCOLOR=0xFFFFFF&TRANSPARENT=TRUE&CRS=EPSG:4326&bbox=-178.217598,18.924782,-66.969271,71.406235&width=760&height=360&TIME=1980/2010 (time from year 1980 to 2010)")
                 .build());
     }
 
     @Test
-    public void i_wmsGetMapBaseRequestBuilderTest() throws Exception {
+    public void a_i_wmsGetMapBaseRequestBuilderTest() throws Exception {
         logger.info("######################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
                 .withKeyValuePair("SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=States,Cities&STYLES=&SRS=EPSG:4326&BBOX=-124,21,-66,49&WIDTH=600&HEIGHT=400&FORMAT=image/png&SERVICENAME=myService&")
                 .build());
     }
 
     @Test
-    public void l_wmsGetMapBaseRequestBuilderTest() throws Exception {
+    public void a_l_wmsGetMapBaseRequestBuilderTest() throws Exception {
         logger.info("######################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
                 .withKeyValuePair("SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=States,Cities&STYLES=&SRS=EPSG:4326&BBOX=-124,21,-66,49&WIDTH=600&HEIGHT=400&FORMAT=image/png&SERVICENAME=myservice&\n"
                         + "TRANSPARENT=TRUE&BGCOLOR=0xFF0000&EXCEPTIONS=application/vnd.ogc.se_blank&REASPECT=TRUE&")
@@ -129,7 +129,7 @@ public class GPWMSGetMapBaseRequestBuilderTest {
     }
 
     @Test
-    public void m_wmsGetMapBaseRequestBuilderTest() throws Exception {
+    public void a_m_wmsGetMapBaseRequestBuilderTest() throws Exception {
         logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
                 .withKeyValuePair("http://150.145.141.92/geoserver/topp/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST" +
                         "=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=topp%3Atasmania_cities&STYLES&LAYERS" +
@@ -140,7 +140,7 @@ public class GPWMSGetMapBaseRequestBuilderTest {
     }
 
     @Test
-    public void n_wmsGetMapBaseRequestBuilderTest() throws Exception {
+    public void a_n_wmsGetMapBaseRequestBuilderTest() throws Exception {
         logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
                 .withKeyValuePair("https://sit2.regione.campania.it/geoserver/RegioneCampania.Cartografia.Tematica/" +
                         "wms?service=WMS&version=1.1.0&request=GetMap&layers=RegioneCampania.Cartografia.Tematica:sitdbo_curve_livello_25m" +
@@ -150,7 +150,7 @@ public class GPWMSGetMapBaseRequestBuilderTest {
     }
 
     @Test
-    public void o_wmsGetMapBaseRequestBuilderTest() throws Exception {
+    public void a_o_wmsGetMapBaseRequestBuilderTest() throws Exception {
         logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
                 .withKeyValuePair("https://sit2.regione.campania.it/geoserver/RegioneCampania.Cartografia.Tematica/wms" +
                         "?service=WMS&version=1.1.0&request=GetMap&layers=RegioneCampania.Cartografia.Tematica:sitdbo_retegeodeticaregionale" +
@@ -160,7 +160,7 @@ public class GPWMSGetMapBaseRequestBuilderTest {
     }
 
     @Test
-    public void p_wmsGetMapBaseRequestBuilderTest() throws Exception {
+    public void a_p_wmsGetMapBaseRequestBuilderTest() throws Exception {
         logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
                 .withKeyValuePair("https://sit2.regione.campania.it/geoserver/RegioneCampania.Catalogo/wms" +
                         "?service=WMS&version=1.1.0&request=GetMap&layers=RegioneCampania.Catalogo:sitdbo_bio_italy" +
@@ -170,7 +170,7 @@ public class GPWMSGetMapBaseRequestBuilderTest {
     }
 
     @Test
-    public void q_wmsGetMapBaseRequestBuilderTest() throws Exception {
+    public void a_q_wmsGetMapBaseRequestBuilderTest() throws Exception {
         logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
                 .withKeyValuePair("https://sit2.regione.campania.it/geoserver/RegioneCampania.Catalogo/wms" +
                         "?service=WMS&version=1.1.0&request=GetMap&layers=RegioneCampania.Catalogo:sitdbo_corine_land_cover_90" +
@@ -180,7 +180,7 @@ public class GPWMSGetMapBaseRequestBuilderTest {
     }
 
     @Test
-    public void r_wmsGetMapBaseRequestBuilderTest() throws Exception {
+    public void a_r_wmsGetMapBaseRequestBuilderTest() throws Exception {
         logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
                 .withKeyValuePair("https://mappe.regione.toscana.it/geoserver/extra_rt_webgis/wms" +
                         "?service=WMS&version=1.1.0&request=GetMap&layers=extra_rt_webgis:elem_ridotto_2&styles=" +
@@ -190,7 +190,7 @@ public class GPWMSGetMapBaseRequestBuilderTest {
     }
 
     @Test
-    public void s_wmsGetMapBaseRequestBuilderTest() throws Exception {
+    public void a_s_wmsGetMapBaseRequestBuilderTest() throws Exception {
         logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
                 .withKeyValuePair("service=WMS&version=1.1.0&request=GetMap" +
                         "&layers=Ospedale_maggiore:cessato_punti&styles=&bbox=8.920043852690128,45.323153911514," +
@@ -200,7 +200,7 @@ public class GPWMSGetMapBaseRequestBuilderTest {
     }
 
     @Test
-    public void t_wmsGetMapBaseRequestBuilderTest() throws Exception {
+    public void a_t_wmsGetMapBaseRequestBuilderTest() throws Exception {
         logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
                 .withKeyValuePair("service=WMS&version=1.1.0&request=GetMap" +
                         "&layers=Ospedale_maggiore:punti&styles=&bbox=493440.1733799758,5018480.796821868," +
@@ -210,7 +210,7 @@ public class GPWMSGetMapBaseRequestBuilderTest {
     }
 
     @Test
-    public void u_wmsGetMapBaseRequestBuilderTest() throws Exception {
+    public void a_u_wmsGetMapBaseRequestBuilderTest() throws Exception {
         logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
                 .withKeyValuePair("SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Oceans,Countries,Cities" +
                         "&STYLES=&SRS=EPSG:4326&BBOX=-124,21,-66,49&WIDTH=600&HEIGHT=400&FORMAT=image/png&")
@@ -218,7 +218,7 @@ public class GPWMSGetMapBaseRequestBuilderTest {
     }
 
     @Test
-    public void v_wmsGetMapBaseRequestBuilderTest() throws Exception {
+    public void a_v_wmsGetMapBaseRequestBuilderTest() throws Exception {
         logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
                 .withKeyValuePair("SSERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=States,Cities" +
                         "&STYLES=&SRS=EPSG:4326&BBOX=-124,21,-66,49&WIDTH=600&HEIGHT=400&FORMAT=image/png" +
@@ -228,13 +228,32 @@ public class GPWMSGetMapBaseRequestBuilderTest {
     }
 
     @Test
-    public void w_wmsGetMapBaseRequestBuilderTest() throws Exception {
+    public void a_w_wmsGetMapBaseRequestBuilderTest() throws Exception {
         logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
                 .withKeyValuePair("http://your.server.address/wms/liegenschaftsentwaesserung/abwasser_werkplan" +
                         "?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=Haltungen,Normschacht,Spezialbauwerke" +
                         "&STYLES=&CRS=EPSG%3A21781&BBOX=696136.28844801,245797.12108743,696318.91114315," +
                         "245939.25832905&WIDTH=1042&HEIGHT=811&FORMAT=application/dxf&FORMAT_OPTIONS=MODE:SYMBOLLAYERSYMBOLOGY;" +
                         "SCALE:250&FILE_NAME=werkplan_abwasser.dxf")
+                .build());
+    }
+
+    @Test
+    public void a_z_wmsGetMapBaseRequestBuilderTest() throws Exception {
+        logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
+                .withKeyValuePair("https://rsdi.regione.basilicata.it/rbgeoserver2016/atc/wms?" +
+                        "service=WMS&version=1.1.0&request=GetMap&layers=atc:atc_basilicata&styles=&bbox=528246.125," +
+                        "4416604.0,658406.625,4554652.5&width=724&height=768&srs=EPSG:32633&format=application/openlayers")
+                .build());
+    }
+
+    @Test
+    public void b_a_wmsGetMapBaseRequestBuilderTest() throws Exception {
+        logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
+                .withKeyValuePair("https://webgis.regione.sardegna.it/geoserver/ppr2006/wms?" +
+                        "service=WMS&version=1.1.0&request=GetMap&layers=ppr2006%3AALBERIMONUMENTALI" +
+                        "&bbox=1451316.0%2C4311236.0%2C1566149.0%2C4562852.0&width=350&height=768" +
+                        "&srs=EPSG%3A3003&format=application/openlayers")
                 .build());
     }
 }

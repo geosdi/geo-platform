@@ -46,8 +46,12 @@ import java.io.Serializable;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Transactional(transactionManager = "gpTransactionManager")
-public interface GeoPlatformJpaRepository<T extends Object, ID extends Serializable>
-        extends JpaRepository<T, ID> {
+public interface GeoPlatformJpaRepository<T extends Object, ID extends Serializable> extends JpaRepository<T, ID> {
 
-    T findById(Long id);
+    /**
+     * @param id
+     * @return {@link Optional<T>}
+     */
+    @Override
+    Optional<T> findById(ID id);
 }

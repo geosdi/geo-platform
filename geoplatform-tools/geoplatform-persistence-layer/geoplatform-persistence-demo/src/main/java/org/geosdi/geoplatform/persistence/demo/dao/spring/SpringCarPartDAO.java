@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.persistence.demo.dao.spring;
 
 import org.geosdi.geoplatform.persistence.dao.spring.GeoPlatformJpaRepository;
 import org.geosdi.geoplatform.persistence.demo.model.CarPart;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -47,6 +48,7 @@ import org.springframework.stereotype.Repository;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Repository(value = "springCarPartDAO")
+@Profile(value = "springData")
 public interface SpringCarPartDAO extends GeoPlatformJpaRepository<CarPart, Long> {
 
     @Query(value = "Select c from CarPart c where c.partName = :partName")

@@ -75,7 +75,10 @@ public class GPWMSGetMapBaseRequestBuilderTheoriesTest {
                         "request=GetMap&layers=RegioneCampania.Cartografia.Tematica:sitdbo_curve_livello_25m&styles=&bbox=394273.34375,4426208.0,571791.3125,4601018.0&width=768&height=756&srs=EPSG:3045&format=application/openlayers",
                 "https://sit2.regione.campania.it/geoserver/RegioneCampania.Catalogo/wms?service=WMS&version=1.1.0&request=GetMap" +
                         "&layers=RegioneCampania.Catalogo:sitdbo_corine_land_cover_90&styles=&bbox=395346.3125,4426030.5,569392.125,4596345.5" +
-                        "&width=768&height=751&srs=EPSG:3045&format=application/openlayers"};
+                        "&width=768&height=751&srs=EPSG:3045&format=application/openlayers",
+                "https://webgis.regione.sardegna.it/geoserver/ppr2006/wms?service=WMS&version=1.1.0&request=GetMap" +
+                        "&layers=ppr2006%3AALBERIMONUMENTALI&bbox=1451316.0%2C4311236.0%2C1566149.0%2C4562852.0" +
+                        "&width=350&height=768&srs=EPSG%3A3003&format=application/openlayers"};
     }
 
     @Theory

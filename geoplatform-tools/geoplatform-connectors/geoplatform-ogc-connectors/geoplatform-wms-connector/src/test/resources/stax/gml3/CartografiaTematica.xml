@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ogc="http://www.opengis.net/ogc"
+                       xmlns:RegioneCampania.Cartografia.Tematica="regione.campania.cartografia.tematica.it"
+                       xmlns:wfs="http://www.opengis.net/wfs" xmlns:ows="http://www.opengis.net/ows"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="regione.campania.cartografia.tematica.it https://sit2.regione.campania.it:443/geoserver/RegioneCampania.Cartografia.Tematica/wfs?service=WFS&amp;version=1.1.0&amp;request=DescribeFeatureType&amp;typeName=RegioneCampania.Cartografia.Tematica%3Asitdbo_reticolo_idrografico http://www.opengis.net/wfs https://sit2.regione.campania.it:443/geoserver/schemas/wfs/1.1.0/wfs.xsd">
+    <gml:featureMembers>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.13027">
+            <RegioneCampania.Cartografia.Tematica:gid>13027</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>13027</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ12526</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>190.541549760
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>190.541539383
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470453.8911 4506181.2245 470533.3995 4506348.8031</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.13028">
+            <RegioneCampania.Cartografia.Tematica:gid>13028</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>13028</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ12527</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>354.709114980
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>354.709094480
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470237.5698 4506235.7517 470388.5665 4506531.9916</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.13029">
+            <RegioneCampania.Cartografia.Tematica:gid>13029</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>13029</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ12528</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>482.536674750
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>482.536727245
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470625.5378 4506218.0006 471037.1553 4506450.4634</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.13030">
+            <RegioneCampania.Cartografia.Tematica:gid>13030</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>13030</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ12529</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>404.486204090
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>404.486201181
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470538.2056 4506171.9502 470625.5378 4506218.0006</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470625.5456 4506218.0029 470925.0962 4506183.9035</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.13013">
+            <RegioneCampania.Cartografia.Tematica:gid>13013</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>13013</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ12512</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>395.420622380
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>395.420627790
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>471197.8942 4505121.8428 471551.4376 4505115.665</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.13014">
+            <RegioneCampania.Cartografia.Tematica:gid>13014</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>13014</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ12513</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>992.273096730
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>992.273059649
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470452.5876 4504814.0921 471197.8383 4505121.841</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>471197.8383 4505121.841 471197.8942 4505121.8428</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>471197.8383 4505121.841 471306.2496 4505219.2329</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.13015">
+            <RegioneCampania.Cartografia.Tematica:gid>13015</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>13015</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ12514</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>355.139942350
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>355.139930569
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470505.7566 4504797.5312 470842.4347 4504873.955</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.13019">
+            <RegioneCampania.Cartografia.Tematica:gid>13019</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>13019</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ12518</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>1260.38209352
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>1260.38196982
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470905.2196 4504570.3306 470914.9054 4504571.0187</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470930.6998 4504577.5457 471549.9051 4504764.969</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470845.3196 4504594.4631 470873.6351 4504579.4553</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470826.9688 4504604.9239 470835.9247 4504600.745</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470687.9761 4504651.5638 470700.1669 4504652.2039</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470783.6503 4504652.5176 470809.7819 4504635.6898</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470710.4807 4504655.017 470739.8731 4504660.7122</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470746.858 4504658.9543 470755.3298 4504660.8373</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470657.0176 4504668.6955 470673.5434 4504656.3956</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470632.5429 4504688.9033 470642.5838 4504680.7764</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470578.5737 4504721.4098 470620.2011 4504695.4922</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>471560.9622 4504751.1147 471907.5069 4504673.574</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470505.7566 4504797.5312 470508.3676 4504792.4522</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.13020">
+            <RegioneCampania.Cartografia.Tematica:gid>13020</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>13020</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ12519</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>1297.82771482
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>1297.82775727
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470914.9054 4504571.0187 470930.6998 4504577.5457</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470930.7051 4504577.5498 471214.9928 4504562.1542</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470873.6351 4504579.4553 470905.2196 4504570.3306</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470835.9247 4504600.745 470845.3196 4504594.4631</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470809.7819 4504635.6898 470826.9688 4504604.9239</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470700.1669 4504652.2039 470710.4807 4504655.017</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470673.5434 4504656.3956 470687.9761 4504651.5638</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470739.8731 4504660.7122 470746.858 4504658.9543</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470755.3298 4504660.8373 470783.6503 4504652.5176</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470642.5838 4504680.7764 470657.0176 4504668.6955</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470620.2011 4504695.4922 470632.5429 4504688.9033</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470508.3676 4504792.4522 470578.5737 4504721.4098</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470452.6235 4504814.1238 470505.7566 4504797.5312</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>469930.9286 4504920.6483 470452.5876 4504814.0921</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.13021">
+            <RegioneCampania.Cartografia.Tematica:gid>13021</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>13021</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ12520</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>1335.21400818
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>1335.21391906
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>469935.9204 4504945.5294 470983.2791 4505595.4861</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.13022">
+            <RegioneCampania.Cartografia.Tematica:gid>13022</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>13022</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ12521</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>1188.80575418
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>1188.80576906
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>469633.1968 4504392.1799 469906.0038 4505401.018</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.13023">
+            <RegioneCampania.Cartografia.Tematica:gid>13023</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>13023</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ12522</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>276.954200560
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>276.954296864
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470572.0927 4505472.7486 470821.7123 4505583.1377</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.13024">
+            <RegioneCampania.Cartografia.Tematica:gid>13024</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>13024</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ12523</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>1254.05344506
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>1254.05340031
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>470008.4799 4505246.1649 470996.7783 4505855.9612</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.13025">
+            <RegioneCampania.Cartografia.Tematica:gid>13025</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>13025</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ12524</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>675.965494920
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>675.965509903
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>469998.3129 4505279.9498 470559.0291 4505604.4675</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.13026">
+            <RegioneCampania.Cartografia.Tematica:gid>13026</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>13026</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ12525</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>1370.44405550
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>1370.44395890
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>469906.0038 4505401.018 470283.7123 4505899.1251 470949.1286 4505916.3387
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.13031">
+            <RegioneCampania.Cartografia.Tematica:gid>13031</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>13031</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ12530</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>1734.00915039
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>1734.00914820
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>469651.5039 4505731.4481 470066.2922 4506222.3462 471020.6974 4506029.5783
+                            </gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.16388">
+            <RegioneCampania.Cartografia.Tematica:gid>16388</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>16388</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ20197</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>2276.81034501
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>2276.81044208
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>471169.2316 4505950.7795 473308.8902 4506170.2496</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.16389">
+            <RegioneCampania.Cartografia.Tematica:gid>16389</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>16389</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ20198</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>88.5627143700
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>88.5627921844
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>471127.0243 4505898.3322 471204.0067 4505929.0189</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.16391">
+            <RegioneCampania.Cartografia.Tematica:gid>16391</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>16391</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ20200</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>268.411403000
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>268.411362309
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>471170.9676 4506035.7616 471425.565 4505994.0707</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.16393">
+            <RegioneCampania.Cartografia.Tematica:gid>16393</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>16393</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ20202</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>357.196426510
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>357.196456140
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>471344.4714 4506157.05 471641.3341 4505976.6026</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.16395">
+            <RegioneCampania.Cartografia.Tematica:gid>16395</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>16395</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ20204</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>455.132812370
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>455.132831180
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>471373.3183 4505653.8744 471675.2945 4505969.6038</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.16398">
+            <RegioneCampania.Cartografia.Tematica:gid>16398</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>16398</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ20207</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>443.056838470
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>443.056789152
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>471195.5789 4505770.1598 471590.1407 4505883.1251</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.16401">
+            <RegioneCampania.Cartografia.Tematica:gid>16401</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>16401</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ20210</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>521.944226530
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>521.944221213
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>471548.4975 4505483.6137 471844.2499 4505870.1593</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.16402">
+            <RegioneCampania.Cartografia.Tematica:gid>16402</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>16402</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ20211</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>244.843053900
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>244.843059213
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>471517.3978 4505530.5033 471653.7645 4505730.8767</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+        <RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico gml:id="sitdbo_reticolo_idrografico.16405">
+            <RegioneCampania.Cartografia.Tematica:gid>16405</RegioneCampania.Cartografia.Tematica:gid>
+            <RegioneCampania.Cartografia.Tematica:objectid>16405</RegioneCampania.Cartografia.Tematica:objectid>
+            <RegioneCampania.Cartografia.Tematica:nome>ACQ20214</RegioneCampania.Cartografia.Tematica:nome>
+            <RegioneCampania.Cartografia.Tematica:shape_leng>1147.95800114
+            </RegioneCampania.Cartografia.Tematica:shape_leng>
+            <RegioneCampania.Cartografia.Tematica:shape_le_1>1147.95814507
+            </RegioneCampania.Cartografia.Tematica:shape_le_1>
+            <RegioneCampania.Cartografia.Tematica:geom>
+                <gml:MultiLineString srsName="http://www.opengis.net/gml/srs/epsg.xml#3045" srsDimension="2">
+                    <gml:lineStringMember>
+                        <gml:LineString>
+                            <gml:posList>471248.847 4506519.8533 472171.074 4505987.216</gml:posList>
+                        </gml:LineString>
+                    </gml:lineStringMember>
+                </gml:MultiLineString>
+            </RegioneCampania.Cartografia.Tematica:geom>
+        </RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

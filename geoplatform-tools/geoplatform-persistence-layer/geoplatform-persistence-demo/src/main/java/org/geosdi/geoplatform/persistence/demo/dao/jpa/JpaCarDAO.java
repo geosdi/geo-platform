@@ -52,10 +52,9 @@ import javax.persistence.criteria.Root;
  */
 @Repository(value = "jpaCarDAO")
 @Profile(value = "jpa")
-public class JpaCarDAO extends GPAbstractJpaDAO<Car, Long>
-        implements ICarDAO {
+public class JpaCarDAO extends GPAbstractJpaDAO<Car, Long> implements ICarDAO {
 
-    public JpaCarDAO() {
+    JpaCarDAO() {
         super(Car.class);
     }
 

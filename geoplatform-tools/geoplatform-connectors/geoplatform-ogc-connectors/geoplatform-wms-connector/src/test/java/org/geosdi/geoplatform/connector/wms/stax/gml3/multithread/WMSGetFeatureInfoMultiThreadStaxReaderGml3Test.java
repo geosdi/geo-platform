@@ -1,11 +1,11 @@
-/**
+/*
  *
  *    geo-platform
  *    Rich webgis framework
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2022 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -33,9 +33,11 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.wms.stax.multithread;
+package org.geosdi.geoplatform.connector.wms.stax.gml3.multithread;
 
-import org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxGml2Reader;
+import org.geosdi.geoplatform.connector.reader.stax.GPWMSGetFeatureInfoStaxGml3Reader;
+import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,25 +50,32 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Flowable.fromIterable;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
+import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.junit.Assert.assertTrue;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPWMSFeatureStoreMultiThreadStaxReaderTest extends GPWMSGetFeatureMultiThreadTest {
+public class WMSGetFeatureInfoMultiThreadStaxReaderGml3Test extends GPWMSGetFeatureMultiThreadGml3Test {
 
-    private static final Logger logger = LoggerFactory.getLogger(GPWMSFeatureStoreMultiThreadStaxReaderTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(WMSGetFeatureInfoMultiThreadStaxReaderGml3Test.class);
     //
-    private static final GPWMSGetFeatureInfoStaxGml2Reader wmsGetFeatureInfoStaxReader = new GPWMSGetFeatureInfoStaxGml2Reader();
+    private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
+            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
+            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
+            WRAP_ROOT_VALUE_DISABLE,
+            INDENT_OUTPUT_ENABLE, NON_NULL);
+    private static final GPWMSGetFeatureInfoStaxGml3Reader wmsGetFeatureInfoStaxReader = new GPWMSGetFeatureInfoStaxGml3Reader();
 
     @Test
-    public void wmsFeatureStoreMultiThreadStaxReaderTest() throws Exception {
+    public void wmsGetFeatureInfoMultiThreadStaxReaderGml3Test() throws Exception {
         CountDownLatch startSignal = new CountDownLatch(1);
         CountDownLatch doneSignal = new CountDownLatch(files.size());
         AtomicInteger counter = new AtomicInteger(0);
         fromIterable(files)
-                .map(f -> new Thread(new WMSFeatureStoreStaxReaderTask(f, startSignal, doneSignal, counter)))
+                .map(f -> new Thread(new WMSGetFeatureInfoStaxReaderGml3Task(f, startSignal, doneSignal, counter)))
                 .subscribe(Thread::start, Throwable::printStackTrace);
         startSignal.countDown();
         doneSignal.await();
@@ -74,9 +83,9 @@ public class GPWMSFeatureStoreMultiThreadStaxReaderTest extends GPWMSGetFeatureM
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@{} process {} files", this.getClass().getSimpleName(), counter.get());
     }
 
-    static class WMSFeatureStoreStaxReaderTask implements Runnable {
+    static class WMSGetFeatureInfoStaxReaderGml3Task implements Runnable {
 
-        private static final Logger logger = LoggerFactory.getLogger(WMSFeatureStoreStaxReaderTask.class);
+        private static final Logger logger = LoggerFactory.getLogger(WMSGetFeatureInfoStaxReaderGml3Task.class);
         //
         private final String fileName;
         private final CountDownLatch startSignal;
@@ -88,7 +97,7 @@ public class GPWMSFeatureStoreMultiThreadStaxReaderTest extends GPWMSGetFeatureM
          * @param theStartSignal
          * @param theDoneSignal
          */
-        WMSFeatureStoreStaxReaderTask(@Nonnull(when = NEVER) String theFileName, @Nonnull(when = NEVER) CountDownLatch theStartSignal,
+        WMSGetFeatureInfoStaxReaderGml3Task(@Nonnull(when = NEVER) String theFileName, @Nonnull(when = NEVER) CountDownLatch theStartSignal,
                 @Nonnull(when = NEVER) CountDownLatch theDoneSignal, @Nonnull(when = NEVER) AtomicInteger theCounter) {
             checkArgument((theFileName != null) && !(theFileName.trim().isEmpty()), "The Parameter fileName must not be null or an empty string.");
             checkArgument(theStartSignal != null, "The Parameter startSignal must not be null.");
@@ -115,8 +124,8 @@ public class GPWMSFeatureStoreMultiThreadStaxReaderTest extends GPWMSGetFeatureM
         public void run() {
             try {
                 startSignal.await();
-                logger.info("#######################FEATURE_STORE : \n{}\n for File : {}\n",
-                        wmsGetFeatureInfoStaxReader.readAsStore(new File(fileName)), fileName);
+                logger.info("#######################FEATURE_COLLECTION : \n{}\n for File : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                        .writeValueAsString(wmsGetFeatureInfoStaxReader.read(new File(fileName))), fileName);
                 this.counter.incrementAndGet();
                 doneSignal.countDown();
             } catch (Exception ex) {

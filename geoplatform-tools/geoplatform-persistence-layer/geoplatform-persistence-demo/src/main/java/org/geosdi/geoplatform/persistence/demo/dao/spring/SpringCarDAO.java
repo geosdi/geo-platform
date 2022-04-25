@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.persistence.demo.dao.spring;
 
 import org.geosdi.geoplatform.persistence.dao.spring.GeoPlatformJpaRepository;
 import org.geosdi.geoplatform.persistence.demo.model.Car;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -45,6 +46,7 @@ import org.springframework.stereotype.Repository;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Repository(value = "springCarDAO")
+@Profile(value = "springData")
 public interface SpringCarDAO extends GeoPlatformJpaRepository<Car, Long> {
 
     Car findByPlate(String plate);

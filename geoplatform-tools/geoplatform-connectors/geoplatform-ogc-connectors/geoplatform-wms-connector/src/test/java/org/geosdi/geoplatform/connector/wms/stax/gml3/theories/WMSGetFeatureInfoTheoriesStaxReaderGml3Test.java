@@ -1,11 +1,11 @@
-/**
+/*
  *
  *    geo-platform
  *    Rich webgis framework
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2022 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -33,44 +33,39 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.persistence.demo.dao.hibernate;
+package org.geosdi.geoplatform.connector.wms.stax.gml3.theories;
 
-import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
-import org.geosdi.geoplatform.persistence.dao.hibernate.GPAbstractHibernateDAO;
-import org.geosdi.geoplatform.persistence.demo.dao.ICarPartDAO;
-import org.geosdi.geoplatform.persistence.demo.model.CarPart;
-import org.hibernate.HibernateException;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Repository;
+import org.geosdi.geoplatform.connector.wms.WMSGetFeatureInfoTheoriesGml3Test;
+import org.junit.experimental.theories.Theories;
+import org.junit.experimental.theories.Theory;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import java.io.File;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static org.geosdi.geoplatform.connector.wms.WMSGetFeatureInfoReaderFileLoaderTest.JACKSON_SUPPORT;
+import static org.geosdi.geoplatform.connector.wms.stax.gml3.WMSGetFeatureInfoStaxReaderGml3Test.wmsGetFeatureInfoStaxGml3Reader;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Repository(value = "hibernateCarPartDAO")
-@Profile(value = "hibernate")
-public class HibernateCarPartDAO extends GPAbstractHibernateDAO<CarPart, Long> implements ICarPartDAO {
+@RunWith(Theories.class)
+public class WMSGetFeatureInfoTheoriesStaxReaderGml3Test extends WMSGetFeatureInfoTheoriesGml3Test {
 
-    HibernateCarPartDAO() {
-        super(CarPart.class);
-    }
+    private static final Logger logger = LoggerFactory.getLogger(WMSGetFeatureInfoTheoriesStaxReaderGml3Test.class);
 
-    @Override
-    public CarPart findByPartName(String partName) throws Exception {
-        try {
-            CriteriaBuilder criteriaBuilder = super.criteriaBuilder();
-            CriteriaQuery<CarPart> criteriaQuery = super.createCriteriaQuery();
-            Root<CarPart> root = criteriaQuery.from(this.persistentClass);
-            criteriaQuery.select(root);
-            criteriaQuery.where(criteriaBuilder.equal(root.get("partname"), partName));
-            return currentSession().createQuery(criteriaQuery).uniqueResult();
-        } catch (HibernateException ex) {
-            logger.error("HibernateException : {}", ex);
-            throw new GPDAOException(ex);
-        }
+    /**
+     * @param fileName
+     * @throws Exception
+     */
+    @Theory
+    public void wmsGetFeatureInfoStaxFeatureReaderTest(String fileName) throws Exception {
+        checkArgument((fileName != null) && !(fileName.trim().isEmpty()), "The Parameter fileName must not be null or an empty string.");
+        File file = new File(dirFiles.concat(fileName));
+        logger.info("#######################FEATURE_COLLECTION : \n{}\n for File : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(file)), fileName);
     }
 }

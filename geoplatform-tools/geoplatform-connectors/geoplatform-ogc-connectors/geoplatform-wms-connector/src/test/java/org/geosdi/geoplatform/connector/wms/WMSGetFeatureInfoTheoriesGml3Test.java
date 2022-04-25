@@ -1,11 +1,11 @@
-/**
+/*
  *
  *    geo-platform
  *    Rich webgis framework
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2022 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -33,44 +33,34 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.persistence.demo.dao.hibernate;
+package org.geosdi.geoplatform.connector.wms;
 
-import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
-import org.geosdi.geoplatform.persistence.dao.hibernate.GPAbstractHibernateDAO;
-import org.geosdi.geoplatform.persistence.demo.dao.ICarPartDAO;
-import org.geosdi.geoplatform.persistence.demo.model.CarPart;
-import org.hibernate.HibernateException;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Repository;
+import org.junit.BeforeClass;
+import org.junit.experimental.theories.DataPoints;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import java.io.File;
+
+import static java.io.File.separator;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.connector.wms.stax.gml3.WMSGetFeatureInfoReaderGml3FileLoaderTest.toArrayFilesName;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Repository(value = "hibernateCarPartDAO")
-@Profile(value = "hibernate")
-public class HibernateCarPartDAO extends GPAbstractHibernateDAO<CarPart, Long> implements ICarPartDAO {
+public class WMSGetFeatureInfoTheoriesGml3Test {
 
-    HibernateCarPartDAO() {
-        super(CarPart.class);
+    protected static String dirFiles;
+
+    @BeforeClass
+    public static void buildDirFiles() throws Exception {
+        dirFiles = of(new File(".").getCanonicalPath(), "src", "test", "resources", "stax", "gml3")
+                .collect(joining(separator, "", separator));
     }
 
-    @Override
-    public CarPart findByPartName(String partName) throws Exception {
-        try {
-            CriteriaBuilder criteriaBuilder = super.criteriaBuilder();
-            CriteriaQuery<CarPart> criteriaQuery = super.createCriteriaQuery();
-            Root<CarPart> root = criteriaQuery.from(this.persistentClass);
-            criteriaQuery.select(root);
-            criteriaQuery.where(criteriaBuilder.equal(root.get("partname"), partName));
-            return currentSession().createQuery(criteriaQuery).uniqueResult();
-        } catch (HibernateException ex) {
-            logger.error("HibernateException : {}", ex);
-            throw new GPDAOException(ex);
-        }
+    @DataPoints
+    public static String[] data() {
+        return toArrayFilesName();
     }
 }

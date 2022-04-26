@@ -50,8 +50,7 @@ public interface GeoPlatformJpaRepository<T extends Object, ID extends Serializa
 
     /**
      * @param id
-     * @return {@link Optional<T>}
+     * @return {@link T}
      */
-    @Override
-    Optional<T> findById(ID id);
+    T findById(ID id);
 }

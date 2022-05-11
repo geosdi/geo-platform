@@ -195,6 +195,38 @@ public enum GPJacksonSupportEnum implements JacksonSupportConfigFeature<ConfigFe
             mapper.configure(this.getFeature(), this.getValue());
         }
 
+    }, READ_DATE_AS_TIMESTAMP_AS_NANOSECONDS_ENABLE(TRUE) {
+        /**
+         * @param mapper
+         */
+        @Override
+        public void configureMapper(ObjectMapper mapper) {
+            mapper.configure(this.getFeature(), this.getValue());
+        }
+
+        /**
+         * @return {@link DeserializationFeature}
+         */
+        @Override
+        public DeserializationFeature getFeature() {
+            return DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS;
+        }
+    }, READ_DATE_AS_TIMESTAMP_AS_NANOSECONDS_DISABLE(FALSE) {
+        /**
+         * @param mapper
+         */
+        @Override
+        public void configureMapper(ObjectMapper mapper) {
+            mapper.configure(this.getFeature(), this.getValue());
+        }
+
+        /**
+         * @return {@link DeserializationFeature}
+         */
+        @Override
+        public DeserializationFeature getFeature() {
+            return DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS;
+        }
     }, WRAP_ROOT_VALUE_ENABLE(TRUE) {
         @Override
         public SerializationFeature getFeature() {

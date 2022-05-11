@@ -1514,7 +1514,7 @@
         <ubl-version>2.0</ubl-version>
         <jetty-version>9.4.46.v20220331</jetty-version>
 
-        <postgresql-version>42.3.3</postgresql-version>
+        <postgresql-version>42.3.4</postgresql-version>
         <postgis-jdbc-version>2021.1.0</postgis-jdbc-version>
 
         <cglib-version>3.3.0</cglib-version>

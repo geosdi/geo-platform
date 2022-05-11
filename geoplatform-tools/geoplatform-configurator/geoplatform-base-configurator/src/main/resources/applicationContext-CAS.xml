@@ -16,7 +16,7 @@
         <property name="locations">
             <list>
                 <value>classpath:gp-cas.properties</value>
-                <value>file:${GP_DATA_DIR}/gp-cas.properties</value>
+                <value>file:#{systemProperties['GP_DATA_DIR']}/gp-cas.properties</value>
             </list>
         </property>
         <property name="ignoreResourceNotFound" value="true" />

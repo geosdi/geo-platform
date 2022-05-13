@@ -35,12 +35,13 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.uri;
 
-import com.google.common.base.Preconditions;
 import org.apache.http.client.utils.URIBuilder;
 
 import javax.annotation.Nonnull;
 import javax.annotation.meta.When;
 import java.io.Serializable;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -67,7 +68,7 @@ public interface GPGeoserverQueryParam<B extends Object> extends Serializable {
      * @param uriBuilder
      */
     default void addQueryParam(URIBuilder uriBuilder) {
-        Preconditions.checkArgument(uriBuilder != null , "The Parameter uriBuilder must not be null");
+        checkArgument(uriBuilder != null, "The Parameter uriBuilder must not be null");
         uriBuilder.addParameter(this.getKey(), this.formatValue());
     }
 
@@ -83,8 +84,7 @@ public interface GPGeoserverQueryParam<B extends Object> extends Serializable {
          * @param theValue
          */
         protected GeoserverQueryParam(@Nonnull(when = When.NEVER) String theKey, @Nonnull(when = When.NEVER) B theValue) {
-            Preconditions
-                    .checkArgument(theKey != null && !(theKey.trim().isEmpty()), "The Parameter key must not be null");
+            checkArgument(theKey != null && !(theKey.trim().isEmpty()), "The Parameter key must not be null");
             this.key = theKey;
             this.value = theValue;
         }

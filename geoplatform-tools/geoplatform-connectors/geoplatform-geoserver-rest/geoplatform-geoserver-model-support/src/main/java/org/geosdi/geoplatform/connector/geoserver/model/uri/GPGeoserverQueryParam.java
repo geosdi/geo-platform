@@ -1,11 +1,11 @@
-/*
+/**
  *
  *    geo-platform
  *    Rich webgis framework
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2022 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.connector.geoserver.model.uri;
 import org.apache.hc.core5.net.URIBuilder;
 
 import javax.annotation.Nonnull;
+import javax.annotation.meta.When;
 import java.io.Serializable;
 
 import static com.google.common.base.Preconditions.checkArgument;

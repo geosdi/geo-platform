@@ -23,27 +23,27 @@
 
     <dependencies>
 
-      <dependency>
-          <groupId>org.geosdi</groupId>
-          <artifactId>geoplatform-geoserver-request-support</artifactId>
-        <version>${project.version}</version>
-      </dependency>
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-geoserver-request-support</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
-      <!-- =========================================================== -->
-      <!-- ===================== COMMONS-POOL ======================== -->
-      <!-- =========================================================== -->
-      <dependency>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-pool2</artifactId>
-      </dependency>
+        <!-- =========================================================== -->
+        <!-- ===================== COMMONS-POOL ======================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
 
-      <!-- =========================================================== -->
-      <!-- ========================== RX3Java ======================== -->
-      <!-- =========================================================== -->
-      <dependency>
-        <groupId>io.reactivex.rxjava3</groupId>
-        <artifactId>rxjava</artifactId>
-      </dependency>
+        <!-- =========================================================== -->
+        <!-- ========================== RX3Java ======================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>io.reactivex.rxjava3</groupId>
+            <artifactId>rxjava</artifactId>
+        </dependency>
 
       <!-- =========================================================== -->
       <!-- ================== APACHE HTTPCOMPONENTS ================== -->
@@ -78,28 +78,28 @@
 
 
         <!-- logging dependencies, delegate all to slf4j and use logback -->
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-      </dependency>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>jcl-over-slf4j</artifactId>
-      </dependency>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>log4j-over-slf4j</artifactId>
-      </dependency>
-      <dependency>
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-classic</artifactId>
-      </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
 
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <scope>test</scope>
-      </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -113,7 +113,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <excludes>
-<!--                        <exclude>**/*.xml</exclude>-->
+                        <!--                        <exclude>**/*.xml</exclude>-->
                         <exclude>**/*.properties</exclude>
                     </excludes>
                 </configuration>

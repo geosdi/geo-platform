@@ -40,6 +40,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPGeoserverParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.coveragestores.GeoserverUpdateCoverageStoreBody;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastores;
+import org.geosdi.geoplatform.connector.geoserver.model.extension.uniquevalues.GPGeoserverUniqueValue;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.file.GPGeoserverCoverageStoreFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.file.GPGeoserverDataStoreFileExtension;
@@ -51,7 +52,6 @@ import org.geosdi.geoplatform.connector.geoserver.model.layers.vector.GeoserverV
 import org.geosdi.geoplatform.connector.geoserver.model.projection.GPProjectionPolicy;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverStyle;
 import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverStyle;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.uniquevalues.GPGeoserverUniqueValue;
 import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate;
 import org.geosdi.geoplatform.connector.geoserver.model.upload.GPGeoserverUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GeoserverCreateWorkspaceBody;
@@ -238,7 +238,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
         if (layerDatasource.matches(".*:80/")) {
             dataSource = dataSource.replaceFirst(":80", "");
         }
-        System.out.println("Data source: " + dataSource);
         if (!dataSource.startsWith(RESTURL)) {
             //The requested style can't be loaded from the rest url configured.
             throw new ResourceNotFoundFault("The requested style can't be loaded from the rest url configured on the publisher service.");
@@ -345,12 +344,14 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
             logger.error(error);
             throw new IllegalArgumentException(error, e.getCause());
         }
-        try{
-            this.geoserverConnectorStore.createStyleSLDV100Request()
-                    .withRaw(!override)
-                    .withStyleName(styleName)
-                    .withStringStyleBody(styleToPublish)
-                    .getResponse();
+        try {
+            if (override) {
+                this.geoserverConnectorStore.updateStyleSLDV100Request().withStringStyleBody(styleToPublish)
+                        .withRaw(FALSE).withStyleName(styleName).getResponse();
+            } else {
+                this.geoserverConnectorStore.createStyleSLDV100Request().withRaw(TRUE).withStyleName(styleName)
+                        .withStringStyleBody(styleToPublish).getResponse();
+            }
         }catch (Exception e) {
             throw new IllegalParameterFault("The Style with name " + styleName + " is not published." );
         }

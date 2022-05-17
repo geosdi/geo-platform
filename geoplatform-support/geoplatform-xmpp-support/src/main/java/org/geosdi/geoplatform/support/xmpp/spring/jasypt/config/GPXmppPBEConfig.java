@@ -35,10 +35,18 @@
  */
 package org.geosdi.geoplatform.support.xmpp.spring.jasypt.config;
 
+import org.geosdi.geoplatform.support.xmpp.configuration.jasypt.pbe.GPXMPPPBEProperties;
 import org.jasypt.encryption.pbe.config.PBEConfig;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  *
@@ -48,12 +56,20 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 class GPXmppPBEConfig {
 
+    private static final Logger logger = LoggerFactory.getLogger(GPXmppPBEConfig.class);
+
+    /**
+     * @param xmppPBEProperties
+     * @return {@link PBEConfig}
+     */
     @Bean(name = "xmppPBEConfig")
-    public PBEConfig xmppPBEConfig() {
+    public PBEConfig xmppPBEConfig(@Nonnull(when = NEVER) GPXMPPPBEProperties xmppPBEProperties) {
+        checkArgument(xmppPBEProperties != null, "The Parameter xmppPBEProperties must not be null.");
+        logger.debug("####################################GP_XMPP_PBE_PASSWORD : {}\n\n", xmppPBEProperties.getPassword());
         return new SimpleStringPBEConfig() {
 
             {
-                super.setPassword("$-geosdi,0x");
+                super.setPassword(xmppPBEProperties.getPassword());
                 super.setPoolSize(2);
                 super.setAlgorithm("PBEWithMD5AndDES");
             }

@@ -20,5 +20,6 @@
     </logger>
     
     <logger name="org.geosdi.geoplatform.support.xmpp.spring.connection.manager.GPXMPPConnectionManager" level="debug"/>
+    <logger name="org.geosdi.geoplatform.support.xmpp.spring.jasypt.config.GPXmppPBEConfig" level="debug"/>
 
 </configuration>

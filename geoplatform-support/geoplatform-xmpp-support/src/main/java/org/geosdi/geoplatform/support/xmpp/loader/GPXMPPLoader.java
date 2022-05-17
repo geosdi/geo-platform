@@ -39,13 +39,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
-@ComponentScan(
-        basePackages = {"org.geosdi.geoplatform.logger.support.spring.config",
-            "org.geosdi.geoplatform.support.xmpp.spring"})
+@ComponentScan(basePackages = {"org.geosdi.geoplatform.logger.support.spring.config",
+        "org.geosdi.geoplatform.support.xmpp.spring"})
 public class GPXMPPLoader {
 }

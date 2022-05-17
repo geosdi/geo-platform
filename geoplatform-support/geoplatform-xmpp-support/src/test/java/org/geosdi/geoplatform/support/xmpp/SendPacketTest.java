@@ -53,6 +53,8 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import javax.annotation.Resource;
 
+import static java.lang.System.clearProperty;
+import static java.lang.System.setProperty;
 import static java.lang.Thread.sleep;
 import static org.jivesoftware.smack.packet.Message.Type.chat;
 import static org.jivesoftware.smack.packet.StanzaBuilder.buildMessage;
@@ -63,14 +65,14 @@ import static org.junit.Assert.assertNotNull;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {GPXMPPLoader.class}, loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {GPXMPPLoader.class, GPXMPPPBEPropertiesLoader.class}, loader = AnnotationConfigContextLoader.class)
 public class SendPacketTest {
 
     @GeoPlatformLog
     static Logger logger;
     //
     static final String GP_XMPP_KEY = "GP_XMPP_FILE_PROP";
-    static final String RECEIVER = "JnFAHibv/ZxmDtQGXHMghKpQLxSOiGjYcAfhDNRNUh8=";
+    static final String RECEIVER = "zwJAU8XSxvNZ1IcxJ6DPpy7QNB74eFCaf6YPvQia6Ro=";
     static final String MESSAGE = " is building geo-platform.";
     //
     @Resource(name = "gpXMPPConnectionManager")
@@ -81,12 +83,12 @@ public class SendPacketTest {
 
     @BeforeClass
     public static void beforeClass() {
-        System.setProperty(GP_XMPP_KEY, "gp-xmpp-test.prop");
+        setProperty(GP_XMPP_KEY, "gp-xmpp-test.prop");
     }
 
     @AfterClass
     public static void afterClass() {
-        System.clearProperty(GP_XMPP_KEY);
+        clearProperty(GP_XMPP_KEY);
     }
 
     @Before

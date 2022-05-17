@@ -47,16 +47,16 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import javax.annotation.Resource;
 
+import static java.lang.System.clearProperty;
+import static java.lang.System.setProperty;
 import static org.junit.Assert.assertNotNull;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {GPXMPPLoaderLazy.class},
-        loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {GPXMPPLoaderLazy.class, GPXMPPPBEPropertiesLoader.class}, loader = AnnotationConfigContextLoader.class)
 public class GPXMPPPropertiesTest {
 
     static final String GP_XMPP_KEY = "GP_XMPP_FILE_PROP";
@@ -66,12 +66,12 @@ public class GPXMPPPropertiesTest {
 
     @BeforeClass
     public static void beforeClass() {
-        System.setProperty(GP_XMPP_KEY, "gp-xmpp-test.prop");
+        setProperty(GP_XMPP_KEY, "gp-xmpp-test.prop");
     }
 
     @AfterClass
     public static void afterClass() {
-        System.clearProperty(GP_XMPP_KEY);
+        clearProperty(GP_XMPP_KEY);
     }
 
     @Test

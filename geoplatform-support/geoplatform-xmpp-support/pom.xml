@@ -17,7 +17,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <smack.version>4.4.4</smack.version>
+        <smack.version>4.4.5</smack.version>
     </properties>
 
     <repositories>
@@ -152,6 +152,16 @@
 
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <systemPropertyVariables>
+                        <GP_XMPP_PBE_KEY>$-geosdi2022,??/07/326329_5,!!-0877</GP_XMPP_PBE_KEY>
+                    </systemPropertyVariables>
+                </configuration>
             </plugin>
         </plugins>
 

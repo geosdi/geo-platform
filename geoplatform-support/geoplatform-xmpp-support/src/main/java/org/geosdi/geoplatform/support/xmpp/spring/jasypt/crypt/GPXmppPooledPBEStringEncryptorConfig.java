@@ -50,6 +50,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 class GPXmppPooledPBEStringEncryptorConfig {
 
+    /**
+     * @param mailPBEConfig
+     * @return {@link PooledPBEStringEncryptor}
+     */
     @Bean(name = "gpXmppPooledPBEStringEncryptor")
     @Autowired
     public PooledPBEStringEncryptor gpXmppPooledPBEStringEncryptor(@Qualifier(value = "xmppPBEConfig") PBEConfig mailPBEConfig) {

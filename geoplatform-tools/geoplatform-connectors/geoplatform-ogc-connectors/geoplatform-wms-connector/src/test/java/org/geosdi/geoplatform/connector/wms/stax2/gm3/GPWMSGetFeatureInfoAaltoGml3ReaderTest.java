@@ -59,8 +59,68 @@ public class GPWMSGetFeatureInfoAaltoGml3ReaderTest extends WMSGetFeatureInfoAal
     }
 
     @Test
-    public void a_c_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+    public void a_c_wmsGetFeatureInfoStaxAaltoGml3ReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_ALBERI_MONUMENTALI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoAaltoGml3Reader.read(storage.find("AlberiMonumentali.xml"))));
+    }
+
+    @Test
+    public void a_d_wmsGetFeatureInfoStaxAaltoGml3ReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_GEOSITI_AREE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoGml3Reader.read(storage.find("FreaCovid.xml"))));
+    }
+
+    @Test
+    public void a_e_wmsGetFeatureInfoStaxAaltoGml3ReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_STRADE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoGml3Reader.read(storage.find("rw8_arno_de_ott_mag.xml"))));
+    }
+
+    @Test
+    public void a_f_wmsGetFeatureInfoStaxAaltoGml3ReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_OLIVETI_CATASTALI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoGml3Reader.read(storage.find("OlivetiCatastali.xml"))));
+    }
+
+    @Test
+    public void a_g_wmsGetFeatureInfoStaxAaltoGml3ReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_VIGNETI_CATASTALI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoGml3Reader.read(storage.find("VignetiCatastali.xml"))));
+    }
+
+    @Test
+    public void a_h_wmsGetFeatureInfoStaxAaltoGml3ReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_ETTARI_COMUNE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoGml3Reader.read(storage.find("EttariComune.xml"))));
+    }
+
+    @Test
+    public void a_i_wmsGetFeatureInfoStaxAaltoGml3ReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_EVENTI_INGV : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoGml3Reader.read(storage.find("EventiIngv.xml"))));
+    }
+
+    @Test
+    public void a_l_wmsGetFeatureInfoStaxAaltoGml3ReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_PLUVIOMETRI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoGml3Reader.read(storage.find("Pluviometri.xml"))));
+    }
+
+    @Test
+    public void a_m_wmsGetFeatureInfoStaxAaltoGml3ReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_ARCO_FERROVIARIO_SICILIA : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoGml3Reader.read(storage.find("ArcoFerroviarioSicilia.xml"))));
+    }
+
+    @Test
+    public void a_n_wmsGetFeatureInfoStaxAaltoGml3ReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_ESITI_AGIBILITA_FABBRICATI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoGml3Reader.read(storage.find("EsitiAgibilitaFabbricati.xml"))));
+    }
+
+    @Test
+    public void a_o_wmsGetFeatureInfoStaxAaltoGml3ReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_CARABINIERI_SICILIA : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoAaltoGml3Reader.read(storage.find("CarabinieriSicilia.xml"))));
     }
 }

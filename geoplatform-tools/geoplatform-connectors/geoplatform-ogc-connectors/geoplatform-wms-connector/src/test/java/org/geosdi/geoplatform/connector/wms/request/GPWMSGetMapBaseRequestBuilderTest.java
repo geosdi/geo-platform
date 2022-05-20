@@ -256,4 +256,14 @@ public class GPWMSGetMapBaseRequestBuilderTest {
                         "&srs=EPSG%3A3003&format=application/openlayers")
                 .build());
     }
+
+    @Test
+    public void b_b_wmsGetMapBaseRequestBuilderTest() throws Exception {
+        logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
+                .withKeyValuePair("https://wms.cfr.toscana.it/geoserver/tmp/wms?service=WMS" +
+                        "&version=1.1.0&request=GetMap&layers=tmp%3Asitc_asl" +
+                        "&bbox=1554750.625%2C4678325.5%2C1771722.875%2C4924792.0&width=676" +
+                        "&height=768&srs=EPSG%3A3003&format=application/openlayers&p=fake")
+                .build());
+    }
 }

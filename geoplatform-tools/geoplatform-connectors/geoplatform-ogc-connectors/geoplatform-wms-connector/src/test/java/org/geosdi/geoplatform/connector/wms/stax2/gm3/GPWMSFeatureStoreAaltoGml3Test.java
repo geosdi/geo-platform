@@ -32,7 +32,7 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.wms.stax.gml3;
+package org.geosdi.geoplatform.connector.wms.stax2.gm3;
 
 import org.geojson.Feature;
 import org.geosdi.geoplatform.connector.reader.stax.GPWMSFeatureStore;
@@ -50,122 +50,122 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(value = NAME_ASCENDING)
-public class GPWMSFeatureStoreGml3Test extends WMSGetFeatureInfoStaxReaderGml3Test {
+public class GPWMSFeatureStoreAaltoGml3Test extends WMSGetFeatureInfoAaltoGml3ReaderTest {
 
     @Test
-    public void a_a_wmsFeatureStoreGml3ReaderTest() throws Exception {
-        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("CartografiaTematica.xml"));
+    public void a_a_wmsFeatureStoreAaltoGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("CartografiaTematica.xml"));
         List<Feature> reticoli = wmsFeatureStore.getFeaturesByKey("sitdbo_reticolo_idrografico");
         assertTrue("For Key : sitdbo_reticolo_idrografico , store must contains a list of Features not null and with 25 features.", (reticoli != null) && (reticoli.size() == 25));
         logger.info("#######################FEATURE_STORE_CARTOGRAGIA_TEMATICA : {}\n", wmsFeatureStore);
-        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "CartografiaTematicaStore.json"), wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "CartografiaTematicaAalto.json"), wmsFeatureStore);
     }
 
     @Test
-    public void a_b_wmsFeatureStoreGml3ReaderTest() throws Exception {
-        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("ComuniSardegna.xml"));
+    public void a_b_wmsFeatureStorAaltoeGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("ComuniSardegna.xml"));
         List<Feature> comuniSardegna = wmsFeatureStore.getFeaturesByKey("IDT_AA01G_COMUNI");
         assertTrue("For Key : IDT_AA01G_COMUNI , store must contains a list of Features not null and with 50 features.", (comuniSardegna != null) && (comuniSardegna.size() == 50));
         logger.info("#######################FEATURE_STORE_BATIMETRIA : {}\n", wmsFeatureStore);
-        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "ComuniSardegnaStore.json"), wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "ComuniSardegnaAalto.json"), wmsFeatureStore);
     }
 
     @Test
-    public void a_c_wmsFeatureStoreGml3ReaderTest() throws Exception {
-        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("AlberiMonumentali.xml"));
+    public void a_c_wmsFeatureStoreAaltoGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("AlberiMonumentali.xml"));
         List<Feature> alberi = wmsFeatureStore.getFeaturesByKey("ALBERIMONUMENTALI");
         assertTrue("For Key : ALBERIMONUMENTALI , store must contains a list of Features not null and with 114 features.", (alberi != null) && (alberi.size() == 114));
         logger.info("#######################FEATURE_STORE_ALBERI_MONUMENTALI : {}\n", wmsFeatureStore);
-        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "AlberiMonumentaliStore.json"), wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "AlberiMonumentaliAalto.json"), wmsFeatureStore);
     }
 
     @Test
-    public void a_d_wmsFeatureStoreGml3ReaderTest() throws Exception {
-        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("FreaCovid.xml"));
+    public void a_d_wmsFeatureStoreAaltoGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("FreaCovid.xml"));
         List<Feature> values = wmsFeatureStore.getFeaturesByKey("frea_covid_010420_160420");
         assertTrue("For Key : frea_covid_010420_160420 , store must contains a list of Features not null and with 85 features.", (values != null) && (values.size() == 85));
         logger.info("#######################FEATURE_STORE_FREA_COVID : {}\n", wmsFeatureStore);
-        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "FreaCovidStore.json"), wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "FreaCovidAalto.json"), wmsFeatureStore);
     }
 
     @Test
-    public void a_e_wmsFeatureStoreGml3ReaderTest() throws Exception {
-        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("rw8_arno_de_ott_mag.xml"));
+    public void a_e_wmsFeatureStoreAaltoGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("rw8_arno_de_ott_mag.xml"));
         List<Feature> values = wmsFeatureStore.getFeaturesByKey("rw8_arno_de_ott_mag");
         assertTrue("For Key : rw8_arno_de_ott_mag , store must contains a list of Features not null and with 500 features.", (values != null) && (values.size() == 500));
         logger.info("#######################FEATURE_STORE_STRADE : {}\n", wmsFeatureStore);
-        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "rw8_arno_de_ott_magStore.json"), wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "rw8_arno_de_ott_magAalto.json"), wmsFeatureStore);
     }
 
     @Test
-    public void a_f_wmsFeatureStoreGml3ReaderTest() throws Exception {
-        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("OlivetiCatastali.xml"));
+    public void a_f_wmsFeatureStoreAaltoGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("OlivetiCatastali.xml"));
         List<Feature> values = wmsFeatureStore.getFeaturesByKey("admin_shp_oliveti_catastali");
         assertTrue("For Key : admin_shp_oliveti_catastali , store must contains a list of Features not null and with 50 features.", (values != null) && (values.size() == 50));
         logger.info("#######################FEATURE_STORE_OLIVETI : {}\n", wmsFeatureStore);
-        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "OlivetiCatastaliStore.json"), wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "OlivetiCatastaliAalto.json"), wmsFeatureStore);
     }
 
     @Test
-    public void a_g_wmsFeatureStoreGml3ReaderTest() throws Exception {
-        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("VignetiCatastali.xml"));
+    public void a_g_wmsFeatureStoreAaltoGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("VignetiCatastali.xml"));
         List<Feature> values = wmsFeatureStore.getFeaturesByKey("admin_shp_vigneti_catastali");
         assertTrue("For Key : admin_shp_vigneti_catastali , store must contains a list of Features not null and with 50 features.", (values != null) && (values.size() == 50));
         logger.info("#######################FEATURE_STORE_VIGNETI : {}\n", wmsFeatureStore);
-        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "VignetiCatastaliStore.json"), wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "VignetiCatastaliAalto.json"), wmsFeatureStore);
     }
 
     @Test
-    public void a_h_wmsFeatureStoreGml3ReaderTest() throws Exception {
-        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("EttariComune.xml"));
+    public void a_h_wmsFeatureStoreAaltoGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("EttariComune.xml"));
         List<Feature> values = wmsFeatureStore.getFeaturesByKey("admin_shp_ettari_comune");
         assertTrue("For Key : admin_shp_ettari_comune , store must contains a list of Features not null and with 42 features.", (values != null) && (values.size() == 42));
         logger.info("#######################FEATURE_STORE_ETTARI_COMUNE : {}\n", wmsFeatureStore);
-        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "EttariComuneStore.json"), wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "EttariComuneAalto.json"), wmsFeatureStore);
     }
 
     @Test
-    public void a_i_wmsFeatureStoreGml3ReaderTest() throws Exception {
-        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("EventiIngv.xml"));
+    public void a_i_wmsFeatureStoreAaltoGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("EventiIngv.xml"));
         List<Feature> values = wmsFeatureStore.getFeaturesByKey("admin_shp_exeflegrei2019_cf_sciami_lp_ingv");
         assertTrue("For Key : admin_shp_exeflegrei2019_cf_sciami_lp_ingv , store must contains a list of Features not null and with 50 features.", (values != null) && (values.size() == 50));
         logger.info("#######################FEATURE_STORE_EVENTI_INGV : {}\n", wmsFeatureStore);
-        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "EventiIngbStore.json"), wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "EventiIngbAalto.json"), wmsFeatureStore);
     }
 
     @Test
-    public void a_l_wmsFeatureStoreGml3ReaderTest() throws Exception {
-        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("Pluviometri.xml"));
+    public void a_l_wmsFeatureStoreAaltoGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("Pluviometri.xml"));
         List<Feature> values = wmsFeatureStore.getFeaturesByKey("sir_pluviometri_valori_ieri");
         assertTrue("For Key : sir_pluviometri_valori_ieri , store must contains a list of Features not null and with 418 features.", (values != null) && (values.size() == 418));
         logger.info("#######################FEATURE_STORE_PLUVIOMETRI : {}\n", wmsFeatureStore);
-        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "PluviometriStore.json"), wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "PluviometriAalto.json"), wmsFeatureStore);
     }
 
     @Test
-    public void a_m_wmsFeatureStoreGml3ReaderTest() throws Exception {
-        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("ArcoFerroviarioSicilia.xml"));
+    public void a_m_wmsFeatureStoreAaltoGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("ArcoFerroviarioSicilia.xml"));
         List<Feature> values = wmsFeatureStore.getFeaturesByKey("Arco_Ferroviario");
         assertTrue("For Key : Arco_Ferroviario , store must contains a list of Features not null and with 22 features.", (values != null) && (values.size() == 22));
         logger.info("#######################FEATURE_STORE_ARCO_FERROVIARIO_SICILIA : {}\n", wmsFeatureStore);
-        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "ArcoFerroviarioSicilia.json"), wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "ArcoFerroviarioSiciliaAalto.json"), wmsFeatureStore);
     }
 
     @Test
-    public void a_n_wmsFeatureStoreGml3ReaderTest() throws Exception {
-        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("EsitiAgibilitaFabbricati.xml"));
+    public void a_n_wmsFeatureStoreAaltoGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("EsitiAgibilitaFabbricati.xml"));
         List<Feature> values = wmsFeatureStore.getFeaturesByKey("Esiti_agibilita_fabbricati");
         assertTrue("For Key : Esiti_agibilita_fabbricati , store must contains a list of Features not null and with 50 features.", (values != null) && (values.size() == 50));
         logger.info("#######################FEATURE_STORE_ESITO_AGIBILITA_FABBRICATI : {}\n",  wmsFeatureStore);
-        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "EsitiAgibilitaFabbricati.json"), wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "EsitiAgibilitaFabbricatiAalto.json"), wmsFeatureStore);
     }
 
     @Test
-    public void a_o_wmsFeatureStoreGml3ReaderTest() throws Exception {
-        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("CarabinieriSicilia.xml"));
+    public void a_o_wmsFeatureStoreAaltoGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("CarabinieriSicilia.xml"));
         List<Feature> values = wmsFeatureStore.getFeaturesByKey("Carabinieri");
         assertTrue("For Key : Carabinieri , store must contains a list of Features not null and with 50 features.", (values != null) && (values.size() == 50));
         logger.info("#######################FEATURE_STORE_CARABINIERI_SICILIA : {}\n",  wmsFeatureStore);
-        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "CarabinieriSicilia.json"), wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "CarabinieriSiciliaAalto.json"), wmsFeatureStore);
     }
 }

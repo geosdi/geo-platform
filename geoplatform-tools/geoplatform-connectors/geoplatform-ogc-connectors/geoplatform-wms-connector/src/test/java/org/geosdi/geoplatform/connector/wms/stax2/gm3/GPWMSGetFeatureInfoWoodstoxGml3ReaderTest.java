@@ -32,7 +32,7 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.wms.stax.gml3;
+package org.geosdi.geoplatform.connector.wms.stax2.gm3;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -44,89 +44,83 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(value = NAME_ASCENDING)
-public class GPWMSGetFeatureInfoStaxGml3ReaderTest extends WMSGetFeatureInfoStaxReaderGml3Test {
+public class GPWMSGetFeatureInfoWoodstoxGml3ReaderTest extends WMSGetFeatureInfoWoodstoxGml3ReaderTest {
 
     @Test
-    public void a_a_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+    public void a_a_wmsGetFeatureInfoStaxWoodstoxGml3ReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_CARTOGRAGIA_TEMATICA : {}\n", JACKSON_SUPPORT.getDefaultMapper()
-                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("CartografiaTematica.xml"))));
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxGml3Reader.read(storage.find("CartografiaTematica.xml"))));
     }
 
     @Test
-    public void a_b_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+    public void a_b_wmsGetFeatureInfoStaxWoodstoxGml3ReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_COMUNI_SARDEGNA : {}\n", JACKSON_SUPPORT.getDefaultMapper()
-                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("ComuniSardegna.xml"))));
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxGml3Reader.read(storage.find("ComuniSardegna.xml"))));
     }
 
     @Test
-    public void a_c_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+    public void a_c_wmsGetFeatureInfoStaxWoodstoxGml3ReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_ALBERI_MONUMENTALI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
-                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("AlberiMonumentali.xml"))));
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxGml3Reader.read(storage.find("AlberiMonumentali.xml"))));
     }
 
     @Test
-    public void a_d_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+    public void a_d_wmsGetFeatureInfoStaxWoodstoxGml3ReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_GEOSITI_AREE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
-                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("FreaCovid.xml"))));
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxGml3Reader.read(storage.find("FreaCovid.xml"))));
     }
 
     @Test
-    public void a_e_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+    public void a_e_wmsGetFeatureInfoStaxWoodstoxGml3ReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_STRADE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
-                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("rw8_arno_de_ott_mag.xml"))));
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxGml3Reader.read(storage.find("rw8_arno_de_ott_mag.xml"))));
     }
 
     @Test
-    public void a_e_wmsGetFeatureInfoStaxGml3ReaderTest() throws Exception {
-        logger.info("#######################FEATURE_COLLECTION_STRADE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
-                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("rw8_arno_de_ott_mag.xml"))));
-    }
-
-    @Test
-    public void a_f_wmsGetFeatureInfoStaxGml3ReaderTest() throws Exception {
+    public void a_f_wmsGetFeatureInfoStaxWoodstoxGml3ReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_OLIVETI_CATASTALI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
-                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("OlivetiCatastali.xml"))));
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxGml3Reader.read(storage.find("OlivetiCatastali.xml"))));
     }
 
     @Test
-    public void a_g_wmsGetFeatureInfoStaxGml3ReaderTest() throws Exception {
+    public void a_g_wmsGetFeatureInfoStaxWoodstoxGml3ReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_VIGNETI_CATASTALI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
-                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("VignetiCatastali.xml"))));
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxGml3Reader.read(storage.find("VignetiCatastali.xml"))));
     }
 
     @Test
-    public void a_h_wmsGetFeatureInfoStaxGml3ReaderTest() throws Exception {
+    public void a_h_wmsGetFeatureInfoStaxWoodstoxGml3ReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_ETTARI_COMUNE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
-                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("EttariComune.xml"))));
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxGml3Reader.read(storage.find("EttariComune.xml"))));
     }
 
     @Test
-    public void a_i_wmsGetFeatureInfoStaxGml3ReaderTest() throws Exception {
+    public void a_i_wmsGetFeatureInfoStaxWoodstoxGml3ReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_EVENTI_INGV : {}\n", JACKSON_SUPPORT.getDefaultMapper()
-                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("EventiIngv.xml"))));
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxGml3Reader.read(storage.find("EventiIngv.xml"))));
     }
 
     @Test
-    public void a_l_wmsGetFeatureInfoStaxGml3ReaderTest() throws Exception {
+    public void a_l_wmsGetFeatureInfoStaxWoodstoxGml3ReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_PLUVIOMETRI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
-                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("Pluviometri.xml"))));
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxGml3Reader.read(storage.find("Pluviometri.xml"))));
     }
 
     @Test
-    public void a_m_wmsGetFeatureInfoStaxGml3ReaderTest() throws Exception {
+    public void a_m_wmsGetFeatureInfoStaxWoodstoxGml3ReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_ARCO_FERROVIARIO_SICILIA : {}\n", JACKSON_SUPPORT.getDefaultMapper()
-                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("ArcoFerroviarioSicilia.xml"))));
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxGml3Reader.read(storage.find("ArcoFerroviarioSicilia.xml"))));
     }
 
     @Test
-    public void a_n_wmsGetFeatureInfoStaxGml3ReaderTest() throws Exception {
+    public void a_n_wmsGetFeatureInfoStaxWoodstoxGml3ReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_ESITI_AGIBILITA_FABBRICATI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
-                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("EsitiAgibilitaFabbricati.xml"))));
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxGml3Reader.read(storage.find("EsitiAgibilitaFabbricati.xml"))));
     }
 
     @Test
-    public void a_o_wmsGetFeatureInfoStaxGml3ReaderTest() throws Exception {
+    public void a_o_wmsGetFeatureInfoStaxWoodstoxGml3ReaderTest() throws Exception {
         logger.info("#######################FEATURE_COLLECTION_CARABINIERI_SICILIA : {}\n", JACKSON_SUPPORT.getDefaultMapper()
-                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("CarabinieriSicilia.xml"))));
+                .writeValueAsString(wmsGetFeatureInfoWoodstoxGml3Reader.read(storage.find("CarabinieriSicilia.xml"))));
     }
 }

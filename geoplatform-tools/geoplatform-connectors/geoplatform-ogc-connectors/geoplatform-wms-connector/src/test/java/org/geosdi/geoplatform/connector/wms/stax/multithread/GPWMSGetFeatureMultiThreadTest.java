@@ -57,10 +57,9 @@ public abstract class GPWMSGetFeatureMultiThreadTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "stax")
-                .collect(joining(separator, "", separator));
         files = toStreamFilesName()
-                .map(basePath::concat)
+                .map(of(new File(".").getCanonicalPath(), "src", "test", "resources", "stax")
+                        .collect(joining(separator, "", separator))::concat)
                 .collect(toCollection(LinkedList::new));
     }
 }

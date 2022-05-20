@@ -1,11 +1,11 @@
-/**
+/*
  *
  *    geo-platform
  *    Rich webgis framework
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2022 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -33,62 +33,39 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.reader.stax;
+package org.geosdi.geoplatform.connector.wms.stax2.gm3.theories.woodstox;
 
-import org.geojson.Feature;
-import org.geojson.GeoJsonObject;
-import org.geosdi.geoplatform.stax.reader.builder.GPXmlStreamReaderBuilder;
+import org.geosdi.geoplatform.connector.wms.WMSGetFeatureInfoTheoriesGml3Test;
+import org.junit.Ignore;
+import org.junit.experimental.theories.Theories;
+import org.junit.experimental.theories.Theory;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.annotation.Nonnull;
-import javax.xml.stream.XMLStreamReader;
+import java.io.File;
 
-import static javax.annotation.meta.When.NEVER;
+import static com.google.common.base.Preconditions.checkArgument;
+import static org.geosdi.geoplatform.connector.wms.stax2.gm3.WMSGetFeatureInfoWoodstoxGml3ReaderTest.wmsGetFeatureInfoWoodstoxGml3Reader;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class BaseGetFeatureGeoJsonStaxGml3Reader extends GPGetFeatureGeoJsonStaxReader implements GPGetFeatureStaxGml3Reader {
+@Ignore
+@RunWith(Theories.class)
+public class GPWMSFeatureStoreWoodstoxGml3TheoriesTest extends WMSGetFeatureInfoTheoriesGml3Test {
 
-    protected static final String FEATURE_MEMBERS_LOCAL_NAME = "featureMembers";
-    private static final String ID_LOCAL_NAME = "id";
-
-    /**
-     * @param theXmlStreamBuilder
-     */
-    protected BaseGetFeatureGeoJsonStaxGml3Reader(@Nonnull(when = NEVER) GPXmlStreamReaderBuilder theXmlStreamBuilder) {
-        super(theXmlStreamBuilder, ID_LOCAL_NAME, "http://www.opengis.net/gml");
-    }
+    private static final Logger logger = LoggerFactory.getLogger(GPWMSFeatureStoreWoodstoxGml3TheoriesTest.class);
 
     /**
-     * @param feature
+     * @param fileName
      * @throws Exception
      */
-    void readFeatureID(Feature feature) throws Exception {
-        this.readFeatureID(this.typeNames.get(), feature);
-    }
-
-    /**
-     * @return {@link Boolean}
-     * @throws Exception
-     */
-    protected boolean isFeatureTag() throws Exception {
-        return this.typeNames.get().containsKey(xmlStreamReader().getLocalName());
-    }
-
-    /**
-     * @param streamReader
-     * @return {@link GeoJsonObject}
-     * @throws Exception
-     */
-    @Override
-    protected GeoJsonObject internalReadGeometry(@Nonnull(when = NEVER) XMLStreamReader streamReader) throws Exception {
-        try {
-            return gmlJAXBContext.acquireUnmarshaller().unmarshalAsGeoJson(xmlStreamReader());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            logger.error("########################Parse Exception : {}", ex.getMessage());
-        }
-        return null;
+    @Theory
+    public void wmsGetFeatureInfoWoodstoxFeatureGml3ReaderTest(String fileName) throws Exception {
+        checkArgument((fileName != null) && !(fileName.trim().isEmpty()), "The Parameter fileName must not be null or an empty string.");
+        File file = new File(dirFiles.concat(fileName));
+        logger.info("#######################FEATURE_STORE : \n{}\n for File : {}\n", wmsGetFeatureInfoWoodstoxGml3Reader.readAsStore(file), fileName);
     }
 }

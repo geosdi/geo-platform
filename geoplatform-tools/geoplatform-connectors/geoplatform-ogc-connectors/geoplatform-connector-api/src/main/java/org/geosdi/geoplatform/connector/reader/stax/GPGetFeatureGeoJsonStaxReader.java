@@ -45,6 +45,7 @@ import org.geosdi.geoplatform.stax.reader.AbstractStaxStreamReader;
 import org.geosdi.geoplatform.stax.reader.builder.GPXmlStreamReaderBuilder;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.events.XMLEvent;
@@ -105,15 +106,18 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
     protected final ThreadLocal<Map<String, IGPFeatureType>> typeNames = withInitial(LinkedHashMap::new);
     private final ThreadLocal<String> previousGeometry = withInitial(() -> null);
     private final String fidLocalName;
+    private final String fidNameSpaceURI;
 
     /**
      * @param theXmlStreamBuilder
      * @param theFidLocalName
      */
-    protected GPGetFeatureGeoJsonStaxReader(@Nonnull(when = NEVER) GPXmlStreamReaderBuilder theXmlStreamBuilder, @Nonnull(when = NEVER) String theFidLocalName) {
+    protected GPGetFeatureGeoJsonStaxReader(@Nonnull(when = NEVER) GPXmlStreamReaderBuilder theXmlStreamBuilder, @Nonnull(when = NEVER) String theFidLocalName,
+            @Nullable String theFidNameSpaceURI) {
         super(theXmlStreamBuilder);
         checkArgument((theFidLocalName != null) && !(theFidLocalName.trim().isEmpty()), "The Parameter fidLocalName must not be null or an empty string.");
         this.fidLocalName = theFidLocalName;
+        this.fidNameSpaceURI = theFidNameSpaceURI;
     }
 
     /**
@@ -175,7 +179,8 @@ public abstract class GPGetFeatureGeoJsonStaxReader extends AbstractStaxStreamRe
         IGPFeatureType featureType = featureTypes.computeIfAbsent(name, value -> new GPFeatureType(prefix, name));
         logger.trace("########################################FEATURE_TYPE : {}\n\n", featureType);
         if ((featureType != null) && (super.isTagName(prefix, name))) {
-            String featureID = xmlStreamReader().getAttributeValue(null, this.fidLocalName);
+            String featureID = xmlStreamReader().getAttributeValue(this.fidNameSpaceURI, this.fidLocalName);
+            logger.trace("\n\n##########################FEATURE_ID_STRING : {}\n\n", featureID);
             feature.setId((featureID != null) && !(featureID.trim().isEmpty()) ? featureID : of(prefix, name).collect(joining(":")));
             logger.trace("#####################FEATURE_ID : {}", feature.getId());
             readInternal(featureType, feature);

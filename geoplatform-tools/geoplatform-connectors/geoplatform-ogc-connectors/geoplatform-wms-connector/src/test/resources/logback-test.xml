@@ -30,5 +30,6 @@
     <logger name="org.geosdi.geoplatform.stax.reader.factory.XMLInputFactoryJDKBuilder" level="debug"/>
     <logger name="org.geosdi.geoplatform.stax.reader.factory.XMLInputFactoryStax2Builder" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.server.request.kvp.GPWMSRequestKvpReader" level="trace"/>
+    <logger name="org.geosdi.geoplatform.connector.reader.stax2.GPWMSGetFeatureInfoStax2Gml3Reader" level="info"/>
 
 </configuration>

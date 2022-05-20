@@ -1,0 +1,865 @@
+<wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:MICROZONAZIONE_SISMICA="http://localhost:8080/geoserver/MICROZONAZIONE_SISMICA"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="0"
+                       timeStamp="2022-05-10T07:25:11.530Z"
+                       xsi:schemaLocation="http://localhost:8080/geoserver/MICROZONAZIONE_SISMICA http://www.protezionecivilesicilia.it:8080/geoserver/MICROZONAZIONE_SISMICA/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=MICROZONAZIONE_SISMICA%3AEsiti_agibilita_fabbricati http://www.opengis.net/wfs http://www.protezionecivilesicilia.it:8080/geoserver/schemas/wfs/1.1.0/wfs.xsd">
+    <gml:boundedBy>
+        <gml:Envelope srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#6708">
+            <gml:lowerCorner>507955.24320005 4157949.2685898</gml:lowerCorner>
+            <gml:upperCorner>517373.57380011 4184661.39348941</gml:upperCorner>
+        </gml:Envelope>
+    </gml:boundedBy>
+    <gml:featureMembers>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.1">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512554.52270008 4161146.47878976</gml:lowerCorner>
+                    <gml:upperCorner>512554.52270008 4161146.47878976</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512554.52270008 4161146.47878976</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8349.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038582</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.2">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512568.39830008 4161114.47518975</gml:lowerCorner>
+                    <gml:upperCorner>512568.39830008 4161114.47518975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512568.39830008 4161114.47518975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8395.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038630</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.3">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512630.39130008 4161144.24048975</gml:lowerCorner>
+                    <gml:upperCorner>512630.39130008 4161144.24048975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512630.39130008 4161144.24048975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8333.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038563</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.4">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512431.60130008 4161850.02368975</gml:lowerCorner>
+                    <gml:upperCorner>512431.60130008 4161850.02368975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512431.60130008 4161850.02368975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8386.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038602</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.5">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512110.84080007 4161346.04448975</gml:lowerCorner>
+                    <gml:upperCorner>512110.84080007 4161346.04448975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512110.84080007 4161346.04448975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8344.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Parzialmente agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038573</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.6">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512522.67460008 4160030.38658977</gml:lowerCorner>
+                    <gml:upperCorner>512522.67460008 4160030.38658977</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512522.67460008 4160030.38658977</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8342.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Parzialmente agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038571</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.7">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512556.34600008 4160007.93878977</gml:lowerCorner>
+                    <gml:upperCorner>512556.34600008 4160007.93878977</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512556.34600008 4160007.93878977</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8409.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038521</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.8">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512569.90810008 4159999.05318977</gml:lowerCorner>
+                    <gml:upperCorner>512569.90810008 4159999.05318977</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512569.90810008 4159999.05318977</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8406.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038520</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.9">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512061.44750007 4161561.86358975</gml:lowerCorner>
+                    <gml:upperCorner>512061.44750007 4161561.86358975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512061.44750007 4161561.86358975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8445.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038488</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.10">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512070.14420007 4161535.77308975</gml:lowerCorner>
+                    <gml:upperCorner>512070.14420007 4161535.77308975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512070.14420007 4161535.77308975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8411.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038524</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.11">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512629.86490008 4160861.54058976</gml:lowerCorner>
+                    <gml:upperCorner>512629.86490008 4160861.54058976</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512629.86490008 4160861.54058976</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8356.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038587</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.12">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512575.10740008 4160825.78078976</gml:lowerCorner>
+                    <gml:upperCorner>512575.10740008 4160825.78078976</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512575.10740008 4160825.78078976</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8325.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038554</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.13">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512375.85550008 4161973.17478975</gml:lowerCorner>
+                    <gml:upperCorner>512375.85550008 4161973.17478975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512375.85550008 4161973.17478975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8380.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038599</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.14">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512385.50800008 4161919.32848974</gml:lowerCorner>
+                    <gml:upperCorner>512385.50800008 4161919.32848974</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512385.50800008 4161919.32848974</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8383.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038600</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.15">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512376.63760008 4161823.32348974</gml:lowerCorner>
+                    <gml:upperCorner>512376.63760008 4161823.32348974</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512376.63760008 4161823.32348974</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8355.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038586</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.16">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512229.85680007 4160565.24148976</gml:lowerCorner>
+                    <gml:upperCorner>512229.85680007 4160565.24148976</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512229.85680007 4160565.24148976</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8302.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile con Provvedimenti</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038533</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.17">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512225.47290008 4160584.53058976</gml:lowerCorner>
+                    <gml:upperCorner>512225.47290008 4160584.53058976</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512225.47290008 4160584.53058976</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8289.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038641</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.18">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512226.10360007 4161815.92208975</gml:lowerCorner>
+                    <gml:upperCorner>512226.10360007 4161815.92208975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512226.10360007 4161815.92208975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8450.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile con Provvedimenti</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038482</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.19">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512239.36160008 4161791.21388975</gml:lowerCorner>
+                    <gml:upperCorner>512239.36160008 4161791.21388975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512239.36160008 4161791.21388975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8359.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038592</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.20">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512732.57880008 4161051.32518976</gml:lowerCorner>
+                    <gml:upperCorner>512732.57880008 4161051.32518976</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512732.57880008 4161051.32518976</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8354.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038585</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.21">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512409.26930008 4162043.38828974</gml:lowerCorner>
+                    <gml:upperCorner>512409.26930008 4162043.38828974</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512409.26930008 4162043.38828974</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8282.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038478</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.22">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512476.63070008 4162050.50758974</gml:lowerCorner>
+                    <gml:upperCorner>512476.63070008 4162050.50758974</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512476.63070008 4162050.50758974</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8387.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038604</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.23">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512138.12360007 4161476.12908975</gml:lowerCorner>
+                    <gml:upperCorner>512138.12360007 4161476.12908975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512138.12360007 4161476.12908975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8338.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038579</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.24">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512144.49230007 4161476.12908975</gml:lowerCorner>
+                    <gml:upperCorner>512144.49230007 4161476.12908975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512144.49230007 4161476.12908975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8339.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038581</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.25">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512387.92660008 4161113.06268976</gml:lowerCorner>
+                    <gml:upperCorner>512387.92660008 4161113.06268976</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512387.92660008 4161113.06268976</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8364.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038590</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.26">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512391.23530008 4161119.34908975</gml:lowerCorner>
+                    <gml:upperCorner>512391.23530008 4161119.34908975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512391.23530008 4161119.34908975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8365.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038591</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.27">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512521.25670008 4161504.14648975</gml:lowerCorner>
+                    <gml:upperCorner>512521.25670008 4161504.14648975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512521.25670008 4161504.14648975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8368.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038598</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.28">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512122.57600007 4161590.29128975</gml:lowerCorner>
+                    <gml:upperCorner>512122.57600007 4161590.29128975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512122.57600007 4161590.29128975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8346.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038575</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.29">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512119.02840007 4161614.23818975</gml:lowerCorner>
+                    <gml:upperCorner>512119.02840007 4161614.23818975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512119.02840007 4161614.23818975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8448.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Parzialmente agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038480</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.30">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512123.90650007 4161614.23818975</gml:lowerCorner>
+                    <gml:upperCorner>512123.90650007 4161614.23818975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512123.90650007 4161614.23818975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8341.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038570</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.31">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512262.70940008 4161580.97818975</gml:lowerCorner>
+                    <gml:upperCorner>512262.70940008 4161580.97818975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512262.70940008 4161580.97818975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8347.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038578</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.32">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512466.21090008 4161827.31178975</gml:lowerCorner>
+                    <gml:upperCorner>512466.21090008 4161827.31178975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512466.21090008 4161827.31178975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8393.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038628</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.33">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512242.93120008 4161729.31828975</gml:lowerCorner>
+                    <gml:upperCorner>512242.93120008 4161729.31828975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512242.93120008 4161729.31828975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8442.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038487</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.34">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512107.07820007 4161641.28898975</gml:lowerCorner>
+                    <gml:upperCorner>512107.07820007 4161641.28898975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512107.07820007 4161641.28898975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8308.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038538</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.35">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512169.32630007 4161672.76758975</gml:lowerCorner>
+                    <gml:upperCorner>512169.32630007 4161672.76758975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512169.32630007 4161672.76758975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8352.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038568</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.36">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512166.90740007 4160848.02028976</gml:lowerCorner>
+                    <gml:upperCorner>512166.90740007 4160848.02028976</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512166.90740007 4160848.02028976</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8350.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038565</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.37">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512062.84360007 4161164.40578976</gml:lowerCorner>
+                    <gml:upperCorner>512062.84360007 4161164.40578976</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512062.84360007 4161164.40578976</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8291.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Parzialmente agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038633</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.38">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512020.93820007 4161159.51698976</gml:lowerCorner>
+                    <gml:upperCorner>512020.93820007 4161159.51698976</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512020.93820007 4161159.51698976</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8351.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile con Provvedimenti</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038566</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.39">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512039.79560007 4161139.96108975</gml:lowerCorner>
+                    <gml:upperCorner>512039.79560007 4161139.96108975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512039.79560007 4161139.96108975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8284.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038635</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.40">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512047.09200007 4161119.45048976</gml:lowerCorner>
+                    <gml:upperCorner>512047.09200007 4161119.45048976</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512047.09200007 4161119.45048976</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8283.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038479</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.41">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512047.83280007 4161088.82688976</gml:lowerCorner>
+                    <gml:upperCorner>512047.83280007 4161088.82688976</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512047.83280007 4161088.82688976</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8293.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Inagibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038632</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.42">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512047.33870007 4161059.93198976</gml:lowerCorner>
+                    <gml:upperCorner>512047.33870007 4161059.93198976</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512047.33870007 4161059.93198976</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8287.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038638</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.43">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512067.83680007 4161049.31248975</gml:lowerCorner>
+                    <gml:upperCorner>512067.83680007 4161049.31248975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512067.83680007 4161049.31248975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8290.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038639</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.44">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512417.30830008 4161665.43408975</gml:lowerCorner>
+                    <gml:upperCorner>512417.30830008 4161665.43408975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512417.30830008 4161665.43408975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8348.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038580</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.45">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512279.20160008 4161674.88678975</gml:lowerCorner>
+                    <gml:upperCorner>512279.20160008 4161674.88678975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512279.20160008 4161674.88678975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8410.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038523</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.46">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512144.24580007 4161710.59538975</gml:lowerCorner>
+                    <gml:upperCorner>512144.24580007 4161710.59538975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512144.24580007 4161710.59538975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8343.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile con Provvedimenti</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038572</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.47">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512067.05230007 4161450.66098975</gml:lowerCorner>
+                    <gml:upperCorner>512067.05230007 4161450.66098975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512067.05230007 4161450.66098975</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8440.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038486</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.48">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512398.49410008 4162267.55668974</gml:lowerCorner>
+                    <gml:upperCorner>512398.49410008 4162267.55668974</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512398.49410008 4162267.55668974</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>3487.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870035058</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.49">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512380.25240008 4162261.11848974</gml:lowerCorner>
+                    <gml:upperCorner>512380.25240008 4162261.11848974</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512380.25240008 4162261.11848974</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8366.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Inagibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038595</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+        <MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati gml:id="Esiti_agibilita_fabbricati.50">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>512179.95090007 4162212.83228974</gml:lowerCorner>
+                    <gml:upperCorner>512179.95090007 4162212.83228974</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <MICROZONAZIONE_SISMICA:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>512179.95090007 4162212.83228974</gml:pos>
+                </gml:Point>
+            </MICROZONAZIONE_SISMICA:the_geom>
+            <MICROZONAZIONE_SISMICA:ID_SOPRALL>8362.0</MICROZONAZIONE_SISMICA:ID_SOPRALL>
+            <MICROZONAZIONE_SISMICA:ESITO>Agibile</MICROZONAZIONE_SISMICA:ESITO>
+            <MICROZONAZIONE_SISMICA:NUMERORICH>0870038596</MICROZONAZIONE_SISMICA:NUMERORICH>
+            <MICROZONAZIONE_SISMICA:COMUNE>ACI CATENA</MICROZONAZIONE_SISMICA:COMUNE>
+        </MICROZONAZIONE_SISMICA:Esiti_agibilita_fabbricati>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

@@ -45,6 +45,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.Lists.newArrayList;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
@@ -95,6 +96,6 @@ public abstract class WMSFeatureStore<K extends Object> implements GPStaxFeature
     @Override
     public List<Feature> getFeaturesByKey(@Nonnull(when = NEVER) K theKey) throws Exception {
         checkArgument(theKey != null, "The Parameter key must not be null.");
-        return this.store.get(theKey);
+        return this.store.getOrDefault(theKey, newArrayList());
     }
 }

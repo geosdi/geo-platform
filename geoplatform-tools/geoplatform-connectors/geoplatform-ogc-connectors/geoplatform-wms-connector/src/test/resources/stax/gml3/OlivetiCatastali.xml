@@ -1,0 +1,1683 @@
+<wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:admin="http://www.geosdi.org/admin"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="0"
+                       timeStamp="2022-04-26T13:50:00.305Z"
+                       xsi:schemaLocation="http://www.geosdi.org/admin https://prosit.geosdi.org/geoserver/admin/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=admin%3Aadmin_shp_oliveti_catastali http://www.opengis.net/wfs https://prosit.geosdi.org/geoserver/schemas/wfs/1.1.0/wfs.xsd">
+    <gml:featureMembers>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.1">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>564966.89235036 4490357.91714533 564968.75194997 4490360.83474125
+                                        564968.53999955 4490357.30711465 564966.89235036 4490357.91714533
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A013</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>3</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>1</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.2">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>571443.07521401 4487990.90955351 571441.94895095 4487993.90814341
+                                        571457.71651489 4488008.76278738 571486.8099995 4488014.56911462 571510.5789995
+                                        4488021.29911462 571523.7299995 4488014.24311462 571513.8799995 4488011.61911462
+                                        571492.1459995 4488007.55711462 571470.3839995 4488002.93011462 571455.6679995
+                                        4487998.85011462 571455.3089995 4487998.46211462 571455.1329995 4487997.98911462
+                                        571455.1619995 4487997.48611462 571455.2159995 4487997.00111462 571455.3759995
+                                        4487996.37311462 571456.1429995 4487994.86511462 571444.8869995 4487991.37211462
+                                        571443.07521401 4487990.90955351
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A013</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>13</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>283</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.3">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>571441.94895095 4487993.90814341 571443.07521401 4487990.90955351
+                                        571441.4479995 4487990.49411462 571440.1619995 4487990.24611462 571438.7679995
+                                        4487989.51411462 571436.4309995 4487987.74011462 571433.2739995 4487984.59011462
+                                        571432.5259995 4487983.43111462 571425.5799995 4487992.66611462 571439.5409995
+                                        4488002.31911462 571451.5299995 4488007.52811462 571457.71651489
+                                        4488008.76278738 571441.94895095 4487993.90814341
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A013</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>13</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>278</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.4">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>572104.06696067 4484510.47899727 572105.26407798 4484512.6846737
+                                        572118.9459995 4484508.86811458 572116.51109234 4484506.91317751 572111.67791545
+                                        4484508.07453354 572104.06696067 4484510.47899727
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A013</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>43</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>414</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.5">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>572105.26407798 4484512.6846737 572104.06696067 4484510.47899727
+                                        572093.60262548 4484481.97495232 572091.5609995 4484483.44511458 572100.2579995
+                                        4484514.08111458 572105.26407798 4484512.6846737
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A013</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>43</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>96</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.6">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>572093.60262548 4484481.97495232 572104.06696067 4484510.47899727
+                                        572111.67791545 4484508.07453354 572116.51109234 4484506.91317751 572103.8739995
+                                        4484496.76711458 572116.1829995 4484470.69611458 572095.3979995 4484480.68211458
+                                        572093.60262548 4484481.97495232
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A013</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>43</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>519</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.7">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>563197.81663615 4490370.62533473 563178.78587251 4490362.72457164
+                                        563156.20399956 4490354.15411465 563141.0224542 4490372.43928254 563187.2432299
+                                        4490389.36508912 563193.49899956 4490374.87811465 563195.77299956
+                                        4490373.20911465 563196.30399956 4490372.96711465 563197.14099956
+                                        4490372.85611465 563197.78399956 4490372.82811465 563198.83999956
+                                        4490373.20411465 563197.81663615 4490370.62533473
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A013</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>1</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>152</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.8">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>563183.79430274 4490400.54975847 563183.74686054 4490400.62720505
+                                        563183.78499956 4490400.63911465 563183.79430274 4490400.54975847
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A013</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>1</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>129</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.9">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>563178.78587251 4490362.72457164 563197.81663615 4490370.62533473
+                                        563197.55899956 4490369.97611465 563196.69699956 4490369.26411465
+                                        563181.84899956 4490363.88711465 563178.78587251 4490362.72457164
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A013</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>1</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>178</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.10">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>564968.75194997 4490360.83474125 564966.89235036 4490357.91714533
+                                        564964.46699955 4490358.81511465 564949.14099955 4490361.02311465
+                                        564945.09599955 4490361.29111465 564944.40834567 4490355.92901232
+                                        564934.11387113 4490363.32285559 564934.39699955 4490366.77011465
+                                        564937.85265434 4490366.46631246 564937.41529717 4490362.36243374
+                                        564951.42929655 4490361.07220096 564952.50667606 4490373.21113791
+                                        564944.10630686 4490374.09468675 564944.0496563 4490374.10537785 564944.35999955
+                                        4490378.49011465 564935.74699955 4490379.48111465 564935.80499955
+                                        4490382.05011465 564944.00299955 4490380.75811465 564951.82599955
+                                        4490379.01011465 564960.31399955 4490376.21711465 564964.01299955
+                                        4490374.50911465 564966.61199955 4490373.34411465 564969.45199955
+                                        4490372.48611465 564968.75194997 4490360.83474125
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A013</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>3</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>673</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.11">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>564952.50667606 4490373.21113791 564951.42929655 4490361.07220096
+                                        564937.41529717 4490362.36243374 564937.85265434 4490366.46631246
+                                        564943.47399955 4490365.97211465 564944.0496563 4490374.10537785 564944.10630686
+                                        4490374.09468675 564952.50667606 4490373.21113791
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A013</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>3</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>674</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.12">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>564934.11387113 4490363.32285559 564944.40834567 4490355.92901232
+                                        564942.59999955 4490341.82811465 564943.37699955 4490337.61911465
+                                        564943.74499955 4490337.31311465 564941.36799955 4490330.51411465
+                                        564931.34199955 4490331.60511465 564932.36399955 4490342.01711465
+                                        564934.11387113 4490363.32285559
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A013</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>3</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>675</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.13">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>563183.74686054 4490400.62720505 563183.79430274 4490400.54975847
+                                        563184.23299956 4490396.33611465 563187.2432299 4490389.36508912 563141.0224542
+                                        4490372.43928254 563131.75599956 4490383.60011465 563166.80599956
+                                        4490395.33711465 563183.74686054 4490400.62720505
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A013</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>1</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>151</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.14">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598449.02280226 4482908.82170618 598449.20861441 4482909.16650851
+                                        598450.09399932 4482909.64211455 598456.51199932 4482910.55211455
+                                        598465.28199932 4482910.53411455 598477.38899932 4482907.45111455
+                                        598489.79399932 4482903.19711455 598493.46699932 4482902.14011455
+                                        598496.24699932 4482901.90311455 598496.6566457 4482901.91309534 598489.17980046
+                                        4482890.09601415 598479.16323761 4482896.89352524 598479.15582238
+                                        4482902.53118517 598467.47200368 4482906.76095786 598453.3811628
+                                        4482908.26913036 598449.02280226 4482908.82170618
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>21</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>110</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.15">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598581.04148115 4482918.61675848 598579.41491662 4482917.94365093
+                                        598577.70599932 4482920.18511455 598579.41899932 4482921.49311455
+                                        598581.04148115 4482918.61675848
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>21</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>482</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.16">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598799.23487262 4482883.71905471 598799.5648723 4482883.91711226
+                                        598800.82299932 4482883.10811455 598802.03399932 4482882.33011455
+                                        598817.86999931 4482871.03311455 598821.00499932 4482866.00011455
+                                        598824.97499932 4482861.36911455 598830.59799931 4482857.39911455
+                                        598835.39499931 4482854.58811455 598836.71799932 4482853.09911455
+                                        598839.36399932 4482850.28711455 598841.67999932 4482847.47511455
+                                        598844.98799932 4482843.34011455 598853.58899931 4482833.08611455
+                                        598859.54299931 4482827.79311455 598864.17399932 4482824.32011455
+                                        598868.30899932 4482820.51511455 598874.26399932 4482816.54611455
+                                        598875.96826684 4482815.44702008 598874.52457014 4482811.92194487
+                                        598865.77779515 4482819.98317337 598838.94305949 4482844.58181439
+                                        598838.21306704 4482845.2668991 598838.76605392 4482845.85616722 598811.58113962
+                                        4482870.54909985 598799.23487262 4482883.71905471
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>22</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>162</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.17">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598823.75875364 4482803.68266143 598828.56682342 4482802.84516209
+                                        598840.40882866 4482800.78241998 598845.06899932 4482799.60311455
+                                        598865.80199931 4482797.93311455 598866.82824018 4482797.73613934
+                                        598865.36936491 4482796.47486178 598848.40510418 4482797.24176487
+                                        598848.29116157 4482768.23459898 598832.94291853 4482763.29037245
+                                        598821.65771755 4482758.57044754 598818.97726538 4482756.33408208
+                                        598797.98706992 4482779.44423232 598798.65494063 4482792.82323204 598799.4171464
+                                        4482799.97086036 598805.29163109 4482803.94257167 598817.92095914
+                                        4482809.52628852 598823.75875364 4482803.68266143
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                            <gml:interior>
+                                <gml:LinearRing>
+                                    <gml:posList>598820.23385186 4482787.06715241 598827.92618537 4482783.16890631
+                                        598827.99463219 4482783.31113368 598828.52999931 4482783.01511455
+                                        598831.93599932 4482789.17411455 598831.19116836 4482789.58595197
+                                        598832.02501427 4482791.18297872 598833.02418908 4482793.09592516
+                                        598825.05200542 4482797.1373962 598820.23385186 4482787.06715241
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:interior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>22</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>276</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.18">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598329.43646548 4482423.9373411 598333.56046403 4482431.6685388
+                                        598342.50999932 4482432.99711455 598348.80499932 4482433.17611455
+                                        598344.74199932 4482430.24811455 598339.83299932 4482427.21211455
+                                        598337.38899932 4482426.10711455 598332.79999932 4482424.80311455
+                                        598329.43646548 4482423.9373411
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>32</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>240</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.19">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598500.58529293 4481911.75611329 598500.51723679 4481910.80518343
+                                        598471.77869852 4481915.54077137 598471.7671941 4481916.40112223 598492.84699932
+                                        4481913.40711454 598492.76699932 4481912.80311454 598500.58529293
+                                        4481911.75611329
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>33</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>643</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.20">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>599589.84815783 4483023.58374896 599591.08467997 4483025.49464085
+                                        599590.16030368 4483023.30569431 599589.84815783 4483023.58374896
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>23</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>318</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.21">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>597714.62532797 4483071.32746531 597716.75137139 4483066.27802752
+                                        597709.37671862 4483062.27830088 597710.43899932 4483064.17811455
+                                        597714.77099932 4483065.77311455 597709.97099932 4483078.81011456
+                                        597706.20799932 4483077.42511456 597705.47599932 4483078.34511456
+                                        597700.57899932 4483076.92511456 597702.03999932 4483070.03911455
+                                        597701.12949871 4483069.63581738 597698.0410973 4483077.99412806 597710.3866901
+                                        4483081.39252817 597714.62532797 4483071.32746531
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>597704.05784798 4483061.71066459 597701.8712319 4483067.628424
+                                        597702.32199932 4483066.61111455 597702.61799932 4483066.74211456
+                                        597704.55999932 4483062.35611455 597704.05784798 4483061.71066459
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>14</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>481</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.22">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>596390.79418727 4482502.49179831 596435.55603235 4482518.31297125
+                                        596441.5094922 4482510.17186536 596448.41023478 4482499.07734469 596449.54400242
+                                        4482494.66350384 596452.20290006 4482491.65727108 596455.85699933
+                                        4482483.06411455 596456.59599933 4482482.00411455 596457.72499933
+                                        4482481.02211455 596458.57399933 4482480.86211455 596466.23899933
+                                        4482482.55411455 596472.48699933 4482457.78611455 596476.77878768
+                                        4482444.55054042 596477.62151717 4482440.81519311 596479.28799931
+                                        4482431.92748422 596414.12443834 4482411.93575078 596414.10899933
+                                        4482411.98311455 596405.54707802 4482434.99960533 596405.21864207
+                                        4482435.9828144 596384.18878523 4482499.35546258 596390.97199933
+                                        4482502.04311455 596390.79418727 4482502.49179831
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>19</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>155</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.23">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>596466.98115999 4482485.06936489 596467.58061817 4482485.32086828
+                                        596476.77878768 4482444.55054042 596472.48699933 4482457.78611455
+                                        596466.23899933 4482482.55411455 596466.98115999 4482485.06936489
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>19</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>155</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.24">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>597478.4143768 4483130.48036504 597488.3626531 4483126.91824327
+                                        597492.01625834 4483112.90423877 597478.40410849 4483117.49411793 597478.4143768
+                                        4483130.48036504
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>14</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>313</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.25">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>599587.58938444 4483019.3454537 599589.84815783 4483023.58374896
+                                        599590.16030368 4483023.30569431 599585.94599931 4483013.32611455 599581.0882796
+                                        4483000.93234607 599577.94498483 4483000.70648872 599587.58938444
+                                        4483019.3454537
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>23</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>49</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.59">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>597640.49123739 4483009.79040093 597691.10743939 4483031.52277942
+                                        597688.21378359 4483025.30769516 597685.07384439 4483022.47998443
+                                        597683.51511007 4483014.04100647 597640.49123739 4483009.79040093
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>14</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>187</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.26">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598818.79262448 4483166.85060004 598834.02230796 4483165.48463899
+                                        598842.51432775 4483164.13753869 598844.4504413 4483162.9736947 598846.03076986
+                                        4483147.5357121 598839.57699931 4483147.03611456 598835.77899931
+                                        4483147.60911455 598833.96499932 4483148.21511456 598825.38399932
+                                        4483151.08111456 598820.56663893 4483152.40174609 598820.52873176
+                                        4483161.43001382 598818.79262448 4483166.85060004
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>22</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>124</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.27">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>600832.92073983 4483179.63237138 600855.75672535 4483230.33576756
+                                        600861.2109993 4483232.33511456 600867.5839993 4483235.28411456 600870.8669993
+                                        4483236.77011455 600872.9339993 4483238.20411456 600879.1399993 4483243.26311456
+                                        600881.9139993 4483244.84011456 600884.3449993 4483245.98811456 600886.0889993
+                                        4483246.61111456 600887.6059993 4483246.95511456 600888.3999993 4483247.03011456
+                                        600889.3839993 4483247.12211456 600891.6739993 4483246.86511456 600892.8629993
+                                        4483246.62311456 600892.3839993 4483244.84211456 600888.1589993 4483245.70211455
+                                        600885.9069993 4483244.54711456 600884.4989993 4483241.87511456 600883.6939993
+                                        4483238.90711456 600883.1829993 4483234.75711456 600882.8799993 4483230.91211456
+                                        600882.5029993 4483226.17211456 600881.5489993 4483221.03111456 600880.3409993
+                                        4483216.30611456 600875.9089993 4483203.74011456 600871.6953851 4483194.72525871
+                                        600870.82587368 4483194.89018847 600850.97099845 4483173.4711633 600847.78719162
+                                        4483171.94189884 600843.50704191 4483175.31591718 600832.92073983
+                                        4483179.63237138
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>24</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>8</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.28">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>597857.12117393 4482130.89715702 597861.18427718 4482129.99470215
+                                        597866.4901177 4482128.71595261 597865.37549848 4482123.69815641 597860.24611314
+                                        4482124.41639038 597856.46339526 4482125.43456988 597857.12117393
+                                        4482130.89715702
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>32</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>195</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.29">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598504.29770901 4481836.8917082 598502.53434157 4481836.95325971
+                                        598505.17699932 4481841.20211454 598503.82199932 4481842.04411454
+                                        598502.79099932 4481840.38711454 598499.78799932 4481842.25411454
+                                        598497.48399932 4481838.55011454 598499.90429982 4481837.04506306
+                                        598477.28670324 4481837.83454529 598454.9352344 4481839.59951252 598455.42157099
+                                        4481840.99901784 598456.0368181 4481841.56651636 598457.88579652
+                                        4481847.81932515 598473.03799932 4481846.84011454 598482.02299932
+                                        4481847.61611454 598493.03599932 4481849.20211454 598493.04399932
+                                        4481849.16711454 598498.3645148 4481850.06654795 598506.50645076 4481844.289925
+                                        598508.42138924 4481837.38197169 598507.17499932 4481837.66211454
+                                        598507.35999932 4481838.48911454 598504.78599932 4481839.06711454
+                                        598504.29770901 4481836.8917082
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                            <gml:interior>
+                                <gml:LinearRing>
+                                    <gml:posList>598491.16288919 4481839.29481131 598493.39668896 4481842.93388638
+                                        598494.27717474 4481844.37734478 598492.72009164 4481845.3083146 598491.83331142
+                                        4481843.9617507 598489.23605662 4481845.67163724 598486.80546477
+                                        4481841.87096576 598491.16288919 4481839.29481131
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:interior>
+                            <gml:interior>
+                                <gml:LinearRing>
+                                    <gml:posList>598485.71299932 4481840.67911454 598485.66099932 4481842.39411454
+                                        598483.61999932 4481842.33211454 598483.67099932 4481840.61711454
+                                        598485.71299932 4481840.67911454
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:interior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>33</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>653</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.30">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598492.54823051 4481851.30958233 598495.8276431 4481851.86643331
+                                        598498.3645148 4481850.06654795 598493.04399932 4481849.16711454 598493.03599932
+                                        4481849.20211454 598492.54823051 4481851.30958233
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>33</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>653</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.31">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>597454.75090467 4483133.10621651 597478.4143768 4483130.48036504
+                                        597478.40410849 4483117.49411793 597453.7899303 4483125.79598826 597454.75090467
+                                        4483133.10621651
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>14</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>317</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.32">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>596494.32369156 4482540.89338354 596502.41985494 4482540.29451653
+                                        596515.7390325 4482544.75067581 596525.40156726 4482546.21213532 596525.10799933
+                                        4482545.64611455 596525.86699933 4482544.32211455 596529.14999933
+                                        4482542.04511455 596533.47599933 4482541.65411455 596556.31499933
+                                        4482537.00911455 596562.85799933 4482535.62311455 596564.94099933
+                                        4482535.54111455 596567.00299933 4482532.28011455 596569.27499933
+                                        4482526.78011455 596570.76099933 4482519.66311455 596569.82099933
+                                        4482510.88311455 596569.15938074 4482506.52600243 596474.63594377
+                                        4482510.54631057 596479.42799933 4482525.55711455 596483.20199933
+                                        4482539.00111455 596490.02299933 4482540.00111455 596494.32369156
+                                        4482540.89338354
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>19</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>275</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.33">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598346.23685222 4483262.21190723 598335.80982416 4483264.24488336
+                                        598328.49541202 4483268.29213853 598327.27159968 4483270.10229294
+                                        598334.56499932 4483266.35211456 598342.63899932 4483263.08211456
+                                        598346.23685222 4483262.21190723
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>12</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO/>
+            <admin:LIVELLO>STRADE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.34">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>596909.29992574 4481914.99917181 596965.62165092 4481818.7156853
+                                        596962.38676022 4481806.74690135 596950.13522904 4481826.1431059 596947.39499933
+                                        4481832.18211454 596942.04999933 4481843.94811454 596940.28099933
+                                        4481846.28611454 596934.37126261 4481851.12608908 596901.5775669
+                                        4481903.57827347 596908.51499933 4481913.09411454 596909.29992574
+                                        4481914.99917181
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>31</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>104</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.35">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>597728.54606807 4482139.55050894 597731.96349601 4482142.29860808
+                                        597743.76335723 4482147.25733429 597755.25373561 4482164.07029082
+                                        597763.25956837 4482157.73477746 597805.6980866 4482120.67962528 597848.13135429
+                                        4482084.31624176 597845.59272331 4482078.82341084 597844.78128248
+                                        4482079.05432811 597788.81136808 4482107.57666779 597766.99778499
+                                        4482119.10813926 597766.69199932 4482119.54211454 597765.06699932
+                                        4482121.48511454 597763.17399932 4482122.72111454 597752.33699932
+                                        4482127.58311454 597749.32727405 4482128.44942866 597731.59443865
+                                        4482137.8236651 597728.54606807 4482139.55050894
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>32</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>265</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.36">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598334.91917809 4482483.30037458 598336.50189287 4482483.35229419
+                                        598336.70581069 4482481.45959523 598335.23999932 4482481.23211455
+                                        598334.91917809 4482483.30037458
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>32</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>539</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.37">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598346.01535641 4482482.32677352 598346.03723738 4482481.90800226
+                                        598338.95799932 4482481.80911455 598336.70581069 4482481.45959523
+                                        598336.50189287 4482483.35229419 598345.88254479 4482483.66070296
+                                        598346.01535641 4482482.32677352
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>32</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>536</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.38">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598556.32664981 4481881.6750248 598557.81562265 4481885.3453929
+                                        598562.69099932 4481885.03111454 598563.17405845 4481886.66633424
+                                        598570.41003374 4481883.78991981 598587.38876909 4481877.8273152 598582.46438923
+                                        4481868.85584052 598581.67799932 4481867.84911454 598579.79233494
+                                        4481865.38804016 598566.36616743 4481870.9166656 598555.97325022
+                                        4481876.47744138 598556.32664981 4481881.6750248
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>33</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>197</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.39">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>599132.57362522 4482471.64519434 599177.52151966 4482479.83463178
+                                        599183.03022192 4482481.03105537 599182.43275105 4482474.35399705
+                                        599179.08999931 4482474.20611455 599172.68699931 4482473.90711455
+                                        599164.75299931 4482473.64111455 599157.28599931 4482472.73411455
+                                        599151.81599931 4482472.37211455 599145.29399931 4482472.10611455
+                                        599138.64899931 4482471.40611455 599132.90733584 4482470.51184283
+                                        599132.57362522 4482471.64519434
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>33</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>508</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.40">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598484.14622328 4481576.95271425 598512.67777353 4481606.83871532
+                                        598518.5317192 4481600.83232739 598527.05739907 4481596.51829851 598520.70687017
+                                        4481589.56689653 598510.21463666 4481577.58221167 598507.54650309
+                                        4481574.42422333 598503.50584197 4481568.18955615 598500.36504047
+                                        4481565.31418433 598498.98638438 4481563.18741561 598497.99599932
+                                        4481563.32911454 598495.46199932 4481565.30011454 598493.77299932
+                                        4481566.70811453 598490.11299932 4481569.80511454 598488.58580807
+                                        4481570.56871016 598487.07324672 4481573.83354652 598486.59635028
+                                        4481574.3417488 598493.93499932 4481581.02811454 598492.48699932
+                                        4481582.61711454 598489.60799932 4481579.99511454 598488.87199932
+                                        4481580.80311454 598487.39399932 4481579.45711453 598488.18199932
+                                        4481578.59211454 598485.17695734 4481575.85431771 598484.14622328
+                                        4481576.95271425
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>33</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>338</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.41">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>596272.32622058 4482164.7689635 596274.05584282 4482153.27413601
+                                        596275.09819694 4482143.95817914 596272.12019698 4482142.89058812 596264.4269383
+                                        4482140.13331002 596262.60391763 4482139.53770534 596250.32399933
+                                        4482156.20211454 596257.91299933 4482158.27111454 596260.55599933
+                                        4482159.33711454 596272.32622058 4482164.7689635
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>18</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>148</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.42">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>596262.60391763 4482139.53770534 596260.06206867 4482138.70725005
+                                        596248.64613146 4482156.20311494 596250.32399933 4482156.20211454
+                                        596262.60391763 4482139.53770534
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>18</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>148</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.43">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>599560.06574603 4483063.26204438 599560.55925869 4483063.18332896
+                                        599560.45321438 4483062.74863592 599559.96899931 4483062.67011455
+                                        599560.06574603 4483063.26204438
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>599558.13419951 4483053.2426127 599557.51301935 4483050.69629309
+                                        599555.44679575 4483045.01943773 599555.09599931 4483046.00811455
+                                        599553.17199931 4483046.44611455 599553.62399931 4483048.42811455
+                                        599555.26399931 4483048.05411455 599556.50899931 4483053.51811455
+                                        599558.13419951 4483053.2426127
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>23</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>375</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.44">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598457.88579652 4481847.81932515 598456.0368181 4481841.56651636
+                                        598455.42157099 4481840.99901784 598456.55099932 4481844.24911454
+                                        598457.62599932 4481847.83611454 598457.88579652 4481847.81932515
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>33</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO/>
+            <admin:LIVELLO>STRADE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.60">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>597506.71909997 4483006.73155188 597515.99744171 4483027.99394204
+                                        597523.80316471 4483028.47325643 597529.32116643 4483011.77978676
+                                        597543.43970895 4482996.46206365 597552.49689302 4482984.77482441
+                                        597534.43232851 4482969.14264479 597529.63396305 4482967.38684595
+                                        597519.56250026 4482967.67605219 597507.15033211 4482989.6631183 597506.71909997
+                                        4483006.73155188
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>14</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>225</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.61">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>597552.57415006 4483066.68164325 597565.59197208 4483054.80143186
+                                        597587.50092529 4483042.60323175 597581.72015631 4483032.1492234 597567.10275725
+                                        4483038.34530144 597563.62918327 4483043.0847798 597549.67303327
+                                        4483065.24715232 597552.57415006 4483066.68164325
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>14</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>184</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.62">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>597545.33270377 4483061.23798084 597549.67303327 4483065.24715232
+                                        597563.62918327 4483043.0847798 597567.10275725 4483038.34530144 597581.72015631
+                                        4483032.1492234 597576.80525454 4483023.25945069 597574.34599909
+                                        4483017.49183436 597573.2850618 4483011.52596811 597584.43439527
+                                        4483002.55611181 597573.49165425 4482996.0791661 597563.62595659
+                                        4483011.55674706 597551.73454045 4483033.55277863 597539.9501817
+                                        4483058.53257746 597545.33270377 4483061.23798084
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>14</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>183</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.63">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>596003.96405277 4482325.8405157 596005.13522212 4482319.22767696
+                                        596002.17666505 4482318.94916689 595992.14534838 4482316.60289903
+                                        595992.77099933 4482317.76411455 595996.51089855 4482323.7109144 595999.6381017
+                                        4482325.46673712 596003.96405277 4482325.8405157
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>595989.7317961 4482316.05355671 595992.62447665 4482321.52881508
+                                        595993.10690681 4482321.7996839 595991.15999934 4482318.70411455 595989.7317961
+                                        4482316.05355671
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>18</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO>87</admin:NUMERO>
+            <admin:LIVELLO>PARTICELLE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+        <admin:admin_shp_oliveti_catastali gml:id="admin_shp_oliveti_catastali.45">
+            <admin:the_geom>
+                <gml:MultiSurface srsName="http://www.opengis.net/gml/srs/epsg.xml#32633" srsDimension="2">
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598464.80729294 4481896.41310307 598468.68386884 4481911.24632434
+                                        598468.79585114 4481916.82314813 598471.7671941 4481916.40112223 598471.77869852
+                                        4481915.54077137 598471.8274459 4481911.89522591 598469.94241816
+                                        4481903.18293225 598467.54318537 4481894.9436572 598467.82748343 4481890.7293874
+                                        598466.60951091 4481883.42170631 598466.52269059 4481882.84262545
+                                        598465.77399932 4481882.97811454 598464.42999932 4481886.26311454
+                                        598465.95199932 4481896.10411454 598464.80729294 4481896.41310307
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598678.88167159 4481815.82567925 598677.68141497 4481817.56618102
+                                        598678.33608671 4481819.18904607 598679.61499932 4481818.04111454
+                                        598679.15699932 4481816.65211454 598678.88167159 4481815.82567925
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598599.70577189 4482006.35468693 598597.19401322 4482006.83209643
+                                        598589.66417176 4482010.01868467 598583.94527449 4482012.76371524
+                                        598591.18399932 4482010.45211454 598599.70577189 4482006.35468693
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598555.91725013 4482003.52646175 598555.83280194 4482002.49484662
+                                        598555.51589569 4482000.85561197 598555.91725013 4482003.52646175
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598448.0705771 4481745.33835414 598454.70356823 4481740.14801645
+                                        598456.88220532 4481737.17054759 598456.42499932 4481737.54411454
+                                        598453.60999932 4481739.59911454 598448.07399932 4481743.04411454
+                                        598446.23999932 4481744.42511454 598448.0705771 4481745.33835414
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598465.25493472 4481730.63527364 598472.14641808 4481728.41088609
+                                        598475.09711185 4481725.31603075 598476.98893897 4481722.90286376
+                                        598483.69359257 4481716.37996928 598486.03965397 4481711.62339305
+                                        598486.48874037 4481709.96945444 598482.22999932 4481715.60111454
+                                        598480.31899932 4481717.88111454 598479.75799932 4481718.55011454
+                                        598473.80699932 4481723.75911454 598468.53099932 4481728.15811454
+                                        598465.25493472 4481730.63527364
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598490.43976045 4481696.7546788 598491.95321583 4481692.3357276
+                                        598495.1299431 4481685.19678494 598497.83925249 4481680.11613785 598500.93513473
+                                        4481674.68673753 598508.95071904 4481668.29534546 598514.97848639
+                                        4481662.2992809 598522.18929435 4481656.35402706 598524.28815258
+                                        4481652.96284351 598527.8704856 4481646.14525387 598533.37927208
+                                        4481641.80188423 598536.95057376 4481641.19278097 598541.01154409
+                                        4481640.4502559 598543.19996246 4481638.88486824 598543.60495707
+                                        4481638.45092312 598541.10599932 4481639.56711454 598539.93399932
+                                        4481639.67311454 598538.65899932 4481639.58711454 598537.75199932
+                                        4481639.06711454 598537.43394401 4481638.59864685 598533.06456253
+                                        4481638.64536974 598525.26092437 4481644.1397947 598524.03838372
+                                        4481645.39816751 598522.84511236 4481649.77624533 598519.75187062
+                                        4481653.06415266 598513.2938016 4481658.71653816 598506.80999164
+                                        4481664.49955048 598498.11311008 4481673.1683296 598497.2273676 4481675.70692485
+                                        598493.39036162 4481681.60730956 598488.93903423 4481690.38384506
+                                        598488.36434437 4481692.03253283 598490.43976045 4481696.7546788
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598437.32005493 4481650.58482369 598437.56173583 4481650.26655198
+                                        598439.65950437 4481647.48022132 598441.96877138 4481644.35379412
+                                        598445.24783845 4481635.54258895 598446.07648475 4481633.32877625
+                                        598442.03899932 4481641.18211454 598436.84099932 4481650.31211454
+                                        598437.32005493 4481650.58482369
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                    <gml:surfaceMember>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>598450.68805424 4481623.54054669 598455.6901644 4481622.02422162
+                                        598458.71446352 4481611.62995728 598459.59622306 4481607.96855609
+                                        598466.10348285 4481599.36735315 598468.68899932 4481595.14611454
+                                        598469.21899932 4481594.38711454 598474.91999932 4481586.22211454
+                                        598481.88899932 4481578.80111454 598482.19714946 4481579.09026346
+                                        598484.14622328 4481576.95271425 598485.17695734 4481575.85431771
+                                        598484.59499932 4481575.32411454 598485.99199932 4481573.79111454
+                                        598486.59635028 4481574.3417488 598487.07324672 4481573.83354652 598488.58580807
+                                        4481570.56871016 598487.29699932 4481571.21311453 598483.98599932
+                                        4481571.04711454 598481.00599932 4481574.88111454 598473.73999932
+                                        4481584.29911454 598467.92299932 4481592.28111454 598466.01099932
+                                        4481595.02911454 598462.22599932 4481600.87311454 598459.74899932
+                                        4481605.13311454 598455.97899932 4481612.54011454 598451.33399932
+                                        4481622.16311454 598450.68805424 4481623.54054669
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </gml:surfaceMember>
+                </gml:MultiSurface>
+            </admin:the_geom>
+            <admin:COMUNE>A017</admin:COMUNE>
+            <admin:SEZIONE/>
+            <admin:FOGLIO>33</admin:FOGLIO>
+            <admin:ALLEGATO/>
+            <admin:SVILUPPO/>
+            <admin:NUMERO/>
+            <admin:LIVELLO>STRADE</admin:LIVELLO>
+            <admin:VISUALIZZA/>
+            <admin:cl_agr_ty>04</admin:cl_agr_ty>
+        </admin:admin_shp_oliveti_catastali>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

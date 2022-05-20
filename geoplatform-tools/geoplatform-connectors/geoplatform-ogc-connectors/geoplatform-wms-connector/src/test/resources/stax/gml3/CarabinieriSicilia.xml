@@ -1,0 +1,1315 @@
+<wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:SISTEMA_REGIONALE_PC="http://localhost:8080/geoserver/SISTEMA_REGIONALE_PC"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="0"
+                       timeStamp="2022-05-10T07:45:44.864Z"
+                       xsi:schemaLocation="http://www.opengis.net/wfs http://www.protezionecivilesicilia.it:8080/geoserver/schemas/wfs/1.1.0/wfs.xsd http://localhost:8080/geoserver/SISTEMA_REGIONALE_PC http://www.protezionecivilesicilia.it:8080/geoserver/SISTEMA_REGIONALE_PC/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=SISTEMA_REGIONALE_PC%3ACarabinieri">
+    <gml:boundedBy>
+        <gml:Envelope srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#6708">
+            <gml:lowerCorner>227097.99999839 3931255.99989338</gml:lowerCorner>
+            <gml:upperCorner>554289.00000034 4285894.99988802</gml:upperCorner>
+        </gml:Envelope>
+    </gml:boundedBy>
+    <gml:featureMembers>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.1">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>282909.9999988 3931255.99989338</gml:lowerCorner>
+                    <gml:upperCorner>282909.9999988 3931255.99989338</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>282909.9999988 3931255.99989338</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>LAMPEDUSA E LINOSA</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92010</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Lampedusa</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA ROMA 37</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/970001</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/970030</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411150@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG28586@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>282910</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>3931256</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.2">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>307029.99999891 3970464.99989273</gml:lowerCorner>
+                    <gml:upperCorner>307029.99999891 3970464.99989273</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>307029.99999891 3970464.99989273</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>LAMPEDUSA E LINOSA</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92010</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Linosa</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA UMBERTO 47</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/972083</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/972120</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411160@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG25475@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>307030</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>3970465</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.3">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>320598.9999989 4164340.99988975</gml:lowerCorner>
+                    <gml:upperCorner>320598.9999989 4164340.99988975</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>320598.9999989 4164340.99988975</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>MENFI</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92013</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Menfi</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA INICO 223</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0925/71111</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0925/71630</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411230@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG24068@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>320599</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4164341</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.4">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>322824.99999891 4174747.9998896</gml:lowerCorner>
+                    <gml:upperCorner>322824.99999891 4174747.9998896</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>322824.99999891 4174747.9998896</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>MONTEVAGO</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92010</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Montevago</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>PIAZZA DELLA REPUBBLICA 1</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0925/38003</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0925/38003</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411240@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG20559@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>322825</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4174748</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.5">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>325255.99999893 4173382.99988961</gml:lowerCorner>
+                    <gml:upperCorner>325255.99999893 4173382.99988961</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>325255.99999893 4173382.99988961</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>SANTA MARGHERITA DI BELICE</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92018</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC S.Margherita Belice</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA DANTE ALIGHIERI 0 SNC</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0925/31180</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0925/31180</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411250@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG29483@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>325256</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4173383</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.6">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>328991.99999896 4153284.99988991</gml:lowerCorner>
+                    <gml:upperCorner>328991.99999896 4153284.99988991</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>328991.99999896 4153284.99988991</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>SCIACCA</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92019</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>COMPAGNIA</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Compagnia CC Sciacca</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA LEONARDO SCIASCIA 1</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0925/21010</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0925/21010</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>cpag411200cdo@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG22574@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>328992</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4153285</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.7">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>328991.99999896 4153284.99988991</gml:lowerCorner>
+                    <gml:upperCorner>328991.99999896 4153284.99988991</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>328991.99999896 4153284.99988991</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>SCIACCA</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92019</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Sciacca</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA LEONARDO SCIASCIA 1</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0925/21060</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0925/21010</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411210@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG30370@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>328992</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4153285</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.8">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>333421.99999898 4168370.99988968</gml:lowerCorner>
+                    <gml:upperCorner>333421.99999898 4168370.99988968</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>333421.99999898 4168370.99988968</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>SAMBUCA DI SICILIA</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92017</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Sambuca Di Sicilia</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA SANTA CROCE 1</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0925/941181</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0925/942118</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411260@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG26413@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>333422</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4168371</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.9">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>342523.99999904 4160433.9998898</gml:lowerCorner>
+                    <gml:upperCorner>342523.99999904 4160433.9998898</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>342523.99999904 4160433.9998898</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>CALTABELLOTTA</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92010</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Caltabellotta</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA IV NOVEMBRE 4</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0925/951111</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0925/951872</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411220@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG27254@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>342524</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4160434</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.10">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>346639.99999907 4150923.99988994</gml:lowerCorner>
+                    <gml:upperCorner>346639.99999907 4150923.99988994</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>346639.99999907 4150923.99988994</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>RIBERA</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92016</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>TENENZA</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Tenenza CC Ribera</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA BELLINI 18</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0925/61111</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0925/61767</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>tnag411270@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG29266@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>346640</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4150924</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.11">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>348864.99999908 4162622.99988976</gml:lowerCorner>
+                    <gml:upperCorner>348864.99999908 4162622.99988976</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>348864.99999908 4162622.99988976</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>BURGIO</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92010</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Burgio</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA LEONE 16</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0925/64121</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0925/64436</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag4112b0@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG22364@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>348865</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4162623</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.12">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>348898.99999908 4154533.99988988</gml:lowerCorner>
+                    <gml:upperCorner>348898.99999908 4154533.99988988</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>348898.99999908 4154533.99988988</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>CALAMONACI</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92010</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Calamonaci</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>CORSO GARIBALDI 40</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0925/68801</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0925/68453</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411280@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG20320@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>348899</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4154534</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.13">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>350441.99999909 4160661.99988979</gml:lowerCorner>
+                    <gml:upperCorner>350441.99999909 4160661.99988979</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>350441.99999909 4160661.99988979</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>LUCCA SICULA</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92010</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Lucca Sicula</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA ZETA 15</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0925/60221</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0925/60690</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411290@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG23795@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>350442</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4160662</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.14">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>354071.99999912 4140067.99989009</gml:lowerCorner>
+                    <gml:upperCorner>354071.99999912 4140067.99989009</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>354071.99999912 4140067.99989009</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>MONTALLEGRO</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92010</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Montallegro</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA CESARE BATTISTI 30</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/847131</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/845024</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag4111b0@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG21307@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>354072</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4140068</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.15">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>358097.99999914 4144961.99989002</gml:lowerCorner>
+                    <gml:upperCorner>358097.99999914 4144961.99989002</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>358097.99999914 4144961.99989002</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>CATTOLICA ERACLEA</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92011</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Cattolica Eraclea</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA ORETO 163</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/849082</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/840656</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag4111c0@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG30146@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>358098</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4144962</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.16">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>360542.99999916 4133423.99989019</gml:lowerCorner>
+                    <gml:upperCorner>360542.99999916 4133423.99989019</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>360542.99999916 4133423.99989019</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>SICULIANA</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92010</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Siculiana</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>PIAZZA PIER SANTI MATTARELLA 3</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/815111</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/815111</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag4111a0@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG27935@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>360543</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4133424</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.17">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>361665.99999916 4153485.99988989</gml:lowerCorner>
+                    <gml:upperCorner>361665.99999916 4153485.99988989</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>361665.99999916 4153485.99988989</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>CIANCIANA</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92012</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Cianciana</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA PAPA GIOVANNI XXIII 3</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/984111</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/984111</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411580@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG22405@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>361666</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4153486</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.18">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>361996.99999916 4164371.99988973</gml:lowerCorner>
+                    <gml:upperCorner>361996.99999916 4164371.99988973</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>361996.99999916 4164371.99988973</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>BIVONA</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92010</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Bivona</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>CONTRADA SCALDAMOSCHE 0 SNC</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/983111</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/983111</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411550@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG24839@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>361997</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4164372</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.19">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>363451.99999917 4158253.99988982</gml:lowerCorner>
+                    <gml:upperCorner>363451.99999917 4158253.99988982</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>363451.99999917 4158253.99988982</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>ALESSANDRIA DELLA ROCCA</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92010</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Alessandria D.Rocca</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>CONTRADA SCILLONATO 7</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/981000</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/981000</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411560@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG27974@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>363452</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4158254</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.20">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>364037.99999918 4130556.99989023</gml:lowerCorner>
+                    <gml:upperCorner>364037.99999918 4130556.99989023</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>364037.99999918 4130556.99989023</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>REALMONTE</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92010</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Realmonte</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA RINA 336</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/816253</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/816253</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411140@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG31693@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>364038</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4130557</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.21">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>366733.99999918 4165506.99988971</gml:lowerCorner>
+                    <gml:upperCorner>366733.99999918 4165506.99988971</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>366733.99999918 4165506.99988971</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>SANTO STEFANO QUISQUINA</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92020</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC S.Stefano Quisquina</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA RUSSELL 0 SNC</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/993228</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/993228</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411570@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG31117@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>366734</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4165507</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.22">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>369803.99999921 4152443.9998899</gml:lowerCorner>
+                    <gml:upperCorner>369803.99999921 4152443.9998899</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>369803.99999921 4152443.9998899</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>SAN BIAGIO PLATANI</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92020</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC San Biagio Platani</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA CALTANISSETTA 1</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/910110</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/910110</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411540@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG21396@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>369804</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4152444</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.23">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>369894.99999922 4128162.99989026</gml:lowerCorner>
+                    <gml:upperCorner>369894.99999922 4128162.99989026</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>369894.99999922 4128162.99989026</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>PORTO EMPEDOCLE</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92014</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Porto Empedocle</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>PIAZZALE GUIDO DONEGANI 0 SNC</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/636135</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/636135</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411120@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG26369@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>369895</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4128163</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.24">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>370046.99999921 4140562.99989008</gml:lowerCorner>
+                    <gml:upperCorner>370046.99999921 4140562.99989008</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>370046.99999921 4140562.99989008</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>RAFFADALI</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92015</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Raffadali</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA F/16 2</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/39103</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/39103</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411190@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG24794@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>370047</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4140563</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.25">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>371316.99999922 4149036.99988995</gml:lowerCorner>
+                    <gml:upperCorner>371316.99999922 4149036.99988995</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>371316.99999922 4149036.99988995</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>SANT'ANGELO MUXARO</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92020</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Sant'Angelo Muxaro</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA FRANCESCO CRISPI 11</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/919088</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/919088</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411480@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG30545@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>371317</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4149037</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.26">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>371348.99999922 4132366.9998902</gml:lowerCorner>
+                    <gml:upperCorner>371348.99999922 4132366.9998902</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>371348.99999922 4132366.9998902</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>AGRIGENTO</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92100</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Montaperto</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA PORTO EMPEDOCLE 0 SNC</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/418512</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/418512</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411130@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG23067@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>371349</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4132367</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.27">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>372083.99999923 4128913.99989025</gml:lowerCorner>
+                    <gml:upperCorner>372083.99999923 4128913.99989025</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>372083.99999923 4128913.99989025</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>AGRIGENTO</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92100</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Villaseta</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA MARESCIALLO PEZZINO 1</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/597259</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/597259</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag4111d0@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG27030@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>372084</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4128914</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.28">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>372518.99999923 4138369.99989011</gml:lowerCorner>
+                    <gml:upperCorner>372518.99999923 4138369.99989011</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>372518.99999923 4138369.99989011</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>JOPPOLO GIANCAXIO</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92010</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Joppolo Giancaxio</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIALE DEI FIORI 2</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/631052</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/631052</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411180@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG21342@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>372519</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4138370</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.29">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>372626.99999923 4143587.99989003</gml:lowerCorner>
+                    <gml:upperCorner>372626.99999923 4143587.99989003</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>372626.99999923 4143587.99989003</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>SANTA ELISABETTA</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92020</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Santa Elisabetta</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>CORSO UMBERTO I 25</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/470135</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/470135</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411470@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG27432@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>372627</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4143588</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.30">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>374723.99999924 4130201.99989023</gml:lowerCorner>
+                    <gml:upperCorner>374723.99999924 4130201.99989023</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>374723.99999924 4130201.99989023</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>AGRIGENTO</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92100</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>COMPAGNIA</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Compagnia CC Agrigento</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>PIAZZALE ALDO MORO 2</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/596322</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/596322</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>cpag411100cdo@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG21509@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>374724</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4130202</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.31">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>374723.99999924 4130201.99989023</gml:lowerCorner>
+                    <gml:upperCorner>374723.99999924 4130201.99989023</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>374723.99999924 4130201.99989023</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>AGRIGENTO</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92100</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Agrigento</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>PIAZZALE ALDO MORO 2</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/596322</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/596795</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411110@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG29447@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>374724</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4130202</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.32">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>374723.99999924 4130201.99989023</gml:lowerCorner>
+                    <gml:upperCorner>374723.99999924 4130201.99989023</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>374723.99999924 4130201.99989023</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>AGRIGENTO</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92100</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>COMPAGNIA</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Comando Provinciale CC Agrigento</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>PIAZZALE ALDO MORO 2</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/596322</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/596322</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>provagcdo@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG27219@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>374724</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4130202</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.33">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>377725.99999926 4125772.9998903</gml:lowerCorner>
+                    <gml:upperCorner>377725.99999926 4125772.9998903</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>377725.99999926 4125772.9998903</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>AGRIGENTO</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92100</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Villaggio Mose'</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA LEONARDO SCIASCIA 204 /A</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/606288</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/606288</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag4111e0@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG33307@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>377726</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4125773</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.34">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>377791.99999926 4140807.99989007</gml:lowerCorner>
+                    <gml:upperCorner>377791.99999926 4140807.99989007</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>377791.99999926 4140807.99989007</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>ARAGONA</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92021</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Aragona</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>PIAZZA ALDO MORO 1</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/36111</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/690238</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411460@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG28220@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>377792</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4140808</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.35">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>379366.99999926 4165465.99988971</gml:lowerCorner>
+                    <gml:upperCorner>379366.99999926 4165465.99988971</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>379366.99999926 4165465.99988971</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>CAMMARATA</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92022</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Cammarata</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>LARGO MAR.ORD.LUCA SENA 2</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/909411</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/900369</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411510@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG31654@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>379367</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4165466</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.36">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>379775.99999927 4141035.99989007</gml:lowerCorner>
+                    <gml:upperCorner>379775.99999927 4141035.99989007</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>379775.99999927 4141035.99989007</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>COMITINI</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92020</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Comitini</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA 3 LUGLIO 1</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/600028</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/600028</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411450@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG31330@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>379776</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4141036</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.37">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>380464.99999927 4155541.99988986</gml:lowerCorner>
+                    <gml:upperCorner>380464.99999927 4155541.99988986</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>380464.99999927 4155541.99988986</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>CASTELTERMINI</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92025</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Casteltermini</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA ALDO MORO 0 SNC</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/916111</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/913286</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411530@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG25433@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>380465</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4155542</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.38">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>381152.99999928 4129848.99989023</gml:lowerCorner>
+                    <gml:upperCorner>381152.99999928 4129848.99989023</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>381152.99999928 4129848.99989023</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>FAVARA</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92026</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>TENENZA</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Tenenza CC Favara</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA OLANDA 81</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/31111</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/438894</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>tnag411170@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG30181@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>381153</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4129849</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.39">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>384649.9999993 4140315.99989008</gml:lowerCorner>
+                    <gml:upperCorner>384649.9999993 4140315.99989008</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>384649.9999993 4140315.99989008</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>GROTTE</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92020</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Grotte</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIALE DELLA VITTORIA 134</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/943031</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/943031</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411440@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG22676@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>384650</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4140316</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.40">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>385144.9999993 4158957.99988981</gml:lowerCorner>
+                    <gml:upperCorner>385144.9999993 4158957.99988981</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>385144.9999993 4158957.99988981</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>AQUAVIVA PLATANI</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>93010</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Acquaviva Platani</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA P.E. GIUDICI 115</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0934/953052</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0934/953521</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stcl412320@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TCL23127@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>385145</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4158958</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.41">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>387584.99999932 4141180.99989006</gml:lowerCorner>
+                    <gml:upperCorner>387584.99999932 4141180.99989006</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>387584.99999932 4141180.99989006</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>RACALMUTO</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92020</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Racalmuto</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA GARIBALDI 15</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/941001</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/941001</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411430@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG25974@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>387585</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4141181</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.42">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>389591.99999933 4134145.99989017</gml:lowerCorner>
+                    <gml:upperCorner>389591.99999933 4134145.99989017</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>389591.99999933 4134145.99989017</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>CASTROFILIPPO</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92020</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Castrofilippo</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA NAZIONALE 0 SNC</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/829201</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/829201</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411420@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG29098@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>389592</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4134146</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.43">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>390662.99999934 4116538.99989043</gml:lowerCorner>
+                    <gml:upperCorner>390662.99999934 4116538.99989043</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>390662.99999934 4116538.99989043</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>PALMA DI MONTECHIARO</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92020</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Palma Di Montechiaro</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA CALTANISSETTA 20</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/968111</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/968152</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411320@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG28182@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>390663</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4116539</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.44">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>392789.99999935 4123833.99989032</gml:lowerCorner>
+                    <gml:upperCorner>392789.99999935 4123833.99989032</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>392789.99999935 4123833.99989032</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>CAMASTRA</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92020</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Camastra</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>PIAZZA FRANCESCO CRISPI 0 SNC</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/950275</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/950275</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411340@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG21630@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>392790</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4123834</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.45">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>393519.99999936 4127535.99989026</gml:lowerCorner>
+                    <gml:upperCorner>393519.99999936 4127535.99989026</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>393519.99999936 4127535.99989026</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>NARO</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92028</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Naro</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA EUROPA 7</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/953438</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/953438</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411360@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG27299@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>393520</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4127536</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.46">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>397326.99999938 4134484.99989016</gml:lowerCorner>
+                    <gml:upperCorner>397326.99999938 4134484.99989016</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>397326.99999938 4134484.99989016</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>CANICATTÌ</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92024</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Canicatti'</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA TENENTE ANTONIO DI DINO 1</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/851200</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/851621</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411410@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG20136@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>397327</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4134485</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.47">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>397326.99999938 4134484.99989016</gml:lowerCorner>
+                    <gml:upperCorner>397326.99999938 4134484.99989016</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>397326.99999938 4134484.99989016</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>CANICATTÌ</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92024</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>COMPAGNIA</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Compagnia CC Canicatti'</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA TENENTE ANTONIO DI DINO 1</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/851621</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/851200</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>cpag411400cdo@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG24563@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>397327</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4134485</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.48">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>404427.99999942 4124637.99989031</gml:lowerCorner>
+                    <gml:upperCorner>404427.99999942 4124637.99989031</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>404427.99999942 4124637.99989031</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>CAMPOBELLO DI LICATA</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92023</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Campobello Di Licata</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA G. GUAZZELLI 0 SNC</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/877062</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/878787</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411330@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG25037@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>404428</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4124638</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.49">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>405905.99999944 4106389.99989058</gml:lowerCorner>
+                    <gml:upperCorner>405905.99999944 4106389.99989058</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>405905.99999944 4106389.99989058</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>LICATA</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92027</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>COMPAGNIA</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Compagnia CC Licata</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA SALVO D'ACQUISTO 2</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/774139</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/774011</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>cpag411300cdo@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG23563@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>405906</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4106390</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+        <SISTEMA_REGIONALE_PC:Carabinieri gml:id="Carabinieri.50">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:lowerCorner>405905.99999944 4106389.99989058</gml:lowerCorner>
+                    <gml:upperCorner>405905.99999944 4106389.99989058</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <SISTEMA_REGIONALE_PC:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#6708" srsDimension="2">
+                    <gml:pos>405905.99999944 4106389.99989058</gml:pos>
+                </gml:Point>
+            </SISTEMA_REGIONALE_PC:the_geom>
+            <SISTEMA_REGIONALE_PC:COMUNE>LICATA</SISTEMA_REGIONALE_PC:COMUNE>
+            <SISTEMA_REGIONALE_PC:PROVINCIA>AGRIGENTO</SISTEMA_REGIONALE_PC:PROVINCIA>
+            <SISTEMA_REGIONALE_PC:SIGLAPROV>AG</SISTEMA_REGIONALE_PC:SIGLAPROV>
+            <SISTEMA_REGIONALE_PC:CAP>92027</SISTEMA_REGIONALE_PC:CAP>
+            <SISTEMA_REGIONALE_PC:TIPOLOGIA>STAZIONE</SISTEMA_REGIONALE_PC:TIPOLOGIA>
+            <SISTEMA_REGIONALE_PC:DENOMINAZI>Stazione CC Licata</SISTEMA_REGIONALE_PC:DENOMINAZI>
+            <SISTEMA_REGIONALE_PC:INDIRIZZO>VIA SALVO D'ACQUISTO 2</SISTEMA_REGIONALE_PC:INDIRIZZO>
+            <SISTEMA_REGIONALE_PC:TELEFONO>0922/774139</SISTEMA_REGIONALE_PC:TELEFONO>
+            <SISTEMA_REGIONALE_PC:FAX>0922/774011</SISTEMA_REGIONALE_PC:FAX>
+            <SISTEMA_REGIONALE_PC:EMAIL>stag411310@carabinieri.it</SISTEMA_REGIONALE_PC:EMAIL>
+            <SISTEMA_REGIONALE_PC:PEC>TAG31299@pec.carabinieri.it</SISTEMA_REGIONALE_PC:PEC>
+            <SISTEMA_REGIONALE_PC:X__WGS84_>405906</SISTEMA_REGIONALE_PC:X__WGS84_>
+            <SISTEMA_REGIONALE_PC:Y__WGS84_>4106390</SISTEMA_REGIONALE_PC:Y__WGS84_>
+        </SISTEMA_REGIONALE_PC:Carabinieri>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

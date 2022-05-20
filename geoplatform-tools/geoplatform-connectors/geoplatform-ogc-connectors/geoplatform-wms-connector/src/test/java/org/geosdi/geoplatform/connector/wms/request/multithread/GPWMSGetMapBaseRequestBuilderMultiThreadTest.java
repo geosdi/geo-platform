@@ -78,7 +78,10 @@ public class GPWMSGetMapBaseRequestBuilderMultiThreadTest {
                         "request=GetMap&layers=RegioneCampania.Cartografia.Tematica:sitdbo_curve_livello_25m&styles=&bbox=394273.34375,4426208.0,571791.3125,4601018.0&width=768&height=756&srs=EPSG:3045&format=application/openlayers",
                 "https://sit2.regione.campania.it/geoserver/RegioneCampania.Catalogo/wms?service=WMS&version=1.1.0&request=GetMap" +
                         "&layers=RegioneCampania.Catalogo:sitdbo_corine_land_cover_90&styles=&bbox=395346.3125,4426030.5,569392.125,4596345.5" +
-                        "&width=768&height=751&srs=EPSG:3045&format=application/openlayers")
+                        "&width=768&height=751&srs=EPSG:3045&format=application/openlayers",
+                "https://wms.cfr.toscana.it/geoserver/tmp/wms?service=WMS&version=1.1.0&request=GetMap&layers=tmp%3Asitc_asl" +
+                        "&bbox=1554750.625%2C4678325.5%2C1771722.875%2C4924792.0&width=676&height=768" +
+                        "&srs=EPSG%3A3003&format=application/openlayers&p=fake")
                 .collect(toList());
         CountDownLatch startSignal = new CountDownLatch(1);
         CountDownLatch doneSignal = new CountDownLatch(urls.size());
@@ -89,7 +92,7 @@ public class GPWMSGetMapBaseRequestBuilderMultiThreadTest {
         startSignal.countDown();
         doneSignal.await();
         assertTrue(counter.get() == urls.size());
-        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@{} process {} files", this.getClass().getSimpleName(), counter.get());
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@{} process {} urls", this.getClass().getSimpleName(), counter.get());
     }
 
     static final class GPWMSGetMapBaseRequestBuilderTask implements Runnable {

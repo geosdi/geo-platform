@@ -1,0 +1,858 @@
+<wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:admin="http://www.geosdi.org/admin"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="0"
+                       timeStamp="2022-05-02T13:32:55.484Z"
+                       xsi:schemaLocation="http://www.geosdi.org/admin https://prosit.geosdi.org/geoserver/admin/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=admin%3Aadmin_shp_exeflegrei2019_cf_sciami_lp_ingv http://www.opengis.net/wfs https://prosit.geosdi.org/geoserver/schemas/wfs/1.1.0/wfs.xsd">
+    <gml:featureMembers>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.1">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15318277 40.83799203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>7</admin:ORA>
+            <admin:MIN>58</admin:MIN>
+            <admin:SEC>55.83</admin:SEC>
+            <admin:MAG>1.0</admin:MAG>
+            <admin:LAT>40.837992034</admin:LAT>
+            <admin:LONG>14.1531827745</admin:LONG>
+            <admin:Z>0.57</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.2">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.16138277 40.82839203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>22</admin:ORA>
+            <admin:MIN>34</admin:MIN>
+            <admin:SEC>30.41</admin:SEC>
+            <admin:MAG>1.2</admin:MAG>
+            <admin:LAT>40.828392034</admin:LAT>
+            <admin:LONG>14.1613827745</admin:LONG>
+            <admin:Z>0.74</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.3">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.14938277 40.82839203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>1</admin:ORA>
+            <admin:MIN>2</admin:MIN>
+            <admin:SEC>37.41</admin:SEC>
+            <admin:MAG>0.9</admin:MAG>
+            <admin:LAT>40.828392034</admin:LAT>
+            <admin:LONG>14.1493827745</admin:LONG>
+            <admin:Z>0.01</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.4">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.16318277 40.82819203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>2</admin:ORA>
+            <admin:MIN>30</admin:MIN>
+            <admin:SEC>49.89</admin:SEC>
+            <admin:MAG>1.2</admin:MAG>
+            <admin:LAT>40.828192034</admin:LAT>
+            <admin:LONG>14.1631827745</admin:LONG>
+            <admin:Z>0.0</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.5">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15508277 40.83239203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>0</admin:ORA>
+            <admin:MIN>19</admin:MIN>
+            <admin:SEC>55.27</admin:SEC>
+            <admin:MAG>1.1</admin:MAG>
+            <admin:LAT>40.832392034</admin:LAT>
+            <admin:LONG>14.1550827745</admin:LONG>
+            <admin:Z>0.06</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.6">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15508277 40.82939203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>15</admin:ORA>
+            <admin:MIN>46</admin:MIN>
+            <admin:SEC>32.47</admin:SEC>
+            <admin:MAG>0.8</admin:MAG>
+            <admin:LAT>40.829392034</admin:LAT>
+            <admin:LONG>14.1550827745</admin:LONG>
+            <admin:Z>0.03</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.7">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.14302258 40.82502263</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>19</admin:ORA>
+            <admin:MIN>27</admin:MIN>
+            <admin:SEC>21.53</admin:SEC>
+            <admin:MAG>0.6</admin:MAG>
+            <admin:LAT>40.8250226298</admin:LAT>
+            <admin:LONG>14.1430225787</admin:LONG>
+            <admin:Z>0.03</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.8">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15412258 40.82782263</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>19</admin:ORA>
+            <admin:MIN>36</admin:MIN>
+            <admin:SEC>56.35</admin:SEC>
+            <admin:MAG>0.4</admin:MAG>
+            <admin:LAT>40.8278226298</admin:LAT>
+            <admin:LONG>14.1541225787</admin:LONG>
+            <admin:Z>0.74</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.9">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.16418277 40.83339203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>9</admin:ORA>
+            <admin:MIN>1</admin:MIN>
+            <admin:SEC>57.88</admin:SEC>
+            <admin:MAG>0.9</admin:MAG>
+            <admin:LAT>40.833392034</admin:LAT>
+            <admin:LONG>14.1641827745</admin:LONG>
+            <admin:Z>0.32</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.10">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15368277 40.83019203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>0</admin:ORA>
+            <admin:MIN>42</admin:MIN>
+            <admin:SEC>20.94</admin:SEC>
+            <admin:MAG>1.2</admin:MAG>
+            <admin:LAT>40.830192034</admin:LAT>
+            <admin:LONG>14.1536827745</admin:LONG>
+            <admin:Z>0.02</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.11">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15868277 40.83269203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>16</admin:ORA>
+            <admin:MIN>54</admin:MIN>
+            <admin:SEC>52.5</admin:SEC>
+            <admin:MAG>0.6</admin:MAG>
+            <admin:LAT>40.832692034</admin:LAT>
+            <admin:LONG>14.1586827745</admin:LONG>
+            <admin:Z>0.69</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.12">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.14578203 40.83482562</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>16</admin:ORA>
+            <admin:MIN>55</admin:MIN>
+            <admin:SEC>39.33</admin:SEC>
+            <admin:MAG>1.0</admin:MAG>
+            <admin:LAT>40.834825617</admin:LAT>
+            <admin:LONG>14.1457820255</admin:LONG>
+            <admin:Z>-0.03</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.13">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.16168277 40.83189203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>1</admin:ORA>
+            <admin:MIN>8</admin:MIN>
+            <admin:SEC>36.47</admin:SEC>
+            <admin:MAG>1.0</admin:MAG>
+            <admin:LAT>40.831892034</admin:LAT>
+            <admin:LONG>14.1616827745</admin:LONG>
+            <admin:Z>0.0</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.14">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.16318277 40.82769203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>23</admin:ORA>
+            <admin:MIN>42</admin:MIN>
+            <admin:SEC>3.22</admin:SEC>
+            <admin:MAG>0.7</admin:MAG>
+            <admin:LAT>40.827692034</admin:LAT>
+            <admin:LONG>14.1631827745</admin:LONG>
+            <admin:Z>0.95</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.15">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15332258 40.82672263</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>19</admin:ORA>
+            <admin:MIN>45</admin:MIN>
+            <admin:SEC>25.96</admin:SEC>
+            <admin:MAG>1.0</admin:MAG>
+            <admin:LAT>40.8267226298</admin:LAT>
+            <admin:LONG>14.1533225787</admin:LONG>
+            <admin:Z>0.03</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.16">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.16088277 40.83899203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>15</admin:ORA>
+            <admin:MIN>43</admin:MIN>
+            <admin:SEC>56.15</admin:SEC>
+            <admin:MAG>1.0</admin:MAG>
+            <admin:LAT>40.838992034</admin:LAT>
+            <admin:LONG>14.1608827745</admin:LONG>
+            <admin:Z>0.72</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.17">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.14382258 40.82532263</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>0</admin:ORA>
+            <admin:MIN>34</admin:MIN>
+            <admin:SEC>23.4</admin:SEC>
+            <admin:MAG>0.6</admin:MAG>
+            <admin:LAT>40.8253226298</admin:LAT>
+            <admin:LONG>14.1438225787</admin:LONG>
+            <admin:Z>0.29</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.18">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15388277 40.83089203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>0</admin:ORA>
+            <admin:MIN>51</admin:MIN>
+            <admin:SEC>27.19</admin:SEC>
+            <admin:MAG>1.3</admin:MAG>
+            <admin:LAT>40.830892034</admin:LAT>
+            <admin:LONG>14.1538827745</admin:LONG>
+            <admin:Z>0.04</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.19">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.16058277 40.83119203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>1</admin:ORA>
+            <admin:MIN>31</admin:MIN>
+            <admin:SEC>29.55</admin:SEC>
+            <admin:MAG>0.9</admin:MAG>
+            <admin:LAT>40.831192034</admin:LAT>
+            <admin:LONG>14.1605827745</admin:LONG>
+            <admin:Z>0.09</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.20">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15482258 40.83672263</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>17</admin:ORA>
+            <admin:MIN>16</admin:MIN>
+            <admin:SEC>59.63</admin:SEC>
+            <admin:MAG>0.4</admin:MAG>
+            <admin:LAT>40.8367226298</admin:LAT>
+            <admin:LONG>14.1548225787</admin:LONG>
+            <admin:Z>0.03</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.21">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15602258 40.83982263</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>17</admin:ORA>
+            <admin:MIN>26</admin:MIN>
+            <admin:SEC>46.95</admin:SEC>
+            <admin:MAG>1.4</admin:MAG>
+            <admin:LAT>40.8398226298</admin:LAT>
+            <admin:LONG>14.1560225787</admin:LONG>
+            <admin:Z>0.0</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.22">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.14962258 40.82702263</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>17</admin:ORA>
+            <admin:MIN>46</admin:MIN>
+            <admin:SEC>37.33</admin:SEC>
+            <admin:MAG>1.4</admin:MAG>
+            <admin:LAT>40.8270226298</admin:LAT>
+            <admin:LONG>14.1496225787</admin:LONG>
+            <admin:Z>0.04</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.23">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15538277 40.83169203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>0</admin:ORA>
+            <admin:MIN>11</admin:MIN>
+            <admin:SEC>45.53</admin:SEC>
+            <admin:MAG>1.4</admin:MAG>
+            <admin:LAT>40.831692034</admin:LAT>
+            <admin:LONG>14.1553827745</admin:LONG>
+            <admin:Z>0.13</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.24">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15358277 40.83519203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>16</admin:ORA>
+            <admin:MIN>16</admin:MIN>
+            <admin:SEC>4.82</admin:SEC>
+            <admin:MAG>0.6</admin:MAG>
+            <admin:LAT>40.835192034</admin:LAT>
+            <admin:LONG>14.1535827745</admin:LONG>
+            <admin:Z>0.0</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.25">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.16108277 40.83199203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>20</admin:ORA>
+            <admin:MIN>30</admin:MIN>
+            <admin:SEC>9.18</admin:SEC>
+            <admin:MAG>0.6</admin:MAG>
+            <admin:LAT>40.831992034</admin:LAT>
+            <admin:LONG>14.1610827745</admin:LONG>
+            <admin:Z>0.01</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.26">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.14808277 40.82419203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>1</admin:ORA>
+            <admin:MIN>32</admin:MIN>
+            <admin:SEC>9.96</admin:SEC>
+            <admin:MAG>1.1</admin:MAG>
+            <admin:LAT>40.824192034</admin:LAT>
+            <admin:LONG>14.1480827745</admin:LONG>
+            <admin:Z>0.65</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.27">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.14452258 40.82422263</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>10</admin:ORA>
+            <admin:MIN>29</admin:MIN>
+            <admin:SEC>12.82</admin:SEC>
+            <admin:MAG>0.6</admin:MAG>
+            <admin:LAT>40.8242226298</admin:LAT>
+            <admin:LONG>14.1445225787</admin:LONG>
+            <admin:Z>0.06</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.28">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.14418277 40.82789203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>17</admin:ORA>
+            <admin:MIN>24</admin:MIN>
+            <admin:SEC>33.24</admin:SEC>
+            <admin:MAG>0.5</admin:MAG>
+            <admin:LAT>40.827892034</admin:LAT>
+            <admin:LONG>14.1441827745</admin:LONG>
+            <admin:Z>0.24</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.29">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.16058277 40.82539203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>22</admin:ORA>
+            <admin:MIN>42</admin:MIN>
+            <admin:SEC>2.28</admin:SEC>
+            <admin:MAG>0.5</admin:MAG>
+            <admin:LAT>40.825392034</admin:LAT>
+            <admin:LONG>14.1605827745</admin:LONG>
+            <admin:Z>0.54</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.30">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15808277 40.82269203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>21</admin:ORA>
+            <admin:MIN>11</admin:MIN>
+            <admin:SEC>16.08</admin:SEC>
+            <admin:MAG>0.8</admin:MAG>
+            <admin:LAT>40.822692034</admin:LAT>
+            <admin:LONG>14.1580827745</admin:LONG>
+            <admin:Z>0.23</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.31">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15718277 40.83869203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>21</admin:ORA>
+            <admin:MIN>44</admin:MIN>
+            <admin:SEC>40.08</admin:SEC>
+            <admin:MAG>0.4</admin:MAG>
+            <admin:LAT>40.838692034</admin:LAT>
+            <admin:LONG>14.1571827745</admin:LONG>
+            <admin:Z>0.2</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.32">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15868277 40.83899203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>21</admin:ORA>
+            <admin:MIN>47</admin:MIN>
+            <admin:SEC>36.09</admin:SEC>
+            <admin:MAG>0.8</admin:MAG>
+            <admin:LAT>40.838992034</admin:LAT>
+            <admin:LONG>14.1586827745</admin:LONG>
+            <admin:Z>0.11</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.33">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15368277 40.83019203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>22</admin:ORA>
+            <admin:MIN>27</admin:MIN>
+            <admin:SEC>51.92</admin:SEC>
+            <admin:MAG>0.4</admin:MAG>
+            <admin:LAT>40.830192034</admin:LAT>
+            <admin:LONG>14.1536827745</admin:LONG>
+            <admin:Z>0.08</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.34">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15318277 40.83119203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>22</admin:ORA>
+            <admin:MIN>28</admin:MIN>
+            <admin:SEC>4.77</admin:SEC>
+            <admin:MAG>1.0</admin:MAG>
+            <admin:LAT>40.831192034</admin:LAT>
+            <admin:LONG>14.1531827745</admin:LONG>
+            <admin:Z>0.03</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.35">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15262258 40.82532263</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>11</admin:ORA>
+            <admin:MIN>32</admin:MIN>
+            <admin:SEC>16.27</admin:SEC>
+            <admin:MAG>0.8</admin:MAG>
+            <admin:LAT>40.8253226298</admin:LAT>
+            <admin:LONG>14.1526225787</admin:LONG>
+            <admin:Z>0.16</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.36">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15988277 40.83589203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>9</admin:ORA>
+            <admin:MIN>7</admin:MIN>
+            <admin:SEC>26.53</admin:SEC>
+            <admin:MAG>1.0</admin:MAG>
+            <admin:LAT>40.835892034</admin:LAT>
+            <admin:LONG>14.1598827745</admin:LONG>
+            <admin:Z>0.47</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.37">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15568277 40.83269203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>23</admin:ORA>
+            <admin:MIN>27</admin:MIN>
+            <admin:SEC>54.35</admin:SEC>
+            <admin:MAG>1.3</admin:MAG>
+            <admin:LAT>40.832692034</admin:LAT>
+            <admin:LONG>14.1556827745</admin:LONG>
+            <admin:Z>0.66</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.38">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.16318277 40.83189203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>0</admin:ORA>
+            <admin:MIN>5</admin:MIN>
+            <admin:SEC>29.87</admin:SEC>
+            <admin:MAG>0.8</admin:MAG>
+            <admin:LAT>40.831892034</admin:LAT>
+            <admin:LONG>14.1631827745</admin:LONG>
+            <admin:Z>0.54</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.39">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15758277 40.82199203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>11</admin:ORA>
+            <admin:MIN>50</admin:MIN>
+            <admin:SEC>9.26</admin:SEC>
+            <admin:MAG>1.0</admin:MAG>
+            <admin:LAT>40.821992034</admin:LAT>
+            <admin:LONG>14.1575827745</admin:LONG>
+            <admin:Z>0.12</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.40">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15468277 40.82449203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>11</admin:ORA>
+            <admin:MIN>52</admin:MIN>
+            <admin:SEC>12.99</admin:SEC>
+            <admin:MAG>1.2</admin:MAG>
+            <admin:LAT>40.824492034</admin:LAT>
+            <admin:LONG>14.1546827745</admin:LONG>
+            <admin:Z>0.79</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.41">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15518277 40.83069203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>12</admin:ORA>
+            <admin:MIN>31</admin:MIN>
+            <admin:SEC>38.02</admin:SEC>
+            <admin:MAG>1.2</admin:MAG>
+            <admin:LAT>40.830692034</admin:LAT>
+            <admin:LONG>14.1551827745</admin:LONG>
+            <admin:Z>0.01</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.42">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15608277 40.82699203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>12</admin:ORA>
+            <admin:MIN>38</admin:MIN>
+            <admin:SEC>33.17</admin:SEC>
+            <admin:MAG>1.0</admin:MAG>
+            <admin:LAT>40.826992034</admin:LAT>
+            <admin:LONG>14.1560827745</admin:LONG>
+            <admin:Z>0.03</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.43">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15658277 40.83149203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>13</admin:ORA>
+            <admin:MIN>44</admin:MIN>
+            <admin:SEC>48.11</admin:SEC>
+            <admin:MAG>1.0</admin:MAG>
+            <admin:LAT>40.831492034</admin:LAT>
+            <admin:LONG>14.1565827745</admin:LONG>
+            <admin:Z>0.6</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.44">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.16208277 40.83719203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>3</admin:ORA>
+            <admin:MIN>30</admin:MIN>
+            <admin:SEC>38.29</admin:SEC>
+            <admin:MAG>0.7</admin:MAG>
+            <admin:LAT>40.837192034</admin:LAT>
+            <admin:LONG>14.1620827745</admin:LONG>
+            <admin:Z>0.03</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.45">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15538277 40.82839203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>6</admin:ORA>
+            <admin:MIN>43</admin:MIN>
+            <admin:SEC>10.76</admin:SEC>
+            <admin:MAG>1.0</admin:MAG>
+            <admin:LAT>40.828392034</admin:LAT>
+            <admin:LONG>14.1553827745</admin:LONG>
+            <admin:Z>0.01</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.46">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15908277 40.82539203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>17</admin:ORA>
+            <admin:MIN>11</admin:MIN>
+            <admin:SEC>16.14</admin:SEC>
+            <admin:MAG>0.8</admin:MAG>
+            <admin:LAT>40.825392034</admin:LAT>
+            <admin:LONG>14.1590827745</admin:LONG>
+            <admin:Z>0.24</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.47">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.14568277 40.82619203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>17</admin:ORA>
+            <admin:MIN>39</admin:MIN>
+            <admin:SEC>37.27</admin:SEC>
+            <admin:MAG>0.7</admin:MAG>
+            <admin:LAT>40.826192034</admin:LAT>
+            <admin:LONG>14.1456827745</admin:LONG>
+            <admin:Z>0.91</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.48">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.16358277 40.83389203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>19</admin:ORA>
+            <admin:MIN>0</admin:MIN>
+            <admin:SEC>32.53</admin:SEC>
+            <admin:MAG>0.5</admin:MAG>
+            <admin:LAT>40.833892034</admin:LAT>
+            <admin:LONG>14.1635827745</admin:LONG>
+            <admin:Z>0.48</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.49">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15788277 40.83739203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>1</admin:ORA>
+            <admin:MIN>26</admin:MIN>
+            <admin:SEC>22.97</admin:SEC>
+            <admin:MAG>0.9</admin:MAG>
+            <admin:LAT>40.837392034</admin:LAT>
+            <admin:LONG>14.1578827745</admin:LONG>
+            <admin:Z>0.43</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+        <admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv gml:id="admin_shp_exeflegrei2019_cf_sciami_lp_ingv.50">
+            <admin:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326" srsDimension="2">
+                    <gml:pos>14.15418277 40.83399203</gml:pos>
+                </gml:Point>
+            </admin:the_geom>
+            <admin:ANNO>2019</admin:ANNO>
+            <admin:MESE>10</admin:MESE>
+            <admin:GIO>18</admin:GIO>
+            <admin:ORA>6</admin:ORA>
+            <admin:MIN>46</admin:MIN>
+            <admin:SEC>27.91</admin:SEC>
+            <admin:MAG>1.1</admin:MAG>
+            <admin:LAT>40.833992034</admin:LAT>
+            <admin:LONG>14.1541827745</admin:LONG>
+            <admin:Z>0.98</admin:Z>
+        </admin:admin_shp_exeflegrei2019_cf_sciami_lp_ingv>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

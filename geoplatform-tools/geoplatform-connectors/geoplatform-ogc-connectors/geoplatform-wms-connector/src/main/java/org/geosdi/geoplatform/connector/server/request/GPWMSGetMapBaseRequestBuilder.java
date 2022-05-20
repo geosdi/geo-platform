@@ -98,7 +98,7 @@ public class GPWMSGetMapBaseRequestBuilder extends GPWMSBaseKeyValuePairBuilder<
      */
     final Boolean check(@Nonnull(when = NEVER) Map.Entry<String, GPWMSRequestKeyValuePair> theEntry) {
         checkArgument(theEntry != null, "The Parameter entry must not be null.");
-        switch (theEntry.getKey()) {
+        switch ((theEntry.getKey() != null) ? theEntry.getKey() : "") {
             case "LAYERS":
             case "SRS":
             case "CRS":

@@ -57,7 +57,7 @@ public abstract class BaseGetFeatureGeoJsonStaxGml3Reader extends GPGetFeatureGe
      * @param theXmlStreamBuilder
      */
     protected BaseGetFeatureGeoJsonStaxGml3Reader(@Nonnull(when = NEVER) GPXmlStreamReaderBuilder theXmlStreamBuilder) {
-        super(theXmlStreamBuilder, ID_LOCAL_NAME);
+        super(theXmlStreamBuilder, ID_LOCAL_NAME, "http://www.opengis.net/gml");
     }
 
     /**

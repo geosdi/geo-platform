@@ -61,7 +61,7 @@ public abstract class WMSGetFeatureInfoStaxGml2Reader extends GPGetFeatureGeoJso
      * @param theXmlStreamBuilder
      */
     WMSGetFeatureInfoStaxGml2Reader(@Nonnull(when = NEVER) GPXmlStreamReaderBuilder theXmlStreamBuilder) {
-        super(theXmlStreamBuilder, FID_LOCAL_NAME);
+        super(theXmlStreamBuilder, FID_LOCAL_NAME, null);
     }
 
     /**

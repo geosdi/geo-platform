@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.connector.server.request.*;
 import org.geosdi.geoplatform.connector.server.v130.GPWMSGetFeatureInfoV130Request;
 import org.geosdi.geoplatform.connector.server.v130.IGPWMSConnectorStoreV130;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,12 +49,16 @@ import java.net.URL;
 import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML2;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML3;
 import static org.geosdi.geoplatform.connector.server.store.GPWMSConnectorBuilder.WMSConnectorBuilder.wmsConnectorBuilder;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class GPWMSConnectorStoreV130PrositTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPWMSConnectorStoreV130PrositTest.class);
@@ -74,7 +79,7 @@ public class GPWMSConnectorStoreV130PrositTest {
     }
 
     @Test
-    public void wmsGetFeatureInfoV130Test() throws Exception {
+    public void a_wmsGetFeatureInfoV130Test() throws Exception {
         GPWMSGetFeatureInfoV130Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
         GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(40.97210836426291, 15.824662897187245, 40.98109151703362, 15.836561468047133);
         GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("admin:admin_shp_vigneti_catastali", "admin:admin_shp_oliveti_catastali").collect(toSet()),
@@ -82,6 +87,18 @@ public class GPWMSConnectorStoreV130PrositTest {
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("admin:admin_shp_vigneti_catastali", "admin:admin_shp_oliveti_catastali")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)
                 .withFeatureCount(8)
-                .withInfoFormat(WMSFeatureInfoFormat.GML2).withX(154).withY(230).showRequestAsString());
+                .withInfoFormat(GML2).withX(154).withY(230).getResponse());
+    }
+
+    @Test
+    public void b_wmsGetFeatureInfoV130Test() throws Exception {
+        GPWMSGetFeatureInfoV130Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
+        GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(40.97210836426291, 15.824662897187245, 40.98109151703362, 15.836561468047133);
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("admin:admin_shp_vigneti_catastali", "admin:admin_shp_oliveti_catastali").collect(toSet()),
+                "EPSG:4326", "256", "256");
+        logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest.withQueryLayers("admin:admin_shp_vigneti_catastali", "admin:admin_shp_oliveti_catastali")
+                .withWMSGetMapRequest(wmsGetMapBaseRequest)
+                .withFeatureCount(8)
+                .withInfoFormat(GML3).withX(154).withY(230).getResponse());
     }
 }

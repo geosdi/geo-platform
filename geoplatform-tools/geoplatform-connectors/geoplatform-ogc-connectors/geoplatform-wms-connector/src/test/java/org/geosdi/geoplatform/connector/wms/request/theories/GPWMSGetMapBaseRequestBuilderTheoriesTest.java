@@ -78,7 +78,10 @@ public class GPWMSGetMapBaseRequestBuilderTheoriesTest {
                         "&width=768&height=751&srs=EPSG:3045&format=application/openlayers",
                 "https://webgis.regione.sardegna.it/geoserver/ppr2006/wms?service=WMS&version=1.1.0&request=GetMap" +
                         "&layers=ppr2006%3AALBERIMONUMENTALI&bbox=1451316.0%2C4311236.0%2C1566149.0%2C4562852.0" +
-                        "&width=350&height=768&srs=EPSG%3A3003&format=application/openlayers"};
+                        "&width=350&height=768&srs=EPSG%3A3003&format=application/openlayers",
+                "https://wms.cfr.toscana.it/geoserver/tmp/wms?service=WMS&version=1.1.0&request=GetMap" +
+                        "&layers=tmp%3Asitc_asl&bbox=1554750.625%2C4678325.5%2C1771722.875%2C4924792.0&width=676" +
+                        "&height=768&srs=EPSG%3A3003&format=application/openlayers&p=fake"};
     }
 
     @Theory

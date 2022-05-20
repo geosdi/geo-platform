@@ -111,7 +111,7 @@ public class GPWMSRequestKeyValuePairDeserializer extends StdDeserializer<WMSGet
         JsonNode node = jp.getCodec().readTree(jp);
         String key = node.get("key").asText();
         String value = node.get("value").asText();
-        switch (key) {
+        switch ((key != null) ? key : "") {
             case "SERVICE" :
                 return WMS_SERVICE_KEY_VALUE_PAIR;
             case "VERSION" :

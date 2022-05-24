@@ -648,6 +648,20 @@
                     <webApp>
                         <contextPath>/geoplatform-service</contextPath>
                     </webApp>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>GP_PERSISTENCE_PBE_KEY</name>
+                            <value>$-geosdi2021,??/07/160821_5,??-77</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <name>GP_GOOGLE_SERVICE_PBE_KEY</name>
+                            <value>$-geosdi2019,??/07,??-77</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <name>GP_LAYER_BUILDER_PBE_KEY</name>
+                            <value>$-geosdi2016,??/0x,??-345</value>
+                        </systemProperty>
+                    </systemProperties>
                 </configuration>
             </plugin>
 

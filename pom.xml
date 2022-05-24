@@ -564,10 +564,11 @@
                 <version>${bcel.version}</version>
             </dependency>
 
+            <!--  Gson: Java to Json conversion -->
             <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
-                <version>2.8.9</version>
+                <version>${gson.version}</version>
             </dependency>
 
             <!-- =========================================================== -->
@@ -1532,6 +1533,7 @@
         <bcel.version>6.5.0</bcel.version>
 
         <jasypt-version>1.9.3</jasypt-version>
+        <gson.version>2.9.0</gson.version>
 
         <guava-gwt-version>23.6-jre</guava-gwt-version>
         <guava-version>31.1-jre</guava-version>

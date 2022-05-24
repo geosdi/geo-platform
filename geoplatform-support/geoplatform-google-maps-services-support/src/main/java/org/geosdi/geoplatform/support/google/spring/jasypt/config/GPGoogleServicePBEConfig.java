@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.support.google.spring.jasypt.config;
 
-import org.geosdi.geoplatform.jasypt.support.env.GPPBESystemEnvProperties;
 import org.geosdi.geoplatform.support.google.spring.configuration.jasypt.pbe.GPGoogleServicePBEProperties;
 import org.jasypt.encryption.pbe.config.PBEConfig;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
@@ -43,6 +42,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -59,7 +60,10 @@ class GPGoogleServicePBEConfig {
      */
     @Bean
     public PBEConfig googleServicePBEConfig(GPGoogleServicePBEProperties googleServicePBEProperties) {
-        logger.debug("####################################GOOGLE_SERVICE_PBE_PASSWORD : {}\n\n", googleServicePBEProperties.getPassword());
+        checkArgument(googleServicePBEProperties != null && googleServicePBEProperties.isSetPassword(),
+                "The Parameter password must not be null or empty String in class." + this.getClass().getSimpleName());
+        logger.debug("####################################GOOGLE_SERVICE_PBE_PASSWORD : {}\n\n",
+                googleServicePBEProperties.getPassword());
         return new SimpleStringPBEConfig() {
 
             {

@@ -52,6 +52,13 @@ public interface GPPBESystemEnvProperties {
     String getPassword();
 
     /**
+     * @return {@link Boolean}
+     */
+    default Boolean isSetPassword() {
+        return this.getPassword() != null && !this.getPassword().isEmpty();
+    }
+
+    /**
      *
      */
     class GPBasePBESystemEnvProperties implements GPPBESystemEnvProperties {

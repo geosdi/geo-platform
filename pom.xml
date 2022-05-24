@@ -574,12 +574,7 @@
                 <artifactId>bcel</artifactId>
                 <version>${bcel.version}</version>
             </dependency>
-<<<<<<< HEAD
-            
-=======
 
-            <!--  Gson: Java to Json conversion -->
->>>>>>> 8318cd4864 (Added Ggson in DependencyManagement)
             <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>

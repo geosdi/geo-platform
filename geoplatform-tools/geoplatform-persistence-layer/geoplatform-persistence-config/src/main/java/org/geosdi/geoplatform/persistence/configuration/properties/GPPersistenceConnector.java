@@ -54,15 +54,15 @@ import static java.util.Collections.list;
 @Component(value = "gpPersistenceConnector")
 public class GPPersistenceConnector implements InitializingBean {
 
-    @Value("persistence{db_driverClassName}")
+    @Value("persistence{db_driverClassName:@null}")
     private String driverClassName;
-    @Value("persistence{db_url}")
+    @Value("persistence{db_url:@null}}")
     private String url;
     @Value("persistence{db_username}")
     private String username;
     @Value("persistence{db_password}")
     private String password;
-    @Value("persistence{db_packageToScan}")
+    @Value("persistence{db_packageToScan:@null}")
     private String packageToScan;
     private String[] packagesToScan;
 
@@ -132,5 +132,6 @@ public class GPPersistenceConnector implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         checkArgument((this.url != null) && !(this.url.trim().isEmpty()), "Parameter DB URL cannot be Null or an Empty String.");
         checkArgument((this.packageToScan != null) && !(this.packageToScan.trim().isEmpty()), "Parameter Package To Scan cannot be Null or an Empty String");
+        checkArgument((this.driverClassName != null) && !(this.driverClassName.trim().isEmpty()), "Parameter driverClassName cannot be Null or an Empty String.");
     }
 }

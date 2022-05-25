@@ -54,8 +54,7 @@
     <logger name="org.geosdi.geoplatform.services.GPTrackingServiceImpl" level="debug"/><!-- TODO info -->
     <logger name="org.geosdi.geoplatform.jdbc.template.spring" level="debug"/>
     <!-- #################################CSV_IMPORTER_SECTION ########################################-->
-    <logger name="org.geosdi.geoplatform.csv.importer.job.launcher.CSVLayerImporterJobLauncher"
-            level="debug"/>
+    <logger name="org.geosdi.geoplatform.csv.importer.job.launcher.CSVLayerImporterJobLauncher" level="debug"/>
     <logger name="org.geosdi.geoplatform.csv.importer.job.runner.config.CSVLayerImporterJobRunner"
             level="debug"/>
     <logger name="org.geosdi.geoplatform.csv.importer.step.spatial.decorator.CSVBatchGeocoderDecoratorStrategy"
@@ -68,5 +67,6 @@
     <logger name="org.geosdi.geoplatform.connector.server.request.v110.query.responsibility" level="trace"/>
     <logger name="org.geosdi.geoplatform.support.wfs.services.GPGetFeatureService" level="debug"/>
     <logger name="org.geosdi.geoplatform.services.builder.GeoSDIHttpClient5" level="trace"/>
+    <logger name="org.geosdi.geoplatform.persistence.jasypt" level="trace"/>
 
 </configuration>

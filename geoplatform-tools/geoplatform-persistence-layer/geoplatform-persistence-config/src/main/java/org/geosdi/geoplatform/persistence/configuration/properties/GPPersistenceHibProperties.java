@@ -40,6 +40,7 @@ import net.jcip.annotations.Immutable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 
 /**
@@ -102,5 +103,19 @@ class GPPersistenceHibProperties implements IGPPersistenceHibProperties {
                 + ", hibHbm2ddlAuto = " + hibHbm2ddlAuto
                 + ", hibGenerateStatistics = " + hibGenerateStatistics
                 + ", hibDefaultSchema = " + hibDefaultSchema + '}';
+    }
+
+    /**
+     * Invoked by the containing {@code BeanFactory} after it has set all bean properties
+     * and satisfied {@link org.springframework.beans.factory.BeanFactoryAware}, {@code ApplicationContextAware} etc.
+     * <p>This method allows the bean instance to perform validation of its overall
+     * configuration and final initialization when all bean properties have been set.
+     *
+     * @throws Exception in the event of misconfiguration (such as failure to set an
+     *                   essential property) or if initialization fails for any other reason
+     */
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        checkArgument((this.hibDatabasePlatform != null) && !(this.hibDatabasePlatform.trim().isEmpty()), "Parameter hibDatabasePlatform cannot be Null or an Empty String.");
     }
 }

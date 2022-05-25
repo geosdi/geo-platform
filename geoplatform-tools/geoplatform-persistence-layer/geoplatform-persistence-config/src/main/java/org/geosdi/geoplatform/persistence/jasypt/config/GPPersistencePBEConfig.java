@@ -45,7 +45,6 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.Nonnull;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -63,10 +62,7 @@ class GPPersistencePBEConfig {
      */
     @Bean
     public PBEConfig persistencePBEConfig(@Nonnull(when = NEVER) GPPersistencePBEProperties persistencePBEProperties) {
-        checkArgument(persistencePBEProperties != null && persistencePBEProperties.isSetPassword(),
-                "The Parameter password must not be null or empty String in class." + this.getClass().getSimpleName());
-        logger.debug("####################################GP_PERSISTENCE_PBE_PASSWORD : {}\n\n",
-                persistencePBEProperties.getPassword());
+        logger.debug("####################################GP_PERSISTENCE_PBE_PASSWORD : {}\n\n", persistencePBEProperties.getPassword());
         return new SimpleStringPBEConfig() {
 
             {

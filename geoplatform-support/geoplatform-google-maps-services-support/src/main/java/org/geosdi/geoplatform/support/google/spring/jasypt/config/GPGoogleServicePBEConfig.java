@@ -60,8 +60,7 @@ class GPGoogleServicePBEConfig {
      */
     @Bean
     public PBEConfig googleServicePBEConfig(GPGoogleServicePBEProperties googleServicePBEProperties) {
-        checkArgument(googleServicePBEProperties != null && googleServicePBEProperties.isSetPassword(),
-                "The Parameter password must not be null or empty String in class." + this.getClass().getSimpleName());
+        checkArgument(googleServicePBEProperties != null , "The Parameter GPGoogleServicePBEProperties must not be null.");
         logger.debug("####################################GOOGLE_SERVICE_PBE_PASSWORD : {}\n\n",
                 googleServicePBEProperties.getPassword());
         return new SimpleStringPBEConfig() {

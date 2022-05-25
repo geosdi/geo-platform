@@ -56,7 +56,7 @@ public class GPPersistenceConnector implements InitializingBean {
 
     @Value("persistence{db_driverClassName:@null}")
     private String driverClassName;
-    @Value("persistence{db_url:@null}}")
+    @Value("persistence{db_url:@null}")
     private String url;
     @Value("persistence{db_username}")
     private String username;

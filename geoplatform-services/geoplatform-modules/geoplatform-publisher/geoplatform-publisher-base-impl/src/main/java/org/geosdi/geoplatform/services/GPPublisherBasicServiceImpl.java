@@ -144,8 +144,6 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
     private ShapeAppender shapeAppender;
     @Autowired
     private Ds2dsConfiguration ds2dsConfiguration;
-    @Autowired
-    private SLDHandler sldHandler;
     @Resource(name = "geoserverConnectorStore")
     protected GPGeoserverConnectorStore geoserverConnectorStore;
 
@@ -810,7 +808,8 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
 
     public boolean styleIsValid(Object style) throws ResourceNotFoundFault {
         try {
-            List<Exception> exceptions = this.sldHandler.validate(style, null, null);
+            SLDHandler sLDHandler = new SLDHandler();
+            List<Exception> exceptions = sLDHandler.validate(style, null, null);
             if (GPSharedUtils.isNotEmpty(exceptions)) {
                 throw new ResourceNotFoundFault(exceptions.toString());
             }

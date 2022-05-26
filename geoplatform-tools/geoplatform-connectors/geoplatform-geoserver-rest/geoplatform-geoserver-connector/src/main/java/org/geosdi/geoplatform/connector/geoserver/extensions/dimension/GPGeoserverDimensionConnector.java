@@ -115,7 +115,7 @@ public abstract class GPGeoserverDimensionConnector extends GPGeoserverImporterC
     public GeoserverLoadDimensionRequest loadDimensionRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverLoadDimensionRequest(this, this.emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

@@ -45,12 +45,16 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.dimension.range.GPCoverageDimensionRange;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.dimension.range.IGPCoverageDimensionRange;
 
+import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Stream.of;
 import static java.util.stream.StreamSupport.stream;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -117,24 +121,44 @@ class GPCoverageDimensionsDeserializer extends StdDeserializer<GPCoverageDimensi
     @Override
     public GPCoverageDimensions deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JacksonException {
         JsonNode node = mapper.readTree(jsonParser);
-        ArrayNode dimensions = (ArrayNode) node.get("coverageDimension");
-        Iterable<JsonNode> iterable = dimensions::elements;
-        List<IGPCoverageDimension> coverageDimensions = stream(iterable.spliterator(), false)
-                .filter(Objects::nonNull)
-                .map(this::toCoverageDimension)
-                .collect(toList());
+        JsonNode coverageDimensionNode = node.get("coverageDimension");
         return new GPCoverageDimensions() {
             {
-                super.setCoverageDimension(coverageDimensions);
+                super.setCoverageDimension(coverageDimensionNode instanceof ArrayNode ? readAsArrayNode(((ArrayNode) coverageDimensionNode)::iterator) : readAsJsonNode(coverageDimensionNode));
             }
         };
     }
 
     /**
      * @param theJsonNode
+     * @return {@link List<IGPCoverageDimension>}
+     */
+    List<IGPCoverageDimension> readAsJsonNode(@Nonnull(when = NEVER) JsonNode theJsonNode) {
+        checkArgument(theJsonNode != null, "The PArameter jsonNode must not be null.");
+        return of(theJsonNode)
+                .filter(Objects::nonNull)
+                .map(this::toCoverageDimension)
+                .collect(toList());
+    }
+
+    /**
+     * @param theIterable
+     * @return {@link List<IGPCoverageDimension>}
+     */
+    List<IGPCoverageDimension> readAsArrayNode(@Nonnull(when = NEVER) Iterable<JsonNode> theIterable)  {
+        checkArgument(theIterable != null, "The PArameter iterable must not be null.");
+        return stream(theIterable.spliterator(), false)
+                .filter(Objects::nonNull)
+                .map(this::toCoverageDimension)
+                .collect(toList());
+    }
+
+    /**
+     * @param theJsonNode
      * @return {@link IGPCoverageDimension}
      */
-    IGPCoverageDimension toCoverageDimension(JsonNode theJsonNode) {
+    IGPCoverageDimension toCoverageDimension(@Nonnull(when = NEVER) JsonNode theJsonNode) {
+        checkArgument(theJsonNode != null, "The PArameter jsonNode must not be null.");
         IGPCoverageDimension dimension = new GPCoverageDimension();
         dimension.setDescription(theJsonNode.get("description").asText());
         dimension.setName(theJsonNode.get("name").asText());

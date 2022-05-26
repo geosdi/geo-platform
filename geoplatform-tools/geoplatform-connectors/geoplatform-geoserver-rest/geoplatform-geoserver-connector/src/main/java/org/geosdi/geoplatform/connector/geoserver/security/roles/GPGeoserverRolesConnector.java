@@ -114,7 +114,7 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
     public GPGeoserverLoadRolesRequest loadRoles() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverLoadRolesRequest(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -128,7 +128,7 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
     public GPGeoserverLoadUserRolesRequest loadUserRoles() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverLoadUserRolesRequest(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -142,7 +142,7 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
     public GPGeoserverLoadGroupRolesRequest loadGroupRoles() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverLoadGroupRolesRequest(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -156,7 +156,7 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
     public GPGeoserverLoadServiceUserRolesRequest loadServiceUserRoles() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverLoadServiceUserRolesRequest(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -170,7 +170,7 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
     public GeoserverLoadServiceGroupRolesRequest loadServiceGroupRoles() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverLoadServiceGroupRolesRequest(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -184,7 +184,7 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
     public GeoserverCreateRoleRequest createRole() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverCreateRoleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -198,7 +198,7 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
     public GeoserverDeleteRoleRequest deleteRole() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverDeleteRoleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -212,7 +212,7 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
     public GeoserverLinkUserToRoleRequest linkUserToRoleRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverLinkUserToRoleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -226,7 +226,7 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
     public GeoserverUnlinkUserToRoleRequest unlinkUserToRoleRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverUnlinkUserToRoleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -240,7 +240,7 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
     public GeoserverLinkGroupToRoleRequest linkGroupToRoleRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverLinkGroupToRoleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -254,7 +254,7 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
     public GeoserverUnlinkGroupToRoleRequest unlinkGroupToRoleRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverUnlinkGroupToRoleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -268,7 +268,7 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
     public GeoserverCreateServiceRoleRequest createServiceRoleRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverCreateServiceRoleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -282,7 +282,7 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
     public GeoserverDeleteServiceRoleRequest deleteServiceRoleRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverDeleteServiceRoleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -296,7 +296,7 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
     public GeoserverCreateServiceUserRoleRequest createServiceUserRoleRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverCreateServiceUserRoleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -310,7 +310,7 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
     public GeoserverDeleteServiceUserRoleRequest deleteServiceUserRoleRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverDeleteServiceUserRoleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -324,7 +324,7 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
     public GeoserverCreateServiceGroupRoleRequest createServiceGroupRoleRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverCreateServiceGroupRoleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -338,7 +338,7 @@ public abstract class GPGeoserverRolesConnector extends GPGeoserverAclLayersConn
     public GeoserverDeleteServiceGroupRoleRequest deleteServiceGroupRoleRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverDeleteServiceGroupRoleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

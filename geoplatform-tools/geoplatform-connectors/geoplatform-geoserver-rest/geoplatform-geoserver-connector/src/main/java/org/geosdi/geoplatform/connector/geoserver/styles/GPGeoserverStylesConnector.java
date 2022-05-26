@@ -113,7 +113,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     public GeoserverStylesRequest loadStylesRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverStylesRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -127,7 +127,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     public GeoserverStyleRequest loadStyleRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverStyleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -141,7 +141,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     public GeoserverCreateStyleRequest createStyleRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverCreateStyleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -155,7 +155,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     public GeoserverCreateStyleSLDV100Request createStyleSLDV100Request() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return GeoserverCreateStyleSLDV100Request.of(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -169,7 +169,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     public GeoserverCreateWorkspaceStyleRequest createWorkspaceStyleRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverCreateWorkspaceStyleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -183,7 +183,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     public GeoserverDeleteStyleRequest deleteStyleRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverDeleteStyleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -197,7 +197,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     public GeoserverDeleteWorkspaceStyleRequest deleteWorkspaceStyleRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverDeleteWorkspaceStyleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -211,7 +211,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     public GeoserverStyleSLDV100Request loadStyleSLDV100Request() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return of(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -225,7 +225,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     public GeoserverWorkspaceStylesRequest loadWorkspaceStylesRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverWorkspaceStylesRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -239,7 +239,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     public GeoserverWorkspaceStyleRequest loadWorkspaceStyleRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverWorkspaceStyleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -253,7 +253,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     public GeoserverUpdateStyleRequest updateStyleRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverUpdateStyleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -267,7 +267,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     public GeoserverUpdateStyleSLDV100Request updateStyleSLDV100Request() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return GeoserverUpdateStyleSLDV100Request.of(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -281,7 +281,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     public GeoserverCreateStyleWithFileSLDRequest createStyleWithFileSLDRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return GeoserverCreateStyleWithFileSLDRequest.of(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -295,7 +295,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     public GeoserverUpdateStyleWithFileSLDRequest updateStyleWithFileSLDRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return GeoserverUpdateStyleWithFileSLDRequest.of(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -309,7 +309,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     public GeoserverLayerStylesRequest loadLayerStylesRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverLayerStylesRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -323,7 +323,7 @@ public abstract class GPGeoserverStylesConnector extends GPGeoserverLayersConnec
     public GeoserverAddStyleToLayerRequest addStyleToLayerRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverAddStyleToLayerRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

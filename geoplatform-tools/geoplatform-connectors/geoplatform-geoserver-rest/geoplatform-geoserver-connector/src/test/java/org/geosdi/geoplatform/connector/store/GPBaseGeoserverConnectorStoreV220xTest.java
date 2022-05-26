@@ -50,9 +50,9 @@ import static org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStoreBu
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPBaseGeoserverConnectorStoreV22xTest {
+public abstract class GPBaseGeoserverConnectorStoreV220xTest {
 
-    protected static final Logger logger = LoggerFactory.getLogger(GPBaseGeoserverConnectorStoreV22xTest.class);
+    protected static final Logger logger = LoggerFactory.getLogger(GPBaseGeoserverConnectorStoreV220xTest.class);
     //
     private static final String geoserverURLV2_20_X = "http://150.145.141.180/geoserver/rest";
     protected static GPGeoserverConnectorStore geoserverConnectorStoreV2_20_x;

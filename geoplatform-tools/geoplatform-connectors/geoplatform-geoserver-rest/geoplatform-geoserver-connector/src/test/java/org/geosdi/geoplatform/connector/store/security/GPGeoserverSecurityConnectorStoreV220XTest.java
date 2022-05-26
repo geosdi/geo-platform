@@ -40,7 +40,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.security.user.GPGeoserve
 import org.geosdi.geoplatform.connector.geoserver.request.security.GeoserverGetMasterPasswordRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.security.catalog.GeoserverGetCatalogRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.security.catalog.GeoserverUpdateCatalogRequest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV22xTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV220xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -56,7 +56,7 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverSecurityConnectorStoreV22XTest extends GPBaseGeoserverConnectorStoreV22xTest {
+public class GPGeoserverSecurityConnectorStoreV220XTest extends GPBaseGeoserverConnectorStoreV220xTest {
 
     @Test
     public void a_loadGeoserverMasterPasswordTest() throws Exception {

@@ -115,7 +115,7 @@ public abstract class GPGeoserverLayerGroupsConnector extends GPGeoserverSetting
     public GeoserverLoadLayerGroupsRequest loadLayerGroupsRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverLoadLayerGroupsRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -129,7 +129,7 @@ public abstract class GPGeoserverLayerGroupsConnector extends GPGeoserverSetting
     public GeoserverLoadLayerGroupRequest loadLayerGroupRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverLoadLayerGroupRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -143,7 +143,7 @@ public abstract class GPGeoserverLayerGroupsConnector extends GPGeoserverSetting
     public GeoserverLoadWorkspaceLayerGroupsRequest loadWorkspaceLayerGroupsRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverLoadWorkspaceLayerGroupsRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -157,7 +157,7 @@ public abstract class GPGeoserverLayerGroupsConnector extends GPGeoserverSetting
     public GeoserverCreateLayerGroupRequest createLayerGroupRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverCreateLayerGroupRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -171,7 +171,7 @@ public abstract class GPGeoserverLayerGroupsConnector extends GPGeoserverSetting
     public GeoserverUpdateLayerGroupRequest updateLayerGroupRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverUpdateLayerGroupRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -185,7 +185,7 @@ public abstract class GPGeoserverLayerGroupsConnector extends GPGeoserverSetting
     public GeoserverDeleteLayerGroupRequest deleteLayerGroupRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverDeleteLayerGroupRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -199,7 +199,7 @@ public abstract class GPGeoserverLayerGroupsConnector extends GPGeoserverSetting
     public GeoserverCreateWorkspaceLayerGroupRequest createWorkspaceLayerGroupRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverCreateWorkspaceLayerGroupRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -213,7 +213,7 @@ public abstract class GPGeoserverLayerGroupsConnector extends GPGeoserverSetting
     public GeoserverUpdateWorkspaceLayerGroupRequest updateWorkspaceLayerGroupRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverUpdateWorkspaceLayerGroupRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -227,7 +227,7 @@ public abstract class GPGeoserverLayerGroupsConnector extends GPGeoserverSetting
     public GeoserverDeleteWorkspaceLayerGroupRequest deleteWorkspaceLayerGroupRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverDeleteWorkspaceLayerGroupRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -241,7 +241,7 @@ public abstract class GPGeoserverLayerGroupsConnector extends GPGeoserverSetting
     public GeoserverLoadWorkspaceLayerGroupRequest loadWorkspaceLayerGroupRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverLoadWorkspaceLayerGroupRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

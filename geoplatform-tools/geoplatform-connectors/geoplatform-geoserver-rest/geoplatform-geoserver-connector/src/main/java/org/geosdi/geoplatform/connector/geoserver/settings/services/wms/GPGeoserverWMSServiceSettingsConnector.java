@@ -111,7 +111,7 @@ public abstract class GPGeoserverWMSServiceSettingsConnector extends GPGeoserver
     public GeoserverLoadWMSServiceSettingsRequest loadWMSServiceSettingsRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverLoadWMSServiceSettingsRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -125,7 +125,7 @@ public abstract class GPGeoserverWMSServiceSettingsConnector extends GPGeoserver
     public GeoserverLoadWMSWorkspaceServiceSettingsRequest loadWMSWorkspaceServiceSettingsRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverLoadWMSWorkspaceServiceSettingsRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -139,7 +139,7 @@ public abstract class GPGeoserverWMSServiceSettingsConnector extends GPGeoserver
     public GeoserverUpdateWMSServiceSettingsRequest updateWMSServiceSettingsRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverUpdateWMSServiceSettingsRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -153,7 +153,7 @@ public abstract class GPGeoserverWMSServiceSettingsConnector extends GPGeoserver
     public GeoserverUpdateWMSWorkspaceSettingsRequest updateWMSWorkspaceServiceSettingsRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverUpdateWMSWorkspaceSettingsRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -167,7 +167,7 @@ public abstract class GPGeoserverWMSServiceSettingsConnector extends GPGeoserver
     public GeoserverDeleteWMSWorkspaceServiceSettingRequest deleteWMSWorkspaceServiceSettingsRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverDeleteWMSWorkspaceServiceSettingRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

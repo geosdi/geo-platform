@@ -37,8 +37,6 @@ package org.geosdi.geoplatform.connector.geoserver.extensions.rasterize;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
-import org.geosdi.geoplatform.connector.geoserver.extensions.rasterize.GPGeoserverRasterizeRequest;
-import org.geosdi.geoplatform.connector.geoserver.extensions.rasterize.IGPGeoserverRasterizeConnector;
 import org.geosdi.geoplatform.connector.geoserver.extensions.uniquevalues.GPGeoserverUniqueValuesConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -116,7 +114,7 @@ public abstract class GPGeoserverRasterizeConnector extends GPGeoserverUniqueVal
     public GPGeoserverRasterizeRequest rasterizeData() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverRasterizeRequest(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

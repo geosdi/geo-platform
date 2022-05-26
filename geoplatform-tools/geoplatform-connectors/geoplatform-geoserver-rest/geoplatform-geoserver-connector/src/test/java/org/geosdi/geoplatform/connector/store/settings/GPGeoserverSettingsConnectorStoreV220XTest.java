@@ -41,7 +41,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.settings.contact.IGPGeos
 import org.geosdi.geoplatform.connector.geoserver.request.settings.GeoserverLoadContactSettingsRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.settings.GeoserverLoadGlobalSettingsRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.settings.GeoserverUpdateGlobalSettingsRequest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV22xTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV220xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
@@ -59,7 +59,7 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverSettingsConnectorStoreV22XTest extends GPBaseGeoserverConnectorStoreV22xTest {
+public class GPGeoserverSettingsConnectorStoreV220XTest extends GPBaseGeoserverConnectorStoreV220xTest {
 
     @Test
     public void a_loadGeoserverGlobalSettingsRequestTest() throws Exception {

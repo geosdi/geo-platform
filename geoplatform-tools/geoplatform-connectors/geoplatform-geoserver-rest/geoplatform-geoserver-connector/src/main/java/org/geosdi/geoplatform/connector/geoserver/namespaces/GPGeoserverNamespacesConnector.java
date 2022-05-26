@@ -113,7 +113,7 @@ public abstract class GPGeoserverNamespacesConnector extends GPGeoserverCoverage
     public GeoserverNamespacesRequest createNamespacesRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverNamespacesRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -127,7 +127,7 @@ public abstract class GPGeoserverNamespacesConnector extends GPGeoserverCoverage
     public GeoserverNamespaceRequest createNamespaceRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverNamespaceRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -141,7 +141,7 @@ public abstract class GPGeoserverNamespacesConnector extends GPGeoserverCoverage
     public GeoserverNamespaceWithBodyRequest createNamespaceWithBodyRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverNamespaceWithBodyRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.connector.store.coveragestores;
 
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverLoadCoverageStoreRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverLoadCoverageStoresRequest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV22xTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV220xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
@@ -48,7 +48,7 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverCoverageStoresConnectorStoreV22XTest extends GPBaseGeoserverConnectorStoreV22xTest {
+public class GPGeoserverCoverageStoresConnectorStoreV220XTest extends GPBaseGeoserverConnectorStoreV220xTest {
 
     @Test
     public void a_loadCoverageStoresConnectorTest() throws Exception {

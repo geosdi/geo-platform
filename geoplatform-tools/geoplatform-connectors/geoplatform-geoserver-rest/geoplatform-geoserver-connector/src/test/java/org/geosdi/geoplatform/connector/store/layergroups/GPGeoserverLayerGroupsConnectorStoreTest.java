@@ -51,20 +51,20 @@ public class GPGeoserverLayerGroupsConnectorStoreTest extends GPBaseGeoserverCon
 
     @Test
     public void a_loadGeoserverWorkspaceToppLayersTest() throws Exception {
-        GeoserverLoadLayerGroupsRequest loadLayerGroupRequest = geoserverConnectorStoreV2_19_x.loadLayerGroups();
+        GeoserverLoadLayerGroupsRequest loadLayerGroupRequest = geoserverConnectorStoreV2_21_x.loadLayerGroups();
         logger.info("############################LOAD_WORKSPACE_LAYERS_RESPONSE : {}\n", loadLayerGroupRequest.getResponse());
     }
 
     @Test
     public void b_loadGeoserverLayerGroupRequestTest() throws Exception {
-        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@LOAD_LAYER_GROUP_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@LOAD_LAYER_GROUP_RESPONSE : {}\n", geoserverConnectorStoreV2_21_x
                 .loadLayerGroupRequest()
                 .withLayerGroupName("spearfish").getResponse());
     }
 
     @Test
     public void c_loadGeoserverLayerGroupRequestTest() throws Exception {
-        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@LOAD_LAYER_GROUP_RESPONSE : {}\n", geoserverConnectorStoreV2_19_x
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@LOAD_LAYER_GROUP_RESPONSE : {}\n", geoserverConnectorStoreV2_21_x
                 .loadLayerGroupRequest()
                 .withLayerGroupName("tiger-ny").getResponse());
     }

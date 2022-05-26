@@ -68,38 +68,38 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void a_aboutVersionGeoserverConnectorTest() throws Exception {
-        GPGeoserverAboutVersionRequest aboutRequest = geoserverConnectorStoreV2_19_x.createAboutVersionRequest();
+        GPGeoserverAboutVersionRequest aboutRequest = geoserverConnectorStoreV2_21_x.createAboutVersionRequest();
         logger.info("#####################ABOUT_VERSION_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutRequest.getResponseAsString());
     }
 
     @Test
     public void b_aboutStatusGeoserverConnectorTest() throws Exception {
-        GPGeoserverAboutStatusRequest aboutStatusRequest = geoserverConnectorStoreV2_19_x.createAboutStatusRequest();
+        GPGeoserverAboutStatusRequest aboutStatusRequest = geoserverConnectorStoreV2_21_x.createAboutStatusRequest();
         logger.info("#####################ABOUT_STATUS_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutStatusRequest.getResponseAsString());
     }
 
     @Test
     public void c_workspacesGeoserverConnectorTest() throws Exception {
-        GeoserverLoadWorkspacesRequest workspacesRequest = geoserverConnectorStoreV2_19_x.loadWorkspacesRequest();
+        GeoserverLoadWorkspacesRequest workspacesRequest = geoserverConnectorStoreV2_21_x.loadWorkspacesRequest();
         logger.info("####################WORKSPACES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", workspacesRequest.getResponse());
     }
 
     @Test
     public void d_namespacesGeoserverConnectorTest() throws Exception {
-        GeoserverNamespacesRequest namespacesRequest = geoserverConnectorStoreV2_19_x.createNamespacesRequest();
+        GeoserverNamespacesRequest namespacesRequest = geoserverConnectorStoreV2_21_x.createNamespacesRequest();
         logger.info("###################NAMESPACES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", namespacesRequest.getResponseAsString());
     }
 
     @Test
     public void e_namespaceGeoserverConnectorTest() throws Exception {
-        GeoserverNamespaceRequest namespaceRequest = geoserverConnectorStoreV2_19_x.createNamespaceRequest();
+        GeoserverNamespaceRequest namespaceRequest = geoserverConnectorStoreV2_21_x.createNamespaceRequest();
         logger.info("###################NAMESPACE_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", namespaceRequest.withPrefix("tiger").getResponseAsString());
     }
 
     @Test
     public void f_namespaceGeoserverConnectorMultiThreadTest() throws Exception {
-        GeoserverNamespacesRequest namespacesRequest = geoserverConnectorStoreV2_19_x.createNamespacesRequest();
-        GeoserverNamespaceRequest namespaceRequest = geoserverConnectorStoreV2_19_x.createNamespaceRequest();
+        GeoserverNamespacesRequest namespacesRequest = geoserverConnectorStoreV2_21_x.createNamespacesRequest();
+        GeoserverNamespaceRequest namespaceRequest = geoserverConnectorStoreV2_21_x.createNamespaceRequest();
         GPGeoserverNamespaces namespaces = namespacesRequest.getResponse();
         logger.info("#######################FOUND : {} namespaces.", namespaces.getNamespaces().size());
         for (IGPGeoserverNamespace namespace : namespaces.getNamespaces()) {
@@ -110,27 +110,27 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void g_layersGeoserverConnectorTest() throws Exception {
-        GeoserverLayersRequest layersRequest = geoserverConnectorStoreV2_19_x.loadLayersRequest();
+        GeoserverLayersRequest layersRequest = geoserverConnectorStoreV2_21_x.loadLayersRequest();
         logger.info("##################LAYERS_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", layersRequest.getResponseAsString());
     }
 
     @Test
     public void h_stylesGeoserverConnectorTest() throws Exception {
-        GeoserverStylesRequest stylesRequest = geoserverConnectorStoreV2_19_x.loadStylesRequest();
+        GeoserverStylesRequest stylesRequest = geoserverConnectorStoreV2_21_x.loadStylesRequest();
         logger.info("#################STYLES_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", stylesRequest.getResponseAsString());
     }
 
     @Test//(expected = ResourceNotFoundException.class)
     public void i_styleGeoserverConnectorTest() throws Exception {
-        GeoserverStyleRequest styleRequest = geoserverConnectorStoreV2_19_x.loadStyleRequest();
+        GeoserverStyleRequest styleRequest = geoserverConnectorStoreV2_21_x.loadStyleRequest();
         styleRequest.withStyleName("Frank");
         logger.info("################STYLE_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", styleRequest.getResponseAsString());
     }
 
     @Test
     public void l_styleGeoserverConnectorMultiThreadTest() throws Exception {
-        GeoserverStylesRequest stylesRequest = geoserverConnectorStoreV2_19_x.loadStylesRequest();
-        GeoserverStyleRequest styleRequest = geoserverConnectorStoreV2_19_x.loadStyleRequest();
+        GeoserverStylesRequest stylesRequest = geoserverConnectorStoreV2_21_x.loadStylesRequest();
+        GeoserverStyleRequest styleRequest = geoserverConnectorStoreV2_21_x.loadStyleRequest();
         stylesRequest.getResponse().getStyles()
                 .stream()
                 .forEach(value -> new GeoserverStyleTask(styleRequest, value.getName()).start());
@@ -139,22 +139,22 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void m_layerVectorGeoserverConnectorTest() throws Exception {
-        GeoserverLoadLayerRequest layerRequest = geoserverConnectorStoreV2_19_x.loadLayerRequest();
+        GeoserverLoadLayerRequest layerRequest = geoserverConnectorStoreV2_21_x.loadLayerRequest();
         layerRequest.withName("giant_polygon");
         logger.info("##############VECTOR_LAYER_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", layerRequest.getResponseAsString());
     }
 
     @Test
     public void n_layerRasterGeoserverConnectorTest() throws Exception {
-        GeoserverLoadLayerRequest layerRequest = geoserverConnectorStoreV2_19_x.loadLayerRequest();
+        GeoserverLoadLayerRequest layerRequest = geoserverConnectorStoreV2_21_x.loadLayerRequest();
         layerRequest.withName("Arc_Sample");
         logger.info("############RASTER_LAYER_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", layerRequest.getResponseAsString());
     }
 
     @Test
     public void o_layerGeoserverConnectorMultiThreadTest() throws Exception {
-        GeoserverLayersRequest layersRequest = geoserverConnectorStoreV2_19_x.loadLayersRequest();
-        GeoserverLoadLayerRequest layerRequest = geoserverConnectorStoreV2_19_x.loadLayerRequest();
+        GeoserverLayersRequest layersRequest = geoserverConnectorStoreV2_21_x.loadLayersRequest();
+        GeoserverLoadLayerRequest layerRequest = geoserverConnectorStoreV2_21_x.loadLayerRequest();
         layersRequest.getResponse().getLayers()
                 .stream()
                 .forEach(value -> new GeoserverLayerTask(layerRequest, value.getLayerName()).start());
@@ -163,7 +163,7 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void p_createWorkspaceGeoserverConnectorTest() throws Exception {
-        GeoserverCreateWorkspaceRequest createWorkspaceRequest = geoserverConnectorStoreV2_19_x.createWorkspaceRequest();
+        GeoserverCreateWorkspaceRequest createWorkspaceRequest = geoserverConnectorStoreV2_21_x.createWorkspaceRequest();
         logger.info("############CREATE_WORKSPACE_RESPONSE : {}", createWorkspaceRequest
                 .withWorkspaceBody(new GeoserverCreateWorkspaceBody("workspace_test"))
                 .getResponseAsString());
@@ -171,7 +171,7 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void q_loadWorkspaceGeoserverConnectorTest() throws Exception {
-        GeoserverLoadWorkspaceRequest loadWorkspaceRequest = geoserverConnectorStoreV2_19_x.loadWorkspaceRequest();
+        GeoserverLoadWorkspaceRequest loadWorkspaceRequest = geoserverConnectorStoreV2_21_x.loadWorkspaceRequest();
         loadWorkspaceRequest.withWorkspaceName("workspace_test");
         GPGeoserverLoadWorkspace loadWorkspace = loadWorkspaceRequest.getResponse();
         logger.info("#############################LOAD_WORKSPACE_RESPONSE : {}\n", loadWorkspace);
@@ -179,7 +179,7 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void r_updateWorkspaceGeoserverConnectorTest() throws Exception {
-        GeoserverUpdateWorkspaceRequest updateWorkspaceRequest = geoserverConnectorStoreV2_19_x.updateWorkspaceRequest();
+        GeoserverUpdateWorkspaceRequest updateWorkspaceRequest = geoserverConnectorStoreV2_21_x.updateWorkspaceRequest();
         updateWorkspaceRequest.withWorkspaceName("workspace_test");
         updateWorkspaceRequest.withWorkspaceBody(new GeoserverCreateWorkspaceBody("workspace_test_1"));
         logger.info("##########################UPDATE_WORKSPACE_RESPONSE : {}\n", updateWorkspaceRequest.getResponseAsString());
@@ -187,7 +187,7 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void s_deleteWorkspaceGeoserverConnectorTest() throws Exception {
-        GeoserverDeleteWorkspaceRequest deleteWorkspaceRequest = geoserverConnectorStoreV2_19_x.deleteWorkspaceRequest();
+        GeoserverDeleteWorkspaceRequest deleteWorkspaceRequest = geoserverConnectorStoreV2_21_x.deleteWorkspaceRequest();
         deleteWorkspaceRequest.withWorkspaceName("workspace_test_1");
         deleteWorkspaceRequest.withRecurse(TRUE);
         logger.info("###########################DELETE_WORKSPACE_RESPONSE : {}\n", deleteWorkspaceRequest.getResponse());
@@ -195,7 +195,7 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void t_aboutManifestGeoserverConnectorTest() throws Exception {
-        GPGeoserverAboutManifestRequest aboutManifestRequest = geoserverConnectorStoreV2_19_x.createAboutManifestRequest();
+        GPGeoserverAboutManifestRequest aboutManifestRequest = geoserverConnectorStoreV2_21_x.createAboutManifestRequest();
         logger.info("#####################ABOUT_MANIFEST_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutManifestRequest.getResponseAsString());
     }
 }

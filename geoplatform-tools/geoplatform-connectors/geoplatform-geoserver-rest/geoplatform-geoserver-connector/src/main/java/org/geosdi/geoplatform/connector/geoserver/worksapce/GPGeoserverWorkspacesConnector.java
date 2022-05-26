@@ -111,7 +111,7 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     public GeoserverLoadWorkspacesRequest loadWorkspacesRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverLoadWorkspacesRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -125,7 +125,7 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     public GeoserverLoadWorkspaceRequest loadWorkspaceRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverLoadWorkspaceRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -139,7 +139,7 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     public GeoserverCreateWorkspaceRequest createWorkspaceRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverCreateWorkspaceRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -153,7 +153,7 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     public GeoserverDeleteWorkspaceRequest deleteWorkspaceRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverDeleteWorkspaceRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -167,7 +167,7 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     public GeoserverUpdateWorkspaceRequest updateWorkspaceRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverUpdateWorkspaceRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

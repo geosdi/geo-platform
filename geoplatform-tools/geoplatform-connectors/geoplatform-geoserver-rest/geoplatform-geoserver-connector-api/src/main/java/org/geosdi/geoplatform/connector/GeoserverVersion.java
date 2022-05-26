@@ -56,11 +56,11 @@ import static javax.annotation.meta.When.NEVER;
 public enum GeoserverVersion implements GPServerConnectorVersion {
 
     /**
-     * <p>Maintenance Version.</p>
-     */
-    V219x("2.19.6"),
-    /**
      * <p>Stable Version.</p>
+     */
+    V221x("2.21.0"),
+    /**
+     * <p>Maintenance Version.</p>
      */
     V220x("2.20.4");
 
@@ -96,7 +96,7 @@ public enum GeoserverVersion implements GPServerConnectorVersion {
                 .filter(Objects::nonNull)
                 .filter(v -> ((version != null) && !(version.trim().isEmpty())) ? v.getVersion().equalsIgnoreCase(version) : FALSE)
                 .findFirst();
-        return optional.orElse(V220x);
+        return optional.orElse(V221x);
     }
 
     /**

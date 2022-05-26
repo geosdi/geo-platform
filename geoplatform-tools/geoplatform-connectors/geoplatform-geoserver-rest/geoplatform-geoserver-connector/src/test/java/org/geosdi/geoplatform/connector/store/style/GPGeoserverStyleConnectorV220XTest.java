@@ -40,7 +40,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverStyleR
 import org.geosdi.geoplatform.connector.geoserver.request.styles.GeoserverWorkspaceStylesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverLoadWorkspacesRequest;
 import org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV22xTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV220xTest;
 import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -64,7 +64,7 @@ import static org.junit.Assert.assertTrue;
  * @email vito.salvia@gmail.com
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class GPGeoserverStyleConnectorV22XTest extends GPBaseGeoserverConnectorStoreV22xTest {
+public class GPGeoserverStyleConnectorV220XTest extends GPBaseGeoserverConnectorStoreV220xTest {
 
     private static final GeoserverLoadWorkspacesRequest workspacesRequest = geoserverConnectorStoreV2_20_x.loadWorkspacesRequest();
     private static final GeoserverWorkspaceStylesRequest gpGeoserverWorkspaceStylesRequest = geoserverConnectorStoreV2_20_x.loadWorkspaceStyles();

@@ -121,7 +121,7 @@ public class GPGeoserverConnector extends GPGeoserverDimensionConnector implemen
     public GeoserverRestRunningRequest createGeoserverRestRunningRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverRestRunningRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -135,7 +135,7 @@ public class GPGeoserverConnector extends GPGeoserverDimensionConnector implemen
     public GeoserverReloadCatalogRequest reloadGeoserverCatalogRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverReloadCatalogRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -149,7 +149,7 @@ public class GPGeoserverConnector extends GPGeoserverDimensionConnector implemen
     public GeoserverResetRequest resetGeoserverRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverResetRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -163,7 +163,7 @@ public class GPGeoserverConnector extends GPGeoserverDimensionConnector implemen
     public GeoserverRestRunningRequest createImportsGeoserverRunningRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverImporterRunningRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

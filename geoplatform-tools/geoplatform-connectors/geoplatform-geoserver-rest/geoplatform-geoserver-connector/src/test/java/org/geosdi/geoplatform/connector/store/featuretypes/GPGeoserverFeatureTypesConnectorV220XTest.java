@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.Geoserver
 import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadWorkspaceFeatureTypesRequest;
 import org.geosdi.geoplatform.connector.server.exception.IncorrectResponseException;
 import org.geosdi.geoplatform.connector.server.exception.ResourceNotFoundException;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV22xTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV220xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
@@ -63,7 +63,7 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverFeatureTypesConnectorV22XTest extends GPBaseGeoserverConnectorStoreV22xTest {
+public class GPGeoserverFeatureTypesConnectorV220XTest extends GPBaseGeoserverConnectorStoreV220xTest {
 
     @Test(expected = ResourceNotFoundException.class)
     public void a_loadWorkspaceDatastoreFeatureTypesTest() throws Exception {

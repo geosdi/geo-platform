@@ -41,7 +41,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.layergroups.GPGeoserverL
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables.GPGeoserverLayerGroupPublishables;
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables.GPGeoserverLayerPublished;
 import org.geosdi.geoplatform.connector.geoserver.request.layergroups.GeoserverLoadLayerGroupsRequest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV22xTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV220xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
@@ -55,7 +55,7 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email vito.salvia@gmail.com
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverLayerGroupsConnectorStoreV22XTest extends GPBaseGeoserverConnectorStoreV22xTest {
+public class GPGeoserverLayerGroupsConnectorStoreV220XTest extends GPBaseGeoserverConnectorStoreV220xTest {
 
     @Test
     public void a_loadGeoserverLoadLayerGroupsRequestTest() throws Exception {

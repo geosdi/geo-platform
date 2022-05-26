@@ -112,7 +112,7 @@ public abstract class GPGeoserverDatastoresConnector extends GPGeoserverStylesCo
     public GeoserverLoadDatastoresRequest loadDatastoresRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverLoadDatastoresRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -126,7 +126,7 @@ public abstract class GPGeoserverDatastoresConnector extends GPGeoserverStylesCo
     public GeoserverLoadDatastoreRequest loadDatastoreRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverLoadDatastoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -140,7 +140,7 @@ public abstract class GPGeoserverDatastoresConnector extends GPGeoserverStylesCo
     public GeoserverCreateDatastoreRequest createDatastoreRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverCreateDatastoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -154,7 +154,7 @@ public abstract class GPGeoserverDatastoresConnector extends GPGeoserverStylesCo
     public GeoserverUpdateDatastoreRequest updateDatastoreRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverUpdateDatastoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -168,7 +168,7 @@ public abstract class GPGeoserverDatastoresConnector extends GPGeoserverStylesCo
     public GeoserverDeleteDatastoreRequest deleteDatastoreRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverDeleteDatastoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -182,7 +182,7 @@ public abstract class GPGeoserverDatastoresConnector extends GPGeoserverStylesCo
     public GeoserverUpdateDataStoreWithStoreNameRequest updateDataStoreWithStoreName() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverUpdateDataStoreWithStoreName(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -196,7 +196,7 @@ public abstract class GPGeoserverDatastoresConnector extends GPGeoserverStylesCo
     public GeoserverCreateDatastoreResourceRequest createDataStoreResource() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverCreateDatastoreResourceRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

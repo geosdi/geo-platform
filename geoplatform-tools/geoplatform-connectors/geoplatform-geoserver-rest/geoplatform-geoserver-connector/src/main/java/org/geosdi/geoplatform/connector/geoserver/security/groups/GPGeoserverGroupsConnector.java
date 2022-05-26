@@ -112,7 +112,7 @@ public abstract class GPGeoserverGroupsConnector extends GPGeoserverUsersConnect
     public GeoserverLoadGroupsRequest loadGroupsRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverLoadGroupsRequest(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -126,7 +126,7 @@ public abstract class GPGeoserverGroupsConnector extends GPGeoserverUsersConnect
     public GeoserverCreateGroupRequest createGroupRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverCreateGroupRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -140,7 +140,7 @@ public abstract class GPGeoserverGroupsConnector extends GPGeoserverUsersConnect
     public GeoserverDeleteGroupRequest deleteGroupRequest() {
         switch (version) {
             case V220x:
-            case V219x:
+            case V221x:
                 return new GPGeoserverDeleteGroupRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

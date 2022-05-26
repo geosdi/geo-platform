@@ -40,7 +40,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wms.GPG
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wms.GeoserverWMSServiceSettings;
 import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wms.*;
 import org.geosdi.geoplatform.connector.jackson.GPGeoserverWMSServiceSettingsJacksonTest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV22xTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV220xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
@@ -62,7 +62,7 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverWMSServiceSettingsConnectorStoreV22XTest extends GPBaseGeoserverConnectorStoreV22xTest {
+public class GPGeoserverWMSServiceSettingsConnectorStoreV220XTest extends GPBaseGeoserverConnectorStoreV220xTest {
 
     @Test
     public void a_loadWMSServiceSettingsRequestTest() throws Exception {

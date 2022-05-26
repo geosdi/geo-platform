@@ -134,9 +134,8 @@ class GPCoverageDimensionsDeserializer extends StdDeserializer<GPCoverageDimensi
      * @return {@link List<IGPCoverageDimension>}
      */
     List<IGPCoverageDimension> readAsJsonNode(@Nonnull(when = NEVER) JsonNode theJsonNode) {
-        checkArgument(theJsonNode != null, "The PArameter jsonNode must not be null.");
+        checkArgument(theJsonNode != null, "The Parameter jsonNode must not be null.");
         return of(theJsonNode)
-                .filter(Objects::nonNull)
                 .map(this::toCoverageDimension)
                 .collect(toList());
     }
@@ -146,7 +145,7 @@ class GPCoverageDimensionsDeserializer extends StdDeserializer<GPCoverageDimensi
      * @return {@link List<IGPCoverageDimension>}
      */
     List<IGPCoverageDimension> readAsArrayNode(@Nonnull(when = NEVER) Iterable<JsonNode> theIterable)  {
-        checkArgument(theIterable != null, "The PArameter iterable must not be null.");
+        checkArgument(theIterable != null, "The Parameter iterable must not be null.");
         return stream(theIterable.spliterator(), false)
                 .filter(Objects::nonNull)
                 .map(this::toCoverageDimension)
@@ -158,7 +157,7 @@ class GPCoverageDimensionsDeserializer extends StdDeserializer<GPCoverageDimensi
      * @return {@link IGPCoverageDimension}
      */
     IGPCoverageDimension toCoverageDimension(@Nonnull(when = NEVER) JsonNode theJsonNode) {
-        checkArgument(theJsonNode != null, "The PArameter jsonNode must not be null.");
+        checkArgument(theJsonNode != null, "The Parameter jsonNode must not be null.");
         IGPCoverageDimension dimension = new GPCoverageDimension();
         dimension.setDescription(theJsonNode.get("description").asText());
         dimension.setName(theJsonNode.get("name").asText());

@@ -13,6 +13,6 @@
     <!-- the shared filter factory -->
     <bean id="filterFactory" class="org.geotools.filter.FilterFactoryImpl"/>
     
-    <bean id="sldHandler" class="org.geosdi.geoplatform.sld.validator.SLDHandler" />
+<!--    <bean id="sldHandler" class="org.geosdi.geoplatform.sld.validator.SLDHandler" />-->
     
 </beans>

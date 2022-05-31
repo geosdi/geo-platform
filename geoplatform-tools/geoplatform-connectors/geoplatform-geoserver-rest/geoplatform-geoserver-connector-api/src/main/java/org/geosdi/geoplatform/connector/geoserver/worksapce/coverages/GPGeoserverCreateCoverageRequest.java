@@ -39,22 +39,19 @@ import com.google.common.io.CharStreams;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
-import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverStringArrayQueryParam;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverUpdateCoverageRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverCreateCoverageRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static io.reactivex.rxjava3.core.Observable.fromIterable;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
-import static java.util.Arrays.asList;
 import static javax.annotation.meta.When.NEVER;
 import static org.apache.http.entity.ContentType.APPLICATION_JSON;
 

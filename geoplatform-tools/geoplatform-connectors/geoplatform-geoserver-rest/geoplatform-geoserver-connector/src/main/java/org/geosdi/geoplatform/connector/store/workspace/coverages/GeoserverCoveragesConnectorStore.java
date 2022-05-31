@@ -103,10 +103,10 @@ public abstract class GeoserverCoveragesConnectorStore extends GeoserverWorkspac
     }
 
     /**
-     * @return {@link GPGeoserverUpdateCoverageRequest}
+     * @return {@link GPGeoserverCreateCoverageRequest}
      */
-    public GPGeoserverUpdateCoverageRequest updateCoverageRequest() {
-        return this.server.updateCoverageRequest();
+    public GPGeoserverCreateCoverageRequest createCoverageRequest() {
+        return this.server.createCoverageRequest();
     }
 
     /**

@@ -141,7 +141,7 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
                         .withCoverageStore("mosaic").withWorkspace("nurc").getResponse();
     }
 
-    @Ignore()
+    @Ignore
     @Test
     public void g_updateCoverage() throws Exception {
         File file = new File(of("src", "test", "resources", "VMI_20210923T1020Z.tif").collect(joining(separator)));
@@ -167,10 +167,9 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
         theGPGeoserverCoverageInfo.setSrs("EPSG:4326");
         theGPGeoserverCoverageInfo.setEnabled(TRUE);
         theGPGeoserverCoverageInfo.setPolicy(GPProjectionPolicy.FORCE_DECLARED);
-        logger.info("#############{}\n", this.geoserverConnectorStore.updateCoverageRequest()
-                .withWorkspace("sf")
-                .withCoverageStore("store_vito")
-                .withCoverageBody(theGPGeoserverCoverageInfo).getResponseAsString());
+        logger.info("#############{}\n",
+                this.geoserverConnectorStore.createCoverageRequest().withWorkspace("sf").withCoverageStore("store_vito")
+                        .withCoverageBody(theGPGeoserverCoverageInfo).getResponseAsString());
         }
 
     @Ignore
@@ -206,20 +205,19 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
                 .withUpdate(GPParameterUpdate.OVERWRITE)
                 .getResponse();
         GeoserverLoadCoverageStoreRequest geoserverLoadCoverageStoreRequest = this.geoserverConnectorStore.loadCoverageStoreRequest().withWorkspace("sf").withStore("store_vito");
-        if (!geoserverLoadCoverageStoreRequest.exist()) {
-            logger.error("");
-        } else if (!this.geoserverConnectorStore.updateCoverageRequest()
-                .withWorkspace("sf")
-                .withCoverageStore("store_vito")
-                .withCoverageName("layer_vito")
-                .withCoverageBody(theGPGeoserverCoverageInfo).getResponse()) {
-            logger.error("Unable to create a coverage for the store:" + "layer_vito");
-        } else {
-            GeoserverRasterLayer geoserverRasterLayer = new GeoserverRasterLayer();
-            GPGeoserverStyle gpGeoserverStyle = new GPGeoserverStyle();
-            gpGeoserverStyle.setName("burg");
-            geoserverRasterLayer.setDefaultStyle(gpGeoserverStyle);
-            logger.info("##############{}\n", this.geoserverConnectorStore.updateLayerRequest().withWorkspaceName("sf").withLayerName("layer_vito").withLayerBody(geoserverRasterLayer).getResponse());
+       if (!geoserverLoadCoverageStoreRequest.exist()) {
+           logger.error("");
+       } else if (!this.geoserverConnectorStore.createCoverageRequest().withWorkspace("sf")
+               .withCoverageStore("store_vito").withCoverageBody(theGPGeoserverCoverageInfo).getResponse()) {
+           logger.error("Unable to create a coverage for the store:" + "layer_vito");
+       } else {
+           GeoserverRasterLayer geoserverRasterLayer = new GeoserverRasterLayer();
+           GPGeoserverStyle gpGeoserverStyle = new GPGeoserverStyle();
+           gpGeoserverStyle.setName("burg");
+           geoserverRasterLayer.setDefaultStyle(gpGeoserverStyle);
+           logger.info("##############{}\n",
+                   this.geoserverConnectorStore.updateLayerRequest().withWorkspaceName("sf").withLayerName("layer_vito")
+                           .withLayerBody(geoserverRasterLayer).getResponse());
         }
     }
 

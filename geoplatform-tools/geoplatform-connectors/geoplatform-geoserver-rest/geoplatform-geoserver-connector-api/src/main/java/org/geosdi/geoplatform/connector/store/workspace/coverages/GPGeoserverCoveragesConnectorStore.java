@@ -78,9 +78,9 @@ public interface GPGeoserverCoveragesConnectorStore extends GPGeoserverWorkspace
     GPGeoserverUpdateStoreCoverageRequest updateStoreCoverageRequest();
 
     /**
-     * @return {@link GPGeoserverUpdateCoverageRequest}
+     * @return {@link GPGeoserverCreateCoverageRequest}
      */
-    GPGeoserverUpdateCoverageRequest updateCoverageRequest();
+    GPGeoserverCreateCoverageRequest createCoverageRequest();
 
     /**
      * @return {@link GeoserverLoadCoverageListRequest}

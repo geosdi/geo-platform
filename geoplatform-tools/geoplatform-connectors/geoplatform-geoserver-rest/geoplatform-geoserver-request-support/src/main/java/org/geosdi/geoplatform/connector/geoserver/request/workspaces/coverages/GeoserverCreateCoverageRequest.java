@@ -46,35 +46,24 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeoserverUpdateCoverageRequest extends GPJsonConnectorRequest<Boolean, GeoserverUpdateCoverageRequest> {
+public interface GeoserverCreateCoverageRequest extends GPJsonConnectorRequest<Boolean, GeoserverCreateCoverageRequest> {
 
     /**
      * @param theWorkspace
-     * @return {@link GeoserverUpdateCoverageRequest}
+     * @return {@link GeoserverCreateCoverageRequest}
      */
-    GeoserverUpdateCoverageRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
+    GeoserverCreateCoverageRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
 
     /**
      * @param theStore
-     * @return {@link GeoserverUpdateCoverageRequest}
+     * @return {@link GeoserverCreateCoverageRequest}
      */
-    GeoserverUpdateCoverageRequest withCoverageStore(@Nonnull(when = NEVER) String theStore);
+    GeoserverCreateCoverageRequest withCoverageStore(@Nonnull(when = NEVER) String theStore);
 
     /**
      * @param theGPGeoserverCoverageInfo
-     * @return {@link GeoserverUpdateCoverageRequest}
+     * @return {@link GeoserverCreateCoverageRequest}
      */
-    GeoserverUpdateCoverageRequest withCoverageBody(GPGeoserverCoverageInfo theGPGeoserverCoverageInfo);
+    GeoserverCreateCoverageRequest withCoverageBody(GPGeoserverCoverageInfo theGPGeoserverCoverageInfo);
 
-    /**
-     * @param theCoverageName
-     * @return {@link GeoserverUpdateCoverageRequest}
-     */
-    GeoserverUpdateCoverageRequest withCoverageName(String theCoverageName);
-
-    /**
-     * @param theCalculate
-     * @return {@link GeoserverUpdateCoverageRequest}
-     */
-    GeoserverUpdateCoverageRequest withCalculate(String[] theCalculate);
 }

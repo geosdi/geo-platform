@@ -1200,9 +1200,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                         GeoserverLoadWorkspaceLayerRequest geoserverLoadLayerRequest = this.geoserverConnectorStore.loadWorkspaceLayerRequest()
                                 .withLayerName(userName + "_" + infoPreview.getNewName()).withWorkspaceName(userWorkspace);
                         GeoserverLayer geoserverLayer = geoserverLoadLayerRequest.getResponse();
-                        if (geoserverLayer.getLayerType().getType()  != GeoserverLayerType.Raster.getType()) {
-                            throw new RuntimeException("Bad layer type for layer " + geoserverLayer.getName());
-                        }
+
                         if (GPSharedUtils.isNotEmpty(infoPreview.getNewName())
                                 && this.checkIfExsistLayerInWorkspace(userWorkspace, userName + "_" + infoPreview.getNewName())
                                 && this.checkIfExsistCoverageUrl(geoserverLayer.getLayerResource().getHref())) {
@@ -1248,7 +1246,7 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                         && infoPreview.getLayerPublishAction().equals(
                         LayerPublishAction.APPEND)) {
                     logger.info(
-                            "***** processEPSGResult: Executing shape append for zip file: " + infoPreview.getFileName());
+                            "***** GPPublisherServiceImpl.java: Executing shape append for zip file: " + infoPreview.getFileName());
                     //Settiamo una nuova source feature per evitare di usare quella vecchia
                     //che punta al precedente file shp
                     ds2dsConfiguration.setSourceFeature(new FeatureConfiguration());
@@ -1598,10 +1596,8 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                         .withFile(fileInTifDir).getResponse();
                 if (!geoserverLoadCoverageStoreRequest.exist()) {
                     return FALSE;
-                } else if (!this.geoserverConnectorStore.updateCoverageRequest()
-                        .withWorkspace(userWorkspace)
-                        .withCoverageStore(fileName)
-                        .withCoverageBody(theGPGeoserverCoverageInfo).getResponse()) {
+                } else if (!this.geoserverConnectorStore.createCoverageRequest().withWorkspace(userWorkspace)
+                        .withCoverageStore(fileName).withCoverageBody(theGPGeoserverCoverageInfo).getResponse()) {
                     logger.error("Unable to create a coverage for the store:" + fileName);
                     return FALSE;
                 } else {

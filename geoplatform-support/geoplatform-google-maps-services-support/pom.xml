@@ -18,10 +18,15 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <google.maps.services.version>2.0.0</google.maps.services.version>
+        <google.maps.services.version>2.1.0</google.maps.services.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>logging-interceptor</artifactId>
+            <version>5.0.0-alpha.7</version>
+        </dependency>
         <!-- =========================================================== -->
         <!-- ======================== LOMBOK =========================== -->
         <!-- =========================================================== -->

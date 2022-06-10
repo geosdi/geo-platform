@@ -39,7 +39,6 @@ import org.geosdi.geoplatform.support.xmpp.configuration.properties.XMPPProperti
 import org.geosdi.geoplatform.support.xmpp.spring.annotation.GPXMPPConnection;
 import org.geosdi.geoplatform.support.xmpp.spring.connection.builder.XMPPConnectionConfigurationBuilder;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,14 +52,15 @@ import org.springframework.context.annotation.Configuration;
 @GPXMPPConnection
 class XMPPConnectionConfig {
 
+    /**
+     * @param gpSpringXMPPProp
+     * @return {@link XMPPTCPConnectionConfiguration}
+     * @throws Exception
+     */
     @Bean(name = "xmppConnectionConfiguration")
-    @Autowired
-    public XMPPTCPConnectionConfiguration xmppConnectionConfiguration(@Qualifier(
-            value = "gpSpringXMPPProp") XMPPProperties gpSpringXMPPProp) throws Exception {
-
+    public XMPPTCPConnectionConfiguration xmppConnectionConfiguration(@Qualifier(value = "gpSpringXMPPProp") XMPPProperties gpSpringXMPPProp) throws Exception {
         return  XMPPConnectionConfigurationBuilder.newInstance()
                 .withXMPPProperties(gpSpringXMPPProp)
                 .build();
     }
-
 }

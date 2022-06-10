@@ -79,14 +79,12 @@ public class GPXMPPConnectionManager implements XMPPConnectionManager {
 
     @Override
     public void login() throws Exception {
-        this.connection.login(this.gpSpringXMPPAuth.getXMPPUserName(),
-                this.gpSpringXMPPAuth.getXMPPPassword());
+        this.connection.login(this.gpSpringXMPPAuth.getXMPPUserName(), this.gpSpringXMPPAuth.getXMPPPassword());
     }
 
     @Override
     public void login(String resource) throws Exception {
-        this.connection.login(this.gpSpringXMPPAuth.getXMPPUserName(),
-                this.gpSpringXMPPAuth.getXMPPPassword(), Resourcepart.from(resource));
+        this.connection.login(this.gpSpringXMPPAuth.getXMPPUserName(), this.gpSpringXMPPAuth.getXMPPPassword(), Resourcepart.from(resource));
     }
 
     @Override
@@ -107,8 +105,7 @@ public class GPXMPPConnectionManager implements XMPPConnectionManager {
     @Override
     public void destroy() throws Exception {
         disconnect();
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Destroy {}\n\n",
-                getClass().getSimpleName());
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Destroy {}\n\n", getClass().getSimpleName());
     }
 
     @Override

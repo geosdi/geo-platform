@@ -88,6 +88,7 @@ public final class XMPPConnectionConfigurationBuilder {
         SmackConfiguration.DEBUG = xmppProperties.isDebuggerEnabled();
         return XMPPTCPConnectionConfiguration
                 .builder()
+                .addEnabledSaslMechanism("PLAIN")
                 .setPort(xmppProperties.getXMPPPort())
                 .setHost(xmppProperties.getXMPPHost())
                 .setSecurityMode(xmppProperties.getSecurityMode())

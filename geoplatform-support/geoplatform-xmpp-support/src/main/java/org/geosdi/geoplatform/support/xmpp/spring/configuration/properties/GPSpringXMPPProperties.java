@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.support.xmpp.spring.configuration.properties;
 
-import com.google.common.base.Preconditions;
 import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.support.xmpp.configuration.auth.XMPPAuth;
 import org.geosdi.geoplatform.support.xmpp.configuration.properties.XMPPProperties;
@@ -45,6 +44,9 @@ import org.springframework.beans.factory.annotation.Value;
 
 import javax.annotation.Resource;
 import javax.inject.Named;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static java.lang.Boolean.FALSE;
 
 /**
  *
@@ -89,30 +91,27 @@ public class GPSpringXMPPProperties implements XMPPProperties {
     @Override
     public Boolean isCompressionEnabled() {
         return this.compressionEnabled = ((this.compressionEnabled != null)
-                ? this.compressionEnabled : Boolean.FALSE);
+                ? this.compressionEnabled : FALSE);
     }
 
     @Override
     public ConnectionConfiguration.SecurityMode getSecurityMode() {
-        return this.securityMode = ((this.securityMode != null)
-                ? this.securityMode : ConnectionConfiguration.SecurityMode.ifpossible);
+        return this.securityMode = ((this.securityMode != null) ? this.securityMode : ConnectionConfiguration.SecurityMode.ifpossible);
     }
 
     @Override
     public String getServiceName() {
-        return this.serviceName = ((this.serviceName != null)
-                ? this.serviceName : "");
+        return this.serviceName = ((this.serviceName != null) ? this.serviceName : "");
     }
 
     @Override
     public Boolean isDebuggerEnabled() {
-        return this.debuggerEnabled = ((this.debuggerEnabled != null)
-                ? this.debuggerEnabled : Boolean.FALSE);
+        return this.debuggerEnabled = ((this.debuggerEnabled != null) ? this.debuggerEnabled : FALSE);
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        Preconditions.checkNotNull(this.xmppHost, "XMPP HOST must not be null.");
+        checkNotNull(this.xmppHost, "XMPP HOST must not be null.");
     }
 
     @Override
@@ -124,5 +123,4 @@ public class GPSpringXMPPProperties implements XMPPProperties {
                 + ", securityMode = " + getSecurityMode()
                 + ", debuggerEnabled = " + isDebuggerEnabled() + '}';
     }
-
 }

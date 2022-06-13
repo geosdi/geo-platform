@@ -46,6 +46,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Map;
 
 import static java.lang.Boolean.TRUE;
+import static org.geosdi.geoplatform.connector.WMSVersion.forValue;
 import static org.geotools.referencing.CRS.decode;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 

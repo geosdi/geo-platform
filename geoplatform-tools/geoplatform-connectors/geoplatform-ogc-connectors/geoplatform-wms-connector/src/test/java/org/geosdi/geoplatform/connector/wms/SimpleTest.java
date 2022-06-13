@@ -69,12 +69,82 @@ public class SimpleTest {
         String value = "http://150.145.141.180/geoserver/topp/wms?service=WMS&version=1.1.0&request=GetMap&layers=topp%3Atasmania_roads&bbox=145.19754%2C-43.423512%2C148.27298000000002%2C-40.852802&width=768&height=641&srs=EPSG%3A4326&format=application/openlayers";
         GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
         Map<String, GPWMSRequestKeyValuePair> values = wmsRequestKvpReader.read(value);
-        values.entrySet().forEach(e -> logger.info("##########ENTRY : {} - VALUE : {}\n", e.getKey(), e.getValue()));
+        values.forEach((key, value1) -> logger.info("##########ENTRY : {} - VALUE : {}\n", key, value1));
     }
 
     @Test
     public void c_simpleTest() throws Exception {
         logger.info("#####################Version : {}\n", forValue("aa"));
         logger.info("#####################Version : {}\n", forValue("1.3.0"));
+    }
+
+    @Test
+    public void d_simpleTest() throws Exception {
+        String value = "https://www.geoportale.piemonte.it/visregpigo/?url=https:%2F%2Fgeomap.reteunitaria.piemonte.it%2Fws%2Faera%2Frp-01%2Faerawms%2Fwms_aera_limiti%3Fservice%3DWMS%26version%3D1.3%26request%3DgetCapabilities&type=wms&layer=&lang=en&title=&mdUrl=https:%2F%2Fwww.geoportale.piemonte.it%2Fgeonetwork%2Fsrv%2Fita%2Fcatalog.search%23%2Fmetadata%2Fr_piemon:bdc4262a-45b1-47eb-a128-30336d9fa654&mdUuid=r_piemon:bdc4262a-45b1-47eb-a128-30336d9fa654&mdId=18466";
+        GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
+        Map<String, GPWMSRequestKeyValuePair> values = wmsRequestKvpReader.read(value);
+        values.forEach((k, v) -> logger.info("##########ENTRY : {} - VALUE : {}\n", k, v));
+    }
+
+    @Test
+    public void e_simpleTest() throws Exception {
+        String value = "https://www.youtube.com/watch?v=Dnnfy4yOTaw&list=RDMM&start_radio=1&rv=GOB7fS2YK0A";
+        GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
+        Map<String, GPWMSRequestKeyValuePair> values = wmsRequestKvpReader.read(value);
+        values.forEach((k, v) -> logger.info("##########ENTRY : {} - VALUE : {}\n", k, v));
+    }
+
+    @Test
+    public void f_simpleTest() throws Exception {
+        String value = "https://radar.protezionecivile.it/#/pages/dashboard?update=e5799bd5-bebf-c581-d995-62cc00ef6469&zoom=6";
+        GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
+        Map<String, GPWMSRequestKeyValuePair> values = wmsRequestKvpReader.read(value);
+        values.forEach((k, v) -> logger.info("##########ENTRY : {} - VALUE : {}\n", k, v));
+    }
+
+    @Test
+    public void g_simpleTest() throws Exception {
+        String value = "https://geoportale.regione.lazio.it/geoserver/geonode/ows?service=WFS&version=1.0.0" +
+                "&request=GetFeature&typeName=geonode:CBLN_Zona_operativa0" +
+                "&maxFeatures=1000000&outputFormat=text%2Fxml%3B+subtype%3Dgml%2F3.1.1;k=test;v=p";
+        GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
+        Map<String, GPWMSRequestKeyValuePair> values = wmsRequestKvpReader.read(value);
+        values.forEach((k, v) -> logger.info("##########ENTRY : {} - VALUE : {}\n", k, v));
+    }
+
+    @Test
+    public void h_simpleTest() throws Exception {
+        String value = "https://geoportale.regione.lazio.it/geoserver/geonode/ows?service=WFS&version=1.0.0" +
+                "&request=GetFeature&typeName=geonode:CBLN_Zona_operativa0" +
+                "&maxFeatures=1000000&outputFormat=text%2Fxml%3B+subtype%3Dgml%2F3.1.1;k=test;v=p&p=val;s=type";
+        GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
+        Map<String, GPWMSRequestKeyValuePair> values = wmsRequestKvpReader.read(value);
+        values.forEach((k, v) -> logger.info("##########ENTRY : {} - VALUE : {}\n", k, v));
+    }
+
+    @Test
+    public void i_simpleTest() throws Exception {
+        String value = "https://geoportale.regione.lazio.it/geoserver/geonode/ows?service=WFS&version=1.0.0" +
+                "&request=GetFeature&typeName=geonode:CBLN_Zona_operativa0;val=tot" +
+                "&maxFeatures=1000000&outputFormat=text%2Fxml%3B+subtype%3Dgml%2F3.1.1;k=test;v=p&p=val;s=type";
+        GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
+        Map<String, GPWMSRequestKeyValuePair> values = wmsRequestKvpReader.read(value);
+        values.forEach((k, v) -> logger.info("##########ENTRY : {} - VALUE : {}\n", k, v));
+    }
+
+    @Test
+    public void l_simpleTest() throws Exception {
+        String value = "http://it.wikipedia.org/application/new_user/registration_form?nome=Mario&cognome=Rossi&ID_utente=M_Rossi.";
+        GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
+        Map<String, GPWMSRequestKeyValuePair> values = wmsRequestKvpReader.read(value);
+        values.forEach((k, v) -> logger.info("##########ENTRY : {} - VALUE : {}\n", k, v));
+    }
+
+    @Test
+    public void m_simpleTest() throws Exception {
+        String value = "nome=Mario&cognome=Rossi&ID_utente=M_Rossi.";
+        GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
+        Map<String, GPWMSRequestKeyValuePair> values = wmsRequestKvpReader.read(value);
+        values.forEach((k, v) -> logger.info("##########ENTRY : {} - VALUE : {}\n", k, v));
     }
 }

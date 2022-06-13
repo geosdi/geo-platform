@@ -114,7 +114,8 @@ public class WMSGetFeatureInfoReaderFileLoaderTest {
                 "CAMPIndustrieARischio.xml", "layer_importer148.xml", "fluids_rete_zk.xml", "AreeBonifica.xml",
                 "CentraliElettriche.xml", "features.xml", "Geositi.xml", "ADBRisk.xml", "PoliziaIDR.xml",
                 "ParchiRegionaliRiserve.xml", "ReteGeodetica.xml", "ElementiRidotti.xml", "UsoSuoloRT.xml",
-                "AlberiMonumentali.xml", "AcqueSecondarie.xml", "AdminGeo.xml", "IDT_SU20G_ZONIZZAZIONE.xml");
+                "AlberiMonumentali.xml", "AcqueSecondarie.xml", "AdminGeo.xml", "IDT_SU20G_ZONIZZAZIONE.xml",
+                "CBLN_COMPRENSORIO.xml", "Biodiversit_ittica_acque_correnti.xml");
     }
 
     /**

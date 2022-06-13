@@ -49,8 +49,10 @@ import java.util.Objects;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.net.URLDecoder.decode;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.Arrays.stream;
 import static java.util.function.Function.identity;
 import static java.util.regex.Pattern.compile;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
 import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.connector.server.request.WMSRequestKey.*;
@@ -94,9 +96,10 @@ public interface GPWMSRequestKvpReader extends GPConnectorReader<GPWMSRequestKey
                     .filter(v -> !(v.trim().isEmpty()))
                     .map(v -> v.split(KVP_SEPARATOR.toKey()))
                     .filter(Objects::nonNull)
-                    .filter(values -> values.length == 2)
+                    .filter(values -> values.length >= 2)
                     .filter(values -> (((values[0] != null) && !(values[0].trim().isEmpty())) && ((values[1] != null) && !(values[1].trim().isEmpty()))))
                     .map(this::internalRead)
+                    .filter(Objects::nonNull)
                     .collect(toMap(GPWMSRequestKey::toKey, identity(), (oldVal, newVal) -> oldVal, LinkedHashMap::new));
         }
 
@@ -131,7 +134,10 @@ public interface GPWMSRequestKvpReader extends GPConnectorReader<GPWMSRequestKey
 
                         @Override
                         public String toValue() {
-                            return theValues[1];
+                            return ((theValues.length == 2) ? theValues[1] : stream(theValues)
+                                    .filter(Objects::nonNull)
+                                    .filter(v -> !(v.trim().isEmpty()))
+                                    .collect(joining(KVP_SEPARATOR.toKey())));
                         }
                     };
             }

@@ -544,4 +544,16 @@ public class GPWMSGetFeatureInfoStaxGml2ReaderTest extends WMSGetFeatureInfoStax
         logger.info("#######################FEATURE_COLLECTION_IDT_SU20G_ZONIZZAZIONE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("IDT_SU20G_ZONIZZAZIONE.xml"))));
     }
+
+    @Test
+    public void d_t_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_CBLN_COMPRENSORIO : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("CBLN_COMPRENSORIO.xml"))));
+    }
+
+    @Test
+    public void d_u_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_Biodiversit_ittica_acque_correnti : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("Biodiversit_ittica_acque_correnti.xml"))));
+    }
 }

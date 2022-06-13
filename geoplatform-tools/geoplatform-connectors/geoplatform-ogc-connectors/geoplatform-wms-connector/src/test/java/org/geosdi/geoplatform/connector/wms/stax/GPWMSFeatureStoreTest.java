@@ -682,4 +682,20 @@ public class GPWMSFeatureStoreTest extends WMSGetFeatureInfoStaxReaderTest {
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "IDT_SU20G_ZONIZZAZIONE.json")
                 .collect(joining(separator))), wmsFeatureStore);
     }
+
+    @Test
+    public void d_l_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("CBLN_COMPRENSORIO.xml"));
+        logger.info("#######################FEATURE_STORE_CBLN_COMPRENSORIO : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "CBLN_COMPRENSORIO.json")
+                .collect(joining(separator))), wmsFeatureStore);
+    }
+
+    @Test
+    public void d_m_wmsFeatureStoreReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(storage.find("Biodiversit_ittica_acque_correnti.xml"));
+        logger.info("#######################FEATURE_STORE_Biodiversit_ittica_acque_correnti : {}\n", wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "Biodiversit_ittica_acque_correnti.json")
+                .collect(joining(separator))), wmsFeatureStore);
+    }
 }

@@ -42,6 +42,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static org.jivesoftware.smack.sasl.SASLMechanism.PLAIN;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -88,7 +89,7 @@ public final class XMPPConnectionConfigurationBuilder {
         SmackConfiguration.DEBUG = xmppProperties.isDebuggerEnabled();
         return XMPPTCPConnectionConfiguration
                 .builder()
-                .addEnabledSaslMechanism("PLAIN")
+                .addEnabledSaslMechanism(PLAIN)
                 .setPort(xmppProperties.getXMPPPort())
                 .setHost(xmppProperties.getXMPPHost())
                 .setSecurityMode(xmppProperties.getSecurityMode())

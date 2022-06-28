@@ -40,10 +40,7 @@ import org.geosdi.geoplatform.support.xmpp.loader.GPXMPPLoader;
 import org.geosdi.geoplatform.support.xmpp.spring.connection.manager.XMPPConnectionManager;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jivesoftware.smack.packet.Message;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.jxmpp.jid.impl.JidCreate;
 import org.slf4j.Logger;
@@ -103,6 +100,7 @@ public class SendPacketTest {
                 .build();
     }
 
+    @Ignore
     @Test
     public void sendPacket() throws Exception {
         this.gpXMPPConnectionManager.login();

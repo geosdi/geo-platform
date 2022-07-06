@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.geoserver.extensions.classify;
 
-import org.geosdi.geoplatform.connector.geoserver.model.extension.rasterize.GeoserverRamp;
+import org.geosdi.geoplatform.connector.geoserver.model.extensions.rasterize.GeoserverRamp;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
 import org.junit.Ignore;
 import org.junit.Test;

@@ -37,12 +37,12 @@ package org.geosdi.geoplatform.geoserver.extensions.importer;
 
 import it.geosolutions.geoserver.rest.manager.GeoServerRESTImporterManager;
 import net.sf.json.JSONObject;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.GPGeoserverCreateImportResponse;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.GPGeoserverLoadImportResponse;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.GeoserverExpandFileImporter;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.body.*;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task.GPGeoserverTaskImporter;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.task.IGPGeoserverTaskImporter;
+import org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.GPGeoserverCreateImportResponse;
+import org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.GPGeoserverLoadImportResponse;
+import org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.GeoserverExpandFileImporter;
+import org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.body.*;
+import org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.task.GPGeoserverTaskImporter;
+import org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.task.IGPGeoserverTaskImporter;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
 import org.junit.Ignore;
 import org.junit.Test;

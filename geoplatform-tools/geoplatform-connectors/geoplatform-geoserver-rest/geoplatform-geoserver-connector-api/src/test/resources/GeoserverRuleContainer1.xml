@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Rules xmlns:ns5="http://www.opengis.net/sld" xmlns:ns2="http://www.w3.org/1999/xlink" xmlns:ns4="http://www.opengis.net/gml" xmlns:ns3="http://www.opengis.net/ogc">
+    <Rule>
+        <ns5:RasterSymbolizer>
+            <ns5:Opacity>1.0</ns5:Opacity>
+            <ns5:ColorMap>
+                <ns5:ColorMapEntry color="#FF0000" quantity="0.0"/>
+                <ns5:ColorMapEntry color="#FFFFFF" quantity="100.0"/>
+                <ns5:ColorMapEntry color="#00FF00" quantity="2000.0"/>
+                <ns5:ColorMapEntry color="#0000FF" quantity="5000.0"/>
+            </ns5:ColorMap>
+        </ns5:RasterSymbolizer>
+    </Rule>
+    <Rule>
+        <ns5:Name> &gt; 226581.0 AND &lt;= 3885534.3</ns5:Name>
+        <ns5:PolygonSymbolizer>
+            <ns5:Fill>
+                <ns5:CssParameter name="fill">#49E8EA</ns5:CssParameter>
+            </ns5:Fill>
+            <ns5:Stroke/>
+        </ns5:PolygonSymbolizer>
+    </Rule>
+    <Rule>
+        <ns5:Name> &gt; 3885534.3 AND &lt;= 7544487.5</ns5:Name>
+        <ns5:PolygonSymbolizer>
+            <ns5:Fill>
+                <ns5:CssParameter name="fill">#A7D4D0</ns5:CssParameter>
+            </ns5:Fill>
+            <ns5:Stroke/>
+        </ns5:PolygonSymbolizer>
+    </Rule>
+    <Rule>
+        <ns5:Name> &gt; 7544487.5 AND &lt;= 1.12034408E7</ns5:Name>
+        <ns5:PolygonSymbolizer>
+            <ns5:Fill>
+                <ns5:CssParameter name="fill">#87322A</ns5:CssParameter>
+            </ns5:Fill>
+            <ns5:Stroke/>
+        </ns5:PolygonSymbolizer>
+    </Rule>
+    <Rule>
+        <ns5:Name> &gt; 1.12034408E7 AND &lt;= 1.4862394E7</ns5:Name>
+        <ns5:PolygonSymbolizer>
+            <ns5:Fill>
+                <ns5:CssParameter name="fill">#4111B2</ns5:CssParameter>
+            </ns5:Fill>
+            <ns5:Stroke/>
+        </ns5:PolygonSymbolizer>
+    </Rule>
+</Rules>

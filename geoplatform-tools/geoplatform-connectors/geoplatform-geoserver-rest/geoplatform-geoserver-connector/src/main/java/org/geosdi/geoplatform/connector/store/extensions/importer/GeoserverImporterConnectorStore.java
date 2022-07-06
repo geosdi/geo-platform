@@ -36,10 +36,10 @@
 package org.geosdi.geoplatform.connector.store.extensions.importer;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverLoadImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task.GeoserverLoadTaskRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extensions.importer.GeoserverCreateImportRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extensions.importer.GeoserverCreateImportWithIdRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extensions.importer.GeoserverLoadImportRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extensions.importer.task.GeoserverLoadTaskRequest;
 import org.geosdi.geoplatform.connector.store.extensions.classify.GoeserverClassifyConnectorStore;
 
 /**

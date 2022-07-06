@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.connector.geoserver.extensions.dimension;
 
 import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.dimension.GPGeoserverTimeDimensionResponse;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.dimension.GeoserverLoadDimensionRequest;
+import org.geosdi.geoplatform.connector.geoserver.model.extensions.dimension.GPGeoserverTimeDimensionResponse;
+import org.geosdi.geoplatform.connector.geoserver.request.extensions.dimension.GeoserverLoadDimensionRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;

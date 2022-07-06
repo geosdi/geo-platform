@@ -37,11 +37,12 @@ package org.geosdi.geoplatform.connector.geoserver.extensions.importer;
 
 import io.reactivex.rxjava3.functions.Consumer;
 import net.jcip.annotations.ThreadSafe;
+
 import org.apache.http.client.utils.URIBuilder;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.GPFileExpandType;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.importer.GPGeoserverLoadImportResponse;
+import org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.GPFileExpandType;
+import org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.GPGeoserverLoadImportResponse;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GeoserverRXQueryParamConsumer;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverLoadImportRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extensions.importer.GeoserverLoadImportRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;

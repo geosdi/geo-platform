@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.store.extensions.rasterize;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.rasterize.GeoserverRasterizeRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extensions.rasterize.GeoserverRasterizeRequest;
 import org.geosdi.geoplatform.connector.store.extensions.uniquevalues.GeoserverUniqueValuesConnectorStore;
 
 /**

@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.extensions.importer.task;
 
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.task.GeoserverLoadTaskRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extensions.importer.task.GeoserverLoadTaskRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 

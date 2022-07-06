@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.geoserver.extensions.dimension;
 
 import org.geosdi.geoplatform.connector.geoserver.extensions.importer.IGPGeoserverImporterConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.dimension.GeoserverLoadDimensionRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extensions.dimension.GeoserverLoadDimensionRequest;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group

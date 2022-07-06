@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.connector.geoserver.extensions.dimension;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.extensions.importer.GPGeoserverImporterConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.dimension.GeoserverLoadDimensionRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extensions.dimension.GeoserverLoadDimensionRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;

@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.store.extensions.dimension;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.dimension.GeoserverLoadDimensionRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extensions.dimension.GeoserverLoadDimensionRequest;
 import org.geosdi.geoplatform.connector.store.extensions.importer.GeoserverImporterConnectorStore;
 
 /**

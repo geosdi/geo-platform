@@ -40,7 +40,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPGeoserverParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.coveragestores.GeoserverUpdateCoverageStoreBody;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastores;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.uniquevalues.GPGeoserverUniqueValue;
+import org.geosdi.geoplatform.connector.geoserver.model.extensions.uniquevalues.GPGeoserverUniqueValue;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.file.GPGeoserverCoverageStoreFileExtension;
 import org.geosdi.geoplatform.connector.geoserver.model.file.GPGeoserverDataStoreFileExtension;

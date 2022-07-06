@@ -37,9 +37,9 @@ package org.geosdi.geoplatform.connector.geoserver.extensions.importer;
 
 import org.geosdi.geoplatform.connector.geoserver.extensions.classify.IGPGeoserverClassifyConnector;
 import org.geosdi.geoplatform.connector.geoserver.extensions.importer.task.GPGeoserverImporterTaskConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverCreateImportWithIdRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.importer.GeoserverLoadImportRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extensions.importer.GeoserverCreateImportRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extensions.importer.GeoserverCreateImportWithIdRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extensions.importer.GeoserverLoadImportRequest;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group

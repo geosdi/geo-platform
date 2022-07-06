@@ -36,8 +36,8 @@
 package org.geosdi.geoplatform.connector.geoserver.extensions.uniquevalues;
 
 import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.uniquevalues.GPGeoserverUniqueValue;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.uniquevalue.GeoserverLoadUniqueValuesRequest;
+import org.geosdi.geoplatform.connector.geoserver.model.extensions.uniquevalues.GPGeoserverUniqueValue;
+import org.geosdi.geoplatform.connector.geoserver.request.extensions.uniquevalue.GeoserverLoadUniqueValuesRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;

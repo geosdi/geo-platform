@@ -35,7 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.jackson;
 
+import org.geosdi.geoplatform.connector.geoserver.model.extensions.classify.GeoserverRuleContainer;
+import org.geosdi.geoplatform.xml.sld.v100.FeatureTypeStyle;
+import org.geosdi.geoplatform.xml.sld.v100.NamedLayer;
 import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
+import org.geosdi.geoplatform.xml.sld.v100.UserStyle;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -63,6 +67,12 @@ public class StyledLayerDescriptorJacksonTest {
         StyledLayerDescriptor styledLayerDescriptor = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper().readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "StyledLayerDescriptor")
                         .collect(joining(separator, "", ".xml"))), StyledLayerDescriptor.class);
         logger.info("##################STYLED_LAYER_DESCRIPTOR : \n {}\n", JACKSON_JAXB_XML_SUPPORT.getDefaultMapper().writeValueAsString(styledLayerDescriptor));
+        NamedLayer namedLayer = (NamedLayer) styledLayerDescriptor.getNamedLayerOrUserLayer().get(0);
+        UserStyle userStyle = (UserStyle) namedLayer.getNamedStyleOrUserStyle().get(0);
+        FeatureTypeStyle featureTypeStyle = userStyle.getFeatureTypeStyle().get(0);
+        GeoserverRuleContainer geoserverRuleContainer = new GeoserverRuleContainer();
+        geoserverRuleContainer.setRules(featureTypeStyle.getRule());
+        logger.info("{}\n", JACKSON_JAXB_XML_SUPPORT.getDefaultMapper().writeValueAsString(geoserverRuleContainer));
     }
 
     @Test

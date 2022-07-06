@@ -38,19 +38,19 @@ package org.geosdi.geoplatform.connector.geoserver.extensions.classify;
 import io.reactivex.rxjava3.functions.Consumer;
 import net.jcip.annotations.ThreadSafe;
 import org.apache.hc.core5.net.URIBuilder;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.classify.GeoserverMethod;
-import org.geosdi.geoplatform.connector.geoserver.model.extension.rasterize.GeoserverRamp;
+import org.geosdi.geoplatform.connector.geoserver.model.extensions.classify.GeoserverMethod;
+import org.geosdi.geoplatform.connector.geoserver.model.extensions.rasterize.GeoserverRamp;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.*;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.classify.GeoserverClassifyRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extensions.classify.GeoserverClassifyRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Observable.fromArray;
 import static java.lang.Boolean.FALSE;
+import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
 
@@ -76,22 +76,25 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
     private final ThreadLocal<GPGeoserverStringQueryParam> symbol;
     private final ThreadLocal<String> format;
 
+    /**
+     * @param server
+     */
     GPGeoserverClassifyRequest(@Nonnull(when = NEVER) GPServerConnector server) {
         super(server, JACKSON_JAXB_XML_SUPPORT);
-        this.vectorName = ThreadLocal.withInitial(() -> null);
-        this.attribute = ThreadLocal.withInitial(() -> null);
-        this.geoserverRamp = ThreadLocal.withInitial(() -> null);
-        this.intervals = ThreadLocal.withInitial(() -> null);
-        this.method = ThreadLocal.withInitial(() -> null);
-        this.open = ThreadLocal.withInitial(() -> null);
-        this.reverse = ThreadLocal.withInitial(() -> null);
-        this.normalize = ThreadLocal.withInitial(() -> null);
-        this.startColor = ThreadLocal.withInitial(() -> null);
-        this.endColor = ThreadLocal.withInitial(() -> null);
-        this.midColor = ThreadLocal.withInitial(() -> null);
-        this.size = ThreadLocal.withInitial(() -> null);
-        this.symbol = ThreadLocal.withInitial(() -> null);
-        this.format = ThreadLocal.withInitial(() -> "xml");
+        this.vectorName = withInitial(() -> null);
+        this.attribute = withInitial(() -> null);
+        this.geoserverRamp = withInitial(() -> null);
+        this.intervals = withInitial(() -> null);
+        this.method = withInitial(() -> null);
+        this.open = withInitial(() -> null);
+        this.reverse = withInitial(() -> null);
+        this.normalize = withInitial(() -> null);
+        this.startColor = withInitial(() -> null);
+        this.endColor = withInitial(() -> null);
+        this.midColor = withInitial(() -> null);
+        this.size = withInitial(() -> null);
+        this.symbol = withInitial(() -> null);
+        this.format = withInitial(() -> "xml");
     }
 
     /**
@@ -99,7 +102,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      * @return {@link GeoserverClassifyRequest}
      */
     @Override
-    public GeoserverClassifyRequest withVectorName(@Nonnull(when = When.NEVER) String theVectorName) {
+    public GeoserverClassifyRequest withVectorName(@Nonnull(when = NEVER) String theVectorName) {
         this.vectorName.set(theVectorName);
         return self();
     }
@@ -109,7 +112,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      * @return
      */
     @Override
-    public GeoserverClassifyRequest withAttribute(@Nonnull(when = When.NEVER) String theAttribute) {
+    public GeoserverClassifyRequest withAttribute(@Nonnull(when = NEVER) String theAttribute) {
         this.attribute.set(new GPGeoserverStringQueryParam("attribute", theAttribute));
         return self();
     }
@@ -119,7 +122,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      * @return {@link GeoserverClassifyRequest}
      */
     @Override
-    public GeoserverClassifyRequest withGeoserverRamp(@Nonnull(when = When.NEVER) GeoserverRamp theGeoserverRamp) {
+    public GeoserverClassifyRequest withGeoserverRamp(@Nonnull(when = NEVER) GeoserverRamp theGeoserverRamp) {
         this.geoserverRamp.set(theGeoserverRamp);
         return self();
     }
@@ -129,7 +132,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      * @return {@link GeoserverClassifyRequest}
      */
     @Override
-    public GeoserverClassifyRequest withIntervals(@Nonnull(when = When.NEVER) Integer theIntervals) {
+    public GeoserverClassifyRequest withIntervals(@Nonnull(when = NEVER) Integer theIntervals) {
         this.intervals.set(theIntervals != null ? new GPGeoserverIntegerQueryParam("intervals", theIntervals) : new GPGeoserverStringQueryParam("intervals", "2"));
         return self();
     }
@@ -139,7 +142,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      * @return {@link GeoserverClassifyRequest}
      */
     @Override
-    public GeoserverClassifyRequest withMethod(@Nonnull(when = When.NEVER) GeoserverMethod theMethod) {
+    public GeoserverClassifyRequest withMethod(@Nonnull(when = NEVER) GeoserverMethod theMethod) {
         this.method.set(theMethod != null ? theMethod :new GPGeoserverStringQueryParam("method", GeoserverMethod.equalInterval.name()));
         return self();
     }
@@ -149,7 +152,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      * @return
      */
     @Override
-    public GeoserverClassifyRequest withOpen(@Nonnull(when = When.NEVER) Boolean theOpen) {
+    public GeoserverClassifyRequest withOpen(@Nonnull(when = NEVER) Boolean theOpen) {
         this.open.set(new GPGeoserverBooleanQueryParam("open", theOpen == null ? FALSE : theOpen));
         return self();
     }
@@ -159,7 +162,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      * @return {@link GeoserverClassifyRequest}
      */
     @Override
-    public GeoserverClassifyRequest withReverse(@Nonnull(when = When.NEVER) Boolean theReverse) {
+    public GeoserverClassifyRequest withReverse(@Nonnull(when = NEVER) Boolean theReverse) {
         this.reverse.set(new GPGeoserverBooleanQueryParam("reverse", theReverse == null ? FALSE : theReverse));
         return self();
     }
@@ -169,7 +172,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      * @return {@link GeoserverClassifyRequest}
      */
     @Override
-    public GeoserverClassifyRequest withNormalize(@Nonnull(when = When.NEVER) Boolean theNormalize) {
+    public GeoserverClassifyRequest withNormalize(@Nonnull(when = NEVER) Boolean theNormalize) {
         this.normalize.set(new GPGeoserverBooleanQueryParam("normalize", theNormalize == null ? FALSE : theNormalize));
         return self();
     }
@@ -179,7 +182,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      * @return {@link GeoserverClassifyRequest}
      */
     @Override
-    public GeoserverClassifyRequest withStartColor(@Nonnull(when = When.NEVER) String theStartColor) {
+    public GeoserverClassifyRequest withStartColor(@Nonnull(when = NEVER) String theStartColor) {
         this.startColor.set(new GPGeoserverStringQueryParam("startColor", theStartColor));
         return self();
     }
@@ -189,7 +192,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      * @return {@link GeoserverClassifyRequest}
      */
     @Override
-    public GeoserverClassifyRequest withEndColor(@Nonnull(when = When.NEVER) String theEndColor) {
+    public GeoserverClassifyRequest withEndColor(@Nonnull(when = NEVER) String theEndColor) {
         this.endColor.set(new GPGeoserverStringQueryParam("endColor", theEndColor));
         return self();
     }
@@ -199,7 +202,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      * @return {@link GeoserverClassifyRequest}
      */
     @Override
-    public GeoserverClassifyRequest withMidColor(@Nonnull(when = When.NEVER) String theMidColor) {
+    public GeoserverClassifyRequest withMidColor(@Nonnull(when = NEVER) String theMidColor) {
         this.midColor.set(new GPGeoserverStringQueryParam("midColor", theMidColor));
         return self();
     }
@@ -209,7 +212,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      * @return
      */
     @Override
-    public GeoserverClassifyRequest withSize(@Nonnull(when = When.NEVER) Boolean theSize) {
+    public GeoserverClassifyRequest withSize(@Nonnull(when = NEVER) Boolean theSize) {
         this.size.set(new GPGeoserverBooleanQueryParam("size", theSize == null ? FALSE : theSize));
         return self();
     }
@@ -219,7 +222,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      * @return
      */
     @Override
-    public GeoserverClassifyRequest withSymbol(@Nonnull(when = When.NEVER) String theSymbol) {
+    public GeoserverClassifyRequest withSymbol(@Nonnull(when = NEVER) String theSymbol) {
         this.symbol.set(new GPGeoserverStringQueryParam("symbol", theSymbol));
         return self();
     }
@@ -238,7 +241,9 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
         String baseURI = this.serverURI.toString();
         String vectorName = this.vectorName.get();
         checkArgument((vectorName != null) && !(vectorName.trim().isEmpty()), "The Parameter vectorName must not be null or an empty string.");
-        String path =  (baseURI.endsWith("/") ? baseURI.concat("sld/").concat(vectorName).concat("/classifier").concat(".").concat(this.format.get()) : baseURI.concat("/sld/").concat(vectorName).concat("/classifier").concat(".").concat(this.format.get()));
+        String path = (baseURI.endsWith("/") ?
+                baseURI.concat("sld/").concat(vectorName).concat("/classifier").concat(".").concat(this.format.get()) :
+                baseURI.concat("/sld/").concat(vectorName).concat("/classifier").concat(".").concat(this.format.get()));
         URIBuilder uriBuilder = new URIBuilder(path);
         Consumer<ThreadLocal> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
         fromArray(this.attribute, this.geoserverRamp, this.intervals, this.method, this.open, this.reverse, this.normalize,

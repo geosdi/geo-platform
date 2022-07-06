@@ -1,0 +1,88 @@
+<Rules xmlns="http://www.opengis.net/sld"
+       xmlns:gml="http://www.opengis.net/gml"
+       xmlns:ogc="http://www.opengis.net/ogc">
+    <Rule>
+        <Name> &gt; 226581.0 AND &lt;= 3885534.3</Name>
+        <Filter>
+            <And>
+                <PropertyIsGreaterThanOrEqualTo>
+                    <PropertyName>FEMALE</PropertyName>
+                    <Literal>226581.0</Literal>
+                </PropertyIsGreaterThanOrEqualTo>
+                <PropertyIsLessThanOrEqualTo>
+                    <PropertyName>FEMALE</PropertyName>
+                    <Literal>3885534.3</Literal>
+                </PropertyIsLessThanOrEqualTo>
+            </And>
+        </Filter>
+        <PolygonSymbolizer>
+            <Fill>
+                <CssParameter name="fill">#49E8EA</CssParameter>
+            </Fill>
+            <Stroke>null</Stroke>
+        </PolygonSymbolizer>
+    </Rule>
+    <Rule>
+        <Name> &gt; 3885534.3 AND &lt;= 7544487.5</Name>
+        <Filter>
+            <And>
+                <PropertyIsGreaterThan>
+                    <PropertyName>FEMALE</PropertyName>
+                    <Literal>3885534.3</Literal>
+                </PropertyIsGreaterThan>
+                <PropertyIsLessThanOrEqualTo>
+                    <PropertyName>FEMALE</PropertyName>
+                    <Literal>7544487.5</Literal>
+                </PropertyIsLessThanOrEqualTo>
+            </And>
+        </Filter>
+        <PolygonSymbolizer>
+            <Fill>
+                <CssParameter name="fill">#A7D4D0</CssParameter>
+            </Fill>
+            <Stroke>null</Stroke>
+        </PolygonSymbolizer>
+    </Rule>
+    <Rule>
+        <Name> &gt; 7544487.5 AND &lt;= 1.12034408E7</Name>
+        <Filter>
+            <And>
+                <PropertyIsGreaterThan>
+                    <PropertyName>FEMALE</PropertyName>
+                    <Literal>7544487.5</Literal>
+                </PropertyIsGreaterThan>
+                <PropertyIsLessThanOrEqualTo>
+                    <PropertyName>FEMALE</PropertyName>
+                    <Literal>1.12034408E7</Literal>
+                </PropertyIsLessThanOrEqualTo>
+            </And>
+        </Filter>
+        <PolygonSymbolizer>
+            <Fill>
+                <CssParameter name="fill">#87322A</CssParameter>
+            </Fill>
+            <Stroke>null</Stroke>
+        </PolygonSymbolizer>
+    </Rule>
+    <Rule>
+        <Name> &gt; 1.12034408E7 AND &lt;= 1.4862394E7</Name>
+        <Filter>
+            <And>
+                <PropertyIsGreaterThan>
+                    <PropertyName>FEMALE</PropertyName>
+                    <Literal>1.12034408E7</Literal>
+                </PropertyIsGreaterThan>
+                <PropertyIsLessThanOrEqualTo>
+                    <PropertyName>FEMALE</PropertyName>
+                    <Literal>1.4862394E7</Literal>
+                </PropertyIsLessThanOrEqualTo>
+            </And>
+        </Filter>
+        <PolygonSymbolizer>
+            <Fill>
+                <CssParameter name="fill">#4111B2</CssParameter>
+            </Fill>
+            <Stroke>null</Stroke>
+        </PolygonSymbolizer>
+    </Rule>
+</Rules>

@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.store.extensions.classify;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.classify.GeoserverClassifyRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extensions.classify.GeoserverClassifyRequest;
 import org.geosdi.geoplatform.connector.store.extensions.rasterize.GoeserverRasterizeConnectorStore;
 
 /**

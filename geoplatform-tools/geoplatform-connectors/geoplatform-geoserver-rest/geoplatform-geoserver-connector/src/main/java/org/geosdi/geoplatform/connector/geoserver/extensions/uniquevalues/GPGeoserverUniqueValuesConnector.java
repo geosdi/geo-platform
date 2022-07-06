@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.connector.geoserver.extensions.uniquevalues;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.layergroups.GPGeoserverLayerGroupsConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.uniquevalue.GeoserverLoadUniqueValuesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extensions.uniquevalue.GeoserverLoadUniqueValuesRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;

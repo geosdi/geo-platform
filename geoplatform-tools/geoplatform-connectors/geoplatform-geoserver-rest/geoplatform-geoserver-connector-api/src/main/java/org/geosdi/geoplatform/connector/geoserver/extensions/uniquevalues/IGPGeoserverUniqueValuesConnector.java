@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.geoserver.extensions.uniquevalues;
 
 import org.geosdi.geoplatform.connector.geoserver.layergroups.IGPGeoserverLayerGroupsConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.extension.uniquevalue.GeoserverLoadUniqueValuesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.extensions.uniquevalue.GeoserverLoadUniqueValuesRequest;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group

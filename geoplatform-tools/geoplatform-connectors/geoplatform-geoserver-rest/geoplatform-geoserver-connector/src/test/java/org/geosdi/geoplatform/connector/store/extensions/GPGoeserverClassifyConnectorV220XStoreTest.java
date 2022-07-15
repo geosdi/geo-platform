@@ -50,10 +50,10 @@ public class GPGoeserverClassifyConnectorV220XStoreTest extends GPBaseGeoserverC
     @Test
     public void classifyTest() throws Exception {
         GeoserverClassifyRequest request = geoserverConnectorStoreV2_20_x.classifyData();
-        logger.info("#################RESPONSE : {}\n", request.withVectorName("topp:states")
+        logger.info("#################RESPONSE : \n{}\n", request.withVectorName("topp:states")
                 .withAttribute("FEMALE")
                 .withGeoserverRamp(random)
                 .withIntervals(4)
-                .withMethod(uniqueInterval).getResponseAsString());
+                .withMethod(uniqueInterval).getResponse());
     }
 }

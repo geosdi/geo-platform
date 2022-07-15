@@ -58,15 +58,6 @@
             <artifactId>httpcore5</artifactId>
         </dependency>
 
-        <!-- =========================================================== -->
-        <!-- ============================ JSON ========================= -->
-        <!-- =========================================================== -->
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20220320</version>
-        </dependency>
-
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>

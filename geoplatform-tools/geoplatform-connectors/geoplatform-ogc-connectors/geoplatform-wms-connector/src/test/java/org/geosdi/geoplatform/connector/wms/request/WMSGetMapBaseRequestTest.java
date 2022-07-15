@@ -133,4 +133,58 @@ public class WMSGetMapBaseRequestTest {
         assertTrue(wmsGetMapBaseRequest.toWMSKeyValuePair().equalsIgnoreCase("LAYERS=extra_rt_webgis:strade_comunali&SRS=EPSG:3003&BBOX=1557923.125,4690438.5,1771935.0,4923962.5&WIDTH=703&HEIGHT=768"));
         logger.info("@@@@@@@@@@@@@@@@@@@@@@GET_MAP_JSON_STRING : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(wmsGetMapBaseRequest));
     }
+
+    @Test
+    public void l_wmsGetMapKeyValuePairTest() throws Exception {
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = builder().withKeyValuePair("service=WMS&version=1.1.0" +
+                        "&request=GetMap&layers=extra_rt_webgis:cen_abi_a_polygon&styles=" +
+                        "&bbox=1557318.5,4695381.5,1770395.625,4922820.0&width=719&height=768" +
+                        "&srs=EPSG:3003&format=application/openlayers")
+                .build();
+        assertTrue(wmsGetMapBaseRequest.toWMSKeyValuePair().equalsIgnoreCase("LAYERS=extra_rt_webgis:cen_abi_a_polygon&srs=EPSG:3003&BBOX=1557318.5,4695381.5,1770395.625,4922820.0&WIDTH=719&HEIGHT=768"));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@GET_MAP_JSON_STRING : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(wmsGetMapBaseRequest));
+    }
+
+    @Test
+    public void m_wmsGetMapKeyValuePairTest() throws Exception {
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = builder().withKeyValuePair("service=WMS&version=1.1.0" +
+                        "&request=GetMap&layers=extra_rt_webgis:strade_private&styles=" +
+                        "&bbox=1575048.75,4730241.0,1757952.875,4909926.0&width=768&height=754" +
+                        "&srs=EPSG:3003&format=application/openlayers&nome=Mario&cognome=Rossi&ID_utente=M_Rossi")
+                .build();
+        assertTrue(wmsGetMapBaseRequest.toWMSKeyValuePair().equalsIgnoreCase("layers=extra_rt_webgis:strade_private&srs=EPSG:3003&bbox=1575048.75,4730241.0,1757952.875,4909926.0&width=768&height=754"));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@GET_MAP_JSON_STRING : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(wmsGetMapBaseRequest));
+    }
+
+    @Test
+    public void n_wmsGetMapKeyValuePairTest() throws Exception {
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = builder().withKeyValuePair("service=WMS&version=1.1.0" +
+                        "&request=GetMap&layers=ETP%3AETPI_AMBITO_TERRITORIALE" +
+                        "&bbox=293596.621109624%2C5048171.15646072%2C415718.058323389%2C5168475.99231138&width=768&height=756" +
+                        "&srs=EPSG%3A6708&styles=&format=application/openlayers")
+                .build();
+        assertTrue(wmsGetMapBaseRequest.toWMSKeyValuePair().equalsIgnoreCase("LAYERS=ETP:ETPI_AMBITO_TERRITORIALE&SRS=EPSG:6708&BBOX=293596.621109624,5048171.15646072,415718.058323389,5168475.99231138&WIDTH=768&HEIGHT=756"));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@GET_MAP_JSON_STRING : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(wmsGetMapBaseRequest));
+    }
+
+    @Test
+    public void o_wmsGetMapKeyValuePairTest() throws Exception {
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = builder().withKeyValuePair("service=WMS&version=1.1.0" +
+                        "&request=GetMap&layers=geonode%3AChirotteri_agg_2021" +
+                        "&bbox=217933.15962398186%2C4535810.204905415%2C411932.0916890357%2C4747808.743869806&width=702" +
+                        "&height=768&srs=EPSG%3A25833&styles=&format=application/openlayers&p=value")
+                .build();
+        assertTrue(wmsGetMapBaseRequest.toWMSKeyValuePair().equalsIgnoreCase("LAYERS=geonode:Chirotteri_agg_2021&SRS=EPSG:25833&BBOX=217933.15962398186,4535810.204905415,411932.0916890357,4747808.743869806&WIDTH=702&HEIGHT=768"));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@GET_MAP_JSON_STRING : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(wmsGetMapBaseRequest));
+    }
+
+    @Test
+    public void p_wmsGetMapKeyValuePairTest() throws Exception {
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = builder().withKeyValuePair("service=WMS&version=1.1.0" +
+                        "&request=GetMap&layers=ETP%3AETPI_RIPOPOLAMENTO&bbox=301137.58864494%2C5062228.58356361%2C397959." +
+                        "53580933%2C5165844.34875&width=717&height=768&srs=EPSG%3A6708&styles=&format=application/openlayers")
+                .build();
+        assertTrue(wmsGetMapBaseRequest.toWMSKeyValuePair().equalsIgnoreCase("LAYERS=ETP:ETPI_RIPOPOLAMENTO&SRS=EPSG:6708&BBOX=301137.58864494,5062228.58356361,397959.53580933,5165844.34875&WIDTH=717&HEIGHT=768"));
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@GET_MAP_JSON_STRING : \n{}\n", JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(wmsGetMapBaseRequest));
+    }
 }

@@ -130,7 +130,7 @@ public class XmlToMapTest {
          */
         @Override
         public void characters(char[] ch, int start, int length) throws SAXException {
-            buffer.append(ch, start, length);
+            buffer.append(new String(ch, start, length));
         }
 
         @Override

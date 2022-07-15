@@ -42,11 +42,13 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.geosdi.geoplatform.jaxb.pool.GPJAXBContextBuilderPool;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.JAXBException;
 import java.io.*;
 import java.net.URL;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -71,7 +73,7 @@ public class GPJAXBXmlMapper extends XmlMapper {
      *                              expected for result type (or has other mismatch issues)
      */
     @Override
-    public <T> T readValue(File src, Class<T> valueType) throws IOException, JsonParseException, JsonMappingException {
+    public <T> T readValue(@Nonnull(when = NEVER) File src, @Nonnull(when = NEVER) Class<T> valueType) throws IOException, JsonParseException, JsonMappingException {
         checkArgument(src != null, "The Parameter src must not be null.");
         checkArgument(valueType != null, "The Parameter valueType must not be null.");
         return GP_JAXB_CONTEXT_BUILDER_POOL.unmarshal(src, valueType);
@@ -87,7 +89,7 @@ public class GPJAXBXmlMapper extends XmlMapper {
      * @throws JsonMappingException
      */
     @Override
-    public <T> T readValue(Reader src, Class<T> valueType) throws IOException, JsonParseException, JsonMappingException {
+    public <T> T readValue(@Nonnull(when = NEVER) Reader src, @Nonnull(when = NEVER) Class<T> valueType) throws IOException, JsonParseException, JsonMappingException {
         checkArgument(src != null, "The Parameter src must not be null.");
         checkArgument(valueType != null, "The Parameter valueType must not be null.");
         return GP_JAXB_CONTEXT_BUILDER_POOL.unmarshal(src, valueType);
@@ -97,12 +99,12 @@ public class GPJAXBXmlMapper extends XmlMapper {
      * @param src
      * @param valueType
      * @param <T>
-     * @return {@link <></>}
+     * @return {@link T}
      * @throws JsonParseException
      * @throws JsonMappingException
      */
     @Override
-    public <T> T readValue(String src, Class<T> valueType) throws JsonParseException, JsonMappingException {
+    public <T> T readValue(@Nonnull(when = NEVER) String src, @Nonnull(when = NEVER) Class<T> valueType) throws JsonParseException, JsonMappingException {
         checkArgument(src != null, "The Parameter src must not be null.");
         checkArgument(valueType != null, "The Parameter valueType must not be null.");
         return GP_JAXB_CONTEXT_BUILDER_POOL.unmarshal(new StringReader(src), valueType);
@@ -118,7 +120,7 @@ public class GPJAXBXmlMapper extends XmlMapper {
      * @throws JsonMappingException
      */
     @Override
-    public <T> T readValue(InputStream src, Class<T> valueType) throws IOException, JsonParseException, JsonMappingException {
+    public <T> T readValue(@Nonnull(when = NEVER) InputStream src, @Nonnull(when = NEVER) Class<T> valueType) throws IOException, JsonParseException, JsonMappingException {
         checkArgument(src != null, "The Parameter src must not be null.");
         checkArgument(valueType != null, "The Parameter valueType must not be null.");
         return GP_JAXB_CONTEXT_BUILDER_POOL.unmarshal(src, valueType);
@@ -134,7 +136,7 @@ public class GPJAXBXmlMapper extends XmlMapper {
      * @throws JsonMappingException
      */
     @Override
-    public <T> T readValue(URL src, Class<T> valueType) throws IOException, JsonParseException, JsonMappingException {
+    public <T> T readValue(@Nonnull(when = NEVER) URL src, @Nonnull(when = NEVER) Class<T> valueType) throws IOException, JsonParseException, JsonMappingException {
         checkArgument(src != null, "The Parameter src must not be null.");
         checkArgument(valueType != null, "The Parameter valueType must not be null.");
         return GP_JAXB_CONTEXT_BUILDER_POOL.unmarshal(src, valueType);
@@ -154,7 +156,7 @@ public class GPJAXBXmlMapper extends XmlMapper {
      * @param value
      */
     @Override
-    public void writeValue(Writer w, Object value) throws IOException, JsonGenerationException, JsonMappingException {
+    public void writeValue(@Nonnull(when = NEVER) Writer w, @Nonnull(when = NEVER) Object value) throws IOException, JsonGenerationException, JsonMappingException {
         checkArgument(w != null, "The Parameter w must not be null.");
         checkArgument(value != null, "The Parameter value must not be null.");
         try {
@@ -173,7 +175,7 @@ public class GPJAXBXmlMapper extends XmlMapper {
      * @param value
      */
     @Override
-    public void writeValue(File resultFile, Object value) throws IOException, JsonGenerationException, JsonMappingException {
+    public void writeValue(@Nonnull(when = NEVER) File resultFile, @Nonnull(when = NEVER) Object value) throws IOException, JsonGenerationException, JsonMappingException {
         checkArgument(resultFile != null, "The Parameter resultFile must not be null.");
         checkArgument(value != null, "The Parameter value must not be null.");
         try {
@@ -195,7 +197,7 @@ public class GPJAXBXmlMapper extends XmlMapper {
      * @param value
      */
     @Override
-    public String writeValueAsString(Object value) throws JsonProcessingException {
+    public String writeValueAsString(@Nonnull(when = NEVER) Object value) throws JsonProcessingException {
         checkArgument(value != null, "The Parameter value must not be null.");
         Writer writer = new StringWriter();
         try {

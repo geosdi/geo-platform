@@ -93,7 +93,8 @@ public class SlideShowJacksonJsonMapperTest {
 
     @Test
     public void c_writeSlideShowJsonAsFileTest() throws Exception {
-        GP_JACKSON_MAPPER.write(new File("./target/SlideShow.json"), SlideShowJacksonXmlMapperTest::slideShow);
+        GP_JACKSON_MAPPER.write(new File(of(new File(".").getCanonicalPath(), "target", "SlideShow.json")
+                .collect(joining(separator))), SlideShowJacksonXmlMapperTest::slideShow);
     }
 
     @Test

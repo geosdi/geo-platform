@@ -89,7 +89,7 @@ public interface GPWMSRequestKvpReader extends GPConnectorReader<GPWMSRequestKey
             logger.trace("########################{} trying to read : {}\n", this.getClass().getSimpleName(), theValue);
             String value = decode(theValue, UTF_8.name());
             int pos = value.indexOf(URL_DELIMITER.toKey());
-            value = ((pos > 0) ? value.substring(pos + 1) : value);
+            value = ((pos > 0) ? value.substring(++pos) : value);
             checkArgument(((value != null) && !(value.trim().isEmpty())), "The Parameter value after removing special characters ? must not be null.");
             return compile(CHAIN.toKey()).splitAsStream(value)
                     .filter(Objects::nonNull)

@@ -168,4 +168,31 @@ public class GPWMSFeatureStoreGml3Test extends WMSGetFeatureInfoStaxReaderGml3Te
         logger.info("#######################FEATURE_STORE_CARABINIERI_SICILIA : {}\n",  wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "CarabinieriSicilia.json"), wmsFeatureStore);
     }
+
+    @Test
+    public void a_p_wmsFeatureStoreGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("SalineStoriche.xml"));
+        List<Feature> values = wmsFeatureStore.getFeaturesByKey("AREESALINESTORICHE");
+        assertTrue("For Key : AREESALINESTORICHE , store must contains a list of Features not null and with 11 features.", (values != null) && (values.size() == 11));
+        logger.info("#######################FEATURE_STORE_SALINE_STORICHE : {}\n",  wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "SalineStoriche.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void a_q_wmsFeatureStoreGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("ETPI_AMBITO_TERRITORIALE.xml"));
+        List<Feature> values = wmsFeatureStore.getFeaturesByKey("ETPI_AMBITO_TERRITORIALE");
+        assertTrue("For Key : ETPI_AMBITO_TERRITORIALE , store must contains a list of Features not null and with 1 features.", (values != null) && (values.size() == 1));
+        logger.info("#######################FEATURE_STORE_ETPI_AMBITO_TERRITORIALE : {}\n",  wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "ETPI_AMBITO_TERRITORIALE.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void a_r_wmsFeatureStoreGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("ETPI_RIPOPOLAMENTO.xml"));
+        List<Feature> values = wmsFeatureStore.getFeaturesByKey("ETPI_RIPOPOLAMENTO");
+        assertTrue("For Key : ETPI_RIPOPOLAMENTO , store must contains a list of Features not null and with 265 features.", (values != null) && (values.size() == 265));
+        logger.info("#######################FEATURE_STORE_ETPI_RIPOPOLAMENTO : {}\n",  wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "ETPI_RIPOPOLAMENTO.json"), wmsFeatureStore);
+    }
 }

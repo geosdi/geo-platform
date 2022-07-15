@@ -75,7 +75,8 @@ public class MessaggioJacksonJsonMapperTest {
     @Test
     @Order(value = 1)
     public void writeMessaggioAsJsonFileTest() throws Exception {
-        GP_JACKSON_MAPPER.write(new File("./target/Messaggio.json"), MessaggioJacksonXmlMapperTest::toMessaggio);
+        GP_JACKSON_MAPPER.write(new File(of(new File(".").getCanonicalPath(), "target", "Messaggio.json")
+                .collect(joining(separator))), MessaggioJacksonXmlMapperTest::toMessaggio);
     }
 
     @Test

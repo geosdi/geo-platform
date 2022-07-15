@@ -129,4 +129,28 @@ public class GPWMSGetFeatureInfoStaxGml3ReaderTest extends WMSGetFeatureInfoStax
         logger.info("#######################FEATURE_COLLECTION_CARABINIERI_SICILIA : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("CarabinieriSicilia.xml"))));
     }
+
+    @Test
+    public void a_p_wmsGetFeatureInfoStaxGml3ReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_SALINE_STORICHE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("SalineStoriche.xml"))));
+    }
+
+    @Test
+    public void a_q_wmsGetFeatureInfoStaxGml3ReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_CBLN_COMPRENSORIO : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("CBLN_COMPRENSORIO.xml"))));
+    }
+
+    @Test
+    public void a_r_wmsGetFeatureInfoStaxGml3ReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_ETPI_AMBITO_TERRITORIALE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("ETPI_AMBITO_TERRITORIALE.xml"))));
+    }
+
+    @Test
+    public void a_s_wmsGetFeatureInfoStaxGml3ReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_ETPI_RIPOPOLAMENTO : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("ETPI_RIPOPOLAMENTO.xml"))));
+    }
 }

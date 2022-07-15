@@ -77,7 +77,8 @@ public class WMSGetFeatureInfoReaderGml3FileLoaderTest extends WMSGetFeatureInfo
         return of("CartografiaTematica.xml", "ComuniSardegna.xml", "AlberiMonumentali.xml", "FreaCovid.xml",
                 "rw8_arno_de_ott_mag.xml", "OlivetiCatastali.xml", "VignetiCatastali.xml", "EttariComune.xml",
                 "EventiIngv.xml", "Pluviometri.xml", "ArcoFerroviarioSicilia.xml", "EsitiAgibilitaFabbricati.xml",
-                "CarabinieriSicilia.xml");
+                "CarabinieriSicilia.xml", "SalineStoriche.xml", "CBLN_COMPRENSORIO.xml", "ETPI_AMBITO_TERRITORIALE.xml",
+                "ETPI_RIPOPOLAMENTO.xml");
     }
 
     /**

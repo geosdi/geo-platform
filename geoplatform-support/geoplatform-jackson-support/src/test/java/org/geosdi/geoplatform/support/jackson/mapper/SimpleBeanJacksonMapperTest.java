@@ -47,6 +47,9 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.io.File.separator;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.junit.Assert.assertNotNull;
 
@@ -86,14 +89,13 @@ public class SimpleBeanJacksonMapperTest {
 
     @Test
     public void readJsonFromFileTest() throws Exception {
-        SimpleBean simpleBean = GP_JACKSON_MAPPER.read(new File("./src/test/resources/simple_bean.json"));
+        SimpleBean simpleBean = GP_JACKSON_MAPPER.read(new File(of("src", "test", "resources", "simple_bean.json").collect(joining(separator))));
         assertNotNull(simpleBean);
     }
 
     @Test
     public void writeJsonTest() throws Exception {
-        logger.info("###################################JSON_AS_STRING : \n{}\n", GP_JACKSON_MAPPER
-                .writeAsString(SimpleBeanJacksonMapperTest::simpleBean));
+        logger.info("###################################JSON_AS_STRING : \n{}\n", GP_JACKSON_MAPPER.writeAsString(SimpleBeanJacksonMapperTest::simpleBean));
     }
 
     @Test
@@ -103,7 +105,8 @@ public class SimpleBeanJacksonMapperTest {
 
     @Test
     public void writeJsonAsFileTest() throws Exception {
-        GP_JACKSON_MAPPER.write(new File("./target/SimpleBean.json"), simpleBean());
+        GP_JACKSON_MAPPER.write(new File(of(new File(".").getCanonicalPath(), "target", "SimpleBean.json")
+                .collect(joining(separator))), simpleBean());
     }
 
     /**

@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.connection.IGPGeoserverC
 
 import javax.annotation.Nonnull;
 import javax.annotation.meta.When;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Map;
 
@@ -48,6 +49,7 @@ import java.util.Map;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@XmlRootElement(name = "dataStore")
 @JsonDeserialize(as = GPGeoserverCreateDatastoreBody.class)
 public interface IGPGeoserverCreateDatastoreBody extends Serializable {
 

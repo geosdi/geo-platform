@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.extensions.classify;
 
+import com.google.common.io.CharStreams;
 import io.reactivex.rxjava3.functions.Consumer;
 import net.jcip.annotations.ThreadSafe;
 
@@ -47,6 +48,8 @@ import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 
 import javax.annotation.Nonnull;
+
+import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Observable.fromArray;
@@ -62,40 +65,26 @@ import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverSty
 @ThreadSafe
 class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, GeoserverClassifyRequest> implements GeoserverClassifyRequest {
 
-    private final ThreadLocal<String> vectorName;
-    private final ThreadLocal<GPGeoserverStringQueryParam> attribute;
-    private final ThreadLocal<GeoserverRamp> geoserverRamp;
-    private final ThreadLocal<GPGeoserverQueryParam> intervals;
-    private final ThreadLocal<GPGeoserverQueryParam> method;
-    private final ThreadLocal<GPGeoserverBooleanQueryParam> open;
-    private final ThreadLocal<GPGeoserverBooleanQueryParam> reverse;
-    private final ThreadLocal<GPGeoserverBooleanQueryParam> normalize;
-    private final ThreadLocal<GPGeoserverStringQueryParam> startColor;
-    private final ThreadLocal<GPGeoserverStringQueryParam> endColor;
-    private final ThreadLocal<GPGeoserverStringQueryParam> midColor;
-    private final ThreadLocal<GPGeoserverBooleanQueryParam> size;
-    private final ThreadLocal<GPGeoserverStringQueryParam> symbol;
-    private final ThreadLocal<String> format;
+    private final ThreadLocal<String> vectorName = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverStringQueryParam> attribute = withInitial(() -> null);
+    private final ThreadLocal<GeoserverRamp> geoserverRamp = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverQueryParam> intervals = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverQueryParam> method = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverBooleanQueryParam> open = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverBooleanQueryParam> reverse = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverBooleanQueryParam> normalize = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverStringQueryParam> startColor = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverStringQueryParam> endColor = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverStringQueryParam> midColor = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverBooleanQueryParam> size = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverStringQueryParam> symbol = withInitial(() -> null);
+    private final ThreadLocal<String> format = withInitial(() -> "xml");
 
     /**
      * @param server
      */
     GPGeoserverClassifyRequest(@Nonnull(when = NEVER) GPServerConnector server) {
         super(server, JACKSON_JAXB_XML_SUPPORT);
-        this.vectorName = withInitial(() -> null);
-        this.attribute = withInitial(() -> null);
-        this.geoserverRamp = withInitial(() -> null);
-        this.intervals = withInitial(() -> null);
-        this.method = withInitial(() -> null);
-        this.open = withInitial(() -> null);
-        this.reverse = withInitial(() -> null);
-        this.normalize = withInitial(() -> null);
-        this.startColor = withInitial(() -> null);
-        this.endColor = withInitial(() -> null);
-        this.midColor = withInitial(() -> null);
-        this.size = withInitial(() -> null);
-        this.symbol = withInitial(() -> null);
-        this.format = withInitial(() -> "xml");
     }
 
     /**
@@ -253,6 +242,16 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
                 .filter(c-> c.get() != null)
                 .subscribe(consumer, Throwable::printStackTrace);
         return uriBuilder.build().toString();
+    }
+
+    /**
+     * @param reader
+     * @return {@link String}
+     * @throws Exception
+     */
+    @Override
+    protected String readInternal(BufferedReader reader) throws Exception {
+        return CharStreams.toString(reader);
     }
 
     /**

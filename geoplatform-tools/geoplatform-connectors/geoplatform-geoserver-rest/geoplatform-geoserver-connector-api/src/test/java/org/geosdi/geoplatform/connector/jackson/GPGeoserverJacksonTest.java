@@ -39,6 +39,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.about.status.GPGeoserver
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastore;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.GPGeoserverLoadDatastores;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.GPGeoserverCreateDatastoreBody;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.IGPGeoserverCreateDatastoreBody;
 import org.geosdi.geoplatform.connector.geoserver.model.featuretypes.GPGeoserverFeatureTypeInfo;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GPGeoserverEmptyLayers;
 import org.geosdi.geoplatform.connector.geoserver.model.layers.GPGeoserverLayers;
@@ -94,7 +95,7 @@ public class GPGeoserverJacksonTest {
     private static final GPJacksonXmlSupport jacksonXmlSupport = new GPJacksonXmlSupport();
 
     @Test
-    public void a_unmarshallGeoserverWorkspacesTest() throws Exception {
+    public void a_a_unmarshallGeoserverWorkspacesTest() throws Exception {
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_WOKSPACES : {}\n", jacksonSupport.getDefaultMapper()
                 .readValue(new StringReader("{  \n" +
                         "   \"workspaces\":{  \n" +
@@ -133,14 +134,14 @@ public class GPGeoserverJacksonTest {
     }
 
     @Test
-    public void b_unmarshallGeoserverEmptyWorkspacesTest() throws Exception {
+    public void a_b_unmarshallGeoserverEmptyWorkspacesTest() throws Exception {
         logger.info("\n{}\n", emptyJacksonSupport.getDefaultMapper().readValue(new StringReader("{  \n" +
                 "   \"workspaces\":\"\"\n" +
                 "}"), GPGeoserverEmptyWorkspaces.class));
     }
 
     @Test
-    public void c_unmarshallGeoserverAboutStatusTest() throws Exception {
+    public void a_c_unmarshallGeoserverAboutStatusTest() throws Exception {
         logger.info("##############################GEOSERVER_ABOUT_STATUS : \n{}\n", jacksonSupport.getDefaultMapper()
                 .readValue(new StringReader("{  \n" +
                         "   \"statuss\":{  \n" +
@@ -255,7 +256,7 @@ public class GPGeoserverJacksonTest {
     }
 
     @Test
-    public void d_unmarshallGeoserverNamespacesTest() throws Exception {
+    public void a_d_unmarshallGeoserverNamespacesTest() throws Exception {
         logger.info("##########################GEOSERVER_NAMESPACES :  \n{}\n", jacksonSupport.getDefaultMapper()
                 .readValue(new StringReader("{  \n" +
                         "   \"namespaces\":{  \n" +
@@ -294,20 +295,20 @@ public class GPGeoserverJacksonTest {
     }
 
     @Test
-    public void e_unmarshallGeoserverEmptyNamespacesTest() throws Exception {
+    public void a_e_unmarshallGeoserverEmptyNamespacesTest() throws Exception {
         logger.info("##########################GEOSERVER_NAMESPACES :  \n{}\n", emptyJacksonSupport.getDefaultMapper()
                 .readValue(new StringReader("{\"namespaces\":\"\"}"), GPGeoserverEmptyNamespaces.class));
     }
 
     @Test
-    public void f_unmarshallGeoserverNamespaceTest() throws Exception {
+    public void a_f_unmarshallGeoserverNamespaceTest() throws Exception {
         logger.info("##########################GEOSERVER_NAMESPACE : \n{}\n", jacksonSupport.getDefaultMapper()
                 .readValue(new StringReader("{\"namespace\":{\"prefix\":\"nurc\",\"uri\":\"http:\\/\\/www.nurc.nato.int\"}}"),
                         GPGeoserverSingleNamespace.class));
     }
 
     @Test
-    public void g_unmarshallGeoserverLayersTest() throws Exception {
+    public void a_g_unmarshallGeoserverLayersTest() throws Exception {
         logger.info("#########################GEOSERVER_LAYERS : \n{}\n", jacksonSupport.getDefaultMapper()
                 .readValue(new StringReader("{  \n" +
                         "   \"layers\":{  \n" +
@@ -394,13 +395,13 @@ public class GPGeoserverJacksonTest {
     }
 
     @Test
-    public void h_unmarshallGeoserverEmptyLayersTest() throws Exception {
+    public void a_h_unmarshallGeoserverEmptyLayersTest() throws Exception {
         logger.info("#######################GEOSERVER_EMPTY_LAYERS : \n{}\n", emptyJacksonSupport.getDefaultMapper()
                 .readValue(new StringReader("{\"layers\":\"\"}"), GPGeoserverEmptyLayers.class));
     }
 
     @Test
-    public void i_unmarshallGeoserverStylesTest() throws Exception {
+    public void a_i_unmarshallGeoserverStylesTest() throws Exception {
         logger.info("#####################GEOSERVER_STYLES : \n{}\n", jacksonSupport.getDefaultMapper()
                 .readValue(new StringReader("{  \n" +
                         "   \"styles\":{  \n" +
@@ -499,13 +500,13 @@ public class GPGeoserverJacksonTest {
     }
 
     @Test
-    public void l_unmarshallGeoserverEmptyStylesTest() throws Exception {
+    public void a_l_unmarshallGeoserverEmptyStylesTest() throws Exception {
         logger.info("#######################GEOSERVER_EMPTY_STYLES : \n{}\n", emptyJacksonSupport.getDefaultMapper()
                 .readValue(new StringReader("{\"styles\":\"\"}"), GPGeoserverEmptyStyles.class));
     }
 
     @Test
-    public void m_unmarshallGeoserverStyleTest() throws Exception {
+    public void a_m_unmarshallGeoserverStyleTest() throws Exception {
         logger.info("######################GEOSERVER_STYLE : \n{}\n", jacksonSupport.getDefaultMapper()
                 .readValue(new StringReader("{  \n" +
                         "   \"style\":{  \n" +
@@ -520,7 +521,7 @@ public class GPGeoserverJacksonTest {
     }
 
     @Test
-    public void n_unmarshallGeoserverRasterLayerTest() throws Exception {
+    public void a_n_unmarshallGeoserverRasterLayerTest() throws Exception {
         logger.info("####################GEOSERVER_RASTER_LAYER : \n{}\n", jacksonSupport.getDefaultMapper()
                 .readValue(new StringReader("{  \n" +
                         "   \"layer\":{  \n" +
@@ -554,7 +555,7 @@ public class GPGeoserverJacksonTest {
     }
 
     @Test
-    public void o_unmarshallGeoserverVectorLayerTest() throws Exception {
+    public void a_o_unmarshallGeoserverVectorLayerTest() throws Exception {
         logger.info("#######################GEOSERVER_VECTOR_LAYER : \n{}\n", jacksonSupport.getDefaultMapper()
                 .readValue(new StringReader("{  \n" +
                         "   \"layer\":{  \n" +
@@ -579,7 +580,7 @@ public class GPGeoserverJacksonTest {
     }
 
     @Test
-    public void p_unmarshallGeoserverLoadDatastoresTest() throws Exception {
+    public void a_p_unmarshallGeoserverLoadDatastoresTest() throws Exception {
         logger.info("#######################GEOSERVER_LOAD_DATASTORES_RESPONSE : \n{}\n", jacksonSupport.getDefaultMapper()
                 .readValue(new StringReader("{  \n" +
                         "   \"dataStores\":{  \n" +
@@ -598,7 +599,7 @@ public class GPGeoserverJacksonTest {
     }
 
     @Test
-    public void q_unmarshallGeoserverLoadDatastoreTest() throws Exception {
+    public void a_q_unmarshallGeoserverLoadDatastoreTest() throws Exception {
         logger.info("#######################GEOSERVER_LOAD_DATASTORES_RESPONSE : \n{}\n", jacksonSupport.getDefaultMapper()
                 .readValue(new StringReader("{  \n" +
                         "   \"dataStore\":{  \n" +
@@ -627,7 +628,7 @@ public class GPGeoserverJacksonTest {
     }
 
     @Test
-    public void r_unmarshallGeoserverCreateDatastoreTest() throws Exception {
+    public void a_r_unmarshallGeoserverCreateDatastoreTest() throws Exception {
         logger.info("#######################GEOSERVER_CREATE_DATASTORE_RESPONSE : \n{}\n", jacksonSupport.getDefaultMapper()
                 .readValue(new StringReader("{  \n" +
                         "   \"dataStore\":{  \n" +
@@ -657,7 +658,7 @@ public class GPGeoserverJacksonTest {
     }
 
     @Test
-    public void s_unmarshallGeoserverCoverageInfoTest() throws Exception {
+    public void a_s_unmarshallGeoserverCoverageInfoTest() throws Exception {
         GPGeoserverCoverageInfo coverageInfo = jacksonSupport.getDefaultMapper()
                 .readValue(new StringReader("{  \n" +
                         "   \"coverage\":{  \n" +
@@ -776,7 +777,7 @@ public class GPGeoserverJacksonTest {
     }
 
     @Test
-    public void t_unmarshallGeoserverFeatureTypeInfoTest() throws Exception {
+    public void a_t_unmarshallGeoserverFeatureTypeInfoTest() throws Exception {
         GPGeoserverFeatureTypeInfo featureTypeInfo = emptyJacksonSupport.getDefaultMapper()
                 .readValue(new StringReader("{\n" +
                         "  \"name\": \"poi\",\n" +
@@ -903,7 +904,7 @@ public class GPGeoserverJacksonTest {
     }
 
     @Test
-    public void u_unmarshallerGeoserverFeatureTypeInfoTest() throws Exception {
+    public void a_u_unmarshallerGeoserverFeatureTypeInfoTest() throws Exception {
         GPGeoserverFeatureTypeInfo featureTypeInfo = jacksonSupport.getDefaultMapper()
                 .readValue(new StringReader("{  \n" +
                         "   \"featureType\":{  \n" +
@@ -1039,5 +1040,152 @@ public class GPGeoserverJacksonTest {
         Writer writer = new StringWriter();
         jacksonXmlSupport.getDefaultMapper().writeValue(writer, featureTypeInfo);
         logger.info("\n{}\n", writer);
+    }
+
+    @Test
+    public void a_v_unmarshallGeoserverCreateDatastoreTest() throws Exception {
+        logger.info("#######################GEOSERVER_CREATE_DATASTORE_RESPONSE : \n{}\n", jacksonSupport.getDefaultMapper()
+                .readValue(new StringReader("{\n"
+                        + "  \"dataStore\" : {\n"
+                        + "    \"name\" : \"DATASTORE_TEST\",\n"
+                        + "    \"description\" : null,\n"
+                        + "    \"enabled\" : true,\n"
+                        + "    \"connectionParameters\" : {\n"
+                        + "      \"entry\" : [ {\n"
+                        + "        \"@key\" : \"Batch insert size\",\n"
+                        + "        \"$\" : \"1\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"Evictor run periodicity\",\n"
+                        + "        \"$\" : \"300\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"database\",\n"
+                        + "        \"$\" : \"/Users/glascaleia/db.gpkg\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"fetch size\",\n"
+                        + "        \"$\" : \"1000\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"validate connections\",\n"
+                        + "        \"$\" : \"true\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"Expose primary keys\",\n"
+                        + "        \"$\" : \"false\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"min connections\",\n"
+                        + "        \"$\" : \"1\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"dbtype\",\n"
+                        + "        \"$\" : \"geopkg\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"Connection timeout\",\n"
+                        + "        \"$\" : \"20\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"Evictor tests per run\",\n"
+                        + "        \"$\" : \"3\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"max connections\",\n"
+                        + "        \"$\" : \"10\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"Test while idle\",\n"
+                        + "        \"$\" : \"true\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"Max connection idle time\",\n"
+                        + "        \"$\" : \"300\"\n"
+                        + "      } ]\n"
+                        + "    }\n"
+                        + "  }\n"
+                        + "}"), IGPGeoserverCreateDatastoreBody.class));
+    }
+
+    @Test
+    public void a_w_unmarshallGeoserverCreateDatastoreTest() throws Exception {
+        IGPGeoserverCreateDatastoreBody createDatastoreBody = jacksonSupport.getDefaultMapper()
+                .readValue(new StringReader("{\n"
+                        + "  \"dataStore\" : {\n"
+                        + "    \"name\" : \"DATASTORE_TEST\",\n"
+                        + "    \"description\" : null,\n"
+                        + "    \"enabled\" : true,\n"
+                        + "    \"connectionParameters\" : {\n"
+                        + "      \"entry\" : [ {\n"
+                        + "        \"@key\" : \"schema\",\n"
+                        + "        \"$\" : \"public\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"Evictor run periodicity\",\n"
+                        + "        \"$\" : \"300\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"Max open prepared statements\",\n"
+                        + "        \"$\" : \"50\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"encode functions\",\n"
+                        + "        \"$\" : \"false\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"create database params\",\n"
+                        + "        \"$\" : \"This is a simple Test\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"preparedStatements\",\n"
+                        + "        \"$\" : \"false\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"Batch insert size\",\n"
+                        + "        \"$\" : \"1\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"database\",\n"
+                        + "        \"$\" : \"db_test\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"host\",\n"
+                        + "        \"$\" : \"localhost\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"Loose bbox\",\n"
+                        + "        \"$\" : \"true\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"Estimated extends\",\n"
+                        + "        \"$\" : \"true\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"fetch size\",\n"
+                        + "        \"$\" : \"1000\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"Support on the fly geometry simplification\",\n"
+                        + "        \"$\" : \"true\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"validate connections\",\n"
+                        + "        \"$\" : \"true\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"Expose primary keys\",\n"
+                        + "        \"$\" : \"false\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"Connection timeout\",\n"
+                        + "        \"$\" : \"20\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"create database\",\n"
+                        + "        \"$\" : \"false\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"passwd\",\n"
+                        + "        \"$\" : \"&&postgres!!\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"port\",\n"
+                        + "        \"$\" : \"4326\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"min connections\",\n"
+                        + "        \"$\" : \"1\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"dbtype\",\n"
+                        + "        \"$\" : \"postgis\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"Evictor tests per run\",\n"
+                        + "        \"$\" : \"3\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"max connections\",\n"
+                        + "        \"$\" : \"10\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"Test while idle\",\n"
+                        + "        \"$\" : \"true\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"user\",\n"
+                        + "        \"$\" : \"postgres\"\n"
+                        + "      }, {\n"
+                        + "        \"@key\" : \"Max connection idle time\",\n"
+                        + "        \"$\" : \"300\"\n"
+                        + "      } ]\n" + "    }\n"
+                        + "  }\n"
+                        + "}"), IGPGeoserverCreateDatastoreBody.class);
+        logger.info("#######################GEOSERVER_CREATE_DATASTORE_RESPONSE : \n{}\n", createDatastoreBody);
     }
 }

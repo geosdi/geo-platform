@@ -37,23 +37,40 @@ package org.geosdi.geoplatform.gml.api.parser.base;
 
 import org.geosdi.geoplatform.gml.api.GMLVersion;
 
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public enum GMLBaseVersion implements GMLVersion {
 
-    V311("3.1.1"), V321("3.2.1");
+    V311("3.1.1"),
+    V321("3.2.1");
     //
-    private String gmlVersion;
+    private final String gmlVersion;
 
-    GMLBaseVersion(String theGmlVersion) {
+    /**
+     * @param theGmlVersion
+     */
+    GMLBaseVersion(@Nonnull(when = NEVER) String theGmlVersion) {
+        checkArgument((theGmlVersion != null) && !(theGmlVersion.trim().isEmpty()), "The Parameter gmlVersion must not be null or an empty string.");
         this.gmlVersion = theGmlVersion;
     }
 
+    /**
+     * @return {@link String}
+     */
     @Override
     public String getGMLVersion() {
         return gmlVersion;
+    }
+
+    @Override
+    public String toString() {
+        return this.gmlVersion;
     }
 }

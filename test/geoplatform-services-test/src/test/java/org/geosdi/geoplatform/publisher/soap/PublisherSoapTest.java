@@ -54,7 +54,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
-import static org.mockito.Matchers.any;
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 /**
@@ -109,16 +110,14 @@ public abstract class PublisherSoapTest extends PublisherBaseTest {
 
     @Override
     protected final void mockAnalyzeTIFInPreview() throws Exception {
-        when(publisherService.analyzeTIFInPreview(any(), any(),
-                any(), any())).thenReturn(new InfoPreview(
-                "DATA_STORE_MOCK_MOKITO_SOAP",
-                "MESSAGE_MOCK_MOKITO_SOAP"));
+        when(publisherService.analyzeTIFInPreview(any(), any(), any(), any()))
+                .thenReturn(new InfoPreview("DATA_STORE_MOCK_MOKITO_SOAP", "MESSAGE_MOCK_MOKITO_SOAP"));
     }
 
     @Override
     protected final void mockExistsStyle() throws Exception {
-        when(publisherService.existsStyle(any(String.class))).thenReturn(
-                FALSE);
+        when(publisherService.existsStyle(any(String.class)))
+                .thenReturn(FALSE);
     }
 
     @Override
@@ -129,27 +128,24 @@ public abstract class PublisherSoapTest extends PublisherBaseTest {
 
     @Override
     protected final void mockPublishStyle() throws Exception {
-        when(publisherService.publishStyle(any(String.class),
-                any(String.class), any(Boolean.class))).thenReturn(FALSE);
+        when(publisherService.publishStyle(any(String.class), any(String.class), any(Boolean.class))).thenReturn(FALSE);
     }
 
     @Override
     protected final void mockDescribeFeatureType() throws Exception {
-        when(publisherService.describeFeatureType(any(String.class))).thenReturn(
-                createLayerAttributeStore(20));
+        when(publisherService.describeFeatureType(any(String.class))).thenReturn(createLayerAttributeStore(20));
     }
 
     @Override
     protected final void mockLoadStyle() throws Exception {
-        when(publisherService.loadStyle(any(String.class), any(String.class))).thenReturn(
-                "MOCK_STYLE_TEST_LOADED_SOAP");
+        when(publisherService.loadStyle(any(String.class), any(String.class)))
+                .thenReturn("MOCK_STYLE_TEST_LOADED_SOAP");
     }
 
     @Override
     protected final void mockProcessEPSGResult() throws Exception {
-        when(publisherService.processEPSGResult(any(
-                ProcessEPSGResultRequest.class))).thenReturn(
-                createInfoPreviewStore(17));
+        when(publisherService.processEPSGResult(any(ProcessEPSGResultRequest.class)))
+                .thenReturn(createInfoPreviewStore(17));
     }
 
     @Override

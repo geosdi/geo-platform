@@ -53,7 +53,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.annotation.Resource;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import static org.mockito.Matchers.any;
+import static java.lang.Boolean.TRUE;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 /**
@@ -76,89 +77,73 @@ public abstract class PublisherRestTest extends PublisherBaseTest {
 
     @Before
     public void setUp() {
-        if (flag.compareAndSet(Boolean.FALSE, Boolean.TRUE)) {
-            logger.debug(
-                    "\n\t@@@@@@@@@@@@@@@@@@@@ SetUp {} @@@@@@@@@@@@@@@@@@@@\n",
-                    getClass().getSimpleName());
+        if (flag.compareAndSet(Boolean.FALSE, TRUE)) {
+            logger.debug("\n\t@@@@@@@@@@@@@@@@@@@@ SetUp {} @@@@@@@@@@@@@@@@@@@@\n", getClass().getSimpleName());
             PublisherRSServerUtils.gpPublisherClient = gpPublisherRestClient.getEndpointService();
             PublisherRSServerUtils.server = GPPublisherRestServerConfig.gpPublisherRestServer(
                     publisherService, basicRestAddress, providerType,
                     serverLogInInterceptor, serverLogOutInterceptor);
             PublisherRSServerUtils.server.start();
-            logger.debug(
-                    "\n\n\t@@@@@@@@@@@@@@@@@@@@@ Start GP_PUBLISHER_REST Server"
-                            + " @@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n");
+            logger.debug("\n\n\t@@@@@@@@@@@@@@@@@@@@@ Start GP_PUBLISHER_REST Server @@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n");
         }
     }
 
     @AfterClass
     public static void afterClass() throws Exception {
         PublisherRSServerUtils.server.stop();
-        logger.debug("\n\n\t@@@@@@@@@@@@@@@@@@@@@ Stop GP_PUBLISHER_REST Server"
-                + " @@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n");
+        logger.debug("\n\n\t@@@@@@@@@@@@@@@@@@@@@ Stop GP_PUBLISHER_REST Server @@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n");
     }
 
     @Override
     protected final void mockPublishAllofPreview() throws Exception {
-        when(publisherService.publishAllofPreview(any(PublishRequest.class)))
-                .thenReturn(Boolean.TRUE);
+        when(publisherService.publishAllofPreview(any(PublishRequest.class))).thenReturn(TRUE);
     }
 
     @Override
     protected final void mockPublish() throws Exception {
-        when(publisherService.publish(any(PublishLayerRequest.class))).thenReturn(
-                Boolean.TRUE);
+        when(publisherService.publish(any(PublishLayerRequest.class))).thenReturn(TRUE);
     }
 
     @Override
     protected final void mockGetPreviewDataStores() throws Exception {
-        when(publisherService.getPreviewDataStores(any(String.class))).thenReturn(
-                createInfoPreviewStore(15));
+        when(publisherService.getPreviewDataStores(any(String.class))).thenReturn(createInfoPreviewStore(15));
     }
 
     @Override
     protected final void mockAnalyzeTIFInPreview() throws Exception {
-        when(publisherService.analyzeTIFInPreview(any(), any(),
-                any(), any())).thenReturn(new InfoPreview(
-                "DATA_STORE_MOCK_MOKITO",
-                "MESSAGE_MOCK_MOKITO"));
+        when(publisherService.analyzeTIFInPreview(any(), any(), any(), any()))
+                .thenReturn(new InfoPreview("DATA_STORE_MOCK_MOKITO", "MESSAGE_MOCK_MOKITO"));
     }
 
     @Override
     protected final void mockExistsStyle() throws Exception {
-        when(publisherService.existsStyle(any(String.class))).thenReturn(
-                Boolean.TRUE);
+        when(publisherService.existsStyle(any(String.class))).thenReturn(TRUE);
     }
 
     @Override
     protected final void mockPutStyle() throws Exception {
-        when(publisherService.updateStyle(any(String.class), any(String.class), any(Boolean.class))).thenReturn(
-                Boolean.TRUE);
+        when(publisherService.updateStyle(any(String.class), any(String.class), any(Boolean.class))).thenReturn(TRUE);
     }
 
     @Override
     protected final void mockPublishStyle() throws Exception {
-        when(publisherService.publishStyle(any(String.class), any(String.class), any(Boolean.class))).thenReturn(
-                Boolean.TRUE);
+        when(publisherService.publishStyle(any(String.class), any(String.class), any(Boolean.class))).thenReturn(TRUE);
     }
 
     @Override
     protected final void mockDescribeFeatureType() throws Exception {
-        when(publisherService.describeFeatureType(any(String.class))).thenReturn(
-                createLayerAttributeStore(40));
+        when(publisherService.describeFeatureType(any(String.class))).thenReturn(createLayerAttributeStore(40));
     }
 
     @Override
     protected final void mockLoadStyle() throws Exception {
-        when(publisherService.loadStyle(any(String.class), any(String.class))).thenReturn(
-                "MOCK_STYLE_TEST_LOADED");
+        when(publisherService.loadStyle(any(String.class), any(String.class))).thenReturn("MOCK_STYLE_TEST_LOADED");
     }
 
     @Override
     protected final void mockProcessEPSGResult() throws Exception {
-        when(publisherService.processEPSGResult(any(
-                ProcessEPSGResultRequest.class))).thenReturn(
-                createInfoPreviewStore(37));
+        when(publisherService.processEPSGResult(any(ProcessEPSGResultRequest.class)))
+                .thenReturn(createInfoPreviewStore(37));
     }
 
     @Override

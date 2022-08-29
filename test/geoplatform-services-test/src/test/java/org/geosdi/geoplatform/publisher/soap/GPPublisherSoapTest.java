@@ -46,6 +46,11 @@ import org.junit.Test;
 import java.io.File;
 
 import static java.io.File.separator;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.publisher.soap.PublisherSoapServerUtils.gpPublisherClient;
 import static org.junit.Assert.*;
 
 /**
@@ -58,10 +63,9 @@ public class GPPublisherSoapTest extends PublisherSoapTest {
     @Test
     public void analyzeZIPEPSGTestSoap() throws Exception {
         super.mockAnalyzeZIPEPSG();
-        InfoPreviewStore previewStore = PublisherSoapServerUtils.gpPublisherClient.analyzeZIPEPSG(
-                "http://localhost:8282/geoplatform-service/",
-                "geoSDI", new File(new File(".").getCanonicalPath() + separator
-                        + "src/test/resources/logback-test.xml"), null);
+        InfoPreviewStore previewStore = gpPublisherClient.analyzeZIPEPSG("http://localhost:8282/geoplatform-service/",
+                "geoSDI", new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "logback-test.xml")
+                        .collect(joining(separator))), null);
         assertEquals(60, previewStore.getInfoPreviews().size());
         logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ analyzeZIPEPSG {}\n\n", previewStore);
     }
@@ -69,7 +73,7 @@ public class GPPublisherSoapTest extends PublisherSoapTest {
     @Test
     public void processEPSGResultTestSoap() throws Exception {
         super.mockProcessEPSGResult();
-        InfoPreviewStore previewStore = PublisherSoapServerUtils.gpPublisherClient.processEPSGResult(new ProcessEPSGResultRequest());
+        InfoPreviewStore previewStore = gpPublisherClient.processEPSGResult(new ProcessEPSGResultRequest());
         assertEquals(17, previewStore.getInfoPreviews().size());
         logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ processEPSGResult SOAP {}\n\n", previewStore);
     }
@@ -77,15 +81,14 @@ public class GPPublisherSoapTest extends PublisherSoapTest {
     @Test
     public void loadStyleTestSoap() throws Exception {
         super.mockLoadStyle();
-        String styleLoaded = PublisherSoapServerUtils.gpPublisherClient.loadStyle(
-                "LAYER_DATA_SOURCE_MOCK_SOAP", "LAYER_NAME_MOCK_SOAP");
+        String styleLoaded = gpPublisherClient.loadStyle("LAYER_DATA_SOURCE_MOCK_SOAP", "LAYER_NAME_MOCK_SOAP");
         assertEquals("MOCK_STYLE_TEST_LOADED_SOAP", styleLoaded);
     }
 
     @Test
     public void describeFeatureTypeTestSoap() throws Exception {
         super.mockDescribeFeatureType();
-        LayerAttributeStore layerAttributeStore = PublisherSoapServerUtils.gpPublisherClient.describeFeatureType("LAYER_NAME_MOCK_TEST_SOAP");
+        LayerAttributeStore layerAttributeStore = gpPublisherClient.describeFeatureType("LAYER_NAME_MOCK_TEST_SOAP");
         assertEquals(20, layerAttributeStore.getLayerAttributes().size());
         logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ describeFeatureType SOAP {}\n\n", layerAttributeStore);
     }
@@ -93,26 +96,27 @@ public class GPPublisherSoapTest extends PublisherSoapTest {
     @Test
     public void publishStyleTestSoap() throws Exception {
         super.mockPublishStyle();
-        assertFalse(PublisherSoapServerUtils.gpPublisherClient.publishStyle("STYLE_MOCK_MOCKITO_SOAP", "STYLE_MOCK_MOCKITO", Boolean.FALSE));
+        assertFalse(gpPublisherClient.publishStyle("STYLE_MOCK_MOCKITO_SOAP", "STYLE_MOCK_MOCKITO", FALSE));
     }
 
     @Test
     public void putStyleTestSoap() throws Exception {
         super.mockPutStyle();
-        assertFalse(PublisherSoapServerUtils.gpPublisherClient.updateStyle("STYLE_MOCK_TEST_SOAP", "STYLE_NAME_MOCK_SOAP", Boolean.FALSE));
+        assertFalse(gpPublisherClient.updateStyle("STYLE_MOCK_TEST_SOAP", "STYLE_NAME_MOCK_SOAP", FALSE));
     }
 
     @Test
     public void existsStyleTestSoap() throws Exception {
         super.mockExistsStyle();
-        assertFalse(PublisherSoapServerUtils.gpPublisherClient.existsStyle("STYLE_MOCK_MOCKITO_TEST_SOAP"));
+        assertFalse(gpPublisherClient.existsStyle("STYLE_MOCK_MOCKITO_TEST_SOAP"));
     }
 
     @Test
     public void analyzeTIFInPreviewTestSoap() throws Exception {
         super.mockAnalyzeTIFInPreview();
-        InfoPreview preview = PublisherSoapServerUtils.gpPublisherClient.analyzeTIFInPreview("jdshfjsdfhsjfh",
-                new File(new File(".").getCanonicalPath() + separator + "src/test/resources/logback-test.xml"), Boolean.TRUE, null);
+        InfoPreview preview = gpPublisherClient.analyzeTIFInPreview("jdshfjsdfhsjfh",
+                new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "logback-test.xml")
+                        .collect(joining(separator))), TRUE, null);
         assertNotNull(preview);
         assertEquals("DATA_STORE_MOCK_MOKITO_SOAP", preview.getDataStoreName());
         assertEquals("MESSAGE_MOCK_MOKITO_SOAP", preview.getMessage());
@@ -122,7 +126,7 @@ public class GPPublisherSoapTest extends PublisherSoapTest {
     @Test
     public void getPreviewDataStoresTestSoap() throws Exception {
         super.mockGetPreviewDataStores();
-        InfoPreviewStore previewStore = PublisherSoapServerUtils.gpPublisherClient.getPreviewDataStores("USER_MOCK_MOKITO_SOAP");
+        InfoPreviewStore previewStore = gpPublisherClient.getPreviewDataStores("USER_MOCK_MOKITO_SOAP");
         assertNotNull(previewStore);
         assertEquals(25, previewStore.getInfoPreviews().size());
         logger.debug("\n\t@@@@@@@@@@@@@@@@@@@@@@@@@ getPreviewDataStores SOAP : {}\n\n", previewStore);
@@ -131,18 +135,14 @@ public class GPPublisherSoapTest extends PublisherSoapTest {
     @Test
     public void publishTestSoap() throws Exception {
         super.mockPublish();
-        assertFalse(PublisherSoapServerUtils.gpPublisherClient.publish(
-                new PublishLayerRequest("7"
-                        + "364736sdfdsufhiuf", "WORKSPACE_MOCK_SOAP",
+        assertFalse(gpPublisherClient.publish(new PublishLayerRequest("7364736sdfdsufhiuf", "WORKSPACE_MOCK_SOAP",
                         "DATA_STORE_MOCK_SOAP", "LAYER_NAME_MOCK_SOAP")));
     }
 
     @Test
     public void publishAllofPreviewTestSoap() throws Exception {
         super.mockPublishAllofPreview();
-        assertFalse(PublisherSoapServerUtils.gpPublisherClient.publishAllofPreview(
-                        new PublishRequest("487538hghghewrwr",
-                                "WORKSPACE_MOCK_TEST_SOAP",
-                                "DATA_STORE_MOCK_TEST_SOAP")));
+        assertFalse(gpPublisherClient.publishAllofPreview(new PublishRequest("487538hghghewrwr",
+                "WORKSPACE_MOCK_TEST_SOAP", "DATA_STORE_MOCK_TEST_SOAP")));
     }
 }

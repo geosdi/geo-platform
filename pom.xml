@@ -1225,7 +1225,7 @@
                         <dependency>
                             <groupId>org.ow2.asm</groupId>
                             <artifactId>asm</artifactId>
-                            <version>9.0</version>
+                            <version>9.3</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -1314,7 +1314,7 @@
                     <dependency>
                         <groupId>org.ow2.asm</groupId>
                         <artifactId>asm</artifactId>
-                        <version>8.0.1</version>
+                        <version>9.3</version>
                     </dependency>
                 </dependencies>
             </plugin>

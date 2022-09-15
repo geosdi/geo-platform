@@ -71,7 +71,7 @@ class GPPersistencePlaceholderConfig {
     public static PropertySourcesPlaceholderConfigurer persistencePropertyConfigurer(@Qualifier(value = "persistencePooledPBEStringEncryptor") PooledPBEStringEncryptor persistencePooledPBEStringEncryptor,
             @Value("#{systemProperties['GP_DATA_DIR']}") String gpConfigDataDir,
             @Value("#{systemProperties['GP_PERSISTENCE_FILE_PROP']}") String persistenceFileProp) throws MalformedURLException {
-        logger.trace("###############################Initializing GPPersistencePlaceholderConfig.\n\n");
+        logger.trace("###############################Initializing GPPersistencePlaceholderConfig - GP_DATA_DIR {} - GP_PERSISTENCE_FILE_PROP : {}\n\n", gpConfigDataDir, persistenceFileProp);
         EncryptablePropertySourcesPlaceholderConfigurer persistenceGSPC = new EncryptablePropertySourcesPlaceholderConfigurer(persistencePooledPBEStringEncryptor);
         persistenceGSPC.setPlaceholderPrefix("persistence{");
         persistenceGSPC.setPlaceholderSuffix("}");

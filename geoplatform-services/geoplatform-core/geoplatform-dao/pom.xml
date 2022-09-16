@@ -276,7 +276,7 @@
 
     <build>
         <plugins>
-            <plugin>
+            <!--plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>hibernate3-maven-plugin</artifactId>
                 <version>3.0</version>
@@ -345,7 +345,7 @@
                         <format>true</format>
                     </componentProperties>
                 </configuration>
-            </plugin>
+            </plugin-->
 
             <!-- Attach sources ============================================ -->
             <plugin>

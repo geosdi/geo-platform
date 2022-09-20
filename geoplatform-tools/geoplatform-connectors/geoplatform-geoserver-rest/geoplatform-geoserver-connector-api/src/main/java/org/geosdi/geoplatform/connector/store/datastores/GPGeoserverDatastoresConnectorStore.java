@@ -70,9 +70,9 @@ public interface GPGeoserverDatastoresConnectorStore extends GPGeoserverStylesCo
     GeoserverDeleteDatastoreRequest deleteDatastoreRequest();
 
     /**
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GeoserverDataStoreUploadFilesRequest}
      */
-    GeoserverUpdateDataStoreWithStoreNameRequest updateDataStoreWithStoreName();
+    GeoserverDataStoreUploadFilesRequest dataStoreUploadFiles();
 
     /**
      * @return {@link GeoserverCreateDatastoreResourceRequest}

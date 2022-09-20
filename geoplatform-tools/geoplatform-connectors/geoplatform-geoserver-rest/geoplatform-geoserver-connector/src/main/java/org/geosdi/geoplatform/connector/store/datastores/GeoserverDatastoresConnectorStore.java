@@ -93,11 +93,11 @@ public abstract class GeoserverDatastoresConnectorStore extends GeoserverStylesC
     }
 
     /**
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GeoserverDataStoreUploadFilesRequest}
      */
     @Override
-    public GeoserverUpdateDataStoreWithStoreNameRequest updateDataStoreWithStoreName() {
-        return this.server.updateDataStoreWithStoreName();
+    public GeoserverDataStoreUploadFilesRequest dataStoreUploadFiles() {
+        return this.server.dataStoreUploadFiles();
     }
 
     /**

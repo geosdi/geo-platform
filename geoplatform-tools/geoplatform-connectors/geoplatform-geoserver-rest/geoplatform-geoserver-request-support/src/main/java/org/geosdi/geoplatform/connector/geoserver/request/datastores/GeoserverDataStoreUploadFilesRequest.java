@@ -50,66 +50,67 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeoserverUpdateDataStoreWithStoreNameRequest extends GPJsonConnectorRequest<Boolean, GeoserverUpdateDataStoreWithStoreNameRequest> {
+public interface GeoserverDataStoreUploadFilesRequest extends GPJsonConnectorRequest<Boolean, GeoserverDataStoreUploadFilesRequest> {
 
     /**
      * @param theWorkspace
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GeoserverDataStoreUploadFilesRequest}
      */
-    GeoserverUpdateDataStoreWithStoreNameRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
+    GeoserverDataStoreUploadFilesRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
 
     /**
      * @param theStore
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GeoserverDataStoreUploadFilesRequest}
      */
-    GeoserverUpdateDataStoreWithStoreNameRequest withStore(@Nonnull(when = NEVER) String theStore);
+    GeoserverDataStoreUploadFilesRequest withStore(@Nonnull(when = NEVER) String theStore);
 
     /**
      * @param theMethod
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GeoserverDataStoreUploadFilesRequest}
      */
-    GeoserverUpdateDataStoreWithStoreNameRequest withMethod(@Nonnull(when = NEVER) GPGeoserverUploadMethod theMethod);
+    GeoserverDataStoreUploadFilesRequest withMethod(@Nonnull(when = NEVER) GPGeoserverUploadMethod theMethod);
 
     /**
      * @param theFormat
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GeoserverDataStoreUploadFilesRequest}
      */
-    GeoserverUpdateDataStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) GPGeoserverDataStoreFileExtension theFormat);
+    GeoserverDataStoreUploadFilesRequest withFormat(@Nonnull(when = NEVER) GPGeoserverDataStoreFileExtension theFormat);
 
     /**
      * @param theParameterConfigure
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GeoserverDataStoreUploadFilesRequest}
      */
-    GeoserverUpdateDataStoreWithStoreNameRequest withConfigure(@Nonnull(when = NEVER) GPGeoserverParameterConfigure theParameterConfigure);
+    GeoserverDataStoreUploadFilesRequest withConfigure(
+            @Nonnull(when = NEVER) GPGeoserverParameterConfigure theParameterConfigure);
 
     /**
      * @param theTarget
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GeoserverDataStoreUploadFilesRequest}
      */
-    GeoserverUpdateDataStoreWithStoreNameRequest withTarget(@Nonnull(when = NEVER) GPGeoserverDataStoreFileExtension theTarget);
+    GeoserverDataStoreUploadFilesRequest withTarget(@Nonnull(when = NEVER) GPGeoserverDataStoreFileExtension theTarget);
 
     /**
      * @param theUpdate
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GeoserverDataStoreUploadFilesRequest}
      */
-    GeoserverUpdateDataStoreWithStoreNameRequest withUpdate(@Nonnull(when = NEVER) GPParameterUpdate theUpdate);
+    GeoserverDataStoreUploadFilesRequest withUpdate(@Nonnull(when = NEVER) GPParameterUpdate theUpdate);
 
     /**
      * @param theCharset
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GeoserverDataStoreUploadFilesRequest}
      */
-    GeoserverUpdateDataStoreWithStoreNameRequest withCharset(@Nonnull(when = NEVER) String theCharset);
+    GeoserverDataStoreUploadFilesRequest withCharset(@Nonnull(when = NEVER) String theCharset);
 
     /**
      * @param theFileName
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GeoserverDataStoreUploadFilesRequest}
      */
-    GeoserverUpdateDataStoreWithStoreNameRequest withFileName(@Nonnull(when = NEVER) String theFileName);
+    GeoserverDataStoreUploadFilesRequest withFileName(@Nonnull(when = NEVER) String theFileName);
 
     /**
      * @param theFile
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GeoserverDataStoreUploadFilesRequest}
      */
-    GeoserverUpdateDataStoreWithStoreNameRequest withFile(@Nonnull(when = NEVER) File theFile);
+    GeoserverDataStoreUploadFilesRequest withFile(@Nonnull(when = NEVER) File theFile);
 
 }

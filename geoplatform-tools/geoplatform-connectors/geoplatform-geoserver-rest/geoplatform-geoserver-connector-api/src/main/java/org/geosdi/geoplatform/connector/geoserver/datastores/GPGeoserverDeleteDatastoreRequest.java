@@ -57,7 +57,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverDeleteDatastoreRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteDatastoreRequest> implements GeoserverDeleteDatastoreRequest {
+class GPGeoserverDeleteDatastoreRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteDatastoreRequest> implements GeoserverDeleteDatastoreRequest {
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> datastoreName;
@@ -67,7 +67,8 @@ public class GPGeoserverDeleteDatastoreRequest extends GPJsonDeleteConnectorRequ
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    GPGeoserverDeleteDatastoreRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverDeleteDatastoreRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
+            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.workspaceName = withInitial(() -> null);
         this.datastoreName = withInitial(() -> null);

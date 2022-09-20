@@ -61,7 +61,7 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverUpdateDatastoreRequest extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateDatastoreRequest> implements GeoserverUpdateDatastoreRequest {
+class GPGeoserverUpdateDatastoreRequest extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateDatastoreRequest> implements GeoserverUpdateDatastoreRequest {
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> storeName;
@@ -71,7 +71,8 @@ public class GPGeoserverUpdateDatastoreRequest extends GPJsonPutConnectorRequest
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    GPGeoserverUpdateDatastoreRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverUpdateDatastoreRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
+            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.workspaceName = withInitial(() -> null);
         this.storeName = withInitial(() -> null);

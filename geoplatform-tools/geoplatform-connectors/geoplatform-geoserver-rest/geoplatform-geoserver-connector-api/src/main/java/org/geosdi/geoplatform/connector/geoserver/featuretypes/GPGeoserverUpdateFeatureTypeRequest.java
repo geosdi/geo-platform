@@ -60,7 +60,7 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverUpdateFeatureTypeRequest extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateFeatureTypeRequest> implements GeoserverUpdateFeatureTypeRequest {
+class GPGeoserverUpdateFeatureTypeRequest extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateFeatureTypeRequest> implements GeoserverUpdateFeatureTypeRequest {
 
     private final ThreadLocal<String> workspace;
     private final ThreadLocal<String> store;

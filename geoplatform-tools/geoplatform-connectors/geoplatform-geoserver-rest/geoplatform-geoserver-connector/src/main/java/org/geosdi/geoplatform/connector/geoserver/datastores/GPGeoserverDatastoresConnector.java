@@ -183,7 +183,7 @@ public abstract class GPGeoserverDatastoresConnector extends GPGeoserverStylesCo
         switch (version) {
             case V220x:
             case V221x:
-                return new GPGeoserverUpdateDataStoreWithStoreName(this, this.jacksonSupport);
+                return new GPGeoserverUpdateDataStoreWithStoreNameRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

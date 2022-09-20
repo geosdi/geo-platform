@@ -54,7 +54,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadDatastoresRequest extends GPGeoserverGetConnectorRequest<GPGeoserverLoadDatastores, GPGeoserverEmptyDatastores, GeoserverLoadDatastoresRequest> implements GeoserverLoadDatastoresRequest {
+class GPGeoserverLoadDatastoresRequest extends GPGeoserverGetConnectorRequest<GPGeoserverLoadDatastores, GPGeoserverEmptyDatastores, GeoserverLoadDatastoresRequest> implements GeoserverLoadDatastoresRequest {
 
     private final ThreadLocal<String> workspaceName;
 
@@ -62,7 +62,8 @@ public class GPGeoserverLoadDatastoresRequest extends GPGeoserverGetConnectorReq
      * @param server
      * @param theJacksonSupport
      */
-    GPGeoserverLoadDatastoresRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverLoadDatastoresRequest(@Nonnull(when = NEVER) GPServerConnector server,
+            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
         this.workspaceName = withInitial(() -> null);
     }

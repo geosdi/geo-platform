@@ -51,7 +51,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadWorkspaceDatastoreFeatureTypesRequest extends GPGeoserverLoadFeatureTypesRequest<GeoserverLoadWorkspaceDatastoreFeatureTypesRequest> implements GeoserverLoadWorkspaceDatastoreFeatureTypesRequest {
+class GPGeoserverLoadWorkspaceDatastoreFeatureTypesRequest extends GPGeoserverLoadFeatureTypesRequest<GeoserverLoadWorkspaceDatastoreFeatureTypesRequest> implements GeoserverLoadWorkspaceDatastoreFeatureTypesRequest {
 
     private final ThreadLocal<String> store;
 

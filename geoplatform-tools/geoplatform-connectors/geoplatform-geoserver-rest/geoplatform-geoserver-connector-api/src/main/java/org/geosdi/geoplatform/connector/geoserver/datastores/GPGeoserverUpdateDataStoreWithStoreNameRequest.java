@@ -70,7 +70,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateDataStoreWithStoreNameRequest> implements GeoserverUpdateDataStoreWithStoreNameRequest {
+class GPGeoserverUpdateDataStoreWithStoreNameRequest extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateDataStoreWithStoreNameRequest> implements GeoserverUpdateDataStoreWithStoreNameRequest {
 
     private final ThreadLocal<String> workspaceName = withInitial(() -> null);
     private final ThreadLocal<String> storeName = withInitial(() -> null);
@@ -87,13 +87,14 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    GPGeoserverUpdateDataStoreWithStoreName(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverUpdateDataStoreWithStoreNameRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
+            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
     }
 
     /**
      * @param theWorkspace
-     * @return {@link GPGeoserverUpdateDataStoreWithStoreName}
+     * @return {@link GPGeoserverUpdateDataStoreWithStoreNameRequest}
      */
     @Override
     public GeoserverUpdateDataStoreWithStoreNameRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
@@ -103,7 +104,7 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
 
     /**
      * @param theStore
-     * @return {@link GPGeoserverUpdateDataStoreWithStoreName}
+     * @return {@link GPGeoserverUpdateDataStoreWithStoreNameRequest}
      */
     @Override
     public GeoserverUpdateDataStoreWithStoreNameRequest withStore(@Nonnull(when = NEVER) String theStore) {
@@ -113,7 +114,7 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
 
     /**
      * @param theMethod
-     * @return {@link GPGeoserverUpdateDataStoreWithStoreName}
+     * @return {@link GPGeoserverUpdateDataStoreWithStoreNameRequest}
      */
     @Override
     public GeoserverUpdateDataStoreWithStoreNameRequest withMethod(@Nonnull(when = NEVER) GPGeoserverUploadMethod theMethod) {
@@ -123,7 +124,7 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
 
     /**
      * @param theFormat
-     * @return {@link GPGeoserverUpdateDataStoreWithStoreName}
+     * @return {@link GPGeoserverUpdateDataStoreWithStoreNameRequest}
      */
     @Override
     public GeoserverUpdateDataStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) GPGeoserverDataStoreFileExtension theFormat) {
@@ -133,7 +134,7 @@ public class GPGeoserverUpdateDataStoreWithStoreName extends GPJsonPutConnectorR
 
     /**
      * @param theParameterConfigure
-     * @return {@link GPGeoserverUpdateDataStoreWithStoreName}
+     * @return {@link GPGeoserverUpdateDataStoreWithStoreNameRequest}
      */
     @Override
     public GeoserverUpdateDataStoreWithStoreNameRequest withConfigure(@Nonnull(when = NEVER) GPGeoserverParameterConfigure theParameterConfigure) {

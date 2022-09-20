@@ -90,8 +90,7 @@ class GPGeoserverDataStoreUploadFilesRequest extends GPJsonPutConnectorRequest<B
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    GPGeoserverDataStoreUploadFilesRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
-            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverDataStoreUploadFilesRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
     }
 
@@ -130,8 +129,7 @@ class GPGeoserverDataStoreUploadFilesRequest extends GPJsonPutConnectorRequest<B
      * @return {@link GPGeoserverDataStoreUploadFilesRequest}
      */
     @Override
-    public GeoserverDataStoreUploadFilesRequest withFormat(
-            @Nonnull(when = NEVER) GPGeoserverDataStoreFileExtension theFormat) {
+    public GeoserverDataStoreUploadFilesRequest withFormat(@Nonnull(when = NEVER) GPGeoserverDataStoreFileExtension theFormat) {
         this.formatName.set(theFormat);
         return self();
     }
@@ -141,9 +139,8 @@ class GPGeoserverDataStoreUploadFilesRequest extends GPJsonPutConnectorRequest<B
      * @return {@link GPGeoserverDataStoreUploadFilesRequest}
      */
     @Override
-    public GeoserverDataStoreUploadFilesRequest withConfigure(
-            @Nonnull(when = NEVER) GPGeoserverParameterConfigure theParameterConfigure) {
-        this.configure.set(theParameterConfigure != null ? theParameterConfigure : ALL);
+    public GeoserverDataStoreUploadFilesRequest withConfigure(@Nonnull(when = NEVER) GPGeoserverParameterConfigure theParameterConfigure) {
+        this.configure.set((theParameterConfigure != null) ? theParameterConfigure : ALL);
         return self();
     }
 
@@ -152,8 +149,7 @@ class GPGeoserverDataStoreUploadFilesRequest extends GPJsonPutConnectorRequest<B
      * @return {@link GeoserverDataStoreUploadFilesRequest}
      */
     @Override
-    public GeoserverDataStoreUploadFilesRequest withTarget(
-            @Nonnull(when = NEVER) GPGeoserverDataStoreFileExtension theTarget) {
+    public GeoserverDataStoreUploadFilesRequest withTarget(@Nonnull(when = NEVER) GPGeoserverDataStoreFileExtension theTarget) {
         this.target.set(theTarget);
         return self();
     }

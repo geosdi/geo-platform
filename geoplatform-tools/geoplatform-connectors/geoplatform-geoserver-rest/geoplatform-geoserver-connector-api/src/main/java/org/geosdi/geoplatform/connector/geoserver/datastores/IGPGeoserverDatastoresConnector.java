@@ -70,12 +70,12 @@ public interface IGPGeoserverDatastoresConnector extends IGPGeoserverStylesConne
     GeoserverDeleteDatastoreRequest deleteDatastoreRequest();
 
     /**
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GeoserverDataStoreUploadFilesRequest}
      */
-    GeoserverUpdateDataStoreWithStoreNameRequest updateDataStoreWithStoreName();
+    GeoserverDataStoreUploadFilesRequest dataStoreUploadFiles();
 
     /**
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GeoserverDataStoreUploadFilesRequest}
      */
     GeoserverCreateDatastoreResourceRequest createDataStoreResource();
 }

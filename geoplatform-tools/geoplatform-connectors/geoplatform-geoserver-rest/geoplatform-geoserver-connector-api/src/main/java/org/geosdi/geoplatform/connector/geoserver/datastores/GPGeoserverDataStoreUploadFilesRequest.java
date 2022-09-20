@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.update.GPParameterUpdate
 import org.geosdi.geoplatform.connector.geoserver.model.upload.GPGeoserverUploadMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverStringQueryParam;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GeoserverRXQueryParamConsumer;
-import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverUpdateDataStoreWithStoreNameRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverDataStoreUploadFilesRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -64,20 +64,23 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.connector.geoserver.model.configure.GPGeoserverParameterConfigure.ALL;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
+ *
+ * <p>Uploads files to the data store, creating it if necessary</p>
  */
 @ThreadSafe
-class GPGeoserverUpdateDataStoreWithStoreNameRequest extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateDataStoreWithStoreNameRequest> implements GeoserverUpdateDataStoreWithStoreNameRequest {
+class GPGeoserverDataStoreUploadFilesRequest extends GPJsonPutConnectorRequest<Boolean, GeoserverDataStoreUploadFilesRequest> implements GeoserverDataStoreUploadFilesRequest {
 
     private final ThreadLocal<String> workspaceName = withInitial(() -> null);
     private final ThreadLocal<String> storeName = withInitial(() -> null);
     private final ThreadLocal<GPGeoserverUploadMethod> methodName = withInitial(() -> null);
     private final ThreadLocal<GPGeoserverDataStoreFileExtension> formatName = withInitial(() -> null);
     private final ThreadLocal<File> file = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverParameterConfigure> configure = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverParameterConfigure> configure = withInitial(() -> ALL);
     private final ThreadLocal<GPGeoserverDataStoreFileExtension> target = withInitial(() -> null);
     private final ThreadLocal<GPParameterUpdate> update = withInitial(() -> null);
     private final ThreadLocal<GPGeoserverStringQueryParam> charset = withInitial(() -> null);
@@ -87,107 +90,110 @@ class GPGeoserverUpdateDataStoreWithStoreNameRequest extends GPJsonPutConnectorR
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    GPGeoserverUpdateDataStoreWithStoreNameRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
+    GPGeoserverDataStoreUploadFilesRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
             @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
     }
 
     /**
      * @param theWorkspace
-     * @return {@link GPGeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GPGeoserverDataStoreUploadFilesRequest}
      */
     @Override
-    public GeoserverUpdateDataStoreWithStoreNameRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
+    public GeoserverDataStoreUploadFilesRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspaceName.set(theWorkspace);
         return self();
     }
 
     /**
      * @param theStore
-     * @return {@link GPGeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GPGeoserverDataStoreUploadFilesRequest}
      */
     @Override
-    public GeoserverUpdateDataStoreWithStoreNameRequest withStore(@Nonnull(when = NEVER) String theStore) {
+    public GeoserverDataStoreUploadFilesRequest withStore(@Nonnull(when = NEVER) String theStore) {
         this.storeName.set(theStore);
         return self();
     }
 
     /**
      * @param theMethod
-     * @return {@link GPGeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GPGeoserverDataStoreUploadFilesRequest}
      */
     @Override
-    public GeoserverUpdateDataStoreWithStoreNameRequest withMethod(@Nonnull(when = NEVER) GPGeoserverUploadMethod theMethod) {
+    public GeoserverDataStoreUploadFilesRequest withMethod(@Nonnull(when = NEVER) GPGeoserverUploadMethod theMethod) {
         this.methodName.set(theMethod);
         return self();
     }
 
     /**
      * @param theFormat
-     * @return {@link GPGeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GPGeoserverDataStoreUploadFilesRequest}
      */
     @Override
-    public GeoserverUpdateDataStoreWithStoreNameRequest withFormat(@Nonnull(when = NEVER) GPGeoserverDataStoreFileExtension theFormat) {
+    public GeoserverDataStoreUploadFilesRequest withFormat(
+            @Nonnull(when = NEVER) GPGeoserverDataStoreFileExtension theFormat) {
         this.formatName.set(theFormat);
         return self();
     }
 
     /**
      * @param theParameterConfigure
-     * @return {@link GPGeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GPGeoserverDataStoreUploadFilesRequest}
      */
     @Override
-    public GeoserverUpdateDataStoreWithStoreNameRequest withConfigure(@Nonnull(when = NEVER) GPGeoserverParameterConfigure theParameterConfigure) {
-        this.configure.set(theParameterConfigure);
+    public GeoserverDataStoreUploadFilesRequest withConfigure(
+            @Nonnull(when = NEVER) GPGeoserverParameterConfigure theParameterConfigure) {
+        this.configure.set(theParameterConfigure != null ? theParameterConfigure : ALL);
         return self();
     }
 
     /**
      * @param theTarget
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GeoserverDataStoreUploadFilesRequest}
      */
     @Override
-    public GeoserverUpdateDataStoreWithStoreNameRequest withTarget(@Nonnull(when = NEVER) GPGeoserverDataStoreFileExtension theTarget) {
+    public GeoserverDataStoreUploadFilesRequest withTarget(
+            @Nonnull(when = NEVER) GPGeoserverDataStoreFileExtension theTarget) {
         this.target.set(theTarget);
         return self();
     }
 
     /**
      * @param theUpdate
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GeoserverDataStoreUploadFilesRequest}
      */
     @Override
-    public GeoserverUpdateDataStoreWithStoreNameRequest withUpdate(@Nonnull(when = NEVER) GPParameterUpdate theUpdate) {
+    public GeoserverDataStoreUploadFilesRequest withUpdate(@Nonnull(when = NEVER) GPParameterUpdate theUpdate) {
         this.update.set(theUpdate);
         return self();
     }
 
     /**
      * @param theCharset
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GeoserverDataStoreUploadFilesRequest}
      */
     @Override
-    public GeoserverUpdateDataStoreWithStoreNameRequest withCharset(@Nonnull(when = NEVER) String theCharset) {
+    public GeoserverDataStoreUploadFilesRequest withCharset(@Nonnull(when = NEVER) String theCharset) {
         this.charset.set(new GPGeoserverStringQueryParam("charset", theCharset));
         return self();
     }
 
     /**
      * @param theFileName
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GeoserverDataStoreUploadFilesRequest}
      */
     @Override
-    public GeoserverUpdateDataStoreWithStoreNameRequest withFileName(@Nonnull(when = NEVER) String theFileName) {
+    public GeoserverDataStoreUploadFilesRequest withFileName(@Nonnull(when = NEVER) String theFileName) {
         this.filename.set(new GPGeoserverStringQueryParam("filename", theFileName));
         return self();
     }
 
     /**
      * @param theFile
-     * @return {@link GeoserverUpdateDataStoreWithStoreNameRequest}
+     * @return {@link GeoserverDataStoreUploadFilesRequest}
      */
     @Override
-    public GeoserverUpdateDataStoreWithStoreNameRequest withFile(@Nonnull(when = NEVER) File theFile) {
+    public GeoserverDataStoreUploadFilesRequest withFile(@Nonnull(when = NEVER) File theFile) {
         this.file.set(theFile);
         return self();
     }

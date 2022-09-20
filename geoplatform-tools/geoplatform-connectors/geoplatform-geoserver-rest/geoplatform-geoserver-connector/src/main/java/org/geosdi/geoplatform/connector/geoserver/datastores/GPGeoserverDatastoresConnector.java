@@ -179,11 +179,11 @@ public abstract class GPGeoserverDatastoresConnector extends GPGeoserverStylesCo
      * @return {@link GeoserverUpdateCoverageStoreWithStoreNameRequest}
      */
     @Override
-    public GeoserverUpdateDataStoreWithStoreNameRequest updateDataStoreWithStoreName() {
+    public GeoserverDataStoreUploadFilesRequest dataStoreUploadFiles() {
         switch (version) {
             case V220x:
             case V221x:
-                return new GPGeoserverUpdateDataStoreWithStoreNameRequest(this, this.jacksonSupport);
+                return new GPGeoserverDataStoreUploadFilesRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

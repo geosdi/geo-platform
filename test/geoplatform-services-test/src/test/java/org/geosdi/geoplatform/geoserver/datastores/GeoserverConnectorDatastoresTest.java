@@ -143,14 +143,10 @@ public class GeoserverConnectorDatastoresTest extends GeoserverConnectorTest {
         assertTrue("#################FILE_EXSIST", file.exists());
         logger.info("#############FILE: {}\n", file.toURI());
         logger.info("##################{}\n", FilenameUtils.getBaseName(file.toURI().toString()));
-        if(this.geoserverConnectorStore.updateDataStoreWithStoreName()
-                .withWorkspace("sf")
-                .withStore("store_vito")
+        if (this.geoserverConnectorStore.dataStoreUploadFiles().withWorkspace("sf").withStore("store_vito")
                 .withMethod(GPGeoserverUploadMethod.FILE)
                 //.withConfigure(GPGeoserverParameterConfigure.FIRST)
-                .withCharset("UTF-8")
-                .withFormat(GPGeoserverDataStoreFileExtension.SHP)
-                .withFileName("admin_shp_comuni")
+                .withCharset("UTF-8").withFormat(GPGeoserverDataStoreFileExtension.SHP).withFileName("admin_shp_comuni")
                 .withFile(file).getResponse()) {
             logger.info("############ERRO TO CREATE STORE");
         }

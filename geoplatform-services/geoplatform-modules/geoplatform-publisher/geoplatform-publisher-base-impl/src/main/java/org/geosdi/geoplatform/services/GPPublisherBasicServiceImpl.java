@@ -1637,14 +1637,11 @@ public class GPPublisherBasicServiceImpl implements IGPPublisherService, Initial
                     "Unable to run: you can't force GeoServer to use an srs which is null");
         }
         try{
-            if(!this.geoserverConnectorStore.updateDataStoreWithStoreName()
-            .withWorkspace(workspace)
-            .withStore(dataStoreName)
-            .withMethod(GPGeoserverUploadMethod.FILE)
-            .withCharset(charset)
-            .withFormat(GPGeoserverDataStoreFileExtension.SHP)
-            .withFileName((dataStoreName != null) ? dataStoreName : FilenameUtils.getBaseName(shapeFile.toString()))
-            .withFile(shapeFile).getResponse()) {
+            if (!this.geoserverConnectorStore.dataStoreUploadFiles().withWorkspace(workspace).withStore(dataStoreName)
+                    .withMethod(GPGeoserverUploadMethod.FILE).withCharset(charset)
+                    .withFormat(GPGeoserverDataStoreFileExtension.SHP).withFileName(
+                            (dataStoreName != null) ? dataStoreName : FilenameUtils.getBaseName(shapeFile.toString()))
+                    .withFile(shapeFile).getResponse()) {
                 logger.error("Unable to create data store for shapefile: {}\n", shapeFile.toURI());
                 return FALSE;
             }

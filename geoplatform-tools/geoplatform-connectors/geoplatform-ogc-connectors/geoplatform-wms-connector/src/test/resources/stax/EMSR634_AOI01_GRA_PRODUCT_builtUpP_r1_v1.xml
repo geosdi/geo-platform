@@ -1,0 +1,1008 @@
+<wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:geosdi="http://geosdi" xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://geosdi http://150.145.133.69:8080/geoserver/geosdi/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=geosdi%3AEMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 http://www.opengis.net/wfs http://150.145.133.69:8080/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+    <gml:boundedBy>
+        <gml:null>unknown</gml:null>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.1">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.64390195,43.54546773
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>11-Residential Buildings</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.2">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.6685267,43.52795967
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>11-Residential Buildings</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.3">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.65949165,43.53773452
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>11-Residential Buildings</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.4">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.63468709,43.54853105
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>11-Residential Buildings</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.5">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.63499835,43.54803106
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>11-Residential Buildings</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.6">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.6348929,43.54796615
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>11-Residential Buildings</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.7">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.64741573,43.53691151
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>11-Residential Buildings</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.8">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.66165499,43.54549801
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>11-Residential Buildings</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.9">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.56527125,43.5141183
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>11-Residential Buildings</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.10">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.65679582,43.54738942
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>12-Non-residential Buildings</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>1223-Fire station</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.11">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.6810402,43.5268394
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>12-Non-residential Buildings</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>123-Wholesale and retail trade buildings</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.12">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.62405808,43.48090869
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>12-Non-residential Buildings</geosdi:obj_type>
+            <geosdi:name>Hygron</geosdi:name>
+            <geosdi:info>123-Wholesale and retail trade buildings</geosdi:info>
+            <geosdi:damage_gra>Damaged</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.13">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.63461205,43.50142235
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>11-Residential Buildings</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>1</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.14">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.647505,43.5372238
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>12-Non-residential Buildings</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>123-Wholesale and retail trade buildings</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.15">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.64046404,43.51642283
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>12-Non-residential Buildings</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>1251-Industrial buildings</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.16">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.65860512,43.54283355
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>12-Non-residential Buildings</geosdi:obj_type>
+            <geosdi:name>Istituto superiore</geosdi:name>
+            <geosdi:info>1263-School, university and research buildings</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.17">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.67289777,43.53011816
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>12-Non-residential Buildings</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>1271-Non-residential farm buildings</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.18">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.67320268,43.52969547
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>12-Non-residential Buildings</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>1271-Non-residential farm buildings</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.19">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.67380805,43.52996087
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>12-Non-residential Buildings</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>1271-Non-residential farm buildings</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.20">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.6489596,43.54706499
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>12-Non-residential Buildings</geosdi:obj_type>
+            <geosdi:name>Concattedrale di Cagli</geosdi:name>
+            <geosdi:info>1272-Buildings used as places of worship and for religious activities</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.21">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.65047075,43.54812912
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>12-Non-residential Buildings</geosdi:obj_type>
+            <geosdi:name>Cappella Tiranni</geosdi:name>
+            <geosdi:info>1272-Buildings used as places of worship and for religious activities</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.22">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.64688974,43.53652197
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>12-Non-residential Buildings</geosdi:obj_type>
+            <geosdi:name>San Geronzio</geosdi:name>
+            <geosdi:info>1272-Buildings used as places of worship and for religious activities</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.23">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.65020598,43.54822345
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>12-Non-residential Buildings</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>1272-Buildings used as places of worship and for religious activities</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.24">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.61776628,43.5172583
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>12-Non-residential Buildings</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>1274-Other buildings not elsewhere classified</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.25">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.5417239,43.43832937
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.26">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.54209916,43.43779955
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.27">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.54200006,43.43807136
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.28">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.5422498,43.4379462
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.29">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.59924965,43.42405512
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.30">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.62078831,43.43700121
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.31">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.62068876,43.43710432
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.32">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.63048901,43.43742113
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.33">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.6311971,43.43271465
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.34">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.63112815,43.4329479
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.35">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.63124751,43.43297575
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.36">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.63158632,43.43279836
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.37">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.63131738,43.4353828
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.38">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.63163341,43.43418856
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.39">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.63175846,43.43439626
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.40">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.63176054,43.43479175
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.41">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.63123102,43.43579008
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.42">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.63200862,43.43451444
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.43">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.63282149,43.43453635
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.44">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.62733185,43.44714297
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.45">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.63053033,43.43778319
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.46">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.63055595,43.43927765
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.47">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.63032965,43.43972495
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.48">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.63049567,43.43946116
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.49">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.6305717,43.43948006
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+    <gml:featureMember>
+        <geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 fid="EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.50">
+            <geosdi:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
+                        12.63059485,43.43983845
+                    </gml:coordinates>
+                </gml:Point>
+            </geosdi:the_geom>
+            <geosdi:obj_type>995-Unclassified</geosdi:obj_type>
+            <geosdi:name>Unknown</geosdi:name>
+            <geosdi:info>997-Not Applicable</geosdi:info>
+            <geosdi:damage_gra>No visible damage</geosdi:damage_gra>
+            <geosdi:det_method>Semi-automatic extraction</geosdi:det_method>
+            <geosdi:notation>Building point</geosdi:notation>
+            <geosdi:or_src_id>994</geosdi:or_src_id>
+            <geosdi:dmg_src_id>2</geosdi:dmg_src_id>
+            <geosdi:cd_value>Not Applicable</geosdi:cd_value>
+        </geosdi:EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1>
+    </gml:featureMember>
+</wfs:FeatureCollection>

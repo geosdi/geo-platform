@@ -39,7 +39,8 @@ import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorReque
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.annotation.meta.When;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -51,24 +52,23 @@ public interface GeoserverDeleteCoverageRequest extends GPJsonConnectorRequest<B
      * @param theWorkspace
      * @return {@link GeoserverDeleteCoverageRequest}
      */
-    GeoserverDeleteCoverageRequest withWorkspace(@Nonnull(when = When.NEVER) String theWorkspace);
+    GeoserverDeleteCoverageRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
 
     /**
      * @param theCoverage
      * @return
      */
-    GeoserverDeleteCoverageRequest withCoverage(@Nonnull(when = When.NEVER) String theCoverage);
+    GeoserverDeleteCoverageRequest withCoverage(@Nonnull(when = NEVER) String theCoverage);
 
     /**
      * @param theStore
      * @return
      */
-    GeoserverDeleteCoverageRequest withCoverageStore(@Nonnull(when = When.NEVER) String theStore);
+    GeoserverDeleteCoverageRequest withCoverageStore(@Nonnull(when = NEVER) String theStore);
 
     /**
      * @param theRecurse
      * @return {@link GeoserverDeleteCoverageRequest}
      */
     GeoserverDeleteCoverageRequest withRecurse(@Nullable Boolean theRecurse);
-
 }

@@ -85,7 +85,7 @@ class GPGeoserverLoadCoveragesRequest extends GPGeoserverGetConnectorRequest<GPG
     /**
      * <p>If the list parameter value is equal to “all” all the coverages available in the data source
      * (even the non published ones) will be returned. The Class returned is an istance
-     * of {@link GPGeoserverAllCoverages}  class.
+     * of {@link GPGeoserverAllCoverages} class.
      * </p>
      *
      * @param theQueryList

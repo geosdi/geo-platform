@@ -36,10 +36,8 @@
 package org.geosdi.geoplatform.connector.store.workspace.coverages;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageListRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoveragesRequest;
-import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.*;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.*;
+import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.GPGeoserverUpdateStoreCoverageRequest;
 import org.geosdi.geoplatform.connector.store.workspace.GeoserverWorkspacesConnectorStore;
 
 /**
@@ -75,23 +73,23 @@ public abstract class GeoserverCoveragesConnectorStore extends GeoserverWorkspac
      * @return {@link GeoserverLoadCoverageRequest}
      */
     @Override
-    public GPGeoserverLoadStoreCoverageRequest loadWorkspaceStoreCoverageRequest() {
+    public GeoserverLoadStoreCoverageRequest loadWorkspaceStoreCoverageRequest() {
         return this.server.loadWorkspaceStoreCoverageRequest();
     }
 
     /**
-     * @return {@link GPGeoserverLoadCoverageWithUrlRequest}
+     * @return {@link GeoserverLoadCoverageWithUrlRequest}
      */
     @Override
-    public GPGeoserverLoadCoverageWithUrlRequest loadCoverageInfoWithUrl() {
+    public GeoserverLoadCoverageWithUrlRequest loadCoverageInfoWithUrl() {
         return this.server.loadCoverageInfoWithUrl();
     }
 
     /**
-     * @return {@link GPGeoserverDeleteCoverageRequest}
+     * @return {@link GeoserverDeleteCoverageRequest}
      */
     @Override
-    public GPGeoserverDeleteCoverageRequest deleteCoverageInCoverageStore() {
+    public GeoserverDeleteCoverageRequest deleteCoverageInCoverageStore() {
         return this.server.deleteCoverageInCoverageStoreRequest();
     }
 
@@ -103,9 +101,9 @@ public abstract class GeoserverCoveragesConnectorStore extends GeoserverWorkspac
     }
 
     /**
-     * @return {@link GPGeoserverCreateCoverageRequest}
+     * @return {@link GeoserverCreateCoverageRequest}
      */
-    public GPGeoserverCreateCoverageRequest createCoverageRequest() {
+    public GeoserverCreateCoverageRequest createCoverageRequest() {
         return this.server.createCoverageRequest();
     }
 

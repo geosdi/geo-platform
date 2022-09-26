@@ -89,7 +89,6 @@ public class GPGeoserverLoadWorkspaceLayerRequest extends GPGeoserverExsistReque
     @Override
     public GeoserverLoadWorkspaceLayerRequest withLayerName(@Nonnull(when = NEVER) String theLayerName) {
         this.layerName.set(theLayerName);
-        super.init();
         return self();
     }
 

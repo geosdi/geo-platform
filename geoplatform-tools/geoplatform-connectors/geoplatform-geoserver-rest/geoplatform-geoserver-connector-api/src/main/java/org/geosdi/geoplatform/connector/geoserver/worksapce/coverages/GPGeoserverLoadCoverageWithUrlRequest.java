@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import javax.annotation.Nonnull;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -53,7 +54,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverLoadCoverageWithUrlRequest extends GPGeoserverExsistRequest<GPGeoserverCoverageInfo, GeoserverLoadCoverageWithUrlRequest> implements GeoserverLoadCoverageWithUrlRequest {
+class GPGeoserverLoadCoverageWithUrlRequest extends GPGeoserverExsistRequest<GPGeoserverCoverageInfo, GeoserverLoadCoverageWithUrlRequest> implements GeoserverLoadCoverageWithUrlRequest {
 
     private final ThreadLocal<String> urlPath;
 
@@ -63,7 +64,7 @@ public class GPGeoserverLoadCoverageWithUrlRequest extends GPGeoserverExsistRequ
      */
     GPGeoserverLoadCoverageWithUrlRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
-        this.urlPath = ThreadLocal.withInitial(() -> null);
+        this.urlPath = withInitial(() -> null);
     }
 
     /**
@@ -73,7 +74,6 @@ public class GPGeoserverLoadCoverageWithUrlRequest extends GPGeoserverExsistRequ
     @Override
     public GeoserverLoadCoverageWithUrlRequest withUrl(@Nonnull(when = NEVER) String theUrl) {
         this.urlPath.set(theUrl);
-        super.init();
         return self();
     }
 

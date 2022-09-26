@@ -36,9 +36,13 @@
 package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 
 import com.google.common.io.CharStreams;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
+
+import net.jcip.annotations.ThreadSafe;
+
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverageInfo;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverCreateCoverageRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
@@ -59,14 +63,18 @@ import static org.apache.http.entity.ContentType.APPLICATION_JSON;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverCreateCoverageRequest extends GPJsonPostConnectorRequest<Boolean, GeoserverCreateCoverageRequest> implements GeoserverCreateCoverageRequest {
+@ThreadSafe
+class GPGeoserverCreateCoverageRequest extends GPJsonPostConnectorRequest<Boolean, GeoserverCreateCoverageRequest> implements GeoserverCreateCoverageRequest {
 
     private final ThreadLocal<String> workspaceName;
     private final ThreadLocal<String> coverageStoreName;
     private final ThreadLocal<GPGeoserverCoverageInfo> coverageBody;
 
-    public GPGeoserverCreateCoverageRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector,
-            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    /**
+     * @param theServerConnector
+     * @param theJacksonSupport
+     */
+    GPGeoserverCreateCoverageRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
         this.workspaceName = withInitial(() -> null);
         this.coverageStoreName = withInitial(() -> null);
@@ -98,7 +106,7 @@ public class GPGeoserverCreateCoverageRequest extends GPJsonPostConnectorRequest
      * @return {@link GeoserverCreateCoverageRequest}
      */
     @Override
-    public GeoserverCreateCoverageRequest withCoverageBody(GPGeoserverCoverageInfo theGPGeoserverCoverageInfo) {
+    public GeoserverCreateCoverageRequest withCoverageBody(@Nonnull(when = NEVER) GPGeoserverCoverageInfo theGPGeoserverCoverageInfo) {
         this.coverageBody.set(theGPGeoserverCoverageInfo);
         return self();
     }
@@ -109,19 +117,15 @@ public class GPGeoserverCreateCoverageRequest extends GPJsonPostConnectorRequest
     @Override
     protected String createUriPath() throws Exception {
         String workspace = this.workspaceName.get();
-        checkArgument((workspace != null) && !(workspace.trim().isEmpty()),
-                "The Parameter workspace must not be null or an empty string");
+        checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string");
         String coverageStore = this.coverageStoreName.get();
-        checkArgument((coverageStore != null) && !(coverageStore.trim().isEmpty()),
-                "The Parameter coverageStore must not be null or an empty string.");
+        checkArgument((coverageStore != null) && !(coverageStore.trim().isEmpty()), "The Parameter coverageStore must not be null or an empty string.");
         String baseURI = this.serverURI.toString();
-        String path = ((baseURI.endsWith("/") ?
+        return new URIBuilder(((baseURI.endsWith("/") ?
                 baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore)
                         .concat("/coverages") :
                 baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore)
-                        .concat("/coverages")));
-        URIBuilder uriBuilder = new URIBuilder(path);
-        return uriBuilder.build().toString();
+                        .concat("/coverages")))).build().toString();
     }
 
     /**

@@ -40,7 +40,8 @@ import org.geosdi.geoplatform.connector.geoserver.request.exsist.GeoserverExsist
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -52,6 +53,5 @@ public interface GeoserverLoadCoverageWithUrlRequest extends GPJsonConnectorRequ
      * @param theUrl
      * @return {@link GeoserverLoadCoverageWithUrlRequest}
      */
-    GeoserverLoadCoverageWithUrlRequest withUrl(@Nonnull(when = When.NEVER) String theUrl);
-
+    GeoserverLoadCoverageWithUrlRequest withUrl(@Nonnull(when = NEVER) String theUrl);
 }

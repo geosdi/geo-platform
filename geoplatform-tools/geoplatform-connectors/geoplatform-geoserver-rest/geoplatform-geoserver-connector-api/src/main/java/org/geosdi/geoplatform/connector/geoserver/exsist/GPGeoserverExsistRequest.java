@@ -68,13 +68,6 @@ public abstract class GPGeoserverExsistRequest<T, ConnectorRequest extends GPJso
     }
 
     /**
-     */
-    public void init() {
-        this.exist.set(null);
-        this.response.set(null);
-    }
-
-    /**
      * @return {@link Boolean}
      */
     @Override
@@ -119,5 +112,19 @@ public abstract class GPGeoserverExsistRequest<T, ConnectorRequest extends GPJso
             this.exist.set(FALSE);
             return null;
         }
+    }
+
+    /**
+     * @return {@link ConnectorRequest}
+     */
+    @Override
+    protected final ConnectorRequest self() {
+        this.init();
+        return super.self();
+    }
+
+    private void init() {
+        this.exist.set(null);
+        this.response.set(null);
     }
 }

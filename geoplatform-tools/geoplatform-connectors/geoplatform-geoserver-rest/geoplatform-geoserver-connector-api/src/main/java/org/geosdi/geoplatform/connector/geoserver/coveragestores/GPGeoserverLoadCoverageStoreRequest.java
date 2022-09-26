@@ -75,7 +75,6 @@ public class GPGeoserverLoadCoverageStoreRequest extends GPGeoserverExsistReques
     @Override
     public GeoserverLoadCoverageStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspace.set(theWorkspace);
-        super.init();
         return self();
     }
 

@@ -57,7 +57,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverDeleteCoverageRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteCoverageRequest> implements GeoserverDeleteCoverageRequest {
+class GPGeoserverDeleteCoverageRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteCoverageRequest> implements GeoserverDeleteCoverageRequest {
 
     private final ThreadLocal<String> workspace;
     private final ThreadLocal<String> coverage;

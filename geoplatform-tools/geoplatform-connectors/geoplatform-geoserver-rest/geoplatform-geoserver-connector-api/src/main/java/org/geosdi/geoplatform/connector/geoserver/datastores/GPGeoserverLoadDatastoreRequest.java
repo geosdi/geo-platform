@@ -78,7 +78,6 @@ class GPGeoserverLoadDatastoreRequest extends GPGeoserverExsistRequest<GPGeoserv
     @Override
     public GeoserverLoadDatastoreRequest withWorkspaceName(String theWorkspaceName) {
         this.workspaceName.set(theWorkspaceName);
-        super.init();
         return self();
     }
 

@@ -71,7 +71,6 @@ public class GPGeoserverLoadLayerRequest extends GPGeoserverExsistRequest<Geoser
      */
     public GeoserverLoadLayerRequest withName(@Nonnull(when = NEVER) String theName) {
         this.name.set(theName);
-        super.init();
         return self();
     }
 

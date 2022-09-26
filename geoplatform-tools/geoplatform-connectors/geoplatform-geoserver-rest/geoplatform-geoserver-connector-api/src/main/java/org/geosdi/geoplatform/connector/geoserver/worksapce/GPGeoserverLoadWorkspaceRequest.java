@@ -77,7 +77,6 @@ public class GPGeoserverLoadWorkspaceRequest extends GPGeoserverExsistRequest<GP
      */
     public GeoserverLoadWorkspaceRequest withWorkspaceName(String theWorkspaceName) {
         this.workspaceName.set(theWorkspaceName);
-        super.init();
         return self();
     }
 

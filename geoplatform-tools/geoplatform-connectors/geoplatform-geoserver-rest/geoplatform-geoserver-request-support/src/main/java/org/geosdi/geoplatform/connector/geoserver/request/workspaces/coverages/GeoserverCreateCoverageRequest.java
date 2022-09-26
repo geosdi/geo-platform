@@ -64,6 +64,5 @@ public interface GeoserverCreateCoverageRequest extends GPJsonConnectorRequest<B
      * @param theGPGeoserverCoverageInfo
      * @return {@link GeoserverCreateCoverageRequest}
      */
-    GeoserverCreateCoverageRequest withCoverageBody(GPGeoserverCoverageInfo theGPGeoserverCoverageInfo);
-
+    GeoserverCreateCoverageRequest withCoverageBody(@Nonnull(when = NEVER) GPGeoserverCoverageInfo theGPGeoserverCoverageInfo);
 }

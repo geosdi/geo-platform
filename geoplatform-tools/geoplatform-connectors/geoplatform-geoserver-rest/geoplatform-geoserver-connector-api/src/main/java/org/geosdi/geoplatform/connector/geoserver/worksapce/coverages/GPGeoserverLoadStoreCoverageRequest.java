@@ -56,12 +56,12 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverLoadStoreCoverageRequest extends GPGeoserverExsistRequest<GPGeoserverCoverageInfo, GeoserverLoadStoreCoverageRequest> implements GeoserverLoadStoreCoverageRequest {
+class GPGeoserverLoadStoreCoverageRequest extends GPGeoserverExsistRequest<GPGeoserverCoverageInfo, GeoserverLoadStoreCoverageRequest> implements GeoserverLoadStoreCoverageRequest {
 
-    private final ThreadLocal<String> workspace;
-    private final ThreadLocal<String> coverage;
-    private final ThreadLocal<String> store;
-    private final ThreadLocal<Boolean> quietOnNotFound;
+    private final ThreadLocal<String> workspace = withInitial(() -> null);
+    private final ThreadLocal<String> coverage = withInitial(() -> null);
+    private final ThreadLocal<String> store = withInitial(() -> null);
+    private final ThreadLocal<Boolean> quietOnNotFound = withInitial(() -> TRUE);
 
     /**
      * @param server
@@ -69,10 +69,6 @@ public class GPGeoserverLoadStoreCoverageRequest extends GPGeoserverExsistReques
      */
     GPGeoserverLoadStoreCoverageRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
-        this.workspace = withInitial(() -> null);
-        this.coverage = withInitial(() -> null);
-        this.store = withInitial(() -> null);
-        this.quietOnNotFound = withInitial(() -> TRUE);
     }
 
     /**
@@ -82,7 +78,6 @@ public class GPGeoserverLoadStoreCoverageRequest extends GPGeoserverExsistReques
     @Override
     public GeoserverLoadStoreCoverageRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspace.set(theWorkspace);
-        super.init();
         return self();
     }
 

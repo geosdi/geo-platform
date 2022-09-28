@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.connector.store.about;
 import org.geosdi.geoplatform.connector.api.GeoPlatformConnector;
 import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutManifestRequest;
 import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutStatusRequest;
+import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutSystemStatusRequest;
 import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutVersionRequest;
 
 
@@ -61,4 +62,9 @@ public interface GPGeoserverAboutConnectorStore extends GeoPlatformConnector {
      * @return {@link GPGeoserverAboutManifestRequest}
      */
     GPGeoserverAboutManifestRequest createAboutManifestRequest();
+
+    /**
+     * @return {@link GPGeoserverAboutSystemStatusRequest}
+     */
+    GPGeoserverAboutSystemStatusRequest createAboutSystemStatusRequest();
 }

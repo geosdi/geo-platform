@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connector.jackson;
 
 import org.geosdi.geoplatform.connector.geoserver.model.about.manifest.GPGeoserverAboutManifest;
+import org.geosdi.geoplatform.connector.geoserver.model.about.manifest.GPGeoserverAboutManifestEntry;
 import org.geosdi.geoplatform.connector.geoserver.model.about.version.GPGeoserverAboutVersion;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -96,5 +97,23 @@ public class GPGeoserverAboutJacksonTest {
         StringWriter writer = new StringWriter();
         jacksonXmlSupport.getDefaultMapper().writeValue(writer, geoserverAboutManifest);
         logger.info("#########################GEOSERVER_ABOUT_MANIFEST_XML : \n{}\n", writer);
+    }
+
+    @Test
+    public void c_unmarshallGeoserverAboutManifestTest() throws Exception {
+        GPGeoserverAboutManifest geoserverAboutManifest = jacksonXmlSupport.getDefaultMapper()
+                .readValue(new File(of(new File(".").getCanonicalPath() , "src", "test", "resources",
+                        "GeoserverAboutManifest.xml")
+                        .collect(joining(separator))), GPGeoserverAboutManifest.class);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_ABOUT_MANIFEST : {}", geoserverAboutManifest);
+    }
+
+    @Test
+    public void d_unmarshallGeoserverAboutManifestEntryTest() throws Exception {
+        GPGeoserverAboutManifestEntry geoserverAboutManifest = jacksonXmlSupport.getDefaultMapper()
+                .readValue(new File(of(new File(".").getCanonicalPath() , "src", "test", "resources",
+                        "GeoserverAboutManifestEntry.xml")
+                        .collect(joining(separator))), GPGeoserverAboutManifestEntry.class);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_ABOUT_MANIFEST_ENTRY : {}", geoserverAboutManifest);
     }
 }

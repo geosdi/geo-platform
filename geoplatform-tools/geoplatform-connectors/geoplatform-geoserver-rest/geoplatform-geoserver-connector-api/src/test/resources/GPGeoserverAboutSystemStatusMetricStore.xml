@@ -1,0 +1,312 @@
+<metrics>
+    <metric>
+        <available>false</available>
+        <description>Operating system</description>
+        <name>OPERATING_SYSTEM</name>
+        <unit/>
+        <category>SYSTEM</category>
+        <identifier>OPERATING_SYSTEM</identifier>
+        <priority>1</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>Uptime</description>
+        <name>SYSTEM_UPTIME</name>
+        <unit>sec</unit>
+        <category>SYSTEM</category>
+        <identifier>SYSTEM_UPTIME</identifier>
+        <priority>2</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>System average load 1 minute</description>
+        <name>SYSTEM_AVERAGE_LOAD_1</name>
+        <unit/>
+        <category>SYSTEM</category>
+        <identifier>SYSTEM_AVERAGE_LOAD_1</identifier>
+        <priority>3</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>System average load 5 minutes</description>
+        <name>SYSTEM_AVERAGE_LOAD_5</name>
+        <unit/>
+        <category>SYSTEM</category>
+        <identifier>SYSTEM_AVERAGE_LOAD_5</identifier>
+        <priority>3</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>System average load 15 minutes</description>
+        <name>SYSTEM_AVERAGE_LOAD_15</name>
+        <unit/>
+        <category>SYSTEM</category>
+        <identifier>SYSTEM_AVERAGE_LOAD_15</identifier>
+        <priority>3</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>Number of physical CPUs</description>
+        <name>PHYSICAL_CPUS</name>
+        <unit/>
+        <category>CPU</category>
+        <identifier>PHYSICAL_CPUS</identifier>
+        <priority>100</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>Number of logical CPUs</description>
+        <name>LOGICAL_CPUS</name>
+        <unit/>
+        <category>CPU</category>
+        <identifier>LOGICAL_CPUS</identifier>
+        <priority>101</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>Number of running process</description>
+        <name>RUNNING_PROCESS</name>
+        <unit/>
+        <category>CPU</category>
+        <identifier>RUNNING_PROCESS</identifier>
+        <priority>102</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>Number of running threads</description>
+        <name>RUNNING_THREADS</name>
+        <unit/>
+        <category>CPU</category>
+        <identifier>RUNNING_THREADS</identifier>
+        <priority>103</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>CPU average load</description>
+        <name>CPU_LOAD</name>
+        <unit>%</unit>
+        <category>CPU</category>
+        <identifier>CPU_LOAD</identifier>
+        <priority>104</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>CPU load</description>
+        <name>PER_CPU_LOAD</name>
+        <unit>%</unit>
+        <category>CPU</category>
+        <identifier>PER_CPU_LOAD</identifier>
+        <priority>105</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>Used physical memory</description>
+        <name>MEMORY_USED</name>
+        <unit>%</unit>
+        <category>MEMORY</category>
+        <identifier>MEMORY_USED</identifier>
+        <priority>200</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>Total physical memory</description>
+        <name>MEMORY_TOTAL</name>
+        <unit>bytes</unit>
+        <category>MEMORY</category>
+        <identifier>MEMORY_TOTAL</identifier>
+        <priority>201</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>Free physical memory</description>
+        <name>MEMORY_FREE</name>
+        <unit>bytes</unit>
+        <category>MEMORY</category>
+        <identifier>MEMORY_FREE</identifier>
+        <priority>201</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>Used swap memory</description>
+        <name>SWAP_USED</name>
+        <unit>%</unit>
+        <category>SWAP</category>
+        <identifier>SWAP_USED</identifier>
+        <priority>300</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>Total swap memory</description>
+        <name>SWAP_TOTAL</name>
+        <unit>bytes</unit>
+        <category>SWAP</category>
+        <identifier>SWAP_TOTAL</identifier>
+        <priority>301</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>Free swap memory</description>
+        <name>SWAP_FREE</name>
+        <unit>bytes</unit>
+        <category>SWAP</category>
+        <identifier>SWAP_FREE</identifier>
+        <priority>302</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>File system usage</description>
+        <name>FILE_SYSTEM_TOTAL_USAGE</name>
+        <unit>%</unit>
+        <category>FILE_SYSTEM</category>
+        <identifier>FILE_SYSTEM_TOTAL_USAGE</identifier>
+        <priority>400</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>Partition space used</description>
+        <name>PARTITION_USED</name>
+        <unit>%</unit>
+        <category>FILE_SYSTEM</category>
+        <identifier>PARTITION_USED</identifier>
+        <priority>500</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>Partition total space</description>
+        <name>PARTITION_TOTAL</name>
+        <unit>bytes</unit>
+        <category>FILE_SYSTEM</category>
+        <identifier>PARTITION_TOTAL</identifier>
+        <priority>501</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>Partition free space</description>
+        <name>PARTITION_FREE</name>
+        <unit>bytes</unit>
+        <category>FILE_SYSTEM</category>
+        <identifier>PARTITION_FREE</identifier>
+        <priority>502</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>Network interfaces send</description>
+        <name>NETWORK_INTERFACES_SEND</name>
+        <unit>bytes</unit>
+        <category>NETWORK</category>
+        <identifier>NETWORK_INTERFACES_SEND</identifier>
+        <priority>800</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>Network interfaces received</description>
+        <name>NETWORK_INTERFACES_RECEIVED</name>
+        <unit>bytes</unit>
+        <category>NETWORK</category>
+        <identifier>NETWORK_INTERFACES_RECEIVED</identifier>
+        <priority>801</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>Network interface band usage</description>
+        <name>NETWORK_INTERFACE_SEND</name>
+        <unit>bytes</unit>
+        <category>NETWORK</category>
+        <identifier>NETWORK_INTERFACE_SEND</identifier>
+        <priority>900</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>Network interface available band</description>
+        <name>NETWORK_INTERFACE_RECEIVED</name>
+        <unit>bytes</unit>
+        <category>NETWORK</category>
+        <identifier>NETWORK_INTERFACE_RECEIVED</identifier>
+        <priority>901</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>CPU temperature</description>
+        <name>TEMPERATURE</name>
+        <unit>°C</unit>
+        <category>SENSORS</category>
+        <identifier>TEMPERATURE</identifier>
+        <priority>1200</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>CPU voltage</description>
+        <name>VOLTAGE</name>
+        <unit>V</unit>
+        <category>SENSORS</category>
+        <identifier>VOLTAGE</identifier>
+        <priority>1201</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>Fan speed</description>
+        <name>FAN_SPEED</name>
+        <unit>rpm</unit>
+        <category>SENSORS</category>
+        <identifier>FAN_SPEED</identifier>
+        <priority>1202</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>GeoServer CPU usage</description>
+        <name>GEOSERVER_CPU_USAGE</name>
+        <unit>%</unit>
+        <category>GEOSERVER</category>
+        <identifier>GEOSERVER_CPU_USAGE</identifier>
+        <priority>1300</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>GeoServer threads</description>
+        <name>GEOSERVER_THREADS</name>
+        <unit/>
+        <category>GEOSERVER</category>
+        <identifier>GEOSERVER_THREADS</identifier>
+        <priority>1301</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+    <metric>
+        <available>false</available>
+        <description>GeoServer JVM memory usage</description>
+        <name>GEOSERVER_JVM_MEMORY_USAGE</name>
+        <unit>%</unit>
+        <category>GEOSERVER</category>
+        <identifier>GEOSERVER_JVM_MEMORY_USAGE</identifier>
+        <priority>1302</priority>
+        <value>NOT AVAILABLE</value>
+    </metric>
+</metrics>

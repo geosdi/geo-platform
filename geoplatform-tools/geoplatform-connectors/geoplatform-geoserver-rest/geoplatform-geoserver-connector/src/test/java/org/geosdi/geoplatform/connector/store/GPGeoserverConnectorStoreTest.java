@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.store;
 
 import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutManifestRequest;
 import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutStatusRequest;
+import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutSystemStatusRequest;
 import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutVersionRequest;
 import org.geosdi.geoplatform.connector.geoserver.model.namespace.GPGeoserverNamespaces;
 import org.geosdi.geoplatform.connector.geoserver.model.namespace.IGPGeoserverNamespace;
@@ -197,5 +198,11 @@ public class GPGeoserverConnectorStoreTest extends GPBaseGeoserverConnectorStore
     public void t_aboutManifestGeoserverConnectorTest() throws Exception {
         GPGeoserverAboutManifestRequest aboutManifestRequest = geoserverConnectorStoreV2_21_x.createAboutManifestRequest();
         logger.info("#####################ABOUT_MANIFEST_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutManifestRequest.getResponseAsString());
+    }
+
+    @Test
+    public void u_aboutSystemStatusGeoserverConnectorTest() throws Exception {
+        GPGeoserverAboutSystemStatusRequest aboutSystemStatusRequest = geoserverConnectorStoreV2_21_x.createAboutSystemStatusRequest();
+        logger.info("#####################ABOUT_SYSTEM_STATUS_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutSystemStatusRequest.getResponseAsString());
     }
 }

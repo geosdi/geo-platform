@@ -1,0 +1,316 @@
+{
+  "metrics": {
+    "metric": [
+      {
+        "available": false,
+        "description": "Operating system",
+        "name": "OPERATING_SYSTEM",
+        "unit": "",
+        "category": "SYSTEM",
+        "identifier": "OPERATING_SYSTEM",
+        "priority": 1,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "Uptime",
+        "name": "SYSTEM_UPTIME",
+        "unit": "sec",
+        "category": "SYSTEM",
+        "identifier": "SYSTEM_UPTIME",
+        "priority": 2,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "System average load 1 minute",
+        "name": "SYSTEM_AVERAGE_LOAD_1",
+        "unit": "",
+        "category": "SYSTEM",
+        "identifier": "SYSTEM_AVERAGE_LOAD_1",
+        "priority": 3,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "System average load 5 minutes",
+        "name": "SYSTEM_AVERAGE_LOAD_5",
+        "unit": "",
+        "category": "SYSTEM",
+        "identifier": "SYSTEM_AVERAGE_LOAD_5",
+        "priority": 3,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "System average load 15 minutes",
+        "name": "SYSTEM_AVERAGE_LOAD_15",
+        "unit": "",
+        "category": "SYSTEM",
+        "identifier": "SYSTEM_AVERAGE_LOAD_15",
+        "priority": 3,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "Number of physical CPUs",
+        "name": "PHYSICAL_CPUS",
+        "unit": "",
+        "category": "CPU",
+        "identifier": "PHYSICAL_CPUS",
+        "priority": 100,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "Number of logical CPUs",
+        "name": "LOGICAL_CPUS",
+        "unit": "",
+        "category": "CPU",
+        "identifier": "LOGICAL_CPUS",
+        "priority": 101,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "Number of running process",
+        "name": "RUNNING_PROCESS",
+        "unit": "",
+        "category": "CPU",
+        "identifier": "RUNNING_PROCESS",
+        "priority": 102,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "Number of running threads",
+        "name": "RUNNING_THREADS",
+        "unit": "",
+        "category": "CPU",
+        "identifier": "RUNNING_THREADS",
+        "priority": 103,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "CPU average load",
+        "name": "CPU_LOAD",
+        "unit": "%",
+        "category": "CPU",
+        "identifier": "CPU_LOAD",
+        "priority": 104,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "CPU load",
+        "name": "PER_CPU_LOAD",
+        "unit": "%",
+        "category": "CPU",
+        "identifier": "PER_CPU_LOAD",
+        "priority": 105,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "Used physical memory ",
+        "name": "MEMORY_USED",
+        "unit": "%",
+        "category": "MEMORY",
+        "identifier": "MEMORY_USED",
+        "priority": 200,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "Total physical memory ",
+        "name": "MEMORY_TOTAL",
+        "unit": "bytes",
+        "category": "MEMORY",
+        "identifier": "MEMORY_TOTAL",
+        "priority": 201,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "Free physical memory",
+        "name": "MEMORY_FREE",
+        "unit": "bytes",
+        "category": "MEMORY",
+        "identifier": "MEMORY_FREE",
+        "priority": 201,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "Used swap memory",
+        "name": "SWAP_USED",
+        "unit": "%",
+        "category": "SWAP",
+        "identifier": "SWAP_USED",
+        "priority": 300,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "Total swap memory",
+        "name": "SWAP_TOTAL",
+        "unit": "bytes",
+        "category": "SWAP",
+        "identifier": "SWAP_TOTAL",
+        "priority": 301,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "Free swap memory",
+        "name": "SWAP_FREE",
+        "unit": "bytes",
+        "category": "SWAP",
+        "identifier": "SWAP_FREE",
+        "priority": 302,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "File system usage",
+        "name": "FILE_SYSTEM_TOTAL_USAGE",
+        "unit": "%",
+        "category": "FILE_SYSTEM",
+        "identifier": "FILE_SYSTEM_TOTAL_USAGE",
+        "priority": 400,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "Partition space used",
+        "name": "PARTITION_USED",
+        "unit": "%",
+        "category": "FILE_SYSTEM",
+        "identifier": "PARTITION_USED",
+        "priority": 500,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "Partition total space",
+        "name": "PARTITION_TOTAL",
+        "unit": "bytes",
+        "category": "FILE_SYSTEM",
+        "identifier": "PARTITION_TOTAL",
+        "priority": 501,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "Partition free space",
+        "name": "PARTITION_FREE",
+        "unit": "bytes",
+        "category": "FILE_SYSTEM",
+        "identifier": "PARTITION_FREE",
+        "priority": 502,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "Network interfaces send",
+        "name": "NETWORK_INTERFACES_SEND",
+        "unit": "bytes",
+        "category": "NETWORK",
+        "identifier": "NETWORK_INTERFACES_SEND",
+        "priority": 800,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "Network interfaces received",
+        "name": "NETWORK_INTERFACES_RECEIVED",
+        "unit": "bytes",
+        "category": "NETWORK",
+        "identifier": "NETWORK_INTERFACES_RECEIVED",
+        "priority": 801,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "Network interface band usage",
+        "name": "NETWORK_INTERFACE_SEND",
+        "unit": "bytes",
+        "category": "NETWORK",
+        "identifier": "NETWORK_INTERFACE_SEND",
+        "priority": 900,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "Network interface available band",
+        "name": "NETWORK_INTERFACE_RECEIVED",
+        "unit": "bytes",
+        "category": "NETWORK",
+        "identifier": "NETWORK_INTERFACE_RECEIVED",
+        "priority": 901,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "CPU temperature",
+        "name": "TEMPERATURE",
+        "unit": "°C",
+        "category": "SENSORS",
+        "identifier": "TEMPERATURE",
+        "priority": 1200,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "CPU voltage",
+        "name": "VOLTAGE",
+        "unit": "V",
+        "category": "SENSORS",
+        "identifier": "VOLTAGE",
+        "priority": 1201,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "Fan speed",
+        "name": "FAN_SPEED",
+        "unit": "rpm",
+        "category": "SENSORS",
+        "identifier": "FAN_SPEED",
+        "priority": 1202,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "GeoServer CPU usage",
+        "name": "GEOSERVER_CPU_USAGE",
+        "unit": "%",
+        "category": "GEOSERVER",
+        "identifier": "GEOSERVER_CPU_USAGE",
+        "priority": 1300,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "GeoServer threads",
+        "name": "GEOSERVER_THREADS",
+        "unit": "",
+        "category": "GEOSERVER",
+        "identifier": "GEOSERVER_THREADS",
+        "priority": 1301,
+        "value": "NOT AVAILABLE"
+      },
+      {
+        "available": false,
+        "description": "GeoServer JVM memory usage",
+        "name": "GEOSERVER_JVM_MEMORY_USAGE",
+        "unit": "%",
+        "category": "GEOSERVER",
+        "identifier": "GEOSERVER_JVM_MEMORY_USAGE",
+        "priority": 1302,
+        "value": "NOT AVAILABLE"
+      }
+    ]
+  }
+}

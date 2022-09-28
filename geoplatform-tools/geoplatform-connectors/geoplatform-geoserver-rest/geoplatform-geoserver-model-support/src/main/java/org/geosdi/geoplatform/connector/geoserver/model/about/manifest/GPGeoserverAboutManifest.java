@@ -35,15 +35,15 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.about.manifest;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 import lombok.ToString;
 
-import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
+
+import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -52,12 +52,11 @@ import java.util.List;
 @Getter
 @ToString
 @XmlRootElement(name = "about")
-@XmlAccessorType(value = XmlAccessType.FIELD)
+@XmlAccessorType(value = FIELD)
 public class GPGeoserverAboutManifest implements IGPGeoserverAboutManifest {
 
     private static final long serialVersionUID = -3849179561784167785L;
     //
-    @XmlElement(name = "resource")
-    @JsonDeserialize(contentAs = GPGeoserverAboutManifestEntry.class)
+    @XmlElement(name = "resource", type = GPGeoserverAboutManifestEntry.class)
     private List<IGPGeoserverAboutManifestEntry> entries;
 }

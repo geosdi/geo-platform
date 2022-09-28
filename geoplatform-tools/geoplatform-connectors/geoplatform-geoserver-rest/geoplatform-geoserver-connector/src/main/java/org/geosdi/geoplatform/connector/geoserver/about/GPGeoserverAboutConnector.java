@@ -163,6 +163,20 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
     }
 
     /**
+     * @return {@link GPGeoserverAboutSystemStatusRequest}
+     */
+    @Override
+    public GPGeoserverAboutSystemStatusRequest createAboutSystemStatusRequest() {
+        switch (version) {
+            case V220x:
+            case V221x:
+                return new GPGeoserverAboutSystemStatusRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
      * @return {@link GeoserverVersion}
      */
     @Override

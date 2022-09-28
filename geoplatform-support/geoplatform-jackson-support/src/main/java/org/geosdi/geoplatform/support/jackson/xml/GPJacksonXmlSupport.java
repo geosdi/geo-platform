@@ -95,7 +95,7 @@ public class GPJacksonXmlSupport implements JacksonXmlSupport {
                 .filter(Objects::nonNull)
                 .filter(f -> f != UNWRAP_ROOT_VALUE_ENABLE)
                 .doOnComplete(() -> logger.info("##############{} configure all Features.", this.getProviderName()))
-                .subscribe(f -> f.configureMapper(this.getDefaultMapper()), e -> e.printStackTrace());
+                .subscribe(f -> f.configureMapper(this.getDefaultMapper()), Throwable::printStackTrace);
     }
 
     /**

@@ -60,6 +60,11 @@ public interface IGPGeoserverAboutConnector extends GPServerConnector {
     GPGeoserverAboutManifestRequest createAboutManifestRequest();
 
     /**
+     * @return {@link GPGeoserverAboutSystemStatusRequest}
+     */
+    GPGeoserverAboutSystemStatusRequest createAboutSystemStatusRequest();
+
+    /**
      * @return {@link GeoserverVersion}
      */
     @Override

@@ -1,0 +1,28 @@
+<resource name="xstream-1.4.11.1">
+    <Archiver-Version>Plexus Archiver</Archiver-Version>
+    <Bundle-License>http://x-stream.github.io/license.html</Bundle-License>
+    <Specification-Version>1.4</Specification-Version>
+    <Bnd-LastModified>1540580837214</Bnd-LastModified>
+    <Bundle-Name>XStream Core</Bundle-Name>
+    <Bundle-Description>XStream is a serialization library from Java objects to XML and back.</Bundle-Description>
+    <Build-Jdk>1.8.0_192</Build-Jdk>
+    <URL/>
+    <Bundle-SymbolicName>xstream</Bundle-SymbolicName>
+    <Built-By>joehni</Built-By>
+    <Require-Capability>osgi.ee;filter:="(&amp;(osgi.ee=JavaSE)(version=1.8))"</Require-Capability>
+    <Tool>Bnd-2.4.1.201501161923</Tool>
+    <Extension-Name/>
+    <Implementation-Title>XStream Core</Implementation-Title>
+    <Implementation-Version>1.4.11.1</Implementation-Version>
+    <Implementation-Build-Id/>
+    <Manifest-Version>1</Manifest-Version>
+    <Created-By>Apache Maven Bundle Plugin</Created-By>
+    <Implementation-Vendor-Id>com.thoughtworks.xstream</Implementation-Vendor-Id>
+    <Bundle-DocURL>http://x-stream.github.io</Bundle-DocURL>
+    <Bundle-Vendor>XStream</Bundle-Vendor>
+    <Implementation-Vendor>XStream</Implementation-Vendor>
+    <Bundle-ManifestVersion>2</Bundle-ManifestVersion>
+    <Bundle-Version>1.4.11.1</Bundle-Version>
+    <Specification-Title>XStream Core</Specification-Title>
+    <Implementation-URL/>
+</resource>

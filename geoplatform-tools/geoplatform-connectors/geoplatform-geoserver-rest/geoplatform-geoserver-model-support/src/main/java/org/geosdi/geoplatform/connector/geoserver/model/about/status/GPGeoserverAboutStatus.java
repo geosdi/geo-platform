@@ -39,11 +39,12 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 import lombok.ToString;
 
-import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
+
+import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -52,7 +53,7 @@ import java.util.List;
 @Getter
 @ToString
 @XmlRootElement(name = "statuss")
-@XmlAccessorType(value = XmlAccessType.FIELD)
+@XmlAccessorType(value = FIELD)
 public class GPGeoserverAboutStatus implements IGPGeoserverAboutStatus {
 
     private static final long serialVersionUID = -3849179561784167785L;

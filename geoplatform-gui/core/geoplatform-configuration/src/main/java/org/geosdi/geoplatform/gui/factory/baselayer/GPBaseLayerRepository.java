@@ -176,23 +176,23 @@ class GPBaseLayerRepository {
             }
 
         });
-        baseLayerMap.put(BaseLayerValue.GEOSDI_BASE, new GPBaseLayerCreator() {
-
-            @Override
-            public Layer createBaseLayer() {
-                return createGeoSdiBaseLayer();
-            }
-
-        });
-        baseLayerMap.put(BaseLayerValue.GEOSDI_NULL_BASE,
-                new GPBaseLayerCreator() {
-
-                    @Override
-                    public Layer createBaseLayer() {
-                        return createGeoSdiNullMapBaseLayer();
-                    }
-
-                });
+//        baseLayerMap.put(BaseLayerValue.GEOSDI_BASE, new GPBaseLayerCreator() {
+//
+//            @Override
+//            public Layer createBaseLayer() {
+//                return createGeoSdiBaseLayer();
+//            }
+//
+//        });
+//        baseLayerMap.put(BaseLayerValue.GEOSDI_NULL_BASE,
+//                new GPBaseLayerCreator() {
+//
+//                    @Override
+//                    public Layer createBaseLayer() {
+//                        return createGeoSdiNullMapBaseLayer();
+//                    }
+//
+//                });
 
         baseLayerMap.put(BaseLayerValue.EMPTY,
                 new GPBaseLayerCreator() {

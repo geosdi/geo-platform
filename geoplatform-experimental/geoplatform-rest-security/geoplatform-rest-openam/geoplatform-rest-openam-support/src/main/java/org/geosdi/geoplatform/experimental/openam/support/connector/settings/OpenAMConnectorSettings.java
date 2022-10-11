@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.experimental.openam.support.connector.settings;
 
-import jdk.nashorn.internal.ir.annotations.Immutable;
+import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.experimental.rs.security.connector.settings.GPConnectorSettings;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

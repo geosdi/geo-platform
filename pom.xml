@@ -1527,7 +1527,7 @@
         <geoapi-version>2.3-M1</geoapi-version>
 
         <gwtVersion>2.10.0</gwtVersion>
-        <gxtVersion>2.3.1a-gwt22</gxtVersion>
+        <gxtVersion>2.3.2a-gwt210</gxtVersion>
 
         <gwtOpenlayersVersion>1.2.0</gwtOpenlayersVersion>
 

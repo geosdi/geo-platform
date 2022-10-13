@@ -36,6 +36,9 @@
 package org.geosdi.geoplatform.connector.geoserver.about;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
+import org.geosdi.geoplatform.connector.geoserver.request.about.status.GeoserverAboutStatusRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.about.system.GeoserverAboutSystemStatusRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.about.version.GeoserverAboutVersionRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 
 /**
@@ -45,14 +48,14 @@ import org.geosdi.geoplatform.connector.server.GPServerConnector;
 public interface IGPGeoserverAboutConnector extends GPServerConnector {
 
     /**
-     * @return {@link GPGeoserverAboutVersionRequest}
+     * @return {@link GeoserverAboutVersionRequest}
      */
-    GPGeoserverAboutVersionRequest createAboutVersionRequest();
+    GeoserverAboutVersionRequest createAboutVersionRequest();
 
     /**
-     * @return {@link GPGeoserverAboutStatusRequest}
+     * @return {@link GeoserverAboutStatusRequest}
      */
-    GPGeoserverAboutStatusRequest createAboutStatusRequest();
+    GeoserverAboutStatusRequest createAboutStatusRequest();
 
     /**
      * @return {@link GPGeoserverAboutStatusRequest}
@@ -60,9 +63,9 @@ public interface IGPGeoserverAboutConnector extends GPServerConnector {
     GPGeoserverAboutManifestRequest createAboutManifestRequest();
 
     /**
-     * @return {@link GPGeoserverAboutSystemStatusRequest}
+     * @return {@link GeoserverAboutSystemStatusRequest}
      */
-    GPGeoserverAboutSystemStatusRequest createAboutSystemStatusRequest();
+    GeoserverAboutSystemStatusRequest createAboutSystemStatusRequest();
 
     /**
      * @return {@link GeoserverVersion}

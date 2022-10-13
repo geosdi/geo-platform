@@ -35,9 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageListRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoveragesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.*;
 import org.geosdi.geoplatform.connector.geoserver.worksapce.IGPGeoserverWorkspacesConnector;
 
 /**
@@ -57,29 +55,29 @@ public interface IGPGeoserverCoveragesConnector extends IGPGeoserverWorkspacesCo
     GeoserverLoadCoverageRequest loadWorkspaceCoverageRequest();
 
     /**
-     * @return {@link GPGeoserverLoadStoreCoverageRequest}
+     * @return {@link GeoserverLoadStoreCoverageRequest}
      */
-    GPGeoserverLoadStoreCoverageRequest loadWorkspaceStoreCoverageRequest();
+    GeoserverLoadStoreCoverageRequest loadWorkspaceStoreCoverageRequest();
 
     /**
-     * @return {@link GPGeoserverLoadCoverageWithUrlRequest}
+     * @return {@link GeoserverLoadCoverageWithUrlRequest}
      */
-    GPGeoserverLoadCoverageWithUrlRequest loadCoverageInfoWithUrl();
+    GeoserverLoadCoverageWithUrlRequest loadCoverageInfoWithUrl();
 
     /**
-     * @return {@link GPGeoserverDeleteCoverageRequest}
+     * @return {@link GeoserverDeleteCoverageRequest}
      */
-    GPGeoserverDeleteCoverageRequest deleteCoverageInCoverageStoreRequest();
+    GeoserverDeleteCoverageRequest deleteCoverageInCoverageStoreRequest();
 
     /**
-     * @return {@link GPGeoserverUpdateStoreCoverageRequest}
+     * @return {@link GeoserverUpdateCoverageStoreRequest}
      */
-    GPGeoserverUpdateStoreCoverageRequest updateStoreCoverageRequest();
+    GeoserverUpdateCoverageStoreRequest updateStoreCoverageRequest();
 
     /**
-     * @return {@link GPGeoserverCreateCoverageRequest}
+     * @return {@link GeoserverCreateCoverageRequest}
      */
-    GPGeoserverCreateCoverageRequest createCoverageRequest();
+    GeoserverCreateCoverageRequest createCoverageRequest();
 
     /**
      * @return {@link GeoserverLoadCoverageListRequest}

@@ -36,18 +36,28 @@
 package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 
 import com.google.common.io.CharStreams;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.client.utils.URIBuilder;
+
+import io.reactivex.rxjava3.functions.Consumer;
+
 import org.geosdi.geoplatform.connector.geoserver.model.coveragestores.GPGeoserverUpdateCoverageStoreBody;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GeoserverRXQueryParamConsumer;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCalculateQueryParam;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCalculateValueQueryParam;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverUpdateCoverageStoreRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static io.reactivex.rxjava3.core.Observable.fromArray;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
@@ -58,25 +68,21 @@ import static org.apache.http.entity.ContentType.APPLICATION_JSON;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverUpdateStoreCoverageRequest extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateCoverageStoreRequest> implements GeoserverUpdateCoverageStoreRequest {
+@ThreadSafe
+class GPGeoserverUpdateCoverageStoreRequest extends GPJsonPutConnectorRequest<Boolean, GeoserverUpdateCoverageStoreRequest> implements GeoserverUpdateCoverageStoreRequest {
 
-    private final ThreadLocal<String> workspaceName;
-    private final ThreadLocal<String> storeName;
-    private final ThreadLocal<String> coverageName;
-    private final ThreadLocal<String[]> calculate;
-    private final ThreadLocal<GPGeoserverUpdateCoverageStoreBody> body;
+    private final ThreadLocal<String> workspaceName = withInitial(() -> null);
+    private final ThreadLocal<String> storeName = withInitial(() -> null);
+    private final ThreadLocal<String> coverageName = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverCalculateQueryParam> calculate = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverUpdateCoverageStoreBody> body = withInitial(() -> null);
 
     /**
      * @param theServerConnector
      * @param theJacksonSupport
      */
-    GPGeoserverUpdateStoreCoverageRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverUpdateCoverageStoreRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
-        this.workspaceName = withInitial(() -> null);
-        this.storeName = withInitial(() -> null);
-        this.coverageName = withInitial(() -> null);
-        this.calculate = withInitial(() -> null);
-        this.body = withInitial(() -> null);
     }
 
 
@@ -85,7 +91,7 @@ public class GPGeoserverUpdateStoreCoverageRequest extends GPJsonPutConnectorReq
      * @return {@link GeoserverUpdateCoverageStoreRequest}
      */
     @Override
-    public GeoserverUpdateCoverageStoreRequest withWorkspace(String theWorkspace) {
+    public GeoserverUpdateCoverageStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspaceName.set(theWorkspace);
         return self();
     }
@@ -95,7 +101,7 @@ public class GPGeoserverUpdateStoreCoverageRequest extends GPJsonPutConnectorReq
      * @return {@link GeoserverUpdateCoverageStoreRequest}
      */
     @Override
-    public GeoserverUpdateCoverageStoreRequest withStore(String theStore) {
+    public GeoserverUpdateCoverageStoreRequest withStore(@Nonnull(when = NEVER) String theStore) {
         this.storeName.set(theStore);
         return self();
     }
@@ -105,7 +111,7 @@ public class GPGeoserverUpdateStoreCoverageRequest extends GPJsonPutConnectorReq
      * @return {@link GeoserverUpdateCoverageStoreRequest}
      */
     @Override
-    public GeoserverUpdateCoverageStoreRequest withCoverage(String theCoverage) {
+    public GeoserverUpdateCoverageStoreRequest withCoverage(@Nonnull(when = NEVER) String theCoverage) {
         this.coverageName.set(theCoverage);
         return self();
     }
@@ -115,8 +121,8 @@ public class GPGeoserverUpdateStoreCoverageRequest extends GPJsonPutConnectorReq
      * @return {@link GeoserverUpdateCoverageStoreRequest}
      */
     @Override
-    public GeoserverUpdateCoverageStoreRequest withCalculate(String[] theCalculates) {
-        this.calculate.set(theCalculates);
+    public GeoserverUpdateCoverageStoreRequest withCalculate(@Nullable GPGeoserverCalculateValueQueryParam[] theCalculates) {
+        this.calculate.set(new GPGeoserverCalculateQueryParam(theCalculates));
         return self();
     }
 
@@ -125,7 +131,7 @@ public class GPGeoserverUpdateStoreCoverageRequest extends GPJsonPutConnectorReq
      * @return {@link GeoserverUpdateCoverageStoreRequest}
      */
     @Override
-    public GeoserverUpdateCoverageStoreRequest withBody(GPGeoserverUpdateCoverageStoreBody theBody) {
+    public GeoserverUpdateCoverageStoreRequest withBody(@Nonnull(when = NEVER) GPGeoserverUpdateCoverageStoreBody theBody) {
         this.body.set(theBody);
         return self();
     }
@@ -137,9 +143,9 @@ public class GPGeoserverUpdateStoreCoverageRequest extends GPJsonPutConnectorReq
     protected HttpEntity prepareHttpEntity() throws Exception {
         GPGeoserverUpdateCoverageStoreBody body = this.body.get();
         checkArgument(body != null, "The Parameter body must not be null.");
-        String bodyAsString = this.jacksonSupport.getDefaultMapper().writeValueAsString(body);
-        logger.debug("#############################BODY : \n{}\n", bodyAsString);
-        return new StringEntity(bodyAsString, APPLICATION_JSON);
+        String coverageBodyAsString = this.jacksonSupport.getDefaultMapper().writeValueAsString(body);
+        logger.debug("#############################COVERAGE_BODY_STRING : \n{}\n", coverageBodyAsString);
+        return new StringEntity(coverageBodyAsString, APPLICATION_JSON);
     }
 
     /**
@@ -155,8 +161,14 @@ public class GPGeoserverUpdateStoreCoverageRequest extends GPJsonPutConnectorReq
         checkArgument((coverage != null) && !(coverage.trim().isEmpty()), "The Parameter coverage must not be null or an empty string.");
         coverage = coverage.concat(".json");
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/coveragestores/").concat(storeName).concat("/coverages/").concat(coverage)
-                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/coveragestores/").concat(storeName).concat("/coverages/").concat(coverage)));
+        URIBuilder uriBuilder = new URIBuilder(((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("/coveragestores/").concat(storeName).concat("/coverages/").concat(coverage)
+                : baseURI.concat("/workspaces/").concat(workspaceName).concat("/coveragestores/").concat(storeName).concat("/coverages/").concat(coverage))));
+        Consumer<ThreadLocal> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
+        fromArray(this.calculate)
+                .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
+                .filter(c-> c.get() != null)
+                .subscribe(consumer, Throwable::printStackTrace);
+        return uriBuilder.build().toString();
     }
 
     /**
@@ -166,14 +178,13 @@ public class GPGeoserverUpdateStoreCoverageRequest extends GPJsonPutConnectorReq
      */
     @Override
     protected Boolean readInternal(BufferedReader reader) throws Exception {
-        try{
+        try {
             String value = CharStreams.toString(reader);
             return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
-            return null;
+            return FALSE;
         }
-
     }
 
     /**

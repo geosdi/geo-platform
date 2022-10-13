@@ -35,24 +35,26 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.uri;
 
-import com.google.common.base.Preconditions;
+import net.jcip.annotations.Immutable;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryParam.GeoserverQueryParam;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
+import javax.annotation.Nullable;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverBooleanQueryParam extends GPGeoserverQueryParam.GeoserverQueryParam<Boolean> {
+@Immutable
+public class GPGeoserverBooleanQueryParam extends GeoserverQueryParam<Boolean> {
 
-    public GPGeoserverBooleanQueryParam(@Nonnull(when = When.NEVER) String theKey, @Nonnull(when = When.NEVER) Boolean theValue) {
+    /**
+     * @param theKey
+     * @param theValue
+     */
+    public GPGeoserverBooleanQueryParam(@Nonnull(when = NEVER) String theKey, @Nullable Boolean theValue) {
         super(theKey, theValue);
-        Preconditions.checkArgument(theValue != null, "The Parameter value must not be null");
-    }
-
-    @Override
-    public String formatValue() {
-        return this.getValue().toString();
     }
 }

@@ -38,9 +38,9 @@ package org.geosdi.geoplatform.connector.geoserver.model.extensions.importer;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryParam;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -52,8 +52,7 @@ public class GPGeoserverExpandChild extends GPGeoserverQueryParam.GeoserverQuery
      * @param theKey
      * @param theValue
      */
-    protected GPGeoserverExpandChild(@Nonnull(when = When.NEVER) String theKey,
-            @Nonnull(when = When.NEVER) Integer theValue) {
+    protected GPGeoserverExpandChild(@Nonnull(when = NEVER) String theKey, @Nonnull(when = NEVER) Integer theValue) {
         super(theKey, theValue);
     }
 

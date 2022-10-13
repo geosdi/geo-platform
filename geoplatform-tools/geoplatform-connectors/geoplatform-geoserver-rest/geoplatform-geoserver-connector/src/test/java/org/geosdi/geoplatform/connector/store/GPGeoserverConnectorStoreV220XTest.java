@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.connector.store;
 
-import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutStatusRequest;
-import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutSystemStatusRequest;
-import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutVersionRequest;
 import org.geosdi.geoplatform.connector.geoserver.model.namespace.GPGeoserverNamespaces;
 import org.geosdi.geoplatform.connector.geoserver.model.namespace.IGPGeoserverNamespace;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverLoadWorkspace;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GeoserverCreateWorkspaceBody;
+import org.geosdi.geoplatform.connector.geoserver.request.about.status.GeoserverAboutStatusRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.about.system.GeoserverAboutSystemStatusRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.about.version.GeoserverAboutVersionRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLayersRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadLayerRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespaceRequest;
@@ -68,13 +68,13 @@ public class GPGeoserverConnectorStoreV220XTest extends GPBaseGeoserverConnector
 
     @Test
     public void a_aboutVersionGeoserverConnectorTest() throws Exception {
-        GPGeoserverAboutVersionRequest aboutRequest = geoserverConnectorStoreV2_20_x.createAboutVersionRequest();
+        GeoserverAboutVersionRequest aboutRequest = geoserverConnectorStoreV2_20_x.createAboutVersionRequest();
         logger.info("#####################ABOUT_VERSION_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutRequest.getResponseAsString());
     }
 
     @Test
     public void b_aboutStatusGeoserverConnectorTest() throws Exception {
-        GPGeoserverAboutStatusRequest aboutStatusRequest = geoserverConnectorStoreV2_20_x.createAboutStatusRequest();
+        GeoserverAboutStatusRequest aboutStatusRequest = geoserverConnectorStoreV2_20_x.createAboutStatusRequest();
         logger.info("#####################ABOUT_STATUS_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutStatusRequest.getResponseAsString());
     }
 
@@ -200,7 +200,7 @@ public class GPGeoserverConnectorStoreV220XTest extends GPBaseGeoserverConnector
 
     @Test
     public void u_aboutSystemStatusGeoserverConnectorTest() throws Exception {
-        GPGeoserverAboutSystemStatusRequest aboutSystemStatusRequest = geoserverConnectorStoreV2_20_x.createAboutSystemStatusRequest();
+        GeoserverAboutSystemStatusRequest aboutSystemStatusRequest = geoserverConnectorStoreV2_20_x.createAboutSystemStatusRequest();
         logger.info("#####################ABOUT_SYSTEM_STATUS_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutSystemStatusRequest.getResponseAsString());
     }
 }

@@ -37,6 +37,9 @@ package org.geosdi.geoplatform.connector.geoserver.about;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
+import org.geosdi.geoplatform.connector.geoserver.request.about.status.GeoserverAboutStatusRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.about.system.GeoserverAboutSystemStatusRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.about.version.GeoserverAboutVersionRequest;
 import org.geosdi.geoplatform.connector.server.GPAbstractServerConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -122,10 +125,10 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
     }
 
     /**
-     * @return {@link GPGeoserverAboutVersionRequest}
+     * @return {@link GeoserverAboutVersionRequest}
      */
     @Override
-    public GPGeoserverAboutVersionRequest createAboutVersionRequest() {
+    public GeoserverAboutVersionRequest createAboutVersionRequest() {
         switch (version) {
             case V220x:
             case V221x:
@@ -139,7 +142,7 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
      * @return {@link GPGeoserverAboutStatusRequest}
      */
     @Override
-    public GPGeoserverAboutStatusRequest createAboutStatusRequest() {
+    public GeoserverAboutStatusRequest createAboutStatusRequest() {
         switch (version) {
             case V220x:
             case V221x:
@@ -164,10 +167,10 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
     }
 
     /**
-     * @return {@link GPGeoserverAboutSystemStatusRequest}
+     * @return {@link GeoserverAboutSystemStatusRequest}
      */
     @Override
-    public GPGeoserverAboutSystemStatusRequest createAboutSystemStatusRequest() {
+    public GeoserverAboutSystemStatusRequest createAboutSystemStatusRequest() {
         switch (version) {
             case V220x:
             case V221x:

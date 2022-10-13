@@ -36,7 +36,13 @@
 package org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages;
 
 import org.geosdi.geoplatform.connector.geoserver.model.coveragestores.GPGeoserverUpdateCoverageStoreBody;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCalculateValueQueryParam;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -48,30 +54,30 @@ public interface GeoserverUpdateCoverageStoreRequest extends GPJsonConnectorRequ
      * @param theWorkspace
      * @return {@link GeoserverUpdateCoverageStoreRequest}
      */
-    GeoserverUpdateCoverageStoreRequest withWorkspace(String theWorkspace);
+    GeoserverUpdateCoverageStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
 
     /**
      * @param theStore
      * @return {@link GeoserverUpdateCoverageStoreRequest}
      */
-    GeoserverUpdateCoverageStoreRequest withStore(String theStore);
+    GeoserverUpdateCoverageStoreRequest withStore(@Nonnull(when = NEVER) String theStore);
 
     /**
      * @param theCoverage
      * @return {@link GeoserverUpdateCoverageStoreRequest}
      */
-    GeoserverUpdateCoverageStoreRequest withCoverage(String theCoverage);
+    GeoserverUpdateCoverageStoreRequest withCoverage(@Nonnull(when = NEVER) String theCoverage);
 
     /**
      * @param theCalculates
      * @return {@link GeoserverUpdateCoverageStoreRequest}
      */
-    GeoserverUpdateCoverageStoreRequest withCalculate(String[] theCalculates);
+    GeoserverUpdateCoverageStoreRequest withCalculate(@Nullable GPGeoserverCalculateValueQueryParam[] theCalculates);
 
     /**
      *
      * @param theBody
      * @return {@link GeoserverUpdateCoverageStoreRequest}
      */
-     GeoserverUpdateCoverageStoreRequest withBody(GPGeoserverUpdateCoverageStoreBody theBody);
+     GeoserverUpdateCoverageStoreRequest withBody(@Nonnull(when = NEVER) GPGeoserverUpdateCoverageStoreBody theBody);
 }

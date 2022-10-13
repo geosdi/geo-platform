@@ -152,7 +152,7 @@ public class GPJacksonSupport implements JacksonSupport {
         fromArray(features)
                 .filter(Objects::nonNull)
                 .doOnComplete(() -> logger.info("##############{} configure all Features.", this.getProviderName()))
-                .subscribe(f -> f.configureMapper(this.getDefaultMapper()), e -> e.printStackTrace());
+                .subscribe(f -> f.configureMapper(this.getDefaultMapper()), Throwable::printStackTrace);
         return this;
     }
 

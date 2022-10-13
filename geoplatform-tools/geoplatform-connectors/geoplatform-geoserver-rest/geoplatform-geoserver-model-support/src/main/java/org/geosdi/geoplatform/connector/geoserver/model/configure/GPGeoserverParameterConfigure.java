@@ -66,6 +66,9 @@ public enum GPGeoserverParameterConfigure implements GPGeoserverQueryParam<Strin
         return "configure";
     }
 
+    /**
+     * @return {@link String}
+     */
     @Override
     public String getValue() {
         return super.toString().toLowerCase();

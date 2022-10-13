@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver;
 
-import org.geosdi.geoplatform.connector.geoserver.extensions.dimension.IGPGeoserverDimensionConnector;
+import org.geosdi.geoplatform.connector.geoserver.fonts.IGPGeoserverFontsConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.reload.GeoserverReloadCatalogRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.reset.GeoserverResetRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.running.GeoserverRestRunningRequest;
@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.running.GeoserverRestR
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverConnector extends IGPGeoserverDimensionConnector {
+public interface IGPGeoserverConnector extends IGPGeoserverFontsConnector {
 
     /**
      * @return {@link GeoserverRestRunningRequest}

@@ -56,6 +56,7 @@ import static com.fasterxml.jackson.databind.type.TypeFactory.defaultInstance;
 import static com.fasterxml.jackson.dataformat.xml.XmlMapper.builder;
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Observable.fromArray;
+import static java.lang.Boolean.FALSE;
 import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.support.jackson.GPJacksonSupport.defaultProp;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.UNWRAP_ROOT_VALUE_ENABLE;
@@ -70,8 +71,18 @@ public class GPJacksonXmlSupport implements JacksonXmlSupport {
     //
     private final XmlMapper xmlMapper;
 
+    /**
+     * <p>By Default {@link JacksonAnnotationIntrospector} is used</p>
+     */
     public GPJacksonXmlSupport() {
-        this(defaultProp());
+        this(FALSE, defaultProp());
+    }
+
+    /**
+     * @param useJacksonAnnotation
+     */
+    public GPJacksonXmlSupport(boolean useJacksonAnnotation) {
+        this(useJacksonAnnotation, defaultProp());
     }
 
     /**
@@ -83,14 +94,22 @@ public class GPJacksonXmlSupport implements JacksonXmlSupport {
     }
 
     /**
+     * @param format
+     * @param useJacksonAnnotation
+     */
+    public GPJacksonXmlSupport(@Nonnull(when = NEVER) DateFormat format, boolean useJacksonAnnotation) {
+        this(useJacksonAnnotation);
+        this.xmlMapper.setDateFormat(format);
+    }
+
+    /**
      * @param features
      */
-    public GPJacksonXmlSupport(@Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {
+    public GPJacksonXmlSupport(boolean useJacksonAnnotation, @Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {
         checkArgument(features != null, "The Parameter features must not be null.");
         this.xmlMapper = builder().defaultUseWrapper(false).build();
         AnnotationIntrospector primary = new JaxbAnnotationIntrospector(defaultInstance());
-        AnnotationIntrospector secondary = new JacksonAnnotationIntrospector();
-        this.xmlMapper.setAnnotationIntrospector(new AnnotationIntrospectorPair(primary, secondary));
+        this.xmlMapper.setAnnotationIntrospector(useJacksonAnnotation ? new AnnotationIntrospectorPair(primary, new JacksonAnnotationIntrospector()) : primary);
         fromArray(features)
                 .filter(Objects::nonNull)
                 .filter(f -> f != UNWRAP_ROOT_VALUE_ENABLE)

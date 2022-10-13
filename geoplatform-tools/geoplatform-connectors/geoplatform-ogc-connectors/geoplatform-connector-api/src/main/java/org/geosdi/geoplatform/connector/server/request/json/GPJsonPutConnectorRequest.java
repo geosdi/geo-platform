@@ -81,8 +81,7 @@ public abstract class GPJsonPutConnectorRequest<T, ConnectorRequest extends GPJs
     protected abstract HttpEntity prepareHttpEntity() throws Exception;
 
     /**
-     * Show the XML Object created for the Request to send to Server
-     *
+     * <p> Show the JSON Object created for the Request to send to Server.</p>
      * @return Request as a String
      * @throws Exception
      */

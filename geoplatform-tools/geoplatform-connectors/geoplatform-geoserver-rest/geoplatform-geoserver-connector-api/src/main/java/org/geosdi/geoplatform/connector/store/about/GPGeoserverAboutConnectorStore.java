@@ -36,11 +36,10 @@
 package org.geosdi.geoplatform.connector.store.about;
 
 import org.geosdi.geoplatform.connector.api.GeoPlatformConnector;
-import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutManifestRequest;
-import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutStatusRequest;
-import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutSystemStatusRequest;
-import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutVersionRequest;
-
+import org.geosdi.geoplatform.connector.geoserver.request.about.manifest.GeoserverAboutManifestRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.about.status.GeoserverAboutStatusRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.about.system.GeoserverAboutSystemStatusRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.about.version.GeoserverAboutVersionRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -49,22 +48,22 @@ import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutVersionR
 public interface GPGeoserverAboutConnectorStore extends GeoPlatformConnector {
 
     /**
-     * @return {@link GPGeoserverAboutVersionRequest}
+     * @return {@link GeoserverAboutVersionRequest}
      */
-    GPGeoserverAboutVersionRequest createAboutVersionRequest();
+    GeoserverAboutVersionRequest createAboutVersionRequest();
 
     /**
-     * @return {@link GPGeoserverAboutStatusRequest}
+     * @return {@link GeoserverAboutStatusRequest}
      */
-    GPGeoserverAboutStatusRequest createAboutStatusRequest();
+    GeoserverAboutStatusRequest createAboutStatusRequest();
 
     /**
-     * @return {@link GPGeoserverAboutManifestRequest}
+     * @return {@link GeoserverAboutManifestRequest}
      */
-    GPGeoserverAboutManifestRequest createAboutManifestRequest();
+    GeoserverAboutManifestRequest createAboutManifestRequest();
 
     /**
-     * @return {@link GPGeoserverAboutSystemStatusRequest}
+     * @return {@link GeoserverAboutSystemStatusRequest}
      */
-    GPGeoserverAboutSystemStatusRequest createAboutSystemStatusRequest();
+    GeoserverAboutSystemStatusRequest createAboutSystemStatusRequest();
 }

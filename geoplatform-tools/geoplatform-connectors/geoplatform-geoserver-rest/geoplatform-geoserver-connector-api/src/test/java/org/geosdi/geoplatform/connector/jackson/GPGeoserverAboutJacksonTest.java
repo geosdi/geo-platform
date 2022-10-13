@@ -38,9 +38,6 @@ package org.geosdi.geoplatform.connector.jackson;
 import org.geosdi.geoplatform.connector.geoserver.model.about.manifest.GPGeoserverAboutManifest;
 import org.geosdi.geoplatform.connector.geoserver.model.about.manifest.GPGeoserverAboutManifestEntry;
 import org.geosdi.geoplatform.connector.geoserver.model.about.version.GPGeoserverAboutVersion;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
-import org.geosdi.geoplatform.support.jackson.xml.GPJacksonXmlSupport;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -53,7 +50,8 @@ import java.io.StringWriter;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
-import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
+import static org.geosdi.geoplatform.connector.jackson.GPGeoserverJacksonTest.jacksonSupport;
+import static org.geosdi.geoplatform.connector.jackson.GPGeoserverJacksonTest.jacksonXmlSupport;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -64,13 +62,6 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 public class GPGeoserverAboutJacksonTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPGeoserverAboutJacksonTest.class);
-    //
-    public static final JacksonSupport jacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_ENABLE,
-            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-            WRAP_ROOT_VALUE_ENABLE,
-            INDENT_OUTPUT_ENABLE);
-    private static final GPJacksonXmlSupport jacksonXmlSupport = new GPJacksonXmlSupport();
 
     @Test
     public void a_unmarshallGeoserverAboutVersionTest() throws Exception {

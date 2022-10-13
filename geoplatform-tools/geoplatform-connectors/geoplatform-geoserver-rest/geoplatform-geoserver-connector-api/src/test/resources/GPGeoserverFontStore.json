@@ -1,0 +1,3 @@
+{
+  "fonts" : [ "Dialog", "Dialog.bold", "Dialog.bolditalic", "Dialog.italic", "Dialog.plain", "DialogInput", "DialogInput.bold", "DialogInput.bolditalic", "DialogInput.italic", "DialogInput.plain", "Lucida Bright", "Lucida Bright Demibold", "Lucida Bright Demibold Italic", "Lucida Bright Italic", "Lucida Bright Regular", "Lucida Sans", "Lucida Sans Demibold", "Lucida Sans Regular", "Lucida Sans Typewriter", "Lucida Sans Typewriter Bold", "Lucida Sans Typewriter Regular", "Monospaced", "Monospaced.bold", "Monospaced.bolditalic", "Monospaced.italic", "Monospaced.plain", "SansSerif", "SansSerif.bold", "SansSerif.bolditalic", "SansSerif.italic", "SansSerif.plain", "Serif", "Serif.bold", "Serif.bolditalic", "Serif.italic", "Serif.plain" ]
+}

@@ -66,18 +66,15 @@ import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverSty
 @ThreadSafe
 class GPGeoserverCreateStyleSLDV100Request extends GPGeoserverBaseCreateStyleRequest<StyledLayerDescriptor, GeoserverCreateStyleSLDV100Request> implements GeoserverCreateStyleSLDV100Request {
 
-    private final ThreadLocal<GPGeoserverStringQueryParam> style;
-    private final ThreadLocal<GPGeoserverBooleanQueryParam> raw;
-    private final ThreadLocal<String> stringStyleBody;
+    private final ThreadLocal<GPGeoserverStringQueryParam> style = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverBooleanQueryParam> raw = withInitial(() -> null);
+    private final ThreadLocal<String> stringStyleBody = withInitial(() -> null);
 
     /**
      * @param theServerConnector
      */
     GPGeoserverCreateStyleSLDV100Request(@Nonnull(when = NEVER) GPServerConnector theServerConnector) {
         super(theServerConnector, JACKSON_JAXB_XML_SUPPORT);
-        this.style = withInitial(() -> null);
-        this.raw = withInitial(() -> null);
-        this.stringStyleBody = withInitial(() -> null);
     }
 
     /**
@@ -137,8 +134,8 @@ class GPGeoserverCreateStyleSLDV100Request extends GPGeoserverBaseCreateStyleReq
      */
     @Override
     protected HttpEntity prepareHttpEntity() throws Exception {
-        checkArgument(this.stringStyleBody.get() != null  || this.styleBody.get() != null, "The style body must not be null");
-        String geoserverStyleBodyString = this.stringStyleBody.get() != null ? this.stringStyleBody.get() : jacksonSupport.getDefaultMapper().writeValueAsString(this.styleBody.get());
+        checkArgument(((this.stringStyleBody.get() != null) && !(this.stringStyleBody.get().trim().isEmpty())) || (this.styleBody.get() != null), "The style body must not be null");
+        String geoserverStyleBodyString = ((this.stringStyleBody.get() != null) && !(this.stringStyleBody.get().trim().isEmpty())) ? this.stringStyleBody.get() : jacksonSupport.getDefaultMapper().writeValueAsString(this.styleBody.get());
         logger.debug("#############################STYLE_BODY : \n{}\n", geoserverStyleBodyString);
         return new StringEntity(geoserverStyleBodyString, APPLICATION_XML);
     }

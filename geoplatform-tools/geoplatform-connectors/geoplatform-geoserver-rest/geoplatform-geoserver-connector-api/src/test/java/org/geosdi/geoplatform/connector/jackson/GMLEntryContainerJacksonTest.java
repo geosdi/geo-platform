@@ -49,7 +49,7 @@ import static java.util.Arrays.asList;
 import static org.geosdi.geoplatform.connector.geoserver.model.settings.service.wfs.gml.GMLVersion.*;
 import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
 import static org.geosdi.geoplatform.connector.jackson.GMLValueJacksonTest.toGMLValue;
-import static org.geosdi.geoplatform.connector.jackson.GPGeoserverAboutJacksonTest.jacksonSupport;
+import static org.geosdi.geoplatform.connector.jackson.GPGeoserverJacksonTest.jacksonSupport;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

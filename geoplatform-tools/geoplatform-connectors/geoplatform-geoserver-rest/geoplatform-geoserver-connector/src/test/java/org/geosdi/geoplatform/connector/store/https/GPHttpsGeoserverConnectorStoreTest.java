@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.store.https;
 
-import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutStatusRequest;
-import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutVersionRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.about.status.GeoserverAboutStatusRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.about.version.GeoserverAboutVersionRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverLoadWorkspacesRequest;
 import org.geosdi.geoplatform.connector.server.exception.UnauthorizedException;
 import org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore;
@@ -80,13 +80,13 @@ public class GPHttpsGeoserverConnectorStoreTest {
 
     @Test(expected = UnauthorizedException.class)
     public void a_aboutHttpsVersionGeoserverConnectorTest() throws Exception {
-        GPGeoserverAboutVersionRequest aboutRequest = httpsGeoserverConnectorStore.createAboutVersionRequest();
+        GeoserverAboutVersionRequest aboutRequest = httpsGeoserverConnectorStore.createAboutVersionRequest();
         logger.info("#####################ABOUT_VERSION_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutRequest.getResponseAsString());
     }
 
     @Test(expected = UnauthorizedException.class)
     public void b_aboutHttpsStatusGeoserverConnectorTest() throws Exception {
-        GPGeoserverAboutStatusRequest aboutStatusRequest = httpsGeoserverConnectorStore.createAboutStatusRequest();
+        GeoserverAboutStatusRequest aboutStatusRequest = httpsGeoserverConnectorStore.createAboutStatusRequest();
         logger.info("#####################ABOUT_STATUS_GEOSERVER_CONNECTOR_RESPONSE : \n{}\n", aboutStatusRequest.getResponseAsString());
     }
 

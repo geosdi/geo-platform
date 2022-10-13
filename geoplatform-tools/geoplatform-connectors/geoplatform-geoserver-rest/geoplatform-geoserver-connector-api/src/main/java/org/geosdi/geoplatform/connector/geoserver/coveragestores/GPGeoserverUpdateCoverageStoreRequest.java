@@ -140,8 +140,13 @@ public class GPGeoserverUpdateCoverageStoreRequest extends GPJsonPutConnectorReq
      */
     @Override
     protected Boolean readInternal(BufferedReader reader) throws Exception {
-        String value = CharStreams.toString(reader);
-        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
+        try {
+            String value = CharStreams.toString(reader);
+            return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return FALSE;
+        }
     }
 
     /**

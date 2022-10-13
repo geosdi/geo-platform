@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.connector.store.workspace.coverages;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.*;
-import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.GPGeoserverUpdateStoreCoverageRequest;
 import org.geosdi.geoplatform.connector.store.workspace.GeoserverWorkspacesConnectorStore;
 
 /**
@@ -94,9 +93,9 @@ public abstract class GeoserverCoveragesConnectorStore extends GeoserverWorkspac
     }
 
     /**
-     * @return {@link GPGeoserverUpdateStoreCoverageRequest}
+     * @return {@link GeoserverUpdateCoverageStoreRequest}
      */
-    public GPGeoserverUpdateStoreCoverageRequest updateStoreCoverageRequest() {
+    public GeoserverUpdateCoverageStoreRequest updateStoreCoverageRequest() {
         return this.server.updateStoreCoverageRequest();
     }
 

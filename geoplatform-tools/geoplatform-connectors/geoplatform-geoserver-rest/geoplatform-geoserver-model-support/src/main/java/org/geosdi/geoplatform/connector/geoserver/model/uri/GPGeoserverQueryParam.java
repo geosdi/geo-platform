@@ -42,6 +42,7 @@ import javax.annotation.Nullable;
 import java.io.Serializable;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group

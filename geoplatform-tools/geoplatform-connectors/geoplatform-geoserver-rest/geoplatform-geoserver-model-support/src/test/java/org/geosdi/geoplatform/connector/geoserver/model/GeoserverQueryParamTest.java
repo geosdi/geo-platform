@@ -34,7 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model;
 
-import org.apache.hc.core5.net.URIBuilder;
+import org.apache.http.client.utils.URIBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.*;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryParam.GeoserverQueryParam;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCalculateQueryParam;

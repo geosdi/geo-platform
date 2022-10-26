@@ -29,9 +29,9 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(value = NAME_ASCENDING)
-public class WideGeowebcacheMarshallTest {
+public class GeowebcacheMarshallTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(WideGeowebcacheMarshallTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(GeowebcacheMarshallTest.class);
     //
     public static final GPJacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,

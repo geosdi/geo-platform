@@ -36,8 +36,12 @@
 package org.geosdi.geoplatform.connector.geoserver.coveragestores;
 
 import com.google.common.io.CharStreams;
+import io.reactivex.rxjava3.functions.Consumer;
 import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.GPGeoserverPurgeParam;
+import org.apache.hc.core5.net.URIBuilder;
+import org.geosdi.geoplatform.connector.geoserver.model.purge.GPGeoserverPurgeParam;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverBooleanQueryParam;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GeoserverRXQueryParamConsumer;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverDeleteCoverageStoreRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
@@ -48,23 +52,24 @@ import javax.annotation.Nullable;
 import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static io.reactivex.rxjava3.core.Observable.fromArray;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.connector.geoserver.model.store.coverage.GPGeoserverPurgeParam.NONE;
+import static org.geosdi.geoplatform.connector.geoserver.model.purge.GPGeoserverPurgeParam.NONE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverDeleteCoverageStoreRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteCoverageStoreRequest> implements GeoserverDeleteCoverageStoreRequest {
+class GPGeoserverDeleteCoverageStoreRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteCoverageStoreRequest> implements GeoserverDeleteCoverageStoreRequest {
 
-    private final ThreadLocal<String> workspace;
-    private final ThreadLocal<String> coverageStore;
-    private final ThreadLocal<GPGeoserverPurgeParam> purge;
-    private final ThreadLocal<Boolean> recurse;
+    private final ThreadLocal<String> workspace = withInitial(() -> null);
+    private final ThreadLocal<String> coverageStore = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverPurgeParam> purge = withInitial(() -> NONE);
+    private final ThreadLocal<GPGeoserverBooleanQueryParam> recurse = withInitial(() -> new GPGeoserverBooleanQueryParam("recurse", FALSE));
 
     /**
      * @param theServerConnector
@@ -72,10 +77,6 @@ public class GPGeoserverDeleteCoverageStoreRequest extends GPJsonDeleteConnector
      */
     GPGeoserverDeleteCoverageStoreRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
-        this.workspace = withInitial(() -> null);
-        this.coverageStore = withInitial(() -> null);
-        this.purge = withInitial(() -> NONE);
-        this.recurse = withInitial(() -> FALSE);
     }
 
     /**
@@ -100,15 +101,21 @@ public class GPGeoserverDeleteCoverageStoreRequest extends GPJsonDeleteConnector
 
     /**
      * <p>
-     * The purge parameter specifies if and how the underlying raster data source is deleted.
-     * Allowable values for this parameter are {@link GPGeoserverPurgeParam#NONE}, {@link GPGeoserverPurgeParam#METADATA},
-     * {@link GPGeoserverPurgeParam#ALL}. When set to {@link GPGeoserverPurgeParam#NONE}
-     * data and auxiliary files are preserved. When set to {@link GPGeoserverPurgeParam#METADATA} delete only auxiliary files and metadata.
-     * It’s recommended when data files (such as granules) should not be deleted from disk.
-     * Finally, when set to {@link GPGeoserverPurgeParam#ALL} both data and auxiliary files are removed.
+     *     The purge parameter specifies if and how the underlying raster data source is deleted.
+     *     Allowable values for this parameter are :
+     *     <ul>
+     *       <li>{@link GPGeoserverPurgeParam#NONE}</li>
+     *       <li>{@link GPGeoserverPurgeParam#METADATA}</li>
+     *       <li>{@link GPGeoserverPurgeParam#ALL}</li>
+     *     </ul>
+     *     When set to {@link GPGeoserverPurgeParam#NONE} data and auxiliary files are preserved.
+     *     When set to {@link GPGeoserverPurgeParam#METADATA} delete only auxiliary files and metadata.
+     *     It’s recommended when data files (such as granules) should not be deleted from disk.
+     *     Finally, when set to {@link GPGeoserverPurgeParam#ALL} both data and auxiliary files are removed.
      * </p>
      *
      * @param thePurge
+     * @param <Purge>
      * @return {@link GeoserverDeleteCoverageStoreRequest}
      */
     @Override
@@ -128,7 +135,7 @@ public class GPGeoserverDeleteCoverageStoreRequest extends GPJsonDeleteConnector
      */
     @Override
     public GeoserverDeleteCoverageStoreRequest withRecurse(@Nullable Boolean theRecurse) {
-        this.recurse.set((theRecurse != null) ? theRecurse : FALSE);
+        this.recurse.set(new GPGeoserverBooleanQueryParam("recurse", (theRecurse != null) ? theRecurse : FALSE));
         return self();
     }
 
@@ -141,13 +148,15 @@ public class GPGeoserverDeleteCoverageStoreRequest extends GPJsonDeleteConnector
         checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace mut not be null or an Empty String.");
         String coverageStore = this.coverageStore.get();
         checkArgument((coverageStore != null) && !(coverageStore.trim().isEmpty()), "The Parameter coverageStore mut not be null or an Empty String.");
-        GPGeoserverPurgeParam purgeParam = this.purge.get();
-        String recurse = this.recurse.get().toString();
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/")
-                .concat(coverageStore).concat("?purge=").concat(purgeParam.toPurge()).concat("&recurse=").concat(recurse)
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore)
-                .concat("?purge=").concat(purgeParam.toPurge()).concat("&recurse=").concat(recurse)));
+        URIBuilder uriBuilder = new URIBuilder(((baseURI.endsWith("/") ?
+                baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore) :
+                baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore))));
+        Consumer<ThreadLocal> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
+        fromArray(this.purge, this.recurse)
+                .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
+                .subscribe(consumer, Throwable::printStackTrace);
+        return uriBuilder.toString();
     }
 
     /**

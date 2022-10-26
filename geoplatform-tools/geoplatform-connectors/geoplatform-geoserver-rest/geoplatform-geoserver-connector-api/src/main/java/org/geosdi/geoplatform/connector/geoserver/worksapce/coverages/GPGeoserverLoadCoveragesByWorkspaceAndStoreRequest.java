@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.GPGeoserverCoverageStore;
 import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.GPGeoserverListCoverageStores;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageListRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoveragesByWorkspaceAndStoreRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -54,7 +54,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-class GPGeoserverLoadCoverageListRequest extends GPJsonGetConnectorRequest<GPGeoserverListCoverageStores, GeoserverLoadCoverageListRequest> implements GeoserverLoadCoverageListRequest {
+class GPGeoserverLoadCoveragesByWorkspaceAndStoreRequest extends GPJsonGetConnectorRequest<GPGeoserverListCoverageStores, GeoserverLoadCoveragesByWorkspaceAndStoreRequest> implements GeoserverLoadCoveragesByWorkspaceAndStoreRequest {
 
     private final ThreadLocal<String> workspace;
     private final ThreadLocal<String> store;
@@ -63,7 +63,7 @@ class GPGeoserverLoadCoverageListRequest extends GPJsonGetConnectorRequest<GPGeo
      * @param server
      * @param theJacksonSupport
      */
-    GPGeoserverLoadCoverageListRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverLoadCoveragesByWorkspaceAndStoreRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
         this.workspace = withInitial(() -> null);
         this.store = withInitial(() -> null);
@@ -71,20 +71,20 @@ class GPGeoserverLoadCoverageListRequest extends GPJsonGetConnectorRequest<GPGeo
 
     /**
      * @param theWorkspace
-     * @return {@link GeoserverLoadCoverageListRequest}
+     * @return {@link GeoserverLoadCoveragesByWorkspaceAndStoreRequest}
      */
     @Override
-    public GeoserverLoadCoverageListRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
+    public GeoserverLoadCoveragesByWorkspaceAndStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
         this.workspace.set(theWorkspace);
         return self();
     }
 
     /**
      * @param theStore The name of the store to be retrieved.
-     * @return {@link GeoserverLoadCoverageListRequest}
+     * @return {@link GeoserverLoadCoveragesByWorkspaceAndStoreRequest}
      */
     @Override
-    public GeoserverLoadCoverageListRequest withStore(@Nonnull(when = NEVER) String theStore) {
+    public GeoserverLoadCoveragesByWorkspaceAndStoreRequest withStore(@Nonnull(when = NEVER) String theStore) {
         this.store.set(theStore);
         return self();
     }

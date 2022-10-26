@@ -1,0 +1,40 @@
+{
+  "Schema": {
+    "attributes": {
+      "Attribute": [
+        {
+          "name": "the_geom",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "nillable": true,
+          "binding": "org.locationtech.jts.geom.MultiPolygon"
+        },
+        {
+          "name": "location",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "nillable": true,
+          "binding": "java.lang.String",
+          "length": 254
+        },
+        {
+          "name": "ingestion",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "nillable": true,
+          "binding": "java.util.Date",
+          "length": 8
+        },
+        {
+          "name": "elevation",
+          "minOccurs": 0,
+          "maxOccurs": 1,
+          "nillable": true,
+          "binding": "java.lang.Integer",
+          "length": 9
+        }
+      ]
+    },
+    "href": "http://localhost:8080/geoserver/restng/workspaces/wcs/coveragestores/watertemp/coverages/watertemp/index/granules.json"
+  }
+}

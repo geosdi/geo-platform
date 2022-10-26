@@ -30,5 +30,6 @@
     <logger name="org.geosdi.geoplatform.connector.geoserver.model.about.version.GPGeoserverVersionResourceDeserializer" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.geoserver.model.security.rule.deserializer.GeoserverRuleDeserializer" level="debug"/>
     <logger name="org.geosdi.geoplatform.connector.geoserver.model.security.rule.deserializer.GeoserverRulesDeserializer" level="debug"/>
+    <logger name="org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.structured.GPCoverageGranulesSchemaDeserializer" level="trace"/>
 
 </configuration>

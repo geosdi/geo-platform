@@ -36,13 +36,13 @@
 package org.geosdi.geoplatform.connector.store.workspace.coverages;
 
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.*;
-import org.geosdi.geoplatform.connector.store.workspace.GPGeoserverWorkspacesConnectorStore;
+import org.geosdi.geoplatform.connector.store.workspace.coverages.structured.GPGeoserverStructuredCoverageConnectorStore;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverCoveragesConnectorStore extends GPGeoserverWorkspacesConnectorStore {
+public interface GPGeoserverCoveragesConnectorStore extends GPGeoserverStructuredCoverageConnectorStore {
 
     /**
      * @return {@link GeoserverLoadCoveragesRequest}
@@ -80,7 +80,7 @@ public interface GPGeoserverCoveragesConnectorStore extends GPGeoserverWorkspace
     GeoserverCreateCoverageRequest createCoverageRequest();
 
     /**
-     * @return {@link GeoserverLoadCoverageListRequest}
+     * @return {@link GeoserverLoadCoveragesByWorkspaceAndStoreRequest}
      */
-    GeoserverLoadCoverageListRequest loadCoverageList();
+    GeoserverLoadCoveragesByWorkspaceAndStoreRequest loadCoveragesByWorkspaceAndStoreRequest();
 }

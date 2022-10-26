@@ -6,7 +6,7 @@ import java.io.Serializable;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface WideGeowebcacheSeedStatusRequest extends Serializable {
+public interface IGeowebcacheSeedStatusRequest extends Serializable {
 
     /**
      * @return {@link String}

@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @JsonDeserialize(as = GeowebcacheSrsBean.class)
-public interface WideGeowebcacheSrsBean extends Serializable {
+public interface IGeowebcacheSrsBean extends Serializable {
 
     /**
      * @return {@link Integer}

@@ -13,7 +13,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @JsonDeserialize(as = GeowebcacheParameterEntry.class)
-public interface WideGeowebcacheParameterEntry extends Serializable {
+public interface IGeowebcacheParameterEntry extends Serializable {
 
     /**
      * @return {@link List<String>}

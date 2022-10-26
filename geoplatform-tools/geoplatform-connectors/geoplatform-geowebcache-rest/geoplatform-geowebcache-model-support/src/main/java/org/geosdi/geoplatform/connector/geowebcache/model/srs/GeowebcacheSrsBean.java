@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class GeowebcacheSrsBean implements WideGeowebcacheSrsBean {
+public class GeowebcacheSrsBean implements IGeowebcacheSrsBean {
 
     private static final long serialVersionUID = -8741112827617099689L;
     //

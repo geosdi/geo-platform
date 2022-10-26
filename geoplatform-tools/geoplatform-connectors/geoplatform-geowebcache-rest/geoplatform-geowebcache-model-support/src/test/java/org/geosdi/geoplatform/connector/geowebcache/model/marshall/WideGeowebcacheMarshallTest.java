@@ -2,12 +2,12 @@ package org.geosdi.geoplatform.connector.geowebcache.model.marshall;
 
 import org.geosdi.geoplatform.connector.geowebcache.model.entry.GeowebcacheParameterEntry;
 import org.geosdi.geoplatform.connector.geowebcache.model.seed.GeowebcacheSeedRequestValue;
-import org.geosdi.geoplatform.connector.geowebcache.model.seed.WideGeowebcacheSeedRequestValue;
+import org.geosdi.geoplatform.connector.geowebcache.model.seed.IGeowebcacheSeedRequestValue;
 import org.geosdi.geoplatform.connector.geowebcache.model.seed.request.GeowebcacheSeedRequest;
 import org.geosdi.geoplatform.connector.geowebcache.model.seed.request.WideGeowebcacheSeedRequest;
-import org.geosdi.geoplatform.connector.geowebcache.model.seed.status.WideGeowebcacheSeedTaskStatus;
+import org.geosdi.geoplatform.connector.geowebcache.model.seed.status.IGeowebcacheSeedTaskStatus;
 import org.geosdi.geoplatform.connector.geowebcache.model.srs.GeowebcacheSrsBean;
-import org.geosdi.geoplatform.connector.geowebcache.model.srs.WideGeowebcacheSrsBean;
+import org.geosdi.geoplatform.connector.geowebcache.model.srs.IGeowebcacheSrsBean;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -42,9 +42,9 @@ public class WideGeowebcacheMarshallTest {
     @Test
     public void a_marshallGeowebcacheSeedRequestTest() throws Exception {
         WideGeowebcacheSeedRequest seedRequest = new GeowebcacheSeedRequest();
-        WideGeowebcacheSeedRequestValue seedRequestValue = new GeowebcacheSeedRequestValue();
+        IGeowebcacheSeedRequestValue seedRequestValue = new GeowebcacheSeedRequestValue();
         seedRequestValue.setName("name:test");
-        WideGeowebcacheSrsBean srsBean = new GeowebcacheSrsBean();
+        IGeowebcacheSrsBean srsBean = new GeowebcacheSrsBean();
         srsBean.setNumber(900913);
         seedRequestValue.setSrs(srsBean);
         seedRequestValue.setZoomStart(6);
@@ -110,7 +110,7 @@ public class WideGeowebcacheMarshallTest {
 
     @Test
     public void c_marshallGeowebcacheSeedTaskStatusTest() throws Exception {
-        WideGeowebcacheSeedTaskStatus seedTaskStatus = WideGeowebcacheSeedTaskStatus.of(of(of(123l, 234l, 4l, 78l, 890l)
+        IGeowebcacheSeedTaskStatus seedTaskStatus = IGeowebcacheSeedTaskStatus.of(of(of(123l, 234l, 4l, 78l, 890l)
                 .collect(toList()), of(12l, 23l, 41l, 781l, 8901l).
                 collect(toList()))
                 .collect(toList()));
@@ -121,19 +121,19 @@ public class WideGeowebcacheMarshallTest {
 
     @Test
     public void d_unmarshallGeowebcacheSeedTaskStatusTest() throws Exception {
-        WideGeowebcacheSeedTaskStatus seedTaskStatus = JACKSON_SUPPORT.getDefaultMapper()
+        IGeowebcacheSeedTaskStatus seedTaskStatus = JACKSON_SUPPORT.getDefaultMapper()
                 .readValue(new StringReader("{\n"
                         + "  \"long-array-array\" : [ [ 123, 234, 4, 78, 890 ], [ 12, 23, 41, 781, 8901 ] ]\n"
-                        + "}"), WideGeowebcacheSeedTaskStatus.class);
+                        + "}"), IGeowebcacheSeedTaskStatus.class);
         assertFalse(seedTaskStatus.isTerminated());
         logger.info("#########################GEOWEBCACHE_SEED_TASK_STATUS_FROM_STRING : {}\n", seedTaskStatus);
     }
 
     @Test
     public void e_unmarshallGeowebcacheSeedTaskStatusTest() throws Exception {
-        WideGeowebcacheSeedTaskStatus seedTaskStatus = JACKSON_SUPPORT.getDefaultMapper()
+        IGeowebcacheSeedTaskStatus seedTaskStatus = JACKSON_SUPPORT.getDefaultMapper()
                 .readValue(new StringReader("{\"long-array-array\":[[126,252,19,851,2],[108,252,3,852,2]," +
-                        "[117,252,2,857,2],[117,252,33,858,2]]}"), WideGeowebcacheSeedTaskStatus.class);
+                        "[117,252,2,857,2],[117,252,33,858,2]]}"), IGeowebcacheSeedTaskStatus.class);
         logger.info("{}\n", seedTaskStatus.getStatusTaskValues().size());
     }
 }

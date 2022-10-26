@@ -1,9 +1,9 @@
 package org.geosdi.geoplatform.connector.geowebcache.model.seed;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.geosdi.geoplatform.connector.geowebcache.model.entry.WideGeowebcacheParameterEntry;
-import org.geosdi.geoplatform.connector.geowebcache.model.seed.operation.WideGeowebcacheSeedOperationType;
-import org.geosdi.geoplatform.connector.geowebcache.model.srs.WideGeowebcacheSrsBean;
+import org.geosdi.geoplatform.connector.geowebcache.model.entry.IGeowebcacheParameterEntry;
+import org.geosdi.geoplatform.connector.geowebcache.model.seed.operation.IGeowebcacheSeedOperationType;
+import org.geosdi.geoplatform.connector.geowebcache.model.srs.IGeowebcacheSrsBean;
 
 import javax.annotation.Nonnull;
 import java.io.Serializable;
@@ -17,7 +17,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @JsonDeserialize(as = GeowebcacheSeedRequestValue.class)
-public interface WideGeowebcacheSeedRequestValue extends Serializable {
+public interface IGeowebcacheSeedRequestValue extends Serializable {
 
     /**
      * @return {@link String}
@@ -30,14 +30,14 @@ public interface WideGeowebcacheSeedRequestValue extends Serializable {
     void setName(String theName);
 
     /**
-     * @return {@link WideGeowebcacheSrsBean}
+     * @return {@link IGeowebcacheSrsBean}
      */
-    <Srs extends WideGeowebcacheSrsBean> Srs getSrs();
+    <Srs extends IGeowebcacheSrsBean> Srs getSrs();
 
     /**
      * @param theSrs
      */
-    <Srs extends WideGeowebcacheSrsBean> void setSrs(Srs theSrs);
+    <Srs extends IGeowebcacheSrsBean> void setSrs(Srs theSrs);
 
     /**
      * @return {@link Integer}
@@ -73,13 +73,13 @@ public interface WideGeowebcacheSeedRequestValue extends Serializable {
      * @param <SeedOperationType>
      * @return {@link SeedOperationType}
      */
-    <SeedOperationType extends WideGeowebcacheSeedOperationType> SeedOperationType getType();
+    <SeedOperationType extends IGeowebcacheSeedOperationType> SeedOperationType getType();
 
     /**
      * @param theType
      * @param <SeedOperationType>
      */
-    <SeedOperationType extends WideGeowebcacheSeedOperationType> void setType(SeedOperationType theType);
+    <SeedOperationType extends IGeowebcacheSeedOperationType> void setType(SeedOperationType theType);
 
     /**
      * @return {@link Integer}
@@ -92,18 +92,18 @@ public interface WideGeowebcacheSeedRequestValue extends Serializable {
     void setThreadCount(Integer theThreadCount);
 
     /**
-     * @return {@link Map<String, WideGeowebcacheParameterEntry>}
+     * @return {@link Map<String,  IGeowebcacheParameterEntry >}
      */
-    Map<String, List<WideGeowebcacheParameterEntry>> getParameters();
+    Map<String, List<IGeowebcacheParameterEntry>> getParameters();
 
     /**
      * @param theParameters
      */
-    void setParameters(Map<String, List<WideGeowebcacheParameterEntry>> theParameters);
+    void setParameters(Map<String, List<IGeowebcacheParameterEntry>> theParameters);
 
     /**
      * @param param
      * @throws Exception
      */
-    void addParameter(@Nonnull(when = NEVER) WideGeowebcacheParameterEntry... param) throws Exception;
+    void addParameter(@Nonnull(when = NEVER) IGeowebcacheParameterEntry... param) throws Exception;
 }

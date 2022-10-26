@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @JsonDeserialize(as = GeowebcacheSeedOperationType.class)
-public interface WideGeowebcacheSeedOperationType extends Serializable {
+public interface IGeowebcacheSeedOperationType extends Serializable {
 
     /**
      * @return {@link String}

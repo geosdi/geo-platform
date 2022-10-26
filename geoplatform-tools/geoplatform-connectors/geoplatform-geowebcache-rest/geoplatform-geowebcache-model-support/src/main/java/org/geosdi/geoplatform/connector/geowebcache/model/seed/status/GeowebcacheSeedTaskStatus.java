@@ -17,7 +17,7 @@ import static javax.annotation.meta.When.NEVER;
  */
 @Getter
 @ToString
-public class GeowebcacheSeedTaskStatus implements WideGeowebcacheSeedTaskStatus {
+public class GeowebcacheSeedTaskStatus implements IGeowebcacheSeedTaskStatus {
 
     private static final long serialVersionUID = 4789955367732661224L;
     //

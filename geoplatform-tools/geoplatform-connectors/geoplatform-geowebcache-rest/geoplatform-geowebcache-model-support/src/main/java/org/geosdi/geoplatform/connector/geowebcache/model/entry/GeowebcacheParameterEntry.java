@@ -22,7 +22,7 @@ import static javax.annotation.meta.When.NEVER;
 @Getter
 @ToString
 @XmlAccessorType(value = XmlAccessType.FIELD)
-public class GeowebcacheParameterEntry implements WideGeowebcacheParameterEntry {
+public class GeowebcacheParameterEntry implements IGeowebcacheParameterEntry {
 
     private static final long serialVersionUID = 358810488942497528L;
     //

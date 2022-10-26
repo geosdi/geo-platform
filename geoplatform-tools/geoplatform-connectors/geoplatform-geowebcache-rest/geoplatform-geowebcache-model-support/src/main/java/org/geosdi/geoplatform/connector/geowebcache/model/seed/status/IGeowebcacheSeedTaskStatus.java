@@ -14,7 +14,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @JsonDeserialize(as = GeowebcacheSeedTaskStatus.class)
-public interface WideGeowebcacheSeedTaskStatus extends Serializable {
+public interface IGeowebcacheSeedTaskStatus extends Serializable {
 
     /**
      * @return {@link List<List<Long>>}
@@ -31,10 +31,10 @@ public interface WideGeowebcacheSeedTaskStatus extends Serializable {
 
     /**
      * @param theStatusTaskValues
-     * @return {@link WideGeowebcacheSeedTaskStatus}
+     * @return {@link IGeowebcacheSeedTaskStatus}
      * @throws Exception
      */
-    static WideGeowebcacheSeedTaskStatus of(@Nonnull(when = NEVER) List<List<Long>> theStatusTaskValues) throws Exception {
+    static IGeowebcacheSeedTaskStatus of(@Nonnull(when = NEVER) List<List<Long>> theStatusTaskValues) throws Exception {
         return new GeowebcacheSeedTaskStatus(theStatusTaskValues);
     }
 }

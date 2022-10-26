@@ -12,7 +12,7 @@ import static java.lang.Boolean.FALSE;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum GeowebcacheSeedOperationType implements WideGeowebcacheSeedOperationType {
+public enum GeowebcacheSeedOperationType implements IGeowebcacheSeedOperationType {
 
     RESEED("reseed"),
     TRUNCATE("truncate");
@@ -42,15 +42,15 @@ public enum GeowebcacheSeedOperationType implements WideGeowebcacheSeedOperation
 
     /**
      * @param type
-     * @return {@link WideGeowebcacheSeedOperationType}
+     * @return {@link IGeowebcacheSeedOperationType}
      */
     @JsonCreator
-    public static WideGeowebcacheSeedOperationType forType(String type) {
-        Optional<WideGeowebcacheSeedOperationType> optional = Arrays
+    public static IGeowebcacheSeedOperationType forType(String type) {
+        Optional<IGeowebcacheSeedOperationType> optional = Arrays
                 .stream(GeowebcacheSeedOperationType.values())
                 .filter(v -> ((type != null) && !(type.trim().isEmpty()))
                         ? v.getType().equalsIgnoreCase(type) : FALSE)
-                .map(value -> (WideGeowebcacheSeedOperationType) value)
+                .map(value -> (IGeowebcacheSeedOperationType) value)
                 .findFirst();
         return ((optional != null) && !(optional.equals(Optional.empty()))) ? optional.get() : null;
     }

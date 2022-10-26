@@ -1,7 +1,7 @@
 package org.geosdi.geoplatform.connector.geowebcache.model.seed.request;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.geosdi.geoplatform.connector.geowebcache.model.seed.WideGeowebcacheSeedRequestValue;
+import org.geosdi.geoplatform.connector.geowebcache.model.seed.IGeowebcacheSeedRequestValue;
 
 import java.io.Serializable;
 
@@ -13,12 +13,12 @@ import java.io.Serializable;
 public interface WideGeowebcacheSeedRequest extends Serializable {
 
     /**
-     * @return {@link WideGeowebcacheSeedRequestValue}
+     * @return {@link IGeowebcacheSeedRequestValue}
      */
-    WideGeowebcacheSeedRequestValue getSeedRequestValue();
+    IGeowebcacheSeedRequestValue getSeedRequestValue();
 
     /**
      * @param theSeedRequestValue
      */
-    void setSeedRequestValue(WideGeowebcacheSeedRequestValue theSeedRequestValue);
+    void setSeedRequestValue(IGeowebcacheSeedRequestValue theSeedRequestValue);
 }

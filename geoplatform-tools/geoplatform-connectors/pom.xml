@@ -19,6 +19,7 @@
         <module>geoplatform-ogc-connectors</module>
         <module>geoplatform-ws-connectors</module>
         <module>geoplatform-geoserver-rest</module>
+      <module>geoplatform-geowebcache-rest</module>
     </modules>
     
     <dependencyManagement>

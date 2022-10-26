@@ -1,0 +1,65 @@
+{
+  "attributes" : {
+    "Attribute" : [ {
+      "name" : "NAME#0",
+      "minOccurs" : 0,
+      "maxOccurs" : 0,
+      "nillable" : true,
+      "binding" : "BINDING#0"
+    }, {
+      "name" : "NAME#1",
+      "minOccurs" : 1,
+      "maxOccurs" : 1,
+      "nillable" : false,
+      "binding" : "BINDING#1"
+    }, {
+      "name" : "NAME#2",
+      "minOccurs" : 2,
+      "maxOccurs" : 2,
+      "nillable" : true,
+      "binding" : "BINDING#2"
+    }, {
+      "name" : "NAME#3",
+      "minOccurs" : 3,
+      "maxOccurs" : 3,
+      "nillable" : false,
+      "binding" : "BINDING#3"
+    }, {
+      "name" : "NAME#4",
+      "minOccurs" : 4,
+      "maxOccurs" : 4,
+      "nillable" : true,
+      "binding" : "BINDING#4"
+    }, {
+      "name" : "NAME#5",
+      "minOccurs" : 5,
+      "maxOccurs" : 5,
+      "nillable" : false,
+      "binding" : "BINDING#5"
+    }, {
+      "name" : "NAME#6",
+      "minOccurs" : 6,
+      "maxOccurs" : 6,
+      "nillable" : true,
+      "binding" : "BINDING#6"
+    }, {
+      "name" : "NAME#7",
+      "minOccurs" : 7,
+      "maxOccurs" : 7,
+      "nillable" : false,
+      "binding" : "BINDING#7"
+    }, {
+      "name" : "NAME#8",
+      "minOccurs" : 8,
+      "maxOccurs" : 8,
+      "nillable" : true,
+      "binding" : "BINDING#8"
+    }, {
+      "name" : "NAME#9",
+      "minOccurs" : 9,
+      "maxOccurs" : 9,
+      "nillable" : false,
+      "binding" : "BINDING#9"
+    } ]
+  }
+}

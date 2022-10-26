@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Schema>
+    <attributes>
+        <Attribute>
+            <name>the_geom</name>
+            <minOccurs>0</minOccurs>
+            <maxOccurs>1</maxOccurs>
+            <nillable>true</nillable>
+            <binding>org.locationtech.jts.geom.MultiPolygon</binding>
+        </Attribute>
+        <Attribute>
+            <name>location</name>
+            <minOccurs>0</minOccurs>
+            <maxOccurs>1</maxOccurs>
+            <nillable>true</nillable>
+            <binding>java.lang.String</binding>
+            <length>254</length>
+        </Attribute>
+        <Attribute>
+            <name>ingestion</name>
+            <minOccurs>0</minOccurs>
+            <maxOccurs>1</maxOccurs>
+            <nillable>true</nillable>
+            <binding>java.util.Date</binding>
+            <length>8</length>
+        </Attribute>
+        <Attribute>
+            <name>elevation</name>
+            <minOccurs>0</minOccurs>
+            <maxOccurs>1</maxOccurs>
+            <nillable>true</nillable>
+            <binding>java.lang.Integer</binding>
+            <length>9</length>
+        </Attribute>
+    </attributes>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom"
+               href="http://localhost:8080/geoserver/rest/workspaces/wcs/coveragestores/watertemp/coverages/watertemp/index/granules.xml"
+               rel="alternate" type="application/xml"/>
+</Schema>

@@ -54,6 +54,7 @@ import java.util.TimeZone;
 import static com.fasterxml.jackson.databind.type.TypeFactory.defaultInstance;
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Observable.fromArray;
+import static java.lang.Boolean.TRUE;
 import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
@@ -67,8 +68,18 @@ public class GPJacksonSupport implements JacksonSupport {
     //
     private final ObjectMapper mapper;
 
+    /**
+     * <p>By Default {@link JaxbAnnotationIntrospector} is used</p>
+     */
     public GPJacksonSupport() {
-        this(defaultProp());
+        this(TRUE, defaultProp());
+    }
+
+    /**
+     * @param useJaxbAnnotation
+     */
+    public GPJacksonSupport(boolean useJaxbAnnotation) {
+        this(useJaxbAnnotation, defaultProp());
     }
 
     /**
@@ -80,18 +91,34 @@ public class GPJacksonSupport implements JacksonSupport {
     }
 
     /**
+     * @param format
+     * @param useJaxbAnnotation
+     */
+    public GPJacksonSupport(@Nonnull(when = NEVER) DateFormat format, boolean useJaxbAnnotation) {
+        this(useJaxbAnnotation);
+        this.mapper.setDateFormat(format);
+    }
+
+    /**
      * @param features
      */
     public GPJacksonSupport(@Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {
+        this(TRUE, features);
+    }
+
+    /**
+     * @param useJaxbAnnotation
+     * @param features
+     */
+    public GPJacksonSupport(boolean useJaxbAnnotation, @Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {
         checkArgument(features != null, "The Parameter features must not be null.");
         this.mapper = new ObjectMapper();
+        AnnotationIntrospector primary = new JacksonAnnotationIntrospector();
+        this.mapper.setAnnotationIntrospector(useJaxbAnnotation ? new AnnotationIntrospectorPair(primary, new JaxbAnnotationIntrospector(defaultInstance())) : primary);
         fromArray(features)
                 .filter(Objects::nonNull)
                 .doOnComplete(() -> logger.info("##############{} configure all Features.", this.getProviderName()))
-                .subscribe(f -> f.configureMapper(this.getDefaultMapper()), Throwable::printStackTrace);
-        AnnotationIntrospector primary = new JaxbAnnotationIntrospector(defaultInstance());
-        AnnotationIntrospector secondary = new JacksonAnnotationIntrospector();
-        this.mapper.setAnnotationIntrospector(new AnnotationIntrospectorPair(primary, secondary));
+                .subscribe(f -> f.configureMapper(this.mapper), Throwable::printStackTrace);
     }
 
     /**

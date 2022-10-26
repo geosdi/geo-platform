@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.*;
-import org.geosdi.geoplatform.connector.geoserver.worksapce.GPGeoserverWorkspacesConnector;
+import org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.structured.GPStructuredCoverageConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -51,7 +51,7 @@ import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExcepti
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPGeoserverCoveragesConnector extends GPGeoserverWorkspacesConnector implements IGPGeoserverCoveragesConnector {
+public abstract class GPGeoserverCoveragesConnector extends GPStructuredCoverageConnector implements IGPGeoserverCoveragesConnector {
 
     /**
      * @param urlServer
@@ -202,14 +202,14 @@ public abstract class GPGeoserverCoveragesConnector extends GPGeoserverWorkspace
     }
 
     /**
-     * @return {@link GeoserverLoadCoverageListRequest}
+     * @return {@link GeoserverLoadCoveragesByWorkspaceAndStoreRequest}
      */
     @Override
-    public GeoserverLoadCoverageListRequest loadCoverageList() {
+    public GeoserverLoadCoveragesByWorkspaceAndStoreRequest loadCoveragesByWorkspaceAndStoreRequest() {
         switch (version) {
             case V220x:
             case V221x:
-                return new GPGeoserverLoadCoverageListRequest(this, this.jacksonSupport);
+                return new GPGeoserverLoadCoveragesByWorkspaceAndStoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

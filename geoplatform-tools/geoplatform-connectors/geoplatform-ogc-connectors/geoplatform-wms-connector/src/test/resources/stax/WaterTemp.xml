@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:FeatureCollection xmlns:wfs="http://www.opengis.net/wfs" xmlns:gf="http://www.geoserver.org/rest/granules"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc"
+                       xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <gml:boundedBy>
+        <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+            <gml:coord>
+                <gml:X>0.23722068851276978</gml:X>
+                <gml:Y>40.562080748421806</gml:Y>
+            </gml:coord>
+            <gml:coord>
+                <gml:X>14.592757149389236</gml:X>
+                <gml:Y>44.55808294568743</gml:Y>
+            </gml:coord>
+        </gml:Box>
+    </gml:boundedBy>
+    <gml:featureMember>
+        <gf:watertemp fid="watertemp.1">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates>0.237221,40.562081 14.592757,44.558083</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <gf:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates>0.237221,40.562081 0.237221,44.558083 14.592757,44.558083
+                                        14.592757,40.562081 0.237221,40.562081
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </gf:the_geom>
+            <gf:location>NCOM_wattemp_000_20081101T0000000_12.tiff</gf:location>
+            <gf:ingestion>2008-11-01T00:00:00Z</gf:ingestion>
+            <gf:elevation>0</gf:elevation>
+        </gf:watertemp>
+    </gml:featureMember>
+    <gml:featureMember>
+        <gf:watertemp fid="watertemp.2">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates>0.237221,40.562081 14.592757,44.558083</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <gf:the_geom>
+                <gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:polygonMember>
+                        <gml:Polygon>
+                            <gml:outerBoundaryIs>
+                                <gml:LinearRing>
+                                    <gml:coordinates>0.237221,40.562081 0.237221,44.558083 14.592757,44.558083
+                                        14.592757,40.562081 0.237221,40.562081
+                                    </gml:coordinates>
+                                </gml:LinearRing>
+                            </gml:outerBoundaryIs>
+                        </gml:Polygon>
+                    </gml:polygonMember>
+                </gml:MultiPolygon>
+            </gf:the_geom>
+            <gf:location>NCOM_wattemp_000_20081031T0000000_12.tiff</gf:location>
+            <gf:ingestion>2008-10-31T00:00:00Z</gf:ingestion>
+            <gf:elevation>0</gf:elevation>
+        </gf:watertemp>
+    </gml:featureMember>
+</wfs:FeatureCollection>

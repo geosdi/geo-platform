@@ -103,6 +103,7 @@ public class GPJacksonXmlSupport implements JacksonXmlSupport {
     }
 
     /**
+     * @param useJacksonAnnotation
      * @param features
      */
     public GPJacksonXmlSupport(boolean useJacksonAnnotation, @Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {

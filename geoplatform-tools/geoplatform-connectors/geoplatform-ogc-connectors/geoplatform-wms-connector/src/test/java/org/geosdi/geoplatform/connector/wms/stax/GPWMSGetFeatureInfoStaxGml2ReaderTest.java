@@ -568,4 +568,10 @@ public class GPWMSGetFeatureInfoStaxGml2ReaderTest extends WMSGetFeatureInfoStax
         logger.info("#######################FEATURE_COLLECTION_EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1 : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("EMSR634_AOI01_GRA_PRODUCT_builtUpP_r1_v1.xml"))));
     }
+
+    @Test
+    public void d_x_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_WATER_TEMP : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("WaterTemp.xml"))));
+    }
 }

@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.connector.geoserver.coveragestores;
 import com.google.common.io.CharStreams;
 import io.reactivex.rxjava3.functions.Consumer;
 import net.jcip.annotations.ThreadSafe;
-import org.apache.hc.core5.net.URIBuilder;
+import org.apache.http.client.utils.URIBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.purge.GPGeoserverPurgeParam;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverBooleanQueryParam;
 import org.geosdi.geoplatform.connector.geoserver.model.uri.GeoserverRXQueryParamConsumer;

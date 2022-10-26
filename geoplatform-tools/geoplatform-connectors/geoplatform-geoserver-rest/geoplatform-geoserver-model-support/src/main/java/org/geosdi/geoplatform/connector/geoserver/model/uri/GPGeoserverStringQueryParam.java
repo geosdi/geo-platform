@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.uri;
 
+import net.jcip.annotations.Immutable;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryParam.GeoserverQueryParam;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -44,14 +47,22 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverStringQueryParam extends GPGeoserverQueryParam.GeoserverQueryParam<String> {
+@Immutable
+public class GPGeoserverStringQueryParam extends GeoserverQueryParam<String> {
 
+    /**
+     * @param theKey
+     * @param theValue
+     */
     public GPGeoserverStringQueryParam(@Nonnull(when = NEVER) String theKey, @Nullable String theValue) {
         super(theKey, theValue);
     }
 
+    /**
+     * @return {@link Boolean}
+     */
     @Override
-    public String formatValue() {
-        return this.getValue();
+    public boolean isQueryParamValid() {
+        return ((super.isQueryParamValid()) && !(this.getValue().trim().isEmpty()));
     }
 }

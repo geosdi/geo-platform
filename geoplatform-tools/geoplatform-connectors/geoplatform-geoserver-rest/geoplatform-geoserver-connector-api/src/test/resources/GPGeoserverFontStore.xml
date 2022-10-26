@@ -1,0 +1,40 @@
+<root>
+    <fonts>
+        <entry>Dialog</entry>
+        <entry>Dialog.bold</entry>
+        <entry>Dialog.bolditalic</entry>
+        <entry>Dialog.italic</entry>
+        <entry>Dialog.plain</entry>
+        <entry>DialogInput</entry>
+        <entry>DialogInput.bold</entry>
+        <entry>DialogInput.bolditalic</entry>
+        <entry>DialogInput.italic</entry>
+        <entry>DialogInput.plain</entry>
+        <entry>Lucida Bright</entry>
+        <entry>Lucida Bright Demibold</entry>
+        <entry>Lucida Bright Demibold Italic</entry>
+        <entry>Lucida Bright Italic</entry>
+        <entry>Lucida Bright Regular</entry>
+        <entry>Lucida Sans</entry>
+        <entry>Lucida Sans Demibold</entry>
+        <entry>Lucida Sans Regular</entry>
+        <entry>Lucida Sans Typewriter</entry>
+        <entry>Lucida Sans Typewriter Bold</entry>
+        <entry>Lucida Sans Typewriter Regular</entry>
+        <entry>Monospaced</entry>
+        <entry>Monospaced.bold</entry>
+        <entry>Monospaced.bolditalic</entry>
+        <entry>Monospaced.italic</entry>
+        <entry>Monospaced.plain</entry>
+        <entry>SansSerif</entry>
+        <entry>SansSerif.bold</entry>
+        <entry>SansSerif.bolditalic</entry>
+        <entry>SansSerif.italic</entry>
+        <entry>SansSerif.plain</entry>
+        <entry>Serif</entry>
+        <entry>Serif.bold</entry>
+        <entry>Serif.bolditalic</entry>
+        <entry>Serif.italic</entry>
+        <entry>Serif.plain</entry>
+    </fonts>
+</root>

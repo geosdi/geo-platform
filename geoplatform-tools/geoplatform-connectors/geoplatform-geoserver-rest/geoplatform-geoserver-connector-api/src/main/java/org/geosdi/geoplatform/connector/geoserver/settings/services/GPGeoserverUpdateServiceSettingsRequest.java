@@ -112,8 +112,13 @@ public abstract class GPGeoserverUpdateServiceSettingsRequest<Body extends Geose
      */
     @Override
     protected Boolean readInternal(BufferedReader reader) throws Exception {
-        String value = CharStreams.toString(reader);
-        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
+        try {
+            String value = CharStreams.toString(reader);
+            return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return FALSE;
+        }
     }
 
     /**

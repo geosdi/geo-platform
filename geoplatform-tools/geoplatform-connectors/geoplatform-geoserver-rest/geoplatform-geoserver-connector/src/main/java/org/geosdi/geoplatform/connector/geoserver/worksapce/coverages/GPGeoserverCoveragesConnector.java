@@ -37,9 +37,7 @@ package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageListRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoveragesRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.*;
 import org.geosdi.geoplatform.connector.geoserver.worksapce.GPGeoserverWorkspacesConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -135,10 +133,10 @@ public abstract class GPGeoserverCoveragesConnector extends GPGeoserverWorkspace
     }
 
     /**
-     * @return {@link GPGeoserverLoadStoreCoverageRequest}
+     * @return {@link GeoserverLoadStoreCoverageRequest}
      */
     @Override
-    public GPGeoserverLoadStoreCoverageRequest loadWorkspaceStoreCoverageRequest() {
+    public GeoserverLoadStoreCoverageRequest loadWorkspaceStoreCoverageRequest() {
         switch (version) {
             case V220x:
             case V221x:
@@ -149,10 +147,10 @@ public abstract class GPGeoserverCoveragesConnector extends GPGeoserverWorkspace
     }
 
     /**
-     * @return {@link GPGeoserverLoadCoverageWithUrlRequest}
+     * @return {@link GeoserverLoadCoverageWithUrlRequest}
      */
     @Override
-    public GPGeoserverLoadCoverageWithUrlRequest loadCoverageInfoWithUrl() {
+    public GeoserverLoadCoverageWithUrlRequest loadCoverageInfoWithUrl() {
         switch (version) {
             case V220x:
             case V221x:
@@ -163,10 +161,10 @@ public abstract class GPGeoserverCoveragesConnector extends GPGeoserverWorkspace
     }
 
     /**
-     * @return {@link GPGeoserverDeleteCoverageRequest}
+     * @return {@link GeoserverDeleteCoverageRequest}
      */
     @Override
-    public GPGeoserverDeleteCoverageRequest deleteCoverageInCoverageStoreRequest() {
+    public GeoserverDeleteCoverageRequest deleteCoverageInCoverageStoreRequest() {
         switch (version) {
             case V220x:
             case V221x:
@@ -177,23 +175,23 @@ public abstract class GPGeoserverCoveragesConnector extends GPGeoserverWorkspace
     }
 
     /**
-     * @return {@link GPGeoserverUpdateStoreCoverageRequest}
+     * @return {@link GeoserverUpdateCoverageStoreRequest}
      */
-    public GPGeoserverUpdateStoreCoverageRequest updateStoreCoverageRequest() {
+    public GeoserverUpdateCoverageStoreRequest updateStoreCoverageRequest() {
         switch (version) {
             case V220x:
             case V221x:
-                return new GPGeoserverUpdateStoreCoverageRequest(this, this.jacksonSupport);
+                return new GPGeoserverUpdateCoverageStoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
 
     /**
-     * @return {@link GPGeoserverCreateCoverageRequest}
+     * @return {@link GeoserverCreateCoverageRequest}
      */
     @Override
-    public GPGeoserverCreateCoverageRequest createCoverageRequest() {
+    public GeoserverCreateCoverageRequest createCoverageRequest() {
         switch (version) {
             case V220x:
             case V221x:

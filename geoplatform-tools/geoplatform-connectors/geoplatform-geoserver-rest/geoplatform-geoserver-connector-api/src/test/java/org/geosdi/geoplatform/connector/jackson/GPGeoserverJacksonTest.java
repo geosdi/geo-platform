@@ -89,10 +89,10 @@ public class GPGeoserverJacksonTest {
             INDENT_OUTPUT_ENABLE);
     public static final JacksonSupport emptyJacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
+            ACCEPT_SINGLE_VALUE_AS_ARRAY_DISABLE,
             WRAP_ROOT_VALUE_DISABLE,
-            INDENT_OUTPUT_ENABLE).configure(ACCEPT_SINGLE_VALUE_AS_ARRAY_DISABLE);
-    private static final GPJacksonXmlSupport jacksonXmlSupport = new GPJacksonXmlSupport();
+            INDENT_OUTPUT_ENABLE);
+    public static final GPJacksonXmlSupport jacksonXmlSupport = new GPJacksonXmlSupport();
 
     @Test
     public void a_a_unmarshallGeoserverWorkspacesTest() throws Exception {

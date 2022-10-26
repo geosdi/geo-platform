@@ -37,10 +37,10 @@ package org.geosdi.geoplatform.connector.store.about;
 
 import org.geosdi.geoplatform.connector.api.GPConnectorStore;
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutManifestRequest;
-import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutStatusRequest;
-import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutSystemStatusRequest;
-import org.geosdi.geoplatform.connector.geoserver.about.GPGeoserverAboutVersionRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.about.manifest.GeoserverAboutManifestRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.about.status.GeoserverAboutStatusRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.about.system.GeoserverAboutSystemStatusRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.about.version.GeoserverAboutVersionRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -56,34 +56,34 @@ public abstract class GeoserverAboutConnectorStore extends GPConnectorStore<GPGe
     }
 
     /**
-     * @return {@link GPGeoserverAboutVersionRequest}
+     * @return {@link GeoserverAboutVersionRequest}
      */
     @Override
-    public GPGeoserverAboutVersionRequest createAboutVersionRequest() {
+    public GeoserverAboutVersionRequest createAboutVersionRequest() {
         return this.server.createAboutVersionRequest();
     }
 
     /**
-     * @return {@link GPGeoserverAboutStatusRequest}
+     * @return {@link GeoserverAboutStatusRequest}
      */
     @Override
-    public GPGeoserverAboutStatusRequest createAboutStatusRequest() {
+    public GeoserverAboutStatusRequest createAboutStatusRequest() {
         return this.server.createAboutStatusRequest();
     }
 
     /**
-     * @return {@link GPGeoserverAboutManifestRequest}
+     * @return {@link GeoserverAboutManifestRequest}
      */
     @Override
-    public GPGeoserverAboutManifestRequest createAboutManifestRequest() {
+    public GeoserverAboutManifestRequest createAboutManifestRequest() {
         return this.server.createAboutManifestRequest();
     }
 
     /**
-     * @return {@link GPGeoserverAboutSystemStatusRequest}
+     * @return {@link GeoserverAboutSystemStatusRequest}
      */
     @Override
-    public GPGeoserverAboutSystemStatusRequest createAboutSystemStatusRequest() {
+    public GeoserverAboutSystemStatusRequest createAboutSystemStatusRequest() {
         return this.server.createAboutSystemStatusRequest();
     }
 }

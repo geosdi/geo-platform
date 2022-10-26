@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.connector.geoserver.model.uri;
 import org.apache.hc.core5.net.URIBuilder;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
+import javax.annotation.Nullable;
 import java.io.Serializable;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -49,6 +49,8 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 public interface GPGeoserverQueryParam<B extends Object> extends Serializable {
+
+    String NULL_QUERY_VALUE = "[NULL]";
 
     /**
      * @return {@link String}
@@ -61,6 +63,13 @@ public interface GPGeoserverQueryParam<B extends Object> extends Serializable {
     B getValue();
 
     /**
+     * @return {@link Boolean}
+     */
+    default boolean isQueryParamValid() {
+        return this.getValue() != null;
+    }
+
+    /**
      * @return {@link String}
      */
     String formatValue();
@@ -68,9 +77,11 @@ public interface GPGeoserverQueryParam<B extends Object> extends Serializable {
     /**
      * @param uriBuilder
      */
-    default void addQueryParam(URIBuilder uriBuilder) {
+    default void addQueryParam(@Nonnull(when = NEVER) URIBuilder uriBuilder) {
         checkArgument(uriBuilder != null , "The Parameter uriBuilder must not be null");
-        uriBuilder.addParameter(this.getKey(), this.formatValue());
+        if (this.isQueryParamValid()) {
+            uriBuilder.addParameter(this.getKey(), this.formatValue());
+        }
     }
 
     abstract class GeoserverQueryParam<B extends Object> implements GPGeoserverQueryParam<B> {
@@ -84,7 +95,7 @@ public interface GPGeoserverQueryParam<B extends Object> extends Serializable {
          * @param theKey
          * @param theValue
          */
-        protected GeoserverQueryParam(@Nonnull(when = NEVER) String theKey, @Nonnull(when = NEVER) B theValue) {
+        protected GeoserverQueryParam(@Nonnull(when = NEVER) String theKey, @Nullable B theValue) {
             checkArgument(theKey != null && !(theKey.trim().isEmpty()), "The Parameter key must not be null");
             this.key = theKey;
             this.value = theValue;
@@ -104,6 +115,21 @@ public interface GPGeoserverQueryParam<B extends Object> extends Serializable {
         @Override
         public B getValue() {
             return value;
+        }
+
+        /**
+         * @return {@link String}
+         */
+        @Override
+        public String formatValue() {
+            return (this.isQueryParamValid() ? this.internalFormatValue() : NULL_QUERY_VALUE);
+        }
+
+        /**
+         * @return {@link String}
+         */
+        protected String internalFormatValue() {
+            return this.getValue().toString();
         }
     }
 }

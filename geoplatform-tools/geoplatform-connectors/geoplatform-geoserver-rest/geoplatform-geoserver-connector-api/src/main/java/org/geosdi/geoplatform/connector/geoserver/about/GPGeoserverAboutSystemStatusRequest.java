@@ -35,8 +35,8 @@
 package org.geosdi.geoplatform.connector.geoserver.about;
 
 import org.geosdi.geoplatform.connector.geoserver.model.about.system.GPGeoserverAboutSystemStatusMetricStore;
+import org.geosdi.geoplatform.connector.geoserver.request.about.system.GeoserverAboutSystemStatusRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
@@ -48,7 +48,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGeoserverAboutSystemStatusRequest extends GPJsonGetConnectorRequest<GPGeoserverAboutSystemStatusMetricStore, GPGeoserverAboutSystemStatusRequest> implements GPJsonConnectorRequest<GPGeoserverAboutSystemStatusMetricStore, GPGeoserverAboutSystemStatusRequest> {
+class GPGeoserverAboutSystemStatusRequest extends GPJsonGetConnectorRequest<GPGeoserverAboutSystemStatusMetricStore, GeoserverAboutSystemStatusRequest> implements GeoserverAboutSystemStatusRequest {
 
     /**
      * @param server

@@ -35,26 +35,55 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.uri;
 
-import com.google.common.base.Preconditions;
+import net.jcip.annotations.Immutable;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryParam.GeoserverQueryParam;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import javax.annotation.Nullable;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
+
+import static java.util.Arrays.stream;
+import static java.util.Collections.EMPTY_SET;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toCollection;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverStringArrayQueryParam extends GPGeoserverQueryParam.GeoserverQueryParam<String[]> {
+@Immutable
+public class GPGeoserverStringArrayQueryParam extends GeoserverQueryParam<String[]> {
 
-    public GPGeoserverStringArrayQueryParam(@Nonnull(when = When.NEVER) String theKey, @Nonnull(when = When.NEVER) String[] theValue) {
+    private final Set<String> cleanValues;
+
+    /**
+     * @param theKey
+     * @param theValue
+     */
+    public GPGeoserverStringArrayQueryParam(@Nonnull(when = NEVER) String theKey, @Nullable String... theValue) {
         super(theKey, theValue);
-        Preconditions.checkArgument(theValue != null && theValue.length > 0, "The Parameter value must not be null");
+        this.cleanValues = super.isQueryParamValid() ? stream(theValue)
+                .filter(Objects::nonNull)
+                .filter(v -> !(v.trim().isEmpty()))
+                .collect(toCollection(LinkedHashSet::new)) : EMPTY_SET;
     }
-    
+
+    /**
+     * @return {@link Boolean}
+     */
     @Override
-    public String formatValue() {
-        return Arrays.stream(this.getValue()).collect(Collectors.joining(","));
+    public boolean isQueryParamValid() {
+        return this.cleanValues.size() > 0;
+    }
+
+    /**
+     * @return {@link String}
+     */
+    @Override
+    protected String internalFormatValue() {
+        return this.cleanValues.stream().collect(joining(","));
     }
 }

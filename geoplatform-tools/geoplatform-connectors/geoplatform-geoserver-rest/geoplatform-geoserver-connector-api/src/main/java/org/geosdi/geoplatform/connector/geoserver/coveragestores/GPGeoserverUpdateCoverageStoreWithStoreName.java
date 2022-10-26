@@ -66,7 +66,7 @@ import static org.apache.hc.core5.http.ContentType.create;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnectorRequest<GPCoverageResponse, GeoserverUpdateCoverageStoreWithStoreNameRequest> implements GeoserverUpdateCoverageStoreWithStoreNameRequest {
+class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnectorRequest<GPCoverageResponse, GeoserverUpdateCoverageStoreWithStoreNameRequest> implements GeoserverUpdateCoverageStoreWithStoreNameRequest {
 
     private final ThreadLocal<String> workspaceName = withInitial(() -> null);
     private final ThreadLocal<String> storeName = withInitial(() -> null);
@@ -74,7 +74,7 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
     private final ThreadLocal<IGPFileExtension> formatName = withInitial(() -> null);
     private final ThreadLocal<File> file = withInitial(() -> null);
     private final ThreadLocal<GPParameterUpdate> update = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverStringQueryParam> configure = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverParameterConfigure> configure = withInitial(() -> null);
     private final ThreadLocal<GPGeoserverStringQueryParam> filename = withInitial(() -> null);
     private final ThreadLocal<GPGeoserverStringQueryParam> coverageName = withInitial(() -> null);
 
@@ -131,7 +131,7 @@ public class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnec
      */
     @Override
     public GeoserverUpdateCoverageStoreWithStoreNameRequest withConfigure(@Nonnull(when = NEVER) GPGeoserverParameterConfigure theParameterConfigure) {
-        this.configure.set(new GPGeoserverStringQueryParam("configure", theParameterConfigure.toString()));
+        this.configure.set(theParameterConfigure);
         return self();
     }
 

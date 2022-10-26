@@ -35,7 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 
+import io.reactivex.rxjava3.functions.Consumer;
 import net.jcip.annotations.ThreadSafe;
+import org.apache.hc.core5.net.URIBuilder;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverStringQueryParam;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GeoserverRXQueryParamConsumer;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverAllCoverages;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCoverages;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverEmptyCoverages;
@@ -49,6 +53,7 @@ import javax.annotation.Nullable;
 import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static io.reactivex.rxjava3.core.Observable.fromArray;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
@@ -59,8 +64,8 @@ import static javax.annotation.meta.When.NEVER;
 @ThreadSafe
 class GPGeoserverLoadCoveragesRequest extends GPGeoserverGetConnectorRequest<GPGeoserverCoverages, GPGeoserverEmptyCoverages, GeoserverLoadCoveragesRequest> implements GeoserverLoadCoveragesRequest {
 
-    private final ThreadLocal<String> workspace;
-    private final ThreadLocal<String> queryList;
+    private final ThreadLocal<String> workspace = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverStringQueryParam> queryList = withInitial(() ->  new GPGeoserverStringQueryParam("list", null));
 
     /**
      * @param server
@@ -68,8 +73,6 @@ class GPGeoserverLoadCoveragesRequest extends GPGeoserverGetConnectorRequest<GPG
      */
     GPGeoserverLoadCoveragesRequest(GPServerConnector server, JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
-        this.workspace = withInitial(() -> null);
-        this.queryList = withInitial(() -> "");
     }
 
     /**
@@ -93,7 +96,7 @@ class GPGeoserverLoadCoveragesRequest extends GPGeoserverGetConnectorRequest<GPG
      */
     @Override
     public GeoserverLoadCoveragesRequest withQueryList(@Nullable String theQueryList) {
-        this.queryList.set(((theQueryList != null) && !(theQueryList.trim().isEmpty())) ? theQueryList : "");
+        this.queryList.set(new GPGeoserverStringQueryParam("list", (theQueryList != null) && !(theQueryList.trim().isEmpty()) ? theQueryList : null));
         return self();
     }
 
@@ -104,10 +107,15 @@ class GPGeoserverLoadCoveragesRequest extends GPGeoserverGetConnectorRequest<GPG
     protected String createUriPath() throws Exception {
         String workspace = this.workspace.get();
         checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not ne null or an empty string.");
-        String queryList = this.queryList.get();
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coverages.json").concat("?list=").concat(queryList)
-                : baseURI.concat("/workspaces/").concat(workspace).concat("/coverages.json").concat("?list=").concat(queryList)));
+        URIBuilder uriBuilder = new URIBuilder(((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coverages.json")
+                : baseURI.concat("/workspaces/").concat(workspace).concat("/coverages.json"))));
+        Consumer<ThreadLocal> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
+        fromArray(this.queryList)
+                .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
+                .filter(c-> c.get() != null)
+                .subscribe(consumer, Throwable::printStackTrace);
+        return uriBuilder.build().toString();
     }
 
     /**
@@ -117,8 +125,8 @@ class GPGeoserverLoadCoveragesRequest extends GPGeoserverGetConnectorRequest<GPG
      */
     @Override
     protected GPGeoserverCoverages readInternal(BufferedReader reader) throws Exception {
-        String queryList = this.queryList.get();
-        return ((queryList != null) && (queryList.equalsIgnoreCase("all"))
+        GPGeoserverStringQueryParam queryList = this.queryList.get();
+        return ((queryList.getValue() != null) && (queryList.getValue().equalsIgnoreCase("all"))
                 ? this.jacksonSupport.getDefaultMapper().readValue(reader, GPGeoserverAllCoverages.class) : super.readInternal(reader));
     }
 

@@ -35,8 +35,12 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.worksapce;
 
+import io.reactivex.rxjava3.functions.Consumer;
 import net.jcip.annotations.ThreadSafe;
+import org.apache.hc.core5.net.URIBuilder;
 import org.geosdi.geoplatform.connector.geoserver.exsist.GPGeoserverExsistRequest;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverBooleanQueryParam;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GeoserverRXQueryParamConsumer;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverLoadWorkspace;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverLoadWorkspaceRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
@@ -48,6 +52,7 @@ import javax.annotation.Nullable;
 import javax.annotation.meta.When;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static io.reactivex.rxjava3.core.Observable.fromArray;
 import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 
@@ -58,8 +63,8 @@ import static java.lang.ThreadLocal.withInitial;
 @ThreadSafe
 public class GPGeoserverLoadWorkspaceRequest extends GPGeoserverExsistRequest<GPGeoserverLoadWorkspace, GeoserverLoadWorkspaceRequest> implements GeoserverLoadWorkspaceRequest {
 
-    private final ThreadLocal<String> workspaceName;
-    private final ThreadLocal<Boolean> quietOnNotFound;
+    private final ThreadLocal<String> workspaceName = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverBooleanQueryParam> quietOnNotFound = withInitial(() -> new GPGeoserverBooleanQueryParam("quietOnNotFound", TRUE));
 
     /**
      * @param server
@@ -67,8 +72,6 @@ public class GPGeoserverLoadWorkspaceRequest extends GPGeoserverExsistRequest<GP
      */
     GPGeoserverLoadWorkspaceRequest(@Nonnull(when = When.NEVER) GPServerConnector server, @Nonnull(when = When.NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
-        this.workspaceName = withInitial(() -> null);
-        this.quietOnNotFound = withInitial(() -> TRUE);
     }
 
     /**
@@ -86,7 +89,7 @@ public class GPGeoserverLoadWorkspaceRequest extends GPGeoserverExsistRequest<GP
      */
     @Override
     public GeoserverLoadWorkspaceRequest withQuietOnNotFound(@Nullable Boolean theQuietOnNotFound) {
-        this.quietOnNotFound.set((theQuietOnNotFound != null) ? theQuietOnNotFound : TRUE);
+        this.quietOnNotFound.set(new GPGeoserverBooleanQueryParam("quietOnNotFound", (theQuietOnNotFound != null) ? theQuietOnNotFound : TRUE));
         return self();
     }
 
@@ -98,9 +101,13 @@ public class GPGeoserverLoadWorkspaceRequest extends GPGeoserverExsistRequest<GP
         String workspaceName = this.workspaceName.get();
         checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspaceName mut not be null or an Empty String.");
         String baseURI = this.serverURI.toString();
-        String quietOnNotFound = this.quietOnNotFound.get().toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("?quietOnNotFound=").concat(quietOnNotFound)
-                : baseURI.concat("/workspaces/").concat(workspaceName).concat("?quietOnNotFound=").concat(quietOnNotFound)));
+        URIBuilder uriBuilder = new URIBuilder(((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName)
+                : baseURI.concat("/workspaces/").concat(workspaceName))));
+        Consumer<ThreadLocal> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
+        fromArray(this.quietOnNotFound)
+                .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
+                .subscribe(consumer, Throwable::printStackTrace);
+        return uriBuilder.build().toString();
     }
 
     /**

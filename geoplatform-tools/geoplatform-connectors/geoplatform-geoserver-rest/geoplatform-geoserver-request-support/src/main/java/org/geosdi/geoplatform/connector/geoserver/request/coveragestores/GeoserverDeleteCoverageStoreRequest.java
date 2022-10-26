@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.coveragestores;
 
-import org.geosdi.geoplatform.connector.geoserver.model.store.coverage.GPGeoserverPurgeParam;
+import org.geosdi.geoplatform.connector.geoserver.model.purge.GPGeoserverPurgeParam;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
@@ -63,12 +63,17 @@ public interface GeoserverDeleteCoverageStoreRequest extends GPJsonConnectorRequ
 
     /**
      * <p>
-     * The purge parameter specifies if and how the underlying raster data source is deleted.
-     * Allowable values for this parameter are {@link GPGeoserverPurgeParam#NONE}, {@link GPGeoserverPurgeParam#METADATA},
-     * {@link GPGeoserverPurgeParam#ALL}. When set to {@link GPGeoserverPurgeParam#NONE}
-     * data and auxiliary files are preserved. When set to {@link GPGeoserverPurgeParam#METADATA} delete only auxiliary files and metadata.
-     * It’s recommended when data files (such as granules) should not be deleted from disk.
-     * Finally, when set to {@link GPGeoserverPurgeParam#ALL} both data and auxiliary files are removed.
+     *     The purge parameter specifies if and how the underlying raster data source is deleted.
+     *     Allowable values for this parameter are :
+     *     <ul>
+     *       <li>{@link GPGeoserverPurgeParam#NONE}</li>
+     *       <li>{@link GPGeoserverPurgeParam#METADATA}</li>
+     *       <li>{@link GPGeoserverPurgeParam#ALL}</li>
+     *     </ul>
+     *     When set to {@link GPGeoserverPurgeParam#NONE} data and auxiliary files are preserved.
+     *     When set to {@link GPGeoserverPurgeParam#METADATA} delete only auxiliary files and metadata.
+     *     It’s recommended when data files (such as granules) should not be deleted from disk.
+     *     Finally, when set to {@link GPGeoserverPurgeParam#ALL} both data and auxiliary files are removed.
      * </p>
      *
      * @param thePurge

@@ -46,17 +46,17 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeoserverLoadCoverageListRequest extends GPJsonConnectorRequest<GPGeoserverListCoverageStores, GeoserverLoadCoverageListRequest> {
+public interface GeoserverLoadCoveragesByWorkspaceAndStoreRequest extends GPJsonConnectorRequest<GPGeoserverListCoverageStores, GeoserverLoadCoveragesByWorkspaceAndStoreRequest> {
 
     /**
      * @param theWorkspace
-     * @return {@link GeoserverLoadCoverageListRequest}
+     * @return {@link GeoserverLoadCoveragesByWorkspaceAndStoreRequest}
      */
-    GeoserverLoadCoverageListRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
+    GeoserverLoadCoveragesByWorkspaceAndStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
 
     /**
      * @param theStore The name of the store to be retrieved.
-     * @return {@link GeoserverLoadCoverageListRequest}
+     * @return {@link GeoserverLoadCoveragesByWorkspaceAndStoreRequest}
      */
-    GeoserverLoadCoverageListRequest withStore(@Nonnull(when = NEVER) String theStore);
+    GeoserverLoadCoveragesByWorkspaceAndStoreRequest withStore(@Nonnull(when = NEVER) String theStore);
 }

@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request;
 
-import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.connector.geoserver.model.GPGeoserverEmptyResponse;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.IncorrectResponseException;
@@ -49,6 +48,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.StringReader;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
@@ -69,7 +69,7 @@ public abstract class GPGeoserverGetConnectorRequest<T, E extends GPGeoserverEmp
      */
     protected GPGeoserverGetConnectorRequest(GPServerConnector server, JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
-        Preconditions.checkArgument(((this.emptyResponse = forEmptyResponse()) != null), "The emptyResponse class must not be null.");
+        checkArgument(((this.emptyResponse = forEmptyResponse()) != null), "The emptyResponse class must not be null.");
     }
 
     /**
@@ -93,7 +93,7 @@ public abstract class GPGeoserverGetConnectorRequest<T, E extends GPGeoserverEmp
      * @throws Exception
      */
     protected final <IS extends InputStream> T internalResponse(IS inputStream) throws Exception {
-        Preconditions.checkArgument(inputStream != null, "The Parameter InputStream must not be null.");
+        checkArgument(inputStream != null, "The Parameter InputStream must not be null.");
         try {
             return this.internalReadResponse(inputStream).toModel();
         } catch (Exception ex) {

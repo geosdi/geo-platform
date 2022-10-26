@@ -33,13 +33,19 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.store.coverage;
+package org.geosdi.geoplatform.connector.geoserver.model.purge;
+
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryParam;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum GPGeoserverPurgeParam implements IGPGeoserverPurgeParam {
+public enum GPGeoserverPurgeParam implements GPGeoserverQueryParam<String> {
 
     NONE("none"),
     METADATA("metadata"),
@@ -47,7 +53,10 @@ public enum GPGeoserverPurgeParam implements IGPGeoserverPurgeParam {
 
     private final String value;
 
-    GPGeoserverPurgeParam(String theValue) {
+    /**
+     * @param theValue
+     */
+    GPGeoserverPurgeParam(@Nonnull(when = NEVER) String theValue) {
         this.value = theValue;
     }
 
@@ -55,7 +64,23 @@ public enum GPGeoserverPurgeParam implements IGPGeoserverPurgeParam {
      * @return {@link String}
      */
     @Override
-    public String toPurge() {
+    public String getKey() {
+        return "purge";
+    }
+
+    /**
+     * @return {@link String}
+     */
+    @Override
+    public String getValue() {
+        return this.value;
+    }
+
+    /**
+     * @return {@link String}
+     */
+    @Override
+    public String formatValue() {
         return this.value;
     }
 
@@ -64,6 +89,6 @@ public enum GPGeoserverPurgeParam implements IGPGeoserverPurgeParam {
      */
     @Override
     public String toString() {
-        return this.toPurge();
+        return this.value;
     }
 }

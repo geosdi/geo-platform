@@ -56,7 +56,7 @@ import static javax.annotation.meta.When.NEVER;
 @ThreadSafe
 class GPGeoserverLoadCoverageWithUrlRequest extends GPGeoserverExsistRequest<GPGeoserverCoverageInfo, GeoserverLoadCoverageWithUrlRequest> implements GeoserverLoadCoverageWithUrlRequest {
 
-    private final ThreadLocal<String> urlPath;
+    private final ThreadLocal<String> urlPath = withInitial(() -> null);
 
     /**
      * @param server
@@ -64,7 +64,6 @@ class GPGeoserverLoadCoverageWithUrlRequest extends GPGeoserverExsistRequest<GPG
      */
     GPGeoserverLoadCoverageWithUrlRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
-        this.urlPath = withInitial(() -> null);
     }
 
     /**

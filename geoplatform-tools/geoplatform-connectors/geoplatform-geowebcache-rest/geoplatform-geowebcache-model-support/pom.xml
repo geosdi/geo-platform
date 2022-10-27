@@ -22,16 +22,25 @@
 
   <dependencies>
 
-    <!-- =========================================================== -->
-    <!-- ================= GEOPLATFORM XML UTILITIES =============== -->
-    <!-- =========================================================== -->
-    <dependency>
-      <groupId>org.geosdi</groupId>
-      <artifactId>geoplatform-xml-utilities</artifactId>
-      <version>${geoplatform-version}</version>
-    </dependency>
+      <!-- =========================================================== -->
+      <!-- ========== GEOPLATFORM GEOSERVER CONNECTOR API ============ -->
+      <!-- =========================================================== -->
+      <dependency>
+          <groupId>org.geosdi</groupId>
+          <artifactId>geoplatform-connector-api</artifactId>
+          <version>${project.version}</version>
+      </dependency>
 
-    <!-- =========================================================== -->
+      <!-- =========================================================== -->
+      <!-- ================= GEOPLATFORM XML UTILITIES =============== -->
+      <!-- =========================================================== -->
+      <dependency>
+          <groupId>org.geosdi</groupId>
+          <artifactId>geoplatform-xml-utilities</artifactId>
+          <version>${geoplatform-version}</version>
+      </dependency>
+
+      <!-- =========================================================== -->
     <!-- =============== GEOPLATFORM JACKSON SUPPORT =============== -->
     <!-- =========================================================== -->
     <dependency>

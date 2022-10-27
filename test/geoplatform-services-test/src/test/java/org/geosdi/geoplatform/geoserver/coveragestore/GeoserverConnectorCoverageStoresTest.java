@@ -227,7 +227,7 @@ public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest
         GPGeoserverCoverageStores geoserverConnectorStore = this.geoserverConnectorStore.loadCoverageStoresRequest().withWorkspace("sf").getResponse();
         layerNames = geoserverConnectorStore.getCoverageStores().stream().map(c -> {
                     try {
-                        return this.geoserverConnectorStore.loadCoverageList()
+                        return this.geoserverConnectorStore.loadCoveragesByWorkspaceAndStoreRequest()
                                 .withWorkspace("sf")
                                 .withStore("sfdem").getResponse().getCoverageStores();
                     } catch (Exception e) {

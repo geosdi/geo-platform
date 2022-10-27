@@ -52,7 +52,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeowebcacheReloadingRequest extends GPJsonPostConnectorRequest<Boolean, GeowebcacheReloadingRequest> implements GeowebcacheReloadingRequest {
+class GPGeowebcacheReloadingRequest extends GPJsonPostConnectorRequest<Boolean, GeowebcacheReloadingRequest> implements GeowebcacheReloadingRequest {
 
     /**
      * @param server

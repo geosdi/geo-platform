@@ -63,7 +63,7 @@ abstract class PostConnectorRequest<T> extends GPBaseConnectorRequest<T, HttpPos
     @Override
     protected HttpPost prepareHttpMethod() throws Exception {
         HttpPost postMethod = new HttpPost(super.serverURI);
-        postMethod.setConfig(super.prepareRequestConfig());
+        postMethod.setConfig(this.prepareRequestConfig());
         HttpEntity httpEntity = this.preparePostEntity();
         postMethod.setEntity(httpEntity);
         return postMethod;

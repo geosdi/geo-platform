@@ -214,4 +214,18 @@ public abstract class GPGeoserverCoveragesConnector extends GPStructuredCoverage
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }
     }
+
+    /**
+     * @return {@link GeoserverResetCoverageCacheRequest}
+     */
+    @Override
+    public GeoserverResetCoverageCacheRequest resetCoverageCacheRequest() {
+        switch (version) {
+            case V220x:
+            case V221x:
+                return new GPGeoserverResetCoverageCacheRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
 }

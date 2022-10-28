@@ -83,4 +83,9 @@ public interface IGPGeoserverCoveragesConnector extends IGPStructuredCoverageCon
      * @return {@link GeoserverLoadCoveragesByWorkspaceAndStoreRequest}
      */
     GeoserverLoadCoveragesByWorkspaceAndStoreRequest loadCoveragesByWorkspaceAndStoreRequest();
+
+    /**
+     * @return {@link GeoserverResetCoverageCacheRequest}
+     */
+    GeoserverResetCoverageCacheRequest resetCoverageCacheRequest();
 }

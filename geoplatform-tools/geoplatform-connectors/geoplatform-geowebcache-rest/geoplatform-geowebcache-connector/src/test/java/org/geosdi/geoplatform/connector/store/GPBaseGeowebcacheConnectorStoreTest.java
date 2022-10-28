@@ -48,8 +48,8 @@ import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorCo
 import static org.geosdi.geoplatform.connector.store.GPGeowebcacheConnectorStoreBuilder.geowebcacheConnectorBuilder;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
 public class GPBaseGeowebcacheConnectorStoreTest {
 
@@ -81,5 +81,11 @@ public class GPBaseGeowebcacheConnectorStoreTest {
     @Test
     public void isRunningTest() throws Exception {
         logger.info("###########GEOWEBCACHE RUNNING : {}\n", this.geowebcacheConnectorStore.isGeowebcacheRunning());
+    }
+
+    @Test
+    public void reloadingTest() throws Exception {
+        logger.info("###########GEOWEBCACHE RELOADING : {}\n", this.geowebcacheConnectorStore.createReloadingRequest()
+                .getResponse());
     }
 }

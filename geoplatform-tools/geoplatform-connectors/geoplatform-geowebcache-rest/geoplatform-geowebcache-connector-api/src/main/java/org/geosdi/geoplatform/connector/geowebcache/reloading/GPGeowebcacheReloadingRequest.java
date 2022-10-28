@@ -46,7 +46,9 @@ import java.io.BufferedReader;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
+import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
+import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -54,20 +56,36 @@ import static javax.annotation.meta.When.NEVER;
  */
 class GPGeowebcacheReloadingRequest extends GPJsonPostConnectorRequest<Boolean, GeowebcacheReloadingRequest> implements GeowebcacheReloadingRequest {
 
+    private ThreadLocal<String> configurationName;
+
     /**
      * @param server
      * @param theJacksonSupport
      */
     GPGeowebcacheReloadingRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
+        this.configurationName = withInitial(() -> null);
+    }
+
+    /**
+     * @param configurationName
+     * @return {@link  GeowebcacheReloadingRequest}
+     */
+    @Override
+    public GeowebcacheReloadingRequest withConfigurationName(String configurationName) {
+        this.configurationName.set(configurationName);
+        return self();
     }
 
     @Override
     protected String createUriPath() throws Exception {
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("reload") : baseURI.concat("/reload")));
+        return ((baseURI.endsWith("/") ? baseURI.concat("/reload") : baseURI.concat("/reload")));
     }
 
+    /**
+     * @return {@link  Class<Boolean>}
+     */
     @Override
     protected Class<Boolean> forClass() {
         return Boolean.class;
@@ -81,11 +99,18 @@ class GPGeowebcacheReloadingRequest extends GPJsonPostConnectorRequest<Boolean, 
     @Override
     protected Boolean readInternal(BufferedReader reader) throws Exception {
         String value = CharStreams.toString(reader);
+        logger.info("@@@@@@@@@VALIUE: {}\n", value);
         return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
     }
 
+    /**
+     * @return {@link  HttpEntity}
+     * @throws Exception
+     */
     @Override
     protected HttpEntity prepareHttpEntity() throws Exception {
-        return null;
+        String configurationName = this.configurationName.get();
+        logger.trace("#############################RELOADING_BODY : \n{}\n", configurationName);
+        return new StringEntity(configurationName != null && !configurationName.trim().isEmpty() ? configurationName : "reload_configuration=1", APPLICATION_JSON) ;
     }
 }

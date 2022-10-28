@@ -41,4 +41,11 @@ import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorReque
  * @email vito.salvia@gmail.com
  */
 public interface GeowebcacheReloadingRequest extends GPJsonConnectorRequest<Boolean, GeowebcacheReloadingRequest> {
+
+    /**
+     *
+     * @param configurationName
+     * @return {@link GeowebcacheReloadingRequest}
+     */
+    GeowebcacheReloadingRequest withConfigurationName(String configurationName);
 }

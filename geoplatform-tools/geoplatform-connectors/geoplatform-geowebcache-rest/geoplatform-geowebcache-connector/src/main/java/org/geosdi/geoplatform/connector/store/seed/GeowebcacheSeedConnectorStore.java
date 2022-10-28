@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.connector.store.seed;
 import org.geosdi.geoplatform.connector.geowebcache.GPGeowebcacheConnector;
 import org.geosdi.geoplatform.connector.geowebcache.request.reloading.GeowebcacheReloadingRequest;
 import org.geosdi.geoplatform.connector.geowebcache.request.seed.GeowebcacheSeedRequest;
+import org.geosdi.geoplatform.connector.geowebcache.request.seed.GeowebcacheSeedWithLayerNameRequest;
 import org.geosdi.geoplatform.connector.store.reloading.GeowebcacheReloadingConnectorStore;
 
 /**
@@ -59,5 +60,13 @@ public abstract class GeowebcacheSeedConnectorStore extends GeowebcacheReloading
     @Override
     public GeowebcacheSeedRequest createSeedRequest() {
         return this.server.createSeedRequest();
+    }
+
+    /**
+     * @return {@link GeowebcacheSeedWithLayerNameRequest}
+     */
+    @Override
+    public GeowebcacheSeedWithLayerNameRequest createSeedWithLayerNameRequest() {
+        return this.server.createSeedWithLayerNameRequest();
     }
 }

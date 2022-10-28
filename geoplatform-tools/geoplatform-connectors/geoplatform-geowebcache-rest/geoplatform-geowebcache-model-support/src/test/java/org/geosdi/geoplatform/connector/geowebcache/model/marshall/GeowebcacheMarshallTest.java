@@ -5,7 +5,7 @@ import org.geosdi.geoplatform.connector.geowebcache.model.seed.GeowebcacheSeedRe
 import org.geosdi.geoplatform.connector.geowebcache.model.seed.IGeowebcacheSeedRequestValue;
 import org.geosdi.geoplatform.connector.geowebcache.model.seed.request.GeowebcacheSeedRequest;
 import org.geosdi.geoplatform.connector.geowebcache.model.seed.request.WideGeowebcacheSeedRequest;
-import org.geosdi.geoplatform.connector.geowebcache.model.seed.status.IGeowebcacheSeedTaskStatus;
+import org.geosdi.geoplatform.connector.geowebcache.model.seed.IGeowebcacheSeedTaskStatus;
 import org.geosdi.geoplatform.connector.geowebcache.model.srs.GeowebcacheSrsBean;
 import org.geosdi.geoplatform.connector.geowebcache.model.srs.IGeowebcacheSrsBean;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;

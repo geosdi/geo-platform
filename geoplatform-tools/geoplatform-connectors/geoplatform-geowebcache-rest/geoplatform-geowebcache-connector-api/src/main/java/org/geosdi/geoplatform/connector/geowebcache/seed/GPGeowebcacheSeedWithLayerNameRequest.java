@@ -35,35 +35,51 @@
 package org.geosdi.geoplatform.connector.geowebcache.seed;
 
 import org.geosdi.geoplatform.connector.geowebcache.model.seed.GeowebcacheSeedTaskStatus;
-import org.geosdi.geoplatform.connector.geowebcache.request.seed.GeowebcacheSeedRequest;
+import org.geosdi.geoplatform.connector.geowebcache.request.seed.GeowebcacheSeedWithLayerNameRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeowebcacheSeedRequest extends GPJsonGetConnectorRequest<GeowebcacheSeedTaskStatus, GeowebcacheSeedRequest> implements GeowebcacheSeedRequest {
+public class GPGeowebcacheSeedWithLayerNameRequest extends GPJsonGetConnectorRequest<GeowebcacheSeedTaskStatus, GeowebcacheSeedWithLayerNameRequest> implements GeowebcacheSeedWithLayerNameRequest {
 
+    private final ThreadLocal<String> layerName;
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    protected GPGeowebcacheSeedRequest(@Nonnull(when = NEVER) GPServerConnector server,
+    protected GPGeowebcacheSeedWithLayerNameRequest(@Nonnull(when = NEVER) GPServerConnector server,
             @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
+        this.layerName = withInitial(() -> null);
+    }
+
+    /**
+     * @param layerName
+     * @return {@link GeowebcacheSeedWithLayerNameRequest}
+     */
+    @Override
+    public GeowebcacheSeedWithLayerNameRequest withLayerName(String layerName) {
+        this.layerName.set(layerName);
+        return self();
     }
 
     @Override
     protected String createUriPath() throws Exception {
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("/seed.json") : baseURI.concat("/seed.json")));
+        String layerName = this.layerName.get();
+        checkArgument((layerName != null) && !(layerName.trim().isEmpty()), "The Parameter layerName must not be null or an empty string.");
+        return ((baseURI.endsWith("/") ? baseURI.concat("/seed/").concat(layerName).concat(".json") : baseURI.concat("/seed/").concat(layerName).concat(".json")));
     }
 
     @Override

@@ -33,28 +33,43 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store;
+package org.geosdi.geoplatform.connector.pool.key;
 
-import org.geosdi.geoplatform.connector.api.GPConnectorBuilder;
+import lombok.Getter;
+import lombok.ToString;
+import net.jcip.annotations.Immutable;
+import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorKey;
+import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
+import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.net.URL;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Vito Salvia - CNR IMAA geoSDI Group
- * @email vito.salvia@gmail.com
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeowebcacheConnectorStoreBuilder extends GPConnectorBuilder<GeowebcacheConnectorStoreBuilder> {
+@Immutable
+@Getter
+@ToString(callSuper = true)
+public class GPPoolGeowebcacheConnectorKey extends GPPoolConnectorKey implements IGPPoolGeowebcacheConnectorKey {
+
+    private final JacksonSupport jacksonSupport;
 
     /**
-     * @param theJacksoSupport
-     * @return {@link GeowebcacheConnectorStoreBuilder}
+     * @param serverUrl
+     * @param pooledConnectorConfig
+     * @param securityConnector
+     * @param version
+     * @param jacksonSupport
      */
-    GeowebcacheConnectorStoreBuilder withJacksonSupport(@Nullable JacksonSupport theJacksoSupport);
-
-    /**
-     * @param theVersion
-     * @return {@link GeowebcacheConnectorStoreBuilder}
-     */
-    GeowebcacheConnectorStoreBuilder withVersion(String theVersion);
+     GPPoolGeowebcacheConnectorKey(@Nonnull(when = NEVER) URL serverUrl, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
+            @Nullable GPSecurityConnector securityConnector, String version, JacksonSupport jacksonSupport) {
+        super(serverUrl, pooledConnectorConfig, securityConnector, version);
+        this.jacksonSupport = jacksonSupport;
+    }
 }

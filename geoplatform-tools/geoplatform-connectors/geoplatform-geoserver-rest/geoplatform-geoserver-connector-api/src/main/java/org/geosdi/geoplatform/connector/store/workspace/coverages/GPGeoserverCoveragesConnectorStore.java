@@ -83,4 +83,9 @@ public interface GPGeoserverCoveragesConnectorStore extends GPGeoserverStructure
      * @return {@link GeoserverLoadCoveragesByWorkspaceAndStoreRequest}
      */
     GeoserverLoadCoveragesByWorkspaceAndStoreRequest loadCoveragesByWorkspaceAndStoreRequest();
+
+    /**
+     * @return {@link GeoserverResetCoverageCacheRequest}
+     */
+    GeoserverResetCoverageCacheRequest resetCoverageCacheRequest();
 }

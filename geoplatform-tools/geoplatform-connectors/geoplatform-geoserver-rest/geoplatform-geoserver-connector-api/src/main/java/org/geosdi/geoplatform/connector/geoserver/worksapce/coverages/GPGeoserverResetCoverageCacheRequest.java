@@ -36,15 +36,14 @@ package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages;
 
 import com.google.common.io.CharStreams;
 import net.jcip.annotations.ThreadSafe;
-import org.apache.hc.core5.http.HttpEntity;
-import org.apache.hc.core5.net.URIBuilder;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.utils.URIBuilder;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverResetCoverageCacheRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-
 import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;

@@ -35,13 +35,12 @@
 package org.geosdi.geoplatform.connector.server.request.json;
 
 import com.google.common.io.CharStreams;
-import org.apache.hc.client5.http.classic.methods.HttpUriRequest;
-import org.apache.hc.core5.http.HttpEntity;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.HttpUriRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-
 import java.io.InputStreamReader;
 import java.io.Reader;
 

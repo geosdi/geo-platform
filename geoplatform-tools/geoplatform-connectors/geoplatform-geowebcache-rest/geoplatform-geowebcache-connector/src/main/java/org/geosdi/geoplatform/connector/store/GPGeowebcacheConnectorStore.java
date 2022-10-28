@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.store;
 
+import org.geosdi.geoplatform.connector.GeowebcacheVersion;
 import org.geosdi.geoplatform.connector.geowebcache.GPGeowebcacheConnector;
 import org.geosdi.geoplatform.connector.geowebcache.request.running.GeowebcacheRestRunningRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
@@ -57,8 +58,8 @@ public class GPGeowebcacheConnectorStore extends GeowebcacheReloadingConnectorSt
      * @param securityConnector
      * @param theJacksonSupport
      */
-    GPGeowebcacheConnectorStore(URL server, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport) {
-        this(server, null, securityConnector, theJacksonSupport);
+    GPGeowebcacheConnectorStore(URL server, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeowebcacheVersion theVersion) {
+        this(server, null, securityConnector, theJacksonSupport, theVersion);
     }
 
     /**
@@ -68,8 +69,8 @@ public class GPGeowebcacheConnectorStore extends GeowebcacheReloadingConnectorSt
      * @param theJacksonSupport
      */
     GPGeowebcacheConnectorStore(URL server, GPPooledConnectorConfig pooledConnectorConfig,
-            GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport) {
-        super(new GPGeowebcacheConnector(server, pooledConnectorConfig, securityConnector, theJacksonSupport));
+            GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeowebcacheVersion theVersion) {
+        super(new GPGeowebcacheConnector(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion));
         this.restRunningRequest = this.server.createGeowebcacheRestRunningRequest();
     }
 

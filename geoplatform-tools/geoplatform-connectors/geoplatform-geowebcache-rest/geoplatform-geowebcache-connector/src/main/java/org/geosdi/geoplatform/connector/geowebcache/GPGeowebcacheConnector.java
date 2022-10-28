@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.geowebcache;
 
+import org.geosdi.geoplatform.connector.GeowebcacheVersion;
+import org.geosdi.geoplatform.connector.GeowebcacheVersionException;
 import org.geosdi.geoplatform.connector.geowebcache.reloading.GPGeowebcacheReloadingConnector;
 import org.geosdi.geoplatform.connector.geowebcache.request.running.GeowebcacheRestRunningRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
@@ -42,6 +44,8 @@ import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import java.net.URL;
+
+import static org.geosdi.geoplatform.connector.GeowebcacheVersion.toVersionExceptionMessage;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -53,18 +57,19 @@ public class GPGeowebcacheConnector extends GPGeowebcacheReloadingConnector impl
      * @param urlServer
      * @param theJacksonSupport
      */
-    public GPGeowebcacheConnector(String urlServer, JacksonSupport theJacksonSupport) {
-        super(urlServer, theJacksonSupport);
+    public GPGeowebcacheConnector(String urlServer, JacksonSupport theJacksonSupport, String theVersion) {
+        super(urlServer, theJacksonSupport, theVersion);
     }
 
     /**
      * @param urlServer
      * @param securityConnector
      * @param theJacksonSupport
+     * @param theVersion
      */
     public GPGeowebcacheConnector(String urlServer, GPSecurityConnector securityConnector,
-            JacksonSupport theJacksonSupport) {
-        super(urlServer, securityConnector, theJacksonSupport);
+            JacksonSupport theJacksonSupport, String theVersion) {
+        super(urlServer, securityConnector, theJacksonSupport, theVersion);
     }
 
     /**
@@ -72,20 +77,21 @@ public class GPGeowebcacheConnector extends GPGeowebcacheReloadingConnector impl
      * @param pooledConnectorConfig
      * @param securityConnector
      * @param theJacksonSupport
-     * @param version
+     * @param theVersion
      */
     public GPGeowebcacheConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig,
-            GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
-        super(urlServer, pooledConnectorConfig, securityConnector, theJacksonSupport);
+            GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String theVersion) {
+        super(urlServer, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion);
     }
 
     /**
      * @param server
      * @param securityConnector
      * @param theJacksonSupport
+     * @param theVersion
      */
-    public GPGeowebcacheConnector(URL server, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport) {
-        super(server, securityConnector, theJacksonSupport);
+    public GPGeowebcacheConnector(URL server, GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeowebcacheVersion theVersion) {
+        super(server, securityConnector, theJacksonSupport, theVersion);
     }
 
     /**
@@ -95,8 +101,8 @@ public class GPGeowebcacheConnector extends GPGeowebcacheReloadingConnector impl
      * @param theJacksonSupport
      */
     public GPGeowebcacheConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig,
-            GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport) {
-        super(server, pooledConnectorConfig, securityConnector, theJacksonSupport);
+            GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeowebcacheVersion theVersion) {
+        super(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion);
         //this.jacksonSupport.getDefaultMapper().coercionConfigFor(GPGeoserverMetadataLinks.class).setCoercion(EmptyString, AsNull);
     }
 
@@ -105,6 +111,12 @@ public class GPGeowebcacheConnector extends GPGeowebcacheReloadingConnector impl
      */
     @Override
     public GeowebcacheRestRunningRequest createGeowebcacheRestRunningRequest() {
-        return new GPGeowebcacheRestRunningRequest(this, this.jacksonSupport);
+        switch (version) {
+            case V120x:
+            case V121x:
+                return new GPGeowebcacheRestRunningRequest(this, this.jacksonSupport);
+            default:
+                throw new GeowebcacheVersionException(toVersionExceptionMessage());
+        }
     }
 }

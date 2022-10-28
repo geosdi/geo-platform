@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connector.store;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.geosdi.geoplatform.connector.GeowebcacheVersion;
 import org.geosdi.geoplatform.connector.api.AbstractConnectorBuilder;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -43,6 +44,7 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import javax.annotation.Nullable;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static org.geosdi.geoplatform.connector.GeowebcacheVersion.fromString;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
 /**
@@ -88,8 +90,9 @@ public final class GPGeowebcacheConnectorStoreBuilder extends AbstractConnectorB
     @Override
     public GPGeowebcacheConnectorStore build() throws Exception {
         checkArgument(this.serverUrl != null, "Server URL must not be null");
+        GeowebcacheVersion v = fromString(this.version);
         return new GPGeowebcacheConnectorStore(this.serverUrl, this.pooledConnectorConfig, this.securityConnector,
-                this::toJacksonSupport);
+                this::toJacksonSupport, v);
     }
 
     /**

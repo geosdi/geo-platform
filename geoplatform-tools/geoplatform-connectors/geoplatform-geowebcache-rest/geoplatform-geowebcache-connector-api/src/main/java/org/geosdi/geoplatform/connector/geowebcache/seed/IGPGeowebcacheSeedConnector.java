@@ -33,19 +33,19 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geowebcache;
+package org.geosdi.geoplatform.connector.geowebcache.seed;
 
-import org.geosdi.geoplatform.connector.geowebcache.request.running.GeowebcacheRestRunningRequest;
-import org.geosdi.geoplatform.connector.geowebcache.seed.IGPGeowebcacheSeedConnector;
+import org.geosdi.geoplatform.connector.geowebcache.reloading.IGPGeowebcacheReloadingConnector;
+import org.geosdi.geoplatform.connector.geowebcache.request.seed.GeowebcacheSeedRequest;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface IGPGeowebcacheConnector extends IGPGeowebcacheSeedConnector {
+public interface IGPGeowebcacheSeedConnector extends IGPGeowebcacheReloadingConnector {
 
     /**
-     * @return {@link GeowebcacheRestRunningRequest}
+     * @return {@link GeowebcacheSeedRequest}
      */
-    GeowebcacheRestRunningRequest createGeowebcacheRestRunningRequest();
+    GeowebcacheSeedRequest createSeedRequest();
 }

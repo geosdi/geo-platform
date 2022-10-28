@@ -40,7 +40,7 @@ import org.geosdi.geoplatform.connector.geowebcache.GPGeowebcacheConnector;
 import org.geosdi.geoplatform.connector.geowebcache.request.running.GeowebcacheRestRunningRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
-import org.geosdi.geoplatform.connector.store.reloading.GeowebcacheReloadingConnectorStore;
+import org.geosdi.geoplatform.connector.store.seed.GeowebcacheSeedConnectorStore;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import java.net.URL;
@@ -49,7 +49,7 @@ import java.net.URL;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeowebcacheConnectorStore extends GeowebcacheReloadingConnectorStore implements IGPGeowebcacheConnectorStore {
+public class GPGeowebcacheConnectorStore extends GeowebcacheSeedConnectorStore implements IGPGeowebcacheConnectorStore {
 
     private final GeowebcacheRestRunningRequest restRunningRequest;
 

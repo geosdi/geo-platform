@@ -33,19 +33,31 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geowebcache;
+package org.geosdi.geoplatform.connector.store.seed;
 
-import org.geosdi.geoplatform.connector.geowebcache.request.running.GeowebcacheRestRunningRequest;
-import org.geosdi.geoplatform.connector.geowebcache.seed.IGPGeowebcacheSeedConnector;
+import org.geosdi.geoplatform.connector.geowebcache.GPGeowebcacheConnector;
+import org.geosdi.geoplatform.connector.geowebcache.request.reloading.GeowebcacheReloadingRequest;
+import org.geosdi.geoplatform.connector.geowebcache.request.seed.GeowebcacheSeedRequest;
+import org.geosdi.geoplatform.connector.store.reloading.GeowebcacheReloadingConnectorStore;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface IGPGeowebcacheConnector extends IGPGeowebcacheSeedConnector {
+public abstract class GeowebcacheSeedConnectorStore extends GeowebcacheReloadingConnectorStore implements GPGeowebcacheSeedConnectorStore {
 
     /**
-     * @return {@link GeowebcacheRestRunningRequest}
+     * @param theServer
      */
-    GeowebcacheRestRunningRequest createGeowebcacheRestRunningRequest();
+    protected GeowebcacheSeedConnectorStore(GPGeowebcacheConnector theServer) {
+        super(theServer);
+    }
+
+    /**
+     * @return {@link GeowebcacheReloadingRequest}
+     */
+    @Override
+    public GeowebcacheSeedRequest createSeedRequest() {
+        return this.server.createSeedRequest();
+    }
 }

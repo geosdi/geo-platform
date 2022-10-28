@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.connector.geowebcache.request.reloading.Geowebcach
 import org.geosdi.geoplatform.connector.server.GPAbstractServerConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import java.net.URL;
@@ -49,6 +50,7 @@ import java.net.URL;
 import static com.google.common.base.Preconditions.checkArgument;
 import static org.geosdi.geoplatform.connector.GeowebcacheVersion.fromString;
 import static org.geosdi.geoplatform.connector.GeowebcacheVersion.toVersionExceptionMessage;
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 
 /**
@@ -59,6 +61,11 @@ public abstract class GPGeowebcacheReloadingConnector extends GPAbstractServerCo
 
     protected final JacksonSupport jacksonSupport;
     protected final GeowebcacheVersion version;
+    protected final JacksonSupport emptyJacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
+            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
+            ACCEPT_SINGLE_VALUE_AS_ARRAY_DISABLE,
+            WRAP_ROOT_VALUE_DISABLE,
+            INDENT_OUTPUT_ENABLE);
 
     /**
      * @param urlServer

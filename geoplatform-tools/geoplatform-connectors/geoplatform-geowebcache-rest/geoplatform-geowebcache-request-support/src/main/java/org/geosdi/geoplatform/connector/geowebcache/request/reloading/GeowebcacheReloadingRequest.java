@@ -40,10 +40,9 @@ import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorReque
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeowebcacheReloadingRequest extends GPJsonConnectorRequest<Boolean, GeowebcacheReloadingRequest> {
+public interface GeowebcacheReloadingRequest extends GPJsonConnectorRequest<String, GeowebcacheReloadingRequest> {
 
     /**
-     *
      * @param configurationName
      * @return {@link GeowebcacheReloadingRequest}
      */

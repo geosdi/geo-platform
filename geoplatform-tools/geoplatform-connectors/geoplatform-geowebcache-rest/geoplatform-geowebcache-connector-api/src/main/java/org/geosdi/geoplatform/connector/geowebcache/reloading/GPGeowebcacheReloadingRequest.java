@@ -44,8 +44,6 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import javax.annotation.Nonnull;
 import java.io.BufferedReader;
 
-import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
@@ -54,7 +52,7 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-class GPGeowebcacheReloadingRequest extends GPJsonPostConnectorRequest<Boolean, GeowebcacheReloadingRequest> implements GeowebcacheReloadingRequest {
+class GPGeowebcacheReloadingRequest extends GPJsonPostConnectorRequest<String, GeowebcacheReloadingRequest> implements GeowebcacheReloadingRequest {
 
     private ThreadLocal<String> configurationName;
 
@@ -62,7 +60,8 @@ class GPGeowebcacheReloadingRequest extends GPJsonPostConnectorRequest<Boolean, 
      * @param server
      * @param theJacksonSupport
      */
-    GPGeowebcacheReloadingRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeowebcacheReloadingRequest(@Nonnull(when = NEVER) GPServerConnector server,
+            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
         this.configurationName = withInitial(() -> null);
     }
@@ -87,8 +86,8 @@ class GPGeowebcacheReloadingRequest extends GPJsonPostConnectorRequest<Boolean, 
      * @return {@link  Class<Boolean>}
      */
     @Override
-    protected Class<Boolean> forClass() {
-        return Boolean.class;
+    protected Class<String> forClass() {
+        return String.class;
     }
 
     /**
@@ -97,10 +96,9 @@ class GPGeowebcacheReloadingRequest extends GPJsonPostConnectorRequest<Boolean, 
      * @throws Exception
      */
     @Override
-    protected Boolean readInternal(BufferedReader reader) throws Exception {
+    protected String readInternal(BufferedReader reader) throws Exception {
         String value = CharStreams.toString(reader);
-        logger.info("@@@@@@@@@VALIUE: {}\n", value);
-        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
+        return value;
     }
 
     /**

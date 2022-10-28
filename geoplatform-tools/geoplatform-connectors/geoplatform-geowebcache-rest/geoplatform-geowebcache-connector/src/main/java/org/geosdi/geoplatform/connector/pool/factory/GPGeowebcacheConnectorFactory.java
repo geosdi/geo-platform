@@ -33,28 +33,40 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store;
+package org.geosdi.geoplatform.connector.pool.factory;
 
-import org.geosdi.geoplatform.connector.api.GPConnectorBuilder;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import org.geosdi.geoplatform.connector.api.pool.GPPoolConnectorFactory;
+import org.geosdi.geoplatform.connector.pool.key.GPPoolGeowebcacheConnectorKey;
+import org.geosdi.geoplatform.connector.store.GPGeowebcacheConnectorStore;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.connector.store.GPGeowebcacheConnectorStoreBuilder.geowebcacheConnectorBuilder;
 
 /**
- * @author Vito Salvia - CNR IMAA geoSDI Group
- * @email vito.salvia@gmail.com
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeowebcacheConnectorStoreBuilder extends GPConnectorBuilder<GeowebcacheConnectorStoreBuilder> {
+public class GPGeowebcacheConnectorFactory extends GPPoolConnectorFactory<GPPoolGeowebcacheConnectorKey, GPGeowebcacheConnectorStore> {
 
     /**
-     * @param theJacksoSupport
-     * @return {@link GeowebcacheConnectorStoreBuilder}
+     * @param key
+     * @return {@link GPGeowebcacheConnectorStore}
+     * @throws Exception
      */
-    GeowebcacheConnectorStoreBuilder withJacksonSupport(@Nullable JacksonSupport theJacksoSupport);
-
-    /**
-     * @param theVersion
-     * @return {@link GeowebcacheConnectorStoreBuilder}
-     */
-    GeowebcacheConnectorStoreBuilder withVersion(String theVersion);
+    @Override
+    public GPGeowebcacheConnectorStore create(@Nonnull(when = NEVER) GPPoolGeowebcacheConnectorKey key) throws Exception {
+        checkNotNull(key, "The GPPoolGeowebcacheConnectorKey must not be null");
+        return geowebcacheConnectorBuilder()
+                .withServerUrl(key.getServerUrl())
+                .withPooledConnectorConfig(key.getPooledConnectorConfig())
+                .withClientSecurity(key.getSecurityConnector())
+                .withJacksonSupport(key.getJacksonSupport())
+                .withSslConnectionSocketFactory(key.getSslConnectionSocketFactory())
+                .withProxyConfiguration(key.getProxyConfiguration())
+                .withVersion(key.getVersion())
+                .build();
+    }
 }

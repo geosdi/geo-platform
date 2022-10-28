@@ -63,9 +63,9 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
 @ThreadSafe
 class GPGeoserverCreateCoverageRequest extends GPJsonPostConnectorRequest<Boolean, GeoserverCreateCoverageRequest> implements GeoserverCreateCoverageRequest {
 
-    private final ThreadLocal<String> workspaceName;
-    private final ThreadLocal<String> coverageStoreName;
-    private final ThreadLocal<GPGeoserverCoverageInfo> coverageBody;
+    private final ThreadLocal<String> workspaceName = withInitial(() -> null);
+    private final ThreadLocal<String> coverageStoreName = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverCoverageInfo> coverageBody = withInitial(() -> null);
 
     /**
      * @param theServerConnector
@@ -73,9 +73,6 @@ class GPGeoserverCreateCoverageRequest extends GPJsonPostConnectorRequest<Boolea
      */
     GPGeoserverCreateCoverageRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
-        this.workspaceName = withInitial(() -> null);
-        this.coverageStoreName = withInitial(() -> null);
-        this.coverageBody = withInitial(() -> null);
     }
 
     /**

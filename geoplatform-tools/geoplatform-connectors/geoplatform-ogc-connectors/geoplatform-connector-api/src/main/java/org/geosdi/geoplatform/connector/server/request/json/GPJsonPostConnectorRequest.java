@@ -35,15 +35,12 @@
  */
 package org.geosdi.geoplatform.connector.server.request.json;
 
-import com.google.common.io.CharStreams;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
 import org.apache.hc.core5.http.HttpEntity;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-import java.io.InputStreamReader;
-import java.io.Reader;
 
 import static javax.annotation.meta.When.NEVER;
 
@@ -51,7 +48,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPJsonPostConnectorRequest<T, ConnectorRequest extends GPJsonConnectorRequest> extends GPBaseJsonConnectorRequest<T, HttpPost, ConnectorRequest> {
+public abstract class GPJsonPostConnectorRequest<T, ConnectorRequest extends GPJsonConnectorRequest> extends GPBaseSendJsonConnectorRequest<T, HttpPost, ConnectorRequest> {
 
     /**
      * @param theServerConnector
@@ -73,23 +70,5 @@ public abstract class GPJsonPostConnectorRequest<T, ConnectorRequest extends GPJ
         if (httpEntity != null)
             httpPost.setEntity(httpEntity);
         return httpPost;
-    }
-
-    /**
-     * @return {@link HttpEntity}
-     */
-    protected abstract HttpEntity prepareHttpEntity() throws Exception;
-
-    /**
-     * <p>Show the JSON Object created for the Request to send to Server.</p>
-     *
-     * @return Request as a String
-     * @throws Exception
-     */
-    @Override
-    public String showRequestAsString() throws Exception {
-        try (Reader reader = new InputStreamReader(this.prepareHttpEntity().getContent())) {
-            return CharStreams.toString(reader);
-        }
     }
 }

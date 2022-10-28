@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.connector.store.coverages;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoveragesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadStoreCoverageRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverResetCoverageCacheRequest;
 import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV220xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -77,5 +78,12 @@ public class GPGeoserverCoveragesConnectorStoreV220XTest extends GPBaseGeoserver
         GeoserverLoadStoreCoverageRequest loadCoverageRequest = geoserverConnectorStoreV2_20_x.loadWorkspaceStoreCoverageRequest();
         loadCoverageRequest.withWorkspace("sf").withCoverage("sfdem").withStore("sfdem");
         logger.info("#######################LOAD_WORKSPACE_STORE_COVERAGE_RESPONSE : {}\n", loadCoverageRequest.getResponse());
+    }
+
+    @Test
+    public void e_resetCoverageCacheTest() throws Exception {
+        GeoserverResetCoverageCacheRequest resetCoverageCacheRequest = geoserverConnectorStoreV2_20_x.resetCoverageCacheRequest();
+        logger.info("#######################RESET_COVERAGE_CACHE_RESPONSE : {}\n", resetCoverageCacheRequest.withWorkspace("sf")
+                .withCoverage("sfdem").withStore("sfdem").getResponse());
     }
 }

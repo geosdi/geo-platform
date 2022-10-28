@@ -113,4 +113,12 @@ public abstract class GeoserverCoveragesConnectorStore extends GeoserverStructur
     public GeoserverLoadCoveragesByWorkspaceAndStoreRequest loadCoveragesByWorkspaceAndStoreRequest() {
         return this.server.loadCoveragesByWorkspaceAndStoreRequest();
     }
+
+    /**
+     * @return {@link GeoserverResetCoverageCacheRequest}
+     */
+    @Override
+    public GeoserverResetCoverageCacheRequest resetCoverageCacheRequest() {
+        return this.server.resetCoverageCacheRequest();
+    }
 }

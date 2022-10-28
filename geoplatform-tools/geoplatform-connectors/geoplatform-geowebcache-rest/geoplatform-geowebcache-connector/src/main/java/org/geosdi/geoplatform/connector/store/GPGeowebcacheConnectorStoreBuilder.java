@@ -96,8 +96,7 @@ public final class GPGeowebcacheConnectorStoreBuilder extends AbstractConnectorB
      * @return {@link ObjectMapper}
      */
     ObjectMapper toJacksonSupport() {
-        this.jacksonSupport = ((this.jacksonSupport != null) ? this.jacksonSupport :
-                new GPJacksonSupport().configure(NON_NULL));
+        this.jacksonSupport = ((this.jacksonSupport != null) ? this.jacksonSupport : new GPJacksonSupport().configure(NON_NULL));
         return this.jacksonSupport.getDefaultMapper();
     }
 }

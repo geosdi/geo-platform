@@ -58,8 +58,7 @@ class GPGeowebcacheReloadingRequest extends GPJsonPostConnectorRequest<Boolean, 
      * @param server
      * @param theJacksonSupport
      */
-    GPGeowebcacheReloadingRequest(@Nonnull(when = NEVER) GPServerConnector server,
-            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeowebcacheReloadingRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
     }
 

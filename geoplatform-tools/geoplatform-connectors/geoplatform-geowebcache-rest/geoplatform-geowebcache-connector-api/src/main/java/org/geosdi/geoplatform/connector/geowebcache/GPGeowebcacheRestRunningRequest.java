@@ -58,8 +58,7 @@ class GPGeowebcacheRestRunningRequest extends GPJsonGetConnectorRequest<Boolean,
      * @param server
      * @param theJacksonSupport
      */
-    GPGeowebcacheRestRunningRequest(@Nonnull(when = NEVER) GPServerConnector server,
-            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeowebcacheRestRunningRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
     }
 

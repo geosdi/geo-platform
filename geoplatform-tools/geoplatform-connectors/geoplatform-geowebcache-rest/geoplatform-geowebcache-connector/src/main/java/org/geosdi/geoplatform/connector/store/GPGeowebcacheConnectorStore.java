@@ -80,5 +80,4 @@ public class GPGeowebcacheConnectorStore extends GeowebcacheReloadingConnectorSt
     public Boolean isGeowebcacheRunning() {
         return this.restRunningRequest.isUp();
     }
-
 }

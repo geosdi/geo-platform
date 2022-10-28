@@ -36,6 +36,8 @@
 package org.geosdi.geoplatform.connector.geowebcache.reloading;
 
 
+import org.geosdi.geoplatform.connector.GeowebcacheVersion;
+import org.geosdi.geoplatform.connector.GeowebcacheVersionException;
 import org.geosdi.geoplatform.connector.geowebcache.request.reloading.GeowebcacheReloadingRequest;
 import org.geosdi.geoplatform.connector.server.GPAbstractServerConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
@@ -45,6 +47,8 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import java.net.URL;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static org.geosdi.geoplatform.connector.GeowebcacheVersion.fromString;
+import static org.geosdi.geoplatform.connector.GeowebcacheVersion.toVersionExceptionMessage;
 
 
 /**
@@ -54,13 +58,14 @@ import static com.google.common.base.Preconditions.checkArgument;
 public abstract class GPGeowebcacheReloadingConnector extends GPAbstractServerConnector implements IGPGeowebcacheReloadingConnector {
 
     protected final JacksonSupport jacksonSupport;
+    protected final GeowebcacheVersion version;
 
     /**
      * @param urlServer
      * @param theJacksonSupport
      */
-    protected GPGeowebcacheReloadingConnector(String urlServer, JacksonSupport theJacksonSupport) {
-        this(urlServer, null, theJacksonSupport);
+    protected GPGeowebcacheReloadingConnector(String urlServer, JacksonSupport theJacksonSupport, String version) {
+        this(urlServer, null, theJacksonSupport, version);
     }
 
     /**
@@ -68,8 +73,8 @@ public abstract class GPGeowebcacheReloadingConnector extends GPAbstractServerCo
      * @param securityConnector
      */
     protected GPGeowebcacheReloadingConnector(String urlServer, GPSecurityConnector securityConnector,
-            JacksonSupport theJacksonSupport) {
-        this(analyzesServerURL(urlServer), securityConnector, theJacksonSupport);
+            JacksonSupport theJacksonSupport, String version) {
+        this(analyzesServerURL(urlServer), securityConnector, theJacksonSupport, fromString(version));
     }
 
     /**
@@ -78,8 +83,8 @@ public abstract class GPGeowebcacheReloadingConnector extends GPAbstractServerCo
      * @param securityConnector
      */
     protected GPGeowebcacheReloadingConnector(String urlServer, GPPooledConnectorConfig pooledConnectorConfig,
-            GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport) {
-        this(analyzesServerURL(urlServer), pooledConnectorConfig, securityConnector, theJacksonSupport);
+            GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, String version) {
+        this(analyzesServerURL(urlServer), pooledConnectorConfig, securityConnector, theJacksonSupport, fromString(version));
     }
 
     /**
@@ -87,9 +92,10 @@ public abstract class GPGeowebcacheReloadingConnector extends GPAbstractServerCo
      * @param securityConnector
      */
     protected GPGeowebcacheReloadingConnector(URL server, GPSecurityConnector securityConnector,
-            JacksonSupport theJacksonSupport) {
+            JacksonSupport theJacksonSupport, GeowebcacheVersion theVersion) {
         super(analyzesServerURL(server), securityConnector);
         checkArgument(theJacksonSupport != null, "The Parameter JacksonSupport mut not be null.");
+        this.version = theVersion;
         this.jacksonSupport = theJacksonSupport;
     }
 
@@ -99,10 +105,11 @@ public abstract class GPGeowebcacheReloadingConnector extends GPAbstractServerCo
      * @param securityConnector
      */
     protected GPGeowebcacheReloadingConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig,
-            GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport) {
+            GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeowebcacheVersion theVersion) {
         super(analyzesServerURL(server), securityConnector, pooledConnectorConfig);
         checkArgument(theJacksonSupport != null, "The Parameter JacksonSupport mut not be null.");
         this.jacksonSupport = theJacksonSupport;
+        this.version = theVersion;
     }
 
     /**
@@ -122,7 +129,13 @@ public abstract class GPGeowebcacheReloadingConnector extends GPAbstractServerCo
      */
     @Override
     public GeowebcacheReloadingRequest createReloadingRequest() {
-        return new GPGeowebcacheReloadingRequest(this, this.jacksonSupport);
+        switch (version) {
+            case V120x:
+            case V121x:
+                return new GPGeowebcacheReloadingRequest(this, this.jacksonSupport);
+            default:
+                throw new GeowebcacheVersionException(toVersionExceptionMessage());
+        }
     }
 
     @Override

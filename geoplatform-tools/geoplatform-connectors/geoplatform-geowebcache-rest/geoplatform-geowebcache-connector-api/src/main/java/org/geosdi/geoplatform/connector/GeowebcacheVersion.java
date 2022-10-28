@@ -33,65 +33,79 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store;
+package org.geosdi.geoplatform.connector;
 
-import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.geosdi.geoplatform.connector.server.GPServerConnector.GPServerConnectorVersion;
 
-import java.net.URL;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Objects;
+import java.util.Optional;
 
-import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
-import static org.geosdi.geoplatform.connector.store.GPGeowebcacheConnectorStoreBuilder.geowebcacheConnectorBuilder;
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
+import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPBaseGeowebcacheConnectorStoreTest {
-
-    protected static final Logger logger = LoggerFactory.getLogger(GPBaseGeowebcacheConnectorStoreTest.class);
-    //
-    private static final String geoserverURLV2_21_x = "http://150.145.141.92/geoserver/gwc/rest";
-    protected static GPGeowebcacheConnectorStore geowebcacheConnectorStore;
+public enum GeowebcacheVersion implements GPServerConnectorVersion {
 
     /**
-     * @throws Exception
+     * <p>Stable Version.</p>
      */
-    @BeforeClass
-    public static void beforeClass() throws Exception {
-        geowebcacheConnectorStore = geowebcacheConnectorBuilder().withServerUrl(new URL(geoserverURLV2_21_x))
-                .withPooledConnectorConfig(
-                        pooledConnectorConfigBuilder().withMaxTotalConnections(150).withDefaultMaxPerRoute(80)
-                                .withMaxRedirect(20).build())
-                .withClientSecurity(new BasicPreemptiveSecurityConnector("admin", "geoserver")).build();
+    V121x("1.21.2"),
+    /**
+     * <p>Maintenance Version.</p>
+     */
+    V120x("1.20.4");
+
+    private final String version;
+
+    /**
+     * @param theVersion
+     */
+    GeowebcacheVersion(@Nonnull(when = NEVER) String theVersion) {
+        checkArgument((theVersion != null) && !(theVersion.trim().isEmpty()), "The Parameter version must not be null or an empty string.");
+        this.version = theVersion;
     }
 
     /**
-     * @throws Exception
+     * @return {@link String}
      */
-    @AfterClass
-    public static void afterClass() throws Exception {
-        geowebcacheConnectorStore.dispose();
+    @Override
+    public String getVersion() {
+        return this.version;
+    }
+
+    @Override
+    public String toString() {
+        return this.version;
     }
 
     /**
-     * @throws Exception
+     * @param version
+     * @return {@link GeowebcacheVersion}
      */
-    @Test
-    public void isRunningTest() throws Exception {
-        logger.info("###########GEOWEBCACHE RUNNING : {}\n", this.geowebcacheConnectorStore.isGeowebcacheRunning());
+    public static GeowebcacheVersion fromString(@Nullable String version) {
+        Optional<GeowebcacheVersion> optional = stream(GeowebcacheVersion.values())
+                .filter(Objects::nonNull)
+                .filter(v -> ((version != null) && !(version.trim().isEmpty())) ? v.getVersion().equalsIgnoreCase(version) : FALSE)
+                .findFirst();
+        return optional.orElse(V121x);
     }
 
     /**
-     * @throws Exception
+     * @return {@link String}
      */
-    @Test
-    public void reloadingTest() throws Exception {
-        logger.info("###########GEOWEBCACHE RELOADING : {}\n", this.geowebcacheConnectorStore.createReloadingRequest()
-                .getResponse());
+    public static String toVersionExceptionMessage() {
+        return of("The version for GPGeoserverConnector must be ", stream(GeowebcacheVersion.values())
+                .map(GeowebcacheVersion::getVersion)
+                .collect(joining(" OR ")))
+                .collect(joining());
     }
 }

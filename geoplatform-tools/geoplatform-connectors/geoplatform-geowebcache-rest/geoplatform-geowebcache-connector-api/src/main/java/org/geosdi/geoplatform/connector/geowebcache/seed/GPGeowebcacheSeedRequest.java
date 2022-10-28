@@ -32,82 +32,42 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geowebcache.reloading;
+package org.geosdi.geoplatform.connector.geowebcache.seed;
 
-import com.google.common.io.CharStreams;
-import org.apache.http.HttpEntity;
-import org.geosdi.geoplatform.connector.geowebcache.request.reloading.GeowebcacheReloadingRequest;
+import org.geosdi.geoplatform.connector.geowebcache.model.seed.status.GeowebcacheSeedTaskStatus;
+import org.geosdi.geoplatform.connector.geowebcache.request.seed.GeowebcacheSeedRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-import java.io.BufferedReader;
 
-import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
-import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-class GPGeowebcacheReloadingRequest extends GPJsonPostConnectorRequest<String, GeowebcacheReloadingRequest> implements GeowebcacheReloadingRequest {
+public class GPGeowebcacheSeedRequest extends GPJsonGetConnectorRequest<GeowebcacheSeedTaskStatus, GeowebcacheSeedRequest> implements GeowebcacheSeedRequest {
 
-    private ThreadLocal<String> configurationName;
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    GPGeowebcacheReloadingRequest(@Nonnull(when = NEVER) GPServerConnector server,
+    protected GPGeowebcacheSeedRequest(@Nonnull(when = NEVER) GPServerConnector server,
             @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
-        this.configurationName = withInitial(() -> null);
-    }
-
-    /**
-     * @param configurationName
-     * @return {@link  GeowebcacheReloadingRequest}
-     */
-    @Override
-    public GeowebcacheReloadingRequest withConfigurationName(String configurationName) {
-        this.configurationName.set(configurationName);
-        return self();
     }
 
     @Override
     protected String createUriPath() throws Exception {
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("/reload") : baseURI.concat("/reload")));
+        return ((baseURI.endsWith("/") ? baseURI.concat("/seed.json") : baseURI.concat("/seed.json")));
     }
 
-    /**
-     * @return {@link  Class<Boolean>}
-     */
     @Override
-    protected Class<String> forClass() {
-        return String.class;
-    }
-
-    /**
-     * @param reader
-     * @return {@link Boolean}
-     * @throws Exception
-     */
-    @Override
-    protected String readInternal(BufferedReader reader) throws Exception {
-        return CharStreams.toString(reader);
-    }
-
-    /**
-     * @return {@link  HttpEntity}
-     * @throws Exception
-     */
-    @Override
-    protected HttpEntity prepareHttpEntity() throws Exception {
-        String configurationName = this.configurationName.get();
-        logger.trace("#############################RELOADING_BODY : \n{}\n", configurationName);
-        return new StringEntity(configurationName != null && !configurationName.trim().isEmpty() ? configurationName : "reload_configuration=1", APPLICATION_JSON) ;
+    protected Class<GeowebcacheSeedTaskStatus> forClass() {
+        return GeowebcacheSeedTaskStatus.class;
     }
 }

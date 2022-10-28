@@ -94,4 +94,13 @@ public class GPBaseGeowebcacheConnectorStoreTest {
         logger.info("###########GEOWEBCACHE RELOADING : {}\n", this.geowebcacheConnectorStore.createReloadingRequest()
                 .getResponse());
     }
+
+    /**
+     * @throws Exception
+     */
+    @Test
+    public void seedTest() throws Exception {
+        logger.info("###########GEOWEBCACHE SEED : {}\n", this.geowebcacheConnectorStore.createSeedRequest()
+                .getResponse());
+    }
 }

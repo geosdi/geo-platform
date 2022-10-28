@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.connector.store;
 
-import org.geosdi.geoplatform.connector.store.reloading.GPGeowebcacheReloadingConnectorStore;
+import org.geosdi.geoplatform.connector.store.seed.GPGeowebcacheSeedConnectorStore;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface IGPGeowebcacheConnectorStore extends GPGeowebcacheReloadingConnectorStore {
+public interface IGPGeowebcacheConnectorStore extends GPGeowebcacheSeedConnectorStore {
 
     /**
      * @return {@link Boolean}

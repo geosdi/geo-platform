@@ -118,8 +118,10 @@ public abstract class GPGeowebcacheReloadingConnector extends GPAbstractServerCo
      */
     protected static URL analyzesServerURL(URL serverURL) {
         checkArgument(serverURL != null, "The Parameter serverURL must not be null.");
-        if (!serverURL.getPath().contains("/geoserver/gwc/rest")) {
-            throw new IllegalStateException("The GeoserverConnector URL must contains path /geoserver/gwc/rest");
+        if (!serverURL.getPath().contains("/geoserver/gwc/rest") && !serverURL.getPath()
+                .contains("/geowebcache/rest")) {
+            throw new IllegalStateException(
+                    "The GeowebcacheConnector URL must contains path /geowebcache/rest or /geoserver/gwc/rest");
         }
         return serverURL;
     }

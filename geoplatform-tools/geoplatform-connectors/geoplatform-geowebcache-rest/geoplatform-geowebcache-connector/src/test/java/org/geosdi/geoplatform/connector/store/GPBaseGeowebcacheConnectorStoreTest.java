@@ -55,7 +55,7 @@ public class GPBaseGeowebcacheConnectorStoreTest {
 
     protected static final Logger logger = LoggerFactory.getLogger(GPBaseGeowebcacheConnectorStoreTest.class);
     //
-    private static final String geoserverURLV2_21_x = "http://150.145.141.92/geoserver/gwc/rest";
+    private static final String geoserverURLV2_21_x = "http://150.145.141.92/geowebcache/rest";
     protected static GPGeowebcacheConnectorStore geowebcacheConnectorStore;
 
     /**
@@ -67,7 +67,7 @@ public class GPBaseGeowebcacheConnectorStoreTest {
                 .withPooledConnectorConfig(
                         pooledConnectorConfigBuilder().withMaxTotalConnections(150).withDefaultMaxPerRoute(80)
                                 .withMaxRedirect(20).build())
-                .withClientSecurity(new BasicPreemptiveSecurityConnector("admin", "geoserver")).build();
+                .withClientSecurity(new BasicPreemptiveSecurityConnector("geowebcache", "secured")).build();
     }
 
     /**

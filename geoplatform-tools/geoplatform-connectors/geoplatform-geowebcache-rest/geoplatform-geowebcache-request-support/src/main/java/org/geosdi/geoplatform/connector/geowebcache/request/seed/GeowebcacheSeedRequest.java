@@ -34,7 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.geowebcache.request.seed;
 
-import org.geosdi.geoplatform.connector.geowebcache.model.seed.status.GeowebcacheSeedTaskStatus;
+import org.geosdi.geoplatform.connector.geowebcache.model.seed.GeowebcacheSeedTaskStatus;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 /**

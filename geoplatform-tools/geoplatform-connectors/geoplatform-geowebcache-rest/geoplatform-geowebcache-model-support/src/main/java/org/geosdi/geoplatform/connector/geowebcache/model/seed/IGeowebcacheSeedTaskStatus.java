@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.connector.geowebcache.model.seed.status;
+package org.geosdi.geoplatform.connector.geowebcache.model.seed;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

@@ -103,4 +103,14 @@ public class GPBaseGeowebcacheConnectorStoreTest {
         logger.info("###########GEOWEBCACHE SEED : {}\n", this.geowebcacheConnectorStore.createSeedRequest()
                 .getResponse());
     }
+
+    /**
+     * @throws Exception
+     */
+    @Test
+    public void seedWithLayerNameTest() throws Exception {
+        logger.info("###########GEOWEBCACHE SEED : {}\n", this.geowebcacheConnectorStore.createSeedWithLayerNameRequest()
+                        .withLayerName("topp:states")
+                .getResponse());
+    }
 }

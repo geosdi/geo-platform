@@ -34,42 +34,73 @@
  */
 package org.geosdi.geoplatform.connector.geowebcache.seed;
 
-import org.geosdi.geoplatform.connector.geowebcache.model.seed.GeowebcacheSeedResponse;
-import org.geosdi.geoplatform.connector.geowebcache.request.seed.GeowebcacheSeedWithLayerNameRequest;
+import com.google.common.io.CharStreams;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.geosdi.geoplatform.connector.geowebcache.model.seed.GPGeowebcacheSeedBody;
+import org.geosdi.geoplatform.connector.geowebcache.request.seed.GeowebcacheSeedWithLayerBodyRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
+import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
+import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeowebcacheSeedWithLayerNameRequest extends GPJsonGetConnectorRequest<GeowebcacheSeedResponse, GeowebcacheSeedWithLayerNameRequest> implements GeowebcacheSeedWithLayerNameRequest {
+public class GPGeowebcacheSeedWithLayerNameBodyRequest extends GPJsonPostConnectorRequest<Boolean, GeowebcacheSeedWithLayerBodyRequest> implements GeowebcacheSeedWithLayerBodyRequest {
 
+    private final ThreadLocal<GPGeowebcacheSeedBody> body;
     private final ThreadLocal<String> layerName;
 
     /**
      * @param server
      * @param theJacksonSupport
      */
-    protected GPGeowebcacheSeedWithLayerNameRequest(@Nonnull(when = NEVER) GPServerConnector server,
+    protected GPGeowebcacheSeedWithLayerNameBodyRequest(@Nonnull(when = NEVER) GPServerConnector server,
             @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
         this.layerName = withInitial(() -> null);
+        this.body = withInitial(() -> null);
+    }
+
+    /**
+     * @return {@link HttpEntity}
+     */
+    @Override
+    protected HttpEntity prepareHttpEntity() throws Exception {
+        GPGeowebcacheSeedBody body = this.body.get();
+        checkArgument(body != null, "The body must not be null.");
+        String bodyString = jacksonSupport.getDefaultMapper().writeValueAsString(body);
+        logger.debug("#############################SEED_BODY : \n{}\n", bodyString);
+        return new StringEntity(bodyString, APPLICATION_JSON);
+    }
+
+    /**
+     * @param body
+     * @return {@link GPGeowebcacheSeedWithLayerNameBodyRequest}
+     */
+    @Override
+    public GeowebcacheSeedWithLayerBodyRequest withBody(GPGeowebcacheSeedBody body) {
+        this.body.set(body);
+        return self();
     }
 
     /**
      * @param layerName
-     * @return {@link GeowebcacheSeedWithLayerNameRequest}
+     * @return {@link GeowebcacheSeedWithLayerBodyRequest}
      */
     @Override
-    public GeowebcacheSeedWithLayerNameRequest withLayerName(String layerName) {
+    public GeowebcacheSeedWithLayerBodyRequest withLayerName(String layerName) {
         this.layerName.set(layerName);
         return self();
     }
@@ -83,7 +114,19 @@ public class GPGeowebcacheSeedWithLayerNameRequest extends GPJsonGetConnectorReq
     }
 
     @Override
-    protected Class<GeowebcacheSeedResponse> forClass() {
-        return GeowebcacheSeedResponse.class;
+    protected Class<Boolean> forClass() {
+        return Boolean.class;
+    }
+
+    /**
+     * @param reader
+     * @return {@link T}
+     * @throws Exception
+     */
+    @Override
+    protected Boolean readInternal(BufferedReader reader) throws Exception {
+        String value = CharStreams.toString(reader);
+        logger.info("##########RESPONSE: {}\n\n", value);
+        return ((value != null) && (!value.trim().isEmpty()) ? FALSE : TRUE);
     }
 }

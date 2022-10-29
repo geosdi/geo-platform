@@ -35,6 +35,17 @@
  */
 package org.geosdi.geoplatform.connector.store;
 
+import org.geosdi.geoplatform.connector.geowebcache.model.seed.GPGeowebcacheSeedBody;
+import org.geosdi.geoplatform.connector.geowebcache.model.seed.GeowebcacheSeedBody;
+import org.geosdi.geoplatform.connector.geowebcache.model.seed.bounds.GPGeowebcacheBoundsBean;
+import org.geosdi.geoplatform.connector.geowebcache.model.seed.bounds.GeowebcacheBoundsBean;
+import org.geosdi.geoplatform.connector.geowebcache.model.seed.entry.coordinates.GPGeowebcacheCoordinatesEntry;
+import org.geosdi.geoplatform.connector.geowebcache.model.seed.entry.coordinates.GeowebcacheCoordinatesEntry;
+import org.geosdi.geoplatform.connector.geowebcache.model.seed.entry.entry.GPGeowebcacheEntryValue;
+import org.geosdi.geoplatform.connector.geowebcache.model.seed.entry.entry.GeowebcacheEntryValue;
+import org.geosdi.geoplatform.connector.geowebcache.model.seed.operation.GeowebcacheSeedOperationType;
+import org.geosdi.geoplatform.connector.geowebcache.model.seed.srs.GPGeowebcacheSrsBean;
+import org.geosdi.geoplatform.connector.geowebcache.model.seed.srs.GeowebcacheSrsBean;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -111,6 +122,37 @@ public class GPBaseGeowebcacheConnectorStoreTest {
     public void seedWithLayerNameTest() throws Exception {
         logger.info("###########GEOWEBCACHE SEED : {}\n", this.geowebcacheConnectorStore.createSeedWithLayerNameRequest()
                         .withLayerName("topp:states")
+                .getResponse());
+    }
+
+    /**
+     * @throws Exception
+     */
+    @Test
+    public void seedWithLayerNameBodyTest() throws Exception {
+        GPGeowebcacheSeedBody geowebcacheSeedBody = new GeowebcacheSeedBody();
+        geowebcacheSeedBody.setName("topp:states");
+        geowebcacheSeedBody.setGridSetId("EPSG:2163");
+        geowebcacheSeedBody.setZoomStart(0);
+        geowebcacheSeedBody.setZoomStop(1);
+        geowebcacheSeedBody.setType(GeowebcacheSeedOperationType.SEED);
+        geowebcacheSeedBody.setThreadCount(1);
+        geowebcacheSeedBody.setFormat("image\\/png");
+        GPGeowebcacheCoordinatesEntry coordinatesEntry = new GeowebcacheCoordinatesEntry();
+        coordinatesEntry.addNumbers(-124.0, 22.0, -66.0, 72.0);
+        GPGeowebcacheBoundsBean coordinatesBean = new GeowebcacheBoundsBean();
+        coordinatesBean.setCoordinates(coordinatesEntry);
+        geowebcacheSeedBody.setBounds(coordinatesBean);
+        GPGeowebcacheEntryValue geowebcacheEntryValue = new GeowebcacheEntryValue();
+        geowebcacheEntryValue.addValue("STYLES");
+        geowebcacheEntryValue.addValue("pophatch");
+        GPGeowebcacheSrsBean gpGeowebcacheSrsBean = new GeowebcacheSrsBean();
+        gpGeowebcacheSrsBean.setNumber(4326);
+        geowebcacheSeedBody.setSrs(gpGeowebcacheSrsBean);
+        geowebcacheSeedBody.addParameter(geowebcacheEntryValue);
+        logger.info("###########GEOWEBCACHE SEED : {}\n", this.geowebcacheConnectorStore.createSeedWithLayerNameBodyRequest()
+                .withLayerName("topp:states")
+                        .withBody(geowebcacheSeedBody)
                 .getResponse());
     }
 }

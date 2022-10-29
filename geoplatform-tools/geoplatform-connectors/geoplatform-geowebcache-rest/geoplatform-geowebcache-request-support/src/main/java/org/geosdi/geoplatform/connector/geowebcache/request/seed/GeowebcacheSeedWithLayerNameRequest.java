@@ -34,14 +34,14 @@
  */
 package org.geosdi.geoplatform.connector.geowebcache.request.seed;
 
-import org.geosdi.geoplatform.connector.geowebcache.model.seed.GeowebcacheSeedTaskStatus;
+import org.geosdi.geoplatform.connector.geowebcache.model.seed.GeowebcacheSeedResponse;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeowebcacheSeedWithLayerNameRequest extends GPJsonConnectorRequest<GeowebcacheSeedTaskStatus, GeowebcacheSeedWithLayerNameRequest> {
+public interface GeowebcacheSeedWithLayerNameRequest extends GPJsonConnectorRequest<GeowebcacheSeedResponse, GeowebcacheSeedWithLayerNameRequest> {
 
     /**
      * @param layerName

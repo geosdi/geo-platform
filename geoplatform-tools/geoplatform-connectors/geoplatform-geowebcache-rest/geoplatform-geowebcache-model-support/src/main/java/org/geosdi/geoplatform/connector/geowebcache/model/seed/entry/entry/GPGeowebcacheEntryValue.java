@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.connector.geowebcache.model.entry;
+package org.geosdi.geoplatform.connector.geowebcache.model.seed.entry.entry;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -12,11 +12,11 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = GeowebcacheParameterEntry.class)
-public interface IGeowebcacheParameterEntry extends Serializable {
+@JsonDeserialize(as = GeowebcacheEntryValue.class)
+public interface GPGeowebcacheEntryValue extends Serializable {
 
     /**
-     * @return {@link List<String>}
+     * @return {@link List <String>}
      */
     List<String> getValues();
 

@@ -32,42 +32,26 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geowebcache.seed;
+package org.geosdi.geoplatform.connector.geowebcache.request.seed;
 
-import org.geosdi.geoplatform.connector.geowebcache.model.seed.GeowebcacheSeedResponse;
-import org.geosdi.geoplatform.connector.geowebcache.request.seed.GeowebcacheSeedRequest;
-import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
-
-import javax.annotation.Nonnull;
-
-import static javax.annotation.meta.When.NEVER;
+import org.geosdi.geoplatform.connector.geowebcache.model.seed.GPGeowebcacheSeedBody;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeowebcacheSeedRequest extends GPJsonGetConnectorRequest<GeowebcacheSeedResponse, GeowebcacheSeedRequest> implements GeowebcacheSeedRequest {
-
+public interface GeowebcacheSeedWithLayerBodyRequest extends GPJsonConnectorRequest<Boolean, GeowebcacheSeedWithLayerBodyRequest> {
 
     /**
-     * @param server
-     * @param theJacksonSupport
+     * @param body
+     * @return {@link GeowebcacheSeedWithLayerBodyRequest}
      */
-    protected GPGeowebcacheSeedRequest(@Nonnull(when = NEVER) GPServerConnector server,
-            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
-        super(server, theJacksonSupport);
-    }
+    GeowebcacheSeedWithLayerBodyRequest withBody(GPGeowebcacheSeedBody body);
 
-    @Override
-    protected String createUriPath() throws Exception {
-        String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("/seed.json") : baseURI.concat("/seed.json")));
-    }
-
-    @Override
-    protected Class<GeowebcacheSeedResponse> forClass() {
-        return GeowebcacheSeedResponse.class;
-    }
+    /**
+     * @param layerName
+     * @return {@link GeowebcacheSeedWithLayerBodyRequest}
+     */
+    GeowebcacheSeedWithLayerBodyRequest withLayerName(String layerName);
 }

@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.geowebcache.seed;
 
 import org.geosdi.geoplatform.connector.geowebcache.reloading.IGPGeowebcacheReloadingConnector;
 import org.geosdi.geoplatform.connector.geowebcache.request.seed.GeowebcacheSeedRequest;
+import org.geosdi.geoplatform.connector.geowebcache.request.seed.GeowebcacheSeedWithLayerBodyRequest;
 import org.geosdi.geoplatform.connector.geowebcache.request.seed.GeowebcacheSeedWithLayerNameRequest;
 
 /**
@@ -55,4 +56,9 @@ public interface IGPGeowebcacheSeedConnector extends IGPGeowebcacheReloadingConn
      * @return {@link GeowebcacheSeedWithLayerNameRequest}
      */
     GeowebcacheSeedWithLayerNameRequest createSeedWithLayerNameRequest();
+
+    /**
+     * @return {@link GeowebcacheSeedWithLayerBodyRequest}
+     */
+    GeowebcacheSeedWithLayerBodyRequest createSeedWithLayerNameBodyRequest();
 }

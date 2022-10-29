@@ -39,6 +39,7 @@ package org.geosdi.geoplatform.connector.geowebcache.seed;
 import org.geosdi.geoplatform.connector.GeowebcacheVersion;
 import org.geosdi.geoplatform.connector.GeowebcacheVersionException;
 import org.geosdi.geoplatform.connector.geowebcache.reloading.GPGeowebcacheReloadingConnector;
+import org.geosdi.geoplatform.connector.geowebcache.request.seed.GeowebcacheSeedWithLayerBodyRequest;
 import org.geosdi.geoplatform.connector.geowebcache.request.seed.GeowebcacheSeedWithLayerNameRequest;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -140,6 +141,20 @@ public abstract class GPGeowebcacheSeedConnector extends GPGeowebcacheReloadingC
             case V120x:
             case V121x:
                 return new GPGeowebcacheSeedWithLayerNameRequest(this, this.emptyJacksonSupport);
+            default:
+                throw new GeowebcacheVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeowebcacheSeedWithLayerBodyRequest}
+     */
+    @Override
+    public GeowebcacheSeedWithLayerBodyRequest createSeedWithLayerNameBodyRequest() {
+        switch (version) {
+            case V120x:
+            case V121x:
+                return new GPGeowebcacheSeedWithLayerNameBodyRequest(this, this.jacksonSupport);
             default:
                 throw new GeowebcacheVersionException(toVersionExceptionMessage());
         }

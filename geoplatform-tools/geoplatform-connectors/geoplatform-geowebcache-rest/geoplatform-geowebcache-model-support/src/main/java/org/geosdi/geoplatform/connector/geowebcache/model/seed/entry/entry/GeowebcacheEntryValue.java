@@ -1,4 +1,4 @@
-package org.geosdi.geoplatform.connector.geowebcache.model.entry;
+package org.geosdi.geoplatform.connector.geowebcache.model.seed.entry.entry;
 
 import com.google.common.collect.Lists;
 import lombok.Getter;
@@ -22,7 +22,7 @@ import static javax.annotation.meta.When.NEVER;
 @Getter
 @ToString
 @XmlAccessorType(value = XmlAccessType.FIELD)
-public class GeowebcacheParameterEntry implements IGeowebcacheParameterEntry {
+public class GeowebcacheEntryValue implements GPGeowebcacheEntryValue {
 
     private static final long serialVersionUID = 358810488942497528L;
     //

@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-iso-binding</artifactId>
-        <version>2.0-SNAPSHOT</version>
+        <version>1.9-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>iso-19139</artifactId>
-    <version>2.0-SNAPSHOT</version>
+    <version>1.9-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == Binding ISO 19139 XML Module</name>

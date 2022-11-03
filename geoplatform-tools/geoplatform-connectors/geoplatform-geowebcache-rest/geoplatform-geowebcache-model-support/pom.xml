@@ -17,7 +17,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <geoplatform-version>2.0-SNAPSHOT</geoplatform-version>
+    <geoplatform-version>1.9-SNAPSHOT</geoplatform-version>
   </properties>
 
   <dependencies>

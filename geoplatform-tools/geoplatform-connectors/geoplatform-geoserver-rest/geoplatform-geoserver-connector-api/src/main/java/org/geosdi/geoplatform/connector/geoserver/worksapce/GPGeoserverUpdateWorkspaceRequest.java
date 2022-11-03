@@ -58,8 +58,8 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
 @ThreadSafe
 class GPGeoserverUpdateWorkspaceRequest extends GPJsonPutConnectorRequest<String, GeoserverUpdateWorkspaceRequest> implements GeoserverUpdateWorkspaceRequest {
 
-    private final ThreadLocal<String> workspaceName;
-    private final ThreadLocal<GPGeoserverCreateWorkspaceBody> workspaceBody;
+    private final ThreadLocal<String> workspaceName = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverCreateWorkspaceBody> workspaceBody = withInitial(() -> null);
 
     /**
      * @param theServerConnector
@@ -67,8 +67,6 @@ class GPGeoserverUpdateWorkspaceRequest extends GPJsonPutConnectorRequest<String
      */
     GPGeoserverUpdateWorkspaceRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(theServerConnector, theJacksonSupport);
-        this.workspaceName = withInitial(() -> null);
-        this.workspaceBody = withInitial(() -> null);
     }
 
     /**

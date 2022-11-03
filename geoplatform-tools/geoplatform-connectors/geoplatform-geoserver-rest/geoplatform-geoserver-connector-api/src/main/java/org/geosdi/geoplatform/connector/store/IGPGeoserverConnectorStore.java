@@ -36,13 +36,13 @@
 package org.geosdi.geoplatform.connector.store;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
-import org.geosdi.geoplatform.connector.store.fonts.GPGeoserverFontsStore;
+import org.geosdi.geoplatform.connector.store.logging.GPGeoserverLoggingStore;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverConnectorStore extends GPGeoserverFontsStore {
+public interface IGPGeoserverConnectorStore extends GPGeoserverLoggingStore {
 
     /**
      * @return {@link Boolean}

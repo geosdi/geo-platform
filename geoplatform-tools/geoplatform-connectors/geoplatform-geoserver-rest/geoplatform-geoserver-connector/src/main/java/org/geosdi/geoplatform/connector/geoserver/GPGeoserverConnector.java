@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.connector.geoserver;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
-import org.geosdi.geoplatform.connector.geoserver.fonts.GPGeoserverFontsConnector;
+import org.geosdi.geoplatform.connector.geoserver.logging.GPGeoserverLoggingConnector;
 import org.geosdi.geoplatform.connector.geoserver.model.metadata.link.GPGeoserverMetadataLinks;
 import org.geosdi.geoplatform.connector.geoserver.request.reload.GeoserverReloadCatalogRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.reset.GeoserverResetRequest;
@@ -56,7 +56,7 @@ import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExcepti
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGeoserverConnector extends GPGeoserverFontsConnector implements IGPGeoserverConnector {
+public class GPGeoserverConnector extends GPGeoserverLoggingConnector implements IGPGeoserverConnector {
 
     /**
      * @param urlServer

@@ -36,13 +36,13 @@
 package org.geosdi.geoplatform.connector.geoserver.datastores;
 
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.*;
-import org.geosdi.geoplatform.connector.geoserver.styles.IGPGeoserverStylesConnector;
+import org.geosdi.geoplatform.connector.geoserver.wms.store.IGPGeoserverWMSStoreConnector;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverDatastoresConnector extends IGPGeoserverStylesConnector {
+public interface IGPGeoserverDatastoresConnector extends IGPGeoserverWMSStoreConnector {
 
     /**
      * @return {@link GeoserverLoadDatastoresRequest}

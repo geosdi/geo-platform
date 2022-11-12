@@ -38,16 +38,17 @@ package org.geosdi.geoplatform.connector.geoserver.request.layers;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.IGPGeoserverCreateDatastoreBody;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.geopkg.IGPGeopackageDatastoreBodyBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.postgis.IGPPostgisDatastoreBodyBuilder;
-import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.wfs.IGPWFSDatastoreBodyBuilder;
-import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.postgis.jndi.IGPPostgisJndiDatastoreBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.file.shape.IGPShapeFileDatastoreBodyBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.file.shape.IGPShapeFilesDirDatastoreBodyBuilder;
+import org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.wfs.IGPWFSDatastoreBodyBuilder;
+import org.geosdi.geoplatform.connector.geoserver.model.layers.GeoserverLayer;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
 import java.util.Map;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -58,7 +59,7 @@ public interface GeoserverBaseCreateLayerRequest<Request extends GeoserverBaseCr
     /**
      * @param theWorkspaceName
      */
-    Request withWorkspaceName(@Nonnull(when = When.NEVER) String theWorkspaceName);
+    Request withWorkspaceName(@Nonnull(when = NEVER) String theWorkspaceName);
 
     /**
      * <p>
@@ -75,11 +76,11 @@ public interface GeoserverBaseCreateLayerRequest<Request extends GeoserverBaseCr
      *
      * @param theLayerBody
      */
-    Request withLayerBody(@Nonnull(when = When.NEVER) GeoserverLayer theLayerBody);
+    Request withLayerBody(@Nonnull(when = NEVER) GeoserverLayer theLayerBody);
 
     /**
      * @param theLayerName
      */
-    Request withLayerName(@Nonnull(when = When.NEVER) String theLayerName);
+    Request withLayerName(@Nonnull(when = NEVER) String theLayerName);
 
 }

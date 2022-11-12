@@ -40,16 +40,15 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import java.io.Serializable;
 
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.EXISTING_PROPERTY;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.EXISTING_PROPERTY,
-        property = "@class")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = CoverageResource.class, name = "coverage"),
+@JsonTypeInfo(use = NAME, include = EXISTING_PROPERTY, property = "@class")
+@JsonSubTypes({@JsonSubTypes.Type(value = CoverageResource.class, name = "coverage"),
         @JsonSubTypes.Type(value = FeatureTypeResource.class, name = "featureType")})
 public interface GeoserverLayerResource extends Serializable {
 

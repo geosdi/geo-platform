@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connector.geoserver.model.workspace;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -49,6 +50,7 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Getter
+@Setter
 @ToString(callSuper = true)
 @XmlRootElement(name = "workspace")
 @XmlAccessorType(value = FIELD)
@@ -57,7 +59,7 @@ public class GPGeoserverWorkspace extends GPGeoserverBaseWorkspace implements IG
     private static final long serialVersionUID = -7603339038135009989L;
     //
     @XmlElement(name = "href")
-    private String workspaceHref;
+    private String value;
 
     public GPGeoserverWorkspace() {
     }
@@ -65,8 +67,8 @@ public class GPGeoserverWorkspace extends GPGeoserverBaseWorkspace implements IG
     /**
      * @param theWorkspaceName
      */
-    public GPGeoserverWorkspace(String theWorkspaceName, String workspaceHref) {
+    public GPGeoserverWorkspace(String theWorkspaceName, String theValue) {
         super(theWorkspaceName);
-        this.workspaceHref = workspaceHref;
+        this.value = theValue;
     }
 }

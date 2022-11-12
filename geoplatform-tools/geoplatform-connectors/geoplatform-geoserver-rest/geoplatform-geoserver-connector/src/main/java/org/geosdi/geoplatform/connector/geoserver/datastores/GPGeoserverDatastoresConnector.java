@@ -39,7 +39,7 @@ import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverUpdateCoverageStoreWithStoreNameRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.*;
-import org.geosdi.geoplatform.connector.geoserver.styles.GPGeoserverStylesConnector;
+import org.geosdi.geoplatform.connector.geoserver.wms.store.GPGeoserverWMSStoreConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
@@ -52,7 +52,7 @@ import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExcepti
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPGeoserverDatastoresConnector extends GPGeoserverStylesConnector implements IGPGeoserverDatastoresConnector {
+public abstract class GPGeoserverDatastoresConnector extends GPGeoserverWMSStoreConnector implements IGPGeoserverDatastoresConnector {
 
     /**
      * @param urlServer

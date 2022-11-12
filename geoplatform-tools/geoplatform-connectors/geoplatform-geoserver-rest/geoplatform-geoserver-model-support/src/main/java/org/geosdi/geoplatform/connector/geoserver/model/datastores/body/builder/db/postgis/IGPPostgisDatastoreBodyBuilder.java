@@ -43,12 +43,12 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.annotation.meta.When;
 import java.util.List;
 import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Flowable.fromArray;
+import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.connector.geoserver.model.datastores.GeoserverDatastoreType.POSTGIS;
 
 /**
@@ -61,7 +61,7 @@ public interface IGPPostgisDatastoreBodyBuilder extends GPGeoserverDatastoreBody
      * @param thePort
      * @return {@link IGPPostgisDatastoreBodyBuilder}
      */
-    IGPPostgisDatastoreBodyBuilder withPort(@Nonnull(when = When.NEVER) Integer thePort);
+    IGPPostgisDatastoreBodyBuilder withPort(@Nonnull(when = NEVER) Integer thePort);
 
     /**
      * <p>Creates the database if it does not exist yet</p>
@@ -93,7 +93,7 @@ public interface IGPPostgisDatastoreBodyBuilder extends GPGeoserverDatastoreBody
      * @param theHost
      * @return {@link IGPPostgisDatastoreBodyBuilder}
      */
-    IGPPostgisDatastoreBodyBuilder withHost(@Nonnull(when = When.NEVER) String theHost);
+    IGPPostgisDatastoreBodyBuilder withHost(@Nonnull(when = NEVER) String theHost);
 
     /**
      * @param theDatabase
@@ -115,7 +115,7 @@ public interface IGPPostgisDatastoreBodyBuilder extends GPGeoserverDatastoreBody
      * @param theUser
      * @return {@link IGPPostgisDatastoreBodyBuilder}
      */
-    IGPPostgisDatastoreBodyBuilder withUser(@Nonnull(when = When.NEVER) String theUser);
+    IGPPostgisDatastoreBodyBuilder withUser(@Nonnull(when = NEVER) String theUser);
 
     class GPPostgisDatastoreBodyBuilder extends GeoserverDatastoreBodyDatabaseBuilder<IGPPostgisDatastoreBodyBuilder> implements IGPPostgisDatastoreBodyBuilder {
 
@@ -145,7 +145,7 @@ public interface IGPPostgisDatastoreBodyBuilder extends GPGeoserverDatastoreBody
          * @return {@link IGPPostgisDatastoreBodyBuilder}
          */
         @Override
-        public IGPPostgisDatastoreBodyBuilder withPort(@Nonnull(when = When.NEVER) Integer thePort) {
+        public IGPPostgisDatastoreBodyBuilder withPort(@Nonnull(when = NEVER) Integer thePort) {
             this.connectionParameters.compute(GPGeoserverConnectionPostGISValues.PORT.getConnectionKey(), (k, v) -> ((thePort != null) && (thePort > 0)) ? thePort.toString() : v);
             return self();
         }
@@ -220,7 +220,7 @@ public interface IGPPostgisDatastoreBodyBuilder extends GPGeoserverDatastoreBody
          * @return {@link IGPPostgisDatastoreBodyBuilder}
          */
         @Override
-        public IGPPostgisDatastoreBodyBuilder withHost(@Nonnull(when = When.NEVER) String theHost) {
+        public IGPPostgisDatastoreBodyBuilder withHost(@Nonnull(when = NEVER) String theHost) {
             this.connectionParameters.compute(GPGeoserverConnectionPostGISValues.HOST.getConnectionKey(), (k, v) -> ((theHost != null) && !(theHost.trim().isEmpty())) ? theHost : v);
             return self();
         }
@@ -302,7 +302,7 @@ public interface IGPPostgisDatastoreBodyBuilder extends GPGeoserverDatastoreBody
          * @return {@link IGPPostgisDatastoreBodyBuilder}
          */
         @Override
-        public IGPPostgisDatastoreBodyBuilder withUser(@Nonnull(when = When.NEVER) String theUser) {
+        public IGPPostgisDatastoreBodyBuilder withUser(@Nonnull(when = NEVER) String theUser) {
             this.connectionParameters.compute(GPGeoserverConnectionPostGISValues.USER.getConnectionKey(), (k, v) -> ((theUser != null) && !(theUser.trim().isEmpty())) ? theUser : v);
             return self();
         }

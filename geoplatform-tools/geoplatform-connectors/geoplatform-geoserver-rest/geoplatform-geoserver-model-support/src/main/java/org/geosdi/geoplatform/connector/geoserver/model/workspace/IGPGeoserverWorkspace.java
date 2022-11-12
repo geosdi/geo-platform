@@ -35,13 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.workspace;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = GPGeoserverWorkspace.class)
 public interface IGPGeoserverWorkspace extends IGPGeoserverBaseWorkspace {
 
     /**
@@ -52,5 +49,10 @@ public interface IGPGeoserverWorkspace extends IGPGeoserverBaseWorkspace {
     /**
      * @return {@link String}
      */
-    String getWorkspaceHref();
+    String getValue();
+
+    /**
+     * @param theValue
+     */
+    void setValue(String theValue);
 }

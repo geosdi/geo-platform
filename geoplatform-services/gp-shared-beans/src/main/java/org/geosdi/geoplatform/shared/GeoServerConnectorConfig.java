@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.shared;
 
-import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
+import org.geosdi.geoplatform.connector.server.security.DigestPreemptiveSecurityConnector;
 import org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -69,7 +69,7 @@ class GeoServerConnectorConfig {
                         .withDefaultMaxPerRoute(40)
                         .withMaxRedirect(10)
                         .build())
-                .withClientSecurity(new BasicPreemptiveSecurityConnector(username, password))
+                .withClientSecurity(new DigestPreemptiveSecurityConnector(username, password))
                 .build();
     }
 

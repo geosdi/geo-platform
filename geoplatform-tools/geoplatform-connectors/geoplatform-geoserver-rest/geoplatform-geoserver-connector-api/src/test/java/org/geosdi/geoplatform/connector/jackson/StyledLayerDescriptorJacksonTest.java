@@ -79,6 +79,13 @@ public class StyledLayerDescriptorJacksonTest {
     public void b_unmarshallStyledLayerDescriptorFromFileTest() throws Exception {
         StyledLayerDescriptor styledLayerDescriptor = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper().readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "StyledLayerDescriptor-DefaultLine")
                 .collect(joining(separator, "", ".xml"))), StyledLayerDescriptor.class);
+        logger.info("@@@@@@@@@@@@@@@@@@@STYLED_LAYER_DESCRIPTOR_DEFAULT_LINE : {}\n", styledLayerDescriptor);
+    }
+
+    @Test
+    public void c_unmarshallStyledLayerDescriptorFromFileTest() throws Exception {
+        StyledLayerDescriptor styledLayerDescriptor = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper().readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "StyledLayerDescriptor1")
+                .collect(joining(separator, "", ".xml"))), StyledLayerDescriptor.class);
         logger.info("##################STYLED_LAYER_DESCRIPTOR_DEFAULT_LINE : {}\n", styledLayerDescriptor);
     }
 }

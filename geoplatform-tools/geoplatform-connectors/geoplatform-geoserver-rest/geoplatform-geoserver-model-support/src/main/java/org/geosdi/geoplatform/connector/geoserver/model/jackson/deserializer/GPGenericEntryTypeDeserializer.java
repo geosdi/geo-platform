@@ -45,6 +45,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -52,7 +53,7 @@ import java.io.IOException;
  */
 public abstract class GPGenericEntryTypeDeserializer<V extends GPGenericEntryType> extends StdDeserializer<V> {
 
-    private static final Logger logger = LoggerFactory.getLogger(GPGenericEntryTypeDeserializer.class);
+    protected static final Logger logger = LoggerFactory.getLogger(GPGenericEntryTypeDeserializer.class);
 
     /**
      * @param vc
@@ -113,8 +114,8 @@ public abstract class GPGenericEntryTypeDeserializer<V extends GPGenericEntryTyp
      */
     @Override
     public V deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JacksonException {
-        String key = null;
-        String value = null;
+        AtomicReference<String> key = new AtomicReference<>(null);
+        AtomicReference<String> value = new AtomicReference<>(null);
         if (jsonParser.currentToken() == JsonToken.START_OBJECT) {
             jsonParser.nextToken();
         }
@@ -122,20 +123,30 @@ public abstract class GPGenericEntryTypeDeserializer<V extends GPGenericEntryTyp
             if (jsonParser.currentToken() == JsonToken.FIELD_NAME) {
                 continue;
             }
-            String propertyName = jsonParser.currentName();
-            logger.debug("######################PROPERTY_NAME: {}, for : {}\n", propertyName, this.getClass().getSimpleName());
-            switch (propertyName) {
-                case "@key": {
-                    key = jsonParser.getText();
-                    break;
-                }
-                case "$": {
-                    value = jsonParser.getText();
-                    break;
-                }
-            }
+            this.internalSwitch(jsonParser, key, value);
         } while (jsonParser.nextToken() != JsonToken.END_OBJECT);
-        return toModel(key, value);
+        return toModel(key.get(), value.get());
+    }
+
+    /**
+     * @param jsonParser
+     * @param key
+     * @param value
+     * @throws IOException
+     */
+    protected void internalSwitch(JsonParser jsonParser, AtomicReference<String> key, AtomicReference<String> value) throws IOException {
+        String propertyName = jsonParser.currentName();
+        logger.debug("######################PROPERTY_NAME: {}, for : {}\n", propertyName, this.getClass().getSimpleName());
+        switch (propertyName) {
+            case "@key": {
+                key.set(jsonParser.getText());
+                break;
+            }
+            case "$": {
+                value.set(jsonParser.getText());
+                break;
+            }
+        }
     }
 
     /**

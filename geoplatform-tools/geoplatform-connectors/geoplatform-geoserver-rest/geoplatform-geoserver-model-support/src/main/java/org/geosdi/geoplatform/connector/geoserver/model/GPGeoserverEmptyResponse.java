@@ -38,12 +38,13 @@ package org.geosdi.geoplatform.connector.geoserver.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.xml.bind.annotation.XmlTransient;
+import java.io.Serializable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverEmptyResponse<T> {
+public interface GPGeoserverEmptyResponse<T> extends Serializable {
 
     /**
      * @return {@link T}

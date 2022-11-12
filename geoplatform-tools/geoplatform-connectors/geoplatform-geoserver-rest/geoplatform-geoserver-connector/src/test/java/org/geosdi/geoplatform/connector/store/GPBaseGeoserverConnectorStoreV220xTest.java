@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.store;
 
-import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
+import org.geosdi.geoplatform.connector.server.security.DigestPreemptiveSecurityConnector;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
@@ -71,7 +71,7 @@ public abstract class GPBaseGeoserverConnectorStoreV220xTest {
                         .withDefaultMaxPerRoute(40)
                         .withMaxRedirect(10)
                         .build())
-                .withClientSecurity(new BasicPreemptiveSecurityConnector("admin", "geoservertest"))
+                .withClientSecurity(new DigestPreemptiveSecurityConnector("admin", "geoservertest"))
                 .build();
     }
 

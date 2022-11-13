@@ -46,7 +46,7 @@ import org.geosdi.geoplatform.connector.geowebcache.model.seed.entry.entry.Geowe
 import org.geosdi.geoplatform.connector.geowebcache.model.seed.operation.GeowebcacheSeedOperationType;
 import org.geosdi.geoplatform.connector.geowebcache.model.seed.srs.GPGeowebcacheSrsBean;
 import org.geosdi.geoplatform.connector.geowebcache.model.seed.srs.GeowebcacheSrsBean;
-import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
+import org.geosdi.geoplatform.connector.server.security.DigestPreemptiveSecurityConnector;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -74,11 +74,14 @@ public class GPBaseGeowebcacheConnectorStoreTest {
      */
     @BeforeClass
     public static void beforeClass() throws Exception {
-        geowebcacheConnectorStore = geowebcacheConnectorBuilder().withServerUrl(new URL(geoserverURLV2_21_x))
-                .withPooledConnectorConfig(
-                        pooledConnectorConfigBuilder().withMaxTotalConnections(150).withDefaultMaxPerRoute(80)
-                                .withMaxRedirect(20).build())
-                .withClientSecurity(new BasicPreemptiveSecurityConnector("geowebcache", "secured")).build();
+        geowebcacheConnectorStore = geowebcacheConnectorBuilder()
+                .withServerUrl(new URL(geoserverURLV2_21_x))
+                .withPooledConnectorConfig(pooledConnectorConfigBuilder()
+                        .withMaxTotalConnections(150)
+                        .withDefaultMaxPerRoute(80)
+                        .withMaxRedirect(20).build())
+                .withClientSecurity(new DigestPreemptiveSecurityConnector("geowebcache", "secured"))
+                .build();
     }
 
     /**

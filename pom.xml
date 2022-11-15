@@ -1295,7 +1295,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.3.0</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
                 </configuration>
@@ -1316,7 +1316,7 @@
                     <dependency>
                         <groupId>org.ow2.asm</groupId>
                         <artifactId>asm</artifactId>
-                        <version>9.3</version>
+                        <version>9.4</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -1330,7 +1330,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.2</version>
+                <version>3.3.0</version>
                 <configuration>
                     <archive>
                         <index>true</index>
@@ -1507,7 +1507,7 @@
         <activemq-version>5.8.0</activemq-version>
 
         <jettison>1.4.1</jettison>
-        <joda-version>2.12.0</joda-version>
+        <joda-version>2.12.1</joda-version>
 
         <javax.ws.rs-api-version>2.1</javax.ws.rs-api-version>
 

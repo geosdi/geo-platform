@@ -32,39 +32,49 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.model.wms.store;
 
-import org.geosdi.geoplatform.connector.geoserver.request.wms.store.*;
-import org.geosdi.geoplatform.connector.store.styles.GPGeoserverStylesConnectorStore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverWorkspace;
+
+import java.time.LocalDateTime;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverWMSStoreConnectorStore extends GPGeoserverStylesConnectorStore {
+@JsonDeserialize(as = GeoserverWMSStore.class)
+@JsonSerialize(as = GeoserverWMSStore.class)
+public interface GPGeoserverWMSStore extends GPGeoserverWMSBaseStore<GPGeoserverWorkspace> {
 
     /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoresRequest}
+     * @return {@link LocalDateTime}
      */
-    GeoserverLoadWorkspaceWMSStoresRequest loadWorkspaceWMSStoresRequest();
+    LocalDateTime getDateCreated();
 
     /**
-     * @return {@link GeoserverCreateWMSStoreRequest}
+     * @param theDateCreated
      */
-    GeoserverCreateWMSStoreRequest createWMSStoreRequest();
+    void setDateCreated(LocalDateTime theDateCreated);
 
     /**
-     * @return {@link GeoserverUpdateWMSStoreRequest}
+     * @return {@link LocalDateTime}
      */
-    GeoserverUpdateWMSStoreRequest updateWMSStoreRequest();
+    LocalDateTime getDateModified();
 
     /**
-     * @return {@link GeoserverDeleteWMSStoreRequest}
+     * @param theDateModified
      */
-    GeoserverDeleteWMSStoreRequest deleteWMSStoreRequest();
+    void setDateModified(LocalDateTime theDateModified);
 
     /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoreRequest}
+     * @return {@link String}
      */
-    GeoserverLoadWorkspaceWMSStoreRequest loadWorkspaceWMSStoreRequest();
+    String getWmsLayers();
+
+    /**
+     * @param theWmsLayers
+     */
+    void setWmsLayers(String theWmsLayers);
 }

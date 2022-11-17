@@ -38,12 +38,15 @@ package org.geosdi.geoplatform.response.collection;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.annotation.Nullable;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
+import static java.util.Collections.EMPTY_LIST;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -65,11 +68,12 @@ public abstract class GPGenericMapType<K, V, Entry extends GPGenericEntryType<K,
     /**
      * @param map
      */
-    public GPGenericMapType(Map<K, V> map) {
-        this.entry = map.entrySet()
+    public GPGenericMapType(@Nullable Map<K, V> map) {
+        this.entry = ((map != null) ? map.entrySet()
                 .stream()
                 .map(this::toEntry)
-                .collect(toList());
+                .filter(Objects::nonNull)
+                .collect(toList()) : EMPTY_LIST);
     }
 
     /**

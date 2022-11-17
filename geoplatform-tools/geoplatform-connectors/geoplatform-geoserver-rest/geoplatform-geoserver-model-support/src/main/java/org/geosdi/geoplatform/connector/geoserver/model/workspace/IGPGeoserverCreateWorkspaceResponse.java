@@ -41,7 +41,7 @@ import java.io.Serializable;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverCreareWorkspaceResponse extends Serializable {
+public interface IGPGeoserverCreateWorkspaceResponse extends Serializable {
 
     /**
      * @return {@link String}

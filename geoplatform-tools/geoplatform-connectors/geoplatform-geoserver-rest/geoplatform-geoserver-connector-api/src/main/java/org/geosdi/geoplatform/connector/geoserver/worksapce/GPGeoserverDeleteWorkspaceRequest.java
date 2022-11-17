@@ -36,7 +36,11 @@
 package org.geosdi.geoplatform.connector.geoserver.worksapce;
 
 import com.google.common.io.CharStreams;
+import io.reactivex.rxjava3.functions.Consumer;
 import net.jcip.annotations.ThreadSafe;
+import org.apache.hc.core5.net.URIBuilder;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverBooleanQueryParam;
+import org.geosdi.geoplatform.connector.geoserver.model.uri.GeoserverRXQueryParamConsumer;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverDeleteWorkspaceRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.ResourceNotFoundException;
@@ -45,8 +49,10 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 import java.io.BufferedReader;
+import java.io.IOException;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static io.reactivex.rxjava3.core.Observable.fromArray;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.ThreadLocal.withInitial;
@@ -57,10 +63,10 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverDeleteWorkspaceRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteWorkspaceRequest> implements GeoserverDeleteWorkspaceRequest {
+class GPGeoserverDeleteWorkspaceRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteWorkspaceRequest> implements GeoserverDeleteWorkspaceRequest {
 
-    private final ThreadLocal<String> workspaceName;
-    private final ThreadLocal<Boolean> recurse;
+    private final ThreadLocal<String> workspaceName = withInitial(() -> null);
+    private final ThreadLocal<GPGeoserverBooleanQueryParam> recurse = withInitial(() -> new GPGeoserverBooleanQueryParam("recurse", FALSE));
 
     /**
      * @param server
@@ -68,8 +74,6 @@ public class GPGeoserverDeleteWorkspaceRequest extends GPJsonDeleteConnectorRequ
      */
     GPGeoserverDeleteWorkspaceRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
-        this.workspaceName = withInitial(() -> null);
-        this.recurse = withInitial(() -> FALSE);
     }
 
     /**
@@ -86,7 +90,7 @@ public class GPGeoserverDeleteWorkspaceRequest extends GPJsonDeleteConnectorRequ
      */
     @Override
     public GeoserverDeleteWorkspaceRequest withRecurse(Boolean theRecurse) {
-        this.recurse.set((theRecurse != null) ? theRecurse : FALSE);
+        this.recurse.set(new GPGeoserverBooleanQueryParam("recurse", (theRecurse != null) ? theRecurse : FALSE));
         return self();
     }
 
@@ -97,10 +101,14 @@ public class GPGeoserverDeleteWorkspaceRequest extends GPJsonDeleteConnectorRequ
     protected String createUriPath() throws Exception {
         String workspaceName = this.workspaceName.get();
         checkArgument((workspaceName != null) && !(workspaceName.trim().isEmpty()), "The Parameter workspaceName mut not be null or an Empty String.");
-        String recurse = this.recurse.get().toString();
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName).concat("?recurse=").concat(recurse)
-                : baseURI.concat("/workspaces/").concat(workspaceName).concat("?recurse=").concat(recurse)));
+        URIBuilder uriBuilder = new URIBuilder(((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName)
+                : baseURI.concat("/workspaces/").concat(workspaceName))));
+        Consumer<ThreadLocal> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
+        fromArray(this.recurse)
+                .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
+                .subscribe(consumer, Throwable::printStackTrace);
+        return uriBuilder.build().toString();
     }
 
     /**
@@ -126,8 +134,13 @@ public class GPGeoserverDeleteWorkspaceRequest extends GPJsonDeleteConnectorRequ
      */
     @Override
     protected Boolean readInternal(BufferedReader reader) throws Exception {
-        String value = CharStreams.toString(reader);
-        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
+        try {
+            String value = CharStreams.toString(reader);
+            return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return FALSE;
+        }
     }
 
     /**

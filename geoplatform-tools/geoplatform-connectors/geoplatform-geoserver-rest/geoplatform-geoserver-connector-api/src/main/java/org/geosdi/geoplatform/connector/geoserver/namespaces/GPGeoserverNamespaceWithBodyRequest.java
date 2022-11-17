@@ -41,7 +41,7 @@ import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.namespace.GPGeoserverSingleNamespace;
 import org.geosdi.geoplatform.connector.geoserver.model.namespace.IGPGeoserverNamespaceBody;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverCreateWorkspaceResponse;
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverCreareWorkspaceResponse;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverCreateWorkspaceResponse;
 import org.geosdi.geoplatform.connector.geoserver.request.namespaces.GeoserverNamespaceWithBodyRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
@@ -60,7 +60,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 @ThreadSafe
-class GPGeoserverNamespaceWithBodyRequest extends GPJsonPostConnectorRequest<IGPGeoserverCreareWorkspaceResponse, GeoserverNamespaceWithBodyRequest> implements GeoserverNamespaceWithBodyRequest {
+class GPGeoserverNamespaceWithBodyRequest extends GPJsonPostConnectorRequest<IGPGeoserverCreateWorkspaceResponse, GeoserverNamespaceWithBodyRequest> implements GeoserverNamespaceWithBodyRequest {
 
     private final ThreadLocal<IGPGeoserverNamespaceBody> namespaceBody;
 
@@ -106,11 +106,11 @@ class GPGeoserverNamespaceWithBodyRequest extends GPJsonPostConnectorRequest<IGP
 
     /**
      * @param reader
-     * @return {@link IGPGeoserverCreareWorkspaceResponse}
+     * @return {@link IGPGeoserverCreateWorkspaceResponse}
      * @throws Exception
      */
     @Override
-    protected IGPGeoserverCreareWorkspaceResponse readInternal(BufferedReader reader) throws Exception {
+    protected IGPGeoserverCreateWorkspaceResponse readInternal(BufferedReader reader) throws Exception {
         return GPGeoserverCreateWorkspaceResponse.builder()
                 .workspaceName(reader.lines().collect(joining()))
                 .build();
@@ -120,7 +120,7 @@ class GPGeoserverNamespaceWithBodyRequest extends GPJsonPostConnectorRequest<IGP
      * @return {@link Class<GPGeoserverSingleNamespace>}
      */
     @Override
-    protected Class<IGPGeoserverCreareWorkspaceResponse> forClass() {
-        return IGPGeoserverCreareWorkspaceResponse.class;
+    protected Class<IGPGeoserverCreateWorkspaceResponse> forClass() {
+        return IGPGeoserverCreateWorkspaceResponse.class;
     }
 }

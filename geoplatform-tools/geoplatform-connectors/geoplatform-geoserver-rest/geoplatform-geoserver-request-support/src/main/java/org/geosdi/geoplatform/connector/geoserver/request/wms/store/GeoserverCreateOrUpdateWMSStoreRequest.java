@@ -32,39 +32,23 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.request.wms.store;
 
-import org.geosdi.geoplatform.connector.geoserver.request.wms.store.*;
-import org.geosdi.geoplatform.connector.store.styles.GPGeoserverStylesConnectorStore;
+import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GPGeoserverWMSStoreBody;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverWMSStoreConnectorStore extends GPGeoserverStylesConnectorStore {
+public interface GeoserverCreateOrUpdateWMSStoreRequest<T, R extends GeoserverCreateOrUpdateWMSStoreRequest<T, R>> extends GeoserverCrudWMSStoreRequest<T, R> {
 
     /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoresRequest}
+     * @param theBody
+     * @return {@link R}
      */
-    GeoserverLoadWorkspaceWMSStoresRequest loadWorkspaceWMSStoresRequest();
-
-    /**
-     * @return {@link GeoserverCreateWMSStoreRequest}
-     */
-    GeoserverCreateWMSStoreRequest createWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverUpdateWMSStoreRequest}
-     */
-    GeoserverUpdateWMSStoreRequest updateWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverDeleteWMSStoreRequest}
-     */
-    GeoserverDeleteWMSStoreRequest deleteWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoreRequest}
-     */
-    GeoserverLoadWorkspaceWMSStoreRequest loadWorkspaceWMSStoreRequest();
+    R withBody(@Nonnull(when = NEVER) GPGeoserverWMSStoreBody theBody);
 }

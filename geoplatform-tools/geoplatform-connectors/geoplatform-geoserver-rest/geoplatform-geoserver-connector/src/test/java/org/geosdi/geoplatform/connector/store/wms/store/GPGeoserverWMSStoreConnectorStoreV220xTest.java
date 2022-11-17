@@ -34,9 +34,76 @@
  */
 package org.geosdi.geoplatform.connector.store.wms.store;
 
+import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GPGeoserverWMSStore;
+import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GPGeoserverWMSStoreBody;
+import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GPGeoserverWMSStores;
+import org.geosdi.geoplatform.connector.geoserver.request.wms.store.GeoserverCreateWMSStoreRequest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV220xTest;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+
+import static java.lang.Boolean.FALSE;
+import static org.geosdi.geoplatform.connector.jackson.wms.store.GeoserverWMSStoresJacksonTest.toWMSStore;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGeoserverWMSStoreConnectorStoreV220xTest {
+@FixMethodOrder(NAME_ASCENDING)
+public class GPGeoserverWMSStoreConnectorStoreV220xTest extends GPBaseGeoserverConnectorStoreV220xTest {
+
+    @Test
+    public void a_loadGeoserverWMSStoresRequestTest() throws Exception {
+        GPGeoserverWMSStores wmsStores = geoserverConnectorStoreV2_20_x.loadWorkspaceWMSStoresRequest()
+                .withWorkspace("sf")
+                .getResponse();
+        assertTrue(wmsStores.isEmpty());
+    }
+
+    @Test
+    public void b_createGeoserverWMSStoreRequestTest() throws Exception {
+        GeoserverCreateWMSStoreRequest request = geoserverConnectorStoreV2_20_x.createWMSStoreRequest()
+                .withWorkspace("sf")
+                .withBody(toWMSStore("http://150.145.141.92/geoserver/ows?service=wms&version=1.1.1&request=GetCapabilities"));
+        logger.info("######################{}\n", request.getResponse());
+    }
+
+    @Test
+    public void c_loadGeoserverWMSStoresRequestTest() throws Exception {
+        GPGeoserverWMSStores wmsStores = geoserverConnectorStoreV2_20_x.loadWorkspaceWMSStoresRequest()
+                .withWorkspace("sf")
+                .getResponse();
+        assertTrue(wmsStores.getStores().size() == 1);
+        assertTrue(wmsStores.getStores().get(0).getName().equals("remote"));
+    }
+
+    @Test
+    public void d_deleteGeoserverWMSStoreRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_DELETE_WMS_STORE_RESPONSE : {}\n",geoserverConnectorStoreV2_20_x
+                .deleteWMSStoreRequest().withWorkspace("sf").withStore("remote").getResponse());
+    }
+
+    @Test
+    public void e_updateGeoserverWMSStoreRequestTest() throws Exception {
+        GPGeoserverWMSStore wmsStore = geoserverConnectorStoreV2_20_x.loadWorkspaceWMSStoreRequest()
+                .withWorkspace("sf")
+                .withStore("remote").getResponse();
+        assertNotNull(wmsStore);
+        GPGeoserverWMSStoreBody wmsStoreBody = toWMSStore("http://150.145.141.92/geoserver/ows?service=wms&version=1.1.1&request=GetCapabilities");
+        wmsStoreBody.setDescription("the_remote_description_test");
+        wmsStoreBody.getMetadata().put("useConnectionPooling", FALSE.toString());
+        logger.info("{}\n", geoserverConnectorStoreV2_20_x.updateWMSStoreRequest()
+                .withWorkspace("sf")
+                .withStore("remote")
+                .withBody(wmsStoreBody).getResponse());
+    }
+
+    @Test
+    public void f_deleteGeoserverWMSStoreRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_DELETE_WMS_STORE_RESPONSE : {}\n",geoserverConnectorStoreV2_20_x
+                .deleteWMSStoreRequest().withWorkspace("sf").withStore("remote").getResponse());
+    }
 }

@@ -32,40 +32,44 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.model.adapter;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.ToString;
-import net.jcip.annotations.Immutable;
+import javax.xml.bind.ValidationEventHandler;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-import javax.xml.bind.annotation.XmlAccessorType;
-
-import static javax.xml.bind.annotation.XmlAccessType.FIELD;
+import static java.time.LocalDateTime.parse;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Getter
-@ToString
-@Immutable
-@XmlAccessorType(value = FIELD)
-public class GPWMSBaseStoreGeoserver implements GeoserverWMSBaseStore {
+public class GPLocalDateTimeAdpater extends XmlAdapter<String, LocalDateTime> {
 
-    private static final long serialVersionUID = -5936159481464102934L;
-    //
-    private final String name;
-    private final String href;
+    private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS z");
 
     /**
-     * @param theName
-     * @param theHref
+     * Convert a value type to a bound type.
+     *
+     * @param theLocalDateTime The value to be converted. Can be null.
+     * @throws Exception if there's an error during the conversion. The caller is responsible for
+     *                   reporting the error to the user through {@link ValidationEventHandler}.
      */
-    @JsonCreator
-    protected GPWMSBaseStoreGeoserver(@JsonProperty(value = "name") String theName, @JsonProperty(namespace = "href") String theHref) {
-        this.name = theName;
-        this.href = theHref;
+    @Override
+    public LocalDateTime unmarshal(String theLocalDateTime) throws Exception {
+        return ((theLocalDateTime != null) && !(theLocalDateTime.trim().isEmpty()) ? parse(theLocalDateTime, this.dateFormat) : null);
+    }
+
+    /**
+     * Convert a bound type to a value type.
+     *
+     * @param theLocalDateTime The value to be convereted. Can be null.
+     * @throws Exception if there's an error during the conversion. The caller is responsible for
+     *                   reporting the error to the user through {@link ValidationEventHandler}.
+     */
+    @Override
+    public String marshal(LocalDateTime theLocalDateTime) throws Exception {
+        return ((theLocalDateTime != null) ? this.dateFormat.format(theLocalDateTime) : null);
     }
 }

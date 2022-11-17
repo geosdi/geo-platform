@@ -32,53 +32,34 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.wms.store.metadata;
+package org.geosdi.geoplatform.connector.geoserver.request.wms.store;
 
-import com.fasterxml.jackson.core.JsonParser;
-import org.geosdi.geoplatform.connector.geoserver.model.jackson.deserializer.GPGenericEntryTypeDeserializer;
+import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GPGeoserverWMSStoreBody;
 
-import java.io.IOException;
-import java.util.concurrent.atomic.AtomicReference;
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-class GPWMSStoreMetadataParamDeserializer extends GPGenericEntryTypeDeserializer<GPWMSStoreMetadataParam> {
-
-    GPWMSStoreMetadataParamDeserializer() {
-        super(GPWMSStoreMetadataParam.class);
-    }
+public interface GeoserverUpdateWMSStoreRequest extends GeoserverCreateOrUpdateWMSStoreRequest<Boolean, GeoserverUpdateWMSStoreRequest> {
 
     /**
-     * @param jsonParser
-     * @param key
-     * @param value
-     * @throws IOException
+     * @param theWMSStore
+     * @return {@link GeoserverUpdateWMSStoreRequest}
      */
-    @Override
-    protected void internalSwitch(JsonParser jsonParser, AtomicReference<String> key, AtomicReference<String> value) throws IOException {
-        String propertyName = jsonParser.currentName();
-        logger.debug("######################PROPERTY_NAME: {}, for : {}\n", propertyName, this.getClass().getSimpleName());
-        switch (propertyName) {
-            case "@key": {
-                key.set(jsonParser.getText());
-                break;
-            }
-            case "text": {
-                value.set(jsonParser.getText());
-                break;
-            }
-        }
-    }
+    GeoserverUpdateWMSStoreRequest withStore(@Nonnull(when = NEVER) String theWMSStore);
 
     /**
-     * @param key
-     * @param value
-     * @return {@link GPWMSStoreMetadataParam}
+     * <p>
+     *     The {@link GPGeoserverWMSStoreBody#setName(String)} must much the Value in the path Rest called,
+     *     otherwise an exception will be throw with status code 403.
+     * </p>
+     * @param theBody
+     * @return {@link GeoserverUpdateWMSStoreRequest}
      */
     @Override
-    protected GPWMSStoreMetadataParam toModel(String key, String value) {
-        return new GPWMSStoreMetadataParam(key, value);
-    }
+    GeoserverUpdateWMSStoreRequest withBody(@Nonnull(when = NEVER) GPGeoserverWMSStoreBody theBody);
 }

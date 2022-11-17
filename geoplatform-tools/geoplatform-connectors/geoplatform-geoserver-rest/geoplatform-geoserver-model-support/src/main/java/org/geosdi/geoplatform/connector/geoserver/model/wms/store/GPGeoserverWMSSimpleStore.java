@@ -32,39 +32,40 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.model.wms.store;
 
-import org.geosdi.geoplatform.connector.geoserver.request.wms.store.*;
-import org.geosdi.geoplatform.connector.store.styles.GPGeoserverStylesConnectorStore;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.ToString;
+import net.jcip.annotations.Immutable;
+
+import javax.xml.bind.annotation.XmlAccessorType;
+
+import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverWMSStoreConnectorStore extends GPGeoserverStylesConnectorStore {
+@Getter
+@ToString
+@Immutable
+@XmlAccessorType(value = FIELD)
+public class GPGeoserverWMSSimpleStore implements GeoserverWMSSimpleStore {
+
+    private static final long serialVersionUID = -5936159481464102934L;
+    //
+    private final String name;
+    private final String href;
 
     /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoresRequest}
+     * @param theName
+     * @param theHref
      */
-    GeoserverLoadWorkspaceWMSStoresRequest loadWorkspaceWMSStoresRequest();
-
-    /**
-     * @return {@link GeoserverCreateWMSStoreRequest}
-     */
-    GeoserverCreateWMSStoreRequest createWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverUpdateWMSStoreRequest}
-     */
-    GeoserverUpdateWMSStoreRequest updateWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverDeleteWMSStoreRequest}
-     */
-    GeoserverDeleteWMSStoreRequest deleteWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoreRequest}
-     */
-    GeoserverLoadWorkspaceWMSStoreRequest loadWorkspaceWMSStoreRequest();
+    @JsonCreator
+    protected GPGeoserverWMSSimpleStore(@JsonProperty(value = "name") String theName, @JsonProperty(namespace = "href") String theHref) {
+        this.name = theName;
+        this.href = theHref;
+    }
 }

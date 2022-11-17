@@ -34,7 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.wms.store;
 
-import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GeoserverWMSStores;
+import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GPGeoserverWMSStores;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
@@ -45,7 +45,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverLoadWorkspaceWMSStoresRequest extends GPJsonConnectorRequest<GeoserverWMSStores, GeoserverLoadWorkspaceWMSStoresRequest> {
+public interface GeoserverLoadWorkspaceWMSStoresRequest extends GPJsonConnectorRequest<GPGeoserverWMSStores, GeoserverLoadWorkspaceWMSStoresRequest> {
 
     /**
      * @param theWorkspace

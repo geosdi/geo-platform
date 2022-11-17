@@ -32,39 +32,28 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.model.wms.store.layers;
 
-import org.geosdi.geoplatform.connector.geoserver.request.wms.store.*;
-import org.geosdi.geoplatform.connector.store.styles.GPGeoserverStylesConnectorStore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import java.io.Serializable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverWMSStoreConnectorStore extends GPGeoserverStylesConnectorStore {
+@JsonDeserialize(as = WMSLinkStoreLayer.class)
+@JsonSerialize(as = WMSLinkStoreLayer.class)
+public interface GPWMSLinkStoreLayer extends Serializable {
 
     /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoresRequest}
+     * @return {@link String}
      */
-    GeoserverLoadWorkspaceWMSStoresRequest loadWorkspaceWMSStoresRequest();
+    String getLink();
 
     /**
-     * @return {@link GeoserverCreateWMSStoreRequest}
+     * @param theLink
      */
-    GeoserverCreateWMSStoreRequest createWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverUpdateWMSStoreRequest}
-     */
-    GeoserverUpdateWMSStoreRequest updateWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverDeleteWMSStoreRequest}
-     */
-    GeoserverDeleteWMSStoreRequest deleteWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoreRequest}
-     */
-    GeoserverLoadWorkspaceWMSStoreRequest loadWorkspaceWMSStoreRequest();
+    void setLink(String theLink);
 }

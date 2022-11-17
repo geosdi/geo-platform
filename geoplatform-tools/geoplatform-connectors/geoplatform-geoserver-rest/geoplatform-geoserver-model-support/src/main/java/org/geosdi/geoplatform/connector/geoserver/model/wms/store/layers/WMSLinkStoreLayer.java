@@ -32,51 +32,27 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.wms.store.metadata;
+package org.geosdi.geoplatform.connector.geoserver.model.wms.store.layers;
 
-import org.geosdi.geoplatform.response.collection.GPGenericMapType;
+import lombok.*;
 
-import java.util.List;
-import java.util.Map;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+
+import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPWMSStoreMetadataMapType extends GPGenericMapType<String, String, GPWMSStoreMetadataParam> {
+@Getter
+@Setter
+@ToString
+@XmlAccessorType(value = FIELD)
+public class WMSLinkStoreLayer implements GPWMSLinkStoreLayer {
 
-    public GPWMSStoreMetadataMapType() {
-    }
-
-    /**
-     * @param map
-     */
-    public GPWMSStoreMetadataMapType(Map<String, String> map) {
-        super(map);
-    }
-
-    /**
-     * @return
-     */
-    @Override
-    public List<GPWMSStoreMetadataParam> getEntry() {
-        return super.getEntry();
-    }
-
-    /**
-     * @param entry
-     */
-    @Override
-    public void setEntry(List<GPWMSStoreMetadataParam> entry) {
-        super.setEntry(entry);
-    }
-
-    /**
-     * @param entry
-     * @return
-     */
-    @Override
-    protected GPWMSStoreMetadataParam toEntry(Map.Entry<String, String> entry) {
-        return new GPWMSStoreMetadataParam(entry.getKey(), entry.getValue());
-    }
+    private static final long serialVersionUID = -3180543794865486409L;
+    //
+    @XmlElement(name = "link")
+    private String link;
 }

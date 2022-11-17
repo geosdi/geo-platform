@@ -34,7 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.wms.store;
 
-import org.geosdi.geoplatform.connector.geoserver.request.wms.store.GeoserverLoadWorkspaceWMSStoresRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.wms.store.*;
 import org.geosdi.geoplatform.connector.geoserver.styles.IGPGeoserverStylesConnector;
 
 /**
@@ -47,4 +47,24 @@ public interface IGPGeoserverWMSStoreConnector extends IGPGeoserverStylesConnect
      * @return {@link GeoserverLoadWorkspaceWMSStoresRequest}
      */
     GeoserverLoadWorkspaceWMSStoresRequest loadWorkspaceWMSStoresRequest();
+
+    /**
+     * @return {@link GeoserverCreateWMSStoreRequest}
+     */
+    GeoserverCreateWMSStoreRequest createWMSStoreRequest();
+
+    /**
+     * @return {@link GeoserverUpdateWMSStoreRequest}
+     */
+    GeoserverUpdateWMSStoreRequest updateWMSStoreRequest();
+
+    /**
+     * @return {@link GeoserverDeleteWMSStoreRequest}
+     */
+    GeoserverDeleteWMSStoreRequest deleteWMSStoreRequest();
+
+    /**
+     * @return {@link GeoserverLoadWorkspaceWMSStoreRequest}
+     */
+    GeoserverLoadWorkspaceWMSStoreRequest loadWorkspaceWMSStoreRequest();
 }

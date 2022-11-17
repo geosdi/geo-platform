@@ -32,39 +32,36 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.model.wms.store;
 
-import org.geosdi.geoplatform.connector.geoserver.request.wms.store.*;
-import org.geosdi.geoplatform.connector.store.styles.GPGeoserverStylesConnectorStore;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverBaseWorkspace;
+
+import javax.annotation.Nullable;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverWMSStoreConnectorStore extends GPGeoserverStylesConnectorStore {
+public interface GPGeoserverWMSStoreBody extends GPGeoserverWMSBaseStore<GPGeoserverBaseWorkspace> {
 
     /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoresRequest}
+     * @return {@link GPGeoserverBaseWorkspace}
      */
-    GeoserverLoadWorkspaceWMSStoresRequest loadWorkspaceWMSStoresRequest();
+    @Override
+    GPGeoserverBaseWorkspace getWorkspace();
 
     /**
-     * @return {@link GeoserverCreateWMSStoreRequest}
+     * @param theWorkspace
      */
-    GeoserverCreateWMSStoreRequest createWMSStoreRequest();
+    @Override
+    void setWorkspace(@Nullable GPGeoserverBaseWorkspace theWorkspace);
 
     /**
-     * @return {@link GeoserverUpdateWMSStoreRequest}
+     * @return {@link Boolean}
      */
-    GeoserverUpdateWMSStoreRequest updateWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverDeleteWMSStoreRequest}
-     */
-    GeoserverDeleteWMSStoreRequest deleteWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoreRequest}
-     */
-    GeoserverLoadWorkspaceWMSStoreRequest loadWorkspaceWMSStoreRequest();
+    @XmlTransient
+    default boolean isSetWorkspace() {
+        return this.getWorkspace() != null;
+    }
 }

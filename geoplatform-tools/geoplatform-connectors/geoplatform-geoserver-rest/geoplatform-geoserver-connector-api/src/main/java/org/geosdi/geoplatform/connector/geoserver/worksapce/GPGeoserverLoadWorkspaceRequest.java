@@ -61,7 +61,7 @@ import static java.lang.ThreadLocal.withInitial;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverLoadWorkspaceRequest extends GPGeoserverExsistRequest<GPGeoserverLoadWorkspace, GeoserverLoadWorkspaceRequest> implements GeoserverLoadWorkspaceRequest {
+class GPGeoserverLoadWorkspaceRequest extends GPGeoserverExsistRequest<GPGeoserverLoadWorkspace, GeoserverLoadWorkspaceRequest> implements GeoserverLoadWorkspaceRequest {
 
     private final ThreadLocal<String> workspaceName = withInitial(() -> null);
     private final ThreadLocal<GPGeoserverBooleanQueryParam> quietOnNotFound = withInitial(() -> new GPGeoserverBooleanQueryParam("quietOnNotFound", TRUE));

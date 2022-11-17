@@ -46,17 +46,17 @@ import javax.xml.bind.annotation.XmlAccessorType;
  */
 @ToString
 @XmlAccessorType(XmlAccessType.FIELD)
-public class GPGeoserverWMSEmptyStores implements GPGeoserverEmptyResponse<GeoserverWMSStores> {
+public class GPGeoserverWMSEmptyStores implements GPGeoserverEmptyResponse<GPGeoserverWMSStores> {
 
     private static final long serialVersionUID = -695200240330671074L;
     //
     private String wmsStores;
 
     /**
-     * @return {@link GeoserverWMSStores}
+     * @return {@link GPGeoserverWMSStores}
      */
     @Override
-    public GeoserverWMSStores toModel() {
-        return new GPGeoserverWMSStores(null);
+    public GPGeoserverWMSStores toModel() {
+        return new GeoserverWMSStores(null);
     }
 }

@@ -32,56 +32,29 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.wms.store.metadata;
+package org.geosdi.geoplatform.connector.geoserver.model.wms.store;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.geosdi.geoplatform.connector.geoserver.model.metadata.IGPGeoserverMetadataParam;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverBaseWorkspace;
 
+import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import static javax.xml.bind.annotation.XmlAccessType.PROPERTY;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-@JsonSerialize(using = GPWMSStoreMetadataParamSerializer.class)
-@JsonDeserialize(using = GPWMSStoreMetadataParamDeserializer.class)
-@XmlRootElement(name = "entry")
-@XmlAccessorType(PROPERTY)
-public class GPWMSStoreMetadataParam implements IGPGeoserverMetadataParam {
+@ToString(callSuper = true)
+@XmlRootElement(name = "wmsStore")
+@XmlAccessorType(value = XmlAccessType.FIELD)
+public class GeoserverWMSStoreBody extends GeoserverWMSBaseStore<GPGeoserverBaseWorkspace> implements GPGeoserverWMSStoreBody {
 
-    private static final long serialVersionUID = 3143925860079195001L;
+    private static final long serialVersionUID = 8502668447804835502L;
     //
-    private String key;
-    private String value;
-
-    /**
-     * @return {@link String}
-     */
-    @XmlAttribute(name = "key", required = true)
-    @Override
-    public String getKey() {
-        return this.key;
-    }
-
-    /**
-     * @return {@link String}
-     */
-    @XmlAttribute(name = "text")
-    @Override
-    public String getValue() {
-        return this.value;
-    }
+    private GPGeoserverBaseWorkspace workspace;
 }

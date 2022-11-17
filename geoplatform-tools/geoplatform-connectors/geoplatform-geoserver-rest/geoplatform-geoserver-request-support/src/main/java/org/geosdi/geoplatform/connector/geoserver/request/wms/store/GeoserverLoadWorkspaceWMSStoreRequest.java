@@ -32,39 +32,47 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.request.wms.store;
 
-import org.geosdi.geoplatform.connector.geoserver.request.wms.store.*;
-import org.geosdi.geoplatform.connector.store.styles.GPGeoserverStylesConnectorStore;
+import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GeoserverWMSStore;
+import org.geosdi.geoplatform.connector.geoserver.request.exsist.GeoserverExsistRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverWMSStoreConnectorStore extends GPGeoserverStylesConnectorStore {
+public interface GeoserverLoadWorkspaceWMSStoreRequest extends GPJsonConnectorRequest<GeoserverWMSStore, GeoserverLoadWorkspaceWMSStoreRequest>, GeoserverExsistRequest {
 
     /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoresRequest}
-     */
-    GeoserverLoadWorkspaceWMSStoresRequest loadWorkspaceWMSStoresRequest();
-
-    /**
-     * @return {@link GeoserverCreateWMSStoreRequest}
-     */
-    GeoserverCreateWMSStoreRequest createWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverUpdateWMSStoreRequest}
-     */
-    GeoserverUpdateWMSStoreRequest updateWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverDeleteWMSStoreRequest}
-     */
-    GeoserverDeleteWMSStoreRequest deleteWMSStoreRequest();
-
-    /**
+     * <p>The name of the workspace containing the WMS store.</p>
+     *
+     * @param theWorkspace
      * @return {@link GeoserverLoadWorkspaceWMSStoreRequest}
      */
-    GeoserverLoadWorkspaceWMSStoreRequest loadWorkspaceWMSStoreRequest();
+    GeoserverLoadWorkspaceWMSStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
+
+    /**
+     * <p>The name of the store to be retrieved.</p>
+     *
+     * @param theStore
+     * @return {@link GeoserverLoadWorkspaceWMSStoreRequest}
+     */
+    GeoserverLoadWorkspaceWMSStoreRequest withStore(@Nonnull(when = NEVER) String theStore);
+
+    /**
+     * <p>
+     * When set to true, avoids to log an Exception when the WMS store is not present.
+     * Note that 404 status code will be returned anyway.
+     * </p>
+     *
+     * @param theQuietOnNotFound
+     * @return {@link GeoserverLoadWorkspaceWMSStoreRequest}
+     */
+    GeoserverLoadWorkspaceWMSStoreRequest withQuietOnNotFound(@Nullable Boolean theQuietOnNotFound);
 }

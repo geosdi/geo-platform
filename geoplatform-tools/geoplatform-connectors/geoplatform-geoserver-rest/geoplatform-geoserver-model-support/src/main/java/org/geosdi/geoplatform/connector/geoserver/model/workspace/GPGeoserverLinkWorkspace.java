@@ -38,10 +38,13 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import static javax.annotation.meta.When.NEVER;
 import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
@@ -66,7 +69,7 @@ public class GPGeoserverLinkWorkspace extends GPGeoserverBaseWorkspace implement
     /**
      * @param theWorkspaceName
      */
-    public GPGeoserverLinkWorkspace(String theWorkspaceName, String theValue) {
+    public GPGeoserverLinkWorkspace(@Nonnull(when = NEVER) String theWorkspaceName, @Nullable String theValue) {
         super(theWorkspaceName);
         this.value = theValue;
     }

@@ -48,7 +48,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @Builder
-public class GPGeoserverCreareStyleResponse implements IGPGeoserverCreareStyleResponse {
+public class GPGeoserverCreateStyleResponse implements IGPGeoserverCreateStyleResponse {
 
     private static final long serialVersionUID = -5764117690369856014L;
     //

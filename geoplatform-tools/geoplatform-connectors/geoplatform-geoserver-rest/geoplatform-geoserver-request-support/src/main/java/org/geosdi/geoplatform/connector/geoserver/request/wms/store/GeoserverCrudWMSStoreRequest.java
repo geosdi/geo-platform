@@ -32,39 +32,23 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.wms.store.metadata.adapter;
+package org.geosdi.geoplatform.connector.geoserver.request.wms.store;
 
-import org.geosdi.geoplatform.connector.geoserver.model.wms.store.metadata.GPWMSStoreMetadataMapType;
-import org.geosdi.geoplatform.connector.geoserver.model.wms.store.metadata.GPWMSStoreMetadataParam;
-import org.geosdi.geoplatform.response.collection.GPGenericMapAdapter;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
-import java.util.Map;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPWMSStoreMetadataMapAdapter extends GPGenericMapAdapter<String, String, GPWMSStoreMetadataParam, GPWMSStoreMetadataMapType> {
+public interface GeoserverCrudWMSStoreRequest<T, R extends GeoserverCrudWMSStoreRequest<T, R>> extends GPJsonConnectorRequest<T, R> {
 
     /**
-     * @param map
-     * @return
-     * @throws Exception
+     * @param theWorkspace
+     * @return {@link }
      */
-    @Override
-    public GPWMSStoreMetadataMapType marshal(Map<String, String> map) throws Exception {
-        return new GPWMSStoreMetadataMapType(map);
-    }
-
-    /**
-     * @param mapType
-     * @return
-     * @throws Exception
-     */
-    @Override
-    public Map<String, String> unmarshal(@Nonnull(when = When.NEVER) GPWMSStoreMetadataMapType mapType) throws Exception {
-        return super.unmarshal(mapType);
-    }
+    R withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
 }

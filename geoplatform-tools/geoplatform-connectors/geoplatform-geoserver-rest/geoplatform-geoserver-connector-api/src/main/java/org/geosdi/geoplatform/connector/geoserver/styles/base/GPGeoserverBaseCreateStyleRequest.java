@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.styles.base;
 
-import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverCreareStyleResponse;
-import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverCreareStyleResponse;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.GPGeoserverCreateStyleResponse;
+import org.geosdi.geoplatform.connector.geoserver.model.styles.IGPGeoserverCreateStyleResponse;
 import org.geosdi.geoplatform.connector.geoserver.request.styles.base.GeoserverBaseCreateStyleRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.ResourceNotFoundException;
@@ -54,7 +54,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPGeoserverBaseCreateStyleRequest<StyleBody, R extends GeoserverBaseCreateStyleRequest> extends GPJsonPostConnectorRequest<IGPGeoserverCreareStyleResponse, R> implements GeoserverBaseCreateStyleRequest<StyleBody, R> {
+public abstract class GPGeoserverBaseCreateStyleRequest<StyleBody, R extends GeoserverBaseCreateStyleRequest> extends GPJsonPostConnectorRequest<IGPGeoserverCreateStyleResponse, R> implements GeoserverBaseCreateStyleRequest<StyleBody, R> {
 
     protected final ThreadLocal<StyleBody> styleBody;
 
@@ -88,12 +88,12 @@ public abstract class GPGeoserverBaseCreateStyleRequest<StyleBody, R extends Geo
 
     /**
      * @param reader
-     * @return {@link IGPGeoserverCreareStyleResponse}
+     * @return {@link IGPGeoserverCreateStyleResponse}
      * @throws Exception
      */
     @Override
-    protected IGPGeoserverCreareStyleResponse readInternal(BufferedReader reader) throws Exception {
-        return GPGeoserverCreareStyleResponse.builder()
+    protected IGPGeoserverCreateStyleResponse readInternal(BufferedReader reader) throws Exception {
+        return GPGeoserverCreateStyleResponse.builder()
                 .styleName(reader.lines().collect(joining()))
                 .build();
     }
@@ -115,10 +115,10 @@ public abstract class GPGeoserverBaseCreateStyleRequest<StyleBody, R extends Geo
     }
 
     /**
-     * @return {@link Class<IGPGeoserverCreareStyleResponse>}
+     * @return {@link Class< IGPGeoserverCreateStyleResponse >}
      */
     @Override
-    protected Class<IGPGeoserverCreareStyleResponse> forClass() {
-        return IGPGeoserverCreareStyleResponse.class;
+    protected Class<IGPGeoserverCreateStyleResponse> forClass() {
+        return IGPGeoserverCreateStyleResponse.class;
     }
 }

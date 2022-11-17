@@ -34,51 +34,38 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.wms.store;
 
-import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.geosdi.geoplatform.connector.geoserver.model.adapter.GPLocalDateTimeAdpater;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverWorkspace;
+
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.time.LocalDateTime;
+
+import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverWMSStore extends Serializable {
+@Getter
+@Setter
+@ToString(callSuper = true)
+@XmlRootElement(name = "wmsStore")
+@XmlAccessorType(value = FIELD)
+public class GeoserverWMSStore extends GeoserverWMSBaseStore<GPGeoserverWorkspace> implements GPGeoserverWMSStore {
 
-    /**
-     * @return {@link String}
-     */
-    String getName();
-
-    /**
-     * @param theName
-     */
-    void setName(String theName);
-
-    /**
-     * @return {@link String}
-     */
-    String getDescription();
-
-    /**
-     * @param theDescription
-     */
-    void setDescription(String theDescription);
-
-    /**
-     * @return {@link String}
-     */
-    String getType();
-
-    /**
-     * @param theType
-     */
-    void setType(String theType);
-
-    /**
-     * @return {@link Boolean}
-     */
-    boolean isEnabled();
-
-    /**
-     * @param theEnabled
-     */
-    void setEnabled(boolean theEnabled);
+    private static final long serialVersionUID = 4032141937044468071L;
+    //
+    private GPGeoserverWorkspace workspace;
+    @XmlJavaTypeAdapter(value = GPLocalDateTimeAdpater.class)
+    private LocalDateTime dateCreated;
+    @XmlJavaTypeAdapter(value = GPLocalDateTimeAdpater.class)
+    private LocalDateTime dateModified;
+    @XmlElement(name = "wmslayers")
+    private String wmsLayers;
 }

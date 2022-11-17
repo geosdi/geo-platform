@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.namespaces;
 
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverCreareWorkspaceResponse;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverCreateWorkspaceResponse;
 import org.geosdi.geoplatform.connector.geoserver.model.namespace.IGPGeoserverNamespaceBody;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
@@ -47,7 +47,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GeoserverNamespaceWithBodyRequest extends GPJsonConnectorRequest<IGPGeoserverCreareWorkspaceResponse, GeoserverNamespaceWithBodyRequest> {
+public interface GeoserverNamespaceWithBodyRequest extends GPJsonConnectorRequest<IGPGeoserverCreateWorkspaceResponse, GeoserverNamespaceWithBodyRequest> {
 
     /**
      * @param theBody

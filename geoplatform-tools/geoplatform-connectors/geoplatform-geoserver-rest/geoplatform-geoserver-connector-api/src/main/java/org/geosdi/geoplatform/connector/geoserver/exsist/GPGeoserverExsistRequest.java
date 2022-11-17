@@ -108,7 +108,7 @@ public abstract class GPGeoserverExsistRequest<T, ConnectorRequest extends GPJso
             this.exist.set(TRUE);
             return this.response.get();
         } catch (Exception ex) {
-            //ex.printStackTrace();
+            ex.printStackTrace();
             this.exist.set(FALSE);
             return null;
         }

@@ -36,7 +36,7 @@ package org.geosdi.geoplatform.connector.geoserver.wms.store;
 
 import net.jcip.annotations.ThreadSafe;
 import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GPGeoserverWMSEmptyStores;
-import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GeoserverWMSStores;
+import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GPGeoserverWMSStores;
 import org.geosdi.geoplatform.connector.geoserver.request.GPGeoserverGetConnectorRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.wms.store.GeoserverLoadWorkspaceWMSStoresRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
@@ -53,7 +53,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-class GPGeoserverLoadWorkspaceWMSStoresRequest extends GPGeoserverGetConnectorRequest<GeoserverWMSStores, GPGeoserverWMSEmptyStores, GeoserverLoadWorkspaceWMSStoresRequest> implements GeoserverLoadWorkspaceWMSStoresRequest {
+class GPGeoserverLoadWorkspaceWMSStoresRequest extends GPGeoserverGetConnectorRequest<GPGeoserverWMSStores, GPGeoserverWMSEmptyStores, GeoserverLoadWorkspaceWMSStoresRequest> implements GeoserverLoadWorkspaceWMSStoresRequest {
 
     private final ThreadLocal<String> workspace = withInitial(() -> null);
 
@@ -87,11 +87,11 @@ class GPGeoserverLoadWorkspaceWMSStoresRequest extends GPGeoserverGetConnectorRe
     }
 
     /**
-     * @return {@link Class< GeoserverWMSStores >}
+     * @return {@link Class<   GPGeoserverWMSStores   >}
      */
     @Override
-    protected Class<GeoserverWMSStores> forClass() {
-        return GeoserverWMSStores.class;
+    protected Class<GPGeoserverWMSStores> forClass() {
+        return GPGeoserverWMSStores.class;
     }
 
     /**

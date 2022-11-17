@@ -32,36 +32,42 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.wms.store.metadata;
+package org.geosdi.geoplatform.connector.geoserver.request.wms.store;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-import java.io.IOException;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-class GPWMSStoreMetadataParamSerializer extends StdSerializer<GPWMSStoreMetadataParam> {
-
-    GPWMSStoreMetadataParamSerializer() {
-        super(GPWMSStoreMetadataParam.class);
-    }
+public interface GeoserverDeleteWMSStoreRequest extends GeoserverCrudWMSStoreRequest<Boolean, GeoserverDeleteWMSStoreRequest> {
 
     /**
-     * @param value Value to serialize; can <b>not</b> be null.
-     * @param gen Generator used to output resulting Json content
-     * @param provider Provider that can be used to get serializers for
-     * serializing Objects value contains, if any.
-     * @throws IOException
+     * <p>Name of the workspace containing the WMS store.</p>
+     *
+     * @param theWorkspace
+     * @return {@link GeoserverDeleteWMSStoreRequest}
      */
-    @Override
-    public void serialize(GPWMSStoreMetadataParam value, JsonGenerator gen, SerializerProvider provider) throws IOException {
-        gen.writeStartObject();
-        gen.writeStringField("@key", value.getKey());
-        gen.writeStringField("text", value.getValue());
-        gen.writeEndObject();
-    }
+    GeoserverDeleteWMSStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
+
+    /**
+     * <p>Name of the WMS store</p>
+     *
+     * @param theStore
+     * @return {@link GeoserverDeleteWMSStoreRequest}
+     */
+    GeoserverDeleteWMSStoreRequest withStore(@Nonnull(when = NEVER) String theStore);
+
+    /**
+     * <p>
+     *     When set to true all resources contained in the store are also removed. Default values is {@link Boolean#TRUE}
+     * </p>
+     *
+     * @param theRecurse
+     * @return {@link GeoserverDeleteWMSStoreRequest}
+     */
+    GeoserverDeleteWMSStoreRequest withRecurse(@Nullable Boolean theRecurse);
 }

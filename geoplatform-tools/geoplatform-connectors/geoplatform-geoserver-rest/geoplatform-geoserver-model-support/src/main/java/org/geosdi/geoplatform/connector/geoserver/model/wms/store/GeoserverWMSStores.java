@@ -34,33 +34,38 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.wms.store;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.ToString;
+import net.jcip.annotations.Immutable;
 
-import javax.xml.bind.annotation.XmlTransient;
-import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
+
+import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = GPGeoserverWMSStores.class)
-@JsonSerialize(as = GPGeoserverWMSStores.class)
-@JsonRootName(value = "wmsStores")
-public interface GeoserverWMSStores extends Serializable {
+@Getter
+@ToString
+@Immutable
+@XmlRootElement(name = "wmsStores")
+@XmlAccessorType(value = FIELD)
+public class GeoserverWMSStores implements GPGeoserverWMSStores {
+
+    private static final long serialVersionUID = -2821960494835368091L;
+    //
+    private final List<GeoserverWMSSimpleStore> stores;
 
     /**
-     * @return {@link List< GeoserverWMSBaseStore >}
+     * @param theStores
      */
-    List<GeoserverWMSBaseStore> getStores();
-
-    /**
-     * @return {@link Boolean}
-     */
-    @XmlTransient
-    default Boolean isEmpty() {
-        return ((this.getStores() == null) || (this.getStores().isEmpty()));
+    @JsonCreator
+    protected GeoserverWMSStores(@JsonProperty(value = "wmsStore") List<GeoserverWMSSimpleStore> theStores) {
+        this.stores = theStores;
     }
 }

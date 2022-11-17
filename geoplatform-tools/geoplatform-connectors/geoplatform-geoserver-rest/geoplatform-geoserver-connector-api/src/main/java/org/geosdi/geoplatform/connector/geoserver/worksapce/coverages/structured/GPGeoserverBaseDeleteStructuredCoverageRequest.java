@@ -47,6 +47,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
@@ -163,8 +164,13 @@ abstract class GPGeoserverBaseDeleteStructuredCoverageRequest<ConnectorDeleteReq
      */
     @Override
     protected final Boolean readInternal(BufferedReader reader) throws Exception {
-        String value = CharStreams.toString(reader);
-        return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
+        try {
+            String value = CharStreams.toString(reader);
+            return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return FALSE;
+        }
     }
 
     /**

@@ -40,7 +40,7 @@ import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverCreateWorkspaceBody;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverCreateWorkspaceResponse;
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverCreareWorkspaceResponse;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverCreateWorkspaceResponse;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverCreateWorkspaceRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.ResourceNotFoundException;
@@ -62,7 +62,7 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-public class GPGeoserverCreateWorkspaceRequest extends GPJsonPostConnectorRequest<IGPGeoserverCreareWorkspaceResponse, GeoserverCreateWorkspaceRequest> implements GeoserverCreateWorkspaceRequest {
+class GPGeoserverCreateWorkspaceRequest extends GPJsonPostConnectorRequest<IGPGeoserverCreateWorkspaceResponse, GeoserverCreateWorkspaceRequest> implements GeoserverCreateWorkspaceRequest {
 
     private final ThreadLocal<GPGeoserverCreateWorkspaceBody> workspaceBody;
     private final ThreadLocal<Boolean> defaultWorkspace;
@@ -110,11 +110,11 @@ public class GPGeoserverCreateWorkspaceRequest extends GPJsonPostConnectorReques
 
     /**
      * @param reader
-     * @return {@link IGPGeoserverCreareWorkspaceResponse}
+     * @return {@link IGPGeoserverCreateWorkspaceResponse}
      * @throws Exception
      */
     @Override
-    protected IGPGeoserverCreareWorkspaceResponse readInternal(BufferedReader reader) throws Exception {
+    protected IGPGeoserverCreateWorkspaceResponse readInternal(BufferedReader reader) throws Exception {
         return GPGeoserverCreateWorkspaceResponse.builder()
                 .workspaceName(reader.lines().collect(joining()))
                 .build();
@@ -143,10 +143,10 @@ public class GPGeoserverCreateWorkspaceRequest extends GPJsonPostConnectorReques
     }
 
     /**
-     * @return {@link Class<IGPGeoserverCreareWorkspaceResponse>}
+     * @return {@link Class< IGPGeoserverCreateWorkspaceResponse >}
      */
     @Override
-    protected Class<IGPGeoserverCreareWorkspaceResponse> forClass() {
-        return IGPGeoserverCreareWorkspaceResponse.class;
+    protected Class<IGPGeoserverCreateWorkspaceResponse> forClass() {
+        return IGPGeoserverCreateWorkspaceResponse.class;
     }
 }

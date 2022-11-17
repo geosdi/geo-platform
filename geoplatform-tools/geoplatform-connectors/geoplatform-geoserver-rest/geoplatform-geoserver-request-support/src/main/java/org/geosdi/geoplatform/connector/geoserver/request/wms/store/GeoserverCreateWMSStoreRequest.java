@@ -32,39 +32,30 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.request.wms.store;
 
-import org.geosdi.geoplatform.connector.geoserver.request.wms.store.*;
-import org.geosdi.geoplatform.connector.store.styles.GPGeoserverStylesConnectorStore;
+import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GPGeoserverWMSStoreBody;
+import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GeoserverCreateWMSStoreResponse;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverWMSStoreConnectorStore extends GPGeoserverStylesConnectorStore {
+public interface GeoserverCreateWMSStoreRequest extends GeoserverCreateOrUpdateWMSStoreRequest<GeoserverCreateWMSStoreResponse, GeoserverCreateWMSStoreRequest> {
 
     /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoresRequest}
-     */
-    GeoserverLoadWorkspaceWMSStoresRequest loadWorkspaceWMSStoresRequest();
-
-    /**
+     * @param theWorkspace
      * @return {@link GeoserverCreateWMSStoreRequest}
      */
-    GeoserverCreateWMSStoreRequest createWMSStoreRequest();
+    GeoserverCreateWMSStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
 
     /**
-     * @return {@link GeoserverUpdateWMSStoreRequest}
+     * @param theBody
+     * @return {@link GeoserverCreateWMSStoreRequest}
      */
-    GeoserverUpdateWMSStoreRequest updateWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverDeleteWMSStoreRequest}
-     */
-    GeoserverDeleteWMSStoreRequest deleteWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoreRequest}
-     */
-    GeoserverLoadWorkspaceWMSStoreRequest loadWorkspaceWMSStoreRequest();
+    GeoserverCreateWMSStoreRequest withBody(@Nonnull(when = NEVER) GPGeoserverWMSStoreBody theBody);
 }

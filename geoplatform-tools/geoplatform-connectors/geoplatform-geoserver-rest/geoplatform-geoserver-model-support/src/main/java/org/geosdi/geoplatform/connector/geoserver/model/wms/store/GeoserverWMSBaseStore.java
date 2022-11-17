@@ -34,26 +34,45 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.wms.store;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.geosdi.geoplatform.connector.geoserver.model.metadata.adapter.GPGeoserverMetadataMapAdapter;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverBaseWorkspace;
 
-import java.io.Serializable;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.util.Map;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = GPWMSBaseStoreGeoserver.class)
-@JsonSerialize(as = GPWMSBaseStoreGeoserver.class)
-public interface GeoserverWMSBaseStore extends Serializable {
+@Getter
+@Setter
+@ToString
+@XmlTransient
+abstract class GeoserverWMSBaseStore<W extends IGPGeoserverBaseWorkspace> implements GPGeoserverWMSBaseStore<W> {
 
-    /**
-     * @return {@link String}
-     */
-    String getName();
+    private static final long serialVersionUID = 4406674477043044960L;
+    //
+    private String name;
+    private String description;
+    private String type;
+    private boolean enabled;
+    @XmlElement(name = "__default__")
+    private boolean defaultStore;
+    private String capabilitiesURL;
+    private String user;
+    private String password;
+    private Integer maxConnections;
+    private String readTimeout;
+    @XmlElement(name = "connectTimeout")
+    private String connectionTimeout;
+    @XmlJavaTypeAdapter(value = GPGeoserverMetadataMapAdapter.class)
+    private Map<String, String> metadata;
 
-    /**
-     * @return {@link String}
-     */
-    String getHref();
+    GeoserverWMSBaseStore() {
+    }
 }

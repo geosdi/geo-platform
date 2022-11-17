@@ -174,7 +174,8 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest, Connector
      * @return {@link T}
      * @throws Exception
      */
-    protected T readInternal(BufferedReader reader) throws Exception {
+    protected T readInternal(@Nonnull(when = NEVER) BufferedReader reader) throws Exception {
+        checkArgument(reader != null, "The Parameter BufferedReader must not be null.");
         return this.jacksonSupport.getDefaultMapper().readValue(reader, this.classe);
     }
 

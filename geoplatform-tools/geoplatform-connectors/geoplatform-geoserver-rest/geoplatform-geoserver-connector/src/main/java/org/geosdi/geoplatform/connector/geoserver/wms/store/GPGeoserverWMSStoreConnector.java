@@ -36,7 +36,7 @@ package org.geosdi.geoplatform.connector.geoserver.wms.store;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
-import org.geosdi.geoplatform.connector.geoserver.request.wms.store.GeoserverLoadWorkspaceWMSStoresRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.wms.store.*;
 import org.geosdi.geoplatform.connector.geoserver.styles.GPGeoserverStylesConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -112,6 +112,62 @@ public abstract class GPGeoserverWMSStoreConnector extends GPGeoserverStylesConn
             case V220x:
             case V221x:
                 return new GPGeoserverLoadWorkspaceWMSStoresRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverCreateWMSStoreRequest}
+     */
+    @Override
+    public GeoserverCreateWMSStoreRequest createWMSStoreRequest() {
+        switch (version) {
+            case V220x:
+            case V221x:
+                return new GPGeoserverCreateWMSStoreRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverUpdateWMSStoreRequest}
+     */
+    @Override
+    public GeoserverUpdateWMSStoreRequest updateWMSStoreRequest() {
+        switch (version) {
+            case V220x:
+            case V221x:
+                return new GPGeoserverUpdateWMSStoreRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverDeleteWMSStoreRequest}
+     */
+    @Override
+    public GeoserverDeleteWMSStoreRequest deleteWMSStoreRequest() {
+        switch (version) {
+            case V220x:
+            case V221x:
+                return new GPGeoserverDeleteWMSStoreRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverLoadWorkspaceWMSStoreRequest}
+     */
+    @Override
+    public GeoserverLoadWorkspaceWMSStoreRequest loadWorkspaceWMSStoreRequest() {
+        switch (version) {
+            case V220x:
+            case V221x:
+                return new GPGeoserverLoadWorkspaceWMSStoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

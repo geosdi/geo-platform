@@ -34,16 +34,25 @@
  */
 package org.geosdi.geoplatform.connector.jackson.wms.store;
 
-import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GeoserverWMSBaseStore;
-import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GeoserverWMSStores;
+import org.geosdi.geoplatform.connector.geoserver.model.wms.store.*;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nonnull;
 import java.io.StringReader;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.TRUE;
+import static java.time.LocalDateTime.parse;
+import static java.time.format.DateTimeFormatter.ofPattern;
+import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
 import static org.geosdi.geoplatform.connector.jackson.GPGeoserverJacksonTest.emptyJacksonSupport;
 import static org.geosdi.geoplatform.connector.jackson.GPGeoserverJacksonTest.jacksonSupport;
 
@@ -58,7 +67,7 @@ public class GeoserverWMSStoresJacksonTest {
 
     @Test
     public void a_unmarshallWMSStoresFromJsonStringTest() throws Exception {
-        GeoserverWMSStores wmsStores = jacksonSupport.getDefaultMapper().readValue(new StringReader("{\n"
+        GPGeoserverWMSStores wmsStores = jacksonSupport.getDefaultMapper().readValue(new StringReader("{\n"
                 + "   \"wmsStores\":{\n"
                 + "      \"wmsStore\":[\n"
                 + "         {\n"
@@ -67,16 +76,112 @@ public class GeoserverWMSStoresJacksonTest {
                 + "         }\n"
                 + "      ]\n"
                 + "   }\n"
-                + "}"), GeoserverWMSStores.class);
+                + "}"), GPGeoserverWMSStores.class);
         logger.info("@@@@@@@@@@@@@@@@@@@@WMS_STORES : \n{}\n", jacksonSupport.getDefaultMapper().writeValueAsString(wmsStores));
     }
 
     @Test
     public void b_unmarshallWMSBaseStoreFromJsonStringTest() throws Exception {
-        GeoserverWMSBaseStore wmsBaseStore = emptyJacksonSupport.getDefaultMapper().readValue(new StringReader("{\n"
+        GeoserverWMSSimpleStore wmsBaseStore = emptyJacksonSupport.getDefaultMapper().readValue(new StringReader("{\n"
                 + "   \"name\":\"altgs\",\n"
                 + "   \"href\":\"http://localhost:8080/geoserver/rest/workspaces/cite/wmsstores/altgs.json\"\n"
-                + "}"), GeoserverWMSBaseStore.class);
+                + "}"), GeoserverWMSSimpleStore.class);
         logger.info("##################WMS_BASE_STORE : \n{}\n", emptyJacksonSupport.getDefaultMapper().writeValueAsString(wmsBaseStore));
+    }
+
+    @Test
+    public void c_unmarshallGPWMSStoreFromXmlStringTest() throws Exception {
+        GeoserverWMSStore wmsStore = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper()
+                .readValue(new StringReader("<wmsStore>\n"
+                        + "<name>remote</name>\n"
+                        + "<description>description_test</description>\n"
+                        + "<type>WMS</type>\n"
+                        + "<enabled>true</enabled>\n"
+                        + "<workspace>\n"
+                        + "<name>sf</name>\n"
+                        + "<atom:link xmlns:atom=\"http://www.w3.org/2005/Atom\" rel=\"alternate\" href=\"http://150.145.141.92/geoserver/rest/workspaces/sf.xml\" type=\"application/xml\"/>\n"
+                        + "</workspace>\n"
+                        + "<metadata>\n"
+                        + "<entry key=\"useConnectionPooling\">false</entry>\n"
+                        + "</metadata>\n"
+                        + "<__default>false</__default>\n"
+                        + "<dateCreated>2022-11-16 06:48:29.586 UTC</dateCreated>\n"
+                        + "<dateModified>2022-11-16 06:49:23.494 UTC</dateModified>\n"
+                        + "<capabilitiesURL>http://150.145.141.180/geoserver/ows?service=wms&amp;version=1.1.1&amp;request=GetCapabilities</capabilitiesURL>\n"
+                        + "<maxConnections>6</maxConnections>\n"
+                        + "<readTimeout>60</readTimeout>\n"
+                        + "<connectTimeout>30</connectTimeout>\n"
+                        + "<wmslayers>\n"
+                        + "<atom:link xmlns:atom=\"http://www.w3.org/2005/Atom\" rel=\"alternate\" href=\"http://150.145.141.92/geoserver/rest/workspaces/sf/wmsstores/remote/wmslayers.xml\" type=\"application/xml\"/>\n"
+                        + "</wmslayers>\n"
+                        + "</wmsStore>"), GeoserverWMSStore.class);
+        logger.info("@@@@@@@@@@@@@@@@@WMS_STORE : {}\n", wmsStore);
+    }
+
+    @Test
+    public void d_unmarshallGPWMSStoreFromJsonStringTest() throws Exception {
+        GeoserverWMSStore wmsStore = jacksonSupport.getDefaultMapper()
+                .readValue(new StringReader("{\n"
+                        + "   \"wmsStore\":{\n"
+                        + "      \"name\":\"remote\",\n"
+                        + "      \"description\":\"description_test\",\n"
+                        + "      \"type\":\"WMS\",\n"
+                        + "      \"enabled\":true,\n"
+                        + "      \"workspace\":{\n"
+                        + "         \"name\":\"sf\",\n"
+                        + "         \"href\":\"http://150.145.141.92/geoserver/rest/workspaces/sf.json\"\n"
+                        + "      },\n"
+                        + "      \"metadata\":{\n"
+                        + "         \"entry\":{\n"
+                        + "            \"@key\":\"useConnectionPooling\",\n"
+                        + "            \"$\":\"false\"\n"
+                        + "         }\n"
+                        + "      },\n"
+                        + "      \"_default\":false,\n"
+                        + "      \"dateCreated\":\"2022-11-16 06:48:29.586 UTC\",\n"
+                        + "      \"dateModified\":\"2022-11-16 06:49:23.494 UTC\",\n"
+                        + "      \"capabilitiesURL\":\"http://150.145.141.180/geoserver/ows?service=wms&version=1.1.1&request=GetCapabilities\",\n"
+                        + "      \"maxConnections\":6,\n"
+                        + "      \"readTimeout\":60,\n"
+                        + "      \"connectTimeout\":30,\n"
+                        + "      \"wmslayers\":\"http://150.145.141.92/geoserver/rest/workspaces/sf/wmsstores/remote/wmslayers.json\"\n"
+                        + "   }\n"
+                        + "}"), GeoserverWMSStore.class);
+        logger.info("@@@@@@@@@@@@@@@@@WMS_STORE : {}\n", wmsStore);
+    }
+
+    @Test
+    public void e_marshallGPWMSStoreAsXmlStringTest() throws Exception {
+        logger.info("##################WMS_STORE : \n{}\n", JACKSON_JAXB_XML_SUPPORT.getDefaultMapper()
+                .writeValueAsString(toWMSStore("http://demo.geoserver.org/geoserver/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities")));
+    }
+
+    @Test
+    public void f_marshallGPWMSStoreAsJsonStringTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@WMS_STORE : \n{}\n", jacksonSupport.getDefaultMapper()
+                .writeValueAsString(toWMSStore("http://demo.geoserver.org/geoserver/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities")));
+    }
+
+    @Test
+    public void g_dateFormatterTest() throws Exception {
+        DateTimeFormatter dateFormat = ofPattern("yyyy-MM-dd HH:mm:ss.SSS z");
+        logger.info("{}\n", parse("2022-11-16 06:48:29.586 UTC", dateFormat));
+    }
+
+    /**
+     * @return {@link GPGeoserverWMSStoreBody}
+     */
+    public static GPGeoserverWMSStoreBody toWMSStore(@Nonnull(when = NEVER) String theCapabilitiesURL) throws Exception {
+        checkArgument((theCapabilitiesURL != null) && !(theCapabilitiesURL.trim().isEmpty()), "The Parameter capabilitiesURL must not be null or an empty string.");
+        GeoserverWMSStoreBody wmsStoreBody = new GeoserverWMSStoreBody();
+        wmsStoreBody.setName("remote");
+        wmsStoreBody.setDescription("description_test");
+        wmsStoreBody.setType("WMS");
+        wmsStoreBody.setEnabled(TRUE);
+        wmsStoreBody.setCapabilitiesURL(theCapabilitiesURL);
+        Map<String, String> metadata = new HashMap<>();
+        metadata.put("useConnectionPooling", "true");
+        wmsStoreBody.setMetadata(metadata);
+        return wmsStoreBody;
     }
 }

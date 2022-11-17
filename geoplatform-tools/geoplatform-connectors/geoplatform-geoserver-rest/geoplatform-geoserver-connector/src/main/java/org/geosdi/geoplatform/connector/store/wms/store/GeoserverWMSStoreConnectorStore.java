@@ -35,7 +35,7 @@
 package org.geosdi.geoplatform.connector.store.wms.store;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
-import org.geosdi.geoplatform.connector.geoserver.request.wms.store.GeoserverLoadWorkspaceWMSStoresRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.wms.store.*;
 import org.geosdi.geoplatform.connector.store.styles.GeoserverStylesConnectorStore;
 
 /**
@@ -57,5 +57,37 @@ public abstract class GeoserverWMSStoreConnectorStore extends GeoserverStylesCon
     @Override
     public GeoserverLoadWorkspaceWMSStoresRequest loadWorkspaceWMSStoresRequest() {
         return this.server.loadWorkspaceWMSStoresRequest();
+    }
+
+    /**
+     * @return {@link GeoserverCreateWMSStoreRequest}
+     */
+    @Override
+    public GeoserverCreateWMSStoreRequest createWMSStoreRequest() {
+        return this.server.createWMSStoreRequest();
+    }
+
+    /**
+     * @return {@link GeoserverUpdateWMSStoreRequest}
+     */
+    @Override
+    public GeoserverUpdateWMSStoreRequest updateWMSStoreRequest() {
+        return this.server.updateWMSStoreRequest();
+    }
+
+    /**
+     * @return {@link GeoserverDeleteWMSStoreRequest}
+     */
+    @Override
+    public GeoserverDeleteWMSStoreRequest deleteWMSStoreRequest() {
+        return this.server.deleteWMSStoreRequest();
+    }
+
+    /**
+     * @return {@link GeoserverLoadWorkspaceWMSStoreRequest}
+     */
+    @Override
+    public GeoserverLoadWorkspaceWMSStoreRequest loadWorkspaceWMSStoreRequest() {
+        return this.server.loadWorkspaceWMSStoreRequest();
     }
 }

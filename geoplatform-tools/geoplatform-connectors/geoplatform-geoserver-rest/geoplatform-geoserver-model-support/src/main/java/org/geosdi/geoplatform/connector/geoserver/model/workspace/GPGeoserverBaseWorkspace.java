@@ -39,9 +39,13 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -64,7 +68,8 @@ public class GPGeoserverBaseWorkspace implements IGPGeoserverBaseWorkspace {
     /**
      * @param theWorkspaceName
      */
-    public GPGeoserverBaseWorkspace(String theWorkspaceName) {
+    public GPGeoserverBaseWorkspace(@Nonnull(when = NEVER) String theWorkspaceName) {
+        checkArgument((theWorkspaceName != null) && !(theWorkspaceName.trim().isEmpty()), "The Parameter workspaceName must not be null or an empty string.");
         this.workspaceName = theWorkspaceName;
     }
 }

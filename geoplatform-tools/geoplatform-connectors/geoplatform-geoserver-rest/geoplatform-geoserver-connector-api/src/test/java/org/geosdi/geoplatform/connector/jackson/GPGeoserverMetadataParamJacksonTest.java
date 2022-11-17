@@ -38,8 +38,6 @@ package org.geosdi.geoplatform.connector.jackson;
 import lombok.*;
 import org.geosdi.geoplatform.connector.geoserver.model.metadata.GPGeoserverMetadataParam;
 import org.geosdi.geoplatform.connector.geoserver.model.metadata.adapter.GPGeoserverMetadataMapAdapter;
-import org.geosdi.geoplatform.connector.geoserver.model.wms.store.metadata.GPWMSStoreMetadataParam;
-import org.geosdi.geoplatform.connector.geoserver.model.wms.store.metadata.adapter.GPWMSStoreMetadataMapAdapter;
 import org.geosdi.geoplatform.support.jackson.mapper.xml.GPBaseJacksonXmlMapper;
 import org.geosdi.geoplatform.support.jackson.mapper.xml.GPJacksonXmlMapper;
 import org.geosdi.geoplatform.support.jackson.xml.jaxb.GPJacksonJAXBXmlSupport;
@@ -75,8 +73,6 @@ public class GPGeoserverMetadataParamJacksonTest {
     private static final Logger logger = LoggerFactory.getLogger(GPGeoserverMetadataParamJacksonTest.class);
     //
     private static final GPJacksonXmlMapper<GPGeoserverMetadataParam> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(GPGeoserverMetadataParam.class,
-            new GPJacksonJAXBXmlSupport());
-    private static final GPJacksonXmlMapper<GPWMSStoreMetadataParam> GP_JACKSON_WMS_STORE_METADATA_XML_MAPPER = new GPBaseJacksonXmlMapper<>(GPWMSStoreMetadataParam.class,
             new GPJacksonJAXBXmlSupport());
 
     @Test
@@ -187,13 +183,13 @@ public class GPGeoserverMetadataParamJacksonTest {
 
     @Test
     public void i_marshalWMSStoreMetadataParamAsXmlStringTest() throws Exception {
-        logger.info("@@@@@@@@@@@@@@@@@@@@GP_WMS_STORE_METADATA_PARAM_AS_STRING : \n{}\n", GP_JACKSON_WMS_STORE_METADATA_XML_MAPPER
+        logger.info("@@@@@@@@@@@@@@@@@@@@GP_WMS_STORE_METADATA_PARAM_AS_STRING : \n{}\n", GP_JACKSON_XML_MAPPER
                 .writeAsString(GPGeoserverMetadataParamJacksonTest::toWMSStoreMetadataParam));
     }
 
     @Test
     public void l_marshallGPWMSStoreMetadataParamAsFileTest() throws Exception {
-        GP_JACKSON_WMS_STORE_METADATA_XML_MAPPER.write(new File(of(".", "target", "GPWMSStoreMetadataParam.xml")
+        GP_JACKSON_XML_MAPPER.write(new File(of(".", "target", "GPWMSStoreMetadataParam.xml")
                 .collect(joining(separator))), GPGeoserverMetadataParamJacksonTest::toWMSStoreMetadataParam);
     }
 
@@ -209,14 +205,15 @@ public class GPGeoserverMetadataParamJacksonTest {
 
     @Test
     public void n_unmarshallGPWMSStoreMetadataFromStringTest() throws Exception {
-        GPWMSStoreMetadata metadata = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper().readValue(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
-                + "<GPWMSStoreMetadata>\n"
-                + "    <metadata>\n"
-                + "        <entry key=\"key_test\" text=\"value_test\"/>\n"
-                + "        <entry key=\"key_1_test\" text=\"value_1_test\"/>\n"
-                + "        <entry key=\"key_2_test\" text=\"value_2_test\"/>\n"
-                + "    </metadata>\n"
-                + "</GPWMSStoreMetadata>"), GPWMSStoreMetadata.class);
+        GPWMSStoreMetadata metadata = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper()
+                .readValue(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
+                        + "<GPWMSStoreMetadata>\n"
+                        + "    <metadata>\n"
+                        + "        <entry key=\"key_test\">value_test</entry>\n"
+                        + "        <entry key=\"key_2_test\">value_2_test</entry>\n"
+                        + "        <entry key=\"key_1_test\">value_1_test</entry>\n"
+                        + "    </metadata>\n"
+                        + "</GPWMSStoreMetadata>"), GPWMSStoreMetadata.class);
         logger.info("####################GP_WMS_STORE_METADATA : {}\n", metadata);
     }
 
@@ -232,9 +229,9 @@ public class GPGeoserverMetadataParamJacksonTest {
                 .readValue(new StringReader("{\n"
                         + "  \"entry\" : {\n"
                         + "    \"@key\" : \"key_test\",\n"
-                        + "    \"text\" : \"value_test\"\n"
+                        + "    \"$\" : \"value_test\"\n"
                         + "  }\n"
-                        + "}"), GPWMSStoreMetadataParam.class));
+                        + "}"), GPGeoserverMetadataParam.class));
     }
 
     @Test
@@ -258,25 +255,25 @@ public class GPGeoserverMetadataParamJacksonTest {
                 + "    \"metadata\" : {\n"
                 + "      \"entry\" : [ {\n"
                 + "        \"@key\" : \"kml.regionateStrategy\",\n"
-                + "        \"text\" : \"external-sorting\"\n"
+                + "        \"$\" : \"external-sorting\"\n"
                 + "      }, {\n"
                 + "        \"@key\" : \"kml.regionateFeatureLimit\",\n"
-                + "        \"text\" : \"15\"\n"
+                + "        \"$\" : \"15\"\n"
                 + "      }, {\n"
                 + "        \"@key\" : \"cacheAgeMax\",\n"
-                + "        \"text\" : \"3000\"\n"
+                + "        \"$\" : \"3000\"\n"
                 + "      }, {\n"
                 + "        \"@key\" : \"cachingEnabled\",\n"
-                + "        \"text\" : \"true\"\n"
+                + "        \"$\" : \"true\"\n"
                 + "      }, {\n"
                 + "        \"@key\" : \"kml.regionateAttribute\",\n"
-                + "        \"text\" : \"NAME\"\n"
+                + "        \"$\" : \"NAME\"\n"
                 + "      }, {\n"
                 + "        \"@key\" : \"indexingEnabled\",\n"
-                + "        \"text\" : \"false\"\n"
+                + "        \"$\" : \"false\"\n"
                 + "      }, {\n"
                 + "        \"@key\" : \"dirName\",\n"
-                + "        \"text\" : \"DS_poi_poi\"\n"
+                + "        \"$\" : \"DS_poi_poi\"\n"
                 + "      } ]\n"
                 + "    }\n"
                 + "  }\n"
@@ -302,8 +299,8 @@ public class GPGeoserverMetadataParamJacksonTest {
     /**
      * @return {@link GPGeoserverMetadataParam}
      */
-    public static GPWMSStoreMetadataParam toWMSStoreMetadataParam() {
-        return new GPWMSStoreMetadataParam("key_test", "value_test");
+    public static GPGeoserverMetadataParam toWMSStoreMetadataParam() {
+        return new GPGeoserverMetadataParam("key_test", "value_test");
     }
 
     /**
@@ -347,7 +344,7 @@ public class GPGeoserverMetadataParamJacksonTest {
 
         private static final long serialVersionUID = -2247798402522860160L;
         //
-        @XmlJavaTypeAdapter(value = GPWMSStoreMetadataMapAdapter.class)
+        @XmlJavaTypeAdapter(value = GPGeoserverMetadataMapAdapter.class)
         private Map<String, String> metadata;
     }
 }

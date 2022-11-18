@@ -35,18 +35,18 @@
 package org.geosdi.geoplatform.connector.geoserver.model;
 
 import org.apache.hc.core5.net.URIBuilder;
-import org.geosdi.geoplatform.connector.geoserver.model.uri.*;
-import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryParam.GeoserverQueryParam;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCalculateQueryParam;
+import org.geosdi.geoplatform.connector.uri.*;
+import org.geosdi.geoplatform.connector.uri.GPGeoserverQueryParam.GeoserverQueryParam;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static java.lang.Boolean.TRUE;
-import static org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryParam.NULL_QUERY_VALUE;
 import static org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCalculateValueQueryParam.latlonbbox;
 import static org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGeoserverCalculateValueQueryParam.values;
+import static org.geosdi.geoplatform.connector.uri.GPGeoserverQueryParam.NULL_QUERY_VALUE;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;

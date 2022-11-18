@@ -41,13 +41,12 @@ import net.jcip.annotations.ThreadSafe;
 import org.apache.hc.core5.net.URIBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.extensions.classify.GeoserverMethod;
 import org.geosdi.geoplatform.connector.geoserver.model.extensions.rasterize.GeoserverRamp;
-import org.geosdi.geoplatform.connector.geoserver.model.uri.*;
 import org.geosdi.geoplatform.connector.geoserver.request.extensions.classify.GeoserverClassifyRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
+import org.geosdi.geoplatform.connector.uri.*;
 
 import javax.annotation.Nonnull;
-
 import java.io.BufferedReader;
 
 import static com.google.common.base.Preconditions.checkArgument;

@@ -33,40 +33,36 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.uri;
+package org.geosdi.geoplatform.connector.uri;
 
-import io.reactivex.rxjava3.functions.Consumer;
-import org.apache.hc.core5.net.URIBuilder;
+import net.jcip.annotations.Immutable;
+import org.geosdi.geoplatform.connector.uri.GPGeoserverQueryParam.GeoserverQueryParam;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public class GeoserverRXQueryParamConsumer<B extends GPGeoserverQueryParam> implements Consumer<ThreadLocal<B>> {
-
-    private final URIBuilder uriBuilder;
+@Immutable
+public class GPGeoserverStringQueryParam extends GeoserverQueryParam<String> {
 
     /**
-     * @param theUriBuilder
+     * @param theKey
+     * @param theValue
      */
-    public GeoserverRXQueryParamConsumer(@Nonnull(when = NEVER) URIBuilder theUriBuilder) {
-        checkArgument(theUriBuilder != null, "The Parameter uriBuilder must not be null.");
-        this.uriBuilder = theUriBuilder;
+    public GPGeoserverStringQueryParam(@Nonnull(when = NEVER) String theKey, @Nullable String theValue) {
+        super(theKey, theValue);
     }
 
     /**
-     * Consume the given value.
-     *
-     * @param queryParam the value
-     * @throws Throwable if the implementation wishes to throw any type of exception
+     * @return {@link Boolean}
      */
     @Override
-    public void accept(ThreadLocal<B> queryParam) throws Throwable {
-        queryParam.get().addQueryParam(this.uriBuilder);
+    public boolean isQueryParamValid() {
+        return ((super.isQueryParamValid()) && !(this.getValue().trim().isEmpty()));
     }
 }

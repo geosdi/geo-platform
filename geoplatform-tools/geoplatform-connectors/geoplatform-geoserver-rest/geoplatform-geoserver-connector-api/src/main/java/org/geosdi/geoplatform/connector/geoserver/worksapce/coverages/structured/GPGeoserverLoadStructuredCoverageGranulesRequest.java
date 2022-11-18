@@ -38,11 +38,11 @@ import io.reactivex.rxjava3.functions.Consumer;
 import net.jcip.annotations.ThreadSafe;
 import org.apache.hc.core5.net.URIBuilder;
 import org.geojson.FeatureCollection;
-import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverIntegerQueryParam;
-import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverStringQueryParam;
-import org.geosdi.geoplatform.connector.geoserver.model.uri.GeoserverRXQueryParamConsumer;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.structured.GeoserverLoadStructuredCoverageGranulesRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.connector.uri.GPGeoserverIntegerQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPGeoserverStringQueryParam;
+import org.geosdi.geoplatform.connector.uri.GeoserverRXQueryParamConsumer;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;

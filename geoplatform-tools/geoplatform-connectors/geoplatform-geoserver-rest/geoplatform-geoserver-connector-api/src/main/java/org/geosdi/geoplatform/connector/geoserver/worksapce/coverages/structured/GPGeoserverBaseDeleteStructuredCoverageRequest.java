@@ -36,16 +36,15 @@ package org.geosdi.geoplatform.connector.geoserver.worksapce.coverages.structure
 
 import com.google.common.io.CharStreams;
 import org.geosdi.geoplatform.connector.geoserver.model.purge.GPGeoserverPurgeParam;
-import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverBooleanQueryParam;
-import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverStringQueryParam;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.structured.GeoserverBaseDeleteStructuredCoverageRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
+import org.geosdi.geoplatform.connector.uri.GPGeoserverBooleanQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPGeoserverStringQueryParam;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 

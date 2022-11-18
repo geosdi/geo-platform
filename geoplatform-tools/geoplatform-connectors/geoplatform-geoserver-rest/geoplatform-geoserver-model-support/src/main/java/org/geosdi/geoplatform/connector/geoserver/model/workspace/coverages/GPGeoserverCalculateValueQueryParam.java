@@ -34,7 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages;
 
-import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverValueQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPGeoserverValueQueryParam;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

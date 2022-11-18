@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.update;
 
-import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPGeoserverQueryParam;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group

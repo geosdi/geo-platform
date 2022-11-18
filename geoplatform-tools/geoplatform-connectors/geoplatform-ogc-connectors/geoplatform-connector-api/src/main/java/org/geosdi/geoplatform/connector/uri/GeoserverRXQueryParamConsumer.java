@@ -33,25 +33,40 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.uri;
+package org.geosdi.geoplatform.connector.uri;
 
-import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryParam.GeoserverQueryParam;
+import io.reactivex.rxjava3.functions.Consumer;
+import org.apache.hc.core5.net.URIBuilder;
 
 import javax.annotation.Nonnull;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 
 /**
- * @author Vito Salvia - CNR IMAA geoSDI Group
- * @email vito.salvia@gmail.com
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPGeoserverIntegerQueryParam extends GeoserverQueryParam<Integer> {
+public class GeoserverRXQueryParamConsumer<B extends GPGeoserverQueryParam> implements Consumer<ThreadLocal<B>> {
+
+    private final URIBuilder uriBuilder;
 
     /**
-     * @param theKey
-     * @param theValue
+     * @param theUriBuilder
      */
-    public GPGeoserverIntegerQueryParam(@Nonnull(when = NEVER) String theKey, @Nonnull(when = NEVER) Integer theValue) {
-        super(theKey, theValue);
+    public GeoserverRXQueryParamConsumer(@Nonnull(when = NEVER) URIBuilder theUriBuilder) {
+        checkArgument(theUriBuilder != null, "The Parameter uriBuilder must not be null.");
+        this.uriBuilder = theUriBuilder;
+    }
+
+    /**
+     * Consume the given value.
+     *
+     * @param queryParam the value
+     * @throws Throwable if the implementation wishes to throw any type of exception
+     */
+    @Override
+    public void accept(ThreadLocal<B> queryParam) throws Throwable {
+        queryParam.get().addQueryParam(this.uriBuilder);
     }
 }

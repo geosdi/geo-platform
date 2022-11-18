@@ -40,12 +40,12 @@ import net.jcip.annotations.ThreadSafe;
 import org.apache.hc.core5.net.URIBuilder;
 import org.geosdi.geoplatform.connector.geoserver.model.extensions.rasterize.GeoserverRamp;
 import org.geosdi.geoplatform.connector.geoserver.model.extensions.rasterize.GeoserverRasterizeType;
-import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryParam;
-import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverStringQueryParam;
-import org.geosdi.geoplatform.connector.geoserver.model.uri.GeoserverRXQueryParamConsumer;
 import org.geosdi.geoplatform.connector.geoserver.request.extensions.rasterize.GeoserverRasterizeRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
+import org.geosdi.geoplatform.connector.uri.GPGeoserverQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPGeoserverStringQueryParam;
+import org.geosdi.geoplatform.connector.uri.GeoserverRXQueryParamConsumer;
 import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
 
 import javax.annotation.Nonnull;

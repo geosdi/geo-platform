@@ -32,19 +32,58 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.uri;
+package org.geosdi.geoplatform.connector.uri;
 
-import java.io.Serializable;
+import net.jcip.annotations.Immutable;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
+
+import static java.util.Arrays.stream;
+import static java.util.Collections.EMPTY_SET;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toCollection;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@FunctionalInterface
-public interface GPGeoserverValueQueryParam extends Serializable {
+@Immutable
+public class GPGeoserverValuesQueryParam extends GPGeoserverQueryParam.GeoserverQueryParam<GPGeoserverValueQueryParam[]> {
+
+    private final Set<String> cleanValues;
+
+    /**
+     * @param theKey
+     * @param theValue
+     */
+    public GPGeoserverValuesQueryParam(@Nonnull(when = NEVER) String theKey,
+            @Nullable GPGeoserverValueQueryParam[] theValue) {
+        super(theKey, theValue);
+        this.cleanValues = super.isQueryParamValid() ? stream(theValue)
+                .filter(Objects::nonNull)
+                .map(GPGeoserverValueQueryParam::toQueryParam)
+                .filter(v -> !(v.trim().isEmpty()))
+                .collect(toCollection(LinkedHashSet::new)) : EMPTY_SET;
+    }
+
+    /**
+     * @return {@link Boolean}
+     */
+    @Override
+    public boolean isQueryParamValid() {
+        return this.cleanValues.size() > 0;
+    }
 
     /**
      * @return {@link String}
      */
-    String toQueryParam();
+    @Override
+    protected String internalFormatValue() {
+        return this.cleanValues.stream().collect(joining(","));
+    }
 }

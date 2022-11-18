@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.extensions.importer;
 
-import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPGeoserverQueryParam;
 
 import javax.annotation.Nonnull;
 

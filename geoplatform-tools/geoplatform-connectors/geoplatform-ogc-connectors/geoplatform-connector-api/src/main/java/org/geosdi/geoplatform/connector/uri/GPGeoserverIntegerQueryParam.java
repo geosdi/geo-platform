@@ -33,13 +33,9 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.uri;
-
-import net.jcip.annotations.Immutable;
-import org.geosdi.geoplatform.connector.geoserver.model.uri.GPGeoserverQueryParam.GeoserverQueryParam;
+package org.geosdi.geoplatform.connector.uri;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import static javax.annotation.meta.When.NEVER;
 
@@ -47,22 +43,13 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-@Immutable
-public class GPGeoserverStringQueryParam extends GeoserverQueryParam<String> {
+public class GPGeoserverIntegerQueryParam extends GPGeoserverQueryParam.GeoserverQueryParam<Integer> {
 
     /**
      * @param theKey
      * @param theValue
      */
-    public GPGeoserverStringQueryParam(@Nonnull(when = NEVER) String theKey, @Nullable String theValue) {
+    public GPGeoserverIntegerQueryParam(@Nonnull(when = NEVER) String theKey, @Nonnull(when = NEVER) Integer theValue) {
         super(theKey, theValue);
-    }
-
-    /**
-     * @return {@link Boolean}
-     */
-    @Override
-    public boolean isQueryParamValid() {
-        return ((super.isQueryParamValid()) && !(this.getValue().trim().isEmpty()));
     }
 }

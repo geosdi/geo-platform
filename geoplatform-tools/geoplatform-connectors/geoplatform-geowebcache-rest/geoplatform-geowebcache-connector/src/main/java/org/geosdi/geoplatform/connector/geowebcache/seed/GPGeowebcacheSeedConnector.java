@@ -161,7 +161,7 @@ public abstract class GPGeowebcacheSeedConnector extends GPGeowebcacheReloadingC
     }
 
     @Override
-    public <V extends GPServerConnectorVersion> V getVersion() {
-        return null;
+    public GPServerConnectorVersion getVersion() {
+        return this.version;
     }
 }

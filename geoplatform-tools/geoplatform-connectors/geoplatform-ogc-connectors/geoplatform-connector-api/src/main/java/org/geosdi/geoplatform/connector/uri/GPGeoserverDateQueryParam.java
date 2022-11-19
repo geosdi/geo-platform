@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.uri;
 
+import org.geosdi.geoplatform.connector.uri.GPGeoserverQueryParam.GeoserverQueryParam;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.text.SimpleDateFormat;
@@ -47,7 +49,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverDateQueryParam extends GPGeoserverQueryParam.GeoserverQueryParam<Date> {
+public class GPGeoserverDateQueryParam extends GeoserverQueryParam<Date> {
 
     private final String formatter;
 
@@ -58,8 +60,7 @@ public class GPGeoserverDateQueryParam extends GPGeoserverQueryParam.GeoserverQu
     public GPGeoserverDateQueryParam(@Nonnull(when = NEVER) String theKey, @Nullable Date theValue,
             @Nonnull(when = NEVER) String theFormatter) {
         super(theKey, theValue);
-        checkArgument(theFormatter != null && !theFormatter.trim().isEmpty(),
-                "The Parameter theFormatter must not be null or empty string");
+        checkArgument((theFormatter != null) && !(theFormatter.trim().isEmpty()), "The Parameter theFormatter must not be null or empty string");
         this.formatter = theFormatter;
     }
 

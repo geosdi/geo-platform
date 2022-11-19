@@ -34,9 +34,9 @@
  */
 package org.geosdi.geoplatform.connector.store.wms.store;
 
-import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GPGeoserverWMSStore;
-import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GPGeoserverWMSStoreBody;
-import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GPGeoserverWMSStores;
+import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GPGeoserverWMSStore;
+import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GPGeoserverWMSStoreBody;
+import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GPGeoserverWMSStores;
 import org.geosdi.geoplatform.connector.geoserver.request.wms.store.GeoserverCreateWMSStoreRequest;
 import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreTest;
 import org.junit.FixMethodOrder;

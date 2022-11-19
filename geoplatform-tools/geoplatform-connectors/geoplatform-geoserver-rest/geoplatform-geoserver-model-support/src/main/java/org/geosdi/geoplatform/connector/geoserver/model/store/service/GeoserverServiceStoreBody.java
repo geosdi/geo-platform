@@ -32,21 +32,15 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.model.store.service;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.geosdi.geoplatform.connector.geoserver.model.adapter.GPLocalDateTimeAdpater;
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverWorkspace;
+import org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverBaseStore;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverBaseWorkspace;
 
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.time.LocalDateTime;
-
-import static javax.xml.bind.annotation.XmlAccessType.FIELD;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -55,17 +49,13 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 @Getter
 @Setter
 @ToString(callSuper = true)
-@XmlRootElement(name = "wmsStore")
-@XmlAccessorType(value = FIELD)
-public class GeoserverWMSStore extends GeoserverWMSBaseStore<GPGeoserverWorkspace> implements GPGeoserverWMSStore {
+@XmlTransient
+public class GeoserverServiceStoreBody extends GeoserverBaseStore<GPGeoserverBaseWorkspace> implements GPGeoserverServiceStoreBody {
 
-    private static final long serialVersionUID = 4032141937044468071L;
+    private static final long serialVersionUID = 1344435574110438204L;
     //
-    private GPGeoserverWorkspace workspace;
-    @XmlJavaTypeAdapter(value = GPLocalDateTimeAdpater.class)
-    private LocalDateTime dateCreated;
-    @XmlJavaTypeAdapter(value = GPLocalDateTimeAdpater.class)
-    private LocalDateTime dateModified;
-    @XmlElement(name = "wmslayers")
-    private String wmsLayers;
+    private GPGeoserverBaseWorkspace workspace;
+
+    protected GeoserverServiceStoreBody() {
+    }
 }

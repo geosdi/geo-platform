@@ -32,14 +32,18 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.wms.store.layers;
+package org.geosdi.geoplatform.connector.geoserver.model.store;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.geosdi.geoplatform.connector.geoserver.model.metadata.adapter.GPGeoserverMetadataMapAdapter;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverBaseWorkspace;
 
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-
-import static javax.xml.bind.annotation.XmlAccessType.FIELD;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.util.Map;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -48,11 +52,27 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 @Getter
 @Setter
 @ToString
-@XmlAccessorType(value = FIELD)
-public class WMSLinkStoreLayer implements GPWMSLinkStoreLayer {
+@XmlTransient
+public abstract class GeoserverBaseStore<W extends IGPGeoserverBaseWorkspace> implements GPGeoserverBaseStore<W> {
 
-    private static final long serialVersionUID = -3180543794865486409L;
+    private static final long serialVersionUID = 4406674477043044960L;
     //
-    @XmlElement(name = "link")
-    private String link;
+    private String name;
+    private String description;
+    private String type;
+    private boolean enabled;
+    @XmlElement(name = "__default__")
+    private boolean defaultStore;
+    private String capabilitiesURL;
+    private String user;
+    private String password;
+    private Integer maxConnections;
+    private String readTimeout;
+    @XmlElement(name = "connectTimeout")
+    private String connectionTimeout;
+    @XmlJavaTypeAdapter(value = GPGeoserverMetadataMapAdapter.class)
+    private Map<String, String> metadata;
+
+    protected GeoserverBaseStore() {
+    }
 }

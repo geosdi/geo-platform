@@ -32,35 +32,23 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.model.store.wms;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.ToString;
+import org.geosdi.geoplatform.connector.geoserver.model.store.service.GeoserverServiceStoreBody;
 
-import javax.xml.bind.annotation.XmlTransient;
-import java.io.Serializable;
-import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = GeoserverWMSStores.class)
-@JsonSerialize(as = GeoserverWMSStores.class)
-@JsonRootName(value = "wmsStores")
-public interface GPGeoserverWMSStores extends Serializable {
+@ToString(callSuper = true)
+@XmlRootElement(name = "wmsStore")
+@XmlAccessorType(value = XmlAccessType.FIELD)
+public class GeoserverWMSStoreBody extends GeoserverServiceStoreBody implements GPGeoserverWMSStoreBody {
 
-    /**
-     * @return {@link List<  GeoserverWMSSimpleStore  >}
-     */
-    List<GeoserverWMSSimpleStore> getStores();
-
-    /**
-     * @return {@link Boolean}
-     */
-    @XmlTransient
-    default Boolean isEmpty() {
-        return ((this.getStores() == null) || (this.getStores().isEmpty()));
-    }
+    private static final long serialVersionUID = 8502668447804835502L;
 }

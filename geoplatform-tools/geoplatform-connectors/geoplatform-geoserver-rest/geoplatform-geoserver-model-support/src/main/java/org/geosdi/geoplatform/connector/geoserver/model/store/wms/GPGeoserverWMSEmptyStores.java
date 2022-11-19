@@ -32,28 +32,31 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.model.store.wms;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.ToString;
+import org.geosdi.geoplatform.connector.geoserver.model.GPGeoserverEmptyResponse;
 
-import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = GPGeoserverWMSSimpleStore.class)
-@JsonSerialize(as = GPGeoserverWMSSimpleStore.class)
-public interface GeoserverWMSSimpleStore extends Serializable {
+@ToString
+@XmlAccessorType(XmlAccessType.FIELD)
+public class GPGeoserverWMSEmptyStores implements GPGeoserverEmptyResponse<GPGeoserverWMSStores> {
+
+    private static final long serialVersionUID = -695200240330671074L;
+    //
+    private String wmsStores;
 
     /**
-     * @return {@link String}
+     * @return {@link GPGeoserverWMSStores}
      */
-    String getName();
-
-    /**
-     * @return {@link String}
-     */
-    String getHref();
+    @Override
+    public GPGeoserverWMSStores toModel() {
+        return new GeoserverWMSStores(null);
+    }
 }

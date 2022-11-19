@@ -32,7 +32,7 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.model.store;
 
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverBaseWorkspace;
 
@@ -43,7 +43,7 @@ import java.util.Map;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverWMSBaseStore<W extends IGPGeoserverBaseWorkspace> extends Serializable {
+public interface GPGeoserverBaseStore<W extends IGPGeoserverBaseWorkspace> extends Serializable {
 
     /**
      * @return {@link String}
@@ -51,7 +51,7 @@ public interface GPGeoserverWMSBaseStore<W extends IGPGeoserverBaseWorkspace> ex
     String getName();
 
     /**
-     * <p>Name of the WMS store</p>
+     * <p>Name of the store</p>
      *
      * @param theName
      */
@@ -63,7 +63,7 @@ public interface GPGeoserverWMSBaseStore<W extends IGPGeoserverBaseWorkspace> ex
     String getDescription();
 
     /**
-     * <p>Description of the WMS store</p>
+     * <p>Description of the store</p>
      *
      * @param theDescription
      */
@@ -75,7 +75,7 @@ public interface GPGeoserverWMSBaseStore<W extends IGPGeoserverBaseWorkspace> ex
     String getType();
 
     /**
-     * <p>Type of store. Set to WMS.</p>
+     * <p>Type of store.</p>
      *
      * @param theType
      */
@@ -111,7 +111,7 @@ public interface GPGeoserverWMSBaseStore<W extends IGPGeoserverBaseWorkspace> ex
     String getCapabilitiesURL();
 
     /**
-     * <p>Location of the WMS capabilities URL where the store originates</p>
+     * <p>Location of the Capabilities URL where the store originates</p>
      *
      * @param theCapabilitiesURL
      */

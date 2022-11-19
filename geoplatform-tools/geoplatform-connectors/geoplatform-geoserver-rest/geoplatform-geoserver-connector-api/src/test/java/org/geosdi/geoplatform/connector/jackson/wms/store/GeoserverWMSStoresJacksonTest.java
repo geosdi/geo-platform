@@ -34,7 +34,11 @@
  */
 package org.geosdi.geoplatform.connector.jackson.wms.store;
 
-import org.geosdi.geoplatform.connector.geoserver.model.wms.store.*;
+import org.geosdi.geoplatform.connector.geoserver.model.store.GPGeoserverStore;
+import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GPGeoserverWMSStoreBody;
+import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GPGeoserverWMSStores;
+import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GeoserverWMSStore;
+import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GeoserverWMSStoreBody;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -82,10 +86,10 @@ public class GeoserverWMSStoresJacksonTest {
 
     @Test
     public void b_unmarshallWMSBaseStoreFromJsonStringTest() throws Exception {
-        GeoserverWMSSimpleStore wmsBaseStore = emptyJacksonSupport.getDefaultMapper().readValue(new StringReader("{\n"
+        GPGeoserverStore wmsBaseStore = emptyJacksonSupport.getDefaultMapper().readValue(new StringReader("{\n"
                 + "   \"name\":\"altgs\",\n"
                 + "   \"href\":\"http://localhost:8080/geoserver/rest/workspaces/cite/wmsstores/altgs.json\"\n"
-                + "}"), GeoserverWMSSimpleStore.class);
+                + "}"), GPGeoserverStore.class);
         logger.info("##################WMS_BASE_STORE : \n{}\n", emptyJacksonSupport.getDefaultMapper().writeValueAsString(wmsBaseStore));
     }
 

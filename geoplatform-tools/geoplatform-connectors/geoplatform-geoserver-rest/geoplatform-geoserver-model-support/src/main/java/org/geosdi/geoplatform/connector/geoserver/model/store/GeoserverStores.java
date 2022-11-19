@@ -32,30 +32,32 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.model.store;
 
-import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GPGeoserverWMSStoreBody;
-import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GeoserverCreateWMSStoreResponse;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.ToString;
+import net.jcip.annotations.Immutable;
 
-import javax.annotation.Nonnull;
-
-import static javax.annotation.meta.When.NEVER;
+import java.util.List;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverCreateWMSStoreRequest extends GeoserverCreateOrUpdateWMSStoreRequest<GeoserverCreateWMSStoreResponse, GeoserverCreateWMSStoreRequest> {
+@Getter
+@ToString
+@Immutable
+public class GeoserverStores implements GPGeoserverStores {
+
+    private static final long serialVersionUID = 3162296624992703701L;
+    //
+    private final List<IGPGeoserverStore> stores;
 
     /**
-     * @param theWorkspace
-     * @return {@link GeoserverCreateWMSStoreRequest}
+     * @param theStores
      */
-    GeoserverCreateWMSStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
-
-    /**
-     * @param theBody
-     * @return {@link GeoserverCreateWMSStoreRequest}
-     */
-    GeoserverCreateWMSStoreRequest withBody(@Nonnull(when = NEVER) GPGeoserverWMSStoreBody theBody);
+    public GeoserverStores(@JsonProperty(value = "wmsStore") List<IGPGeoserverStore> theStores) {
+        this.stores = theStores;
+    }
 }

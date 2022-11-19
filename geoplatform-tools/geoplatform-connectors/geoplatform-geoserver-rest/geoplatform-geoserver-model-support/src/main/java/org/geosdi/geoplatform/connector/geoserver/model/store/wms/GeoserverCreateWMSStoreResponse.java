@@ -32,31 +32,18 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.model.store.wms;
 
-import lombok.ToString;
-import org.geosdi.geoplatform.connector.geoserver.model.GPGeoserverEmptyResponse;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import java.io.Serializable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@ToString
-@XmlAccessorType(XmlAccessType.FIELD)
-public class GPGeoserverWMSEmptyStores implements GPGeoserverEmptyResponse<GPGeoserverWMSStores> {
-
-    private static final long serialVersionUID = -695200240330671074L;
-    //
-    private String wmsStores;
+public interface GeoserverCreateWMSStoreResponse extends Serializable {
 
     /**
-     * @return {@link GPGeoserverWMSStores}
+     * @return {@link String}
      */
-    @Override
-    public GPGeoserverWMSStores toModel() {
-        return new GeoserverWMSStores(null);
-    }
+    String getStoreName();
 }

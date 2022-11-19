@@ -32,30 +32,28 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.model.store.wms.layers;
 
-import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GPGeoserverWMSStoreBody;
-import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GeoserverCreateWMSStoreResponse;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import javax.annotation.Nonnull;
-
-import static javax.annotation.meta.When.NEVER;
+import java.io.Serializable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverCreateWMSStoreRequest extends GeoserverCreateOrUpdateWMSStoreRequest<GeoserverCreateWMSStoreResponse, GeoserverCreateWMSStoreRequest> {
+@JsonDeserialize(as = WMSLinkStoreLayer.class)
+@JsonSerialize(as = WMSLinkStoreLayer.class)
+public interface GPWMSLinkStoreLayer extends Serializable {
 
     /**
-     * @param theWorkspace
-     * @return {@link GeoserverCreateWMSStoreRequest}
+     * @return {@link String}
      */
-    GeoserverCreateWMSStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
+    String getLink();
 
     /**
-     * @param theBody
-     * @return {@link GeoserverCreateWMSStoreRequest}
+     * @param theLink
      */
-    GeoserverCreateWMSStoreRequest withBody(@Nonnull(when = NEVER) GPGeoserverWMSStoreBody theBody);
+    void setLink(String theLink);
 }

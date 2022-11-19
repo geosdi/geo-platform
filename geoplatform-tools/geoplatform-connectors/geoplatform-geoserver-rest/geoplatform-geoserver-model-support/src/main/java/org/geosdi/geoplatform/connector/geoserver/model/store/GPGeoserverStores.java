@@ -32,28 +32,28 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.wms.store.layers;
+package org.geosdi.geoplatform.connector.geoserver.model.store;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = WMSLinkStoreLayer.class)
-@JsonSerialize(as = WMSLinkStoreLayer.class)
-public interface GPWMSLinkStoreLayer extends Serializable {
+public interface GPGeoserverStores extends Serializable {
 
     /**
-     * @return {@link String}
+     * @return {@link List<IGPGeoserverStore>}
      */
-    String getLink();
+    List<IGPGeoserverStore> getStores();
 
     /**
-     * @param theLink
+     * @return {@link Boolean}
      */
-    void setLink(String theLink);
+    @XmlTransient
+    default Boolean isEmpty() {
+        return ((this.getStores() == null) || (this.getStores().isEmpty()));
+    }
 }

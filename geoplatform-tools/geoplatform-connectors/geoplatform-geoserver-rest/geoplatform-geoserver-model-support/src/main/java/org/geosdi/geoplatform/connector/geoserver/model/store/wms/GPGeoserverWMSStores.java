@@ -32,36 +32,19 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.model.store.wms;
 
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverBaseWorkspace;
-
-import javax.annotation.Nullable;
-import javax.xml.bind.annotation.XmlTransient;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.geosdi.geoplatform.connector.geoserver.model.store.GPGeoserverStores;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPGeoserverWMSStoreBody extends GPGeoserverWMSBaseStore<GPGeoserverBaseWorkspace> {
-
-    /**
-     * @return {@link GPGeoserverBaseWorkspace}
-     */
-    @Override
-    GPGeoserverBaseWorkspace getWorkspace();
-
-    /**
-     * @param theWorkspace
-     */
-    @Override
-    void setWorkspace(@Nullable GPGeoserverBaseWorkspace theWorkspace);
-
-    /**
-     * @return {@link Boolean}
-     */
-    @XmlTransient
-    default boolean isSetWorkspace() {
-        return this.getWorkspace() != null;
-    }
+@JsonDeserialize(as = GeoserverWMSStores.class)
+@JsonSerialize(as = GeoserverWMSStores.class)
+@JsonRootName(value = "wmsStores")
+public interface GPGeoserverWMSStores extends GPGeoserverStores {
 }

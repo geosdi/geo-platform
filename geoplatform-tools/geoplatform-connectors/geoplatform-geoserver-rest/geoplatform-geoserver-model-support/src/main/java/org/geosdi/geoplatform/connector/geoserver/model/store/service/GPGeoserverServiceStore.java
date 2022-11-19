@@ -32,26 +32,36 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.model.store.service;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
-import net.jcip.annotations.Immutable;
+import org.geosdi.geoplatform.connector.geoserver.model.store.GPGeoserverBaseStore;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverBaseWorkspace;
+
+import java.time.LocalDateTime;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@AllArgsConstructor
-@Getter
-@ToString
-@Builder
-@Immutable
-public class GPGeoserverCreateWMSStoreResponse implements GeoserverCreateWMSStoreResponse {
+public interface GPGeoserverServiceStore<W extends IGPGeoserverBaseWorkspace> extends GPGeoserverBaseStore<W> {
 
-    private static final long serialVersionUID = 2016206960498126661L;
-    //
-    private final String storeName;
+    /**
+     * @return {@link LocalDateTime}
+     */
+    LocalDateTime getDateCreated();
+
+    /**
+     * @param theDateCreated
+     */
+    void setDateCreated(LocalDateTime theDateCreated);
+
+    /**
+     * @return {@link LocalDateTime}
+     */
+    LocalDateTime getDateModified();
+
+    /**
+     * @param theDateModified
+     */
+    void setDateModified(LocalDateTime theDateModified);
 }

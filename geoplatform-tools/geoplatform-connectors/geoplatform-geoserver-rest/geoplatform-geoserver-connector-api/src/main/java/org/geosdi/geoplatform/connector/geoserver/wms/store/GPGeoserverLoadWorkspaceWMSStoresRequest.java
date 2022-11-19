@@ -35,8 +35,8 @@
 package org.geosdi.geoplatform.connector.geoserver.wms.store;
 
 import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GPGeoserverWMSEmptyStores;
-import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GPGeoserverWMSStores;
+import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GPGeoserverWMSEmptyStores;
+import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GPGeoserverWMSStores;
 import org.geosdi.geoplatform.connector.geoserver.request.GPGeoserverGetConnectorRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.wms.store.GeoserverLoadWorkspaceWMSStoresRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;

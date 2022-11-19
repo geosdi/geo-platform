@@ -32,29 +32,28 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.model.store.wms;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverBaseWorkspace;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.geosdi.geoplatform.connector.geoserver.model.store.service.GPGeoserverServiceStore;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverWorkspace;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Getter
-@Setter
-@ToString(callSuper = true)
-@XmlRootElement(name = "wmsStore")
-@XmlAccessorType(value = XmlAccessType.FIELD)
-public class GeoserverWMSStoreBody extends GeoserverWMSBaseStore<GPGeoserverBaseWorkspace> implements GPGeoserverWMSStoreBody {
+@JsonDeserialize(as = GeoserverWMSStore.class)
+@JsonSerialize(as = GeoserverWMSStore.class)
+public interface GPGeoserverWMSStore extends GPGeoserverServiceStore<GPGeoserverWorkspace> {
 
-    private static final long serialVersionUID = 8502668447804835502L;
-    //
-    private GPGeoserverBaseWorkspace workspace;
+    /**
+     * @return {@link String}
+     */
+    String getWmsLayers();
+
+    /**
+     * @param theWmsLayers
+     */
+    void setWmsLayers(String theWmsLayers);
 }

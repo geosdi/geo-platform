@@ -34,9 +34,9 @@
  */
 package org.geosdi.geoplatform.connector.store.wms.store;
 
-import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GPGeoserverWMSStore;
-import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GPGeoserverWMSStoreBody;
-import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GPGeoserverWMSStores;
+import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GPGeoserverWMSStore;
+import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GPGeoserverWMSStoreBody;
+import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GPGeoserverWMSStores;
 import org.geosdi.geoplatform.connector.geoserver.request.wms.store.GeoserverCreateWMSStoreRequest;
 import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV220xTest;
 import org.junit.FixMethodOrder;
@@ -81,9 +81,11 @@ public class GPGeoserverWMSStoreConnectorStoreV220xTest extends GPBaseGeoserverC
     }
 
     @Test
-    public void d_deleteGeoserverWMSStoreRequestTest() throws Exception {
-        logger.info("@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_DELETE_WMS_STORE_RESPONSE : {}\n",geoserverConnectorStoreV2_20_x
-                .deleteWMSStoreRequest().withWorkspace("sf").withStore("remote").getResponse());
+    public void d_loadGeoserverWMSStoreRequestTest() throws Exception {
+        GPGeoserverWMSStore wmsStore = geoserverConnectorStoreV2_20_x.loadWorkspaceWMSStoreRequest()
+                .withWorkspace("sf")
+                .withStore("remote").getResponse();
+        logger.info("@@@@@@@@@@@@@@@@@@@WMS_STORE : {}\n", wmsStore);
     }
 
     @Test

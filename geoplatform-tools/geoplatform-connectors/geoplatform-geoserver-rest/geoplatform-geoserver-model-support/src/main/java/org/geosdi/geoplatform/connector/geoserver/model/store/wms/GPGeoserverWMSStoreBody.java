@@ -32,49 +32,13 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.model.store.wms;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverWorkspace;
-
-import java.time.LocalDateTime;
+import org.geosdi.geoplatform.connector.geoserver.model.store.service.GPGeoserverServiceStoreBody;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@JsonDeserialize(as = GeoserverWMSStore.class)
-@JsonSerialize(as = GeoserverWMSStore.class)
-public interface GPGeoserverWMSStore extends GPGeoserverWMSBaseStore<GPGeoserverWorkspace> {
-
-    /**
-     * @return {@link LocalDateTime}
-     */
-    LocalDateTime getDateCreated();
-
-    /**
-     * @param theDateCreated
-     */
-    void setDateCreated(LocalDateTime theDateCreated);
-
-    /**
-     * @return {@link LocalDateTime}
-     */
-    LocalDateTime getDateModified();
-
-    /**
-     * @param theDateModified
-     */
-    void setDateModified(LocalDateTime theDateModified);
-
-    /**
-     * @return {@link String}
-     */
-    String getWmsLayers();
-
-    /**
-     * @param theWmsLayers
-     */
-    void setWmsLayers(String theWmsLayers);
+public interface GPGeoserverWMSStoreBody extends GPGeoserverServiceStoreBody {
 }

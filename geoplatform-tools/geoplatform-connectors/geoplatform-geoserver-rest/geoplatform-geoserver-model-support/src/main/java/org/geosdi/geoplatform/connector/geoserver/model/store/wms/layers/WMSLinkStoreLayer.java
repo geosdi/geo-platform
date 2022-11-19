@@ -32,30 +32,27 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.model.store.wms.layers;
 
-import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GPGeoserverWMSStoreBody;
-import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GeoserverCreateWMSStoreResponse;
+import lombok.*;
 
-import javax.annotation.Nonnull;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 
-import static javax.annotation.meta.When.NEVER;
+import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverCreateWMSStoreRequest extends GeoserverCreateOrUpdateWMSStoreRequest<GeoserverCreateWMSStoreResponse, GeoserverCreateWMSStoreRequest> {
+@Getter
+@Setter
+@ToString
+@XmlAccessorType(value = FIELD)
+public class WMSLinkStoreLayer implements GPWMSLinkStoreLayer {
 
-    /**
-     * @param theWorkspace
-     * @return {@link GeoserverCreateWMSStoreRequest}
-     */
-    GeoserverCreateWMSStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
-
-    /**
-     * @param theBody
-     * @return {@link GeoserverCreateWMSStoreRequest}
-     */
-    GeoserverCreateWMSStoreRequest withBody(@Nonnull(when = NEVER) GPGeoserverWMSStoreBody theBody);
+    private static final long serialVersionUID = -3180543794865486409L;
+    //
+    @XmlElement(name = "link")
+    private String link;
 }

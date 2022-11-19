@@ -32,40 +32,36 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.model.store.service;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
-import net.jcip.annotations.Immutable;
+import org.geosdi.geoplatform.connector.geoserver.model.adapter.GPLocalDateTimeAdpater;
+import org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverBaseStore;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverBaseWorkspace;
 
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.util.List;
-
-import static javax.xml.bind.annotation.XmlAccessType.FIELD;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.time.LocalDateTime;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Getter
-@ToString
-@Immutable
-@XmlRootElement(name = "wmsStores")
-@XmlAccessorType(value = FIELD)
-public class GeoserverWMSStores implements GPGeoserverWMSStores {
+@Setter
+@ToString(callSuper = true)
+@XmlTransient
+public abstract class GeoserverServiceStore<W extends IGPGeoserverBaseWorkspace> extends GeoserverBaseStore<W> implements GPGeoserverServiceStore<W> {
 
-    private static final long serialVersionUID = -2821960494835368091L;
+    private static final long serialVersionUID = 9190382007935703892L;
     //
-    private final List<GeoserverWMSSimpleStore> stores;
+    @XmlJavaTypeAdapter(value = GPLocalDateTimeAdpater.class)
+    private LocalDateTime dateCreated;
+    @XmlJavaTypeAdapter(value = GPLocalDateTimeAdpater.class)
+    private LocalDateTime dateModified;
 
-    /**
-     * @param theStores
-     */
-    @JsonCreator
-    protected GeoserverWMSStores(@JsonProperty(value = "wmsStore") List<GeoserverWMSSimpleStore> theStores) {
-        this.stores = theStores;
+    protected GeoserverServiceStore() {
     }
 }

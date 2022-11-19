@@ -32,40 +32,24 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.model.store.service;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.ToString;
-import net.jcip.annotations.Immutable;
+import org.geosdi.geoplatform.connector.geoserver.model.store.GPGeoserverBaseStore;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverBaseWorkspace;
 
-import javax.xml.bind.annotation.XmlAccessorType;
-
-import static javax.xml.bind.annotation.XmlAccessType.FIELD;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Getter
-@ToString
-@Immutable
-@XmlAccessorType(value = FIELD)
-public class GPGeoserverWMSSimpleStore implements GeoserverWMSSimpleStore {
-
-    private static final long serialVersionUID = -5936159481464102934L;
-    //
-    private final String name;
-    private final String href;
+public interface GPGeoserverServiceStoreBody extends GPGeoserverBaseStore<GPGeoserverBaseWorkspace> {
 
     /**
-     * @param theName
-     * @param theHref
+     * @return {@link Boolean}
      */
-    @JsonCreator
-    protected GPGeoserverWMSSimpleStore(@JsonProperty(value = "name") String theName, @JsonProperty(namespace = "href") String theHref) {
-        this.name = theName;
-        this.href = theHref;
+    @XmlTransient
+    default boolean isSetWorkspace() {
+        return this.getWorkspace() != null;
     }
 }

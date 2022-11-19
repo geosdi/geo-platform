@@ -32,47 +32,26 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.model.store.wms;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
-import org.geosdi.geoplatform.connector.geoserver.model.metadata.adapter.GPGeoserverMetadataMapAdapter;
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverBaseWorkspace;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.util.Map;
+import net.jcip.annotations.Immutable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@AllArgsConstructor
 @Getter
-@Setter
 @ToString
-@XmlTransient
-abstract class GeoserverWMSBaseStore<W extends IGPGeoserverBaseWorkspace> implements GPGeoserverWMSBaseStore<W> {
+@Builder
+@Immutable
+public class GPGeoserverCreateWMSStoreResponse implements GeoserverCreateWMSStoreResponse {
 
-    private static final long serialVersionUID = 4406674477043044960L;
+    private static final long serialVersionUID = 2016206960498126661L;
     //
-    private String name;
-    private String description;
-    private String type;
-    private boolean enabled;
-    @XmlElement(name = "__default__")
-    private boolean defaultStore;
-    private String capabilitiesURL;
-    private String user;
-    private String password;
-    private Integer maxConnections;
-    private String readTimeout;
-    @XmlElement(name = "connectTimeout")
-    private String connectionTimeout;
-    @XmlJavaTypeAdapter(value = GPGeoserverMetadataMapAdapter.class)
-    private Map<String, String> metadata;
-
-    GeoserverWMSBaseStore() {
-    }
+    private final String storeName;
 }

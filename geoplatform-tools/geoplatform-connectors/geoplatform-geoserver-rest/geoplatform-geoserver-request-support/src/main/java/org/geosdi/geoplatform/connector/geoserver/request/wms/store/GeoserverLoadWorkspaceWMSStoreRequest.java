@@ -34,7 +34,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.wms.store;
 
-import org.geosdi.geoplatform.connector.geoserver.model.wms.store.GeoserverWMSStore;
+import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GeoserverWMSStore;
 import org.geosdi.geoplatform.connector.geoserver.request.exsist.GeoserverExsistRequest;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 

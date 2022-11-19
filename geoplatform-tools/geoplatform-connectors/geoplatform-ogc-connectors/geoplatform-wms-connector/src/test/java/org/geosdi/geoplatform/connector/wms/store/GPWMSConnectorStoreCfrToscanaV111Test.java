@@ -76,14 +76,15 @@ public class GPWMSConnectorStoreCfrToscanaV111Test {
                         .withMaxTotalConnections(40)
                         .withDefaultMaxPerRoute(20)
                         .withMaxRedirect(5)
-                        .build()).build();
+                        .build())
+                .build();
     }
 
     @Test
     public void a_wmsDescribeLayerV11Test() throws Exception {
         GPWMSDescribeLayerV111Request wmsDescribeLayerRequest = wmsServerConnector.createDescribeLayerRequest();
         logger.info("##########################WMS_DESCRIBE_LAYER_RESPONSE_V111 : {}\n", wmsDescribeLayerRequest
-                .withLayers("tmp:frea_covid_010420_160420", "tmp:rw8_arno_de_ott_mag", "tmp:sitc_strutture_disabili").getResponse());
+                .withLayers("geo:cf_distretti", "\tgeo:sir_frea_oscillazioni_2019_2021", "geo:sir_frea_trend_2019_2021").getResponse());
     }
 
     @Test
@@ -125,8 +126,8 @@ public class GPWMSConnectorStoreCfrToscanaV111Test {
     @Test
     public void e_wmsGetFeatureInfoV111Test() throws Exception {
         GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
-        GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(1640995.7037249417, 4814109.927903829, 1671841.69393636, 4844955.918115247);
-        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("tmp:rw8_arno_de_ott_mag").collect(toSet()),
+        GPWMSBoundingBox wmsBoundinBox = new WMSBoundingBox(1592779.7561543707, 4821339.4568596305, 1623625.746365789, 4852185.447071048);
+        GPWMSGetMapBaseRequest wmsGetMapBaseRequest = new WMSGetMapBaseRequest(wmsBoundinBox, of("geo:sir_frea_trend_2019_2021").collect(toSet()),
                 "EPSG:3003", "101", "101");
         logger.info("##################################WMS_GET_FEATURE_INFO_V111_RESPONSE : {}\n", wmsGetFeatureInfoRequest//.withQueryLayers("tmp:rw8_arno_de_ott_mag")
                 .withWMSGetMapRequest(wmsGetMapBaseRequest)

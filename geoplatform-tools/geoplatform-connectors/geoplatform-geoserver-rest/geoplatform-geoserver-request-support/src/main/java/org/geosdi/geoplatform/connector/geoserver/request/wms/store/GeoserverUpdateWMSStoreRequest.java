@@ -35,6 +35,7 @@
 package org.geosdi.geoplatform.connector.geoserver.request.wms.store;
 
 import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GPGeoserverWMSStoreBody;
+import org.geosdi.geoplatform.connector.geoserver.request.store.GeoserverUpdateStoreRequest;
 
 import javax.annotation.Nonnull;
 
@@ -44,7 +45,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverUpdateWMSStoreRequest extends GeoserverCreateOrUpdateWMSStoreRequest<Boolean, GeoserverUpdateWMSStoreRequest> {
+public interface GeoserverUpdateWMSStoreRequest extends GeoserverUpdateStoreRequest<GPGeoserverWMSStoreBody, GeoserverUpdateWMSStoreRequest> {
 
     /**
      * @param theWMSStore

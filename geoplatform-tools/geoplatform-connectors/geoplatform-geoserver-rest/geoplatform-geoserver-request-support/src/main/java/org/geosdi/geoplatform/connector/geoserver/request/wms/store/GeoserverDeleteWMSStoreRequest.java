@@ -34,6 +34,8 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.request.wms.store;
 
+import org.geosdi.geoplatform.connector.geoserver.request.store.GeoserverCrudStoreRequest;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -43,7 +45,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverDeleteWMSStoreRequest extends GeoserverCrudWMSStoreRequest<Boolean, GeoserverDeleteWMSStoreRequest> {
+public interface GeoserverDeleteWMSStoreRequest extends GeoserverCrudStoreRequest<Boolean, GeoserverDeleteWMSStoreRequest> {
 
     /**
      * <p>Name of the workspace containing the WMS store.</p>

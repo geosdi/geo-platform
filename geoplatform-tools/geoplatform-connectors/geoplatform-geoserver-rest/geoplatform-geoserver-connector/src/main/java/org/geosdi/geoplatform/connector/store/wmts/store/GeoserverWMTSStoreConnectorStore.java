@@ -32,39 +32,30 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.wms.store;
+package org.geosdi.geoplatform.connector.store.wmts.store;
 
-import org.geosdi.geoplatform.connector.geoserver.request.wms.store.*;
-import org.geosdi.geoplatform.connector.geoserver.wmts.store.IGPGeoserverWMTSStoreConnector;
+import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
+import org.geosdi.geoplatform.connector.geoserver.request.wmts.store.GeoserverLoadWorkspaceWMTSStoresRequest;
+import org.geosdi.geoplatform.connector.store.styles.GeoserverStylesConnectorStore;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverWMSStoreConnector extends IGPGeoserverWMTSStoreConnector {
+public abstract class GeoserverWMTSStoreConnectorStore extends GeoserverStylesConnectorStore implements GPGeoserverWMTSStoreConnectorStore {
 
     /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoresRequest}
+     * @param theServer
      */
-    GeoserverLoadWorkspaceWMSStoresRequest loadWorkspaceWMSStoresRequest();
+    protected GeoserverWMTSStoreConnectorStore(GPGeoserverConnector theServer) {
+        super(theServer);
+    }
 
     /**
-     * @return {@link GeoserverCreateWMSStoreRequest}
+     * @return {@link GeoserverLoadWorkspaceWMTSStoresRequest}
      */
-    GeoserverCreateWMSStoreRequest createWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverUpdateWMSStoreRequest}
-     */
-    GeoserverUpdateWMSStoreRequest updateWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverDeleteWMSStoreRequest}
-     */
-    GeoserverDeleteWMSStoreRequest deleteWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoreRequest}
-     */
-    GeoserverLoadWorkspaceWMSStoreRequest loadWorkspaceWMSStoreRequest();
+    @Override
+    public GeoserverLoadWorkspaceWMTSStoresRequest loadWorkspaceWMTSStoresRequest() {
+        return this.server.loadWorkspaceWMTSStoresRequest();
+    }
 }

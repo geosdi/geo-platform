@@ -32,26 +32,19 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.store.wms;
+package org.geosdi.geoplatform.connector.store.wmts.store;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
-import net.jcip.annotations.Immutable;
+import org.geosdi.geoplatform.connector.geoserver.request.wmts.store.GeoserverLoadWorkspaceWMTSStoresRequest;
+import org.geosdi.geoplatform.connector.store.styles.GPGeoserverStylesConnectorStore;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@AllArgsConstructor
-@Getter
-@ToString
-@Builder
-@Immutable
-public class GPGeoserverCreateWMSStoreResponse implements GeoserverCreateWMSStoreResponse {
+public interface GPGeoserverWMTSStoreConnectorStore extends GPGeoserverStylesConnectorStore {
 
-    private static final long serialVersionUID = 2016206960498126661L;
-    //
-    private final String storeName;
+    /**
+     * @return {@link GeoserverLoadWorkspaceWMTSStoresRequest}
+     */
+    GeoserverLoadWorkspaceWMTSStoresRequest loadWorkspaceWMTSStoresRequest();
 }

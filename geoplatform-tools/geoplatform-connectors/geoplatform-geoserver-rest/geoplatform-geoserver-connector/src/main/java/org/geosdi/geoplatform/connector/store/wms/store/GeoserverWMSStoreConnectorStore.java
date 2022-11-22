@@ -36,13 +36,13 @@ package org.geosdi.geoplatform.connector.store.wms.store;
 
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.wms.store.*;
-import org.geosdi.geoplatform.connector.store.styles.GeoserverStylesConnectorStore;
+import org.geosdi.geoplatform.connector.store.wmts.store.GeoserverWMTSStoreConnectorStore;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoserverWMSStoreConnectorStore extends GeoserverStylesConnectorStore implements GPGeoserverWMSStoreConnectorStore {
+public abstract class GeoserverWMSStoreConnectorStore extends GeoserverWMTSStoreConnectorStore implements GPGeoserverWMSStoreConnectorStore {
 
     /**
      * @param theServer

@@ -32,39 +32,34 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.model.store.wmts;
 
-import org.geosdi.geoplatform.connector.geoserver.request.wms.store.*;
-import org.geosdi.geoplatform.connector.geoserver.wmts.store.IGPGeoserverWMTSStoreConnector;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.geosdi.geoplatform.connector.geoserver.model.store.service.GeoserverServiceStore;
+import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverWorkspace;
+
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverWMSStoreConnector extends IGPGeoserverWMTSStoreConnector {
+@Getter
+@Setter
+@ToString(callSuper = true)
+@XmlRootElement(name = "wmtsStore")
+@XmlAccessorType(value = FIELD)
+public class GeoserverWMTSStore extends GeoserverServiceStore<GPGeoserverWorkspace> implements GPGeoserverWMTSStore {
 
-    /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoresRequest}
-     */
-    GeoserverLoadWorkspaceWMSStoresRequest loadWorkspaceWMSStoresRequest();
-
-    /**
-     * @return {@link GeoserverCreateWMSStoreRequest}
-     */
-    GeoserverCreateWMSStoreRequest createWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverUpdateWMSStoreRequest}
-     */
-    GeoserverUpdateWMSStoreRequest updateWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverDeleteWMSStoreRequest}
-     */
-    GeoserverDeleteWMSStoreRequest deleteWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoreRequest}
-     */
-    GeoserverLoadWorkspaceWMSStoreRequest loadWorkspaceWMSStoreRequest();
+    private static final long serialVersionUID = 1601110804976358439L;
+    //
+    private GPGeoserverWorkspace workspace;
+    @XmlElement(name = "wmtsLayers")
+    private String wmtsLayers;
 }

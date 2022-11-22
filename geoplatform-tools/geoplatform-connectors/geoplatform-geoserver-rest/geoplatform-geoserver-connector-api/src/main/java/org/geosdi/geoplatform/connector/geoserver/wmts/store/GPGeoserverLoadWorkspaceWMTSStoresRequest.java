@@ -32,39 +32,48 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.wmts.store;
 
-import org.geosdi.geoplatform.connector.geoserver.request.wms.store.*;
-import org.geosdi.geoplatform.connector.geoserver.wmts.store.IGPGeoserverWMTSStoreConnector;
+import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.model.store.wmts.GPGeoserverWMTSEmptyStores;
+import org.geosdi.geoplatform.connector.geoserver.model.store.wmts.GPGeoserverWMTSStores;
+import org.geosdi.geoplatform.connector.geoserver.request.store.GPGeoserverLoadWorkspaceStoresRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.wmts.store.GeoserverLoadWorkspaceWMTSStoresRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverWMSStoreConnector extends IGPGeoserverWMTSStoreConnector {
+@ThreadSafe
+class GPGeoserverLoadWorkspaceWMTSStoresRequest extends GPGeoserverLoadWorkspaceStoresRequest<GPGeoserverWMTSStores, GPGeoserverWMTSEmptyStores, GeoserverLoadWorkspaceWMTSStoresRequest> implements GeoserverLoadWorkspaceWMTSStoresRequest {
 
     /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoresRequest}
+     * @param server
+     * @param theJacksonSupport
      */
-    GeoserverLoadWorkspaceWMSStoresRequest loadWorkspaceWMSStoresRequest();
+    GPGeoserverLoadWorkspaceWMTSStoresRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(server, theJacksonSupport, "/wmtsstores.json");
+    }
 
     /**
-     * @return {@link GeoserverCreateWMSStoreRequest}
+     * @return {@link Class<GPGeoserverWMTSEmptyStores>}
      */
-    GeoserverCreateWMSStoreRequest createWMSStoreRequest();
+    @Override
+    protected Class<GPGeoserverWMTSEmptyStores> forEmptyResponse() {
+        return GPGeoserverWMTSEmptyStores.class;
+    }
 
     /**
-     * @return {@link GeoserverUpdateWMSStoreRequest}
+     * @return {@link Class<GPGeoserverWMTSStores>}
      */
-    GeoserverUpdateWMSStoreRequest updateWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverDeleteWMSStoreRequest}
-     */
-    GeoserverDeleteWMSStoreRequest deleteWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoreRequest}
-     */
-    GeoserverLoadWorkspaceWMSStoreRequest loadWorkspaceWMSStoreRequest();
+    @Override
+    protected Class<GPGeoserverWMTSStores> forClass() {
+        return GPGeoserverWMTSStores.class;
+    }
 }

@@ -32,48 +32,60 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.request.store;
 
-import net.jcip.annotations.ThreadSafe;
-import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GPGeoserverWMSEmptyStores;
-import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GPGeoserverWMSStores;
-import org.geosdi.geoplatform.connector.geoserver.request.store.GPGeoserverLoadWorkspaceStoresRequest;
-import org.geosdi.geoplatform.connector.geoserver.request.wms.store.GeoserverLoadWorkspaceWMSStoresRequest;
+import org.geosdi.geoplatform.connector.geoserver.model.GPGeoserverEmptyResponse;
+import org.geosdi.geoplatform.connector.geoserver.model.store.GPGeoserverStores;
+import org.geosdi.geoplatform.connector.geoserver.request.GPGeoserverGetConnectorRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@ThreadSafe
-class GPGeoserverLoadWorkspaceWMSStoresRequest extends GPGeoserverLoadWorkspaceStoresRequest<GPGeoserverWMSStores, GPGeoserverWMSEmptyStores, GeoserverLoadWorkspaceWMSStoresRequest> implements GeoserverLoadWorkspaceWMSStoresRequest {
+public abstract class GPGeoserverLoadWorkspaceStoresRequest<Stores extends GPGeoserverStores,E extends GPGeoserverEmptyResponse<Stores>, R extends GeoserverLoadWorkspaceStoresRequest> extends GPGeoserverGetConnectorRequest<Stores, E, R> implements GeoserverLoadWorkspaceStoresRequest<Stores, R> {
+
+    private final String storeRestPath;
+    private final ThreadLocal<String> workspace = withInitial(() -> null);
 
     /**
      * @param server
      * @param theJacksonSupport
+     * @param theStoreRestPath
      */
-    GPGeoserverLoadWorkspaceWMSStoresRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
-        super(server, theJacksonSupport, "/wmsstores.json");
+    protected GPGeoserverLoadWorkspaceStoresRequest(@Nonnull(when = NEVER) GPServerConnector server,
+            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport, @Nonnull(when = NEVER) String theStoreRestPath) {
+        super(server, theJacksonSupport);
+        checkArgument((theStoreRestPath != null) && !(theStoreRestPath.trim().isEmpty()), "The Parameter storeRestPath must not be null or an empty string.");
+        this.storeRestPath = theStoreRestPath;
     }
 
     /**
-     * @return {@link Class<GPGeoserverWMSStores>}
+     * @param theWorkspace
+     * @return {@link R}
      */
     @Override
-    protected Class<GPGeoserverWMSStores> forClass() {
-        return GPGeoserverWMSStores.class;
+    public R withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
+        this.workspace.set(theWorkspace);
+        return self();
     }
 
     /**
-     * @return {@link Class<GPGeoserverWMSEmptyStores>}
+     * @return {@link String}
      */
     @Override
-    protected Class<GPGeoserverWMSEmptyStores> forEmptyResponse() {
-        return GPGeoserverWMSEmptyStores.class;
+    protected String createUriPath() throws Exception {
+        String workspace = this.workspace.get();
+        checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string");
+        String baseURI = this.serverURI.toString();
+        return ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat(this.storeRestPath)
+                : baseURI.concat("/workspaces/").concat(workspace).concat(this.storeRestPath)));
     }
 }

@@ -32,9 +32,10 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.request.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.request.store;
 
-import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GPGeoserverWMSStoreBody;
+import org.geosdi.geoplatform.connector.geoserver.model.store.service.GPGeoserverServiceStoreBody;
+import org.geosdi.geoplatform.connector.geoserver.model.store.service.GeoserverCreateStoreResponse;
 
 import javax.annotation.Nonnull;
 
@@ -44,11 +45,19 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverCreateOrUpdateWMSStoreRequest<T, R extends GeoserverCreateOrUpdateWMSStoreRequest<T, R>> extends GeoserverCrudWMSStoreRequest<T, R> {
+public interface GeoserverCreateStoreRequest<Body extends GPGeoserverServiceStoreBody, R extends GeoserverCreateStoreRequest<Body, R>> extends GeoserverCreateOrUpdateStoreRequest<GeoserverCreateStoreResponse, Body, R> {
 
     /**
      * @param theBody
      * @return {@link R}
      */
-    R withBody(@Nonnull(when = NEVER) GPGeoserverWMSStoreBody theBody);
+    @Override
+    R withBody(@Nonnull(when = NEVER) Body theBody);
+
+    /**
+     * @param theWorkspace
+     * @return {@link }
+     */
+    @Override
+    R withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
 }

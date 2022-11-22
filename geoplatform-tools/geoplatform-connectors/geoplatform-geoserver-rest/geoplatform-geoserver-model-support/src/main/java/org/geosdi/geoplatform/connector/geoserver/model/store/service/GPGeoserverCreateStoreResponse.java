@@ -32,18 +32,26 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.store.wms;
+package org.geosdi.geoplatform.connector.geoserver.model.store.service;
 
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
+import net.jcip.annotations.Immutable;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverCreateWMSStoreResponse extends Serializable {
+@AllArgsConstructor
+@Getter
+@ToString
+@Builder
+@Immutable
+public class GPGeoserverCreateStoreResponse implements GeoserverCreateStoreResponse {
 
-    /**
-     * @return {@link String}
-     */
-    String getStoreName();
+    private static final long serialVersionUID = 2016206960498126661L;
+    //
+    private final String storeName;
 }

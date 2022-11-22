@@ -32,39 +32,28 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.wms.store;
+package org.geosdi.geoplatform.connector.store.wmts.store;
 
-import org.geosdi.geoplatform.connector.geoserver.request.wms.store.*;
-import org.geosdi.geoplatform.connector.geoserver.wmts.store.IGPGeoserverWMTSStoreConnector;
+import org.geosdi.geoplatform.connector.geoserver.model.store.wmts.GPGeoserverWMTSStores;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreTest;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+
+import static org.junit.Assert.assertTrue;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverWMSStoreConnector extends IGPGeoserverWMTSStoreConnector {
+@FixMethodOrder(NAME_ASCENDING)
+public class GPGeoserverWMTSStoreConnectorStoreTest extends GPBaseGeoserverConnectorStoreTest {
 
-    /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoresRequest}
-     */
-    GeoserverLoadWorkspaceWMSStoresRequest loadWorkspaceWMSStoresRequest();
-
-    /**
-     * @return {@link GeoserverCreateWMSStoreRequest}
-     */
-    GeoserverCreateWMSStoreRequest createWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverUpdateWMSStoreRequest}
-     */
-    GeoserverUpdateWMSStoreRequest updateWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverDeleteWMSStoreRequest}
-     */
-    GeoserverDeleteWMSStoreRequest deleteWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoreRequest}
-     */
-    GeoserverLoadWorkspaceWMSStoreRequest loadWorkspaceWMSStoreRequest();
+    @Test
+    public void a_loadGeoserverWMTSStoresRequestTest() throws Exception {
+        GPGeoserverWMTSStores wmtsStores = geoserverConnectorStoreV2_21_x.loadWorkspaceWMTSStoresRequest()
+                .withWorkspace("sf")
+                .getResponse();
+        assertTrue(wmtsStores.isEmpty());
+    }
 }

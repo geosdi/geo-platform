@@ -32,39 +32,31 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.wms.store;
+package org.geosdi.geoplatform.connector.geoserver.model.store.wmts;
 
-import org.geosdi.geoplatform.connector.geoserver.request.wms.store.*;
-import org.geosdi.geoplatform.connector.geoserver.wmts.store.IGPGeoserverWMTSStoreConnector;
+import lombok.ToString;
+import org.geosdi.geoplatform.connector.geoserver.model.GPGeoserverEmptyResponse;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPGeoserverWMSStoreConnector extends IGPGeoserverWMTSStoreConnector {
+@ToString
+@XmlAccessorType(XmlAccessType.FIELD)
+public class GPGeoserverWMTSEmptyStores implements GPGeoserverEmptyResponse<GPGeoserverWMTSStores> {
+
+    private static final long serialVersionUID = 416621771426657204L;
+    //
+    private String wmtsStores;
 
     /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoresRequest}
+     * @return {@link GPGeoserverWMTSStores}
      */
-    GeoserverLoadWorkspaceWMSStoresRequest loadWorkspaceWMSStoresRequest();
-
-    /**
-     * @return {@link GeoserverCreateWMSStoreRequest}
-     */
-    GeoserverCreateWMSStoreRequest createWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverUpdateWMSStoreRequest}
-     */
-    GeoserverUpdateWMSStoreRequest updateWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverDeleteWMSStoreRequest}
-     */
-    GeoserverDeleteWMSStoreRequest deleteWMSStoreRequest();
-
-    /**
-     * @return {@link GeoserverLoadWorkspaceWMSStoreRequest}
-     */
-    GeoserverLoadWorkspaceWMSStoreRequest loadWorkspaceWMSStoreRequest();
+    @Override
+    public GPGeoserverWMTSStores toModel() {
+        return new GeoserverWMTSStores(null);
+    }
 }

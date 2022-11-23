@@ -32,36 +32,39 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.store.service;
+package org.geosdi.geoplatform.connector.geoserver.wmts.store;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.geosdi.geoplatform.connector.geoserver.model.adapter.GPLocalDateTimeAdpater;
-import org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverBaseStore;
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverBaseWorkspace;
-import org.joda.time.LocalDateTime;
+import net.jcip.annotations.ThreadSafe;
+import org.geosdi.geoplatform.connector.geoserver.model.store.wmts.GeoserverWMTSStore;
+import org.geosdi.geoplatform.connector.geoserver.request.wmts.store.GeoserverLoadWorkspaceWMTSStoreRequest;
+import org.geosdi.geoplatform.connector.geoserver.store.GPGeoserverLoadWorkspaceStoreRequest;
+import org.geosdi.geoplatform.connector.server.GPServerConnector;
+import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Getter
-@Setter
-@ToString(callSuper = true)
-@XmlTransient
-public abstract class GeoserverServiceStore<W extends IGPGeoserverBaseWorkspace> extends GeoserverBaseStore<W> implements GPGeoserverServiceStore<W> {
+@ThreadSafe
+class GPGeoserverLoadWorkspaceWMTSStoreRequest extends GPGeoserverLoadWorkspaceStoreRequest<GeoserverWMTSStore, GeoserverLoadWorkspaceWMTSStoreRequest> implements GeoserverLoadWorkspaceWMTSStoreRequest {
 
-    private static final long serialVersionUID = 9190382007935703892L;
-    //
-    @XmlJavaTypeAdapter(value = GPLocalDateTimeAdpater.class)
-    private LocalDateTime dateCreated;
-    @XmlJavaTypeAdapter(value = GPLocalDateTimeAdpater.class)
-    private LocalDateTime dateModified;
+    /**
+     * @param server
+     * @param theJacksonSupport
+     */
+    GPGeoserverLoadWorkspaceWMTSStoreRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+        super(server, theJacksonSupport, "/wmtsstores/");
+    }
 
-    protected GeoserverServiceStore() {
+    /**
+     * @return {@link Class<GeoserverWMTSStore>}
+     */
+    @Override
+    protected Class<GeoserverWMTSStore> forClass() {
+        return GeoserverWMTSStore.class;
     }
 }

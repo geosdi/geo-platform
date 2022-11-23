@@ -34,27 +34,14 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.wms.store;
 
-import com.google.common.io.CharStreams;
-import io.reactivex.rxjava3.functions.Consumer;
 import net.jcip.annotations.ThreadSafe;
-import org.apache.hc.core5.net.URIBuilder;
+import org.geosdi.geoplatform.connector.geoserver.request.store.GPGeoserverDeleteStoreRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.wms.store.GeoserverDeleteWMSStoreRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverBooleanQueryParam;
-import org.geosdi.geoplatform.connector.uri.GeoserverRXQueryParamConsumer;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.io.BufferedReader;
-import java.io.IOException;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static io.reactivex.rxjava3.core.Observable.fromArray;
-import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
-import static java.lang.ThreadLocal.withInitial;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -62,99 +49,13 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @ThreadSafe
-class GPGeoserverDeleteWMSStoreRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteWMSStoreRequest> implements GeoserverDeleteWMSStoreRequest {
-
-    private final ThreadLocal<String> workspace = withInitial(() -> null);
-    private final ThreadLocal<String> store = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverBooleanQueryParam> recurse = withInitial(() -> new GPGeoserverBooleanQueryParam("recurse", TRUE));
+class GPGeoserverDeleteWMSStoreRequest extends GPGeoserverDeleteStoreRequest<GeoserverDeleteWMSStoreRequest> implements GeoserverDeleteWMSStoreRequest {
 
     /**
      * @param theServerConnector
      * @param theJacksonSupport
      */
     GPGeoserverDeleteWMSStoreRequest(@Nonnull(when = NEVER) GPServerConnector theServerConnector, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
-        super(theServerConnector, theJacksonSupport);
-    }
-
-    /**
-     * <p>Name of the workspace containing the WMS store.</p>
-     *
-     * @param theWorkspace
-     * @return {@link GeoserverDeleteWMSStoreRequest}
-     */
-    @Override
-    public GeoserverDeleteWMSStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace) {
-        this.workspace.set(theWorkspace);
-        return self();
-    }
-
-    /**
-     * <p>Name of the WMS store</p>
-     *
-     * @param theStore
-     * @return {@link GeoserverDeleteWMSStoreRequest}
-     */
-    @Override
-    public GeoserverDeleteWMSStoreRequest withStore(@Nonnull(when = NEVER) String theStore) {
-        this.store.set(theStore);
-        return self();
-    }
-
-    /**
-     * <p>
-     * When set to true all resources contained in the store are also removed. Default values is {@link Boolean#TRUE}
-     * </p>
-     *
-     * @param theRecurse
-     * @return {@link GeoserverDeleteWMSStoreRequest}
-     */
-    @Override
-    public GeoserverDeleteWMSStoreRequest withRecurse(@Nullable Boolean theRecurse) {
-        this.recurse.set(new GPGeoserverBooleanQueryParam("recurse", (theRecurse != null) ? theRecurse : TRUE));
-        return self();
-    }
-
-    /**
-     * @return {@link String}
-     */
-    @Override
-    protected String createUriPath() throws Exception {
-        String workspace = this.workspace.get();
-        checkArgument((workspace != null) && !(workspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string");
-        String wmsStore = this.store.get();
-        checkArgument((wmsStore != null) && !(wmsStore.trim().isEmpty()), "The Parameter wmsStore must not be null or an empty string");
-        String baseURI = this.serverURI.toString();
-        URIBuilder uriBuilder = new URIBuilder(((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace)
-                .concat("/wmsstores/").concat(wmsStore) : baseURI.concat("/workspaces/").concat(workspace)
-                .concat("/wmsstores/").concat(wmsStore))));
-        Consumer<ThreadLocal> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
-        fromArray(this.recurse)
-                .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
-                .subscribe(consumer, Throwable::printStackTrace);
-        return uriBuilder.build().toString();
-    }
-
-    /**
-     * @param reader
-     * @return {@link Boolean}
-     * @throws Exception
-     */
-    @Override
-    protected Boolean readInternal(BufferedReader reader) throws Exception {
-        try {
-            String value = CharStreams.toString(reader);
-            return ((value != null) && (value.trim().isEmpty()) ? TRUE : FALSE);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return FALSE;
-        }
-    }
-
-    /**
-     * @return {@link Class<Boolean>}
-     */
-    @Override
-    protected Class<Boolean> forClass() {
-        return Boolean.class;
+        super(theServerConnector, theJacksonSupport, "/wmsstores/");
     }
 }

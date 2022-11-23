@@ -36,8 +36,8 @@ package org.geosdi.geoplatform.connector.geoserver.model.store.service;
 
 import org.geosdi.geoplatform.connector.geoserver.model.store.GPGeoserverBaseStore;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverBaseWorkspace;
+import org.joda.time.LocalDateTime;
 
-import java.time.LocalDateTime;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

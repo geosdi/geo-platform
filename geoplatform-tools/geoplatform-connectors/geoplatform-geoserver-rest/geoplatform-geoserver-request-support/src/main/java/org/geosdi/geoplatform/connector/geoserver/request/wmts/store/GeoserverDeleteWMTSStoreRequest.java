@@ -32,36 +32,44 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.store.service;
+package org.geosdi.geoplatform.connector.geoserver.request.wmts.store;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.geosdi.geoplatform.connector.geoserver.model.adapter.GPLocalDateTimeAdpater;
-import org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverBaseStore;
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverBaseWorkspace;
-import org.joda.time.LocalDateTime;
+import org.geosdi.geoplatform.connector.geoserver.request.store.GeoserverDeleteStoreRequest;
 
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Getter
-@Setter
-@ToString(callSuper = true)
-@XmlTransient
-public abstract class GeoserverServiceStore<W extends IGPGeoserverBaseWorkspace> extends GeoserverBaseStore<W> implements GPGeoserverServiceStore<W> {
+public interface GeoserverDeleteWMTSStoreRequest extends GeoserverDeleteStoreRequest<GeoserverDeleteWMTSStoreRequest> {
 
-    private static final long serialVersionUID = 9190382007935703892L;
-    //
-    @XmlJavaTypeAdapter(value = GPLocalDateTimeAdpater.class)
-    private LocalDateTime dateCreated;
-    @XmlJavaTypeAdapter(value = GPLocalDateTimeAdpater.class)
-    private LocalDateTime dateModified;
+    /**
+     * <p>Name of the workspace containing the WMTS store.</p>
+     *
+     * @param theWorkspace
+     * @return {@link GeoserverDeleteWMTSStoreRequest}
+     */
+    GeoserverDeleteWMTSStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
 
-    protected GeoserverServiceStore() {
-    }
+    /**
+     * <p>Name of the WMS store</p>
+     *
+     * @param theStore
+     * @return {@link GeoserverDeleteWMTSStoreRequest}
+     */
+    GeoserverDeleteWMTSStoreRequest withStore(@Nonnull(when = NEVER) String theStore);
+
+    /**
+     * <p>
+     *     When set to true all resources contained in the store are also removed. Default values is {@link Boolean#TRUE}
+     * </p>
+     *
+     * @param theRecurse
+     * @return {@link GeoserverDeleteWMTSStoreRequest}
+     */
+    GeoserverDeleteWMTSStoreRequest withRecurse(@Nullable Boolean theRecurse);
 }

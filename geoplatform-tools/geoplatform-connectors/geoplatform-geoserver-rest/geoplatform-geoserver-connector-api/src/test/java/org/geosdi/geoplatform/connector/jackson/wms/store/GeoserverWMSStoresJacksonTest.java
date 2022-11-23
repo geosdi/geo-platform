@@ -39,6 +39,9 @@ import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GPGeoserverWMS
 import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GPGeoserverWMSStores;
 import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GeoserverWMSStore;
 import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GeoserverWMSStoreBody;
+import org.joda.time.LocalDateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -47,14 +50,11 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 import java.io.StringReader;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.TRUE;
-import static java.time.LocalDateTime.parse;
-import static java.time.format.DateTimeFormatter.ofPattern;
 import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverStyleSLDV100Request.JACKSON_JAXB_XML_SUPPORT;
 import static org.geosdi.geoplatform.connector.jackson.GPGeoserverJacksonTest.emptyJacksonSupport;
@@ -168,8 +168,8 @@ public class GeoserverWMSStoresJacksonTest {
 
     @Test
     public void g_dateFormatterTest() throws Exception {
-        DateTimeFormatter dateFormat = ofPattern("yyyy-MM-dd HH:mm:ss.SSS z");
-        logger.info("{}\n", parse("2022-11-16 06:48:29.586 UTC", dateFormat));
+       DateTimeFormatter dateFormat = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS z");
+       logger.info("{}\n", LocalDateTime.parse("2022-11-23 06:45:05.6 UTC", dateFormat));
     }
 
     /**

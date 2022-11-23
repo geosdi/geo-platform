@@ -32,36 +32,27 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.store.service;
+package org.geosdi.geoplatform.connector.geoserver.request.wmts.store;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.geosdi.geoplatform.connector.geoserver.model.adapter.GPLocalDateTimeAdpater;
-import org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverBaseStore;
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverBaseWorkspace;
-import org.joda.time.LocalDateTime;
+import org.geosdi.geoplatform.connector.geoserver.model.store.wmts.GeoserverWMTSStore;
+import org.geosdi.geoplatform.connector.geoserver.request.store.GeoserverLoadWorkspaceStoreRequest;
 
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Getter
-@Setter
-@ToString(callSuper = true)
-@XmlTransient
-public abstract class GeoserverServiceStore<W extends IGPGeoserverBaseWorkspace> extends GeoserverBaseStore<W> implements GPGeoserverServiceStore<W> {
+public interface GeoserverLoadWorkspaceWMTSStoreRequest extends GeoserverLoadWorkspaceStoreRequest<GeoserverWMTSStore, GeoserverLoadWorkspaceWMTSStoreRequest> {
 
-    private static final long serialVersionUID = 9190382007935703892L;
-    //
-    @XmlJavaTypeAdapter(value = GPLocalDateTimeAdpater.class)
-    private LocalDateTime dateCreated;
-    @XmlJavaTypeAdapter(value = GPLocalDateTimeAdpater.class)
-    private LocalDateTime dateModified;
-
-    protected GeoserverServiceStore() {
-    }
+    /**
+     * <p>The name of the workspace containing the WMTS store.</p>
+     *
+     * @param theWorkspace
+     * @return {@link GeoserverLoadWorkspaceWMTSStoreRequest}
+     */
+    @Override
+    GeoserverLoadWorkspaceWMTSStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
 }

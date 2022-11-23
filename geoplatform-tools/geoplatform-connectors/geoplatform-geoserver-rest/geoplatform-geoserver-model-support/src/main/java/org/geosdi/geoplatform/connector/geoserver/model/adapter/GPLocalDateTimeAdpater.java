@@ -34,12 +34,14 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.adapter;
 
+import org.joda.time.LocalDateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import javax.xml.bind.ValidationEventHandler;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
-import static java.time.LocalDateTime.parse;
+import static org.joda.time.LocalDateTime.parse;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -47,7 +49,7 @@ import static java.time.LocalDateTime.parse;
  */
 public class GPLocalDateTimeAdpater extends XmlAdapter<String, LocalDateTime> {
 
-    private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS z");
+    private final DateTimeFormatter dateFormat = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSS z");
 
     /**
      * Convert a value type to a bound type.
@@ -70,6 +72,6 @@ public class GPLocalDateTimeAdpater extends XmlAdapter<String, LocalDateTime> {
      */
     @Override
     public String marshal(LocalDateTime theLocalDateTime) throws Exception {
-        return ((theLocalDateTime != null) ? this.dateFormat.format(theLocalDateTime) : null);
+        return ((theLocalDateTime != null) ? this.dateFormat.print(theLocalDateTime) : null);
     }
 }

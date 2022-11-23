@@ -32,36 +32,47 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.geoserver.model.store.service;
+package org.geosdi.geoplatform.connector.geoserver.request.store;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.geosdi.geoplatform.connector.geoserver.model.adapter.GPLocalDateTimeAdpater;
-import org.geosdi.geoplatform.connector.geoserver.model.store.GeoserverBaseStore;
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverBaseWorkspace;
-import org.joda.time.LocalDateTime;
+import org.geosdi.geoplatform.connector.geoserver.model.store.service.GPGeoserverServiceStore;
+import org.geosdi.geoplatform.connector.geoserver.request.exsist.GeoserverExsistRequest;
+import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
 
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Getter
-@Setter
-@ToString(callSuper = true)
-@XmlTransient
-public abstract class GeoserverServiceStore<W extends IGPGeoserverBaseWorkspace> extends GeoserverBaseStore<W> implements GPGeoserverServiceStore<W> {
+public interface GeoserverLoadWorkspaceStoreRequest<T extends GPGeoserverServiceStore, R extends GeoserverLoadWorkspaceStoreRequest<T, R>> extends GPJsonConnectorRequest<T, R>, GeoserverExsistRequest {
 
-    private static final long serialVersionUID = 9190382007935703892L;
-    //
-    @XmlJavaTypeAdapter(value = GPLocalDateTimeAdpater.class)
-    private LocalDateTime dateCreated;
-    @XmlJavaTypeAdapter(value = GPLocalDateTimeAdpater.class)
-    private LocalDateTime dateModified;
+    /**
+     * <p>The name of the workspace containing the store.</p>
+     *
+     * @param theWorkspace
+     * @return {@link R}
+     */
+    R withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
 
-    protected GeoserverServiceStore() {
-    }
+    /**
+     * <p>The name of the store to be retrieved.</p>
+     *
+     * @param theStore
+     * @return {@link R}
+     */
+    R withStore(@Nonnull(when = NEVER) String theStore);
+
+    /**
+     * <p>
+     * When set to true, avoids to log an Exception when the WMS store is not present.
+     * Note that 404 status code will be returned anyway.
+     * </p>
+     *
+     * @param theQuietOnNotFound
+     * @return {@link R}
+     */
+    R withQuietOnNotFound(@Nullable Boolean theQuietOnNotFound);
 }

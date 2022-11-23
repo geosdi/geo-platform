@@ -35,11 +35,9 @@
 package org.geosdi.geoplatform.connector.geoserver.request.wms.store;
 
 import org.geosdi.geoplatform.connector.geoserver.model.store.wms.GeoserverWMSStore;
-import org.geosdi.geoplatform.connector.geoserver.request.exsist.GeoserverExsistRequest;
-import org.geosdi.geoplatform.connector.server.request.json.GPJsonConnectorRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.store.GeoserverLoadWorkspaceStoreRequest;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import static javax.annotation.meta.When.NEVER;
 
@@ -47,7 +45,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverLoadWorkspaceWMSStoreRequest extends GPJsonConnectorRequest<GeoserverWMSStore, GeoserverLoadWorkspaceWMSStoreRequest>, GeoserverExsistRequest {
+public interface GeoserverLoadWorkspaceWMSStoreRequest extends GeoserverLoadWorkspaceStoreRequest<GeoserverWMSStore, GeoserverLoadWorkspaceWMSStoreRequest> {
 
     /**
      * <p>The name of the workspace containing the WMS store.</p>
@@ -55,24 +53,6 @@ public interface GeoserverLoadWorkspaceWMSStoreRequest extends GPJsonConnectorRe
      * @param theWorkspace
      * @return {@link GeoserverLoadWorkspaceWMSStoreRequest}
      */
+    @Override
     GeoserverLoadWorkspaceWMSStoreRequest withWorkspace(@Nonnull(when = NEVER) String theWorkspace);
-
-    /**
-     * <p>The name of the store to be retrieved.</p>
-     *
-     * @param theStore
-     * @return {@link GeoserverLoadWorkspaceWMSStoreRequest}
-     */
-    GeoserverLoadWorkspaceWMSStoreRequest withStore(@Nonnull(when = NEVER) String theStore);
-
-    /**
-     * <p>
-     * When set to true, avoids to log an Exception when the WMS store is not present.
-     * Note that 404 status code will be returned anyway.
-     * </p>
-     *
-     * @param theQuietOnNotFound
-     * @return {@link GeoserverLoadWorkspaceWMSStoreRequest}
-     */
-    GeoserverLoadWorkspaceWMSStoreRequest withQuietOnNotFound(@Nullable Boolean theQuietOnNotFound);
 }

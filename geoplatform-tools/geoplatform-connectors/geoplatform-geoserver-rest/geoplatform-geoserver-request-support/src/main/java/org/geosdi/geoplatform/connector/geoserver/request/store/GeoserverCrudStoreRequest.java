@@ -44,7 +44,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GeoserverCrudStoreRequest<T, R extends GeoserverCrudStoreRequest<T, R>> extends GPJsonConnectorRequest<T, R> {
+public interface GeoserverCrudStoreRequest<T, R extends GeoserverCrudStoreRequest> extends GPJsonConnectorRequest<T, R> {
 
     /**
      * @param theWorkspace

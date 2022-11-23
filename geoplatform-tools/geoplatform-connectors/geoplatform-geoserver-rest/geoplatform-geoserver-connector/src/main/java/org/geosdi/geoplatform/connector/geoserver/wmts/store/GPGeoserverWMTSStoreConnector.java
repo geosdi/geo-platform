@@ -36,7 +36,7 @@ package org.geosdi.geoplatform.connector.geoserver.wmts.store;
 
 import org.geosdi.geoplatform.connector.GeoserverVersion;
 import org.geosdi.geoplatform.connector.GeoserverVersionException;
-import org.geosdi.geoplatform.connector.geoserver.request.wmts.store.GeoserverLoadWorkspaceWMTSStoresRequest;
+import org.geosdi.geoplatform.connector.geoserver.request.wmts.store.*;
 import org.geosdi.geoplatform.connector.geoserver.styles.GPGeoserverStylesConnector;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
@@ -116,6 +116,62 @@ public abstract class GPGeoserverWMTSStoreConnector extends GPGeoserverStylesCon
             case V220x:
             case V221x:
                 return new GPGeoserverLoadWorkspaceWMTSStoresRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverCreateWMTSStoreRequest}
+     */
+    @Override
+    public GeoserverCreateWMTSStoreRequest createWMTSStoreRequest() {
+        switch (version) {
+            case V220x:
+            case V221x:
+                return new GPGeoserverCreateWMTSStoreRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverUpdateWMTSStoreRequest}
+     */
+    @Override
+    public GeoserverUpdateWMTSStoreRequest updateWMTSStoreRequest() {
+        switch (version) {
+            case V220x:
+            case V221x:
+                return new GPGeoserverUpdateWMTSStoreRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverDeleteWMTSStoreRequest}
+     */
+    @Override
+    public GeoserverDeleteWMTSStoreRequest deleteWMTSStoreRequest() {
+        switch (version) {
+            case V220x:
+            case V221x:
+                return new GPGeoserverDeleteWMTSStoreRequest(this, this.jacksonSupport);
+            default:
+                throw new GeoserverVersionException(toVersionExceptionMessage());
+        }
+    }
+
+    /**
+     * @return {@link GeoserverLoadWorkspaceWMTSStoreRequest}
+     */
+    @Override
+    public GeoserverLoadWorkspaceWMTSStoreRequest loadWorkspaceWMTSStoreRequest() {
+        switch (version) {
+            case V220x:
+            case V221x:
+                return new GPGeoserverLoadWorkspaceWMTSStoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
         }

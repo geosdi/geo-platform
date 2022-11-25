@@ -109,8 +109,8 @@ public abstract class GPGeoserverWMSStoreConnector extends GPGeoserverWMTSStoreC
     @Override
     public GeoserverLoadWorkspaceWMSStoresRequest loadWorkspaceWMSStoresRequest() {
         switch (version) {
-            case V220x:
             case V221x:
+            case V222x:
                 return new GPGeoserverLoadWorkspaceWMSStoresRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -123,8 +123,8 @@ public abstract class GPGeoserverWMSStoreConnector extends GPGeoserverWMTSStoreC
     @Override
     public GeoserverCreateWMSStoreRequest createWMSStoreRequest() {
         switch (version) {
-            case V220x:
             case V221x:
+            case V222x:
                 return new GPGeoserverCreateWMSStoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -137,8 +137,8 @@ public abstract class GPGeoserverWMSStoreConnector extends GPGeoserverWMTSStoreC
     @Override
     public GeoserverUpdateWMSStoreRequest updateWMSStoreRequest() {
         switch (version) {
-            case V220x:
             case V221x:
+            case V222x:
                 return new GPGeoserverUpdateWMSStoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -151,8 +151,8 @@ public abstract class GPGeoserverWMSStoreConnector extends GPGeoserverWMTSStoreC
     @Override
     public GeoserverDeleteWMSStoreRequest deleteWMSStoreRequest() {
         switch (version) {
-            case V220x:
             case V221x:
+            case V222x:
                 return new GPGeoserverDeleteWMSStoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -165,8 +165,8 @@ public abstract class GPGeoserverWMSStoreConnector extends GPGeoserverWMTSStoreC
     @Override
     public GeoserverLoadWorkspaceWMSStoreRequest loadWorkspaceWMSStoreRequest() {
         switch (version) {
-            case V220x:
             case V221x:
+            case V222x:
                 return new GPGeoserverLoadWorkspaceWMSStoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

@@ -115,8 +115,8 @@ public abstract class GPGeoserverClassifyConnector extends GPGeoserverRasterizeC
     @Override
     public GeoserverClassifyRequest classifyData() {
         switch (version) {
-            case V220x:
             case V221x:
+            case V222x:
                 return new GPGeoserverClassifyRequest(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

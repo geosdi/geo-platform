@@ -117,8 +117,8 @@ public abstract class GPGeoserverImporterConnector extends GPGeoserverClassifyCo
     @Override
     public GeoserverCreateImportRequest createImportRequest() {
         switch (version) {
-            case V220x:
             case V221x:
+            case V222x:
                 return new GPGeoserverCreateImportRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -131,8 +131,8 @@ public abstract class GPGeoserverImporterConnector extends GPGeoserverClassifyCo
     @Override
     public GeoserverLoadImportRequest loadImportRequest() {
         switch (version) {
-            case V220x:
             case V221x:
+            case V222x:
                 return new GPGeoserverLoadImportRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -145,8 +145,8 @@ public abstract class GPGeoserverImporterConnector extends GPGeoserverClassifyCo
     @Override
     public GeoserverLoadTaskRequest loadTaskRequest() {
         switch (version) {
-            case V220x:
             case V221x:
+            case V222x:
                 return of(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -159,8 +159,8 @@ public abstract class GPGeoserverImporterConnector extends GPGeoserverClassifyCo
     @Override
     public GeoserverCreateImportWithIdRequest createImportWithIdRequest() {
         switch (version) {
-            case V220x:
             case V221x:
+            case V222x:
                 return new GPGeoserverCreateImportWithIdRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

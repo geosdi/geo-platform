@@ -111,8 +111,8 @@ public abstract class GPGeoserverAclLayersConnector extends GPGeoserverCatalogCo
     @Override
     public GPGeoserverLoadAclLayersRequest loadAclLayers() {
         switch (version) {
-            case V220x:
             case V221x:
+            case V222x:
                 return new GPGeoserverLoadAclLayersRequest(this, emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -125,8 +125,8 @@ public abstract class GPGeoserverAclLayersConnector extends GPGeoserverCatalogCo
     @Override
     public GPGeoserverCreateAclLayersRequest createAclLayers() {
         switch (version) {
-            case V220x:
             case V221x:
+            case V222x:
                 return new GPGeoserverCreateAclLayersRequest(this, emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -139,8 +139,8 @@ public abstract class GPGeoserverAclLayersConnector extends GPGeoserverCatalogCo
     @Override
     public GPGeoserverUpdateAclLayersRequest updateAclLayers() {
         switch (version) {
-            case V220x:
             case V221x:
+            case V222x:
                 return new GPGeoserverUpdateAclLayersRequest(this, emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -153,8 +153,8 @@ public abstract class GPGeoserverAclLayersConnector extends GPGeoserverCatalogCo
     @Override
     public GPGeoserverDeleteAclLayersByRuleRequest deleteAclLayersByRule() {
         switch (version) {
-            case V220x:
             case V221x:
+            case V222x:
                 return new GPGeoserverDeleteAclLayersByRuleRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

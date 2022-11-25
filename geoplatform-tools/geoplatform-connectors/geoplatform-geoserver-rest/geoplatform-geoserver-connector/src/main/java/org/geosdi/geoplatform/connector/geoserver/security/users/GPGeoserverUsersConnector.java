@@ -112,8 +112,8 @@ public abstract class GPGeoserverUsersConnector extends GPGeoserverServicesConne
     @Override
     public GeoserverLoadUsersRequest loadUsersRequest() {
         switch (version) {
-            case V220x:
             case V221x:
+            case V222x:
                 return new GPGeoserverLoadUsersRequest(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -126,8 +126,8 @@ public abstract class GPGeoserverUsersConnector extends GPGeoserverServicesConne
     @Override
     public GeoserverCreateUserRequest createUserRequest() {
         switch (version) {
-            case V220x:
             case V221x:
+            case V222x:
                 return new GPGeoserverCreateUserRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -140,8 +140,8 @@ public abstract class GPGeoserverUsersConnector extends GPGeoserverServicesConne
     @Override
     public GeoserverDeleteUserRequest deleteUserRequest() {
         switch (version) {
-            case V220x:
             case V221x:
+            case V222x:
                 return new GPGeoserverDeleteUserRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -154,8 +154,8 @@ public abstract class GPGeoserverUsersConnector extends GPGeoserverServicesConne
     @Override
     public GeoserverLoadUserRequest loadUserRequest() {
         switch (version) {
-            case V220x:
             case V221x:
+            case V222x:
                 return new GPGeoserverLoadUserRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

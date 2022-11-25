@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 
-import static org.geosdi.geoplatform.connector.GeoserverVersion.V221x;
+import static org.geosdi.geoplatform.connector.GeoserverVersion.V222x;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStoreBuilder.geoserverConnectorBuilder;
 
@@ -55,24 +55,24 @@ public abstract class GPBaseGeoserverConnectorStoreTest {
 
     protected static final Logger logger = LoggerFactory.getLogger(GPBaseGeoserverConnectorStoreTest.class);
     //
-    private static final String geoserverURLV2_21_x = "http://150.145.141.92/geoserver/rest";
-    protected static GPGeoserverConnectorStore geoserverConnectorStoreV2_21_x;
+    private static final String geoserverURLV2_22_x = "http://150.145.141.92/geoserver/rest";
+    protected static GPGeoserverConnectorStore geoserverConnectorStoreV2_22_x;
 
     /**
      * @throws Exception
      */
     @BeforeClass
     public static void beforeClass() throws Exception {
-        geoserverConnectorStoreV2_21_x = geoserverConnectorBuilder()
-                .withServerUrl(new URL(geoserverURLV2_21_x))
-                .withVersion(V221x.getVersion())
+        geoserverConnectorStoreV2_22_x = geoserverConnectorBuilder()
+                .withServerUrl(new URL(geoserverURLV2_22_x))
+                .withVersion(V222x.getVersion())
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(150)
                         .withDefaultMaxPerRoute(80)
                         .withMaxRedirect(20)
                         .build())
                 .withClientSecurity(new DigestPreemptiveSecurityConnector("admin", "geoserver"))
-                .withVersion(V221x.getVersion())
+                .withVersion(V222x.getVersion())
                 .build();
     }
 
@@ -81,6 +81,6 @@ public abstract class GPBaseGeoserverConnectorStoreTest {
      */
     @AfterClass
     public static void afterClass() throws Exception {
-        geoserverConnectorStoreV2_21_x.dispose();
+        geoserverConnectorStoreV2_22_x.dispose();
     }
 }

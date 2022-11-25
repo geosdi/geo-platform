@@ -37,10 +37,10 @@ package org.geosdi.geoplatform.persistence.configuration.jpa;
 
 import org.geosdi.geoplatform.persistence.configuration.basic.strategy.PropertiesStrategyManager;
 import org.geosdi.geoplatform.persistence.configuration.properties.GPPersistenceConnector;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
@@ -52,7 +52,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -67,13 +66,9 @@ import static javax.annotation.meta.When.NEVER;
 @EnableTransactionManagement
 class GPPersistenceJpaConfig {
 
-    @Autowired
     private final GPPersistenceConnector gpPersistenceConnector;
-    @Resource(name = "persitenceDataSource")
     private final DataSource persitenceDataSource;
-    @Autowired
     private final JpaVendorAdapter jpaVendorAdapter;
-    @Autowired
     private final PropertiesStrategyManager hibPropStrategyManager;
 
     /**
@@ -117,6 +112,7 @@ class GPPersistenceJpaConfig {
      * @throws Exception
      */
     @Bean
+    @Primary
     public PlatformTransactionManager gpTransactionManager() throws Exception {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(this.gpEntityManagerFactory().getObject());

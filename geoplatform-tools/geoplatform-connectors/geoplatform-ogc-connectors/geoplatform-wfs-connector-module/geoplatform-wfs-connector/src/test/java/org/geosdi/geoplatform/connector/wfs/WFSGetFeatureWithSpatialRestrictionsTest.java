@@ -63,7 +63,7 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
-        request.setPropertyNames(Arrays.asList(new String[]{"WORKERS", "MANUAL", "SUB_REGION"}));
+        request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
         request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
         request.setSRS("EPSG:4326");
         logger.info("######################\n{}\n", request.showRequestAsString());
@@ -77,7 +77,7 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
-        request.setPropertyNames(Arrays.asList(new String[]{"WORKERS", "MANUAL", "SUB_REGION"}));
+        request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
         request.setQueryDTO(GPJAXBContextBuilder.newInstance()
                 .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                         "<QueryDTO>\n" +
@@ -122,7 +122,7 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
-        request.setPropertyNames(Arrays.asList(new String[]{"WORKERS", "MANUAL", "SUB_REGION"}));
+        request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
         request.setQueryDTO(GPJAXBContextBuilder.newInstance()
                 .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                         "<QueryDTO>\n" +
@@ -167,7 +167,7 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
-        request.setPropertyNames(Arrays.asList(new String[]{"WORKERS", "MANUAL", "SUB_REGION"}));
+        request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
         request.setQueryDTO(GPJAXBContextBuilder.newInstance()
                 .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                         "<QueryDTO>\n" +
@@ -198,7 +198,7 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
-        request.setPropertyNames(Arrays.asList(new String[]{"WORKERS", "MANUAL", "SUB_REGION"}));
+        request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
         request.setQueryDTO(GPJAXBContextBuilder.newInstance()
                 .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                         "<QueryDTO>\n" +

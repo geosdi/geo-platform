@@ -77,9 +77,15 @@ public abstract class AbstractGetFeatureRequest<T, Request> extends WFSRequest<T
     @Getter
     @Setter
     protected QueryDTO queryDTO;
+    @Getter
+    @Setter
+    protected String cqlFilter;
     @Setter
     private String geometryName;
 
+    /**
+     * @param server
+     */
     public AbstractGetFeatureRequest(GPServerConnector server) {
         super(server);
     }
@@ -144,18 +150,26 @@ public abstract class AbstractGetFeatureRequest<T, Request> extends WFSRequest<T
         return ((this.queryDTO != null) && (this.queryDTO.isSetQueryRestrictionList()));
     }
 
+    /**
+     * @return {@link Boolean}
+     */
+    @Override
+    public Boolean isSetCqlFilter() {
+        return ((this.cqlFilter != null) && !(this.cqlFilter.trim().isEmpty()));
+    }
+
     @Override
     public String toString() {
-        return this.getClass()
-                .getSimpleName() + " {" +
-                "  typeName = " + typeName +
-                ", featureIDs = " + featureIDs +
-                ", bBox = " + bBox +
-                ", srs = '" + srs + '\'' +
-                ", resultType = '" + resultType + '\'' +
-                ", outputFormat = '" + outputFormat + '\'' +
-                ", maxFeatures = " + maxFeatures +
-                ", queryDTO = " + queryDTO +
-                '}';
+        return this.getClass().getSimpleName()
+                + " {"
+                + "  typeName = " + typeName
+                + ", featureIDs = " + featureIDs
+                + ", bBox = " + bBox
+                + ", srs = " + srs
+                + ", resultType = " + resultType
+                + ", outputFormat = " + outputFormat
+                + ", maxFeatures = " + maxFeatures
+                + ", cqlFilter = " + cqlFilter
+                + ", queryDTO = " + queryDTO + '}';
     }
 }

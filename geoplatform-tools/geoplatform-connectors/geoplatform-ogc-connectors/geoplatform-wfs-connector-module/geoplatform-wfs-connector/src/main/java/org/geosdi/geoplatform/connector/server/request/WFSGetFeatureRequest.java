@@ -211,4 +211,19 @@ public interface WFSGetFeatureRequest<T> extends IGPostConnectorRequest<T> {
      * @return {@link Boolean}
      */
     Boolean isSetQueryDTO();
+
+    /**
+     * @param theCqlFilter
+     */
+    void setCqlFilter(String theCqlFilter);
+
+    /**
+     * @return {@link String}
+     */
+    String getCqlFilter();
+
+    /**
+     * @return {@link Boolean}
+     */
+    Boolean isSetCqlFilter();
 }

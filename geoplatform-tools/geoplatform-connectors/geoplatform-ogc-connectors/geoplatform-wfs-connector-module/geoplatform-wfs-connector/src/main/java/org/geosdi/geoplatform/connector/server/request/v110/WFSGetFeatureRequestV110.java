@@ -87,8 +87,16 @@ public class WFSGetFeatureRequestV110 extends AbstractGetFeatureRequest<FeatureC
         QueryType query = new QueryType();
         query.setTypeName(asList(typeName));
         request.getQuery().add(query);
-        if (super.isSetFeatureIDs()) {
+        if (super.isSetCqlFilter()) {
             FilterType filter = new FilterType();
+            query.setFilter(filter);
+        }
+        if (super.isSetFeatureIDs()) {
+            FilterType filter = query.getFilter();
+            if (filter == null) {
+                filter = new FilterType();
+                query.setFilter(filter);
+            }
             filter.setId(featureIDs
                     .stream()
                     .filter(featureID -> (featureID != null) && !(featureID.trim().isEmpty()))
@@ -160,5 +168,15 @@ public class WFSGetFeatureRequestV110 extends AbstractGetFeatureRequest<FeatureC
         upper.setValue(asList(bbox.getMaxX(), bbox.getMaxY()));
         envelope.setUpperCorner(upper);
         return envelope;
+    }
+
+    /**
+     * @param theCqlFilter
+     * @return {@link FilterType}
+     * @throws Exception
+     */
+    private FilterType createFilterTypeByCqlFilter(@Nonnull(when = NEVER) String theCqlFilter) throws Exception {
+//        Preconditions.checkArgument();
+        return null;
     }
 }

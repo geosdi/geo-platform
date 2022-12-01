@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.response;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -72,7 +71,7 @@ public class RasterLayerDTO extends ShortLayerDTO {
     private GPLayerAttribution layerAttribution;
     @XmlElementWrapper(name = "styleList")
     @XmlElement(name = "style")
-    @JsonProperty(value = "styleList")
+    //@JsonProperty(value = "styleList")
     private List<String> styleList;
     @XmlElementWrapper(name = "subLayerList")
     @XmlElement(name = "layer")

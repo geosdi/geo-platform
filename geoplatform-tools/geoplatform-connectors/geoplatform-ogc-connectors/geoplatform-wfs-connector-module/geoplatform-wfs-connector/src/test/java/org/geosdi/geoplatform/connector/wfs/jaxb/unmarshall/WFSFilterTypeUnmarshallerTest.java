@@ -112,4 +112,26 @@ public class WFSFilterTypeUnmarshallerTest {
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@FILTER_TYPE_AS_XML_STRING : \n{}\n", writer);
         logger.info("#########################FILTER_TYPE : {}\n", filterType);
     }
+
+    @Test
+    public void d_wfsFilterTypev100PoolTest() throws Exception {
+        FilterType filterType = filterTypeCqlBuilder()
+                .withCqlFilter("(COMUNE like 'AVIGLIANO'  OR  PRO_COM = 77014 OR COMUNE like 'T%') AND (COMUNE like '%O' OR PRO_COM = 4)")
+                .build();
+        Writer writer = new StringWriter();
+        wfsJAXBContextPool.marshal(filterType, writer);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@FILTER_TYPE_AS_XML_STRING : \n{}\n", writer);
+        logger.info("#########################FILTER_TYPE : {}\n", filterType);
+    }
+
+    @Test
+    public void e_wfsFilterTypev100PoolTest() throws Exception {
+        FilterType filterType = filterTypeCqlBuilder()
+                .withCqlFilter("COMUNE like 'AVIGLIANO'")
+                .build();
+        Writer writer = new StringWriter();
+        wfsJAXBContextPool.marshal(filterType, writer);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@FILTER_TYPE_AS_XML_STRING : \n{}\n", writer);
+        logger.info("#########################FILTER_TYPE : {}\n", filterType);
+    }
 }

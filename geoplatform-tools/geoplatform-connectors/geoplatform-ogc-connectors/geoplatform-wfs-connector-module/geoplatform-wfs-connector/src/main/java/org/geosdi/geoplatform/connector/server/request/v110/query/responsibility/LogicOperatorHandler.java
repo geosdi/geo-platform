@@ -57,7 +57,7 @@ import static java.util.stream.Collectors.toList;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class LogicOperatorHandler implements ILogicOperatorHandler {
+abstract class LogicOperatorHandler implements ILogicOperatorHandler {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
@@ -72,6 +72,8 @@ public abstract class LogicOperatorHandler implements ILogicOperatorHandler {
     protected void forwardBuildLogicFilterOperator(QueryDTO queryDTO, FilterType filter) throws IllegalStateException {
         if (this.successor != null) {
             this.successor.buildLogicFilterOperator(queryDTO, filter);
+        } else {
+            logger.trace("#################There are no rings to process matchOperator : " + queryDTO.getMatchOperator());
         }
     }
 

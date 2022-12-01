@@ -56,6 +56,7 @@ import static io.reactivex.rxjava3.core.Observable.fromIterable;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.connector.server.request.v110.cql.GPFilterTypeCqlBuilder.filterTypeCqlBuilder;
 import static org.geosdi.geoplatform.connector.server.request.v110.query.responsibility.ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder;
 import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.RESULTS;
 import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.fromValue;
@@ -88,8 +89,7 @@ public class WFSGetFeatureRequestV110 extends AbstractGetFeatureRequest<FeatureC
         query.setTypeName(asList(typeName));
         request.getQuery().add(query);
         if (super.isSetCqlFilter()) {
-            FilterType filter = new FilterType();
-            query.setFilter(filter);
+            query.setFilter(filterTypeCqlBuilder().withCqlFilter(this.cqlFilter).build());
         }
         if (super.isSetFeatureIDs()) {
             FilterType filter = query.getFilter();

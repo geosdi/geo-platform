@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110.query.responsibility;
 
+import com.google.common.collect.Lists;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryRestrictionDTO;
 import org.geosdi.geoplatform.gui.shared.wfs.OperatorType;
@@ -55,9 +56,9 @@ import static org.geosdi.geoplatform.gui.shared.wfs.LogicOperatorType.ALL;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class AndOperatorHandler extends LogicOperatorHandler {
+class AndOperatorHandler extends LogicOperatorHandler {
 
-    protected AndOperatorHandler() {
+    AndOperatorHandler() {
         super.setSuccessor(new NotOperatorHandler());
     }
 
@@ -86,16 +87,35 @@ public class AndOperatorHandler extends LogicOperatorHandler {
         List<JAXBElement<?>> elements = super.buildJAXBElementList(queryRestrictionDTOs);
         logger.debug("##################{} builds : {} " + (elements.size() > 1 ? "elements" : "element") + "\n",
                 getFilterName(), elements.size());
+        List<JAXBElement<?>> cqlFilterElements = Lists.newArrayList();
+        if (filter.isSetComparisonOps()) {
+            cqlFilterElements.add(filter.getComparisonOps());
+        }
+        if (filter.isSetLogicOps()) {
+            cqlFilterElements.add(filter.getLogicOps());
+        }
         if (elements.size() == 1) {
             if (filter.isSetSpatialOps()) {
                 elements.add(filter.getSpatialOps());
                 filter.setSpatialOps(null);
                 BinaryLogicOpType and = new BinaryLogicOpType();
-                and.setComparisonOpsOrSpatialOpsOrLogicOps(elements);
+                if (cqlFilterElements.isEmpty()) {
+                    and.setComparisonOpsOrSpatialOpsOrLogicOps(elements);
+                } else {
+                    cqlFilterElements.addAll(elements);
+                    and.setComparisonOpsOrSpatialOpsOrLogicOps(cqlFilterElements);
+                }
                 filter.setLogicOps(filterFactory.createAnd(and));
             } else {
-                JAXBElement<ComparisonOpsType> opsTypeJAXBElement = (JAXBElement<ComparisonOpsType>) elements.get(0);
-                filter.setComparisonOps(opsTypeJAXBElement);
+                if (cqlFilterElements.isEmpty()) {
+                    JAXBElement<ComparisonOpsType> opsTypeJAXBElement = (JAXBElement<ComparisonOpsType>) elements.get(0);
+                    filter.setComparisonOps(opsTypeJAXBElement);
+                } else {
+                    BinaryLogicOpType and = new BinaryLogicOpType();
+                    cqlFilterElements.add(elements.get(0));
+                    and.setComparisonOpsOrSpatialOpsOrLogicOps(cqlFilterElements);
+                    filter.setLogicOps(filterFactory.createAnd(and));
+                }
             }
         } else if (elements.size() > 1) {
             if (filter.isSetSpatialOps()) {
@@ -103,7 +123,12 @@ public class AndOperatorHandler extends LogicOperatorHandler {
                 filter.setSpatialOps(null);
             }
             BinaryLogicOpType and = new BinaryLogicOpType();
-            and.setComparisonOpsOrSpatialOpsOrLogicOps(elements);
+            if (cqlFilterElements.isEmpty()) {
+                and.setComparisonOpsOrSpatialOpsOrLogicOps(elements);
+            } else {
+                cqlFilterElements.addAll(elements);
+                and.setComparisonOpsOrSpatialOpsOrLogicOps(cqlFilterElements);
+            }
             filter.setLogicOps(filterFactory.createAnd(and));
         }
     }

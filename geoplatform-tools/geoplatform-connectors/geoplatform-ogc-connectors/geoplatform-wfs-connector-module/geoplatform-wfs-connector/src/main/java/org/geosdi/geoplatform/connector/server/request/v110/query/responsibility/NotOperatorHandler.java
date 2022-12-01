@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110.query.responsibility;
 
+import com.google.common.collect.Lists;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryRestrictionDTO;
 import org.geosdi.geoplatform.gui.shared.wfs.LogicOperatorType;
@@ -56,9 +57,9 @@ import static org.geosdi.geoplatform.gui.shared.wfs.LogicOperatorType.NONE;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class NotOperatorHandler extends LogicOperatorHandler {
+class NotOperatorHandler extends LogicOperatorHandler {
 
-    protected NotOperatorHandler() {
+    NotOperatorHandler() {
     }
 
     /**
@@ -86,9 +87,22 @@ public class NotOperatorHandler extends LogicOperatorHandler {
         List<JAXBElement<?>> elements = super.buildJAXBElementList(queryRestrictionDTOs);
         logger.debug("##################{} builds : {} " + (elements.size() > 1 ? "elements" : "element") + "\n",
                 getFilterName(), elements.size());
-        UnaryLogicOpType unaryLogicOpType = ((elements.size() == 1)
-                ? createComparisonOps(elements.get(0), filter) : createLogicOps(elements, filter));
-        filter.setLogicOps(filterFactory.createNot(unaryLogicOpType));
+        List<JAXBElement<?>> cqlFilterElements = Lists.newArrayList();
+        if (filter.isSetComparisonOps()) {
+            cqlFilterElements.add(filter.getComparisonOps());
+        }
+        if (filter.isSetLogicOps()) {
+            cqlFilterElements.add(filter.getLogicOps());
+        }
+        UnaryLogicOpType unaryLogicOpType = ((elements.size() == 1) ? createComparisonOps(elements.get(0), filter) : createLogicOps(elements, filter));
+        if (cqlFilterElements.isEmpty()) {
+            filter.setLogicOps(filterFactory.createNot(unaryLogicOpType));
+        } else {
+            BinaryLogicOpType and = new BinaryLogicOpType();
+            cqlFilterElements.add(filterFactory.createNot(unaryLogicOpType));
+            and.setComparisonOpsOrSpatialOpsOrLogicOps(cqlFilterElements);
+            filter.setLogicOps(filterFactory.createAnd(and));
+        }
     }
 
     /**

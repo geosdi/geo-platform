@@ -145,14 +145,38 @@ public class GPGetFeatureService extends AbstractFeatureService implements GetFe
 
     /**
      * @param layerSchema
+     * @param queryDTO
+     * @param bBox
+     * @param cqlFilter
+     * @param maxFeatures
+     * @return {@link FeatureCollection}
+     * @throws Exception
+     */
+    @Override
+    public FeatureCollection searchFeaturesByBboxCqlFilterAndQuery(@Nonnull(when = NEVER) LayerSchemaDTO layerSchema,
+            @Nullable QueryDTO queryDTO, @Nullable BBox bBox, String cqlFilter, int maxFeatures) throws Exception {
+        checkArgument(layerSchema != null, "The Parameter layerSchema must not be null.");
+        maxFeatures = (maxFeatures > 0) ? maxFeatures : 100;
+        WFSGetFeatureRequest request = this.createRequest(layerSchema, null);
+        request.setBBox(bBox);
+        request.setMaxFeatures(BigInteger.valueOf(maxFeatures));
+        request.setQueryDTO(queryDTO);
+        request.setCqlFilter(cqlFilter);
+        logger.debug("#################################REQUEST_AS_STRING : {}\n", request.showRequestAsString());
+        WFSGetFeatureGeoJsonStaxReader geoJsonStaxReader = new WFSGetFeatureGeoJsonStaxReader(layerSchema);
+        return geoJsonStaxReader.read(request.getResponseAsStream());
+    }
+
+    /**
+     * @param layerSchema
      * @param maxFeatures
      * @param headerParams
      * @return {@link FeatureCollectionDTO}
      * @throws Exception
      */
     @Override
-    public FeatureCollectionDTO getFeature(LayerSchemaDTO layerSchema, int maxFeatures, Map<String, String> headerParams)
-            throws Exception {
+    public FeatureCollectionDTO getFeature(LayerSchemaDTO layerSchema, int maxFeatures,
+            Map<String, String> headerParams) throws Exception {
         checkArgument(maxFeatures > 0, "The Parameter maxFeatures must be > 0.");
         WFSGetFeatureRequest request = this.createRequest(layerSchema, headerParams);
         request.setMaxFeatures(BigInteger.valueOf(maxFeatures));

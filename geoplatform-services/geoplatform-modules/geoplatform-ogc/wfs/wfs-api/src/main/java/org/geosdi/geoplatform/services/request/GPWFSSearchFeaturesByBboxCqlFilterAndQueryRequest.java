@@ -1,11 +1,11 @@
-/**
+/*
  *
  *    geo-platform
  *    Rich webgis framework
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2022 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -33,27 +33,27 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.services.rs.path;
+package org.geosdi.geoplatform.services.request;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public final class GPWFSServiceRSPathConfig {
+@Getter
+@Setter
+@ToString(callSuper = true)
+@NoArgsConstructor
+@XmlAccessorType
+public class GPWFSSearchFeaturesByBboxCqlFilterAndQueryRequest extends GPWFSSearchFeaturesByBboxAndQueryRequest {
 
-    public static final String DEFAULT_WFS_RS_SERVICE_PATH = "/";
-
-    /**
-     * WFS CAPABILITIES PATH
-     */
-    public static final String WFS_SERVICE_RS_PATH = "/jsonWFS";
-    public static final String DESCRIBE_FEATURE_TYPE_RS_PATH = "/describeFeatureType";
-    public static final String GET_GEOJSON_FEATURES_RS_PATH = "/getGeoJsonFeatures";
-    public static final String WFS_SEARCH_FEATURES_RS_PATH = "/searchFeatures";
-    public static final String WFS_SEARCH_FEATURES_BY_BBOX_RS_PATH = "/searchFeaturesByBbox";
-    public static final String WFS_SEARCH_FEATURES_BY_BBOX_AND_QUERY_RS_PATH = "/searchFeaturesByBboxAndQuery";
-    public static final String WFS_SEARCH_FEATURES_BY_BBOX_CQL_FILTER_AND_QUERY_RS_PATH = "/searchFeaturesByBboxCqlFilterAndQuery";
-
-    private GPWFSServiceRSPathConfig() {
-    }
+    private static final long serialVersionUID = 3181149872128222998L;
+    //
+    private String cqlFilter;
 }

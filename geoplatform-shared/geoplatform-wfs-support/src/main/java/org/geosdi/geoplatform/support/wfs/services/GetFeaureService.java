@@ -87,7 +87,20 @@ public interface GetFeaureService {
      * @return {@link FeatureCollection}
      * @throws Exception
      */
-    FeatureCollection searchFeaturesByBboxAndQuery(@Nonnull(when = NEVER) LayerSchemaDTO layerSchema, @Nullable QueryDTO queryDTO, @Nullable BBox bBox, int maxFeatures) throws Exception;
+    FeatureCollection searchFeaturesByBboxAndQuery(@Nonnull(when = NEVER) LayerSchemaDTO layerSchema,
+            @Nullable QueryDTO queryDTO, @Nullable BBox bBox, int maxFeatures) throws Exception;
+
+    /**
+     * @param layerSchema
+     * @param queryDTO
+     * @param bBox
+     * @param cqlFilter
+     * @param maxFeatures
+     * @return {@link FeatureCollection}
+     * @throws Exception
+     */
+    FeatureCollection searchFeaturesByBboxCqlFilterAndQuery(@Nonnull(when = NEVER) LayerSchemaDTO layerSchema,
+            @Nullable QueryDTO queryDTO, @Nullable BBox bBox, String cqlFilter, int maxFeatures) throws Exception;
 
     /**
      * @param layerSchema
@@ -96,7 +109,8 @@ public interface GetFeaureService {
      * @return {@link FeatureCollectionDTO}
      * @throws Exception
      */
-    FeatureCollectionDTO getFeature(LayerSchemaDTO layerSchema, int maxFeatures, Map<String, String> headerParams) throws Exception;
+    FeatureCollectionDTO getFeature(LayerSchemaDTO layerSchema, int maxFeatures, Map<String, String> headerParams)
+            throws Exception;
 
     /**
      * @param serverURL

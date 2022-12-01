@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110.query.responsibility;
 
+import com.google.common.collect.Lists;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryRestrictionDTO;
 import org.geosdi.geoplatform.gui.shared.wfs.LogicOperatorType;
@@ -55,9 +56,9 @@ import static org.geosdi.geoplatform.gui.shared.wfs.LogicOperatorType.ANY;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class OrOperatorHandler extends LogicOperatorHandler {
+class OrOperatorHandler extends LogicOperatorHandler {
 
-    protected OrOperatorHandler() {
+    OrOperatorHandler() {
         super.setSuccessor(new AndOperatorHandler());
     }
 
@@ -84,18 +85,39 @@ public class OrOperatorHandler extends LogicOperatorHandler {
     protected void processQueryRestrictions(FilterType filter, List<QueryRestrictionDTO> queryRestrictionDTOs) {
         logger.debug("################### {} Processing............\n", getFilterName());
         List<JAXBElement<?>> elements = super.buildJAXBElementList(queryRestrictionDTOs);
-        logger.debug("##################{} builds : {} " + (elements.size() > 1 ? "elements" : "element") + "\n",
+        logger.info("##################{} builds : {} " + (elements.size() > 1 ? "elements" : "element") + "\n",
                 getFilterName(), elements.size());
+        List<JAXBElement<?>> cqlFilterElements = Lists.newArrayList();
+        if (filter.isSetComparisonOps()) {
+            cqlFilterElements.add(filter.getComparisonOps());
+        }
+        if (filter.isSetLogicOps()) {
+            cqlFilterElements.add(filter.getLogicOps());
+        }
         if (elements.size() == 1) {
             if (filter.isSetSpatialOps()) {
                 elements.add(filter.getSpatialOps());
                 filter.setSpatialOps(null);
                 BinaryLogicOpType or = new BinaryLogicOpType();
                 or.setComparisonOpsOrSpatialOpsOrLogicOps(elements);
-                filter.setLogicOps(filterFactory.createOr(or));
+                if (cqlFilterElements.isEmpty()) {
+                    filter.setLogicOps(filterFactory.createOr(or));
+                } else {
+                    BinaryLogicOpType and = new BinaryLogicOpType();
+                    cqlFilterElements.add(filterFactory.createOr(or));
+                    and.setComparisonOpsOrSpatialOpsOrLogicOps(cqlFilterElements);
+                    filter.setLogicOps(filterFactory.createAnd(and));
+                }
             } else {
-                JAXBElement<ComparisonOpsType> element = (JAXBElement<ComparisonOpsType>) elements.get(0);
-                filter.setComparisonOps(element);
+                if (cqlFilterElements.isEmpty()) {
+                    JAXBElement<ComparisonOpsType> element = (JAXBElement<ComparisonOpsType>) elements.get(0);
+                    filter.setComparisonOps(element);
+                } else {
+                    BinaryLogicOpType and = new BinaryLogicOpType();
+                    cqlFilterElements.add(elements.get(0));
+                    and.setComparisonOpsOrSpatialOpsOrLogicOps(cqlFilterElements);
+                    filter.setLogicOps(filterFactory.createAnd(and));
+                }
             }
         } else if (elements.size() > 1) {
             if (filter.isSetSpatialOps()) {
@@ -104,7 +126,14 @@ public class OrOperatorHandler extends LogicOperatorHandler {
             }
             BinaryLogicOpType or = new BinaryLogicOpType();
             or.setComparisonOpsOrSpatialOpsOrLogicOps(elements);
-            filter.setLogicOps(filterFactory.createOr(or));
+            if (cqlFilterElements.isEmpty()) {
+                filter.setLogicOps(filterFactory.createOr(or));
+            } else {
+                BinaryLogicOpType and = new BinaryLogicOpType();
+                cqlFilterElements.add(filterFactory.createOr(or));
+                and.setComparisonOpsOrSpatialOpsOrLogicOps(cqlFilterElements);
+                filter.setLogicOps(filterFactory.createAnd(and));
+            }
         }
     }
 

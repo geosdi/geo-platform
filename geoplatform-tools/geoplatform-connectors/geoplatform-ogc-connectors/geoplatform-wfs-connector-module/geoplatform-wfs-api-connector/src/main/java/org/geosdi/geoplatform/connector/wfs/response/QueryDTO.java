@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.wfs.response;
 
-import org.geosdi.geoplatform.gui.shared.wfs.OperatorType;
-
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.List;
+
+import static org.geosdi.geoplatform.gui.shared.wfs.OperatorType.EQUAL;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -63,8 +63,8 @@ public class QueryDTO implements Serializable {
      * @return {@link String}
      */
     public String getMatchOperator() {
-        return matchOperator = ((this.matchOperator != null) && !(this.matchOperator.isEmpty()) ?
-                this.matchOperator : OperatorType.EQUAL.toString());
+        return matchOperator = ((this.matchOperator != null) && !(this.matchOperator.trim().isEmpty()) ?
+                this.matchOperator : EQUAL.toString());
     }
 
     /**

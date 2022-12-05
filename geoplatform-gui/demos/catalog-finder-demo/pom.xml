@@ -29,7 +29,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.gwtproject</groupId>
+            <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
             <scope>provided</scope>
         </dependency>
@@ -37,12 +37,11 @@
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-dev</artifactId>
-            <version>${gwtVersion}</version>
             <scope>provided</scope>
         </dependency>
         
         <dependency>
-            <groupId>org.gwtproject.web.bindery</groupId>
+            <groupId>com.google.web.bindery</groupId>
             <artifactId>requestfactory-server</artifactId>
             <scope>runtime</scope>
         </dependency>
@@ -153,7 +152,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
-                <version>${gwtVersion}</version>
+                <version>${gwt.version}</version>
                 <executions>
                     <execution>
                         <id>test</id>

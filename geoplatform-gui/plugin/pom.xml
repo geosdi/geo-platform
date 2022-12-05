@@ -33,7 +33,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>gwt-maven-plugin</artifactId>
-                    <version>${gwtVersion}</version>
+                    <version>${gwt.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>

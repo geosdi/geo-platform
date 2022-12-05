@@ -22,7 +22,7 @@
     <dependencies>
         
         <dependency>
-            <groupId>org.gwtproject</groupId>
+            <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
             <scope>provided</scope>
         </dependency>

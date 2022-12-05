@@ -30,7 +30,7 @@
     <dependencies>
         
         <dependency>
-            <groupId>org.gwtproject</groupId>
+            <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
             <scope>provided</scope>
         </dependency>
@@ -38,7 +38,6 @@
         <dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-dev</artifactId>
-            <version>${gwtVersion}</version>
             <scope>provided</scope>
         </dependency>
         
@@ -116,7 +115,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>gwt-maven-plugin</artifactId>
-                <version>${gwtVersion}</version>
+                <version>${gwt.version}</version>
                 <executions>
                     <execution>
                         <id>test</id>

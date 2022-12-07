@@ -163,6 +163,8 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
      */
     protected final void onBuildSuccess(GPClientProject clientProject) {
         GWT.log("########################onBuildSuccess " + clientProject);
+        /**TODO TEMPORARY FIX**/
+        clientProject.setProjectShared(Boolean.TRUE);
         Registry.register(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name(), clientProject);
         root.setId(clientProject.getId());
         root.setLabel(clientProject.getName());

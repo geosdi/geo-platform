@@ -69,7 +69,9 @@ public interface ILogicOperatorHandler {
     /**
      * @return {@link String}
      */
-    String getFilterName();
+    default String getFilterName() {
+        return this.getClass().getSimpleName();
+    }
 
     /**
      *

@@ -96,6 +96,13 @@ public interface WFSGetFeatureRequest<T> extends IGPostConnectorRequest<T> {
     void setBBox(BBox bBox);
 
     /**
+     * @return {@link Boolean}
+     */
+    default boolean isSetBBox() {
+        return this.getBBox() != null;
+    }
+
+    /**
      * @return {@link String}
      */
     String getGeometryName();
@@ -125,6 +132,13 @@ public interface WFSGetFeatureRequest<T> extends IGPostConnectorRequest<T> {
     void setSRS(String srs);
 
     /**
+     * @return {@link Boolean}
+     */
+    default boolean isSetSRS() {
+        return ((this.getSRS() != null) && !(this.getSRS().trim().isEmpty()));
+    }
+
+    /**
      * Gets the value of the resultType property.
      *
      * @return ResultType
@@ -145,6 +159,13 @@ public interface WFSGetFeatureRequest<T> extends IGPostConnectorRequest<T> {
     void setResultType(String resultType);
 
     /**
+     * @return {@link Boolean}
+     */
+    default boolean isSetResultType() {
+        return ((this.getResultType() != null) && !(this.getResultType().trim().isEmpty()));
+    }
+
+    /**
      * Gets the value of the outputFormat property.
      *
      * @return OutputFormat
@@ -159,6 +180,13 @@ public interface WFSGetFeatureRequest<T> extends IGPostConnectorRequest<T> {
      * @param outputFormat
      */
     void setOutputFormat(String outputFormat);
+
+    /**
+     * @return {@link Boolean}
+     */
+    default boolean isSetOutputFormat() {
+        return ((this.getOutputFormat() != null) && !(this.getOutputFormat().trim().isEmpty()));
+    }
 
     /**
      * Gets the value of the maxFeatures property.
@@ -177,6 +205,13 @@ public interface WFSGetFeatureRequest<T> extends IGPostConnectorRequest<T> {
      * @param value
      */
     void setMaxFeatures(BigInteger value);
+
+    /**
+     * @return {@link Boolean}
+     */
+    default boolean isSetMaxFeatures() {
+        return (this.getMaxFeatures() != null);
+    }
 
     /**
      * <p>The Property Names to retrieve in {@link org.geosdi.geoplatform.xml.wfs.v110.QueryType} query</p>

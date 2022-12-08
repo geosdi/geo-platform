@@ -37,27 +37,16 @@ package org.geosdi.geoplatform.connector.server.request.v110;
 
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.AbstractGetFeatureRequest;
-import org.geosdi.geoplatform.gui.shared.bean.BBox;
-import org.geosdi.geoplatform.xml.filter.v110.BBOXType;
-import org.geosdi.geoplatform.xml.filter.v110.FilterType;
-import org.geosdi.geoplatform.xml.filter.v110.GmlObjectIdType;
-import org.geosdi.geoplatform.xml.filter.v110.PropertyNameType;
-import org.geosdi.geoplatform.xml.gml.v311.DirectPositionType;
-import org.geosdi.geoplatform.xml.gml.v311.EnvelopeType;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
 import org.geosdi.geoplatform.xml.wfs.v110.GetFeatureType;
 import org.geosdi.geoplatform.xml.wfs.v110.QueryType;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.JAXBElement;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static io.reactivex.rxjava3.core.Observable.fromIterable;
 import static java.util.Arrays.asList;
-import static java.util.stream.Collectors.toList;
 import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.connector.server.request.v110.cql.GPFilterTypeCqlBuilder.filterTypeCqlBuilder;
-import static org.geosdi.geoplatform.connector.server.request.v110.query.responsibility.ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder;
+import static org.geosdi.geoplatform.connector.server.request.v110.param.GPWFSGetFeatureRequestParamChain.wfsGetFeatureRequestParamChain;
 import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.RESULTS;
 import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.fromValue;
 
@@ -66,9 +55,6 @@ import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.fromValue;
  * @author Vincenzo Monteverde - <vincenzo.monteverde@geosdi.org>
  */
 public class WFSGetFeatureRequestV110 extends AbstractGetFeatureRequest<FeatureCollectionType, GetFeatureType> {
-
-    private static final org.geosdi.geoplatform.xml.filter.v110.ObjectFactory filterFactory = new org.geosdi.geoplatform.xml.filter.v110.ObjectFactory();
-    private static final org.geosdi.geoplatform.xml.gml.v311.ObjectFactory gmlFactory = new org.geosdi.geoplatform.xml.gml.v311.ObjectFactory();
 
     /**
      * @param server
@@ -88,95 +74,12 @@ public class WFSGetFeatureRequestV110 extends AbstractGetFeatureRequest<FeatureC
         QueryType query = new QueryType();
         query.setTypeName(asList(typeName));
         request.getQuery().add(query);
-        if (super.isSetCqlFilter()) {
-            query.setFilter(filterTypeCqlBuilder().withCqlFilter(this.cqlFilter).build());
-        }
-        if (super.isSetFeatureIDs()) {
-            FilterType filter = query.getFilter();
-            if (filter == null) {
-                filter = new FilterType();
-                query.setFilter(filter);
-            }
-            filter.setId(featureIDs
-                    .stream()
-                    .filter(featureID -> (featureID != null) && !(featureID.trim().isEmpty()))
-                    .map(featureID -> filterFactory.createGmlObjectId(new GmlObjectIdType(featureID)))
-                    .collect(toList()));
-            query.setFilter(filter);
-        }
-        if (super.isSetPropertyNames()) {
-            fromIterable(this.propertyNames)
-                    .filter(v -> ((v != null) && !(v.trim().isEmpty())))
-                    .doOnComplete(() -> logger.debug("################### propertyNames processed."))
-                    .subscribe(v -> query.getPropertyNameOrXlinkPropertyNameOrFunction().add(v), Throwable::printStackTrace);
-        }
-        if (srs != null) {
-            query.setSrsName(srs);
-        }
-        if (bBox != null) {
-            FilterType filter = query.getFilter();
-            if (filter == null) {
-                filter = new FilterType();
-                query.setFilter(filter);
-            }
-            filter.setSpatialOps(this.createAreaOperator(bBox));
-        }
-        if (super.isSetQueryDTO()) {
-            FilterType filterType = query.getFilter();
-            if (filterType == null) {
-                filterType = new FilterType();
-                query.setFilter(filterType);
-            }
-            builder().withFilterType(filterType).withQueryDTO(queryDTO).build();
-        }
+        wfsGetFeatureRequestParamChain().applyParam(this, query);
         request.setResultType(resultType != null ? fromValue(resultType) : RESULTS);
         request.setOutputFormat(outputFormat != null ? outputFormat : "text/xml; subtype=gml/3.1.1");
         if (maxFeatures != null) {
             request.setMaxFeatures(maxFeatures);
         }
         return request;
-    }
-
-    /**
-     * @param bbox
-     * @return {@link JAXBElement<BBOXType>}
-     */
-    private JAXBElement<BBOXType> createAreaOperator(BBox bbox) {
-        logger.debug("#######################BBOX : {}\n.", bbox);
-        BBOXType bBoxType = new BBOXType();
-        PropertyNameType propertyNameType = new PropertyNameType();
-        propertyNameType.setContent(asList(super.getGeometryName()));
-        bBoxType.setPropertyName(propertyNameType);
-        EnvelopeType envelope = this.createEnvelope(bbox);
-        if (srs != null) {
-            envelope.setSrsName(srs);
-        }
-        bBoxType.setEnvelope(gmlFactory.createEnvelope(envelope));
-        return filterFactory.createBBOX(bBoxType);
-    }
-
-    /**
-     * @param bbox
-     * @return {@link EnvelopeType}
-     */
-    private EnvelopeType createEnvelope(BBox bbox) {
-        EnvelopeType envelope = new EnvelopeType();
-        DirectPositionType lower = new DirectPositionType();
-        lower.setValue(asList(bbox.getMinX(), bbox.getMinY()));
-        envelope.setLowerCorner(lower);
-        DirectPositionType upper = new DirectPositionType();
-        upper.setValue(asList(bbox.getMaxX(), bbox.getMaxY()));
-        envelope.setUpperCorner(upper);
-        return envelope;
-    }
-
-    /**
-     * @param theCqlFilter
-     * @return {@link FilterType}
-     * @throws Exception
-     */
-    private FilterType createFilterTypeByCqlFilter(@Nonnull(when = NEVER) String theCqlFilter) throws Exception {
-//        Preconditions.checkArgument();
-        return null;
     }
 }

@@ -85,7 +85,7 @@ class AndOperatorHandler extends LogicOperatorHandler {
     protected void processQueryRestrictions(FilterType filter, List<QueryRestrictionDTO> queryRestrictionDTOs) {
         logger.debug("################### {} Processing............\n", getFilterName());
         List<JAXBElement<?>> elements = super.buildJAXBElementList(queryRestrictionDTOs);
-        logger.debug("##################{} builds : {} " + (elements.size() > 1 ? "elements" : "element") + "\n",
+        logger.debug("##################{} builds : {} ".concat((elements.size() > 1 ? "elements" : "element.\n")),
                 getFilterName(), elements.size());
         List<JAXBElement<?>> cqlFilterElements = Lists.newArrayList();
         if (filter.isSetComparisonOps()) {

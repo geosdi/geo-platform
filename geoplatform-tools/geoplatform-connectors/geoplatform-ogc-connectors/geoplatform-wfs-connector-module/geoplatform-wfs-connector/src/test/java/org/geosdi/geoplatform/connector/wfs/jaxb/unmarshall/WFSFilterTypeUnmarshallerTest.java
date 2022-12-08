@@ -52,6 +52,7 @@ import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.server.request.v110.cql.GPFilterTypeCqlBuilder.filterTypeCqlBuilder;
+import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -133,5 +134,27 @@ public class WFSFilterTypeUnmarshallerTest {
         wfsJAXBContextPool.marshal(filterType, writer);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@FILTER_TYPE_AS_XML_STRING : \n{}\n", writer);
         logger.info("#########################FILTER_TYPE : {}\n", filterType);
+    }
+
+    @Test
+    public void f_wfsFilterTypev100PoolTest() throws Exception {
+        FilterType filterType = filterTypeCqlBuilder()
+                .withCqlFilter("(COMUNE like 'AVIGLIANO'  OR  PRO_COM = 77014 OR COMUNE like 'T%') " +
+                        "AND (COMUNE like '%O' OR PRO_COM = 4) AND (Intersects(shape,POINT(-45.891523 170.467375)))")
+                .build();
+        Writer writer = new StringWriter();
+        wfsJAXBContextPool.marshal(filterType, writer);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@FILTER_TYPE_AS_XML_STRING : \n{}\n", writer);
+    }
+
+    @Test
+    public void g_wfsFilterTypev100PoolTest() throws Exception {
+        FilterType filterType = filterTypeCqlBuilder()
+                .withCqlFilter("Intersects(shape,POINT(-45.891523 170.467375))")
+                .build();
+        assertTrue(filterType.isSetSpatialOps());
+        Writer writer = new StringWriter();
+        wfsJAXBContextPool.marshal(filterType, writer);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@FILTER_TYPE_AS_XML_STRING : \n{}\n", writer);
     }
 }

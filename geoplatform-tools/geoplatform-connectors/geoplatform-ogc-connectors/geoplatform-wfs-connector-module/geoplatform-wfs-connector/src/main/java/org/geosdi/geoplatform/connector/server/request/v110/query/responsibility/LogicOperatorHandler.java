@@ -139,14 +139,6 @@ abstract class LogicOperatorHandler implements ILogicOperatorHandler {
     }
 
     /**
-     * @return {@link String}
-     */
-    @Override
-    public String getFilterName() {
-        return getClass().getSimpleName();
-    }
-
-    /**
      * @param queryRestrictionDTO
      * @return {@link JAXBElement<?>}
      */

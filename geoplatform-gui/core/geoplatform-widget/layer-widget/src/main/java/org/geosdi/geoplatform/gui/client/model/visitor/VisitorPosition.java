@@ -247,7 +247,6 @@ public class VisitorPosition extends AbstractVisitTree implements IVisitor {
      *
      */
     protected void clearFolderDescendantMap() {
-        logger.info("#############CLEAR MAP");
         this.folderDescendantMap.clear();
     }
 }

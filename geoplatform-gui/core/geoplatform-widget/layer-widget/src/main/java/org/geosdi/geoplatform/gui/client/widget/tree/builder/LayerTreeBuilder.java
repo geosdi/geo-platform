@@ -1,11 +1,11 @@
-/**
+/*
  *
  *    geo-platform
  *    Rich webgis framework
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2022 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -162,7 +162,6 @@ public class LayerTreeBuilder implements GPCompositeBuilder {
      * @param clientProject
      */
     protected final void onBuildSuccess(GPClientProject clientProject) {
-        GWT.log("########################onBuildSuccess " + clientProject);
         Registry.register(UserSessionEnum.CURRENT_PROJECT_ON_TREE.name(), clientProject);
         root.setId(clientProject.getId());
         root.setLabel(clientProject.getName());

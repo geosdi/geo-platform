@@ -37,8 +37,6 @@ package org.geosdi.geoplatform.gui.client.model.visitor;
 
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.google.common.collect.Maps;
-import java.util.List;
-import java.util.Map;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.model.GPLayerBean;
@@ -49,40 +47,43 @@ import org.geosdi.geoplatform.gui.model.tree.AbstractRootTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Logger;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class VisitorPosition extends AbstractVisitTree
-        implements IVisitor {
+public class VisitorPosition extends AbstractVisitTree implements IVisitor {
 
+    protected final static Logger logger = Logger.getLogger("VisitorPosition");
+    //
     private int tmpIndex = -1;
     private boolean stopIterating;
     private GPBeanTreeModel startPosition;
     private GPBeanTreeModel endPosition;
     private GPBeanTreeModel tmpElement;
-    private Map<FolderTreeNode, Integer> folderDescendantMap = Maps.<FolderTreeNode, Integer>newHashMap();
+    private Map<FolderTreeNode, Integer> folderDescendantMap = Maps.newHashMap();
 
-    public void fixPosition(GPBeanTreeModel changedElement,
-            GPBeanTreeModel parentDestination, int newIndex) {
+    public void fixPosition(GPBeanTreeModel changedElement, GPBeanTreeModel parentDestination, int newIndex) {
         GPBeanTreeModel oldParent = (GPBeanTreeModel) changedElement.getParent();
         int oldZIndex = changedElement.getzIndex();
-        System.out.println("Old zIndex: " + oldZIndex);
-        System.out.println("parentDestination.getzIndex(): " + parentDestination.getzIndex());
-        System.out.println("New Index: " + newIndex);
+        logger.info("\nOld zIndex: " + oldZIndex);
+        logger.info("\nparentDestination.getzIndex(): " + parentDestination.getzIndex());
         //int newZIndex = parentDestination.getzIndex() - newIndex - 1;
         int numElementsMoved = 1; // Iff changedElement is a layer
         int newZIndex = this.getNewZIndex(parentDestination, newIndex);
-        System.out.println("New zIndex: " + newZIndex);
+        logger.info("\nNew zIndex: " + newZIndex);
         if (newZIndex < oldZIndex) {
-            System.out.println("Executing: newIndex < oldIndex");
+            logger.info("\nExecuting: newIndex < oldIndex");
             this.startPosition = super.getPrecedingElement(changedElement);
             oldParent.remove(changedElement);
             changedElement.setParent(parentDestination);
             parentDestination.insert(changedElement, newIndex);
             this.endPosition = super.getNextUnvisitedElement(super.findDeepestElementInNode(changedElement));
         } else if (newZIndex > oldZIndex) {
-            System.out.println("Executing: newIndex > oldIndex");
+            logger.info("\nExecuting: newIndex > oldIndex");
             this.endPosition = super.getNextUnvisitedElement(super.findDeepestElementInNode(changedElement));
             oldParent.remove(changedElement);
             changedElement.setParent(parentDestination);
@@ -97,8 +98,8 @@ public class VisitorPosition extends AbstractVisitTree
                 numElementsMoved = ((FolderTreeNode) changedElement).getNumberOfDescendants() + 1;
             }
             this.updateNumberOfDescendants(oldParent, parentDestination, numElementsMoved);
-            System.out.println("In FixPosition: returning without index changes"
-                    + "for element: " + changedElement.getLabel());
+            logger.info(
+                    "\nIn FixPosition: returning without index changes" + "for element: " + changedElement.getLabel());
             return;
         }
 
@@ -106,16 +107,18 @@ public class VisitorPosition extends AbstractVisitTree
             numElementsMoved = ((FolderTreeNode) changedElement).getNumberOfDescendants() + 1;
         }
         this.updateNumberOfDescendants(oldParent, parentDestination, numElementsMoved);
-
-        System.out.println(this.startPosition == null ? "Start Position: null" : "Start Position: " + this.startPosition.getLabel());
-        System.out.println(this.endPosition == null ? "End position: untill the end of the Tree" : "End position: " + this.endPosition.getLabel());
+        logger.info("##############FOLDER DESCENDANT KEYS" + folderDescendantMap.keySet());
+        logger.info("##############FOLDER DESCENDANT VALUES" + folderDescendantMap.values());
+        logger.info(this.startPosition == null ? "Start Position: null" :
+                "Start Position: " + this.startPosition.getLabel());
+        logger.info(this.endPosition == null ? "End position: untill the end of the Tree" :
+                "End position: " + this.endPosition.getLabel());
         this.preorderTraversal();
-        System.out.println("End modification");
+        logger.info("End modification");
     }
 
     private void updateNumberOfDescendants(GPBeanTreeModel oldParent, GPBeanTreeModel parentDestination,
             int numElementsMoved) {
-        this.folderDescendantMap.clear();
         this.updateNumberOfDescendants(oldParent, -numElementsMoved);
         this.updateNumberOfDescendants(parentDestination, numElementsMoved);
     }
@@ -190,12 +193,11 @@ public class VisitorPosition extends AbstractVisitTree
 
     @Override
     public void visitFolder(AbstractFolderTreeNode folder) {
-        ((FolderTreeNode) folder).setzIndex(--this.tmpIndex);
-        if (!((FolderTreeNode) folder).isLoaded()) {
-            this.tmpIndex = this.tmpIndex - ((FolderTreeNode) folder).getNumberOfDescendants();
+        folder.setzIndex(--this.tmpIndex);
+        if (!folder.isLoaded()) {
+            this.tmpIndex = this.tmpIndex - folder.getNumberOfDescendants();
         }
-        System.out.println("VisitorPos Folder set zIndex: " + folder.getzIndex()
-                + " to the folder: " + folder.getLabel());
+        logger.info("VisitorPos Folder set zIndex: " + folder.getzIndex() + " to the folder: " + folder.getLabel());
         List<ModelData> childrens = folder.getChildren();
         for (int i = 0; i < childrens.size() && !this.stopIterating; i++) {
             this.tmpElement = (GPBeanTreeModel) childrens.get(i);
@@ -239,5 +241,13 @@ public class VisitorPosition extends AbstractVisitTree
      */
     public Map<FolderTreeNode, Integer> getFolderDescendantMap() {
         return folderDescendantMap;
+    }
+
+    /**
+     *
+     */
+    protected void clearFolderDescendantMap() {
+        logger.info("#############CLEAR MAP");
+        this.folderDescendantMap.clear();
     }
 }

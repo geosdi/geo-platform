@@ -72,7 +72,7 @@ public class SaveFolderPropertiesCommand implements
 
     @Override
     public SaveFolderPropertiesResponse execute(SaveFolderPropertiesRequest request, HttpServletRequest httpServletRequest) {
-        logger.info("##################### Executing {} Command", this.getClass().getSimpleName());
+        logger.info("#####################Executing {} Command", this.getClass().getSimpleName());
         try {
             this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
@@ -89,7 +89,7 @@ public class SaveFolderPropertiesCommand implements
             SaveFolderPropertiesCommand.logger.error("Failed to save folder on LayerService: " + ex);
             throw new GeoPlatformException(ex);
         }
-        logger.debug("#################### After sending project notification");
+        logger.debug("####################After sending project notification");
 
         return new SaveFolderPropertiesResponse(Boolean.TRUE);
     }

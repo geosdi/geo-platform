@@ -36,8 +36,6 @@
 package org.geosdi.geoplatform.gui.client.listener;
 
 import com.extjs.gxt.ui.client.event.EventType;
-import org.geosdi.geoplatform.gui.client.model.visitor.VisitorPosition;
-import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.store.Store;
 import com.extjs.gxt.ui.client.store.TreeStore;
@@ -46,17 +44,22 @@ import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.command.memento.dnd.chain.GPSaveTreeElementManager;
 import org.geosdi.geoplatform.gui.client.command.memento.dnd.chain.SaveTreeElementManager;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
-import org.geosdi.geoplatform.gui.model.tree.LayerEvents;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
-import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.memento.save.IMementoSave;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveDragDrop;
 import org.geosdi.geoplatform.gui.client.model.visitor.VisitorDisplayHide;
+import org.geosdi.geoplatform.gui.client.model.visitor.dnd.VisitorDndPosition;
+import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.LayerEvents;
 
-public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>,
-        ISave<MementoSaveDragDrop> {
+import java.util.logging.Logger;
 
+public class GPDNDListener implements Listener<TreeStoreEvent<GPBeanTreeModel>>, ISave<MementoSaveDragDrop> {
+
+    protected final static Logger logger = Logger.getLogger("GPDNDListener");
+    //
     private VisitorDisplayHide checkerVisitor;
-    private VisitorPosition visitor = new VisitorPosition();
+    private VisitorDndPosition visitor = new VisitorDndPosition();
     private GPBeanTreeModel changedElement;
     private GPBeanTreeModel parentDestination;
     private int newIndex;

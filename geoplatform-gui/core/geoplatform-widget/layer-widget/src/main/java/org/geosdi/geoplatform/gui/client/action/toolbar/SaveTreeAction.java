@@ -55,6 +55,8 @@ import org.geosdi.geoplatform.gui.model.tree.LayerEvents;
 import org.geosdi.geoplatform.gui.model.tree.TreeStatusEnum;
 import org.geosdi.geoplatform.gui.observable.Observable;
 import org.geosdi.geoplatform.gui.observable.Observer;
+import org.geosdi.geoplatform.gui.puregwt.descendant.ClearDescendantHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.descendant.event.GPClearDescendentMapEvent;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 import org.geosdi.geoplatform.gui.puregwt.savecache.SaveCacheHandlerManager;
@@ -72,6 +74,7 @@ public class SaveTreeAction extends ToolbarLayerTreeAction implements GPPeekCach
     private boolean visibiltyProgressBar;
     private GwtEvent eventAfterAllSaveOperations;
     private SaveTreeToolbarPlugin savePlugin;
+    private final GPClearDescendentMapEvent gpClearDescendentMapEvent = new GPClearDescendentMapEvent();
 
     /**
      * @param theTree
@@ -121,6 +124,7 @@ public class SaveTreeAction extends ToolbarLayerTreeAction implements GPPeekCach
                 this.eventAfterAllSaveOperations = null;
             }
             GPCompositeRefreshHandlerSupport.fireCompositeRefreshEvent(LOAD_ROOT_ELEMENTS_EVENT);
+            ClearDescendantHandlerManager.fireEvent(this.gpClearDescendentMapEvent);
         }
     }
 

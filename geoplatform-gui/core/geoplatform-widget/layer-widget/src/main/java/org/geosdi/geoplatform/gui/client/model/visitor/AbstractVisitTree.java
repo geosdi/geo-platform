@@ -36,16 +36,21 @@
 package org.geosdi.geoplatform.gui.client.model.visitor;
 
 import com.extjs.gxt.ui.client.data.ModelData;
-import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.FolderTreeNode;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 
+import java.util.List;
+import java.util.logging.Logger;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email  nazzareno.sileno@geosdi.org
+ * @email nazzareno.sileno@geosdi.org
  */
 public abstract class AbstractVisitTree {
+
+    protected final static Logger logger = Logger.getLogger("AbstractVisitTree");
+    //
 
     protected int numberOfElements = -1;
 

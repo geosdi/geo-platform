@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.server.command.memento.dnd;
 
 import com.google.common.base.Preconditions;
-import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.command.memento.dnd.SaveDragAndDropRequest;
@@ -58,15 +57,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Lazy
 @Component(value = "command.memento.dnd.SaveDragAndDropCommand")
-public class SaveDragAndDropCommand implements
-        GPCommand<SaveDragAndDropRequest, SaveDragAndDropResponse> {
+public class SaveDragAndDropCommand implements GPCommand<SaveDragAndDropRequest, SaveDragAndDropResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(
             SaveDragAndDropCommand.class);
@@ -81,8 +80,7 @@ public class SaveDragAndDropCommand implements
     public SaveDragAndDropResponse execute(SaveDragAndDropRequest request,
             HttpServletRequest httpServletRequest) {
 
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
+        logger.debug("#####################Executing {} Command", this.getClass().getSimpleName());
 
         MementoSaveDragDrop memento = request.getMemento();
 

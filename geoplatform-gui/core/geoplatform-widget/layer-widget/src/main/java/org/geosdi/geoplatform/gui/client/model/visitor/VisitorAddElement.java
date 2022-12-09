@@ -49,6 +49,7 @@ import org.geosdi.geoplatform.gui.model.tree.visitor.IVisitor;
 
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -56,6 +57,8 @@ import java.util.Map;
  */
 public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
 
+    protected final static Logger logger = Logger.getLogger("VisitorAddElement");
+    //
     private GPBeanTreeModel endPosition;
     private GPBeanTreeModel tmpElement;
     private int tmpIndex;
@@ -159,8 +162,7 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
         if (!((FolderTreeNode) folder).isLoaded()) {
             this.tmpIndex = this.tmpIndex - ((FolderTreeNode) folder).getNumberOfDescendants();
         }
-        System.out.println("VisitorAddElem Folder set zIndex: " + folder.getzIndex()
-                + " to the folder: " + folder.getLabel());
+        logger.info("VisitorAddElem Folder set zIndex: " + folder.getzIndex() + " to the folder: " + folder.getLabel());
         List<ModelData> childrens = folder.getChildren();
         for (int i = 0; i < childrens.size() && !this.stopIterating; i++) {
             this.tmpElement = (GPBeanTreeModel) childrens.get(i);
@@ -176,8 +178,7 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
 
     private void visitLeaf(GPLayerBean leaf) {
         ((GPBeanTreeModel) leaf).setzIndex(--this.tmpIndex);
-        System.out.println("VisitorAddElem Leaf set zIndex: " + this.tmpIndex
-                + " to the leaf: " + leaf.getLabel());
+        logger.info("VisitorAddElem Leaf set zIndex: " + this.tmpIndex + " to the leaf: " + leaf.getLabel());
     }
 
     @Override

@@ -53,13 +53,17 @@ import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 
+import java.util.logging.Logger;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class SaveLayerHandler extends SaveTreeElementHandler {
 
+    protected final static Logger logger = Logger.getLogger("SaveLayerHandler");
+
+    //
     public SaveLayerHandler() {
         request.setElementType(GPTreeCompositeType.LEAF);
     }
@@ -84,6 +88,7 @@ public class SaveLayerHandler extends SaveTreeElementHandler {
             private static final long serialVersionUID = 4252849345878558685L;
 
             {
+                logger.info("########REQUEST doSave Layer" + request);
                 super.setCommandRequest(request);
             }
 

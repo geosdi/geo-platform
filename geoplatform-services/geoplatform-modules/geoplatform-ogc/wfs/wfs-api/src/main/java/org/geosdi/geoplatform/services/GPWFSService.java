@@ -207,8 +207,7 @@ public interface GPWFSService {
      */
     @POST
     @Path(value = GPWFSServiceRSPathConfig.WFS_SEARCH_FEATURES_BY_BBOX_CQL_FILTER_AND_QUERY_RS_PATH)
-    Response searchFeaturesByBboxCqlFilterAndQuery(GPWFSSearchFeaturesByBboxCqlFilterAndQueryRequest request)
-            throws Exception;
+    Response searchFeaturesByBboxCqlFilterAndQuery(GPWFSSearchFeaturesByBboxCqlFilterAndQueryRequest request) throws Exception;
 
     /**
      * @param serverURL

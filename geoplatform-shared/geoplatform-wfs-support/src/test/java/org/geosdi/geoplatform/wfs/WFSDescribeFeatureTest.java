@@ -177,4 +177,25 @@ public class WFSDescribeFeatureTest {
         gpJAXBContextBuilder.marshal(root, writer);
         logger.info("######################LAYER_SCHEMA_DTSUP_STROMBOLI_XML : \n{}\n", writer);
     }
+
+    @Test
+    public void f_describeAdminSHPComuniTest() throws Exception {
+        WFSDescribeFeatureTypeRequest<Schema> request =  newConnector()
+                .withServerUrl(new URL("https://prosit.geosdi.org/geoserver/wfs"))
+                .withPooledConnectorConfig(pooledConnectorConfigBuilder()
+                        .withMaxTotalConnections(150)
+                        .withDefaultMaxPerRoute(80)
+                        .withMaxRedirect(20)
+                        .build()).build().createDescribeFeatureTypeRequest();
+        QName value = new QName("admin:admin_shp_comuni");
+        String localPart = value.getLocalPart();
+        request.setTypeName(Arrays.asList(value));
+        Schema s = request.getResponse();
+        String name = localPart.substring(localPart.indexOf(":") + 1);
+        QName qName = new QName("org.geosdi.geoplatform.connector.wfs.response", "LayerSchemaDTO");
+        JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(qName, LayerSchemaDTO.class, schemaReader.getFeature(s, name));
+        StringWriter writer = new StringWriter();
+        gpJAXBContextBuilder.marshal(root, writer);
+        logger.info("######################LAYER_SCHEMA_ADMIN_SHP_COMUNI_XML : \n{}\n", writer);
+    }
 }

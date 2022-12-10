@@ -88,7 +88,7 @@ public class PropertyIsLikeType extends ComparisonOpsType implements ToString2 {
     @XmlAttribute(name = "singleChar", required = true)
     protected String singleChar;
     @XmlAttribute(name = "escapeChar", required = true)
-    protected String escapeChar;
+    protected String escapeChar = "\n";
 
     /**
      * Recupera il valore della proprietà propertyName.
@@ -203,7 +203,7 @@ public class PropertyIsLikeType extends ComparisonOpsType implements ToString2 {
      *              {@link String }
      */
     public void setEscapeChar(String value) {
-        this.escapeChar = value;
+        this.escapeChar = value != null ? value : "'\'";
     }
 
     public boolean isSetEscapeChar() {

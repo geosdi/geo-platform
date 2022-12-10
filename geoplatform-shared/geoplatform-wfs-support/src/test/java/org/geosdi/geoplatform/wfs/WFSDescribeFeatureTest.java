@@ -1,11 +1,11 @@
-/**
+/*
  *
  *    geo-platform
  *    Rich webgis framework
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2021 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2022 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -51,10 +51,10 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import java.io.StringWriter;
 import java.net.URL;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
+import static java.net.URLDecoder.decode;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.geosdi.geoplatform.connector.WFSConnectorBuilder.newConnector;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 
@@ -93,7 +93,7 @@ public class WFSDescribeFeatureTest {
     private static final FeatureSchemaReader schemaReader = new GPFeatureSchemaReader();
 
     @Test
-    public void describeToppStatesTest() throws Exception {
+    public void a_describeToppStatesTest() throws Exception {
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         String localPart = statesName.getLocalPart();
         request.setTypeName(Arrays.asList(statesName));
@@ -108,7 +108,7 @@ public class WFSDescribeFeatureTest {
     }
 
     @Test
-    public void describeSFRoadTest() throws Exception {
+    public void b_describeSFRoadTest() throws Exception {
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         String localPart = sfRoads.getLocalPart();
         request.setTypeName(Arrays.asList(sfRoads));
@@ -157,11 +157,11 @@ public class WFSDescribeFeatureTest {
         logger.info("######################LAYER_SCHEMA_PERCORSI_NAVETTE_XML : \n{}\n", writer);
     }
 
-    @Ignore
     @Test
+    @Ignore
     public void e_describeLayerDtsupStromboliTest() throws Exception {
-        String serverURL = "http://localhost:8888/sitdpc/gpServerProxy?targetURL=https://insar.irea.cnr.it/geoserver/wms%26v=dpc%26p=4WzL06EA";
-        serverURL = URLDecoder.decode(serverURL.replaceAll("wms", "wfs"), StandardCharsets.UTF_8.name());
+        String serverURL = "https://servizi.protezionecivile.it/webgis/sitdpc/gpServerProxy?targetURL=https://insar.irea.cnr.it/geoserver/wms%26v=dpc%26p=4WzL06EA";
+        serverURL = decode(serverURL.replaceAll("wms", "wfs"), UTF_8.name());
         logger.info("########################SERVER_URL : {}\n", serverURL);
         WFSDescribeFeatureTypeRequest<Schema> request = newConnector().withServerUrl(new URL(serverURL)).build()
                 .createDescribeFeatureTypeRequest();
@@ -170,12 +170,32 @@ public class WFSDescribeFeatureTest {
         request.setTypeName(Arrays.asList(dtsupStromboli));
         logger.info("{}\n", request.showRequestAsString());
         logger.info("#########################SCHEMA_AS_STRING : \n{}\n", request.getResponseAsString());
-//        Schema s = request.getResponse();
-//        String name = localPart.substring(localPart.indexOf(":") + 1);
-//        JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(dtsupStromboli, LayerSchemaDTO.class, schemaReader.getFeature(s, name));
-//        StringWriter writer = new StringWriter();
-//        gpJAXBContextBuilder.marshal(root, writer);
-//        logger.info("######################LAYER_SCHEMA_DTSUP_STROMBOLI_XML : \n{}\n", writer);
+        Schema s = request.getResponse();
+        String name = localPart.substring(localPart.indexOf(":") + 1);
+        JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(dtsupStromboli, LayerSchemaDTO.class, schemaReader.getFeature(s, name));
+        StringWriter writer = new StringWriter();
+        gpJAXBContextBuilder.marshal(root, writer);
+        logger.info("######################LAYER_SCHEMA_DTSUP_STROMBOLI_XML : \n{}\n", writer);
     }
 
+    @Test
+    public void f_describeAdminSHPComuniTest() throws Exception {
+        WFSDescribeFeatureTypeRequest<Schema> request =  newConnector()
+                .withServerUrl(new URL("https://prosit.geosdi.org/geoserver/wfs"))
+                .withPooledConnectorConfig(pooledConnectorConfigBuilder()
+                        .withMaxTotalConnections(150)
+                        .withDefaultMaxPerRoute(80)
+                        .withMaxRedirect(20)
+                        .build()).build().createDescribeFeatureTypeRequest();
+        QName value = new QName("admin:admin_shp_comuni");
+        String localPart = value.getLocalPart();
+        request.setTypeName(Arrays.asList(value));
+        Schema s = request.getResponse();
+        String name = localPart.substring(localPart.indexOf(":") + 1);
+        QName qName = new QName("org.geosdi.geoplatform.connector.wfs.response", "LayerSchemaDTO");
+        JAXBElement<LayerSchemaDTO> root = new JAXBElement<>(qName, LayerSchemaDTO.class, schemaReader.getFeature(s, name));
+        StringWriter writer = new StringWriter();
+        gpJAXBContextBuilder.marshal(root, writer);
+        logger.info("######################LAYER_SCHEMA_ADMIN_SHP_COMUNI_XML : \n{}\n", writer);
+    }
 }

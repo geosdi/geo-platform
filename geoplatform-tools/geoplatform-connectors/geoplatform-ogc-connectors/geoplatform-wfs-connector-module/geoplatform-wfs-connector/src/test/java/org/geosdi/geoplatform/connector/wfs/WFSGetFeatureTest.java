@@ -46,10 +46,14 @@ import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
+import javax.xml.namespace.QName;
 import java.io.StringReader;
 import java.math.BigInteger;
+import java.net.URL;
 import java.util.Arrays;
 
+import static org.geosdi.geoplatform.connector.WFSConnectorBuilder.newConnector;
+import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.HITS;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -259,7 +263,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         request.setQueryDTO(GPJAXBContextBuilder.newInstance()
                 .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                         "<QueryDTO>\n" +
-                        "    <matchOperator>NONE</matchOperator>\n" +
+                        "    <matchOperator>ALL</matchOperator>\n" +
                         "    <queryRestrictionList>\n" +
                         "        <queryRestriction>\n" +
                         "            <attribute>\n" +
@@ -270,12 +274,11 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
                         "                <type>string</type>\n" +
                         "                <value></value>\n" +
                         "            </attribute>\n" +
-                        "            <operator>CONTAINS</operator>\n" +
+                        "            <operator>LIKE</operator>\n" +
                         "            <restriction>Mtn</restriction>\n" +
                         "        </queryRestriction>\n" +
                         "    </queryRestrictionList>\n" +
                         "</QueryDTO>"), QueryDTO.class));
-
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
         logger.info("##################################statesNotContainsRestrictionTest#Features : {}\n", response.getNumberOfFeatures().intValue());
@@ -426,5 +429,38 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
         logger.info("########################################statesSecureNotGreatherThanRestrictionTest#Features : {}\n", response.getNumberOfFeatures().intValue());
+    }
+
+    @Test
+    public void r_adminSHPComCqlFilterTest() throws Exception {
+        WFSGetFeatureRequest<FeatureCollectionType> request = newConnector()
+                .withServerUrl(new URL("https://prosit.geosdi.org/geoserver/wfs"))
+                .withPooledConnectorConfig(pooledConnectorConfigBuilder()
+                        .withMaxTotalConnections(150)
+                        .withDefaultMaxPerRoute(80)
+                        .withMaxRedirect(20)
+                        .build()).build().createGetFeatureRequest();
+        request.setTypeName(new QName("admin:admin_shp_comuni"));
+        request.setResultType(HITS.value());
+        request.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
+        logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
+        logger.info("#########################################RESPONSE : {}\n", request.getResponseAsString());
+    }
+
+    @Test
+    public void s_adminSHPComCqlFilterAndBboxTest() throws Exception {
+        WFSGetFeatureRequest<FeatureCollectionType> request = newConnector()
+                .withServerUrl(new URL("https://prosit.geosdi.org/geoserver/wfs"))
+                .withPooledConnectorConfig(pooledConnectorConfigBuilder()
+                        .withMaxTotalConnections(150)
+                        .withDefaultMaxPerRoute(80)
+                        .withMaxRedirect(20)
+                        .build()).build().createGetFeatureRequest();
+        request.setTypeName(new QName("admin:admin_shp_comuni"));
+        request.setResultType(HITS.value());
+        request.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
+        request.setBBox(new BBox(14.403076171875002, 38.83542884007305, 19.368896484375004, 40.94671366508002));
+        logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
+        logger.info("#########################################RESPONSE : {}\n", request.getResponseAsString());
     }
 }

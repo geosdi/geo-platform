@@ -36,9 +36,9 @@ package org.geosdi.geoplatform.connector.server.request.v110.cql;
 
 import org.geosdi.geoplatform.jaxb.pool.GPJAXBContextBuilderPool;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
-import org.geotools.filter.text.cql2.CQL;
-import org.geotools.xml.Configuration;
-import org.geotools.xml.Encoder;
+import org.geotools.filter.text.ecql.ECQL;
+import org.geotools.xsd.Configuration;
+import org.geotools.xsd.Encoder;
 import org.opengis.filter.Filter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,7 +49,7 @@ import java.io.StringReader;
 
 import static org.geosdi.geoplatform.jaxb.pool.GPJAXBContextBuilderPool.jaxbContextBuilderPool;
 import static org.geotools.factory.CommonFactoryFinder.getFilterFactory2;
-import static org.geotools.factory.GeoTools.getDefaultHints;
+import static org.geotools.util.factory.GeoTools.getDefaultHints;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -89,13 +89,13 @@ class FilterTypeCqlBuilder implements GPFilterTypeCqlBuilder {
      */
     protected final FilterType internalBuild() {
         try {
-            Filter filter = CQL.toFilter(this.cqlFilter, getFilterFactory2(getDefaultHints()));
+            Filter filter = ECQL.toFilter(this.cqlFilter, getFilterFactory2(getDefaultHints()));
             Configuration configuration = new org.geotools.filter.v1_0.OGCConfiguration();
             Encoder encoder = new Encoder(configuration);
             encoder.setIndenting(true);
             encoder.setIndentSize(4);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            encoder.encode(filter, org.geotools.filter.v1_0.OGC.Filter, stream);
+            encoder.encode(filter, org.geotools.filter.v1_1.OGC.Filter, stream);
             return jaxbContextBuilder.unmarshal(new StringReader(stream.toString()), FilterType.class);
         } catch (Exception ex) {
             ex.printStackTrace();

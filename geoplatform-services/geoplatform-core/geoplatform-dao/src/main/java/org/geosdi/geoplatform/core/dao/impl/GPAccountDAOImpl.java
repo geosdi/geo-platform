@@ -223,8 +223,9 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
             Root<GPUser> userRoot = builder.treat(root, GPUser.class);
             criteriaQuery.select(root);
             List<Predicate> predicates = Lists.newArrayList();
-            if ((nameLike != null) && !(nameLike.trim().isEmpty()))
-                predicates.add(builder.like(builder.lower(userRoot.get("username")), nameLike.toLowerCase()));
+            if ((nameLike != null) && !(nameLike.trim().isEmpty())) {
+                predicates.add(builder.like(builder.lower(userRoot.get("name")), nameLike.toLowerCase()));
+            }
             predicates.add(builder.equal(root.join("organization").get("name"), organizationName));
             predicates.add(builder.notEqual(root.get("id"), userID));
             predicates.add(builder.isNotNull(userRoot.get("username")));
@@ -322,8 +323,9 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
             List<Predicate> predicates = Lists.newArrayList();
             predicates.add(builder.equal(root.join("organization").get("name"), organizationName));
             predicates.add(builder.isNotNull(userRoot.get("username")));
-            if ((nameLike != null) && !(nameLike.isEmpty()))
-                predicates.add(builder.like(builder.lower(userRoot.get("username")), nameLike.toLowerCase()));
+            if ((nameLike != null) && !(nameLike.isEmpty())) {
+                predicates.add(builder.like(builder.lower(userRoot.get("name")), nameLike.toLowerCase()));
+            }
             criteriaQuery.where(predicates.stream().toArray(size -> new Predicate[size]));
             return this.entityManager.createQuery(criteriaQuery).getSingleResult();
         } catch (Exception ex) {

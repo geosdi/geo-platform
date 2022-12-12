@@ -228,9 +228,9 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
             }
             predicates.add(builder.equal(root.join("organization").get("name"), organizationName));
             predicates.add(builder.notEqual(root.get("id"), userID));
-            predicates.add(builder.isNotNull(userRoot.get("username")));
+            predicates.add(builder.isNotNull(userRoot.get("name")));
             criteriaQuery.where(predicates.stream().toArray(s -> new Predicate[s]))
-                    .orderBy(builder.asc(userRoot.get("username")));
+                    .orderBy(builder.asc(userRoot.get("name")));
             Query typedQuery = this.entityManager.createQuery(criteriaQuery);
             Integer firstResult = (page == 0) ? 0 : ((page * size));
             typedQuery.setFirstResult(firstResult);
@@ -322,7 +322,7 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
             criteriaQuery.select(builder.count(root));
             List<Predicate> predicates = Lists.newArrayList();
             predicates.add(builder.equal(root.join("organization").get("name"), organizationName));
-            predicates.add(builder.isNotNull(userRoot.get("username")));
+            predicates.add(builder.isNotNull(userRoot.get("name")));
             if ((nameLike != null) && !(nameLike.isEmpty())) {
                 predicates.add(builder.like(builder.lower(userRoot.get("name")), nameLike.toLowerCase()));
             }

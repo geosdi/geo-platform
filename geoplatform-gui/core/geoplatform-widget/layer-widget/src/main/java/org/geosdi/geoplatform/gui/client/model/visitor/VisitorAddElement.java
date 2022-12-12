@@ -162,7 +162,7 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
         if (!((FolderTreeNode) folder).isLoaded()) {
             this.tmpIndex = this.tmpIndex - ((FolderTreeNode) folder).getNumberOfDescendants();
         }
-        logger.info("VisitorAddElem Folder set zIndex: " + folder.getzIndex() + " to the folder: " + folder.getLabel());
+        logger.fine("VisitorAddElem Folder set zIndex: " + folder.getzIndex() + " to the folder: " + folder.getLabel());
         List<ModelData> childrens = folder.getChildren();
         for (int i = 0; i < childrens.size() && !this.stopIterating; i++) {
             this.tmpElement = (GPBeanTreeModel) childrens.get(i);
@@ -178,7 +178,7 @@ public class VisitorAddElement extends AbstractVisitTree implements IVisitor {
 
     private void visitLeaf(GPLayerBean leaf) {
         ((GPBeanTreeModel) leaf).setzIndex(--this.tmpIndex);
-        logger.info("VisitorAddElem Leaf set zIndex: " + this.tmpIndex + " to the leaf: " + leaf.getLabel());
+        logger.fine("VisitorAddElem Leaf set zIndex: " + this.tmpIndex + " to the leaf: " + leaf.getLabel());
     }
 
     @Override

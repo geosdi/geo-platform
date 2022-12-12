@@ -88,7 +88,6 @@ public class SaveLayerHandler extends SaveTreeElementHandler {
             private static final long serialVersionUID = 4252849345878558685L;
 
             {
-                logger.info("########REQUEST doSave Layer" + request);
                 super.setCommandRequest(request);
             }
 

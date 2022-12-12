@@ -89,7 +89,6 @@ public class SaveFolderHandler extends SaveTreeElementHandler {
             private static final long serialVersionUID = 4252849345878558685L;
 
             {
-                logger.info("########REQUEST do save folder " + request);
                 super.setCommandRequest(request);
             }
 

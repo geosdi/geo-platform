@@ -380,14 +380,13 @@ public class GPAccountDelegate implements AccountDelegate {
         searchCriteria.addFilterNotEqual("id", userID);
         searchCriteria.setMaxResults(request.getNum());
         searchCriteria.setPage(request.getPage());
-        searchCriteria.addFilterNotEmpty("username");
-        searchCriteria.addSortAsc("username");
-        searchCriteria.addFilterEqual("organization.name",
-                user.getOrganization().getName());
+        searchCriteria.addFilterNotEmpty("name");
+        searchCriteria.addSortAsc("name");
+        searchCriteria.addFilterEqual("organization.name", user.getOrganization().getName());
 
         String like = request.getNameLike();
         if (like != null) {
-            searchCriteria.addFilterILike("username", like);
+            searchCriteria.addFilterILike("name", like);
         }
 
         List<GPAccount> accountList = accountDao.search(searchCriteria);
@@ -476,11 +475,11 @@ public class GPAccountDelegate implements AccountDelegate {
     @Override
     public Long getUsersCount(String organization, SearchRequest request) {
         Search searchCriteria = new Search(GPAccount.class);
-        searchCriteria.addFilterNotEmpty("username");
+        searchCriteria.addFilterNotEmpty("name");
         searchCriteria.addFilterEqual("organization.name", organization);
 
         if (request != null && request.getNameLike() != null) {
-            searchCriteria.addFilterILike("username", request.getNameLike());
+            searchCriteria.addFilterILike("name", request.getNameLike());
         }
         return Long.valueOf(accountDao.count(searchCriteria));
     }

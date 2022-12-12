@@ -37,8 +37,8 @@ package org.geosdi.geoplatform.connector.server.request.v110.cql;
 import org.geosdi.geoplatform.jaxb.pool.GPJAXBContextBuilderPool;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.geotools.filter.text.ecql.ECQL;
-import org.geotools.xsd.Configuration;
-import org.geotools.xsd.Encoder;
+import org.geotools.xml.Configuration;
+import org.geotools.xml.Encoder;
 import org.opengis.filter.Filter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,7 +49,7 @@ import java.io.StringReader;
 
 import static org.geosdi.geoplatform.jaxb.pool.GPJAXBContextBuilderPool.jaxbContextBuilderPool;
 import static org.geotools.factory.CommonFactoryFinder.getFilterFactory2;
-import static org.geotools.util.factory.GeoTools.getDefaultHints;
+import static org.geotools.factory.GeoTools.getDefaultHints;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

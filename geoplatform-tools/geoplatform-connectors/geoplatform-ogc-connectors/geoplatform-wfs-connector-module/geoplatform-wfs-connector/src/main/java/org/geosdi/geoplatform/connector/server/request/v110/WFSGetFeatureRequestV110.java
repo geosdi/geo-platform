@@ -35,17 +35,21 @@
  */
 package org.geosdi.geoplatform.connector.server.request.v110;
 
+import org.geosdi.geoplatform.connector.bridge.implementor.GPWFSGetFeatureReader;
+import org.geosdi.geoplatform.connector.bridge.store.GPWFSGetFeatureReaderStore;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.AbstractGetFeatureRequest;
-import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
+import org.geosdi.geoplatform.connector.server.request.GPWFSGetFeatureOutputFormat;
 import org.geosdi.geoplatform.xml.wfs.v110.GetFeatureType;
 import org.geosdi.geoplatform.xml.wfs.v110.QueryType;
 
 import javax.annotation.Nonnull;
+import java.io.InputStream;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.Arrays.asList;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.connector.server.request.WFSGetFeatureOutputFormat.GML_311;
 import static org.geosdi.geoplatform.connector.server.request.v110.param.GPWFSGetFeatureRequestParamChain.wfsGetFeatureRequestParamChain;
 import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.RESULTS;
 import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.fromValue;
@@ -54,7 +58,9 @@ import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.fromValue;
  * @author Giuseppe La Scaleia - <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde - <vincenzo.monteverde@geosdi.org>
  */
-public class WFSGetFeatureRequestV110 extends AbstractGetFeatureRequest<FeatureCollectionType, GetFeatureType> {
+public class WFSGetFeatureRequestV110 extends AbstractGetFeatureRequest<Object, GetFeatureType> {
+
+    private static final GPWFSGetFeatureReaderStore store = new GPWFSGetFeatureReaderStore();
 
     /**
      * @param server
@@ -75,11 +81,24 @@ public class WFSGetFeatureRequestV110 extends AbstractGetFeatureRequest<FeatureC
         query.setTypeName(asList(typeName));
         request.getQuery().add(query);
         wfsGetFeatureRequestParamChain().applyParam(this, query);
-        request.setResultType(resultType != null ? fromValue(resultType) : RESULTS);
-        request.setOutputFormat(outputFormat != null ? outputFormat : "text/xml; subtype=gml/3.1.1");
-        if (maxFeatures != null) {
+        request.setResultType(this.isSetResultType() ? fromValue(resultType) : RESULTS);
+        request.setOutputFormat(this.isSetOutputFormat() ? outputFormat.getOutputFormat() : GML_311.getOutputFormat());
+        if (this.isSetMaxFeatures()) {
             request.setMaxFeatures(maxFeatures);
         }
         return request;
+    }
+
+    /**
+     * @param inputStream
+     * @return {@link Object}
+     * @throws Exception
+     */
+    @Override
+    protected final Object readInternal(@Nonnull(when = NEVER) InputStream inputStream) throws Exception {
+        GPWFSGetFeatureOutputFormat outpuFormat = this.isSetOutputFormat() ? this.outputFormat : GML_311;
+        GPWFSGetFeatureReader<?> reader = store.getImplementorByKey(outpuFormat);
+        checkArgument(reader != null, "There is no GetFeatureReader for outputFormat : " + outpuFormat.getOutputFormat());
+        return reader.read(inputStream);
     }
 }

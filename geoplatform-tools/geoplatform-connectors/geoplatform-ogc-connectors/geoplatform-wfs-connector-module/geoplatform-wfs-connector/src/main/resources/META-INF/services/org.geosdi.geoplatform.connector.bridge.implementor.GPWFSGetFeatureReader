@@ -1,0 +1,3 @@
+org.geosdi.geoplatform.connector.bridge.implementor.csv.GPWFSGetFeatureCsvReader
+org.geosdi.geoplatform.connector.bridge.implementor.geojson.GPWFSGetFeatureGeoJsonReader
+org.geosdi.geoplatform.connector.bridge.implementor.gml.GPWFSGetFeatureGml311Reader

@@ -35,8 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.wfs;
 
+import org.geojson.FeatureCollection;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
+import org.geosdi.geoplatform.csv.support.model.IGPCSVBaseSchema;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
 import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.xml.gml.v311.FeatureArrayPropertyType;
@@ -46,15 +48,14 @@ import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
-import javax.xml.namespace.QName;
 import java.io.StringReader;
 import java.math.BigInteger;
-import java.net.URL;
 import java.util.Arrays;
 
-import static org.geosdi.geoplatform.connector.WFSConnectorBuilder.newConnector;
-import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
+import static org.geosdi.geoplatform.connector.server.request.WFSGetFeatureOutputFormat.CSV;
+import static org.geosdi.geoplatform.connector.server.request.WFSGetFeatureOutputFormat.GEOJSON;
 import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.HITS;
+import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.RESULTS;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -406,7 +407,7 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     public void q_statesSecureNotGreatherThanRestrictionTest() throws Exception {
         WFSGetFeatureRequest<FeatureCollectionType> request = secureServerConnector.createGetFeatureRequest();
         request.setTypeName(statesName);
-        request.setResultType(HITS.value());
+        request.setResultType(RESULTS.value());
         request.setQueryDTO(GPJAXBContextBuilder.newInstance()
                 .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                         "<QueryDTO>\n" +
@@ -432,35 +433,62 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
     }
 
     @Test
-    public void r_adminSHPComCqlFilterTest() throws Exception {
-        WFSGetFeatureRequest<FeatureCollectionType> request = newConnector()
-                .withServerUrl(new URL("https://prosit.geosdi.org/geoserver/wfs"))
-                .withPooledConnectorConfig(pooledConnectorConfigBuilder()
-                        .withMaxTotalConnections(150)
-                        .withDefaultMaxPerRoute(80)
-                        .withMaxRedirect(20)
-                        .build()).build().createGetFeatureRequest();
-        request.setTypeName(new QName("admin:admin_shp_comuni"));
-        request.setResultType(HITS.value());
-        request.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
+    public void r_statesSecureNotGreatherThanRestrictionAsGeoJsonTest() throws Exception {
+        WFSGetFeatureRequest<FeatureCollection> request = secureServerConnector.createGetFeatureRequest();
+        request.setTypeName(statesName);
+        request.setResultType(RESULTS.value());
+        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
+                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                        "<QueryDTO>\n" +
+                        "    <matchOperator>NONE</matchOperator>\n" +
+                        "    <queryRestrictionList>\n" +
+                        "        <queryRestriction>\n" +
+                        "            <attribute>\n" +
+                        "                <maxOccurs>1</maxOccurs>\n" +
+                        "                <minOccurs>0</minOccurs>\n" +
+                        "                <name>WORKERS</name>\n" +
+                        "                <nillable>true</nillable>\n" +
+                        "                <type>double</type>\n" +
+                        "                <value></value>\n" +
+                        "            </attribute>\n" +
+                        "            <operator>GREATER</operator>\n" +
+                        "            <restriction>6000000</restriction>\n" +
+                        "        </queryRestriction>\n" +
+                        "    </queryRestrictionList>\n" +
+                        "</QueryDTO>"), QueryDTO.class));
+        request.setOutputFormat(GEOJSON);
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
-        logger.info("#########################################RESPONSE : {}\n", request.getResponseAsString());
+        FeatureCollection response = request.getResponse();
+        logger.info("########################################statesSecureNotGreatherThanRestrictionTest#Features : {}\n", response.getFeatures().size());
     }
 
     @Test
-    public void s_adminSHPComCqlFilterAndBboxTest() throws Exception {
-        WFSGetFeatureRequest<FeatureCollectionType> request = newConnector()
-                .withServerUrl(new URL("https://prosit.geosdi.org/geoserver/wfs"))
-                .withPooledConnectorConfig(pooledConnectorConfigBuilder()
-                        .withMaxTotalConnections(150)
-                        .withDefaultMaxPerRoute(80)
-                        .withMaxRedirect(20)
-                        .build()).build().createGetFeatureRequest();
-        request.setTypeName(new QName("admin:admin_shp_comuni"));
-        request.setResultType(HITS.value());
-        request.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
-        request.setBBox(new BBox(14.403076171875002, 38.83542884007305, 19.368896484375004, 40.94671366508002));
+    public void s_statesSecureNotGreatherThanRestrictionAsCsvTest() throws Exception {
+        WFSGetFeatureRequest<IGPCSVBaseSchema> request = secureServerConnector.createGetFeatureRequest();
+        request.setTypeName(statesName);
+        request.setResultType(RESULTS.value());
+        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
+                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                        "<QueryDTO>\n" +
+                        "    <matchOperator>NONE</matchOperator>\n" +
+                        "    <queryRestrictionList>\n" +
+                        "        <queryRestriction>\n" +
+                        "            <attribute>\n" +
+                        "                <maxOccurs>1</maxOccurs>\n" +
+                        "                <minOccurs>0</minOccurs>\n" +
+                        "                <name>WORKERS</name>\n" +
+                        "                <nillable>true</nillable>\n" +
+                        "                <type>double</type>\n" +
+                        "                <value></value>\n" +
+                        "            </attribute>\n" +
+                        "            <operator>GREATER</operator>\n" +
+                        "            <restriction>6000000</restriction>\n" +
+                        "        </queryRestriction>\n" +
+                        "    </queryRestrictionList>\n" +
+                        "</QueryDTO>"), QueryDTO.class));
+        request.setOutputFormat(CSV);
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
-        logger.info("#########################################RESPONSE : {}\n", request.getResponseAsString());
+        IGPCSVBaseSchema response = request.getResponse();
+        logger.info("########################################statesSecureNotGreatherThanRestrictionTest#Features : {}\n", response.getRowAttributes().size());
     }
 }

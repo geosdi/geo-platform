@@ -43,6 +43,8 @@ import org.geosdi.geoplatform.xml.filter.v110.ComparisonOpsType;
 
 import javax.xml.bind.JAXBElement;
 
+import static java.lang.Boolean.FALSE;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -71,7 +73,7 @@ public class QueryRestrictionMockStrategy implements QueryRestrictionStrategy<Co
      */
     @Override
     public Boolean isValid() {
-        return Boolean.FALSE;
+        return FALSE;
     }
 
     /**

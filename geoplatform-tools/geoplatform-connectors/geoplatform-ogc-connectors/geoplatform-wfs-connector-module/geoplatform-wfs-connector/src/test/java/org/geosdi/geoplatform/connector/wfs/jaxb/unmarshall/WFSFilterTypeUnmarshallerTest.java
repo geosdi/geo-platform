@@ -157,4 +157,50 @@ public class WFSFilterTypeUnmarshallerTest {
         wfsJAXBContextPool.marshal(filterType, writer);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@FILTER_TYPE_AS_XML_STRING : \n{}\n", writer);
     }
+
+    @Test
+    public void h_wfsFilterTypev100PoolTest() throws Exception {
+        FilterType filterType = filterTypeCqlBuilder()
+                .withCqlFilter("Intersects(shape,LINESTRING(-42.45063 171.21188,-42.45859 171.20709))")
+                .build();
+        assertTrue(filterType.isSetSpatialOps());
+        Writer writer = new StringWriter();
+        wfsJAXBContextPool.marshal(filterType, writer);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@FILTER_TYPE_AS_XML_STRING : \n{}\n", writer);
+    }
+
+    @Test
+    public void i_wfsFilterTypev100PoolTest() throws Exception {
+        FilterType filterType = filterTypeCqlBuilder()
+                .withCqlFilter("Within(shape,POLYGON((-45.874136 170.501371,-45.872947 170.502041," +
+                        "-45.872544 170.503536,-45.872999 170.505233,-45.874136 170.505870,-45.875255 170.505187," +
+                        "-45.875723 170.503601,-45.875261 170.501969,-45.874136 170.501371)))")
+                .build();
+        assertTrue(filterType.isSetSpatialOps());
+        Writer writer = new StringWriter();
+        wfsJAXBContextPool.marshal(filterType, writer);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@FILTER_TYPE_AS_XML_STRING : \n{}\n", writer);
+    }
+
+    @Test
+    public void l_wfsFilterTypev100PoolTest() throws Exception {
+        FilterType filterType = filterTypeCqlBuilder()
+                .withCqlFilter("DWithin(GEOMETRY,POINT(5895346 1792630),10000,meters)")
+                .build();
+        assertTrue(filterType.isSetSpatialOps());
+        Writer writer = new StringWriter();
+        wfsJAXBContextPool.marshal(filterType, writer);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@FILTER_TYPE_AS_XML_STRING : \n{}\n", writer);
+    }
+
+    @Test
+    public void m_wfsFilterTypev100PoolTest() throws Exception {
+        FilterType filterType = filterTypeCqlBuilder()
+                .withCqlFilter("INTERSECTS(geom, ENVELOPE(-100, 49, -90, 50))")
+                .build();
+        assertTrue(filterType.isSetSpatialOps());
+        Writer writer = new StringWriter();
+        wfsJAXBContextPool.marshal(filterType, writer);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@FILTER_TYPE_AS_XML_STRING : \n{}\n", writer);
+    }
 }

@@ -80,7 +80,7 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
         CloseableHttpResponse httpResponse = this.securityConnector.secure(this, httpUriRequest);
         int statusCode = httpResponse.getCode();
         logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
-        super.checkHttpResponseStatus(statusCode);
+        this.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
             return statusCode == 204 || responseEntity == null ? null : this.readInternal(responseEntity.getContent());
@@ -100,7 +100,7 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpUriRequest);
         int statusCode = httpResponse.getCode();
         logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
-        super.checkHttpResponseStatus(statusCode);
+        this.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
             return statusCode == 204 || responseEntity == null ? "" : CharStreams.toString(new InputStreamReader(responseEntity.getContent(), UTF_8));
@@ -120,7 +120,7 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
         CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpUriRequest);
         int statusCode = httpResponse.getCode();
         logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
-        super.checkHttpResponseStatus(statusCode);
+        this.checkHttpResponseStatus(statusCode);
         HttpEntity responseEntity = httpResponse.getEntity();
         try {
             return statusCode == 204 || responseEntity == null ? null : new ByteArrayInputStream(IOUtils.toByteArray(responseEntity.getContent()));

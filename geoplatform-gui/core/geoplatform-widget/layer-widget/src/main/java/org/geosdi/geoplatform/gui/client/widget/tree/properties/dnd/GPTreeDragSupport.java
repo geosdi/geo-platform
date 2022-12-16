@@ -37,21 +37,18 @@ package org.geosdi.geoplatform.gui.client.widget.tree.properties.dnd;
 
 import com.extjs.gxt.ui.client.data.ModelData;
 import com.extjs.gxt.ui.client.dnd.TreePanelDragSource;
-import com.extjs.gxt.ui.client.event.BaseEvent;
-import com.extjs.gxt.ui.client.event.DNDEvent;
-import com.extjs.gxt.ui.client.event.DNDListener;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.*;
 import com.extjs.gxt.ui.client.store.TreeStoreEvent;
-import javax.inject.Inject;
-import javax.inject.Singleton;
-import org.geosdi.geoplatform.gui.model.tree.LayerEvents;
 import org.geosdi.geoplatform.gui.client.listener.GPDNDListener;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
 import org.geosdi.geoplatform.gui.client.widget.tree.dnd.GinDragSource;
 import org.geosdi.geoplatform.gui.client.widget.tree.dnd.GinGPDNDListener;
 import org.geosdi.geoplatform.gui.client.widget.tree.panel.GinTreePanel;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
+import org.geosdi.geoplatform.gui.model.tree.LayerEvents;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  *
@@ -66,9 +63,7 @@ public class GPTreeDragSupport implements TreeDragSupport {
     private final GPTreePanel tree;
 
     @Inject
-    public GPTreeDragSupport(GinDragSource theDragSource,
-            GinGPDNDListener theGpDNDListener,
-            GinTreePanel theTree) {
+    public GPTreeDragSupport(GinDragSource theDragSource, GinGPDNDListener theGpDNDListener, GinTreePanel theTree) {
         this.dragSource = theDragSource.get();
         this.gpDNDListener = theGpDNDListener.get();
         this.tree = theTree.get();
@@ -81,16 +76,12 @@ public class GPTreeDragSupport implements TreeDragSupport {
             public void dragStart(DNDEvent e) {
                 ModelData sel = tree.getSelectionModel().getSelectedItem();
                 if (tree.getSelectionModel().getSelectedItems().size() > 1
-                        || (sel != null && sel == tree.getStore().getRootItems().get(
-                        0))) {
+                        || (sel != null && sel == tree.getStore().getRootItems().get(0))) {
                     e.setCancelled(Boolean.TRUE);
                     e.getStatus().setStatus(Boolean.FALSE);
                 } else {
                     super.dragStart(e);
-                    ((TreePanelDragSource) e.getSource()).fireEvent(
-                            LayerEvents.GP_DRAG_START,
-                            new TreeStoreEvent<GPBeanTreeModel>(
-                            tree.getStore()));
+                    ((TreePanelDragSource) e.getSource()).fireEvent(LayerEvents.GP_DRAG_START, new TreeStoreEvent<GPBeanTreeModel>(tree.getStore()));
                 }
             }
         });
@@ -102,10 +93,7 @@ public class GPTreeDragSupport implements TreeDragSupport {
         Listener listenerDragLost = new Listener() {
             @Override
             public void handleEvent(BaseEvent be) {
-                ((TreePanelDragSource) be.getSource()).fireEvent(
-                        LayerEvents.GP_DRAG_LOST,
-                        new TreeStoreEvent<GPBeanTreeModel>(
-                        tree.getStore()));
+                ((TreePanelDragSource) be.getSource()).fireEvent(LayerEvents.GP_DRAG_LOST, new TreeStoreEvent<GPBeanTreeModel>(tree.getStore()));
                 //System.out.println("DragSource: Ho intercettato il drag cancelled");
             }
         };

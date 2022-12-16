@@ -430,4 +430,36 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         request.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%' OR Intersects(shape,POINT(-45.891523 170.467375)))");
         logger.info("######################\n{}\n", request.showRequestAsString());
     }
+
+    @Test
+    public void p_showRequestAsStringWithCqlFilterTest() throws Exception {
+        WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
+        request.setResultType(ResultTypeType.RESULTS.value());
+        request.setTypeName(statesName);
+        request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
+        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
+                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                        "<QueryDTO>\n" +
+                        "    <matchOperator>ANY</matchOperator>\n" +
+                        "    <queryRestrictionList>\n" +
+                        "        <queryRestriction>\n" +
+                        "            <attribute>\n" +
+                        "                <maxOccurs>1</maxOccurs>\n" +
+                        "                <minOccurs>0</minOccurs>\n" +
+                        "                <name>WORKERS</name>\n" +
+                        "                <nillable>true</nillable>\n" +
+                        "                <type>double</type>\n" +
+                        "                <value></value>\n" +
+                        "            </attribute>\n" +
+                        "            <operator>GREATER_OR_EQUAL</operator>\n" +
+                        "            <restriction>1248972.0</restriction>\n" +
+                        "        </queryRestriction>\n" +
+                        "    </queryRestrictionList>\n" +
+                        "</QueryDTO>"), QueryDTO.class));
+        request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
+        request.setSRS("EPSG:4326");
+        request.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%' " +
+                "OR Intersects(shape,POINT(-45.891523 170.467375)) OR Intersects(shape,LINESTRING(-42.45063 171.21188,-42.45859 171.20709)))");
+        logger.info("######################\n{}\n", request.showRequestAsString());
+    }
 }

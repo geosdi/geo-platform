@@ -50,7 +50,8 @@ import java.util.List;
  */
 public abstract class AbstractGetFeatureRequest<T, Request> extends WFSRequest<T, Request> implements WFSGetFeatureRequest<T> {
 
-    private static final String NAME_GEOMETRY = "the_geom"; // TODO name property geometry is always "the_geom"?
+    private static final String DEFAULT_GEOMETRY_NAME = "the_geom";
+    private static final String DEFAULT_SRS = "EPSG:4326";
     //
     @Getter
     @Setter
@@ -70,7 +71,7 @@ public abstract class AbstractGetFeatureRequest<T, Request> extends WFSRequest<T
     protected String resultType;
     @Getter
     @Setter
-    protected String outputFormat;
+    protected GPWFSGetFeatureOutputFormat outputFormat;
     @Getter
     @Setter
     protected BigInteger maxFeatures;
@@ -109,11 +110,11 @@ public abstract class AbstractGetFeatureRequest<T, Request> extends WFSRequest<T
     /**
      * Sets the value of the SRS query property.
      *
-     * @param srs
+     * @param theSrs
      */
     @Override
-    public void setSRS(String srs) {
-        this.srs = srs;
+    public void setSRS(String theSrs) {
+        this.srs = theSrs;
     }
 
     /**
@@ -123,7 +124,7 @@ public abstract class AbstractGetFeatureRequest<T, Request> extends WFSRequest<T
      */
     @Override
     public String getSRS() {
-        return this.srs;
+        return this.srs = (((this.srs != null) && !(this.srs.trim().isEmpty())) ? this.srs : DEFAULT_SRS);
     }
 
     /**
@@ -131,7 +132,7 @@ public abstract class AbstractGetFeatureRequest<T, Request> extends WFSRequest<T
      */
     @Override
     public String getGeometryName() {
-        return (isSetGeometryName() ? this.geometryName : NAME_GEOMETRY);
+        return (isSetGeometryName() ? this.geometryName : DEFAULT_GEOMETRY_NAME);
     }
 
     /**

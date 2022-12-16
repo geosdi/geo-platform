@@ -33,36 +33,58 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.bridge.store;
+package org.geosdi.geoplatform.connector.wfs.bridge.finder;
 
-import org.geosdi.geoplatform.connector.bridge.implementor.GPWMSGetFeatureInfoReader;
-import org.geosdi.geoplatform.connector.server.request.GPWMSFeatureInfoFormat;
-import org.geosdi.geoplatform.support.bridge.store.GPImplementorStore;
+import org.geosdi.geoplatform.connector.bridge.finder.GPWFSGetFeatureReaderFinder;
+import org.geosdi.geoplatform.connector.bridge.implementor.GPWFSGetFeatureReader;
+import org.geosdi.geoplatform.support.bridge.finder.GPImplementorFinder;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.annotation.Nonnull;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
-
-import static com.google.common.base.Preconditions.checkArgument;
-import static java.util.function.Function.identity;
-import static java.util.stream.Collectors.toMap;
-import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface WMSGetFeatureInfoReaderStore extends GPImplementorStore<GPWMSGetFeatureInfoReader<?>> {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class GPWFSGetFeatureReaderFinderTest {
 
-    /**
-     * @return {@link Map<GPWMSFeatureInfoFormat, GPWMSGetFeatureInfoReader<?>}
-     */
-    static Map<GPWMSFeatureInfoFormat, GPWMSGetFeatureInfoReader<?>> of(@Nonnull(when = NEVER) Set<GPWMSGetFeatureInfoReader<?>> wmsFeatureInfoReaders) {
-        checkArgument(wmsFeatureInfoReaders != null, "The Parameter wmsGetFeatureInfoReaders must not be null.");
-        return wmsFeatureInfoReaders.stream()
-                .filter(Objects::nonNull)
-                .collect(toMap(k -> k.getKey().getImplementorKey(), identity(), (v1, v2) -> v1, LinkedHashMap::new));
+    private static final Logger logger = LoggerFactory.getLogger(GPWFSGetFeatureReaderFinderTest.class);
+    //
+    private static final GPImplementorFinder<GPWFSGetFeatureReader<?>> finder = new GPWFSGetFeatureReaderFinder<>();
+
+    @Test
+    public void a_getAllReaderImplementorsTest() throws Exception {
+        Set<GPWFSGetFeatureReader<?>> readerImplementors = finder.getAllImplementors();
+        logger.info("##########################READER_IMPLEMENTORS : {}\n", readerImplementors);
+    }
+
+    @Test
+    public void b_firstReload() throws Exception {
+        finder.reload();
+        logger.info("###########################{}\n", finder.getValidImplementors().size());
+    }
+
+    @Test
+    public void c_getAllReaderImplementors1Test() throws Exception {
+        Set<GPWFSGetFeatureReader<?>> readerImplementors = finder.getAllImplementors();
+        logger.info("##########################READER_IMPLEMENTORS : {}\n", readerImplementors.size());
+
+    }
+
+    @Test
+    public void d_secondReload() throws Exception {
+        finder.reload();
+        logger.info("###########################{}\n", finder.getValidImplementors().size());
+    }
+
+    @Test
+    public void getAllReaderImplementors2Test() throws Exception {
+        Set<GPWFSGetFeatureReader<?>> readerImplementors = finder.getAllImplementors();
+        logger.info("##########################READER_IMPLEMENTORS : {}\n", readerImplementors.size());
     }
 }

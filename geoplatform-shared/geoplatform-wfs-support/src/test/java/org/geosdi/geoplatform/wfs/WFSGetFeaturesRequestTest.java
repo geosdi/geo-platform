@@ -589,6 +589,54 @@ public class WFSGetFeaturesRequestTest {
         logger.info("#####################GRANDI_DIGHE : {}\n", featureCollectionDTOWrapper.getFeatureCollectionDTO());
     }
 
+    @Test
+    public void r_shpAdminComuniTest() throws Exception {
+        String wfsURL = "https://prosit.geosdi.org/geoserver/wfs";
+        GPWFSConnectorStore serverConnector = WFSConnectorBuilder
+                .newConnector()
+                .withServerUrl(new URL(wfsURL))
+                .build();
+        QName shpComuni = new QName("admin:admin_shp_comuni");
+        String localPart = shpComuni.getLocalPart();
+        String name = localPart.substring(localPart.indexOf(":") + 1);
+        WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
+        request.setTypeName(asList(shpComuni));
+        Schema response = request.getResponse();
+        logger.info("#################SCHEMA : {}\n", response);
+
+        LayerSchemaDTO layerSchema = featureReaderXSD.getFeature(response, name);
+        if(layerSchema == null) {
+            throw new IllegalStateException("The Layer Schema is null.");
+        }
+        layerSchema.setScope(wfsURL);
+        logger.debug("\n\t##################################LAYER_SCHEMA : {}", layerSchema);
+        WFSGetFeatureRequest getFeatureRequest = serverConnector.createGetFeatureRequest();
+        getFeatureRequest.setTypeName(new QName(layerSchema.getTypeName()));
+        getFeatureRequest.setSRS("EPSG:4326");
+        getFeatureRequest.setBBox(new BBox(14.403076171875002, 38.83542884007305, 19.368896484375004, 40.94671366508002));
+        getFeatureRequest.setGeometryName(layerSchema.getGeometry().getName());
+        getFeatureRequest.setResultType(RESULTS.value());
+        getFeatureRequest.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
+        getFeatureRequest.setMaxFeatures(valueOf(50));
+        logger.debug("@@@@@@@@@@@@@@@@@@REQUEST_AS_STRING : \n{}\n", getFeatureRequest.showRequestAsString());
+        InputStream is = getFeatureRequest.getResponseAsStream();
+        WFSGetFeatureStaxReader featureReaderStAX = new WFSGetFeatureStaxReader(layerSchema);
+        FeatureCollectionDTO featureCollection = featureReaderStAX.read(is);
+
+        if(!featureCollection.isFeaturesLoaded()) {
+            featureCollection.setErrorMessage(getFeatureRequest.getResponseAsString());
+        }
+        JAXBElement<FeatureCollectionDTO> root = new JAXBElement<>(shpComuni, FeatureCollectionDTO.class, featureCollection);
+        gpJAXBContextBuilder.marshal(root, new File(of(new File(".").getCanonicalPath(), "target", "AdminShpComuni")
+                .collect(joining(separator, "", ".xml"))));
+        getFeatureRequest.setOutputFormat("json");
+        InputStream isJson = getFeatureRequest.getResponseAsStream();
+        FeatureCollection featureCollectionJson = JACKSON_SUPPORT.getDefaultMapper().readValue(isJson, FeatureCollection.class);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@NUMBER_OF_FEATURES : {}\n", featureCollectionJson.getFeatures().size());
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "AdminShpComuni")
+                .collect(joining(separator, "", ".json"))), featureCollectionJson);
+    }
+
     @Getter
     @Setter
     @XmlRootElement(name = "FeatureCollectionDTOWrapper")

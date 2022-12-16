@@ -170,22 +170,21 @@ public interface WFSGetFeatureRequest<T> extends IGPostConnectorRequest<T> {
      *
      * @return OutputFormat
      */
-    String getOutputFormat();
+    GPWFSGetFeatureOutputFormat getOutputFormat();
 
     /**
      * Sets the value of the outputFormat property.
-     * <p>
-     * <p>Default value is "text/xml; subtype=gml/3.1.1".</p>
+     * <p>Default value is {@link WFSGetFeatureOutputFormat#GML_311}.</p>
      *
      * @param outputFormat
      */
-    void setOutputFormat(String outputFormat);
+    void setOutputFormat(GPWFSGetFeatureOutputFormat outputFormat);
 
     /**
      * @return {@link Boolean}
      */
     default boolean isSetOutputFormat() {
-        return ((this.getOutputFormat() != null) && !(this.getOutputFormat().trim().isEmpty()));
+        return ((this.getOutputFormat() != null));
     }
 
     /**
@@ -197,7 +196,6 @@ public interface WFSGetFeatureRequest<T> extends IGPostConnectorRequest<T> {
 
     /**
      * Sets the value of the maxFeatures property.
-     * <p>
      * <p>There is no default value defined and the absence of the attribute
      * means that all feature type instances in the result should should be
      * returned to the client.</p>

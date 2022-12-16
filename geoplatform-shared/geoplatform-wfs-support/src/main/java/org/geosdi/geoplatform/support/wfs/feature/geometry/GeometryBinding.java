@@ -41,12 +41,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class GeometryBinding {
 
-    private static final Map<String, Class> GML_GEOMETRY_BINDING = new HashMap<String, Class>();
+    private static final Map<String, Class> GML_GEOMETRY_BINDING = new HashMap();
 
     static {
         GML_GEOMETRY_BINDING.put("GeometryPropertyType", Geometry.class);

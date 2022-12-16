@@ -88,6 +88,7 @@ import static java.math.BigInteger.valueOf;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.connector.server.request.WFSGetFeatureOutputFormat.GEOJSON;
 import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder.newInstance;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
@@ -385,7 +386,7 @@ public class WFSGetFeaturesRequestTest {
         WFSGetFeatureRequest getFeatureRequest = serverConnector.createGetFeatureRequest();
         getFeatureRequest.setTypeName(states);
         getFeatureRequest.setSRS("EPSG:4326");
-        getFeatureRequest.setOutputFormat("json");
+        getFeatureRequest.setOutputFormat(GEOJSON);
         getFeatureRequest.setResultType(RESULTS.value());
 
         getFeatureRequest.setMaxFeatures(valueOf(50));
@@ -433,7 +434,7 @@ public class WFSGetFeaturesRequestTest {
         JAXBElement<FeatureCollectionDTO> root = new JAXBElement<>(percorsiNavette, FeatureCollectionDTO.class, featureCollection);
         gpJAXBContextBuilder.marshal(root, new File(of(new File(".").getCanonicalPath(), "target", "PercorsiNavette")
                 .collect(joining(separator, "", ".xml"))));
-        getFeatureRequest.setOutputFormat("json");
+        getFeatureRequest.setOutputFormat(GEOJSON);
         InputStream isJson = getFeatureRequest.getResponseAsStream();
         FeatureCollection featureCollectionJson = JACKSON_SUPPORT
                 .getDefaultMapper().readValue(isJson, FeatureCollection.class);
@@ -479,7 +480,7 @@ public class WFSGetFeaturesRequestTest {
         JAXBElement<FeatureCollectionDTO> root = new JAXBElement<>(ospedali, FeatureCollectionDTO.class, featureCollection);
         gpJAXBContextBuilder.marshal(root, new File(of(new File(".").getCanonicalPath(), "target", "Ospedali")
                 .collect(joining(separator, "", ".xml"))));
-        getFeatureRequest.setOutputFormat("json");
+        getFeatureRequest.setOutputFormat(GEOJSON);
         InputStream isJson = getFeatureRequest.getResponseAsStream();
         FeatureCollection featureCollectionJson = JACKSON_SUPPORT.getDefaultMapper().readValue(isJson, FeatureCollection.class);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "Ospedali")
@@ -574,7 +575,7 @@ public class WFSGetFeaturesRequestTest {
         JAXBElement<FeatureCollectionDTO> root = new JAXBElement<>(grandiDighe, FeatureCollectionDTO.class, featureCollection);
         gpJAXBContextBuilder.marshal(root, new File(of(new File(".").getCanonicalPath(), "target", "GrandiDighe")
                 .collect(joining(separator, "", ".xml"))));
-        getFeatureRequest.setOutputFormat("json");
+        getFeatureRequest.setOutputFormat(GEOJSON);
         InputStream isJson = getFeatureRequest.getResponseAsStream();
         FeatureCollection featureCollectionJson = JACKSON_SUPPORT.getDefaultMapper().readValue(isJson, FeatureCollection.class);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "GrandiDighe")
@@ -629,7 +630,7 @@ public class WFSGetFeaturesRequestTest {
         JAXBElement<FeatureCollectionDTO> root = new JAXBElement<>(shpComuni, FeatureCollectionDTO.class, featureCollection);
         gpJAXBContextBuilder.marshal(root, new File(of(new File(".").getCanonicalPath(), "target", "AdminShpComuni")
                 .collect(joining(separator, "", ".xml"))));
-        getFeatureRequest.setOutputFormat("json");
+        getFeatureRequest.setOutputFormat(GEOJSON);
         InputStream isJson = getFeatureRequest.getResponseAsStream();
         FeatureCollection featureCollectionJson = JACKSON_SUPPORT.getDefaultMapper().readValue(isJson, FeatureCollection.class);
         logger.info("@@@@@@@@@@@@@@@@@@@@@NUMBER_OF_FEATURES : {}\n", featureCollectionJson.getFeatures().size());

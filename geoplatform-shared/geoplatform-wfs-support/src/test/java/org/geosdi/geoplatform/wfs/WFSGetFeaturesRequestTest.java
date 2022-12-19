@@ -39,7 +39,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.geojson.FeatureCollection;
 import org.geosdi.geoplatform.connector.GPWFSConnectorStore;
-import org.geosdi.geoplatform.connector.WFSConnectorBuilder;
 import org.geosdi.geoplatform.connector.server.request.WFSDescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
@@ -88,6 +87,7 @@ import static java.math.BigInteger.valueOf;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.connector.WFSConnectorBuilder.newConnector;
 import static org.geosdi.geoplatform.connector.server.request.WFSGetFeatureOutputFormat.GEOJSON;
 import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder.newInstance;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
@@ -125,7 +125,7 @@ public class WFSGetFeaturesRequestTest {
     @Test
     public void a_getAllFeaturesTest() throws Exception {
         String wfsURL = "http://geoserver.wfppal.org/geoserver/wfs";
-        GPWFSConnectorStore serverConnector = WFSConnectorBuilder.newConnector().withServerUrl(new URL(wfsURL)).build();
+        GPWFSConnectorStore serverConnector = newConnector().withServerUrl(new URL(wfsURL)).build();
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         request.setTypeName(asList(information));
         Schema response = request.getResponse();
@@ -157,8 +157,7 @@ public class WFSGetFeaturesRequestTest {
     @Test
     public void b_statesTest() throws Exception {
         String wfsURL = "http://150.145.141.92/geoserver/wfs";
-        GPWFSConnectorStore serverConnector = WFSConnectorBuilder
-                .newConnector()
+        GPWFSConnectorStore serverConnector = newConnector()
                 .withServerUrl(new URL(wfsURL))
                 .build();
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
@@ -191,8 +190,7 @@ public class WFSGetFeaturesRequestTest {
     @Test
     public void c_tigerRoadsTest() throws Exception {
         String wfsURL = "http://150.145.141.92/geoserver/wfs";
-        GPWFSConnectorStore serverConnector = WFSConnectorBuilder
-                .newConnector()
+        GPWFSConnectorStore serverConnector = newConnector()
                 .withServerUrl(new URL(wfsURL))
                 .build();
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
@@ -226,8 +224,7 @@ public class WFSGetFeaturesRequestTest {
     public void d_siteTrTest() throws Exception {
         String wfsURL = "http://150.145.141.241/geoserver/wfs";
         QName siteTRCom = new QName("cite:tr_com");
-        GPWFSConnectorStore serverConnector = WFSConnectorBuilder
-                .newConnector()
+        GPWFSConnectorStore serverConnector = newConnector()
                 .withServerUrl(new URL(wfsURL))
                 .build();
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
@@ -279,7 +276,7 @@ public class WFSGetFeaturesRequestTest {
     public void e_generateXMLFilesTest() throws Exception {
         String wfsURL = "http://150.145.141.92/geoserver/wfs";
         QName layerQName = new QName("sf:restricted");
-        GPWFSConnectorStore serverConnector = WFSConnectorBuilder.newConnector().withServerUrl(new URL(wfsURL)).build();
+        GPWFSConnectorStore serverConnector = newConnector().withServerUrl(new URL(wfsURL)).build();
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
         request.setTypeName(asList(layerQName));
         Schema response = request.getResponse();
@@ -345,8 +342,7 @@ public class WFSGetFeaturesRequestTest {
         String wfsURL = "http://150.145.141.92/geoserver/wfs";
         QName TASMANIA_ROADS = new QName("http://www.openplans.org/topp",
                 "tasmania_roads", "topp");
-        GPWFSConnectorStore serverConnector = WFSConnectorBuilder
-                .newConnector()
+        GPWFSConnectorStore serverConnector = newConnector()
                 .withServerUrl(new URL(wfsURL))
                 .build();
         WFSDescribeFeatureTypeRequest<Schema> request = serverConnector.createDescribeFeatureTypeRequest();
@@ -379,8 +375,7 @@ public class WFSGetFeaturesRequestTest {
     @Test
     public void i_statesFeatureAsJsonTest() throws Exception {
         String wfsURL = "http://150.145.141.92/geoserver/wfs";
-        GPWFSConnectorStore serverConnector = WFSConnectorBuilder
-                .newConnector()
+        GPWFSConnectorStore serverConnector = newConnector()
                 .withServerUrl(new URL(wfsURL))
                 .build();
         WFSGetFeatureRequest getFeatureRequest = serverConnector.createGetFeatureRequest();
@@ -400,8 +395,7 @@ public class WFSGetFeaturesRequestTest {
     @Test
     public void l_percorsiNavetteTest() throws Exception {
         String wfsURL = "http://mappe-dpc.protezionecivile.it/gssitdpc/wfs";
-        GPWFSConnectorStore serverConnector = WFSConnectorBuilder
-                .newConnector()
+        GPWFSConnectorStore serverConnector = newConnector()
                 .withServerUrl(new URL(wfsURL))
                 .build();
         QName percorsiNavette = new QName("PianoCampiFlegrei:CF_PercorsiNavette");
@@ -442,11 +436,11 @@ public class WFSGetFeaturesRequestTest {
                 .collect(joining(separator, "", ".json"))), featureCollectionJson);
     }
 
+    @Ignore(value = "Serivce is unavailable")
     @Test
     public void m_ospedaliTest() throws Exception {
         String wfsURL = "https://servizi.protezionecivile.it/geoserver/wfs";
-        GPWFSConnectorStore serverConnector = WFSConnectorBuilder
-                .newConnector()
+        GPWFSConnectorStore serverConnector = newConnector()
                 .withClientSecurity(new BasicPreemptiveSecurityConnector("MAIDNT78M23G942L", "mdonato"))
                 .withServerUrl(new URL(wfsURL))
                 .build();
@@ -508,8 +502,7 @@ public class WFSGetFeaturesRequestTest {
     @Test
     public void p_itGrandiDigheTest() throws Exception {
         String wfsURL = "https://servizi.protezionecivile.it/geoserver/wfs";
-        GPWFSConnectorStore serverConnector = WFSConnectorBuilder
-                .newConnector()
+        GPWFSConnectorStore serverConnector = newConnector()
                 .withClientSecurity(new BasicPreemptiveSecurityConnector("MAIDNT78M23G942L", "mdonato"))
                 .withServerUrl(new URL(wfsURL))
                 .build();
@@ -593,10 +586,7 @@ public class WFSGetFeaturesRequestTest {
     @Test
     public void r_shpAdminComuniTest() throws Exception {
         String wfsURL = "https://prosit.geosdi.org/geoserver/wfs";
-        GPWFSConnectorStore serverConnector = WFSConnectorBuilder
-                .newConnector()
-                .withServerUrl(new URL(wfsURL))
-                .build();
+        GPWFSConnectorStore serverConnector = newConnector().withServerUrl(new URL(wfsURL)).build();
         QName shpComuni = new QName("admin:admin_shp_comuni");
         String localPart = shpComuni.getLocalPart();
         String name = localPart.substring(localPart.indexOf(":") + 1);

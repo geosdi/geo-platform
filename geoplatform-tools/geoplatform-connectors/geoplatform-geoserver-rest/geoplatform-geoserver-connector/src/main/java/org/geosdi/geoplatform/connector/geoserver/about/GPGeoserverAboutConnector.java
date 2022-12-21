@@ -193,8 +193,6 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
      */
     protected static URL analyzesServerURL(URL serverURL) {
         checkArgument(serverURL != null, "The Parameter serverURL must not be null.");
-        if (!serverURL.getPath().contains("/geoserver/rest"))
-            throw new IllegalStateException("The GeoserverConnector URL must contains path /geoserver/rest");
         return serverURL;
     }
 }

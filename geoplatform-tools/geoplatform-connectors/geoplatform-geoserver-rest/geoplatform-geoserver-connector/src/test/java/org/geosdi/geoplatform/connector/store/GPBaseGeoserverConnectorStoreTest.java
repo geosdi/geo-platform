@@ -55,7 +55,7 @@ public abstract class GPBaseGeoserverConnectorStoreTest {
 
     protected static final Logger logger = LoggerFactory.getLogger(GPBaseGeoserverConnectorStoreTest.class);
     //
-    private static final String geoserverURLV2_22_x = "http://150.145.141.92/geoserver/rest";
+    private static final String geoserverURLV2_22_x = "http://150.145.69.23:9090/geoserver/cloud/rest";
     protected static GPGeoserverConnectorStore geoserverConnectorStoreV2_22_x;
 
     /**

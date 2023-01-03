@@ -56,8 +56,7 @@ class GPGeoserverLoadAclLayersRequest extends GPJsonGetConnectorRequest<GPGeoser
      * @param server
      * @param theJacksonSupport
      */
-    GPGeoserverLoadAclLayersRequest(@Nonnull(when = NEVER) GPServerConnector server,
-            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverLoadAclLayersRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
     }
 

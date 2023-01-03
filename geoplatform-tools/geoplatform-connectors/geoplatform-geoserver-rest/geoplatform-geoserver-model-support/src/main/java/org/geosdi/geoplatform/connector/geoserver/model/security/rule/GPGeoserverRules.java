@@ -55,6 +55,7 @@ import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 @ToString
 @XmlRootElement(name = "rules")
 @XmlAccessorType(FIELD)
+//@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class GPGeoserverRules implements GeoserverRules {
 
     private static final long serialVersionUID = 8939491150269139258L;

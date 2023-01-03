@@ -111,6 +111,11 @@ public class GPGeoserverRulesJacksonTest {
                         + "   \"*.*.r\":\"*\"\n" + "}"), GPGeoserverRules.class));
     }
 
+    @Test
+    public void f_unmarshallGPGeoserverRulesEmptyJacksonTest() throws Exception {
+        logger.info("{}\n", emptyJacksonSupport.getDefaultMapper().readValue(new StringReader("{}"), GPGeoserverRules.class));
+    }
+
     /**
      * @return {@link GPGeoserverRules}
      */

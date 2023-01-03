@@ -39,7 +39,6 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.google.common.collect.Lists;
 import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GPGeoserverRule;
 import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GPGeoserverRules;
 import org.geosdi.geoplatform.connector.geoserver.model.security.rule.GeoserverRule;
@@ -49,6 +48,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -114,12 +115,20 @@ public class GeoserverRulesDeserializer extends StdDeserializer<GeoserverRules> 
      */
     @Override
     public GeoserverRules deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JacksonException {
-        List<GeoserverRule> rules = Lists.newArrayList();
+        List<GeoserverRule> rules = newArrayList();
         if (jsonParser.currentToken() == JsonToken.START_OBJECT) {
             jsonParser.nextToken();
         }
         do {
             String propertyName = jsonParser.currentName();
+            if (propertyName == null) {
+                logger.debug("@@@@@@@@@@@@@@@@@@@@@@@PROPERTY_NAME IS NULL so I will return an Empty GPGeoserverRules.");
+                return new GPGeoserverRules() {
+                    {
+                        super.setRules(newArrayList());
+                    }
+                };
+            }
             logger.debug("######################PROPERTY_NAME: {}, for : {}\n", propertyName, this.getClass().getSimpleName());
             jsonParser.nextToken();
             rules.add(new GPGeoserverRule() {

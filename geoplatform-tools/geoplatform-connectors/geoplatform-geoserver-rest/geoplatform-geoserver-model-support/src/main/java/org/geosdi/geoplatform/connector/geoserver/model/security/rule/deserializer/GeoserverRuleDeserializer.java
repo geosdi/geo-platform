@@ -54,7 +54,7 @@ public class GeoserverRuleDeserializer extends StdDeserializer<GeoserverRule> {
 
     private static final Logger logger = LoggerFactory.getLogger(GeoserverRuleDeserializer.class);
 
-    protected GeoserverRuleDeserializer() {
+    GeoserverRuleDeserializer() {
         super(GeoserverRule.class);
     }
 
@@ -114,6 +114,10 @@ public class GeoserverRuleDeserializer extends StdDeserializer<GeoserverRule> {
             jsonParser.nextToken();
         }
         String propertyName = jsonParser.currentName();
+        if (propertyName == null) {
+            logger.debug("@@@@@@@@@@@@@@@@@@@@@@@PROPERTY_NAME IS NULL so I will return an Empty GPGeoserverRule.");
+            return new GPGeoserverRule();
+        }
         logger.debug("######################PROPERTY_NAME: {}, for : {}\n", propertyName, this.getClass().getSimpleName());
         jsonParser.nextToken();
         return new GPGeoserverRule() {

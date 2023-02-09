@@ -50,7 +50,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.TRUE;
 import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.JSON;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
@@ -62,7 +62,7 @@ public class GPWMSGetFeatureInfoGeoJsonReader implements GPWMSGetFeatureInfoRead
 
     private static final Logger logger = LoggerFactory.getLogger(GPWMSGetFeatureInfoGeoJsonReader.class);
     //
-    private static final JacksonSupport jacksonSupport = new GPJacksonSupport(JAKARTA, UNWRAP_ROOT_VALUE_DISABLE,
+    private static final JacksonSupport jacksonSupport = new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE, NON_NULL);
 

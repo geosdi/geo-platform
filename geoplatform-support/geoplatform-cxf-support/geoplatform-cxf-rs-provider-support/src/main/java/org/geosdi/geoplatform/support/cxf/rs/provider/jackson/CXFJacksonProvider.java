@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.support.cxf.rs.provider.jackson;
 
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.fasterxml.jackson.jakarta.rs.cfg.Annotations;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature;
@@ -48,6 +47,7 @@ import java.text.SimpleDateFormat;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -55,7 +55,7 @@ import static javax.annotation.meta.When.NEVER;
  */
 public class CXFJacksonProvider extends CXFBaseJacksonProvider {
 
-    private static final GPJacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ"))
+    private static final GPJacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ"), JAKARTA)
                 .configure(GPJsonIncludeFeature.NON_NULL);
 
     public CXFJacksonProvider() {

@@ -46,6 +46,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Locale;
 
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
@@ -68,7 +69,7 @@ public final class GPRestProviderFactory {
                 return new CXFJacksonProvider();
             case JACKSON_WITHOUT_ROOT:
                 logger.debug("\n\n############################### RestProviderFactory is building an instance of {}\n\n", CXFJacksonProvider.class);
-                return new CXFJacksonProvider(new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
+                return new CXFJacksonProvider(new GPJacksonSupport(JAKARTA, UNWRAP_ROOT_VALUE_DISABLE,
                         FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
                         ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
                         WRAP_ROOT_VALUE_DISABLE,
@@ -84,7 +85,7 @@ public final class GPRestProviderFactory {
                         .setLocale(Locale.getDefault()));
             case JACKSON_JODA_TIME_WITHOUT_ROOT:
                 logger.debug("############################### RestProviderFactory is building an instance of {} with JODA_TIME_WITHOUT_ROOT SUPPORT\n\n", CXFJacksonProvider.class);
-                return new CXFJacksonProvider(new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
+                return new CXFJacksonProvider(new GPJacksonSupport(JAKARTA, UNWRAP_ROOT_VALUE_DISABLE,
                         FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
                         ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
                         WRAP_ROOT_VALUE_DISABLE,

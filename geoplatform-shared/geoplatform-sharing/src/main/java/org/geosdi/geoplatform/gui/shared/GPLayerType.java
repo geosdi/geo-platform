@@ -35,13 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.shared;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@XmlRootElement
+//@XmlRootElement
 public enum GPLayerType {
 
     /**

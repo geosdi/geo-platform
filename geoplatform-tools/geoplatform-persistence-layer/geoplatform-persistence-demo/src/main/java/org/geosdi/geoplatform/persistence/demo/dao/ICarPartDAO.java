@@ -43,7 +43,7 @@ import org.geosdi.geoplatform.persistence.demo.model.CarPart;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface ICarPartDAO extends GPBaseDAO<CarPart, Long> {
+public interface ICarPartDAO extends GPBaseDAO<CarPart, String> {
 
     /**
      * @param partName

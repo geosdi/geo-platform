@@ -14,6 +14,19 @@
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Publisher Widget</name>
+
+    <repositories>
+        <repository>
+            <id>Archivia Apache</id>
+            <url>https://archiva-repository.apache.org/archiva/repository/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+    </repositories>
  
     <dependencies>
         <dependency>
@@ -69,7 +82,6 @@
         <!-- ============================================================ -->
         <!-- ============= GEOPLATFORM WS PUBLISH CONNECTOR ============= -->
         <!-- ============================================================ -->
-        
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-ws-publish-connector</artifactId>
@@ -92,6 +104,12 @@
             <groupId>org.gwtopenmaps.openlayers</groupId>
             <artifactId>gwt-openlayers-server</artifactId>
             <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0.2</version>
         </dependency>
         
         <!-- logging dependencies, delegate all to slf4j and use logback -->
@@ -121,11 +139,13 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
+
         <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-            <version>1.3.3</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-fileupload2</artifactId>
+            <version>2.0-SNAPSHOT</version>
         </dependency>
+
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -164,6 +184,15 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpcore</artifactId>
+        </dependency>
+
+        <!-- =========================================================== -->
+        <!-- JAKARTA SERVLET -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>

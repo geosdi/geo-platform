@@ -35,14 +35,13 @@
  */
 package org.geosdi.geoplatform.exception;
 
-import javax.xml.ws.WebFault;
+import jakarta.xml.ws.WebFault;
 
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@WebFault(name = "AccountLoginFault",
-          faultBean = "org.geosdi.exception.AccountLoginFault")
+@WebFault(name = "AccountLoginFault", faultBean = "org.geosdi.exception.AccountLoginFault")
 public class AccountLoginFault extends Exception {
 
     private static final long serialVersionUID = -9167519878278175760L;

@@ -52,21 +52,29 @@ import java.io.Serializable;
 @Setter
 @XmlRootElement(name = "CD")
 @XmlType(propOrder = {"TITLE", "ARTIST", "COUNTRY", "COMPANY", "PRICE", "YEAR"})
+@jakarta.xml.bind.annotation.XmlRootElement(name = "CD")
+@jakarta.xml.bind.annotation.XmlType(propOrder = {"TITLE", "ARTIST", "COUNTRY", "COMPANY", "PRICE", "YEAR"})
 @ToString
 public class Cd implements Serializable {
 
     private static final long serialVersionUID = 42652068378637087L;
     //
     @XmlElement(name = "TITLE")
+    @jakarta.xml.bind.annotation.XmlElement(name = "TITLE")
     private String title;
     @XmlElement(name = "ARTIST")
+    @jakarta.xml.bind.annotation.XmlElement(name = "ARTIST")
     private String artist;
     @XmlElement(name = "COUNTRY")
+    @jakarta.xml.bind.annotation.XmlElement(name = "COUNTRY")
     private String country;
     @XmlElement(name = "COMPANY")
+    @jakarta.xml.bind.annotation.XmlElement(name = "COMPANY")
     private String company;
     @XmlElement(name = "PRICE")
+    @jakarta.xml.bind.annotation.XmlElement(name = "PRICE")
     private Double price;
     @XmlElement(name = "YEAR")
+    @jakarta.xml.bind.annotation.XmlElement(name = "YEAR")
     private Integer year;
 }

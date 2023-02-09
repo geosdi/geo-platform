@@ -35,17 +35,15 @@
  */
 package org.geosdi.geoplatform.exception;
 
-import javax.ws.rs.core.Response;
-import javax.xml.ws.WebFault;
+import jakarta.ws.rs.core.Response;
+import jakarta.xml.ws.WebFault;
 
-import static javax.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR;
+import static jakarta.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@WebFault(name = "ServerInternalFault",
-        faultBean = "org.geosdi.geoplatform.exception.ServerInternalFault")
+@WebFault(name = "ServerInternalFault", faultBean = "org.geosdi.geoplatform.exception.ServerInternalFault")
 public class ServerInternalFault extends GPExceptionFault {
 
     private static final long serialVersionUID = -7788747032539948057L;

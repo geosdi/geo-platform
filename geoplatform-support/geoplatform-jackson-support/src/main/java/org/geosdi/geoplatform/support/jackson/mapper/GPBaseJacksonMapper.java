@@ -35,11 +35,13 @@
  */
 package org.geosdi.geoplatform.support.jackson.mapper;
 
+import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.geosdi.geoplatform.support.jackson.function.GPJacksonCheck;
 import org.geosdi.geoplatform.support.jackson.reader.GPBaseJacksonReaderSupport;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.File;
 import java.io.Writer;
 
@@ -53,13 +55,22 @@ import static javax.annotation.meta.When.NEVER;
 public class GPBaseJacksonMapper<T extends Object> extends GPBaseJacksonReaderSupport<T> implements GPJacksonMapper<T> {
 
     /**
+     * <p>{@link JacksonSupport} can be null, in this case will be used {@link GPJacksonMapper#DEFAULT_MAPPER} with only
+     *     {@link JacksonAnnotationIntrospector}
+     * </p>
+     *
      * @param theEntityClass
      * @param theJacksonSupport
      */
-    public GPBaseJacksonMapper(@Nonnull(when = NEVER) Class<T> theEntityClass, JacksonSupport theJacksonSupport) {
+    public GPBaseJacksonMapper(@Nonnull(when = NEVER) Class<T> theEntityClass, @Nullable JacksonSupport theJacksonSupport) {
         super(((theJacksonSupport != null) ? theJacksonSupport : DEFAULT_MAPPER), theEntityClass);
     }
 
+    /**
+     * @param entity
+     * @return {@link String}
+     * @throws Exception
+     */
     @Override
     public String writeAsString(@Nonnull(when = NEVER) T entity) throws Exception {
         checkArgument(entity != null, "The Parameter Entity must not be null.");

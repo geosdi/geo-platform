@@ -35,41 +35,81 @@
  */
 package org.geosdi.geoplatform.support.async.mail;
 
-import java.io.InputStream;
-import java.util.concurrent.Future;
-import javax.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMessage;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.scheduling.annotation.Async;
 
+import javax.annotation.Nonnull;
+import java.io.InputStream;
+import java.util.concurrent.Future;
+
+import static javax.annotation.meta.When.NEVER;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GPMailAsyncSender {
 
+    /**
+     * @return {@link MimeMessage}
+     */
     MimeMessage createMimeMessage();
 
-    MimeMessage createMimeMessage(InputStream in) throws MailException;
+    /**
+     * @param in
+     * @return {@link MimeMessage}
+     * @throws MailException
+     */
+    MimeMessage createMimeMessage(@Nonnull(when = NEVER) InputStream in) throws MailException;
 
+    /**
+     * @param mm
+     * @return {@link Future<Boolean>}
+     * @throws MailException
+     */
     @Async(value = "gpThreadPoolTaskExecutor")
-    Future<Boolean> send(MimeMessage mm) throws MailException;
+    Future<Boolean> send(@Nonnull(when = NEVER) MimeMessage mm) throws MailException;
 
+    /**
+     * @param mms
+     * @return {@link Future<Boolean>}
+     * @throws MailException
+     */
     @Async(value = "gpThreadPoolTaskExecutor")
-    Future<Boolean> send(MimeMessage[] mms) throws MailException;
+    Future<Boolean> send(@Nonnull(when = NEVER) MimeMessage[] mms) throws MailException;
 
+    /**
+     * @param mmp
+     * @return {@link Future<Boolean>}
+     * @throws MailException
+     */
     @Async(value = "gpThreadPoolTaskExecutor")
-    Future<Boolean> send(MimeMessagePreparator mmp) throws MailException;
+    Future<Boolean> send(@Nonnull(when = NEVER) MimeMessagePreparator mmp) throws MailException;
 
+    /**
+     * @param mmps
+     * @return {@link Future<Boolean>}
+     * @throws MailException
+     */
     @Async(value = "gpThreadPoolTaskExecutor")
-    Future<Boolean> send(MimeMessagePreparator[] mmps) throws MailException;
+    Future<Boolean> send(@Nonnull(when = NEVER) MimeMessagePreparator[] mmps) throws MailException;
 
+    /**
+     * @param smm
+     * @return {@link Future<Boolean>}
+     * @throws MailException
+     */
     @Async(value = "gpThreadPoolTaskExecutor")
-    Future<Boolean> send(SimpleMailMessage smm) throws MailException;
+    Future<Boolean> send(@Nonnull(when = NEVER) SimpleMailMessage smm) throws MailException;
 
+    /**
+     * @param smms
+     * @return {@link Future<Boolean>}
+     * @throws MailException
+     */
     @Async(value = "gpThreadPoolTaskExecutor")
-    Future<Boolean> send(SimpleMailMessage[] smms) throws MailException;
-
+    Future<Boolean> send(@Nonnull(when = NEVER) SimpleMailMessage[] smms) throws MailException;
 }

@@ -35,7 +35,8 @@
  */
 package org.geosdi.geoplatform.core.dao.impl;
 
-import com.google.common.collect.Lists;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.*;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GPOrganization;
@@ -45,11 +46,10 @@ import org.geosdi.geoplatform.persistence.dao.jpa.GPAbstractJpaDAO;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.Lists.newArrayList;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
@@ -178,7 +178,7 @@ class GPServerDAOImpl extends GPAbstractJpaDAO<GeoPlatformServer, Long> implemen
             CriteriaBuilder builder = super.criteriaBuilder();
             CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
             Root<GeoPlatformServer> root = criteriaQuery.from(this.persistentClass);
-            List<Predicate> predicates = Lists.newArrayList();
+            List<Predicate> predicates = newArrayList();
             if ((titleOrAliasName != null) && !(titleOrAliasName.trim().isEmpty())) {
                 predicates.add(builder.or(builder.like(builder.lower(root.get("title")), titleOrAliasName.toLowerCase()),
                         builder.like(builder.lower(root.get("aliasName")), titleOrAliasName.toLowerCase())));
@@ -212,7 +212,7 @@ class GPServerDAOImpl extends GPAbstractJpaDAO<GeoPlatformServer, Long> implemen
             CriteriaQuery<GeoPlatformServer> criteriaQuery = super.createCriteriaQuery();
             Root<GeoPlatformServer> root = criteriaQuery.from(this.persistentClass);
             criteriaQuery.select(root);
-            List<Predicate> predicates = Lists.newArrayList();
+            List<Predicate> predicates = newArrayList();
             if ((titleOrAliasName != null) && !(titleOrAliasName.trim().isEmpty())) {
                 predicates.add(builder.or(builder.like(builder.lower(root.get("title")), titleOrAliasName.toLowerCase()),
                         builder.like(builder.lower(root.get("aliasName")), titleOrAliasName.toLowerCase())));

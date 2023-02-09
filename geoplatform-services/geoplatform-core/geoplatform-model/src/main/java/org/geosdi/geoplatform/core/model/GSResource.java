@@ -35,16 +35,15 @@
  */
 package org.geosdi.geoplatform.core.model;
 
+import jakarta.persistence.*;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
 import org.geosdi.geoplatform.core.model.adapter.MultiPolygonAdapter;
 import org.geosdi.geoplatform.core.model.enums.GrantType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 import org.locationtech.jts.geom.MultiPolygon;
 
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
@@ -67,8 +66,15 @@ public class GSResource implements Serializable {
     private static final long serialVersionUID = 2010157772649295820L;
     //
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GS_RESOURCE_SEQ")
-    @SequenceGenerator(name = "GS_RESOURCE_SEQ", sequenceName = "GS_RESOURCE_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gs_resource_generator")
+    @GenericGenerator(name = "gs_resource_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "GS_RESOURCE_SEQ"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "50"),
+                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
+            }
+    )
     private Long id;
     //
     @ManyToOne
@@ -88,15 +94,13 @@ public class GSResource implements Serializable {
     @Column(name = "default_style")
     private String defaultStyle;
     //
-    @Column(name = "cql_filter_read")
-    @Type(type = "text")
+    @Column(name = "cql_filter_read", columnDefinition = "text")
     private String cqlFilterRead;
     //
-    @Column(name = "cql_filter_write")
-    @Type(type = "text")
+    @Column(name = "cql_filter_write", columnDefinition = "text")
     private String cqlFilterWrite;
     //
-    @Type(type = "text")
+    @Column(name = "attributes", columnDefinition = "text")
     private String attributes;
     //
     @Column(name = "cluster_node")

@@ -40,22 +40,22 @@ import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.introspect.AnnotationIntrospectorPair;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
-import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
+import org.geosdi.geoplatform.support.jackson.annotation.GPJacksonXmlAnnotationIntrospectorBuilder;
 import org.geosdi.geoplatform.support.jackson.property.JacksonSupportConfigFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.text.DateFormat;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.TimeZone;
 
-import static com.fasterxml.jackson.databind.type.TypeFactory.defaultInstance;
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Observable.fromArray;
-import static java.lang.Boolean.TRUE;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonAnnotationIntrospectorBuilder.JACKSON;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
@@ -69,52 +69,39 @@ public class GPJacksonSupport implements JacksonSupport {
     private final ObjectMapper mapper;
 
     /**
-     * <p>By Default {@link JaxbAnnotationIntrospector} is used</p>
+     * <p>In this case will be used only {@link JacksonAnnotationIntrospector}</p>
      */
     public GPJacksonSupport() {
-        this(TRUE, defaultProp());
+        this(null);
     }
 
     /**
-     * @param useJaxbAnnotation
+     * <p>If the parameter theBuilder is null then will be used only {@link JacksonAnnotationIntrospector}</p>
+     *
+     * @param theBuilder
      */
-    public GPJacksonSupport(boolean useJaxbAnnotation) {
-        this(useJaxbAnnotation, defaultProp());
-    }
-
-    /**
-     * @param format
-     */
-    public GPJacksonSupport(@Nonnull(when = NEVER) DateFormat format) {
-        this();
-        this.mapper.setDateFormat(format);
+    public GPJacksonSupport(@Nullable GPJacksonXmlAnnotationIntrospectorBuilder theBuilder) {
+        this(theBuilder, defaultProp());
     }
 
     /**
      * @param format
-     * @param useJaxbAnnotation
+     * @param theBuilder
      */
-    public GPJacksonSupport(@Nonnull(when = NEVER) DateFormat format, boolean useJaxbAnnotation) {
-        this(useJaxbAnnotation);
+    public GPJacksonSupport(@Nonnull(when = NEVER) DateFormat format, @Nullable GPJacksonXmlAnnotationIntrospectorBuilder theBuilder) {
+        this(theBuilder, defaultProp());
         this.mapper.setDateFormat(format);
     }
 
     /**
+     * @param theBuilder
      * @param features
      */
-    public GPJacksonSupport(@Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {
-        this(TRUE, features);
-    }
-
-    /**
-     * @param useJaxbAnnotation
-     * @param features
-     */
-    public GPJacksonSupport(boolean useJaxbAnnotation, @Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {
+    public GPJacksonSupport(@Nullable GPJacksonXmlAnnotationIntrospectorBuilder theBuilder, @Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {
         checkArgument(features != null, "The Parameter features must not be null.");
         this.mapper = new ObjectMapper();
-        AnnotationIntrospector primary = new JacksonAnnotationIntrospector();
-        this.mapper.setAnnotationIntrospector(useJaxbAnnotation ? new AnnotationIntrospectorPair(primary, new JaxbAnnotationIntrospector(defaultInstance())) : primary);
+        AnnotationIntrospector primary = JACKSON.build();
+        this.mapper.setAnnotationIntrospector(theBuilder != null ? new AnnotationIntrospectorPair(primary, theBuilder.build()) : primary);
         fromArray(features)
                 .filter(Objects::nonNull)
                 .doOnComplete(() -> logger.info("##############{} configure all Features.", this.getProviderName()))

@@ -35,14 +35,14 @@
  */
 package org.geosdi.geoplatform.experimental.mongodb.spring.jasypt.placeholder;
 
-import java.net.MalformedURLException;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.spring31.properties.EncryptablePropertySourcesPlaceholderConfigurer;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.net.MalformedURLException;
 
 /**
  *
@@ -54,25 +54,23 @@ class GPMongoPlaceholderConfig {
 
     private static final PlaceholderMongoResourcesLoader placeholderResourcesLoader = new PlaceholderMongoResourcesLoader();
 
+    /**
+     * @param gpMongoPooledPBEStringEncryptor
+     * @param gpConfigDataDir
+     * @param gpMongoFileProp
+     * @return {@link EncryptablePropertySourcesPlaceholderConfigurer}
+     * @throws MalformedURLException
+     */
     @Bean(name = "gpMongoPropertyConfigurer")
-    @Required
-    public static EncryptablePropertySourcesPlaceholderConfigurer gpMongoPropertyConfigurer(@Qualifier(
-            value = "gpMongoPooledPBEStringEncryptor") PooledPBEStringEncryptor gpMongoPooledPBEStringEncryptor,
-            @Value("#{systemProperties['GP_DATA_DIR']}") String gpConfigDataDir,
-            @Value("#{systemProperties['GP_MONGO_FILE_PROP']}") String gpMongoFileProp)
-            throws MalformedURLException {
-
+    public static EncryptablePropertySourcesPlaceholderConfigurer gpMongoPropertyConfigurer(@Qualifier(value = "gpMongoPooledPBEStringEncryptor") PooledPBEStringEncryptor gpMongoPooledPBEStringEncryptor,
+            @Value("#{systemProperties['GP_DATA_DIR']}") String gpConfigDataDir, @Value("#{systemProperties['GP_MONGO_FILE_PROP']}") String gpMongoFileProp) throws MalformedURLException {
         EncryptablePropertySourcesPlaceholderConfigurer gpMongoPC = new EncryptablePropertySourcesPlaceholderConfigurer(gpMongoPooledPBEStringEncryptor);
         gpMongoPC.setPlaceholderPrefix("gpMongoConfigurator{");
         gpMongoPC.setPlaceholderSuffix("}");
         gpMongoPC.setNullValue("@null");
-
-        gpMongoPC.setLocations(placeholderResourcesLoader.loadResources(gpConfigDataDir,
-                gpMongoFileProp));
+        gpMongoPC.setLocations(placeholderResourcesLoader.loadResources(gpConfigDataDir, gpMongoFileProp));
         gpMongoPC.setIgnoreResourceNotFound(Boolean.TRUE);
         gpMongoPC.setIgnoreUnresolvablePlaceholders(Boolean.TRUE);
-
         return gpMongoPC;
     }
-
 }

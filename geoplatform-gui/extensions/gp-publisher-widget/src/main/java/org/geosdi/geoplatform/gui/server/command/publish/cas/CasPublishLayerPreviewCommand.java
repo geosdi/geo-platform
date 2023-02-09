@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.publish.cas;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.command.publish.basic.PublishLayerPreviewResponse;
 import org.geosdi.geoplatform.gui.client.command.publish.cas.CasPublishLayerPreviewRequest;
@@ -53,7 +54,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -66,18 +66,15 @@ import java.util.List;
 @Lazy(true)
 @Component(value = "command.publish.cas.CasPublishLayerPreviewCommand")
 @Profile(value = "gs_cas")
-public class CasPublishLayerPreviewCommand implements
-        GPCommand<CasPublishLayerPreviewRequest, PublishLayerPreviewResponse> {
+public class CasPublishLayerPreviewCommand implements GPCommand<CasPublishLayerPreviewRequest, PublishLayerPreviewResponse> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            CasPublishLayerPreviewCommand.class);
+    private static final Logger logger = LoggerFactory.getLogger(CasPublishLayerPreviewCommand.class);
     private GPPublisherBasicServiceImpl casPublisherService;
     @Autowired
     private SessionUtility sessionUtility;
 
     @Override
-    public PublishLayerPreviewResponse execute(CasPublishLayerPreviewRequest request,
-            HttpServletRequest httpServletRequest) {
+    public PublishLayerPreviewResponse execute(CasPublishLayerPreviewRequest request, HttpServletRequest httpServletRequest) {
         try {
             sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
@@ -86,9 +83,8 @@ public class CasPublishLayerPreviewCommand implements
         String result = null;
         try {
             List<String> layerList = request.getLayerList();
-            casPublisherService.publishAll(new PublishLayersRequest(
-                    httpServletRequest.getSession().getId(), request.getWorkspace(),
-                    "dataTest", layerList));
+            casPublisherService.publishAll(new PublishLayersRequest(httpServletRequest.getSession().getId(),
+                    request.getWorkspace(), "dataTest", layerList));
         } catch (ResourceNotFoundFault ex) {
             ex.printStackTrace();
             throw new GeoPlatformException("Error on publish shape.");
@@ -97,11 +93,9 @@ public class CasPublishLayerPreviewCommand implements
             throw new GeoPlatformException("Error on publish shape.");
         } catch (IOException e) {
             e.printStackTrace();
-            throw new GeoPlatformException(new GPReloadURLException(
-                    "Error on reloading cluster."));
+            throw new GeoPlatformException(new GPReloadURLException("Error on reloading cluster."));
         }
         return new PublishLayerPreviewResponse(result);
-
     }
 
     /**

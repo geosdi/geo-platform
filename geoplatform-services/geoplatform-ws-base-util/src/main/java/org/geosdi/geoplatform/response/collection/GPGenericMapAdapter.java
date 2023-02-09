@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.response.collection;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.ValidationEventHandler;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -56,7 +55,7 @@ public abstract class GPGenericMapAdapter<K, V, Entry extends GPGenericEntryType
      *
      * @param mapType The value to be converted. Can be null.
      * @throws Exception if there's an error during the conversion. The caller is responsible for
-     *                   reporting the error to the user through {@link ValidationEventHandler}.
+     *                   reporting the error to the user through {@link javax.xml.bind.ValidationEventHandler}.
      */
     @Override
     public Map<K, V> unmarshal(@Nonnull(when = NEVER) MapType mapType) throws Exception {

@@ -37,11 +37,11 @@ package org.geosdi.geoplatform.support.cxf.rs.provider.jackson;
 
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.jaxrs.cfg.Annotations;
-import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
+import com.fasterxml.jackson.jakarta.rs.cfg.Annotations;
+import com.fasterxml.jackson.jakarta.rs.json.JacksonXmlBindJsonProvider;
+import jakarta.ws.rs.ext.Provider;
 
 import javax.annotation.Nonnull;
-import javax.ws.rs.ext.Provider;
 
 import static javax.annotation.meta.When.NEVER;
 
@@ -50,7 +50,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Provider
-abstract class CXFBaseJacksonProvider extends JacksonJaxbJsonProvider {
+abstract class CXFBaseJacksonProvider extends JacksonXmlBindJsonProvider {
 
     /**
      * @param mapper

@@ -77,8 +77,7 @@ public class GPJAXBContextBuilderTaskPooled implements Callable<Long> {
         attributeStore.setAttributes(createAttributes(25));
         StringWriter writer = new StringWriter();
         GP_JAXB_CONTEXT_BUILDER_POOL.marshal(attributeStore, writer);
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@MARSHALL_ATTRIBUTE_STORE_AS_STRING_POOLED : \n{}\n",
-                writer.toString());
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@MARSHALL_ATTRIBUTE_STORE_AS_STRING_POOLED : \n{}\n", writer);
         return System.currentTimeMillis() - start;
     }
 }

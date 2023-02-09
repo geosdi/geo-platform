@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.login.xmpp;
 
-import com.google.common.base.Preconditions;
+import jakarta.annotation.PostConstruct;
 import org.geosdi.geoplatform.gui.client.command.login.xmpp.XMPPGetDataLoginRequest;
 import org.geosdi.geoplatform.gui.client.command.login.xmpp.XMPPGetDataLoginResponse;
 import org.geosdi.geoplatform.gui.client.model.security.XMPPLoginDetails;
@@ -48,8 +48,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -68,7 +69,7 @@ public class XMPPGetDataLoginCommand implements GPCommand<XMPPGetDataLoginReques
     public XMPPGetDataLoginResponse execute(XMPPGetDataLoginRequest request, HttpServletRequest httpServletRequest) {
         XMPPGetDataLoginResponse xMPPGetDataLoginResponse = null;
         String usernameToRetrieve = request.getUserNameToRetrieve();
-        logger.info("XMPP username to retrieve: " + usernameToRetrieve);
+        logger.info("XMPP username to retrieve: {}", usernameToRetrieve);
         if (usernameToRetrieve != null) {
             XMPPLoginDetails xMPPLoginDetails = this.securityService.xmppGetDataLogin(usernameToRetrieve, httpServletRequest);
             xMPPGetDataLoginResponse = new XMPPGetDataLoginResponse(xMPPLoginDetails);
@@ -78,7 +79,6 @@ public class XMPPGetDataLoginCommand implements GPCommand<XMPPGetDataLoginReques
 
     @PostConstruct
     public void postConstruct() {
-        Preconditions.checkNotNull(securityService, "The SecurityService must "
-                + "not be null.");
+        checkNotNull(securityService, "The SecurityService must not be null.");
     }
 }

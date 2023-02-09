@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.persistence.configuration.basic;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.c3p0.config.GPC3P0Config;
 import org.geosdi.geoplatform.persistence.configuration.properties.GPPersistenceConnector;
 import org.slf4j.Logger;
@@ -44,7 +45,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 import static com.google.common.base.Preconditions.checkArgument;

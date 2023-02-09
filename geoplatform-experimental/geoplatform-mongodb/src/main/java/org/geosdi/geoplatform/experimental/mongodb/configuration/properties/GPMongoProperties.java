@@ -59,9 +59,7 @@ public class GPMongoProperties implements MongoBaseProperties {
 
     @Override
     public MongoCredential getUserCredential() {
-        return this.userCredentials = ((this.mongoAuth != null) && (this.mongoAuth.isMongoAuthEnabled())) ?
-                createCredential(mongoAuth.getMongoUserName(), this.mongoDatabaseName,
-                        mongoAuth.getMongoPassword().toCharArray()) : null;
+        return this.userCredentials = ((this.mongoAuth != null) && (this.mongoAuth.isMongoAuthEnabled())) ? createCredential(mongoAuth.getMongoUserName(), this.mongoDatabaseName, mongoAuth.getMongoPassword().toCharArray()) : null;
     }
 
     /**

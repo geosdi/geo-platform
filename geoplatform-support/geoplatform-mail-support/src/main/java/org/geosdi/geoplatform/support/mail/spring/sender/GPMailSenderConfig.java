@@ -35,13 +35,12 @@
  */
 package org.geosdi.geoplatform.support.mail.spring.sender;
 
+import jakarta.mail.Session;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-
-import javax.mail.Session;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

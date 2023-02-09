@@ -137,7 +137,7 @@ public class GoogleStaxReaderMultiThreadTest {
             try {
                 startSignal.await();
                 logger.debug("###########################{} begin execution.\n", "#".concat(this.taskName + " - " + count));
-                logger.debug("{} Result from File @@@@@@@@@@@@@@@@@@@@ \n{}\n", "#".concat(this.taskName + " - " + count), googleStaxReader.read(this.file).toString());
+                logger.debug("{} Result from File @@@@@@@@@@@@@@@@@@@\n{}\n", "#".concat(this.taskName + " - " + count), googleStaxReader.read(this.file).toString());
                 this.counter.incrementAndGet();
                 doneSignal.countDown();
             } catch (Exception ex) {

@@ -35,10 +35,11 @@
  */
 package org.geosdi.geoplatform.core.model;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
@@ -51,6 +52,7 @@ import java.io.Serializable;
         @Index(columnList = "gs_user", name = "GS_USER_INDEX")
 })
 @XmlRootElement(name = "GSAccount")
+@Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "gs_account")
 public class GSAccount implements Serializable {
 
@@ -60,8 +62,15 @@ public class GSAccount implements Serializable {
     private static final long serialVersionUID = -7837443989271187279L;
     //
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GS_ACCOUNT_SEQ")
-    @SequenceGenerator(name = "GS_ACCOUNT_SEQ", sequenceName = "GS_ACCOUNT_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gs_account_generator")
+    @GenericGenerator(name = "gs_account_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "GS_ACCOUNT_SEQ"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "50"),
+                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
+            }
+    )
     private Long id;
     //
     @Column(name = "gs_user")

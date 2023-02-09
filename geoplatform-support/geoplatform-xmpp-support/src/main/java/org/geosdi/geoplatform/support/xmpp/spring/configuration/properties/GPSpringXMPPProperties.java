@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.support.xmpp.spring.configuration.properties;
 
+import jakarta.annotation.Resource;
 import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.support.xmpp.configuration.auth.XMPPAuth;
 import org.geosdi.geoplatform.support.xmpp.configuration.properties.XMPPProperties;
@@ -42,7 +43,6 @@ import org.geosdi.geoplatform.support.xmpp.spring.annotation.GPXMPPProp;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.springframework.beans.factory.annotation.Value;
 
-import javax.annotation.Resource;
 import javax.inject.Named;
 
 import static com.google.common.base.Preconditions.checkNotNull;

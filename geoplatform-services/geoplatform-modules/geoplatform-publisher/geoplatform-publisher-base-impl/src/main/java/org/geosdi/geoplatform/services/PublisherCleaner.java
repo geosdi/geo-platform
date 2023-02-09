@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.services;
 
+import jakarta.annotation.PreDestroy;
 import org.geosdi.geoplatform.services.utility.PublishUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PreDestroy;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

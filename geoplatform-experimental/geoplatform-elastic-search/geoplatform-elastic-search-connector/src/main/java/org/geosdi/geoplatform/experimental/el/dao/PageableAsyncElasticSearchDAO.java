@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.experimental.el.dao;
 
+import jakarta.annotation.Resource;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage;
 import org.geosdi.geoplatform.experimental.el.search.operation.OperationByPage.OperationByPageSearch;
 import org.geosdi.geoplatform.experimental.el.search.operation.responsibility.IGPOperationHandlerManager;
 
-import javax.annotation.Resource;
 import java.util.concurrent.CompletableFuture;
 
 import static com.google.common.base.Preconditions.checkNotNull;

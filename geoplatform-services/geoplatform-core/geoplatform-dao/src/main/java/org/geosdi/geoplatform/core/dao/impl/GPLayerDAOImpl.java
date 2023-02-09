@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.core.dao.impl;
 
-import com.google.common.collect.Lists;
+import jakarta.persistence.Query;
 import org.geosdi.geoplatform.core.dao.GPLayerDAO;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
@@ -43,11 +43,11 @@ import org.geosdi.geoplatform.persistence.dao.jpa.GPAbstractJpaDAO;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.Lists.newArrayList;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
@@ -95,7 +95,7 @@ class GPLayerDAOImpl extends GPAbstractJpaDAO<GPLayer, Long> implements GPLayerD
 
     /**
      * @param projectID
-     * @return {@link List <String>}
+     * @return {@link List<String>}
      * @throws GPDAOException
      */
     @Override
@@ -105,7 +105,7 @@ class GPLayerDAOImpl extends GPAbstractJpaDAO<GPLayer, Long> implements GPLayerD
             Query query = this.entityManager.createQuery("select distinct l.urlServer from GPLayer l " +
                     "join l.project as p where p.id=:id");
             query.setParameter("id", projectID);
-            ArrayList<String> result = Lists.newArrayList();
+            ArrayList<String> result = newArrayList();
             List<String> founds = query.getResultList();
             result.addAll(founds);
             return result;

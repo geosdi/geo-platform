@@ -37,13 +37,16 @@ package org.geosdi.geoplatform.core.model;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.*;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -56,11 +59,12 @@ import javax.xml.bind.annotation.XmlTransient;
         @JsonSubTypes.Type(value = GPVectorLayer.class, name = "GPVector")})
 @XmlTransient
 @XmlSeeAlso(value = {GPRasterLayer.class, GPVectorLayer.class})
-@Entity
-@Table(name = "gp_layer", indexes = {@Index(columnList = "name", name = "LAYER_NAME_INDEX")
-})
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Entity(name = "GPLayer")
+@Table(name = "gp_layer", indexes = {@Index(columnList = "name", name = "LAYER_NAME_INDEX"),
+        @Index(columnList = "project_id", name = "LAYER_PROJECT_ID_INDEX")})
+@Inheritance(strategy = InheritanceType.JOINED)
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "gp_layer")
+@Cacheable
 @Getter
 @Setter
 @ToString
@@ -72,8 +76,15 @@ public abstract class GPLayer implements IGPLayer {
     private static final long serialVersionUID = 5746325405739614413L;
     //
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_LAYER_SEQ")
-    @SequenceGenerator(name = "GP_LAYER_SEQ", sequenceName = "GP_LAYER_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gp_layer_generator")
+    @GenericGenerator(name = "gp_layer_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "GP_LAYER_SEQ"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "50"),
+                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
+            }
+    )
     private Long id;
     //
     @Column(nullable = false)
@@ -106,7 +117,7 @@ public abstract class GPLayer implements IGPLayer {
     @Column(name = "layer_type", nullable = false)
     @Enumerated(EnumType.STRING)
     private GPLayerType layerType;
-    //    
+    //
     @Column
     private int position = -1;
     //
@@ -121,6 +132,14 @@ public abstract class GPLayer implements IGPLayer {
     //
     @Column(name = "single_tile_request", nullable = false)
     private boolean singleTileRequest = false;
+    //
+    @ManyToOne(optional = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private GPFolder folder;
+    //
+    @ManyToOne(optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private GPProject project;
 
     /**
      * (non-Javadoc)

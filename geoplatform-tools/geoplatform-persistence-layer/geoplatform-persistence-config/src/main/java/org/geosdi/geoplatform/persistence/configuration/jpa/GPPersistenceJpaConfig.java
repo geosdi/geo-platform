@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.persistence.configuration.jpa;
 
+import jakarta.persistence.EntityManagerFactory;
 import org.geosdi.geoplatform.persistence.configuration.basic.strategy.PropertiesStrategyManager;
 import org.geosdi.geoplatform.persistence.configuration.properties.GPPersistenceConnector;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -113,9 +114,10 @@ class GPPersistenceJpaConfig {
      */
     @Bean
     @Primary
-    public PlatformTransactionManager gpTransactionManager() throws Exception {
+    public PlatformTransactionManager gpTransactionManager(@Nonnull(when = NEVER) EntityManagerFactory theEntityManagerFactory) throws Exception {
+        checkArgument(theEntityManagerFactory != null, "The Parameter EntityManagerFactory must not be null.");
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(this.gpEntityManagerFactory().getObject());
+        transactionManager.setEntityManagerFactory(theEntityManagerFactory);
         return transactionManager;
     }
 

@@ -35,10 +35,9 @@
  */
 package org.geosdi.geoplatform.scheduler.exception;
 
-import javax.xml.ws.WebFault;
+import jakarta.xml.ws.WebFault;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @WebFault(name = "EmailException", faultBean = "org.geosdi.exception.EmailException")

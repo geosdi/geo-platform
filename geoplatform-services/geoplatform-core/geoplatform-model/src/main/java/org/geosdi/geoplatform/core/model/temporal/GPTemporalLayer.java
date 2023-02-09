@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.core.model.temporal;
 
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Embedded;
 import lombok.*;
 import org.geosdi.geoplatform.core.model.temporal.dimension.GPTemporalDimension;
 import org.geosdi.geoplatform.core.model.temporal.extent.GPTemporalExtent;
 
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 

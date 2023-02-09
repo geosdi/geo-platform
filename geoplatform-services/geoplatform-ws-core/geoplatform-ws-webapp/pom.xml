@@ -23,9 +23,8 @@
         </dependency>
 
         <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>2.0.1.Final</version>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
         </dependency>
 
         <!-- =============================================================== -->
@@ -84,6 +83,10 @@
                 <exclusion>
                     <groupId>cglib</groupId>
                     <artifactId>cglib</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.angus</groupId>
+                    <artifactId>angus-activation</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -169,9 +172,12 @@
             <artifactId>cglib-nodep</artifactId>
         </dependency>
 
+        <!-- =========================================================== -->
+        <!-- JAKARTA SERVLET -->
+        <!-- =========================================================== -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
 

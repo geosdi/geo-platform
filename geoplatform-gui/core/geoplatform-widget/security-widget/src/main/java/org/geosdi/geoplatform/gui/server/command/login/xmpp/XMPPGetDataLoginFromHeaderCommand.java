@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.login.xmpp;
 
+import jakarta.annotation.PostConstruct;
 import org.geosdi.geoplatform.gui.client.command.login.xmpp.XMPPGetDataLoginFromHeaderRequest;
 import org.geosdi.geoplatform.gui.client.command.login.xmpp.XMPPGetDataLoginResponse;
 import org.geosdi.geoplatform.gui.client.model.security.XMPPLoginDetails;
@@ -47,7 +48,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import static com.google.common.base.Preconditions.checkNotNull;

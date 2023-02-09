@@ -39,14 +39,18 @@
  */
 package org.geosdi.geoplatform.persistence.demo.model;
 
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
+import org.hibernate.annotations.Parameter;
 
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -58,87 +62,50 @@ import java.io.Serializable;
         name = "CAR_PARTS", uniqueConstraints = {
             @UniqueConstraint(columnNames = {"partname", "carplate"})})
 @Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE,
-        region = "carPartCacheRegion")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "carPartCacheRegion")
+@Getter
+@Setter
+@ToString
 public class CarPart implements Serializable {
 
     private static final long serialVersionUID = 2061845368648914687L;
     //
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY,
-            generator = "CAR_PARTS_SEQ")
-    @SequenceGenerator(name = "CAR_PARTS_SEQ", sequenceName = "CAR_PARTS_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "car_part_generator")
+    @GenericGenerator(name = "car_part_generator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @Parameter(name = "sequence_name", value = "CAR_PART_SEQ"),
+                    @Parameter(name = "initial_value", value = "1"),
+                    @Parameter(name = "increment_size", value = "3"),
+                    @Parameter(name = "optimizer", value = "pooled-lo")
+            }
+    )
     private Long id;
     //
     @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "carplate", referencedColumnName = "plate",
-            nullable = false)
+    @JoinColumn(name = "carplate", referencedColumnName = "plate", nullable = false)
     private Car car;
     //
     @NaturalId
     @Column(name = "partname", columnDefinition = "VARCHAR(2048)")
     private String partName;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Car getCar() {
-        return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
-    }
-
-    public String getPartName() {
-        return partName;
-    }
-
-    public void setPartName(String partName) {
-        this.partName = partName;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        CarPart carPart = (CarPart) o;
+        return id.equals(carPart.id) && partName.equals(carPart.partName);
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 97 * hash + (this.car != null ? this.car.hashCode() : 0);
-        hash = 97 * hash + (this.partName != null ? this.partName.hashCode() : 0);
-        return hash;
+        return Objects.hash(id, partName);
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final CarPart other = (CarPart) obj;
-        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
-            return false;
-        }
-        if (this.car != other.car && (this.car == null || !this.car.equals(
-                other.car))) {
-            return false;
-        }
-        if ((this.partName == null) ? (other.partName != null)
-                : !this.partName.equals(other.partName)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "CarPart{" + "id=" + id + ", car=" + car + ", partName=" + partName + '}';
-    }
-
 }

@@ -37,7 +37,8 @@ package org.geosdi.geoplatform.support.cxf.rs.provider.jackson;
 
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.jaxrs.cfg.Annotations;
+
+import com.fasterxml.jackson.jakarta.rs.cfg.Annotations;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature;
 

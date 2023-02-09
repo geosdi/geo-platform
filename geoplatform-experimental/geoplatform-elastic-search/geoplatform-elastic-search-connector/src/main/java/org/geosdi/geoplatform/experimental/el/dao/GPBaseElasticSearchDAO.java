@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.experimental.el.dao;
 
+import jakarta.annotation.Resource;
 import org.elasticsearch.action.admin.indices.refresh.RefreshResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.index.reindex.UpdateByQueryRequestBuilder;
@@ -47,7 +48,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Resource;
 import java.nio.file.Path;
 import java.util.concurrent.ExecutorService;
 

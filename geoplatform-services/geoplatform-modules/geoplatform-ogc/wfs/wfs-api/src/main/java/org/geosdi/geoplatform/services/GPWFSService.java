@@ -35,6 +35,11 @@
  */
 package org.geosdi.geoplatform.services;
 
+import jakarta.jws.WebParam;
+import jakarta.jws.WebService;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.codehaus.jra.Get;
 import org.geosdi.geoplatform.connector.wfs.response.*;
@@ -45,11 +50,6 @@ import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesByBboxRequest;
 import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesRequest;
 import org.geosdi.geoplatform.services.rs.path.GPWFSServiceRSPathConfig;
 
-import javax.jws.WebParam;
-import javax.jws.WebService;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Map;
 

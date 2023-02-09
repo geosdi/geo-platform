@@ -45,6 +45,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
+import static java.lang.Boolean.TRUE;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
@@ -61,11 +63,11 @@ public class TrackingScheduler implements InitializingBean {
         this.sendMessageJobDetail = JobBuilder.newJob(SendTrackingMessageJob.class).
                 withIdentity(SendTrackingMessageJob.SEND_TRACKING_MESSAGE_JOB, TrackingScheduler.TRACKING_GROUP).
                 withDescription("Sends the message using the created connection").
-                storeDurably(Boolean.TRUE).
+                storeDurably(TRUE).
                 requestRecovery().
                 build();
         try {
-            this.scheduler.addJob(this.sendMessageJobDetail, Boolean.TRUE);
+            this.scheduler.addJob(this.sendMessageJobDetail, TRUE);
         } catch (SchedulerException ex) {
             logger.error("Error adding tracking jobs: " + ex);
         }

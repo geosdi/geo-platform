@@ -35,9 +35,8 @@
  */
 package org.geosdi.geoplatform.experimental.el.query.index;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.experimental.el.index.GPAbstractIndexCreator;
-
-import javax.annotation.Resource;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

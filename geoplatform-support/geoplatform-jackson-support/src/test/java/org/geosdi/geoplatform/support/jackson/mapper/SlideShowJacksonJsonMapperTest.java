@@ -48,6 +48,7 @@ import java.io.File;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.junit.Assert.assertNotNull;
@@ -63,7 +64,7 @@ public class SlideShowJacksonJsonMapperTest {
     private static final Logger logger = LoggerFactory.getLogger(SlideShowJacksonJsonMapperTest.class);
     //
     private static final GPJacksonMapper<SlideShow> GP_JACKSON_MAPPER = new GPBaseJacksonMapper<>(SlideShow.class,
-            new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE, FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
+            new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_DISABLE, FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
                     ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE, INDENT_OUTPUT_ENABLE)
                     .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)
                     .configure(NON_NULL));

@@ -35,15 +35,21 @@
  */
 package org.geosdi.geoplatform.response.collection;
 
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import lombok.Setter;
+import org.geosdi.geoplatform.response.collection.jakarta.adapter.StringStringJakartaMapAdapter;
+
+import java.io.Serializable;
 import java.util.Map;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import org.geosdi.geoplatform.response.collection.adapter.StringStringMapAdapter;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class XmppAttributesMap {
+public class XmppAttributesMap implements Serializable {
 
+    private static final long serialVersionUID = -7652580816718134925L;
+    //
+    @Setter
     private Map<String, String> map;
 
     public XmppAttributesMap() {
@@ -53,12 +59,11 @@ public class XmppAttributesMap {
         this.map = map;
     }
 
-    @XmlJavaTypeAdapter(StringStringMapAdapter.class)
+    /**
+     * @return {@link Map<String, String>}
+     */
+    @XmlJavaTypeAdapter(StringStringJakartaMapAdapter.class)
     public Map<String, String> getAttributesMap() {
         return map;
-    }
-
-    public void setAttributesMap(Map<String, String> map) {
-        this.map = map;
     }
 }

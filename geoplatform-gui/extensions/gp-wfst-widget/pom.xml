@@ -85,6 +85,11 @@
             <version>${project.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+        </dependency>
+
         <!-- TODO  REMOVE SCOPE PROVIDED WITH SPRING 3.2.5.RELEASE-->
         <dependency>
             <groupId>org.geosdi</groupId>

@@ -37,12 +37,11 @@ package org.geosdi.geoplatform.rs.support.geocoding.response;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import lombok.Getter;
 import lombok.ToString;
 import org.geojson.Point;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -59,9 +58,13 @@ public class GPGeocodingLocality implements IGPGeocodingLocality {
     private final String formattedAddress;
     private final Point location;
 
+    /**
+     * @param theFormattedAddress
+     * @param theGeometry
+     */
     @JsonCreator
     public GPGeocodingLocality(@JsonProperty(value = "formattedAddress") String theFormattedAddress,
-                               @JsonProperty(value = "location") Point theGeometry) {
+            @JsonProperty(value = "location") Point theGeometry) {
         this.formattedAddress = theFormattedAddress;
         this.location = theGeometry;
     }

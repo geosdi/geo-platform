@@ -54,9 +54,9 @@ import static javax.annotation.meta.When.NEVER;
  */
 @Repository(value = "jpaCarSearchDAO")
 @Profile(value = {"lucene"})
-public class JPACarSearchDAO extends GenericJPASearchDAO<CarSearch> implements ICarSeachDAO {
+class JPACarSearchDAO extends GenericJPASearchDAO<CarSearch> implements ICarSeachDAO {
 
-    public JPACarSearchDAO() {
+    JPACarSearchDAO() {
         super(CarSearch.class);
     }
 

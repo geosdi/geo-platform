@@ -35,18 +35,17 @@
  */
 package org.geosdi.geoplatform.services;
 
-import java.util.List;
-import javax.annotation.Resource;
-import javax.jws.WebService;
+import jakarta.annotation.Resource;
+import jakarta.jws.WebService;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.scheduler.delegate.api.SchedulerDelegate;
 
+import java.util.List;
+
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@WebService(
-        endpointInterface = "org.geosdi.geoplatform.services.GPSchedulerService")
+@WebService(endpointInterface = "org.geosdi.geoplatform.services.GPSchedulerService")
 public class GPSchedulerServiceImpl implements GPSchedulerService {
 
     @Resource(name = "gpSchedulerDelegate")
@@ -58,17 +57,13 @@ public class GPSchedulerServiceImpl implements GPSchedulerService {
     }
 
     @Override
-    public void sendEmailModification(GPUser user,
-            String previousEmail, String newPlainPassword) {
-        this.gpSchedulerDelegate.sendEmailModification(user, previousEmail,
-                newPlainPassword);
+    public void sendEmailModification(GPUser user, String previousEmail, String newPlainPassword) {
+        this.gpSchedulerDelegate.sendEmailModification(user, previousEmail, newPlainPassword);
     }
 
     @Override
-    public void sendEmailUserCreationNotification(List<String> emailRecipient,
-            String createdUserName) {
-        this.gpSchedulerDelegate.sendEmailUserCreationNotification(
-                emailRecipient, createdUserName);
+    public void sendEmailUserCreationNotification(List<String> emailRecipient, String createdUserName) {
+        this.gpSchedulerDelegate.sendEmailUserCreationNotification(emailRecipient, createdUserName);
     }
 
     @Override

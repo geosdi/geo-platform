@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.core.model.attribution.logo;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 

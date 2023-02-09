@@ -35,6 +35,12 @@
  */
 package org.geosdi.geoplatform.services;
 
+import jakarta.jws.WebParam;
+import jakarta.jws.WebResult;
+import jakarta.jws.WebService;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import org.apache.cxf.annotations.FastInfoset;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.codehaus.jra.Get;
@@ -47,12 +53,6 @@ import org.geosdi.geoplatform.services.request.WMSHeaderParam;
 import org.geosdi.geoplatform.services.response.GPLayerTypeResponse;
 import org.geosdi.geoplatform.services.rs.path.GPServiceRSPathConfig;
 
-import javax.jws.WebParam;
-import javax.jws.WebResult;
-import javax.jws.WebService;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**

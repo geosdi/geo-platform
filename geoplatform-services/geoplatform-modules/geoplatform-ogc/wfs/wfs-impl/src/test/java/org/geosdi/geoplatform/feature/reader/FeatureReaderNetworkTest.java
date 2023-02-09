@@ -38,13 +38,15 @@ package org.geosdi.geoplatform.feature.reader;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.support.wfs.feature.reader.FeatureSchemaReader;
 import org.geosdi.geoplatform.support.wfs.feature.reader.GPFeatureSchemaReader;
-import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -61,8 +63,8 @@ public class FeatureReaderNetworkTest {
     public void readRestrictedAllNet() throws Exception {
         List<LayerSchemaDTO> schemas = featureReaderXSD.read(new URL(DESCRIBE_FEATURE_PATH.concat("sf:restricted"))
                 .openStream());
-        Assert.assertNotNull(schemas);
-        Assert.assertEquals(1, schemas.size());
+        assertNotNull(schemas);
+        assertEquals(1, schemas.size());
         LayerSchemaDTO layerSchema = schemas.get(0);
         logger.debug("#######################HERE THE SCHEMA FOR : sf:restricted : \n{}\n", layerSchema);
     }
@@ -71,59 +73,58 @@ public class FeatureReaderNetworkTest {
     public void readTigerRoadsAllNet() throws Exception {
         List<LayerSchemaDTO> schemas = featureReaderXSD.read(new URL(DESCRIBE_FEATURE_PATH.concat("tiger:tiger_roads"))
                 .openStream());
-        Assert.assertNotNull(schemas);
-        Assert.assertEquals(1, schemas.size());
+        assertNotNull(schemas);
+        assertEquals(1, schemas.size());
         LayerSchemaDTO layerSchema = schemas.get(0);
-        logger.debug("########################HERE THE SCHEMA FOR : tiger:tiger_roads : \n{}\n", layerSchema);
+        logger.debug("########################HERE THE SCHEMA FOR : tiger:tiger_roads :\n{}\n", layerSchema);
     }
 
     @Test
     public void readStatesAllNet() throws Exception {
         List<LayerSchemaDTO> schemas = featureReaderXSD.read(new URL(DESCRIBE_FEATURE_PATH.concat("topp:states"))
                 .openStream());
-        Assert.assertNotNull(schemas);
-        Assert.assertEquals(1, schemas.size());
+        assertNotNull(schemas);
+        assertEquals(1, schemas.size());
         LayerSchemaDTO layerSchema = schemas.get(0);
-        logger.debug("######################HERE THE SCHEMA FOR : topp:states : \n{}\n", layerSchema);
+        logger.debug("######################HERE THE SCHEMA FOR : topp:states :\n{}\n", layerSchema);
     }
 
     @Test
     public void readSFStreamsAllNet() throws Exception {
-        List<LayerSchemaDTO> schemas = featureReaderXSD.read(new URL(DESCRIBE_FEATURE_PATH.concat("sf:streams"))
-                .openStream());
-        Assert.assertNotNull(schemas);
-        Assert.assertEquals(1, schemas.size());
+        List<LayerSchemaDTO> schemas = featureReaderXSD.read(new URL(DESCRIBE_FEATURE_PATH.concat("sf:streams")).openStream());
+        assertNotNull(schemas);
+        assertEquals(1, schemas.size());
         LayerSchemaDTO layerSchema = schemas.get(0);
-        logger.debug("######################HERE THE SCHEMA FOR : sf:streams : \n{}\n", layerSchema);
+        logger.debug("######################HERE THE SCHEMA FOR : sf:streams : \n{}\n", layerSchema);
     }
 
     @Test
     public void readSFArchsitesAllNet() throws Exception {
         List<LayerSchemaDTO> schemas = featureReaderXSD.read(new URL(DESCRIBE_FEATURE_PATH.concat("sf:archsites"))
                 .openStream());
-        Assert.assertNotNull(schemas);
-        Assert.assertEquals(1, schemas.size());
+        assertNotNull(schemas);
+        assertEquals(1, schemas.size());
         LayerSchemaDTO layerSchema = schemas.get(0);
-        logger.debug("######################HERE THE SCHEMA FOR : sf:archsites : \n{}\n", layerSchema);
+        logger.debug("######################HERE THE SCHEMA FOR : sf:archsites : \n{}\n", layerSchema);
     }
 
     @Test
     public void readToppTasmaniaRoadsAllNet() throws Exception {
         List<LayerSchemaDTO> schemas = featureReaderXSD.read(new URL(DESCRIBE_FEATURE_PATH.concat("topp:tasmania_roads"))
                 .openStream());
-        Assert.assertNotNull(schemas);
-        Assert.assertEquals(1, schemas.size());
+        assertNotNull(schemas);
+        assertEquals(1, schemas.size());
         LayerSchemaDTO layerSchema = schemas.get(0);
-        logger.debug("######################HERE THE SCHEMA FOR : topp:tasmania_roads : \n{}\n", layerSchema);
+        logger.debug("######################HERE THE SCHEMA FOR : topp:tasmania_roads : \n{}\n", layerSchema);
     }
 
     @Test
     public void readToppTasmaniaWaterBodiesNet() throws Exception {
         List<LayerSchemaDTO> schemas = featureReaderXSD.read(new URL(DESCRIBE_FEATURE_PATH.concat("topp:tasmania_water_bodies"))
                 .openStream());
-        Assert.assertNotNull(schemas);
-        Assert.assertEquals(1, schemas.size());
+        assertNotNull(schemas);
+        assertEquals(1, schemas.size());
         LayerSchemaDTO layerSchema = schemas.get(0);
-        logger.debug("######################HERE THE SCHEMA FOR : topp:tasmania_water_bodies : \n{}\n", layerSchema);
+        logger.debug("######################HERE THE SCHEMA FOR : topp:tasmania_water_bodies : \n{}\n", layerSchema);
     }
 }

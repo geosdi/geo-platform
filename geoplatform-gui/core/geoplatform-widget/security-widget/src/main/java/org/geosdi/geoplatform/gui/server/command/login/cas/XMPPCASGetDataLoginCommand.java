@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.login.cas;
 
+import jakarta.annotation.PostConstruct;
 import org.geosdi.geoplatform.gui.client.command.login.cas.XMPPCASGetDataLoginRequest;
 import org.geosdi.geoplatform.gui.client.command.login.xmpp.XMPPGetDataLoginResponse;
 import org.geosdi.geoplatform.gui.client.model.security.XMPPLoginDetails;
@@ -50,7 +51,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -62,8 +62,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @Lazy(true)
 @Component(value = "command.login.XMPPCASGetDataLoginCommand")
 @Profile(value = "cas")
-public class XMPPCASGetDataLoginCommand implements
-        GPCommand<XMPPCASGetDataLoginRequest, XMPPGetDataLoginResponse> {
+public class XMPPCASGetDataLoginCommand implements GPCommand<XMPPCASGetDataLoginRequest, XMPPGetDataLoginResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(XMPPCASGetDataLoginCommand.class);
     //

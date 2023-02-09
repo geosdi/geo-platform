@@ -49,7 +49,6 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import javax.annotation.Resource;
 import java.io.*;
 import java.util.Arrays;
 import java.util.List;
@@ -266,7 +265,7 @@ public class SLDHandler {
      * Turns input into a Reader.
      *
      * @param input A {@link Reader}, {@link java.io.InputStream}, {@link File},
-     *              or {@link Resource}.
+     *              or {@link String}.
      */
     protected Reader toReader(Object input) throws IOException {
         if (input instanceof Reader) {

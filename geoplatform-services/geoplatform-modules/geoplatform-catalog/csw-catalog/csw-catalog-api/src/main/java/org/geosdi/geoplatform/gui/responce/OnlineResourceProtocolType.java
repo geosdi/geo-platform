@@ -36,9 +36,10 @@
 package org.geosdi.geoplatform.gui.responce;
 
 import com.google.common.collect.ImmutableList;
+import jakarta.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlEnumValue;
+
 import java.util.List;
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
 
 /**
  * Some literal protocol of property OnlineResourceType.

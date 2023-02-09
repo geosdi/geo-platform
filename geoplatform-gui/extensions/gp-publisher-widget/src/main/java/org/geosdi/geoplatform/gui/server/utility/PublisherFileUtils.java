@@ -38,21 +38,22 @@ package org.geosdi.geoplatform.gui.server.utility;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import org.apache.commons.io.FileUtils;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import static java.io.File.separator;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -65,8 +66,7 @@ public class PublisherFileUtils {
     private File pbDir;
 
     public File createFileWithUniqueName(String fileName) {
-        return new File(pbDir.getAbsolutePath() + File.separator + fileName
-                + Long.toString(System.nanoTime()));
+        return new File(pbDir.getAbsolutePath() + separator + fileName + System.nanoTime());
     }
 
     public static String generateJSONObjects(List<InfoPreview> infoPreview) {
@@ -78,8 +78,8 @@ public class PublisherFileUtils {
 
     @PostConstruct
     public void init() {
-        if (!TMP_DIR_PATH.endsWith(File.separator)) {
-            TMP_DIR_PATH += File.separator;
+        if (!TMP_DIR_PATH.endsWith(separator)) {
+            TMP_DIR_PATH += separator;
         }
         pbDir = new File(TMP_DIR_PATH + "GPPublishDir");
         if (!pbDir.exists()) {
@@ -93,8 +93,7 @@ public class PublisherFileUtils {
         try {
             if (pbDir.exists()) {
                 FileUtils.deleteDirectory(pbDir);
-                logger.info("- ----------------------> Destroy PublisherFileUtils "
-                        + "and  Delete GPPublishDir");
+                logger.info("- ----------------------> Destroy PublisherFileUtils and  Delete GPPublishDir");
             }
         } catch (IOException ex) {
             logger.error("GeoPlatform Publish Dir Delete Error : " + ex);

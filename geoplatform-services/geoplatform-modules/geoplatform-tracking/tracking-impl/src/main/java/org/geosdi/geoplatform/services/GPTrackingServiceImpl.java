@@ -35,12 +35,7 @@
  */
 package org.geosdi.geoplatform.services;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import javax.jws.WebService;
+import jakarta.jws.WebService;
 import org.geosdi.geoplatform.core.dao.GPAccountProjectDAO;
 import org.geosdi.geoplatform.core.dao.GPProjectDAO;
 import org.geosdi.geoplatform.core.model.GPAccount;
@@ -57,15 +52,14 @@ import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Presence;
-import org.quartz.CalendarIntervalScheduleBuilder;
-import org.quartz.SchedulerException;
-import org.quartz.Trigger;
-import org.quartz.TriggerBuilder;
-import org.quartz.TriggerKey;
+import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Calendar;
+import java.util.*;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

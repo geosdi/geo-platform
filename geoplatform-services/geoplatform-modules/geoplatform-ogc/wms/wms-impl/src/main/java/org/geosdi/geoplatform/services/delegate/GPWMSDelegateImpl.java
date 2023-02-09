@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.services.delegate;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.configurator.crypt.GPPooledPBEStringEncryptorDecorator;
 import org.geosdi.geoplatform.core.dao.GPServerDAO;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
@@ -57,7 +58,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 import static java.util.Locale.ENGLISH;

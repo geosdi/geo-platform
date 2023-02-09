@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.experimental.el.spring.jasypt.placeholder;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.spring31.properties.EncryptablePropertySourcesPlaceholderConfigurer;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -54,25 +53,23 @@ class GPElasticSearchPlaceholderConfig {
 
     private static final PlaceholderELResourcesLoader placeholderResourcesLoader = new PlaceholderELResourcesLoader();
 
+    /**
+     * @param gpElasticSearchPooledPBEStringEncryptor
+     * @param elasticSearchConfigDataDir
+     * @param elasticSearchFileProp
+     * @return {@link EncryptablePropertySourcesPlaceholderConfigurer}
+     * @throws MalformedURLException
+     */
     @Bean(name = "gpElasticSearchPropertyConfigurer")
-    @Required
-    public static EncryptablePropertySourcesPlaceholderConfigurer gpElasticSearchPropertyConfigurer(
-            @Qualifier(value = "gpElasticSearchPooledPBEStringEncryptor") PooledPBEStringEncryptor gpElasticSearchPooledPBEStringEncryptor,
-            @Value("#{systemProperties['GP_DATA_DIR']}") String elasticSearchConfigDataDir,
-            @Value("#{systemProperties['GP_ELASTIC_SEARCH_FILE_PROP']}") String elasticSearchFileProp)
-            throws MalformedURLException {
-
+    public static EncryptablePropertySourcesPlaceholderConfigurer gpElasticSearchPropertyConfigurer(@Qualifier(value = "gpElasticSearchPooledPBEStringEncryptor") PooledPBEStringEncryptor gpElasticSearchPooledPBEStringEncryptor,
+            @Value("#{systemProperties['GP_DATA_DIR']}") String elasticSearchConfigDataDir, @Value("#{systemProperties['GP_ELASTIC_SEARCH_FILE_PROP']}") String elasticSearchFileProp) throws MalformedURLException {
         EncryptablePropertySourcesPlaceholderConfigurer gpElasticSearchPC = new EncryptablePropertySourcesPlaceholderConfigurer(gpElasticSearchPooledPBEStringEncryptor);
         gpElasticSearchPC.setPlaceholderPrefix("gpElasticSearchConfigurator{");
         gpElasticSearchPC.setPlaceholderSuffix("}");
         gpElasticSearchPC.setNullValue("@null");
-
-        gpElasticSearchPC.setLocations(placeholderResourcesLoader.loadResources(elasticSearchConfigDataDir,
-                elasticSearchFileProp));
+        gpElasticSearchPC.setLocations(placeholderResourcesLoader.loadResources(elasticSearchConfigDataDir, elasticSearchFileProp));
         gpElasticSearchPC.setIgnoreResourceNotFound(Boolean.TRUE);
         gpElasticSearchPC.setIgnoreUnresolvablePlaceholders(Boolean.TRUE);
-
         return gpElasticSearchPC;
     }
-
 }

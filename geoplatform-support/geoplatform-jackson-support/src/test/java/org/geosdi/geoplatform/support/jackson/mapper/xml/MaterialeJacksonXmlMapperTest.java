@@ -51,6 +51,7 @@ import static java.io.File.separator;
 import static java.util.UUID.randomUUID;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -61,8 +62,7 @@ public class MaterialeJacksonXmlMapperTest {
 
     private static final Logger logger = LoggerFactory.getLogger(MaterialeJacksonXmlMapperTest.class);
     //
-    private static final GPJacksonXmlMapper<Materiale> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(Materiale.class,
-            new GPJacksonXmlSupport());
+    private static final GPJacksonXmlMapper<Materiale> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(Materiale.class, new GPJacksonXmlSupport(JAXB));
 
     @Test
     @Order(value = 0)

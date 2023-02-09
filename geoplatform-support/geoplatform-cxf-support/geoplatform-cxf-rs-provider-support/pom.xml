@@ -38,24 +38,6 @@
             <artifactId>spring-expression</artifactId>
         </dependency>
         
-        <!-- =========================================================== -->
-        <!-- ============================ JAXB ========================= -->
-        <!-- =========================================================== -->
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-core</artifactId>
-        </dependency>
-        
         <dependency>
             <groupId>com.sun.activation</groupId>
             <artifactId>javax.activation</artifactId>
@@ -96,10 +78,10 @@
             <artifactId>jackson-datatype-joda</artifactId>
         </dependency>
 
-        <!-- JAX-RS provider -->
+        <!-- JAKARTA RS provicder -->
         <dependency>
-            <groupId>com.fasterxml.jackson.jaxrs</groupId>
-            <artifactId>jackson-jaxrs-json-provider</artifactId>
+            <groupId>com.fasterxml.jackson.jakarta.rs</groupId>
+            <artifactId>jackson-jakarta-rs-json-provider</artifactId>
         </dependency>
 
         <!-- SCOPE TEST -->

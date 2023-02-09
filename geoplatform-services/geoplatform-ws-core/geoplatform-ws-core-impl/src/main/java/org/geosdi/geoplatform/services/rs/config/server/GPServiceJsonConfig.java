@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.services.rs.config.server;
 
-import org.apache.cxf.interceptor.Interceptor;
+import jakarta.ws.rs.core.Application;
+import jakarta.ws.rs.ext.RuntimeDelegate;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
-import org.apache.cxf.message.Message;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter;
 import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
 import org.geosdi.geoplatform.core.model.GPAccount;
@@ -49,19 +49,14 @@ import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
 import org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory;
 import org.geosdi.geoplatform.support.cxf.rs.provider.jettyson.GPJSONProvider;
-import org.geosdi.geoplatform.support.swagger.spring.configuration.rest.GPSwaggerRestConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.ws.rs.core.Application;
-import javax.ws.rs.ext.RuntimeDelegate;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  *
@@ -74,63 +69,40 @@ class GPServiceJsonConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(GPServiceJsonConfig.class);
 
+    /**
+     * @param geoPlatformService
+     * @param gpJsonCoreApplication
+     * @param providerType
+     * @param gpCrossResourceSharingFilter
+     * @param serverLogInInterceptor
+     * @param serverLogOutInterceptor
+     * @return {@link JAXRSServerFactoryBean}
+     */
     @Bean(initMethod = "create")
-    @Required
-    public static JAXRSServerFactoryBean geoplatformServiceJSON(@Qualifier(
-            value = "geoPlatformService") GeoPlatformService geoPlatformService,
+    public static JAXRSServerFactoryBean geoplatformServiceJSON(@Qualifier(value = "geoPlatformService") GeoPlatformService geoPlatformService,
             @Qualifier(value = "gpJsonCoreApplication") Application gpJsonCoreApplication,
             @Value("configurator{cxf_rest_provider_type}") GPRestProviderType providerType,
-            @Qualifier(value = "gpCoreSwaggerRestConfiguration") GPSwaggerRestConfiguration gpCoreSwaggerRestConfiguration,
             @Qualifier(value = "gpCrossResourceSharingFilter") CrossOriginResourceSharingFilter gpCrossResourceSharingFilter,
             @Qualifier(value = "serverLoggingInInterceptorBean") LoggingInInterceptor serverLogInInterceptor,
             @Qualifier(value = "serverLoggingOutInterceptorBean") LoggingOutInterceptor serverLogOutInterceptor) {
-
-        logger.debug("\n\n#####################GP_CORE_SWAGGER_CONFIGURED : {}\n\n",
-                gpCoreSwaggerRestConfiguration.isSwaggerConfigured());
-
-        List<Object> serviceBeans;
-        List<? extends Object> providers;
-
-        if (gpCoreSwaggerRestConfiguration.isSwaggerConfigured()) {
-            serviceBeans = Arrays.asList(new Object[]{geoPlatformService,
-                gpCoreSwaggerRestConfiguration.getSwaggerApiListingResource()});
-            providers = Arrays.asList(
-                    new Object[]{createProvider(providerType),
-                        gpCoreSwaggerRestConfiguration.getSwaggerResourceWriter(),
-                        new GPExceptionFaultMapper(),
-                        gpCrossResourceSharingFilter});
-        } else {
-            serviceBeans = Arrays.asList(new Object[]{geoPlatformService});
-            providers = Arrays.asList(
-                    new Object[]{createProvider(providerType),
-                        new GPExceptionFaultMapper(),
-                        gpCrossResourceSharingFilter});
-        }
-
-        JAXRSServerFactoryBean factory = RuntimeDelegate.getInstance().createEndpoint(
-                gpJsonCoreApplication, JAXRSServerFactoryBean.class);
-        factory.setServiceBeans(serviceBeans);
+        JAXRSServerFactoryBean factory = RuntimeDelegate.getInstance().createEndpoint(gpJsonCoreApplication, JAXRSServerFactoryBean.class);
+        factory.setServiceBeans(Arrays.asList(new Object[]{geoPlatformService}));
         factory.setAddress(factory.getAddress());
-        factory.setProviders(providers);
-
-        factory.setInInterceptors(Arrays.<Interceptor<? extends Message>>asList(
-                serverLogInInterceptor)
-        );
-        factory.setOutInterceptors(
-                Arrays.<Interceptor<? extends Message>>asList(
-                        serverLogOutInterceptor));
-
+        factory.setProviders(Arrays.asList(createProvider(providerType), new GPExceptionFaultMapper(), gpCrossResourceSharingFilter));
+        factory.setInInterceptors(Arrays.asList(serverLogInInterceptor));
+        factory.setOutInterceptors(Arrays.asList(serverLogOutInterceptor));
         return factory;
     }
 
+    /**
+     * @param providerType
+     * @return {@link Object}
+     */
     private static Object createProvider(GPRestProviderType providerType) {
         Object provider = GPRestProviderFactory.createProvider(providerType);
         if (provider instanceof GPJSONProvider) {
-            ((GPJSONProvider) provider).setExtraClass(
-                    new Class<?>[]{GPAccount.class,
-                        GPLayer.class});
+            ((GPJSONProvider) provider).setExtraClass(new Class<?>[]{GPAccount.class, GPLayer.class});
         }
         return provider;
     }
-
 }

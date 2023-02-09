@@ -36,12 +36,14 @@
 package org.geosdi.geoplatform.configurator.wfs;
 
 import org.geosdi.geoplatform.support.wfs.configurator.GPWFSConfigurator;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
 /**
  *
@@ -57,10 +59,7 @@ public class GPWFSConfiguratorTest {
 
     @Test
     public void testWFSConfigurator() {
-        Assert.assertNotNull(gpWFSConfigurator);
-
-        Assert.assertFalse("The data source passed match with default.",
-                           this.gpWFSConfigurator.matchDefaultDataSource(
-                "http://www.google.it"));
+        assertNotNull(gpWFSConfigurator);
+        assertFalse("The data source passed match with default.", this.gpWFSConfigurator.matchDefaultDataSource("http://www.google.it"));
     }
 }

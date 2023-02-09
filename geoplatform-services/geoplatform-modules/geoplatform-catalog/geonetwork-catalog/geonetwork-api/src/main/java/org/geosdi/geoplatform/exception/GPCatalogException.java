@@ -35,14 +35,13 @@
  */
 package org.geosdi.geoplatform.exception;
 
-import javax.xml.ws.WebFault;
+import jakarta.xml.ws.WebFault;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-@WebFault(name = "GPCatalogException",
-          faultBean = "org.geosdi.geoplatform.exception.GPCatalogException")
+@WebFault(name = "GPCatalogException", faultBean = "org.geosdi.geoplatform.exception.GPCatalogException")
 public class GPCatalogException extends Exception {
 
     private static final long serialVersionUID = -3359078886582754949L;

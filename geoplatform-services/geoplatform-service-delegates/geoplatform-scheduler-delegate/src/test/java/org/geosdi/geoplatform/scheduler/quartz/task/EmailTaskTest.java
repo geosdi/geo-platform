@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.scheduler.quartz.task;
 
-import org.junit.Assert;
+import jakarta.annotation.Resource;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,7 +44,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.Resource;
+import static org.junit.Assert.assertNotNull;
+
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -61,7 +62,7 @@ public class EmailTaskTest {
 
     @Before
     public void setUp() throws Exception {
-        Assert.assertNotNull(this.emailTask);
+        assertNotNull(this.emailTask);
     }
 
     @Test

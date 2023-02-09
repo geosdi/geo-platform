@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.websocket.support.configuration.broker.rabbitmq;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.websocket.support.spring.configuration.broker.rabbitmq.IGPWebSocketRabbiMQBroker;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,8 +45,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import javax.annotation.Resource;
 
 import static org.junit.Assert.assertNotNull;
 

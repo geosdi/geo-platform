@@ -35,18 +35,22 @@
  */
 package org.geosdi.geoplatform.support.async.mail;
 
-import com.google.common.base.Preconditions;
-import java.io.InputStream;
-import java.util.concurrent.Future;
-import javax.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMessage;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.scheduling.annotation.AsyncResult;
 
+import javax.annotation.Nonnull;
+import java.io.InputStream;
+import java.util.concurrent.Future;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static java.lang.Boolean.TRUE;
+import static javax.annotation.meta.When.NEVER;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -54,55 +58,84 @@ public final class BaseMailAsyncSender implements GPMailAsyncSender {
 
     private final JavaMailSender mailSender;
 
-    public BaseMailAsyncSender(JavaMailSender theMailSender) {
-        Preconditions.checkNotNull(theMailSender,
-                "Mail Sender must not be null");
+    /**
+     * @param theMailSender
+     */
+    public BaseMailAsyncSender(@Nonnull(when = NEVER) JavaMailSender theMailSender) {
+        checkNotNull(theMailSender, "Mail Sender must not be null");
         this.mailSender = theMailSender;
     }
 
+    /**
+     * @param mm
+     * @return {@link Future<Boolean>}
+     * @throws MailException
+     */
     @Override
-    public Future<Boolean> send(MimeMessage mm) throws MailException {
+    public Future<Boolean> send(@Nonnull(when = NEVER) MimeMessage mm) throws MailException {
+        checkNotNull(mm != null, "The Parameter MimeMessage must not be null");
         this.mailSender.send(mm);
-
-        return new AsyncResult<Boolean>(Boolean.TRUE);
+        return new AsyncResult(TRUE);
     }
 
+    /**
+     * @param mms
+     * @return {@link Future<Boolean>}
+     * @throws MailException
+     */
     @Override
-    public Future<Boolean> send(MimeMessage[] mms) throws MailException {
+    public Future<Boolean> send(@Nonnull(when = NEVER) MimeMessage[] mms) throws MailException {
+        checkNotNull(mms != null, "The Parameter MimeMessage[] must not be null");
         this.mailSender.send(mms);
-
-        return new AsyncResult<Boolean>(Boolean.TRUE);
+        return new AsyncResult(TRUE);
     }
 
+    /**
+     * @param mmp
+     * @return {@link Future<Boolean>}
+     * @throws MailException
+     */
     @Override
-    public Future<Boolean> send(MimeMessagePreparator mmp) throws
-            MailException {
+    public Future<Boolean> send(@Nonnull(when = NEVER) MimeMessagePreparator mmp) throws MailException {
+        checkNotNull(mmp != null, "The Parameter MimeMessagePreparator must not be null");
         this.mailSender.send(mmp);
-
-        return new AsyncResult<Boolean>(Boolean.TRUE);
+        return new AsyncResult(TRUE);
     }
 
+    /**
+     * @param mmps
+     * @return {@link Future<Boolean>}
+     * @throws MailException
+     */
     @Override
-    public Future<Boolean> send(MimeMessagePreparator[] mmps) throws
-            MailException {
+    public Future<Boolean> send(@Nonnull(when = NEVER) MimeMessagePreparator[] mmps) throws MailException {
+        checkNotNull(mmps != null, "The Parameter MimeMessagePreparator[] must not be null");
         this.mailSender.send(mmps);
-
-        return new AsyncResult<Boolean>(Boolean.TRUE);
+        return new AsyncResult(TRUE);
     }
 
+    /**
+     * @param smm
+     * @return {@link Future<Boolean>}
+     * @throws MailException
+     */
     @Override
-    public Future<Boolean> send(SimpleMailMessage smm) throws MailException {
+    public Future<Boolean> send(@Nonnull(when = NEVER) SimpleMailMessage smm) throws MailException {
+        checkNotNull(smm != null, "The Parameter SimpleMailMessage must not be null");
         this.mailSender.send(smm);
-
-        return new AsyncResult<Boolean>(Boolean.TRUE);
+        return new AsyncResult(TRUE);
     }
 
+    /**
+     * @param smms
+     * @return {@link Future<Boolean>}
+     * @throws MailException
+     */
     @Override
-    public Future<Boolean> send(SimpleMailMessage[] smms) throws
-            MailException {
+    public Future<Boolean> send(@Nonnull(when = NEVER) SimpleMailMessage[] smms) throws MailException {
+        checkNotNull(smms != null, "The Parameter SimpleMailMessage[] must not be null");
         this.mailSender.send(smms);
-
-        return new AsyncResult<Boolean>(Boolean.TRUE);
+        return new AsyncResult(TRUE);
     }
 
     @Override
@@ -110,9 +143,14 @@ public final class BaseMailAsyncSender implements GPMailAsyncSender {
         return this.mailSender.createMimeMessage();
     }
 
+    /**
+     * @param in
+     * @return {@link MimeMessage}
+     * @throws MailException
+     */
     @Override
-    public MimeMessage createMimeMessage(InputStream in) throws MailException {
+    public MimeMessage createMimeMessage(@Nonnull(when = NEVER) InputStream in) throws MailException {
+        checkNotNull(in != null, "The Parameter InputStream must not be null");
         return this.mailSender.createMimeMessage(in);
     }
-
 }

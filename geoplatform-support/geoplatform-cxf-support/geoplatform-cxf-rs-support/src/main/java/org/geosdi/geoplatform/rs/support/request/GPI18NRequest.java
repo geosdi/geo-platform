@@ -35,11 +35,10 @@
  */
 package org.geosdi.geoplatform.rs.support.request;
 
+import jakarta.xml.bind.annotation.XmlTransient;
 import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.hibernate.validator.support.request.GPI18NRequestValidator;
-
-import javax.xml.bind.annotation.XmlTransient;
 
 import static java.util.Locale.ENGLISH;
 

@@ -35,55 +35,52 @@
  */
 package org.geosdi.geoplatform.services.rs.config.server;
 
-import java.util.Arrays;
-import javax.ws.rs.core.Application;
-import javax.ws.rs.ext.RuntimeDelegate;
-import org.apache.cxf.interceptor.Interceptor;
+import jakarta.ws.rs.core.Application;
+import jakarta.ws.rs.ext.RuntimeDelegate;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
-import org.apache.cxf.message.Message;
 import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
 import org.geosdi.geoplatform.services.GPPublisherService;
 import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
-import static org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory.createProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Collections;
+
+import static org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory.createProvider;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
 @Rest
 class GPPublisherServiceJsonConfig {
-    
+
+    /**
+     * @param publisherService
+     * @param gpJsonPublisherApplication
+     * @param providerType
+     * @param serverLogInInterceptor
+     * @param serverLogOutInterceptor
+     * @return {@link JAXRSServerFactoryBean}
+     */
     @Bean(initMethod = "create")
-    @Required
-    public static JAXRSServerFactoryBean publisherServiceJson(@Qualifier(
-            value = "publisherService") GPPublisherService publisherService,
+    public static JAXRSServerFactoryBean publisherServiceJson(
+            @Qualifier(value = "publisherService") GPPublisherService publisherService,
             @Qualifier(value = "gpJsonPublisherApplication") Application gpJsonPublisherApplication,
             @Value("configurator{cxf_rest_provider_type}") GPRestProviderType providerType,
             @Qualifier(value = "serverLoggingInInterceptorBean") LoggingInInterceptor serverLogInInterceptor,
             @Qualifier(value = "serverLoggingOutInterceptorBean") LoggingOutInterceptor serverLogOutInterceptor) {
-        
-        JAXRSServerFactoryBean factory = RuntimeDelegate.getInstance().createEndpoint(
-                gpJsonPublisherApplication, JAXRSServerFactoryBean.class);
+        JAXRSServerFactoryBean factory = RuntimeDelegate.getInstance().createEndpoint(gpJsonPublisherApplication, JAXRSServerFactoryBean.class);
         factory.setServiceBean(publisherService);
         factory.setAddress(factory.getAddress());
         factory.setProvider(createProvider(providerType));
-        factory.setInInterceptors(Arrays.<Interceptor<? extends Message>>asList(
-                serverLogInInterceptor)
-        );
-        factory.setOutInterceptors(
-                Arrays.<Interceptor<? extends Message>>asList(
-                        serverLogOutInterceptor));
-        
+        factory.setInInterceptors(Collections.singletonList(serverLogInInterceptor));
+        factory.setOutInterceptors(Collections.singletonList(serverLogOutInterceptor));
         return factory;
     }
-    
 }

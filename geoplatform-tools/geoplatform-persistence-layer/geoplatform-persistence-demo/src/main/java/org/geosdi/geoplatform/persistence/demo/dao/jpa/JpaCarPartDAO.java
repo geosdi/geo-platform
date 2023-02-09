@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.persistence.demo.dao.jpa;
 
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
 import org.geosdi.geoplatform.persistence.dao.jpa.GPAbstractJpaDAO;
 import org.geosdi.geoplatform.persistence.demo.dao.ICarPartDAO;
@@ -43,16 +45,13 @@ import org.hibernate.HibernateException;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Repository(value = "jpaCarPartDAO")
 @Profile(value = "jpa")
-public class JpaCarPartDAO extends GPAbstractJpaDAO<CarPart, Long> implements ICarPartDAO {
+class JpaCarPartDAO extends GPAbstractJpaDAO<CarPart, String> implements ICarPartDAO {
 
     JpaCarPartDAO() {
         super(CarPart.class);

@@ -35,12 +35,13 @@
  */
 package org.geosdi.geoplatform.services;
 
-import java.util.List;
-import javax.jws.WebParam;
-import javax.jws.WebService;
+import jakarta.jws.WebParam;
+import jakarta.jws.WebService;
 import org.codehaus.jra.Post;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.services.scheduler.api.GPSchedulerServiceApi;
+
+import java.util.List;
 
 /**
  * Public interface to define the service operations mapped via SOAP using CXF
@@ -51,8 +52,7 @@ import org.geosdi.geoplatform.services.scheduler.api.GPSchedulerServiceApi;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@WebService(name = "GPSchedulerService",
-        targetNamespace = "http://services.geo-platform.org/")
+@WebService(name = "GPSchedulerService", targetNamespace = "http://services.geo-platform.org/")
 public interface GPSchedulerService extends GPSchedulerServiceApi {
 
     @Post
@@ -71,6 +71,5 @@ public interface GPSchedulerService extends GPSchedulerServiceApi {
 
     @Post
     @Override
-    void sendEmailUserCreationNotification(List<String> emailRecipient,
-            String createdUserName);
+    void sendEmailUserCreationNotification(List<String> emailRecipient, String createdUserName);
 }

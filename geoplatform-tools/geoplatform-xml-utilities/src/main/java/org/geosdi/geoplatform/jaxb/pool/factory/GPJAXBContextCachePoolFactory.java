@@ -35,12 +35,13 @@
  */
 package org.geosdi.geoplatform.jaxb.pool.factory;
 
-import com.google.common.base.Preconditions;
 import org.apache.commons.pool2.BaseKeyedPooledObjectFactory;
 import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.impl.DefaultPooledObject;
 
 import javax.xml.bind.JAXBContext;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -58,7 +59,7 @@ public class GPJAXBContextCachePoolFactory extends BaseKeyedPooledObjectFactory<
      */
     @Override
     public JAXBContext create(GPJAXBContextCachePool key) throws Exception {
-        Preconditions.checkNotNull(key, "The GPJAXBContextCache must not be null.");
+        checkNotNull(key, "The GPJAXBContextCache must not be null.");
         return key.getContext();
     }
 
@@ -80,7 +81,7 @@ public class GPJAXBContextCachePoolFactory extends BaseKeyedPooledObjectFactory<
      * The default implementation is a no-op.
      *
      * @param key the key used when selecting the instance
-     * @param p   a {@code PooledObject} wrapping the the instance to be destroyed
+     * @param p   a {@code PooledObject} wrapping the instance to be destroyed
      */
     @Override
     public void destroyObject(GPJAXBContextCachePool key, PooledObject<JAXBContext> p) throws Exception {

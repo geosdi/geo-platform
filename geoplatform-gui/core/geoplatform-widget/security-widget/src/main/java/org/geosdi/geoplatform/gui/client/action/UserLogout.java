@@ -52,13 +52,16 @@ import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 public class UserLogout extends MenuBaseAction {
 
-
+    private final static Logger logger = Logger.getLogger("UserLogout");
 
     public UserLogout() {
         super(SecurityModuleConstants.INSTANCE.UserLogout_tileText(),
@@ -84,12 +87,11 @@ public class UserLogout extends MenuBaseAction {
     }
 
     private void invalidateSession() {
-        GWT.log("Invalidate Sessione");
+        logger.log(Level.INFO, "#################### Invalidate Session");
         final InvalidateSessionRequest invalidateSessionRequest = GWT.create(InvalidateSessionRequest.class);
-        GWT.log(""+invalidateSessionRequest);
+        logger.log(Level.INFO, "#################### Invalidate Session Request : " + invalidateSessionRequest);
 
-        ClientCommandDispatcher.getInstance().execute(
-                new GPClientCommand<InvalidateSessionResponse>() {
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<InvalidateSessionResponse>() {
             private static final long serialVersionUID = 3838394981874885388L;
 
             {
@@ -106,8 +108,7 @@ public class UserLogout extends MenuBaseAction {
 
             @Override
             public void onCommandFailure(Throwable exception) {
-                GWT.log(""+exception.getMessage());
-                System.out.println("Error on invalidating the session!!!");
+                logger.log(Level.INFO, "Error on invalidating the session!!! : " + exception.getMessage());
                 //TODO: In case of fail... what is possible to do??
             }
         });

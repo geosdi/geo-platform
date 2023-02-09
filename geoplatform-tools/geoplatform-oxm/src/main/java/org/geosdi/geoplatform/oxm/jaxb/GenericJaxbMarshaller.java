@@ -41,13 +41,13 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GenericJaxbMarshaller extends GPMarshaller, GPUnmarshaller,
-        InitializingBean {
+public interface GenericJaxbMarshaller extends GPMarshaller, GPUnmarshaller, InitializingBean {
 
+    /**
+     * @param theMarshaller
+     */
     void setMarshaller(Jaxb2Marshaller theMarshaller);
-
 }

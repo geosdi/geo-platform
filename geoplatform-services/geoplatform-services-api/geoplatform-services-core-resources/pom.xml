@@ -23,6 +23,12 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-model</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.eclipse.angus</groupId>
+                    <artifactId>angus-activation</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         
         <!-- GUAVA -->

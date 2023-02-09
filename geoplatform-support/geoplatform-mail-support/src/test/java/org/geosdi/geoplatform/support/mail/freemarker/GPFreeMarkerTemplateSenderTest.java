@@ -36,6 +36,8 @@
 package org.geosdi.geoplatform.support.mail.freemarker;
 
 import freemarker.template.Configuration;
+import jakarta.annotation.Resource;
+import jakarta.mail.internet.MimeMessage;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.support.mail.configuration.detail.GPMailDetail;
 import org.geosdi.geoplatform.support.mail.loader.GPMailLoader;
@@ -51,8 +53,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
-import javax.annotation.Resource;
-import javax.mail.internet.MimeMessage;
+import static java.lang.System.clearProperty;
+import static java.lang.System.setProperty;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -67,7 +70,7 @@ public class GPFreeMarkerTemplateSenderTest {
     static Logger logger;
     //
     static final String GP_MAIL_KEY = "GP_MAIL_FILE_PROP";
-
+    //
     @Resource(name = "gpMailSpringDetail")
     private GPMailDetail gpMailSpringDetail;
     @Resource(name = "gpMailSpringSender")
@@ -77,26 +80,25 @@ public class GPFreeMarkerTemplateSenderTest {
 
     @BeforeClass
     public static void beforeClass() {
-        System.setProperty(GP_MAIL_KEY, "gp-mail-test.prop");
+        setProperty(GP_MAIL_KEY, "gp-mail-test.prop");
     }
 
     @AfterClass
     public static void afterClass() {
-        System.clearProperty(GP_MAIL_KEY);
+        clearProperty(GP_MAIL_KEY);
     }
 
     @Before
     public void setUp() {
-        Assert.assertNotNull(logger);
-        Assert.assertNotNull(gpMailSpringDetail);
-        Assert.assertNotNull(gpMailSpringSender);
-        Assert.assertNotNull(freeMarkerConfiguration);
+        assertNotNull(logger);
+        assertNotNull(gpMailSpringDetail);
+        assertNotNull(gpMailSpringSender);
+        assertNotNull(freeMarkerConfiguration);
     }
 
     @Test
     public void gpMailDetailTest() {
-        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@Mail Detail : {}",
-                gpMailSpringDetail);
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@Mail Detail : {}", gpMailSpringDetail);
     }
 
     @Test

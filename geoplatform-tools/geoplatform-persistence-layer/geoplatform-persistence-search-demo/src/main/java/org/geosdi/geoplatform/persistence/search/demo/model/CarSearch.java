@@ -35,15 +35,17 @@
  */
 package org.geosdi.geoplatform.persistence.search.demo.model;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.DocumentId;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 
-import javax.persistence.*;
 import java.io.Serializable;
-
-import static org.hibernate.search.engine.backend.types.Searchable.YES;
+import java.util.Objects;
 
 /**
  *
@@ -52,96 +54,39 @@ import static org.hibernate.search.engine.backend.types.Searchable.YES;
  */
 @Entity
 @Indexed(index = "CarSearchIndex")
+@Getter
+@Setter
+@ToString
 public class CarSearch implements Serializable {
 
     private static final long serialVersionUID = -492671838741301712L;
     //
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CAR_SEQ")
-    @SequenceGenerator(name = "CAR_SEQ", sequenceName = "CAR_SEQ")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//, generator = "CAR_SEQ")
+//    @SequenceGenerator(name = "CAR_SEQ", sequenceName = "CAR_SEQ")
     @DocumentId
     private Long id;
     //
     @NaturalId
     private String plate;
     //
-    @Column(name = "model")
+    @FullTextField(name = "model")
     private String model;
 
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the plate
-     */
-    public String getPlate() {
-        return plate;
-    }
-
-    /**
-     * @param plate the plate to set
-     */
-    public void setPlate(String plate) {
-        this.plate = plate;
-    }
-
-    /**
-     * @return the model
-     */
-    @FullTextField(name = "model", searchable = YES)
-    public String getModel() {
-        return model;
-    }
-
-    /**
-     * @param model the model to set
-     */
-    public void setModel(String model) {
-        this.model = model;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        CarSearch carSearch = (CarSearch) o;
+        return id.equals(carSearch.id) && plate.equals(carSearch.plate);
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 71 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 71 * hash + (this.plate != null ? this.plate.hashCode() : 0);
-        return hash;
+        return Objects.hash(id, plate);
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final CarSearch other = (CarSearch) obj;
-        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
-            return false;
-        }
-        if ((this.plate == null) ? (other.plate != null) : !this.plate.equals(
-                other.plate)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "CarSearch{ " + "id = " + id + ", plate = " + plate
-                + ", model = " + model + '}';
-    }
-
 }

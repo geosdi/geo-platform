@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.core.model;
 
+import jakarta.persistence.*;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
+import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
@@ -56,14 +56,22 @@ import java.io.Serializable;
         @Index(columnList = "name", name = "VIEWPORT_NAME_INDEX"),
         @Index(columnList = "account_project_id", name = "ACCOUNT_PROJECT_ID_INDEX")
 })
+@Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "viewport")
 public class GPViewport implements Serializable {
 
     private static final long serialVersionUID = 8911979056279744318L;
     //
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_VIEWPORT_SEQ")
-    @SequenceGenerator(name = "GP_VIEWPORT_SEQ", sequenceName = "GP_VIEWPORT_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gp_viewport_generator")
+    @GenericGenerator(name = "gp_viewport_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "GP_VIEWPORT_SEQ"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "50"),
+                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
+            }
+    )
     private Long id;
     //
     @Column(nullable = false)

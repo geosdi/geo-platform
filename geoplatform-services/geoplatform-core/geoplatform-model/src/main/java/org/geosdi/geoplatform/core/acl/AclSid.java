@@ -35,13 +35,17 @@
  */
 package org.geosdi.geoplatform.core.acl;
 
+import jakarta.persistence.*;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.geosdi.geoplatform.core.model.GPOrganization;
+import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * The <tt>AclSid</tt> (SID is an acronym for "Security Identity") domain class
@@ -59,13 +63,26 @@ import javax.persistence.*;
         indexes = {
                 @Index(columnList = "sid", name = "ACL_SID_INDEX")
         })
+@Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "sid")
+@Getter
+@Setter
+@ToString
 // TODO: implements Sid? extends PrincipalSid, GrantedAuthoritySid?
-public class AclSid {
+public class AclSid implements Serializable {
 
+    private static final long serialVersionUID = -7679673575853604494L;
+    //
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACL_SID_SEQ")
-    @SequenceGenerator(name = "ACL_SID_SEQ", sequenceName = "ACL_SID_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gp_acl_sid_generator")
+    @GenericGenerator(name = "gp_acl_sid_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "ACL_SID_SEQ"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "50"),
+                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
+            }
+    )
     private Long id;
     /**
      * Standard security concept which represents only an authenticated entity.
@@ -113,84 +130,6 @@ public class AclSid {
         this.organization = organization;
     }
     //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the principal
-     * @see #principal
-     */
-    public boolean isPrincipal() {
-        return principal;
-    }
-
-    /**
-     * @param principal the principal to set
-     * @see #principal
-     */
-    public void setPrincipal(boolean principal) {
-        this.principal = principal;
-    }
-
-    /**
-     * @return the sid
-     * @see #sid
-     */
-    public String getSid() {
-        return sid;
-    }
-
-    /**
-     * @param sid the sid to set
-     * @see #sid
-     */
-    public void setSid(String sid) {
-        this.sid = sid;
-    }
-
-    /**
-     * @return the organization
-     */
-    public GPOrganization getOrganization() {
-        return organization;
-    }
-
-    /**
-     * @param organization the organization to set
-     */
-    public void setOrganization(GPOrganization organization) {
-        this.organization = organization;
-    }
-    //</editor-fold>
-
-    /**
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        StringBuilder str = new StringBuilder("AclSid {");
-        str.append("id=").append(id);
-        str.append(", principal=").append(principal);
-        str.append(", sid=").append(sid);
-        str.append(", organization=").append(organization);
-        return str.append('}').toString();
-    }
 
     /**
      * (non-Javadoc)

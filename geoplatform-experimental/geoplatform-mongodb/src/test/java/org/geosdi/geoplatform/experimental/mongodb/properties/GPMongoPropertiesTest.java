@@ -35,17 +35,19 @@
  */
 package org.geosdi.geoplatform.experimental.mongodb.properties;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.experimental.mongodb.configuration.properties.MongoProperties;
 import org.geosdi.geoplatform.experimental.mongodb.loader.GPMongoPropertiesLoaderTest;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
-
-import javax.annotation.Resource;
 
 import static org.junit.Assert.assertNotNull;
 

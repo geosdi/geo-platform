@@ -42,7 +42,6 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class EmailModificationJob extends EmailJob {
@@ -51,8 +50,7 @@ public class EmailModificationJob extends EmailJob {
     public static final String NEW_PLAIN_PASSWORD = "new_plain_password";
 
     @Override
-    protected void sendEmail(GPUser user, JobExecutionContext context)
-            throws JobExecutionException {
+    protected void sendEmail(GPUser user, JobExecutionContext context) throws JobExecutionException {
         try {
             JobDataMap triggerMap = context.getTrigger().getJobDataMap();
             String previousEmail = (String) triggerMap.get(PREVIOUS_EMAIL);

@@ -35,73 +35,81 @@
  */
 package org.geosdi.geoplatform.persistence.configuration.cache.properties;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import static java.lang.Boolean.FALSE;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@ToString
 @Component(value = "gpEhCacheProperties")
-public class GPEhCacheProperties {
+class GPEhCacheProperties implements GPEhCacheHibernateProperties {
 
     @Value("persistence{db_cacheRegionFactoryClass}")
+    @Getter
+    @Setter
     private String hibCacheRegionFactoryClass;
+    @Value("persistence{db_javax.cache.provider}")
+    @Getter
+    @Setter
+    private String hibCacheProvider;
     @Value("persistence{db_useSecondLevelCache:@null}")
+    @Setter
     private Boolean hibUseSecondLevelCache;
     @Value("persistence{db_useQueryCache:@null}")
+    @Setter
     private Boolean hibUseQueryCache;
     @Value("persistence{db_ehcacheConfigurationResourceName:@null}")
+    @Setter
+    @Getter
     private String ehcacheConfResourceName;
     @Value("persistence{db_use_structured_entries:@null}")
+    @Setter
     private Boolean useStructuredEntries;
 
     /**
-     * @return the hibCacheRegionFactoryClass
+     * @return {@link Boolean}
      */
+    @Override
     public String getHibCacheRegionFactoryClass() {
         return hibCacheRegionFactoryClass;
     }
 
     /**
-     * @return the hibUseSecondLevelCache
+     * @return {@link Boolean}
      */
-    public boolean isHibUseSecondLevelCache() {
-        return (hibUseSecondLevelCache == null) ? FALSE : hibUseSecondLevelCache;
-    }
-
-    /**
-     * @return the hibUseQueryCache
-     */
+    @Override
     public boolean isHibUseQueryCache() {
         return (hibUseQueryCache == null) ? FALSE : hibUseQueryCache;
     }
 
     /**
-     * @return the ehcacheConfResourceName
+     * @return {@link Boolean}
      */
+    @Override
     public String getEhcacheConfResourceName() {
         return ehcacheConfResourceName;
     }
 
     /**
-     * @return the useStructuredEntries
+     * @return {@link Boolean}
      */
+    @Override
     public boolean isUseStructuredEntries() {
         return (useStructuredEntries == null) ? FALSE : useStructuredEntries;
     }
 
+    /**
+     * @return {@link Boolean}
+     */
     @Override
-    public String toString() {
-        return "GPEhCacheProperties{ " + "hibCacheRegionFactoryClass = "
-                + hibCacheRegionFactoryClass + ", hibUseSecondLevelCache = "
-                + isHibUseSecondLevelCache() + ", hibUseQueryCache = "
-                + hibUseQueryCache + ", ehcacheConfResourceName = "
-                + ehcacheConfResourceName + ", useStructuredEntries = "
-                + useStructuredEntries + '}';
+    public boolean isHibUseSecondLevelCache() {
+        return (hibUseSecondLevelCache == null) ? FALSE : hibUseSecondLevelCache;
     }
-
 }

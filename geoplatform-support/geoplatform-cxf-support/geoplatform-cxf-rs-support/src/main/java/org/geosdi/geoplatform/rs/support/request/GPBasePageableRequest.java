@@ -36,11 +36,10 @@
 package org.geosdi.geoplatform.rs.support.request;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.xml.bind.annotation.XmlTransient;
 import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.rs.support.request.annotation.GPPageableFrom;
-
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

@@ -38,25 +38,24 @@ package org.geosdi.geoplatform.support.jackson.xml;
 import com.fasterxml.jackson.databind.AnnotationIntrospector;
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.introspect.AnnotationIntrospectorPair;
-import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import org.geosdi.geoplatform.support.jackson.annotation.GPJacksonXmlAnnotationIntrospectorBuilder;
+import org.geosdi.geoplatform.support.jackson.annotation.JacksonAnnotationIntrospectorBuilder;
 import org.geosdi.geoplatform.support.jackson.property.JacksonSupportConfigFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.text.DateFormat;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.TimeZone;
 
-import static com.fasterxml.jackson.databind.type.TypeFactory.defaultInstance;
 import static com.fasterxml.jackson.dataformat.xml.XmlMapper.builder;
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Observable.fromArray;
-import static java.lang.Boolean.FALSE;
 import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.support.jackson.GPJacksonSupport.defaultProp;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.UNWRAP_ROOT_VALUE_ENABLE;
@@ -72,45 +71,33 @@ public class GPJacksonXmlSupport implements JacksonXmlSupport {
     private final XmlMapper xmlMapper;
 
     /**
-     * <p>By Default {@link JacksonAnnotationIntrospector} is used</p>
+     * @param theJacksonXmlBuilder
      */
-    public GPJacksonXmlSupport() {
-        this(FALSE, defaultProp());
+    public GPJacksonXmlSupport(@Nonnull(when = NEVER) GPJacksonXmlAnnotationIntrospectorBuilder theJacksonXmlBuilder) {
+        this(theJacksonXmlBuilder, null);
     }
 
     /**
-     * @param useJacksonAnnotation
+     * @param theJacksonXmlBuilder
+     * @param theJacksonBuilder
      */
-    public GPJacksonXmlSupport(boolean useJacksonAnnotation) {
-        this(useJacksonAnnotation, defaultProp());
+    public GPJacksonXmlSupport(@Nonnull(when = NEVER) GPJacksonXmlAnnotationIntrospectorBuilder theJacksonXmlBuilder,
+            @Nullable JacksonAnnotationIntrospectorBuilder theJacksonBuilder) {
+        this(theJacksonXmlBuilder, theJacksonBuilder, defaultProp());
     }
 
     /**
-     * @param format
-     */
-    public GPJacksonXmlSupport(@Nonnull(when = NEVER) DateFormat format) {
-        this();
-        this.xmlMapper.setDateFormat(format);
-    }
-
-    /**
-     * @param format
-     * @param useJacksonAnnotation
-     */
-    public GPJacksonXmlSupport(@Nonnull(when = NEVER) DateFormat format, boolean useJacksonAnnotation) {
-        this(useJacksonAnnotation);
-        this.xmlMapper.setDateFormat(format);
-    }
-
-    /**
-     * @param useJacksonAnnotation
+     * @param theJacksonXmlBuilder
+     * @param theJacksonBuilder
      * @param features
      */
-    public GPJacksonXmlSupport(boolean useJacksonAnnotation, @Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {
+    public GPJacksonXmlSupport(@Nonnull(when = NEVER) GPJacksonXmlAnnotationIntrospectorBuilder theJacksonXmlBuilder,
+            @Nullable JacksonAnnotationIntrospectorBuilder theJacksonBuilder, @Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {
+        checkArgument(theJacksonXmlBuilder != null, "The Parameter theJacksonXmlBuilder must not be null.");
         checkArgument(features != null, "The Parameter features must not be null.");
         this.xmlMapper = builder().defaultUseWrapper(false).build();
-        AnnotationIntrospector primary = new JaxbAnnotationIntrospector(defaultInstance());
-        this.xmlMapper.setAnnotationIntrospector(useJacksonAnnotation ? new AnnotationIntrospectorPair(primary, new JacksonAnnotationIntrospector()) : primary);
+        AnnotationIntrospector primary = theJacksonXmlBuilder.build();
+        this.xmlMapper.setAnnotationIntrospector(theJacksonBuilder != null ? new AnnotationIntrospectorPair(primary, theJacksonBuilder.build()) : primary);
         fromArray(features)
                 .filter(Objects::nonNull)
                 .filter(f -> f != UNWRAP_ROOT_VALUE_ENABLE)
@@ -142,7 +129,8 @@ public class GPJacksonXmlSupport implements JacksonXmlSupport {
      * @return {@link JacksonXmlSupport}
      */
     @Override
-    public final JacksonXmlSupport registerModule(Module module) {
+    public final JacksonXmlSupport registerModule(@Nonnull(when = NEVER) Module module) {
+        checkArgument(module != null, "The Parameter module must not be null.");
         this.xmlMapper.registerModule(module);
         return this;
     }

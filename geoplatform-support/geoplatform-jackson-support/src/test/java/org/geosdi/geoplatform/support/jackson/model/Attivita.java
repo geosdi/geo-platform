@@ -51,6 +51,9 @@ import java.util.List;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @XmlRootElement(name = "ATTIVITA")
+@jakarta.xml.bind.annotation.XmlRootElement(name = "ATTIVITA")
+@jakarta.xml.bind.annotation.XmlType(propOrder = {"TRATTA_PICCHETTO", "PROGRESSIVO", "DESCRIZIONE", "CODICE", "WBE", "UNITA_MISURA",
+        "TIPOLOGIA_IMPIANTO", "QTA_PROGETTO", "IMPORTO_PRESUNTO", "PRESTAZIONE", "MATERIALE"})
 @XmlType(propOrder = {"TRATTA_PICCHETTO", "PROGRESSIVO", "DESCRIZIONE", "CODICE", "WBE", "UNITA_MISURA",
         "TIPOLOGIA_IMPIANTO", "QTA_PROGETTO", "IMPORTO_PRESUNTO", "PRESTAZIONE", "MATERIALE"})
 @Getter
@@ -61,23 +64,33 @@ public class Attivita implements Serializable {
     private static final long serialVersionUID = -3853179178327509090L;
     //
     @XmlElement(name = "TRATTA_PICCHETTO")
+    @jakarta.xml.bind.annotation.XmlElement(name = "TRATTA_PICCHETTO")
     private String trattaPicchetto;
     @XmlElement(name = "PROGRESSIVO")
+    @jakarta.xml.bind.annotation.XmlElement(name = "PROGRESSIVO")
     private Integer progressivo;
     @XmlElement(name = "CODICE")
+    @jakarta.xml.bind.annotation.XmlElement(name = "CODICE")
     private String codice;
     @XmlElement(name = "WBE")
+    @jakarta.xml.bind.annotation.XmlElement(name = "WBE")
     private String wbe;
     @XmlElement(name = "UNITA_MISURA")
+    @jakarta.xml.bind.annotation.XmlElement(name = "UNITA_MISURA")
     private String unitaMisura;
     @XmlElement(name = "TIPOLOGIA_IMPIANTO")
+    @jakarta.xml.bind.annotation.XmlElement(name = "TIPOLOGIA_IMPIANTO")
     private String tipologiaImpianto;
     @XmlElement(name = "QTA_PROGETTO")
+    @jakarta.xml.bind.annotation.XmlElement(name = "QTA_PROGETTO")
     private String qtaProgetto;
     @XmlElement(name = "IMPORTO_PRESUNTO")
+    @jakarta.xml.bind.annotation.XmlElement(name = "IMPORTO_PRESUNTO")
     private double importoPresunto;
     @XmlElement(name = "PRESTAZIONE")
+    @jakarta.xml.bind.annotation.XmlElement(name = "PRESTAZIONE")
     private List<Prestazione> prestazioni = Lists.newArrayList();
     @XmlElement(name = "MATERIALE")
+    @jakarta.xml.bind.annotation.XmlElement(name = "MATERIALE")
     private Materiale materiale;
 }

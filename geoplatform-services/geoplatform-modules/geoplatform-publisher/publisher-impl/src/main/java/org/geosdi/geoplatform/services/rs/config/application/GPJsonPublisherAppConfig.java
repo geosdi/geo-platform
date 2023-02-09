@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.services.rs.config.application;
 
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+import jakarta.ws.rs.ApplicationPath;
+import jakarta.ws.rs.core.Application;
 import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
 import org.geosdi.geoplatform.services.rs.path.GPPublisherRSPathConfig;
 import org.springframework.context.annotation.Bean;
@@ -56,9 +56,7 @@ class GPJsonPublisherAppConfig {
         return new GPJsonPublisherApplication();
     }
 
-    @ApplicationPath(
-            value = GPPublisherRSPathConfig.GP_PUBLISHER_SERVICE_RS_PATH)
+    @ApplicationPath(value = GPPublisherRSPathConfig.GP_PUBLISHER_SERVICE_RS_PATH)
     final class GPJsonPublisherApplication extends Application {
     }
-
 }

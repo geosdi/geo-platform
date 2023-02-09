@@ -79,6 +79,15 @@
             <version>${project.version}</version>
         </dependency>
 
+        <!-- =========================================================== -->
+        <!-- JAKARTA SERVLET -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>

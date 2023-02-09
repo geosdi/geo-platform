@@ -37,8 +37,6 @@ package org.geosdi.geoplatform.support.jackson.mapper.xml;
 
 import org.geosdi.geoplatform.support.jackson.function.GPJacksonCheck;
 import org.geosdi.geoplatform.support.jackson.reader.GPJacksonReaderSupport;
-import org.geosdi.geoplatform.support.jackson.xml.GPJacksonXmlSupport;
-import org.geosdi.geoplatform.support.jackson.xml.JacksonXmlSupport;
 
 import javax.annotation.Nonnull;
 import java.io.File;
@@ -51,8 +49,6 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GPJacksonXmlMapper<T extends Object> extends GPJacksonReaderSupport<T> {
-
-    JacksonXmlSupport DEFAULT_XML_MAPPER = new GPJacksonXmlSupport();
 
     /**
      * @param entity

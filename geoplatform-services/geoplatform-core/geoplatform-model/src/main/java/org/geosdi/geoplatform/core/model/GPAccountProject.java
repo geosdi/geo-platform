@@ -35,15 +35,16 @@
  */
 package org.geosdi.geoplatform.core.model;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.*;
+import jakarta.persistence.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.acls.domain.BasePermission;
 
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
 
 /**
@@ -57,7 +58,8 @@ import java.io.Serializable;
         indexes = {
                 @Index(columnList = "account_id", name = "ACCOUNT_ID_INDEX"),
                 @Index(columnList = "project_id", name = "PROJECT_ID_INDEX")})
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "account_project")
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "account_project")
 public class GPAccountProject implements Serializable {
 
     /**
@@ -66,10 +68,15 @@ public class GPAccountProject implements Serializable {
     private static final long serialVersionUID = -5848638543797948563L;
     //
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "GP_ACCOUNT_PROJECT_SEQ")
-    @SequenceGenerator(name = "GP_ACCOUNT_PROJECT_SEQ",
-            sequenceName = "GP_ACCOUNT_PROJECT_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gp_account_project_generator")
+    @GenericGenerator(name = "gp_account_project_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "GP_ACCOUNT_PROJECT_SEQ"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "40"),
+                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
+            }
+    )
     private Long id;
     //
     //@XmlAnyElement(lax = true)

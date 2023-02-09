@@ -75,7 +75,7 @@ public class GenericMapType<K, V> implements Serializable {
         checkArgument(map != null, "The Parameter map must not be null.");
         this.entry = map.entrySet()
                 .stream()
-                .map(entry -> new GenericEntryType<>(entry))
+                .map(GenericEntryType::new)
                 .collect(toList());
     }
 }

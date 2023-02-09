@@ -35,16 +35,16 @@
  */
 package org.geosdi.geoplatform.persistence.dao.hibernate;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaDelete;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.CriteriaUpdate;
 import org.geosdi.geoplatform.persistence.dao.GPAbstractBaseDAO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Nonnull;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaDelete;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.CriteriaUpdate;
 import java.io.Serializable;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -81,7 +81,7 @@ abstract class GPHibernateCriteriaDAO<T extends Object, ID extends Serializable>
     }
 
     /**
-     * @return {@link CriteriaQuery<T>}
+     * @return {@link CriteriaQuery <T>}
      */
     public final CriteriaQuery<T> createCriteriaQuery() {
         return this.criteriaBuilder().createQuery(super.getPersistentClass());
@@ -99,7 +99,7 @@ abstract class GPHibernateCriteriaDAO<T extends Object, ID extends Serializable>
     }
 
     /**
-     * @return {@link CriteriaDelete<T>}
+     * @return {@link CriteriaDelete <T>}
      */
     public final CriteriaDelete<T> createCriteriaDelete() {
         return this.criteriaBuilder().createCriteriaDelete(this.persistentClass);
@@ -117,7 +117,7 @@ abstract class GPHibernateCriteriaDAO<T extends Object, ID extends Serializable>
     }
 
     /**
-     * @return {@link CriteriaUpdate<T>}
+     * @return {@link CriteriaUpdate <T>}
      */
     public final CriteriaUpdate<T> createCriteriaUpdate() {
         return this.criteriaBuilder().createCriteriaUpdate(this.persistentClass);

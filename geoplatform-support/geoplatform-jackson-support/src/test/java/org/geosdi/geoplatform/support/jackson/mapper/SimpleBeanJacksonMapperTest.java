@@ -50,6 +50,7 @@ import java.util.Map;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.junit.Assert.assertNotNull;
 
@@ -62,7 +63,7 @@ public class SimpleBeanJacksonMapperTest {
     private static final Logger logger = LoggerFactory.getLogger(SimpleBeanJacksonMapperTest.class);
     //
     private static final GPJacksonMapper<SimpleBean> GP_JACKSON_MAPPER = new GPBaseJacksonMapper<>(SimpleBean.class,
-            new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE, FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
+            new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_DISABLE, FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
                     ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE, INDENT_OUTPUT_ENABLE)
                     .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)
                     .configure(GPJsonIncludeFeature.NON_NULL));

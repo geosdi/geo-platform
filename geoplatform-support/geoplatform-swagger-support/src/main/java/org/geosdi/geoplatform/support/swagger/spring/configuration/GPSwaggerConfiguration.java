@@ -35,12 +35,14 @@
  */
 package org.geosdi.geoplatform.support.swagger.spring.configuration;
 
-import com.google.common.base.Preconditions;
-import java.util.Arrays;
 import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  *
@@ -140,25 +142,11 @@ public class GPSwaggerConfiguration implements SwaggerConfiguration {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        Preconditions.checkArgument((this.resourcePackage != null)
-                && !(this.resourcePackage.isEmpty()), "The Resource Package "
-                + "parameter must not be null or an Empty String.");
-
-        Preconditions.checkArgument((this.host != null)
-                && !(this.host.isEmpty()), "The Host "
-                + "parameter must not be null or an Empty String.");
-
-        Preconditions.checkArgument((this.basePath != null)
-                && !(this.basePath.isEmpty()), "The Base Path "
-                + "parameter must not be null or an Empty String.");
-
-        Preconditions.checkArgument((this.title != null)
-                && !(this.title.isEmpty()), "The Title "
-                + "parameter must not be null or an Empty String.");
-
-        Preconditions.checkArgument((this.contact != null)
-                && !(this.contact.isEmpty()), "The Contact "
-                + "parameter must not be null or an Empty String.");
+        checkArgument((this.resourcePackage != null) && !(this.resourcePackage.isEmpty()), "The Resource Package parameter must not be null or an Empty String.");
+        checkArgument((this.host != null) && !(this.host.isEmpty()), "The Host parameter must not be null or an Empty String.");
+        checkArgument((this.basePath != null) && !(this.basePath.isEmpty()), "The Base Path parameter must not be null or an Empty String.");
+        checkArgument((this.title != null) && !(this.title.isEmpty()), "The Title parameter must not be null or an Empty String.");
+        checkArgument((this.contact != null) && !(this.contact.isEmpty()), "The Contact parameter must not be null or an Empty String.");
     }
 
     @Override

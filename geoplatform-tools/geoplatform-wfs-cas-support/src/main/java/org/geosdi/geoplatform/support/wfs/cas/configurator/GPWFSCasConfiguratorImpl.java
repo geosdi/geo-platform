@@ -37,26 +37,32 @@ package org.geosdi.geoplatform.support.wfs.cas.configurator;
 
 import org.geosdi.geoplatform.support.wfs.configurator.GPWFSConfiguratorImpl;
 
+import javax.annotation.Nullable;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPWFSCasConfiguratorImpl extends GPWFSConfiguratorImpl {
 
+    /**
+     * @param dataSource
+     * @return {@link Boolean}
+     */
     @Override
-    public boolean matchDefaultDataSource(String dataSource) {
-        return (dataSource.contains("?")) ? canMatch(dataSource)
-                : super.matchDefaultDataSource(dataSource);
+    public boolean matchDefaultDataSource(@Nullable String dataSource) {
+        return (((dataSource != null) && (dataSource.contains("?"))) ? canMatch(dataSource) : super.matchDefaultDataSource(dataSource));
     }
 
+    /**
+     * @param dataSource
+     * @return {@link Boolean}
+     */
     final boolean canMatch(String dataSource) {
         int index = dataSource.indexOf("?");
         if (index != -1) {
             dataSource = dataSource.substring(0, index);
         }
-
         return defaultWFSDataSource.equalsIgnoreCase(dataSource);
     }
-
 }

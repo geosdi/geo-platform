@@ -43,9 +43,10 @@ import org.junit.Test;
 import org.springframework.security.acls.domain.BasePermission;
 
 import java.util.*;
-import java.util.stream.Stream;
 
+import static java.lang.Boolean.TRUE;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Stream.of;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -78,7 +79,7 @@ public class GPInitializerTest extends BaseInitializerTest {
         logger.trace("\n\t@@@ " + getClass().getSimpleName() + ".setUp @@@");
         organizationTest = new GPOrganization("geoSDI_dao_test");
         organizationDAO.persist(organizationTest);
-        userPositionTest = super.insertUser(usernameUserPositionTest, organizationTest, Boolean.TRUE);
+        userPositionTest = super.insertUser(usernameUserPositionTest, organizationTest, TRUE);
 
         endPosition = beginPosition + 930;
 
@@ -101,7 +102,7 @@ public class GPInitializerTest extends BaseInitializerTest {
         folderA.setChecked(false);
         folderB.setChecked(true);
         //
-        folderDAO.persist(Stream.of(folderA, folderB).collect(toList()));
+        folderDAO.persist(of(folderA, folderB).collect(toList()));
 
         rasterLayer = super.createRasterLayer(folderB, userPositionTestProject, beginPosition + 30); // 333030
         vectorLayer = super.createVectorLayer(folderB, userPositionTestProject, beginPosition); // 333000
@@ -110,7 +111,7 @@ public class GPInitializerTest extends BaseInitializerTest {
         rasterLayer.setChecked(false);
         vectorLayer.setChecked(true);
         //
-        layerDAO.persist(Stream.of(rasterLayer, vectorLayer).collect(toList()));
+        layerDAO.persist(of(rasterLayer, vectorLayer).collect(toList()));
     }
 
     @After

@@ -36,10 +36,16 @@
 package org.geosdi.geoplatform.gui.server;
 
 import com.google.common.collect.Lists;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import org.apache.commons.fileupload2.FileItem;
+import org.apache.commons.fileupload2.FileUploadException;
+import org.apache.commons.fileupload2.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload2.jaksrvlt.JakSrvltFileUpload;
 import org.apache.commons.io.FilenameUtils;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -57,12 +63,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -95,20 +95,17 @@ public class UploadServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this,
-                config.getServletContext());
+        SpringBeanAutowiringSupport.processInjectionBasedOnServletContext(this, config.getServletContext());
     }
 
     @Override
-    public void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException, GeoPlatformException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, GeoPlatformException {
         this.doPost(req, resp);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException, GeoPlatformException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, GeoPlatformException {
 //        logger.info("Query String: " + req.getQueryString());
 //        while (req.getParameterMap().keySet().iterator().hasNext()) {
 //            logger.info("Parameter next: " + req.getParameterMap().keySet().iterator().next());
@@ -131,7 +128,7 @@ public class UploadServlet extends HttpServlet {
         }
         receivedAssertion = (AssertionImpl) session.getAttribute(AbstractCasFilter.CONST_CAS_ASSERTION);
         // process only multipart requests
-        if (ServletFileUpload.isMultipartContent(req)) {
+        if (JakSrvltFileUpload.isMultipartContent(req)) {
             // Create a factory for disk-based file items
             DiskFileItemFactory factory = new DiskFileItemFactory();
             // Create a new file upload handler
@@ -140,7 +137,7 @@ public class UploadServlet extends HttpServlet {
              * disk.
              */
             factory.setSizeThreshold(1 * 1024 * 1024); //1 MB
-            ServletFileUpload upload = new ServletFileUpload(factory);
+            JakSrvltFileUpload upload = new JakSrvltFileUpload(factory);
             File uploadedFile = null;
             // Parse the request
             try {

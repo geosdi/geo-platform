@@ -35,22 +35,21 @@
  */
 package org.geosdi.geoplatform.responce.adapter;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
+import org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType;
+import org.geosdi.geoplatform.gui.responce.URIDTO;
+import org.geosdi.geoplatform.responce.adapter.UriMapAdapter.UriMap;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
-import org.geosdi.geoplatform.gui.responce.OnlineResourceProtocolType;
-import org.geosdi.geoplatform.gui.responce.URIDTO;
-import org.geosdi.geoplatform.responce.adapter.UriMapAdapter.EntryUriMap;
-import org.geosdi.geoplatform.responce.adapter.UriMapAdapter.UriMap;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -70,8 +69,7 @@ public class UriMapAdapter extends XmlAdapter<UriMap, Map<OnlineResourceProtocol
         UriMap uriMap = new UriMap();
         List<EntryUriMap> entries = uriMap.getEntryUriMap();
         for (Map.Entry<OnlineResourceProtocolType, URIDTO> e : v.entrySet()) {
-            entries.add(new EntryUriMap(
-                    e.getKey(), e.getValue()));
+            entries.add(new EntryUriMap(e.getKey(), e.getValue()));
         }
         return uriMap;
     }

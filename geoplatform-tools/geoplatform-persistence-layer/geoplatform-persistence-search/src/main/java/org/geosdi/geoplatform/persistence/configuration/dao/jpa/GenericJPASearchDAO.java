@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.persistence.configuration.dao.jpa;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.geosdi.geoplatform.persistence.configuration.dao.GPBaseSearchDAO;
 import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
 import org.hibernate.Session;
@@ -44,8 +46,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.Collection;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -78,7 +78,7 @@ public abstract class GenericJPASearchDAO<T extends Object> implements GPBaseSea
 
     @Override
     public final SearchSession searchSession() throws Exception {
-        return this.searchSession = ((this.searchSession != null) ? this.searchSession : Search.session(this.entityManager));
+        return this.searchSession = ((this.searchSession != null) ? this.searchSession : Search.session((Session) this.entityManager.getDelegate()));
     }
 
     @Override

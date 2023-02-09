@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.experimental.el.query.rest.delegare;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO.IPageResult;
 import org.geosdi.geoplatform.experimental.el.query.dao.IGPElasticSearchQueryDAO;
@@ -48,15 +49,11 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
-
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPElasticSearchQueryDelegate<QUERY extends GPElasticSearchQuery,
-        QUERY_DAO extends IGPElasticSearchQueryDAO<QUERY>, REQUEST extends GPElasticSearchQueryExecutionRequest>
-        implements IGPElasticSearchQueryDelegate<QUERY, QUERY_DAO, REQUEST> {
+public class GPElasticSearchQueryDelegate<QUERY extends GPElasticSearchQuery, QUERY_DAO extends IGPElasticSearchQueryDAO<QUERY>, REQUEST extends GPElasticSearchQueryExecutionRequest> implements IGPElasticSearchQueryDelegate<QUERY, QUERY_DAO, REQUEST> {
 
     @GeoPlatformLog
     protected Logger logger;

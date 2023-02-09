@@ -44,18 +44,19 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
 class GPMailAsyncSenderConfig {
 
+    /**
+     * @param mailSender
+     * @return {@link GPMailAsyncSender}
+     */
     @Bean(name = "gpMailAsyncSender")
     @Autowired
-    public GPMailAsyncSender gpMailAsyncSender(@Qualifier(
-            value = "gpMailSpringSender") JavaMailSender mailSender) {
+    public GPMailAsyncSender gpMailAsyncSender(@Qualifier(value = "gpMailSpringSender") JavaMailSender mailSender) {
         return new BaseMailAsyncSender(mailSender);
     }
-
 }

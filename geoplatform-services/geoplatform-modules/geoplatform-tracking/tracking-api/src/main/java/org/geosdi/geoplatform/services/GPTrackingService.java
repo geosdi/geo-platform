@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.services;
 
-import javax.jws.WebParam;
-import javax.jws.WebService;
+import jakarta.jws.WebParam;
+import jakarta.jws.WebService;
 import org.codehaus.jra.Post;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;

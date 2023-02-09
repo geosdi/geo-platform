@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.wms.i18N.validator;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.hibernate.validator.support.GPI18NValidator;
 import org.geosdi.geoplatform.hibernate.validator.support.request.GPI18NRequestValidator;
 import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoRequest;
@@ -48,7 +49,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.Resource;
 import java.util.Locale;
 
 import static java.util.stream.Collectors.toList;

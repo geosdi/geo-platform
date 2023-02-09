@@ -36,20 +36,17 @@
 package org.geosdi.geoplatform.support.mail.freemarker;
 
 import freemarker.template.Configuration;
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.support.mail.spring.configuration.freemarker.IGPFreeMarkerConfigLocation;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.Resource;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -82,9 +79,9 @@ public class GPFreeMarkerConfigurationTest {
 
     @Before
     public void setUp() {
-        Assert.assertNotNull(logger);
-        Assert.assertNotNull(gpFreeMarkerConfigLocation);
-        Assert.assertNotNull(freeMarkerConfiguration);
+        assertNotNull(logger);
+        assertNotNull(gpFreeMarkerConfigLocation);
+        assertNotNull(freeMarkerConfiguration);
     }
 
     @Test

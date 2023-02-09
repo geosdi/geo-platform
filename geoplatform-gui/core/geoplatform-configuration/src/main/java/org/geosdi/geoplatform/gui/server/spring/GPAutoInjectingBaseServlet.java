@@ -35,15 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.server.spring;
 
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -51,16 +49,14 @@ public class GPAutoInjectingBaseServlet extends HttpServlet {
 
     private static final long serialVersionUID = 8092470293199110596L;
     //
-
     protected AutowireCapableBeanFactory springBeanFactory;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(
-                config.getServletContext());
-        this.springBeanFactory = ctx.getAutowireCapableBeanFactory();
-        springBeanFactory.autowireBean(this);
+        /** @Todo fix the compilation for now try to use this https://github.com/gwtproject/gwt/issues/9727 **/
+//        WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(config.getServletContext());
+//        this.springBeanFactory = ctx.getAutowireCapableBeanFactory();
+//        springBeanFactory.autowireBean(this);
     }
-
 }

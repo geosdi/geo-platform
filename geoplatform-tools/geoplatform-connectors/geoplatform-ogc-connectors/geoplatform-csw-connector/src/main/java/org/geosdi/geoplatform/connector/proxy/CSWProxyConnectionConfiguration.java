@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.proxy;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.support.httpclient.proxy.GPNoProxyHostsMatcher;
 import org.geosdi.geoplatform.support.httpclient.proxy.GPProxyConnectionParamaters;
 import org.geosdi.geoplatform.support.httpclient.proxy.GPProxyCredentialProvider;
@@ -48,8 +48,7 @@ import org.springframework.stereotype.Component;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Component(value = "cswProxyConnectionConfiguration")
-public class CSWProxyConnectionConfiguration implements
-        HttpClientProxyConfiguration {
+public class CSWProxyConnectionConfiguration implements HttpClientProxyConfiguration {
 
     @Resource(name = "cswProxyConnectionParameters")
     private GPProxyConnectionParamaters cswProxyConnectionParameters;

@@ -55,11 +55,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Lazy(true)
 @Component(value = "command.session.InvalidateSessionCommand")
-public class InvalidateSessionCommand implements
-        GPCommand<InvalidateSessionRequest, InvalidateSessionResponse> {
+public class InvalidateSessionCommand implements GPCommand<InvalidateSessionRequest, InvalidateSessionResponse> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            BasicLoginCommand.class);
+    private static final Logger logger = LoggerFactory.getLogger(BasicLoginCommand.class);
     //
     private static final InvalidateSessionResponse isr = new InvalidateSessionResponse();
     //
@@ -67,17 +65,10 @@ public class InvalidateSessionCommand implements
     private ISecurityService securityService;
 
     @Override
-    public InvalidateSessionResponse execute(InvalidateSessionRequest request,
-            HttpServletRequest httpServletRequest) {
-
-        logger.info("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
+    public InvalidateSessionResponse execute(InvalidateSessionRequest request, HttpServletRequest httpServletRequest) {
+        logger.info("#####################Executing {} Command", this.getClass().getSimpleName());
         this.securityService.invalidateSession(httpServletRequest);
-
         logger.info("#################### Session Invalidate.");
-
         return isr;
     }
-
 }

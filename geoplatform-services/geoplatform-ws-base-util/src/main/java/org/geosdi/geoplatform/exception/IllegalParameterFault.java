@@ -35,9 +35,8 @@
  */
 package org.geosdi.geoplatform.exception;
 
-import javax.xml.ws.WebFault;
-
-import static javax.ws.rs.core.Response.Status;
+import jakarta.ws.rs.core.Response.Status;
+import jakarta.xml.ws.WebFault;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

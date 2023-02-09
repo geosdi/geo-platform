@@ -36,6 +36,8 @@
 package org.geosdi.geoplatform.core.dao.impl;
 
 import com.google.common.collect.Lists;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.*;
 import org.geosdi.geoplatform.core.dao.GPAccountProjectDAO;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
@@ -43,8 +45,6 @@ import org.geosdi.geoplatform.persistence.dao.jpa.GPAbstractJpaDAO;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;

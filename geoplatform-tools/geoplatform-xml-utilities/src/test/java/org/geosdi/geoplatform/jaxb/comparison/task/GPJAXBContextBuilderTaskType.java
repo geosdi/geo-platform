@@ -42,5 +42,7 @@ package org.geosdi.geoplatform.jaxb.comparison.task;
 public enum GPJAXBContextBuilderTaskType {
 
     SIMPLE,
-    POOLED;
+    POOLED,
+    JAKARTA_SIMPLE,
+    JAKARTA_POOLED;
 }

@@ -34,18 +34,17 @@
         <property name="templateModification" value="#{emailProperties['email.template.modification']}"/>
     </bean>
 
-    <bean id="mailSender"
-          class="org.springframework.mail.javamail.JavaMailSenderImpl">
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="defaultEncoding" value="UTF-8"/>
 
         <!-- GMail via TLS -->
-        <!--property name="host" value="smtp.gmail.com" />
-        <property name="port" value="587" />
-        <property name="javaMailProperties">
-            <props>
-                <prop key="mail.smtp.starttls.enable">true</prop>
-            </props>
-        </property-->
+<!--        <property name="host" value="smtp.gmail.com" />-->
+<!--        <property name="port" value="587" />-->
+<!--        <property name="javaMailProperties">-->
+<!--            <props>-->
+<!--                <prop key="mail.smtp.starttls.enable">true</prop>-->
+<!--            </props>-->
+<!--        </property>-->
 
         <!-- GMail via SSL -->
         <property name="host" value="smtp.googlemail.com"/>

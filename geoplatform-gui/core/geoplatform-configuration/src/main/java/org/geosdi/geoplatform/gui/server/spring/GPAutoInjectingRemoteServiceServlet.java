@@ -36,16 +36,14 @@
 package org.geosdi.geoplatform.gui.server.spring;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPAutoInjectingRemoteServiceServlet extends RemoteServiceServlet {
 
@@ -56,8 +54,9 @@ public class GPAutoInjectingRemoteServiceServlet extends RemoteServiceServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(config.getServletContext());
-        this.springBeanFactory = ctx.getAutowireCapableBeanFactory();
-        springBeanFactory.autowireBean(this);
+        /** @Todo fix the compilation for now try to use this https://github.com/gwtproject/gwt/issues/9727 **/
+//        WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(config.getServletContext());
+//        this.springBeanFactory = ctx.getAutowireCapableBeanFactory();
+//        springBeanFactory.autowireBean(this);
     }
 }

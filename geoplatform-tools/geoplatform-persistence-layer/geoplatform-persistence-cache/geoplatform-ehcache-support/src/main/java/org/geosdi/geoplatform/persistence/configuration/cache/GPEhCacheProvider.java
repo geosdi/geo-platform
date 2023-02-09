@@ -36,10 +36,11 @@
 package org.geosdi.geoplatform.persistence.configuration.cache;
 
 import org.geosdi.geoplatform.persistence.cache.api.GPHibernateCacheProvider;
-import org.geosdi.geoplatform.persistence.configuration.cache.properties.GPEhCacheProperties;
+import org.geosdi.geoplatform.persistence.configuration.cache.properties.GPEhCacheHibernateProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -50,14 +51,17 @@ import java.util.Properties;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
-public class GPEhCacheProvider implements GPHibernateCacheProvider {
+class GPEhCacheProvider implements GPHibernateCacheProvider {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            GPEhCacheProvider.class);
+    private static final Logger logger = LoggerFactory.getLogger(GPEhCacheProvider.class);
     //
     @Autowired
-    private GPEhCacheProperties gpEhCacheProperties;
+    @Qualifier(value = "gpEhCacheProperties")
+    private GPEhCacheHibernateProperties ehCacheProperties;
 
+    /**
+     * @return {@link Properties}
+     */
     @Override
     @Bean(name = "gpEhCacheProviderSupport")
     public Properties getCacheProviderProperties() {
@@ -66,18 +70,17 @@ public class GPEhCacheProvider implements GPHibernateCacheProvider {
             private static final long serialVersionUID = 3109256773218160485L;
 
             {
-
-                if (gpEhCacheProperties.isHibUseSecondLevelCache()
-                        && gpEhCacheProperties.getHibCacheRegionFactoryClass() != null) {
-                    logger.info("################################Hibernate EHCache Properties : {}\n\n",
-                            gpEhCacheProperties);
-                    this.put("javax.persistence.sharedCache.mode", "ENABLE_SELECTIVE");
-                    this.put("hibernate.cache.region.factory_class", gpEhCacheProperties.getHibCacheRegionFactoryClass());
-                    this.put("hibernate.cache.use_second_level_cache", gpEhCacheProperties.isHibUseSecondLevelCache());
-                    this.put("hibernate.cache.use_query_cache", gpEhCacheProperties.isHibUseQueryCache());
-                    this.put("hibernate.cache.use_structured_entries", gpEhCacheProperties.isUseStructuredEntries());
-                } else if (gpEhCacheProperties.isHibUseSecondLevelCache()) {
-                    throw new IllegalArgumentException(GPEhCacheProperties.class.getCanonicalName()
+                if (ehCacheProperties.isHibUseSecondLevelCache() && ehCacheProperties.getHibCacheRegionFactoryClass() != null) {
+                    logger.info("################################Hibernate EHCache Properties : {}\n\n", ehCacheProperties);
+                    this.put("jakarta.persistence.sharedCache.mode", "ENABLE_SELECTIVE");
+                    this.put("hibernate.cache.region.factory_class", ehCacheProperties.getHibCacheRegionFactoryClass());
+                    this.put("hibernate.javax.cache.provider", ehCacheProperties.getHibCacheProvider());
+                    this.put("hibernate.javax.cache.uri", ehCacheProperties.getEhcacheConfResourceName());
+                    this.put("hibernate.cache.use_second_level_cache", ehCacheProperties.isHibUseSecondLevelCache());
+                    this.put("hibernate.cache.use_query_cache", ehCacheProperties.isHibUseQueryCache());
+                    this.put("hibernate.cache.use_structured_entries", ehCacheProperties.isUseStructuredEntries());
+                } else if (ehCacheProperties.isHibUseSecondLevelCache()) {
+                    throw new IllegalArgumentException(GPEhCacheHibernateProperties.class.getCanonicalName()
                             + ": To use the Second level cache it is "
                             + "necessary to specify all the necessary parameters");
                 }

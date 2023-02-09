@@ -35,10 +35,9 @@
  */
 package org.geosdi.geoplatform.rs.support.service.template;
 
+import jakarta.ws.rs.core.Response;
 import org.geosdi.geoplatform.rs.support.request.GPGeocodingAddressRequest;
 import org.geosdi.geoplatform.rs.support.request.GPRevertGeocodingRequest;
-
-import javax.ws.rs.core.Response;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

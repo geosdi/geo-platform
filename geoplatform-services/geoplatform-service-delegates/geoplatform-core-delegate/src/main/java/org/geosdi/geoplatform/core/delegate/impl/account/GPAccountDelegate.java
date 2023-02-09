@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.core.delegate.impl.account;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.core.dao.*;
 import org.geosdi.geoplatform.core.delegate.api.account.AccountDelegate;
 import org.geosdi.geoplatform.core.model.*;
@@ -55,7 +56,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,8 +75,7 @@ import static org.geosdi.geoplatform.response.factory.AccountDTOFactory.buildUse
 @Component(value = "gpAccountDelegate")
 public class GPAccountDelegate implements AccountDelegate {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            GPAccountDelegate.class);
+    private static final Logger logger = LoggerFactory.getLogger(GPAccountDelegate.class);
     //
     @Autowired
     private GPAccountDAO accountDao;

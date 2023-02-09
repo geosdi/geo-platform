@@ -48,6 +48,7 @@ import java.io.File;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -60,8 +61,7 @@ public class SimpleBeanJacksonXmlMapperTest {
 
     private static final Logger logger = LoggerFactory.getLogger(SimpleBeanJacksonMapperTest.class);
     //
-    private static final GPJacksonXmlMapper<SimpleBean> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(SimpleBean.class,
-            new GPJacksonXmlSupport());
+    private static final GPJacksonXmlMapper<SimpleBean> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(SimpleBean.class, new GPJacksonXmlSupport(JAXB));
     @Test
     public void a_writeXmTest() throws Exception {
         logger.info("###################################XML_AS_STRING : \n{}\n", GP_JACKSON_XML_MAPPER

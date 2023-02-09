@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.core.dao;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.core.acl.AclEntry;
 import org.geosdi.geoplatform.core.acl.dao.AclEntryDAO;
 import org.geosdi.geoplatform.core.model.GPAccount;
@@ -50,7 +51,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 import static org.junit.Assert.assertNotNull;

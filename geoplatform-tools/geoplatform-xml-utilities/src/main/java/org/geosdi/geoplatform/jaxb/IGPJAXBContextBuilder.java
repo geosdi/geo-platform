@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.jaxb;
 
 import org.w3c.dom.Node;
 
-import javax.xml.bind.JAXBException;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLStreamReader;
@@ -139,16 +138,16 @@ public interface IGPJAXBContextBuilder {
     /**
      * @param jaxbObject
      * @param result
-     * @throws JAXBException
+     * @throws Exception
      */
-    void marshal(Object jaxbObject, Result result) throws JAXBException;
+    void marshal(Object jaxbObject, Result result) throws Exception;
 
     /**
      * @param jaxbObject
      * @param file
-     * @throws JAXBException
+     * @throws Exception
      */
-    void marshal(Object jaxbObject, File file) throws JAXBException;
+    void marshal(Object jaxbObject, File file) throws Exception;
 
     /**
      * @param jaxbObject
@@ -160,35 +159,35 @@ public interface IGPJAXBContextBuilder {
     /**
      * @param jaxbObject
      * @param node
-     * @throws JAXBException
+     * @throws Exception
      */
-    void marshal(Object jaxbObject, Node node) throws JAXBException;
+    void marshal(Object jaxbObject, Node node) throws Exception;
 
     /**
      * @param jaxbObject
      * @param stream
-     * @throws JAXBException
+     * @throws Exception
      */
-    void marshal(Object jaxbObject, OutputStream stream) throws JAXBException;
+    void marshal(Object jaxbObject, OutputStream stream) throws Exception;
 
     /**
      * @param jaxbObject
      * @param writer
-     * @throws JAXBException
+     * @throws Exception
      */
-    void marshal(Object jaxbObject, Writer writer) throws JAXBException;
+    void marshal(Object jaxbObject, Writer writer) throws Exception;
 
     /**
      * @param jaxbObject
      * @param writer
-     * @throws JAXBException
+     * @throws Exception
      */
-    void marshal(Object jaxbObject, XMLEventWriter writer) throws JAXBException;
+    void marshal(Object jaxbObject, XMLEventWriter writer) throws Exception;
 
     /**
      * @param jaxbObject
      * @param writer
-     * @throws JAXBException
+     * @throws Exception
      */
-    void marshal(Object jaxbObject, XMLStreamWriter writer) throws JAXBException;
+    void marshal(Object jaxbObject, XMLStreamWriter writer) throws Exception;
 }

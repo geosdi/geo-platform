@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.core.acl.dao.impl;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import org.geosdi.geoplatform.core.acl.AclEntry;
 import org.geosdi.geoplatform.core.acl.dao.AclEntryDAO;
 import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
@@ -42,9 +45,6 @@ import org.geosdi.geoplatform.persistence.dao.jpa.GPAbstractJpaDAO;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;

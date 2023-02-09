@@ -36,14 +36,18 @@
 package org.geosdi.geoplatform.experimental.mongodb.configuration.auth;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface MongoBaseAuth extends MongoAuth {
 
+    /**
+     * @param theMongoUserName
+     */
     void setMongoUserName(String theMongoUserName);
 
+    /**
+     * @param theMongoPassword
+     */
     void setMongoPassword(String theMongoPassword);
-
 }

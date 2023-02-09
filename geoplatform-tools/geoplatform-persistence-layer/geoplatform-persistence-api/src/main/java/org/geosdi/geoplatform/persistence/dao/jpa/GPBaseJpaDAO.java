@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.persistence.dao.jpa;
 
+import jakarta.persistence.EntityManager;
 import org.geosdi.geoplatform.persistence.dao.GPBaseDAO;
 import org.hibernate.Cache;
 import org.hibernate.SessionFactory;
 
-import javax.persistence.EntityManager;
 import java.io.Serializable;
 
 /**

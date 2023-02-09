@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.persistence.configuration.export;
 
+import jakarta.annotation.Resource;
 import org.hibernate.boot.Metadata;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.hibernate.tool.schema.TargetType;
@@ -43,7 +44,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 
-import javax.annotation.Resource;
 import java.io.File;
 import java.util.EnumSet;
 

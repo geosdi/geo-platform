@@ -36,11 +36,11 @@
 package org.geosdi.geoplatform.mock;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**

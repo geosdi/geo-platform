@@ -35,10 +35,16 @@
  */
 package org.geosdi.geoplatform.response.collection;
 
+import lombok.Setter;
+
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.Map;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -49,32 +55,36 @@ public class GenericEntryType<K, V> implements GPGenericEntryType<K, V> {
 
     private static final long serialVersionUID = 4209226890477537087L;
     //
+    @Setter
     private K key;
+    @Setter
     private V value;
 
     public GenericEntryType() {
     }
 
-    public GenericEntryType(Map.Entry<K, V> e) {
+    /**
+     * @param e
+     */
+    public GenericEntryType(@Nonnull(when = NEVER) Map.Entry<K, V> e) {
+        checkArgument(e != null, "The Parameter Map.Entry must not be null.");
         key = e.getKey();
         value = e.getValue();
     }
 
+    /**
+     * @return {@link K}
+     */
     @XmlElement
     public K getKey() {
         return key;
     }
 
-    public void setKey(K key) {
-        this.key = key;
-    }
-
+    /**
+     * @return {@link V}
+     */
     @XmlElement
     public V getValue() {
         return value;
-    }
-
-    public void setValue(V value) {
-        this.value = value;
     }
 }

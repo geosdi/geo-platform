@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.core.model.attribution;
 
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Embedded;
 import lombok.*;
 import org.geosdi.geoplatform.core.model.attribution.logo.GPAttributionLogoURL;
 
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 

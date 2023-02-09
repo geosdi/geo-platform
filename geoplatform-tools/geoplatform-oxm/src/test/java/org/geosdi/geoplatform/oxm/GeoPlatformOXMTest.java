@@ -40,7 +40,8 @@ import org.geosdi.geoplatform.GPGenericMarshaller;
 import org.geosdi.geoplatform.mock.ClassToXMLMap;
 import org.geosdi.geoplatform.oxm.castor.IGPCastorMarshaller;
 import org.geosdi.geoplatform.oxm.jaxb.GenericJaxbMarshaller;
-import org.junit.Assert;
+import org.geosdi.geoplatform.oxm.jibx.GPJibxBindingContext;
+import org.jibx.runtime.IMarshallingContext;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -78,7 +79,7 @@ public class GeoPlatformOXMTest {
     //
     @Autowired
     @Qualifier(value = "jibx")
-    private GPGenericMarshaller jibx;
+    private GPJibxBindingContext jibx;
     //
     private ClassToXMLMap message;
 
@@ -123,11 +124,14 @@ public class GeoPlatformOXMTest {
     }
 
     @Test
-    public void testJibx() throws IOException {
+    public void testJibx() throws Exception {
         String jibxFile = "target/jibx.xml";
         File f = new File(jibxFile);
-        jibx.marshal(message, f);
-        ClassToXMLMap jibxMap = (ClassToXMLMap) jibx.unmarshal(f);
+        IMarshallingContext marshallingContext = jibx.createMarshallingContext();
+        marshallingContext.setIndent(2);
+        marshallingContext.setOutput(new FileOutputStream(f), "UTF-8");
+        marshallingContext.marshalDocument(message);
+        ClassToXMLMap jibxMap = (ClassToXMLMap) jibx.createUnmarshallingContext().unmarshalDocument(new DataInputStream(new FileInputStream(f)), "UTF-8");
         assertNotNull(jibxMap);
         logger.info("JIXB BEAN *************** {}", jibxMap + "\n");
     }

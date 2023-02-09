@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.core.model;
 
+import jakarta.persistence.*;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
 import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
+import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -67,9 +67,15 @@ public class GPMessage implements Serializable {
     private static final long serialVersionUID = -160635166814490037L;
     //
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "GP_MESSAGE_SEQ")
-    @SequenceGenerator(name = "GP_MESSAGE_SEQ", sequenceName = "GP_MESSAGE_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gp_message_generator")
+    @GenericGenerator(name = "gp_message_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "GP_MESSAGE_SEQ"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "50"),
+                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
+            }
+    )
     private Long id;
     //
     @ManyToOne(optional = false)

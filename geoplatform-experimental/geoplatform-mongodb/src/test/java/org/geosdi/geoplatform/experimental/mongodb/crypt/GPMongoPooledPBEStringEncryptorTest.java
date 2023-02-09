@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.experimental.mongodb.crypt;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.junit.FixMethodOrder;
@@ -43,8 +44,6 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import javax.annotation.Resource;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;

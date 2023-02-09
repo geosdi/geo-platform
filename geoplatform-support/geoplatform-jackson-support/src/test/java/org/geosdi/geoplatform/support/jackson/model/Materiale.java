@@ -49,7 +49,9 @@ import java.io.Serializable;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @XmlRootElement(name = "MATERIALE")
+@jakarta.xml.bind.annotation.XmlRootElement(name = "MATERIALE")
 @XmlType(propOrder = {"CODICE", "QTA_PROGETTO", "SEGNO"})
+@jakarta.xml.bind.annotation.XmlType(propOrder = {"CODICE", "QTA_PROGETTO", "SEGNO"})
 @Getter
 @Setter
 @ToString
@@ -58,9 +60,12 @@ public class Materiale implements Serializable {
     private static final long serialVersionUID = 3441555991760964484L;
     //
     @XmlElement(name = "CODICE")
+    @jakarta.xml.bind.annotation.XmlElement(name = "CODICE")
     private String codice;
     @XmlElement(name = "QTA_PROGETTO")
+    @jakarta.xml.bind.annotation.XmlElement(name = "QTA_PROGETTO")
     private String qtaProgetto;
     @XmlElement(name = "SEGNO")
+    @jakarta.xml.bind.annotation.XmlElement(name = "SEGNO")
     private char segno;
 }

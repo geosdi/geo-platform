@@ -35,15 +35,15 @@
  */
 package org.geosdi.geoplatform.rs.support.compression.provider;
 
+import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.core.MultivaluedMap;
+import jakarta.ws.rs.ext.Provider;
+import jakarta.ws.rs.ext.WriterInterceptor;
+import jakarta.ws.rs.ext.WriterInterceptorContext;
 import org.geosdi.geoplatform.rs.support.compression.annotation.GPCompress;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.ext.Provider;
-import javax.ws.rs.ext.WriterInterceptor;
-import javax.ws.rs.ext.WriterInterceptorContext;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Optional;
@@ -63,7 +63,7 @@ public class GPGZIPWriterInterceptor implements WriterInterceptor {
     private static final Logger logger = LoggerFactory.getLogger(GPGZIPWriterInterceptor.class);
 
     /**
-     * Interceptor method wrapping calls to {@link javax.ws.rs.ext.MessageBodyWriter#writeTo} method.
+     * Interceptor method wrapping calls to {@link jakarta.ws.rs.ext.MessageBodyWriter#writeTo} method.
      * The parameters of the wrapped method called are available from {@code context}.
      * Implementations of this method SHOULD explicitly call
      * {@link WriterInterceptorContext#proceed} to invoke the next interceptor in the chain,

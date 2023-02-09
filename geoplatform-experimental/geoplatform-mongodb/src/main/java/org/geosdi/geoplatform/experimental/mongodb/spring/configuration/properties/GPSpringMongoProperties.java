@@ -36,15 +36,14 @@
 package org.geosdi.geoplatform.experimental.mongodb.spring.configuration.properties;
 
 import com.mongodb.MongoCredential;
+import jakarta.annotation.Resource;
 import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.experimental.mongodb.configuration.auth.MongoAuth;
 import org.geosdi.geoplatform.experimental.mongodb.configuration.properties.MongoProperties;
 import org.geosdi.geoplatform.experimental.mongodb.spring.annotation.GPMongoProp;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-
-import javax.annotation.Resource;
-import javax.inject.Named;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.mongodb.MongoCredential.createCredential;
@@ -57,7 +56,7 @@ import static org.geosdi.geoplatform.experimental.mongodb.configuration.properti
  */
 @Immutable
 @GPMongoProp
-@Named(value = "gpSpringMongoProp")
+@Component(value = "gpSpringMongoProp")
 class GPSpringMongoProperties implements MongoProperties {
 
     private static final long serialVersionUID = 2164578284848305794L;
@@ -91,11 +90,17 @@ class GPSpringMongoProperties implements MongoProperties {
         return this.mongoDatabaseName = (StringUtils.hasText(this.mongoDatabaseName)) ? this.mongoDatabaseName : (String) MONGO_DBNAME.mongoProp();
     }
 
+    /**
+     * @return {@link MongoAuth}
+     */
     @Override
     public MongoAuth getMongoAuth() {
         return this.mongoAuth;
     }
 
+    /**
+     * @return {@link MongoCredential}
+     */
     @Override
     public MongoCredential getUserCredential() {
         return this.userCredentials;
@@ -114,9 +119,7 @@ class GPSpringMongoProperties implements MongoProperties {
         checkArgument(!this.mongoHost.equals(MONGO_HOST_VALUE), "The Parameter mongoHost must not be " + MONGO_HOST_VALUE);
         checkArgument(!this.mongoDatabaseName.equals(MONGO_DATABASE_NAME_VALUE), "The Parameter mongoDatabaseName must not be " + MONGO_DATABASE_NAME_VALUE);
         checkArgument(this.mongoAuth != null, "The Parameter mongoAuth must not be null.");
-        this.userCredentials = this.mongoAuth.isMongoAuthEnabled() ?
-                createCredential(mongoAuth.getMongoUserName(), this.mongoDatabaseName,
-                        mongoAuth.getMongoPassword().toCharArray()) : null;
+        this.userCredentials = this.mongoAuth.isMongoAuthEnabled() ? createCredential(mongoAuth.getMongoUserName(), this.mongoDatabaseName, mongoAuth.getMongoPassword().toCharArray()) : null;
     }
 
     @Override

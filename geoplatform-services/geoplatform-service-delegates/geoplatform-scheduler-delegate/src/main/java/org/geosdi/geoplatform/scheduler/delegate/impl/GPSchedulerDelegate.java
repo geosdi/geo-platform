@@ -35,33 +35,22 @@
  */
 package org.geosdi.geoplatform.scheduler.delegate.impl;
 
-import java.util.List;
-import javax.annotation.PreDestroy;
-import javax.annotation.Resource;
+import jakarta.annotation.PreDestroy;
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.core.dao.GPAccountDAO;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.scheduler.delegate.api.SchedulerDelegate;
-import org.geosdi.geoplatform.scheduler.quartz.jobs.EmailJob;
-import org.geosdi.geoplatform.scheduler.quartz.jobs.EmailModificationJob;
-import org.geosdi.geoplatform.scheduler.quartz.jobs.EmailRegistrationJob;
-import org.geosdi.geoplatform.scheduler.quartz.jobs.EmailUserCreationNotificationJob;
-import org.geosdi.geoplatform.scheduler.quartz.jobs.GroupJobType;
-import org.geosdi.geoplatform.scheduler.quartz.jobs.TempAccountExpireJob;
+import org.geosdi.geoplatform.scheduler.quartz.jobs.*;
 import org.geosdi.geoplatform.scheduler.quartz.task.EmailTask;
-import org.quartz.CronScheduleBuilder;
-import org.quartz.JobBuilder;
-import org.quartz.JobDetail;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
-import org.quartz.Trigger;
-import org.quartz.TriggerBuilder;
+import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -104,8 +93,7 @@ public class GPSchedulerDelegate implements SchedulerDelegate {
     }
 
     @Override
-    public void sendEmailModification(GPUser user, String previousEmail,
-            String newPlainPassword) {
+    public void sendEmailModification(GPUser user, String previousEmail, String newPlainPassword) {
         // Trigger the job to run once
         Trigger trigger = TriggerBuilder.newTrigger().
                 withIdentity("EmailModificationTrigger",
@@ -119,7 +107,6 @@ public class GPSchedulerDelegate implements SchedulerDelegate {
                 previousEmail);
         trigger.getJobDataMap().put(EmailModificationJob.NEW_PLAIN_PASSWORD,
                 newPlainPassword);
-
         try {
             logger.info("\n*** Fire trigger for sending modification email...");
             scheduler.scheduleJob(trigger);
@@ -129,8 +116,7 @@ public class GPSchedulerDelegate implements SchedulerDelegate {
     }
 
     @Override
-    public void sendEmailUserCreationNotification(List<String> emailRecipient,
-            String createdUserName) {
+    public void sendEmailUserCreationNotification(List<String> emailRecipient, String createdUserName) {
         // Trigger the job to run once
         Trigger trigger = TriggerBuilder.newTrigger().
                 withIdentity("emailUserCreationNotificationTrigger",

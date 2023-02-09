@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.scheduler.quartz.task;
 
+import jakarta.mail.MessagingException;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.VelocityException;
@@ -47,8 +48,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.List;
@@ -143,43 +142,39 @@ public class EmailTask {
     }
     //</editor-fold>
 
-    public void sendEmailUserCreationNotification(List<String> emailRecipient,
-            String createdUserName) throws EmailException {
+    public void sendEmailUserCreationNotification(List<String> emailRecipient, String createdUserName) throws EmailException {
         logger.info("\n*** Sending email for user creation notification to {} ***",
                 emailRecipient.size());
 
-        MimeMessagePreparator preparator = new MimeMessagePreparator() {
-            @Override
-            public void prepare(MimeMessage mimeMessage) {
-                try {
-                    MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
-                    message.setSubject(createSubject(subjectCreationNotification));
-                    String[] array = emailRecipient.toArray(new String[emailRecipient.size()]);
-                    message.setTo(array);
-                    Map model = new HashMap();
-                    model.put("createdUserName", createdUserName);
-                    model.put("frontendLink", frontendLink);
-                    model.put("frontendLabel", frontendLabel);
-                    VelocityContext velocityContext = new VelocityContext(new HashMap());
-                    StringWriter writer = new StringWriter();
-                    schedulerVelocityEngine.mergeTemplate("template/"
-                            + "geoPlatformMailSupport.html.vm", "UTF-8", velocityContext, writer);
-                    String text = writer.toString();
-                    message.setText(text, true);
-                } catch (VelocityException ex) {
-                    logger.error("\n*** VelocityException: {}", ex.getMessage());
-                } catch (MessagingException ex) {
-                    logger.error("\n*** MessagingException: {}", ex.getMessage());
-                } catch (Exception ex) {
-                    logger.error("\n*** Exception: {}", ex.getMessage());
-                }
+        MimeMessagePreparator preparator = mimeMessage -> {
+
+            try {
+                MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+                message.setSubject(createSubject(subjectCreationNotification));
+                String[] array = emailRecipient.toArray(new String[emailRecipient.size()]);
+                message.setTo(array);
+                Map model = new HashMap();
+                model.put("createdUserName", createdUserName);
+                model.put("frontendLink", frontendLink);
+                model.put("frontendLabel", frontendLabel);
+                VelocityContext velocityContext = new VelocityContext(model);
+                StringWriter writer = new StringWriter();
+                schedulerVelocityEngine.mergeTemplate(this.templateCreationNotification, "UTF-8", velocityContext, writer);
+                String text = writer.toString();
+                message.setText(text, true);
+            } catch (VelocityException ex) {
+                logger.error("\n*** VelocityException: {}", ex.getMessage());
+            } catch (MessagingException ex) {
+                logger.error("\n*** MessagingException: {}", ex.getMessage());
+            } catch (Exception ex) {
+                logger.error("\n*** Exception: {}", ex.getMessage());
             }
         };
 
         try {
             mailSender.send(preparator);
         } catch (MailException ex) {
-            logger.error("\n*** MailException: {}" + ex.getStackTrace().toString());
+            ex.printStackTrace();
             throw new EmailException(ex.getMessage());
         }
 
@@ -190,31 +185,29 @@ public class EmailTask {
         String email = user.getEmailAddress();
         logger.info("\n*** Sending email for registration to {} ***", email);
 
-        MimeMessagePreparator preparator = new MimeMessagePreparator() {
-            @Override
-            public void prepare(MimeMessage mimeMessage) {
-                try {
-                    MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
-                    message.setSubject(createSubject(subjectRegistration));
-                    message.setTo(user.getEmailAddress());
+        MimeMessagePreparator preparator = mimeMessage -> {
 
-                    Map model = new HashMap();
-                    model.put("user", user);
-                    model.put("frontendLink", frontendLink);
-                    model.put("frontendLabel", frontendLabel);
-                    VelocityContext velocityContext = new VelocityContext(new HashMap());
-                    StringWriter writer = new StringWriter();
-                    schedulerVelocityEngine.mergeTemplate(templateRegistration, "UTF-8",
-                            velocityContext, writer);
-                    String text = writer.toString();
-                    message.setText(text, true);
-                } catch (VelocityException ex) {
-                    logger.error("\n*** VelocityException: {}", ex.getMessage());
-                } catch (MessagingException ex) {
-                    logger.error("\n*** MessagingException: {}", ex.getMessage());
-                } catch (Exception ex) {
-                    logger.error("\n*** Exception: {}", ex.getMessage());
-                }
+            try {
+                MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+                message.setSubject(createSubject(subjectRegistration));
+                message.setTo(user.getEmailAddress());
+
+                Map model = new HashMap();
+                model.put("user", user);
+                model.put("frontendLink", frontendLink);
+                model.put("frontendLabel", frontendLabel);
+                VelocityContext velocityContext = new VelocityContext(new HashMap());
+                StringWriter writer = new StringWriter();
+                schedulerVelocityEngine.mergeTemplate(templateRegistration, "UTF-8",
+                        velocityContext, writer);
+                String text = writer.toString();
+                message.setText(text, true);
+            } catch (VelocityException ex) {
+                logger.error("\n*** VelocityException: {}", ex.getMessage());
+            } catch (MessagingException ex) {
+                logger.error("\n*** MessagingException: {}", ex.getMessage());
+            } catch (Exception ex) {
+                logger.error("\n*** Exception: {}", ex.getMessage());
             }
         };
 
@@ -228,51 +221,48 @@ public class EmailTask {
         logger.info("\n*** Email for registration sended to {} ***", email);
     }
 
-    public void sendEmailModification(GPUser user, String previousEmail, String newPlainPassword)
-            throws EmailException {
+    public void sendEmailModification(GPUser user, String previousEmail, String newPlainPassword) throws EmailException {
         String email = user.getEmailAddress();
         logger.info("\n*** Sending email for registration to {} ***", email);
 
-        MimeMessagePreparator preparator = new MimeMessagePreparator() {
-            @Override
-            public void prepare(MimeMessage mimeMessage) {
-                try {
-                    MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
-                    message.setSubject(createSubject(subjectModification));
-                    message.setTo(user.getEmailAddress());
+        MimeMessagePreparator preparator = mimeMessage -> {
 
-                    Map model = new HashMap();
-                    model.put("user", user);
-                    model.put("frontendLink", frontendLink);
-                    model.put("frontendLabel", frontendLabel);
-                    // email
-                    boolean emailChanged = false;
-                    if (previousEmail != null) {
-                        emailChanged = true;
-                        model.put("previousEmail", previousEmail);
-                    }
-                    model.put("emailChanged", emailChanged);
-                    // password
-                    boolean passwordChanged = false;
-                    if (newPlainPassword != null) {
-                        passwordChanged = true;
-                        model.put("newPlainPassword", newPlainPassword);
-                    }
-                    model.put("passwordChanged", passwordChanged);
-                    VelocityContext velocityContext = new VelocityContext(new HashMap());
-                    StringWriter writer = new StringWriter();
-                    schedulerVelocityEngine.mergeTemplate(templateModification, "UTF-8",
-                            velocityContext, writer);
+            try {
+                MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+                message.setSubject(createSubject(subjectModification));
+                message.setTo(user.getEmailAddress());
 
-                    String text = writer.toString();
-                    message.setText(text, true);
-                } catch (VelocityException ex) {
-                    logger.error("\n*** VelocityException: {}", ex.getMessage());
-                } catch (MessagingException ex) {
-                    logger.error("\n*** MessagingException: {}", ex.getMessage());
-                } catch (Exception ex) {
-                    logger.error("\n*** Exception: {}", ex.getMessage());
+                Map model = new HashMap();
+                model.put("user", user);
+                model.put("frontendLink", frontendLink);
+                model.put("frontendLabel", frontendLabel);
+                // email
+                boolean emailChanged = false;
+                if (previousEmail != null) {
+                    emailChanged = true;
+                    model.put("previousEmail", previousEmail);
                 }
+                model.put("emailChanged", emailChanged);
+                // password
+                boolean passwordChanged = false;
+                if (newPlainPassword != null) {
+                    passwordChanged = true;
+                    model.put("newPlainPassword", newPlainPassword);
+                }
+                model.put("passwordChanged", passwordChanged);
+                VelocityContext velocityContext = new VelocityContext(new HashMap());
+                StringWriter writer = new StringWriter();
+                schedulerVelocityEngine.mergeTemplate(templateModification, "UTF-8",
+                        velocityContext, writer);
+
+                String text = writer.toString();
+                message.setText(text, true);
+            } catch (VelocityException ex) {
+                logger.error("\n*** VelocityException: {}", ex.getMessage());
+            } catch (MessagingException ex) {
+                logger.error("\n*** MessagingException: {}", ex.getMessage());
+            } catch (Exception ex) {
+                logger.error("\n*** Exception: {}", ex.getMessage());
             }
         };
 

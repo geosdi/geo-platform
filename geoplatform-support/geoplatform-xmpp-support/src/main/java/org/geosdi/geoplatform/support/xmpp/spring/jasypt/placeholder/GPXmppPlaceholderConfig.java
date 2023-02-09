@@ -35,14 +35,16 @@
  */
 package org.geosdi.geoplatform.support.xmpp.spring.jasypt.placeholder;
 
-import java.net.MalformedURLException;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.spring31.properties.EncryptablePropertySourcesPlaceholderConfigurer;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.net.MalformedURLException;
+
+import static java.lang.Boolean.TRUE;
 
 /**
  *
@@ -54,25 +56,23 @@ class GPXmppPlaceholderConfig {
 
     private static final PlaceholderXmppResourcesLoader placeholderResourcesLoader = new PlaceholderXmppResourcesLoader();
 
+    /**
+     * @param gpXmppPooledPBEStringEncryptor
+     * @param gpConfigDataDir
+     * @param gpXmppFileProp
+     * @return {@link EncryptablePropertySourcesPlaceholderConfigurer}
+     * @throws MalformedURLException
+     */
     @Bean(name = "gpXmppPropertyConfigurer")
-    @Required
-    public static EncryptablePropertySourcesPlaceholderConfigurer gpXmppPropertyConfigurer(@Qualifier(
-            value = "gpXmppPooledPBEStringEncryptor") PooledPBEStringEncryptor gpXmppPooledPBEStringEncryptor,
-            @Value("#{systemProperties['GP_DATA_DIR']}") String gpConfigDataDir,
-            @Value("#{systemProperties['GP_XMPP_FILE_PROP']}") String gpXmppFileProp)
-            throws MalformedURLException {
-
+    public static EncryptablePropertySourcesPlaceholderConfigurer gpXmppPropertyConfigurer(@Qualifier(value = "gpXmppPooledPBEStringEncryptor") PooledPBEStringEncryptor gpXmppPooledPBEStringEncryptor,
+            @Value("#{systemProperties['GP_DATA_DIR']}") String gpConfigDataDir, @Value("#{systemProperties['GP_XMPP_FILE_PROP']}") String gpXmppFileProp) throws MalformedURLException {
         EncryptablePropertySourcesPlaceholderConfigurer gpXmppPC = new EncryptablePropertySourcesPlaceholderConfigurer(gpXmppPooledPBEStringEncryptor);
         gpXmppPC.setPlaceholderPrefix("gpXmppConfigurator{");
         gpXmppPC.setPlaceholderSuffix("}");
         gpXmppPC.setNullValue("@null");
-
-        gpXmppPC.setLocations(placeholderResourcesLoader.loadResources(gpConfigDataDir,
-                gpXmppFileProp));
-        gpXmppPC.setIgnoreResourceNotFound(Boolean.TRUE);
-        gpXmppPC.setIgnoreUnresolvablePlaceholders(Boolean.TRUE);
-
+        gpXmppPC.setLocations(placeholderResourcesLoader.loadResources(gpConfigDataDir, gpXmppFileProp));
+        gpXmppPC.setIgnoreResourceNotFound(TRUE);
+        gpXmppPC.setIgnoreUnresolvablePlaceholders(TRUE);
         return gpXmppPC;
     }
-
 }

@@ -39,6 +39,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
+import jakarta.jws.WebParam;
+import jakarta.jws.WebResult;
+import jakarta.jws.WebService;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import org.apache.cxf.annotations.FastInfoset;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.codehaus.jra.Delete;
@@ -79,11 +84,6 @@ import org.geosdi.geoplatform.response.viewport.WSGetViewportResponse;
 import org.geosdi.geoplatform.services.core.api.GPCoreServiceApi;
 import org.geosdi.geoplatform.services.rs.path.GPServiceRSPathConfig;
 
-import javax.jws.WebParam;
-import javax.jws.WebResult;
-import javax.jws.WebService;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 /**

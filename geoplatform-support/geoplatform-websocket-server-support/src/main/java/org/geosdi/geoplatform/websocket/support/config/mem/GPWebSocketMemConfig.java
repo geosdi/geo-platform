@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.websocket.support.config.mem;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.configurator.bootstrap.Develop;
 import org.geosdi.geoplatform.websocket.support.spring.configuration.broker.GPWebSocketStompBroker;
 import org.slf4j.Logger;
@@ -47,8 +48,6 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration;
 import org.springframework.web.socket.server.HandshakeInterceptor;
-
-import javax.annotation.Resource;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

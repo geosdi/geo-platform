@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.services;
 
+import jakarta.annotation.Resource;
+import jakarta.jws.WebService;
 import org.geosdi.geoplatform.core.dao.GSAccountDAO;
 import org.geosdi.geoplatform.core.dao.GSResourceDAO;
 import org.geosdi.geoplatform.core.delegate.api.account.AccountDelegate;
@@ -80,8 +82,6 @@ import org.geosdi.geoplatform.scheduler.delegate.api.SchedulerDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
-import javax.jws.WebService;
 import java.util.List;
 
 /**
@@ -92,8 +92,7 @@ import java.util.List;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  */
 @Transactional(transactionManager = "gpTransactionManager") // Give atomicity on WS methods
-@WebService(
-        endpointInterface = "org.geosdi.geoplatform.services.GeoPlatformService")
+@WebService(endpointInterface = "org.geosdi.geoplatform.services.GeoPlatformService")
 public class GeoPlatformServiceImpl implements GeoPlatformService {
 
     @Autowired

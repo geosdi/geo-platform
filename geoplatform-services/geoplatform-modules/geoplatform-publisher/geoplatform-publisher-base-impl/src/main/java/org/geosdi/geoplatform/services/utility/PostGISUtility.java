@@ -36,13 +36,13 @@
 package org.geosdi.geoplatform.services.utility;
 
 import com.google.common.collect.Maps;
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.connector.geoserver.model.datastores.IGPGeoserverCreateDatastoreResponse;
 import org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStore;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.Map;
 

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.core.model;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -42,7 +43,6 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.locationtech.jts.geom.Geometry;
 
-import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -50,9 +50,11 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name = "VectorLayer")
 @Entity(name = "VectorLayer")
-@Table(name = "gp_vector_layer", indexes = {
-        @Index(columnList = "project_id", name = "VECTOR_PROJECT_ID_INDEX")
-})
+@Table(name = "gp_vector_layer")
+@PrimaryKeyJoinColumn(name = "gp_layer_id")
+@OnDelete(action = OnDeleteAction.CASCADE)
+@Getter
+@Setter
 @ToString(callSuper = true)
 public class GPVectorLayer extends GPLayer implements IGPVectorLayer {
 
@@ -61,20 +63,6 @@ public class GPVectorLayer extends GPLayer implements IGPVectorLayer {
      */
     private static final long serialVersionUID = 3309979650712821228L;
     //
-    @Getter
-    @Setter
     @Column(name = "the_geom")
     private Geometry geometry;
-    //
-    @Getter
-    @Setter
-    @ManyToOne(optional = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private GPFolder folder;
-    //
-    @Getter
-    @Setter
-    @ManyToOne(optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private GPProject project;
 }

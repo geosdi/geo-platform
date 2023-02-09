@@ -35,8 +35,11 @@
  */
 package org.geosdi.geoplatform.support.wfs.configurator;
 
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -46,11 +49,18 @@ public interface GPWFSConfigurator {
      * <p>This method compares the data source passed with the default included
      * in the Configurator Module</p>
      *
-     * @param dataSource
-     *
+     * @param theDataSource
      * @return boolean
      */
-    boolean matchDefaultDataSource(String dataSource);
+    boolean matchDefaultDataSource(@Nonnull(when = NEVER) String theDataSource);
 
+    /**
+     * @return {@link String}
+     */
     String getDefaultWFSDataSource();
+
+    /**
+     * @param theDefaultWFSDataSource
+     */
+    void setDefaultWFSDataSource(String theDefaultWFSDataSource);
 }

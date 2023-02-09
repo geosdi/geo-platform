@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.websocket.support.crypt;
 
+import jakarta.annotation.Resource;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -44,8 +45,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import javax.annotation.Resource;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;

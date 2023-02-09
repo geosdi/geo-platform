@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.services.rs.path;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -50,34 +49,21 @@ public final class GPPublisherRSPathConfig {
      * PREVIEW PATH
      */
     private static final String PREVIEW_BASE_PATH = "/preview/";
-    public static final String ANALAYZE_ZIP_EPSG_PATH = PREVIEW_BASE_PATH 
-            + "analyzeZIPEPSG";
-    public static final String PROCESS_EPSG_RESULT_PATH = PREVIEW_BASE_PATH +
-            "processEPSGResult";
-    public static final String LOAD_STYLE_PATH = PREVIEW_BASE_PATH +
-            "loadStyle";
-    public static final String DESCRIBE_FEATURE_TYPE_PATH = PREVIEW_BASE_PATH +
-            "describeFeatureType";
-    public static final String PUBLISH_STYLE_PATH = PREVIEW_BASE_PATH +
-            "publishStyle";
+    public static final String ANALAYZE_ZIP_EPSG_PATH = PREVIEW_BASE_PATH + "analyzeZIPEPSG";
+    public static final String PROCESS_EPSG_RESULT_PATH = PREVIEW_BASE_PATH + "processEPSGResult";
+    public static final String LOAD_STYLE_PATH = PREVIEW_BASE_PATH + "loadStyle";
+    public static final String DESCRIBE_FEATURE_TYPE_PATH = PREVIEW_BASE_PATH + "describeFeatureType";
+    public static final String PUBLISH_STYLE_PATH = PREVIEW_BASE_PATH + "publishStyle";
     public static final String UPDATE_STYLE_PATH = PREVIEW_BASE_PATH + "updateStyle";
-    public static final String EXISTS_STYLE_PATH = PREVIEW_BASE_PATH +
-            "existsStyle";
-    public static final String GET_WORKSPACE_NAMES_PATH = PREVIEW_BASE_PATH +
-            "getWorkspaceNames";
-    public static final String CREATE_WORKSPACE_PATH = PREVIEW_BASE_PATH +
-            "createWorkspace";
-    public static final String ANALYZE_TIF_IN_PREVIEW_PATH = PREVIEW_BASE_PATH
-            + "analyzeTIFInPreview";
-    public static final String GET_PREVIEW_DATA_STORES_PATH = PREVIEW_BASE_PATH 
-            + "getPreviewDataStores";
+    public static final String EXISTS_STYLE_PATH = PREVIEW_BASE_PATH + "existsStyle";
+    public static final String GET_WORKSPACE_NAMES_PATH = PREVIEW_BASE_PATH + "getWorkspaceNames";
+    public static final String CREATE_WORKSPACE_PATH = PREVIEW_BASE_PATH + "createWorkspace";
+    public static final String ANALYZE_TIF_IN_PREVIEW_PATH = PREVIEW_BASE_PATH + "analyzeTIFInPreview";
+    public static final String GET_PREVIEW_DATA_STORES_PATH = PREVIEW_BASE_PATH + "getPreviewDataStores";
     public static final String PUBLISH_PATH = PREVIEW_BASE_PATH + "publish";
-    public static final String PUBLISH_ALL_PATH = PREVIEW_BASE_PATH +
-            "publishAll";
-    public static final String PUBLISH_ALL_OF_PREVIEW_PATH = PREVIEW_BASE_PATH +
-            "publishAllofPreview";
-    public static final String UNIQUE_VALUES_PATH = PREVIEW_BASE_PATH +
-            "uniqueValue";
+    public static final String PUBLISH_ALL_PATH = PREVIEW_BASE_PATH + "publishAll";
+    public static final String PUBLISH_ALL_OF_PREVIEW_PATH = PREVIEW_BASE_PATH + "publishAllofPreview";
+    public static final String UNIQUE_VALUES_PATH = PREVIEW_BASE_PATH + "uniqueValue";
 
     private GPPublisherRSPathConfig() {
     }

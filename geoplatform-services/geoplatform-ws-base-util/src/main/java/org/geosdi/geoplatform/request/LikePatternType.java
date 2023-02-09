@@ -35,19 +35,15 @@
  */
 package org.geosdi.geoplatform.request;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @XmlRootElement
 public enum LikePatternType {
 
-    CONTAINS,
-    STARTS_WITH,
-    ENDS_WITH,
-    CONTENT_EQUALS;
+    CONTAINS, STARTS_WITH, ENDS_WITH, CONTENT_EQUALS;
     //
     private static final String PERCENT = "%";
 

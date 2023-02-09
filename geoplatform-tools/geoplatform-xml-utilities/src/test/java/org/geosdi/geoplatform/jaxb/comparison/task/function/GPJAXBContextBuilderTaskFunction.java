@@ -35,9 +35,7 @@
  */
 package org.geosdi.geoplatform.jaxb.comparison.task.function;
 
-import org.geosdi.geoplatform.jaxb.comparison.task.GPJAXBContextBuilderTaskPooled;
-import org.geosdi.geoplatform.jaxb.comparison.task.GPJAXBContextBuilderTaskSimple;
-import org.geosdi.geoplatform.jaxb.comparison.task.GPJAXBContextBuilderTaskType;
+import org.geosdi.geoplatform.jaxb.comparison.task.*;
 
 import javax.annotation.Nonnull;
 import java.util.concurrent.Callable;
@@ -45,7 +43,6 @@ import java.util.function.Function;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.jaxb.comparison.task.GPJAXBContextBuilderTaskType.SIMPLE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -71,6 +68,17 @@ public class GPJAXBContextBuilderTaskFunction implements Function<Integer, Calla
      */
     @Override
     public Callable<Long> apply(Integer integer) {
-        return ((this.taskType == SIMPLE) ? new GPJAXBContextBuilderTaskSimple() : new GPJAXBContextBuilderTaskPooled());
+        switch (this.taskType) {
+            case SIMPLE:
+                return new GPJAXBContextBuilderTaskSimple();
+            case POOLED:
+                return new GPJAXBContextBuilderTaskPooled();
+            case JAKARTA_SIMPLE:
+                return new GPJAXBJakartaContextBuilderTaskSimple();
+            case JAKARTA_POOLED:
+                return new GPJAXBJakartaContextBuilderTaskPooled();
+            default:
+                throw new IllegalStateException("There is no values to build a Task");
+        }
     }
 }

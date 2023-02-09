@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.persistence.dao.jpa.criteria;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.criteria.*;
 import org.geosdi.geoplatform.persistence.dao.GPAbstractBaseDAO;
 import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
 import org.hibernate.Cache;
@@ -43,9 +46,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.annotation.Nonnull;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.*;
 import java.io.Serializable;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -87,7 +87,7 @@ public abstract class GPCriteriaJpaDAO<T extends Object, ID extends Serializable
     }
 
     /**
-     * @return {@link CriteriaQuery<T>}
+     * @return {@link CriteriaQuery <T>}
      */
     @Override
     public CriteriaQuery<T> createCriteriaQuery() {
@@ -123,7 +123,7 @@ public abstract class GPCriteriaJpaDAO<T extends Object, ID extends Serializable
     }
 
     /**
-     * @return {@link CriteriaUpdate<T>}
+     * @return {@link CriteriaUpdate <T>}
      */
     @Override
     public CriteriaUpdate<T> createCriteriaUpdate() {

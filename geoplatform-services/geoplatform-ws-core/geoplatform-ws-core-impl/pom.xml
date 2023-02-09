@@ -81,17 +81,13 @@
             <artifactId>spring-security-acl</artifactId>
         </dependency>
 
+        <!-- =========================================================== -->
+        <!-- JAKARTA SERVLET -->
+        <!-- =========================================================== -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
             <scope>provided</scope>
-        </dependency>
-
-        <!-- JUnit -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
         </dependency>
 
         <!-- CXF -->
@@ -117,14 +113,13 @@
             <artifactId>geoplatform-cxf-server-configurator</artifactId>
             <version>${project.version}</version>
         </dependency>
-        
+
+        <!-- JUnit -->
         <dependency>
-            <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-swagger-support</artifactId>
-            <version>${project.version}</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
-
-
     </dependencies>
 
     <build>

@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.server.command.publish.cas;
 
 import com.google.common.collect.Lists;
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.gui.client.command.publish.basic.GetWorkspaceListResponse;
 import org.geosdi.geoplatform.gui.client.command.publish.cas.CasGetWorkspaceListRequest;
 import org.geosdi.geoplatform.gui.client.model.GPWorkspace;
@@ -48,7 +49,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,22 +59,17 @@ import java.util.List;
  */
 @Lazy(true)
 @Component(value = "command.publish.cas.GetWorkspaceListCommand")
-public class CasGetWorkspaceListCommand implements
-        GPCommand<CasGetWorkspaceListRequest, GetWorkspaceListResponse> {
+public class CasGetWorkspaceListCommand implements GPCommand<CasGetWorkspaceListRequest, GetWorkspaceListResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(CasGetWorkspaceListCommand.class);
-
+    //
     private GPPublisherBasicServiceImpl casPublisherService;
 
     @Override
-    public GetWorkspaceListResponse execute(CasGetWorkspaceListRequest request,
-            HttpServletRequest httpServletRequest) {
-
-        logger.info("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
+    public GetWorkspaceListResponse execute(CasGetWorkspaceListRequest request, HttpServletRequest httpServletRequest) {
+        logger.info("#####################Executing {} Command", this.getClass().getSimpleName());
         List<String> results = this.casPublisherService.getWorkspaceNames();
-        logger.info("#################### Found {} ", results);
+        logger.info("####################Found {} ", results);
         ArrayList<GPWorkspace> workspaceResult = Lists.<GPWorkspace>newArrayList();
         for (String result : GPSharedUtils.safeList(results)) {
             workspaceResult.add(new GPWorkspace(result));
@@ -86,8 +81,7 @@ public class CasGetWorkspaceListCommand implements
      * @param casPublisherService
      */
     @Resource
-    public void setCasPublisherService(
-            @Qualifier("casPublisherService") GPPublisherBasicServiceImpl casPublisherService) {
+    public void setCasPublisherService(@Qualifier("casPublisherService") GPPublisherBasicServiceImpl casPublisherService) {
         this.casPublisherService = casPublisherService;
     }
 }

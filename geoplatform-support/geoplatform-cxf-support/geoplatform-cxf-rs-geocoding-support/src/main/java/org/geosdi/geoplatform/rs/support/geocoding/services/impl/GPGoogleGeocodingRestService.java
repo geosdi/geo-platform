@@ -35,6 +35,10 @@
  */
 package org.geosdi.geoplatform.rs.support.geocoding.services.impl;
 
+import jakarta.annotation.Resource;
+import jakarta.ws.rs.OPTIONS;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.core.Response;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.apache.cxf.rs.security.cors.LocalPreflight;
 import org.geosdi.geoplatform.rs.support.geocoding.delegate.IGPGoogleGeocodingDelegate;
@@ -43,12 +47,7 @@ import org.geosdi.geoplatform.rs.support.request.GPGeocodingAddressRequest;
 import org.geosdi.geoplatform.rs.support.request.GPRevertGeocodingRequest;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-import javax.ws.rs.OPTIONS;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Response;
-
-import static javax.ws.rs.core.Response.ok;
+import static jakarta.ws.rs.core.Response.ok;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.websocket.support.spring.configuration.broker.rabbitmq;
 
+import jakarta.annotation.Resource;
 import lombok.Getter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
@@ -42,8 +43,6 @@ import org.geosdi.geoplatform.configurator.bootstrap.Production;
 import org.geosdi.geoplatform.websocket.support.spring.configuration.broker.rabbitmq.auth.IGPWebSocketRabbitMQAuth;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.util.stream.Stream.of;

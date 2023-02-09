@@ -35,14 +35,13 @@
  */
 package org.geosdi.geoplatform.experimental.el.index;
 
+import jakarta.annotation.Resource;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.xcontent.XContentBuilder;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
-
-import javax.annotation.Resource;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;

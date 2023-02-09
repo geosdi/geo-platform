@@ -35,10 +35,11 @@
  */
 package org.geosdi.geoplatform.core.model;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
@@ -54,13 +55,21 @@ import java.io.Serializable;
         @Index(columnList = "name", name = "ORGANIZATION_NAME_INDEX")
 })
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "organization")
+@Cacheable
 public class GPOrganization implements Serializable {
 
     private static final long serialVersionUID = -6538489460089423182L;
     //
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_ORGANIZATION_SEQ")
-    @SequenceGenerator(name = "GP_ORGANIZATION_SEQ", sequenceName = "GP_ORGANIZATION_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gp_organization_generator")
+    @GenericGenerator(name = "gp_organization_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "GP_ORGANIZATION_SEQ"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "50"),
+                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
+            }
+    )
     private Long id;
     //
     @Column(nullable = false, unique = true)

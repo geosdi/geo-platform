@@ -18,7 +18,6 @@
     <dependencies>
         
         <!-- GEOPLATFORM -->
-       
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geonetwork-catalog-api</artifactId>

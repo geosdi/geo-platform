@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.login.sso;
 
-import com.google.common.base.Preconditions;
+import jakarta.annotation.PostConstruct;
 import org.geosdi.geoplatform.gui.client.command.login.sso.SSOLoginRequest;
 import org.geosdi.geoplatform.gui.client.command.login.sso.SSOLoginResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -47,8 +47,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  *
@@ -59,8 +60,7 @@ import javax.servlet.http.HttpServletRequest;
 @Component(value = "command.login.SSOLoginCommand")
 public class SSOLoginCommand implements GPCommand<SSOLoginRequest, SSOLoginResponse> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            SSOLoginCommand.class);
+    private static final Logger logger = LoggerFactory.getLogger(SSOLoginCommand.class);
     //
     @Autowired
     private ISecurityService securityService;
@@ -73,8 +73,6 @@ public class SSOLoginCommand implements GPCommand<SSOLoginRequest, SSOLoginRespo
 
     @PostConstruct
     public void postConstruct() {
-        Preconditions.checkNotNull(securityService, "The SecurityService must "
-                + "not be null.");
+        checkNotNull(securityService, "The SecurityService must not be null.");
     }
-
 }

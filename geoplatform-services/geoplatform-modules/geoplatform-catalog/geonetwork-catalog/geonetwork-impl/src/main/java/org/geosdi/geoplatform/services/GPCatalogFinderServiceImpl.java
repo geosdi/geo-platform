@@ -40,15 +40,16 @@ import it.geosolutions.geonetwork.exception.GNLibException;
 import it.geosolutions.geonetwork.exception.GNServerException;
 import it.geosolutions.geonetwork.util.GNSearchRequest;
 import it.geosolutions.geonetwork.util.GNSearchResponse;
-import java.util.ArrayList;
-import java.util.List;
-import javax.jws.WebService;
+import jakarta.jws.WebService;
 import org.geosdi.geoplatform.exception.GPCatalogException;
 import org.geosdi.geoplatform.responce.GPCatalogMetadataDTO;
 import org.geosdi.geoplatform.services.util.GPCatalogClient;
 import org.geosdi.geoplatform.services.util.GPCatalogMetadataLoader;
 import org.jdom.Element;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group

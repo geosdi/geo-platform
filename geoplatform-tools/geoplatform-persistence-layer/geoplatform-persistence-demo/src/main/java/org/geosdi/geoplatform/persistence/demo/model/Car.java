@@ -35,17 +35,18 @@
  */
 package org.geosdi.geoplatform.persistence.demo.model;
 
-import java.io.Serializable;
-import javax.persistence.Cacheable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
+
+import java.io.Serializable;
+import java.util.Objects;
 
 /**
  *
@@ -55,13 +56,24 @@ import org.hibernate.annotations.NaturalId;
 @Entity
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "carCacheRegion")
+@Getter
+@Setter
+@ToString
 public class Car implements Serializable {
 
     private static final long serialVersionUID = 7556465403027719413L;
     //
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CAR_SEQ")
-    @SequenceGenerator(name = "CAR_SEQ", sequenceName = "CAR_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "car_generator")
+    @GenericGenerator(name = "car_generator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @Parameter(name = "sequence_name", value = "CAR_SEQ"),
+                    @Parameter(name = "initial_value", value = "1"),
+                    @Parameter(name = "increment_size", value = "3"),
+                    @Parameter(name = "optimizer", value = "pooled-lo")
+            }
+    )
     private Long id;
     //
     @NaturalId
@@ -70,78 +82,20 @@ public class Car implements Serializable {
     @Column(name = "model")
     private String model;
 
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the plate
-     */
-    public String getPlate() {
-        return plate;
-    }
-
-    /**
-     * @param plate the plate to set
-     */
-    public void setPlate(String plate) {
-        this.plate = plate;
-    }
-
-    /**
-     * @return the model
-     */
-    public String getModel() {
-        return model;
-    }
-
-    /**
-     * @param model the model to set
-     */
-    public void setModel(String model) {
-        this.model = model;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Car car = (Car) o;
+        return id.equals(car.id) && plate.equals(car.plate);
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 71 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 71 * hash + (this.plate != null ? this.plate.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Car other = (Car) obj;
-        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
-            return false;
-        }
-        if ((this.plate == null) ? (other.plate != null) : !this.plate.equals(
-                other.plate)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Car{ " + "id = " + id + ", plate = " + plate
-                + ", model = " + model + '}';
+        return Objects.hash(id, plate);
     }
 }

@@ -35,14 +35,14 @@
  */
 package org.geosdi.geoplatform.core.model;
 
+import jakarta.persistence.*;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
+import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
@@ -59,6 +59,7 @@ import java.io.Serializable;
 @Table(name = "gp_authority", indexes = {
         @Index(columnList = "account_natural_id", name = "AUTHORITY_ACCOUNT_NATURAL_ID_INDEX")
 })
+@Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "authority")
 public class GPAuthority implements GrantedAuthority, Serializable {
 
@@ -68,8 +69,15 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     private static final long serialVersionUID = -5005299814060260152L;
     //
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_AUTHORITY_SEQ")
-    @SequenceGenerator(name = "GP_AUTHORITY_SEQ", sequenceName = "GP_AUTHORITY_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gp_autorithy_generator")
+    @GenericGenerator(name = "gp_autorithy_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "GP_AUTHORITY_SEQ"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "50"),
+                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
+            }
+    )
     private Long id;
     //
     @Column(nullable = false)

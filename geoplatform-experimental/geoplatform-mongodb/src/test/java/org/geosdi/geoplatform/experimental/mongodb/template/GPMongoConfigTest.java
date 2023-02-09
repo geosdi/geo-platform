@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.experimental.mongodb.template;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.experimental.mongodb.loader.GPMongoConfigLoaderTest;
 import org.geosdi.geoplatform.experimental.mongodb.model.Address;
 import org.geosdi.geoplatform.experimental.mongodb.repositories.AddressRepository;
@@ -51,7 +52,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;

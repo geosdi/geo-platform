@@ -50,8 +50,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @email nazzareno.sileno@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
-    "classpath*:applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml", "classpath*:applicationContext.xml"})
 @ActiveProfiles(value = {"jpa"})
 public class TestXmppMessage {
 

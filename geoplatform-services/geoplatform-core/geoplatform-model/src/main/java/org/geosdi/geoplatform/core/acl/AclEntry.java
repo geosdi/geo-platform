@@ -35,12 +35,16 @@
  */
 package org.geosdi.geoplatform.core.acl;
 
+import jakarta.persistence.*;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * The <tt>AclEntry</tt> domain class contains entries representing grants
@@ -64,13 +68,26 @@ import javax.persistence.*;
                 @Index(columnList = "acl_object_identity", name = "ACL_ENTRY_OBJECT_IDENTITY_INDEX"),
                 @Index(columnList = "sid", name = "ACL_ENTRY_SID_INDEX")
         })
+@Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "entry")
+@Getter
+@Setter
+@ToString
 // TODO: implements AccessControlEntry?
-public class AclEntry {
+public class AclEntry implements Serializable {
 
+    private static final long serialVersionUID = -646975886421027258L;
+    //
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACL_ENTRY_SEQ")
-    @SequenceGenerator(name = "ACL_ENTRY_SEQ", sequenceName = "ACL_ENTRY_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gp_acl_entry_generator")
+    @GenericGenerator(name = "gp_acl_entry_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "ACL_ENTRY_SEQ"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "50"),
+                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
+            }
+    )
     private Long id;
     //
     @ManyToOne
@@ -107,6 +124,13 @@ public class AclEntry {
     public AclEntry() {
     }
 
+    /**
+     * @param aclObjectIdentity
+     * @param aceOrder
+     * @param aclSid
+     * @param mask
+     * @param granting
+     */
     public AclEntry(AclObjectIdentity aclObjectIdentity, Integer aceOrder, AclSid aclSid,
             Integer mask, boolean granting) {
         this.aclObject = aclObjectIdentity;
@@ -118,6 +142,15 @@ public class AclEntry {
         this.auditFailure = true;
     }
 
+    /**
+     * @param aclObjectIdentity
+     * @param aceOrder
+     * @param aclSid
+     * @param mask
+     * @param granting
+     * @param auditSuccess
+     * @param auditFailure
+     */
     public AclEntry(AclObjectIdentity aclObjectIdentity, Integer aceOrder, AclSid aclSid,
             Integer mask, boolean granting, boolean auditSuccess, boolean auditFailure) {
         this.aclObject = aclObjectIdentity;
@@ -129,146 +162,4 @@ public class AclEntry {
         this.auditFailure = auditFailure;
     }
     //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the aclObject
-     */
-    public AclObjectIdentity getAclObject() {
-        return aclObject;
-    }
-
-    /**
-     * @param aclObject the aclObject to set
-     */
-    public void setAclObject(AclObjectIdentity aclObject) {
-        this.aclObject = aclObject;
-    }
-
-    /**
-     * @return the aceOrder
-     * @see #aceOrder
-     */
-    public Integer getAceOrder() {
-        return aceOrder;
-    }
-
-    /**
-     * @param aceOrder the aceOrder to set
-     * @see #aceOrder
-     */
-    public void setAceOrder(Integer aceOrder) {
-        this.aceOrder = aceOrder;
-    }
-
-    /**
-     * @return the aclSid
-     */
-    public AclSid getAclSid() {
-        return aclSid;
-    }
-
-    /**
-     * @param aclSid the aclSid to set
-     */
-    public void setAclSid(AclSid aclSid) {
-        this.aclSid = aclSid;
-    }
-
-    /**
-     * @return the mask
-     * @see #mask
-     */
-    public Integer getMask() {
-        return mask;
-    }
-
-    /**
-     * @param mask the mask to set
-     * @see #mask
-     */
-    public void setMask(Integer mask) {
-        this.mask = mask;
-    }
-
-    /**
-     * @return the granting
-     * @see #granting
-     */
-    public boolean isGranting() {
-        return granting;
-    }
-
-    /**
-     * @param granting the granting to set
-     * @see #granting
-     */
-    public void setGranting(boolean granting) {
-        this.granting = granting;
-    }
-
-    /**
-     * @return the auditSuccess
-     */
-    public boolean isAuditSuccess() {
-        return auditSuccess;
-    }
-
-    /**
-     * @param auditSuccess the auditSuccess to set
-     */
-    public void setAuditSuccess(boolean auditSuccess) {
-        this.auditSuccess = auditSuccess;
-    }
-
-    /**
-     * @return the auditFailure
-     */
-    public boolean isAuditFailure() {
-        return auditFailure;
-    }
-
-    /**
-     * @param auditFailure the auditFailure to set
-     */
-    public void setAuditFailure(boolean auditFailure) {
-        this.auditFailure = auditFailure;
-    }
-    //</editor-fold>
-
-    /**
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        StringBuilder str = new StringBuilder("AclEntry {");
-        str.append("id=").append(id);
-        str.append(", aclObject.id=").append(
-                aclObject != null ? aclObject.getId() : "NULL");
-        str.append(", aceOrder=").append(aceOrder);
-        str.append(", aclSid.id=").append(
-                aclSid != null ? aclSid.getId() : "NULL");
-        str.append(", mask=").append(mask);
-        str.append(", granting=").append(granting);
-        str.append(", auditSuccess=").append(auditSuccess);
-        str.append(", auditFailure=").append(auditFailure).append('}');
-        return str.toString();
-    }
 }

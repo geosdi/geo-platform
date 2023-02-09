@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.services;
 
+import jakarta.annotation.Resource;
+import jakarta.jws.WebService;
+import jakarta.ws.rs.core.Response;
 import org.apache.cxf.binding.soap.SoapFault;
 import org.geosdi.geoplatform.connector.wfs.response.*;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -53,9 +56,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 
-import javax.annotation.Resource;
-import javax.jws.WebService;
-import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Map;
 

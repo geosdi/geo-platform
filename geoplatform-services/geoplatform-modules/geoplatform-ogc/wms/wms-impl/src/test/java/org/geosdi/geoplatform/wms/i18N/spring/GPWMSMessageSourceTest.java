@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.wms.i18N.spring;
 
+import jakarta.annotation.Resource;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -46,7 +47,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.Resource;
 import java.util.Locale;
 
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;

@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.core.model;
 
+import jakarta.persistence.*;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
+import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
@@ -54,6 +54,7 @@ import java.io.Serializable;
 @Entity(name = "Folder")
 @Table(name = "gp_folder", indexes = {
         @Index(columnList = "name", name = "FOLDER_NAME_INDEX")})
+@Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "folder")
 public class GPFolder implements Serializable {
 
@@ -63,8 +64,15 @@ public class GPFolder implements Serializable {
     private static final long serialVersionUID = -5826659681483678835L;
     //
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GP_FOLDER_SEQ")
-    @SequenceGenerator(name = "GP_FOLDER_SEQ", sequenceName = "GP_FOLDER_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gp_folder_generator")
+    @GenericGenerator(name = "gp_folder_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "GP_FOLDER_SEQ"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "50"),
+                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
+            }
+    )
     private Long id;
     //
     @Column(nullable = false)

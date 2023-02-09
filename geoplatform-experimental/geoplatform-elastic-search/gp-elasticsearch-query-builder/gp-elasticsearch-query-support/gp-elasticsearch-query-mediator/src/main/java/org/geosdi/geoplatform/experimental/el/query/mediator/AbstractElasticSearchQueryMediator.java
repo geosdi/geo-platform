@@ -36,10 +36,10 @@
 package org.geosdi.geoplatform.experimental.el.query.mediator;
 
 import com.google.common.collect.ImmutableMap;
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator;
 import org.geosdi.geoplatform.experimental.el.query.mediator.colleague.decorator.IGPElasticSearchQueryColleagueDecorator;
 
-import javax.annotation.Resource;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkArgument;

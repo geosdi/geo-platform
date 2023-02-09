@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.rs.support.service.manager;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.ws.rs.Path;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +45,7 @@ import org.springframework.core.annotation.Order;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.annotation.PostConstruct;
-import javax.ws.rs.Path;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;

@@ -34,10 +34,10 @@
             <artifactId>jaxb-core</artifactId>
         </dependency>
         
-        <dependency>
+        <!--dependency>
             <groupId>com.sun.activation</groupId>
             <artifactId>javax.activation</artifactId>
-        </dependency>
+        </dependency-->
     </dependencies>
 
     <build>

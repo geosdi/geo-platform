@@ -58,6 +58,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 /**
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -111,45 +114,45 @@ public class FeatureReaderTest {
             ff = new FileInputStream(dftFile);
 
             List<LayerSchemaDTO> schemas = featureReaderXSD.read(ff);
-            Assert.assertNotNull(schemas);
-            Assert.assertEquals(1, schemas.size());
+            assertNotNull(schemas);
+            assertEquals(1, schemas.size());
 
             LayerSchemaDTO layerSchema = schemas.get(0);
-            Assert.assertNotNull(layerSchema.getTypeName());
+            assertNotNull(layerSchema.getTypeName());
             String name = layerSchema.getTypeName().substring(layerSchema.getTypeName().indexOf(":") + 1);
-            Assert.assertNotNull(layerSchema.getTargetNamespace());
-            Assert.assertNotNull(layerSchema.getGeometry());
+            assertNotNull(layerSchema.getTargetNamespace());
+            assertNotNull(layerSchema.getGeometry());
             List<AttributeDTO> attributes = layerSchema.getAttributes();
-            Assert.assertNotNull(attributes);
-            Assert.assertEquals(numAttributes, attributes.size());
+            assertNotNull(attributes);
+            assertEquals(numAttributes, attributes.size());
             for (AttributeDTO att : attributes) {
                 Assert.assertTrue(att.getMinOccurs() >= 0);
                 Assert.assertTrue(att.getMaxOccurs() > att.getMinOccurs());
-                Assert.assertNotNull(att.getName());
-                Assert.assertNotNull(att.getType());
+                assertNotNull(att.getName());
+                assertNotNull(att.getType());
             }
             logger.debug("@@@@@@@@@@@@@@@@@@@@LAYER_SCHEMA : {}", layerSchema);
 
             WFSGetFeatureStaxReader featureReader = new WFSGetFeatureStaxReader(layerSchema);
             FeatureCollectionDTO fc = featureReader.read(new File(fileGF));
-            Assert.assertNotNull(fc);
-            Assert.assertNotNull(fc.getTimeStamp());
-            Assert.assertEquals(numFeatures, fc.getNumberOfFeatures());
+            assertNotNull(fc);
+            assertNotNull(fc.getTimeStamp());
+            assertEquals(numFeatures, fc.getNumberOfFeatures());
             List<FeatureDTO> features = fc.getFeatures();
-            Assert.assertNotNull(features);
-            Assert.assertEquals(numFeatures, features.size());
+            assertNotNull(features);
+            assertEquals(numFeatures, features.size());
             for (FeatureDTO feature : features) {
-                Assert.assertNotNull(feature.getFID());
+                assertNotNull(feature.getFID());
                 Assert.assertTrue(feature.getFID().contains(name));
-                Assert.assertNotNull(feature.getGeometry());
+                assertNotNull(feature.getGeometry());
                 if (numAttributes == 0) {
                     Assert.assertTrue(feature.getAttributes().getAttributesMap().isEmpty());
                 } else {
-                    Assert.assertNotNull(feature.getAttributes());
+                    assertNotNull(feature.getAttributes());
                     Map<String, String> fMap = feature.getAttributes().getAttributesMap();
-                    Assert.assertNotNull(fMap);
+                    assertNotNull(fMap);
                     logger.debug("#################FMAP_SIZE : {}\n", fMap.size());
-                    Assert.assertEquals(numAttributes, fMap.size());
+                    assertEquals(numAttributes, fMap.size());
                 }
                 logger.debug("@@@@@@@@@@@@@@@@@@@@ {} - {}", feature.getFID(), feature.getAttributes());
                 logger.debug("GEOMETRY @@@@@@@@@@@@@@@@ : {}", feature.getGeometry());

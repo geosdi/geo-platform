@@ -49,6 +49,7 @@ import static java.io.File.separator;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -62,8 +63,7 @@ public class SlideShowJacksonXmlMapperTest {
 
     private static final Logger logger = LoggerFactory.getLogger(SlideShowJacksonXmlMapperTest.class);
     //
-    private static final GPJacksonXmlMapper<SlideShow> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(SlideShow.class,
-            new GPJacksonXmlSupport().configure(NON_NULL));
+    private static final GPJacksonXmlMapper<SlideShow> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(SlideShow.class, new GPJacksonXmlSupport(JAXB).configure(NON_NULL));
 
     @Test
     public void a_writeSlideShowAsXmlStringTest() throws Exception {

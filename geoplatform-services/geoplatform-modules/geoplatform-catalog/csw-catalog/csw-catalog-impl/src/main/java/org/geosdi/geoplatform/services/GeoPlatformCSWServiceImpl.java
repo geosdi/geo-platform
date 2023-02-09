@@ -35,9 +35,8 @@
  */
 package org.geosdi.geoplatform.services;
 
-import java.util.List;
-import javax.annotation.Resource;
-import javax.jws.WebService;
+import jakarta.annotation.Resource;
+import jakarta.jws.WebService;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -50,6 +49,8 @@ import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 import org.geosdi.geoplatform.services.delegate.CSWDelegate;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
@@ -59,8 +60,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Transactional // Give atomicity on WS methods
-@WebService(
-        endpointInterface = "org.geosdi.geoplatform.services.GeoPlatformCSWService")
+@WebService(endpointInterface = "org.geosdi.geoplatform.services.GeoPlatformCSWService")
 public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
 
     @Resource(name = "cswServiceDelegate")
@@ -72,9 +72,7 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     }
 
     @Override
-    public ServerCSWDTO saveServerCSW(String alias, String serverUrl,
-            String organization)
-            throws IllegalParameterFault {
+    public ServerCSWDTO saveServerCSW(String alias, String serverUrl, String organization) throws IllegalParameterFault {
         return cswServiceDelegate.saveServerCSW(alias, serverUrl, organization);
     }
 
@@ -84,26 +82,22 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     }
 
     @Override
-    public List<ServerCSWDTO> getAllCSWServers(String organizationName)
-            throws ResourceNotFoundFault {
+    public List<ServerCSWDTO> getAllCSWServers(String organizationName) throws ResourceNotFoundFault {
         return cswServiceDelegate.getAllCSWServers(organizationName);
     }
 
     @Override
-    public GeoPlatformServer getServerDetailCSW(Long serverID)
-            throws ResourceNotFoundFault {
+    public GeoPlatformServer getServerDetailCSW(Long serverID) throws ResourceNotFoundFault {
         return cswServiceDelegate.getServerDetailCSW(serverID);
     }
 
     @Override
-    public GeoPlatformServer getServerDetailCSWByUrl(String serverUrl)
-            throws ResourceNotFoundFault {
+    public GeoPlatformServer getServerDetailCSWByUrl(String serverUrl) throws ResourceNotFoundFault {
         return cswServiceDelegate.getServerDetailCSWByUrl(serverUrl);
     }
 
     @Override
-    public ServerCSWDTO getShortServerCSW(String serverUrl)
-            throws ResourceNotFoundFault {
+    public ServerCSWDTO getShortServerCSW(String serverUrl) throws ResourceNotFoundFault {
         return cswServiceDelegate.getShortServerCSW(serverUrl);
     }
 
@@ -113,35 +107,27 @@ public class GeoPlatformCSWServiceImpl implements GeoPlatformCSWService {
     }
 
     @Override
-    public List<ServerCSWDTO> searchCSWServers(PaginatedSearchRequest request,
-            String organization) {
+    public List<ServerCSWDTO> searchCSWServers(PaginatedSearchRequest request, String organization) {
         return cswServiceDelegate.searchCSWServers(request, organization);
     }
 
     @Override
-    public int getRecordsCount(CatalogFinderBean catalogFinder)
-            throws Exception {
+    public int getRecordsCount(CatalogFinderBean catalogFinder) throws Exception {
         return cswServiceDelegate.getRecordsCount(catalogFinder);
     }
 
     @Override
-    public List<SummaryRecordDTO> searchSummaryRecords(int num, int start,
-            CatalogFinderBean catalogFinder)
-            throws Exception {
+    public List<SummaryRecordDTO> searchSummaryRecords(int num, int start, CatalogFinderBean catalogFinder) throws Exception {
         return cswServiceDelegate.searchSummaryRecords(num, start, catalogFinder);
     }
 
     @Override
-    public List<FullRecordDTO> searchFullRecords(int num, int start,
-            CatalogFinderBean catalogFinder)
-            throws Exception {
+    public List<FullRecordDTO> searchFullRecords(int num, int start, CatalogFinderBean catalogFinder) throws Exception {
         return cswServiceDelegate.searchFullRecords(num, start, catalogFinder);
     }
 
     @Override
-    public String getRecordById(Long serverID, String identifier)
-            throws Exception {
+    public String getRecordById(Long serverID, String identifier) throws Exception {
         return cswServiceDelegate.getRecordById(serverID, identifier);
     }
-
 }

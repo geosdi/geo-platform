@@ -35,10 +35,9 @@
  */
 package org.geosdi.geoplatform.rs.support.request.search;
 
+import jakarta.xml.bind.annotation.XmlTransient;
 import lombok.ToString;
 import org.geosdi.geoplatform.rs.support.request.GPBasePageableRequest;
-
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.persistence.configuration.basic.strategy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -71,13 +72,7 @@ public class PropertiesStrategyManager implements InitializingBean {
 
     /**
      * Invoked by the containing {@code BeanFactory} after it has set all bean properties
-     * and satisfied {@link org.springframework.beans.factory.BeanFactoryAware  StringBuilder builder = new StringBuilder();
-     *         builder.append("PropertiesStrategyManager Configuration ###################");
-     *         builder.append("\n\n");
-     *         builder.append("Strategy Used : ");
-     *         builder.append(printStrategy());
-     *         builder.append("\n\n");
-     *         logger.info(builder.toString());}, {@code ApplicationContextAware} etc.
+     * and satisfied {@link BeanFactoryAware}, {@code ApplicationContextAware} etc.
      * <p>This method allows the bean instance to perform validation of its overall
      * configuration and final initialization when all bean properties have been set.
      *

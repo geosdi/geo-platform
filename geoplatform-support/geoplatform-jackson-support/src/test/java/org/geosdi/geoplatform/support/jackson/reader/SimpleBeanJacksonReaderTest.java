@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.support.jackson.reader;
 
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.model.SimpleBean;
-import org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -49,7 +48,9 @@ import java.util.stream.Stream;
 
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
+import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -63,10 +64,11 @@ public class SimpleBeanJacksonReaderTest {
 
     private static final Logger logger = LoggerFactory.getLogger(SimpleBeanJacksonReaderTest.class);
     //
-    private static final GPJacksonReaderSupport<SimpleBean> JACKSON_READER_SUPPORT = new GPBaseJacksonReaderSupport<>(new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
-            FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE, INDENT_OUTPUT_ENABLE)
+    private static final GPJacksonReaderSupport<SimpleBean> JACKSON_READER_SUPPORT = new GPBaseJacksonReaderSupport<>(new GPJacksonSupport(JAXB,
+            UNWRAP_ROOT_VALUE_DISABLE, FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
+            WRAP_ROOT_VALUE_DISABLE, INDENT_OUTPUT_ENABLE)
             .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)
-            .configure(GPJsonIncludeFeature.NON_NULL), SimpleBean.class);
+            .configure(NON_NULL), SimpleBean.class);
 
     @Test
     public void a_readJsonFromURLTest() throws Exception {
@@ -97,6 +99,7 @@ public class SimpleBeanJacksonReaderTest {
                 "  \"url\": \"https://httpbin.org/get?color=red&shape=square\"\n" +
                 "}");
         assertNotNull(simpleBean);
+        logger.info("#######################SIMPLE_BEAN from String : {}\n", simpleBean);
     }
 
     @Test

@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.persistence.dao.jpa.criteria;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaDelete;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.CriteriaUpdate;
 import org.geosdi.geoplatform.persistence.dao.jpa.GPBaseJpaDAO;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaDelete;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.CriteriaUpdate;
 import java.io.Serializable;
 
 /**
@@ -60,7 +60,7 @@ public interface BaseCriteriaJpaDAO<T extends Object, ID extends Serializable> e
     CriteriaDelete<T> createCriteriaDelete();
 
     /**
-     * @return {@link CriteriaUpdate<T>}
+     * @return {@link CriteriaUpdate <T>}
      */
     CriteriaUpdate<T> createCriteriaUpdate();
 

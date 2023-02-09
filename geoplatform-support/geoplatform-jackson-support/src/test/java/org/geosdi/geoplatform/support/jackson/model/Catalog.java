@@ -53,10 +53,12 @@ import java.util.List;
 @Setter
 @ToString
 @XmlRootElement(name = "CATALOG")
+@jakarta.xml.bind.annotation.XmlRootElement(name = "CATALOG")
 public class Catalog implements Serializable {
 
     private static final long serialVersionUID = -4441811146261378605L;
     //
     @XmlElement(name = "CD")
+    @jakarta.xml.bind.annotation.XmlElement(name = "CD")
     private List<Cd> cd = new ArrayList<>();
 }

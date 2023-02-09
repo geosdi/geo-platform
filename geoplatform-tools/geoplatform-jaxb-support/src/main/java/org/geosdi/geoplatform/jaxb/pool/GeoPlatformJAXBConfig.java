@@ -37,8 +37,9 @@ package org.geosdi.geoplatform.jaxb.pool;
 
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
+import static java.time.Duration.ofMillis;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -48,9 +49,8 @@ public class GeoPlatformJAXBConfig extends GenericObjectPoolConfig {
         super.setMaxIdle(15);
         super.setMaxTotal(100);
         super.setMinIdle(6);
-        super.setTimeBetweenEvictionRunsMillis(1000L * 60L * 10L);
+        super.setTimeBetweenEvictionRuns(ofMillis(1000L * 60L * 10L));
         super.setNumTestsPerEvictionRun(50);
-        super.setMinEvictableIdleTimeMillis(1000L * 60L * 5L);
+        super.setMinEvictableIdleTime(ofMillis(1000L * 60L * 5L));
     }
-
 }

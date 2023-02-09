@@ -35,13 +35,14 @@
  */
 package org.geosdi.geoplatform.jasypt.support;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.Resource;
+import static org.junit.Assert.assertEquals;
 
 /**
  *
@@ -56,26 +57,25 @@ public class GPDigesterTest {
     private final static String encryptedTextMD5 = "c5e78595a2c9c515c6d218549bc6873d";
     private final static String encryptedTextSHA1 = "87f969449681b7674a7bda1a8988f413c16a16a7";
     //
-    @Resource(name = "gpDigesterSHA1")
+    @Autowired
+    @Qualifier(value = "gpDigesterSHA1")
     private GPDigesterConfigurator gpDigesterSHA1;
     //
-    @Resource(name = "gpDigesterMD5")
+    @Autowired
+    @Qualifier(value = "gpDigesterMD5")
     private GPDigesterConfigurator gpDigesterMD5;
 
     @Test
     public void testMD5() {
         String encrypted = gpDigesterMD5.digest(plainText).toLowerCase();
-
-        Assert.assertEquals(32, encrypted.length());
-        Assert.assertEquals(encryptedTextMD5, encrypted);
+        assertEquals(32, encrypted.length());
+        assertEquals(encryptedTextMD5, encrypted);
     }
 
     @Test
     public void testSHA1() {
         String encrypted = gpDigesterSHA1.digest(plainText).toLowerCase();
-
-        Assert.assertEquals(40, encrypted.length());
-        Assert.assertEquals(encryptedTextSHA1, encrypted);
+        assertEquals(40, encrypted.length());
+        assertEquals(encryptedTextSHA1, encrypted);
     }
-
 }

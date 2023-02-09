@@ -35,14 +35,15 @@
  */
 package org.geosdi.geoplatform.services;
 
-import java.util.List;
-import javax.jws.WebParam;
-import javax.jws.WebResult;
-import javax.jws.WebService;
+import jakarta.jws.WebParam;
+import jakarta.jws.WebResult;
+import jakarta.jws.WebService;
 import org.codehaus.jra.Get;
 import org.codehaus.jra.HttpResource;
 import org.geosdi.geoplatform.exception.GPCatalogException;
 import org.geosdi.geoplatform.responce.GPCatalogMetadataDTO;
+
+import java.util.List;
 
 /**
  * Public interface to define the service operations mapped via REST using CXT
@@ -54,8 +55,7 @@ import org.geosdi.geoplatform.responce.GPCatalogMetadataDTO;
  * @author Giuseppe La Scaleia - CNR IMAA - geoSDI
  * @email giuseppe.lascaleia@geosdi.org
  */
-@WebService(name = "GPCatalogFinderService",
-            targetNamespace = "http://services.geo-platform.org/")
+@WebService(name = "GPCatalogFinderService", targetNamespace = "http://services.geo-platform.org/")
 public interface GPCatalogFinderService {
 
     @Get

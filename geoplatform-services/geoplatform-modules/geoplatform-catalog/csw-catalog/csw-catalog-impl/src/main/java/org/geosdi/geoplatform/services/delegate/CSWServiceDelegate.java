@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.services.delegate;
 
 import com.google.common.collect.Lists;
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.connector.CatalogGetCapabilitiesBean;
 import org.geosdi.geoplatform.connector.GPCSWConnectorBuilder;
 import org.geosdi.geoplatform.connector.GPCatalogConnectorStore;
@@ -74,7 +75,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
 import javax.xml.bind.JAXBElement;
 import java.io.IOException;
 import java.math.BigInteger;
@@ -86,11 +86,9 @@ import java.util.List;
 import static org.geosdi.geoplatform.connector.schema.CSWOperationsWithOutputSchema.GET_RECORD_BY_ID;
 
 /**
- * @author Michele Santomauro - CNR IMAA geoSDI Group
+ * @author Michele Santomauro <michele.santomauro@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email michele.santomauro@geosdi.org
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  */
 class CSWServiceDelegate implements CSWDelegate {
 
@@ -162,13 +160,11 @@ class CSWServiceDelegate implements CSWDelegate {
             server.setOrganization(org);
 
             server.setTitle(capabilities.getServiceIdentification().getTitle());
-            server.setAbstractServer(
-                    capabilities.getServiceIdentification().getAbstractText());
+            server.setAbstractServer(capabilities.getServiceIdentification().getAbstractText());
             server.setName(capabilities.getServiceProvider().getProviderName());
 
             CSWEntityCorrectness.checkCSWServer(server); // TODO assert
             serverDao.persist(server);
-
         } catch (Exception ex) {
             logger.error("### MalformedURLException: {}", ex.getMessage());
             throw new IllegalParameterFault("Exception : " + ex.getMessage());
@@ -189,16 +185,12 @@ class CSWServiceDelegate implements CSWDelegate {
      */
     @Override
     public List<ServerCSWDTO> getAllCSWServers(String organizationName) throws ResourceNotFoundFault {
-        GPOrganization organization = organizationDao.findByName(
-                organizationName);
-
+        GPOrganization organization = organizationDao.findByName(organizationName);
         if (organization == null) {
             throw new ResourceNotFoundFault("Organization with name "
                     + organizationName + "was not found.");
         }
-
-        List<GeoPlatformServer> found = serverDao.findAll(organization.getId(),
-                GPCapabilityType.CSW);
+        List<GeoPlatformServer> found = serverDao.findAll(organization.getId(), GPCapabilityType.CSW);
         return convertServerList(found);
     }
 
@@ -206,14 +198,12 @@ class CSWServiceDelegate implements CSWDelegate {
      * @see GeoPlatformCSWService#getServerDetailCSW(java.lang.Long)
      */
     @Override
-    public GeoPlatformServer getServerDetailCSW(Long serverID)
-            throws ResourceNotFoundFault {
+    public GeoPlatformServer getServerDetailCSW(Long serverID) throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.find(serverID);
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found", serverID);
         }
         CSWEntityCorrectness.checkCSWServerLog(server); // TODO assert
-
         return server;
     }
 
@@ -221,14 +211,12 @@ class CSWServiceDelegate implements CSWDelegate {
      * @see GeoPlatformCSWService#getServerDetailCSWByUrl(java.lang.String)
      */
     @Override
-    public GeoPlatformServer getServerDetailCSWByUrl(String serverUrl)
-            throws ResourceNotFoundFault {
+    public GeoPlatformServer getServerDetailCSWByUrl(String serverUrl) throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found " + serverUrl);
         }
         CSWEntityCorrectness.checkCSWServerLog(server); // TODO assert
-
         return server;
     }
 
@@ -236,14 +224,12 @@ class CSWServiceDelegate implements CSWDelegate {
      * @see GeoPlatformCSWService#getShortServerCSW(java.lang.String)
      */
     @Override
-    public ServerCSWDTO getShortServerCSW(String serverUrl)
-            throws ResourceNotFoundFault {
+    public ServerCSWDTO getShortServerCSW(String serverUrl) throws ResourceNotFoundFault {
         GeoPlatformServer server = serverDao.findByServerUrl(serverUrl);
         if (server == null) {
             throw new ResourceNotFoundFault("Server not found " + serverUrl);
         }
         CSWEntityCorrectness.checkCSWServerLog(server); // TODO assert
-
         return new ServerCSWDTO(server);
     }
 
@@ -254,8 +240,7 @@ class CSWServiceDelegate implements CSWDelegate {
     }
 
     @Override
-    public List<ServerCSWDTO> searchCSWServers(PaginatedSearchRequest request,
-            String organization) {
+    public List<ServerCSWDTO> searchCSWServers(PaginatedSearchRequest request, String organization) {
         List<GeoPlatformServer> serverList = serverDao.searchPagebleServers(request.getPage(), request.getNum(),
                 organization, GPCapabilityType.CSW, request.getNameLike());
         logger.info("####################################ECCOLI : {}\n", serverList);

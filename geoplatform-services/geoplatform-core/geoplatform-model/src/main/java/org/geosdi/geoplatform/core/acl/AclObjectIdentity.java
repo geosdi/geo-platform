@@ -35,12 +35,16 @@
  */
 package org.geosdi.geoplatform.core.acl;
 
+import jakarta.persistence.*;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * The <tt>AclObjectIdentity</tt> domain class contains entries representing
@@ -60,13 +64,26 @@ import javax.persistence.*;
                 @Index(columnList = "object_id_class", name = "ACL_OBJECT_IDENTITY_CLASS_INDEX"),
                 @Index(columnList = "object_id_identity", name = "ACL_OBJECT_IDENTITY_ID_INDEX")
         })
+@Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "object_identity")
+@Setter
+@Getter
+@ToString
 // TODO: implements Acl? extends AclImpl?
-public class AclObjectIdentity {
+public class AclObjectIdentity implements Serializable {
 
+    private static final long serialVersionUID = -3597977180509604626L;
+    //
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACL_OBJECT_IDENTITY_SEQ")
-    @SequenceGenerator(name = "ACL_OBJECT_IDENTITY_SEQ", sequenceName = "ACL_OBJECT_IDENTITY_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gp_acl_object_identity_generator")
+    @GenericGenerator(name = "gp_acl_object_identity_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "ACL_OBJECT_IDENTITY_SEQ"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "50"),
+                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
+            }
+    )
     private Long id;
     //
     @ManyToOne
@@ -122,111 +139,4 @@ public class AclObjectIdentity {
         this.parentAclObject = parentAclObject;
     }
     //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the aclClass
-     */
-    public AclClass getAclClass() {
-        return aclClass;
-    }
-
-    /**
-     * @param aclClass the aclClass to set
-     */
-    public void setAclClass(AclClass aclClass) {
-        this.aclClass = aclClass;
-    }
-
-    /**
-     * @return the objectId
-     */
-    public Long getObjectId() {
-        return objectId;
-    }
-
-    /**
-     * @param objectId the objectId to set
-     */
-    public void setObjectId(Long objectId) {
-        this.objectId = objectId;
-    }
-
-    /**
-     * @return the parentAclObject
-     */
-    public AclObjectIdentity getParentAclObject() {
-        return parentAclObject;
-    }
-
-    /**
-     * @param parentAclObject the parentAclObject to set
-     */
-    public void setParentAclObject(AclObjectIdentity parentAclObject) {
-        this.parentAclObject = parentAclObject;
-    }
-
-    /**
-     * @return the aclSid
-     */
-    public AclSid getAclSid() {
-        return aclSid;
-    }
-
-    /**
-     * @param aclSid the aclSid to set
-     */
-    public void setAclSid(AclSid aclSid) {
-        this.aclSid = aclSid;
-    }
-
-    /**
-     * @return the inheriting
-     */
-    public boolean isInheriting() {
-        return inheriting;
-    }
-
-    /**
-     * @param inheriting the inheriting to set
-     */
-    public void setInheriting(boolean inheriting) {
-        this.inheriting = inheriting;
-    }
-    //</editor-fold>
-
-    /**
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        StringBuilder str = new StringBuilder("AclObjectIdentity {");
-        str.append("id=").append(id);
-        str.append(", aclClass.id=").append(
-                aclClass != null ? aclClass.getId() : "NULL");
-        str.append(", objectId=").append(objectId);
-        str.append(", parentAclObject.id=").append(
-                parentAclObject != null ? parentAclObject.getId() : "NULL");
-        str.append(", aclSid.id=").append(
-                aclSid != null ? aclSid.getId() : "NULL");
-        str.append(", inheriting=").append(inheriting).append('}');
-        return str.toString();
-    }
 }

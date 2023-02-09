@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.server.command.publish.cas;
 
 import com.google.common.collect.Lists;
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.gui.client.command.publish.basic.ProcessEPSGResultResponse;
 import org.geosdi.geoplatform.gui.client.command.publish.cas.CasProcessEPSGResultRequest;
@@ -56,7 +57,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,18 +70,16 @@ import static org.geosdi.geoplatform.gui.server.utility.PublisherFileUtils.gener
 @Lazy(true)
 @Component(value = "command.publish.cas.CasProcessEPSGResultCommand")
 @Profile(value = "gs_cas")
-public class CasProcessEPSGResultCommand implements
-        GPCommand<CasProcessEPSGResultRequest, ProcessEPSGResultResponse> {
+public class CasProcessEPSGResultCommand implements GPCommand<CasProcessEPSGResultRequest, ProcessEPSGResultResponse> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            CasProcessEPSGResultCommand.class);
+    private static final Logger logger = LoggerFactory.getLogger(CasProcessEPSGResultCommand.class);
+    //
     private GPPublisherBasicServiceImpl casPublisherService;
     @Autowired
     private SessionUtility sessionUtility;
 
     @Override
-    public ProcessEPSGResultResponse execute(CasProcessEPSGResultRequest request,
-            HttpServletRequest httpServletRequest) {
+    public ProcessEPSGResultResponse execute(CasProcessEPSGResultRequest request, HttpServletRequest httpServletRequest) {
         GPAccount account;
         try {
             account = sessionUtility.getLoggedAccount(httpServletRequest);
@@ -102,8 +100,7 @@ public class CasProcessEPSGResultCommand implements
         }
     }
 
-    private ArrayList<InfoPreview> trasformPreviewLayerList(
-            List<EPSGLayerData> previewLayerList) {
+    private ArrayList<InfoPreview> trasformPreviewLayerList(List<EPSGLayerData> previewLayerList) {
         ArrayList<InfoPreview> infoPreviewList = Lists.<InfoPreview>newArrayList();
         InfoPreview infoPreview;
         for (EPSGLayerData previewLayer : previewLayerList) {

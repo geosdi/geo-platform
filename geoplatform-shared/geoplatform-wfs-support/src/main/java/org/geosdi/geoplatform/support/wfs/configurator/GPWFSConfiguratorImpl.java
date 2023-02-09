@@ -35,6 +35,11 @@
  */
 package org.geosdi.geoplatform.support.wfs.configurator;
 
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -43,9 +48,18 @@ public class GPWFSConfiguratorImpl implements GPWFSConfigurator {
 
     protected String defaultWFSDataSource;
 
+    /**
+     * <p>This method compares the data source passed with the default included
+     * in the Configurator Module</p>
+     *
+     * @param theDataSource
+     * @return boolean
+     */
     @Override
-    public boolean matchDefaultDataSource(String dataSource) {
-        return defaultWFSDataSource.equalsIgnoreCase(dataSource);
+    public boolean matchDefaultDataSource(@Nonnull(when = NEVER) String theDataSource) {
+        checkArgument((theDataSource != null) && !(theDataSource.trim().isEmpty()), "The Parameter dataSource must not be null or an empty string.");
+        checkArgument((this.defaultWFSDataSource != null) && !(this.defaultWFSDataSource.trim().isEmpty()), "The Parameter defaultWFSDataSource must not be null or an empty string.");
+        return defaultWFSDataSource.trim().equalsIgnoreCase(theDataSource.trim());
     }
 
     /**
@@ -62,5 +76,4 @@ public class GPWFSConfiguratorImpl implements GPWFSConfigurator {
     public void setDefaultWFSDataSource(String defaultWFSDataSource) {
         this.defaultWFSDataSource = defaultWFSDataSource;
     }
-
 }

@@ -35,12 +35,13 @@
  */
 package org.geosdi.geoplatform.persistence.configuration.export.reflection;
 
+import jakarta.persistence.Entity;
 import org.geosdi.geoplatform.persistence.configuration.properties.GPPersistenceConnector;
 import org.reflections.Reflections;
 import org.reflections.util.ConfigurationBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.Entity;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;

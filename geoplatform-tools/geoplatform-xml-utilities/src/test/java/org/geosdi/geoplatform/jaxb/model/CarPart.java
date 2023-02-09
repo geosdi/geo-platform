@@ -55,6 +55,8 @@ import java.io.Serializable;
 @ToString
 @XmlRootElement(name = "CarPart")
 @XmlAccessorType(XmlAccessType.FIELD)
+@jakarta.xml.bind.annotation.XmlRootElement(name = "CarPart")
+@jakarta.xml.bind.annotation.XmlAccessorType(jakarta.xml.bind.annotation.XmlAccessType.FIELD)
 public class CarPart implements Serializable {
 
     private static final long serialVersionUID = -4820968017757045937L;

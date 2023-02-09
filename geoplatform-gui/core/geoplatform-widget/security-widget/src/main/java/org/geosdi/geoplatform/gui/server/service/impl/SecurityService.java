@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.server.service.impl;
 
 import com.google.common.collect.Lists;
+import jakarta.xml.ws.soap.SOAPFaultException;
 import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -67,7 +68,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.soap.SOAPFaultException;
+
 import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;

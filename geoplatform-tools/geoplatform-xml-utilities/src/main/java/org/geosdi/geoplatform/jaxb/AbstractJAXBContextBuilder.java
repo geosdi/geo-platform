@@ -119,9 +119,7 @@ public abstract class AbstractJAXBContextBuilder implements IGPJAXBContextBuilde
         try {
             Object item = getContext(type).createUnmarshaller().unmarshal(uri.toURL());
             return (item instanceof JAXBElement) ? ((JAXBElement<T>) item).getValue() : (T) item;
-        } catch (JAXBException e) {
-            throw new DataBindingException(e);
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new DataBindingException(e);
         }
     }

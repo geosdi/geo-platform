@@ -35,11 +35,6 @@
             <artifactId>geoplatform-persistence-cache-api</artifactId>
             <version>${project.version}</version>
         </dependency>
-        
-        <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
-        </dependency>
 
         <!-- =========================================================== -->
         <!-- ================ GEOPLATFORM C3P0 Support ================= -->
@@ -53,14 +48,22 @@
         <!-- ================ HIBERNATE C3P0 ANNOTATIONS =============== -->
         <!-- =========================================================== -->
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-c3p0</artifactId>
+        </dependency>
+
+        <!-- =========================================================== -->
+        <!-- ====================== HIBERNATE ANT ====================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-ant</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
-            <version>0.9.9</version>
+            <version>0.10.2</version>
         </dependency>
     </dependencies>
 

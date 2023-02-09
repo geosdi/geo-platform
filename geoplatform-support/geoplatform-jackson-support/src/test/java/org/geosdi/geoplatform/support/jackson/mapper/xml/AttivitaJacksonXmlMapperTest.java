@@ -57,8 +57,10 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.iterate;
 import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.geosdi.geoplatform.support.jackson.mapper.xml.MaterialeJacksonXmlMapperTest.toMateriale;
 import static org.geosdi.geoplatform.support.jackson.mapper.xml.PrestazioneJacksonXmlMapperTest.toPrestazioni;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -69,8 +71,7 @@ public class AttivitaJacksonXmlMapperTest {
 
     private static final Logger logger = LoggerFactory.getLogger(AttivitaJacksonXmlMapperTest.class);
     //
-    private static final GPJacksonXmlMapper<Attivita> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(Attivita.class,
-            new GPJacksonXmlSupport());
+    private static final GPJacksonXmlMapper<Attivita> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(Attivita.class, new GPJacksonXmlSupport(JAXB));
 
     @Test
     @Order(value = 0)
@@ -125,8 +126,10 @@ public class AttivitaJacksonXmlMapperTest {
     @Test
     @Order(value = 1)
     public void unmarshallAttivitaFromFileTest() throws Exception {
-        logger.info("#######################Attivita_FROM_FILE : {}\n", GP_JACKSON_XML_MAPPER
-                .read(new File(of("src", "test", "resources", "attivita.xml").collect(joining(separator)))));
+        Attivita attivita = GP_JACKSON_XML_MAPPER.read(new File(of("src", "test", "resources", "attivita.xml")
+                .collect(joining(separator))));
+        assertTrue(attivita.getPrestazioni().size() == 4);
+        logger.info("#######################Attivita_FROM_FILE : {}\n", attivita);
     }
 
     @Test
@@ -157,7 +160,7 @@ public class AttivitaJacksonXmlMapperTest {
 
     /**
      * @param numbers
-     * @return {@link List<Attivita>}
+     * @return {@link List< Attivita >}
      */
     static List<Attivita> toAttivita(int numbers) {
         checkArgument((numbers > 0), "The Number of Attivita must be greather than 0.");

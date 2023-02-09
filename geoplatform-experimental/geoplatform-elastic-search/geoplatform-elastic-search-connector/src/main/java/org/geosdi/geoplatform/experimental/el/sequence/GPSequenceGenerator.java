@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.experimental.el.sequence;
 
+import jakarta.annotation.Resource;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.update.UpdateResponse;
@@ -46,8 +47,6 @@ import org.geosdi.geoplatform.experimental.el.api.model.sequence.IGPSequence;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.slf4j.Logger;
-
-import javax.annotation.Resource;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;

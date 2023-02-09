@@ -49,7 +49,9 @@ import java.io.Serializable;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @XmlRootElement(name = "PRESTAZIONE")
+@jakarta.xml.bind.annotation.XmlRootElement(name = "PRESTAZIONE")
 @XmlType(propOrder = {"CODICE", "DESCRIZIONE", "QTA_PROGETTO", "UNITA_MISURA", "VALORE_ZMED"})
+@jakarta.xml.bind.annotation.XmlType(propOrder = {"CODICE", "DESCRIZIONE", "QTA_PROGETTO", "UNITA_MISURA", "VALORE_ZMED"})
 @Getter
 @Setter
 @ToString
@@ -58,13 +60,18 @@ public class Prestazione implements Serializable {
     private static final long serialVersionUID = -117548968562921778L;
     //
     @XmlElement(name = "CODICE")
+    @jakarta.xml.bind.annotation.XmlElement(name = "CODICE")
     private String codice;
     @XmlElement(name = "DESCRIZIONE")
+    @jakarta.xml.bind.annotation.XmlElement(name = "DESCRIZIONE")
     private String descrizione;
     @XmlElement(name = "QTA_PROGETTO")
+    @jakarta.xml.bind.annotation.XmlElement(name = "QTA_PROGETTO")
     private String qtaProgetto;
     @XmlElement(name = "UNITA_MISURA")
+    @jakarta.xml.bind.annotation.XmlElement(name = "UNITA_MISURA")
     private String unitaMisura;
     @XmlElement(name = "VALORE_ZMED")
+    @jakarta.xml.bind.annotation.XmlElement(name = "VALORE_ZMED")
     private int valoreZmed;
 }

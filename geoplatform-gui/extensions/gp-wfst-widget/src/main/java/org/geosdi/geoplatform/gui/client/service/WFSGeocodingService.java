@@ -37,13 +37,12 @@ package org.geosdi.geoplatform.gui.client.service;
 
 import org.fusesource.restygwt.client.MethodCallback;
 import org.fusesource.restygwt.client.RestService;
-import org.geosdi.geoplatform.gui.client.model.geocoding.WFSAddressDTO;
 import org.geosdi.geoplatform.gui.client.service.request.GPGeocodingAddressRequestDTO;
 import org.geosdi.geoplatform.gui.client.service.response.FeatureCollectionResponse;
-import org.geosdi.geoplatform.gui.client.service.response.WFSAddressStore;
 
-import javax.ws.rs.*;
-import java.util.List;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -60,6 +59,4 @@ public interface WFSGeocodingService extends RestService {
     @Path(GEOCODING_SERVICE_URL + "/searchAddress")
     @Produces("application/json")
     void searchAddress(GPGeocodingAddressRequestDTO gpGeocodingAddressRequestDTO, MethodCallback<FeatureCollectionResponse> callback);
-
-
 }

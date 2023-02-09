@@ -36,6 +36,8 @@
 package org.geosdi.geoplatform.rs.support.geocoding.delegate;
 
 import com.google.maps.model.GeocodingResult;
+import jakarta.annotation.Resource;
+import jakarta.ws.rs.core.Response;
 import org.geojson.LngLatAlt;
 import org.geojson.Point;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -50,9 +52,8 @@ import org.slf4j.Logger;
 import org.springframework.context.MessageSource;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Resource;
-import javax.ws.rs.core.Response;
 
+import static java.lang.Long.valueOf;
 import static java.util.Arrays.stream;
 import static java.util.Locale.forLanguageTag;
 import static java.util.stream.Collectors.toList;
@@ -86,7 +87,7 @@ class GPGoogleGeocodingDelegate implements IGPGoogleGeocodingDelegate {
         logger.debug("#####################TRYING To find Address : {} with lang : {}\n", request.getAddress(), request.getLang());
         GeocodingResult[] geocodingResults = this.gpGeocodingService.newRequest()
                 .address(request.getAddress()).language(request.getLang()).await();
-        return new GPGeocodingResult(new Long(geocodingResults.length),
+        return new GPGeocodingResult(valueOf(geocodingResults.length),
                 stream(geocodingResults)
                         .filter(geocodingResult -> (geocodingResult != null) && (geocodingResult.geometry != null))
                         .map(geocodingResult -> new GPGeocodingLocality(geocodingResult.formattedAddress,

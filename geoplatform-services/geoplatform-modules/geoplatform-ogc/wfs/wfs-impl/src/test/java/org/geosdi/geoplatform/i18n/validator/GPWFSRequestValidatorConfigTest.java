@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.i18n.validator;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.hibernate.validator.support.GPI18NValidator;
 import org.geosdi.geoplatform.hibernate.validator.support.request.GPI18NRequestValidator;
 import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesRequest;
@@ -48,7 +49,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.Resource;
 import java.util.Locale;
 
 import static org.geosdi.geoplatform.wfs.request.validator.GPWFSSearchFeaturesRequestValidatorTest.createWFSSearchFeaturesRequest;

@@ -40,8 +40,7 @@ import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.experimental.mongodb.configuration.auth.MongoAuth;
 import org.geosdi.geoplatform.experimental.mongodb.spring.annotation.GPMongoProp;
 import org.springframework.beans.factory.annotation.Value;
-
-import javax.inject.Named;
+import org.springframework.stereotype.Component;
 
 /**
  *
@@ -51,7 +50,7 @@ import javax.inject.Named;
 @Immutable
 @GPMongoProp
 @Getter
-@Named(value = "gpSpringMongoAuth")
+@Component(value = "gpSpringMongoAuth")
 class GPSpringMongoAuth implements MongoAuth {
 
     private static final long serialVersionUID = 7862623782819344491L;

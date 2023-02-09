@@ -44,13 +44,14 @@ import org.geosdi.geoplatform.core.delegate.api.organization.OrganizationDelegat
 import org.geosdi.geoplatform.core.delegate.api.project.ProjectDelegate;
 import org.geosdi.geoplatform.core.delegate.api.server.ServerDelegate;
 import org.geosdi.geoplatform.core.delegate.api.viewport.ViewportDelegate;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  *
@@ -83,15 +84,15 @@ public class CoreDelegateSpringTest {
 
     @Test
     public void coreDelegateComponentsTest() {
-        Assert.assertNotNull(gpAccountDelegate);
-        Assert.assertNotNull(gpAclDelegate);
-        Assert.assertNotNull(gpFolderDelegate);
-        Assert.assertNotNull(gpLayerDelegate);
-        Assert.assertNotNull(gpMessageDelegate);
-        Assert.assertNotNull(gpOrganizationDelegate);
-        Assert.assertNotNull(gpProjectDelegate);
-        Assert.assertNotNull(gpServerDelegate);
-        Assert.assertNotNull(gpViewportDelegate);
+        assertNotNull(gpAccountDelegate);
+        assertNotNull(gpAclDelegate);
+        assertNotNull(gpFolderDelegate);
+        assertNotNull(gpLayerDelegate);
+        assertNotNull(gpMessageDelegate);
+        assertNotNull(gpOrganizationDelegate);
+        assertNotNull(gpProjectDelegate);
+        assertNotNull(gpServerDelegate);
+        assertNotNull(gpViewportDelegate);
     }
 
 }

@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.services;
 
+import jakarta.annotation.Resource;
+import jakarta.jws.WebMethod;
+import jakarta.ws.rs.core.Response;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.response.ServerDTO;
@@ -43,9 +46,6 @@ import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoRequest;
 import org.geosdi.geoplatform.services.request.WMSHeaderParam;
 import org.geosdi.geoplatform.services.response.GPLayerTypeResponse;
 
-import javax.annotation.Resource;
-import javax.jws.WebMethod;
-import javax.ws.rs.core.Response;
 import java.util.List;
 
 public class GPWMSServiceImpl implements GPWMSService {

@@ -35,25 +35,34 @@
  */
 package org.geosdi.geoplatform.scheduler.delegate.api;
 
-import java.util.List;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.springframework.beans.factory.InitializingBean;
 
+import java.util.List;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface SchedulerDelegate extends InitializingBean {
 
+    /**
+     * @param user
+     */
     void sendEmailRegistration(GPUser user);
 
-    void sendEmailModification(GPUser user, String previousEmail,
-            String newPlainPassword);
+    /**
+     * @param user
+     * @param previousEmail
+     * @param newPlainPassword
+     */
+    void sendEmailModification(GPUser user, String previousEmail, String newPlainPassword);
 
-    void sendEmailUserCreationNotification(List<String> emailRecipient,
-            String createdUserName);
-    
+    /**
+     * @param emailRecipient
+     * @param createdUserName
+     */
+    void sendEmailUserCreationNotification(List<String> emailRecipient, String createdUserName);
+
     void checkTempAccount();
-
 }

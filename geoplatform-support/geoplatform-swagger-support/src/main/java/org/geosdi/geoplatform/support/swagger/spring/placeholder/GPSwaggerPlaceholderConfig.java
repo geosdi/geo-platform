@@ -35,14 +35,13 @@
  */
 package org.geosdi.geoplatform.support.swagger.spring.placeholder;
 
-import java.net.MalformedURLException;
 import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+
+import java.net.MalformedURLException;
 
 /**
  *
@@ -55,24 +54,22 @@ class GPSwaggerPlaceholderConfig {
 
     private static final SwaggerResourcesLoader swaggerResourcesLoader = new SwaggerResourcesLoader();
 
+    /**
+     * @param gpConfigDataDir
+     * @param gpSwaggerFileProp
+     * @return {@link PropertySourcesPlaceholderConfigurer}
+     * @throws MalformedURLException
+     */
     @Bean(name = "gpSwaggerPropertyConfigurer")
-    @Required
-    public static PropertySourcesPlaceholderConfigurer gpSwaggerPropertyConfigurer(
-            @Value("#{systemProperties['GP_SWAGGER_DATA_DIR']}") String gpConfigDataDir,
-            @Value("#{systemProperties['GP_SWAGGER_FILE_PROP']}") String gpSwaggerFileProp)
-            throws MalformedURLException {
-
+    public static PropertySourcesPlaceholderConfigurer gpSwaggerPropertyConfigurer(@Value("#{systemProperties['GP_SWAGGER_DATA_DIR']}") String gpConfigDataDir,
+            @Value("#{systemProperties['GP_SWAGGER_FILE_PROP']}") String gpSwaggerFileProp) throws MalformedURLException {
         PropertySourcesPlaceholderConfigurer gpSwaggerPlaceHolder = new PropertySourcesPlaceholderConfigurer();
         gpSwaggerPlaceHolder.setPlaceholderPrefix("gpSwaggerConfigurator{");
         gpSwaggerPlaceHolder.setPlaceholderSuffix("}");
         gpSwaggerPlaceHolder.setNullValue("@null");
-
-        gpSwaggerPlaceHolder.setLocations(swaggerResourcesLoader.loadResources(
-                gpConfigDataDir, gpSwaggerFileProp));
+        gpSwaggerPlaceHolder.setLocations(swaggerResourcesLoader.loadResources(gpConfigDataDir, gpSwaggerFileProp));
         gpSwaggerPlaceHolder.setIgnoreResourceNotFound(Boolean.TRUE);
         gpSwaggerPlaceHolder.setIgnoreUnresolvablePlaceholders(Boolean.TRUE);
-
         return gpSwaggerPlaceHolder;
     }
-
 }

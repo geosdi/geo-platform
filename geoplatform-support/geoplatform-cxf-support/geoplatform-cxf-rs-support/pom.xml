@@ -22,6 +22,14 @@
 
     <dependencies>
         <!-- =========================================================== -->
+        <!-- ======================== JAKARTA JAXB ===================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+        </dependency>
+
+        <!-- =========================================================== -->
         <!-- =========================== SPRING ======================== -->
         <!-- =========================================================== -->
         <dependency>
@@ -43,19 +51,11 @@
         </dependency>
 
         <!-- =========================================================== -->
-        <!-- JAXB -->
-        <!-- =========================================================== -->
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-        </dependency>
-
-        <!-- =========================================================== -->
         <!-- ========================== REST =========================== -->
         <!-- =========================================================== -->
-        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
+        <dependency>  
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
         </dependency>
 
         <dependency>
@@ -80,8 +80,8 @@
         </dependency>
 
         <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
         </dependency>
 
         <!-- =========================================================== -->

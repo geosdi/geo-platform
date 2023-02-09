@@ -36,33 +36,27 @@
 package org.geosdi.geoplatform.gui.server.gwt;
 
 import com.google.gwt.user.client.rpc.SerializationException;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-
 import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
 import org.geosdi.geoplatform.gui.server.service.IStartupService;
 import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
 import org.geosdi.geoplatform.gui.service.GeoPlatformConfiguration;
-import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Deprecated
-public class GeoPlatformConfigurationImpl extends GPAutoInjectingRemoteServiceServlet
-        implements GeoPlatformConfiguration {
+public class GeoPlatformConfigurationImpl extends GPAutoInjectingRemoteServiceServlet implements GeoPlatformConfiguration {
 
     private static final long serialVersionUID = 4416552134318747534L;
-    static ThreadLocal<HttpServletRequest> perThreadRequest
-            = new ThreadLocal<HttpServletRequest>();
+    static ThreadLocal<HttpServletRequest> perThreadRequest = new ThreadLocal<HttpServletRequest>();
 
     @Override
     public String processCall(String payload) throws SerializationException {
@@ -77,6 +71,7 @@ public class GeoPlatformConfigurationImpl extends GPAutoInjectingRemoteServiceSe
     public static HttpServletRequest getRequest() {
         return perThreadRequest.get();
     }
+
     //
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
@@ -86,11 +81,9 @@ public class GeoPlatformConfigurationImpl extends GPAutoInjectingRemoteServiceSe
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-
-        ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(
-                getServletContext());
-        GeoPlatformContextUtil.getInstance().setSpringContext(context);
-
+        /** @Todo fix the compilation for now try to use this https://github.com/gwtproject/gwt/issues/9727 **/
+//        ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+//        GeoPlatformContextUtil.getInstance().setSpringContext(context);
         this.initGeoPlatformContext();
     }
 
@@ -111,7 +104,6 @@ public class GeoPlatformConfigurationImpl extends GPAutoInjectingRemoteServiceSe
      */
     private void initGeoPlatformContext() {
         assert (this.startupService != null) : "The GeoPlatform StartupService is null";
-
         logger.info("################ GeoPlatform Context Initialized Correctly");
     }
 }

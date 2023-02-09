@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.support.mail;
 
+import jakarta.annotation.Resource;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
@@ -50,17 +51,17 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import javax.annotation.Resource;
 import java.io.StringWriter;
 import java.util.HashMap;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {GPMailLoader.class},
-        loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {GPMailLoader.class}, loader = AnnotationConfigContextLoader.class)
 @ActiveProfiles(profiles = {"GPMailVelocitySupport"})
 public class SMTPMailSpringPropertiesTest {
 
@@ -88,15 +89,14 @@ public class SMTPMailSpringPropertiesTest {
 
     @Before
     public void setUp() {
-        Assert.assertNotNull(logger);
-        Assert.assertNotNull(gpMailSpringDetail);
-        Assert.assertNotNull(gpMailSpringSender);
+        assertNotNull(logger);
+        assertNotNull(gpMailSpringDetail);
+        assertNotNull(gpMailSpringSender);
     }
 
     @Test
     public void gpMailDetailTest() {
-        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@Mail Detail : {}",
-                gpMailSpringDetail);
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@Mail Detail : {}", gpMailSpringDetail);
     }
 
     @Test

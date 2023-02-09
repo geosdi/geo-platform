@@ -39,10 +39,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import java.util.concurrent.TimeUnit;
-
-import static org.geosdi.geoplatform.jaxb.comparison.task.GPJAXBContextBuilderTaskType.POOLED;
-import static org.geosdi.geoplatform.jaxb.comparison.task.GPJAXBContextBuilderTaskType.SIMPLE;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static org.geosdi.geoplatform.jaxb.comparison.task.GPJAXBContextBuilderTaskType.*;
 
 
 /**
@@ -55,14 +53,24 @@ public class GPAXBContextBuilderComparisonTest extends AbstractAXBContextBuilder
     @Test
     public void a_gpJAXBContextBuilderSimpleTest() throws Exception {
         logger.info("GPJAXBContextBuilderSimpleTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(SIMPLE)));
+                super.defineNumThreads(), MILLISECONDS.toSeconds(executeMultiThreadsTasks(SIMPLE)));
     }
 
     @Test
     public void b_gpJAXBContextBuilderPooledTest() throws Exception {
         logger.info("GPJAXBContextBuilderPooledTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(POOLED)));
+                super.defineNumThreads(), MILLISECONDS.toSeconds(executeMultiThreadsTasks(POOLED)));
+    }
+
+    @Test
+    public void c_gpJAXBJakartaContextBuilderSimpleTest() throws Exception {
+        logger.info("GPJAXBJakartaContextBuilderSimpleTest : Executed {} threads in {} s \n",
+                super.defineNumThreads(), MILLISECONDS.toSeconds(executeMultiThreadsTasks(JAKARTA_SIMPLE)));
+    }
+
+    @Test
+    public void d_gpJAXBJakartaContextBuilderPooledTest() throws Exception {
+        logger.info("GPJAXBJakartaContextBuilderPooledTest : Executed {} threads in {} s \n",
+                super.defineNumThreads(), MILLISECONDS.toSeconds(executeMultiThreadsTasks(JAKARTA_POOLED)));
     }
 }

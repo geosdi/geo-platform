@@ -35,10 +35,15 @@
  */
 package org.geosdi.geoplatform.core.acl;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * The <tt>AclClass</tt> domain class contains entries for the names of each
@@ -50,12 +55,25 @@ import javax.persistence.*;
 @Table(name = "acl_class", indexes = {
         @Index(columnList = "clazz", name = "ACL_CLASS_INDEX")
 })
+@Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "class")
-public class AclClass {
+@Getter
+@Setter
+@ToString
+public class AclClass implements Serializable {
 
+    private static final long serialVersionUID = -587659899652273094L;
+    //
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACL_CLASS_SEQ")
-    @SequenceGenerator(name = "ACL_CLASS_SEQ", sequenceName = "ACL_CLASS_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gp_acl_class_generator")
+    @GenericGenerator(name = "gp_acl_class_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "ACL_CLASS_SEQ"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "50"),
+                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
+            }
+    )
     private Long id;
     /**
      * Fully qualified name of a class (package.className) of the secure domain object.
@@ -75,50 +93,4 @@ public class AclClass {
         this.clazz = clazz;
     }
     //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="Getter and setter methods">
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the clazz
-     * @see #clazz
-     */
-    public String getClazz() {
-        return clazz;
-    }
-
-    /**
-     * @param clazz the clazz to set
-     * @see #clazz
-     */
-    public void setClazz(String clazz) {
-        this.clazz = clazz;
-    }
-    //</editor-fold>
-
-    /**
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        StringBuilder str = new StringBuilder("AclClass {");
-        str.append("id=").append(id);
-        str.append(", clazz=").append(clazz).append('}');
-        return str.toString();
-    }
 }

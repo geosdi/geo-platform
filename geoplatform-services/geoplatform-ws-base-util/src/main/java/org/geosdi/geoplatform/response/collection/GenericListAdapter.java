@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.response.collection;
 
-import java.io.Serializable;
-import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -48,6 +48,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class GenericListAdapter<T> implements Serializable {
 
     private static final long serialVersionUID = -9002627076906911672L;
+    //
     protected List<T> list;
 
     public GenericListAdapter() {

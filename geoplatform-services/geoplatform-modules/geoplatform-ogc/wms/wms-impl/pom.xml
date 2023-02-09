@@ -55,8 +55,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        
-        
+
         <!-- APACHE COMMONS -->
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -75,13 +74,11 @@
         <!-- =========================================================== -->
         <!-- ======================== GUAVA =========================== -->
         <!-- =========================================================== -->
-            
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>          
         </dependency>
             
-
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -164,9 +161,12 @@
             <artifactId>cglib-nodep</artifactId>
         </dependency>
 
+        <!-- =========================================================== -->
+        <!-- JAKARTA SERVLET -->
+        <!-- =========================================================== -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
 

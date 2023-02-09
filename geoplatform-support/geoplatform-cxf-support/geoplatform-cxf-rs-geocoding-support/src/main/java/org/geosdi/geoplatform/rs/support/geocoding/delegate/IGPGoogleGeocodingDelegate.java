@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.rs.support.geocoding.delegate;
 
+import jakarta.ws.rs.core.Response;
 import org.geosdi.geoplatform.rs.support.geocoding.response.IGPGeocodingResult;
 import org.geosdi.geoplatform.rs.support.request.GPGeocodingAddressRequest;
 import org.geosdi.geoplatform.rs.support.request.GPRevertGeocodingRequest;
 
 import javax.annotation.Nonnull;
-import javax.ws.rs.core.Response;
 
 import static javax.annotation.meta.When.NEVER;
 

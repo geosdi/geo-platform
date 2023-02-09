@@ -35,7 +35,8 @@
  */
 package org.geosdi.geoplatform.services.rs.config.converter;
 
-import javax.ws.rs.ext.ParamConverter;
+import jakarta.ws.rs.ext.ParamConverter;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Pattern;

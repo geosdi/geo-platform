@@ -38,12 +38,13 @@ package org.geosdi.geoplatform.core.model;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlSeeAlso;
@@ -74,8 +75,7 @@ import java.util.List;
         @Index(columnList = "email_address", name = "USER_EMAIL_INDEX")
 })
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "gp_account_type",
-        discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "gp_account_type", discriminatorType = DiscriminatorType.STRING)
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "account")
 @Cacheable
 public abstract class GPAccount implements Serializable {
@@ -86,9 +86,15 @@ public abstract class GPAccount implements Serializable {
     private static final long serialVersionUID = -5273811518496727023L;
     //
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "GP_ACCOUNT_SEQ")
-    @SequenceGenerator(name = "GP_ACCOUNT_SEQ", sequenceName = "GP_ACCOUNT_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gp_account_generator")
+    @GenericGenerator(name = "gp_account_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "GP_ACCOUNT_SEQ"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "50"),
+                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
+            }
+    )
     private Long id;
     //
     @Column(name = "is_enabled", nullable = false)

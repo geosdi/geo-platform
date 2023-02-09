@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.support.quartz.task;
 
+import jakarta.annotation.PostConstruct;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.support.quartz.task.repository.GPTaskRepository;
 import org.quartz.*;
 import org.slf4j.Logger;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -67,12 +67,10 @@ public abstract class GPBaseJobTask implements JobTask {
         boolean unscheduled = false;
         try {
             unscheduled = scheduler.unscheduleJob(triggerKey);
-            logger.debug("\n\n#################Unscheduling Trigger : {}\n",
-                    triggerKey);
+            logger.debug("\n\n#################Unscheduling Trigger : {}\n", triggerKey);
         } catch (SchedulerException se) {
             se.printStackTrace();
-            logger.error("\n@@@@@@@@@@@@@@@@@@@@@@SchedulerException : "
-                    + "{} - for Trigger : {}", se, triggerKey);
+            logger.error("\n@@@@@@@@@@@@@@@@@@@@@@SchedulerException : {} - for Trigger : {}", se, triggerKey);
         }
         return unscheduled;
     }
@@ -85,17 +83,14 @@ public abstract class GPBaseJobTask implements JobTask {
      */
     protected final Boolean unscheduleJobs(Scheduler scheduler, List<TriggerKey> triggerKeys) throws Exception {
         checkArgument(scheduler != null, "The Parameter Scheduler must not be null.");
-        checkArgument(((triggerKeys != null) && !(triggerKeys.isEmpty())),
-                "The Parameter TriggerKeys must not be null or Emty.");
+        checkArgument(((triggerKeys != null) && !(triggerKeys.isEmpty())), "The Parameter TriggerKeys must not be null or Emty.");
         boolean unscheduled = false;
         try {
             unscheduled = scheduler.unscheduleJobs(triggerKeys);
-            logger.debug("\n\n#################Unscheduling Triggers : {}\n",
-                    triggerKeys);
+            logger.debug("\n\n#################Unscheduling Triggers : {}\n", triggerKeys);
         } catch (SchedulerException se) {
             se.printStackTrace();
-            logger.error("\n@@@@@@@@@@@@@@@@@@@@@@SchedulerException : "
-                    + "{}", se);
+            logger.error("\n@@@@@@@@@@@@@@@@@@@@@@SchedulerException : {}", se);
         }
         return unscheduled;
     }
@@ -110,12 +105,10 @@ public abstract class GPBaseJobTask implements JobTask {
         checkArgument(trigger != null, "The Parameter Trigger must not be null.");
         try {
             scheduler.scheduleJob(trigger);
-            logger.debug("\n\n#####################Scheduling Trigger : "
-                    + "{}\n", trigger.getKey());
+            logger.debug("\n\n#####################Scheduling Trigger : {}\n", trigger.getKey());
         } catch (SchedulerException se) {
             se.printStackTrace();
-            logger.error("\n@@@@@@@@@@@@@@@@@@@@@@SchedulerException : "
-                    + "{} - for Trigger : {}", se, trigger.getKey());
+            logger.error("\n@@@@@@@@@@@@@@@@@@@@@@SchedulerException : {} - for Trigger : {}", se, trigger.getKey());
         }
     }
 
@@ -131,12 +124,10 @@ public abstract class GPBaseJobTask implements JobTask {
         checkArgument(trigger != null, "The Parameter Trigger must not be null.");
         try {
             scheduler.scheduleJob(jobDetail, trigger);
-            logger.debug("\n\n#####################Scheduling JobDetail : {} "
-                    + "with Trigger : {}\n", jobDetail, trigger.getKey());
+            logger.debug("\n\n#####################Scheduling JobDetail : {} with Trigger : {}\n", jobDetail, trigger.getKey());
         } catch (SchedulerException se) {
             se.printStackTrace();
-            logger.error("\n@@@@@@@@@@@@@@@@@@@@@@SchedulerException : "
-                    + "{} - for Trigger : {}", se, trigger.getKey());
+            logger.error("\n@@@@@@@@@@@@@@@@@@@@@@SchedulerException : {} - for Trigger : {}", se, trigger.getKey());
         }
     }
 
@@ -147,20 +138,16 @@ public abstract class GPBaseJobTask implements JobTask {
      * @param replace
      * @throws Exception
      */
-    protected final void scheduleJob(Scheduler scheduler, JobDetail jobDetail, Set<? extends Trigger> triggersForJob,
-            boolean replace) throws Exception {
+    protected final void scheduleJob(Scheduler scheduler, JobDetail jobDetail, Set<? extends Trigger> triggersForJob, boolean replace) throws Exception {
         checkArgument(scheduler != null, "The Parameter Scheduler must not be null.");
         checkArgument(jobDetail != null, "The Parameter JobDetail must not be null.");
-        checkArgument(((triggersForJob != null) && !(triggersForJob.isEmpty())),
-                "The Parameter TriggersForJob must not be null and not be Empty.");
+        checkArgument(((triggersForJob != null) && !(triggersForJob.isEmpty())), "The Parameter TriggersForJob must not be null and not be Empty.");
         try {
             scheduler.scheduleJob(jobDetail, triggersForJob, replace);
-            logger.debug("\n\n#####################Scheduling JobDetail : {} "
-                    + "with Triggers Set : {}\n", jobDetail, triggersForJob);
+            logger.debug("\n\n#####################Scheduling JobDetail : {} with Triggers Set : {}\n", jobDetail, triggersForJob);
         } catch (SchedulerException se) {
             se.printStackTrace();
-            logger.error("\n@@@@@@@@@@@@@@@@@@@@@@SchedulerException : "
-                    + "{} - for JobDetail : {}", se, jobDetail);
+            logger.error("\n@@@@@@@@@@@@@@@@@@@@@@SchedulerException : {} - for JobDetail : {}", se, jobDetail);
         }
     }
 
@@ -170,15 +157,12 @@ public abstract class GPBaseJobTask implements JobTask {
      * @param replace
      * @throws Exception
      */
-    protected final void scheduleJobs(Scheduler scheduler, Map<JobDetail, Set<? extends Trigger>> triggersAndJobs,
-            boolean replace) throws Exception {
+    protected final void scheduleJobs(Scheduler scheduler, Map<JobDetail, Set<? extends Trigger>> triggersAndJobs, boolean replace) throws Exception {
         checkArgument(scheduler != null, "The Parameter Scheduler must not be null.");
-        checkArgument(((triggersAndJobs != null) && !(triggersAndJobs.isEmpty())),
-                "The Parameter TriggersForJob must not be null and not be Empty.");
+        checkArgument(((triggersAndJobs != null) && !(triggersAndJobs.isEmpty())), "The Parameter TriggersForJob must not be null and not be Empty.");
         try {
             scheduler.scheduleJobs(triggersAndJobs, replace);
-            logger.debug("\n\n####################Scheduling triggersAndJobs: "
-                    + "{}\n", triggersAndJobs);
+            logger.debug("\n\n####################Scheduling triggersAndJobs: {}\n", triggersAndJobs);
         } catch (SchedulerException se) {
             se.printStackTrace();
             logger.error("\n@@@@@@@@@@@@@@@@@@@@@@SchedulerException : "

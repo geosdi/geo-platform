@@ -35,15 +35,17 @@
  */
 package org.geosdi.geoplatform.support.mail.spring.session;
 
-import org.geosdi.geoplatform.support.mail.configuration.properties.JavaMailProp;
+import jakarta.mail.Authenticator;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Session;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.mail.Authenticator;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
 import java.util.Properties;
+
+import static org.geosdi.geoplatform.support.mail.configuration.properties.JavaMailProp.MAIL_PASSWORD;
+import static org.geosdi.geoplatform.support.mail.configuration.properties.JavaMailProp.MAIL_USER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -58,19 +60,19 @@ class GPMailSessionConfig {
      */
     @Bean(name = "gpMailSpringSession")
     public static Session gpMailSpringSession(@Qualifier(value = "gpJavaMailProperties") Properties gpJavaMailProperties) {
-        return Session.getInstance(gpJavaMailProperties, new GPMailAuthenticatorSupport(gpJavaMailProperties
-                .getProperty(JavaMailProp.MAIL_USER.toString()), gpJavaMailProperties
-                .getProperty(JavaMailProp.MAIL_PASSWORD.toString())));
+        return Session.getInstance(gpJavaMailProperties, new GPMailAuthenticatorSupport(gpJavaMailProperties.getProperty(MAIL_USER.toString()),
+                        gpJavaMailProperties.getProperty(MAIL_PASSWORD.toString())));
     }
 
-    /**
-     *
-     */
     static class GPMailAuthenticatorSupport extends Authenticator {
 
         private final String userName;
         private final String password;
 
+        /**
+         * @param theUserName
+         * @param thePassword
+         */
         public GPMailAuthenticatorSupport(String theUserName, String thePassword) {
             this.userName = theUserName;
             this.password = thePassword;

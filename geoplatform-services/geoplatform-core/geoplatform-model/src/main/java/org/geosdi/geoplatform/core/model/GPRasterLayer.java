@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.core.model;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -43,7 +44,6 @@ import org.geosdi.geoplatform.core.model.temporal.GPTemporalLayer;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
@@ -60,7 +60,10 @@ import static org.geosdi.geoplatform.gui.shared.GPLayerType.WMS;
 @XmlRootElement(name = "RasterLayer")
 @XmlAccessorType(FIELD)
 @Entity(name = "RasterLayer")
-@Table(name = "gp_raster_layer", indexes = {@Index(columnList = "project_id", name = "RASTER_PROJECT_ID_INDEX")})
+@Table(name = "gp_raster_layer")
+@PrimaryKeyJoinColumn(name = "gp_layer_id")
+@OnDelete(action = OnDeleteAction.CASCADE)
+//@DiscriminatorValue("GPRasterLayer")
 @ToString(callSuper = true)
 public class GPRasterLayer extends GPLayer implements IGPRasterLayer {
 
@@ -98,18 +101,6 @@ public class GPRasterLayer extends GPLayer implements IGPRasterLayer {
     @Setter
     @Embedded
     private GPLayerAttribution layerAttribution;
-    //
-    @Getter
-    @Setter
-    @ManyToOne(optional = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private GPFolder folder;
-    //
-    @Getter
-    @Setter
-    @ManyToOne(optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private GPProject project;
 
     public GPRasterLayer() {
         super.setLayerType(WMS);

@@ -36,11 +36,11 @@
 package org.geosdi.geoplatform.responce;
 
 import com.google.common.collect.Lists;
-import java.util.List;
 import org.geosdi.geoplatform.core.model.GPBBox;
 
+import java.util.List;
+
 /**
- *
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */

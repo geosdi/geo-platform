@@ -1,0 +1,22 @@
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.0">
+    <persistence-unit name="geoplatform-persistence-layer-test" transaction-type="RESOURCE_LOCAL">
+        <description>GeoPlatform Hibernate EntityManager Demo</description>
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <properties>
+            <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver" />
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:persistence;DB_CLOSE_DELAY=-1" />
+            <property name="jakarta.persistence.jdbc.user" value="sa" />
+            <property name="jakarta.persistence.jdbc.password" value="" />
+            <property name="connection.pool_size" value="1"/>
+            <!-- Select our SQL dialect -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <!-- Drop and re-create the database schema on startup -->
+            <property name="hibernate.hbm2ddl.auto" value="drop-and-create"/>
+            <!-- Echo the SQL to stdout -->
+            <property name="hibernate.show_sql" value="true"/>
+            <!-- Set the current session context -->
+            <property name="current_session_context_class" value="thread"/>
+        </properties>
+    </persistence-unit>
+</persistence>

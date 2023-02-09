@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.persistence.configuration.basic;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.persistence.configuration.basic.strategy.PersistenceHibernateStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.Map;
 import java.util.Properties;
 

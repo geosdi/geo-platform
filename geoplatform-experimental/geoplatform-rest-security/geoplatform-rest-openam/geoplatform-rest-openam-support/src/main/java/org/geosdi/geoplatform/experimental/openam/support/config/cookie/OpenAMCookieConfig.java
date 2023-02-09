@@ -39,7 +39,6 @@ import org.geosdi.geoplatform.experimental.openam.api.connector.GPOpenAMConnecto
 import org.geosdi.geoplatform.experimental.openam.api.connector.cookie.IOpenAMCookieInfo;
 import org.geosdi.geoplatform.experimental.openam.support.connector.settings.cookie.OpenAMCookieInfo;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -50,10 +49,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 class OpenAMCookieConfig {
 
+    /**
+     * @param openAMConnector
+     * @return {@link IOpenAMCookieInfo}
+     * @throws Exception
+     */
     @Bean
-    @Required
-    public static IOpenAMCookieInfo openAMCookieInfo(@Qualifier(value = "openAMConnector") GPOpenAMConnector openAMConnector)
-            throws Exception {
+    public static IOpenAMCookieInfo openAMCookieInfo(@Qualifier(value = "openAMConnector") GPOpenAMConnector openAMConnector) throws Exception {
         IOpenAMCookieInfo openAMCookieInfo = new OpenAMCookieInfo(openAMConnector.serverInfo().getCookieName());
         openAMConnector.registerOpenAMCookieInfo(openAMCookieInfo);
         return openAMCookieInfo;

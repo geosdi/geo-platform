@@ -48,6 +48,7 @@ import java.io.StringReader;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -59,8 +60,7 @@ public class PlaneForSaleJacksonXmlMapperTest {
 
     private static final Logger logger = LoggerFactory.getLogger(PlaneForSaleJacksonXmlMapperTest.class);
     //
-    private static final GPJacksonXmlMapper<PlaneForSale> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(PlaneForSale.class,
-            new GPJacksonXmlSupport());
+    private static final GPJacksonXmlMapper<PlaneForSale> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(PlaneForSale.class, new GPJacksonXmlSupport(JAXB));
 
     @Test
     public void a_readPlaneForSaleFromXmlStringTest() throws Exception {

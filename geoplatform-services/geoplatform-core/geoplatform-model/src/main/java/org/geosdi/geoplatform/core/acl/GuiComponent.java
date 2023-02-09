@@ -35,10 +35,13 @@
  */
 package org.geosdi.geoplatform.core.acl;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -48,12 +51,23 @@ import javax.persistence.*;
         indexes = {
                 @Index(columnList = "component_id", name = "GUI_COMPONENT_ID_INDEX")
         })
+@Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "gui_component")
+@Getter
+@Setter
+@ToString
 public class GuiComponent {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GUI_COMPONENT_SEQ")
-    @SequenceGenerator(name = "GUI_COMPONENT_SEQ", sequenceName = "GUI_COMPONENT_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gp_gui_component_generator")
+    @GenericGenerator(name = "gp_gui_component_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "GUI_COMPONENT_SEQ"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "50"),
+                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
+            }
+    )
     private Long id;
     // The ID (string type) of the GUI Component
     @Column(name = "component_id", nullable = false, unique = true)
@@ -64,46 +78,5 @@ public class GuiComponent {
 
     public GuiComponent(String componentId) {
         this.componentId = componentId;
-    }
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the componentId
-     */
-    public String getComponentId() {
-        return componentId;
-    }
-
-    /**
-     * @param componentId the componentId to set
-     */
-    public void setComponentId(String componentId) {
-        this.componentId = componentId;
-    }
-
-    /**
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        StringBuilder str = new StringBuilder("GuiComponent {");
-        str.append("id=").append(id);
-        str.append(", componentId=").append(componentId).append('}');
-        return str.toString();
     }
 }

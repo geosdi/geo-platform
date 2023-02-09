@@ -297,6 +297,13 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-jakarta-dependency</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.geosdi</groupId>
@@ -532,16 +539,6 @@
             </dependency>
 
             <!-- =========================================================== -->
-            <!-- ========================== REST =========================== -->
-            <!-- =========================================================== -->
-
-            <dependency>
-                <groupId>javax.ws.rs</groupId>
-                <artifactId>javax.ws.rs-api</artifactId>
-                <version>${javax.ws.rs-api-version}</version>
-            </dependency>
-
-            <!-- =========================================================== -->
             <!-- ======================= ACTIVE MQ ========================= -->
             <!-- =========================================================== -->
 
@@ -762,20 +759,15 @@
                 <version>1.6.2</version>
             </dependency>
 
-            <dependency>
-                <groupId>javax.xml.ws</groupId>
-                <artifactId>jaxws-api</artifactId>
-                <version>2.3.0</version>
-            </dependency>
-
             <!-- =========================================================== -->
-            <!-- JAXB -->
+            <!-- ========================== JAXB =========================== -->
             <!-- =========================================================== -->
             <dependency>
                 <groupId>javax.xml.bind</groupId>
                 <artifactId>jaxb-api</artifactId>
                 <version>2.3.1</version>
             </dependency>
+
             <dependency>
                 <groupId>com.sun.xml.bind</groupId>
                 <artifactId>jaxb-core</artifactId>
@@ -788,21 +780,15 @@
             </dependency>
 
             <dependency>
-                <groupId>com.sun.activation</groupId>
-                <artifactId>javax.activation</artifactId>
-                <version>1.2.0</version>
-            </dependency>
-
-            <dependency>
-                <groupId>javax.jws</groupId>
-                <artifactId>javax.jws-api</artifactId>
-                <version>1.1</version>
-            </dependency>
-
-            <dependency>
                 <groupId>javax.annotation</groupId>
                 <artifactId>javax.annotation-api</artifactId>
                 <version>1.3.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.sun.activation</groupId>
+                <artifactId>javax.activation</artifactId>
+                <version>1.2.0</version>
             </dependency>
 
             <!-- =========================================================== -->
@@ -1019,6 +1005,12 @@
             </dependency>
 
             <dependency>
+                <groupId>javax.ws.rs</groupId>
+                <artifactId>javax.ws.rs-api</artifactId>
+                <version>${javax.ws.rs-api-version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>name.pehl</groupId>
                 <artifactId>piriti-user</artifactId>
                 <version>0.10</version>
@@ -1206,7 +1198,7 @@
                         <dependency>
                             <groupId>org.ow2.asm</groupId>
                             <artifactId>asm</artifactId>
-                            <version>9.3</version>
+                            <version>9.4</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -1267,6 +1259,27 @@
             </plugin>
 
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                       <id>enforce-maven</id>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                            <configuration>
+                                <rules>
+                                    <requireMavenVersion>
+                                        <version>3.0.2</version>
+                                    </requireMavenVersion>
+                                </rules>
+                            </configuration>
+                    </execution>
+               </executions>
+            </plugin>
+
+            <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>3.1.0</version>
             </plugin>
@@ -1286,7 +1299,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.18.1</version>
                 <configuration>
-                    <encoding>UTF-8</encoding>
                     <skipTests>false</skipTests>
                     <reportFormat>plain</reportFormat>
                     <argLine>-Xms512m -Xmx1024m</argLine>
@@ -1353,7 +1365,7 @@
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-ftp</artifactId>
-                <version>3.5.2</version>
+                <version>3.5.3</version>
             </extension>
         </extensions>
 
@@ -1488,7 +1500,7 @@
         <jettison>1.4.1</jettison>
         <joda-version>2.12.1</joda-version>
 
-        <javax.ws.rs-api-version>2.1</javax.ws.rs-api-version>
+        <javax.ws.rs-api-version>2.1.1</javax.ws.rs-api-version>
 
         <jibx-version>1.3.3</jibx-version>
 

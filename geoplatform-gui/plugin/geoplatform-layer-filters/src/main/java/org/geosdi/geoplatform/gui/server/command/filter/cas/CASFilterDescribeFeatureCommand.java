@@ -47,12 +47,12 @@ import org.geosdi.geoplatform.responce.LayerAttribute;
 import org.geosdi.geoplatform.services.GPPublisherBasicServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -63,47 +63,41 @@ import java.util.List;
 @Lazy(true)
 @Component(value = "command.filter.cas.CASFilterDescribeFeatureCommand")
 @Profile(value = "gs_cas")
-public class CASFilterDescribeFeatureCommand implements
-        GPCommand<FilterDescribeFeatureRequest, FilterDescribeFeatureResponse> {
+public class CASFilterDescribeFeatureCommand implements GPCommand<FilterDescribeFeatureRequest, FilterDescribeFeatureResponse> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            FilterDescribeFeatureCommand.class);
+    private static final Logger logger = LoggerFactory.getLogger(FilterDescribeFeatureCommand.class);
     //
     private GPPublisherBasicServiceImpl casPublisherService;
 
+    /**
+     * @param request
+     * @param httpServletRequest
+     * @return {@link FilterDescribeFeatureResponse}
+     */
     @Override
-    public FilterDescribeFeatureResponse execute(
-            FilterDescribeFeatureRequest request,
-            HttpServletRequest httpServletRequest) {
-
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
+    public FilterDescribeFeatureResponse execute(FilterDescribeFeatureRequest request, HttpServletRequest httpServletRequest) {
+        logger.debug("#####################Executing {} Command", this.getClass().getSimpleName());
         List<GPLayerAttributes> attributeList = Lists.<GPLayerAttributes>newArrayList();
         try {
-            List<LayerAttribute> result = this.casPublisherService.describeFeatureType(
-                    request.getLayerName()).getLayerAttributes();
+            List<LayerAttribute> result = this.casPublisherService.describeFeatureType(request.getLayerName()).getLayerAttributes();
             for (LayerAttribute layerAttribute : result) {
                 GPLayerAttributes gpLayerAttributes = new GPLayerAttributes();
                 gpLayerAttributes.setAttributeType(layerAttribute.getType());
-                gpLayerAttributes.setAttributeValue(
-                        layerAttribute.getValue());
+                gpLayerAttributes.setAttributeValue(layerAttribute.getValue());
                 attributeList.add(gpLayerAttributes);
             }
         } catch (ResourceNotFoundFault rnff) {
             throw new GeoPlatformException(rnff.getMessage());
         }
-        logger.debug("#################### Found {} ", attributeList);
-
+        logger.debug("####################Found {} ", attributeList);
         return new FilterDescribeFeatureResponse(Lists.newArrayList(attributeList));
     }
 
     /**
      * @param casPublisherService the geoPlatformServiceClient to set
      */
-    @Resource
-    public void setCasPublisherService(
-            @Qualifier("casPublisherService") GPPublisherBasicServiceImpl casPublisherService) {
+    @Autowired
+    public void setCasPublisherService(@Qualifier("casPublisherService") GPPublisherBasicServiceImpl casPublisherService) {
         this.casPublisherService = casPublisherService;
     }
 }

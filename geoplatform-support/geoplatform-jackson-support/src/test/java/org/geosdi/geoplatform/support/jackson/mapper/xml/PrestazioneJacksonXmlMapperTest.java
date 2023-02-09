@@ -57,6 +57,7 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.iterate;
 import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -67,8 +68,7 @@ public class PrestazioneJacksonXmlMapperTest {
 
     private static final Logger logger = LoggerFactory.getLogger(PrestazioneJacksonXmlMapperTest.class);
     //
-    private static final GPJacksonXmlMapper<Prestazione> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(Prestazione.class,
-            new GPJacksonXmlSupport());
+    private static final GPJacksonXmlMapper<Prestazione> GP_JACKSON_XML_MAPPER = new GPBaseJacksonXmlMapper<>(Prestazione.class, new GPJacksonXmlSupport(JAXB));
 
     @Test
     @Order(value = 0)

@@ -35,10 +35,9 @@
  */
 package org.geosdi.geoplatform.services;
 
-import java.util.List;
-import javax.jws.WebParam;
-import javax.jws.WebResult;
-import javax.jws.WebService;
+import jakarta.jws.WebParam;
+import jakarta.jws.WebResult;
+import jakarta.jws.WebService;
 import org.codehaus.jra.Delete;
 import org.codehaus.jra.Get;
 import org.codehaus.jra.Post;
@@ -53,6 +52,8 @@ import org.geosdi.geoplatform.responce.FullRecordDTO;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 
+import java.util.List;
+
 /**
  * Public interface to define the service operations mapped via REST using CXF
  * framework.
@@ -61,8 +62,7 @@ import org.geosdi.geoplatform.responce.SummaryRecordDTO;
  * @email michele.santomauro@geosdi.org
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@WebService(name = "GeoPlatformCSWService",
-            targetNamespace = "http://csw.services.geo-platform.org/")
+@WebService(name = "GeoPlatformCSWService", targetNamespace = "http://csw.services.geo-platform.org/")
 public interface GeoPlatformCSWService {
 
     //<editor-fold defaultstate="collapsed" desc="CSW Server">

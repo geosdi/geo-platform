@@ -65,23 +65,23 @@
         <!-- ======================== HIBERNATE ======================== -->
         <!-- =========================================================== -->
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
         </dependency>
 
         <!-- =========================================================== -->
-        <!-- =================  JAVAX PERSISTENCE API=================== -->
+        <!-- ===============  JAKARTA PERSISTENCE API ================== -->
         <!-- =========================================================== -->
-        <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>javax.persistence-api</artifactId>
+        <dependency>   
+             <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>                       
         </dependency>
 
         <!-- =========================================================== -->
         <!-- ==================== HIBERNATE SPATIAL ==================== -->
         <!-- =========================================================== -->
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-spatial</artifactId>
         </dependency>
 
@@ -94,8 +94,8 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
-        
     </dependencies>
 
     <build>
@@ -113,5 +113,4 @@
 
         </plugins>
     </build>
-
 </project>

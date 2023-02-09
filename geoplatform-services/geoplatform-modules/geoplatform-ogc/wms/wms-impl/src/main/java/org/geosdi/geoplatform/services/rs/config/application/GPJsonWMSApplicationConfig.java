@@ -35,8 +35,8 @@
  */
 package org.geosdi.geoplatform.services.rs.config.application;
 
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+import jakarta.ws.rs.ApplicationPath;
+import jakarta.ws.rs.core.Application;
 import org.geosdi.geoplatform.configurator.bootstrap.cxf.Rest;
 import org.geosdi.geoplatform.services.rs.path.GPServiceRSPathConfig;
 import org.springframework.context.annotation.Bean;

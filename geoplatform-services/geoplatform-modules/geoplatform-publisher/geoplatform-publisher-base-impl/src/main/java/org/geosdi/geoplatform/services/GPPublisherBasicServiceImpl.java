@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.services;
 
 import com.google.common.collect.Lists;
+import jakarta.annotation.Resource;
 import org.apache.commons.io.FilenameUtils;
 import org.geosdi.geoplatform.connector.geoserver.model.configure.GPGeoserverParameterConfigure;
 import org.geosdi.geoplatform.connector.geoserver.model.coveragestores.GeoserverUpdateCoverageStoreBody;
@@ -95,7 +96,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

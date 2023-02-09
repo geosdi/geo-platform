@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.persistence.demo.dao.hibernate;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
 import org.geosdi.geoplatform.persistence.dao.hibernate.GPAbstractHibernateDAO;
 import org.geosdi.geoplatform.persistence.demo.dao.ICarPartDAO;
@@ -43,17 +46,13 @@ import org.hibernate.HibernateException;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Repository(value = "hibernateCarPartDAO")
 @Profile(value = "hibernate")
-public class HibernateCarPartDAO extends GPAbstractHibernateDAO<CarPart, Long> implements ICarPartDAO {
+class HibernateCarPartDAO extends GPAbstractHibernateDAO<CarPart, String> implements ICarPartDAO {
 
     HibernateCarPartDAO() {
         super(CarPart.class);

@@ -35,7 +35,8 @@
  */
 package org.geosdi.geoplatform.core.dao.impl;
 
-import com.google.common.collect.Lists;
+import jakarta.persistence.Query;
+import jakarta.persistence.criteria.*;
 import org.geosdi.geoplatform.core.dao.GPAccountDAO;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPApplication;
@@ -45,11 +46,10 @@ import org.geosdi.geoplatform.persistence.dao.jpa.GPAbstractJpaDAO;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Query;
-import javax.persistence.criteria.*;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.Lists.newArrayList;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
@@ -222,7 +222,7 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
             Root<GPAccount> root = criteriaQuery.from(this.persistentClass);
             Root<GPUser> userRoot = builder.treat(root, GPUser.class);
             criteriaQuery.select(root);
-            List<Predicate> predicates = Lists.newArrayList();
+            List<Predicate> predicates = newArrayList();
             if ((nameLike != null) && !(nameLike.trim().isEmpty())) {
                 predicates.add(builder.like(builder.lower(userRoot.get("name")), nameLike.toLowerCase()));
             }
@@ -261,7 +261,7 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
             Root<GPAccount> root = criteriaQuery.from(this.persistentClass);
             Root<GPUser> userRoot = builder.treat(root, GPUser.class);
             criteriaQuery.select(root);
-            List<Predicate> predicates = Lists.newArrayList();
+            List<Predicate> predicates = newArrayList();
             if ((nameLike != null) && !(nameLike.trim().isEmpty()))
                 predicates.add(builder.like(builder.lower(userRoot.get("username")), nameLike.toLowerCase()));
             predicates.add(builder.equal(root.get("enabled"), TRUE));
@@ -320,7 +320,7 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
             Root<GPAccount> root = criteriaQuery.from(this.persistentClass);
             Root<GPUser> userRoot = builder.treat(root, GPUser.class);
             criteriaQuery.select(builder.count(root));
-            List<Predicate> predicates = Lists.newArrayList();
+            List<Predicate> predicates = newArrayList();
             predicates.add(builder.equal(root.join("organization").get("name"), organizationName));
             predicates.add(builder.isNotNull(userRoot.get("name")));
             if ((nameLike != null) && !(nameLike.isEmpty())) {

@@ -41,11 +41,11 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:oxm="http://www.springframework.org/schema/oxm"
        xsi:schemaLocation="http://www.springframework.org/schema/beans 
-           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
            http://www.springframework.org/schema/oxm
-           http://www.springframework.org/schema/oxm/spring-oxm-3.2.xsd
+           http://www.springframework.org/schema/oxm/spring-oxm-4.3.xsd
            http://www.springframework.org/schema/context
-           http://www.springframework.org/schema/context/spring-context-3.2.xsd"
+           http://www.springframework.org/schema/context/spring-context-4.3.xsd"
        default-autowire="byName">
 
     <context:annotation-config/>
@@ -54,8 +54,8 @@
         <constructor-arg value="mapping.xml"/>
     </bean>
 
-    <bean id="jibx" class="org.geosdi.geoplatform.oxm.jibx.GPJibxMarshaller">
-        <property name="marshaller" ref="jibxMarshaller"/>
+    <bean id="jibx" class="org.geosdi.geoplatform.oxm.jibx.GPJibxBindingContextImpl">
+        <constructor-arg index="0" value="org.geosdi.geoplatform.mock.ClassToXMLMap"/>
     </bean>
 
     <bean id="jax" class="org.geosdi.geoplatform.oxm.jaxb.GPJaxbMarshaller">
@@ -77,6 +77,6 @@
 
     <bean id="classToXmlTypePermission" class="org.geosdi.geoplatform.oxm.ClassToXmlTypePermission" />
 
-    <oxm:jibx-marshaller id="jibxMarshaller" target-class="org.geosdi.geoplatform.mock.ClassToXMLMap"/>
+<!--    <oxm:jibx-marshaller id="jibxMarshaller" target-class="org.geosdi.geoplatform.mock.ClassToXMLMap"/>-->
 
 </beans>

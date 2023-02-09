@@ -35,10 +35,8 @@
  */
 package org.geosdi.geoplatform.oxm.jaxb;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.Reader;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.sax.SAXResult;
@@ -46,10 +44,12 @@ import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stax.StAXResult;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.Reader;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -58,13 +58,7 @@ public class GPJaxbMarshaller implements GenericJaxbMarshaller {
     private Jaxb2Marshaller marshaller;
 
     @Override
-    public void setMarshaller(Jaxb2Marshaller theMarshaller) {
-        this.marshaller = theMarshaller;
-    }
-
-    @Override
-    public void marshal(Object jaxbElement, java.io.OutputStream os)
-            throws IOException {
+    public void marshal(Object jaxbElement, java.io.OutputStream os) throws IOException {
         this.marshaller.marshal(jaxbElement, new StreamResult(os));
     }
 
@@ -74,41 +68,33 @@ public class GPJaxbMarshaller implements GenericJaxbMarshaller {
     }
 
     @Override
-    public void marshal(Object jaxbElement, java.io.Writer writer)
-            throws IOException {
+    public void marshal(Object jaxbElement, java.io.Writer writer) throws IOException {
         this.marshaller.marshal(jaxbElement, new StreamResult(writer));
     }
 
     @Override
-    public void marshal(Object jaxbElement, org.xml.sax.ContentHandler handler)
-            throws IOException {
+    public void marshal(Object jaxbElement, org.xml.sax.ContentHandler handler) throws IOException {
         this.marshaller.marshal(jaxbElement, new SAXResult(handler));
     }
 
     @Override
-    public void marshal(Object jaxbElement, org.w3c.dom.Node node)
-            throws IOException {
+    public void marshal(Object jaxbElement, org.w3c.dom.Node node) throws IOException {
         this.marshaller.marshal(jaxbElement, new DOMResult(node));
     }
 
     @Override
-    public void marshal(Object jaxbElement,
-            javax.xml.stream.XMLStreamWriter writer)
-            throws IOException {
+    public void marshal(Object jaxbElement, javax.xml.stream.XMLStreamWriter writer) throws IOException {
         this.marshaller.marshal(jaxbElement, new StAXResult(writer));
     }
 
     @Override
-    public void marshal(Object jaxbElement,
-            javax.xml.stream.XMLEventWriter writer)
-            throws IOException {
+    public void marshal(Object jaxbElement, javax.xml.stream.XMLEventWriter writer) throws IOException {
         this.marshaller.marshal(jaxbElement, new StAXResult(writer));
     }
 
     @Override
     public Object unmarshal(java.io.File f) throws IOException {
-        return this.marshaller.unmarshal(
-                new StreamSource(new FileInputStream(f)));
+        return this.marshaller.unmarshal(new StreamSource(new FileInputStream(f)));
     }
 
     @Override
@@ -139,9 +125,15 @@ public class GPJaxbMarshaller implements GenericJaxbMarshaller {
     @Override
     public void afterPropertiesSet() throws Exception {
         if (this.marshaller == null) {
-            throw new IllegalArgumentException("The property marshaller "
-                    + "must not be null");
+            throw new IllegalArgumentException("The property marshaller must not be null");
         }
     }
 
+    /**
+     * @param theMarshaller
+     */
+    @Override
+    public void setMarshaller(Jaxb2Marshaller theMarshaller) {
+        this.marshaller = theMarshaller;
+    }
 }

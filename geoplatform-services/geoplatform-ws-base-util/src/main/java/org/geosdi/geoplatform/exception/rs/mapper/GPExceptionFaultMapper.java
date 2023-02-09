@@ -35,17 +35,18 @@
  */
 package org.geosdi.geoplatform.exception.rs.mapper;
 
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.ext.ExceptionMapper;
+import jakarta.ws.rs.ext.Provider;
 import org.geosdi.geoplatform.exception.GPExceptionFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.exception.rs.GPRestExceptionMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.ExceptionMapper;
-import javax.ws.rs.ext.Provider;
+import static jakarta.ws.rs.core.Response.status;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -55,18 +56,12 @@ import javax.ws.rs.ext.Provider;
 @Produces(MediaType.APPLICATION_JSON)
 public class GPExceptionFaultMapper implements ExceptionMapper<GPExceptionFault> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            GPExceptionFaultMapper.class);
+    private static final Logger logger = LoggerFactory.getLogger(GPExceptionFaultMapper.class);
 
     @Override
     public Response toResponse(GPExceptionFault exception) {
-        logger.warn("@@@@@@@@@@@@@@@@@@@@@ {GPExceptionFault "
-                + ": " + exception + "}\n");
-
-        return Response.status(exception.status()).entity(new GPRestExceptionMessage(
-                exception.getExceptionType(), exception.getMessage(),
-                (exception instanceof ResourceNotFoundFault)
-                        ? ((ResourceNotFoundFault) exception).getId()
-                        : null)).type(MediaType.APPLICATION_JSON_TYPE).build();
+        logger.warn("@@@@@@@@@@@@@@@@@@@@@ {GPExceptionFault : " + exception + "}\n");
+        return status(exception.status()).entity(new GPRestExceptionMessage(exception.getExceptionType(), exception.getMessage(),
+                (exception instanceof ResourceNotFoundFault) ? ((ResourceNotFoundFault) exception).getId() : null)).type(MediaType.APPLICATION_JSON_TYPE).build();
     }
 }

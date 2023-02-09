@@ -58,7 +58,7 @@ public class GenericMapAdapter<K, V> extends XmlAdapter<GenericMapType<K, V>, Ma
 
     /**
      * @param v
-     * @return {@link GenericMapAdapter<K, V>}
+     * @return {@link GenericMapType<K, V>}
      * @throws Exception
      */
     @Override

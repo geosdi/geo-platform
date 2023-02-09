@@ -58,11 +58,10 @@ import javax.servlet.http.HttpServletRequest;
 @Lazy(true)
 @Profile(value = "cas")
 @Component(value = "command.session.cas.CASInvalidateSessionCommand")
-public class CASInvalidateSessionCommand implements
-        GPCommand<InvalidateSessionRequest, CASInvalidateSessionResponse> {
+public class CASInvalidateSessionCommand implements GPCommand<InvalidateSessionRequest, CASInvalidateSessionResponse> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            BasicLoginCommand.class);
+    private static final Logger logger = LoggerFactory.getLogger(BasicLoginCommand.class);
+    //
     private @Value("casProp{cas_logout_url}")
     String casLogoutURL;
     private @Value("casProp{service_url}")
@@ -74,19 +73,13 @@ public class CASInvalidateSessionCommand implements
     private ISecurityService securityService;
 
     @Override
-    public CASInvalidateSessionResponse execute(InvalidateSessionRequest request,
-            HttpServletRequest httpServletRequest) {
-
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
+    public CASInvalidateSessionResponse execute(InvalidateSessionRequest request, HttpServletRequest httpServletRequest) {
+        logger.debug("#####################Executing {} Command", this.getClass().getSimpleName());
         String logoutURL = casLogoutURL;
-
         if (this.isServiceLogout != null && this.isServiceLogout) {
             logoutURL += "?service=" + service_url;
         }
-
         logger.debug("#################### CAS Session Invalidate.");
-
         return new CASInvalidateSessionResponse(logoutURL);
     }
 }

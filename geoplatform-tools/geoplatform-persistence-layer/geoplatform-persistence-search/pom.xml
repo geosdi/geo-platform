@@ -16,7 +16,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>         
-        <hibernate-search-version>6.1.7.Final</hibernate-search-version>
+        <hibernate-search-version>6.2.0.Alpha1</hibernate-search-version>
     </properties>
 
     <dependencies>
@@ -31,7 +31,7 @@
         <!-- =========================================================== -->
         <dependency>
             <groupId>org.hibernate.search</groupId>
-            <artifactId>hibernate-search-mapper-orm</artifactId>
+            <artifactId>hibernate-search-mapper-orm-orm6</artifactId>
             <version>${hibernate-search-version}</version>
         </dependency>
 

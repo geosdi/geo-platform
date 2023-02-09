@@ -36,7 +36,6 @@
 package org.geosdi;
 
 import org.geosdi.geoplatform.core.dao.GPAccountDAO;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,14 +43,15 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import static org.junit.Assert.assertNotNull;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
-    "classpath*:applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml", "classpath*:applicationContext.xml"})
 @ActiveProfiles(profiles = {"dev", "jpa"})
 public class DAOInjectionTest {
     
@@ -60,6 +60,6 @@ public class DAOInjectionTest {
     
     @Test
     public void testInjection() {
-        Assert.assertNotNull(accountDAO);
+        assertNotNull(accountDAO);
     }
 }

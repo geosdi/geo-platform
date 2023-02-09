@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import java.net.URL;
 
 import static org.geosdi.geoplatform.connector.GeoserverVersion.toVersionExceptionMessage;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
@@ -55,7 +56,7 @@ import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEn
  */
 public abstract class GPGeoserverUniqueValuesConnector extends GPGeoserverLayerGroupsConnector implements IGPGeoserverUniqueValuesConnector {
 
-    protected final JacksonSupport emptyJacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
+    protected final JacksonSupport emptyJacksonSupport = new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
             ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
             WRAP_ROOT_VALUE_DISABLE,

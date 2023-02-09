@@ -49,6 +49,7 @@ import java.io.InputStream;
 import java.io.StringReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
@@ -57,7 +58,7 @@ import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEn
  */
 public abstract class GPGeoserverGetConnectorRequest<T, E extends GPGeoserverEmptyResponse<T>, ConnectorRequest extends GPJsonConnectorRequest> extends GPJsonGetConnectorRequest<T, ConnectorRequest> {
 
-    protected static final JacksonSupport emptyJacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
+    protected static final JacksonSupport emptyJacksonSupport = new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE);
     //

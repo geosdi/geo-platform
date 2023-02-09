@@ -37,13 +37,14 @@ package org.geosdi.geoplatform.core.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
+
+import static jakarta.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
  * @author Francesco Izzi - geoSDI
@@ -52,7 +53,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(FIELD)
 @Embeddable
 public class GPBBox implements Serializable {
 

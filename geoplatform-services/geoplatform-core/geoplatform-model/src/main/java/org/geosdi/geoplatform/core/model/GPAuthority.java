@@ -35,26 +35,26 @@
  */
 package org.geosdi.geoplatform.core.model;
 
-import jakarta.persistence.*;
 import jakarta.persistence.Index;
 import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
-import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.*;
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 
+import static jakarta.xml.bind.annotation.XmlAccessType.FIELD;
+
 /**
- * @todo Analyze deletion of accountNaturalID field or account field.
- *
  * @author Francesco Izzi - CNR IMAA - geoSDI Group
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @todo Analyze deletion of accountNaturalID field or account field.
  */
 //@XmlRootElement(name = "Authority")
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(FIELD)
 @Entity(name = "Authority")
 @Table(name = "gp_authority", indexes = {
         @Index(columnList = "account_natural_id", name = "AUTHORITY_ACCOUNT_NATURAL_ID_INDEX")

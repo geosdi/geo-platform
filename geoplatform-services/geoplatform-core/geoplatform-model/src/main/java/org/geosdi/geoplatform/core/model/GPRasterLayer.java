@@ -36,6 +36,8 @@
 package org.geosdi.geoplatform.core.model;
 
 import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -44,14 +46,12 @@ import org.geosdi.geoplatform.core.model.temporal.GPTemporalLayer;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jakarta.xml.bind.annotation.XmlAccessType.FIELD;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
-import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 import static org.geosdi.geoplatform.gui.shared.GPLayerType.WMS;
 
 /**

@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.core.model;
 
+import jakarta.xml.bind.annotation.XmlTransient;
 import org.geosdi.geoplatform.core.model.attribution.GPLayerAttribution;
 import org.geosdi.geoplatform.core.model.temporal.GPTemporalLayer;
 
-import javax.xml.bind.annotation.XmlTransient;
 import java.util.List;
 
 /**

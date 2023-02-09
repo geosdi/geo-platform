@@ -37,12 +37,13 @@ package org.geosdi.geoplatform.core.model.temporal;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import lombok.*;
 import org.geosdi.geoplatform.core.model.temporal.dimension.GPTemporalDimension;
 import org.geosdi.geoplatform.core.model.temporal.extent.GPTemporalExtent;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import static jakarta.xml.bind.annotation.XmlAccessType.FIELD;
+
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -54,7 +55,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @AllArgsConstructor
 @ToString
 @Embeddable
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(FIELD)
 public class GPTemporalLayer implements IGPTemporalLayer {
 
     private static final long serialVersionUID = 4045762262072835884L;

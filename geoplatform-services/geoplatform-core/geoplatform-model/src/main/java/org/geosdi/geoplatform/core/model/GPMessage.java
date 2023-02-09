@@ -35,32 +35,30 @@
  */
 package org.geosdi.geoplatform.core.model;
 
-import jakarta.persistence.*;
 import jakarta.persistence.Index;
 import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
-import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.*;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import static jakarta.xml.bind.annotation.XmlAccessType.FIELD;
+
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @XmlRootElement(name = "Message")
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(FIELD)
 @Entity(name = "Message")
-@Table(name = "gp_message", indexes = {
-        @Index(columnList = "recipient_id", name = "ACCOUNT_RECIPIENT_ID_INDEX"),
-        @Index(columnList = "sender_id", name = "ACCOUNT_SENDER_ID_INDEX")
-})
+@Table(name = "gp_message", indexes = {@Index(columnList = "recipient_id", name = "ACCOUNT_RECIPIENT_ID_INDEX"), @Index(columnList = "sender_id", name = "ACCOUNT_SENDER_ID_INDEX")})
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "message")
 public class GPMessage implements Serializable {
 

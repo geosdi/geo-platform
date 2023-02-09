@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.core.model.attribution;
 
+import jakarta.xml.bind.annotation.XmlTransient;
 import org.geosdi.geoplatform.core.model.attribution.logo.GPAttributionLogoURL;
 
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 
 /**

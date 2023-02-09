@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.core.model.adapter;
 
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.io.ParseException;
 import org.locationtech.jts.io.WKTReader;
 import org.locationtech.jts.io.WKTWriter;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -52,7 +52,7 @@ public class GeometryAdapter<T extends Geometry> extends XmlAdapter<String, T> {
     /**
      * (non-Javadoc)
      *
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -78,7 +78,7 @@ public class GeometryAdapter<T extends Geometry> extends XmlAdapter<String, T> {
     /**
      * (non-Javadoc)
      *
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override
     public String marshal(T v) throws ParseException {

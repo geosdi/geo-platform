@@ -35,17 +35,17 @@
  */
 package org.geosdi.geoplatform.core.model;
 
-import jakarta.persistence.*;
 import jakarta.persistence.Index;
 import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.geosdi.geoplatform.core.model.adapter.MultiPolygonAdapter;
 import org.geosdi.geoplatform.core.model.enums.GrantType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 import org.locationtech.jts.geom.MultiPolygon;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 
 /**

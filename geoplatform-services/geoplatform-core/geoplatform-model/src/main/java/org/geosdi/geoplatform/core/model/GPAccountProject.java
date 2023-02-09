@@ -36,28 +36,25 @@
 package org.geosdi.geoplatform.core.model;
 
 import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.acls.domain.BasePermission;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
+
+import static jakarta.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 //@XmlRootElement(name = "GPAccountProject")
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(FIELD)
 @Entity
-@Table(name = "gp_account_project", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"account_id", "project_id"})},
-        indexes = {
-                @Index(columnList = "account_id", name = "ACCOUNT_ID_INDEX"),
-                @Index(columnList = "project_id", name = "PROJECT_ID_INDEX")})
+@Table(name = "gp_account_project", uniqueConstraints = {@UniqueConstraint(columnNames = {"account_id", "project_id"})}, indexes = {@Index(columnList = "account_id", name = "ACCOUNT_ID_INDEX"), @Index(columnList = "project_id", name = "PROJECT_ID_INDEX")})
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "account_project")
 public class GPAccountProject implements Serializable {

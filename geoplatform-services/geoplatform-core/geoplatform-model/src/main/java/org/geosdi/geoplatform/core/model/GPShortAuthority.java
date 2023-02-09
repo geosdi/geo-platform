@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.core.model;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

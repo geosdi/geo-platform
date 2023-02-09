@@ -37,10 +37,11 @@ package org.geosdi.geoplatform.core.model.attribution.logo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import lombok.*;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import static jakarta.xml.bind.annotation.XmlAccessType.FIELD;
+
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -52,7 +53,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @AllArgsConstructor
 @ToString
 @Embeddable
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(FIELD)
 public class GPAttributionLogoURL implements IGPAttributionLogoURL {
 
     private static final long serialVersionUID = -8687941618757514519L;

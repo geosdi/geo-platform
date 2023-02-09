@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.support.jackson.property.JacksonSupportConfigFeatu
 import org.locationtech.jts.geom.Geometry;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
@@ -60,7 +61,7 @@ public class GPJacksonJTSSupport extends GPJacksonSupport implements IGPJacksonJ
     }
 
     public GPJacksonJTSSupport(JacksonSupportConfigFeature... features) {
-        super(features);
+        super(JAXB, features);
         super.registerModule(new GPJTSModule());
     }
 

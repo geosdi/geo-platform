@@ -40,7 +40,6 @@ import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.csv.support.model.IGPCSVBaseSchema;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.xml.gml.v311.FeatureArrayPropertyType;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
@@ -54,6 +53,7 @@ import java.util.Arrays;
 
 import static org.geosdi.geoplatform.connector.server.request.WFSGetFeatureOutputFormat.CSV;
 import static org.geosdi.geoplatform.connector.server.request.WFSGetFeatureOutputFormat.GEOJSON;
+import static org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder.jakartaContextBuilder;
 import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.HITS;
 import static org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType.RESULTS;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -68,27 +68,8 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        queryDTOAnd = GPJAXBContextBuilder.newInstance()
-                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<QueryDTO>\n" +
-                        "    <matchOperator>ALL</matchOperator>\n" +
-                        "    <queryRestrictionList>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
-                        "                <name>WORKERS</name>\n" +
-                        "                <nillable>true</nillable>\n" +
-                        "                <type>double</type>\n" +
-                        "                <value></value>\n" +
-                        "            </attribute>\n" +
-                        "            <operator>GREATER_OR_EQUAL</operator>\n" +
-                        "            <restriction>0.25</restriction>\n" +
-                        "        </queryRestriction>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
+        queryDTOAnd = jakartaContextBuilder().unmarshal(new StringReader(
+                "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<QueryDTO>\n" + "    <matchOperator>ALL</matchOperator>\n" + "    <queryRestrictionList>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" + "                <name>WORKERS</name>\n" + "                <nillable>true</nillable>\n" + "                <type>double</type>\n" + "                <value></value>\n" + "            </attribute>\n" + "            <operator>GREATER_OR_EQUAL</operator>\n" + "            <restriction>0.25</restriction>\n" + "        </queryRestriction>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" +
                         "                <name>MANUAL</name>\n" +
                         "                <nillable>true</nillable>\n" +
                         "                <type>double</type>\n" +
@@ -202,25 +183,9 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
         request.setTypeName(statesName);
         request.setResultType(HITS.value());
-        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
-                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<QueryDTO>\n" +
-                        "    <matchOperator>ALL</matchOperator>\n" +
-                        "    <queryRestrictionList>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
-                        "                <name>SUB_REGION</name>\n" +
-                        "                <nillable>true</nillable>\n" +
-                        "                <type>string</type>\n" +
-                        "                <value></value>\n" +
-                        "            </attribute>\n" +
-                        "            <operator>CONTAINS</operator>\n" +
-                        "            <restriction>Mtn</restriction>\n" +
-                        "        </queryRestriction>\n" +
-                        "    </queryRestrictionList>\n" +
-                        "</QueryDTO>"), QueryDTO.class));
+        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<QueryDTO>\n" + "    <matchOperator>ALL</matchOperator>\n" + "    <queryRestrictionList>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" + "                <name>SUB_REGION</name>\n" + "                <nillable>true</nillable>\n" + "                <type>string</type>\n" + "                <value></value>\n" + "            </attribute>\n" + "            <operator>CONTAINS</operator>\n" + "            <restriction>Mtn</restriction>\n" + "        </queryRestriction>\n" + "    </queryRestrictionList>\n" + "</QueryDTO>"),
+                QueryDTO.class));
 
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
@@ -232,25 +197,9 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         WFSGetFeatureRequest<FeatureCollectionType> request = secureServerConnector.createGetFeatureRequest();
         request.setTypeName(statesName);
         request.setResultType(HITS.value());
-        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
-                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<QueryDTO>\n" +
-                        "    <matchOperator>ALL</matchOperator>\n" +
-                        "    <queryRestrictionList>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
-                        "                <name>SUB_REGION</name>\n" +
-                        "                <nillable>true</nillable>\n" +
-                        "                <type>string</type>\n" +
-                        "                <value></value>\n" +
-                        "            </attribute>\n" +
-                        "            <operator>CONTAINS</operator>\n" +
-                        "            <restriction>Mtn</restriction>\n" +
-                        "        </queryRestriction>\n" +
-                        "    </queryRestrictionList>\n" +
-                        "</QueryDTO>"), QueryDTO.class));
+        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<QueryDTO>\n" + "    <matchOperator>ALL</matchOperator>\n" + "    <queryRestrictionList>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" + "                <name>SUB_REGION</name>\n" + "                <nillable>true</nillable>\n" + "                <type>string</type>\n" + "                <value></value>\n" + "            </attribute>\n" + "            <operator>CONTAINS</operator>\n" + "            <restriction>Mtn</restriction>\n" + "        </queryRestriction>\n" + "    </queryRestrictionList>\n" + "</QueryDTO>"),
+                QueryDTO.class));
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
         logger.info("###################################statesSecureContainsRestrictionTest#Features : {}\n", response.getNumberOfFeatures().intValue());
@@ -261,25 +210,9 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
         request.setTypeName(statesName);
         request.setResultType(HITS.value());
-        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
-                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<QueryDTO>\n" +
-                        "    <matchOperator>ALL</matchOperator>\n" +
-                        "    <queryRestrictionList>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
-                        "                <name>SUB_REGION</name>\n" +
-                        "                <nillable>true</nillable>\n" +
-                        "                <type>string</type>\n" +
-                        "                <value></value>\n" +
-                        "            </attribute>\n" +
-                        "            <operator>LIKE</operator>\n" +
-                        "            <restriction>Mtn</restriction>\n" +
-                        "        </queryRestriction>\n" +
-                        "    </queryRestrictionList>\n" +
-                        "</QueryDTO>"), QueryDTO.class));
+        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<QueryDTO>\n" + "    <matchOperator>ALL</matchOperator>\n" + "    <queryRestrictionList>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" + "                <name>SUB_REGION</name>\n" + "                <nillable>true</nillable>\n" + "                <type>string</type>\n" + "                <value></value>\n" + "            </attribute>\n" + "            <operator>LIKE</operator>\n" + "            <restriction>Mtn</restriction>\n" + "        </queryRestriction>\n" + "    </queryRestrictionList>\n" + "</QueryDTO>"),
+                QueryDTO.class));
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
         logger.info("##################################statesNotContainsRestrictionTest#Features : {}\n", response.getNumberOfFeatures().intValue());
@@ -290,25 +223,9 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         WFSGetFeatureRequest<FeatureCollectionType> request = secureServerConnector.createGetFeatureRequest();
         request.setTypeName(statesName);
         request.setResultType(HITS.value());
-        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
-                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<QueryDTO>\n" +
-                        "    <matchOperator>NONE</matchOperator>\n" +
-                        "    <queryRestrictionList>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
-                        "                <name>SUB_REGION</name>\n" +
-                        "                <nillable>true</nillable>\n" +
-                        "                <type>string</type>\n" +
-                        "                <value></value>\n" +
-                        "            </attribute>\n" +
-                        "            <operator>CONTAINS</operator>\n" +
-                        "            <restriction>Mtn</restriction>\n" +
-                        "        </queryRestriction>\n" +
-                        "    </queryRestrictionList>\n" +
-                        "</QueryDTO>"), QueryDTO.class));
+        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<QueryDTO>\n" + "    <matchOperator>NONE</matchOperator>\n" + "    <queryRestrictionList>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" + "                <name>SUB_REGION</name>\n" + "                <nillable>true</nillable>\n" + "                <type>string</type>\n" + "                <value></value>\n" + "            </attribute>\n" + "            <operator>CONTAINS</operator>\n" + "            <restriction>Mtn</restriction>\n" + "        </queryRestriction>\n" + "    </queryRestrictionList>\n" + "</QueryDTO>"),
+                QueryDTO.class));
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
         logger.info("#####################################statesSecureNotContainsRestrictionTest#Features {}\n", response.getNumberOfFeatures().intValue());
@@ -319,25 +236,9 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
         request.setTypeName(statesName);
         request.setResultType(HITS.value());
-        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
-                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<QueryDTO>\n" +
-                        "    <matchOperator>ALL</matchOperator>\n" +
-                        "    <queryRestrictionList>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
-                        "                <name>WORKERS</name>\n" +
-                        "                <nillable>true</nillable>\n" +
-                        "                <type>double</type>\n" +
-                        "                <value></value>\n" +
-                        "            </attribute>\n" +
-                        "            <operator>GREATER</operator>\n" +
-                        "            <restriction>6000000</restriction>\n" +
-                        "        </queryRestriction>\n" +
-                        "    </queryRestrictionList>\n" +
-                        "</QueryDTO>"), QueryDTO.class));
+        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<QueryDTO>\n" + "    <matchOperator>ALL</matchOperator>\n" + "    <queryRestrictionList>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" + "                <name>WORKERS</name>\n" + "                <nillable>true</nillable>\n" + "                <type>double</type>\n" + "                <value></value>\n" + "            </attribute>\n" + "            <operator>GREATER</operator>\n" + "            <restriction>6000000</restriction>\n" + "        </queryRestriction>\n" + "    </queryRestrictionList>\n" + "</QueryDTO>"),
+                QueryDTO.class));
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
         logger.info("#########################################statesGreatherThanRestrictionTest#Features : {}\n", response.getNumberOfFeatures().intValue());
@@ -348,25 +249,9 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         WFSGetFeatureRequest<FeatureCollectionType> request = secureServerConnector.createGetFeatureRequest();
         request.setTypeName(statesName);
         request.setResultType(HITS.value());
-        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
-                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<QueryDTO>\n" +
-                        "    <matchOperator>ALL</matchOperator>\n" +
-                        "    <queryRestrictionList>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
-                        "                <name>WORKERS</name>\n" +
-                        "                <nillable>true</nillable>\n" +
-                        "                <type>double</type>\n" +
-                        "                <value></value>\n" +
-                        "            </attribute>\n" +
-                        "            <operator>GREATER</operator>\n" +
-                        "            <restriction>6000000</restriction>\n" +
-                        "        </queryRestriction>\n" +
-                        "    </queryRestrictionList>\n" +
-                        "</QueryDTO>"), QueryDTO.class));
+        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<QueryDTO>\n" + "    <matchOperator>ALL</matchOperator>\n" + "    <queryRestrictionList>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" + "                <name>WORKERS</name>\n" + "                <nillable>true</nillable>\n" + "                <type>double</type>\n" + "                <value></value>\n" + "            </attribute>\n" + "            <operator>GREATER</operator>\n" + "            <restriction>6000000</restriction>\n" + "        </queryRestriction>\n" + "    </queryRestrictionList>\n" + "</QueryDTO>"),
+                QueryDTO.class));
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
         logger.info("#############################statesSecureGreatherThanRestrictionTest#Features : {}\n",
@@ -378,25 +263,9 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         WFSGetFeatureRequest<FeatureCollectionType> request = serverConnector.createGetFeatureRequest();
         request.setTypeName(statesName);
         request.setResultType(HITS.value());
-        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
-                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<QueryDTO>\n" +
-                        "    <matchOperator>NONE</matchOperator>\n" +
-                        "    <queryRestrictionList>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
-                        "                <name>WORKERS</name>\n" +
-                        "                <nillable>true</nillable>\n" +
-                        "                <type>double</type>\n" +
-                        "                <value></value>\n" +
-                        "            </attribute>\n" +
-                        "            <operator>GREATER</operator>\n" +
-                        "            <restriction>6000000</restriction>\n" +
-                        "        </queryRestriction>\n" +
-                        "    </queryRestrictionList>\n" +
-                        "</QueryDTO>"), QueryDTO.class));
+        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<QueryDTO>\n" + "    <matchOperator>NONE</matchOperator>\n" + "    <queryRestrictionList>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" + "                <name>WORKERS</name>\n" + "                <nillable>true</nillable>\n" + "                <type>double</type>\n" + "                <value></value>\n" + "            </attribute>\n" + "            <operator>GREATER</operator>\n" + "            <restriction>6000000</restriction>\n" + "        </queryRestriction>\n" + "    </queryRestrictionList>\n" + "</QueryDTO>"),
+                QueryDTO.class));
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
         logger.info("##################################statesNotGreatherThanRestrictionTest#Features {}\n",
@@ -408,25 +277,9 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         WFSGetFeatureRequest<FeatureCollectionType> request = secureServerConnector.createGetFeatureRequest();
         request.setTypeName(statesName);
         request.setResultType(RESULTS.value());
-        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
-                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<QueryDTO>\n" +
-                        "    <matchOperator>NONE</matchOperator>\n" +
-                        "    <queryRestrictionList>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
-                        "                <name>WORKERS</name>\n" +
-                        "                <nillable>true</nillable>\n" +
-                        "                <type>double</type>\n" +
-                        "                <value></value>\n" +
-                        "            </attribute>\n" +
-                        "            <operator>GREATER</operator>\n" +
-                        "            <restriction>6000000</restriction>\n" +
-                        "        </queryRestriction>\n" +
-                        "    </queryRestrictionList>\n" +
-                        "</QueryDTO>"), QueryDTO.class));
+        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<QueryDTO>\n" + "    <matchOperator>NONE</matchOperator>\n" + "    <queryRestrictionList>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" + "                <name>WORKERS</name>\n" + "                <nillable>true</nillable>\n" + "                <type>double</type>\n" + "                <value></value>\n" + "            </attribute>\n" + "            <operator>GREATER</operator>\n" + "            <restriction>6000000</restriction>\n" + "        </queryRestriction>\n" + "    </queryRestrictionList>\n" + "</QueryDTO>"),
+                QueryDTO.class));
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
         logger.info("########################################statesSecureNotGreatherThanRestrictionTest#Features : {}\n", response.getNumberOfFeatures().intValue());
@@ -437,25 +290,9 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         WFSGetFeatureRequest<FeatureCollection> request = secureServerConnector.createGetFeatureRequest();
         request.setTypeName(statesName);
         request.setResultType(RESULTS.value());
-        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
-                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<QueryDTO>\n" +
-                        "    <matchOperator>NONE</matchOperator>\n" +
-                        "    <queryRestrictionList>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
-                        "                <name>WORKERS</name>\n" +
-                        "                <nillable>true</nillable>\n" +
-                        "                <type>double</type>\n" +
-                        "                <value></value>\n" +
-                        "            </attribute>\n" +
-                        "            <operator>GREATER</operator>\n" +
-                        "            <restriction>6000000</restriction>\n" +
-                        "        </queryRestriction>\n" +
-                        "    </queryRestrictionList>\n" +
-                        "</QueryDTO>"), QueryDTO.class));
+        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<QueryDTO>\n" + "    <matchOperator>NONE</matchOperator>\n" + "    <queryRestrictionList>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" + "                <name>WORKERS</name>\n" + "                <nillable>true</nillable>\n" + "                <type>double</type>\n" + "                <value></value>\n" + "            </attribute>\n" + "            <operator>GREATER</operator>\n" + "            <restriction>6000000</restriction>\n" + "        </queryRestriction>\n" + "    </queryRestrictionList>\n" + "</QueryDTO>"),
+                QueryDTO.class));
         request.setOutputFormat(GEOJSON);
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         FeatureCollection response = request.getResponse();
@@ -467,25 +304,9 @@ public class WFSGetFeatureTest extends WFSTestConfigurator {
         WFSGetFeatureRequest<IGPCSVBaseSchema> request = secureServerConnector.createGetFeatureRequest();
         request.setTypeName(statesName);
         request.setResultType(RESULTS.value());
-        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
-                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<QueryDTO>\n" +
-                        "    <matchOperator>NONE</matchOperator>\n" +
-                        "    <queryRestrictionList>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
-                        "                <name>WORKERS</name>\n" +
-                        "                <nillable>true</nillable>\n" +
-                        "                <type>double</type>\n" +
-                        "                <value></value>\n" +
-                        "            </attribute>\n" +
-                        "            <operator>GREATER</operator>\n" +
-                        "            <restriction>6000000</restriction>\n" +
-                        "        </queryRestriction>\n" +
-                        "    </queryRestrictionList>\n" +
-                        "</QueryDTO>"), QueryDTO.class));
+        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<QueryDTO>\n" + "    <matchOperator>NONE</matchOperator>\n" + "    <queryRestrictionList>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" + "                <name>WORKERS</name>\n" + "                <nillable>true</nillable>\n" + "                <type>double</type>\n" + "                <value></value>\n" + "            </attribute>\n" + "            <operator>GREATER</operator>\n" + "            <restriction>6000000</restriction>\n" + "        </queryRestriction>\n" + "    </queryRestrictionList>\n" + "</QueryDTO>"),
+                QueryDTO.class));
         request.setOutputFormat(CSV);
         logger.info("#############################REQUEST_AS_STRING : \n{}\n", request.showRequestAsString());
         IGPCSVBaseSchema response = request.getResponse();

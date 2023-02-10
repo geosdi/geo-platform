@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.connector.wfs;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.xml.wfs.v110.FeatureCollectionType;
 import org.geosdi.geoplatform.xml.wfs.v110.ResultTypeType;
 import org.junit.FixMethodOrder;
@@ -48,6 +47,7 @@ import javax.xml.namespace.QName;
 import java.io.StringReader;
 import java.util.Arrays;
 
+import static org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder.jakartaContextBuilder;
 import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -78,27 +78,8 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
         request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
-                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<QueryDTO>\n" +
-                        "    <matchOperator>ALL</matchOperator>\n" +
-                        "    <queryRestrictionList>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
-                        "                <name>WORKERS</name>\n" +
-                        "                <nillable>true</nillable>\n" +
-                        "                <type>double</type>\n" +
-                        "                <value></value>\n" +
-                        "            </attribute>\n" +
-                        "            <operator>GREATER_OR_EQUAL</operator>\n" +
-                        "            <restriction>2248972.0</restriction>\n" +
-                        "        </queryRestriction>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
+        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+                "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<QueryDTO>\n" + "    <matchOperator>ALL</matchOperator>\n" + "    <queryRestrictionList>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" + "                <name>WORKERS</name>\n" + "                <nillable>true</nillable>\n" + "                <type>double</type>\n" + "                <value></value>\n" + "            </attribute>\n" + "            <operator>GREATER_OR_EQUAL</operator>\n" + "            <restriction>2248972.0</restriction>\n" + "        </queryRestriction>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" +
                         "                <name>MANUAL</name>\n" +
                         "                <nillable>true</nillable>\n" +
                         "                <type>double</type>\n" +
@@ -123,27 +104,8 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
         request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
-                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<QueryDTO>\n" +
-                        "    <matchOperator>NONE</matchOperator>\n" +
-                        "    <queryRestrictionList>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
-                        "                <name>WORKERS</name>\n" +
-                        "                <nillable>true</nillable>\n" +
-                        "                <type>double</type>\n" +
-                        "                <value></value>\n" +
-                        "            </attribute>\n" +
-                        "            <operator>GREATER_OR_EQUAL</operator>\n" +
-                        "            <restriction>2248972.0</restriction>\n" +
-                        "        </queryRestriction>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
+        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+                "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<QueryDTO>\n" + "    <matchOperator>NONE</matchOperator>\n" + "    <queryRestrictionList>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" + "                <name>WORKERS</name>\n" + "                <nillable>true</nillable>\n" + "                <type>double</type>\n" + "                <value></value>\n" + "            </attribute>\n" + "            <operator>GREATER_OR_EQUAL</operator>\n" + "            <restriction>2248972.0</restriction>\n" + "        </queryRestriction>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" +
                         "                <name>MANUAL</name>\n" +
                         "                <nillable>true</nillable>\n" +
                         "                <type>double</type>\n" +
@@ -168,25 +130,9 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
         request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
-                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<QueryDTO>\n" +
-                        "    <matchOperator>NONE</matchOperator>\n" +
-                        "    <queryRestrictionList>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
-                        "                <name>WORKERS</name>\n" +
-                        "                <nillable>true</nillable>\n" +
-                        "                <type>double</type>\n" +
-                        "                <value></value>\n" +
-                        "            </attribute>\n" +
-                        "            <operator>GREATER_OR_EQUAL</operator>\n" +
-                        "            <restriction>1248972.0</restriction>\n" +
-                        "        </queryRestriction>\n" +
-                        "    </queryRestrictionList>\n" +
-                        "</QueryDTO>"), QueryDTO.class));
+        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<QueryDTO>\n" + "    <matchOperator>NONE</matchOperator>\n" + "    <queryRestrictionList>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" + "                <name>WORKERS</name>\n" + "                <nillable>true</nillable>\n" + "                <type>double</type>\n" + "                <value></value>\n" + "            </attribute>\n" + "            <operator>GREATER_OR_EQUAL</operator>\n" + "            <restriction>1248972.0</restriction>\n" + "        </queryRestriction>\n" + "    </queryRestrictionList>\n" + "</QueryDTO>"),
+                QueryDTO.class));
         logger.info("######################\n{}\n", request.showRequestAsString());
         FeatureCollectionType response = request.getResponse();
         assertTrue(response.getNumberOfFeatures().intValue() == 23);
@@ -199,25 +145,9 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
         request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
-                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<QueryDTO>\n" +
-                        "    <matchOperator>NONE</matchOperator>\n" +
-                        "    <queryRestrictionList>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
-                        "                <name>WORKERS</name>\n" +
-                        "                <nillable>true</nillable>\n" +
-                        "                <type>double</type>\n" +
-                        "                <value></value>\n" +
-                        "            </attribute>\n" +
-                        "            <operator>GREATER_OR_EQUAL</operator>\n" +
-                        "            <restriction>1248972.0</restriction>\n" +
-                        "        </queryRestriction>\n" +
-                        "    </queryRestrictionList>\n" +
-                        "</QueryDTO>"), QueryDTO.class));
+        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<QueryDTO>\n" + "    <matchOperator>NONE</matchOperator>\n" + "    <queryRestrictionList>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" + "                <name>WORKERS</name>\n" + "                <nillable>true</nillable>\n" + "                <type>double</type>\n" + "                <value></value>\n" + "            </attribute>\n" + "            <operator>GREATER_OR_EQUAL</operator>\n" + "            <restriction>1248972.0</restriction>\n" + "        </queryRestriction>\n" + "    </queryRestrictionList>\n" + "</QueryDTO>"),
+                QueryDTO.class));
         request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
         request.setSRS("EPSG:4326");
         logger.info("######################\n{}\n", request.showRequestAsString());
@@ -242,25 +172,9 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
         request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
-                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<QueryDTO>\n" +
-                        "    <matchOperator>NONE</matchOperator>\n" +
-                        "    <queryRestrictionList>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
-                        "                <name>WORKERS</name>\n" +
-                        "                <nillable>true</nillable>\n" +
-                        "                <type>double</type>\n" +
-                        "                <value></value>\n" +
-                        "            </attribute>\n" +
-                        "            <operator>GREATER_OR_EQUAL</operator>\n" +
-                        "            <restriction>1248972.0</restriction>\n" +
-                        "        </queryRestriction>\n" +
-                        "    </queryRestrictionList>\n" +
-                        "</QueryDTO>"), QueryDTO.class));
+        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<QueryDTO>\n" + "    <matchOperator>NONE</matchOperator>\n" + "    <queryRestrictionList>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" + "                <name>WORKERS</name>\n" + "                <nillable>true</nillable>\n" + "                <type>double</type>\n" + "                <value></value>\n" + "            </attribute>\n" + "            <operator>GREATER_OR_EQUAL</operator>\n" + "            <restriction>1248972.0</restriction>\n" + "        </queryRestriction>\n" + "    </queryRestrictionList>\n" + "</QueryDTO>"),
+                QueryDTO.class));
         request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
         request.setSRS("EPSG:4326");
         request.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
@@ -273,25 +187,9 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
         request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
-                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<QueryDTO>\n" +
-                        "    <matchOperator>ALL</matchOperator>\n" +
-                        "    <queryRestrictionList>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
-                        "                <name>WORKERS</name>\n" +
-                        "                <nillable>true</nillable>\n" +
-                        "                <type>double</type>\n" +
-                        "                <value></value>\n" +
-                        "            </attribute>\n" +
-                        "            <operator>GREATER_OR_EQUAL</operator>\n" +
-                        "            <restriction>1248972.0</restriction>\n" +
-                        "        </queryRestriction>\n" +
-                        "    </queryRestrictionList>\n" +
-                        "</QueryDTO>"), QueryDTO.class));
+        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<QueryDTO>\n" + "    <matchOperator>ALL</matchOperator>\n" + "    <queryRestrictionList>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" + "                <name>WORKERS</name>\n" + "                <nillable>true</nillable>\n" + "                <type>double</type>\n" + "                <value></value>\n" + "            </attribute>\n" + "            <operator>GREATER_OR_EQUAL</operator>\n" + "            <restriction>1248972.0</restriction>\n" + "        </queryRestriction>\n" + "    </queryRestrictionList>\n" + "</QueryDTO>"),
+                QueryDTO.class));
         request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
         request.setSRS("EPSG:4326");
         request.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
@@ -304,25 +202,9 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
         request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
-                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<QueryDTO>\n" +
-                        "    <matchOperator>ALL</matchOperator>\n" +
-                        "    <queryRestrictionList>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
-                        "                <name>WORKERS</name>\n" +
-                        "                <nillable>true</nillable>\n" +
-                        "                <type>double</type>\n" +
-                        "                <value></value>\n" +
-                        "            </attribute>\n" +
-                        "            <operator>GREATER_OR_EQUAL</operator>\n" +
-                        "            <restriction>1248972.0</restriction>\n" +
-                        "        </queryRestriction>\n" +
-                        "    </queryRestrictionList>\n" +
-                        "</QueryDTO>"), QueryDTO.class));
+        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<QueryDTO>\n" + "    <matchOperator>ALL</matchOperator>\n" + "    <queryRestrictionList>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" + "                <name>WORKERS</name>\n" + "                <nillable>true</nillable>\n" + "                <type>double</type>\n" + "                <value></value>\n" + "            </attribute>\n" + "            <operator>GREATER_OR_EQUAL</operator>\n" + "            <restriction>1248972.0</restriction>\n" + "        </queryRestriction>\n" + "    </queryRestrictionList>\n" + "</QueryDTO>"),
+                QueryDTO.class));
         request.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
         logger.info("######################\n{}\n", request.showRequestAsString());
     }
@@ -333,25 +215,9 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
         request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
-                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<QueryDTO>\n" +
-                        "    <matchOperator>ANY</matchOperator>\n" +
-                        "    <queryRestrictionList>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
-                        "                <name>WORKERS</name>\n" +
-                        "                <nillable>true</nillable>\n" +
-                        "                <type>double</type>\n" +
-                        "                <value></value>\n" +
-                        "            </attribute>\n" +
-                        "            <operator>GREATER_OR_EQUAL</operator>\n" +
-                        "            <restriction>1248972.0</restriction>\n" +
-                        "        </queryRestriction>\n" +
-                        "    </queryRestrictionList>\n" +
-                        "</QueryDTO>"), QueryDTO.class));
+        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<QueryDTO>\n" + "    <matchOperator>ANY</matchOperator>\n" + "    <queryRestrictionList>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" + "                <name>WORKERS</name>\n" + "                <nillable>true</nillable>\n" + "                <type>double</type>\n" + "                <value></value>\n" + "            </attribute>\n" + "            <operator>GREATER_OR_EQUAL</operator>\n" + "            <restriction>1248972.0</restriction>\n" + "        </queryRestriction>\n" + "    </queryRestrictionList>\n" + "</QueryDTO>"),
+                QueryDTO.class));
         request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
         request.setSRS("EPSG:4326");
         request.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
@@ -364,25 +230,9 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
         request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
-                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<QueryDTO>\n" +
-                        "    <matchOperator>ANY</matchOperator>\n" +
-                        "    <queryRestrictionList>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
-                        "                <name>WORKERS</name>\n" +
-                        "                <nillable>true</nillable>\n" +
-                        "                <type>double</type>\n" +
-                        "                <value></value>\n" +
-                        "            </attribute>\n" +
-                        "            <operator>GREATER_OR_EQUAL</operator>\n" +
-                        "            <restriction>1248972.0</restriction>\n" +
-                        "        </queryRestriction>\n" +
-                        "    </queryRestrictionList>\n" +
-                        "</QueryDTO>"), QueryDTO.class));
+        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<QueryDTO>\n" + "    <matchOperator>ANY</matchOperator>\n" + "    <queryRestrictionList>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" + "                <name>WORKERS</name>\n" + "                <nillable>true</nillable>\n" + "                <type>double</type>\n" + "                <value></value>\n" + "            </attribute>\n" + "            <operator>GREATER_OR_EQUAL</operator>\n" + "            <restriction>1248972.0</restriction>\n" + "        </queryRestriction>\n" + "    </queryRestrictionList>\n" + "</QueryDTO>"),
+                QueryDTO.class));
         request.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%')");
         logger.info("######################\n{}\n", request.showRequestAsString());
     }
@@ -406,25 +256,9 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
         request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
-                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<QueryDTO>\n" +
-                        "    <matchOperator>ANY</matchOperator>\n" +
-                        "    <queryRestrictionList>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
-                        "                <name>WORKERS</name>\n" +
-                        "                <nillable>true</nillable>\n" +
-                        "                <type>double</type>\n" +
-                        "                <value></value>\n" +
-                        "            </attribute>\n" +
-                        "            <operator>GREATER_OR_EQUAL</operator>\n" +
-                        "            <restriction>1248972.0</restriction>\n" +
-                        "        </queryRestriction>\n" +
-                        "    </queryRestrictionList>\n" +
-                        "</QueryDTO>"), QueryDTO.class));
+        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<QueryDTO>\n" + "    <matchOperator>ANY</matchOperator>\n" + "    <queryRestrictionList>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" + "                <name>WORKERS</name>\n" + "                <nillable>true</nillable>\n" + "                <type>double</type>\n" + "                <value></value>\n" + "            </attribute>\n" + "            <operator>GREATER_OR_EQUAL</operator>\n" + "            <restriction>1248972.0</restriction>\n" + "        </queryRestriction>\n" + "    </queryRestrictionList>\n" + "</QueryDTO>"),
+                QueryDTO.class));
         request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
         request.setSRS("EPSG:4326");
         request.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%' OR Intersects(shape,POINT(-45.891523 170.467375)))");
@@ -437,25 +271,9 @@ public class WFSGetFeatureWithSpatialRestrictionsTest extends WFSTestConfigurato
         request.setResultType(ResultTypeType.RESULTS.value());
         request.setTypeName(statesName);
         request.setPropertyNames(Arrays.asList("WORKERS", "MANUAL", "SUB_REGION"));
-        request.setQueryDTO(GPJAXBContextBuilder.newInstance()
-                .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                        "<QueryDTO>\n" +
-                        "    <matchOperator>ANY</matchOperator>\n" +
-                        "    <queryRestrictionList>\n" +
-                        "        <queryRestriction>\n" +
-                        "            <attribute>\n" +
-                        "                <maxOccurs>1</maxOccurs>\n" +
-                        "                <minOccurs>0</minOccurs>\n" +
-                        "                <name>WORKERS</name>\n" +
-                        "                <nillable>true</nillable>\n" +
-                        "                <type>double</type>\n" +
-                        "                <value></value>\n" +
-                        "            </attribute>\n" +
-                        "            <operator>GREATER_OR_EQUAL</operator>\n" +
-                        "            <restriction>1248972.0</restriction>\n" +
-                        "        </queryRestriction>\n" +
-                        "    </queryRestrictionList>\n" +
-                        "</QueryDTO>"), QueryDTO.class));
+        request.setQueryDTO(jakartaContextBuilder().unmarshal(new StringReader(
+                        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + "<QueryDTO>\n" + "    <matchOperator>ANY</matchOperator>\n" + "    <queryRestrictionList>\n" + "        <queryRestriction>\n" + "            <attribute>\n" + "                <maxOccurs>1</maxOccurs>\n" + "                <minOccurs>0</minOccurs>\n" + "                <name>WORKERS</name>\n" + "                <nillable>true</nillable>\n" + "                <type>double</type>\n" + "                <value></value>\n" + "            </attribute>\n" + "            <operator>GREATER_OR_EQUAL</operator>\n" + "            <restriction>1248972.0</restriction>\n" + "        </queryRestriction>\n" + "    </queryRestrictionList>\n" + "</QueryDTO>"),
+                QueryDTO.class));
         request.setBBox(new BBox(-75.102613, 40.212597, -72.361859, 41.512517));
         request.setSRS("EPSG:4326");
         request.setCqlFilter("(COMUNE like 'AVIGLIANO' OR PRO_COM = 77014 OR COMUNE like 'T%' " +

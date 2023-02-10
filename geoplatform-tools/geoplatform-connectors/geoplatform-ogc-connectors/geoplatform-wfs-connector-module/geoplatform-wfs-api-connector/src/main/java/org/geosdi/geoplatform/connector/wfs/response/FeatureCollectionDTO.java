@@ -35,7 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.wfs.response;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;

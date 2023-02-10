@@ -53,7 +53,7 @@ public interface GPWFSComparisonTest {
 
         @Override
         public Thread newThread(Runnable r) {
-            Thread thread = Executors.privilegedThreadFactory().newThread(r);
+            Thread thread = Executors.defaultThreadFactory().newThread(r);
             thread.setName("WFSComparisonThread - " + threadID.getAndIncrement());
             thread.setDaemon(TRUE);
             return thread;

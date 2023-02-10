@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.connector.wfs.jaxb.unmarshall.query.theories;
 
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
 import org.junit.BeforeClass;
 import org.junit.experimental.theories.DataPoints;
@@ -52,6 +51,7 @@ import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.server.request.v110.query.responsibility.ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder;
+import static org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder.jakartaContextBuilder;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -81,9 +81,7 @@ public class QueryRestrictionsTheoriesBuilderTest {
         File queryRestrictionsFile = new File(queryRestrictionsStringFile);
         logger.info("##################FILTER_CREATED : \n{}\n \n :: for File : {}\n", builder()
                 .withFilterType(new FilterType())
-                .withQueryDTO(GPJAXBContextBuilder.newInstance()
-                        .unmarshal(queryRestrictionsFile, QueryDTO.class))
+                .withQueryDTO(jakartaContextBuilder().unmarshal(queryRestrictionsFile, QueryDTO.class))
                 .build(), file);
-
     }
 }

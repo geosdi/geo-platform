@@ -39,7 +39,7 @@ import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.GeometryAttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryDTO;
 import org.geosdi.geoplatform.connector.wfs.response.QueryRestrictionDTO;
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.jaxb.IGPJAXBContextBuilder;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -52,7 +52,8 @@ import java.util.Arrays;
 import static java.lang.Boolean.FALSE;
 import static org.geosdi.geoplatform.gui.shared.wfs.OperatorType.CONTAINS;
 import static org.geosdi.geoplatform.gui.shared.wfs.OperatorType.EQUAL;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder.jakartaContextBuilder;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
@@ -64,8 +65,8 @@ public class QueryRestrictionMarshallTest {
 
     private final static Logger logger = LoggerFactory.getLogger(QueryRestrictionMarshallTest.class);
     //
-    private static final GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
-    private static final GPJacksonSupport jacksonSupport = new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_DISABLE,
+    private static final IGPJAXBContextBuilder jaxbJakartaContextBuilder = jakartaContextBuilder();
+    private static final GPJacksonSupport jacksonSupport = new GPJacksonSupport(JAKARTA, UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE).configure(NON_NULL);
 
@@ -73,13 +74,13 @@ public class QueryRestrictionMarshallTest {
     public void a_marshallQueryDTOWithGeometryTest() throws Exception {
         QueryDTO queryDTO = createQueryDTOWithGeometryAttribute();
         StringWriter stringWriter = new StringWriter();
-        jaxbContextBuilder.marshal(queryDTO, stringWriter);
+        jaxbJakartaContextBuilder.marshal(queryDTO, stringWriter);
         logger.info("#########################QUERY_DTO_AS_STRING : \n{}\n", stringWriter);
     }
 
     @Test
     public void b_unmarshallQueryDTOWithGeometryTest() throws Exception {
-        QueryDTO queryDTO = jaxbContextBuilder.unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+        QueryDTO queryDTO = jaxbJakartaContextBuilder.unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                 "<QueryDTO>\n" +
                 "    <matchOperator>NONE</matchOperator>\n" +
                 "    <queryRestrictionList>\n" +
@@ -104,13 +105,13 @@ public class QueryRestrictionMarshallTest {
     public void c_marshallQueryDTOWithAttributeTest() throws Exception {
         QueryDTO queryDTO = createQueryDTOWithAttribute();
         StringWriter stringWriter = new StringWriter();
-        jaxbContextBuilder.marshal(queryDTO, stringWriter);
+        jaxbJakartaContextBuilder.marshal(queryDTO, stringWriter);
         logger.info("#########################QUERY_DTO_AS_STRING : \n{}\n", stringWriter);
     }
 
     @Test
     public void d_unmarshallQueryDTOWithAttributeTest() throws Exception {
-        QueryDTO queryDTO = jaxbContextBuilder.unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+        QueryDTO queryDTO = jaxbJakartaContextBuilder.unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                 "<QueryDTO>\n" +
                 "    <matchOperator>NONE</matchOperator>\n" +
                 "    <queryRestrictionList>\n" +

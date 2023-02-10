@@ -58,7 +58,8 @@ import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.server.request.v110.query.responsibility.ILogicOperatorHandler.WFSQueryRestrictionsBuilder.builder;
-import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder.newInstance;
+
+import static org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder.jakartaContextBuilder;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -79,13 +80,13 @@ public class QueryRestrictionsBuilderTest {
         String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "unmarshall", "query")
                 .collect(joining(separator, "", separator));
         File queryDTOAndFile = new File(basePath.concat("wfsQueryAnd.xml"));
-        queryDTOAnd = newInstance().unmarshal(queryDTOAndFile, QueryDTO.class);
+        queryDTOAnd = jakartaContextBuilder().unmarshal(queryDTOAndFile, QueryDTO.class);
         logger.info("####################QUERY_DTO_AND : {}\n\n", queryDTOAnd);
         File queryDTOOrFile = new File(basePath.concat("wfsQueryOr.xml"));
-        queryDTOOr = newInstance().unmarshal(queryDTOOrFile, QueryDTO.class);
+        queryDTOOr = jakartaContextBuilder().unmarshal(queryDTOOrFile, QueryDTO.class);
         logger.info("####################QUERY_DTO_OR : {}\n\n", queryDTOOr);
         File queryDTONotFile = new File(basePath.concat("wfsQueryNot.xml"));
-        queryDTONot = newInstance().unmarshal(queryDTONotFile, QueryDTO.class);
+        queryDTONot = jakartaContextBuilder().unmarshal(queryDTONotFile, QueryDTO.class);
         logger.info("####################QUERY_DTO_NOT : {}\n\n", queryDTOOr);
     }
 
@@ -113,7 +114,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void d_wfsQueryRestrictionsBuilderNotStringTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT_FROM_STRING : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(newInstance()
+                .withQueryDTO(jakartaContextBuilder()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -139,7 +140,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void e_wfsQueryRestrictionsBuilderAndGreatherTest() throws Exception {
         logger.info("##################FILTER_CREATED_GREATHER : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(newInstance()
+                .withQueryDTO(jakartaContextBuilder()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -165,7 +166,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void f_wfsQueryRestrictionsBuilderAndGreatherOrEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_GREATHER_OR_EQUAL : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(newInstance()
+                .withQueryDTO(jakartaContextBuilder()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -191,7 +192,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void g_wfsQueryRestrictionsBuilderOrGreatherTest() throws Exception {
         logger.info("##################FILTER_CREATED_GREATHER : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(newInstance()
+                .withQueryDTO(jakartaContextBuilder()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -217,7 +218,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void h_wfsQueryRestrictionsBuilderNotGreatherTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT_GREATHER : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(newInstance()
+                .withQueryDTO(jakartaContextBuilder()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -243,7 +244,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void i_wfsQueryRestrictionsBuilderOrGreatherOrEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_GREATHER_OR_EQUAL : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(newInstance()
+                .withQueryDTO(jakartaContextBuilder()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -269,33 +270,32 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void l_wfsQueryRestrictionsBuilderNotGreatherOrEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT_GREATHER_OR_EQUAL : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(newInstance()
-                        .unmarshal(new StringReader(
-                                "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                                        "<QueryDTO>\n" +
-                                        "    <matchOperator>NONE</matchOperator>\n" +
-                                        "    <queryRestrictionList>\n" +
-                                        "        <queryRestriction>\n" +
-                                        "            <attribute>\n" +
-                                        "                <maxOccurs>1</maxOccurs>\n" +
-                                        "                <minOccurs>0</minOccurs>\n" +
-                                        "                <name>WORKERS</name>\n" +
-                                        "                <nillable>true</nillable>\n" +
-                                        "                <type>double</type>\n" +
-                                        "                <value></value>\n" +
-                                        "            </attribute>\n" +
-                                        "            <operator>GREATER_OR_EQUAL</operator>\n" +
-                                        "            <restriction>0.25</restriction>\n" +
-                                        "        </queryRestriction>\n" +
-                                        "    </queryRestrictionList>\n" +
-                                        "</QueryDTO>"), QueryDTO.class))
+                .withQueryDTO(jakartaContextBuilder()
+                        .unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                                "<QueryDTO>\n" +
+                                "    <matchOperator>NONE</matchOperator>\n" +
+                                "    <queryRestrictionList>\n" +
+                                "        <queryRestriction>\n" +
+                                "            <attribute>\n" +
+                                "                <maxOccurs>1</maxOccurs>\n" +
+                                "                <minOccurs>0</minOccurs>\n" +
+                                "                <name>WORKERS</name>\n" +
+                                "                <nillable>true</nillable>\n" +
+                                "                <type>double</type>\n" +
+                                "                <value></value>\n" +
+                                "            </attribute>\n" +
+                                "            <operator>GREATER_OR_EQUAL</operator>\n" +
+                                "            <restriction>0.25</restriction>\n" +
+                                "        </queryRestriction>\n" +
+                                "    </queryRestrictionList>\n" +
+                                "</QueryDTO>"), QueryDTO.class))
                 .build());
     }
 
     @Test
     public void m_wfsQueryRestrictionsBuilderAndLessTest() throws Exception {
         logger.info("##################FILTER_CREATED_LESS : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(newInstance()
+                .withQueryDTO(jakartaContextBuilder()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -321,7 +321,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void n_wfsQueryRestrictionsBuilderAndLessOrEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_LESS_OR_EQUAL : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(newInstance()
+                .withQueryDTO(jakartaContextBuilder()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -347,7 +347,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void o_wfsQueryRestrictionsBuilderOrLessTest() throws Exception {
         logger.info("##################FILTER_CREATED_LESS : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(newInstance()
+                .withQueryDTO(jakartaContextBuilder()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -373,7 +373,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void p_wfsQueryRestrictionsBuilderNotLessTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT_LESS : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(newInstance()
+                .withQueryDTO(jakartaContextBuilder()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -399,7 +399,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void q_wfsQueryRestrictionsBuilderOrLessOrEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_LESS_OR_EQUAL : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(newInstance()
+                .withQueryDTO(jakartaContextBuilder()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -425,7 +425,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void r_wfsQueryRestrictionsBuilderNotLessOrEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT_LESS_OR_EQUAL : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(newInstance()
+                .withQueryDTO(jakartaContextBuilder()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -451,7 +451,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void s_wfsQueryRestrictionsBuilderAndEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_EQUAL : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(newInstance()
+                .withQueryDTO(jakartaContextBuilder()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -477,7 +477,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void t_wfsQueryRestrictionsBuilderOrEqualTest() throws Exception {
         logger.info("##################FILTER_CREATED_EQUAL : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(newInstance()
+                .withQueryDTO(jakartaContextBuilder()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -503,7 +503,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void u_wfsQueryRestrictionsBuilderAndContainsTest() throws Exception {
         logger.info("##################FILTER_CREATED_CONTAINS : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(newInstance()
+                .withQueryDTO(jakartaContextBuilder()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -529,7 +529,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void v_wfsQueryRestrictionsBuilderOrContainsTest() throws Exception {
         logger.info("##################FILTER_CREATED_CONTAINS : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(newInstance()
+                .withQueryDTO(jakartaContextBuilder()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -555,7 +555,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void w_wfsQueryRestrictionsBuilderNotContainsTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT_CONTAINS : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(newInstance()
+                .withQueryDTO(jakartaContextBuilder()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -581,7 +581,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void x_wfsQueryRestrictionsBuilderAndStartWithTest() throws Exception {
         logger.info("##################FILTER_CREATED_START_WITH : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(newInstance()
+                .withQueryDTO(jakartaContextBuilder()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -607,7 +607,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void y_wfsQueryRestrictionsBuilderOrStartWithTest() throws Exception {
         logger.info("##################FILTER_CREATED_START_WITH : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(newInstance()
+                .withQueryDTO(jakartaContextBuilder()
                         .unmarshal(new StringReader(
                                 "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                                         "<QueryDTO>\n" +
@@ -633,7 +633,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void z_a_wfsQueryRestrictionsBuilderNotStartWithTest() throws Exception {
         logger.info("##################FILTER_CREATED_NOT_START_WITH : {}\n", builder().withFilterType(new FilterType())
-                .withQueryDTO(newInstance().unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                .withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                         "<QueryDTO>\n" +
                         "    <matchOperator>NONE</matchOperator>\n" +
                         "    <queryRestrictionList>\n" +
@@ -664,7 +664,7 @@ public class QueryRestrictionsBuilderTest {
     @Test
     public void z_c_wfsQueryRestrictionsBuilderWithBBOXAndQueryTest() throws Exception {
         logger.info("##################FILTER_CREATED_WITH_BBOX_AND_QUERY : {}\n", builder().withFilterType(createFilterType())
-                .withQueryDTO(newInstance().unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
+                .withQueryDTO(jakartaContextBuilder().unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
                                 + "<QueryDTO>\n"
                                 + "    <matchOperator>ANY</matchOperator>\n"
                                 + "    <queryRestrictionList>\n"

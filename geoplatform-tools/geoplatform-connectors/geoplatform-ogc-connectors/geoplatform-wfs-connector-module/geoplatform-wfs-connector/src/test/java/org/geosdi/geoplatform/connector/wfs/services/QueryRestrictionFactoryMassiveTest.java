@@ -62,7 +62,7 @@ public class QueryRestrictionFactoryMassiveTest {
 
         @Override
         public Thread newThread(Runnable r) {
-            Thread thread = Executors.privilegedThreadFactory().newThread(r);
+            Thread thread = Executors.defaultThreadFactory().newThread(r);
             thread.setName("QueryRestrictionThread - " + threadID.getAndIncrement());
             thread.setDaemon(Boolean.TRUE);
             return thread;

@@ -90,6 +90,7 @@ import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.WFSConnectorBuilder.newConnector;
 import static org.geosdi.geoplatform.connector.server.request.WFSGetFeatureOutputFormat.GEOJSON;
 import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder.newInstance;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.geosdi.geoplatform.wfs.WFSDescribeFeatureTest.gpJAXBContextBuilder;
@@ -115,10 +116,8 @@ public class WFSGetFeaturesRequestTest {
             .substring(tigerRoads.getLocalPart().indexOf(":") + 1, tigerRoads.getLocalPart().length());
     //
     private final static FeatureSchemaReader featureReaderXSD = new GPFeatureSchemaReader();
-    private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
-            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-            WRAP_ROOT_VALUE_DISABLE,
+    private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_DISABLE,
+            FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE, NON_NULL);
 
     @Ignore(value = "Geoserver is Down")

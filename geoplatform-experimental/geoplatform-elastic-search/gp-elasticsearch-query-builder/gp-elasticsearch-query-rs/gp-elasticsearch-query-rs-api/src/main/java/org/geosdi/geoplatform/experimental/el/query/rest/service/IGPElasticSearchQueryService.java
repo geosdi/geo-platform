@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.experimental.el.query.rest.service;
 
+import jakarta.ws.rs.core.Response;
 import org.geosdi.geoplatform.experimental.el.query.rest.request.GPElasticSearchQueryExecutionRequest;
 
-import javax.ws.rs.core.Response;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

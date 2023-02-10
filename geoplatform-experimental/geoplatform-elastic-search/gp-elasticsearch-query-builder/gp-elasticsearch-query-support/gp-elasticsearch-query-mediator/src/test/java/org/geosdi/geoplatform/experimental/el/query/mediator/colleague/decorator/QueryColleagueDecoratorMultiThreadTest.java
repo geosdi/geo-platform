@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.experimental.el.query.mediator.colleague.decorator;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.experimental.el.query.mediator.colleague.GPElasticSearchQueryColleague;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.junit.Assert;
@@ -46,7 +47,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 

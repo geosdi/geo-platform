@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.experimental.el.query.rest.service;
 
+import jakarta.ws.rs.core.Response;
 import org.geosdi.geoplatform.experimental.el.query.dao.IGPElasticSearchQueryDAO;
 import org.geosdi.geoplatform.experimental.el.query.model.GPElasticSearchQuery;
 import org.geosdi.geoplatform.experimental.el.query.rest.delegare.IGPElasticSearchQueryDelegate;
 import org.geosdi.geoplatform.experimental.el.query.rest.request.GPElasticSearchQueryExecutionRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.ws.rs.core.Response;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

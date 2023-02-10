@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.experimental.el.threadpool.config;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.junit.Assert;
 import org.junit.Before;
@@ -45,7 +46,6 @@ import org.slf4j.Logger;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;

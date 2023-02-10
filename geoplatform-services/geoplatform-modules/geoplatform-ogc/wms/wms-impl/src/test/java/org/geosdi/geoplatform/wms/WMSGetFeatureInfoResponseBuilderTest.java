@@ -58,6 +58,7 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.services.builder.WMSGetFeatureInfoResponseBuilder.wmsGetFeatureInfoResponseBuilder;
 import static org.geosdi.geoplatform.services.request.WMSGetFeatureInfoResponseFormat.FEATURE_STORE;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -71,10 +72,8 @@ public class WMSGetFeatureInfoResponseBuilderTest {
 
     private static final Logger logger = LoggerFactory.getLogger(WMSGetFeatureInfoResponseBuilderTest.class);
     //
-    private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
-            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-            WRAP_ROOT_VALUE_DISABLE,
+    private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(JAKARTA, UNWRAP_ROOT_VALUE_DISABLE,
+            FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE, NON_NULL);
 
     @Test

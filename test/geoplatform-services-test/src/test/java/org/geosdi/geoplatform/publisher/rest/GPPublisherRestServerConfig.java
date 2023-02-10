@@ -35,10 +35,7 @@
  */
 package org.geosdi.geoplatform.publisher.rest;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.MediaType;
 import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.interceptor.Interceptor;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
@@ -48,6 +45,11 @@ import org.apache.cxf.message.Message;
 import org.geosdi.geoplatform.exception.rs.mapper.GPExceptionFaultMapper;
 import org.geosdi.geoplatform.services.GPPublisherService;
 import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory.createProvider;
 
 /**

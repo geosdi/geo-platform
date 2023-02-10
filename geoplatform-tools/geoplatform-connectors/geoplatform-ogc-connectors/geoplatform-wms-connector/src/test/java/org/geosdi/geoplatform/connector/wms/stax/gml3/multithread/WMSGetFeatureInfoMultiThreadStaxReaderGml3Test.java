@@ -50,6 +50,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Flowable.fromIterable;
 import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.junit.Assert.assertTrue;
@@ -62,10 +63,8 @@ public class WMSGetFeatureInfoMultiThreadStaxReaderGml3Test extends GPWMSGetFeat
 
     private static final Logger logger = LoggerFactory.getLogger(WMSGetFeatureInfoMultiThreadStaxReaderGml3Test.class);
     //
-    private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
-            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-            WRAP_ROOT_VALUE_DISABLE,
+    private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_DISABLE,
+            FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE, NON_NULL);
     private static final GPWMSGetFeatureInfoStaxGml3Reader wmsGetFeatureInfoStaxReader = new GPWMSGetFeatureInfoStaxGml3Reader();
 

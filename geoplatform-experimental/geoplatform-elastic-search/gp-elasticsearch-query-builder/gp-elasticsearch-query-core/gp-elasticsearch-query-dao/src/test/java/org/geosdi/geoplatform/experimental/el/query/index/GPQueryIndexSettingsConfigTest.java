@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.experimental.el.query.index;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.junit.Assert;
@@ -45,7 +46,6 @@ import org.slf4j.Logger;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.Resource;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

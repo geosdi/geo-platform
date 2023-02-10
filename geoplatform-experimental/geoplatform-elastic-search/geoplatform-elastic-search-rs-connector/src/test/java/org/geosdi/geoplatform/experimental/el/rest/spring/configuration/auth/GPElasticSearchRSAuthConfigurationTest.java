@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.experimental.el.rest.spring.configuration.auth;
 
+import jakarta.annotation.Resource;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -43,7 +44,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import javax.annotation.Resource;
 import java.io.File;
 
 import static java.io.File.separator;

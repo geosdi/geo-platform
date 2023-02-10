@@ -35,6 +35,10 @@
  */
 package org.geosdi.geoplatform.model.rest;
 
+import jakarta.ws.rs.BadRequestException;
+import jakarta.ws.rs.ClientErrorException;
+import jakarta.ws.rs.InternalServerErrorException;
+import jakarta.ws.rs.NotFoundException;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GPUser;
@@ -54,10 +58,6 @@ import org.geosdi.geoplatform.response.UserDTOResponse;
 import org.junit.Assert;
 import org.junit.Test;
 
-import javax.ws.rs.BadRequestException;
-import javax.ws.rs.ClientErrorException;
-import javax.ws.rs.InternalServerErrorException;
-import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 /**

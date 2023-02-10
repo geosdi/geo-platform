@@ -35,7 +35,11 @@
  */
 package org.geosdi.geoplatform.experimental.el.rest.spring.configuration.base;
 
-import org.junit.*;
+import jakarta.annotation.Resource;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +47,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import javax.annotation.Resource;
 import java.io.File;
 
 import static java.io.File.separator;

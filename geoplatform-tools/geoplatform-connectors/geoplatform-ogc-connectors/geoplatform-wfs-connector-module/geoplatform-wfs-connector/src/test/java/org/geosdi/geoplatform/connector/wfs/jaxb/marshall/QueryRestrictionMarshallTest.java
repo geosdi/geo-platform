@@ -52,6 +52,7 @@ import java.util.Arrays;
 import static java.lang.Boolean.FALSE;
 import static org.geosdi.geoplatform.gui.shared.wfs.OperatorType.CONTAINS;
 import static org.geosdi.geoplatform.gui.shared.wfs.OperatorType.EQUAL;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
@@ -64,12 +65,9 @@ public class QueryRestrictionMarshallTest {
     private final static Logger logger = LoggerFactory.getLogger(QueryRestrictionMarshallTest.class);
     //
     private static final GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
-    private static final GPJacksonSupport jacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
-            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-            WRAP_ROOT_VALUE_DISABLE,
-            INDENT_OUTPUT_ENABLE)
-            .configure(NON_NULL);
+    private static final GPJacksonSupport jacksonSupport = new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_DISABLE,
+            FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
+            INDENT_OUTPUT_ENABLE).configure(NON_NULL);
 
     @Test
     public void a_marshallQueryDTOWithGeometryTest() throws Exception {

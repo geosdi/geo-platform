@@ -52,8 +52,6 @@ import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGe
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverLoadCoverageStoreRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageWithUrlRequest;
 import org.geosdi.geoplatform.geoserver.GeoserverConnectorTest;
-import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
-import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -70,7 +68,6 @@ import static java.io.File.separator;
 import static java.lang.Boolean.TRUE;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
-import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -79,12 +76,6 @@ import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEn
 public class GeoserverConnectorCoverageStoresTest extends GeoserverConnectorTest {
 
     static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorCoverageStoresTest.class);
-    //
-    public static final JacksonSupport jacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_ENABLE,
-            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-            WRAP_ROOT_VALUE_ENABLE,
-            INDENT_OUTPUT_ENABLE);
 
     @Test
     public void a_exsistCoverageStores() throws Exception {

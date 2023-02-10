@@ -35,14 +35,13 @@
  */
 package org.geosdi.geoplatform.model.soap;
 
+import jakarta.xml.ws.Endpoint;
 import org.apache.cxf.jaxws.EndpointImpl;
 import org.geosdi.geoplatform.connectors.ws.wms.soap.GPWMSClientTestConnector;
 import org.geosdi.geoplatform.cxf.bus.GPSpringBusConfigurator;
 import org.geosdi.geoplatform.model.BaseGPListenerServices;
 import org.geosdi.geoplatform.services.GPWMSService;
 import org.springframework.test.context.TestContext;
-
-import javax.xml.ws.Endpoint;
 
 import static org.junit.Assert.assertNotNull;
 

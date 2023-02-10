@@ -35,7 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.wfs.response;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -46,7 +50,7 @@ import static org.geosdi.geoplatform.gui.shared.wfs.OperatorType.EQUAL;
  * @email nazzareno.sileno@geosdi.org
  */
 @XmlRootElement(name = "QueryDTO")
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(jakarta.xml.bind.annotation.XmlAccessType.FIELD)
 public class QueryDTO implements Serializable {
 
     private static final long serialVersionUID = 8374546992812250827L;

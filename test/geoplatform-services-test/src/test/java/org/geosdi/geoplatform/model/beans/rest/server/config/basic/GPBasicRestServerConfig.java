@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.model.beans.rest.server.config.basic;
 
+import jakarta.ws.rs.core.MediaType;
 import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.interceptor.*;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
@@ -52,7 +53,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.ws.rs.core.MediaType;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;

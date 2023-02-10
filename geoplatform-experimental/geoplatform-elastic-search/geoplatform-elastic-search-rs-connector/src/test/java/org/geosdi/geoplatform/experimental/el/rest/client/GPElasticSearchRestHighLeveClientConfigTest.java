@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.experimental.el.rest.client;
 
+import jakarta.annotation.Resource;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.junit.Before;
@@ -43,8 +44,6 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import javax.annotation.Resource;
 
 import static org.junit.Assert.assertNotNull;
 

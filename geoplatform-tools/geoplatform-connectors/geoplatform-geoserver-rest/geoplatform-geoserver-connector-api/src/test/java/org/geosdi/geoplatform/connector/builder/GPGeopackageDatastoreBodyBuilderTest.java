@@ -46,6 +46,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 
 import static org.geosdi.geoplatform.connector.geoserver.model.datastores.body.builder.db.geopkg.IGPGeopackageDatastoreBodyBuilder.GPGeopackageDatastoreBodyBuilder.geopackageDatastoreBodyBuilder;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -58,10 +59,8 @@ public class GPGeopackageDatastoreBodyBuilderTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPGeopackageDatastoreBodyBuilderTest.class);
     //
-    private static final JacksonSupport jacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_ENABLE,
-            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-            WRAP_ROOT_VALUE_ENABLE,
+    private static final JacksonSupport jacksonSupport = new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_ENABLE,
+            FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_ENABLE,
             INDENT_OUTPUT_ENABLE);
 
     @Test

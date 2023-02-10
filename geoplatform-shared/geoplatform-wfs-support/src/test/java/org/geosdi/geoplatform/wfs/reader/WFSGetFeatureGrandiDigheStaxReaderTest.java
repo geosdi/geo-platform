@@ -60,6 +60,7 @@ import static io.reactivex.rxjava3.core.Observable.fromIterable;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.junit.Assert.assertNotNull;
@@ -78,17 +79,16 @@ public class WFSGetFeatureGrandiDigheStaxReaderTest {
     private static GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
     private static File getFeatureGrandiDighe;
     private static final StopWatch stopWatch = new StopWatch("wfsGetFeatureGrandiDighe");
-    private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
-            FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-            ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-            WRAP_ROOT_VALUE_DISABLE,
+    private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_DISABLE,
+            FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE, NON_NULL);
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader")
-                .collect(joining(separator, "", separator));
-        grandiDigheLayerSchema = jaxbContextBuilder.unmarshal(new File(basePath.concat("LayerSchemaGrandiDighe.xml")), LayerSchemaDTO.class);
+        String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader").collect(
+                joining(separator, "", separator));
+        grandiDigheLayerSchema = jaxbContextBuilder.unmarshal(new File(basePath.concat("LayerSchemaGrandiDighe.xml")),
+                LayerSchemaDTO.class);
         getFeatureGrandiDighe = Paths.get(basePath.concat("GetFeatureGrandiDighe.xml")).toFile();
         assertNotNull("The LayerSchemaDTO for IDROGEOLOGICO:IT_grandi_dighe_MIT2019 must not be null.", grandiDigheLayerSchema);
         assertNotNull("The File getFeatureGrandiDighe must not be null.", getFeatureGrandiDighe);

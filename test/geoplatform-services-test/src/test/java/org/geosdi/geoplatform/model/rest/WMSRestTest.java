@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.model.rest;
 
+import jakarta.ws.rs.InternalServerErrorException;
+import jakarta.ws.rs.core.Response;
 import org.geosdi.geoplatform.model.soap.ServiceWMSTest;
 import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.response.ServerDTO;
@@ -42,7 +44,10 @@ import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoElement;
 import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoRequest;
 import org.geosdi.geoplatform.services.request.WMSGetFeatureInfoBoundingBox;
 import org.geosdi.geoplatform.services.request.WMSGetFeatureInfoPoint;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.FixMethodOrder;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.test.context.ActiveProfiles;
@@ -50,8 +55,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.ws.rs.InternalServerErrorException;
-import javax.ws.rs.core.Response;
 import java.util.Arrays;
 
 import static java.util.stream.Collectors.toList;

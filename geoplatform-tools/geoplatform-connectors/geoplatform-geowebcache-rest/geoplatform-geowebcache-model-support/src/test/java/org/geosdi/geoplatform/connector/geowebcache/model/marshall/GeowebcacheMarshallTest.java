@@ -11,6 +11,7 @@ import java.io.StringReader;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.junit.Assert.assertFalse;
@@ -25,10 +26,9 @@ public class GeowebcacheMarshallTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GeowebcacheMarshallTest.class);
     //
-    public static final GPJacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
+    public static final GPJacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
-            INDENT_OUTPUT_ENABLE, FAIL_ON_EMPTY_BEANS_DISABLE)
-            .configure(NON_NULL);
+            INDENT_OUTPUT_ENABLE, FAIL_ON_EMPTY_BEANS_DISABLE).configure(NON_NULL);
 //    private static final GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
 
     @Test

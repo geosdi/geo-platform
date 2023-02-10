@@ -35,6 +35,8 @@
  */
 package org.geosdi.geoplatform.model.rest;
 
+import jakarta.ws.rs.ClientErrorException;
+import jakarta.ws.rs.NotFoundException;
 import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -52,8 +54,6 @@ import org.geosdi.geoplatform.response.collection.TreeFolderElements;
 import org.junit.Assert;
 import org.junit.Test;
 
-import javax.ws.rs.ClientErrorException;
-import javax.ws.rs.NotFoundException;
 import java.util.*;
 
 /**

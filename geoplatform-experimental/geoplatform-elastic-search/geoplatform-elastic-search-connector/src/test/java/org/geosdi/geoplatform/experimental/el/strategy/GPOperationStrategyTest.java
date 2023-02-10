@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.experimental.el.strategy;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.experimental.el.search.strategy.GPStrategyRepository;
 import org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncStrategy;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
@@ -46,8 +47,6 @@ import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import javax.annotation.Resource;
 
 import static org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType.OperationAsyncType.DELETE;
 import static org.geosdi.geoplatform.experimental.el.search.strategy.IGPOperationAsyncType.OperationAsyncType.UPDATE;

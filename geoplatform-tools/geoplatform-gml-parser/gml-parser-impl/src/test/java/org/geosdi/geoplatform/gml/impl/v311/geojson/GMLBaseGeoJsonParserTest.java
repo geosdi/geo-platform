@@ -48,6 +48,7 @@ import java.io.IOException;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
@@ -58,7 +59,7 @@ public abstract class GMLBaseGeoJsonParserTest {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
-    protected static final ObjectMapper mapper = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
+    protected static final ObjectMapper mapper = new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE).getDefaultMapper();
     protected static final GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();

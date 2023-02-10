@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.publisher.prod.soap;
 
+import jakarta.xml.ws.Endpoint;
 import org.apache.cxf.jaxws.EndpointImpl;
 import org.geosdi.geoplatform.connectors.ws.publish.soap.GPPublisherClientTestConnector;
 import org.geosdi.geoplatform.cxf.bus.GPSpringBusConfigurator;
@@ -42,8 +43,6 @@ import org.geosdi.geoplatform.publisher.prod.BasePublisherListenerServices;
 import org.geosdi.geoplatform.publisher.prod.PublisherServiceTest;
 import org.geosdi.geoplatform.services.GPPublisherService;
 import org.springframework.test.context.TestContext;
-
-import javax.xml.ws.Endpoint;
 
 import static org.junit.Assert.assertNotNull;
 

@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.model.rest;
 
+import jakarta.ws.rs.NotFoundException;
 import org.geosdi.geoplatform.initializer.GuiComponentIDs;
 import org.geosdi.geoplatform.request.organization.WSPutRolePermissionRequest;
 import org.geosdi.geoplatform.request.organization.WSSaveRoleRequest;
 import org.geosdi.geoplatform.response.collection.GuiComponentsPermissionMapData;
 import org.junit.Test;
 
-import javax.ws.rs.NotFoundException;
 import java.util.HashMap;
 import java.util.List;
 

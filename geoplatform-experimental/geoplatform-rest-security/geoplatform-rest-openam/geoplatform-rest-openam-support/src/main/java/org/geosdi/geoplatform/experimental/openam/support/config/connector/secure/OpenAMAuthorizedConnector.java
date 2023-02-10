@@ -69,6 +69,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static org.geosdi.geoplatform.experimental.openam.api.connector.request.parameter.RequestParameter.RequestParameterType.ACTION_LOGOUT;
 import static org.geosdi.geoplatform.experimental.openam.support.connector.request.BaseOpenAMRequest.OpenAMRequestType.AUTHENTICATE;
 import static org.geosdi.geoplatform.experimental.openam.support.connector.request.BaseOpenAMRequest.OpenAMRequestType.LOGOUT;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -86,11 +87,10 @@ public abstract class OpenAMAuthorizedConnector implements BaseOpenAMConnector {
     @Resource(name = "requestParameterMediator")
     protected IRequestParameterMediator requestParameterMediator;
     protected IOpenAMCookieInfo openAMCookieInfo;
-    protected final ObjectMapper openAMReader = new GPJacksonSupport(GPJacksonSupportEnum.UNWRAP_ROOT_VALUE_DISABLE,
-            GPJacksonSupportEnum.FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-            GPJacksonSupportEnum.ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-            GPJacksonSupportEnum.WRAP_ROOT_VALUE_DISABLE, GPJacksonSupportEnum.INDENT_OUTPUT_ENABLE)
-            .configure(GPJsonIncludeFeature.NON_NULL).getDefaultMapper();
+    protected final ObjectMapper openAMReader = new GPJacksonSupport(JAXB,
+            GPJacksonSupportEnum.UNWRAP_ROOT_VALUE_DISABLE, GPJacksonSupportEnum.FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
+            GPJacksonSupportEnum.ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, GPJacksonSupportEnum.WRAP_ROOT_VALUE_DISABLE,
+            GPJacksonSupportEnum.INDENT_OUTPUT_ENABLE).configure(GPJsonIncludeFeature.NON_NULL).getDefaultMapper();
 
     protected OpenAMAuthorizedConnector(GPConnectorSettings theOpenAMConnectorSettings) {
         checkNotNull(theOpenAMConnectorSettings, "The OpenAMConnectorSettings must not be null.");

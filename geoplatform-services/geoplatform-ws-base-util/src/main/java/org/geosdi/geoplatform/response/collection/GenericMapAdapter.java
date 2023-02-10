@@ -35,8 +35,7 @@
  */
 package org.geosdi.geoplatform.response.collection;
 
-import jakarta.xml.bind.annotation.adapters.XmlAdapter;
-
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 

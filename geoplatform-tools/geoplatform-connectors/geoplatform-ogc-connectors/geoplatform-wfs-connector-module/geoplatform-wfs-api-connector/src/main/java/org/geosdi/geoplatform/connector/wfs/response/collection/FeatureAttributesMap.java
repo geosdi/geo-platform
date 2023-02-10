@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.wfs.response.collection;
 
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import org.geosdi.geoplatform.response.collection.adapter.StringStringMapAdapter;
+import org.geosdi.geoplatform.response.collection.jakarta.adapter.StringStringJakartaMapAdapter;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -48,7 +48,7 @@ public class FeatureAttributesMap implements Serializable {
 
     private static final long serialVersionUID = 1750989553209626148L;
     //
-    @XmlJavaTypeAdapter(StringStringMapAdapter.class)
+    @XmlJavaTypeAdapter(StringStringJakartaMapAdapter.class)
     private Map<String, String> map;
 
     public FeatureAttributesMap() {

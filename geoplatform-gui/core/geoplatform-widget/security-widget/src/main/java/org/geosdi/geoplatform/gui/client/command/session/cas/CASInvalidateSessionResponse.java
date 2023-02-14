@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.client.command.session.cas;
 
 import com.google.gwt.user.client.Window;
+import org.geosdi.geoplatform.gui.client.GPXMPPClient;
 import org.geosdi.geoplatform.gui.client.command.session.*;
 
 /**
@@ -57,6 +58,8 @@ public class CASInvalidateSessionResponse extends InvalidateSessionResponse {
 
     @Override
     public void executeInvalidateSession() {
+        GPXMPPClient xMPPClient = new GPXMPPClient();
+        xMPPClient.userXMPPLoout();
         Window.Location.reload();
       //  Window.Location.replace(super.result);
 //        Window.open(super.result, "_self", "logoutRequest");

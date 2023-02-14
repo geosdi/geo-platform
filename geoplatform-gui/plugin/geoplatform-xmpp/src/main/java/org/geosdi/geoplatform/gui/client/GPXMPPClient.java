@@ -37,12 +37,7 @@ package org.geosdi.geoplatform.gui.client;
 
 import com.calclab.emite.core.client.bosh.XmppBoshConnection;
 import com.calclab.emite.core.client.conn.ConnectionSettings;
-import com.calclab.emite.core.client.events.MessageEvent;
-import com.calclab.emite.core.client.events.MessageHandler;
-import com.calclab.emite.core.client.events.PresenceEvent;
-import com.calclab.emite.core.client.events.PresenceHandler;
-import com.calclab.emite.core.client.events.StateChangedEvent;
-import com.calclab.emite.core.client.events.StateChangedHandler;
+import com.calclab.emite.core.client.events.*;
 import com.calclab.emite.core.client.xmpp.session.SessionStates;
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
@@ -54,8 +49,6 @@ import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.emite.im.client.roster.XmppRoster;
 import com.extjs.gxt.ui.client.Registry;
 import com.google.gwt.core.client.GWT;
-import java.util.Collection;
-import java.util.logging.Logger;
 import org.geosdi.geoplatform.gui.client.config.XMPPSessionGinjector;
 import org.geosdi.geoplatform.gui.client.i18n.XMPPModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.XMPPModuleMessages;
@@ -64,19 +57,24 @@ import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPEventRepository;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.event.AbstractXMPPEvent;
 
+import java.util.Collection;
+import java.util.logging.Logger;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 public class GPXMPPClient {
 
-    private Logger logger = Logger.getLogger("");
+    private static final Logger logger = Logger.getLogger("GPXMPPClient");
+    //
+    private static final XMPPSessionGinjector ginjector = GWT.create(XMPPSessionGinjector.class);
 
     public void userXMPPLogin(String username, String password,
             String hostXmppServer) {
         logger.info("Executing xmpp code for: " + hostXmppServer);
-        final XMPPSessionGinjector ginjector = GWT.create(
-                XMPPSessionGinjector.class);
+//        final XMPPSessionGinjector ginjector = GWT.create(
+//                XMPPSessionGinjector.class);
         final XmppSession sessionXmpp = ginjector.getXmppSession();
         final XmppBoshConnection connection = ginjector.getXmppBoshConnection();
         connection.setSettings(new ConnectionSettings("http-bind",
@@ -185,5 +183,10 @@ public class GPXMPPClient {
 // System.out.println("CHAT Message received: " + event.getMessage().getBody());
 // }
 // });
+    }
+
+    public void userXMPPLoout() {
+        final XmppSession sessionXmpp = ginjector.getXmppSession();
+        sessionXmpp.logout();
     }
 }

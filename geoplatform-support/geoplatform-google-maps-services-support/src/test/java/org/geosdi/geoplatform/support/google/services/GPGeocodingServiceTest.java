@@ -79,7 +79,7 @@ public class GPGeocodingServiceTest extends GPBaseConfigTest {
     public void gpErrorGeocodingTest() throws Exception {
         GeocodingResult[] errorResults = gpGeocodingService.newRequest().address("Romaaaaa").await();
         assertTrue((errorResults.length == 0));
-        GeocodingResult[] results = gpGeocodingService.newRequest().address("Roma").region("it").await();
+        GeocodingResult[] results = gpGeocodingService.newRequest().address("Roma Italia").region("it").await();
         assertTrue((results != null) && (results.length > 0));
         logger.info("###########################Location : {} - Geometry : {}\n", results[0].formattedAddress, results[0].geometry);
     }

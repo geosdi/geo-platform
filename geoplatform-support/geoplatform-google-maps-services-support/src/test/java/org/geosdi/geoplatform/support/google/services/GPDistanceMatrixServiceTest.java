@@ -39,7 +39,6 @@ import com.google.maps.model.*;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.support.google.spring.services.distance.GPDistanceMatrixService;
 import org.geosdi.geoplatform.support.google.spring.services.geocoding.GPGeocodingService;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,6 +48,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.geosdi.geoplatform.support.google.spring.services.distance.Unit.K;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -68,7 +69,7 @@ public class GPDistanceMatrixServiceTest extends GPBaseConfigTest {
 
     @Before
     public void setUp() {
-        Assert.assertNotNull(gpDistanceMatrixService);
+        assertNotNull(gpDistanceMatrixService);
     }
 
     @Test
@@ -76,7 +77,7 @@ public class GPDistanceMatrixServiceTest extends GPBaseConfigTest {
         DistanceMatrix distanceMatrix = this.gpDistanceMatrixService
                 .getDistanceMatrix(new String[]{"sdfjhdsjf"}, new String[]{"sdfihdsf"})
                 .mode(TravelMode.DRIVING).language("it").await();
-        Assert.assertNotNull(distanceMatrix);
+        assertNotNull(distanceMatrix);
         DistanceMatrixRow distanceMatrixRow = distanceMatrix.rows[0];
         DistanceMatrixElement element = distanceMatrixRow.elements[0];
         logger.info("######################ERROR Status : {}\n", element.status);
@@ -88,7 +89,7 @@ public class GPDistanceMatrixServiceTest extends GPBaseConfigTest {
         DistanceMatrix distanceMatrix = this.gpDistanceMatrixService
                 .getDistanceMatrix(new String[]{"Tito"}, new String[]{"Roma"})
                 .mode(TravelMode.DRIVING).language("it").await();
-        Assert.assertNotNull(distanceMatrix);
+        assertNotNull(distanceMatrix);
         DistanceMatrixRow distanceMatrixRow = distanceMatrix.rows[0];
         for (DistanceMatrixElement element : distanceMatrixRow.elements) {
             logger.info("######################Tito - Roma : KM : {} - Duration : {} - Fare : {}\n",
@@ -101,7 +102,7 @@ public class GPDistanceMatrixServiceTest extends GPBaseConfigTest {
         DistanceMatrix distanceMatrix = this.gpDistanceMatrixService
                 .getDistanceMatrix(new String[]{"Roma"}, new String[]{"Firenze"})
                 .mode(TravelMode.DRIVING).language("it").await();
-        Assert.assertNotNull(distanceMatrix);
+        assertNotNull(distanceMatrix);
         DistanceMatrixRow distanceMatrixRow = distanceMatrix.rows[0];
         for (DistanceMatrixElement element : distanceMatrixRow.elements) {
             logger.info("######################Roma - Firenze : KM : {} - Duration : {} - Fare : {}\n",
@@ -114,7 +115,7 @@ public class GPDistanceMatrixServiceTest extends GPBaseConfigTest {
         DistanceMatrix distanceMatrix = this.gpDistanceMatrixService
                 .getDistanceMatrix(new String[]{"Salerno"}, new String[]{"Bologna"})
                 .mode(TravelMode.DRIVING).language("it").await();
-        Assert.assertNotNull(distanceMatrix);
+        assertNotNull(distanceMatrix);
         DistanceMatrixRow distanceMatrixRow = distanceMatrix.rows[0];
         for (DistanceMatrixElement element : distanceMatrixRow.elements) {
             logger.info("######################Salerno - Bologna : KM : {} - Duration : {} - Fare : {}\n",
@@ -127,7 +128,7 @@ public class GPDistanceMatrixServiceTest extends GPBaseConfigTest {
         DistanceMatrix distanceMatrix = this.gpDistanceMatrixService
                 .getDistanceMatrix(new String[]{"Caserta"}, new String[]{"Torino"})
                 .mode(TravelMode.DRIVING).language("it").await();
-        Assert.assertNotNull(distanceMatrix);
+        assertNotNull(distanceMatrix);
         DistanceMatrixRow distanceMatrixRow = distanceMatrix.rows[0];
         for (DistanceMatrixElement element : distanceMatrixRow.elements) {
             logger.info("######################KM : {} - Duration : {} - Fare : {}\n",
@@ -138,11 +139,11 @@ public class GPDistanceMatrixServiceTest extends GPBaseConfigTest {
     @Test
     public void titoParaguaiDistanceTest() throws Exception {
         GeocodingResult[] results = gpGeocodingService.newRequest().address("Tito Potenza").await();
-        Assert.assertTrue((results != null) && (results.length > 0));
+        assertTrue((results != null) && (results.length > 0));
         logger.info("###########################Location : {} - Geometry : {} - PlaceID : {}\n",
                 results[0].formattedAddress, results[0].geometry, results[0].placeId);
         GeocodingResult[] resultsParaguai = gpGeocodingService.newRequest().address("Paraguai").await();
-        Assert.assertTrue((resultsParaguai != null) && (resultsParaguai.length > 0));
+        assertTrue((resultsParaguai != null) && (resultsParaguai.length > 0));
         logger.info("###########################Location : {} - Geometry : {} - PlaceID : {}\n",
                 resultsParaguai[0].formattedAddress, resultsParaguai[0].geometry, resultsParaguai[0].placeId);
         logger.info("{}", this.gpDistanceMatrixService
@@ -154,16 +155,15 @@ public class GPDistanceMatrixServiceTest extends GPBaseConfigTest {
     @Test
     public void titoRomaDistanceDirectTest() throws Exception {
         GeocodingResult[] results = gpGeocodingService.newRequest().address("Tito Potenza").await();
-        Assert.assertTrue((results != null) && (results.length > 0));
+        assertTrue((results != null) && (results.length > 0));
         logger.info("###########################Location : {} - Geometry : {} - PlaceID : {}\n",
                 results[0].formattedAddress, results[0].geometry, results[0].placeId);
-        GeocodingResult[] resultsRoma = gpGeocodingService.newRequest().address("Roma").region("it").await();
-        Assert.assertTrue((resultsRoma != null) && (resultsRoma.length > 0));
+        GeocodingResult[] resultsRoma = gpGeocodingService.newRequest().address("Roma Italia").region("it").await();
+        assertTrue((resultsRoma != null) && (resultsRoma.length > 0));
         logger.info("###########################Location : {} - Geometry : {} - PlaceID : {}\n",
                 resultsRoma[0].formattedAddress, resultsRoma[0].geometry, resultsRoma[0].placeId);
         logger.info("################################DISTANCE : {}\n", this.gpDistanceMatrixService
                 .distance(results[0].geometry.location.lat, results[0].geometry.location.lng,
-                        resultsRoma[0].geometry.location.lat, resultsRoma[0].geometry.location.lng,
-                        K).doubleValue());
+                        resultsRoma[0].geometry.location.lat, resultsRoma[0].geometry.location.lng, K).doubleValue());
     }
 }

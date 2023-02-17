@@ -38,8 +38,9 @@ package org.geosdi.geoplatform.support.jackson;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.response.ProjectDTO;
 import org.geosdi.geoplatform.response.WSGetAccountProjectsResponse;
-import static org.geosdi.geoplatform.support.jackson.GPBaseJacksonSupportTest.jacksonSupport;
 import org.junit.Test;
+
+import static java.lang.Thread.currentThread;
 
 /**
  *
@@ -50,39 +51,25 @@ public class GPJacksonProjectSupportTest extends GPBaseJacksonSupportTest {
 
     @Test
     public void projectsDataMapperTest() throws Exception {
-        ProjectDTO projectDTO = jacksonSupport.getDefaultMapper().readValue(
-                Thread.currentThread().getContextClassLoader().getResourceAsStream(
-                        PROJECTS_DATA_JSON), ProjectDTO.class);
-
-        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@PROJECTS_DATA_MAPPING"
-                + " : {}\n\n", projectDTO);
-        
+        ProjectDTO projectDTO = jacksonSupport.getDefaultMapper()
+                .readValue(currentThread().getContextClassLoader().getResourceAsStream(PROJECTS_DATA_JSON), ProjectDTO.class);
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@PROJECTS_DATA_MAPPING : {}\n\n", projectDTO);
         super.marshall(projectDTO);
     }
 
     @Test
     public void getAllProjectsDataMapperTest() throws Exception {
-        WSGetAccountProjectsResponse response = jacksonSupport.getDefaultMapper().readValue(
-                Thread.currentThread().getContextClassLoader().getResourceAsStream(
-                        GET_ALL_PROJECTS_DATA_JSON),
-                WSGetAccountProjectsResponse.class);
-
-        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-                + "GET_ALL_PROJECTS_DATA_MAPPING : {}\n\n", response);
-        
+        WSGetAccountProjectsResponse response = jacksonSupport.getDefaultMapper()
+                .readValue(currentThread().getContextClassLoader().getResourceAsStream(GET_ALL_PROJECTS_DATA_JSON), WSGetAccountProjectsResponse.class);
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GET_ALL_PROJECTS_DATA_MAPPING : {}\n\n", response);
         super.marshall(response);
     }
 
     @Test
     public void projectDataMapperTest() throws Exception {
-        GPProject project = jacksonSupport.getDefaultMapper().readValue(
-                Thread.currentThread().getContextClassLoader().getResourceAsStream(
-                        PROJECT_DATA_JSON), GPProject.class);
-
-        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@PROJECT_DATA_MAPPING"
-                + " : {}\n\n", project);
-        
+        GPProject project = jacksonSupport.getDefaultMapper()
+                .readValue(currentThread().getContextClassLoader().getResourceAsStream(PROJECT_DATA_JSON), GPProject.class);
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@PROJECT_DATA_MAPPING : {}\n\n", project);
         super.marshall(project);
     }
-
 }

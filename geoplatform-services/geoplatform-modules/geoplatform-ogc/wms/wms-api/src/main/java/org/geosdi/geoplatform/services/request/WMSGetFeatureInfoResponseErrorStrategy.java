@@ -35,11 +35,12 @@
  */
 package org.geosdi.geoplatform.services.request;
 
+import jakarta.xml.bind.annotation.XmlTransient;
 import org.geojson.Feature;
 import org.geosdi.geoplatform.services.response.WMSGetFeatureInfoResponse;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.annotation.XmlTransient;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 

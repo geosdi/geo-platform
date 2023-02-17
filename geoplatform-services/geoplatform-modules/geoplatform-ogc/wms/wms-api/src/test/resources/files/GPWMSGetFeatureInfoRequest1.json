@@ -15,14 +15,6 @@
   },
   "wmsFeatureInfoElements": [
     {
-      "wmsServerURL": "http://mappe-dpc.protezionecivile.it/gssitdpc/wms",
-      "layers": "PianoCampiFlegrei:CF_AreeIncontro"
-    },
-    {
-      "wmsServerURL": "http://mappe-dpc.protezionecivile.it/gssitdpc/wms",
-      "layers": "PianoCampiFlegrei:CF_CentriCoordinamento"
-    },
-    {
       "wmsServerURL": "https://servizi.protezionecivile.it/geoserver/wms",
       "layers": "VULCANICO:CF_aree_attesa"
     },

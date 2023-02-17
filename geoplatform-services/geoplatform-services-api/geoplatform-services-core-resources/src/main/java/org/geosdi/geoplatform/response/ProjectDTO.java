@@ -35,9 +35,11 @@
  */
 package org.geosdi.geoplatform.response;
 
-import com.google.common.base.Preconditions;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.core.model.GPAccount;
@@ -45,11 +47,7 @@ import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.response.factory.AccountDTOFactory;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

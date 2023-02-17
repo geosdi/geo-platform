@@ -35,13 +35,12 @@
  */
 package org.geosdi.geoplatform.services.request;
 
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
-
-import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

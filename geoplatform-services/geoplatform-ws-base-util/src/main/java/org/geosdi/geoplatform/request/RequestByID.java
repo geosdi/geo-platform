@@ -43,7 +43,6 @@ import java.io.Serializable;
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- *
  */
 @XmlRootElement(name = "RequestByID")
 public class RequestByID implements Serializable {

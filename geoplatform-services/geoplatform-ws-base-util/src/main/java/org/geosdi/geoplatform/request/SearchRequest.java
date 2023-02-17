@@ -57,10 +57,17 @@ public class SearchRequest implements Serializable {
     public SearchRequest() {
     }
 
+    /**
+     * @param nameLike
+     */
     public SearchRequest(String nameLike) {
         this.nameLike = LikePatternType.CONTAINS.apply(nameLike);
     }
 
+    /**
+     * @param nameLike
+     * @param theLikeType
+     */
     public SearchRequest(String nameLike, LikePatternType theLikeType) {
         this.likeType = theLikeType;
         this.nameLike = this.likeType.apply(nameLike);

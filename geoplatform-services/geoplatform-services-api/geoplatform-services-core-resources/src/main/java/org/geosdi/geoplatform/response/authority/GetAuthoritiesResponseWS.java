@@ -35,14 +35,16 @@
  */
 package org.geosdi.geoplatform.response.authority;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.List;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

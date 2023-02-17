@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.response;
 
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.List;
 
 /**
@@ -61,6 +61,9 @@ public class RasterPropertiesDTO extends ShortLayerPropertiesDTO {
     public RasterPropertiesDTO() {
     }
 
+    /**
+     * @param layer
+     */
     public RasterPropertiesDTO(GPRasterLayer layer) {
         super(layer);
         this.opacity = layer.getOpacity();

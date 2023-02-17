@@ -38,12 +38,12 @@ package org.geosdi.geoplatform.services.request;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.List;
 
 import static org.geosdi.geoplatform.services.request.WMSGetFeatureInfoResponseFormat.GEOJSON;

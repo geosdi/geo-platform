@@ -35,20 +35,23 @@
  */
 package org.geosdi.geoplatform.support.jackson;
 
-import java.text.SimpleDateFormat;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.SimpleDateFormat;
+
+import static java.lang.System.out;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPBaseJacksonSupportTest {
     
-    protected static final Logger logger = LoggerFactory.getLogger(
-            GPBaseJacksonSupportTest.class);
+    protected static final Logger logger = LoggerFactory.getLogger(GPBaseJacksonSupportTest.class);
+    //
     protected static GPJacksonSupport jacksonSupport;
     
     static final String ACCOUNTS_DATA_JSON = "accounts-data.json";
@@ -91,13 +94,16 @@ public class GPBaseJacksonSupportTest {
     
     @BeforeClass
     public static void beforeClass() {
-        jacksonSupport = new GPJacksonSupport();
+        jacksonSupport = new GPJacksonSupport(JAKARTA);
         jacksonSupport.setDateFormat(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ"));
     }
-    
+
+    /**
+     * @param value
+     * @throws Exception
+     */
     protected final void marshall(Object value) throws Exception {
-        jacksonSupport.getDefaultMapper().writeValue(System.out, value);
-        System.out.print("\n\n");
+        jacksonSupport.getDefaultMapper().writeValue(out, value);
+        out.println("\n\n");
     }
-    
 }

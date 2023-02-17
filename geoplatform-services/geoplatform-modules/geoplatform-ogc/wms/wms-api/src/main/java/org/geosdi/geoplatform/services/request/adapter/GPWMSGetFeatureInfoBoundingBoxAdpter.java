@@ -35,11 +35,10 @@
  */
 package org.geosdi.geoplatform.services.request.adapter;
 
+import jakarta.xml.bind.ValidationEventHandler;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoBoundingBox;
 import org.geosdi.geoplatform.services.request.WMSGetFeatureInfoBoundingBox;
-
-import javax.xml.bind.ValidationEventHandler;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

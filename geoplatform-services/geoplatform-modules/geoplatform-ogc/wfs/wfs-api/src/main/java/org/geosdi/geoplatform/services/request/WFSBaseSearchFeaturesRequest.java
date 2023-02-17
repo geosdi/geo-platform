@@ -37,14 +37,13 @@ package org.geosdi.geoplatform.services.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.xml.bind.annotation.XmlTransient;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.geosdi.geoplatform.services.request.annotation.GPWFSTypeNameAllowed;
 import org.hibernate.validator.constraints.Range;
-
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

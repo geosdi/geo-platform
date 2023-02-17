@@ -35,14 +35,13 @@
  */
 package org.geosdi.geoplatform.request.layer;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.request.TreeModificationRequest;
 import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -59,8 +58,13 @@ public class WSDDLayerAndTreeModificationsRequest extends TreeModificationReques
     public WSDDLayerAndTreeModificationsRequest() {
     }
 
-    public WSDDLayerAndTreeModificationsRequest(Long theLayerMovedID,
-            Long theNewParentID, int theNewPosition,
+    /**
+     * @param theLayerMovedID
+     * @param theNewParentID
+     * @param theNewPosition
+     * @param theDescendantsMapData
+     */
+    public WSDDLayerAndTreeModificationsRequest(Long theLayerMovedID, Long theNewParentID, int theNewPosition,
             GPWebServiceMapData theDescendantsMapData) {
         super(theDescendantsMapData);
         this.layerMovedID = theLayerMovedID;

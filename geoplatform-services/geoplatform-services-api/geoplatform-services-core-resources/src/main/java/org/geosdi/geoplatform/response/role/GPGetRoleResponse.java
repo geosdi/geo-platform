@@ -39,16 +39,23 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public interface GPGetRoleResponse extends Serializable {
 
+    /**
+     * @return {@link List<String>}
+     */
     List<String> getRoles();
 
+    /**
+     * @param roles
+     */
     void setRoles(List<String> roles);
 
+    /**
+     * @param role
+     */
     void addRole(String role);
-
 }

@@ -55,19 +55,15 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public final class AccountDTOFactory {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            AccountDTOFactory.class);
+    private static final Logger logger = LoggerFactory.getLogger(AccountDTOFactory.class);
 
     private static final Map<Class<? extends GPAccount>, AccountDTOStrategy> parameters = Maps.<Class<? extends GPAccount>, AccountDTOStrategy>newHashMap();
 
     static {
-        for (AccountDTOStrategy accountStrategy : AccountStrategyFinder.getValidStrategies(
-                AccountDTOStrategy.class)) {
+        for (AccountDTOStrategy accountStrategy : AccountStrategyFinder.getValidStrategies(AccountDTOStrategy.class)) {
             parameters.put(accountStrategy.forClass(), accountStrategy);
         }
-        logger.debug(
-                "\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@ShortAccountDTOFactory parameters "
-                        + "map up with {} values.\n\n", parameters.size());
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@ShortAccountDTOFactory parameters map up with {} values.\n\n", parameters.size());
     }
 
     AccountDTOFactory() {
@@ -77,18 +73,12 @@ public final class AccountDTOFactory {
      * @param accounts
      * @return {@link List<ShortAccountDTO>}
      */
-    public static List<ShortAccountDTO> buildShortAccountDTOList(
-            List<GPAccount> accounts) {
-        checkNotNull(accounts, "The List of Accounts "
-                + "must not be null.");
-
-        List<ShortAccountDTO> accountsDTO = new ArrayList<>(
-                accounts.size());
-
+    public static List<ShortAccountDTO> buildShortAccountDTOList(List<GPAccount> accounts) {
+        checkNotNull(accounts, "The List of Accounts must not be null.");
+        List<ShortAccountDTO> accountsDTO = new ArrayList<>(accounts.size());
         for (GPAccount account : accounts) {
             accountsDTO.add(buildAccountDTO(account));
         }
-
         return accountsDTO;
     }
 

@@ -36,9 +36,9 @@
 package org.geosdi.geoplatform.services.request;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.geosdi.geoplatform.services.request.adapter.GPWMSGetFeatureInfoPointAdapter;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 
 /**

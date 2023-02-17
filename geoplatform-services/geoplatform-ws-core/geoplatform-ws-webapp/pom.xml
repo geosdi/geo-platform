@@ -648,11 +648,11 @@
                         <port>8080</port>
                     </httpConnector>
                     <contextXml>${basedir}/src/main/webapp/WEB-INF/jetty-context.xml</contextXml>
-                    <scanIntervalSeconds>0</scanIntervalSeconds>
                     <stopKey>foo</stopKey>
                     <stopPort>9999</stopPort>
                     <webApp>
                         <contextPath>/geoplatform-service</contextPath>
+                        <scanIntervalSeconds>0</scanIntervalSeconds>
                     </webApp>
                     <systemProperties>
                         <systemProperty>

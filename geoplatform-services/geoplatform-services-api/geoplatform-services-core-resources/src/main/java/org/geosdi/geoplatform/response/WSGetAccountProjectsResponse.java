@@ -36,15 +36,14 @@
 package org.geosdi.geoplatform.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 import java.util.List;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -61,8 +60,10 @@ public class WSGetAccountProjectsResponse implements Serializable {
     public WSGetAccountProjectsResponse() {
     }
 
-    public WSGetAccountProjectsResponse(
-            List<GPAccountProject> theAccountProjects) {
+    /**
+     * @param theAccountProjects
+     */
+    public WSGetAccountProjectsResponse(List<GPAccountProject> theAccountProjects) {
         this.accountProjects = theAccountProjects;
     }
 
@@ -85,5 +86,4 @@ public class WSGetAccountProjectsResponse implements Serializable {
         return getClass().getSimpleName() + " {" + "accountProjects = "
                 + accountProjects + '}';
     }
-
 }

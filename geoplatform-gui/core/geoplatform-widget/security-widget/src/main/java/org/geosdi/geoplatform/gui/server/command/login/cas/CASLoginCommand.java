@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.command.login.cas;
 
-import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginRequest;
 import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -48,39 +47,30 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Lazy(true)
 @Component(value = "command.login.CasLoginCommand")
 @Profile(value = "cas")
-public class CASLoginCommand implements
-        GPCommand<CASLoginRequest, CASLoginResponse> {
+public class CASLoginCommand implements GPCommand<CASLoginRequest, CASLoginResponse> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            CASLoginCommand.class);
+    private static final Logger logger = LoggerFactory.getLogger(CASLoginCommand.class);
     //
     @Autowired
     private ISecurityService securityService;
 
     @Override
-    public CASLoginResponse execute(CASLoginRequest request,
-            HttpServletRequest httpServletRequest) {
-
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
+    public CASLoginResponse execute(CASLoginRequest request, HttpServletRequest httpServletRequest) {
+        logger.debug("###################Executing {} Command", this.getClass().getSimpleName());
         /**
          * Here the parameter in Request *
          */
-        IGPAccountDetail accountDetail = this.securityService.casLogin(
-                httpServletRequest);
-
+        IGPAccountDetail accountDetail = this.securityService.casLogin(httpServletRequest);
         logger.debug("##################### FOUND {} ", accountDetail);
-
         return new CASLoginResponse(accountDetail);
     }
-
 }

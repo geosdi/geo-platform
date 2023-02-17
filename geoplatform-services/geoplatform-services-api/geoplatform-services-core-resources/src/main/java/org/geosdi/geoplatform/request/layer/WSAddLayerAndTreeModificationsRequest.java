@@ -35,9 +35,9 @@
  */
 package org.geosdi.geoplatform.request.layer;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.request.TreeModificationRequest;
 import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
@@ -60,8 +60,13 @@ public class WSAddLayerAndTreeModificationsRequest extends TreeModificationReque
     public WSAddLayerAndTreeModificationsRequest() {
     }
 
-    public WSAddLayerAndTreeModificationsRequest(Long theProjectID,
-            Long theParentFolderID, GPLayer theLayer,
+    /**
+     * @param theProjectID
+     * @param theParentFolderID
+     * @param theLayer
+     * @param theDescendantsMapData
+     */
+    public WSAddLayerAndTreeModificationsRequest(Long theProjectID, Long theParentFolderID, GPLayer theLayer,
             GPWebServiceMapData theDescendantsMapData) {
         super(theDescendantsMapData);
         this.projectID = theProjectID;

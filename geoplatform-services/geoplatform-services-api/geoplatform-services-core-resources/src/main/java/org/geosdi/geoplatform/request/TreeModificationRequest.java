@@ -35,20 +35,20 @@
  */
 package org.geosdi.geoplatform.request;
 
-import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlTransient;
 import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequest;
 import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
-import java.io.Serializable;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlTransient;
+import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
 import org.geosdi.geoplatform.request.layer.WSAddLayerAndTreeModificationsRequest;
 import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
 import org.geosdi.geoplatform.request.layer.WSDDLayerAndTreeModificationsRequest;
 import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsRequest;
 import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 
+import java.io.Serializable;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -69,8 +69,10 @@ public abstract class TreeModificationRequest implements Serializable {
     public TreeModificationRequest() {
     }
 
-    public TreeModificationRequest(
-            GPWebServiceMapData theDescendantsMapData) {
+    /**
+     * @param theDescendantsMapData
+     */
+    public TreeModificationRequest(GPWebServiceMapData theDescendantsMapData) {
         this.descendantsMapData = theDescendantsMapData;
     }
 
@@ -84,9 +86,7 @@ public abstract class TreeModificationRequest implements Serializable {
     /**
      * @param descendantsMapData the descendantsMapData to set
      */
-    public void setDescendantsMapData(
-            GPWebServiceMapData descendantsMapData) {
+    public void setDescendantsMapData(GPWebServiceMapData descendantsMapData) {
         this.descendantsMapData = descendantsMapData;
     }
-
 }

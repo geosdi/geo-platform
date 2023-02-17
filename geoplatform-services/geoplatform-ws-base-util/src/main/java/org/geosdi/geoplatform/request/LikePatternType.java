@@ -41,23 +41,43 @@ import jakarta.xml.bind.annotation.XmlRootElement;
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @XmlRootElement
-public enum LikePatternType {
+public enum LikePatternType implements GPLikePatternType {
 
-    CONTAINS, STARTS_WITH, ENDS_WITH, CONTENT_EQUALS;
-    //
-    private static final String PERCENT = "%";
-
-    public String apply(String s) {
-        if (s == null || s.trim().length() == 0) {
-            return null;
+    CONTAINS {
+        /**
+         * @param s
+         * @return {@link String}
+         */
+        @Override
+        public String apply(String s) {
+            return (((s == null || s.trim().length() == 0)) ? null : PERCENT.concat(s).concat(PERCENT));
         }
-        if (this == LikePatternType.CONTAINS) {
-            return PERCENT + s + PERCENT;
-        } else if (this == LikePatternType.STARTS_WITH) {
-            return s + PERCENT;
-        } else if (this == LikePatternType.ENDS_WITH) {
-            return PERCENT + s;
+    }, STARTS_WITH {
+        /**
+         * @param s
+         * @return {@link String}
+         */
+        @Override
+        public String apply(String s) {
+            return (((s == null || s.trim().length() == 0)) ? null : s.concat(PERCENT));
         }
-        return s; // CONTENT_EQUALS
-    }
+    }, ENDS_WITH {
+        /**
+         * @param s
+         * @return {@link String}
+         */
+        @Override
+        public String apply(String s) {
+            return (((s == null || s.trim().length() == 0)) ? null : PERCENT.concat(s));
+        }
+    }, CONTENT_EQUALS {
+        /**
+         * @param s
+         * @return {@link String}
+         */
+        @Override
+        public String apply(String s) {
+            return (((s == null || s.trim().length() == 0)) ? null : s);
+        }
+    };
 }

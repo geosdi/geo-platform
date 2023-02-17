@@ -35,14 +35,14 @@
  */
 package org.geosdi.geoplatform.request.viewport;
 
-import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.core.model.GPViewport;
 
+import java.io.Serializable;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -58,8 +58,11 @@ public class InsertViewportRequest implements Serializable {
     public InsertViewportRequest() {
     }
 
-    public InsertViewportRequest(Long theAccountProjectID,
-            GPViewport theViewport) {
+    /**
+     * @param theAccountProjectID
+     * @param theViewport
+     */
+    public InsertViewportRequest(Long theAccountProjectID, GPViewport theViewport) {
         this.accountProjectID = theAccountProjectID;
         this.viewport = theViewport;
     }
@@ -97,5 +100,4 @@ public class InsertViewportRequest implements Serializable {
         return getClass().getSimpleName() + " {" + "accountProjectID = "
                 + accountProjectID + ", viewport = " + viewport + '}';
     }
-
 }

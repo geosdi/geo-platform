@@ -65,7 +65,7 @@ public class GPWFSRequestfValidator extends GPI18NValidator<GPI18NRequestValidat
     protected String buildMessage(Set<ConstraintViolation<GPI18NRequestValidator>> constraintViolations) {
         return constraintViolations.stream()
                 .map(ConstraintViolation::getMessage)
-                .filter(message -> ((message != null) && !(message.isEmpty())))
+                .filter(message -> ((message != null) && !(message.trim().isEmpty())))
                 .distinct()
                 .collect(joining("\n"));
     }

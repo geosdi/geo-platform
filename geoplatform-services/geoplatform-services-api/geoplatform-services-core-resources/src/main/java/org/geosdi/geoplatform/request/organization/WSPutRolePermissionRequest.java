@@ -35,13 +35,12 @@
  */
 package org.geosdi.geoplatform.request.organization;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.response.collection.GuiComponentsPermissionMapData;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -56,9 +55,12 @@ public class WSPutRolePermissionRequest extends WSSaveRoleRequest {
     public WSPutRolePermissionRequest() {
     }
 
-    public WSPutRolePermissionRequest(
-            GuiComponentsPermissionMapData mapComponentPermission,
-            String theRole, String theOrganization) {
+    /**
+     * @param mapComponentPermission
+     * @param theRole
+     * @param theOrganization
+     */
+    public WSPutRolePermissionRequest(GuiComponentsPermissionMapData mapComponentPermission, String theRole, String theOrganization) {
         super(theRole, theOrganization);
         this.mapComponentPermission = mapComponentPermission;
     }
@@ -73,8 +75,7 @@ public class WSPutRolePermissionRequest extends WSSaveRoleRequest {
     /**
      * @param theMapComponentPermission the mapComponentPermission to set
      */
-    public void setMapComponentPermission(
-            GuiComponentsPermissionMapData theMapComponentPermission) {
+    public void setMapComponentPermission(GuiComponentsPermissionMapData theMapComponentPermission) {
         this.mapComponentPermission = theMapComponentPermission;
     }
 

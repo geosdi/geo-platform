@@ -35,22 +35,19 @@
  */
 package org.geosdi.geoplatform.request.folder;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.request.TreeModificationRequest;
 import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @XmlRootElement
-@XmlType(propOrder = {"projectID", "parentID",
-    "folder", "descendantsMapData"})
-public class WSAddFolderAndTreeModificationsRequest
-        extends TreeModificationRequest {
+@XmlType(propOrder = {"projectID", "parentID", "folder", "descendantsMapData"})
+public class WSAddFolderAndTreeModificationsRequest extends TreeModificationRequest {
 
     private static final long serialVersionUID = 9033003359326516301L;
     //
@@ -61,8 +58,13 @@ public class WSAddFolderAndTreeModificationsRequest
     public WSAddFolderAndTreeModificationsRequest() {
     }
 
-    public WSAddFolderAndTreeModificationsRequest(Long theProjectID,
-            Long theParentID, GPFolder theFolder,
+    /**
+     * @param theProjectID
+     * @param theParentID
+     * @param theFolder
+     * @param theDescendantsMapData
+     */
+    public WSAddFolderAndTreeModificationsRequest(Long theProjectID, Long theParentID, GPFolder theFolder,
             GPWebServiceMapData theDescendantsMapData) {
         super(theDescendantsMapData);
         this.projectID = theProjectID;

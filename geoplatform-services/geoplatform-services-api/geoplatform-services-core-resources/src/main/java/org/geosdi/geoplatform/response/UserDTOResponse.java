@@ -37,18 +37,18 @@ package org.geosdi.geoplatform.response;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.annotation.Nonnull;
-import javax.annotation.meta.When;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static javax.xml.bind.annotation.XmlAccessType.FIELD;
+import static jakarta.xml.bind.annotation.XmlAccessType.FIELD;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -69,7 +69,7 @@ public class UserDTOResponse implements Serializable {
      * @param theUserDTO
      */
     @JsonCreator
-    public UserDTOResponse(@Nonnull(when = When.NEVER) @JsonProperty(value = "userDTO") UserDTO theUserDTO) {
+    public UserDTOResponse(@Nonnull(when = NEVER) @JsonProperty(value = "userDTO") UserDTO theUserDTO) {
         checkArgument(theUserDTO != null, "The Parameter userDTO must not be null.");
         this.userDTO = theUserDTO;
     }

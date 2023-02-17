@@ -37,13 +37,13 @@ package org.geosdi.geoplatform.response;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlSeeAlso;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSeeAlso;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -77,6 +77,9 @@ public abstract class ShortAccountDTO implements Serializable {
     public ShortAccountDTO() {
     }
 
+    /**
+     * @param account
+     */
     public ShortAccountDTO(GPAccount account) {
         this.id = account.getId();
         this.organization = account.getOrganization().getName(); // TODO Possibile NullPointerException

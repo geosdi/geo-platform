@@ -48,8 +48,7 @@ import java.util.List;
  */
 //@XmlRootElement(name = "LayerSchemaDTO")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"typeName", "targetNamespace", "scope",
-        "geometry", "attributes"})
+@XmlType(propOrder = {"typeName", "targetNamespace", "scope", "geometry", "attributes"})
 public class LayerSchemaDTO implements Serializable {
 
     private static final long serialVersionUID = -1361873282045310490L;

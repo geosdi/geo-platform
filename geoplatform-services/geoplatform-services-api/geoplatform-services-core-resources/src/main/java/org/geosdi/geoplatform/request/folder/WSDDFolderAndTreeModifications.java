@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.request.folder;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.request.TreeModificationRequest;
 import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 
@@ -48,11 +48,9 @@ import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @XmlRootElement
-@XmlType(propOrder = {"folderMovedID", "newParentID",
-    "newPosition", "descendantsMapData"})
+@XmlType(propOrder = {"folderMovedID", "newParentID", "newPosition", "descendantsMapData"})
 @XmlAccessorType(XmlAccessType.FIELD)
-public class WSDDFolderAndTreeModifications
-        extends TreeModificationRequest {
+public class WSDDFolderAndTreeModifications extends TreeModificationRequest {
 
     private static final long serialVersionUID = 9201263180218998178L;
     //
@@ -63,8 +61,13 @@ public class WSDDFolderAndTreeModifications
     public WSDDFolderAndTreeModifications() {
     }
 
-    public WSDDFolderAndTreeModifications(Long theFolderMovedID,
-            Long theNewParentID, int theNewPosition,
+    /**
+     * @param theFolderMovedID
+     * @param theNewParentID
+     * @param theNewPosition
+     * @param theDescendantsMapData
+     */
+    public WSDDFolderAndTreeModifications(Long theFolderMovedID, Long theNewParentID, int theNewPosition,
             GPWebServiceMapData theDescendantsMapData) {
         super(theDescendantsMapData);
         this.folderMovedID = theFolderMovedID;

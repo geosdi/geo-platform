@@ -35,7 +35,8 @@
  */
 package org.geosdi.geoplatform.response;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * For handle IElementDTO inteface with JAXB.

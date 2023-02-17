@@ -35,12 +35,12 @@
  */
 package org.geosdi.geoplatform.response;
 
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlTransient;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>

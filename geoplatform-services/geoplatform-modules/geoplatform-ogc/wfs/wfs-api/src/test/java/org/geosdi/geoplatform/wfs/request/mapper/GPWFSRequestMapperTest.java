@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.wfs.request.mapper;
 
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.jaxb.IGPJAXBContextBuilder;
 import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesByBboxAndQueryRequest;
 import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesByBboxRequest;
 import org.geosdi.geoplatform.services.request.GPWFSSearchFeaturesRequest;
@@ -53,6 +53,7 @@ import java.io.StringWriter;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder.jakartaContextBuilder;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
@@ -262,7 +263,7 @@ public class GPWFSRequestMapperTest {
                         + "}"), GPWFSSearchFeaturesByBboxAndQueryRequest.class);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GP_WFS_SEARCH_FEATURES_BY_BBOX_REQUEST_FROM_STRING : {}\n",
                 wfsSearchFeaturesByBboxAndQueryRequest);
-        GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
+        IGPJAXBContextBuilder jaxbContextBuilder = jakartaContextBuilder();
         StringWriter writer = new StringWriter();
         jaxbContextBuilder.marshal(wfsSearchFeaturesByBboxAndQueryRequest.getQueryDTO(), writer);
         logger.info("########################QUERY_DTO_XML : \n{}\n", writer);

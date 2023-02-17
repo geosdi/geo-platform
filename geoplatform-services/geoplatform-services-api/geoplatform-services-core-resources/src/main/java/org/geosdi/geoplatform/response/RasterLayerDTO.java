@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.response;
 
+import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -46,7 +47,7 @@ import org.geosdi.geoplatform.core.model.attribution.GPLayerAttribution;
 import org.geosdi.geoplatform.core.model.temporal.GPTemporalLayer;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.annotation.*;
+
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;

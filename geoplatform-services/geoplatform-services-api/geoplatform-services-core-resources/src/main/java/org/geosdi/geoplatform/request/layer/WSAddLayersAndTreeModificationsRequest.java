@@ -35,17 +35,14 @@
  */
 package org.geosdi.geoplatform.request.layer;
 
-import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.*;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.geosdi.geoplatform.core.model.GPRasterLayer;
 import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.request.TreeModificationRequest;
 import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
+
+import java.util.List;
 
 /**
  *
@@ -54,8 +51,7 @@ import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class WSAddLayersAndTreeModificationsRequest
-        extends TreeModificationRequest {
+public class WSAddLayersAndTreeModificationsRequest extends TreeModificationRequest {
 
     private static final long serialVersionUID = -8055754216178718106L;
     //
@@ -69,8 +65,13 @@ public class WSAddLayersAndTreeModificationsRequest
     public WSAddLayersAndTreeModificationsRequest() {
     }
 
-    public WSAddLayersAndTreeModificationsRequest(Long theProjectID,
-            Long theParentFolderID, List<GPLayer> theLayers,
+    /**
+     * @param theProjectID
+     * @param theParentFolderID
+     * @param theLayers
+     * @param theDescendantsMapData
+     */
+    public WSAddLayersAndTreeModificationsRequest(Long theProjectID, Long theParentFolderID, List<GPLayer> theLayers,
             GPWebServiceMapData theDescendantsMapData) {
         super(theDescendantsMapData);
         this.projectID = theProjectID;

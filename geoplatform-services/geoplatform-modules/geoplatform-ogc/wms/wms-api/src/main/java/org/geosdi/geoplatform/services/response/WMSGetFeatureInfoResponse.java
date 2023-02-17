@@ -36,13 +36,14 @@
 package org.geosdi.geoplatform.services.response;
 
 import com.google.common.collect.Lists;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+
 import java.util.List;
 
 import static javax.annotation.meta.When.NEVER;

@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.request.folder;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.request.TreeModificationRequest;
 import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 
@@ -50,8 +50,7 @@ import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 @XmlRootElement
 @XmlType(propOrder = {"folderID", "descendantsMapData"})
 @XmlAccessorType(XmlAccessType.FIELD)
-public class WSDeleteFolderAndTreeModifications
-        extends TreeModificationRequest {
+public class WSDeleteFolderAndTreeModifications extends TreeModificationRequest {
 
     private static final long serialVersionUID = 7677459385594481220L;
     //
@@ -60,8 +59,11 @@ public class WSDeleteFolderAndTreeModifications
     public WSDeleteFolderAndTreeModifications() {
     }
 
-    public WSDeleteFolderAndTreeModifications(Long folderID,
-            GPWebServiceMapData theDescendantsMapData) {
+    /**
+     * @param folderID
+     * @param theDescendantsMapData
+     */
+    public WSDeleteFolderAndTreeModifications(Long folderID, GPWebServiceMapData theDescendantsMapData) {
         super(theDescendantsMapData);
         this.folderID = folderID;
     }

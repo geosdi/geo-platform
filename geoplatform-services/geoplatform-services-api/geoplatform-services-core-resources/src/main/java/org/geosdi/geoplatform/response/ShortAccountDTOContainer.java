@@ -36,16 +36,15 @@
 package org.geosdi.geoplatform.response;
 
 import com.google.common.collect.Lists;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlElementRefs;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlElementRefs;
 import java.io.Serializable;
 import java.util.List;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -54,7 +53,7 @@ import java.util.List;
 public class ShortAccountDTOContainer implements Serializable {
 
     private static final long serialVersionUID = -4846363289249055355L;
-
+    //
     @XmlElementRefs(value = {
         @XmlElementRef(name = "userDTO", type = UserDTO.class),
         @XmlElementRef(name = "applicationDTO", type = ApplicationDTO.class)})
@@ -63,6 +62,9 @@ public class ShortAccountDTOContainer implements Serializable {
     public ShortAccountDTOContainer() {
     }
 
+    /**
+     * @param accounts
+     */
     public ShortAccountDTOContainer(List<ShortAccountDTO> accounts) {
         this.accounts = accounts;
     }

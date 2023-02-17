@@ -35,11 +35,10 @@
  */
 package org.geosdi.geoplatform.response;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.core.model.GPUser;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author giuseppe
@@ -63,6 +62,9 @@ public class UserDTO extends ShortAccountDTO {
         super();
     }
 
+    /**
+     * @param user
+     */
     public UserDTO(GPUser user) {
         super(user);
         this.name = user.getName();

@@ -139,7 +139,7 @@
 
             <!-- Run the application using "mvn jetty:run" -->
             <plugin>
-                <groupId>org.mortbay.jetty</groupId>
+                <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <configuration>
                     <contextXml>${basedir}/war/WEB-INF/jetty-context.xml</contextXml>
@@ -147,12 +147,12 @@
                     <webAppConfig>
                         <contextPath>/</contextPath>
                     </webAppConfig>
-                    <connectors>
+                    <httpConnector>
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
                             <port>9393</port>
                             <maxIdleTime>60000</maxIdleTime>
                         </connector>
-                    </connectors>
+                    </httpConnector>
                     <reload>manual</reload>
                 </configuration>
             </plugin>

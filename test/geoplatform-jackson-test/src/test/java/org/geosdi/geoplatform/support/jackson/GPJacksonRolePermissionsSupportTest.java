@@ -39,8 +39,9 @@ import org.geosdi.geoplatform.request.organization.WSPutRolePermissionRequest;
 import org.geosdi.geoplatform.request.organization.WSSaveRoleRequest;
 import org.geosdi.geoplatform.response.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.response.role.WSGetRoleResponse;
-import static org.geosdi.geoplatform.support.jackson.GPBaseJacksonSupportTest.jacksonSupport;
 import org.junit.Test;
+
+import static java.lang.Thread.currentThread;
 
 /**
  *
@@ -51,52 +52,33 @@ public class GPJacksonRolePermissionsSupportTest extends GPBaseJacksonSupportTes
     
     @Test
     public void saveRoleRequestDataMappingTest() throws Exception {
-        WSSaveRoleRequest saveRoleRequest = jacksonSupport.getDefaultMapper().readValue(
-                Thread.currentThread().getContextClassLoader().getResourceAsStream(
-                        SAVE_ROLE_REQUEST_DATA_JSON), WSSaveRoleRequest.class);
-        
-        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@SAVE_ROLE_REQUEST_DATA_MAPPING"
-                + " : {}\n\n", saveRoleRequest);
-        
+        WSSaveRoleRequest saveRoleRequest = jacksonSupport.getDefaultMapper()
+                .readValue(currentThread().getContextClassLoader().getResourceAsStream(SAVE_ROLE_REQUEST_DATA_JSON), WSSaveRoleRequest.class);
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@SAVE_ROLE_REQUEST_DATA_MAPPING : {}\n\n", saveRoleRequest);
         super.marshall(saveRoleRequest);
     }
     
     @Test
     public void guiComponentsPermissionDataMappingTest() throws Exception {
-        GuiComponentsPermissionMapData guiComponents = jacksonSupport.getDefaultMapper().readValue(
-                Thread.currentThread().getContextClassLoader().getResourceAsStream(
-                        GUI_COMPONENTS_PERMISSION_DATA_JSON),
-                GuiComponentsPermissionMapData.class);
-        
-        logger.info("\n\n@@@@@@@@@@@@@@@@GUI_COMPONENTS_PERMISSION_DATA_MAPPING"
-                + " : {}\n\n", guiComponents);
-        
+        GuiComponentsPermissionMapData guiComponents = jacksonSupport.getDefaultMapper()
+                .readValue(currentThread().getContextClassLoader().getResourceAsStream(GUI_COMPONENTS_PERMISSION_DATA_JSON), GuiComponentsPermissionMapData.class);
+        logger.info("\n\n@@@@@@@@@@@@@@@@GUI_COMPONENTS_PERMISSION_DATA_MAPPING : {}\n\n", guiComponents);
         super.marshall(guiComponents);
     }
     
     @Test
     public void putRolePermissionDataMappingTest() throws Exception {
-        WSPutRolePermissionRequest putPermissionReques = jacksonSupport.getDefaultMapper().readValue(
-                Thread.currentThread().getContextClassLoader().getResourceAsStream(
-                        PUT_ROLE_PERMISSION_REQUEST_DATA_JSON),
-                WSPutRolePermissionRequest.class);
-        
-        logger.info("\n\n@@@@@@@@@@@@@@PUT_ROLE_PERMISSION_REQUEST_DATA_MAPPING"
-                + " : {}\n\n", putPermissionReques);
-        
+        WSPutRolePermissionRequest putPermissionReques = jacksonSupport.getDefaultMapper()
+                .readValue(currentThread().getContextClassLoader().getResourceAsStream(PUT_ROLE_PERMISSION_REQUEST_DATA_JSON), WSPutRolePermissionRequest.class);
+        logger.info("\n\n@@@@@@@@@@@@@@PUT_ROLE_PERMISSION_REQUEST_DATA_MAPPING: {}\n\n", putPermissionReques);
         super.marshall(putPermissionReques);
     }
     
     @Test
     public void getRoleResponseDataMappingTest() throws Exception {
-        WSGetRoleResponse getRoleResponse = jacksonSupport.getDefaultMapper().readValue(
-                Thread.currentThread().getContextClassLoader().getResourceAsStream(
-                        GET_ROLE_RESPONSE_DATA_JSON),
-                WSGetRoleResponse.class);
-        
-        logger.info("\n\n@@@@@@@@@@@@@@@@GET_ROLE_RESPONSE_REQUEST_DATA_MAPPING"
-                + " : {}\n\n", getRoleResponse);
-        
+        WSGetRoleResponse getRoleResponse = jacksonSupport.getDefaultMapper()
+                .readValue(currentThread().getContextClassLoader().getResourceAsStream(GET_ROLE_RESPONSE_DATA_JSON), WSGetRoleResponse.class);
+        logger.info("\n\n@@@@@@@@@@@@@@@@GET_ROLE_RESPONSE_REQUEST_DATA_MAPPING : {}\n\n", getRoleResponse);
         super.marshall(getRoleResponse);
     }
 }

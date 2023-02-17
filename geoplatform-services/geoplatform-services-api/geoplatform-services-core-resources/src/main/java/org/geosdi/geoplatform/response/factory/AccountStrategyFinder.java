@@ -35,11 +35,12 @@
  */
 package org.geosdi.geoplatform.response.factory;
 
+import net.jcip.annotations.ThreadSafe;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.ServiceLoader;
 import java.util.Set;
-import net.jcip.annotations.ThreadSafe;
 
 /**
  *
@@ -49,14 +50,12 @@ import net.jcip.annotations.ThreadSafe;
 @ThreadSafe
 public final class AccountStrategyFinder {
 
-    private static final ServiceLoader<AccountDTOStrategy> loader = ServiceLoader.<AccountDTOStrategy>load(
-            AccountDTOStrategy.class);
+    private static final ServiceLoader<AccountDTOStrategy> loader = ServiceLoader.<AccountDTOStrategy>load(AccountDTOStrategy.class);
 
     private AccountStrategyFinder() {
     }
 
-    private static synchronized <S extends AccountDTOStrategy> Set<S> getStrategies(
-            final Class<S> type, final boolean all) {
+    private static synchronized <S extends AccountDTOStrategy> Set<S> getStrategies(final Class<S> type, final boolean all) {
         final Iterator<AccountDTOStrategy> strategies = loader.iterator();
 
         return new StrategyArraySet<S>(new Iterator<S>() {

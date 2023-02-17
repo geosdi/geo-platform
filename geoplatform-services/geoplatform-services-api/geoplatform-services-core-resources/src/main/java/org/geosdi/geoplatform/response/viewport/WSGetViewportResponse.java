@@ -35,17 +35,13 @@
  */
 package org.geosdi.geoplatform.response.viewport;
 
-import java.io.Serializable;
-import java.util.Collection;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.*;
 import org.geosdi.geoplatform.core.model.GPViewport;
 
+import java.io.Serializable;
+import java.util.Collection;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

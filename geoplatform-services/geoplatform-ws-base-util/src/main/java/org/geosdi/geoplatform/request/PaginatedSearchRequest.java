@@ -54,19 +54,33 @@ public class PaginatedSearchRequest extends SearchRequest {
     public PaginatedSearchRequest() {
     }
 
+    /**
+     * @param num
+     * @param page
+     */
     public PaginatedSearchRequest(int num, int page) {
         this.num = num;
         this.page = page;
     }
 
+    /**
+     * @param nameLike
+     * @param num
+     * @param page
+     */
     public PaginatedSearchRequest(String nameLike, int num, int page) {
         super(nameLike);
         this.num = num;
         this.page = page;
     }
 
-    public PaginatedSearchRequest(String nameLike, LikePatternType likeType,
-            int num, int page) {
+    /**
+     * @param nameLike
+     * @param likeType
+     * @param num
+     * @param page
+     */
+    public PaginatedSearchRequest(String nameLike, LikePatternType likeType, int num, int page) {
         super(nameLike, likeType);
         this.num = num;
         this.page = page;

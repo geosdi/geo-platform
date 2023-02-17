@@ -35,14 +35,14 @@
  */
 package org.geosdi.geoplatform.request.message;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.io.Serializable;
 import java.util.Date;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -58,6 +58,10 @@ public class MarkMessageReadByDateRequest implements Serializable {
     public MarkMessageReadByDateRequest() {
     }
 
+    /**
+     * @param theRecipientID
+     * @param theToDate
+     */
     public MarkMessageReadByDateRequest(Long theRecipientID, Date theToDate) {
         this.recipientID = theRecipientID;
         this.toDate = theToDate;

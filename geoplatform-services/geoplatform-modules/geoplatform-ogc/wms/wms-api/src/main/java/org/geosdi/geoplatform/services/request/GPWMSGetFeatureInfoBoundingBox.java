@@ -36,11 +36,11 @@
 package org.geosdi.geoplatform.services.request;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import jakarta.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.geosdi.geoplatform.connector.server.request.GPWMSBoundingBox;
 import org.geosdi.geoplatform.services.request.adapter.GPWMSGetFeatureInfoBoundingBoxAdpter;
 
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 
 /**

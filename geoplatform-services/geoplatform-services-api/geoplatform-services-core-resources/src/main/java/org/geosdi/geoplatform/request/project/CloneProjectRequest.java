@@ -35,9 +35,10 @@
  */
 package org.geosdi.geoplatform.request.project;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.io.Serializable;
 
 /**
@@ -57,8 +58,12 @@ public class CloneProjectRequest implements Serializable {
     public CloneProjectRequest() {
     }
 
-    public CloneProjectRequest(Long gpProjectID,
-            Long theAccountID,String nameProject) {
+    /**
+     * @param gpProjectID
+     * @param theAccountID
+     * @param nameProject
+     */
+    public CloneProjectRequest(Long gpProjectID, Long theAccountID,String nameProject) {
         this.gpProjectID = gpProjectID;
         this.accountID = theAccountID;
         this.nameProject = nameProject;

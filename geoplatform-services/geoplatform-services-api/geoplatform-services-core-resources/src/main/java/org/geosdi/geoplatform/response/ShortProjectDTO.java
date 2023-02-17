@@ -35,8 +35,9 @@
  */
 package org.geosdi.geoplatform.response;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+
 import java.io.Serializable;
 
 /**
@@ -57,6 +58,12 @@ public class ShortProjectDTO implements Serializable {
     public ShortProjectDTO() {
     }
 
+    /**
+     * @param theVersion
+     * @param theNumberOfElements
+     * @param theInternalPublic
+     * @param theExternalPublic
+     */
     public ShortProjectDTO(Integer theVersion, Integer theNumberOfElements, boolean theInternalPublic,
             boolean theExternalPublic) {
         this.version = theVersion;

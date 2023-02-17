@@ -35,16 +35,12 @@
  */
 package org.geosdi.geoplatform.request;
 
+import jakarta.xml.bind.annotation.*;
+
 import java.io.Serializable;
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -62,8 +58,11 @@ public class PutAccountsProjectRequest implements Serializable {
     public PutAccountsProjectRequest() {
     }
 
-    public PutAccountsProjectRequest(Long projectID,
-            List<Long> accountIDsProject) {
+    /**
+     * @param projectID
+     * @param accountIDsProject
+     */
+    public PutAccountsProjectRequest(Long projectID, List<Long> accountIDsProject) {
         this.projectID = projectID;
         this.accountIDsProject = accountIDsProject;
     }

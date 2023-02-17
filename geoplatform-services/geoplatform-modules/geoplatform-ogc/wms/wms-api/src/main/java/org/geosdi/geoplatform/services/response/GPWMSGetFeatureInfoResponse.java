@@ -35,17 +35,17 @@
  */
 package org.geosdi.geoplatform.services.response;
 
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import lombok.Getter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 import java.util.List;
 
+import static jakarta.xml.bind.annotation.XmlAccessType.FIELD;
 import static javax.annotation.meta.When.NEVER;
-import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

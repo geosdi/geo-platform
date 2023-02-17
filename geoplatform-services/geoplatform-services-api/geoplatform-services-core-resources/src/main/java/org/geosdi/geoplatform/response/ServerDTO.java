@@ -35,12 +35,13 @@
  */
 package org.geosdi.geoplatform.response;
 
+import jakarta.xml.bind.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.annotation.*;
+
 import java.io.Serializable;
 import java.util.List;
 

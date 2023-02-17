@@ -63,8 +63,7 @@ public class TreeFolderElements extends TreeSet<AbstractElementDTO> {
 
     private static final long serialVersionUID = -2893259943610436517L;
     //
-    private static final transient Logger logger = LoggerFactory.getLogger(
-            TreeFolderElements.class);
+    private static final transient Logger logger = LoggerFactory.getLogger(TreeFolderElements.class);
 
     /**
      * @param folders list of FolderDTO

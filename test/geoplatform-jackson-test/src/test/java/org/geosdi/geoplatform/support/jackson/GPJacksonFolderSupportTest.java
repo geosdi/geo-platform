@@ -43,8 +43,9 @@ import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
 import org.geosdi.geoplatform.response.collection.ChildrenFolderStore;
 import org.junit.Test;
 
+import static java.lang.Thread.currentThread;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -52,81 +53,49 @@ public class GPJacksonFolderSupportTest extends GPBaseJacksonSupportTest {
 
     @Test
     public void folderDataMapperTest() throws Exception {
-        GPFolder folder = jacksonSupport.getDefaultMapper().readValue(
-                Thread.currentThread().getContextClassLoader().getResourceAsStream(FOLDER_DATA_JSON), GPFolder.class);
+        GPFolder folder = jacksonSupport.getDefaultMapper()
+                .readValue(currentThread().getContextClassLoader().getResourceAsStream(FOLDER_DATA_JSON), GPFolder.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@FOLDER_DATA_MAPPING" + " : {}\n\n", folder);
         super.marshall(folder);
     }
 
     @Test
     public void insertFolderRequestDataMapperTest() throws Exception {
-        InsertFolderRequest insertFolderRequest = jacksonSupport.getDefaultMapper().readValue(
-                Thread.currentThread().getContextClassLoader().getResourceAsStream(
-                        INSERT_FOLDER_REQUEST_DATA_JSON),
-                InsertFolderRequest.class);
-
-        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@INSERT_FOLDER_REQUEST_DATA_MAPPING"
-                + " : {}\n\n", insertFolderRequest);
-
+        InsertFolderRequest insertFolderRequest = jacksonSupport.getDefaultMapper()
+                .readValue(currentThread().getContextClassLoader().getResourceAsStream(INSERT_FOLDER_REQUEST_DATA_JSON), InsertFolderRequest.class);
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@INSERT_FOLDER_REQUEST_DATA_MAPPING: {}\n\n", insertFolderRequest);
         super.marshall(insertFolderRequest);
     }
 
     @Test
-    public void addFolderAndTreeModificationRequestDataMapperTest()
-            throws Exception {
-        WSAddFolderAndTreeModificationsRequest addFolderRequest = jacksonSupport.getDefaultMapper().readValue(
-                Thread.currentThread().getContextClassLoader().getResourceAsStream(
-                        ADD_FOLDER_TREE_MODIFICATION_REQUEST_DATA_JSON),
-                WSAddFolderAndTreeModificationsRequest.class);
-
-        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-                + "ADD_FOLDER_TREE_MODIFICATION_REQUEST_DATA_MAPPING"
-                + " : {}\n\n", addFolderRequest);
-
+    public void addFolderAndTreeModificationRequestDataMapperTest() throws Exception {
+        WSAddFolderAndTreeModificationsRequest addFolderRequest = jacksonSupport.getDefaultMapper()
+                .readValue(currentThread().getContextClassLoader().getResourceAsStream(ADD_FOLDER_TREE_MODIFICATION_REQUEST_DATA_JSON), WSAddFolderAndTreeModificationsRequest.class);
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ADD_FOLDER_TREE_MODIFICATION_REQUEST_DATA_MAPPING : {}\n\n", addFolderRequest);
         super.marshall(addFolderRequest);
     }
 
     @Test
-    public void deleteFolderAndTreeModificationRequestDataMapperTest()
-            throws Exception {
-        WSDeleteFolderAndTreeModifications deleteFolderRequest = jacksonSupport.getDefaultMapper().readValue(
-                Thread.currentThread().getContextClassLoader().getResourceAsStream(
-                        DELETE_FOLDER_TREE_MODIFICATION_REQUEST_DATA_JSON),
-                WSDeleteFolderAndTreeModifications.class);
-
-        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-                + "DELETE_FOLDER_TREE_MODIFICATION_REQUEST_DATA_MAPPING"
-                + " : {}\n\n", deleteFolderRequest);
-
+    public void deleteFolderAndTreeModificationRequestDataMapperTest() throws Exception {
+        WSDeleteFolderAndTreeModifications deleteFolderRequest = jacksonSupport.getDefaultMapper()
+                .readValue(currentThread().getContextClassLoader().getResourceAsStream(DELETE_FOLDER_TREE_MODIFICATION_REQUEST_DATA_JSON), WSDeleteFolderAndTreeModifications.class);
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@DELETE_FOLDER_TREE_MODIFICATION_REQUEST_DATA_MAPPING : {}\n\n", deleteFolderRequest);
         super.marshall(deleteFolderRequest);
     }
 
     @Test
     public void getChildrenFolderDataMapperTest() throws Exception {
-        ChildrenFolderStore folderStore = jacksonSupport.getDefaultMapper().readValue(
-                Thread.currentThread().getContextClassLoader().getResourceAsStream(
-                        GET_CHILDREN_FOLDER_DATA_JSON),
-                ChildrenFolderStore.class);
-
-        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@GET_CHILDREN_FOLDER_DATA_MAPPING"
-                + " : {}\n\n", folderStore);
-
+        ChildrenFolderStore folderStore = jacksonSupport.getDefaultMapper()
+                .readValue(currentThread().getContextClassLoader().getResourceAsStream(GET_CHILDREN_FOLDER_DATA_JSON), ChildrenFolderStore.class);
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@GET_CHILDREN_FOLDER_DATA_MAPPING : {}\n\n", folderStore);
         super.marshall(folderStore);
     }
 
     @Test
-    public void ddFolderAndTreeModificationRequestDataMapperTest()
-            throws Exception {
-        WSDDFolderAndTreeModifications ddFolderRequest = jacksonSupport.getDefaultMapper().readValue(
-                Thread.currentThread().getContextClassLoader().getResourceAsStream(
-                        DD_FOLDER_TREE_MODIFICATION_REQUEST_DATA_JSON),
-                WSDDFolderAndTreeModifications.class);
-
-        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-                + "DD_FOLDER_TREE_MODIFICATION_REQUEST_DATA_MAPPING"
-                + " : {}\n\n", ddFolderRequest);
-
+    public void ddFolderAndTreeModificationRequestDataMapperTest() throws Exception {
+        WSDDFolderAndTreeModifications ddFolderRequest = jacksonSupport.getDefaultMapper()
+                .readValue(currentThread().getContextClassLoader().getResourceAsStream(DD_FOLDER_TREE_MODIFICATION_REQUEST_DATA_JSON), WSDDFolderAndTreeModifications.class);
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@DD_FOLDER_TREE_MODIFICATION_REQUEST_DATA_MAPPING: {}\n\n", ddFolderRequest);
         super.marshall(ddFolderRequest);
     }
-
 }

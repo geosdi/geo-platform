@@ -35,14 +35,13 @@
  */
 package org.geosdi.geoplatform.request.layer;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.request.TreeModificationRequest;
 import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -57,8 +56,11 @@ public class WSDeleteLayerAndTreeModificationsRequest extends TreeModificationRe
     public WSDeleteLayerAndTreeModificationsRequest() {
     }
 
-    public WSDeleteLayerAndTreeModificationsRequest(Long theLayerID,
-            GPWebServiceMapData theDescendantsMapData) {
+    /**
+     * @param theLayerID
+     * @param theDescendantsMapData
+     */
+    public WSDeleteLayerAndTreeModificationsRequest(Long theLayerID, GPWebServiceMapData theDescendantsMapData) {
         super(theDescendantsMapData);
         this.layerID = theLayerID;
     }

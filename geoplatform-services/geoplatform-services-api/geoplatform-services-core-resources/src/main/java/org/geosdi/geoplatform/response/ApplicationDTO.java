@@ -35,9 +35,8 @@
  */
 package org.geosdi.geoplatform.response;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.core.model.GPApplication;
-
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -52,6 +51,9 @@ public class ApplicationDTO extends ShortAccountDTO {
     public ApplicationDTO() {
     }
 
+    /**
+     * @param application
+     */
     public ApplicationDTO(GPApplication application) {
         super(application);
         this.appID = application.getAppID();

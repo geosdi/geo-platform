@@ -38,8 +38,9 @@ package org.geosdi.geoplatform.support.jackson;
 import org.geosdi.geoplatform.core.model.GPMessage;
 import org.geosdi.geoplatform.response.MessageDTO;
 import org.geosdi.geoplatform.response.message.GetMessageResponse;
-import static org.geosdi.geoplatform.support.jackson.GPBaseJacksonSupportTest.jacksonSupport;
 import org.junit.Test;
+
+import static java.lang.Thread.currentThread;
 
 /**
  *
@@ -50,38 +51,25 @@ public class GPJacksonMessageSupportTest extends GPBaseJacksonSupportTest {
 
     @Test
     public void messageDataMapperTest() throws Exception {
-        GPMessage message = jacksonSupport.getDefaultMapper().readValue(
-                Thread.currentThread().getContextClassLoader().getResourceAsStream(
-                        MESSAGE_DATA_JSON), GPMessage.class);
-
-        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@MESSAGE_DATA_MAPPING"
-                + " : {}\n\n", message);
-        
+        GPMessage message = jacksonSupport.getDefaultMapper()
+                .readValue(currentThread().getContextClassLoader().getResourceAsStream(MESSAGE_DATA_JSON), GPMessage.class);
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@MESSAGE_DATA_MAPPING : {}\n\n", message);
         super.marshall(message);
     }
 
     @Test
     public void messageDTODataMapperTest() throws Exception {
-        MessageDTO messageDTO = jacksonSupport.getDefaultMapper().readValue(
-                Thread.currentThread().getContextClassLoader().getResourceAsStream(
-                        MESSAGE_DTO_DATA_JSON), MessageDTO.class);
-
-        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@MESSAGE_DTO_DATA_MAPPING"
-                + " : {}\n\n", messageDTO);
-        
+        MessageDTO messageDTO = jacksonSupport.getDefaultMapper()
+                .readValue(currentThread().getContextClassLoader().getResourceAsStream(MESSAGE_DTO_DATA_JSON), MessageDTO.class);
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@MESSAGE_DTO_DATA_MAPPING : {}\n\n", messageDTO);
         super.marshall(messageDTO);
     }
 
     @Test
     public void getMessageResponseDataMapperTest() throws Exception {
-        GetMessageResponse getMessageReponse = jacksonSupport.getDefaultMapper().readValue(
-                Thread.currentThread().getContextClassLoader().getResourceAsStream(
-                        GET_MESSAGE_RESPONSE_DATA_JSON),
-                GetMessageResponse.class);
-
-        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@GET_MESSAGE_RESPONSE_DATA_MAPPING"
-                + " : {}\n\n", getMessageReponse);
-        
+        GetMessageResponse getMessageReponse = jacksonSupport.getDefaultMapper()
+                .readValue(currentThread().getContextClassLoader().getResourceAsStream(GET_MESSAGE_RESPONSE_DATA_JSON), GetMessageResponse.class);
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@GET_MESSAGE_RESPONSE_DATA_MAPPING : {}\n\n", getMessageReponse);
         super.marshall(getMessageReponse);
     }
 }

@@ -35,8 +35,9 @@
  */
 package org.geosdi.geoplatform.services.request;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+
 import java.io.Serializable;
 
 /**
@@ -54,6 +55,10 @@ public class WMSHeaderParam implements Serializable {
     public WMSHeaderParam() {
     }
 
+    /**
+     * @param headerKey
+     * @param headerValue
+     */
     public WMSHeaderParam(String headerKey, String headerValue) {
         this.headerKey = headerKey;
         this.headerValue = headerValue;

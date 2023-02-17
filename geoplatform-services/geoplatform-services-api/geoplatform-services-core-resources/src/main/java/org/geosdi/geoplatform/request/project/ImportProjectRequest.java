@@ -35,14 +35,14 @@
  */
 package org.geosdi.geoplatform.request.project;
 
-import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.response.ProjectDTO;
 
+import java.io.Serializable;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -58,8 +58,11 @@ public class ImportProjectRequest implements Serializable {
     public ImportProjectRequest() {
     }
 
-    public ImportProjectRequest(ProjectDTO theProjectDTO,
-            Long theAccountID) {
+    /**
+     * @param theProjectDTO
+     * @param theAccountID
+     */
+    public ImportProjectRequest(ProjectDTO theProjectDTO, Long theAccountID) {
         this.projectDTO = theProjectDTO;
         this.accountID = theAccountID;
     }
@@ -97,5 +100,4 @@ public class ImportProjectRequest implements Serializable {
         return getClass().getSimpleName() + " {" + "projectDTO = "
                 + projectDTO + ", accountID = " + accountID + '}';
     }
-
 }

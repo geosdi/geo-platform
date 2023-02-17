@@ -35,10 +35,9 @@
  */
 package org.geosdi.geoplatform.services.request;
 
+import jakarta.xml.bind.annotation.XmlSeeAlso;
+import jakarta.xml.bind.annotation.XmlTransient;
 import org.geosdi.geoplatform.hibernate.validator.support.request.GPI18NRequestValidator;
-
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlTransient;
 
 import static java.util.Locale.ENGLISH;
 

@@ -36,9 +36,9 @@
 package org.geosdi.geoplatform.response.role;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,6 +67,9 @@ public class WSGetRoleResponse implements GPGetRoleResponse {
     public WSGetRoleResponse() {
     }
 
+    /**
+     * @param theRoles
+     */
     public WSGetRoleResponse(List<String> theRoles) {
         this.roles = theRoles;
     }

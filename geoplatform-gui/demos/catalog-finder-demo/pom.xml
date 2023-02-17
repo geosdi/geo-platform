@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-  
+
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>demos</artifactId>
@@ -14,7 +15,7 @@
     <packaging>war</packaging>
 
     <name>Geo-Platform :: == Catalog Finder Widget Demo</name>
-  
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -23,8 +24,8 @@
                 <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>    
-        </dependencies>    
+            </dependency>
+        </dependencies>
     </dependencyManagement>
 
     <dependencies>
@@ -39,20 +40,20 @@
             <artifactId>gwt-dev</artifactId>
             <scope>provided</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.gwtproject.web.bindery</groupId>
             <artifactId>requestfactory-server</artifactId>
             <scope>runtime</scope>
         </dependency>
-        
+
         <!-- Dependencies for GWT-2.3.0 Compilation -->
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
             <version>1.0.0.GA</version>
         </dependency>
-        
+
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api-sources</artifactId>
@@ -86,13 +87,13 @@
             <artifactId>geoplatform-configuration</artifactId>
             <classifier>sources</classifier>
         </dependency>
-        
+
         <!-- GeoPlatform -->
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>csw-catalog-api</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>csw-catalog-api</artifactId>
@@ -105,13 +106,13 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-resources</artifactId>
         </dependency>
-        
+
         <!-- CATALOG FINDER MODULE -->
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>finder-widget</artifactId>
         </dependency>
-        
+
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -129,14 +130,14 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
-    
+
     <build>
         <outputDirectory>war/WEB-INF/classes</outputDirectory>
         <plugins>
@@ -169,14 +170,14 @@
                     <hostedWebapp>${basedir}/war</hostedWebapp>
                     <incremental>false</incremental>
                     <extraJvmArgs>-XX:MaxPermSize=766M -Xmx1024M -Xss1024k -Dgwt.nowarn.legacy.tools</extraJvmArgs>
-                    
+
                     <module>org.geosdi.geoplatform.demos.catalog.CatalogFinderDemoUI</module>
-<!--                    
-                    <inplace>true</inplace>
-                    <gwtVersion>${gwtVersion}</gwtVersion>
-                    <warSourceDirectory>war</warSourceDirectory>
-                    <disableCastChecking>true</disableCastChecking>
-                    <disableClassMetadata>true</disableClassMetadata>-->
+                    <!--
+                                        <inplace>true</inplace>
+                                        <gwtVersion>${gwtVersion}</gwtVersion>
+                                        <warSourceDirectory>war</warSourceDirectory>
+                                        <disableCastChecking>true</disableCastChecking>
+                                        <disableClassMetadata>true</disableClassMetadata>-->
                 </configuration>
             </plugin>
 
@@ -187,16 +188,16 @@
                 <configuration>
                     <contextXml>${basedir}/war/WEB-INF/jetty-context.xml</contextXml>
                     <webAppSourceDirectory>${basedir}/war</webAppSourceDirectory>
-                    <webAppConfig>
+                    <webApp>
                         <contextPath>/</contextPath>
-                    </webAppConfig>
+                    </webApp>
                     <httpConnector>
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
                             <port>9393</port>
                             <maxIdleTime>60000</maxIdleTime>
                         </connector>
+                        <reload>manual</reload>
                     </httpConnector>
-                    <reload>manual</reload>
                 </configuration>
             </plugin>
 
@@ -209,11 +210,11 @@
                         <phase>clean</phase>
                         <configuration>
                             <target>
-                                <delete dir="war/catalog_finder_demo" />
-                                <delete dir="war/WEB-INF/deploy" />
-                                <delete dir="war/WEB-INF/lib" />
-                                <delete dir="gwt-unitCache" />
-                                <delete dir="target" />
+                                <delete dir="war/catalog_finder_demo"/>
+                                <delete dir="war/WEB-INF/deploy"/>
+                                <delete dir="war/WEB-INF/lib"/>
+                                <delete dir="gwt-unitCache"/>
+                                <delete dir="target"/>
                             </target>
                         </configuration>
                         <goals>
@@ -222,7 +223,7 @@
                     </execution>
                 </executions>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>

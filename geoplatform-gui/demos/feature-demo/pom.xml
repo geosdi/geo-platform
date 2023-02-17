@@ -144,16 +144,16 @@
                 <configuration>
                     <contextXml>${basedir}/war/WEB-INF/jetty-context.xml</contextXml>
                     <webAppSourceDirectory>${basedir}/war</webAppSourceDirectory>
-                    <webAppConfig>
+                    <webApp>
                         <contextPath>/</contextPath>
-                    </webAppConfig>
+                    </webApp>
                     <httpConnector>
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
                             <port>9393</port>
                             <maxIdleTime>60000</maxIdleTime>
                         </connector>
+                        <reload>manual</reload>
                     </httpConnector>
-                    <reload>manual</reload>
                 </configuration>
             </plugin>
 

@@ -35,16 +35,18 @@
  */
 package org.geosdi.geoplatform.rs.support.geocoding;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.rs.support.geocoding.services.api.IGPGoogleGeocodingRestService;
 import org.geosdi.geoplatform.rs.support.request.GPGeocodingAddressRequest;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import javax.annotation.Resource;
 
 import static java.lang.System.clearProperty;
 import static java.lang.System.setProperty;

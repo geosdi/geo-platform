@@ -39,8 +39,7 @@ import net.jcip.annotations.Immutable;
 import org.geosdi.geoplatform.support.xmpp.configuration.auth.XMPPAuth;
 import org.geosdi.geoplatform.support.xmpp.spring.annotation.GPXMPPProp;
 import org.springframework.beans.factory.annotation.Value;
-
-import javax.inject.Named;
+import org.springframework.stereotype.Component;
 
 /**
  *
@@ -49,7 +48,7 @@ import javax.inject.Named;
  */
 @Immutable
 @GPXMPPProp
-@Named(value = "gpSpringXMPPAuth")
+@Component(value = "gpSpringXMPPAuth")
 public class GPSpringXMPPAuth implements XMPPAuth {
 
     @Value("gpXmppConfigurator{gp.xmpp.username:@null}")

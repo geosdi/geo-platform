@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.support.xmpp;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.support.xmpp.configuration.properties.XMPPProperties;
 import org.geosdi.geoplatform.support.xmpp.loader.GPXMPPLoaderLazy;
 import org.junit.AfterClass;
@@ -44,8 +45,6 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
-
-import javax.annotation.Resource;
 
 import static java.lang.System.clearProperty;
 import static java.lang.System.setProperty;

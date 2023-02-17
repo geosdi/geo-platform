@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.support.async.mail;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.support.async.mail.loader.GPMailAsyncLoader;
 import org.geosdi.geoplatform.support.mail.configuration.detail.GPMailDetail;
@@ -46,11 +47,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import javax.annotation.Resource;
 import java.util.concurrent.Future;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -64,7 +63,7 @@ public class GPMailAsyncTest {
     //
     static final String GP_ASYNC_KEY = "GP_ASYNC_FILE_PROP";
     static final String GP_MAIL_KEY = "GP_MAIL_FILE_PROP";
-
+    //
     @Resource(name = "gpMailSpringDetail")
     private GPMailDetail gpMailSpringDetail;
     @Resource(name = "gpMailAsyncSender")

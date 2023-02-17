@@ -42,8 +42,7 @@ import org.geosdi.geoplatform.support.xmpp.configuration.properties.XMPPProperti
 import org.geosdi.geoplatform.support.xmpp.spring.annotation.GPXMPPProp;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.springframework.beans.factory.annotation.Value;
-
-import javax.inject.Named;
+import org.springframework.stereotype.Component;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static java.lang.Boolean.FALSE;
@@ -55,7 +54,7 @@ import static java.lang.Boolean.FALSE;
  */
 @Immutable
 @GPXMPPProp
-@Named(value = "gpSpringXMPPProp")
+@Component(value = "gpSpringXMPPProp")
 public class GPSpringXMPPProperties implements XMPPProperties {
 
     @Value("gpXmppConfigurator{gp.xmpp.host:@null}")

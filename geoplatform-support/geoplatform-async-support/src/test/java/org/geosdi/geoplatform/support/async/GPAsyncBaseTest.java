@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.support.async;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.support.async.loader.GPAsyncLoader;
 import org.geosdi.geoplatform.support.async.spring.properties.TaskExecutorProperties;
@@ -45,8 +46,6 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
-
-import javax.annotation.Resource;
 
 /**
  *
@@ -62,7 +61,7 @@ public class GPAsyncBaseTest {
     static Logger logger;
     //
     static final String GP_ASYNC_KEY = "GP_ASYNC_FILE_PROP";
-
+    //
     @Resource(name = "gpThreadPoolTaskExecutor")
     ThreadPoolTaskExecutor gpThreadPoolTaskExecutor;
     @Resource(name = "gpTaskExecutorProp")

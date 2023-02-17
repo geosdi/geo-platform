@@ -35,9 +35,10 @@
  */
 package org.geosdi.geoplatform.responce;
 
-import java.util.List;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
+
+import java.util.List;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

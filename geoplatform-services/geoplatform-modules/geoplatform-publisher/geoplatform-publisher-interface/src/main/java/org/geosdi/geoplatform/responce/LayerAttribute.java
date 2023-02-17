@@ -35,7 +35,8 @@
  */
 package org.geosdi.geoplatform.responce;
 
-import javax.xml.bind.annotation.XmlRootElement;
+
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

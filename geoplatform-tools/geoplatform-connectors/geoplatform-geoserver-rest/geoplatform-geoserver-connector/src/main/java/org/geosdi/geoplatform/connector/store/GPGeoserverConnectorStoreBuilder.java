@@ -45,6 +45,7 @@ import javax.annotation.Nullable;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static org.geosdi.geoplatform.connector.GeoserverVersion.fromString;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
 /**
@@ -98,7 +99,7 @@ public final class GPGeoserverConnectorStoreBuilder extends AbstractConnectorBui
      * @return {@link ObjectMapper}
      */
     ObjectMapper toJacksonSupport() {
-        this.jacksonSupport = ((this.jacksonSupport != null) ? this.jacksonSupport : new GPJacksonSupport().configure(NON_NULL));
+        this.jacksonSupport = ((this.jacksonSupport != null) ? this.jacksonSupport : new GPJacksonSupport(JAXB).configure(NON_NULL));
         return this.jacksonSupport.getDefaultMapper();
     }
 }

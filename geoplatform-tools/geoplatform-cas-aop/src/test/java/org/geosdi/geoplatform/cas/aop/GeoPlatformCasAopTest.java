@@ -39,6 +39,7 @@ import it.geosolutions.geoserver.rest.GeoServerRESTPublisher;
 import it.geosolutions.geoserver.rest.cas.GeoServerCASRESTPublisher;
 import it.geosolutions.geoserver.rest.cas.GeoServerCASRESTReader;
 import it.geosolutions.geoserver.rest.sldservice.Ramp;
+import jakarta.annotation.Resource;
 import org.apache.commons.httpclient.NameValuePair;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.services.IGPPublisherService;
@@ -51,7 +52,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.Resource;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.net.URI;

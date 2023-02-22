@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.publisher;
 
 import com.google.common.collect.Lists;
+import jakarta.annotation.Resource;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
@@ -49,7 +50,6 @@ import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 

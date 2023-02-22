@@ -35,9 +35,8 @@
  */
 package org.geosdi.geoplatform.catalogws.beans;
 
-import java.util.concurrent.TimeUnit;
-import javax.annotation.PostConstruct;
-import javax.xml.ws.Endpoint;
+import jakarta.annotation.PostConstruct;
+import jakarta.xml.ws.Endpoint;
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBusFactory;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
@@ -48,6 +47,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  *

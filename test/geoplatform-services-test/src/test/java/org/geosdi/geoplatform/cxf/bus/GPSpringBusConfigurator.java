@@ -35,26 +35,25 @@
  */
 package org.geosdi.geoplatform.cxf.bus;
 
-import net.sf.ehcache.Disposable;
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBusFactory;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.geosdi.geoplatform.configurator.bootstrap.Develop;
 import org.geosdi.geoplatform.support.cxf.server.ServerInterceptorStrategyFactory;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import static java.lang.Boolean.FALSE;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Component(value = "gpSpringBusConf")
 @Develop
-public class GPSpringBusConfigurator implements Disposable {
+public class GPSpringBusConfigurator implements DisposableBean {
 
     @Autowired
     private ServerInterceptorStrategyFactory factory;
@@ -73,10 +72,11 @@ public class GPSpringBusConfigurator implements Disposable {
 //                factory.getSecurityOutInterceptor());
 
         SpringBusFactory.setDefaultBus(bus);
+        SpringBusFactory.setThreadDefaultBus(this.bus);
     }
 
     @Override
-    public void dispose() {
+    public void destroy() throws Exception {
         if (this.bus != null) {
             this.bus.shutdown(FALSE);
         }

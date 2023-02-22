@@ -370,6 +370,7 @@
                     <systemPropertyVariables>
                         <GP_PERSISTENCE_PBE_KEY>$-geosdi2021,??/08/1345786543ffFF,??-77</GP_PERSISTENCE_PBE_KEY>
                     </systemPropertyVariables>
+                    <argLine>--add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED</argLine>
                 </configuration>
             </plugin>
         </plugins>

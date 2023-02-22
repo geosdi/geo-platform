@@ -28,6 +28,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-persistence-api</artifactId>
             <version>${project.version}</version>

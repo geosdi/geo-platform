@@ -40,13 +40,9 @@ import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
-import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.model.ServiceTest;
-import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
-import org.junit.Assert;
 import org.junit.runner.RunWith;
-import org.springframework.security.acls.domain.BasePermission;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -55,14 +51,19 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static java.lang.Boolean.TRUE;
+import static org.geosdi.geoplatform.gui.shared.GPRole.USER;
+import static org.geosdi.geoplatform.request.LikePatternType.CONTENT_EQUALS;
+import static org.junit.Assert.assertEquals;
+import static org.springframework.security.acls.domain.BasePermission.ADMINISTRATION;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
-    "classpath*:applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml", "classpath*:applicationContext.xml"})
 @TestExecutionListeners(value = {WSListenerBasicServices.class})
 @ActiveProfiles(profiles = {"dev", "jpa"})
 abstract class BaseSoapServiceTest extends ServiceTest {
@@ -88,25 +89,19 @@ abstract class BaseSoapServiceTest extends ServiceTest {
     public void setUp() throws Exception {
         super.setUp();
         // Insert User
-        idUserTest = this.createAndInsertUser(usernameTest, organizationTest,
-                GPRole.USER);
-        userTest = gpWSClient.getUserDetailByUsername(
-                new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
+        idUserTest = this.createAndInsertUser(usernameTest, organizationTest, USER);
+        userTest = gpWSClient.getUserDetailByUsername(new SearchRequest(usernameTest, CONTENT_EQUALS));
         // Insert Project
-        idProjectTest = this.createAndInsertProject("project_test_ws", false, 2,
-                new Date(System.currentTimeMillis()));
+        idProjectTest = this.createAndInsertProject("project_test_ws", false, 2, new Date(System.currentTimeMillis()));
         projectTest = gpWSClient.getProjectDetail(idProjectTest);
         // Insert the Account as the owner of Project
-        this.createAndInsertAccountProject(userTest, projectTest,
-                BasePermission.ADMINISTRATION);
+        this.createAndInsertAccountProject(userTest, projectTest, ADMINISTRATION);
 
         // Create root folders for the user
-        idRootFolderA = this.createAndInsertFolder(nameRootFolderA, projectTest,
-                2, null);
+        idRootFolderA = this.createAndInsertFolder(nameRootFolderA, projectTest, 2, null);
         rootFolderA = gpWSClient.getFolderDetail(idRootFolderA);
 
-        idRootFolderB = this.createAndInsertFolder(nameRootFolderB, projectTest,
-                1, null);
+        idRootFolderB = this.createAndInsertFolder(nameRootFolderB, projectTest, 1, null);
         rootFolderB = gpWSClient.getFolderDetail(idRootFolderB);
 
         // Set the list of keywords (for raster layer)
@@ -123,13 +118,10 @@ abstract class BaseSoapServiceTest extends ServiceTest {
     @Override
     public void tearDown() {
         try {
-            Assert.assertEquals(Boolean.TRUE, gpWSClient.deleteProject(
-                    idProjectTest));
+            assertEquals(TRUE, gpWSClient.deleteProject(idProjectTest));
         } catch (Exception ex) {
             logger.error("ERROR @@@@@@@@@@@@@@@@@@@@@@@@ " + ex);
         }
-
         super.tearDown();
     }
-
 }

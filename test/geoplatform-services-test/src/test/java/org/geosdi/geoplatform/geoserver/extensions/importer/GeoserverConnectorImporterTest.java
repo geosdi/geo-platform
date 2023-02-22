@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.geoserver.extensions.importer;
 
 import it.geosolutions.geoserver.rest.manager.GeoServerRESTImporterManager;
+import jakarta.annotation.Resource;
 import net.sf.json.JSONObject;
 import org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.GPGeoserverCreateImportResponse;
 import org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.GPGeoserverLoadImportResponse;
@@ -48,8 +49,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.annotation.Resource;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group

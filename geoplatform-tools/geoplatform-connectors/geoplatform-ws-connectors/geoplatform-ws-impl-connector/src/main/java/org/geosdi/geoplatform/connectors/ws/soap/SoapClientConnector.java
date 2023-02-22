@@ -60,33 +60,20 @@ public abstract class SoapClientConnector<E> extends GPAbstractWSClientConnector
     @Override
     protected void create() {
         JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
-
         if (clientInterceptorStrategyFactory != null) {
-            factory.getInInterceptors().add(
-                    this.clientInterceptorStrategyFactory.getLoggingInInterceptor());
-            factory.getInInterceptors().add(
-                    this.clientInterceptorStrategyFactory.getSecurityInInterceptor());
-
-            factory.getOutInterceptors().add(
-                    this.clientInterceptorStrategyFactory.getLoggingOutInterceptor());
-            factory.getOutInterceptors().add(
-                    this.clientInterceptorStrategyFactory.getSecurityOutInterceptor());
+            factory.getInInterceptors().add(this.clientInterceptorStrategyFactory.getLoggingInInterceptor());
+            factory.getInInterceptors().add(this.clientInterceptorStrategyFactory.getSecurityInInterceptor());
+            factory.getOutInterceptors().add(this.clientInterceptorStrategyFactory.getLoggingOutInterceptor());
+            factory.getOutInterceptors().add(this.clientInterceptorStrategyFactory.getSecurityOutInterceptor());
         }
-
         if (serviceClass == null) {
-            throw new IllegalArgumentException(
-                    "The Parameter Service Class can't be null.");
+            throw new IllegalArgumentException("The Parameter Service Class can't be null.");
         }
-
         factory.setServiceClass(this.serviceClass);
-
         if (getAddress() == null) {
-            throw new IllegalArgumentException(
-                    "The Parameter Address can't be null.");
+            throw new IllegalArgumentException("The Parameter Address can't be null.");
         }
-
         factory.setAddress(getAddress());
         this.endpointService = (E) factory.create();
     }
-
 }

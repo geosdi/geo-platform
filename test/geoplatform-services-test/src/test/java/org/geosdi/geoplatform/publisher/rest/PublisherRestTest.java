@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.publisher.rest;
 
+import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.connectors.ws.publish.rest.GPPublisherRestClientTestConnector;
 import org.geosdi.geoplatform.publisher.PublisherBaseTest;
 import org.geosdi.geoplatform.request.ProcessEPSGResultRequest;
@@ -50,7 +51,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.Resource;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static java.lang.Boolean.TRUE;

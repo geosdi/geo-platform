@@ -41,9 +41,7 @@ import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.AccountLoginFault;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.request.InsertAccountRequest;
-import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.response.ApplicationDTO;
@@ -55,12 +53,12 @@ import org.junit.Test;
 import java.util.List;
 
 import static java.lang.Boolean.FALSE;
-import static org.geosdi.geoplatform.gui.shared.GPRole.USER;
+import static org.geosdi.geoplatform.gui.shared.GPRole.*;
+import static org.geosdi.geoplatform.request.LikePatternType.CONTENT_EQUALS;
 import static org.junit.Assert.*;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class WSAccountTest extends BaseSoapServiceTest {
@@ -69,14 +67,12 @@ public class WSAccountTest extends BaseSoapServiceTest {
     public void testAllAccounts() {
         List<ShortAccountDTO> accountList = gpWSClient.getAllAccounts().getAccounts();
         assertNotNull(accountList);
-        logger.info("\n*** Number of Accounts into DB: {} ***",
-                accountList.size());
+        logger.info("\n*** Number of Accounts into DB: {} ***", accountList.size());
         for (ShortAccountDTO account : accountList) {
             if (account instanceof UserDTO) {
-                logger.info("\n*** User into DB:\n{}\n***", (UserDTO) account);
+                logger.info("@@@@@@@@@@@@@@@@@@@@@@ User into DB:\n{}\n***",  account);
             } else if (account instanceof ApplicationDTO) {
-                logger.info("\n*** Application into DB:\n{}\n***",
-                        (ApplicationDTO) account);
+                logger.info("###################### Application into DB:\n{}\n***", account);
             }
         }
     }
@@ -84,8 +80,7 @@ public class WSAccountTest extends BaseSoapServiceTest {
     @Test
     public void testAllOrganizationAccounts() throws Exception {
         // Initial test
-        List<ShortAccountDTO> accountList = gpWSClient.getAccounts(
-                organizationNameTest).getAccounts();
+        List<ShortAccountDTO> accountList = gpWSClient.getAccounts(organizationNameTest).getAccounts();
         assertNotNull(accountList);
         int numAccounts = accountList.size();
         logger.info("\n*** Number of Accounts for Organization \"{}\": {} ***",
@@ -98,10 +93,8 @@ public class WSAccountTest extends BaseSoapServiceTest {
         this.createAndInsertUser("to_search", organizationTest, USER);
 
         // Insert the other Organization and a User for it
-        GPOrganization otherOrganization = new GPOrganization(
-                "other_organization_ws_test");
-        Long otherOrganizationID = gpWSClient.insertOrganization(
-                otherOrganization);
+        GPOrganization otherOrganization = new GPOrganization("other_organization_ws_test");
+        Long otherOrganizationID = gpWSClient.insertOrganization(otherOrganization);
         this.createAndInsertUser("none_search", otherOrganization, USER);
 
         // Final test
@@ -125,8 +118,7 @@ public class WSAccountTest extends BaseSoapServiceTest {
     @Test
     public void testRetrieveUser() throws ResourceNotFoundFault {
         // Number of Account Like
-        long numAccountsLike = gpWSClient.getAccountsCount(
-                new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
+        long numAccountsLike = gpWSClient.getAccountsCount(new SearchRequest(usernameTest, CONTENT_EQUALS));
         assertEquals("Number of Account Like", 1L, numAccountsLike);
 
         // Get User from Id
@@ -134,27 +126,21 @@ public class WSAccountTest extends BaseSoapServiceTest {
         UserDTOResponse userDTOResponse = gpWSClient.getShortUser(idUserTest);
         UserDTO userDTOFromWS = userDTOResponse.getUserDTO();
         assertNotNull(userDTOFromWS);
-        assertEquals("Error found UserDTO from Id", idUserTest,
-                userDTOFromWS.getId().longValue());
+        assertEquals("Error found UserDTO from Id", idUserTest, userDTOFromWS.getId().longValue());
         // Get GPUser from Id
         GPUser userFromWS = gpWSClient.getUserDetail(idUserTest);
         assertNotNull(userFromWS);
-        assertEquals("Error found GPUser from Id", idUserTest,
-                userFromWS.getId().longValue());
+        assertEquals("Error found GPUser from Id", idUserTest, userFromWS.getId().longValue());
 
         // Get User from Username
         // Get UserDTO from Username
-        userDTOFromWS = gpWSClient.getShortUserByUsername(
-                new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS)).getUserDTO();
+        userDTOFromWS = gpWSClient.getShortUserByUsername(new SearchRequest(usernameTest, CONTENT_EQUALS)).getUserDTO();
         assertNotNull(userDTOFromWS);
-        assertEquals("Error found UserDTO from Username", idUserTest,
-                userDTOFromWS.getId().longValue());
+        assertEquals("Error found UserDTO from Username", idUserTest, userDTOFromWS.getId().longValue());
         // Get GPUser from Username
-        userFromWS = gpWSClient.getUserDetailByUsername(
-                new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
+        userFromWS = gpWSClient.getUserDetailByUsername(new SearchRequest(usernameTest, CONTENT_EQUALS));
         assertNotNull(userFromWS);
-        assertEquals("Error found GPUser from Username", idUserTest,
-                userFromWS.getId().longValue());
+        assertEquals("Error found GPUser from Username", idUserTest, userFromWS.getId().longValue());
     }
 
     @Test(expected = IllegalParameterFault.class)
@@ -164,45 +150,34 @@ public class WSAccountTest extends BaseSoapServiceTest {
 
     @Test
     public void testInsertUserWithSingleRole() throws ResourceNotFoundFault {
-        List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(
-                usernameTest).getAuthorities();
+        List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(usernameTest).getAuthorities();
         assertNotNull("Authorities null", authorities);
-        assertEquals("Number of Authorities of " + usernameTest, 1,
-                authorities.size());
+        assertEquals("Number of Authorities of " + usernameTest, 1, authorities.size());
 
         GPAuthority authority = authorities.get(0);
         assertNotNull(authority);
-        assertEquals("Authority string", USER.getRole(),
-                authority.getAuthority());
-        assertEquals("Authority level", super.getTrustedLevelByRole(
-                USER), authority.getTrustedLevel());
+        assertEquals("Authority string", USER.getRole(), authority.getAuthority());
+        assertEquals("Authority level", super.getTrustedLevelByRole(USER), authority.getTrustedLevel());
         assertEquals("Authority username", usernameTest, authority.getAccountNaturalID());
     }
 
     @Test
-    public void testInsertUserWithMultiRole() throws IllegalParameterFault,
-            ResourceNotFoundFault {
+    public void testInsertUserWithMultiRole() throws IllegalParameterFault, ResourceNotFoundFault {
         String usernameMultiRole = "user-multi-role";
-        Long idUser = super.createAndInsertUser(usernameMultiRole,
-                organizationTest, GPRole.ADMIN, GPRole.VIEWER);
-
+        Long idUser = super.createAndInsertUser(usernameMultiRole, organizationTest, ADMIN, VIEWER);
         try {
-            List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(
-                    usernameMultiRole).getAuthorities();
+            List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(usernameMultiRole).getAuthorities();
             assertNotNull(authorities);
-            assertEquals("Number of Authorities of " + usernameMultiRole,
-                    2, authorities.size());
+            assertEquals("Number of Authorities of " + usernameMultiRole, 2, authorities.size());
 
             boolean isAdmin = false;
             boolean isViewer = false;
             for (GPAuthority authority : authorities) {
                 assertNotNull(authority);
-                assertEquals("Authority email", usernameMultiRole,
-                        authority.getAccountNaturalID());
-                if (GPRole.ADMIN.getRole().equals(authority.getAuthority())) {
+                assertEquals("Authority email", usernameMultiRole, authority.getAccountNaturalID());
+                if (ADMIN.getRole().equals(authority.getAuthority())) {
                     isAdmin = true;
-                } else if (GPRole.VIEWER.getRole().equals(
-                        authority.getAuthority())) {
+                } else if (VIEWER.getRole().equals(authority.getAuthority())) {
                     isViewer = true;
                 }
             }
@@ -285,14 +260,11 @@ public class WSAccountTest extends BaseSoapServiceTest {
     @Test(expected = IllegalParameterFault.class)
     public void testAuthorizationIncorrectPassword() throws Exception {
         String wrongPassword = passwordTest + "_";
-        gpWSClient.getUserDetailByUsernameAndPassword(usernameTest,
-                wrongPassword);
+        gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, wrongPassword);
     }
 
     @Test(expected = AccountLoginFault.class)
-    public void testLoginFaultUserDisabled()
-            throws ResourceNotFoundFault, IllegalParameterFault,
-            AccountLoginFault {
+    public void testLoginFaultUserDisabled() throws ResourceNotFoundFault, IllegalParameterFault, AccountLoginFault {
         // Set disabled user
         userTest.setEnabled(false);
         gpWSClient.updateUser(userTest);
@@ -302,9 +274,7 @@ public class WSAccountTest extends BaseSoapServiceTest {
     }
 
     @Test(expected = AccountLoginFault.class)
-    public void testLoginFaultUserExpired()
-            throws ResourceNotFoundFault, IllegalParameterFault,
-            AccountLoginFault {
+    public void testLoginFaultUserExpired() throws ResourceNotFoundFault, IllegalParameterFault, AccountLoginFault {
         // Set temporary user
         gpWSClient.forceTemporaryAccount(idUserTest);
 
@@ -326,7 +296,7 @@ public class WSAccountTest extends BaseSoapServiceTest {
 
     @Test
     public void updateUserSoapTest() throws Exception {
-        Long idUser = super.createAndInsertUser("userToUpdate-SOAP", organizationTest, GPRole.ADMIN);
+        Long idUser = super.createAndInsertUser("userToUpdate-SOAP", organizationTest, ADMIN);
         GPUser user = gpWSClient.getUserDetail(idUser);
         logger.info("##################USER : {}\n", user);
         user.setName("UserToUpdate");
@@ -339,7 +309,7 @@ public class WSAccountTest extends BaseSoapServiceTest {
     @Test
     public void searchUsersTest() throws Exception {
         String usernameMultiRole = "user-test1-ws";
-        Long idUser = super.createAndInsertUser(usernameMultiRole, organizationTest, GPRole.ADMIN, GPRole.VIEWER);
+        Long idUser = super.createAndInsertUser(usernameMultiRole, organizationTest, ADMIN, VIEWER);
         try {
             insertMassiveUsers("-ws");
             List<UserDTO> users = gpWSClient.searchUsers(idUser, new PaginatedSearchRequest(25, 0)).getSearchUsers();

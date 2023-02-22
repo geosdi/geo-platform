@@ -49,11 +49,17 @@ import org.springframework.context.annotation.Configuration;
 @Develop
 class GeoPlatformWSTestBeans {
 
+    /**
+     * @return {@link GPBasicWSClientTestConnector}
+     */
     @Bean
     public GPBasicWSClientTestConnector gpWSClient() {
        return new GPBasicWSClientTestConnector();
     }
 
+    /**
+     * @return {@link GPWMSClientTestConnector}
+     */
     @Bean
     public GPWMSClientTestConnector gpWMSClient() {
        return  new GPWMSClientTestConnector();

@@ -76,9 +76,9 @@
                 <version>${jibx-version}</version>
                 <configuration>
                     <schemaBindingDirectory>src/main/resources/jibx</schemaBindingDirectory>
-                    <includes>
+                    <includeSchemaBindings>
                         <include>binding.xml</include>
-                    </includes>
+                    </includeSchemaBindings>
                     <load>true</load>
                 </configuration>
                 <executions>
@@ -109,7 +109,6 @@
                     </dependency>
                 </dependencies>
             </plugin>
-
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

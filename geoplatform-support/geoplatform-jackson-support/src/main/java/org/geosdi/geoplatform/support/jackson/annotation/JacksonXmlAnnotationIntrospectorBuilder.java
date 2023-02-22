@@ -63,5 +63,14 @@ public enum JacksonXmlAnnotationIntrospectorBuilder implements GPJacksonXmlAnnot
         public AnnotationIntrospector build() {
             return new JakartaXmlBindAnnotationIntrospector(defaultInstance());
         }
+    },
+    DEFAULT {
+        /**
+         * @return {@link V}
+         */
+        @Override
+        public <V extends AnnotationIntrospector> V build() {
+            return null;
+        }
     }
 }

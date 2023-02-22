@@ -44,10 +44,14 @@ import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
+import javax.annotation.Nonnull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -80,9 +84,10 @@ public abstract class ShortAccountDTO implements Serializable {
     /**
      * @param account
      */
-    public ShortAccountDTO(GPAccount account) {
+    public ShortAccountDTO(@Nonnull(when = NEVER) GPAccount account) {
+        checkArgument(account != null, "The Parameter account must not be null.");
         this.id = account.getId();
-        this.organization = account.getOrganization().getName(); // TODO Possibile NullPointerException
+        this.organization = ((account.isSetOrganization()) ? account.getOrganization().getName() : null);
         this.enabled = account.isEnabled();
         this.temporary = account.isAccountTemporary();
         this.expired = !account.isAccountNonExpired();

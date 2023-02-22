@@ -71,7 +71,7 @@ public abstract class GPExceptionFault extends RuntimeException {
     /**
      * <p>Only for RS Exception</p>
      *
-     * @return {@link javax.ws.rs.core.Response.Status}
+     * @return {@link Response.Status}
      */
     public abstract Response.Status status();
 }

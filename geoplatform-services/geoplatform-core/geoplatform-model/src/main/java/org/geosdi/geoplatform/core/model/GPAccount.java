@@ -272,6 +272,14 @@ public abstract class GPAccount implements Serializable {
         this.organization = organization;
     }
 
+    /**
+     * @return {@link Boolean}
+     */
+    @XmlTransient
+    public boolean isSetOrganization() {
+        return this.organization != null;
+    }
+
     public boolean isLoadExpandedFolders() {
         return loadExpandedFolders;
     }

@@ -56,6 +56,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static io.reactivex.rxjava3.core.Observable.fromArray;
 import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.support.jackson.annotation.JacksonAnnotationIntrospectorBuilder.JACKSON;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.DEFAULT;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 
 /**
@@ -72,7 +73,7 @@ public class GPJacksonSupport implements JacksonSupport {
      * <p>In this case will be used only {@link JacksonAnnotationIntrospector}</p>
      */
     public GPJacksonSupport() {
-        this(null);
+        this(DEFAULT);
     }
 
     /**
@@ -91,6 +92,14 @@ public class GPJacksonSupport implements JacksonSupport {
     public GPJacksonSupport(@Nonnull(when = NEVER) DateFormat format, @Nullable GPJacksonXmlAnnotationIntrospectorBuilder theBuilder) {
         this(theBuilder, defaultProp());
         this.mapper.setDateFormat(format);
+    }
+
+    /**
+     * <p>In this case will be used only {@link JacksonAnnotationIntrospector}</p>
+     * @param features
+     */
+    public GPJacksonSupport(@Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {
+        this(null, features);
     }
 
     /**

@@ -40,8 +40,9 @@ import org.geosdi.geoplatform.connectors.ws.basic.rest.GPBasicRestClientTestConn
 import org.geosdi.geoplatform.model.BaseGPListenerServices;
 import org.geosdi.geoplatform.model.ServiceTest;
 import org.geosdi.geoplatform.services.GeoPlatformService;
-import org.junit.Assert;
 import org.springframework.test.context.TestContext;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  *
@@ -56,25 +57,18 @@ class RSListenerBasicServices extends BaseGPListenerServices {
     @Override
     public void beforeTestClass(TestContext tc) throws Exception {
         super.beforeTestClass(tc);
-
-        GPBasicRestClientTestConnector gpBasicRestClient = (GPBasicRestClientTestConnector) appContext.getBean(
-                "gpBasicRestClient");
-        Assert.assertNotNull("gpBasicRestClient is NULL",
-                gpBasicRestClient);
+        GPBasicRestClientTestConnector gpBasicRestClient = (GPBasicRestClientTestConnector) appContext.getBean("gpBasicRestClient");
+        assertNotNull("gpBasicRestClient is NULL", gpBasicRestClient);
         gpRSClient = gpBasicRestClient.getEndpointService();
-
         this.gpBasicRestServer = (Server) appContext.getBean("gpBasicRestServer");
-        Assert.assertNotNull("gpBasicRestServer is NULL", gpBasicRestServer);
-
+        assertNotNull("gpBasicRestServer is NULL", gpBasicRestServer);
         this.gpBasicRestServer.start();
-
         logger.info("\n\t@@@ Server ready... @@@");
     }
 
     @Override
     public void prepareTestInstance(TestContext tc) throws Exception {
         logger.info("\n\t@@@ RSListenerWMSService.prepareTestInstance @@@");
-
         ServiceTest testInstance = (ServiceTest) tc.getTestInstance();
         testInstance.setGeoplatformServiceClient(gpRSClient);
     }
@@ -84,5 +78,4 @@ class RSListenerBasicServices extends BaseGPListenerServices {
         logger.info("\n\t@@@ RSListenerWMSService.afterTestClass @@@");
         this.gpBasicRestServer.stop();
     }
-
 }

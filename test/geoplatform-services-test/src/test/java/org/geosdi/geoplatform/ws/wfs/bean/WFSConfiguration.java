@@ -42,23 +42,27 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @Configuration
 @Develop
 class WFSConfiguration {
 
-    private @Value("configurator{default_wfs_datasource}")
-    String addressDatastore;
+    private @Value("configurator{default_wfs_datasource}") String addressDatastore;
 
+    /**
+     * @return {@link String}
+     */
     @Bean
     public String addressDatastore() {
         return addressDatastore;
     }
 
+    /**
+     * @return {@link GPWFSClientTestConnector}
+     */
     @Bean
     public GPWFSClientTestConnector wfsClient() {
-       return new GPWFSClientTestConnector();
+        return new GPWFSClientTestConnector();
     }
 }

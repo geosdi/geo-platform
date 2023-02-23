@@ -72,8 +72,8 @@ public class RSRolePermissionTest extends BasicRestServiceTest {
         assertEquals(51, wsUserMapData.getPermissionMap().size());
         GuiComponentsPermissionMapData viewerMapData = new GuiComponentsPermissionMapData();
         viewerMapData.setPermissionMap(new HashMap<>(MAP_VIEWER));
-        assertTrue(gpWSClient.updateRolePermission(new WSPutRolePermissionRequest(viewerMapData,
-                VIEWER.getRole(), organizationNameRSTest)));GuiComponentsPermissionMapData wsViewerMapData = gpWSClient.getRolePermission(VIEWER.getRole(), organizationNameRSTest);
+        assertTrue(gpWSClient.updateRolePermission(new WSPutRolePermissionRequest(viewerMapData, VIEWER.getRole(), organizationNameRSTest)));
+        GuiComponentsPermissionMapData wsViewerMapData = gpWSClient.getRolePermission(VIEWER.getRole(), organizationNameRSTest);
         logger.trace("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@RETRIEVE GuiComponents for  VIEWER_ROLE : {}\n\n", wsViewerMapData);
         assertEquals(50, wsViewerMapData.getPermissionMap().size());
     }

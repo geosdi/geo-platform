@@ -45,13 +45,10 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {
-    "classpath:applicationContext-Test.xml",
-    "classpath*:applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml", "classpath*:applicationContext.xml"})
 @TestExecutionListeners(value = {WFSListenerServices.class})
 @ActiveProfiles(profiles = {"dev", "jpa"})
 public abstract class WFSAbstractTest {

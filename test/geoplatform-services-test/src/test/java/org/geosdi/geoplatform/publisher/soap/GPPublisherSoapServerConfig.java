@@ -35,40 +35,34 @@
  */
 package org.geosdi.geoplatform.publisher.soap;
 
-import java.util.Arrays;
 import org.apache.cxf.endpoint.Server;
-import org.apache.cxf.interceptor.Interceptor;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxws.JaxWsServerFactoryBean;
-import org.apache.cxf.message.Message;
 import org.geosdi.geoplatform.services.GPPublisherService;
 
+import static java.util.List.of;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 class GPPublisherSoapServerConfig {
 
-    public static Server gpPublisherSoapServer(
-            GPPublisherService publisherService,
-            String publisherSoapAddress,
-            LoggingInInterceptor serverLogInInterceptor,
-            LoggingOutInterceptor serverLogOutInterceptor) {
-
+    /**
+     * @param publisherService
+     * @param publisherSoapAddress
+     * @param serverLogInInterceptor
+     * @param serverLogOutInterceptor
+     * @return
+     */
+    public static Server gpPublisherSoapServer(GPPublisherService publisherService, String publisherSoapAddress,
+            LoggingInInterceptor serverLogInInterceptor, LoggingOutInterceptor serverLogOutInterceptor) {
         JaxWsServerFactoryBean factory = new JaxWsServerFactoryBean();
         factory.setServiceBean(publisherService);
         factory.setAddress(publisherSoapAddress);
-
-        factory.setInInterceptors(Arrays.<Interceptor<? extends Message>>asList(
-                serverLogInInterceptor)
-        );
-        factory.setOutInterceptors(
-                Arrays.<Interceptor<? extends Message>>asList(
-                        serverLogOutInterceptor));
-
+        factory.setInInterceptors(of(serverLogInInterceptor));
+        factory.setOutInterceptors(of(serverLogOutInterceptor));
         return factory.create();
     }
-
 }

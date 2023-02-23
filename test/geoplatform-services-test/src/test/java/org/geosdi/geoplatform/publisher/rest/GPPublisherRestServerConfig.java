@@ -37,11 +37,9 @@ package org.geosdi.geoplatform.publisher.rest;
 
 import jakarta.ws.rs.core.MediaType;
 import org.apache.cxf.endpoint.Server;
-import org.apache.cxf.interceptor.Interceptor;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
-import org.apache.cxf.message.Message;
 import org.geosdi.geoplatform.exception.rs.mapper.GPExceptionFaultMapper;
 import org.geosdi.geoplatform.services.GPPublisherService;
 import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
@@ -53,40 +51,32 @@ import java.util.Map;
 import static org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory.createProvider;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 class GPPublisherRestServerConfig {
 
-    public static Server gpPublisherRestServer(
-            GPPublisherService publisherService,
-            String publisherRestAddress, GPRestProviderType providerType,
-            LoggingInInterceptor serverLogInInterceptor,
+    /**
+     * @param publisherService
+     * @param publisherRestAddress
+     * @param providerType
+     * @param serverLogInInterceptor
+     * @param serverLogOutInterceptor
+     * @return
+     */
+    public static Server gpPublisherRestServer(GPPublisherService publisherService, String publisherRestAddress,
+            GPRestProviderType providerType, LoggingInInterceptor serverLogInInterceptor,
             LoggingOutInterceptor serverLogOutInterceptor) {
-
         JAXRSServerFactoryBean factory = new JAXRSServerFactoryBean();
         factory.setServiceBean(publisherService);
         factory.setAddress(publisherRestAddress);
-
-        factory.setProviders(Arrays.asList(
-                new Object[]{createProvider(providerType),
-                    new GPExceptionFaultMapper()}));
-
+        factory.setProviders(Arrays.asList(new Object[]{createProvider(providerType), new GPExceptionFaultMapper()}));
         Map<Object, Object> extensionMappings = new HashMap<>();
         extensionMappings.put("xml", MediaType.APPLICATION_XML);
         extensionMappings.put("json", MediaType.APPLICATION_JSON);
-
         factory.setExtensionMappings(extensionMappings);
-
-        factory.setInInterceptors(Arrays.<Interceptor<? extends Message>>asList(
-                serverLogInInterceptor)
-        );
-        factory.setOutInterceptors(
-                Arrays.<Interceptor<? extends Message>>asList(
-                        serverLogOutInterceptor));
-
+        factory.setInInterceptors(Arrays.asList(serverLogInInterceptor));
+        factory.setOutInterceptors(Arrays.asList(serverLogOutInterceptor));
         return factory.create();
     }
-
 }

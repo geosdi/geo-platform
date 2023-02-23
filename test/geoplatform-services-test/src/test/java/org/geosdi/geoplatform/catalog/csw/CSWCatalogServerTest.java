@@ -77,7 +77,6 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
     public void testReinsertServerOur() throws Exception {
         // Try to reinsert the server
         Long serverID = cswService.insertServerCSW(serverTestOur);
-
         assertNotNull(serverID);
         assertEquals(serverTestOurID, serverID);
     }
@@ -85,7 +84,6 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
     @Test(expected = IllegalParameterFault.class)
     public void testInsertServerNullURL() throws Exception {
         serverTestOur.setServerUrl(null);
-
         // Try to insert the incorrect server
         cswService.insertServerCSW(serverTestOur);
     }
@@ -93,7 +91,6 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
     @Test(expected = IllegalParameterFault.class)
     public void testInsertServerNullType() throws Exception {
         serverTestOur.setServerType(null);
-
         // Try to insert the incorrect server
         cswService.insertServerCSW(serverTestOur);
     }
@@ -251,24 +248,18 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
         // First page
         PaginatedSearchRequest request = new PaginatedSearchRequest("test", 10, 0); // wrt title and alias
         List<ServerCSWDTO> search = cswService.searchCSWServers(request, super.organizationNameTest);
-
         assertNotNull(search);
         assertEquals(10, search.size());
-
         // Second page
         request = new PaginatedSearchRequest("test", 10, 1); // wrt title and alias
         search = cswService.searchCSWServers(request, super.organizationNameTest);
-
         assertNotNull(search);
         assertEquals(10, search.size());
-
         // Third page
         request = new PaginatedSearchRequest("test", 10, 2); // wrt title and alias
         search = cswService.searchCSWServers(request, super.organizationNameTest);
-
         assertNotNull(search);
         assertEquals(6, search.size());
-
         // Delete the servers
         for (Long serverID : serverIDs) {
             boolean deleted = cswService.deleteServerCSW(serverID);
@@ -276,6 +267,10 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
         }
     }
 
+    /**
+     * @param expected
+     * @param toTest
+     */
     private void compareServer(GeoPlatformServer expected, GeoPlatformServer toTest) {
         assertNotNull(expected);
         assertNotNull(toTest);
@@ -286,6 +281,10 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
         assertEquals(expected.getServerUrl(), toTest.getServerUrl());
     }
 
+    /**
+     * @param expected
+     * @param toTest
+     */
     private void compareServer(GeoPlatformServer expected, ServerCSWDTO toTest) {
         assertNotNull(expected);
         assertNotNull(toTest);
@@ -295,6 +294,10 @@ public class CSWCatalogServerTest extends CSWCatalogTest {
         assertEquals(expected.getServerUrl(), toTest.getServerUrl());
     }
 
+    /**
+     * @param expected
+     * @param toTest
+     */
     private void compareServer(ServerCSWDTO expected, ServerCSWDTO toTest) {
         assertNotNull(expected);
         assertNotNull(toTest);

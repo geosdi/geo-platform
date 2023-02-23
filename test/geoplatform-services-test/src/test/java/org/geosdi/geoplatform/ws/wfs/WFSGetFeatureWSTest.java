@@ -39,7 +39,6 @@ import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
-import org.junit.Assert;
 import org.junit.Test;
 
 import javax.xml.namespace.QName;
@@ -47,9 +46,9 @@ import java.util.List;
 import java.util.Map;
 
 import static java.util.Collections.EMPTY_MAP;
+import static org.junit.Assert.*;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class WFSGetFeatureWSTest extends WFSAbstractTest {
@@ -62,9 +61,7 @@ public class WFSGetFeatureWSTest extends WFSAbstractTest {
         LayerSchemaDTO layerSchema = wfsService.describeFeatureType(addressDatastore, typeName, EMPTY_MAP);
         logger.debug("\n\n\n@@@ {}", layerSchema);
         BBox bBox = new BBox(-75.102613, 40.212597, -72.361859, 41.512517);
-
         FeatureCollectionDTO fc = wfsService.getFeatureByBBox(layerSchema, bBox, EMPTY_MAP);
-
         this.checkFeatureCollection(fc, typeName, 22, 4);
     }
 
@@ -72,9 +69,7 @@ public class WFSGetFeatureWSTest extends WFSAbstractTest {
     public void statesFeatureV110() throws Exception {
         String typeName = TOPP_STATES.getLocalPart();
         BBox bBox = new BBox(-75.102613, 40.212597, -72.361859, 41.512517);
-
         FeatureCollectionDTO fc = wfsService.getFeatureByBBoxDirect(addressDatastore, typeName, bBox, EMPTY_MAP);
-
         this.checkFeatureCollection(fc, typeName, 22, 4);
     }
 
@@ -85,33 +80,34 @@ public class WFSGetFeatureWSTest extends WFSAbstractTest {
         this.checkFeatureCollection(fc, typeName, 22, 10);
     }
 
-    private void checkFeatureCollection(FeatureCollectionDTO fc,
-            String typeName, int numAttributes, int numFeatures) {
-        Assert.assertNotNull(fc);
-
-        Assert.assertNotNull(fc.getTimeStamp());
-        Assert.assertEquals(numFeatures, fc.getNumberOfFeatures());
-
+    /**
+     * @param fc
+     * @param typeName
+     * @param numAttributes
+     * @param numFeatures
+     */
+    private void checkFeatureCollection(FeatureCollectionDTO fc, String typeName, int numAttributes, int numFeatures) {
+        assertNotNull(fc);
+        assertNotNull(fc.getTimeStamp());
+        assertEquals(numFeatures, fc.getNumberOfFeatures());
         String name = typeName.substring(typeName.indexOf(":") + 1);
         List<FeatureDTO> features = fc.getFeatures();
-        Assert.assertNotNull(features);
-        Assert.assertEquals(numFeatures, features.size());
+        assertNotNull(features);
+        assertEquals(numFeatures, features.size());
         for (FeatureDTO feature : features) {
             String fID = feature.getFID();
-            Assert.assertNotNull(fID);
-            Assert.assertTrue(fID.startsWith(name));
-
-            Assert.assertNotNull(feature.getGeometry());
-
-            Assert.assertNotNull(feature.getAttributes());
+            assertNotNull(fID);
+            assertTrue(fID.startsWith(name));
+            assertNotNull(feature.getGeometry());
+            assertNotNull(feature.getAttributes());
             Map<String, String> fMap = feature.getAttributes().getAttributesMap();
-            Assert.assertNotNull(fMap);
-            Assert.assertEquals(numAttributes, fMap.size());
+            assertNotNull(fMap);
+            assertEquals(numAttributes, fMap.size());
             for (Map.Entry<String, String> e : fMap.entrySet()) {
                 String attName = e.getKey();
                 String attValue = e.getValue();
-                Assert.assertNotNull(attName);
-                Assert.assertNotNull(attValue);
+                assertNotNull(attName);
+                assertNotNull(attValue);
             }
         }
     }

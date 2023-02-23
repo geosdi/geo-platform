@@ -46,7 +46,6 @@ import org.geosdi.geoplatform.request.project.SaveProjectRequest;
 import org.geosdi.geoplatform.response.*;
 import org.geosdi.geoplatform.response.collection.ChildrenFolderStore;
 import org.geosdi.geoplatform.response.collection.TreeFolderElements;
-import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.security.acls.domain.BasePermission;
 
@@ -54,19 +53,15 @@ import java.util.*;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class RSProjectTest extends BasicRestServiceTest {
 
-    Map<String, Object> fixture = new HashMap<String, Object>();
+    Map<String, Object> fixture = new HashMap();
     // Folder
     private static final String nameFolder1A = "folder1A_rs";
     private static final String nameFolder1B = "folder1B_rs";
@@ -112,9 +107,7 @@ public class RSProjectTest extends BasicRestServiceTest {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-
-        Long idRasterRootFolderA = super.createAndInsertRasterLayer(super.rootFolderA, titleRaster + nameRootFolderA,
-                nameRaster + nameRootFolderA, "", 15, "", "");
+        Long idRasterRootFolderA = super.createAndInsertRasterLayer(super.rootFolderA, titleRaster + nameRootFolderA, nameRaster + nameRootFolderA, "", 15, "", "");
         rasterRootFolderA = gpWSClient.getRasterLayer(idRasterRootFolderA).getRasterLayer();
         this.fixture.put(rasterRootFolderA.getName(), rasterRootFolderA);
         // "rootFolderA" ---> "folder1(A|B|C)"
@@ -126,9 +119,7 @@ public class RSProjectTest extends BasicRestServiceTest {
         folder1B = gpWSClient.getFolderDetail(idFolder1B);
         this.fixture.put(folder1B.getName(), folder1B);
         //
-        Long idRasterFolder1B = super
-                .createAndInsertRasterLayer(folder1B, titleRaster + nameFolder1B, nameRaster + nameFolder1B, "", 4, "",
-                        "");
+        Long idRasterFolder1B = super.createAndInsertRasterLayer(folder1B, titleRaster + nameFolder1B, nameRaster + nameFolder1B, "", 4, "", "");
         rasterFolder1B = gpWSClient.getRasterLayer(idRasterFolder1B).getRasterLayer();
         this.fixture.put(rasterFolder1B.getName(), rasterFolder1B);
         //
@@ -149,9 +140,7 @@ public class RSProjectTest extends BasicRestServiceTest {
         folder2C = gpWSClient.getFolderDetail(idFolder2C);
         this.fixture.put(folder2C.getName(), folder2C);
         //
-        Long idRasterFolder2C = super
-                .createAndInsertRasterLayer(folder2C, titleRaster + nameFolder2C, nameRaster + nameFolder2C, "", 6, "",
-                        "");
+        Long idRasterFolder2C = super.createAndInsertRasterLayer(folder2C, titleRaster + nameFolder2C, nameRaster + nameFolder2C, "", 6, "", "");
         rasterFolder2C = gpWSClient.getRasterLayer(idRasterFolder2C).getRasterLayer();
         this.fixture.put(rasterFolder2C.getName(), rasterFolder2C);
         //
@@ -160,9 +149,7 @@ public class RSProjectTest extends BasicRestServiceTest {
         folder3A = gpWSClient.getFolderDetail(idFolder3A);
         this.fixture.put(folder3A.getName(), folder3A);
         //
-        Long idVectorFolder3A = super
-                .createAndInsertVectorLayer(folder3A, titleVector + nameFolder3A, nameVector + nameFolder3A, "", 11, "",
-                        "");
+        Long idVectorFolder3A = super.createAndInsertVectorLayer(folder3A, titleVector + nameFolder3A, nameVector + nameFolder3A, "", 11, "", "");
         vectorFolder3A = gpWSClient.getVectorLayer(idVectorFolder3A).getVectorLayer();
         this.fixture.put(vectorFolder3A.getName(), vectorFolder3A);
         //
@@ -177,73 +164,58 @@ public class RSProjectTest extends BasicRestServiceTest {
         super.rootFolderA.setNumberOfDescendants(13);
         super.rootFolderA.setPosition(16);
         gpWSClient.updateFolder(super.rootFolderA);
-
-        Long idVectorRootFolderB = super.createAndInsertVectorLayer(super.rootFolderB, titleVector + nameRootFolderB,
-                nameVector + nameRootFolderB, "", 1, "", "");
+        Long idVectorRootFolderB = super.createAndInsertVectorLayer(super.rootFolderB, titleVector + nameRootFolderB, nameVector + nameRootFolderB, "", 1, "", "");
         vectorRootFolderB = gpWSClient.getVectorLayer(idVectorRootFolderB).getVectorLayer();
         this.fixture.put(vectorRootFolderB.getName(), vectorRootFolderB);
         //
         super.rootFolderB.setNumberOfDescendants(1);
         super.rootFolderB.setPosition(2);
         gpWSClient.updateFolder(super.rootFolderB);
-
-        super.projectTest.setNumberOfElements(
-                projectTest.getNumberOfElements() + super.rootFolderA.getNumberOfDescendants() + super.rootFolderB
-                        .getNumberOfDescendants());
+        super.projectTest.setNumberOfElements(projectTest.getNumberOfElements() + super.rootFolderA.getNumberOfDescendants() + super.rootFolderB.getNumberOfDescendants());
         gpWSClient.updateProject(projectTest);
     }
 
     @Test
     public void testFixtureNotNullRest() {
         for (Map.Entry<String, Object> entry : fixture.entrySet()) {
-            Assert.assertNotNull(entry.getKey() + " is NULL", entry.getValue());
+            assertNotNull(entry.getKey() + " is NULL", entry.getValue());
         }
     }
 
     @Test
     public void testExportProjectRest() throws ResourceNotFoundFault {
         ProjectDTO project = gpWSClient.exportProject(super.idProjectTest);
-
         assertEquals("project name", super.projectTest.getName(), project.getName());
-        assertEquals("project elements", super.projectTest.getNumberOfElements(),
-                project.getNumberOfElements().intValue());
-
+        assertEquals("project elements", super.projectTest.getNumberOfElements(), project.getNumberOfElements().intValue());
         List<FolderDTO> rootFolders = project.getRootFolders();
         assertEquals("#root", 2, rootFolders.size());
         assertEquals("A", nameRootFolderA, rootFolders.get(0).getName());
         assertEquals("B", nameRootFolderB, rootFolders.get(1).getName());
-
         List<AbstractElementDTO> childRootFolderA = rootFolders.get(0).getElementList();
         assertEquals("#A", 4, childRootFolderA.size());
         assertEquals("R-A", nameRaster + nameRootFolderA, childRootFolderA.get(0).getName());
         assertEquals("1A", nameFolder1A, childRootFolderA.get(1).getName());
         assertEquals("1B", nameFolder1B, childRootFolderA.get(2).getName());
         assertEquals("1C", nameFolder1C, childRootFolderA.get(3).getName());
-
         List<AbstractElementDTO> childFolder1A = ((FolderDTO) childRootFolderA.get(1)).getElementList();
         assertEquals("#1A", 3, childFolder1A.size());
         assertEquals("2A", nameFolder2A, childFolder1A.get(0).getName());
         assertEquals("2B", nameFolder2B, childFolder1A.get(1).getName());
         assertEquals("2C", nameFolder2C, childFolder1A.get(2).getName());
-
         List<AbstractElementDTO> childFolder2A = ((FolderDTO) childFolder1A.get(0)).getElementList();
         assertEquals("#2A", 3, childFolder2A.size());
         assertEquals("3A", nameFolder3A, childFolder2A.get(0).getName());
         assertEquals("3B", nameFolder3B, childFolder2A.get(1).getName());
         assertEquals("3C", nameFolder3C, childFolder2A.get(2).getName());
-
         FolderDTO f1B = (FolderDTO) childRootFolderA.get(2);
         assertEquals("#1B", 1, f1B.getElementList().size());
         assertEquals("R-1B", nameRaster + nameFolder1B, f1B.getElementList().get(0).getName());
-
         FolderDTO f2C = (FolderDTO) childFolder1A.get(2);
         assertEquals("#2C", 1, f2C.getElementList().size());
         assertEquals("R-2C", nameRaster + nameFolder2C, f2C.getElementList().get(0).getName());
-
         FolderDTO f3A = (FolderDTO) childFolder2A.get(0);
         assertEquals("#3A", 1, f3A.getElementList().size());
         assertEquals("V-3A", nameVector + nameFolder3A, f3A.getElementList().get(0).getName());
-
         List<AbstractElementDTO> childRootFolderB = rootFolders.get(1).getElementList();
         assertEquals("#B", 1, childRootFolderB.size());
         assertEquals("V-B", nameVector + nameRootFolderB, childRootFolderB.get(0).getName());
@@ -252,14 +224,11 @@ public class RSProjectTest extends BasicRestServiceTest {
     @Test
     public void testOnlyFirstLevelFolderRest() throws ResourceNotFoundFault {
         gpWSClient.deleteFolder(super.idRootFolderA);
-
         ProjectDTO project = gpWSClient.exportProject(super.idProjectTest);
         assertEquals("project name", super.projectTest.getName(), project.getName());
-
         List<FolderDTO> rootFolders = project.getRootFolders();
         assertEquals("#root", 1, rootFolders.size());
         assertEquals("B", nameRootFolderB, rootFolders.get(0).getName());
-
         List<AbstractElementDTO> childRootFolderB = rootFolders.get(0).getElementList();
         assertEquals("#B", 1, childRootFolderB.size());
         assertEquals("V-B", nameVector + nameRootFolderB, childRootFolderB.get(0).getName());
@@ -269,55 +238,42 @@ public class RSProjectTest extends BasicRestServiceTest {
     public void testImportProjectRest() throws Exception {
         // Create ProjectDTO to import
         ProjectDTO projectDTO = new ProjectDTO(super.projectTest);
-
         List<GPFolder> rootFolders = Arrays.asList(super.rootFolderA, super.rootFolderB);
         List<FolderDTO> rootFoldersDTO = FolderDTO.convertToFolderDTOList(rootFolders);
         projectDTO.setRootFolders(rootFoldersDTO);
-
         FolderDTO rootFolderADTO = rootFoldersDTO.get(0);
         rootFolderADTO.addLayer(new RasterLayerDTO(rasterRootFolderA));
-        List<FolderDTO> childRootFolderA = FolderDTO
-                .convertToFolderDTOList(Arrays.asList(folder1A, folder1B, folder1C));
+        List<FolderDTO> childRootFolderA = FolderDTO.convertToFolderDTOList(Arrays.asList(folder1A, folder1B, folder1C));
         rootFolderADTO.addFolders(childRootFolderA);
-
         List<FolderDTO> childFolder1A = FolderDTO.convertToFolderDTOList(Arrays.asList(folder2A, folder2B, folder2C));
         childRootFolderA.get(0).addFolders(childFolder1A);
         childRootFolderA.get(1).addLayer(new RasterLayerDTO(rasterFolder1B));
-
         List<FolderDTO> childFolder2A = FolderDTO.convertToFolderDTOList(Arrays.asList(folder3A, folder3B, folder3C));
         childFolder1A.get(0).addFolders(childFolder2A);
         childFolder1A.get(2).addLayer(new RasterLayerDTO(rasterFolder2C));
-
         childFolder2A.get(0).addLayer(new VectorLayerDTO(vectorFolder3A));
-
         FolderDTO rootFolderBDTO = rootFoldersDTO.get(1);
         rootFolderBDTO.addLayer(new VectorLayerDTO(vectorRootFolderB));
-
-        projectDTO
-                .setId(null); // Entity passed must not containd an ID, otherwise Hibernate throws PersistentObjectException
+        projectDTO.setId(null); // Entity passed must not containd an ID, otherwise Hibernate throws PersistentObjectException
         // Import ProjectDTO
         Long projectID = gpWSClient.importProject(new ImportProjectRequest(projectDTO, super.idUserTest));
         // Check imported Project
         assertTrue("Check importProject", projectID > 0);
         logger.debug("*** ID project imported: {} ***", projectID);
-
         GPProject projectAdded = gpWSClient.getProjectDetail(projectID);
         assertEquals("project name", super.projectTest.getName(), projectAdded.getName());
         assertEquals("project elements", super.projectTest.getNumberOfElements(), projectAdded.getNumberOfElements());
-
         ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(projectID, super.idUserTest);
-        Assert.assertNotNull("projectWithRootFolders null", projectWithRootFolders);
-
+        assertNotNull("projectWithRootFolders null", projectWithRootFolders);
         rootFoldersDTO = projectWithRootFolders.getRootFolders();
-        Assert.assertNotNull("rootFolders null", rootFoldersDTO);
+        assertNotNull("rootFolders null", rootFoldersDTO);
         assertEquals("#root", 2, rootFoldersDTO.size());
         rootFolderADTO = rootFoldersDTO.get(0);
         rootFolderBDTO = rootFoldersDTO.get(1);
         this.assertFolderRest("A", super.rootFolderA, rootFolderADTO);
         this.assertFolderRest("B", super.rootFolderB, rootFolderBDTO);
-
         TreeFolderElements elemRootFolderA = gpWSClient.getChildrenElements(rootFolderADTO.getId()).getFolderElements();
-        Assert.assertNotNull("elem-A null", elemRootFolderA);
+        assertNotNull("elem-A null", elemRootFolderA);
         assertEquals("#A", 4, elemRootFolderA.size());
         IElementDTO rasterRootFolderADTO = elemRootFolderA.pollFirst();
         FolderDTO folder1ADTO = (FolderDTO) elemRootFolderA.pollFirst();
@@ -327,9 +283,8 @@ public class RSProjectTest extends BasicRestServiceTest {
         this.assertFolderRest("1A", folder1A, folder1ADTO);
         this.assertFolderRest("1B", folder1B, folder1BDTO);
         this.assertFolderRest("1C", folder1C, folder1CDTO);
-
         TreeFolderElements elemFolder1A = gpWSClient.getChildrenElements(folder1ADTO.getId()).getFolderElements();
-        Assert.assertNotNull("elem-1A null", elemFolder1A);
+        assertNotNull("elem-1A null", elemFolder1A);
         assertEquals("#1A", 3, elemFolder1A.size());
         FolderDTO folder2ADTO = (FolderDTO) elemFolder1A.pollFirst();
         FolderDTO folder2BDTO = (FolderDTO) elemFolder1A.pollFirst();
@@ -337,9 +292,8 @@ public class RSProjectTest extends BasicRestServiceTest {
         this.assertFolderRest("2A", folder2A, folder2ADTO);
         this.assertFolderRest("2B", folder2B, folder2BDTO);
         this.assertFolderRest("2C", folder2C, folder2CDTO);
-
         TreeFolderElements elemFolder2A = gpWSClient.getChildrenElements(folder2ADTO.getId()).getFolderElements();
-        Assert.assertNotNull("elem-2A null", elemFolder2A);
+        assertNotNull("elem-2A null", elemFolder2A);
         assertEquals("#2A", 3, elemFolder2A.size());
         FolderDTO folder3ADTO = (FolderDTO) elemFolder2A.pollFirst();
         FolderDTO folder3BDTO = (FolderDTO) elemFolder2A.pollFirst();
@@ -347,27 +301,23 @@ public class RSProjectTest extends BasicRestServiceTest {
         this.assertFolderRest("3A", folder3A, folder3ADTO);
         this.assertFolderRest("3B", folder3B, folder3BDTO);
         this.assertFolderRest("3C", folder3C, folder3CDTO);
-
         TreeFolderElements elemFolder3A = gpWSClient.getChildrenElements(folder3ADTO.getId()).getFolderElements();
-        Assert.assertNotNull("elem-3A null", elemFolder3A);
+        assertNotNull("elem-3A null", elemFolder3A);
         assertEquals("#3A", 1, elemFolder3A.size());
         IElementDTO vectorFolder3ADTO = elemFolder3A.pollFirst();
         this.assertLayerRest("V-3A", vectorFolder3A, vectorFolder3ADTO);
-
         TreeFolderElements elemFolder2C = gpWSClient.getChildrenElements(folder2CDTO.getId()).getFolderElements();
-        Assert.assertNotNull("elem-2C null", elemFolder2C);
+        assertNotNull("elem-2C null", elemFolder2C);
         assertEquals("#2C", 1, elemFolder2C.size());
         IElementDTO rasterFolder2CDTO = elemFolder2C.pollFirst();
         this.assertLayerRest("R-2C", rasterFolder2C, rasterFolder2CDTO);
-
         TreeFolderElements elemFolder1B = gpWSClient.getChildrenElements(folder1BDTO.getId()).getFolderElements();
-        Assert.assertNotNull("elem-1B null", elemFolder1B);
+        assertNotNull("elem-1B null", elemFolder1B);
         assertEquals("#1B", 1, elemFolder1B.size());
         IElementDTO rasterFolder1BDTO = elemFolder1B.pollFirst();
         this.assertLayerRest("R-1B", rasterFolder1B, rasterFolder1BDTO);
-
         TreeFolderElements elemRootFolderB = gpWSClient.getChildrenElements(rootFolderBDTO.getId()).getFolderElements();
-        Assert.assertNotNull("elem-B null", elemRootFolderB);
+        assertNotNull("elem-B null", elemRootFolderB);
         assertEquals("#B", 1, elemRootFolderB.size());
         IElementDTO vectorRootFolderBDTO = elemRootFolderB.pollFirst();
         this.assertLayerRest("V-B", vectorRootFolderB, vectorRootFolderBDTO);
@@ -379,46 +329,35 @@ public class RSProjectTest extends BasicRestServiceTest {
         super.rootFolderB.setExpanded(true);
         folder1A.setExpanded(true);
         folder2C.setExpanded(true);
-
         gpWSClient.updateFolder(super.rootFolderA);
         gpWSClient.updateFolder(super.rootFolderB);
         gpWSClient.updateFolder(folder1A);
         gpWSClient.updateFolder(folder2C);
-
         ProjectDTO project = gpWSClient.getProjectWithExpandedFolders(super.idProjectTest, super.idUserTest);
-
         assertEquals("project name", super.projectTest.getName(), project.getName());
-        assertEquals("project elements", super.projectTest.getNumberOfElements(),
-                project.getNumberOfElements().intValue());
-
+        assertEquals("project elements", super.projectTest.getNumberOfElements(), project.getNumberOfElements().intValue());
         List<FolderDTO> rootFolders = project.getRootFolders();
         assertEquals("#root", 2, rootFolders.size());
         assertEquals("A", nameRootFolderA, rootFolders.get(0).getName());
         assertEquals("B", nameRootFolderB, rootFolders.get(1).getName());
-
         List<AbstractElementDTO> childRootFolderA = rootFolders.get(0).getElementList();
         assertEquals("#A", 4, childRootFolderA.size());
         assertEquals("R-A", nameRaster + nameRootFolderA, childRootFolderA.get(0).getName());
         assertEquals("1A", nameFolder1A, childRootFolderA.get(1).getName());
         assertEquals("1B", nameFolder1B, childRootFolderA.get(2).getName());
         assertEquals("1C", nameFolder1C, childRootFolderA.get(3).getName());
-
         List<AbstractElementDTO> childFolder1A = ((FolderDTO) childRootFolderA.get(1)).getElementList();
         assertEquals("#1A", 3, childFolder1A.size());
         assertEquals("2A", nameFolder2A, childFolder1A.get(0).getName());
         assertEquals("2B", nameFolder2B, childFolder1A.get(1).getName());
         assertEquals("2C", nameFolder2C, childFolder1A.get(2).getName());
-
         List<AbstractElementDTO> childFolder2A = ((FolderDTO) childFolder1A.get(0)).getElementList();
         assertEquals("#2A", 0, childFolder2A.size()); // NO elements
-
         FolderDTO f1B = (FolderDTO) childRootFolderA.get(2);
         assertEquals("#1B", 0, f1B.getElementList().size()); // NO elements
-
         FolderDTO f2C = (FolderDTO) childFolder1A.get(2);
         assertEquals("#2C", 1, f2C.getElementList().size());
         assertEquals("R-2C", nameRaster + nameFolder2C, f2C.getElementList().get(0).getName());
-
         List<AbstractElementDTO> childRootFolderB = rootFolders.get(1).getElementList();
         assertEquals("#B", 1, childRootFolderB.size());
         assertEquals("V-B", nameVector + nameRootFolderB, childRootFolderB.get(0).getName());
@@ -430,27 +369,22 @@ public class RSProjectTest extends BasicRestServiceTest {
         projectTest.setShared(true);
         projectTest.setName("shared_project_test_rs");
         gpWSClient.updateProject(projectTest);
-
         // Initial test
         List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
-        Assert.assertNotEquals(accountsToShare.isEmpty(), TRUE);
+        assertNotEquals(accountsToShare.isEmpty(), TRUE);
         assertEquals(1, accountsToShare.size());
         assertEquals(idUserTest, accountsToShare.get(0).getId().longValue());
-
         // Insert Users to which the Project is shared
         Long firstUserID = this.createAndInsertUser("first_to_share_project", organizationTest, GPRole.USER);
         Long latterUserID = this.createAndInsertUser("latter_to_share_project", organizationTest, GPRole.VIEWER);
-
         GPUser firstUser = gpWSClient.getUserDetail(firstUserID);
         GPUser latterUser = gpWSClient.getUserDetail(latterUserID);
-
         // Insert the Users as viewers of Project
         this.createAndInsertAccountProject(firstUser, projectTest, BasePermission.READ);
         this.createAndInsertAccountProject(latterUser, projectTest, BasePermission.READ);
-
         // Final test
         accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
-        Assert.assertNotEquals(accountsToShare.isEmpty(), TRUE);
+        assertNotEquals(accountsToShare.isEmpty(), TRUE);
         assertEquals(3, accountsToShare.size());
     }
 
@@ -460,23 +394,19 @@ public class RSProjectTest extends BasicRestServiceTest {
         projectTest.setShared(true);
         projectTest.setName("shared_project_to_share_test_rs");
         gpWSClient.updateProject(projectTest);
-
         // Initial test
         List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsToShareByProjectID(idProjectTest).getAccounts();
         assertEquals(accountsToShare.isEmpty(), TRUE);
-
         // Insert a User to which the Project is shared as viewer
         Long newUserID = this.createAndInsertUser("user_to_share_project_rs", organizationTest, GPRole.USER);
         GPUser newUser = gpWSClient.getUserDetail(newUserID);
         this.createAndInsertAccountProject(newUser, projectTest, BasePermission.READ);
-
         // Insert Users to which it possible to share the Project
         this.createAndInsertUser("first_possible_to_share_project_rs", organizationTest, GPRole.USER);
         this.createAndInsertUser("latter_possible_to_share_project_rs", organizationTest, GPRole.VIEWER);
-
         // Final test
         accountsToShare = gpWSClient.getAccountsToShareByProjectID(idProjectTest).getAccounts();
-        Assert.assertNotEquals(accountsToShare.isEmpty(), TRUE);
+        assertNotEquals(accountsToShare.isEmpty(), TRUE);
         assertEquals(2, accountsToShare.size());
     }
 
@@ -486,25 +416,21 @@ public class RSProjectTest extends BasicRestServiceTest {
         projectTest.setShared(true);
         projectTest.setName("shared_project_owner_test_rs");
         gpWSClient.updateProject(projectTest);
-
         // Insert a User to which the Project is shared as viewer
         Long newOwnerID = this.createAndInsertUser("user_to_share_project_rs", organizationTest, GPRole.USER);
         GPUser newOwner = gpWSClient.getUserDetail(newOwnerID);
         this.createAndInsertAccountProject(newOwner, projectTest, BasePermission.READ);
-
         // Initial test
         GPAccount owner = gpWSClient.getProjectOwner(idProjectTest).getAccount();
-        Assert.assertNotNull(owner);
+        assertNotNull(owner);
         assertEquals(userTest, owner);
-
         // Change the Account owner
         RequestByAccountProjectIDs request = new RequestByAccountProjectIDs(newOwnerID, idProjectTest);
         boolean result = gpWSClient.setProjectOwner(request);
         assertTrue(result);
-
         // Final test
         owner = gpWSClient.getProjectOwner(idProjectTest).getAccount();
-        Assert.assertNotNull(owner);
+        assertNotNull(owner);
         assertEquals(newOwnerID, owner.getId());
     }
 
@@ -512,19 +438,16 @@ public class RSProjectTest extends BasicRestServiceTest {
     public void testProjectNewOwnerRest() throws Exception {
         // Initial test
         GPAccount owner = gpWSClient.getProjectOwner(idProjectTest).getAccount();
-        Assert.assertNotNull(owner);
+        assertNotNull(owner);
         assertEquals(userTest, owner);
-
         // Change the Account owner
         Long newOwnerID = this.createAndInsertUser("new_owner_rs", organizationTest, GPRole.ADMIN);
-
         RequestByAccountProjectIDs request = new RequestByAccountProjectIDs(newOwnerID, idProjectTest);
         boolean result = gpWSClient.setProjectOwner(request);
         assertTrue(result);
-
         // Final test
         owner = gpWSClient.getProjectOwner(idProjectTest).getAccount();
-        Assert.assertNotNull(owner);
+        assertNotNull(owner);
         assertEquals(newOwnerID, owner.getId());
     }
 
@@ -532,26 +455,20 @@ public class RSProjectTest extends BasicRestServiceTest {
     public void testUpdateAccountsProjectSharingCreateRest() throws Exception {
         // Initial test
         GPProject project = gpWSClient.getProjectDetail(idProjectTest);
-        Assert.assertFalse(project.isShared());
-
+        assertFalse(project.isShared());
         List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
-        Assert.assertNotNull(accountsToShare);
+        assertNotNull(accountsToShare);
         assertEquals(1, accountsToShare.size());
         assertEquals(idUserTest, accountsToShare.get(0).getId().longValue());
-
         // Insert User to which the Project will be share
         Long newUserID = this.createAndInsertUser("user_to_share_project_rs", organizationTest, GPRole.USER);
-
         // Test add user for sharing
-        Boolean result = gpWSClient.updateAccountsProjectSharing(
-                new PutAccountsProjectRequest(idProjectTest, Arrays.asList(idUserTest, newUserID)));
+        Boolean result = gpWSClient.updateAccountsProjectSharing(new PutAccountsProjectRequest(idProjectTest, Arrays.asList(idUserTest, newUserID)));
         assertTrue(result);
-
         project = gpWSClient.getProjectDetail(idProjectTest);
         assertTrue(project.isShared());
-
         accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
-        Assert.assertNotNull(accountsToShare);
+        assertNotNull(accountsToShare);
         assertEquals(2, accountsToShare.size());
         boolean check = false;
         for (ShortAccountDTO accountDTO : accountsToShare) {
@@ -569,17 +486,14 @@ public class RSProjectTest extends BasicRestServiceTest {
         Long newUserID = this.createAndInsertUser("user_to_share_project_rs", organizationTest, GPRole.USER);
         GPUser newUser = gpWSClient.getUserDetail(newUserID);
         this.createAndInsertAccountProject(newUser, projectTest, BasePermission.READ);
-
         // Set the Project as share
         projectTest.setShared(true);
         gpWSClient.updateProject(projectTest);
-
         // Initial test
         GPProject project = gpWSClient.getProjectDetail(idProjectTest);
         assertTrue(project.isShared());
-
         List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
-        Assert.assertNotNull(accountsToShare);
+        assertNotNull(accountsToShare);
         assertEquals(2, accountsToShare.size());
         assertEquals(2, accountsToShare.size());
         boolean check = false;
@@ -590,17 +504,13 @@ public class RSProjectTest extends BasicRestServiceTest {
             }
         }
         assertTrue(check);
-
         // Test delete user for sharing
-        boolean result = gpWSClient
-                .updateAccountsProjectSharing(new PutAccountsProjectRequest(idProjectTest, Arrays.asList(idUserTest)));
+        boolean result = gpWSClient.updateAccountsProjectSharing(new PutAccountsProjectRequest(idProjectTest, Arrays.asList(idUserTest)));
         assertTrue(result);
-
         project = gpWSClient.getProjectDetail(idProjectTest);
-        Assert.assertFalse(project.isShared());
-
+        assertFalse(project.isShared());
         accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
-        Assert.assertNotNull(accountsToShare);
+        assertNotNull(accountsToShare);
         assertEquals(1, accountsToShare.size());
         assertEquals(idUserTest, accountsToShare.get(0).getId().longValue());
     }
@@ -612,17 +522,14 @@ public class RSProjectTest extends BasicRestServiceTest {
         Long latterUserID = this.createAndInsertUser("latter_to_share_project", organizationTest, GPRole.VIEWER);
         GPUser newUser = gpWSClient.getUserDetail(firstUserID);
         this.createAndInsertAccountProject(newUser, projectTest, BasePermission.READ);
-
         // Set the Project as share
         projectTest.setShared(true);
         gpWSClient.updateProject(projectTest);
-
         // Initial test
         GPProject project = gpWSClient.getProjectDetail(idProjectTest);
         assertTrue(project.isShared());
-
         List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
-        Assert.assertNotNull(accountsToShare);
+        assertNotNull(accountsToShare);
         assertEquals(2, accountsToShare.size());
         assertEquals(2, accountsToShare.size());
         boolean checkFirst = false;
@@ -633,17 +540,13 @@ public class RSProjectTest extends BasicRestServiceTest {
             }
         }
         assertTrue(checkFirst);
-
         // Test add latter user for sharing
-        boolean result = gpWSClient.updateAccountsProjectSharing(
-                new PutAccountsProjectRequest(idProjectTest, Arrays.asList(idUserTest, firstUserID, latterUserID)));
+        boolean result = gpWSClient.updateAccountsProjectSharing(new PutAccountsProjectRequest(idProjectTest, Arrays.asList(idUserTest, firstUserID, latterUserID)));
         assertTrue(result);
-
         project = gpWSClient.getProjectDetail(idProjectTest);
         assertTrue(project.isShared());
-
         accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
-        Assert.assertNotNull(accountsToShare);
+        assertNotNull(accountsToShare);
         assertEquals(3, accountsToShare.size());
         checkFirst = false;
         boolean checkLatter = false;
@@ -657,17 +560,13 @@ public class RSProjectTest extends BasicRestServiceTest {
         }
         assertTrue(checkFirst);
         assertTrue(checkLatter);
-
         // Test delete first user for sharing
-        result = gpWSClient.updateAccountsProjectSharing(
-                new PutAccountsProjectRequest(idProjectTest, Arrays.asList(idUserTest, latterUserID)));
+        result = gpWSClient.updateAccountsProjectSharing(new PutAccountsProjectRequest(idProjectTest, Arrays.asList(idUserTest, latterUserID)));
         assertTrue(result);
-
         project = gpWSClient.getProjectDetail(idProjectTest);
         assertTrue(project.isShared());
-
         accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
-        Assert.assertNotNull(accountsToShare);
+        assertNotNull(accountsToShare);
         assertEquals(2, accountsToShare.size());
         checkLatter = false;
         for (ShortAccountDTO accountDTO : accountsToShare) {
@@ -683,23 +582,18 @@ public class RSProjectTest extends BasicRestServiceTest {
     public void testUpdateAccountsProjectSharingOwnerRest() throws Exception {
         // Initial test
         GPProject project = gpWSClient.getProjectDetail(idProjectTest);
-        Assert.assertFalse(project.isShared());
-
+        assertFalse(project.isShared());
         List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
-        Assert.assertNotNull(accountsToShare);
+        assertNotNull(accountsToShare);
         assertEquals(1, accountsToShare.size());
         assertEquals(idUserTest, accountsToShare.get(0).getId().longValue());
-
         // Test pass owner
-        boolean result = gpWSClient
-                .updateAccountsProjectSharing(new PutAccountsProjectRequest(idProjectTest, Arrays.asList(idUserTest)));
+        boolean result = gpWSClient.updateAccountsProjectSharing(new PutAccountsProjectRequest(idProjectTest, Arrays.asList(idUserTest)));
         assertTrue(result);
-
         project = gpWSClient.getProjectDetail(idProjectTest);
-        Assert.assertFalse(project.isShared());
-
+        assertFalse(project.isShared());
         accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
-        Assert.assertNotNull(accountsToShare);
+        assertNotNull(accountsToShare);
         assertEquals(1, accountsToShare.size());
         assertEquals(idUserTest, accountsToShare.get(0).getId().longValue());
     }
@@ -708,24 +602,14 @@ public class RSProjectTest extends BasicRestServiceTest {
     public void updateAccountProjectTestRest() throws Exception {
         String username = "new-user-rs";
         Long idUser = super.createAndInsertUser(username, organizationTest, GPRole.ADMIN, GPRole.VIEWER);
-
         GPUser user = gpWSClient.getUserDetail(idUser);
-
-        long idProject = super
-                .createAndInsertProject("_newproject_test_rs", false, 6, new Date(System.currentTimeMillis()));
-
+        long idProject = super.createAndInsertProject("_newproject_test_rs", false, 6, new Date(System.currentTimeMillis()));
         GPProject project = gpWSClient.getProjectDetail(idProject);
-
         Long idAccountProject = super.createAndInsertAccountProject(user, project, BasePermission.ADMINISTRATION);
-
         GPAccountProject accountProject = gpWSClient.getAccountProject(idAccountProject);
-
         accountProject.setDefaultProject(TRUE);
-
         idAccountProject = gpWSClient.updateAccountProject(accountProject);
-
         accountProject = gpWSClient.getAccountProject(idAccountProject);
-
         assertEquals(TRUE, accountProject.isDefaultProject());
         assertEquals(TRUE, gpWSClient.deleteAccount(idUser));
     }
@@ -738,18 +622,15 @@ public class RSProjectTest extends BasicRestServiceTest {
         String username1 = "second-user-rs";
         Long idUser1 = super.createAndInsertUser(username1, organizationTest, GPRole.ADMIN);
         GPUser user1 = gpWSClient.getUserDetail(idUser1);
-        long idProject = super
-                .createAndInsertProject("first_project_test_rs", false, 116, new Date(System.currentTimeMillis()));
+        long idProject = super.createAndInsertProject("first_project_test_rs", false, 116, new Date(System.currentTimeMillis()));
         GPProject project = gpWSClient.getProjectDetail(idProject);
-        long idProject1 = super
-                .createAndInsertProject("second_project_test_rs", false, 11, new Date(System.currentTimeMillis()));
+        long idProject1 = super.createAndInsertProject("second_project_test_rs", false, 11, new Date(System.currentTimeMillis()));
         GPProject project1 = gpWSClient.getProjectDetail(idProject1);
         super.createAndInsertAccountProject(user, project, BasePermission.ADMINISTRATION);
         super.createAndInsertAccountProject(user1, project, BasePermission.ADMINISTRATION);
         super.createAndInsertAccountProject(user, project1, BasePermission.ADMINISTRATION);
         assertEquals(2, gpWSClient.getAccountProjectsByProjectID(idProject).getAccountProjects().size());
-        assertEquals(116, gpWSClient.getAccountProjectByAccountAndProjectIDs(idUser, idProject).getProject()
-                .getNumberOfElements());
+        assertEquals(116, gpWSClient.getAccountProjectByAccountAndProjectIDs(idUser, idProject).getProject().getNumberOfElements());
         assertEquals(2, gpWSClient.getAccountProjectsCount(idUser, null).intValue());
         assertEquals(TRUE, gpWSClient.deleteAccount(idUser));
         assertEquals(TRUE, gpWSClient.deleteAccount(idUser1));
@@ -757,8 +638,7 @@ public class RSProjectTest extends BasicRestServiceTest {
 
     @Test
     public void saveAccountProjectPropertiesRest() throws Exception {
-        AccountProjectPropertiesDTO apDTO = new AccountProjectPropertiesDTO(idUserTest, idProjectTest,
-                "Project-New-Rest", 4, TRUE, TRUE, TRUE, FALSE);
+        AccountProjectPropertiesDTO apDTO = new AccountProjectPropertiesDTO(idUserTest, idProjectTest, "Project-New-Rest", 4, TRUE, TRUE, TRUE, FALSE);
         assertTrue(gpWSClient.saveAccountProjectProperties(apDTO));
         GPProject project = gpWSClient.getProjectDetail(idProjectTest);
         logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@@@Project_Updated : {}\n\n@@@@@@@@@@@@@@@@@@", project);
@@ -772,14 +652,10 @@ public class RSProjectTest extends BasicRestServiceTest {
     public void saveProjectTestRest() throws Exception {
         GPProject project = super.createProject("Save-Project-Rest", FALSE, 200, new Date(System.currentTimeMillis()));
         Long idProject = gpWSClient.saveProject(new SaveProjectRequest(usernameTest, project, TRUE));
-
         GPProject loadProject = gpWSClient.getProjectDetail(idProject);
-
         assertEquals(200, loadProject.getNumberOfElements());
         assertEquals("Save-Project-Rest", loadProject.getName());
-
         GPAccountProject owner = gpWSClient.getProjectOwner(idProject);
-
         assertEquals(usernameTest, owner.getAccount().getNaturalID());
         assertEquals(TRUE, gpWSClient.deleteAccount(owner.getAccount().getId()));
     }
@@ -787,17 +663,12 @@ public class RSProjectTest extends BasicRestServiceTest {
     @Test
     public void cloneProjectTestRest() throws Exception {
         //create project
-        GPProject project = super
-                .createProject("Project-To-Be-Cloned", FALSE, 200, new Date(System.currentTimeMillis()));
+        GPProject project = super.createProject("Project-To-Be-Cloned", FALSE, 200, new Date(System.currentTimeMillis()));
         Long idProject = gpWSClient.saveProject(new SaveProjectRequest(usernameTest, project, TRUE));
-
         GPProject loadProject = gpWSClient.getProjectDetail(idProject);
-
         assertEquals(200, loadProject.getNumberOfElements());
         assertEquals("Project-To-Be-Cloned", loadProject.getName());
-
         GPAccountProject owner = gpWSClient.getProjectOwner(idProject);
-
         //create folders
         long idFolder_A = super.createAndInsertFolder(titleFolderA, loadProject, 1, null);
         GPFolder folder_A = gpWSClient.getFolderDetail(idFolder_A);
@@ -809,21 +680,13 @@ public class RSProjectTest extends BasicRestServiceTest {
         GPFolder folder_D = gpWSClient.getFolderDetail(idFolder_D);
         long idFolder_E = super.createAndInsertFolder(titleFolderE, loadProject, 5, folder_C);
         GPFolder folder_E = gpWSClient.getFolderDetail(idFolder_E);
-
         //create layers
-        super.createAndInsertRasterLayer(folder_A, titleRasterA, "name_" + titleRasterA, "abstract_" + titleRasterA, 1,
-                "srs", serverUrlTest);
-        super.createAndInsertRasterLayer(folder_E, titleRasterE, "name_" + titleRasterE, "abstract_" + titleRasterE, 1,
-                "srs", serverUrlTest);
-        super.createAndInsertVectorLayer(folder_B, titleVectorB, "name_" + titleVectorB, "abstract_" + titleVectorB, 1,
-                "srs", serverUrlTest);
-        super.createAndInsertVectorLayer(folder_D, titleVectorD, "name_" + titleVectorD, "abstract_" + titleVectorD, 1,
-                "srs", serverUrlTest);
-        super.createAndInsertVectorLayer(folder_C, titleVectorC, "name_" + titleVectorC, "abstract_" + titleVectorC, 1,
-                "srs", serverUrlTest);
-
-        CloneProjectRequest request = new CloneProjectRequest(loadProject.getId(), owner.getAccount().getId(),
-                loadProject.getName().concat("-copy"));
+        super.createAndInsertRasterLayer(folder_A, titleRasterA, "name_" + titleRasterA, "abstract_" + titleRasterA, 1, "srs", serverUrlTest);
+        super.createAndInsertRasterLayer(folder_E, titleRasterE, "name_" + titleRasterE, "abstract_" + titleRasterE, 1, "srs", serverUrlTest);
+        super.createAndInsertVectorLayer(folder_B, titleVectorB, "name_" + titleVectorB, "abstract_" + titleVectorB, 1, "srs", serverUrlTest);
+        super.createAndInsertVectorLayer(folder_D, titleVectorD, "name_" + titleVectorD, "abstract_" + titleVectorD, 1, "srs", serverUrlTest);
+        super.createAndInsertVectorLayer(folder_C, titleVectorC, "name_" + titleVectorC, "abstract_" + titleVectorC, 1, "srs", serverUrlTest);
+        CloneProjectRequest request = new CloneProjectRequest(loadProject.getId(), owner.getAccount().getId(), loadProject.getName().concat("-copy"));
         long idProjectCloned = gpWSClient.cloneProject(request);
         ProjectDTO projectDTO = gpWSClient.getProjectWithRootFolders(idProjectCloned, owner.getAccount().getId());
         GPFolder rootFolder = gpWSClient.getFolderDetail(projectDTO.getRootFolders().get(0).getId());
@@ -835,7 +698,6 @@ public class RSProjectTest extends BasicRestServiceTest {
         ChildrenFolderStore cChildrens = gpWSClient.getChildrenFolders(clonedFolder_C.getId());
         GPFolder clonedFolder_E = gpWSClient.getFolderDetail(cChildrens.getChildren().get(0).getId());
         ShortLayerDTOContainer gpLayers = gpWSClient.getLayers(idProjectCloned);
-
         assertEquals("Project-To-Be-Cloned-copy", projectDTO.getName());
         assertEquals(titleFolderA, rootFolder.getName());
         assertTrue("Project ID", rootFolder.getProject().getId() == idProjectCloned);
@@ -847,29 +709,22 @@ public class RSProjectTest extends BasicRestServiceTest {
         assertTrue("Parent ID", clonedFolder_C.getParent().getId().longValue() == rootFolder.getId().longValue());
         assertTrue("Parent ID", clonedFolder_D.getParent().getId().longValue() == clonedFolder_B.getId().longValue());
         assertTrue("Parent ID", clonedFolder_E.getParent().getId().longValue() == clonedFolder_C.getId().longValue());
-
         assertTrue("Layers Size", gpLayers.getLayers().size() == 5);
         assertTrue("Root Children folders", rootChildrens.getChildren().size() == 2);
-
         assertEquals(titleFolderB, clonedFolder_B.getName());
         assertEquals(titleFolderC, clonedFolder_C.getName());
         assertEquals(titleFolderD, clonedFolder_D.getName());
         assertEquals(titleFolderE, clonedFolder_E.getName());
-
         assertEquals(usernameTest, owner.getAccount().getNaturalID());
         assertEquals(TRUE, gpWSClient.deleteAccount(owner.getAccount().getId()));
     }
 
     @Test
     public void setProjectSharedTestRest() throws Exception {
-        Long idProject = super
-                .createAndInsertProject("Project-Rest-to-Share", FALSE, 2000, new Date(System.currentTimeMillis()));
-
+        Long idProject = super.createAndInsertProject("Project-Rest-to-Share", FALSE, 2000, new Date(System.currentTimeMillis()));
         gpWSClient.setProjectShared(idProject);
-
         GPProject project = gpWSClient.getProjectDetail(idProject);
-
-        Assert.assertNotNull(project);
+        assertNotNull(project);
         assertEquals(TRUE, project.isShared());
         assertEquals(TRUE, gpWSClient.deleteProject(idProject));
     }
@@ -879,15 +734,24 @@ public class RSProjectTest extends BasicRestServiceTest {
         logger.info("#############################SHORT_PROJECT_RS : {}\n", gpWSClient.getShortProject(idProjectTest));
     }
 
+    /**
+     * @param msg
+     * @param layer
+     * @param layerToCheck
+     */
     private void assertLayerRest(String msg, GPLayer layer, IElementDTO layerToCheck) {
         assertEquals(msg, layer.getName(), layerToCheck.getName());
         assertEquals("Position-" + msg, layer.getPosition(), layerToCheck.getPosition().intValue());
     }
 
+    /**
+     * @param msg
+     * @param folder
+     * @param folderToCheck
+     */
     private void assertFolderRest(String msg, GPFolder folder, FolderDTO folderToCheck) {
         assertEquals(msg, folder.getName(), folderToCheck.getName());
         assertEquals("Position-" + msg, folder.getPosition(), folderToCheck.getPosition().intValue());
-        assertEquals("Descendats-" + msg, folder.getNumberOfDescendants(),
-                folderToCheck.getNumberOfDescendants().intValue());
+        assertEquals("Descendats-" + msg, folder.getNumberOfDescendants(), folderToCheck.getNumberOfDescendants().intValue());
     }
 }

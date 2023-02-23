@@ -41,7 +41,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -49,9 +48,11 @@ import org.springframework.context.annotation.Configuration;
 @Develop
 class GPPublisherRestBeansConfig {
 
+    /**
+     * @return {@link GPPublisherRestClientTestConnector}
+     */
     @Bean
     public GPPublisherRestClientTestConnector gpPublisherRestClient() {
         return new GPPublisherRestClientTestConnector();
     }
-
 }

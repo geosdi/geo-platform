@@ -40,9 +40,7 @@ import jakarta.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.List;
 
-
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -59,6 +57,9 @@ public class InfoPreviewStore implements Serializable {
     public InfoPreviewStore() {
     }
 
+    /**
+     * @param theInfoPreviews
+     */
     public InfoPreviewStore(List<InfoPreview> theInfoPreviews) {
         this.infoPreviews = theInfoPreviews;
     }
@@ -79,8 +80,7 @@ public class InfoPreviewStore implements Serializable {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + " {" + "infoPreviews = "
-                + infoPreviews + '}';
+        return getClass().getSimpleName() + " {" + "infoPreviews = " + infoPreviews + '}';
     }
 
 }

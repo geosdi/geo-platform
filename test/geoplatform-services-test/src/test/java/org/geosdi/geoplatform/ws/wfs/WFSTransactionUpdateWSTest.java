@@ -40,16 +40,14 @@ import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.shared.bean.BBox;
-import org.junit.Assert;
 import org.junit.Test;
 
 import javax.xml.namespace.QName;
-import java.util.Arrays;
 import java.util.Map;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.EMPTY_MAP;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -72,16 +70,13 @@ public class WFSTransactionUpdateWSTest extends WFSAbstractTest {
         }
         assertNotNull(att1);
         assertNotNull(att2);
-
         BBox bbox = new BBox(-75.102613, 40.212597, -75.361859, 40.512517);
         FeatureCollectionDTO featureCollection = wfsService.getFeatureByBBoxDirect(addressDatastore, typeName, bbox, EMPTY_MAP);
         assertEquals(1, featureCollection.getNumberOfFeatures());
         assertNotNull(featureCollection.getFeatures());
-
         FeatureDTO feature = featureCollection.getFeatures().get(0);
         assertNotNull(feature);
         assertNotNull(feature.getFID());
-
         Map<String, String> attributesMap = feature.getAttributes().getAttributesMap();
         String val1 = attributesMap.get(att1.getName());
         double d1 = Double.valueOf(val1) + 0.001;
@@ -89,13 +84,9 @@ public class WFSTransactionUpdateWSTest extends WFSAbstractTest {
         String val2 = attributesMap.get(att2.getName());
         double d2 = Double.valueOf(val2) + 0.001;
         att2.setValue(Double.toString(d2));
-        logger.info("\n\n*** val1: from {} to {}\n*** val2: from {} to {}\n\n",
-                val1, att1.getValue(), val2, att2.getValue());
-
-        boolean updated = wfsService.transactionUpdate(addressDatastore, typeName, feature.getFID(),
-                Arrays.asList(att1, att2), EMPTY_MAP);
-        Assert.assertTrue(updated);
-
+        logger.info("\n\n*** val1: from {} to {}\n*** val2: from {} to {}\n\n", val1, att1.getValue(), val2, att2.getValue());
+        boolean updated = wfsService.transactionUpdate(addressDatastore, typeName, feature.getFID(), asList(att1, att2), EMPTY_MAP);
+        assertTrue(updated);
         feature = wfsService.getFeatureByFIDDirect(addressDatastore, typeName, feature.getFID(), EMPTY_MAP);
         assertNotNull(feature);
         assertNotNull(feature.getFID());

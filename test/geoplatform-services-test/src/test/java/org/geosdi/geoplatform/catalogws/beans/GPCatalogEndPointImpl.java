@@ -51,9 +51,8 @@ import org.springframework.beans.factory.annotation.Value;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPCatalogEndPointImpl {
 
@@ -75,17 +74,12 @@ public class GPCatalogEndPointImpl {
     public void init() {
         SpringBusFactory bf = new SpringBusFactory();
         bus = bf.createBus();
-
         bus.getInInterceptors().add(new LoggingInInterceptor());
         bus.getOutInterceptors().add(new LoggingOutInterceptor());
-//
-//        bus.getInInterceptors().add(serverInterceptorStrategyFactory.getSecurityInInterceptor());
-//        bus.getOutInterceptors().add(serverInterceptorStrategyFactory.getSecurityOutInterceptor());
-
         SpringBusFactory.setDefaultBus(bus);
+        SpringBusFactory.setThreadDefaultBus(bus);
         endpoint = Endpoint.create(gpCatalogFinderService);
-
-        logger.info("\n\t@@@ Catalog Finder End Point Created @@@");
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@ Catalog Finder End Point Created @@@@@@@@@@@@@@@@@@@@@");
     }
 
     /**
@@ -104,8 +98,7 @@ public class GPCatalogEndPointImpl {
      * @throws Exception 
      */
     public void stopServer() throws Exception {
-        logger.info("\n\t@@@ Catalog Finder WS Service Shut Down @@@");
-
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@ Catalog Finder WS Service Shut Down @@@@@@@@@@@@@@@@@@@");
         endpoint.stop();
         bus.shutdown(true);
         // Wait to be sure that the endpoint was shutdown properly

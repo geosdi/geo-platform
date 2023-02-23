@@ -39,7 +39,6 @@ import com.google.common.collect.Lists;
 import jakarta.annotation.Resource;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
-import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.responce.InfoPreviewStore;
 import org.geosdi.geoplatform.responce.LayerAttribute;
@@ -50,13 +49,15 @@ import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.IntStream.iterate;
+import static org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction.*;
 import static org.mockito.Mockito.mock;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -98,31 +99,31 @@ public abstract class PublisherBaseTest {
 
     protected abstract void mockAnalyzeZIPEPSG() throws Exception;
 
+    /**
+     * @param size
+     * @return {@link InfoPreviewStore}
+     */
     protected final InfoPreviewStore createInfoPreviewStore(int size) {
-        List<InfoPreview> previews = new ArrayList<>(size);
-
-        for (int i = 0; i < size; i++) {
-            previews.add(new InfoPreview("MOCK_URL" + i, "WORKSPACE_MOCK" + i,
-                    "LAYER_NAME_MOCK" + i, i, i, i, i, "EPSG:MOCK" + i,
-                    "STYLE_NAME_MOCK" + i,
-                    ((i % 2) == 0) ? Boolean.TRUE : Boolean.FALSE,
-                    ((i % 2) == 0) ? Lists.<LayerPublishAction>newArrayList(
-                                    LayerPublishAction.APPEND, LayerPublishAction.OVERRIDE,
-                                    LayerPublishAction.RENAME) : null));
-        }
-
-        return new InfoPreviewStore(previews);
+        checkArgument(size >0 , "The Parameter size must be greather than 0.");
+        return new InfoPreviewStore(iterate(0, n -> n + 1)
+                .limit(size)
+                .boxed()
+                .map(i -> new InfoPreview("MOCK_URL" + i, "WORKSPACE_MOCK" + i, "LAYER_NAME_MOCK" + i, i, i, i, i,
+                        "EPSG:MOCK" + i, "STYLE_NAME_MOCK" + i, ((i % 2) == 0) ? TRUE : FALSE,
+                        ((i % 2) == 0) ? Lists.newArrayList(APPEND, OVERRIDE, RENAME) : null))
+                .collect(toList()));
     }
 
+    /**
+     * @param size
+     * @return {@link LayerAttributeStore}
+     */
     protected final LayerAttributeStore createLayerAttributeStore(int size) {
-        List<LayerAttribute> layerAttributes = new ArrayList<>(size);
-
-        for (int i = 0; i < size; i++) {
-            layerAttributes.add(new LayerAttribute("VALUE_MOCK_" + i,
-                    "TYPE_MOCK_" + i));
-        }
-
-        return new LayerAttributeStore(layerAttributes);
+        checkArgument(size >0 , "The Parameter size must be greather than 0.");
+        return new LayerAttributeStore(iterate(0, n -> n + 1)
+                .limit(size)
+                .boxed()
+                .map(i -> new LayerAttribute("VALUE_MOCK_" + i, "TYPE_MOCK_" + i))
+                .collect(toList()));
     }
-
 }

@@ -105,21 +105,13 @@ public abstract class CSWCatalogTest {
     @Before
     public void setUp() throws Exception {
         logger.trace("\n\t@@@ {}.setUp @@@", this.getClass().getSimpleName());
-
         organizationTest = new GPOrganization(organizationNameTest);
         organizationTest.setId(gpWSClient.insertOrganization(organizationTest));
-
         // Insert the servers test
-        serverTestOur = this.createCSWServer("CSW Server WS Test",
-                geosdiProvider.getGeosdiUrl(), organizationTest);
+        serverTestOur = this.createCSWServer("CSW Server WS Test", geosdiProvider.getGeosdiUrl(), organizationTest);
         serverTestOurID = cswService.insertServerCSW(serverTestOur);
         serverTestOur.setId(serverTestOurID);
-
-        serverTestTrevisoID = cswService.insertServerCSW(
-                this.createCSWServer("Provincia di Treviso",
-                "http://ows.provinciatreviso.it/geonetwork/srv/it/csw",
-                organizationTest));
-
+        serverTestTrevisoID = cswService.insertServerCSW(this.createCSWServer("Provincia di Treviso", "http://ows.provinciatreviso.it/geonetwork/srv/it/csw", organizationTest));
         // Create the CSW search parameters
         catalogFinder = new CatalogFinderBean();
         catalogFinder.setServerID(serverTestOurID);
@@ -136,12 +128,16 @@ public abstract class CSWCatalogTest {
     @After
     public void tearDown() throws ResourceNotFoundFault {
         logger.trace("\n\t@@@ {}.tearDown @@@", this.getClass().getSimpleName());
-
         gpWSClient.deleteOrganization(organizationTest.getId());
     }
 
-    protected GeoPlatformServer createCSWServer(String title, String url,
-            GPOrganization organization) {
+    /**
+     * @param title
+     * @param url
+     * @param organization
+     * @return {@link GeoPlatformServer}
+     */
+    protected GeoPlatformServer createCSWServer(String title, String url, GPOrganization organization) {
         GeoPlatformServer server = new GeoPlatformServer();
         server.setServerType(GPCapabilityType.CSW);
         server.setTitle(title);

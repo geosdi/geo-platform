@@ -40,14 +40,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
 @Develop
 class GPCatalogWSEndPointConfiguration {
 
+    /**
+     * @return {@link GPCatalogEndPointImpl}
+     */
     @Bean
     public GPCatalogEndPointImpl gpCatalogEndPointImpl() {
         return new GPCatalogEndPointImpl();

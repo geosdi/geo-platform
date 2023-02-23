@@ -41,21 +41,18 @@ import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.request.message.MarkMessageReadByDateRequest;
 import org.geosdi.geoplatform.response.MessageDTO;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.*;
 
+import static org.geosdi.geoplatform.gui.shared.GPMessageCommandType.NONE;
 import static org.geosdi.geoplatform.gui.shared.GPRole.USER;
 import static org.geosdi.geoplatform.gui.shared.GPRole.VIEWER;
 import static org.geosdi.geoplatform.request.LikePatternType.CONTENT_EQUALS;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class RSMessageTest extends BasicRestServiceTest {
@@ -73,12 +70,10 @@ public class RSMessageTest extends BasicRestServiceTest {
         // Insert Users
         idUserTest = this.createAndInsertUser(usernameTest, organizationTest, USER);
         userTest = gpWSClient.getUserDetailByUsername(new SearchRequest(usernameTest, CONTENT_EQUALS));
-
         firstRecipientID = this.createAndInsertUser("first_recipient_RS", organizationTest, USER);
         firstRecipient = gpWSClient.getUserDetail(firstRecipientID);
         latterRecipientID = this.createAndInsertUser("latter_recipient_RS", organizationTest, VIEWER);
 //        latterRecipient = gpWSClient.getUserDetail(latterRecipientID);
-
         // Create message
         message = new GPMessage();
         message.setRecipient(firstRecipient);
@@ -87,7 +82,7 @@ public class RSMessageTest extends BasicRestServiceTest {
         message.setRead(false);
         message.setSubject("Foo subject REST");
         message.setText("Foo message REST.");
-        message.addCommand(GPMessageCommandType.NONE);
+        message.addCommand(NONE);
     }
 
     @Test
@@ -95,7 +90,6 @@ public class RSMessageTest extends BasicRestServiceTest {
         // Insert message
         Long messageID = gpWSClient.insertMessage(message);
         assertNotNull(messageID);
-
         // Test
         GPMessage messageDetail = gpWSClient.getMessageDetail(messageID);
         assertNotNull(messageDetail);
@@ -106,7 +100,7 @@ public class RSMessageTest extends BasicRestServiceTest {
         assertEquals(message.getSubject(), messageDetail.getSubject());
         assertEquals(message.getText(), messageDetail.getText());
         assertEquals(message.getCommands(), messageDetail.getCommands());
-        Assert.assertFalse(messageDetail.isRead());
+        assertFalse(messageDetail.isRead());
     }
 
     @Test
@@ -115,14 +109,13 @@ public class RSMessageTest extends BasicRestServiceTest {
         message.addCommand(GPMessageCommandType.OPEN_PROJECT);
         Long messageID = gpWSClient.insertMessage(message);
         assertNotNull(messageID);
-
         // Test
         GPMessage messageDetail = gpWSClient.getMessageDetail(messageID);
         assertNotNull(messageDetail);
         List<GPMessageCommandType> commands = messageDetail.getCommands();
         assertNotNull(commands);
         assertEquals(2, commands.size());
-        assertTrue(commands.contains(GPMessageCommandType.NONE));
+        assertTrue(commands.contains(NONE));
         assertTrue(commands.contains(GPMessageCommandType.OPEN_PROJECT));
     }
 
@@ -133,7 +126,6 @@ public class RSMessageTest extends BasicRestServiceTest {
         messageDTO.setRecipientIDs(Arrays.asList(firstRecipientID, latterRecipientID));
         Boolean result = gpWSClient.insertMultiMessage(messageDTO);
         assertTrue(result);
-
         // Test first
         List<GPMessage> firstAllMessages = gpWSClient.getAllMessagesByRecipient(firstRecipientID).getMessages();
         assertNotNull(firstAllMessages);
@@ -141,7 +133,6 @@ public class RSMessageTest extends BasicRestServiceTest {
         GPMessage firstMessage = firstAllMessages.get(0);
         assertNotNull(firstMessage);
         assertEquals(firstRecipientID, firstMessage.getRecipient().getId());
-
         // Test latter
         List<GPMessage> latterAllMessages = gpWSClient.getAllMessagesByRecipient(latterRecipientID).getMessages();
         assertNotNull(latterAllMessages);
@@ -156,7 +147,6 @@ public class RSMessageTest extends BasicRestServiceTest {
         // Insert message
         Long messageID = gpWSClient.insertMessage(message);
         assertNotNull(messageID);
-
         // Test
         Boolean result = gpWSClient.deleteMessage(messageID);
         assertTrue(result);
@@ -167,11 +157,9 @@ public class RSMessageTest extends BasicRestServiceTest {
         // Insert message
         Long messageID = gpWSClient.insertMessage(message);
         assertNotNull(messageID);
-
         // Test
         Boolean result = gpWSClient.markMessageAsRead(messageID);
         assertTrue(result);
-
         GPMessage messageDetail = gpWSClient.getMessageDetail(messageID);
         assertNotNull(messageDetail);
         assertTrue(messageDetail.isRead());
@@ -180,10 +168,8 @@ public class RSMessageTest extends BasicRestServiceTest {
     @Test
     public void testRetrieveMessagesRest() throws Exception {
         this.insertMessagesSortedRest();
-
         // Test all messages
-        List<GPMessage> allMessages = gpWSClient.getAllMessagesByRecipient(
-                firstRecipientID).getMessages();
+        List<GPMessage> allMessages = gpWSClient.getAllMessagesByRecipient(firstRecipientID).getMessages();
         assertNotNull(allMessages);
         assertEquals(3, allMessages.size());
         assertNotNull(allMessages.get(0));
@@ -192,28 +178,22 @@ public class RSMessageTest extends BasicRestServiceTest {
         assertNotNull(allMessages.get(0).getCreationDate());
         assertNotNull(allMessages.get(1).getCreationDate());
         assertNotNull(allMessages.get(2).getCreationDate());
-        assertTrue(allMessages.get(0).getCreationDate().after(
-                allMessages.get(1).getCreationDate()));
-        assertTrue(allMessages.get(1).getCreationDate().after(
-                allMessages.get(2).getCreationDate()));
-
+        assertTrue(allMessages.get(0).getCreationDate().after(allMessages.get(1).getCreationDate()));
+        assertTrue(allMessages.get(1).getCreationDate().after(allMessages.get(2).getCreationDate()));
         // Test unread messages
-        List<GPMessage> unreadMessages = gpWSClient.getUnreadMessagesByRecipient(
-                firstRecipientID).getMessages();
+        List<GPMessage> unreadMessages = gpWSClient.getUnreadMessagesByRecipient(firstRecipientID).getMessages();
         assertNotNull(unreadMessages);
         assertEquals(2, unreadMessages.size());
         assertNotNull(unreadMessages.get(0));
         assertNotNull(unreadMessages.get(1));
         assertNotNull(unreadMessages.get(0).getCreationDate());
         assertNotNull(unreadMessages.get(1).getCreationDate());
-        assertTrue(allMessages.get(0).getCreationDate().after(
-                allMessages.get(1).getCreationDate()));
+        assertTrue(allMessages.get(0).getCreationDate().after(allMessages.get(1).getCreationDate()));
     }
 
     @Test
     public void testMarkAllMessageAsReadRest() throws Exception {
         this.insertMessagesSortedRest();
-
         // Test unread messages intial
         List<GPMessage> unreadMessages = gpWSClient.getUnreadMessagesByRecipient(firstRecipientID).getMessages();
         assertNotNull(unreadMessages);
@@ -221,7 +201,6 @@ public class RSMessageTest extends BasicRestServiceTest {
         // Test mark messages as read
         Boolean result = gpWSClient.markAllMessagesAsReadByRecipient(firstRecipientID);
         assertTrue(result);
-
         // Test unread messages final
         unreadMessages = gpWSClient.getUnreadMessagesByRecipient(firstRecipientID).getMessages();
         assertEquals(0, unreadMessages.size());
@@ -230,17 +209,14 @@ public class RSMessageTest extends BasicRestServiceTest {
     @Test
     public void testMarkPreviousMessagesAsReadRest() throws Exception {
         this.insertMessagesSortedRest();
-
         // Test unread messages intial
         List<GPMessage> unreadMessages = gpWSClient.getUnreadMessagesByRecipient(firstRecipientID).getMessages();
         assertNotNull(unreadMessages);
         assertEquals(2, unreadMessages.size());
-
         // Test mark messages as read
         Date toDate = new GregorianCalendar(2012, Calendar.JANUARY, 12 - 1).getTime();
         Boolean result = gpWSClient.markMessagesAsReadByDate(new MarkMessageReadByDateRequest(firstRecipientID, toDate));
         assertTrue(result);
-
         // Test unread messages final
         unreadMessages = gpWSClient.getUnreadMessagesByRecipient(firstRecipientID).getMessages();
         assertNotNull(unreadMessages);
@@ -252,23 +228,19 @@ public class RSMessageTest extends BasicRestServiceTest {
      */
     private void insertMessagesSortedRest() throws Exception {
         // Insert message 1
-        message.setCreationDate(
-                new GregorianCalendar(2012, Calendar.JANUARY, 1).getTime());
+        message.setCreationDate(new GregorianCalendar(2012, Calendar.JANUARY, 1).getTime());
         Long messageID = gpWSClient.insertMessage(message);
         assertNotNull(messageID);
         // Insert message 2
-        message.setCreationDate(
-                new GregorianCalendar(2012, Calendar.JANUARY, 12).getTime());
+        message.setCreationDate(new GregorianCalendar(2012, Calendar.JANUARY, 12).getTime());
         message.setText("Another message to read.");
         messageID = gpWSClient.insertMessage(message);
         assertNotNull(messageID);
         // Insert message 3
-        message.setCreationDate(
-                new GregorianCalendar(2012, Calendar.JANUARY, 23).getTime());
+        message.setCreationDate(new GregorianCalendar(2012, Calendar.JANUARY, 23).getTime());
         message.setText("Message read.");
         message.setRead(true);
         messageID = gpWSClient.insertMessage(message);
         assertNotNull(messageID);
     }
-
 }

@@ -44,12 +44,13 @@ import org.geosdi.geoplatform.connectors.ws.csw.GPCSWClientTestConnector;
 import org.geosdi.geoplatform.cxf.bus.GPSpringBusConfigurator;
 import org.geosdi.geoplatform.services.GeoPlatformCSWService;
 import org.geosdi.geoplatform.services.GeoPlatformService;
-import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.TestContext;
 import org.springframework.test.context.TestExecutionListener;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  *
@@ -71,51 +72,33 @@ public class CSWListenerServices implements TestExecutionListener {
     @Override
     public void beforeTestClass(TestContext testContext) throws Exception {
         logger.info("\n\t@@@ CSWListenerServices.beforeTestClass @@@");
-
         ApplicationContext appContext = testContext.getApplicationContext();
-
-        GPCSWClientTestConnector cswClientConnector = (GPCSWClientTestConnector) appContext.getBean(
-                "cswClient");
-        Assert.assertNotNull("cswClient is NULL", cswClientConnector);
+        GPCSWClientTestConnector cswClientConnector = (GPCSWClientTestConnector) appContext.getBean("cswClient");
+        assertNotNull("cswClient is NULL", cswClientConnector);
         cswService = cswClientConnector.getEndpointService();
-
-        GPBasicWSClientTestConnector wsClientConnector = (GPBasicWSClientTestConnector) appContext.getBean(
-                "gpWSClient");
-        Assert.assertNotNull("geoPlatformWSClient is NULL", wsClientConnector);
+        GPBasicWSClientTestConnector wsClientConnector = (GPBasicWSClientTestConnector) appContext.getBean("gpWSClient");
+        assertNotNull("geoPlatformWSClient is NULL", wsClientConnector);
         gpWSClient = wsClientConnector.getEndpointService();
-
-        GeoPlatformCSWService geoPlatformCSWService = (GeoPlatformCSWService) appContext.getBean(
-                "cswService");
-        Assert.assertNotNull("cswService is NULL", geoPlatformCSWService);
-
-        GeoPlatformService geoPlatformService = (GeoPlatformService) appContext.getBean(
-                "geoPlatformService");
-        Assert.assertNotNull("geoPlatformService is NULL", geoPlatformService);
-
+        GeoPlatformCSWService geoPlatformCSWService = (GeoPlatformCSWService) appContext.getBean("cswService");
+        assertNotNull("cswService is NULL", geoPlatformCSWService);
+        GeoPlatformService geoPlatformService = (GeoPlatformService) appContext.getBean("geoPlatformService");
+        assertNotNull("geoPlatformService is NULL", geoPlatformService);
         appContext.getBean(GPSpringBusConfigurator.class).createBus();
-
         String cswServerAddress = cswClientConnector.getAddress();
         this.cswServiceImpl = (EndpointImpl) Endpoint.publish(cswServerAddress, geoPlatformCSWService);
-
         String wsServerAddress = wsClientConnector.getAddress();
         this.gpWSClientImpl = (EndpointImpl) Endpoint.publish(wsServerAddress, geoPlatformService);
-
         logger.info("\n\t@@@ Server ready... @@@");
     }
 
     @Override
     public void prepareTestInstance(TestContext testContext) throws Exception {
         logger.info("\n\t@@@ CSWListenerServices.prepareTestInstance @@@");
-
         CSWCatalogTest testInstance = (CSWCatalogTest) testContext.getTestInstance();
         testInstance.setCSWService(cswService);
         testInstance.setGeoplatformService(gpWSClient);
-
         ApplicationContext appContext = testContext.getApplicationContext();
-        testInstance.setSnipcProvider(appContext.getBean(
-                SnipcCatalogBeanProvider.class));
-        testInstance.setGeosdiProvider(appContext.getBean(
-                GeosdiCatalogBeanProvider.class));
+        testInstance.setSnipcProvider(appContext.getBean(SnipcCatalogBeanProvider.class));testInstance.setGeosdiProvider(appContext.getBean(GeosdiCatalogBeanProvider.class));
     }
 
     @Override
@@ -132,5 +115,4 @@ public class CSWListenerServices implements TestExecutionListener {
         this.gpWSClientImpl.stop();
         this.cswServiceImpl.stop();
     }
-
 }

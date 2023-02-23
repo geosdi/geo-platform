@@ -51,14 +51,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
-    "classpath*:applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext-Test.xml", "classpath*:applicationContext.xml"})
 @ActiveProfiles(profiles = {"dev", "jpa"})
 public class GPCatalogWSTest {
 
@@ -86,14 +87,11 @@ public class GPCatalogWSTest {
     @Ignore(value = "Timeout Error")
     public void searchMetadata() {
         try {
-            List<GPCatalogMetadataDTO> metadataList = this.catalogClient.searchPublicMetadata(
-                    "strade");
-            Assert.assertFalse("Items not found", metadataList.isEmpty());
-
-
+            List<GPCatalogMetadataDTO> metadataList = this.catalogClient.searchPublicMetadata("strade");
+            assertFalse("Items not found", metadataList.isEmpty());
             logger.info("FOUND {} ELEMENTS @@@@@@@@@@@@", metadataList.size());
         } catch (GPCatalogException ex) {
-            Assert.fail(ex.getMessage());
+            fail(ex.getMessage());
         }
     }
 }

@@ -63,10 +63,7 @@ import static org.geosdi.geoplatform.request.LikePatternType.CONTENT_EQUALS;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class RSAccountTest extends BasicRestServiceTest {
@@ -95,13 +92,10 @@ public class RSAccountTest extends BasicRestServiceTest {
         for (ShortAccountDTO account : accountList) {
             assertEquals(organizationNameRSTest, account.getOrganization());
         }
-
         // Insert User of the organization for test
         this.createAndInsertUser("to_search", organizationTest, USER);
-
         // Insert the other Organization and a User for it
-        GPOrganization otherOrganization = new GPOrganization("other_organization_ws_test");Long otherOrganizationID = gpWSClient.insertOrganization(
-                otherOrganization);
+        GPOrganization otherOrganization = new GPOrganization("other_organization_ws_test");Long otherOrganizationID = gpWSClient.insertOrganization(otherOrganization);
         this.createAndInsertUser("none_search", otherOrganization, USER);
         // Final test
         accountList = gpWSClient.getAccounts(organizationNameRSTest).getAccounts();
@@ -110,7 +104,6 @@ public class RSAccountTest extends BasicRestServiceTest {
         for (ShortAccountDTO account : accountList) {
             assertEquals(organizationNameRSTest, account.getOrganization());
         }
-
         // Delete the other Organization
         gpWSClient.deleteOrganization(otherOrganizationID);
     }
@@ -126,7 +119,6 @@ public class RSAccountTest extends BasicRestServiceTest {
         // Number of Account Like
         long numAccountsLike = gpWSClient.getAccountsCount(new SearchRequest(usernameTest, CONTENT_EQUALS));
         assertEquals("Number of Account Like", 1L, numAccountsLike);
-
         // Get User from Id
         // Get UserDTO from Id
         UserDTOResponse userDTOResponse = gpWSClient.getShortUser(idUserTest);
@@ -137,7 +129,6 @@ public class RSAccountTest extends BasicRestServiceTest {
         GPUser userFromWS = gpWSClient.getUserDetail(idUserTest);
         assertNotNull(userFromWS);
         assertEquals("Error found GPUser from Id", idUserTest, userFromWS.getId().longValue());
-
         // Get User from Username
         // Get UserDTO from Username
         userDTOFromWS = gpWSClient.getShortUserByUsername(new SearchRequest(usernameTest, CONTENT_EQUALS)).getUserDTO();
@@ -159,7 +150,6 @@ public class RSAccountTest extends BasicRestServiceTest {
         List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(usernameTest).getAuthorities();
         assertNotNull("Authorities null", authorities);
         assertEquals("Number of Authorities of " + usernameTest, 1, authorities.size());
-
         GPAuthority authority = authorities.get(0);
         assertNotNull(authority);
         assertEquals("Authority string", USER.getRole(), authority.getAuthority());
@@ -171,7 +161,6 @@ public class RSAccountTest extends BasicRestServiceTest {
     public void testInsertUserWithMultiRoleRest() throws IllegalParameterFault, ResourceNotFoundFault {
         String usernameMultiRole = "user-multi-role-rs";
         Long idUser = super.createAndInsertUser(usernameMultiRole, organizationTest, ADMIN, VIEWER);
-
         try {
             List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(usernameMultiRole).getAuthorities();
             assertNotNull(authorities);
@@ -189,7 +178,6 @@ public class RSAccountTest extends BasicRestServiceTest {
             }
             assertTrue("Authority ADMIN string", isAdmin);
             assertTrue("Authority VIEWER string", isViewer);
-
         } finally {
             boolean check = gpWSClient.deleteAccount(idUser);
             assertTrue(check);
@@ -205,7 +193,6 @@ public class RSAccountTest extends BasicRestServiceTest {
         } catch (ClientErrorException ex) {
             GPRestExceptionMessage exMess = ex.getResponse().readEntity(GPRestExceptionMessage.class);
             logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@{}\n", exMess);
-
             if (!exMess.getMessage().toLowerCase().contains("username")) { // Must be fail for other reasons
                 fail("Not fail for User already exist wrt username, but for: " + ex.getMessage());
             }
@@ -222,7 +209,6 @@ public class RSAccountTest extends BasicRestServiceTest {
         } catch (ClientErrorException ex) {
             GPRestExceptionMessage exMess = ex.getResponse().readEntity(GPRestExceptionMessage.class);
             logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@{}\n", exMess);
-
             if (!exMess.getMessage().toLowerCase().contains("email")) { // Must be fail for other reasons
                 fail("Not fail for User already exist wrt email, but for: " + ex.getMessage());
             }
@@ -232,14 +218,12 @@ public class RSAccountTest extends BasicRestServiceTest {
     @Test
     public void testInsertIncorrectUserWRTUOrganizationRest() throws Exception {
         GPUser user = super.createUser("no-organization-rs", new GPOrganization("organization-inexistent-rs"), USER);
-
         try {
             gpWSClient.insertAccount(new InsertAccountRequest(user, FALSE));
             fail("User incorrect wrt organization");
         } catch (ClientErrorException ex) {
             GPRestExceptionMessage exMess = ex.getResponse().readEntity(GPRestExceptionMessage.class);
             logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@{}\n", exMess);
-
             if (!exMess.getMessage().toLowerCase().contains("organization")) { // Must be fail for other reasons
                 fail(
                         "Not fail for User incorrect wrt organization, but for: " + ex.getMessage());
@@ -284,7 +268,6 @@ public class RSAccountTest extends BasicRestServiceTest {
         // Set disabled user
         userTest.setEnabled(false);
         gpWSClient.updateUser(userTest);
-
         // Must be throws AccountLoginFault because the user is disabled
         gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, passwordTest);
     }
@@ -292,16 +275,12 @@ public class RSAccountTest extends BasicRestServiceTest {
     @Test
     public void updateUserRestTest() throws Exception {
         Long idUser = super.createAndInsertUser("userToUpdate-SOAP", organizationTest, ADMIN);
-
         GPUser user = gpWSClient.getUserDetail(idUser);
         logger.info("##################USER : {}\n", user);
-
         user.setName("UserToUpdate");
         gpWSClient.updateUser(user);
-
         user = gpWSClient.getUserDetail(idUser);
         logger.info("#################USER_UPDATED : {}\n", user);
-
         gpWSClient.deleteAccount(idUser);
     }
 
@@ -309,7 +288,6 @@ public class RSAccountTest extends BasicRestServiceTest {
     public void searchUsersTestRest() throws Exception {
         String usernameMultiRole = "user-test1-rs";
         Long idUser = super.createAndInsertUser(usernameMultiRole, organizationTest, ADMIN, VIEWER);
-
         try {
             insertMassiveUsers("-rs");
             List<UserDTO> users = gpWSClient.searchUsers(idUser, new PaginatedSearchRequest(25, 0)).getSearchUsers();

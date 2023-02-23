@@ -38,78 +38,66 @@ package org.geosdi.geoplatform.ws.wfs;
 import org.apache.cxf.binding.soap.SoapFault;
 import org.geosdi.geoplatform.connector.wfs.response.AttributeDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
-import org.junit.Assert;
 import org.junit.Test;
 
 import javax.xml.namespace.QName;
 import java.util.List;
 
 import static java.util.Collections.EMPTY_MAP;
+import static org.junit.Assert.*;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class WFSDescribeFeatureTypeWSTest extends WFSAbstractTest {
 
-    private final static QName TOPP_STATES = new QName(
-            "http://www.openplans.org/topp", "topp:states");
-    private final static QName SF_COMUNI = new QName(
-            "http://www.openplans.org/spearfish", "sf:comuni2001");
+    private final static QName TOPP_STATES = new QName("http://www.openplans.org/topp", "topp:states");
+    private final static QName SF_COMUNI = new QName("http://www.openplans.org/spearfish", "sf:comuni2001");
 
     @Test
     public void statesFeatureV110() throws Exception {
-        LayerSchemaDTO layerSchema = wfsService.describeFeatureType(addressDatastore,
-                TOPP_STATES.getLocalPart(), EMPTY_MAP);
-        logger.info("\n\n\n@@@ {}", layerSchema);
-
-        Assert.assertNotNull(layerSchema);
-        Assert.assertEquals(TOPP_STATES.getLocalPart(),
-                layerSchema.getTypeName());
-        Assert.assertEquals(TOPP_STATES.getNamespaceURI(),
-                layerSchema.getTargetNamespace());
-        Assert.assertEquals(addressDatastore, layerSchema.getScope());
-
+        LayerSchemaDTO layerSchema = wfsService.describeFeatureType(addressDatastore, TOPP_STATES.getLocalPart(), EMPTY_MAP);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@ {}", layerSchema);
+        assertNotNull(layerSchema);
+        assertEquals(TOPP_STATES.getLocalPart(), layerSchema.getTypeName());
+        assertEquals(TOPP_STATES.getNamespaceURI(), layerSchema.getTargetNamespace());
+        assertEquals(addressDatastore, layerSchema.getScope());
         AttributeDTO geometry = layerSchema.getGeometry();
-        Assert.assertNotNull(geometry);
-        Assert.assertEquals("the_geom", geometry.getName());
-        Assert.assertEquals("MultiPolygon", geometry.getType());
-
+        assertNotNull(geometry);
+        assertEquals("the_geom", geometry.getName());
+        assertEquals("MultiPolygon", geometry.getType());
         List<AttributeDTO> attributes = layerSchema.getAttributes();
-        Assert.assertNotNull(attributes);
-        Assert.assertEquals(22, attributes.size());
+        assertNotNull(attributes);
+        assertEquals(22, attributes.size());
         for (AttributeDTO attribute : attributes) {
-            Assert.assertNotNull(attribute);
-            Assert.assertNotNull(attribute.getName());
-            Assert.assertNotNull(attribute.getType());
-            Assert.assertTrue(attribute.isNillable());
-            Assert.assertEquals(0, attribute.getMinOccurs());
-            Assert.assertEquals(1, attribute.getMaxOccurs());
+            assertNotNull(attribute);
+            assertNotNull(attribute.getName());
+            assertNotNull(attribute.getType());
+            assertTrue(attribute.isNillable());
+            assertEquals(0, attribute.getMinOccurs());
+            assertEquals(1, attribute.getMaxOccurs());
         }
     }
 
     @Test(expected = SoapFault.class)
     public void comuniFeatureV110() throws Exception {
         LayerSchemaDTO layerSchema = wfsService.describeFeatureType(addressDatastore, SF_COMUNI.getLocalPart(), EMPTY_MAP);
-        logger.info("\n\n\n@@@ {}", layerSchema);
-
-        Assert.assertNotNull(layerSchema);
-        Assert.assertEquals(SF_COMUNI.getLocalPart(), layerSchema.getTypeName());
-        Assert.assertEquals(SF_COMUNI.getNamespaceURI(),
-                layerSchema.getTargetNamespace());
-        Assert.assertEquals(addressDatastore, layerSchema.getScope());
-
+        logger.info("@@@@@@@@@@@@@@@@@@ {}", layerSchema);
+        assertNotNull(layerSchema);
+        assertEquals(SF_COMUNI.getLocalPart(), layerSchema.getTypeName());
+        assertEquals(SF_COMUNI.getNamespaceURI(), layerSchema.getTargetNamespace());
+        assertEquals(addressDatastore, layerSchema.getScope());
         AttributeDTO geometry = layerSchema.getGeometry();
-        Assert.assertNotNull(geometry);
-        Assert.assertEquals("the_geom", geometry.getName());
-        Assert.assertEquals("MultiPolygon", geometry.getType());
-
+        assertNotNull(geometry);
+        assertEquals("the_geom", geometry.getName());
+        assertEquals("MultiPolygon", geometry.getType());
         List<AttributeDTO> attributes = layerSchema.getAttributes();
-        Assert.assertNotNull(attributes);
-        Assert.assertEquals(10, attributes.size());
+        assertNotNull(attributes);
+        assertEquals(10, attributes.size());
         for (AttributeDTO attribute : attributes) {
-            Assert.assertNotNull(attribute);
-            Assert.assertNotNull(attribute.getName());
-            Assert.assertNotNull(attribute.getType());
+            assertNotNull(attribute);
+            assertNotNull(attribute.getName());
+            assertNotNull(attribute.getType());
         }
     }
 
@@ -119,11 +107,9 @@ public class WFSDescribeFeatureTypeWSTest extends WFSAbstractTest {
         try {
             layerSchema = wfsService.describeFeatureType(addressDatastore, "sf:sfdem", EMPTY_MAP);
         } catch (Exception ex) {
-            logger.error("###############Exception ############### {}",
-                    ex.getMessage());
+            logger.error("###############Exception ############### {}", ex.getMessage());
         }
-
-        Assert.assertNull(layerSchema);
+        assertNull(layerSchema);
     }
 
     @Test
@@ -132,10 +118,9 @@ public class WFSDescribeFeatureTypeWSTest extends WFSAbstractTest {
         try {
             layerSchema = wfsService.describeFeatureType(addressDatastore, "none:foo", EMPTY_MAP);
         } catch (Exception ex) {
-            logger.error("###############Exception ############### {}",
-                    ex.getMessage());
+            logger.error("###############Exception ############### {}", ex.getMessage());
         }
-        Assert.assertNull(layerSchema);
+        assertNull(layerSchema);
     }
 
     @Test(expected = SoapFault.class)

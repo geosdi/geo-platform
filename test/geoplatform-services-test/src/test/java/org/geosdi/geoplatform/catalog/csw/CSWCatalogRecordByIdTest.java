@@ -52,7 +52,6 @@ public class CSWCatalogRecordByIdTest extends CSWCatalogTest {
         // Insert the server
         GeoPlatformServer server = this.createCSWServer("SNIPC", snipcProvider.getSnipcUrl(), organizationTest);
         Long serverID = cswService.insertServerCSW(server);
-
         String recordById = cswService.getRecordById(serverID, "{3DEE88CB-A0DB-4794-941A-FD8119621A2F}");
         logger.info("\n@@@@@@@@@@@@@@@@@@@@@@@@ METADATA\n{}", recordById);
     }

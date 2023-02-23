@@ -35,19 +35,23 @@
  */
 package org.geosdi.geoplatform.model.rest;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import org.geosdi.geoplatform.core.model.GPAccountProject;
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPViewport;
 import org.geosdi.geoplatform.request.viewport.InsertViewportRequest;
 import org.geosdi.geoplatform.request.viewport.ManageViewportRequest;
-import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.stream.IntStream;
+
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+import static java.util.stream.Collectors.toList;
+import static org.junit.Assert.*;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -58,138 +62,78 @@ public class RSViewportTest extends BasicRestServiceTest {
     @Override
     public void setUp() throws Exception {
         super.setUp();
-
         this.accountProject = gpWSClient.getAccountProject(idAccountProject);
-        Assert.assertNotNull(accountProject);
+        assertNotNull(accountProject);
     }
 
     @Test
     public void insertMassiveViewportTestRest() throws Exception {
         Collection<GPViewport> viewports = super.createMassiveViewports();
-
         gpWSClient.saveOrUpdateViewportList(new ManageViewportRequest(
                 idAccountProject, new ArrayList<>(viewports)));
-
-        Collection<GPViewport> viewportsFound = gpWSClient.getAccountProjectViewports(
-                idAccountProject).getViewports();
-
-        logger.trace("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@FOUND {} "
-                + "@@@@@@@@@@@@@@@@@@@@@@@@@\n\n", viewportsFound);
-
-        Assert.assertEquals(80, viewportsFound.size());
-
-        GPViewport defaultVieport = gpWSClient.getDefaultViewport(
-                idAccountProject);
-
-        logger.trace("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@DEFAULT_VIEWPORT "
-                + "Found : {}@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n", defaultVieport);
-
-        Assert.assertEquals("Viewport0-Rest", defaultVieport.getName());
-        Assert.assertEquals(0.0, defaultVieport.getZoomLevel(), 0.0);
+        Collection<GPViewport> viewportsFound = gpWSClient.getAccountProjectViewports(idAccountProject).getViewports();
+        logger.trace("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@FOUND {} @@@@@@@@@@@@@@@@@@@@@@@@@\n\n", viewportsFound);
+        assertEquals(80, viewportsFound.size());
+        GPViewport defaultVieport = gpWSClient.getDefaultViewport(idAccountProject);
+        logger.trace("\n\n@@@@@@@@@@@@@@@@@@DEFAULT_VIEWPORTFound : {}@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n", defaultVieport);
+        assertEquals("Viewport0-Rest", defaultVieport.getName());
+        assertEquals(0.0, defaultVieport.getZoomLevel(), 0.0);
     }
 
     @Test
     public void updateViewportTestRest() throws Exception {
-        Long idViewportDefault = gpWSClient.insertViewport(
-                new InsertViewportRequest(
-                        idAccountProject, new GPViewport("Viewport-To-Save-RS",
-                                "This is the viewport to save", 22, new GPBBox(
-                                        10, 10,
-                                        20, 20), Boolean.TRUE)));
-
-        Assert.assertNotNull(idViewportDefault);
-
-        Long idViewport = gpWSClient.insertViewport(new InsertViewportRequest(
-                idAccountProject, new GPViewport("Viewport-To-Save-New-RS",
-                        "This is the viewport to save New", 18, new GPBBox(18,
-                                20,
-                                40, 29), Boolean.FALSE)));
-
-        Assert.assertNotNull(idViewport);
-
-        Long idViewport1 = gpWSClient.insertViewport(new InsertViewportRequest(
-                idAccountProject, new GPViewport("Viewport-To-Save-New-1-RS",
-                        "This is the viewport to save New", 31, new GPBBox(21,
-                                33, 50, 79), Boolean.FALSE)));
-
-        Assert.assertNotNull(idViewport1);
-
-        Collection<GPViewport> viewports = gpWSClient.getAccountProjectViewports(
-                idAccountProject).getViewports();
-
-        Assert.assertEquals(3, viewports.size());
-
+        Long idViewportDefault = gpWSClient.insertViewport(new InsertViewportRequest(idAccountProject, new GPViewport("Viewport-To-Save-RS", "This is the viewport to save", 22, new GPBBox(10, 10, 20, 20), TRUE)));
+        assertNotNull(idViewportDefault);
+        Long idViewport = gpWSClient.insertViewport(new InsertViewportRequest(idAccountProject, new GPViewport("Viewport-To-Save-New-RS", "This is the viewport to save New", 18, new GPBBox(18, 20, 40, 29), FALSE)));
+        assertNotNull(idViewport);
+        Long idViewport1 = gpWSClient.insertViewport(new InsertViewportRequest(idAccountProject, new GPViewport("Viewport-To-Save-New-1-RS", "This is the viewport to save New", 31, new GPBBox(21, 33, 50, 79), FALSE)));
+        assertNotNull(idViewport1);
+        Collection<GPViewport> viewports = gpWSClient.getAccountProjectViewports(idAccountProject).getViewports();
+        assertEquals(3, viewports.size());
         GPViewport viewport = gpWSClient.getDefaultViewport(idAccountProject);
-        Assert.assertEquals(Boolean.TRUE, viewport.isIsDefault());
-        Assert.assertEquals("Viewport-To-Save-RS", viewport.getName());
-
+        assertEquals(TRUE, viewport.isIsDefault());
+        assertEquals("Viewport-To-Save-RS", viewport.getName());
         viewport.setName("Viewport-Updated-RS");
         viewport.setDescription("New Description");
-        viewport.setIsDefault(Boolean.FALSE);
-
+        viewport.setIsDefault(FALSE);
         gpWSClient.updateViewport(viewport);
-
         GPViewport v = gpWSClient.getViewportById(idViewport1);
-        v.setIsDefault(Boolean.TRUE);
+        v.setIsDefault(TRUE);
         gpWSClient.updateViewport(v);
-
         GPViewport df = gpWSClient.getDefaultViewport(idAccountProject);
-        Assert.assertEquals(idViewport1, df.getId());
+        assertEquals(idViewport1, df.getId());
     }
 
     @Test
     public void deleteViewportTestRest() throws Exception {
-        Long idViewport = gpWSClient.insertViewport(
-                new InsertViewportRequest(
-                        idAccountProject,
-                        new GPViewport("Viewport-To-Delete-RS",
-                                "This is the viewport to Delete", 26,
-                                new GPBBox(
-                                        15, 15, 22, 30), Boolean.TRUE)));
-
-        Assert.assertNotNull(idViewport);
-
+        Long idViewport = gpWSClient.insertViewport(new InsertViewportRequest(idAccountProject, new GPViewport("Viewport-To-Delete-RS", "This is the viewport to Delete", 26, new GPBBox(15, 15, 22, 30), TRUE)));
+        assertNotNull(idViewport);
         GPViewport viewport = gpWSClient.getViewportById(idViewport);
-        Assert.assertNotNull(viewport);
-
-        logger.trace("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@VIEWPORT_FOUND :"
-                + " {}\n\n", viewport);
-
-        Assert.assertTrue(gpWSClient.deleteViewport(idViewport));
+        assertNotNull(viewport);
+        logger.trace("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@VIEWPORT_FOUND : {}\n\n", viewport);
+        assertTrue(gpWSClient.deleteViewport(idViewport));
     }
 
     @Test
     public void replaceViewportListTestRest() throws Exception {
         Collection<GPViewport> viewports = super.createMassiveViewports();
-
-        gpWSClient.saveOrUpdateViewportList(new ManageViewportRequest(
-                idAccountProject, new ArrayList<>(viewports)));
-
-        Assert.assertEquals(80, gpWSClient.getAccountProjectViewports(
-                idAccountProject).getViewports().size());
-
-        gpWSClient.replaceViewportList(new ManageViewportRequest(
-                idAccountProject, new ArrayList<>(
-                        createViewportListToReplace())));
-
-        Collection<GPViewport> viewportsReplacedFound = gpWSClient.getAccountProjectViewports(
-                idAccountProject).getViewports();
-
-        Assert.assertEquals(20, viewportsReplacedFound.size());
-
-        logger.trace("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ COLLECTION_"
-                + "VIEWPORT_REPLACED : {}", viewportsReplacedFound);
+        gpWSClient.saveOrUpdateViewportList(new ManageViewportRequest(idAccountProject, new ArrayList<>(viewports)));
+        assertEquals(80, gpWSClient.getAccountProjectViewports(idAccountProject).getViewports().size());
+        gpWSClient.replaceViewportList(new ManageViewportRequest(idAccountProject, new ArrayList<>(createViewportListToReplace())));Collection<GPViewport> viewportsReplacedFound = gpWSClient.getAccountProjectViewports(idAccountProject).getViewports();
+        assertEquals(20, viewportsReplacedFound.size());
+        logger.trace("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ COLLECTION_VIEWPORT_REPLACED : {}", viewportsReplacedFound);
     }
 
+    /**
+     * @return {@link Collection<GPViewport>}
+     */
     Collection<GPViewport> createViewportListToReplace() {
-        List<GPViewport> viewports = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            viewports.add(new GPViewport("Viewport_To_Replace" + i + "-Rest",
-                    "This is a Generic Viewport to Replace", i,
-                    new GPBBox(i, i, i, i),
-                    (i == 0) ? Boolean.TRUE : Boolean.FALSE));
-        }
-        return viewports;
+        return IntStream.iterate(0, n -> n + 1)
+                .limit(20)
+                .boxed()
+                .map(i -> new GPViewport("Viewport_To_Replace" + i + "-Rest",
+                        "This is a Generic Viewport to Replace", i, new GPBBox(i, i, i, i),
+                        (i == 0) ? TRUE : FALSE))
+                .collect(toList());
     }
-
 }

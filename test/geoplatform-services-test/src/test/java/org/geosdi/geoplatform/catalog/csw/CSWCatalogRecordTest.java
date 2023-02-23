@@ -241,25 +241,23 @@ public class CSWCatalogRecordTest extends CSWCatalogTest {
     @Test
     public void testSecureGetRecordsSNIPC() throws Exception {
         // Insert the server
-        GeoPlatformServer server = this.createCSWServer("SNIPC", snipcProvider.
-                getSnipcUrl(), organizationTest);
+        GeoPlatformServer server = this.createCSWServer("SNIPC", snipcProvider.getSnipcUrl(), organizationTest);
         Long serverID = cswService.insertServerCSW(server);
-
         // Set catalog finder
         catalogFinder.setServerID(serverID);
-
         int count = cswService.getRecordsCount(catalogFinder);
         assertTrue(count > 0);
-
         // Delete the server
         boolean deleted = cswService.deleteServerCSW(serverID);
         assertTrue(deleted);
     }
 
+    /**
+     * @param collection
+     */
     private void traceCollection(Collection collection) {
         for (Object object : collection) {
-            logger.trace("\n*****************TRACE_COLLECTION_OBJECT " + object);
+            logger.trace("@@@@@@@@@@@@@@@@@@@@@TRACE_COLLECTION_OBJECT {}", object);
         }
     }
-
 }

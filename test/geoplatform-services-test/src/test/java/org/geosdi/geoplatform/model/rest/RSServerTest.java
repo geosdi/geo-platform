@@ -35,18 +35,19 @@
  */
 package org.geosdi.geoplatform.model.rest;
 
-import java.util.Collection;
-import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.server.WSSaveServerRequest;
 import org.geosdi.geoplatform.response.ServerDTO;
-import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Collection;
+
+import static org.geosdi.geoplatform.core.model.GPCapabilityType.WMS;
+import static org.junit.Assert.*;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -56,17 +57,13 @@ public class RSServerTest extends BasicRestServiceTest {
     public void setUp() throws Exception {
         // Insert Organization
         super.setUpOrganization();
-
         // Insert Servers
-        idServerTest = this.createAndInsertServer(serverUrlTest,
-                GPCapabilityType.WMS, organizationTest);
-        idServerGeoSDI = this.createAndInsertServer(serverUrlGeoSDI,
-                GPCapabilityType.WMS, organizationTest);
+        idServerTest = this.createAndInsertServer(serverUrlTest, WMS, organizationTest);
+        idServerGeoSDI = this.createAndInsertServer(serverUrlGeoSDI, WMS, organizationTest);
     }
 
     @Test
-    public void testUpdateServerRest()
-            throws IllegalParameterFault, ResourceNotFoundFault {
+    public void testUpdateServerRest() throws IllegalParameterFault, ResourceNotFoundFault {
         final String serverUrlUpdated = serverUrlTest.replaceAll("org", "com");
         // Retrieve Server
         GeoPlatformServer serverTest = gpWSClient.getServerDetail(idServerTest);
@@ -74,15 +71,12 @@ public class RSServerTest extends BasicRestServiceTest {
         // Update Server
         serverTest.setServerUrl(serverUrlUpdated);
         gpWSClient.updateServer(serverTest);
-
         // Retrieve Server modified
-        GeoPlatformServer serverModified = gpWSClient.getServerDetail(
-                idServerTest);
+        GeoPlatformServer serverModified = gpWSClient.getServerDetail(idServerTest);
         logger.debug("\n*** serverModified:\n{}\n***", serverModified);
         // Assert on Server modified
-        Assert.assertNotNull(serverModified);
-        Assert.assertEquals(serverTest.getServerUrl(),
-                serverModified.getServerUrl());
+        assertNotNull(serverModified);
+        assertEquals(serverTest.getServerUrl(), serverModified.getServerUrl());
     }
 
     @Test
@@ -90,82 +84,53 @@ public class RSServerTest extends BasicRestServiceTest {
         // Get Server from Id
         GeoPlatformServer gpServer = gpWSClient.getServerDetail(idServerTest);
         logger.debug("\n*** gpServer:\n{}\n***", gpServer);
-        Assert.assertNotNull(gpServer);
-        Assert.assertEquals("Id Server NOT match", idServerTest,
-                gpServer.getId().longValue());
-        Assert.assertEquals("URL Server NOT match", serverUrlTest,
-                gpServer.getServerUrl());
-
+        assertNotNull(gpServer);
+        assertEquals("Id Server NOT match", idServerTest, gpServer.getId().longValue());
+        assertEquals("URL Server NOT match", serverUrlTest, gpServer.getServerUrl());
         // Get Server from serverUrl
         ServerDTO serverDTO = gpWSClient.getShortServer(serverUrlTest);
         logger.debug("\n*** serverDTO:\n{}\n***", serverDTO);
-        Assert.assertNotNull(serverDTO);
-        Assert.assertEquals("Id Server NOT match", idServerTest,
-                serverDTO.getId().longValue());
-        Assert.assertEquals("URL Server NOT match", serverUrlTest,
-                serverDTO.getServerUrl());
+        assertNotNull(serverDTO);
+        assertEquals("Id Server NOT match", idServerTest, serverDTO.getId().longValue());
+        assertEquals("URL Server NOT match", serverUrlTest, serverDTO.getServerUrl());
     }
 
     @Test
     public void testGetAllServerRest() throws ResourceNotFoundFault {
         // Number of Servers
-        Collection<ServerDTO> servers = gpWSClient.getAllServers(
-                organizationNameRSTest).getServers();
-        Assert.assertNotNull(servers);
+        Collection<ServerDTO> servers = gpWSClient.getAllServers(organizationNameRSTest).getServers();
+        assertNotNull(servers);
         int totalServers = servers.size();
-        Assert.assertTrue("Number of Servers stored into database",
-                totalServers >= 1); // SetUp() added 1 server
-
+        assertTrue("Number of Servers stored into database", totalServers >= 1); // SetUp() added 1 server
         // Insert new Server
-        long idNewServer = this.createAndInsertServer(
-                "map_rest.testGetAllServer.com",
-                GPCapabilityType.WMS, organizationTest);
-
+        long idNewServer = this.createAndInsertServer("map_rest.testGetAllServer.com", WMS, organizationTest);
         // Assert of number of Servers
-        Assert.assertEquals(
-                "Total numebr of Servers is wrong after inserted new Server",
-                gpWSClient.getAllServers(organizationNameRSTest).getServers().size(),
-                totalServers + 1);
-
+        assertEquals("Total numebr of Servers is wrong after inserted new Server", gpWSClient.getAllServers(organizationNameRSTest).getServers().size(), totalServers + 1);
         // Delete new Server
         this.deleteServer(idNewServer);
-
         // Assert of number of Servers
-        Assert.assertEquals(
-                "Total numebr of Servers is wrong after deleted new Server",
-                gpWSClient.getAllServers(organizationNameRSTest).getServers().size(),
-                totalServers);
+        assertEquals("Total numebr of Servers is wrong after deleted new Server", gpWSClient.getAllServers(organizationNameRSTest).getServers().size(), totalServers);
     }
 
     @Test
-    public void testSaveServerRest() throws ResourceNotFoundFault,
-            IllegalParameterFault {
+    public void testSaveServerRest() throws ResourceNotFoundFault, IllegalParameterFault {
         logger.trace("\n@@@ testSaveServer @@@");
         // Server is into DB
         ServerDTO serverGeoSDI = gpWSClient.getShortServer(serverUrlGeoSDI);
-        Assert.assertNotNull(serverGeoSDI);
-        ServerDTO serverDTO = gpWSClient.saveServer(new WSSaveServerRequest(
-                serverGeoSDI.getId(), "geoSDI", serverUrlGeoSDI,
-                organizationTest.getName()));
-        Assert.assertNotNull("ServerDTO geoSDI is NULL", serverDTO);
-        Assert.assertEquals("ServerDTO geoSDI alias is wrong", "geoSDI",
-                serverDTO.getAlias());
-
+        assertNotNull(serverGeoSDI);
+        ServerDTO serverDTO = gpWSClient.saveServer(new WSSaveServerRequest(serverGeoSDI.getId(), "geoSDI", serverUrlGeoSDI, organizationTest.getName()));
+        assertNotNull("ServerDTO geoSDI is NULL", serverDTO);
+        assertEquals("ServerDTO geoSDI alias is wrong", "geoSDI", serverDTO.getAlias());
         // Server is NOT into DB
         String serverUrlEx = "http://iws.erdas.com/ecwp/ecw_wms.dll?request=GetCapabilities";
-        serverDTO = gpWSClient.saveServer(new WSSaveServerRequest(null, "Erdas",
-                serverUrlEx, organizationTest.getName()));
-        Assert.assertNotNull("ServerDTO EX is NULL", serverDTO);
-
+        serverDTO = gpWSClient.saveServer(new WSSaveServerRequest(null, "Erdas", serverUrlEx, organizationTest.getName()));
+        assertNotNull("ServerDTO EX is NULL", serverDTO);
         // Check if the server was insert
         GeoPlatformServer serverEx = gpWSClient.getServerDetailByUrl(serverUrlEx);
-        Assert.assertNotNull("Server Ex is NULL for URL", serverEx);
-        Assert.assertEquals("Server Ex URL is NOT correct", serverUrlEx,
-                serverEx.getServerUrl());
-        Assert.assertEquals("Server Ex ID is NOT correct", serverDTO.getId(),
-                serverEx.getId());
+        assertNotNull("Server Ex is NULL for URL", serverEx);
+        assertEquals("Server Ex URL is NOT correct", serverUrlEx, serverEx.getServerUrl());
+        assertEquals("Server Ex ID is NOT correct", serverDTO.getId(), serverEx.getId());
         // Delete server
         gpWSClient.deleteServer(serverEx.getId());
     }
-
 }

@@ -58,7 +58,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -82,7 +81,7 @@ public abstract class PublisherSoapTest extends PublisherBaseTest {
             PublisherSoapServerUtils.server = GPPublisherSoapServerConfig.gpPublisherSoapServer(publisherService, basicSoapAddress,
                     serverLogInInterceptor, serverLogOutInterceptor);
             PublisherSoapServerUtils.server.start();
-            logger.debug("\n\n\t@@@@@@@@@@@@@@@@@@@@@ Start GP_PUBLISHER_SOAP Server @@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n");
+            logger.debug("@@@@@@@@@@@@@@@@@@@@@ Start GP_PUBLISHER_SOAP Server @@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n");
         }
     }
 

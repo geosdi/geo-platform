@@ -39,7 +39,6 @@ import org.apache.cxf.endpoint.Server;
 import org.geosdi.geoplatform.services.GPPublisherService;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -47,5 +46,4 @@ class PublisherRSServerUtils {
 
     static Server server;
     static GPPublisherService gpPublisherClient;
-
 }

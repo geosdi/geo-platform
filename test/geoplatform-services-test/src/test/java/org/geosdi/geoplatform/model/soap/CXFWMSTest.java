@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.model.soap;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.RequestByID;
 import org.geosdi.geoplatform.response.ServerDTO;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ActiveProfiles;
@@ -48,9 +47,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.text.ParseException;
 
+import static org.junit.Assert.assertNotNull;
+
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
- *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext-Test.xml",
@@ -65,14 +65,14 @@ public class CXFWMSTest extends ServiceWMSTest {
 
     @Test
     public void testFixture() {
-        Assert.assertNotNull(gpWMSClient);
+        assertNotNull(gpWMSClient);
     }
 
     @Test(expected = ResourceNotFoundFault.class)
     public void testGetCapabilities() throws ParseException, ResourceNotFoundFault {
         ServerDTO serverDTO = gpWMSClient.getShortServer(serverUrlGeoSDI);
         logger.info("^^^^^^^^^^^^^^^^^^^^^^^^^ SERVER___DTO ^^^^^^^^^^^^^^^^^^\n{}", serverDTO);
-        Assert.assertNotNull(serverDTO);
+        assertNotNull(serverDTO);
 
         serverDTO = gpWMSClient.getCapabilities(serverDTO.getServerUrl(),
                 new RequestByID(serverDTO.getId()), null, null);

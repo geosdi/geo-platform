@@ -41,13 +41,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @Configuration
 @Develop
 class CSWCatalogTestBeans {
 
+    /**
+     * @return {@link GPCSWClientTestConnector}
+     */
     @Bean
     public GPCSWClientTestConnector cswClient() {
         return new GPCSWClientTestConnector();

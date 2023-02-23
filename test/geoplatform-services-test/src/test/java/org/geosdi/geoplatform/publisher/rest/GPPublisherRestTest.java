@@ -53,7 +53,6 @@ import static org.geosdi.geoplatform.publisher.rest.PublisherRSServerUtils.gpPub
 import static org.junit.Assert.*;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

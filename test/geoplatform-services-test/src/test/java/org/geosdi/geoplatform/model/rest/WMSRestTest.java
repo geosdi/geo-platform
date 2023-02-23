@@ -44,7 +44,6 @@ import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoElement;
 import org.geosdi.geoplatform.services.request.GPWMSGetFeatureInfoRequest;
 import org.geosdi.geoplatform.services.request.WMSGetFeatureInfoBoundingBox;
 import org.geosdi.geoplatform.services.request.WMSGetFeatureInfoPoint;
-import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -61,6 +60,7 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.services.request.WMSGetFeatureInfoResponseFormat.FEATURE_STORE;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -84,17 +84,14 @@ public class WMSRestTest extends ServiceWMSTest {
         ServerDTO serverDTO = gpWMSClient.getShortServer(serverUrlGeoSDI);
         assertNotNull(serverDTO);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@ SERVER_DTO @@@@@@@@@@@@@@@@@@\n{}", serverDTO);
-        serverDTO = gpWMSClient.getCapabilities(serverDTO.getServerUrl(),
-                new RequestByID(serverDTO.getId()), null, null);
+        serverDTO = gpWMSClient.getCapabilities(serverDTO.getServerUrl(), new RequestByID(serverDTO.getId()), null, null);
         logger.debug("\n*** NUMBER OF LAYERS FOR geoSDI Server {} ***", serverDTO.getLayerList().size());
     }
 
     @Ignore(value = "Server is DOWN.")
     @Test
     public void b_testRestExternalGetCapabilities() throws Exception {
-        ServerDTO serverDTO = gpWMSClient.getCapabilities("http://sgi1.isprambiente.it/arcgis/services/servizi/" +
-                        "geologia500k/MapServer/WMSServer?request=GetCapabilities&service=WMS", new RequestByID(),
-                null, null);
+        ServerDTO serverDTO = gpWMSClient.getCapabilities("http://sgi1.isprambiente.it/arcgis/services/servizi/geologia500k/MapServer/WMSServer?request=GetCapabilities&service=WMS", new RequestByID(), null, null);
         logger.info("###############################FOUND : {}\n", serverDTO);
     }
 
@@ -120,6 +117,6 @@ public class WMSRestTest extends ServiceWMSTest {
         wmsGetFeatureInfoElement.setLayers(of("topp:states", "topp:states").collect(toList()));
         wmsGetFeatureInfoRequest.setWmsFeatureInfoElements(Arrays.asList(wmsGetFeatureInfoElement));
         Response response = gpWMSClient.wmsGetFeatureInfo(wmsGetFeatureInfoRequest);
-        Assert.assertTrue(response.getStatus() == 200);
+        assertTrue(response.getStatus() == 200);
     }
 }

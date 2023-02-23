@@ -43,7 +43,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -51,11 +50,17 @@ import org.springframework.context.annotation.Configuration;
 @Develop
 class GPCatalogWSConfiguration {
 
+    /**
+     * @return {@link GPGeonetworkClientTestConnector}
+     */
     @Bean
     public GPGeonetworkClientTestConnector gpCatalogWSClient() {
         return new GPGeonetworkClientTestConnector();
     }
 
+    /**
+     * @return {@link GPCatalogFinderService}
+     */
     @Bean
     public GPCatalogFinderService gpCatalogFinderService() {
         return new GPCatalogFinderServiceImpl();

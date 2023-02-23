@@ -62,32 +62,24 @@ public class WFSListenerServices implements TestExecutionListener {
     @Override
     public void beforeTestClass(TestContext testContext) throws Exception {
         logger.info("\n\t@@@ WFSListenerServices.beforeTestClass @@@");
-
         ApplicationContext appContext = testContext.getApplicationContext();
-
         GPWFSClientTestConnector wfsClientConnector = appContext.getBean("wfsClient", GPWFSClientTestConnector.class);
         assertNotNull("wfsClient is NULL", wfsClientConnector);
         wfsService = wfsClientConnector.getEndpointService();
         assertNotNull("wfsService is NULL", wfsService);
-
         addressDatastore = appContext.getBean("addressDatastore", String.class);
         assertNotNull("addressDatastore is NULL", addressDatastore);
-
         GPWFSService geoPlatformWFSService = appContext.getBean("wfsService", GPWFSService.class);
         assertNotNull("wfsService is NULL", geoPlatformWFSService);
-
         appContext.getBean(GPSpringBusConfigurator.class).createBus();
-
         String wfsServerAddress = wfsClientConnector.getAddress();
         this.wfsServiceImpl = (EndpointImpl) Endpoint.publish(wfsServerAddress, geoPlatformWFSService);
-
         logger.info("\n\t@@@ Server ready... @@@");
     }
 
     @Override
     public void prepareTestInstance(TestContext testContext) throws Exception {
         logger.info("\n\t@@@ WFSListenerServices.prepareTestInstance @@@");
-
         WFSAbstractTest testInstance = (WFSAbstractTest) testContext.getTestInstance();
         testInstance.setWfsService(wfsService);
         testInstance.setAddressDatastore(addressDatastore);
@@ -106,5 +98,4 @@ public class WFSListenerServices implements TestExecutionListener {
         logger.info("\n\t@@@ WFSListenerServices.afterTestClass @@@");
         this.wfsServiceImpl.stop();
     }
-
 }

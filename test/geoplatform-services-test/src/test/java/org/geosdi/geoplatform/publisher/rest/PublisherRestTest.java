@@ -53,12 +53,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -67,7 +67,7 @@ import static org.mockito.Mockito.when;
 @ActiveProfiles(profiles = {"dev", "jpa"})
 public abstract class PublisherRestTest extends PublisherBaseTest {
 
-    private static final AtomicBoolean flag = new AtomicBoolean(Boolean.FALSE);
+    private static final AtomicBoolean flag = new AtomicBoolean(FALSE);
     @Value("configurator{webservice_rs_test_publisher_endpoint_address}")
     private String basicRestAddress;
     @Value("configurator{cxf_rest_provider_type}")
@@ -77,14 +77,14 @@ public abstract class PublisherRestTest extends PublisherBaseTest {
 
     @Before
     public void setUp() {
-        if (flag.compareAndSet(Boolean.FALSE, TRUE)) {
+        if (flag.compareAndSet(FALSE, TRUE)) {
             logger.debug("\n\t@@@@@@@@@@@@@@@@@@@@ SetUp {} @@@@@@@@@@@@@@@@@@@@\n", getClass().getSimpleName());
             PublisherRSServerUtils.gpPublisherClient = gpPublisherRestClient.getEndpointService();
             PublisherRSServerUtils.server = GPPublisherRestServerConfig.gpPublisherRestServer(
                     publisherService, basicRestAddress, providerType,
                     serverLogInInterceptor, serverLogOutInterceptor);
             PublisherRSServerUtils.server.start();
-            logger.debug("\n\n\t@@@@@@@@@@@@@@@@@@@@@ Start GP_PUBLISHER_REST Server @@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n");
+            logger.debug("@@@@@@@@@@@@@@@@@@@@@ Start GP_PUBLISHER_REST Server @@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n");
         }
     }
 

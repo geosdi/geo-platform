@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.support.rs.provider;
 import org.geosdi.geoplatform.response.ProjectDTO;
 import org.geosdi.geoplatform.response.ShortAccountDTOContainer;
 import org.geosdi.geoplatform.response.WSGetAccountProjectsResponse;
-import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
 import org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory;
 import org.geosdi.geoplatform.support.cxf.rs.provider.jackson.CXFJacksonProvider;
 import org.junit.BeforeClass;
@@ -46,56 +45,42 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static java.lang.Thread.currentThread;
+import static org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType.JACKSON;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPJacksonProviderTest {
 
-    static final Logger logger = LoggerFactory.getLogger(
-            GPJacksonProviderTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(GPJacksonProviderTest.class);
     //
     private static final String ACCOUNTS_DATA_JSON = "accounts-data.json";
     private static final String PROJECTS_DATA_JSON = "projects-data.json";
     private static final String GET_ALL_PROJECTS_DATA_JSON = "GetAllProject-data.json";
-
     private static CXFJacksonProvider jacksonProvider;
 
     @BeforeClass
     public static void beforeClass() {
-        jacksonProvider = (CXFJacksonProvider) GPRestProviderFactory.createProvider(
-                GPRestProviderType.JACKSON);
+        jacksonProvider = (CXFJacksonProvider) GPRestProviderFactory.createProvider(JACKSON);
     }
 
     @Test
     public void accountsDataMapperTest() throws Exception {
-        ShortAccountDTOContainer accountContainer = jacksonProvider.getConfiguredMapper().readValue(
-                Thread.currentThread().getContextClassLoader().getResourceAsStream(
-                        ACCOUNTS_DATA_JSON), ShortAccountDTOContainer.class);
-
-        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ACCOUNTS_DATA_MAPPING"
-                + " : {}\n\n", accountContainer);
+        ShortAccountDTOContainer accountContainer = jacksonProvider.getConfiguredMapper().readValue(currentThread().getContextClassLoader().getResourceAsStream(ACCOUNTS_DATA_JSON), ShortAccountDTOContainer.class);
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ACCOUNTS_DATA_MAPPING : {}\n\n", accountContainer);
     }
 
     @Test
     public void projectsDataMapperTest() throws Exception {
-        ProjectDTO projectDTO = jacksonProvider.getConfiguredMapper().readValue(
-                Thread.currentThread().getContextClassLoader().getResourceAsStream(
-                        PROJECTS_DATA_JSON), ProjectDTO.class);
-
-        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@PROJECTS_DATA_MAPPING"
-                + " : {}\n\n", projectDTO);
+        ProjectDTO projectDTO = jacksonProvider.getConfiguredMapper().readValue(currentThread().getContextClassLoader().getResourceAsStream(PROJECTS_DATA_JSON), ProjectDTO.class);
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@PROJECTS_DATA_MAPPING : {}\n\n", projectDTO);
     }
 
     @Test
     public void getAllProjectsDataMapperTest() throws Exception {
-        WSGetAccountProjectsResponse response = jacksonProvider.getConfiguredMapper().readValue(
-                Thread.currentThread().getContextClassLoader().getResourceAsStream(
-                        GET_ALL_PROJECTS_DATA_JSON),
-                WSGetAccountProjectsResponse.class);
-
-        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-                + "GET_ALL_PROJECTS_DATA_MAPPING : {}\n\n", response);
+        WSGetAccountProjectsResponse response = jacksonProvider.getConfiguredMapper().readValue(currentThread().getContextClassLoader().getResourceAsStream(GET_ALL_PROJECTS_DATA_JSON), WSGetAccountProjectsResponse.class);
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GET_ALL_PROJECTS_DATA_MAPPING : {}\n\n", response);
     }
 }

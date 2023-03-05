@@ -49,6 +49,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.io.File.separator;
+import static java.lang.Boolean.TRUE;
+import static java.util.concurrent.Executors.defaultThreadFactory;
+import static java.util.concurrent.Executors.newFixedThreadPool;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -62,9 +69,9 @@ public abstract class AbstractWMCComparisonTest {
 
         @Override
         public Thread newThread(Runnable r) {
-            Thread thread = Executors.privilegedThreadFactory().newThread(r);
+            Thread thread = defaultThreadFactory().newThread(r);
             thread.setName("WMCComparisonThread - " + threadID.getAndIncrement());
-            thread.setDaemon(Boolean.TRUE);
+            thread.setDaemon(TRUE);
             return thread;
         }
     };
@@ -75,26 +82,24 @@ public abstract class AbstractWMCComparisonTest {
 
     @BeforeClass
     public static void loadFile() throws Exception {
-        String wmcFileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/WMC-v110.xml";
-        file = new File(wmcFileString);
+        file = new File(Stream.of(new File(".").getCanonicalPath(), "src", "test", "resources", "WMC-v110.xml")
+                .collect(Collectors.joining(separator, "", "")));
     }
 
     protected int defineNumThreads() {
         return 150;
     }
 
-    protected long executeMultiThreadsTasks(GPBaseJAXBContext jaxbContext)
-            throws Exception {
+    /**
+     * @param jaxbContext
+     * @return {@link Long}
+     * @throws Exception
+     */
+    protected long executeMultiThreadsTasks(GPBaseJAXBContext jaxbContext) throws Exception {
         long time = 0;
-
         int numThreads = defineNumThreads();
-
-        ExecutorService executor = Executors.newFixedThreadPool(numThreads,
-                WMCComparisonThreadFactory);
-
-        List<Callable<Long>> tasks = new ArrayList<>(
-                numThreads);
+        ExecutorService executor = newFixedThreadPool(numThreads, WMCComparisonThreadFactory);
+        List<Callable<Long>> tasks = new ArrayList<>(numThreads);
         for (int i = 0; i < numThreads; i++) {
             if (jaxbContext instanceof WMCJAXBContextPoolV110) {
                 tasks.add(new WMCPooledTask(jaxbContext));
@@ -102,12 +107,9 @@ public abstract class AbstractWMCComparisonTest {
                 tasks.add(new WMCSimpleTask(jaxbContext));
             }
         }
-
         List<Future<Long>> results = executor.invokeAll(tasks);
         executor.shutdown();
-
         boolean flag = executor.awaitTermination(1, TimeUnit.MINUTES);
-
         if (flag) {
             for (Future<Long> future : results) {
                 time += future.get();
@@ -115,7 +117,6 @@ public abstract class AbstractWMCComparisonTest {
         } else {
             throw new InterruptedException("Some Threads are not executed.");
         }
-
         return time;
     }
 

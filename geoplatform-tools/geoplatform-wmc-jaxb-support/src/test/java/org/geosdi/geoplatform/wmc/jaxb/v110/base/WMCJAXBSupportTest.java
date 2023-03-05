@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.wmc.support.v110.jaxb.repository.WMCJAXBContextSup
 import org.geosdi.geoplatform.xml.wmc.v110.*;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -201,6 +202,7 @@ public class WMCJAXBSupportTest {
         logger.info("###########################\n{}\n\n", writer);
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void l_wmcV110SupportURLTest() throws Exception {
         Unmarshaller unmarshaller = wmcJAXBContext.acquireUnmarshaller();
@@ -213,6 +215,7 @@ public class WMCJAXBSupportTest {
         logger.info("###########################\n{}\n\n", writer);
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void m_wmc1V110SupportURLTest() throws Exception {
         Unmarshaller unmarshaller = wmcJAXBContext.acquireUnmarshaller();
@@ -225,6 +228,7 @@ public class WMCJAXBSupportTest {
         logger.info("###########################\n{}\n\n", writer);
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void n_wmc2V110SupportURLTest() throws Exception {
         Unmarshaller unmarshaller = wmcJAXBContext.acquireUnmarshaller();
@@ -248,6 +252,7 @@ public class WMCJAXBSupportTest {
         logger.info("###########################\n{}\n\n", writer);
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void p_wmcLayerListV110SupportURLTest() throws Exception {
         Unmarshaller unmarshaller = wmcJAXBContext.acquireUnmarshaller();
@@ -260,6 +265,7 @@ public class WMCJAXBSupportTest {
         logger.info("###########################\n{}\n\n", writer);
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void q_wmcGeneralTypeV110SupportURLTest() throws Exception {
         Unmarshaller unmarshaller = wmcJAXBContext.acquireUnmarshaller();
@@ -272,6 +278,7 @@ public class WMCJAXBSupportTest {
         logger.info("###########################\n{}\n\n", writer);
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void r_wmcFormatListV110SupportURLTest() throws Exception {
         Unmarshaller unmarshaller = wmcJAXBContext.acquireUnmarshaller();
@@ -284,6 +291,7 @@ public class WMCJAXBSupportTest {
         logger.info("###########################\n{}\n\n", writer);
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void s_wmcStyleListV110SupportURLTest() throws Exception {
         Unmarshaller unmarshaller = wmcJAXBContext.acquireUnmarshaller();
@@ -296,6 +304,7 @@ public class WMCJAXBSupportTest {
         logger.info("###########################\n{}\n\n", writer);
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void t_wmcServerV110SupportURLTest() throws Exception {
         Unmarshaller unmarshaller = wmcJAXBContext.acquireUnmarshaller();
@@ -308,6 +317,7 @@ public class WMCJAXBSupportTest {
         logger.info("###########################\n{}\n\n", writer);
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void u_wmcLayerTypeV110SupportURLTest() throws Exception {
         Unmarshaller unmarshaller = wmcJAXBContext.acquireUnmarshaller();
@@ -320,6 +330,7 @@ public class WMCJAXBSupportTest {
         logger.info("###########################\n{}\n\n", writer);
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void v_wmcExtensionTypeV110SupportURLTest() throws Exception {
         Unmarshaller unmarshaller = wmcJAXBContext.acquireUnmarshaller();

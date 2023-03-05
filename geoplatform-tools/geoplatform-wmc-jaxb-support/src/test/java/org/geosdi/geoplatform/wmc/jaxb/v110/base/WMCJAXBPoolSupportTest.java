@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.wmc.support.v110.jaxb.repository.WMCJAXBContextSup
 import org.geosdi.geoplatform.xml.wmc.v110.*;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -177,6 +178,7 @@ public class WMCJAXBPoolSupportTest {
         logger.info("###########################\n{}\n\n", writer);
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void l_wmcV110SupportPoolURLTest() throws Exception {
         ViewContextType viewContextType = wmcJAXBContextPool
@@ -187,6 +189,7 @@ public class WMCJAXBPoolSupportTest {
         logger.info("###########################\n{}\n\n", writer);
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void m_wmc1V110SupportPoolURLTest() throws Exception {
         ViewContextType viewContextType = wmcJAXBContextPool
@@ -197,6 +200,7 @@ public class WMCJAXBPoolSupportTest {
         logger.info("###########################\n{}\n\n", writer);
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void n_wmc2V110SupportPoolURLTest() throws Exception {
         ViewContextType viewContextType = wmcJAXBContextPool
@@ -216,6 +220,7 @@ public class WMCJAXBPoolSupportTest {
         logger.info("###########################\n{}\n\n", writer);
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void p_wmcLayerListV110SupportPoolURLTest() throws Exception {
         LayerListType layerListType = (LayerListType) wmcJAXBContextPool
@@ -226,6 +231,7 @@ public class WMCJAXBPoolSupportTest {
         logger.info("###########################\n{}\n\n", writer);
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void q_wmcGeneralTypeV110SupportPoolURLTest() throws Exception {
         GeneralType generalType = (GeneralType) wmcJAXBContextPool
@@ -236,6 +242,7 @@ public class WMCJAXBPoolSupportTest {
         logger.info("###########################\n{}\n\n", writer);
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void r_wmcFormatListV110SupportPoolURLTest() throws Exception {
         FormatListType formatListType = (FormatListType) wmcJAXBContextPool
@@ -246,6 +253,7 @@ public class WMCJAXBPoolSupportTest {
         logger.info("###########################\n{}\n\n", writer);
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void s_wmcStyleListV110SupportPoolURLTest() throws Exception {
         StyleListType styleListType = (StyleListType) wmcJAXBContextPool
@@ -256,6 +264,7 @@ public class WMCJAXBPoolSupportTest {
         logger.info("###########################\n{}\n\n", writer);
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void t_wmcServerV110SupportPoolURLTest() throws Exception {
         ServerType serverType = (ServerType) wmcJAXBContextPool
@@ -266,6 +275,7 @@ public class WMCJAXBPoolSupportTest {
         logger.info("###########################\n{}\n\n", writer);
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void u_wmcLayerTypeV110SupportPoolURLTest() throws Exception {
         LayerType layerType = (LayerType) wmcJAXBContextPool
@@ -276,6 +286,7 @@ public class WMCJAXBPoolSupportTest {
         logger.info("###########################\n{}\n\n", writer);
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void v_wmcExtensionTypeV110SupportPoolURLTest() throws Exception {
         ExtensionType extensionType = (ExtensionType) wmcJAXBContextPool

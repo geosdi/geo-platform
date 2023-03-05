@@ -43,6 +43,10 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 
+import static java.io.File.separator;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -56,8 +60,8 @@ public abstract class AbstractWMCJAXBTheoriesTest {
 
     @BeforeClass
     public static void buildDirFiles() throws IOException {
-        dirFiles = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/";
+        dirFiles = of(new File(".").getCanonicalPath(), "src", "test", "resources")
+                .collect(joining(separator, "", separator));
     }
 
     @DataPoints

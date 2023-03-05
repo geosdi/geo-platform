@@ -42,8 +42,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import javax.xml.bind.JAXBContext;
-import java.util.concurrent.TimeUnit;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static javax.xml.bind.JAXBContext.newInstance;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -54,19 +54,13 @@ public class WMCComparisonTest extends AbstractWMCComparisonTest {
 
     @Test
     public void wmcPooledContextTest() throws Exception {
-        logger.info("WMCPooledContextTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        new WMCJAXBContextPoolV110(JAXBContext
-                                .newInstance(ViewContextType.class)))));
+        logger.info("WMCPooledContextTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(new WMCJAXBContextPoolV110(newInstance(ViewContextType.class)))));
     }
 
     @Test
     public void wmcSimpleContextTest() throws Exception {
-        logger.info("WMCSimpleContextTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        new WMCJAXBContextV110(JAXBContext
-                                .newInstance(ViewContextType.class)))));
+        logger.info("WMCSimpleContextTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(new WMCJAXBContextV110(newInstance(ViewContextType.class)))));
     }
 }

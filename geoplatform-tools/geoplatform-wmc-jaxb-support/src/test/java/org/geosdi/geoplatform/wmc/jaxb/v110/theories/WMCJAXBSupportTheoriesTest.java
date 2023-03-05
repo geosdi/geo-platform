@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.wmc.jaxb.v110.theories;
 import org.geosdi.geoplatform.wmc.support.v110.jaxb.context.WMCJAXBContextV110;
 import org.geosdi.geoplatform.wmc.support.v110.jaxb.repository.WMCJAXBContextProviderV110;
 import org.geosdi.geoplatform.wmc.support.v110.jaxb.repository.WMCJAXBContextSupport;
+import org.junit.Ignore;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
@@ -57,10 +58,8 @@ import java.net.URL;
 public class WMCJAXBSupportTheoriesTest extends AbstractWMCJAXBTheoriesTest {
 
     static {
-        wmcJAXBContext = WMCJAXBContextSupport
-                .getProvider(WMCJAXBContextProviderV110.WMC_CONTEXT_KEY_V110);
+        wmcJAXBContext = WMCJAXBContextSupport.getProvider(WMCJAXBContextProviderV110.WMC_CONTEXT_KEY_V110);
     }
-
     //
     private final static WMCJAXBContextV110 wmcJAXBContext;
 
@@ -79,6 +78,7 @@ public class WMCJAXBSupportTheoriesTest extends AbstractWMCJAXBTheoriesTest {
         logger.info("###########################\n{}\n\n", writer);
     }
 
+    @Ignore(value = "Server is Down")
     @Theory
     public void wmcJaxbSupportURLTest(String fileName) throws Exception {
         Unmarshaller unmarshaller = wmcJAXBContext.acquireUnmarshaller();

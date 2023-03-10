@@ -56,6 +56,7 @@ import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPEventRepository;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.event.AbstractXMPPEvent;
+import org.geosdi.geoplatform.gui.puregwt.xmpp.event.NotifyXMPPLogoutEvent;
 
 import java.util.Collection;
 import java.util.logging.Logger;
@@ -69,6 +70,7 @@ public class GPXMPPClient {
     private static final Logger logger = Logger.getLogger("GPXMPPClient");
     //
     private static final XMPPSessionGinjector ginjector = GWT.create(XMPPSessionGinjector.class);
+    private static final NotifyXMPPLogoutEvent NOTIFY_XMPP_LOGOUT_EVENT = new NotifyXMPPLogoutEvent();
 
     public void userXMPPLogin(String username, String password,
             String hostXmppServer) {
@@ -89,18 +91,19 @@ public class GPXMPPClient {
                     public void onStateChanged(StateChangedEvent event) {
                         if (event.is(SessionStates.loggedIn)) {
                             logger.info(
-                                    XMPPModuleConstants.INSTANCE.GPXMPPClient_xmppConnectionInfoText()
-                                    + "\n " + XMPPModuleConstants.INSTANCE.GPXMPPClient_statusOnlineText());
-// GeoPlatformMessage.infoMessage(XMPPModuleConstants.INSTANCE.GPXMPPClient_xmppConnectionInfoText(),
-// XMPPModuleConstants.INSTANCE.GPXMPPClient_statusOnlineText());
+                                    XMPPModuleConstants.INSTANCE.GPXMPPClient_xmppConnectionInfoText() + "\n " + XMPPModuleConstants.INSTANCE.GPXMPPClient_statusOnlineText());
+                            // GeoPlatformMessage.infoMessage(XMPPModuleConstants.INSTANCE.GPXMPPClient_xmppConnectionInfoText(),
+                            // XMPPModuleConstants.INSTANCE.GPXMPPClient_statusOnlineText());
                             logger.info("We are now online");
-                        } else if (event.is(SessionStates.disconnected)) {
+                        } else if (event.is(SessionStates.disconnected) || event.is(SessionStates.error)) {
                             logger.info(
-                                    XMPPModuleConstants.INSTANCE.GPXMPPClient_xmppConnectionInfoText()
-                                    + "\n " + XMPPModuleConstants.INSTANCE.GPXMPPClient_statusOffLineText());
-// GeoPlatformMessage.infoMessage(XMPPModuleConstants.INSTANCE.GPXMPPClient_xmppConnectionInfoText(),
-// XMPPModuleConstants.INSTANCE.GPXMPPClient_statusOffLineText());
+                                    XMPPModuleConstants.INSTANCE.GPXMPPClient_xmppConnectionInfoText() + "\n " + XMPPModuleConstants.INSTANCE.GPXMPPClient_statusOffLineText());
+
+                            // GeoPlatformMessage.infoMessage(XMPPModuleConstants.INSTANCE.GPXMPPClient_xmppConnectionInfoText(),
+                            // XMPPModuleConstants.INSTANCE.GPXMPPClient_statusOffLineText());
                             logger.info("We are now offline");
+                            userXMPPLoout();
+                            XMPPHandlerManager.fireEvent(NOTIFY_XMPP_LOGOUT_EVENT);
                         } else {
                             logger.info(
                                     XMPPModuleConstants.INSTANCE.GPXMPPClient_xmppConnectionInfoText()

@@ -41,6 +41,7 @@ import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -50,19 +51,21 @@ import org.geosdi.geoplatform.gui.client.i18n.SecurityModuleConstants;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.xmpp.handler.IXMPPLogoutHandler;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class UserLogout extends MenuBaseAction {
-
+public class UserLogout extends MenuBaseAction implements IXMPPLogoutHandler {
 
 
     public UserLogout() {
         super(SecurityModuleConstants.INSTANCE.UserLogout_tileText(),
                 AbstractImagePrototype.create(BasicWidgetResources.ICONS.logout()));
+        XMPPHandlerManager.addHandler(TYPE, this);
     }
 
     @Override
@@ -110,11 +113,18 @@ public class UserLogout extends MenuBaseAction {
                 System.out.println("Error on invalidating the session!!!");
                 //TODO: In case of fail... what is possible to do??
             }
-        });
+                });
     }
 
     protected void closeSession(InvalidateSessionResponse response) {
         response.executeInvalidateSession();
     }
 
+    /**
+     *
+     */
+    @Override
+    public void xmppLogout() {
+        Window.Location.reload();
+    }
 }

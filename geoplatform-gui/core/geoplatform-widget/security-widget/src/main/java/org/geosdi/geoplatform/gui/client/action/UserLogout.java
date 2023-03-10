@@ -41,6 +41,7 @@ import com.extjs.gxt.ui.client.event.MessageBoxEvent;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -50,22 +51,21 @@ import org.geosdi.geoplatform.gui.client.i18n.SecurityModuleConstants;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
+import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.xmpp.handler.IXMPPLogoutHandler;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class UserLogout extends MenuBaseAction {
+public class UserLogout extends MenuBaseAction implements IXMPPLogoutHandler {
 
-    private final static Logger logger = Logger.getLogger("UserLogout");
 
     public UserLogout() {
         super(SecurityModuleConstants.INSTANCE.UserLogout_tileText(),
                 AbstractImagePrototype.create(BasicWidgetResources.ICONS.logout()));
+        XMPPHandlerManager.addHandler(TYPE, this);
     }
 
     @Override
@@ -87,11 +87,12 @@ public class UserLogout extends MenuBaseAction {
     }
 
     private void invalidateSession() {
-        logger.log(Level.INFO, "#################### Invalidate Session");
+        GWT.log("Invalidate Sessione");
         final InvalidateSessionRequest invalidateSessionRequest = GWT.create(InvalidateSessionRequest.class);
-        logger.log(Level.INFO, "#################### Invalidate Session Request : " + invalidateSessionRequest);
+        GWT.log(""+invalidateSessionRequest);
 
-        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<InvalidateSessionResponse>() {
+        ClientCommandDispatcher.getInstance().execute(
+                new GPClientCommand<InvalidateSessionResponse>() {
             private static final long serialVersionUID = 3838394981874885388L;
 
             {
@@ -108,7 +109,8 @@ public class UserLogout extends MenuBaseAction {
 
             @Override
             public void onCommandFailure(Throwable exception) {
-                logger.log(Level.INFO, "Error on invalidating the session!!! : " + exception.getMessage());
+                GWT.log(""+exception.getMessage());
+                System.out.println("Error on invalidating the session!!!");
                 //TODO: In case of fail... what is possible to do??
             }
         });
@@ -118,4 +120,11 @@ public class UserLogout extends MenuBaseAction {
         response.executeInvalidateSession();
     }
 
+    /**
+     *
+     */
+    @Override
+    public void xmppLogout() {
+        Window.Location.reload();
+    }
 }

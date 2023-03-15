@@ -23,6 +23,13 @@
                 <scope>import</scope>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-jackson-dependency</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -65,6 +72,16 @@
         </dependency>
 
         <dependency>
+            <groupId>io.hypersistence</groupId>
+            <artifactId>hypersistence-utils-hibernate-60</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
         </dependency>
@@ -72,6 +89,14 @@
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>jakarta.el</artifactId>
+        </dependency>
+
+        <!-- =========================================================== -->
+        <!-- ========================== RX3Java ======================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>io.reactivex.rxjava3</groupId>
+            <artifactId>rxjava</artifactId>
         </dependency>
 
         <!-- ============================================================ -->

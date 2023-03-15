@@ -35,14 +35,16 @@
  */
 package org.geosdi.geoplatform.persistence.demo.model;
 
-import jakarta.persistence.*;
+import io.hypersistence.utils.hibernate.id.Tsid;
+import jakarta.persistence.Cacheable;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Parameter;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
 
 import java.io.Serializable;
@@ -64,16 +66,17 @@ public class Car implements Serializable {
     private static final long serialVersionUID = 7556465403027719413L;
     //
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "car_generator")
-    @GenericGenerator(name = "car_generator",
-            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-            parameters = {
-                    @Parameter(name = "sequence_name", value = "CAR_SEQ"),
-                    @Parameter(name = "initial_value", value = "1"),
-                    @Parameter(name = "increment_size", value = "3"),
-                    @Parameter(name = "optimizer", value = "pooled-lo")
-            }
-    )
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "car_generator")
+//    @GenericGenerator(name = "car_generator",
+//            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+//            parameters = {
+//                    @Parameter(name = "sequence_name", value = "CAR_SEQ"),
+//                    @Parameter(name = "initial_value", value = "1"),
+//                    @Parameter(name = "increment_size", value = "3"),
+//                    @Parameter(name = "optimizer", value = "pooled-lo")
+//            }
+//    )
+    @Tsid
     private Long id;
     //
     @NaturalId

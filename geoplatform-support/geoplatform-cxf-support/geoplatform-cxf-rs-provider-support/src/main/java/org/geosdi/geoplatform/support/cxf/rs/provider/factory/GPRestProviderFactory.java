@@ -79,7 +79,7 @@ public final class GPRestProviderFactory {
             case JACKSON_JODA_TIME:
                 logger.debug("############################### RestProviderFactory is building an instance of {} with JODA_TIME SUPPORT\n\n",
                         CXFJacksonProvider.class);
-                return new CXFJacksonProvider(new GPJacksonSupport().registerModule(new JodaModule())
+                return new CXFJacksonProvider(new GPJacksonSupport(JAKARTA).registerModule(new JodaModule())
                         .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)
                         .configure(GPJsonIncludeFeature.NON_NULL)
                         .setLocale(Locale.getDefault()));

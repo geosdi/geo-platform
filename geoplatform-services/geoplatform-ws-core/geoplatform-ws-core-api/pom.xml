@@ -18,14 +18,6 @@
         <dependencies>
             <dependency>
                 <groupId>org.geosdi</groupId>
-                <artifactId>geoplatform-swagger-dependency</artifactId>
-                <type>pom</type>
-                <scope>import</scope>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-jackson-dependency</artifactId>
                 <type>pom</type>
                 <scope>import</scope>
@@ -140,12 +132,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
         <!-- CXF -->
         <dependency>
             <groupId>org.apache.cxf</groupId>
@@ -160,46 +146,19 @@
             <artifactId>cxf-rt-rs-security-cors</artifactId>
         </dependency>
 
-        <!-- =========================================================== -->
-        <!-- ========================== SWAGGER ======================== -->
-        <!-- =========================================================== -->
         <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-core</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.core</groupId>
-                    <artifactId>jackson-databind</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.datatype</groupId>
-                    <artifactId>jackson-datatype-joda</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>javax.validation</groupId>
-                    <artifactId>validation-api</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-service-description</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-service-description-swagger</artifactId>
         </dependency>
 
         <dependency>
            <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-jaxrs</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.fasterxml.jackson.dataformat</groupId>
-                    <artifactId>jackson-dataformat-xml</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>javax.ws.rs</groupId>
-                    <artifactId>jsr311-api</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>

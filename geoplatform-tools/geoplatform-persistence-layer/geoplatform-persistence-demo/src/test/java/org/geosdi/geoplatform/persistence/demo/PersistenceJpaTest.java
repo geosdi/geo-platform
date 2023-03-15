@@ -51,10 +51,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
+import java.util.stream.IntStream;
+
+import static io.reactivex.rxjava3.core.Observable.fromStream;
 import static org.junit.Assert.*;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -102,21 +104,31 @@ public class PersistenceJpaTest {
         logger.info("########################################FIND_CAR_BY_ID : {}\n", this.jpaCarDAO.find(car.getId()));
     }
 
-    private void insert() {
-        for (int i = 0; i < 100; i++) {
-            Car car = new Car();
-            car.setPlate("AR793" + i);
-            car.setModel("Fiat Model " + i);
-            CarPart carPart = new CarPart();
-            carPart.setPartName(PART_NAME + i);
-            carPart.setCar(car);
-            jpaCarDAO.persist(car);
-            jpaCarPartDAO.persist(carPart);
-        }
+    void insert() {
+        fromStream(IntStream.iterate(0, n -> n + 1)
+                .limit(100)
+                .boxed())
+                .map(this::toCarPart)
+                .subscribe(this::consume, Throwable::printStackTrace);
     }
 
-    private void removeAll() throws Exception {
+    void removeAll() throws Exception {
         jpaCarDAO.removeAll();
         logger.info("REMOVED ALL CARS ##################################");
+    }
+
+    void consume(CarPart theCarPart) {
+        jpaCarDAO.persist(theCarPart.getCar());
+        jpaCarPartDAO.persist(theCarPart);
+    }
+
+    CarPart toCarPart(int i) {
+        Car car = new Car();
+        car.setPlate("AR793" + i);
+        car.setModel("Fiat Model " + i);
+        CarPart carPart = new CarPart();
+        carPart.setPartName(PART_NAME + i);
+        carPart.setCar(car);
+        return carPart;
     }
 }

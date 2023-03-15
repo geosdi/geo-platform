@@ -56,7 +56,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Arrays;
+import static java.util.Arrays.asList;
 
 /**
  *
@@ -86,11 +86,11 @@ class GPServiceJsonConfig {
             @Qualifier(value = "serverLoggingInInterceptorBean") LoggingInInterceptor serverLogInInterceptor,
             @Qualifier(value = "serverLoggingOutInterceptorBean") LoggingOutInterceptor serverLogOutInterceptor) {
         JAXRSServerFactoryBean factory = RuntimeDelegate.getInstance().createEndpoint(gpJsonCoreApplication, JAXRSServerFactoryBean.class);
-        factory.setServiceBeans(Arrays.asList(new Object[]{geoPlatformService}));
+        factory.setServiceBeans(asList(new Object[]{geoPlatformService}));
         factory.setAddress(factory.getAddress());
-        factory.setProviders(Arrays.asList(createProvider(providerType), new GPExceptionFaultMapper(), gpCrossResourceSharingFilter));
-        factory.setInInterceptors(Arrays.asList(serverLogInInterceptor));
-        factory.setOutInterceptors(Arrays.asList(serverLogOutInterceptor));
+        factory.setProviders(asList(createProvider(providerType), new GPExceptionFaultMapper(), gpCrossResourceSharingFilter));
+        factory.setInInterceptors(asList(serverLogInInterceptor));
+        factory.setOutInterceptors(asList(serverLogOutInterceptor));
         return factory;
     }
 

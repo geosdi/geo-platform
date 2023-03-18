@@ -1483,6 +1483,7 @@
         <maven.build.timestamp.format>
             yyyy-MM-dd'T'HH:mm:ss'Z'
         </maven.build.timestamp.format>
+        <maven.compiler.showWarnings>false</maven.compiler.showWarnings>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <netbeans.hint.license>geo-platform</netbeans.hint.license>
         <kotlin.version>1.6.0</kotlin.version>

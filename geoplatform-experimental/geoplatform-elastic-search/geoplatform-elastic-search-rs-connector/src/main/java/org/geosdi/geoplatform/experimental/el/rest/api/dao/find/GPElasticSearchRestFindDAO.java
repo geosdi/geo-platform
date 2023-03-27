@@ -121,6 +121,16 @@ public interface GPElasticSearchRestFindDAO<D extends Document> extends GPPageab
     /**
      * @param from
      * @param size
+     * @param thePropertyName
+     * @param theValue
+     * @return {@link IPageResult<D>}
+     * @throws Exception
+     */
+    IPageResult<D> find(Integer from, Integer size, @Nonnull(when = NEVER) String thePropertyName, @Nonnull(when = NEVER) Object theValue) throws Exception;
+
+    /**
+     * @param from
+     * @param size
      * @param sortField
      * @param sortOrder
      * @return {@link org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO.IPageResult<D>}

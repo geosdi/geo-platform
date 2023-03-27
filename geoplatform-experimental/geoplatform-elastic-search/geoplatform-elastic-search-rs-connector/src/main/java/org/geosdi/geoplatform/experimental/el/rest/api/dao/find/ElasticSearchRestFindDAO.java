@@ -39,6 +39,7 @@ import com.google.common.collect.Iterables;
 import org.elasticsearch.action.get.*;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.index.query.Operator;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.FetchSourceContext;
@@ -47,6 +48,8 @@ import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
 import org.geosdi.geoplatform.experimental.el.dao.PageResult;
 import org.geosdi.geoplatform.experimental.el.rest.api.dao.page.PageableElasticSearchRestDAO;
+import org.geosdi.geoplatform.experimental.el.search.bool.BooleanExactSearch;
+import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -215,6 +218,21 @@ public abstract class ElasticSearchRestFindDAO<D extends Document> extends Pagea
     @Override
     public IPageResult<D> find(Integer from, Integer size) throws Exception {
         return super.find(new MultiFieldsSearch(from, size));
+    }
+
+    /**
+     * @param from
+     * @param size
+     * @param thePropertyName
+     * @param theValue
+     * @return {@link IPageResult<D>}
+     * @throws Exception
+     */
+    @Override
+    public IPageResult<D> find(Integer from, Integer size, @Nonnull(when = NEVER) String thePropertyName, @Nonnull Object theValue) throws Exception {
+        checkArgument((thePropertyName != null) && !(thePropertyName.trim().isEmpty()), "The Parameter propertyName must not be null or an empty string.");
+        checkArgument(theValue != null, "The Parameter value must not be null.");
+        return super.find(new MultiFieldsSearch(from, size, new BooleanExactSearch(thePropertyName, theValue, IBooleanSearch.BooleanQueryType.MUST, Operator.AND)));
     }
 
     /**

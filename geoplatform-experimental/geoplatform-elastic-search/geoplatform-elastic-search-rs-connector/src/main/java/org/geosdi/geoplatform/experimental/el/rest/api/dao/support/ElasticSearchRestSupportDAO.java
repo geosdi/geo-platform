@@ -42,6 +42,8 @@ import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.rest.api.index.settings.GPElasticSearchRestIndexSettings;
 import org.geosdi.geoplatform.experimental.el.rest.api.mapper.GPElasticSearchRestMapper;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -56,6 +58,7 @@ import static javax.annotation.meta.When.NEVER;
  */
 public abstract class ElasticSearchRestSupportDAO<D extends Document> implements GPElasticSearchRestSupportDAO<D> {
 
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     protected static final String EMPTY_JSON = "{}";
     //
     private final GPElasticSearchCheck<GPElasticSearchRestIndexSettings, Class<D>, Exception> settingsCheck;
@@ -158,12 +161,43 @@ public abstract class ElasticSearchRestSupportDAO<D extends Document> implements
     }
 
     /**
+     * @param searchHit
+     * @param classe
+     * @param <V>
+     * @return {@link V}
+     */
+    protected <V extends Object> V read(@Nonnull(when = NEVER) SearchHit searchHit, @Nonnull(when = NEVER) Class<V> classe) {
+        try {
+            checkNotNull(searchHit, "The SearchHit must not be null.");
+            checkNotNull(classe, "The Parameter classe must not be null.");
+            logger.trace("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SOURCE_JSON : \n{}\n", searchHit.getSourceAsString());
+            return this.read(searchHit.getSourceAsString(), classe);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
      * @param documentAsString
      * @param classe
      * @return {@link V}
      * @throws Exception
      */
     protected <V extends Document> V readDocument(@Nonnull(when = NEVER) String documentAsString, @Nonnull(when = NEVER) Class<V> classe) throws Exception {
+        checkArgument(((documentAsString != null) && !(documentAsString.trim().isEmpty()) && !(documentAsString.equalsIgnoreCase(EMPTY_JSON))), "The String to Wrap must not be null or Empty");
+        checkArgument(classe != null, "The Parameter classe must not be null.");
+        return this.elasticSearchRestMapper.read(documentAsString, classe);
+    }
+
+    /**
+     * @param documentAsString
+     * @param classe
+     * @param <V>
+     * @return {@link V}
+     * @throws Exception
+     */
+    protected <V extends Object> V read(@Nonnull(when = NEVER) String documentAsString, @Nonnull(when = NEVER) Class<V> classe) throws Exception {
         checkArgument(((documentAsString != null) && !(documentAsString.trim().isEmpty()) && !(documentAsString.equalsIgnoreCase(EMPTY_JSON))), "The String to Wrap must not be null or Empty");
         checkArgument(classe != null, "The Parameter classe must not be null.");
         return this.elasticSearchRestMapper.read(documentAsString, classe);

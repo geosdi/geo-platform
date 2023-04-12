@@ -136,8 +136,19 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
      * @return {@link IPageResult<V>}
      * @throws Exception
      */
-    <P extends Page, V extends Document> IPageResult<V> find(@Nonnull(when = NEVER) P page, String[] includeFields, String[] excludeFields,
-            @Nonnull(when = NEVER) Class<V> classe) throws Exception;
+    <P extends Page, V extends Document> IPageResult<V> find(@Nonnull(when = NEVER) P page, String[] includeFields, String[] excludeFields, @Nonnull(when = NEVER) Class<V> classe) throws Exception;
+
+    /**
+     * @param page
+     * @param includeFields
+     * @param excludeFields
+     * @param classe
+     * @param <P>
+     * @param <V>
+     * @return {@link PageStore<V>}
+     * @throws Exception
+     */
+    <P extends Page, V extends Object> PageStore<V> findAndMappingWithClass(@Nonnull(when = NEVER) P page, String[] includeFields, String[] excludeFields, @Nonnull(when = NEVER) Class<V> classe) throws Exception;
 
     /**
      * @param page

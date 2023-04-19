@@ -27,14 +27,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
         </dependency>
-        
-        <!-- =========================================================== -->
-        <!-- JAXB -->
-        <!-- =========================================================== -->
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>

@@ -16,7 +16,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>         
-        <hibernate-search-version>6.2.0.Alpha1</hibernate-search-version>
+        <hibernate-search-version>6.2.0.Alpha2</hibernate-search-version>
     </properties>
 
     <dependencies>

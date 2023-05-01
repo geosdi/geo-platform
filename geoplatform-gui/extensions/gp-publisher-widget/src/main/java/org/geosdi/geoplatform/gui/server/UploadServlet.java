@@ -45,7 +45,7 @@ import jakarta.servlet.http.HttpSession;
 import org.apache.commons.fileupload2.FileItem;
 import org.apache.commons.fileupload2.FileUploadException;
 import org.apache.commons.fileupload2.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload2.jaksrvlt.JakSrvltFileUpload;
+import org.apache.commons.fileupload2.jakarta.JakartaServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
@@ -128,7 +128,7 @@ public class UploadServlet extends HttpServlet {
         }
         receivedAssertion = (AssertionImpl) session.getAttribute(AbstractCasFilter.CONST_CAS_ASSERTION);
         // process only multipart requests
-        if (JakSrvltFileUpload.isMultipartContent(req)) {
+        if (JakartaServletFileUpload.isMultipartContent(req)) {
             // Create a factory for disk-based file items
             DiskFileItemFactory factory = new DiskFileItemFactory();
             // Create a new file upload handler
@@ -137,7 +137,7 @@ public class UploadServlet extends HttpServlet {
              * disk.
              */
             factory.setSizeThreshold(1 * 1024 * 1024); //1 MB
-            JakSrvltFileUpload upload = new JakSrvltFileUpload(factory);
+            JakartaServletFileUpload upload = new JakartaServletFileUpload(factory);
             File uploadedFile = null;
             // Parse the request
             try {

@@ -112,6 +112,12 @@
             <artifactId>postgresql</artifactId>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>org.springframework</groupId>-->
+<!--            <artifactId>spring-instrument</artifactId>-->
+<!--            <version>6.0.8</version>-->
+<!--        </dependency>-->
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
@@ -143,6 +149,9 @@
                     <systemPropertyVariables>
                         <GP_PERSISTENCE_PBE_KEY>$-geosdi2021,??/07/160821_5,??-77</GP_PERSISTENCE_PBE_KEY>
                     </systemPropertyVariables>
+<!--                    <argLine>-->
+<!--                        -javaagent:"${settings.localRepository}/org/springframework/spring-instrument/6.0.8/spring-instrument-6.0.8.jar"-->
+<!--                    </argLine>-->
                 </configuration>
             </plugin>
         </plugins>

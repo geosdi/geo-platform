@@ -47,10 +47,12 @@ import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.Geoserver
 import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverDeleteFeatureTypeRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadWorkspaceDatastoreFeatureTypesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadWorkspaceFeatureTypesRequest;
-import org.geosdi.geoplatform.connector.server.exception.ResourceNotFoundException;
 import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static java.lang.Boolean.TRUE;
 import static java.util.Arrays.asList;
@@ -150,11 +152,14 @@ public class GPGeoserverFeatureTypesConnectorTest extends GPBaseGeoserverConnect
         IGPFeatureTypeAttributes featureTypeAttributes = new GPFeatureTypeAttributes();
         featureTypeAttributes.setValues(asList(featureTypeAttribute));
         featureTypeBody.setAttributes(featureTypeAttributes);
+        Map<String, String> metadata = new HashMap<>();
+        metadata.put("cachingEnabled", "true");
+        featureTypeBody.setMetadata(metadata);
         createFeatureTypeRequest.withFeatureTypeBody(featureTypeBody);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@CREATE_FEATURE_TYPE_RESPONSE : {}\n", createFeatureTypeRequest.getResponse());
     }
 
-    @Test(expected = ResourceNotFoundException.class)
+    @Test//(expected = ResourceNotFoundException.class)
     public void g_deleteFeatureTypeTest() throws Exception {
         GeoserverDeleteFeatureTypeRequest deleteFeatureTypeRequest = geoserverConnectorStoreV2_22_x.deleteFeatureTypeRequest();
         deleteFeatureTypeRequest.withWorkspace("topp").withStore("Test").withFeatureTypeName("test").withRecurse(TRUE);

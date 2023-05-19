@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.persistence.dao;
 import org.geosdi.geoplatform.persistence.dao.exception.GPDAOException;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Nonnull;
+import javax.annotation.meta.When;
 import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Stream;
@@ -106,4 +108,11 @@ public interface GPBaseDAO<T extends Object, ID extends Serializable> extends GP
      * @return {@link Number}
      */
     Number count() throws GPDAOException;
+
+    /**
+     * @param theIds
+     * @return {@link List<T>}
+     * @throws GPDAOException
+     */
+    List<T> findByIds(@Nonnull(when = When.NEVER) List<ID> theIds) throws GPDAOException;
 }

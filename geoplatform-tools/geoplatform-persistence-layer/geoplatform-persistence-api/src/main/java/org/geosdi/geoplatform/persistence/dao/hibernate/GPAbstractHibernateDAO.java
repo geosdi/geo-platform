@@ -47,6 +47,7 @@ import javax.annotation.Nonnull;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -247,6 +248,26 @@ public abstract class GPAbstractHibernateDAO<T extends Object, ID extends Serial
             CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
             criteriaQuery.select(criteriaBuilder.count(criteriaQuery.from(super.getPersistentClass())));
             return this.currentSession().createQuery(criteriaQuery).getSingleResult();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new GPDAOException(ex);
+        }
+    }
+
+    /**
+     * @param theIds
+     * @return {@link List<T>}
+     * @throws GPDAOException
+     */
+    @Override
+    public List<T> findByIds(@Nonnull(when = NEVER) List<ID> theIds) throws GPDAOException {
+        checkArgument(theIds != null, "The Parameter ids must not be null.");
+        theIds = theIds.stream()
+                .filter(Objects::nonNull)
+                .collect(toList());
+        logger.trace("@@@@@@@@@@@@@@@@@@@@Trying to find {} by ids : {}\n", this.persistentClass.getSimpleName(), theIds);
+        try {
+            return this.currentSession().byMultipleIds(this.persistentClass).multiLoad(theIds);
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new GPDAOException(ex);

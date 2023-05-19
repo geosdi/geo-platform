@@ -235,4 +235,24 @@ public abstract class GPAbstractJpaDAO<T extends Object, ID extends Serializable
         criteriaQuery.select(criteriaBuilder.count(criteriaQuery.from(super.getPersistentClass())));
         return entityManager.createQuery(criteriaQuery).getSingleResult();
     }
+
+    /**
+     * @param theIds
+     * @return {@link List<T>}
+     * @throws GPDAOException
+     */
+    @Override
+    public List<T> findByIds(@Nonnull(when = NEVER) List<ID> theIds) throws GPDAOException {
+        checkArgument(theIds != null, "The Parameter ids must not be null.");
+        theIds = theIds.stream()
+                .filter(Objects::nonNull)
+                .collect(toList());
+        logger.trace("@@@@@@@@@@@@@@@@@@@@Trying to find {} by ids : {}\n", this.persistentClass.getSimpleName(), theIds);
+        try {
+            return super.getSession().byMultipleIds(this.persistentClass).multiLoad(theIds);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new GPDAOException(ex);
+        }
+    }
 }

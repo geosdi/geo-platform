@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.wfs;
 
 import org.geosdi.geoplatform.connector.server.request.WFSGetCapabilitiesRequest;
 import org.geosdi.geoplatform.xml.wfs.v110.WFSCapabilitiesType;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.BufferedWriter;
@@ -71,6 +72,7 @@ public class WFSGetCapabilitiesTest extends WFSTestConfigurator {
         }
     }
 
+    @Ignore(value = "Server id DOWN")
     @Test
     public void testHttpsGetCapabilitiesV110() throws Exception {
         System.setProperty("jsse.enableSNIExtension", "false");

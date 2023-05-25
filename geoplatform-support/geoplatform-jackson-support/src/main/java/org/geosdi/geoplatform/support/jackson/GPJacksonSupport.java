@@ -110,7 +110,8 @@ public class GPJacksonSupport implements JacksonSupport {
         checkArgument(features != null, "The Parameter features must not be null.");
         this.mapper = new ObjectMapper();
         AnnotationIntrospector primary = JACKSON.build();
-        this.mapper.setAnnotationIntrospector((theBuilder != null) && !(theBuilder.equals(DEFAULT)) ? new AnnotationIntrospectorPair(primary, theBuilder.build()) : primary);
+        AnnotationIntrospector secondary = ((theBuilder != null) ? theBuilder.build() : null);
+        this.mapper.setAnnotationIntrospector((secondary != null) ? new AnnotationIntrospectorPair(primary, secondary) : primary);
         fromArray(features)
                 .filter(Objects::nonNull)
                 .doOnComplete(() -> logger.info("##############{} configure all Features.", this.getProviderName()))

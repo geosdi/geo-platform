@@ -55,7 +55,7 @@ public interface GPPBESystemEnvProperties {
      * @return {@link Boolean}
      */
     default Boolean isSetPassword() {
-        return ((this.getPassword() != null) && !(this.getPassword().isEmpty()));
+        return ((this.getPassword() != null) && !(this.getPassword().trim().isEmpty()));
     }
 
     class GPBasePBESystemEnvProperties implements GPPBESystemEnvProperties {
@@ -66,7 +66,7 @@ public interface GPPBESystemEnvProperties {
          * @param thePropertyEnvName
          */
         public GPBasePBESystemEnvProperties(@Nonnull(when = NEVER) String thePropertyEnvName) {
-            checkArgument((thePropertyEnvName != null) && !(thePropertyEnvName.isEmpty()), "The parameter PropertyEnvName must not be null or an Empty String.");
+            checkArgument((thePropertyEnvName != null) && !(thePropertyEnvName.trim().isEmpty()), "The parameter PropertyEnvName must not be null or an Empty String.");
             this.propertyEnvName = thePropertyEnvName;
         }
 

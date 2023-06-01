@@ -256,7 +256,7 @@
                     </execution>
                     <execution>
                         <id>failsafe-verify</id>
-                        <phase>verify</phase>
+                        <phase>deploy</phase>
                         <goals>
                             <goal>verify</goal>
                         </goals>

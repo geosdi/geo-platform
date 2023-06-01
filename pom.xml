@@ -643,7 +643,7 @@
                 <artifactId>commons-pool2</artifactId>
                 <version>${commons-pool-version}</version>
             </dependency>
-            
+
             <!-- =========================================================== -->
             <!--                    Kotlin                                   -->
             <!-- =========================================================== -->
@@ -652,13 +652,13 @@
                 <artifactId>kotlin-stdlib</artifactId>
                 <version>${kotlin.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-stdlib-jdk8</artifactId>
                 <version>${kotlin.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-test</artifactId>
@@ -1064,21 +1064,22 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.0.0-M1</version>
+                    <version>3.1.1</version>
                 </plugin>
 
                 <plugin>
                     <inherited>true</inherited>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.1.0</version>
                     <configuration>
                         <attach>true</attach>
+                        <classifier>sources</classifier>
                     </configuration>
                     <executions>
                         <execution>
                             <id>attach-sources</id>
-                            <phase>verify</phase>
+                            <phase>deploy</phase>
                             <goals>
                                 <goal>jar-no-fork</goal>
                             </goals>
@@ -1089,7 +1090,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
-                    <version>3.0.0-M4</version>
+                    <version>3.0.0</version>
                     <configuration>
                         <tagNameFormat>v@{project.version}</tagNameFormat>
                         <autoVersionSubmodules>true</autoVersionSubmodules>
@@ -1117,7 +1118,7 @@
                     <artifactId>maven-dependency-plugin</artifactId>
                     <version>3.3.0</version>
                 </plugin>
-                
+
                 <plugin>
                     <groupId>org.jetbrains.kotlin</groupId>
                     <artifactId>kotlin-maven-plugin</artifactId>
@@ -1254,8 +1255,8 @@
                                     <message>Invalid Java version. It has to be 11 or higher</message>
                                 </requireJavaVersion>
                                 <requireMavenVersion>
-                                    <version>[3.9,)</version>
-                                    <message>Invalid Maven version. It should, at least, be 3.9</message>
+                                    <version>[3.8,)</version>
+                                    <message>Invalid Maven version. It should, at least, be 3.8</message>
                                 </requireMavenVersion>
                             </rules>
                         </configuration>

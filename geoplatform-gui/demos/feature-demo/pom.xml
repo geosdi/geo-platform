@@ -122,7 +122,7 @@
                         <goals>
                             <goal>clean</goal>
                             <!--<goal>compile</goal>-->
-                            <goal>generateAsync</goal>
+<!--                            <goal>generateAsync</goal>-->
                             <goal>test</goal>
                         </goals>
                     </execution>

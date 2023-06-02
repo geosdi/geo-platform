@@ -132,10 +132,11 @@
                 <executions>
                     <execution>
                         <id>attach-sources</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
+<phase>verify</phase>
+<goals>
+    <goal>jar-no-fork</goal>
+</goals>
+
                     </execution>
                 </executions>
             </plugin>

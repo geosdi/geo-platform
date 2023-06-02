@@ -83,10 +83,11 @@
                 <executions>
                     <execution>
                         <id>attach-sources</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
+<phase>verify</phase>
+<goals>
+    <goal>jar-no-fork</goal>
+</goals>
+
                     </execution>
                 </executions>
             </plugin>
@@ -106,7 +107,7 @@
                 <executions>
                     <execution>
                         <id>concatenate-dtds</id>
-                        <phase>generate-sources</phase>
+                        <phase>compile</phase>
                         <configuration>
                             <target>
                                 <concat destfile="src/main/resources/wms/1.1.1/wms_1_1_1.dtd">

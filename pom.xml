@@ -1071,7 +1071,7 @@
                     <inherited>true</inherited>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.2.0</version>
                     <configuration>
                         <attach>true</attach>
                         <classifier>sources</classifier>
@@ -1116,7 +1116,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.6.0</version>
                 </plugin>
 
                 <plugin>
@@ -1185,7 +1185,7 @@
 
                 <plugin>
                     <artifactId>maven-antrun-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>3.1.0</version>
                 </plugin>
 
                 <plugin>
@@ -1241,7 +1241,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.3.0</version>
                 <executions>
                     <execution>
                         <id>enforce-java</id>
@@ -1281,7 +1281,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.3.1</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
                 </configuration>
@@ -1309,7 +1309,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
-                <version>3.0.0-M1</version>
+                <version>3.1.1</version>
             </plugin>
 
             <plugin>
@@ -1503,7 +1503,7 @@
         <ubl-version>2.0</ubl-version>
         <jetty-version>11.0.15</jetty-version>
 
-        <postgresql-version>42.5.4</postgresql-version>
+        <postgresql-version>42.6.0</postgresql-version>
         <postgis-jdbc-version>2021.1.0</postgis-jdbc-version>
 
         <cglib-version>3.3.0</cglib-version>
@@ -1519,8 +1519,8 @@
         <jasypt-version>1.9.3</jasypt-version>
         <gson.version>2.9.0</gson.version>
 
-        <guava-gwt-version>31.1-jre</guava-gwt-version>
-        <guava-version>31.1-jre</guava-version>
+        <guava-gwt-version>32.0.0-jre</guava-gwt-version>
+        <guava-version>32.0.0-jre</guava-version>
         <guice-version>5.1.0</guice-version>
 
         <ehcache-version>2.10.9.2</ehcache-version>

@@ -67,6 +67,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import static org.apache.commons.fileupload2.disk.DiskFileItemFactory.builder;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
@@ -130,13 +132,15 @@ public class UploadServlet extends HttpServlet {
         // process only multipart requests
         if (JakartaServletFileUpload.isMultipartContent(req)) {
             // Create a factory for disk-based file items
-            DiskFileItemFactory factory = new DiskFileItemFactory();
+            DiskFileItemFactory factory = builder()
+                    .setBufferSize(1 * 1024 * 1024)
+                    .get();
             // Create a new file upload handler
            /*
              * Set the size threshold, above which content will be stored on
              * disk.
              */
-            factory.setSizeThreshold(1 * 1024 * 1024); //1 MB
+//            factory.setSizeThreshold(1 * 1024 * 1024); //1 MB
             JakartaServletFileUpload upload = new JakartaServletFileUpload(factory);
             File uploadedFile = null;
             // Parse the request
@@ -161,7 +165,7 @@ public class UploadServlet extends HttpServlet {
 
                         try {
                             uploadedFile = this.publisherFileUtils.createFileWithUniqueName(fileName);
-                            item.write(uploadedFile);
+                            item.write(uploadedFile.toPath());
                         } catch (Exception ex) {
                             logger.info("ERRORE : " + ex);
                             resp.sendError(

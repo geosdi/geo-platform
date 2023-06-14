@@ -110,8 +110,8 @@ public abstract class GPGeoserverFeatureTypesConnector extends GPGeoserverCovera
     @Override
     public GeoserverLoadWorkspaceFeatureTypesRequest loadWorkspaceFeatureTypesRequest() {
         switch (version) {
-            case V221x:
-            case V222x:
+            case V22x:
+            case V23x:
                 return new GPGeoserverLoadWorkspaceFeatureTypesRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -124,8 +124,8 @@ public abstract class GPGeoserverFeatureTypesConnector extends GPGeoserverCovera
     @Override
     public GeoserverLoadWorkspaceDatastoreFeatureTypesRequest loadWorkspaceDatastoreFeatureTypesRequest() {
         switch (version) {
-            case V221x:
-            case V222x:
+            case V22x:
+            case V23x:
                 return new GPGeoserverLoadWorkspaceDatastoreFeatureTypesRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -138,8 +138,8 @@ public abstract class GPGeoserverFeatureTypesConnector extends GPGeoserverCovera
     @Override
     public GeoserverCreateFeatureTypeRequest createFeatureTypeRequest() {
         switch (version) {
-            case V221x:
-            case V222x:
+            case V22x:
+            case V23x:
                 return new GPGeoserverCreateFeatureTypeRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -152,8 +152,8 @@ public abstract class GPGeoserverFeatureTypesConnector extends GPGeoserverCovera
     @Override
     public GeoserverDeleteFeatureTypeRequest deleteFeatureTypeRequest() {
         switch (version) {
-            case V221x:
-            case V222x:
+            case V22x:
+            case V23x:
                 return new GPGeoserverDeleteFeatureTypeRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -166,8 +166,8 @@ public abstract class GPGeoserverFeatureTypesConnector extends GPGeoserverCovera
     @Override
     public GeoserverLoadFeatureTypeWithUrlRequest loadFeatureTypeWithUrl() {
         switch (version) {
-            case V221x:
-            case V222x:
+            case V22x:
+            case V23x:
                 return new GPGeoserverLoadFeatureTypeWithUrlRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -180,8 +180,8 @@ public abstract class GPGeoserverFeatureTypesConnector extends GPGeoserverCovera
     @Override
     public GeoserverUpdateFeatureTypeRequest updateFeatureTypeRequest() {
         switch (version) {
-            case V221x:
-            case V222x:
+            case V22x:
+            case V23x:
                 return new GPGeoserverUpdateFeatureTypeRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

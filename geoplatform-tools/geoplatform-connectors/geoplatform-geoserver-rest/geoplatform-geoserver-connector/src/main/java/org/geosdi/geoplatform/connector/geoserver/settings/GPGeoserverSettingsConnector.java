@@ -110,8 +110,8 @@ public abstract class GPGeoserverSettingsConnector extends GPGeoserverWMSService
     @Override
     public GPGeoserverLoadGlobalSettingsRequest loadGeoserverGlobalSettingRequest() {
         switch (version) {
-            case V221x:
-            case V222x:
+            case V22x:
+            case V23x:
                 return new GPGeoserverLoadGlobalSettingsRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -124,8 +124,8 @@ public abstract class GPGeoserverSettingsConnector extends GPGeoserverWMSService
     @Override
     public GeoserverUpdateGlobalSettingsRequest updateGlobalSettingsRequest() {
         switch (version) {
-            case V221x:
-            case V222x:
+            case V22x:
+            case V23x:
                 return new GPGeoserverUpdateGlobalSettingsRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -138,8 +138,8 @@ public abstract class GPGeoserverSettingsConnector extends GPGeoserverWMSService
     @Override
     public GPGeoserverLoadContactSettingsRequest loadGeoserverContactSettingsRequest() {
         switch (version) {
-            case V221x:
-            case V222x:
+            case V22x:
+            case V23x:
                 return new GPGeoserverLoadContactSettingsRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

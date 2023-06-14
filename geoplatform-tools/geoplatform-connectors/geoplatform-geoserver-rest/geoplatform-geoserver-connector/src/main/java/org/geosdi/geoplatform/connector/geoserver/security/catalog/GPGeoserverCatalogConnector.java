@@ -113,8 +113,8 @@ public abstract class GPGeoserverCatalogConnector extends GPGeoserverGroupsConne
     @Override
     public GPGeoserverGetCatalogRequest loadCatalogRequest() {
         switch (version) {
-            case V221x:
-            case V222x:
+            case V22x:
+            case V23x:
                 return new GPGeoserverGetCatalogRequest(this, this.emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -127,8 +127,8 @@ public abstract class GPGeoserverCatalogConnector extends GPGeoserverGroupsConne
     @Override
     public GeoserverUpdateCatalogRequest updateCatalogRequest() {
         switch (version) {
-            case V221x:
-            case V222x:
+            case V22x:
+            case V23x:
                 return new GPGeoserverUpdateCatalogRequest(this, this.emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

@@ -42,9 +42,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.commons.fileupload2.FileItem;
-import org.apache.commons.fileupload2.FileUploadException;
-import org.apache.commons.fileupload2.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload2.core.FileItem;
+import org.apache.commons.fileupload2.core.FileUploadException;
+import org.apache.commons.fileupload2.core.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload2.jakarta.JakartaServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 import org.geosdi.geoplatform.core.model.GPAccount;
@@ -67,7 +67,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import static org.apache.commons.fileupload2.disk.DiskFileItemFactory.builder;
+import static org.apache.commons.fileupload2.core.disk.DiskFileItemFactory.builder;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

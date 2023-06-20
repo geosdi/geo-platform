@@ -90,7 +90,8 @@ public class GPProject implements Serializable {
     @Column
     private boolean shared = false;
     //
-    @Column(name = "project_description", columnDefinition = "Text")
+    @Column(name = "project_description")
+    @Lob
     private String description;
     //
     @Column(name = "image_project_path")

@@ -92,7 +92,8 @@ public class GeoPlatformServer implements Serializable {
     @Column
     private String title;
     //
-    @Column(name = "abstract", columnDefinition = "TEXT")
+    @Column(name = "abstract")
+    @Lob
     private String abstractServer;
     //
     @Column(name = "capability_type", nullable = false)

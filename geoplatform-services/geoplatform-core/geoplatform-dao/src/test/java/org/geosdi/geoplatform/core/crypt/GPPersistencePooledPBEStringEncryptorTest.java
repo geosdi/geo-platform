@@ -108,4 +108,12 @@ public class GPPersistencePooledPBEStringEncryptorTest {
         assertTrue("Persistence DB Username / Encrypted Name doesn't match", this.persistencePooledPBEStringEncryptor.decrypt(encryptedValue).equals(value));
         logger.info("@@@@@@@@@@@@@@PERSISTENCE_DB_USERNAME_ENCRYPTED_VALUE : {}\n\n", encryptedValue);
     }
+
+    @Test
+    public void f_encryptedValueDBUrlTest() throws Exception {
+        String value = "jdbc:hsqldb:mem:gp;close_result=true;sql.syntax_pgs=true";
+        String encryptedValue = this.persistencePooledPBEStringEncryptor.encrypt(value);
+        assertTrue("Persistence DB Url / Encrypted Name doesn't match", this.persistencePooledPBEStringEncryptor.decrypt(encryptedValue).equals(value));
+        logger.info("@@@@@@@@@@@@@@PERSISTENCE_DB_URL_ENCRYPTED_VALUE : {}\n\n", encryptedValue);
+    }
 }

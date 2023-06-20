@@ -75,7 +75,7 @@ public class GPOrganization implements Serializable {
     @Column(nullable = false, unique = true)
     private String name;
     //
-    @Column(columnDefinition = "TEXT")
+    @Lob
     private String description;
     //
     @Column

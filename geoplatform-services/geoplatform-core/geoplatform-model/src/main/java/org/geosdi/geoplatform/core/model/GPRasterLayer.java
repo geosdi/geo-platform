@@ -76,7 +76,8 @@ public class GPRasterLayer extends GPLayer implements IGPRasterLayer {
     @Column
     private float opacity = 1.0f;
     // The character , separated list of styles
-    @Column(length = 500, columnDefinition = "TEXT")
+    @Column
+    @Lob
     private String styles;
     //
     @Getter

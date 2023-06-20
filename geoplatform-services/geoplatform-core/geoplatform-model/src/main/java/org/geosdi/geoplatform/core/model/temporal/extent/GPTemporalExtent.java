@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.core.model.temporal.extent;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.Lob;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import lombok.*;
 
@@ -62,6 +63,7 @@ public class GPTemporalExtent implements IGPTemporalExtent {
     private String name;
     @Column(name = "default_extent")
     private String defaultExtent;
-    @Column(name = "extent_value", columnDefinition = "TEXT")
+    @Column(name = "extent_value")
+    @Lob
     private String value;
 }

@@ -39,12 +39,13 @@ import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.core.acl.AclEntry;
 import org.geosdi.geoplatform.core.acl.dao.AclEntryDAO;
 import org.geosdi.geoplatform.core.model.GPAccount;
-import org.geosdi.geoplatform.core.model.GPCapabilityType;
 import org.geosdi.geoplatform.core.model.GPLayer;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ActiveProfiles;
@@ -53,6 +54,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
+import static org.geosdi.geoplatform.core.model.GPCapabilityType.CSW;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -62,6 +64,7 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 @ActiveProfiles(value = {"jpa"})
+@FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
 public class GeoPlatformCoreDaoTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GeoPlatformCoreDaoTest.class);
@@ -93,59 +96,59 @@ public class GeoPlatformCoreDaoTest {
     }
 
     @Test
-    public void findAllAccountsTest() throws Exception {
+    public void a_findAllAccountsTest() throws Exception {
         List<GPAccount> accounts = this.accountDAO.findAll();
         logger.info("############################FOUNDS {} - Accounts.", accounts.size());
     }
 
     @Test
-    public void findByOrganizationNameTest() throws Exception {
+    public void b_findByOrganizationNameTest() throws Exception {
         List<GPAccount> accounts = this.accountDAO.findByOrganization("geoSDI");
         logger.info("###########################FOUNDS : {} - Accounts.", accounts.size());
     }
 
     @Test
-    public void findAccountByUserNameTest() throws Exception {
+    public void c_findAccountByUserNameTest() throws Exception {
         logger.info("################################FOUND : {}\n", this.accountDAO.findByUsername("admin"));
 
     }
 
     @Test
-    public void findAccountByEmailTest() throws Exception {
+    public void d_findAccountByEmailTest() throws Exception {
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@FOUND : {}\n", this.accountDAO.findByEmail("admin@geosdi.org"));
     }
 
     @Test
-    public void countAccountsTest() throws Exception {
+    public void e_countAccountsTest() throws Exception {
         logger.info("###############################FOUNDS : {}\n", this.accountDAO.countAccounts("%user%"));
     }
 
     @Test
-    public void findLayersByProjectIDTest() throws Exception {
+    public void f_findLayersByProjectIDTest() throws Exception {
         List<String> dataSources = this.layerDAO.findDistinctDataSourceByProjectId(1l);
         logger.info("###############################LAYERS_DATA_SOURCES : {}\n", dataSources);
     }
 
     @Test
-    public void findLayerByNameTest() throws Exception {
+    public void g_findLayerByNameTest() throws Exception {
         GPLayer layer = this.layerDAO.findByLayerName("test");
         Assert.assertNull(layer);
         logger.info("{}\n", this.layerDAO.persistCheckStatusLayer(1l, Boolean.TRUE));
     }
 
     @Test
-    public void findShortByAccountNaturalIDTest() throws Exception {
+    public void h_findShortByAccountNaturalIDTest() throws Exception {
         logger.info("###########################{}\n", this.authorityDAO.findShortByAccountNaturalID("admin"));
     }
 
     @Test
-    public void countAccoutProjectTest() throws Exception {
+    public void i_countAccoutProjectTest() throws Exception {
         logger.info("########################ACCOUNT_PROJECTS_FOUND : {}\n", this.accountProjectDAO.count(2l,
                 "%user%"));
     }
 
     @Test
-    public void searchPagebleUsersByOrganizationTest() throws Exception {
+    public void l_searchPagebleUsersByOrganizationTest() throws Exception {
         logger.info("{}\n", this.accountDAO.searchPagebleUsersByOrganization(0, 4, "geoSDI",
                 52l, null).size());
         logger.info("{}\n", this.accountDAO.searchPagebleUsersByOrganization(2, 4, "geoSDI",
@@ -153,17 +156,17 @@ public class GeoPlatformCoreDaoTest {
     }
 
     @Test
-    public void countAccountByOrganizationTest() throws Exception {
+    public void m_countAccountByOrganizationTest() throws Exception {
         logger.info("{}\n", this.accountDAO.countUsers("geoSDI", null));
     }
 
     @Test
-    public void searchRootFoldersTest() throws Exception {
+    public void n_searchRootFoldersTest() throws Exception {
         logger.info("#########################ROOT_FOLDERS : {}\n", this.folderDAO.searchSubFoders(54l));
     }
 
     @Test
-    public void findByObjectIdentityTest() throws Exception {
+    public void o_findByObjectIdentityTest() throws Exception {
         List<AclEntry> entries = this.entryDAO.findByObjectIdentity(104l);
         for (AclEntry entry : entries) {
             logger.info("{}\n", entry.getAceOrder());
@@ -171,8 +174,7 @@ public class GeoPlatformCoreDaoTest {
     }
 
     @Test
-    public void searchCSWServersTest() throws Exception {
-        logger.info("{}\n", this.serverDAO.searchPagebleServers(0, 10, "geoSDI_ws_test",
-                GPCapabilityType.CSW, "%test%"));
+    public void p_searchCSWServersTest() throws Exception {
+        logger.info("{}\n", this.serverDAO.searchPagebleServers(0, 10, "geoSDI_ws_test", CSW, "%test%"));
     }
 }

@@ -323,7 +323,7 @@ class GPAccountDAOImpl extends GPAbstractJpaDAO<GPAccount, Long> implements GPAc
             List<Predicate> predicates = newArrayList();
             predicates.add(builder.equal(root.join("organization").get("name"), organizationName));
             predicates.add(builder.isNotNull(userRoot.get("name")));
-            if ((nameLike != null) && !(nameLike.isEmpty())) {
+            if ((nameLike != null) && !(nameLike.trim().isEmpty())) {
                 predicates.add(builder.like(builder.lower(userRoot.get("name")), nameLike.toLowerCase()));
             }
             criteriaQuery.where(predicates.stream().toArray(size -> new Predicate[size]));

@@ -94,13 +94,16 @@ public class GSResource implements Serializable {
     @Column(name = "default_style")
     private String defaultStyle;
     //
-    @Column(name = "cql_filter_read", columnDefinition = "text")
+    @Column(name = "cql_filter_read")
+    @Lob
     private String cqlFilterRead;
     //
-    @Column(name = "cql_filter_write", columnDefinition = "text")
+    @Column(name = "cql_filter_write")
+    @Lob
     private String cqlFilterWrite;
     //
-    @Column(name = "attributes", columnDefinition = "text")
+    @Column(name = "attributes")
+    @Lob
     private String attributes;
     //
     @Column(name = "cluster_node")

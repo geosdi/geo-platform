@@ -96,7 +96,8 @@ public abstract class GPLayer implements IGPLayer {
     @Column(name = "alias_name")
     private String alias;
     //
-    @Column(name = "abstract", columnDefinition = "TEXT")
+    @Column(name = "abstract")
+    @Lob
     private String abstractText;
     //
     @Column(name = "url_server")
@@ -105,10 +106,12 @@ public abstract class GPLayer implements IGPLayer {
     @Column
     private String srs;
     //
-    @Column(name = "cql_filter", columnDefinition = "TEXT")
+    @Column(name = "cql_filter")
+    @Lob
     private String cqlFilter;
     //
-    @Column(name = "time_filter", columnDefinition = "TEXT")
+    @Column(name = "time_filter")
+    @Lob
     private String timeFilter;
     //
     @Embedded

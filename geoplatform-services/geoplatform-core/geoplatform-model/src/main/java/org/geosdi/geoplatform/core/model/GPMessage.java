@@ -91,7 +91,7 @@ public class GPMessage implements Serializable {
     @Column(length = 100)
     private String subject;
     //
-    @Column(columnDefinition = "TEXT")
+    @Lob
     private String text;
     //
     @Column(name = "is_read")

@@ -42,8 +42,7 @@ import org.geosdi.geoplatform.experimental.el.query.param.type.GPElasticSearchQu
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPElasticSearchQueryParamValue extends GPElasticSearchQueryExtraParamValue
-        implements IGPElasticSearchQueryParamValue {
+public class GPElasticSearchQueryParamValue extends GPElasticSearchQueryExtraParamValue implements IGPElasticSearchQueryParamValue {
 
     private static final long serialVersionUID = 7790265320855430364L;
     //

@@ -37,8 +37,8 @@ package org.geosdi.geoplatform.experimental.el.query.model.adapter;
 
 import org.geosdi.geoplatform.experimental.el.query.param.extra.IGPElasticSearchQueryExtraParamValue;
 import org.geosdi.geoplatform.experimental.el.query.param.key.IGPElasticSearchQueryParamKey;
-import org.geosdi.geoplatform.response.collection.GenericMapAdapter;
-import org.geosdi.geoplatform.response.collection.GenericMapType;
+import org.geosdi.geoplatform.response.collection.jakarta.GenericJakartaMapAdapter;
+import org.geosdi.geoplatform.response.collection.jakarta.GenericJakartaMapType;
 
 import java.util.Map;
 
@@ -46,16 +46,25 @@ import java.util.Map;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class QueryExtraParametersAdapter extends GenericMapAdapter<IGPElasticSearchQueryParamKey,
-        IGPElasticSearchQueryExtraParamValue> {
+public class QueryExtraParametersAdapter extends GenericJakartaMapAdapter<IGPElasticSearchQueryParamKey, IGPElasticSearchQueryExtraParamValue> {
 
+    /**
+     * @param v
+     * @return {@link Map<IGPElasticSearchQueryParamKey, IGPElasticSearchQueryExtraParamValue>}
+     * @throws Exception
+     */
     @Override
-    public Map<IGPElasticSearchQueryParamKey, IGPElasticSearchQueryExtraParamValue> unmarshal(GenericMapType<IGPElasticSearchQueryParamKey, IGPElasticSearchQueryExtraParamValue> v) throws Exception {
+    public Map<IGPElasticSearchQueryParamKey, IGPElasticSearchQueryExtraParamValue> unmarshal(GenericJakartaMapType<IGPElasticSearchQueryParamKey, IGPElasticSearchQueryExtraParamValue> v) throws Exception {
         return super.unmarshal(v);
     }
 
+    /**
+     * @param v
+     * @return {@link GenericJakartaMapType<IGPElasticSearchQueryParamKey, IGPElasticSearchQueryExtraParamValue>}
+     * @throws Exception
+     */
     @Override
-    public GenericMapType<IGPElasticSearchQueryParamKey, IGPElasticSearchQueryExtraParamValue> marshal(Map<IGPElasticSearchQueryParamKey, IGPElasticSearchQueryExtraParamValue> v) throws Exception {
+    public GenericJakartaMapType<IGPElasticSearchQueryParamKey, IGPElasticSearchQueryExtraParamValue> marshal(Map<IGPElasticSearchQueryParamKey, IGPElasticSearchQueryExtraParamValue> v) throws Exception {
         return super.marshal(v);
     }
 }

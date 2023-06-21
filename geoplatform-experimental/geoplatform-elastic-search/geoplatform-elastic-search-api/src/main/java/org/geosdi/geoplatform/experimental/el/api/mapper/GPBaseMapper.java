@@ -36,13 +36,13 @@
 package org.geosdi.geoplatform.experimental.el.api.mapper;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.geosdi.geoplatform.support.jackson.mapper.GPBaseJacksonMapper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import static javax.annotation.meta.When.NEVER;
 import static org.springframework.core.annotation.AnnotationUtils.findAnnotation;

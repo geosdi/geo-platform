@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.experimental.el.query.rest.response;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.experimental.el.query.model.GPElasticSearchQuery;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 /**

@@ -54,6 +54,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
 
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.WRITE_DATES_AS_TIMESTAMPS_DISABLE;
 
 /**
@@ -64,7 +65,7 @@ public class GPElasticSearchQueryExecutionRequestTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPElasticSearchQueryExecutionRequestTest.class);
     //
-    private static final JacksonSupport jacksonSupport = new GPJacksonSupport()
+    private static final JacksonSupport jacksonSupport = new GPJacksonSupport(JAKARTA)
             .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)
             .registerModule(new JodaModule())
             .configure(GPJsonIncludeFeature.NON_NULL);
@@ -94,7 +95,7 @@ public class GPElasticSearchQueryExecutionRequestTest {
     @Test
     public void writeGPElasticSearchQueryExecutorStoreAsStringTest() throws Exception {
         GPElasticSearchQueryExecutorStore<GPElasticSearchQuery> queryExecutorStore = new GPElasticSearchQueryExecutorStore<>();
-        queryExecutorStore.setTotal(10l);
+        queryExecutorStore.setTotal(10L);
         queryExecutorStore.setExecutionResults(GPElasticSearchQueryMapperTest.createMockGPElasticSearchQuery(10));
         logger.info("#####################################GP_ELASTICSEARCH_QUERY_STORE : \n\n{}\n\n",
                 jacksonSupport.getDefaultMapper().writeValueAsString(queryExecutorStore));
@@ -103,7 +104,7 @@ public class GPElasticSearchQueryExecutionRequestTest {
     @Test
     public void writeGPElasticSearchQueryExecutorStoreAsFileTest() throws Exception {
         GPElasticSearchQueryExecutorStore<GPElasticSearchQuery> queryExecutorStore = new GPElasticSearchQueryExecutorStore<>();
-        queryExecutorStore.setTotal(10l);
+        queryExecutorStore.setTotal(10L);
         queryExecutorStore.setExecutionResults(GPElasticSearchQueryMapperTest.createMockGPElasticSearchQuery(10));
         jacksonSupport.getDefaultMapper().writeValue(new File("./target/GPElasticSearchQueryExecutorStore.json"),
                 queryExecutorStore);
@@ -117,10 +118,10 @@ public class GPElasticSearchQueryExecutionRequestTest {
                 super.setQueryTemplateParameters(new HashMap<String, Object>() {
 
                     {
-                        super.put("key1", new Integer(1));
+                        super.put("key1", 1);
                         super.put("key2", "Key_2");
                         super.put("key3", new Date());
-                        super.put("key4", new Double(3.4));
+                        super.put("key4", 3.4);
                     }
                 });
             }

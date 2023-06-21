@@ -38,33 +38,53 @@ package org.geosdi.geoplatform.experimental.el.query.param.type;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Optional;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public enum GPElasticSearchQueryValueType {
-    NUMBER("Number"), TEMPORAL("Temporal"), STRING("String");
+
+    NUMBER("Number"),
+    TEMPORAL("Temporal"),
+    STRING("String");
 
     private final String value;
 
-    GPElasticSearchQueryValueType(String theValue) {
+    /**
+     * @param theValue
+     */
+    GPElasticSearchQueryValueType(@Nonnull(when = NEVER) String theValue) {
+        checkArgument((theValue != null) && !(theValue.trim().isEmpty()), "The Parameter value must not be null or an empty string.");
         this.value = theValue;
     }
 
+    /**
+     * @return {@link String}
+     */
     @JsonValue
     public String getValue() {
         return this.value;
     }
 
+    /**
+     * @param value
+     * @return {@link GPElasticSearchQueryValueType}
+     */
     @JsonCreator
-    public static GPElasticSearchQueryValueType fromValue(String value) {
+    public static GPElasticSearchQueryValueType fromValue(@Nullable String value) {
         Optional<GPElasticSearchQueryValueType> optionalQueryValueType = Arrays
                 .stream(GPElasticSearchQueryValueType.values())
-                .filter(queryValueType -> queryValueType.getValue().equalsIgnoreCase(value))
+                .filter(queryValueType -> ((value != null) && !(value.trim().isEmpty())) ? queryValueType.getValue().equalsIgnoreCase(value) : FALSE)
                 .findFirst();
-        return ((optionalQueryValueType != null) ? optionalQueryValueType.get() : null);
+        return optionalQueryValueType.orElse(null);
     }
 }

@@ -37,6 +37,11 @@ package org.geosdi.geoplatform.experimental.el.query.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.collect.Maps;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.geosdi.geoplatform.experimental.el.index.GPBaseIndexCreator.GPIndexSettings;
 import org.geosdi.geoplatform.experimental.el.index.settings.GPBaseIndexSettings;
 import org.geosdi.geoplatform.experimental.el.query.model.adapter.QueryExtraParametersAdapter;
@@ -48,11 +53,6 @@ import org.geosdi.geoplatform.experimental.el.query.param.value.GPElasticSearchQ
 import org.geosdi.geoplatform.experimental.el.query.param.value.IGPElasticSearchQueryParamValue;
 import org.joda.time.DateTime;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Map;
 
 /**

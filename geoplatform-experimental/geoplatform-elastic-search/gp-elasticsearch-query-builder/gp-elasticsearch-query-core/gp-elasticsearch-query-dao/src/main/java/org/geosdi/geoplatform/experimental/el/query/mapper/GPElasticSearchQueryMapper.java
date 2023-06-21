@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.experimental.el.query.model.GPElasticSearchQuery;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature;
 
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.WRITE_DATES_AS_TIMESTAMPS_DISABLE;
 
 /**
@@ -50,7 +51,7 @@ import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEn
 public class GPElasticSearchQueryMapper<Q extends GPElasticSearchQuery> extends GPBaseMapper<Q> {
 
     public GPElasticSearchQueryMapper(Class<Q> theQueryClass) {
-        super(theQueryClass, new GPJacksonSupport()
+        super(theQueryClass, new GPJacksonSupport(JAKARTA)
                 .registerModule(new JodaModule())
                 .configure(WRITE_DATES_AS_TIMESTAMPS_DISABLE)
                 .configure(GPJsonIncludeFeature.NON_NULL));

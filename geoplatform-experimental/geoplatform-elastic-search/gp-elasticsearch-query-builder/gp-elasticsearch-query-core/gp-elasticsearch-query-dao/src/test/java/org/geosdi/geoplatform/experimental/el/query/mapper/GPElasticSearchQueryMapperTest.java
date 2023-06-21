@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.experimental.el.query.mapper;
 
-import com.google.common.base.Preconditions;
 import org.geosdi.geoplatform.experimental.el.index.settings.GPBaseIndexSettings;
 import org.geosdi.geoplatform.experimental.el.query.model.GPElasticSearchQuery;
 import org.geosdi.geoplatform.experimental.el.query.param.extra.GPElasticSearchQueryExtraParamValue;
@@ -49,7 +48,9 @@ import org.geosdi.geoplatform.experimental.el.query.task.function.GPElasticSearc
 import org.geosdi.geoplatform.experimental.el.query.task.function.GPElasticSearchQueryParamValueFunction;
 import org.geosdi.geoplatform.experimental.el.query.task.logger.GPElasticSearchQueryTaskLoggerPrinter;
 import org.joda.time.DateTime;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -59,15 +60,23 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.StreamSupport;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.io.File.separator;
+import static java.lang.Boolean.FALSE;
+import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toMap;
+import static java.util.stream.IntStream.iterate;
+import static java.util.stream.Stream.of;
+import static java.util.stream.StreamSupport.stream;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
 public class GPElasticSearchQueryMapperTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPElasticSearchQueryMapperTest.class);
@@ -75,36 +84,37 @@ public class GPElasticSearchQueryMapperTest {
     private final GPElasticSearchQueryMapper queryMapper = new GPElasticSearchQueryMapper<>(GPElasticSearchQuery.class);
 
     @Test
-    public void writeGPElasticSearchQueryAsStringTest() throws Exception {
+    public void a_writeGPElasticSearchQueryAsStringTest() throws Exception {
         logger.info("##########################GP_ELASTIC_SEARCH_QUERY_AS_STRING : \n{}\n",
                 this.queryMapper.writeAsString(createMockGPElasticSearchQuery()));
     }
 
     @Test
-    public void writeGPElasticSearchQueryAsFileTest() throws Exception {
-        this.queryMapper.write(new File("./target/GPElasticSearchQuery.json"), createMockGPElasticSearchQuery());
+    public void b_writeGPElasticSearchQueryAsFileTest() throws Exception {
+        this.queryMapper.write(new File(of(new File(".").getCanonicalPath(), "target", "GPElasticSearchQuery")
+                .collect(joining(separator, "", ".json"))), createMockGPElasticSearchQuery());
     }
 
     @Test
-    public void readGPElasticSearchQueryFromFileTest() throws Exception {
+    public void c_readGPElasticSearchQueryFromFileTest() throws Exception {
         logger.info("@@@@@@@@@@@@@@@@Mapper : {}, read from File : {}\n\n",
                 queryMapper, queryMapper.read(new ClassPathResource("query/GPElasticSearchQuery.json").getFile()));
     }
 
     @Test
-    public void printGPElasticSearchQueryFileTest() throws Exception {
+    public void d_printGPElasticSearchQueryFileTest() throws Exception {
         AtomicInteger counter = new AtomicInteger(0);
-        StreamSupport.stream(createMockGPElasticSearchQuery(20).spliterator(), Boolean.FALSE)
+        stream(createMockGPElasticSearchQuery(20).spliterator(), FALSE)
                 .forEach(query -> new GPElasticSearchQueryTaskFilePrinter(query, this.queryMapper,
                         counter, "GPElasticSearchQuery").start());
-        Thread.sleep(1000);
+        Thread.sleep(500);
         logger.info(":::::::::::::::::::::::::::::PRINTED : {} GPElasticSearchQuery.\n", counter.get());
     }
 
     @Test
-    public void printGPElasticSearchQueryLoggerTest() throws Exception {
+    public void e_printGPElasticSearchQueryLoggerTest() throws Exception {
         AtomicInteger counter = new AtomicInteger(0);
-        StreamSupport.stream(createMockGPElasticSearchQuery(20).spliterator(), Boolean.FALSE)
+        stream(createMockGPElasticSearchQuery(20).spliterator(), FALSE)
                 .forEach(query -> new GPElasticSearchQueryTaskLoggerPrinter(query, this.queryMapper, counter).start());
         Thread.sleep(500);
         logger.info(":::::::::::::::::::::::::::::PRINTED : {} GPElasticSearchQuery.\n", counter.get());
@@ -126,34 +136,42 @@ public class GPElasticSearchQueryMapperTest {
         };
     }
 
+    /**
+     * @param queryNumbers
+     * @return {@link Collection<GPElasticSearchQuery>}
+     */
     public static Collection<GPElasticSearchQuery> createMockGPElasticSearchQuery(int queryNumbers) {
-        Preconditions.checkArgument((queryNumbers > 0), "The Number of Query must " +
-                "be greather than 0.");
-        return IntStream.iterate(0, n -> n + 1)
+        checkArgument((queryNumbers > 0), "The Number of Query must be greather than 0.");
+        return iterate(0, n -> n + 1)
                 .limit(queryNumbers)
                 .boxed()
                 .map(new GPElasticSearchQueryFunction())
                 .collect(Collectors.toList());
     }
 
+    /**
+     * @param queryParametersNumber
+     * @return {@link Map<IGPElasticSearchQueryParamKey, IGPElasticSearchQueryParamValue>}
+     */
     public static Map<IGPElasticSearchQueryParamKey, IGPElasticSearchQueryParamValue> createQueryParameters(int queryParametersNumber) {
-        Preconditions.checkArgument((queryParametersNumber > 0), "The Number of Query Parameters must " +
-                "be greather than 0.");
-        return IntStream.iterate(0, n -> n + 1)
+        checkArgument((queryParametersNumber > 0), "The Number of Query Parameters must be greather than 0.");
+        return iterate(0, n -> n + 1)
                 .limit(queryParametersNumber)
                 .boxed()
                 .map(new GPElasticSearchQueryParamValueFunction())
-                .collect(Collectors.toMap(GPElasticSearchQueryParamValue::getKeyValue, Function.identity()));
+                .collect(toMap(GPElasticSearchQueryParamValue::getKeyValue, identity()));
     }
 
+    /**
+     * @param queryParametersNumber
+     * @return {@link Map<IGPElasticSearchQueryParamKey, IGPElasticSearchQueryParamValue>}
+     */
     public static Map<IGPElasticSearchQueryParamKey, IGPElasticSearchQueryExtraParamValue> createQueryExtraParameters(int queryParametersNumber) {
-        Preconditions.checkArgument((queryParametersNumber > 0), "The Number of Query Parameters must " +
-                "be greather than 0.");
-        return IntStream.iterate(0, n -> n + 1)
+        checkArgument((queryParametersNumber > 0), "The Number of Query Parameters must be greather than 0.");
+        return iterate(0, n -> n + 1)
                 .limit(queryParametersNumber)
                 .boxed()
                 .map(new GPElasticSearchQueryExtraParamFunction())
-                .collect(Collectors.toMap(GPElasticSearchQueryExtraParamValue::getKeyValue,
-                        Function.identity()));
+                .collect(toMap(GPElasticSearchQueryExtraParamValue::getKeyValue, identity()));
     }
 }

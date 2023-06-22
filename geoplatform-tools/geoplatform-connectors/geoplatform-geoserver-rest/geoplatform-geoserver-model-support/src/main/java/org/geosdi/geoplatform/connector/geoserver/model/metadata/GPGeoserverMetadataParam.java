@@ -84,6 +84,6 @@ public class GPGeoserverMetadataParam implements IGPGeoserverMetadataParam {
     @XmlValue
     @Override
     public String getValue() {
-        return this.value;
+        return this.value != null ? this.value : "null";
     }
 }

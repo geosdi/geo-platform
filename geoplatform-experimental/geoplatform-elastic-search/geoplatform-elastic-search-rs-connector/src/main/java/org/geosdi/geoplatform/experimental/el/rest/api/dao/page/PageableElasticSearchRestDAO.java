@@ -44,6 +44,7 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
 import org.geosdi.geoplatform.experimental.el.dao.PageResult;
+import org.geosdi.geoplatform.experimental.el.dao.store.PageStore;
 import org.geosdi.geoplatform.experimental.el.rest.api.dao.index.ElasticSearchRestIndexDAO;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 
@@ -219,8 +220,7 @@ public abstract class PageableElasticSearchRestDAO<D extends Document> extends E
      * @throws Exception
      */
     @Override
-    public <P extends Page, V extends Document> IPageResult<V> find(@Nonnull(when = NEVER) P page, String[] includeFields,
-            String[] excludeFields, @Nonnull(when = NEVER) Class<V> classe) throws Exception {
+    public <P extends Page, V extends Document> IPageResult<V> find(@Nonnull(when = NEVER) P page, String[] includeFields, String[] excludeFields, @Nonnull(when = NEVER) Class<V> classe) throws Exception {
         checkArgument((page != null), "Page must not be null.");
         checkArgument(classe != null, "The Parameter subType must not be null.");
         checkNotNull(classe, "The Parameter classe must not be null.");
@@ -238,7 +238,37 @@ public abstract class PageableElasticSearchRestDAO<D extends Document> extends E
         return new PageResult<V>(total, of(searchResponse.getHits().getHits())
                 .filter(Objects::nonNull)
                 .map(searchHit -> this.readDocument(searchHit, classe))
-                .filter(s -> s != null)
+                .filter(Objects::nonNull)
+                .collect(toList()));
+    }
+
+    /**
+     * @param page
+     * @param includeFields
+     * @param excludeFields
+     * @param classe
+     * @return {@link IPageResult<V>}
+     * @throws Exception
+     */
+    @Override
+    public <P extends Page, V> PageStore<V> findAndMappingWithClass(@Nonnull(when = NEVER) P page, String[] includeFields, String[] excludeFields, @Nonnull(when = NEVER) Class<V> classe) throws Exception {
+        checkArgument((page != null), "Page must not be null.");
+        checkNotNull(classe, "The Parameter classe must not be null.");
+        SearchRequest searchRequest = this.prepareSearchRequest();
+        SearchSourceBuilder searchSourceBuilder = page.buildPage(new SearchSourceBuilder());
+        searchSourceBuilder.fetchSource(includeFields, excludeFields);
+        searchRequest.source(searchSourceBuilder);
+        logger.trace("#########################Builder : {}\n\n", searchSourceBuilder.toString());
+        SearchResponse searchResponse = this.elasticSearchRestHighLevelClient.search(searchRequest, DEFAULT);
+        if (searchResponse.status() != OK) {
+            throw new IllegalStateException("Problem in Search : " + searchResponse.status());
+        }
+        Long total = searchResponse.getHits().getTotalHits().value;
+        logger.debug("###################TOTAL HITS FOUND : {} .\n\n", total);
+        return new PageStore<V>(total, of(searchResponse.getHits().getHits())
+                .filter(Objects::nonNull)
+                .map(searchHit -> this.read(searchHit, classe))
+                .filter(Objects::nonNull)
                 .collect(toList()));
     }
 

@@ -41,6 +41,7 @@ import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
 import org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO;
+import org.geosdi.geoplatform.experimental.el.dao.store.PageStore;
 import org.geosdi.geoplatform.experimental.el.rest.api.dao.index.GPElasticSearchRestIndexDAO;
 
 import javax.annotation.Nonnull;
@@ -107,8 +108,18 @@ public interface GPPageableElasticSearchRestDAO<D extends Document> extends GPPa
      * @throws Exception
      */
     @Override
-    <P extends Page, V extends Document> IPageResult<V> find(@Nonnull(when = NEVER) P page, String[] includeFields,
-            String[] excludeFields, @Nonnull(when = NEVER) Class<V> classe) throws Exception;
+    <P extends Page, V extends Document> IPageResult<V> find(@Nonnull(when = NEVER) P page, String[] includeFields, String[] excludeFields, @Nonnull(when = NEVER) Class<V> classe) throws Exception;
+
+    /**
+     * @param page
+     * @param includeFields
+     * @param excludeFields
+     * @param classe
+     * @return {@link PageStore<V>}
+     * @throws Exception
+     */
+    @Override
+    <P extends Page, V> PageStore<V> findAndMappingWithClass(@Nonnull(when = NEVER) P page, String[] includeFields, String[] excludeFields, @Nonnull(when = NEVER) Class<V> classe) throws Exception;
 
     /**
      * @param page

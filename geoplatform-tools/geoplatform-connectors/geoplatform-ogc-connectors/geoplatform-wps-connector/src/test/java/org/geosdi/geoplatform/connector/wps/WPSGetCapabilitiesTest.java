@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.connector.wps;
 
 import org.geosdi.geoplatform.connector.server.request.WPSGetCapabilitiesRequest;
 import org.geosdi.geoplatform.xml.wps.v100.WPSCapabilitiesType;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.BufferedWriter;
@@ -50,6 +51,7 @@ import static java.nio.file.Paths.get;
  */
 public class WPSGetCapabilitiesTest extends WPSTestConfigurator {
 
+    @Ignore(value = "Server id DOWN")
     @Test
     public void wpsGetCapabilitiesV100Test() throws Exception {
         WPSGetCapabilitiesRequest<WPSCapabilitiesType> request = wpsServerConnector.createGetCapabilitiesRequest();
@@ -59,7 +61,8 @@ public class WPSGetCapabilitiesTest extends WPSTestConfigurator {
             writer.write(responseAsString);
         }
     }
-    
+
+    @Ignore(value = "Server id DOWN")
     @Test
     public void wpsHttpsGetCapabilitiesV100Test() throws Exception {
         System.setProperty("jsse.enableSNIExtension", "false");

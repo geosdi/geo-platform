@@ -112,8 +112,8 @@ public abstract class GPGeoserverServicesConnector extends GPGeoserverFeatureTyp
     @Override
     public GPGeoserverLoadAclServicesRequest loadAclServices() {
         switch (version) {
-            case V221x:
-            case V222x:
+            case V22x:
+            case V23x:
                 return new GPGeoserverLoadAclServicesRequest(this, emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -126,8 +126,8 @@ public abstract class GPGeoserverServicesConnector extends GPGeoserverFeatureTyp
     @Override
     public GPGeoserverCreateAclServicesRequest createAclServices() {
         switch (version) {
-            case V221x:
-            case V222x:
+            case V22x:
+            case V23x:
                 return new GPGeoserverCreateAclServicesRequest(this, emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -140,8 +140,8 @@ public abstract class GPGeoserverServicesConnector extends GPGeoserverFeatureTyp
     @Override
     public GPGeoserverUpdateAclServicesRequest updateAclServices() {
         switch (version) {
-            case V221x:
-            case V222x:
+            case V22x:
+            case V23x:
                 return new GPGeoserverUpdateAclServicesRequest(this, emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -154,8 +154,8 @@ public abstract class GPGeoserverServicesConnector extends GPGeoserverFeatureTyp
     @Override
     public GPGeoserverDeleteAclServicesByRuleRequest deleteAclServicesByRule() {
         switch (version) {
-            case V221x:
-            case V222x:
+            case V22x:
+            case V23x:
                 return new GPGeoserverDeleteAclServicesByRuleRequest(this, emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

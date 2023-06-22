@@ -109,8 +109,8 @@ public abstract class GPGeoserverFontsConnector extends GPGeoserverDimensionConn
     @Override
     public GeoserverFontsRequest createGeoserverFontsRequest() {
         switch (version) {
-            case V221x:
-            case V222x:
+            case V22x:
+            case V23x:
                 return new GPGeoserverFontsRequest(this, this.emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

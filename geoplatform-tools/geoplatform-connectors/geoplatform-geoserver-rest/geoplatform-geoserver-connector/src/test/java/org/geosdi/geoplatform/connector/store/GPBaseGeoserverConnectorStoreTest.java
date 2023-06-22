@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 
-import static org.geosdi.geoplatform.connector.GeoserverVersion.V222x;
+import static org.geosdi.geoplatform.connector.GeoserverVersion.V23x;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStoreBuilder.geoserverConnectorBuilder;
 
@@ -65,14 +65,14 @@ public abstract class GPBaseGeoserverConnectorStoreTest {
     public static void beforeClass() throws Exception {
         geoserverConnectorStoreV2_22_x = geoserverConnectorBuilder()
                 .withServerUrl(new URL(geoserverURLV2_22_x))
-                .withVersion(V222x.getVersion())
+                .withVersion(V23x.getVersion())
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(150)
                         .withDefaultMaxPerRoute(80)
                         .withMaxRedirect(20)
                         .build())
                 .withClientSecurity(new DigestPreemptiveSecurityConnector("admin", "geoserver"))
-                .withVersion(V222x.getVersion())
+                .withVersion(V23x.getVersion())
                 .build();
     }
 

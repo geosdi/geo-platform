@@ -69,6 +69,11 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-acl</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>jakarta.activation</groupId>
+            <artifactId>jakarta.activation-api</artifactId>
+        </dependency>
         
         <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>

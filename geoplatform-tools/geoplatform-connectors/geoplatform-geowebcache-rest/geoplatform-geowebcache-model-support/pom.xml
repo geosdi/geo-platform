@@ -17,7 +17,6 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <geoplatform-version>1.9-SNAPSHOT</geoplatform-version>
   </properties>
 
   <dependencies>
@@ -37,7 +36,7 @@
       <dependency>
           <groupId>org.geosdi</groupId>
           <artifactId>geoplatform-xml-utilities</artifactId>
-          <version>${geoplatform-version}</version>
+        <version>${project.version}</version>
       </dependency>
 
       <!-- =========================================================== -->
@@ -46,7 +45,7 @@
     <dependency>
       <groupId>org.geosdi</groupId>
       <artifactId>geoplatform-jackson-support</artifactId>
-      <version>${geoplatform-version}</version>
+      <version>${project.version}</version>
     </dependency>
 
     <!-- =========================================================== -->

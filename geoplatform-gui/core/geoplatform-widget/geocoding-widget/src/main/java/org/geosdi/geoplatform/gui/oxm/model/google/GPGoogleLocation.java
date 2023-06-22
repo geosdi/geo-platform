@@ -35,14 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.oxm.model.google;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class GPGoogleLocation {
@@ -83,7 +82,6 @@ public class GPGoogleLocation {
 
     @Override
     public String toString() {
-        return "GPGoogleLocation{" + "latitude="
-                + lat + ", longitude=" + lon + '}';
+        return "GPGoogleLocation{" + "latitude=" + lat + ", longitude=" + lon + '}';
     }
 }

@@ -36,13 +36,9 @@
 package org.geosdi.geoplatform.gui.oxm.model.google;
 
 import com.google.common.collect.Lists;
-import java.util.ArrayList;
+import jakarta.xml.bind.annotation.*;
+
 import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 /**
  *
@@ -68,7 +64,7 @@ public class GPGoogleGeocodeRoot {
     }
 
     /**
-     * @param status the status to set
+     * @param theStatus the status to set
      */
     public void setStatus(String theStatus) {
         this.status = theStatus;

@@ -37,17 +37,18 @@ package org.geosdi.geoplatform.wfs.reader;
 
 import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.jaxb.IGPJAXBContextBuilder;
 import org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.File;
 import java.nio.file.Paths;
-import java.util.stream.Collectors;
 
 import static java.io.File.separator;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
+import static org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder.jakartaContextBuilder;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -58,14 +59,14 @@ import static org.junit.Assert.assertTrue;
 public class WFSGetFeatureCreateLayerStaxReaderTest {
 
     private static LayerSchemaDTO createLayerSchema;
-    private static GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
+    private static IGPJAXBContextBuilder jakartaContextBuilder = jakartaContextBuilder();
     private static File getFeatureCreateLayer;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
         String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader")
-                .collect(Collectors.joining(separator, "", separator));
-        createLayerSchema = jaxbContextBuilder.unmarshal(new File(basePath.concat("LayerSchemaCreateLayer.xml")), LayerSchemaDTO.class);
+                .collect(joining(separator, "", separator));
+        createLayerSchema = jakartaContextBuilder.unmarshal(new File(basePath.concat("LayerSchemaCreateLayer.xml")), LayerSchemaDTO.class);
         getFeatureCreateLayer = Paths.get(basePath.concat("GetFeatureCreateLayer.xml")).toFile();
         assertNotNull("The LayerSchemaDTO for createLayer must not be null.", createLayerSchema);
         assertNotNull("The File getFeatureCreateLayer must not be null.", getFeatureCreateLayer);

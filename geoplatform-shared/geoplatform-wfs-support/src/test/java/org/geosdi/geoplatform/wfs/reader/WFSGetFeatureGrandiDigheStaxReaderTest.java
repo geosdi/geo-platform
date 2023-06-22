@@ -39,7 +39,7 @@ import org.geojson.FeatureCollection;
 import org.geosdi.geoplatform.connector.reader.stax.GetFeatureGeoJsonStaxGml3Reader;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.jaxb.IGPJAXBContextBuilder;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader;
@@ -60,7 +60,8 @@ import static io.reactivex.rxjava3.core.Observable.fromIterable;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder.jakartaContextBuilder;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.junit.Assert.assertNotNull;
@@ -76,10 +77,10 @@ public class WFSGetFeatureGrandiDigheStaxReaderTest {
     private static final Logger logger = LoggerFactory.getLogger(WFSGetFeatureGrandiDigheStaxReaderTest.class);
     //
     private static LayerSchemaDTO grandiDigheLayerSchema;
-    private static GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
+    private static IGPJAXBContextBuilder jakartaContextBuilder = jakartaContextBuilder();
     private static File getFeatureGrandiDighe;
     private static final StopWatch stopWatch = new StopWatch("wfsGetFeatureGrandiDighe");
-    private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_DISABLE,
+    private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(JAKARTA, UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE, NON_NULL);
 
@@ -87,7 +88,7 @@ public class WFSGetFeatureGrandiDigheStaxReaderTest {
     public static void beforeClass() throws Exception {
         String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader").collect(
                 joining(separator, "", separator));
-        grandiDigheLayerSchema = jaxbContextBuilder.unmarshal(new File(basePath.concat("LayerSchemaGrandiDighe.xml")),
+        grandiDigheLayerSchema = jakartaContextBuilder.unmarshal(new File(basePath.concat("LayerSchemaGrandiDighe.xml")),
                 LayerSchemaDTO.class);
         getFeatureGrandiDighe = Paths.get(basePath.concat("GetFeatureGrandiDighe.xml")).toFile();
         assertNotNull("The LayerSchemaDTO for IDROGEOLOGICO:IT_grandi_dighe_MIT2019 must not be null.", grandiDigheLayerSchema);

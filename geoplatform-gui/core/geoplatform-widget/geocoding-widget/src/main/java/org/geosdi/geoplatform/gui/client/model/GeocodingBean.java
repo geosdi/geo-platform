@@ -42,8 +42,7 @@ import org.geosdi.geoplatform.gui.model.IGeoPlatformLocation;
  * @author giuseppe
  *
  */
-public class GeocodingBean extends GeoPlatformBeanModel implements
-        IGeoPlatformLocation {
+public class GeocodingBean extends GeoPlatformBeanModel implements IGeoPlatformLocation {
 
     /**
      *

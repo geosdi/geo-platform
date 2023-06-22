@@ -40,7 +40,7 @@ import org.geosdi.geoplatform.connector.reader.stax.GetFeatureGeoJsonStaxGml3Rea
 import org.geosdi.geoplatform.connector.wfs.response.FeatureCollectionDTO;
 import org.geosdi.geoplatform.connector.wfs.response.FeatureDTO;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
+import org.geosdi.geoplatform.jaxb.IGPJAXBContextBuilder;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 import org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader;
@@ -59,7 +59,8 @@ import java.nio.file.Paths;
 import static java.io.File.separator;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.jaxb.jakarta.GPJAXBJakartaContextBuilder.jakartaContextBuilder;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.junit.Assert.assertNotNull;
@@ -75,10 +76,10 @@ public class WFSGetFeatureToppTasmaniaRoadsStaxReaderTest {
     private static final Logger logger = LoggerFactory.getLogger(WFSGetFeatureToppTasmaniaRoadsStaxReaderTest.class);
     //
     private static LayerSchemaDTO toppTasmaniaRoadsLayerSchema;
-    private static GPJAXBContextBuilder jaxbContextBuilder = GPJAXBContextBuilder.newInstance();
+    private static IGPJAXBContextBuilder jakartaContextBuilder = jakartaContextBuilder();
     private static File getFeatureToppTasmaniaRoads;
     private static final StopWatch stopWatch = new StopWatch("wfsGetFeatureToppTasmaniaRoad");
-    private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(JAXB, UNWRAP_ROOT_VALUE_DISABLE,
+    private static final JacksonSupport JACKSON_SUPPORT = new GPJacksonSupport(JAKARTA, UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE, WRAP_ROOT_VALUE_DISABLE,
             INDENT_OUTPUT_ENABLE, NON_NULL);
 
@@ -86,7 +87,7 @@ public class WFSGetFeatureToppTasmaniaRoadsStaxReaderTest {
     public static void beforeClass() throws Exception {
         String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources", "reader")
                 .collect(joining(separator, "", separator));
-        toppTasmaniaRoadsLayerSchema = jaxbContextBuilder.unmarshal(new File(basePath.concat("LayerSchemaToppTasmaniaRoads.xml")), LayerSchemaDTO.class);
+        toppTasmaniaRoadsLayerSchema = jakartaContextBuilder.unmarshal(new File(basePath.concat("LayerSchemaToppTasmaniaRoads.xml")), LayerSchemaDTO.class);
         getFeatureToppTasmaniaRoads = Paths.get(basePath.concat("GetFeatureToppTasmaniaRoads.xml")).toFile();
         assertNotNull("The LayerSchemaDTO for topp:tasmania_roads must not be null.", toppTasmaniaRoadsLayerSchema);
         assertNotNull("The File getFeatureToppTasmaniaRoads must not be null.", getFeatureToppTasmaniaRoads);

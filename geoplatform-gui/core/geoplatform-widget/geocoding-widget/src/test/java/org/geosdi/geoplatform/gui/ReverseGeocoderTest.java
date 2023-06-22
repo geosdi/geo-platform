@@ -35,10 +35,8 @@
  */
 package org.geosdi.geoplatform.gui;
 
-import java.io.IOException;
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.server.service.IReverseGeocoding;
-import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,6 +45,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.io.IOException;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  *
@@ -74,9 +76,7 @@ public class ReverseGeocoderTest {
         } catch (IOException e) {
             logger.error("IOException {}", e);
         }
-
-        Assert.assertNotNull(bean);
-
+        assertNotNull(bean);
         logger.info("Locations ***************** {}", bean.getDescription());
     }
 
@@ -89,9 +89,7 @@ public class ReverseGeocoderTest {
         } catch (IOException e) {
             logger.error("IOException {}", e);
         }
-
-        Assert.assertNotNull(bean);
-
+        assertNotNull(bean);
         logger.info("Locations ***************** {}", bean.getDescription());
     }
 }

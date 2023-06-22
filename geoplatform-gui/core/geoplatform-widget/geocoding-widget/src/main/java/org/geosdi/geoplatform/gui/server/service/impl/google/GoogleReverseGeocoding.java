@@ -35,12 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl.google;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-
-
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.model.GeocodingKeyValue;
 import org.geosdi.geoplatform.gui.client.model.google.GoogleGeocodeBean;
@@ -53,6 +47,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 
 /**
  *
@@ -78,16 +77,11 @@ public class GoogleReverseGeocoding implements IReverseGeocoding {
      * double)
      */
     @Override
-    public GeocodingBean findLocation(double lat, double lon)
-            throws IOException {
-
+    public GeocodingBean findLocation(double lat, double lon) throws IOException {
         URL url = new URL(REVERSE_GEOCODER_PREFIX_FOR_XML + "?latlng="
                 + URLEncoder.encode(lat + "," + lon, "UTF-8") + "&language=it&sensor=true");
-
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-        GPGoogleGeocodeRoot oxmBean = (GPGoogleGeocodeRoot) this.geocoderGoogleJaxbMarshaller.
-                unmarshal(conn.getInputStream());
+        GPGoogleGeocodeRoot oxmBean = (GPGoogleGeocodeRoot) this.geocoderGoogleJaxbMarshaller.unmarshal(conn.getInputStream());
 
         if (oxmBean.getStatus().equals(
                 ResponseStatus.EnumResponseStatus.STATUS_OK.getValue())) {

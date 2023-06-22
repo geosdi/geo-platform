@@ -35,12 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.oxm.model.yahoo;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 
 /**
- *
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
@@ -546,17 +545,6 @@ public class GPYahooResult {
      */
     @Override
     public String toString() {
-        return "GPYahooResult [quality=" + quality + ", latitude=" + latitude
-                + ", longitude=" + longitude + ", offsetlat=" + offsetlat
-                + ", offsetlon=" + offsetlon + ", radius=" + radius + ", name="
-                + name + ", line1=" + line1 + ", line2=" + line2 + ", line3="
-                + line3 + ", line4=" + line4 + ", house=" + house + ", street="
-                + street + ", xstreet=" + xstreet + ", unittype=" + unittype
-                + ", unit=" + unit + ", postal=" + postal + ", neighborhood="
-                + neighborhood + ", city=" + city + ", county=" + county
-                + ", state=" + state + ", country=" + country
-                + ", countrycode=" + countrycode + ", statecode=" + statecode
-                + ", countycode=" + countycode + ", uzip=" + uzip + ", hash="
-                + hash + ", woeid=" + woeid + ", woetype=" + woetype + "]";
+        return "GPYahooResult [quality=" + quality + ", latitude=" + latitude + ", longitude=" + longitude + ", offsetlat=" + offsetlat + ", offsetlon=" + offsetlon + ", radius=" + radius + ", name=" + name + ", line1=" + line1 + ", line2=" + line2 + ", line3=" + line3 + ", line4=" + line4 + ", house=" + house + ", street=" + street + ", xstreet=" + xstreet + ", unittype=" + unittype + ", unit=" + unit + ", postal=" + postal + ", neighborhood=" + neighborhood + ", city=" + city + ", county=" + county + ", state=" + state + ", country=" + country + ", countrycode=" + countrycode + ", statecode=" + statecode + ", countycode=" + countycode + ", uzip=" + uzip + ", hash=" + hash + ", woeid=" + woeid + ", woetype=" + woetype + "]";
     }
 }

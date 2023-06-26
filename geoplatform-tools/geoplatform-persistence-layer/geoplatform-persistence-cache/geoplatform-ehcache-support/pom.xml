@@ -45,22 +45,6 @@
         </dependency>
 
         <!-- =========================================================== -->
-        <!-- JAXB -->
-        <!-- =========================================================== -->
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-        </dependency>
-
-        <!-- =========================================================== -->
         <!-- ======================== LOMBOK =========================== -->
         <!-- =========================================================== -->
         <dependency>
@@ -99,6 +83,7 @@
             <groupId>org.ehcache</groupId>
             <artifactId>ehcache</artifactId>
             <version>${ehcache-version}</version>
+            <classifier>jakarta</classifier>
         </dependency>
         
         <!-- logging dependencies, delegate all to slf4j and use logback -->

@@ -218,6 +218,12 @@
             <artifactId>geoplatform-publisher-base-impl</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.ehcache</groupId>
+                    <artifactId>ehcache</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- =============================================================== -->

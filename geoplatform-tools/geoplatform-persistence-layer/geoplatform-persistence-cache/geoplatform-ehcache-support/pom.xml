@@ -84,6 +84,12 @@
             <artifactId>ehcache</artifactId>
             <version>${ehcache-version}</version>
             <classifier>jakarta</classifier>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.glassfish.jaxb</groupId>
+                    <artifactId>jaxb-runtime</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         
         <!-- logging dependencies, delegate all to slf4j and use logback -->

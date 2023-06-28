@@ -116,6 +116,18 @@
             </releases>
         </repository>
 
+        <repository>
+            <id>grepo-vertispa</id>
+            <name>grepo-vertispa</name>
+            <url>https://repo.vertispan.com/gwt-snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+
         <!-- OSGEO -->
         <!--repository>
             <id>osgeo</id>

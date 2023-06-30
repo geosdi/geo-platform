@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.servermanagement;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.servermanagement.add.UpdateAddServerRequest;
 import org.geosdi.geoplatform.gui.client.command.servermanagement.add.UpdateAddServerResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -45,7 +46,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

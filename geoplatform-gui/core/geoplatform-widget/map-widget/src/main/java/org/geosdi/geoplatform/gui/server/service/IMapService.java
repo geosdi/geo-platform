@@ -35,10 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.server.service;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+
+import java.util.List;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -46,10 +47,10 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  */
 public interface IMapService {
 
-    public void saveBaseLayer(String baseLayer, HttpServletRequest httpServletRequest) throws GeoPlatformException;
+    void saveBaseLayer(String baseLayer, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    public void replaceViewportList(List<GPClientViewport> viewportList, HttpServletRequest httpServletRequest) throws GeoPlatformException;
-
-    public List<GPClientViewport> loadViewportElements(HttpServletRequest httpServletRequest)
+    void replaceViewportList(List<GPClientViewport> viewportList, HttpServletRequest httpServletRequest)
             throws GeoPlatformException;
+
+    List<GPClientViewport> loadViewportElements(HttpServletRequest httpServletRequest) throws GeoPlatformException;
 }

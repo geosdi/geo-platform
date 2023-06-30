@@ -97,7 +97,7 @@
             <dependency>
                 <groupId>org.geosdi</groupId>
                 <artifactId>geoplatform-resources</artifactId>
-                <version>1.2.12-gwt2.10.x</version>
+                <version>1.2.12-gwt2.11.x</version>
             </dependency>
             
             <dependency>

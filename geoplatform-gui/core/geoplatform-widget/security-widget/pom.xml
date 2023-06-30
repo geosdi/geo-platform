@@ -16,10 +16,10 @@
     <name>Geo-Platform :: == Security Module</name>
 
     <dependencies>
-        
+
         <dependency>
             <groupId>org.gwtproject</groupId>
-            <artifactId>gwt-user</artifactId>
+            <artifactId>gwt-servlet-jakarta</artifactId>
             <scope>provided</scope>
         </dependency>
 

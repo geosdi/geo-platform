@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.server.gwt;
 
 import com.google.gwt.user.client.rpc.SerializationException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 import org.geosdi.geoplatform.gui.command.server.CommandDispatcher;
@@ -44,7 +45,6 @@ import org.geosdi.geoplatform.gui.server.spring.xsrf.GPAutoInjectingXsrfTokenSer
 import org.geosdi.geoplatform.gui.service.GeoPlatformService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

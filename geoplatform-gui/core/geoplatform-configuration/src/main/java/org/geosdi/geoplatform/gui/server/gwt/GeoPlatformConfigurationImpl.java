@@ -36,17 +36,20 @@
 package org.geosdi.geoplatform.gui.server.gwt;
 
 import com.google.gwt.user.client.rpc.SerializationException;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.global.IGeoPlatformGlobal;
 import org.geosdi.geoplatform.gui.server.service.IStartupService;
 import org.geosdi.geoplatform.gui.server.spring.GPAutoInjectingRemoteServiceServlet;
 import org.geosdi.geoplatform.gui.service.GeoPlatformConfiguration;
+import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -81,9 +84,8 @@ public class GeoPlatformConfigurationImpl extends GPAutoInjectingRemoteServiceSe
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        /** @Todo fix the compilation for now try to use this https://github.com/gwtproject/gwt/issues/9727 **/
-//        ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-//        GeoPlatformContextUtil.getInstance().setSpringContext(context);
+        ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+        GeoPlatformContextUtil.getInstance().setSpringContext(context);
         this.initGeoPlatformContext();
     }
 

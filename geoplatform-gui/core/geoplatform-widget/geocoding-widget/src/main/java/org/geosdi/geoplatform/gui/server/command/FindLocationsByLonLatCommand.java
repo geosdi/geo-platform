@@ -35,8 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command;
 
-import java.io.IOException;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.FindLocationResponse;
 import org.geosdi.geoplatform.gui.client.command.FindLocationsByLonLatRequest;
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
@@ -50,15 +49,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Lazy(true)
 @Component(value = "command.FindLocationsByLonLatCommand")
-public class FindLocationsByLonLatCommand implements
-        GPCommand<FindLocationsByLonLatRequest, FindLocationResponse> {
+public class FindLocationsByLonLatCommand implements GPCommand<FindLocationsByLonLatRequest, FindLocationResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(
             FindLocationsByLonLatCommand.class);

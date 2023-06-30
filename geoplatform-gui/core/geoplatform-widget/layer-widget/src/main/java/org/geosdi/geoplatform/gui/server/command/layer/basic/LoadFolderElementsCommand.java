@@ -35,8 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.layer.basic;
 
-import java.util.ArrayList;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.LoadFolderElementsRequest;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.LoadFolderElementsResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -48,14 +47,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 @Lazy(true)
 @Component(value = "command.layer.basic.LoadFolderElementsCommand")
-public class LoadFolderElementsCommand implements
-        GPCommand<LoadFolderElementsRequest, LoadFolderElementsResponse> {
+public class LoadFolderElementsCommand implements GPCommand<LoadFolderElementsRequest, LoadFolderElementsResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(
             LoadFolderElementsCommand.class);

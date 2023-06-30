@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.FindDirectionsByCoordRequest;
 import org.geosdi.geoplatform.gui.client.command.FindDirectionsByCoordResponse;
 import org.geosdi.geoplatform.gui.client.model.RoutingBean;

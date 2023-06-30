@@ -35,10 +35,10 @@
  */
 package org.geosdi.geoplatform.gui.server.command.map.baselayer;
 
-import org.geosdi.geoplatform.gui.server.command.map.GPBasicMapCommand;
-import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.gui.client.command.SaveBaseLayerRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.GPMapModuleResponse;
+import org.geosdi.geoplatform.gui.client.command.SaveBaseLayerRequest;
+import org.geosdi.geoplatform.gui.server.command.map.GPBasicMapCommand;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 

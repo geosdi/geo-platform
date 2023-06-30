@@ -56,7 +56,6 @@ public class GPAutoInjectingBaseServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        /** @Todo fix the compilation for now try to use this https://github.com/gwtproject/gwt/issues/9727 **/
         WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(config.getServletContext());
         this.springBeanFactory = ctx.getAutowireCapableBeanFactory();
         springBeanFactory.autowireBean(this);

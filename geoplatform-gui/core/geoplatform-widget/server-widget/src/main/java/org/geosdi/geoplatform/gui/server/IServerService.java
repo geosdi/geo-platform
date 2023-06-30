@@ -35,16 +35,17 @@
  */
 package org.geosdi.geoplatform.gui.server;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+
+import java.util.List;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 public interface IServerService {
-    
-    public List<String> getUserAuthorities(HttpServletRequest httpServletRequest) throws GeoPlatformException;
-    
+
+    List<String> getUserAuthorities(HttpServletRequest httpServletRequest) throws GeoPlatformException;
+
 }

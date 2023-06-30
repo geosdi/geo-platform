@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.server.command.layer.basic;
 
 import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.SearchProjectsRequest;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.SearchProjectsResponse;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
@@ -46,8 +47,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

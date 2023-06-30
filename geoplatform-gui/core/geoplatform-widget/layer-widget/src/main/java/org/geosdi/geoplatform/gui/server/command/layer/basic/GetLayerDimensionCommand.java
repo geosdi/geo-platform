@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.layer.basic;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.GetLayerDimensionRequest;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.GetLayerDimensionResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;

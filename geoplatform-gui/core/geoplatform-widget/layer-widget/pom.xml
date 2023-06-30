@@ -18,15 +18,21 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.gwttime</groupId>
-            <artifactId>gwttime</artifactId>
-            <version>1.0.2</version>
+            <groupId>org.gwtproject</groupId>
+            <artifactId>gwt-servlet-jakarta</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.gwtproject</groupId>
-            <artifactId>gwt-user</artifactId>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.gwttime</groupId>
+            <artifactId>gwttime</artifactId>
+            <version>1.0.2</version>
         </dependency>
 
         <dependency>

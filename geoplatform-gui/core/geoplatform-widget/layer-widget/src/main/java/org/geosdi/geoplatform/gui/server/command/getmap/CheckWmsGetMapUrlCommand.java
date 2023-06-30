@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.getmap;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.getmap.CheckWmsGetMapUrlRequest;
 import org.geosdi.geoplatform.gui.client.command.getmap.CheckWmsGetMapUrlResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;

@@ -35,9 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.FindLocationsByAddressRequest;
 import org.geosdi.geoplatform.gui.client.command.FindLocationsResponse;
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
@@ -49,6 +47,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *

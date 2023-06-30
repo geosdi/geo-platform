@@ -39,6 +39,7 @@ import it.geosolutions.geoserver.rest.cas.CASHTTPUtils;
 import it.geosolutions.geoserver.rest.cas.GeoServerCASRESTPublisher;
 import it.geosolutions.geoserver.rest.cas.GeoServerCASRESTReader;
 import it.geosolutions.geoserver.rest.cas.manager.GeoServerCASRESTStoreManager;
+import jakarta.servlet.http.HttpServletRequest;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -51,7 +52,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 
-import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;

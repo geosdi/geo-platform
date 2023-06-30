@@ -16,15 +16,28 @@
     <name>Geo-Platform :: == Basic Widget Module</name>
 
     <dependencies>
+
         <dependency>
-            <groupId>org.gwtproject</groupId>
-            <artifactId>gwt-user</artifactId>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
-        
+
+        <dependency>
+            <groupId>org.gwtproject</groupId>
+            <artifactId>gwt-servlet-jakarta</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.moxieapps.gwt</groupId>
             <artifactId>org.moxieapps.gwt.uploader</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.gwtproject</groupId>
+                    <artifactId>gwt-user</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- GXT -->

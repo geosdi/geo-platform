@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.server.command.login.sso;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.login.sso.SSOLoginRequest;
 import org.geosdi.geoplatform.gui.client.command.login.sso.SSOLoginResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -46,8 +47,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

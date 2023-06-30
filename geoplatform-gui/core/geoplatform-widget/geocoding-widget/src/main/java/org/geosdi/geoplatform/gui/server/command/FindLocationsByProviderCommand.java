@@ -35,11 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.server.command;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.gui.client.command.FindLocationsResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.FindLocationsByProviderRequest;
+import org.geosdi.geoplatform.gui.client.command.FindLocationsResponse;
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.widget.map.ReverseGeoCoderProvider;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -51,15 +49,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Lazy(true)
 @Component(value = "command.FindLocationsByProviderCommand")
-public class FindLocationsByProviderCommand implements
-        GPCommand<FindLocationsByProviderRequest, FindLocationsResponse> {
+public class FindLocationsByProviderCommand implements GPCommand<FindLocationsByProviderRequest, FindLocationsResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(
             FindLocationsByProviderCommand.class);

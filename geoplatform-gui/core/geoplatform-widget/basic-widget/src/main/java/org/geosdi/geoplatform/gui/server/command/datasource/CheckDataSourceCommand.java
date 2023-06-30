@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.datasource;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.datasource.CheckDataSourceRequest;
 import org.geosdi.geoplatform.gui.client.command.datasource.CheckDataSourceResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -43,9 +44,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com

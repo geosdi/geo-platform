@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.login.cas;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginRequest;
 import org.geosdi.geoplatform.gui.client.command.login.cas.CASLoginResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -46,8 +47,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

@@ -35,10 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.cas;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.command.capabilities.basic.BasicCapabilitiesResponse;
 import org.geosdi.geoplatform.gui.command.capabilities.cas.CASCapabilitiesRequest;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -56,8 +53,11 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

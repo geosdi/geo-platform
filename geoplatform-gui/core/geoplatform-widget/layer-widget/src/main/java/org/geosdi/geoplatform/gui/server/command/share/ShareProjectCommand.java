@@ -35,10 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.server.command.share;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.share.ShareProjectRequest;
 import org.geosdi.geoplatform.gui.client.command.share.ShareProjectResponse;
-import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.slf4j.Logger;

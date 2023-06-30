@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.session;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.session.InvalidateSessionRequest;
 import org.geosdi.geoplatform.gui.client.command.session.InvalidateSessionResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -45,8 +46,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  *

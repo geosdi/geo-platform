@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.map.viewport;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.ReplaceViewportListRequest;
 import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 import org.geosdi.geoplatform.gui.server.command.map.GPBasicMapCommand;

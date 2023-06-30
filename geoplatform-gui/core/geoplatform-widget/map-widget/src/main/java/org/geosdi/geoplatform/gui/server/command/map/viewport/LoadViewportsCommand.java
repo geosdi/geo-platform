@@ -35,9 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.map.viewport;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.LoadViewportsRequest;
 import org.geosdi.geoplatform.gui.client.command.LoadViewportsResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -49,15 +47,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Lazy
 @Component(value = "command.map.viewport.LoadViewportsCommand")
-public class LoadViewportsCommand implements
-        GPCommand<LoadViewportsRequest, LoadViewportsResponse> {
+public class LoadViewportsCommand implements GPCommand<LoadViewportsRequest, LoadViewportsResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(
             LoadViewportsCommand.class);

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.auth;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.user.GetUserAuthoritiesRequest;
 import org.geosdi.geoplatform.gui.client.command.user.GetUserAuthoritiesResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -45,7 +46,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 

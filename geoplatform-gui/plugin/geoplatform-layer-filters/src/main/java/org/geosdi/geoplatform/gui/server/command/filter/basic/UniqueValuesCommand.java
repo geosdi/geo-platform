@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.server.command.filter.basic;
 
 import com.google.common.collect.Lists;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.command.filter.basic.UniqueValueResponse;
 import org.geosdi.geoplatform.gui.client.command.filter.basic.UniqueValuesRequest;
@@ -51,7 +52,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**

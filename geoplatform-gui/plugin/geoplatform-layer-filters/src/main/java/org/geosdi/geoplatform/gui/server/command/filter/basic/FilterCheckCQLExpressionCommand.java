@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.filter.basic;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.filter.basic.FilterCheckCQLExpressionRequest;
 import org.geosdi.geoplatform.gui.client.command.filter.basic.FilterCheckCQLExpressionResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;

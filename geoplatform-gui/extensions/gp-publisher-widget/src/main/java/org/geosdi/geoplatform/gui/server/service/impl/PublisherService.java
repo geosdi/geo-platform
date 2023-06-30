@@ -36,13 +36,7 @@
 package org.geosdi.geoplatform.gui.server.service.impl;
 
 import com.google.common.collect.Lists;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.slf4j.Logger;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
@@ -57,9 +51,16 @@ import org.geosdi.geoplatform.request.ProcessEPSGResultRequest;
 import org.geosdi.geoplatform.request.PublishLayersRequest;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.services.GPPublisherService;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

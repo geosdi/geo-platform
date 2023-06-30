@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -47,17 +47,18 @@ import org.geosdi.geoplatform.gui.command.server.GPCommand;
  */
 public class GPCommandDispatcher extends BasicCommandDispatcher {
 
+    /**
+     * @param request
+     * @param httpServletRequest
+     * @param <Request>
+     * @param <Response>
+     * @return
+     */
     @Override
-    public <Request extends GPCommandRequest, Response extends GPCommandResponse> Response execute(
-            Request request, HttpServletRequest httpServletRequest) {
-        logger.debug("\n######################### GPCommandDipatcher "
-                + ": Execution of Command : {}\n", request.getCommandName());
-
+    public <Request extends GPCommandRequest, Response extends GPCommandResponse> Response execute(Request request, HttpServletRequest httpServletRequest) {
+        logger.debug("\n######################### GPCommandDipatcher " + ": Execution of Command : {}\n", request.getCommandName());
         GPCommand command = super.findCommand(request);
-
-        logger.debug("\n#################### Found Command : {}\n",
-                command);
-
+        logger.debug("\n#################### Found Command : {}\n", command);
         return (Response) command.execute(request, httpServletRequest);
     }
 }

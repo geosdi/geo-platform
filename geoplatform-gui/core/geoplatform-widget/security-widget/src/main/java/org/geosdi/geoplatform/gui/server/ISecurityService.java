@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.model.security.XMPPLoginDetails;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
@@ -46,23 +46,15 @@ import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
  */
 public interface ISecurityService {
 
-    IGPAccountDetail userLogin(String userName, String password, Long projectID,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    IGPAccountDetail userLogin(String userName, String password, Long projectID, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    IGPAccountDetail ssoLogin(HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    IGPAccountDetail ssoLogin(HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    XMPPLoginDetails xmppGetDataLogin(String userName, HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    XMPPLoginDetails xmppGetDataLogin(String userName, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    IGPAccountDetail casLogin(HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    IGPAccountDetail casLogin(HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    IGPAccountDetail applicationLogin(String appID,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    IGPAccountDetail applicationLogin(String appID, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    void invalidateSession(HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    void invalidateSession(HttpServletRequest httpServletRequest) throws GeoPlatformException;
 }

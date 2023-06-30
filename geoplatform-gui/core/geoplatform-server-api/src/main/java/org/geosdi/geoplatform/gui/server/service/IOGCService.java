@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.server.service;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPLayerGrid;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
 /**

@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.command.server;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 import org.springframework.context.ApplicationContextAware;
@@ -60,9 +60,7 @@ public interface CommandDispatcher extends ApplicationContextAware {
      * @param httpServletRequest
      * @return 
      */
-    <Request extends GPCommandRequest, Response extends GPCommandResponse> Response execute(
-            Request request, HttpServletRequest httpServletRequest);
+    <Request extends GPCommandRequest, Response extends GPCommandResponse> Response execute(Request request, HttpServletRequest httpServletRequest);
 
     void destroy();
-    
 }

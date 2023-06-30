@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.command.server;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 

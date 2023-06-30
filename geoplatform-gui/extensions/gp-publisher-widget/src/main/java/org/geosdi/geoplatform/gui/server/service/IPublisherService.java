@@ -35,10 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.server.service;
 
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+
+import java.util.List;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

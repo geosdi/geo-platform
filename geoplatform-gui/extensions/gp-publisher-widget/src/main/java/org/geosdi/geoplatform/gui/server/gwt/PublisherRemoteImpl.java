@@ -47,8 +47,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class PublisherRemoteImpl extends GPAutoInjectingXsrfTokenServiceServlet
-        implements PublisherRemote {
+public class PublisherRemoteImpl extends GPAutoInjectingXsrfTokenServiceServlet implements PublisherRemote {
 
     private static final long serialVersionUID = 5204638800999412388L;
     //

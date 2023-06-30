@@ -36,6 +36,8 @@
 package org.geosdi.geoplatform.gui.server.service.impl;
 
 import com.google.common.collect.Lists;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.geosdi.geoplatform.configurator.crypt.GPPooledPBEStringEncryptorDecorator;
 import org.geosdi.geoplatform.core.model.GSAccount;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
@@ -59,8 +61,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 

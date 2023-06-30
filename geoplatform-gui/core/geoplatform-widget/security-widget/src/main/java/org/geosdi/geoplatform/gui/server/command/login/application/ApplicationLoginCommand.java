@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.login.application;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.login.application.ApplicationLoginRequest;
 import org.geosdi.geoplatform.gui.client.command.login.application.ApplicationLoginResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -55,8 +55,7 @@ import org.springframework.stereotype.Component;
  */
 @Lazy(true)
 @Component(value = "command.login.ApplicationLoginCommand")
-public class ApplicationLoginCommand implements
-        GPCommand<ApplicationLoginRequest, ApplicationLoginResponse> {
+public class ApplicationLoginCommand implements GPCommand<ApplicationLoginRequest, ApplicationLoginResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(
             BasicLoginCommand.class);
@@ -65,18 +64,10 @@ public class ApplicationLoginCommand implements
     private ISecurityService securityService;
 
     @Override
-    public ApplicationLoginResponse execute(ApplicationLoginRequest request,
-            HttpServletRequest httpServletRequest) {
-
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
-        IGPAccountDetail accountDetail = this.securityService.applicationLogin(
-                request.getAppID(), httpServletRequest);
-
-        logger.debug("#################### Found {} ", accountDetail);
-
+    public ApplicationLoginResponse execute(ApplicationLoginRequest request, HttpServletRequest httpServletRequest) {
+        logger.debug("#####################Executing {} Command", this.getClass().getSimpleName());
+        IGPAccountDetail accountDetail = this.securityService.applicationLogin(request.getAppID(), httpServletRequest);
+        logger.debug("####################Found {} ", accountDetail);
         return new ApplicationLoginResponse(accountDetail);
     }
-
 }

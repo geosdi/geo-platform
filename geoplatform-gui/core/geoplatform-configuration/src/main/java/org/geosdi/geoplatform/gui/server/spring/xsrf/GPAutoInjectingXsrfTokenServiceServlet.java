@@ -39,7 +39,7 @@ import com.google.gwt.user.server.rpc.XsrfTokenServiceServlet;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
+
 
 /**
  *

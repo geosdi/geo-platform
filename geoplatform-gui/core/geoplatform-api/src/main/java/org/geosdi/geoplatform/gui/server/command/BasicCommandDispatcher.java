@@ -56,31 +56,21 @@ public abstract class BasicCommandDispatcher implements CommandDispatcher {
     protected ApplicationContext appContext;
 
     @Override
-    public void setApplicationContext(ApplicationContext theAppContext) throws
-            BeansException {
+    public void setApplicationContext(ApplicationContext theAppContext) throws BeansException {
         this.appContext = theAppContext;
     }
 
     @Override
     public void destroy() {
-        logger.info("\n\n {} destroy ################################",
-                getClass().getSimpleName());
+        logger.info("\n\n {} destroy ################################", getClass().getSimpleName());
     }
 
-    <Request extends GPCommandRequest> GPCommand findCommand(
-            Request request) throws GeoPlatformException {
-        GPCommand command = appContext.getBean(request.getCommandName(),
-                GPCommand.class);
-
+    <Request extends GPCommandRequest> GPCommand findCommand(Request request) throws GeoPlatformException {
+        GPCommand command = appContext.getBean(request.getCommandName(), GPCommand.class);
         if (command == null) {
-            logger.error("There is no Command with name : "
-                    + request.getCommandName() + " defined in Spring "
-                    + "Application Context.");
-            throw new GeoPlatformException("No Command with name : "
-                    + request.getCommandName() + " found.");
+            logger.error("There is no Command with name : " + request.getCommandName() + " defined in Spring " + "Application Context.");
+            throw new GeoPlatformException("No Command with name : " + request.getCommandName() + " found.");
         }
-
         return command;
     }
-
 }

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.basic;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.command.capabilities.basic.BasicCapabilitiesRequest;
 import org.geosdi.geoplatform.gui.command.capabilities.basic.BasicCapabilitiesResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -46,7 +47,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
 /**

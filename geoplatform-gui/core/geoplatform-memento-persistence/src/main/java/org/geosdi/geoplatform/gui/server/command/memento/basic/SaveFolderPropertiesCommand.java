@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.memento.basic;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.command.memento.basic.SaveFolderPropertiesRequest;
@@ -51,8 +52,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.memento.basic;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.command.memento.basic.SendSharedProjectNotificationRequest;
 import org.geosdi.geoplatform.gui.client.command.memento.basic.SendSharedProjectNotificationResponse;

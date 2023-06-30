@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.server.command.memento.toolbar;
 
 import com.google.common.base.Preconditions;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.command.memento.toolbar.DeleteTreeElementRequest;
 import org.geosdi.geoplatform.gui.client.command.memento.toolbar.DeleteTreeElementResponse;

@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.gui.server.command.memento.check;
 
 import com.google.common.base.Preconditions;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.command.memento.check.SaveCheckFolderAndTreeRequest;
 import org.geosdi.geoplatform.gui.client.command.memento.check.SaveCheckFolderAndTreeResponse;

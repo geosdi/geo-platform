@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.wfst.cas.feature;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.cas.feature.CasEraseFeatureRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.feature.EraseFeatureResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -49,8 +50,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
 
 import static java.util.Collections.EMPTY_MAP;
 import static org.jasig.cas.client.util.AbstractCasFilter.CONST_CAS_ASSERTION;

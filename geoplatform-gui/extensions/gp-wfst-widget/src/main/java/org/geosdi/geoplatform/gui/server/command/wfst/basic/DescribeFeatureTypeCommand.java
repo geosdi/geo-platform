@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.wfst.basic;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.connector.wfs.response.LayerSchemaDTO;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.DescribeFeatureTypeRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.basic.DescribeFeatureTypeResponse;
@@ -46,7 +47,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 

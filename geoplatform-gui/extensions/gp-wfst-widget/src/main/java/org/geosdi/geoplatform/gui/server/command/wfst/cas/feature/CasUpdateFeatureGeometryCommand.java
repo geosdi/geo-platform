@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.wfst.cas.feature;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.cas.feature.CasUpdateFeatureGeometryRequest;
 import org.geosdi.geoplatform.gui.client.command.wfst.feature.UpdateFeatureGeometryResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -50,7 +51,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 import static java.util.Collections.EMPTY_MAP;

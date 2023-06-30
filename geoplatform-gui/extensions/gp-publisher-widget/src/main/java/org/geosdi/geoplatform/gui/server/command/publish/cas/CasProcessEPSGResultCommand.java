@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.server.command.publish.cas;
 
 import com.google.common.collect.Lists;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.gui.client.command.publish.basic.ProcessEPSGResultResponse;
 import org.geosdi.geoplatform.gui.client.command.publish.cas.CasProcessEPSGResultRequest;
@@ -57,7 +58,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 

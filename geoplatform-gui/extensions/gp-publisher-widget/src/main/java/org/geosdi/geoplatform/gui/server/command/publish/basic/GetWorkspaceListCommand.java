@@ -36,9 +36,7 @@
 package org.geosdi.geoplatform.gui.server.command.publish.basic;
 
 import com.google.common.collect.Lists;
-import java.util.ArrayList;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.publish.basic.GetWorkspaceListRequest;
 import org.geosdi.geoplatform.gui.client.command.publish.basic.GetWorkspaceListResponse;
 import org.geosdi.geoplatform.gui.client.model.GPWorkspace;
@@ -52,14 +50,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 @Lazy(true)
 @Component(value = "command.publish.basic.GetWorkspaceListCommand")
-public class GetWorkspaceListCommand implements
-        GPCommand<GetWorkspaceListRequest, GetWorkspaceListResponse> {
+public class GetWorkspaceListCommand implements GPCommand<GetWorkspaceListRequest, GetWorkspaceListResponse> {
 
     private static final Logger logger = LoggerFactory.getLogger(GetWorkspaceListCommand.class);
 

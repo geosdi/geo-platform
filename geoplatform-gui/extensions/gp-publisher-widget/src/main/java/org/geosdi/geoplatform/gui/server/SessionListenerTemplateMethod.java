@@ -35,12 +35,13 @@
  */
 package org.geosdi.geoplatform.gui.server;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.servlet.http.HttpSessionEvent;
-import javax.servlet.http.HttpSessionListener;
+import jakarta.servlet.http.HttpSessionEvent;
+import jakarta.servlet.http.HttpSessionListener;
 import org.geosdi.geoplatform.gui.spring.GeoPlatformContextUtil;
 import org.geosdi.geoplatform.services.GPPublisherService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

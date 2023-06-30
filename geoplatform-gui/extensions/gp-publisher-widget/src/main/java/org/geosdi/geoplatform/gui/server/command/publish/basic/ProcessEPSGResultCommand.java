@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.command.publish.basic;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.publish.basic.ProcessEPSGResultRequest;
 import org.geosdi.geoplatform.gui.client.command.publish.basic.ProcessEPSGResultResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;

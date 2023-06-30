@@ -37,6 +37,7 @@ package org.geosdi.geoplatform.gui.server.command.publish.cas;
 
 import com.google.common.collect.Lists;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.publish.basic.GetWorkspaceListResponse;
 import org.geosdi.geoplatform.gui.client.command.publish.cas.CasGetWorkspaceListRequest;
 import org.geosdi.geoplatform.gui.client.model.GPWorkspace;
@@ -49,7 +50,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 

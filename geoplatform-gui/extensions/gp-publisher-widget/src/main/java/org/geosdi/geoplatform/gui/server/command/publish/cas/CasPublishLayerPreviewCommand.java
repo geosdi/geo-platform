@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.gui.server.command.publish.cas;
 
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.command.publish.basic.PublishLayerPreviewResponse;
 import org.geosdi.geoplatform.gui.client.command.publish.cas.CasPublishLayerPreviewRequest;
@@ -54,7 +55,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;

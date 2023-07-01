@@ -22,7 +22,8 @@
             <artifactId>gwt-servlet-jakarta</artifactId>
             <scope>provided</scope>
         </dependency>
-        
+
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-configuration</artifactId>

@@ -1008,7 +1008,7 @@
             <dependency>
                 <groupId>com.google.gwt</groupId>
                 <artifactId>gwtquery-ui</artifactId>
-                <version>r148</version>
+                <version>r149</version>
                 <!--                <scope>provided</scope>-->
             </dependency>
 

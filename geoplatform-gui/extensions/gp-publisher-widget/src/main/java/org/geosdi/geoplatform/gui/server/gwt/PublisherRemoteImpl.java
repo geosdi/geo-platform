@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.gwt;
 
-import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
 import org.geosdi.geoplatform.gui.client.service.PublisherRemote;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -43,10 +42,13 @@ import org.geosdi.geoplatform.gui.server.service.IPublisherService;
 import org.geosdi.geoplatform.gui.server.spring.xsrf.GPAutoInjectingXsrfTokenServiceServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
+//TODO create command
 public class PublisherRemoteImpl extends GPAutoInjectingXsrfTokenServiceServlet implements PublisherRemote {
 
     private static final long serialVersionUID = 5204638800999412388L;

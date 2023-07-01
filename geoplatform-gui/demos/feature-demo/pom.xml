@@ -31,7 +31,7 @@
 
         <dependency>
             <groupId>org.gwtproject</groupId>
-            <artifactId>gwt-servlet-jakarta</artifactId>
+            <artifactId>gwt-user</artifactId>
             <scope>provided</scope>
         </dependency>
 

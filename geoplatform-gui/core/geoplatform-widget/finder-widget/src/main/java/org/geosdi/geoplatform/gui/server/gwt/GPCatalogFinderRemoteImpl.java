@@ -52,8 +52,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
  */
-public class GPCatalogFinderRemoteImpl extends GPAutoInjectingXsrfTokenServiceServlet
-        implements GPCatalogFinderRemote {
+public class GPCatalogFinderRemoteImpl extends GPAutoInjectingXsrfTokenServiceServlet implements GPCatalogFinderRemote {
 
     private static final long serialVersionUID = 8756054653877871843L;
     //
@@ -63,61 +62,37 @@ public class GPCatalogFinderRemoteImpl extends GPAutoInjectingXsrfTokenServiceSe
     @Override
     public ArrayList<GPCSWServerBeanModel> getAllCSWServers(
             String organizationName) throws GeoPlatformException {
-        return gpCatalogFinderService.getAllCSWServers(
-                organizationName, super.getThreadLocalRequest());
+        return gpCatalogFinderService.getAllCSWServers(organizationName, super.getThreadLocalRequest());
     }
 
     @Override
-    public PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(
-            PagingLoadConfig config,
-            String searchText,
-            String organization)
-            throws GeoPlatformException {
-        return gpCatalogFinderService.searchCSWServers(config, searchText,
-                organization,
-                super.getThreadLocalRequest());
+    public PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(PagingLoadConfig config, String searchText,
+            String organization) throws GeoPlatformException {
+        return gpCatalogFinderService.searchCSWServers(config, searchText, organization, super.getThreadLocalRequest());
     }
 
     @Override
-    public GPCSWServerBeanModel saveServerCSW(String alias,
-            String serverUrl,
-            String organization)
-            throws GeoPlatformException {
-        return gpCatalogFinderService.saveServerCSW(alias, serverUrl,
-                organization,
-                super.getThreadLocalRequest());
+    public GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl, String organization) throws GeoPlatformException {
+        return gpCatalogFinderService.saveServerCSW(alias, serverUrl, organization, super.getThreadLocalRequest());
     }
 
     @Override
     public boolean deleteServerCSW(Long serverID) throws GeoPlatformException {
-        return gpCatalogFinderService.deleteServerCSW(serverID,
-                super.getThreadLocalRequest());
+        return gpCatalogFinderService.deleteServerCSW(serverID, super.getThreadLocalRequest());
     }
 
     @Override
-    public PagingLoadResult<SummaryRecord> searchSummaryRecords(
-            PagingLoadConfig config,
-            CatalogFinderBean catalogFinder)
-            throws Exception {
-        return gpCatalogFinderService.searchSummaryRecords(config, catalogFinder,
-                super.getThreadLocalRequest());
+    public PagingLoadResult<SummaryRecord> searchSummaryRecords(PagingLoadConfig config, CatalogFinderBean catalogFinder) throws Exception {
+        return gpCatalogFinderService.searchSummaryRecords(config, catalogFinder, super.getThreadLocalRequest());
     }
 
     @Override
-    public PagingLoadResult<FullRecord> searchFullRecords(
-            PagingLoadConfig config,
-            CatalogFinderBean catalogFinder)
-            throws Exception {
-        return gpCatalogFinderService.searchFullRecords(config, catalogFinder,
-                super.getThreadLocalRequest());
+    public PagingLoadResult<FullRecord> searchFullRecords(PagingLoadConfig config, CatalogFinderBean catalogFinder) throws Exception {
+        return gpCatalogFinderService.searchFullRecords(config, catalogFinder, super.getThreadLocalRequest());
     }
 
     @Override
-    public String getRecordById(Long serverID,
-            String identifier,
-            String moduleName) throws Exception {
-        return gpCatalogFinderService.getRecordById(serverID, identifier,
-                moduleName,
-                super.getThreadLocalRequest());
+    public String getRecordById(Long serverID, String identifier, String moduleName) throws Exception {
+        return gpCatalogFinderService.getRecordById(serverID, identifier, moduleName, super.getThreadLocalRequest());
     }
 }

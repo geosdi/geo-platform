@@ -46,8 +46,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @email  michele.santomauro@geosdi.org
  *
  */
-public class OAuth2RemoteImpl extends GPAutoInjectingRemoteServiceServlet
-        implements OAuth2Remote {
+public class OAuth2RemoteImpl extends GPAutoInjectingRemoteServiceServlet implements OAuth2Remote {
 
     private static final long serialVersionUID = -8161383693348011400L;
     //

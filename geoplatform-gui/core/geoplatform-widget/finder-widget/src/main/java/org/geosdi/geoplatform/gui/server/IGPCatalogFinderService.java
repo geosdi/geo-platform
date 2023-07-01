@@ -37,13 +37,14 @@ package org.geosdi.geoplatform.gui.server;
 
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
-import java.util.ArrayList;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.model.SummaryRecord;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
+
+import java.util.ArrayList;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
@@ -52,39 +53,17 @@ import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
  */
 public interface IGPCatalogFinderService {
 
-    ArrayList<GPCSWServerBeanModel> getAllCSWServers(String organizationName,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    ArrayList<GPCSWServerBeanModel> getAllCSWServers(String organizationName, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(
-            PagingLoadConfig config,
-            String searchText,
-            String organization,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(PagingLoadConfig config, String searchText, String organization, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    GPCSWServerBeanModel saveServerCSW(String alias,
-            String serverUrl,
-            String organization,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    GPCSWServerBeanModel saveServerCSW(String alias, String serverUrl, String organization, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    boolean deleteServerCSW(Long serverID,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    boolean deleteServerCSW(Long serverID, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    PagingLoadResult<SummaryRecord> searchSummaryRecords(PagingLoadConfig config,
-            CatalogFinderBean catalogFinder,
-            HttpServletRequest httpServletRequest)
-            throws Exception;
+    PagingLoadResult<SummaryRecord> searchSummaryRecords(PagingLoadConfig config, CatalogFinderBean catalogFinder, HttpServletRequest httpServletRequest) throws Exception;
 
-    PagingLoadResult<FullRecord> searchFullRecords(PagingLoadConfig config,
-            CatalogFinderBean catalogFinder,
-            HttpServletRequest httpServletRequest)
-            throws Exception;
+    PagingLoadResult<FullRecord> searchFullRecords(PagingLoadConfig config, CatalogFinderBean catalogFinder, HttpServletRequest httpServletRequest) throws Exception;
 
-    String getRecordById(Long serverID,
-            String identifier,
-            String moduleName,
-            HttpServletRequest httpServletRequest) throws Exception;
+    String getRecordById(Long serverID, String identifier, String moduleName, HttpServletRequest httpServletRequest) throws Exception;
 }

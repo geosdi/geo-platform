@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 
 /**
@@ -45,6 +45,5 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
  */
 public interface IOAuth2Service {
     
-    public void googleUserLogin(String token, HttpServletRequest httpServletRequest)
-            throws GeoPlatformException;
+    public void googleUserLogin(String token, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 }

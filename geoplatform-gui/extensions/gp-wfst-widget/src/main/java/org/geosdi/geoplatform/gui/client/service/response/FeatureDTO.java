@@ -35,15 +35,11 @@
  */
 package org.geosdi.geoplatform.gui.client.service.response;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
 import com.google.gwt.json.client.JSONValue;
-import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.geosdi.geoplatform.gui.client.model.geocoding.WFSAddressGeocodingKeyValue.*;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group

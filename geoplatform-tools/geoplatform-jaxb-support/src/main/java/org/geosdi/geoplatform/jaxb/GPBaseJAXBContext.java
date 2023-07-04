@@ -35,11 +35,16 @@
  */
 package org.geosdi.geoplatform.jaxb;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.util.Map;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
+import static javax.xml.bind.JAXBContext.newInstance;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -69,7 +74,7 @@ public abstract class GPBaseJAXBContext {
      *                       contextPath</li> </ol>
      */
     public GPBaseJAXBContext(String contextPath, ClassLoader classLoader, Map<String, ?> properties) throws JAXBException {
-        this.jaxbContext = JAXBContext.newInstance(contextPath, classLoader, properties);
+        this.jaxbContext = newInstance(contextPath, classLoader, properties);
     }
 
     /**
@@ -86,11 +91,15 @@ public abstract class GPBaseJAXBContext {
      * @throws IllegalArgumentException if the parameter contains {@code null}
      *                                  (i.e., {@code GeoPlatformJAXBContext(null);})
      */
-    public GPBaseJAXBContext(Class... classToBeBound) throws JAXBException {
-        this.jaxbContext = JAXBContext.newInstance(classToBeBound);
+    public GPBaseJAXBContext(@Nonnull(when = NEVER) Class... classToBeBound) throws JAXBException {
+        this.jaxbContext = newInstance(classToBeBound);
     }
 
-    public GPBaseJAXBContext(JAXBContext theJaxbContext) {
+    /**
+     * @param theJaxbContext
+     */
+    public GPBaseJAXBContext(@Nonnull(when = NEVER) JAXBContext theJaxbContext) {
+        checkArgument(theJaxbContext != null, "The Parameter jaxbContext must not be null.");
         this.jaxbContext = theJaxbContext;
     }
 

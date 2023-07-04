@@ -29,7 +29,6 @@
         <!-- =========================================================== -->
         <!-- ======================== GUAVA =========================== -->
         <!-- =========================================================== -->
-            
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -38,7 +37,6 @@
         <!-- =========================================================== -->
         <!-- ===================== COMMONS-POOL ======================== -->
         <!-- =========================================================== -->
-        
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
@@ -65,6 +63,29 @@
         <dependency>
             <groupId>com.sun.activation</groupId>
             <artifactId>javax.activation</artifactId>
+        </dependency>
+
+        <!-- =========================================================== -->
+        <!-- ======================== JAKARTA JAXB ===================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
         </dependency>
         
         <!-- logging dependencies, delegate all to slf4j and use logback -->

@@ -1,5 +1,5 @@
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -33,7 +33,7 @@
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
@@ -50,7 +50,7 @@
             <groupId>org.gwtopenmaps.openlayers</groupId>
             <artifactId>gwt-openlayers-client</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.gwtopenmaps.openlayers</groupId>
             <artifactId>gwt-openlayers-server</artifactId>
@@ -60,16 +60,16 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-api</artifactId>
         </dependency>
-        
+
         <!-- =========================================================== -->
         <!-- ======================== GUAVA =========================== -->
         <!-- =========================================================== -->
-            
+
         <dependency>
             <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>          
+            <artifactId>guava</artifactId>
         </dependency>
-            
+
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava-gwt</artifactId>

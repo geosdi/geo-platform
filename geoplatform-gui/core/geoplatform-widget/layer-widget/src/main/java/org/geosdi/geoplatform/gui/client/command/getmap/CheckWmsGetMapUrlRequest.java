@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.gui.client.command.getmap;
 import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -72,8 +71,6 @@ public class CheckWmsGetMapUrlRequest implements GPCommandRequest {
 
     @Override
     public String toString() {
-        return "CheckWmsGetMapUrlRequest{ " + "urlEncoding = "
-                + urlEncoding + '}';
+        return "CheckWmsGetMapUrlRequest{ " + "urlEncoding = " + urlEncoding + '}';
     }
-
 }

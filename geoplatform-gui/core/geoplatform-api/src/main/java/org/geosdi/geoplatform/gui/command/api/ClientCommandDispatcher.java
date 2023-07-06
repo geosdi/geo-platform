@@ -36,15 +36,12 @@
 package org.geosdi.geoplatform.gui.command.api;
 
 import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.RpcTokenException;
-import com.google.gwt.user.client.rpc.XsrfToken;
-import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
-import java.util.Random;
+import com.google.gwt.user.client.rpc.*;
 import org.geosdi.geoplatform.gui.service.GeoPlatformService;
 import org.geosdi.geoplatform.gui.service.GeoPlatformServiceAsync;
 import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
+
+import java.util.Random;
 
 /**
  *

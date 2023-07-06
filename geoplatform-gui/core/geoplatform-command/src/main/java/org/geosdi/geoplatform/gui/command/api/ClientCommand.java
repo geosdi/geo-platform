@@ -38,19 +38,24 @@ package org.geosdi.geoplatform.gui.command.api;
 import java.io.Serializable;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
- *
  * @since 1.5.1
  */
-public interface ClientCommand<Response extends GPCommandResponse> extends
-        Serializable {
+public interface ClientCommand<Response extends GPCommandResponse> extends Serializable {
 
+    /**
+     * @return {@link GPCommandRequest}
+     */
     GPCommandRequest getCommandRequest();
 
+    /**
+     * @param response
+     */
     void onCommandSuccess(Response response);
 
+    /**
+     * @param exception
+     */
     void onCommandFailure(Throwable exception);
-
 }

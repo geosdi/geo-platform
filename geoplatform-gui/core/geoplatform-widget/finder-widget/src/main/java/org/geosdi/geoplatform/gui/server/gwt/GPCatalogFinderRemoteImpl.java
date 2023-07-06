@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.gui.server.gwt;
 
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
-import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.model.SummaryRecord;
 import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemote;
@@ -47,6 +46,8 @@ import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.server.IGPCatalogFinderService;
 import org.geosdi.geoplatform.gui.server.spring.xsrf.GPAutoInjectingXsrfTokenServiceServlet;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
@@ -60,14 +61,12 @@ public class GPCatalogFinderRemoteImpl extends GPAutoInjectingXsrfTokenServiceSe
     private IGPCatalogFinderService gpCatalogFinderService;
 
     @Override
-    public ArrayList<GPCSWServerBeanModel> getAllCSWServers(
-            String organizationName) throws GeoPlatformException {
+    public ArrayList<GPCSWServerBeanModel> getAllCSWServers(String organizationName) throws GeoPlatformException {
         return gpCatalogFinderService.getAllCSWServers(organizationName, super.getThreadLocalRequest());
     }
 
     @Override
-    public PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(PagingLoadConfig config, String searchText,
-            String organization) throws GeoPlatformException {
+    public PagingLoadResult<GPCSWServerBeanModel> searchCSWServers(PagingLoadConfig config, String searchText, String organization) throws GeoPlatformException {
         return gpCatalogFinderService.searchCSWServers(config, searchText, organization, super.getThreadLocalRequest());
     }
 

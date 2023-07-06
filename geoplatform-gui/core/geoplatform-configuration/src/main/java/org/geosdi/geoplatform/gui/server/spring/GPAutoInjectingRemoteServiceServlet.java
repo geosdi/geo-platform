@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.spring;
 
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.google.gwt.user.server.rpc.jakarta.RemoteServiceServlet;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;

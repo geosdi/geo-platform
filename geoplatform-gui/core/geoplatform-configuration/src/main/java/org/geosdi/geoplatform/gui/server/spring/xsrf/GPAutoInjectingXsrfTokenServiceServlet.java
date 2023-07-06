@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.gui.server.spring.xsrf;
 
-import com.google.gwt.user.server.rpc.XsrfTokenServiceServlet;
+import com.google.gwt.user.server.rpc.jakarta.XsrfTokenServiceServlet;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
@@ -55,10 +55,8 @@ public class GPAutoInjectingXsrfTokenServiceServlet extends XsrfTokenServiceServ
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(
-                config.getServletContext());
+        WebApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(config.getServletContext());
         this.springBeanFactory = ctx.getAutowireCapableBeanFactory();
         springBeanFactory.autowireBean(this);
     }
-
 }

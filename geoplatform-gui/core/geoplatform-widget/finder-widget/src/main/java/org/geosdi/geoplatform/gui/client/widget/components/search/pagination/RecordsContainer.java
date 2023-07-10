@@ -47,15 +47,10 @@ import com.extjs.gxt.ui.client.widget.grid.RowExpander;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.google.common.collect.Lists;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.RpcTokenException;
-import com.google.gwt.user.client.rpc.XsrfToken;
-import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
-import java.util.List;
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import com.google.gwt.user.client.rpc.*;
 import org.geosdi.geoplatform.gui.client.action.menu.ShowFullMetadataAction;
+import org.geosdi.geoplatform.gui.client.command.SearchFullRecordsRequest;
+import org.geosdi.geoplatform.gui.client.command.SearchFullRecordsResponse;
 import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.model.AbstractRecord.RecordKeyValue;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
@@ -63,6 +58,8 @@ import org.geosdi.geoplatform.gui.client.puregwt.event.StatusWidgetEvent;
 import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemote;
 import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.containers.pagination.grid.GridLayoutPaginationContainer;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
@@ -71,6 +68,10 @@ import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
 import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import java.util.List;
 
 /**
  *
@@ -93,18 +94,19 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     private final DisplayLayersProgressBarEvent hideProgressBar = new DisplayLayersProgressBarEvent(
             false);
 
+    /**
+     * @param theCatalogFinder
+     * @param theMetadataSelector
+     * @param theBus
+     */
     @Inject
-    public RecordsContainer(CatalogFinderBean theCatalogFinder,
-            MetadataSelectionManager theMetadataSelector,
-            GPEventBus theBus) {
+    public RecordsContainer(CatalogFinderBean theCatalogFinder, MetadataSelectionManager theMetadataSelector, GPEventBus theBus) {
         super(true, 10);
         super.setWidth(550);
         super.setStyleName("records-Container");
-
         this.catalogFinder = theCatalogFinder;
         this.metadataSelection = theMetadataSelector;
         this.bus = theBus;
-
         LayerHandlerManager.addHandler(DeselectGridRecordHandler.TYPE, this);
     }
 
@@ -122,17 +124,13 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     }
 
     private Menu createRecordContextMenu() {
-        ShowFullMetadataAction showFullMetadata = new ShowFullMetadataAction(
-                this);
-
+        ShowFullMetadataAction showFullMetadata = new ShowFullMetadataAction(this);
         MenuItem fullMetadata = new MenuItem();
         fullMetadata.addSelectionListener(showFullMetadata);
         fullMetadata.setText(showFullMetadata.getTitle());
         fullMetadata.setIcon(showFullMetadata.getImage());
-
         Menu menu = new Menu();
         menu.add(fullMetadata);
-
         return menu;
     }
 
@@ -181,12 +179,30 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
             @Override
             protected void load(final Object loadConfig,
                     final AsyncCallback<PagingLoadResult<FullRecord>> callback) {
-                xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+                final SearchFullRecordsRequest searchFullRecordsRequest = new SearchFullRecordsRequest();
+                searchFullRecordsRequest.setConfig((PagingLoadConfig) loadConfig);
+                searchFullRecordsRequest.setCatalogFinder(catalogFinder);
+                ClientCommandDispatcher.getInstance().execute(new GPClientCommand<SearchFullRecordsResponse>() {
 
+                    {
+                        super.setCommandRequest(searchFullRecordsRequest);
+                    }
+
+                    /**
+                     * @param response
+                     */
                     @Override
-                    public void onFailure(Throwable caught) {
+                    public void onCommandSuccess(SearchFullRecordsResponse response) {
+                        callback.onSuccess(response.getResult());
+                    }
+
+                    /**
+                     * @param exception
+                     */
+                    @Override
+                    public void onCommandFailure(Throwable exception) {
                         try {
-                            throw caught;
+                            throw exception;
                         } catch (RpcTokenException e) {
                             // Can be thrown for several reasons:
                             //   - duplicate session cookie, which may be a sign of a cookie
@@ -197,23 +213,12 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
                             // unexpected
                         }
                     }
-
-                    @Override
-                    public void onSuccess(XsrfToken token) {
-                        ((HasRpcToken) catalogFinderRemote).setRpcToken(token);
-                        catalogFinderRemote.searchFullRecords(
-                                (PagingLoadConfig) loadConfig, catalogFinder,
-                                callback);
-                    }
-
                 });
             }
-
         };
 
         super.loader = new BasePagingLoader<PagingLoadResult<FullRecord>>(proxy);
         super.loader.setRemoteSort(false);
-
         super.store = new ListStore<FullRecord>(loader);
     }
 

@@ -38,21 +38,19 @@ package org.geosdi.geoplatform.gui.client.action.menu;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.RpcTokenException;
-import com.google.gwt.user.client.rpc.XsrfToken;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.CatalogFinderWidgetResources;
+import org.geosdi.geoplatform.gui.client.command.GetRecordByIdRequest;
+import org.geosdi.geoplatform.gui.client.command.GetRecordByIdResponse;
 import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderMessages;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.puregwt.event.StatusWidgetEvent;
-import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemote;
-import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.components.search.pagination.RecordsContainer;
 import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 
 /**
  * Execute a CSW GetRecordById request, for view, into a new browser tab, the
@@ -62,17 +60,15 @@ import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPC
  */
 public class ShowFullMetadataAction extends MenuBaseAction {
 
-    private static final GPCatalogFinderRemoteAsync catalogFinderRemote = GPCatalogFinderRemote.Util.getInstance();
-    //
     private final RecordsContainer rc;
     private FullRecord record;
 
+    /**
+     * @param rc
+     */
     public ShowFullMetadataAction(RecordsContainer rc) {
-        super(CatalogFinderConstants.INSTANCE.
-                ShowFullMetadataAction_titleActionText(), 
-                AbstractImagePrototype.create(
-                        CatalogFinderWidgetResources.ICONS.metadata()));
-
+        super(CatalogFinderConstants.INSTANCE.ShowFullMetadataAction_titleActionText(),
+                AbstractImagePrototype.create(CatalogFinderWidgetResources.ICONS.metadata()));
         this.rc = rc;
     }
 
@@ -87,63 +83,41 @@ public class ShowFullMetadataAction extends MenuBaseAction {
             record = rc.getMetadataSelection().getRecordsExcluded().get(0);
         }
 
-        this.rc.getBus().fireEvent(
-                new StatusWidgetEvent(CatalogFinderMessages.INSTANCE.
-                        ShowFullMetadataAction_loadingStatusBarMessage(
-                                record.getTitle()),
-                        GPCatalogStatusBarType.STATUS_LOADING));
+        this.rc.getBus().fireEvent(new StatusWidgetEvent(
+                CatalogFinderMessages.INSTANCE.ShowFullMetadataAction_loadingStatusBarMessage(record.getTitle()),
+                GPCatalogStatusBarType.STATUS_LOADING));
+        final GetRecordByIdRequest getRecordByIdRequest = new GetRecordByIdRequest();
+        getRecordByIdRequest.setServerID(record.getIdCatalog());
+        getRecordByIdRequest.setIdentifier(record.getIdentifier());
+        getRecordByIdRequest.setModuleName(GWT.getModuleName());
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<GetRecordByIdResponse>() {
 
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
-
-            @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
-                }
+            {
+                super.setCommandRequest(getRecordByIdRequest);
             }
 
+            /**
+             * @param response
+             */
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) catalogFinderRemote).setRpcToken(token);
-                catalogFinderRemote.getRecordById(record.getIdCatalog(),
-                        record.getIdentifier(), GWT.getModuleName(),
-                        new AsyncCallback<String>() {
+            public void onCommandSuccess(GetRecordByIdResponse response) {
+                Window.open(GWT.getModuleBaseURL() + "csw-template/" + response.getResult(),
+                        CatalogFinderConstants.INSTANCE.ShowFullMetadataAction_windowText(), "");
+                rc.getBus().fireEvent(new StatusWidgetEvent(
+                        CatalogFinderConstants.INSTANCE.ShowFullMetadataAction_recordRequestExecutedText(),
+                        GPCatalogStatusBarType.STATUS_OK));
+            }
 
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                System.out.println(
-                                        "Error @@@@@@@@@@@@@@@@ " + caught);
-                                rc.getBus().fireEvent(
-                                        new StatusWidgetEvent(
-                                                CatalogFinderConstants.INSTANCE.
-                                                ShowFullMetadataAction_errorRecordRequestText(),
-                                                GPCatalogStatusBarType.STATUS_ERROR));
-                            }
-
-                            @Override
-                            public void onSuccess(String result) {
-                                Window.open(
-                                        GWT.getModuleBaseURL() + "csw-template/" + result,
-                                        CatalogFinderConstants.INSTANCE.ShowFullMetadataAction_windowText(),
-                                        "");
-                                rc.getBus().fireEvent(
-                                        new StatusWidgetEvent(
-                                                CatalogFinderConstants.INSTANCE.
-                                                ShowFullMetadataAction_recordRequestExecutedText(),
-                                                GPCatalogStatusBarType.STATUS_OK));
-                            }
-
-                        });
+            /**
+             * @param exception
+             */
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                System.out.println("Error @@@@@@@@@@@@@@@@ " + exception);
+                rc.getBus().fireEvent(new StatusWidgetEvent(
+                        CatalogFinderConstants.INSTANCE.ShowFullMetadataAction_errorRecordRequestText(),
+                        GPCatalogStatusBarType.STATUS_ERROR));
             }
         });
     }
-
 }

@@ -34,31 +34,29 @@
  */
 package org.geosdi.geoplatform.gui.server.command;
 
-import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import jakarta.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.gui.client.command.SearchCSWServersRequest;
-import org.geosdi.geoplatform.gui.client.command.SearchCSWServersResponse;
+import org.geosdi.geoplatform.gui.client.command.GetRecordByIdRequest;
+import org.geosdi.geoplatform.gui.client.command.GetRecordByIdResponse;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
-import org.geosdi.geoplatform.request.PaginatedSearchRequest;
-import org.geosdi.geoplatform.request.SearchRequest;
-import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.io.File;
+import java.text.Normalizer;
+import java.util.regex.Pattern;
 
-import static java.util.stream.Collectors.toCollection;
+import static java.lang.System.currentTimeMillis;
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.regex.Pattern.compile;
+import static org.apache.commons.io.FileUtils.writeStringToFile;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Lazy
-@Component(value = "command.SearchCSWServersCommand")
-class SearchCSWServersCommand extends BaseCSWCommand<SearchCSWServersRequest, SearchCSWServersResponse> {
+@Component(value = "command.GetRecordByIdCommand")
+class GetRecordByIdCommand extends BaseCSWCommand<GetRecordByIdRequest, GetRecordByIdResponse> {
 
     /**
      * @param request
@@ -66,32 +64,34 @@ class SearchCSWServersCommand extends BaseCSWCommand<SearchCSWServersRequest, Se
      * @return
      */
     @Override
-    public SearchCSWServersResponse execute(SearchCSWServersRequest request, HttpServletRequest httpServletRequest) {
+    public GetRecordByIdResponse execute(GetRecordByIdRequest request, HttpServletRequest httpServletRequest) {
         logger.debug("#####################Executing {} Command", this.getClass().getSimpleName());
-        logger.debug("Search Text: {}", request.getSearchText());
-        logger.debug("Organization: {}", request.getOrganization());
-        SearchRequest srq = new SearchRequest(request.getSearchText());
+        logger.debug("ServerID : {}", request.getServerID());
+        logger.debug("Identifier : {}", request.getIdentifier());
+        logger.debug("ModuleName : {}", request.getModuleName());
         try {
-            int serversCount = geoPlatformCSWClient.getCSWServersCount(srq, request.getOrganization());
-            ArrayList<GPCSWServerBeanModel> searchServers;
-            if (serversCount == 0) {
-                logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@No catalog found ***");
-                searchServers = new ArrayList<GPCSWServerBeanModel>(0);
-            } else {
-                int start = request.getConfig().getOffset();
-                int page = start == 0 ? start : start / request.getConfig().getLimit();
-                PaginatedSearchRequest psr = new PaginatedSearchRequest(request.getSearchText(),
-                        request.getConfig().getLimit(), page);
-                List<ServerCSWDTO> serverList = geoPlatformCSWClient.searchCSWServers(psr, request.getOrganization());
-                searchServers = serverList.stream()
-                        .filter(Objects::nonNull)
-                        .map(SearchCSWServersCommand::convertServerDTO)
-                        .collect(toCollection(ArrayList::new));
-            }
-            return new SearchCSWServersResponse(new BasePagingLoadResult<GPCSWServerBeanModel>(searchServers, request.getConfig().getOffset(), serversCount));
+            String url = httpServletRequest.getSession().getServletContext().getRealPath("/" + request.getModuleName() + "/csw-template");
+            logger.trace("PATH @@@@@@@@@@@@@@@@@@ {}", url);
+            String response = geoPlatformCSWClient.getRecordById(request.getServerID(), request.getIdentifier());
+            response = this.deAccent(response);
+            String fileName = url + "/" + currentTimeMillis() + "-" + request.getIdentifier() + ".xml";
+            File file = new File(fileName);
+            writeStringToFile(file, response, UTF_8);
+            logger.debug("Name FILE Created  @@@@@@@@@@@@@@@@@@@@@@@@@@@ {}", file.getName());
+            return new GetRecordByIdResponse(file.getName());
         } catch (Exception ex) {
-            ex.printStackTrace();
-            throw new GeoPlatformException(ex);
+            logger.error("\n*** IOException ***\n{}", ex.getMessage());
+            throw new GeoPlatformException(ex.getMessage());
         }
+    }
+
+    /**
+     * @param str
+     * @return {@link String}
+     */
+    protected String deAccent(String str) {
+        String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
+        Pattern pattern = compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(nfdNormalizedString).replaceAll("'");
     }
 }

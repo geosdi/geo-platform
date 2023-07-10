@@ -37,7 +37,10 @@ package org.geosdi.geoplatform.gui.client.widget.components.filters.container;
 
 import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.data.*;
-import com.extjs.gxt.ui.client.event.*;
+import com.extjs.gxt.ui.client.event.ComponentEvent;
+import com.extjs.gxt.ui.client.event.KeyListener;
+import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
+import com.extjs.gxt.ui.client.event.SelectionChangedListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.grid.*;
@@ -47,25 +50,23 @@ import com.extjs.gxt.ui.client.widget.tips.QuickTip;
 import com.google.common.collect.Lists;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
 import com.google.gwt.user.client.rpc.RpcTokenException;
-import com.google.gwt.user.client.rpc.XsrfToken;
-import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import java.util.List;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.action.button.GPSecureButton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.action.server.AddServerAction;
 import org.geosdi.geoplatform.gui.client.action.server.DeleteServerAction;
+import org.geosdi.geoplatform.gui.client.command.DeleteServerCSWRequest;
+import org.geosdi.geoplatform.gui.client.command.DeleteServerCSWResponse;
+import org.geosdi.geoplatform.gui.client.command.SearchCSWServersRequest;
+import org.geosdi.geoplatform.gui.client.command.SearchCSWServersResponse;
 import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.puregwt.event.StatusWidgetEvent;
 import org.geosdi.geoplatform.gui.client.puregwt.handler.LoadFirstServersHandler;
-import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemote;
-import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.components.form.CSWServerFormWidget;
 import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.configuration.action.event.ActionEnableEvent;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -75,22 +76,19 @@ import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel.GPCSWServerKeyValue;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
-import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import java.util.List;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Singleton
-public class CSWServerPaginationContainer
-        extends GridLayoutPaginationContainer<GPCSWServerBeanModel>
-        implements LoadFirstServersHandler {
+public class CSWServerPaginationContainer extends GridLayoutPaginationContainer<GPCSWServerBeanModel> implements LoadFirstServersHandler {
 
-    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
-    private static final GPCatalogFinderRemoteAsync catalogFinderRemote = GPCatalogFinderRemote.Util.getInstance();
-    //
     private final CatalogFinderBean catalogFinder;
     private final GPEventBus bus;
     private final ActionEnableEvent enableEvent = new ActionEnableEvent(false);
@@ -101,13 +99,11 @@ public class CSWServerPaginationContainer
     private GPSecureButton deleteServerButton;
 
     @Inject
-    public CSWServerPaginationContainer(CatalogFinderBean theCatalogFinder,
-            GPEventBus theBus) {
+    public CSWServerPaginationContainer(CatalogFinderBean theCatalogFinder, GPEventBus theBus) {
         super(true);
         catalogFinder = theCatalogFinder;
         bus = theBus;
         serverForm = new CSWServerFormWidget(this, bus);
-
         bus.addHandler(LoadFirstServersHandler.TYPE, this);
     }
 
@@ -129,9 +125,7 @@ public class CSWServerPaginationContainer
 
     private void createSearchComponent() {
         searchField = new GPSecureStringTextField();
-        searchField.setFieldLabel(
-                CatalogFinderConstants.INSTANCE.CSWServerPaginationContainer_searchFieltLabelText());
-
+        searchField.setFieldLabel(CatalogFinderConstants.INSTANCE.CSWServerPaginationContainer_searchFieltLabelText());
         searchField.addKeyListener(new KeyListener() {
 
             @Override
@@ -262,13 +256,32 @@ public class CSWServerPaginationContainer
             @Override
             protected void load(final Object loadConfig,
                     final AsyncCallback<PagingLoadResult<GPCSWServerBeanModel>> callback) {
-                final String searchText = searchField.getValue() == null ? "" : searchField.getValue();
-                xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+                String searchText = searchField.getValue() == null ? "" : searchField.getValue();
+                final SearchCSWServersRequest searchCSWServersRequest = new SearchCSWServersRequest();
+                searchCSWServersRequest.setConfig((PagingLoadConfig) loadConfig);
+                searchCSWServersRequest.setSearchText(searchText);
+                searchCSWServersRequest.setOrganization(GPAccountLogged.getInstance().getOrganization());
+                ClientCommandDispatcher.getInstance().execute(new GPClientCommand<SearchCSWServersResponse>() {
 
+                    {
+                        super.setCommandRequest(searchCSWServersRequest);
+                    }
+
+                    /**
+                     * @param response
+                     */
                     @Override
-                    public void onFailure(Throwable caught) {
+                    public void onCommandSuccess(SearchCSWServersResponse response) {
+                        callback.onSuccess(response.getResult());
+                    }
+
+                    /**
+                     * @param exception
+                     */
+                    @Override
+                    public void onCommandFailure(Throwable exception) {
                         try {
-                            throw caught;
+                            throw exception;
                         } catch (RpcTokenException e) {
                             // Can be thrown for several reasons:
                             //   - duplicate session cookie, which may be a sign of a cookie
@@ -279,18 +292,8 @@ public class CSWServerPaginationContainer
                             // unexpected
                         }
                     }
-
-                    @Override
-                    public void onSuccess(XsrfToken token) {
-                        ((HasRpcToken) catalogFinderRemote).setRpcToken(token);
-                        catalogFinderRemote.searchCSWServers(
-                                (PagingLoadConfig) loadConfig, searchText,
-                                GPAccountLogged.getInstance().getOrganization(),
-                                callback);
-                    }
                 });
             }
-
         };
 
         super.loader = new BasePagingLoader<PagingLoadResult<GPCSWServerBeanModel>>(
@@ -338,55 +341,39 @@ public class CSWServerPaginationContainer
     }
 
     public void executeDeleteServer() {
-        super.widget.mask(
-                CatalogFinderConstants.INSTANCE.CSWServerPaginationContainer_gridDeletingMaskText());
-
+        super.widget.mask(CatalogFinderConstants.INSTANCE.CSWServerPaginationContainer_gridDeletingMaskText());
         final GPCSWServerBeanModel selectedServer = sm.getSelectedItem();
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+        final DeleteServerCSWRequest deleteServerCSWRequest = new DeleteServerCSWRequest();
+        deleteServerCSWRequest.setServerID(selectedServer.getId());
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<DeleteServerCSWResponse>() {
 
-            @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
-                }
+            {
+                super.setCommandRequest(deleteServerCSWRequest);
             }
 
+            /**
+             * @param response
+             */
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) catalogFinderRemote).setRpcToken(token);
-                catalogFinderRemote.deleteServerCSW(selectedServer.getId(),
-                        new AsyncCallback<Boolean>() {
+            public void onCommandSuccess(DeleteServerCSWResponse response) {
+                store.remove(selectedServer);
+                bus.fireEvent(new StatusWidgetEvent(
+                        CatalogFinderConstants.INSTANCE.CSWServerPaginationContainer_eventCorrectlyDeletedServerText(),
+                        GPCatalogStatusBarType.STATUS_OK));
 
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                System.out.println(
-                                        "\n*** Error on deleting server: " + caught.getMessage()); // TODO logger
-                                bus.fireEvent(new StatusWidgetEvent(
-                                                CatalogFinderConstants.INSTANCE.CSWServerPaginationContainer_eventErrorDeletingServerText(),
-                                                GPCatalogStatusBarType.STATUS_ERROR));
+                widget.unmask();
+            }
 
-                                widget.unmask();
-                            }
-
-                            @Override
-                            public void onSuccess(Boolean result) {
-                                store.remove(selectedServer);
-                                bus.fireEvent(new StatusWidgetEvent(
-                                                CatalogFinderConstants.INSTANCE.CSWServerPaginationContainer_eventCorrectlyDeletedServerText(),
-                                                GPCatalogStatusBarType.STATUS_OK));
-
-                                widget.unmask();
-                            }
-
-                        });
+            /**
+             * @param exception
+             */
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                System.out.println("\n*** Error on deleting server: " + exception.getMessage()); // TODO logger
+                bus.fireEvent(new StatusWidgetEvent(
+                        CatalogFinderConstants.INSTANCE.CSWServerPaginationContainer_eventErrorDeletingServerText(),
+                        GPCatalogStatusBarType.STATUS_ERROR));
+                widget.unmask();
             }
         });
     }

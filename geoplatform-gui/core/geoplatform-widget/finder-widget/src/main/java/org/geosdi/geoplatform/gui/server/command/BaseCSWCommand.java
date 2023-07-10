@@ -34,11 +34,19 @@
  */
 package org.geosdi.geoplatform.gui.server.command;
 
+import org.geosdi.geoplatform.gui.client.model.AbstractRecord;
+import org.geosdi.geoplatform.gui.client.model.FullRecord;
+import org.geosdi.geoplatform.gui.client.model.SummaryRecord;
 import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
 import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
+import org.geosdi.geoplatform.gui.configuration.map.client.geometry.BBoxClientInfo;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
+import org.geosdi.geoplatform.gui.shared.bean.BBox;
+import org.geosdi.geoplatform.responce.AbstractRecordDTO;
+import org.geosdi.geoplatform.responce.FullRecordDTO;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
+import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 import org.geosdi.geoplatform.services.GeoPlatformCSWService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,5 +100,58 @@ abstract class BaseCSWCommand<Request extends GPCommandRequest, Response extends
         server.setTitle(serverDTO.getTitle());
         server.setAlias(serverDTO.getAlias());
         return server;
+    }
+
+    /**
+     * @param record
+     * @param recordDTO
+     * @param <R>
+     * @return {@link R}
+     */
+    protected static <R extends AbstractRecord> R convertRecordDTO(R record, AbstractRecordDTO recordDTO) {
+        record.setIdentifier(recordDTO.getIdentifier());
+        record.setIdCatalog(recordDTO.getIdCatalog());
+        record.setTitle(recordDTO.getTitle());
+        record.setCatalogURL(recordDTO.getCatalogURL());
+        record.setType(recordDTO.getType());
+        record.setAbstractText(recordDTO.getAbstractText());
+        record.setSubjects(recordDTO.getSubjects());
+        return record;
+    }
+
+    /**
+     * @param summaryRecordDTO
+     * @return {@link SummaryRecord}
+     */
+    protected static SummaryRecord convertSummaryRecordDTO(SummaryRecordDTO summaryRecordDTO) {
+        return convertRecordDTO(new SummaryRecord(), summaryRecordDTO);
+    }
+
+    /**
+     * @param fullRecordDTO
+     * @return {@link FullRecord}
+     */
+    protected static FullRecord convertFullRecordDTO(FullRecordDTO fullRecordDTO) {
+        FullRecord fullRecord = convertRecordDTO(new FullRecord(), fullRecordDTO);
+        fullRecord.setBBox(convertBBoxDTO(fullRecordDTO.getBBox()));
+        fullRecord.setCrs(fullRecordDTO.getCrs());
+        fullRecord.setUriMap(fullRecordDTO.getUriMap());
+        return fullRecord;
+    }
+
+    /**
+     * @param bBox
+     * @return {@link BBoxClientInfo}
+     */
+    protected static BBoxClientInfo convertBBoxDTO(BBox bBox) {
+        if (bBox == null) {
+            return null;
+        }
+        BBoxClientInfo bBoxClient = new BBoxClientInfo();
+        bBoxClient.setLowerLeftX(bBox.getMinX());
+        bBoxClient.setLowerLeftY(bBox.getMinY());
+        bBoxClient.setUpperRightX(bBox.getMaxX());
+        bBoxClient.setUpperRightY(bBox.getMaxY());
+        return bBoxClient;
     }
 }

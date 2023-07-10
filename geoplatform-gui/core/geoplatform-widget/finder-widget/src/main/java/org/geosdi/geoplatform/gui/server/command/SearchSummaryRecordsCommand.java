@@ -36,13 +36,11 @@ package org.geosdi.geoplatform.gui.server.command;
 
 import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import jakarta.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.gui.client.command.SearchCSWServersRequest;
-import org.geosdi.geoplatform.gui.client.command.SearchCSWServersResponse;
+import org.geosdi.geoplatform.gui.client.command.SearchSummaryRecordsRequest;
+import org.geosdi.geoplatform.gui.client.command.SearchSummaryRecordsResponse;
+import org.geosdi.geoplatform.gui.client.model.SummaryRecord;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
-import org.geosdi.geoplatform.request.PaginatedSearchRequest;
-import org.geosdi.geoplatform.request.SearchRequest;
-import org.geosdi.geoplatform.responce.ServerCSWDTO;
+import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -57,8 +55,8 @@ import static java.util.stream.Collectors.toCollection;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Lazy
-@Component(value = "command.SearchCSWServersCommand")
-class SearchCSWServersCommand extends BaseCSWCommand<SearchCSWServersRequest, SearchCSWServersResponse> {
+@Component(value = "command.SearchSummaryRecordsCommand")
+class SearchSummaryRecordsCommand extends BaseCSWCommand<SearchSummaryRecordsRequest, SearchSummaryRecordsResponse> {
 
     /**
      * @param request
@@ -66,32 +64,25 @@ class SearchCSWServersCommand extends BaseCSWCommand<SearchCSWServersRequest, Se
      * @return
      */
     @Override
-    public SearchCSWServersResponse execute(SearchCSWServersRequest request, HttpServletRequest httpServletRequest) {
+    public SearchSummaryRecordsResponse execute(SearchSummaryRecordsRequest request, HttpServletRequest httpServletRequest) {
         logger.debug("#####################Executing {} Command", this.getClass().getSimpleName());
-        logger.debug("Search Text: {}", request.getSearchText());
-        logger.debug("Organization: {}", request.getOrganization());
-        SearchRequest srq = new SearchRequest(request.getSearchText());
+        logger.debug("PagingLoadConfig : {}", request.getConfig());
+        logger.debug("CatalogFinder : {}", request.getCatalogFinder());
         try {
-            int serversCount = geoPlatformCSWClient.getCSWServersCount(srq, request.getOrganization());
-            ArrayList<GPCSWServerBeanModel> searchServers;
-            if (serversCount == 0) {
-                logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@No catalog found ***");
-                searchServers = new ArrayList<GPCSWServerBeanModel>(0);
+            int recordsCount = geoPlatformCSWClient.getRecordsCount(request.getCatalogFinder());
+            if (recordsCount == 0) {
+                logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ No Summary Record found @@@@@@@@@@@@@@@@@@@@@");
+                return new SearchSummaryRecordsResponse(new BasePagingLoadResult<SummaryRecord>(new ArrayList<SummaryRecord>(0), request.getConfig().getOffset(), recordsCount));
             } else {
-                int start = request.getConfig().getOffset();
-                int page = start == 0 ? start : start / request.getConfig().getLimit();
-                PaginatedSearchRequest psr = new PaginatedSearchRequest(request.getSearchText(),
-                        request.getConfig().getLimit(), page);
-                List<ServerCSWDTO> serverList = geoPlatformCSWClient.searchCSWServers(psr, request.getOrganization());
-                searchServers = serverList.stream()
+                List<SummaryRecordDTO> recordList = geoPlatformCSWClient.searchSummaryRecords(request.getConfig().getLimit(), request.getConfig().getOffset() + 1, request.getCatalogFinder());
+                return new SearchSummaryRecordsResponse(new BasePagingLoadResult<SummaryRecord>(recordList.stream()
                         .filter(Objects::nonNull)
-                        .map(SearchCSWServersCommand::convertServerDTO)
-                        .collect(toCollection(ArrayList::new));
+                        .map(SearchSummaryRecordsCommand::convertSummaryRecordDTO)
+                        .collect(toCollection(ArrayList::new)), request.getConfig().getOffset(), recordsCount));
             }
-            return new SearchCSWServersResponse(new BasePagingLoadResult<GPCSWServerBeanModel>(searchServers, request.getConfig().getOffset(), serversCount));
         } catch (Exception ex) {
             ex.printStackTrace();
-            throw new GeoPlatformException(ex);
+            throw new GeoPlatformException(ex.getMessage());
         }
     }
 }

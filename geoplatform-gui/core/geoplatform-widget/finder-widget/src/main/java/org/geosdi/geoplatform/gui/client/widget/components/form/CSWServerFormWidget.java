@@ -39,46 +39,40 @@ import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
-import com.extjs.gxt.ui.client.widget.form.*;
+import com.extjs.gxt.ui.client.widget.form.Field;
+import com.extjs.gxt.ui.client.widget.form.FieldSet;
+import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
+import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.RpcTokenException;
-import com.google.gwt.user.client.rpc.XsrfToken;
-import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.command.SaveServerCSWRequest;
+import org.geosdi.geoplatform.gui.client.command.SaveServerCSWResponse;
 import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderMessages;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.i18n.status.SaveStatusConstants;
 import org.geosdi.geoplatform.gui.client.puregwt.event.StatusWidgetEvent;
-import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemote;
-import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.SaveStatus.EnumSaveStatus;
 import org.geosdi.geoplatform.gui.client.widget.components.filters.container.CSWServerPaginationContainer;
 import org.geosdi.geoplatform.gui.client.widget.form.GeoPlatformFormWidget;
 import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.model.server.GPCSWServerBeanModel;
 import org.geosdi.geoplatform.gui.model.server.GPServerBeanModel;
 import org.geosdi.geoplatform.gui.puregwt.GPEventBus;
-import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class CSWServerFormWidget
-        extends GeoPlatformFormWidget<GPServerBeanModel> {
+public class CSWServerFormWidget extends GeoPlatformFormWidget<GPServerBeanModel> {
 
-    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
-    private static final GPCatalogFinderRemoteAsync catalogFinderRemote = GPCatalogFinderRemote.Util.getInstance();
-    //
     private final CSWServerPaginationContainer catalogWindget;
     private FormButtonBinding formButtonBinding; // Monitors the valid state of a form and enabled / disabled all buttons
     private GPSecureStringTextField urlField;
@@ -87,8 +81,11 @@ public class CSWServerFormWidget
     private String urlEncoding;
     private final GPEventBus bus;
 
-    public CSWServerFormWidget(CSWServerPaginationContainer catalogWindget,
-            GPEventBus bus) {
+    /**
+     * @param catalogWindget
+     * @param bus
+     */
+    public CSWServerFormWidget(CSWServerPaginationContainer catalogWindget, GPEventBus bus) {
         super(true);
         this.catalogWindget = catalogWindget;
         this.bus = bus;
@@ -97,14 +94,10 @@ public class CSWServerFormWidget
     @Override
     public void addComponentToForm() {
         this.createFieldSet();
-
         super.saveStatus = new SaveStatus();
         super.saveStatus.setAutoWidth(true);
-
         super.formPanel.getButtonBar().add(super.saveStatus);
-
         super.formPanel.setButtonAlign(HorizontalAlignment.RIGHT);
-
         saveButton = new Button(ButtonsConstants.INSTANCE.saveText(),
                 AbstractImagePrototype.create(BasicWidgetResources.ICONS.done()),
                 new SelectionListener<ButtonEvent>() {
@@ -116,7 +109,6 @@ public class CSWServerFormWidget
                 });
         saveButton.setEnabled(false);
         super.formPanel.addButton(saveButton);
-
         Button cancelButton = new Button(ButtonsConstants.INSTANCE.cancelText(),
                 AbstractImagePrototype.create(BasicWidgetResources.ICONS.cancel()),
                 new SelectionListener<ButtonEvent>() {
@@ -127,15 +119,13 @@ public class CSWServerFormWidget
                     }
                 });
         super.formPanel.addButton(cancelButton);
-
         formButtonBinding = new FormButtonBinding(super.formPanel);
         formButtonBinding.addButton(saveButton);
     }
 
     private void createFieldSet() {
         fieldSet = new FieldSet();
-        fieldSet.setHeadingHtml(
-                CatalogFinderConstants.INSTANCE.CSWServerFormWidget_fieldSetHeadingText());
+        fieldSet.setHeadingHtml(CatalogFinderConstants.INSTANCE.CSWServerFormWidget_fieldSetHeadingText());
 
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(70);
@@ -176,8 +166,7 @@ public class CSWServerFormWidget
 
     @Override
     public void initSize() {
-        setHeadingHtml(
-                CatalogFinderConstants.INSTANCE.CSWServerFormWidget_headingText());
+        setHeadingHtml(CatalogFinderConstants.INSTANCE.CSWServerFormWidget_headingText());
         setSize(400, 210);
     }
 
@@ -204,18 +193,15 @@ public class CSWServerFormWidget
 
     @Override
     public void execute() {
-        super.saveStatus.setBusy(
-                CatalogFinderConstants.INSTANCE.CSWServerFormWidget_saveStatusBusyText());
+        super.saveStatus.setBusy(CatalogFinderConstants.INSTANCE.CSWServerFormWidget_saveStatusBusyText());
 
         GPCSWServerBeanModel server = catalogWindget.containsServer(urlEncoding);
         if (server != null) {
             setStatus(EnumSaveStatus.STATUS_NOT_SAVE.getValue(),
                     SaveStatusConstants.INSTANCE.STATUS_MESSAGE_NOT_SAVE());
 
-            GeoPlatformMessage.alertMessage(
-                    SaveStatusConstants.INSTANCE.STATUS_MESSAGE_NOT_SAVE(),
-                    CatalogFinderMessages.INSTANCE.CSWServerFormWidget_alertExistServerMessage(
-                            server.getAlias()));
+            GeoPlatformMessage.alertMessage(SaveStatusConstants.INSTANCE.STATUS_MESSAGE_NOT_SAVE(),
+                    CatalogFinderMessages.INSTANCE.CSWServerFormWidget_alertExistServerMessage(server.getAlias()));
         } else {
             saveServer();
         }
@@ -223,73 +209,65 @@ public class CSWServerFormWidget
 
     private void saveServer() {
         final String aliasValue = aliasField.getValue().trim();
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<SaveServerCSWResponse>() {
 
-            @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
-                }
+            {
+                super.setCommandRequest(new SaveServerCSWRequest() {
+                    {
+                        super.setAlias(aliasValue);
+                        super.setServerUrl(urlEncoding);
+                        super.setOrganization(GPAccountLogged.getInstance().getOrganization());
+                    }
+                });
             }
 
+            /**
+             * @param response
+             */
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) catalogFinderRemote).setRpcToken(token);
-                catalogFinderRemote.saveServerCSW(aliasValue, urlEncoding,
-                        GPAccountLogged.getInstance().getOrganization(),
-                        new AsyncCallback<GPCSWServerBeanModel>() {
+            public void onCommandSuccess(SaveServerCSWResponse response) {
+                GPCSWServerBeanModel server = response.getResult();
+                catalogWindget.addNewServer(server);
 
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                System.out.println(
-                                        "\n*** Error on saving server: " + caught.getMessage()); // TODO logger
-                                setStatus(
-                                        EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
-                                        SaveStatusConstants.INSTANCE.STATUS_MESSAGE_SAVE_ERROR());
-                                bus.fireEvent(new StatusWidgetEvent(
-                                                CatalogFinderConstants.INSTANCE.CSWServerFormWidget_eventErrorSavingServerText(),
-                                                GPCatalogStatusBarType.STATUS_ERROR));
-                            }
+                /**
+                 * TODO Manage case when the user try to add a
+                 * server with same alias and URL wrt a DB entry
+                 * previous added. So, the server don't be added
+                 * but will be returned the DB entry early
+                 * saved.
+                 */
+                if (aliasValue.equals(server.getAlias())) {
+                    setStatus(
+                            EnumSaveStatus.STATUS_SAVE.getValue(),
+                            SaveStatusConstants.INSTANCE.STATUS_MESSAGE_SAVE());
+                    bus.fireEvent(new StatusWidgetEvent(
+                            CatalogFinderConstants.INSTANCE.CSWServerFormWidget_eventCorrectlySavedServerText(),
+                            GPCatalogStatusBarType.STATUS_OK));
+                } else {
+                    setStatus(
+                            EnumSaveStatus.STATUS_NOT_SAVE.getValue(),
+                            SaveStatusConstants.INSTANCE.STATUS_MESSAGE_NOT_SAVE());
+                    bus.fireEvent(new StatusWidgetEvent(
+                            CatalogFinderMessages.INSTANCE.CSWServerFormWidget_alertExistServerMessage(
+                                    server.getAlias()),
+                            GPCatalogStatusBarType.STATUS_NOT_OK));
+                }
 
-                            @Override
-                            public void onSuccess(GPCSWServerBeanModel server) {
-                                catalogWindget.addNewServer(server);
+                hide();
+            }
 
-                                /**
-                                 * TODO Manage case when the user try to add a
-                                 * server with same alias and URL wrt a DB entry
-                                 * previous added. So, the server don't be added
-                                 * but will be returned the DB entry early
-                                 * saved.
-                                 */
-                                if (aliasValue.equals(server.getAlias())) {
-                                    setStatus(
-                                            EnumSaveStatus.STATUS_SAVE.getValue(),
-                                            SaveStatusConstants.INSTANCE.STATUS_MESSAGE_SAVE());
-                                    bus.fireEvent(new StatusWidgetEvent(
-                                                    CatalogFinderConstants.INSTANCE.CSWServerFormWidget_eventCorrectlySavedServerText(),
-                                                    GPCatalogStatusBarType.STATUS_OK));
-                                } else {
-                                    setStatus(
-                                            EnumSaveStatus.STATUS_NOT_SAVE.getValue(),
-                                            SaveStatusConstants.INSTANCE.STATUS_MESSAGE_NOT_SAVE());
-                                    bus.fireEvent(new StatusWidgetEvent(
-                                                    CatalogFinderMessages.INSTANCE.CSWServerFormWidget_alertExistServerMessage(
-                                                            server.getAlias()),
-                                                    GPCatalogStatusBarType.STATUS_NOT_OK));
-                                }
-
-                                hide();
-                            }
-                        });
+            /**
+             * @param exception
+             */
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                System.out.println("\n*** Error on saving server: " + exception.getMessage()); // TODO logger
+                setStatus(
+                        EnumSaveStatus.STATUS_SAVE_ERROR.getValue(),
+                        SaveStatusConstants.INSTANCE.STATUS_MESSAGE_SAVE_ERROR());
+                bus.fireEvent(new StatusWidgetEvent(
+                        CatalogFinderConstants.INSTANCE.CSWServerFormWidget_eventErrorSavingServerText(),
+                        GPCatalogStatusBarType.STATUS_ERROR));
             }
         });
     }

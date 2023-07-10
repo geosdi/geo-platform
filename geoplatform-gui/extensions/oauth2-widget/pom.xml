@@ -28,12 +28,18 @@
             <artifactId>google-api-client</artifactId>
             <version>2.2.0</version>
         </dependency>
-		
+
         <!-- Dependencies for GWT -->
 
         <dependency>
             <groupId>org.gwtproject</groupId>
             <artifactId>gwt-servlet-jakarta</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.gwtproject</groupId>
+            <artifactId>gwt-user</artifactId>
             <scope>provided</scope>
         </dependency>
 

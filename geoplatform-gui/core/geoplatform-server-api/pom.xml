@@ -1,7 +1,7 @@
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-  
+
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>core</artifactId>
@@ -23,20 +23,31 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.gwtproject</groupId>
+            <artifactId>gwt-user</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.gwtproject</groupId>
+            <artifactId>gwt-user</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-configuration</artifactId>
             <scope>provided</scope>
         </dependency>
-        
+
         <!-- =========================================================== -->
         <!-- ======================== GUAVA ============================ -->
         <!-- =========================================================== -->
-            
+
         <dependency>
             <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>          
+            <artifactId>guava</artifactId>
         </dependency>
 
         <!-- SPRING -->
@@ -77,7 +88,7 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
         </dependency>
-        
+
         <!-- ============================================================== -->
         <!-- =============== GEOPLATFORM WS BASIC CONNECTOR =============== -->
         <!-- ============================================================== -->
@@ -86,18 +97,18 @@
             <artifactId>geoplatform-ws-basic-connector</artifactId>
             <version>${project.version}</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-ws-wms-connector</artifactId>
             <version>${project.version}</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-sharing</artifactId>
         </dependency>
-        
+
         <!-- CAS -->
         <dependency>
             <groupId>org.jasig.cas.client</groupId>
@@ -107,7 +118,7 @@
         </dependency>
 
     </dependencies>
-  
+
     <build>
         <plugins>
             <plugin>
@@ -132,7 +143,7 @@
                 <artifactId>maven-resources-plugin</artifactId>
             </plugin>
         </plugins>
-        
+
         <!-- TODO: the resources stuff hardcodes paths to source + test directories, 
         we should be able to use some properties here -->
         <resources>

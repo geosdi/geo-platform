@@ -878,7 +878,7 @@
             <dependency>
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
-                <version>2.1.214</version>
+                <version>2.2.220</version>
             </dependency>
 
             <!-- =========================================================== -->
@@ -1524,7 +1524,7 @@
 
         <geoserver-manager-version>1.7</geoserver-manager-version>
         <geojson-jackson-version>1.14</geojson-jackson-version>
-        <hsqldb-version>2.7.0</hsqldb-version>
+        <hsqldb-version>2.7.2</hsqldb-version>
         <geodb-version>0.9</geodb-version>
         <junit.version>4.13.2</junit.version>
         <maven-surefire.version>3.0.0-M7</maven-surefire.version>

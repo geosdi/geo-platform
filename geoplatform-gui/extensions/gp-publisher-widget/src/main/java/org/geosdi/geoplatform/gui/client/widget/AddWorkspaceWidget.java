@@ -43,15 +43,18 @@ import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.command.publish.workspace.CreateWorkspaceCommandRequest;
+import org.geosdi.geoplatform.gui.client.command.publish.workspace.CreateWorkspaceCommandResponse;
 import org.geosdi.geoplatform.gui.client.i18n.PublisherWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
-import org.geosdi.geoplatform.gui.client.service.PublisherRemote;
 import org.geosdi.geoplatform.gui.client.widget.form.GenericFormWidget;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 
@@ -169,29 +172,37 @@ public class AddWorkspaceWidget extends GenericFormWidget {
 
     @Override
     public void execute() {
-        PublisherRemote.Util.getInstance().createWorkspace(
-                this.workspaceNameTextField.getValue(), false, new AsyncCallback<Boolean>() {
 
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorTitleText(),
-                                WindowsConstants.INSTANCE.errorSavingTitleText() + caught.getMessage());
-                    }
+        final CreateWorkspaceCommandRequest createWorkspaceCommandRequest = GWT.<CreateWorkspaceCommandRequest>create(
+                CreateWorkspaceCommandRequest.class);
+        createWorkspaceCommandRequest.setWorkspaceName(this.workspaceNameTextField.getValue());
 
-                    @Override
-                    public void onSuccess(Boolean result) {
-                        if (result) {
-                            clearComponents();
-                            AddWorkspaceWidget.super.hide();
-                            GeoPlatformMessage.infoMessage(WindowsConstants.INSTANCE.infoTitleText(),
-                                    WindowsConstants.INSTANCE.operationCompletedWithSuccessText());
-                        } else {
-                            GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorTitleText(),
-                                    WindowsConstants.INSTANCE.errorSavingTitleText());
-                        }
-                    }
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<CreateWorkspaceCommandResponse>() {
+            /**
+             * @param response
+             */
+            @Override
+            public void onCommandSuccess(CreateWorkspaceCommandResponse response) {
+                if (response.getResult()) {
+                    clearComponents();
+                    AddWorkspaceWidget.super.hide();
+                    GeoPlatformMessage.infoMessage(WindowsConstants.INSTANCE.infoTitleText(),
+                            WindowsConstants.INSTANCE.operationCompletedWithSuccessText());
+                } else {
+                    GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorTitleText(),
+                            WindowsConstants.INSTANCE.errorSavingTitleText());
+                }
+            }
 
-                });
+            /**
+             * @param exception
+             */
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorTitleText(),
+                        WindowsConstants.INSTANCE.errorSavingTitleText() + exception.getMessage());
+            }
+        });
     }
 
     @Override

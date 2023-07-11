@@ -42,22 +42,26 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
 import com.google.common.collect.Lists;
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.command.publish.layer.LayerPreviewCommandRequest;
+import org.geosdi.geoplatform.gui.client.command.publish.workspace.CreateWorkspaceCommandResponse;
 import org.geosdi.geoplatform.gui.client.event.kml.UploadKmlEvent;
 import org.geosdi.geoplatform.gui.client.i18n.PublisherWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
-import org.geosdi.geoplatform.gui.client.service.PublisherRemote;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPExtensions;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPFileUploader;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.AbstractFolderTreeNode;
+import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
+
+import java.util.List;
 
 /**
  * TODO This widget is not used because the relative action is not registered
@@ -129,36 +133,45 @@ public class UploadKmlWidget extends GeoPlatformWindow {
                 if (tree.getSelectionModel().getSelectedItem() instanceof AbstractFolderTreeNode) {
                     //expander.checkNodeState();
                     List<String> layersName = Lists.<String>newArrayList();
-//                    for (PreviewLayer layer : layerList) {
-//                        layersName.add(layer.getName());
-//                    }
-                    PublisherRemote.Util.getInstance().publishLayerPreview(layersName, null, new AsyncCallback<String>() {
-                        @Override
-                        public void onFailure(Throwable caught) {
-                            if (caught.getCause() instanceof GPSessionTimeout) {
-//                                GPHandlerManager.fireEvent(new GPLoginEvent(publishShapePreviewEvent));
-                            } else {
-                                GeoPlatformMessage.errorMessage(
-                                        PublisherWidgetConstants.INSTANCE.errorPublishingText(),
-                                        WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
-                                LayoutManager.getInstance().getStatusMap().setStatus(
-                                        PublisherWidgetConstants.INSTANCE.
-                                        statusErrorShapePublishingText(),
-                                        EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                                System.out.println("Error Publishing previewed shape: " + caught.toString()
-                                        + " data: " + caught.getMessage());
-                            }
-                        }
+                    //                    for (PreviewLayer layer : layerList) {
+                    //                        layersName.add(layer.getName());
+                    //                    }
 
-                        @Override
-                        public void onSuccess(String result) {
-//                            LayerHandlerManager.fireEvent(new AddRasterFromPublisherEvent(layerList));
-                            reset();
-//                            LayoutManager.getInstance().getStatusMap().setStatus(
-//                                    "Shape\\s published successfully: remember to save the new tree state.",
-//                                    EnumSearchStatus.STATUS_SEARCH.toString());
-                        }
-                    });
+                    final LayerPreviewCommandRequest layerPreviewCommandRequest = GWT.<LayerPreviewCommandRequest>create(
+                            LayerPreviewCommandRequest.class);
+                    layerPreviewCommandRequest.setLayerList(layersName);
+                    layerPreviewCommandRequest.setWorkspace(null);
+
+                    ClientCommandDispatcher.getInstance()
+                            .execute(new GPClientCommand<CreateWorkspaceCommandResponse>() {
+                                /**
+                                 * @param response
+                                 */
+                                @Override
+                                public void onCommandSuccess(CreateWorkspaceCommandResponse response) {
+                                    reset();
+                                }
+
+                                /**
+                                 * @param exception
+                                 */
+                                @Override
+                                public void onCommandFailure(Throwable exception) {
+                                    if (exception.getCause() instanceof GPSessionTimeout) {
+                                        //                                GPHandlerManager.fireEvent(new GPLoginEvent(publishShapePreviewEvent));
+                                    } else {
+                                        GeoPlatformMessage.errorMessage(
+                                                PublisherWidgetConstants.INSTANCE.errorPublishingText(),
+                                                WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
+                                        LayoutManager.getInstance().getStatusMap().setStatus(
+                                                PublisherWidgetConstants.INSTANCE.statusErrorShapePublishingText(),
+                                                EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                                        System.out.println(
+                                                "Error Publishing previewed shape: " + exception.toString() + " data: " + exception.getMessage());
+                                    }
+                                }
+                            });
+
                 } else {
                     GeoPlatformMessage.alertMessage(PublisherWidgetConstants.INSTANCE.
                             UploadKmlWidget_headingText(),

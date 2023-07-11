@@ -33,53 +33,31 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.server.gwt;
+package org.geosdi.geoplatform.gui.client.command.publish.layer;
 
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
-import org.geosdi.geoplatform.gui.client.service.PublisherRemote;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
-import org.geosdi.geoplatform.gui.server.service.IPublisherService;
-import org.geosdi.geoplatform.gui.server.spring.xsrf.GPAutoInjectingXsrfTokenServiceServlet;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public class PublisherRemoteImpl extends GPAutoInjectingXsrfTokenServiceServlet
-        implements PublisherRemote {
+public class LayerPreviewCommandResponse implements GPCommandResponse<String> {
 
-    private static final long serialVersionUID = 5204638800999412388L;
+    private static final long serialVersionUID = 5801692830655914736L;
     //
-    @Autowired
-    private IPublisherService publisherService;
+    private final String result;
 
-    @Override
-    @Deprecated
-    public String publishLayerPreview(List<String> layerList,
-            String workspace) throws GeoPlatformException {
-        return publisherService.publishLayerPreview(super.
-                getThreadLocalRequest(), layerList, workspace);
+    public LayerPreviewCommandResponse(String theResult) {
+        this.result = theResult;
     }
 
     @Override
-    @Deprecated
-    public String processEPSGResult(List<EPSGLayerData> previewLayerList,
-            String workspace) throws GeoPlatformException {
-        return publisherService.processEPSGResult(super.getThreadLocalRequest(),
-                previewLayerList, workspace);
+    public String getResult() {
+        return null;
     }
 
     @Override
-    public void kmlPreview(String url) throws GeoPlatformException {
-        publisherService.kmlPreview(super.getThreadLocalRequest(), url);
+    public String toString() {
+        return "LayerPreviewCommandResponse{" + this.result + '}';
     }
-
-    @Override
-    public boolean createWorkspace(String workspaceName, boolean silent) throws GeoPlatformException {
-        return this.publisherService.createWorkspace(workspaceName, silent,
-                super.getThreadLocalRequest());
-    }
-
 }

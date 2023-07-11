@@ -35,16 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.widget;
 
-import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.Style.LayoutRegion;
-import com.extjs.gxt.ui.client.event.BaseEvent;
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.KeyListener;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.event.*;
 import com.extjs.gxt.ui.client.util.Margins;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
@@ -55,17 +48,15 @@ import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
 import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.http.client.URL;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.RpcTokenException;
-import com.google.gwt.user.client.rpc.XsrfToken;
-import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Image;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.PublisherResources;
+import org.geosdi.geoplatform.gui.client.command.publish.kml.KmlPreviewCommandRequest;
+import org.geosdi.geoplatform.gui.client.command.publish.kml.KmlPreviewCommandResponse;
 import org.geosdi.geoplatform.gui.client.event.kml.IUploadKMLPreviewHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.GPKmlPreviewEvent;
 import org.geosdi.geoplatform.gui.client.event.timeout.IGPKmlPreviewHandler;
@@ -73,17 +64,17 @@ import org.geosdi.geoplatform.gui.client.i18n.PublisherWidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.i18n.kml.KMLErrorMessageConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
-import org.geosdi.geoplatform.gui.client.service.PublisherRemote;
-import org.geosdi.geoplatform.gui.client.service.PublisherRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
+import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
-import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
 import org.geosdi.geoplatform.gui.regex.GPRegEx;
-import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
+import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.gwtopenmaps.openlayers.client.Bounds;
 
 /**
@@ -91,17 +82,12 @@ import org.gwtopenmaps.openlayers.client.Bounds;
  */
 public class GPKmlWidget extends GeoPlatformWindow
         implements IUploadKMLPreviewHandler, IGPKmlPreviewHandler {
-
-    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
-    private static final PublisherRemoteAsync publisherRemote = PublisherRemote.Util.getInstance();
-    //
     private ContentPanel centralPanel;
     private PreviewWidget previewWidget;
     private FieldSet southPanel;
     private Image centralImage;
     private Bounds bounds;
     private final GPKmlPreviewEvent publishShapePreviewEvent = new GPKmlPreviewEvent();
-//    private List<PreviewLayer> layerList = new ArrayList<PreviewLayer>(); // KMLPreviewLayer
     //
     private GPSecureStringTextField urlText;
     private Button buttonPreview;
@@ -387,64 +373,49 @@ public class GPKmlWidget extends GeoPlatformWindow
     }
 
     private void verifyUrl(final boolean runExecute) {
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
 
+
+        final KmlPreviewCommandRequest kmlPreviewCommandRequest = GWT.<KmlPreviewCommandRequest>create(
+                KmlPreviewCommandRequest.class);
+        kmlPreviewCommandRequest.setUrl(urlEncoding);
+
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<KmlPreviewCommandResponse>() {
+            /**
+             * @param response
+             */
             @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
+            public void onCommandSuccess(KmlPreviewCommandResponse response) {
+                if (response.getResult() == null) { // DEL
+                    buttonPreview.enable(); // DEL
+                    return; // DEL
+                } // DEL
+
+                if (response.getResult()) {
+                    buttonPreview.enable();
+                    if (runExecute) { // Iff the enter key is pressed
+                        execute();
+                    }
+                } else {
+                    buttonPreview.disable();
                 }
             }
 
+            /**
+             * @param exception
+             */
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) publisherRemote).setRpcToken(token);
-                publisherRemote.kmlPreview(urlEncoding,
-                        new AsyncCallback<Boolean>() {
-
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                if (caught.getCause() instanceof GPSessionTimeout) {
-                                    GPHandlerManager.fireEvent(new GPLoginEvent(
-                                                    publishShapePreviewEvent));
-                                } else {
-                                    GeoPlatformMessage.errorMessage(
-                                            PublisherWidgetConstants.INSTANCE.GPKmlWidget_errorCheckingKMLURLText(),
-                                            WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
-                                    LayoutManager.getInstance().getStatusMap().setStatus(
-                                            PublisherWidgetConstants.INSTANCE.GPKmlWidget_statusErrorPreviewText(),
-                                            EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                                    System.out.println(
-                                            "Error checking the KML URL: " + caught.toString()
-                                            + " data: " + caught.getMessage());
-                                }
-                            }
-
-                            @Override
-                            public void onSuccess(Boolean result) {
-                                if (result == null) { // DEL
-                                    buttonPreview.enable(); // DEL
-                                    return; // DEL
-                                } // DEL
-
-                                if (result) {
-                                    buttonPreview.enable();
-                                    if (runExecute) { // Iff the enter key is pressed
-                                        execute();
-                                    }
-                                } else {
-                                    buttonPreview.disable();
-                                }
-                            }
-                        });
+            public void onCommandFailure(Throwable exception) {
+                if (exception.getCause() instanceof GPSessionTimeout) {
+                    GPHandlerManager.fireEvent(new GPLoginEvent(publishShapePreviewEvent));
+                } else {
+                    GeoPlatformMessage.errorMessage(
+                            PublisherWidgetConstants.INSTANCE.GPKmlWidget_errorCheckingKMLURLText(),
+                            WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
+                    LayoutManager.getInstance().getStatusMap()
+                            .setStatus(PublisherWidgetConstants.INSTANCE.GPKmlWidget_statusErrorPreviewText(),
+                                    EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                    System.out.println("Error checking the KML URL: " + exception.toString() + " data: " + exception.getMessage());
+                }
             }
         });
     }

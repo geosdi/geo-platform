@@ -37,7 +37,10 @@ package org.geosdi.geoplatform.gui.client.widget.form;
 
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style;
-import com.extjs.gxt.ui.client.event.*;
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.event.MessageBoxEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.Store;
 import com.extjs.gxt.ui.client.widget.Dialog;
@@ -52,9 +55,11 @@ import com.extjs.gxt.ui.client.widget.form.ListField;
 import com.extjs.gxt.ui.client.widget.form.StoreFilterField;
 import com.extjs.gxt.ui.client.widget.layout.*;
 import com.google.common.collect.Maps;
-import com.google.gwt.user.client.rpc.*;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.command.layer.account.AccountFromSharedProjectCommandRequest;
+import org.geosdi.geoplatform.gui.client.command.layer.account.AccountFromSharedProjectCommandResponse;
 import org.geosdi.geoplatform.gui.client.command.share.GetUsersToShareProjectRequest;
 import org.geosdi.geoplatform.gui.client.command.share.GetUsersToShareProjectResponse;
 import org.geosdi.geoplatform.gui.client.command.share.ShareProjectRequest;
@@ -65,10 +70,8 @@ import org.geosdi.geoplatform.gui.client.i18n.MementoPersistenceConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
-import org.geosdi.geoplatform.gui.client.puregwt.share.event.GPChangeHeightWidgetEvent;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommandExecutor;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -77,13 +80,8 @@ import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUserKeyValue;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
-import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
-import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 
-import java.util.ArrayList;
 import java.util.Map;
-
-import static org.geosdi.geoplatform.gui.client.model.SharingPermissionEnum.READ;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -91,8 +89,6 @@ import static org.geosdi.geoplatform.gui.client.model.SharingPermissionEnum.READ
  */
 public class ShareProjectPanel extends GeoPlatformContentPanel {
 
-    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
-    private static final LayerRemoteAsync layerRemote = LayerRemote.Util.getInstance();
     private final static String PROJECT_NAME_LABEL = LayerModuleConstants.INSTANCE.ShareProjectPanel_projectNameLabelText() + ": ";
     private final static String OWNER_LABEL = LayerModuleConstants.INSTANCE.ShareProjectPanel_ownerLabelText() + ": ";
     private final static String ORGANIZATION_LABEL = LayerModuleConstants.INSTANCE.ShareProjectPanel_organizationLabelText() + ": ";
@@ -109,7 +105,6 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
     private Label projectNameLabel;
     private Label ownerLabel;
     private Label organizationLabel;
-    private ShareProjectPermissionWidget shareProjectPermissionWidget;
 
     public ShareProjectPanel(GPProjectManagementWidget projectManagementWidget, boolean lazy) {
         super(lazy);
@@ -160,16 +155,15 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         lists.setHeight("" + GPProjectManagementWidget.COMPONENT_HEIGHT / 1.75);
         lists.setStyleAttribute("margin-left", "11px");
         lists.setHideLabel(Boolean.TRUE);
+
         ListField<GPSimpleUser> from = lists.getFromList();
         from.setDisplayField(GPSimpleUserKeyValue.NAME.toString());
         this.fromStore = new ListStore<GPSimpleUser>();
         from.setStore(this.fromStore);
         ListField<GPSimpleUser> to = lists.getToList();
         to.setDisplayField(GPSimpleUserKeyValue.NAME.toString());
-
         this.toStore = new ListStore<GPSimpleUser>();
         to.setStore(this.toStore);
-
         Button cancelButton = new Button(LayerModuleConstants.INSTANCE.ShareProjectPanel_cancelButtonText(),
                 AbstractImagePrototype.create(BasicWidgetResources.ICONS.gear()), new SelectionListener<ButtonEvent>() {
 
@@ -214,7 +208,6 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                             test = true;
                         }
                         accountsMap.put(user.getId(), user.getSharedPermission());
-                        // accountIDsProject.add(user.getId());
                     }
                     final boolean isShared = test && toStore.getModels().size() > 1;
                     ShareProjectPanel.this.reset();
@@ -251,9 +244,8 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         });
         super.addButton(saveButton);
         super.add(verticalPanel);
-        super.add(lists, new FormData("97%"));
+        super.add(lists, new FormData("98%"));
         LayoutContainer filterContainer = new LayoutContainer(new BorderLayout());
-        this.shareProjectPermissionWidget = new ShareProjectPermissionWidget();
         this.fromFilter = this.createServerFilter(this.fromFilter, fromStore,
                 LayerModuleConstants.INSTANCE.ShareProjectPanel_fromFilterLabelText());
         filterContainer.add(this.fromFilter, new BorderLayoutData(Style.LayoutRegion.WEST));
@@ -261,47 +253,7 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                 LayerModuleConstants.INSTANCE.ShareProjectPanel_toFilterLabelText());
         filterContainer.add(this.toFilter, new BorderLayoutData(Style.LayoutRegion.EAST));
         filterContainer.setStyleAttribute("margin", "11px");
-        lists.getToList().addSelectionChangedListener(new SelectionChangedListener<GPSimpleUser>() {
-            @Override
-            public void selectionChanged(SelectionChangedEvent<GPSimpleUser> se) {
-
-                if (se.getSelectedItem() != null && se.getSelectedItem().getSharedPermission() != 16) {
-                    shareProjectPermissionWidget.bindUser(se.getSelectedItem());
-                    WidgetPropertiesHandlerManager.fireEvent(new GPChangeHeightWidgetEvent(
-                            GPProjectManagementWidget.WINDOW_HEIGHT + shareProjectPermissionWidget.getHeight()));
-                    setHeight(GPProjectManagementWidget.COMPONENT_HEIGHT + shareProjectPermissionWidget.getHeight());
-                } else {
-                    shareProjectPermissionWidget.hide();
-                    setHeight(GPProjectManagementWidget.COMPONENT_HEIGHT);
-                    WidgetPropertiesHandlerManager.fireEvent(
-                            new GPChangeHeightWidgetEvent(GPProjectManagementWidget.WINDOW_HEIGHT));
-                }
-            }
-        });
-
-
-        lists.getFromList().addSelectionChangedListener(new SelectionChangedListener<GPSimpleUser>() {
-
-
-            /**
-             * Fires when the selection has changed.
-             *
-             * @param se the selection event
-             */
-            @Override
-            public void selectionChanged(SelectionChangedEvent<GPSimpleUser> se) {
-                if (se.getSelectedItem() != null && se.getSelectedItem().getSharedPermission() != 16) {
-                    se.getSelectedItem().setSharedPermission(READ.getCode());
-                }
-            }
-        });
-
-        super.add(shareProjectPermissionWidget, new RowData());
         super.add(filterContainer);
-    }
-
-    public void resetHeight() {
-        setHeight(GPProjectManagementWidget.COMPONENT_HEIGHT);
     }
 
     @Override
@@ -356,41 +308,27 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
             }
         });
 
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+        final AccountFromSharedProjectCommandRequest accountFromSharedProjectCommandRequest = GWT.<AccountFromSharedProjectCommandRequest>create(
+                AccountFromSharedProjectCommandRequest.class);
+        accountFromSharedProjectCommandRequest.setIdSharedProject(project.getId());
 
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<AccountFromSharedProjectCommandResponse>() {
+            /**
+             * @param response
+             */
             @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
-                }
+            public void onCommandSuccess(AccountFromSharedProjectCommandResponse response) {
+                toStore.add(response.getResult());
             }
 
+            /**
+             * @param exception
+             */
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) layerRemote).setRpcToken(token);
-                layerRemote.getAccountsFromSharedProject(project.getId(), new AsyncCallback<ArrayList<GPSimpleUser>>() {
-
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        logger.warning("Failled to load Share Project's Accounts: " + caught);
-                    }
-
-                    @Override
-                    public void onSuccess(ArrayList<GPSimpleUser> result) {
-                        toStore.add(result);
-                    }
-                });
+            public void onCommandFailure(Throwable exception) {
+                logger.warning("Failled to load Share Project's Accounts: " + exception);
             }
         });
-
         boolean enableMenu = false;
         IGPAccountDetail accountInSession = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
         if (theProject.getOwner() == null || theProject.getOwner().getId().equals(accountInSession.getId())) {

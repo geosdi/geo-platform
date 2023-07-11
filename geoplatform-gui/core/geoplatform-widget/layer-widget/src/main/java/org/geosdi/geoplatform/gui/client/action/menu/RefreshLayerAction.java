@@ -38,20 +38,18 @@ package org.geosdi.geoplatform.gui.client.action.menu;
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.event.SelectionChangedListener;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.RpcTokenException;
-import com.google.gwt.user.client.rpc.XsrfToken;
-import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
+import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.client.command.layer.refresh.LayerRefreshCommandRequest;
+import org.geosdi.geoplatform.gui.client.command.layer.refresh.LayerRefreshCommandResponse;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleMessages;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.model.LayerRefreshTimeValue;
 import org.geosdi.geoplatform.gui.client.model.LayerRefreshTimeValue.LayerRefreshTimeEnum;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.GPTreePanel;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.impl.map.event.ReloadLayerMapEvent;
@@ -62,18 +60,13 @@ import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.handler.IXMPPRefreshLayerHandler;
-import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTimeValue>
-        implements IXMPPRefreshLayerHandler {
+public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTimeValue> implements IXMPPRefreshLayerHandler {
 
-    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
-    private static final LayerRemoteAsync layerRemote = LayerRemote.Util.getInstance();
-    //
     private final GPTreePanel<GPBeanTreeModel> treePanel;
     private ReloadLayerMapEvent reloadLayerEvent;
 
@@ -86,70 +79,57 @@ public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTim
     public void selectionChanged(SelectionChangedEvent<LayerRefreshTimeValue> se) {
         final GPBeanTreeModel itemSelected = this.treePanel.getSelectionModel().getSelectedItem();
         if (!(itemSelected instanceof GPLayerTreeModel)) {
-            throw new IllegalArgumentException(
-                    "It is possible to refresh only layers");
+            throw new IllegalArgumentException("It is possible to refresh only layers");
         }
         final GPLayerTreeModel layerSelected = (GPLayerTreeModel) itemSelected;
-        final LayerRefreshTimeEnum refreshTimeEnum = se.getSelectedItem().get(
-                LayerRefreshTimeValue.REFRESH_TIME_KEY);
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+        final LayerRefreshTimeEnum refreshTimeEnum = se.getSelectedItem().get(LayerRefreshTimeValue.REFRESH_TIME_KEY);
 
-            @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
-                }
+
+        final LayerRefreshCommandRequest layerRefreshCommandRequest = GWT.<LayerRefreshCommandRequest>create(
+                LayerRefreshCommandRequest.class);
+
+        layerRefreshCommandRequest.setEmiteResource(
+                (String) Registry.get(GlobalRegistryEnum.EMITE_RESOURCE.getValue()));
+        layerRefreshCommandRequest.setLayerUUID(layerSelected.getUUID());
+        layerRefreshCommandRequest.setSecondToRefresh(refreshTimeEnum.getValue());
+
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<LayerRefreshCommandResponse>() {
+
+            {
+                super.setCommandRequest(layerRefreshCommandRequest);
             }
 
+            /**
+             * @param response
+             */
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) layerRemote).setRpcToken(token);
-                layerRemote.setLayerRefreshTime(
-                        (String) Registry.get(
-                                GlobalRegistryEnum.EMITE_RESOURCE.getValue()),
-                        layerSelected.getUUID(),
-                        refreshTimeEnum.getValue(),
-                        new AsyncCallback<Object>() {
+            public void onCommandSuccess(LayerRefreshCommandResponse response) {
+                if (refreshTimeEnum.getValue() != LayerRefreshTimeValue.NO_REFRESH_VALUE) {
+                    LayoutManager.getInstance().getStatusMap().setStatus(
+                            LayerModuleMessages.INSTANCE.RefreshLayerAction_statusReloadTimeInfoMessage(
+                                    refreshTimeEnum.getValue()),
+                            SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
+                } else {
+                    LayoutManager.getInstance().getStatusMap()
+                            .setStatus(LayerModuleConstants.INSTANCE.RefreshLayerAction_statusStopReloadTimeText(),
+                                    SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
+                }
+                layerSelected.setRefreshTime(refreshTimeEnum.getValue());
+                treePanel.refresh(layerSelected);
+            }
 
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                GeoPlatformMessage.errorMessage(
-                                        WindowsConstants.INSTANCE.errorReloadingTitleText(),
-                                        WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
-                                LayoutManager.getInstance().getStatusMap().setStatus(
-                                        LayerModuleConstants.INSTANCE.RefreshLayerAction_statusReloadTimeErrorText(),
-                                        SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                                System.out.println(
-                                        "Error setting the reload time for layer: " + caught.toString()
-                                        + " data: " + caught.getMessage());
-                            }
-
-                            @Override
-                            public void onSuccess(Object result) {
-                                if (refreshTimeEnum.getValue() != LayerRefreshTimeValue.NO_REFRESH_VALUE) {
-                                    LayoutManager.getInstance().getStatusMap().setStatus(
-                                            LayerModuleMessages.INSTANCE.
-                                            RefreshLayerAction_statusReloadTimeInfoMessage(
-                                                    refreshTimeEnum.getValue()),
-                                            SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
-                                } else {
-                                    LayoutManager.getInstance().getStatusMap().setStatus(
-                                            LayerModuleConstants.INSTANCE.RefreshLayerAction_statusStopReloadTimeText(),
-                                            SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
-                                }
-                                layerSelected.setRefreshTime(
-                                        refreshTimeEnum.getValue());
-                                treePanel.refresh(layerSelected);
-                            }
-                        });
+            /**
+             * @param exception
+             */
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorReloadingTitleText(),
+                        WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
+                LayoutManager.getInstance().getStatusMap()
+                        .setStatus(LayerModuleConstants.INSTANCE.RefreshLayerAction_statusReloadTimeErrorText(),
+                                SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                System.out.println(
+                        "Error setting the reload time for layer: " + exception.toString() + " data: " + exception.getMessage());
             }
         });
     }
@@ -158,45 +138,35 @@ public class RefreshLayerAction extends SelectionChangedListener<LayerRefreshTim
     public void handleMessageBody(final String messageBody) {
         GPBeanTreeModel element = treePanel.getStore().findModel(messageBody);
         if (element != null && element instanceof GPLayerTreeModel && ((GPLayerTreeModel) element).isChecked()) {
-            this.reloadLayerEvent = new ReloadLayerMapEvent(
-                    (GPLayerBean) element);
+            this.reloadLayerEvent = new ReloadLayerMapEvent((GPLayerBean) element);
             GPHandlerManager.fireEvent(this.reloadLayerEvent);
         } else if (element instanceof GPLayerTreeModel) {
-            xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
 
+
+            final LayerRefreshCommandRequest layerRefreshCommandRequest = GWT.<LayerRefreshCommandRequest>create(
+                    LayerRefreshCommandRequest.class);
+
+            layerRefreshCommandRequest.setEmiteResource(
+                    (String) Registry.get(GlobalRegistryEnum.EMITE_RESOURCE.getValue()));
+            layerRefreshCommandRequest.setLayerUUID(messageBody);
+            layerRefreshCommandRequest.setSecondToRefresh(0);
+
+            ClientCommandDispatcher.getInstance().execute(new GPClientCommand<LayerRefreshCommandResponse>() {
+
+                /**
+                 * @param response
+                 */
                 @Override
-                public void onFailure(Throwable caught) {
-                    try {
-                        throw caught;
-                    } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                        //   - duplicate session cookie, which may be a sign of a cookie
-                        //     overwrite attack
-                        //   - XSRF token cannot be generated because session cookie isn't
-                        //     present
-                    } catch (Throwable e) {
-                        // unexpected
-                    }
+                public void onCommandSuccess(LayerRefreshCommandResponse response) {
+
                 }
 
+                /**
+                 * @param exception
+                 */
                 @Override
-                public void onSuccess(XsrfToken token) {
-                    ((HasRpcToken) layerRemote).setRpcToken(token);
-                    layerRemote.setLayerRefreshTime(
-                            (String) Registry.get(
-                                    GlobalRegistryEnum.EMITE_RESOURCE.getValue()),
-                            messageBody, 0, new AsyncCallback<Object>() {
+                public void onCommandFailure(Throwable exception) {
 
-                                        @Override
-                                        public void onFailure(Throwable caught) {
-//                    System.out.println("Fallita rimozione layer xmpp in ascolto: " + messageBody);
-                                        }
-
-                                        @Override
-                                        public void onSuccess(Object result) {
-//                    System.out.println("Rimosso layer xmpp in ascolto: " + messageBody);
-                                        }
-                                    });
                 }
             });
         }

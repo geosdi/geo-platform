@@ -122,7 +122,7 @@ public class GPProjectManagementWidget extends GeoPlatformWindow implements ISha
 
     @Override
     public void hide() {
-        this.shareProjectPanel.resetHeight();
+        //this.shareProjectPanel.resetHeight();
         this.initSize();
         this.repaint();
         super.hide();

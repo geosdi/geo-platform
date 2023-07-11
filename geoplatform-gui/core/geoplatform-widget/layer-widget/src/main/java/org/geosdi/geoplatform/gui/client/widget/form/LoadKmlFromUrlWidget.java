@@ -36,58 +36,45 @@
 package org.geosdi.geoplatform.gui.client.widget.form;
 
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
-import com.extjs.gxt.ui.client.event.BaseEvent;
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.KeyListener;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.event.*;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.http.client.URL;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.RpcTokenException;
-import com.google.gwt.user.client.rpc.XsrfToken;
-import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.ISave;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
+import org.geosdi.geoplatform.gui.client.command.layer.check.CheckKmlUrlCommandRequest;
+import org.geosdi.geoplatform.gui.client.command.layer.check.CheckKmlUrlCommandResponse;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.i18n.kml.KMLErrorMessageConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
-import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.model.memento.save.MementoSaveOperations;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
+import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedLayers;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.expander.GPLayerExpander;
 import org.geosdi.geoplatform.gui.client.widget.fileupload.GPExtensions;
 import org.geosdi.geoplatform.gui.client.widget.form.KmlUrlStatus.EnumKmlUrlStatus;
 import org.geosdi.geoplatform.gui.client.widget.tree.form.GPTreeFormWidget;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.model.tree.GPBeanTreeModel;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerTreeModel;
 import org.geosdi.geoplatform.gui.regex.GPRegEx;
-import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 
-public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
-        implements ISave<MementoSaveAddedLayers> {
+public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel> implements ISave<MementoSaveAddedLayers> {
 
     private GPSecureStringTextField urlText;
-    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
-    private static final LayerRemoteAsync layerRemote = LayerRemote.Util.getInstance();
     //
     private Button buttonAdd;
-//    private final VisitorAddElement addVisitor;
     private GPBeanTreeModel parentDestination;
     private final GPLayerExpander expander;
     //
@@ -96,7 +83,7 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
 
     public LoadKmlFromUrlWidget(TreePanel<GPBeanTreeModel> theTree) {
         super(theTree, true);
-//        addVisitor = new VisitorAddElement();
+        //        addVisitor = new VisitorAddElement();
         expander = new GPLayerExpander(theTree, this);
     }
 
@@ -109,8 +96,7 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
 
     @Override
     public void initSize() {
-        setHeadingHtml(
-                LayerModuleConstants.INSTANCE.LoadKmlFromUrlWidget_headingText());
+        setHeadingHtml(LayerModuleConstants.INSTANCE.LoadKmlFromUrlWidget_headingText());
         setSize(330, 170);
     }
 
@@ -123,8 +109,7 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
     @Override
     public void addComponentToForm() {
         super.fieldSet = new FieldSet();
-        super.fieldSet.setHeadingHtml(LayerModuleConstants.INSTANCE.
-                LoadKmlFromUrlWidget_fieldSetHeadingText());
+        super.fieldSet.setHeadingHtml(LayerModuleConstants.INSTANCE.LoadKmlFromUrlWidget_fieldSetHeadingText());
 
         FormLayout layout = new FormLayout();
         layout.setLabelWidth(40);
@@ -181,12 +166,12 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
             @Override
             public void handleEvent(BaseEvent be) {
                 if (checkUrl()) {
-//                    verifyUrl(false); // TODO Decomment
+                    //                    verifyUrl(false); // TODO Decomment
                 } else {
                     buttonAdd.disable();
                     setStatus(EnumKmlUrlStatus.STATUS_NO_CHECKED.getValue(),
                             EnumKmlUrlStatus.STATUS_MESSAGE_NOT_CHECKED.getValue());
-//                            suggestion);
+                    //                            suggestion);
                 }
             }
         });
@@ -196,25 +181,23 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
             @Override
             public void componentKeyUp(ComponentEvent event) {
                 if (urlText.getValue() == null) {
-                    if ((event.getKeyCode() == KeyCodes.KEY_BACKSPACE)
-                            || (event.getKeyCode() == KeyCodes.KEY_DELETE)) {
+                    if ((event.getKeyCode() == KeyCodes.KEY_BACKSPACE) || (event.getKeyCode() == KeyCodes.KEY_DELETE)) {
                         reset();
                     }
                 } else {
                     if (checkUrl()) {
-//                        verifyUrl(false); // TODO Decomment
+                        //                        verifyUrl(false); // TODO Decomment
                     } else {
                         setStatus(EnumKmlUrlStatus.STATUS_NO_CHECKED.getValue(),
                                 EnumKmlUrlStatus.STATUS_MESSAGE_NOT_CHECKED.getValue());
-//                            suggestion);
+                        //                            suggestion);
                     }
                 }
             }
 
             @Override
             public void componentKeyPress(ComponentEvent event) {
-                if ((event.getKeyCode() == KeyCodes.KEY_ENTER)
-                        && checkUrl()) {
+                if ((event.getKeyCode() == KeyCodes.KEY_ENTER) && checkUrl()) {
                     verifyUrl(true);
                 }
             }
@@ -236,22 +219,21 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
 
     @Override
     public void execute() {
-        super.saveStatus.setBusy(LayerModuleConstants.INSTANCE.
-                LoadKmlFromUrlWidget_statusAddingKMLText());
+        super.saveStatus.setBusy(LayerModuleConstants.INSTANCE.LoadKmlFromUrlWidget_statusAddingKMLText());
         this.parentDestination = this.getTree().getSelectionModel().getSelectedItem();
-//        assert (this.getTree().isExpanded(parentDestination)) : "AddFolderWidget on execute: the parent folder must be expanded before the add operation";    \
+        //        assert (this.getTree().isExpanded(parentDestination)) : "AddFolderWidget on execute: the parent folder must be expanded before the add operation";    \
 
-//        List<GPBeanTreeModel> rasterList = this.createRasterList();
-//        this.getTree().getStore().insert(parentDestination, rasterList, 0, true);
-//        this.addVisitor.insertLayerElements(rasterList, parentDestination);
-//        MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(this);
-//        mementoSaveLayer.setAddedLayers(MementoBuilder.generateMementoLayerList(rasterList));
-//        mementoSaveLayer.setDescendantMap(this.addVisitor.getFolderDescendantMap());
-//        GPLayerSaveCache.getInstance().add(mementoSaveLayer);
+        //        List<GPBeanTreeModel> rasterList = this.createRasterList();
+        //        this.getTree().getStore().insert(parentDestination, rasterList, 0, true);
+        //        this.addVisitor.insertLayerElements(rasterList, parentDestination);
+        //        MementoSaveAddedLayers mementoSaveLayer = new MementoSaveAddedLayers(this);
+        //        mementoSaveLayer.setAddedLayers(MementoBuilder.generateMementoLayerList(rasterList));
+        //        mementoSaveLayer.setDescendantMap(this.addVisitor.getFolderDescendantMap());
+        //        GPLayerSaveCache.getInstance().add(mementoSaveLayer);
         clearComponents();
-        LayoutManager.getInstance().getStatusMap().setStatus(
-                LayerModuleConstants.INSTANCE.LoadKmlFromUrlWidget_statusAddedKMLSuccessText(),
-                EnumSearchStatus.STATUS_SEARCH.toString());
+        LayoutManager.getInstance().getStatusMap()
+                .setStatus(LayerModuleConstants.INSTANCE.LoadKmlFromUrlWidget_statusAddedKMLSuccessText(),
+                        EnumSearchStatus.STATUS_SEARCH.toString());
     }
 
     @Override
@@ -266,7 +248,7 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
         suggestion = null;
 
         String url = urlText.getValue();
-//        System.out.println("*** URL:\n" + url + "\n");        
+        //        System.out.println("*** URL:\n" + url + "\n");
         if (url == null) { // If it is added the listener on Events.OnPaste, sometimes url is NULL
             System.out.println("URL is NULL");
             return check;
@@ -274,8 +256,7 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
         url = url.replaceAll("[ ]+", ""); // Delete all spaces
 
         urlEncoding = URL.decodeQueryString(url); // Encoding into ASCII
-        System.out.println("*** URL encoding:\n" + GPRegEx.printPrettyURL(
-                urlEncoding));
+        System.out.println("*** URL encoding:\n" + GPRegEx.printPrettyURL(urlEncoding));
 
         if (!urlEncoding.startsWith("http://")) {
             suggestion = KMLErrorMessageConstants.INSTANCE.suggestionURLStartText();
@@ -287,8 +268,7 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
             } else if (!GPRegEx.RE_FUSION_TABLES_QS_G.test(urlEncoding)) {
                 suggestion = KMLErrorMessageConstants.INSTANCE.suggestionCheckFieldGText();
             }
-        } else if (!urlEncoding.toUpperCase().endsWith(
-                GPExtensions.KML.toString())) { // URL direct KML
+        } else if (!urlEncoding.toUpperCase().endsWith(GPExtensions.KML.toString())) { // URL direct KML
             suggestion = KMLErrorMessageConstants.INSTANCE.suggestionURLMustReferKMLText();
         }
 
@@ -302,62 +282,44 @@ public class LoadKmlFromUrlWidget extends GPTreeFormWidget<GPLayerTreeModel>
     }
 
     private void verifyUrl(final boolean runExecute) {
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
 
+        final CheckKmlUrlCommandRequest checkKmlUrlCommandRequest = GWT.<CheckKmlUrlCommandRequest>create(
+                CheckKmlUrlCommandRequest.class);
+        checkKmlUrlCommandRequest.setUrl(urlEncoding);
+
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<CheckKmlUrlCommandResponse>() {
+            /**
+             * @param response
+             */
             @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
+            public void onCommandSuccess(CheckKmlUrlCommandResponse response) {
+                if (response.getResult()) {
+                    buttonAdd.enable();
+                    setStatus(EnumKmlUrlStatus.STATUS_CHECKED.getValue(),
+                            EnumKmlUrlStatus.STATUS_MESSAGE_CHECKED.getValue());
+                    if (runExecute) { // Iff the enter key is pressed
+                        execute();
+                    }
+                } else {
+                    buttonAdd.disable();
+                    setStatus(EnumKmlUrlStatus.STATUS_CHECK_ERROR.getValue(),
+                            EnumKmlUrlStatus.STATUS_MESSAGE_CHECK_ERROR.getValue());
                 }
             }
 
+            /**
+             * @param exception
+             */
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) layerRemote).setRpcToken(token);
-                layerRemote.checkKmlUrl(urlEncoding,
-                        new AsyncCallback<Boolean>() {
-
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                buttonAdd.disable();
-                                GeoPlatformMessage.errorMessage(
-                                        LayerModuleConstants.INSTANCE.
-                                        errorCheckingURLTitleText(),
-                                        WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
-                                LayoutManager.getInstance().getStatusMap().setStatus(
-                                        LayerModuleConstants.INSTANCE.statusErrorCheckingURLText(),
-                                        EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                                System.out.println(
-                                        "Error checking the WMS URL: " + caught.toString()
-                                        + " data: " + caught.getMessage());
-                            }
-
-                            @Override
-                            public void onSuccess(Boolean result) {
-                                if (result) {
-                                    buttonAdd.enable();
-                                    setStatus(
-                                            EnumKmlUrlStatus.STATUS_CHECKED.getValue(),
-                                            EnumKmlUrlStatus.STATUS_MESSAGE_CHECKED.getValue());
-                                    if (runExecute) { // Iff the enter key is pressed
-                                        execute();
-                                    }
-                                } else {
-                                    buttonAdd.disable();
-                                    setStatus(
-                                            EnumKmlUrlStatus.STATUS_CHECK_ERROR.getValue(),
-                                            EnumKmlUrlStatus.STATUS_MESSAGE_CHECK_ERROR.getValue());
-                                }
-                            }
-                        });
+            public void onCommandFailure(Throwable exception) {
+                buttonAdd.disable();
+                GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.errorCheckingURLTitleText(),
+                        WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
+                LayoutManager.getInstance().getStatusMap()
+                        .setStatus(LayerModuleConstants.INSTANCE.statusErrorCheckingURLText(),
+                                EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                System.out.println(
+                        "Error checking the WMS URL: " + exception.toString() + " data: " + exception.getMessage());
             }
         });
     }

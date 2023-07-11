@@ -36,14 +36,16 @@
 package org.geosdi.geoplatform.gui.client.action.projects;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.google.gwt.user.client.rpc.*;
+import com.google.gwt.core.client.GWT;
+import org.geosdi.geoplatform.gui.client.command.layer.defaultproject.DefaultProjectCommandRequest;
+import org.geosdi.geoplatform.gui.client.command.layer.defaultproject.DefaultProjectCommandResponse;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.img.LayerWidgetImage;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
@@ -51,7 +53,6 @@ import org.geosdi.geoplatform.gui.model.message.AbstractCommandAction;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.projects.event.GPDefaultProjectTreeEvent;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
-import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 
@@ -66,8 +67,8 @@ public class ShareProjectCommandAction<X extends ButtonEvent> extends AbstractCo
 
     private static final Logger logger = Logger.getLogger("ShareProjectCommandAction");
     //
-    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
-    private static final LayerRemoteAsync layerRemote = LayerRemote.Util.getInstance();
+    private final GPDefaultProjectTreeEvent defaultProjectEvent = new GPDefaultProjectTreeEvent();
+
 
     public ShareProjectCommandAction() {
         super(LayerWidgetImage.INSTANCE.commandProj(),
@@ -83,57 +84,40 @@ public class ShareProjectCommandAction<X extends ButtonEvent> extends AbstractCo
     @Override
     public void componentSelected(ButtonEvent ce) {
         final Long projectID = Long.parseLong(super.commandProperties);
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
 
+
+        final DefaultProjectCommandRequest defaultProjectCommandRequest = GWT.<DefaultProjectCommandRequest>create(
+                DefaultProjectCommandRequest.class);
+        defaultProjectCommandRequest.setProjectID(projectID);
+
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<DefaultProjectCommandResponse>() {
+
+            /**
+             * @param response
+             */
             @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
-                }
+            public void onCommandSuccess(DefaultProjectCommandResponse response) {
+
+                TimeoutHandlerManager.fireEvent(defaultProjectEvent);
             }
 
+            /**
+             * @param exception
+             */
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) layerRemote).setRpcToken(token);
-                layerRemote.setDefaultProject(projectID,
-                        new AsyncCallback<Object>() {
-
-                            private final GPDefaultProjectTreeEvent defaultProjectEvent = new GPDefaultProjectTreeEvent();
-
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                if (caught.getCause() instanceof GPSessionTimeout) {
-                                    GPHandlerManager.fireEvent(new GPLoginEvent(
-                                            null));
-                                } else {
-                                    GeoPlatformMessage.errorMessage(
-                                            LayerModuleConstants.INSTANCE.
-                                                    ShareProjectCommandAction_errorLoadingProjectText(),
-                                            WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
-                                    LayoutManager.getInstance().getStatusMap().setStatus(
-                                            LayerModuleConstants.INSTANCE.
-                                                    ShareProjectCommandAction_errorLoadingProjectText(),
-                                            SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                                    System.out.println(
-                                            "Error loading project: " + caught.toString()
-                                                    + " data: " + caught.getMessage());
-                                }
-                            }
-
-                            @Override
-                            public void onSuccess(Object result) {
-                                TimeoutHandlerManager.fireEvent(
-                                        defaultProjectEvent);
-                            }
-                        });
+            public void onCommandFailure(Throwable exception) {
+                if (exception.getCause() instanceof GPSessionTimeout) {
+                    GPHandlerManager.fireEvent(new GPLoginEvent(null));
+                } else {
+                    GeoPlatformMessage.errorMessage(
+                            LayerModuleConstants.INSTANCE.ShareProjectCommandAction_errorLoadingProjectText(),
+                            WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
+                    LayoutManager.getInstance().getStatusMap().setStatus(
+                            LayerModuleConstants.INSTANCE.ShareProjectCommandAction_errorLoadingProjectText(),
+                            SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                    System.out.println(
+                            "Error loading project: " + exception.toString() + " data: " + exception.getMessage());
+                }
             }
         });
     }

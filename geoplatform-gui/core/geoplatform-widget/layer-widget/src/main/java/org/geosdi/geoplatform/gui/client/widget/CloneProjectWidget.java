@@ -43,14 +43,13 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.rpc.*;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.CloneProjectCommandRequest;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.CloneProjectCommandResponse;
+import org.geosdi.geoplatform.gui.client.command.layer.defaultproject.DefaultProjectCommandRequest;
+import org.geosdi.geoplatform.gui.client.command.layer.defaultproject.DefaultProjectCommandResponse;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.GPRootTreeNode;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -58,7 +57,6 @@ import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.projects.event.GPDefaultProjectTreeEvent;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
-import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -71,8 +69,6 @@ public class CloneProjectWidget extends GeoPlatformWindow {
     private TextField<String> projectNameField;
     private CloneProjectWidget.GPDefaultProjectSelector selector;
     private SearchStatus searchStatus;
-    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
-    private static final LayerRemoteAsync layerRemote = LayerRemote.Util.getInstance();
     private final GPDefaultProjectTreeEvent defaultProjectEvent = new GPDefaultProjectTreeEvent();
 
     private FormPanel fp;
@@ -206,53 +202,31 @@ public class CloneProjectWidget extends GeoPlatformWindow {
         }
 
         private void selectDefaultProject() {
-            searchStatus.setBusy(LayerModuleConstants.INSTANCE.
-                    GPProjectSearchPanel_statusSettingDefaultProjectText());
-            xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+            searchStatus.setBusy(LayerModuleConstants.INSTANCE.GPProjectSearchPanel_statusSettingDefaultProjectText());
 
+
+            final DefaultProjectCommandRequest defaultProjectCommandRequest = GWT.<DefaultProjectCommandRequest>create(
+                    DefaultProjectCommandRequest.class);
+            defaultProjectCommandRequest.setProjectID(projectID);
+
+            ClientCommandDispatcher.getInstance().execute(new GPClientCommand<DefaultProjectCommandResponse>() {
+                /**
+                 * @param response
+                 */
                 @Override
-                public void onFailure(Throwable caught) {
-                    try {
-                        throw caught;
-                    } catch (RpcTokenException e) {
-                        // Can be thrown for several reasons:
-                        //   - duplicate session cookie, which may be a sign of a cookie
-                        //     overwrite attack
-                        //   - XSRF token cannot be generated because session cookie isn't
-                        //     present
-                    } catch (Throwable e) {
-                        // unexpected
-                    }
+                public void onCommandSuccess(DefaultProjectCommandResponse response) {
+                    TimeoutHandlerManager.fireEvent(defaultProjectEvent);
+                    hide();
                 }
 
+                /**
+                 * @param exception
+                 */
                 @Override
-                public void onSuccess(XsrfToken token) {
-                    ((HasRpcToken) layerRemote).setRpcToken(token);
-                    layerRemote.setDefaultProject(
-                            projectID,
-                            new AsyncCallback<Object>() {
-
-                                /**
-                                 * TODO MANAGE FOR SESSION TIMEOUT EXCEPTION *
-                                 */
-                                @Override
-                                public void onFailure(Throwable caught) {
-                                    GeoPlatformMessage.errorMessage(
-                                            LayerModuleConstants.INSTANCE.
-                                                    GPProjectSearchPanel_settingDefaultProjectErrorTitleText(),
-                                            caught.getMessage());
-                                }
-
-                                @Override
-                                public void onSuccess(Object result) {
-/*                                    setSearchStatus(
-                                            SearchStatus.EnumSearchStatus.STATUS_SEARCH,
-                                            EnumProjectMessage.DEFAUTL_PROJECT_MESSAGE);*/
-                                    TimeoutHandlerManager.fireEvent(
-                                            defaultProjectEvent);
-                                    hide();
-                                }
-                            });
+                public void onCommandFailure(Throwable exception) {
+                    GeoPlatformMessage.errorMessage(
+                            LayerModuleConstants.INSTANCE.GPProjectSearchPanel_settingDefaultProjectErrorTitleText(),
+                            exception.getMessage());
                 }
             });
         }

@@ -46,27 +46,30 @@ import com.extjs.gxt.ui.client.widget.form.CheckBoxGroup;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.FormButtonBinding;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
-import com.google.gwt.user.client.rpc.*;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.button.GPSecureButton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.action.projects.AddProjectAction;
+import org.geosdi.geoplatform.gui.client.command.layer.save.SaveProjectCommandRequest;
+import org.geosdi.geoplatform.gui.client.command.layer.save.SaveProjectCommandResponse;
+import org.geosdi.geoplatform.gui.client.command.layer.update.UpdateProjectCommandRequest;
+import org.geosdi.geoplatform.gui.client.command.layer.update.UpdateProjectCommandResponse;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProjectKey;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.form.binding.GPDynamicFormBinding;
 import org.geosdi.geoplatform.gui.client.widget.form.projects.binding.*;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchPanel;
 import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchPanel;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextArea;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
-import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 import java.util.List;
@@ -79,9 +82,6 @@ import static java.lang.Boolean.FALSE;
  */
 public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> {
 
-    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
-    private static final LayerRemoteAsync layerRemote = LayerRemote.Util.getInstance();
-    //
     private final GPListViewSearchPanel<GPClientProject> searchWidget;
     private GPSecureStringTextField projectFieldName;
     private GPSecureStringTextArea projectDescription;
@@ -248,105 +248,82 @@ public class ProjectBindingWidget extends GPDynamicFormBinding<GPClientProject> 
     }
 
     private void insertProject() {
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
 
+        final SaveProjectCommandRequest saveProjectCommandRequest = GWT.<SaveProjectCommandRequest>create(
+                SaveProjectCommandRequest.class);
+        saveProjectCommandRequest.setProject(entity);
+
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<SaveProjectCommandResponse>() {
+            /**
+             * @param response
+             */
             @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
+            public void onCommandSuccess(SaveProjectCommandResponse response) {
+                entity.setId(response.getResult());
+                searchWidget.getStore().insert(entity, 0);
+                if (entity.isDefaultProject()) {
+                    changeDefaultProject();
                 }
+                searchWidget.getStore().commitChanges();
+                GeoPlatformMessage.infoMessage(
+                        LayerModuleConstants.INSTANCE.ProjectBindingWidget_addProjectSuccessText(),
+                        "<ul><li>" + entity.getName() + "</li></ul>");
+                if (entity.isDefaultProject()) {
+                    TimeoutHandlerManager.fireEvent(((GPProjectSearchPanel) searchWidget).getDefaultProjectEvent());
+                }
+                hide();
             }
 
+            /**
+             * @param exception
+             */
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) layerRemote).setRpcToken(token);
-                layerRemote.saveProject(entity, new AsyncCallback<Long>() {
-
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        GeoPlatformMessage.errorMessage(
-                                LayerModuleConstants.INSTANCE.ProjectBindingWidget_addProjectErrorText(),
-                                caught.getMessage());
-                    }
-
-                    @Override
-                    public void onSuccess(Long result) {
-                        entity.setId(result);
-                        searchWidget.getStore().insert(entity, 0);
-                        if (entity.isDefaultProject()) {
-                            changeDefaultProject();
-                        }
-                        searchWidget.getStore().commitChanges();
-                        GeoPlatformMessage.infoMessage(LayerModuleConstants.INSTANCE.ProjectBindingWidget_addProjectSuccessText(),
-                                "<ul><li>" + entity.getName() + "</li></ul>");
-                        if (entity.isDefaultProject()) {
-                            TimeoutHandlerManager.fireEvent(((GPProjectSearchPanel) searchWidget).getDefaultProjectEvent());
-                        }
-                        hide();
-                    }
-                });
+            public void onCommandFailure(Throwable exception) {
+                GeoPlatformMessage.errorMessage(
+                        LayerModuleConstants.INSTANCE.ProjectBindingWidget_addProjectErrorText(),
+                        exception.getMessage());
             }
         });
     }
 
     private void updateProject() {
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
 
+
+        final UpdateProjectCommandRequest updateProjectCommandRequest = GWT.<UpdateProjectCommandRequest>create(
+                UpdateProjectCommandRequest.class);
+        updateProjectCommandRequest.setProject(entity);
+
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<UpdateProjectCommandResponse>() {
+            /**
+             * @param response
+             */
             @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
+            public void onCommandSuccess(UpdateProjectCommandResponse response) {
+                searchWidget.getStore().remove(entity);
+                searchWidget.getStore().insert(entity, 0);
+                if (entity.isDefaultProject()) {
+                    changeDefaultProject();
                 }
+                searchWidget.getStore().commitChanges();
+
+                GeoPlatformMessage.infoMessage(
+                        LayerModuleConstants.INSTANCE.ProjectBindingWidget_updateProjectSuccessText(),
+                        "<ul><li>" + entity.getName() + "</li></ul>");
+                if (entity.isDefaultProject()) {
+                    TimeoutHandlerManager.fireEvent(((GPProjectSearchPanel) searchWidget).getDefaultProjectEvent());
+                }
+
+                hide();
             }
 
+            /**
+             * @param exception
+             */
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) layerRemote).setRpcToken(token);
-                layerRemote.updateProject(entity, new AsyncCallback<Object>() {
-
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                GeoPlatformMessage.errorMessage(
-                                        LayerModuleConstants.INSTANCE.
-                                                ProjectBindingWidget_updateProjectErrorText(),
-                                        caught.getMessage());
-                            }
-
-                            @Override
-                            public void onSuccess(Object result) {
-                                searchWidget.getStore().remove(entity);
-                                searchWidget.getStore().insert(entity, 0);
-                                if (entity.isDefaultProject()) {
-                                    changeDefaultProject();
-                                }
-                                searchWidget.getStore().commitChanges();
-
-                                GeoPlatformMessage.infoMessage(LayerModuleConstants.INSTANCE.ProjectBindingWidget_updateProjectSuccessText(),
-                                        "<ul><li>" + entity.getName() + "</li></ul>");
-                                if (entity.isDefaultProject()) {
-                                    TimeoutHandlerManager.fireEvent(((GPProjectSearchPanel) searchWidget).getDefaultProjectEvent());
-                                }
-
-                                hide();
-                            }
-                        }
-                );
+            public void onCommandFailure(Throwable exception) {
+                GeoPlatformMessage.errorMessage(
+                        LayerModuleConstants.INSTANCE.ProjectBindingWidget_updateProjectErrorText(),
+                        exception.getMessage());
             }
         });
     }

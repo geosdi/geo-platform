@@ -749,7 +749,7 @@ public class LayerService implements ILayerService {
      * @throws GeoPlatformException
      */
     @Override
-    public void deleteProject(Long projectID, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+    public void deleteProject(Long projectID) throws GeoPlatformException {
         try {
             this.geoPlatformServiceClient.deleteProject(projectID);
         } catch (ResourceNotFoundFault rnf) {

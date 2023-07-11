@@ -72,6 +72,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-api</artifactId>
             <classifier>sources</classifier>

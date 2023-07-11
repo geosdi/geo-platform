@@ -53,21 +53,13 @@ import com.extjs.gxt.ui.client.widget.form.DualListField.Mode;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.ListField;
 import com.extjs.gxt.ui.client.widget.form.StoreFilterField;
-import com.extjs.gxt.ui.client.widget.layout.BorderLayout;
-import com.extjs.gxt.ui.client.widget.layout.BorderLayoutData;
-import com.extjs.gxt.ui.client.widget.layout.FormData;
-import com.extjs.gxt.ui.client.widget.layout.FormLayout;
-import com.extjs.gxt.ui.client.widget.layout.MarginData;
+import com.extjs.gxt.ui.client.widget.layout.*;
 import com.google.common.collect.Lists;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.RpcTokenException;
-import com.google.gwt.user.client.rpc.XsrfToken;
-import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import java.util.ArrayList;
-import java.util.List;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.command.layer.account.AccountFromSharedProjectCommandRequest;
+import org.geosdi.geoplatform.gui.client.command.layer.account.AccountFromSharedProjectCommandResponse;
 import org.geosdi.geoplatform.gui.client.command.share.GetUsersToShareProjectRequest;
 import org.geosdi.geoplatform.gui.client.command.share.GetUsersToShareProjectResponse;
 import org.geosdi.geoplatform.gui.client.command.share.ShareProjectRequest;
@@ -78,9 +70,8 @@ import org.geosdi.geoplatform.gui.client.i18n.MementoPersistenceConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommandExecutor;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
@@ -89,7 +80,8 @@ import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUserKeyValue;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
-import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
+
+import java.util.List;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -97,8 +89,6 @@ import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
  */
 public class ShareProjectPanel extends GeoPlatformContentPanel {
 
-    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
-    private static final LayerRemoteAsync layerRemote = LayerRemote.Util.getInstance();
     private final static String PROJECT_NAME_LABEL = LayerModuleConstants.INSTANCE.ShareProjectPanel_projectNameLabelText() + ": ";
     private final static String OWNER_LABEL = LayerModuleConstants.INSTANCE.ShareProjectPanel_ownerLabelText() + ": ";
     private final static String ORGANIZATION_LABEL = LayerModuleConstants.INSTANCE.ShareProjectPanel_organizationLabelText() + ": ";
@@ -333,54 +323,35 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                     public void onCommandSuccess(
                             GetUsersToShareProjectResponse response) {
                                 fromStore.add(response.getResult());
-                            }
+                    }
 
-                            @Override
-                            public void onCommandFailure(Throwable exception) {
-                                System.out.println(
-                                        "Failled to load Organization Users to Share Project: "
-                                        + exception);
-                            }
+                    @Override
+                    public void onCommandFailure(Throwable exception) {
+                        System.out.println("Failled to load Organization Users to Share Project: " + exception);
+                    }
                 });
 
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+        final AccountFromSharedProjectCommandRequest accountFromSharedProjectCommandRequest = GWT.<AccountFromSharedProjectCommandRequest>create(
+                AccountFromSharedProjectCommandRequest.class);
+        accountFromSharedProjectCommandRequest.setIdSharedProject(project.getId());
 
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<AccountFromSharedProjectCommandResponse>() {
+            /**
+             * @param response
+             */
             @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
-                }
+            public void onCommandSuccess(AccountFromSharedProjectCommandResponse response) {
+                toStore.add(response.getResult());
             }
 
+            /**
+             * @param exception
+             */
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) layerRemote).setRpcToken(token);
-                layerRemote.getAccountsFromSharedProject(
-                        project.getId(),
-                        new AsyncCallback<ArrayList<GPSimpleUser>>() {
-
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                logger.warning(
-                                        "Failled to load Share Project's Accounts: " + caught);
-                            }
-
-                            @Override
-                            public void onSuccess(ArrayList<GPSimpleUser> result) {
-                                toStore.add(result);
-                            }
-                        });
+            public void onCommandFailure(Throwable exception) {
+                logger.warning("Failled to load Share Project's Accounts: " + exception);
             }
         });
-
         boolean enableMenu = false;
         IGPAccountDetail accountInSession = Registry.get(
                 UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());

@@ -52,4 +52,9 @@
         <appender-ref ref="STDOUT" />
     </root>
 
+    <logger name="org.geosdi.geoplatform.gui.server.service.impl.google.GoogleGeocodingService" level="debug"/>
+    <logger name="org.geosdi.geoplatform.gui.server.service.impl.google.GoogleReverseGeocoding" level="debug"/>
+    <logger name="org.geosdi.geoplatform.gui.server.service.impl.yahoo.YahooGeocodingService" level="debug"/>
+    <logger name="org.geosdi.geoplatform.gui.server.service.impl.yahoo.YahooReverseGeocoding" level="debug"/>
+
 </configuration>

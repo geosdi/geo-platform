@@ -56,12 +56,11 @@ import java.util.ArrayList;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Lazy(true)
+@Lazy
 @Component(value = "command.FindLocationsByProviderCommand")
 public class FindLocationsByProviderCommand implements GPCommand<FindLocationsByProviderRequest, FindLocationsResponse> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            FindLocationsByProviderCommand.class);
+    private static final Logger logger = LoggerFactory.getLogger(FindLocationsByProviderCommand.class);
     //
     @Autowired
     private IGeocodingService googleGeocodingService;
@@ -69,42 +68,28 @@ public class FindLocationsByProviderCommand implements GPCommand<FindLocationsBy
     private IGeocodingService yahooGeocodingService;
 
     @Override
-    public FindLocationsResponse execute(
-            FindLocationsByProviderRequest request,
-            HttpServletRequest httpServletRequest) {
-
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
+    public FindLocationsResponse execute(FindLocationsByProviderRequest request, HttpServletRequest httpServletRequest) {
+        logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
         if (request.getAddress() == null) {
             logger.error("##############Address is NULL.");
             throw new GeoPlatformException("The Address must not be null.");
         }
-
         if (request.getProvider() == null) {
             logger.error("##############Provider is NULL.");
             throw new GeoPlatformException("The Provider must not be null.");
         }
-
         ArrayList<GeocodingBean> result;
         try {
-            if (request.getProvider().equals(
-                    ReverseGeoCoderProvider.GOOGLE.getProvider())) {
-                result = this.googleGeocodingService.findLocations(
-                        request.getAddress());
+            if (request.getProvider().equals(ReverseGeoCoderProvider.GOOGLE.getProvider())) {
+                result = this.googleGeocodingService.findLocations(request.getAddress());
             } else {
-                result = this.yahooGeocodingService.findLocations(
-                        request.getAddress());
+                result = this.yahooGeocodingService.findLocations(request.getAddress());
             }
-
-            logger.debug("#####################FindLocationsByProviderCommand "
-                    + "Result : {}", result);
-
+            logger.debug("#####################FindLocationsByProviderCommand Result : {}", result);
             return new FindLocationsResponse(result);
         } catch (IOException e) {
             logger.error(e.getMessage());
             throw new GeoPlatformException(e.getMessage());
         }
     }
-
 }

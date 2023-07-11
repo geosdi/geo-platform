@@ -35,32 +35,26 @@
  */
 package org.geosdi.geoplatform.gui.server.service;
 
-import java.io.IOException;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
-
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
+import java.io.IOException;
+
 /**
  * @author giuseppe
- * 
  */
 public interface IReverseGeocoding {
 
     /**
-     *
      * @param lat
      * @param lon
-     * @return
-     * 		   GeocodingBean
-     *
+     * @return GeocodingBean
      * @throws IOException
      * @throws SAXException
      * @throws ParserConfigurationException
      * @throws XPathExpressionException
      */
-    public GeocodingBean findLocation(double lat, double lon)
-            throws IOException;
+    public GeocodingBean findLocation(double lat, double lon) throws IOException;
 }

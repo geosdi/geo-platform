@@ -54,33 +54,24 @@ import org.springframework.stereotype.Component;
  */
 @Lazy
 @Component(value = "command.FindDirectionsByCoordCommand")
-public class FindDirectionsByCoordCommand implements
-        GPCommand<FindDirectionsByCoordRequest, FindDirectionsByCoordResponse> {
+public class FindDirectionsByCoordCommand implements GPCommand<FindDirectionsByCoordRequest, FindDirectionsByCoordResponse> {
     
-    private static final Logger logger = LoggerFactory.getLogger(
-            FindDirectionsByCoordCommand.class);
+    private static final Logger logger = LoggerFactory.getLogger(FindDirectionsByCoordCommand.class);
     //
     @Autowired
     private IRoutingService routingService;
-    
+
+    /**
+     * @param request
+     * @param httpServletRequest
+     * @return
+     */
     @Override
-    public FindDirectionsByCoordResponse execute(
-            FindDirectionsByCoordRequest request,
-            HttpServletRequest httpServletRequest) {
-        
-        logger.debug("\n\n@@@@@@@@@@@@@@@@@FindDirectionsByCoordRequest : {}",
-                request);
-        
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-        
-        RoutingBean result = this.routingService.findDirections(
-                request.getxStart(), request.getyStart(),
-                request.getxStop(), request.getyStop());
-        
+    public FindDirectionsByCoordResponse execute(FindDirectionsByCoordRequest request, HttpServletRequest httpServletRequest) {
+        logger.debug("\n\n@@@@@@@@@@@@@@@@@FindDirectionsByCoordRequest : {}", request);
+        logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
+        RoutingBean result = this.routingService.findDirections(request.getxStart(), request.getyStart(), request.getxStop(), request.getyStop());
         logger.debug("########################FOUND : {}", result);
-        
         return new FindDirectionsByCoordResponse(result);
     }
-    
 }

@@ -51,10 +51,8 @@ import java.io.IOException;
 import static org.junit.Assert.assertNotNull;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
- *
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"applicationContext-TEST.xml"})

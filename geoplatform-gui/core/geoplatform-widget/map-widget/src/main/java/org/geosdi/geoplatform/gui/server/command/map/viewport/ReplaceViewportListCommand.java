@@ -43,26 +43,22 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Lazy
 @Component(value = "command.map.viewport.ReplaceViewportListCommand")
-public class ReplaceViewportListCommand
-        extends GPBasicMapCommand<ReplaceViewportListRequest> {
-    
+public class ReplaceViewportListCommand extends GPBasicMapCommand<ReplaceViewportListRequest> {
+
+    /**
+     * @param request
+     * @param httpServletRequest
+     * @return {@link GPCommandResponse}
+     */
     @Override
-    public GPCommandResponse execute(ReplaceViewportListRequest request,
-            HttpServletRequest httpServletRequest) {
-        
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-        
-        this.mapService.replaceViewportList(request.getViewportList(),
-                httpServletRequest);
-        
+    public GPCommandResponse execute(ReplaceViewportListRequest request, HttpServletRequest httpServletRequest) {
+        logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
+        this.mapService.replaceViewportList(request.getViewportList(), httpServletRequest);
         return MAP_MODULE_RESPONSE;
     }
-    
 }

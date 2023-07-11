@@ -35,12 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl.yahoo;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.model.yahoo.YahooGeocodeBean;
 import org.geosdi.geoplatform.gui.oxm.model.yahoo.GPYahooGeocodeRoot;
@@ -52,6 +46,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 
 /**
  *
@@ -69,8 +69,6 @@ public class YahooGeocodingService implements IGeocodingService {
     //
     @Autowired
     private GPJaxbMarshaller geocoderYahooJaxbMarshaller;
-    //
-    private ArrayList<GeocodingBean> beans;
 
     /**
      * (non-Javadoc)
@@ -79,28 +77,19 @@ public class YahooGeocodingService implements IGeocodingService {
      * org.geosdi.geoplatform.gui.server.service.IGeocodingService#findLocations(java.lang.String)
      */
     @Override
-    public ArrayList<GeocodingBean> findLocations(String address)
-            throws IOException {
-        this.beans = new ArrayList<GeocodingBean>();
-
+    public ArrayList<GeocodingBean> findLocations(String address) throws IOException {
+        ArrayList<GeocodingBean> beans = new ArrayList<GeocodingBean>();
         URL url = new URL(GEOCODER_REQUEST_PREFIX_FOR_XML + "?location="
                 + URLEncoder.encode(address, "UTF-8")
                 + "&locale=it_IT"
                 + "&appid=oyPe8o3V34EgAqJ2h4KP8KDsxgsYfqncfoLF7nagje.a1wUYJeHBE2aQaua7");
-
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-        GPYahooGeocodeRoot oxmBean = (GPYahooGeocodeRoot) this.geocoderYahooJaxbMarshaller.
-                unmarshal(conn.getInputStream());
-
-        if (oxmBean.getError().equals(
-                ResponseStatus.EnumResponseStatus.CODE_NO_ERROR.getValue())) {
+        GPYahooGeocodeRoot oxmBean = (GPYahooGeocodeRoot) this.geocoderYahooJaxbMarshaller.unmarshal(conn.getInputStream());
+        if (oxmBean.getError().equals(ResponseStatus.EnumResponseStatus.CODE_NO_ERROR.getValue())) {
             for (GPYahooResult result : oxmBean.getResultList()) {
                 beans.add(new YahooGeocodeBean(result));
             }
         }
-
         return beans;
     }
-
 }

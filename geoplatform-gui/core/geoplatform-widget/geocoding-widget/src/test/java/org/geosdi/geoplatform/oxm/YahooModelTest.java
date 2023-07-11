@@ -35,11 +35,8 @@
  */
 package org.geosdi.geoplatform.oxm;
 
-import java.io.File;
-import java.io.IOException;
 import org.geosdi.geoplatform.gui.oxm.model.yahoo.GPYahooGeocodeRoot;
 import org.geosdi.geoplatform.oxm.jaxb.GPJaxbMarshaller;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -48,68 +45,56 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.io.File;
+import java.io.IOException;
+
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
 /**
- *
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
- *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(
-            locations = {"classpath:org/geosdi/geoplatform/gui/applicationContext-TEST.xml"})
-    public class YahooModelTest {
+@ContextConfiguration(locations = {"classpath:org/geosdi/geoplatform/gui/applicationContext-TEST.xml"})
+public class YahooModelTest {
 
-        private final Logger logger = LoggerFactory.getLogger(this.getClass());
-        //
-        @Autowired
-        private GPJaxbMarshaller geocoderYahooJaxbMarshaller;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    //
+    @Autowired
+    private GPJaxbMarshaller geocoderYahooJaxbMarshaller;
 
-        @Test
-        public void testGeocoding() {
-            try {
-                String sourceFileUrl = new File(".").getCanonicalPath() + File.separator
-                        + "src/test/resources/yahooGeocodeExample.xml";
-
-                File source = new File(sourceFileUrl);
-                if (!source.canRead()) {
-                    throw new IllegalArgumentException(
-                            "Source path " + sourceFileUrl + " is not valid");
-                }
-
-                GPYahooGeocodeRoot geocode = (GPYahooGeocodeRoot) geocoderYahooJaxbMarshaller.
-                        unmarshal(source);
-                Assert.assertNotNull("The geocode is null", geocode);
-
-                logger.info(
-                        "\n\n\t GeoPlatform Yahoo geocoding OXM parsing : {}\n\n",
-                        geocode);
-            } catch (IOException ex) {
-                Assert.fail(ex.getMessage());
+    @Test
+    public void testGeocoding() {
+        try {
+            File source = new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "yahooGeocodeExample")
+                    .collect(joining(File.separator, "", ".xml")));
+            if (!source.canRead()) {
+                throw new IllegalArgumentException("Source path " + source.getPath() + " is not valid");
             }
+            GPYahooGeocodeRoot geocode = (GPYahooGeocodeRoot) geocoderYahooJaxbMarshaller.unmarshal(source);
+            assertNotNull("The geocode is null", geocode);
+            logger.info("#############################GeoPlatform Yahoo geocoding OXM parsing : {}\n\n", geocode);
+        } catch (IOException ex) {
+            fail(ex.getMessage());
         }
-
-        @Test
-        public void testReverseGeocoding() {
-            try {
-                String sourceFileUrl = new File(".").getCanonicalPath() + File.separator
-                        + "src/test/resources/yahooReverseGeocodeExample.xml";
-
-                File source = new File(sourceFileUrl);
-                if (!source.canRead()) {
-                    throw new IllegalArgumentException(
-                            "Source path " + sourceFileUrl + " is not valid");
-                }
-
-                GPYahooGeocodeRoot geocode = (GPYahooGeocodeRoot) geocoderYahooJaxbMarshaller.
-                        unmarshal(source);
-                Assert.assertNotNull("The geocode is null", geocode);
-
-                logger.info(
-                        "\n\n\t GeoPlatform Yahoo reverse geocoding OXM parsing : {}\n\n",
-                        geocode);
-            } catch (IOException ex) {
-                Assert.fail(ex.getMessage());
-            }
-        }
-
     }
+
+    @Test
+    public void testReverseGeocoding() {
+        try {
+            File source = new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "yahooReverseGeocodeExample")
+                    .collect(joining(File.separator, "", ".xml")));
+            if (!source.canRead()) {
+                throw new IllegalArgumentException("Source path " + source.getPath() + " is not valid");
+            }
+            GPYahooGeocodeRoot geocode = (GPYahooGeocodeRoot) geocoderYahooJaxbMarshaller.unmarshal(source);
+            assertNotNull("The geocode is null", geocode);
+            logger.info("@@@@@@@@@@@@@@@@@@@@GeoPlatform Yahoo reverse geocoding OXM parsing : {}\n\n", geocode);
+        } catch (IOException ex) {
+            fail(ex.getMessage());
+        }
+    }
+}

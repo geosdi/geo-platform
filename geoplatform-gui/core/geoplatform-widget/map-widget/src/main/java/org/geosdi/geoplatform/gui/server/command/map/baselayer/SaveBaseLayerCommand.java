@@ -43,7 +43,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -51,16 +50,15 @@ import org.springframework.stereotype.Component;
 @Component(value = "command.map.baselayer.SaveBaseLayerCommand")
 public class SaveBaseLayerCommand extends GPBasicMapCommand<SaveBaseLayerRequest> {
 
+    /**
+     * @param request
+     * @param httpServletRequest
+     * @return {@link GPMapModuleResponse}
+     */
     @Override
-    public GPMapModuleResponse execute(SaveBaseLayerRequest request,
-            HttpServletRequest httpServletRequest) {
-
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
+    public GPMapModuleResponse execute(SaveBaseLayerRequest request, HttpServletRequest httpServletRequest) {
+        logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
         this.mapService.saveBaseLayer(request.getBaseLayer(), httpServletRequest);
-
         return MAP_MODULE_RESPONSE;
     }
-
 }

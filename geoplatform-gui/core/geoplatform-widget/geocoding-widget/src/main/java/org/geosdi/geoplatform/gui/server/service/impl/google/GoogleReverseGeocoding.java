@@ -64,7 +64,7 @@ public class GoogleReverseGeocoding implements IReverseGeocoding {
     // URL prefix to the reverse geocoder
     private static final String REVERSE_GEOCODER_PREFIX_FOR_XML = "http://maps.googleapis.com/maps/api/geocode/xml";
     //
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(GoogleReverseGeocoding.class);
     //
     @Autowired
     private GPJaxbMarshaller geocoderGoogleJaxbMarshaller;
@@ -78,6 +78,7 @@ public class GoogleReverseGeocoding implements IReverseGeocoding {
      */
     @Override
     public GeocodingBean findLocation(double lat, double lon) throws IOException {
+        logger.debug("###########################EXECUTED : {}\n", this.getClass().getSimpleName());
         URL url = new URL(REVERSE_GEOCODER_PREFIX_FOR_XML + "?latlng="
                 + URLEncoder.encode(lat + "," + lon, "UTF-8") + "&language=it&sensor=true");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();

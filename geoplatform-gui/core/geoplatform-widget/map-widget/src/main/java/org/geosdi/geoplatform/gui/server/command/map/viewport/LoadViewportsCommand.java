@@ -38,12 +38,8 @@ package org.geosdi.geoplatform.gui.server.command.map.viewport;
 import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.LoadViewportsRequest;
 import org.geosdi.geoplatform.gui.client.command.LoadViewportsResponse;
-import org.geosdi.geoplatform.gui.command.server.GPCommand;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
-import org.geosdi.geoplatform.gui.server.service.IMapService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.geosdi.geoplatform.gui.server.command.map.GPBasicMapCommand;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -56,28 +52,18 @@ import java.util.List;
  */
 @Lazy
 @Component(value = "command.map.viewport.LoadViewportsCommand")
-public class LoadViewportsCommand implements GPCommand<LoadViewportsRequest, LoadViewportsResponse> {
+public class LoadViewportsCommand extends GPBasicMapCommand<LoadViewportsRequest> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            LoadViewportsCommand.class);
-    //
-    @Autowired
-    private IMapService mapService;
-
+    /**
+     * @param request
+     * @param httpServletRequest
+     * @return {@link LoadViewportsResponse}
+     */
     @Override
-    public LoadViewportsResponse execute(LoadViewportsRequest request,
-            HttpServletRequest httpServletRequest) {
-
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
-        List<GPClientViewport> viewports = this.mapService.loadViewportElements(
-                httpServletRequest);
-
+    public LoadViewportsResponse execute(LoadViewportsRequest request, HttpServletRequest httpServletRequest) {
+        logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
+        List<GPClientViewport> viewports = this.mapService.loadViewportElements(httpServletRequest);
         logger.debug("#################### Found {}\n", viewports);
-
-        return new LoadViewportsResponse(new ArrayList<>(
-                viewports));
+        return new LoadViewportsResponse(new ArrayList<>(viewports));
     }
-
 }

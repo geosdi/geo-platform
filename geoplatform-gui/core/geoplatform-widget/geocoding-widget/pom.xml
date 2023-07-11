@@ -141,7 +141,6 @@
             <artifactId>logback-classic</artifactId>
         </dependency>
 
-
         <!-- SCOPE TEST -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -161,27 +160,10 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>
-
         <plugins>
-            <!-- ... or ask the plugin to detect them based on gwt modules files and 
-            copy the required java sources -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>gwt-maven-plugin</artifactId>
-                <executions>
-                    <!-- GWT version detected from dependencyManagement -->
-                    <execution>
-                        <goals>
-                            <goal>resources</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -196,10 +178,8 @@
                         <goals>
                             <goal>jar-no-fork</goal>
                         </goals>
-
                     </execution>
                 </executions>
-
             </plugin>
 
             <plugin>
@@ -241,6 +221,5 @@
                 </includes>
             </resource>
         </resources>
-
     </build>
 </project>

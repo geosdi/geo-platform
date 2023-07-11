@@ -35,18 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-
 import org.geosdi.geoplatform.gui.client.model.Directions;
 import org.geosdi.geoplatform.gui.client.model.RoutingBean;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
@@ -61,6 +49,18 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import static javax.xml.parsers.DocumentBuilderFactory.newInstance;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -70,13 +70,9 @@ import org.xml.sax.SAXException;
 public class RoutingService implements IRoutingService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    
+    //
     @Autowired
     private RoutingServiceParameters serviceParameter;
-    
-    private URL url;
-    private HttpURLConnection conn;
-    private XPath xpath;
 
     /**
      * (non-Javadoc)
@@ -84,55 +80,33 @@ public class RoutingService implements IRoutingService {
      * @see org.geosdi.geoplatform.gui.server.service.IRoutingService#findDirections(double, double, double, double)
      */
     @Override
-    public RoutingBean findDirections(double xStart, double yStart,
-            double xStop, double yStop) throws GeoPlatformException {
+    public RoutingBean findDirections(double xStart, double yStart, double xStop, double yStop) throws GeoPlatformException {
         RoutingBean tracking = new RoutingBean();
-
+        HttpURLConnection conn = null;
         try {
-            url = new URL(serviceParameter.getServiceDataSource()
+            URL url = new URL(serviceParameter.getServiceDataSource()
                     + serviceParameter.getFirstRegex() + xStart + "," + yStart
                     + serviceParameter.getFinalRegex() + xStop + "," + yStop
                     + serviceParameter.getMethod());
-
             conn = (HttpURLConnection) url.openConnection();
-
             Document trackingResultDocument = null;
             // open the connection and get results as InputSource.
             conn.connect();
-            InputSource geocoderResultInputSource = new InputSource(
-                    conn.getInputStream());
-
+            InputSource geocoderResultInputSource = new InputSource(conn.getInputStream());
             // read result and parse into XML Document
-            trackingResultDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(geocoderResultInputSource);
-
+            trackingResultDocument = newInstance().newDocumentBuilder().parse(geocoderResultInputSource);
             // prepare XPath
-            xpath = XPathFactory.newInstance().newXPath();
-
+            XPath xpath = XPathFactory.newInstance().newXPath();
             // extract the result
             NodeList resultNodeList = null;
-
-            resultNodeList = (NodeList) xpath.evaluate(
-                    "/result/route/complete_line", trackingResultDocument,
-                    XPathConstants.NODESET);
-
+            resultNodeList = (NodeList) xpath.evaluate("/result/route/complete_line", trackingResultDocument, XPathConstants.NODESET);
             // save first the completeline string
             tracking.setCompleteLine(resultNodeList.item(0).getTextContent());
-
-            resultNodeList = (NodeList) xpath.evaluate(
-                    "/result/route/total_length", trackingResultDocument,
-                    XPathConstants.NODESET);
-
+            resultNodeList = (NodeList) xpath.evaluate("/result/route/total_length", trackingResultDocument, XPathConstants.NODESET);
             tracking.setTotalLength(resultNodeList.item(0).getTextContent());
-
-            resultNodeList = (NodeList) xpath.evaluate(
-                    "/result/route/total_estimated_time",
-                    trackingResultDocument, XPathConstants.NODESET);
+            resultNodeList = (NodeList) xpath.evaluate("/result/route/total_estimated_time", trackingResultDocument, XPathConstants.NODESET);
             tracking.setTotaEstimatedTime(resultNodeList.item(0).getTextContent());
-
-            resultNodeList = (NodeList) xpath.evaluate(
-                    "/result/route/directions/step", trackingResultDocument,
-                    XPathConstants.NODESET);
-
+            resultNodeList = (NodeList) xpath.evaluate("/result/route/directions/step", trackingResultDocument, XPathConstants.NODESET);
             for (int i = 0; i < resultNodeList.getLength(); ++i) {
                 Directions direction = new Directions();
                 direction.setRoute(resultNodeList.item(i).getChildNodes().item(0).getTextContent());
@@ -141,7 +115,6 @@ public class RoutingService implements IRoutingService {
                 }
                 tracking.addDirection(direction);
             }
-
         } catch (MalformedURLException e) {
             logger.error("Error :", e);
             throw new GeoPlatformException(e);
@@ -158,9 +131,10 @@ public class RoutingService implements IRoutingService {
             logger.error("Error :", e);
             throw new GeoPlatformException(e);
         } finally {
-            conn.disconnect();
+            if (conn != null) {
+                conn.disconnect();
+            }
         }
-
         return tracking;
     }
 }

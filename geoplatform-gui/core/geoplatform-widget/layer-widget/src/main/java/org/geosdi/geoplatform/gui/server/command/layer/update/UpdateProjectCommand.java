@@ -57,6 +57,8 @@ class UpdateProjectCommand extends GPLayerCommand<UpdateProjectCommandRequest, U
     @Override
     public UpdateProjectCommandResponse execute(UpdateProjectCommandRequest request,
             HttpServletRequest httpServletRequest) {
+        logger.debug("#####################Executing {} Command with Parameter: {}\n", this.getClass().getSimpleName(),
+                request.getProject());
         this.layerService.updateProject(request.getProject(), httpServletRequest);
         return new UpdateProjectCommandResponse(Boolean.TRUE);
     }

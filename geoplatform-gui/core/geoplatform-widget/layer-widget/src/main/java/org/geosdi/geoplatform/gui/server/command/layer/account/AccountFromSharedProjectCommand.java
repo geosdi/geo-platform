@@ -57,6 +57,8 @@ class AccountFromSharedProjectCommand extends GPLayerCommand<AccountFromSharedPr
     @Override
     public AccountFromSharedProjectCommandResponse execute(AccountFromSharedProjectCommandRequest request,
             HttpServletRequest httpServletRequest) {
+        logger.debug("#####################Executing {} Command with Parameter: {}\n", this.getClass().getSimpleName(),
+                request.getIdSharedProject());
         return new AccountFromSharedProjectCommandResponse(
                 this.layerService.getAccountsFromSharedProject(request.getIdSharedProject(), httpServletRequest));
     }

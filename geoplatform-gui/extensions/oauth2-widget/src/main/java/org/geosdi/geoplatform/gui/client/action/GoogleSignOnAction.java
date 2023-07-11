@@ -39,32 +39,33 @@ import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.google.api.gwt.oauth2.client.Auth;
 import com.google.api.gwt.oauth2.client.AuthRequest;
 import com.google.api.gwt.oauth2.client.Callback;
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.OAuth2MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.OAuth2Resources;
+import org.geosdi.geoplatform.gui.client.command.google.GoogleUserLoginCommandRequest;
+import org.geosdi.geoplatform.gui.client.command.google.GoogleUserLoginCommandResponse;
 import org.geosdi.geoplatform.gui.client.i18n.OAuth2WidgetConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.oauth2.IGPOAuth2GEBLoginHandler;
 import org.geosdi.geoplatform.gui.puregwt.oauth2.OAuth2HandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.oauth2.event.GPOAuth2AddServerEvent;
 import org.geosdi.geoplatform.gui.puregwt.oauth2.event.GPOAuth2CapabilitiesEvent;
-import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.oauth2.event.GPToolbarIconGEBLoginWidgetEvent;
 import org.geosdi.geoplatform.gui.puregwt.oauth2.event.GPToolbarIconGEBLogoutWidgetEvent;
-import org.geosdi.geoplatform.gui.server.gwt.OAuth2RemoteImpl;
+import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 import org.geosdi.geoplatform.gui.utility.oauth2.EnumOAuth2;
 
 /**
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
- *
  */
-public class GoogleSignOnAction extends OAuth2MenuBaseAction
-        implements IGPOAuth2GEBLoginHandler {
+public class GoogleSignOnAction extends OAuth2MenuBaseAction implements IGPOAuth2GEBLoginHandler {
 
     private String type;
 
@@ -84,8 +85,8 @@ public class GoogleSignOnAction extends OAuth2MenuBaseAction
     public void doLoginOnGEB(String theType) {
         this.type = theType;
 
-        AuthRequest request = new AuthRequest(super.getGoogleAuthUrl(),
-                super.getGoogleClientId()).withScopes(super.getScope());
+        AuthRequest request = new AuthRequest(super.getGoogleAuthUrl(), super.getGoogleClientId()).withScopes(
+                super.getScope());
 
         Auth auth = Auth.get();
         auth.login(request, new Callback<String, Throwable>() {
@@ -96,12 +97,11 @@ public class GoogleSignOnAction extends OAuth2MenuBaseAction
                 setImage(AbstractImagePrototype.create(OAuth2Resources.ICONS.googleSignOnGreen()));
                 setEnabled(false);
 
-                WidgetPropertiesHandlerManager.fireEvent(
-                        new GPToolbarIconGEBLoginWidgetEvent(
+                WidgetPropertiesHandlerManager.fireEvent(new GPToolbarIconGEBLoginWidgetEvent(
                         OAuth2WidgetConstants.INSTANCE.GoogleSignOnAction_signedOnGEBText()));
-                LayoutManager.getInstance().getStatusMap().setStatus(
-                        OAuth2WidgetConstants.INSTANCE.GoogleSignOnAction_signedOnGEBText(),
-                        EnumSearchStatus.STATUS_SEARCH.toString());
+                LayoutManager.getInstance().getStatusMap()
+                        .setStatus(OAuth2WidgetConstants.INSTANCE.GoogleSignOnAction_signedOnGEBText(),
+                                EnumSearchStatus.STATUS_SEARCH.toString());
 
                 if (type.equals(EnumOAuth2.LOAD_CAPABILITIES.getValue())) {
                     OAuth2HandlerManager.fireEvent(new GPOAuth2CapabilitiesEvent());
@@ -115,30 +115,38 @@ public class GoogleSignOnAction extends OAuth2MenuBaseAction
                 setImage(AbstractImagePrototype.create(OAuth2Resources.ICONS.googleSignOnWhite()));
                 setEnabled(true);
 
-                WidgetPropertiesHandlerManager.fireEvent(
-                        new GPToolbarIconGEBLogoutWidgetEvent(
+                WidgetPropertiesHandlerManager.fireEvent(new GPToolbarIconGEBLogoutWidgetEvent(
                         OAuth2WidgetConstants.INSTANCE.GoogleSignOnAction_notSignedOnGEBText()));
 
                 GeoPlatformMessage.errorMessage(
-                        OAuth2WidgetConstants.INSTANCE.GoogleSignOnAction_errorSigningOnGEBText(),
-                        caught.getMessage());
-                LayoutManager.getInstance().getStatusMap().setStatus(
-                        OAuth2WidgetConstants.INSTANCE.GoogleSignOnAction_errorSigningOnGEBText(),
-                        EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
+                        OAuth2WidgetConstants.INSTANCE.GoogleSignOnAction_errorSigningOnGEBText(), caught.getMessage());
+                LayoutManager.getInstance().getStatusMap()
+                        .setStatus(OAuth2WidgetConstants.INSTANCE.GoogleSignOnAction_errorSigningOnGEBText(),
+                                EnumSearchStatus.STATUS_SEARCH_ERROR.toString());
             }
         });
     }
 
     private void googleLoginCallback(String token) {
-        OAuth2RemoteImpl.Util.getInstance().googleUserLogin(token, new AsyncCallback<Object>() {
+        final GoogleUserLoginCommandRequest googleUserLoginCommandRequest = GWT.<GoogleUserLoginCommandRequest>create(
+                GoogleUserLoginCommandRequest.class);
+        googleUserLoginCommandRequest.setToken(token);
+
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<GoogleUserLoginCommandResponse>() {
+            /**
+             * @param response
+             */
             @Override
-            public void onFailure(Throwable caught) {
-                GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorTitleText(),
-                        caught.getMessage());
+            public void onCommandSuccess(GoogleUserLoginCommandResponse response) {
+
             }
 
+            /**
+             * @param exception
+             */
             @Override
-            public void onSuccess(Object result) {
+            public void onCommandFailure(Throwable exception) {
+                GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorTitleText(), exception.getMessage());
             }
         });
     }

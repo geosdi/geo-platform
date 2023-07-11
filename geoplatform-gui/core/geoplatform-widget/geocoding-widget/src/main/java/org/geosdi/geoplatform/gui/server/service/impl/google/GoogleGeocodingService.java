@@ -76,19 +76,13 @@ public class GoogleGeocodingService implements IGeocodingService {
     @Override
     public ArrayList<GeocodingBean> findLocations(String address) throws IOException {
         ArrayList<GeocodingBean> beans = new ArrayList<>();
-
         logger.debug("@@@@@@@@@@@@@@@@@@@@Process Request for {}\n", GEOCODER_REQUEST_PREFIX_FOR_XML);
-
-        URL url = new URL(GEOCODER_REQUEST_PREFIX_FOR_XML + "?address="
-                + URLEncoder.encode(address, "UTF-8") + "&language=it&sensor=false");
-
+        URL url = new URL(GEOCODER_REQUEST_PREFIX_FOR_XML + "?address=" + URLEncoder.encode(address,
+                "UTF-8") + "&language=it&sensor=false");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-        GPGoogleGeocodeRoot oxmBean = (GPGoogleGeocodeRoot) this.geocoderGoogleJaxbMarshaller.
-                unmarshal(conn.getInputStream());
-
-        if (oxmBean.getStatus().equals(
-                ResponseStatus.EnumResponseStatus.STATUS_OK.getValue())) {
+        GPGoogleGeocodeRoot oxmBean = (GPGoogleGeocodeRoot) this.geocoderGoogleJaxbMarshaller.unmarshal(
+                conn.getInputStream());
+        if (oxmBean.getStatus().equals(ResponseStatus.EnumResponseStatus.STATUS_OK.getValue())) {
             for (GPGoogleResult result : oxmBean.getResultList()) {
                 beans.add(new GoogleGeocodeBean(result));
             }

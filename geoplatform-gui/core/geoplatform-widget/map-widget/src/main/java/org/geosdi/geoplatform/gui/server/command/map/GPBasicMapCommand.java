@@ -42,21 +42,35 @@ import org.geosdi.geoplatform.gui.command.server.GPCommand;
 import org.geosdi.geoplatform.gui.server.service.IMapService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPBasicMapCommand<Request extends GPCommandRequest>
-        implements GPCommand<Request, GPCommandResponse> {
+public abstract class GPBasicMapCommand<Request extends GPCommandRequest> implements GPCommand<Request, GPCommandResponse>, InitializingBean {
 
-    protected static final Logger logger = LoggerFactory.getLogger(
-            GPBasicMapCommand.class);
+    protected static final Logger logger = LoggerFactory.getLogger(GPBasicMapCommand.class);
     protected static final GPMapModuleResponse MAP_MODULE_RESPONSE = new GPMapModuleResponse();
     //
     @Autowired
     protected IMapService mapService;
 
+    /**
+     * Invoked by the containing {@code BeanFactory} after it has set all bean properties
+     * and satisfied {@link BeanFactoryAware}, {@code ApplicationContextAware} etc.
+     * <p>This method allows the bean instance to perform validation of its overall
+     * configuration and final initialization when all bean properties have been set.
+     *
+     * @throws Exception in the event of misconfiguration (such as failure to set an
+     *                   essential property) or if initialization fails for any other reason
+     */
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        checkArgument(this.mapService != null, "The Parameter mapService must not be null.");
+    }
 }

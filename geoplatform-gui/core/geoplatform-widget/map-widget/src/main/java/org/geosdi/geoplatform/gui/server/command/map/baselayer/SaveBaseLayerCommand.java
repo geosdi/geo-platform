@@ -35,15 +35,15 @@
  */
 package org.geosdi.geoplatform.gui.server.command.map.baselayer;
 
-import org.geosdi.geoplatform.gui.server.command.map.GPBasicMapCommand;
-import javax.servlet.http.HttpServletRequest;
-import org.geosdi.geoplatform.gui.client.command.SaveBaseLayerRequest;
 import org.geosdi.geoplatform.gui.client.command.GPMapModuleResponse;
+import org.geosdi.geoplatform.gui.client.command.SaveBaseLayerRequest;
+import org.geosdi.geoplatform.gui.server.command.map.GPBasicMapCommand;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -51,16 +51,15 @@ import org.springframework.stereotype.Component;
 @Component(value = "command.map.baselayer.SaveBaseLayerCommand")
 public class SaveBaseLayerCommand extends GPBasicMapCommand<SaveBaseLayerRequest> {
 
+    /**
+     * @param request
+     * @param httpServletRequest
+     * @return {@link GPMapModuleResponse}
+     */
     @Override
-    public GPMapModuleResponse execute(SaveBaseLayerRequest request,
-            HttpServletRequest httpServletRequest) {
-
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
+    public GPMapModuleResponse execute(SaveBaseLayerRequest request, HttpServletRequest httpServletRequest) {
+        logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
         this.mapService.saveBaseLayer(request.getBaseLayer(), httpServletRequest);
-
         return MAP_MODULE_RESPONSE;
     }
-
 }

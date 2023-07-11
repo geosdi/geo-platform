@@ -35,34 +35,31 @@
  */
 package org.geosdi.geoplatform.gui.server.command.map.viewport;
 
-import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.ReplaceViewportListRequest;
 import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 import org.geosdi.geoplatform.gui.server.command.map.GPBasicMapCommand;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Lazy
 @Component(value = "command.map.viewport.ReplaceViewportListCommand")
-public class ReplaceViewportListCommand
-        extends GPBasicMapCommand<ReplaceViewportListRequest> {
-    
+public class ReplaceViewportListCommand extends GPBasicMapCommand<ReplaceViewportListRequest> {
+
+    /**
+     * @param request
+     * @param httpServletRequest
+     * @return {@link GPCommandResponse}
+     */
     @Override
-    public GPCommandResponse execute(ReplaceViewportListRequest request,
-            HttpServletRequest httpServletRequest) {
-        
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-        
-        this.mapService.replaceViewportList(request.getViewportList(),
-                httpServletRequest);
-        
+    public GPCommandResponse execute(ReplaceViewportListRequest request, HttpServletRequest httpServletRequest) {
+        logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
+        this.mapService.replaceViewportList(request.getViewportList(), httpServletRequest);
         return MAP_MODULE_RESPONSE;
     }
-    
 }

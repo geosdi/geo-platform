@@ -37,8 +37,9 @@ package org.geosdi.geoplatform.gui.client.command;
 
 import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 
+import static java.lang.Boolean.TRUE;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -52,7 +53,6 @@ public class GPMapModuleResponse implements GPCommandResponse<Boolean> {
 
     @Override
     public Boolean getResult() {
-        return Boolean.TRUE;
+        return TRUE;
     }
-
 }

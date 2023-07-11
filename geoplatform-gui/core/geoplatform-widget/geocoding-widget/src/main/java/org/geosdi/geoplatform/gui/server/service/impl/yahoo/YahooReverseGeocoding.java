@@ -35,11 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.service.impl.yahoo;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
 import org.geosdi.geoplatform.gui.client.model.GeocodingKeyValue;
 import org.geosdi.geoplatform.gui.client.model.google.GoogleGeocodeBean;
@@ -54,11 +49,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+
 /**
- *
  * @author Michele Santomauro - CNR IMAA geoSDI Group
  * @email michele.santomauro@geosdi.org
- *
  */
 @Component("yahooReverseGeocoding")
 public class YahooReverseGeocoding implements IReverseGeocoding {
@@ -66,7 +64,7 @@ public class YahooReverseGeocoding implements IReverseGeocoding {
     // URL prefix to the reverse geocoder
     private static final String REVERSE_GEOCODER_PREFIX_FOR_XML = "http://where.yahooapis.com/geocode";
     //
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(YahooReverseGeocoding.class);
     //
     @Autowired
     private GPJaxbMarshaller geocoderYahooJaxbMarshaller;
@@ -74,35 +72,25 @@ public class YahooReverseGeocoding implements IReverseGeocoding {
     /**
      * (non-Javadoc)
      *
-     * @see
-     * org.geosdi.geoplatform.gui.server.service.IReverseGeocoding#findLocation(double,
+     * @see org.geosdi.geoplatform.gui.server.service.IReverseGeocoding#findLocation(double,
      * double)
      */
     @Override
-    public GeocodingBean findLocation(double lat, double lon)
-            throws IOException {
-
-        URL url = new URL(REVERSE_GEOCODER_PREFIX_FOR_XML + "?q="
-                + URLEncoder.encode(lat + ",+" + lon, "UTF-8")
-                + "&&locale=it_IT&gflags=R"
-                + "&appid=oyPe8o3V34EgAqJ2h4KP8KDsxgsYfqncfoLF7nagje.a1wUYJeHBE2aQaua7");
-
+    public GeocodingBean findLocation(double lat, double lon) throws IOException {
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@EXECUTED : {}\n", this.getClass().getSimpleName());
+        URL url = new URL(REVERSE_GEOCODER_PREFIX_FOR_XML + "?q=" + URLEncoder.encode(lat + ",+" + lon,
+                "UTF-8") + "&&locale=it_IT&gflags=R" + "&appid=oyPe8o3V34EgAqJ2h4KP8KDsxgsYfqncfoLF7nagje.a1wUYJeHBE2aQaua7");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-        GPYahooGeocodeRoot oxmBean = (GPYahooGeocodeRoot) this.geocoderYahooJaxbMarshaller.
-                unmarshal(conn.getInputStream());
-
-        if (oxmBean.getError().equals(
-                ResponseStatus.EnumResponseStatus.CODE_NO_ERROR.getValue())) {
+        GPYahooGeocodeRoot oxmBean = (GPYahooGeocodeRoot) this.geocoderYahooJaxbMarshaller.unmarshal(
+                conn.getInputStream());
+        if (oxmBean.getError().equals(ResponseStatus.EnumResponseStatus.CODE_NO_ERROR.getValue())) {
             GPYahooResult result = oxmBean.getResultList().get(0);
             return new YahooGeocodeBean(result);
         }
-
         /**
          * @@@@@@@@@@@@@@ TODO FIXE ME
          * @@@@@@@@@@@@@@@@@@@@ *
          */
         return new GoogleGeocodeBean(GeocodingKeyValue.ZERO_RESULTS.toString());
     }
-
 }

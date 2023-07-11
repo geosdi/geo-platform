@@ -35,15 +35,16 @@
  */
 package org.geosdi.geoplatform.gui.server.service.converter;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
 import org.geosdi.geoplatform.core.model.GPAuthority;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 import org.geosdi.geoplatform.response.UserDTO;
 import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -52,30 +53,35 @@ import org.springframework.stereotype.Component;
 @Component(value = "dtoUserConverter")
 public class DTOUserConverter {
 
+    /**
+     * @param userDetail
+     * @return {@link GPUser}
+     */
     public GPUser convertToGPUser(IGPUserManageDetail userDetail) {
         GPUser user = new GPUser();
-
         if (userDetail.getId() != null) {
             user.setId(userDetail.getId());
             user.setEnabled(true);
         }
-
         user.setName(userDetail.getName());
         user.setEmailAddress(userDetail.getEmail());
         user.setUsername(userDetail.getUsername());
         user.setPassword(userDetail.getPassword());
         user.setEnabled(userDetail.isEnabled());
         user.setAccountTemporary(userDetail.isTemporary());
-
         GPAuthority authority = new GPAuthority();
         authority.setAuthority(userDetail.getAuthority());
         authority.setTrustedLevel(userDetail.getTrustedLevel());
         user.setGPAuthorities(Arrays.asList(authority));
-
         return user;
     }
 
-    // All properties unless the password
+    /**
+     * <p>All properties unless the password</p>
+     *
+     * @param userDTO
+     * @return {@link GPUserManageDetail}
+     */
     public GPUserManageDetail convertToGPUserManageDetail(UserDTO userDTO) {
         GPUserManageDetail user = new GPUserManageDetail();
         user.setId(userDTO.getId());

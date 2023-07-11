@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.command;
 
-import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.FindDirectionsByCoordRequest;
 import org.geosdi.geoplatform.gui.client.command.FindDirectionsByCoordResponse;
 import org.geosdi.geoplatform.gui.client.model.RoutingBean;
@@ -47,6 +46,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -54,33 +55,26 @@ import org.springframework.stereotype.Component;
  */
 @Lazy
 @Component(value = "command.FindDirectionsByCoordCommand")
-public class FindDirectionsByCoordCommand implements
-        GPCommand<FindDirectionsByCoordRequest, FindDirectionsByCoordResponse> {
-    
-    private static final Logger logger = LoggerFactory.getLogger(
-            FindDirectionsByCoordCommand.class);
+public class FindDirectionsByCoordCommand implements GPCommand<FindDirectionsByCoordRequest, FindDirectionsByCoordResponse> {
+
+    private static final Logger logger = LoggerFactory.getLogger(FindDirectionsByCoordCommand.class);
     //
     @Autowired
     private IRoutingService routingService;
-    
+
+    /**
+     * @param request
+     * @param httpServletRequest
+     * @return
+     */
     @Override
-    public FindDirectionsByCoordResponse execute(
-            FindDirectionsByCoordRequest request,
+    public FindDirectionsByCoordResponse execute(FindDirectionsByCoordRequest request,
             HttpServletRequest httpServletRequest) {
-        
-        logger.debug("\n\n@@@@@@@@@@@@@@@@@FindDirectionsByCoordRequest : {}",
-                request);
-        
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-        
-        RoutingBean result = this.routingService.findDirections(
-                request.getxStart(), request.getyStart(),
+        logger.debug("\n\n@@@@@@@@@@@@@@@@@FindDirectionsByCoordRequest : {}", request);
+        logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
+        RoutingBean result = this.routingService.findDirections(request.getxStart(), request.getyStart(),
                 request.getxStop(), request.getyStop());
-        
         logger.debug("########################FOUND : {}", result);
-        
         return new FindDirectionsByCoordResponse(result);
     }
-    
 }

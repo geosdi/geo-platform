@@ -27,7 +27,7 @@
             <artifactId>gwt-servlet</artifactId>
             <scope>runtime</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.gwtproject.web.bindery</groupId>
             <artifactId>requestfactory-server</artifactId>
@@ -72,12 +72,12 @@
             <groupId>org.geosdi</groupId>
             <artifactId>basic-widget</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-oxm</artifactId>
         </dependency>
-        
+
         <!-- GWT-OL Resources -->
         <dependency>
             <groupId>org.gwtopenmaps.openlayers</groupId>
@@ -136,7 +136,7 @@
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>xml-apis</groupId>
             <artifactId>xml-apis</artifactId>

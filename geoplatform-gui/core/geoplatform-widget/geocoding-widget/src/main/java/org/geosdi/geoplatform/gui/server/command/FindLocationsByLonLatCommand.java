@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.command;
 
-import java.io.IOException;
-import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.FindLocationResponse;
 import org.geosdi.geoplatform.gui.client.command.FindLocationsByLonLatRequest;
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
@@ -49,6 +47,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 /**
  *
@@ -69,41 +70,28 @@ public class FindLocationsByLonLatCommand implements
     private IReverseGeocoding yahooReverseGeocoding;
 
     @Override
-    public FindLocationResponse execute(FindLocationsByLonLatRequest request,
-            HttpServletRequest httpServletRequest) {
-
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
+    public FindLocationResponse execute(FindLocationsByLonLatRequest request, HttpServletRequest httpServletRequest) {
+        logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
         if (request.getLon() == null) {
             logger.error("##############Parameter LON is NULL.");
             throw new GeoPlatformException("The Parameter Lon must not be null.");
         }
-
         if (request.getLat() == null) {
             logger.error("##############Parameter LAT is NULL.");
             throw new GeoPlatformException("The Parameter Lat must not be null.");
         }
-
         GeocodingBean result;
         try {
             if (request.getProvider() == ReverseGeoCoderProvider.YAHOO) {
-                result = this.yahooReverseGeocoding.findLocation(
-                        request.getLat(), request.getLon());
+                result = this.yahooReverseGeocoding.findLocation(request.getLat(), request.getLon());
             } else {
-                result = this.googleReverseGeocoding.findLocation(
-                        request.getLat(), request.getLon());
+                result = this.googleReverseGeocoding.findLocation(request.getLat(), request.getLon());
             }
-
-            logger.debug("#####################FindLocationsByProviderCommand "
-                    + "Result : {}", result);
-
+            logger.debug("#####################FindLocationsByProviderCommand Result : {}", result);
             return new FindLocationResponse(result);
-
         } catch (IOException e) {
             logger.error(e.getMessage());
             throw new GeoPlatformException(e.getMessage());
         }
     }
-
 }

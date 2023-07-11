@@ -37,11 +37,6 @@ package org.geosdi.geoplatform.gui.server.service.impl;
 
 import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
-import com.extjs.gxt.ui.client.data.PagingLoadResult;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.core.model.GPOrganization;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
@@ -68,6 +63,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 /**
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -85,43 +85,29 @@ public class UserService implements IUserService {
     private DTOUserConverter dtoUserConverter;
 
     @Override
-    public PagingLoadResult<GPUserManageDetail> searchUsers(
-            PagingLoadConfig config,
-            String searchText, String organization,
-            HttpServletRequest httpServletRequest) {
+    public BasePagingLoadResult<GPUserManageDetail> searchUsers(PagingLoadConfig config, String searchText,
+            String organization, HttpServletRequest httpServletRequest) {
         GPUser user = this.getCheckLoggedUser(httpServletRequest);
-
         SearchRequest srq = new SearchRequest(searchText);
-
-        Long usersCount = this.geoPlatformServiceClient.getUsersCount(
-                organization, srq);
-
+        Long usersCount = this.geoPlatformServiceClient.getUsersCount(organization, srq);
         int start = config.getOffset();
         int page = start == 0 ? start : start / config.getLimit();
-
-        PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText,
-                config.getLimit(), page);
-
+        PaginatedSearchRequest psr = new PaginatedSearchRequest(searchText, config.getLimit(), page);
         List<UserDTO> userList = null;
         try {
-            userList = this.geoPlatformServiceClient.searchUsers(user.getId(),
-                    psr).getSearchUsers();
+            userList = this.geoPlatformServiceClient.searchUsers(user.getId(), psr).getSearchUsers();
             if (userList == null) {
                 throw new GeoPlatformException("There are no results");
             }
         } catch (ResourceNotFoundFault rnnf) {
             throw new GeoPlatformException(rnnf.getMessage()); // TODO Better message
         }
-
         List<GPUserManageDetail> searchUsers = new ArrayList<GPUserManageDetail>();
         for (UserDTO userDTO : userList) {
-            GPUserManageDetail userDetail = this.dtoUserConverter.convertToGPUserManageDetail(
-                    userDTO);
+            GPUserManageDetail userDetail = this.dtoUserConverter.convertToGPUserManageDetail(userDTO);
             searchUsers.add(userDetail);
         }
-
-        return new BasePagingLoadResult<GPUserManageDetail>(searchUsers,
-                config.getOffset(), usersCount.intValue());
+        return new BasePagingLoadResult<GPUserManageDetail>(searchUsers, config.getOffset(), usersCount.intValue());
     }
 
     @Override
@@ -133,22 +119,17 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Long insertUser(IGPUserManageDetail userDetail, String organization,
-            HttpServletRequest httpServletRequest, boolean checkUserSession, 
-            boolean sendEmail)
-            throws GeoPlatformException {
+    public Long insertUser(IGPUserManageDetail userDetail, String organization, HttpServletRequest httpServletRequest,
+            boolean checkUserSession, boolean sendEmail) throws GeoPlatformException {
         if (checkUserSession) {
             this.getCheckLoggedUser(httpServletRequest);
         }
-        logger.debug("\nUser to INSERT (of the organization \"{}\"):\n{}",
-                organization, userDetail);
+        logger.debug("\nUser to INSERT (of the organization \"{}\"):\n{}", organization, userDetail);
         Long iserId = null;
         try {
             GPUser user = this.dtoUserConverter.convertToGPUser(userDetail);
             user.setOrganization(new GPOrganization(organization));
-
-            iserId = geoPlatformServiceClient.insertAccount(
-                    new InsertAccountRequest(user, sendEmail));
+            iserId = geoPlatformServiceClient.insertAccount(new InsertAccountRequest(user, sendEmail));
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
         }

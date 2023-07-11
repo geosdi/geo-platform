@@ -35,9 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.command;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.FindLocationsByAddressRequest;
 import org.geosdi.geoplatform.gui.client.command.FindLocationsResponse;
 import org.geosdi.geoplatform.gui.client.model.GeocodingBean;
@@ -50,47 +47,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.ArrayList;
+
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Lazy(true)
+@Lazy
 @Component(value = "command.FindLocationsByAddressCommand")
-public class FindLocationsByAddressCommand implements
-        GPCommand<FindLocationsByAddressRequest, FindLocationsResponse> {
+public class FindLocationsByAddressCommand implements GPCommand<FindLocationsByAddressRequest, FindLocationsResponse> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            FindLocationsByAddressCommand.class);
+    private static final Logger logger = LoggerFactory.getLogger(FindLocationsByAddressCommand.class);
     //
     @Autowired
     private IGeocodingService googleGeocodingService;
 
     @Override
-    public FindLocationsResponse execute(
-            FindLocationsByAddressRequest request,
-            HttpServletRequest httpServletRequest) {
-
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
+    public FindLocationsResponse execute(FindLocationsByAddressRequest request, HttpServletRequest httpServletRequest) {
+        logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
         if (request.getAddress() == null) {
             logger.error("##############Address is NULL.");
             throw new GeoPlatformException("The Address must not be null.");
         }
-
         try {
-            ArrayList<GeocodingBean> result = this.googleGeocodingService.findLocations(
-                    request.getAddress());
-
-            logger.debug("#####################FindLocationsByAddressCommand "
-                    + "Result : {}", result);
-
+            ArrayList<GeocodingBean> result = this.googleGeocodingService.findLocations(request.getAddress());
+            logger.debug("#####################FindLocationsByAddressCommand Result : {}", result);
             return new FindLocationsResponse(result);
         } catch (IOException e) {
             logger.error(e.getMessage());
             throw new GeoPlatformException(e.getMessage());
         }
     }
-
 }

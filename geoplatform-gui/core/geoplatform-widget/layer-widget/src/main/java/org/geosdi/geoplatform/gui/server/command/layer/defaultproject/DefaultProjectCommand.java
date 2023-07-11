@@ -58,6 +58,8 @@ class DefaultProjectCommand extends GPLayerCommand<DefaultProjectCommandRequest,
     @Override
     public DefaultProjectCommandResponse execute(DefaultProjectCommandRequest request,
             HttpServletRequest httpServletRequest) {
+        logger.debug("#####################Executing {} Command with Parameter: {}\n", this.getClass().getSimpleName(),
+                request.getProjectID());
         this.layerService.setDefaultProject(request.getProjectID(), httpServletRequest);
         return new DefaultProjectCommandResponse(Boolean.TRUE);
     }

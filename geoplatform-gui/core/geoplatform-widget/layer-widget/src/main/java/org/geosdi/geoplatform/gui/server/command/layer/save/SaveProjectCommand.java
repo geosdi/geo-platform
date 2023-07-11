@@ -58,6 +58,8 @@ class SaveProjectCommand extends GPLayerCommand<SaveProjectCommandRequest, SaveP
     @Override
     public SaveProjectCommandResponse execute(SaveProjectCommandRequest request,
             HttpServletRequest httpServletRequest) {
+        logger.debug("#####################Executing {} Command with Parameter: {}\n", this.getClass().getSimpleName(),
+                request.getProject());
         return new SaveProjectCommandResponse(this.layerService.saveProject(request.getProject(), httpServletRequest));
     }
 }

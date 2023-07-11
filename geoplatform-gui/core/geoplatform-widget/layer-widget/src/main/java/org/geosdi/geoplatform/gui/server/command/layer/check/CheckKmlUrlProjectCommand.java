@@ -58,6 +58,8 @@ class CheckKmlUrlProjectCommand extends GPLayerCommand<CheckKmlUrlCommandRequest
     @Override
     public CheckKmlUrlCommandResponse execute(CheckKmlUrlCommandRequest request,
             HttpServletRequest httpServletRequest) {
+        logger.debug("#####################Executing {} Command with Parameter: {}\n", this.getClass().getSimpleName(),
+                request.getUrl());
         return new CheckKmlUrlCommandResponse(this.layerService.checkKmlUrl(request.getUrl()));
     }
 }

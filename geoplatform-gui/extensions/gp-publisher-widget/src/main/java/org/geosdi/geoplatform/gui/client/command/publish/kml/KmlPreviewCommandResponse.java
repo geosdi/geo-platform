@@ -33,45 +33,31 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.service;
+package org.geosdi.geoplatform.gui.client.command.publish.kml;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import com.google.gwt.user.server.rpc.XsrfProtect;
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
-import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-@RemoteServiceRelativePath("PublisherRemote")
-@XsrfProtect
-public interface PublisherRemote extends RemoteService {
+public class KmlPreviewCommandResponse implements GPCommandResponse<Boolean> {
 
-    public static class Util {
+    private static final long serialVersionUID = 8036589306647954751L;
+    //
+    private final Boolean result;
 
-        private static final PublisherRemoteAsync instance
-                = (PublisherRemoteAsync) GWT.create(PublisherRemote.class);
-
-        public static PublisherRemoteAsync getInstance() {
-            return instance;
-        }
-
+    public KmlPreviewCommandResponse(Boolean theResult) {
+        this.result = theResult;
     }
 
-    @Deprecated
-    String processEPSGResult(List<EPSGLayerData> previewLayerList,
-            String workspace) throws GeoPlatformException;
+    @Override
+    public Boolean getResult() {
+        return null;
+    }
 
-    @Deprecated
-    String publishLayerPreview(List<String> layerList,
-            String workspace) throws GeoPlatformException;
-
-    void kmlPreview(String url) throws GeoPlatformException;
-
-    boolean createWorkspace(String workspaceName, boolean silent) throws GeoPlatformException;
-
+    @Override
+    public String toString() {
+        return "KmlPreviewCommandResponse{" + this.result + '}';
+    }
 }

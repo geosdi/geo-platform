@@ -33,27 +33,31 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.gui.client.service;
+package org.geosdi.geoplatform.gui.client.command.publish.workspace;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import java.util.List;
-import org.geosdi.geoplatform.gui.client.model.EPSGLayerData;
+import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 
 /**
- * @author Nazzareno Sileno - CNR IMAA geoSDI Group
- * @email nazzareno.sileno@geosdi.org
+ * @author Vito Salvia - CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface PublisherRemoteAsync {
+public class CreateWorkspaceCommandResponse implements GPCommandResponse<Boolean> {
 
-    @Deprecated
-    void processEPSGResult(List<EPSGLayerData> previewLayerList,
-            String workspace, AsyncCallback<String> callback);
+    private static final long serialVersionUID = 5415946543048359635L;
+    //
+    private final Boolean result;
 
-    @Deprecated
-    void publishLayerPreview(List<String> layerList, String workspace,
-            AsyncCallback<String> callback);
+    public CreateWorkspaceCommandResponse(Boolean theResult) {
+        this.result = theResult;
+    }
 
-    void kmlPreview(String url, AsyncCallback<Boolean> callback);
+    @Override
+    public Boolean getResult() {
+        return null;
+    }
 
-    void createWorkspace(String workspaceName, boolean silent, AsyncCallback<Boolean> callback);
+    @Override
+    public String toString() {
+        return "CreateWorkspaceResponseCommand{" + this.result + '}';
+    }
 }

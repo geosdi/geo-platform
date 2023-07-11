@@ -47,7 +47,8 @@ import com.extjs.gxt.ui.client.widget.grid.RowExpander;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 import com.google.common.collect.Lists;
-import com.google.gwt.user.client.rpc.*;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.RpcTokenException;
 import org.geosdi.geoplatform.gui.client.action.menu.ShowFullMetadataAction;
 import org.geosdi.geoplatform.gui.client.command.SearchFullRecordsRequest;
 import org.geosdi.geoplatform.gui.client.command.SearchFullRecordsResponse;
@@ -55,8 +56,6 @@ import org.geosdi.geoplatform.gui.client.i18n.CatalogFinderConstants;
 import org.geosdi.geoplatform.gui.client.model.AbstractRecord.RecordKeyValue;
 import org.geosdi.geoplatform.gui.client.model.FullRecord;
 import org.geosdi.geoplatform.gui.client.puregwt.event.StatusWidgetEvent;
-import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemote;
-import org.geosdi.geoplatform.gui.client.service.GPCatalogFinderRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.statusbar.GPCatalogStatusBar.GPCatalogStatusBarType;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
@@ -67,7 +66,6 @@ import org.geosdi.geoplatform.gui.puregwt.grid.event.DeselectGridRecordHandler;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.progressbar.layers.event.DisplayLayersProgressBarEvent;
 import org.geosdi.geoplatform.gui.responce.CatalogFinderBean;
-import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -79,12 +77,8 @@ import java.util.List;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Singleton
-public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
-        implements RecordsContainerSelectionListener, DeselectGridRecordHandler {
+public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord> implements RecordsContainerSelectionListener, DeselectGridRecordHandler {
 
-    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
-    private static final GPCatalogFinderRemoteAsync catalogFinderRemote = GPCatalogFinderRemote.Util.getInstance();
-    //
     private final GPEventBus bus;
     private final CatalogFinderBean catalogFinder;
     private CheckBoxSelectionModel<FullRecord> selectionModel;
@@ -114,12 +108,9 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     public void setGridProperties() {
         super.widget.setHeight(250);
         super.widget.getView().setForceFit(true);
-
         super.widget.setSelectionModel(this.selectionModel);
-
         super.widget.addPlugin(this.rowExpander);
         super.widget.addPlugin(this.selectionModel);
-
         super.widget.setContextMenu(this.createRecordContextMenu());
     }
 
@@ -137,38 +128,29 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     @Override
     public ColumnModel prepareColumnModel() {
         List<ColumnConfig> configs = Lists.<ColumnConfig>newArrayList();
-
         StringBuilder templateBuilder = new StringBuilder();
         templateBuilder.append("<p><b>");
-        templateBuilder.append(
-                CatalogFinderConstants.INSTANCE.RecordsContainer_xTemplateAbstractText());
+        templateBuilder.append(CatalogFinderConstants.INSTANCE.RecordsContainer_xTemplateAbstractText());
         templateBuilder.append(":</b> {ABSTRACT_TEXT}</p><br>");
         templateBuilder.append("<p><b>");
-        templateBuilder.append(
-                CatalogFinderConstants.INSTANCE.RecordsContainer_xTemplateKeywordsText());
+        templateBuilder.append(CatalogFinderConstants.INSTANCE.RecordsContainer_xTemplateKeywordsText());
         templateBuilder.append(":</b><br></p>");
         templateBuilder.append("<tpl for=\"SUBJECTS\">");
         templateBuilder.append("<div>{.}</div>");
         templateBuilder.append("</tpl>");
-
         XTemplate tpl = XTemplate.create(templateBuilder.toString());
-
         rowExpander = new RowExpander(tpl);
         configs.add(rowExpander);
-
         ColumnConfig titleColumn = new ColumnConfig();
         titleColumn.setId(RecordKeyValue.TITLE.toString());
-        titleColumn.setHeaderHtml(
-                CatalogFinderConstants.INSTANCE.RecordsContainer_titleColumnHeaderText());
+        titleColumn.setHeaderHtml(CatalogFinderConstants.INSTANCE.RecordsContainer_titleColumnHeaderText());
         titleColumn.setWidth(490);
         titleColumn.setFixed(true);
         titleColumn.setResizable(false);
         configs.add(titleColumn);
-
         selectionModel = new CheckBoxSelectionModel<FullRecord>();
         selectionModel.setSelectionMode(SelectionMode.SINGLE);
         configs.add(selectionModel.getColumn());
-
         return new ColumnModel(configs);
     }
 
@@ -225,8 +207,7 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     @Override
     protected void onLoaderBeforeLoad(LoadEvent le) {
         this.metadataSelection.clearRecordsExcludedList();
-        widget.mask(
-                CatalogFinderConstants.INSTANCE.RecordsContainer_gridLoadingMaskText());
+        widget.mask(CatalogFinderConstants.INSTANCE.RecordsContainer_gridLoadingMaskText());
     }
 
     @Override
@@ -234,26 +215,21 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
         BasePagingLoadResult result = (BasePagingLoadResult) le.getData();
 
         if (result.getTotalLength() == 0) {
-            getBus().fireEvent(new StatusWidgetEvent(
-                    CatalogFinderConstants.INSTANCE.RecordsContainer_eventNoRecordsLoaderText(),
+            getBus().fireEvent(new StatusWidgetEvent(CatalogFinderConstants.INSTANCE.RecordsContainer_eventNoRecordsLoaderText(),
                     GPCatalogStatusBarType.STATUS_NOT_OK));
         } else {
-            getBus().fireEvent(new StatusWidgetEvent(
-                    CatalogFinderConstants.INSTANCE.RecordsContainer_eventRecordsCorrectlyLoaderText(),
+            getBus().fireEvent(new StatusWidgetEvent(CatalogFinderConstants.INSTANCE.RecordsContainer_eventRecordsCorrectlyLoaderText(),
                     GPCatalogStatusBarType.STATUS_OK));
         }
-
         widget.unmask();
     }
 
     @Override
     protected void onLoaderLoadException(LoadEvent le) {
         System.out.println("\n*** " + le.exception); // TODO logger
-        GeoPlatformMessage.errorMessage(
-                CatalogFinderConstants.INSTANCE.RecordsContainer_errorServiceDownTitleText(),
+        GeoPlatformMessage.errorMessage(CatalogFinderConstants.INSTANCE.RecordsContainer_errorServiceDownTitleText(),
                 CatalogFinderConstants.INSTANCE.RecordsContainer_errorServiceDownBodyText());
-        getBus().fireEvent(new StatusWidgetEvent(
-                CatalogFinderConstants.INSTANCE.RecordsContainer_errorServiceDownBodyText(),
+        getBus().fireEvent(new StatusWidgetEvent(CatalogFinderConstants.INSTANCE.RecordsContainer_errorServiceDownBodyText(),
                 GPCatalogStatusBarType.STATUS_ERROR));
 
         this.reset();
@@ -341,5 +317,4 @@ public class RecordsContainer extends GridLayoutPaginationContainer<FullRecord>
     public GPEventBus getBus() {
         return bus;
     }
-
 }

@@ -44,7 +44,7 @@ import com.extjs.gxt.ui.client.event.SelectionChangedEvent;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.rpc.*;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import org.geosdi.geoplatform.gui.action.button.GPSecureButton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
 import org.geosdi.geoplatform.gui.client.action.projects.DeleteProjectAction;
@@ -52,6 +52,8 @@ import org.geosdi.geoplatform.gui.client.action.projects.GPProjectAction;
 import org.geosdi.geoplatform.gui.client.action.projects.ShareProjectAction;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.SearchProjectsRequest;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.SearchProjectsResponse;
+import org.geosdi.geoplatform.gui.client.command.layer.delete.DeleteProjectCommandRequest;
+import org.geosdi.geoplatform.gui.client.command.layer.delete.DeleteProjectCommandResponse;
 import org.geosdi.geoplatform.gui.client.config.MementoModuleInjector;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleMessages;
@@ -59,8 +61,6 @@ import org.geosdi.geoplatform.gui.client.i18n.MementoPersistenceConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
-import org.geosdi.geoplatform.gui.client.service.LayerRemote;
-import org.geosdi.geoplatform.gui.client.service.LayerRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.form.GPProjectManagementWidget;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.GPPagingToolBar;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.listview.GPListViewSearchPanel;
@@ -76,7 +76,6 @@ import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.layers.projects.event.GPDefaultProjectTreeEvent;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
-import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 
@@ -92,9 +91,6 @@ import static org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchSt
  */
 public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject> {
 
-    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
-    private static final LayerRemoteAsync layerRemote = LayerRemote.Util.getInstance();
-    //
     private final GPDefaultProjectTreeEvent defaultProjectEvent = new GPDefaultProjectTreeEvent();
     private final GPDefaultProjectSelector selector;
     //
@@ -292,42 +288,33 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
     }
 
     public void deleteProject() {
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
 
+
+        final DeleteProjectCommandRequest deleteProjectCommandRequest = GWT.<DeleteProjectCommandRequest>create(
+                DeleteProjectCommandRequest.class);
+        deleteProjectCommandRequest.setProjectID(getSelectionModel().getSelectedItem().getId());
+
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<DeleteProjectCommandResponse>() {
+            /**
+             * @param response
+             */
             @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
-                }
+            public void onCommandSuccess(DeleteProjectCommandResponse response) {
+                GeoPlatformMessage.infoMessage(LayerModuleConstants.INSTANCE.deleteProjectTitleText(),
+                        LayerModuleMessages.INSTANCE.GPProjectSearchPanel_projectRemovedMessage(
+                                getSelectionModel().getSelectedItem().getName()));
+                store.remove(getSelectionModel().getSelectedItem());
             }
 
+            /**
+             * @param exception
+             */
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) layerRemote).setRpcToken(token);
-                layerRemote.deleteProject(getSelectionModel().getSelectedItem().getId(), new AsyncCallback<Object>() {
+            public void onCommandFailure(Throwable exception) {
 
-                    @Override
-                    public void onFailure(Throwable caught) {
-                    }
-
-                    @Override
-                    public void onSuccess(Object result) {
-                        GeoPlatformMessage.infoMessage(LayerModuleConstants.INSTANCE.deleteProjectTitleText(),
-                                LayerModuleMessages.INSTANCE.GPProjectSearchPanel_projectRemovedMessage(
-                                        getSelectionModel().getSelectedItem().getName()));
-                        store.remove(getSelectionModel().getSelectedItem());
-                    }
-                });
             }
         });
+
     }
 
     public void shareProject(GPClientProject clientProject) {
@@ -341,73 +328,33 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
 
         private void selectDefaultProject() {
             searchStatus.setBusy(LayerModuleConstants.INSTANCE.GPProjectSearchPanel_statusSettingDefaultProjectText());
-            xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
 
+
+            final DeleteProjectCommandRequest deleteProjectCommandRequest = GWT.<DeleteProjectCommandRequest>create(
+                    DeleteProjectCommandRequest.class);
+            deleteProjectCommandRequest.setProjectID(getListView().getSelectionModel().getSelectedItem().getId());
+
+            ClientCommandDispatcher.getInstance().execute(new GPClientCommand<DeleteProjectCommandResponse>() {
+                /**
+                 * @param response
+                 */
                 @Override
-                public void onFailure(Throwable caught) {
-                    try {
-                        throw caught;
-                    } catch (RpcTokenException e) {
-                        // Can be thrown for several reasons:
-                        //   - duplicate session cookie, which may be a sign of a cookie
-                        //     overwrite attack
-                        //   - XSRF token cannot be generated because session cookie isn't
-                        //     present
-                    } catch (Throwable e) {
-                        // unexpected
-                    }
+                public void onCommandSuccess(DeleteProjectCommandResponse response) {
+                    setSearchStatus(STATUS_SEARCH, EnumProjectMessage.DEFAUTL_PROJECT_MESSAGE);
+                    //                            store.commitChanges();
+                    loadData();
+                    TimeoutHandlerManager.fireEvent(defaultProjectEvent);
                 }
 
+                /**
+                 * @param exception
+                 */
                 @Override
-                public void onSuccess(XsrfToken token) {
-                    ((HasRpcToken) layerRemote).setRpcToken(token);
-                    layerRemote.setDefaultProject(getListView().getSelectionModel().getSelectedItem().getId(),
-                            new AsyncCallback<Object>() {
-
-                                /**
-                                 * TODO MANAGE FOR SESSION TIMEOUT EXCEPTION *
-                                 */
-                                @Override
-                                public void onFailure(Throwable caught) {
-                                    GeoPlatformMessage.errorMessage(
-                                            LayerModuleConstants.INSTANCE.GPProjectSearchPanel_settingDefaultProjectErrorTitleText(),
-                                            caught.getMessage());
-                                }
-
-                                @Override
-                                public void onSuccess(Object result) {
-                                    retrievePermissionMaskForUserAndPoroject(
-                                            getListView().getSelectionModel().getSelectedItem().getId());
-                                    setSearchStatus(STATUS_SEARCH, EnumProjectMessage.DEFAUTL_PROJECT_MESSAGE);
-                                    //                            store.commitChanges();
-                                    loadData();
-                                    TimeoutHandlerManager.fireEvent(defaultProjectEvent);
-                                }
-                            });
+                public void onCommandFailure(Throwable exception) {
+                    GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.GPProjectSearchPanel_settingDefaultProjectErrorTitleText(),
+                            exception.getMessage());
                 }
             });
         }
-
-        /**
-         * @param projectID
-         */
-        private void retrievePermissionMaskForUserAndPoroject(long projectID) {
-            layerRemote.getSharedPermissionForUserAndProject(projectID, new AsyncCallback<Integer>() {
-
-                @Override
-                public void onFailure(Throwable caught) {
-                    GeoPlatformMessage.errorMessage(
-                            LayerModuleConstants.INSTANCE.GPProjectSearchPanel_settingDefaultProjectErrorTitleText(),
-                            caught.getMessage());
-                }
-
-                @Override
-                public void onSuccess(Integer o) {
-                    IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-                    accountDetail.setSharedPermission(o);
-                }
-            });
-        }
-
     }
 }

@@ -131,7 +131,7 @@ public interface ILayerService extends InitializingBean {
 
     void updateProject(GPClientProject project, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    void deleteProject(Long projectID, HttpServletRequest httpServletRequest) throws GeoPlatformException;
+    void deleteProject(Long projectID) throws GeoPlatformException;
 
     void setLayerRefreshTime(String emiteResource, String layerUUID, int secondToRefresh,
             HttpServletRequest httpServletRequest) throws GeoPlatformException;

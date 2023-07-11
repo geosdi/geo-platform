@@ -58,6 +58,8 @@ class DeleteProjectCommand extends GPLayerCommand<DeleteProjectCommandRequest, D
     @Override
     public DeleteProjectCommandResponse execute(DeleteProjectCommandRequest request,
             HttpServletRequest httpServletRequest) {
+        logger.debug("#####################Executing {} Command with Parameter: {}\n", this.getClass().getSimpleName(),
+                request.getProjectID());
         this.layerService.deleteProject(request.getProjectID());
         return new DeleteProjectCommandResponse(Boolean.TRUE);
     }

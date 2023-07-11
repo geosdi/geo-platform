@@ -59,6 +59,9 @@ class LayerRefreshCommand extends GPLayerCommand<LayerRefreshCommandRequest, Lay
     @Override
     public LayerRefreshCommandResponse execute(LayerRefreshCommandRequest request,
             HttpServletRequest httpServletRequest) {
+        logger.debug("#####################Executing {} Command with Parameter: {} - {} - {}\n",
+                this.getClass().getSimpleName(), request.getLayerUUID(), request.getSecondToRefresh(),
+                request.getEmiteResource());
         this.layerService.setLayerRefreshTime(request.getEmiteResource(), request.getLayerUUID(),
                 request.getSecondToRefresh(), httpServletRequest);
         return new LayerRefreshCommandResponse(Boolean.TRUE);

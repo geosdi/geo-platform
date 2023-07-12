@@ -42,6 +42,7 @@ import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.global.security.IGPTreeOptions;
 import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
+import org.springframework.beans.factory.InitializingBean;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ import java.util.HashMap;
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public interface IUserService {
+public interface IUserService extends InitializingBean {
 
     /**
      * @param config

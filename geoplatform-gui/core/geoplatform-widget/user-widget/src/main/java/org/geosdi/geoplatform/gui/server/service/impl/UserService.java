@@ -59,6 +59,7 @@ import org.geosdi.geoplatform.response.collection.GuiComponentsPermissionMapData
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -67,9 +68,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.TRUE;
+import static java.util.stream.Collectors.toList;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 @Service("userService")
@@ -102,20 +107,22 @@ public class UserService implements IUserService {
         } catch (ResourceNotFoundFault rnnf) {
             throw new GeoPlatformException(rnnf.getMessage()); // TODO Better message
         }
-        List<GPUserManageDetail> searchUsers = new ArrayList<GPUserManageDetail>();
-        for (UserDTO userDTO : userList) {
-            GPUserManageDetail userDetail = this.dtoUserConverter.convertToGPUserManageDetail(userDTO);
-            searchUsers.add(userDetail);
-        }
-        return new BasePagingLoadResult<GPUserManageDetail>(searchUsers, config.getOffset(), usersCount.intValue());
+        return new BasePagingLoadResult<GPUserManageDetail>(userList.stream()
+                .filter(Objects::nonNull)
+                .map(this.dtoUserConverter::convertToGPUserManageDetail)
+                .collect(toList()), config.getOffset(), usersCount.intValue());
     }
 
+    /**
+     * @param userDetail
+     * @param organization
+     * @param httpServletRequest
+     * @return {@link Long}
+     * @throws GeoPlatformException
+     */
     @Override
-    public Long insertUser(IGPUserManageDetail userDetail, String organization,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException {
-        return this.insertUser(userDetail, organization, httpServletRequest,
-                Boolean.TRUE, Boolean.TRUE);
+    public Long insertUser(IGPUserManageDetail userDetail, String organization, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        return this.insertUser(userDetail, organization, httpServletRequest, TRUE, TRUE);
     }
 
     @Override
@@ -124,94 +131,87 @@ public class UserService implements IUserService {
         if (checkUserSession) {
             this.getCheckLoggedUser(httpServletRequest);
         }
-        logger.debug("\nUser to INSERT (of the organization \"{}\"):\n{}", organization, userDetail);
-        Long iserId = null;
+        logger.debug("#################User to INSERT (of the organization \"{}\"):\n{}", organization, userDetail);
         try {
             GPUser user = this.dtoUserConverter.convertToGPUser(userDetail);
             user.setOrganization(new GPOrganization(organization));
-            iserId = geoPlatformServiceClient.insertAccount(new InsertAccountRequest(user, sendEmail));
+            return geoPlatformServiceClient.insertAccount(new InsertAccountRequest(user, sendEmail));
         } catch (IllegalParameterFault ipf) {
             throw new GeoPlatformException(ipf.getMessage());
         }
-        return iserId;
     }
 
+    /**
+     * @param userDetail
+     * @param httpServletRequest
+     * @return {@link Long}
+     * @throws GeoPlatformException
+     */
     @Override
-    public Long updateUser(IGPUserManageDetail userDetail,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException {
+    public Long updateUser(IGPUserManageDetail userDetail, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         this.getCheckLoggedUser(httpServletRequest);
-
-        logger.debug("\nUser to UPDATE:\n{}", userDetail);
-        Long userID = null;
+        logger.debug("#########################User to UPDATE:\n{}\n", userDetail);
         try {
             GPUser user = this.dtoUserConverter.convertToGPUser(userDetail);
-            userID = geoPlatformServiceClient.updateUser(user);
-        } catch (IllegalParameterFault ipf) {
+            return geoPlatformServiceClient.updateUser(user);
+        } catch (Exception ipf) {
             throw new GeoPlatformException(ipf.getMessage());
-        } catch (ResourceNotFoundFault rnnf) {
-            throw new GeoPlatformException(rnnf.getMessage());
         }
-
-        return userID;
     }
 
+    /**
+     * @param userTreeOptions
+     * @param httpServletRequest
+     * @return {@link Long}
+     * @throws GeoPlatformException
+     */
     @Override
-    public Long updateUserTreeOptions(IGPTreeOptions userTreeOptions,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException {
+    public Long updateUserTreeOptions(IGPTreeOptions userTreeOptions, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPUser gPUser = this.getCheckLoggedUser(httpServletRequest);
-        logger.debug("\nUserTreeOptions to UPDATE:\n{}", userTreeOptions);
-        Long accountProjectID = null;
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@UserTreeOptions to UPDATE:\n{}", userTreeOptions);
         try {
-            gPUser.setLoadExpandedFolders(
-                    userTreeOptions.isLoadExpandedFolders());
-            accountProjectID = geoPlatformServiceClient.updateUser(gPUser);
-        } catch (IllegalParameterFault ipf) {
+            gPUser.setLoadExpandedFolders(userTreeOptions.isLoadExpandedFolders());
+            return geoPlatformServiceClient.updateUser(gPUser);
+        } catch (Exception ipf) {
             throw new GeoPlatformException(ipf.getMessage());
-        } catch (ResourceNotFoundFault rnnf) {
-            throw new GeoPlatformException(rnnf.getMessage());
         }
-        return accountProjectID;
     }
 
+    /**
+     * @param userDetail
+     * @param currentPlainPassword
+     * @param newPlainPassword
+     * @param httpServletRequest
+     * @return {@link Long}
+     * @throws GeoPlatformException
+     */
     @Override
-    public Long updateOwnUser(IGPUserManageDetail userDetail,
-            String currentPlainPassword,
-            String newPlainPassword,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException {
-
+    public Long updateOwnUser(IGPUserManageDetail userDetail, String currentPlainPassword, String newPlainPassword, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         this.getCheckLoggedUser(httpServletRequest);
-
-        logger.debug("\nOWN User to update:\n{}", userDetail);
+        logger.debug("################################OWN User to update:\n{}", userDetail);
         Long userID = null;
         try {
             UserDTO userDTO = new UserDTO();
             userDTO.setId(userDetail.getId());
             userDTO.setName(userDetail.getName());
             userDTO.setEmailAddress(userDetail.getEmail());
-
-            userID = geoPlatformServiceClient.updateOwnUser(userDTO,
-                    currentPlainPassword, newPlainPassword);
-
-            sessionUtility.storeLoggedAccount(
-                    this.dtoUserConverter.convertToGPUser(userDetail),
-                    httpServletRequest);
-        } catch (IllegalParameterFault ipf) {
+            userID = geoPlatformServiceClient.updateOwnUser(userDTO, currentPlainPassword, newPlainPassword);
+            sessionUtility.storeLoggedAccount(this.dtoUserConverter.convertToGPUser(userDetail), httpServletRequest);
+        } catch (Exception ipf) {
             throw new GeoPlatformException(ipf.getMessage());
-        } catch (ResourceNotFoundFault rnnf) {
-            throw new GeoPlatformException(rnnf.getMessage());
         }
-
         return userID;
     }
 
+    /**
+     * @param userID
+     * @param httpServletRequest
+     * @return {@link Boolean}
+     * @throws GeoPlatformException
+     */
     @Override
-    public boolean deleteUser(Long userID, HttpServletRequest httpServletRequest)
-            throws GeoPlatformException {
+    public boolean deleteUser(Long userID, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         this.getCheckLoggedUser(httpServletRequest);
-
         try {
             return geoPlatformServiceClient.deleteAccount(userID);
         } catch (ResourceNotFoundFault ex) {
@@ -220,88 +220,95 @@ public class UserService implements IUserService {
         }
     }
 
+    /**
+     * @param httpServletRequest
+     * @return
+     */
     @Override
     public IGPUserManageDetail getOwnUser(HttpServletRequest httpServletRequest) {
         GPUser user = this.getCheckLoggedUser(httpServletRequest);
         return this.dtoUserConverter.convertToGPUserManageDetail(user);
     }
 
-    private GPUser getCheckLoggedUser(HttpServletRequest httpServletRequest) {
-        try {
-            return (GPUser) sessionUtility.getLoggedAccount(httpServletRequest);
-        } catch (GPSessionTimeout timeout) {
-            throw new GeoPlatformException(timeout);
-        }
-    }
-
+    /**
+     * @param organization
+     * @param httpServletRequest
+     * @return {@link ArrayList<String>}
+     */
     @Override
-    public ArrayList<String> getAllRoles(String organization,
-            HttpServletRequest httpServletRequest) {
+    public ArrayList<String> getAllRoles(String organization, HttpServletRequest httpServletRequest) {
         ArrayList<String> roles = null;
         try {
-            roles = (ArrayList<String>) geoPlatformServiceClient.getAllRoles(
-                    organization).getRoles();
+            roles = (ArrayList<String>) geoPlatformServiceClient.getAllRoles(organization).getRoles();
         } catch (ResourceNotFoundFault ex) {
             logger.error(this.getClass().getSimpleName(), ex.getMessage());
         }
         return roles;
     }
 
+    /**
+     * @param httpServletRequest
+     * @return {@link ArrayList<String>}
+     */
     @Override
-    public ArrayList<String> getAllGuiComponentIDs(
-            HttpServletRequest httpServletRequest) {
+    public ArrayList<String> getAllGuiComponentIDs(HttpServletRequest httpServletRequest) {
         return (ArrayList<String>) geoPlatformServiceClient.getAllGuiComponentIDs();
     }
 
+    /**
+     * @param role
+     * @param organization
+     * @param httpServletRequest
+     * @return {@link HashMap<String, Boolean>}
+     * @throws GeoPlatformException
+     */
     @Override
-    public HashMap<String, Boolean> getRolePermission(String role,
-            String organization,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException {
+    public HashMap<String, Boolean> getRolePermission(String role, String organization, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         HashMap<String, Boolean> permissionMap;
-
         try {
-            GuiComponentsPermissionMapData rolePermission = geoPlatformServiceClient.getRolePermission(
-                    role, organization);
+            GuiComponentsPermissionMapData rolePermission = geoPlatformServiceClient.getRolePermission(role, organization);
             permissionMap = (HashMap<String, Boolean>) rolePermission.getPermissionMap();
         } catch (ResourceNotFoundFault ex) {
             logger.error(this.getClass().getSimpleName(), ex.getMessage());
-            throw new GeoPlatformException(
-                    "Unable to find \"" + role + "\" role");
+            throw new GeoPlatformException("Unable to find \"" + role + "\" role");
         }
-
         return permissionMap;
     }
 
+    /**
+     * @param role
+     * @param organization
+     * @param permissionMap
+     * @param httpServletRequest
+     * @return {@link Boolean}
+     * @throws GeoPlatformException
+     */
     @Override
-    public boolean updateRolePermission(String role, String organization,
-            HashMap<String, Boolean> permissionMap,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException {
+    public boolean updateRolePermission(String role, String organization, HashMap<String, Boolean> permissionMap, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GuiComponentsPermissionMapData rolePermission = new GuiComponentsPermissionMapData();
         rolePermission.setPermissionMap(permissionMap);
         try {
-            return geoPlatformServiceClient.updateRolePermission(
-                    new WSPutRolePermissionRequest(rolePermission, role,
-                            organization));
+            return geoPlatformServiceClient.updateRolePermission(new WSPutRolePermissionRequest(rolePermission, role, organization));
         } catch (ResourceNotFoundFault ex) {
             logger.error(this.getClass().getSimpleName(), ex.getMessage());
-            throw new GeoPlatformException(
-                    "Unable to find \"" + role + "\" role");
+            throw new GeoPlatformException("Unable to find \"" + role + "\" role");
         }
     }
 
+    /**
+     * @param role
+     * @param organization
+     * @param httpServletRequest
+     * @return {@link Boolean}
+     * @throws GeoPlatformException
+     */
     @Override
-    public boolean saveRole(String role, String organization,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException {
+    public boolean saveRole(String role, String organization, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         try {
-            return geoPlatformServiceClient.saveRole(new WSSaveRoleRequest(role,
-                    organization));
+            return geoPlatformServiceClient.saveRole(new WSSaveRoleRequest(role, organization));
         } catch (IllegalParameterFault ex) {
             logger.error(this.getClass().getSimpleName(), ex.getMessage());
-            throw new GeoPlatformException(
-                    "Error on saving the new role \"" + role + "\"");
+            throw new GeoPlatformException("Error on saving the new role \"" + role + "\"");
         }
     }
 
@@ -309,8 +316,35 @@ public class UserService implements IUserService {
      * @param geoPlatformServiceClient the geoPlatformServiceClient to set
      */
     @Autowired
-    public void setGeoPlatformServiceClient(
-            @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
+    public void setGeoPlatformServiceClient(@Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
+    }
+
+    /**
+     * Invoked by the containing {@code BeanFactory} after it has set all bean properties
+     * and satisfied {@link BeanFactoryAware}, {@code ApplicationContextAware} etc.
+     * <p>This method allows the bean instance to perform validation of its overall
+     * configuration and final initialization when all bean properties have been set.
+     *
+     * @throws Exception in the event of misconfiguration (such as failure to set an
+     *                   essential property) or if initialization fails for any other reason
+     */
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        checkArgument(this.sessionUtility != null, "The Parameter sessionUtility must not be null.");
+        checkArgument(this.dtoUserConverter != null, "The Parameter dtoUserConverter must not be null.");
+        checkArgument(this.geoPlatformServiceClient != null, "The Parameter geoPlatformServiceClient must not be null.");
+    }
+
+    /**
+     * @param httpServletRequest
+     * @return {@link GPUser}
+     */
+    private GPUser getCheckLoggedUser(HttpServletRequest httpServletRequest) {
+        try {
+            return (GPUser) sessionUtility.getLoggedAccount(httpServletRequest);
+        } catch (GPSessionTimeout timeout) {
+            throw new GeoPlatformException(timeout);
+        }
     }
 }

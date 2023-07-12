@@ -112,7 +112,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
     private ListStore<GuiComponentDetail> store;
     private EditorGrid<GuiComponentDetail> grid;
     private SimpleComboBox<String> rolesComboBox;
-//    private AbstractImagePrototype defaultImage = IconHelper.createPath("geoportal/gp-images/error.png");
+    //    private AbstractImagePrototype defaultImage = IconHelper.createPath("geoportal/gp-images/error.png");
     private AbstractImagePrototype defaultImage = IconHelper.createPath(""); // Empty icon
 
     public ManageRolesWidget() {
@@ -127,8 +127,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         this.guiComponentIDs = guiComponentIDs;
         Collections.sort(guiComponentIDs);
 
-        this.guiComponents = new ArrayList<GuiComponentDetail>(
-                guiComponentIDs.size());
+        this.guiComponents = new ArrayList<GuiComponentDetail>(guiComponentIDs.size());
         for (String componentId : guiComponentIDs) {
             GuiComponentDetail gc = this.createGuiComponentDetail(componentId);
             guiComponents.add(gc);
@@ -146,8 +145,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
 
     @Override
     public void setWindowProperties() {
-        super.setHeadingHtml(UserModuleConstants.INSTANCE.
-                ManageRolesWidget_headingText());
+        super.setHeadingHtml(UserModuleConstants.INSTANCE.ManageRolesWidget_headingText());
         super.setResizable(false);
         super.setLayout(new FlowLayout());
         super.setModal(true);
@@ -166,10 +164,8 @@ public class ManageRolesWidget extends GeoPlatformWindow {
 
     private void createMainPanel() {
         mainPanel = new ContentPanel();
-        mainPanel.setHeadingHtml(UserModuleConstants.INSTANCE.
-                ManageRolesWidget_rolePermissionsText());
-        mainPanel.setIcon(
-                AbstractImagePrototype.create(BasicWidgetResources.ICONS.role()));
+        mainPanel.setHeadingHtml(UserModuleConstants.INSTANCE.ManageRolesWidget_rolePermissionsText());
+        mainPanel.setIcon(AbstractImagePrototype.create(BasicWidgetResources.ICONS.role()));
         mainPanel.setFrame(true);
         mainPanel.setSize(585, 430);
         mainPanel.setLayout(new FitLayout());
@@ -189,8 +185,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
                 loadPermissions();
             }
         };
-        rolesComboBox.setEmptyText(UserModuleConstants.INSTANCE.
-                ManageRolesWidget_rolePermissionsText());
+        rolesComboBox.setEmptyText(UserModuleConstants.INSTANCE.ManageRolesWidget_rolePermissionsText());
         rolesComboBox.setToolTip(new ToolTipConfig(rolesComboBox.getEmptyText(),
                 UserModuleConstants.INSTANCE.ManageRolesWidget_rolePermissionsTooltipText()));
         rolesComboBox.setMaxHeight(150);
@@ -199,22 +194,16 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         rolesComboBox.setTriggerAction(TriggerAction.ALL);
         toolbar.add(rolesComboBox);
 
-        allPermissionsButton = new SplitButton(UserModuleConstants.INSTANCE.
-                ManageRolesWidget_allPermissionsToText());
-        allPermissionsButton.setToolTip(new ToolTipConfig(
-                allPermissionsButton.getHtml(),
-                UserModuleConstants.INSTANCE.
-                ManageRolesWidget_rolePermissionsToASinglePermissionText()));
+        allPermissionsButton = new SplitButton(UserModuleConstants.INSTANCE.ManageRolesWidget_allPermissionsToText());
+        allPermissionsButton.setToolTip(new ToolTipConfig(allPermissionsButton.getHtml(),
+                UserModuleConstants.INSTANCE.ManageRolesWidget_rolePermissionsToASinglePermissionText()));
         allPermissionsButton.setArrowAlign(ButtonArrowAlign.BOTTOM);
         allPermissionsButton.setMenu(this.createPermissionsMenu());
         toolbar.add(allPermissionsButton);
 
-        copyPermissionsButton = new Button(UserModuleConstants.INSTANCE.
-                ManageRolesWidget_copyPermissionsText());
-        copyPermissionsButton.setToolTip(new ToolTipConfig(
-                copyPermissionsButton.getHtml(),
-                UserModuleConstants.INSTANCE.
-                ManageRolesWidget_copyPermissionsTooltipText()));
+        copyPermissionsButton = new Button(UserModuleConstants.INSTANCE.ManageRolesWidget_copyPermissionsText());
+        copyPermissionsButton.setToolTip(new ToolTipConfig(copyPermissionsButton.getHtml(),
+                UserModuleConstants.INSTANCE.ManageRolesWidget_copyPermissionsTooltipText()));
         copyPermissionsButton.setArrowAlign(ButtonArrowAlign.BOTTOM);
         copyPermissionsButton.setMenu(this.createRolesMenu());
         toolbar.add(copyPermissionsButton);
@@ -223,8 +212,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
 
         toolbar.add(new FillToolItem());
         toolbar.add(new SeparatorToolItem());
-        Button newRoleButton = new Button(UserModuleConstants.INSTANCE.
-                ManageRolesWidget_newRoleText(),
+        Button newRoleButton = new Button(UserModuleConstants.INSTANCE.ManageRolesWidget_newRoleText(),
                 new SelectionListener<ButtonEvent>() {
 
                     @Override
@@ -233,8 +221,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
                     }
                 });
         newRoleButton.setToolTip(new ToolTipConfig(newRoleButton.getHtml(),
-                UserModuleConstants.INSTANCE.
-                ManageRolesWidget_newRoleTooltipText()));
+                UserModuleConstants.INSTANCE.ManageRolesWidget_newRoleTooltipText()));
         toolbar.add(newRoleButton);
 
         mainPanel.setTopComponent(toolbar);
@@ -257,12 +244,10 @@ public class ManageRolesWidget extends GeoPlatformWindow {
     }
 
     private void createEditorGrid() {
-        grid = new EditorGrid<GuiComponentDetail>(store,
-                this.prepareColumnModel());
+        grid = new EditorGrid<GuiComponentDetail>(store, this.prepareColumnModel());
         grid.setBorders(true);
         grid.setStripeRows(true);
-        grid.setAutoExpandColumn(
-                GuiComponentDetailKeyValue.COMPONENT_ID.toString());
+        grid.setAutoExpandColumn(GuiComponentDetailKeyValue.COMPONENT_ID.toString());
 
         mainPanel.add(grid);
     }
@@ -294,14 +279,13 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         super.addButton(resetButton);
 
         saveButton = new Button(ButtonsConstants.INSTANCE.saveText(),
-                AbstractImagePrototype.create(BasicWidgetResources.ICONS.done()),
-                new SelectionListener<ButtonEvent>() {
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.done()), new SelectionListener<ButtonEvent>() {
 
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        savePermissions();
-                    }
-                });
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                savePermissions();
+            }
+        });
         super.addButton(saveButton);
 
         this.disableGridButtons();
@@ -323,8 +307,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
 
         ColumnConfig iconColumn = new ColumnConfig();
         iconColumn.setId("icon");
-        iconColumn.setHeaderHtml(
-                UserModuleConstants.INSTANCE.ManageRolesWidget_iconText());
+        iconColumn.setHeaderHtml(UserModuleConstants.INSTANCE.ManageRolesWidget_iconText());
         iconColumn.setWidth(35);
         iconColumn.setFixed(true);
         iconColumn.setResizable(false);
@@ -332,10 +315,8 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         iconColumn.setRenderer(new GPGridCellRenderer<GuiComponentDetail>() {
 
             @Override
-            public Object render(GuiComponentDetail model, String property,
-                    ColumnData config, int rowIndex, int colIndex,
-                    ListStore<GuiComponentDetail> store,
-                    Grid<GuiComponentDetail> grid) {
+            public Object render(GuiComponentDetail model, String property, ColumnData config, int rowIndex,
+                    int colIndex, ListStore<GuiComponentDetail> store, Grid<GuiComponentDetail> grid) {
                 Button button = new Button();
                 button.setIcon(model.getImage());
                 button.setAutoWidth(true);
@@ -346,8 +327,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
 
         ColumnConfig idColumn = new ColumnConfig();
         idColumn.setId(GuiComponentDetailKeyValue.COMPONENT_ID.toString());
-        idColumn.setHeaderHtml(UserModuleConstants.INSTANCE.
-                ManageRolesWidget_componentIDText());
+        idColumn.setHeaderHtml(UserModuleConstants.INSTANCE.ManageRolesWidget_componentIDText());
         idColumn.setFixed(true);
         configs.add(idColumn);
 
@@ -376,19 +356,15 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         GridCellRenderer<GuiComponentDetail> rendererPermission = new GridCellRenderer<GuiComponentDetail>() {
 
             @Override
-            public Object render(GuiComponentDetail model, String property,
-                    ColumnData config, int rowIndex, int colIndex,
-                    ListStore<GuiComponentDetail> store,
-                    Grid<GuiComponentDetail> grid) {
+            public Object render(GuiComponentDetail model, String property, ColumnData config, int rowIndex,
+                    int colIndex, ListStore<GuiComponentDetail> store, Grid<GuiComponentDetail> grid) {
                 GuiPermission permission = model.getPermission();
-                return "<span style='color:" + permission.toStringColor()
-                        + "'>" + permission + "</span>";
+                return "<span style='color:" + permission.toStringColor() + "'>" + permission + "</span>";
             }
         };
         ColumnConfig permissionColumn = new ColumnConfig();
         permissionColumn.setId(GuiComponentDetailKeyValue.PERMISSION.toString());
-        permissionColumn.setHeaderHtml(UserModuleConstants.INSTANCE.
-                ManageRolesWidget_permissionsText());
+        permissionColumn.setHeaderHtml(UserModuleConstants.INSTANCE.ManageRolesWidget_permissionsText());
         permissionColumn.setWidth(150);
         permissionColumn.setFixed(true);
         permissionColumn.setEditor(comboEditor);
@@ -433,7 +409,8 @@ public class ManageRolesWidget extends GeoPlatformWindow {
                         }
                     }
                 }
-                setSearchStatus(EnumSearchStatus.STATUS_SEARCH, UserModuleMessages.INSTANCE.rolePermissionsSuccesfullyRetrievedMessage(role));
+                setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
+                        UserModuleMessages.INSTANCE.rolePermissionsSuccesfullyRetrievedMessage(role));
                 enableModifyButtons();
                 ManageRolesWidget.this.unmask();
             }
@@ -443,7 +420,8 @@ public class ManageRolesWidget extends GeoPlatformWindow {
              */
             @Override
             public void onCommandFailure(Throwable exception) {
-                setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR, UserModuleMessages.INSTANCE.errorRetrievingRolePermissionsMessage(role));
+                setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
+                        UserModuleMessages.INSTANCE.errorRetrievingRolePermissionsMessage(role));
             }
         });
     }
@@ -451,7 +429,8 @@ public class ManageRolesWidget extends GeoPlatformWindow {
     private void savePermissions() {
         grid.stopEditing(true);
         List<Record> modifiedElements = store.getModifiedRecords();
-        final HashMap<String, Boolean> permissionMap = Maps.<String, Boolean>newHashMapWithExpectedSize(modifiedElements.size());
+        final HashMap<String, Boolean> permissionMap = Maps.<String, Boolean>newHashMapWithExpectedSize(
+                modifiedElements.size());
         for (Record record : modifiedElements) {
             String componentId = record.get(GuiComponentDetailKeyValue.COMPONENT_ID.toString()).toString();
             GuiPermission permission = (GuiPermission) record.get(GuiComponentDetailKeyValue.PERMISSION.toString());
@@ -476,7 +455,8 @@ public class ManageRolesWidget extends GeoPlatformWindow {
             public void onCommandSuccess(UpdateRolePermissionResponse response) {
                 store.commitChanges();
                 disableGridButtons();
-                setSearchStatus(EnumSearchStatus.STATUS_SEARCH, UserModuleMessages.INSTANCE.permissionsRoleSuccesfullySavedMessage(role));
+                setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
+                        UserModuleMessages.INSTANCE.permissionsRoleSuccesfullySavedMessage(role));
                 unmask();
             }
 
@@ -485,36 +465,29 @@ public class ManageRolesWidget extends GeoPlatformWindow {
              */
             @Override
             public void onCommandFailure(Throwable exception) {
-                setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR, UserModuleMessages.INSTANCE.errorSavingRolePermissionsMessage(role));
+                setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
+                        UserModuleMessages.INSTANCE.errorSavingRolePermissionsMessage(role));
             }
         });
     }
 
     private void createNewRole() {
-        GeoPlatformMessage.promptMessage(UserModuleConstants.INSTANCE.
-                ManageRolesWidget_newRoleText(), UserModuleConstants.INSTANCE.
-                ManageRolesWidget_enterNewRoleNameText(),
-                new Listener<MessageBoxEvent>() {
+        GeoPlatformMessage.promptMessage(UserModuleConstants.INSTANCE.ManageRolesWidget_newRoleText(),
+                UserModuleConstants.INSTANCE.ManageRolesWidget_enterNewRoleNameText(), new Listener<MessageBoxEvent>() {
 
                     @Override
                     public void handleEvent(MessageBoxEvent be) {
-                        if (Dialog.CANCEL.equals(
-                                be.getButtonClicked().getItemId())) {
+                        if (Dialog.CANCEL.equals(be.getButtonClicked().getItemId())) {
                             return;
                         }
 
                         String roleName = be.getValue().trim();
                         for (String r : roles) {
                             if (r.equalsIgnoreCase(roleName)) {
-                                GeoPlatformMessage.errorMessage(
-                                        WindowsConstants.INSTANCE.
-                                        errorTitleText(),
-                                        UserModuleConstants.INSTANCE.
-                                        ManageRolesWidget_roleNameAlreadyExistsText());
-                                setSearchStatus(
-                                        EnumSearchStatus.STATUS_NO_SEARCH,
-                                        UserModuleMessages.INSTANCE.roleNameAlreadyExistsMessage(
-                                                roleName));
+                                GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorTitleText(),
+                                        UserModuleConstants.INSTANCE.ManageRolesWidget_roleNameAlreadyExistsText());
+                                setSearchStatus(EnumSearchStatus.STATUS_NO_SEARCH,
+                                        UserModuleMessages.INSTANCE.roleNameAlreadyExistsMessage(roleName));
                                 return;
                             }
                         }
@@ -550,7 +523,8 @@ public class ManageRolesWidget extends GeoPlatformWindow {
                 rolesComboBox.add(role);
                 rolesComboBox.setSimpleValue(role);
                 addRoleMenuItem(role);
-                setSearchStatus(EnumSearchStatus.STATUS_SEARCH, UserModuleMessages.INSTANCE.newRoleCreatedMessage(role));
+                setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
+                        UserModuleMessages.INSTANCE.newRoleCreatedMessage(role));
                 enableModifyButtons();
                 unmask();
             }
@@ -560,7 +534,8 @@ public class ManageRolesWidget extends GeoPlatformWindow {
              */
             @Override
             public void onCommandFailure(Throwable exception) {
-                setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR, UserModuleMessages.INSTANCE.errorSavingNewRoleMessage(role));
+                setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
+                        UserModuleMessages.INSTANCE.errorSavingNewRoleMessage(role));
             }
         });
     }
@@ -569,7 +544,7 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         GuiComponentDetail gc = new GuiComponentDetail();
         gc.setComponentId(componentId);
 
-//        gc.setDescription(action.get....()); // TODO Manage description
+        //        gc.setDescription(action.get....()); // TODO Manage description
         // TODO Manage icon
         MenuActionRegistar menuRegistar = BasicGinInjector.MainInjector.getInstance().getMenuActionRegistar();
         GeoPlatformAction action = menuRegistar.get(componentId);
@@ -579,8 +554,8 @@ public class ManageRolesWidget extends GeoPlatformWindow {
                 if (image != null) {
                     gc.setImage(image);
                 }
-//          }else{
-//              action = ToolbarActionRegistar.get(entry.getKey(), null)
+                //          }else{
+                //              action = ToolbarActionRegistar.get(entry.getKey(), null)
             }
         }
         if (gc.getImage() == null) {
@@ -601,13 +576,11 @@ public class ManageRolesWidget extends GeoPlatformWindow {
                     // Set selected permission for all permissions
                     for (GuiComponentDetail gc : guiComponents) {
                         Record r = store.getRecord(gc);
-                        r.set(GuiComponentDetailKeyValue.PERMISSION.toString(),
-                                permission);
+                        r.set(GuiComponentDetailKeyValue.PERMISSION.toString(), permission);
                     }
 
                     setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
-                            UserModuleMessages.INSTANCE.permissionsValueSettedMessage(
-                                    permission.toString()));
+                            UserModuleMessages.INSTANCE.permissionsValueSettedMessage(permission.toString()));
                 }
             });
             permissionMenu.add(permissionItem);
@@ -651,9 +624,11 @@ public class ManageRolesWidget extends GeoPlatformWindow {
                         for (GuiComponentDetail gc : guiComponents) {
                             Record r = store.getRecord(gc);
                             Boolean booleanPermission = result.get(gc.getComponentId());
-                            r.set(GuiComponentDetailKeyValue.PERMISSION.toString(), GuiPermission.fromBoolean(booleanPermission));
+                            r.set(GuiComponentDetailKeyValue.PERMISSION.toString(),
+                                    GuiPermission.fromBoolean(booleanPermission));
                         }
-                        setSearchStatus(EnumSearchStatus.STATUS_SEARCH, UserModuleMessages.INSTANCE.permissionsRoleCopiedToMessage(roleItem, role));
+                        setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
+                                UserModuleMessages.INSTANCE.permissionsRoleCopiedToMessage(roleItem, role));
                     }
 
                     /**
@@ -661,7 +636,8 @@ public class ManageRolesWidget extends GeoPlatformWindow {
                      */
                     @Override
                     public void onCommandFailure(Throwable exception) {
-                        setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR, UserModuleMessages.INSTANCE.errorRetrievingRolePermissionsMessage(roleItem));
+                        setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR,
+                                UserModuleMessages.INSTANCE.errorRetrievingRolePermissionsMessage(roleItem));
                     }
                 });
             }
@@ -701,15 +677,12 @@ public class ManageRolesWidget extends GeoPlatformWindow {
     @Override
     public void show() {
         super.show();
-
         rolesComboBox.removeAll();
         rolesComboBox.add(this.roles);
-
         copyPermissionsMenu.removeAll();
         for (String roleIth : this.roles) {
             this.addRoleMenuItem(roleIth);
         }
-
         this.setSearchStatus(EnumSearchStatus.STATUS_NO_SEARCH,
                 UserModuleConstants.INSTANCE.ManageRolesWidget_statusSelectOrCreateRoleText());
     }
@@ -719,15 +692,13 @@ public class ManageRolesWidget extends GeoPlatformWindow {
         if (store.getModifiedRecords().isEmpty()) {
             super.hide();
         } else {
-            GeoPlatformMessage.confirmMessage(
-                    WindowsConstants.INSTANCE.warningTitleText(),
+            GeoPlatformMessage.confirmMessage(WindowsConstants.INSTANCE.warningTitleText(),
                     UserModuleConstants.INSTANCE.ManageRolesWidget_unsavedPermissionsWarningText(),
                     new Listener<MessageBoxEvent>() {
 
                         @Override
                         public void handleEvent(MessageBoxEvent be) {
-                            if (Dialog.YES.equals(
-                                    be.getButtonClicked().getItemId())) {
+                            if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
                                 ManageRolesWidget.super.hide();
                             }
                         }

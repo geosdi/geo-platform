@@ -42,36 +42,27 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.RpcTokenException;
-import com.google.gwt.user.client.rpc.XsrfToken;
-import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
+import org.geosdi.geoplatform.gui.client.command.user.tree.UpdateUserTreeOptionsRequest;
+import org.geosdi.geoplatform.gui.client.command.user.tree.UpdateUserTreeOptionsResponse;
 import org.geosdi.geoplatform.gui.client.i18n.UserModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
-import org.geosdi.geoplatform.gui.client.service.UserRemote;
-import org.geosdi.geoplatform.gui.client.service.UserRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.users.member.UserOptionsMember;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.impl.users.options.UserTreeOptions;
 import org.geosdi.geoplatform.gui.impl.view.LayoutManager;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
-import org.geosdi.geoplatform.gui.server.gwt.UserRemoteImpl;
-import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class UserOptionsMemberView extends UserOptionsMember {
 
-    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
-    private static final UserRemoteAsync userRemote = UserRemote.Util.getInstance();
-    //
     private CheckBox startupStrategyCheckBox;
 
     public UserOptionsMemberView() {
@@ -110,67 +101,46 @@ public class UserOptionsMemberView extends UserOptionsMember {
     @Override
     public void saveOptions() {
         this.startupStrategyCheckBox.getValue();
-        final UserTreeOptions userTreeOptions = Registry.get(
-                UserSessionEnum.USER_TREE_OPTIONS.name());
-        userTreeOptions.setLoadExpandedFolders(
-                startupStrategyCheckBox.getValue());
+        final UserTreeOptions userTreeOptions = Registry.get(UserSessionEnum.USER_TREE_OPTIONS.name());
+        userTreeOptions.setLoadExpandedFolders(startupStrategyCheckBox.getValue());
 
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+        final UpdateUserTreeOptionsRequest updateUserTreeOptionsRequest = new UpdateUserTreeOptionsRequest();
+        updateUserTreeOptionsRequest.setUserTreeOptions(userTreeOptions);
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<UpdateUserTreeOptionsResponse>() {
 
+            {
+                super.setCommandRequest(updateUserTreeOptionsRequest);
+            }
+
+            /**
+             * @param response
+             */
             @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
+            public void onCommandSuccess(UpdateUserTreeOptionsResponse response) {
+                UserOptionsMemberView.super.saveButton.disable();
+                LayoutManager.getInstance().getStatusMap().setStatus(
+                        UserModuleConstants.INSTANCE.
+                                UserOptionsMemberView_statusSaveOptionSuccesfullyText(),
+                        SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
+            }
+
+            /**
+             * @param exception
+             */
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                if (exception.getCause() instanceof GPSessionTimeout) {
+                    GPHandlerManager.fireEvent(new GPLoginEvent(
+                            null));
+                } else {
+                    GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorSavingTitleText(),
+                            WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
+                    LayoutManager.getInstance().getStatusMap().setStatus(UserModuleConstants.INSTANCE.UserOptionsMemberView_statusErrorSavingText(),
+                            SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                    System.out.println("Error saving view options: " + exception.toString() + " data: " + exception.getMessage());
                 }
             }
-
-            @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) userRemote).setRpcToken(token);
-                userRemote.updateUserTreeOptions(userTreeOptions,
-                        new AsyncCallback<Long>() {
-
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                if (caught.getCause() instanceof GPSessionTimeout) {
-                                    GPHandlerManager.fireEvent(new GPLoginEvent(
-                                                    null));
-                                } else {
-                                    GeoPlatformMessage.errorMessage(
-                                            WindowsConstants.INSTANCE.
-                                            errorSavingTitleText(),
-                                            WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
-                                    LayoutManager.getInstance().getStatusMap().setStatus(
-                                            UserModuleConstants.INSTANCE.
-                                            UserOptionsMemberView_statusErrorSavingText(),
-                                            SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                                    System.out.println(
-                                            "Error saving view options: " + caught.toString()
-                                            + " data: " + caught.getMessage());
-                                }
-                            }
-
-                            @Override
-                            public void onSuccess(Long result) {
-                                UserOptionsMemberView.super.saveButton.disable();
-
-                                LayoutManager.getInstance().getStatusMap().setStatus(
-                                        UserModuleConstants.INSTANCE.
-                                        UserOptionsMemberView_statusSaveOptionSuccesfullyText(),
-                                        SearchStatus.EnumSearchStatus.STATUS_SEARCH.toString());
-                            }
-                        });
-            }
         });
-
     }
 
     @Override

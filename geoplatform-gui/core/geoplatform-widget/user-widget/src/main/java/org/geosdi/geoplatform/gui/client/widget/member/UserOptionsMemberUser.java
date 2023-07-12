@@ -47,28 +47,21 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.Validator;
 import com.extjs.gxt.ui.client.widget.layout.FormLayout;
 import com.extjs.gxt.ui.client.widget.layout.VBoxLayoutData;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.RpcTokenException;
-import com.google.gwt.user.client.rpc.XsrfToken;
-import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
+import org.geosdi.geoplatform.gui.client.command.user.crud.UpdateOwnUserRequest;
+import org.geosdi.geoplatform.gui.client.command.user.crud.UpdateOwnUserResponse;
 import org.geosdi.geoplatform.gui.client.i18n.UserModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
-import org.geosdi.geoplatform.gui.client.service.UserRemote;
-import org.geosdi.geoplatform.gui.client.service.UserRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.users.member.UserOptionsMember;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.GPSecureStringTextField;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.regex.GPRegEx;
-import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 import org.geosdi.geoplatform.gui.view.event.GeoPlatformEvents;
 
 public class UserOptionsMemberUser extends UserOptionsMember {
 
-    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
-    private static final UserRemoteAsync userRemote = UserRemote.Util.getInstance();
-    //
     private FormPanel formPanel;
     //
     private GPSecureStringTextField usernameField;
@@ -90,8 +83,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
     private boolean validPassword;
 
     public UserOptionsMemberUser() {
-        super(UserModuleConstants.INSTANCE.
-                UserOptionsMemberUser_userText());
+        super(UserModuleConstants.INSTANCE.UserOptionsMemberUser_userText());
     }
 
     @Override
@@ -99,54 +91,41 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         this.formPanel = new FormPanel();
         this.formPanel.setSize(420, 350);
         this.formPanel.setHeaderVisible(false);
-
         this.formPanel.add(this.createPropertiesSetting());
-        this.formPanel.add(this.createEmailSetting(), new VBoxLayoutData(
-                new Margins(20, 0, 0, 0)));
-        this.formPanel.add(this.createPasswordSetting(), new VBoxLayoutData(
-                new Margins(20, 0, 0, 0)));
-
+        this.formPanel.add(this.createEmailSetting(), new VBoxLayoutData(new Margins(20, 0, 0, 0)));
+        this.formPanel.add(this.createPasswordSetting(), new VBoxLayoutData(new Margins(20, 0, 0, 0)));
         panel.add(formPanel);
     }
 
     private FieldSet createPropertiesSetting() {
         FieldSet userFieldSet = new FieldSet();
-        userFieldSet.setHeadingHtml(UserModuleConstants.INSTANCE.
-                UserOptionsMemberUser_userText());
+        userFieldSet.setHeadingHtml(UserModuleConstants.INSTANCE.UserOptionsMemberUser_userText());
         userFieldSet.setSize(400, 110);
         userFieldSet.setLayout(this.getFormLayoutTemplate());
-
         usernameField = new GPSecureStringTextField();
-        usernameField.setFieldLabel(
-                UserModuleConstants.INSTANCE.usernameFieldText());
+        usernameField.setFieldLabel(UserModuleConstants.INSTANCE.usernameFieldText());
         usernameField.setEnabled(false);
 
         userFieldSet.add(usernameField);
 
         roleField = new GPSecureStringTextField();
-        roleField.setFieldLabel(UserModuleConstants.INSTANCE.
-                userRoleLabelText());
+        roleField.setFieldLabel(UserModuleConstants.INSTANCE.userRoleLabelText());
         roleField.setEnabled(false);
-
         userFieldSet.add(roleField);
-
         nameField = new GPSecureStringTextField();
         nameField.setFieldLabel(UserModuleConstants.INSTANCE.nameFieldText());
-        nameField.setToolTip(UserModuleConstants.INSTANCE.
-                UserOptionsMemberUser_nameFieldTooltipText());
+        nameField.setToolTip(UserModuleConstants.INSTANCE.UserOptionsMemberUser_nameFieldTooltipText());
         nameField.setSelectOnFocus(true);
         nameField.setAllowBlank(false);
         nameField.setAutoValidate(true);
         nameField.setValidator(this.validatorUpdateName());
         userFieldSet.add(nameField);
-
         return userFieldSet;
     }
 
     private FieldSet createEmailSetting() {
         FieldSet emailResultSet = new FieldSet();
-        emailResultSet.setHeadingHtml(UserModuleConstants.INSTANCE.
-                UserOptionsMemberUser_changeEmailHeadingText());
+        emailResultSet.setHeadingHtml(UserModuleConstants.INSTANCE.UserOptionsMemberUser_changeEmailHeadingText());
         emailResultSet.setSize(400, 50);
         emailResultSet.setCheckboxToggle(true);
         emailResultSet.setExpanded(false);
@@ -154,8 +133,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
         emailField = new GPSecureStringTextField();
         emailField.setFieldLabel(UserModuleConstants.INSTANCE.emailFieldText());
-        emailField.setToolTip(UserModuleConstants.INSTANCE.
-                UserOptionsMemberUser_emailFieldTooltipText());
+        emailField.setToolTip(UserModuleConstants.INSTANCE.UserOptionsMemberUser_emailFieldTooltipText());
         emailField.setAutoValidate(true);
         emailField.setAllowBlank(false);
         emailField.setValidator(validatorUpdateEmail());
@@ -171,14 +149,12 @@ public class UserOptionsMemberUser extends UserOptionsMember {
                         emailField.setValue(user.getEmail());
                     }
                 });
-
         return emailResultSet;
     }
 
     private FieldSet createPasswordSetting() {
         FieldSet passwordFieldSet = new FieldSet();
-        passwordFieldSet.setHeadingHtml(UserModuleConstants.INSTANCE.
-                UserOptionsMemberUser_changePasswordHeadingText());
+        passwordFieldSet.setHeadingHtml(UserModuleConstants.INSTANCE.UserOptionsMemberUser_changePasswordHeadingText());
         passwordFieldSet.setSize(400, 100);
         passwordFieldSet.setCheckboxToggle(true);
         passwordFieldSet.setExpanded(false);
@@ -197,8 +173,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
 
         newPasswordField = new GPSecureStringTextField();
         newPasswordField.setFieldLabel(ButtonsConstants.INSTANCE.newText());
-        newPasswordField.setToolTip(UserModuleConstants.INSTANCE.
-                UserOptionsMemberUser_newPasswordTooltipText());
+        newPasswordField.setToolTip(UserModuleConstants.INSTANCE.UserOptionsMemberUser_newPasswordTooltipText());
         newPasswordField.setPassword(true);
         newPasswordField.setAutoValidate(true);
         newPasswordField.setAllowBlank(false);
@@ -207,8 +182,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         passwordFieldSet.add(newPasswordField);
 
         newRePasswordField = new GPSecureStringTextField();
-        newRePasswordField.setFieldLabel(UserModuleConstants.INSTANCE.
-                UserOptionsMemberUser_newRePasswordLabelText());
+        newRePasswordField.setFieldLabel(UserModuleConstants.INSTANCE.UserOptionsMemberUser_newRePasswordLabelText());
         newRePasswordField.setToolTip(UserModuleConstants.INSTANCE.
                 UserOptionsMemberUser_newRePasswordTooltipText());
         newRePasswordField.setPassword(true);
@@ -241,57 +215,39 @@ public class UserOptionsMemberUser extends UserOptionsMember {
                         updatePassword(null, false);
                     }
                 });
-
         return passwordFieldSet;
     }
 
     @Override
     public void saveOptions() {
         this.updateUserProperties();
-
         final String currentPlainPassword = oldPasswordField.getValue();
+        final UpdateOwnUserRequest updateOwnUserRequest = new UpdateOwnUserRequest();
+        updateOwnUserRequest.setUserDetail(user);
+        updateOwnUserRequest.setCurrentPlainPassword(currentPlainPassword);
+        updateOwnUserRequest.setNewPlainPassword(newPlainPassword);
 
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<UpdateOwnUserResponse>() {
 
-            @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
-                }
+            {
+                super.setCommandRequest(updateOwnUserRequest);
             }
 
+            /**
+             * @param response
+             */
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) userRemote).setRpcToken(token);
-                userRemote.updateOwnUser(user, currentPlainPassword,
-                        newPlainPassword,
-                        new AsyncCallback<Long>() {
+            public void onCommandSuccess(UpdateOwnUserResponse response) {
+                saveButton.disable();
+                GeoPlatformMessage.infoMessage(UserModuleConstants.INSTANCE.infoUserSuccesfullyModifiedText(), "<ul><li>" + user.getUsername() + "</li></ul>");
+            }
 
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                GeoPlatformMessage.errorMessage(
-                                        WindowsConstants.INSTANCE.errorTitleText(),
-                                        caught.getMessage());
-                            }
-
-                            @Override
-                            public void onSuccess(Long result) {
-                                saveButton.disable();
-
-                                GeoPlatformMessage.infoMessage(
-                                        UserModuleConstants.INSTANCE.
-                                        infoUserSuccesfullyModifiedText(),
-                                        "<ul><li>" + user.getUsername() + "</li></ul>");
-                            }
-                        });
+            /**
+             * @param exception
+             */
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorTitleText(), exception.getMessage());
             }
         });
     }
@@ -308,9 +264,7 @@ public class UserOptionsMemberUser extends UserOptionsMember {
         usernameField.setValue(user.getUsername());
         roleField.setValue(user.getAuthority());
         nameField.setValue(user.getName());
-
         emailField.setValue(user.getEmail());
-
         oldPasswordField.reset();
         newPasswordField.reset();
         newRePasswordField.reset();

@@ -44,39 +44,30 @@ import com.extjs.gxt.ui.client.widget.Dialog;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.grid.ColumnData;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.RpcTokenException;
-import com.google.gwt.user.client.rpc.XsrfToken;
-import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.command.user.crud.DeleteUserRequest;
+import org.geosdi.geoplatform.gui.client.command.user.crud.DeleteUserResponse;
 import org.geosdi.geoplatform.gui.client.event.timeout.IManageDeleteUserHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.ManageDeleteUserEvent;
 import org.geosdi.geoplatform.gui.client.i18n.UserModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.UserModuleMessages;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
-import org.geosdi.geoplatform.gui.client.service.UserRemote;
-import org.geosdi.geoplatform.gui.client.service.UserRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.grid.renderer.GPGridCellRenderer;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
-import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-public class DeleteUserRenderer extends GPGridCellRenderer<GPUserManageDetail>
-        implements IManageDeleteUserHandler {
+public class DeleteUserRenderer extends GPGridCellRenderer<GPUserManageDetail> implements IManageDeleteUserHandler {
 
-    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
-    private static final UserRemoteAsync userRemote = UserRemote.Util.getInstance();
-    //
     private final ManageDeleteUserEvent manageDeleteUserEvent = new ManageDeleteUserEvent();
 
     public DeleteUserRenderer() {
@@ -120,55 +111,37 @@ public class DeleteUserRenderer extends GPGridCellRenderer<GPUserManageDetail>
     }
 
     @Override
-    public void manageDeleteUser(final GPUserManageDetail user,
-            final ListStore<GPUserManageDetail> store) {
+    public void manageDeleteUser(final GPUserManageDetail user, final ListStore<GPUserManageDetail> store) {
+        final DeleteUserRequest deleteUserRequest = new DeleteUserRequest();
+        deleteUserRequest.setUserID(user.getId());
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<DeleteUserResponse>() {
 
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
-
-            @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
-                }
+            {
+                super.setCommandRequest(deleteUserRequest);
             }
 
+            /**
+             * @param response
+             */
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) userRemote).setRpcToken(token);
-                userRemote.deleteUser(user.getId(),
-                        new AsyncCallback<Boolean>() {
+            public void onCommandSuccess(DeleteUserResponse response) {
+                store.remove(user);
+                GeoPlatformMessage.infoMessage(UserModuleConstants.INSTANCE.DeleteUserRenderer_infoUserSuccesfullyDeletedText(), "<ul><li>" + user.getUsername() + "</li></ul>");
+            }
 
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                if (caught.getCause() instanceof GPSessionTimeout) {
-                                    manageDeleteUserEvent.setUser(user);
-                                    manageDeleteUserEvent.setStore(store);
-                                    GPHandlerManager.fireEvent(new GPLoginEvent(
-                                                    manageDeleteUserEvent));
-                                } else {
-                                    GeoPlatformMessage.errorMessage(
-                                            WindowsConstants.INSTANCE.errorTitleText(),
-                                            caught.getMessage());
-                                }
-                            }
-
-                            @Override
-                            public void onSuccess(Boolean result) {
-                                store.remove(user);
-                                GeoPlatformMessage.infoMessage(
-                                        UserModuleConstants.INSTANCE.
-                                        DeleteUserRenderer_infoUserSuccesfullyDeletedText(),
-                                        "<ul><li>" + user.getUsername() + "</li></ul>");
-                            }
-                        });
+            /**
+             * @param exception
+             */
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                if (exception.getCause() instanceof GPSessionTimeout) {
+                    manageDeleteUserEvent.setUser(user);
+                    manageDeleteUserEvent.setStore(store);
+                    GPHandlerManager.fireEvent(new GPLoginEvent(
+                            manageDeleteUserEvent));
+                } else {
+                    GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorTitleText(), exception.getMessage());
+                }
             }
         });
     }

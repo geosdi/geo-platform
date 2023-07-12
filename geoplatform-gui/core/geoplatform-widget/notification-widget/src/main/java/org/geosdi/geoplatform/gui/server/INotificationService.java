@@ -37,12 +37,18 @@ package org.geosdi.geoplatform.gui.server;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public interface INotificationService {
+public interface INotificationService extends InitializingBean {
 
+    /**
+     * @param httpServletRequest
+     * @return {@link Boolean}
+     * @throws GeoPlatformException
+     */
     boolean markMessagesAsRead(HttpServletRequest httpServletRequest) throws GeoPlatformException;
 }

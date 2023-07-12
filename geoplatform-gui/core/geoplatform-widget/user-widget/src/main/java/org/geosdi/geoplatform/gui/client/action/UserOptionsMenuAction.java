@@ -37,21 +37,18 @@ package org.geosdi.geoplatform.gui.client.action;
 
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.RpcTokenException;
-import com.google.gwt.user.client.rpc.XsrfToken;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.command.user.GetOwnUserRequest;
+import org.geosdi.geoplatform.gui.client.command.user.GetOwnUserResponse;
 import org.geosdi.geoplatform.gui.client.i18n.UserModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
-import org.geosdi.geoplatform.gui.client.service.UserRemote;
-import org.geosdi.geoplatform.gui.client.service.UserRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.UserOptionsWidget;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
-import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
 
 /**
  *
@@ -59,10 +56,7 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserManageDetail;
  */
 public class UserOptionsMenuAction extends MenuBaseAction {
 
-    private static final UserRemoteAsync userRemote = UserRemote.Util.getInstance();
-    //
-    private final UserOptionsWidget userOptionsWidget = new UserOptionsWidget(
-            true);
+    private final UserOptionsWidget userOptionsWidget = new UserOptionsWidget(true);
 
     public UserOptionsMenuAction() {
         super(UserModuleConstants.INSTANCE.UserOptionsMenuAction_titleText(),
@@ -71,8 +65,7 @@ public class UserOptionsMenuAction extends MenuBaseAction {
 
     @Override
     public void componentSelected(MenuEvent ce) {
-        if (Registry.get(
-                UserSessionEnum.USER_MANAGE_DETAIL_IN_SESSION.toString()) != null) {
+        if (Registry.get(UserSessionEnum.USER_MANAGE_DETAIL_IN_SESSION.toString()) != null) {
             userOptionsWidget.show();
         } else {
             retrievesUserFromSession();
@@ -83,43 +76,28 @@ public class UserOptionsMenuAction extends MenuBaseAction {
      * Retrieves User from Session
      */
     private void retrievesUserFromSession() {
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+        final GetOwnUserRequest getOwnUserRequest = new GetOwnUserRequest();
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<GetOwnUserResponse>() {
 
-            @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
-                }
+            {
+                super.setCommandRequest(getOwnUserRequest);
             }
 
+            /**
+             * @param response
+             */
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) userRemote).setRpcToken(token);
-                userRemote.getOwnUser(new AsyncCallback<IGPUserManageDetail>() {
+            public void onCommandSuccess(GetOwnUserResponse response) {
+                Registry.register(UserSessionEnum.USER_MANAGE_DETAIL_IN_SESSION.toString(), response.getResult());
+                userOptionsWidget.show();
+            }
 
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        GeoPlatformMessage.errorMessage(
-                                WindowsConstants.INSTANCE.errorTitleText(),
-                                caught.getMessage());
-                    }
-
-                    @Override
-                    public void onSuccess(IGPUserManageDetail user) {
-                        Registry.register(
-                                UserSessionEnum.USER_MANAGE_DETAIL_IN_SESSION.toString(),
-                                user);
-                        userOptionsWidget.show();
-                    }
-                });
+            /**
+             * @param exception
+             */
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorTitleText(), exception.getMessage());
             }
         });
     }

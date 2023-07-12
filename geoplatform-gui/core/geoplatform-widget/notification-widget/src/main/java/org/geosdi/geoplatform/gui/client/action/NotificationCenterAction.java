@@ -37,20 +37,17 @@ package org.geosdi.geoplatform.gui.client.action;
 
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.RpcTokenException;
-import com.google.gwt.user.client.rpc.XsrfToken;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import java.util.List;
 import org.geosdi.geoplatform.gui.action.ToolbarMapAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.command.MarkMessagesAsReadRequest;
+import org.geosdi.geoplatform.gui.client.command.MarkMessagesAsReadResponse;
 import org.geosdi.geoplatform.gui.client.i18n.NotificationModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
-import org.geosdi.geoplatform.gui.client.service.NotificationRemote;
-import org.geosdi.geoplatform.gui.client.service.NotificationRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.NotificationPopupPanel;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
@@ -60,81 +57,59 @@ import org.geosdi.geoplatform.gui.model.message.IGPClientMessage;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 
+import java.util.List;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 public class NotificationCenterAction extends ToolbarMapAction {
 
-    private static final NotificationRemoteAsync notificationRemote = NotificationRemote.Util.getInstance();
-    //
     private final NotificationPopupPanel notificationPopupPanel;
 
-    public NotificationCenterAction(
-            NotificationPopupPanel notificationPopupPanel) {
-        super(AbstractImagePrototype.create(BasicWidgetResources.ICONS.info()),
-                NotificationModuleConstants.INSTANCE.NotificationCenterAction_tooltipText());
+    /**
+     * @param notificationPopupPanel
+     */
+    public NotificationCenterAction(NotificationPopupPanel notificationPopupPanel) {
+        super(AbstractImagePrototype.create(BasicWidgetResources.ICONS.info()), NotificationModuleConstants.INSTANCE.NotificationCenterAction_tooltipText());
         this.notificationPopupPanel = notificationPopupPanel;
     }
 
     @Override
     public void componentSelected(ButtonEvent e) {
-//        RootLayoutPanel.get().add(new BinderDeckLayout());
-//        this.binderDeckLayout.setVisible(Boolean.TRUE);
-//        notificationPopupPanel.setStyleName(style.notifypopup());
-        notificationPopupPanel.setPopupPosition(
-                e.getTarget().getAbsoluteLeft() - (170),
-                e.getTarget().getAbsoluteTop() + (20));
+        notificationPopupPanel.setPopupPosition(e.getTarget().getAbsoluteLeft() - (170), e.getTarget().getAbsoluteTop() + (20));
         notificationPopupPanel.show();
-        IGPAccountDetail accountDetail = Registry.get(
-                UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
         List<IGPClientMessage> messageList = accountDetail.getUnreadMessages();
         if (messageList != null && !messageList.isEmpty()) {
-            xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+            final MarkMessagesAsReadRequest markMessagesAsReadRequest = new MarkMessagesAsReadRequest();
+            ClientCommandDispatcher.getInstance().execute(new GPClientCommand<MarkMessagesAsReadResponse>() {
 
-                @Override
-                public void onFailure(Throwable caught) {
-                    try {
-                        throw caught;
-                    } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                        //   - duplicate session cookie, which may be a sign of a cookie
-                        //     overwrite attack
-                        //   - XSRF token cannot be generated because session cookie isn't
-                        //     present
-                    } catch (Throwable e) {
-                        // unexpected
-                    }
+                {
+                    super.setCommandRequest(markMessagesAsReadRequest);
                 }
 
+                /**
+                 * @param response
+                 */
                 @Override
-                public void onSuccess(XsrfToken token) {
-                    ((HasRpcToken) notificationRemote).setRpcToken(token);
-                    notificationRemote.markMessagesAsRead(
-                            new AsyncCallback<Boolean>() {
+                public void onCommandSuccess(MarkMessagesAsReadResponse response) {
+                }
 
-                                @Override
-                                public void onFailure(Throwable caught) {
-                                    if (caught.getCause() instanceof GPSessionTimeout) {
-                                        GPHandlerManager.fireEvent(
-                                                new GPLoginEvent(null));
-                                    } else {
-                                        GeoPlatformMessage.errorMessage(
-                                                NotificationModuleConstants.INSTANCE.NotificationCenterAction_errorSavingReadMessagesText(),
-                                                WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
-                                        LayoutManager.getInstance().getStatusMap().setStatus(
-                                                NotificationModuleConstants.INSTANCE.NotificationCenterAction_errorSavingReadMessagesText(),
-                                                SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
-                                        System.out.println(
-                                                "Error Saving the read messages: " + caught.toString()
-                                                + " data: " + caught.getMessage());
-                                    }
-                                }
-
-                                @Override
-                                public void onSuccess(Boolean result) {
-                                }
-                            });
+                /**
+                 * @param exception
+                 */
+                @Override
+                public void onCommandFailure(Throwable exception) {
+                    if (exception.getCause() instanceof GPSessionTimeout) {
+                        GPHandlerManager.fireEvent(new GPLoginEvent(null));
+                    } else {
+                        GeoPlatformMessage.errorMessage(NotificationModuleConstants.INSTANCE.NotificationCenterAction_errorSavingReadMessagesText(),
+                                WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
+                        LayoutManager.getInstance().getStatusMap().setStatus(NotificationModuleConstants.INSTANCE.NotificationCenterAction_errorSavingReadMessagesText(),
+                                SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
+                        System.out.println("Error Saving the read messages: " + exception.toString() + " data: " + exception.getMessage());
+                    }
                 }
             });
         }

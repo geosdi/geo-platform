@@ -44,16 +44,12 @@ import com.extjs.gxt.ui.client.widget.ContentPanel;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.RpcTokenException;
-import com.google.gwt.user.client.rpc.XsrfToken;
-import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import java.util.Date;
-import java.util.List;
-import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.command.user.crud.InsertUserRequest;
+import org.geosdi.geoplatform.gui.client.command.user.crud.InsertUserResponse;
+import org.geosdi.geoplatform.gui.client.command.user.crud.UpdateUserRequest;
+import org.geosdi.geoplatform.gui.client.command.user.crud.UpdateUserResponse;
 import org.geosdi.geoplatform.gui.client.event.timeout.IManageInsertUserHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.IManageUpdateUserHandler;
 import org.geosdi.geoplatform.gui.client.event.timeout.ManageInsertUserEvent;
@@ -63,16 +59,19 @@ import org.geosdi.geoplatform.gui.client.i18n.UserModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
-import org.geosdi.geoplatform.gui.client.service.UserRemote;
-import org.geosdi.geoplatform.gui.client.service.UserRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.tab.GeoPlatformTabItem;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.impl.map.event.GPLoginEvent;
 import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.session.TimeoutHandlerManager;
-import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
+
+import javax.inject.Singleton;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -84,12 +83,8 @@ import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Singleton
-public class UserPropertiesWidget extends GeoPlatformTabItem
-        implements IManageInsertUserHandler, IManageUpdateUserHandler {
+public class UserPropertiesWidget extends GeoPlatformTabItem implements IManageInsertUserHandler, IManageUpdateUserHandler {
 
-    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
-    private static final UserRemoteAsync userRemote = UserRemote.Util.getInstance();
-    //
     private GPUserManageDetail user;
     //
     private ContentPanel centralPanel;
@@ -103,8 +98,7 @@ public class UserPropertiesWidget extends GeoPlatformTabItem
     private UserPropertiesManagerWidget userPropertiesManagerWidget;
 
     public UserPropertiesWidget() {
-        super(UserModuleConstants.INSTANCE.UserPropertiesWidget_headingText(),
-                Boolean.FALSE);
+        super(UserModuleConstants.INSTANCE.UserPropertiesWidget_headingText(), Boolean.FALSE);
 //        super.setSize(340, 350);
         TimeoutHandlerManager.addHandler(IManageInsertUserHandler.TYPE, this);
         TimeoutHandlerManager.addHandler(IManageUpdateUserHandler.TYPE, this);
@@ -179,109 +173,74 @@ public class UserPropertiesWidget extends GeoPlatformTabItem
     @Override
     public void manageInsertUser() {
         user.setCreationDate(new Date());
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+        final InsertUserRequest insertUserRequest = new InsertUserRequest();
+        insertUserRequest.setUserDetail(user);
+        insertUserRequest.setOrganization(GPAccountLogged.getInstance().getOrganization());
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<InsertUserResponse> () {
 
-            @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
-                }
+            {
+                super.setCommandRequest(insertUserRequest);
             }
 
+            /**
+             * @param response
+             */
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) userRemote).setRpcToken(token);
-                userRemote.insertUser(user,
-                        GPAccountLogged.getInstance().getOrganization(),
-                        new AsyncCallback<Long>() {
+            public void onCommandSuccess(InsertUserResponse response) {
+                user.setId(response.getResult());
+                store.insert(user, 0);
+                store.commitChanges();
+                userPropertiesManagerWidget.hide();
+                // TODO statusbar...
+                GeoPlatformMessage.infoMessage(UserModuleConstants.INSTANCE.infoUserSuccesfullyAddedText(), "<ul><li>" + user.getUsername() + "</li></ul>");
+            }
 
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                if (caught.getCause() instanceof GPSessionTimeout) {
-                                    GPHandlerManager.fireEvent(new GPLoginEvent(
-                                                    manageInsertUserEvent));
-                                } else {
-                                    GeoPlatformMessage.errorMessage(
-                                            WindowsConstants.INSTANCE.
-                                            errorTitleText(),
-                                            caught.getMessage());
-                                }
-                            }
-
-                            @Override
-                            public void onSuccess(Long result) {
-                                user.setId(result);
-                                store.insert(user, 0);
-                                store.commitChanges();
-                                userPropertiesManagerWidget.hide();
-
-                                // TODO statusbar...
-                                GeoPlatformMessage.infoMessage(
-                                        UserModuleConstants.INSTANCE.
-                                        infoUserSuccesfullyAddedText(),
-                                        "<ul><li>" + user.getUsername() + "</li></ul>");
-                            }
-                        });
+            /**
+             * @param exception
+             */
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                if (exception.getCause() instanceof GPSessionTimeout) {
+                    GPHandlerManager.fireEvent(new GPLoginEvent(
+                            manageInsertUserEvent));
+                } else {
+                    GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorTitleText(), exception.getMessage());
+                }
             }
         });
     }
 
     @Override
     public void manageUpdateUser() {
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+        final UpdateUserRequest updateUserRequest = new UpdateUserRequest();
+        updateUserRequest.setUserDetail(user);
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<UpdateUserResponse> () {
 
-            @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
-                }
+            {
+                super.setCommandRequest(updateUserRequest);
             }
 
+            /**
+             * @param response
+             */
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) userRemote).setRpcToken(token);
-                userRemote.updateUser(user, new AsyncCallback<Long>() {
+            public void onCommandSuccess(UpdateUserResponse response) {
+                store.commitChanges();
+                userPropertiesManagerWidget.hide();
+                // TODO statusbar...
+                GeoPlatformMessage.infoMessage(UserModuleConstants.INSTANCE.infoUserSuccesfullyModifiedText(), "<ul><li>" + user.getUsername() + "</li></ul>");
+            }
 
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        if (caught.getCause() instanceof GPSessionTimeout) {
-                            GPHandlerManager.fireEvent(new GPLoginEvent(
-                                    manageUpdateUserEvent));
-                        } else {
-                            GeoPlatformMessage.errorMessage(
-                                    WindowsConstants.INSTANCE.
-                                    errorTitleText(), caught.getMessage());
-                        }
-                    }
-
-                    @Override
-                    public void onSuccess(Long result) {
-                        store.commitChanges();
-                        userPropertiesManagerWidget.hide();
-
-                        // TODO statusbar...
-                        GeoPlatformMessage.infoMessage(
-                                UserModuleConstants.INSTANCE.
-                                infoUserSuccesfullyModifiedText(),
-                                "<ul><li>" + user.getUsername() + "</li></ul>");
-                    }
-                });
+            /**
+             * @param exception
+             */
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                if (exception.getCause() instanceof GPSessionTimeout) {
+                    GPHandlerManager.fireEvent(new GPLoginEvent(manageUpdateUserEvent));
+                } else {
+                    GeoPlatformMessage.errorMessage(WindowsConstants.INSTANCE.errorTitleText(), exception.getMessage());
+                }
             }
         });
     }
@@ -302,8 +261,7 @@ public class UserPropertiesWidget extends GeoPlatformTabItem
         super.init();
     }
 
-    public void setWindowToClose(
-            UserPropertiesManagerWidget userPropertiesManagerWidget) {
+    public void setWindowToClose(UserPropertiesManagerWidget userPropertiesManagerWidget) {
         this.userPropertiesManagerWidget = userPropertiesManagerWidget;
     }
 }

@@ -45,9 +45,12 @@ import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -64,14 +67,10 @@ public class NotificationService implements INotificationService {
     private SessionUtility sessionUtility;
 
     /**
-     * @param geoPlatformServiceClient the geoPlatformServiceClient to set
+     * @param httpServletRequest
+     * @return {@link Boolean}
+     * @throws GeoPlatformException
      */
-    @Autowired
-    public void setGeoPlatformServiceClient(
-            @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
-        this.geoPlatformServiceClient = geoPlatformServiceClient;
-    }
-
     @Override
     public boolean markMessagesAsRead(HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPAccount account;
@@ -86,5 +85,28 @@ public class NotificationService implements INotificationService {
             logger.debug("Returning no elements: " + rnf);
         }
         return true;
+    }
+
+    /**
+     * @param geoPlatformServiceClient the geoPlatformServiceClient to set
+     */
+    @Autowired
+    public void setGeoPlatformServiceClient(@Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
+        this.geoPlatformServiceClient = geoPlatformServiceClient;
+    }
+
+    /**
+     * Invoked by the containing {@code BeanFactory} after it has set all bean properties
+     * and satisfied {@link BeanFactoryAware}, {@code ApplicationContextAware} etc.
+     * <p>This method allows the bean instance to perform validation of its overall
+     * configuration and final initialization when all bean properties have been set.
+     *
+     * @throws Exception in the event of misconfiguration (such as failure to set an
+     *                   essential property) or if initialization fails for any other reason
+     */
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        checkArgument(this.geoPlatformServiceClient != null, "The Parameter geoPlatformServiceClient must not be null.");
+        checkArgument(this.sessionUtility != null, "The Parameter sessionUtility must not be null.");
     }
 }

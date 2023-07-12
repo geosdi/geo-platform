@@ -37,11 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget;
 
 import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.Style.ButtonArrowAlign;
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.ComponentEvent;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.MessageBoxEvent;
-import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.event.*;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.Record;
 import com.extjs.gxt.ui.client.store.StoreEvent;
@@ -55,13 +51,7 @@ import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboBox;
 import com.extjs.gxt.ui.client.widget.form.SimpleComboValue;
-import com.extjs.gxt.ui.client.widget.grid.CellEditor;
-import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
-import com.extjs.gxt.ui.client.widget.grid.ColumnData;
-import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
-import com.extjs.gxt.ui.client.widget.grid.EditorGrid;
-import com.extjs.gxt.ui.client.widget.grid.Grid;
-import com.extjs.gxt.ui.client.widget.grid.GridCellRenderer;
+import com.extjs.gxt.ui.client.widget.grid.*;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.menu.Menu;
@@ -72,20 +62,16 @@ import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.RpcTokenException;
-import com.google.gwt.user.client.rpc.XsrfToken;
-import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
 import org.geosdi.geoplatform.gui.action.menu.MenuActionRegistar;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.command.role.crud.SaveRoleRequest;
+import org.geosdi.geoplatform.gui.client.command.role.crud.SaveRoleResponse;
+import org.geosdi.geoplatform.gui.client.command.role.permission.GetRolePermissionRequest;
+import org.geosdi.geoplatform.gui.client.command.role.permission.GetRolePermissionResponse;
+import org.geosdi.geoplatform.gui.client.command.role.permission.crud.UpdateRolePermissionRequest;
+import org.geosdi.geoplatform.gui.client.command.role.permission.crud.UpdateRolePermissionResponse;
 import org.geosdi.geoplatform.gui.client.config.BasicGinInjector;
 import org.geosdi.geoplatform.gui.client.i18n.UserModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.UserModuleMessages;
@@ -94,25 +80,22 @@ import org.geosdi.geoplatform.gui.client.i18n.windows.WindowsConstants;
 import org.geosdi.geoplatform.gui.client.model.GuiComponentDetail;
 import org.geosdi.geoplatform.gui.client.model.GuiComponentDetail.GuiComponentDetailKeyValue;
 import org.geosdi.geoplatform.gui.client.model.GuiPermission;
-import org.geosdi.geoplatform.gui.client.service.UserRemote;
-import org.geosdi.geoplatform.gui.client.service.UserRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus.EnumSearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.grid.renderer.GPGridCellRenderer;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.action.GeoPlatformAction;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
-import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 import org.geosdi.geoplatform.gui.shared.GPRole;
 
+import java.util.*;
+
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class ManageRolesWidget extends GeoPlatformWindow {
 
-    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
-    private static final UserRemoteAsync userRemote = UserRemote.Util.getInstance();
-    //
     private String role;
     private List<String> roles;
     private List<String> guiComponentIDs;
@@ -417,77 +400,50 @@ public class ManageRolesWidget extends GeoPlatformWindow {
 
     private void loadPermissions() {
         mask(UserModuleMessages.INSTANCE.retrievingRolePermissionsMessage(role));
+        final GetRolePermissionRequest getRolePermissionRequest = new GetRolePermissionRequest();
+        getRolePermissionRequest.setRole(role);
+        getRolePermissionRequest.setOrganization(GPAccountLogged.getInstance().getOrganization());
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<GetRolePermissionResponse>() {
 
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
-
-            @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
-                }
+            {
+                super.setCommandRequest(getRolePermissionRequest);
             }
 
+            /**
+             * @param response
+             */
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) userRemote).setRpcToken(token);
-                userRemote.getRolePermission(role,
-                        GPAccountLogged.getInstance().getOrganization(),
-                        new AsyncCallback<HashMap<String, Boolean>>() {
+            public void onCommandSuccess(GetRolePermissionResponse response) {
+                HashMap<String, Boolean> result = response.getResult();
+                grid.stopEditing(true);
+                ManageRolesWidget.this.store.removeAll();
+                for (GuiComponentDetail gc : guiComponents) {
+                    Boolean booleanPermission = result.get(gc.getComponentId());
+                    gc.setPermission(GuiPermission.fromBoolean(booleanPermission));
+                    ManageRolesWidget.this.store.add(gc);
+                }
 
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                setSearchStatus(
-                                        EnumSearchStatus.STATUS_SEARCH_ERROR,
-                                        UserModuleMessages.INSTANCE.errorRetrievingRolePermissionsMessage(
-                                                role));
-                            }
+                // Iff for ADMIN role, we will remove MANAGE_ROLES
+                // i.e. MANAGE_ROLES will not be modified for a ADMIN role
+                if (role.equals(GPRole.ADMIN.getRole())) {
+                    for (GuiComponentDetail gc : guiComponents) {
+                        if (gc.getComponentId().equals("manageRoles")) {
+                            ManageRolesWidget.this.store.remove(gc);
+                            break;
+                        }
+                    }
+                }
+                setSearchStatus(EnumSearchStatus.STATUS_SEARCH, UserModuleMessages.INSTANCE.rolePermissionsSuccesfullyRetrievedMessage(role));
+                enableModifyButtons();
+                ManageRolesWidget.this.unmask();
+            }
 
-                            @Override
-                            public void onSuccess(
-                                    HashMap<String, Boolean> result) {
-                                        grid.stopEditing(true);
-                                        ManageRolesWidget.this.store.removeAll();
-
-                                        for (GuiComponentDetail gc : guiComponents) {
-                                            Boolean booleanPermission = result.get(
-                                                    gc.getComponentId());
-                                            gc.setPermission(
-                                                    GuiPermission.fromBoolean(
-                                                            booleanPermission));
-
-                                            ManageRolesWidget.this.store.add(gc);
-                                        }
-
-                                        // Iff for ADMIN role, we will remove MANAGE_ROLES
-                                        // i.e. MANAGE_ROLES will not be modified for a ADMIN role
-                                        if (role.equals(GPRole.ADMIN.getRole())) {
-                                            for (GuiComponentDetail gc : guiComponents) {
-                                                if (gc.getComponentId().equals(
-                                                        "manageRoles")) {
-                                                    ManageRolesWidget.this.store.remove(
-                                                            gc);
-                                                    break;
-                                                }
-                                            }
-                                        }
-
-                                        setSearchStatus(
-                                                EnumSearchStatus.STATUS_SEARCH,
-                                                UserModuleMessages.INSTANCE.
-                                                rolePermissionsSuccesfullyRetrievedMessage(
-                                                        role));
-                                        enableModifyButtons();
-                                        ManageRolesWidget.this.unmask();
-                                    }
-                        });
+            /**
+             * @param exception
+             */
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR, UserModuleMessages.INSTANCE.errorRetrievingRolePermissionsMessage(role));
             }
         });
     }
@@ -495,60 +451,41 @@ public class ManageRolesWidget extends GeoPlatformWindow {
     private void savePermissions() {
         grid.stopEditing(true);
         List<Record> modifiedElements = store.getModifiedRecords();
-
-        final HashMap<String, Boolean> permissionMap = Maps.<String, Boolean>newHashMapWithExpectedSize(
-                modifiedElements.size());
+        final HashMap<String, Boolean> permissionMap = Maps.<String, Boolean>newHashMapWithExpectedSize(modifiedElements.size());
         for (Record record : modifiedElements) {
-            String componentId = record.get(
-                    GuiComponentDetailKeyValue.COMPONENT_ID.toString()).toString();
-            GuiPermission permission = (GuiPermission) record.get(
-                    GuiComponentDetailKeyValue.PERMISSION.toString());
+            String componentId = record.get(GuiComponentDetailKeyValue.COMPONENT_ID.toString()).toString();
+            GuiPermission permission = (GuiPermission) record.get(GuiComponentDetailKeyValue.PERMISSION.toString());
             permissionMap.put(componentId, permission.toBoolean());
         }
 
         mask(UserModuleMessages.INSTANCE.savingRolePermissionsMessage(role));
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+        final UpdateRolePermissionRequest updateRolePermissionRequest = new UpdateRolePermissionRequest();
+        updateRolePermissionRequest.setRole(role);
+        updateRolePermissionRequest.setOrganization(GPAccountLogged.getInstance().getOrganization());
+        updateRolePermissionRequest.setPermissionMap(permissionMap);
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<UpdateRolePermissionResponse>() {
 
-            @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
-                }
+            {
+                super.setCommandRequest(updateRolePermissionRequest);
             }
 
+            /**
+             * @param response
+             */
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) userRemote).setRpcToken(token);
-                userRemote.updateRolePermission(role,
-                        GPAccountLogged.getInstance().getOrganization(),
-                        permissionMap, new AsyncCallback<Boolean>() {
+            public void onCommandSuccess(UpdateRolePermissionResponse response) {
+                store.commitChanges();
+                disableGridButtons();
+                setSearchStatus(EnumSearchStatus.STATUS_SEARCH, UserModuleMessages.INSTANCE.permissionsRoleSuccesfullySavedMessage(role));
+                unmask();
+            }
 
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                setSearchStatus(
-                                        EnumSearchStatus.STATUS_SEARCH_ERROR,
-                                        UserModuleMessages.INSTANCE.errorSavingRolePermissionsMessage(
-                                                role));
-                            }
-
-                            @Override
-                            public void onSuccess(Boolean result) {
-                                store.commitChanges();
-                                disableGridButtons();
-                                setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
-                                        UserModuleMessages.INSTANCE.permissionsRoleSuccesfullySavedMessage(
-                                                role));
-                                unmask();
-                            }
-                        });
+            /**
+             * @param exception
+             */
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR, UserModuleMessages.INSTANCE.errorSavingRolePermissionsMessage(role));
             }
         });
     }
@@ -581,7 +518,6 @@ public class ManageRolesWidget extends GeoPlatformWindow {
                                 return;
                             }
                         }
-
                         role = roleName;
                         saveNewRole();
                     }
@@ -590,61 +526,41 @@ public class ManageRolesWidget extends GeoPlatformWindow {
 
     private void saveNewRole() {
         mask(UserModuleMessages.INSTANCE.savingNewRoleMessage(role));
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+        final SaveRoleRequest saveRoleRequest = new SaveRoleRequest();
+        saveRoleRequest.setRole(role);
+        saveRoleRequest.setOrganization(GPAccountLogged.getInstance().getOrganization());
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<SaveRoleResponse>() {
 
-            @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
-                }
+            {
+                super.setCommandRequest(saveRoleRequest);
             }
 
+            /**
+             * @param response
+             */
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) userRemote).setRpcToken(token);
-                userRemote.saveRole(role,
-                        GPAccountLogged.getInstance().getOrganization(),
-                        new AsyncCallback<Boolean>() {
+            public void onCommandSuccess(SaveRoleResponse response) {
+                // Set default permission NONE for all permissions
+                store.removeAll();
+                for (GuiComponentDetail gc : guiComponents) {
+                    gc.setPermission(GuiPermission.NONE);
+                    store.add(gc);
+                }
+                roles.add(role);
+                rolesComboBox.add(role);
+                rolesComboBox.setSimpleValue(role);
+                addRoleMenuItem(role);
+                setSearchStatus(EnumSearchStatus.STATUS_SEARCH, UserModuleMessages.INSTANCE.newRoleCreatedMessage(role));
+                enableModifyButtons();
+                unmask();
+            }
 
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                setSearchStatus(
-                                        EnumSearchStatus.STATUS_SEARCH_ERROR,
-                                        UserModuleMessages.INSTANCE.errorSavingNewRoleMessage(
-                                                role));
-                            }
-
-                            @Override
-                            public void onSuccess(Boolean result) {
-                                // Set default permission NONE for all permissions
-                                store.removeAll();
-                                for (GuiComponentDetail gc : guiComponents) {
-                                    gc.setPermission(GuiPermission.NONE);
-                                    store.add(gc);
-                                }
-
-                                roles.add(role);
-
-                                rolesComboBox.add(role);
-                                rolesComboBox.setSimpleValue(role);
-
-                                addRoleMenuItem(role);
-
-                                setSearchStatus(EnumSearchStatus.STATUS_SEARCH,
-                                        UserModuleMessages.INSTANCE.newRoleCreatedMessage(
-                                                role));
-                                enableModifyButtons();
-                                unmask();
-                            }
-                        });
+            /**
+             * @param exception
+             */
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR, UserModuleMessages.INSTANCE.errorSavingNewRoleMessage(role));
             }
         });
     }
@@ -714,63 +630,38 @@ public class ManageRolesWidget extends GeoPlatformWindow {
 
             @Override
             public void componentSelected(ComponentEvent ce) {
-                searchStatus.setBusy(UserModuleMessages.INSTANCE.
-                        retrievingPermissionsRoleMessage(roleItem));
-                xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+                searchStatus.setBusy(UserModuleMessages.INSTANCE.retrievingPermissionsRoleMessage(roleItem));
+                final GetRolePermissionRequest getRolePermissionRequest = new GetRolePermissionRequest();
+                getRolePermissionRequest.setRole(roleItem);
+                getRolePermissionRequest.setOrganization(GPAccountLogged.getInstance().getOrganization());
+                ClientCommandDispatcher.getInstance().execute(new GPClientCommand<GetRolePermissionResponse>() {
 
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        try {
-                            throw caught;
-                        } catch (RpcTokenException e) {
-                            // Can be thrown for several reasons:
-                            //   - duplicate session cookie, which may be a sign of a cookie
-                            //     overwrite attack
-                            //   - XSRF token cannot be generated because session cookie isn't
-                            //     present
-                        } catch (Throwable e) {
-                            // unexpected
-                        }
+                    {
+                        super.setCommandRequest(getRolePermissionRequest);
                     }
 
+                    /**
+                     * @param response
+                     */
                     @Override
-                    public void onSuccess(XsrfToken token) {
-                        ((HasRpcToken) userRemote).setRpcToken(token);
-                        userRemote.getRolePermission(roleItem,
-                                GPAccountLogged.getInstance().getOrganization(),
-                                new AsyncCallback<HashMap<String, Boolean>>() {
+                    public void onCommandSuccess(GetRolePermissionResponse response) {
+                        HashMap<String, Boolean> result = response.getResult();
+                        grid.stopEditing(true);
+                        // Copy permissions from selected role
+                        for (GuiComponentDetail gc : guiComponents) {
+                            Record r = store.getRecord(gc);
+                            Boolean booleanPermission = result.get(gc.getComponentId());
+                            r.set(GuiComponentDetailKeyValue.PERMISSION.toString(), GuiPermission.fromBoolean(booleanPermission));
+                        }
+                        setSearchStatus(EnumSearchStatus.STATUS_SEARCH, UserModuleMessages.INSTANCE.permissionsRoleCopiedToMessage(roleItem, role));
+                    }
 
-                                    @Override
-                                    public void onFailure(Throwable caught) {
-                                        setSearchStatus(
-                                                EnumSearchStatus.STATUS_SEARCH_ERROR,
-                                                UserModuleMessages.INSTANCE.
-                                                errorRetrievingRolePermissionsMessage(
-                                                        roleItem));
-                                    }
-
-                                    @Override
-                                    public void onSuccess(
-                                            HashMap<String, Boolean> result) {
-                                                grid.stopEditing(true);
-
-                                                // Copy permissions from selected role
-                                                for (GuiComponentDetail gc : guiComponents) {
-                                                    Record r = store.getRecord(
-                                                            gc);
-                                                    Boolean booleanPermission = result.get(
-                                                            gc.getComponentId());
-                                                    r.set(GuiComponentDetailKeyValue.PERMISSION.toString(),
-                                                            GuiPermission.fromBoolean(
-                                                                    booleanPermission));
-                                                }
-
-                                                setSearchStatus(
-                                                        EnumSearchStatus.STATUS_SEARCH,
-                                                        UserModuleMessages.INSTANCE.permissionsRoleCopiedToMessage(
-                                                                roleItem, role));
-                                            }
-                                });
+                    /**
+                     * @param exception
+                     */
+                    @Override
+                    public void onCommandFailure(Throwable exception) {
+                        setSearchStatus(EnumSearchStatus.STATUS_SEARCH_ERROR, UserModuleMessages.INSTANCE.errorRetrievingRolePermissionsMessage(roleItem));
                     }
                 });
             }

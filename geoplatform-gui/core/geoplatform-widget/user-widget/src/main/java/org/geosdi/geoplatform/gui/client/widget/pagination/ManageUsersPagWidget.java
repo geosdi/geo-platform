@@ -36,11 +36,7 @@
 package org.geosdi.geoplatform.gui.client.widget.pagination;
 
 import com.extjs.gxt.ui.client.Registry;
-import com.extjs.gxt.ui.client.data.BasePagingLoader;
-import com.extjs.gxt.ui.client.data.ModelData;
-import com.extjs.gxt.ui.client.data.PagingLoadConfig;
-import com.extjs.gxt.ui.client.data.PagingLoadResult;
-import com.extjs.gxt.ui.client.data.RpcProxy;
+import com.extjs.gxt.ui.client.data.*;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.event.WindowEvent;
@@ -54,31 +50,30 @@ import com.extjs.gxt.ui.client.widget.toolbar.PagingToolBar;
 import com.google.common.collect.Lists;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.RpcTokenException;
-import com.google.gwt.user.client.rpc.XsrfToken;
-import com.google.gwt.user.client.rpc.XsrfTokenServiceAsync;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import java.util.ArrayList;
-import java.util.List;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.command.role.GetAllRolesRequest;
+import org.geosdi.geoplatform.gui.client.command.role.GetAllRolesResponse;
+import org.geosdi.geoplatform.gui.client.command.user.search.SearchUsersRequest;
+import org.geosdi.geoplatform.gui.client.command.user.search.SearchUsersResponse;
 import org.geosdi.geoplatform.gui.client.i18n.UserModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.i18n.status.SearchStatusConstants;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail;
 import org.geosdi.geoplatform.gui.client.model.GPUserManageDetail.GPUserManageDetailKeyValue;
-import org.geosdi.geoplatform.gui.client.service.UserRemote;
-import org.geosdi.geoplatform.gui.client.service.UserRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.SearchStatus;
 import org.geosdi.geoplatform.gui.client.widget.UserPropertiesManagerWidget;
 import org.geosdi.geoplatform.gui.client.widget.UserPropertiesWidget;
 import org.geosdi.geoplatform.gui.client.widget.grid.pagination.grid.GPGridSearchWidget;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.users.options.member.UserSessionEnum;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUserKeyValue;
-import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import java.util.List;
 
 /**
  *
@@ -91,9 +86,6 @@ import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 @Singleton
 public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail> {
 
-    private static final XsrfTokenServiceAsync xsrf = GPXsrfTokenService.Util.getInstance();
-    private static final UserRemoteAsync userRemote = UserRemote.Util.getInstance();
-    //
     @Inject
     private UserPropertiesWidget userPropertiesWidget;
     //
@@ -107,18 +99,13 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
     public void finalizeInitOperations() {
         super.finalizeInitOperations();
         //Using defered binding will be select the right widget to show
-        this.userPropertiesManagerWidget = GWT.create(
-                UserPropertiesManagerWidget.class);
-        this.userPropertiesWidget.setWindowToClose(
-                this.userPropertiesManagerWidget);
+        this.userPropertiesManagerWidget = GWT.create(UserPropertiesManagerWidget.class);
+        this.userPropertiesWidget.setWindowToClose(this.userPropertiesManagerWidget);
         //
-        super.selectButton.setText(UserModuleConstants.INSTANCE.
-                ManageUsersPagWidget_modifyUserText());
-        super.search.setFieldLabel(UserModuleConstants.INSTANCE.
-                ManageUsersPagWidget_findUserText());
+        super.selectButton.setText(UserModuleConstants.INSTANCE.ManageUsersPagWidget_modifyUserText());
+        super.search.setFieldLabel(UserModuleConstants.INSTANCE.ManageUsersPagWidget_findUserText());
         this.userPropertiesWidget.setStore(super.store);
-        super.addButton(1, new Button(UserModuleConstants.INSTANCE.
-                ManageUsersPagWidget_addUserText(),
+        super.addButton(1, new Button(UserModuleConstants.INSTANCE.ManageUsersPagWidget_addUserText(),
                 AbstractImagePrototype.create(BasicWidgetResources.ICONS.logged_user()),
                 new SelectionListener<ButtonEvent>() {
 
@@ -137,10 +124,8 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
 
     @Override
     public void setWindowProperties() {
-        super.setHeadingHtml(UserModuleConstants.INSTANCE.
-                ManageUsersPagWidget_headingText());
+        super.setHeadingHtml(UserModuleConstants.INSTANCE.ManageUsersPagWidget_headingText());
         super.setSize(670, 490);
-
         super.addWindowListener(new WindowListener() {
 
             @Override
@@ -155,41 +140,38 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
     @Override
     public void createStore() {
         super.toolBar = new PagingToolBar(super.getPageSize());
-
         super.proxy = new RpcProxy<PagingLoadResult<GPUserManageDetail>>() {
 
             @Override
-            protected void load(final Object loadConfig,
-                    final AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback) {
+            protected void load(final Object loadConfig, final AsyncCallback<PagingLoadResult<GPUserManageDetail>> callback) {
+                final SearchUsersRequest searchUsersRequest = new SearchUsersRequest();
+                searchUsersRequest.setConfig((PagingLoadConfig) loadConfig);
+                searchUsersRequest.setSearchText(searchText);
+                searchUsersRequest.setOrganization(GPAccountLogged.getInstance().getOrganization());
 
-                xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+                ClientCommandDispatcher.getInstance().execute(new GPClientCommand<SearchUsersResponse>() {
 
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        try {
-                            throw caught;
-                        } catch (RpcTokenException e) {
-                            // Can be thrown for several reasons:
-                            //   - duplicate session cookie, which may be a sign of a cookie
-                            //     overwrite attack
-                            //   - XSRF token cannot be generated because session cookie isn't
-                            //     present
-                        } catch (Throwable e) {
-                            // unexpected
-                        }
+                    {
+                        super.setCommandRequest(searchUsersRequest);
                     }
 
+                    /**
+                     * @param response
+                     */
                     @Override
-                    public void onSuccess(XsrfToken token) {
-                        ((HasRpcToken) userRemote).setRpcToken(token);
-                        userRemote.searchUsers(
-                                (PagingLoadConfig) loadConfig, searchText,
-                                GPAccountLogged.getInstance().getOrganization(),
-                                callback);
+                    public void onCommandSuccess(SearchUsersResponse response) {
+                        callback.onSuccess(response.getResult());
+                    }
+
+                    /**
+                     * @param exception
+                     */
+                    @Override
+                    public void onCommandFailure(Throwable exception) {
+                        callback.onFailure(exception);
                     }
                 });
             }
-
         };
 
         super.loader = new BasePagingLoader<PagingLoadResult<ModelData>>(proxy);
@@ -204,49 +186,37 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
     @Override
     public ColumnModel prepareColumnModel() {
         List<ColumnConfig> configs = Lists.<ColumnConfig>newArrayList();
-
         ColumnConfig nameColumn = new ColumnConfig();
         nameColumn.setId(GPSimpleUserKeyValue.NAME.toString());
         nameColumn.setHeaderHtml(UserModuleConstants.INSTANCE.nameFieldText());
         configs.add(nameColumn);
-
         ColumnConfig usernameColumn = new ColumnConfig();
         usernameColumn.setId(GPSimpleUserKeyValue.USERNAME.toString());
-        usernameColumn.setHeaderHtml(
-                UserModuleConstants.INSTANCE.usernameFieldText());
+        usernameColumn.setHeaderHtml(UserModuleConstants.INSTANCE.usernameFieldText());
         usernameColumn.setWidth(120);
         configs.add(usernameColumn);
-
         CheckColumnConfig enabledColumn = new CheckColumnConfig();
         enabledColumn.setId(GPUserManageDetailKeyValue.ENABLED.toString());
-        enabledColumn.setHeaderHtml(
-                UserModuleConstants.INSTANCE.enabledFieldLabelText());
+        enabledColumn.setHeaderHtml(UserModuleConstants.INSTANCE.enabledFieldLabelText());
         enabledColumn.setWidth(50);
         enabledColumn.setFixed(true);
         configs.add(enabledColumn);
-
         CheckColumnConfig tempColumn = new CheckColumnConfig();
         tempColumn.setId(GPUserManageDetailKeyValue.TEMPORARY.toString());
-        tempColumn.setHeaderHtml(
-                UserModuleConstants.INSTANCE.temporaryFieldLabelText());
+        tempColumn.setHeaderHtml(UserModuleConstants.INSTANCE.temporaryFieldLabelText());
         tempColumn.setWidth(65);
         tempColumn.setFixed(true);
         configs.add(tempColumn);
-
         ColumnConfig roleColumn = new ColumnConfig();
         roleColumn.setId(GPSimpleUserKeyValue.AUTORITHY.toString());
-        roleColumn.setHeaderHtml(
-                UserModuleConstants.INSTANCE.userRoleLabelText());
+        roleColumn.setHeaderHtml(UserModuleConstants.INSTANCE.userRoleLabelText());
         roleColumn.setWidth(80);
         configs.add(roleColumn);
-
         ColumnConfig trustedLevelColumn = new ColumnConfig();
         trustedLevelColumn.setId(GPSimpleUserKeyValue.TRUSTED_LEVEL.toString());
-        trustedLevelColumn.setHeaderHtml(UserModuleConstants.INSTANCE.
-                ManageUsersPagWidget_trustedFieldLabelText());
+        trustedLevelColumn.setHeaderHtml(UserModuleConstants.INSTANCE.ManageUsersPagWidget_trustedFieldLabelText());
         trustedLevelColumn.setWidth(70);
         configs.add(trustedLevelColumn);
-
         ColumnConfig delColumn = new ColumnConfig();
         delColumn.setId("delColumn");
         delColumn.setHeaderHtml(ButtonsConstants.INSTANCE.deleteText());
@@ -256,7 +226,6 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
         delColumn.setSortable(false);
         delColumn.setRenderer(new DeleteUserRenderer());
         configs.add(delColumn);
-
         return new ColumnModel(configs);
     }
 
@@ -274,66 +243,35 @@ public class ManageUsersPagWidget extends GPGridSearchWidget<GPUserManageDetail>
     }
 
     private void showUserPropertiesWidget(final boolean isNewUser) {
-        searchStatus.setBusy(UserModuleConstants.INSTANCE.
-                ManageUsersPagWidget_statusRetrievingRolesText());
+        searchStatus.setBusy(UserModuleConstants.INSTANCE.ManageUsersPagWidget_statusRetrievingRolesText());
+        final GetAllRolesRequest getAllRolesRequest = new GetAllRolesRequest();
+        getAllRolesRequest.setOrganization(GPAccountLogged.getInstance().getOrganization());
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<GetAllRolesResponse>() {
 
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
-
-            @Override
-            public void onFailure(Throwable caught) {
-                try {
-                    throw caught;
-                } catch (RpcTokenException e) {
-                    // Can be thrown for several reasons:
-                    //   - duplicate session cookie, which may be a sign of a cookie
-                    //     overwrite attack
-                    //   - XSRF token cannot be generated because session cookie isn't
-                    //     present
-                } catch (Throwable e) {
-                    // unexpected
-                }
+            {
+                super.setCommandRequest(getAllRolesRequest);
             }
 
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) userRemote).setRpcToken(token);
-                userRemote.getAllRoles(
-                        GPAccountLogged.getInstance().getOrganization(),
-                        new AsyncCallback<ArrayList<String>>() {
+            public void onCommandSuccess(GetAllRolesResponse response) {
+                setSearchStatus(SearchStatus.EnumSearchStatus.STATUS_SEARCH, SearchStatusConstants.INSTANCE.STATUS_MESSAGE_SEARCH());
+                GPUserManageDetail userDetail;
+                if (isNewUser) {
+                    userDetail = new GPUserManageDetail();
+                    Registry.register(UserSessionEnum.SEARCHED_USER.name(), null);
+                } else {
+                    userDetail = widget.getSelectionModel().getSelectedItem();
+                    Registry.register(UserSessionEnum.SEARCHED_USER.name(), userDetail);
+                }
+                userPropertiesWidget.setData(userDetail, response.getResult());
+                userPropertiesManagerWidget.show();
+            }
 
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                setSearchStatus(
-                                        SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR,
-                                        UserModuleConstants.INSTANCE.
-                                        ManageUsersPagWidget_statusErrorRetrievingRolesText());
-                            }
-
-                            @Override
-                            public void onSuccess(ArrayList<String> result) {
-                                setSearchStatus(
-                                        SearchStatus.EnumSearchStatus.STATUS_SEARCH,
-                                        SearchStatusConstants.INSTANCE.STATUS_MESSAGE_SEARCH());
-
-                                GPUserManageDetail userDetail;
-                                if (isNewUser) {
-                                    userDetail = new GPUserManageDetail();
-                                    Registry.register(
-                                            UserSessionEnum.SEARCHED_USER.name(),
-                                            null);
-                                } else {
-                                    userDetail = widget.getSelectionModel().getSelectedItem();
-                                    Registry.register(
-                                            UserSessionEnum.SEARCHED_USER.name(),
-                                            userDetail);
-                                }
-                                userPropertiesWidget.setData(userDetail, result);
-                                userPropertiesManagerWidget.show();
-                            }
-
-                        });
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                setSearchStatus(SearchStatus.EnumSearchStatus.STATUS_SEARCH_ERROR,
+                        UserModuleConstants.INSTANCE.ManageUsersPagWidget_statusErrorRetrievingRolesText());
             }
         });
     }
-
 }

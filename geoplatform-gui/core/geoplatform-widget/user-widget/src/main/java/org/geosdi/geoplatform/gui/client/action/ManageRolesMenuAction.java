@@ -36,28 +36,25 @@
 package org.geosdi.geoplatform.gui.client.action;
 
 import com.extjs.gxt.ui.client.event.MenuEvent;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.HasRpcToken;
-import com.google.gwt.user.client.rpc.XsrfToken;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import java.util.ArrayList;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseAction;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
+import org.geosdi.geoplatform.gui.client.command.gui.GetAllGuiComponentIDsRequest;
+import org.geosdi.geoplatform.gui.client.command.gui.GetAllGuiComponentIDsResopnse;
+import org.geosdi.geoplatform.gui.client.command.role.GetAllRolesRequest;
+import org.geosdi.geoplatform.gui.client.command.role.GetAllRolesResponse;
 import org.geosdi.geoplatform.gui.client.i18n.UserModuleConstants;
-import org.geosdi.geoplatform.gui.client.service.UserRemote;
-import org.geosdi.geoplatform.gui.client.service.UserRemoteAsync;
 import org.geosdi.geoplatform.gui.client.widget.ManageRolesWidget;
+import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
+import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
 import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.security.GPAccountLogged;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class ManageRolesMenuAction extends MenuBaseAction {
 
-    private static final UserRemoteAsync userRemote = UserRemote.Util.getInstance();
-    //
     private final ManageRolesWidget rolesWidget = new ManageRolesWidget();
 
     public ManageRolesMenuAction() {
@@ -71,59 +68,61 @@ public class ManageRolesMenuAction extends MenuBaseAction {
     }
 
     private void retrieveRoles() {
-        xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
+        final GetAllRolesRequest getAllRolesRequest = new GetAllRolesRequest();
+        getAllRolesRequest.setOrganization(GPAccountLogged.getInstance().getOrganization());
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<GetAllRolesResponse>() {
 
-            @Override
-            public void onFailure(Throwable caught) {
-                throw new UnsupportedOperationException("Not supported yet.");
+            {
+                super.setCommandRequest(getAllRolesRequest);
             }
 
+            /**
+             * @param response
+             */
             @Override
-            public void onSuccess(XsrfToken token) {
-                ((HasRpcToken) userRemote).setRpcToken(token);
-                userRemote.getAllRoles(
-                        GPAccountLogged.getInstance().getOrganization(),
-                        new AsyncCallback<ArrayList<String>>() {
+            public void onCommandSuccess(GetAllRolesResponse response) {
+                rolesWidget.setRoles(response.getResult());
+                if (rolesWidget.getGuiComponentIDs() == null) {
+                    retrieveGuiComponentIDs();
+                } else {
+                    rolesWidget.show();
+                }
+            }
 
-                            @Override
-                            public void onFailure(Throwable caught) {
-                                GeoPlatformMessage.errorMessage(
-                                        UserModuleConstants.INSTANCE.
-                                        ManageRolesMenuAction_errorRetrievingRoleTitleText(),
-                                        caught.getMessage());
-                            }
-
-                            @Override
-                            public void onSuccess(ArrayList<String> result) {
-                                rolesWidget.setRoles(result);
-                                if (rolesWidget.getGuiComponentIDs() == null) {
-                                    retrieveGuiComponentIDs();
-                                } else {
-                                    rolesWidget.show();
-                                }
-                            }
-                        });
+            /**
+             * @param exception
+             */
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                GeoPlatformMessage.errorMessage(UserModuleConstants.INSTANCE.ManageRolesMenuAction_errorRetrievingRoleTitleText(), exception.getMessage());
             }
         });
     }
 
     private void retrieveGuiComponentIDs() {
-        userRemote.getAllGuiComponentIDs(
-                new AsyncCallback<ArrayList<String>>() {
+        final GetAllGuiComponentIDsRequest getAllGuiComponentIDsRequest = new GetAllGuiComponentIDsRequest();
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<GetAllGuiComponentIDsResopnse>() {
 
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        GeoPlatformMessage.errorMessage(
-                                UserModuleConstants.INSTANCE.
-                                ManageRolesMenuAction_errorRetrievingPermissionsIDsTitleText(),
-                                caught.getMessage());
-                    }
+            {
+                super.setCommandRequest(getAllGuiComponentIDsRequest);
+            }
 
-                    @Override
-                    public void onSuccess(ArrayList<String> result) {
-                        rolesWidget.setGuiComponentIDs(result);
-                        rolesWidget.show();
-                    }
-                });
+            /**
+             * @param response
+             */
+            @Override
+            public void onCommandSuccess(GetAllGuiComponentIDsResopnse response) {
+                rolesWidget.setGuiComponentIDs(response.getResult());
+                rolesWidget.show();
+            }
+
+            /**
+             * @param exception
+             */
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                GeoPlatformMessage.errorMessage(UserModuleConstants.INSTANCE.ManageRolesMenuAction_errorRetrievingPermissionsIDsTitleText(), exception.getMessage());
+            }
+        });
     }
 }

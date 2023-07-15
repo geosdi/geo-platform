@@ -26,7 +26,7 @@
         <module>geoplatform-ows-binding</module>
         <module>geoplatform-w3c-xsd-binding</module>
         <module>geoplatform-wfs-binding</module>
-        <module>geoplatform-sld-binding</module>
+        <module>geoplatform-xsld-binding</module>
         <module>geoplatform-wmc-binding</module>
         <module>geoplatform-wps-binding</module>
         <module>geoplatform-wms-binding</module>

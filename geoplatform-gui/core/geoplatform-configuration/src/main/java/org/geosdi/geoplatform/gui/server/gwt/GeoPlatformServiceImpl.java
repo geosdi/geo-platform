@@ -45,7 +45,6 @@ import org.geosdi.geoplatform.gui.server.spring.xsrf.GPAutoInjectingXsrfTokenSer
 import org.geosdi.geoplatform.gui.service.GeoPlatformService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org

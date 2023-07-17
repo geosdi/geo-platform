@@ -148,7 +148,7 @@ public class CatalogCapabilitiesTest {
         logger.info("CSW SECURE GET_CAPABILITIES VERSION @@@@@@@@@@@@@@@@@@@@@@@ {}", response.getVersion());
     }
 
-//    @Ignore(value = "Server is Down")
+    @Ignore(value = "Server is Down")
     @Test
     public void testGetCapabilitiesRNDTWithConnector() throws Exception {
         GPCatalogConnectorStore serverConnector = newConnector()

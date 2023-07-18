@@ -53,7 +53,6 @@ import org.geosdi.geoplatform.gui.server.SessionUtility;
 import org.geosdi.geoplatform.gui.server.service.converter.DTOSecurityConverter;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
-import org.geosdi.geoplatform.request.LikePatternType;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.request.project.SaveProjectRequest;
 import org.geosdi.geoplatform.response.collection.GuiComponentsPermissionMapData;
@@ -71,6 +70,9 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
+
+import static java.lang.Boolean.TRUE;
+import static org.geosdi.geoplatform.request.LikePatternType.CONTENT_EQUALS;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -104,11 +106,18 @@ public class SecurityService implements ISecurityService {
     @Autowired
     private UserService userService;
 
+    /**
+     * @param username
+     * @param password
+     * @param projectID
+     * @param httpServletRequest
+     * @return {@link IGPAccountDetail}
+     * @throws GeoPlatformException
+     */
     @Override
     public IGPAccountDetail userLogin(String username, String password, Long projectID, HttpServletRequest httpServletRequest) throws GeoPlatformException {
-        GPUser user;
         try {
-            user = geoPlatformServiceClient.getUserDetailByUsernameAndPassword(username, password);
+            GPUser user = geoPlatformServiceClient.getUserDetailByUsernameAndPassword(username, password);
             return this.executeLoginOnGPAccount(user, geoPlatformServiceClient.getAccountPermission(user.getId()), projectID, httpServletRequest);
         } catch (ResourceNotFoundFault ex) {
             logger.error("SecurityService", "Unable to find user with username or email: " + username + " Error: " + ex);
@@ -125,13 +134,19 @@ public class SecurityService implements ISecurityService {
         }
     }
 
+    /**
+     * @param userName
+     * @param httpServletRequest
+     * @return {@link XMPPLoginDetails}
+     * @throws GeoPlatformException
+     */
     @Override
     public XMPPLoginDetails xmppGetDataLogin(String userName, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         XMPPLoginDetails xMPPLoginDetails = null;
         if (userName != null) {
             GPUser user;
             try {
-                user = geoPlatformServiceClient.getUserDetailByUsername(new SearchRequest(userName, LikePatternType.CONTENT_EQUALS));
+                user = geoPlatformServiceClient.getUserDetailByUsername(new SearchRequest(userName, CONTENT_EQUALS));
                 xMPPLoginDetails = new XMPPLoginDetails();
                 xMPPLoginDetails.setUsername(user.getUsername());
                 xMPPLoginDetails.setPassword(user.getPassword());
@@ -144,6 +159,11 @@ public class SecurityService implements ISecurityService {
         return xMPPLoginDetails;
     }
 
+    /**
+     * @param httpServletRequest
+     * @return {@link IGPAccountDetail}
+     * @throws GeoPlatformException
+     */
     @Override
     public IGPAccountDetail ssoLogin(HttpServletRequest httpServletRequest) throws GeoPlatformException {
         IGPAccountDetail accountDetail = null;
@@ -152,7 +172,7 @@ public class SecurityService implements ISecurityService {
         if (ivUser != null) {
             GPUser user;
             try {
-                user = geoPlatformServiceClient.getUserDetailByUsername(new SearchRequest(ivUser, LikePatternType.CONTENT_EQUALS));
+                user = geoPlatformServiceClient.getUserDetailByUsername(new SearchRequest(ivUser, CONTENT_EQUALS));
                 accountDetail = this.executeLoginOnGPAccount(user, geoPlatformServiceClient.getAccountPermission(user.getId()), null, httpServletRequest);
             } catch (ResourceNotFoundFault ex) {
                 logger.error("SecurityService", "Unable to find user with username or email: " + ivUser + " Error: " + ex);
@@ -165,69 +185,64 @@ public class SecurityService implements ISecurityService {
         return accountDetail;
     }
 
+    /**
+     * @param httpServletRequest
+     * @return {@link IGPAccountDetail}
+     * @throws GeoPlatformException
+     */
     @Override
-    public IGPAccountDetail casLogin(HttpServletRequest httpServletRequest)
-            throws GeoPlatformException {
-        Assertion casAssertion = (AssertionImpl) httpServletRequest.
-                getSession().getAttribute(AbstractCasFilter.CONST_CAS_ASSERTION);
+    public IGPAccountDetail casLogin(HttpServletRequest httpServletRequest) throws GeoPlatformException {
+        Assertion casAssertion = (AssertionImpl) httpServletRequest.getSession().getAttribute(AbstractCasFilter.CONST_CAS_ASSERTION);
         IGPAccountDetail accountDetail = null;
-        if (casAssertion != null && casAssertion.getPrincipal() != null
-                && casAssertion.getPrincipal().getName() != null) {
+        if (casAssertion != null && casAssertion.getPrincipal() != null && casAssertion.getPrincipal().getName() != null) {
             String casUserName = casAssertion.getPrincipal().getName();
-            GPUser user;
             try {
-                user = geoPlatformServiceClient.getUserDetailByUsername(
-                        new SearchRequest(casUserName,
-                                LikePatternType.CONTENT_EQUALS));
+                GPUser user = geoPlatformServiceClient.getUserDetailByUsername(new SearchRequest(casUserName, CONTENT_EQUALS));
                 geoPlatformServiceClient.getAccountPermission(user.getId());
-                accountDetail = this.executeLoginOnGPAccount(user,
-                        geoPlatformServiceClient.getAccountPermission(
-                                user.getId()), null, httpServletRequest);
+                accountDetail = this.executeLoginOnGPAccount(user, geoPlatformServiceClient.getAccountPermission(user.getId()), null, httpServletRequest);
             } catch (ResourceNotFoundFault ex) {
-                logger.info("SecurityService",
-                        "Unable to find user with username or email: " + casUserName
-                                + " Error: " + ex);
-                accountDetail = this.createNewCASUser(casUserName,
-                        httpServletRequest);
+                logger.info("SecurityService", "Unable to find user with username or email: " + casUserName + " Error: " + ex);
+                accountDetail = this.createNewCASUser(casUserName, httpServletRequest);
             } catch (SOAPFaultException ex) {
-                logger.error(
-                        "Error on SecurityService: " + ex + " password incorrect");
+                logger.error("Error on SecurityService: " + ex + " password incorrect");
                 throw new GeoPlatformException("Password incorrect");
             }
         }
         return accountDetail;
     }
 
-    private IGPAccountDetail createNewCASUser(String casUserName,
-            HttpServletRequest httpServletRequest) {
+    /**
+     * @param casUserName
+     * @param httpServletRequest
+     * @return {@link IGPAccountDetail}
+     */
+    private IGPAccountDetail createNewCASUser(String casUserName, HttpServletRequest httpServletRequest) {
         IGPUserManageDetail newCASAccount = this.fillNewCASAccount(casUserName);
-        logger.info(
-                "A new user from CAS login will be created with username: " + casUserName);
-        userService.insertUser(newCASAccount, this.casOrganization,
-                httpServletRequest, Boolean.FALSE, Boolean.TRUE);
+        logger.info("A new user from CAS login will be created with username: " + casUserName);
+        userService.insertUser(newCASAccount, this.casOrganization, httpServletRequest, Boolean.FALSE, TRUE);
         StringTokenizer tokenizer = new StringTokenizer(this.casAdminEmails, ";");
-        List<String> emailList = Lists.<String>newArrayListWithExpectedSize(
-                tokenizer.countTokens());
+        List<String> emailList = Lists.<String>newArrayListWithExpectedSize(tokenizer.countTokens());
         while (tokenizer.hasMoreElements()) {
             emailList.add(tokenizer.nextToken());
         }
         try {
-            geoPlatformServiceClient.sendCASNewUserNotification(emailList,
-                    casUserName);
+            geoPlatformServiceClient.sendCASNewUserNotification(emailList, casUserName);
         } catch (IllegalParameterFault ex) {
-            logger.error("SecurityService",
-                    "Unable to send email to: " + this.casAdminEmails
-                            + " after new cas user creation. Error: " + ex);
+            logger.error("@@@@@@@@@@@@@SecurityService. Unable to send email to: {}  after new cas user creation. Error: {}\n", this.casAdminEmails , ex.getMessage());
         }
         return this.casLogin(httpServletRequest);
     }
 
+    /**
+     * @param userName
+     * @return {@link IGPUserManageDetail}
+     */
     private IGPUserManageDetail fillNewCASAccount(String userName) {
         IGPUserManageDetail userToReturn = new GPUserManageDetail();
         userToReturn.setAuthority(this.casAuthority);
         userToReturn.setCreationDate(new Date());
         userToReturn.setEmail(userName + this.casEmailSuffix);
-        userToReturn.setEnabled(Boolean.TRUE);
+        userToReturn.setEnabled(TRUE);
         userToReturn.setName(userName);
         userToReturn.setOrganization(this.casOrganization);
         userToReturn.setPassword(userName);
@@ -237,13 +252,19 @@ public class SecurityService implements ISecurityService {
         return userToReturn;
     }
 
-    private IGPAccountDetail executeLoginOnGPAccount(GPAccount account, GuiComponentsPermissionMapData guiComponentPermission, Long projectID, HttpServletRequest httpServletRequest)
-            throws ResourceNotFoundFault, SOAPFaultException {
+    /**
+     * @param account
+     * @param guiComponentPermission
+     * @param projectID
+     * @param httpServletRequest
+     * @return {@link IGPAccountDetail}
+     * @throws ResourceNotFoundFault
+     * @throws SOAPFaultException
+     */
+    private IGPAccountDetail executeLoginOnGPAccount(GPAccount account, GuiComponentsPermissionMapData guiComponentPermission, Long projectID, HttpServletRequest httpServletRequest) throws ResourceNotFoundFault, SOAPFaultException {
         logger.info("Account id: " + account.getId());
         GPAccountProject accountProject = null;
-        if (projectID == null) {
-            accountProject = geoPlatformServiceClient.getDefaultAccountProject(
-                    account.getId());
+        if (projectID == null) {accountProject = geoPlatformServiceClient.getDefaultAccountProject(account.getId());
         } else {
             accountProject = geoPlatformServiceClient.getAccountProjectByAccountAndProjectIDs(account.getId(), projectID);
         }
@@ -266,30 +287,33 @@ public class SecurityService implements ISecurityService {
         return userDetail;
     }
 
+    /**
+     * @param appID
+     * @param httpServletRequest
+     * @return {@link IGPAccountDetail}
+     * @throws GeoPlatformException
+     */
     @Override
     public IGPAccountDetail applicationLogin(String appID, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPApplication application;
         try {
             application = geoPlatformServiceClient.getApplication(appID);
-            return this.executeLoginOnGPAccount(application,
-                    geoPlatformServiceClient.getApplicationPermission(application.getAppID()), null, httpServletRequest);
+            return this.executeLoginOnGPAccount(application, geoPlatformServiceClient.getApplicationPermission(application.getAppID()), null, httpServletRequest);
         } catch (ResourceNotFoundFault ex) {
-            logger.error("SecurityService",
-                    "Unable to find application with appID: " + appID
-                            + " Error: " + ex);
-            throw new GeoPlatformException(
-                    "Unable to find application with appID: "
-                            + appID);
+            logger.error("SecurityService. Unable to find application with appID: : {} - Error : {}\n", appID, ex.getMessage());
+            throw new GeoPlatformException("Unable to find application with appID: " + appID);
         } catch (AccountLoginFault ex) {
             logger.error("Error on SecurityService: " + ex);
-            throw new GeoPlatformException(
-                    ex.getMessage() + ", contact the administrator");
+            throw new GeoPlatformException(ex.getMessage() + ", contact the administrator");
         }
     }
 
-    public GPAccount loginFromSessionServer(
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException {
+    /**
+     * @param httpServletRequest
+     * @return {@link GPAccount
+     * @throws GeoPlatformException
+     */
+    public GPAccount loginFromSessionServer(HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPAccount account = null;
         try {
             account = this.sessionUtility.getLoggedAccount(httpServletRequest);
@@ -298,16 +322,13 @@ public class SecurityService implements ISecurityService {
         }
         return account;
     }
-//
-//    private void deleteUserFromSession(HttpServletRequest httpServletRequest) {
-//        HttpSession session = httpServletRequest.getSession();
-//        session.removeAttribute(SessionProperty.LOGGED_ACCOUNT.toString());
-//    }
-//
 
+    /**
+     * @param httpServletRequest
+     * @throws GeoPlatformException
+     */
     @Override
-    public void invalidateSession(HttpServletRequest httpServletRequest)
-            throws GeoPlatformException {
+    public void invalidateSession(HttpServletRequest httpServletRequest) throws GeoPlatformException {
         //deleteUserFromSession(httpServletRequest);
         HttpSession session = httpServletRequest.getSession(false);
         if (session != null) {
@@ -315,19 +336,21 @@ public class SecurityService implements ISecurityService {
         }
     }
 
-    private Long saveDefaultProject(GPAccount account, GPProject project)
-            throws GeoPlatformException {
+    /**
+     * @param account
+     * @param project
+     * @return {@link Long}
+     * @throws GeoPlatformException
+     */
+    private Long saveDefaultProject(GPAccount account, GPProject project) throws GeoPlatformException {
         Long idProject = null;
         try {
-            idProject = this.geoPlatformServiceClient.saveProject(
-                    new SaveProjectRequest(account.getNaturalID(),
-                            project, Boolean.TRUE));
+            idProject = this.geoPlatformServiceClient.saveProject(new SaveProjectRequest(account.getNaturalID(), project, TRUE));
         } catch (ResourceNotFoundFault rnf) {
-            this.logger.error(
-                    "Failed to save project on SecurityService: " + rnf);
+            this.logger.error("Failed to save project on SecurityService: {}\n", rnf.getMessage());
             throw new GeoPlatformException(rnf);
         } catch (IllegalParameterFault ilg) {
-            logger.error("Error on SecurityService: " + ilg);
+            logger.error("Error on SecurityService: {}\n", ilg.getMessage());
             throw new GeoPlatformException("Parameter incorrect on saveProject");
         }
         return idProject;
@@ -337,8 +360,7 @@ public class SecurityService implements ISecurityService {
      * @param geoPlatformServiceClient the geoPlatformServiceClient to set
      */
     @Autowired
-    public void setGeoPlatformServiceClient(
-            @Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
+    public void setGeoPlatformServiceClient(@Qualifier("geoPlatformServiceClient") GeoPlatformService geoPlatformServiceClient) {
         this.geoPlatformServiceClient = geoPlatformServiceClient;
     }
 }

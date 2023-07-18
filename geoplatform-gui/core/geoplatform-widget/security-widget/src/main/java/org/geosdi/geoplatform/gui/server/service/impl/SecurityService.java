@@ -105,34 +105,23 @@ public class SecurityService implements ISecurityService {
     private UserService userService;
 
     @Override
-    public IGPAccountDetail userLogin(String username, String password, Long projectID,
-            HttpServletRequest httpServletRequest)
-            throws GeoPlatformException {
+    public IGPAccountDetail userLogin(String username, String password, Long projectID, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPUser user;
         try {
-            user = geoPlatformServiceClient.getUserDetailByUsernameAndPassword(
-                    username, password);
-            return this.executeLoginOnGPAccount(user,
-                    geoPlatformServiceClient.getAccountPermission(user.getId()),
-                    projectID, httpServletRequest);
+            user = geoPlatformServiceClient.getUserDetailByUsernameAndPassword(username, password);
+            return this.executeLoginOnGPAccount(user, geoPlatformServiceClient.getAccountPermission(user.getId()), projectID, httpServletRequest);
         } catch (ResourceNotFoundFault ex) {
-            logger.error("SecurityService",
-                    "Unable to find user with username or email: " + username
-                            + " Error: " + ex);
-            throw new GeoPlatformException(
-                    "Unable to find user with username or email: "
-                            + username);
+            logger.error("SecurityService", "Unable to find user with username or email: " + username + " Error: " + ex);
+            throw new GeoPlatformException("Unable to find user with username or email: " + username);
         } catch (SOAPFaultException ex) {
-            logger.error(
-                    "Error on SecurityService: " + ex + " password incorrect");
+            logger.error("Error on SecurityService: " + ex + " password incorrect");
             throw new GeoPlatformException("Password incorrect");
         } catch (IllegalParameterFault ex) {
             logger.error("Error on SecurityService: " + ex);
             throw new GeoPlatformException("Parameter incorrect");
         } catch (AccountLoginFault ex) {
             logger.error("Error on SecurityService: " + ex);
-            throw new GeoPlatformException(
-                    ex.getMessage() + ", contact the administrator");
+            throw new GeoPlatformException(ex.getMessage() + ", contact the administrator");
         }
     }
 

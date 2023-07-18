@@ -1,5 +1,5 @@
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -16,7 +16,6 @@
     <name>Geo-Platform :: == Security Module</name>
 
     <dependencies>
-
         <dependency>
             <groupId>org.gwtproject</groupId>
             <artifactId>gwt-servlet-jakarta</artifactId>
@@ -36,15 +35,11 @@
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>basic-widget</artifactId>
             <type>jar</type>
         </dependency>
-        
+
         <!-- CAS -->
         <dependency>
             <groupId>org.jasig.cas.client</groupId>
@@ -52,20 +47,19 @@
             <type>jar</type>
             <version>3.2.1</version>
         </dependency>
-        
+
         <!-- GWT-OL Resources -->
-        
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-api</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>user-widget</artifactId>
             <version>${project.version}</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-base-configurator</artifactId>
@@ -76,19 +70,26 @@
             <artifactId>geoplatform-api</artifactId>
             <classifier>sources</classifier>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-server-api</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-xmpp</artifactId>
             <version>${project.version}</version>
         </dependency>
-        
-        
+
+        <!-- =========================================================== -->
+        <!-- JAVAX SERVLET -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -116,17 +117,6 @@
                     <attach>true</attach>
                     <classifier>sources</classifier>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-<phase>verify</phase>
-<goals>
-    <goal>jar-no-fork</goal>
-</goals>
-
-                    </execution>
-                </executions>
-
             </plugin>
 
             <plugin>

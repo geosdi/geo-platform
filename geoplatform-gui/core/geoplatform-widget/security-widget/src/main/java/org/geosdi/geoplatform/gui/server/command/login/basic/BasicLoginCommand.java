@@ -62,10 +62,9 @@ public class BasicLoginCommand implements GPCommand<BasicLoginRequest, BasicLogi
 
     @Override
     public BasicLoginResponse execute(BasicLoginRequest request, HttpServletRequest httpServletRequest) {
-        logger.debug("##################### Executing {} Command", this.getClass().getSimpleName());
-
+        logger.debug("#####################Executing {} Command", this.getClass().getSimpleName());
         IGPAccountDetail accountDetail = this.securityService.userLogin(request.getUserName(), request.getPassword(), request.getProjectID(), httpServletRequest);
-        logger.debug("#################### Found {} ", accountDetail);
+        logger.debug("####################Found {} ", accountDetail);
         return new BasicLoginResponse(accountDetail);
     }
 }

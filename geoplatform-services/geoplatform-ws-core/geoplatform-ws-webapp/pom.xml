@@ -182,14 +182,6 @@
         </dependency>
 
         <!-- =============================================================== -->
-        <!-- JUnit -->
-        <!-- =============================================================== -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <!-- =============================================================== -->
         <!-- CXF -->
         <!-- =============================================================== -->
         <dependency>
@@ -278,6 +270,20 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-cxf-server-configurator</artifactId>
             <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-rt</artifactId>
+        </dependency>
+
+        <!-- =============================================================== -->
+        <!-- JUnit -->
+        <!-- =============================================================== -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

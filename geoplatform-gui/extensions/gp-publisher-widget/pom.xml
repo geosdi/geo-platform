@@ -14,19 +14,6 @@
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == Publisher Widget</name>
-
-    <repositories>
-        <repository>
-            <id>Archivia Apache</id>
-            <url>https://archiva-repository.apache.org/archiva/repository/snapshots/</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </repository>
-    </repositories>
  
     <dependencies>
         <dependency>

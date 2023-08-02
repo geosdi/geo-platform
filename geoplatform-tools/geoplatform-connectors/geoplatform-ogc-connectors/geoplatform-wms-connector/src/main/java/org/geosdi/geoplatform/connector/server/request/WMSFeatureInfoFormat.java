@@ -38,10 +38,14 @@ package org.geosdi.geoplatform.connector.server.request;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Optional;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 import static java.util.Arrays.stream;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -64,7 +68,8 @@ public enum WMSFeatureInfoFormat implements GPWMSFeatureInfoFormat {
     /**
      * @param theFormat
      */
-    WMSFeatureInfoFormat(String theFormat) {
+    WMSFeatureInfoFormat(@Nonnull(when = NEVER) String theFormat) {
+        checkArgument((theFormat != null) && !(theFormat.trim().isEmpty()), "The Parameter format must not be null or an empty string.");
         this.format = theFormat;
     }
 
@@ -90,10 +95,9 @@ public enum WMSFeatureInfoFormat implements GPWMSFeatureInfoFormat {
      * @return {@link WMSFeatureInfoFormat}
      */
     @JsonCreator
-    public static WMSFeatureInfoFormat forFormat(String format) {
+    public static WMSFeatureInfoFormat forFormat(@Nullable String format) {
         Optional<WMSFeatureInfoFormat> optional = stream(WMSFeatureInfoFormat.values())
-                .filter(v -> ((format != null) && !(format.trim().isEmpty()))
-                        ? v.format.equalsIgnoreCase(format) : FALSE)
+                .filter(v -> ((format != null) && !(format.trim().isEmpty())) ? v.format.equalsIgnoreCase(format) : FALSE)
                 .findFirst();
         return optional.orElse(null);
     }

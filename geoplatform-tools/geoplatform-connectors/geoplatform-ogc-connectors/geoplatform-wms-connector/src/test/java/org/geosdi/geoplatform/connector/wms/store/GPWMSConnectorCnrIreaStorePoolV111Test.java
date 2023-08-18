@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.wms.store;
 
-import org.apache.hc.core5.util.Timeout;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
 import org.geosdi.geoplatform.connector.server.v111.GPWMSDescribeLayerV111Request;
 import org.geosdi.geoplatform.connector.server.v111.GPWMSGetCapabilitiesV111Request;
@@ -51,6 +50,7 @@ import java.net.URL;
 
 import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.apache.hc.core5.util.Timeout.of;
 import static org.geosdi.geoplatform.connector.pool.builder.v111.WMSConnectorBuilderPoolV111.wmsConnectorBuilderPoolV111;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -72,10 +72,10 @@ public class GPWMSConnectorCnrIreaStorePoolV111Test {
                 .withServerUrl(new URL("https://insar.irea.cnr.it/geoserver/geonode/wms"))
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(20)
-                        .withConnectionTimeout(Timeout.of(5l, SECONDS))
-                        .withRequestConnectionTimeout(Timeout.of(5l, SECONDS))
-                        .withResponseConnectionTimeout(Timeout.of(3l, SECONDS))
-                        .withConnectionKeepAlive(Timeout.of(3l, MINUTES))
+                        .withConnectionTimeout(of(5l, SECONDS))
+                        .withRequestConnectionTimeout(of(5l, SECONDS))
+                        .withResponseConnectionTimeout(of(3l, SECONDS))
+                        .withConnectionKeepAlive(of(3l, MINUTES))
                         .withDefaultMaxPerRoute(10)
                         .withMaxRedirect(5)
                         .build())

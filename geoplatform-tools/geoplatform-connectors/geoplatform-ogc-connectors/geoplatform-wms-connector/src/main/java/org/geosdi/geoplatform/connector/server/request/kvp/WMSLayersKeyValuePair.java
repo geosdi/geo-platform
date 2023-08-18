@@ -58,7 +58,7 @@ public class WMSLayersKeyValuePair extends WMSGetMapBaseRequestKeyValuePair<Coll
 
     private static final long serialVersionUID = 4376314577324930255L;
     //
-    private Collection<String> layers;
+    private final Collection<String> layers;
 
     /**
      * @param theValue

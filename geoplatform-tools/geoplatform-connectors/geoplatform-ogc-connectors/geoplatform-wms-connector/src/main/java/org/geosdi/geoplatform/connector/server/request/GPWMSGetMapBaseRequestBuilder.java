@@ -42,7 +42,7 @@ import org.geosdi.geoplatform.connector.server.request.kvp.GPWMSRequestKeyValueP
 import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.LinkedHashSet;
-import java.util.Map;
+import java.util.Map.Entry;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
@@ -74,7 +74,7 @@ public class GPWMSGetMapBaseRequestBuilder extends GPWMSBaseKeyValuePairBuilder<
      */
     @Override
     protected GPWMSGetMapBaseRequest internalBuild() throws Exception {
-        Map<String, GPWMSRequestKeyValuePair> values = wmsRequestKvpReader.read(this.keyValuePair.get());
+        var values = wmsRequestKvpReader.read(this.keyValuePair.get());
         GPWMSRequestKeyValuePair<Collection<String>> layers = values.get(LAYERS.toKey());
         GPWMSRequestKeyValuePair<String> srs = values.getOrDefault(SRS.toKey(), values.get(CRS.toKey()));
         GPWMSRequestKeyValuePair<String> width = values.get(WIDTH.toKey());
@@ -88,7 +88,7 @@ public class GPWMSGetMapBaseRequestBuilder extends GPWMSBaseKeyValuePairBuilder<
         return new WMSGetMapBaseRequest(bbox.toValue(), layers.toValue(), srs.toValue(), width.toValue(), height.toValue(), values.entrySet()
                 .stream()
                 .filter(this::check)
-                .map(Map.Entry::getValue)
+                .map(Entry::getValue)
                 .collect(toCollection(LinkedHashSet::new)));
     }
 
@@ -96,7 +96,7 @@ public class GPWMSGetMapBaseRequestBuilder extends GPWMSBaseKeyValuePairBuilder<
      * @param theEntry
      * @return {@link Boolean}
      */
-    final Boolean check(@Nonnull(when = NEVER) Map.Entry<String, GPWMSRequestKeyValuePair> theEntry) {
+    final Boolean check(@Nonnull(when = NEVER) Entry<String, GPWMSRequestKeyValuePair> theEntry) {
         checkArgument(theEntry != null, "The Parameter entry must not be null.");
         switch ((theEntry.getKey() != null) ? theEntry.getKey() : "") {
             case "LAYERS":

@@ -1,0 +1,2689 @@
+<wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml" xmlns:geonode="https://geoportale.regione.lazio.it"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="0"
+                       timeStamp="2023-08-30T10:36:28.859Z"
+                       xsi:schemaLocation="https://geoportale.regione.lazio.it https://geoportale.regione.lazio.it/geoserver/geonode/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=geonode%3ACinema_teatri_25833 http://www.opengis.net/wfs https://geoportale.regione.lazio.it/geoserver/schemas/wfs/1.1.0/wfs.xsd">
+    <gml:featureMembers>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.1">
+            <geonode:fid>1</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>352774.16475563 4572624.78439098</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>59032</geonode:Comune>
+            <geonode:Provincia>59</geonode:Provincia>
+            <geonode:Nome>PILLI</geonode:Nome>
+            <geonode:tipo_sala>ARENA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>VIA PANTANELLE. 1</geonode:Indirizzo>
+            <geonode:Telefono>0771 727500</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>13.24169</geonode:Longitudin>
+            <geonode:Latitudine>41.29165</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.2">
+            <geonode:fid>2</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>248024.86280034 4656758.77035547</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58097</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>CORALLO</geonode:Nome>
+            <geonode:tipo_sala>ARENA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>VIA DEI NORMANNI</geonode:Indirizzo>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>11.956547</geonode:Longitudin>
+            <geonode:Latitudine>42.02252</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.3">
+            <geonode:fid>3</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>240538.15289232 4658469.63937112</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58097</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>LUCCIOLA</geonode:Nome>
+            <geonode:tipo_sala>ARENA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>VIA AURELIA. 311</geonode:Indirizzo>
+            <geonode:Telefono>3334644181</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>11.865492</geonode:Longitudin>
+            <geonode:Latitudine>42.035474</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.4">
+            <geonode:fid>4</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>317695.90447527 4647835.8747807</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58104</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>GIUSEPPETTI</geonode:Nome>
+            <geonode:tipo_sala>ARENA</geonode:tipo_sala>
+            <geonode:Posti>622</geonode:Posti>
+            <geonode:Indirizzo>VICOLO INVERSATA. 5</geonode:Indirizzo>
+            <geonode:Telefono>0774 335087</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.800114</geonode:Longitudin>
+            <geonode:Latitudine>41.961442</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.5">
+            <geonode:fid>5</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>272722.35675339 4670624.39189955</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58107</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>PALMA</geonode:Nome>
+            <geonode:tipo_sala>ARENA</geonode:tipo_sala>
+            <geonode:Posti>240</geonode:Posti>
+            <geonode:Indirizzo>VIALE GARIBALDI. 101</geonode:Indirizzo>
+            <geonode:Telefono>06 9999769</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.249115</geonode:Longitudin>
+            <geonode:Latitudine>42.154777</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.6">
+            <geonode:fid>6</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>380124.2654522 4563624.47668753</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>59009</geonode:Comune>
+            <geonode:Provincia>59</geonode:Provincia>
+            <geonode:Nome>ARISTON</geonode:Nome>
+            <geonode:tipo_sala>CINEMA-TEATRO</geonode:tipo_sala>
+            <geonode:Posti>648</geonode:Posti>
+            <geonode:Indirizzo>PIAZZA DELLA LIBERTA'. 19</geonode:Indirizzo>
+            <geonode:Telefono>0771 460214</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>13.5699909</geonode:Longitudin>
+            <geonode:Latitudine>41.2151275</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.7">
+            <geonode:fid>7</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>371412.00922536 4585203.78039429</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>59012</geonode:Comune>
+            <geonode:Provincia>59</geonode:Provincia>
+            <geonode:Nome>LILLA</geonode:Nome>
+            <geonode:tipo_sala>CINEMA-TEATRO</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>CORSO VITTORIO EMANUELE. 33</geonode:Indirizzo>
+            <geonode:Telefono>3403788222</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>13.4615336</geonode:Longitudin>
+            <geonode:Latitudine>41.4081012</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.8">
+            <geonode:fid>8</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>348092.29947851 4592850.24270088</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>59019</geonode:Comune>
+            <geonode:Provincia>59</geonode:Provincia>
+            <geonode:Nome>CINEMA TEATRO COMUNALE (EX REALI)</geonode:Nome>
+            <geonode:tipo_sala>CINEMA-TEATRO</geonode:tipo_sala>
+            <geonode:Posti>290</geonode:Posti>
+            <geonode:Indirizzo>VIA D. MARZI. 39</geonode:Indirizzo>
+            <geonode:Telefono>0773 903734</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>13.1807317</geonode:Longitudin>
+            <geonode:Latitudine>41.4728744</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.9">
+            <geonode:fid>9</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>292567.53349114 4692991.83900415</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>57035</geonode:Comune>
+            <geonode:Provincia>57</geonode:Provincia>
+            <geonode:Nome>MANLIO</geonode:Nome>
+            <geonode:tipo_sala>CINEMA-TEATRO</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>PIAZZA GARIBALDI. 1</geonode:Indirizzo>
+            <geonode:Telefono>744910336</geonode:Telefono>
+            <geonode:Note>IN ATTIVITA'</geonode:Note>
+            <geonode:Longitudin>12.481077</geonode:Longitudin>
+            <geonode:Latitudine>42.361536</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.10">
+            <geonode:fid>10</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>235183.10796891 4664869.07141661</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58032</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>BUONARROTI</geonode:Nome>
+            <geonode:tipo_sala>CINEMA-TEATRO</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>VIA BUONARROTI 13/B</geonode:Indirizzo>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>11.7980022</geonode:Longitudin>
+            <geonode:Latitudine>42.0912368</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.11">
+            <geonode:fid>11</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>315310.4459353 4659616.46387485</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58075</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>MULTISCREEN NUOVO TEATRO</geonode:Nome>
+            <geonode:tipo_sala>CINEMA-TEATRO</geonode:tipo_sala>
+            <geonode:Posti>368</geonode:Posti>
+            <geonode:Indirizzo>VIA ISONZO. 44</geonode:Indirizzo>
+            <geonode:Telefono>0774 637305</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.767643</geonode:Longitudin>
+            <geonode:Latitudine>42.06691</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.12">
+            <geonode:fid>12</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>293940.34009338 4644551.49426952</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>LUX</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>702</geonode:Posti>
+            <geonode:Indirizzo>VIA MASSACIUCCOLI. 31</geonode:Indirizzo>
+            <geonode:Telefono>06 86391361</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.5148469</geonode:Longitudin>
+            <geonode:Latitudine>41.9260398</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.13">
+            <geonode:fid>13</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>291293.92089989 4637574.29306974</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>PALLADIUM</geonode:Nome>
+            <geonode:tipo_sala>CINEMA-TEATRO</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>PIAZZA BARTOLOMEO ROMANO. 8</geonode:Indirizzo>
+            <geonode:Telefono>657067761</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.485425</geonode:Longitudin>
+            <geonode:Latitudine>41.862563</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.14">
+            <geonode:fid>14</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>331957.03061012 4639326.05230036</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58100</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>CAESAR</geonode:Nome>
+            <geonode:tipo_sala>CINEMA-TEATRO</geonode:tipo_sala>
+            <geonode:Posti>304</geonode:Posti>
+            <geonode:Indirizzo>VIA REMIGIO DE PAOLIS. 16</geonode:Indirizzo>
+            <geonode:Telefono>06 95479184</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.9745215</geonode:Longitudin>
+            <geonode:Latitudine>41.8880119</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.15">
+            <geonode:fid>15</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>243493.77188907 4737039.93838785</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>56001</geonode:Comune>
+            <geonode:Provincia>56</geonode:Provincia>
+            <geonode:Nome>CINEMA TEATRO BONI</geonode:Nome>
+            <geonode:tipo_sala>CINEMA-TEATRO</geonode:tipo_sala>
+            <geonode:Indirizzo>PIAZZA DELLA COSTITUENTE. 9</geonode:Indirizzo>
+            <geonode:Telefono>3384743391</geonode:Telefono>
+            <geonode:Note>NO PROGRAMMAZIONE</geonode:Note>
+            <geonode:Longitudin>11.8661619</geonode:Longitudin>
+            <geonode:Latitudine>42.743003</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.16">
+            <geonode:fid>16</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>362601.7915016 4611070.31620731</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>60038</geonode:Comune>
+            <geonode:Provincia>60</geonode:Provincia>
+            <geonode:Nome>NESTOR</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>889</geonode:Posti>
+            <geonode:Indirizzo>VIALE MAZZINI. 11</geonode:Indirizzo>
+            <geonode:Telefono>0775 251740</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>13.3502594</geonode:Longitudin>
+            <geonode:Latitudine>41.639538</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.17">
+            <geonode:fid>17</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>303693.69248693 4606335.46604072</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>59001</geonode:Comune>
+            <geonode:Provincia>59</geonode:Provincia>
+            <geonode:Nome>MULTIPLEX VILLAGE</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>1196</geonode:Posti>
+            <geonode:Indirizzo>SS PONTINA Km 45200</geonode:Indirizzo>
+            <geonode:Telefono>069 276833</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.64499</geonode:Longitudin>
+            <geonode:Latitudine>41.584604</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.18">
+            <geonode:fid>18</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>324955.88532752 4592660.75687918</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>59011</geonode:Comune>
+            <geonode:Provincia>59</geonode:Provincia>
+            <geonode:Nome>CORSO</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>920</geonode:Posti>
+            <geonode:Indirizzo>CORSO DELLA REPUBBLICA. 148</geonode:Indirizzo>
+            <geonode:Telefono>0773 693183</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.903868</geonode:Longitudin>
+            <geonode:Latitudine>41.466454</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.19">
+            <geonode:fid>19</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>325050.47842277 4592591.80915344</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>59011</geonode:Comune>
+            <geonode:Provincia>59</geonode:Provincia>
+            <geonode:Nome>GIACOMINI</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>911</geonode:Posti>
+            <geonode:Indirizzo>VIA UMBERTO I. 6</geonode:Indirizzo>
+            <geonode:Telefono>0773 662665</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.90502</geonode:Longitudin>
+            <geonode:Latitudine>41.465854</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.20">
+            <geonode:fid>20</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>323698.1000059 4591899.49485627</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>59011</geonode:Comune>
+            <geonode:Provincia>59</geonode:Provincia>
+            <geonode:Nome>OXER</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>953</geonode:Posti>
+            <geonode:Indirizzo>VIALE P. L. NEVI. 124</geonode:Indirizzo>
+            <geonode:Telefono>347 7137115</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.8890383</geonode:Longitudin>
+            <geonode:Latitudine>41.4593262</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.21">
+            <geonode:fid>21</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>325001.08442975 4592287.94461729</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>59011</geonode:Comune>
+            <geonode:Provincia>59</geonode:Provincia>
+            <geonode:Nome>SUPERCINEMA</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>842</geonode:Posti>
+            <geonode:Indirizzo>CORSO DELLA REPUBBLICA. 191</geonode:Indirizzo>
+            <geonode:Telefono>0773 694288</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.904517</geonode:Longitudin>
+            <geonode:Latitudine>41.463108</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.22">
+            <geonode:fid>22</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>334706.95160337 4573977.51383722</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>59024</geonode:Comune>
+            <geonode:Provincia>59</geonode:Provincia>
+            <geonode:Nome>AUGUSTUS</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>492</geonode:Posti>
+            <geonode:Indirizzo>PIAZZA DEL COMUNE. 10</geonode:Indirizzo>
+            <geonode:Telefono>0773 518570</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>13.025663</geonode:Longitudin>
+            <geonode:Latitudine>41.3003307</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.23">
+            <geonode:fid>23</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>353632.33755117 4572257.57894874</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>59032</geonode:Comune>
+            <geonode:Provincia>59</geonode:Provincia>
+            <geonode:Nome>RIO</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>482</geonode:Posti>
+            <geonode:Indirizzo>VIA DEL RIO. 19</geonode:Indirizzo>
+            <geonode:Telefono>0773 700653</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>13.2520228</geonode:Longitudin>
+            <geonode:Latitudine>41.2884999</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.24">
+            <geonode:fid>24</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>323694.10547451 4696703.95656592</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>57059</geonode:Comune>
+            <geonode:Provincia>57</geonode:Provincia>
+            <geonode:Nome>TEATRO MODERNO</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>1132</geonode:Posti>
+            <geonode:Indirizzo>VIA CINTIA. 56</geonode:Indirizzo>
+            <geonode:Telefono>0746 297808</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.8576426</geonode:Longitudin>
+            <geonode:Latitudine>42.4026242</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.25">
+            <geonode:fid>25</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>301883.66678391 4591234.67323598</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58007</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>ASTORIA</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>409</geonode:Posti>
+            <geonode:Indirizzo>VIA GIACOMO MATTEOTTI. 8</geonode:Indirizzo>
+            <geonode:Telefono>06 9831587</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.628263</geonode:Longitudin>
+            <geonode:Latitudine>41.448255</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.26">
+            <geonode:fid>26</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>301301.25354602 4598575.35488084</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58007</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>LIDO</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>741</geonode:Posti>
+            <geonode:Indirizzo>VIA DELLE CINQUE MIGLIA Loc. PANDIGLIONE</geonode:Indirizzo>
+            <geonode:Telefono>06 8989825</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.618878</geonode:Longitudin>
+            <geonode:Latitudine>41.514175</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.27">
+            <geonode:fid>27</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>301782.40508226 4591099.50263557</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58007</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>MODERNO</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>918</geonode:Posti>
+            <geonode:Indirizzo>PIAZZA DELLA PACE. 11</geonode:Indirizzo>
+            <geonode:Telefono>06 9846141</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.6270961</geonode:Longitudin>
+            <geonode:Latitudine>41.4470135</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.28">
+            <geonode:fid>28</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>266485.00716504 4664811.01813981</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58013</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>VIRGILIO</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>753</geonode:Posti>
+            <geonode:Indirizzo>VIA NEGRETTI. 44</geonode:Indirizzo>
+            <geonode:Telefono>06 9987996</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.1760335</geonode:Longitudin>
+            <geonode:Latitudine>42.1006486</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.29">
+            <geonode:fid>29</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>334642.52524392 4620981.59284426</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58034</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>ARISTON</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>2165</geonode:Posti>
+            <geonode:Indirizzo>VIA CONSOLARE LATINA. 1</geonode:Indirizzo>
+            <geonode:Telefono>06 9701486</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>13.011985</geonode:Longitudin>
+            <geonode:Latitudine>41.72345</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.30">
+            <geonode:fid>30</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>301780.61522702 4668153.72155442</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58036</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>CINEFERONIA</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>2184</geonode:Posti>
+            <geonode:Indirizzo>VIA MILANO. 15</geonode:Indirizzo>
+            <geonode:Telefono>0765 451250</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.601345</geonode:Longitudin>
+            <geonode:Latitudine>42.140437</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.31">
+            <geonode:fid>31</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>275559.4402903 4630687.62487431</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58120</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>UCI PARCO LEONARDO</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>6030</geonode:Posti>
+            <geonode:Indirizzo>VIA PORTUENSE. 2000</geonode:Indirizzo>
+            <geonode:Telefono>899788678</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.298654</geonode:Longitudin>
+            <geonode:Latitudine>41.796299</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.32">
+            <geonode:fid>32</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>307097.01145498 4631038.81567701</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58039</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>POLITEAMA</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>838</geonode:Posti>
+            <geonode:Indirizzo>LARGO PANIZZA. 6</geonode:Indirizzo>
+            <geonode:Telefono>06 9420479</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.677798</geonode:Longitudin>
+            <geonode:Latitudine>41.807757</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.33">
+            <geonode:fid>33</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>307827.53988535 4620286.52560301</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58043</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>CYNTHIANUM</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>458</geonode:Posti>
+            <geonode:Indirizzo>VIA GIUSEPPE MAZZINI. 5</geonode:Indirizzo>
+            <geonode:Telefono>06 9364484</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.69006</geonode:Longitudin>
+            <geonode:Latitudine>41.711167</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.34">
+            <geonode:fid>34</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>307936.18489263 4619777.15471911</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58043</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>MODERNISSIMO</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>VIA CESARE BATTISTI 10/12?</geonode:Indirizzo>
+            <geonode:Telefono>06 9364993</geonode:Telefono>
+            <geonode:Note>NO PROGRAMMAZIONE</geonode:Note>
+            <geonode:Longitudin>12.691529</geonode:Longitudin>
+            <geonode:Latitudine>41.706609</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.35">
+            <geonode:fid>35</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>306304.19998622 4628751.61255869</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58046</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>ALFELLINI</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>471</geonode:Posti>
+            <geonode:Indirizzo>VIALE I MAGGIO. 82</geonode:Indirizzo>
+            <geonode:Telefono>06 9411664</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.669008</geonode:Longitudin>
+            <geonode:Latitudine>41.78698</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.36">
+            <geonode:fid>36</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>302844.66201723 4658342.37655716</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58065</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>NOVO MANCINI</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>320</geonode:Posti>
+            <geonode:Indirizzo>VIA G. MATTEOTTI. 55</geonode:Indirizzo>
+            <geonode:Telefono>06 9061888</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.617519</geonode:Longitudin>
+            <geonode:Latitudine>42.052416</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.37">
+            <geonode:fid>37</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>291699.45718311 4616775.72202009</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58079</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>LA GALLERIA</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>1880</geonode:Posti>
+            <geonode:Indirizzo>VIA DELLA MOTOMECCANICA. 4/d</geonode:Indirizzo>
+            <geonode:Telefono>06 9122893</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.497595</geonode:Longitudin>
+            <geonode:Latitudine>41.675516</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.38">
+            <geonode:fid>38</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>290139.9919391 4642417.9100617</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>ADRIANO</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>2382</geonode:Posti>
+            <geonode:Indirizzo>PIAZZA CAVOUR. 22</geonode:Indirizzo>
+            <geonode:Telefono>06 36004988</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.469815</geonode:Longitudin>
+            <geonode:Latitudine>41.905841</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.39">
+            <geonode:fid>39</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>286633.33887774 4641919.0082769</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>ALHAMBRA</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>557</geonode:Posti>
+            <geonode:Indirizzo>VIA PIER DELLE VIGNE. 4</geonode:Indirizzo>
+            <geonode:Telefono>06 66012154</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.427758</geonode:Longitudin>
+            <geonode:Latitudine>41.900413</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.40">
+            <geonode:fid>40</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>291683.93405897 4636256.96215432</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>AMBASSADE</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>644</geonode:Posti>
+            <geonode:Indirizzo>VIA ACCADEMIA DEGLI AGIATI. 57</geonode:Indirizzo>
+            <geonode:Telefono>06 5408901</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.4905834</geonode:Longitudin>
+            <geonode:Latitudine>41.8508121</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.41">
+            <geonode:fid>41</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>285904.6892707 4643326.15630924</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>ANDROMEDA</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>1168</geonode:Posti>
+            <geonode:Indirizzo>VIA MATTIA BATTISTINI. 195</geonode:Indirizzo>
+            <geonode:Telefono>06 6142649</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.418472</geonode:Longitudin>
+            <geonode:Latitudine>41.912877</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.42">
+            <geonode:fid>42</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>295675.99004271 4645886.41545448</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>ANTARES</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>502</geonode:Posti>
+            <geonode:Indirizzo>VIALE ADRIATICO. 15/21</geonode:Indirizzo>
+            <geonode:Telefono>06 8186655</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.535298</geonode:Longitudin>
+            <geonode:Latitudine>41.938503</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.43">
+            <geonode:fid>43</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>297118.66694577 4637216.72111092</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>ATLANTIC</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>1830</geonode:Posti>
+            <geonode:Indirizzo>VIA TUSCOLANA. 745</geonode:Indirizzo>
+            <geonode:Telefono>06 7610656</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.555664</geonode:Longitudin>
+            <geonode:Latitudine>41.86086</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.44">
+            <geonode:fid>44</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>291714.90460467 4642132.55330968</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>BARBERINI</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>1079</geonode:Posti>
+            <geonode:Indirizzo>PIAZZA BARBERINI. 24/26</geonode:Indirizzo>
+            <geonode:Telefono>06 4821082</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.488886</geonode:Longitudin>
+            <geonode:Latitudine>41.90369</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.45">
+            <geonode:fid>45</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>298006.59050434 4639586.37700444</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>BROADWAY</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>998</geonode:Posti>
+            <geonode:Indirizzo>VIA DEI NARCISI. 36</geonode:Indirizzo>
+            <geonode:Telefono>62303408</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.565543</geonode:Longitudin>
+            <geonode:Latitudine>41.882411</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.46">
+            <geonode:fid>46</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>288293.86953097 4648956.54958999</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>CIAK</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>564</geonode:Posti>
+            <geonode:Indirizzo>VIA CASSIA. 692</geonode:Indirizzo>
+            <geonode:Telefono>06 33251607</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.44523</geonode:Longitudin>
+            <geonode:Latitudine>41.964182</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.47">
+            <geonode:fid>47</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>274396.99141795 4625239.16365839</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>CINELAND</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>2681</geonode:Posti>
+            <geonode:Indirizzo>VIA DEI ROMAGNOLI. 715</geonode:Indirizzo>
+            <geonode:Telefono>06 561841</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.286746</geonode:Longitudin>
+            <geonode:Latitudine>41.74695</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.143">
+            <geonode:fid>143</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>238782.43881708 4717678.33866254</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>56053</geonode:Comune>
+            <geonode:Provincia>56</geonode:Provincia>
+            <geonode:Nome>COLOMBO</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>200</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>11.817586</geonode:Longitudin>
+            <geonode:Latitudine>42.567321</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.48">
+            <geonode:fid>48</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>288233.99724683 4649146.04979868</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>CINESTAR CASSIA</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>VIA VIBIO MARIANO. 20</geonode:Indirizzo>
+            <geonode:Telefono>06 33261019</geonode:Telefono>
+            <geonode:Note>NO PROGRAMMAZIONE</geonode:Note>
+            <geonode:Longitudin>12.44444</geonode:Longitudin>
+            <geonode:Latitudine>41.965871</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.49">
+            <geonode:fid>49</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>289784.14739315 4634424.80175521</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>EURCINE</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>902</geonode:Posti>
+            <geonode:Indirizzo>VIA LISZT. 32</geonode:Indirizzo>
+            <geonode:Telefono>06 45472089</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.46837</geonode:Longitudin>
+            <geonode:Latitudine>41.833824</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.50">
+            <geonode:fid>50</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>292028.18610031 4642298.53072243</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>FIAMMA</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>576</geonode:Posti>
+            <geonode:Indirizzo>VIA BISSOLATI. 47</geonode:Indirizzo>
+            <geonode:Telefono>06 4827100</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.492601</geonode:Longitudin>
+            <geonode:Latitudine>41.905266</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.51">
+            <geonode:fid>51</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>289641.9345778 4641398.50673909</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>FILMSTUDIO</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>162</geonode:Posti>
+            <geonode:Indirizzo>Via degli Orti D'Alibert. 1</geonode:Indirizzo>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>12.464179</geonode:Longitudin>
+            <geonode:Latitudine>41.896536</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.52">
+            <geonode:fid>52</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>285773.81494092 4644287.55172526</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>GALAXY</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>1450</geonode:Posti>
+            <geonode:Indirizzo>VIA P. MAFFI. 10</geonode:Indirizzo>
+            <geonode:Telefono>06 61662413</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.4165464</geonode:Longitudin>
+            <geonode:Latitudine>41.9214918</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.53">
+            <geonode:fid>53</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>289003.30311783 4642788.5162849</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>GIULIO CESARE</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>880</geonode:Posti>
+            <geonode:Indirizzo>VIALE GIULI CESARE. 259</geonode:Indirizzo>
+            <geonode:Telefono>06 39720877</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.455991</geonode:Longitudin>
+            <geonode:Latitudine>41.908873</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.54">
+            <geonode:fid>54</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>290410.72444108 4639405.0564162</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>GREENWICH</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>374</geonode:Posti>
+            <geonode:Indirizzo>VIA BODONI. 59</geonode:Indirizzo>
+            <geonode:Telefono>06 5745825</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.474145</geonode:Longitudin>
+            <geonode:Latitudine>41.878803</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.55">
+            <geonode:fid>55</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>289989.88348445 4640896.45024906</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>INTRASTEVERE</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>356</geonode:Posti>
+            <geonode:Indirizzo>VICOLO MORONI. 3a</geonode:Indirizzo>
+            <geonode:Telefono>06 5884230</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.468548</geonode:Longitudin>
+            <geonode:Latitudine>41.892111</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.56">
+            <geonode:fid>56</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>294563.0134525 4642603.80217893</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>JOLLY</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>815</geonode:Posti>
+            <geonode:Indirizzo>VIA G. DELLA BELLA</geonode:Indirizzo>
+            <geonode:Telefono>06 44232190</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.523028</geonode:Longitudin>
+            <geonode:Latitudine>41.908676</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.57">
+            <geonode:fid>57</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>293435.18840636 4644803.11857912</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>KING</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>488</geonode:Posti>
+            <geonode:Indirizzo>VIA FOGLIANO. 37</geonode:Indirizzo>
+            <geonode:Telefono>06 86206732</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.508672</geonode:Longitudin>
+            <geonode:Latitudine>41.928172</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.58">
+            <geonode:fid>58</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>293942.6224637 4644595.56977505</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>LUX</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>702</geonode:Posti>
+            <geonode:Indirizzo>VIA MASSACIUCCOLI. 31</geonode:Indirizzo>
+            <geonode:Telefono>06 86391361</geonode:Telefono>
+            <geonode:Note>GIA' INSERITO NELL'ELENCO CINEMA-TEATRO</geonode:Note>
+            <geonode:Longitudin>12.514859</geonode:Longitudin>
+            <geonode:Latitudine>41.926437</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.59">
+            <geonode:fid>59</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>290752.60626816 4636567.54639324</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>MADISON</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>810</geonode:Posti>
+            <geonode:Indirizzo>VIA CHIABRERA. 121</geonode:Indirizzo>
+            <geonode:Telefono>06 5417926</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.4792651</geonode:Longitudin>
+            <geonode:Latitudine>41.8533612</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.60">
+            <geonode:fid>60</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>294371.06220486 4638917.2475899</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>MAESTOSO</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>1080</geonode:Posti>
+            <geonode:Indirizzo>VIA APPIA NUOVA. 416</geonode:Indirizzo>
+            <geonode:Telefono>06 786086</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.521999</geonode:Longitudin>
+            <geonode:Latitudine>41.875453</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.61">
+            <geonode:fid>61</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>290741.43794746 4642791.82413521</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>METROPOLITAN</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>VIA DEL CORSO. 7</geonode:Indirizzo>
+            <geonode:Telefono>06 3200933</geonode:Telefono>
+            <geonode:Note>?</geonode:Note>
+            <geonode:Longitudin>12.476927</geonode:Longitudin>
+            <geonode:Latitudine>41.909365</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.62">
+            <geonode:fid>62</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>292523.91799019 4642999.08002107</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>MIGNON</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>426</geonode:Posti>
+            <geonode:Indirizzo>VIA VITERBO. 11</geonode:Indirizzo>
+            <geonode:Telefono>06 8559493</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.498326</geonode:Longitudin>
+            <geonode:Latitudine>41.9117</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.63">
+            <geonode:fid>63</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>288636.62749644 4637465.6250496</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>MISSOURI</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>VIA BOMBELLI. 25</geonode:Indirizzo>
+            <geonode:Telefono>06 55383193</geonode:Telefono>
+            <geonode:Note>MOZIONE PER LA RIQUALIFICAZIONE</geonode:Note>
+            <geonode:Longitudin>12.453478</geonode:Longitudin>
+            <geonode:Latitudine>41.86088</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.64">
+            <geonode:fid>64</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>288577.62765992 4642873.62350269</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>MULTISALA DORIA</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>467</geonode:Posti>
+            <geonode:Indirizzo>Via Andrea Doria. 52</geonode:Indirizzo>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>12.450833</geonode:Longitudin>
+            <geonode:Latitudine>41.909525</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.65">
+            <geonode:fid>65</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>290897.35565136 4642078.08540503</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>NUOVO OLIMPIA</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>357</geonode:Posti>
+            <geonode:Indirizzo>VIA IN LUCINA. 16g</geonode:Indirizzo>
+            <geonode:Telefono>06 6861068</geonode:Telefono>
+            <geonode:Note>nel nostro elenco viene forse denominato NUOVO OLIMPIA</geonode:Note>
+            <geonode:Longitudin>12.479058</geonode:Longitudin>
+            <geonode:Latitudine>41.902984</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.66">
+            <geonode:fid>66</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>289945.55114456 4647313.42640898</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>ODEON MULTISCREEN</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>537</geonode:Posti>
+            <geonode:Indirizzo>PIAZZAJACINI. 22</geonode:Indirizzo>
+            <geonode:Telefono>06 36307379</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.465729</geonode:Longitudin>
+            <geonode:Latitudine>41.949839</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.67">
+            <geonode:fid>67</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>283984.33491071 4642913.49949777</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>OVERLOOK</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>VIA GAE MAZZONI. 47</geonode:Indirizzo>
+            <geonode:Telefono/>
+            <geonode:Note>DISMESSO. ATTUALMENTE ADIBITO A SCOPO ABITATIVO</geonode:Note>
+            <geonode:Longitudin>12.3954907</geonode:Longitudin>
+            <geonode:Latitudine>41.9086414</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.68">
+            <geonode:fid>68</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>290151.0881693 4641107.07333908</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>PASQUINO</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>12.4704145</geonode:Longitudin>
+            <geonode:Latitudine>41.894049</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.69">
+            <geonode:fid>69</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>291952.24009652 4641862.107779</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>QUATTRO FONTANE</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>818</geonode:Posti>
+            <geonode:Indirizzo>VIA QUATTRO FONTANE. 23</geonode:Indirizzo>
+            <geonode:Telefono>06 4741515</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.49184</geonode:Longitudin>
+            <geonode:Latitudine>41.901319</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.70">
+            <geonode:fid>70</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>290449.1486385 4640605.40314781</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>REALE</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>1025</geonode:Posti>
+            <geonode:Indirizzo>PIAZZA SONNINO. 7</geonode:Indirizzo>
+            <geonode:Telefono>06 5810234</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.474182</geonode:Longitudin>
+            <geonode:Latitudine>41.889614</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.71">
+            <geonode:fid>71</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>291109.26376918 4644223.3151337</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>ROXY</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>VIA LUIGI LUCIANI. 52/a</geonode:Indirizzo>
+            <geonode:Telefono>06 36005606</geonode:Telefono>
+            <geonode:Note>SITO INTERNET E PROGRAMMAZIONE</geonode:Note>
+            <geonode:Longitudin>12.480851</geonode:Longitudin>
+            <geonode:Latitudine>41.922343</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.72">
+            <geonode:fid>72</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>293168.3837965 4640557.17067748</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>ROYAL</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>1001</geonode:Posti>
+            <geonode:Indirizzo>VIA E. FILIBERTO. 175</geonode:Indirizzo>
+            <geonode:Telefono>06 70474549</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.506945</geonode:Longitudin>
+            <geonode:Latitudine>41.889896</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.73">
+            <geonode:fid>73</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>292641.48362612 4642945.7511153</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>SAVOY</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>939</geonode:Posti>
+            <geonode:Indirizzo>VIA BERGAMO. 25</geonode:Indirizzo>
+            <geonode:Telefono>06 85300948</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.499761</geonode:Longitudin>
+            <geonode:Latitudine>41.911251</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.74">
+            <geonode:fid>74</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>289187.37594206 4642744.49145016</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>SCIPIONI lumiere</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>150</geonode:Posti>
+            <geonode:Indirizzo>Via degli Scipioni. 82</geonode:Indirizzo>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>12.458224</geonode:Longitudin>
+            <geonode:Latitudine>41.908526</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.75">
+            <geonode:fid>75</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>287881.82168061 4632840.89669712</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>STARDUST VILLAGE</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>1924</geonode:Posti>
+            <geonode:Indirizzo>VIA DI DECIMA. 72</geonode:Indirizzo>
+            <geonode:Telefono>06 52244119</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.446049</geonode:Longitudin>
+            <geonode:Latitudine>41.819065</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.76">
+            <geonode:fid>76</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>284499.20286357 4648464.60714535</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>STARPLEX</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>1756</geonode:Posti>
+            <geonode:Indirizzo>Via della Lucchina. 90</geonode:Indirizzo>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>12.399663</geonode:Longitudin>
+            <geonode:Latitudine>41.958728</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.77">
+            <geonode:fid>77</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>293885.94515043 4641340.38253341</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>TIBUR</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>319</geonode:Posti>
+            <geonode:Indirizzo>VIA DEGLI ETRUSCHI. 36</geonode:Indirizzo>
+            <geonode:Telefono>06 4957762</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.515313</geonode:Longitudin>
+            <geonode:Latitudine>41.897131</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.78">
+            <geonode:fid>78</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>294710.69692067 4638858.20266653</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>TRIANON</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>1125</geonode:Posti>
+            <geonode:Indirizzo>VIA M. SCEVOLA. 99</geonode:Indirizzo>
+            <geonode:Telefono>06 7858158</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.5261087</geonode:Longitudin>
+            <geonode:Latitudine>41.8750099</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.79">
+            <geonode:fid>79</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>297971.85347947 4643433.66364333</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>TRISTAR MULTIPLEX</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>VIA GROTTA DI GREGNA. 5</geonode:Indirizzo>
+            <geonode:Telefono>06 40801484</geonode:Telefono>
+            <geonode:Note>CHIUSO</geonode:Note>
+            <geonode:Longitudin>12.5638084</geonode:Longitudin>
+            <geonode:Latitudine>41.9170226</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.80">
+            <geonode:fid>80</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>306091.89386458 4643095.77205513</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>UCI CINEMAS ROMA EST</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>2500</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>12.661756</geonode:Longitudin>
+            <geonode:Latitudine>41.916017</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.81">
+            <geonode:fid>81</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>290395.95991825 4637952.82907053</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>UCI CINEMAS ROMA MARCONI</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>1126</geonode:Posti>
+            <geonode:Indirizzo>VIA E. FERMI. 161</geonode:Indirizzo>
+            <geonode:Telefono>06 892960</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.474482</geonode:Longitudin>
+            <geonode:Latitudine>41.8657318</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.82">
+            <geonode:fid>82</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>296274.96712955 4649524.95679987</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>UCI PORTA DI ROMA</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>2498</geonode:Posti>
+            <geonode:Indirizzo>VIA DELLE VIGNE NUOVE. snc</geonode:Indirizzo>
+            <geonode:Telefono>06 87074311</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.541258</geonode:Longitudin>
+            <geonode:Latitudine>41.971399</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.83">
+            <geonode:fid>83</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>316008.21141394 4617653.41378387</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58111</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>CENTRO POLIFUNZIONALE AUGUSTUS</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>859</geonode:Posti>
+            <geonode:Indirizzo>VIA FILIPPO TURATI. snc</geonode:Indirizzo>
+            <geonode:Telefono>696149082</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.789133</geonode:Longitudin>
+            <geonode:Latitudine>41.689402</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.84">
+            <geonode:fid>84</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>291078.81174533 4642464.05701366</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>56036</geonode:Comune>
+            <geonode:Provincia>56</geonode:Provincia>
+            <geonode:Nome>FLAVIA</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>350</geonode:Posti>
+            <geonode:Indirizzo>VIA DELLA CROCE. 1</geonode:Indirizzo>
+            <geonode:Telefono>0761 826611</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.481107</geonode:Longitudin>
+            <geonode:Latitudine>41.906505</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.85">
+            <geonode:fid>85</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>256459.21500316 4714812.79811563</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>56036</geonode:Comune>
+            <geonode:Provincia>56</geonode:Provincia>
+            <geonode:Nome>GALLERY</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>350</geonode:Posti>
+            <geonode:Indirizzo>VIA CARDINAL SALOTTI. snc</geonode:Indirizzo>
+            <geonode:Telefono>0761 824342</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.033873</geonode:Longitudin>
+            <geonode:Latitudine>42.547326</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.86">
+            <geonode:fid>86</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>232437.33793851 4682985.65269084</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>56050</geonode:Comune>
+            <geonode:Provincia>56</geonode:Provincia>
+            <geonode:Nome>ETRUSCO</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>552</geonode:Posti>
+            <geonode:Indirizzo>VIA DELLA CASERMA. 32</geonode:Indirizzo>
+            <geonode:Telefono>0766 856432</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>11.756532</geonode:Longitudin>
+            <geonode:Latitudine>42.25321</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.87">
+            <geonode:fid>87</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>267550.75221794 4702786.5452097</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>56060</geonode:Comune>
+            <geonode:Provincia>56</geonode:Provincia>
+            <geonode:Nome>TUSCIA VILLAGE</geonode:Nome>
+            <geonode:tipo_sala>MULTISALA</geonode:tipo_sala>
+            <geonode:Posti>1225</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>12.173674</geonode:Longitudin>
+            <geonode:Latitudine>42.442567</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.88">
+            <geonode:fid>88</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>362210.73424622 4620796.42962363</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>60003</geonode:Comune>
+            <geonode:Provincia>60</geonode:Provincia>
+            <geonode:Nome>POLITEAMA ITALIA</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>VIA ROMA. 35</geonode:Indirizzo>
+            <geonode:Telefono>0775 441159</geonode:Telefono>
+            <geonode:Note>NO PROGRAMMAZIONE</geonode:Note>
+            <geonode:Longitudin>13.3433206</geonode:Longitudin>
+            <geonode:Latitudine>41.7270386</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.89">
+            <geonode:fid>89</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>402337.04050086 4593774.28151591</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>60019</geonode:Comune>
+            <geonode:Provincia>60</geonode:Provincia>
+            <geonode:Nome>RAPIDO</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>360</geonode:Posti>
+            <geonode:Indirizzo>VIALE DANTE. 50</geonode:Indirizzo>
+            <geonode:Telefono>0776 621555</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>13.8300586</geonode:Longitudin>
+            <geonode:Latitudine>41.4896364</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.90">
+            <geonode:fid>90</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>361477.59296713 4603355.14106378</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>60024</geonode:Comune>
+            <geonode:Provincia>60</geonode:Provincia>
+            <geonode:Nome>ANTARES</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>PIAZZA MUNICIPIO</geonode:Indirizzo>
+            <geonode:Telefono>0775 6221</geonode:Telefono>
+            <geonode:Note>NO PROGRAMMAZIONE</geonode:Note>
+            <geonode:Longitudin>13.33855</geonode:Longitudin>
+            <geonode:Latitudine>41.56988</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.91">
+            <geonode:fid>91</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>376247.12914945 4600484.62835644</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>60025</geonode:Comune>
+            <geonode:Provincia>60</geonode:Provincia>
+            <geonode:Nome>SUPERCINEMA</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>354</geonode:Posti>
+            <geonode:Indirizzo>VIA CAMPIDOGLIO. 51</geonode:Indirizzo>
+            <geonode:Telefono>0775 914347</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>13.516228</geonode:Longitudin>
+            <geonode:Latitudine>41.546456</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.92">
+            <geonode:fid>92</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>376375.98696265 4610788.73251315</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>60044</geonode:Comune>
+            <geonode:Provincia>60</geonode:Provincia>
+            <geonode:Nome>CINEMA CIMELLO</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>PIAZZA GUGLIELMO MARCONI</geonode:Indirizzo>
+            <geonode:Telefono>0775 289502</geonode:Telefono>
+            <geonode:Note>NO PROGRAMMAZIONE</geonode:Note>
+            <geonode:Longitudin>13.515648</geonode:Longitudin>
+            <geonode:Latitudine>41.639257</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.93">
+            <geonode:fid>93</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>368918.46697993 4607958.38517783</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>60058</geonode:Comune>
+            <geonode:Provincia>60</geonode:Provincia>
+            <geonode:Nome>GASSMAN</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>PIAZZA MANARA. 1</geonode:Indirizzo>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>13.426757</geonode:Longitudin>
+            <geonode:Latitudine>41.612582</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.94">
+            <geonode:fid>94</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>384527.4901783 4619476.24252876</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>60074</geonode:Comune>
+            <geonode:Provincia>60</geonode:Provincia>
+            <geonode:Nome>SUPERCINEMA</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>250</geonode:Posti>
+            <geonode:Indirizzo>VIA SETTEMBRINI. 1</geonode:Indirizzo>
+            <geonode:Telefono>0776 832055</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>13.611814</geonode:Longitudin>
+            <geonode:Latitudine>41.718706</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.95">
+            <geonode:fid>95</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>368462.86697704 4579605.07542528</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>59007</geonode:Comune>
+            <geonode:Provincia>59</geonode:Provincia>
+            <geonode:Nome>SUPERCINEMA CASTELLO</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>500</geonode:Posti>
+            <geonode:Indirizzo>VIA GONZAGA. 22</geonode:Indirizzo>
+            <geonode:Telefono>0771 501284</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>13.427477</geonode:Longitudin>
+            <geonode:Latitudine>41.357212</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.96">
+            <geonode:fid>96</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>339812.2373262 4566442.04492543</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>59025</geonode:Comune>
+            <geonode:Provincia>59</geonode:Provincia>
+            <geonode:Nome>ANNA MAGNANI</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>90</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>13.08859</geonode:Longitudin>
+            <geonode:Latitudine>41.23352</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.97">
+            <geonode:fid>97</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>359533.71044397 4721128.20882664</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>57002</geonode:Comune>
+            <geonode:Provincia>57</geonode:Provincia>
+            <geonode:Nome>ex cinema ENAL</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>CORSO UMBERTO I</geonode:Indirizzo>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>13.286934</geonode:Longitudin>
+            <geonode:Latitudine>42.629798</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.98">
+            <geonode:fid>98</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>283463.4193487 4668399.69786995</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58015</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>SPLENDOR</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>VIA ROMA. 11</geonode:Indirizzo>
+            <geonode:Telefono>3391461587</geonode:Telefono>
+            <geonode:Note>NO PROGRAMMAZIONE</geonode:Note>
+            <geonode:Longitudin>12.379812</geonode:Longitudin>
+            <geonode:Latitudine>42.137804</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.99">
+            <geonode:fid>99</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>259985.92672713 4653681.27855578</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58029</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>MODERNO</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>170</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>12.102092</geonode:Longitudin>
+            <geonode:Latitudine>41.998576</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.100">
+            <geonode:fid>100</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>234877.40644559 4665095.07857539</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58032</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>ROYAL</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>360</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>11.794209</geonode:Longitudin>
+            <geonode:Latitudine>42.093166</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.101">
+            <geonode:fid>101</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>257840.31238926 4648252.20356146</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58116</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>LUCCIOLA</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>369</geonode:Posti>
+            <geonode:Indirizzo>PIAZZA MARTIN MARESCOTTI. 3/a</geonode:Indirizzo>
+            <geonode:Telefono>06 99222696</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.078453</geonode:Longitudin>
+            <geonode:Latitudine>41.949085</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.102">
+            <geonode:fid>102</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>262595.55289019 4668154.60546069</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58054</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>QUANTE STORIE</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>230</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>12.127695</geonode:Longitudin>
+            <geonode:Latitudine>42.129558</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.103">
+            <geonode:fid>103</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>294582.30163754 4643242.58253741</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>ACADEMY HALL</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note>TRASFORMATO IN SALA BINGO</geonode:Note>
+            <geonode:Longitudin>12.523038</geonode:Longitudin>
+            <geonode:Latitudine>41.914429</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.104">
+            <geonode:fid>104</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>293241.27146251 4644279.32201303</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>ADMIRAL</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>488</geonode:Posti>
+            <geonode:Indirizzo>PIAZZA VERBANO. 5</geonode:Indirizzo>
+            <geonode:Telefono>06 8541195</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.506519</geonode:Longitudin>
+            <geonode:Latitudine>41.923408</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.105">
+            <geonode:fid>105</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>290260.81213113 4640357.56491136</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>ALCAZAR</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>202</geonode:Posti>
+            <geonode:Indirizzo>VIA MERRY DEL VAL. 14</geonode:Indirizzo>
+            <geonode:Telefono>65880099</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.472002</geonode:Longitudin>
+            <geonode:Latitudine>41.887334</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.106">
+            <geonode:fid>106</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>292783.26047644 4642429.96116575</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>AMBASCIATORI</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>450</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>12.50165</geonode:Longitudin>
+            <geonode:Latitudine>41.906647</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.107">
+            <geonode:fid>107</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>293012.54228213 4641981.7530674</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>ARCHIMEDE</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note>TRASFORMATO IN HOTEL</geonode:Note>
+            <geonode:Longitudin>12.504569</geonode:Longitudin>
+            <geonode:Latitudine>41.902674</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.108">
+            <geonode:fid>108</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>294778.32208343 4640438.98170921</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>AVORIO</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note>CHIUSO</geonode:Note>
+            <geonode:Longitudin>12.526374</geonode:Longitudin>
+            <geonode:Latitudine>41.889252</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.109">
+            <geonode:fid>109</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>289912.90135765 4645225.02402023</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>CAPITOL</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note>TRASFORMATO IN SPAZIO POLIFUNZIONALE</geonode:Note>
+            <geonode:Longitudin>12.46608</geonode:Longitudin>
+            <geonode:Latitudine>41.931039</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.110">
+            <geonode:fid>110</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>292122.49561777 4643771.85070123</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>CARAVAGGIO</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>200</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>12.493218</geonode:Longitudin>
+            <geonode:Latitudine>41.918548</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.111">
+            <geonode:fid>111</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>289947.27552053 4642720.55547327</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>COLA DI RIENZO</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note>TRASFORMATO IN SALA BINGO</geonode:Note>
+            <geonode:Longitudin>12.467386</geonode:Longitudin>
+            <geonode:Latitudine>41.908513</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.112">
+            <geonode:fid>112</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>291674.48929545 4642971.7990718</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>DEI PICCOLI</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>63</geonode:Posti>
+            <geonode:Indirizzo>VIA DELLA PINETA. 15</geonode:Indirizzo>
+            <geonode:Telefono>06 8553485</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.488103</geonode:Longitudin>
+            <geonode:Latitudine>41.911231</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.113">
+            <geonode:fid>113</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>289302.01715209 4639834.54734177</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>DEL VASCELLO</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note>NO PROGRAMMAZIONE</geonode:Note>
+            <geonode:Longitudin>12.460643</geonode:Longitudin>
+            <geonode:Latitudine>41.882373</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.114">
+            <geonode:fid>114</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>294408.78171759 4642848.08163443</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>DELLE PROVINCIE</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>375</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>12.521085</geonode:Longitudin>
+            <geonode:Latitudine>41.910834</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.115">
+            <geonode:fid>115</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>290056.87147257 4642729.43220266</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>EDEN</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>366</geonode:Posti>
+            <geonode:Indirizzo>PIAZZA COLA DI RIENZO. 74/76</geonode:Indirizzo>
+            <geonode:Telefono>06 3612449</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.468703</geonode:Longitudin>
+            <geonode:Latitudine>41.908622</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.116">
+            <geonode:fid>116</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>291945.16229641 4644201.46057815</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>EMBASSY</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>856</geonode:Posti>
+            <geonode:Indirizzo>VIA STOPPANI. 7</geonode:Indirizzo>
+            <geonode:Telefono>06 8070245</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.49093</geonode:Longitudin>
+            <geonode:Latitudine>41.922367</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.117">
+            <geonode:fid>117</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>292614.18544433 4643813.94249308</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>EMPIRE</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>935</geonode:Posti>
+            <geonode:Indirizzo>VIALE REGINA MARGHERITA. 29</geonode:Indirizzo>
+            <geonode:Telefono>68417719</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.499127</geonode:Longitudin>
+            <geonode:Latitudine>41.919056</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.118">
+            <geonode:fid>118</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>292701.56057332 4642799.74835276</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>EUROPA</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>704</geonode:Posti>
+            <geonode:Indirizzo>CORSO D'ITALIA. 107</geonode:Indirizzo>
+            <geonode:Telefono>06 4429238</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.500536</geonode:Longitudin>
+            <geonode:Latitudine>41.909953</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.119">
+            <geonode:fid>119</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>290330.49820292 4641237.0344052</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>FARNESE</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>295</geonode:Posti>
+            <geonode:Indirizzo>PIAZZA CAMPO DE' FIORI. 56</geonode:Indirizzo>
+            <geonode:Telefono>06 6864395</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.472529</geonode:Longitudin>
+            <geonode:Latitudine>41.895266</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.120">
+            <geonode:fid>120</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>292896.26802736 4642855.30800746</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>GIOIELLO</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note>NO PROGRAMMAZIONE</geonode:Note>
+            <geonode:Longitudin>12.502862</geonode:Longitudin>
+            <geonode:Latitudine>41.910504</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.121">
+            <geonode:fid>121</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>287928.19616954 4641412.49896845</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>GREGORY</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>600</geonode:Posti>
+            <geonode:Indirizzo>VIA GREGORIO VII. 180</geonode:Indirizzo>
+            <geonode:Telefono>06 6380600</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.443535</geonode:Longitudin>
+            <geonode:Latitudine>41.896204</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.122">
+            <geonode:fid>122</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>292435.48867972 4643720.36129028</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>HOLIDAY</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>LARGO B. MARCELLO. 1</geonode:Indirizzo>
+            <geonode:Telefono>06 8548362</geonode:Telefono>
+            <geonode:Note>CHIUSO</geonode:Note>
+            <geonode:Longitudin>12.497007</geonode:Longitudin>
+            <geonode:Latitudine>41.918167</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.123">
+            <geonode:fid>123</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>294766.16182076 4640509.67807441</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>KINO</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>36</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>12.526203</geonode:Longitudin>
+            <geonode:Latitudine>41.889885</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.124">
+            <geonode:fid>124</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>289469.3112299 4641958.46127624</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>LUCKY BLU</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note>TRASFORMATO IN SUPERMERCATO</geonode:Note>
+            <geonode:Longitudin>12.4619004</geonode:Longitudin>
+            <geonode:Latitudine>41.9015285</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.125">
+            <geonode:fid>125</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>289859.06811662 4637803.86273848</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>MOULIN ROUGE</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>1080</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>12.468072</geonode:Longitudin>
+            <geonode:Latitudine>41.864249</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.126">
+            <geonode:fid>126</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>294718.03709932 4640597.30378487</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>NUOVO CINEMA AQUILA</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>321</geonode:Posti>
+            <geonode:Indirizzo>VIA AQUILA. 66/74</geonode:Indirizzo>
+            <geonode:Telefono>06 70614390</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.525593</geonode:Longitudin>
+            <geonode:Latitudine>41.890661</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.127">
+            <geonode:fid>127</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>290286.20496371 4640038.52581248</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>NUOVO SACHER</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>314</geonode:Posti>
+            <geonode:Indirizzo>VIA L. ASCIANGHI. 1</geonode:Indirizzo>
+            <geonode:Telefono>06 5818116</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.472421</geonode:Longitudin>
+            <geonode:Latitudine>41.88447</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.128">
+            <geonode:fid>128</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>289052.69239789 4643532.44570681</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>REWIND ROME</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>197</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>12.45632</geonode:Longitudin>
+            <geonode:Latitudine>41.91558</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.129">
+            <geonode:fid>129</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>290437.65423676 4640494.27339964</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>ROMA</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>349</geonode:Posti>
+            <geonode:Indirizzo>PIAZZA SONNINO. 37</geonode:Indirizzo>
+            <geonode:Telefono>06 5812884</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.474083</geonode:Longitudin>
+            <geonode:Latitudine>41.888611</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.130">
+            <geonode:fid>130</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>290234.47045045 4640097.84090305</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>SALA TROISI</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>491</geonode:Posti>
+            <geonode:Indirizzo>VIA G. INDUNO. 1</geonode:Indirizzo>
+            <geonode:Telefono>06 36005606</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.471777</geonode:Longitudin>
+            <geonode:Latitudine>41.88499</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.131">
+            <geonode:fid>131</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>291165.16643725 4641574.00039407</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>TIME ELEVATOR</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>481</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>12.482462</geonode:Longitudin>
+            <geonode:Latitudine>41.898519</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.132">
+            <geonode:fid>132</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>291314.45925853 4641780.7734386</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>TREVI CENTER (ex Sala Trevi)</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>12.484187</geonode:Longitudin>
+            <geonode:Latitudine>41.900419</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.133">
+            <geonode:fid>133</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>295644.70622789 4642521.17663436</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>ULISSE</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>382</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>12.536087</geonode:Longitudin>
+            <geonode:Latitudine>41.908213</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.134">
+            <geonode:fid>134</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>293923.30895575 4642864.47098435</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>58091</geonode:Comune>
+            <geonode:Provincia>58</geonode:Provincia>
+            <geonode:Nome>UNIVERSAL</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>12.515231</geonode:Longitudin>
+            <geonode:Latitudine>41.910855</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.135">
+            <geonode:fid>135</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>243435.50321158 4737227.49100738</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>56001</geonode:Comune>
+            <geonode:Provincia>56</geonode:Provincia>
+            <geonode:Nome>OLIMPYA</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>166</geonode:Posti>
+            <geonode:Indirizzo>VIA CANTORRIVO. 5</geonode:Indirizzo>
+            <geonode:Telefono>0763 730052</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>11.865366</geonode:Longitudin>
+            <geonode:Latitudine>42.74467</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.136">
+            <geonode:fid>136</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>261472.38904938 4723527.64578386</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>56003</geonode:Comune>
+            <geonode:Provincia>56</geonode:Provincia>
+            <geonode:Nome>ALBERTO SORDI</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>VIA G. MATTEOTTI. 2</geonode:Indirizzo>
+            <geonode:Telefono>0761 793555</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.091207</geonode:Longitudin>
+            <geonode:Latitudine>42.627272</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.137">
+            <geonode:fid>137</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>253044.5370605 4725807.03410846</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>56008</geonode:Comune>
+            <geonode:Provincia>56</geonode:Provincia>
+            <geonode:Nome>MODERNO</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>200</geonode:Posti>
+            <geonode:Indirizzo>VIA MARCONI. snc</geonode:Indirizzo>
+            <geonode:Telefono>0761 799186</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>11.9875776</geonode:Longitudin>
+            <geonode:Latitudine>42.6451167</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.138">
+            <geonode:fid>138</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>270679.52872503 4725713.24207373</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>56018</geonode:Comune>
+            <geonode:Provincia>56</geonode:Provincia>
+            <geonode:Nome>TEVERE</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>263</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>12.202472</geonode:Longitudin>
+            <geonode:Latitudine>42.649726</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.139">
+            <geonode:fid>139</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>272453.49747452 4699923.68003682</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>56021</geonode:Comune>
+            <geonode:Provincia>56</geonode:Provincia>
+            <geonode:Nome>FLORIDA</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>550</geonode:Posti>
+            <geonode:Indirizzo/>
+            <geonode:Telefono/>
+            <geonode:Note/>
+            <geonode:Longitudin>12.234351</geonode:Longitudin>
+            <geonode:Latitudine>42.418268</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.140">
+            <geonode:fid>140</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>247494.16641522 4713735.81026852</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>56034</geonode:Comune>
+            <geonode:Provincia>56</geonode:Provincia>
+            <geonode:Nome>ROMA</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>VIA NINO BIXIO. 3/5</geonode:Indirizzo>
+            <geonode:Telefono>0761 870587</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>11.925312</geonode:Longitudin>
+            <geonode:Latitudine>42.534764</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.141">
+            <geonode:fid>141</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>285109.52402361 4704223.21107688</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>56042</geonode:Comune>
+            <geonode:Provincia>56</geonode:Provincia>
+            <geonode:Nome>ALBERINI</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>270</geonode:Posti>
+            <geonode:Indirizzo>VIA DEL PLEBISCITO. 10</geonode:Indirizzo>
+            <geonode:Telefono>0761 403585</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.386407</geonode:Longitudin>
+            <geonode:Latitudine>42.460556</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.142">
+            <geonode:fid>142</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>272454.48077621 4699951.32850967</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>56048</geonode:Comune>
+            <geonode:Provincia>56</geonode:Provincia>
+            <geonode:Nome>FLORIDA</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>90</geonode:Posti>
+            <geonode:Indirizzo>PIAZZA MARCONI. 12</geonode:Indirizzo>
+            <geonode:Telefono>0761 759649</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.234352</geonode:Longitudin>
+            <geonode:Latitudine>42.418517</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.144">
+            <geonode:fid>144</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>281597.73633238 4699622.81644055</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>56055</geonode:Comune>
+            <geonode:Provincia>56</geonode:Provincia>
+            <geonode:Nome>ALBERTONE NAZIONALE</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>VIA SANTA MARIA. 15</geonode:Indirizzo>
+            <geonode:Telefono>0761 409985</geonode:Telefono>
+            <geonode:Note>NO PROGRAMMAZIONE</geonode:Note>
+            <geonode:Longitudin>12.345488</geonode:Longitudin>
+            <geonode:Latitudine>42.418188</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.145">
+            <geonode:fid>145</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>259566.94523683 4687913.28994232</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>56057</geonode:Comune>
+            <geonode:Provincia>56</geonode:Provincia>
+            <geonode:Nome>EXCELSIOR</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>370</geonode:Posti>
+            <geonode:Indirizzo>VIA CASSIA. 277</geonode:Indirizzo>
+            <geonode:Telefono>0761 483340</geonode:Telefono>
+            <geonode:Note>nel nostro elenco viene situato in localit? CURA DI VETRALLA</geonode:Note>
+            <geonode:Longitudin>12.082923</geonode:Longitudin>
+            <geonode:Latitudine>42.306358</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.146">
+            <geonode:fid>146</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>262814.91159325 4699607.47933037</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>56059</geonode:Comune>
+            <geonode:Provincia>56</geonode:Provincia>
+            <geonode:Nome>AZZURRO</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>900</geonode:Posti>
+            <geonode:Indirizzo>VIA CARLO CATTANEO. 44</geonode:Indirizzo>
+            <geonode:Telefono>0761 220019</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.117473</geonode:Longitudin>
+            <geonode:Latitudine>42.412539</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.147">
+            <geonode:fid>147</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>261948.63700147 4700234.66151685</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>56059</geonode:Comune>
+            <geonode:Provincia>56</geonode:Provincia>
+            <geonode:Nome>GENIO</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>901</geonode:Posti>
+            <geonode:Indirizzo>VIA TEATRO DEL GENIO. 16</geonode:Indirizzo>
+            <geonode:Telefono>0761 1343041</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.1066986</geonode:Longitudin>
+            <geonode:Latitudine>42.4179151</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.148">
+            <geonode:fid>148</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>262000.89169943 4700833.79155298</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>56059</geonode:Comune>
+            <geonode:Provincia>56</geonode:Provincia>
+            <geonode:Nome>LUX</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>290</geonode:Posti>
+            <geonode:Indirizzo>VIALE TRENTO. 1</geonode:Indirizzo>
+            <geonode:Telefono>0761 340848</geonode:Telefono>
+            <geonode:Note/>
+            <geonode:Longitudin>12.107085</geonode:Longitudin>
+            <geonode:Latitudine>42.42332</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+        <geonode:Cinema_teatri_25833 gml:id="Cinema_teatri_25833.149">
+            <geonode:fid>149</geonode:fid>
+            <geonode:the_geom>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#25833" srsDimension="2">
+                    <gml:pos>261782.1302526 4700518.05451416</gml:pos>
+                </gml:Point>
+            </geonode:the_geom>
+            <geonode:Comune>56059</geonode:Comune>
+            <geonode:Provincia>56</geonode:Provincia>
+            <geonode:Nome>METROPOLITAN</geonode:Nome>
+            <geonode:tipo_sala>SALA CINEMATOGRAFICA</geonode:tipo_sala>
+            <geonode:Posti>0</geonode:Posti>
+            <geonode:Indirizzo>VIA DEL PAVONE. 72</geonode:Indirizzo>
+            <geonode:Telefono>0761 343047</geonode:Telefono>
+            <geonode:Note>NO PROGRAMMAZIONE</geonode:Note>
+            <geonode:Longitudin>12.10456</geonode:Longitudin>
+            <geonode:Latitudine>42.420413</geonode:Latitudine>
+        </geonode:Cinema_teatri_25833>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

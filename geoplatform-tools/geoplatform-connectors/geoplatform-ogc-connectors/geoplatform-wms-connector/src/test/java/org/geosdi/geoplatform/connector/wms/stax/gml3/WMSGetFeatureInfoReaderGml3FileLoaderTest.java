@@ -78,7 +78,8 @@ public class WMSGetFeatureInfoReaderGml3FileLoaderTest extends WMSGetFeatureInfo
                 "rw8_arno_de_ott_mag.xml", "OlivetiCatastali.xml", "VignetiCatastali.xml", "EttariComune.xml",
                 "EventiIngv.xml", "Pluviometri.xml", "ArcoFerroviarioSicilia.xml", "EsitiAgibilitaFabbricati.xml",
                 "CarabinieriSicilia.xml", "SalineStoriche.xml", "CBLN_COMPRENSORIO.xml", "ETPI_AMBITO_TERRITORIALE.xml",
-                "ETPI_RIPOPOLAMENTO.xml");
+                "ETPI_RIPOPOLAMENTO.xml", "PPR06_Ambiti_di_paesaggio_Limiti_d'ambito.xml", "CinemaTeatri.xml",
+                "AcquePubbliche.xml");
     }
 
     /**

@@ -108,55 +108,39 @@ public interface GPWMSRequestKvpReader extends GPConnectorReader<GPWMSRequestKey
          * @return {@link GPWMSRequestKeyValuePair}
          */
         private GPWMSRequestKeyValuePair internalRead(String... theValues) {
-            return switch (theValues[0].toUpperCase()) {
-                case "SERVICE" -> theValues[1].equalsIgnoreCase("WMS") ? WMS_SERVICE_KEY_VALUE_PAIR : new WMSGetMapBaseRequestKeyValuePair<String>(theValues[0].toUpperCase()) {
+            switch (theValues[0].toUpperCase()) {
+                case "SERVICE":
+                    return WMS_SERVICE_KEY_VALUE_PAIR;
+                case "VERSION":
+                    return new WMSVersionKeyValuePair(theValues[1]);
+                case "REQUEST":
+                    return WMS_REQUEST_KEY_VALUE_PAIR;
+                case "LAYERS":
+                    return new WMSLayersKeyValuePair(theValues[1]);
+                case "SRS":
+                    return new WMSSrsKeyValuePair(theValues[1]);
+                case "CRS":
+                    return new WMSCrsKeyValuePair(theValues[1]);
+                case "WIDTH":
+                    return new WMSWidthKeyValuePair(theValues[1]);
+                case "HEIGHT":
+                    return new WMSHeightKeyValuePair(theValues[1]);
+                case "BBOX":
+                    return new WMSBoundingBoxKeyValuePair(theValues[1]);
+                case "STYLES":
+                    return new WMSStylesKeyValuePair(theValues[1]);
+                default:
+                    return new WMSGetMapBaseRequestKeyValuePair<String>(theValues[0].toUpperCase()) {
 
-                        /**
-                         * @return {@link String}
-                         */
                         @Override
                         public String toValue() {
-                            return ((theValues.length == 2) ? theValues[1] : stream(theValues)
-                                    .filter(Objects::nonNull)
-                                    .filter(v -> !(v.trim().isEmpty()))
-                                    .collect(joining(KVP_SEPARATOR.toKey())));
+                            return ((theValues.length == 2) ? theValues[1] :
+                                    stream(theValues)
+                                            .filter(Objects::nonNull).filter(v -> !(v.trim().isEmpty()))
+                                            .collect(joining(KVP_SEPARATOR.toKey())));
                         }
                     };
-                case "VERSION" -> new WMSVersionKeyValuePair(theValues[1]);
-                case "REQUEST" -> theValues[1].equalsIgnoreCase("GetMap") ? WMS_REQUEST_KEY_VALUE_PAIR : new WMSGetMapBaseRequestKeyValuePair<String>(theValues[0].toUpperCase()) {
-
-                    /**
-                     * @return {@link String}
-                     */
-                    @Override
-                    public String toValue() {
-                        return ((theValues.length == 2) ? theValues[1] : stream(theValues)
-                                .filter(Objects::nonNull)
-                                .filter(v -> !(v.trim().isEmpty()))
-                                .collect(joining(KVP_SEPARATOR.toKey())));
-                    }
-                };
-                case "LAYERS" -> new WMSLayersKeyValuePair(theValues[1]);
-                case "SRS" -> new WMSSrsKeyValuePair(theValues[1]);
-                case "CRS" -> new WMSCrsKeyValuePair(theValues[1]);
-                case "WIDTH" -> new WMSWidthKeyValuePair(theValues[1]);
-                case "HEIGHT" -> new WMSHeightKeyValuePair(theValues[1]);
-                case "BBOX" -> new WMSBoundingBoxKeyValuePair(theValues[1]);
-                case "STYLES" -> new WMSStylesKeyValuePair(theValues[1]);
-                default -> new WMSGetMapBaseRequestKeyValuePair<String>(theValues[0].toUpperCase()) {
-
-                    /**
-                     * @return {@link String}
-                     */
-                    @Override
-                    public String toValue() {
-                        return ((theValues.length == 2) ? theValues[1] : stream(theValues)
-                                .filter(Objects::nonNull)
-                                .filter(v -> !(v.trim().isEmpty()))
-                                .collect(joining(KVP_SEPARATOR.toKey())));
-                    }
-                };
-            };
+            }
         }
     }
 }

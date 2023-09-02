@@ -153,4 +153,22 @@ public class GPWMSGetFeatureInfoStaxGml3ReaderTest extends WMSGetFeatureInfoStax
         logger.info("#######################FEATURE_COLLECTION_ETPI_RIPOPOLAMENTO : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("ETPI_RIPOPOLAMENTO.xml"))));
     }
+
+    @Test
+    public void a_t_wmsGetFeatureInfoStaxGml3ReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_PPR06_AMBITI_DI_PAESAGGIO : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("PPR06_Ambiti_di_paesaggio_Limiti_d'ambito.xml"))));
+    }
+
+    @Test
+    public void a_u_wmsGetFeatureInfoStaxGml3ReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_CINEMA_TEATRI : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("CinemaTeatri.xml"))));
+    }
+
+    @Test
+    public void a_v_wmsGetFeatureInfoStaxGml3ReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_ACQUE_PUBBLICHE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("AcquePubbliche.xml"))));
+    }
 }

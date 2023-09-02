@@ -195,4 +195,31 @@ public class GPWMSFeatureStoreGml3Test extends WMSGetFeatureInfoStaxReaderGml3Te
         logger.info("#######################FEATURE_STORE_ETPI_RIPOPOLAMENTO : {}\n",  wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "ETPI_RIPOPOLAMENTO.json"), wmsFeatureStore);
     }
+
+    @Test
+    public void a_s_wmsFeatureStoreGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("PPR06_Ambiti_di_paesaggio_Limiti_d'ambito.xml"));
+        List<Feature> values = wmsFeatureStore.getFeaturesByKey("AMBITIPAESAGGIOSTAMPA");
+        assertTrue("For Key : AMBITIPAESAGGIOSTAMPA , store must contains a list of Features not null and with 50 features.", (values != null) && (values.size() == 50));
+        logger.info("#######################FEATURE_STORE_PPR06_AMBITI_DI_PAESAGGIO : {}\n",  wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "PPR06_Ambiti_di_paesaggio_Limiti_d'ambito.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void a_t_wmsFeatureStoreGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("CinemaTeatri.xml"));
+        List<Feature> values = wmsFeatureStore.getFeaturesByKey("Cinema_teatri_25833");
+        assertTrue("For Key : Cinema_teatri_25833 , store must contains a list of Features not null and with 149 features.", (values != null) && (values.size() == 149));
+        logger.info("#######################FEATURE_STORE_CINEMA_TEATRI : {}\n",  wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "CinemaTeatri.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void a_u_wmsFeatureStoreGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("AcquePubbliche.xml"));
+        List<Feature> values = wmsFeatureStore.getFeaturesByKey("acque_pubbliche0");
+        assertTrue("For Key : acque_pubbliche0 , store must contains a list of Features not null and with 2912 features.", (values != null) && (values.size() == 2912));
+        logger.debug("#######################FEATURE_STORE_ACQUE_PUBBLICHE : {}\n",  wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "acque_pubbliche0.json"), wmsFeatureStore);
+    }
 }

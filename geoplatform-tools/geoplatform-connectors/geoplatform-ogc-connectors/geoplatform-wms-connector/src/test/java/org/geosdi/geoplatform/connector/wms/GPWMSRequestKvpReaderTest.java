@@ -55,6 +55,8 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 public class GPWMSRequestKvpReaderTest {
 
     private static final Logger logger = LoggerFactory.getLogger(GPWMSRequestKvpReaderTest.class);
+    //
+    private static final GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
 
     @Test
     public void a_wmsRequestKvpReaderTest() throws Exception {
@@ -64,7 +66,6 @@ public class GPWMSRequestKvpReaderTest {
     @Test
     public void b_wmsRequestKvpReaderTest() throws Exception {
         String value = "http://150.145.141.180/geoserver/topp/wms?service=WMS&version=1.1.0&request=GetMap&layers=topp%3Atasmania_roads&bbox=145.19754%2C-43.423512%2C148.27298000000002%2C-40.852802&width=768&height=641&srs=EPSG%3A4326&format=application/openlayers";
-        GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
         var values = wmsRequestKvpReader.read(value);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@VALUES : {}\n", values);
     }
@@ -78,7 +79,6 @@ public class GPWMSRequestKvpReaderTest {
     @Test
     public void d_wmsRequestKvpReaderTest() throws Exception {
         String value = "https://www.geoportale.piemonte.it/visregpigo/?url=https:%2F%2Fgeomap.reteunitaria.piemonte.it%2Fws%2Faera%2Frp-01%2Faerawms%2Fwms_aera_limiti%3Fservice%3DWMS%26version%3D1.3%26request%3DgetCapabilities&type=wms&layer=&lang=en&title=&mdUrl=https:%2F%2Fwww.geoportale.piemonte.it%2Fgeonetwork%2Fsrv%2Fita%2Fcatalog.search%23%2Fmetadata%2Fr_piemon:bdc4262a-45b1-47eb-a128-30336d9fa654&mdUuid=r_piemon:bdc4262a-45b1-47eb-a128-30336d9fa654&mdId=18466";
-        GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
         var values = wmsRequestKvpReader.read(value);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@VALUES : {}\n", values);
     }
@@ -86,7 +86,6 @@ public class GPWMSRequestKvpReaderTest {
     @Test
     public void e_wmsRequestKvpReaderTest() throws Exception {
         String value = "https://www.youtube.com/watch?v=Dnnfy4yOTaw&list=RDMM&start_radio=1&rv=GOB7fS2YK0A";
-        GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
         var values = wmsRequestKvpReader.read(value);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@VALUES : {}\n", values);
     }
@@ -94,7 +93,6 @@ public class GPWMSRequestKvpReaderTest {
     @Test
     public void f_wmsRequestKvpReaderTest() throws Exception {
         String value = "https://radar.protezionecivile.it/#/pages/dashboard?update=e5799bd5-bebf-c581-d995-62cc00ef6469&zoom=6";
-        GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
         var values = wmsRequestKvpReader.read(value);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@VALUES : {}\n", values);
     }
@@ -104,7 +102,6 @@ public class GPWMSRequestKvpReaderTest {
         String value = "https://geoportale.regione.lazio.it/geoserver/geonode/ows?service=WFS&version=1.0.0" +
                 "&request=GetFeature&typeName=geonode:CBLN_Zona_operativa0" +
                 "&maxFeatures=1000000&outputFormat=text%2Fxml%3B+subtype%3Dgml%2F3.1.1;k=test;v=p";
-        GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
         var values = wmsRequestKvpReader.read(value);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@VALUES : {}\n", values);
     }
@@ -114,7 +111,6 @@ public class GPWMSRequestKvpReaderTest {
         String value = "https://geoportale.regione.lazio.it/geoserver/geonode/ows?service=WFS&version=1.0.0" +
                 "&request=GetFeature&typeName=geonode:CBLN_Zona_operativa0" +
                 "&maxFeatures=1000000&outputFormat=text%2Fxml%3B+subtype%3Dgml%2F3.1.1;k=test;v=p&p=val;s=type";
-        GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
         var values = wmsRequestKvpReader.read(value);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@VALUES : {}\n", values);
     }
@@ -124,7 +120,6 @@ public class GPWMSRequestKvpReaderTest {
         String value = "https://geoportale.regione.lazio.it/geoserver/geonode/ows?service=WFS&version=1.0.0" +
                 "&request=GetFeature&typeName=geonode:CBLN_Zona_operativa0;val=tot" +
                 "&maxFeatures=1000000&outputFormat=text%2Fxml%3B+subtype%3Dgml%2F3.1.1;k=test;v=p&p=val;s=type";
-        GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
         var values = wmsRequestKvpReader.read(value);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@VALUES : {}\n", values);
     }
@@ -132,7 +127,6 @@ public class GPWMSRequestKvpReaderTest {
     @Test
     public void l_wmsRequestKvpReaderTest() throws Exception {
         String value = "http://it.wikipedia.org/application/new_user/registration_form?nome=Mario&cognome=Rossi&ID_utente=M_Rossi.";
-        GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
         var values = wmsRequestKvpReader.read(value);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@VALUES : {}\n", values);
     }
@@ -140,7 +134,80 @@ public class GPWMSRequestKvpReaderTest {
     @Test
     public void m_wmsRequestKvpReaderTest() throws Exception {
         String value = "nome=Mario&cognome=Rossi&ID_utente=M_Rossi.";
-        GPWMSRequestKvpReader wmsRequestKvpReader = new WMSRequestKvpReader();
+        var values = wmsRequestKvpReader.read(value);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@VALUES : {}\n", values);
+    }
+
+    @Test
+    public void o_wmsRequestKvpReaderTest() throws Exception {
+        String value = "http://webgis.regione.sardegna.it/geoserver/ras/wms?service=WMS" +
+                "&version=1.1.0&request=GetMap&layers=ras%3AIDT_FV04G_QUADRO_UNIONE&bbox=1426638.0%2C4301311.0%2C1570229.0%2C4573602.5" +
+                "&width=404&height=768&srs=EPSG%3A3003&format=application/openlayers";
+        var values = wmsRequestKvpReader.read(value);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@VALUES : {}\n", values);
+    }
+
+    @Test
+    public void p_wmsRequestKvpReaderTest() throws Exception {
+        String value = "http://webgis.regione.sardegna.it/geoserver/ras/ows?service=WFS&version=1.0.0" +
+                "&request=GetFeature&typeName=ras%3AIDT_FV05G_CENTROIDI&maxFeatures=50&outputFormat=gml3";
+        var values = wmsRequestKvpReader.read(value);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@VALUES : {}\n", values);
+    }
+
+    @Test
+    public void q_wmsRequestKvpReaderTest() throws Exception {
+        String value = "http://webgis.regione.sardegna.it/geoserver/ras/wms?service=WMS&version=1.1.0" +
+                "&request=GetMap&layers=ras%3AIDT_SU22V_MONITORAGGIO_COMUNI_COSTIERI" +
+                "&bbox=1426638.0%2C4301311.0%2C1570229.0%2C4573602.5&width=404&height=768" +
+                "&srs=EPSG%3A3003&format=application/openlayers";
+        var values = wmsRequestKvpReader.read(value);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@VALUES : {}\n", values);
+    }
+
+    @Test
+    public void r_wmsRequestKvpReaderTest() throws Exception {
+        String value = "http://webgis.regione.sardegna.it/geoserver/ppr2006/ows?service=WFS&version=1.0.0" +
+                "&request=GetFeature&typeName=ppr2006%3AAMBITIPAESAGGIOSTAMPA&maxFeatures=50&outputFormat=gml3";
+        var values = wmsRequestKvpReader.read(value);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@VALUES : {}\n", values);
+    }
+
+    @Test
+    public void s_wmsRequestKvpReaderTest() throws Exception {
+        String value = "https://geoportale.regione.lazio.it/geoserver/geonode/wms?service=WMS&version=1.1.0&request=GetMap" +
+                "&layers=geonode%3AChirotteri_agg_2021&bbox=217933.15962398186%2C4535810.204905415%2C411932.0916890357%2C4747808.743869806" +
+                "&width=702&height=768&srs=EPSG%3A25833&styles=&format=application/openlayers";
+        var values = wmsRequestKvpReader.read(value);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@VALUES : {}\n", values);
+    }
+
+    @Test
+    public void t_wmsRequestKvpReaderTest() throws Exception {
+        String value = "https://geoportale.regione.lazio.it/geoserver/geonode/wms?service=WMS" +
+                "&version=1.1.0&request=GetMap&layers=geonode%3ACSK_DESC_CosmoSkyMed_Dettaglio_short" +
+                "&bbox=328185.8626041106%2C4603239.347786488%2C386167.7758694746%2C4641570.557980582" +
+                "&width=768&height=507&srs=EPSG%3A25833&styles=/kml?layers=geonode:CSK_DESC_CosmoSkyMed_Dettaglio_short";
+        var values = wmsRequestKvpReader.read(value);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@VALUES : {}\n", values);
+    }
+
+    @Test
+    public void u_wmsRequestKvpReaderTest() throws Exception {
+        String value = "https://geoportale.regione.lazio.it/geoserver/geonode/wms?service=WMS&version=1.1.0" +
+                "&request=GetMap&layers=geonode%3ACinema_teatri_25833" +
+                "&bbox=232437.33793851%2C4563624.47668753%2C402337.040500861%2C4737227.491007377" +
+                "&width=751&height=768&srs=EPSG%3A25833&styles=&format=application/openlayers";
+        var values = wmsRequestKvpReader.read(value);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@VALUES : {}\n", values);
+    }
+
+    @Test
+    public void v_wmsRequestKvpReaderTest() throws Exception {
+        String value = "https://geoportale.regione.lazio.it/geoserver/geonode/wms?service=WMS&version=1.1.0" +
+                "&request=GetMap&layers=geonode%3Aacque_pubbliche0" +
+                "&bbox=210758.76261226524%2C4564213.357974808%2C418146.2604014253%2C4747665.801421798" +
+                "&width=768&height=679&srs=EPSG%3A25833&styles=&format=application/openlayers";
         var values = wmsRequestKvpReader.read(value);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@VALUES : {}\n", values);
     }

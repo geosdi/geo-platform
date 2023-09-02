@@ -134,10 +134,9 @@ public interface GPWMSRequestKvpReader extends GPConnectorReader<GPWMSRequestKey
 
                         @Override
                         public String toValue() {
-                            return ((theValues.length == 2) ? theValues[1] :
-                                    stream(theValues)
-                                            .filter(Objects::nonNull).filter(v -> !(v.trim().isEmpty()))
-                                            .collect(joining(KVP_SEPARATOR.toKey())));
+                            return ((theValues.length == 2) ? theValues[1] : stream(theValues)
+                                    .filter(Objects::nonNull).filter(v -> !(v.trim().isEmpty()))
+                                    .collect(joining(KVP_SEPARATOR.toKey())));
                         }
                     };
             }

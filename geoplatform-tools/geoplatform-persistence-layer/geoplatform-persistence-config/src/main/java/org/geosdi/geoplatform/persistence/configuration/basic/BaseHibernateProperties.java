@@ -47,6 +47,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Properties;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -82,6 +83,9 @@ class BaseHibernateProperties implements PersistenceHibernateStrategy {
                 this.put("hibernate.hbm2ddl.auto", gpHibernateProperties.getHibHbm2ddlAuto());
                 this.put("hibernate.show_sql", gpHibernateProperties.isHibShowSql());
                 this.put("hibernate.generate_statistics", gpHibernateProperties.isHibGenerateStatistics());
+                this.put("hibernate.enhancer.enableAssociationManagement", FALSE);
+                this.put("hibernate.enhancer.enableDirtyTracking", FALSE);
+                this.put("hibernate.enhancer.enableLazyInitialization", FALSE);
                 if ((gpHibernateProperties.getHibDefaultSchema() != null) && !(gpHibernateProperties.getHibDefaultSchema().trim().isEmpty())) {
                     this.put("hibernate.default_schema", gpHibernateProperties.getHibDefaultSchema());
                 }

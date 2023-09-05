@@ -222,4 +222,13 @@ public class GPWMSFeatureStoreGml3Test extends WMSGetFeatureInfoStaxReaderGml3Te
         logger.debug("#######################FEATURE_STORE_ACQUE_PUBBLICHE : {}\n",  wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "acque_pubbliche0.json"), wmsFeatureStore);
     }
+
+    @Test
+    public void a_v_wmsFeatureStoreGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("cen_abi_a_polygon.xml"));
+        List<Feature> values = wmsFeatureStore.getFeaturesByKey("cen_abi_a_polygon");
+        assertTrue("For Key : cen_abi_a_polygon , store must contains a list of Features not null and with 100 features.", (values != null) && (values.size() == 100));
+        logger.info("#######################FEATURE_STORE_CEN_ABI_POLYGON : {}\n",  wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "cen_abi_a_polygon.json"), wmsFeatureStore);
+    }
 }

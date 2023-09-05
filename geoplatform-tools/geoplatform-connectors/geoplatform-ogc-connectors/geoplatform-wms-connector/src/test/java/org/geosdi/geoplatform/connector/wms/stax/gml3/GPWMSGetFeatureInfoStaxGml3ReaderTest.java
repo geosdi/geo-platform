@@ -171,4 +171,10 @@ public class GPWMSGetFeatureInfoStaxGml3ReaderTest extends WMSGetFeatureInfoStax
         logger.info("#######################FEATURE_COLLECTION_ACQUE_PUBBLICHE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("AcquePubbliche.xml"))));
     }
+
+    @Test
+    public void a_x_wmsGetFeatureInfoStaxGml3ReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_CEN_ABI_POLYGON : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("cen_abi_a_polygon.xml"))));
+    }
 }

@@ -177,4 +177,16 @@ public class GPWMSGetFeatureInfoStaxGml3ReaderTest extends WMSGetFeatureInfoStax
         logger.info("#######################FEATURE_COLLECTION_CEN_ABI_POLYGON : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("cen_abi_a_polygon.xml"))));
     }
+
+    @Test
+    public void b_a_wmsGetFeatureInfoStaxGml3ReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_AC0104021_PROVINCE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("Ac0104021_province.xml"))));
+    }
+
+    @Test
+    public void b_b_wmsGetFeatureInfoStaxGml3ReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_AC0104021_PROVINCE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("SpecchiAcqua.xml"))));
+    }
 }

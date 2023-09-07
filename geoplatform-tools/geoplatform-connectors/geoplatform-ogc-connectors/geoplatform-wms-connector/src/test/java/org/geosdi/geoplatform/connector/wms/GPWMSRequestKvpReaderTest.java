@@ -248,4 +248,31 @@ public class GPWMSRequestKvpReaderTest {
         var values = wmsRequestKvpReader.read(value);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@VALUES : {}\n", values);
     }
+
+    @Test
+    public void b_a_wmsRequestKvpReaderTest() throws Exception {
+        String value = "https://idt2.regione.veneto.it/idt/geo/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap" +
+                "&FORMAT=image%2Fpng&TRANSPARENT=true&LAYERS=rv%3Ac0104011_comuni&TILED=true&STYLES=&WIDTH=256" +
+                "&HEIGHT=256&SRS=EPSG%3A3003&BBOX=1727528.1547612585%2C5013084.221042814%2C1727604.5062221778%2C5013160.572503733";
+        var values = wmsRequestKvpReader.read(value);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@VALUES : {}\n", values);
+    }
+
+    @Test
+    public void b_b_wmsRequestKvpReaderTest() throws Exception {
+        String value = "http://serviziogc.regione.fvg.it/geoserver/ETP/wms?service=WMS&version=1.1.0&request=GetMap" +
+                "&layers=ETP%3AETPI_AMBITO_TERRITORIALE&bbox=293596.621109624%2C5048171.15646072%2C415718.058323389%2C5168475.99231138" +
+                "&width=768&height=756&srs=EPSG%3A6708&styles=&format=application/openlayers";
+        var values = wmsRequestKvpReader.read(value);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@VALUES : {}\n", values);
+    }
+
+    @Test
+    public void b_c_wmsRequestKvpReaderTest() throws Exception {
+        String value = "http://serviziogc.regione.fvg.it/geoserver/ETP/wms?service=WMS&version=1.1.0&request=GetMap" +
+                "&layers=ETP%3AETP_SPECCHI_ACQUA&bbox=296304.288054919%2C5114933.32027077%2C368010.394710425%2C5157654.22077153" +
+                "&width=768&height=457&srs=EPSG%3A6708&styles=&format=application/openlayers";
+        var values = wmsRequestKvpReader.read(value);
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@VALUES : {}\n", values);
+    }
 }

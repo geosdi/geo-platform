@@ -217,10 +217,10 @@ public class GPWMSFeatureStoreGml3Test extends WMSGetFeatureInfoStaxReaderGml3Te
     @Test
     public void a_u_wmsFeatureStoreGml3ReaderTest() throws Exception {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("AcquePubbliche.xml"));
-        List<Feature> values = wmsFeatureStore.getFeaturesByKey("acque_pubbliche0");
-        assertTrue("For Key : acque_pubbliche0 , store must contains a list of Features not null and with 2912 features.", (values != null) && (values.size() == 2912));
-        logger.debug("#######################FEATURE_STORE_ACQUE_PUBBLICHE : {}\n",  wmsFeatureStore);
-        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "acque_pubbliche0.json"), wmsFeatureStore);
+        List<Feature> values = wmsFeatureStore.getFeaturesByKey("SINS_4068_1460995_acque_cumxfrancigena1000");
+        assertTrue("For Key : SINS_4068_1460995_acque_cumxfrancigena1000 , store must contains a list of Features not null and with 312 features.", (values != null) && (values.size() == 312));
+        logger.info("#######################FEATURE_STORE_ACQUE_PUBBLICHE : {}\n",  wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "AcquePubbliche.json"), wmsFeatureStore);
     }
 
     @Test
@@ -230,5 +230,23 @@ public class GPWMSFeatureStoreGml3Test extends WMSGetFeatureInfoStaxReaderGml3Te
         assertTrue("For Key : cen_abi_a_polygon , store must contains a list of Features not null and with 100 features.", (values != null) && (values.size() == 100));
         logger.info("#######################FEATURE_STORE_CEN_ABI_POLYGON : {}\n",  wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "cen_abi_a_polygon.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void a_x_wmsFeatureStoreGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("Ac0104021_province.xml"));
+        List<Feature> values = wmsFeatureStore.getFeaturesByKey("c0104021_province");
+        assertTrue("For Key : Ac0104021_province , store must contains a list of Features not null and with 1 features.", (values != null) && (values.size() == 1));
+        logger.info("#######################FEATURE_STORE_AC0104021_PROVINCE : {}\n",  wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "Ac0104021_province.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void a_y_wmsFeatureStoreGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("SpecchiAcqua.xml"));
+        List<Feature> values = wmsFeatureStore.getFeaturesByKey("ETP_SPECCHI_ACQUA");
+        assertTrue("For Key : ETP_SPECCHI_ACQUA , store must contains a list of Features not null and with 10 features.", (values != null) && (values.size() == 10));
+        logger.info("#######################FEATURE_STORE_SPECCHI_ACQUA : {}\n",  wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "SpecchiAcqua.json"), wmsFeatureStore);
     }
 }

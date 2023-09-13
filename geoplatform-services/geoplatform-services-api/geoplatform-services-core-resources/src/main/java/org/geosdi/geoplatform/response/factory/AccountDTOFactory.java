@@ -45,10 +45,10 @@ import org.geosdi.geoplatform.response.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -68,7 +68,8 @@ public final class AccountDTOFactory {
         for (AccountDTOStrategy accountStrategy : AccountStrategyFinder.getValidStrategies(AccountDTOStrategy.class)) {
             parameters.put(accountStrategy.forClass(), accountStrategy);
         }
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@ShortAccountDTOFactory parameters map up with {} values.\n\n", parameters.size());
+        logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@ShortAccountDTOFactory parameters " + "map up with {} values.\n\n",
+                parameters.size());
     }
 
     AccountDTOFactory() {
@@ -89,11 +90,7 @@ public final class AccountDTOFactory {
      */
     public static List<ShortAccountDTO> buildShortAccountDecoratorDTOList(List<IGPUserAdapter> accounts) {
         checkNotNull(accounts, "The List of Accounts must not be null.");
-        return accounts
-                .stream()
-                .filter(Objects::nonNull)
-                .map(AccountDTOFactory::buildAccountDTO)
-                .collect(toList());
+        return accounts.stream().filter(Objects::nonNull).map(AccountDTOFactory::buildAccountDTO).collect(toList());
     }
 
     /**
@@ -113,20 +110,17 @@ public final class AccountDTOFactory {
     public static ShortAccountDTO buildAccountDTO(IGPUserAdapter theGpUserAdapter) {
         checkArgument(theGpUserAdapter != null, "The Parameter theGpUserAdapter must not be null");
         AccountDTOStrategy strategy = parameters.get(theGpUserAdapter.getUser().getClass());
-        return (strategy != null && strategy instanceof UserDTOStrategy) ? ((UserDTOStrategy) strategy).create(theGpUserAdapter) : null;
+        return (strategy != null && strategy instanceof UserDTOStrategy) ?
+                ((UserDTOStrategy) strategy).create(theGpUserAdapter) : null;
     }
 
-    /**
-     * @param users
-     * @return {@link List<UserDTO>}
-     */
+
     public static List<UserDTO> buildUserDTOList(List<GPUser> users) {
         checkNotNull(users, "The List of Accounts must not be null.");
-        return users.stream()
-                .filter(Objects::nonNull)
-                .map(AccountDTOFactory::buildAccountDTO)
-                .filter(v -> v instanceof UserDTO)
-                .map(v -> (UserDTO) v)
-                .collect(Collectors.toList());
+        List<UserDTO> usersDTO = new ArrayList<>(users.size());
+        for (GPUser gpUser : users) {
+            usersDTO.add((UserDTO) buildAccountDTO(gpUser));
+        }
+        return usersDTO;
     }
 }

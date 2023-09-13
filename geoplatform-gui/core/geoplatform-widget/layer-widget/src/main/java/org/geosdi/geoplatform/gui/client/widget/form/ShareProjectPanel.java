@@ -157,6 +157,7 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         lists.setHeight("" + GPProjectManagementWidget.COMPONENT_HEIGHT / 1.75);
         lists.setStyleAttribute("margin-left", "11px");
         lists.setHideLabel(Boolean.TRUE);
+
         ListField<GPSimpleUser> from = lists.getFromList();
         from.setDisplayField(GPSimpleUserKeyValue.NAME.toString());
         this.fromStore = new ListStore<GPSimpleUser>();
@@ -311,15 +312,13 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         this.toStore.removeAll();
     }
 
-    private StoreFilterField<GPSimpleUser> createServerFilter(
-            StoreFilterField<GPSimpleUser> storeFilterField,
+    private StoreFilterField<GPSimpleUser> createServerFilter(StoreFilterField<GPSimpleUser> storeFilterField,
             ListStore<GPSimpleUser> store, String filterLabel) {
         storeFilterField = new StoreFilterField<GPSimpleUser>() {
 
             @Override
-            protected boolean doSelect(Store<GPSimpleUser> store,
-                    GPSimpleUser parent,
-                    GPSimpleUser record, String property, String filter) {
+            protected boolean doSelect(Store<GPSimpleUser> store, GPSimpleUser parent, GPSimpleUser record,
+                    String property, String filter) {
                 String name = record.getName().toString().toLowerCase();
                 if (name.contains(filter.toLowerCase())) {
                     return Boolean.TRUE;
@@ -327,8 +326,7 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                 return Boolean.FALSE;
             }
         };
-        storeFilterField.setEmptyText(LayerModuleConstants.INSTANCE.
-                ShareProjectPanel_storeFilterEmptyText());
+        storeFilterField.setEmptyText(LayerModuleConstants.INSTANCE.ShareProjectPanel_storeFilterEmptyText());
         storeFilterField.bind(store);
         storeFilterField.setFieldLabel(filterLabel);
         return storeFilterField;
@@ -341,26 +339,24 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
 
         getUsersToShare.setProjectId(this.project.getId());
 
-        GPClientCommandExecutor.executeCommand(
-                new GPClientCommand<GetUsersToShareProjectResponse>() {
+        GPClientCommandExecutor.executeCommand(new GPClientCommand<GetUsersToShareProjectResponse>() {
 
-                    private static final long serialVersionUID = 8650649319305683871L;
+            private static final long serialVersionUID = 8650649319305683871L;
 
-                    {
-                        super.setCommandRequest(getUsersToShare);
-                    }
+            {
+                super.setCommandRequest(getUsersToShare);
+            }
 
-                    @Override
-                    public void onCommandSuccess(
-                            GetUsersToShareProjectResponse response) {
-                                fromStore.add(response.getResult());
-                    }
+            @Override
+            public void onCommandSuccess(GetUsersToShareProjectResponse response) {
+                fromStore.add(response.getResult());
+            }
 
-                    @Override
-                    public void onCommandFailure(Throwable exception) {
-                        System.out.println("Failled to load Organization Users to Share Project: " + exception);
-                    }
-                });
+            @Override
+            public void onCommandFailure(Throwable exception) {
+                System.out.println("Failled to load Organization Users to Share Project: " + exception);
+            }
+        });
 
         final AccountFromSharedProjectCommandRequest accountFromSharedProjectCommandRequest = GWT.<AccountFromSharedProjectCommandRequest>create(
                 AccountFromSharedProjectCommandRequest.class);
@@ -396,17 +392,14 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
     }
 
     private void updateLabels() {
-        IGPAccountDetail accountDetail = Registry.get(
-                UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-        this.projectNameLabel.setHtml(
-                PROJECT_NAME_LABEL + this.project.getName());
+        IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+        this.projectNameLabel.setHtml(PROJECT_NAME_LABEL + this.project.getName());
         if (project.getOwner() != null) {
             this.ownerLabel.setHtml(OWNER_LABEL + project.getOwner().getName());
         } else {
             this.ownerLabel.setHtml(OWNER_LABEL + accountDetail.getName());
         }
-        this.organizationLabel.setHtml(
-                ORGANIZATION_LABEL + accountDetail.getOrganization());
+        this.organizationLabel.setHtml(ORGANIZATION_LABEL + accountDetail.getOrganization());
     }
 
     @Override

@@ -438,11 +438,8 @@ public class GPProjectDelegate implements ProjectDelegate {
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
         List<GPAccountProject> accountProjectList = accountProjectDao.findByProjectID(projectID);
-        List<IGPUserAdapter> accountList = accountProjectList
-                .stream()
-                .filter(Objects::nonNull)
-                .map(account -> new GPUserAdapter(account.getAccount(), account.getPermissionMask()))
-                .collect(toList());
+        List<IGPUserAdapter> accountList = accountProjectList.stream().filter(Objects::nonNull)
+                .map(account -> new GPUserAdapter(account.getAccount(), account.getPermissionMask())).collect(toList());
         return new ShortAccountDTOContainer(buildShortAccountDecoratorDTOList(accountList));
     }
 

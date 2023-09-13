@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class GPSimpleUser extends GeoPlatformBeanModel implements IGPUserSimpleDetail {

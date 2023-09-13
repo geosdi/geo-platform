@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.core.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * @author giuseppe
@@ -46,7 +45,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 //@XmlRootElement(name = "GPUser")
 @Entity(name = "User")
 @DiscriminatorValue("GPUser")
-public class GPUser extends GPAccount implements UserDetails {
+public class GPUser extends GPAccount implements IGPUser {
 
     /**
      * serialVersionUID
@@ -161,8 +160,7 @@ public class GPUser extends GPAccount implements UserDetails {
      */
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(
-                " {");
+        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
         str.append(super.toString());
         str.append(", username=").append(username);
         str.append(", password=").append(password);

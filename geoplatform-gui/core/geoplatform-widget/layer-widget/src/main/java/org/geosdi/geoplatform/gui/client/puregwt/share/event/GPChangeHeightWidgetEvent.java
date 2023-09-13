@@ -33,24 +33,31 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.response.factory;
+package org.geosdi.geoplatform.gui.client.puregwt.share.event;
 
-import org.geosdi.geoplatform.core.model.IGPAccount;
-import org.geosdi.geoplatform.response.ShortAccountDTO;
+import com.google.gwt.event.shared.GwtEvent;
+import org.geosdi.geoplatform.gui.client.puregwt.share.IShareWidgetHandler;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
- * @param <T>
+ * @author Vito Salvia- CNR IMAA geoSDI Group
+ * @email vito.salvia@gmail.com
  */
-public interface AccountDTOStrategy<T extends IGPAccount> {
+public class GPChangeHeightWidgetEvent extends GwtEvent<IShareWidgetHandler> {
 
-    <D extends ShortAccountDTO> D create(T account);
+    private final int height;
 
-    Boolean isValid();
+    public GPChangeHeightWidgetEvent(int height) {
+        this.height = height;
+    }
 
-    Class<T> forClass();
+    @Override
+    public Type<IShareWidgetHandler> getAssociatedType() {
+        return IShareWidgetHandler.TYPE;
+    }
+
+    @Override
+    protected void dispatch(IShareWidgetHandler handler) {
+        handler.changeHeight(this.height);
+    }
 
 }

@@ -78,7 +78,7 @@ import java.util.List;
 @DiscriminatorColumn(name = "gp_account_type", discriminatorType = DiscriminatorType.STRING)
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "account")
 @Cacheable
-public abstract class GPAccount implements Serializable {
+public abstract class GPAccount implements IGPAccount {
 
     /**
      * serialVersionUID

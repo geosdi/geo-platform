@@ -38,6 +38,8 @@ package org.geosdi.geoplatform.response.factory;
 import com.google.common.collect.Maps;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPUser;
+import org.geosdi.geoplatform.core.model.IGPAccount;
+import org.geosdi.geoplatform.core.model.adapter.IGPUserAdapter;
 import org.geosdi.geoplatform.response.ShortAccountDTO;
 import org.geosdi.geoplatform.response.UserDTO;
 import org.slf4j.Logger;
@@ -46,8 +48,12 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Objects;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -80,6 +86,18 @@ public final class AccountDTOFactory {
             accountsDTO.add(buildAccountDTO(account));
         }
         return accountsDTO;
+    public static List<ShortAccountDTO> buildShortAccountDTOList(List<GPAccount> accounts) {
+        checkNotNull(accounts, "The List of Accounts must not be null.");
+        return accounts.stream().filter(Objects::nonNull).map(AccountDTOFactory::buildAccountDTO).collect(toList());
+    }
+
+    /**
+     * @param accounts
+     * @return {@link List<ShortAccountDTO>}
+     */
+    public static List<ShortAccountDTO> buildShortAccountDecoratorDTOList(List<IGPUserAdapter> accounts) {
+        checkNotNull(accounts, "The List of Accounts must not be null.");
+        return accounts.stream().filter(Objects::nonNull).map(AccountDTOFactory::buildAccountDTO).collect(toList());
     }
 
     /**
@@ -87,10 +105,22 @@ public final class AccountDTOFactory {
      * @param account
      * @return {@link GPAccount}
      */
-    public static <V extends GPAccount> ShortAccountDTO buildAccountDTO(V account) {
+    public static <V extends IGPAccount> ShortAccountDTO buildAccountDTO(V account) {
         AccountDTOStrategy strategy = parameters.get(account.getClass());
         return (strategy != null) ? strategy.create(account) : null;
     }
+
+    /**
+     * @param theGpUserAdapter
+     * @return
+     */
+    public static ShortAccountDTO buildAccountDTO(IGPUserAdapter theGpUserAdapter) {
+        checkArgument(theGpUserAdapter != null, "The Parameter theGpUserAdapter must not be null");
+        AccountDTOStrategy strategy = parameters.get(theGpUserAdapter.getUser().getClass());
+        return (strategy != null && strategy instanceof UserDTOStrategy) ?
+                ((UserDTOStrategy) strategy).create(theGpUserAdapter) : null;
+    }
+
 
     public static List<UserDTO> buildUserDTOList(List<GPUser> users) {
         checkNotNull(users, "The List of Accounts must not be null.");

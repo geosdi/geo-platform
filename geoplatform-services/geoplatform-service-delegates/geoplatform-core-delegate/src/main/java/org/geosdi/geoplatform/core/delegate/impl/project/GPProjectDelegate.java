@@ -41,6 +41,8 @@ import org.geosdi.geoplatform.core.delegate.api.project.ProjectDelegate;
 import org.geosdi.geoplatform.core.delegate.impl.project.function.GPFolderFunction;
 import org.geosdi.geoplatform.core.delegate.impl.project.function.GPLayerFunction;
 import org.geosdi.geoplatform.core.model.*;
+import org.geosdi.geoplatform.core.model.adapter.GPUserAdapter;
+import org.geosdi.geoplatform.core.model.adapter.IGPUserAdapter;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.PaginatedSearchRequest;
@@ -63,12 +65,14 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static java.lang.Boolean.TRUE;
+import static java.util.stream.Collectors.toList;
 import static org.geosdi.geoplatform.core.binding.IGPProjectBinder.GPProjectBinder.newGProjectBinder;
 import static org.geosdi.geoplatform.response.FolderDTO.convertToGPFolder;
+import static org.geosdi.geoplatform.response.ProjectDTO.convertToProjectDTOList;
 import static org.geosdi.geoplatform.response.RasterLayerDTO.convertToGPRasterLayer;
 import static org.geosdi.geoplatform.response.VectorLayerDTO.convertToGPVectorLayer;
 import static org.geosdi.geoplatform.response.factory.AccountDTOFactory.buildShortAccountDTOList;
-import static org.geosdi.geoplatform.response.ProjectDTO.convertToProjectDTOList;
+import static org.geosdi.geoplatform.response.factory.AccountDTOFactory.buildShortAccountDecoratorDTOList;
 
 /**
  * <p>Project service delegate.</p>
@@ -79,8 +83,7 @@ import static org.geosdi.geoplatform.response.ProjectDTO.convertToProjectDTOList
 @Component(value = "gpProjectDelegate")
 public class GPProjectDelegate implements ProjectDelegate {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            GPProjectDelegate.class);
+    private static final Logger logger = LoggerFactory.getLogger(GPProjectDelegate.class);
     //
     @Autowired
     private GPProjectDAO projectDao;
@@ -100,11 +103,9 @@ public class GPProjectDelegate implements ProjectDelegate {
     // === Project
     // ========================================================================= 
     @Override
-    public Long saveProject(SaveProjectRequest saveProjectRequest) throws
-            ResourceNotFoundFault, IllegalParameterFault {
+    public Long saveProject(SaveProjectRequest saveProjectRequest) throws ResourceNotFoundFault, IllegalParameterFault {
         if (saveProjectRequest == null) {
-            throw new IllegalParameterFault("The SaveProjetRequest must not "
-                    + "be null.");
+            throw new IllegalParameterFault("The SaveProjetRequest must not " + "be null.");
         }
         String accountNaturalID = saveProjectRequest.getAccountNaturalID();
         GPProject project = saveProjectRequest.getProject();
@@ -114,8 +115,7 @@ public class GPProjectDelegate implements ProjectDelegate {
 
         GPAccount account = accountDao.findByNaturalID(accountNaturalID);
         if (account == null) {
-            throw new ResourceNotFoundFault(
-                    "Account with naturalID \"" + accountNaturalID + "\" not found");
+            throw new ResourceNotFoundFault("Account with naturalID \"" + accountNaturalID + "\" not found");
         }
         EntityCorrectness.checkAccountLog(account); // TODO assert
 
@@ -127,8 +127,7 @@ public class GPProjectDelegate implements ProjectDelegate {
 
         // Reset default project
         if (defaultProject) {
-            GPAccountProject oldDefault = accountProjectDao.findDefaultProjectByAccountID(
-                    account.getId());
+            GPAccountProject oldDefault = accountProjectDao.findDefaultProjectByAccountID(account.getId());
             if (oldDefault != null) {
                 oldDefault.setDefaultProject(false);
                 accountProjectDao.update(oldDefault);
@@ -174,8 +173,7 @@ public class GPProjectDelegate implements ProjectDelegate {
     }
 
     @Override
-    public GPProject getProjectDetail(Long projectID) throws
-            ResourceNotFoundFault {
+    public GPProject getProjectDetail(Long projectID) throws ResourceNotFoundFault {
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
 
@@ -183,8 +181,7 @@ public class GPProjectDelegate implements ProjectDelegate {
     }
 
     @Override
-    public Integer getNumberOfElementsProject(Long projectID) throws
-            ResourceNotFoundFault {
+    public Integer getNumberOfElementsProject(Long projectID) throws ResourceNotFoundFault {
         GPProject project = this.getProjectDetail(projectID);
 
         return project.getNumberOfElements();
@@ -198,7 +195,8 @@ public class GPProjectDelegate implements ProjectDelegate {
     @Override
     public ShortProjectDTO getShortProject(Long projectID) throws ResourceNotFoundFault {
         GPProject project = this.getProjectDetail(projectID);
-        return new ShortProjectDTO(project.getVersion(), project.getNumberOfElements(), project.isInternalPublic(), project.isExternalPublic());
+        return new ShortProjectDTO(project.getVersion(), project.getNumberOfElements(), project.isInternalPublic(),
+                project.isExternalPublic());
     }
 
     @Override
@@ -210,8 +208,7 @@ public class GPProjectDelegate implements ProjectDelegate {
     }
 
     @Override
-    public Boolean setProjectOwner(RequestByAccountProjectIDs request) throws
-            ResourceNotFoundFault {
+    public Boolean setProjectOwner(RequestByAccountProjectIDs request) throws ResourceNotFoundFault {
         GPProject project = this.getProjectByID(request.getProjectID());
         EntityCorrectness.checkProjectLog(project); // TODO assert
 
@@ -219,21 +216,18 @@ public class GPProjectDelegate implements ProjectDelegate {
         EntityCorrectness.checkAccountLog(owner); // TODO assert
 
         // Reset the owner
-        GPAccountProject accountOwner = accountProjectDao.findOwnerByProjectID(
-                project.getId());
+        GPAccountProject accountOwner = accountProjectDao.findOwnerByProjectID(project.getId());
         EntityCorrectness.checkAccountProjectLog(accountOwner); // TODO assert
         accountOwner.setPermissionMask(BasePermission.READ.getMask());
         accountProjectDao.update(accountOwner);
 
         // Set the new owner
-        List<GPAccountProject> accounts = accountProjectDao.findNotOwnersByProjectID(
-                project.getId());
+        List<GPAccountProject> accounts = accountProjectDao.findNotOwnersByProjectID(project.getId());
         boolean exist = false;
         for (GPAccountProject accountProject : accounts) {
             EntityCorrectness.checkAccountProjectLog(accountProject); // TODO assert
             if (owner.equals(accountProject.getAccount())) {
-                accountProject.setPermissionMask(
-                        BasePermission.ADMINISTRATION.getMask());
+                accountProject.setPermissionMask(BasePermission.ADMINISTRATION.getMask());
                 exist = true;
                 break;
             }
@@ -243,16 +237,14 @@ public class GPProjectDelegate implements ProjectDelegate {
             GPAccountProject ownerProject = new GPAccountProject();
             ownerProject.setAccount(owner);
             ownerProject.setProject(project);
-            ownerProject.setPermissionMask(
-                    BasePermission.ADMINISTRATION.getMask());
+            ownerProject.setPermissionMask(BasePermission.ADMINISTRATION.getMask());
             accountProjectDao.persist(ownerProject);
         }
         return TRUE;
     }
 
     @Override
-    public GPAccountProject getProjectOwner(Long projectID) throws
-            ResourceNotFoundFault {
+    public GPAccountProject getProjectOwner(Long projectID) throws ResourceNotFoundFault {
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
         GPAccountProject accountOwner = accountProjectDao.findOwnerByProjectID(projectID);
@@ -261,13 +253,11 @@ public class GPProjectDelegate implements ProjectDelegate {
     }
 
     @Override
-    public GPProject getDefaultProject(Long accountID) throws
-            ResourceNotFoundFault {
+    public GPProject getDefaultProject(Long accountID) throws ResourceNotFoundFault {
         GPAccount account = this.getAccountByID(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
 
-        GPAccountProject defaultAccountProject = accountProjectDao.findDefaultProjectByAccountID(
-                accountID);
+        GPAccountProject defaultAccountProject = accountProjectDao.findDefaultProjectByAccountID(accountID);
         if (defaultAccountProject == null) {
             return null;
         }
@@ -277,16 +267,14 @@ public class GPProjectDelegate implements ProjectDelegate {
     }
 
     @Override
-    public ProjectDTO getDefaultProjectDTO(Long accountID) throws
-            ResourceNotFoundFault {
+    public ProjectDTO getDefaultProjectDTO(Long accountID) throws ResourceNotFoundFault {
         GPProject project = this.getDefaultProject(accountID);
         if (project == null) {
             return null;
         }
         ProjectDTO projectDTO;
         if (project.isShared()) {
-            GPAccountProject ownerProject = accountProjectDao.findOwnerByProjectID(
-                    project.getId());
+            GPAccountProject ownerProject = accountProjectDao.findOwnerByProjectID(project.getId());
             GPAccount owner = ownerProject.getAccount();
 
             projectDTO = new ProjectDTO(project, true, owner);
@@ -297,16 +285,14 @@ public class GPProjectDelegate implements ProjectDelegate {
     }
 
     @Override
-    public GPProject updateDefaultProject(Long accountID, Long projectID) throws
-            ResourceNotFoundFault {
+    public GPProject updateDefaultProject(Long accountID, Long projectID) throws ResourceNotFoundFault {
         GPAccount account = this.getAccountByID(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
 
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
 
-        GPAccountProject defaultAccountProject = accountProjectDao.forceAsDefaultProject(
-                accountID, projectID);
+        GPAccountProject defaultAccountProject = accountProjectDao.forceAsDefaultProject(accountID, projectID);
         if (defaultAccountProject == null) {
             return null;
         }
@@ -319,8 +305,7 @@ public class GPProjectDelegate implements ProjectDelegate {
     // === AccountProject
     // =========================================================================
     @Override
-    public Long insertAccountProject(GPAccountProject accountProject) throws
-            IllegalParameterFault {
+    public Long insertAccountProject(GPAccountProject accountProject) throws IllegalParameterFault {
         EntityCorrectness.checkAccountProject(accountProject);
 
         accountProjectDao.persist(accountProject);
@@ -328,8 +313,8 @@ public class GPProjectDelegate implements ProjectDelegate {
     }
 
     @Override
-    public Long updateAccountProject(GPAccountProject accountProject) throws
-            ResourceNotFoundFault, IllegalParameterFault {
+    public Long updateAccountProject(GPAccountProject accountProject)
+            throws ResourceNotFoundFault, IllegalParameterFault {
         EntityCorrectness.checkAccountProject(accountProject); // TODO assert
         accountProjectDao.update(accountProject);
 
@@ -337,53 +322,43 @@ public class GPProjectDelegate implements ProjectDelegate {
     }
 
     @Override
-    public Boolean deleteAccountProject(Long accountProjectID) throws
-            ResourceNotFoundFault {
-        GPAccountProject accountProject = this.getAccountProjectByID(
-                accountProjectID);
+    public Boolean deleteAccountProject(Long accountProjectID) throws ResourceNotFoundFault {
+        GPAccountProject accountProject = this.getAccountProjectByID(accountProjectID);
         EntityCorrectness.checkAccountProjectLog(accountProject); // TODO assert
 
         return accountProjectDao.removeById(accountProjectID);
     }
 
     @Override
-    public GPAccountProject getAccountProject(Long accountProjectID) throws
-            ResourceNotFoundFault {
-        GPAccountProject accountProject = this.getAccountProjectByID(
-                accountProjectID);
+    public GPAccountProject getAccountProject(Long accountProjectID) throws ResourceNotFoundFault {
+        GPAccountProject accountProject = this.getAccountProjectByID(accountProjectID);
         EntityCorrectness.checkAccountProjectLog(accountProject); // TODO assert
 
         return accountProject;
     }
 
     @Override
-    public WSGetAccountProjectsResponse getAccountProjectsByAccountID(
-            Long accountID) {
-        List<GPAccountProject> accountProjectsList = accountProjectDao.findByAccountID(
-                accountID);
+    public WSGetAccountProjectsResponse getAccountProjectsByAccountID(Long accountID) {
+        List<GPAccountProject> accountProjectsList = accountProjectDao.findByAccountID(accountID);
         EntityCorrectness.checkAccountProjectListLog(accountProjectsList); // TODO assert
         return new WSGetAccountProjectsResponse(accountProjectsList);
     }
 
     @Override
-    public WSGetAccountProjectsResponse getAccountProjectsByProjectID(
-            Long projectID) {
-        List<GPAccountProject> accountProjectsList = accountProjectDao.findByProjectID(
-                projectID);
+    public WSGetAccountProjectsResponse getAccountProjectsByProjectID(Long projectID) {
+        List<GPAccountProject> accountProjectsList = accountProjectDao.findByProjectID(projectID);
         EntityCorrectness.checkAccountProjectListLog(accountProjectsList); // TODO assert
 
         return new WSGetAccountProjectsResponse(accountProjectsList);
     }
 
     @Override
-    public GPAccountProject getAccountProjectByAccountAndProjectIDs(
-            Long accountID, Long projectID) throws ResourceNotFoundFault {
-        GPAccountProject accountProject = accountProjectDao.find(accountID,
-                projectID);
+    public GPAccountProject getAccountProjectByAccountAndProjectIDs(Long accountID, Long projectID)
+            throws ResourceNotFoundFault {
+        GPAccountProject accountProject = accountProjectDao.find(accountID, projectID);
         if (accountProject == null) {
             throw new ResourceNotFoundFault(
-                    "AccountProjects not found for with id:\"" + accountID
-                            + "\" and project with id:\"" + projectID + "\"");
+                    "AccountProjects not found for with id:\"" + accountID + "\" and project with id:\"" + projectID + "\"");
         }
         EntityCorrectness.checkAccountProjectLog(accountProject); // TODO assert
 
@@ -391,31 +366,29 @@ public class GPProjectDelegate implements ProjectDelegate {
     }
 
     @Override
-    public Long getAccountProjectsCount(Long accountID, SearchRequest request)
-            throws ResourceNotFoundFault {
+    public Long getAccountProjectsCount(Long accountID, SearchRequest request) throws ResourceNotFoundFault {
         GPAccount account = this.getAccountByID(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
-        return ((request != null) ? this.accountProjectDao.count(accountID, request.getNameLike()).longValue()
-                : this.accountProjectDao.count(accountID, null).longValue());
+        return ((request != null) ? this.accountProjectDao.count(accountID, request.getNameLike()).longValue() :
+                this.accountProjectDao.count(accountID, null).longValue());
     }
 
     @Override
-    public GPAccountProject getDefaultAccountProject(Long accountID) throws
-            ResourceNotFoundFault {
+    public GPAccountProject getDefaultAccountProject(Long accountID) throws ResourceNotFoundFault {
         GPAccount account = this.getAccountByID(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
         return accountProjectDao.findDefaultProjectByAccountID(accountID);
     }
 
     @Override
-    public List<ProjectDTO> searchAccountProjects(Long accountID,
-            PaginatedSearchRequest request) throws ResourceNotFoundFault {
+    public List<ProjectDTO> searchAccountProjects(Long accountID, PaginatedSearchRequest request)
+            throws ResourceNotFoundFault {
         GPAccount account = this.getAccountByID(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
         List<GPAccountProject> accountProjectList = ((request != null) ?
                 this.accountProjectDao.searchAccountProjectsByAccountID(request.getPage(), request.getNum(), accountID,
-                        request.getNameLike())
-                : this.accountProjectDao.searchAccountProjectsByAccountID(null, null, accountID, null));
+                        request.getNameLike()) :
+                this.accountProjectDao.searchAccountProjectsByAccountID(null, null, accountID, null));
         EntityCorrectness.checkAccountProjectListLog(accountProjectList); // TODO assert
         List<ProjectDTO> projectDTOList = new ArrayList<ProjectDTO>(accountProjectList.size());
         for (GPAccountProject accountProject : accountProjectList) {
@@ -434,7 +407,8 @@ public class GPProjectDelegate implements ProjectDelegate {
     }
 
     @Override
-    public Boolean saveAccountProjectProperties(AccountProjectPropertiesDTO accountProjectProperties) throws ResourceNotFoundFault, IllegalParameterFault {
+    public Boolean saveAccountProjectProperties(AccountProjectPropertiesDTO accountProjectProperties)
+            throws ResourceNotFoundFault, IllegalParameterFault {
         GPProject project = this.getProjectByID(accountProjectProperties.getProjectID());
         EntityCorrectness.checkProjectLog(project); // TODO assert
         String projectName = accountProjectProperties.getProjectName();
@@ -459,28 +433,23 @@ public class GPProjectDelegate implements ProjectDelegate {
     }
 
     @Override
-    public ShortAccountDTOContainer getAccountsByProjectID(Long projectID)
-            throws ResourceNotFoundFault {
+    public ShortAccountDTOContainer getAccountsByProjectID(Long projectID) throws ResourceNotFoundFault {
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
         List<GPAccountProject> accountProjectList = accountProjectDao.findByProjectID(projectID);
-        List<GPAccount> accountList = new ArrayList<>(accountProjectList.size());
-        for (GPAccountProject accountProject : accountProjectList) {
-            GPAccount account = accountProject.getAccount();
-            accountList.add(account);
-        }
-        return new ShortAccountDTOContainer(buildShortAccountDTOList(accountList));
+        List<IGPUserAdapter> accountList = accountProjectList.stream().filter(Objects::nonNull)
+                .map(account -> new GPUserAdapter(account.getAccount(), account.getPermissionMask())).collect(toList());
+        return new ShortAccountDTOContainer(buildShortAccountDecoratorDTOList(accountList));
     }
 
+    //TODO replacing with query to retrieve user
     @Override
-    public ShortAccountDTOContainer getAccountsToShareByProjectID(Long projectID)
-            throws ResourceNotFoundFault {
+    public ShortAccountDTOContainer getAccountsToShareByProjectID(Long projectID) throws ResourceNotFoundFault {
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
 
         // Retrieve info for obtain Accounts of shared Projects
-        List<GPAccountProject> accountProjects = accountProjectDao.findByProjectID(
-                projectID);
+        List<GPAccountProject> accountProjects = accountProjectDao.findByProjectID(projectID);
         EntityCorrectness.checkAccountProjectListLog(accountProjects); // TODO assert
 
         // Retrieve the Organization related to the shared Project
@@ -488,8 +457,7 @@ public class GPProjectDelegate implements ProjectDelegate {
         GPOrganization organization = accountProjects.get(0).getAccount().getOrganization();
 
         // Retrieve all Accounts of the Organization
-        List<GPAccount> accounts = accountDao.findByOrganization(
-                organization.getName());
+        List<GPAccount> accounts = accountDao.findByOrganization(organization.getName());
         EntityCorrectness.checkAccountListLog(accounts); // TODO assert
 
         // Retrieve the Accounts to share the Project
@@ -500,9 +468,8 @@ public class GPProjectDelegate implements ProjectDelegate {
     }
 
     @Override
-    public Boolean updateAccountsProjectSharing(
-            PutAccountsProjectRequest apRequest) throws ResourceNotFoundFault,
-            IllegalParameterFault {
+    public Boolean updateAccountsProjectSharing(PutAccountsProjectRequest apRequest)
+            throws ResourceNotFoundFault, IllegalParameterFault {
         if (apRequest == null) {
             throw new IllegalParameterFault("The PutAccountsProjectRequest must not be null.");
         }
@@ -530,10 +497,8 @@ public class GPProjectDelegate implements ProjectDelegate {
 
         logger.debug("\n*** Update all relations of sharing");
 
-        List<GPAccountProject> accountProjectList = accountProjectDao.findNotOwnersByProjectID(
-                projectID);
-        Map<Long, GPAccountProject> sharingMap = new HashMap<Long, GPAccountProject>(
-                accountProjectList.size());
+        List<GPAccountProject> accountProjectList = accountProjectDao.findNotOwnersByProjectID(projectID);
+        Map<Long, GPAccountProject> sharingMap = new HashMap<Long, GPAccountProject>(accountProjectList.size());
         for (GPAccountProject accountProject : accountProjectList) {
             sharingMap.put(accountProject.getAccount().getId(), accountProject);
         }
@@ -546,19 +511,15 @@ public class GPProjectDelegate implements ProjectDelegate {
 
                 GPAccountProject newAccountProject = new GPAccountProject();
                 newAccountProject.setAccountAndProject(newAccount, project);
-                newAccountProject.setPermissionMask(
-                        BasePermission.READ.getMask());
-                logger.trace(
-                        "\n*** Create a new relation of sharing for Account \"{}\"",
-                        newAccount.getNaturalID());
+                newAccountProject.setPermissionMask(BasePermission.READ.getMask());
+                logger.trace("\n*** Create a new relation of sharing for Account \"{}\"", newAccount.getNaturalID());
                 accountProjectDao.persist(newAccountProject);
             }
         }
 
         // Delete the remaining relations of sharing
         for (Map.Entry<Long, GPAccountProject> e : sharingMap.entrySet()) {
-            logger.trace(
-                    "\n*** Delete the relation of sharing for Account \"{}\"",
+            logger.trace("\n*** Delete the relation of sharing for Account \"{}\"",
                     e.getValue().getAccount().getNaturalID());
             accountProjectDao.removeById(e.getValue().getId());
         }
@@ -575,24 +536,21 @@ public class GPProjectDelegate implements ProjectDelegate {
     // =========================================================================
     // === Folder / Project
     @Override
-    public ProjectDTO getProjectWithRootFolders(Long projectID, Long accountID)
-            throws ResourceNotFoundFault {
+    public ProjectDTO getProjectWithRootFolders(Long projectID, Long accountID) throws ResourceNotFoundFault {
         ProjectDTO projectDTO = this.retrieveProjectDTO(projectID, accountID);
 
         // Root Folders
         List<GPFolder> rootFolders = folderDao.searchRootFolders(projectID);
         logger.debug("\n############################### rootFolders:\n{}", rootFolders);
 
-        List<FolderDTO> rootFoldersDTO = FolderDTO.convertToFolderDTOList(
-                rootFolders);
+        List<FolderDTO> rootFoldersDTO = FolderDTO.convertToFolderDTOList(rootFolders);
         projectDTO.setRootFolders(rootFoldersDTO);
 
         return projectDTO;
     }
 
     @Override
-    public ProjectDTO getProjectWithExpandedFolders(Long projectID,
-            Long accountID) throws ResourceNotFoundFault {
+    public ProjectDTO getProjectWithExpandedFolders(Long projectID, Long accountID) throws ResourceNotFoundFault {
         ProjectDTO projectDTO = this.retrieveProjectDTO(projectID, accountID);
 
         // Root Folders
@@ -617,8 +575,7 @@ public class GPProjectDelegate implements ProjectDelegate {
         List<GPFolder> rootFolders = folderDao.searchRootFolders(projectID);
         logger.debug("\n*** rootFolders:\n{}", rootFolders);
 
-        List<FolderDTO> rootFoldersDTO = FolderDTO.convertToFolderDTOList(
-                rootFolders);
+        List<FolderDTO> rootFoldersDTO = FolderDTO.convertToFolderDTOList(rootFolders);
         projectDTO.setRootFolders(rootFoldersDTO);
 
         Map<Long, FolderDTO> mapProjectFolders = new HashMap<Long, FolderDTO>();
@@ -629,24 +586,21 @@ public class GPProjectDelegate implements ProjectDelegate {
         // Sub Folders
         List<GPFolder> subFolders = folderDao.searchSubFoders(projectID);
 
-        Map<String, GPFolder> subFoldersMap = new HashMap<String, GPFolder>(
-                subFolders.size());
+        Map<String, GPFolder> subFoldersMap = new HashMap<String, GPFolder>(subFolders.size());
         for (GPFolder folder : subFolders) {
             String key = this.createParentChildKey(folder.getParent(), folder);
             logger.debug("\n*** key: {}\n*** subFolder ***\n{}", key, folder);
             subFoldersMap.put(key, folder);
         }
 
-        mapProjectFolders = this.fillProjectFolders(rootFoldersDTO,
-                subFoldersMap, mapProjectFolders);
+        mapProjectFolders = this.fillProjectFolders(rootFoldersDTO, subFoldersMap, mapProjectFolders);
 
         // Sub Layers
         List<GPLayer> subLayers = layerDao.searchLayersByProjectID(projectID);
         for (GPLayer layer : subLayers) {
             FolderDTO parent = mapProjectFolders.get(layer.getFolder().getId());
             if (parent == null) { // TODO assert: only for test purpose
-                throw new ResourceNotFoundFault("Parent folder not found",
-                        layer.getFolder().getId());
+                throw new ResourceNotFoundFault("Parent folder not found", layer.getFolder().getId());
             }
 
             ShortLayerDTO layerDTO;
@@ -665,21 +619,18 @@ public class GPProjectDelegate implements ProjectDelegate {
     public Long cloneProject(CloneProjectRequest cloneProjectRequest) throws Exception {
         GPAccount gpAccount = accountDao.find(cloneProjectRequest.getAccountID());
         if (gpAccount == null) {
-            throw new ResourceNotFoundFault(
-                    "Account not found for with id:\"" + cloneProjectRequest.getAccountID());
+            throw new ResourceNotFoundFault("Account not found for with id:\"" + cloneProjectRequest.getAccountID());
         }
         GPProject gpProject = projectDao.find(cloneProjectRequest.getGpProjectID());
         if (gpProject == null) {
-            throw new ResourceNotFoundFault(
-                    "Project not found for with id:\"" + cloneProjectRequest.getGpProjectID());
+            throw new ResourceNotFoundFault("Project not found for with id:\"" + cloneProjectRequest.getGpProjectID());
         }
         gpProject.setShared(false);
         try {
             // Root Folders
             List<GPFolder> rootFolders = folderDao.searchRootFolders(cloneProjectRequest.getGpProjectID());
             logger.debug("\n*** rootFolders:\n{}", rootFolders);
-            GPProject projectCloned = newGProjectBinder()
-                    .withNameProject(cloneProjectRequest.getNameProject())
+            GPProject projectCloned = newGProjectBinder().withNameProject(cloneProjectRequest.getNameProject())
                     .withFrom(gpProject).bind();
             GPAccountProject gpAccountProject = new GPAccountProject();
             gpAccountProject.setAccount(gpAccount);
@@ -695,16 +646,17 @@ public class GPProjectDelegate implements ProjectDelegate {
             List<GPFolder> subFolders = folderDao.searchSubFoders(cloneProjectRequest.getGpProjectID());
             Collections.sort(subFolders, Comparator.comparingInt(f -> f.getLevel()));
 
-            IntStream.iterate(0, n -> n + 1).limit(subFolders.size()).boxed().forEach(i ->
-            {
-                GPFolder folderCloned = new GPFolderFunction(projectCloned, folderDao, folderMap.get(subFolders.get(i).getParent().getId())).apply(subFolders.get(i));
+            IntStream.iterate(0, n -> n + 1).limit(subFolders.size()).boxed().forEach(i -> {
+                GPFolder folderCloned = new GPFolderFunction(projectCloned, folderDao,
+                        folderMap.get(subFolders.get(i).getParent().getId())).apply(subFolders.get(i));
                 folderMap.put(subFolders.get(i).getId(), folderCloned);
             });
 
             // Sub Layers
             List<GPLayer> subLayers = layerDao.searchLayersByProjectID(cloneProjectRequest.getGpProjectID());
             IntStream.iterate(0, n -> n + 1).limit(subLayers.size()).boxed().forEach(i -> {
-                new GPLayerFunction(projectCloned, layerDao, folderMap.get(subLayers.get(i).getFolder().getId())).apply(subLayers.get(i));
+                new GPLayerFunction(projectCloned, layerDao, folderMap.get(subLayers.get(i).getFolder().getId())).apply(
+                        subLayers.get(i));
             });
 
             return projectCloned.getId();
@@ -720,12 +672,13 @@ public class GPProjectDelegate implements ProjectDelegate {
      */
     @Override
     public ProjectDTOContainer findInternalPublicProjects(PaginatedSearchRequest request) throws Exception {
-        if(request == null) {
+        if (request == null) {
             throw new IllegalParameterFault("The Parameter PaginatedSearchRequest must not be null.");
         }
         logger.trace("#######################Called {}#findInternalPublicProjects with request : {}\n", this, request);
         int total = this.projectDao.getTotalInternalPublic();
-        return new ProjectDTOContainer(total > 0 ? convertToProjectDTOList(this.projectDao.findInternalPublic(request.getNum(), request.getPage())) :
+        return new ProjectDTOContainer(total > 0 ?
+                convertToProjectDTOList(this.projectDao.findInternalPublic(request.getNum(), request.getPage())) :
                 Lists.newArrayList(), total);
     }
 
@@ -736,20 +689,20 @@ public class GPProjectDelegate implements ProjectDelegate {
      */
     @Override
     public ProjectDTOContainer findExternalPublicProjects(PaginatedSearchRequest request) throws Exception {
-        if(request == null) {
+        if (request == null) {
             throw new IllegalParameterFault("The Parameter PaginatedSearchRequest must not be null.");
         }
         logger.trace("#######################Called {}#findExternalPublicProjects with request : {}\n", this, request);
         int total = this.projectDao.getTotalExternalPublic();
-        return new ProjectDTOContainer(total > 0 ? convertToProjectDTOList(this.projectDao.findExternalPublic(request.getNum(), request.getPage())) :
+        return new ProjectDTOContainer(total > 0 ?
+                convertToProjectDTOList(this.projectDao.findExternalPublic(request.getNum(), request.getPage())) :
                 Lists.newArrayList(), total);
     }
 
     @Override
     public Long importProject(ImportProjectRequest impRequest) throws Exception {
         if (impRequest == null) {
-            throw new IllegalParameterFault("The ImportProjectRequest must "
-                    + "not be null.");
+            throw new IllegalParameterFault("The ImportProjectRequest must " + "not be null.");
         }
         Long accountID = impRequest.getAccountID();
         ProjectDTO projectDTO = impRequest.getProjectDTO();
@@ -769,20 +722,16 @@ public class GPProjectDelegate implements ProjectDelegate {
         position = 0;
         for (int i = rootFolders.size() - 1; i >= 0; i--) {
             FolderDTO folderDTO = rootFolders.get(i);
-            GPFolder folder = convertToGPFolder(project, null,
-                    folderDTO);
+            GPFolder folder = convertToGPFolder(project, null, folderDTO);
 
             List<AbstractElementDTO> childs = folderDTO.getElementList();
-            int numberOfDescendants = this.persistElementList(project, folder,
-                    childs);
+            int numberOfDescendants = this.persistElementList(project, folder, childs);
 
-            logger.trace("\n\n*** Folder {} - Desc = {} ***\n\n",
-                    folder.getName(), numberOfDescendants);
+            logger.trace("\n\n*** Folder {} - Desc = {} ***\n\n", folder.getName(), numberOfDescendants);
             folder.setNumberOfDescendants(numberOfDescendants);
 
             folder.setPosition(++position);
-            logger.trace("*** Folder {} - pos = {}", folder.getName(),
-                    folder.getPosition());
+            logger.trace("*** Folder {} - pos = {}", folder.getName(), folder.getPosition());
 
             EntityCorrectness.checkFolder(folder); // TODO assert
             folderDao.persist(folder);
@@ -806,8 +755,7 @@ public class GPProjectDelegate implements ProjectDelegate {
     /**
      * **************************************************************************
      */
-    private GPProject getProjectByID(Long projectID) throws
-            ResourceNotFoundFault {
+    private GPProject getProjectByID(Long projectID) throws ResourceNotFoundFault {
         GPProject project = projectDao.find(projectID);
         if (project == null) {
             throw new ResourceNotFoundFault("Project not found", projectID);
@@ -815,8 +763,7 @@ public class GPProjectDelegate implements ProjectDelegate {
         return project;
     }
 
-    private GPAccount getAccountByID(Long accountID) throws
-            ResourceNotFoundFault {
+    private GPAccount getAccountByID(Long accountID) throws ResourceNotFoundFault {
         GPAccount account = accountDao.find(accountID);
         if (account == null) {
             throw new ResourceNotFoundFault("Account not found", accountID);
@@ -824,13 +771,10 @@ public class GPProjectDelegate implements ProjectDelegate {
         return account;
     }
 
-    private GPAccountProject getAccountProjectByID(Long accountProjectID)
-            throws ResourceNotFoundFault {
-        GPAccountProject accountProject = accountProjectDao.find(
-                accountProjectID);
+    private GPAccountProject getAccountProjectByID(Long accountProjectID) throws ResourceNotFoundFault {
+        GPAccountProject accountProject = accountProjectDao.find(accountProjectID);
         if (accountProject == null) {
-            throw new ResourceNotFoundFault("AccountProject not found",
-                    accountProjectID);
+            throw new ResourceNotFoundFault("AccountProject not found", accountProjectID);
         }
         return accountProject;
     }
@@ -839,15 +783,14 @@ public class GPProjectDelegate implements ProjectDelegate {
         return parent.getId() + ":" + child.getId();
     }
 
-    private Map<Long, FolderDTO> fillProjectFolders(List<FolderDTO> folders,
-            Map<String, GPFolder> mapRemaining, Map<Long, FolderDTO> mapAll) {
+    private Map<Long, FolderDTO> fillProjectFolders(List<FolderDTO> folders, Map<String, GPFolder> mapRemaining,
+            Map<Long, FolderDTO> mapAll) {
         logger.debug("\n*** fillFolderList - Map size: {}", mapRemaining.size());
         if (!mapRemaining.isEmpty()) {
             List<FolderDTO> childsDTO;
             for (FolderDTO folder : folders) {
                 logger.debug("\n*** fillFolderList - folder: {}", folder);
-                List<GPFolder> childs = this.getChilds(folder.getId(),
-                        mapRemaining);
+                List<GPFolder> childs = this.getChilds(folder.getId(), mapRemaining);
                 if (childs.size() > 0) {
                     childsDTO = FolderDTO.convertToFolderDTOList(childs);
                     folder.addFolders(childsDTO);
@@ -882,7 +825,8 @@ public class GPProjectDelegate implements ProjectDelegate {
         return childs;
     }
 
-    private int persistElementList(GPProject project, GPFolder parent, List<AbstractElementDTO> elementList) throws Exception {
+    private int persistElementList(GPProject project, GPFolder parent, List<AbstractElementDTO> elementList)
+            throws Exception {
         int numberOfDescendants = 0;
 
         for (int i = elementList.size() - 1; i >= 0; i--) {
@@ -894,8 +838,7 @@ public class GPProjectDelegate implements ProjectDelegate {
                 List<AbstractElementDTO> childs = folderDTO.getElementList();
                 int descendantsIth = this.persistElementList(project, folder, childs);
                 logger.trace("\n\n*** FOLDER\t{} ***\n\n", folder.getName());
-                logger.trace("\n\n*** Desc = {} + DescIth = {} ***\n",
-                        numberOfDescendants, descendantsIth);
+                logger.trace("\n\n*** Desc = {} + DescIth = {} ***\n", numberOfDescendants, descendantsIth);
                 folder.setNumberOfDescendants(descendantsIth);
                 folder.setPosition(++position);
                 logger.trace("*** DescIth {} - pos = {}", folder.getName(), folder.getPosition());
@@ -916,13 +859,11 @@ public class GPProjectDelegate implements ProjectDelegate {
                 numberOfDescendants++;
             }
         }
-        logger.trace("\n@@@ ELEMENT {}  ---  DESCENDANTS = {} @@@\n\n\n",
-                parent.getName(), numberOfDescendants);
+        logger.trace("\n@@@ ELEMENT {}  ---  DESCENDANTS = {} @@@\n\n\n", parent.getName(), numberOfDescendants);
         return numberOfDescendants;
     }
 
-    private void fillProjectExpandedFolders(Long projectID,
-            List<FolderDTO> folders) {
+    private void fillProjectExpandedFolders(Long projectID, List<FolderDTO> folders) {
         logger.debug("\n*** fillExpandedFolder - size: {}", folders.size());
 
         List<FolderDTO> childsDTO;
@@ -958,8 +899,7 @@ public class GPProjectDelegate implements ProjectDelegate {
         if (project.isShared()) {
             logger.debug("\n*** Delete all relations of sharing");
 
-            List<GPAccountProject> accountProjectList = accountProjectDao.findNotOwnersByProjectID(
-                    project.getId());
+            List<GPAccountProject> accountProjectList = accountProjectDao.findNotOwnersByProjectID(project.getId());
             for (GPAccountProject accountProject : accountProjectList) {
                 accountProjectDao.removeById(accountProject.getId());
             }
@@ -970,8 +910,7 @@ public class GPProjectDelegate implements ProjectDelegate {
     }
 
     private GPAccount retrieveProjectOwner(Long projectID) {
-        GPAccountProject accountOwner = accountProjectDao.findOwnerByProjectID(
-                projectID);
+        GPAccountProject accountOwner = accountProjectDao.findOwnerByProjectID(projectID);
         EntityCorrectness.checkAccountProjectLog(accountOwner); // TODO assert
 
         GPAccount owner = accountOwner.getAccount();
@@ -987,12 +926,10 @@ public class GPProjectDelegate implements ProjectDelegate {
 
         GPAccount account = this.getAccountByID(accountID);
         EntityCorrectness.checkAccountLog(account); // TODO assert
-        logger.trace("\n*** The account that retrieve the project is {}",
-                account.getNaturalID());
+        logger.trace("\n*** The account that retrieve the project is {}", account.getNaturalID());
 
         GPAccount owner = this.retrieveProjectOwner(projectID);
-        logger.trace("\n*** The account owner of the project is {}",
-                owner.getNaturalID());
+        logger.trace("\n*** The account owner of the project is {}", owner.getNaturalID());
 
         ProjectDTO projectDTO;
         if (accountID.equals(owner.getId())) {

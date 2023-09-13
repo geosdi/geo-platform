@@ -846,6 +846,7 @@ public class LayerService implements ILayerService {
         try {
             this.sessionUtility.getLoggedAccount(httpServletRequest);
             List<ShortAccountDTO> accounts = this.geoPlatformServiceClient.getAccountsByProjectID(idSharedProject).getAccounts();
+            logger.info("##############accounts: {}\n", accounts);
             simpleUserList = Lists.newArrayList(this.dtoLayerConverter.convertToGPSimpleUser(accounts));
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);

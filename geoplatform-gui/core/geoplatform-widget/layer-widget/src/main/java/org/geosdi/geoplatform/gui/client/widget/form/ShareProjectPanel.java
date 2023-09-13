@@ -37,10 +37,7 @@ package org.geosdi.geoplatform.gui.client.widget.form;
 
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.Style;
-import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.event.MessageBoxEvent;
-import com.extjs.gxt.ui.client.event.SelectionListener;
+import com.extjs.gxt.ui.client.event.*;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.store.Store;
 import com.extjs.gxt.ui.client.widget.Dialog;
@@ -70,6 +67,7 @@ import org.geosdi.geoplatform.gui.client.i18n.MementoPersistenceConstants;
 import org.geosdi.geoplatform.gui.client.i18n.buttons.ButtonsConstants;
 import org.geosdi.geoplatform.gui.client.model.memento.puregwt.event.PeekCacheEvent;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
+import org.geosdi.geoplatform.gui.client.puregwt.share.event.GPChangeHeightWidgetEvent;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformContentPanel;
 import org.geosdi.geoplatform.gui.command.api.ClientCommandDispatcher;
 import org.geosdi.geoplatform.gui.command.api.GPClientCommand;
@@ -80,6 +78,7 @@ import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUserKeyValue;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
+import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 import java.util.List;
 
@@ -105,6 +104,7 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
     private Label projectNameLabel;
     private Label ownerLabel;
     private Label organizationLabel;
+    private ShareProjectPermissionWidget shareProjectPermissionWidget;
 
     public ShareProjectPanel(GPProjectManagementWidget projectManagementWidget,
             boolean lazy) {
@@ -262,6 +262,7 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         super.add(verticalPanel);
         super.add(lists, new FormData("98%"));
         LayoutContainer filterContainer = new LayoutContainer(new BorderLayout());
+        this.shareProjectPermissionWidget = new ShareProjectPermissionWidget();
         this.fromFilter = this.createServerFilter(this.fromFilter, fromStore,
                 LayerModuleConstants.INSTANCE.ShareProjectPanel_fromFilterLabelText());
         filterContainer.add(this.fromFilter, new BorderLayoutData(
@@ -271,7 +272,29 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         filterContainer.add(this.toFilter, new BorderLayoutData(
                 Style.LayoutRegion.EAST));
         filterContainer.setStyleAttribute("margin", "11px");
+        lists.getToList().addSelectionChangedListener(new SelectionChangedListener<GPSimpleUser>() {
+            @Override
+            public void selectionChanged(SelectionChangedEvent<GPSimpleUser> se) {
+
+                if (se.getSelectedItem() != null && se.getSelectedItem().getPermissionMask() != 16) {
+                    shareProjectPermissionWidget.bindUser(se.getSelectedItem());
+                    WidgetPropertiesHandlerManager.fireEvent(new GPChangeHeightWidgetEvent(
+                            GPProjectManagementWidget.WINDOW_HEIGHT + shareProjectPermissionWidget.getHeight()));
+                    setHeight(GPProjectManagementWidget.COMPONENT_HEIGHT + shareProjectPermissionWidget.getHeight());
+                } else {
+                    shareProjectPermissionWidget.hide();
+                    setHeight(GPProjectManagementWidget.COMPONENT_HEIGHT);
+                    WidgetPropertiesHandlerManager.fireEvent(
+                            new GPChangeHeightWidgetEvent(GPProjectManagementWidget.WINDOW_HEIGHT));
+                }
+            }
+        });
+        super.add(shareProjectPermissionWidget, new RowData());
         super.add(filterContainer);
+    }
+
+    public void resetHeight() {
+        setHeight(GPProjectManagementWidget.COMPONENT_HEIGHT);
     }
 
     @Override
@@ -352,6 +375,7 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                 logger.warning("Failled to load Share Project's Accounts: " + exception);
             }
         });
+
         boolean enableMenu = false;
         IGPAccountDetail accountInSession = Registry.get(
                 UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());

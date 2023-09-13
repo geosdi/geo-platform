@@ -52,12 +52,8 @@ import java.util.List;
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "type")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = UserDTO.class, name = "UserDTO"),
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({@JsonSubTypes.Type(value = UserDTO.class, name = "UserDTO"),
         @JsonSubTypes.Type(value = ApplicationDTO.class, name = "ApplicationDTO")})
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlSeeAlso(value = {UserDTO.class, ApplicationDTO.class})
@@ -90,8 +86,7 @@ public abstract class ShortAccountDTO implements Serializable {
             for (GPAuthority authority : account.getGPAuthorities()) {
                 roles.add(authority.getAuthority());
 
-                if (this.trustedLevel == null
-                        || this.trustedLevel.ordinal() < authority.getTrustedLevel().ordinal()) {
+                if (this.trustedLevel == null || this.trustedLevel.ordinal() < authority.getTrustedLevel().ordinal()) {
                     this.trustedLevel = authority.getTrustedLevel();
                 }
             }
@@ -209,6 +204,7 @@ public abstract class ShortAccountDTO implements Serializable {
     public void setTrustedLevel(GPTrustedLevel trustedLevel) {
         this.trustedLevel = trustedLevel;
     }
+
 
     /**
      * (non-Javadoc)

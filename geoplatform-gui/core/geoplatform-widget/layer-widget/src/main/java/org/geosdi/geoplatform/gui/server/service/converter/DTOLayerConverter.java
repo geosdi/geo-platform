@@ -53,6 +53,8 @@ import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
 import org.geosdi.geoplatform.response.*;
 import org.geosdi.geoplatform.response.collection.TreeFolderElements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Nonnull;
@@ -79,6 +81,9 @@ import static org.geosdi.geoplatform.gui.shared.GPLayerType.WMS;
  */
 @Component(value = "dtoLayerConverter")
 public class DTOLayerConverter implements GPDTOLayerConverter {
+
+    private static final Logger logger = LoggerFactory.getLogger(DTOLayerConverter.class);
+
 
     /**
      * @param folders
@@ -414,12 +419,14 @@ public class DTOLayerConverter implements GPDTOLayerConverter {
      * @return {@link GPSimpleUser}
      */
     private GPSimpleUser convertToGPSimpleUser(UserDTO userDTO) {
+        logger.info("########UserDTO: {}\n", userDTO);
         GPSimpleUser user = new GPSimpleUser();
         user.setId(userDTO.getId());
         user.setOrganization(userDTO.getOrganization());
         user.setName(userDTO.getName());
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmailAddress());
+        user.setPermissionMask(userDTO.getPermissionMask());
         return user;
     }
 }

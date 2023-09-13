@@ -35,8 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.global.security;
 
-import java.io.Serializable;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
+
+import java.io.Serializable;
 
 /**
  *

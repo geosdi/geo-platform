@@ -124,6 +124,13 @@ public interface LayerModuleConstants extends Constants {
     @DefaultStringValue("Clone Project Widget")
     String CloneProjectWidget_headingText();
 
+
+    @DefaultStringValue("User Permission Widget")
+    String PermissionShareProjectWidget_headingText();
+
+    @DefaultStringValue("User permission")
+    String ShareProjectWidget_radioButtonTitle();
+
     /**
      * start LayerTimeFilterWidget
      */

@@ -35,14 +35,6 @@
  */
 package org.geosdi.geoplatform.services;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
 import junit.framework.TestCase;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPApplication;
@@ -54,22 +46,23 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.*;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 public class ShortAccountDTOFactoryMassiveTest extends TestCase {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            ShortAccountDTOFactoryMassiveTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(ShortAccountDTOFactoryMassiveTest.class);
 
     @Test
     public void testShortAccountFactory() throws InterruptedException, ExecutionException {
         ExecutorService executor = Executors.newFixedThreadPool(2);
 
-        List<Callable<ShortAccountDTO>> tasks = new ArrayList<Callable<ShortAccountDTO>>(
-                1000);
+        List<Callable<ShortAccountDTO>> tasks = new ArrayList<Callable<ShortAccountDTO>>(1000);
 
         for (int i = 0; i < 1000; i++) {
             if (i < 500) {
@@ -95,7 +88,7 @@ public class ShortAccountDTOFactoryMassiveTest extends TestCase {
 
     private GPUser createGPUser(int i) {
         GPUser user = new GPUser();
-        user.setId(new Long(i));
+        user.setId(Long.valueOf(i));
         user.setName("TEST" + i);
         user.setUsername("TEST" + i);
         user.setEmailAddress("user@test.it");
@@ -108,9 +101,8 @@ public class ShortAccountDTOFactoryMassiveTest extends TestCase {
     private GPApplication createGPApplication(int i) {
         int f = ++i * 20;
         GPApplication application = new GPApplication();
-        application.setId(new Long(f));
-        application.setOrganization(new GPOrganization("ORGANIZATION_"
-                + "APPLICATION_TEST"));
+        application.setId(Long.valueOf(f));
+        application.setOrganization(new GPOrganization("ORGANIZATION_" + "APPLICATION_TEST"));
         application.setAppID("APPLICATION_TEST" + f);
 
         return application;

@@ -48,7 +48,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -78,7 +77,7 @@ import java.util.List;
         discriminatorType = DiscriminatorType.STRING)
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "account")
 @Cacheable
-public abstract class GPAccount implements Serializable {
+public abstract class GPAccount implements IGPAccount {
 
     /**
      * serialVersionUID

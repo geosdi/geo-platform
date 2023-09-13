@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.command.share;
 
-import java.util.ArrayList;
-import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.share.GetUsersToShareProjectRequest;
 import org.geosdi.geoplatform.gui.client.command.share.GetUsersToShareProjectResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -48,35 +46,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Lazy(true)
 @Component(value = "command.share.GetUsersToShareProjectCommand")
-public class GetUsersToShareProjectCommand implements
-        GPCommand<GetUsersToShareProjectRequest, GetUsersToShareProjectResponse> {
+public class GetUsersToShareProjectCommand implements GPCommand<GetUsersToShareProjectRequest, GetUsersToShareProjectResponse> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            GetUsersToShareProjectCommand.class);
+    private static final Logger logger = LoggerFactory.getLogger(GetUsersToShareProjectCommand.class);
     //
     @Autowired
     private ILayerService layerService;
 
     @Override
-    public GetUsersToShareProjectResponse execute(
-            GetUsersToShareProjectRequest request,
+    public GetUsersToShareProjectResponse execute(GetUsersToShareProjectRequest request,
             HttpServletRequest httpServletRequest) {
-
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
-        ArrayList<GPSimpleUser> result = this.layerService.getOrganizationUsersToShareProject(
-                request.getProjectId(), httpServletRequest);
-
-        logger.debug("#################### Found {} ", result);
-
+        logger.debug("#####################Executing {} Command", this.getClass().getSimpleName());
+        ArrayList<GPSimpleUser> result = this.layerService.getOrganizationUsersToShareProject(request.getProjectId(),
+                httpServletRequest);
+        logger.debug("####################Found {} ", result);
         return new GetUsersToShareProjectResponse(result);
     }
 

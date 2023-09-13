@@ -37,26 +37,30 @@ package org.geosdi.geoplatform.gui.client.widget.form;
 
 import org.geosdi.geoplatform.gui.client.i18n.LayerModuleConstants;
 import org.geosdi.geoplatform.gui.client.model.projects.GPClientProject;
+import org.geosdi.geoplatform.gui.client.puregwt.share.IShareWidgetHandler;
 import org.geosdi.geoplatform.gui.client.widget.GeoPlatformWindow;
 import org.geosdi.geoplatform.gui.client.widget.pagination.projects.GPProjectSearchPanel;
+import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 import javax.inject.Singleton;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Singleton
-public class GPProjectManagementWidget extends GeoPlatformWindow {
+public class GPProjectManagementWidget extends GeoPlatformWindow implements IShareWidgetHandler {
 
     public final static int COMPONENT_WIDTH = 664;
     public final static int COMPONENT_HEIGHT = 510;
+    public final static int WINDOW_HEIGHT = 542;
+    public final static int WINDOW_WIDTH = 678;
     private GPProjectSearchPanel projectSearchPanel;
     private ShareProjectPanel shareProjectPanel;
 
     public GPProjectManagementWidget() {
         super(Boolean.TRUE);
+        WidgetPropertiesHandlerManager.addHandler(TYPE, this);
     }
 
     @Override
@@ -105,6 +109,27 @@ public class GPProjectManagementWidget extends GeoPlatformWindow {
 
     @Override
     public void initSize() {
-        super.setSize(678, 542);
+        super.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+    }
+
+    /**
+     * @param height
+     */
+    @Override
+    public void changeHeight(int height) {
+        this.setHeight(height);
+    }
+
+    @Override
+    public void hide() {
+        this.shareProjectPanel.resetHeight();
+        this.initSize();
+        this.repaint();
+        super.hide();
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
     }
 }

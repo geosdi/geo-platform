@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.core.model;
 
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -47,7 +45,7 @@ import javax.persistence.Entity;
 //@XmlRootElement(name = "GPUser")
 @Entity(name = "User")
 @DiscriminatorValue("GPUser")
-public class GPUser extends GPAccount implements UserDetails {
+public class GPUser extends GPAccount implements IGPUser {
 
     /**
      * serialVersionUID
@@ -58,14 +56,14 @@ public class GPUser extends GPAccount implements UserDetails {
     private String name;
     //
     @Column(name = "user_name", unique = true)
-//    @Index(name = "USER_USERNAME_INDEX")
+    //    @Index(name = "USER_USERNAME_INDEX")
     private String username;
     //
     @Column(name = "user_password")
     private String password;
     //
     @Column(name = "email_address", unique = true)
-//    @Index(name = "USER_EMAIL_INDEX")
+    //    @Index(name = "USER_EMAIL_INDEX")
     private String emailAddress;
     //
     @Column(name = "send_email")
@@ -162,8 +160,7 @@ public class GPUser extends GPAccount implements UserDetails {
      */
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(
-                " {");
+        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
         str.append(super.toString());
         str.append(", username=").append(username);
         str.append(", password=").append(password);

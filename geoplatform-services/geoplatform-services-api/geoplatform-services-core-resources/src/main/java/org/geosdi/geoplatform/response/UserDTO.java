@@ -55,6 +55,7 @@ public class UserDTO extends ShortAccountDTO {
     private String username;
     private String emailAddress;
     private boolean sendEmail;
+    private int permissionMask;
 
     /**
      * Default constructor
@@ -70,6 +71,16 @@ public class UserDTO extends ShortAccountDTO {
         this.emailAddress = user.getEmailAddress();
         this.sendEmail = user.isSendEmail();
     }
+
+    /**
+     * @param theGPUser
+     * @param thePermissionMask
+     */
+    public UserDTO(GPUser theGPUser, int thePermissionMask) {
+        this(theGPUser);
+        this.permissionMask = thePermissionMask;
+    }
+
 
     /**
      * @return the name
@@ -127,15 +138,29 @@ public class UserDTO extends ShortAccountDTO {
         this.emailAddress = emailAddress;
     }
 
+    /**
+     * @return
+     */
+    public int getPermissionMask() {
+        return permissionMask;
+    }
+
+    /**
+     * @param permissionMask
+     */
+    public void setPermissionMask(int permissionMask) {
+        this.permissionMask = permissionMask;
+    }
+
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(
-                " {");
+        StringBuilder str = new StringBuilder(this.getClass().getSimpleName()).append(" {");
         str.append(super.toString());
         str.append(", name=").append(name);
         str.append(", username=").append(username);
         str.append(", emailAddress=").append(emailAddress);
         str.append(", sendEmail=").append(sendEmail);
+        str.append(", permissionMask=").append(permissionMask);
         return str.append("}").toString();
     }
 }

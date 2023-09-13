@@ -48,6 +48,8 @@ public class GPSimpleUser extends GeoPlatformBeanModel implements IGPUserSimpleD
     private static final long serialVersionUID = 6888698454407152018L;
     //
     private Long id; // For performance purpose: used for equals() and hashCode() methods
+    private String sharedPermission;
+    private int permissionMask;
 
     /**
      * @return the id
@@ -63,6 +65,34 @@ public class GPSimpleUser extends GeoPlatformBeanModel implements IGPUserSimpleD
     @Override
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * @return
+     */
+    public String getSharedPermission() {
+        return this.sharedPermission;
+    }
+
+    /**
+     * @param theSharedPermission
+     */
+    public void setSharedPermission(String theSharedPermission) {
+        this.sharedPermission = theSharedPermission;
+    }
+
+    /**
+     * @return {@link int}
+     */
+    public int getPermissionMask() {
+        return permissionMask;
+    }
+
+    /**
+     * @param permissionMask
+     */
+    public void setPermissionMask(int permissionMask) {
+        this.permissionMask = permissionMask;
     }
 
     /**

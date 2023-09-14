@@ -35,13 +35,9 @@
  */
 package org.geosdi.geoplatform.request;
 
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
-import java.util.List;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Map;
 
 /**
  *
@@ -57,13 +53,12 @@ public class PutAccountsProjectRequest implements Serializable {
     private Long projectID;
     @XmlElementWrapper(name = "accountsIDS")
     @XmlElement(name = "accountID")
-    private List<Long> accountIDsProject;
+    private Map<Long, Integer> accountIDsProject;
 
     public PutAccountsProjectRequest() {
     }
 
-    public PutAccountsProjectRequest(Long projectID,
-            List<Long> accountIDsProject) {
+    public PutAccountsProjectRequest(Long projectID, Map<Long, Integer> accountIDsProject) {
         this.projectID = projectID;
         this.accountIDsProject = accountIDsProject;
     }
@@ -85,15 +80,14 @@ public class PutAccountsProjectRequest implements Serializable {
     /**
      * @return the accountIDsProject
      */
-    public List<Long> getAccountIDsProject() {
+    public Map<Long, Integer> getAccountIDsProject() {
         return accountIDsProject;
     }
 
     /**
      * @param accountIDsProject the accountIDsProject to set
      */
-    public void setAccountIDsProject(
-            List<Long> accountIDsProject) {
+    public void setAccountIDsProject(Map<Long, Integer> accountIDsProject) {
         this.accountIDsProject = accountIDsProject;
     }
 

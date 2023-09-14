@@ -51,7 +51,7 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.ListField;
 import com.extjs.gxt.ui.client.widget.form.StoreFilterField;
 import com.extjs.gxt.ui.client.widget.layout.*;
-import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.gwt.user.client.rpc.*;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -81,7 +81,9 @@ import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerMana
 import org.geosdi.geoplatform.gui.service.gwt.xsrf.GPXsrfTokenService;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+
+import static org.geosdi.geoplatform.gui.client.model.SharingPermissionEnum.READ;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -203,20 +205,22 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                             });
                 } else {
                     toStore.commitChanges();
-                    List<Long> accountIDsProject = Lists.<Long>newArrayListWithCapacity(toStore.getModels().size());
+                    Map<Long, Integer> accountsMap = Maps.newHashMap();
                     IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
                     boolean test = false;
+
                     for (GPSimpleUser user : toStore.getModels()) {
                         if (user.getId().equals(accountDetail.getId())) {
                             test = true;
                         }
-                        accountIDsProject.add(user.getId());
+                        accountsMap.put(user.getId(), user.getSharedPermission());
+                        // accountIDsProject.add(user.getId());
                     }
-                    final boolean isShared = test && accountIDsProject.size() > 1;
+                    final boolean isShared = test && toStore.getModels().size() > 1;
                     ShareProjectPanel.this.reset();
 
                     shareProjectReq.setIdSharedProject(project.getId());
-                    shareProjectReq.setAccountIDsProject(accountIDsProject);
+                    shareProjectReq.setAccountIDsProject(accountsMap);
 
                     GPClientCommandExecutor.executeCommand(new GPClientCommand<ShareProjectResponse>() {
 
@@ -261,7 +265,7 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
             @Override
             public void selectionChanged(SelectionChangedEvent<GPSimpleUser> se) {
 
-                if (se.getSelectedItem() != null && se.getSelectedItem().getPermissionMask() != 16) {
+                if (se.getSelectedItem() != null && se.getSelectedItem().getSharedPermission() != 16) {
                     shareProjectPermissionWidget.bindUser(se.getSelectedItem());
                     WidgetPropertiesHandlerManager.fireEvent(new GPChangeHeightWidgetEvent(
                             GPProjectManagementWidget.WINDOW_HEIGHT + shareProjectPermissionWidget.getHeight()));
@@ -274,6 +278,24 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                 }
             }
         });
+
+
+        lists.getFromList().addSelectionChangedListener(new SelectionChangedListener<GPSimpleUser>() {
+
+
+            /**
+             * Fires when the selection has changed.
+             *
+             * @param se the selection event
+             */
+            @Override
+            public void selectionChanged(SelectionChangedEvent<GPSimpleUser> se) {
+                if (se.getSelectedItem() != null && se.getSelectedItem().getSharedPermission() != 16) {
+                    se.getSelectedItem().setSharedPermission(READ.getCode());
+                }
+            }
+        });
+
         super.add(shareProjectPermissionWidget, new RowData());
         super.add(filterContainer);
     }

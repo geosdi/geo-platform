@@ -35,10 +35,8 @@
  */
 package org.geosdi.geoplatform.gui.server.command.share;
 
-import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.share.ShareProjectRequest;
 import org.geosdi.geoplatform.gui.client.command.share.ShareProjectResponse;
-import org.geosdi.geoplatform.gui.command.api.GPCommandResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.slf4j.Logger;
@@ -46,6 +44,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -67,7 +67,7 @@ public class ShareProjectCommand implements
     public ShareProjectResponse execute(ShareProjectRequest request,
             HttpServletRequest httpServletRequest) {
 
-        logger.debug("##################### Executing {} Command", this.
+        logger.debug("#####################Executing {} Command", this.
                 getClass().getSimpleName());
 
         logger.debug("\n@@@@@@@@@@@ID Project: {}\n", 
@@ -79,7 +79,7 @@ public class ShareProjectCommand implements
                 request.getIdSharedProject(),
                 request.getAccountIDsProject(), httpServletRequest);
 
-        logger.debug("#################### Found {} ", result);
+        logger.debug("####################Found {} ", result);
 
         return new ShareProjectResponse(result);
     }

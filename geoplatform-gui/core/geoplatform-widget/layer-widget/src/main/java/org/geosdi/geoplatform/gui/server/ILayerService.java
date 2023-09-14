@@ -56,6 +56,7 @@ import org.springframework.beans.factory.InitializingBean;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -65,7 +66,8 @@ public interface ILayerService extends InitializingBean {
 
     GPClientProject loadDefaultProject(HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
-    boolean shareProjectToUsers(long idSharedProject, List<Long> accountIDsProject, HttpServletRequest httpServletRequest) throws GeoPlatformException;
+    boolean shareProjectToUsers(long idSharedProject, Map<Long, Integer> accountIDsProject,
+            HttpServletRequest httpServletRequest) throws GeoPlatformException;
 
     ArrayList<GPSimpleUser> getOrganizationUsersToShareProject(long projectId, HttpServletRequest httpServletRequest) throws GeoPlatformException;
 

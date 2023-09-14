@@ -63,6 +63,7 @@ public class ShareProjectPermissionWidget extends VerticalPanel {
     private Radio readRadioButton;
     private Radio writeRadioButton;
     private boolean initialized;
+    private GPSimpleUser gpSimpleUser;
 
 
     public ShareProjectPermissionWidget() {
@@ -97,6 +98,9 @@ public class ShareProjectPermissionWidget extends VerticalPanel {
             data.setMargins(new Margins(5, 5, 5, 5));
             fieldSet.add(this.radioGroup, data);
             this.setVisible(FALSE);
+            this.radioGroup.addListener(Events.Change, be -> {
+                this.gpSimpleUser.setSharedPermission(this.radioGroup.getValue().getData(RADIO_KEY_VALUE));
+            });
             this.initialized = true;
         }
     }
@@ -105,12 +109,10 @@ public class ShareProjectPermissionWidget extends VerticalPanel {
      * @param gpSimpleUser
      */
     public void bindUser(GPSimpleUser gpSimpleUser) {
-        this.radioGroup.setFieldLabel((gpSimpleUser.getName()));
-        this.radioGroup.setValue(
-                gpSimpleUser.getSharedPermission() == (WRITE.getCode()) ? this.writeRadioButton : this.readRadioButton);
-        this.radioGroup.addListener(Events.Change, be -> {
-            gpSimpleUser.setSharedPermission(this.radioGroup.getValue().getData(RADIO_KEY_VALUE));
-        });
+        this.gpSimpleUser = gpSimpleUser;
+        this.radioGroup.setFieldLabel((this.gpSimpleUser.getName()));
+        this.radioGroup.setValue(this.gpSimpleUser.getSharedPermission() == (WRITE.getCode()) ? this.writeRadioButton :
+                this.readRadioButton);
         this.setVisible(TRUE);
     }
 }

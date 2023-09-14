@@ -71,12 +71,12 @@ public class RSMessageTest extends BasicRestServiceTest {
         // Insert Organization
         this.setUpOrganization();
         // Insert Users
-        idUserTest = this.createAndInsertUser(usernameTest, organizationTest, USER);
+        this.userTest = this.createAndInsertUser(usernameTest, organizationTest, USER);
         userTest = gpWSClient.getUserDetailByUsername(new SearchRequest(usernameTest, CONTENT_EQUALS));
 
-        firstRecipientID = this.createAndInsertUser("first_recipient_RS", organizationTest, USER);
+        firstRecipientID = this.createAndInsertUser("first_recipient_RS", organizationTest, USER).getId();
         firstRecipient = gpWSClient.getUserDetail(firstRecipientID);
-        latterRecipientID = this.createAndInsertUser("latter_recipient_RS", organizationTest, VIEWER);
+        latterRecipientID = this.createAndInsertUser("latter_recipient_RS", organizationTest, VIEWER).getId();
 //        latterRecipient = gpWSClient.getUserDetail(latterRecipientID);
 
         // Create message

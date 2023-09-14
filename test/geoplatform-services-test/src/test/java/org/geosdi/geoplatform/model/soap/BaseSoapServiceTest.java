@@ -88,7 +88,7 @@ abstract class BaseSoapServiceTest extends ServiceTest {
     public void setUp() throws Exception {
         super.setUp();
         // Insert User
-        idUserTest = this.createAndInsertUser(usernameTest, organizationTest,
+        this.userTest = this.createAndInsertUser(usernameTest, organizationTest,
                 GPRole.USER);
         userTest = gpWSClient.getUserDetailByUsername(
                 new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));

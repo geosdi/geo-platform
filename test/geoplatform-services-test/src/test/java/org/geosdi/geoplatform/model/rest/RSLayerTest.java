@@ -211,8 +211,7 @@ public class RSLayerTest extends BasicRestServiceTest {
         boolean erased = gpWSClient.deleteLayer(idRaster1);
         Assert.assertTrue("Deletion of the layer rasterLayer1", erased);
         
-        ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(
-                idProjectTest, super.idUserTest);
+        ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest, this.userTest.getId());
         Assert.assertNotNull("projectWithRootFolders null",
                 projectWithRootFolders);
 

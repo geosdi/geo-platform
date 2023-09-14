@@ -55,6 +55,7 @@ import java.util.*;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
+import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -555,7 +556,7 @@ public class RSProjectTest extends BasicRestServiceTest {
         assertEquals(2, accountsToShare.size());
         boolean check = false;
         for (ShortAccountDTO accountDTO : accountsToShare) {
-            if (newUserID.equals(accountDTO.getId())) {
+            if (newUserID.getId() == accountDTO.getId()) {
                 check = true;
                 break;
             }
@@ -603,7 +604,7 @@ public class RSProjectTest extends BasicRestServiceTest {
         Assert.assertFalse(project.isShared());
 
         accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
-        Assert.assertNotNull(accountsToShare);
+        assertNotNull(accountsToShare);
         assertEquals(1, accountsToShare.size());
         assertEquals(this.userTest.getId().longValue(), accountsToShare.get(0).getId().longValue());
     }
@@ -630,7 +631,7 @@ public class RSProjectTest extends BasicRestServiceTest {
         assertEquals(2, accountsToShare.size());
         boolean checkFirst = false;
         for (ShortAccountDTO accountDTO : accountsToShare) {
-            if (firstUserID.equals(accountDTO.getId())) {
+            if (firstUserID.getId() == accountDTO.getId()) {
                 checkFirst = true;
                 break;
             }

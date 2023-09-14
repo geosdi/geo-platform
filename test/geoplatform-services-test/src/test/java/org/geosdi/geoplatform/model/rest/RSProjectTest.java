@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.request.project.SaveProjectRequest;
 import org.geosdi.geoplatform.response.*;
 import org.geosdi.geoplatform.response.collection.ChildrenFolderStore;
 import org.geosdi.geoplatform.response.collection.TreeFolderElements;
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.security.acls.domain.BasePermission;
 
@@ -492,7 +493,7 @@ public class RSProjectTest extends BasicRestServiceTest {
         assertEquals(2, accountsToShare.size());
         boolean check = false;
         for (ShortAccountDTO accountDTO : accountsToShare) {
-            if (newUserID.equals(accountDTO.getId())) {
+            if (newUserID.getId() == accountDTO.getId()) {
                 check = true;
                 break;
             }
@@ -506,14 +507,17 @@ public class RSProjectTest extends BasicRestServiceTest {
         Long newUserID = this.createAndInsertUser("user_to_share_project_rs", organizationTest, GPRole.USER).getId();
         GPUser newUser = gpWSClient.getUserDetail(newUserID);
         this.createAndInsertAccountProject(newUser, projectTest, BasePermission.READ);
+
         // Set the Project as share
         projectTest.setShared(true);
         gpWSClient.updateProject(projectTest);
+
         // Initial test
         GPProject project = gpWSClient.getProjectDetail(idProjectTest);
         assertTrue(project.isShared());
+
         List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
-        assertNotNull(accountsToShare);
+        Assert.assertNotNull(accountsToShare);
         assertEquals(2, accountsToShare.size());
         assertEquals(2, accountsToShare.size());
         boolean check = false;
@@ -548,14 +552,17 @@ public class RSProjectTest extends BasicRestServiceTest {
         GPUser latterUserID = this.createAndInsertUser("latter_to_share_project", organizationTest, GPRole.VIEWER);
         GPUser newUser = gpWSClient.getUserDetail(firstUserID.getId());
         this.createAndInsertAccountProject(newUser, projectTest, BasePermission.READ);
+
         // Set the Project as share
         projectTest.setShared(true);
         gpWSClient.updateProject(projectTest);
+
         // Initial test
         GPProject project = gpWSClient.getProjectDetail(idProjectTest);
         assertTrue(project.isShared());
+
         List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
-        assertNotNull(accountsToShare);
+        Assert.assertNotNull(accountsToShare);
         assertEquals(2, accountsToShare.size());
         assertEquals(2, accountsToShare.size());
         boolean checkFirst = false;
@@ -581,7 +588,7 @@ public class RSProjectTest extends BasicRestServiceTest {
         assertTrue(project.isShared());
 
         accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
-        assertNotNull(accountsToShare);
+        Assert.assertNotNull(accountsToShare);
         assertEquals(3, accountsToShare.size());
         checkFirst = false;
         boolean checkLatter = false;
@@ -607,7 +614,7 @@ public class RSProjectTest extends BasicRestServiceTest {
         assertTrue(project.isShared());
 
         accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
-        assertNotNull(accountsToShare);
+        Assert.assertNotNull(accountsToShare);
         assertEquals(2, accountsToShare.size());
         checkLatter = false;
         for (ShortAccountDTO accountDTO : accountsToShare) {

@@ -505,9 +505,7 @@ public class GPProjectDelegate implements ProjectDelegate {
         for (GPAccountProject accountProject : accountProjectList) {
             sharingMap.put(accountProject.getAccount().getId(), accountProject);
         }
-
         accountIDsProject.remove(ownerID);
-
         for (Long id : accountIDsProject.keySet()) {
             GPAccountProject accountProject = sharingMap.remove(id);
             // Create a new relation of sharing
@@ -520,6 +518,9 @@ public class GPProjectDelegate implements ProjectDelegate {
                 logger.info("######ACCOUNT: {}\n", newAccountProject);
                 logger.trace("\n*** Create a new relation of sharing for Account \"{}\"", newAccount.getNaturalID());
                 accountProjectDao.persist(newAccountProject);
+            } else {
+                accountProject.setPermissionMask(accountIDsProject.get(id));
+                accountProjectDao.update(accountProject);
             }
         }
 

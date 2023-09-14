@@ -74,6 +74,5 @@ public class GPTreeMenuCommandTest {
     @Test
     public void compositeMenuCommand() throws Exception {
         GPCommandResponse response = gpCommandDispatcher.execute(new GetCompositeMenuRequest(), null);
-        logger.info("RESPONSE : ######################### \n\n {} \n ", response);
     }
 }

@@ -225,11 +225,14 @@ public class RSProjectTest extends BasicRestServiceTest {
     @Test
     public void testOnlyFirstLevelFolderRest() throws ResourceNotFoundFault {
         gpWSClient.deleteFolder(super.idRootFolderA);
+
         ProjectDTO project = gpWSClient.exportProject(super.idProjectTest);
         assertEquals("project name", super.projectTest.getName(), project.getName());
+
         List<FolderDTO> rootFolders = project.getRootFolders();
         assertEquals("#root", 1, rootFolders.size());
         assertEquals("B", nameRootFolderB, rootFolders.get(0).getName());
+
         List<AbstractElementDTO> childRootFolderB = rootFolders.get(0).getElementList();
         assertEquals("#B", 1, childRootFolderB.size());
         assertEquals("V-B", nameVector + nameRootFolderB, childRootFolderB.get(0).getName());
@@ -818,6 +821,7 @@ public class RSProjectTest extends BasicRestServiceTest {
     private void assertFolderRest(String msg, GPFolder folder, FolderDTO folderToCheck) {
         assertEquals(msg, folder.getName(), folderToCheck.getName());
         assertEquals("Position-" + msg, folder.getPosition(), folderToCheck.getPosition().intValue());
-        assertEquals("Descendats-" + msg, folder.getNumberOfDescendants(), folderToCheck.getNumberOfDescendants().intValue());
+        assertEquals("Descendats-" + msg, folder.getNumberOfDescendants(),
+                folderToCheck.getNumberOfDescendants().intValue());
     }
 }

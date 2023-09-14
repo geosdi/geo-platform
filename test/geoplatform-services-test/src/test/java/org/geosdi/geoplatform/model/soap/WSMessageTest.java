@@ -73,10 +73,10 @@ public class WSMessageTest extends BaseSoapServiceTest {
         userTest = gpWSClient.getUserDetailByUsername(
                 new SearchRequest(usernameTest, CONTENT_EQUALS));
 
-        firstRecipientID = this.createAndInsertUser("first_recipient", organizationTest, GPRole.USER).getId();
+        firstRecipientID = this.createAndInsertUser("first_recipient", organizationTest, USER).getId();
         firstRecipient = gpWSClient.getUserDetail(firstRecipientID);
 
-        latterRecipientID = this.createAndInsertUser("latter_recipient", organizationTest, GPRole.VIEWER).getId();
+        latterRecipientID = this.createAndInsertUser("latter_recipient", organizationTest, VIEWER).getId();
 //        latterRecipient = gpWSClient.getUserDetail(latterRecipientID);
         // Create message
         message = new GPMessage();

@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.model.soap;
 import com.google.common.collect.Maps;
 import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
+import org.geosdi.geoplatform.gui.shared.GPRole;
 import org.geosdi.geoplatform.request.PutAccountsProjectRequest;
 import org.geosdi.geoplatform.request.RequestByAccountProjectIDs;
 import org.geosdi.geoplatform.request.project.CloneProjectRequest;
@@ -400,7 +401,7 @@ public class WSProjectTest extends BaseSoapServiceTest {
         gpWSClient.updateFolder(super.rootFolderB);
         gpWSClient.updateFolder(folder1A);
         gpWSClient.updateFolder(folder2C);
-        ProjectDTO project = gpWSClient.getProjectWithExpandedFolders(super.idProjectTest, super.idUserTest);
+        ProjectDTO project = gpWSClient.getProjectWithExpandedFolders(super.idProjectTest, super.userTest.getId());
         assertEquals("project name", super.projectTest.getName(), project.getName());
         assertEquals("project elements", super.projectTest.getNumberOfElements(), project.getNumberOfElements().intValue());
         List<FolderDTO> rootFolders = project.getRootFolders();
@@ -619,9 +620,15 @@ public class WSProjectTest extends BaseSoapServiceTest {
         assertEquals(1, accountsToShare.size());
         assertEquals(this.userTest.getId().longValue(), accountsToShare.get(0).getId().longValue());
         // Insert User to which the Project will be share
-        Long newUserID = this.createAndInsertUser("user_to_share_project", organizationTest, USER).getId();
+        Long newUserID = this.createAndInsertUser("user_to_share_project", organizationTest, GPRole.USER).getId();
+
+        Map<Long, Integer> accounstMap = Maps.newHashMap();
+        accounstMap.put(this.userTest.getId(), 1);
+        accounstMap.put(newUserID, 1);
+
         // Test add user for sharing
-        boolean result = gpWSClient.updateAccountsProjectSharing(new PutAccountsProjectRequest(idProjectTest, asList(idUserTest, newUserID)));
+        boolean result = gpWSClient.updateAccountsProjectSharing(
+                new PutAccountsProjectRequest(idProjectTest, accounstMap));
         assertTrue(result);
         project = gpWSClient.getProjectDetail(idProjectTest);
         assertTrue(project.isShared());

@@ -49,7 +49,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -79,13 +78,6 @@ public final class AccountDTOFactory {
      * @param accounts
      * @return {@link List<ShortAccountDTO>}
      */
-    public static List<ShortAccountDTO> buildShortAccountDTOList(List<GPAccount> accounts) {
-        checkNotNull(accounts, "The List of Accounts must not be null.");
-        List<ShortAccountDTO> accountsDTO = new ArrayList<>(accounts.size());
-        for (GPAccount account : accounts) {
-            accountsDTO.add(buildAccountDTO(account));
-        }
-        return accountsDTO;
     public static List<ShortAccountDTO> buildShortAccountDTOList(List<GPAccount> accounts) {
         checkNotNull(accounts, "The List of Accounts must not be null.");
         return accounts.stream().filter(Objects::nonNull).map(AccountDTOFactory::buildAccountDTO).collect(toList());

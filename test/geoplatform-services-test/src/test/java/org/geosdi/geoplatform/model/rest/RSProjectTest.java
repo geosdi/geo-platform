@@ -257,14 +257,14 @@ public class RSProjectTest extends BasicRestServiceTest {
         rootFolderBDTO.addLayer(new VectorLayerDTO(vectorRootFolderB));
         projectDTO.setId(null); // Entity passed must not containd an ID, otherwise Hibernate throws PersistentObjectException
         // Import ProjectDTO
-        Long projectID = gpWSClient.importProject(new ImportProjectRequest(projectDTO, super.idUserTest));
+        Long projectID = gpWSClient.importProject(new ImportProjectRequest(projectDTO, super.userTest.getId()));
         // Check imported Project
         assertTrue("Check importProject", projectID > 0);
         logger.debug("*** ID project imported: {} ***", projectID);
         GPProject projectAdded = gpWSClient.getProjectDetail(projectID);
         assertEquals("project name", super.projectTest.getName(), projectAdded.getName());
         assertEquals("project elements", super.projectTest.getNumberOfElements(), projectAdded.getNumberOfElements());
-        ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(projectID, super.idUserTest);
+        ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(projectID, super.userTest.getId());
         assertNotNull("projectWithRootFolders null", projectWithRootFolders);
         rootFoldersDTO = projectWithRootFolders.getRootFolders();
         assertNotNull("rootFolders null", rootFoldersDTO);
@@ -334,7 +334,7 @@ public class RSProjectTest extends BasicRestServiceTest {
         gpWSClient.updateFolder(super.rootFolderB);
         gpWSClient.updateFolder(folder1A);
         gpWSClient.updateFolder(folder2C);
-        ProjectDTO project = gpWSClient.getProjectWithExpandedFolders(super.idProjectTest, super.idUserTest);
+        ProjectDTO project = gpWSClient.getProjectWithExpandedFolders(super.idProjectTest, super.userTest.getId());
         assertEquals("project name", super.projectTest.getName(), project.getName());
         assertEquals("project elements", super.projectTest.getNumberOfElements(), project.getNumberOfElements().intValue());
         List<FolderDTO> rootFolders = project.getRootFolders();
@@ -633,8 +633,8 @@ public class RSProjectTest extends BasicRestServiceTest {
         accountsMap.put(this.userTest.getId(), 1);
 
         // Test pass owner
-        boolean result = gpWSClient
-                .updateAccountsProjectSharing(new PutAccountsProjectRequest(idProjectTest, Arrays.asList(idUserTest)));
+        boolean result = gpWSClient.updateAccountsProjectSharing(
+                new PutAccountsProjectRequest(idProjectTest, accountsMap));
         assertTrue(result);
 
         project = gpWSClient.getProjectDetail(idProjectTest);

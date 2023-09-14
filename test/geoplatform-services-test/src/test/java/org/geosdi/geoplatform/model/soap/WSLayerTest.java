@@ -55,6 +55,7 @@ import static org.geosdi.geoplatform.gui.shared.GPLayerType.*;
 import static org.junit.Assert.*;
 
 /**
+ *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
@@ -163,10 +164,14 @@ public class WSLayerTest extends BaseSoapServiceTest {
         // Delete "rasterLayer1" from "rootFolderA"
         boolean erased = gpWSClient.deleteLayer(idRaster1);
         assertTrue("Deletion of the layer rasterLayer1", erased);
-        ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest, super.idUserTest);
-        assertNotNull("projectWithRootFolders null", projectWithRootFolders);
+
+        ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest, this.userTest.getId());
+        assertNotNull("projectWithRootFolders null",
+                projectWithRootFolders);
+
         // Get root folders for project
         List<FolderDTO> folderList = projectWithRootFolders.getRootFolders();
+
         // Assert on the structure of project's folders
         assertEquals("assertEquals folderList.getList().size()",
                 folderList.size(), 2);

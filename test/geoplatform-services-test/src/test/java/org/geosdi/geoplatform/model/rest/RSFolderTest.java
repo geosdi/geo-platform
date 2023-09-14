@@ -56,7 +56,10 @@ import static java.lang.Boolean.TRUE;
 import static org.junit.Assert.*;
 
 /**
- * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class RSFolderTest extends BasicRestServiceTest {
@@ -147,16 +150,21 @@ public class RSFolderTest extends BasicRestServiceTest {
         Integer totalFolders = gpWSClient.getNumberOfElementsProject(idProjectTest);
         assertEquals("Number of all folders of ProjectTest before deleted", 7, totalFolders.intValue()); // SetUp() added 2+5 folders
         //
-        ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest, super.idUserTest);
-        assertNotNull("projectWithRootFolders null", projectWithRootFolders);
+        ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest, this.userTest.getId());
+        assertNotNull("projectWithRootFolders null",
+                projectWithRootFolders);
+
         List<FolderDTO> rootFolderList = projectWithRootFolders.getRootFolders();
         assertNotNull("List of root folders is null", rootFolderList);
         assertEquals("Number of root folders of ProjectTest before deleted", 2, rootFolderList.size());
         // Delete "rootFolderB" and in cascade "folder3" & "folder4" & "folder5"
         gpWSClient.deleteFolder(idRootFolderB);
+
         // "rootFolderA" ---> "folder1" & "folder2"
-        projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest, super.idUserTest);
-        assertNotNull("projectWithRootFolders null", projectWithRootFolders);
+        projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest, this.userTest.getId());
+        assertNotNull("projectWithRootFolders null",
+                projectWithRootFolders);
+
         rootFolderList = projectWithRootFolders.getRootFolders();
         assertNotNull("List of mod root folders is null", rootFolderList);
         assertEquals("Number of root folders of ProjectTest after deleted", 1, rootFolderList.size());

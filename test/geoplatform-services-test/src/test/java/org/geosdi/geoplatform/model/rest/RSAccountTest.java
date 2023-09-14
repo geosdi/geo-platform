@@ -63,7 +63,10 @@ import static org.geosdi.geoplatform.request.LikePatternType.CONTENT_EQUALS;
 import static org.junit.Assert.*;
 
 /**
- * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
+ *
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class RSAccountTest extends BasicRestServiceTest {
@@ -121,23 +124,30 @@ public class RSAccountTest extends BasicRestServiceTest {
         assertEquals("Number of Account Like", 1L, numAccountsLike);
         // Get User from Id
         // Get UserDTO from Id
-        UserDTOResponse userDTOResponse = gpWSClient.getShortUser(idUserTest);
+        UserDTOResponse userDTOResponse = gpWSClient.getShortUser(this.userTest.getId());
         UserDTO userDTOFromWS = userDTOResponse.getUserDTO();
         assertNotNull(userDTOFromWS);
-        assertEquals("Error found UserDTO from Id", idUserTest, userDTOFromWS.getId().longValue());
+        assertEquals("Error found UserDTO from Id", this.userTest.getId().longValue(),
+                userDTOFromWS.getId().longValue());
         // Get GPUser from Id
-        GPUser userFromWS = gpWSClient.getUserDetail(idUserTest);
+        GPUser userFromWS = gpWSClient.getUserDetail(this.userTest.getId());
         assertNotNull(userFromWS);
-        assertEquals("Error found GPUser from Id", idUserTest, userFromWS.getId().longValue());
+        assertEquals("Error found GPUser from Id", this.userTest.getId().longValue(),
+                userFromWS.getId().longValue());
+
         // Get User from Username
         // Get UserDTO from Username
-        userDTOFromWS = gpWSClient.getShortUserByUsername(new SearchRequest(usernameTest, CONTENT_EQUALS)).getUserDTO();
+        userDTOFromWS = gpWSClient.getShortUserByUsername(
+                new SearchRequest(usernameTest, CONTENT_EQUALS)).getUserDTO();
         assertNotNull(userDTOFromWS);
-        assertEquals("Error found UserDTO from Username", idUserTest, userDTOFromWS.getId().longValue());
+        assertEquals("Error found UserDTO from Username", this.userTest.getId().longValue(),
+                userDTOFromWS.getId().longValue());
         // Get GPUser from Username
-        userFromWS = gpWSClient.getUserDetailByUsername(new SearchRequest(usernameTest, CONTENT_EQUALS));
+        userFromWS = gpWSClient.getUserDetailByUsername(
+                new SearchRequest(usernameTest, CONTENT_EQUALS));
         assertNotNull(userFromWS);
-        assertEquals("Error found GPUser from Username", idUserTest, userFromWS.getId().longValue());
+       assertEquals("Error found GPUser from Username", this.userTest.getId().longValue(),
+                userFromWS.getId().longValue());
     }
 
     @Test(expected = BadRequestException.class)
@@ -158,9 +168,12 @@ public class RSAccountTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void testInsertUserWithMultiRoleRest() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void testInsertUserWithMultiRoleRest() throws IllegalParameterFault,
+            ResourceNotFoundFault {
         String usernameMultiRole = "user-multi-role-rs";
-        Long idUser = super.createAndInsertUser(usernameMultiRole, organizationTest, ADMIN, VIEWER);
+        GPUser user = super.createAndInsertUser(usernameMultiRole,
+                organizationTest, ADMIN, VIEWER);
+
         try {
             List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(usernameMultiRole).getAuthorities();
             assertNotNull(authorities);
@@ -179,7 +192,7 @@ public class RSAccountTest extends BasicRestServiceTest {
             assertTrue("Authority ADMIN string", isAdmin);
             assertTrue("Authority VIEWER string", isViewer);
         } finally {
-            boolean check = gpWSClient.deleteAccount(idUser);
+            boolean check = gpWSClient.deleteAccount(user.getId());
             assertTrue(check);
         }
     }
@@ -268,35 +281,49 @@ public class RSAccountTest extends BasicRestServiceTest {
         // Set disabled user
         userTest.setEnabled(false);
         gpWSClient.updateUser(userTest);
+
         // Must be throws AccountLoginFault because the user is disabled
         gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, passwordTest);
     }
 
     @Test
     public void updateUserRestTest() throws Exception {
-        Long idUser = super.createAndInsertUser("userToUpdate-SOAP", organizationTest, ADMIN);
-        GPUser user = gpWSClient.getUserDetail(idUser);
+        GPUser user1 = super.createAndInsertUser("userToUpdate-SOAP", organizationTest, ADMIN);
+
+        GPUser user = gpWSClient.getUserDetail(user1.getId());
         logger.info("##################USER : {}\n", user);
+
         user.setName("UserToUpdate");
         gpWSClient.updateUser(user);
-        user = gpWSClient.getUserDetail(idUser);
+
+        user = gpWSClient.getUserDetail(user1.getId());
         logger.info("#################USER_UPDATED : {}\n", user);
-        gpWSClient.deleteAccount(idUser);
+
+        gpWSClient.deleteAccount(user1.getId());
     }
 
     @Test
     public void searchUsersTestRest() throws Exception {
         String usernameMultiRole = "user-test1-rs";
-        Long idUser = super.createAndInsertUser(usernameMultiRole, organizationTest, ADMIN, VIEWER);
+        GPUser user = super.createAndInsertUser(usernameMultiRole,
+                organizationTest, ADMIN, VIEWER);
+
         try {
             insertMassiveUsers("-rs");
-            List<UserDTO> users = gpWSClient.searchUsers(idUser, new PaginatedSearchRequest(25, 0)).getSearchUsers();
+            List<UserDTO> users = gpWSClient.searchUsers(user.getId(),
+                    new PaginatedSearchRequest(25, 0)).getSearchUsers();
+
             assertEquals(25, users.size());
-            assertEquals(6, gpWSClient.searchUsers(idUser, new PaginatedSearchRequest(25, 1)).getSearchUsers().size());
-            Long userCount = gpWSClient.getUsersCount(organizationTest.getName(), null);
+
+            assertEquals(6, gpWSClient.searchUsers(user.getId(),
+                    new PaginatedSearchRequest(25, 1)).getSearchUsers().size());
+
+            Long userCount = gpWSClient.getUsersCount(organizationTest.getName(),
+                    null);
+
             assertEquals(32, userCount.intValue());
         } finally {
-            Boolean check = gpWSClient.deleteAccount(idUser);
+            Boolean check = gpWSClient.deleteAccount(user.getId());
             assertTrue(check);
         }
     }
@@ -304,21 +331,30 @@ public class RSAccountTest extends BasicRestServiceTest {
     @Test
     public void getAuthoritiesTestRest() throws Exception {
         String usernameMultiRole = "user-auth-rs";
-        Long idUser = super.createAndInsertUser(usernameMultiRole, organizationTest, ADMIN, VIEWER);
-        List<String> authorities = gpWSClient.getAuthorities(idUser).getAuthorities();
+        GPUser user = super.createAndInsertUser(usernameMultiRole,
+                organizationTest, ADMIN, VIEWER);
+
+        List<String> authorities = gpWSClient.getAuthorities(user.getId()).getAuthorities();
         assertEquals(2, authorities.size());
+
         logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@Authorities : {}", authorities);
     }
 
     @Test
     public void forceTemporaryAccountTestRest() throws Exception {
         String usernameTmp = "user-tmp-rs";
-        Long idUser = super.createAndInsertUser(usernameTmp, organizationTest, ADMIN, VIEWER);
-        gpWSClient.forceTemporaryAccount(idUser);
-        GPUser tmpUser = gpWSClient.getUserDetail(idUser);
+        GPUser user = super.createAndInsertUser(usernameTmp,
+                organizationTest, ADMIN, VIEWER);
+
+        gpWSClient.forceTemporaryAccount(user.getId());
+
+        GPUser tmpUser = gpWSClient.getUserDetail(user.getId());
         assertEquals(Boolean.TRUE, tmpUser.isAccountTemporary());
-        gpWSClient.forceExpiredTemporaryAccount(idUser);
-        tmpUser = gpWSClient.getUserDetail(idUser);
-        assertEquals(FALSE, tmpUser.isAccountNonExpired());
+
+        gpWSClient.forceExpiredTemporaryAccount(user.getId());
+        tmpUser = gpWSClient.getUserDetail(user.getId());
+
+        assertEquals(Boolean.FALSE, tmpUser.isAccountNonExpired());
     }
+
 }

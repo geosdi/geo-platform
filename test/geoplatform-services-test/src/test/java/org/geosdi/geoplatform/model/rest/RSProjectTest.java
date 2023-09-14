@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.model.rest;
 
+import com.google.common.collect.Maps;
 import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.shared.GPRole;
@@ -369,16 +370,21 @@ public class RSProjectTest extends BasicRestServiceTest {
         projectTest.setShared(true);
         projectTest.setName("shared_project_test_rs");
         gpWSClient.updateProject(projectTest);
+
         // Initial test
         List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
         assertNotEquals(accountsToShare.isEmpty(), TRUE);
         assertEquals(1, accountsToShare.size());
-        assertEquals(idUserTest, accountsToShare.get(0).getId().longValue());
+        assertEquals(this.userTest.getId().longValue(), accountsToShare.get(0).getId().longValue());
+
         // Insert Users to which the Project is shared
-        Long firstUserID = this.createAndInsertUser("first_to_share_project", organizationTest, GPRole.USER);
-        Long latterUserID = this.createAndInsertUser("latter_to_share_project", organizationTest, GPRole.VIEWER);
+        Long firstUserID = this.createAndInsertUser("first_to_share_project", organizationTest, GPRole.USER).getId();
+        Long latterUserID = this.createAndInsertUser("latter_to_share_project", organizationTest, GPRole.VIEWER)
+                .getId();
+
         GPUser firstUser = gpWSClient.getUserDetail(firstUserID);
         GPUser latterUser = gpWSClient.getUserDetail(latterUserID);
+
         // Insert the Users as viewers of Project
         this.createAndInsertAccountProject(firstUser, projectTest, BasePermission.READ);
         this.createAndInsertAccountProject(latterUser, projectTest, BasePermission.READ);
@@ -398,7 +404,7 @@ public class RSProjectTest extends BasicRestServiceTest {
         List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsToShareByProjectID(idProjectTest).getAccounts();
         assertEquals(accountsToShare.isEmpty(), TRUE);
         // Insert a User to which the Project is shared as viewer
-        Long newUserID = this.createAndInsertUser("user_to_share_project_rs", organizationTest, GPRole.USER);
+        Long newUserID = this.createAndInsertUser("user_to_share_project_rs", organizationTest, GPRole.USER).getId();
         GPUser newUser = gpWSClient.getUserDetail(newUserID);
         this.createAndInsertAccountProject(newUser, projectTest, BasePermission.READ);
         // Insert Users to which it possible to share the Project
@@ -416,18 +422,22 @@ public class RSProjectTest extends BasicRestServiceTest {
         projectTest.setShared(true);
         projectTest.setName("shared_project_owner_test_rs");
         gpWSClient.updateProject(projectTest);
+
         // Insert a User to which the Project is shared as viewer
-        Long newOwnerID = this.createAndInsertUser("user_to_share_project_rs", organizationTest, GPRole.USER);
+        Long newOwnerID = this.createAndInsertUser("user_to_share_project_rs", organizationTest, GPRole.USER).getId();
         GPUser newOwner = gpWSClient.getUserDetail(newOwnerID);
         this.createAndInsertAccountProject(newOwner, projectTest, BasePermission.READ);
+
         // Initial test
         GPAccount owner = gpWSClient.getProjectOwner(idProjectTest).getAccount();
         assertNotNull(owner);
         assertEquals(userTest, owner);
+
         // Change the Account owner
         RequestByAccountProjectIDs request = new RequestByAccountProjectIDs(newOwnerID, idProjectTest);
         boolean result = gpWSClient.setProjectOwner(request);
         assertTrue(result);
+
         // Final test
         owner = gpWSClient.getProjectOwner(idProjectTest).getAccount();
         assertNotNull(owner);
@@ -441,7 +451,8 @@ public class RSProjectTest extends BasicRestServiceTest {
         assertNotNull(owner);
         assertEquals(userTest, owner);
         // Change the Account owner
-        Long newOwnerID = this.createAndInsertUser("new_owner_rs", organizationTest, GPRole.ADMIN);
+        Long newOwnerID = this.createAndInsertUser("new_owner_rs", organizationTest, GPRole.ADMIN).getId();
+
         RequestByAccountProjectIDs request = new RequestByAccountProjectIDs(newOwnerID, idProjectTest);
         boolean result = gpWSClient.setProjectOwner(request);
         assertTrue(result);
@@ -459,14 +470,23 @@ public class RSProjectTest extends BasicRestServiceTest {
         List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
         assertNotNull(accountsToShare);
         assertEquals(1, accountsToShare.size());
-        assertEquals(idUserTest, accountsToShare.get(0).getId().longValue());
+        assertEquals(this.userTest.getId().longValue(), accountsToShare.get(0).getId().longValue());
+
         // Insert User to which the Project will be share
-        Long newUserID = this.createAndInsertUser("user_to_share_project_rs", organizationTest, GPRole.USER);
+        GPUser newUserID = this.createAndInsertUser("user_to_share_project_rs", organizationTest, GPRole.USER);
+
+        Map<Long, Integer> accountsMap = Maps.newHashMap();
+
+        accountsMap.put(userTest.getId(), 1);
+        accountsMap.put(newUserID.getId(), 2);
         // Test add user for sharing
-        Boolean result = gpWSClient.updateAccountsProjectSharing(new PutAccountsProjectRequest(idProjectTest, Arrays.asList(idUserTest, newUserID)));
+        Boolean result = gpWSClient.updateAccountsProjectSharing(
+                new PutAccountsProjectRequest(idProjectTest, accountsMap));
         assertTrue(result);
+
         project = gpWSClient.getProjectDetail(idProjectTest);
         assertTrue(project.isShared());
+
         accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
         assertNotNull(accountsToShare);
         assertEquals(2, accountsToShare.size());
@@ -483,7 +503,7 @@ public class RSProjectTest extends BasicRestServiceTest {
     @Test
     public void testUpdateAccountsProjectSharingRemoveAllRest() throws Exception {
         // Insert a User to which the Project is shared as viewer
-        Long newUserID = this.createAndInsertUser("user_to_share_project_rs", organizationTest, GPRole.USER);
+        Long newUserID = this.createAndInsertUser("user_to_share_project_rs", organizationTest, GPRole.USER).getId();
         GPUser newUser = gpWSClient.getUserDetail(newUserID);
         this.createAndInsertAccountProject(newUser, projectTest, BasePermission.READ);
         // Set the Project as share
@@ -504,23 +524,29 @@ public class RSProjectTest extends BasicRestServiceTest {
             }
         }
         assertTrue(check);
+
+        Map<Long, Integer> accountsMap = Maps.newHashMap();
+        accountsMap.put(this.userTest.getId(), 1);
+
         // Test delete user for sharing
-        boolean result = gpWSClient.updateAccountsProjectSharing(new PutAccountsProjectRequest(idProjectTest, Arrays.asList(idUserTest)));
+        boolean result = gpWSClient.updateAccountsProjectSharing(
+                new PutAccountsProjectRequest(idProjectTest, accountsMap));
         assertTrue(result);
+
         project = gpWSClient.getProjectDetail(idProjectTest);
         assertFalse(project.isShared());
         accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
         assertNotNull(accountsToShare);
         assertEquals(1, accountsToShare.size());
-        assertEquals(idUserTest, accountsToShare.get(0).getId().longValue());
+        assertEquals(this.userTest.getId().longValue(), accountsToShare.get(0).getId().longValue());
     }
 
     @Test
     public void testUpdateAccountsProjectSharingManageRest() throws Exception {
         // Insert a User to which the Project is shared as viewer
-        Long firstUserID = this.createAndInsertUser("first_to_share_project", organizationTest, GPRole.USER);
-        Long latterUserID = this.createAndInsertUser("latter_to_share_project", organizationTest, GPRole.VIEWER);
-        GPUser newUser = gpWSClient.getUserDetail(firstUserID);
+        GPUser firstUserID = this.createAndInsertUser("first_to_share_project", organizationTest, GPRole.USER);
+        GPUser latterUserID = this.createAndInsertUser("latter_to_share_project", organizationTest, GPRole.VIEWER);
+        GPUser newUser = gpWSClient.getUserDetail(firstUserID.getId());
         this.createAndInsertAccountProject(newUser, projectTest, BasePermission.READ);
         // Set the Project as share
         projectTest.setShared(true);
@@ -540,11 +566,20 @@ public class RSProjectTest extends BasicRestServiceTest {
             }
         }
         assertTrue(checkFirst);
+
+        Map<Long, Integer> accountsMap = Maps.newHashMap();
+        accountsMap.put(this.userTest.getId(), 1);
+        accountsMap.put(firstUserID.getId(), 1);
+        accountsMap.put(latterUserID.getId(), 1);
+
         // Test add latter user for sharing
-        boolean result = gpWSClient.updateAccountsProjectSharing(new PutAccountsProjectRequest(idProjectTest, Arrays.asList(idUserTest, firstUserID, latterUserID)));
+        boolean result = gpWSClient.updateAccountsProjectSharing(
+                new PutAccountsProjectRequest(idProjectTest, accountsMap));
         assertTrue(result);
+
         project = gpWSClient.getProjectDetail(idProjectTest);
         assertTrue(project.isShared());
+
         accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
         assertNotNull(accountsToShare);
         assertEquals(3, accountsToShare.size());
@@ -560,11 +595,17 @@ public class RSProjectTest extends BasicRestServiceTest {
         }
         assertTrue(checkFirst);
         assertTrue(checkLatter);
+
         // Test delete first user for sharing
-        result = gpWSClient.updateAccountsProjectSharing(new PutAccountsProjectRequest(idProjectTest, Arrays.asList(idUserTest, latterUserID)));
+
+        accountsMap.remove(firstUserID.getId());
+
+        result = gpWSClient.updateAccountsProjectSharing(new PutAccountsProjectRequest(idProjectTest, accountsMap));
         assertTrue(result);
+
         project = gpWSClient.getProjectDetail(idProjectTest);
         assertTrue(project.isShared());
+
         accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
         assertNotNull(accountsToShare);
         assertEquals(2, accountsToShare.size());
@@ -586,65 +627,85 @@ public class RSProjectTest extends BasicRestServiceTest {
         List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
         assertNotNull(accountsToShare);
         assertEquals(1, accountsToShare.size());
-        assertEquals(idUserTest, accountsToShare.get(0).getId().longValue());
+        assertEquals(this.userTest.getId().longValue(), accountsToShare.get(0).getId().longValue());
+
+        Map<Long, Integer> accountsMap = Maps.newHashMap();
+        accountsMap.put(this.userTest.getId(), 1);
+
         // Test pass owner
-        boolean result = gpWSClient.updateAccountsProjectSharing(new PutAccountsProjectRequest(idProjectTest, Arrays.asList(idUserTest)));
+        boolean result = gpWSClient
+                .updateAccountsProjectSharing(new PutAccountsProjectRequest(idProjectTest, Arrays.asList(idUserTest)));
         assertTrue(result);
+
         project = gpWSClient.getProjectDetail(idProjectTest);
         assertFalse(project.isShared());
         accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
         assertNotNull(accountsToShare);
         assertEquals(1, accountsToShare.size());
-        assertEquals(idUserTest, accountsToShare.get(0).getId().longValue());
+        assertEquals(this.userTest.getId().longValue(), accountsToShare.get(0).getId().longValue());
     }
 
     @Test
     public void updateAccountProjectTestRest() throws Exception {
         String username = "new-user-rs";
-        Long idUser = super.createAndInsertUser(username, organizationTest, GPRole.ADMIN, GPRole.VIEWER);
-        GPUser user = gpWSClient.getUserDetail(idUser);
-        long idProject = super.createAndInsertProject("_newproject_test_rs", false, 6, new Date(System.currentTimeMillis()));
+        GPUser idUser = super.createAndInsertUser(username, organizationTest, GPRole.ADMIN, GPRole.VIEWER);
+
+        GPUser user = gpWSClient.getUserDetail(idUser.getId());
+
+        long idProject = super.createAndInsertProject("_newproject_test_rs", false, 6,
+                new Date(System.currentTimeMillis()));
+
         GPProject project = gpWSClient.getProjectDetail(idProject);
+
         Long idAccountProject = super.createAndInsertAccountProject(user, project, BasePermission.ADMINISTRATION);
+
         GPAccountProject accountProject = gpWSClient.getAccountProject(idAccountProject);
+
         accountProject.setDefaultProject(TRUE);
+
         idAccountProject = gpWSClient.updateAccountProject(accountProject);
+
         accountProject = gpWSClient.getAccountProject(idAccountProject);
+
         assertEquals(TRUE, accountProject.isDefaultProject());
-        assertEquals(TRUE, gpWSClient.deleteAccount(idUser));
+        assertEquals(TRUE, gpWSClient.deleteAccount(idUser.getId()));
     }
 
     @Test
     public void retrieveAccountProjectsTestRest() throws Exception {
         String username = "first-user-rs";
-        Long idUser = super.createAndInsertUser(username, organizationTest, GPRole.ADMIN, GPRole.VIEWER);
-        GPUser user = gpWSClient.getUserDetail(idUser);
+        GPUser idUser = super.createAndInsertUser(username, organizationTest, GPRole.ADMIN, GPRole.VIEWER);
+        GPUser user = gpWSClient.getUserDetail(idUser.getId());
         String username1 = "second-user-rs";
-        Long idUser1 = super.createAndInsertUser(username1, organizationTest, GPRole.ADMIN);
-        GPUser user1 = gpWSClient.getUserDetail(idUser1);
-        long idProject = super.createAndInsertProject("first_project_test_rs", false, 116, new Date(System.currentTimeMillis()));
+        GPUser idUser1 = super.createAndInsertUser(username1, organizationTest, GPRole.ADMIN);
+        GPUser user1 = gpWSClient.getUserDetail(idUser1.getId());
+        long idProject = super.createAndInsertProject("first_project_test_rs", false, 116,
+                new Date(System.currentTimeMillis()));
         GPProject project = gpWSClient.getProjectDetail(idProject);
-        long idProject1 = super.createAndInsertProject("second_project_test_rs", false, 11, new Date(System.currentTimeMillis()));
+        long idProject1 = super.createAndInsertProject("second_project_test_rs", false, 11,
+                new Date(System.currentTimeMillis()));
         GPProject project1 = gpWSClient.getProjectDetail(idProject1);
         super.createAndInsertAccountProject(user, project, BasePermission.ADMINISTRATION);
         super.createAndInsertAccountProject(user1, project, BasePermission.ADMINISTRATION);
         super.createAndInsertAccountProject(user, project1, BasePermission.ADMINISTRATION);
         assertEquals(2, gpWSClient.getAccountProjectsByProjectID(idProject).getAccountProjects().size());
-        assertEquals(116, gpWSClient.getAccountProjectByAccountAndProjectIDs(idUser, idProject).getProject().getNumberOfElements());
-        assertEquals(2, gpWSClient.getAccountProjectsCount(idUser, null).intValue());
-        assertEquals(TRUE, gpWSClient.deleteAccount(idUser));
-        assertEquals(TRUE, gpWSClient.deleteAccount(idUser1));
+        assertEquals(116, gpWSClient.getAccountProjectByAccountAndProjectIDs(idUser.getId(), idProject).getProject()
+                .getNumberOfElements());
+        assertEquals(2, gpWSClient.getAccountProjectsCount(idUser.getId(), null).intValue());
+        assertEquals(TRUE, gpWSClient.deleteAccount(idUser.getId()));
+        assertEquals(TRUE, gpWSClient.deleteAccount(idUser1.getId()));
     }
 
     @Test
     public void saveAccountProjectPropertiesRest() throws Exception {
-        AccountProjectPropertiesDTO apDTO = new AccountProjectPropertiesDTO(idUserTest, idProjectTest, "Project-New-Rest", 4, TRUE, TRUE, TRUE, FALSE);
+        AccountProjectPropertiesDTO apDTO = new AccountProjectPropertiesDTO(this.userTest.getId(), idProjectTest,
+                "Project-New-Rest", 4, TRUE, TRUE, TRUE, FALSE);
         assertTrue(gpWSClient.saveAccountProjectProperties(apDTO));
         GPProject project = gpWSClient.getProjectDetail(idProjectTest);
         logger.debug("\n\n@@@@@@@@@@@@@@@@@@@@@@Project_Updated : {}\n\n@@@@@@@@@@@@@@@@@@", project);
         assertEquals(TRUE, project.isShared());
         assertEquals(2, project.getVersion());
-        GPProject defaultProject = gpWSClient.getDefaultProject(idUserTest);
+        GPProject defaultProject = gpWSClient.getDefaultProject(this.userTest.getId());
         assertEquals(defaultProject.getId(), project.getId());
     }
 
@@ -663,7 +724,8 @@ public class RSProjectTest extends BasicRestServiceTest {
     @Test
     public void cloneProjectTestRest() throws Exception {
         //create project
-        GPProject project = super.createProject("Project-To-Be-Cloned", FALSE, 200, new Date(System.currentTimeMillis()));
+        GPProject project = super.createProject("Project-To-Be-Cloned", FALSE, 200,
+                new Date(System.currentTimeMillis()));
         Long idProject = gpWSClient.saveProject(new SaveProjectRequest(usernameTest, project, TRUE));
         GPProject loadProject = gpWSClient.getProjectDetail(idProject);
         assertEquals(200, loadProject.getNumberOfElements());
@@ -715,14 +777,18 @@ public class RSProjectTest extends BasicRestServiceTest {
         assertEquals(titleFolderC, clonedFolder_C.getName());
         assertEquals(titleFolderD, clonedFolder_D.getName());
         assertEquals(titleFolderE, clonedFolder_E.getName());
+
         assertEquals(usernameTest, owner.getAccount().getNaturalID());
         assertEquals(TRUE, gpWSClient.deleteAccount(owner.getAccount().getId()));
     }
 
     @Test
     public void setProjectSharedTestRest() throws Exception {
-        Long idProject = super.createAndInsertProject("Project-Rest-to-Share", FALSE, 2000, new Date(System.currentTimeMillis()));
+        Long idProject = super.createAndInsertProject("Project-Rest-to-Share", FALSE, 2000,
+                new Date(System.currentTimeMillis()));
+
         gpWSClient.setProjectShared(idProject);
+
         GPProject project = gpWSClient.getProjectDetail(idProject);
         assertNotNull(project);
         assertEquals(TRUE, project.isShared());

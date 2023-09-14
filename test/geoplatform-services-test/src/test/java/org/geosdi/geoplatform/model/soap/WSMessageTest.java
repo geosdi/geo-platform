@@ -54,6 +54,7 @@ import static org.geosdi.geoplatform.request.LikePatternType.CONTENT_EQUALS;
 import static org.junit.Assert.*;
 
 /**
+ *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class WSMessageTest extends BaseSoapServiceTest {
@@ -69,11 +70,13 @@ public class WSMessageTest extends BaseSoapServiceTest {
         // Insert Organization
         this.setUpOrganization();
         // Insert Users
-        idUserTest = this.createAndInsertUser(usernameTest, organizationTest, USER);
-        userTest = gpWSClient.getUserDetailByUsername(new SearchRequest(usernameTest, CONTENT_EQUALS));
-        firstRecipientID = this.createAndInsertUser("first_recipient", organizationTest, USER);
+        userTest = gpWSClient.getUserDetailByUsername(
+                new SearchRequest(usernameTest, CONTENT_EQUALS));
+
+        firstRecipientID = this.createAndInsertUser("first_recipient", organizationTest, GPRole.USER).getId();
         firstRecipient = gpWSClient.getUserDetail(firstRecipientID);
-        latterRecipientID = this.createAndInsertUser("latter_recipient", organizationTest, VIEWER);
+
+        latterRecipientID = this.createAndInsertUser("latter_recipient", organizationTest, GPRole.VIEWER).getId();
 //        latterRecipient = gpWSClient.getUserDetail(latterRecipientID);
         // Create message
         message = new GPMessage();

@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
 import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.request.message.MarkMessageReadByDateRequest;
 import org.geosdi.geoplatform.response.MessageDTO;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.*;
@@ -68,12 +69,14 @@ public class RSMessageTest extends BasicRestServiceTest {
         // Insert Organization
         this.setUpOrganization();
         // Insert Users
-        idUserTest = this.createAndInsertUser(usernameTest, organizationTest, USER);
+        this.userTest = this.createAndInsertUser(usernameTest, organizationTest, USER);
         userTest = gpWSClient.getUserDetailByUsername(new SearchRequest(usernameTest, CONTENT_EQUALS));
-        firstRecipientID = this.createAndInsertUser("first_recipient_RS", organizationTest, USER);
+
+        firstRecipientID = this.createAndInsertUser("first_recipient_RS", organizationTest, USER).getId();
         firstRecipient = gpWSClient.getUserDetail(firstRecipientID);
-        latterRecipientID = this.createAndInsertUser("latter_recipient_RS", organizationTest, VIEWER);
+        latterRecipientID = this.createAndInsertUser("latter_recipient_RS", organizationTest, VIEWER).getId();
 //        latterRecipient = gpWSClient.getUserDetail(latterRecipientID);
+
         // Create message
         message = new GPMessage();
         message.setRecipient(firstRecipient);

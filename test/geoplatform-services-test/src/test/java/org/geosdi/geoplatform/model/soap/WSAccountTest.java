@@ -123,24 +123,28 @@ public class WSAccountTest extends BaseSoapServiceTest {
 
         // Get User from Id
         // Get UserDTO from Id
-        UserDTOResponse userDTOResponse = gpWSClient.getShortUser(idUserTest);
+        UserDTOResponse userDTOResponse = gpWSClient.getShortUser(this.userTest.getId());
         UserDTO userDTOFromWS = userDTOResponse.getUserDTO();
         assertNotNull(userDTOFromWS);
-        assertEquals("Error found UserDTO from Id", idUserTest, userDTOFromWS.getId().longValue());
+        assertEquals("Error found UserDTO from Id", this.userTest.getId().longValue(),
+                userDTOFromWS.getId().longValue());
         // Get GPUser from Id
-        GPUser userFromWS = gpWSClient.getUserDetail(idUserTest);
+        GPUser userFromWS = gpWSClient.getUserDetail(this.userTest.getId());
         assertNotNull(userFromWS);
-        assertEquals("Error found GPUser from Id", idUserTest, userFromWS.getId().longValue());
+        assertEquals("Error found GPUser from Id", this.userTest.getId().longValue(),
+                userFromWS.getId().longValue());
 
         // Get User from Username
         // Get UserDTO from Username
         userDTOFromWS = gpWSClient.getShortUserByUsername(new SearchRequest(usernameTest, CONTENT_EQUALS)).getUserDTO();
         assertNotNull(userDTOFromWS);
-        assertEquals("Error found UserDTO from Username", idUserTest, userDTOFromWS.getId().longValue());
+        assertEquals("Error found UserDTO from Username", this.userTest.getId().longValue(),
+                userDTOFromWS.getId().longValue());
         // Get GPUser from Username
         userFromWS = gpWSClient.getUserDetailByUsername(new SearchRequest(usernameTest, CONTENT_EQUALS));
         assertNotNull(userFromWS);
-        assertEquals("Error found GPUser from Username", idUserTest, userFromWS.getId().longValue());
+        assertEquals("Error found GPUser from Username", this.userTest.getId().longValue(),
+                userFromWS.getId().longValue());
     }
 
     @Test(expected = IllegalParameterFault.class)
@@ -164,7 +168,9 @@ public class WSAccountTest extends BaseSoapServiceTest {
     @Test
     public void testInsertUserWithMultiRole() throws IllegalParameterFault, ResourceNotFoundFault {
         String usernameMultiRole = "user-multi-role";
-        Long idUser = super.createAndInsertUser(usernameMultiRole, organizationTest, ADMIN, VIEWER);
+        GPUser user = super.createAndInsertUser(usernameMultiRole,
+                organizationTest, ADMIN, VIEWER);
+
         try {
             List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(usernameMultiRole).getAuthorities();
             assertNotNull(authorities);
@@ -185,7 +191,7 @@ public class WSAccountTest extends BaseSoapServiceTest {
             assertTrue("Authority VIEWER string", isViewer);
 
         } finally {
-            boolean check = gpWSClient.deleteAccount(idUser);
+            boolean check = gpWSClient.deleteAccount(user.getId());
             assertTrue(check);
         }
     }
@@ -276,10 +282,10 @@ public class WSAccountTest extends BaseSoapServiceTest {
     @Test(expected = AccountLoginFault.class)
     public void testLoginFaultUserExpired() throws ResourceNotFoundFault, IllegalParameterFault, AccountLoginFault {
         // Set temporary user
-        gpWSClient.forceTemporaryAccount(idUserTest);
+        gpWSClient.forceTemporaryAccount(this.userTest.getId());
 
         // Set expired user (user must be temporary)
-        gpWSClient.forceExpiredTemporaryAccount(idUserTest);
+        gpWSClient.forceExpiredTemporaryAccount(this.userTest.getId());
 
         // Must be throws AccountLoginFault because the user is expired
         gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, passwordTest);
@@ -296,27 +302,29 @@ public class WSAccountTest extends BaseSoapServiceTest {
 
     @Test
     public void updateUserSoapTest() throws Exception {
-        Long idUser = super.createAndInsertUser("userToUpdate-SOAP", organizationTest, ADMIN);
-        GPUser user = gpWSClient.getUserDetail(idUser);
+        GPUser user1 = super.createAndInsertUser("userToUpdate-SOAP", organizationTest, ADMIN);
+        GPUser user = gpWSClient.getUserDetail(user1.getId());
         logger.info("##################USER : {}\n", user);
         user.setName("UserToUpdate");
         gpWSClient.updateUser(user);
-        user = gpWSClient.getUserDetail(idUser);
+        user = gpWSClient.getUserDetail(user1.getId());
         logger.info("#################USER_UPDATED : {}\n", user);
-        gpWSClient.deleteAccount(idUser);
+        gpWSClient.deleteAccount(user1.getId());
     }
 
     @Test
     public void searchUsersTest() throws Exception {
         String usernameMultiRole = "user-test1-ws";
-        Long idUser = super.createAndInsertUser(usernameMultiRole, organizationTest, ADMIN, VIEWER);
+        GPUser user = super.createAndInsertUser(usernameMultiRole, organizationTest, VIEWER);
         try {
             insertMassiveUsers("-ws");
-            List<UserDTO> users = gpWSClient.searchUsers(idUser, new PaginatedSearchRequest(25, 0)).getSearchUsers();
+            List<UserDTO> users = gpWSClient.searchUsers(user.getId(), new PaginatedSearchRequest(25, 0))
+                    .getSearchUsers();
             assertEquals(25, users.size());
-            assertEquals(6, gpWSClient.searchUsers(idUser, new PaginatedSearchRequest(25, 1)).getSearchUsers().size());
+            assertEquals(6,
+                    gpWSClient.searchUsers(user.getId(), new PaginatedSearchRequest(25, 1)).getSearchUsers().size());
         } finally {
-            Boolean check = gpWSClient.deleteAccount(idUser);
+            Boolean check = gpWSClient.deleteAccount(user.getId());
             assertTrue(check);
         }
     }

@@ -147,17 +147,22 @@ public class WSFolderTest extends BaseSoapServiceTest {
         int totalFolders = gpWSClient.getNumberOfElementsProject(idProjectTest);
         assertEquals("Number of all folders of ProjectTest before deleted", 7, totalFolders); // SetUp() added 2+5 folders
         //
-        ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest, super.idUserTest);
-        assertNotNull("projectWithRootFolders null", projectWithRootFolders);
+        ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest, this.userTest.getId());
+        assertNotNull("projectWithRootFolders null",
+                projectWithRootFolders);
+
         List<FolderDTO> rootFolderList = projectWithRootFolders.getRootFolders();
         logger.debug("##########################################FOUND : {}\n\n", rootFolderList.size());
         assertNotNull("List of root folders is null", rootFolderList);
         assertEquals("Number of root folders of ProjectTest before deleted", 2, rootFolderList.size());
         // Delete "rootFolderB" and in cascade "folder3" & "folder4" & "folder5"
         gpWSClient.deleteFolder(idRootFolderB);
+
         // "rootFolderA" ---> "folder1" & "folder2"
-        projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest, super.idUserTest);
-        assertNotNull("projectWithRootFolders null", projectWithRootFolders);
+        projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest, this.userTest.getId());
+        assertNotNull("projectWithRootFolders null",
+                projectWithRootFolders);
+
         rootFolderList = projectWithRootFolders.getRootFolders();
         assertNotNull("List of mod root folders is null", rootFolderList);
         assertEquals("Number of root folders of ProjectTest after deleted", 1, rootFolderList.size());

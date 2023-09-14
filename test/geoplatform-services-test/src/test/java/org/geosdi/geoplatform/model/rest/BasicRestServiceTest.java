@@ -92,8 +92,10 @@ abstract class BasicRestServiceTest extends ServiceTest {
     public void setUp() throws Exception {
         super.setUp();
         // Insert User
-        idUserTest = this.createAndInsertUser(usernameTest, organizationTest, USER);
-        userTest = gpWSClient.getUserDetailByUsername(new SearchRequest(usernameTest, CONTENT_EQUALS));
+        this.userTest = this.createAndInsertUser(usernameTest, organizationTest,
+                USER);
+        userTest = gpWSClient.getUserDetailByUsername(
+                new SearchRequest(usernameTest, CONTENT_EQUALS));
         // Insert Project
         idProjectTest = this.createAndInsertProject("project_test_rs", false, 2, new Date(System.currentTimeMillis()));
         projectTest = gpWSClient.getProjectDetail(idProjectTest);

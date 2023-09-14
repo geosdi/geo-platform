@@ -679,7 +679,7 @@ public class WSProjectTest extends BaseSoapServiceTest {
         assertTrue(result);
 
         project = gpWSClient.getProjectDetail(idProjectTest);
-        Assert.assertFalse(project.isShared());
+        assertFalse(project.isShared());
 
         accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
         assertNotNull(accountsToShare);

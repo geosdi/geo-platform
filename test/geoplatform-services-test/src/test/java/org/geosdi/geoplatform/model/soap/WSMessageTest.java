@@ -35,11 +35,6 @@
  */
 package org.geosdi.geoplatform.model.soap;
 
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPMessage;
 import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
@@ -50,6 +45,8 @@ import org.geosdi.geoplatform.request.message.MarkMessageReadByDateRequest;
 import org.geosdi.geoplatform.response.MessageDTO;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.*;
 
 /**
  *
@@ -69,17 +66,15 @@ public class WSMessageTest extends BaseSoapServiceTest {
         this.setUpOrganization();
 
         // Insert Users
-        idUserTest = this.createAndInsertUser(usernameTest, organizationTest,
+        this.userTest = this.createAndInsertUser(usernameTest, organizationTest,
                 GPRole.USER);
         userTest = gpWSClient.getUserDetailByUsername(
                 new SearchRequest(usernameTest, LikePatternType.CONTENT_EQUALS));
 
-        firstRecipientID = this.createAndInsertUser("first_recipient",
-                organizationTest, GPRole.USER);
+        firstRecipientID = this.createAndInsertUser("first_recipient", organizationTest, GPRole.USER).getId();
         firstRecipient = gpWSClient.getUserDetail(firstRecipientID);
 
-        latterRecipientID = this.createAndInsertUser("latter_recipient",
-                organizationTest, GPRole.VIEWER);
+        latterRecipientID = this.createAndInsertUser("latter_recipient", organizationTest, GPRole.VIEWER).getId();
 //        latterRecipient = gpWSClient.getUserDetail(latterRecipientID);
 
         // Create message

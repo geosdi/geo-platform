@@ -74,7 +74,7 @@ public abstract class ServiceTest {
     protected static final String domainNameTest = "geosdi-test.org";
     //
     protected List<String> layerInfoKeywords;
-    protected long idUserTest = -1;
+    protected GPUser userTest = null;
     //
     protected final String serverUrlTest = "http://map.serverNameTest.foo";
     protected long idServerTest = -1;
@@ -117,13 +117,15 @@ public abstract class ServiceTest {
      *
      * @throws org.geosdi.geoplatform.exception.IllegalParameterFault
      */
-    protected Long createAndInsertUser(String username, GPOrganization organization, GPRole... roles) throws IllegalParameterFault {
+    protected GPUser createAndInsertUser(String username, GPOrganization organization, GPRole... roles)
+            throws IllegalParameterFault {
         GPUser user = this.createUser(username, organization, roles);
         logger.debug("\n*** GPUser to INSERT:\n{}\n***", user);
         long idUser = gpWSClient.insertAccount(new InsertAccountRequest(user, FALSE));
+        user.setId(idUser);
         logger.debug("\n*** Id ASSIGNED at the User in the DB: {} ***", idUser);
         assertTrue("Id ASSIGNED at the User in the DB", idUser > 0);
-        return idUser;
+        return user;
     }
 
     protected GPUser createUser(String username, GPOrganization organization, GPRole... roles) {

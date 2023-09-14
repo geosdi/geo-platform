@@ -174,8 +174,7 @@ public class WSFolderTest extends BaseSoapServiceTest {
         Assert.assertEquals("Number of all folders of ProjectTest before deleted",
                 7, totalFolders); // SetUp() added 2+5 folders
         //
-        ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(
-                idProjectTest, super.idUserTest);
+        ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest, this.userTest.getId());
         Assert.assertNotNull("projectWithRootFolders null",
                 projectWithRootFolders);
 
@@ -189,8 +188,7 @@ public class WSFolderTest extends BaseSoapServiceTest {
         gpWSClient.deleteFolder(idRootFolderB);
 
         // "rootFolderA" ---> "folder1" & "folder2"
-        projectWithRootFolders = gpWSClient.getProjectWithRootFolders(
-                idProjectTest, super.idUserTest);
+        projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest, this.userTest.getId());
         Assert.assertNotNull("projectWithRootFolders null",
                 projectWithRootFolders);
 

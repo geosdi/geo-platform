@@ -35,22 +35,23 @@
  */
 package org.geosdi.geoplatform.model.rest;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.folder.WSAddFolderAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
 import org.geosdi.geoplatform.request.folder.WSDDFolderAndTreeModifications;
+import org.geosdi.geoplatform.request.folder.WSDeleteFolderAndTreeModifications;
 import org.geosdi.geoplatform.response.FolderDTO;
 import org.geosdi.geoplatform.response.ProjectDTO;
 import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.response.collection.TreeFolderElements;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -175,8 +176,7 @@ public class RSFolderTest extends BasicRestServiceTest {
                 "Number of all folders of ProjectTest before deleted",
                 7, totalFolders.intValue()); // SetUp() added 2+5 folders
         //
-        ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(
-                idProjectTest, super.idUserTest);
+        ProjectDTO projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest, this.userTest.getId());
         Assert.assertNotNull("projectWithRootFolders null",
                 projectWithRootFolders);
 
@@ -190,8 +190,7 @@ public class RSFolderTest extends BasicRestServiceTest {
         gpWSClient.deleteFolder(idRootFolderB);
 
         // "rootFolderA" ---> "folder1" & "folder2"
-        projectWithRootFolders = gpWSClient.getProjectWithRootFolders(
-                idProjectTest, super.idUserTest);
+        projectWithRootFolders = gpWSClient.getProjectWithRootFolders(idProjectTest, this.userTest.getId());
         Assert.assertNotNull("projectWithRootFolders null",
                 projectWithRootFolders);
 

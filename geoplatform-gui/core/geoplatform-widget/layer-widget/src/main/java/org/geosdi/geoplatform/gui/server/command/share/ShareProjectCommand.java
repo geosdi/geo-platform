@@ -66,7 +66,7 @@ public class ShareProjectCommand implements
     public ShareProjectResponse execute(ShareProjectRequest request,
             HttpServletRequest httpServletRequest) {
 
-        logger.debug("##################### Executing {} Command", this.
+        logger.debug("#####################Executing {} Command", this.
                 getClass().getSimpleName());
 
         logger.debug("\n@@@@@@@@@@@ID Project: {}\n", 
@@ -78,7 +78,7 @@ public class ShareProjectCommand implements
                 request.getIdSharedProject(),
                 request.getAccountIDsProject(), httpServletRequest);
 
-        logger.debug("#################### Found {} ", result);
+        logger.debug("####################Found {} ", result);
 
         return new ShareProjectResponse(result);
     }

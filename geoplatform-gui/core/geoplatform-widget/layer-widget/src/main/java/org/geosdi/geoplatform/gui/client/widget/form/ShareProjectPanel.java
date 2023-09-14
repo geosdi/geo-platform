@@ -52,6 +52,7 @@ import com.extjs.gxt.ui.client.widget.form.ListField;
 import com.extjs.gxt.ui.client.widget.form.StoreFilterField;
 import com.extjs.gxt.ui.client.widget.layout.*;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.client.BasicWidgetResources;
@@ -81,6 +82,9 @@ import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
 import java.util.List;
+import java.util.Map;
+
+import static org.geosdi.geoplatform.gui.client.model.SharingPermissionEnum.READ;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -106,16 +110,14 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
     private Label organizationLabel;
     private ShareProjectPermissionWidget shareProjectPermissionWidget;
 
-    public ShareProjectPanel(GPProjectManagementWidget projectManagementWidget,
-            boolean lazy) {
+    public ShareProjectPanel(GPProjectManagementWidget projectManagementWidget, boolean lazy) {
         super(lazy);
         this.projectManagementWidget = projectManagementWidget;
     }
 
     @Override
     public void initSize() {
-        super.setSize(GPProjectManagementWidget.COMPONENT_WIDTH,
-                GPProjectManagementWidget.COMPONENT_HEIGHT);
+        super.setSize(GPProjectManagementWidget.COMPONENT_WIDTH, GPProjectManagementWidget.COMPONENT_HEIGHT);
     }
 
     @Override
@@ -123,8 +125,7 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         VerticalPanel verticalPanel = new VerticalPanel();
         verticalPanel.setSpacing(10);
         FieldSet fieldSet = new FieldSet();
-        fieldSet.setHeadingHtml(
-                LayerModuleConstants.INSTANCE.ShareProjectPanel_fieldSetHeadingText());
+        fieldSet.setHeadingHtml(LayerModuleConstants.INSTANCE.ShareProjectPanel_fieldSetHeadingText());
         fieldSet.setWidth(GPProjectManagementWidget.COMPONENT_WIDTH - 25);
         this.projectNameLabel = new Label();
         this.projectNameLabel.setStyleAttribute("font-size", "13");
@@ -137,24 +138,20 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         fieldSet.add(organizationLabel, new MarginData(10));
         verticalPanel.add(fieldSet);
         //
-        LayoutContainer labelListContainer = new LayoutContainer(
-                new BorderLayout());
+        LayoutContainer labelListContainer = new LayoutContainer(new BorderLayout());
         labelListContainer.setHeight(20);
         labelListContainer.setStyleAttribute("background-color", "white");
-        labelListContainer.setWidth(
-                GPProjectManagementWidget.COMPONENT_WIDTH - 25);
-        Label organizationUserLabel = new Label(LayerModuleConstants.INSTANCE.
-                ShareProjectPanel_organizationUserLabelText() + ":");
+        labelListContainer.setWidth(GPProjectManagementWidget.COMPONENT_WIDTH - 25);
+        Label organizationUserLabel = new Label(
+                LayerModuleConstants.INSTANCE.ShareProjectPanel_organizationUserLabelText() + ":");
         organizationUserLabel.setStyleAttribute("font-size", "13");
         organizationUserLabel.setStyleAttribute("font-weight", "bold");
-        labelListContainer.add(organizationUserLabel, new BorderLayoutData(
-                Style.LayoutRegion.WEST));
-        Label projectSharedUserLabel = new Label(LayerModuleConstants.INSTANCE.
-                ShareProjectPanel_projectSharedUserLabelText() + ":");
+        labelListContainer.add(organizationUserLabel, new BorderLayoutData(Style.LayoutRegion.WEST));
+        Label projectSharedUserLabel = new Label(
+                LayerModuleConstants.INSTANCE.ShareProjectPanel_projectSharedUserLabelText() + ":");
         projectSharedUserLabel.setStyleAttribute("font-size", "13");
         projectSharedUserLabel.setStyleAttribute("font-weight", "bold");
-        labelListContainer.add(projectSharedUserLabel, new BorderLayoutData(
-                Style.LayoutRegion.EAST));
+        labelListContainer.add(projectSharedUserLabel, new BorderLayoutData(Style.LayoutRegion.EAST));
         verticalPanel.add(labelListContainer);
         //
         final DualListField<GPSimpleUser> lists = new DualListField<GPSimpleUser>();
@@ -162,46 +159,44 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         lists.setHeight("" + GPProjectManagementWidget.COMPONENT_HEIGHT / 1.75);
         lists.setStyleAttribute("margin-left", "11px");
         lists.setHideLabel(Boolean.TRUE);
-
         ListField<GPSimpleUser> from = lists.getFromList();
         from.setDisplayField(GPSimpleUserKeyValue.NAME.toString());
         this.fromStore = new ListStore<GPSimpleUser>();
         from.setStore(this.fromStore);
         ListField<GPSimpleUser> to = lists.getToList();
         to.setDisplayField(GPSimpleUserKeyValue.NAME.toString());
+
         this.toStore = new ListStore<GPSimpleUser>();
         to.setStore(this.toStore);
-        Button cancelButton = new Button(LayerModuleConstants.INSTANCE.
-                ShareProjectPanel_cancelButtonText(),
-                AbstractImagePrototype.create(BasicWidgetResources.ICONS.gear()),
-                new SelectionListener<ButtonEvent>() {
 
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        ShareProjectPanel.this.reset();
-                        projectManagementWidget.showSearchProjectPanel();
-                    }
-                });
+        Button cancelButton = new Button(LayerModuleConstants.INSTANCE.ShareProjectPanel_cancelButtonText(),
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.gear()), new SelectionListener<ButtonEvent>() {
+
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                ShareProjectPanel.this.reset();
+                projectManagementWidget.showSearchProjectPanel();
+            }
+        });
         super.addButton(cancelButton);
         saveButton = new Button(ButtonsConstants.INSTANCE.saveText(),
-                AbstractImagePrototype.create(BasicWidgetResources.ICONS.save()),
-                new SelectionListener<ButtonEvent>() {
+                AbstractImagePrototype.create(BasicWidgetResources.ICONS.save()), new SelectionListener<ButtonEvent>() {
 
-                    @Override
-                    public void componentSelected(ButtonEvent ce) {
-                        if (project.isDefaultProject()
-                        && !MementoModuleInjector.MainInjector.getInstance().getMementoSave().isEmpty()) {
-                            GeoPlatformMessage.confirmMessage(
-                                    MementoPersistenceConstants.INSTANCE.MementoSaveCacheManager_unsavedOperationsText(),
-                                    MementoPersistenceConstants.INSTANCE.MementoSaveCacheManager_unsavedOperationMessageText(),
-                                    new Listener<MessageBoxEvent>() {
-                                        @Override
-                                        public void handleEvent(MessageBoxEvent be) {
-                                            if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
-                                                PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
-                                                LayerHandlerManager.fireEvent(peekCacheEvent);
-                                            } else {
-                                                GeoPlatformMessage.errorMessage(
+            @Override
+            public void componentSelected(ButtonEvent ce) {
+                if (project.isDefaultProject() && !MementoModuleInjector.MainInjector.getInstance().getMementoSave()
+                        .isEmpty()) {
+                    GeoPlatformMessage.confirmMessage(
+                            MementoPersistenceConstants.INSTANCE.MementoSaveCacheManager_unsavedOperationsText(),
+                            MementoPersistenceConstants.INSTANCE.MementoSaveCacheManager_unsavedOperationMessageText(),
+                            new Listener<MessageBoxEvent>() {
+                                @Override
+                                public void handleEvent(MessageBoxEvent be) {
+                                    if (Dialog.YES.equals(be.getButtonClicked().getItemId())) {
+                                        PeekCacheEvent peekCacheEvent = new PeekCacheEvent();
+                                        LayerHandlerManager.fireEvent(peekCacheEvent);
+                                    } else {
+                                        GeoPlatformMessage.errorMessage(
                                                 LayerModuleConstants.INSTANCE.ShareProjectPanel_shareVerifySaveOperationsTitleText(),
                                                 LayerModuleConstants.INSTANCE.ShareProjectPanel_shareVerifySaveOperationsMessageText());
                                             }
@@ -209,8 +204,8 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                                     });
                         } else {
                             toStore.commitChanges();
-                            List<Long> accountIDsProject = Lists.<Long>newArrayListWithCapacity(
-                                    toStore.getModels().size());
+                    Map<Long, Integer> accountsMap = Maps.newHashMap();
+
                             IGPAccountDetail accountDetail = Registry.get(
                                     UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
                             boolean test = false;
@@ -218,13 +213,14 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                                 if (user.getId().equals(accountDetail.getId())) {
                                     test = true;
                                 }
-                                accountIDsProject.add(user.getId());
+                                accountsMap.put(user.getId(), user.getSharedPermission());
+                                //accountIDsProject.add(user.getId());
                             }
-                            final boolean isShared = test && accountIDsProject.size() > 1;
+                    final boolean isShared = test && toStore.getModels().size() > 1;
                             ShareProjectPanel.this.reset();
 
-                            shareProjectReq.setIdSharedProject(project.getId());
-                            shareProjectReq.setAccountIDsProject(accountIDsProject);
+                    shareProjectReq.setIdSharedProject(project.getId());
+                    shareProjectReq.setAccountIDsProject(accountsMap);
 
                             GPClientCommandExecutor.executeCommand(
                                     new GPClientCommand<ShareProjectResponse>() {
@@ -260,23 +256,21 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                 });
         super.addButton(saveButton);
         super.add(verticalPanel);
-        super.add(lists, new FormData("98%"));
+        super.add(lists, new FormData("97%"));
         LayoutContainer filterContainer = new LayoutContainer(new BorderLayout());
         this.shareProjectPermissionWidget = new ShareProjectPermissionWidget();
         this.fromFilter = this.createServerFilter(this.fromFilter, fromStore,
                 LayerModuleConstants.INSTANCE.ShareProjectPanel_fromFilterLabelText());
-        filterContainer.add(this.fromFilter, new BorderLayoutData(
-                Style.LayoutRegion.WEST));
+        filterContainer.add(this.fromFilter, new BorderLayoutData(Style.LayoutRegion.WEST));
         this.toFilter = this.createServerFilter(this.toFilter, toStore,
                 LayerModuleConstants.INSTANCE.ShareProjectPanel_toFilterLabelText());
-        filterContainer.add(this.toFilter, new BorderLayoutData(
-                Style.LayoutRegion.EAST));
+        filterContainer.add(this.toFilter, new BorderLayoutData(Style.LayoutRegion.EAST));
         filterContainer.setStyleAttribute("margin", "11px");
         lists.getToList().addSelectionChangedListener(new SelectionChangedListener<GPSimpleUser>() {
             @Override
             public void selectionChanged(SelectionChangedEvent<GPSimpleUser> se) {
 
-                if (se.getSelectedItem() != null && se.getSelectedItem().getPermissionMask() != 16) {
+                if (se.getSelectedItem() != null && se.getSelectedItem().getSharedPermission() != 16) {
                     shareProjectPermissionWidget.bindUser(se.getSelectedItem());
                     WidgetPropertiesHandlerManager.fireEvent(new GPChangeHeightWidgetEvent(
                             GPProjectManagementWidget.WINDOW_HEIGHT + shareProjectPermissionWidget.getHeight()));
@@ -289,6 +283,24 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                 }
             }
         });
+
+
+        lists.getFromList().addSelectionChangedListener(new SelectionChangedListener<GPSimpleUser>() {
+
+
+            /**
+             * Fires when the selection has changed.
+             *
+             * @param se the selection event
+             */
+            @Override
+            public void selectionChanged(SelectionChangedEvent<GPSimpleUser> se) {
+                if (se.getSelectedItem() != null && se.getSelectedItem().getSharedPermission() != 16) {
+                    se.getSelectedItem().setSharedPermission(READ.getCode());
+                }
+            }
+        });
+
         super.add(shareProjectPermissionWidget, new RowData());
         super.add(filterContainer);
     }

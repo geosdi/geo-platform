@@ -98,6 +98,8 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -408,7 +410,9 @@ public class LayerService implements ILayerService {
      */
     @Override
     @Deprecated
-    public boolean saveDeletedLayerAndTreeModifications(MementoSaveRemove memento, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+    public boolean saveDeletedLayerAndTreeModifications(
+            MementoSaveRemove memento,
+            HttpServletRequest httpServletRequest) throws GeoPlatformException {
         try {
             this.sessionUtility.getLoggedAccount(httpServletRequest);
         } catch (GPSessionTimeout timeout) {
@@ -868,11 +872,13 @@ public class LayerService implements ILayerService {
      * @throws GeoPlatformException
      */
     @Override
-    public boolean shareProjectToUsers(long idSharedProject, List<Long> accountIDsProject, HttpServletRequest httpServletRequest) throws GeoPlatformException {
+    public boolean shareProjectToUsers(long idSharedProject, Map<Long, Integer> accountIDsProject,
+            HttpServletRequest httpServletRequest) throws GeoPlatformException {
         boolean result;
         try {
             GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
-            result = this.geoPlatformServiceClient.updateAccountsProjectSharing(new PutAccountsProjectRequest(idSharedProject, accountIDsProject));
+            result = this.geoPlatformServiceClient.updateAccountsProjectSharing(
+                    new PutAccountsProjectRequest(idSharedProject, accountIDsProject));
             if (result) {
                 MessageDTO message = new MessageDTO();
                 message.setCommands(Lists.newArrayList(GPMessageCommandType.OPEN_PROJECT));
@@ -888,14 +894,16 @@ public class LayerService implements ILayerService {
                     sharerName = account.getNaturalID();
                 }
                 GPProject project = this.geoPlatformServiceClient.getProjectDetail(idSharedProject);
-                message.setText(sharerName + " shared with you the " + project.getName() + " project. Do you want to open it?");
-                message.setRecipientIDs(accountIDsProject);
+                message.setText(
+                        sharerName + " shared with you the " + project.getName() + " project. Do you want to open it?");
+                message.setRecipientIDs(accountIDsProject.keySet().stream().collect(Collectors.toList()));
                 this.geoPlatformServiceClient.insertMultiMessage(message);
             }
         } catch (GPSessionTimeout timeout) {
             throw new GeoPlatformException(timeout);
         } catch (ResourceNotFoundFault | IllegalParameterFault rnf) {
-            logger.error("Failed to save Shared project to Accounts for Shared Project with id: " + idSharedProject + "on SecurityService: " + rnf);
+            logger.error(
+                    "Failed to save Shared project to Accounts for Shared Project with id: " + idSharedProject + "on SecurityService: " + rnf);
             throw new GeoPlatformException(rnf);
         }
         return result;

@@ -48,6 +48,8 @@ import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
+import static org.geosdi.geoplatform.gui.client.model.SharingPermissionEnum.READ;
+import static org.geosdi.geoplatform.gui.client.model.SharingPermissionEnum.WRITE;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -83,11 +85,11 @@ public class ShareProjectPermissionWidget extends VerticalPanel {
             this.radioGroup = new RadioGroup();
             this.readRadioButton = new Radio();
             this.writeRadioButton = new Radio();
-            this.readRadioButton.setBoxLabel("R");
+            this.readRadioButton.setBoxLabel(READ.getPermission());
             this.readRadioButton.setHideLabel(true);
-            this.readRadioButton.setData(RADIO_KEY_VALUE, "R");
-            this.writeRadioButton.setBoxLabel("W");
-            this.writeRadioButton.setData(RADIO_KEY_VALUE, "W");
+            this.readRadioButton.setData(RADIO_KEY_VALUE, READ.getCode());
+            this.writeRadioButton.setBoxLabel(WRITE.getPermission());
+            this.writeRadioButton.setData(RADIO_KEY_VALUE, WRITE.getCode());
             this.readRadioButton.setHideLabel(true);
             this.radioGroup.add(this.readRadioButton);
             this.radioGroup.add(this.writeRadioButton);
@@ -105,9 +107,8 @@ public class ShareProjectPermissionWidget extends VerticalPanel {
     public void bindUser(GPSimpleUser gpSimpleUser) {
         this.radioGroup.setFieldLabel((gpSimpleUser.getName()));
         this.radioGroup.setValue(
-                gpSimpleUser.getSharedPermission() != null && gpSimpleUser.getSharedPermission().equals("W") ?
-                        this.writeRadioButton : this.readRadioButton);
-        this.addListener(Events.Change, be -> {
+                gpSimpleUser.getSharedPermission() == (WRITE.getCode()) ? this.writeRadioButton : this.readRadioButton);
+        this.radioGroup.addListener(Events.Change, be -> {
             gpSimpleUser.setSharedPermission(this.radioGroup.getValue().getData(RADIO_KEY_VALUE));
         });
         this.setVisible(TRUE);

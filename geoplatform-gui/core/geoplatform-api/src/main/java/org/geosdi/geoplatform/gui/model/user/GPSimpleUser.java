@@ -40,7 +40,6 @@ import org.geosdi.geoplatform.gui.model.GeoPlatformBeanModel;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class GPSimpleUser extends GeoPlatformBeanModel implements IGPUserSimpleDetail {
@@ -48,8 +47,6 @@ public class GPSimpleUser extends GeoPlatformBeanModel implements IGPUserSimpleD
     private static final long serialVersionUID = 6888698454407152018L;
     //
     private Long id; // For performance purpose: used for equals() and hashCode() methods
-    private String sharedPermission;
-    private int permissionMask;
 
     /**
      * @return the id
@@ -70,30 +67,17 @@ public class GPSimpleUser extends GeoPlatformBeanModel implements IGPUserSimpleD
     /**
      * @return
      */
-    public String getSharedPermission() {
-        return this.sharedPermission;
+    public int getSharedPermission() {
+        return super.get(GPSimpleUserKeyValue.SHARED_PERMISSION.toString());
     }
 
     /**
      * @param theSharedPermission
      */
-    public void setSharedPermission(String theSharedPermission) {
-        this.sharedPermission = theSharedPermission;
+    public void setSharedPermission(int theSharedPermission) {
+        super.set(GPSimpleUserKeyValue.SHARED_PERMISSION.toString(), theSharedPermission);
     }
 
-    /**
-     * @return {@link int}
-     */
-    public int getPermissionMask() {
-        return permissionMask;
-    }
-
-    /**
-     * @param permissionMask
-     */
-    public void setPermissionMask(int permissionMask) {
-        this.permissionMask = permissionMask;
-    }
 
     /**
      * @return the username

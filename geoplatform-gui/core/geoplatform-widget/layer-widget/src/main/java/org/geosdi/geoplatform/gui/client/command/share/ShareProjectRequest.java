@@ -35,8 +35,9 @@
  */
 package org.geosdi.geoplatform.gui.client.command.share;
 
-import java.util.List;
 import org.geosdi.geoplatform.gui.command.api.GPCommandRequest;
+
+import java.util.Map;
 
 /**
  *
@@ -48,13 +49,12 @@ public class ShareProjectRequest implements GPCommandRequest {
     private static final long serialVersionUID = -1690702874731051954L;
     //
     private Long idSharedProject;
-    private List<Long> accountIDsProject;
+    private Map<Long, Integer> accountIDsProject;
 
     public ShareProjectRequest() {
     }
 
-    public ShareProjectRequest(Long theIdSharedProject,
-            List<Long> theAccountIDsProject) {
+    public ShareProjectRequest(Long theIdSharedProject, Map<Long, Integer> theAccountIDsProject) {
         this.idSharedProject = theIdSharedProject;
         this.accountIDsProject = theAccountIDsProject;
     }
@@ -76,15 +76,14 @@ public class ShareProjectRequest implements GPCommandRequest {
     /**
      * @return the accountIDsProject
      */
-    public List<Long> getAccountIDsProject() {
+    public Map<Long, Integer> getAccountIDsProject() {
         return accountIDsProject;
     }
 
     /**
      * @param accountIDsProject the accountIDsProject to set
      */
-    public void setAccountIDsProject(
-            List<Long> accountIDsProject) {
+    public void setAccountIDsProject(Map<Long, Integer> accountIDsProject) {
         this.accountIDsProject = accountIDsProject;
     }
 

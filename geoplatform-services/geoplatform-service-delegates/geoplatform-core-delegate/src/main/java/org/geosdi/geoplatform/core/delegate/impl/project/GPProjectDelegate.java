@@ -474,7 +474,7 @@ public class GPProjectDelegate implements ProjectDelegate {
             throw new IllegalParameterFault("The PutAccountsProjectRequest must not be null.");
         }
         Long projectID = apRequest.getProjectID();
-        List<Long> accountIDsProject = apRequest.getAccountIDsProject();
+        Map<Long, Integer> accountIDsProject = apRequest.getAccountIDsProject();
 
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
@@ -487,7 +487,10 @@ public class GPProjectDelegate implements ProjectDelegate {
         Long ownerID = accountProjectDao.findOwnerByProjectID(projectID).getAccount().getId();
 
         // The Account owner relation's project will not be managed
-        boolean checkOwner = accountIDsProject.remove(ownerID);
+        //boolean checkOwner = accountIDsProject.remove(ownerID);
+
+        boolean checkOwner = accountIDsProject.containsKey(ownerID);
+
         // Unshare project if the Account owner is not present
         if (!checkOwner || accountIDsProject.isEmpty()) {
             logger.trace("\n*** The project will be unshare");
@@ -503,15 +506,18 @@ public class GPProjectDelegate implements ProjectDelegate {
             sharingMap.put(accountProject.getAccount().getId(), accountProject);
         }
 
-        for (Long accountID : accountIDsProject) {
-            GPAccountProject accountProject = sharingMap.remove(accountID);
+        accountIDsProject.remove(ownerID);
+
+        for (Long id : accountIDsProject.keySet()) {
+            GPAccountProject accountProject = sharingMap.remove(id);
             // Create a new relation of sharing
             if (accountProject == null) {
-                GPAccount newAccount = this.getAccountByID(accountID);
+                GPAccount newAccount = this.getAccountByID(id);
 
                 GPAccountProject newAccountProject = new GPAccountProject();
                 newAccountProject.setAccountAndProject(newAccount, project);
-                newAccountProject.setPermissionMask(BasePermission.READ.getMask());
+                newAccountProject.setPermissionMask(accountIDsProject.get(id));
+                logger.info("######ACCOUNT: {}\n", newAccountProject);
                 logger.trace("\n*** Create a new relation of sharing for Account \"{}\"", newAccount.getNaturalID());
                 accountProjectDao.persist(newAccountProject);
             }

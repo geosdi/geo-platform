@@ -37,8 +37,6 @@ package org.geosdi.geoplatform.gui.server.gwt;
 
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
-import java.util.ArrayList;
-import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveCheck;
@@ -54,6 +52,10 @@ import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 import org.geosdi.geoplatform.gui.server.ILayerService;
 import org.geosdi.geoplatform.gui.server.spring.xsrf.GPAutoInjectingXsrfTokenServiceServlet;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -285,8 +287,8 @@ public class LayerRemoteImpl extends GPAutoInjectingXsrfTokenServiceServlet
     }
 
     @Override
-    public boolean shareProjectToUsers(long idSharedProject,
-            List<Long> accountIDsProject) throws GeoPlatformException {
+    public boolean shareProjectToUsers(long idSharedProject, Map<Long, Integer> accountIDsProject)
+            throws GeoPlatformException {
         return this.layerService.shareProjectToUsers(idSharedProject,
                 accountIDsProject,
                 super.getThreadLocalRequest());

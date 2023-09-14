@@ -41,8 +41,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.google.gwt.user.server.rpc.XsrfProtect;
-import java.util.ArrayList;
-import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveCheck;
@@ -54,6 +52,10 @@ import org.geosdi.geoplatform.gui.configuration.map.client.layer.IGPFolderElemen
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
@@ -77,8 +79,7 @@ public interface LayerRemote extends RemoteService {
     GPClientProject loadDefaultProject() throws GeoPlatformException;
 
     @Deprecated
-    boolean shareProjectToUsers(long idSharedProject,
-            List<Long> accountIDsProject) throws GeoPlatformException;
+    boolean shareProjectToUsers(long idSharedProject, Map<Long, Integer> accountIDsProject) throws GeoPlatformException;
 
     @Deprecated
     ArrayList<GPSimpleUser> getOrganizationUsersToShareProject(long projectId)

@@ -38,8 +38,6 @@ package org.geosdi.geoplatform.gui.client.service;
 import com.extjs.gxt.ui.client.data.PagingLoadConfig;
 import com.extjs.gxt.ui.client.data.PagingLoadResult;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import java.util.ArrayList;
-import java.util.List;
 import org.geosdi.geoplatform.gui.client.model.composite.TreeElement;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveAddedFolder;
 import org.geosdi.geoplatform.gui.client.model.memento.save.bean.MementoSaveCheck;
@@ -52,6 +50,10 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.gui.model.tree.GPLayerAttributes;
 import org.geosdi.geoplatform.gui.model.user.GPSimpleUser;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
@@ -60,8 +62,7 @@ public interface LayerRemoteAsync {
 
     void loadDefaultProject(AsyncCallback<GPClientProject> callback);
 
-    void shareProjectToUsers(long idSharedProject,
-            List<Long> accountIDsProject,
+    void shareProjectToUsers(long idSharedProject, Map<Long, Integer> accountIDsProject,
             AsyncCallback<Boolean> callback);
 
     void getOrganizationUsersToShareProject(long projectId,

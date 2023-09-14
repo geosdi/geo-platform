@@ -157,7 +157,6 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
         lists.setHeight("" + GPProjectManagementWidget.COMPONENT_HEIGHT / 1.75);
         lists.setStyleAttribute("margin-left", "11px");
         lists.setHideLabel(Boolean.TRUE);
-
         ListField<GPSimpleUser> from = lists.getFromList();
         from.setDisplayField(GPSimpleUserKeyValue.NAME.toString());
         this.fromStore = new ListStore<GPSimpleUser>();
@@ -219,38 +218,33 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                             shareProjectReq.setIdSharedProject(project.getId());
                             shareProjectReq.setAccountIDsProject(accountsMap);
 
-                            GPClientCommandExecutor.executeCommand(
-                                    new GPClientCommand<ShareProjectResponse>() {
+                    GPClientCommandExecutor.executeCommand(new GPClientCommand<ShareProjectResponse>() {
 
-                                        private static final long serialVersionUID = 1596346272632793993L;
+                        private static final long serialVersionUID = 1596346272632793993L;
 
-                                        {
-                                            super.setCommandRequest(shareProjectReq);
-                                        }
-
-                                        @Override
-                                        public void onCommandSuccess(
-                                                ShareProjectResponse response) {
-                                                    if (project.isDefaultProject()) {
-                                                        GPClientProject projInSession = Registry.get(
-                                                                UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
-                                                        projInSession.setProjectShared(
-                                                                isShared);
-                                                    }
-                                                    project.setProjectShared(isShared);
-                                                    loadData(project);
-                                                }
-
-                                                @Override
-                                                public void onCommandFailure(
-                                                        Throwable exception) {
-                                                            logger.warning(
-                                                                    "Error on saving user to share project");
-                                                        }
-                                    });
+                        {
+                            super.setCommandRequest(shareProjectReq);
                         }
-                    }
-                });
+
+                        @Override
+                        public void onCommandSuccess(ShareProjectResponse response) {
+                            if (project.isDefaultProject()) {
+                                GPClientProject projInSession = Registry.get(
+                                        UserSessionEnum.CURRENT_PROJECT_ON_TREE.name());
+                                projInSession.setProjectShared(isShared);
+                            }
+                            project.setProjectShared(isShared);
+                            loadData(project);
+                        }
+
+                        @Override
+                        public void onCommandFailure(Throwable exception) {
+                            logger.warning("Error on saving user to share project");
+                        }
+                    });
+                }
+            }
+        });
         super.addButton(saveButton);
         super.add(verticalPanel);
         super.add(lists, new FormData("97%"));

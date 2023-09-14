@@ -129,11 +129,6 @@ public class LayerService implements ILayerService {
     @Resource(name = "geoserverConnectorStore")
     protected GPGeoserverConnectorStore geoserverConnectorStore;
 
-    /**
-     * @param httpServletRequest
-     * @return {@link GPClientProject}
-     * @throws GeoPlatformException
-     */
     @Override
     public GPClientProject loadDefaultProjectElements(HttpServletRequest httpServletRequest) throws GeoPlatformException {
         Long projectId;
@@ -164,12 +159,6 @@ public class LayerService implements ILayerService {
         }
     }
 
-    /**
-     * @param projectID
-     * @param httpServletRequest
-     * @return {@link GPShortClientProject}
-     * @throws GeoPlatformException
-     */
     @Override
     public GPShortClientProject loadRootElements(Long projectID, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         try {
@@ -181,12 +170,6 @@ public class LayerService implements ILayerService {
         }
     }
 
-    /**
-     * @param projectId
-     * @param httpServletRequest
-     * @return {@link List<GPFolderClientInfo>}
-     * @throws GeoPlatformException
-     */
     @Override
     public ArrayList<GPFolderClientInfo> loadProject(long projectId, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPAccount account;
@@ -210,12 +193,6 @@ public class LayerService implements ILayerService {
         return this.dtoLayerConverter.convertOnlyFolders(folderList);
     }
 
-    /**
-     * @param folderID
-     * @param httpServletRequest
-     * @return {@link List<IGPFolderElements>}
-     * @throws GeoPlatformException
-     */
     @Override
     public ArrayList<IGPFolderElements> loadFolderElements(Long folderID, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         try {
@@ -234,15 +211,6 @@ public class LayerService implements ILayerService {
         return elementsToReturn;
     }
 
-    /**
-     * @param folderName
-     * @param position
-     * @param numberOfDescendants
-     * @param isChecked
-     * @param httpServletRequest
-     * @return {@link Long}
-     * @throws GeoPlatformException
-     */
     @Override
     public Long saveFolderForUser(String folderName, int position, int numberOfDescendants, boolean isChecked, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPFolder folder = new GPFolder();
@@ -271,16 +239,6 @@ public class LayerService implements ILayerService {
         return savedFolderId;
     }
 
-    /**
-     * @param idParentFolder
-     * @param folderName
-     * @param position
-     * @param numberOfDescendants
-     * @param isChecked
-     * @param httpServletRequest
-     * @return {@link Long}
-     * @throws GeoPlatformException
-     */
     @Override
     public Long saveFolder(Long idParentFolder, String folderName, int position, int numberOfDescendants, boolean isChecked, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         try {
@@ -321,12 +279,6 @@ public class LayerService implements ILayerService {
         return savedFolderId;
     }
 
-    /**
-     * @param id
-     * @param elementType
-     * @param httpServletRequest
-     * @throws GeoPlatformException
-     */
     @Override
     public void deleteElement(Long id, TreeElement elementType, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         try {
@@ -344,12 +296,6 @@ public class LayerService implements ILayerService {
         }
     }
 
-    /**
-     * @param memento
-     * @param httpServletRequest
-     * @return {@link Long}
-     * @throws GeoPlatformException
-     */
     @Override
     public Long saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         try {
@@ -377,12 +323,6 @@ public class LayerService implements ILayerService {
         return idSavedFolder;
     }
 
-    /**
-     * @param memento
-     * @param httpServletRequest
-     * @return {@link Boolean}
-     * @throws GeoPlatformException
-     */
     @Override
     @Deprecated
     public boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento, HttpServletRequest httpServletRequest) throws GeoPlatformException {
@@ -402,12 +342,6 @@ public class LayerService implements ILayerService {
         return result;
     }
 
-    /**
-     * @param memento
-     * @param httpServletRequest
-     * @return {@link Boolean}
-     * @throws GeoPlatformException
-     */
     @Override
     @Deprecated
     public boolean saveDeletedLayerAndTreeModifications(
@@ -429,12 +363,6 @@ public class LayerService implements ILayerService {
         return result;
     }
 
-    /**
-     * @param memento
-     * @param httpServletRequest
-     * @return {@link Boolean}
-     * @throws GeoPlatformException
-     */
     @Override
     public boolean saveDragAndDropLayerAndTreeModifications(MementoSaveDragDrop memento, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPWebServiceMapData map = this.dtoMementoConverter.convertDescendantMap(memento.getWsDescendantMap());
@@ -456,12 +384,6 @@ public class LayerService implements ILayerService {
         return result;
     }
 
-    /**
-     * @param memento
-     * @param httpServletRequest
-     * @return {@link Boolean}
-     * @throws GeoPlatformException
-     */
     @Override
     public boolean saveDragAndDropFolderAndTreeModifications(MementoSaveDragDrop memento, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPWebServiceMapData map = this.dtoMementoConverter.convertDescendantMap(memento.getWsDescendantMap());
@@ -481,12 +403,6 @@ public class LayerService implements ILayerService {
         return result;
     }
 
-    /**
-     * @param memento
-     * @param httpServletRequest
-     * @return {@link Boolean}
-     * @throws GeoPlatformException
-     */
     @Override
     @Deprecated
     public boolean saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento, HttpServletRequest httpServletRequest) throws GeoPlatformException {
@@ -505,12 +421,6 @@ public class LayerService implements ILayerService {
         return result;
     }
 
-    /**
-     * @param memento
-     * @param httpServletRequest
-     * @return {@link Boolean}
-     * @throws GeoPlatformException
-     */
     @Override
     @Deprecated
     public boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento, HttpServletRequest httpServletRequest) throws GeoPlatformException {
@@ -529,12 +439,6 @@ public class LayerService implements ILayerService {
         return result;
     }
 
-    /**
-     * @param memento
-     * @param httpServletRequest
-     * @return {@link Boolean}
-     * @throws GeoPlatformException
-     */
     @Override
     public boolean saveLayerProperties(MementoLayerOriginalProperties memento, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         boolean result;
@@ -556,11 +460,6 @@ public class LayerService implements ILayerService {
         return result;
     }
 
-    /**
-     * @param urlString
-     * @return {@link Boolean}
-     * @throws GeoPlatformException
-     */
     @Override
     public boolean checkWmsGetMapUrl(String urlString) throws GeoPlatformException {
         try {
@@ -580,11 +479,7 @@ public class LayerService implements ILayerService {
         return false;
     }
 
-    /**
-     * @param urlString
-     * @return {@link Boolean}
-     * @throws GeoPlatformException
-     */
+    // TODO Check
     @Override
     public boolean checkKmlUrl(String urlString) throws GeoPlatformException {
         try {
@@ -598,10 +493,6 @@ public class LayerService implements ILayerService {
         return false;
     }
 
-    /**
-     * @param id
-     * @throws GeoPlatformException
-     */
     @Deprecated
     private void deleteFolder(Long id) throws GeoPlatformException {
         try {
@@ -612,10 +503,6 @@ public class LayerService implements ILayerService {
         }
     }
 
-    /**
-     * @param id
-     * @throws GeoPlatformException
-     */
     @Deprecated
     private void deleteLayer(Long id) throws GeoPlatformException {
         try {
@@ -626,14 +513,6 @@ public class LayerService implements ILayerService {
         }
     }
 
-    /**
-     * @param config
-     * @param searchText
-     * @param imageURL
-     * @param httpServletRequest
-     * @return {@link BasePagingLoadResult<GPClientProject>}
-     * @throws GeoPlatformException
-     */
     @Override
     public BasePagingLoadResult<GPClientProject> searchProjects(PagingLoadConfig config, String searchText, String imageURL, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         GPAccount account;
@@ -672,11 +551,6 @@ public class LayerService implements ILayerService {
         }
     }
 
-    /**
-     * @param projectID
-     * @param httpServletRequest
-     * @throws GeoPlatformException
-     */
     @Override
     public void setDefaultProject(Long projectID, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         try {
@@ -691,12 +565,6 @@ public class LayerService implements ILayerService {
         }
     }
 
-    /**
-     * @param project
-     * @param httpServletRequest
-     * @return {@link Long}
-     * @throws GeoPlatformException
-     */
     @Override
     public Long saveProject(GPClientProject project, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         Long projectId;
@@ -719,11 +587,6 @@ public class LayerService implements ILayerService {
         return projectId;
     }
 
-    /**
-     * @param project
-     * @param httpServletRequest
-     * @throws GeoPlatformException
-     */
     @Override
     public void updateProject(GPClientProject project, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         try {
@@ -747,11 +610,6 @@ public class LayerService implements ILayerService {
         }
     }
 
-    /**
-     * @param projectID
-     * @param httpServletRequest
-     * @throws GeoPlatformException
-     */
     @Override
     public void deleteProject(Long projectID) throws GeoPlatformException {
         try {
@@ -762,13 +620,6 @@ public class LayerService implements ILayerService {
         }
     }
 
-    /**
-     * @param emiteResource
-     * @param layerUUID
-     * @param secondToRefresh
-     * @param httpServletRequest
-     * @throws GeoPlatformException
-     */
     @Override
     public void setLayerRefreshTime(String emiteResource, String layerUUID, int secondToRefresh, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         try {
@@ -789,11 +640,6 @@ public class LayerService implements ILayerService {
         }
     }
 
-    /**
-     * @param httpServletRequest
-     * @return {@link List<GPSimpleUser>}
-     * @throws GeoPlatformException
-     */
     @Override
     public ArrayList<GPSimpleUser> getOrganizationUsers(HttpServletRequest httpServletRequest) throws GeoPlatformException {
         ArrayList<GPSimpleUser> simpleUserList = null;
@@ -813,12 +659,6 @@ public class LayerService implements ILayerService {
         return simpleUserList;
     }
 
-    /**
-     * @param projectId
-     * @param httpServletRequest
-     * @return {@link List<GPSimpleUser>}
-     * @throws GeoPlatformException
-     */
     @Override
     public ArrayList<GPSimpleUser> getOrganizationUsersToShareProject(long projectId, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         ArrayList<GPSimpleUser> simpleUserList = null;
@@ -838,12 +678,6 @@ public class LayerService implements ILayerService {
         return simpleUserList;
     }
 
-    /**
-     * @param idSharedProject
-     * @param httpServletRequest
-     * @return {@link List<GPSimpleUser>}
-     * @throws GeoPlatformException
-     */
     @Override
     public ArrayList<GPSimpleUser> getAccountsFromSharedProject(long idSharedProject, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         ArrayList<GPSimpleUser> simpleUserList = null;
@@ -864,13 +698,6 @@ public class LayerService implements ILayerService {
         return simpleUserList;
     }
 
-    /**
-     * @param idSharedProject
-     * @param accountIDsProject
-     * @param httpServletRequest
-     * @return {@link Boolean}
-     * @throws GeoPlatformException
-     */
     @Override
     public boolean shareProjectToUsers(long idSharedProject, Map<Long, Integer> accountIDsProject,
             HttpServletRequest httpServletRequest) throws GeoPlatformException {
@@ -909,11 +736,6 @@ public class LayerService implements ILayerService {
         return result;
     }
 
-    /**
-     * @param httpServletRequest
-     * @return {@link GPClientProject}
-     * @throws GeoPlatformException
-     */
     @Override
     public GPClientProject loadDefaultProject(HttpServletRequest httpServletRequest) throws GeoPlatformException {
         try {
@@ -931,12 +753,6 @@ public class LayerService implements ILayerService {
         }
     }
 
-    /**
-     * @param layerName
-     * @param httpServletRequest
-     * @return {@link String}
-     * @throws GeoPlatformException
-     */
     @Override
     public String getLayerDimension(String layerName, HttpServletRequest httpServletRequest) throws GeoPlatformException {
         try {
@@ -953,11 +769,6 @@ public class LayerService implements ILayerService {
         }
     }
 
-    /**
-     * @param layerName
-     * @return {@link List<GPLayerAttributes>}
-     * @throws GeoPlatformException
-     */
     @Override
     public List<GPLayerAttributes> describeFeatureType(String layerName) throws GeoPlatformException {
         List<GPLayerAttributes> attributeList = Lists.<GPLayerAttributes>newArrayList();
@@ -975,11 +786,6 @@ public class LayerService implements ILayerService {
         return attributeList;
     }
 
-    /**
-     * @param request
-     * @return {@link Long}
-     * @throws GeoPlatformException
-     */
     @Override
     public Long cloneProject(CloneProjectRequest request) throws GeoPlatformException {
         try {

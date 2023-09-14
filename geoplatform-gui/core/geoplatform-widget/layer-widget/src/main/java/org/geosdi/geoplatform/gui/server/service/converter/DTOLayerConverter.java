@@ -419,7 +419,6 @@ public class DTOLayerConverter implements GPDTOLayerConverter {
      * @return {@link GPSimpleUser}
      */
     private GPSimpleUser convertToGPSimpleUser(UserDTO userDTO) {
-        logger.info("########UserDTO: {}\n", userDTO);
         GPSimpleUser user = new GPSimpleUser();
         user.setId(userDTO.getId());
         user.setOrganization(userDTO.getOrganization());

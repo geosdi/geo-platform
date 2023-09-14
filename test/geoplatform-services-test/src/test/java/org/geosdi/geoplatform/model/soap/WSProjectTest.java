@@ -391,6 +391,18 @@ public class WSProjectTest extends BaseSoapServiceTest {
         this.assertLayer("V-B", vectorRootFolderB, vectorRootFolderBDTO);
     }
 
+    private void assertLayer(String msg, GPLayer layer, IElementDTO layerToCheck) {
+        assertEquals(msg, layer.getName(), layerToCheck.getName());
+        assertEquals("Position-" + msg, layer.getPosition(), layerToCheck.getPosition().intValue());
+    }
+
+    private void assertFolder(String msg, GPFolder folder, FolderDTO folderToCheck) {
+        assertEquals(msg, folder.getName(), folderToCheck.getName());
+        assertEquals("Position-" + msg, folder.getPosition(), folderToCheck.getPosition().intValue());
+        assertEquals("Descendats-" + msg, folder.getNumberOfDescendants(),
+                folderToCheck.getNumberOfDescendants().intValue());
+    }
+
     @Test
     public void testExpandedElementsProject() throws Exception {
         super.rootFolderA.setExpanded(true);
@@ -797,26 +809,5 @@ public class WSProjectTest extends BaseSoapServiceTest {
     public void testGetShortProjectTest() throws Exception {
         logger.info("#############################SHORT_PROJECT : {}\n", gpWSClient
                 .getShortProject(idProjectTest));
-    }
-
-    /**
-     * @param msg
-     * @param layer
-     * @param layerToCheck
-     */
-    private void assertLayer(String msg, GPLayer layer, IElementDTO layerToCheck) {
-        assertEquals(msg, layer.getName(), layerToCheck.getName());
-        assertEquals("Position-" + msg, layer.getPosition(), layerToCheck.getPosition().intValue());
-    }
-
-    /**
-     * @param msg
-     * @param folder
-     * @param folderToCheck
-     */
-    private void assertFolder(String msg, GPFolder folder, FolderDTO folderToCheck) {
-        assertEquals(msg, folder.getName(), folderToCheck.getName());
-        assertEquals("Position-" + msg, folder.getPosition(), folderToCheck.getPosition().intValue());
-        assertEquals("Descendats-" + msg, folder.getNumberOfDescendants(), folderToCheck.getNumberOfDescendants().intValue());
     }
 }

@@ -540,7 +540,7 @@ public class WSProjectTest extends BaseSoapServiceTest {
         assertEquals(accountsToShare.isEmpty(), Boolean.TRUE);
 
         // Insert a User to which the Project is shared as viewer
-        Long newUserID = this.createAndInsertUser("user_to_share_project", organizationTest, GPRole.USER);
+        Long newUserID = this.createAndInsertUser("user_to_share_project", organizationTest, GPRole.USER).getId();
         GPUser newUser = gpWSClient.getUserDetail(newUserID);
         this.createAndInsertAccountProject(newUser, projectTest, BasePermission.READ);
 
@@ -562,7 +562,7 @@ public class WSProjectTest extends BaseSoapServiceTest {
         gpWSClient.updateProject(projectTest);
 
         // Insert a User to which the Project is shared as viewer
-        Long newOwnerID = this.createAndInsertUser("user_to_share_project", organizationTest, GPRole.USER);
+        Long newOwnerID = this.createAndInsertUser("user_to_share_project", organizationTest, GPRole.USER).getId();
         GPUser newOwner = gpWSClient.getUserDetail(newOwnerID);
         this.createAndInsertAccountProject(newOwner, projectTest, BasePermission.READ);
 
@@ -590,7 +590,7 @@ public class WSProjectTest extends BaseSoapServiceTest {
         assertEquals(userTest, owner);
 
         // Change the Account owner
-        Long newOwnerID = this.createAndInsertUser("new_owner", organizationTest, GPRole.ADMIN);
+        Long newOwnerID = this.createAndInsertUser("new_owner", organizationTest, GPRole.ADMIN).getId();
 
         RequestByAccountProjectIDs request = new RequestByAccountProjectIDs(newOwnerID, idProjectTest);
         boolean result = gpWSClient.setProjectOwner(request);

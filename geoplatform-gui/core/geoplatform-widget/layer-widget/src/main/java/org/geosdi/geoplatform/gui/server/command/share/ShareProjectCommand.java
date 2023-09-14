@@ -48,35 +48,26 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Lazy(true)
 @Component(value = "command.share.ShareProjectCommand")
-public class ShareProjectCommand implements
-        GPCommand<ShareProjectRequest, ShareProjectResponse> {
+public class ShareProjectCommand implements GPCommand<ShareProjectRequest, ShareProjectResponse> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            ShareProjectCommand.class);
+    private static final Logger logger = LoggerFactory.getLogger(ShareProjectCommand.class);
     //
     @Autowired
     private ILayerService layerService;
 
     @Override
-    public ShareProjectResponse execute(ShareProjectRequest request,
-            HttpServletRequest httpServletRequest) {
+    public ShareProjectResponse execute(ShareProjectRequest request, HttpServletRequest httpServletRequest) {
 
-        logger.debug("#####################Executing {} Command", this.
-                getClass().getSimpleName());
+        logger.debug("#####################Executing {} Command", this.getClass().getSimpleName());
 
-        logger.debug("\n@@@@@@@@@@@ID Project: {}\n", 
-                request.getIdSharedProject());
-        logger.debug("\n@@@@@@@@@@@Accounts ID: {}\n",
-                request.getAccountIDsProject());
-
-        Boolean result = this.layerService.shareProjectToUsers(
-                request.getIdSharedProject(),
+        logger.debug("\n@@@@@@@@@@@ID Project: {}\n", request.getIdSharedProject());
+        logger.debug("\n@@@@@@@@@@@Accounts ID: {}\n", request.getAccountIDsProject());
+        Boolean result = this.layerService.shareProjectToUsers(request.getIdSharedProject(),
                 request.getAccountIDsProject(), httpServletRequest);
 
         logger.debug("####################Found {} ", result);

@@ -45,6 +45,7 @@ import org.geosdi.geoplatform.response.FolderDTO;
 import org.geosdi.geoplatform.response.ProjectDTO;
 import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.response.collection.TreeFolderElements;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.HashMap;

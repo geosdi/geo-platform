@@ -895,8 +895,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.UPDATE_ACCOUNTS_PROJECT_SHARING_PATH)
     @WebResult(name = "account")
     @Override
-    Boolean updateAccountsProjectSharing(PutAccountsProjectRequest apRequest)
-            throws ResourceNotFoundFault, IllegalParameterFault;
+    Boolean updateAccountsProjectSharing(PutAccountsProjectRequest apRequest) throws ResourceNotFoundFault, IllegalParameterFault;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Project">
     // ==========================================================================

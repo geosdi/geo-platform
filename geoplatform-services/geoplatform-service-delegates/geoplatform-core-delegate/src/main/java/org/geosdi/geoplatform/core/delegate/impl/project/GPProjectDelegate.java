@@ -64,6 +64,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.util.stream.Collectors.toList;
 import static org.geosdi.geoplatform.core.binding.IGPProjectBinder.GPProjectBinder.newGProjectBinder;
@@ -481,7 +482,7 @@ public class GPProjectDelegate implements ProjectDelegate {
 
         if (accountIDsProject == null || accountIDsProject.isEmpty()) {
             logger.trace("\n*** There aren't relations of sharing to update");
-            return Boolean.FALSE;
+            return FALSE;
         }
 
         Long ownerID = accountProjectDao.findOwnerByProjectID(projectID).getAccount().getId();

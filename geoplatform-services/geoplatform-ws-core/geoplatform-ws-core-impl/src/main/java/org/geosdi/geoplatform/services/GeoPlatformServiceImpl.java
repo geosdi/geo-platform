@@ -417,9 +417,7 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public Boolean updateAccountsProjectSharing(
-            PutAccountsProjectRequest apRequest)
-            throws ResourceNotFoundFault, IllegalParameterFault {
+    public Boolean updateAccountsProjectSharing(PutAccountsProjectRequest apRequest) throws ResourceNotFoundFault, IllegalParameterFault {
         return gpProjectDelegate.updateAccountsProjectSharing(apRequest);
     }
     //</editor-fold>

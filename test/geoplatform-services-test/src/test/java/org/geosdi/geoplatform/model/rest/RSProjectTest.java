@@ -519,7 +519,6 @@ public class RSProjectTest extends BasicRestServiceTest {
         List<ShortAccountDTO> accountsToShare = gpWSClient.getAccountsByProjectID(idProjectTest).getAccounts();
         Assert.assertNotNull(accountsToShare);
         assertEquals(2, accountsToShare.size());
-        assertEquals(2, accountsToShare.size());
         boolean check = false;
         for (ShortAccountDTO accountDTO : accountsToShare) {
             if (newUserID.equals(accountDTO.getId())) {
@@ -533,8 +532,7 @@ public class RSProjectTest extends BasicRestServiceTest {
         accountsMap.put(this.userTest.getId(), 1);
 
         // Test delete user for sharing
-        boolean result = gpWSClient.updateAccountsProjectSharing(
-                new PutAccountsProjectRequest(idProjectTest, accountsMap));
+        boolean result = gpWSClient.updateAccountsProjectSharing(new PutAccountsProjectRequest(idProjectTest, accountsMap));
         assertTrue(result);
 
         project = gpWSClient.getProjectDetail(idProjectTest);

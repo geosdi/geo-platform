@@ -49,7 +49,7 @@
     <logger name="org.geosdi.geoplatform.services.FeatureReader" level="debug"/><!-- TODO info -->
     <logger name="org.geosdi.geoplatform.services.feature.GPTransactionService" level="debug"/><!-- TODO info -->
 
-    <logger name="org.geosdi.geoplatform.core.delegate.impl.project.GPProjectDelegate" level="info"/>
+    <logger name="org.geosdi.geoplatform.core.delegate.impl.project.GPProjectDelegate" level="debug"/>
     <logger name="org.geosdi.geoplatform.core.delegate.impl.acl.GPAclDelegate" level="trace"/>
 
     <logger name="org.geosdi.geoplatform.connector.server.request.v202.CatalogGetRecordsV202" level="info"/>

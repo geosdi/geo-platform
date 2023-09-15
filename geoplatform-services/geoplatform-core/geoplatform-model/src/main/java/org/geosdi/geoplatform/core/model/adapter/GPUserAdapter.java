@@ -39,7 +39,7 @@ import lombok.ToString;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPUser;
 
-import static org.postgresql.shaded.com.ongres.scram.common.util.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -57,8 +57,7 @@ public class GPUserAdapter implements IGPUserAdapter {
      * @param thePermissionMask
      */
     public GPUserAdapter(GPAccount theUser, int thePermissionMask) {
-        checkArgument(theUser != null && theUser instanceof GPUser,
-                "The parameter theUser must not be null and instance of GPAccount");
+        checkArgument(theUser != null && theUser instanceof GPUser, "The parameter theUser must not be null and instance of GPAccount");
         this.user = (GPUser) theUser;
         this.permissionMask = thePermissionMask;
     }

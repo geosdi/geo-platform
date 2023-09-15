@@ -178,16 +178,13 @@ public interface ProjectDelegate extends GPProjectResource, GPAccountProjectReso
     Boolean saveAccountProjectProperties(AccountProjectPropertiesDTO accountProjectProperties) throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Override
-    ShortAccountDTOContainer getAccountsByProjectID(Long projectID)
-            throws ResourceNotFoundFault;
+    ShortAccountDTOContainer getAccountsByProjectID(Long projectID) throws ResourceNotFoundFault;
 
     @Override
-    ShortAccountDTOContainer getAccountsToShareByProjectID(Long projectID)
-            throws ResourceNotFoundFault;
+    ShortAccountDTOContainer getAccountsToShareByProjectID(Long projectID) throws ResourceNotFoundFault;
 
     @Override
-    Boolean updateAccountsProjectSharing(PutAccountsProjectRequest apRequest)
-            throws ResourceNotFoundFault, IllegalParameterFault;
+    Boolean updateAccountsProjectSharing(PutAccountsProjectRequest apRequest) throws ResourceNotFoundFault, IllegalParameterFault;
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Folder / Project">

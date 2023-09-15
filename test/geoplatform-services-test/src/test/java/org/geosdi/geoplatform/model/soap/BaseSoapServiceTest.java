@@ -41,7 +41,6 @@ import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.core.model.GPUser;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.model.ServiceTest;
-import org.geosdi.geoplatform.request.SearchRequest;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -53,7 +52,6 @@ import java.util.Date;
 
 import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.gui.shared.GPRole.USER;
-import static org.geosdi.geoplatform.request.LikePatternType.CONTENT_EQUALS;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.security.acls.domain.BasePermission.ADMINISTRATION;
 
@@ -89,10 +87,7 @@ abstract class BaseSoapServiceTest extends ServiceTest {
     public void setUp() throws Exception {
         super.setUp();
         // Insert User
-        this.userTest = this.createAndInsertUser(usernameTest, organizationTest,
-                USER);
-        userTest = gpWSClient.getUserDetailByUsername(
-                new SearchRequest(usernameTest, CONTENT_EQUALS));
+        this.userTest = this.createAndInsertUser(usernameTest, organizationTest, USER);
         // Insert Project
         idProjectTest = this.createAndInsertProject("project_test_ws", false, 2, new Date(System.currentTimeMillis()));
         projectTest = gpWSClient.getProjectDetail(idProjectTest);

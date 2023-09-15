@@ -38,10 +38,8 @@ package org.geosdi.geoplatform.model.rest;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPMessage;
 import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
-import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.request.message.MarkMessageReadByDateRequest;
 import org.geosdi.geoplatform.response.MessageDTO;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.*;
@@ -49,7 +47,6 @@ import java.util.*;
 import static org.geosdi.geoplatform.gui.shared.GPMessageCommandType.NONE;
 import static org.geosdi.geoplatform.gui.shared.GPRole.USER;
 import static org.geosdi.geoplatform.gui.shared.GPRole.VIEWER;
-import static org.geosdi.geoplatform.request.LikePatternType.CONTENT_EQUALS;
 import static org.junit.Assert.*;
 
 /**
@@ -70,10 +67,10 @@ public class RSMessageTest extends BasicRestServiceTest {
         this.setUpOrganization();
         // Insert Users
         this.userTest = this.createAndInsertUser(usernameTest, organizationTest, USER);
-        userTest = gpWSClient.getUserDetailByUsername(new SearchRequest(usernameTest, CONTENT_EQUALS));
 
-        firstRecipientID = this.createAndInsertUser("first_recipient_RS", organizationTest, USER).getId();
-        firstRecipient = gpWSClient.getUserDetail(firstRecipientID);
+        firstRecipient = this.createAndInsertUser("first_recipient_RS", organizationTest, USER);
+        firstRecipientID = firstRecipient.getId();
+
         latterRecipientID = this.createAndInsertUser("latter_recipient_RS", organizationTest, VIEWER).getId();
 //        latterRecipient = gpWSClient.getUserDetail(latterRecipientID);
 

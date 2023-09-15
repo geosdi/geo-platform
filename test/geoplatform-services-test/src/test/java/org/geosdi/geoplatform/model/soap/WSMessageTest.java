@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.model.soap;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPMessage;
 import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
-import org.geosdi.geoplatform.request.SearchRequest;
 import org.geosdi.geoplatform.request.message.MarkMessageReadByDateRequest;
 import org.geosdi.geoplatform.response.MessageDTO;
 import org.junit.Test;
@@ -50,11 +49,9 @@ import static org.geosdi.geoplatform.gui.shared.GPMessageCommandType.NONE;
 import static org.geosdi.geoplatform.gui.shared.GPMessageCommandType.OPEN_PROJECT;
 import static org.geosdi.geoplatform.gui.shared.GPRole.USER;
 import static org.geosdi.geoplatform.gui.shared.GPRole.VIEWER;
-import static org.geosdi.geoplatform.request.LikePatternType.CONTENT_EQUALS;
 import static org.junit.Assert.*;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class WSMessageTest extends BaseSoapServiceTest {
@@ -70,11 +67,10 @@ public class WSMessageTest extends BaseSoapServiceTest {
         // Insert Organization
         this.setUpOrganization();
         // Insert Users
-        userTest = gpWSClient.getUserDetailByUsername(
-                new SearchRequest(usernameTest, CONTENT_EQUALS));
+        this.userTest = this.createAndInsertUser(usernameTest, organizationTest, USER);
 
-        firstRecipientID = this.createAndInsertUser("first_recipient", organizationTest, USER).getId();
-        firstRecipient = gpWSClient.getUserDetail(firstRecipientID);
+        firstRecipient = this.createAndInsertUser("first_recipient_RS", organizationTest, USER);
+        firstRecipientID = firstRecipient.getId();
 
         latterRecipientID = this.createAndInsertUser("latter_recipient", organizationTest, VIEWER).getId();
 //        latterRecipient = gpWSClient.getUserDetail(latterRecipientID);

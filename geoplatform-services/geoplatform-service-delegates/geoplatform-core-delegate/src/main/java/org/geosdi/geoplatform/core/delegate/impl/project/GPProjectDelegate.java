@@ -438,8 +438,11 @@ public class GPProjectDelegate implements ProjectDelegate {
         GPProject project = this.getProjectByID(projectID);
         EntityCorrectness.checkProjectLog(project); // TODO assert
         List<GPAccountProject> accountProjectList = accountProjectDao.findByProjectID(projectID);
-        List<IGPUserAdapter> accountList = accountProjectList.stream().filter(Objects::nonNull)
-                .map(account -> new GPUserAdapter(account.getAccount(), account.getPermissionMask())).collect(toList());
+        List<IGPUserAdapter> accountList = accountProjectList
+                .stream()
+                .filter(Objects::nonNull)
+                .map(account -> new GPUserAdapter(account.getAccount(), account.getPermissionMask()))
+                .collect(toList());
         return new ShortAccountDTOContainer(buildShortAccountDecoratorDTOList(accountList));
     }
 
@@ -491,7 +494,8 @@ public class GPProjectDelegate implements ProjectDelegate {
         //boolean checkOwner = accountIDsProject.remove(ownerID);
 
         boolean checkOwner = accountIDsProject.containsKey(ownerID);
-
+        if (checkOwner)
+            accountIDsProject.remove(ownerID);
         // Unshare project if the Account owner is not present
         if (!checkOwner || accountIDsProject.isEmpty()) {
             logger.trace("\n*** The project will be unshare");
@@ -506,7 +510,6 @@ public class GPProjectDelegate implements ProjectDelegate {
         for (GPAccountProject accountProject : accountProjectList) {
             sharingMap.put(accountProject.getAccount().getId(), accountProject);
         }
-        accountIDsProject.remove(ownerID);
         for (Long id : accountIDsProject.keySet()) {
             GPAccountProject accountProject = sharingMap.remove(id);
             // Create a new relation of sharing

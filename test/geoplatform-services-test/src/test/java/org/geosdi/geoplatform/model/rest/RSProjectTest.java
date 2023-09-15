@@ -716,10 +716,14 @@ public class RSProjectTest extends BasicRestServiceTest {
     public void saveProjectTestRest() throws Exception {
         GPProject project = super.createProject("Save-Project-Rest", FALSE, 200, new Date(System.currentTimeMillis()));
         Long idProject = gpWSClient.saveProject(new SaveProjectRequest(usernameTest, project, TRUE));
+
         GPProject loadProject = gpWSClient.getProjectDetail(idProject);
+
         assertEquals(200, loadProject.getNumberOfElements());
         assertEquals("Save-Project-Rest", loadProject.getName());
+
         GPAccountProject owner = gpWSClient.getProjectOwner(idProject);
+
         assertEquals(usernameTest, owner.getAccount().getNaturalID());
         assertEquals(TRUE, gpWSClient.deleteAccount(owner.getAccount().getId()));
     }

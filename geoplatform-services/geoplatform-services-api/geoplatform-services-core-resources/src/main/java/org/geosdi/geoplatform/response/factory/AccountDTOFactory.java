@@ -45,10 +45,10 @@ import org.geosdi.geoplatform.response.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -114,13 +114,13 @@ public final class AccountDTOFactory {
                 ((UserDTOStrategy) strategy).create(theGpUserAdapter) : null;
     }
 
-
+    /**
+     * @param users
+     * @return {@link List<UserDTO>}
+     */
     public static List<UserDTO> buildUserDTOList(List<GPUser> users) {
         checkNotNull(users, "The List of Accounts must not be null.");
-        List<UserDTO> usersDTO = new ArrayList<>(users.size());
-        for (GPUser gpUser : users) {
-            usersDTO.add((UserDTO) buildAccountDTO(gpUser));
-        }
-        return usersDTO;
+        return users.stream().filter(Objects::nonNull).map(AccountDTOFactory::buildAccountDTO)
+                .filter(v -> v instanceof UserDTO).map(v -> (UserDTO) v).collect(Collectors.toList());
     }
 }

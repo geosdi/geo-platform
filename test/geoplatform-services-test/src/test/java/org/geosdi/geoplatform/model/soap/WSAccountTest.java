@@ -222,10 +222,9 @@ public class WSAccountTest extends BaseSoapServiceTest {
             gpWSClient.insertAccount(new InsertAccountRequest(user, FALSE));
             fail("User already exist wrt username");
         } catch (IllegalParameterFault ex) {
-            ex.printStackTrace();
-//            if (!ex.getMessage().toLowerCase().contains("username")) { // Must be fail for other reasons
-//                fail("Not fail for User already exist wrt username, but for: " + ex.getMessage());
-//            }
+            if (!ex.getMessage().toLowerCase().contains("username")) { // Must be fail for other reasons
+                fail("Not fail for User already exist wrt username, but for: " + ex.getMessage());
+            }
         }
     }
 

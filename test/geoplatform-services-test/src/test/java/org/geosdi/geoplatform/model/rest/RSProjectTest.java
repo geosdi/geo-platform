@@ -47,6 +47,7 @@ import org.geosdi.geoplatform.request.project.SaveProjectRequest;
 import org.geosdi.geoplatform.response.*;
 import org.geosdi.geoplatform.response.collection.ChildrenFolderStore;
 import org.geosdi.geoplatform.response.collection.TreeFolderElements;
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.security.acls.domain.BasePermission;
 

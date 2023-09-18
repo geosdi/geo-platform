@@ -61,20 +61,21 @@ import org.springframework.stereotype.Component;
 public class SendSharedProjectNotificationCommand implements
         GPCommand<SendSharedProjectNotificationRequest, SendSharedProjectNotificationResponse> {
 
-    private static final Logger logger = LoggerFactory.getLogger(
-            SendSharedProjectNotificationCommand.class);
+    private static final Logger logger = LoggerFactory.getLogger(SendSharedProjectNotificationCommand.class);
+    //
     @Autowired
     private SessionUtility sessionUtility;
     //
     private GPTrackingService geoPlatformTrackingClient;
 
+    /**
+     * @param request
+     * @param httpServletRequest
+     * @return {@link SendSharedProjectNotificationResponse}
+     */
     @Override
-    public SendSharedProjectNotificationResponse execute(SendSharedProjectNotificationRequest request,
-            HttpServletRequest httpServletRequest) {
-
-        logger.debug("##################### Executing {} Command", this.
-                getClass().getSimpleName());
-
+    public SendSharedProjectNotificationResponse execute(SendSharedProjectNotificationRequest request, HttpServletRequest httpServletRequest) {
+        logger.debug("########################Executing {} Command", this.getClass().getSimpleName());
         try {
             this.sessionUtility.getLoggedAccount(httpServletRequest);
             logger.debug("Request to send shared project message for projectID: "
@@ -87,9 +88,7 @@ public class SendSharedProjectNotificationCommand implements
             logger.error("An Error Occured on sendSharedProjectNotification: " + rnff);
             throw new GeoPlatformException(rnff);
         }
-
-        logger.debug("#################### After sending project notification");
-
+        logger.debug("####################After sending project notification");
         return new SendSharedProjectNotificationResponse();
     }
 

@@ -35,17 +35,17 @@
  */
 package org.geosdi.geoplatform.gui.model.message;
 
-import java.util.HashMap;
-import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
+
+import javax.inject.Singleton;
+import java.util.HashMap;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
 @Singleton
-public class CommandActionMediator<X extends GPMessageCommandType, Y extends ICommandAction>
-        extends HashMap<X, Y> {
+public class CommandActionMediator<X extends GPMessageCommandType, Y extends ICommandAction> extends HashMap<X, Y> {
 
     private static final long serialVersionUID = 2664324873399353891L;
 

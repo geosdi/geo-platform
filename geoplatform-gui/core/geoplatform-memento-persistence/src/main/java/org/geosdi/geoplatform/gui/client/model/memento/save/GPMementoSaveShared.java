@@ -60,8 +60,7 @@ import org.geosdi.geoplatform.gui.shared.XMPPSubjectEnum;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class GPMementoSaveShared extends GPCache<IMemento<ISave>> implements
-        IMementoSave, IXMPPNotifyMessageHandler {
+public class GPMementoSaveShared extends GPCache<IMemento<ISave>> implements IMementoSave, IXMPPNotifyMessageHandler {
 
     private static final long serialVersionUID = -5458269761345444182L;
     //
@@ -69,6 +68,10 @@ public class GPMementoSaveShared extends GPCache<IMemento<ISave>> implements
     private ObservableGPLayerSaveCache observable;
     private boolean isAddedToXMPPHandler;
 
+    /**
+     * @param observable
+     * @param peekCacheEvent
+     */
     public GPMementoSaveShared(ObservableGPLayerSaveCache observable, PeekCacheEvent peekCacheEvent) {
         this.observable = observable;
         this.peekCacheEvent = peekCacheEvent;
@@ -79,6 +82,10 @@ public class GPMementoSaveShared extends GPCache<IMemento<ISave>> implements
         }
     }
 
+    /**
+     * @param element
+     * @return {@link AbstractMementoOriginalProperties}
+     */
     @Override
     public AbstractMementoOriginalProperties copyOriginalProperties(GPBeanTreeModel element) {
         AbstractMementoOriginalProperties memento = MementoSaveBuilder.generateMementoOriginalProperties(element);
@@ -86,6 +93,9 @@ public class GPMementoSaveShared extends GPCache<IMemento<ISave>> implements
         return memento;
     }
 
+    /**
+     * @param memento
+     */
     @Override
     public void putOriginalPropertiesInCache(AbstractMementoOriginalProperties memento) {
         boolean treeInitialized = (Boolean) Registry.get(UserSessionEnum.TREE_LOADED.name());
@@ -97,6 +107,10 @@ public class GPMementoSaveShared extends GPCache<IMemento<ISave>> implements
         }
     }
 
+    /**
+     * @param memento element whose presence in this collection is to be ensured
+     * @return {@link Boolean}
+     */
     @Override
     public boolean add(IMemento<ISave> memento) {
         boolean treeInitialized = (Boolean) Registry.get(UserSessionEnum.TREE_LOADED.name());
@@ -110,6 +124,9 @@ public class GPMementoSaveShared extends GPCache<IMemento<ISave>> implements
         return condition;
     }
 
+    /**
+     * @return {@link IMemento<ISave>}
+     */
     @Override
     public IMemento<ISave> poll() {
         IMemento<ISave> memento = super.poll();
@@ -186,15 +203,14 @@ public class GPMementoSaveShared extends GPCache<IMemento<ISave>> implements
                     }
 
                     @Override
-                    public void onCommandSuccess(
-                            SendSharedProjectNotificationResponse response) {
-                                System.out.println("Send shared project notification On success");
-                            }
+                    public void onCommandSuccess(SendSharedProjectNotificationResponse response) {
+                        System.out.println("Send shared project notification On success");
+                    }
 
-                            @Override
-                            public void onCommandFailure(Throwable exception) {
-                                System.out.println("Send shared project notification On Fail");
-                            }
+                    @Override
+                    public void onCommandFailure(Throwable exception) {
+                        System.out.println("Send shared project notification On Fail");
+                    }
 
                 });
     }

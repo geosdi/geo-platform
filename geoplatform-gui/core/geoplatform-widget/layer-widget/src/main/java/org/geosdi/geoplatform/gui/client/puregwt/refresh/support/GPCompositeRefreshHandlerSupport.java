@@ -57,16 +57,26 @@ public final class GPCompositeRefreshHandlerSupport {
     //
     private static final GPEventBus bus = new GPEventBusImpl();
 
+    /**
+     * @param gpLayerTreeRefresher
+     */
     @Inject
     public GPCompositeRefreshHandlerSupport(GPLayerTreeRefresher gpLayerTreeRefresher) {
         logger.log(Level.INFO, "###################################GPCompositeRefreshHandlerSupport " + gpLayerTreeRefresher);
         addCompositeRefreshHandler(gpLayerTreeRefresher);
     }
 
+    /**
+     * @param gpLayerTreeRefresher
+     * @return {@link HandlerRegistration}
+     */
     protected HandlerRegistration addCompositeRefreshHandler(GPLayerTreeRefresher gpLayerTreeRefresher) {
         return bus.addHandler(TYPE, gpLayerTreeRefresher);
     }
 
+    /**
+     * @param event
+     */
     public static void fireCompositeRefreshEvent(RefreshCompositeEvent event) {
         bus.fireEvent(event);
     }

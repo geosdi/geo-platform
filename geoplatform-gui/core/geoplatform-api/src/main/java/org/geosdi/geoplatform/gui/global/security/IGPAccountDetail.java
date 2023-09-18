@@ -44,9 +44,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @author Giuseppe La Scaleia - <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
- * @email giuseppe.lascaleia@geosdi.org
  */
 public interface IGPAccountDetail extends Serializable {
 

@@ -38,8 +38,6 @@ package org.geosdi.geoplatform.gui.client.action.menu;
 import com.extjs.gxt.ui.client.event.MenuEvent;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import org.geosdi.geoplatform.gui.action.menu.MenuBaseSecureAction;
 import org.geosdi.geoplatform.gui.client.LayerResources;
 import org.geosdi.geoplatform.gui.client.command.layer.basic.LoadDefaultProjectRequest;
@@ -57,6 +55,9 @@ import org.geosdi.geoplatform.gui.puregwt.GPHandlerManager;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 import org.geosdi.geoplatform.gui.utility.GPSessionTimeout;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
@@ -66,9 +67,11 @@ public class ShareProjectMenuAction extends MenuBaseSecureAction {
 
     private GPProjectManagementWidget projectManagementWidget;
 
+    /**
+     * @param projectManagementWidget
+     */
     @Inject
-    public ShareProjectMenuAction(
-            GPProjectManagementWidget projectManagementWidget) {
+    public ShareProjectMenuAction(GPProjectManagementWidget projectManagementWidget) {
         super(GPTrustedLevel.HIGH, LayerModuleConstants.INSTANCE.ShareProjectMenuAction_titleText(),
                 AbstractImagePrototype.create(LayerResources.ICONS.arrowRefresh()));
         this.projectManagementWidget = projectManagementWidget;
@@ -76,11 +79,9 @@ public class ShareProjectMenuAction extends MenuBaseSecureAction {
 
     @Override
     public void componentSelected(MenuEvent e) {
-        final LoadDefaultProjectRequest loadDefaultProjectRequest = GWT.
-                <LoadDefaultProjectRequest>create(LoadDefaultProjectRequest.class);
-        
-        ClientCommandDispatcher.getInstance().execute(
-                new GPClientCommand<LoadDefaultProjectResponse>() {
+        final LoadDefaultProjectRequest loadDefaultProjectRequest = GWT.<LoadDefaultProjectRequest>create(LoadDefaultProjectRequest.class);
+        ClientCommandDispatcher.getInstance().execute(new GPClientCommand<LoadDefaultProjectResponse>() {
+
             private static final long serialVersionUID = 3109256773218160485L;
 
             {
@@ -100,8 +101,7 @@ public class ShareProjectMenuAction extends MenuBaseSecureAction {
                     GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
                             ShareProjectMenuAction_errorSharingTitleText(),
                             WindowsConstants.INSTANCE.errorMakingConnectionBodyText());
-                    LayoutManager.getInstance().getStatusMap().setStatus(
-                            LayerModuleConstants.INSTANCE.ShareProjectMenuAction_statusErrorSharingText(),
+                    LayoutManager.getInstance().getStatusMap().setStatus(LayerModuleConstants.INSTANCE.ShareProjectMenuAction_statusErrorSharingText(),
                             SearchStatus.EnumSearchStatus.STATUS_NO_SEARCH.toString());
                 }
             }

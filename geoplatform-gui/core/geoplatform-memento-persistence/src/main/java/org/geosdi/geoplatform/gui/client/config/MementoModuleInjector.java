@@ -49,8 +49,7 @@ public interface MementoModuleInjector extends Ginjector {
 
     class MainInjector {
 
-        private static MementoModuleInjector instance = GWT.create(
-                MementoModuleInjector.class);
+        private static MementoModuleInjector instance = GWT.create(MementoModuleInjector.class);
 
         private MainInjector() {
         }
@@ -60,5 +59,8 @@ public interface MementoModuleInjector extends Ginjector {
         }
     }
 
+    /**
+     * @return {@link IMementoSave}
+     */
     IMementoSave getMementoSave();
 }

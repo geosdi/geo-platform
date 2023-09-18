@@ -40,18 +40,20 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import org.geosdi.geoplatform.gui.action.ToolbarAction;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email  giuseppe.lascaleia@geosdi.org
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public abstract class ToolbarLayerTreeAction extends ToolbarAction {
 
     protected TreePanel tree;
 
-    public ToolbarLayerTreeAction(TreePanel theTree, AbstractImagePrototype image,
-            String tooltip) {
+    /**
+     * @param theTree
+     * @param image
+     * @param tooltip
+     */
+    public ToolbarLayerTreeAction(TreePanel theTree, AbstractImagePrototype image, String tooltip) {
         super(image, tooltip);
         this.tree = theTree;
     }
-
 }

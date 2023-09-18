@@ -69,10 +69,8 @@ public class ShareProjectCommandAction<X extends ButtonEvent> extends AbstractCo
     //
     private final GPDefaultProjectTreeEvent defaultProjectEvent = new GPDefaultProjectTreeEvent();
 
-
     public ShareProjectCommandAction() {
-        super(LayerWidgetImage.INSTANCE.commandProj(),
-                BasicGinInjector.MainInjector.getInstance().getCommandActionMediator());
+        super(LayerWidgetImage.INSTANCE.commandProj(), BasicGinInjector.MainInjector.getInstance().getCommandActionMediator());
         logger.log(Level.INFO, "###################################ShareProjectCommandAction");
     }
 
@@ -81,13 +79,13 @@ public class ShareProjectCommandAction<X extends ButtonEvent> extends AbstractCo
         this.commandActionMediator.put(GPMessageCommandType.OPEN_PROJECT, this);
     }
 
+    /**
+     * @param ce
+     */
     @Override
     public void componentSelected(ButtonEvent ce) {
         final Long projectID = Long.parseLong(super.commandProperties);
-
-
-        final DefaultProjectCommandRequest defaultProjectCommandRequest = GWT.<DefaultProjectCommandRequest>create(
-                DefaultProjectCommandRequest.class);
+        final DefaultProjectCommandRequest defaultProjectCommandRequest = GWT.<DefaultProjectCommandRequest>create(DefaultProjectCommandRequest.class);
         defaultProjectCommandRequest.setProjectID(projectID);
 
         ClientCommandDispatcher.getInstance().execute(new GPClientCommand<DefaultProjectCommandResponse>() {

@@ -54,8 +54,8 @@ import org.geosdi.geoplatform.gui.client.widget.time.panel.strategy.view.IStrate
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@GinModules(value = {LayerModuleGinConfigurator.class,
-        LayerTreeGinConfigurator.class, LayerTreeGinProviderConfigurator.class, TimeDimensionConfigurator.class})
+@GinModules(value = {LayerModuleGinConfigurator.class, LayerTreeGinConfigurator.class,
+        LayerTreeGinProviderConfigurator.class, TimeDimensionConfigurator.class})
 public interface LayerModuleInjector extends Ginjector {
 
     class MainInjector {

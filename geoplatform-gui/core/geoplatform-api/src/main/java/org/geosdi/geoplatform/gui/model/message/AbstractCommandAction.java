@@ -44,13 +44,16 @@ import com.google.gwt.user.client.ui.Image;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-//@Singleton
 public abstract class AbstractCommandAction<X extends ComponentEvent> extends SelectionListener<X> implements ICommandAction {
 
     protected String commandProperties;
     protected ImageResource imageResource;
     protected CommandActionMediator commandActionMediator;
 
+    /**
+     * @param imageResource
+     * @param commandActionMediator
+     */
     public AbstractCommandAction(ImageResource imageResource, CommandActionMediator commandActionMediator) {
         this.imageResource = imageResource;
         this.commandActionMediator = commandActionMediator;

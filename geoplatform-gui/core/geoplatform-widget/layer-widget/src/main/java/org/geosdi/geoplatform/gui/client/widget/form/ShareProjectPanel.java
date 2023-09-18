@@ -51,7 +51,6 @@ import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.ListField;
 import com.extjs.gxt.ui.client.widget.form.StoreFilterField;
 import com.extjs.gxt.ui.client.widget.layout.*;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
@@ -81,7 +80,6 @@ import org.geosdi.geoplatform.gui.model.user.GPSimpleUserKeyValue;
 import org.geosdi.geoplatform.gui.puregwt.layers.LayerHandlerManager;
 import org.geosdi.geoplatform.gui.puregwt.properties.WidgetPropertiesHandlerManager;
 
-import java.util.List;
 import java.util.Map;
 
 import static org.geosdi.geoplatform.gui.client.model.SharingPermissionEnum.READ;
@@ -204,10 +202,8 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                                     });
                         } else {
                             toStore.commitChanges();
-                    Map<Long, Integer> accountsMap = Maps.newHashMap();
-
-                            IGPAccountDetail accountDetail = Registry.get(
-                                    UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+                            Map<Long, Integer> accountsMap = Maps.newHashMap();
+                            IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
                             boolean test = false;
                             for (GPSimpleUser user : toStore.getModels()) {
                                 if (user.getId().equals(accountDetail.getId())) {
@@ -216,11 +212,11 @@ public class ShareProjectPanel extends GeoPlatformContentPanel {
                                 accountsMap.put(user.getId(), user.getSharedPermission());
                                 //accountIDsProject.add(user.getId());
                             }
-                    final boolean isShared = test && toStore.getModels().size() > 1;
+                            final boolean isShared = test && toStore.getModels().size() > 1;
                             ShareProjectPanel.this.reset();
 
-                    shareProjectReq.setIdSharedProject(project.getId());
-                    shareProjectReq.setAccountIDsProject(accountsMap);
+                            shareProjectReq.setIdSharedProject(project.getId());
+                            shareProjectReq.setAccountIDsProject(accountsMap);
 
                             GPClientCommandExecutor.executeCommand(
                                     new GPClientCommand<ShareProjectResponse>() {

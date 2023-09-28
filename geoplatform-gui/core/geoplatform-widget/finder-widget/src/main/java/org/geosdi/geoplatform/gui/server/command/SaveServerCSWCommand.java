@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.gui.server.command;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.gui.client.command.SaveServerCSWRequest;
 import org.geosdi.geoplatform.gui.client.command.SaveServerCSWResponse;
@@ -42,6 +41,8 @@ import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

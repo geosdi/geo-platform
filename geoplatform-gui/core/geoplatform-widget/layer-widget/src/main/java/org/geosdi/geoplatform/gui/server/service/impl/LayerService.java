@@ -796,6 +796,19 @@ public class LayerService implements ILayerService {
         }
     }
 
+    @Override
+    public Integer getSharedPermissionForUserAndProject(long projectId, HttpServletRequest httpServletRequest) {
+        try {
+            GPAccount account = this.sessionUtility.getLoggedAccount(httpServletRequest);
+            return geoPlatformServiceClient.getAccountProjectByAccountAndProjectIDs(account.getId(), projectId)
+                    .getPermissionMask();
+        } catch (Exception e) {
+            logger.error("An Error Occured : " + e.getMessage());
+            throw new GeoPlatformException(e.getMessage());
+        }
+
+    }
+
     /**
      * @param geoPlatformServiceClient the geoPlatformServiceClient to set
      */
@@ -819,6 +832,7 @@ public class LayerService implements ILayerService {
     public void setGeoPlatformPublishClient(@Qualifier("geoPlatformPublishClient") GPPublisherService geoPlatformPublishClient) {
         this.geoPlatformPublishClient = geoPlatformPublishClient;
     }
+
 
     /**
      * Invoked by the containing {@code BeanFactory} after it has set all bean properties

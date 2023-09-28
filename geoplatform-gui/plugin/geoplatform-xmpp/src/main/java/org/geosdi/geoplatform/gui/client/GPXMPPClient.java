@@ -43,8 +43,6 @@ import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.core.client.xmpp.stanzas.Message;
 import com.calclab.emite.core.client.xmpp.stanzas.Presence;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
-import com.calclab.emite.im.client.chat.Chat;
-import com.calclab.emite.im.client.chat.ChatManager;
 import com.calclab.emite.im.client.roster.RosterItem;
 import com.calclab.emite.im.client.roster.XmppRoster;
 import com.extjs.gxt.ui.client.Registry;
@@ -52,6 +50,7 @@ import com.google.gwt.core.client.GWT;
 import org.geosdi.geoplatform.gui.client.config.XMPPSessionGinjector;
 import org.geosdi.geoplatform.gui.client.i18n.XMPPModuleConstants;
 import org.geosdi.geoplatform.gui.client.i18n.XMPPModuleMessages;
+import org.geosdi.geoplatform.gui.configuration.message.GeoPlatformMessage;
 import org.geosdi.geoplatform.gui.global.enumeration.GlobalRegistryEnum;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPEventRepository;
 import org.geosdi.geoplatform.gui.puregwt.xmpp.XMPPHandlerManager;
@@ -91,17 +90,16 @@ public class GPXMPPClient {
                     public void onStateChanged(StateChangedEvent event) {
                         if (event.is(SessionStates.loggedIn)) {
                             logger.info(
-                                    XMPPModuleConstants.INSTANCE.GPXMPPClient_xmppConnectionInfoText()
-                                    + "\n " + XMPPModuleConstants.INSTANCE.GPXMPPClient_statusOnlineText());
-// GeoPlatformMessage.infoMessage(XMPPModuleConstants.INSTANCE.GPXMPPClient_xmppConnectionInfoText(),
-// XMPPModuleConstants.INSTANCE.GPXMPPClient_statusOnlineText());
+                                    XMPPModuleConstants.INSTANCE.GPXMPPClient_xmppConnectionInfoText() + "\n " + XMPPModuleConstants.INSTANCE.GPXMPPClient_statusOnlineText());
+                            // GeoPlatformMessage.infoMessage(XMPPModuleConstants.INSTANCE.GPXMPPClient_xmppConnectionInfoText(),
+                            // XMPPModuleConstants.INSTANCE.GPXMPPClient_statusOnlineText());
                             logger.info("We are now online");
-                        } else if (event.is(SessionStates.disconnected)) {
+                        } else if (event.is(SessionStates.disconnected) || event.is(SessionStates.error)) {
                             logger.info(
-                                    XMPPModuleConstants.INSTANCE.GPXMPPClient_xmppConnectionInfoText()
-                                    + "\n " + XMPPModuleConstants.INSTANCE.GPXMPPClient_statusOffLineText());
-// GeoPlatformMessage.infoMessage(XMPPModuleConstants.INSTANCE.GPXMPPClient_xmppConnectionInfoText(),
-// XMPPModuleConstants.INSTANCE.GPXMPPClient_statusOffLineText());
+                                    XMPPModuleConstants.INSTANCE.GPXMPPClient_xmppConnectionInfoText() + "\n " + XMPPModuleConstants.INSTANCE.GPXMPPClient_statusOffLineText());
+
+                            // GeoPlatformMessage.infoMessage(XMPPModuleConstants.INSTANCE.GPXMPPClient_xmppConnectionInfoText(),
+                            // XMPPModuleConstants.INSTANCE.GPXMPPClient_statusOffLineText());
                             logger.info("We are now offline");
                             userXMPPLoout();
                             XMPPHandlerManager.fireEvent(NOTIFY_XMPP_LOGOUT_EVENT);
@@ -125,17 +123,10 @@ public class GPXMPPClient {
             @Override
             public void onPresence(PresenceEvent event) {
                 Presence presence = event.getPresence();
+                logger.info("Presence received from " + presence.getFrom() + ": " + presence);
                 logger.info(
-                        "Presence received from " + presence.getFrom() + ": " + presence.toString());
-                logger.info(
-                        XMPPModuleConstants.INSTANCE.GPXMPPClient_xmppConnectionInfoText()
-                        + "\n "
-                        + XMPPModuleMessages.INSTANCE.presenceReceivedFromMessage(
+                        XMPPModuleConstants.INSTANCE.GPXMPPClient_xmppConnectionInfoText() + "\n " + XMPPModuleMessages.INSTANCE.presenceReceivedFromMessage(
                                 presence.getFromAsString(), presence.toString()));
-// GeoPlatformMessage.infoMessage(XMPPModuleConstants.INSTANCE.
-// GPXMPPClient_xmppConnectionInfoText(),
-// XMPPModuleMessages.INSTANCE.presenceReceivedFromMessage(
-// presence.getFromAsString(), presence.toString()));
                 Registry.register(GlobalRegistryEnum.EMITE_RESOURCE.getValue(),
                         sessionXmpp.getCurrentUserURI().getResource());
             }
@@ -148,21 +139,19 @@ public class GPXMPPClient {
             @Override
             public void onMessage(MessageEvent event) {
                 Message message = event.getMessage();
-// message.getAttribute(null);
+                // message.getAttribute(null);
                 logger.info("Message received: " + message.getSubject());
                 XmppRoster roster = ginjector.getRoster();
                 Collection<RosterItem> items = roster.getItems();
                 logger.info("**** ROSTER ALL ITEMS: " + items.size());
                 for (RosterItem rosterItem : items) {
-// System.out.println("*** " + rosterItem.toString() + " [" + rosterItem.getName() + "]");
+                    // System.out.println("*** " + rosterItem.toString() + " [" + rosterItem.getName() + "]");
                     if (rosterItem.isAvailable()) {
-                        logger.severe(
-                                "### AVAILABLE ### " + rosterItem.getJID() + " [" + rosterItem.getName() + "]");
+                        logger.severe("### AVAILABLE ### " + rosterItem.getJID() + " [" + rosterItem.getName() + "]");
                     }
                 }
                 if (message.getSubject() != null && message.getBody() != null) {
-                    AbstractXMPPEvent xmppEvent = XMPPEventRepository.getXMPPEventForSubject(
-                            message.getSubject());
+                    AbstractXMPPEvent xmppEvent = XMPPEventRepository.getXMPPEventForSubject(message.getSubject());
                     logger.info("XMPP Event found: " + xmppEvent);
                     if (xmppEvent != null) {
                         xmppEvent.setMessageBody(message.getBody());
@@ -171,22 +160,13 @@ public class GPXMPPClient {
                         logger.info("Message fired");
                     }
                 }
-                String subject = message.getSubject() == null
-                        ? XMPPModuleConstants.INSTANCE.GPXMPPClient_newMessageText()
-                        : message.getSubject();
-// GeoPlatformMessage.infoMessage(subject, message.getBody());
+                String subject =
+                        message.getSubject() == null ? XMPPModuleConstants.INSTANCE.GPXMPPClient_newMessageText() :
+                                message.getSubject();
+                GeoPlatformMessage.infoMessage(subject, message.getBody());
                 logger.info(subject + "\n " + message.getBody());
             }
         });
-        final ChatManager chatManager = ginjector.getChatManager();
-// xmppURI = XmppURI.uri("service@" + hostXmppServer);
-        final Chat chat = chatManager.open(xmppURI);
-// chat.addMessageReceivedHandler(new MessageHandler() {
-// @Override
-// public void onMessage(final MessageEvent event) {
-// System.out.println("CHAT Message received: " + event.getMessage().getBody());
-// }
-// });
     }
 
     public void userXMPPLoout() {

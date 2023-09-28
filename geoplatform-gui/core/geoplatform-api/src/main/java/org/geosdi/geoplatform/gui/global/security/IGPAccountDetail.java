@@ -137,4 +137,14 @@ public interface IGPAccountDetail extends Serializable {
      * @return {@link List<IGPClientMessage>}
      */
     List<IGPClientMessage> getUnreadMessages();
+
+    /**
+     * @return
+     */
+    int getSharedPermission();
+
+    /**
+     * @param theSharedPermission
+     */
+    void setSharedPermission(int theSharedPermission);
 }

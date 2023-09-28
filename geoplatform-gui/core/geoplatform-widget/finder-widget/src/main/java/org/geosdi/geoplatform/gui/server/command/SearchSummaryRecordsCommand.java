@@ -35,7 +35,6 @@
 package org.geosdi.geoplatform.gui.server.command;
 
 import com.extjs.gxt.ui.client.data.BasePagingLoadResult;
-import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.SearchSummaryRecordsRequest;
 import org.geosdi.geoplatform.gui.client.command.SearchSummaryRecordsResponse;
 import org.geosdi.geoplatform.gui.client.model.SummaryRecord;
@@ -44,6 +43,7 @@ import org.geosdi.geoplatform.responce.SummaryRecordDTO;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

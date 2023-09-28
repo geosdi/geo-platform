@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.server.command.memento.basic;
 
-import javax.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.command.memento.basic.SendSharedProjectNotificationRequest;
 import org.geosdi.geoplatform.gui.client.command.memento.basic.SendSharedProjectNotificationResponse;
@@ -51,6 +50,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group

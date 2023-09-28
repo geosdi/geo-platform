@@ -136,4 +136,20 @@ public class AccountDetailDummy implements IGPAccountDetail {
     public List<IGPClientMessage> getUnreadMessages() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    /**
+     * @return
+     */
+    @Override
+    public int getSharedPermission() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    /**
+     * @param theSharedPermission
+     */
+    @Override
+    public void setSharedPermission(int theSharedPermission) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

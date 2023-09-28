@@ -35,8 +35,6 @@
  */
 package org.geosdi.geoplatform.gui.client.model.security;
 
-import java.util.List;
-import java.util.Map;
 import org.geosdi.geoplatform.gui.configuration.map.client.GPClientViewport;
 import org.geosdi.geoplatform.gui.global.security.IGPAccountDetail;
 import org.geosdi.geoplatform.gui.global.security.IGPTreeOptions;
@@ -44,12 +42,13 @@ import org.geosdi.geoplatform.gui.global.security.IGPUserSimpleDetail;
 import org.geosdi.geoplatform.gui.model.message.IGPClientMessage;
 import org.geosdi.geoplatform.gui.shared.GPTrustedLevel;
 
+import java.util.List;
+import java.util.Map;
+
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
+ * @email giuseppe.lascaleia@geosdi.org
  */
 public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail {
 
@@ -69,6 +68,7 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
     private Map<String, Boolean> componentPermission;
     private IGPTreeOptions treeOptions;
     private List<IGPClientMessage> unreadMessages;
+    private int sharedPermission;
 
     public GPLoginUserDetail() {
     }
@@ -217,5 +217,21 @@ public class GPLoginUserDetail implements IGPUserSimpleDetail, IGPAccountDetail 
     @Override
     public List<IGPClientMessage> getUnreadMessages() {
         return this.unreadMessages;
+    }
+
+    /**
+     * @return {@link Integer}
+     */
+    @Override
+    public int getSharedPermission() {
+        return sharedPermission;
+    }
+
+    /**
+     * @param sharedPermission
+     */
+    @Override
+    public void setSharedPermission(int sharedPermission) {
+        this.sharedPermission = sharedPermission;
     }
 }

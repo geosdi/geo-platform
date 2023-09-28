@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.gui.server.command;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.MarkMessagesAsReadRequest;
 import org.geosdi.geoplatform.gui.client.command.MarkMessagesAsReadResponse;
 import org.geosdi.geoplatform.gui.command.server.GPCommand;
@@ -44,6 +43,8 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
 
 import static com.google.common.base.Preconditions.checkArgument;
 

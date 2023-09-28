@@ -34,13 +34,13 @@
  */
 package org.geosdi.geoplatform.gui.server.command;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.GetRecordByIdRequest;
 import org.geosdi.geoplatform.gui.client.command.GetRecordByIdResponse;
 import org.geosdi.geoplatform.gui.global.GeoPlatformException;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.text.Normalizer;
 import java.util.regex.Pattern;

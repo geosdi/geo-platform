@@ -61,8 +61,7 @@ import java.util.Map;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-public class LayerRemoteImpl extends GPAutoInjectingXsrfTokenServiceServlet
-        implements LayerRemote {
+public class LayerRemoteImpl extends GPAutoInjectingXsrfTokenServiceServlet implements LayerRemote {
 
     private static final long serialVersionUID = -2177973379191108728L;
     //
@@ -70,7 +69,6 @@ public class LayerRemoteImpl extends GPAutoInjectingXsrfTokenServiceServlet
     private ILayerService layerService;
 
     /**
-     * @deprecated Using command
      * @return
      * @throws GeoPlatformException
      * @deprecated
@@ -78,126 +76,86 @@ public class LayerRemoteImpl extends GPAutoInjectingXsrfTokenServiceServlet
     @Deprecated
     @Override
     public GPClientProject loadDefaultProjectElements() throws GeoPlatformException {
-        return this.layerService.loadDefaultProjectElements(
-                super.getThreadLocalRequest());
+        return this.layerService.loadDefaultProjectElements(super.getThreadLocalRequest());
     }
 
-//    /**
-//     * @deprecated Using command
-//     * @param projectId
-//     * @return
-//     * @throws GeoPlatformException
-//     */
-//    @Deprecated
-//    @Override
-//    public ArrayList<GPFolderClientInfo> loadProject(long projectId) throws GeoPlatformException {
-//        return this.layerService.loadProject(projectId,
-//                super.getThreadLocalRequest());
-//    }
+    //    /**
+    //     * @deprecated Using command
+    //     * @param projectId
+    //     * @return
+    //     * @throws GeoPlatformException
+    //     */
+    //    @Deprecated
+    //    @Override
+    //    public ArrayList<GPFolderClientInfo> loadProject(long projectId) throws GeoPlatformException {
+    //        return this.layerService.loadProject(projectId,
+    //                super.getThreadLocalRequest());
+    //    }
 
     /**
-     * @deprecated Using command
      * @param folderID
      * @return
      * @throws GeoPlatformException
+     * @deprecated Using command
      */
     @Deprecated
     @Override
-    public ArrayList<IGPFolderElements> loadFolderElements(Long folderID)
+    public ArrayList<IGPFolderElements> loadFolderElements(Long folderID) throws GeoPlatformException {
+        return this.layerService.loadFolderElements(folderID, super.getThreadLocalRequest());
+    }
+
+    @Override
+    public Long saveFolderForUser(String folderName, int position, int numberOfDescendants, boolean isChecked)
             throws GeoPlatformException {
-        return this.layerService.loadFolderElements(folderID,
+        return this.layerService.saveFolderForUser(folderName, position, numberOfDescendants, isChecked,
                 super.getThreadLocalRequest());
     }
 
     @Override
-    public Long saveFolderForUser(String folderName,
-            int position,
-            int numberOfDescendants,
+    public Long saveFolder(Long idParentFolder, String folderName, int position, int numberOfDescendants,
             boolean isChecked) throws GeoPlatformException {
-        return this.layerService.saveFolderForUser(folderName, position,
-                numberOfDescendants,
-                isChecked,
+        return this.layerService.saveFolder(idParentFolder, folderName, position, numberOfDescendants, isChecked,
                 super.getThreadLocalRequest());
     }
 
     @Override
-    public Long saveFolder(Long idParentFolder,
-            String folderName,
-            int position,
-            int numberOfDescendants,
-            boolean isChecked) throws GeoPlatformException {
-        return this.layerService.saveFolder(idParentFolder, folderName,
-                position, numberOfDescendants,
-                isChecked,
-                super.getThreadLocalRequest());
+    public void deleteElement(Long id, TreeElement elementType) throws GeoPlatformException {
+        this.layerService.deleteElement(id, elementType, super.getThreadLocalRequest());
     }
 
     @Override
-    public void deleteElement(Long id,
-            TreeElement elementType)
-            throws GeoPlatformException {
-        this.layerService.deleteElement(id, elementType,
-                super.getThreadLocalRequest());
+    public Long saveAddedFolderAndTreeModifications(MementoSaveAddedFolder memento) throws GeoPlatformException {
+        return this.layerService.saveAddedFolderAndTreeModifications(memento, super.getThreadLocalRequest());
     }
 
     @Override
-    public Long saveAddedFolderAndTreeModifications(
-            MementoSaveAddedFolder memento)
-            throws GeoPlatformException {
-        return this.layerService.saveAddedFolderAndTreeModifications(memento,
-                super.getThreadLocalRequest());
+    public boolean saveDeletedFolderAndTreeModifications(MementoSaveRemove memento) throws GeoPlatformException {
+        return this.layerService.saveDeletedFolderAndTreeModifications(memento, super.getThreadLocalRequest());
     }
 
     @Override
-    public boolean saveDeletedFolderAndTreeModifications(
-            MementoSaveRemove memento)
-            throws GeoPlatformException {
-        return this.layerService.saveDeletedFolderAndTreeModifications(memento,
-                super.getThreadLocalRequest());
+    public boolean saveDeletedLayerAndTreeModifications(MementoSaveRemove memento) throws GeoPlatformException {
+        return this.layerService.saveDeletedLayerAndTreeModifications(memento, super.getThreadLocalRequest());
     }
 
     @Override
-    public boolean saveDeletedLayerAndTreeModifications(
-            MementoSaveRemove memento)
-            throws GeoPlatformException {
-        return this.layerService.saveDeletedLayerAndTreeModifications(memento,
-                super.getThreadLocalRequest());
+    public boolean saveDragAndDropLayerAndTreeModifications(MementoSaveDragDrop memento) throws GeoPlatformException {
+        return this.layerService.saveDragAndDropLayerAndTreeModifications(memento, super.getThreadLocalRequest());
     }
 
     @Override
-    public boolean saveDragAndDropLayerAndTreeModifications(
-            MementoSaveDragDrop memento)
-            throws GeoPlatformException {
-        return this.layerService.saveDragAndDropLayerAndTreeModifications(
-                memento,
-                super.getThreadLocalRequest());
+    public boolean saveDragAndDropFolderAndTreeModifications(MementoSaveDragDrop memento) throws GeoPlatformException {
+        return this.layerService.saveDragAndDropFolderAndTreeModifications(memento, super.getThreadLocalRequest());
     }
 
     @Override
-    public boolean saveDragAndDropFolderAndTreeModifications(
-            MementoSaveDragDrop memento)
-            throws GeoPlatformException {
-        return this.layerService.saveDragAndDropFolderAndTreeModifications(
-                memento,
-                super.getThreadLocalRequest());
+    public boolean saveCheckStatusFolderAndTreeModifications(MementoSaveCheck memento) throws GeoPlatformException {
+        return this.layerService.saveCheckStatusFolderAndTreeModifications(memento, super.getThreadLocalRequest());
     }
 
     @Override
-    public boolean saveCheckStatusFolderAndTreeModifications(
-            MementoSaveCheck memento)
-            throws GeoPlatformException {
-        return this.layerService.saveCheckStatusFolderAndTreeModifications(
-                memento,
-                super.getThreadLocalRequest());
-    }
-
-    @Override
-    public boolean saveCheckStatusLayerAndTreeModifications(
-            MementoSaveCheck memento)
-            throws GeoPlatformException {
-        return this.layerService.saveCheckStatusLayerAndTreeModifications(
-                memento,
-                super.getThreadLocalRequest());
+    public boolean saveCheckStatusLayerAndTreeModifications(MementoSaveCheck memento) throws GeoPlatformException {
+        return this.layerService.saveCheckStatusLayerAndTreeModifications(memento, super.getThreadLocalRequest());
     }
 
     @Override
@@ -211,40 +169,33 @@ public class LayerRemoteImpl extends GPAutoInjectingXsrfTokenServiceServlet
     }
 
     @Override
-    public boolean saveLayerProperties(MementoLayerOriginalProperties memento)
-            throws GeoPlatformException {
-        return this.layerService.saveLayerProperties(memento,
-                super.getThreadLocalRequest());
+    public boolean saveLayerProperties(MementoLayerOriginalProperties memento) throws GeoPlatformException {
+        return this.layerService.saveLayerProperties(memento, super.getThreadLocalRequest());
     }
 
     /**
-     * @deprecated Using command
      * @param config
      * @param searchText
      * @param imageURL
      * @return
      * @throws GeoPlatformException
+     * @deprecated Using command
      */
     @Deprecated
     @Override
-    public PagingLoadResult<GPClientProject> searchProjects(
-            PagingLoadConfig config,
-            String searchText,
-            String imageURL) throws GeoPlatformException {
-        return this.layerService.searchProjects(config, searchText, imageURL,
-                super.getThreadLocalRequest());
+    public PagingLoadResult<GPClientProject> searchProjects(PagingLoadConfig config, String searchText, String imageURL)
+            throws GeoPlatformException {
+        return this.layerService.searchProjects(config, searchText, imageURL, super.getThreadLocalRequest());
     }
 
     @Override
     public void setDefaultProject(Long projectID) throws GeoPlatformException {
-        this.layerService.setDefaultProject(projectID,
-                super.getThreadLocalRequest());
+        this.layerService.setDefaultProject(projectID, super.getThreadLocalRequest());
     }
 
     @Override
     public Long saveProject(GPClientProject project) throws GeoPlatformException {
-        return this.layerService.saveProject(project,
-                super.getThreadLocalRequest());
+        return this.layerService.saveProject(project, super.getThreadLocalRequest());
     }
 
     @Override
@@ -258,53 +209,42 @@ public class LayerRemoteImpl extends GPAutoInjectingXsrfTokenServiceServlet
     }
 
     @Override
-    public void setLayerRefreshTime(String emiteResource,
-            String layerUUID,
-            int secondToRefresh) throws GeoPlatformException {
-        this.layerService.setLayerRefreshTime(emiteResource, layerUUID,
-                secondToRefresh,
-                super.getThreadLocalRequest());
+    public void setLayerRefreshTime(String emiteResource, String layerUUID, int secondToRefresh)
+            throws GeoPlatformException {
+        this.layerService.setLayerRefreshTime(emiteResource, layerUUID, secondToRefresh, super.getThreadLocalRequest());
     }
 
     @Override
     public ArrayList<GPSimpleUser> getOrganizationUsers() throws GeoPlatformException {
-        return this.layerService.getOrganizationUsers(
-                super.getThreadLocalRequest());
+        return this.layerService.getOrganizationUsers(super.getThreadLocalRequest());
     }
 
     @Override
-    public ArrayList<GPSimpleUser> getOrganizationUsersToShareProject(
-            long projectId) throws GeoPlatformException {
-        return this.layerService.getOrganizationUsersToShareProject(projectId,
-                super.getThreadLocalRequest());
+    public ArrayList<GPSimpleUser> getOrganizationUsersToShareProject(long projectId) throws GeoPlatformException {
+        return this.layerService.getOrganizationUsersToShareProject(projectId, super.getThreadLocalRequest());
     }
 
     @Override
-    public ArrayList<GPSimpleUser> getAccountsFromSharedProject(
-            long idSharedProject) throws GeoPlatformException {
-        return this.layerService.getAccountsFromSharedProject(idSharedProject,
-                super.getThreadLocalRequest());
+    public ArrayList<GPSimpleUser> getAccountsFromSharedProject(long idSharedProject) throws GeoPlatformException {
+        return this.layerService.getAccountsFromSharedProject(idSharedProject, super.getThreadLocalRequest());
     }
 
     @Override
     public boolean shareProjectToUsers(long idSharedProject, Map<Long, Integer> accountIDsProject)
             throws GeoPlatformException {
-        return this.layerService.shareProjectToUsers(idSharedProject,
-                accountIDsProject,
-                super.getThreadLocalRequest());
+        return this.layerService.shareProjectToUsers(idSharedProject, accountIDsProject, super.getThreadLocalRequest());
     }
 
     @Override
     public GPClientProject loadDefaultProject() throws GeoPlatformException {
-        return this.layerService.loadDefaultProject(
-                super.getThreadLocalRequest());
+        return this.layerService.loadDefaultProject(super.getThreadLocalRequest());
     }
 
     /**
-     * @deprecated Using CAS command
      * @param layerName
      * @return
      * @throws GeoPlatformException
+     * @deprecated Using CAS command
      */
     @Deprecated
     @Override
@@ -313,14 +253,23 @@ public class LayerRemoteImpl extends GPAutoInjectingXsrfTokenServiceServlet
     }
 
     /**
-     * @deprecated Using CAS command
      * @param layerName
      * @return
      * @throws GeoPlatformException
+     * @deprecated Using CAS command
      */
     @Deprecated
     @Override
     public List<GPLayerAttributes> describeFeatureType(String layerName) throws GeoPlatformException {
         return this.layerService.describeFeatureType(layerName);
+    }
+
+    /**
+     * @param projectId
+     * @return
+     */
+    @Override
+    public Integer getSharedPermissionForUserAndProject(long projectId) {
+        return this.layerService.getSharedPermissionForUserAndProject(projectId, super.getThreadLocalRequest());
     }
 }

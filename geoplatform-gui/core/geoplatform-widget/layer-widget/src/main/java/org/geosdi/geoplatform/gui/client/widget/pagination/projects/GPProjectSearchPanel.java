@@ -116,17 +116,21 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
         super.selectButton.setText(LayerModuleConstants.INSTANCE.GPProjectSearchPanel_selectButtonText());
         super.search.setFieldLabel(LayerModuleConstants.INSTANCE.GPProjectSearchPanel_searchlabelText());
         GPProjectAction action = new GPProjectAction(GPTrustedLevel.HIGH, this);
-        GPSecureButton addProjectButton = new GPSecureButton(ButtonsConstants.INSTANCE.addText(), create(ICONS.projectAdd()), action);
+        GPSecureButton addProjectButton = new GPSecureButton(ButtonsConstants.INSTANCE.addText(),
+                create(ICONS.projectAdd()), action);
         super.addButton(1, addProjectButton);
         addProjectButton.disable();
-        this.editButton = new GPSecureButton(ButtonsConstants.INSTANCE.editText(), create(BasicWidgetResources.ICONS.edit()), action);
+        this.editButton = new GPSecureButton(ButtonsConstants.INSTANCE.editText(),
+                create(BasicWidgetResources.ICONS.edit()), action);
         this.editButton.disable();
         super.addButton(2, this.editButton);
-        this.deleteButton = new GPSecureButton(ButtonsConstants.INSTANCE.deleteText(), create(ICONS.projectDelete()), new DeleteProjectAction(GPTrustedLevel.HIGH, this));
+        this.deleteButton = new GPSecureButton(ButtonsConstants.INSTANCE.deleteText(), create(ICONS.projectDelete()),
+                new DeleteProjectAction(GPTrustedLevel.HIGH, this));
         this.deleteButton.disable();
         super.addButton(3, this.deleteButton);
         ShareProjectAction shareProjectAction = new ShareProjectAction(GPTrustedLevel.HIGH, this);
-        this.shareButton = new GPSecureButton(ButtonsConstants.INSTANCE.shareText(), create(ICONS.arrowRefresh()), shareProjectAction);
+        this.shareButton = new GPSecureButton(ButtonsConstants.INSTANCE.shareText(), create(ICONS.arrowRefresh()),
+                shareProjectAction);
         this.shareButton.disable();
         super.addButton(4, this.shareButton);
     }
@@ -143,7 +147,7 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
         sb.append("<div>");
         sb.append(LayerModuleConstants.INSTANCE.GPProjectSearchPanel_listViewPropertiesText());
         sb.append(": {numberOfElements} <B>{shared}</B></div>");
-//        sb.append("<div>{message}</div>");
+        //        sb.append("<div>{message}</div>");
         sb.append("<div>");
         sb.append(LayerModuleConstants.INSTANCE.GPProjectSearchPanel_listViewVersionText());
         sb.append(": {version}</div>");
@@ -174,46 +178,45 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
             @Override
             protected void load(final Object loadConfig,
                     final AsyncCallback<PagingLoadResult<GPClientProject>> callback) {
-                final SearchProjectsRequest searchProjectsRequest = GWT.
-                        <SearchProjectsRequest>create(SearchProjectsRequest.class);
+                final SearchProjectsRequest searchProjectsRequest = GWT.<SearchProjectsRequest>create(
+                        SearchProjectsRequest.class);
 
                 searchProjectsRequest.setConfig((PagingLoadConfig) loadConfig);
                 searchProjectsRequest.setSearchText(searchText);
                 searchProjectsRequest.setImageURL(create(ICONS.gpProject()).getHTML());
 
-                ClientCommandDispatcher.getInstance().execute(
-                        new GPClientCommand<SearchProjectsResponse>() {
+                ClientCommandDispatcher.getInstance().execute(new GPClientCommand<SearchProjectsResponse>() {
 
-                            private static final long serialVersionUID = 3109256773218160485L;
+                    private static final long serialVersionUID = 3109256773218160485L;
 
-                            {
-                                super.setCommandRequest(searchProjectsRequest);
+                    {
+                        super.setCommandRequest(searchProjectsRequest);
+                    }
+
+                    @Override
+                    public void onCommandSuccess(SearchProjectsResponse response) {
+                        callback.onSuccess(response.getResult());
+                        toolBar.enable();
+                    }
+
+                    @Override
+                    public void onCommandFailure(Throwable caught) {
+                        clearWidgetElements();
+                        try {
+                            throw caught;
+                        } catch (GeoPlatformException e) {
+                            if (caught.getCause() instanceof GPSessionTimeout) {
+                                GPHandlerManager.fireEvent(new GPLoginEvent(null));
+                            } else {
+                                setSearchStatus(STATUS_NO_SEARCH, INSTANCE.STATUS_MESSAGE_NOT_SEARCH());
                             }
-
-                            @Override
-                            public void onCommandSuccess(SearchProjectsResponse response) {
-                                callback.onSuccess(response.getResult());
-                                toolBar.enable();
-                            }
-
-                            @Override
-                            public void onCommandFailure(Throwable caught) {
-                                clearWidgetElements();
-                                try {
-                                    throw caught;
-                                } catch (GeoPlatformException e) {
-                                    if (caught.getCause() instanceof GPSessionTimeout) {
-                                        GPHandlerManager.fireEvent(new GPLoginEvent(null));
-                                    } else {
-                                        setSearchStatus(STATUS_NO_SEARCH, INSTANCE.STATUS_MESSAGE_NOT_SEARCH());
-                                    }
-                                } catch (Throwable e) {
-                                    LayoutManager.getInstance().getStatusMap().setStatus(
-                                            LayerModuleConstants.INSTANCE.GPProjectManagementWidget_headingText(),
+                        } catch (Throwable e) {
+                            LayoutManager.getInstance().getStatusMap()
+                                    .setStatus(LayerModuleConstants.INSTANCE.GPProjectManagementWidget_headingText(),
                                             STATUS_NO_SEARCH.toString());
-                                }
-                            }
-                        });
+                        }
+                    }
+                });
             }
         };
         super.loader = new BasePagingLoader<PagingLoadResult<ModelData>>(proxy);
@@ -226,10 +229,9 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
     @Override
     public void executeSelect() {
         if (getListView().getSelectionModel().getSelectedItem().isDefaultProject()) {
-            GeoPlatformMessage.alertMessage(LayerModuleConstants.INSTANCE.
-                            GPProjectSearchPanel_alertDefaultProjectSelectedTitleText(),
-                    LayerModuleConstants.INSTANCE.
-                            GPProjectSearchPanel_alertDefaultProjectSelectedBodyText());
+            GeoPlatformMessage.alertMessage(
+                    LayerModuleConstants.INSTANCE.GPProjectSearchPanel_alertDefaultProjectSelectedTitleText(),
+                    LayerModuleConstants.INSTANCE.GPProjectSearchPanel_alertDefaultProjectSelectedBodyText());
             getListView().getSelectionModel().deselectAll();
         } else if (!MementoModuleInjector.MainInjector.getInstance().getMementoSave().isEmpty()) {
             GeoPlatformMessage.confirmMessage(
@@ -257,10 +259,8 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
         GPClientProject clientProject = se.getSelectedItem();
         if (clientProject != null) {
             super.selectButton.enable();
-            IGPAccountDetail accountInSession = Registry.get(
-                    UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
-            if (clientProject.getOwner() == null || clientProject.getOwner().getId().equals(
-                    accountInSession.getId())) {
+            IGPAccountDetail accountInSession = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+            if (clientProject.getOwner() == null || clientProject.getOwner().getId().equals(accountInSession.getId())) {
                 deleteButton.enable();
                 this.editButton.enable();
                 this.shareButton.enable();
@@ -312,26 +312,20 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
             @Override
             public void onSuccess(XsrfToken token) {
                 ((HasRpcToken) layerRemote).setRpcToken(token);
-                layerRemote.deleteProject(
-                        getSelectionModel().getSelectedItem().getId(),
-                        new AsyncCallback<Object>() {
+                layerRemote.deleteProject(getSelectionModel().getSelectedItem().getId(), new AsyncCallback<Object>() {
 
-                            @Override
-                            public void onFailure(Throwable caught) {
-                            }
+                    @Override
+                    public void onFailure(Throwable caught) {
+                    }
 
-                            @Override
-                            public void onSuccess(Object result) {
-                                GeoPlatformMessage.infoMessage(
-                                        LayerModuleConstants.INSTANCE.
-                                                deleteProjectTitleText(),
-                                        LayerModuleMessages.INSTANCE.
-                                                GPProjectSearchPanel_projectRemovedMessage(
-                                                        getSelectionModel().getSelectedItem().getName()));
-                                store.remove(
-                                        getSelectionModel().getSelectedItem());
-                            }
-                        });
+                    @Override
+                    public void onSuccess(Object result) {
+                        GeoPlatformMessage.infoMessage(LayerModuleConstants.INSTANCE.deleteProjectTitleText(),
+                                LayerModuleMessages.INSTANCE.GPProjectSearchPanel_projectRemovedMessage(
+                                        getSelectionModel().getSelectedItem().getName()));
+                        store.remove(getSelectionModel().getSelectedItem());
+                    }
+                });
             }
         });
     }
@@ -346,8 +340,7 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
     private class GPDefaultProjectSelector {
 
         private void selectDefaultProject() {
-            searchStatus.setBusy(LayerModuleConstants.INSTANCE.
-                    GPProjectSearchPanel_statusSettingDefaultProjectText());
+            searchStatus.setBusy(LayerModuleConstants.INSTANCE.GPProjectSearchPanel_statusSettingDefaultProjectText());
             xsrf.getNewXsrfToken(new AsyncCallback<XsrfToken>() {
 
                 @Override
@@ -376,13 +369,15 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
                                  */
                                 @Override
                                 public void onFailure(Throwable caught) {
-                                    GeoPlatformMessage.errorMessage(LayerModuleConstants.INSTANCE.
-                                                    GPProjectSearchPanel_settingDefaultProjectErrorTitleText(),
+                                    GeoPlatformMessage.errorMessage(
+                                            LayerModuleConstants.INSTANCE.GPProjectSearchPanel_settingDefaultProjectErrorTitleText(),
                                             caught.getMessage());
                                 }
 
                                 @Override
                                 public void onSuccess(Object result) {
+                                    retrievePermissionMaskForUserAndPoroject(
+                                            getListView().getSelectionModel().getSelectedItem().getId());
                                     setSearchStatus(STATUS_SEARCH, EnumProjectMessage.DEFAUTL_PROJECT_MESSAGE);
                                     //                            store.commitChanges();
                                     loadData();
@@ -392,5 +387,27 @@ public class GPProjectSearchPanel extends GPListViewSearchPanel<GPClientProject>
                 }
             });
         }
+
+        /**
+         * @param projectID
+         */
+        private void retrievePermissionMaskForUserAndPoroject(long projectID) {
+            layerRemote.getSharedPermissionForUserAndProject(projectID, new AsyncCallback<Integer>() {
+
+                @Override
+                public void onFailure(Throwable caught) {
+                    GeoPlatformMessage.errorMessage(
+                            LayerModuleConstants.INSTANCE.GPProjectSearchPanel_settingDefaultProjectErrorTitleText(),
+                            caught.getMessage());
+                }
+
+                @Override
+                public void onSuccess(Integer o) {
+                    IGPAccountDetail accountDetail = Registry.get(UserSessionEnum.ACCOUNT_DETAIL_IN_SESSION.name());
+                    accountDetail.setSharedPermission(o);
+                }
+            });
+        }
+
     }
 }

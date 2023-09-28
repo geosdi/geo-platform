@@ -34,12 +34,13 @@
  */
 package org.geosdi.geoplatform.gui.server.command.role.permission;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.gui.client.command.role.permission.GetRolePermissionRequest;
 import org.geosdi.geoplatform.gui.client.command.role.permission.GetRolePermissionResponse;
 import org.geosdi.geoplatform.gui.server.command.BaseUserCommand;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

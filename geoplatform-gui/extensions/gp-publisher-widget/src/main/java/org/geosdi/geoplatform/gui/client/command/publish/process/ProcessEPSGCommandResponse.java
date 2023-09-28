@@ -53,7 +53,7 @@ public class ProcessEPSGCommandResponse implements GPCommandResponse<String> {
 
     @Override
     public String getResult() {
-        return null;
+        return this.result;
     }
 
     @Override

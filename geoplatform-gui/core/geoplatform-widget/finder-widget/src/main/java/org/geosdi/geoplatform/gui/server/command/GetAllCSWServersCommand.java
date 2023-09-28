@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.gui.server.command;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.gui.client.command.GetAllCSWServersRequest;
 import org.geosdi.geoplatform.gui.client.command.GetAllCSWServersResponse;
@@ -43,6 +42,7 @@ import org.geosdi.geoplatform.responce.ServerCSWDTO;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

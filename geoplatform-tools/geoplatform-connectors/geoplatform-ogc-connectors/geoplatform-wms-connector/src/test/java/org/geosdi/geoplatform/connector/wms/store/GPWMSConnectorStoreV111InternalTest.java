@@ -49,7 +49,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URL;
+import java.net.URI;
 
 import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.of;
@@ -73,7 +73,7 @@ public class GPWMSConnectorStoreV111InternalTest {
     public static void beforeClass() throws Exception {
         wmsServerConnector = wmsConnectorBuilder()
                 .wmsConnectorBuilderV111()
-                .withServerUrl(new URL("http://150.145.141.180/geoserver/wms"))
+                .withServerUrl(new URI("http://150.145.141.180/geoserver/wms").toURL())
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(20)
                         .withDefaultMaxPerRoute(8)

@@ -50,7 +50,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URL;
+import java.net.URI;
 
 import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -58,7 +58,8 @@ import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.pool.builder.v111.WMSConnectorBuilderPoolV111.wmsConnectorBuilderPoolV111;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
-import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.*;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML2_AS_STRING;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML3;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -75,13 +76,13 @@ public class GPWMSConnectorStoreSit2PoolV111Test {
     @BeforeClass
     public static void beforeClass() throws Exception {
         wmsServerConnector = wmsConnectorBuilderPoolV111()
-                .withServerUrl(new URL("https://sit2.regione.campania.it/geoserver/wms"))
+                .withServerUrl(new URI("https://sit2.regione.campania.it/geoserver/wms").toURL())
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(20)
-                        .withConnectionTimeout(Timeout.of(15l, SECONDS))
-                        .withRequestConnectionTimeout(Timeout.of(5l, SECONDS))
-                        .withResponseConnectionTimeout(Timeout.of(3l, SECONDS))
-                        .withConnectionKeepAlive(Timeout.of(3l, MINUTES))
+                        .withConnectionTimeout(Timeout.of(15L, SECONDS))
+                        .withRequestConnectionTimeout(Timeout.of(5L, SECONDS))
+                        .withResponseConnectionTimeout(Timeout.of(3L, SECONDS))
+                        .withConnectionKeepAlive(Timeout.of(3L, MINUTES))
                         .withDefaultMaxPerRoute(10)
                         .withMaxRedirect(5)
                         .build())

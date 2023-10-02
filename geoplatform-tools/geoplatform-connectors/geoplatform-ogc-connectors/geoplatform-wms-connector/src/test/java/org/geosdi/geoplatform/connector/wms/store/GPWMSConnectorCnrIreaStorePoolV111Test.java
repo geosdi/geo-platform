@@ -46,7 +46,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URL;
+import java.net.URI;
 
 import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -69,13 +69,13 @@ public class GPWMSConnectorCnrIreaStorePoolV111Test {
     @BeforeClass
     public static void beforeClass() throws Exception {
         wmsServerConnector = wmsConnectorBuilderPoolV111()
-                .withServerUrl(new URL("https://insar.irea.cnr.it/geoserver/geonode/wms"))
+                .withServerUrl(new URI("https://insar.irea.cnr.it/geoserver/geonode/wms").toURL())
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(20)
-                        .withConnectionTimeout(of(5l, SECONDS))
-                        .withRequestConnectionTimeout(of(5l, SECONDS))
-                        .withResponseConnectionTimeout(of(3l, SECONDS))
-                        .withConnectionKeepAlive(of(3l, MINUTES))
+                        .withConnectionTimeout(of(5L, SECONDS))
+                        .withRequestConnectionTimeout(of(5L, SECONDS))
+                        .withResponseConnectionTimeout(of(3L, SECONDS))
+                        .withConnectionKeepAlive(of(3L, MINUTES))
                         .withDefaultMaxPerRoute(10)
                         .withMaxRedirect(5)
                         .build())

@@ -43,7 +43,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URL;
+import java.net.URI;
 
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.geosdi.geoplatform.connector.server.store.GPWMSConnectorBuilder.WMSConnectorBuilder.wmsConnectorBuilder;
@@ -64,7 +64,7 @@ public class GPWMSConnectorStoreToscanaV111Test {
     public static void beforeClass() throws Exception {
         wmsServerConnector = wmsConnectorBuilder()
                 .wmsConnectorBuilderV111()
-                .withServerUrl(new URL("https://mappe.regione.toscana.it/geoserver/wms"))
+                .withServerUrl(new URI("https://mappe.regione.toscana.it/geoserver/wms").toURL())
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(40)
                         .withDefaultMaxPerRoute(20)

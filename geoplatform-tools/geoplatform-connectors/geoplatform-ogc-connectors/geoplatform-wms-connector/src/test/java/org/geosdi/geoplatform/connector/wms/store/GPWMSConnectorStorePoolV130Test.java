@@ -43,7 +43,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URL;
+import java.net.URI;
 
 import static org.geosdi.geoplatform.connector.pool.builder.v130.WMSConnectorBuilderPoolV130.wmsConnectorBuilderPoolV130;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
@@ -63,7 +63,7 @@ public class GPWMSConnectorStorePoolV130Test {
     @BeforeClass
     public static void beforeClass() throws Exception {
         wmsServerConnector = wmsConnectorBuilderPoolV130()
-                .withServerUrl(new URL("http://150.145.141.180/geoserver/wms"))
+                .withServerUrl(new URI("http://150.145.141.180/geoserver/wms").toURL())
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(150)
                         .withDefaultMaxPerRoute(80)

@@ -51,7 +51,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.UnmarshalException;
-import java.net.URL;
+import java.net.URI;
 
 import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -78,13 +78,13 @@ public class GPWMSConnectorStoreV111MappeDPCTest {
     public static void beforeClass() throws Exception {
         wmsServerConnector = wmsConnectorBuilder()
                 .wmsConnectorBuilderV111()
-                .withServerUrl(new URL("http://mappe-dpc.protezionecivile.it/gssitdpc/wms"))
+                .withServerUrl(new URI("http://mappe-dpc.protezionecivile.it/gssitdpc/wms").toURL())
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(12)
-                        .withConnectionTimeout(of(15l, SECONDS))
-                        .withRequestConnectionTimeout(of(5l, SECONDS))
-                        .withResponseConnectionTimeout(of(3l, SECONDS))
-                        .withConnectionKeepAlive(of(3l, MINUTES))
+                        .withConnectionTimeout(of(15L, SECONDS))
+                        .withRequestConnectionTimeout(of(5L, SECONDS))
+                        .withResponseConnectionTimeout(of(3L, SECONDS))
+                        .withConnectionKeepAlive(of(3L, MINUTES))
                         .withDefaultMaxPerRoute(8)
                         .withMaxRedirect(5)
                         .build())

@@ -47,12 +47,13 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URL;
+import java.net.URI;
 
 import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
-import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.*;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML2;
+import static org.geosdi.geoplatform.connector.server.request.WMSFeatureInfoFormat.GML3_AS_STRING;
 import static org.geosdi.geoplatform.connector.server.store.GPWMSConnectorBuilder.WMSConnectorBuilder.wmsConnectorBuilder;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -71,7 +72,7 @@ public class GPWMSConnectorStoreLammaV111Test {
     public static void beforeClass() throws Exception {
         wmsServerConnector = wmsConnectorBuilder()
                 .wmsConnectorBuilderV111()
-                .withServerUrl(new URL("https://geoportale.lamma.rete.toscana.it/geoserver_clima/wms"))
+                .withServerUrl(new URI("https://geoportale.lamma.rete.toscana.it/geoserver_clima/wms").toURL())
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(15)
                         .withDefaultMaxPerRoute(7)

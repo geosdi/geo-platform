@@ -43,7 +43,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URL;
+import java.net.URI;
 
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.geosdi.geoplatform.connector.server.store.GPWMSConnectorBuilder.WMSConnectorBuilder.wmsConnectorBuilder;
@@ -62,7 +62,7 @@ public class GPWMSConnectorStoreEsriCartaFitoclimaticaV130Test {
     public static void beforeClass() throws Exception {
         wmsServerConnectorMinisteroAmbiente = wmsConnectorBuilder()
                 .wmsConnectorBuilderV130()
-                .withServerUrl(new URL("http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Carta_fitoclimatica.map"))
+                .withServerUrl(new URI("http://wms.pcn.minambiente.it/ogc?map=/ms_ogc/WMS_v1.3/Vettoriali/Carta_fitoclimatica.map").toURL())
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(40)
                         .withDefaultMaxPerRoute(20)

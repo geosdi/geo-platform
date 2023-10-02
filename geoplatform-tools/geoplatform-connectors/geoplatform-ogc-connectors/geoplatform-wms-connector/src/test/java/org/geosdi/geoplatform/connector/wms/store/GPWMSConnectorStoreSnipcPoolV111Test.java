@@ -50,7 +50,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URL;
+import java.net.URI;
 
 import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.of;
@@ -73,7 +73,7 @@ public class GPWMSConnectorStoreSnipcPoolV111Test {
     @BeforeClass
     public static void beforeClass() throws Exception {
         wmsServerConnector = wmsConnectorBuilderPoolV111()
-                .withServerUrl(new URL("https://servizi.protezionecivile.it/geoserver/wms"))
+                .withServerUrl(new URI("https://servizi.protezionecivile.it/geoserver/wms").toURL())
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(150)
                         .withDefaultMaxPerRoute(80)

@@ -106,7 +106,7 @@ public class GPGeoserverFeatureTypesConnectorV221XTest extends GPBaseGeoserverCo
     @Test
     public void e_loadWorkspaceFeatureTypesTest() throws Exception {
         GeoserverLoadWorkspaceFeatureTypesRequest workspaceFeatureTypesRequest = geoserverConnectorStoreV2_21_x.loadWorkspaceFeatureTypesRequest();
-        workspaceFeatureTypesRequest.withWorkspace("sf");
+        workspaceFeatureTypesRequest.withWorkspace("sf").withFeatureTypeCategory(configured);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@LOAD_WORKSPACE_FEATURE_TYPES_RESPONSE : {}\n", workspaceFeatureTypesRequest.getResponse().toFeatureType());
     }
 

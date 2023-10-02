@@ -36,6 +36,7 @@
 package org.geosdi.geoplatform.connector.server;
 
 import org.apache.hc.client5.http.auth.CredentialsStore;
+import org.apache.hc.client5.http.config.ConnectionConfig;
 import org.apache.hc.client5.http.config.RequestConfig;
 import org.apache.hc.client5.http.impl.DefaultHttpRequestRetryStrategy;
 import org.apache.hc.client5.http.impl.auth.BasicCredentialsProvider;
@@ -268,7 +269,6 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
                 .setRequestExecutor(new HttpRequestExecutor())
                 .setConnectionManager(createClientConnectionManager())
                 .setDefaultRequestConfig(RequestConfig.custom()
-                        .setConnectTimeout(this.pooledConnectorConfig.getConnectionTimeout())
                         .setConnectionRequestTimeout(this.pooledConnectorConfig.getRequestConnectionTimeout())
                         .setConnectionKeepAlive(this.pooledConnectorConfig.getConnectionKeepAlive())
                         .setMaxRedirects(this.pooledConnectorConfig.getMaxRedirect())
@@ -290,6 +290,9 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
                 .register("https", this.sslConnectionSocketFactory).build());
         cm.setMaxTotal(this.pooledConnectorConfig.getMaxTotalConnections());
         cm.setDefaultMaxPerRoute(this.pooledConnectorConfig.getDefaultMaxPerRoute());
+        cm.setDefaultConnectionConfig(ConnectionConfig.custom()
+                        .setConnectTimeout(this.pooledConnectorConfig.getConnectionTimeout())
+                .build());
         return cm;
     }
 

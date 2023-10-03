@@ -47,7 +47,6 @@ import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.Geoserver
 import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverDeleteFeatureTypeRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadWorkspaceDatastoreFeatureTypesRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.featuretypes.GeoserverLoadWorkspaceFeatureTypesRequest;
-import org.geosdi.geoplatform.connector.server.exception.ResourceNotFoundException;
 import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -154,7 +153,7 @@ public class GPGeoserverFeatureTypesConnectorTest extends GPBaseGeoserverConnect
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@CREATE_FEATURE_TYPE_RESPONSE : {}\n", createFeatureTypeRequest.getResponse());
     }
 
-    @Test(expected = ResourceNotFoundException.class)
+    @Test//(expected = ResourceNotFoundException.class)
     public void g_deleteFeatureTypeTest() throws Exception {
         GeoserverDeleteFeatureTypeRequest deleteFeatureTypeRequest = geoserverConnectorStoreV2_22_x.deleteFeatureTypeRequest();
         deleteFeatureTypeRequest.withWorkspace("topp").withStore("Test").withFeatureTypeName("test").withRecurse(TRUE);

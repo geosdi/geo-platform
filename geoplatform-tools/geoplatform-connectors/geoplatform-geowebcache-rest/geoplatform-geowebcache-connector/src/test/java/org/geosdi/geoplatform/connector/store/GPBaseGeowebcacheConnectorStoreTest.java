@@ -66,7 +66,7 @@ public class GPBaseGeowebcacheConnectorStoreTest {
 
     protected static final Logger logger = LoggerFactory.getLogger(GPBaseGeowebcacheConnectorStoreTest.class);
     //
-    private static final String geoserverURLV2_21_x = "http://150.145.141.92/geoserver/gwc/rest";
+    private static final String geoserverURLV2_21_x = "http://localhost:8080/geowebcache/rest/";
     protected static GPGeowebcacheConnectorStore geowebcacheConnectorStore;
 
     /**
@@ -80,7 +80,7 @@ public class GPBaseGeowebcacheConnectorStoreTest {
                         .withMaxTotalConnections(150)
                         .withDefaultMaxPerRoute(80)
                         .withMaxRedirect(20).build())
-                .withClientSecurity(new DigestPreemptiveSecurityConnector("admin", "geoserver"))
+                .withClientSecurity(new DigestPreemptiveSecurityConnector("geowebcache", "secured"))
                 .build();
     }
 
@@ -97,7 +97,7 @@ public class GPBaseGeowebcacheConnectorStoreTest {
      */
     @Test
     public void isRunningTest() throws Exception {
-        logger.info("###########GEOWEBCACHE RUNNING : {}\n", this.geowebcacheConnectorStore.isGeowebcacheRunning());
+        logger.info("###########GEOWEBCACHE RUNNING : {}\n", geowebcacheConnectorStore.isGeowebcacheRunning());
     }
 
     /**
@@ -105,7 +105,7 @@ public class GPBaseGeowebcacheConnectorStoreTest {
      */
     @Test
     public void reloadingTest() throws Exception {
-        logger.info("###########GEOWEBCACHE RELOADING : {}\n", this.geowebcacheConnectorStore.createReloadingRequest()
+        logger.info("###########GEOWEBCACHE RELOADING : {}\n", geowebcacheConnectorStore.createReloadingRequest()
                 .getResponse());
     }
 
@@ -123,8 +123,8 @@ public class GPBaseGeowebcacheConnectorStoreTest {
      */
     @Test
     public void seedWithLayerNameTest() throws Exception {
-        logger.info("###########GEOWEBCACHE SEED : {}\n", this.geowebcacheConnectorStore.createSeedWithLayerNameRequest()
-                        .withLayerName("topp:states")
+        logger.info("###########GEOWEBCACHE SEED : {}\n", geowebcacheConnectorStore.createSeedWithLayerNameRequest()
+                .withLayerName("topp:states")
                 .getResponse());
     }
 
@@ -140,7 +140,7 @@ public class GPBaseGeowebcacheConnectorStoreTest {
         geowebcacheSeedBody.setZoomStop(1);
         geowebcacheSeedBody.setType(GeowebcacheSeedOperationType.SEED);
         geowebcacheSeedBody.setThreadCount(1);
-        geowebcacheSeedBody.setFormat("image\\/png");
+        geowebcacheSeedBody.setFormat("image/png");
         GPGeowebcacheCoordinatesEntry coordinatesEntry = new GeowebcacheCoordinatesEntry();
         coordinatesEntry.addNumbers(-124.0, 22.0, -66.0, 72.0);
         GPGeowebcacheBoundsBean coordinatesBean = new GeowebcacheBoundsBean();
@@ -155,7 +155,7 @@ public class GPBaseGeowebcacheConnectorStoreTest {
         geowebcacheSeedBody.addParameter(geowebcacheEntryValue);
         logger.info("###########GEOWEBCACHE SEED : {}\n", this.geowebcacheConnectorStore.createSeedWithLayerNameBodyRequest()
                 .withLayerName("topp:states")
-                        .withBody(geowebcacheSeedBody)
+                .withBody(geowebcacheSeedBody)
                 .getResponse());
     }
 }

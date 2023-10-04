@@ -110,7 +110,7 @@ public class GPGeowebcacheSeedWithLayerNameBodyRequest extends GPJsonPostConnect
         String baseURI = this.serverURI.toString();
         String layerName = this.layerName.get();
         checkArgument((layerName != null) && !(layerName.trim().isEmpty()), "The Parameter layerName must not be null or an empty string.");
-        return ((baseURI.endsWith("/") ? baseURI.concat("/seed/").concat(layerName).concat(".json") : baseURI.concat("/seed/").concat(layerName).concat(".json")));
+        return ((baseURI.endsWith("/") ? baseURI.concat("seed/").concat(layerName).concat(".json") : baseURI.concat("/seed/").concat(layerName).concat(".json")));
     }
 
     @Override

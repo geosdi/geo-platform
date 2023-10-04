@@ -53,6 +53,6 @@ public enum GeowebcacheSeedOperationType implements GPGeowebcacheSeedOperationTy
                         ? v.getType().equalsIgnoreCase(type) : FALSE)
                 .map(value -> (GPGeowebcacheSeedOperationType) value)
                 .findFirst();
-        return ((optional != null) && !(optional.equals(Optional.empty()))) ? optional.get() : null;
+        return optional.orElse(null);
     }
 }

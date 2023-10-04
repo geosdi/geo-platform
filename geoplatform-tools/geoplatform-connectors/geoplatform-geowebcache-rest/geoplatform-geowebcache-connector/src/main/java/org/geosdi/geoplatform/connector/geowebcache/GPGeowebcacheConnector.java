@@ -103,7 +103,6 @@ public class GPGeowebcacheConnector extends GPGeowebcacheSeedConnector implement
     public GPGeowebcacheConnector(URL server, GPPooledConnectorConfig pooledConnectorConfig,
             GPSecurityConnector securityConnector, JacksonSupport theJacksonSupport, GeowebcacheVersion theVersion) {
         super(server, pooledConnectorConfig, securityConnector, theJacksonSupport, theVersion);
-        //this.jacksonSupport.getDefaultMapper().coercionConfigFor(GPGeoserverMetadataLinks.class).setCoercion(EmptyString, AsNull);
     }
 
     /**

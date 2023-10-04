@@ -6,7 +6,6 @@
     <prerequisites>
         <maven>3.0.2</maven>
     </prerequisites>
-    
 
     <groupId>org.geosdi</groupId>
     <artifactId>geo-platform</artifactId>

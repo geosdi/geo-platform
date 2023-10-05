@@ -35,7 +35,10 @@
  */
 package org.geosdi.geoplatform.connector.uri;
 
+import net.jcip.annotations.Immutable;
+
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import static javax.annotation.meta.When.NEVER;
 
@@ -43,13 +46,14 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverIntegerQueryParam extends GPConnectorQueryParam.ConnectorQueryParam<Integer> {
+@Immutable
+public class GPConnectorBooleanQueryParam extends GPConnectorQueryParam.ConnectorQueryParam<Boolean> {
 
     /**
      * @param theKey
      * @param theValue
      */
-    public GPGeoserverIntegerQueryParam(@Nonnull(when = NEVER) String theKey, @Nonnull(when = NEVER) Integer theValue) {
+    public GPConnectorBooleanQueryParam(@Nonnull(when = NEVER) String theKey, @Nullable Boolean theValue) {
         super(theKey, theValue);
     }
 }

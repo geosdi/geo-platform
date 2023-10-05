@@ -43,8 +43,8 @@ import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.apache.hc.core5.net.URIBuilder;
 import org.geosdi.geoplatform.connector.geoserver.styles.base.GPGeoserverBaseCreateStyleRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverBooleanQueryParam;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverStringQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorBooleanQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorStringQueryParam;
 import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
 
@@ -66,8 +66,8 @@ import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverSty
 @ThreadSafe
 class GPGeoserverCreateStyleSLDV100Request extends GPGeoserverBaseCreateStyleRequest<StyledLayerDescriptor, GeoserverCreateStyleSLDV100Request> implements GeoserverCreateStyleSLDV100Request {
 
-    private final ThreadLocal<GPGeoserverStringQueryParam> style = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverBooleanQueryParam> raw = withInitial(() -> null);
+    private final ThreadLocal<GPConnectorStringQueryParam> style = withInitial(() -> null);
+    private final ThreadLocal<GPConnectorBooleanQueryParam> raw = withInitial(() -> null);
     private final ThreadLocal<String> stringStyleBody = withInitial(() -> null);
 
     /**
@@ -83,7 +83,7 @@ class GPGeoserverCreateStyleSLDV100Request extends GPGeoserverBaseCreateStyleReq
      */
     @Override
     public GeoserverCreateStyleSLDV100Request withStyleName(@Nonnull(when = NEVER) String theStyleName) {
-        this.style.set(new GPGeoserverStringQueryParam("name", theStyleName));
+        this.style.set(new GPConnectorStringQueryParam("name", theStyleName));
         return self();
     }
 
@@ -110,7 +110,7 @@ class GPGeoserverCreateStyleSLDV100Request extends GPGeoserverBaseCreateStyleReq
      */
     @Override
     public GeoserverCreateStyleSLDV100Request withRaw(@Nullable Boolean theRaw) {
-        this.raw.set(new GPGeoserverBooleanQueryParam("raw", theRaw));
+        this.raw.set(new GPConnectorBooleanQueryParam("raw", theRaw));
         return self();
     }
 

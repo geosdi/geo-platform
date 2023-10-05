@@ -40,8 +40,8 @@ import org.apache.hc.core5.net.URIBuilder;
 import org.geojson.FeatureCollection;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.structured.GeoserverLoadStructuredCoverageGranulesRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverIntegerQueryParam;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverStringQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorIntegerQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorStringQueryParam;
 import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
@@ -60,9 +60,9 @@ import static javax.annotation.meta.When.NEVER;
 @ThreadSafe
 class GPGeoserverLoadStructuredCoverageGranulesRequest extends GPGeoserverBaseStructuredCoverageRequest<FeatureCollection, GeoserverLoadStructuredCoverageGranulesRequest> implements GeoserverLoadStructuredCoverageGranulesRequest {
 
-    private final ThreadLocal<GPGeoserverStringQueryParam> filter = withInitial(() -> new GPGeoserverStringQueryParam("filter", null));
-    private final ThreadLocal<GPGeoserverIntegerQueryParam> offset = withInitial(() -> new GPGeoserverIntegerQueryParam("offset", null));
-    private final ThreadLocal<GPGeoserverIntegerQueryParam> limit = withInitial(() -> new GPGeoserverIntegerQueryParam("limit", null));
+    private final ThreadLocal<GPConnectorStringQueryParam> filter = withInitial(() -> new GPConnectorStringQueryParam("filter", null));
+    private final ThreadLocal<GPConnectorIntegerQueryParam> offset = withInitial(() -> new GPConnectorIntegerQueryParam("offset", null));
+    private final ThreadLocal<GPConnectorIntegerQueryParam> limit = withInitial(() -> new GPConnectorIntegerQueryParam("limit", null));
 
     /**
      * @param server
@@ -80,7 +80,7 @@ class GPGeoserverLoadStructuredCoverageGranulesRequest extends GPGeoserverBaseSt
      */
     @Override
     public GeoserverLoadStructuredCoverageGranulesRequest withFilter(@Nullable String theFilter) {
-        this.filter.set(new GPGeoserverStringQueryParam("filter", theFilter));
+        this.filter.set(new GPConnectorStringQueryParam("filter", theFilter));
         return self();
     }
 
@@ -92,7 +92,7 @@ class GPGeoserverLoadStructuredCoverageGranulesRequest extends GPGeoserverBaseSt
      */
     @Override
     public GeoserverLoadStructuredCoverageGranulesRequest withOffset(@Nullable Integer theOffset) {
-        this.offset.set(new GPGeoserverIntegerQueryParam("offset", theOffset));
+        this.offset.set(new GPConnectorIntegerQueryParam("offset", theOffset));
         return self();
     }
 
@@ -104,7 +104,7 @@ class GPGeoserverLoadStructuredCoverageGranulesRequest extends GPGeoserverBaseSt
      */
     @Override
     public GeoserverLoadStructuredCoverageGranulesRequest withLimit(@Nullable Integer theLimit) {
-        this.limit.set(new GPGeoserverIntegerQueryParam("limit", theLimit));
+        this.limit.set(new GPConnectorIntegerQueryParam("limit", theLimit));
         return self();
     }
 

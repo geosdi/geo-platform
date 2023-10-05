@@ -39,7 +39,7 @@ import io.reactivex.rxjava3.functions.Consumer;
 import org.apache.hc.core5.net.URIBuilder;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverBooleanQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorBooleanQueryParam;
 import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
@@ -64,7 +64,7 @@ public abstract class GPGeoserverDeleteStoreRequest<R extends GeoserverDeleteSto
 
     private final ThreadLocal<String> workspace = withInitial(() -> null);
     private final ThreadLocal<String> store = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverBooleanQueryParam> recurse = withInitial(() -> new GPGeoserverBooleanQueryParam("recurse", TRUE));
+    private final ThreadLocal<GPConnectorBooleanQueryParam> recurse = withInitial(() -> new GPConnectorBooleanQueryParam("recurse", TRUE));
     private final String storeRestPath;
 
     /**
@@ -111,7 +111,7 @@ public abstract class GPGeoserverDeleteStoreRequest<R extends GeoserverDeleteSto
      */
     @Override
     public R withRecurse(@Nullable Boolean theRecurse) {
-        this.recurse.set(new GPGeoserverBooleanQueryParam("recurse", (theRecurse != null) ? theRecurse : TRUE));
+        this.recurse.set(new GPConnectorBooleanQueryParam("recurse", (theRecurse != null) ? theRecurse : TRUE));
         return self();
     }
 

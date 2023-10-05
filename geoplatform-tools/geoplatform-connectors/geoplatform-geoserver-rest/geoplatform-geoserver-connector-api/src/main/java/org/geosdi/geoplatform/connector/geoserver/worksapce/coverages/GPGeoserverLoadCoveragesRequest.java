@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGe
 import org.geosdi.geoplatform.connector.geoserver.request.GPGeoserverGetConnectorRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoveragesRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverStringQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorStringQueryParam;
 import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
@@ -65,7 +65,7 @@ import static javax.annotation.meta.When.NEVER;
 class GPGeoserverLoadCoveragesRequest extends GPGeoserverGetConnectorRequest<GPGeoserverCoverages, GPGeoserverEmptyCoverages, GeoserverLoadCoveragesRequest> implements GeoserverLoadCoveragesRequest {
 
     private final ThreadLocal<String> workspace = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverStringQueryParam> queryList = withInitial(() ->  new GPGeoserverStringQueryParam("list", null));
+    private final ThreadLocal<GPConnectorStringQueryParam> queryList = withInitial(() ->  new GPConnectorStringQueryParam("list", null));
 
     /**
      * @param server
@@ -96,7 +96,7 @@ class GPGeoserverLoadCoveragesRequest extends GPGeoserverGetConnectorRequest<GPG
      */
     @Override
     public GeoserverLoadCoveragesRequest withQueryList(@Nullable String theQueryList) {
-        this.queryList.set(new GPGeoserverStringQueryParam("list", (theQueryList != null) && !(theQueryList.trim().isEmpty()) ? theQueryList : null));
+        this.queryList.set(new GPConnectorStringQueryParam("list", (theQueryList != null) && !(theQueryList.trim().isEmpty()) ? theQueryList : null));
         return self();
     }
 
@@ -125,7 +125,7 @@ class GPGeoserverLoadCoveragesRequest extends GPGeoserverGetConnectorRequest<GPG
      */
     @Override
     protected GPGeoserverCoverages readInternal(BufferedReader reader) throws Exception {
-        GPGeoserverStringQueryParam queryList = this.queryList.get();
+        GPConnectorStringQueryParam queryList = this.queryList.get();
         return ((queryList.getValue() != null) && (queryList.getValue().equalsIgnoreCase("all"))
                 ? this.jacksonSupport.getDefaultMapper().readValue(reader, GPGeoserverAllCoverages.class) : super.readInternal(reader));
     }

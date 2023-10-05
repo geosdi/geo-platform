@@ -53,7 +53,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Immutable
-public class GPGeoserverValuesQueryParam extends GPConnectorQueryParam.ConnectorQueryParam<GPGeoserverValueQueryParam[]> {
+public class GPConnectorValuesQueryParam extends GPConnectorQueryParam.ConnectorQueryParam<GPConnectorValueQueryParam[]> {
 
     private final Set<String> cleanValues;
 
@@ -61,12 +61,12 @@ public class GPGeoserverValuesQueryParam extends GPConnectorQueryParam.Connector
      * @param theKey
      * @param theValue
      */
-    public GPGeoserverValuesQueryParam(@Nonnull(when = NEVER) String theKey,
-            @Nullable GPGeoserverValueQueryParam[] theValue) {
+    public GPConnectorValuesQueryParam(@Nonnull(when = NEVER) String theKey,
+            @Nullable GPConnectorValueQueryParam[] theValue) {
         super(theKey, theValue);
         this.cleanValues = super.isQueryParamValid() ? stream(theValue)
                 .filter(Objects::nonNull)
-                .map(GPGeoserverValueQueryParam::toQueryParam)
+                .map(GPConnectorValueQueryParam::toQueryParam)
                 .filter(v -> !(v.trim().isEmpty()))
                 .collect(toCollection(LinkedHashSet::new)) : EMPTY_SET;
     }

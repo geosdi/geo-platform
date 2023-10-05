@@ -66,8 +66,8 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
     private final ThreadLocal<String> vectorName = withInitial(() -> null);
     private final ThreadLocal<GPGeoserverStringQueryParam> attribute = withInitial(() -> null);
     private final ThreadLocal<GeoserverRamp> geoserverRamp = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverQueryParam> intervals = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverQueryParam> method = withInitial(() -> null);
+    private final ThreadLocal<GPConnectorQueryParam> intervals = withInitial(() -> null);
+    private final ThreadLocal<GPConnectorQueryParam> method = withInitial(() -> null);
     private final ThreadLocal<GPGeoserverBooleanQueryParam> open = withInitial(() -> null);
     private final ThreadLocal<GPGeoserverBooleanQueryParam> reverse = withInitial(() -> null);
     private final ThreadLocal<GPGeoserverBooleanQueryParam> normalize = withInitial(() -> null);
@@ -233,7 +233,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
                 baseURI.concat("sld/").concat(vectorName).concat("/classifier").concat(".").concat(this.format.get()) :
                 baseURI.concat("/sld/").concat(vectorName).concat("/classifier").concat(".").concat(this.format.get()));
         URIBuilder uriBuilder = new URIBuilder(path);
-        Consumer<ThreadLocal> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
+        Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.attribute, this.geoserverRamp, this.intervals, this.method, this.open, this.reverse, this.normalize,
                 this.startColor, this.endColor, this.midColor, this.size, this.symbol)
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))

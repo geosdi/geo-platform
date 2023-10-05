@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.purge;
 
-import org.geosdi.geoplatform.connector.uri.GPGeoserverQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorQueryParam;
 
 import javax.annotation.Nonnull;
 
@@ -45,7 +45,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum GPGeoserverPurgeParam implements GPGeoserverQueryParam<String> {
+public enum GPGeoserverPurgeParam implements GPConnectorQueryParam<String> {
 
     NONE("none"),
     METADATA("metadata"),

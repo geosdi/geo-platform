@@ -35,11 +35,11 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.extensions.importer;
 
-import org.geosdi.geoplatform.connector.uri.GPGeoserverQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorQueryParam;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public interface GPFileExpandType<B extends Object> extends GPGeoserverQueryParam<B> {
+public interface GPFileExpandType<B extends Object> extends GPConnectorQueryParam<B> {
 }

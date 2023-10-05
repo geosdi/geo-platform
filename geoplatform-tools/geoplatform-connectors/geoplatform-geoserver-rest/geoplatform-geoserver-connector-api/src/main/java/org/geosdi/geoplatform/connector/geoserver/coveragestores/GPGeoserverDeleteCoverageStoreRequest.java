@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.Geoserv
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
 import org.geosdi.geoplatform.connector.uri.GPGeoserverBooleanQueryParam;
-import org.geosdi.geoplatform.connector.uri.GeoserverRXQueryParamConsumer;
+import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -152,7 +152,7 @@ class GPGeoserverDeleteCoverageStoreRequest extends GPJsonDeleteConnectorRequest
         URIBuilder uriBuilder = new URIBuilder(((baseURI.endsWith("/") ?
                 baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore) :
                 baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(coverageStore))));
-        Consumer<ThreadLocal> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
+        Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.purge, this.recurse)
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
                 .subscribe(consumer, Throwable::printStackTrace);

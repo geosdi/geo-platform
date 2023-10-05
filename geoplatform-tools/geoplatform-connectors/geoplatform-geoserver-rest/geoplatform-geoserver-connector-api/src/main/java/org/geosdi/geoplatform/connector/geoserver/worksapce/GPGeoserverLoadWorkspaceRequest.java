@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverLo
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.uri.GPGeoserverBooleanQueryParam;
-import org.geosdi.geoplatform.connector.uri.GeoserverRXQueryParamConsumer;
+import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -103,7 +103,7 @@ class GPGeoserverLoadWorkspaceRequest extends GPGeoserverExsistRequest<GPGeoserv
         String baseURI = this.serverURI.toString();
         URIBuilder uriBuilder = new URIBuilder(((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspaceName)
                 : baseURI.concat("/workspaces/").concat(workspaceName))));
-        Consumer<ThreadLocal> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
+        Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.quietOnNotFound)
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
                 .subscribe(consumer, Throwable::printStackTrace);

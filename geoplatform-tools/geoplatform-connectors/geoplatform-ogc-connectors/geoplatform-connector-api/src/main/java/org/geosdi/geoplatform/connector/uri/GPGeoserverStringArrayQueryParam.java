@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.uri;
 
 import net.jcip.annotations.Immutable;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverQueryParam.GeoserverQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorQueryParam.ConnectorQueryParam;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -55,7 +55,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 @Immutable
-public class GPGeoserverStringArrayQueryParam extends GeoserverQueryParam<String[]> {
+public class GPGeoserverStringArrayQueryParam extends ConnectorQueryParam<String[]> {
 
     private final Set<String> cleanValues;
 

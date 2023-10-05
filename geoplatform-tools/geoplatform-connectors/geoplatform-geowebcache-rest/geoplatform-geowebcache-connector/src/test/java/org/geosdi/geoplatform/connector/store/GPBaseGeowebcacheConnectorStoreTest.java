@@ -66,7 +66,7 @@ public class GPBaseGeowebcacheConnectorStoreTest {
 
     protected static final Logger logger = LoggerFactory.getLogger(GPBaseGeowebcacheConnectorStoreTest.class);
     //
-    private static final String geoserverURLV2_21_x = "http://localhost:8080/geowebcache/rest/";
+    private static final String geoserverURLV2_21_x = "http://150.145.141.92/geoserver/gwc/rest";
     protected static GPGeowebcacheConnectorStore geowebcacheConnectorStore;
 
     /**

@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.extensions.classify;
 
-import org.geosdi.geoplatform.connector.uri.GPGeoserverQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorQueryParam;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public enum GeoserverMethod implements GPGeoserverQueryParam<String> {
+public enum GeoserverMethod implements GPConnectorQueryParam<String> {
 
     equalInterval,
     uniqueInterval,

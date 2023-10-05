@@ -35,13 +35,13 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.configure;
 
-import org.geosdi.geoplatform.connector.uri.GPGeoserverQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorQueryParam;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public enum GPGeoserverParameterConfigure implements GPGeoserverQueryParam<String> {
+public enum GPGeoserverParameterConfigure implements GPConnectorQueryParam<String> {
 
     FIRST, NONE, ALL;
 

@@ -53,7 +53,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Immutable
-public class GPGeoserverValuesQueryParam extends GPGeoserverQueryParam.GeoserverQueryParam<GPGeoserverValueQueryParam[]> {
+public class GPGeoserverValuesQueryParam extends GPConnectorQueryParam.ConnectorQueryParam<GPGeoserverValueQueryParam[]> {
 
     private final Set<String> cleanValues;
 

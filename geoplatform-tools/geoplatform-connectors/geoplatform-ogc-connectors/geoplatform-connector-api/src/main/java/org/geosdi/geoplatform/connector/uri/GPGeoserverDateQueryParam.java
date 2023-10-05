@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.uri;
 
-import org.geosdi.geoplatform.connector.uri.GPGeoserverQueryParam.GeoserverQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorQueryParam.ConnectorQueryParam;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -49,7 +49,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverDateQueryParam extends GeoserverQueryParam<Date> {
+public class GPGeoserverDateQueryParam extends ConnectorQueryParam<Date> {
 
     private final String formatter;
 

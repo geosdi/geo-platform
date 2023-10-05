@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.extensions.importer;
 
-import org.geosdi.geoplatform.connector.uri.GPGeoserverQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorQueryParam;
 
 import javax.annotation.Nonnull;
 
@@ -46,7 +46,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverExpandChild extends GPGeoserverQueryParam.GeoserverQueryParam<Integer> implements GPFileExpandType<Integer>{
+public class GPGeoserverExpandChild extends GPConnectorQueryParam.ConnectorQueryParam<Integer> implements GPFileExpandType<Integer>{
 
     /**
      * @param theKey

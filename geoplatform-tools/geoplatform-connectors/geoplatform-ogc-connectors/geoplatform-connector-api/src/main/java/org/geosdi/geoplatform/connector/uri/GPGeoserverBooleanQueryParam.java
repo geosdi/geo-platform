@@ -47,7 +47,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 @Immutable
-public class GPGeoserverBooleanQueryParam extends GPGeoserverQueryParam.GeoserverQueryParam<Boolean> {
+public class GPGeoserverBooleanQueryParam extends GPConnectorQueryParam.ConnectorQueryParam<Boolean> {
 
     /**
      * @param theKey

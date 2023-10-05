@@ -46,7 +46,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.extensions.importer.Ge
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
 import org.geosdi.geoplatform.connector.uri.GPGeoserverBooleanQueryParam;
-import org.geosdi.geoplatform.connector.uri.GeoserverRXQueryParamConsumer;
+import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -143,7 +143,7 @@ class GPGeoserverCreateImportWithIdRequest extends GPJsonPostConnectorRequest<Ob
         checkArgument(id != null && id >= 0, "Parameter id must not be null");
         String path = ((baseURI.endsWith("/") ? baseURI.concat("imports/").concat(id.toString()) : baseURI.concat("/imports/").concat(id.toString())));
         URIBuilder uriBuilder = new URIBuilder(path);
-        Consumer<ThreadLocal> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
+        Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.async, this.exec, this.expand)
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
                 .filter(c-> c.get() != null)

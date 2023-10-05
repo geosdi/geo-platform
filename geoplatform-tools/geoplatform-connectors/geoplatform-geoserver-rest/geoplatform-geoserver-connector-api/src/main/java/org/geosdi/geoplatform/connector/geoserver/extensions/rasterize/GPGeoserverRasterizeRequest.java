@@ -43,9 +43,9 @@ import org.geosdi.geoplatform.connector.geoserver.model.extensions.rasterize.Geo
 import org.geosdi.geoplatform.connector.geoserver.request.extensions.rasterize.GeoserverRasterizeRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorQueryParam;
 import org.geosdi.geoplatform.connector.uri.GPGeoserverStringQueryParam;
-import org.geosdi.geoplatform.connector.uri.GeoserverRXQueryParamConsumer;
+import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
 
 import javax.annotation.Nonnull;
@@ -63,12 +63,12 @@ import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverSty
 class GPGeoserverRasterizeRequest extends GPJsonGetConnectorRequest<StyledLayerDescriptor, GeoserverRasterizeRequest> implements GeoserverRasterizeRequest {
 
     private final ThreadLocal<String> rasterName;
-    private final ThreadLocal<GPGeoserverQueryParam> geoserverRamp;
+    private final ThreadLocal<GPConnectorQueryParam> geoserverRamp;
     private final ThreadLocal<GPGeoserverStringQueryParam> min;
     private final ThreadLocal<GPGeoserverStringQueryParam> max;
     private final ThreadLocal<GPGeoserverStringQueryParam> classes;
     private final ThreadLocal<GPGeoserverStringQueryParam> digits;
-    private final ThreadLocal<GPGeoserverQueryParam> type;
+    private final ThreadLocal<GPConnectorQueryParam> type;
     private final ThreadLocal<GPGeoserverStringQueryParam> startColor;
     private final ThreadLocal<GPGeoserverStringQueryParam> endColor;
     private final ThreadLocal<GPGeoserverStringQueryParam> midColor;
@@ -197,7 +197,7 @@ class GPGeoserverRasterizeRequest extends GPJsonGetConnectorRequest<StyledLayerD
         checkArgument((rasterName != null) && !(rasterName.trim().isEmpty()), "The Parameter rasterName must not be null or an empty string.");
         String path =  (baseURI.endsWith("/") ? baseURI.concat("sld/").concat(rasterName).concat("/rasterize.sld") : baseURI.concat("/sld/").concat(rasterName).concat("/rasterize.sld"));
         URIBuilder uriBuilder = new URIBuilder(path);
-        Consumer<ThreadLocal> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
+        Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.min, this.max, this.classes, this.digits, this.type, this.geoserverRamp, this.startColor, this.endColor, this.midColor)
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
                 .filter(c-> c.get() != null)

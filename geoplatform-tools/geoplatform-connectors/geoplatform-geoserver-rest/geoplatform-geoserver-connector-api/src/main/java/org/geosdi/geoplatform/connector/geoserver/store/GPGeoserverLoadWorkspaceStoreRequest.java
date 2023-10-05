@@ -41,7 +41,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.store.service.GPGeoserve
 import org.geosdi.geoplatform.connector.geoserver.request.store.GeoserverLoadWorkspaceStoreRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.uri.GPGeoserverBooleanQueryParam;
-import org.geosdi.geoplatform.connector.uri.GeoserverRXQueryParamConsumer;
+import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -128,7 +128,7 @@ public abstract class GPGeoserverLoadWorkspaceStoreRequest<T extends GPGeoserver
         URIBuilder uriBuilder = new URIBuilder(((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace)
                 .concat(this.storeRestPath).concat(wmsStore).concat(".json") : baseURI.concat("/workspaces/").concat(workspace)
                 .concat(this.storeRestPath).concat(wmsStore).concat(".json"))));
-        Consumer<ThreadLocal> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
+        Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.quietOnNotFound)
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
                 .subscribe(consumer, Throwable::printStackTrace);

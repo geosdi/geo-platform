@@ -47,7 +47,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GPConnectorRXQueryParamConsumer<B extends GPConnectorQueryParam> implements Consumer<ThreadLocal<B>> {
+public class GPConnectorRXQueryParamConsumer<B extends ThreadLocal<? extends GPConnectorQueryParam>> implements Consumer<B> {
 
     private final URIBuilder uriBuilder;
 
@@ -62,11 +62,13 @@ public class GPConnectorRXQueryParamConsumer<B extends GPConnectorQueryParam> im
     /**
      * Consume the given value.
      *
-     * @param queryParam the value
+     * @param b the value
      * @throws Throwable if the implementation wishes to throw any type of exception
      */
     @Override
-    public void accept(ThreadLocal<B> queryParam) throws Throwable {
-        queryParam.get().addQueryParam(this.uriBuilder);
+    public void accept(B b) throws Throwable {
+        if ((b != null) && (b.get() != null)) {
+            b.get().addQueryParam(this.uriBuilder);
+        }
     }
 }

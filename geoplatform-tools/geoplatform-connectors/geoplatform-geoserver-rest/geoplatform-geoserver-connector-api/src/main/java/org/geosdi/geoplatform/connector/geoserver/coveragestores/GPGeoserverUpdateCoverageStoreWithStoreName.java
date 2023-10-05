@@ -50,7 +50,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.Geoserv
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
 import org.geosdi.geoplatform.connector.uri.GPGeoserverStringQueryParam;
-import org.geosdi.geoplatform.connector.uri.GeoserverRXQueryParamConsumer;
+import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 
 import javax.annotation.Nonnull;
 import java.io.File;
@@ -192,7 +192,7 @@ class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnectorRequ
         String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())
                 : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())));
         URIBuilder uriBuilder = new URIBuilder(path);
-        Consumer<ThreadLocal> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
+        Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.update, this.configure, this.filename, this.coverageName)
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
                 .filter(c-> c.get() != null)

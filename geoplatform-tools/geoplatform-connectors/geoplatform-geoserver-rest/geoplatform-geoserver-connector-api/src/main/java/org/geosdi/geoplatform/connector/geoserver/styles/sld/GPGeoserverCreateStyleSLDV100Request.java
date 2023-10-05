@@ -45,7 +45,7 @@ import org.geosdi.geoplatform.connector.geoserver.styles.base.GPGeoserverBaseCre
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.uri.GPGeoserverBooleanQueryParam;
 import org.geosdi.geoplatform.connector.uri.GPGeoserverStringQueryParam;
-import org.geosdi.geoplatform.connector.uri.GeoserverRXQueryParamConsumer;
+import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
 
 import javax.annotation.Nonnull;
@@ -121,7 +121,7 @@ class GPGeoserverCreateStyleSLDV100Request extends GPGeoserverBaseCreateStyleReq
     protected String createUriPath() throws Exception {
         String baseURI = super.createUriPath();
         URIBuilder uriBuilder = new URIBuilder(baseURI);
-        Consumer<ThreadLocal> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
+        Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.raw, this.style)
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
                 .filter(c-> c.get() != null)

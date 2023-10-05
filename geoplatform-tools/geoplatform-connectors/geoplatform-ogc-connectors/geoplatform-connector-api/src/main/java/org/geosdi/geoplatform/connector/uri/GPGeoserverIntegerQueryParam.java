@@ -43,7 +43,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverIntegerQueryParam extends GPGeoserverQueryParam.GeoserverQueryParam<Integer> {
+public class GPGeoserverIntegerQueryParam extends GPConnectorQueryParam.ConnectorQueryParam<Integer> {
 
     /**
      * @param theKey

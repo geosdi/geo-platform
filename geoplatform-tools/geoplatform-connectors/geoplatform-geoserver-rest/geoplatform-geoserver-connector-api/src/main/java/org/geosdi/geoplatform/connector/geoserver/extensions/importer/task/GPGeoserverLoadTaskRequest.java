@@ -43,7 +43,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.task
 import org.geosdi.geoplatform.connector.geoserver.request.extensions.importer.task.GeoserverLoadTaskRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
-import org.geosdi.geoplatform.connector.uri.GeoserverRXQueryParamConsumer;
+import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -119,7 +119,7 @@ class GPGeoserverLoadTaskRequest extends GPJsonGetConnectorRequest<GPGeoserverTa
         String path = (baseURI.endsWith("/") ? baseURI.concat("imports/").concat(importId.toString()).concat("/tasks/").concat(taskId.toString())
                 : baseURI.concat("/imports/").concat(importId.toString()).concat("/tasks/").concat(taskId.toString()));
         URIBuilder uriBuilder = new URIBuilder(path);
-        Consumer<ThreadLocal> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
+        Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.expand)
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
                 .filter(c-> c.get() != null)

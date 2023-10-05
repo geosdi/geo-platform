@@ -42,7 +42,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.s
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.uri.GPGeoserverIntegerQueryParam;
 import org.geosdi.geoplatform.connector.uri.GPGeoserverStringQueryParam;
-import org.geosdi.geoplatform.connector.uri.GeoserverRXQueryParamConsumer;
+import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -122,7 +122,7 @@ class GPGeoserverLoadStructuredCoverageGranulesRequest extends GPGeoserverBaseSt
         String baseURI = this.serverURI.toString();
         URIBuilder uriBuilder = new URIBuilder(((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/coverages/").concat(coverage).concat("/index/granules.json")
                 : baseURI.concat("/workspaces/").concat(workspace).concat("/coveragestores/").concat(store).concat("/coverages/").concat(coverage).concat("/index/granules.json"))));
-        Consumer<ThreadLocal> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
+        Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.filter, this.offset, this.limit)
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
                 .subscribe(consumer, Throwable::printStackTrace);

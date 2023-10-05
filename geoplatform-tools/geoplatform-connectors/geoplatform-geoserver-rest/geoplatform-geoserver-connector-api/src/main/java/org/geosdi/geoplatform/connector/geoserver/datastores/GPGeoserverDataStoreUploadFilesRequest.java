@@ -51,7 +51,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverDa
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
 import org.geosdi.geoplatform.connector.uri.GPGeoserverStringQueryParam;
-import org.geosdi.geoplatform.connector.uri.GeoserverRXQueryParamConsumer;
+import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -211,7 +211,7 @@ class GPGeoserverDataStoreUploadFilesRequest extends GPJsonPutConnectorRequest<B
         String path = ((baseURI.endsWith("/") ? baseURI.concat("workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())
                 : baseURI.concat("/workspaces/").concat(workspace).concat("/datastores/").concat(store).concat("/").concat(method.toString()).concat(".").concat(format.toString())));
         URIBuilder uriBuilder = new URIBuilder(path);
-        Consumer<ThreadLocal> consumer = new GeoserverRXQueryParamConsumer(uriBuilder);
+        Consumer<ThreadLocal> consumer = new GPConnectorRXQueryParamConsumer(uriBuilder);
         fromArray(this.update, this.configure, this.filename, this.target, this.charset)
                 .doOnComplete(() -> logger.info("##################Uri Builder DONE.\n"))
                 .filter(c-> c.get() != null)

@@ -35,40 +35,21 @@
  */
 package org.geosdi.geoplatform.connector.uri;
 
-import org.geosdi.geoplatform.connector.uri.GPConnectorQueryParam.ConnectorQueryParam;
-
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverDateQueryParam extends ConnectorQueryParam<Date> {
-
-    private final String formatter;
+public class GPConnectorIntegerQueryParam extends GPConnectorQueryParam.ConnectorQueryParam<Integer> {
 
     /**
      * @param theKey
      * @param theValue
      */
-    public GPGeoserverDateQueryParam(@Nonnull(when = NEVER) String theKey, @Nullable Date theValue,
-            @Nonnull(when = NEVER) String theFormatter) {
+    public GPConnectorIntegerQueryParam(@Nonnull(when = NEVER) String theKey, @Nonnull(when = NEVER) Integer theValue) {
         super(theKey, theValue);
-        checkArgument((theFormatter != null) && !(theFormatter.trim().isEmpty()), "The Parameter theFormatter must not be null or empty string");
-        this.formatter = theFormatter;
-    }
-
-    /**
-     * @return {@link String}
-     */
-    @Override
-    protected String internalFormatValue() {
-        return new SimpleDateFormat(this.formatter).format(this.getValue());
     }
 }

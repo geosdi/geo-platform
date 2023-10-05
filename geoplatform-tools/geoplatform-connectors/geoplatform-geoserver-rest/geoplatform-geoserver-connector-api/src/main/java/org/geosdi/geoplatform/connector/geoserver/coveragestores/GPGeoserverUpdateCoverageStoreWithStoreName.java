@@ -49,7 +49,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GPCover
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverUpdateCoverageStoreWithStoreNameRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverStringQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorStringQueryParam;
 import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 
 import javax.annotation.Nonnull;
@@ -75,8 +75,8 @@ class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnectorRequ
     private final ThreadLocal<File> file = withInitial(() -> null);
     private final ThreadLocal<GPParameterUpdate> update = withInitial(() -> null);
     private final ThreadLocal<GPGeoserverParameterConfigure> configure = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverStringQueryParam> filename = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverStringQueryParam> coverageName = withInitial(() -> null);
+    private final ThreadLocal<GPConnectorStringQueryParam> filename = withInitial(() -> null);
+    private final ThreadLocal<GPConnectorStringQueryParam> coverageName = withInitial(() -> null);
 
     /**
      * @param theServerConnector
@@ -161,7 +161,7 @@ class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnectorRequ
      */
     @Override
     public GeoserverUpdateCoverageStoreWithStoreNameRequest withFileName(@Nonnull(when = NEVER) String theFileName) {
-        this.filename.set(new GPGeoserverStringQueryParam("filename", theFileName));
+        this.filename.set(new GPConnectorStringQueryParam("filename", theFileName));
         return self();
     }
 
@@ -171,7 +171,7 @@ class GPGeoserverUpdateCoverageStoreWithStoreName extends GPJsonPutConnectorRequ
      */
     @Override
     public GeoserverUpdateCoverageStoreWithStoreNameRequest withCoverageName(@Nonnull(when = NEVER) String theCoverageName) {
-        this.coverageName.set(new GPGeoserverStringQueryParam("coverageName", theCoverageName));
+        this.coverageName.set(new GPConnectorStringQueryParam("coverageName", theCoverageName));
         return self();
     }
 

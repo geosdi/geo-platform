@@ -43,7 +43,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverDe
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.ResourceNotFoundException;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverBooleanQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorBooleanQueryParam;
 import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
@@ -66,7 +66,7 @@ import static javax.annotation.meta.When.NEVER;
 class GPGeoserverDeleteWorkspaceRequest extends GPJsonDeleteConnectorRequest<Boolean, GeoserverDeleteWorkspaceRequest> implements GeoserverDeleteWorkspaceRequest {
 
     private final ThreadLocal<String> workspaceName = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverBooleanQueryParam> recurse = withInitial(() -> new GPGeoserverBooleanQueryParam("recurse", FALSE));
+    private final ThreadLocal<GPConnectorBooleanQueryParam> recurse = withInitial(() -> new GPConnectorBooleanQueryParam("recurse", FALSE));
 
     /**
      * @param server
@@ -90,7 +90,7 @@ class GPGeoserverDeleteWorkspaceRequest extends GPJsonDeleteConnectorRequest<Boo
      */
     @Override
     public GeoserverDeleteWorkspaceRequest withRecurse(Boolean theRecurse) {
-        this.recurse.set(new GPGeoserverBooleanQueryParam("recurse", (theRecurse != null) ? theRecurse : FALSE));
+        this.recurse.set(new GPConnectorBooleanQueryParam("recurse", (theRecurse != null) ? theRecurse : FALSE));
         return self();
     }
 

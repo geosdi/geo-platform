@@ -43,13 +43,13 @@ import static javax.annotation.meta.When.NEVER;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public class GPGeoserverNumberQueryParam extends GPConnectorQueryParam.ConnectorQueryParam<Number> {
+public class GPConnectorNumberQueryParam extends GPConnectorQueryParam.ConnectorQueryParam<Number> {
 
     /**
      * @param theKey
      * @param theValue
      */
-    public GPGeoserverNumberQueryParam(@Nonnull(when = NEVER) String theKey, @Nonnull(when = NEVER) Number theValue) {
+    public GPConnectorNumberQueryParam(@Nonnull(when = NEVER) String theKey, @Nonnull(when = NEVER) Number theValue) {
         super(theKey, theValue);
     }
 }

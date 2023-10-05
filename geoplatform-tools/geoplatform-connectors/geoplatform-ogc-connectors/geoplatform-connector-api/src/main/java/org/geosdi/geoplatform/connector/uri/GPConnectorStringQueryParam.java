@@ -40,14 +40,7 @@ import org.geosdi.geoplatform.connector.uri.GPConnectorQueryParam.ConnectorQuery
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
 
-import static java.util.Arrays.stream;
-import static java.util.Collections.EMPTY_SET;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toCollection;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -55,20 +48,14 @@ import static javax.annotation.meta.When.NEVER;
  * @email vito.salvia@gmail.com
  */
 @Immutable
-public class GPGeoserverStringArrayQueryParam extends ConnectorQueryParam<String[]> {
-
-    private final Set<String> cleanValues;
+public class GPConnectorStringQueryParam extends ConnectorQueryParam<String> {
 
     /**
      * @param theKey
      * @param theValue
      */
-    public GPGeoserverStringArrayQueryParam(@Nonnull(when = NEVER) String theKey, @Nullable String... theValue) {
+    public GPConnectorStringQueryParam(@Nonnull(when = NEVER) String theKey, @Nullable String theValue) {
         super(theKey, theValue);
-        this.cleanValues = super.isQueryParamValid() ? stream(theValue)
-                .filter(Objects::nonNull)
-                .filter(v -> !(v.trim().isEmpty()))
-                .collect(toCollection(LinkedHashSet::new)) : EMPTY_SET;
     }
 
     /**
@@ -76,14 +63,6 @@ public class GPGeoserverStringArrayQueryParam extends ConnectorQueryParam<String
      */
     @Override
     public boolean isQueryParamValid() {
-        return this.cleanValues.size() > 0;
-    }
-
-    /**
-     * @return {@link String}
-     */
-    @Override
-    protected String internalFormatValue() {
-        return this.cleanValues.stream().collect(joining(","));
+        return ((super.isQueryParamValid()) && !(this.getValue().trim().isEmpty()));
     }
 }

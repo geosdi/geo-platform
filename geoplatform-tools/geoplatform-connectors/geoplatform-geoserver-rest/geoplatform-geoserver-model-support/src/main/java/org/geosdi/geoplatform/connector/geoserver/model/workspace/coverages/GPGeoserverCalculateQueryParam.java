@@ -35,7 +35,7 @@
 package org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages;
 
 import net.jcip.annotations.Immutable;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverValuesQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorValuesQueryParam;
 
 import javax.annotation.Nullable;
 
@@ -44,7 +44,7 @@ import javax.annotation.Nullable;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Immutable
-public class GPGeoserverCalculateQueryParam extends GPGeoserverValuesQueryParam {
+public class GPGeoserverCalculateQueryParam extends GPConnectorValuesQueryParam {
 
     /**
      * @param theValue

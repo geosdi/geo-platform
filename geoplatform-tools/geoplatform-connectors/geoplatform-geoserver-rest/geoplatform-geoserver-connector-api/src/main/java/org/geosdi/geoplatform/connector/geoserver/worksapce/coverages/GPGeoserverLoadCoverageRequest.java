@@ -42,7 +42,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages.GPGe
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverBooleanQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorBooleanQueryParam;
 import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
@@ -64,7 +64,7 @@ class GPGeoserverLoadCoverageRequest extends GPJsonGetConnectorRequest<GPGeoserv
 
     private final ThreadLocal<String> workspace = withInitial(() -> null);
     private final ThreadLocal<String> coverage = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverBooleanQueryParam> quietOnNotFound = withInitial(() -> new GPGeoserverBooleanQueryParam("quietOnNotFound", TRUE));
+    private final ThreadLocal<GPConnectorBooleanQueryParam> quietOnNotFound = withInitial(() -> new GPConnectorBooleanQueryParam("quietOnNotFound", TRUE));
 
     /**
      * @param server
@@ -100,7 +100,7 @@ class GPGeoserverLoadCoverageRequest extends GPJsonGetConnectorRequest<GPGeoserv
      */
     @Override
     public GeoserverLoadCoverageRequest withQuietOnNotFound(@Nullable Boolean theQuietOnNotFound) {
-        this.quietOnNotFound.set(new GPGeoserverBooleanQueryParam("quietOnNotFound", (theQuietOnNotFound != null) ? theQuietOnNotFound : TRUE));
+        this.quietOnNotFound.set(new GPConnectorBooleanQueryParam("quietOnNotFound", (theQuietOnNotFound != null) ? theQuietOnNotFound : TRUE));
         return self();
     }
 

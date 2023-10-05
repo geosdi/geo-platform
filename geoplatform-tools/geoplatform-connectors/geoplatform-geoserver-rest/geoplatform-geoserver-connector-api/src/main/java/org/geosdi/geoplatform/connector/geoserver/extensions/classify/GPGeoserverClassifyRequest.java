@@ -64,18 +64,18 @@ import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverSty
 class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, GeoserverClassifyRequest> implements GeoserverClassifyRequest {
 
     private final ThreadLocal<String> vectorName = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverStringQueryParam> attribute = withInitial(() -> null);
+    private final ThreadLocal<GPConnectorStringQueryParam> attribute = withInitial(() -> null);
     private final ThreadLocal<GeoserverRamp> geoserverRamp = withInitial(() -> null);
     private final ThreadLocal<GPConnectorQueryParam> intervals = withInitial(() -> null);
     private final ThreadLocal<GPConnectorQueryParam> method = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverBooleanQueryParam> open = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverBooleanQueryParam> reverse = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverBooleanQueryParam> normalize = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverStringQueryParam> startColor = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverStringQueryParam> endColor = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverStringQueryParam> midColor = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverBooleanQueryParam> size = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverStringQueryParam> symbol = withInitial(() -> null);
+    private final ThreadLocal<GPConnectorBooleanQueryParam> open = withInitial(() -> null);
+    private final ThreadLocal<GPConnectorBooleanQueryParam> reverse = withInitial(() -> null);
+    private final ThreadLocal<GPConnectorBooleanQueryParam> normalize = withInitial(() -> null);
+    private final ThreadLocal<GPConnectorStringQueryParam> startColor = withInitial(() -> null);
+    private final ThreadLocal<GPConnectorStringQueryParam> endColor = withInitial(() -> null);
+    private final ThreadLocal<GPConnectorStringQueryParam> midColor = withInitial(() -> null);
+    private final ThreadLocal<GPConnectorBooleanQueryParam> size = withInitial(() -> null);
+    private final ThreadLocal<GPConnectorStringQueryParam> symbol = withInitial(() -> null);
     private final ThreadLocal<String> format = withInitial(() -> "xml");
 
     /**
@@ -101,7 +101,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      */
     @Override
     public GeoserverClassifyRequest withAttribute(@Nonnull(when = NEVER) String theAttribute) {
-        this.attribute.set(new GPGeoserverStringQueryParam("attribute", theAttribute));
+        this.attribute.set(new GPConnectorStringQueryParam("attribute", theAttribute));
         return self();
     }
 
@@ -121,7 +121,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      */
     @Override
     public GeoserverClassifyRequest withIntervals(@Nonnull(when = NEVER) Integer theIntervals) {
-        this.intervals.set(theIntervals != null ? new GPGeoserverIntegerQueryParam("intervals", theIntervals) : new GPGeoserverStringQueryParam("intervals", "2"));
+        this.intervals.set(theIntervals != null ? new GPConnectorIntegerQueryParam("intervals", theIntervals) : new GPConnectorStringQueryParam("intervals", "2"));
         return self();
     }
 
@@ -131,7 +131,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      */
     @Override
     public GeoserverClassifyRequest withMethod(@Nonnull(when = NEVER) GeoserverMethod theMethod) {
-        this.method.set(theMethod != null ? theMethod :new GPGeoserverStringQueryParam("method", GeoserverMethod.equalInterval.name()));
+        this.method.set(theMethod != null ? theMethod :new GPConnectorStringQueryParam("method", GeoserverMethod.equalInterval.name()));
         return self();
     }
 
@@ -141,7 +141,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      */
     @Override
     public GeoserverClassifyRequest withOpen(@Nonnull(when = NEVER) Boolean theOpen) {
-        this.open.set(new GPGeoserverBooleanQueryParam("open", theOpen == null ? FALSE : theOpen));
+        this.open.set(new GPConnectorBooleanQueryParam("open", theOpen == null ? FALSE : theOpen));
         return self();
     }
 
@@ -151,7 +151,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      */
     @Override
     public GeoserverClassifyRequest withReverse(@Nonnull(when = NEVER) Boolean theReverse) {
-        this.reverse.set(new GPGeoserverBooleanQueryParam("reverse", theReverse == null ? FALSE : theReverse));
+        this.reverse.set(new GPConnectorBooleanQueryParam("reverse", theReverse == null ? FALSE : theReverse));
         return self();
     }
 
@@ -161,7 +161,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      */
     @Override
     public GeoserverClassifyRequest withNormalize(@Nonnull(when = NEVER) Boolean theNormalize) {
-        this.normalize.set(new GPGeoserverBooleanQueryParam("normalize", theNormalize == null ? FALSE : theNormalize));
+        this.normalize.set(new GPConnectorBooleanQueryParam("normalize", theNormalize == null ? FALSE : theNormalize));
         return self();
     }
 
@@ -171,7 +171,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      */
     @Override
     public GeoserverClassifyRequest withStartColor(@Nonnull(when = NEVER) String theStartColor) {
-        this.startColor.set(new GPGeoserverStringQueryParam("startColor", theStartColor));
+        this.startColor.set(new GPConnectorStringQueryParam("startColor", theStartColor));
         return self();
     }
 
@@ -181,7 +181,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      */
     @Override
     public GeoserverClassifyRequest withEndColor(@Nonnull(when = NEVER) String theEndColor) {
-        this.endColor.set(new GPGeoserverStringQueryParam("endColor", theEndColor));
+        this.endColor.set(new GPConnectorStringQueryParam("endColor", theEndColor));
         return self();
     }
 
@@ -191,7 +191,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      */
     @Override
     public GeoserverClassifyRequest withMidColor(@Nonnull(when = NEVER) String theMidColor) {
-        this.midColor.set(new GPGeoserverStringQueryParam("midColor", theMidColor));
+        this.midColor.set(new GPConnectorStringQueryParam("midColor", theMidColor));
         return self();
     }
 
@@ -201,7 +201,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      */
     @Override
     public GeoserverClassifyRequest withSize(@Nonnull(when = NEVER) Boolean theSize) {
-        this.size.set(new GPGeoserverBooleanQueryParam("size", theSize == null ? FALSE : theSize));
+        this.size.set(new GPConnectorBooleanQueryParam("size", theSize == null ? FALSE : theSize));
         return self();
     }
 
@@ -211,7 +211,7 @@ class GPGeoserverClassifyRequest extends GPJsonGetConnectorRequest<String, Geose
      */
     @Override
     public GeoserverClassifyRequest withSymbol(@Nonnull(when = NEVER) String theSymbol) {
-        this.symbol.set(new GPGeoserverStringQueryParam("symbol", theSymbol));
+        this.symbol.set(new GPConnectorStringQueryParam("symbol", theSymbol));
         return self();
     }
 

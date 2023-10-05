@@ -43,7 +43,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverLoa
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverLoadWorkspaceRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.GeoserverLoadCoverageRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverBooleanQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorBooleanQueryParam;
 import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
@@ -64,7 +64,7 @@ import static java.lang.ThreadLocal.withInitial;
 class GPGeoserverLoadWorkspaceRequest extends GPGeoserverExsistRequest<GPGeoserverLoadWorkspace, GeoserverLoadWorkspaceRequest> implements GeoserverLoadWorkspaceRequest {
 
     private final ThreadLocal<String> workspaceName = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverBooleanQueryParam> quietOnNotFound = withInitial(() -> new GPGeoserverBooleanQueryParam("quietOnNotFound", TRUE));
+    private final ThreadLocal<GPConnectorBooleanQueryParam> quietOnNotFound = withInitial(() -> new GPConnectorBooleanQueryParam("quietOnNotFound", TRUE));
 
     /**
      * @param server
@@ -89,7 +89,7 @@ class GPGeoserverLoadWorkspaceRequest extends GPGeoserverExsistRequest<GPGeoserv
      */
     @Override
     public GeoserverLoadWorkspaceRequest withQuietOnNotFound(@Nullable Boolean theQuietOnNotFound) {
-        this.quietOnNotFound.set(new GPGeoserverBooleanQueryParam("quietOnNotFound", (theQuietOnNotFound != null) ? theQuietOnNotFound : TRUE));
+        this.quietOnNotFound.set(new GPConnectorBooleanQueryParam("quietOnNotFound", (theQuietOnNotFound != null) ? theQuietOnNotFound : TRUE));
         return self();
     }
 

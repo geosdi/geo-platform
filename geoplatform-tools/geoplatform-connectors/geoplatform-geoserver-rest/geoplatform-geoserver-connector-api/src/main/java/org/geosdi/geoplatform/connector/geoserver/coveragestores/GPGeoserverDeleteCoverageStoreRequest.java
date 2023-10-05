@@ -43,7 +43,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.purge.GPGeoserverPurgePa
 import org.geosdi.geoplatform.connector.geoserver.request.coveragestores.GeoserverDeleteCoverageStoreRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverBooleanQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorBooleanQueryParam;
 import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
@@ -69,7 +69,7 @@ class GPGeoserverDeleteCoverageStoreRequest extends GPJsonDeleteConnectorRequest
     private final ThreadLocal<String> workspace = withInitial(() -> null);
     private final ThreadLocal<String> coverageStore = withInitial(() -> null);
     private final ThreadLocal<GPGeoserverPurgeParam> purge = withInitial(() -> NONE);
-    private final ThreadLocal<GPGeoserverBooleanQueryParam> recurse = withInitial(() -> new GPGeoserverBooleanQueryParam("recurse", FALSE));
+    private final ThreadLocal<GPConnectorBooleanQueryParam> recurse = withInitial(() -> new GPConnectorBooleanQueryParam("recurse", FALSE));
 
     /**
      * @param theServerConnector
@@ -135,7 +135,7 @@ class GPGeoserverDeleteCoverageStoreRequest extends GPJsonDeleteConnectorRequest
      */
     @Override
     public GeoserverDeleteCoverageStoreRequest withRecurse(@Nullable Boolean theRecurse) {
-        this.recurse.set(new GPGeoserverBooleanQueryParam("recurse", (theRecurse != null) ? theRecurse : FALSE));
+        this.recurse.set(new GPConnectorBooleanQueryParam("recurse", (theRecurse != null) ? theRecurse : FALSE));
         return self();
     }
 

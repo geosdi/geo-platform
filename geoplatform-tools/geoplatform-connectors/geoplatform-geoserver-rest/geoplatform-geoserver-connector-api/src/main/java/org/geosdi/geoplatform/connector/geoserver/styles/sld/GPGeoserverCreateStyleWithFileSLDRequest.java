@@ -44,8 +44,8 @@ import org.apache.hc.core5.http.io.entity.FileEntity;
 import org.apache.hc.core5.net.URIBuilder;
 import org.geosdi.geoplatform.connector.geoserver.styles.base.GPGeoserverBaseCreateStyleRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverBooleanQueryParam;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverStringQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorBooleanQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorStringQueryParam;
 import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 
 import javax.annotation.Nonnull;
@@ -67,8 +67,8 @@ import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverSty
 @ThreadSafe
 class GPGeoserverCreateStyleWithFileSLDRequest extends GPGeoserverBaseCreateStyleRequest<File, GeoserverCreateStyleWithFileSLDRequest> implements GeoserverCreateStyleWithFileSLDRequest {
 
-    private final ThreadLocal<GPGeoserverStringQueryParam> style;
-    private final ThreadLocal<GPGeoserverBooleanQueryParam> raw;
+    private final ThreadLocal<GPConnectorStringQueryParam> style;
+    private final ThreadLocal<GPConnectorBooleanQueryParam> raw;
 
     /**
      * @param theServerConnector
@@ -85,7 +85,7 @@ class GPGeoserverCreateStyleWithFileSLDRequest extends GPGeoserverBaseCreateStyl
      */
     @Override
     public GeoserverCreateStyleWithFileSLDRequest withStyleName(@Nonnull(when = NEVER) String theStyleName) {
-        this.style.set(new GPGeoserverStringQueryParam("name", theStyleName));
+        this.style.set(new GPConnectorStringQueryParam("name", theStyleName));
         return self();
     }
 
@@ -105,7 +105,7 @@ class GPGeoserverCreateStyleWithFileSLDRequest extends GPGeoserverBaseCreateStyl
      */
     @Override
     public GeoserverCreateStyleWithFileSLDRequest withRaw(@Nullable Boolean theRaw) {
-        this.raw.set(new GPGeoserverBooleanQueryParam("raw", theRaw));
+        this.raw.set(new GPConnectorBooleanQueryParam("raw", theRaw));
         return self();
     }
 

@@ -56,13 +56,13 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(value = NAME_ASCENDING)
-public class ConnectorQueryParamTest {
+public class GeoserverConnectorQueryParamTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(ConnectorQueryParamTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorQueryParamTest.class);
 
     @Test
     public void a_geoserverBooleanQueryParamTest() throws Exception {
-        ConnectorQueryParam<Boolean> booleanQueryParam = new GPGeoserverBooleanQueryParam("the_boolean_key", TRUE);
+        ConnectorQueryParam<Boolean> booleanQueryParam = new GPConnectorBooleanQueryParam("the_boolean_key", TRUE);
         assertTrue(booleanQueryParam.isQueryParamValid());
         assertTrue(booleanQueryParam.formatValue().equals("true"));
         URIBuilder uriBuilder = new URIBuilder("http://www.test.it");
@@ -72,7 +72,7 @@ public class ConnectorQueryParamTest {
 
     @Test
     public void b_geoserverBooleanQueryParamNullTest() throws Exception {
-        ConnectorQueryParam<Boolean> booleanQueryParam = new GPGeoserverBooleanQueryParam("the_boolean_key", null);
+        ConnectorQueryParam<Boolean> booleanQueryParam = new GPConnectorBooleanQueryParam("the_boolean_key", null);
         assertFalse(booleanQueryParam.isQueryParamValid());
         assertTrue(booleanQueryParam.formatValue().equals(NULL_QUERY_VALUE));
         URIBuilder uriBuilder = new URIBuilder("http://www.test.it");
@@ -82,7 +82,7 @@ public class ConnectorQueryParamTest {
 
     @Test
     public void c_geoserverIntegerQueryParamTest() throws Exception {
-        ConnectorQueryParam<Integer> integerQueryParam = new GPGeoserverIntegerQueryParam("the_integer_key", 27);
+        ConnectorQueryParam<Integer> integerQueryParam = new GPConnectorIntegerQueryParam("the_integer_key", 27);
         assertTrue(integerQueryParam.isQueryParamValid());
         assertTrue(integerQueryParam.formatValue().equals("27"));
         URIBuilder uriBuilder = new URIBuilder("http://www.test.it");
@@ -92,7 +92,7 @@ public class ConnectorQueryParamTest {
 
     @Test
     public void d_geoserverIntegerQueryParamNullTest() throws Exception {
-        ConnectorQueryParam<Integer> integerQueryParam = new GPGeoserverIntegerQueryParam("the_integer_key", null);
+        ConnectorQueryParam<Integer> integerQueryParam = new GPConnectorIntegerQueryParam("the_integer_key", null);
         assertFalse(integerQueryParam.isQueryParamValid());
         assertTrue(integerQueryParam.formatValue().equals(NULL_QUERY_VALUE));
         URIBuilder uriBuilder = new URIBuilder("http://www.test.it");
@@ -102,7 +102,7 @@ public class ConnectorQueryParamTest {
 
     @Test
     public void e_geoserverStringQueryParamTest() throws Exception {
-        ConnectorQueryParam<String> stringQueryParam = new GPGeoserverStringQueryParam("the_string_key", "val_test");
+        ConnectorQueryParam<String> stringQueryParam = new GPConnectorStringQueryParam("the_string_key", "val_test");
         assertTrue(stringQueryParam.isQueryParamValid());
         assertTrue(stringQueryParam.formatValue().equals("val_test"));
         URIBuilder uriBuilder = new URIBuilder("http://www.test.it");
@@ -112,7 +112,7 @@ public class ConnectorQueryParamTest {
 
     @Test
     public void f_geoserverStringQueryParamNullTest() throws Exception {
-        ConnectorQueryParam<String> stringQueryParam = new GPGeoserverStringQueryParam("the_string_key", null);
+        ConnectorQueryParam<String> stringQueryParam = new GPConnectorStringQueryParam("the_string_key", null);
         assertFalse(stringQueryParam.isQueryParamValid());
         assertTrue(stringQueryParam.formatValue().equals(NULL_QUERY_VALUE));
         URIBuilder uriBuilder = new URIBuilder("http://www.test.it");
@@ -122,7 +122,7 @@ public class ConnectorQueryParamTest {
 
     @Test
     public void g_geoserverStringQueryParamEmptyTest() throws Exception {
-        ConnectorQueryParam<String> stringQueryParam = new GPGeoserverStringQueryParam("the_string_key", "      ");
+        ConnectorQueryParam<String> stringQueryParam = new GPConnectorStringQueryParam("the_string_key", "      ");
         assertFalse(stringQueryParam.isQueryParamValid());
         assertTrue(stringQueryParam.formatValue().equals(NULL_QUERY_VALUE));
         URIBuilder uriBuilder = new URIBuilder("http://www.test.it");
@@ -132,7 +132,7 @@ public class ConnectorQueryParamTest {
 
     @Test
     public void h_geoserverStringArrayQueryParamTest() throws Exception {
-        ConnectorQueryParam<String[]> stringQueryParam = new GPGeoserverStringArrayQueryParam("the_string_array_key", "val_test", "val1_test", "val2_test", "val3_test", "val3_test");
+        ConnectorQueryParam<String[]> stringQueryParam = new GPConnectorStringArrayQueryParam("the_string_array_key", "val_test", "val1_test", "val2_test", "val3_test", "val3_test");
         assertTrue(stringQueryParam.isQueryParamValid());
         assertTrue(stringQueryParam.formatValue().equals("val_test,val1_test,val2_test,val3_test"));
         URIBuilder uriBuilder = new URIBuilder("http://www.test.it");
@@ -142,7 +142,7 @@ public class ConnectorQueryParamTest {
 
     @Test
     public void i_geoserverStringArrayQueryParamWithNullAndEmptyValuesTest() throws Exception {
-        ConnectorQueryParam<String[]> stringQueryParam = new GPGeoserverStringArrayQueryParam("the_string_array_key", "val_test", null, "    ", "val1_test", "val2_test", "val3_test", "val3_test");
+        ConnectorQueryParam<String[]> stringQueryParam = new GPConnectorStringArrayQueryParam("the_string_array_key", "val_test", null, "    ", "val1_test", "val2_test", "val3_test", "val3_test");
         assertTrue(stringQueryParam.isQueryParamValid());
         assertTrue(stringQueryParam.formatValue().equals("val_test,val1_test,val2_test,val3_test"));
         URIBuilder uriBuilder = new URIBuilder("http://www.test.it");
@@ -152,7 +152,7 @@ public class ConnectorQueryParamTest {
 
     @Test
     public void l_geoserverStringArrayQueryParamWithNullAndEmptyValuesTest() throws Exception {
-        ConnectorQueryParam<String[]> stringQueryParam = new GPGeoserverStringArrayQueryParam("the_string_array_key", "val_test", null, "    ", null, null, null, "val3_test");
+        ConnectorQueryParam<String[]> stringQueryParam = new GPConnectorStringArrayQueryParam("the_string_array_key", "val_test", null, "    ", null, null, null, "val3_test");
         assertTrue(stringQueryParam.isQueryParamValid());
         assertTrue(stringQueryParam.formatValue().equals("val_test,val3_test"));
         URIBuilder uriBuilder = new URIBuilder("http://www.test.it");
@@ -162,7 +162,7 @@ public class ConnectorQueryParamTest {
 
     @Test
     public void m_geoserverStringArrayQueryParamWithNullAndEmptyValuesTest() throws Exception {
-        ConnectorQueryParam<String[]> stringQueryParam = new GPGeoserverStringArrayQueryParam("the_string_array_key", "", null, "    ", null, null, null, "");
+        ConnectorQueryParam<String[]> stringQueryParam = new GPConnectorStringArrayQueryParam("the_string_array_key", "", null, "    ", null, null, null, "");
         assertFalse(stringQueryParam.isQueryParamValid());
         assertTrue(stringQueryParam.formatValue().equals(NULL_QUERY_VALUE));
         URIBuilder uriBuilder = new URIBuilder("http://www.test.it");
@@ -172,7 +172,7 @@ public class ConnectorQueryParamTest {
 
     @Test
     public void n_geoserverCalculateQueryParamTest() throws Exception {
-        ConnectorQueryParam<GPGeoserverValueQueryParam[]> calculateQueryParam = new GPGeoserverCalculateQueryParam(values());
+        ConnectorQueryParam<GPConnectorValueQueryParam[]> calculateQueryParam = new GPGeoserverCalculateQueryParam(values());
         assertTrue(calculateQueryParam.isQueryParamValid());
         assertTrue(calculateQueryParam.formatValue().equals("nativebbox,latlonbbox,dimensions"));
         URIBuilder uriBuilder = new URIBuilder("http://www.test.it");
@@ -182,7 +182,7 @@ public class ConnectorQueryParamTest {
 
     @Test
     public void o_geoserverCalculateQueryParamWithNullValuesTest() throws Exception {
-        ConnectorQueryParam<GPGeoserverValueQueryParam[]> calculateQueryParam = new GPGeoserverCalculateQueryParam(null, null);
+        ConnectorQueryParam<GPConnectorValueQueryParam[]> calculateQueryParam = new GPGeoserverCalculateQueryParam(null, null);
         assertFalse(calculateQueryParam.isQueryParamValid());
         assertTrue(calculateQueryParam.formatValue().equals(NULL_QUERY_VALUE));
         URIBuilder uriBuilder = new URIBuilder("http://www.test.it");
@@ -192,7 +192,7 @@ public class ConnectorQueryParamTest {
 
     @Test
     public void p_geoserverCalculateQueryParamWithNullValuesTest() throws Exception {
-        ConnectorQueryParam<GPGeoserverValueQueryParam[]> calculateQueryParam = new GPGeoserverCalculateQueryParam(null, null, latlonbbox);
+        ConnectorQueryParam<GPConnectorValueQueryParam[]> calculateQueryParam = new GPGeoserverCalculateQueryParam(null, null, latlonbbox);
         assertTrue(calculateQueryParam.isQueryParamValid());
         assertTrue(calculateQueryParam.formatValue().equals("latlonbbox"));
         URIBuilder uriBuilder = new URIBuilder("http://www.test.it");

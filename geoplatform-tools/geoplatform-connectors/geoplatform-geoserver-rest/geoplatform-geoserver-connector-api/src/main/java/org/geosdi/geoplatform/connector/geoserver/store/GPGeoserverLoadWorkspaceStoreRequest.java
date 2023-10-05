@@ -40,7 +40,7 @@ import org.geosdi.geoplatform.connector.geoserver.exsist.GPGeoserverExsistReques
 import org.geosdi.geoplatform.connector.geoserver.model.store.service.GPGeoserverServiceStore;
 import org.geosdi.geoplatform.connector.geoserver.request.store.GeoserverLoadWorkspaceStoreRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverBooleanQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorBooleanQueryParam;
 import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
@@ -61,7 +61,7 @@ public abstract class GPGeoserverLoadWorkspaceStoreRequest<T extends GPGeoserver
 
     private final ThreadLocal<String> workspace = withInitial(() -> null);
     private final ThreadLocal<String> store = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverBooleanQueryParam> quietOnNotFound = withInitial(() -> new GPGeoserverBooleanQueryParam("quietOnNotFound", TRUE));
+    private final ThreadLocal<GPConnectorBooleanQueryParam> quietOnNotFound = withInitial(() -> new GPConnectorBooleanQueryParam("quietOnNotFound", TRUE));
     private final String storeRestPath;
 
     /**
@@ -111,7 +111,7 @@ public abstract class GPGeoserverLoadWorkspaceStoreRequest<T extends GPGeoserver
      */
     @Override
     public R withQuietOnNotFound(@Nullable Boolean theQuietOnNotFound) {
-        this.quietOnNotFound.set(new GPGeoserverBooleanQueryParam("quietOnNotFound", (theQuietOnNotFound != null) ? theQuietOnNotFound : TRUE));
+        this.quietOnNotFound.set(new GPConnectorBooleanQueryParam("quietOnNotFound", (theQuietOnNotFound != null) ? theQuietOnNotFound : TRUE));
         return self();
     }
 

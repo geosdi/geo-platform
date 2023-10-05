@@ -41,7 +41,7 @@ import java.io.Serializable;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FunctionalInterface
-public interface GPGeoserverValueQueryParam extends Serializable {
+public interface GPConnectorValueQueryParam extends Serializable {
 
     /**
      * @return {@link String}

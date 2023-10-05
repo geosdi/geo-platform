@@ -39,8 +39,8 @@ import org.geosdi.geoplatform.connector.geoserver.model.purge.GPGeoserverPurgePa
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.coverages.structured.GeoserverBaseDeleteStructuredCoverageRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonDeleteConnectorRequest;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverBooleanQueryParam;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverStringQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorBooleanQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorStringQueryParam;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -62,9 +62,9 @@ abstract class GPGeoserverBaseDeleteStructuredCoverageRequest<ConnectorDeleteReq
     protected final ThreadLocal<String> workspace = withInitial(() -> null);
     protected final ThreadLocal<String> store = withInitial(() -> null);
     protected final ThreadLocal<String> coverage = withInitial(() -> null);
-    protected final ThreadLocal<GPGeoserverStringQueryParam> filter = withInitial(() -> new GPGeoserverStringQueryParam("filter", null));
+    protected final ThreadLocal<GPConnectorStringQueryParam> filter = withInitial(() -> new GPConnectorStringQueryParam("filter", null));
     protected final ThreadLocal<GPGeoserverPurgeParam> purge = withInitial(() -> null);
-    protected final ThreadLocal<GPGeoserverBooleanQueryParam> updateBbox = withInitial(() -> new GPGeoserverBooleanQueryParam("updateBBox", FALSE));
+    protected final ThreadLocal<GPConnectorBooleanQueryParam> updateBbox = withInitial(() -> new GPConnectorBooleanQueryParam("updateBBox", FALSE));
 
     /**
      * @param theServerConnector
@@ -112,7 +112,7 @@ abstract class GPGeoserverBaseDeleteStructuredCoverageRequest<ConnectorDeleteReq
      */
     @Override
     public ConnectorDeleteRequest withFilter(@Nullable String theFilter) {
-        this.filter.set(new GPGeoserverStringQueryParam("filter", theFilter));
+        this.filter.set(new GPConnectorStringQueryParam("filter", theFilter));
         return self();
     }
 
@@ -152,7 +152,7 @@ abstract class GPGeoserverBaseDeleteStructuredCoverageRequest<ConnectorDeleteReq
      */
     @Override
     public ConnectorDeleteRequest withUpdateBbox(@Nullable Boolean theUpdateBbox) {
-        this.updateBbox.set(new GPGeoserverBooleanQueryParam("updateBBox", (theUpdateBbox != null) ? theUpdateBbox : FALSE));
+        this.updateBbox.set(new GPConnectorBooleanQueryParam("updateBBox", (theUpdateBbox != null) ? theUpdateBbox : FALSE));
         return self();
     }
 

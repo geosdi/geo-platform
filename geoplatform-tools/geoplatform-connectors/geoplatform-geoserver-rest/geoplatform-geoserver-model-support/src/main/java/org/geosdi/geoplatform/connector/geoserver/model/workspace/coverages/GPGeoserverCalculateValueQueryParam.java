@@ -34,13 +34,13 @@
  */
 package org.geosdi.geoplatform.connector.geoserver.model.workspace.coverages;
 
-import org.geosdi.geoplatform.connector.uri.GPGeoserverValueQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorValueQueryParam;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum GPGeoserverCalculateValueQueryParam implements GPGeoserverValueQueryParam {
+public enum GPGeoserverCalculateValueQueryParam implements GPConnectorValueQueryParam {
 
     nativebbox, latlonbbox, dimensions;
 

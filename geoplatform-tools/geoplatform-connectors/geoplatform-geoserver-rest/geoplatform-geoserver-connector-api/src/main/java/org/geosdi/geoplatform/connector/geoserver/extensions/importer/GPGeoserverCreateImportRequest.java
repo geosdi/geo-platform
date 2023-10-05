@@ -46,7 +46,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.extensions.importer.body
 import org.geosdi.geoplatform.connector.geoserver.request.extensions.importer.GeoserverCreateImportRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPostConnectorRequest;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverBooleanQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorBooleanQueryParam;
 import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
@@ -66,8 +66,8 @@ import static org.apache.hc.core5.http.ContentType.APPLICATION_JSON;
 class GPGeoserverCreateImportRequest extends GPJsonPostConnectorRequest<GPGeoserverCreateImportResponse, GeoserverCreateImportRequest> implements GeoserverCreateImportRequest {
 
     private final ThreadLocal<GPGeoserverCreateImportBody> body;
-    private final ThreadLocal<GPGeoserverBooleanQueryParam> async;
-    private final ThreadLocal<GPGeoserverBooleanQueryParam> exec;
+    private final ThreadLocal<GPConnectorBooleanQueryParam> async;
+    private final ThreadLocal<GPConnectorBooleanQueryParam> exec;
     private final ThreadLocal<GPFileExpandType> expand;
 
     /**
@@ -98,7 +98,7 @@ class GPGeoserverCreateImportRequest extends GPJsonPostConnectorRequest<GPGeoser
      */
     @Override
     public GeoserverCreateImportRequest withExec(@Nonnull(when = NEVER) Boolean theExec) {
-        this.exec.set(new GPGeoserverBooleanQueryParam("exec", theExec));
+        this.exec.set(new GPConnectorBooleanQueryParam("exec", theExec));
         return self();
     }
 
@@ -118,7 +118,7 @@ class GPGeoserverCreateImportRequest extends GPJsonPostConnectorRequest<GPGeoser
      */
     @Override
     public GeoserverCreateImportRequest withAsync(@Nonnull(when = NEVER) Boolean theAsync) {
-        this.async.set(new GPGeoserverBooleanQueryParam("async", theAsync));
+        this.async.set(new GPConnectorBooleanQueryParam("async", theAsync));
         return self();
     }
 

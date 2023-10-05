@@ -50,7 +50,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.upload.GPGeoserverUpload
 import org.geosdi.geoplatform.connector.geoserver.request.datastores.GeoserverDataStoreUploadFilesRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonPutConnectorRequest;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverStringQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorStringQueryParam;
 import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
@@ -83,8 +83,8 @@ class GPGeoserverDataStoreUploadFilesRequest extends GPJsonPutConnectorRequest<B
     private final ThreadLocal<GPGeoserverParameterConfigure> configure = withInitial(() -> ALL);
     private final ThreadLocal<GPGeoserverDataStoreFileExtension> target = withInitial(() -> null);
     private final ThreadLocal<GPParameterUpdate> update = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverStringQueryParam> charset = withInitial(() -> null);
-    private final ThreadLocal<GPGeoserverStringQueryParam> filename = withInitial(() -> null);
+    private final ThreadLocal<GPConnectorStringQueryParam> charset = withInitial(() -> null);
+    private final ThreadLocal<GPConnectorStringQueryParam> filename = withInitial(() -> null);
 
     /**
      * @param theServerConnector
@@ -170,7 +170,7 @@ class GPGeoserverDataStoreUploadFilesRequest extends GPJsonPutConnectorRequest<B
      */
     @Override
     public GeoserverDataStoreUploadFilesRequest withCharset(@Nonnull(when = NEVER) String theCharset) {
-        this.charset.set(new GPGeoserverStringQueryParam("charset", theCharset));
+        this.charset.set(new GPConnectorStringQueryParam("charset", theCharset));
         return self();
     }
 
@@ -180,7 +180,7 @@ class GPGeoserverDataStoreUploadFilesRequest extends GPJsonPutConnectorRequest<B
      */
     @Override
     public GeoserverDataStoreUploadFilesRequest withFileName(@Nonnull(when = NEVER) String theFileName) {
-        this.filename.set(new GPGeoserverStringQueryParam("filename", theFileName));
+        this.filename.set(new GPConnectorStringQueryParam("filename", theFileName));
         return self();
     }
 

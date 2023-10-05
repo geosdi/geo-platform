@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.connector.geoserver.request.extensions.rasterize.G
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.request.json.GPJsonGetConnectorRequest;
 import org.geosdi.geoplatform.connector.uri.GPConnectorQueryParam;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverStringQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorStringQueryParam;
 import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 import org.geosdi.geoplatform.xml.sld.v100.StyledLayerDescriptor;
 
@@ -64,14 +64,14 @@ class GPGeoserverRasterizeRequest extends GPJsonGetConnectorRequest<StyledLayerD
 
     private final ThreadLocal<String> rasterName;
     private final ThreadLocal<GPConnectorQueryParam> geoserverRamp;
-    private final ThreadLocal<GPGeoserverStringQueryParam> min;
-    private final ThreadLocal<GPGeoserverStringQueryParam> max;
-    private final ThreadLocal<GPGeoserverStringQueryParam> classes;
-    private final ThreadLocal<GPGeoserverStringQueryParam> digits;
+    private final ThreadLocal<GPConnectorStringQueryParam> min;
+    private final ThreadLocal<GPConnectorStringQueryParam> max;
+    private final ThreadLocal<GPConnectorStringQueryParam> classes;
+    private final ThreadLocal<GPConnectorStringQueryParam> digits;
     private final ThreadLocal<GPConnectorQueryParam> type;
-    private final ThreadLocal<GPGeoserverStringQueryParam> startColor;
-    private final ThreadLocal<GPGeoserverStringQueryParam> endColor;
-    private final ThreadLocal<GPGeoserverStringQueryParam> midColor;
+    private final ThreadLocal<GPConnectorStringQueryParam> startColor;
+    private final ThreadLocal<GPConnectorStringQueryParam> endColor;
+    private final ThreadLocal<GPConnectorStringQueryParam> midColor;
 
     GPGeoserverRasterizeRequest(@Nonnull(when = NEVER) GPServerConnector server) {
         super(server, JACKSON_JAXB_XML_SUPPORT);
@@ -103,7 +103,7 @@ class GPGeoserverRasterizeRequest extends GPJsonGetConnectorRequest<StyledLayerD
      */
     @Override
     public GeoserverRasterizeRequest withMin(@Nonnull(when = NEVER) Double theMin) {
-        this.min.set(new GPGeoserverStringQueryParam("min", theMin != null ? theMin.toString() : "0.0"));
+        this.min.set(new GPConnectorStringQueryParam("min", theMin != null ? theMin.toString() : "0.0"));
         return self();
     }
 
@@ -113,7 +113,7 @@ class GPGeoserverRasterizeRequest extends GPJsonGetConnectorRequest<StyledLayerD
      */
     @Override
     public GeoserverRasterizeRequest withMax(@Nonnull(when = NEVER) Double theMax) {
-        this.max.set(new GPGeoserverStringQueryParam("max", theMax != null ? theMax.toString() : "100.0"));
+        this.max.set(new GPConnectorStringQueryParam("max", theMax != null ? theMax.toString() : "100.0"));
         return self();
     }
 
@@ -123,7 +123,7 @@ class GPGeoserverRasterizeRequest extends GPJsonGetConnectorRequest<StyledLayerD
      */
     @Override
     public GeoserverRasterizeRequest withClasses(@Nonnull(when = NEVER) Integer theClasses) {
-        this.classes.set(new GPGeoserverStringQueryParam("classes", theClasses != null ? theClasses.toString() : "100"));
+        this.classes.set(new GPConnectorStringQueryParam("classes", theClasses != null ? theClasses.toString() : "100"));
         return self();
     }
 
@@ -133,7 +133,7 @@ class GPGeoserverRasterizeRequest extends GPJsonGetConnectorRequest<StyledLayerD
      */
     @Override
     public GeoserverRasterizeRequest withDigits(@Nonnull(when = NEVER) Integer theDigits) {
-        this.digits.set(new GPGeoserverStringQueryParam("digits", theDigits != null ? theDigits.toString() : "5"));
+        this.digits.set(new GPConnectorStringQueryParam("digits", theDigits != null ? theDigits.toString() : "5"));
         return self();
     }
 
@@ -143,7 +143,7 @@ class GPGeoserverRasterizeRequest extends GPJsonGetConnectorRequest<StyledLayerD
      */
     @Override
     public GeoserverRasterizeRequest withType(@Nonnull(when = NEVER) GeoserverRasterizeType theType) {
-        this.type.set(theType != null ? theType : new GPGeoserverStringQueryParam("type", GeoserverRasterizeType.RAMP.name()));
+        this.type.set(theType != null ? theType : new GPConnectorStringQueryParam("type", GeoserverRasterizeType.RAMP.name()));
         return self();
     }
 
@@ -153,7 +153,7 @@ class GPGeoserverRasterizeRequest extends GPJsonGetConnectorRequest<StyledLayerD
      */
     @Override
     public GeoserverRasterizeRequest withGeoserverRamp(@Nonnull(when = NEVER) GeoserverRamp theGeoserverRamp) {
-        this.geoserverRamp.set(theGeoserverRamp != null ? theGeoserverRamp : new GPGeoserverStringQueryParam("ramp", GeoserverRamp.red.name()));
+        this.geoserverRamp.set(theGeoserverRamp != null ? theGeoserverRamp : new GPConnectorStringQueryParam("ramp", GeoserverRamp.red.name()));
         return self();
     }
 
@@ -163,7 +163,7 @@ class GPGeoserverRasterizeRequest extends GPJsonGetConnectorRequest<StyledLayerD
      */
     @Override
     public GeoserverRasterizeRequest withStartColor(@Nonnull(when = NEVER) String theStartColor) {
-        this.startColor.set(new GPGeoserverStringQueryParam("startColor", theStartColor));
+        this.startColor.set(new GPConnectorStringQueryParam("startColor", theStartColor));
         return self();
     }
 
@@ -173,7 +173,7 @@ class GPGeoserverRasterizeRequest extends GPJsonGetConnectorRequest<StyledLayerD
      */
     @Override
     public GeoserverRasterizeRequest withEndColor(@Nonnull(when = NEVER) String theEndColor) {
-        this.endColor.set(new GPGeoserverStringQueryParam("endColor", theEndColor));
+        this.endColor.set(new GPConnectorStringQueryParam("endColor", theEndColor));
         return self();
     }
 
@@ -183,7 +183,7 @@ class GPGeoserverRasterizeRequest extends GPJsonGetConnectorRequest<StyledLayerD
      */
     @Override
     public GeoserverRasterizeRequest withMidColor(@Nonnull(when = NEVER) String theMidColor) {
-        this.midColor.set(new GPGeoserverStringQueryParam("midColor", theMidColor));
+        this.midColor.set(new GPConnectorStringQueryParam("midColor", theMidColor));
         return self();
     }
 

@@ -44,7 +44,7 @@ import org.apache.hc.core5.http.io.entity.FileEntity;
 import org.apache.hc.core5.net.URIBuilder;
 import org.geosdi.geoplatform.connector.geoserver.styles.base.GPGeoserverBaseUpdateStyleRequest;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
-import org.geosdi.geoplatform.connector.uri.GPGeoserverBooleanQueryParam;
+import org.geosdi.geoplatform.connector.uri.GPConnectorBooleanQueryParam;
 import org.geosdi.geoplatform.connector.uri.GPConnectorRXQueryParamConsumer;
 
 import javax.annotation.Nonnull;
@@ -67,7 +67,7 @@ import static org.geosdi.geoplatform.connector.geoserver.styles.sld.GeoserverSty
 @ThreadSafe
 class GPGeoserverUpdateStyleWithFileSLDRequest extends GPGeoserverBaseUpdateStyleRequest<File, GeoserverUpdateStyleWithFileSLDRequest> implements GeoserverUpdateStyleWithFileSLDRequest {
 
-    private final ThreadLocal<GPGeoserverBooleanQueryParam> raw;
+    private final ThreadLocal<GPConnectorBooleanQueryParam> raw;
     protected final ThreadLocal<File> styleBody;
 
     /**
@@ -85,7 +85,7 @@ class GPGeoserverUpdateStyleWithFileSLDRequest extends GPGeoserverBaseUpdateStyl
      */
     @Override
     public GeoserverUpdateStyleWithFileSLDRequest withRaw(@Nullable Boolean theRaw) {
-        this.raw.set(new GPGeoserverBooleanQueryParam("raw", theRaw));
+        this.raw.set(new GPConnectorBooleanQueryParam("raw", theRaw));
         return self();
     }
 

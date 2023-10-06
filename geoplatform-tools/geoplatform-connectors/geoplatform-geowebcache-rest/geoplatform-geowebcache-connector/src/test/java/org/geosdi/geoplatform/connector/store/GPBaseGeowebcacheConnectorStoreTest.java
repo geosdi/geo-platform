@@ -80,7 +80,7 @@ public class GPBaseGeowebcacheConnectorStoreTest {
                         .withMaxTotalConnections(150)
                         .withDefaultMaxPerRoute(80)
                         .withMaxRedirect(20).build())
-                .withClientSecurity(new DigestPreemptiveSecurityConnector("geowebcache", "secured"))
+                .withClientSecurity(new DigestPreemptiveSecurityConnector("admin", "geoserver"))
                 .build();
     }
 

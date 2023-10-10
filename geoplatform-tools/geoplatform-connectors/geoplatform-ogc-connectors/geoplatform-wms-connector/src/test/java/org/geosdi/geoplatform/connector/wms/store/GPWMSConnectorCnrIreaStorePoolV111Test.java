@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.wms.store;
 
-import org.apache.hc.core5.util.Timeout;
 import org.geosdi.geoplatform.connector.server.security.BasicPreemptiveSecurityConnector;
 import org.geosdi.geoplatform.connector.server.v111.GPWMSDescribeLayerV111Request;
 import org.geosdi.geoplatform.connector.server.v111.GPWMSGetCapabilitiesV111Request;
@@ -51,6 +50,7 @@ import java.net.URI;
 
 import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.apache.hc.core5.util.Timeout.of;
 import static org.geosdi.geoplatform.connector.pool.builder.v111.WMSConnectorBuilderPoolV111.wmsConnectorBuilderPoolV111;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;

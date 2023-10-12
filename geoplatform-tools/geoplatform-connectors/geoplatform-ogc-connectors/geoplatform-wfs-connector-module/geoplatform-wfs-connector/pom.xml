@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-wfs-connector-module</artifactId>
-        <version>2.0.1</version>
+        <version>2.0.2-SNAPSHOT</version>
     </parent>
     
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-wfs-connector</artifactId>
-    <version>2.0.1</version>
+    <version>2.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
     
     <name>Geo-Platform :: == WFS Connector Module</name>
@@ -28,7 +28,7 @@
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>csv-api-support</artifactId>
-            <version>2.0.1</version>
+            <version>2.0.2-SNAPSHOT</version>
         </dependency>
 
         <!-- =========================================================== -->

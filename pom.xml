@@ -8,7 +8,7 @@
 
     <groupId>org.geosdi</groupId>
     <artifactId>geo-platform</artifactId>
-    <version>2.0.2-SNAPSHOT</version>
+    <version>2.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Geo-Platform :: == GeoSDI Framework</name>
@@ -1122,7 +1122,7 @@
                         <tagNameFormat>v@{project.version}</tagNameFormat>
                         <autoVersionSubmodules>true</autoVersionSubmodules>
                         <releaseProfiles>release</releaseProfiles>
-                        <arguments>-Dmaven.javadoc.skip=true -DskipTests=true -Pexperimental,develop</arguments>
+                        <arguments>-Dmaven.javadoc.skip=true -DskipTests=true</arguments>
                     </configuration>
                     <executions>
                         <execution>

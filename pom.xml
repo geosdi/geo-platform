@@ -16,9 +16,9 @@
     <url>https://github.com/geosdi/geo-platform</url>
 
     <scm>
-        <url>https://github.com/geosdi/geo-platform</url>
-        <connection>scm:git:git://github.com/geosdi/geo-platform.git</connection>
-        <developerConnection>scm:git:git@github.com:geosdi/geo-platform.git</developerConnection>
+        <url>https://github.com/geosdi/geo-platform.git</url>
+        <connection>scm:git:https://github.com/geosdi/geo-platform.git</connection>
+        <developerConnection>scm:git:https://github.com/geosdi/geo-platform.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 

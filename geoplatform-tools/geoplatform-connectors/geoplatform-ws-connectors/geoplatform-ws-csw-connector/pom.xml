@@ -4,12 +4,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-ws-connectors</artifactId>
-        <version>2.0-SNAPSHOT</version>
+        <version>2.0.1</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-ws-csw-connector</artifactId>
-    <version>2.0-SNAPSHOT</version>
+    <version>2.0.1</version>
     <packaging>jar</packaging>
 
     <name>Geo-Platform :: == WS CSW Connector Module</name>

@@ -62,7 +62,7 @@ class GPQuartzPlaceholderConfig {
             @Value("#{systemProperties['GP_QUARTZ_DATA_DIR']}") String gpQuartzConfigDataDir,
             @Value("#{systemProperties['GP_QUARTZ_FILE_PROP']}") String gpQuartzFileProp)
             throws MalformedURLException {
-        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@INITIALIZING GP_QUARTZ_PLACEHOLDER_CONFIGURER");
+        logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@INITIALIZING GP_QUARTZ_PLACEHOLDER_CONFIGURER : GP_QUARTZ_DATA_DIR : {} - GP_QUARTZ_FILE_PROP : {}\n", gpQuartzConfigDataDir, gpQuartzFileProp);
 
         PropertySourcesPlaceholderConfigurer gpQuartzPC = new PropertySourcesPlaceholderConfigurer();
         gpQuartzPC.setPlaceholderPrefix("gpQuartzConfigurator{");

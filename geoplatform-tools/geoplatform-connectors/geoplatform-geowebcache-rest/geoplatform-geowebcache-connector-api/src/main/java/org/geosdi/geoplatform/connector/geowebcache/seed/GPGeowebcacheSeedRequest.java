@@ -63,7 +63,7 @@ public class GPGeowebcacheSeedRequest extends GPJsonGetConnectorRequest<Geowebca
     @Override
     protected String createUriPath() throws Exception {
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("/seed.json") : baseURI.concat("/seed.json")));
+        return ((baseURI.endsWith("/") ? baseURI.concat("seed.json") : baseURI.concat("/seed.json")));
     }
 
     @Override

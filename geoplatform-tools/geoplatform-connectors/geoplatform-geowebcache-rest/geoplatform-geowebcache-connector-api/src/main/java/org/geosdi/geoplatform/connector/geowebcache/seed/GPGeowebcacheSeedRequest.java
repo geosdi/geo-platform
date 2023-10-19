@@ -50,22 +50,27 @@ import static javax.annotation.meta.When.NEVER;
  */
 public class GPGeowebcacheSeedRequest extends GPJsonGetConnectorRequest<GeowebcacheSeedResponse, GeowebcacheSeedRequest> implements GeowebcacheSeedRequest {
 
-
     /**
      * @param server
      * @param theJacksonSupport
      */
-    protected GPGeowebcacheSeedRequest(@Nonnull(when = NEVER) GPServerConnector server,
-            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    protected GPGeowebcacheSeedRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
     }
 
+    /**
+     * @return {@link String}
+     * @throws Exception
+     */
     @Override
     protected String createUriPath() throws Exception {
         String baseURI = this.serverURI.toString();
         return ((baseURI.endsWith("/") ? baseURI.concat("seed.json") : baseURI.concat("/seed.json")));
     }
 
+    /**
+     * @return {@link Class<GeowebcacheSeedResponse>}
+     */
     @Override
     protected Class<GeowebcacheSeedResponse> forClass() {
         return GeowebcacheSeedResponse.class;

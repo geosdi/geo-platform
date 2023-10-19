@@ -61,8 +61,7 @@ class GPGeowebcacheReloadingRequest extends GPJsonPostConnectorRequest<String, G
      * @param server
      * @param theJacksonSupport
      */
-    GPGeowebcacheReloadingRequest(@Nonnull(when = NEVER) GPServerConnector server,
-            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeowebcacheReloadingRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
         this.configurationName = withInitial(() -> null);
     }
@@ -80,7 +79,7 @@ class GPGeowebcacheReloadingRequest extends GPJsonPostConnectorRequest<String, G
     @Override
     protected String createUriPath() throws Exception {
         String baseURI = this.serverURI.toString();
-        return ((baseURI.endsWith("/") ? baseURI.concat("/reload") : baseURI.concat("/reload")));
+        return ((baseURI.endsWith("/") ? baseURI.concat("reload") : baseURI.concat("/reload")));
     }
 
     /**

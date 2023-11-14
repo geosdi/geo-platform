@@ -55,6 +55,8 @@ import org.geosdi.geoplatform.support.wfs.feature.reader.GPFeatureSchemaReader;
 import org.geosdi.geoplatform.support.wfs.feature.reader.WFSGetFeatureStaxReader;
 import org.geosdi.geoplatform.xml.wfs.v110.GetFeatureType;
 import org.geosdi.geoplatform.xml.xsd.v2001.Schema;
+import org.geotools.api.referencing.crs.CoordinateReferenceSystem;
+import org.geotools.api.referencing.operation.MathTransform;
 import org.geotools.geometry.jts.JTS;
 import org.geotools.referencing.CRS;
 import org.junit.FixMethodOrder;
@@ -65,8 +67,6 @@ import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.PrecisionModel;
-import org.opengis.referencing.crs.CoordinateReferenceSystem;
-import org.opengis.referencing.operation.MathTransform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

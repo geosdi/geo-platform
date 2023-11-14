@@ -36,10 +36,10 @@ package org.geosdi.geoplatform.connector.server.request.v110.cql;
 
 import org.geosdi.geoplatform.jaxb.pool.GPJAXBContextBuilderPool;
 import org.geosdi.geoplatform.xml.filter.v110.FilterType;
+import org.geotools.api.filter.Filter;
 import org.geotools.filter.text.ecql.ECQL;
 import org.geotools.xsd.Configuration;
 import org.geotools.xsd.Encoder;
-import org.opengis.filter.Filter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,7 +48,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.StringReader;
 
 import static org.geosdi.geoplatform.jaxb.pool.GPJAXBContextBuilderPool.jaxbContextBuilderPool;
-import static org.geotools.factory.CommonFactoryFinder.getFilterFactory2;
+import static org.geotools.factory.CommonFactoryFinder.getFilterFactory;
 import static org.geotools.util.factory.GeoTools.getDefaultHints;
 
 /**
@@ -89,7 +89,7 @@ class FilterTypeCqlBuilder implements GPFilterTypeCqlBuilder {
      */
     protected final FilterType internalBuild() {
         try {
-            Filter filter = ECQL.toFilter(this.cqlFilter, getFilterFactory2(getDefaultHints()));
+            Filter filter = ECQL.toFilter(this.cqlFilter, getFilterFactory(getDefaultHints()));
             Configuration configuration = new org.geotools.filter.v1_0.OGCConfiguration();
             Encoder encoder = new Encoder(configuration);
             encoder.setIndenting(true);

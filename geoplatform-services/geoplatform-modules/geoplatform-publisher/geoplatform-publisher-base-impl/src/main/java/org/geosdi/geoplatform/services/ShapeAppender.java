@@ -42,7 +42,20 @@ import org.geosdi.geoplatform.services.utility.Ds2dsConfiguration;
 import org.geosdi.geoplatform.services.utility.FeatureConfiguration;
 import org.geosdi.geoplatform.services.utility.FeatureConfigurationUtil;
 import org.geosdi.geoplatform.services.utility.PublishUtility;
-import org.geotools.data.*;
+import org.geotools.api.data.DataStore;
+import org.geotools.api.data.FeatureStore;
+import org.geotools.api.data.Query;
+import org.geotools.api.data.Transaction;
+import org.geotools.api.feature.simple.SimpleFeature;
+import org.geotools.api.feature.simple.SimpleFeatureType;
+import org.geotools.api.feature.type.AttributeDescriptor;
+import org.geotools.api.feature.type.GeometryDescriptor;
+import org.geotools.api.filter.Filter;
+import org.geotools.api.referencing.FactoryException;
+import org.geotools.api.referencing.NoSuchAuthorityCodeException;
+import org.geotools.api.referencing.crs.CoordinateReferenceSystem;
+import org.geotools.data.DataUtilities;
+import org.geotools.data.DefaultTransaction;
 import org.geotools.factory.CommonFactoryFinder;
 import org.geotools.feature.AttributeTypeBuilder;
 import org.geotools.feature.FeatureCollection;
@@ -55,14 +68,6 @@ import org.geotools.jdbc.*;
 import org.geotools.referencing.CRS;
 import org.geotools.util.URLs;
 import org.geotools.util.factory.Hints;
-import org.opengis.feature.simple.SimpleFeature;
-import org.opengis.feature.simple.SimpleFeatureType;
-import org.opengis.feature.type.AttributeDescriptor;
-import org.opengis.feature.type.GeometryDescriptor;
-import org.opengis.filter.Filter;
-import org.opengis.referencing.FactoryException;
-import org.opengis.referencing.NoSuchAuthorityCodeException;
-import org.opengis.referencing.crs.CoordinateReferenceSystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -602,7 +607,7 @@ public class ShapeAppender {
             }
             return Filter.INCLUDE;
         }
-        ECQLCompiler compiler = new ECQLCompiler(cqlFilter, CommonFactoryFinder.getFilterFactory2());
+        ECQLCompiler compiler = new ECQLCompiler(cqlFilter, CommonFactoryFinder.getFilterFactory());
         try {
             compiler.compileFilter();
             return compiler.getFilter();

@@ -35,13 +35,14 @@
  */
 package org.geosdi.geoplatform.services.utility;
 
+import org.geotools.api.data.DataStore;
+import org.geotools.api.data.DataStoreFinder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Map;
-import org.geotools.data.DataStore;
-import org.geotools.data.DataStoreFinder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class FeatureConfigurationUtil {
 

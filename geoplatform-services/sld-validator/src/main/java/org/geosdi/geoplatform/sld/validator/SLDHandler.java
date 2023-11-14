@@ -35,9 +35,10 @@
  */
 package org.geosdi.geoplatform.sld.validator;
 
+import org.geotools.api.style.*;
 import org.geotools.factory.CommonFactoryFinder;
 import org.geotools.sld.v1_1.SLDConfiguration;
-import org.geotools.styling.*;
+import org.geotools.styling.DefaultResourceLocator;
 import org.geotools.util.URLs;
 import org.geotools.util.Version;
 import org.geotools.util.logging.Logging;

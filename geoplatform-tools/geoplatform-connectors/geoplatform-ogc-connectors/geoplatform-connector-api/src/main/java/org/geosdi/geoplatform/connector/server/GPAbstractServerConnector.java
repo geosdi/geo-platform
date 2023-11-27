@@ -55,6 +55,7 @@ import org.apache.hc.core5.http.impl.io.HttpRequestExecutor;
 import org.apache.hc.core5.ssl.SSLContextBuilder;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
+import org.geosdi.geoplatform.connector.server.ssl.GPSSLConnectionSocketFactory;
 import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,6 +69,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
+import static java.net.URI.create;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.apache.hc.core5.util.TimeValue.of;
 
@@ -227,7 +229,7 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
         checkArgument((urlServer != null) && !(urlServer.trim().isEmpty()), "The Parameter urlServer must not be null or an empty string.");
         try {
             int index = urlServer.indexOf("?");
-            return ((index != -1) ? new URL(urlServer.substring(0, index)) : new URL(urlServer));
+            return ((index != -1) ? create(urlServer.substring(0, index)).toURL() : create(urlServer).toURL());
         } catch (MalformedURLException ex) {
             ex.printStackTrace();
             throw new IllegalStateException(ex);
@@ -277,7 +279,7 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
                         .setCookieSpec(this.pooledConnectorConfig.getCookieSpec().toCookieSpec())
                         .build())
                 .setDefaultCredentialsProvider(credentialsStore)
-                .setRetryStrategy(new DefaultHttpRequestRetryStrategy(5, of(10l, SECONDS)))
+                .setRetryStrategy(new DefaultHttpRequestRetryStrategy(5, of(10L, SECONDS)))
                 .build();
     }
 
@@ -303,7 +305,7 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
         try {
             SSLContextBuilder builder = new SSLContextBuilder();
             builder.loadTrustMaterial(null, (chain, authType) -> true);
-            return new SSLConnectionSocketFactory(builder.build(), NoopHostnameVerifier.INSTANCE);
+            return new GPSSLConnectionSocketFactory(builder.build(), NoopHostnameVerifier.INSTANCE);
         } catch (Exception ex) {
             logger.warn("#####################Error to createDefaultSSLConnectionSocketFactory cause : {}\n", ex.getMessage());
             ex.printStackTrace();

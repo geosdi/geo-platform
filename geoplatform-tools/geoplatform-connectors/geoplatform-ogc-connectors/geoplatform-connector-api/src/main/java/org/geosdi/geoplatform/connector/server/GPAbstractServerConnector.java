@@ -55,7 +55,6 @@ import org.apache.hc.core5.http.impl.io.HttpRequestExecutor;
 import org.apache.hc.core5.ssl.SSLContextBuilder;
 import org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfig;
 import org.geosdi.geoplatform.connector.server.security.GPSecurityConnector;
-import org.geosdi.geoplatform.connector.server.ssl.GPSSLConnectionSocketFactory;
 import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -305,7 +304,7 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
         try {
             SSLContextBuilder builder = new SSLContextBuilder();
             builder.loadTrustMaterial(null, (chain, authType) -> true);
-            return new GPSSLConnectionSocketFactory(builder.build(), NoopHostnameVerifier.INSTANCE);
+            return new SSLConnectionSocketFactory(builder.build(), NoopHostnameVerifier.INSTANCE);
         } catch (Exception ex) {
             logger.warn("#####################Error to createDefaultSSLConnectionSocketFactory cause : {}\n", ex.getMessage());
             ex.printStackTrace();

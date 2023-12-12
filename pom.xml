@@ -1077,7 +1077,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.4.1</version>
                     <executions>
                         <execution>
                             <id>enforce-maven</id>
@@ -1099,7 +1099,7 @@
                     <inherited>true</inherited>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.3.0</version>
                     <configuration>
                         <attach>true</attach>
                     </configuration>
@@ -1142,7 +1142,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.6.1</version>
                 </plugin>
                 
                 <plugin>
@@ -1154,7 +1154,7 @@
                 <plugin>
                     <groupId>com.mycila</groupId>
                     <artifactId>license-maven-plugin</artifactId>
-                    <version>4.1</version>
+                    <version>4.3</version>
                     <configuration>
                         <header>etc/header.txt</header>
                         <aggregate>true</aggregate>
@@ -1241,7 +1241,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
-                    <version>3.3.2</version>
+                    <version>3.4.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -1266,7 +1266,7 @@
 
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.3.2</version>
             </plugin>
 
             <plugin>
@@ -1363,14 +1363,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.9.1</version>
+                <version>3.12.1</version>
             </plugin>
 
             <!-- javadoc -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.3.2</version>
+                <version>3.6.3</version>
                 <configuration>
                     <source>11</source>
                     <version>false</version>

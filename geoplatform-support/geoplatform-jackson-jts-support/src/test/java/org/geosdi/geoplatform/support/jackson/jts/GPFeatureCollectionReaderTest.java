@@ -91,4 +91,14 @@ public class GPFeatureCollectionReaderTest {
                     .getDefaultMapper().readValue(featureAsString, Geometry.class));
         }
     }
+
+    @Test
+    public void c_parseFeatureTest() throws Exception {
+        FeatureCollection featureCollection = JACKSON_SUPPORT.getDefaultMapper()
+                .readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "geojson", "FeatureCollection")
+                        .collect(joining(separator, "", ".json"))), FeatureCollection.class);
+        String value = JTS_JACKSON_SUPPORT.getDefaultMapper().writeValueAsString(featureCollection);
+        GeometryCollection geometryCollection = JTS_JACKSON_SUPPORT.getDefaultMapper().readValue(new String(value), GeometryCollection.class);
+        logger.info("{}\n", geometryCollection);
+    }
 }

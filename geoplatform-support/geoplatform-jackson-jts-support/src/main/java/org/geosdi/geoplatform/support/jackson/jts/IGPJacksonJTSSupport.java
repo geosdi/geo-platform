@@ -35,9 +35,15 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts;
 
+import org.geojson.FeatureCollection;
 import org.geojson.GeoJsonObject;
 import org.geojson.Geometry;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
+import org.locationtech.jts.geom.GeometryCollection;
+
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -50,26 +56,40 @@ public interface IGPJacksonJTSSupport extends JacksonSupport {
      * @return {@link GeoJsonObject}
      * @throws Exception
      */
-    GeoJsonObject convertJtsGeometryToGeoJson(org.locationtech.jts.geom.Geometry theGeom) throws Exception;
+    GeoJsonObject convertJtsGeometryToGeoJson(@Nonnull(when = NEVER) org.locationtech.jts.geom.Geometry theGeom) throws Exception;
 
     /**
      * @param theGeoJsonGeometry
      * @return {@link org.locationtech.jts.geom.Geometry}
      * @throws Exception
      */
-    org.locationtech.jts.geom.Geometry convertGeoJsonGeometryToJts(Geometry theGeoJsonGeometry) throws Exception;
+    org.locationtech.jts.geom.Geometry convertGeoJsonGeometryToJts(@Nonnull(when = NEVER) Geometry theGeoJsonGeometry) throws Exception;
 
     /**
      * @param theGeom
      * @return {@link GeoJsonObject}
      * @throws Exception
      */
-    GeoJsonObject convertVividisolutionGeometryToGeoJson(com.vividsolutions.jts.geom.Geometry theGeom) throws Exception;
+    GeoJsonObject convertVividisolutionGeometryToGeoJson(@Nonnull(when = NEVER) com.vividsolutions.jts.geom.Geometry theGeom) throws Exception;
 
     /**
      * @param theGeoJsonGeometry
      * @return {@link org.locationtech.jts.geom.Geometry}
      * @throws Exception
      */
-    com.vividsolutions.jts.geom.Geometry convertGeoJsonGeometryToVividisolution(Geometry theGeoJsonGeometry) throws Exception;
+    com.vividsolutions.jts.geom.Geometry convertGeoJsonGeometryToVividisolution(@Nonnull(when = NEVER) Geometry theGeoJsonGeometry) throws Exception;
+
+    /**
+     * @param theFeatureCollection
+     * @return {@link org.locationtech.jts.geom.Geometry}
+     * @throws Exception
+     */
+    GeometryCollection convertGeoJsonFeatureCollectionToJts(@Nonnull(when = NEVER) FeatureCollection theFeatureCollection) throws Exception;
+
+    /**
+     * @param theFeatureCollection
+     * @return {@link org.locationtech.jts.geom.Geometry}
+     * @throws Exception
+     */
+    com.vividsolutions.jts.geom.GeometryCollection convertGeoJsonFeatureCollectionToVividisolution(@Nonnull(when = NEVER) FeatureCollection theFeatureCollection) throws Exception;
 }

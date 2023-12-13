@@ -35,13 +35,21 @@
  */
 package org.geosdi.geoplatform.support.jackson.jts;
 
+import org.geojson.FeatureCollection;
 import org.geojson.GeoJsonObject;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import org.geosdi.geoplatform.support.jackson.jts.module.GPJTSModule;
 import org.geosdi.geoplatform.support.jackson.property.JacksonSupportConfigFeature;
 import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryCollection;
+
+import javax.annotation.Nonnull;
+
+import java.io.StringReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
@@ -70,7 +78,7 @@ public class GPJacksonJTSSupport extends GPJacksonSupport implements IGPJacksonJ
      * @throws Exception
      */
     @Override
-    public GeoJsonObject convertJtsGeometryToGeoJson(Geometry theGeom) throws Exception {
+    public GeoJsonObject convertJtsGeometryToGeoJson(@Nonnull(when = NEVER) Geometry theGeom) throws Exception {
         checkArgument(theGeom != null, "The Parameter Geometry must not be null.");
         String geometryGeoJsonString = super.getDefaultMapper().writeValueAsString(theGeom);
         return super.getDefaultMapper().readValue(geometryGeoJsonString, GeoJsonObject.class);
@@ -82,7 +90,7 @@ public class GPJacksonJTSSupport extends GPJacksonSupport implements IGPJacksonJ
      * @throws Exception
      */
     @Override
-    public Geometry convertGeoJsonGeometryToJts(org.geojson.Geometry theGeoJsonGeometry) throws Exception {
+    public Geometry convertGeoJsonGeometryToJts(@Nonnull(when = NEVER) org.geojson.Geometry theGeoJsonGeometry) throws Exception {
         checkArgument(theGeoJsonGeometry != null, "The Parameter GeoJson Geometry must not be null.");
         String geometryGeoJsonString = super.getDefaultMapper().writeValueAsString(theGeoJsonGeometry);
         return super.getDefaultMapper().readValue(geometryGeoJsonString, org.locationtech.jts.geom.Geometry.class);
@@ -94,7 +102,7 @@ public class GPJacksonJTSSupport extends GPJacksonSupport implements IGPJacksonJ
      * @throws Exception
      */
     @Override
-    public GeoJsonObject convertVividisolutionGeometryToGeoJson(com.vividsolutions.jts.geom.Geometry theGeom) throws Exception {
+    public GeoJsonObject convertVividisolutionGeometryToGeoJson(@Nonnull(when = NEVER) com.vividsolutions.jts.geom.Geometry theGeom) throws Exception {
         checkArgument(theGeom != null, "The Parameter Geometry must not be null.");
         String geometryGeoJsonString = super.getDefaultMapper().writeValueAsString(theGeom);
         return super.getDefaultMapper().readValue(geometryGeoJsonString, GeoJsonObject.class);
@@ -106,10 +114,34 @@ public class GPJacksonJTSSupport extends GPJacksonSupport implements IGPJacksonJ
      * @throws Exception
      */
     @Override
-    public com.vividsolutions.jts.geom.Geometry convertGeoJsonGeometryToVividisolution(org.geojson.Geometry theGeoJsonGeometry) throws Exception {
+    public com.vividsolutions.jts.geom.Geometry convertGeoJsonGeometryToVividisolution(@Nonnull(when = NEVER) org.geojson.Geometry theGeoJsonGeometry) throws Exception {
         checkArgument(theGeoJsonGeometry != null, "The Parameter GeoJson Geometry must not be null.");
         String geometryGeoJsonString = super.getDefaultMapper().writeValueAsString(theGeoJsonGeometry);
         return super.getDefaultMapper().readValue(geometryGeoJsonString, com.vividsolutions.jts.geom.Geometry.class);
+    }
+
+    /**
+     * @param theFeatureCollection
+     * @return {@link Geometry}
+     * @throws Exception
+     */
+    @Override
+    public GeometryCollection convertGeoJsonFeatureCollectionToJts(@Nonnull(when = NEVER) FeatureCollection theFeatureCollection) throws Exception {
+        checkArgument((theFeatureCollection != null) && (!theFeatureCollection.getFeatures().isEmpty()), "The Parameter featureCollection must not be null and must contains features.");
+        String geometryAsString = super.getDefaultMapper().writeValueAsString(theFeatureCollection);
+        return super.getDefaultMapper().readValue(new StringReader(geometryAsString), GeometryCollection.class);
+    }
+
+    /**
+     * @param theFeatureCollection
+     * @return {@link Geometry}
+     * @throws Exception
+     */
+    @Override
+    public com.vividsolutions.jts.geom.GeometryCollection convertGeoJsonFeatureCollectionToVividisolution(@Nonnull(when = NEVER) FeatureCollection theFeatureCollection) throws Exception {
+        checkArgument((theFeatureCollection != null) && (!theFeatureCollection.getFeatures().isEmpty()), "The Parameter featureCollection must not be null and must contains features.");
+        String geometryAsString = super.getDefaultMapper().writeValueAsString(theFeatureCollection);
+        return super.getDefaultMapper().readValue(new StringReader(geometryAsString), com.vividsolutions.jts.geom.GeometryCollection.class);
     }
 
     /**

@@ -44,12 +44,11 @@ import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.GeometryCollection;
 
 import javax.annotation.Nonnull;
-
 import java.io.StringReader;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAXB;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 
@@ -68,7 +67,7 @@ public class GPJacksonJTSSupport extends GPJacksonSupport implements IGPJacksonJ
     }
 
     public GPJacksonJTSSupport(JacksonSupportConfigFeature... features) {
-        super(JAXB, features);
+        super(JAKARTA, features);
         super.registerModule(new GPJTSModule());
     }
 

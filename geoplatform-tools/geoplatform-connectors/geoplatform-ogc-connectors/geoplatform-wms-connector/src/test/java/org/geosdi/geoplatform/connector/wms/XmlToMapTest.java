@@ -106,7 +106,7 @@ public class XmlToMapTest {
         @Override
         public void endElement(String uri, String localName, String qName) throws SAXException {
             final String value = buffer.toString().trim();
-            if (value.length() > 0) {
+            if (!value.isEmpty()) {
                 result.put(qName.trim(), value);
             }
             buffer.setLength(0);

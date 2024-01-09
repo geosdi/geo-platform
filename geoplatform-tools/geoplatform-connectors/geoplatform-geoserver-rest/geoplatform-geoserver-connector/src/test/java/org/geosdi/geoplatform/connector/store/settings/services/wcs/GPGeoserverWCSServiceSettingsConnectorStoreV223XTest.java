@@ -38,7 +38,7 @@ package org.geosdi.geoplatform.connector.store.settings.services.wcs;
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wcs.GPGeoserverWCSServiceSettings;
 import org.geosdi.geoplatform.connector.geoserver.model.settings.service.wcs.GPGeoserverWCSWorkspaceServiceSettings;
 import org.geosdi.geoplatform.connector.geoserver.request.settings.services.wcs.*;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV221xTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV223xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
@@ -61,29 +61,29 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverWCSServiceSettingsConnectorStoreV221XTest extends GPBaseGeoserverConnectorStoreV221xTest {
+public class GPGeoserverWCSServiceSettingsConnectorStoreV223XTest extends GPBaseGeoserverConnectorStoreV223xTest {
 
     @Test
     public void a_loadWCSServiceSettingsRequestTest() throws Exception {
-        GeoserverLoadWCSServiceSettingsRequest wcsServiceSettingsRequest = geoserverConnectorStoreV2_21_x.loadWCSServiceSettingsRequest();
+        GeoserverLoadWCSServiceSettingsRequest wcsServiceSettingsRequest = geoserverConnectorStoreV2_23_x.loadWCSServiceSettingsRequest();
         logger.info("########################GEOSERVER_WCS_SERIVCE_SETTINGS_RESPONSE : {}\n", wcsServiceSettingsRequest.getResponse());
     }
 
     @Test
     public void b_loadWCSWorkspaceServiceSettingsRequestTest() throws Exception {
-        GeoserverLoadWCSWorkspaceServiceSettingsRequest wcsWorkspaceServiceSettingsRequest = geoserverConnectorStoreV2_21_x.loadWCSWorkspaceServiceSettingsRequest();
+        GeoserverLoadWCSWorkspaceServiceSettingsRequest wcsWorkspaceServiceSettingsRequest = geoserverConnectorStoreV2_23_x.loadWCSWorkspaceServiceSettingsRequest();
         logger.info("########################GEOSERVER_WCS_WORKSPACE_SERIVCE_SETTINGS_RESPONSE : {}\n", wcsWorkspaceServiceSettingsRequest
                 .withWorkspace("topp").getResponse());
     }
 
     @Test
     public void c_updateWCSServiceSettingsRequestTest() throws Exception {
-        GeoserverUpdateWCSServiceSettingsRequest updateWCSServiceSettingsRequest = geoserverConnectorStoreV2_21_x.updateWCSServiceSettingsRequest();
+        GeoserverUpdateWCSServiceSettingsRequest updateWCSServiceSettingsRequest = geoserverConnectorStoreV2_23_x.updateWCSServiceSettingsRequest();
         GPGeoserverWCSServiceSettings wcsServiceSettings = toWCSServiceSettings();
         wcsServiceSettings.setMaintainer("Francesco Izzi");
         wcsServiceSettings.setAbstrct("This is a simple example for Geoserver");
         assertTrue(updateWCSServiceSettingsRequest.withBody(wcsServiceSettings).getResponse());
-        GPGeoserverWCSServiceSettings retrieveWFSSettings = geoserverConnectorStoreV2_21_x.loadWCSServiceSettingsRequest().getResponse();
+        GPGeoserverWCSServiceSettings retrieveWFSSettings = geoserverConnectorStoreV2_23_x.loadWCSServiceSettingsRequest().getResponse();
         assertTrue(retrieveWFSSettings.getMaintainer().equals("Francesco Izzi"));
         assertTrue(retrieveWFSSettings.getAbstrct().equals("This is a simple example for Geoserver"));
     }
@@ -93,7 +93,7 @@ public class GPGeoserverWCSServiceSettingsConnectorStoreV221XTest extends GPBase
         GPGeoserverWCSServiceSettings wcsServiceSettings = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper()
                 .readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "WCSServiceSettings")
                         .collect(joining(separator, "", ".xml"))), GPGeoserverWCSServiceSettings.class);
-        logger.info("###################WCS_UPDATE_SERVICE_SETTINGS_RESPONSE : {}\n", geoserverConnectorStoreV2_21_x.updateWCSServiceSettingsRequest()
+        logger.info("###################WCS_UPDATE_SERVICE_SETTINGS_RESPONSE : {}\n", geoserverConnectorStoreV2_23_x.updateWCSServiceSettingsRequest()
                 .withBody(wcsServiceSettings).getResponse());
     }
 
@@ -106,7 +106,7 @@ public class GPGeoserverWCSServiceSettingsConnectorStoreV221XTest extends GPBase
             wcsWorkspaceServiceSettings.getWorkspace().setWorkspaceName("nurc");
             wcsWorkspaceServiceSettings.setMaintainer("Giuseppe La Scaleia");
             wcsWorkspaceServiceSettings.setAbstrct("This is a simple Test.");
-            GeoserverUpdateWCSWorkspaceServiceSettingsRequest updateWCSWorkspaceSettingsRequest = geoserverConnectorStoreV2_21_x.updateWCSWorkspaceServiceSettingsRequest();
+            GeoserverUpdateWCSWorkspaceServiceSettingsRequest updateWCSWorkspaceSettingsRequest = geoserverConnectorStoreV2_23_x.updateWCSWorkspaceServiceSettingsRequest();
             logger.info("@@@@@@@@@@@@@@@@@WCS_UPDATE_WORKSPACE_SERVICE_SETTINGS_RESPONSE : {}\n", updateWCSWorkspaceSettingsRequest
                     .withWorkspace("nurc").withBody(wcsWorkspaceServiceSettings).getResponse());
         }
@@ -114,14 +114,14 @@ public class GPGeoserverWCSServiceSettingsConnectorStoreV221XTest extends GPBase
 
     @Test
     public void f_loadWCSWorkspaceServiceSettingsRequestTest() throws Exception {
-        GeoserverLoadWCSWorkspaceServiceSettingsRequest wcsWorkspaceServiceSettingsRequest = geoserverConnectorStoreV2_21_x.loadWCSWorkspaceServiceSettingsRequest();
+        GeoserverLoadWCSWorkspaceServiceSettingsRequest wcsWorkspaceServiceSettingsRequest = geoserverConnectorStoreV2_23_x.loadWCSWorkspaceServiceSettingsRequest();
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_WCS_WORKSPACE_SETTINGS_RESPONSE : {}\n", wcsWorkspaceServiceSettingsRequest
                 .withWorkspace("nurc").getResponse());
     }
 
     @Test
     public void g_deleteWCSWorkspaceServiceSettingsRequestTest() throws Exception {
-        GeoserverDeleteWCSWorkspaceServiceSettingsRequest deleteWCSWorkspaceServiceSettingRequest = geoserverConnectorStoreV2_21_x.deleteWCSWorkspaceServiceSettingsRequest();
+        GeoserverDeleteWCSWorkspaceServiceSettingsRequest deleteWCSWorkspaceServiceSettingRequest = geoserverConnectorStoreV2_23_x.deleteWCSWorkspaceServiceSettingsRequest();
         logger.info("########################WCS_DELETE_WORKSPACE_SERVICE_SETTINGS : {}\n", deleteWCSWorkspaceServiceSettingRequest
                 .withWorkspace("nurc").getResponse());
     }

@@ -1,4 +1,4 @@
-/**
+/*
  *
  *    geo-platform
  *    Rich webgis framework
@@ -32,8 +32,7 @@
  *   based on this library. If you modify this library, you may extend this exception
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
- */package org.geosdi.geoplatform.connector.store.security.roles;
-
+ */
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.security.roles.*;
 import org.geosdi.geoplatform.connector.store.security.layers.GeoserverACLLayersConnectorStore;

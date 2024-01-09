@@ -5,7 +5,7 @@
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2022 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2024 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -33,6 +33,8 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
+package org.geosdi.geoplatform.connector.store.security.roles;
+
 import org.geosdi.geoplatform.connector.geoserver.GPGeoserverConnector;
 import org.geosdi.geoplatform.connector.geoserver.request.security.roles.*;
 import org.geosdi.geoplatform.connector.store.security.layers.GeoserverACLLayersConnectorStore;
@@ -41,7 +43,7 @@ import org.geosdi.geoplatform.connector.store.security.layers.GeoserverACLLayers
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-public abstract class GeoserverRolesConnectorStore extends GeoserverACLLayersConnectorStore implements GPGeoserverRolesConnectorStore{
+public abstract class GeoserverRolesConnectorStore extends GeoserverACLLayersConnectorStore implements GPGeoserverRolesConnectorStore {
     /**
      * @param theServer
      */

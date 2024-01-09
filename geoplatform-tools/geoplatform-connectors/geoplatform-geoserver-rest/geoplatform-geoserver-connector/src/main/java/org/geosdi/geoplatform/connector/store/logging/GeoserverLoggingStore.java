@@ -5,7 +5,7 @@
  *    http://geo-platform.org
  *   ====================================================================
  *
- *   Copyright (C) 2008-2022 geoSDI Group (CNR IMAA - Potenza - ITALY).
+ *   Copyright (C) 2008-2024 geoSDI Group (CNR IMAA - Potenza - ITALY).
  *
  *   This program is free software: you can redistribute it and/or modify it
  *   under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@ import org.geosdi.geoplatform.connector.store.fonts.GeoserverFontsStore;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GeoserverLoggingStore extends GeoserverFontsStore implements GPGeoserverLoggingStore{
+public abstract class GeoserverLoggingStore extends GeoserverFontsStore implements GPGeoserverLoggingStore {
 
     /**
      * @param theServer

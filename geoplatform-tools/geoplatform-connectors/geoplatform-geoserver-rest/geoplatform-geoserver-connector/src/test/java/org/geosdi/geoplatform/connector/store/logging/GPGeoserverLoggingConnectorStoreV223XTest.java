@@ -33,39 +33,51 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.layergroups;
+package org.geosdi.geoplatform.connector.store.logging;
 
-import org.geosdi.geoplatform.connector.geoserver.request.layergroups.GeoserverLoadLayerGroupsRequest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreTest;
+import org.geosdi.geoplatform.connector.GeoserverVersionException;
+import org.geosdi.geoplatform.connector.geoserver.request.logging.GeoserverLoadLoggingRequest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV223xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
+import static java.lang.Boolean.TRUE;
+import static org.geosdi.geoplatform.connector.jackson.GPGeoserverLoggingJacksonTest.toGeoserverLogging;
+import static org.junit.Assert.assertFalse;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
- * @author Vito Salvia - CNR IMAA geoSDI Group
- * @email vito.salvia@gmail.com
+ * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
+ * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverLayerGroupsConnectorStoreTest extends GPBaseGeoserverConnectorStoreTest {
+public class GPGeoserverLoggingConnectorStoreV223XTest extends GPBaseGeoserverConnectorStoreV223xTest {
 
-    @Test
-    public void a_loadGeoserverWorkspaceToppLayersTest() throws Exception {
-        GeoserverLoadLayerGroupsRequest loadLayerGroupRequest = geoserverConnectorStoreV2_24_x.loadLayerGroups();
-        logger.info("############################LOAD_WORKSPACE_LAYERS_RESPONSE : {}\n", loadLayerGroupRequest.getResponse());
+    @Test(expected = GeoserverVersionException.class)
+    public void a_loadGeoserverLoggingRequestTest() throws Exception {
+        GeoserverLoadLoggingRequest loadLoggingRequest = geoserverConnectorStoreV2_23_x.loadLoggingRequest();
+        logger.info("####################GEOSERVER_LOAD_LOGGING_RESPONSE : {}\n", loadLoggingRequest.getResponse());
     }
 
-    @Test
-    public void b_loadGeoserverLayerGroupRequestTest() throws Exception {
-        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@LOAD_LAYER_GROUP_RESPONSE : {}\n", geoserverConnectorStoreV2_24_x
-                .loadLayerGroupRequest()
-                .withLayerGroupName("spearfish").getResponse());
+    @Test(expected = GeoserverVersionException.class)
+    public void b_updateGeoserverLoggingRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@GEOSERVER_UPDATE_LOGGING_RESPONSE : {}\n", geoserverConnectorStoreV2_23_x
+                .updateLoggingRequest()
+                .withBody(toGeoserverLogging())
+                .getResponse());
     }
 
-    @Test
-    public void c_loadGeoserverLayerGroupRequestTest() throws Exception {
-        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@LOAD_LAYER_GROUP_RESPONSE : {}\n", geoserverConnectorStoreV2_24_x
-                .loadLayerGroupRequest()
-                .withLayerGroupName("tiger-ny").getResponse());
+    @Test(expected = GeoserverVersionException.class)
+    public void c_loadGeoserverLoggingRequestTest() throws Exception {
+        GeoserverLoadLoggingRequest loadLoggingRequest = geoserverConnectorStoreV2_23_x.loadLoggingRequest();
+        assertFalse(loadLoggingRequest.getResponse().isStdOutLogging());
+    }
+
+    @Test(expected = GeoserverVersionException.class)
+    public void c_updateGeoserverLoggingRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@GEOSERVER_UPDATE_LOGGING_RESPONSE : {}\n", geoserverConnectorStoreV2_23_x
+                .updateLoggingRequest()
+                .withBody(toGeoserverLogging(TRUE))
+                .getResponse());
     }
 }

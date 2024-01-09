@@ -66,25 +66,25 @@ public class GPGeoserverWMTSServiceSettingsConnectorStoreTest extends GPBaseGeos
 
     @Test
     public void a_loadWMTSServiceSettingsRequestTest() throws Exception {
-        GeoserverLoadWMTSServiceSettingsRequest wmtsServiceSettingsRequest = geoserverConnectorStoreV2_22_x.loadWMTSServiceSettingsRequest();
+        GeoserverLoadWMTSServiceSettingsRequest wmtsServiceSettingsRequest = geoserverConnectorStoreV2_24_x.loadWMTSServiceSettingsRequest();
         logger.info("########################GEOSERVER_WMTS_SERIVCE_SETTINGS_RESPONSE : {}\n", wmtsServiceSettingsRequest.getResponse());
     }
 
     @Test
     public void b_loadWMTSWorkspaceServiceSettingsRequestTest() throws Exception {
-        GeoserverLoadWMTSWorkspaceServiceSettingsRequest wmtsWorkspaceServiceSettingsRequest = geoserverConnectorStoreV2_22_x.loadWMTSWorkspaceServiceSettingsRequest();
+        GeoserverLoadWMTSWorkspaceServiceSettingsRequest wmtsWorkspaceServiceSettingsRequest = geoserverConnectorStoreV2_24_x.loadWMTSWorkspaceServiceSettingsRequest();
         logger.info("########################GEOSERVER_WMTS_SERIVCE_SETTINGS_RESPONSE : {}\n", wmtsWorkspaceServiceSettingsRequest
                 .withWorkspace("topp").getResponse());
     }
 
     @Test
     public void c_updateWMTSServiceSettingsRequestTest() throws Exception {
-        GeoserverUpdateWMTSServiceSettingsRequest updateWMTSServiceSettingsRequest = geoserverConnectorStoreV2_22_x.updateWMTSServiceSettingsRequest();
+        GeoserverUpdateWMTSServiceSettingsRequest updateWMTSServiceSettingsRequest = geoserverConnectorStoreV2_24_x.updateWMTSServiceSettingsRequest();
         GPGeoserverWMTSServiceSettings wmtsServiceSettings = toWMTSServiceSettings();
         wmtsServiceSettings.setMaintainer("Francesco Izzi");
         wmtsServiceSettings.setAbstrct("This is a simple example for Geoserver");
         assertTrue(updateWMTSServiceSettingsRequest.withBody(wmtsServiceSettings).getResponse());
-        GPGeoserverWMTSServiceSettings retrieveWMTSSettings = geoserverConnectorStoreV2_22_x.loadWMTSServiceSettingsRequest().getResponse();
+        GPGeoserverWMTSServiceSettings retrieveWMTSSettings = geoserverConnectorStoreV2_24_x.loadWMTSServiceSettingsRequest().getResponse();
         assertTrue(retrieveWMTSSettings.getMaintainer().equals("Francesco Izzi"));
         assertTrue(retrieveWMTSSettings.getAbstrct().equals("This is a simple example for Geoserver"));
     }
@@ -94,7 +94,7 @@ public class GPGeoserverWMTSServiceSettingsConnectorStoreTest extends GPBaseGeos
         GeoserverWMTSServiceSettings wmtsServiceSettings = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper()
                 .readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "WMTSServiceSettings-2.19")
                         .collect(joining(separator, "", ".xml"))), GPGeoserverWMTSServiceSettings.class);
-        logger.info("###################WMTS_UPDATE_SERVICE_SETTINGS_RESPONSE : {}\n", geoserverConnectorStoreV2_22_x.updateWMTSServiceSettingsRequest()
+        logger.info("###################WMTS_UPDATE_SERVICE_SETTINGS_RESPONSE : {}\n", geoserverConnectorStoreV2_24_x.updateWMTSServiceSettingsRequest()
                 .withBody(wmtsServiceSettings).getResponse());
     }
 
@@ -107,7 +107,7 @@ public class GPGeoserverWMTSServiceSettingsConnectorStoreTest extends GPBaseGeos
             wmtsWorkspaceServiceSettings.getWorkspace().setWorkspaceName("nurc");
             wmtsWorkspaceServiceSettings.setMaintainer("Giuseppe La Scaleia");
             wmtsWorkspaceServiceSettings.setAbstrct("This is a simple Test.");
-            GeoserverUpdateWMTSWorkspaceServiceSettingsRequest updateWMTSWorkspaceSettingsRequest = geoserverConnectorStoreV2_22_x.updateWMTSWorkspaceServiceSettingsRequest();
+            GeoserverUpdateWMTSWorkspaceServiceSettingsRequest updateWMTSWorkspaceSettingsRequest = geoserverConnectorStoreV2_24_x.updateWMTSWorkspaceServiceSettingsRequest();
             logger.info("@@@@@@@@@@@@@@@@@WMTS_UPDATE_WORKSPACE_SERVICE_SETTINGS_RESPONSE : {}\n", updateWMTSWorkspaceSettingsRequest
                     .withWorkspace("nurc").withBody(wmtsWorkspaceServiceSettings).getResponse());
         }
@@ -115,14 +115,14 @@ public class GPGeoserverWMTSServiceSettingsConnectorStoreTest extends GPBaseGeos
 
     @Test
     public void f_loadWMTSWorkspaceServiceSettingsRequestTest() throws Exception {
-        GeoserverLoadWMTSWorkspaceServiceSettingsRequest wmtsWorkspaceServiceSettingsRequest = geoserverConnectorStoreV2_22_x.loadWMTSWorkspaceServiceSettingsRequest();
+        GeoserverLoadWMTSWorkspaceServiceSettingsRequest wmtsWorkspaceServiceSettingsRequest = geoserverConnectorStoreV2_24_x.loadWMTSWorkspaceServiceSettingsRequest();
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@GEOSERVER_WNTS_WORKSPACE_SETTINGS_RESPONSE : {}\n", wmtsWorkspaceServiceSettingsRequest
                 .withWorkspace("nurc").getResponse());
     }
 
     @Test
     public void g_deleteWMTSWorkspaceServiceSettingsRequestTest() throws Exception {
-        GeoserverDeleteWMTSWorkspaceServiceSettingsRequest deleteWMTSWorkspaceServiceSettingRequest = geoserverConnectorStoreV2_22_x.deleteWMTSWorkspaceServiceSettingsRequest();
+        GeoserverDeleteWMTSWorkspaceServiceSettingsRequest deleteWMTSWorkspaceServiceSettingRequest = geoserverConnectorStoreV2_24_x.deleteWMTSWorkspaceServiceSettingsRequest();
         logger.info("########################WMTS_DELETE_WORKSPACE_SERVICE_SETTINGS : {}\n", deleteWMTSWorkspaceServiceSettingRequest
                 .withWorkspace("nurc").getResponse());
     }

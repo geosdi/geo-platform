@@ -113,8 +113,8 @@ public abstract class GPGeoserverRasterizeConnector extends GPGeoserverUniqueVal
     @Override
     public GPGeoserverRasterizeRequest rasterizeData() {
         switch (version) {
-            case V22x:
             case V23x:
+            case V24x:
                 return new GPGeoserverRasterizeRequest(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

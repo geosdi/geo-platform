@@ -42,6 +42,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -58,15 +59,15 @@ abstract class WFSBaseGetFeatureRequestParam implements WFSGetFeatureRequestPara
     /**
      * @param theRequest
      * @param theQueryType
-     * @param theChain
      * @throws Exception
      */
     @Override
-    public void applyParam(WFSGetFeatureRequest theRequest, QueryType theQueryType, GPWFSGetFeatureRequestParamChain theChain) throws Exception {
+    public void applyParam(@Nonnull(when = NEVER) WFSGetFeatureRequest theRequest, @Nonnull(when = NEVER) QueryType theQueryType) throws Exception {
+        checkArgument(theRequest != null, "The Parameter WFSGetFeatureRequest mut not be null.");
+        checkArgument(theQueryType != null, "The Parameter QueryType mut not be null.");
         if (this.canBeApplyParam(theRequest)) {
             this.internalApply(theRequest, theQueryType);
         }
-        theChain.applyParam(theRequest, theQueryType);
     }
 
     /**

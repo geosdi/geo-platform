@@ -1522,8 +1522,8 @@
         <aspectj-version>1.9.20</aspectj-version>
         <jetty-version>11.0.16</jetty-version>
 
-        <postgresql-version>42.6.0</postgresql-version>
-        <postgis-jdbc-version>2021.1.0</postgis-jdbc-version>
+        <postgresql-version>42.7.1</postgresql-version>
+        <postgis-jdbc-version>2023.1.0</postgis-jdbc-version>
 
         <cglib-version>3.3.0</cglib-version>
 

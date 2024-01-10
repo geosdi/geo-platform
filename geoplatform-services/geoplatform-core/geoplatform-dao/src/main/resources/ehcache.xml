@@ -439,7 +439,7 @@
         <disk-store-settings thread-pool="cache2Pool" writer-concurrency="2"/>
     </cache>
 
-    <cache alias="org.hibernate.cache.spi.QueryResultsRegion">
+    <cache alias="default-query-results-region">
         <expiry>
             <ttl>600</ttl>
         </expiry>
@@ -450,7 +450,7 @@
         </resources>
     </cache>
 
-    <cache alias="org.hibernate.cache.spi.TimestampsRegion">
+    <cache alias="default-update-timestamps-region">
         <expiry>
             <ttl>600</ttl>
         </expiry>

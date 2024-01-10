@@ -38,6 +38,10 @@ package org.geosdi.geoplatform.connector.server.request.v110.param;
 import org.geosdi.geoplatform.connector.server.request.WFSGetFeatureRequest;
 import org.geosdi.geoplatform.xml.wfs.v110.QueryType;
 
+import javax.annotation.Nonnull;
+
+import static javax.annotation.meta.When.NEVER;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -47,10 +51,9 @@ public interface WFSGetFeatureRequestParam {
     /**
      * @param theRequest
      * @param theQueryType
-     * @param theChain
      * @throws Exception
      */
-    void applyParam(WFSGetFeatureRequest theRequest, QueryType theQueryType, GPWFSGetFeatureRequestParamChain theChain) throws Exception;
+    void applyParam(@Nonnull(when = NEVER) WFSGetFeatureRequest theRequest, @Nonnull(when = NEVER) QueryType theQueryType) throws Exception;
 
     /**
      * @return {@link String}

@@ -74,10 +74,10 @@ class WFSGetFeatureRequestParamChain implements GPWFSGetFeatureRequestParamChain
     public void applyParam(@Nonnull(when = NEVER) WFSGetFeatureRequest theRequest, @Nonnull(when = NEVER) QueryType theQueryType) throws Exception {
         checkArgument(theRequest != null, "The Parameter WFSGetFeatureRequest must not be null.");
         checkArgument(theQueryType != null, "The Parameter QueryType must not be null.");
-        if (this.params.hasNext()) {
+        while (this.params.hasNext()) {
             WFSGetFeatureRequestParam param = this.params.next();
             logger.debug("#########################Processing : {}\n", param.toParamName());
-            param.applyParam(theRequest, theQueryType, this);
+            param.applyParam(theRequest, theQueryType);
         }
     }
 }

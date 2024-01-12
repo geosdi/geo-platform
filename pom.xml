@@ -1554,7 +1554,7 @@
         <geodb-version>0.9</geodb-version>
         <junit.version>4.13.2</junit.version>
         <maven-surefire.version>3.1.0</maven-surefire.version>
-        <gwt-plugin.version>2.11.0</gwt-plugin.version>
+        <gwt-plugin.version>2.10.0</gwt-plugin.version>
 
     </properties>
 

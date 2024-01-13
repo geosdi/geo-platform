@@ -60,6 +60,13 @@
         </snapshotRepository>
     </distributionManagement>
 
+    <pluginRepositories>
+        <pluginRepository>
+            <id>geosdi-realese</id>
+            <url>https://repo.geosdi.org/artifactory/libs-release-local</url>
+        </pluginRepository>
+    </pluginRepositories>
+
     <repositories>
         <!-- geoSDI -->
         <repository>
@@ -70,6 +77,7 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+
 
         <repository>
             <id>geosdi-snapshots</id>

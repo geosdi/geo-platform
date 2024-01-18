@@ -934,7 +934,7 @@
             <dependency>
                 <groupId>org.moxieapps.gwt</groupId>
                 <artifactId>org.moxieapps.gwt.uploader</artifactId>
-                <version>1.2.1</version>
+                <version>1.2.2</version>
             </dependency>
 
             <!-- GWT-OPENLAYERS -->

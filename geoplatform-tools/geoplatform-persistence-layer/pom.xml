@@ -126,8 +126,8 @@
     <properties>
         <hibernate-version>6.4.1.Final</hibernate-version>
         <hibernate-commons-annotations-version>6.0.6.Final</hibernate-commons-annotations-version>
-        <spring-data-jpa-version>3.2.1</spring-data-jpa-version>
-        <hypersistence-utils.version>3.6.1</hypersistence-utils.version>
+        <spring-data-jpa-version>3.2.2</spring-data-jpa-version>
+        <hypersistence-utils.version>3.7.0</hypersistence-utils.version>
     </properties>
 
 </project>

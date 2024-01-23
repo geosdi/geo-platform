@@ -40,6 +40,7 @@ import org.locationtech.jts.geom.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -69,8 +70,8 @@ public class JTSCoordinateWriter implements IJTSCoordinateWriter {
     @Override
     public Coordinate[] buildJTSCoordinates(List<LngLatAlt> lngLatAlts) {
         return lngLatAlts.stream().filter(lngLatAlt -> lngLatAlt != null)
-                .map(lngLatAlt -> buildJTSCoordinate(lngLatAlt))
-                .toArray(size -> new Coordinate[size]);
+                .map(this::buildJTSCoordinate)
+                .toArray(Coordinate[]::new);
     }
 
     /**
@@ -80,9 +81,9 @@ public class JTSCoordinateWriter implements IJTSCoordinateWriter {
     @Override
     public LinearRing buildJTSLinearRing(List<LngLatAlt> lngLatAlts) {
         return this.geometryFactory.createLinearRing(lngLatAlts.stream()
-                .filter(lngLatAlt -> lngLatAlt != null)
-                .map(lngLatAlt -> buildJTSCoordinate(lngLatAlt))
-                .toArray(size -> new Coordinate[size]));
+                .filter(Objects::nonNull)
+                .map(this::buildJTSCoordinate)
+                .toArray(Coordinate[]::new));
     }
 
     /**
@@ -91,9 +92,10 @@ public class JTSCoordinateWriter implements IJTSCoordinateWriter {
      */
     @Override
     public LinearRing[] buildJTSLinearRings(List<List<LngLatAlt>> lists) {
-        return lists.stream().map(list -> buildJTSCoordinates(list))
-                .map(coordinates -> this.geometryFactory.createLinearRing(coordinates))
-                .toArray(size -> new LinearRing[size]);
+        return lists.stream()
+                .map(this::buildJTSCoordinates)
+                .map(this.geometryFactory::createLinearRing)
+                .toArray(LinearRing[]::new);
     }
 
     /**
@@ -102,10 +104,11 @@ public class JTSCoordinateWriter implements IJTSCoordinateWriter {
      */
     @Override
     public Point[] buildJTSPoints(List<LngLatAlt> lngLatAlts) {
-        return lngLatAlts.stream().filter(lngLatAlt -> lngLatAlt != null)
-                .map(lngLatAlt -> buildJTSCoordinate(lngLatAlt))
-                .map(coordinate -> this.geometryFactory.createPoint(coordinate))
-                .toArray(size -> new Point[size]);
+        return lngLatAlts.stream()
+                .filter(Objects::nonNull)
+                .map(this::buildJTSCoordinate)
+                .map(this.geometryFactory::createPoint)
+                .toArray(Point[]::new);
     }
 
     /**
@@ -114,9 +117,10 @@ public class JTSCoordinateWriter implements IJTSCoordinateWriter {
      */
     @Override
     public LineString[] buildJTSLineStrings(List<List<LngLatAlt>> lists) {
-        return lists.stream().map(list -> buildJTSCoordinates(list))
-                .map(coordinates -> this.geometryFactory.createLineString(coordinates))
-                .toArray(size -> new LineString[size]);
+        return lists.stream()
+                .map(this::buildJTSCoordinates)
+                .map(this.geometryFactory::createLineString)
+                .toArray(LineString[]::new);
     }
 
     /**
@@ -125,8 +129,9 @@ public class JTSCoordinateWriter implements IJTSCoordinateWriter {
      */
     @Override
     public Coordinate[] buildJTSPolygonCoordinates(List<List<LngLatAlt>> lists) {
-        return lists.stream().map(list -> buildJTSCoordinates(list))
-                .toArray(size -> new Coordinate[size]);
+        return lists.stream()
+                .map(this::buildJTSCoordinates)
+                .toArray(Coordinate[]::new);
     }
 
     /**

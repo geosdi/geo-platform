@@ -1,7 +1,7 @@
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-  
+
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>csw-catalog</artifactId>
@@ -19,22 +19,22 @@
         <!-- =========================================================== -->
         <!-- ========================== REST =========================== -->
         <!-- =========================================================== -->
-        <dependency>  
+        <dependency>
             <groupId>jakarta.ws.rs</groupId>
             <artifactId>jakarta.ws.rs-api</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>jakarta.jws</groupId>
             <artifactId>jakarta.jws-api</artifactId>
         </dependency>
-        
-    	<!-- GEOPLATFORM -->
+
+        <!-- GEOPLATFORM -->
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-model</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-ws-util</artifactId>
@@ -43,14 +43,14 @@
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-sharing</artifactId>
         </dependency>
-        
+
         <!-- GUAVA -->
         <dependency>
             <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>          
+            <artifactId>guava</artifactId>
         </dependency>
-        
-		<!-- APACHE COMMONS -->
+
+        <!-- APACHE COMMONS -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -59,20 +59,20 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
         </dependency>
-        
-		<!-- logging dependencies, delegate all to slf4j and use logback -->
+
+        <!-- logging dependencies, delegate all to slf4j and use logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.codehaus.jra</groupId>
             <artifactId>jra</artifactId>
         </dependency>
-        
+
     </dependencies>
-    
+
     <build>
         <resources>
             <resource>
@@ -82,17 +82,25 @@
                 </includes>
             </resource>
         </resources>
-        
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <attach>true</attach>
+                    <classifier>sources</classifier>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
-    
 </project>

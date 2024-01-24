@@ -169,7 +169,7 @@
                 <executions>
                     <execution>
                         <id>attach-sources</id>
-                        <phase>verify</phase>
+                        <phase>deploy</phase>
                         <goals>
                             <goal>jar-no-fork</goal>
                         </goals>
@@ -183,14 +183,6 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
                 </configuration>
             </plugin>
         </plugins>

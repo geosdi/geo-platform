@@ -1092,7 +1092,7 @@
                     <artifactId>maven-source-plugin</artifactId>
                     <version>3.3.0</version>
                     <configuration>
-                        <attach>true</attach>
+                        <attach>false</attach>
                         <classifier>sources</classifier>
                     </configuration>
                     <executions>

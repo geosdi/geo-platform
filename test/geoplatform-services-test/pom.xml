@@ -41,6 +41,11 @@
     <dependencies>
 
         <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http-jetty</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-ws-csw-connector</artifactId>
             <version>${project.version}</version>

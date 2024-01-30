@@ -35,7 +35,8 @@
  */
 package org.geosdi.geoplatform.experimental.rs.security.authenticator.basic.annotation;
 
-import javax.ws.rs.NameBinding;
+import jakarta.ws.rs.NameBinding;
+
 import java.lang.annotation.*;
 
 /**

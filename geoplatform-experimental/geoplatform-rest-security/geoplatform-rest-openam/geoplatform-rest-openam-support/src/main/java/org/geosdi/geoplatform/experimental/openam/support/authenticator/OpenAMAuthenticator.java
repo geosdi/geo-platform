@@ -35,6 +35,9 @@
  */
 package org.geosdi.geoplatform.experimental.openam.support.authenticator;
 
+import jakarta.ws.rs.Priorities;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.ext.Provider;
 import org.geosdi.geoplatform.exception.NotAuthorizedFault;
 import org.geosdi.geoplatform.exception.ServerInternalFault;
 import org.geosdi.geoplatform.experimental.openam.api.annotation.GPOpenAMSupport;
@@ -46,16 +49,13 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Priority;
-import javax.ws.rs.Priorities;
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.ext.Provider;
 import java.io.IOException;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static jakarta.ws.rs.core.HttpHeaders.AUTHORIZATION;
+import static jakarta.ws.rs.core.Response.Status.UNAUTHORIZED;
+import static jakarta.ws.rs.core.Response.status;
 import static javax.annotation.meta.When.NEVER;
-import static javax.ws.rs.core.HttpHeaders.AUTHORIZATION;
-import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
-import static javax.ws.rs.core.Response.status;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -96,7 +96,7 @@ public class OpenAMAuthenticator extends BaseOpenAmAuthenticator {
      *
      * @param requestContext request context.
      * @throws IOException if an I/O exception occurs.
-     * @see javax.ws.rs.container.PreMatching
+     * @see jakarta.ws.rs.container.PreMatching
      */
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {

@@ -20,29 +20,4 @@
         <module>geoplatform-rest-openam</module>
     </modules>
 
-    <dependencyManagement>
-        <dependencies>
-            <!-- =========================================================== -->
-            <!-- ============== GEOPLATFORM JACKSON DEPENDENCY ============= -->
-            <!-- =========================================================== -->
-            <dependency>
-                <groupId>org.geosdi</groupId>
-                <artifactId>geoplatform-jackson-dependency</artifactId>
-                <type>pom</type>
-                <scope>import</scope>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>javax.annotation</groupId>
-                <artifactId>javax.annotation-api</artifactId>
-                <version>${javax.annotation.api-version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <properties>
-        <javax.annotation.api-version>1.2</javax.annotation.api-version>
-    </properties>
-
 </project>

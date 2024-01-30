@@ -35,7 +35,8 @@
  */
 package org.geosdi.geoplatform.experimental.openam.api.annotation;
 
-import javax.ws.rs.NameBinding;
+import jakarta.ws.rs.NameBinding;
+
 import java.lang.annotation.*;
 
 /**

@@ -35,9 +35,8 @@
  */
 package org.geosdi.geoplatform.experimental.rs.security.authenticator.filter;
 
+import jakarta.ws.rs.container.ContainerRequestFilter;
 import org.geosdi.geoplatform.experimental.rs.security.authenticator.GPAuthenticatorType;
-
-import javax.ws.rs.container.ContainerRequestFilter;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

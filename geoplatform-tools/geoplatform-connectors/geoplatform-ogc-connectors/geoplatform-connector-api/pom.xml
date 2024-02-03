@@ -138,17 +138,15 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <configuration>
-
                     <classifier>sources</classifier>
                 </configuration>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
-<phase>verify</phase>
-<goals>
-    <goal>jar-no-fork</goal>
-</goals>
-
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
@@ -160,7 +158,6 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
-
             </plugin>
         </plugins>
     </build>

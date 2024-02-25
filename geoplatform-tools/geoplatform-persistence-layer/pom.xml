@@ -15,7 +15,7 @@
     <name>Geo-Platform :: == Persistence Layer Module</name>
 
     <repositories>
-        <repository>
+        <!--repository>
             <id>jboss-public-repository-group</id>
             <name>JBoss Public Maven Repository Group</name>
             <url>https://repository.jboss.org/nexus/content/groups/public/</url>
@@ -28,7 +28,7 @@
                 <enabled>true</enabled>
                 <updatePolicy>never</updatePolicy>
             </snapshots>
-        </repository>
+        </repository-->
     </repositories>
 
     <dependencyManagement>
@@ -126,8 +126,8 @@
     <properties>
         <hibernate-version>6.4.4.Final</hibernate-version>
         <hibernate-commons-annotations-version>6.0.6.Final</hibernate-commons-annotations-version>
-        <spring-data-jpa-version>3.2.2</spring-data-jpa-version>
-        <hypersistence-utils.version>3.7.2</hypersistence-utils.version>
+        <spring-data-jpa-version>3.2.3</spring-data-jpa-version>
+        <hypersistence-utils.version>3.7.3</hypersistence-utils.version>
     </properties>
 
 </project>

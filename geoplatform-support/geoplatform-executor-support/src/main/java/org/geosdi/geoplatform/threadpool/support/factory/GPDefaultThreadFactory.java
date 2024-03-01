@@ -39,7 +39,7 @@ import javax.annotation.Nullable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import static java.lang.Thread.MAX_PRIORITY;
 import static java.lang.Thread.NORM_PRIORITY;
 
@@ -64,11 +64,9 @@ public class GPDefaultThreadFactory implements GPThreadFactorySupport {
      * @param thePriority
      */
     public GPDefaultThreadFactory(@Nullable String theThreadNamePrefix, @Nullable Boolean theIsDaemon, @Nullable Integer thePriority) {
-        this.threadNamePrefix = ((theThreadNamePrefix != null) && !(theThreadNamePrefix.trim().isEmpty()))
-                ? theThreadNamePrefix : "GPTaskExecutor#";
-        this.isDaemon = (theIsDaemon != null) ? theIsDaemon : FALSE;
-        this.priority = ((thePriority != null) && ((thePriority <= MAX_PRIORITY)
-                && (thePriority >= Thread.MIN_PRIORITY))) ? thePriority : NORM_PRIORITY;
+        this.threadNamePrefix = ((theThreadNamePrefix != null) && !(theThreadNamePrefix.trim().isEmpty())) ? theThreadNamePrefix : "GPTaskExecutor#";
+        this.isDaemon = (theIsDaemon != null) ? theIsDaemon : TRUE;
+        this.priority = ((thePriority != null) && ((thePriority <= MAX_PRIORITY) && (thePriority >= Thread.MIN_PRIORITY))) ? thePriority : NORM_PRIORITY;
     }
 
     /**
@@ -81,7 +79,7 @@ public class GPDefaultThreadFactory implements GPThreadFactorySupport {
      */
     @Override
     public Thread newThread(Runnable r) {
-        Thread thread = Executors.privilegedThreadFactory().newThread(r);
+        Thread thread = Executors.defaultThreadFactory().newThread(r);
         thread.setName(this.threadNamePrefix + nextThreadID());
         thread.setPriority(this.priority);
         thread.setDaemon(this.isDaemon);

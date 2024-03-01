@@ -65,7 +65,7 @@ public class GPThreadPoolSupportConfigBuilder extends GPDefaultThreadPoolConfigB
      */
     @Override
     public <ConfigBuilder extends GPThreadPoolConfigBuilder> ConfigBuilder withThreadNamePrefix(String theThreadNamePrefix) {
-        this.threadNamePrefix = ((theThreadNamePrefix != null) && !(theThreadNamePrefix.isEmpty())) ? theThreadNamePrefix : defaultThreadNamePrefix();
+        this.threadNamePrefix = ((theThreadNamePrefix != null) && !(theThreadNamePrefix.trim().isEmpty())) ? theThreadNamePrefix : defaultThreadNamePrefix();
         return self();
     }
 

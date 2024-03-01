@@ -42,7 +42,8 @@ import org.geosdi.geoplatform.threadpool.support.factory.GPDefaultThreadFactory;
 import java.util.Queue;
 import java.util.concurrent.*;
 
-import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -124,7 +125,7 @@ abstract class GPDefaultThreadPoolConfigBuilder implements GPThreadPoolConfigBui
      * @return {@link Long}
      */
     protected static Long defaultKeepAlive() {
-        return TimeUnit.SECONDS.convert(30000l, TimeUnit.MILLISECONDS);
+        return TimeUnit.SECONDS.convert(30000l, MILLISECONDS);
     }
 
     /**
@@ -138,7 +139,7 @@ abstract class GPDefaultThreadPoolConfigBuilder implements GPThreadPoolConfigBui
      * @return {@link Boolean}
      */
     protected static Boolean defaultIsDaemon() {
-        return FALSE;
+        return TRUE;
     }
 
     /**

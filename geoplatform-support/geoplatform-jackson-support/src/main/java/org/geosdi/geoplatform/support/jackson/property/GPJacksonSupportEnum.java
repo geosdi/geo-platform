@@ -53,6 +53,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 public enum GPJacksonSupportEnum implements JacksonSupportConfigFeature<ConfigFeature> {
+
     UNWRAP_ROOT_VALUE_ENABLE(TRUE) {
         @Override
         public DeserializationFeature getFeature() {
@@ -389,9 +390,7 @@ public enum GPJacksonSupportEnum implements JacksonSupportConfigFeature<ConfigFe
         public void configureMapper(ObjectMapper mapper) {
             mapper.configure(this.getFeature(), this.getValue());
         }
-    },
-    @Deprecated
-    USE_WRAPPER_NAME_AS_PROPERTY_NAME_ENABLE(TRUE) {
+    }, @Deprecated USE_WRAPPER_NAME_AS_PROPERTY_NAME_ENABLE(TRUE) {
         @Override
         public MapperFeature getFeature() {
             return MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME;
@@ -402,9 +401,7 @@ public enum GPJacksonSupportEnum implements JacksonSupportConfigFeature<ConfigFe
             mapper.configure(this.getFeature(), this.getValue());
         }
 
-    },
-    @Deprecated
-    USE_WRAPPER_NAME_AS_PROPERTY_NAME_DISABLE(FALSE) {
+    }, @Deprecated USE_WRAPPER_NAME_AS_PROPERTY_NAME_DISABLE(FALSE) {
         @Override
         public MapperFeature getFeature() {
             return MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME;

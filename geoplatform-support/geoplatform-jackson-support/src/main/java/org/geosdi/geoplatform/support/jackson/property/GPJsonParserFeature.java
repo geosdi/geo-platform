@@ -35,7 +35,7 @@
  */
 package org.geosdi.geoplatform.support.jackson.property;
 
-import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.annotation.Nonnull;
@@ -50,12 +50,12 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public enum GPJsonParserFeature implements JacksonSupportConfigFeature<JsonParser.Feature> {
+public enum GPJsonParserFeature implements JacksonSupportConfigFeature<Feature> {
 
     AUTO_CLOSE_SOURCE_ENABLE(TRUE) {
         @Override
-        public JsonParser.Feature getFeature() {
-            return JsonParser.Feature.AUTO_CLOSE_SOURCE;
+        public Feature getFeature() {
+            return Feature.AUTO_CLOSE_SOURCE;
         }
 
         @Override
@@ -65,8 +65,8 @@ public enum GPJsonParserFeature implements JacksonSupportConfigFeature<JsonParse
 
     }, AUTO_CLOSE_SOURCE_DISABLE(FALSE) {
         @Override
-        public JsonParser.Feature getFeature() {
-            return JsonParser.Feature.AUTO_CLOSE_SOURCE;
+        public Feature getFeature() {
+            return Feature.AUTO_CLOSE_SOURCE;
         }
 
         @Override
@@ -76,8 +76,8 @@ public enum GPJsonParserFeature implements JacksonSupportConfigFeature<JsonParse
 
     }, ALLOW_COMMENTS_ENABLE(TRUE) {
         @Override
-        public JsonParser.Feature getFeature() {
-            return JsonParser.Feature.ALLOW_COMMENTS;
+        public Feature getFeature() {
+            return Feature.ALLOW_COMMENTS;
         }
 
         @Override
@@ -87,8 +87,8 @@ public enum GPJsonParserFeature implements JacksonSupportConfigFeature<JsonParse
 
     }, ALLOW_COMMENTS_DISABLE(FALSE) {
         @Override
-        public JsonParser.Feature getFeature() {
-            return JsonParser.Feature.ALLOW_COMMENTS;
+        public Feature getFeature() {
+            return Feature.ALLOW_COMMENTS;
         }
 
         @Override
@@ -98,8 +98,8 @@ public enum GPJsonParserFeature implements JacksonSupportConfigFeature<JsonParse
 
     }, ALLOW_YAML_COMMENTS_ENABLE(TRUE) {
         @Override
-        public JsonParser.Feature getFeature() {
-            return JsonParser.Feature.ALLOW_YAML_COMMENTS;
+        public Feature getFeature() {
+            return Feature.ALLOW_YAML_COMMENTS;
         }
 
         @Override
@@ -109,8 +109,8 @@ public enum GPJsonParserFeature implements JacksonSupportConfigFeature<JsonParse
 
     }, ALLOW_YAML_COMMENTS_DISABLE(FALSE) {
         @Override
-        public JsonParser.Feature getFeature() {
-            return JsonParser.Feature.ALLOW_YAML_COMMENTS;
+        public Feature getFeature() {
+            return Feature.ALLOW_YAML_COMMENTS;
         }
 
         @Override
@@ -120,8 +120,8 @@ public enum GPJsonParserFeature implements JacksonSupportConfigFeature<JsonParse
 
     }, ALLOW_UNQUOTED_FIELD_NAMES_ENABLE(TRUE) {
         @Override
-        public JsonParser.Feature getFeature() {
-            return JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES;
+        public Feature getFeature() {
+            return Feature.ALLOW_UNQUOTED_FIELD_NAMES;
         }
 
         @Override
@@ -131,8 +131,8 @@ public enum GPJsonParserFeature implements JacksonSupportConfigFeature<JsonParse
 
     }, ALLOW_UNQUOTED_FIELD_NAMES_DISABLE(FALSE) {
         @Override
-        public JsonParser.Feature getFeature() {
-            return JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES;
+        public Feature getFeature() {
+            return Feature.ALLOW_UNQUOTED_FIELD_NAMES;
         }
 
         @Override
@@ -142,8 +142,8 @@ public enum GPJsonParserFeature implements JacksonSupportConfigFeature<JsonParse
 
     }, ALLOW_SINGLE_QUOTES_ENABLE(TRUE) {
         @Override
-        public JsonParser.Feature getFeature() {
-            return JsonParser.Feature.ALLOW_SINGLE_QUOTES;
+        public Feature getFeature() {
+            return Feature.ALLOW_SINGLE_QUOTES;
         }
 
         @Override
@@ -153,8 +153,8 @@ public enum GPJsonParserFeature implements JacksonSupportConfigFeature<JsonParse
 
     }, ALLOW_SINGLE_QUOTES_DISABLE(FALSE) {
         @Override
-        public JsonParser.Feature getFeature() {
-            return JsonParser.Feature.ALLOW_SINGLE_QUOTES;
+        public Feature getFeature() {
+            return Feature.ALLOW_SINGLE_QUOTES;
         }
 
         @Override
@@ -164,7 +164,7 @@ public enum GPJsonParserFeature implements JacksonSupportConfigFeature<JsonParse
 
     }, ALLOW_UNQUOTED_CONTROL_CHARS_ENABLE(TRUE) {
         @Override
-        public JsonParser.Feature getFeature() {
+        public Feature getFeature() {
             return ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature();
         }
 
@@ -175,7 +175,7 @@ public enum GPJsonParserFeature implements JacksonSupportConfigFeature<JsonParse
 
     }, ALLOW_UNQUOTED_CONTROL_CHARS_DISABLE(FALSE) {
         @Override
-        public JsonParser.Feature getFeature() {
+        public Feature getFeature() {
             return ALLOW_UNESCAPED_CONTROL_CHARS.mappedFeature();
         }
 
@@ -186,7 +186,7 @@ public enum GPJsonParserFeature implements JacksonSupportConfigFeature<JsonParse
 
     }, ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER_ENABLE(TRUE) {
         @Override
-        public JsonParser.Feature getFeature() {
+        public Feature getFeature() {
             return ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER.mappedFeature();
         }
 
@@ -197,7 +197,7 @@ public enum GPJsonParserFeature implements JacksonSupportConfigFeature<JsonParse
 
     }, ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER_DISABLE(FALSE) {
         @Override
-        public JsonParser.Feature getFeature() {
+        public Feature getFeature() {
             return ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER.mappedFeature();
         }
 
@@ -208,7 +208,7 @@ public enum GPJsonParserFeature implements JacksonSupportConfigFeature<JsonParse
 
     }, ALLOW_NUMERIC_LEADING_ZEROS_ENABLE(TRUE) {
         @Override
-        public JsonParser.Feature getFeature() {
+        public Feature getFeature() {
             return ALLOW_LEADING_ZEROS_FOR_NUMBERS.mappedFeature();
         }
 
@@ -219,7 +219,7 @@ public enum GPJsonParserFeature implements JacksonSupportConfigFeature<JsonParse
 
     }, ALLOW_NUMERIC_LEADING_ZEROS_DISABLE(FALSE) {
         @Override
-        public JsonParser.Feature getFeature() {
+        public Feature getFeature() {
             return ALLOW_LEADING_ZEROS_FOR_NUMBERS.mappedFeature();
         }
 
@@ -230,7 +230,7 @@ public enum GPJsonParserFeature implements JacksonSupportConfigFeature<JsonParse
 
     }, ALLOW_NON_NUMERIC_NUMBERS_ENABLE(TRUE) {
         @Override
-        public JsonParser.Feature getFeature() {
+        public Feature getFeature() {
             return ALLOW_NON_NUMERIC_NUMBERS.mappedFeature();
         }
 
@@ -241,7 +241,7 @@ public enum GPJsonParserFeature implements JacksonSupportConfigFeature<JsonParse
 
     }, ALLOW_NON_NUMERIC_NUMBERS_DISABLE(FALSE) {
         @Override
-        public JsonParser.Feature getFeature() {
+        public Feature getFeature() {
             return ALLOW_NON_NUMERIC_NUMBERS.mappedFeature();
         }
 
@@ -252,8 +252,8 @@ public enum GPJsonParserFeature implements JacksonSupportConfigFeature<JsonParse
 
     }, STRICT_DUPLICATE_DETECTION_ENABLE(TRUE) {
         @Override
-        public JsonParser.Feature getFeature() {
-            return JsonParser.Feature.STRICT_DUPLICATE_DETECTION;
+        public Feature getFeature() {
+            return Feature.STRICT_DUPLICATE_DETECTION;
         }
 
         @Override
@@ -263,13 +263,77 @@ public enum GPJsonParserFeature implements JacksonSupportConfigFeature<JsonParse
 
     }, STRICT_DUPLICATE_DETECTION_DISABLE(FALSE) {
         @Override
-        public JsonParser.Feature getFeature() {
-            return JsonParser.Feature.STRICT_DUPLICATE_DETECTION;
+        public Feature getFeature() {
+            return Feature.STRICT_DUPLICATE_DETECTION;
         }
 
         @Override
         public void configureMapper(ObjectMapper mapper) {
             mapper.configure(getFeature(), getValue());
+        }
+    }, USE_FAST_DOUBLE_PARSER_ENABLE(TRUE) {
+        /**
+         * @param mapper
+         */
+        @Override
+        public void configureMapper(ObjectMapper mapper) {
+            mapper.configure(getFeature(), getValue());
+        }
+
+        /**
+         * @return {@link Feature}
+         */
+        @Override
+        public Feature getFeature() {
+            return Feature.USE_FAST_DOUBLE_PARSER;
+        }
+    }, USE_FAST_DOUBLE_PARSER_DISABLE(FALSE) {
+        /**
+         * @param mapper
+         */
+        @Override
+        public void configureMapper(ObjectMapper mapper) {
+            mapper.configure(this.getFeature(), this.getValue());
+        }
+
+        /**
+         * @return {@link Feature}
+         */
+        @Override
+        public Feature getFeature() {
+            return Feature.USE_FAST_DOUBLE_PARSER;
+        }
+    }, USE_FAST_BIG_NUMBER_PARSER_ENABLE(TRUE) {
+        /**
+         * @param mapper
+         */
+        @Override
+        public void configureMapper(ObjectMapper mapper) {
+            mapper.configure(this.getFeature(), this.getValue());
+        }
+
+        /**
+         * @return {@link Feature}
+         */
+        @Override
+        public Feature getFeature() {
+            return Feature.USE_FAST_BIG_NUMBER_PARSER;
+        }
+    }, USE_FAST_BIG_NUMBER_PARSER_DISABLE(FALSE) {
+        /**
+         * @param mapper
+         */
+        @Override
+        public void configureMapper(ObjectMapper mapper) {
+            mapper.configure(this.getFeature(), this.getValue());
+        }
+
+        /**
+         * @return {@link Feature}
+         */
+        @Override
+        public Feature getFeature() {
+            return Feature.USE_FAST_BIG_NUMBER_PARSER;
         }
     };
 

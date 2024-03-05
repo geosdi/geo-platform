@@ -76,10 +76,9 @@ public interface JacksonSupport {
      */
     default <J extends JacksonSupport> J configure(@Nonnull(when = NEVER) JacksonSupportConfigFeature... features) {
         checkArgument(features != null, "The Parameter features must not be null.");
-        checkArgument(this.getDefaultMapper() != null, "The Parameter ObjectMapper must not be null.");
         fromArray(features)
                 .filter(Objects::nonNull)
-                .subscribe(f -> f.configureMapper(this.getDefaultMapper()), e -> e.printStackTrace());
+                .subscribe(this::configure, Throwable::printStackTrace);
         return (J) this;
     }
 

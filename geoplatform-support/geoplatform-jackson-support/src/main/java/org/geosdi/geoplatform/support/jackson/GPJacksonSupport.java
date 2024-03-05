@@ -57,6 +57,8 @@ import static io.reactivex.rxjava3.core.Observable.fromArray;
 import static java.lang.Boolean.TRUE;
 import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
+import static org.geosdi.geoplatform.support.jackson.property.GPJsonParserFeature.USE_FAST_BIG_NUMBER_PARSER_ENABLE;
+import static org.geosdi.geoplatform.support.jackson.property.GPJsonParserFeature.USE_FAST_DOUBLE_PARSER_ENABLE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -117,8 +119,8 @@ public class GPJacksonSupport implements JacksonSupport {
         this.mapper.setAnnotationIntrospector(useJaxbAnnotation ? new AnnotationIntrospectorPair(primary, new JaxbAnnotationIntrospector(defaultInstance())) : primary);
         fromArray(features)
                 .filter(Objects::nonNull)
-                .doOnComplete(() -> logger.info("##############{} configure all Features.", this.getProviderName()))
-                .subscribe(f -> f.configureMapper(this.mapper), Throwable::printStackTrace);
+                .doOnComplete(() -> logger.trace("##############{} configure all Features.", this.getProviderName()))
+                .subscribe(this::configure, Throwable::printStackTrace);
     }
 
     /**
@@ -178,7 +180,7 @@ public class GPJacksonSupport implements JacksonSupport {
         checkArgument(features != null, "The Parameter features must not be null.");
         fromArray(features)
                 .filter(Objects::nonNull)
-                .doOnComplete(() -> logger.info("##############{} configure all Features.", this.getProviderName()))
+                .doOnComplete(() -> logger.trace("##############{} configure all Features.", this.getProviderName()))
                 .subscribe(f -> f.configureMapper(this.getDefaultMapper()), Throwable::printStackTrace);
         return this;
     }
@@ -210,9 +212,8 @@ public class GPJacksonSupport implements JacksonSupport {
      */
     public static JacksonSupportConfigFeature[] defaultProp() {
         return new JacksonSupportConfigFeature[]{UNWRAP_ROOT_VALUE_ENABLE,
-                FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
-                ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
-                WRAP_ROOT_VALUE_ENABLE,
-                INDENT_OUTPUT_ENABLE};
+                FAIL_ON_UNKNOW_PROPERTIES_DISABLE, ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
+                WRAP_ROOT_VALUE_ENABLE, INDENT_OUTPUT_ENABLE,
+                USE_FAST_DOUBLE_PARSER_ENABLE, USE_FAST_BIG_NUMBER_PARSER_ENABLE};
     }
 }

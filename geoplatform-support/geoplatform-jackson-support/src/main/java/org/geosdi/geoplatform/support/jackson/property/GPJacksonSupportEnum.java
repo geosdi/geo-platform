@@ -390,7 +390,7 @@ public enum GPJacksonSupportEnum implements JacksonSupportConfigFeature<ConfigFe
         public void configureMapper(ObjectMapper mapper) {
             mapper.configure(this.getFeature(), this.getValue());
         }
-    }, @Deprecated USE_WRAPPER_NAME_AS_PROPERTY_NAME_ENABLE(TRUE) {
+    }, USE_WRAPPER_NAME_AS_PROPERTY_NAME_ENABLE(TRUE) {
         @Override
         public MapperFeature getFeature() {
             return MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME;
@@ -401,7 +401,7 @@ public enum GPJacksonSupportEnum implements JacksonSupportConfigFeature<ConfigFe
             mapper.configure(this.getFeature(), this.getValue());
         }
 
-    }, @Deprecated USE_WRAPPER_NAME_AS_PROPERTY_NAME_DISABLE(FALSE) {
+    }, USE_WRAPPER_NAME_AS_PROPERTY_NAME_DISABLE(FALSE) {
         @Override
         public MapperFeature getFeature() {
             return MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME;

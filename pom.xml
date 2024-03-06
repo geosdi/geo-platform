@@ -1497,7 +1497,7 @@
 
         <javax.ws.rs-api-version>2.1</javax.ws.rs-api-version>
 
-        <jibx-version>1.3.3</jibx-version>
+        <jibx-version>1.4.2</jibx-version>
 
         <aspectj-version>1.8.9</aspectj-version>
         <ubl-version>2.0</ubl-version>

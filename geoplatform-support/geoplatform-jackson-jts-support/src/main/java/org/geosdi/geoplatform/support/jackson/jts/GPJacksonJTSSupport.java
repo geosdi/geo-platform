@@ -74,7 +74,7 @@ public class GPJacksonJTSSupport extends GPJacksonSupport implements IGPJacksonJ
      * @param features
      */
     protected GPJacksonJTSSupport(@Nonnull(when = NEVER) JacksonSupportConfigFeature<?>... features) {
-        super(JAKARTA, features);
+        super(features);
         super.registerModule(new GPJTSModule());
     }
 

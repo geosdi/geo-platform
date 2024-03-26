@@ -40,7 +40,8 @@ import net.jcip.annotations.Immutable;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO.Page;
+import org.elasticsearch.search.sort.SortOrder;
+import org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO.SortablePage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -72,7 +73,7 @@ public interface GPCoupleMultiFieldSearch extends GPPageableElasticSearchDAO.Pag
 
     @ToString
     @Immutable
-    class CoupleMultiFieldSearch extends Page implements GPCoupleMultiFieldSearch {
+    class CoupleMultiFieldSearch extends SortablePage implements GPCoupleMultiFieldSearch {
 
         private static final Logger logger = LoggerFactory.getLogger(CoupleMultiFieldSearch.class);
         //
@@ -83,7 +84,7 @@ public interface GPCoupleMultiFieldSearch extends GPPageableElasticSearchDAO.Pag
          * @param theMultiFieldPageBuilders
          */
         public CoupleMultiFieldSearch(@Nonnull(when = NEVER) List<GPCoupleMultiFieldPageBuilder> theMultiFieldPageBuilders) {
-            this(0, 0, theMultiFieldPageBuilders);
+            this(null, null, 0, 0, theMultiFieldPageBuilders);
         }
 
         /**
@@ -91,8 +92,8 @@ public interface GPCoupleMultiFieldSearch extends GPPageableElasticSearchDAO.Pag
          * @param theSize
          * @param theMultiFieldPageBuilders
          */
-        public CoupleMultiFieldSearch(int theFrom, int theSize, @Nonnull(when = NEVER) List<GPCoupleMultiFieldPageBuilder> theMultiFieldPageBuilders) {
-            super(theFrom, theSize);
+        public CoupleMultiFieldSearch(String field, SortOrder sortOrder, int theFrom, int theSize, @Nonnull(when = NEVER) List<GPCoupleMultiFieldPageBuilder> theMultiFieldPageBuilders) {
+            super(field, sortOrder, theFrom, theSize);
             checkArgument((theMultiFieldPageBuilders != null) && !(theMultiFieldPageBuilders.isEmpty()), "The Parameter multiFieldPageBuilders must not be null or empty");
             this.multiFieldPageBuilders = theMultiFieldPageBuilders.stream()
                     .filter(Objects::nonNull)

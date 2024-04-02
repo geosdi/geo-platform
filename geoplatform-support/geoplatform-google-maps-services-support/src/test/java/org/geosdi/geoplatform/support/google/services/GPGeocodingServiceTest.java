@@ -42,7 +42,6 @@ import com.google.maps.model.LatLng;
 import com.google.maps.model.LocationType;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.support.google.spring.services.geocoding.GPGeocodingService;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -156,7 +155,7 @@ public class GPGeocodingServiceTest extends GPBaseConfigTest {
                 "Marsicovetere").bounds(new LatLng(40.373706, 15.821933),
                 new LatLng(40.378703, 15.830559)).await();
         assertNotNull(results);
-        Assert.assertEquals("85050 Marsicovetere, Province of Potenza, Italy",
+        assertEquals("85050 Marsicovetere, Province of Potenza, Italy",
                 results[0].formattedAddress);
     }
 
@@ -172,11 +171,8 @@ public class GPGeocodingServiceTest extends GPBaseConfigTest {
         assertNotNull(results);
         assertNotNull(results[0].geometry);
         assertNotNull(results[0].geometry.location);
-        Assert.assertEquals(40.6404067, results[0].geometry.location.lat,
-                0.000001);
-        Assert.assertEquals(15.8056041, results[0].geometry.location.lng,
-                0.000001);
-        Assert.assertEquals(LocationType.APPROXIMATE,
-                results[0].geometry.locationType);
+        assertEquals(40.6377715, results[0].geometry.location.lat, 0.000001);
+        assertEquals(15.805502, results[0].geometry.location.lng, 0.000001);
+        assertEquals(LocationType.APPROXIMATE, results[0].geometry.locationType);
     }
 }

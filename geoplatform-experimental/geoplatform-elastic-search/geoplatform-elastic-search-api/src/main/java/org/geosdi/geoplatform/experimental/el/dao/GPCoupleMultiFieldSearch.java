@@ -114,7 +114,7 @@ public interface GPCoupleMultiFieldSearch extends GPPageableElasticSearchDAO.Pag
             fromIterable(this.multiFieldPageBuilders)
                     .filter(Objects::nonNull)
                     .doOnComplete(() ->  logger.trace("####################{} - Create Query: \n{} \n\n", getClass().getSimpleName(), this.queryBuilder.toString()))
-                    .subscribe(value -> this.internalBuildPage(value, builder));
+                    .subscribe(value -> this.internalBuildPage(value, builder), Throwable::printStackTrace);
             return (Builder) super.buildPage(builder.setQuery(this.queryBuilder));
         }
 
@@ -131,7 +131,7 @@ public interface GPCoupleMultiFieldSearch extends GPPageableElasticSearchDAO.Pag
             fromIterable(this.multiFieldPageBuilders)
                     .filter(Objects::nonNull)
                     .doOnComplete(() ->  logger.trace("####################{} - RX COMPLETE Create Query: \n{} \n\n", getClass().getSimpleName(), this.queryBuilder.toString()))
-                    .subscribe(value -> this.internalBuildPage(value, builder));
+                    .subscribe(value -> this.internalBuildPage(value, builder), Throwable::printStackTrace);
             return (Builder) super.buildPage(builder.query(this.queryBuilder));
         }
 
@@ -153,7 +153,7 @@ public interface GPCoupleMultiFieldSearch extends GPPageableElasticSearchDAO.Pag
             fromIterable(this.multiFieldPageBuilders)
                     .filter(Objects::nonNull)
                     .doOnComplete(() ->  logger.trace("####################{} - Create Query: \n{} \n\n", getClass().getSimpleName(), this.queryBuilder.toString()))
-                    .subscribe(value -> this.internalBuildPage(value, new SearchSourceBuilder()));
+                    .subscribe(value -> this.internalBuildPage(value, new SearchSourceBuilder()), Throwable::printStackTrace);
             return boolQueryBuilder().toString();
         }
 

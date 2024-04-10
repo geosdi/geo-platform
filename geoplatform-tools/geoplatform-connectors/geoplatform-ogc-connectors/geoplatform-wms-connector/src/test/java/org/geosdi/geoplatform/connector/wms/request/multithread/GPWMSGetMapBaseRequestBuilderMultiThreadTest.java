@@ -110,8 +110,7 @@ public class GPWMSGetMapBaseRequestBuilderMultiThreadTest {
          * @param theDoneSignal
          * @param theCounter
          */
-        GPWMSGetMapBaseRequestBuilderTask(@Nonnull(when = NEVER) String theURL, @Nonnull(when = NEVER) CountDownLatch theStartSignal,
-                @Nonnull(when = NEVER) CountDownLatch theDoneSignal, @Nonnull(when = NEVER) AtomicInteger theCounter) {
+        GPWMSGetMapBaseRequestBuilderTask(@Nonnull(when = NEVER) String theURL, @Nonnull(when = NEVER) CountDownLatch theStartSignal, @Nonnull(when = NEVER) CountDownLatch theDoneSignal, @Nonnull(when = NEVER) AtomicInteger theCounter) {
             checkArgument((theURL != null) && !(theURL.trim().isEmpty()), "The Parameter url must not be null or an empty string.");
             checkArgument(theStartSignal != null, "The Parameter startSignal must not be null.");
             checkArgument(theDoneSignal != null, "The Parameter doneSignal must not be null.");

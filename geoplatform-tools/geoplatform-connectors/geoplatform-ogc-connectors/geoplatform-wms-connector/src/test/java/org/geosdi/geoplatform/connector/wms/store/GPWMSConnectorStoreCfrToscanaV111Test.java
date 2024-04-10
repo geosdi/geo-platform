@@ -85,7 +85,7 @@ public class GPWMSConnectorStoreCfrToscanaV111Test {
     public void a_wmsDescribeLayerV11Test() throws Exception {
         GPWMSDescribeLayerV111Request wmsDescribeLayerRequest = wmsServerConnector.createDescribeLayerRequest();
         logger.info("##########################WMS_DESCRIBE_LAYER_RESPONSE_V111 : {}\n", wmsDescribeLayerRequest
-                .withLayers("geo:cf_distretti", "\tgeo:sir_frea_oscillazioni_2019_2021", "geo:sir_frea_trend_2019_2021").getResponse());
+                .withLayers("geo:cf_distretti", "geo:sir_frea_oscillazioni_2019_2021", "geo:sir_frea_trend_2019_2021").getResponse());
     }
 
     @Test

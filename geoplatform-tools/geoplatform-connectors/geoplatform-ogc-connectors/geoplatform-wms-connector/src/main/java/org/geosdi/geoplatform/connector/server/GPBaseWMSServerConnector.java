@@ -80,8 +80,7 @@ public abstract class GPBaseWMSServerConnector<WMSGetCapabilities extends GPWMSG
      * @param securityConnector
      * @param version
      */
-    protected GPBaseWMSServerConnector(@Nonnull(when = NEVER) String urlServer, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
-            @Nullable GPSecurityConnector securityConnector, @Nonnull(when = NEVER) WMSVersion version) {
+    protected GPBaseWMSServerConnector(@Nonnull(when = NEVER) String urlServer, @Nullable GPPooledConnectorConfig pooledConnectorConfig, @Nullable GPSecurityConnector securityConnector, @Nonnull(when = NEVER) WMSVersion version) {
         this(analyzesServerURL(urlServer), pooledConnectorConfig, securityConnector, version);
     }
 
@@ -100,8 +99,7 @@ public abstract class GPBaseWMSServerConnector<WMSGetCapabilities extends GPWMSG
      * @param securityConnector
      * @param theVersion
      */
-    protected GPBaseWMSServerConnector(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
-            @Nullable GPSecurityConnector securityConnector, @Nonnull(when = NEVER) WMSVersion theVersion) {
+    protected GPBaseWMSServerConnector(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig, @Nullable GPSecurityConnector securityConnector, @Nonnull(when = NEVER) WMSVersion theVersion) {
         super(server, securityConnector, pooledConnectorConfig);
         checkArgument(theVersion != null, "The Parameter version must not be null.");
         this.version = theVersion;
@@ -113,9 +111,7 @@ public abstract class GPBaseWMSServerConnector<WMSGetCapabilities extends GPWMSG
      * @param securityConnector
      * @param theVersion
      */
-    protected GPBaseWMSServerConnector(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig,
-            @Nullable GPSecurityConnector securityConnector, @Nullable SSLConnectionSocketFactory theSSLConnectionSocketFactory,
-            @Nonnull(when = NEVER) WMSVersion theVersion) {
+    protected GPBaseWMSServerConnector(@Nonnull(when = NEVER) URL server, @Nullable GPPooledConnectorConfig pooledConnectorConfig, @Nullable GPSecurityConnector securityConnector, @Nullable SSLConnectionSocketFactory theSSLConnectionSocketFactory, @Nonnull(when = NEVER) WMSVersion theVersion) {
         super(server, securityConnector, pooledConnectorConfig, theSSLConnectionSocketFactory);
         checkArgument(theVersion != null, "The Parameter version must not be null.");
         this.version = theVersion;

@@ -272,7 +272,6 @@ public abstract class GPAbstractServerConnector implements GPServerConnector {
                 .setDefaultRequestConfig(RequestConfig.custom()
                         .setConnectionRequestTimeout(this.pooledConnectorConfig.getRequestConnectionTimeout())
                         .setConnectionKeepAlive(this.pooledConnectorConfig.getConnectionKeepAlive())
-                        .setMaxRedirects(this.pooledConnectorConfig.getMaxRedirect())
                         .setRedirectsEnabled(this.pooledConnectorConfig.isRedirectsEnabled())
                         .setMaxRedirects(this.pooledConnectorConfig.getMaxRedirect())
                         .setCookieSpec(this.pooledConnectorConfig.getCookieSpec().toCookieSpec())

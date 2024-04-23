@@ -35,9 +35,13 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
+import com.google.common.io.CharStreams;
+import org.apache.commons.io.IOUtils;
 import org.apache.hc.client5.http.auth.CredentialsStore;
 import org.apache.hc.client5.http.config.RequestConfig;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.core5.http.ClassicHttpResponse;
+import org.apache.hc.core5.http.HttpEntity;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.ResourceNotFoundException;
 import org.geosdi.geoplatform.connector.server.exception.UnauthorizedException;
@@ -46,8 +50,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
 
+import static com.google.common.base.Charsets.UTF_8;
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
 import static org.apache.hc.client5.http.config.RequestConfig.custom;
@@ -148,4 +156,59 @@ public abstract class GPAbstractConnectorRequest<T> implements GPConnectorReques
     public CredentialsStore getCredentialsStore() {
         return this.credentialStore;
     }
+
+    /**
+     * @param httpResponse
+     * @return {@link T}
+     */
+    protected T internalResponseAsEntity(ClassicHttpResponse httpResponse) {
+        int statusCode = httpResponse.getCode();
+        logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
+        try {
+            this.checkHttpResponseStatus(statusCode);
+            HttpEntity responseEntity = httpResponse.getEntity();
+            return ((statusCode == 204) || (responseEntity == null)) ? null : this.readInternal(responseEntity.getContent());
+        } catch (Exception ex) {
+            throw new IllegalStateException(ex);
+        }
+    }
+
+    /**
+     * @param httpResponse
+     * @return {@link String}
+     */
+    protected String internalResponseAsString(ClassicHttpResponse httpResponse) {
+        int statusCode = httpResponse.getCode();
+        logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
+        try {
+            this.checkHttpResponseStatus(statusCode);
+            HttpEntity responseEntity = httpResponse.getEntity();
+            return statusCode == 204 || responseEntity == null ? "" : CharStreams.toString(new InputStreamReader(responseEntity.getContent(), UTF_8));
+        } catch (Exception ex) {
+            throw new IllegalStateException(ex);
+        }
+    }
+
+    /**
+     * @param httpResponse
+     * @return {@link InputStream}
+     */
+    protected InputStream internalResponseAsStream(ClassicHttpResponse httpResponse) {
+        int statusCode = httpResponse.getCode();
+        logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
+        try {
+            this.checkHttpResponseStatus(statusCode);
+            HttpEntity responseEntity = httpResponse.getEntity();
+            return statusCode == 204 || responseEntity == null ? null : new ByteArrayInputStream(IOUtils.toByteArray(responseEntity.getContent()));
+        } catch (Exception ex) {
+            throw new IllegalStateException(ex);
+        }
+    }
+
+    /**
+     * @param inputStream
+     * @return {@link T}
+     * @throws Exception
+     */
+    protected abstract T readInternal(@Nonnull(when = NEVER) InputStream inputStream) throws Exception;
 }

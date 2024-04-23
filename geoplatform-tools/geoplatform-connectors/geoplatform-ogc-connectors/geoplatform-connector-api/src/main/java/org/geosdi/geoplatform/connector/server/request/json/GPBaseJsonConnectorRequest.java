@@ -35,9 +35,8 @@
  */
 package org.geosdi.geoplatform.connector.server.request.json;
 
-import com.google.common.io.CharStreams;
 import org.apache.hc.client5.http.classic.methods.HttpUriRequest;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.core5.http.ClassicHttpResponse;
 import org.apache.hc.core5.http.HttpEntity;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.IncorrectResponseException;
@@ -46,15 +45,11 @@ import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import static com.google.common.base.Charsets.UTF_8;
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
-import static org.apache.commons.io.IOUtils.toByteArray;
-import static org.apache.hc.core5.http.io.entity.EntityUtils.consume;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -84,20 +79,7 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest, Connector
         HttpUriRequest httpMethod = this.prepareHttpMethod();
         this.addHeaderParams(httpMethod);
         logger.debug("#############################Executing -------------> {}\n", httpMethod.getUri().toString());
-        CloseableHttpResponse httpResponse = this.securityConnector.secure(this, httpMethod);
-        int statusCode = httpResponse.getCode();
-        logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
-        this.checkHttpResponseStatus(statusCode);
-        HttpEntity responseEntity = httpResponse.getEntity();
-        try  {
-            return (((statusCode == 204) || (responseEntity == null)) ? null : this.readInternal(new BufferedReader(new InputStreamReader(responseEntity.getContent(), UTF_8_CHARSERT))));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            throw new IncorrectResponseException(ex);
-        } finally {
-            consume(responseEntity);
-            httpResponse.close();
-        }
+        return this.securityConnector.secure(this, httpMethod, this::internalResponseAsEntity);
     }
 
     /**
@@ -113,17 +95,7 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest, Connector
         HttpUriRequest httpMethod = this.prepareHttpMethod();
         this.addHeaderParams(httpMethod);
         logger.debug("#############################Executing -------------> {}\n", httpMethod.getUri().toString());
-        CloseableHttpResponse httpResponse = this.securityConnector.secure(this, httpMethod);
-        int statusCode = httpResponse.getCode();
-        logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
-        this.checkHttpResponseStatus(statusCode);
-        HttpEntity responseEntity = httpResponse.getEntity();
-        try {
-            return statusCode == 204 || responseEntity == null ? "" : CharStreams.toString(new InputStreamReader(responseEntity.getContent(), UTF_8));
-        } finally {
-            consume(responseEntity);
-            httpResponse.close();
-        }
+        return this.securityConnector.secure(this, httpMethod, this::internalResponseAsString);
     }
 
     /**
@@ -139,17 +111,7 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest, Connector
         HttpUriRequest httpMethod = this.prepareHttpMethod();
         this.addHeaderParams(httpMethod);
         logger.debug("#############################Executing -------------> {}\n", httpMethod.getUri().toString());
-        CloseableHttpResponse httpResponse = this.securityConnector.secure(this, httpMethod);
-        int statusCode = httpResponse.getCode();
-        logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
-        this.checkHttpResponseStatus(statusCode);
-        HttpEntity responseEntity = httpResponse.getEntity();
-        try {
-            return statusCode == 204 || responseEntity == null ? null : new ByteArrayInputStream(toByteArray(responseEntity.getContent()));
-        } finally {
-            consume(responseEntity);
-            httpResponse.close();
-        }
+        return this.securityConnector.secure(this, httpMethod, this::internalResponseAsStream);
     }
 
     /**
@@ -180,10 +142,38 @@ abstract class GPBaseJsonConnectorRequest<T, H extends HttpUriRequest, Connector
     }
 
     /**
+     * @param inputStream
+     * @return {@link T}
+     * @throws Exception
+     */
+    @Override
+    protected T readInternal(@Nonnull(when = NEVER) InputStream inputStream) throws Exception {
+        checkArgument(inputStream != null, "The Parameter inputStream must not be null.");
+        return this.readInternal(new BufferedReader(new InputStreamReader(inputStream, UTF_8_CHARSERT)));
+    }
+
+    /**
      * @return {@link ConnectorRequest}
      */
     protected ConnectorRequest self() {
         return (ConnectorRequest) this;
+    }
+
+    /**
+     * @param httpResponse
+     * @return {@link T}
+     */
+    protected T internalResponseAsEntity(ClassicHttpResponse httpResponse) {
+        int statusCode = httpResponse.getCode();
+        logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
+        try  {
+            this.checkHttpResponseStatus(statusCode);
+            HttpEntity responseEntity = httpResponse.getEntity();
+            return (((statusCode == 204) || (responseEntity == null)) ? null : this.readInternal(new BufferedReader(new InputStreamReader(responseEntity.getContent(), UTF_8_CHARSERT))));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new IncorrectResponseException(ex);
+        }
     }
 
     /**

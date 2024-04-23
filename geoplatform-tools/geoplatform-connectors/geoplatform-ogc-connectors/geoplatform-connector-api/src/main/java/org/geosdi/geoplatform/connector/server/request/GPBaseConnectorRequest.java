@@ -35,11 +35,7 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import com.google.common.io.CharStreams;
-import org.apache.commons.io.IOUtils;
 import org.apache.hc.client5.http.classic.methods.HttpUriRequest;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
-import org.apache.hc.core5.http.HttpEntity;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 import org.geosdi.geoplatform.connector.server.exception.IncorrectResponseException;
 
@@ -48,14 +44,11 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import static com.google.common.base.Charsets.UTF_8;
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
-import static org.apache.hc.core5.http.io.entity.EntityUtils.consume;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -77,17 +70,7 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
     @Override
     public T getResponse() throws Exception {
         HttpUriRequest httpUriRequest = this.prepareHttpMethod();
-        CloseableHttpResponse httpResponse = this.securityConnector.secure(this, httpUriRequest);
-        int statusCode = httpResponse.getCode();
-        logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
-        this.checkHttpResponseStatus(statusCode);
-        HttpEntity responseEntity = httpResponse.getEntity();
-        try {
-            return statusCode == 204 || responseEntity == null ? null : this.readInternal(responseEntity.getContent());
-        } finally {
-            consume(responseEntity);
-            httpResponse.close();
-        }
+        return this.securityConnector.secure(this, httpUriRequest, this::internalResponseAsEntity);
     }
 
     /**
@@ -97,17 +80,7 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
     @Override
     public String getResponseAsString() throws Exception {
         HttpUriRequest httpUriRequest = this.prepareHttpMethod();
-        CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpUriRequest);
-        int statusCode = httpResponse.getCode();
-        logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
-        this.checkHttpResponseStatus(statusCode);
-        HttpEntity responseEntity = httpResponse.getEntity();
-        try {
-            return statusCode == 204 || responseEntity == null ? "" : CharStreams.toString(new InputStreamReader(responseEntity.getContent(), UTF_8));
-        } finally {
-            consume(responseEntity);
-            httpResponse.close();
-        }
+        return super.securityConnector.secure(this, httpUriRequest, this::internalResponseAsString);
     }
 
     /**
@@ -117,17 +90,7 @@ abstract class GPBaseConnectorRequest<T, H extends HttpUriRequest> extends GPAbs
     @Override
     public InputStream getResponseAsStream() throws Exception {
         HttpUriRequest httpUriRequest = this.prepareHttpMethod();
-        CloseableHttpResponse httpResponse = super.securityConnector.secure(this, httpUriRequest);
-        int statusCode = httpResponse.getCode();
-        logger.debug("###############################STATUS_CODE : {} for Request : {}\n", statusCode, this.getClass().getSimpleName());
-        this.checkHttpResponseStatus(statusCode);
-        HttpEntity responseEntity = httpResponse.getEntity();
-        try {
-            return statusCode == 204 || responseEntity == null ? null : new ByteArrayInputStream(IOUtils.toByteArray(responseEntity.getContent()));
-        } finally {
-            consume(responseEntity);
-            httpResponse.close();
-        }
+        return super.securityConnector.secure(this, httpUriRequest, this::internalResponseAsStream);
     }
 
     /**

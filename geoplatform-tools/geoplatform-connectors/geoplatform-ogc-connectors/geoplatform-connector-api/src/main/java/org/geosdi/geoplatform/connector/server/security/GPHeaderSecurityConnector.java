@@ -37,7 +37,7 @@ package org.geosdi.geoplatform.connector.server.security;
 
 import net.jcip.annotations.Immutable;
 import org.apache.hc.client5.http.classic.methods.HttpUriRequest;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.core5.http.io.HttpClientResponseHandler;
 import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,17 +73,18 @@ public class GPHeaderSecurityConnector implements GPSecurityConnector {
      *
      * @param connectorRequest
      * @param httpRequest
-     * @return CloseableHttpResponse
+     * @return T
      * @throws {@link IOException}
      */
     @Override
-    public <C extends GPConnectorRequest, H extends HttpUriRequest> CloseableHttpResponse secure(@Nonnull(when = NEVER) C connectorRequest, @Nonnull(when = NEVER) H httpRequest) throws IOException {
+    public <C extends GPConnectorRequest, H extends HttpUriRequest, T> T secure(@Nonnull(when = NEVER) C connectorRequest, @Nonnull(when = NEVER) H httpRequest, @Nonnull(when = NEVER) HttpClientResponseHandler<T> responseHandler) throws IOException {
         checkArgument(connectorRequest != null, "The Parameter connectorRequest must not be null.");
         checkArgument(httpRequest != null, "The Parameter httpRequest must not be null.");
+        checkArgument(responseHandler != null, "The Parameter responseHandler must not be null.");
         logger.debug("#########################{} is injecting values {} in Header Request.\n", this.getClass().getSimpleName(), this.headerParams);
         this.headerParams.entrySet()
                 .stream()
                 .forEach(entry -> httpRequest.addHeader(entry.getKey(), entry.getValue()));
-        return connectorRequest.getClientConnection().execute(httpRequest);
+        return connectorRequest.getClientConnection().execute(httpRequest, responseHandler);
     }
 }

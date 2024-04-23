@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.server.security;
 
 import org.apache.hc.client5.http.classic.methods.HttpUriRequest;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.core5.http.io.HttpClientResponseHandler;
 import org.geosdi.geoplatform.connector.server.request.GPConnectorRequest;
 
 import javax.annotation.Nonnull;
@@ -64,14 +64,15 @@ public class DefaultSecurityConnector extends AbstractSecurityConnector {
      * @param httpRequest
      * @param <C>
      * @param <H>
-     * @return {@link CloseableHttpResponse}
+     * @return {@link T}
      * @throws IOException
      */
     @Override
-    public <C extends GPConnectorRequest, H extends HttpUriRequest> CloseableHttpResponse secure(@Nonnull(when = NEVER) C connectorRequest, @Nonnull(when = NEVER) H httpRequest) throws IOException {
+    public <C extends GPConnectorRequest, H extends HttpUriRequest, T> T secure(@Nonnull(when = NEVER) C connectorRequest, @Nonnull(when = NEVER) H httpRequest, @Nonnull(when = NEVER) HttpClientResponseHandler<T> responseHandler) throws IOException {
         checkArgument(connectorRequest != null, "The Parameter connectorRequest must not be null.");
         checkArgument(httpRequest != null, "The Parameter httpRequest must not be null.");
+        checkArgument(responseHandler != null, "The Parameter responseHandler must not be null.");
         super.bindCredentials(connectorRequest.getCredentialsStore(), connectorRequest.getURI());
-        return connectorRequest.getClientConnection().execute(httpRequest);
+        return connectorRequest.getClientConnection().execute(httpRequest, responseHandler);
     }
 }

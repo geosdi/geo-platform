@@ -37,6 +37,8 @@ package org.geosdi.geoplatform.support.mail.spring.jasypt.placeholder;
 
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.spring31.properties.EncryptablePropertySourcesPlaceholderConfigurer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -53,6 +55,8 @@ import static java.lang.Boolean.TRUE;
 @Configuration
 class GPMailPlaceholderConfig {
 
+    private static final Logger logger = LoggerFactory.getLogger(GPMailPlaceholderConfig.class);
+    //
     private static final PlaceholderMailResourcesLoader placeholderResourcesLoader = new PlaceholderMailResourcesLoader();
 
     /**
@@ -66,6 +70,7 @@ class GPMailPlaceholderConfig {
     public static EncryptablePropertySourcesPlaceholderConfigurer gpMailPropertyConfigurer(@Qualifier(value = "gpMailPooledPBEStringEncryptor") PooledPBEStringEncryptor gpMailPooledPBEStringEncryptor,
             @Value("#{systemProperties['GP_DATA_DIR']}") String gpConfigDataDir,
             @Value("#{systemProperties['GP_MAIL_FILE_PROP']}") String gpMailFileProp) throws MalformedURLException {
+        logger.trace("#########################GP_DATA_DIR : {} - GP_MAIL_FILE_PROP : {}\n", gpConfigDataDir, gpMailFileProp);
         EncryptablePropertySourcesPlaceholderConfigurer gpMPC = new EncryptablePropertySourcesPlaceholderConfigurer(gpMailPooledPBEStringEncryptor);
         gpMPC.setPlaceholderPrefix("gpMailConfigurator{");
         gpMPC.setPlaceholderSuffix("}");

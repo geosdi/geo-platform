@@ -37,22 +37,22 @@ package org.geosdi.geoplatform.support.mail.freemarker;
 
 import freemarker.template.Configuration;
 import jakarta.annotation.Resource;
-import jakarta.mail.internet.MimeMessage;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.geosdi.geoplatform.support.mail.configuration.detail.GPMailDetail;
+import org.geosdi.geoplatform.support.mail.configuration.properties.SMTPMailProperties;
 import org.geosdi.geoplatform.support.mail.loader.GPMailLoader;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
+import static java.lang.Boolean.TRUE;
 import static java.lang.System.clearProperty;
 import static java.lang.System.setProperty;
 import static org.junit.Assert.assertNotNull;
@@ -73,6 +73,8 @@ public class GPFreeMarkerTemplateSenderTest {
     //
     @Resource(name = "gpMailSpringDetail")
     private GPMailDetail gpMailSpringDetail;
+    @Resource(name = "smtpMailSpringProperties")
+    private SMTPMailProperties smtpMailSpringProperties;
     @Resource(name = "gpMailSpringSender")
     private JavaMailSender gpMailSpringSender;
     @Resource(name = "gpFreeMarkerConfiguration")
@@ -92,6 +94,7 @@ public class GPFreeMarkerTemplateSenderTest {
     public void setUp() {
         assertNotNull(logger);
         assertNotNull(gpMailSpringDetail);
+        assertNotNull(smtpMailSpringProperties);
         assertNotNull(gpMailSpringSender);
         assertNotNull(freeMarkerConfiguration);
     }
@@ -99,27 +102,21 @@ public class GPFreeMarkerTemplateSenderTest {
     @Test
     public void gpMailDetailTest() {
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@Mail Detail : {}", gpMailSpringDetail);
+        logger.info("{}\n", this.smtpMailSpringProperties);
     }
 
     @Test
     @Ignore(value = "Too Mails from Hudson / Jenkins")
     public void sendMailWithFreeMarkerSupport() throws InterruptedException {
-        this.gpMailSpringSender.send(new MimeMessagePreparator() {
-
-            @Override
-            public void prepare(MimeMessage mimeMessage) throws Exception {
-                MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
-                message.setSubject("geoSDI Notification FreeMarker Support");
-                message.setTo(new String[]{"vito.salvia@gmail.com", "glascaleia@gmail.com"});
-                String text = FreeMarkerTemplateUtils.processTemplateIntoString(freeMarkerConfiguration
-                        .getTemplate("geoPlatformMailSupport.fm"), null);
-                message.setText(text, Boolean.TRUE);
-                message.setFrom(gpMailSpringDetail.getFrom(),
-                        gpMailSpringDetail.getFromName());
-                message.setReplyTo(gpMailSpringDetail.getReplayTo(),
-                        gpMailSpringDetail.getReplayToName());
-            }
-
+        this.gpMailSpringSender.send(mimeMessage -> {
+            MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
+            message.setSubject("geoSDI Notification FreeMarker Support");
+            message.setTo(new String[]{"vito.salvia@gmail.com", "glascaleia@gmail.com"});
+            String text = FreeMarkerTemplateUtils.processTemplateIntoString(freeMarkerConfiguration
+                    .getTemplate("geoPlatformMailSupport.fm"), null);
+            message.setText(text, TRUE);
+            message.setFrom(gpMailSpringDetail.getFrom(), gpMailSpringDetail.getFromName());
+            message.setReplyTo(gpMailSpringDetail.getReplayTo(), gpMailSpringDetail.getReplayToName());
         });
     }
 }

@@ -71,8 +71,8 @@ class GPSpringVelocityEngineConfig {
             throws VelocityException, IOException {
         logger.debug("\n\n@@@@@@@@@@@@@@@@@@@CONFIGURING VELOCITY POOL PARSER with : {}\n\n", gpVelocityParserPollSize);
         VelocityEngine velocityEngine = new VelocityEngine();
-        velocityEngine.addProperty("resource.loader", "class");
-        velocityEngine.addProperty("class.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+        velocityEngine.addProperty("resource.loaders", "class");
+        velocityEngine.addProperty("resource.loader.class.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
         velocityEngine.addProperty("parser.pool.class", "org.apache.velocity.runtime.ParserPoolImpl");
         velocityEngine.addProperty("parser.pool.size", gpVelocityParserPollSize.getPoolSize());
         velocityEngine.init();

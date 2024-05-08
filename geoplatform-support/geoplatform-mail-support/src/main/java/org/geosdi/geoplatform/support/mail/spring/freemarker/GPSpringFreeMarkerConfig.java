@@ -45,6 +45,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import static freemarker.template.TemplateExceptionHandler.RETHROW_HANDLER;
+import static java.lang.Boolean.FALSE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -70,7 +71,7 @@ class GPSpringFreeMarkerConfig {
         freeMarkerConfiguration.setTemplateLoader(new ClassTemplateLoader(Thread.currentThread().getContextClassLoader(), gpFreeMarkerConfigLocation.getFreeMarkerConfigLocation()));
         freeMarkerConfiguration.setDefaultEncoding("UTF-8");
         freeMarkerConfiguration.setTemplateExceptionHandler(RETHROW_HANDLER);
-        freeMarkerConfiguration.setLogTemplateExceptions(Boolean.FALSE);
+        freeMarkerConfiguration.setLogTemplateExceptions(FALSE);
         return freeMarkerConfiguration;
     }
 }

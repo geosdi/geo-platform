@@ -41,6 +41,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -89,7 +91,7 @@ class SMTPMailSpringProperties implements SMTPMailProperties {
 
     @Override
     public Boolean isDebugEnable() {
-        return this.debug = (this.debug != null) ? this.debug : Boolean.FALSE;
+        return this.debug = (this.debug != null) ? this.debug : FALSE;
     }
 
     @Override
@@ -104,17 +106,17 @@ class SMTPMailSpringProperties implements SMTPMailProperties {
 
     @Override
     public Boolean isSmtpSslEnable() {
-        return this.smtpSsl = (this.smtpSsl != null) ? this.smtpSsl : Boolean.TRUE;
+        return this.smtpSsl = (this.smtpSsl != null) ? this.smtpSsl : TRUE;
     }
 
     @Override
     public Boolean isSmtpStarttlsEnable() {
-        return this.smtpStarttls = (this.smtpStarttls != null) ? this.smtpStarttls : Boolean.TRUE;
+        return this.smtpStarttls = (this.smtpStarttls != null) ? this.smtpStarttls : TRUE;
     }
 
     @Override
     public Boolean isSmtpAuth() {
-        return this.smtpAuth = (this.smtpAuth != null) ? this.smtpAuth : Boolean.TRUE;
+        return this.smtpAuth = (this.smtpAuth != null) ? this.smtpAuth : TRUE;
     }
 
     @Override

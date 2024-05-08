@@ -52,7 +52,10 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 import javax.annotation.Resource;
 import java.io.StringWriter;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+
+import static java.lang.Boolean.TRUE;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -68,7 +71,7 @@ public class SMTPMailSpringPropertiesTest {
     static Logger logger;
     //
     static final String GP_MAIL_KEY = "GP_MAIL_FILE_PROP";
-
+    //
     @Resource(name = "gpMailSpringDetail")
     private GPMailDetail gpMailSpringDetail;
     @Resource(name = "gpMailSpringSender")
@@ -106,18 +109,14 @@ public class SMTPMailSpringPropertiesTest {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage);
             message.setSubject("Notification");
             message.setTo("core@geosdi.org");
-            VelocityContext velocityContext = new VelocityContext(new HashMap());
+            VelocityContext velocityContext = new VelocityContext(new LinkedHashMap<>());
             StringWriter writer = new StringWriter();
             gpSpringVelocityEngine.mergeTemplate("template/"
                     + "geoPlatformMailSupport.html.vm", "UTF-8", velocityContext, writer);
             String text = writer.toString();
-            message.setText(text, Boolean.TRUE);
-            message.setFrom(gpMailSpringDetail.getFrom(),
-                    gpMailSpringDetail.getFromName());
-            message.setReplyTo(gpMailSpringDetail.getReplayTo(),
-                    gpMailSpringDetail.getReplayToName());
-
+            message.setText(text, TRUE);
+            message.setFrom(gpMailSpringDetail.getFrom(), gpMailSpringDetail.getFromName());
+            message.setReplyTo(gpMailSpringDetail.getReplayTo(), gpMailSpringDetail.getReplayToName());
         });
     }
-
 }

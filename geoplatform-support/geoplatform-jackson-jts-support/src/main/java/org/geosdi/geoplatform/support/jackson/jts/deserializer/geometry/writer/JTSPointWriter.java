@@ -40,6 +40,7 @@ import org.geojson.Point;
 import javax.annotation.Nonnull;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Boolean.TRUE;
 import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.support.jackson.jts.deserializer.geometry.writer.bridge.implementor.JTSGeometryWriterImplementor.JTSGeometryWriterImplementorKey.forClass;
 
@@ -70,7 +71,7 @@ public class JTSPointWriter extends JTSBaseWriter<Point, org.locationtech.jts.ge
      */
     @Override
     public Boolean isValid() {
-        return Boolean.TRUE;
+        return TRUE;
     }
 
     /**

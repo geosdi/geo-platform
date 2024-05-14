@@ -110,8 +110,8 @@ public abstract class GPGeoserverCoveragesConnector extends GPStructuredCoverage
     @Override
     public GeoserverLoadCoveragesRequest loadWorkspaceCoveragesRequest() {
         switch (version) {
-            case V23x:
             case V24x:
+            case V25x:
                 return new GPGeoserverLoadCoveragesRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -124,8 +124,8 @@ public abstract class GPGeoserverCoveragesConnector extends GPStructuredCoverage
     @Override
     public GeoserverLoadCoverageRequest loadWorkspaceCoverageRequest() {
         switch (version) {
-            case V23x:
             case V24x:
+            case V25x:
                 return new GPGeoserverLoadCoverageRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -138,8 +138,8 @@ public abstract class GPGeoserverCoveragesConnector extends GPStructuredCoverage
     @Override
     public GeoserverLoadStoreCoverageRequest loadWorkspaceStoreCoverageRequest() {
         switch (version) {
-            case V23x:
             case V24x:
+            case V25x:
                 return new GPGeoserverLoadStoreCoverageRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -152,8 +152,8 @@ public abstract class GPGeoserverCoveragesConnector extends GPStructuredCoverage
     @Override
     public GeoserverLoadCoverageWithUrlRequest loadCoverageInfoWithUrl() {
         switch (version) {
-            case V23x:
             case V24x:
+            case V25x:
                 return new GPGeoserverLoadCoverageWithUrlRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -166,8 +166,8 @@ public abstract class GPGeoserverCoveragesConnector extends GPStructuredCoverage
     @Override
     public GeoserverDeleteCoverageRequest deleteCoverageInCoverageStoreRequest() {
         switch (version) {
-            case V23x:
             case V24x:
+            case V25x:
                 return new GPGeoserverDeleteCoverageRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -179,8 +179,8 @@ public abstract class GPGeoserverCoveragesConnector extends GPStructuredCoverage
      */
     public GeoserverUpdateCoverageStoreRequest updateStoreCoverageRequest() {
         switch (version) {
-            case V23x:
             case V24x:
+            case V25x:
                 return new GPGeoserverUpdateCoverageStoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -193,8 +193,8 @@ public abstract class GPGeoserverCoveragesConnector extends GPStructuredCoverage
     @Override
     public GeoserverCreateCoverageRequest createCoverageRequest() {
         switch (version) {
-            case V23x:
             case V24x:
+            case V25x:
                 return new GPGeoserverCreateCoverageRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -207,8 +207,8 @@ public abstract class GPGeoserverCoveragesConnector extends GPStructuredCoverage
     @Override
     public GeoserverLoadCoveragesByWorkspaceAndStoreRequest loadCoveragesByWorkspaceAndStoreRequest() {
         switch (version) {
-            case V23x:
             case V24x:
+            case V25x:
                 return new GPGeoserverLoadCoveragesByWorkspaceAndStoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -221,8 +221,8 @@ public abstract class GPGeoserverCoveragesConnector extends GPStructuredCoverage
     @Override
     public GeoserverResetCoverageCacheRequest resetCoverageCacheRequest() {
         switch (version) {
-            case V23x:
             case V24x:
+            case V25x:
                 return new GPGeoserverResetCoverageCacheRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

@@ -111,9 +111,9 @@ public abstract class GPGeoserverLoggingConnector extends GPGeoserverFontsConnec
     @Override
     public GeoserverLoadLoggingRequest loadLoggingRequest() {
         switch (version) {
-            case V24x:
+            case V25x:
                 return new GPGeoserverLoadLoggingRequest(this, this.jacksonSupport);
-            case V23x:
+            case V24x:
                 throw new GeoserverVersionException("For Geoserver Version 2.20.x the Path logging is not Present.");
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -126,9 +126,9 @@ public abstract class GPGeoserverLoggingConnector extends GPGeoserverFontsConnec
     @Override
     public GeoserverUpdateLoggingRequest updateLoggingRequest() {
         switch (version) {
-            case V24x:
+            case V25x:
                 return new GPGeoserverUpdateLoggingRequest(this, this.jacksonSupport);
-            case V23x:
+            case V24x:
                 throw new GeoserverVersionException("For Geoserver Version 2.20.x the Path logging is not Present.");
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

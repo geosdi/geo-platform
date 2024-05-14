@@ -91,7 +91,7 @@ public class DefaultSRSBaseParser extends AbstractGMLBaseSRSParser {
                     }
                 } catch (ParseException e) {
                     //only trace the ParserException and continues the cycle
-                    logger.trace("DefaultSRSBaseParser - Parser Exception @@@@@@@@@@@@@@@@@ {}\n", e);
+                    logger.trace("DefaultSRSBaseParser - Parser Exception @@@@@@@@@@@@@@@@@ {}\n", e.getMessage());
                 }
             }
         }

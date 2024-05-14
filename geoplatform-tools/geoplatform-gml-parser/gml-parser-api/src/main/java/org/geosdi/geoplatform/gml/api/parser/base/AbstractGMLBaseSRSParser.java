@@ -60,7 +60,7 @@ public abstract class AbstractGMLBaseSRSParser implements GMLBaseSRSGeoJsonParse
         checkArgument(thePatterns != null, "The Parameter patterns must not be null");
         this.patterns = stream(thePatterns)
                 .filter(pattern -> ((pattern != null) && !(pattern.trim().isEmpty())))
-                .toArray(n -> new String[n]);
+                .toArray(String[]::new);
     }
 
     /**

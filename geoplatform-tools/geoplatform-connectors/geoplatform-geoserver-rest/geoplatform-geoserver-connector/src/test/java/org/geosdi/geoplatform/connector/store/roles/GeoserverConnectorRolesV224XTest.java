@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.store.roles;
 
 import org.geosdi.geoplatform.connector.geoserver.model.security.user.GPGeoserverUserBody;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV223xTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV224xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -50,111 +50,111 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email vito.salvia@gmail.com
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GeoserverConnectorRolesV223XTest extends GPBaseGeoserverConnectorStoreV223xTest {
+public class GeoserverConnectorRolesV224XTest extends GPBaseGeoserverConnectorStoreV224xTest {
 
-    static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorRolesV223XTest.class);
+    static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorRolesV224XTest.class);
     //
 
     @Test
     public void a_loadRoles() throws Exception {
-        logger.info("################### {}\n", this.geoserverConnectorStoreV2_23_x.loadRoles().getResponse());
+        logger.info("################### {}\n", this.geoserverConnectorStoreV2_24_x.loadRoles().getResponse());
     }
 
     @Test
     public void b_loadUserRoles() throws Exception {
         logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_23_x.loadUserRoles().withUser("admin").getResponse());
+                this.geoserverConnectorStoreV2_24_x.loadUserRoles().withUser("admin").getResponse());
     }
 
     @Test
     public void c_loadGroupRoles() throws Exception {
         logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_23_x.loadGroupRoles().withGroup("test").getResponse());
+                this.geoserverConnectorStoreV2_24_x.loadGroupRoles().withGroup("test").getResponse());
     }
 
     @Test
     public void d_loadServiceUserRoles() throws Exception {
         logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_23_x.loadServiceUserRoles().withService("default").withUser("admin")
+                this.geoserverConnectorStoreV2_24_x.loadServiceUserRoles().withService("default").withUser("admin")
                         .getResponse());
     }
 
     @Test
     public void e_loadServiceGroupRoles() throws Exception {
         logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_23_x.loadServiceGroupRoles().withService("default").withGroup("test")
+                this.geoserverConnectorStoreV2_24_x.loadServiceGroupRoles().withService("default").withGroup("test")
                         .getResponse());
     }
 
     @Test
     public void f_createRole() throws Exception {
         logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_23_x.createRole().withRole("test_role").getResponse());
+                this.geoserverConnectorStoreV2_24_x.createRole().withRole("test_role").getResponse());
     }
 
     @Test
     public void g_linkUserToRole() throws Exception {
         GPGeoserverUserBody createUser = toGeoserverUserBody("vsalvia", "0x,salvia,0x");
         logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_23_x.createUserRequest().withBody(createUser).getResponse());
+                this.geoserverConnectorStoreV2_24_x.createUserRequest().withBody(createUser).getResponse());
         logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_23_x.linkUserToRole().withRole("test_role").withUser("vsalvia")
+                this.geoserverConnectorStoreV2_24_x.linkUserToRole().withRole("test_role").withUser("vsalvia")
                         .getResponse());
         logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_23_x.unlinkUserToRole().withRole("test_role").withUser("vsalvia")
+                this.geoserverConnectorStoreV2_24_x.unlinkUserToRole().withRole("test_role").withUser("vsalvia")
                         .getResponse());
     }
 
     @Test
     public void h_linkGroupToRole() throws Exception {
         logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_23_x.createGroupRequest().withGropuName("test_group").getResponse());
+                this.geoserverConnectorStoreV2_24_x.createGroupRequest().withGropuName("test_group").getResponse());
         logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_23_x.linkGroupToRole().withRole("test_role").withGroup("test_group")
+                this.geoserverConnectorStoreV2_24_x.linkGroupToRole().withRole("test_role").withGroup("test_group")
                         .getResponse());
         logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_23_x.unlinkGroupToRole().withRole("test_role").withGroup("test_group")
+                this.geoserverConnectorStoreV2_24_x.unlinkGroupToRole().withRole("test_role").withGroup("test_group")
                         .getResponse());
     }
 
     @Test
     public void i_createServiceRoleTest() throws Exception {
         logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_23_x.createServiceRole().withService("default").withRole("test_role2")
+                this.geoserverConnectorStoreV2_24_x.createServiceRole().withService("default").withRole("test_role2")
                         .getResponse());
         logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_23_x.deleteServiceRole().withService("default").withRole("test_role2")
+                this.geoserverConnectorStoreV2_24_x.deleteServiceRole().withService("default").withRole("test_role2")
                         .getResponse());
     }
 
     @Test
     public void l_createServiceUserRoleTest() throws Exception {
         logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_23_x.createServiceUserRole().withService("default").withRole("test_role")
+                this.geoserverConnectorStoreV2_24_x.createServiceUserRole().withService("default").withRole("test_role")
                         .withUser("vsalvia").getResponse());
         logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_23_x.deleteServiceUserRole().withService("default").withRole("test_role")
+                this.geoserverConnectorStoreV2_24_x.deleteServiceUserRole().withService("default").withRole("test_role")
                         .withUser("vsalvia").getResponseAsString());
     }
 
     @Test
     public void m_createServiceGroupRoleTest() throws Exception {
         logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_23_x.createServiceGroupRole().withService("default")
+                this.geoserverConnectorStoreV2_24_x.createServiceGroupRole().withService("default")
                         .withRole("test_role").withGroup("test_group").getResponse());
         logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_23_x.deleteServiceGroupRole().withService("default")
+                this.geoserverConnectorStoreV2_24_x.deleteServiceGroupRole().withService("default")
                         .withRole("test_role").withGroup("test_group").getResponseAsString());
     }
 
     @Test
     public void z_deleteAll() throws Exception {
         logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_23_x.deleteRole().withRole("test_role").getResponse());
+                this.geoserverConnectorStoreV2_24_x.deleteRole().withRole("test_role").getResponse());
         logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_23_x.deleteUserRequest().withUser("vsalvia").getResponse());
+                this.geoserverConnectorStoreV2_24_x.deleteUserRequest().withUser("vsalvia").getResponse());
         logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_23_x.deleteGroupRequest().withGropuName("test_group").getResponse());
+                this.geoserverConnectorStoreV2_24_x.deleteGroupRequest().withGropuName("test_group").getResponse());
     }
 
 }

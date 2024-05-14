@@ -33,13 +33,17 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.connector.store.fonts;
+package org.geosdi.geoplatform.connector.store.logging;
 
-import org.geosdi.geoplatform.connector.geoserver.request.fonts.GeoserverFontsRequest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV223xTest;
+import org.geosdi.geoplatform.connector.GeoserverVersionException;
+import org.geosdi.geoplatform.connector.geoserver.request.logging.GeoserverLoadLoggingRequest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV224xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
+import static java.lang.Boolean.TRUE;
+import static org.geosdi.geoplatform.connector.jackson.GPGeoserverLoggingJacksonTest.toGeoserverLogging;
+import static org.junit.Assert.assertFalse;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -47,11 +51,33 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverFontsConnectorStoreV223XTest extends GPBaseGeoserverConnectorStoreV223xTest {
+public class GPGeoserverLoggingConnectorStoreV224XTest extends GPBaseGeoserverConnectorStoreV224xTest {
 
-    @Test
-    public void a_createGeoserverFontsRequestTest() throws Exception {
-        GeoserverFontsRequest fontsRequest = geoserverConnectorStoreV2_23_x.createGeoserverFontsRequest();
-        logger.info("#####################GEOSERVER_FONTS_RESPONSE : {}\n", fontsRequest.getResponse());
+    @Test(expected = GeoserverVersionException.class)
+    public void a_loadGeoserverLoggingRequestTest() throws Exception {
+        GeoserverLoadLoggingRequest loadLoggingRequest = geoserverConnectorStoreV2_24_x.loadLoggingRequest();
+        logger.info("####################GEOSERVER_LOAD_LOGGING_RESPONSE : {}\n", loadLoggingRequest.getResponse());
+    }
+
+    @Test(expected = GeoserverVersionException.class)
+    public void b_updateGeoserverLoggingRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@GEOSERVER_UPDATE_LOGGING_RESPONSE : {}\n", geoserverConnectorStoreV2_24_x
+                .updateLoggingRequest()
+                .withBody(toGeoserverLogging())
+                .getResponse());
+    }
+
+    @Test(expected = GeoserverVersionException.class)
+    public void c_loadGeoserverLoggingRequestTest() throws Exception {
+        GeoserverLoadLoggingRequest loadLoggingRequest = geoserverConnectorStoreV2_24_x.loadLoggingRequest();
+        assertFalse(loadLoggingRequest.getResponse().isStdOutLogging());
+    }
+
+    @Test(expected = GeoserverVersionException.class)
+    public void c_updateGeoserverLoggingRequestTest() throws Exception {
+        logger.info("@@@@@@@@@@@@@@@@@@@GEOSERVER_UPDATE_LOGGING_RESPONSE : {}\n", geoserverConnectorStoreV2_24_x
+                .updateLoggingRequest()
+                .withBody(toGeoserverLogging(TRUE))
+                .getResponse());
     }
 }

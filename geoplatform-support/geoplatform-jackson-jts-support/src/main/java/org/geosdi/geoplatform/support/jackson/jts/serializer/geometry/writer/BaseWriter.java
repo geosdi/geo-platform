@@ -89,15 +89,18 @@ public abstract class BaseWriter<JTS extends GPJTSGeometryAdapter, GEOJSON exten
 
     /**
      * @param geometry
-     * @return
+     * @return {@link Crs}
      */
     protected Crs writeGeometryCrs(JTS geometry) {
-        Crs crs = new Crs();
-        crs.setType(CrsType.name);
-        Map<String, Object> properties = new HashMap<>();
-        properties.put("name", "EPSG:" + ((geometry.getSRID() != 0) ? geometry.getSRID() : 4326));
-        crs.setProperties(properties);
-        return crs;
+        if (geometry.getSRID() != 0) {
+            Crs crs = new Crs();
+            crs.setType(CrsType.name);
+            Map<String, Object> properties = new HashMap<>();
+            properties.put("name", "EPSG:" + geometry.getSRID());
+            crs.setProperties(properties);
+            return crs;
+        }
+        return null;
     }
 
     /**

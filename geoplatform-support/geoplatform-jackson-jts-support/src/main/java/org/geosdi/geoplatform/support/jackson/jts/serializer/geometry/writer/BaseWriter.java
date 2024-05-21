@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.support.jackson.jts.serializer.geometry.writer;
 import com.fasterxml.jackson.core.JsonGenerator;
 import org.geojson.Crs;
 import org.geojson.GeoJsonObject;
-import org.geojson.jackson.CrsType;
 import org.geosdi.geoplatform.support.jackson.jts.adapter.GPJTSGeometryAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,6 +48,7 @@ import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
+import static org.geojson.jackson.CrsType.name;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -94,11 +94,10 @@ public abstract class BaseWriter<JTS extends GPJTSGeometryAdapter, GEOJSON exten
     protected Crs writeGeometryCrs(JTS geometry) {
         if (geometry.getSRID() != 0) {
             Crs crs = new Crs();
-            crs.setType(CrsType.name);
+            crs.setType(name);
             Map<String, Object> properties = new HashMap<>();
             properties.put("name", "EPSG:" + geometry.getSRID());
             crs.setProperties(properties);
-            return crs;
         }
         return null;
     }

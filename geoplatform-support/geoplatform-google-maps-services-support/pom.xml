@@ -21,11 +21,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.squareup.okhttp3</groupId>
-            <artifactId>logging-interceptor</artifactId>
-            <version>5.0.0-alpha.11</version>
-        </dependency>
         <!-- =========================================================== -->
         <!-- ======================== LOMBOK =========================== -->
         <!-- =========================================================== -->

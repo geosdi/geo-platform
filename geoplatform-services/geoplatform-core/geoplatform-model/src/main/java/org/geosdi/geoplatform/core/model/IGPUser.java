@@ -35,7 +35,11 @@
  */
 package org.geosdi.geoplatform.core.model;
 
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Vito Salvia - CNR IMAA geoSDI Group
@@ -102,4 +106,34 @@ public interface IGPUser extends UserDetails, IGPAccount {
      * @param sendEmail
      */
     void setSendEmail(boolean sendEmail);
+
+    /**
+     * Returns the authorities granted to the user. Cannot return <code>null</code>.
+     *
+     * @return the authorities, sorted by natural key (never <code>null</code>)
+     */
+    @Override
+    default Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    /**
+     * @return {@link Boolean}
+     */
+    boolean isEnabled();
+
+    /**
+     * @return {@link Boolean}
+     */
+    boolean isCredentialsNonExpired();
+
+    /**
+     * @return {@link Boolean}
+     */
+    boolean isAccountNonLocked();
+
+    /**
+     * @return {@link Boolean}
+     */
+    boolean isAccountNonExpired();
 }

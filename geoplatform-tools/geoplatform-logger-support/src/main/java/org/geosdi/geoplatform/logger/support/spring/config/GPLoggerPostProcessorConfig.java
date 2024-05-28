@@ -50,7 +50,7 @@ class GPLoggerPostProcessorConfig {
      * @return {@link GPLoggerPostProcessor}
      */
     @Bean(name = "gpLoggerPostProcessor")
-    public GPLoggerPostProcessor gpLoggerPostProcessor() {
+    public static GPLoggerPostProcessor gpLoggerPostProcessor() {
         return new GPLoggerPostProcessor();
     }
 }

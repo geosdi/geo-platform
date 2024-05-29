@@ -45,6 +45,7 @@ import org.geosdi.geoplatform.connector.server.v130.GPWMSGetFeatureInfoV130Reque
 import org.geosdi.geoplatform.connector.server.v130.IGPWMSConnectorStoreV130;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -88,12 +89,14 @@ public class GPWMSConnectorStoreSit2PoolV130Test {
                 .build();
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void a_wmsGetCapabilitiesV130Test() throws Exception {
         GPWMSGetCapabilitiesV130Request wmsGetCapabilitiesRequest = wmsServerConnector.createGetCapabilitiesRequest();
         logger.info("###############################WMS_GET_CAPABILITIES_V130_RESPONSE : {}\n", wmsGetCapabilitiesRequest.getResponseAsString());
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void b_wmsGetFeatureInfoV130Test() throws Exception {
         GPWMSGetFeatureInfoV130Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
@@ -106,6 +109,7 @@ public class GPWMSConnectorStoreSit2PoolV130Test {
                 .withInfoFormat(GML2_AS_STRING).withX(50).withY(50).getResponse());
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void c_wmsGetFeatureInfoV130Test() throws Exception {
         GPWMSGetFeatureInfoV130Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
@@ -118,6 +122,7 @@ public class GPWMSConnectorStoreSit2PoolV130Test {
                 .withInfoFormat(GML2_AS_STRING).withX(50).withY(50).getResponse());
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void d_wmsGetFeatureInfoV130Test() throws Exception {
         GPWMSGetFeatureInfoV130Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
@@ -130,6 +135,7 @@ public class GPWMSConnectorStoreSit2PoolV130Test {
                 .withInfoFormat(GML3).withX(50).withY(50).getResponse());
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void e_wmsGetFeatureInfoV130Test() throws Exception {
         GPWMSGetFeatureInfoV130Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();

@@ -46,6 +46,7 @@ import org.geosdi.geoplatform.connector.server.v111.GPWMSGetFeatureInfoV111Reque
 import org.geosdi.geoplatform.connector.server.v111.IGPWMSConnectorStoreV111;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,12 +90,14 @@ public class GPWMSConnectorStoreSit2PoolV111Test {
                 .build();
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void a_wmsGetCapabilitiesV111Test() throws Exception {
         GPWMSGetCapabilitiesV111Request wmsGetCapabilitiesRequest = wmsServerConnector.createGetCapabilitiesRequest();
         logger.info("###############################WMS_GET_CAPABILITIES_V111_RESPONSE : {}\n", wmsGetCapabilitiesRequest.getResponseAsString());
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void b_wmsDescribeLayerV11Test() throws Exception {
         GPWMSDescribeLayerV111Request wmsDescribeLayerRequest = wmsServerConnector.createDescribeLayerRequest();
@@ -102,6 +105,7 @@ public class GPWMSConnectorStoreSit2PoolV111Test {
                 .withLayers("RegioneCampania.Cartografia.Tematica:sitdbo_zps").getResponseAsString());
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void c_wmsDescribeLayerV11Test() throws Exception {
         GPWMSDescribeLayerV111Request wmsDescribeLayerRequest = wmsServerConnector.createDescribeLayerRequest();
@@ -109,6 +113,7 @@ public class GPWMSConnectorStoreSit2PoolV111Test {
                 .withLayers("RegioneCampania.Cartografia.Tematica:sitdbo_reticolo_idrografico").getResponseAsString());
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void d_wmsGetFeatureInfoV111Test() throws Exception {
         GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
@@ -121,6 +126,7 @@ public class GPWMSConnectorStoreSit2PoolV111Test {
                 .withInfoFormat(GML2_AS_STRING).withX(50).withY(50).getResponse());
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void e_wmsDescribeLayerV11Test() throws Exception {
         GPWMSDescribeLayerV111Request wmsDescribeLayerRequest = wmsServerConnector.createDescribeLayerRequest();
@@ -129,6 +135,7 @@ public class GPWMSConnectorStoreSit2PoolV111Test {
                         "RegioneCampania.Cartografia.Tematica:sitdbo_aree_carsiche", "RegioneCampania.Ambiente:sitdbo_zps").getResponseAsString());
     }
 
+    @Ignore(value = "Server is Down")
     @Test
     public void f_wmsGetFeatureInfoV111Test() throws Exception {
         GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();

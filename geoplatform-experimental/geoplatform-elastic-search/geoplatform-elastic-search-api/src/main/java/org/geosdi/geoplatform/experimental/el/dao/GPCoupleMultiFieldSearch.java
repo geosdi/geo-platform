@@ -92,6 +92,15 @@ public interface GPCoupleMultiFieldSearch extends GPPageableElasticSearchDAO.Pag
          * @param theSize
          * @param theMultiFieldPageBuilders
          */
+        public CoupleMultiFieldSearch(int theFrom, int theSize, @Nonnull(when = NEVER) List<GPCoupleMultiFieldPageBuilder> theMultiFieldPageBuilders) {
+            this(null, null, theFrom, theSize, theMultiFieldPageBuilders);
+        }
+
+        /**
+         * @param theFrom
+         * @param theSize
+         * @param theMultiFieldPageBuilders
+         */
         public CoupleMultiFieldSearch(String field, SortOrder sortOrder, int theFrom, int theSize, @Nonnull(when = NEVER) List<GPCoupleMultiFieldPageBuilder> theMultiFieldPageBuilders) {
             super(field, sortOrder, theFrom, theSize);
             checkArgument((theMultiFieldPageBuilders != null) && !(theMultiFieldPageBuilders.isEmpty()), "The Parameter multiFieldPageBuilders must not be null or empty");

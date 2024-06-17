@@ -76,6 +76,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.zip.GZIPInputStream;
 
@@ -280,6 +281,16 @@ public class GeoSDIHttpClient5 implements HTTPClient {
      */
     @Override
     public void setConnectTimeout(int connectTimeout) {
+
+    }
+
+    @Override
+    public Map<String, String> getExtraParams() {
+        return Map.of();
+    }
+
+    @Override
+    public void setExtraParams(Map<String, String> extraParams) {
 
     }
 

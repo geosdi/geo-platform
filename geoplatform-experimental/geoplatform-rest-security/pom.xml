@@ -18,6 +18,7 @@
     <modules>
         <module>geoplatform-rest-security-api</module>
         <module>geoplatform-rest-openam</module>
+        <module>geoplatform-rest-jwt-support</module>
     </modules>
 
     <dependencyManagement>

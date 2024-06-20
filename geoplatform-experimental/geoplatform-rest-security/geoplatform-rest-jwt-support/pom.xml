@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>org.geosdi</groupId>
-        <artifactId>geoplatform-elastic-search</artifactId>
+        <artifactId>geoplatform-rest-security</artifactId>
         <version>2.0.2-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
-    <artifactId>geoplatform-elastic-search-rs-connector</artifactId>
+    <artifactId>geoplatform-rest-jwt-support</artifactId>
     <version>2.0.2-SNAPSHOT</version>
 
-    <name>Geo-Platform :: == Elastic Search Rest Connector Module</name>
-    <description>This Module is a ElasticSearch Connector based on Java High Level REST Client.</description>
+    <name>Geo-Platform :: == Rest JSON Web Tokens Support</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jwt.version>0.12.5</jwt.version>
     </properties>
 
     <dependencies>
-        <!-- =========================================================== -->
-        <!-- ============= GEOPLATFORM ELASTIC SEARCH API ============== -->
-        <!-- =========================================================== -->
         <dependency>
             <groupId>org.geosdi</groupId>
-            <artifactId>geoplatform-elastic-search-api</artifactId>
+            <artifactId>geoplatform-rest-security-api</artifactId>
             <version>${project.version}</version>
         </dependency>
 
@@ -37,6 +35,25 @@
         <dependency>
             <groupId>io.reactivex.rxjava3</groupId>
             <artifactId>rxjava</artifactId>
+        </dependency>
+
+        <!-- =========================================================== -->
+        <!-- ====================== JSON WEB TOKEN ===================== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>${jwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>${jwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>${jwt.version}</version>
         </dependency>
 
         <!-- =========================================================== -->
@@ -80,26 +97,6 @@
             <version>${project.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
-        </dependency>
-
-        <!-- =========================================================== -->
-        <!-- ============= ELASTIC SEARCH REST HIGH LEVEL CLIENT ======= -->
-        <!-- =========================================================== -->
-        <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>elasticsearch-rest-high-level-client</artifactId>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.20.0</version>
-        </dependency>
-
         <!-- =========================================================== -->
         <!-- ============================ TEST ========================= -->
         <!-- =========================================================== -->
@@ -130,6 +127,16 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <systemPropertyVariables>
+                        <GP_JWT_REST_PBE_KEY>1234/??197788</GP_JWT_REST_PBE_KEY>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>

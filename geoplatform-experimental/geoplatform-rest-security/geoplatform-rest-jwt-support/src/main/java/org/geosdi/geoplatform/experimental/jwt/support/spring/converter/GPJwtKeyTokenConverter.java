@@ -32,53 +32,39 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.jwt.support.spring.configuration;
+package org.geosdi.geoplatform.experimental.jwt.support.spring.converter;
 
-import lombok.Getter;
-import lombok.ToString;
-import net.jcip.annotations.Immutable;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.core.convert.converter.Converter;
 
+import javax.annotation.Nonnull;
 import javax.crypto.SecretKey;
 
-import static java.lang.Math.abs;
+import static com.google.common.base.Preconditions.checkArgument;
+import static io.jsonwebtoken.io.Decoders.BASE64;
+import static io.jsonwebtoken.security.Keys.hmacShaKeyFor;
+import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.experimental.jwt.support.spring.configuration.IGPJwtConfiguration.GP_JWT_SECRET_KEY;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@ToString
-@Immutable
-@Component(value = "gpJwtConfiguration")
-class GPJwtConfiguration implements IGPJwtConfiguration {
+class GPJwtKeyTokenConverter implements Converter<String, SecretKey> {
 
-    private static final long serialVersionUID = 1873198581522066412L;
-    //
-    private static final String GP_JWT_EXPIRATION = "jwtRestConfigurator{gp.jwt_expiration:@null}";
-    private static final String GP_JWT_REFRESH_TOKEN_EXPIRATION = "jwtRestConfigurator{gp.jwt_refresh_token_expiration:@null}";
-    //
-    @Getter
-    @Value(value = GP_JWT_SECRET_KEY)
-    private SecretKey secretKey;
-    @Value(value = GP_JWT_EXPIRATION)
-    private Long expiration;
-    @Value(value = GP_JWT_REFRESH_TOKEN_EXPIRATION)
-    private Long refreshTokenExpiration;
-
-    /**
-     * @return {@link Long}
-     */
-    @Override
-    public Long getExpiration() {
-        return ((this.expiration != null) ? abs(this.expiration) : 3600000L);
+    GPJwtKeyTokenConverter() {
     }
 
     /**
-     * @return {@link Long}
+     * Convert the source object of type {@code S} to target type {@code T}.
+     *
+     * @param theSecretKey the source object to convert, which must be an instance of {@code S} (never {@code null})
+     * @return the converted object, which must be an instance of {@code T} (potentially {@code null})
+     * @throws IllegalArgumentException if the source cannot be converted to the desired target type
      */
     @Override
-    public Long getRefreshTokenExpiration() {
-        return ((this.refreshTokenExpiration != null) ? abs(this.refreshTokenExpiration) : 25200000L);
+    public SecretKey convert(@Nonnull(when = NEVER) String theSecretKey) {
+        checkArgument(((theSecretKey != null) && !(theSecretKey.trim().isEmpty()) && !(theSecretKey.equals(GP_JWT_SECRET_KEY))), "The Parameter secretKey must not be null or an empty string or " + GP_JWT_SECRET_KEY);
+        byte[] keyBytes = BASE64.decode(theSecretKey);
+        return hmacShaKeyFor(keyBytes);
     }
 }

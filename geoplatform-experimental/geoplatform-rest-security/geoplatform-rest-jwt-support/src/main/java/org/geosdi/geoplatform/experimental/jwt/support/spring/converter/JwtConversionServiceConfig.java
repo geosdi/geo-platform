@@ -60,12 +60,20 @@ class JwtConversionServiceConfig {
      * @param converters
      * @return {@link DefaultFormattingConversionService}
      */
-    @Bean
-    public FormattingConversionService conversionService(Set<Converter<?, ?>> converters) {
+    @Bean(name = "conversionService")
+    public FormattingConversionService jwtConversionService(Set<Converter<?, ?>> converters) {
         FormattingConversionService jwtConversionService = new FormattingConversionService();
         fromIterable(converters)
-                .doOnComplete(() -> logger.info("@@@@@@@@@@@@@@@@@@@@JWT_CONVERSION_SERVICE finished its work."))
+                .doOnComplete(() -> logger.trace("@@@@@@@@@@@@@@@@@@@@JWT_CONVERSION_SERVICE finished its work."))
                 .subscribe(jwtConversionService::addConverter, Throwable::printStackTrace);
         return jwtConversionService;
+    }
+
+    /**
+     * @return {@link GPJwtKeyTokenConverter}
+     */
+    @Bean
+    public GPJwtKeyTokenConverter jwtKeyTokenCoverter() {
+        return new GPJwtKeyTokenConverter();
     }
 }

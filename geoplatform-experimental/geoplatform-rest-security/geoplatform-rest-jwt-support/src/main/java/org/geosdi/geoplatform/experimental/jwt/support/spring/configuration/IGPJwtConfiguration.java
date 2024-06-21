@@ -34,8 +34,8 @@
  */
 package org.geosdi.geoplatform.experimental.jwt.support.spring.configuration;
 
+import javax.crypto.SecretKey;
 import java.io.Serializable;
-import java.security.Key;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -43,10 +43,12 @@ import java.security.Key;
  */
 public interface IGPJwtConfiguration extends Serializable {
 
+    String GP_JWT_SECRET_KEY = "jwtRestConfigurator{gp.jwt_secret_key:@null}";
+
     /**
-     * @return {@link Key}
+     * @return {@link SecretKey}
      */
-    Key getSecretKey();
+    SecretKey getSecretKey();
 
     /**
      * @return {@link Long}

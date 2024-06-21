@@ -32,40 +32,76 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.jwt.support.spring.converter;
+package org.geosdi.geoplatform.experimental.jwt.support.service;
 
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Component;
+import io.jsonwebtoken.Claims;
+import org.geosdi.geoplatform.experimental.jwt.support.spring.configuration.IGPJwtConfiguration;
 
 import javax.annotation.Nonnull;
-import java.security.Key;
+import javax.annotation.Nullable;
+import java.io.Serializable;
+import java.util.Map;
+import java.util.function.Function;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static io.jsonwebtoken.io.Decoders.BASE64;
-import static io.jsonwebtoken.security.Keys.hmacShaKeyFor;
 import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@Component
-class GPJwtKeyTokenCoverter implements Converter<String, Key> {
-
-    GPJwtKeyTokenCoverter() {
-    }
+public interface IGPJwtServiceSupport extends Serializable {
 
     /**
-     * Convert the source object of type {@code S} to target type {@code T}.
-     *
-     * @param theSecretKey the source object to convert, which must be an instance of {@code S} (never {@code null})
-     * @return the converted object, which must be an instance of {@code T} (potentially {@code null})
-     * @throws IllegalArgumentException if the source cannot be converted to the desired target type
+     * @param theToken
+     * @return {@link Claims}
+     * @throws Exception
      */
-    @Override
-    public Key convert(@Nonnull(when = NEVER) String theSecretKey) {
-        checkArgument((theSecretKey != null) && !(theSecretKey.trim().isEmpty()), "The Parameter secretKey must not be null.");
-        byte[] keyBytes = BASE64.decode(theSecretKey);
-        return hmacShaKeyFor(keyBytes);
-    }
+    Claims extractAllClaims(@Nonnull(when = NEVER) String theToken) throws Exception;
+
+    /**
+     * @param theToken
+     * @return {@link Boolean}
+     * @throws Exception
+     */
+    boolean isTokenExpired(@Nonnull(when = NEVER) String theToken) throws Exception;
+
+    /**
+     * @param theToken
+     * @return {@link String}
+     * @throws Exception
+     */
+    String extractUsername(@Nonnull(when = NEVER) String theToken) throws Exception;
+
+    /**
+     * @param theUsername
+     * @param theExtraClaims
+     * @return {@link String}
+     * @throws Exception
+     */
+    String generateToken(@Nonnull(when = NEVER) String theUsername, @Nullable Map<String, Object> theExtraClaims) throws Exception;
+
+    /**
+     * @param theUsername
+     * @return {@link String}
+     * @throws Exception
+     */
+    String generateRefreshToken(@Nonnull(when = NEVER) String theUsername) throws Exception;
+
+    /**
+     * @return {@link IGPJwtConfiguration}
+     */
+    IGPJwtConfiguration getJwtConfiguration();
+
+    /**
+     * @param theToken
+     * @param theClaimFunction
+     * @param <T>
+     * @return {@link <></>}
+     * @throws Exception
+     */
+     default <T> T extractClaim(@Nonnull(when = NEVER) String theToken, @Nonnull(when = NEVER) Function<Claims, T> theClaimFunction) throws Exception {
+         checkArgument(theClaimFunction != null, "The Parameter claimFunction must not be null");
+         return theClaimFunction.apply(extractAllClaims(theToken));
+     }
 }

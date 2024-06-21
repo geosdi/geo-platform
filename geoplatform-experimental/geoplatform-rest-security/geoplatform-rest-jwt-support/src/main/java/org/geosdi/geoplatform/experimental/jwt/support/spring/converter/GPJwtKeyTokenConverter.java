@@ -32,31 +32,39 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.jwt.support.spring.configuration;
+package org.geosdi.geoplatform.experimental.jwt.support.spring.converter;
 
+import org.springframework.core.convert.converter.Converter;
+
+import javax.annotation.Nonnull;
 import javax.crypto.SecretKey;
-import java.io.Serializable;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static io.jsonwebtoken.io.Decoders.BASE64;
+import static io.jsonwebtoken.security.Keys.hmacShaKeyFor;
+import static javax.annotation.meta.When.NEVER;
+import static org.geosdi.geoplatform.experimental.jwt.support.spring.configuration.IGPJwtConfiguration.GP_JWT_SECRET_KEY;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public sealed interface IGPJwtConfiguration extends Serializable permits GPJwtConfiguration {
+class GPJwtKeyTokenConverter implements Converter<String, SecretKey> {
 
-    String GP_JWT_SECRET_KEY = "jwtRestConfigurator{gp.jwt_secret_key:@null}";
-
-    /**
-     * @return {@link SecretKey}
-     */
-    SecretKey getSecretKey();
+    GPJwtKeyTokenConverter() {
+    }
 
     /**
-     * @return {@link Long}
+     * Convert the source object of type {@code S} to target type {@code T}.
+     *
+     * @param theSecretKey the source object to convert, which must be an instance of {@code S} (never {@code null})
+     * @return the converted object, which must be an instance of {@code T} (potentially {@code null})
+     * @throws IllegalArgumentException if the source cannot be converted to the desired target type
      */
-    Long getExpiration();
-
-    /**
-     * @return {@link Long}
-     */
-    Long getRefreshTokenExpiration();
+    @Override
+    public SecretKey convert(@Nonnull(when = NEVER) String theSecretKey) {
+        checkArgument(((theSecretKey != null) && !(theSecretKey.trim().isEmpty()) && !(theSecretKey.equals(GP_JWT_SECRET_KEY))), "The Parameter secretKey must not be null or an empty string or " + GP_JWT_SECRET_KEY);
+        byte[] keyBytes = BASE64.decode(theSecretKey);
+        return hmacShaKeyFor(keyBytes);
+    }
 }

@@ -40,9 +40,8 @@ import net.jcip.annotations.Immutable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.security.Key;
+import javax.crypto.SecretKey;
 
-import static java.lang.Long.valueOf;
 import static java.lang.Math.abs;
 
 /**
@@ -56,13 +55,12 @@ non-sealed class GPJwtConfiguration implements IGPJwtConfiguration {
 
     private static final long serialVersionUID = 1873198581522066412L;
     //
-    private static final String GP_JWT_SECRET_KEY = "jwtRestConfigurator{gp.jwt_secret_key:@null}";
     private static final String GP_JWT_EXPIRATION = "jwtRestConfigurator{gp.jwt_expiration:@null}";
     private static final String GP_JWT_REFRESH_TOKEN_EXPIRATION = "jwtRestConfigurator{gp.jwt_refresh_token_expiration:@null}";
     //
     @Getter
     @Value(value = GP_JWT_SECRET_KEY)
-    private Key secretKey;
+    private SecretKey secretKey;
     @Value(value = GP_JWT_EXPIRATION)
     private Long expiration;
     @Value(value = GP_JWT_REFRESH_TOKEN_EXPIRATION)
@@ -73,7 +71,7 @@ non-sealed class GPJwtConfiguration implements IGPJwtConfiguration {
      */
     @Override
     public Long getExpiration() {
-        return ((this.expiration != null) ? abs(this.expiration) : valueOf(3600000));
+        return ((this.expiration != null) ? abs(this.expiration) : 3600000L);
     }
 
     /**
@@ -81,6 +79,6 @@ non-sealed class GPJwtConfiguration implements IGPJwtConfiguration {
      */
     @Override
     public Long getRefreshTokenExpiration() {
-        return ((this.refreshTokenExpiration != null) ? abs(this.refreshTokenExpiration) : valueOf(25200000));
+        return ((this.refreshTokenExpiration != null) ? abs(this.refreshTokenExpiration) : 25200000L);
     }
 }

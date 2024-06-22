@@ -19,13 +19,42 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jwt.version>0.12.5</jwt.version>
+        <jwt.version>0.12.6</jwt.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- =========================================================== -->
+            <!-- ============== GEOPLATFORM JACKSON DEPENDENCY ============= -->
+            <!-- =========================================================== -->
+            <dependency>
+                <groupId>org.geosdi</groupId>
+                <artifactId>geoplatform-jackson-dependency</artifactId>
+                <type>pom</type>
+                <scope>import</scope>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-rest-security-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-joda</artifactId>
+        </dependency>
+
+        <!-- =========================================================== -->
+        <!-- =============== GEOPLATFORM JACKSON SUPPORT =============== -->
+        <!-- =========================================================== -->
+        <dependency>
+            <groupId>org.geosdi</groupId>
+            <artifactId>geoplatform-jackson-support</artifactId>
             <version>${project.version}</version>
         </dependency>
 

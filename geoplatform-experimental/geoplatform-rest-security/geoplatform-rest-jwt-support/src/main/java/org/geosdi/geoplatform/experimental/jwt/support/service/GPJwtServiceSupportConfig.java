@@ -34,14 +34,12 @@
  */
 package org.geosdi.geoplatform.experimental.jwt.support.service;
 
-import io.jsonwebtoken.Claims;
 import org.geosdi.geoplatform.experimental.jwt.support.spring.configuration.IGPJwtConfiguration;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.io.Serializable;
-import java.util.Map;
-import java.util.function.Function;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
@@ -50,77 +48,24 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPJwtServiceSupport extends Serializable {
+@Configuration
+class GPJwtServiceSupportConfig {
+
+    private final IGPJwtConfiguration jwtConfiguration;
 
     /**
-     * @param theToken
-     * @return {@link Claims}
-     * @throws Exception
+     * @param theJwtConfiguration
      */
-    Claims extractAllClaims(@Nonnull(when = NEVER) String theToken) throws Exception;
-
-    /**
-     * @param theToken
-     * @return {@link Boolean}
-     * @throws Exception
-     */
-    boolean isTokenExpired(@Nonnull(when = NEVER) String theToken) throws Exception;
-
-    /**
-     * @param theToken
-     * @return {@link String}
-     * @throws Exception
-     */
-    String extractUsername(@Nonnull(when = NEVER) String theToken) throws Exception;
-
-    /**
-     * @param theUsername
-     * @return {@link String}
-     * @throws Exception
-     */
-    default String generateToken(@Nonnull(when = NEVER) String theUsername) throws Exception {
-        return this.generateToken(theUsername, Map.of());
+    GPJwtServiceSupportConfig(@Qualifier(value = "gpJwtConfiguration") @Nonnull(when = NEVER) IGPJwtConfiguration theJwtConfiguration) {
+        checkArgument(theJwtConfiguration != null, "The Parameter jwtConfiguration must not be null.");
+        this.jwtConfiguration = theJwtConfiguration;
     }
 
     /**
-     * @param theUsername
-     * @param theExtraClaims
-     * @return {@link String}
-     * @throws Exception
+     * @return {@link IGPJwtServiceSupport}
      */
-    String generateToken(@Nonnull(when = NEVER) String theUsername, @Nullable Map<String, Object> theExtraClaims) throws Exception;
-
-    /**
-     * @param theUsername
-     * @return {@link String}
-     * @throws Exception
-     */
-    String generateRefreshToken(@Nonnull(when = NEVER) String theUsername) throws Exception;
-
-    /**
-     * @return {@link IGPJwtConfiguration}
-     */
-    IGPJwtConfiguration getJwtConfiguration();
-
-    /**
-     * @param theToken
-     * @param theClaimType
-     * @param theClaimKey
-     * @param <T>
-     * @return {@link T}
-     * @throws Exception
-     */
-    <T> T extractClaim(@Nonnull(when = NEVER) String theToken, @Nonnull(when = NEVER) Class<T> theClaimType, @Nonnull(when = NEVER) String theClaimKey) throws Exception;
-
-    /**
-     * @param theToken
-     * @param theClaimFunction
-     * @param <T>
-     * @return {@link <></>}
-     * @throws Exception
-     */
-     default <T> T extractClaim(@Nonnull(when = NEVER) String theToken, @Nonnull(when = NEVER) Function<Claims, T> theClaimFunction) throws Exception {
-         checkArgument(theClaimFunction != null, "The Parameter claimFunction must not be null");
-         return theClaimFunction.apply(extractAllClaims(theToken));
-     }
+    @Bean
+    public IGPJwtServiceSupport jwtServiceSupport() {
+        return new GPJwtServiceSupport(this.jwtConfiguration);
+    }
 }

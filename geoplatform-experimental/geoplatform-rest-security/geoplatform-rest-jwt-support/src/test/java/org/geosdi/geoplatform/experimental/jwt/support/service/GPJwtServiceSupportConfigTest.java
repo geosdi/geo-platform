@@ -35,6 +35,7 @@
 package org.geosdi.geoplatform.experimental.jwt.support.service;
 
 import jakarta.annotation.Resource;
+import org.geosdi.geoplatform.experimental.jwt.support.claims.GPJwtRoleClaim;
 import org.geosdi.geoplatform.experimental.jwt.support.claims.JwtUserClaim;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
 import org.junit.Before;
@@ -47,6 +48,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static java.util.Map.of;
 import static java.util.UUID.randomUUID;
+import static org.geosdi.geoplatform.experimental.jwt.support.claims.GPJwtRoleClaim.toRoleClaim;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
@@ -96,5 +98,16 @@ public class GPJwtServiceSupportConfigTest {
     @Test
     public void d_tokenIsExpiredTest() throws Exception {
         logger.info("########################EXPIRED : {}\n", this.jwtServiceSupport.isTokenExpired("eyJ6aXAiOiJHWklQIiwiYWxnIjoiSFMzODQifQ.H4sIAAAAAAAA_6tWKi5NUrJSyk0syszXK8ovLs50SM9NzMzRS87PVdJRykwsUbIyNDe0sDQ3Njaz1FFKrSiACZhZmlnWAgAYExl6QQAAAA.P7ee1BOrId2dOr8Ddq665sre_rgvhH0XFfMJVPSoeahWeDDA7bK1T38RbMoq_Bns"));
+    }
+
+    @Test
+    public void e_extractJwtRoleClaimTest() throws Exception {
+        String token = this.jwtServiceSupport.generateToken("mario.rossi@gmail.com",
+                of("name", "Mario Rossi", "test", 123456L, "jwt_user", new JwtUserClaim(randomUUID().toString(), "Mario Rossi"), "jwt_role", toRoleClaim("ADMIN")));
+        logger.info("######################JWT_TOKEN : {}\n", token);
+        JwtUserClaim jwtUser = this.jwtServiceSupport.extractClaim(token, JwtUserClaim.class, "jwt_user");
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@JWT_USER_CLAIN : {}\n", jwtUser);
+        GPJwtRoleClaim roleClaim = this.jwtServiceSupport.extractClaim(token, GPJwtRoleClaim.class, "jwt_role");
+        logger.info("######################JWT_ROLE_CLAIM : {}\n", roleClaim);
     }
 }

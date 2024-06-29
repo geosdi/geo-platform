@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.support.google.services;
 
 import com.google.maps.PendingResult;
-import com.google.maps.model.ComponentFilter;
 import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.LatLng;
 import com.google.maps.model.LocationType;
@@ -53,6 +52,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.maps.model.ComponentFilter.*;
 import static org.junit.Assert.*;
 
 /**
@@ -129,7 +129,7 @@ public class GPGeocodingServiceTest extends GPBaseConfigTest {
     public void gpGeocodingWithRegionTest() throws Exception {
         GeocodingResult[] results = gpGeocodingService.newRequest().address("Marsicovetere").region("it").await();
         assertNotNull(results);
-        assertEquals("85050 Marsicovetere, Province of Potenza, Italy", results[0].formattedAddress);
+        assertEquals("Marsicovetere, Provincia di Potenza, Italy", results[0].formattedAddress);
     }
 
     @Test
@@ -142,21 +142,18 @@ public class GPGeocodingServiceTest extends GPBaseConfigTest {
     @Test
     public void gpGeocodingWithComponentFilterTest() throws Exception {
         GeocodingResult[] results = gpGeocodingService.newRequest()
-                .address("Marsicovetere")
-                .components(ComponentFilter.country("it"), ComponentFilter
-                        .postalCode("85050")).await();
+                .address("via provinciale 169")
+                .components(country("it"), locality("Marsicovetere"), postalCode("85050")).await();
         assertNotNull(results);
-        assertEquals("85050 Marsicovetere, Province of Potenza, Italy", results[0].formattedAddress);
+        assertEquals("Via Provinciale, 169, 85050 Marsicovetere PZ, Italy", results[0].formattedAddress);
     }
 
     @Test
     public void gpGeocodingBoundsTest() throws Exception {
-        GeocodingResult[] results = gpGeocodingService.newRequest().address(
-                "Marsicovetere").bounds(new LatLng(40.373706, 15.821933),
-                new LatLng(40.378703, 15.830559)).await();
+        GeocodingResult[] results = gpGeocodingService.newRequest().address("Marsicovetere")
+                .bounds(new LatLng(40.373706, 15.821933), new LatLng(40.378703, 15.830559)).await();
         assertNotNull(results);
-        assertEquals("85050 Marsicovetere, Province of Potenza, Italy",
-                results[0].formattedAddress);
+        assertEquals("Marsicovetere, Provincia di Potenza, Italy", results[0].formattedAddress);
     }
 
     @Test

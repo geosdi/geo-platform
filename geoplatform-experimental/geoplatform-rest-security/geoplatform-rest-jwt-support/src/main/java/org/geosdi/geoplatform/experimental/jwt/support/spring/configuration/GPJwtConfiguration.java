@@ -37,11 +37,13 @@ package org.geosdi.geoplatform.experimental.jwt.support.spring.configuration;
 import lombok.Getter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
+import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Math.abs;
 
 /**
@@ -57,6 +59,7 @@ non-sealed class GPJwtConfiguration implements IGPJwtConfiguration {
     //
     private static final String GP_JWT_EXPIRATION = "jwtRestConfigurator{gp.jwt_expiration:@null}";
     private static final String GP_JWT_REFRESH_TOKEN_EXPIRATION = "jwtRestConfigurator{gp.jwt_refresh_token_expiration:@null}";
+    private static final String GP_JWT_ROLE_CLAIM_KEY = "jwtRestConfigurator{gp.jwt_role_clain_key:@null}";
     //
     @Getter
     @Value(value = GP_JWT_SECRET_KEY)
@@ -65,6 +68,9 @@ non-sealed class GPJwtConfiguration implements IGPJwtConfiguration {
     private Long expiration;
     @Value(value = GP_JWT_REFRESH_TOKEN_EXPIRATION)
     private Long refreshTokenExpiration;
+    @Value(value = GP_JWT_ROLE_CLAIM_KEY)
+    @Getter
+    private String jwtRoleClaimKey;
 
     /**
      * @return {@link Long}
@@ -80,5 +86,19 @@ non-sealed class GPJwtConfiguration implements IGPJwtConfiguration {
     @Override
     public Long getRefreshTokenExpiration() {
         return ((this.refreshTokenExpiration != null) ? abs(this.refreshTokenExpiration) : 25200000L);
+    }
+
+    /**
+     * Invoked by the containing {@code BeanFactory} after it has set all bean properties
+     * and satisfied {@link BeanFactoryAware}, {@code ApplicationContextAware} etc.
+     * <p>This method allows the bean instance to perform validation of its overall
+     * configuration and final initialization when all bean properties have been set.
+     *
+     * @throws Exception in the event of misconfiguration (such as failure to set an
+     *                   essential property) or if initialization fails for any other reason
+     */
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        checkArgument(((jwtRoleClaimKey != null) && !(jwtRoleClaimKey.trim().isEmpty()) && !(jwtRoleClaimKey.equals(GP_JWT_ROLE_CLAIM_KEY))), "The Parameter jwtRoleClaimKey must not be null or an empty string or " + GP_JWT_ROLE_CLAIM_KEY);
     }
 }

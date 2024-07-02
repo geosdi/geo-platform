@@ -32,38 +32,40 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.jwt.support.spring.configuration;
+package org.geosdi.geoplatform.experimental.jwt.support.authenticator.filter;
 
-import org.springframework.beans.factory.InitializingBean;
+import org.geosdi.geoplatform.experimental.rs.security.authenticator.GPAuthenticatorType;
+import org.geosdi.geoplatform.experimental.rs.security.authenticator.filter.GPAuthenticatorVersionFilter;
 
-import javax.crypto.SecretKey;
-import java.io.Serializable;
+import static org.geosdi.geoplatform.experimental.jwt.support.authenticator.GPJwtAuthenticatorType.JWT;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public sealed interface IGPJwtConfiguration extends Serializable, InitializingBean permits GPJwtConfiguration {
-
-    String GP_JWT_SECRET_KEY = "jwtRestConfigurator{gp.jwt_secret_key:@null}";
-
-    /**
-     * @return {@link SecretKey}
-     */
-    SecretKey getSecretKey();
-
-    /**
-     * @return {@link Long}
-     */
-    Long getExpiration();
-
-    /**
-     * @return {@link Long}
-     */
-    Long getRefreshTokenExpiration();
+public interface GPJwtAuthenticator extends GPAuthenticatorVersionFilter {
 
     /**
      * @return {@link String}
      */
-    String getJwtRoleClaimKey();
+    @Override
+    default String getAuthenticatorVersion() {
+        return "JWT-v0.12.6";
+    }
+
+    /**
+     * @return {@link GPAuthenticatorType}
+     */
+    @Override
+    default GPAuthenticatorType getAuthenticatorType() {
+        return JWT;
+    }
+
+    /**
+     * @return {@link String}
+     */
+    @Override
+    default String getAuthenticatorName() {
+        return this.getClass().getSimpleName();
+    }
 }

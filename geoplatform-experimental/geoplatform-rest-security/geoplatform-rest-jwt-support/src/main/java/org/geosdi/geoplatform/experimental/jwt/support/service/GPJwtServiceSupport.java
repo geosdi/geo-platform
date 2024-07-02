@@ -44,6 +44,7 @@ import io.jsonwebtoken.jackson.io.JacksonSerializer;
 import lombok.Getter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
+import org.geosdi.geoplatform.experimental.jwt.support.claims.GPJwtRoleClaim;
 import org.geosdi.geoplatform.experimental.jwt.support.spring.configuration.IGPJwtConfiguration;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 
@@ -190,5 +191,15 @@ class GPJwtServiceSupport implements IGPJwtServiceSupport {
                 .parseSignedClaims(theToken)
                 .getPayload()
                 .get(theClaimKey, theClaimType);
+    }
+
+    /**
+     * @param theToken
+     * @return {@link GPJwtRoleClaim}
+     * @throws Exception
+     */
+    @Override
+    public GPJwtRoleClaim extractJwtRoleClain(@Nonnull(when = NEVER) String theToken) throws Exception {
+        return this.extractClaim(theToken, GPJwtRoleClaim.class, this.jwtConfiguration.getJwtRoleClaimKey());
     }
 }

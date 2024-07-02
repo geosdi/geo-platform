@@ -49,8 +49,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import static java.util.Map.of;
 import static java.util.UUID.randomUUID;
 import static org.geosdi.geoplatform.experimental.jwt.support.claims.GPJwtRoleClaim.toRoleClaim;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -109,5 +108,16 @@ public class GPJwtServiceSupportConfigTest {
         logger.info("@@@@@@@@@@@@@@@@@@@@@@JWT_USER_CLAIN : {}\n", jwtUser);
         GPJwtRoleClaim roleClaim = this.jwtServiceSupport.extractClaim(token, GPJwtRoleClaim.class, "jwt_role");
         logger.info("######################JWT_ROLE_CLAIM : {}\n", roleClaim);
+    }
+
+    @Test
+    public void f_extractJwtRoleClaimTest() throws Exception {
+        String token = this.jwtServiceSupport.generateToken("mario.rossi@gmail.com",
+                of("name", "Mario Rossi", "test", 123456L, "jwt_user", new JwtUserClaim(randomUUID().toString(), "Mario Rossi"), "jwt_role_claim", toRoleClaim("ADMIN")));
+        logger.info("######################JWT_TOKEN : {}\n", token);
+        JwtUserClaim jwtUser = this.jwtServiceSupport.extractClaim(token, JwtUserClaim.class, "jwt_user");
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@JWT_USER_CLAIN : {}\n", jwtUser);
+        GPJwtRoleClaim roleClaim = this.jwtServiceSupport.extractClaim(token, GPJwtRoleClaim.class, "jwt_role");
+        assertNull(roleClaim);
     }
 }

@@ -35,6 +35,7 @@
 package org.geosdi.geoplatform.experimental.jwt.support.service;
 
 import io.jsonwebtoken.Claims;
+import org.geosdi.geoplatform.experimental.jwt.support.claims.GPJwtRoleClaim;
 import org.geosdi.geoplatform.experimental.jwt.support.spring.configuration.IGPJwtConfiguration;
 
 import javax.annotation.Nonnull;
@@ -111,6 +112,13 @@ public interface IGPJwtServiceSupport extends Serializable {
      * @throws Exception
      */
     <T> T extractClaim(@Nonnull(when = NEVER) String theToken, @Nonnull(when = NEVER) Class<T> theClaimType, @Nonnull(when = NEVER) String theClaimKey) throws Exception;
+
+    /**
+     * @param theToken
+     * @return {@link GPJwtRoleClaim}
+     * @throws Exception
+     */
+    GPJwtRoleClaim extractJwtRoleClain(@Nonnull(when = NEVER) String theToken) throws Exception;
 
     /**
      * @param theToken

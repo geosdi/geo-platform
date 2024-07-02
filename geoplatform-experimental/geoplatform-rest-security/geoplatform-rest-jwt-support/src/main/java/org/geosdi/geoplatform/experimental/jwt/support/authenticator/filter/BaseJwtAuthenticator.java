@@ -32,38 +32,56 @@
  * to your version of the library, but you are not obligated to do so. If you do not
  * wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.jwt.support.spring.configuration;
+package org.geosdi.geoplatform.experimental.jwt.support.authenticator.filter;
 
-import org.springframework.beans.factory.InitializingBean;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import org.geosdi.geoplatform.exception.NotAuthorizedFault;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.crypto.SecretKey;
-import java.io.Serializable;
+import javax.annotation.Nonnull;
+import java.io.IOException;
+
+import static jakarta.ws.rs.core.HttpHeaders.AUTHORIZATION;
+import static jakarta.ws.rs.core.Response.Status.UNAUTHORIZED;
+import static jakarta.ws.rs.core.Response.status;
+import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPJwtConfiguration extends Serializable {
+abstract class BaseJwtAuthenticator implements GPJwtAuthenticator {
 
-    String GP_JWT_SECRET_KEY = "jwtRestConfigurator{gp.jwt_secret_key:@null}";
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    /**
-     * @return {@link SecretKey}
-     */
-    SecretKey getSecretKey();
+    BaseJwtAuthenticator() {
+    }
 
     /**
-     * @return {@link Long}
+     * @param containerRequestContext
+     * @throws IOException
      */
-    Long getExpiration();
+    @Override
+    public void filter(ContainerRequestContext containerRequestContext) throws IOException {
+        logger.debug("::::::::::::::::::::::::{} is validating --------------> Path : {}\n", getAuthenticatorType(),
+                containerRequestContext.getUriInfo().getAbsolutePath());
+        // Get the HTTP Authorization header from the request
+        String authorizationHeader = containerRequestContext.getHeaderString(AUTHORIZATION);
+        if (authorizationHeader == null || authorizationHeader.trim().isEmpty() || !authorizationHeader.startsWith("Bearer ")) {
+            throw new NotAuthorizedFault("Authorization header must be provided");
+        }
+        String token = authorizationHeader.substring("Bearer".length()).trim();
+        try {
+            validateToken(token);
+        } catch (Exception ex) {
+            containerRequestContext.abortWith(status(UNAUTHORIZED).build());
+        }
+    }
 
     /**
-     * @return {@link Long}
+     * @param token
+     * @throws Exception
      */
-    Long getRefreshTokenExpiration();
-
-    /**
-     * @return {@link String}
-     */
-    String getJwtRoleClaimKey();
+    protected abstract void validateToken(@Nonnull(when = NEVER) String token) throws Exception;
 }

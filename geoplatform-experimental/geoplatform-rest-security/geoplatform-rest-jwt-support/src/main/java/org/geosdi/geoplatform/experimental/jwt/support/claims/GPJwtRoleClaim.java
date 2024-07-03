@@ -47,7 +47,7 @@ import static javax.annotation.meta.When.NEVER;
  * @email giuseppe.lascaleia@geosdi.org
  */
 //@JsonDeserialize(as = JwtRoleClaim.class)
-public sealed interface GPJwtRoleClaim extends Serializable permits JwtRoleClaim {
+public interface GPJwtRoleClaim extends Serializable {
 
     /**
      * @return {@link String}

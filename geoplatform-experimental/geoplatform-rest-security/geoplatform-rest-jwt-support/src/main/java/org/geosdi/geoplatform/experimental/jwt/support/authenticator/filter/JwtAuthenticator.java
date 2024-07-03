@@ -83,16 +83,18 @@ public class JwtAuthenticator extends BaseJwtAuthenticator {
         if (this.jwtServiceSupport.isTokenExpired(token)) {
             throw new NotAuthorizedFault("The Jwt Token is expired.");
         }
+        String user = this.jwtServiceSupport.extractUsername(token);
+        logger.trace("######################Trying to retrieve Role for User : {}\n", user);
         Method method = resourceInfo.getResourceMethod();
-        GPJwtSupport jwtSecured = method.getAnnotation(GPJwtSupport.class);
-        if (jwtSecured == null) {
-            jwtSecured = resourceInfo.getResourceClass().getAnnotation(GPJwtSupport.class);
-        }
+        GPJwtSupport jwtSecured = ((method.getAnnotation(GPJwtSupport.class) != null) ? method.getAnnotation(GPJwtSupport.class) : resourceInfo.getResourceClass().getAnnotation(GPJwtSupport.class));
         if (jwtSecured != null) {
             List<String> roles = asList(jwtSecured.roles());
             GPJwtRoleClaim roleClaim = this.jwtServiceSupport.extractJwtRoleClain(token);
-            if (!roles.isEmpty() && roleClaim == null) {
+            if (!(roles.isEmpty()) && (roleClaim == null)) {
                 throw new NotAuthorizedFault("The Method is accesible only with a Role, but in the jwt token the jwtRoleClaim is not present.");
+            }
+            if (!(roles.isEmpty()) && (roleClaim != null) && !(roles.contains(roleClaim.getRole()))) {
+                throw new NotAuthorizedFault("The Method is accesible only with a Role, but the Role specified in the jwtRoleClaim doesn't match any roles present on the Resource.");
             }
         }
     }

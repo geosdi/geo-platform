@@ -6,12 +6,12 @@
     <parent>
         <groupId>org.geosdi</groupId>
         <artifactId>geoplatform-rest-security</artifactId>
-        <version>2.0.2-SNAPSHOT</version>
+        <version>1.9-SNAPSHOT</version>
     </parent>
 
     <groupId>org.geosdi</groupId>
     <artifactId>geoplatform-rest-jwt-support</artifactId>
-    <version>2.0.2-SNAPSHOT</version>
+    <version>1.9-SNAPSHOT</version>
 
     <name>Geo-Platform :: == Rest JSON Web Tokens Support</name>
     <!-- FIXME change it to the project's website -->

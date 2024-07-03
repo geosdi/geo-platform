@@ -60,7 +60,6 @@ import static io.jsonwebtoken.Jwts.parser;
 import static java.lang.Boolean.TRUE;
 import static java.util.Map.of;
 import static javax.annotation.meta.When.NEVER;
-import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
 import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
 import static org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature.NON_NULL;
 import static org.joda.time.DateTime.now;
@@ -75,7 +74,7 @@ class GPJwtServiceSupport implements IGPJwtServiceSupport {
 
     private static final long serialVersionUID = 6730444116638398822L;
     //
-    private static final GPJacksonSupport jacksonSupport = new GPJacksonSupport(JAKARTA, UNWRAP_ROOT_VALUE_DISABLE,
+    private static final GPJacksonSupport jacksonSupport = new GPJacksonSupport(UNWRAP_ROOT_VALUE_DISABLE,
             FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
             ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
             WRAP_ROOT_VALUE_DISABLE,

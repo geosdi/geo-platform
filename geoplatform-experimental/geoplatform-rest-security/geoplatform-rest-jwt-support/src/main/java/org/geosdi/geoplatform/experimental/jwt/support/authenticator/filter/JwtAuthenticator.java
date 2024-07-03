@@ -34,18 +34,18 @@
  */
 package org.geosdi.geoplatform.experimental.jwt.support.authenticator.filter;
 
-import jakarta.annotation.Priority;
-import jakarta.annotation.Resource;
-import jakarta.ws.rs.Priorities;
-import jakarta.ws.rs.container.ResourceInfo;
-import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.ext.Provider;
 import org.geosdi.geoplatform.exception.NotAuthorizedFault;
 import org.geosdi.geoplatform.experimental.jwt.support.annotation.GPJwtSupport;
 import org.geosdi.geoplatform.experimental.jwt.support.claims.GPJwtRoleClaim;
 import org.geosdi.geoplatform.experimental.jwt.support.service.IGPJwtServiceSupport;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Priority;
+import javax.annotation.Resource;
+import javax.ws.rs.Priorities;
+import javax.ws.rs.container.ResourceInfo;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.ext.Provider;
 import java.lang.reflect.Method;
 import java.util.List;
 

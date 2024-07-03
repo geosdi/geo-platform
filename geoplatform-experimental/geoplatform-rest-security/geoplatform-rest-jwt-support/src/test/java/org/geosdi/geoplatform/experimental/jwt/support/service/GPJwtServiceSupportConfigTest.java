@@ -34,7 +34,6 @@
  */
 package org.geosdi.geoplatform.experimental.jwt.support.service;
 
-import jakarta.annotation.Resource;
 import org.geosdi.geoplatform.experimental.jwt.support.claims.GPJwtRoleClaim;
 import org.geosdi.geoplatform.experimental.jwt.support.claims.JwtUserClaim;
 import org.geosdi.geoplatform.logger.support.annotation.GeoPlatformLog;
@@ -45,6 +44,8 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.annotation.Resource;
 
 import static java.util.Map.of;
 import static java.util.UUID.randomUUID;

@@ -34,18 +34,18 @@
  */
 package org.geosdi.geoplatform.experimental.jwt.support.authenticator.filter;
 
-import jakarta.ws.rs.container.ContainerRequestContext;
 import org.geosdi.geoplatform.exception.NotAuthorizedFault;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
+import javax.ws.rs.container.ContainerRequestContext;
 import java.io.IOException;
 
-import static jakarta.ws.rs.core.HttpHeaders.AUTHORIZATION;
-import static jakarta.ws.rs.core.Response.Status.UNAUTHORIZED;
-import static jakarta.ws.rs.core.Response.status;
 import static javax.annotation.meta.When.NEVER;
+import static javax.ws.rs.core.HttpHeaders.AUTHORIZATION;
+import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
+import static javax.ws.rs.core.Response.status;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group

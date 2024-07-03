@@ -34,8 +34,8 @@
  */
 package org.geosdi.geoplatform.experimental.jwt.support.annotation;
 
-import jakarta.ws.rs.NameBinding;
 
+import javax.ws.rs.NameBinding;
 import java.lang.annotation.*;
 
 /**

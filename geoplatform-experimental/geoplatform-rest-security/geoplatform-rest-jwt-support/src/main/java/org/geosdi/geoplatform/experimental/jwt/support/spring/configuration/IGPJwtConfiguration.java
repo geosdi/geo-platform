@@ -43,7 +43,7 @@ import java.io.Serializable;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface IGPJwtConfiguration extends Serializable {
+public interface IGPJwtConfiguration extends Serializable, InitializingBean {
 
     String GP_JWT_SECRET_KEY = "jwtRestConfigurator{gp.jwt_secret_key:@null}";
 

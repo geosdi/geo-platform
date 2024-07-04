@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.experimental.el.search.bool;
 import net.jcip.annotations.Immutable;
 import org.elasticsearch.index.query.Operator;
 import org.elasticsearch.index.query.QueryBuilder;
+import org.geosdi.geoplatform.experimental.el.search.term.GPTermSearch;
 
 import javax.annotation.Nonnull;
 
@@ -45,6 +46,8 @@ import static javax.annotation.meta.When.NEVER;
 import static org.elasticsearch.index.query.QueryBuilders.matchQuery;
 
 /**
+ * This class search documents which match the parameter value. If you want an exact search see {@link GPTermSearch}
+ *
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */

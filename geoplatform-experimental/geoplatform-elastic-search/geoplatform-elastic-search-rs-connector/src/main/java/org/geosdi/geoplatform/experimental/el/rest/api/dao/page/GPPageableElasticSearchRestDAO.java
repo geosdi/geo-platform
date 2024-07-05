@@ -38,13 +38,16 @@ package org.geosdi.geoplatform.experimental.el.rest.api.dao.page;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
+import org.geosdi.geoplatform.experimental.el.api.function.GPElasticSearchCheck;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
 import org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO;
+import org.geosdi.geoplatform.experimental.el.dao.scroll.GPScrollElasticSearchConfig;
 import org.geosdi.geoplatform.experimental.el.dao.store.PageStore;
 import org.geosdi.geoplatform.experimental.el.rest.api.dao.index.GPElasticSearchRestIndexDAO;
 
 import javax.annotation.Nonnull;
+import java.util.Set;
 
 import static javax.annotation.meta.When.NEVER;
 
@@ -61,6 +64,15 @@ public interface GPPageableElasticSearchRestDAO<D extends Document> extends GPPa
      */
     @Override
     <P extends Page> IPageResult<D> find(@Nonnull(when = NEVER) P page) throws Exception;
+
+    /**
+     * @param theScrollConfig
+     * @param <P>
+     * @param <R>
+     * @param <E>
+     * @throws Exception
+     */
+    <P extends Page, R extends Object, E extends Exception> void findWithScroll(@Nonnull(when = NEVER) GPScrollElasticSearchConfig<P, D, R, E, GPElasticSearchCheck<R, Set<D>, E>> theScrollConfig) throws Exception;
 
     /**
      * @param page

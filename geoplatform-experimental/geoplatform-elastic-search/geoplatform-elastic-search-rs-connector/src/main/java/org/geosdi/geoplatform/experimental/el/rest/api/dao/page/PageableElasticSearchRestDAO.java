@@ -35,15 +35,21 @@
  */
 package org.geosdi.geoplatform.experimental.el.rest.api.dao.page;
 
+import org.elasticsearch.action.search.ClearScrollRequest;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.search.SearchScrollRequest;
 import org.elasticsearch.client.core.CountRequest;
 import org.elasticsearch.client.core.CountResponse;
+import org.elasticsearch.search.Scroll;
+import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.aggregations.AbstractAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.geosdi.geoplatform.experimental.el.api.function.GPElasticSearchCheck;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
 import org.geosdi.geoplatform.experimental.el.dao.PageResult;
+import org.geosdi.geoplatform.experimental.el.dao.scroll.GPScrollElasticSearchConfig;
 import org.geosdi.geoplatform.experimental.el.dao.store.PageStore;
 import org.geosdi.geoplatform.experimental.el.rest.api.dao.index.ElasticSearchRestIndexDAO;
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
@@ -51,14 +57,17 @@ import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Objects;
+import java.util.Set;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
 import static org.elasticsearch.client.RequestOptions.DEFAULT;
 import static org.elasticsearch.rest.RestStatus.OK;
+import static org.elasticsearch.search.sort.SortOrder.ASC;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -97,6 +106,46 @@ public abstract class PageableElasticSearchRestDAO<D extends Document> extends E
                 .map(this::readDocument)
                 .filter(Objects::nonNull)
                 .collect(toList()));
+    }
+
+    /**
+     * @param theScrollConfig
+     * @param <P>
+     * @param <R>
+     * @param <E>
+     * @throws Exception
+     */
+    @Override
+    public <P extends Page, R extends Object, E extends Exception> void findWithScroll(@Nonnull(when = NEVER) GPScrollElasticSearchConfig<P, D, R, E, GPElasticSearchCheck<R, Set<D>, E>> theScrollConfig) throws Exception {
+        checkArgument((theScrollConfig != null), "The Parameter scrollConfig must not be null.");
+        SearchRequest searchRequest = this.prepareSearchRequest();
+        SearchSourceBuilder searchSourceBuilder = theScrollConfig.toPage()
+                .buildPage(new SearchSourceBuilder())
+                .size(theScrollConfig.toSize())
+                .sort("_doc", ASC);
+        searchRequest.source(searchSourceBuilder);
+        Scroll scroll = new Scroll(theScrollConfig.toTimeValue());
+        searchRequest.scroll(scroll);
+        SearchResponse searchResponse = this.elasticSearchRestHighLevelClient.search(searchRequest, DEFAULT);
+        String scrollId = searchResponse.getScrollId();
+        SearchHit[] searchHits = searchResponse.getHits().getHits();
+        while ((searchHits != null) && (searchHits.length > 0)) {
+            theScrollConfig.toCheckFunction().apply(of(searchResponse.getHits().getHits())
+                    .filter(Objects::nonNull)
+                    .map(this::readDocument)
+                    .filter(Objects::nonNull)
+                    .collect(toSet()));
+            SearchScrollRequest scrollRequest = new SearchScrollRequest(scrollId);
+            scrollRequest.scroll(scroll);
+            searchResponse = this.elasticSearchRestHighLevelClient.scroll(scrollRequest, DEFAULT);
+            scrollId = searchResponse.getScrollId();
+            searchHits = searchResponse.getHits().getHits();
+        }
+        // Clear the scroll context
+        ClearScrollRequest clearScrollRequest = new ClearScrollRequest();
+        clearScrollRequest.addScrollId(scrollId);
+        this.elasticSearchRestHighLevelClient.clearScroll(clearScrollRequest, DEFAULT);
+        theScrollConfig.toScroolElasticSearchCallback().doOnCompleteScrool();
     }
 
     /**

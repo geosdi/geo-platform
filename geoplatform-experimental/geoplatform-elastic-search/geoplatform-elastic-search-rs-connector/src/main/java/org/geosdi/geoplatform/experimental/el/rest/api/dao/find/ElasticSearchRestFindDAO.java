@@ -46,7 +46,10 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
 import org.geosdi.geoplatform.experimental.el.dao.PageResult;
-import org.geosdi.geoplatform.experimental.el.rest.api.dao.page.PageableElasticSearchRestDAO;
+import org.geosdi.geoplatform.experimental.el.rest.api.dao.page.scroll.PageableElasticSearchRestScrollDAO;
+import org.geosdi.geoplatform.experimental.el.search.bool.BooleanExactSearch;
+import org.geosdi.geoplatform.experimental.el.search.bool.IBooleanSearch;
+
 import org.geosdi.geoplatform.support.jackson.GPJacksonSupport;
 
 import javax.annotation.Nonnull;
@@ -70,7 +73,7 @@ import static org.geosdi.geoplatform.experimental.el.condition.PredicateConditio
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class ElasticSearchRestFindDAO<D extends Document> extends PageableElasticSearchRestDAO<D> implements GPElasticSearchRestFindDAO<D> {
+public abstract class ElasticSearchRestFindDAO<D extends Document> extends PageableElasticSearchRestScrollDAO<D> implements GPElasticSearchRestFindDAO<D> {
 
     /**
      * @param theEntityClass

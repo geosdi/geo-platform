@@ -40,7 +40,7 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
 import org.geosdi.geoplatform.experimental.el.condition.PredicateCondition;
-import org.geosdi.geoplatform.experimental.el.rest.api.dao.page.GPPageableElasticSearchRestDAO;
+import org.geosdi.geoplatform.experimental.el.rest.api.dao.page.scroll.GPPageableElasticSearchRestScrollDAO;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -53,7 +53,7 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public interface GPElasticSearchRestFindDAO<D extends Document> extends GPPageableElasticSearchRestDAO<D> {
+public interface GPElasticSearchRestFindDAO<D extends Document> extends GPPageableElasticSearchRestScrollDAO<D> {
 
     /**
      * @param theDocumentID

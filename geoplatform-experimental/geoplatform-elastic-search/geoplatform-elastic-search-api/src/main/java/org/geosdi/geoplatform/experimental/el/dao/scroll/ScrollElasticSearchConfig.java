@@ -43,7 +43,7 @@ import org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Set;
+import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static javax.annotation.meta.When.NEVER;
@@ -54,7 +54,7 @@ import static org.geosdi.geoplatform.experimental.el.dao.scroll.GPScrollElasticS
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Immutable
-non-sealed class ScrollElasticSearchConfig<P extends GPPageableElasticSearchDAO.Page, D extends Document, R extends Object, E extends Exception, C extends GPElasticSearchCheck<R, Set<D>, E>> implements GPScrollElasticSearchConfig<P, D, R, E, C> {
+non-sealed class ScrollElasticSearchConfig<P extends GPPageableElasticSearchDAO.Page, D extends Document, R extends Object, E extends Exception, C extends GPElasticSearchCheck<R, List<D>, E>> implements GPScrollElasticSearchConfig<P, D, R, E, C> {
 
     private final P page;
     private final TimeValue timeValue;

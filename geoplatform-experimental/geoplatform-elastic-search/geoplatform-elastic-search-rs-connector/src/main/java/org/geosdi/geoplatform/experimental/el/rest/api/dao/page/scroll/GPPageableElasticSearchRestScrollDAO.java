@@ -33,15 +33,15 @@
  *   to your version of the library, but you are not obligated to do so. If you do not
  *   wish to do so, delete this exception statement from your version.
  */
-package org.geosdi.geoplatform.experimental.el.dao.scroll;
+package org.geosdi.geoplatform.experimental.el.rest.api.dao.page.scroll;
 
-import org.elasticsearch.core.TimeValue;
+import io.reactivex.rxjava3.disposables.Disposable;
 import org.geosdi.geoplatform.experimental.el.api.function.GPElasticSearchCheck;
 import org.geosdi.geoplatform.experimental.el.api.model.Document;
-import org.geosdi.geoplatform.experimental.el.dao.GPPageableElasticSearchDAO.Page;
+import org.geosdi.geoplatform.experimental.el.dao.scroll.GPScrollElasticSearchConfig;
+import org.geosdi.geoplatform.experimental.el.rest.api.dao.page.GPPageableElasticSearchRestDAO;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
 
 import static javax.annotation.meta.When.NEVER;
@@ -50,50 +50,25 @@ import static javax.annotation.meta.When.NEVER;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public sealed interface GPScrollElasticSearchConfig<P extends Page, D extends Document, R extends Object, E extends Exception, C extends GPElasticSearchCheck<R, List<D>, E>> permits ScrollElasticSearchConfig {
+public interface GPPageableElasticSearchRestScrollDAO<D extends Document> extends GPPageableElasticSearchRestDAO<D> {
 
     /**
-     * @return {@link P}
-     */
-    P toPage();
-
-    /**
-     * @return {@link TimeValue}
-     */
-    TimeValue toTimeValue();
-
-    /**
-     * @return {@link Integer}
-     */
-    Integer toSize();
-
-    /**
-     * @return {@link C}
-     */
-    C toCheckFunction();
-
-    /**
-     * @return {@link GPScrollElasticSearchCallback}
-     */
-    GPScrollElasticSearchCallback toScroolElasticSearchCallback();
-
-    /**
-     * @param thePage
-     * @param theTimeValue
-     * @param theSize
-     * @param theCheckFunction
-     * @param theScroolElasticSearchCallback
+     * @param theScrollConfig
      * @param <P>
-     * @param <D>
      * @param <R>
      * @param <E>
-     * @param <C>
-     * @return {@link GPScrollElasticSearchConfig}
      * @throws Exception
      */
-    static <P extends Page, D extends Document, R extends Object, E extends Exception, C extends GPElasticSearchCheck<R, List<D>, E>> GPScrollElasticSearchConfig<P, D, R, E, C> toScrollConfig(@Nonnull(when = NEVER) P thePage,
-            @Nonnull(when = NEVER) TimeValue theTimeValue, @Nonnull(when = NEVER) Integer theSize, @Nonnull(when = NEVER) C theCheckFunction,
-            @Nullable GPScrollElasticSearchCallback theScroolElasticSearchCallback) throws Exception {
-        return new ScrollElasticSearchConfig<>(thePage, theTimeValue, theSize, theCheckFunction, theScroolElasticSearchCallback);
-    }
+    <P extends Page, R extends Object, E extends Exception> void findWithScroll(@Nonnull(when = NEVER) GPScrollElasticSearchConfig<P, D, R, E, GPElasticSearchCheck<R, List<D>, E>> theScrollConfig) throws Exception;
+
+    /**
+     *
+     * @param theScrollConfig
+     * @return
+     * @param <P>
+     * @param <R>
+     * @param <E>
+     * @throws Exception
+     */
+    <P extends Page, R extends Object, E extends Exception> Disposable findWithRXScroll(@Nonnull(when = NEVER) GPScrollElasticSearchConfig<P, D, R, E, GPElasticSearchCheck<R, List<D>, E>> theScrollConfig) throws Exception;
 }

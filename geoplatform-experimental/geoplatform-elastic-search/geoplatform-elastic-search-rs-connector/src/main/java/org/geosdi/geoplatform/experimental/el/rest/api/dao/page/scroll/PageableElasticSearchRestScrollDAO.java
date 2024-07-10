@@ -171,7 +171,7 @@ public abstract class PageableElasticSearchRestScrollDAO<D extends Document> ext
      * @param scrollId
      * @return {@link Observable<List<D>>}
      */
-    protected <P extends Page, R, E extends Exception> Observable<List<D>> performRXSearchWithScroll(@Nonnull(when = NEVER) SearchRequest searchRequest, @Nonnull(when = NEVER) GPScrollElasticSearchConfig<P, D, R, E, GPElasticSearchCheck<R, List<D>, E>> theScrollConfig, final AtomicReference<String> scrollId) {
+    protected <P extends Page, R, E extends Exception> Observable<List<D>> performRXSearchWithScroll(@Nonnull(when = NEVER) SearchRequest searchRequest, @Nonnull(when = NEVER) GPScrollElasticSearchConfig<P, D, R, E, GPElasticSearchCheck<R, List<D>, E>> theScrollConfig, AtomicReference<String> scrollId) {
         checkArgument(searchRequest != null, "The Parameter searchRequest must not be null");
         checkArgument(theScrollConfig != null, "The Parameter scrollConfig must not be null");
         checkArgument(scrollId != null, "The Parameter scrollId must not be null");

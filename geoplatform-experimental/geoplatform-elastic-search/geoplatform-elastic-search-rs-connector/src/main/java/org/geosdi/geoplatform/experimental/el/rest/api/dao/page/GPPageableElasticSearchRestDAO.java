@@ -84,7 +84,7 @@ public interface GPPageableElasticSearchRestDAO<D extends Document> extends GPPa
      * @param <E>
      * @throws Exception
      */
-    <P extends Page, R extends Object, E extends Exception> Disposable findWithRXScroll(@Nonnull(when = NEVER) GPScrollElasticSearchConfig<P, D, R, E, GPElasticSearchCheck<R, List<D>, E>> theScrollConfig) throws Exception;
+    <P extends Page, R extends Object, E extends Exception> Disposable findWithRXScrollAsync(@Nonnull(when = NEVER) GPScrollElasticSearchConfig<P, D, R, E, GPElasticSearchCheck<R, List<D>, E>> theScrollConfig) throws Exception;
 
     /**
      * @param page

@@ -36,13 +36,12 @@
 package org.geosdi.geoplatform.experimental.el.rest.api.dao.page.scroll;
 
 import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.ObservableEmitter;
+import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.Disposable;
 import org.elasticsearch.action.search.ClearScrollRequest;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchScrollRequest;
-import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.search.Scroll;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -59,6 +58,8 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static io.reactivex.rxjava3.core.Single.fromCallable;
+import static io.reactivex.rxjava3.schedulers.Schedulers.io;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
@@ -129,55 +130,72 @@ public abstract class PageableElasticSearchRestScrollDAO<D extends Document> ext
      * @throws Exception
      */
     @Override
-    public <P extends Page, R, E extends Exception> Disposable findWithRXScroll(@Nonnull(when = NEVER) GPScrollElasticSearchConfig<P, D, R, E, GPElasticSearchCheck<R, List<D>, E>> theScrollConfig) throws Exception {
+    public <P extends Page, R, E extends Exception> Disposable findWithRXScrollAsync(@Nonnull(when = NEVER) GPScrollElasticSearchConfig<P, D, R, E, GPElasticSearchCheck<R, List<D>, E>> theScrollConfig) throws Exception {
         checkArgument((theScrollConfig != null), "The Parameter scrollConfig must not be null.");
-        SearchRequest searchRequest = this.prepareSearchRequest();
-        SearchSourceBuilder searchSourceBuilder = theScrollConfig.toPage()
-                .buildPage(new SearchSourceBuilder())
-                .size(theScrollConfig.toSize())
-                .sort("_doc", ASC);
-        searchRequest.source(searchSourceBuilder);
-        Scroll scroll = new Scroll(theScrollConfig.toTimeValue());
-        searchRequest.scroll(scroll);
         AtomicReference<String> scrollId = new AtomicReference<>();
-        return Observable.<SearchHit[]>create(emitter -> this.internalScrollSearch(emitter, searchRequest, scroll, scrollId))
+        return this.prepareRXSearchRequestWithScroll(theScrollConfig)
+                .flatMapObservable(searchRequest -> this.performRXSearchWithScroll(searchRequest, theScrollConfig, scrollId))
+                .subscribeOn(io())
+                .observeOn(io())
+                .doOnComplete(theScrollConfig.toScroolElasticSearchCallback()::doOnCompleteScrool)
                 .doOnComplete(() -> {
                     ClearScrollRequest clearScrollRequest = new ClearScrollRequest();
                     clearScrollRequest.addScrollId(scrollId.get());
-                    elasticSearchRestHighLevelClient.clearScroll(clearScrollRequest, RequestOptions.DEFAULT);
+                    elasticSearchRestHighLevelClient.clearScroll(clearScrollRequest, DEFAULT);
                 })
-                .doOnComplete(theScrollConfig.toScroolElasticSearchCallback()::doOnCompleteScrool)
-                .subscribe(searchHits -> {
-                    theScrollConfig.toCheckFunction().apply(of(searchHits)
-                            .filter(Objects::nonNull)
-                            .map(this::readDocument)
-                            .filter(Objects::nonNull)
-                            .collect(toList()));
-                }, Throwable::printStackTrace);
+                .subscribe(theScrollConfig.toCheckFunction()::apply, Throwable::printStackTrace);
     }
 
     /**
-     * @param emitter
-     * @param searchRequest
-     * @param scroll
-     * @param scrollId
+     * @param theScrollConfig
+     * @return {@link Single<SearchRequest>}
      */
-    protected void internalScrollSearch(ObservableEmitter<SearchHit[]> emitter, SearchRequest searchRequest, Scroll scroll, AtomicReference<String> scrollId) {
-        try {
-            SearchResponse searchResponse = elasticSearchRestHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
-            scrollId.set(searchResponse.getScrollId());
-            SearchHit[] searchHits = searchResponse.getHits().getHits();
-            while (searchHits != null && searchHits.length > 0) {
-                emitter.onNext(searchHits);
-                SearchScrollRequest scrollRequest = new SearchScrollRequest(scrollId.get());
-                scrollRequest.scroll(scroll);
-                searchResponse = elasticSearchRestHighLevelClient.scroll(scrollRequest, RequestOptions.DEFAULT);
+    protected <P extends Page, R, E extends Exception> Single<SearchRequest> prepareRXSearchRequestWithScroll(@Nonnull(when = NEVER) GPScrollElasticSearchConfig<P, D, R, E, GPElasticSearchCheck<R, List<D>, E>> theScrollConfig) {
+        checkArgument(theScrollConfig != null, "The Parameter scrollConfig must not be null");
+        return fromCallable(() -> {
+            SearchRequest searchRequest = this.prepareSearchRequest();
+            SearchSourceBuilder searchSourceBuilder = theScrollConfig.toPage()
+                    .buildPage(new SearchSourceBuilder())
+                    .size(theScrollConfig.toSize())
+                    .sort("_doc", ASC);
+            searchRequest.source(searchSourceBuilder);
+            Scroll scroll = new Scroll(theScrollConfig.toTimeValue());
+            searchRequest.scroll(scroll);
+            return searchRequest;
+        });
+    }
+
+    /**
+     * @param searchRequest
+     * @param theScrollConfig
+     * @param scrollId
+     * @return {@link Observable<List<D>>}
+     */
+    protected <P extends Page, R, E extends Exception> Observable<List<D>> performRXSearchWithScroll(@Nonnull(when = NEVER) SearchRequest searchRequest, @Nonnull(when = NEVER) GPScrollElasticSearchConfig<P, D, R, E, GPElasticSearchCheck<R, List<D>, E>> theScrollConfig, final AtomicReference<String> scrollId) {
+        checkArgument(searchRequest != null, "The Parameter searchRequest must not be null");
+        checkArgument(theScrollConfig != null, "The Parameter scrollConfig must not be null");
+        checkArgument(scrollId != null, "The Parameter scrollId must not be null");
+        return Observable.create(emitter -> {
+            try {
+                SearchResponse searchResponse = this.elasticSearchRestHighLevelClient.search(searchRequest, DEFAULT);
                 scrollId.set(searchResponse.getScrollId());
-                searchHits = searchResponse.getHits().getHits();
+                SearchHit[] searchHits = searchResponse.getHits().getHits();
+                while ((searchHits != null) && (searchHits.length > 0)) {
+                    List<D> documents = of(searchHits).filter(Objects::nonNull).map(this::readDocument)
+                            .filter(Objects::nonNull).collect(toList());
+
+                    emitter.onNext(documents);
+
+                    SearchScrollRequest scrollRequest = new SearchScrollRequest(scrollId.get());
+                    scrollRequest.scroll(new Scroll(theScrollConfig.toTimeValue()));
+                    searchResponse = this.elasticSearchRestHighLevelClient.scroll(scrollRequest, DEFAULT);
+                    scrollId.set(searchResponse.getScrollId());
+                    searchHits = searchResponse.getHits().getHits();
+                }
+                emitter.onComplete();
+            } catch (Exception ex) {
+                emitter.onError(ex);
             }
-            emitter.onComplete();
-        } catch (Exception e) {
-            emitter.onError(e);
-        }
+        });
     }
 }

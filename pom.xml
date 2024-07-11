@@ -1536,7 +1536,7 @@
         <hsqldb-version>2.7.3</hsqldb-version>
         <geodb-version>0.9</geodb-version>
         <junit.version>4.13.2</junit.version>
-        <maven-surefire.version>3.3.0</maven-surefire.version>
+        <maven-surefire.version>3.3.1</maven-surefire.version>
         <gwt-plugin.version>2.10.1</gwt-plugin.version>
     </properties>
 

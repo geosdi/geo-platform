@@ -137,12 +137,12 @@ public abstract class PageableElasticSearchRestScrollDAO<D extends Document> ext
                 .flatMapObservable(searchRequest -> this.performRXSearchWithScroll(searchRequest, theScrollConfig, scrollId))
                 .subscribeOn(io())
                 .observeOn(io())
-                .doOnComplete(theScrollConfig.toScroolElasticSearchCallback()::doOnCompleteScrool)
                 .doOnComplete(() -> {
                     ClearScrollRequest clearScrollRequest = new ClearScrollRequest();
                     clearScrollRequest.addScrollId(scrollId.get());
                     elasticSearchRestHighLevelClient.clearScroll(clearScrollRequest, DEFAULT);
                 })
+                .doOnComplete(theScrollConfig.toScroolElasticSearchCallback()::doOnCompleteScrool)
                 .subscribe(theScrollConfig.toCheckFunction()::apply, Throwable::printStackTrace);
     }
 

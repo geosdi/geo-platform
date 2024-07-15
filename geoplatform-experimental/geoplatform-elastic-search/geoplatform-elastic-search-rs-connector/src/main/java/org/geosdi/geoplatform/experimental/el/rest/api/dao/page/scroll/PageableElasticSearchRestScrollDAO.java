@@ -181,8 +181,11 @@ public abstract class PageableElasticSearchRestScrollDAO<D extends Document> ext
                 scrollId.set(searchResponse.getScrollId());
                 SearchHit[] searchHits = searchResponse.getHits().getHits();
                 while ((searchHits != null) && (searchHits.length > 0)) {
-                    List<D> documents = of(searchHits).filter(Objects::nonNull).map(this::readDocument)
-                            .filter(Objects::nonNull).collect(toList());
+                    List<D> documents = of(searchHits)
+                            .filter(Objects::nonNull)
+                            .map(this::readDocument)
+                            .filter(Objects::nonNull)
+                            .collect(toList());
 
                     emitter.onNext(documents);
 

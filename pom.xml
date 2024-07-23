@@ -1364,7 +1364,7 @@
             <plugin>
                 <groupId>io.github.git-commit-id</groupId>
                 <artifactId>git-commit-id-maven-plugin</artifactId>
-                <version>6.0.0</version>
+                <version>9.0.1</version>
                 <executions>
                     <execution>
                         <goals>

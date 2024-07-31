@@ -96,6 +96,7 @@ public class CatalogGetRecordsTest {
     private @Value("configurator{snipc_catalog_password}")
     String snipcPassword;
 
+    @Ignore(value = "Server is DOWN")
     @Test
     public void testSummaryRecord() throws Exception {
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
@@ -116,6 +117,7 @@ public class CatalogGetRecordsTest {
         }
     }
 
+    @Ignore(value = "Server is DOWN")
     @Test
     public void testFullRecord() throws Exception {
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
@@ -211,6 +213,7 @@ public class CatalogGetRecordsTest {
         }
     }
 
+    @Ignore(value = "Server is DOWN")
     @Test
     public void testInternalGetRecordsTest() throws Exception {
         GPCatalogConnectorStore internalServer = newConnector()
@@ -239,6 +242,7 @@ public class CatalogGetRecordsTest {
         logger.info("###########################RESPONSE : {}\n", request.getResponse());
     }
 
+    @Ignore(value = "Server is DOWN")
     @Test
     public void testGetRecordsOurCountAreaItaly() throws Exception {
         GPCatalogConnectorStore internalServer = newConnector()

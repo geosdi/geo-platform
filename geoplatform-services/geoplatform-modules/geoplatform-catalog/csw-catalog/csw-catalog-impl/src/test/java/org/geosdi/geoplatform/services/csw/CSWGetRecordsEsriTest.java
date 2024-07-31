@@ -96,35 +96,25 @@ public class CSWGetRecordsEsriTest {
             }
 
         });
-
         CatalogGetRecordsRequest<GetRecordsResponseType> request = serverConnector.createGetRecordsRequest();
         request.setTypeName(TypeName.RECORD_V202);
         request.setOutputSchema(OutputSchema.CSW_V202);
         request.setElementSetName(ElementSetType.FULL.value());
         request.setResultType(ResultType.RESULTS.value());
-
         request.setConstraintLanguage(ConstraintLanguage.FILTER);
         request.setConstraintLanguageVersion(ConstraintLanguageVersion.V110);
         request.setCatalogFinder(finderBean);
-
         request.setStartPosition(BigInteger.ONE);
         request.setMaxRecords(BigInteger.valueOf(25));
-
-        logger.debug("\n\n#####################RESPONSE AS STRING : {}\n\n",
-                request.getResponseAsString());
-
+        logger.debug("\n\n#####################RESPONSE AS STRING : {}\n\n", request.getResponseAsString());
         GetRecordsResponseType response = request.getResponse();
-
         SearchResultsType result = response.getSearchResults();
-
-        List<JAXBElement<? extends AbstractRecordType>> records
-                = result.getAbstractRecord();
+        List<JAXBElement<? extends AbstractRecordType>> records = result.getAbstractRecord();
         logger.debug("\n*** Record list size: {} ***", records.size());
-
         processFirstResult((RecordType) records.get(1).getValue());
-
     }
 
+    @Ignore(value = "Serve id Down")
     @Test
     public void testFullRecordGeoSDI() throws Exception {
         URL url = new URL("http://catalog.geosdi.org:80/geonetwork/srv/eng/csw");

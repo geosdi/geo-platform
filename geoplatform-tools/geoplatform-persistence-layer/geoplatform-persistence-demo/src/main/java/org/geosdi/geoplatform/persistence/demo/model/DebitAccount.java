@@ -36,9 +36,13 @@
 package org.geosdi.geoplatform.persistence.demo.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.math.BigDecimal;
 
@@ -55,4 +59,8 @@ public class DebitAccount extends Account {
     private static final long serialVersionUID = 2524964303398293787L;
     //
     private BigDecimal overdraftFee;
+    @ManyToOne
+    @JoinColumn(name = "organization_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Organization organization;
 }

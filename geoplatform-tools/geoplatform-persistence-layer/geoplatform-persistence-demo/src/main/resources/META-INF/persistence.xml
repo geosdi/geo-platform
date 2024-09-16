@@ -12,7 +12,7 @@
             <!-- Select our SQL dialect -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <!-- Drop and re-create the database schema on startup -->
-            <property name="hibernate.hbm2ddl.auto" value="drop-and-create"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
             <!-- Echo the SQL to stdout -->
             <property name="hibernate.show_sql" value="true"/>
             <!-- Set the current session context -->

@@ -35,6 +35,7 @@
  */
 package org.geosdi.geoplatform.persistence.configuration.properties;
 
+import lombok.Getter;
 import net.jcip.annotations.Immutable;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,52 +55,22 @@ import static java.util.Collections.list;
 @Component(value = "gpPersistenceConnector")
 public class GPPersistenceConnector implements InitializingBean {
 
+    @Getter
     @Value("persistence{db_driverClassName:@null}")
     private String driverClassName;
+    @Getter
     @Value("persistence{db_url:@null}")
     private String url;
+    @Getter
     @Value("persistence{db_username}")
     private String username;
+    @Getter
     @Value("persistence{db_password}")
     private String password;
+    @Getter
     @Value("persistence{db_packageToScan:@null}")
     private String packageToScan;
     private String[] packagesToScan;
-
-    /**
-     * @return the driverClassName
-     */
-    public String getDriverClassName() {
-        return driverClassName;
-    }
-
-    /**
-     * @return the url
-     */
-    public String getUrl() {
-        return url;
-    }
-
-    /**
-     * @return the username
-     */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
-     * @return the password
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * @return the packageToScan
-     */
-    public String getPackageToScan() {
-        return packageToScan;
-    }
 
     /**
      * @return the packagesToScan

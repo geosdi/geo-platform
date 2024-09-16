@@ -21,4 +21,5 @@
     <logger name="org.geosdi.geoplatform.persistence.configuration.basic.BaseHibernateProperties" level="debug"/>
     <logger name="org.geosdi.geoplatform.persistence.jasypt.config.GPPersistencePBEConfig" level="debug"/>
     <logger name="org.geosdi.geoplatform.persistence.jasypt.config.GPPersistencePBEConfig" level="debug"/>
+    <logger name="org.geosdi.geoplatform.persistence.configuration.basic.BaseHibernateProperties" level="debug"/>
 </configuration>

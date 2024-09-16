@@ -36,11 +36,13 @@
 package org.geosdi.geoplatform.persistence;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Persistence;
+import jakarta.persistence.criteria.CriteriaDelete;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import org.geosdi.geoplatform.persistence.demo.model.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -48,7 +50,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
+import java.util.List;
 
+import static jakarta.persistence.Persistence.createEntityManagerFactory;
 import static java.lang.String.valueOf;
 
 /**
@@ -63,9 +67,9 @@ public class HibernateJpaNativeTest {
     private static EntityManager entityManager;
     private final static String PART_NAME = "Gearbox";
 
-    @Before
-    public void setUp() throws Exception {
-        entityManager = Persistence.createEntityManagerFactory("geoplatform-persistence-layer-test").createEntityManager();
+    @BeforeClass
+    public static void setUp() throws Exception {
+        entityManager = createEntityManagerFactory("geoplatform-persistence-layer-test").createEntityManager();
     }
 
     @Test
@@ -82,8 +86,8 @@ public class HibernateJpaNativeTest {
                 CarPart carPart = new CarPart();
                 carPart.setPartName(PART_NAME + i);
                 carPart.setCar(car);
-                session.save(car);
-                session.save(carPart);
+                session.persist(car);
+                session.persist(carPart);
             }
             // commit transaction
             transaction.commit();
@@ -119,14 +123,53 @@ public class HibernateJpaNativeTest {
                 session.persist(creditAccount);
             }
             // commit transaction
-            session.remove(organization);
             transaction.commit();
         } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback();
             }
             ex.printStackTrace();
-        } finally {
+        }
+    }
+
+    @Test
+    public void c_deleteOrganizationTest() throws Exception {
+        Transaction transaction;
+        Session session = (Session) entityManager.getDelegate();
+        // start a transaction
+        transaction = session.beginTransaction();
+        try {
+            CriteriaDelete<Organization> criteriaDelete = entityManager.getCriteriaBuilder().createCriteriaDelete(Organization.class);
+            Root<Organization> root = criteriaDelete.from(Organization.class);
+            criteriaDelete.where(entityManager.getCriteriaBuilder().equal(root.get("id"), 1));
+            logger.info("########################{}\n", entityManager.createQuery(criteriaDelete).executeUpdate());
+            transaction.commit();
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        }
+    }
+
+    @Test
+    public void d_countCreditAccountsTest() throws Exception {
+        Transaction transaction;
+        Session session = (Session) entityManager.getDelegate();
+        // start a transaction
+        transaction = session.beginTransaction();
+        try {
+            CriteriaQuery<CreditAccount> criteriaQuery = entityManager.getCriteriaBuilder().createQuery(CreditAccount.class);
+            Root<CreditAccount> root = criteriaQuery.from(CreditAccount.class);
+            criteriaQuery.select(root);
+            List<CreditAccount> values = this.entityManager.createQuery(criteriaQuery).getResultList();
+            logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@FOUND {} CreditAccounts.", values.size());
+            transaction.commit();
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
         }
     }
 }

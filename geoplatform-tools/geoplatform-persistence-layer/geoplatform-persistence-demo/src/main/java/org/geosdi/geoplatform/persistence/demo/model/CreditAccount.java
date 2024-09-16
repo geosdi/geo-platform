@@ -36,9 +36,13 @@
 package org.geosdi.geoplatform.persistence.demo.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.math.BigDecimal;
 
@@ -55,4 +59,8 @@ public class CreditAccount extends Account {
     private static final long serialVersionUID = 1980025134017897525L;
     //
     private BigDecimal creditLimit;
+    @ManyToOne
+    @JoinColumn(name = "organization_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Organization organization;
 }

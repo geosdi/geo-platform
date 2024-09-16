@@ -41,8 +41,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Parameter;
 
 import java.io.Serializable;
@@ -76,8 +74,4 @@ public abstract class Account implements Serializable {
     private String owner;
     private BigDecimal balance;
     private BigDecimal interestRate;
-    @ManyToOne
-    @JoinColumn(name = "organization_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Organization organization;
 }

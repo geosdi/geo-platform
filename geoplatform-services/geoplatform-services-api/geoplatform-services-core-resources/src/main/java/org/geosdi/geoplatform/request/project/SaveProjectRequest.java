@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.request.project;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.core.model.GPProject;
 
 import java.io.Serializable;
@@ -46,7 +45,7 @@ import java.io.Serializable;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement
+//@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SaveProjectRequest implements Serializable {
 

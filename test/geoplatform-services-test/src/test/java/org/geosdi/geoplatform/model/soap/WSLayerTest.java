@@ -38,27 +38,27 @@ package org.geosdi.geoplatform.model.soap;
 import org.geosdi.geoplatform.core.model.*;
 import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
-import org.geosdi.geoplatform.request.layer.WSAddLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSDDLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsRequest;
+import org.geosdi.geoplatform.request.layer.*;
 import org.geosdi.geoplatform.response.FolderDTO;
 import org.geosdi.geoplatform.response.ProjectDTO;
 import org.geosdi.geoplatform.response.ShortLayerDTO;
 import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.response.collection.TreeFolderElements;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import java.util.*;
 
 import static org.geosdi.geoplatform.gui.shared.GPLayerType.*;
 import static org.junit.Assert.*;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class WSLayerTest extends BaseSoapServiceTest {
 
     private static final String urlServer = "http://www.geosdi.org/test";
@@ -114,7 +114,7 @@ public class WSLayerTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testAddLayers() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void a_testAddLayers() throws IllegalParameterFault, ResourceNotFoundFault {
         List<Long> idList = this.addLayer3();
         this.checkState(new int[]{8, 5, 4, 3, 2, 1}, new int[]{4, 2}, "after add layers");
         GPLayer newRasterLayer3 = gpWSClient.getRasterLayer(idList.get(0)).getRasterLayer();
@@ -126,7 +126,7 @@ public class WSLayerTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testGetLayer() throws ResourceNotFoundFault {
+    public void b_testGetLayer() throws ResourceNotFoundFault {
         ShortLayerDTO shortRasterLayer1 = gpWSClient.getShortLayer(idRaster1);
         assertNotNull("assertNotNull shortRasterLayer1", shortRasterLayer1);
         assertEquals("assertEquals shortRasterLayer1.getTitle()", titleRaster1, shortRasterLayer1.getTitle());
@@ -146,17 +146,17 @@ public class WSLayerTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testUpdateRasterLayer() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void c_testUpdateRasterLayer() throws IllegalParameterFault, ResourceNotFoundFault {
         final String titleLayerUpdated = "rasterLayerUpdated";
         raster1.setTitle(titleLayerUpdated);
-        gpWSClient.updateRasterLayer(raster1);
+        gpWSClient.updateRasterLayer(new UpdateLayerRequest(raster1));
         ShortLayerDTO layerUpdated = gpWSClient.getShortLayer(idRaster1);
         assertNotNull("assertNotNull layerUpdated", layerUpdated);
         assertEquals("assertEquals layerUpdated.getTitle()", titleLayerUpdated, layerUpdated.getTitle());
     }
 
     @Test
-    public void testDeleteLayer() throws ResourceNotFoundFault {
+    public void d_testDeleteLayer() throws ResourceNotFoundFault {
         // Assert total number of folders stored into DB before delete            
         List<ShortLayerDTO> allLayersBeforeDelete = gpWSClient.getLayers(idProjectTest).getLayers();
         int totalLayers = allLayersBeforeDelete.size();
@@ -202,7 +202,7 @@ public class WSLayerTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testSaveAndDeleteLayerAndTreeModifications() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void e_testSaveAndDeleteLayerAndTreeModifications() throws IllegalParameterFault, ResourceNotFoundFault {
         Map<Long, Integer> map = new HashMap<Long, Integer>();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
         descendantsMapData.setDescendantsMap(map);
@@ -230,7 +230,7 @@ public class WSLayerTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testDragAndDropLayerOnSameParent() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void f_testDragAndDropLayerOnSameParent() throws IllegalParameterFault, ResourceNotFoundFault {
         logger.trace("\n\t@@@ testDragAndDropLayerOnSameParent @@@");
         Map<Long, Integer> map = new HashMap<Long, Integer>();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
@@ -246,7 +246,7 @@ public class WSLayerTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testDragAndDropLayerOnDifferentFolder() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void g_testDragAndDropLayerOnDifferentFolder() throws IllegalParameterFault, ResourceNotFoundFault {
         logger.trace("\n\t@@@ testDragAndDropLayerOnDifferentFolder @@@");
         Map<Long, Integer> map = new HashMap<Long, Integer>();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
@@ -268,7 +268,7 @@ public class WSLayerTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testTransactionOnAddLayer() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void h_testTransactionOnAddLayer() throws IllegalParameterFault, ResourceNotFoundFault {
         logger.trace("\n\t@@@ testTransactionOnAddLayer @@@");
         Map<Long, Integer> map = new HashMap<Long, Integer>();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
@@ -285,7 +285,7 @@ public class WSLayerTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testTransactionOnRemoveAndAddLayer() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void i_testTransactionOnRemoveAndAddLayer() throws IllegalParameterFault, ResourceNotFoundFault {
         logger.trace("\n\t@@@ testTransactionOnRemoveAndAddLayer @@@");
         Map<Long, Integer> map = new HashMap<Long, Integer>();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
@@ -309,7 +309,7 @@ public class WSLayerTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testGetShortLayer() throws ResourceNotFoundFault {
+    public void l_testGetShortLayer() throws ResourceNotFoundFault {
         ShortLayerDTO layer = gpWSClient.getShortLayer(idVector2);
         assertNotNull("assertNotNull layer", layer);
         assertEquals("assertEquals layer.getLayerType()", layer.getLayerType(), POLYGON);
@@ -319,7 +319,7 @@ public class WSLayerTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testGetBBox() throws ResourceNotFoundFault {
+    public void m_testGetBBox() throws ResourceNotFoundFault {
         GPBBox bbox = gpWSClient.getBBox(idVector1);
         assertNotNull("assertNotNull bbox", bbox);
         assertEquals("assertEquals bbox.getMaxX()", 0, Double.compare(bbox.getMaxX(), 20.0));
@@ -329,7 +329,7 @@ public class WSLayerTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testCorrectnessOnAddLayers() throws ResourceNotFoundFault {
+    public void n_testCorrectnessOnAddLayers() throws ResourceNotFoundFault {
         logger.trace("\n\t@@@ testCorrectnessOnAddLayers @@@");
         Map<Long, Integer> map = new HashMap<Long, Integer>();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
@@ -344,7 +344,7 @@ public class WSLayerTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testGetLayerInfo() throws ResourceNotFoundFault {
+    public void o_testGetLayerInfo() throws ResourceNotFoundFault {
         GPLayerInfo layerInfo = gpWSClient.getLayerInfo(idRaster2);
         assertNotNull("assertNotNull layerInfo", layerInfo);
         assertEquals("assertEquals layerInfo.isQueryable()", false, layerInfo.isQueryable());
@@ -358,12 +358,17 @@ public class WSLayerTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testGetLayersDataSourceByProject() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void p_testGetLayersDataSourceByProject() throws IllegalParameterFault, ResourceNotFoundFault {
         this.addLayer3();
         List<String> list = gpWSClient.getLayersDataSourceByProjectID(idProjectTest).getDataSources();
         assertEquals("Number of elements of server's url", 2, list.size());
         assertTrue("List does not contain 'http://www.geosdi.org/test'", list.contains(urlServer));
         assertTrue("List does not contain 'http://www.geosdi.org/newtest'", list.contains(newUrlServer));
+    }
+
+    @Test
+    public void q_saveCheckStatusLayerAndTreeModificationsRest() throws Exception {
+        assertTrue(gpWSClient.saveCheckStatusLayerAndTreeModifications(idRaster1, true));
     }
 
     /**

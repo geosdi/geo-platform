@@ -41,6 +41,7 @@ import org.geosdi.geoplatform.request.PublishRequest;
 import org.geosdi.geoplatform.responce.InfoPreview;
 import org.geosdi.geoplatform.responce.InfoPreviewStore;
 import org.geosdi.geoplatform.responce.LayerAttributeStore;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import java.io.File;
@@ -51,15 +52,17 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.publisher.rest.PublisherRSServerUtils.gpPublisherClient;
 import static org.junit.Assert.*;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class GPPublisherRestTest extends PublisherRestTest {
 
     @Test
-    public void analyzeZIPEPSGTestRest() throws Exception {
+    public void a_analyzeZIPEPSGTestRest() throws Exception {
         super.mockAnalyzeZIPEPSG();
         InfoPreviewStore previewStore = gpPublisherClient.analyzeZIPEPSG("http://localhost:8282/geoplatform-service/",
                 "geoSDI", new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "logback-test.xml")
@@ -69,7 +72,7 @@ public class GPPublisherRestTest extends PublisherRestTest {
     }
 
     @Test
-    public void processEPSGResultTestRest() throws Exception {
+    public void b_processEPSGResultTestRest() throws Exception {
         super.mockProcessEPSGResult();
         InfoPreviewStore previewStore = gpPublisherClient.processEPSGResult(new ProcessEPSGResultRequest());
         assertEquals(37, previewStore.getInfoPreviews().size());
@@ -77,14 +80,14 @@ public class GPPublisherRestTest extends PublisherRestTest {
     }
 
     @Test
-    public void loadStyleTestRest() throws Exception {
+    public void c_loadStyleTestRest() throws Exception {
         super.mockLoadStyle();
         String styleLoaded = gpPublisherClient.loadStyle("LAYER_DATA_SOURCE_MOCK", "LAYER_NAME_MOCK");
         assertEquals("MOCK_STYLE_TEST_LOADED", styleLoaded);
     }
 
     @Test
-    public void describeFeatureTypeTestRest() throws Exception {
+    public void d_describeFeatureTypeTestRest() throws Exception {
         super.mockDescribeFeatureType();
         LayerAttributeStore layerAttributeStore = gpPublisherClient.describeFeatureType("LAYER_NAME_MOCK_TEST");
         assertEquals(40, layerAttributeStore.getLayerAttributes().size());
@@ -92,25 +95,25 @@ public class GPPublisherRestTest extends PublisherRestTest {
     }
 
     @Test
-    public void publishStyleTestRest() throws Exception {
+    public void e_publishStyleTestRest() throws Exception {
         super.mockPublishStyle();
         assertTrue(gpPublisherClient.publishStyle("STYLE_MOCK_MOCKITO", "STYLE_MOCK_MOCKITO", Boolean.FALSE));
     }
 
     @Test
-    public void putStyleTestRest() throws Exception {
+    public void f_putStyleTestRest() throws Exception {
         super.mockPutStyle();
         assertTrue(gpPublisherClient.updateStyle("STYLE_MOCK_TEST", "STYLE_NAME_MOCK", TRUE));
     }
 
     @Test
-    public void existsStyleTestRest() throws Exception {
+    public void g_existsStyleTestRest() throws Exception {
         super.mockExistsStyle();
         assertTrue(gpPublisherClient.existsStyle("STYLE_MOCK_MOCKITO_TEST"));
     }
 
     @Test
-    public void analyzeTIFInPreviewTestRest() throws Exception {
+    public void h_analyzeTIFInPreviewTestRest() throws Exception {
         super.mockAnalyzeTIFInPreview();
         InfoPreview preview = gpPublisherClient.analyzeTIFInPreview("jdshfjsdfhsjfh",
                 new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "logback-test.xml")
@@ -122,7 +125,7 @@ public class GPPublisherRestTest extends PublisherRestTest {
     }
 
     @Test
-    public void getPreviewDataStoresTestRest() throws Exception {
+    public void i_getPreviewDataStoresTestRest() throws Exception {
         super.mockGetPreviewDataStores();
         InfoPreviewStore previewStore = gpPublisherClient.getPreviewDataStores("USER_MOCK_MOKITO");
         assertNotNull(previewStore);
@@ -131,14 +134,14 @@ public class GPPublisherRestTest extends PublisherRestTest {
     }
 
     @Test
-    public void publishTestRest() throws Exception {
+    public void l_publishTestRest() throws Exception {
         super.mockPublish();
         assertTrue(gpPublisherClient.publish(new PublishLayerRequest("7364736sdfdsufhiuf", "WORKSPACE_MOCK",
                 "DATA_STORE_MOCK", "LAYER_NAME_MOCK")));
     }
 
     @Test
-    public void publishAllofPreviewTestRest() throws Exception {
+    public void m_publishAllofPreviewTestRest() throws Exception {
         super.mockPublishAllofPreview();
         assertTrue(gpPublisherClient.publishAllofPreview(new PublishRequest("487538hghghewrwr",
                 "WORKSPACE_MOCK_TEST", "DATA_STORE_MOCK_TEST")));

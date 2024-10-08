@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.request;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.io.Serializable;
 
@@ -49,7 +48,7 @@ import java.io.Serializable;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@XmlRootElement(name = "RequestByAccountProjectIDs")
+//@XmlRootElement(name = "RequestByAccountProjectIDs")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RequestByAccountProjectIDs implements Serializable {
 

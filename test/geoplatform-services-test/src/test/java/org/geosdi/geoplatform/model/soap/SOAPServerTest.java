@@ -40,16 +40,19 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.server.WSSaveServerRequest;
 import org.geosdi.geoplatform.response.ServerDTO;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import java.util.Collection;
 
 import static org.geosdi.geoplatform.core.model.GPCapabilityType.WMS;
 import static org.junit.Assert.*;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class SOAPServerTest extends BaseSoapServiceTest {
 
     @Override
@@ -62,7 +65,7 @@ public class SOAPServerTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testUpdateServer() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void a_testUpdateServer() throws IllegalParameterFault, ResourceNotFoundFault {
         final String serverUrlUpdated = serverUrlTest.replaceAll("org", "com");
         // Retrieve Server
         GeoPlatformServer serverTest = gpWSClient.getServerDetail(idServerTest);
@@ -79,7 +82,7 @@ public class SOAPServerTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testGetServer() throws ResourceNotFoundFault {
+    public void b_testGetServer() throws ResourceNotFoundFault {
         // Get Server from Id
         GeoPlatformServer gpServer = gpWSClient.getServerDetail(idServerTest);
         logger.debug("\n*** gpServer:\n{}\n***", gpServer);
@@ -95,7 +98,7 @@ public class SOAPServerTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testGetAllServer() throws ResourceNotFoundFault {
+    public void c_testGetAllServer() throws ResourceNotFoundFault {
         // Number of Servers
         Collection<ServerDTO> servers = gpWSClient.getAllServers(organizationNameTest).getServers();
         assertNotNull(servers);
@@ -112,7 +115,7 @@ public class SOAPServerTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testSaveServer() throws ResourceNotFoundFault, IllegalParameterFault {
+    public void d_testSaveServer() throws ResourceNotFoundFault, IllegalParameterFault {
         logger.trace("\n@@@ testSaveServer @@@");
         // Server is into DB
         ServerDTO serverGeoSDI = gpWSClient.getShortServer(serverUrlGeoSDI);
@@ -124,7 +127,6 @@ public class SOAPServerTest extends BaseSoapServiceTest {
         String serverUrlEx = "http://iws.erdas.com/ecwp/ecw_wms.dll?request=GetCapabilities";
         serverDTO = gpWSClient.saveServer(new WSSaveServerRequest(null, "Erdas", serverUrlEx, organizationTest.getName()));
         assertNotNull("ServerDTO EX is NULL", serverDTO);
-
         // Check if the server was insert
         GeoPlatformServer serverEx = gpWSClient.getServerDetailByUrl(serverUrlEx);
         assertNotNull("Server Ex is NULL for URL", serverEx);

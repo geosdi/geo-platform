@@ -49,10 +49,8 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-
 /**
  * @author Francesco Izzi - geoSDI
- *
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 @JsonSubTypes({@JsonSubTypes.Type(value = GPRasterLayer.class, name = "GPRaster"),

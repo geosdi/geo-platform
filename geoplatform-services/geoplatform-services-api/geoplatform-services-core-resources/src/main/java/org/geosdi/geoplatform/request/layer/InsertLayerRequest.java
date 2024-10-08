@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.request.layer;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.core.model.GPLayer;
 
 import java.io.Serializable;
@@ -48,7 +47,7 @@ import java.io.Serializable;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement(name = "InsertLayerRequest")
+//@XmlRootElement(name = "InsertLayerRequest")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class InsertLayerRequest implements Serializable {
 
@@ -81,5 +80,4 @@ public class InsertLayerRequest implements Serializable {
     public void setLayer(GPLayer layer) {
         this.layer = layer;
     }
-
 }

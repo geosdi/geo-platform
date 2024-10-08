@@ -49,7 +49,6 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -59,13 +58,13 @@ import java.util.List;
  *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@JsonTypeInfo(  
-    use = JsonTypeInfo.Id.NAME,  
-    include = JsonTypeInfo.As.PROPERTY,  
-    property = "type")  
-@JsonSubTypes({  
-    @Type(value = GPUser.class, name = "GPUser"),  
-    @Type(value = GPApplication.class, name = "GPApplication") })  
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "type")
+@JsonSubTypes({
+    @Type(value = GPUser.class, name = "GPUser"),
+    @Type(value = GPApplication.class, name = "GPApplication") })
 @XmlTransient
 @XmlSeeAlso(value = {GPUser.class, GPApplication.class})
 @Entity

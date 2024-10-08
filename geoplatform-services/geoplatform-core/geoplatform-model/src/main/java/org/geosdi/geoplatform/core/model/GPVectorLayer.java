@@ -39,6 +39,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.Setter;
@@ -47,11 +48,13 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.locationtech.jts.geom.Geometry;
 
+import static jakarta.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
  */
-@XmlRootElement(name = "VectorLayer")
+@XmlRootElement(name = "GPVectorLayer")
+@XmlAccessorType(FIELD)
 @Entity(name = "VectorLayer")
 @Table(name = "gp_vector_layer")
 @PrimaryKeyJoinColumn(name = "gp_layer_id")

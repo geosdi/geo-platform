@@ -41,18 +41,26 @@ import org.geosdi.geoplatform.response.SearchUsersResponseWS;
 import org.geosdi.geoplatform.response.ShortAccountDTOContainer;
 import org.geosdi.geoplatform.response.authority.GetAuthoritiesResponseWS;
 import org.geosdi.geoplatform.response.authority.GetAuthorityResponse;
+import org.geosdi.geoplatform.support.jackson.property.GPJsonIncludeFeature;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 
+import java.util.Locale;
+
 import static java.lang.Thread.currentThread;
+import static org.geosdi.geoplatform.support.jackson.annotation.JacksonXmlAnnotationIntrospectorBuilder.JAKARTA;
+import static org.geosdi.geoplatform.support.jackson.property.GPJacksonSupportEnum.*;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class GPJacksonAccountSupportTest extends GPBaseJacksonSupportTest {
     
     @Test
-    public void accountsDataMapperTest() throws Exception {
+    public void a_accountsDataMapperTest() throws Exception {
         ShortAccountDTOContainer accountContainer = jacksonSupport.getDefaultMapper()
                 .readValue(currentThread().getContextClassLoader().getResourceAsStream(ACCOUNTS_DATA_JSON), ShortAccountDTOContainer.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ACCOUNTS_DATA_MAPPING : {}\n\n", accountContainer);
@@ -60,7 +68,7 @@ public class GPJacksonAccountSupportTest extends GPBaseJacksonSupportTest {
     }
     
     @Test
-    public void insertAccountRequestMapperTest() throws Exception {
+    public void b_insertAccountRequestMapperTest() throws Exception {
         InsertAccountRequest insertAccountRequest = jacksonSupport.getDefaultMapper()
                 .readValue(currentThread().getContextClassLoader().getResourceAsStream(INSERT_ACCOUNT_REQUEST_DATA_JSON), InsertAccountRequest.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@INSERT_ACCOUNT_REQUEST : {}\n\n", insertAccountRequest);
@@ -68,7 +76,7 @@ public class GPJacksonAccountSupportTest extends GPBaseJacksonSupportTest {
     }
     
     @Test
-    public void accountProjectDataMapperTest() throws Exception {
+    public void c_accountProjectDataMapperTest() throws Exception {
         GPAccountProject accountProject = jacksonSupport.getDefaultMapper()
                 .readValue(currentThread().getContextClassLoader().getResourceAsStream(ACCOUNT_PROJECT_DATA_JSON), GPAccountProject.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@ACCOUNT_PROJECT_DATA_MAPPING : {}\n\n", accountProject);
@@ -76,7 +84,7 @@ public class GPJacksonAccountSupportTest extends GPBaseJacksonSupportTest {
     }
     
     @Test
-    public void getAuthoritiesResponseDataMapperTest() throws Exception {
+    public void d_getAuthoritiesResponseDataMapperTest() throws Exception {
         GetAuthoritiesResponseWS getAuthoritiesResponse = jacksonSupport.getDefaultMapper()
                 .readValue(currentThread().getContextClassLoader().getResourceAsStream(GET_AUTHORITIES_RESPONSE_DATA_JSON), GetAuthoritiesResponseWS.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@GET_AUTHORITIES_RESPONSE_DATA_MAPPING : {}\n\n", getAuthoritiesResponse);
@@ -84,7 +92,7 @@ public class GPJacksonAccountSupportTest extends GPBaseJacksonSupportTest {
     }
     
     @Test
-    public void searchUsersResponseDataMapperTest() throws Exception {
+    public void e_searchUsersResponseDataMapperTest() throws Exception {
         SearchUsersResponseWS searchUsersResponse = jacksonSupport.getDefaultMapper()
                 .readValue(currentThread().getContextClassLoader().getResourceAsStream(SEARCH_USERS_RESPONSE_DATA_JSON), SearchUsersResponseWS.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@SEARCH_USERS_RESPONSE_DATA_MAPPING : {}\n\n", searchUsersResponse);
@@ -92,10 +100,33 @@ public class GPJacksonAccountSupportTest extends GPBaseJacksonSupportTest {
     }
     
     @Test
-    public void getAuthorityResponseDataMapperTest() throws Exception {
+    public void f_getAuthorityResponseDataMapperTest() throws Exception {
         GetAuthorityResponse getAuthorityResponse = jacksonSupport.getDefaultMapper()
                 .readValue(currentThread().getContextClassLoader().getResourceAsStream(GET_AUTHORITY_RESPONSE_DATA_JSON), GetAuthorityResponse.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@GET_AUTHORITY_RESPONSE_DATA_MAPPING : {}\n\n", getAuthorityResponse);
         super.marshall(getAuthorityResponse);
+    }
+
+    @Test
+    public void g_insertAccountRequestMapperTest() throws Exception {
+        InsertAccountRequest insertAccountRequest = jacksonSupport.getDefaultMapper()
+                .readValue(currentThread().getContextClassLoader().getResourceAsStream(INSERT_ACCOUNT_REQUEST_JSON), InsertAccountRequest.class);
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@INSERT_ACCOUNT_REQUEST : {}\n\n", insertAccountRequest);
+        super.marshall(insertAccountRequest);
+    }
+
+    @Test
+    public void h_insertAccountRequestMapperTest() throws Exception {
+        GPJacksonSupport jacksonSupport = new GPJacksonSupport(JAKARTA, UNWRAP_ROOT_VALUE_DISABLE,
+                FAIL_ON_UNKNOW_PROPERTIES_DISABLE,
+                ACCEPT_SINGLE_VALUE_AS_ARRAY_ENABLE,
+                WRAP_ROOT_VALUE_DISABLE,
+                INDENT_OUTPUT_ENABLE)
+                .configure(GPJsonIncludeFeature.NON_NULL)
+                .setLocale(Locale.getDefault());
+        InsertAccountRequest insertAccountRequest = jacksonSupport.getDefaultMapper()
+                .readValue(currentThread().getContextClassLoader().getResourceAsStream("InsertAccountRequestWithoutRoot.json"), InsertAccountRequest.class);
+        logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@INSERT_ACCOUNT_REQUEST : {}\n\n", insertAccountRequest);
+        super.marshall(insertAccountRequest);
     }
 }

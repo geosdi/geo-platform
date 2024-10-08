@@ -40,21 +40,24 @@ import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPViewport;
 import org.geosdi.geoplatform.request.viewport.InsertViewportRequest;
 import org.geosdi.geoplatform.request.viewport.ManageViewportRequest;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.stream.IntStream;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.IntStream.iterate;
 import static org.junit.Assert.*;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class RSViewportTest extends BasicRestServiceTest {
 
     private GPAccountProject accountProject;
@@ -67,10 +70,9 @@ public class RSViewportTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void insertMassiveViewportTestRest() throws Exception {
+    public void a_insertMassiveViewportTestRest() throws Exception {
         Collection<GPViewport> viewports = super.createMassiveViewports();
-        gpWSClient.saveOrUpdateViewportList(new ManageViewportRequest(
-                idAccountProject, new ArrayList<>(viewports)));
+        gpWSClient.saveOrUpdateViewportList(new ManageViewportRequest(idAccountProject, new ArrayList<>(viewports)));
         Collection<GPViewport> viewportsFound = gpWSClient.getAccountProjectViewports(idAccountProject).getViewports();
         logger.trace("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@FOUND {} @@@@@@@@@@@@@@@@@@@@@@@@@\n\n", viewportsFound);
         assertEquals(80, viewportsFound.size());
@@ -81,7 +83,7 @@ public class RSViewportTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void updateViewportTestRest() throws Exception {
+    public void b_updateViewportTestRest() throws Exception {
         Long idViewportDefault = gpWSClient.insertViewport(new InsertViewportRequest(idAccountProject, new GPViewport("Viewport-To-Save-RS", "This is the viewport to save", 22, new GPBBox(10, 10, 20, 20), TRUE)));
         assertNotNull(idViewportDefault);
         Long idViewport = gpWSClient.insertViewport(new InsertViewportRequest(idAccountProject, new GPViewport("Viewport-To-Save-New-RS", "This is the viewport to save New", 18, new GPBBox(18, 20, 40, 29), FALSE)));
@@ -105,7 +107,7 @@ public class RSViewportTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void deleteViewportTestRest() throws Exception {
+    public void c_deleteViewportTestRest() throws Exception {
         Long idViewport = gpWSClient.insertViewport(new InsertViewportRequest(idAccountProject, new GPViewport("Viewport-To-Delete-RS", "This is the viewport to Delete", 26, new GPBBox(15, 15, 22, 30), TRUE)));
         assertNotNull(idViewport);
         GPViewport viewport = gpWSClient.getViewportById(idViewport);
@@ -115,7 +117,7 @@ public class RSViewportTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void replaceViewportListTestRest() throws Exception {
+    public void d_replaceViewportListTestRest() throws Exception {
         Collection<GPViewport> viewports = super.createMassiveViewports();
         gpWSClient.saveOrUpdateViewportList(new ManageViewportRequest(idAccountProject, new ArrayList<>(viewports)));
         assertEquals(80, gpWSClient.getAccountProjectViewports(idAccountProject).getViewports().size());
@@ -128,7 +130,7 @@ public class RSViewportTest extends BasicRestServiceTest {
      * @return {@link Collection<GPViewport>}
      */
     Collection<GPViewport> createViewportListToReplace() {
-        return IntStream.iterate(0, n -> n + 1)
+        return iterate(0, n -> n + 1)
                 .limit(20)
                 .boxed()
                 .map(i -> new GPViewport("Viewport_To_Replace" + i + "-Rest",

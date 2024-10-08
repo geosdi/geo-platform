@@ -38,19 +38,22 @@ package org.geosdi.geoplatform.support.jackson;
 import org.geosdi.geoplatform.core.model.GPMessage;
 import org.geosdi.geoplatform.response.MessageDTO;
 import org.geosdi.geoplatform.response.message.GetMessageResponse;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import static java.lang.Thread.currentThread;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class GPJacksonMessageSupportTest extends GPBaseJacksonSupportTest {
 
     @Test
-    public void messageDataMapperTest() throws Exception {
+    public void a_messageDataMapperTest() throws Exception {
         GPMessage message = jacksonSupport.getDefaultMapper()
                 .readValue(currentThread().getContextClassLoader().getResourceAsStream(MESSAGE_DATA_JSON), GPMessage.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@MESSAGE_DATA_MAPPING : {}\n\n", message);
@@ -58,7 +61,7 @@ public class GPJacksonMessageSupportTest extends GPBaseJacksonSupportTest {
     }
 
     @Test
-    public void messageDTODataMapperTest() throws Exception {
+    public void b_messageDTODataMapperTest() throws Exception {
         MessageDTO messageDTO = jacksonSupport.getDefaultMapper()
                 .readValue(currentThread().getContextClassLoader().getResourceAsStream(MESSAGE_DTO_DATA_JSON), MessageDTO.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@MESSAGE_DTO_DATA_MAPPING : {}\n\n", messageDTO);
@@ -66,7 +69,7 @@ public class GPJacksonMessageSupportTest extends GPBaseJacksonSupportTest {
     }
 
     @Test
-    public void getMessageResponseDataMapperTest() throws Exception {
+    public void c_getMessageResponseDataMapperTest() throws Exception {
         GetMessageResponse getMessageReponse = jacksonSupport.getDefaultMapper()
                 .readValue(currentThread().getContextClassLoader().getResourceAsStream(GET_MESSAGE_RESPONSE_DATA_JSON), GetMessageResponse.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@GET_MESSAGE_RESPONSE_DATA_MAPPING : {}\n\n", getMessageReponse);

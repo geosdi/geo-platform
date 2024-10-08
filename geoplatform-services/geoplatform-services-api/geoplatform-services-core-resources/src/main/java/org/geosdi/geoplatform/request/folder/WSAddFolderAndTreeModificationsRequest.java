@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.request.folder;
 
-import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlType;
 import org.geosdi.geoplatform.core.model.GPFolder;
 import org.geosdi.geoplatform.request.TreeModificationRequest;
@@ -45,7 +44,7 @@ import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement
+//@XmlRootElement
 @XmlType(propOrder = {"projectID", "parentID", "folder", "descendantsMapData"})
 public class WSAddFolderAndTreeModificationsRequest extends TreeModificationRequest {
 

@@ -42,15 +42,13 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.exception.rs.GPRestExceptionMessage;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
-import org.geosdi.geoplatform.request.layer.WSAddLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSDDLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsRequest;
+import org.geosdi.geoplatform.request.layer.*;
 import org.geosdi.geoplatform.response.FolderDTO;
 import org.geosdi.geoplatform.response.ProjectDTO;
 import org.geosdi.geoplatform.response.ShortLayerDTO;
 import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 import org.geosdi.geoplatform.response.collection.TreeFolderElements;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import java.util.*;
@@ -58,11 +56,13 @@ import java.util.*;
 import static org.geosdi.geoplatform.gui.shared.GPLayerType.POLYGON;
 import static org.geosdi.geoplatform.gui.shared.GPLayerType.WMS;
 import static org.junit.Assert.*;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class RSLayerTest extends BasicRestServiceTest {
     
     private static final String urlServer = "http://www.geosdi.org/test_rs";
@@ -117,7 +117,7 @@ public class RSLayerTest extends BasicRestServiceTest {
     }
     
     @Test
-    public void testAddLayersRest() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void a_testAddLayersRest() throws IllegalParameterFault, ResourceNotFoundFault {
         List<Long> idList = this.addLayer3Rest();
         this.checkStateRest(new int[]{8, 5, 4, 3, 2, 1}, new int[]{4, 2}, "after add layers");
         GPLayer newRasterLayer3 = gpWSClient.getRasterLayer(idList.get(0)).getRasterLayer();
@@ -129,7 +129,7 @@ public class RSLayerTest extends BasicRestServiceTest {
     }
     
     @Test
-    public void testGetLayerRest() throws ResourceNotFoundFault {
+    public void b_testGetLayerRest() throws ResourceNotFoundFault {
         ShortLayerDTO shortRasterLayer1 = gpWSClient.getShortLayer(idRaster1);
         assertNotNull("assertNotNull shortRasterLayer1", shortRasterLayer1);
         assertEquals("assertEquals shortRasterLayer1.getTitle()", titleRaster1, shortRasterLayer1.getTitle());
@@ -149,17 +149,17 @@ public class RSLayerTest extends BasicRestServiceTest {
     }
     
     @Test
-    public void testUpdateRasterLayerRest() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void c_testUpdateRasterLayerRest() throws IllegalParameterFault, ResourceNotFoundFault {
         final String titleLayerUpdated = "rasterLayerUpdated_rs";
         raster1.setTitle(titleLayerUpdated);
-        gpWSClient.updateRasterLayer(raster1);
+        gpWSClient.updateRasterLayer(new UpdateLayerRequest(raster1));
         ShortLayerDTO layerUpdated = gpWSClient.getShortLayer(idRaster1);
         assertNotNull("assertNotNull layerUpdated", layerUpdated);
         assertEquals("assertEquals layerUpdated.getTitle()", titleLayerUpdated, layerUpdated.getTitle());
     }
     
     @Test
-    public void testDeleteLayerRest() throws ResourceNotFoundFault {
+    public void d_testDeleteLayerRest() throws ResourceNotFoundFault {
         // Assert total number of folders stored into DB before delete            
         List<ShortLayerDTO> allLayersBeforeDelete = gpWSClient.getLayers(idProjectTest).getLayers();
         int totalLayers = allLayersBeforeDelete.size();
@@ -204,7 +204,7 @@ public class RSLayerTest extends BasicRestServiceTest {
     }
     
     @Test
-    public void testSaveAndDeleteLayerAndTreeModifications() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void e_testSaveAndDeleteLayerAndTreeModifications() throws IllegalParameterFault, ResourceNotFoundFault {
         Map<Long, Integer> map = new HashMap<Long, Integer>();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
         descendantsMapData.setDescendantsMap(map);
@@ -238,7 +238,7 @@ public class RSLayerTest extends BasicRestServiceTest {
     }
     
     @Test
-    public void testDragAndDropLayerOnSameParentRest() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void f_testDragAndDropLayerOnSameParentRest() throws IllegalParameterFault, ResourceNotFoundFault {
         logger.trace("\n\t@@@ testDragAndDropLayerOnSameParentRest @@@");
         Map<Long, Integer> map = new HashMap<Long, Integer>();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
@@ -254,7 +254,7 @@ public class RSLayerTest extends BasicRestServiceTest {
     }
     
     @Test
-    public void testDragAndDropLayerOnDifferentFolderRest() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void g_testDragAndDropLayerOnDifferentFolderRest() throws IllegalParameterFault, ResourceNotFoundFault {
         logger.trace("\n\t@@@ testDragAndDropLayerOnDifferentFolderRest @@@");
         Map<Long, Integer> map = new HashMap();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
@@ -276,7 +276,7 @@ public class RSLayerTest extends BasicRestServiceTest {
     }
     
     @Test
-    public void testTransactionOnAddLayerRest() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void h_testTransactionOnAddLayerRest() throws IllegalParameterFault, ResourceNotFoundFault {
         logger.trace("\n\t@@@ testTransactionOnAddLayerRest @@@");
         Map<Long, Integer> map = new HashMap();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
@@ -293,7 +293,7 @@ public class RSLayerTest extends BasicRestServiceTest {
     }
     
     @Test
-    public void testTransactionOnRemoveAndAddLayerRest() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void i_testTransactionOnRemoveAndAddLayerRest() throws IllegalParameterFault, ResourceNotFoundFault {
         logger.trace("\n\t@@@ testTransactionOnRemoveAndAddLayerRest @@@");
         Map<Long, Integer> map = new HashMap();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
@@ -321,7 +321,7 @@ public class RSLayerTest extends BasicRestServiceTest {
     }
     
     @Test
-    public void testGetShortLayerRest() throws ResourceNotFoundFault {
+    public void l_testGetShortLayerRest() throws ResourceNotFoundFault {
         ShortLayerDTO layer = gpWSClient.getShortLayer(idVector2);
         assertNotNull("assertNotNull layer", layer);
         assertEquals("assertEquals layer.getLayerType()", layer.getLayerType(), POLYGON);
@@ -331,7 +331,7 @@ public class RSLayerTest extends BasicRestServiceTest {
     }
     
     @Test
-    public void testGetBBoxRest() throws ResourceNotFoundFault {
+    public void m_testGetBBoxRest() throws ResourceNotFoundFault {
         GPBBox bbox = gpWSClient.getBBox(idVector1);
         assertNotNull("assertNotNull bbox", bbox);
         assertEquals("assertEquals bbox.getMaxX()", 0, Double.compare(bbox.getMaxX(), 20.0));
@@ -341,7 +341,7 @@ public class RSLayerTest extends BasicRestServiceTest {
     }
     
     @Test
-    public void testCorrectnessOnAddLayersRest() throws ResourceNotFoundFault {
+    public void n_testCorrectnessOnAddLayersRest() throws ResourceNotFoundFault {
         logger.trace("\n\t@@@ testCorrectnessOnAddLayers @@@");
         Map<Long, Integer> map = new HashMap<Long, Integer>();
         GPWebServiceMapData descendantsMapData = new GPWebServiceMapData();
@@ -356,7 +356,7 @@ public class RSLayerTest extends BasicRestServiceTest {
     }
     
     @Test
-    public void testGetLayerInfoRest() throws ResourceNotFoundFault {
+    public void o_testGetLayerInfoRest() throws ResourceNotFoundFault {
         GPLayerInfo layerInfo = gpWSClient.getLayerInfo(idRaster2);
         assertNotNull("assertNotNull layerInfo", layerInfo);
         assertEquals("assertEquals layerInfo.isQueryable()", false, layerInfo.isQueryable());
@@ -370,7 +370,7 @@ public class RSLayerTest extends BasicRestServiceTest {
     }
     
     @Test
-    public void testGetLayersDataSourceByProjectRest() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void p_testGetLayersDataSourceByProjectRest() throws IllegalParameterFault, ResourceNotFoundFault {
         this.addLayer3Rest();
         List<String> list = gpWSClient.getLayersDataSourceByProjectID(idProjectTest).getDataSources();
         assertEquals("Number of elements of server's url", 2, list.size());
@@ -379,7 +379,7 @@ public class RSLayerTest extends BasicRestServiceTest {
     }
     
     @Test
-    public void saveCheckStatusLayerAndTreeModificationsRest() throws Exception {
+    public void q_saveCheckStatusLayerAndTreeModificationsRest() throws Exception {
         assertTrue(gpWSClient.saveCheckStatusLayerAndTreeModifications(idRaster1, true));
     }
 

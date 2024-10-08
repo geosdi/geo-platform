@@ -702,34 +702,27 @@ public class GeoPlatformServiceImpl implements GeoPlatformService {
     }
 
     @Override
-    public Long updateRasterLayer(GPRasterLayer layer)
-            throws ResourceNotFoundFault, IllegalParameterFault {
-        return gpLayerDelegate.updateRasterLayer(layer);
+    public Long updateRasterLayer(UpdateLayerRequest updateLayerRequest) throws ResourceNotFoundFault, IllegalParameterFault {
+        return gpLayerDelegate.updateRasterLayer(updateLayerRequest);
     }
 
     @Override
-    public Long updateVectorLayer(GPVectorLayer layer)
-            throws ResourceNotFoundFault, IllegalParameterFault {
-        return gpLayerDelegate.updateVectorLayer(layer);
+    public Long updateVectorLayer(UpdateLayerRequest updateLayerRequest) throws ResourceNotFoundFault, IllegalParameterFault {
+        return gpLayerDelegate.updateVectorLayer(updateLayerRequest);
     }
 
     @Override
-    public Boolean deleteLayer(Long layerID)
-            throws ResourceNotFoundFault {
+    public Boolean deleteLayer(Long layerID) throws ResourceNotFoundFault {
         return gpLayerDelegate.deleteLayer(layerID);
     }
 
     @Override
-    public Long saveAddedLayerAndTreeModifications(
-            WSAddLayerAndTreeModificationsRequest addLayerRequest)
-            throws ResourceNotFoundFault, IllegalParameterFault {
-        return gpLayerDelegate.saveAddedLayerAndTreeModifications(
-                addLayerRequest);
+    public Long saveAddedLayerAndTreeModifications(WSAddLayerAndTreeModificationsRequest addLayerRequest) throws ResourceNotFoundFault, IllegalParameterFault {
+        return gpLayerDelegate.saveAddedLayerAndTreeModifications(addLayerRequest);
     }
 
     @Override
-    public LongListStore saveAddedLayersAndTreeModifications(WSAddLayersAndTreeModificationsRequest addLayersRequest)
-            throws ResourceNotFoundFault, IllegalParameterFault {
+    public LongListStore saveAddedLayersAndTreeModifications(WSAddLayersAndTreeModificationsRequest addLayersRequest) throws ResourceNotFoundFault, IllegalParameterFault {
         return gpLayerDelegate.saveAddedLayersAndTreeModifications(addLayersRequest);
     }
 

@@ -37,10 +37,7 @@ package org.geosdi.geoplatform.core.model.attribution.logo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import jakarta.xml.bind.annotation.XmlAccessorType;
 import lombok.*;
-
-import static jakarta.xml.bind.annotation.XmlAccessType.FIELD;
 
 
 /**
@@ -53,7 +50,7 @@ import static jakarta.xml.bind.annotation.XmlAccessType.FIELD;
 @AllArgsConstructor
 @ToString
 @Embeddable
-@XmlAccessorType(FIELD)
+//@XmlAccessorType(FIELD)
 public class GPAttributionLogoURL implements IGPAttributionLogoURL {
 
     private static final long serialVersionUID = -8687941618757514519L;

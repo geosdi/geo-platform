@@ -1,5 +1,5 @@
 {
-    "Message": {
+    "GPMessage": {
         "id": null,
         "recipient": {
             "type": "GPUser",

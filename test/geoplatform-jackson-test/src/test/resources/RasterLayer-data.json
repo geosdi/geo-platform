@@ -1,5 +1,5 @@
 {
-    "RasterLayer": {
+    "GPRasterLayer": {
         "type": "GPRaster",
         "id": 8250,
         "title": "raster_1_rs",

@@ -36,18 +36,22 @@
 package org.geosdi.geoplatform.responce;
 
 import jakarta.xml.bind.annotation.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.List;
 
-
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement
+//@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
+@Getter
+@Setter
+@ToString
 public class LayerAttributeStore implements Serializable {
 
     private static final long serialVersionUID = 4302935972814087852L;
@@ -62,25 +66,4 @@ public class LayerAttributeStore implements Serializable {
     public LayerAttributeStore(List<LayerAttribute> theLayerAttributes) {
         this.layerAttributes = theLayerAttributes;
     }
-
-    /**
-     * @return the layerAttributes
-     */
-    public List<LayerAttribute> getLayerAttributes() {
-        return layerAttributes;
-    }
-
-    /**
-     * @param layerAttributes the layerAttributes to set
-     */
-    public void setLayerAttributes(List<LayerAttribute> layerAttributes) {
-        this.layerAttributes = layerAttributes;
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + " {" + "layerAttributes = "
-                + layerAttributes + '}';
-    }
-
 }

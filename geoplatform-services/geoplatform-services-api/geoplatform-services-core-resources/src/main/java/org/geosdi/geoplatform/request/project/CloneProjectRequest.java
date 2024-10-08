@@ -45,7 +45,7 @@ import java.io.Serializable;
  * @author Vito Salvia - CNR IMAA geoSDI Group
  * @email vito.salvia@gmail.com
  */
-@XmlRootElement
+//@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CloneProjectRequest implements Serializable {
 

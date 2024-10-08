@@ -37,14 +37,8 @@ package org.geosdi.geoplatform.services.core.api.resources;
 
 import org.geosdi.geoplatform.core.model.GPBBox;
 import org.geosdi.geoplatform.core.model.GPLayerInfo;
-import org.geosdi.geoplatform.core.model.GPRasterLayer;
-import org.geosdi.geoplatform.core.model.GPVectorLayer;
 import org.geosdi.geoplatform.gui.shared.GPLayerType;
-import org.geosdi.geoplatform.request.layer.InsertLayerRequest;
-import org.geosdi.geoplatform.request.layer.WSAddLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSAddLayersAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSDDLayerAndTreeModificationsRequest;
-import org.geosdi.geoplatform.request.layer.WSDeleteLayerAndTreeModificationsRequest;
+import org.geosdi.geoplatform.request.layer.*;
 import org.geosdi.geoplatform.response.*;
 import org.geosdi.geoplatform.response.collection.LongListStore;
 
@@ -73,7 +67,7 @@ public interface GPLayerResource {
     /**
      * Update a raster Layer.
      *
-     * @param layer the Layer to update
+     * @param updateLayerRequest the Layer to update
      * @return the Layer ID
      *
      * @throws Exception if Layer not found or if the Layer is not valid
@@ -82,19 +76,19 @@ public interface GPLayerResource {
      * #saveLayerProperties(org.geosdi.geoplatform.responce.RasterPropertiesDTO)
      */
     @Deprecated
-    Long updateRasterLayer(GPRasterLayer layer) throws Exception;
+    Long updateRasterLayer(UpdateLayerRequest updateLayerRequest) throws Exception;
 
     /**
      * Update a vector Layer.
      *
-     * @param layer the Layer to update
+     * @param updateLayerRequest the Layer to update
      * @return the Layer ID
      *
      * @throws Exception if Layer not found or if the Layer is not valid
      * @deprecated only for test purpose
      */
     @Deprecated
-    Long updateVectorLayer(GPVectorLayer layer) throws Exception;
+    Long updateVectorLayer(UpdateLayerRequest updateLayerRequest) throws Exception;
 
     /**
      * Delete a Layer by ID.

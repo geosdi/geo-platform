@@ -53,7 +53,7 @@ import static jakarta.xml.bind.annotation.XmlAccessType.FIELD;
 @AllArgsConstructor
 @ToString
 @Embeddable
-@XmlAccessorType(FIELD)
+@XmlAccessorType(value = FIELD)
 public class GPTemporalDimension implements IGPTemporalDimension {
 
     private static final long serialVersionUID = -5312461449503570743L;

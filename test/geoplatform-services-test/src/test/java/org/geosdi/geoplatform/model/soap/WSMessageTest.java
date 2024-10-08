@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.core.model.GPMessage;
 import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
 import org.geosdi.geoplatform.request.message.MarkMessageReadByDateRequest;
 import org.geosdi.geoplatform.response.MessageDTO;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import java.util.*;
@@ -50,10 +51,12 @@ import static org.geosdi.geoplatform.gui.shared.GPMessageCommandType.OPEN_PROJEC
 import static org.geosdi.geoplatform.gui.shared.GPRole.USER;
 import static org.geosdi.geoplatform.gui.shared.GPRole.VIEWER;
 import static org.junit.Assert.*;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class WSMessageTest extends BaseSoapServiceTest {
 
     private Long firstRecipientID;
@@ -86,7 +89,7 @@ public class WSMessageTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testInsertMessage() throws Exception {
+    public void a_testInsertMessage() throws Exception {
         // Insert message
         Long messageID = gpWSClient.insertMessage(message);
         assertNotNull(messageID);
@@ -104,7 +107,7 @@ public class WSMessageTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testInsertMessageMultiCommand() throws Exception {
+    public void b_testInsertMessageMultiCommand() throws Exception {
         // Insert message
         message.addCommand(OPEN_PROJECT);
         Long messageID = gpWSClient.insertMessage(message);
@@ -120,7 +123,7 @@ public class WSMessageTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testInsertMultiMessage() throws Exception {
+    public void c_testInsertMultiMessage() throws Exception {
         // Insert messages
         MessageDTO messageDTO = new MessageDTO(message);
         messageDTO.setRecipientIDs(Arrays.asList(firstRecipientID, latterRecipientID));
@@ -143,7 +146,7 @@ public class WSMessageTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testDeleteMessage() throws Exception {
+    public void d_testDeleteMessage() throws Exception {
         // Insert message
         Long messageID = gpWSClient.insertMessage(message);
         assertNotNull(messageID);
@@ -152,7 +155,7 @@ public class WSMessageTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testMarkMessageAsRead() throws Exception {
+    public void e_testMarkMessageAsRead() throws Exception {
         // Insert message
         Long messageID = gpWSClient.insertMessage(message);
         assertNotNull(messageID);
@@ -165,7 +168,7 @@ public class WSMessageTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testRetrieveMessages() throws Exception {
+    public void f_testRetrieveMessages() throws Exception {
         this.insertMessagesSorted();
         // Test all messages
         List<GPMessage> allMessages = gpWSClient.getAllMessagesByRecipient(firstRecipientID).getMessages();
@@ -192,7 +195,7 @@ public class WSMessageTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testMarkAllMessageAsRead() throws Exception {
+    public void g_testMarkAllMessageAsRead() throws Exception {
         this.insertMessagesSorted();
         // Test unread messages intial
         List<GPMessage> unreadMessages = gpWSClient.getUnreadMessagesByRecipient(firstRecipientID).getMessages();
@@ -207,7 +210,7 @@ public class WSMessageTest extends BaseSoapServiceTest {
     }
 
     @Test
-    public void testMarkPreviousMessagesAsRead() throws Exception {
+    public void h_testMarkPreviousMessagesAsRead() throws Exception {
         this.insertMessagesSorted();
         // Test unread messages intial
         List<GPMessage> unreadMessages = gpWSClient.getUnreadMessagesByRecipient(firstRecipientID).getMessages();

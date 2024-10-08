@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.connectors.ws.publish.rest;
 import org.springframework.beans.factory.annotation.Value;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

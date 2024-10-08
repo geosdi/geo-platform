@@ -40,17 +40,20 @@ import org.geosdi.geoplatform.exception.IllegalParameterFault;
 import org.geosdi.geoplatform.exception.ResourceNotFoundFault;
 import org.geosdi.geoplatform.request.server.WSSaveServerRequest;
 import org.geosdi.geoplatform.response.ServerDTO;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import java.util.Collection;
 
 import static org.geosdi.geoplatform.core.model.GPCapabilityType.WMS;
 import static org.junit.Assert.*;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class RSServerTest extends BasicRestServiceTest {
 
     @Override
@@ -63,7 +66,7 @@ public class RSServerTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void testUpdateServerRest() throws IllegalParameterFault, ResourceNotFoundFault {
+    public void a_testUpdateServerRest() throws IllegalParameterFault, ResourceNotFoundFault {
         final String serverUrlUpdated = serverUrlTest.replaceAll("org", "com");
         // Retrieve Server
         GeoPlatformServer serverTest = gpWSClient.getServerDetail(idServerTest);
@@ -80,7 +83,7 @@ public class RSServerTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void testGetServerRest() throws ResourceNotFoundFault {
+    public void b_testGetServerRest() throws ResourceNotFoundFault {
         // Get Server from Id
         GeoPlatformServer gpServer = gpWSClient.getServerDetail(idServerTest);
         logger.debug("\n*** gpServer:\n{}\n***", gpServer);
@@ -96,7 +99,7 @@ public class RSServerTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void testGetAllServerRest() throws ResourceNotFoundFault {
+    public void c_testGetAllServerRest() throws ResourceNotFoundFault {
         // Number of Servers
         Collection<ServerDTO> servers = gpWSClient.getAllServers(organizationNameRSTest).getServers();
         assertNotNull(servers);
@@ -113,7 +116,7 @@ public class RSServerTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void testSaveServerRest() throws ResourceNotFoundFault, IllegalParameterFault {
+    public void d_testSaveServerRest() throws ResourceNotFoundFault, IllegalParameterFault {
         logger.trace("\n@@@ testSaveServer @@@");
         // Server is into DB
         ServerDTO serverGeoSDI = gpWSClient.getShortServer(serverUrlGeoSDI);

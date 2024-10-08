@@ -53,26 +53,27 @@ import org.geosdi.geoplatform.response.ApplicationDTO;
 import org.geosdi.geoplatform.response.ShortAccountDTO;
 import org.geosdi.geoplatform.response.UserDTO;
 import org.geosdi.geoplatform.response.UserDTOResponse;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import java.util.List;
 
 import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import static org.geosdi.geoplatform.gui.shared.GPRole.*;
 import static org.geosdi.geoplatform.request.LikePatternType.CONTENT_EQUALS;
 import static org.junit.Assert.*;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
- *
- * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
- * @email giuseppe.lascaleia@geosdi.org
- *
+ * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>*
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class RSAccountTest extends BasicRestServiceTest {
 
     @Test
-    public void testAllAccountsRest() {
+    public void a_testAllAccountsRest() {
         List<ShortAccountDTO> accountList = gpWSClient.getAllAccounts().getAccounts();
         assertNotNull(accountList);
         logger.info("\n*** Number of Accounts into DB: {} ***", accountList.size());
@@ -86,7 +87,7 @@ public class RSAccountTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void testAllOrganizationAccountsRest() throws Exception {
+    public void b_testAllOrganizationAccountsRest() throws Exception {
         // Initial test
         List<ShortAccountDTO> accountList = gpWSClient.getAccounts(organizationNameRSTest).getAccounts();
         assertNotNull(accountList);
@@ -112,13 +113,13 @@ public class RSAccountTest extends BasicRestServiceTest {
     }
 
     @Test(expected = NotFoundException.class)
-    public void testAllOrganizationAccountsIncorrectRest() throws Exception {
+    public void c_testAllOrganizationAccountsIncorrectRest() throws Exception {
         String wrongOrganizationName = organizationNameRSTest + "_";
         gpWSClient.getAccounts(wrongOrganizationName);
     }
 
     @Test
-    public void testRetrieveUserRest() throws ResourceNotFoundFault {
+    public void d_testRetrieveUserRest() throws ResourceNotFoundFault {
         // Number of Account Like
         long numAccountsLike = gpWSClient.getAccountsCount(new SearchRequest(usernameTest, CONTENT_EQUALS));
         assertEquals("Number of Account Like", 1L, numAccountsLike);
@@ -151,12 +152,12 @@ public class RSAccountTest extends BasicRestServiceTest {
     }
 
     @Test(expected = BadRequestException.class)
-    public void testInsertUserWithNoRolesRest() throws IllegalParameterFault {
+    public void e_testInsertUserWithNoRolesRest() throws IllegalParameterFault {
         super.createAndInsertUser("user-no-roles-rest", organizationTest);
     }
 
     @Test
-    public void testInsertUserWithSingleRoleRest() throws ResourceNotFoundFault {
+    public void f_testInsertUserWithSingleRoleRest() throws ResourceNotFoundFault {
         List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(usernameTest).getAuthorities();
         assertNotNull("Authorities null", authorities);
         assertEquals("Number of Authorities of " + usernameTest, 1, authorities.size());
@@ -168,12 +169,9 @@ public class RSAccountTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void testInsertUserWithMultiRoleRest() throws IllegalParameterFault,
-            ResourceNotFoundFault {
+    public void g_testInsertUserWithMultiRoleRest() throws IllegalParameterFault, ResourceNotFoundFault {
         String usernameMultiRole = "user-multi-role-rs";
-        GPUser user = super.createAndInsertUser(usernameMultiRole,
-                organizationTest, ADMIN, VIEWER);
-
+        GPUser user = super.createAndInsertUser(usernameMultiRole, organizationTest, ADMIN, VIEWER);
         try {
             List<GPAuthority> authorities = gpWSClient.getAuthoritiesDetail(usernameMultiRole).getAuthorities();
             assertNotNull(authorities);
@@ -198,7 +196,7 @@ public class RSAccountTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void testInsertDuplicateUserWRTUsernameRest() throws Exception {
+    public void h_testInsertDuplicateUserWRTUsernameRest() throws Exception {
         GPUser user = super.createUser(usernameTest, organizationTest, USER);
         try {
             gpWSClient.insertAccount(new InsertAccountRequest(user, FALSE));
@@ -213,7 +211,7 @@ public class RSAccountTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void testInsertDuplicateUserWRTEmailRest() throws Exception {
+    public void i_testInsertDuplicateUserWRTEmailRest() throws Exception {
         GPUser user = super.createUser("duplicate-email-rs", organizationTest, USER);
         user.setEmailAddress(super.userTest.getEmailAddress());
         try {
@@ -229,7 +227,7 @@ public class RSAccountTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void testInsertIncorrectUserWRTUOrganizationRest() throws Exception {
+    public void l_testInsertIncorrectUserWRTUOrganizationRest() throws Exception {
         GPUser user = super.createUser("no-organization-rs", new GPOrganization("organization-inexistent-rs"), USER);
         try {
             gpWSClient.insertAccount(new InsertAccountRequest(user, FALSE));
@@ -238,46 +236,45 @@ public class RSAccountTest extends BasicRestServiceTest {
             GPRestExceptionMessage exMess = ex.getResponse().readEntity(GPRestExceptionMessage.class);
             logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@{}\n", exMess);
             if (!exMess.getMessage().toLowerCase().contains("organization")) { // Must be fail for other reasons
-                fail(
-                        "Not fail for User incorrect wrt organization, but for: " + ex.getMessage());
+                fail("Not fail for User incorrect wrt organization, but for: " + ex.getMessage());
             }
         }
     }
 
     @Test
-    public void testAuthorizationCorrectUsernameRest() throws Exception {
+    public void m_testAuthorizationCorrectUsernameRest() throws Exception {
         GPUser user = gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, passwordTest);
         assertNotNull("User is null", user);
         assertEquals(usernameTest, user.getUsername());
     }
 
     @Test
-    public void testAuthorizationCorrectEmailRest() throws Exception {
+    public void n_testAuthorizationCorrectEmailRest() throws Exception {
         GPUser user = gpWSClient.getUserDetailByUsernameAndPassword(emailTest, passwordTest);
         assertNotNull("User is null", user);
         assertEquals(emailTest, user.getEmailAddress());
     }
 
     @Test(expected = NotFoundException.class)
-    public void testAuthorizationIncorrectUsernameRest() throws Exception {
+    public void o_testAuthorizationIncorrectUsernameRest() throws Exception {
         String wrongUsername = usernameTest + "_";
         gpWSClient.getUserDetailByUsernameAndPassword(wrongUsername, passwordTest);
     }
 
     @Test(expected = NotFoundException.class)
-    public void testAuthorizationIncorrectEmailRest() throws Exception {
+    public void p_testAuthorizationIncorrectEmailRest() throws Exception {
         String wrongEmail = emailTest + "_";
         gpWSClient.getUserDetailByUsernameAndPassword(wrongEmail, passwordTest);
     }
 
     @Test(expected = BadRequestException.class)
-    public void testAuthorizationIncorrectPasswordRest() throws Exception {
+    public void q_testAuthorizationIncorrectPasswordRest() throws Exception {
         String wrongPassword = passwordTest + "_";
         gpWSClient.getUserDetailByUsernameAndPassword(usernameTest, wrongPassword);
     }
 
     @Test(expected = InternalServerErrorException.class)
-    public void testLoginFaultUserDisabledRest() throws ResourceNotFoundFault, IllegalParameterFault, AccountLoginFault {
+    public void r_testLoginFaultUserDisabledRest() throws ResourceNotFoundFault, IllegalParameterFault, AccountLoginFault {
         // Set disabled user
         userTest.setEnabled(false);
         gpWSClient.updateUser(userTest);
@@ -287,40 +284,27 @@ public class RSAccountTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void updateUserRestTest() throws Exception {
-        GPUser user1 = super.createAndInsertUser("userToUpdate-SOAP", organizationTest, ADMIN);
-
+    public void s_updateUserRestTest() throws Exception {
+        GPUser user1 = super.createAndInsertUser("userToUpdate-REST", organizationTest, ADMIN);
         GPUser user = gpWSClient.getUserDetail(user1.getId());
         logger.info("##################USER : {}\n", user);
-
         user.setName("UserToUpdate");
         gpWSClient.updateUser(user);
-
         user = gpWSClient.getUserDetail(user1.getId());
         logger.info("#################USER_UPDATED : {}\n", user);
-
         gpWSClient.deleteAccount(user1.getId());
     }
 
     @Test
-    public void searchUsersTestRest() throws Exception {
+    public void t_searchUsersTestRest() throws Exception {
         String usernameMultiRole = "user-test1-rs";
-        GPUser user = super.createAndInsertUser(usernameMultiRole,
-                organizationTest, ADMIN, VIEWER);
-
+        GPUser user = super.createAndInsertUser(usernameMultiRole, organizationTest, ADMIN, VIEWER);
         try {
             insertMassiveUsers("-rs");
-            List<UserDTO> users = gpWSClient.searchUsers(user.getId(),
-                    new PaginatedSearchRequest(25, 0)).getSearchUsers();
-
+            List<UserDTO> users = gpWSClient.searchUsers(user.getId(), new PaginatedSearchRequest(25, 0)).getSearchUsers();
             assertEquals(25, users.size());
-
-            assertEquals(6, gpWSClient.searchUsers(user.getId(),
-                    new PaginatedSearchRequest(25, 1)).getSearchUsers().size());
-
-            Long userCount = gpWSClient.getUsersCount(organizationTest.getName(),
-                    null);
-
+            assertEquals(6, gpWSClient.searchUsers(user.getId(), new PaginatedSearchRequest(25, 1)).getSearchUsers().size());
+            Long userCount = gpWSClient.getUsersCount(organizationTest.getName(), null);
             assertEquals(32, userCount.intValue());
         } finally {
             Boolean check = gpWSClient.deleteAccount(user.getId());
@@ -329,32 +313,23 @@ public class RSAccountTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void getAuthoritiesTestRest() throws Exception {
+    public void t_getAuthoritiesTestRest() throws Exception {
         String usernameMultiRole = "user-auth-rs";
-        GPUser user = super.createAndInsertUser(usernameMultiRole,
-                organizationTest, ADMIN, VIEWER);
-
+        GPUser user = super.createAndInsertUser(usernameMultiRole, organizationTest, ADMIN, VIEWER);
         List<String> authorities = gpWSClient.getAuthorities(user.getId()).getAuthorities();
         assertEquals(2, authorities.size());
-
         logger.debug("\n@@@@@@@@@@@@@@@@@@@@@@Authorities : {}", authorities);
     }
 
     @Test
-    public void forceTemporaryAccountTestRest() throws Exception {
+    public void u_forceTemporaryAccountTestRest() throws Exception {
         String usernameTmp = "user-tmp-rs";
-        GPUser user = super.createAndInsertUser(usernameTmp,
-                organizationTest, ADMIN, VIEWER);
-
+        GPUser user = super.createAndInsertUser(usernameTmp, organizationTest, ADMIN, VIEWER);
         gpWSClient.forceTemporaryAccount(user.getId());
-
         GPUser tmpUser = gpWSClient.getUserDetail(user.getId());
-        assertEquals(Boolean.TRUE, tmpUser.isAccountTemporary());
-
+        assertEquals(TRUE, tmpUser.isAccountTemporary());
         gpWSClient.forceExpiredTemporaryAccount(user.getId());
         tmpUser = gpWSClient.getUserDetail(user.getId());
-
         assertEquals(Boolean.FALSE, tmpUser.isAccountNonExpired());
     }
-
 }

@@ -59,6 +59,7 @@ public class GPBaseJacksonSupportTest {
     static final String PROJECT_DATA_JSON = "project-data.json";
     static final String GET_ALL_PROJECTS_DATA_JSON = "GetAllProject-data.json";
     static final String INSERT_ACCOUNT_REQUEST_DATA_JSON = "InsertAccountRequest-data.json";
+    static final String INSERT_ACCOUNT_REQUEST_JSON = "InsertAccountRequest.json";
     static final String ACCOUNT_PROJECT_DATA_JSON = "accountproject-data.json";
     static final String GET_AUTHORITIES_RESPONSE_DATA_JSON = "GetAuthoritiesResponse-data.json";
     static final String GET_AUTHORITY_RESPONSE_DATA_JSON = "GetAuthorityResponse-data.json";

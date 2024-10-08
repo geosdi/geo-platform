@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.request.viewport;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.core.model.GPViewport;
 
 import java.io.Serializable;
@@ -47,7 +46,7 @@ import java.util.ArrayList;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement
+//@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ManageViewportRequest implements Serializable {
 

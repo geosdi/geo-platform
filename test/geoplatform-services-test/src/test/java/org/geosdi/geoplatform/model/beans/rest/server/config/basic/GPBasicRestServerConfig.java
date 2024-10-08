@@ -37,9 +37,11 @@ package org.geosdi.geoplatform.model.beans.rest.server.config.basic;
 
 import jakarta.ws.rs.core.MediaType;
 import org.apache.cxf.endpoint.Server;
-import org.apache.cxf.interceptor.*;
+import org.apache.cxf.interceptor.FIStaxInInterceptor;
+import org.apache.cxf.interceptor.FIStaxOutInterceptor;
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
-import org.apache.cxf.message.Message;
 import org.geosdi.geoplatform.configurator.bootstrap.Develop;
 import org.geosdi.geoplatform.core.model.GPAccount;
 import org.geosdi.geoplatform.core.model.GPLayer;
@@ -48,14 +50,18 @@ import org.geosdi.geoplatform.services.GeoPlatformService;
 import org.geosdi.geoplatform.support.cxf.rs.provider.configurator.GPRestProviderType;
 import org.geosdi.geoplatform.support.cxf.rs.provider.factory.GPRestProviderFactory;
 import org.geosdi.geoplatform.support.cxf.rs.provider.jettyson.GPJSONProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
+import static java.lang.Boolean.TRUE;
+import static java.util.Arrays.asList;
 
 /**
  *
@@ -65,6 +71,8 @@ import java.util.Map;
 @Configuration
 @Develop
 class GPBasicRestServerConfig {
+
+    private static final Logger logger = LoggerFactory.getLogger(GPBasicRestServerConfig.class);
 
     @Bean(name = "gpBasicRestServer")
     public static Server gpBasicRestServer(@Qualifier(
@@ -78,9 +86,7 @@ class GPBasicRestServerConfig {
         factory.setServiceBean(geoPlatformService);
         factory.setAddress(basicRestAddress);
 
-        factory.setProviders(Arrays.asList(
-                new Object[]{createProvider(providerType),
-                        new GPExceptionFaultMapper()}));
+        factory.setProviders(asList(createProvider(providerType), new GPExceptionFaultMapper()));
 
         Map<Object, Object> extensionMappings = new HashMap<>();
         extensionMappings.put("xml", MediaType.APPLICATION_XML);
@@ -89,13 +95,13 @@ class GPBasicRestServerConfig {
 
         if (providerType.equals(GPRestProviderType.FASTINFOSET)) {
             Map<String, Object> properties = new HashMap<>();
-            properties.put("org.apache.cxf.endpoint.private", Boolean.TRUE);
+            properties.put("org.apache.cxf.endpoint.private", TRUE);
             factory.setProperties(properties);
-            factory.setInInterceptors(Arrays.<Interceptor<? extends Message>>asList(new FIStaxInInterceptor()));
-            factory.setOutInterceptors(Arrays.<Interceptor<? extends Message>>asList(new FIStaxOutInterceptor()));
+            factory.setInInterceptors(asList(new FIStaxInInterceptor()));
+            factory.setOutInterceptors(asList(new FIStaxOutInterceptor()));
         } else {
-            factory.setInInterceptors(Arrays.<Interceptor<? extends Message>>asList(serverLogInInterceptor));
-            factory.setOutInterceptors(Arrays.<Interceptor<? extends Message>>asList(serverLogOutInterceptor));
+            factory.setInInterceptors(asList(serverLogInInterceptor));
+            factory.setOutInterceptors(asList(serverLogOutInterceptor));
         }
 
         return factory.create();
@@ -104,9 +110,7 @@ class GPBasicRestServerConfig {
     private static Object createProvider(GPRestProviderType providerType) {
         Object provider = GPRestProviderFactory.createProvider(providerType);
         if (provider instanceof GPJSONProvider) {
-            ((GPJSONProvider) provider).setExtraClass(
-                    new Class<?>[]{GPAccount.class,
-                            GPLayer.class});
+            ((GPJSONProvider) provider).setExtraClass(new Class<?>[]{GPAccount.class, GPLayer.class});
         }
         return provider;
     }

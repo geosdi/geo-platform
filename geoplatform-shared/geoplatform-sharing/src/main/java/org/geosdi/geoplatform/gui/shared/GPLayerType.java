@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.gui.shared;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 //@XmlRootElement

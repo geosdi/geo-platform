@@ -47,7 +47,7 @@ import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement
+//@XmlRootElement
 @XmlType(propOrder = {"folderID", "descendantsMapData"})
 @XmlAccessorType(XmlAccessType.FIELD)
 public class WSDeleteFolderAndTreeModifications extends TreeModificationRequest {

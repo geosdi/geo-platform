@@ -45,11 +45,10 @@ import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 import java.util.List;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement
+//@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class WSAddLayersAndTreeModificationsRequest extends TreeModificationRequest {
 
@@ -57,9 +56,7 @@ public class WSAddLayersAndTreeModificationsRequest extends TreeModificationRequ
     //
     private Long projectID;
     private Long parentFolderID;
-    @XmlElementRefs(value = {
-        @XmlElementRef(name = "gpRasterLayer", type = GPRasterLayer.class),
-        @XmlElementRef(name = "gpVectorLayer", type = GPVectorLayer.class)})
+    @XmlElementRefs(value = {@XmlElementRef(name = "gpRasterLayer", type = GPRasterLayer.class), @XmlElementRef(name = "gpVectorLayer", type = GPVectorLayer.class)})
     private List<GPLayer> layers;
 
     public WSAddLayersAndTreeModificationsRequest() {
@@ -123,9 +120,7 @@ public class WSAddLayersAndTreeModificationsRequest extends TreeModificationRequ
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + " {" + "projectID = " + projectID
-                + ", parentFolderID = " + parentFolderID
-                + ", layers = " + layers + '}';
+        return getClass().getSimpleName() + " {" + "projectID = " + projectID + ", parentFolderID = " + parentFolderID + ", layers = " + layers + '}';
     }
 
 }

@@ -38,19 +38,21 @@ package org.geosdi.geoplatform.support.jackson;
 import org.geosdi.geoplatform.core.model.GPProject;
 import org.geosdi.geoplatform.response.ProjectDTO;
 import org.geosdi.geoplatform.response.WSGetAccountProjectsResponse;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import static java.lang.Thread.currentThread;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class GPJacksonProjectSupportTest extends GPBaseJacksonSupportTest {
 
     @Test
-    public void projectsDataMapperTest() throws Exception {
+    public void a_projectsDataMapperTest() throws Exception {
         ProjectDTO projectDTO = jacksonSupport.getDefaultMapper()
                 .readValue(currentThread().getContextClassLoader().getResourceAsStream(PROJECTS_DATA_JSON), ProjectDTO.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@PROJECTS_DATA_MAPPING : {}\n\n", projectDTO);
@@ -58,7 +60,7 @@ public class GPJacksonProjectSupportTest extends GPBaseJacksonSupportTest {
     }
 
     @Test
-    public void getAllProjectsDataMapperTest() throws Exception {
+    public void b_getAllProjectsDataMapperTest() throws Exception {
         WSGetAccountProjectsResponse response = jacksonSupport.getDefaultMapper()
                 .readValue(currentThread().getContextClassLoader().getResourceAsStream(GET_ALL_PROJECTS_DATA_JSON), WSGetAccountProjectsResponse.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GET_ALL_PROJECTS_DATA_MAPPING : {}\n\n", response);
@@ -66,7 +68,7 @@ public class GPJacksonProjectSupportTest extends GPBaseJacksonSupportTest {
     }
 
     @Test
-    public void projectDataMapperTest() throws Exception {
+    public void c_projectDataMapperTest() throws Exception {
         GPProject project = jacksonSupport.getDefaultMapper()
                 .readValue(currentThread().getContextClassLoader().getResourceAsStream(PROJECT_DATA_JSON), GPProject.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@PROJECT_DATA_MAPPING : {}\n\n", project);

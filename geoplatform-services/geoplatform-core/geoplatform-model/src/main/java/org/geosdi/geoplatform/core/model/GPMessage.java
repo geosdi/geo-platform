@@ -39,7 +39,6 @@ import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import jakarta.persistence.*;
 import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
@@ -55,7 +54,7 @@ import static jakarta.xml.bind.annotation.XmlAccessType.FIELD;
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@XmlRootElement(name = "Message")
+//@XmlRootElement(name = "Message")
 @XmlAccessorType(FIELD)
 @Entity(name = "Message")
 @Table(name = "gp_message", indexes = {@Index(columnList = "recipient_id", name = "ACCOUNT_RECIPIENT_ID_INDEX"), @Index(columnList = "sender_id", name = "ACCOUNT_SENDER_ID_INDEX")})

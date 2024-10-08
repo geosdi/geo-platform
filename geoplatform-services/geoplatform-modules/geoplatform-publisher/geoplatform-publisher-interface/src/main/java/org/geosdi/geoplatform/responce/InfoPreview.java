@@ -35,7 +35,8 @@
  */
 package org.geosdi.geoplatform.responce;
 
-import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import org.geosdi.geoplatform.gui.shared.publisher.LayerPublishAction;
 
 import java.util.List;
@@ -44,7 +45,8 @@ import java.util.List;
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-@XmlRootElement(name = "InfoPreview")
+//@XmlRootElement(name = "InfoPreview")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class InfoPreview {
 
     private String dataSource = "";

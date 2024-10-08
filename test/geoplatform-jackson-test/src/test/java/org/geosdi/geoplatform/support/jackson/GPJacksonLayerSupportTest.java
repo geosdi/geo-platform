@@ -47,18 +47,21 @@ import org.geosdi.geoplatform.response.GetDataSourceResponse;
 import org.geosdi.geoplatform.response.ShortLayerDTO;
 import org.geosdi.geoplatform.response.ShortLayerDTOContainer;
 import org.geosdi.geoplatform.response.collection.TreeFolderElementsStore;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import static java.lang.Thread.currentThread;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class GPJacksonLayerSupportTest extends GPBaseJacksonSupportTest {
 
     @Test
-    public void insertLayerRequestDataMapperTest() throws Exception {
+    public void a_insertLayerRequestDataMapperTest() throws Exception {
         InsertLayerRequest insertLayerRequest = jacksonSupport.getDefaultMapper()
                 .readValue(currentThread().getContextClassLoader().getResourceAsStream(INSERT_LAYER_REQUEST_DATA_JSON), InsertLayerRequest.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@INSERT_LAYER_REQUEST_DATA_MAPPING : {}\n\n", insertLayerRequest);
@@ -66,77 +69,77 @@ public class GPJacksonLayerSupportTest extends GPBaseJacksonSupportTest {
     }
 
     @Test
-    public void rasterLayerDataMapperTest() throws Exception {
+    public void b_rasterLayerDataMapperTest() throws Exception {
         GPRasterLayer rasterLayer = jacksonSupport.getDefaultMapper().readValue(currentThread().getContextClassLoader().getResourceAsStream(RASTER_LAYER_DATA_JSON), GPRasterLayer.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@RASTER_LAYER_DATA_MAPPING : {}\n\n", rasterLayer);
         super.marshall(rasterLayer);
     }
 
     @Test
-    public void vectorLayerDataMapperTest() throws Exception {
+    public void c_vectorLayerDataMapperTest() throws Exception {
         GPVectorLayer vectorLayer = jacksonSupport.getDefaultMapper().readValue(currentThread().getContextClassLoader().getResourceAsStream(VECTOR_LAYER_DATA_JSON), GPVectorLayer.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@VECTOR_LAYER_DATA_MAPPING : {}\n\n", vectorLayer);
         super.marshall(vectorLayer);
     }
 
     @Test
-    public void shortLayerDTODataMapperTest() throws Exception {
+    public void d_shortLayerDTODataMapperTest() throws Exception {
         ShortLayerDTO shortLayer = jacksonSupport.getDefaultMapper().readValue(currentThread().getContextClassLoader().getResourceAsStream(SHORT_LAYER_DTO_DATA_JSON), ShortLayerDTO.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@SHORT_LAYER_DTO_DATA_MAPPING : {}\n\n", shortLayer);
         super.marshall(shortLayer);
     }
 
     @Test
-    public void shortLayerDTOContainerDataMapperTest() throws Exception {
+    public void e_shortLayerDTOContainerDataMapperTest() throws Exception {
         ShortLayerDTOContainer shortLayerContainer = jacksonSupport.getDefaultMapper().readValue(currentThread().getContextClassLoader().getResourceAsStream(SHORT_LAYER_DTO_CONTAINER_DATA_JSON), ShortLayerDTOContainer.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SHORT_LAYER_DTO_CONTAINER_DATA_MAPPING : {}\n\n", shortLayerContainer);
         super.marshall(shortLayerContainer);
     }
 
     @Test
-    public void treeFolderElementsStoreDataMapperTest() throws Exception {
+    public void f_treeFolderElementsStoreDataMapperTest() throws Exception {
         TreeFolderElementsStore store = jacksonSupport.getDefaultMapper().readValue(currentThread().getContextClassLoader().getResourceAsStream(TREE_FOLDER_ELEMENTS_STORE_DATA_JSON), TreeFolderElementsStore.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ TREE_FOLDER_ELEMENTS_STORE_DATA_MAPPING : {}\n\n", store);
         super.marshall(store);
     }
 
     @Test
-    public void addLayerTreeModificationsDataMapperTest() throws Exception {
+    public void g_addLayerTreeModificationsDataMapperTest() throws Exception {
         WSAddLayerAndTreeModificationsRequest request = jacksonSupport.getDefaultMapper().readValue(currentThread().getContextClassLoader().getResourceAsStream(ADD_LAYER_TREE_MODIFICATION_REQUEST_DATA_JSON), WSAddLayerAndTreeModificationsRequest.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ADD_LAYER_TREE_MODIFICATION_REQUEST_DATA_MAPPING : {}\n\n", request);
         super.marshall(request);
     }
 
     @Test
-    public void deleteLayerTreeModificationsDataMapperTest() throws Exception {
+    public void h_deleteLayerTreeModificationsDataMapperTest() throws Exception {
         WSDeleteLayerAndTreeModificationsRequest request = jacksonSupport.getDefaultMapper().readValue(currentThread().getContextClassLoader().getResourceAsStream(DELETE_LAYER_TREE_MODIFICATION_REQUEST_DATA_JSON), WSDeleteLayerAndTreeModificationsRequest.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@DELETE_LAYER_TREE_MODIFICATION_REQUEST_DATA_MAPPING : {}\n\n", request);
         super.marshall(request);
     }
 
     @Test
-    public void ddLayerTreeModificationsDataMapperTest() throws Exception {
+    public void i_ddLayerTreeModificationsDataMapperTest() throws Exception {
         WSDDLayerAndTreeModificationsRequest request = jacksonSupport.getDefaultMapper().readValue(currentThread().getContextClassLoader().getResourceAsStream(DD_LAYER_TREE_MODIFICATION_REQUEST_DATA_JSON), WSDDLayerAndTreeModificationsRequest.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ DD_LAYER_TREE_MODIFICATION_REQUEST_DATA_MAPPING : {}\n\n", request);
         super.marshall(request);
     }
 
     @Test
-    public void getBBoxDataMapperTest() throws Exception {
+    public void l_getBBoxDataMapperTest() throws Exception {
         GPBBox bbox = jacksonSupport.getDefaultMapper().readValue(currentThread().getContextClassLoader().getResourceAsStream(GET_BBOX_DATA_JSON), GPBBox.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GET_BBOX_DATA_MAPPING : {}\n\n", bbox);
         super.marshall(bbox);
     }
 
     @Test
-    public void getLayerInfoDataMapperTest() throws Exception {
+    public void m_getLayerInfoDataMapperTest() throws Exception {
         GPLayerInfo layerInfo = jacksonSupport.getDefaultMapper().readValue(currentThread().getContextClassLoader().getResourceAsStream(GET_LAYER_INFO_DATA_JSON), GPLayerInfo.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@GET_LAYER_INFO_DATA_MAPPING: {}\n\n", layerInfo);
         super.marshall(layerInfo);
     }
 
     @Test
-    public void getLayersDataSourceDataMapperTest() throws Exception {
+    public void n_getLayersDataSourceDataMapperTest() throws Exception {
         GetDataSourceResponse response = jacksonSupport.getDefaultMapper().readValue(currentThread().getContextClassLoader().getResourceAsStream(GET_LAYERS_DATA_SOURCE_DATA_JSON), GetDataSourceResponse.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ GET_LAYERS_DATA_SOURCE_DATA_MAPPING : {}\n\n", response);
         super.marshall(response);

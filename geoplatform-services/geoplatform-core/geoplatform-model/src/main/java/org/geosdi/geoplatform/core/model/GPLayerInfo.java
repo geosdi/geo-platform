@@ -37,22 +37,23 @@ package org.geosdi.geoplatform.core.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jakarta.xml.bind.annotation.XmlAccessType.FIELD;
 import static java.util.Arrays.asList;
 
 /**
  * @author Francesco Izzi - geoSDI
- *
  */
 @Embeddable
 //@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(value = FIELD)
 public class GPLayerInfo implements Serializable {
 
     /**
@@ -60,25 +61,13 @@ public class GPLayerInfo implements Serializable {
      */
     private static final long serialVersionUID = -7418444235711934950L;
     //
-    @Column(nullable = true)
+    @Getter
+    @Setter
+    @Column
     private boolean queryable = false;
     // The character ; separated list of keywords
     @Column(length = 500)
     private String keywords;
-
-    /**
-     * @return the queryable
-     */
-    public boolean isQueryable() {
-        return queryable;
-    }
-
-    /**
-     * @param queryable the queryable to set
-     */
-    public void setQueryable(boolean queryable) {
-        this.queryable = queryable;
-    }
 
     /**
      * @return the keywords

@@ -37,18 +37,18 @@ package org.geosdi.geoplatform.connector.geoserver.model.store.coverage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.ToString;
 import net.jcip.annotations.Immutable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.annotation.meta.When;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
 import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
@@ -79,13 +79,13 @@ public class GPGeoserverCoverageStoreBody implements IGPGeoserverCoverageStoreBo
      * @param theCoverageName
      * @param theUrl
      */
-    protected GPGeoserverCoverageStoreBody(@Nonnull(when = When.NEVER) String theCoverageName, @Nullable String theDescription,
-            @Nonnull(when = When.NEVER) String theWorkspace, @Nonnull(when = When.NEVER) GPCoverageStoreType theType,
-            @Nonnull(when = When.NEVER) String theUrl, boolean theEnabled) {
-        Preconditions.checkArgument((theCoverageName != null) && !(theCoverageName.trim().isEmpty()), "The Parameter coverageName must not be null or an empty string.");
-        Preconditions.checkArgument((theWorkspace != null) && !(theWorkspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string.");
-        Preconditions.checkArgument(theType != null, "The Parameter type must not be null.");
-        Preconditions.checkArgument((theUrl != null) && !(theUrl.trim().isEmpty()), "The Parameter url must not be null or an empty string.");
+    protected GPGeoserverCoverageStoreBody(@Nonnull(when = NEVER) String theCoverageName, @Nullable String theDescription,
+            @Nonnull(when = NEVER) String theWorkspace, @Nonnull(when = NEVER) GPCoverageStoreType theType,
+            @Nonnull(when = NEVER) String theUrl, boolean theEnabled) {
+        checkArgument((theCoverageName != null) && !(theCoverageName.trim().isEmpty()), "The Parameter coverageName must not be null or an empty string.");
+        checkArgument((theWorkspace != null) && !(theWorkspace.trim().isEmpty()), "The Parameter workspace must not be null or an empty string.");
+        checkArgument(theType != null, "The Parameter type must not be null.");
+        checkArgument((theUrl != null) && !(theUrl.trim().isEmpty()), "The Parameter url must not be null or an empty string.");
         this.coverageName = theCoverageName;
         this.workspace = theWorkspace;
         this.url = theUrl;

@@ -48,7 +48,7 @@ import java.util.List;
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@XmlRootElement
+//@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class MessageDTO {
 

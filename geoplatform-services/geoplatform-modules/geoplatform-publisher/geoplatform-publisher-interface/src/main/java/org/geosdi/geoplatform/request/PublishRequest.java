@@ -35,18 +35,15 @@
  */
 package org.geosdi.geoplatform.request;
 
-import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlSeeAlso;
 
 import java.io.Serializable;
 
-
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement
+//@XmlRootElement
 @XmlSeeAlso(value = {PublishLayerRequest.class, PublishLayersRequest.class})
 public class PublishRequest implements Serializable {
 
@@ -59,8 +56,7 @@ public class PublishRequest implements Serializable {
     public PublishRequest() {
     }
 
-    public PublishRequest(String theSessionID, String theWorkspace,
-            String theDataStoreName) {
+    public PublishRequest(String theSessionID, String theWorkspace, String theDataStoreName) {
         this.sessionID = theSessionID;
         this.workspace = theWorkspace;
         this.dataStoreName = theDataStoreName;

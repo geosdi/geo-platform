@@ -35,14 +35,22 @@
  */
 package org.geosdi.geoplatform.responce;
 
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-import jakarta.xml.bind.annotation.XmlRootElement;
+import static jakarta.xml.bind.annotation.XmlAccessType.FIELD;
 
 /**
  * @author Nazzareno Sileno - CNR IMAA geoSDI Group
  * @email nazzareno.sileno@geosdi.org
  */
-@XmlRootElement(name = "LayerAttribute")
+//@XmlRootElement(name = "LayerAttribute")
+@Getter
+@Setter
+@ToString
+@XmlAccessorType(value = FIELD)
 public class LayerAttribute {
 
     private String value;
@@ -54,21 +62,5 @@ public class LayerAttribute {
     public LayerAttribute(String value, String type) {
         this.value = value;
         this.type = type;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
     }
 }

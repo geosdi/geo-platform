@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.core.model.GPMessage;
 import org.geosdi.geoplatform.gui.shared.GPMessageCommandType;
 import org.geosdi.geoplatform.request.message.MarkMessageReadByDateRequest;
 import org.geosdi.geoplatform.response.MessageDTO;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import java.util.*;
@@ -48,11 +49,13 @@ import static org.geosdi.geoplatform.gui.shared.GPMessageCommandType.NONE;
 import static org.geosdi.geoplatform.gui.shared.GPRole.USER;
 import static org.geosdi.geoplatform.gui.shared.GPRole.VIEWER;
 import static org.junit.Assert.*;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia <giuseppe.lascaleia@geosdi.org>
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class RSMessageTest extends BasicRestServiceTest {
 
     private Long firstRecipientID;
@@ -86,7 +89,7 @@ public class RSMessageTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void testInsertMessageRest() throws Exception {
+    public void a_testInsertMessageRest() throws Exception {
         // Insert message
         Long messageID = gpWSClient.insertMessage(message);
         assertNotNull(messageID);
@@ -104,7 +107,7 @@ public class RSMessageTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void testInsertMessageMultiCommandRest() throws Exception {
+    public void b_testInsertMessageMultiCommandRest() throws Exception {
         // Insert message
         message.addCommand(GPMessageCommandType.OPEN_PROJECT);
         Long messageID = gpWSClient.insertMessage(message);
@@ -120,7 +123,7 @@ public class RSMessageTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void testInsertMultiMessageRest() throws Exception {
+    public void c_testInsertMultiMessageRest() throws Exception {
         // Insert messages
         MessageDTO messageDTO = new MessageDTO(message);
         messageDTO.setRecipientIDs(Arrays.asList(firstRecipientID, latterRecipientID));
@@ -143,7 +146,7 @@ public class RSMessageTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void testDeleteMessageRest() throws Exception {
+    public void d_testDeleteMessageRest() throws Exception {
         // Insert message
         Long messageID = gpWSClient.insertMessage(message);
         assertNotNull(messageID);
@@ -153,7 +156,7 @@ public class RSMessageTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void testMarkMessageAsReadRest() throws Exception {
+    public void e_testMarkMessageAsReadRest() throws Exception {
         // Insert message
         Long messageID = gpWSClient.insertMessage(message);
         assertNotNull(messageID);
@@ -166,7 +169,7 @@ public class RSMessageTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void testRetrieveMessagesRest() throws Exception {
+    public void f_testRetrieveMessagesRest() throws Exception {
         this.insertMessagesSortedRest();
         // Test all messages
         List<GPMessage> allMessages = gpWSClient.getAllMessagesByRecipient(firstRecipientID).getMessages();
@@ -192,7 +195,7 @@ public class RSMessageTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void testMarkAllMessageAsReadRest() throws Exception {
+    public void g_testMarkAllMessageAsReadRest() throws Exception {
         this.insertMessagesSortedRest();
         // Test unread messages intial
         List<GPMessage> unreadMessages = gpWSClient.getUnreadMessagesByRecipient(firstRecipientID).getMessages();
@@ -207,7 +210,7 @@ public class RSMessageTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void testMarkPreviousMessagesAsReadRest() throws Exception {
+    public void h_testMarkPreviousMessagesAsReadRest() throws Exception {
         this.insertMessagesSortedRest();
         // Test unread messages intial
         List<GPMessage> unreadMessages = gpWSClient.getUnreadMessagesByRecipient(firstRecipientID).getMessages();

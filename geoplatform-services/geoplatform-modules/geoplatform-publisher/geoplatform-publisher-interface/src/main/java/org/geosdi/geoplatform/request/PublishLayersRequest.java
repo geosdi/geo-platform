@@ -39,13 +39,11 @@ import jakarta.xml.bind.annotation.*;
 
 import java.util.List;
 
-
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement
+//@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class PublishLayersRequest extends PublishRequest {
 
@@ -58,8 +56,8 @@ public class PublishLayersRequest extends PublishRequest {
     public PublishLayersRequest() {
     }
 
-    public PublishLayersRequest(String theSessionID, String theWorkspace,
-            String theDataStoreName, List<String> theLayerNames) {
+    public PublishLayersRequest(String theSessionID, String theWorkspace, String theDataStoreName,
+            List<String> theLayerNames) {
         super(theSessionID, theWorkspace, theDataStoreName);
         this.layerNames = theLayerNames;
     }

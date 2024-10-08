@@ -81,17 +81,10 @@ public interface GPPublisherService extends IGPPublisherService {
     @HttpResource(location = "/preview/analyzeZIPEPSG")
     @WebResult(name = "Result")
     @Override
-    InfoPreviewStore analyzeZIPEPSG(
-            @WebParam(name = "sessionID")
-            @Multipart(value = "sessionID") String sessionID,
-            @WebParam(name = "username")
-            @Multipart(value = "userName") String userName,
-            @WebParam(name = "fileName")
-            @Multipart(value = "fileName",
-                    type = MediaType.APPLICATION_OCTET_STREAM) File file,
-            @WebParam(name = "workspace")
-            @Multipart(value = "workspace", required = false) String workspace)
-            throws ResourceNotFoundFault;
+    InfoPreviewStore analyzeZIPEPSG(@WebParam(name = "sessionID") @Multipart(value = "sessionID") String sessionID,
+            @WebParam(name = "username") @Multipart(value = "userName") String userName,
+            @WebParam(name = "fileName") @Multipart(value = "fileName", type = MediaType.APPLICATION_OCTET_STREAM) File file,
+            @WebParam(name = "workspace") @Multipart(value = "workspace", required = false) String workspace) throws ResourceNotFoundFault;
 
     @Post
     @POST
@@ -99,9 +92,7 @@ public interface GPPublisherService extends IGPPublisherService {
     @HttpResource(location = "/preview/processEPSGResult")
     @WebResult(name = "Result")
     @Override
-    InfoPreviewStore processEPSGResult(
-            @WebParam(name = "request") ProcessEPSGResultRequest request)
-            throws ResourceNotFoundFault;
+    InfoPreviewStore processEPSGResult(@WebParam(name = "request") ProcessEPSGResultRequest request) throws ResourceNotFoundFault;
 
     @Get
     @GET
@@ -109,12 +100,8 @@ public interface GPPublisherService extends IGPPublisherService {
     @HttpResource(location = "/preview/loadStyle")
     @WebResult(name = "Result")
     @Override
-    String loadStyle(
-            @WebParam(name = "layerDatasource")
-            @QueryParam(value = "layerDatasource") String layerDatasource,
-            @WebParam(name = "styleName")
-            @QueryParam(value = "styleName") String styleName)
-            throws ResourceNotFoundFault;
+    String loadStyle(@WebParam(name = "layerDatasource") @QueryParam(value = "layerDatasource") String layerDatasource,
+            @WebParam(name = "styleName") @QueryParam(value = "styleName") String styleName) throws ResourceNotFoundFault;
 
     @Get
     @GET
@@ -122,10 +109,7 @@ public interface GPPublisherService extends IGPPublisherService {
     @HttpResource(location = "/preview/loadStyle")
     @WebResult(name = "Result")
     @Override
-    LayerAttributeStore describeFeatureType(
-            @WebParam(name = "layerName")
-            @QueryParam(value = "layerName") String layerName)
-            throws ResourceNotFoundFault;
+    LayerAttributeStore describeFeatureType(@WebParam(name = "layerName") @QueryParam(value = "layerName") String layerName) throws ResourceNotFoundFault;
 
     @Get
     @GET
@@ -133,12 +117,8 @@ public interface GPPublisherService extends IGPPublisherService {
     @HttpResource(location = "/preview/uniqueValue")
     @WebResult(name = "Result")
     @Override
-    UniqueValuesInfo uniqueValues(
-            @WebParam(name = "layerName")
-            @QueryParam(value = "layerName") String layerName,
-            @WebParam(name = "layerAttribute")
-            @QueryParam(value = "layerAttribute") String layerAttribute)
-            throws ResourceNotFoundFault;
+    UniqueValuesInfo uniqueValues(@WebParam(name = "layerName") @QueryParam(value = "layerName") String layerName,
+            @WebParam(name = "layerAttribute") @QueryParam(value = "layerAttribute") String layerAttribute) throws ResourceNotFoundFault;
 
     @Post
     @POST
@@ -146,14 +126,9 @@ public interface GPPublisherService extends IGPPublisherService {
     @HttpResource(location = "/preview/publishStyle")
     @WebResult(name = "Result")
     @Override
-    Boolean publishStyle(
-            @WebParam(name = "styleToPublish")
-            @QueryParam(value = "styleToPublish") String styleToPublish,
-            @WebParam(name = "styleName")
-            @QueryParam(value = "styleName") String styleName,
-            @WebParam(name = "validate")
-            @QueryParam(value = "validate") boolean validate)
-            throws ResourceNotFoundFault;
+    Boolean publishStyle(@WebParam(name = "styleToPublish") @QueryParam(value = "styleToPublish") String styleToPublish,
+            @WebParam(name = "styleName") @QueryParam(value = "styleName") String styleName,
+            @WebParam(name = "validate") @QueryParam(value = "validate") boolean validate) throws ResourceNotFoundFault;
 
     @Put
     @PUT
@@ -176,9 +151,7 @@ public interface GPPublisherService extends IGPPublisherService {
     @HttpResource(location = "/preview/existsStyle")
     @WebResult(name = "Result")
     @Override
-    public Boolean existsStyle(
-            @WebParam(name = "styleName")
-            @QueryParam(value = "styleName") String styleName);
+    public Boolean existsStyle(@WebParam(name = "styleName") @QueryParam(value = "styleName") String styleName);
 
     @Get
     @GET

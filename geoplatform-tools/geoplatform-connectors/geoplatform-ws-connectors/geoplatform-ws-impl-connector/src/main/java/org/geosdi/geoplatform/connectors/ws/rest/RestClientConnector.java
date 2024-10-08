@@ -44,6 +44,8 @@ import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Arrays;
 
+import static java.lang.Boolean.TRUE;
+
 /**
  * <p>
  * Abstract class that represents the template for the implementation of all
@@ -86,7 +88,7 @@ public abstract class RestClientConnector<E> extends GPAbstractWSClientConnector
         }
 
         this.endpointService = JAXRSClientFactory.create(getAddress(),
-                serviceClass, Arrays.<Object> asList(this.basicRestProvider), Boolean.TRUE);
+                serviceClass, Arrays.<Object> asList(this.basicRestProvider), TRUE);
     }
 
     /**

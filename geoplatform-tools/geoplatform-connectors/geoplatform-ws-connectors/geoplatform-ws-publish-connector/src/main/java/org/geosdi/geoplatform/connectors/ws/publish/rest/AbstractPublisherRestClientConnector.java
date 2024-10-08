@@ -39,12 +39,10 @@ import org.geosdi.geoplatform.connectors.ws.rest.RestClientConnector;
 import org.geosdi.geoplatform.services.GPPublisherService;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-abstract class AbstractPublisherRestClientConnector
-        extends RestClientConnector<GPPublisherService> {
+abstract class AbstractPublisherRestClientConnector extends RestClientConnector<GPPublisherService> {
 
     String address;
 
@@ -61,5 +59,4 @@ abstract class AbstractPublisherRestClientConnector
     protected Class<?>[] getExtraClasses() {
         return null;
     }
-
 }

@@ -37,11 +37,8 @@ package org.geosdi.geoplatform.core.model.attribution;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
-import jakarta.xml.bind.annotation.XmlAccessorType;
 import lombok.*;
 import org.geosdi.geoplatform.core.model.attribution.logo.GPAttributionLogoURL;
-
-import static jakarta.xml.bind.annotation.XmlAccessType.FIELD;
 
 
 /**
@@ -54,7 +51,7 @@ import static jakarta.xml.bind.annotation.XmlAccessType.FIELD;
 @AllArgsConstructor
 @ToString
 @Embeddable
-@XmlAccessorType(FIELD)
+//@XmlAccessorType(FIELD)
 public class GPLayerAttribution implements IGPLayerAttribution {
 
     private static final long serialVersionUID = -4580140282811599555L;

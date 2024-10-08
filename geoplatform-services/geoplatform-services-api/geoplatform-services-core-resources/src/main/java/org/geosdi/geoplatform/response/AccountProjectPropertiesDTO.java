@@ -38,14 +38,13 @@ package org.geosdi.geoplatform.response;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.io.Serializable;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
-@XmlRootElement
+//@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class AccountProjectPropertiesDTO implements Serializable {
 

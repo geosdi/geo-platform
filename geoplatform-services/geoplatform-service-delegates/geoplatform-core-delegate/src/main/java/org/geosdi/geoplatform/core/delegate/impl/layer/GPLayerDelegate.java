@@ -86,22 +86,34 @@ class GPLayerDelegate implements LayerDelegate {
     }
 
     @Override
-    public Long updateRasterLayer(GPRasterLayer layer)
-            throws ResourceNotFoundFault, IllegalParameterFault {
+    public Long updateRasterLayer(UpdateLayerRequest updateLayerRequest) throws ResourceNotFoundFault, IllegalParameterFault {
+        if (updateLayerRequest == null) {
+            throw new IllegalParameterFault("The UpdateLayerRequest must not be null.");
+        }
+        GPLayer layer = updateLayerRequest.getLayer();
+        if (!(layer instanceof GPRasterLayer)) {
+            throw new IllegalParameterFault("The Parameter layer must be a GPRasterLayer.");
+        }
         checkLayer(layer); // TODO assert
         GPRasterLayer orig = (GPRasterLayer) this.getLayerDetail(layer.getId());
-        orig.setLayerInfo(layer.getLayerInfo());
+        orig.setLayerInfo(((GPRasterLayer) layer).getLayerInfo());
         this.updateLayer(orig, layer);
         layerDao.update(orig);
         return orig.getId();
     }
 
     @Override
-    public Long updateVectorLayer(GPVectorLayer layer)
-            throws ResourceNotFoundFault, IllegalParameterFault {
+    public Long updateVectorLayer(UpdateLayerRequest updateLayerRequest) throws ResourceNotFoundFault, IllegalParameterFault {
+        if (updateLayerRequest == null) {
+            throw new IllegalParameterFault("The UpdateLayerRequest must not be null.");
+        }
+        GPLayer layer = updateLayerRequest.getLayer();
+        if (!(layer instanceof GPVectorLayer)) {
+            throw new IllegalParameterFault("The Parameter layer must be a GPVectorLayer.");
+        }
         checkLayer(layer); // TODO assert
         GPVectorLayer orig = (GPVectorLayer) this.getLayerDetail(layer.getId());
-        orig.setGeometry(layer.getGeometry());
+        orig.setGeometry(((GPVectorLayer) layer).getGeometry());
         this.updateLayer(orig, layer);
         layerDao.update(orig);
         return orig.getId();

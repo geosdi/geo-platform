@@ -56,12 +56,10 @@ public interface LayerDelegate extends GPLayerResource {
             IllegalParameterFault;
 
     @Override
-    Long updateRasterLayer(GPRasterLayer layer)
-            throws ResourceNotFoundFault, IllegalParameterFault;
+    Long updateRasterLayer(UpdateLayerRequest updateLayerRequest) throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Override
-    Long updateVectorLayer(GPVectorLayer layer)
-            throws ResourceNotFoundFault, IllegalParameterFault;
+    Long updateVectorLayer(UpdateLayerRequest updateLayerRequest) throws ResourceNotFoundFault, IllegalParameterFault;
 
     @Override
     Boolean deleteLayer(Long layerID) throws ResourceNotFoundFault;

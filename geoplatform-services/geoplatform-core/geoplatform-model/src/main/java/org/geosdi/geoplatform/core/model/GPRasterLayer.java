@@ -57,8 +57,8 @@ import static org.geosdi.geoplatform.gui.shared.GPLayerType.WMS;
 /**
  * @author Francesco Izzi - CNR IMAA - geoSDI
  */
-@XmlRootElement(name = "RasterLayer")
-@XmlAccessorType(FIELD)
+@XmlRootElement(name = "GPRasterLayer")
+@XmlAccessorType(value = FIELD)
 @Entity(name = "RasterLayer")
 @Table(name = "gp_raster_layer")
 @PrimaryKeyJoinColumn(name = "gp_layer_id")

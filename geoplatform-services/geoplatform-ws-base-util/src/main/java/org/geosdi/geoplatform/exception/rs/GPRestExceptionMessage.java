@@ -37,18 +37,20 @@ package org.geosdi.geoplatform.exception.rs;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlRootElement;
+import lombok.Getter;
+import lombok.Setter;
 import org.geosdi.geoplatform.exception.GPExceptionFaultType;
 
 import java.io.Serializable;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement
+//@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
+@Getter
+@Setter
 public class GPRestExceptionMessage implements Serializable {
 
     private static final long serialVersionUID = -8447193762518149838L;
@@ -60,55 +62,37 @@ public class GPRestExceptionMessage implements Serializable {
     public GPRestExceptionMessage() {
     }
 
+    /**
+     * @param message
+     */
     public GPRestExceptionMessage(String message) {
         this(null, message);
     }
 
-    public GPRestExceptionMessage(GPExceptionFaultType theFaultType,
-            String theMessage) {
+    /**
+     * @param theFaultType
+     * @param theMessage
+     */
+    public GPRestExceptionMessage(GPExceptionFaultType theFaultType, String theMessage) {
         this(theFaultType, theMessage, null);
     }
 
-    public GPRestExceptionMessage(GPExceptionFaultType faultType,
-            String message, Long id) {
+    /**
+     * @param faultType
+     * @param message
+     * @param id
+     */
+    public GPRestExceptionMessage(GPExceptionFaultType faultType, String message, Long id) {
         this.faultType = faultType;
         this.message = message;
         this.id = id;
     }
 
-    /**
-     * @return the faultType
-     */
-    public GPExceptionFaultType getFaultType() {
-        return faultType;
-    }
-
-    /**
-     * @param faultType the faultType to set
-     */
-    public void setFaultType(
-            GPExceptionFaultType faultType) {
-        this.faultType = faultType;
-    }
-
-    /**
-     * @return the message
-     */
-    public String getMessage() {
-        return message;
-    }
-
-    /**
-     * @param message the message to set
-     */
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     @Override
     public String toString() {
-        return getClass().getSimpleName() + " {" + "faultType = " + faultType
-                + ", message = " + message + ", id = " + id + '}';
+        return getClass().getSimpleName()
+                + " {" + "faultType = " + faultType
+                + ", message = " + message
+                + ", id = " + id + '}';
     }
-
 }

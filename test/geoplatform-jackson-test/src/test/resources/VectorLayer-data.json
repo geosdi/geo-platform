@@ -1,5 +1,5 @@
 {
-    "VectorLayer": {
+    "GPVectorLayer": {
         "type": "GPVector",
         "id": 8251,
         "title": "vector_1_rs",

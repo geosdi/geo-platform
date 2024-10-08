@@ -36,6 +36,9 @@
 package org.geosdi.geoplatform.responce;
 
 import jakarta.xml.bind.annotation.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.List;
@@ -44,8 +47,11 @@ import java.util.List;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement
+//@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
+@Getter
+@Setter
+@ToString
 public class InfoPreviewStore implements Serializable {
 
     private static final long serialVersionUID = -8998134033575002792L;
@@ -63,24 +69,4 @@ public class InfoPreviewStore implements Serializable {
     public InfoPreviewStore(List<InfoPreview> theInfoPreviews) {
         this.infoPreviews = theInfoPreviews;
     }
-
-    /**
-     * @return the infoPreviews
-     */
-    public List<InfoPreview> getInfoPreviews() {
-        return infoPreviews;
-    }
-
-    /**
-     * @param infoPreviews the infoPreviews to set
-     */
-    public void setInfoPreviews(List<InfoPreview> infoPreviews) {
-        this.infoPreviews = infoPreviews;
-    }
-
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + " {" + "infoPreviews = " + infoPreviews + '}';
-    }
-
 }

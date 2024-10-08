@@ -40,6 +40,7 @@ import org.geosdi.geoplatform.initializer.GuiComponentIDs;
 import org.geosdi.geoplatform.request.organization.WSPutRolePermissionRequest;
 import org.geosdi.geoplatform.request.organization.WSSaveRoleRequest;
 import org.geosdi.geoplatform.response.collection.GuiComponentsPermissionMapData;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -49,11 +50,13 @@ import static org.geosdi.geoplatform.gui.shared.GPRole.*;
 import static org.geosdi.geoplatform.initializer.GuiComponentIDs.MAP_VIEWER;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class RSRolePermissionTest extends BasicRestServiceTest {
 
     @Override
@@ -63,7 +66,7 @@ public class RSRolePermissionTest extends BasicRestServiceTest {
     }
 
     @Test(expected = NotFoundException.class)
-    public void updateRolePermissionTestRest() throws Exception {
+    public void a_updateRolePermissionTestRest() throws Exception {
         GuiComponentsPermissionMapData userMapData = new GuiComponentsPermissionMapData();
         userMapData.setPermissionMap(new HashMap<>(GuiComponentIDs.MAP_USER));
         assertTrue(gpWSClient.updateRolePermission(new WSPutRolePermissionRequest(userMapData, USER.getRole(), organizationNameRSTest)));
@@ -79,14 +82,14 @@ public class RSRolePermissionTest extends BasicRestServiceTest {
     }
 
     @Test
-    public void getAllRolesTestRest() throws Exception {
+    public void b_getAllRolesTestRest() throws Exception {
         List<String> roles = gpWSClient.getAllRoles(organizationNameRSTest).getRoles();
         logger.trace("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ROLES_FOUND for {} , are : {}\n\n", organizationNameRSTest, roles);
         assertEquals(3, roles.size());
     }
 
     @Test
-    public void getRolePermissionTestRest() throws Exception {
+    public void c_getRolePermissionTestRest() throws Exception {
         GuiComponentsPermissionMapData wsAdminMapData = gpWSClient.getRolePermission(ADMIN.getRole(), organizationNameRSTest);
         logger.trace("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@RETRIEVE GuiComponents for ADMIN_ROLE : {}\n\n", wsAdminMapData);
         assertEquals(0, wsAdminMapData.getPermissionMap().size());

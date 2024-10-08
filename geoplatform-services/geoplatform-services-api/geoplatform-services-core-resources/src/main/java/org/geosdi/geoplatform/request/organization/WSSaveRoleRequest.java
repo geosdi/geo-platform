@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.request.organization;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlRootElement;
 
 import java.io.Serializable;
 
@@ -45,7 +44,7 @@ import java.io.Serializable;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement
+//@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class WSSaveRoleRequest implements Serializable {
 

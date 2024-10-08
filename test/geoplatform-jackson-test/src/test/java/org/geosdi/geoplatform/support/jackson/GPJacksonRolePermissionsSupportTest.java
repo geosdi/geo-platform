@@ -39,19 +39,21 @@ import org.geosdi.geoplatform.request.organization.WSPutRolePermissionRequest;
 import org.geosdi.geoplatform.request.organization.WSSaveRoleRequest;
 import org.geosdi.geoplatform.response.collection.GuiComponentsPermissionMapData;
 import org.geosdi.geoplatform.response.role.WSGetRoleResponse;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import static java.lang.Thread.currentThread;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class GPJacksonRolePermissionsSupportTest extends GPBaseJacksonSupportTest {
     
     @Test
-    public void saveRoleRequestDataMappingTest() throws Exception {
+    public void a_saveRoleRequestDataMappingTest() throws Exception {
         WSSaveRoleRequest saveRoleRequest = jacksonSupport.getDefaultMapper()
                 .readValue(currentThread().getContextClassLoader().getResourceAsStream(SAVE_ROLE_REQUEST_DATA_JSON), WSSaveRoleRequest.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@SAVE_ROLE_REQUEST_DATA_MAPPING : {}\n\n", saveRoleRequest);
@@ -59,7 +61,7 @@ public class GPJacksonRolePermissionsSupportTest extends GPBaseJacksonSupportTes
     }
     
     @Test
-    public void guiComponentsPermissionDataMappingTest() throws Exception {
+    public void b_guiComponentsPermissionDataMappingTest() throws Exception {
         GuiComponentsPermissionMapData guiComponents = jacksonSupport.getDefaultMapper()
                 .readValue(currentThread().getContextClassLoader().getResourceAsStream(GUI_COMPONENTS_PERMISSION_DATA_JSON), GuiComponentsPermissionMapData.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@GUI_COMPONENTS_PERMISSION_DATA_MAPPING : {}\n\n", guiComponents);
@@ -67,7 +69,7 @@ public class GPJacksonRolePermissionsSupportTest extends GPBaseJacksonSupportTes
     }
     
     @Test
-    public void putRolePermissionDataMappingTest() throws Exception {
+    public void c_putRolePermissionDataMappingTest() throws Exception {
         WSPutRolePermissionRequest putPermissionReques = jacksonSupport.getDefaultMapper()
                 .readValue(currentThread().getContextClassLoader().getResourceAsStream(PUT_ROLE_PERMISSION_REQUEST_DATA_JSON), WSPutRolePermissionRequest.class);
         logger.info("\n\n@@@@@@@@@@@@@@PUT_ROLE_PERMISSION_REQUEST_DATA_MAPPING: {}\n\n", putPermissionReques);
@@ -75,7 +77,7 @@ public class GPJacksonRolePermissionsSupportTest extends GPBaseJacksonSupportTes
     }
     
     @Test
-    public void getRoleResponseDataMappingTest() throws Exception {
+    public void d_getRoleResponseDataMappingTest() throws Exception {
         WSGetRoleResponse getRoleResponse = jacksonSupport.getDefaultMapper()
                 .readValue(currentThread().getContextClassLoader().getResourceAsStream(GET_ROLE_RESPONSE_DATA_JSON), WSGetRoleResponse.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@GET_ROLE_RESPONSE_REQUEST_DATA_MAPPING : {}\n\n", getRoleResponse);

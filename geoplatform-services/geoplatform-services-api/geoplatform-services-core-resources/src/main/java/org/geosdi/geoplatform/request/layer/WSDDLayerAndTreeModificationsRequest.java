@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.request.layer;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.request.TreeModificationRequest;
 import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
 
@@ -45,7 +44,7 @@ import org.geosdi.geoplatform.response.collection.GPWebServiceMapData;
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement
+//@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class WSDDLayerAndTreeModificationsRequest extends TreeModificationRequest {
 

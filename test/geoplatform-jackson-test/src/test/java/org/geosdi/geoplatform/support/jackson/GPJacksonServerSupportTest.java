@@ -38,26 +38,28 @@ package org.geosdi.geoplatform.support.jackson;
 import org.geosdi.geoplatform.core.model.GeoPlatformServer;
 import org.geosdi.geoplatform.response.ServerDTO;
 import org.geosdi.geoplatform.response.ServerDTOContainer;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 
 import static java.lang.Thread.currentThread;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
+@FixMethodOrder(value = NAME_ASCENDING)
 public class GPJacksonServerSupportTest extends GPBaseJacksonSupportTest {
 
     @Test
-    public void serverDataMappingTest() throws Exception {
+    public void a_serverDataMappingTest() throws Exception {
         GeoPlatformServer server = jacksonSupport.getDefaultMapper().readValue(currentThread().getContextClassLoader().getResourceAsStream(SERVER_DATA_JSON), GeoPlatformServer.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SERVER_DATA_MAPPING" + " : {}\n\n", server);
         super.marshall(server);
     }
 
     @Test
-    public void serverDTODataMappingTest() throws Exception {
+    public void b_serverDTODataMappingTest() throws Exception {
         ServerDTO serverDTO = jacksonSupport.getDefaultMapper()
                 .readValue(currentThread().getContextClassLoader().getResourceAsStream(SERVER_DTO_DATA_JSON), ServerDTO.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SERVER_DTO_DATA_MAPPING : {}\n\n", serverDTO);
@@ -65,7 +67,7 @@ public class GPJacksonServerSupportTest extends GPBaseJacksonSupportTest {
     }
 
     @Test
-    public void serverDTOContainerDataMappingTest() throws Exception {
+    public void c_serverDTOContainerDataMappingTest() throws Exception {
         ServerDTOContainer serverDTOContainer = jacksonSupport.getDefaultMapper()
                 .readValue(currentThread().getContextClassLoader().getResourceAsStream(SERVER_DTO_CONTAINER_DATA_JSON), ServerDTOContainer.class);
         logger.info("\n\n@@@@@@@@@@@@@@@@@@@@@SERVER_DTO_CONTAINER_DATA_MAPPING : {}\n\n", serverDTOContainer);

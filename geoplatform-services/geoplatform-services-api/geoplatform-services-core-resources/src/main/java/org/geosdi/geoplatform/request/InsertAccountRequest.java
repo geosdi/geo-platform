@@ -38,23 +38,21 @@ package org.geosdi.geoplatform.request;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
 import org.geosdi.geoplatform.core.model.GPAccount;
 
 import java.io.Serializable;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@XmlRootElement(name = "InsertAccountRequest")
+//@XmlRootElement(name = "InsertAccountRequest")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class InsertAccountRequest implements Serializable {
 
     private static final long serialVersionUID = 1646506363613851665L;
     //
-    //@XmlAnyElement(lax = true)
+//    @XmlAnyElement(lax = true)
     @XmlElement(name = "account")
     private GPAccount account;
     private boolean sendEmail;

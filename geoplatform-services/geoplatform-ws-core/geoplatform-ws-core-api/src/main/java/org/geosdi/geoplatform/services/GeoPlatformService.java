@@ -1471,14 +1471,12 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.INSERT_LAYER_PATH)
     @Deprecated
     @Override
-    Long insertLayer(
-            @WebParam(name = "layerRequest") InsertLayerRequest layerRequest)
-            throws IllegalParameterFault;
+    Long insertLayer(@WebParam(name = "layerRequest") InsertLayerRequest layerRequest) throws IllegalParameterFault;
 
     /**
      * Update a raster Layer.
      *
-     * @param layer the Layer to update
+     * @param updateLayerRequest the Layer to update
      * @return the Layer ID
      * @throws ResourceNotFoundFault if Layer not found
      * @throws IllegalParameterFault if the Layer is not valid
@@ -1490,13 +1488,12 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.UPDATE_RASTER_LAYER_PARH)
     @Deprecated
     @Override
-    Long updateRasterLayer(@WebParam(name = "layer") GPRasterLayer layer)
-            throws ResourceNotFoundFault, IllegalParameterFault;
+    Long updateRasterLayer(@WebParam(name = "updateLayerRequest") UpdateLayerRequest updateLayerRequest) throws ResourceNotFoundFault, IllegalParameterFault;
 
     /**
      * Update a vector Layer.
      *
-     * @param layer the Layer to update
+     * @param updateLayerRequest the Layer to update
      * @return the Layer ID
      * @throws ResourceNotFoundFault if Layer not found
      * @throws IllegalParameterFault if the Layer is not valid
@@ -1507,8 +1504,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Path(value = GPServiceRSPathConfig.UPDATE_VECTOR_LAYER_PATH)
     @Deprecated
     @Override
-    Long updateVectorLayer(@WebParam(name = "layer") GPVectorLayer layer)
-            throws ResourceNotFoundFault, IllegalParameterFault;
+    Long updateVectorLayer(@WebParam(name = "updateLayerRequest") UpdateLayerRequest updateLayerRequest) throws ResourceNotFoundFault, IllegalParameterFault;
 
     /**
      * Delete a Layer by ID.
@@ -1525,8 +1521,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @Deprecated
     @Override
     Boolean deleteLayer(@WebParam(name = "layerID")
-    @QueryParam(value = "layerID") Long layerID)
-            throws ResourceNotFoundFault;
+    @QueryParam(value = "layerID") Long layerID) throws ResourceNotFoundFault;
 
     /**
      * Insert a Layer, moreover manage Folder ancestors and positions on tree.
@@ -1628,9 +1623,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @PUT
     @Path(value = GPServiceRSPathConfig.SAVE_DD_LAYER_AND_TREE_MODIFICATIONS_PATH)
     @Override
-    Boolean saveDragAndDropLayerAndTreeModifications(
-            @WebParam(name = "ddLayerReq") WSDDLayerAndTreeModificationsRequest ddLayerReq)
-            throws ResourceNotFoundFault, IllegalParameterFault;
+    Boolean saveDragAndDropLayerAndTreeModifications(@WebParam(name = "ddLayerReq") WSDDLayerAndTreeModificationsRequest ddLayerReq) throws ResourceNotFoundFault, IllegalParameterFault;
 
     /**
      * Update properties (alias, opacity, styles, CQL filter and checked) of a
@@ -1645,9 +1638,7 @@ public interface GeoPlatformService extends GPCoreServiceApi {
     @PUT
     @Path(value = GPServiceRSPathConfig.SAVE_LAYERS_PROPERTIES_PATH)
     @Override
-    Boolean saveLayerProperties(
-            @WebParam(name = "layerProperties") RasterPropertiesDTO layerProperties)
-            throws ResourceNotFoundFault, IllegalParameterFault;
+    Boolean saveLayerProperties(@WebParam(name = "layerProperties") RasterPropertiesDTO layerProperties) throws ResourceNotFoundFault, IllegalParameterFault;
 
     /**
      * Retrieve a raster Layer by ID.

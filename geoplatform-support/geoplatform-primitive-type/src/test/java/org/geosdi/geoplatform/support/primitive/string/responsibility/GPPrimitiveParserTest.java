@@ -209,4 +209,11 @@ public class GPPrimitiveParserTest {
         logger.info("#############BASE_DOUBLE_PARSE_DOUBLE_JAVA : {}\n", Duration.between(start, finish).toMillis());
         logger.info("###########################PARSE_VALUE : {}\n", className);
     }
+
+    @Test
+    public void b_c_parseValueTest() throws Exception {
+        String className = primitiveParserHandlerManager.parseValue("2024-10-09T11:58:22.240000+00:00").getSimpleName();
+        logger.info("###########################PARSE_VALUE : {}\n", className);
+        assertTrue(className.equalsIgnoreCase(DateTime.class.getSimpleName()));
+    }
 }

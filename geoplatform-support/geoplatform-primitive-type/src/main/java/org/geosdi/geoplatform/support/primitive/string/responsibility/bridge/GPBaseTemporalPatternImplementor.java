@@ -55,7 +55,7 @@ public class GPBaseTemporalPatternImplementor implements GPTemporalPatternImplem
                 "dd.MM.yy", "H:mm", "H:mm:ss:SSS", "dd/MM/YY", "dd/MM/YYYY", "dd-MM-YY", "dd-MM-YYYY", "YYYY-MM-dd",
                 "YYYY-MM-dd HH:mm:ss", "yyyy-MM-dd'T'HH:mm:ss", "yyyy-MM-dd'T'HH:mm:ss.SSSSSSS", "MM-dd-yyyy",
                 "yyyy-MM-dd HH:mm:ss.SSS", "yyyy-MM-dd HH:mm:ss.SSSZ", "EEEEE MMMMM yyyy HH:mm:ss.SSSZ",
-                "yyyy-MM-ddTHH:mm:ss:sssZ", "yyyy-MM-dd'T'HH:mm:ss'Z'"));
+                "yyyy-MM-ddTHH:mm:ss:sssZ", "yyyy-MM-dd'T'HH:mm:ss'Z'", "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZZ"));
     }
 
     /**

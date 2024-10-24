@@ -57,8 +57,7 @@ class GPGeoserverCreateRoleRequest extends GPGeoserverBaseCreateRoleRequest<Geos
      * @param server
      * @param theJacksonSupport
      */
-    GPGeoserverCreateRoleRequest(@Nonnull(when = NEVER) GPServerConnector server,
-            @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
+    GPGeoserverCreateRoleRequest(@Nonnull(when = NEVER) GPServerConnector server, @Nonnull(when = NEVER) JacksonSupport theJacksonSupport) {
         super(server, theJacksonSupport);
     }
 

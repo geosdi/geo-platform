@@ -53,7 +53,6 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 public class GeoserverConnectorRolesTest extends GPBaseGeoserverConnectorStoreTest {
 
     static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorRolesTest.class);
-    //
 
     @Test
     public void a_loadRoles() throws Exception {

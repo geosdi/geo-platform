@@ -42,5 +42,4 @@ import org.geosdi.geoplatform.connector.geoserver.request.security.roles.base.Ge
  * @email vito.salvia@gmail.com
  */
 public interface GeoserverCreateRoleRequest extends GeoserverBaseRoleRequest<GeoserverCreateRoleRequest> {
-
 }

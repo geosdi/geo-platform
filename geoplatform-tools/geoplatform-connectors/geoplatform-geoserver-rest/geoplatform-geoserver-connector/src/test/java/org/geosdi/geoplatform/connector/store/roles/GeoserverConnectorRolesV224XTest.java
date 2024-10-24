@@ -53,7 +53,6 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 public class GeoserverConnectorRolesV224XTest extends GPBaseGeoserverConnectorStoreV224xTest {
 
     static final Logger logger = LoggerFactory.getLogger(GeoserverConnectorRolesV224XTest.class);
-    //
 
     @Test
     public void a_loadRoles() throws Exception {
@@ -62,34 +61,31 @@ public class GeoserverConnectorRolesV224XTest extends GPBaseGeoserverConnectorSt
 
     @Test
     public void b_loadUserRoles() throws Exception {
-        logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_24_x.loadUserRoles().withUser("admin").getResponse());
+        logger.info("################### {}\n", this.geoserverConnectorStoreV2_24_x.loadUserRoles().withUser("admin").getResponse());
     }
 
     @Test
     public void c_loadGroupRoles() throws Exception {
-        logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_24_x.loadGroupRoles().withGroup("test").getResponse());
+        logger.info("################### {}\n", this.geoserverConnectorStoreV2_24_x.loadGroupRoles().withGroup("test").getResponse());
     }
 
     @Test
     public void d_loadServiceUserRoles() throws Exception {
-        logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_24_x.loadServiceUserRoles().withService("default").withUser("admin")
-                        .getResponse());
+        logger.info("################### {}\n", this.geoserverConnectorStoreV2_24_x.loadServiceUserRoles()
+                .withService("default")
+                .withUser("admin").getResponse());
     }
 
     @Test
     public void e_loadServiceGroupRoles() throws Exception {
-        logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_24_x.loadServiceGroupRoles().withService("default").withGroup("test")
-                        .getResponse());
+        logger.info("################### {}\n", this.geoserverConnectorStoreV2_24_x.loadServiceGroupRoles()
+                .withService("default")
+                .withGroup("test").getResponse());
     }
 
     @Test
     public void f_createRole() throws Exception {
-        logger.info("################### {}\n",
-                this.geoserverConnectorStoreV2_24_x.createRole().withRole("test_role").getResponse());
+        logger.info("################### {}\n", this.geoserverConnectorStoreV2_24_x.createRole().withRole("test_role").getResponse());
     }
 
     @Test

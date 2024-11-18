@@ -38,27 +38,25 @@ package org.geosdi.geoplatform.experimental.mongodb.spring.jasypt.crypt;
 import org.geosdi.geoplatform.jasypt.support.BasePooledPBEStringEncryptorDecorator;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.PBEConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @Configuration
 class GPMongoPooledPBEStringEncryptorConfig {
 
+    /**
+     * @param mongoPBEConfig
+     * @return {@link PooledPBEStringEncryptor}
+     */
     @Bean(name = "gpMongoPooledPBEStringEncryptor")
-    @Autowired
-    public PooledPBEStringEncryptor gpMongoPooledPBEStringEncryptor(@Qualifier(
-            value = "mongoPBEConfig") PBEConfig mongoPBEConfig) {
+    public PooledPBEStringEncryptor gpMongoPooledPBEStringEncryptor(@Qualifier(value = "mongoPBEConfig") PBEConfig mongoPBEConfig) {
         BasePooledPBEStringEncryptorDecorator mongobppe = new BasePooledPBEStringEncryptorDecorator();
         mongobppe.setPbeConfig(mongoPBEConfig);
-
         return mongobppe.pooledPBEStringEncryptor();
     }
-
 }

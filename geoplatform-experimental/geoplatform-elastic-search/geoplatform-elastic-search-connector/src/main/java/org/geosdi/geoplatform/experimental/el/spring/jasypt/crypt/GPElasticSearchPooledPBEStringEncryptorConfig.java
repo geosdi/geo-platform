@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.experimental.el.spring.jasypt.crypt;
 import org.geosdi.geoplatform.jasypt.support.BasePooledPBEStringEncryptorDecorator;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.PBEConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -50,14 +49,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 class GPElasticSearchPooledPBEStringEncryptorConfig {
 
+    /**
+     * @param gpElasticSearchPBEConfig
+     * @return {@link PooledPBEStringEncryptor}
+     */
     @Bean(name = "gpElasticSearchPooledPBEStringEncryptor")
-    @Autowired
-    public PooledPBEStringEncryptor gpElasticSearchPooledPBEStringEncryptor(
-            @Qualifier(value = "gpElasticSearchPBEConfig") PBEConfig gpElasticSearchPBEConfig) {
+    public PooledPBEStringEncryptor gpElasticSearchPooledPBEStringEncryptor(@Qualifier(value = "gpElasticSearchPBEConfig") PBEConfig gpElasticSearchPBEConfig) {
         BasePooledPBEStringEncryptorDecorator elasticSearchbppe = new BasePooledPBEStringEncryptorDecorator();
         elasticSearchbppe.setPbeConfig(gpElasticSearchPBEConfig);
-
         return elasticSearchbppe.pooledPBEStringEncryptor();
     }
-
 }

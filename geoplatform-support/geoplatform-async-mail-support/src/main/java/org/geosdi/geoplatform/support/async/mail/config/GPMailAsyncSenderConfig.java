@@ -37,7 +37,6 @@ package org.geosdi.geoplatform.support.async.mail.config;
 
 import org.geosdi.geoplatform.support.async.mail.BaseMailAsyncSender;
 import org.geosdi.geoplatform.support.async.mail.GPMailAsyncSender;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -55,7 +54,6 @@ class GPMailAsyncSenderConfig {
      * @return {@link GPMailAsyncSender}
      */
     @Bean(name = "gpMailAsyncSender")
-    @Autowired
     public GPMailAsyncSender gpMailAsyncSender(@Qualifier(value = "gpMailSpringSender") JavaMailSender mailSender) {
         return new BaseMailAsyncSender(mailSender);
     }

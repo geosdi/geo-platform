@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.support.xmpp.spring.jasypt.crypt;
 import org.geosdi.geoplatform.jasypt.support.BasePooledPBEStringEncryptorDecorator;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.PBEConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -55,7 +54,6 @@ class GPXmppPooledPBEStringEncryptorConfig {
      * @return {@link PooledPBEStringEncryptor}
      */
     @Bean(name = "gpXmppPooledPBEStringEncryptor")
-    @Autowired
     public PooledPBEStringEncryptor gpXmppPooledPBEStringEncryptor(@Qualifier(value = "xmppPBEConfig") PBEConfig mailPBEConfig) {
         BasePooledPBEStringEncryptorDecorator bpbe = new BasePooledPBEStringEncryptorDecorator();
         bpbe.setPbeConfig(mailPBEConfig);

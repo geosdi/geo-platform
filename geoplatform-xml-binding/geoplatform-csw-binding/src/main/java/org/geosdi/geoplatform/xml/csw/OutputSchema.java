@@ -35,8 +35,12 @@
  */
 package org.geosdi.geoplatform.xml.csw;
 
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
+
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public enum OutputSchema {
@@ -47,8 +51,12 @@ public enum OutputSchema {
     //
     private final String schema;
 
-    OutputSchema(String schema) {
-        this.schema = schema;
+    /**
+     * @param theSchema
+     */
+    OutputSchema(@Nonnull(when = NEVER) String theSchema) {
+        checkArgument((theSchema != null) && !(theSchema.trim().isEmpty()), "The Parameter schema must not be null or an empty string.");
+        this.schema = theSchema;
     }
 
     @Override

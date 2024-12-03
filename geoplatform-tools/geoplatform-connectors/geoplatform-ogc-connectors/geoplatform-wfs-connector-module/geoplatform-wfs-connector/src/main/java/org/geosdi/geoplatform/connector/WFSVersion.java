@@ -38,6 +38,7 @@ package org.geosdi.geoplatform.connector;
 import org.geosdi.geoplatform.connector.server.GPServerConnector;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -81,7 +82,7 @@ public enum WFSVersion implements GPServerConnector.GPServerConnectorVersion {
      * @param theVersion
      * @return {@link WFSVersion}
      */
-    public static WFSVersion fromString(String theVersion) {
+    public static WFSVersion fromString(@Nullable String theVersion) {
         Optional<WFSVersion> optional = stream(WFSVersion.values())
                 .filter(v -> ((theVersion != null) && !(theVersion.trim().isEmpty())) ? v.getVersion().equalsIgnoreCase(theVersion) : FALSE)
                 .findFirst();

@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.xml.csw;
 import javax.xml.namespace.QName;
 
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public class QNameConstant {

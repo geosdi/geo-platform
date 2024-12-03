@@ -50,6 +50,8 @@ import org.geosdi.geoplatform.support.httpclient.proxy.HttpClientProxyConfigurat
 
 import java.net.URL;
 
+import static org.geosdi.geoplatform.connector.GPCatalogVersion.V202;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -185,12 +187,9 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector implemen
      */
     @Override
     public CatalogGetCapabilitiesRequest createGetCapabilitiesRequest() {
-        switch (getVersion()) {
-            case V202:
-                return new CatalogGetCapabilitiesV202(this);
-            default:
-                throw new CatalogVersionException("The Version for CSW must be 2.0.2");
-        }
+        return switch (this.version) {
+            case V202 -> new CatalogGetCapabilitiesV202(this);
+        };
     }
 
     /**
@@ -202,12 +201,9 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector implemen
      */
     @Override
     public CatalogGetRecordsRequest createGetRecordsRequest() {
-        switch (getVersion()) {
-            case V202:
-                return new CatalogGetRecordsV202(this);
-            default:
-                throw new CatalogVersionException("The Version for CSW must be 2.0.2");
-        }
+        return switch (this.version) {
+            case V202 -> new CatalogGetRecordsV202(this);
+        };
     }
 
     /**
@@ -218,13 +214,9 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector implemen
      */
     @Override
     public CatalogGetRecordByIdRequest createGetRecordByIdRequest() {
-        switch (getVersion()) {
-            case V202:
-                return new CatalogGetRecordByIdV202(this);
-            default:
-                throw new CatalogVersionException(
-                        "The Version for CSW must be 2.0.2");
-        }
+        return switch (this.version) {
+            case V202 -> new CatalogGetRecordByIdV202(this);
+        };
     }
 
     /**
@@ -232,7 +224,7 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector implemen
      */
     @Override
     public GPCatalogVersion getVersion() {
-        return version;
+        return this.version;
     }
 
     /**
@@ -244,9 +236,9 @@ public class GPCatalogServerConnector extends GPAbstractServerConnector implemen
      * @return {@link GPCatalogVersion}
      */
     private static GPCatalogVersion toCSWVersion(String version) {
-        if (!version.equalsIgnoreCase("2.0.2")) {
+        if ((version == null) || (!version.equalsIgnoreCase("2.0.2"))) {
             throw new CatalogVersionException("CSW Version must be 2.0.2");
         }
-        return GPCatalogVersion.V202;
+        return V202;
     }
 }

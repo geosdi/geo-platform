@@ -49,6 +49,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+
+import static java.io.File.separator;
+import static java.lang.Boolean.TRUE;
+import static java.util.concurrent.Executors.newFixedThreadPool;
+import static java.util.stream.Stream.of;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -62,9 +68,9 @@ public abstract class AbstractCSWComparisonTest {
 
         @Override
         public Thread newThread(Runnable r) {
-            Thread thread = Executors.privilegedThreadFactory().newThread(r);
+            Thread thread = Executors.defaultThreadFactory().newThread(r);
             thread.setName("CSWComparisonThread - " + threadID.getAndIncrement());
-            thread.setDaemon(Boolean.TRUE);
+            thread.setDaemon(TRUE);
             return thread;
         }
     };
@@ -75,66 +81,52 @@ public abstract class AbstractCSWComparisonTest {
 
     @BeforeClass
     public static void loadFile() throws Exception {
-        String fileString = new File(".").getCanonicalPath() + File.separator
-                + "src/test/resources/getRecordsCount.xml";
-        file = new File(fileString);
+        file = new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "getRecordsCount.xml")
+                .collect(Collectors.joining(separator)));
     }
 
     protected int defineNumThreads() {
         return 300;
     }
 
-    protected long executeMultiThreadsTasks(GPBaseJAXBContext jaxbContext)
-            throws Exception {
+    protected long executeMultiThreadsTasks(GPBaseJAXBContext jaxbContext) throws Exception {
         long time = 0;
-
         int numThreads = defineNumThreads();
+        try(ExecutorService executor = newFixedThreadPool(numThreads, CSWComparisonThreadFactory)) {
 
-        ExecutorService executor = Executors.newFixedThreadPool(numThreads,
-                CSWComparisonThreadFactory);
-
-        List<Callable<Long>> tasks = new ArrayList<>(
-                numThreads);
-        for (int i = 0; i < numThreads; i++) {
-            if (jaxbContext instanceof CSWJAXBContextPool) {
-                tasks.add(new CSWPooledTask(jaxbContext));
+            List<Callable<Long>> tasks = new ArrayList<>(numThreads);
+            for (int i = 0; i < numThreads; i++) {
+                if (jaxbContext instanceof CSWJAXBContextPool) {
+                    tasks.add(new CSWPooledTask(jaxbContext));
+                } else {
+                    tasks.add(new CSWSimpleTask(jaxbContext));
+                }
+            }
+            List<Future<Long>> results = executor.invokeAll(tasks);
+            executor.shutdown();
+            boolean flag = executor.awaitTermination(1, TimeUnit.MINUTES);
+            if (flag) {
+                for (Future<Long> future : results) {
+                    time += future.get();
+                }
             } else {
-                tasks.add(new CSWSimpleTask(jaxbContext));
+                throw new InterruptedException("Some Threads are not executed.");
             }
+            return time;
         }
-
-        List<Future<Long>> results = executor.invokeAll(tasks);
-        executor.shutdown();
-
-        boolean flag = executor.awaitTermination(1, TimeUnit.MINUTES);
-
-        if (flag) {
-            for (Future<Long> future : results) {
-                time += future.get();
-            }
-        } else {
-            throw new InterruptedException("Some Threads are not executed.");
-        }
-
-        return time;
     }
 
     private long executeSimpleTask(GPBaseJAXBContext jaxbContext) throws Exception {
         long start = System.currentTimeMillis();
-
-        GetRecordsType getRecords = ((JAXBElement<GetRecordsType>) jaxbContext
-                .acquireUnmarshaller().unmarshal(file)).getValue();
+        GetRecordsType getRecords = ((JAXBElement<GetRecordsType>) jaxbContext.acquireUnmarshaller().unmarshal(file)).getValue();
         StringWriter writer = new StringWriter();
-
         jaxbContext.acquireMarshaller().marshal(getRecords, writer);
         logger.debug("\n{}\n", writer);
-
         return System.currentTimeMillis() - start;
     }
 
     private long executePooledTask(GPBaseJAXBContext jaxbContext) throws Exception {
         long start = System.currentTimeMillis();
-
         GetRecordsType getRecords = (GetRecordsType) ((CSWJAXBContextPool) jaxbContext).unmarshal(file);
         StringWriter writer = new StringWriter();
         ((CSWJAXBContextPool) jaxbContext).marshal(getRecords, writer);

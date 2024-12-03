@@ -40,9 +40,11 @@ import org.geosdi.geoplatform.connector.jaxb.context.pool.CSWJAXBContextPool;
 import org.geosdi.geoplatform.jaxb.GPBaseJAXBContext;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Nullable;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
+import static org.geosdi.geoplatform.connector.jaxb.comparison.factory.CSWContextFactory.CSWContextType.SIMPLE;
 import static org.geosdi.geoplatform.xml.csw.CSWContextServiceProviderV202.CSW_CONTEXT_SERVICE_PROVIDER;
 
 /**
@@ -52,7 +54,6 @@ import static org.geosdi.geoplatform.xml.csw.CSWContextServiceProviderV202.CSW_C
 public class CSWContextFactory {
 
     public enum CSWContextType {
-
         SIMPLE,
         POOLED;
     }
@@ -61,24 +62,21 @@ public class CSWContextFactory {
         try {
             jaxbContext = JAXBContext.newInstance(CSW_CONTEXT_SERVICE_PROVIDER.getContextPath());
         } catch (JAXBException ex) {
-            LoggerFactory.getLogger(CSWContextFactory.class).error("ERROR Loading "
-                    + "Context : " + ex);
+            LoggerFactory.getLogger(CSWContextFactory.class).error("ERROR Loading Context : " + ex);
         }
     }
-
     //
     private static JAXBContext jaxbContext;
 
-    public static GPBaseJAXBContext createCSWContext(CSWContextType type)
-            throws Exception {
-
-        switch (type) {
-            case SIMPLE:
-                return new CSWJAXBContext(jaxbContext);
-            case POOLED:
-                return new CSWJAXBContextPool(jaxbContext);
-            default:
-                return new CSWJAXBContext(jaxbContext);
-        }
+    /**
+     * @param type
+     * @return {@link GPBaseJAXBContext}
+     * @throws Exception
+     */
+    public static GPBaseJAXBContext createCSWContext(@Nullable CSWContextType type) throws Exception {
+        return switch (type == null ? SIMPLE : type) {
+            case SIMPLE -> new CSWJAXBContext(jaxbContext);
+            case POOLED -> new CSWJAXBContextPool(jaxbContext);
+        };
     }
 }

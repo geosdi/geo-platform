@@ -40,34 +40,28 @@ import org.geosdi.geoplatform.connector.jaxb.context.pool.CSWJAXBContextPool;
 import org.geosdi.geoplatform.xml.csw.v202.GetRecordsType;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
 
 import javax.xml.bind.JAXBContext;
-import java.util.concurrent.TimeUnit;
+
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-@FixMethodOrder(value = MethodSorters.NAME_ASCENDING)
-public class CSWContextComparisonTest
-        extends AbstractCSWComparisonTest {
+@FixMethodOrder(value = NAME_ASCENDING)
+public class CSWContextComparisonTest extends AbstractCSWComparisonTest {
 
     @Test
     public void cswPooledContextTest() throws Exception {
-        logger.info("CSWPooledContextTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        new CSWJAXBContextPool(JAXBContext
-                                .newInstance(GetRecordsType.class)))));
+        logger.info("CSWPooledContextTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(new CSWJAXBContextPool(JAXBContext.newInstance(GetRecordsType.class)))));
     }
 
     @Test
     public void cswSimpleContextTest() throws Exception {
-        logger.info("CSWSimpleContextTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        new CSWJAXBContext(JAXBContext
-                                .newInstance(GetRecordsType.class)))));
+        logger.info("CSWSimpleContextTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(new CSWJAXBContext(JAXBContext.newInstance(GetRecordsType.class)))));
     }
 }

@@ -35,10 +35,13 @@
  */
 package org.geosdi.geoplatform.xml.csw;
 
+import javax.annotation.Nonnull;
 import javax.xml.namespace.QName;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
+
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public enum TypeName {
@@ -48,10 +51,17 @@ public enum TypeName {
     //
     private final QName qName;
 
-    TypeName(QName qName) {
-        this.qName = qName;
+    /**
+     * @param theQName
+     */
+    TypeName(@Nonnull(when = NEVER) QName theQName) {
+        checkArgument(theQName != null, "The Parameter qName must not be null.");
+        this.qName = theQName;
     }
 
+    /**
+     * @return {@link QName}
+     */
     public QName getQName() {
         return qName;
     }

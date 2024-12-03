@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.xml.csw;
 
 /**
- *
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */

@@ -35,8 +35,12 @@
  */
 package org.geosdi.geoplatform.xml.csw;
 
+import javax.annotation.Nonnull;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static javax.annotation.meta.When.NEVER;
+
 /**
- *
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
  */
 public enum ConstraintLanguageVersion {
@@ -45,10 +49,17 @@ public enum ConstraintLanguageVersion {
     //
     String version;
 
-    private ConstraintLanguageVersion(String version) {
-        this.version = version;
+    /**
+     * @param theVersion
+     */
+    ConstraintLanguageVersion(@Nonnull(when = NEVER) String theVersion) {
+        checkArgument((theVersion != null) && !(theVersion.trim().isEmpty()), "The Parameter version must not be null or an Empty string.");
+        this.version = theVersion;
     }
 
+    /**
+     * @return {@link String}
+     */
     public String getVersion() {
         return version;
     }

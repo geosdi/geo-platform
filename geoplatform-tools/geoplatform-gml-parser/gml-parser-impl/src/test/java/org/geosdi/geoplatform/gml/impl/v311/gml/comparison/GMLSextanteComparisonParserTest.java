@@ -35,13 +35,15 @@
  */
 package org.geosdi.geoplatform.gml.impl.v311.gml.comparison;
 
-import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextFactoryV311;
 import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextType;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import java.util.concurrent.TimeUnit;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static org.geosdi.geoplatform.gml.impl.v311.gml.comparison.AbstractGMLComparisonTest.GMLTaskType.*;
+import static org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextFactoryV311.createJAXBContext;
+import static org.geosdi.geoplatform.gml.impl.v311.jaxb.context.factory.GMLContextType.POOLED;
 
 /**
  *
@@ -53,182 +55,122 @@ public class GMLSextanteComparisonParserTest extends AbstractGMLComparisonTest {
 
     @Test
     public void gmlPointSextantePoolTest() throws Exception {
-        logger.info("gmlPointSextantePoolTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        GMLContextFactoryV311.createJAXBContext(GMLContextType.POOLED),
-                        GMLTaskType.POINT_POOLED)));
+        logger.info("gmlPointSextantePoolTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(createJAXBContext(POOLED), POINT_POOLED)));
     }
 
     @Test
     public void gmlPointSextanteSimpleTest() throws Exception {
-        logger.info("gmlPointSextanteSimpleTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        GMLContextFactoryV311.createJAXBContext(GMLContextType.SIMPLE),
-                        GMLTaskType.POINT_SIMPLE)));
+        logger.info("gmlPointSextanteSimpleTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(createJAXBContext(GMLContextType.SIMPLE), POINT_SIMPLE)));
     }
 
     @Test
     public void gmlLineStringSextantePoolTest() throws Exception {
-        logger.info("gmlLineStringSextantePoolTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        GMLContextFactoryV311.createJAXBContext(GMLContextType.POOLED),
-                        GMLTaskType.LINE_STRING_POOLED)));
+        logger.info("gmlLineStringSextantePoolTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(createJAXBContext(POOLED), LINE_STRING_POOLED)));
     }
 
     @Test
     public void gmlLineStringSextanteSimpleTest() throws Exception {
-        logger.info("gmlLineStringSextanteSimpleTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        GMLContextFactoryV311.createJAXBContext(GMLContextType.SIMPLE),
-                        GMLTaskType.LINE_STRING_SIMPE)));
+        logger.info("gmlLineStringSextanteSimpleTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(createJAXBContext(GMLContextType.SIMPLE), LINE_STRING_SIMPE)));
     }
 
     @Test
     public void gmlLinearRingSextantePoolTest() throws Exception {
-        logger.info("gmlLinearRingSextantePoolTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        GMLContextFactoryV311.createJAXBContext(GMLContextType.POOLED),
-                        GMLTaskType.LINEAR_RING_POOLED)));
+        logger.info("gmlLinearRingSextantePoolTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(createJAXBContext(POOLED), LINEAR_RING_POOLED)));
     }
 
     @Test
     public void gmlLinearRingSextanteSimpleTest() throws Exception {
-        logger.info("gmlLinearRingSextanteSimpleTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        GMLContextFactoryV311.createJAXBContext(GMLContextType.SIMPLE),
-                        GMLTaskType.LINEAR_RING_SIMPLE)));
+        logger.info("gmlLinearRingSextanteSimpleTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(createJAXBContext(GMLContextType.SIMPLE), LINEAR_RING_SIMPLE)));
     }
 
     @Test
     public void gmlPolygonSextantePoolTest() throws Exception {
-        logger.info("gmlPolygonSextantePoolTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        GMLContextFactoryV311.createJAXBContext(GMLContextType.POOLED),
-                        GMLTaskType.POLYGON_POOLED)));
+        logger.info("gmlPolygonSextantePoolTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(createJAXBContext(POOLED), POLYGON_POOLED)));
     }
 
     @Test
     public void gmlPolygonSextanteSimpleTest() throws Exception {
-        logger.info("gmlPolygonSextanteSimpleTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        GMLContextFactoryV311.createJAXBContext(GMLContextType.SIMPLE),
-                        GMLTaskType.POLYGON_SIMPE)));
+        logger.info("gmlPolygonSextanteSimpleTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(createJAXBContext(GMLContextType.SIMPLE), POLYGON_SIMPE)));
     }
 
     @Test
     public void gmlMultiPointSextantePoolTest() throws Exception {
-        logger.info("gmlMultiPointSextantePoolTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        GMLContextFactoryV311.createJAXBContext(GMLContextType.POOLED),
-                        GMLTaskType.MULTI_POINT_POOLED)));
+        logger.info("gmlMultiPointSextantePoolTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(createJAXBContext(POOLED), MULTI_POINT_POOLED)));
     }
 
     @Test
     public void gmlMultiPointSextanteSimpleTest() throws Exception {
-        logger.info("gmlMultiPointSextanteSimpleTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        GMLContextFactoryV311.createJAXBContext(GMLContextType.SIMPLE),
-                        GMLTaskType.MULTI_POINT_SIMPLE)));
+        logger.info("gmlMultiPointSextanteSimpleTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(createJAXBContext(GMLContextType.SIMPLE), MULTI_POINT_SIMPLE)));
     }
 
     @Test
     public void gmlMultiLineStringSextantePoolTest() throws Exception {
-        logger.info("gmlMultiLineStringSextantePoolTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        GMLContextFactoryV311.createJAXBContext(GMLContextType.POOLED),
-                        GMLTaskType.MULTI_LINE_STRING_POOLED)));
+        logger.info("gmlMultiLineStringSextantePoolTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(createJAXBContext(POOLED), MULTI_LINE_STRING_POOLED)));
     }
 
     @Test
     public void gmlMultiLineStringSextanteSimpleTest() throws Exception {
-        logger.info("gmlMultiLineStringSextanteSimpleTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        GMLContextFactoryV311.createJAXBContext(GMLContextType.SIMPLE),
-                        GMLTaskType.MULTI_LINE_STRING_SIMPLE)));
+        logger.info("gmlMultiLineStringSextanteSimpleTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(createJAXBContext(GMLContextType.SIMPLE), MULTI_LINE_STRING_SIMPLE)));
     }
 
     @Test
     public void gmlMultiPolygonSextantePoolTest() throws Exception {
-        logger.info("gmlMultiPolygonSextantePoolTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        GMLContextFactoryV311.createJAXBContext(GMLContextType.POOLED),
-                        GMLTaskType.MULTI_POLYGON_POOLED)));
+        logger.info("gmlMultiPolygonSextantePoolTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(createJAXBContext(POOLED), MULTI_POLYGON_POOLED)));
     }
 
     @Test
     public void gmlMultiPolygonSextanteSimpleTest() throws Exception {
-        logger.info("gmlMultiPolygonSextanteSimpleTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        GMLContextFactoryV311.createJAXBContext(GMLContextType.SIMPLE),
-                        GMLTaskType.MULTI_POLYGON_SIMPLE)));
+        logger.info("gmlMultiPolygonSextanteSimpleTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(createJAXBContext(GMLContextType.SIMPLE), MULTI_POLYGON_SIMPLE)));
     }
 
     @Test
     public void gmlMultiCurveSextantePoolTest() throws Exception {
-        logger.info("gmlMultiCurveSextantePoolTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        GMLContextFactoryV311.createJAXBContext(GMLContextType.POOLED),
-                        GMLTaskType.MULTI_CURVE_POOLED)));
+        logger.info("gmlMultiCurveSextantePoolTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(createJAXBContext(POOLED), MULTI_CURVE_POOLED)));
     }
 
     @Test
     public void gmlMultiCurveSextanteSimpleTest() throws Exception {
-        logger.info("gmlMultiCurveSextanteSimpleTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        GMLContextFactoryV311.createJAXBContext(GMLContextType.SIMPLE),
-                        GMLTaskType.MULTI_CURVE_SIMPLE)));
+        logger.info("gmlMultiCurveSextanteSimpleTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(createJAXBContext(GMLContextType.SIMPLE), MULTI_CURVE_SIMPLE)));
     }
 
     @Test
     public void gmlMultiSurfaceSextantePoolTest() throws Exception {
-        logger.info("gmlMultiSurfaceSextantePoolTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        GMLContextFactoryV311.createJAXBContext(GMLContextType.POOLED),
-                        GMLTaskType.MULTI_SURFACE_POOLED)));
+        logger.info("gmlMultiSurfaceSextantePoolTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(createJAXBContext(POOLED), MULTI_SURFACE_POOLED)));
     }
 
     @Test
     public void gmlMultiSurfaceSextanteSimpleTest() throws Exception {
-        logger.info("gmlMultiSurfaceSextanteSimpleTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        GMLContextFactoryV311.createJAXBContext(GMLContextType.SIMPLE),
-                        GMLTaskType.MULTI_SURFACE_SIMPLE)));
+        logger.info("gmlMultiSurfaceSextanteSimpleTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(createJAXBContext(GMLContextType.SIMPLE), MULTI_SURFACE_SIMPLE)));
     }
 
     @Test
     public void gmlGeometryCollectionSextantePoolTest() throws Exception {
-        logger.info("gmlGeometryCollectionSextantePoolTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        GMLContextFactoryV311.createJAXBContext(GMLContextType.POOLED),
-                        GMLTaskType.GEOMETRY_COLLECTION_POOLED)));
+        logger.info("gmlGeometryCollectionSextantePoolTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(createJAXBContext(POOLED), GEOMETRY_COLLECTION_POOLED)));
     }
 
     @Test
     public void gmlGeometryCollectionSimpleTest() throws Exception {
-        logger.info("gmlGeometryCollectionSimpleTest : Executed {} threads in {} s \n",
-                super.defineNumThreads(),
-                TimeUnit.MILLISECONDS.toSeconds(executeMultiThreadsTasks(
-                        GMLContextFactoryV311.createJAXBContext(GMLContextType.SIMPLE),
-                        GMLTaskType.GEOMETRY_COLLECTION_SIMPLE)));
+        logger.info("gmlGeometryCollectionSimpleTest : Executed {} threads in {} s \n", super.defineNumThreads(),
+                MILLISECONDS.toSeconds(executeMultiThreadsTasks(createJAXBContext(GMLContextType.SIMPLE), GEOMETRY_COLLECTION_SIMPLE)));
     }
 
     @Test

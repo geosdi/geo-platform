@@ -39,7 +39,6 @@ import org.geosdi.geoplatform.gml.api.jaxb.context.GMLJAXBContext;
 import org.geosdi.geoplatform.gml.api.jaxb.context.GMLUnmarshaller;
 import org.geosdi.geoplatform.gml.impl.v311.jaxb.context.pool.GMLJAXBContextPooledV311;
 import org.junit.BeforeClass;
-import org.locationtech.jts.geom.Geometry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,10 +48,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Stream;
 
 import static java.io.File.separator;
+import static java.lang.System.currentTimeMillis;
+import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Stream.of;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -89,7 +90,7 @@ public abstract class AbstractGMLComparisonTest {
 
         @Override
         public Thread newThread(Runnable r) {
-            Thread thread = Executors.privilegedThreadFactory().newThread(r);
+            Thread thread = Executors.defaultThreadFactory().newThread(r);
             thread.setName("GMLComparisonThread - " + threadID.getAndIncrement());
             thread.setDaemon(Boolean.TRUE);
             return thread;
@@ -112,7 +113,7 @@ public abstract class AbstractGMLComparisonTest {
 
     @BeforeClass
     public static void loadFile() throws Exception {
-        String basePath = Stream.of(new File(".").getCanonicalPath(), "src", "test", "resources")
+        String basePath = of(new File(".").getCanonicalPath(), "src", "test", "resources")
                 .collect(joining(separator, "", separator));
         String pointfileString = basePath.concat("Point.xml");
         pointFile = new File(pointfileString);
@@ -131,540 +132,541 @@ public abstract class AbstractGMLComparisonTest {
         return 150;
     }
 
-    protected long executeMultiThreadsTasks(GMLJAXBContext jaxbContext, GMLTaskType gmlTaskType)
-            throws Exception {
+    protected long executeMultiThreadsTasks(GMLJAXBContext jaxbContext, GMLTaskType gmlTaskType) throws Exception {
         long time = 0;
-
         int numThreads = defineNumThreads();
-
-        ExecutorService executor = Executors.newFixedThreadPool(numThreads,
-                GMLComparisonThreadFactory);
-
-        List<GMLPointSextanteTask> tasks = new ArrayList<>(numThreads);
-        fillTasksList(jaxbContext, tasks, gmlTaskType, numThreads);
-
-        List<Future<Long>> results = executor.invokeAll(tasks);
-        executor.shutdown();
-
-        boolean flag = executor.awaitTermination(1, TimeUnit.MINUTES);
-
-        if (flag) {
-            for (Future<Long> future : results) {
-                time += future.get();
+        try(ExecutorService executor = Executors.newFixedThreadPool(numThreads, GMLComparisonThreadFactory)) {
+            List<GMLPointSextanteTask> tasks = new ArrayList<>(numThreads);
+            fillTasksList(jaxbContext, tasks, gmlTaskType, numThreads);
+            List<Future<Long>> results = executor.invokeAll(tasks);
+            executor.shutdown();
+            boolean flag = executor.awaitTermination(1, MINUTES);
+            if (flag) {
+                for (Future<Long> future : results) {
+                    time += future.get();
+                }
+            } else {
+                throw new InterruptedException("Some Threads are not executed.");
             }
-        } else {
-            throw new InterruptedException("Some Threads are not executed.");
+            return time;
         }
-
-        return time;
     }
 
     private void fillTasksList(GMLJAXBContext jaxbContext, List<GMLPointSextanteTask> tasks,
             GMLTaskType gmlTaskType, int numThreads) {
         switch (gmlTaskType) {
-            case POINT_SIMPLE:
+            case POINT_SIMPLE -> {
                 for (int i = 0; i < numThreads; i++)
                     tasks.add(new GMLPointSextanteTask(jaxbContext));
-                break;
-            case POINT_POOLED:
+            }
+            case POINT_POOLED -> {
                 for (int i = 0; i < numThreads; i++)
                     tasks.add(new GMLPointPooledSextanteTask(jaxbContext));
-                break;
-            case LINE_STRING_SIMPE:
+            }
+            case LINE_STRING_SIMPE -> {
                 for (int i = 0; i < numThreads; i++)
                     tasks.add(new GMLLineStringSextanteTask(jaxbContext));
-                break;
-            case LINE_STRING_POOLED:
+            }
+            case LINE_STRING_POOLED -> {
                 for (int i = 0; i < numThreads; i++)
                     tasks.add(new GMLLineStringPooledSextanteTask(jaxbContext));
-                break;
-            case LINEAR_RING_SIMPLE:
+            }
+            case LINEAR_RING_SIMPLE -> {
                 for (int i = 0; i < numThreads; i++)
                     tasks.add(new GMLLinearRingSextanteTask(jaxbContext));
-                break;
-            case LINEAR_RING_POOLED:
+            }
+            case LINEAR_RING_POOLED -> {
                 for (int i = 0; i < numThreads; i++)
                     tasks.add(new GMLLineStringPooledSextanteTask(jaxbContext));
-                break;
-            case POLYGON_SIMPE:
+            }
+            case POLYGON_SIMPE -> {
                 for (int i = 0; i < numThreads; i++)
                     tasks.add(new GMLPolygonSextanteTask(jaxbContext));
-                break;
-            case POLYGON_POOLED:
+            }
+            case POLYGON_POOLED -> {
                 for (int i = 0; i < numThreads; i++)
                     tasks.add(new GMLPolygonPooledSextanteTask(jaxbContext));
-                break;
-            case MULTI_POINT_SIMPLE:
+            }
+            case MULTI_POINT_SIMPLE -> {
                 for (int i = 0; i < numThreads; i++)
                     tasks.add(new GMLMultiPointSextanteTask(jaxbContext));
-                break;
-            case MULTI_POINT_POOLED:
+            }
+            case MULTI_POINT_POOLED -> {
                 for (int i = 0; i < numThreads; i++)
                     tasks.add(new GMLMultiPointPooledSextanteTask(jaxbContext));
-                break;
-            case MULTI_LINE_STRING_SIMPLE:
+            }
+            case MULTI_LINE_STRING_SIMPLE -> {
                 for (int i = 0; i < numThreads; i++)
                     tasks.add(new GMLMultiLineStringSextanteTask(jaxbContext));
-                break;
-            case MULTI_LINE_STRING_POOLED:
+            }
+            case MULTI_LINE_STRING_POOLED -> {
                 for (int i = 0; i < numThreads; i++)
                     tasks.add(new GMLMultiLineStringPooledSextanteTask(jaxbContext));
-                break;
-            case MULTI_POLYGON_SIMPLE:
+            }
+            case MULTI_POLYGON_SIMPLE -> {
                 for (int i = 0; i < numThreads; i++)
                     tasks.add(new GMLMultiPolygonSextanteTask(jaxbContext));
-                break;
-            case MULTI_POLYGON_POOLED:
+            }
+            case MULTI_POLYGON_POOLED -> {
                 for (int i = 0; i < numThreads; i++)
                     tasks.add(new GMLMultiPolygonPooledSextanteTask(jaxbContext));
-                break;
-            case MULTI_CURVE_SIMPLE:
+            }
+            case MULTI_CURVE_SIMPLE -> {
                 for (int i = 0; i < numThreads; i++)
                     tasks.add(new GMLMultiCurveSextanteTask(jaxbContext));
-                break;
-            case MULTI_CURVE_POOLED:
+            }
+            case MULTI_CURVE_POOLED -> {
                 for (int i = 0; i < numThreads; i++)
                     tasks.add(new GMLMultiCurvePooledSextanteTask(jaxbContext));
-                break;
-            case MULTI_SURFACE_SIMPLE:
+            }
+            case MULTI_SURFACE_SIMPLE -> {
                 for (int i = 0; i < numThreads; i++)
                     tasks.add(new GMLMultiSurfaceSextanteTask(jaxbContext));
-                break;
-            case MULTI_SURFACE_POOLED:
+            }
+            case MULTI_SURFACE_POOLED -> {
                 for (int i = 0; i < numThreads; i++)
                     tasks.add(new GMLMultiSurfacePooledSextanteTask(jaxbContext));
-                break;
-            case GEOMETRY_COLLECTION_SIMPLE:
+            }
+            case GEOMETRY_COLLECTION_SIMPLE -> {
                 for (int i = 0; i < numThreads; i++)
                     tasks.add(new GMLGeometryCollectionSextanteTask(jaxbContext));
-                break;
-            case GEOMETRY_COLLECTION_POOLED:
+            }
+            case GEOMETRY_COLLECTION_POOLED -> {
                 for (int i = 0; i < numThreads; i++)
                     tasks.add(new GMLGeometryCollectionPooledSextanteTask(jaxbContext));
-                break;
+            }
         }
     }
-
 
     private class GMLPointSextanteTask implements Callable<Long> {
 
         final GMLJAXBContext jaxbContext;
 
+        /**
+         * @param theJaxbContext
+         */
         public GMLPointSextanteTask(GMLJAXBContext theJaxbContext) {
             this.jaxbContext = theJaxbContext;
         }
 
         @Override
         public Long call() throws Exception {
-            long start = System.currentTimeMillis();
-
+            long start = currentTimeMillis();
             GMLUnmarshaller unmarshaller = jaxbContext.acquireUnmarshaller();
-            Geometry geometry = (Geometry) unmarshaller.unmarshal(pointFile);
-
+            var geometry =  unmarshaller.unmarshal(pointFile);
             StringWriter writer = new StringWriter();
             jaxbContext.acquireMarshaller().marshal(geometry, writer);
             logger.debug("\n{}\n", writer);
             count.incrementAndGet();
-
-            return System.currentTimeMillis() - start;
+            return currentTimeMillis() - start;
         }
     }
 
     private class GMLPointPooledSextanteTask extends GMLPointSextanteTask {
 
+        /**
+         * @param theJaxbContext
+         */
         public GMLPointPooledSextanteTask(GMLJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
         @Override
         public Long call() throws Exception {
-            long start = System.currentTimeMillis();
-
-            Geometry geometry = (Geometry) ((GMLJAXBContextPooledV311) jaxbContext).unmarshal(pointFile);
+            long start = currentTimeMillis();
+            var geometry = ((GMLJAXBContextPooledV311) jaxbContext).unmarshal(pointFile);
             StringWriter writer = new StringWriter();
             ((GMLJAXBContextPooledV311) jaxbContext).marshal(geometry, writer);
             logger.debug("\n{}\n", writer);
             count.incrementAndGet();
-
-            return System.currentTimeMillis() - start;
+            return currentTimeMillis() - start;
         }
     }
 
     private class GMLLineStringSextanteTask extends GMLPointSextanteTask {
 
+        /**
+         * @param theJaxbContext
+         */
         public GMLLineStringSextanteTask(GMLJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
         @Override
         public Long call() throws Exception {
-            long start = System.currentTimeMillis();
-
+            long start = currentTimeMillis();
             GMLUnmarshaller unmarshaller = jaxbContext.acquireUnmarshaller();
-            Geometry geometry = (Geometry) unmarshaller.unmarshal(lineStringFile);
-
+            var geometry = unmarshaller.unmarshal(lineStringFile);
             StringWriter writer = new StringWriter();
             jaxbContext.acquireMarshaller().marshal(geometry, writer);
             logger.debug("\n{}\n", writer);
             count.incrementAndGet();
-
-            return System.currentTimeMillis() - start;
+            return currentTimeMillis() - start;
         }
     }
 
     private class GMLLineStringPooledSextanteTask extends GMLPointSextanteTask {
 
+        /**
+         * @param theJaxbContext
+         */
         public GMLLineStringPooledSextanteTask(GMLJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
         @Override
         public Long call() throws Exception {
-            long start = System.currentTimeMillis();
-
-            Geometry geometry = (Geometry) ((GMLJAXBContextPooledV311) jaxbContext).unmarshal(lineStringFile);
+            long start = currentTimeMillis();
+            var geometry = ((GMLJAXBContextPooledV311) jaxbContext).unmarshal(lineStringFile);
             StringWriter writer = new StringWriter();
             ((GMLJAXBContextPooledV311) jaxbContext).marshal(geometry, writer);
             logger.debug("\n{}\n", writer);
             count.incrementAndGet();
-
-            return System.currentTimeMillis() - start;
+            return currentTimeMillis() - start;
         }
     }
 
     private class GMLLinearRingSextanteTask extends GMLPointSextanteTask {
 
+        /**
+         * @param theJaxbContext
+         */
         public GMLLinearRingSextanteTask(GMLJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
         @Override
         public Long call() throws Exception {
-            long start = System.currentTimeMillis();
-
+            long start = currentTimeMillis();
             GMLUnmarshaller unmarshaller = jaxbContext.acquireUnmarshaller();
-            Geometry geometry = (Geometry) unmarshaller.unmarshal(linearRingFile);
-
+            var geometry = unmarshaller.unmarshal(linearRingFile);
             StringWriter writer = new StringWriter();
             jaxbContext.acquireMarshaller().marshal(geometry, writer);
             logger.debug("\n{}\n", writer);
             count.incrementAndGet();
-
-            return System.currentTimeMillis() - start;
+            return currentTimeMillis() - start;
         }
     }
 
     private class GMLLinearRingPooledSextanteTask extends GMLPointSextanteTask {
 
+        /**
+         * @param theJaxbContext
+         */
         public GMLLinearRingPooledSextanteTask(GMLJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
         @Override
         public Long call() throws Exception {
-            long start = System.currentTimeMillis();
-
-            Geometry geometry = (Geometry) ((GMLJAXBContextPooledV311) jaxbContext).unmarshal(linearRingFile);
+            long start = currentTimeMillis();
+            var geometry = ((GMLJAXBContextPooledV311) jaxbContext).unmarshal(linearRingFile);
             StringWriter writer = new StringWriter();
             ((GMLJAXBContextPooledV311) jaxbContext).marshal(geometry, writer);
             logger.debug("\n{}\n", writer);
             count.incrementAndGet();
-
-            return System.currentTimeMillis() - start;
+            return currentTimeMillis() - start;
         }
     }
 
     private class GMLPolygonSextanteTask extends GMLPointSextanteTask {
 
+        /**
+         * @param theJaxbContext
+         */
         public GMLPolygonSextanteTask(GMLJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
         @Override
         public Long call() throws Exception {
-            long start = System.currentTimeMillis();
-
+            long start = currentTimeMillis();
             GMLUnmarshaller unmarshaller = jaxbContext.acquireUnmarshaller();
-            Geometry geometry = (Geometry) unmarshaller.unmarshal(polygonFile);
-
+            var geometry = unmarshaller.unmarshal(polygonFile);
             StringWriter writer = new StringWriter();
             jaxbContext.acquireMarshaller().marshal(geometry, writer);
             logger.debug("\n{}\n", writer);
             count.incrementAndGet();
-
-            return System.currentTimeMillis() - start;
+            return currentTimeMillis() - start;
         }
     }
 
     private class GMLPolygonPooledSextanteTask extends GMLPointSextanteTask {
 
+        /**
+         * @param theJaxbContext
+         */
         public GMLPolygonPooledSextanteTask(GMLJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
         @Override
         public Long call() throws Exception {
-            long start = System.currentTimeMillis();
-
-            Geometry geometry = (Geometry) ((GMLJAXBContextPooledV311) jaxbContext).unmarshal(polygonFile);
+            long start = currentTimeMillis();
+            var geometry = ((GMLJAXBContextPooledV311) jaxbContext).unmarshal(polygonFile);
             StringWriter writer = new StringWriter();
             ((GMLJAXBContextPooledV311) jaxbContext).marshal(geometry, writer);
             logger.debug("\n{}\n", writer);
             count.incrementAndGet();
-
-            return System.currentTimeMillis() - start;
+            return currentTimeMillis() - start;
         }
     }
 
     private class GMLMultiPointSextanteTask extends GMLPointSextanteTask {
 
+        /**
+         * @param theJaxbContext
+         */
         public GMLMultiPointSextanteTask(GMLJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
         @Override
         public Long call() throws Exception {
-            long start = System.currentTimeMillis();
-
+            long start = currentTimeMillis();
             GMLUnmarshaller unmarshaller = jaxbContext.acquireUnmarshaller();
-            Geometry geometry = (Geometry) unmarshaller.unmarshal(multiPointFile);
-
+            var geometry = unmarshaller.unmarshal(multiPointFile);
             StringWriter writer = new StringWriter();
             jaxbContext.acquireMarshaller().marshal(geometry, writer);
             logger.debug("\n{}\n", writer);
             count.incrementAndGet();
-
-            return System.currentTimeMillis() - start;
+            return currentTimeMillis() - start;
         }
     }
 
     private class GMLMultiPointPooledSextanteTask extends GMLPointSextanteTask {
 
+        /**
+         * @param theJaxbContext
+         */
         public GMLMultiPointPooledSextanteTask(GMLJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
         @Override
         public Long call() throws Exception {
-            long start = System.currentTimeMillis();
-
-            Geometry geometry = (Geometry) ((GMLJAXBContextPooledV311) jaxbContext).unmarshal(multiPointFile);
+            long start = currentTimeMillis();
+            var geometry = ((GMLJAXBContextPooledV311) jaxbContext).unmarshal(multiPointFile);
             StringWriter writer = new StringWriter();
             ((GMLJAXBContextPooledV311) jaxbContext).marshal(geometry, writer);
             logger.debug("\n{}\n", writer);
             count.incrementAndGet();
-
-            return System.currentTimeMillis() - start;
+            return currentTimeMillis() - start;
         }
     }
 
     private class GMLMultiLineStringSextanteTask extends GMLPointSextanteTask {
 
+        /**
+         * @param theJaxbContext
+         */
         public GMLMultiLineStringSextanteTask(GMLJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
         @Override
         public Long call() throws Exception {
-            long start = System.currentTimeMillis();
-
+            long start = currentTimeMillis();
             GMLUnmarshaller unmarshaller = jaxbContext.acquireUnmarshaller();
-            Geometry geometry = (Geometry) unmarshaller.unmarshal(multiLineStringFile);
-
+            var geometry = unmarshaller.unmarshal(multiLineStringFile);
             StringWriter writer = new StringWriter();
             jaxbContext.acquireMarshaller().marshal(geometry, writer);
             logger.debug("\n{}\n", writer);
             count.incrementAndGet();
-
-            return System.currentTimeMillis() - start;
+            return currentTimeMillis() - start;
         }
     }
 
     private class GMLMultiLineStringPooledSextanteTask extends GMLPointSextanteTask {
 
+        /**
+         * @param theJaxbContext
+         */
         public GMLMultiLineStringPooledSextanteTask(GMLJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
         @Override
         public Long call() throws Exception {
-            long start = System.currentTimeMillis();
-
-            Geometry geometry = (Geometry) ((GMLJAXBContextPooledV311) jaxbContext).unmarshal(multiLineStringFile);
+            long start = currentTimeMillis();
+            var geometry = ((GMLJAXBContextPooledV311) jaxbContext).unmarshal(multiLineStringFile);
             StringWriter writer = new StringWriter();
             ((GMLJAXBContextPooledV311) jaxbContext).marshal(geometry, writer);
             logger.debug("\n{}\n", writer);
             count.incrementAndGet();
-
-            return System.currentTimeMillis() - start;
+            return currentTimeMillis() - start;
         }
     }
 
     private class GMLMultiPolygonSextanteTask extends GMLPointSextanteTask {
 
+        /**
+         * @param theJaxbContext
+         */
         public GMLMultiPolygonSextanteTask(GMLJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
         @Override
         public Long call() throws Exception {
-            long start = System.currentTimeMillis();
-
+            long start = currentTimeMillis();
             GMLUnmarshaller unmarshaller = jaxbContext.acquireUnmarshaller();
-            Geometry geometry = (Geometry) unmarshaller.unmarshal(multiPolygonFile);
-
+            var geometry = unmarshaller.unmarshal(multiPolygonFile);
             StringWriter writer = new StringWriter();
             jaxbContext.acquireMarshaller().marshal(geometry, writer);
             logger.debug("\n{}\n", writer);
             count.incrementAndGet();
-
-            return System.currentTimeMillis() - start;
+            return currentTimeMillis() - start;
         }
     }
 
     private class GMLMultiPolygonPooledSextanteTask extends GMLPointSextanteTask {
 
+        /**
+         * @param theJaxbContext
+         */
         public GMLMultiPolygonPooledSextanteTask(GMLJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
         @Override
         public Long call() throws Exception {
-            long start = System.currentTimeMillis();
-
-            Geometry geometry = (Geometry) ((GMLJAXBContextPooledV311) jaxbContext).unmarshal(multiPolygonFile);
+            long start = currentTimeMillis();
+            var geometry = ((GMLJAXBContextPooledV311) jaxbContext).unmarshal(multiPolygonFile);
             StringWriter writer = new StringWriter();
             ((GMLJAXBContextPooledV311) jaxbContext).marshal(geometry, writer);
             logger.debug("\n{}\n", writer);
             count.incrementAndGet();
-
-            return System.currentTimeMillis() - start;
+            return currentTimeMillis() - start;
         }
     }
 
     private class GMLMultiCurveSextanteTask extends GMLPointSextanteTask {
 
+        /**
+         * @param theJaxbContext
+         */
         public GMLMultiCurveSextanteTask(GMLJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
         @Override
         public Long call() throws Exception {
-            long start = System.currentTimeMillis();
-
+            long start = currentTimeMillis();
             GMLUnmarshaller unmarshaller = jaxbContext.acquireUnmarshaller();
-            Geometry geometry = (Geometry) unmarshaller.unmarshal(multiCurveFile);
-
+            var geometry = unmarshaller.unmarshal(multiCurveFile);
             StringWriter writer = new StringWriter();
             jaxbContext.acquireMarshaller().marshal(geometry, writer);
             logger.debug("\n{}\n", writer);
             count.incrementAndGet();
-
-            return System.currentTimeMillis() - start;
+            return currentTimeMillis() - start;
         }
     }
 
     private class GMLMultiCurvePooledSextanteTask extends GMLPointSextanteTask {
 
+        /**
+         * @param theJaxbContext
+         */
         public GMLMultiCurvePooledSextanteTask(GMLJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
         @Override
         public Long call() throws Exception {
-            long start = System.currentTimeMillis();
-
-            Geometry geometry = (Geometry) ((GMLJAXBContextPooledV311) jaxbContext).unmarshal(multiCurveFile);
+            long start = currentTimeMillis();
+            var geometry = ((GMLJAXBContextPooledV311) jaxbContext).unmarshal(multiCurveFile);
             StringWriter writer = new StringWriter();
             ((GMLJAXBContextPooledV311) jaxbContext).marshal(geometry, writer);
             logger.debug("\n{}\n", writer);
             count.incrementAndGet();
-
-            return System.currentTimeMillis() - start;
+            return currentTimeMillis() - start;
         }
     }
 
     private class GMLMultiSurfaceSextanteTask extends GMLPointSextanteTask {
 
+        /**
+         * @param theJaxbContext
+         */
         public GMLMultiSurfaceSextanteTask(GMLJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
         @Override
         public Long call() throws Exception {
-            long start = System.currentTimeMillis();
-
+            long start = currentTimeMillis();
             GMLUnmarshaller unmarshaller = jaxbContext.acquireUnmarshaller();
-            Geometry geometry = (Geometry) unmarshaller.unmarshal(multiSurfaceFile);
-
+            var geometry = unmarshaller.unmarshal(multiSurfaceFile);
             StringWriter writer = new StringWriter();
             jaxbContext.acquireMarshaller().marshal(geometry, writer);
             logger.debug("\n{}\n", writer);
             count.incrementAndGet();
-
-            return System.currentTimeMillis() - start;
+            return currentTimeMillis() - start;
         }
     }
 
     private class GMLMultiSurfacePooledSextanteTask extends GMLPointSextanteTask {
 
+        /**
+         * @param theJaxbContext
+         */
         public GMLMultiSurfacePooledSextanteTask(GMLJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
         @Override
         public Long call() throws Exception {
-            long start = System.currentTimeMillis();
-
-            Geometry geometry = (Geometry) ((GMLJAXBContextPooledV311) jaxbContext).unmarshal(multiSurfaceFile);
+            long start = currentTimeMillis();
+            var geometry = ((GMLJAXBContextPooledV311) jaxbContext).unmarshal(multiSurfaceFile);
             StringWriter writer = new StringWriter();
             ((GMLJAXBContextPooledV311) jaxbContext).marshal(geometry, writer);
             logger.debug("\n{}\n", writer);
             count.incrementAndGet();
-
-            return System.currentTimeMillis() - start;
+            return currentTimeMillis() - start;
         }
     }
 
     private class GMLGeometryCollectionSextanteTask extends GMLPointSextanteTask {
 
+        /**
+         * @param theJaxbContext
+         */
         public GMLGeometryCollectionSextanteTask(GMLJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
         @Override
         public Long call() throws Exception {
-            long start = System.currentTimeMillis();
-
+            long start = currentTimeMillis();
             GMLUnmarshaller unmarshaller = jaxbContext.acquireUnmarshaller();
-            Geometry geometry = (Geometry) unmarshaller.unmarshal(geometryCollectionFile);
-
+            var geometry = unmarshaller.unmarshal(geometryCollectionFile);
             StringWriter writer = new StringWriter();
             jaxbContext.acquireMarshaller().marshal(geometry, writer);
             logger.debug("\n{}\n", writer);
             count.incrementAndGet();
-
-            return System.currentTimeMillis() - start;
+            return currentTimeMillis() - start;
         }
     }
 
     private class GMLGeometryCollectionPooledSextanteTask extends GMLPointSextanteTask {
 
+        /**
+         * @param theJaxbContext
+         */
         public GMLGeometryCollectionPooledSextanteTask(GMLJAXBContext theJaxbContext) {
             super(theJaxbContext);
         }
 
         @Override
         public Long call() throws Exception {
-            long start = System.currentTimeMillis();
-
-            Geometry geometry = (Geometry) ((GMLJAXBContextPooledV311) jaxbContext).unmarshal(geometryCollectionFile);
+            long start = currentTimeMillis();
+            var geometry = ((GMLJAXBContextPooledV311) jaxbContext).unmarshal(geometryCollectionFile);
             StringWriter writer = new StringWriter();
             ((GMLJAXBContextPooledV311) jaxbContext).marshal(geometry, writer);
             logger.debug("\n{}\n", writer);
             count.incrementAndGet();
-
-            return System.currentTimeMillis() - start;
+            return currentTimeMillis() - start;
         }
     }
 }

@@ -125,6 +125,18 @@ public class GPGeoserverUpdateStyleBodyJacksonTest {
     }
 
     /**
+     * @return {@link IGPGeoserverUpdateStyleBody}
+     */
+    public static IGPGeoserverUpdateStyleBody toGPGeoserverUpdateStyleBody(String theFileName) {
+        IGPGeoserverUpdateStyleBody geoserverUpdateStyleBody = new GPGeoserverUpdateStyleBody();
+        geoserverUpdateStyleBody.setStyleName("STYLE_TEST");
+        geoserverUpdateStyleBody.setLanguageVersion(toGPGeoserverStyleVersion());
+        geoserverUpdateStyleBody.setFileName(theFileName);
+        geoserverUpdateStyleBody.setLegend(toGPGeoserverStyleLegend());
+        return geoserverUpdateStyleBody;
+    }
+
+    /**
      * @return {@link IGPStyleVersion}
      */
     static IGPStyleVersion toGPGeoserverStyleVersion() {

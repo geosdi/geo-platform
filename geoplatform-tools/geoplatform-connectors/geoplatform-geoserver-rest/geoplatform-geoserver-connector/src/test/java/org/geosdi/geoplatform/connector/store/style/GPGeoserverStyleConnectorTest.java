@@ -66,8 +66,8 @@ import static org.junit.Assert.assertTrue;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class GPGeoserverStyleConnectorTest extends GPBaseGeoserverConnectorStoreTest {
 
-    private static final GeoserverLoadWorkspacesRequest workspacesRequest = geoserverConnectorStoreV2_25_x.loadWorkspacesRequest();
-    private static final GeoserverWorkspaceStylesRequest gpGeoserverWorkspaceStylesRequest = geoserverConnectorStoreV2_25_x.loadWorkspaceStyles();
+    private static final GeoserverLoadWorkspacesRequest workspacesRequest = geoserverConnectorStoreV2_26_x.loadWorkspacesRequest();
+    private static final GeoserverWorkspaceStylesRequest gpGeoserverWorkspaceStylesRequest = geoserverConnectorStoreV2_26_x.loadWorkspaceStyles();
 
     @Test
     public void a_stylesGeoserverConnectorTest() throws Exception {
@@ -81,7 +81,7 @@ public class GPGeoserverStyleConnectorTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void b_geoserverStyleRequestTest() throws Exception {
-        GeoserverStyleRequest geoserverStyleRequest = geoserverConnectorStoreV2_25_x.loadStyleRequest();
+        GeoserverStyleRequest geoserverStyleRequest = geoserverConnectorStoreV2_26_x.loadStyleRequest();
         logger.info("#####################GEOSERVER_STYLE_RESPONSE_AS_STRING : {}\n", geoserverStyleRequest
                 .withStyleName("tiger_roads")
                 .getResponseAsString());
@@ -92,7 +92,7 @@ public class GPGeoserverStyleConnectorTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void c_geoserverStyleSLDV100RequestTest() throws Exception {
-        GeoserverStyleSLDV100Request geoserverStyleSLDV100Request = geoserverConnectorStoreV2_25_x.loadStyleSLDV100Request();
+        GeoserverStyleSLDV100Request geoserverStyleSLDV100Request = geoserverConnectorStoreV2_26_x.loadStyleSLDV100Request();
         logger.info("#####################GEOSERVER_STYLE_SLD_V100_RESPONSE_AS_STRING : {}\n", geoserverStyleSLDV100Request
                 .withStyleName("tiger_roads")
                 .getResponseAsString());
@@ -103,25 +103,34 @@ public class GPGeoserverStyleConnectorTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void d_geoserverCreateStyleRequestTest() throws Exception {
-        logger.info("@@@@@@@@@@@@@@@@@@@@GEOSERVER_CREATE_STYLE_RESPONSE : {}\n", geoserverConnectorStoreV2_25_x.createStyleRequest()
+        StyledLayerDescriptor styledLayerDescriptor = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper().readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "roads33")
+                .collect(joining(separator, "", ".xml"))), StyledLayerDescriptor.class);
+        logger.info("#################GEOSERVER_CREATE_STYLE_SLD_V100_RESPONSE : {}\n", geoserverConnectorStoreV2_26_x.createStyleSLDV100Request()
+                .withStyleName("roads33")
+                .withStyleBody(styledLayerDescriptor)
+                .getResponse());
+        logger.info("@@@@@@@@@@@@@@@@@@@@GEOSERVER_CREATE_STYLE_RESPONSE : {}\n", geoserverConnectorStoreV2_26_x.createStyleRequest()
                 .withStyleBody(toGPGeoserverStyleBody("roads_style_new", "roads33.sld"))
                 .getResponse());
     }
 
     @Test
     public void e_geoserverUpdateStyleRequestTest() throws Exception {
-        assertTrue(geoserverConnectorStoreV2_25_x.updateStyleRequest()
+        assertTrue(geoserverConnectorStoreV2_26_x.updateStyleRequest()
                 .withStyleName("roads_style_new")
-                .withStyleBody(toGPGeoserverUpdateStyleBody())
+                .withStyleBody(toGPGeoserverUpdateStyleBody("roads33.sld"))
                 .getResponse());
-        assertTrue(geoserverConnectorStoreV2_25_x.loadStyleRequest()
+        assertTrue(geoserverConnectorStoreV2_26_x.deleteStyleRequest()
+                .withStyle("roads33")
+                .getResponse() == TRUE);
+        assertTrue(geoserverConnectorStoreV2_26_x.loadStyleRequest()
                 .withStyleName("STYLE_TEST")
                 .exist());
     }
 
     @Test
     public void f_geoserverDeleteStyleRequestTest() throws Exception {
-        assertTrue(geoserverConnectorStoreV2_25_x.deleteStyleRequest()
+        assertTrue(geoserverConnectorStoreV2_26_x.deleteStyleRequest()
                 .withStyle("STYLE_TEST")
                 .getResponse() == TRUE);
     }
@@ -130,7 +139,7 @@ public class GPGeoserverStyleConnectorTest extends GPBaseGeoserverConnectorStore
     public void g_geoserverCreateStyleSLDV100RequestTest() throws Exception {
         StyledLayerDescriptor styledLayerDescriptor = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper().readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "StyledLayerDescriptor-DefaultLine")
                 .collect(joining(separator, "", ".xml"))), StyledLayerDescriptor.class);
-        logger.info("#################GEOSERVER_CREATE_STYLE_SLD_V100_RESPONSE : {}\n", geoserverConnectorStoreV2_25_x.createStyleSLDV100Request()
+        logger.info("#################GEOSERVER_CREATE_STYLE_SLD_V100_RESPONSE : {}\n", geoserverConnectorStoreV2_26_x.createStyleSLDV100Request()
                 .withStyleName("style_sld_v100")
                 .withStyleBody(styledLayerDescriptor)
                 .getResponse());
@@ -138,10 +147,10 @@ public class GPGeoserverStyleConnectorTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void h_geoserverDeleteStyleSLDV100RequestTest() throws Exception {
-        assertTrue(geoserverConnectorStoreV2_25_x.deleteStyleRequest()
+        assertTrue(geoserverConnectorStoreV2_26_x.deleteStyleRequest()
                 .withStyle("style_sld_v100")
                 .getResponse() == TRUE);
-        GeoserverStyleSLDV100Request geoserverStyleSLDV100Request = geoserverConnectorStoreV2_25_x.loadStyleSLDV100Request();
+        GeoserverStyleSLDV100Request geoserverStyleSLDV100Request = geoserverConnectorStoreV2_26_x.loadStyleSLDV100Request();
         logger.info("#####################GEOSERVER_STYLE_SLD_V100_RESPONSE_AS_STRING : {}\n", geoserverStyleSLDV100Request
                 .withStyleName("style_sld_v100")
                 .exist());
@@ -149,7 +158,7 @@ public class GPGeoserverStyleConnectorTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void i_geoserverCreateWorkspaceStyleRequestTest() throws Exception {
-        logger.info("@@@@@@@@@@@@@@@@@@@@GEOSERVER_CREATE_WORKSPACE_STYLE_RESPONSE : {}\n", geoserverConnectorStoreV2_25_x.createWorkspaceStyleRequest()
+        logger.info("@@@@@@@@@@@@@@@@@@@@GEOSERVER_CREATE_WORKSPACE_STYLE_RESPONSE : {}\n", geoserverConnectorStoreV2_26_x.createWorkspaceStyleRequest()
                 .withWorkspace("sf")
                 .withStyleBody(toGPGeoserverStyleBody("roads_style_new_sf", "roads33_sf.sld"))
                 .getResponse());
@@ -157,7 +166,7 @@ public class GPGeoserverStyleConnectorTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void l_geoserverDeleteWorkspaceStyleRequestTest() throws Exception {
-        assertTrue(geoserverConnectorStoreV2_25_x.deleteWorkspaceStyleRequest()
+        assertTrue(geoserverConnectorStoreV2_26_x.deleteWorkspaceStyleRequest()
                 .withWorkspace("sf")
                 .withStyle("roads_style_new_sf")
                 .getResponse() == TRUE);
@@ -165,7 +174,7 @@ public class GPGeoserverStyleConnectorTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void m_geoserverCreateStyleRequestTest() throws Exception {
-        logger.info("@@@@@@@@@@@@@@@@@@@@GEOSERVER_CREATE_STYLE_RESPONSE : {}\n", geoserverConnectorStoreV2_25_x.createStyleRequest()
+        logger.info("@@@@@@@@@@@@@@@@@@@@GEOSERVER_CREATE_STYLE_RESPONSE : {}\n", geoserverConnectorStoreV2_26_x.createStyleRequest()
                 .withStyleBody(toGPGeoserverStyleBody("roads_style_new_test", "roads33_24.sld"))
                 .getResponse());
     }
@@ -174,11 +183,11 @@ public class GPGeoserverStyleConnectorTest extends GPBaseGeoserverConnectorStore
     public void n_geoserverUpdateStyleSLDV100RequestTest() throws Exception {
         StyledLayerDescriptor styledLayerDescriptor = JACKSON_JAXB_XML_SUPPORT.getDefaultMapper().readValue(new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "StyledLayerDescriptor-DefaultLine")
                 .collect(joining(separator, "", ".xml"))), StyledLayerDescriptor.class);
-        assertTrue(geoserverConnectorStoreV2_25_x.updateStyleSLDV100Request()
+        assertTrue(geoserverConnectorStoreV2_26_x.updateStyleSLDV100Request()
                 .withStyleName("roads_style_new_test")
                 .withStyleBody(styledLayerDescriptor)
                 .getResponse());
-        GeoserverStyleRequest styleRequest = geoserverConnectorStoreV2_25_x.loadStyleRequest()
+        GeoserverStyleRequest styleRequest = geoserverConnectorStoreV2_26_x.loadStyleRequest()
                 .withStyleName("roads_style_new_test");
         assertTrue(styleRequest.exist());
         logger.info("######################GEOSERVER_LOAD_STYLE_RESPONSE : {}\n", styleRequest.getResponse());
@@ -186,10 +195,10 @@ public class GPGeoserverStyleConnectorTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void o_geoserverDeleteStyleSLDV100RequestTest() throws Exception {
-        assertTrue(geoserverConnectorStoreV2_25_x.deleteStyleRequest()
+        assertTrue(geoserverConnectorStoreV2_26_x.deleteStyleRequest()
                 .withStyle("roads_style_new_test")
                 .getResponse() == TRUE);
-        GeoserverStyleSLDV100Request geoserverStyleSLDV100Request = geoserverConnectorStoreV2_25_x.loadStyleSLDV100Request();
+        GeoserverStyleSLDV100Request geoserverStyleSLDV100Request = geoserverConnectorStoreV2_26_x.loadStyleSLDV100Request();
         logger.info("#####################GEOSERVER_STYLE_SLD_V100_RESPONSE_AS_STRING : {}\n", geoserverStyleSLDV100Request
                 .withStyleName("roads_style_new_test")
                 .exist());
@@ -197,30 +206,30 @@ public class GPGeoserverStyleConnectorTest extends GPBaseGeoserverConnectorStore
 
     @Test
     public void p_geoserverLoadLayerStylesRequestTest() throws Exception {
-        logger.info("@@@@@@@@@@@@@@@@@@@@GEOSERVER_LAYER_STYLES_RESPONSE : {}\n", geoserverConnectorStoreV2_25_x.loadLayerStylesRequest()
+        logger.info("@@@@@@@@@@@@@@@@@@@@GEOSERVER_LAYER_STYLES_RESPONSE : {}\n", geoserverConnectorStoreV2_26_x.loadLayerStylesRequest()
                 .withLayerName("topp:states").getResponse());
     }
 
     @Test
     public void q_geoserverCreateStyleRequestTest() throws Exception {
-        logger.info("@@@@@@@@@@@@@@@@@@@@GEOSERVER_CREATE_STYLE_RESPONSE : {}\n", geoserverConnectorStoreV2_25_x.createStyleRequest()
+        logger.info("@@@@@@@@@@@@@@@@@@@@GEOSERVER_CREATE_STYLE_RESPONSE : {}\n", geoserverConnectorStoreV2_26_x.createStyleRequest()
                 .withStyleBody(toGPGeoserverStyleBody("polygon_style_new_test", "polygon_24.sld"))
                 .getResponse());
     }
 
     @Test
     public void r_geoserverAddStyleToLayerRequestTest() throws Exception {
-        logger.info("###################GEOSERVER_ADD_STYLE_TO_LAYER_RESPONSE : {}\n", geoserverConnectorStoreV2_25_x.addStyleToLayerRequest()
+        logger.info("###################GEOSERVER_ADD_STYLE_TO_LAYER_RESPONSE : {}\n", geoserverConnectorStoreV2_26_x.addStyleToLayerRequest()
                 .withLayer("topp:states")
                 .withStyleBody(toGPGeoserverStyleBody("polygon_style_new_test", "polygon_24.sld")).getResponseAsString());
     }
 
     @Test
     public void s_geoserverDeleteStyleSLDV100RequestTest() throws Exception {
-        assertTrue(geoserverConnectorStoreV2_25_x.deleteStyleRequest()
+        assertTrue(geoserverConnectorStoreV2_26_x.deleteStyleRequest()
                 .withStyle("polygon_style_new_test")
                 .getResponse() == TRUE);
-        GeoserverStyleSLDV100Request geoserverStyleSLDV100Request = geoserverConnectorStoreV2_25_x.loadStyleSLDV100Request();
+        GeoserverStyleSLDV100Request geoserverStyleSLDV100Request = geoserverConnectorStoreV2_26_x.loadStyleSLDV100Request();
         logger.info("#####################GEOSERVER_STYLE_SLD_V100_RESPONSE_AS_STRING : {}\n", geoserverStyleSLDV100Request
                 .withStyleName("polygon_style_new_test")
                 .exist());

@@ -36,7 +36,7 @@
 package org.geosdi.geoplatform.connector.store.fonts;
 
 import org.geosdi.geoplatform.connector.geoserver.request.fonts.GeoserverFontsRequest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV224xTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV225xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
@@ -47,11 +47,11 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverFontsConnectorStoreV224XTest extends GPBaseGeoserverConnectorStoreV224xTest {
+public class GPGeoserverFontsConnectorStoreV225XTest extends GPBaseGeoserverConnectorStoreV225xTest {
 
     @Test
     public void a_createGeoserverFontsRequestTest() throws Exception {
-        GeoserverFontsRequest fontsRequest = geoserverConnectorStoreV2_24_x.createGeoserverFontsRequest();
+        GeoserverFontsRequest fontsRequest = geoserverConnectorStoreV2_25_x.createGeoserverFontsRequest();
         logger.info("#####################GEOSERVER_FONTS_RESPONSE : {}\n", fontsRequest.getResponse());
     }
 }

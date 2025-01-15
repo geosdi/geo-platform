@@ -40,7 +40,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverWo
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadWorkspaceLayerRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadWorkspaceLayersRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverLoadWorkspacesRequest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV224xTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV225xTest;
 import org.geosdi.geoplatform.connector.store.task.GeoserverWorkspaceLayersTask;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -53,69 +53,69 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email giuseppe.lascaleia@geosdi.org
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverLayersConnectorStoreV224XTest extends GPBaseGeoserverConnectorStoreV224xTest {
+public class GPGeoserverLayersConnectorStoreV225XTest extends GPBaseGeoserverConnectorStoreV225xTest {
 
     @Test
     public void a_loadGeoserverWorkspaceToppLayersTest() throws Exception {
-        GeoserverLoadWorkspaceLayersRequest loadWorkspaceLayersRequest = geoserverConnectorStoreV2_24_x.loadWorkspaceLayersRequest();
+        GeoserverLoadWorkspaceLayersRequest loadWorkspaceLayersRequest = geoserverConnectorStoreV2_25_x.loadWorkspaceLayersRequest();
         loadWorkspaceLayersRequest.withWorkspaceName("topp");
         logger.info("############################LOAD_WORKSPACE_LAYERS_RESPONSE : {}\n", loadWorkspaceLayersRequest.getResponse());
     }
 
     @Test
     public void b_loadGeoserverWorkspaceCiteTest() throws Exception {
-        GeoserverLoadWorkspaceLayersRequest loadWorkspaceLayersRequest = geoserverConnectorStoreV2_24_x.loadWorkspaceLayersRequest();
+        GeoserverLoadWorkspaceLayersRequest loadWorkspaceLayersRequest = geoserverConnectorStoreV2_25_x.loadWorkspaceLayersRequest();
         logger.info("############################LOAD_WORKSPACE_LAYERS_RESPONSE : {}\n", loadWorkspaceLayersRequest
                 .withWorkspaceName("cite").getResponse());
     }
 
     @Test
     public void c_loadGeoserverWorkspaceTigerTest() throws Exception {
-        GeoserverLoadWorkspaceLayersRequest loadWorkspaceLayersRequest = geoserverConnectorStoreV2_24_x.loadWorkspaceLayersRequest();
+        GeoserverLoadWorkspaceLayersRequest loadWorkspaceLayersRequest = geoserverConnectorStoreV2_25_x.loadWorkspaceLayersRequest();
         loadWorkspaceLayersRequest.withWorkspaceName("tiger");
         logger.info("############################LOAD_WORKSPACE_LAYERS_RESPONSE : {}\n", loadWorkspaceLayersRequest.getResponse());
     }
 
     @Test
     public void d_loadGeoserverWorkspaceNurcTest() throws Exception {
-        GeoserverLoadWorkspaceLayersRequest loadWorkspaceLayersRequest = geoserverConnectorStoreV2_24_x.loadWorkspaceLayersRequest();
+        GeoserverLoadWorkspaceLayersRequest loadWorkspaceLayersRequest = geoserverConnectorStoreV2_25_x.loadWorkspaceLayersRequest();
         loadWorkspaceLayersRequest.withWorkspaceName("nurc");
         logger.info("############################LOAD_WORKSPACE_LAYERS_RESPONSE : {}\n", loadWorkspaceLayersRequest.getResponse());
     }
 
     @Test
     public void e_loadGeoserverWorkspaceSdeTest() throws Exception {
-        GeoserverLoadWorkspaceLayersRequest loadWorkspaceLayersRequest = geoserverConnectorStoreV2_24_x.loadWorkspaceLayersRequest();
+        GeoserverLoadWorkspaceLayersRequest loadWorkspaceLayersRequest = geoserverConnectorStoreV2_25_x.loadWorkspaceLayersRequest();
         loadWorkspaceLayersRequest.withWorkspaceName("sde");
         logger.info("############################LOAD_WORKSPACE_LAYERS_RESPONSE : {}\n", loadWorkspaceLayersRequest.getResponse());
     }
 
     @Test
     public void f_loadGeoserverWorkspaceItGeosolutionsTest() throws Exception {
-        GeoserverLoadWorkspaceLayersRequest loadWorkspaceLayersRequest = geoserverConnectorStoreV2_24_x.loadWorkspaceLayersRequest();
+        GeoserverLoadWorkspaceLayersRequest loadWorkspaceLayersRequest = geoserverConnectorStoreV2_25_x.loadWorkspaceLayersRequest();
         loadWorkspaceLayersRequest.withWorkspaceName("it.geosolutions");
         logger.info("############################LOAD_WORKSPACE_LAYERS_RESPONSE : {}\n", loadWorkspaceLayersRequest.getResponse());
     }
 
     @Test
     public void g_loadGeoserverWorkspaceSfTest() throws Exception {
-        GeoserverLoadWorkspaceLayersRequest loadWorkspaceLayersRequest = geoserverConnectorStoreV2_24_x.loadWorkspaceLayersRequest();
+        GeoserverLoadWorkspaceLayersRequest loadWorkspaceLayersRequest = geoserverConnectorStoreV2_25_x.loadWorkspaceLayersRequest();
         loadWorkspaceLayersRequest.withWorkspaceName("sf");
         logger.info("############################LOAD_WORKSPACE_LAYERS_RESPONSE : {}\n", loadWorkspaceLayersRequest.getResponse());
     }
 
     @Test
     public void h_loadGeoserverWorkspaceLayerTest() throws Exception {
-        GeoserverLoadWorkspaceLayerRequest loadWorkspaceLayerRequest = geoserverConnectorStoreV2_24_x.loadWorkspaceLayerRequest();
+        GeoserverLoadWorkspaceLayerRequest loadWorkspaceLayerRequest = geoserverConnectorStoreV2_25_x.loadWorkspaceLayerRequest();
         loadWorkspaceLayerRequest.withWorkspaceName("tiger").withLayerName("poi");
         logger.info("######################LOAD_WORKSPACE_LAYER_RESPONSE : {}\n", loadWorkspaceLayerRequest.getResponse());
     }
 
     @Test
     public void h_loadGeoserverWorkspaceLayersTest() throws Exception {
-        GeoserverLoadWorkspacesRequest workspacesRequest = geoserverConnectorStoreV2_24_x.loadWorkspacesRequest();
+        GeoserverLoadWorkspacesRequest workspacesRequest = geoserverConnectorStoreV2_25_x.loadWorkspacesRequest();
         GPGeoserverWorkspaces geoserverWorkspaces = workspacesRequest.getResponse();
-        GeoserverLoadWorkspaceLayersRequest loadWorkspaceLayersRequest = geoserverConnectorStoreV2_24_x.loadWorkspaceLayersRequest();
+        GeoserverLoadWorkspaceLayersRequest loadWorkspaceLayersRequest = geoserverConnectorStoreV2_25_x.loadWorkspaceLayersRequest();
         for (IGPGeoserverWorkspace geoserverWorkspace : geoserverWorkspaces.getWorkspaces()) {
             new GeoserverWorkspaceLayersTask(loadWorkspaceLayersRequest, geoserverWorkspace.getWorkspaceName()).start();
         }

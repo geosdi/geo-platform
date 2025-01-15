@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 
-import static org.geosdi.geoplatform.connector.GeoserverVersion.V24x;
+import static org.geosdi.geoplatform.connector.GeoserverVersion.V25x;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStoreBuilder.geoserverConnectorBuilder;
 
@@ -51,21 +51,21 @@ import static org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStoreBu
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public abstract class GPBaseGeoserverConnectorStoreV224xTest {
+public abstract class GPBaseGeoserverConnectorStoreV225xTest {
 
-    protected static final Logger logger = LoggerFactory.getLogger(GPBaseGeoserverConnectorStoreV224xTest.class);
+    protected static final Logger logger = LoggerFactory.getLogger(GPBaseGeoserverConnectorStoreV225xTest.class);
     //
-    private static final String geoserverURLV2_24_X = "http://150.145.141.180/geoserver/rest";
-    protected static GPGeoserverConnectorStore geoserverConnectorStoreV2_24_x;
+    private static final String geoserverURLV2_25_X = "http://150.145.141.180/geoserver/rest";
+    protected static GPGeoserverConnectorStore geoserverConnectorStoreV2_25_x;
 
     /**
      * @throws Exception
      */
     @BeforeClass
     public static void beforeClass() throws Exception {
-        geoserverConnectorStoreV2_24_x = geoserverConnectorBuilder()
-                .withServerUrl(new URL(geoserverURLV2_24_X))
-                .withVersion(V24x.getVersion())
+        geoserverConnectorStoreV2_25_x = geoserverConnectorBuilder()
+                .withServerUrl(new URL(geoserverURLV2_25_X))
+                .withVersion(V25x.getVersion())
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(80)
                         .withDefaultMaxPerRoute(40)
@@ -80,6 +80,6 @@ public abstract class GPBaseGeoserverConnectorStoreV224xTest {
      */
     @AfterClass
     public static void afterClass() throws Exception {
-        geoserverConnectorStoreV2_24_x.dispose();
+        geoserverConnectorStoreV2_25_x.dispose();
     }
 }

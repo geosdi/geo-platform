@@ -110,8 +110,8 @@ public abstract class GPStructuredCoverageConnector extends GPGeoserverWorkspace
     @Override
     public GeoserverLoadStructuredCoverageSchemaRequest loadStructuredCoverageRequest() {
         switch (version) {
-            case V24x:
             case V25x:
+            case V26x:
                 return new GPGeoserverLoadStructuredCoverageSchemaRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -124,8 +124,8 @@ public abstract class GPStructuredCoverageConnector extends GPGeoserverWorkspace
     @Override
     public GeoserverLoadStructuredCoverageGranulesRequest loadStructuredCoverageGranulesRequest() {
         switch (version) {
-            case V24x:
             case V25x:
+            case V26x:
                 return new GPGeoserverLoadStructuredCoverageGranulesRequest(this, this.emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -138,8 +138,8 @@ public abstract class GPStructuredCoverageConnector extends GPGeoserverWorkspace
     @Override
     public GeoserverDeleteCoverageGranulesRequest deleteCoverageGranulesRequest() {
         switch (version) {
-            case V24x:
             case V25x:
+            case V26x:
                 return new GPGeoserverDeleteCoverageGranulesRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -152,8 +152,8 @@ public abstract class GPStructuredCoverageConnector extends GPGeoserverWorkspace
     @Override
     public GeoserverLoadGranuleAttributesRequest loadGranuleAttributesRequest() {
         switch (version) {
-            case V24x:
             case V25x:
+            case V26x:
                 return new GPGeoserverLoadGranuleAttributesRequest(this, this.emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -166,8 +166,8 @@ public abstract class GPStructuredCoverageConnector extends GPGeoserverWorkspace
     @Override
     public GeoserverDeleteCoverageGranuleRequest deleteCoverageGranuleRequest() {
         switch (version) {
-            case V24x:
             case V25x:
+            case V26x:
                 return new GPGeoserverDeleteCoverageGranuleRequest(this, this.emptyJacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

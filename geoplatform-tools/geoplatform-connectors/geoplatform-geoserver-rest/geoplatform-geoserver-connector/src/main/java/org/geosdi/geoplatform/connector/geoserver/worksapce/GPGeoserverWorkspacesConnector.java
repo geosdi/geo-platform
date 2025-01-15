@@ -110,8 +110,8 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     @Override
     public GeoserverLoadWorkspacesRequest loadWorkspacesRequest() {
         switch (version) {
-            case V24x:
             case V25x:
+            case V26x:
                 return new GPGeoserverLoadWorkspacesRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -124,8 +124,8 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     @Override
     public GeoserverLoadWorkspaceRequest loadWorkspaceRequest() {
         switch (version) {
-            case V24x:
             case V25x:
+            case V26x:
                 return new GPGeoserverLoadWorkspaceRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -138,8 +138,8 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     @Override
     public GeoserverCreateWorkspaceRequest createWorkspaceRequest() {
         switch (version) {
-            case V24x:
             case V25x:
+            case V26x:
                 return new GPGeoserverCreateWorkspaceRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -152,8 +152,8 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     @Override
     public GeoserverDeleteWorkspaceRequest deleteWorkspaceRequest() {
         switch (version) {
-            case V24x:
             case V25x:
+            case V26x:
                 return new GPGeoserverDeleteWorkspaceRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -166,8 +166,8 @@ public abstract class GPGeoserverWorkspacesConnector extends GPGeoserverAboutCon
     @Override
     public GeoserverUpdateWorkspaceRequest updateWorkspaceRequest() {
         switch (version) {
-            case V24x:
             case V25x:
+            case V26x:
                 return new GPGeoserverUpdateWorkspaceRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

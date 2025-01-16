@@ -869,6 +869,15 @@
             </dependency>
 
             <!-- =========================================================== -->
+            <!-- ==================== UNIVOCITY PARSERS ==================== -->
+            <!-- =========================================================== -->
+            <dependency>
+                <groupId>com.sonofab1rd</groupId>
+                <artifactId>univocity-parsers</artifactId>
+                <version>${univocity.parsers.version}</version>
+            </dependency>
+
+            <!-- =========================================================== -->
             <!-- JUNIT -->
             <!-- =========================================================== -->
             <dependency>
@@ -1562,6 +1571,7 @@
         <junit.version>4.13.2</junit.version>
         <maven-surefire.version>3.5.2</maven-surefire.version>
         <gwt-plugin.version>2.10.1</gwt-plugin.version>
+        <univocity.parsers.version>2.10.1</univocity.parsers.version>
     </properties>
 
 </project>

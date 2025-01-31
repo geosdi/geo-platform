@@ -46,6 +46,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.nio.file.Files.list;
@@ -154,6 +155,32 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
     }
 
     /**
+     * @param theFile
+     * @param theClass
+     * @return {@link V}
+     * @throws Exception
+     */
+    @Override
+    public <V extends Object> V read(@Nonnull(when = NEVER) File theFile, @Nonnull(when = NEVER) Class<V> theClass) throws Exception {
+        checkArgument(theFile != null, "The Parameter file must not be null.");
+        checkArgument(theClass != null, "The Parameter theClass must not be null.");
+        return this.jacksonSupport.getDefaultMapper().readValue(theFile, theClass);
+    }
+
+    /**
+     * @param theInputStream
+     * @param theClass
+     * @return {@link V}
+     * @throws Exception
+     */
+    @Override
+    public <V extends Object> V read(@Nonnull(when = NEVER) InputStream theInputStream, @Nonnull(when = NEVER) Class<V> theClass) throws Exception {
+        checkArgument(theInputStream != null, "The Parameter inputStream must not be null.");
+        checkArgument(theClass != null, "The Parameter theClass must not be null.");
+        return this.jacksonSupport.getDefaultMapper().readValue(theInputStream, theClass);
+    }
+
+    /**
      * @param path
      * @return {@link Collection<T>}
      * @throws Exception
@@ -161,11 +188,13 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
     @Override
     public Collection<T> readFromDirectory(@Nonnull(when = NEVER) Path path) throws Exception {
         checkArgument((path != null && path.toFile().isDirectory()), "The Parameter Path must not be null and must be a Directory");
-        return list(path)
-                .filter(p -> !(p.toFile().isDirectory()) && (p.toFile().getName().endsWith(".json")))
-                .map(this::read)
-                .filter(Objects::nonNull)
-                .collect(toList());
+         try (Stream<Path> theStream = list(path)) {
+             return theStream
+                     .filter(p -> !(p.toFile().isDirectory()) && (p.toFile().getName().endsWith(".json")))
+                     .map(this::read)
+                    .filter(Objects::nonNull)
+                     .collect(toList());
+        }
     }
 
     /**

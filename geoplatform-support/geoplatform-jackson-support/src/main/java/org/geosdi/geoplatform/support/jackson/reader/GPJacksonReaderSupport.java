@@ -106,6 +106,24 @@ public interface GPJacksonReaderSupport<T extends Object> {
     <V extends Object> V read(@Nonnull(when = NEVER) Reader reader, @Nonnull(when = NEVER) Class<V> classe) throws Exception;
 
     /**
+     * @param theFile
+     * @param theClass
+     * @param <V>
+     * @return {@link V}
+     * @throws Exception
+     */
+    <V extends Object> V read(@Nonnull(when = NEVER) File theFile, @Nonnull(when = NEVER) Class<V> theClass) throws Exception;
+
+    /**
+     * @param theInputStream
+     * @param theClass
+     * @param <V>
+     * @return {@link V}
+     * @throws Exception
+     */
+    <V extends Object> V read(@Nonnull(when = NEVER) InputStream theInputStream, @Nonnull(when = NEVER) Class<V> theClass) throws Exception;
+
+    /**
      * @param direrctory
      * @return {@link Collection<T>}
      * @throws Exception

@@ -173,7 +173,7 @@
     </build>
     
     <properties>
-        <jaxb2-basics-version>0.13.1</jaxb2-basics-version>
+        <jaxb2-basics-version>1.11.1</jaxb2-basics-version>
     </properties>
 
 </project>

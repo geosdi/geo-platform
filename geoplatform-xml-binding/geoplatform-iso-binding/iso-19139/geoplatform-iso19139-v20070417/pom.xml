@@ -98,8 +98,46 @@
                         <value>iso/19139/*/gsr/gsr.xsd</value>
                         <value>iso/19139/*/gss/gss.xsd</value>
                         <value>iso/19139/*/gts/gts.xsd</value>
-                        <!--<value>gml/3.2.1/gml.xsd</value>-->
+                        <value>gml/3.2.1/gml.xsd</value>
                     </schemaIncludes>
+                    <episodes>
+                        <episode>
+                            <groupId>org.geosdi</groupId>
+                            <artifactId>gml-3.2.1</artifactId>
+                        </episode>
+                    </episodes>
+                    <episode>true</episode>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jvnet.jaxb</groupId>
+                <artifactId>jaxb-maven-plugin</artifactId>
+                <version>4.0.8</version>
+                <configuration>
+                    <schemaIncludes>
+                        <value>iso/19139/*/gco/gco.xsd</value>
+                        <value>iso/19139/*/gmd/gmd.xsd</value>
+                        <value>iso/19139/*/gmx/gmx.xsd</value>
+                        <value>iso/19139/*/gsr/gsr.xsd</value>
+                        <value>iso/19139/*/gss/gss.xsd</value>
+                        <value>iso/19139/*/gts/gts.xsd</value>
+                        <value>gml/3.2.1/gml.xsd</value>
+                    </schemaIncludes>
+                    <args>
+                        <arg>-XtoString</arg>
+                        <arg>-Xsetters</arg>
+                        <arg>-Xwildcard</arg>
+                        <arg>-Xinject-code</arg>
+                        <arg>-Xinheritance</arg>
+                    </args>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.jvnet.jaxb2_commons</groupId>
+                            <artifactId>jaxb2-basics</artifactId>
+                            <version>${jaxb2-basics-version}</version>
+                        </plugin>
+                    </plugins>
                     <episodes>
                         <episode>
                             <groupId>org.geosdi</groupId>

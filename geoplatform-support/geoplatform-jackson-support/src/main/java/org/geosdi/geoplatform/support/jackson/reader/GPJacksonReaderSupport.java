@@ -88,6 +88,13 @@ public interface GPJacksonReaderSupport<T extends Object> {
     T read(@Nonnull(when = NEVER) String entityAsString) throws Exception;
 
     /**
+     * @param theEntityAsBytes
+     * @return {@link T}
+     * @throws Exception
+     */
+    T read(@Nonnull(when = NEVER) byte[] theEntityAsBytes) throws Exception;
+
+    /**
      * @param entityAsString
      * @param classe
      * @param <V>

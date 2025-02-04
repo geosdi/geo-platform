@@ -38,10 +38,7 @@ package org.geosdi.geoplatform.support.jackson.reader;
 import org.geosdi.geoplatform.support.jackson.JacksonSupport;
 
 import javax.annotation.Nonnull;
-import java.io.File;
-import java.io.InputStream;
-import java.io.Reader;
-import java.io.StringReader;
+import java.io.*;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.Collection;
@@ -126,6 +123,17 @@ public class GPBaseJacksonReaderSupport<T extends Object> implements GPJacksonRe
     public T read(@Nonnull(when = NEVER) String entityAsString) throws Exception {
         checkArgument((entityAsString != null) && !(entityAsString.trim().isEmpty()), "The Parameter EntityAsString must not be null or Empty.");
         return this.read(new StringReader(entityAsString));
+    }
+
+    /**
+     * @param theEntityAsBytes
+     * @return {@link T}
+     * @throws Exception
+     */
+    @Override
+    public T read(@Nonnull(when = NEVER) byte[] theEntityAsBytes) throws Exception {
+        checkArgument(theEntityAsBytes != null, "The Parameter theEntityAsBytes must not be null.");
+        return this.read(new ByteArrayInputStream(theEntityAsBytes));
     }
 
     /**

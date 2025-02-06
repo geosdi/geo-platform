@@ -226,7 +226,7 @@ public class LocatorType implements ToString2 {
     }
 
     public String toString() {
-        final JAXBToStringStrategy strategy = JAXBToStringStrategy.INSTANCE2;
+        final JAXBToStringStrategy strategy = JAXBToStringStrategy.INSTANCE;
         final StringBuilder buffer = new StringBuilder();
         append(null, buffer, strategy);
         return buffer.toString();

@@ -62,7 +62,7 @@
 
     <repositories>
         <!-- geoSDI -->
-        <repository>
+        <epository>
             <id>geosdi-realese</id>
             <name>repo.geosdi.org-releases</name>
             <url>https://repo.geosdi.org/artifactory/libs-release-local</url>

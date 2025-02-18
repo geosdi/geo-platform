@@ -105,6 +105,7 @@ class GPPersistenceJpaConfig {
 //        gpFactoryBean.setLoadTimeWeaver(this.gpLoadTimeWeaver());
         gpFactoryBean.setJpaProperties(this.hibPropStrategyManager.getProperties());
         gpFactoryBean.setPersistenceUnitName("geoplatform-persistence-layer");
+        gpFactoryBean.setEntityManagerFactoryInterface(EntityManagerFactory.class);
         return gpFactoryBean;
     }
 

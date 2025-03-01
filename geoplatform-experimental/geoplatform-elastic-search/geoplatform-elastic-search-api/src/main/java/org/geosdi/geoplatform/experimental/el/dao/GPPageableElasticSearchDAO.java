@@ -66,6 +66,7 @@ import java.util.Objects;
 import java.util.function.Function;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static io.reactivex.rxjava3.core.Flowable.fromArray;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Stream.of;
@@ -788,7 +789,18 @@ public interface GPPageableElasticSearchDAO<D extends Document> {
          */
         @Override
         public BoolQueryBuilder boolQueryBuilder() {
-            return this.queryBuilder = ((this.queryBuilder != null) ? this.queryBuilder : boolQuery());
+            return this.queryBuilder = ((this.queryBuilder != null) ? this.queryBuilder : this.internalQueryBuilder());
+        }
+
+        /**
+         * @return {@link BoolQueryBuilder}
+         */
+        protected final BoolQueryBuilder internalQueryBuilder() {
+            this.queryBuilder = boolQuery();
+            fromArray(this.queryList)
+                    .filter(Objects::nonNull)
+                    .subscribe(this::buildQuery);
+            return this.queryBuilder;
         }
     }
 }

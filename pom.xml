@@ -1517,7 +1517,7 @@
         <activemq-version>5.8.0</activemq-version>
 
         <jettison>1.5.4</jettison>
-        <joda-version>2.13.0</joda-version>
+        <joda-version>2.13.1</joda-version>
 
         <javax.ws.rs-api-version>2.1.1</javax.ws.rs-api-version>
 

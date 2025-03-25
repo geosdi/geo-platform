@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.wms.bridge.implementor;
 
-import org.checkerframework.checker.units.qual.K;
 import org.geosdi.geoplatform.connector.bridge.implementor.text.GPWMSGetFeatureInfoTextReader;
 import org.geosdi.geoplatform.connector.server.request.GPWMSFeatureInfoFormat;
 
@@ -57,7 +56,7 @@ public class GPWMSGetFeatureInfoMockReader extends GPWMSGetFeatureInfoTextReader
         }
 
         /**
-         * @return {@link K}
+         * @return {@link GPWMSFeatureInfoFormat}
          */
         @Override
         public GPWMSFeatureInfoFormat getImplementorKey() {

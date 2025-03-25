@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.connector.server.request;
 
-import org.checkerframework.checker.units.qual.K;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
@@ -66,7 +65,7 @@ public enum WFSGetFeatureOutputFormat implements GPWFSGetFeatureOutputFormat {
     }
 
     /**
-     * @return {@link K}
+     * @return {@link GPWFSGetFeatureOutputFormat}
      */
     @Override
     public GPWFSGetFeatureOutputFormat getImplementorKey() {

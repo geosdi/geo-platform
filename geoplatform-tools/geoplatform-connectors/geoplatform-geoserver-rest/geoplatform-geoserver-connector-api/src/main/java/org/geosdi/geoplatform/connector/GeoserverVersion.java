@@ -44,9 +44,9 @@ import java.util.Optional;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static java.lang.Boolean.FALSE;
+import static java.lang.String.join;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.joining;
-import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -58,11 +58,11 @@ public enum GeoserverVersion implements GPServerConnectorVersion {
     /**
      * <p>Stable Version.</p>
      */
-    V26x("2.26.1"),
+    V26x("2.26.2"),
     /**
      * <p>Maintenance Version.</p>
      */
-    V25x("2.25.5");
+    V25x("2.25.6");
 
     private final String version;
 
@@ -103,9 +103,9 @@ public enum GeoserverVersion implements GPServerConnectorVersion {
      * @return {@link String}
      */
     public static String toVersionExceptionMessage() {
-        return of("The version for GPGeoserverConnector must be ", stream(GeoserverVersion.values())
-                .map(GeoserverVersion::getVersion)
-                .collect(joining(" OR ")))
-                .collect(joining());
+        return join("", "The version for GPGeoserverConnector must be ",
+                stream(GeoserverVersion.values())
+                        .map(GeoserverVersion::getVersion)
+                        .collect(joining(" OR ")));
     }
 }

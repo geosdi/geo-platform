@@ -1530,7 +1530,7 @@
         <jibx-version>1.4.2</jibx-version>
 
         <aspectj-version>1.9.20</aspectj-version>
-        <jetty-version>12.0.18</jetty-version>
+        <jetty-version>12.0.19</jetty-version>
 
         <postgresql-version>42.7.5</postgresql-version>
         <postgis-jdbc-version>2024.1.0</postgis-jdbc-version>

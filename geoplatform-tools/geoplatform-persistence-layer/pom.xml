@@ -124,7 +124,7 @@
     </modules>
 
     <properties>
-        <hibernate-version>6.6.12.Final</hibernate-version>
+        <hibernate-version>6.6.13.Final</hibernate-version>
         <hibernate-commons-annotations-version>7.0.3.Final</hibernate-commons-annotations-version>
         <spring-data-jpa-version>3.4.4</spring-data-jpa-version>
         <hypersistence-utils.version>3.9.9</hypersistence-utils.version>

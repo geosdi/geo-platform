@@ -97,7 +97,7 @@ public class CatalogCapabilitiesTest {
     }
 
     @Test
-//    @Ignore("SERVER IS DOWN")
+    @Ignore("SERVER IS DOWN")
     public void testCapabilitiesV202() throws Exception {
         CatalogCapabilities catalogGetCapabilities = catalogCapabilitiesBean.bindUrl("http://rsdi.regione.basilicata.it/Catalogo/srv/en/csw");
         logger.info("CATALOG CAPABILITIES BEAN V_2.0.2 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + catalogGetCapabilities);

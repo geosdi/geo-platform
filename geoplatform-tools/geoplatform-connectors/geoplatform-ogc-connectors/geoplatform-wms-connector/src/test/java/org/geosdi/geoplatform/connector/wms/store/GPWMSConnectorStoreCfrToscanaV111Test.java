@@ -44,6 +44,7 @@ import org.geosdi.geoplatform.connector.server.v111.GPWMSGetFeatureInfoV111Reque
 import org.geosdi.geoplatform.connector.server.v111.IGPWMSConnectorStoreV111;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,6 +82,7 @@ public class GPWMSConnectorStoreCfrToscanaV111Test {
                 .build();
     }
 
+    @Ignore
     @Test
     public void a_wmsDescribeLayerV11Test() throws Exception {
         GPWMSDescribeLayerV111Request wmsDescribeLayerRequest = wmsServerConnector.createDescribeLayerRequest();

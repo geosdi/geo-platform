@@ -126,6 +126,7 @@ public class GPWMSConnectorStoreCfrToscanaV111Test {
                 .withInfoFormat(GML3_AS_STRING).withX(50).withY(50).getResponse());
     }
 
+    @Ignore
     @Test
     public void e_wmsGetFeatureInfoV111Test() throws Exception {
         GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();

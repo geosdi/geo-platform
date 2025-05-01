@@ -68,7 +68,7 @@ public class SendPacketTest {
     static Logger logger;
     //
     static final String GP_XMPP_KEY = "GP_XMPP_FILE_PROP";
-    static final String RECEIVER = "zwJAU8XSxvNZ1IcxJ6DPpy7QNB74eFCaf6YPvQia6Ro=";
+    static final String RECEIVER = "B507cM+mtP7OOjY6/d0q0UfhBM8Vx/aVmGSmt409AqY=";
     static final String MESSAGE = " is building geo-platform.";
     //
     @Resource(name = "gpXMPPConnectionManager")

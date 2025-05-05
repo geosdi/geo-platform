@@ -122,6 +122,8 @@ public class GPGeoserverJacksonStoreTest {
                 .getDefaultMapper().readValue(new StringReader("{\n" +
                         "  \"coverageStore\": {\n" +
                         "    \"name\": \"nyc\",\n" +
+                        "    \"workspace\": \"test\",\n" +
+                        "    \"type\": \"GeoTIFF\",\n" +
                         "    \"url\": \"file:/path/to/file.tiff\"\n" +
                         "  }\n" +
                         "}\n"), GPGeoserverCoverageStoreBody.class));

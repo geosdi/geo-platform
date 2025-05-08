@@ -72,14 +72,11 @@ public class GPGeoserverCoverageStoreBody implements IGPGeoserverCoverageStoreBo
     private String url;
     private String workspace;
 
-    protected GPGeoserverCoverageStoreBody() {
-    }
-
     /**
      * @param theCoverageName
      * @param theUrl
      */
-    protected GPGeoserverCoverageStoreBody(@Nonnull(when = NEVER) String theCoverageName, @Nullable String theDescription,
+    GPGeoserverCoverageStoreBody(@Nonnull(when = NEVER) String theCoverageName, @Nullable String theDescription,
             @Nonnull(when = NEVER) String theWorkspace, @Nonnull(when = NEVER) GPCoverageStoreType theType,
             @Nonnull(when = NEVER) String theUrl, boolean theEnabled) {
         checkArgument((theCoverageName != null) && !(theCoverageName.trim().isEmpty()), "The Parameter coverageName must not be null or an empty string.");

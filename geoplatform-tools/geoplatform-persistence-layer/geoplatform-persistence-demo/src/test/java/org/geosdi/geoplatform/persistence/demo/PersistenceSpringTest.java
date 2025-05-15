@@ -38,44 +38,71 @@ package org.geosdi.geoplatform.persistence.demo;
 import org.geosdi.geoplatform.persistence.demo.bootstrap.SpringDataAppConfig;
 import org.geosdi.geoplatform.persistence.demo.dao.spring.SpringCarDAO;
 import org.geosdi.geoplatform.persistence.demo.model.Car;
-import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
+
+import java.util.List;
+import java.util.Objects;
+
+import static io.reactivex.rxjava3.core.Flowable.fromIterable;
+import static org.junit.Assert.assertEquals;
+import static org.junit.runners.MethodSorters.NAME_ASCENDING;
+import static org.springframework.data.domain.Example.of;
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.exact;
+import static org.springframework.data.domain.ExampleMatcher.matching;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {GPPersistenceLoaderDemoConfig.class, SpringDataAppConfig.class},
+@ContextConfiguration(classes = {GPPersistenceLoaderDemoConfig.class, SpringDataAppConfig.class, GPPersistenceSpringDataLoaderConfig.class},
         loader = AnnotationConfigContextLoader.class)
 @ActiveProfiles(value = {"jpa", "springData"})
+@FixMethodOrder(value = NAME_ASCENDING)
 public class PersistenceSpringTest {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //
     @Autowired
     private SpringCarDAO springCarDAO;
-    private Car car;
 
-    @Before
-    public void setUp() {
-        car = new Car();
-        car.setPlate("AR793JJ");
-        car.setModel("Fiat Croma");
-        springCarDAO.save(car);
+    @Test
+    public void a_testSpringProfile() {
+        Car car =  springCarDAO.findByPlate("AR793JJ");
+        logger.info("Persistence Spring JPA DATA Test - Car Found @@@@@@@@@@@@@@@@@@@@@@@@@ {}", car);
     }
 
     @Test
-    public void testSpringProfile() {
-        logger.info("Persistence Spring JPA DATA Test - Car Found @@@@@@@@@@@@@@@@@@@@@@@@@ " + springCarDAO.findByPlate("AR793JJ"));
-        this.springCarDAO.delete(car);
+    public void b_testSpringProfile() {
+        ExampleMatcher matcher = matching()
+                .withMatcher("plate", exact());
+        Car car = new Car();
+        car.setPlate("CT149JS");
+        List<Car> cars = this.springCarDAO.findAll(of(car, matcher));
+        assertEquals(1, cars.size());
+    }
+
+    @Test
+    public void c_testSpringProfile() {
+        ExampleMatcher matcher = matching()
+                .withMatcher("model", contains().caseSensitive());
+        Car car = new Car();
+        car.setModel("Fiat");
+        List<Car> cars = this.springCarDAO.findAll(of(car, matcher));
+        assertEquals(2, cars.size());
+        fromIterable(cars)
+                .filter(Objects::nonNull)
+                .subscribe(this.springCarDAO::delete, Throwable::printStackTrace);
     }
 }

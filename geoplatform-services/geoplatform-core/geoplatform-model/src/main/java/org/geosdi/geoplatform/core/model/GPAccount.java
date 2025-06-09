@@ -44,7 +44,6 @@ import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlSeeAlso;
 import jakarta.xml.bind.annotation.XmlTransient;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
@@ -86,14 +85,7 @@ public abstract class GPAccount implements IGPAccount {
     //
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gp_account_generator")
-    @GenericGenerator(name = "gp_account_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "GP_ACCOUNT_SEQ"),
-                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
-                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "50"),
-                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
-            }
-    )
+    @SequenceGenerator(name = "gp_account_generator", sequenceName = "GP_ACCOUNT_SEQ")
     private Long id;
     //
     @Column(name = "is_enabled", nullable = false)

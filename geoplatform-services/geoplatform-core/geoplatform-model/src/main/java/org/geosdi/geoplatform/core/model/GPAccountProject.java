@@ -39,7 +39,6 @@ import jakarta.persistence.*;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.acls.domain.BasePermission;
@@ -66,14 +65,7 @@ public class GPAccountProject implements Serializable {
     //
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gp_account_project_generator")
-    @GenericGenerator(name = "gp_account_project_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "GP_ACCOUNT_PROJECT_SEQ"),
-                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
-                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "40"),
-                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
-            }
-    )
+    @SequenceGenerator(name = "gp_account_project_generator", sequenceName = "GP_ACCOUNT_PROJECT_SEQ")
     private Long id;
     //
     //@XmlAnyElement(lax = true)

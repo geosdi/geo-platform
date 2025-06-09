@@ -41,7 +41,6 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  * @author Vincenzo Monteverde <vincenzo.monteverde@geosdi.org>
@@ -60,14 +59,7 @@ public class GuiComponent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gp_gui_component_generator")
-    @GenericGenerator(name = "gp_gui_component_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "GUI_COMPONENT_SEQ"),
-                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
-                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "50"),
-                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
-            }
-    )
+    @SequenceGenerator(name = "gp_gui_component_generator", sequenceName = "GUI_COMPONENT_SEQ")
     private Long id;
     // The ID (string type) of the GUI Component
     @Column(name = "component_id", nullable = false, unique = true)

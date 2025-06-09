@@ -35,15 +35,10 @@
  */
 package org.geosdi.geoplatform.persistence.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
 import java.io.Serializable;
 
@@ -61,15 +56,7 @@ public class Organization implements Serializable {
     //
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "organization_generator")
-    @GenericGenerator(name = "organization_generator",
-            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-            parameters = {
-                    @Parameter(name = "sequence_name", value = "ORGANIZATION_SEQ"),
-                    @Parameter(name = "initial_value", value = "1"),
-                    @Parameter(name = "increment_size", value = "3"),
-                    @Parameter(name = "optimizer", value = "pooled-lo")
-            }
-    )
+    @SequenceGenerator(name = "organization_generator", sequenceName = "ORGANIZATION_SEQ", allocationSize = 3)
     private Long id;
     private String name;
 }

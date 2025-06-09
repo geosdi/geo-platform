@@ -40,7 +40,6 @@ import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
 
@@ -62,14 +61,7 @@ public class GPOrganization implements Serializable {
     //
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gp_organization_generator")
-    @GenericGenerator(name = "gp_organization_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "GP_ORGANIZATION_SEQ"),
-                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
-                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "50"),
-                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
-            }
-    )
+    @SequenceGenerator(name = "gp_organization_generator", sequenceName = "GP_ORGANIZATION_SEQ")
     private Long id;
     //
     @Column(nullable = false, unique = true)

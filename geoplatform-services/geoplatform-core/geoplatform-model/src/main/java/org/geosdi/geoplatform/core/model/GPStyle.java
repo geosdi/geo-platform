@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.core.model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -60,14 +59,7 @@ public class GPStyle implements Serializable {
     //
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gp_style_generator")
-    @GenericGenerator(name = "gp_style_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "GP_STYLE_SEQ"),
-                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
-                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "50"),
-                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
-            }
-    )
+    @SequenceGenerator(name = "gp_style_generator", sequenceName = "GP_STYLE_SEQ")
     private Long id;
     //
     @Column

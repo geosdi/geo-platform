@@ -76,14 +76,7 @@ public class AclObjectIdentity implements Serializable {
     //
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gp_acl_object_identity_generator")
-    @GenericGenerator(name = "gp_acl_object_identity_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "ACL_OBJECT_IDENTITY_SEQ"),
-                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
-                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "50"),
-                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
-            }
-    )
+    @SequenceGenerator(name = "gp_acl_object_identity_generator", sequenceName = "ACL_OBJECT_IDENTITY_SEQ")
     private Long id;
     //
     @ManyToOne

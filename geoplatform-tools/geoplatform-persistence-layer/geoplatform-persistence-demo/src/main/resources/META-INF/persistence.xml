@@ -1,8 +1,16 @@
-<persistence xmlns="https://jakarta.ee/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.0">
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.2">
     <persistence-unit name="geoplatform-persistence-layer-test" transaction-type="RESOURCE_LOCAL">
         <description>GeoPlatform Hibernate EntityManager Demo</description>
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>org.geosdi.geoplatform.persistence.demo.model.Car</class>
+        <class>org.geosdi.geoplatform.persistence.demo.model.Account</class>
+        <class>org.geosdi.geoplatform.persistence.demo.model.CarPart</class>
+        <class>org.geosdi.geoplatform.persistence.demo.model.CreditAccount</class>
+        <class>org.geosdi.geoplatform.persistence.demo.model.DebitAccount</class>
+        <class>org.geosdi.geoplatform.persistence.demo.model.Organization</class>
+
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
+
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver" />
             <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:persistence;DB_CLOSE_DELAY=-1" />

@@ -71,10 +71,10 @@
             <artifactId>jakarta.validation-api</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>io.hypersistence</groupId>
-            <artifactId>hypersistence-utils-hibernate-63</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.hypersistence</groupId>-->
+<!--            <artifactId>hypersistence-utils-hibernate-63</artifactId>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>

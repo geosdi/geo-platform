@@ -39,7 +39,6 @@ import jakarta.persistence.*;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
 
@@ -63,14 +62,7 @@ public class GSAccount implements Serializable {
     //
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gs_account_generator")
-    @GenericGenerator(name = "gs_account_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "GS_ACCOUNT_SEQ"),
-                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
-                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "50"),
-                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
-            }
-    )
+    @SequenceGenerator(name = "gs_account_generator", sequenceName = "GS_ACCOUNT_SEQ")
     private Long id;
     //
     @Column(name = "gs_user")

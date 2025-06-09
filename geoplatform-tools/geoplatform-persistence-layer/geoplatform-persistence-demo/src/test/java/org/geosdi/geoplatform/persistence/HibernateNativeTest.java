@@ -83,8 +83,8 @@ public class HibernateNativeTest {
                 CarPart carPart = new CarPart();
                 carPart.setPartName(PART_NAME + i);
                 carPart.setCar(car);
-                session.save(car);
-                session.save(carPart);
+                session.persist(car);
+                session.persist(carPart);
             }
             // commit transaction
             transaction.commit();

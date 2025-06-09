@@ -40,8 +40,6 @@ import jakarta.xml.bind.annotation.XmlTransient;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -61,15 +59,7 @@ public abstract class Account implements Serializable {
     private static final long serialVersionUID = -7517186839151324412L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_generator")
-    @GenericGenerator(name = "account_generator",
-            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-            parameters = {
-                    @Parameter(name = "sequence_name", value = "ACCOUNT_SEQ"),
-                    @Parameter(name = "initial_value", value = "1"),
-                    @Parameter(name = "increment_size", value = "3"),
-                    @Parameter(name = "optimizer", value = "pooled-lo")
-            }
-    )
+    @SequenceGenerator(name = "account_generator", sequenceName = "ACCOUNT_SEQ", allocationSize = 3)
     private Long id;
     private String owner;
     private BigDecimal balance;

@@ -70,14 +70,7 @@ public class GPAuthority implements GrantedAuthority, Serializable {
     //
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gp_autorithy_generator")
-    @GenericGenerator(name = "gp_autorithy_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "GP_AUTHORITY_SEQ"),
-                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
-                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "50"),
-                    @org.hibernate.annotations.Parameter(name = "optimizer", value = "pooled-lo")
-            }
-    )
+    @SequenceGenerator(name = "gp_autorithy_generator", sequenceName = "GP_AUTHORITY_SEQ")
     private Long id;
     //
     @Column(nullable = false)

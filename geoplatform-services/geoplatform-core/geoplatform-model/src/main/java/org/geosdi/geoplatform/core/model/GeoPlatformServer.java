@@ -36,14 +36,13 @@
 package org.geosdi.geoplatform.core.model;
 
 import jakarta.persistence.*;
-import jakarta.persistence.Index;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.*;
 import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 
@@ -70,14 +69,7 @@ public class GeoPlatformServer implements Serializable {
     //
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gp_server_generator")
-    @GenericGenerator(name = "gp_server_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "GP_SERVER_SEQ"),
-                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
-                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "30"),
-                    @Parameter(name = "optimizer", value = "pooled-lo")
-            }
-    )
+    @SequenceGenerator(name = "gp_server_generator", sequenceName = "GP_SERVER_SEQ")
     private Long id;
     //
     @Column(name = "server_url", nullable = false, unique = true)

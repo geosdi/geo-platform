@@ -110,8 +110,8 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
     @Override
     public GeoserverLoadCoverageStoresRequest loadCoverageStoresRequest() {
         switch (version) {
-            case V25x:
             case V26x:
+            case V27x:
                 return new GPGeoserverLoadCoverageStoresRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -124,8 +124,8 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
     @Override
     public GeoserverLoadCoverageStoreRequest loadCoverageStoreRequest() {
         switch (version) {
-            case V25x:
             case V26x:
+            case V27x:
                 return new GPGeoserverLoadCoverageStoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -138,8 +138,8 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
     @Override
     public GeoserverCreateCoverageStoreRequest createCoverageStoreRequest() {
         switch (version) {
-            case V25x:
             case V26x:
+            case V27x:
                 return new GPGeoserverCreateCoverageStoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -152,8 +152,8 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
     @Override
     public GeoserverDeleteCoverageStoreRequest deleteCoverageStoreRequest() {
         switch (version) {
-            case V25x:
             case V26x:
+            case V27x:
                 return new GPGeoserverDeleteCoverageStoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -166,8 +166,8 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
     @Override
     public GeoserverUpdateCoverageStoreRequest updateCoverageStoreRequest() {
         switch (version) {
-            case V25x:
             case V26x:
+            case V27x:
                 return new GPGeoserverUpdateCoverageStoreRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -180,8 +180,8 @@ public abstract class GPGeoserverCoverageStoresConnector extends GPGeoserverData
     @Override
     public GeoserverUpdateCoverageStoreWithStoreNameRequest updateCoverageStoreWithStoreName() {
         switch (version) {
-            case V25x:
             case V26x:
+            case V27x:
                 return new GPGeoserverUpdateCoverageStoreWithStoreName(this);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

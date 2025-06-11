@@ -49,10 +49,13 @@ import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static io.reactivex.rxjava3.core.Flowable.fromStream;
 import static java.io.File.separator;
 import static java.lang.System.currentTimeMillis;
+import static java.lang.Thread.ofVirtual;
 import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.IntStream.iterate;
 import static java.util.stream.Stream.of;
 
 /**
@@ -90,9 +93,8 @@ public abstract class AbstractGMLComparisonTest {
 
         @Override
         public Thread newThread(Runnable r) {
-            Thread thread = Executors.defaultThreadFactory().newThread(r);
+            Thread thread =  ofVirtual().factory().newThread(r);
             thread.setName("GMLComparisonThread - " + threadID.getAndIncrement());
-            thread.setDaemon(Boolean.TRUE);
             return thread;
         }
     };
@@ -128,14 +130,23 @@ public abstract class AbstractGMLComparisonTest {
         geometryCollectionFile = new File(basePath.concat("GeometryCollection.xml"));
     }
 
+    /**
+     * @return {@link Integer}
+     */
     protected int defineNumThreads() {
         return 150;
     }
 
+    /**
+     * @param jaxbContext
+     * @param gmlTaskType
+     * @return {@link Long}
+     * @throws Exception
+     */
     protected long executeMultiThreadsTasks(GMLJAXBContext jaxbContext, GMLTaskType gmlTaskType) throws Exception {
         long time = 0;
         int numThreads = defineNumThreads();
-        try(ExecutorService executor = Executors.newFixedThreadPool(numThreads, GMLComparisonThreadFactory)) {
+        try (ExecutorService executor = Executors.newFixedThreadPool(numThreads, GMLComparisonThreadFactory)) {
             List<GMLPointSextanteTask> tasks = new ArrayList<>(numThreads);
             fillTasksList(jaxbContext, tasks, gmlTaskType, numThreads);
             List<Future<Long>> results = executor.invokeAll(tasks);
@@ -152,88 +163,133 @@ public abstract class AbstractGMLComparisonTest {
         }
     }
 
-    private void fillTasksList(GMLJAXBContext jaxbContext, List<GMLPointSextanteTask> tasks,
-            GMLTaskType gmlTaskType, int numThreads) {
+    /**
+     * @param jaxbContext
+     * @param tasks
+     * @param gmlTaskType
+     * @param numThreads
+     */
+    private void fillTasksList(GMLJAXBContext jaxbContext, List<GMLPointSextanteTask> tasks, GMLTaskType gmlTaskType, int numThreads) {
         switch (gmlTaskType) {
             case POINT_SIMPLE -> {
-                for (int i = 0; i < numThreads; i++)
-                    tasks.add(new GMLPointSextanteTask(jaxbContext));
+                fromStream(iterate(0, n -> n + 1)
+                        .limit(numThreads)
+                        .boxed())
+                        .subscribe(i -> tasks.add(new GMLPointSextanteTask(jaxbContext)), Throwable::printStackTrace);
             }
             case POINT_POOLED -> {
-                for (int i = 0; i < numThreads; i++)
-                    tasks.add(new GMLPointPooledSextanteTask(jaxbContext));
+                fromStream(iterate(0, n -> n + 1)
+                        .limit(numThreads)
+                        .boxed())
+                        .subscribe(i -> tasks.add(new GMLPointPooledSextanteTask(jaxbContext)), Throwable::printStackTrace);
             }
             case LINE_STRING_SIMPE -> {
-                for (int i = 0; i < numThreads; i++)
-                    tasks.add(new GMLLineStringSextanteTask(jaxbContext));
+                fromStream(iterate(0, n -> n + 1)
+                        .limit(numThreads)
+                        .boxed())
+                        .subscribe(i -> tasks.add(new GMLLineStringSextanteTask(jaxbContext)), Throwable::printStackTrace);
             }
             case LINE_STRING_POOLED -> {
-                for (int i = 0; i < numThreads; i++)
-                    tasks.add(new GMLLineStringPooledSextanteTask(jaxbContext));
+                fromStream(iterate(0, n -> n + 1)
+                        .limit(numThreads)
+                        .boxed())
+                        .subscribe(i -> tasks.add(new GMLLineStringPooledSextanteTask(jaxbContext)), Throwable::printStackTrace);
             }
             case LINEAR_RING_SIMPLE -> {
-                for (int i = 0; i < numThreads; i++)
-                    tasks.add(new GMLLinearRingSextanteTask(jaxbContext));
+                fromStream(iterate(0, n -> n + 1)
+                        .limit(numThreads)
+                        .boxed())
+                        .subscribe(i -> tasks.add(new GMLLinearRingSextanteTask(jaxbContext)), Throwable::printStackTrace);
             }
             case LINEAR_RING_POOLED -> {
-                for (int i = 0; i < numThreads; i++)
-                    tasks.add(new GMLLineStringPooledSextanteTask(jaxbContext));
+                fromStream(iterate(0, n -> n + 1)
+                        .limit(numThreads)
+                        .boxed())
+                        .subscribe(i -> tasks.add(new GMLLinearRingPooledSextanteTask(jaxbContext)), Throwable::printStackTrace);
             }
             case POLYGON_SIMPE -> {
-                for (int i = 0; i < numThreads; i++)
-                    tasks.add(new GMLPolygonSextanteTask(jaxbContext));
+                fromStream(iterate(0, n -> n + 1)
+                        .limit(numThreads)
+                        .boxed())
+                        .subscribe(i -> tasks.add(new GMLPolygonSextanteTask(jaxbContext)), Throwable::printStackTrace);
             }
             case POLYGON_POOLED -> {
-                for (int i = 0; i < numThreads; i++)
-                    tasks.add(new GMLPolygonPooledSextanteTask(jaxbContext));
+                fromStream(iterate(0, n -> n + 1)
+                        .limit(numThreads)
+                        .boxed())
+                        .subscribe(i -> tasks.add(new GMLPolygonPooledSextanteTask(jaxbContext)), Throwable::printStackTrace);
             }
             case MULTI_POINT_SIMPLE -> {
-                for (int i = 0; i < numThreads; i++)
-                    tasks.add(new GMLMultiPointSextanteTask(jaxbContext));
+                fromStream(iterate(0, n -> n + 1)
+                        .limit(numThreads)
+                        .boxed())
+                        .subscribe(i -> tasks.add(new GMLMultiPointSextanteTask(jaxbContext)), Throwable::printStackTrace);
             }
             case MULTI_POINT_POOLED -> {
-                for (int i = 0; i < numThreads; i++)
-                    tasks.add(new GMLMultiPointPooledSextanteTask(jaxbContext));
+                fromStream(iterate(0, n -> n + 1)
+                        .limit(numThreads)
+                        .boxed())
+                        .subscribe(i -> tasks.add(new GMLMultiPointPooledSextanteTask(jaxbContext)), Throwable::printStackTrace);
             }
             case MULTI_LINE_STRING_SIMPLE -> {
-                for (int i = 0; i < numThreads; i++)
-                    tasks.add(new GMLMultiLineStringSextanteTask(jaxbContext));
+                fromStream(iterate(0, n -> n + 1)
+                        .limit(numThreads)
+                        .boxed())
+                        .subscribe(i -> tasks.add(new GMLMultiLineStringSextanteTask(jaxbContext)), Throwable::printStackTrace);
             }
             case MULTI_LINE_STRING_POOLED -> {
-                for (int i = 0; i < numThreads; i++)
-                    tasks.add(new GMLMultiLineStringPooledSextanteTask(jaxbContext));
+                fromStream(iterate(0, n -> n + 1)
+                        .limit(numThreads)
+                        .boxed())
+                        .subscribe(i -> tasks.add(new GMLMultiLineStringPooledSextanteTask(jaxbContext)), Throwable::printStackTrace);
             }
             case MULTI_POLYGON_SIMPLE -> {
-                for (int i = 0; i < numThreads; i++)
-                    tasks.add(new GMLMultiPolygonSextanteTask(jaxbContext));
+                fromStream(iterate(0, n -> n + 1)
+                        .limit(numThreads)
+                        .boxed())
+                        .subscribe(i -> tasks.add(new GMLMultiPolygonSextanteTask(jaxbContext)), Throwable::printStackTrace);
             }
             case MULTI_POLYGON_POOLED -> {
-                for (int i = 0; i < numThreads; i++)
-                    tasks.add(new GMLMultiPolygonPooledSextanteTask(jaxbContext));
+                fromStream(iterate(0, n -> n + 1)
+                        .limit(numThreads)
+                        .boxed())
+                        .subscribe(i -> tasks.add(new GMLMultiPolygonPooledSextanteTask(jaxbContext)), Throwable::printStackTrace);
             }
             case MULTI_CURVE_SIMPLE -> {
-                for (int i = 0; i < numThreads; i++)
-                    tasks.add(new GMLMultiCurveSextanteTask(jaxbContext));
+                fromStream(iterate(0, n -> n + 1)
+                        .limit(numThreads)
+                        .boxed())
+                        .subscribe(i -> tasks.add(new GMLMultiCurveSextanteTask(jaxbContext)), Throwable::printStackTrace);
             }
             case MULTI_CURVE_POOLED -> {
-                for (int i = 0; i < numThreads; i++)
-                    tasks.add(new GMLMultiCurvePooledSextanteTask(jaxbContext));
+                fromStream(iterate(0, n -> n + 1)
+                        .limit(numThreads)
+                        .boxed())
+                        .subscribe(i -> tasks.add(new GMLMultiCurvePooledSextanteTask(jaxbContext)), Throwable::printStackTrace);
             }
             case MULTI_SURFACE_SIMPLE -> {
-                for (int i = 0; i < numThreads; i++)
-                    tasks.add(new GMLMultiSurfaceSextanteTask(jaxbContext));
+                fromStream(iterate(0, n -> n + 1)
+                        .limit(numThreads)
+                        .boxed())
+                        .subscribe(i -> tasks.add(new GMLMultiSurfaceSextanteTask(jaxbContext)), Throwable::printStackTrace);
             }
             case MULTI_SURFACE_POOLED -> {
-                for (int i = 0; i < numThreads; i++)
-                    tasks.add(new GMLMultiSurfacePooledSextanteTask(jaxbContext));
+                fromStream(iterate(0, n -> n + 1)
+                        .limit(numThreads)
+                        .boxed())
+                        .subscribe(i -> tasks.add(new GMLMultiSurfacePooledSextanteTask(jaxbContext)), Throwable::printStackTrace);
             }
             case GEOMETRY_COLLECTION_SIMPLE -> {
-                for (int i = 0; i < numThreads; i++)
-                    tasks.add(new GMLGeometryCollectionSextanteTask(jaxbContext));
+                fromStream(iterate(0, n -> n + 1)
+                        .limit(numThreads)
+                        .boxed())
+                        .subscribe(i -> tasks.add(new GMLGeometryCollectionSextanteTask(jaxbContext)), Throwable::printStackTrace);
             }
             case GEOMETRY_COLLECTION_POOLED -> {
-                for (int i = 0; i < numThreads; i++)
-                    tasks.add(new GMLGeometryCollectionPooledSextanteTask(jaxbContext));
+                fromStream(iterate(0, n -> n + 1)
+                        .limit(numThreads)
+                        .boxed())
+                        .subscribe(i -> tasks.add(new GMLGeometryCollectionPooledSextanteTask(jaxbContext)), Throwable::printStackTrace);
             }
         }
     }

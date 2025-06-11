@@ -41,7 +41,7 @@ import org.geosdi.geoplatform.connector.geoserver.model.layergroups.GPGeoserverL
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables.GPGeoserverLayerGroupPublishables;
 import org.geosdi.geoplatform.connector.geoserver.model.layergroups.publishables.GPGeoserverLayerPublished;
 import org.geosdi.geoplatform.connector.geoserver.request.layergroups.GeoserverLoadLayerGroupsRequest;
-import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV225xTest;
+import org.geosdi.geoplatform.connector.store.GPBaseGeoserverConnectorStoreV226xTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
@@ -55,11 +55,11 @@ import static org.junit.runners.MethodSorters.NAME_ASCENDING;
  * @email vito.salvia@gmail.com
  */
 @FixMethodOrder(NAME_ASCENDING)
-public class GPGeoserverLayerGroupsConnectorStoreV225XTest extends GPBaseGeoserverConnectorStoreV225xTest {
+public class GPGeoserverLayerGroupsConnectorStoreV226XTest extends GPBaseGeoserverConnectorStoreV226xTest {
 
     @Test
     public void a_loadGeoserverLoadLayerGroupsRequestTest() throws Exception {
-        GeoserverLoadLayerGroupsRequest loadLayerGroupRequest = geoserverConnectorStoreV2_25_x.loadLayerGroups();
+        GeoserverLoadLayerGroupsRequest loadLayerGroupRequest = geoserverConnectorStoreV2_26_x.loadLayerGroups();
         logger.info("############################LOAD_LAYER_GROUPS_RESPONSE : {}\n",
                 loadLayerGroupRequest.getResponse());
     }
@@ -67,38 +67,38 @@ public class GPGeoserverLayerGroupsConnectorStoreV225XTest extends GPBaseGeoserv
     @Test
     public void b_loadGeoserverLayerGroupRequestTest() throws Exception {
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@LOAD_LAYER_GROUP_RESPONSE : {}\n",
-                geoserverConnectorStoreV2_25_x.loadLayerGroupRequest().withLayerGroupName("spearfish").getResponse());
+                geoserverConnectorStoreV2_26_x.loadLayerGroupRequest().withLayerGroupName("spearfish").getResponse());
     }
 
     @Test
     public void c_loadGeoserverLayerGroupRequestTest() throws Exception {
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@LOAD_LAYER_GROUP_RESPONSE : {}\n",
-                geoserverConnectorStoreV2_25_x.loadLayerGroupRequest().withLayerGroupName("LAYER_GROUP_TEST")
+                geoserverConnectorStoreV2_26_x.loadLayerGroupRequest().withLayerGroupName("LAYER_GROUP_TEST")
                         .getResponse());
     }
 
     @Test
     public void d_loadWorkspaceGeoserverLayerGroupsRequestTest() throws Exception {
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@LOAD_WORKSPACE_LAYER_GROUP_RESPONSE : {}\n",
-                geoserverConnectorStoreV2_25_x.loadWorkspaceLayerGroupsRequest().withWorkspace("sf").getResponse());
+                geoserverConnectorStoreV2_26_x.loadWorkspaceLayerGroupsRequest().withWorkspace("sf").getResponse());
     }
 
     @Test
     public void e_createGeoserverLayerGroupRequestTest() throws Exception {
-        logger.info("###################{}\n", geoserverConnectorStoreV2_25_x.createLayerGroupRequest()
+        logger.info("###################{}\n", geoserverConnectorStoreV2_26_x.createLayerGroupRequest()
                 .withBody(this.toBody("LAYER_GROUP_TEST_NAME", "LAYER_GROUP_TEST_TITLE")).getResponse());
     }
 
     @Test
     public void d_deleteGeoserverLayerGroupRequestTest() throws Exception {
-        logger.info("@@@@@@@@@@@@@@@@@@@DELETE_LAYER_GROUP_RESPONSE : {}\n", geoserverConnectorStoreV2_25_x.deleteLayerGroupRequest()
+        logger.info("@@@@@@@@@@@@@@@@@@@DELETE_LAYER_GROUP_RESPONSE : {}\n", geoserverConnectorStoreV2_26_x.deleteLayerGroupRequest()
                 .withName("LAYER_GROUP_TEST_NAME")
                 .getResponse());
     }
 
     @Test
     public void e_createGeoserverWorkspaeLayerGroupRequestTest() throws Exception {
-        logger.info("###################{}\n", geoserverConnectorStoreV2_25_x.createWorkspaceLayerGroupRequest()
+        logger.info("###################{}\n", geoserverConnectorStoreV2_26_x.createWorkspaceLayerGroupRequest()
                 .withWorkspace("tiger")
                 .withBody(this.toBody("LAYER_GROUP_TEST_WORKSPACE_NAME", "LAYER_GROUP_TEST_WORKSPACE_TITLE"))
                 .getResponse());
@@ -106,14 +106,14 @@ public class GPGeoserverLayerGroupsConnectorStoreV225XTest extends GPBaseGeoserv
 
     @Test
     public void f_loadGeoserverWorkspaceLayerGroupRequestTest() throws Exception {
-        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@LOAD_WORKSPACE_LAYER_GROUP_RESPONSE : {}\n", geoserverConnectorStoreV2_25_x.loadWorkspaceLayerGroupsRequest()
+        logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@LOAD_WORKSPACE_LAYER_GROUP_RESPONSE : {}\n", geoserverConnectorStoreV2_26_x.loadWorkspaceLayerGroupsRequest()
                 .withWorkspace("tiger")
                 .getResponse());
     }
 
     @Test
     public void g_deleteGeoserverWorkspaceLayerGroupRequestTest() throws Exception {
-        logger.info("@@@@@@@@@@@@@@@@@@@DELETE_LAYER_GROUP_RESPONSE : {}\n", geoserverConnectorStoreV2_25_x.deleteWorkspaceLayerGroupRequest()
+        logger.info("@@@@@@@@@@@@@@@@@@@DELETE_LAYER_GROUP_RESPONSE : {}\n", geoserverConnectorStoreV2_26_x.deleteWorkspaceLayerGroupRequest()
                 .withWorkspace("tiger")
                 .withName("LAYER_GROUP_TEST_WORKSPACE_NAME")
                 .getResponse());

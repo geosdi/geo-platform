@@ -129,8 +129,8 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
     @Override
     public GeoserverAboutVersionRequest createAboutVersionRequest() {
         switch (version) {
-            case V25x:
             case V26x:
+            case V27x:
                 return new GPGeoserverAboutVersionRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -143,8 +143,8 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
     @Override
     public GeoserverAboutStatusRequest createAboutStatusRequest() {
         switch (version) {
-            case V25x:
             case V26x:
+            case V27x:
                 return new GPGeoserverAboutStatusRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -157,8 +157,8 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
     @Override
     public GPGeoserverAboutManifestRequest createAboutManifestRequest() {
         switch (version) {
-            case V25x:
             case V26x:
+            case V27x:
                 return new GPGeoserverAboutManifestRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -171,8 +171,8 @@ public abstract class GPGeoserverAboutConnector extends GPAbstractServerConnecto
     @Override
     public GeoserverAboutSystemStatusRequest createAboutSystemStatusRequest() {
         switch (version) {
-            case V25x:
             case V26x:
+            case V27x:
                 return new GPGeoserverAboutSystemStatusRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

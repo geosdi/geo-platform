@@ -116,8 +116,8 @@ public class GPGeoserverConnector extends GPGeoserverLoggingConnector implements
     @Override
     public GeoserverRestRunningRequest createGeoserverRestRunningRequest() {
         switch (version) {
-            case V25x:
             case V26x:
+            case V27x:
                 return new GPGeoserverRestRunningRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -130,8 +130,8 @@ public class GPGeoserverConnector extends GPGeoserverLoggingConnector implements
     @Override
     public GeoserverReloadCatalogRequest reloadGeoserverCatalogRequest() {
         switch (version) {
-            case V25x:
             case V26x:
+            case V27x:
                 return new GPGeoserverReloadCatalogRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -144,8 +144,8 @@ public class GPGeoserverConnector extends GPGeoserverLoggingConnector implements
     @Override
     public GeoserverResetRequest resetGeoserverRequest() {
         switch (version) {
-            case V25x:
             case V26x:
+            case V27x:
                 return new GPGeoserverResetRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());
@@ -158,8 +158,8 @@ public class GPGeoserverConnector extends GPGeoserverLoggingConnector implements
     @Override
     public GeoserverRestRunningRequest createImportsGeoserverRunningRequest() {
         switch (version) {
-            case V25x:
             case V26x:
+            case V27x:
                 return new GPGeoserverImporterRunningRequest(this, this.jacksonSupport);
             default:
                 throw new GeoserverVersionException(toVersionExceptionMessage());

@@ -39,6 +39,7 @@
  */
 package org.geosdi.geoplatform.persistence.demo.model;
 
+import io.hypersistence.utils.hibernate.id.Tsid;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -68,9 +69,9 @@ public class CarPart implements Serializable {
     private static final long serialVersionUID = 2061845368648914687L;
     //
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "car_part_generator")
-    @SequenceGenerator(name = "car_part_generator", sequenceName = "CAR_PART_SEQ", allocationSize = 3)
-//    @Tsid
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "car_part_generator")
+//    @SequenceGenerator(name = "car_part_generator", sequenceName = "CAR_PART_SEQ", allocationSize = 3)
+    @Tsid
     private Long id;
     //
     @ManyToOne(optional = false)

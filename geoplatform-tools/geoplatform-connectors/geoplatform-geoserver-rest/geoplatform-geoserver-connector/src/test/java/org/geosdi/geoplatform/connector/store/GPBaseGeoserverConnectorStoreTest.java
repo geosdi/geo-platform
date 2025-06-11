@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 
-import static org.geosdi.geoplatform.connector.GeoserverVersion.V26x;
+import static org.geosdi.geoplatform.connector.GeoserverVersion.V27x;
 import static org.geosdi.geoplatform.connector.server.config.GPPooledConnectorConfigBuilder.PooledConnectorConfigBuilder.pooledConnectorConfigBuilder;
 import static org.geosdi.geoplatform.connector.store.GPGeoserverConnectorStoreBuilder.geoserverConnectorBuilder;
 
@@ -55,24 +55,24 @@ public abstract class GPBaseGeoserverConnectorStoreTest {
 
     protected static final Logger logger = LoggerFactory.getLogger(GPBaseGeoserverConnectorStoreTest.class);
     //
-    private static final String geoserverURLV2_26_x = "http://150.145.141.92/geoserver/rest";
-    protected static GPGeoserverConnectorStore geoserverConnectorStoreV2_26_x;
+    private static final String geoserverURLV2_27_x = "http://150.145.141.92/geoserver/rest";
+    protected static GPGeoserverConnectorStore geoserverConnectorStoreV2_27_x;
 
     /**
      * @throws Exception
      */
     @BeforeClass
     public static void beforeClass() throws Exception {
-        geoserverConnectorStoreV2_26_x = geoserverConnectorBuilder()
-                .withServerUrl(new URI(geoserverURLV2_26_x).toURL())
-                .withVersion(V26x.getVersion())
+        geoserverConnectorStoreV2_27_x = geoserverConnectorBuilder()
+                .withServerUrl(new URI(geoserverURLV2_27_x).toURL())
+                .withVersion(V27x.getVersion())
                 .withPooledConnectorConfig(pooledConnectorConfigBuilder()
                         .withMaxTotalConnections(150)
                         .withDefaultMaxPerRoute(80)
                         .withMaxRedirect(20)
                         .build())
                 .withClientSecurity(new DigestPreemptiveSecurityConnector("admin", "geoserver"))
-                .withVersion(V26x.getVersion())
+                .withVersion(V27x.getVersion())
                 .build();
     }
 
@@ -81,6 +81,6 @@ public abstract class GPBaseGeoserverConnectorStoreTest {
      */
     @AfterClass
     public static void afterClass() throws Exception {
-        geoserverConnectorStoreV2_26_x.dispose();
+        geoserverConnectorStoreV2_27_x.dispose();
     }
 }

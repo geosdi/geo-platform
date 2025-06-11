@@ -41,11 +41,13 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static java.lang.Thread.currentThread;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GeoserverLayerTask extends Thread {
+public class GeoserverLayerTask implements Runnable {
 
     private static final Logger logger = LoggerFactory.getLogger(GeoserverLayerTask.class);
     //
@@ -66,16 +68,7 @@ public class GeoserverLayerTask extends Thread {
     }
 
     /**
-     * If this thread was constructed using a separate
-     * <code>Runnable</code> run object, then that
-     * <code>Runnable</code> object's <code>run</code> method is called;
-     * otherwise, this method does nothing and returns.
-     * <p>
-     * Subclasses of <code>Thread</code> should override this method.
-     *
-     * @see #start()
-     * @see #stop()
-     * @see Thread#Thread(ThreadGroup, Runnable, String)
+     * Runs this operation.
      */
     @Override
     public void run() {

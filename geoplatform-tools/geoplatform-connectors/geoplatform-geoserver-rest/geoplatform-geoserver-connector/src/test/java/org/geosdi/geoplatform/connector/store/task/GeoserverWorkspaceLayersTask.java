@@ -42,13 +42,14 @@ import org.slf4j.LoggerFactory;
 import javax.annotation.Nonnull;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static java.lang.Thread.currentThread;
 import static javax.annotation.meta.When.NEVER;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
  */
-public class GeoserverWorkspaceLayersTask extends Thread {
+public class GeoserverWorkspaceLayersTask implements Runnable {
 
     private static final Logger logger = LoggerFactory.getLogger(GeoserverWorkspaceLayersTask.class);
     //
@@ -72,16 +73,7 @@ public class GeoserverWorkspaceLayersTask extends Thread {
     }
 
     /**
-     * If this thread was constructed using a separate
-     * <code>Runnable</code> run object, then that
-     * <code>Runnable</code> object's <code>run</code> method is called;
-     * otherwise, this method does nothing and returns.
-     * <p>
-     * Subclasses of <code>Thread</code> should override this method.
-     *
-     * @see #start()
-     * @see #stop()
-     * @see Thread#Thread(ThreadGroup, Runnable, String)
+     * Runs this operation.
      */
     @Override
     public void run() {

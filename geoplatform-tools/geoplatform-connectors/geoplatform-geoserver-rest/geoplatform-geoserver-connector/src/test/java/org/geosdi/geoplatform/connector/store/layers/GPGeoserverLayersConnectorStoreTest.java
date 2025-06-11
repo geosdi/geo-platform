@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.connector.store.layers;
 
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverWorkspaces;
-import org.geosdi.geoplatform.connector.geoserver.model.workspace.IGPGeoserverWorkspace;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadWorkspaceLayerRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.layers.GeoserverLoadWorkspaceLayersRequest;
 import org.geosdi.geoplatform.connector.geoserver.request.workspaces.GeoserverLoadWorkspacesRequest;
@@ -45,6 +44,10 @@ import org.geosdi.geoplatform.connector.store.task.GeoserverWorkspaceLayersTask;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 
+import java.util.Objects;
+
+import static io.reactivex.rxjava3.core.Flowable.fromIterable;
+import static java.lang.Thread.ofVirtual;
 import static java.lang.Thread.sleep;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
@@ -116,9 +119,9 @@ public class GPGeoserverLayersConnectorStoreTest extends GPBaseGeoserverConnecto
         GeoserverLoadWorkspacesRequest workspacesRequest = geoserverConnectorStoreV2_27_x.loadWorkspacesRequest();
         GPGeoserverWorkspaces geoserverWorkspaces = workspacesRequest.getResponse();
         GeoserverLoadWorkspaceLayersRequest loadWorkspaceLayersRequest = geoserverConnectorStoreV2_27_x.loadWorkspaceLayersRequest();
-        for (IGPGeoserverWorkspace geoserverWorkspace : geoserverWorkspaces.getWorkspaces()) {
-            new GeoserverWorkspaceLayersTask(loadWorkspaceLayersRequest, geoserverWorkspace.getWorkspaceName()).start();
-        }
+        fromIterable(geoserverWorkspaces.getWorkspaces())
+                .filter(Objects::nonNull)
+                .subscribe(v -> ofVirtual().start(new GeoserverWorkspaceLayersTask(loadWorkspaceLayersRequest, v.getWorkspaceName())), Throwable::printStackTrace);
         sleep(1000);
     }
 }

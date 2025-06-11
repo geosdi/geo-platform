@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.connector.store;
 
 import org.geosdi.geoplatform.connector.geoserver.model.namespace.GPGeoserverNamespaces;
-import org.geosdi.geoplatform.connector.geoserver.model.namespace.IGPGeoserverNamespace;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GPGeoserverLoadWorkspace;
 import org.geosdi.geoplatform.connector.geoserver.model.workspace.GeoserverCreateWorkspaceBody;
 import org.geosdi.geoplatform.connector.geoserver.request.about.status.GeoserverAboutStatusRequest;
@@ -56,7 +55,12 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static io.reactivex.rxjava3.core.Flowable.fromIterable;
 import static java.lang.Boolean.TRUE;
+import static java.lang.Thread.ofVirtual;
 import static java.lang.Thread.sleep;
 
 /**
@@ -102,9 +106,9 @@ public class GPGeoserverConnectorStoreV226XTest extends GPBaseGeoserverConnector
         GeoserverNamespaceRequest namespaceRequest = geoserverConnectorStoreV2_26_x.createNamespaceRequest();
         GPGeoserverNamespaces namespaces = namespacesRequest.getResponse();
         logger.info("#######################FOUND : {} namespaces.", namespaces.getNamespaces().size());
-        for (IGPGeoserverNamespace namespace : namespaces.getNamespaces()) {
-            new GeoserverNamespaceTask(namespaceRequest, namespace.getName()).start();
-        }
+        fromIterable(namespaces.getNamespaces())
+                .filter(Objects::nonNull)
+                .subscribe(v -> ofVirtual().start(new GeoserverNamespaceTask(namespaceRequest, v.getName())), Throwable::printStackTrace);
         sleep(1000);
     }
 
@@ -131,9 +135,9 @@ public class GPGeoserverConnectorStoreV226XTest extends GPBaseGeoserverConnector
     public void l_styleGeoserverConnectorMultiThreadTest() throws Exception {
         GeoserverStylesRequest stylesRequest = geoserverConnectorStoreV2_26_x.loadStylesRequest();
         GeoserverStyleRequest styleRequest = geoserverConnectorStoreV2_26_x.loadStyleRequest();
-        stylesRequest.getResponse().getStyles()
-                .stream()
-                .forEach(value -> new GeoserverStyleTask(styleRequest, value.getName()).start());
+        fromIterable(stylesRequest.getResponse().getStyles())
+                .filter(Objects::nonNull)
+                .subscribe(value -> ofVirtual().start(new GeoserverStyleTask(styleRequest, value.getName())), Throwable::printStackTrace);
         sleep(1000);
     }
 
@@ -155,9 +159,10 @@ public class GPGeoserverConnectorStoreV226XTest extends GPBaseGeoserverConnector
     public void o_layerGeoserverConnectorMultiThreadTest() throws Exception {
         GeoserverLayersRequest layersRequest = geoserverConnectorStoreV2_26_x.loadLayersRequest();
         GeoserverLoadLayerRequest layerRequest = geoserverConnectorStoreV2_26_x.loadLayerRequest();
-        layersRequest.getResponse().getLayers()
-                .stream()
-                .forEach(value -> new GeoserverLayerTask(layerRequest, value.getLayerName()).start());
+        AtomicInteger counter = new AtomicInteger(0);
+        fromIterable(layersRequest.getResponse().getLayers())
+                .filter(Objects::nonNull)
+                .subscribe(value -> ofVirtual().name("GP_GEOSERVER_CONNECTOR_V226X_" + counter.getAndIncrement()).start(new GeoserverLayerTask(layerRequest, value.getLayerName())), Throwable::printStackTrace);
         sleep(1000);
     }
 

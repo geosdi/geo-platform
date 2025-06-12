@@ -66,8 +66,8 @@ public class WMSGetFeatureInfoMultiThreadAaltoGml3ReaderTest extends GPWMSGetFea
         CountDownLatch doneSignal = new CountDownLatch(files.size());
         AtomicInteger counter = new AtomicInteger(0);
         fromIterable(files)
-                .map(f -> new Thread(new WMSGetFeatureInfoAaltoGml3ReaderTask(f, startSignal, doneSignal, counter)))
-                .subscribe(Thread::start);
+                .map(f -> new WMSGetFeatureInfoAaltoGml3ReaderTask(f, startSignal, doneSignal, counter))
+                .subscribe(Thread::startVirtualThread);
         startSignal.countDown();
         doneSignal.await();
         assertTrue(counter.get() == files.size());

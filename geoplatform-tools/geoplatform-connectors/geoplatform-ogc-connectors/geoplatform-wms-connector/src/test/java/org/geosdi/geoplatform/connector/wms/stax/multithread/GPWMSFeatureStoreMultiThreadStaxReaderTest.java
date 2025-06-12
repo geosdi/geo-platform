@@ -66,8 +66,8 @@ public class GPWMSFeatureStoreMultiThreadStaxReaderTest extends GPWMSGetFeatureM
         CountDownLatch doneSignal = new CountDownLatch(files.size());
         AtomicInteger counter = new AtomicInteger(0);
         fromIterable(files)
-                .map(f -> new Thread(new WMSFeatureStoreStaxReaderTask(f, startSignal, doneSignal, counter)))
-                .subscribe(Thread::start, Throwable::printStackTrace);
+                .map(f -> new WMSFeatureStoreStaxReaderTask(f, startSignal, doneSignal, counter))
+                .subscribe(Thread::startVirtualThread, Throwable::printStackTrace);
         startSignal.countDown();
         doneSignal.await();
         assertTrue(counter.get() == files.size());

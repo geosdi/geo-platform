@@ -66,8 +66,8 @@ public class WMSGetFeatureInfoMultiThreadWoodstoxGml3ReaderTest extends GPWMSGet
         CountDownLatch doneSignal = new CountDownLatch(files.size());
         AtomicInteger counter = new AtomicInteger(0);
         fromIterable(files)
-                .map(f -> new Thread(new WMSGetFeatureInfoWoodstoxGml3ReaderTask(f, startSignal, doneSignal, counter)))
-                .subscribe(Thread::start);
+                .map(f -> new WMSGetFeatureInfoWoodstoxGml3ReaderTask(f, startSignal, doneSignal, counter))
+                .subscribe(Thread::startVirtualThread);
         startSignal.countDown();
         doneSignal.await();
         assertTrue(counter.get() == files.size());

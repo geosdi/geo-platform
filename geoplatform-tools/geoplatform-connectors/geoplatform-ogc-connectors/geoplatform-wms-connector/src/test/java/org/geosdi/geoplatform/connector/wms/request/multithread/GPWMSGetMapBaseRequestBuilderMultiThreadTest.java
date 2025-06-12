@@ -87,8 +87,8 @@ public class GPWMSGetMapBaseRequestBuilderMultiThreadTest {
         CountDownLatch doneSignal = new CountDownLatch(urls.size());
         AtomicInteger counter = new AtomicInteger(0);
         fromIterable(urls)
-                .map(url -> new Thread(new GPWMSGetMapBaseRequestBuilderTask(url, startSignal, doneSignal, counter)))
-                .subscribe(Thread::start, Throwable::printStackTrace);
+                .map(url -> new GPWMSGetMapBaseRequestBuilderTask(url, startSignal, doneSignal, counter))
+                .subscribe(Thread::startVirtualThread, Throwable::printStackTrace);
         startSignal.countDown();
         doneSignal.await();
         assertTrue(counter.get() == urls.size());

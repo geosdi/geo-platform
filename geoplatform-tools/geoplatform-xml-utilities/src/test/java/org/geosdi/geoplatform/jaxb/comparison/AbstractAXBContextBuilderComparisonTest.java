@@ -43,9 +43,10 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.concurrent.*;
-import java.util.stream.IntStream;
 
+import static java.util.concurrent.Executors.newFixedThreadPool;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.IntStream.iterate;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -59,29 +60,31 @@ public class AbstractAXBContextBuilderComparisonTest {
         return 150;
     }
 
+    /**
+     * @param taskType
+     * @return {@link Long}
+     * @throws Exception
+     */
     long executeMultiThreadsTasks(GPJAXBContextBuilderTaskType taskType) throws Exception {
-        long time = 0;
-        int numThreads = defineNumThreads();
-        ExecutorService executor = Executors.newFixedThreadPool(12, new GPJAXBContextBuilderComparisonThreadFactory());
-
-        List<Callable<Long>> tasks = IntStream.iterate(0, n -> n + 1)
-                .limit(numThreads)
-                .boxed()
-                .map(new GPJAXBContextBuilderTaskFunction(taskType))
-                .collect(toList());
-
-        List<Future<Long>> results = executor.invokeAll(tasks);
-        executor.shutdown();
-        boolean flag = executor.awaitTermination(1, TimeUnit.MINUTES);
-
-        if (flag) {
-            for (Future<Long> future : results) {
-                time += future.get();
+        try (ExecutorService executor = newFixedThreadPool(12, new GPJAXBContextBuilderComparisonThreadFactory())) {
+            long time = 0;
+            int numThreads = defineNumThreads();
+            List<Callable<Long>> tasks = iterate(0, n -> n + 1)
+                    .limit(numThreads)
+                    .boxed()
+                    .map(new GPJAXBContextBuilderTaskFunction(taskType))
+                    .collect(toList());
+            List<Future<Long>> results = executor.invokeAll(tasks);
+            executor.shutdown();
+            boolean flag = executor.awaitTermination(1, TimeUnit.MINUTES);
+            if (flag) {
+                for (Future<Long> future : results) {
+                    time += future.get();
+                }
+            } else {
+                throw new InterruptedException("Some Threads are not executed.");
             }
-        } else {
-            throw new InterruptedException("Some Threads are not executed.");
+            return time;
         }
-
-        return time;
     }
 }

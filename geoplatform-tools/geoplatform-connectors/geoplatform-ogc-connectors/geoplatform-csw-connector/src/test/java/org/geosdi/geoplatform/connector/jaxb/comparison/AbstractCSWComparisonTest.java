@@ -49,12 +49,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 import static java.io.File.separator;
-import static java.lang.Boolean.TRUE;
-import static java.util.concurrent.Executors.newFixedThreadPool;
-import static java.util.stream.Stream.of;
+import static java.lang.String.join;
+import static java.lang.Thread.ofVirtual;
+import static java.util.concurrent.Executors.newThreadPerTaskExecutor;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -68,9 +67,8 @@ public abstract class AbstractCSWComparisonTest {
 
         @Override
         public Thread newThread(Runnable r) {
-            Thread thread = Executors.defaultThreadFactory().newThread(r);
+            Thread thread = ofVirtual().factory().newThread(r);
             thread.setName("CSWComparisonThread - " + threadID.getAndIncrement());
-            thread.setDaemon(TRUE);
             return thread;
         }
     };
@@ -81,8 +79,8 @@ public abstract class AbstractCSWComparisonTest {
 
     @BeforeClass
     public static void loadFile() throws Exception {
-        file = new File(of(new File(".").getCanonicalPath(), "src", "test", "resources", "getRecordsCount.xml")
-                .collect(Collectors.joining(separator)));
+        file = new File(join(separator, new File(".").getCanonicalPath(), "src", "test", "resources",
+                "getRecordsCount.xml"));
     }
 
     protected int defineNumThreads() {
@@ -92,8 +90,7 @@ public abstract class AbstractCSWComparisonTest {
     protected long executeMultiThreadsTasks(GPBaseJAXBContext jaxbContext) throws Exception {
         long time = 0;
         int numThreads = defineNumThreads();
-        try(ExecutorService executor = newFixedThreadPool(numThreads, CSWComparisonThreadFactory)) {
-
+        try (ExecutorService executor = newThreadPerTaskExecutor(CSWComparisonThreadFactory)) {
             List<Callable<Long>> tasks = new ArrayList<>(numThreads);
             for (int i = 0; i < numThreads; i++) {
                 if (jaxbContext instanceof CSWJAXBContextPool) {

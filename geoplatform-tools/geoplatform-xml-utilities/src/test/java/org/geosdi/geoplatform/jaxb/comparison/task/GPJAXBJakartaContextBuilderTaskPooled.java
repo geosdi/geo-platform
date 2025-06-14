@@ -36,7 +36,6 @@
 package org.geosdi.geoplatform.jaxb.comparison.task;
 
 import org.geosdi.geoplatform.jaxb.jakarta.IGPJAXBJakartaContextBuilder;
-import org.geosdi.geoplatform.jaxb.jakarta.pool.GPJAXBJakartaContextBuilderPool;
 import org.geosdi.geoplatform.jaxb.model.AttributeStore;
 import org.geosdi.geoplatform.jaxb.model.Car;
 import org.slf4j.Logger;
@@ -47,9 +46,10 @@ import java.io.StringWriter;
 import java.util.concurrent.Callable;
 
 import static java.io.File.separator;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Stream.of;
+import static java.lang.String.join;
+import static java.lang.System.currentTimeMillis;
 import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilderTest.createAttributes;
+import static org.geosdi.geoplatform.jaxb.jakarta.pool.GPJAXBJakartaContextBuilderPool.jaxbJakartaContextBuilderPool;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -59,8 +59,8 @@ public class GPJAXBJakartaContextBuilderTaskPooled implements Callable<Long> {
 
     private static final Logger logger = LoggerFactory.getLogger(GPJAXBJakartaContextBuilderTaskPooled.class);
     //
-    private final static IGPJAXBJakartaContextBuilder GP_JAXB_JAKARTA_CONTEXT_BUILDER_POOL = GPJAXBJakartaContextBuilderPool.jaxbJakartaContextBuilderPool();
-    private static final String pathFile = of(".", "src", "test", "resources", "Car.xml").collect(joining(separator));
+    private final static IGPJAXBJakartaContextBuilder GP_JAXB_JAKARTA_CONTEXT_BUILDER_POOL = jaxbJakartaContextBuilderPool();
+    private static final String pathFile = join(separator, ".", "src", "test", "resources", "Car.xml");
 
     /**
      * Computes a result, or throws an exception if unable to do so.
@@ -70,7 +70,7 @@ public class GPJAXBJakartaContextBuilderTaskPooled implements Callable<Long> {
      */
     @Override
     public Long call() throws Exception {
-        long start = System.currentTimeMillis();
+        long start = currentTimeMillis();
         logger.debug("###########################UNMARSHALL_CAR_FROM_FILE_POOLED : {}\n", GP_JAXB_JAKARTA_CONTEXT_BUILDER_POOL
                 .unmarshal(new File(pathFile), Car.class));
         AttributeStore attributeStore = new AttributeStore();
@@ -78,6 +78,6 @@ public class GPJAXBJakartaContextBuilderTaskPooled implements Callable<Long> {
         StringWriter writer = new StringWriter();
         GP_JAXB_JAKARTA_CONTEXT_BUILDER_POOL.marshal(attributeStore, writer);
         logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@MARSHALL_ATTRIBUTE_STORE_AS_STRING_POOLED : \n{}\n", writer);
-        return System.currentTimeMillis() - start;
+        return currentTimeMillis() - start;
     }
 }

@@ -41,6 +41,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
+import static java.util.concurrent.Executors.newFixedThreadPool;
+
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
  * @email giuseppe.lascaleia@geosdi.org
@@ -63,20 +65,21 @@ public class AbstractWFSComparisonTest extends WFSBaseComparisonTest {
     long executeMultiThreadsTasks(GPBaseJAXBContext jaxbContext, WFSTaskType wfsTaskType) throws Exception {
         long time = 0;
         int numThreads = defineNumThreads();
-        ExecutorService executor = Executors.newFixedThreadPool(numThreads, WFSComparisonThreadFactory);
-        List<Callable<Long>> tasks = new ArrayList<Callable<Long>>(numThreads);
-        fillTasksList(jaxbContext, tasks, wfsTaskType, numThreads);
-        List<Future<Long>> results = executor.invokeAll(tasks);
-        executor.shutdown();
-        boolean flag = executor.awaitTermination(1, TimeUnit.MINUTES);
-        if (flag) {
-            for (Future<Long> future : results) {
-                time += future.get();
+        try (ExecutorService executor = newFixedThreadPool(numThreads, WFSComparisonThreadFactory)) {
+            List<Callable<Long>> tasks = new ArrayList<Callable<Long>>(numThreads);
+            fillTasksList(jaxbContext, tasks, wfsTaskType, numThreads);
+            List<Future<Long>> results = executor.invokeAll(tasks);
+            executor.shutdown();
+            boolean flag = executor.awaitTermination(1, TimeUnit.MINUTES);
+            if (flag) {
+                for (Future<Long> future : results) {
+                    time += future.get();
+                }
+            } else {
+                throw new InterruptedException("Some Threads are not executed.");
             }
-        } else {
-            throw new InterruptedException("Some Threads are not executed.");
+            return time;
         }
-        return time;
     }
 
     /**

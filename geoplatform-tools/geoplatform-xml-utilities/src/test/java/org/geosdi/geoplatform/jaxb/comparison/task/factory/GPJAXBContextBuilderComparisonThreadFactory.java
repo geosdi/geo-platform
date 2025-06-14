@@ -38,7 +38,6 @@ package org.geosdi.geoplatform.jaxb.comparison.task.factory;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static java.lang.Boolean.TRUE;
 import static java.lang.Thread.ofVirtual;
 
 /**
@@ -61,7 +60,6 @@ public class GPJAXBContextBuilderComparisonThreadFactory implements ThreadFactor
     public Thread newThread(Runnable r) {
         Thread thread = ofVirtual().factory().newThread(r);
         thread.setName("GPJAXBContextBuilderComparisonThread - " + threadID.getAndIncrement());
-        thread.setDaemon(TRUE);
         return thread;
     }
 }

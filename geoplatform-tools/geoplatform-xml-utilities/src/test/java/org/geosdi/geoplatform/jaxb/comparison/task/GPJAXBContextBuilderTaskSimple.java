@@ -35,7 +35,6 @@
  */
 package org.geosdi.geoplatform.jaxb.comparison.task;
 
-import org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder;
 import org.geosdi.geoplatform.jaxb.IGPJAXBContextBuilder;
 import org.geosdi.geoplatform.jaxb.model.AttributeStore;
 import org.geosdi.geoplatform.jaxb.model.Car;
@@ -47,8 +46,9 @@ import java.io.StringWriter;
 import java.util.concurrent.Callable;
 
 import static java.io.File.separator;
-import static java.util.stream.Collectors.joining;
-import static java.util.stream.Stream.of;
+import static java.lang.String.join;
+import static java.lang.System.currentTimeMillis;
+import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilder.newInstance;
 import static org.geosdi.geoplatform.jaxb.GPJAXBContextBuilderTest.createAttributes;
 
 /**
@@ -59,8 +59,8 @@ public class GPJAXBContextBuilderTaskSimple implements Callable<Long> {
 
     private static final Logger logger = LoggerFactory.getLogger(GPJAXBContextBuilderTaskSimple.class);
     //
-    private static final IGPJAXBContextBuilder GP_JAXB_CONTEXT_BUILDER = GPJAXBContextBuilder.newInstance();
-    private static final String pathFile = of(".", "src", "test", "resources", "Car.xml").collect(joining(separator));
+    private static final IGPJAXBContextBuilder GP_JAXB_CONTEXT_BUILDER = newInstance();
+    private static final String pathFile = join(separator, ".", "src", "test", "resources", "Car.xml");
 
     /**
      * Computes a result, or throws an exception if unable to do so.
@@ -70,7 +70,7 @@ public class GPJAXBContextBuilderTaskSimple implements Callable<Long> {
      */
     @Override
     public Long call() throws Exception {
-        long start = System.currentTimeMillis();
+        long start = currentTimeMillis();
         logger.debug("###########################UNMARSHALL_CAR_FROM_FILE_SIMPLE : {}\n", GP_JAXB_CONTEXT_BUILDER
                 .unmarshal(new File(pathFile), Car.class));
         AttributeStore attributeStore = new AttributeStore();
@@ -78,6 +78,6 @@ public class GPJAXBContextBuilderTaskSimple implements Callable<Long> {
         StringWriter writer = new StringWriter();
         GP_JAXB_CONTEXT_BUILDER.marshal(attributeStore, writer);
         logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@MARSHALL_ATTRIBUTE_STORE_AS_STRING_SIMPLE : \n{}\n", writer);
-        return System.currentTimeMillis() - start;
+        return currentTimeMillis() - start;
     }
 }

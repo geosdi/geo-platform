@@ -53,6 +53,7 @@ import static io.reactivex.rxjava3.core.Flowable.fromStream;
 import static java.io.File.separator;
 import static java.lang.System.currentTimeMillis;
 import static java.lang.Thread.ofVirtual;
+import static java.util.concurrent.Executors.newFixedThreadPool;
 import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.IntStream.iterate;
@@ -146,7 +147,7 @@ public abstract class AbstractGMLComparisonTest {
     protected long executeMultiThreadsTasks(GMLJAXBContext jaxbContext, GMLTaskType gmlTaskType) throws Exception {
         long time = 0;
         int numThreads = defineNumThreads();
-        try (ExecutorService executor = Executors.newFixedThreadPool(numThreads, GMLComparisonThreadFactory)) {
+        try (ExecutorService executor = newFixedThreadPool(numThreads, GMLComparisonThreadFactory)) {
             List<GMLPointSextanteTask> tasks = new ArrayList<>(numThreads);
             fillTasksList(jaxbContext, tasks, gmlTaskType, numThreads);
             List<Future<Long>> results = executor.invokeAll(tasks);

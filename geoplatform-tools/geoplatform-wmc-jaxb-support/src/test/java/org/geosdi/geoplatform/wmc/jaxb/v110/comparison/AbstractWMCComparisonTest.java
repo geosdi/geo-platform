@@ -53,8 +53,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.io.File.separator;
-import static java.lang.Boolean.TRUE;
-import static java.util.concurrent.Executors.defaultThreadFactory;
+import static java.lang.Thread.ofVirtual;
 import static java.util.concurrent.Executors.newFixedThreadPool;
 
 /**
@@ -69,9 +68,8 @@ public abstract class AbstractWMCComparisonTest {
 
         @Override
         public Thread newThread(Runnable r) {
-            Thread thread = defaultThreadFactory().newThread(r);
+            Thread thread = ofVirtual().factory().newThread(r);
             thread.setName("WMCComparisonThread - " + threadID.getAndIncrement());
-            thread.setDaemon(TRUE);
             return thread;
         }
     };
@@ -87,7 +85,7 @@ public abstract class AbstractWMCComparisonTest {
     }
 
     protected int defineNumThreads() {
-        return 150;
+        return 300;
     }
 
     /**

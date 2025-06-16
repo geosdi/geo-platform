@@ -17,8 +17,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mongodb.version>5.5.0</mongodb.version>
-        <spring-data-mongodb-version>4.5.0</spring-data-mongodb-version>
+        <mongodb.version>5.5.1</mongodb.version>
+        <spring-data-mongodb-version>4.5.1</spring-data-mongodb-version>
     </properties>
 
     <dependencyManagement>
@@ -153,20 +153,6 @@
                 <inherited>true</inherited>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <configuration>
-
-                    <classifier>sources</classifier>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-<phase>verify</phase>
-<goals>
-    <goal>jar-no-fork</goal>
-</goals>
-
-                    </execution>
-                </executions>
             </plugin>
 
             <plugin>

@@ -266,4 +266,14 @@ public class GPWMSGetMapBaseRequestBuilderTest {
                         "&height=768&srs=EPSG%3A3003&format=application/openlayers&p=fake")
                 .build());
     }
+
+    @Test
+    public void b_c_wmsGetMapBaseRequestBuilderTest() throws Exception {
+        logger.info("#####################GP_WMS_GET_MAP_BASE_REQUEST : {}\n", builder
+                .withKeyValuePair("https://webgis.regione.sardegna.it/geoserver/ras/wms?service=WMS" +
+                        "&version=1.1.0&request=GetMap&layers=ras%3AIDT_FV04G_QUADRO_UNIONE" +
+                        "&bbox=1426638.0%2C4301311.0%2C1570229.0%2C4573602.5&width=404&height=768" +
+                        "&srs=EPSG%3A3003&format=application/openlayers")
+                .build());
+    }
 }

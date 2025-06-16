@@ -53,7 +53,7 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.Stream.of;
 import static javax.annotation.meta.When.NEVER;
 import static org.geosdi.geoplatform.connector.server.request.GPWMSGetMapBaseRequestBuilder.builder;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -81,7 +81,11 @@ public class GPWMSGetMapBaseRequestBuilderMultiThreadTest {
                         "&width=768&height=751&srs=EPSG:3045&format=application/openlayers",
                 "https://wms.cfr.toscana.it/geoserver/tmp/wms?service=WMS&version=1.1.0&request=GetMap&layers=tmp%3Asitc_asl" +
                         "&bbox=1554750.625%2C4678325.5%2C1771722.875%2C4924792.0&width=676&height=768" +
-                        "&srs=EPSG%3A3003&format=application/openlayers&p=fake")
+                        "&srs=EPSG%3A3003&format=application/openlayers&p=fake",
+                "https://webgis.regione.sardegna.it/geoserver/ras/wms?service=WMS"
+                        + "&version=1.1.0&request=GetMap&layers=ras%3AIDT_FV04G_QUADRO_UNIONE"
+                        + "&bbox=1426638.0%2C4301311.0%2C1570229.0%2C4573602.5&width=404&height=768"
+                        + "&srs=EPSG%3A3003&format=application/openlayers")
                 .collect(toList());
         CountDownLatch startSignal = new CountDownLatch(1);
         CountDownLatch doneSignal = new CountDownLatch(urls.size());
@@ -91,7 +95,7 @@ public class GPWMSGetMapBaseRequestBuilderMultiThreadTest {
                 .subscribe(Thread::startVirtualThread, Throwable::printStackTrace);
         startSignal.countDown();
         doneSignal.await();
-        assertTrue(counter.get() == urls.size());
+        assertEquals(urls.size(), counter.get());
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@{} process {} urls", this.getClass().getSimpleName(), counter.get());
     }
 

@@ -1,0 +1,916 @@
+<wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                       xmlns:ras="http://www.regione.sardegna.it"
+                       xmlns:wfs="http://www.opengis.net/wfs"
+                       xmlns:gml="http://www.opengis.net/gml"
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="0"
+                       timeStamp="2025-06-16T12:48:20.761Z"
+                       xsi:schemaLocation="http://www.regione.sardegna.it https://webgis.regione.sardegna.it/geoserver/ras/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=ras%3AIDT_FV04G_QUADRO_UNIONE http://www.opengis.net/wfs https://webgis.regione.sardegna.it/geoserver/schemas/wfs/1.1.0/wfs.xsd">
+    <gml:boundedBy>
+        <gml:Envelope srsDimension="2" srsName="http://www.opengis.net/gml/srs/epsg.xml#3003">
+            <gml:lowerCorner>1423673.010011 4297974.671382</gml:lowerCorner>
+            <gml:upperCorner>1573401.936377 4577005.70762</gml:upperCorner>
+        </gml:Envelope>
+    </gml:boundedBy>
+    <gml:featureMembers>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.12256">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1466239.337073 4306428.350904</gml:lowerCorner>
+                    <gml:upperCorner>1470571.017737 4310876.330574</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1467183.614899 4310876.330574 1466239.337073 4307335.127011 1469570.407472 4306428.350904 1470571.017737 4309955.190977 1467183.614899 4310876.330574</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2001</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.12257">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1466987.836371 4309048.261642</gml:lowerCorner>
+                    <gml:upperCorner>1471336.653734 4313364.42115</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1467922.337844 4313364.42115 1466987.836371 4309838.597445 1470387.577877 4309048.261642 1471336.653734 4312492.224807 1467922.337844 4313364.42115</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2001</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.12258">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1467679.659685 4311523.963363</gml:lowerCorner>
+                    <gml:upperCorner>1472022.714091 4316011.099961</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1471773.221857 4315077.704771 1468642.858125 4315990.343803 1468580.544918 4316011.099961 1468566.053413 4315927.834506 1467679.659685 4312489.10677 1471052.772001 4311523.963363 1471972.715367 4314849.24346 1472022.714091 4315017.869292 1471773.221857 4315077.704771</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2001</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.12259">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1462714.041365 4302444.348468</gml:lowerCorner>
+                    <gml:upperCorner>1467784.019647 4307503.014962</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1462943.112779 4305900.957671 1462946.504806 4305910.448593 1462714.041365 4305805.914571 1462724.381188 4305786.283147 1462718.143398 4305783.012858 1464360.655119 4302444.348468 1467784.019647 4304139.786404 1465998.896464 4307503.014962 1462943.112779 4305900.957671</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2001</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.12260">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1464489.281768 4303364.571503</gml:lowerCorner>
+                    <gml:upperCorner>1469409.490275 4308365.19018</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1464489.281768 4306716.57989 1466108.947191 4303364.571503 1469409.490275 4304852.382179 1467781.606644 4308365.19018 1464489.281768 4306716.57989</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2001</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.12261">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1466736.239151 4304483.867612</gml:lowerCorner>
+                    <gml:upperCorner>1471853.729596 4309397.66039</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1466736.239151 4307879.169054 1468567.775093 4304483.867612 1471853.729596 4305927.739875 1470043.922127 4309397.66039 1466736.239151 4307879.169054</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2001</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.12262">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1469184.139004 4305474.705399</gml:lowerCorner>
+                    <gml:upperCorner>1474190.618847 4310609.241509</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1469184.139004 4308923.932591 1470797.691498 4305474.705399 1474190.618847 4307130.696845 1472523.448175 4310609.241509 1469184.139004 4308923.932591</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2001</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.12263">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1471499.339151 4306681.862243</gml:lowerCorner>
+                    <gml:upperCorner>1476631.504346 4311714.19822</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1471499.339151 4310090.591027 1473302.490307 4306681.862243 1476631.504346 4308338.691509 1474829.568021 4311714.19822 1471499.339151 4310090.591027</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2001</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.12264">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1473867.305465 4307799.141674</gml:lowerCorner>
+                    <gml:upperCorner>1479180.189451 4312932.07543</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1473867.305465 4311163.87943 1475587.73577 4307799.141674 1479180.189451 4309493.025673 1477468.800082 4312932.07543 1473867.305465 4311163.87943</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2001</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.12265">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1476351.976183 4309005.27804</gml:lowerCorner>
+                    <gml:upperCorner>1481439.152375 4314032.418555</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1481306.330062 4310908.132272 1481305.365908 4310905.691483 1479802.592944 4314032.418555 1479788.938236 4314025.79077 1479787.508443 4314028.51843 1479749.960013 4314006.871342 1476351.976183 4312357.54235 1478059.064996 4309005.27804 1481389.977353 4310603.731887 1481433.784011 4310621.566296 1481432.615603 4310624.193331 1481439.152375 4310627.330227 1481332.838834 4310848.530258 1481306.330062 4310908.132272</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2001</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.12266">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1450002.007823 4321312.982413</gml:lowerCorner>
+                    <gml:upperCorner>1454833.982474 4326592.872355</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1450005.579566 4325534.882569 1450005.573131 4325534.880717 1450639.78478 4321312.982413 1454833.982474 4322497.093768 1453680.620301 4326592.872355 1450305.015223 4325621.085659 1450002.007823 4325558.43911 1450005.579566 4325534.882569</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2001</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.12267">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1451587.14627 4321845.930178</gml:lowerCorner>
+                    <gml:upperCorner>1456159.206429 4326926.472571</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1451587.14627 4325916.298862 1452359.020248 4321845.930178 1456159.206429 4322842.461532 1455301.713339 4326926.472571 1451587.14627 4325916.298862</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2001</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.12268">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1453857.809806 4322553.609724</gml:lowerCorner>
+                    <gml:upperCorner>1458702.065684 4327424.830512</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1453857.809806 4326540.174963 1454962.973332 4322553.609724 1458702.065684 4323320.741462 1457817.853918 4327424.830512 1453857.809806 4326540.174963</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2001</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.12269">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1456671.397322 4323088.832064</gml:lowerCorner>
+                    <gml:upperCorner>1461562.190775 4327818.427613</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1460915.067607 4327811.729427 1456671.397322 4327206.162221 1457532.565544 4323088.832064 1461562.190775 4323785.126492 1460962.006897 4327818.427613 1460945.694896 4327816.099908 1460945.519536 4327816.976088 1460915.067607 4327811.729427</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2001</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.13230">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1564420.44608 4476168.076186</gml:lowerCorner>
+                    <gml:upperCorner>1569203.743242 4480877.626176</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1564420.44608 4477604.391707 1567800.546331 4476168.076186 1569203.743242 4479513.641314 1565646.909994 4480877.626176 1564420.44608 4477604.391707</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>1999</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.13231">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1563024.290326 4473216.789528</gml:lowerCorner>
+                    <gml:upperCorner>1568018.620289 4478199.593839</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1563024.290326 4474602.258374 1566634.096733 4473216.789528 1568018.620289 4476847.039249 1564702.691404 4478199.593839 1563024.290326 4474602.258374</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>1999</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.13232">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1561906.374785 4470608.960475</gml:lowerCorner>
+                    <gml:upperCorner>1566862.709827 4475236.947224</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1561906.374785 4471887.705046 1565374.0456 4470608.960475 1566862.709827 4473834.697656 1563423.544287 4475236.947224 1561906.374785 4471887.705046</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>1999</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.13233">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1560643.814551 4467523.956859</gml:lowerCorner>
+                    <gml:upperCorner>1565783.694964 4472638.743142</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1560643.814551 4468979.233194 1564349.949749 4467523.956859 1565783.694964 4471164.602054 1562435.054398 4472638.743142 1560643.814551 4468979.233194</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>1999</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.13234">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1559209.914922 4464718.763197</gml:lowerCorner>
+                    <gml:upperCorner>1564580.810292 4469740.436694</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1559209.914922 4466116.911486 1562957.606782 4464718.763197 1564580.810292 4468239.463243 1561126.781175 4469740.436694 1559209.914922 4466116.911486</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>1999</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.13235">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1549217.359709 4453787.517019</gml:lowerCorner>
+                    <gml:upperCorner>1553693.930187 4457688.510935</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1549217.359709 4455192.411153 1551440.827553 4453787.517019 1553693.930187 4456068.046627 1550843.994171 4457688.510935 1549217.359709 4455192.411153</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>1999</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.13236">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1550359.521899 4455123.358437</gml:lowerCorner>
+                    <gml:upperCorner>1554536.068034 4459372.759162</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1550359.521899 4456883.29759 1552841.308311 4455123.358437 1554536.068034 4457793.966279 1551808.157568 4459372.759162 1550359.521899 4456883.29759</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>1999</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.13237">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1551156.39497 4456263.080734</gml:lowerCorner>
+                    <gml:upperCorner>1555678.584141 4460881.658714</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1551156.39497 4458564.238978 1553591.227687 4456263.080734 1555678.584141 4459368.532586 1552902.818886 4460881.658714 1551156.39497 4458564.238978</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>1999</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.13238">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1552355.709552 4458049.836823</gml:lowerCorner>
+                    <gml:upperCorner>1556461.405636 4463016.631071</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1552355.709552 4460156.627819 1554748.00843 4458049.836823 1556461.405636 4460992.145546 1553653.87788 4463016.631071 1552355.709552 4460156.627819</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>1999</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.13239">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1553041.098826 4459688.48939</gml:lowerCorner>
+                    <gml:upperCorner>1557989.09101 4464850.418923</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1553041.098826 4461505.948402 1555855.398618 4459688.48939 1557989.09101 4463100.523612 1554603.100833 4464850.418923 1553041.098826 4461505.948402</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>1999</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.13240">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1554011.957856 4462095.710404</gml:lowerCorner>
+                    <gml:upperCorner>1559441.064373 4467193.004648</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1554011.957856 4463937.320947 1557147.115798 4462095.710404 1559441.064373 4465336.470869 1556401.397292 4467193.004648 1554011.957856 4463937.320947</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>1999</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.13241">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1555440.54957 4464140.682601</gml:lowerCorner>
+                    <gml:upperCorner>1560835.510671 4469367.880343</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1555440.54957 4466184.652402 1558546.163188 4464140.682601 1560835.510671 4467233.468017 1557804.454762 4469367.880343 1555440.54957 4466184.652402</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>1999</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.13242">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1557074.8931 4466178.254354</gml:lowerCorner>
+                    <gml:upperCorner>1562366.035302 4471604.368723</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1557074.8931 4468355.984729 1560103.780753 4466178.254354 1562366.035302 4469440.608201 1559416.929563 4471604.368723 1557074.8931 4468355.984729</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>1999</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.13243">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1558700.387713 4468562.780046</gml:lowerCorner>
+                    <gml:upperCorner>1563982.832119 4473683.784492</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1558700.387713 4470659.48029 1561704.390905 4468562.780046 1563982.832119 4471585.672492 1560993.823057 4473683.784492 1558700.387713 4470659.48029</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>1999</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.13244">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1560356.891126 4470630.524247</gml:lowerCorner>
+                    <gml:upperCorner>1565577.785694 4475948.319494</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1560356.891126 4472727.033378 1563312.352684 4470630.524247 1565577.785694 4473857.803489 1562501.377771 4475948.319494 1560356.891126 4472727.033378</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>1999</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.13245">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1551130.272761 4447079.639673</gml:lowerCorner>
+                    <gml:upperCorner>1554811.052516 4450719.240613</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1551130.272761 4447156.06423 1554811.052516 4447079.639673 1554722.349449 4450719.240613 1551241.839902 4450376.502783 1551130.272761 4447156.06423</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>1999</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.13246">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1551123.205972 4449344.918602</gml:lowerCorner>
+                    <gml:upperCorner>1554782.162837 4453095.329877</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1551146.135287 4449677.370803 1554782.162837 4449344.918602 1554572.511704 4453095.329877 1551123.205972 4452886.094976 1551146.135287 4449677.370803</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>1999</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.12034">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1459281.131031 4402459.167804</gml:lowerCorner>
+                    <gml:upperCorner>1464097.705726 4407141.467853</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1460473.273171 4407141.467853 1459281.131031 4403696.486506 1462917.315031 4402459.167804 1464097.705726 4406007.530646 1460473.273171 4407141.467853</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2001</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.12035">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1460038.779352 4405153.604708</gml:lowerCorner>
+                    <gml:upperCorner>1465139.89114 4410097.333898</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1461339.710997 4410097.333898 1460038.779352 4406417.162964 1463766.165549 4405153.604708 1465139.89114 4408789.083064 1461339.710997 4410097.333898</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2001</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.12036">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1461220.099233 4407690.87719</gml:lowerCorner>
+                    <gml:upperCorner>1466271.012825 4412831.940352</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1462653.472325 4412831.940352 1461220.099233 4409188.094572 1465003.174026 4407690.87719 1466271.012825 4411577.921829 1462653.472325 4412831.940352</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2001</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.11969">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1457148.836348 4330416.133631</gml:lowerCorner>
+                    <gml:upperCorner>1461354.019211 4334930.521117</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1457148.836348 4334930.521117 1457396.200046 4330416.133631 1461354.019211 4330725.338254 1461044.814589 4334868.680192 1457148.836348 4334930.521117</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2002</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.11970">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1457148.836348 4332518.725063</gml:lowerCorner>
+                    <gml:upperCorner>1461168.496438 4337280.476246</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1457148.836348 4337156.794397 1457148.836348 4332518.725063 1461168.496438 4332642.406912 1461044.814589 4337280.476246 1457148.836348 4337156.794397</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2002</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.11971">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1457148.836348 4336043.657757</gml:lowerCorner>
+                    <gml:upperCorner>1461106.655513 4340681.727092</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1457148.836348 4340558.045243 1457210.677273 4336043.657757 1461044.814589 4336043.657757 1461106.655513 4340681.727092 1457148.836348 4340558.045243</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2002</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.11972">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1457086.995424 4337218.635322</gml:lowerCorner>
+                    <gml:upperCorner>1460982.973664 4341733.022807</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1457086.995424 4341733.022807 1457086.995424 4337218.635322 1460982.973664 4337527.839944 1460797.450891 4341671.181883 1457086.995424 4341733.022807</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2002</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.11973">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1454798.881219 4338146.249189</gml:lowerCorner>
+                    <gml:upperCorner>1458447.495762 4341733.022807</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1454798.881219 4341733.022807 1455046.244916 4338146.249189 1458385.654837 4338146.249189 1458447.495762 4341609.340958 1454798.881219 4341733.022807</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2002</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.11974">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1455108.085841 4335363.407588</gml:lowerCorner>
+                    <gml:upperCorner>1458571.177611 4339259.385829</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1455108.085841 4339259.385829 1455169.926765 4335487.089437 1458571.177611 4335363.407588 1458323.813913 4338950.181207 1455108.085841 4339259.385829</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2002</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.11975">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1455169.926765 4332518.725063</gml:lowerCorner>
+                    <gml:upperCorner>1458694.85946 4336662.067002</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1455169.926765 4336662.067002 1455231.76769 4332766.088761 1458694.85946 4332518.725063 1458509.336686 4336414.703304 1455169.926765 4336662.067002</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2002</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.11976">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1455231.76769 4329426.67884</gml:lowerCorner>
+                    <gml:upperCorner>1458756.700384 4334002.90725</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1455231.76769 4334002.90725 1455293.608614 4329426.67884 1458756.700384 4329550.360689 1458694.85946 4333631.861703 1455231.76769 4334002.90725</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2002</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.11977">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1455231.76769 4328251.701275</gml:lowerCorner>
+                    <gml:upperCorner>1459004.064082 4332395.043214</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1455293.608614 4332395.043214 1455231.76769 4328251.701275 1459004.064082 4328313.5422 1458756.700384 4332333.20229 1455293.608614 4332395.043214</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2002</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.11978">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1451131.337092 4345879.419503</gml:lowerCorner>
+                    <gml:upperCorner>1455933.176934 4350428.530933</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1451131.337092 4349586.10289 1452142.250743 4345879.419503 1455933.176934 4346890.333154 1454838.020479 4350428.530933 1451131.337092 4349586.10289</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2002</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.11979">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1451805.279526 4343689.106593</gml:lowerCorner>
+                    <gml:upperCorner>1456607.119368 4347985.48961</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1451805.279526 4347143.061567 1452816.193177 4343689.106593 1456607.119368 4344615.77744 1455596.205717 4347985.48961 1451805.279526 4347143.061567</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2002</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.11980">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1452142.250743 4342425.464529</gml:lowerCorner>
+                    <gml:upperCorner>1456859.847781 4347058.818763</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1452142.250743 4346132.147916 1453321.650003 4342425.464529 1456859.847781 4343267.892572 1455848.93413 4347058.818763 1452142.250743 4346132.147916</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2002</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.11981">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1460650.773972 4348827.917652</gml:lowerCorner>
+                    <gml:upperCorner>1464947.156989 4353124.300669</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1461577.444819 4353124.300669 1460650.773972 4349754.588499 1464188.971751 4348827.917652 1464947.156989 4352281.872626 1461577.444819 4353124.300669</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2002</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.11982">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1458039.247041 4349333.374478</gml:lowerCorner>
+                    <gml:upperCorner>1462419.872862 4353714.000299</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1459050.160692 4353714.000299 1458039.247041 4350344.288129 1461577.444819 4349333.374478 1462419.872862 4352955.81506 1459050.160692 4353714.000299</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2002</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.12270">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1451632.351332 4326864.179285</gml:lowerCorner>
+                    <gml:upperCorner>1455822.468282 4331257.794834</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1452479.916128 4331189.765784 1452497.196659 4331199.708073 1452160.054489 4331257.794834 1452113.552405 4330978.979794 1452127.260377 4330986.866624 1451632.351332 4327411.280054 1455387.252503 4326864.179285 1455781.772088 4330184.739058 1455787.238235 4330177.386022 1455822.115092 4330514.287824 1455820.954667 4330514.527742 1455822.468282 4330527.26741 1452479.916128 4331189.765784</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2001</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+        <ras:IDT_FV04G_QUADRO_UNIONE gml:id="IDT_FV04G_QUADRO_UNIONE.12271">
+            <gml:boundedBy>
+                <gml:Envelope srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:lowerCorner>1451392.763221 4324364.352962</gml:lowerCorner>
+                    <gml:upperCorner>1455511.304516 4328618.685883</gml:upperCorner>
+                </gml:Envelope>
+            </gml:boundedBy>
+            <ras:GEOM>
+                <gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#3003" srsDimension="2">
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>1451783.06829 4328618.685883 1451392.763221 4324720.426051 1455113.527076 4324364.352962 1455511.304516 4328114.837417 1451783.06829 4328618.685883</gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </ras:GEOM>
+            <ras:VOLO>2001</ras:VOLO>
+        </ras:IDT_FV04G_QUADRO_UNIONE>
+    </gml:featureMembers>
+</wfs:FeatureCollection>

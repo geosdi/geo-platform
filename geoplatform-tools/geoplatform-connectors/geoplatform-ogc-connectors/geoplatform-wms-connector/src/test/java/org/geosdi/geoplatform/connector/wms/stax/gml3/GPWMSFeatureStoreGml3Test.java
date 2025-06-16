@@ -250,4 +250,14 @@ public class GPWMSFeatureStoreGml3Test extends WMSGetFeatureInfoStaxReaderGml3Te
         logger.info("#######################FEATURE_STORE_SPECCHI_ACQUA : {}\n",  wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "SpecchiAcqua.json"), wmsFeatureStore);
     }
+
+    @Test
+    public void a_z_wmsFeatureStoreGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxGml3Reader.readAsStore(storage.find("IDT_FV04G_QUADRO_UNIONE.xml"));
+        List<Feature> values = wmsFeatureStore.getFeaturesByKey("IDT_FV04G_QUADRO_UNIONE");
+        assertTrue("For Key : IDT_FV04G_QUADRO_UNIONE , store must contains a list of Features not null and with 50 features.", (values != null) && (values.size() == 50));
+        logger.info("#######################FEATURE_STORE_IDT_FV04G_QUADRO_UNIONE : {}\n",  wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "IDT_FV04G_QUADRO_UNIONE.json"), wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "IDT_FV04G_QUADRO_UNIONE.geojson"), wmsFeatureStore.asFeatureCollection());
+    }
 }

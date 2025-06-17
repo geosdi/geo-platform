@@ -36,15 +36,12 @@
 package org.geosdi.geoplatform.connector.reader.stax;
 
 import org.geojson.Feature;
-import org.geojson.FeatureCollection;
 
 import javax.annotation.Nonnull;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
-import static io.reactivex.rxjava3.core.Flowable.fromIterable;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -70,17 +67,4 @@ public interface GPStaxFeatureStore<K extends Object> extends Serializable {
      * @throws Exception
      */
     List<Feature> getFeaturesByKey(@Nonnull(when = NEVER) K theKey) throws Exception;
-
-    /**
-     * @return {@link FeatureCollection}
-     */
-    default FeatureCollection asFeatureCollection() {
-        FeatureCollection featureCollection = new FeatureCollection();
-        fromIterable(getStore().entrySet())
-                .filter(Objects::nonNull)
-                .map(Map.Entry::getValue)
-                .filter(Objects::nonNull)
-                .subscribe(featureCollection::addAll, Throwable::printStackTrace);
-        return featureCollection;
-    }
 }

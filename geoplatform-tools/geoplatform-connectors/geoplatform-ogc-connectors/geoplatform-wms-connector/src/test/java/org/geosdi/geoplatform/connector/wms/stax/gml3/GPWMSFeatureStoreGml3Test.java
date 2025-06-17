@@ -258,6 +258,5 @@ public class GPWMSFeatureStoreGml3Test extends WMSGetFeatureInfoStaxReaderGml3Te
         assertTrue("For Key : IDT_FV04G_QUADRO_UNIONE , store must contains a list of Features not null and with 50 features.", (values != null) && (values.size() == 50));
         logger.info("#######################FEATURE_STORE_IDT_FV04G_QUADRO_UNIONE : {}\n",  wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "IDT_FV04G_QUADRO_UNIONE.json"), wmsFeatureStore);
-        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "IDT_FV04G_QUADRO_UNIONE.geojson"), wmsFeatureStore.asFeatureCollection());
     }
 }

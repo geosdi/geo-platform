@@ -169,4 +169,94 @@ public class GPWMSFeatureStoreAaltoGml3Test extends WMSGetFeatureInfoAaltoGml3Re
         logger.info("#######################FEATURE_STORE_CARABINIERI_SICILIA : {}\n",  wmsFeatureStore);
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "CarabinieriSiciliaAalto.json"), wmsFeatureStore);
     }
+
+    @Test
+    public void a_p_wmsFeatureStoreAaltoGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("SalineStoriche.xml"));
+        List<Feature> values = wmsFeatureStore.getFeaturesByKey("AREESALINESTORICHE");
+        assertTrue("For Key : AREESALINESTORICHE , store must contains a list of Features not null and with 11 features.", (values != null) && (values.size() == 11));
+        logger.info("#######################FEATURE_STORE_SALINE_STORICHE : {}\n",  wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "SalineStoricheAalto.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void a_q_wmsFeatureStoreAaltoGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("ETPI_AMBITO_TERRITORIALE.xml"));
+        List<Feature> values = wmsFeatureStore.getFeaturesByKey("ETPI_AMBITO_TERRITORIALE");
+        assertTrue("For Key : ETPI_AMBITO_TERRITORIALE , store must contains a list of Features not null and with 1 features.", (values != null) && (values.size() == 1));
+        logger.info("#######################FEATURE_STORE_ETPI_AMBITO_TERRITORIALE : {}\n",  wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "ETPI_AMBITO_TERRITORIALEAalto.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void a_r_wmsFeatureStoreAaltoGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("ETPI_RIPOPOLAMENTO.xml"));
+        List<Feature> values = wmsFeatureStore.getFeaturesByKey("ETPI_RIPOPOLAMENTO");
+        assertTrue("For Key : ETPI_RIPOPOLAMENTO , store must contains a list of Features not null and with 265 features.", (values != null) && (values.size() == 265));
+        logger.info("#######################FEATURE_STORE_ETPI_RIPOPOLAMENTO : {}\n",  wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "ETPI_RIPOPOLAMENTOAalto.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void a_s_wmsFeatureStoreAaltoGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("PPR06_Ambiti_di_paesaggio_Limiti_d'ambito.xml"));
+        List<Feature> values = wmsFeatureStore.getFeaturesByKey("AMBITIPAESAGGIOSTAMPA");
+        assertTrue("For Key : AMBITIPAESAGGIOSTAMPA , store must contains a list of Features not null and with 50 features.", (values != null) && (values.size() == 50));
+        logger.info("#######################FEATURE_STORE_PPR06_AMBITI_DI_PAESAGGIO : {}\n",  wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "PPR06_Ambiti_di_paesaggio_Limiti_d'ambitoAalto.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void a_t_wmsFeatureStoreAaltoGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("CinemaTeatri.xml"));
+        List<Feature> values = wmsFeatureStore.getFeaturesByKey("Cinema_teatri_25833");
+        assertTrue("For Key : Cinema_teatri_25833 , store must contains a list of Features not null and with 149 features.", (values != null) && (values.size() == 149));
+        logger.info("#######################FEATURE_STORE_CINEMA_TEATRI : {}\n",  wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "CinemaTeatriAalto.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void a_u_wmsFeatureStoreAaltoGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("AcquePubbliche.xml"));
+        List<Feature> values = wmsFeatureStore.getFeaturesByKey("SINS_4068_1460995_acque_cumxfrancigena1000");
+        assertTrue("For Key : SINS_4068_1460995_acque_cumxfrancigena1000 , store must contains a list of Features not null and with 312 features.", (values != null) && (values.size() == 312));
+        logger.info("#######################FEATURE_STORE_ACQUE_PUBBLICHE : {}\n",  wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "AcquePubblicheAalto.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void a_v_wmsFeatureStoreAaltoGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("cen_abi_a_polygon.xml"));
+        List<Feature> values = wmsFeatureStore.getFeaturesByKey("cen_abi_a_polygon");
+        assertTrue("For Key : cen_abi_a_polygon , store must contains a list of Features not null and with 100 features.", (values != null) && (values.size() == 100));
+        logger.info("#######################FEATURE_STORE_CEN_ABI_POLYGON : {}\n",  wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "cen_abi_a_polygonAalto.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void a_x_wmsFeatureStoreAaltoGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("Ac0104021_province.xml"));
+        List<Feature> values = wmsFeatureStore.getFeaturesByKey("c0104021_province");
+        assertTrue("For Key : Ac0104021_province , store must contains a list of Features not null and with 1 features.", (values != null) && (values.size() == 1));
+        logger.info("#######################FEATURE_STORE_AC0104021_PROVINCE : {}\n",  wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "Ac0104021_provinceAalto.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void a_y_wmsFeatureStoreAaltoGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("SpecchiAcqua.xml"));
+        List<Feature> values = wmsFeatureStore.getFeaturesByKey("ETP_SPECCHI_ACQUA");
+        assertTrue("For Key : ETP_SPECCHI_ACQUA , store must contains a list of Features not null and with 10 features.", (values != null) && (values.size() == 10));
+        logger.info("#######################FEATURE_STORE_SPECCHI_ACQUA : {}\n",  wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "SpecchiAcquaAalto.json"), wmsFeatureStore);
+    }
+
+    @Test
+    public void a_z_wmsFeatureStoreAaltoGml3ReaderTest() throws Exception {
+        GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoAaltoGml3Reader.readAsStore(storage.find("IDT_FV04G_QUADRO_UNIONE.xml"));
+        List<Feature> values = wmsFeatureStore.getFeaturesByKey("IDT_FV04G_QUADRO_UNIONE");
+        assertTrue("For Key : IDT_FV04G_QUADRO_UNIONE , store must contains a list of Features not null and with 50 features.", (values != null) && (values.size() == 50));
+        logger.info("#######################FEATURE_STORE_IDT_FV04G_QUADRO_UNIONE : {}\n",  wmsFeatureStore);
+        JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(destDir, "IDT_FV04G_QUADRO_UNIONEAalto.json"), wmsFeatureStore);
+    }
 }

@@ -45,6 +45,7 @@ import java.util.LinkedHashMap;
 import java.util.stream.Stream;
 
 import static java.io.File.separator;
+import static java.lang.String.join;
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
@@ -65,8 +66,7 @@ public class WMSGetFeatureInfoReaderGml3FileLoaderTest extends WMSGetFeatureInfo
         storage = IGPConnectorFileStorage.of(toStreamFilesName()
                 .map(WMSGetFeatureInfoReaderGml3FileLoaderTest::toGPConnectorFile)
                 .collect(toMap(IGPConnectorFile::getKey, identity(), (v1, v2) -> v1, LinkedHashMap::new)));
-        destDir = new File(of(new File(".").getCanonicalPath(), "target", "gml3")
-                .collect(joining(separator)));
+        destDir = new File(join(separator, new File(".").getCanonicalPath(), "target", "gml3"));
         if (!destDir.exists())
             destDir.mkdirs();
     }

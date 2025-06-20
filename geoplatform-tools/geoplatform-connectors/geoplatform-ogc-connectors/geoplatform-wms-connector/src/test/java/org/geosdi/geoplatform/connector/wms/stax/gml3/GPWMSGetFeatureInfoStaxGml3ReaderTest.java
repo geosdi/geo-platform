@@ -190,4 +190,10 @@ public class GPWMSGetFeatureInfoStaxGml3ReaderTest extends WMSGetFeatureInfoStax
         logger.info("#######################FEATURE_COLLECTION_AC0104021_PROVINCE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("SpecchiAcqua.xml"))));
     }
+
+    @Test
+    public void b_c_wmsGetFeatureInfoStaxGml3ReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_IDT_FV04G_QUADRO_UNIONE : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxGml3Reader.read(storage.find("IDT_FV04G_QUADRO_UNIONE.xml"))));
+    }
 }

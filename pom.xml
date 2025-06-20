@@ -1506,7 +1506,7 @@
     </reporting>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>24</java.version>
         <maven.compiler.proc>full</maven.compiler.proc>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>

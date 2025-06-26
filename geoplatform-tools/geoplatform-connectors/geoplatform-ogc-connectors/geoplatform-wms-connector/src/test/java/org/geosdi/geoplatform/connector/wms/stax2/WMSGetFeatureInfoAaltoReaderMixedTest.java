@@ -53,8 +53,7 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.wms.stax2.WMSGetFeatureInfoAaltoReaderTest.JACKSON_SUPPORT;
 import static org.geosdi.geoplatform.connector.wms.stax2.WMSGetFeatureInfoAaltoReaderTest.wmsGetFeatureInfoAaltoReader;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -116,6 +115,9 @@ public class WMSGetFeatureInfoAaltoReaderMixedTest {
         List<Feature> elementiRidotti = wmsFeatureStore.getFeaturesByKey("elem_ridotto_2");
         assertNotNull(elementiRidotti);
         assertTrue(elementiRidotti.size() == 7);
+        List<Feature> poiExport = wmsFeatureStore.getFeaturesByKey("IDT_OP08V_POI_EXPORT");
+        assertNotNull(poiExport);
+        assertEquals(150, poiExport.size());
         fromIterable(wmsFeatureStore.getStore().entrySet())
                 .subscribe(k -> logger.info("###############{} - size : {}\n", k.getKey(), k.getValue().size()));
         JACKSON_SUPPORT.getDefaultMapper().writeValue(new File(of(new File(".").getCanonicalPath(), "target", "StoreAaltoMIXED_FEATURES")

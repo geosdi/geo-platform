@@ -7,8 +7,9 @@
                        xmlns:admin="http://www.geosdi.org/admin"
                        xmlns:genicivili="www.cfr.toscana.it/genicivili"
                        xmlns:extra_rt_webgis="http://mappe.regione.toscana.it/extra_rt_webgis"
+                       xmlns:dbu="http://www.regione.sardegna.it/"
                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                       xsi:schemaLocation="http://www.opengeospatial.net/rsdi http://rsdi.regione.basilicata.it:80/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=rsdi:alt_300_a_400,typeName=PianoCampiFlegrei%3ACF_zonarossa_mappeinterattive,typeName=PNSRS%3AABR_1_4_1_aree_urb_val_storico,typeName=PNSRS%3AABR_4_5_comuni_aff_COM,typeName=PNSRS%3AABR_1_4_1_aree_urb_val_storico,typeName=rsdi:alt_600_a_700,typeName=admin%3Aadmin_shp_pozzuoli447so_acque,typeName=ws_vito%3Afluids_rete_zk,typeName=genicivili%3Aait_corsi_acqua_2018,typeName=extra_rt_webgis%3Aelem_ridotto_2 http://www.opengis.net/wfs http://rsdi.regione.basilicata.it:80/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
+                       xsi:schemaLocation="http://www.opengeospatial.net/rsdi http://rsdi.regione.basilicata.it:80/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=rsdi:alt_300_a_400,typeName=PianoCampiFlegrei%3ACF_zonarossa_mappeinterattive,typeName=PNSRS%3AABR_1_4_1_aree_urb_val_storico,typeName=PNSRS%3AABR_4_5_comuni_aff_COM,typeName=PNSRS%3AABR_1_4_1_aree_urb_val_storico,typeName=rsdi:alt_600_a_700,typeName=admin%3Aadmin_shp_pozzuoli447so_acque,typeName=ws_vito%3Afluids_rete_zk,typeName=genicivili%3Aait_corsi_acqua_2018,typeName=extra_rt_webgis%3Aelem_ridotto_2,typeName=extra_rt_webgis%3Aelem_ridotto_2 http://www.opengis.net/wfs http://rsdi.regione.basilicata.it:80/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd">
     <gml:boundedBy>
         <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#32633">
             <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">
@@ -6563,5 +6564,2992 @@
             <extra_rt_webgis:cls_amm>100</extra_rt_webgis:cls_amm>
             <extra_rt_webgis:den_breve>A1</extra_rt_webgis:den_breve>
         </extra_rt_webgis:elem_ridotto_2>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a5f">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.50412554,40.29510111 8.50412554,40.29510111</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>32FF340190174F75A94F94FD0BE0CE5F</dbu:POIUUID>
+            <dbu:LABEL>Cattedrale dell'Immacolata</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.50412554,40.29510111</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18257</dbu:HREF>
+            <dbu:ISTAT>095079</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a60">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.18376418,39.24285724 9.18376418,39.24285724</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>D18C98B3A3DF4213B94C60CB4F643C25</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Sant'Elena</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.18376418,39.24285724</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18362</dbu:HREF>
+            <dbu:ISTAT>092051</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a61">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.7447209,40.78278847 8.7447209,40.78278847</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>CC71BDE620AD4D11B0BAF6219037999C</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Santa Maria Assunta</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.7447209,40.78278847</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18356</dbu:HREF>
+            <dbu:ISTAT>090046</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a62">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.64441958,40.44706862 8.64441958,40.44706862</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>E38AD89793294168A7F4DBE7C4676FEF</dbu:POIUUID>
+            <dbu:LABEL>Santuario di N. S. di Bonu Ighinu</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.64441958,40.44706862</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18350</dbu:HREF>
+            <dbu:ISTAT>090038</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a63">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.50220834,40.29756939 8.50220834,40.29756939</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>8572D4C467304283B3F117BC5E397509</dbu:POIUUID>
+            <dbu:LABEL>Chiesa del Carmine</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.50220834,40.29756939</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18262</dbu:HREF>
+            <dbu:ISTAT>095079</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a64">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.89889945,39.56229855 8.89889945,39.56229855</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>DDD9020AC3BB4EAFA2508D79133B8328</dbu:POIUUID>
+            <dbu:LABEL>Chiesa della Madonna delle Grazie</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.89889945,39.56229855</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ISTAT>106015</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a65">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.11301906,39.21876282 9.11301906,39.21876282</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>0F500583740C42468162EAB5417943F7</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Sant'Anna</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.11301906,39.21876282</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18284</dbu:HREF>
+            <dbu:ISTAT>092009</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a66">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.11428303,39.21595155 9.11428303,39.21595155</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>E00EC708B1A6468DA5AAE5F30F0C4F86</dbu:POIUUID>
+            <dbu:LABEL>Vasca del Santo Sepolcro</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.11428303,39.21595155</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17867</dbu:HREF>
+            <dbu:ISTAT>092009</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a67">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.11441056,39.216232 9.11441056,39.216232</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>82101FE8EAAC49FAB382672DBC75E24B</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Sant'Antonio Abate</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.11441056,39.216232</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18411</dbu:HREF>
+            <dbu:ISTAT>092009</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a68">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.55620231,40.73062995 8.55620231,40.73062995</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>DAA25B01B6A54D7DA77046BF0228CC00</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Sant'Antonio Abate</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.55620231,40.73062995</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18236</dbu:HREF>
+            <dbu:ISTAT>090064</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a69">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.56041758,40.73031498 8.56041758,40.73031498</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>707DD9ECCD534D3C8704011D784E0168</dbu:POIUUID>
+            <dbu:LABEL>Chiesa della Santissima Trinità</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.56041758,40.73031498</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18230</dbu:HREF>
+            <dbu:ISTAT>090064</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a6a">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.81669468,39.76847131 8.81669468,39.76847131</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>CFFFD22A21E743B683CD6D99B1E4D941</dbu:POIUUID>
+            <dbu:LABEL>Cattedrale di San Pietro</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.81669468,39.76847131</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ISTAT>095004</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a6b">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.11150187,39.21888939 9.11150187,39.21888939</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>B54C372359CC44E8BA9CFAA5F7E70EC9</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Michele</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.11150187,39.21888939</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=19254</dbu:HREF>
+            <dbu:ISTAT>092009</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a6c">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.93344633,40.12070731 8.93344633,40.12070731</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>4BDE4B63658349D2AA04BD8BA3318536</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Santa Maria di Ossolo</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.93344633,40.12070731</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18343</dbu:HREF>
+            <dbu:ISTAT>095014</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a6d">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.93171589,40.10629318 8.93171589,40.10629318</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>2A062FB3088A437B800031EAAF6B3A75</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Sebastiano</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.93171589,40.10629318</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18395</dbu:HREF>
+            <dbu:ISTAT>095063</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a6e">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.91383027,40.08660324 8.91383027,40.08660324</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>B68741A54ED4497B97900424BC283540</dbu:POIUUID>
+            <dbu:LABEL>Chiesa della Madonna della Guardia</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.91383027,40.08660324</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18342</dbu:HREF>
+            <dbu:ISTAT>095007</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a6f">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.19822761,40.16070712 9.19822761,40.16070712</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>831468A2AFB241719E2BC1252CF16E3C</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Gavino</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.19822761,40.16070712</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18351</dbu:HREF>
+            <dbu:ISTAT>091028</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a70">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.04055793,40.00826633 9.04055793,40.00826633</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>E8363F8E70F8434883A7222CB9EAB55D</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Mauro</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.04055793,40.00826633</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ISTAT>091086</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a71">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.95109698,40.10061285 8.95109698,40.10061285</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>3327C71033E742FDAE840E3F6E9992FD</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Giacomo</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.95109698,40.10061285</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18355</dbu:HREF>
+            <dbu:ISTAT>095034</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a72">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.62779021,39.53983647 8.62779021,39.53983647</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>235BB6A3CD2F47019906A9A7B61F51DC</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Nicola di Mira</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.62779021,39.53983647</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ISTAT>106008</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a73">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.60046029,40.01242234 8.60046029,40.01242234</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>4A1ACC8286CF482F89F52D84E0A68252</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Santa Sofia</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.60046029,40.01242234</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18327</dbu:HREF>
+            <dbu:ISTAT>095050</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a74">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.57659612,40.26121261 8.57659612,40.26121261</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>A30D9594E7704C07B8E906555F445518</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Gabriele Arcangelo</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.57659612,40.26121261</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18287</dbu:HREF>
+            <dbu:ISTAT>095086</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a75">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.12244235,39.2145559 9.12244235,39.2145559</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>3F4638889C64408A925281D17E875C21</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Lucifero</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.12244235,39.2145559</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18337</dbu:HREF>
+            <dbu:ISTAT>092009</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a76">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.11261046,39.21604929 9.11261046,39.21604929</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>BFE02462A7FF44BDB0F4E6F4030E590D</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Sant'Agostino Nuovo</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.11261046,39.21604929</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18349</dbu:HREF>
+            <dbu:ISTAT>092009</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a77">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.72548721,40.39794001 8.72548721,40.39794001</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>2E4EF3EF0E994D5EBDD235ADFB671CCB</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Giorgio</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.72548721,40.39794001</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18358</dbu:HREF>
+            <dbu:ISTAT>090066</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a78">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.11606145,39.2190648 9.11606145,39.2190648</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>C26F4F32B6FA40689B9EE28E51CAAD53</dbu:POIUUID>
+            <dbu:LABEL>Chiesa della Purissima</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.11606145,39.2190648</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18271</dbu:HREF>
+            <dbu:ISTAT>092009</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a79">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.11701814,39.22015283 9.11701814,39.22015283</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>7EC21D83750B4128B7E343997D7ABEAE</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Santa Lucia</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.11701814,39.22015283</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18295</dbu:HREF>
+            <dbu:ISTAT>092009</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a7a">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.11684477,39.21845143 9.11684477,39.21845143</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>38DFACBB065C4F18AC7ADE1FF6B3A885</dbu:POIUUID>
+            <dbu:LABEL>Chiesa della Speranza</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.11684477,39.21845143</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18280</dbu:HREF>
+            <dbu:ISTAT>092009</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a7b">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.55431868,40.72639946 8.55431868,40.72639946</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>C90DFCB7AD614A9899DB7349A464F3A1</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Santa Maria di Betlem</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.55431868,40.72639946</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17843</dbu:HREF>
+            <dbu:ISTAT>090064</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a7c">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.55850775,40.72678203 8.55850775,40.72678203</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>5AB0F5D968CF40A49C99DD0C29CB9595</dbu:POIUUID>
+            <dbu:LABEL>Cattedrale di San Nicola</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.55850775,40.72678203</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18420</dbu:HREF>
+            <dbu:ISTAT>090064</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a7d">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.63022121,40.39757775 8.63022121,40.39757775</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>AB3CB897C85C43DB9550F1468726E999</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Santa Giulia</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.63022121,40.39757775</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18319</dbu:HREF>
+            <dbu:ISTAT>090053</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a7e">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.87833515,40.8453797 8.87833515,40.8453797</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>1372CDA8EF1942EF88BBD5B7D9E929CB</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Giorgio</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.87833515,40.8453797</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=21636</dbu:HREF>
+            <dbu:ISTAT>090056</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a7f">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.49870075,40.29931329 8.49870075,40.29931329</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>2DE4D782D43740EC8BFEFF5C876236DB</dbu:POIUUID>
+            <dbu:LABEL>Convento dei Cappuccini</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.49870075,40.29931329</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=24803</dbu:HREF>
+            <dbu:ISTAT>095079</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a80">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.50212306,40.29581499 8.50212306,40.29581499</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>2798406F8D9D40F285C77AE7AADD3E13</dbu:POIUUID>
+            <dbu:LABEL>Chiesa della Madonna del Rosario</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.50212306,40.29581499</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=24799</dbu:HREF>
+            <dbu:ISTAT>095079</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a81">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.31440298,40.55710896 8.31440298,40.55710896</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>E289BD202FDC41C694F745CF2BE93F27</dbu:POIUUID>
+            <dbu:LABEL>Chiesa della Misericordia</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.31440298,40.55710896</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a82">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.31304281,40.55897214 8.31304281,40.55897214</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>BC589A680CD5464092E68854FB35CE20</dbu:POIUUID>
+            <dbu:LABEL>Chiesa del Rosario</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.31304281,40.55897214</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=24795</dbu:HREF>
+            <dbu:ISTAT>090003</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a83">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.31284355,40.5567646 8.31284355,40.5567646</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>E753032B8FA2450CBA24EE927BA399C1</dbu:POIUUID>
+            <dbu:LABEL>Chiesa del Carmine</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.31284355,40.5567646</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=24793</dbu:HREF>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a84">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.6388466,39.90028232 8.6388466,39.90028232</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>FB3BA23D7A864DBEA01AA8220750EB05</dbu:POIUUID>
+            <dbu:LABEL>Aeroporto di Oristano-Fenosu</dbu:LABEL>
+            <dbu:CATEGORY>aerodrome</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>aeroway</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.6388466,39.90028232</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ADDRESS>S.P. 57 KM 3,5/4, LOC. FENOSU</dbu:ADDRESS>
+            <dbu:ISTAT>095038</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a85">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.51382781,40.90428348 9.51382781,40.90428348</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>FB0B242E41D749848CA8D191B3A8B1F2</dbu:POIUUID>
+            <dbu:LABEL>Aeroporto di Olbia-Costa Smeralda</dbu:LABEL>
+            <dbu:CATEGORY>aerodrome</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>aeroway</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.51382781,40.90428348</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ADDRESS>Aeroporto Costa Smeralda</dbu:ADDRESS>
+            <dbu:ISTAT>104017</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a86">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.67802525,39.92213874 9.67802525,39.92213874</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>F2A95D2979DB4EBAA78B0AAC48F467C7</dbu:POIUUID>
+            <dbu:LABEL>Aeroporto di Tortolì-Arbatax</dbu:LABEL>
+            <dbu:CATEGORY>aerodrome</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>aeroway</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.67802525,39.92213874</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ADDRESS>Localita Aeroporto</dbu:ADDRESS>
+            <dbu:ISTAT>105018</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a87">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.29531527,40.63016758 8.29531527,40.63016758</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>A58948103A1C4D328D5611390CE12E89</dbu:POIUUID>
+            <dbu:LABEL>Aeroporto di Alghero-Fertilia</dbu:LABEL>
+            <dbu:CATEGORY>aerodrome</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>aeroway</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.29531527,40.63016758</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ADDRESS>Regione Nuraghe Biancu</dbu:ADDRESS>
+            <dbu:ISTAT>090003</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a88">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.06083936,39.2542395 9.06083936,39.2542395</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>560A08C9DB5B486BBA9616FEFBC2B07D</dbu:POIUUID>
+            <dbu:LABEL>Aeroporto di Cagliari-Elmas</dbu:LABEL>
+            <dbu:CATEGORY>aerodrome</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>aeroway</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.06083936,39.2542395</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ADDRESS>Via Aeroporto</dbu:ADDRESS>
+            <dbu:ISTAT>092108</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a89">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.48791228,39.81531246 9.48791228,39.81531246</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>BD802D0FF6F14D06BAFC93F8004FC4B4</dbu:POIUUID>
+            <dbu:LABEL>Punto di ristoro Su Bulliccu</dbu:LABEL>
+            <dbu:CATEGORY>biergarten</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>amenity</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.48791228,39.81531246</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ISTAT>105020</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a8a">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.25677379,39.99132136 9.25677379,39.99132136</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>4732ED26B4B946159F4AF9D57D4E182C</dbu:POIUUID>
+            <dbu:LABEL>Agriturismo</dbu:LABEL>
+            <dbu:CATEGORY>biergarten</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>amenity</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.25677379,39.99132136</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ISTAT>091016</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a8b">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.27218614,40.02522848 9.27218614,40.02522848</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>09DFD3A3E4A44E23B950E71553A4EE05</dbu:POIUUID>
+            <dbu:LABEL>Bar-ristorante</dbu:LABEL>
+            <dbu:CATEGORY>biergarten</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>amenity</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.27218614,40.02522848</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ISTAT>091016</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a8c">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.23209546,40.03229847 9.23209546,40.03229847</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>672AA15DA36042478D1CF18AAB1B7107</dbu:POIUUID>
+            <dbu:LABEL>Bar-ristorante</dbu:LABEL>
+            <dbu:CATEGORY>biergarten</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>amenity</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.23209546,40.03229847</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ISTAT>091016</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a8d">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.50838564,40.10452988 9.50838564,40.10452988</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>C2FB2AD023334F308E5069137861197A</dbu:POIUUID>
+            <dbu:LABEL>Punto di ristoro</dbu:LABEL>
+            <dbu:CATEGORY>biergarten</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>amenity</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.50838564,40.10452988</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ISTAT>105021</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a8e">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.4142319,39.86277442 9.4142319,39.86277442</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>85356551FC64420093666019A5FE9CC9</dbu:POIUUID>
+            <dbu:LABEL>Punto di ristoro Niala</dbu:LABEL>
+            <dbu:CATEGORY>biergarten</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>amenity</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.4142319,39.86277442</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ISTAT>105022</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a8f">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.51915116,39.14266683 9.51915116,39.14266683</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>86BFF4CEC1A54FCC81A2907E7DD93F82</dbu:POIUUID>
+            <dbu:LABEL>EL PEYOTE</dbu:LABEL>
+            <dbu:CATEGORY>nightclub</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>amenity</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.51915116,39.14266683</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>www.elpeyote.it</dbu:HREF>
+            <dbu:ADDRESS>Località Campus, km. 47</dbu:ADDRESS>
+            <dbu:ISTAT>092100</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a90">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.23157137,40.03233853 9.23157137,40.03233853</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>DB4981EF0F174C6F9F90C49D4760D48B</dbu:POIUUID>
+            <dbu:LABEL>Parcheggio</dbu:LABEL>
+            <dbu:CATEGORY>parking</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>amenity</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.23157137,40.03233853</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ISTAT>091016</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a91">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.27121173,40.02513259 9.27121173,40.02513259</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>14D2C43AFCBF4D66856F0AAC1EF4025C</dbu:POIUUID>
+            <dbu:LABEL>Parcheggio</dbu:LABEL>
+            <dbu:CATEGORY>parking</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>amenity</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.27121173,40.02513259</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ISTAT>091016</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a92">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.70633533,40.7229874 9.70633533,40.7229874</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>F6F82FF3FE734616B77B6DA8FD54D770</dbu:POIUUID>
+            <dbu:LABEL>LI CUPULATTI BEACH</dbu:LABEL>
+            <dbu:CATEGORY>village</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>amenity</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.70633533,40.7229874</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>www.itihotels.it</dbu:HREF>
+            <dbu:ADDRESS>Località Agrustos</dbu:ADDRESS>
+            <dbu:ISTAT>104009</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a93">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.50347395,40.27290231 8.50347395,40.27290231</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>D8FD4ECEECA946D2AD0257C652B1AFB7</dbu:POIUUID>
+            <dbu:LABEL>ABBA MALA VILLAGE</dbu:LABEL>
+            <dbu:CATEGORY>village</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>amenity</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.50347395,40.27290231</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>www.abbamala.com</dbu:HREF>
+            <dbu:ADDRESS>Località Abba Mala</dbu:ADDRESS>
+            <dbu:ISTAT>095079</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a94">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.28229826,40.59743097 8.28229826,40.59743097</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>4196C973BD654C3DB67E3240C89CAF6B</dbu:POIUUID>
+            <dbu:LABEL>CAMP NURRAL</dbu:LABEL>
+            <dbu:CATEGORY>village</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>amenity</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.28229826,40.59743097</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>www.campnurral.it</dbu:HREF>
+            <dbu:ADDRESS>S.S. 291 km 33,2</dbu:ADDRESS>
+            <dbu:ISTAT>090003</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a95">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.76768762,40.42506691 9.76768762,40.42506691</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>9954FF2B411C4720BA0D3934B0BCA5C3</dbu:POIUUID>
+            <dbu:LABEL>ALBA DORATA </dbu:LABEL>
+            <dbu:CATEGORY>village</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>amenity</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.76768762,40.42506691</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>www.itihotels.it</dbu:HREF>
+            <dbu:ADDRESS>S.S. 125 KM. 233.300 - Località Sas Linnas Siccas </dbu:ADDRESS>
+            <dbu:ISTAT>091063</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a96">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.40743823,41.24974651 9.40743823,41.24974651</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>F020C8D2AF594538A024C2410AE40EC2</dbu:POIUUID>
+            <dbu:LABEL>TOURING CLUB ITALIANO</dbu:LABEL>
+            <dbu:CATEGORY>village</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>amenity</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.40743823,41.24974651</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>www.touring.club.it</dbu:HREF>
+            <dbu:ADDRESS>Punta Cannone</dbu:ADDRESS>
+            <dbu:ISTAT>104012</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a97">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.58107693,39.26755235 9.58107693,39.26755235</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>3BE5799507B84A2BB9CAAE6DF9F9CBD0</dbu:POIUUID>
+            <dbu:LABEL>PISCINA REI</dbu:LABEL>
+            <dbu:CATEGORY>village</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>amenity</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.58107693,39.26755235</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>www.piscinarei.it</dbu:HREF>
+            <dbu:ADDRESS>Via della Necropoli Località Piscina Rei</dbu:ADDRESS>
+            <dbu:ISTAT>092039</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a98">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.86850529,38.89403313 8.86850529,38.89403313</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>4BCD4C748D544690ABDB3BECA98153F1</dbu:POIUUID>
+            <dbu:LABEL>BAIA CHIA </dbu:LABEL>
+            <dbu:CATEGORY>village</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>amenity</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.86850529,38.89403313</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>www.chialagunaresort.com</dbu:HREF>
+            <dbu:ADDRESS>Località Chia</dbu:ADDRESS>
+            <dbu:ISTAT>092018</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a99">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.49216674,40.07702543 8.49216674,40.07702543</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>834257555C58495299F7D3A26C280620</dbu:POIUUID>
+            <dbu:LABEL>LE DUNE</dbu:LABEL>
+            <dbu:CATEGORY>village</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>amenity</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.49216674,40.07702543</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>www.villaggioledune.net</dbu:HREF>
+            <dbu:ADDRESS>S.S. 292 km. 108,00 Località Torre del Pozzo</dbu:ADDRESS>
+            <dbu:ISTAT>095019</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a9a">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.65787556,40.89247194 8.65787556,40.89247194</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>1EAF9FE78B3B4A86B652E32D6B34EE3B</dbu:POIUUID>
+            <dbu:LABEL>RASCIADA </dbu:LABEL>
+            <dbu:CATEGORY>village</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>amenity</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.65787556,40.89247194</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>www.rasciada.it</dbu:HREF>
+            <dbu:ADDRESS>Località Li Paddini</dbu:ADDRESS>
+            <dbu:ISTAT>090023</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a9b">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.53032861,39.90392551 8.53032861,39.90392551</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>524943F6143641FF9DA1A6FD91E9CB68</dbu:POIUUID>
+            <dbu:LABEL>SPINNAKER</dbu:LABEL>
+            <dbu:CATEGORY>village</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>amenity</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.53032861,39.90392551</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>www.spinnakervacanze.com</dbu:HREF>
+            <dbu:ADDRESS>Località Brabau - Strada Torregrande - Pontile Località Brabau</dbu:ADDRESS>
+            <dbu:ISTAT>095038</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a9c">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.97880848,40.61426428 8.97880848,40.61426428</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>C8731D57A5BD4B5DA66374C99F85CD8C</dbu:POIUUID>
+            <dbu:LABEL>Ponte Romano Ezzu</dbu:LABEL>
+            <dbu:CATEGORY>bridge</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.97880848,40.61426428</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=20929</dbu:HREF>
+            <dbu:ISTAT>090052</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a9d">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.28675181,40.59587714 8.28675181,40.59587714</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>24AB99F70EB7402181045230A083B5DB</dbu:POIUUID>
+            <dbu:LABEL>Fertilia, ponte romano</dbu:LABEL>
+            <dbu:CATEGORY>bridge</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.28675181,40.59587714</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=20928</dbu:HREF>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a9e">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.10306334,39.85726646 9.10306334,39.85726646</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>FCDBC03C4A3E47B8A0F7474A8BD4FBEC</dbu:POIUUID>
+            <dbu:LABEL>Chiesa S. Sofia</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.10306334,39.85726646</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ISTAT>095082</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3a9f">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.30725361,39.8534793 9.30725361,39.8534793</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>3CAE51E68C7244D2823297A563DF8B43</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Sebastiano</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.30725361,39.8534793</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ISTAT>105015</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aa0">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.93023981,40.09602146 8.93023981,40.09602146</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>D442B090807A44758E568D80180C9678</dbu:POIUUID>
+            <dbu:LABEL>Chiesa Santa Maria</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.93023981,40.09602146</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ISTAT>095007</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aa1">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.91797441,40.09909335 8.91797441,40.09909335</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>5C035B553C734A4D8D894EF7BF6F9A65</dbu:POIUUID>
+            <dbu:LABEL>Chiesa San Nicola</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.91797441,40.09909335</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ISTAT>095063</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aa2">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.22716216,39.86635827 9.22716216,39.86635827</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>C93B5293E92C49619D55D558F9E42F9C</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di S. Cosimo</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.22716216,39.86635827</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ISTAT>092121</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aa3">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.04662015,40.5288856 9.04662015,40.5288856</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>EB8F67BF4B95462E95C6A7E0CF65BA0D</dbu:POIUUID>
+            <dbu:LABEL>Chiesa Madonna di Fatima</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.04662015,40.5288856</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ISTAT>090018</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aa4">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.32457591,39.83922126 9.32457591,39.83922126</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>D4D4C75C3D80447EA7B87E2C6BACA456</dbu:POIUUID>
+            <dbu:LABEL>Chiesa XIX secolo</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.32457591,39.83922126</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ISTAT>105015</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aa5">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.34942335,39.8682328 9.34942335,39.8682328</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>E96D8C9D4C0B40E9828799939E756D87</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Cristoforo</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.34942335,39.8682328</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:ISTAT>105015</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aa6">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.9366121,40.16556073 8.9366121,40.16556073</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>F2C1E9A685934FFA9D6AC6B05FE4CA79</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Santu Antine</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.9366121,40.16556073</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18882</dbu:HREF>
+            <dbu:ISTAT>095052</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aa7">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.50795284,40.09330901 8.50795284,40.09330901</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>7AA4C2942CC94DB5A0CB25D8FC05FC7F</dbu:POIUUID>
+            <dbu:LABEL>Basiliche di Cornus</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.50795284,40.09330901</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17898</dbu:HREF>
+            <dbu:ISTAT>095019</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aa8">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.86485615,40.90499669 8.86485615,40.90499669</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>C08EB34FB00D4A07A3EBC240BC4A9754</dbu:POIUUID>
+            <dbu:LABEL>Nostra Signora o Madonna delle Grazie</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.86485615,40.90499669</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17947</dbu:HREF>
+            <dbu:ISTAT>090087</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aa9">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.56152388,40.67824388 8.56152388,40.67824388</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>E184A025379742F28560840CE0574344</dbu:POIUUID>
+            <dbu:LABEL>Oratorio di Santa Croce</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.56152388,40.67824388</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17895</dbu:HREF>
+            <dbu:ISTAT>090072</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aaa">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.71959645,40.5232949 8.71959645,40.5232949</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>43FD2C01CE4C445F966BEBF230A4EBF9</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Santa Vittoria</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.71959645,40.5232949</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18330</dbu:HREF>
+            <dbu:ISTAT>090071</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aab">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.65742882,40.39925503 8.65742882,40.39925503</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>8D42F6532BF44441B95FA93AE4932BFD</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Giorgio</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.65742882,40.39925503</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18321</dbu:HREF>
+            <dbu:ISTAT>090059</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aac">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.83515166,40.54991523 8.83515166,40.54991523</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>A378C0CD622A4B38A261D3E77F9364B4</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Santa Caterina</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.83515166,40.54991523</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=21634</dbu:HREF>
+            <dbu:ISTAT>090042</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aad">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.14980406,40.91786673 9.14980406,40.91786673</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>E8D13BD6A2DE4EA3BF7159EAE04C0E9C</dbu:POIUUID>
+            <dbu:LABEL>SS. Cosma e Damiano</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.14980406,40.91786673</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=21614</dbu:HREF>
+            <dbu:ISTAT>104025</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aae">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.81809738,40.74894092 8.81809738,40.74894092</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>153D0309895440DA9018B8633D130322</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Matteo</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.81809738,40.74894092</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=21635</dbu:HREF>
+            <dbu:ISTAT>090025</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aaf">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.10346261,40.9027531 9.10346261,40.9027531</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>450C6DFB4842480887D4BAC2DB422741</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Pietro</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.10346261,40.9027531</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=21624</dbu:HREF>
+            <dbu:ISTAT>104025</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ab0">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.31384287,40.55818905 8.31384287,40.55818905</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>335613885C8647B1BA1F93B5AD231DFD</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Francesco</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.31384287,40.55818905</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18261</dbu:HREF>
+            <dbu:ISTAT>090003</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ab1">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.31864285,40.55651611 8.31864285,40.55651611</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>F7BF0081316E48A6B395EF9406CC3BB0</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Michele</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.31864285,40.55651611</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18293</dbu:HREF>
+            <dbu:ISTAT>090003</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ab2">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.11512518,39.22526346 9.11512518,39.22526346</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>9D644B0173F948AABD9E70A7693A89D2</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Lorenzo</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.11512518,39.22526346</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17746</dbu:HREF>
+            <dbu:ISTAT>092009</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ab3">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.59031255,39.90273292 8.59031255,39.90273292</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>EAD7AB9DCF884EDDAA6E755D3B2C5E0C</dbu:POIUUID>
+            <dbu:LABEL>Cattedrale di Santa Maria Assunta</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.59031255,39.90273292</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18417</dbu:HREF>
+            <dbu:ISTAT>095038</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ab4">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.90837322,39.483348 8.90837322,39.483348</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>D42DC93CB78343C29A409D5DF14B2CFF</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Gemiliano</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.90837322,39.483348</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17926</dbu:HREF>
+            <dbu:ISTAT>106013</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ab5">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.53281071,39.31417084 8.53281071,39.31417084</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>5D2C1D2AA4854C6E972310B3D27805C2</dbu:POIUUID>
+            <dbu:LABEL>Chiesa del Collegio</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.53281071,39.31417084</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18353</dbu:HREF>
+            <dbu:ISTAT>107009</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ab6">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.53205024,39.31225333 8.53205024,39.31225333</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>F407AC3E03B247F6BB3FBBB5BC7400A5</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Francesco</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.53205024,39.31225333</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18296</dbu:HREF>
+            <dbu:ISTAT>107009</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ab7">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.54528081,39.31050457 8.54528081,39.31050457</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>3EB1E37F5D304A188F6E3DDECAA438E6</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Santa Maria di Valverde</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.54528081,39.31050457</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17810</dbu:HREF>
+            <dbu:ISTAT>107009</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ab8">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.30562055,39.14562805 8.30562055,39.14562805</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>A5B41EF6FE3447D891DF0EF721173721</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Carlo Borromeo</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.30562055,39.14562805</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18290</dbu:HREF>
+            <dbu:ISTAT>107004</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ab9">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.08262615,39.39145629 9.08262615,39.39145629</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>C611B9FEF30749739D85F1F6B2ED899B</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Saturno</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.08262615,39.39145629</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17812</dbu:HREF>
+            <dbu:ISTAT>092088</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aba">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.73274299,39.4568262 8.73274299,39.4568262</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>DD11EDC71F8349A58855DF5083D621F1</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Santa Barbara</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.73274299,39.4568262</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18248</dbu:HREF>
+            <dbu:ISTAT>106025</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3abb">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.82365443,39.61405359 8.82365443,39.61405359</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>AC4741E5748F4E1EA6FBD8B4A60FF3D7</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Gregorio</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.82365443,39.61405359</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17958</dbu:HREF>
+            <dbu:ISTAT>106016</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3abc">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.14431709,39.25264209 9.14431709,39.25264209</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>ADFAD3C0DBB04774B6341CD9A3BCA087</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Sant'Ambrogio</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.14431709,39.25264209</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18306</dbu:HREF>
+            <dbu:ISTAT>092109</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3abd">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.53359537,39.31214938 8.53359537,39.31214938</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>3ECD2DEEE41C4E0D8C919699818CB0A8</dbu:POIUUID>
+            <dbu:LABEL>Chiesa della Madonna delle Grazie o Convento dei Frati Minori</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.53359537,39.31214938</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=19231</dbu:HREF>
+            <dbu:ISTAT>107009</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3abe">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.53283509,39.31348321 8.53283509,39.31348321</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>6DAB15DEA90A4BCA96ED522E0DA473E7</dbu:POIUUID>
+            <dbu:LABEL>Cattedrale di Santa Chiara</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.53283509,39.31348321</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17799</dbu:HREF>
+            <dbu:ISTAT>107009</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3abf">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.11599788,39.21511468 9.11599788,39.21511468</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>B6EE784B74404BA180F72A4B71BAC38D</dbu:POIUUID>
+            <dbu:LABEL>Chiesa e Convento di Santa Rosalia</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.11599788,39.21511468</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18272</dbu:HREF>
+            <dbu:ISTAT>092009</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ac0">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.11287726,39.21941252 9.11287726,39.21941252</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>72DC63C0056D4FDC8F87A1B9C8DEC2B3</dbu:POIUUID>
+            <dbu:LABEL>Cripta di Sant'Efisio</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.11287726,39.21941252</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17839</dbu:HREF>
+            <dbu:ISTAT>092009</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ac1">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.54745109,39.30677061 8.54745109,39.30677061</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>8FD8722E248140EAB555B25E96811E37</dbu:POIUUID>
+            <dbu:LABEL>Chiesa San Salvatore</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.54745109,39.30677061</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18073</dbu:HREF>
+            <dbu:ISTAT>107009</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ac2">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.68647697,40.4487504 8.68647697,40.4487504</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>27AEF133BB1C41098AA778679EB7F70B</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Santa Maria Iscalas</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.68647697,40.4487504</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18066</dbu:HREF>
+            <dbu:ISTAT>090027</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ac3">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.70821776,39.94689244 8.70821776,39.94689244</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>937C294606C7484595972FE0864E6498</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Teodoro di Congius</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.70821776,39.94689244</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18138</dbu:HREF>
+            <dbu:ISTAT>095059</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ac4">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.99870817,39.28914056 8.99870817,39.28914056</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>275A6CD362C44604870CA6039E23A26C</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Giovanni</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.99870817,39.28914056</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17756</dbu:HREF>
+            <dbu:ISTAT>092003</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ac5">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.79279505,39.54556252 8.79279505,39.54556252</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>22E637E8D6194C78A61B11BD48935EA2</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Gavino</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.79279505,39.54556252</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17942</dbu:HREF>
+            <dbu:ISTAT>106014</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ac6">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.61380461,39.91590337 8.61380461,39.91590337</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>A1D46CC169AD472399C52A5D106165DD</dbu:POIUUID>
+            <dbu:LABEL>Chiesa della Maddalena di Silì</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.61380461,39.91590337</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17932</dbu:HREF>
+            <dbu:ISTAT>095038</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ac7">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.63148653,39.53638111 8.63148653,39.53638111</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>CBA77F3AAE6646FDB3DD6157F7D18A34</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Santa Maria</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.63148653,39.53638111</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17876</dbu:HREF>
+            <dbu:ISTAT>106008</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ac8">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.64197751,39.27752678 8.64197751,39.27752678</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>3441E49A69D14C7FA9F2927A821640C5</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Santa Maria della Neve</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.64197751,39.27752678</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18414</dbu:HREF>
+            <dbu:ISTAT>107022</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ac9">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.64094417,39.27582132 8.64094417,39.27582132</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>38E3EC52D0CC471888C6094551B4D8EF</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Ranieri</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.64094417,39.27582132</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17853</dbu:HREF>
+            <dbu:ISTAT>107022</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aca">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.81342798,40.77625218 8.81342798,40.77625218</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>E8479B5A0B21400ABC892B0AFB74BE21</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Pantaleo</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.81342798,40.77625218</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=19232</dbu:HREF>
+            <dbu:ISTAT>090039</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3acb">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.8764273,40.12076506 8.8764273,40.12076506</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>60D2321DC33842B9ADCC0A5E40D352A8</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Pietro di Zuri</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.8764273,40.12076506</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17856</dbu:HREF>
+            <dbu:ISTAT>095016</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3acc">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.06908238,39.34014752 9.06908238,39.34014752</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>015EFB3D0ABD449FB0810A6BF543F1A3</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Gemiliano</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.06908238,39.34014752</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17835</dbu:HREF>
+            <dbu:ISTAT>092074</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3acd">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.89155182,39.67025578 8.89155182,39.67025578</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>CE81169BFF634671B0A1EE7551AE9A27</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Michele Arcangelo</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.89155182,39.67025578</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17841</dbu:HREF>
+            <dbu:ISTAT>106021</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ace">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.56081408,40.47315784 8.56081408,40.47315784</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>C86617CC20D94955BA9367F8A008433A</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Sant'Antonio Abate</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.56081408,40.47315784</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17949</dbu:HREF>
+            <dbu:ISTAT>090040</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3acf">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.56065459,40.47140696 8.56065459,40.47140696</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>9B49F82B102940348BF78E95E4DFA802</dbu:POIUUID>
+            <dbu:LABEL>Santo Stefano</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.56065459,40.47140696</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17956</dbu:HREF>
+            <dbu:ISTAT>090040</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ad0">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.96217226,39.61742391 8.96217226,39.61742391</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>0ED6E190E8F74E0E8A9C0589EEC8A9E5</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Giovanni Battista</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.96217226,39.61742391</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18504</dbu:HREF>
+            <dbu:ISTAT>106026</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ad1">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.96254485,39.61732281 8.96254485,39.61732281</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>15271515BDC44715864356A1FA646567</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Pietro</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.96254485,39.61732281</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17847</dbu:HREF>
+            <dbu:ISTAT>106026</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ad2">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.00051908,39.70247131 9.00051908,39.70247131</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>7F147087B5FD4404BE95A26F5C2FF03E</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Giovanni Battista</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.00051908,39.70247131</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17763</dbu:HREF>
+            <dbu:ISTAT>106002</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ad3">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.13636886,39.53636467 9.13636886,39.53636467</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>308674D6C9874350A8F764D38D183D15</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Santa Maria di Segolai</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.13636886,39.53636467</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17930</dbu:HREF>
+            <dbu:ISTAT>092070</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ad4">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.99532471,39.03355122 8.99532471,39.03355122</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>2D044778499C4BAC9BD3EF9B53010455</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Pietro</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.99532471,39.03355122</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17834</dbu:HREF>
+            <dbu:ISTAT>092099</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ad5">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.88962793,40.53466007 8.88962793,40.53466007</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>7C682AB5AF3746F3A077CC2AD42599AA</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Giacomo</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.88962793,40.53466007</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17902</dbu:HREF>
+            <dbu:ISTAT>090032</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ad6">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.90640999,40.54536692 8.90640999,40.54536692</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>7D1D4202B8C54A85AC3F3ADAB69C76EC</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Santa Croce</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.90640999,40.54536692</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18074</dbu:HREF>
+            <dbu:ISTAT>090032</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ad7">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.55015429,40.71860012 8.55015429,40.71860012</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>DECC456EEF4C4095838CEAA06944F5FB</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Pietro di Silki</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.55015429,40.71860012</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=18347</dbu:HREF>
+            <dbu:ISTAT>090064</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ad8">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.48840484,40.74788488 8.48840484,40.74788488</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>B4098F291A834C9C9973C7D1F134D868</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Sant'Antonio di Noi Noi</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.48840484,40.74788488</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17757</dbu:HREF>
+            <dbu:ISTAT>090064</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ad9">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.83473193,40.12252094 8.83473193,40.12252094</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>87C05C693EEF4885A1BF72C55C1BF438</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Palmerio</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.83473193,40.12252094</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17783</dbu:HREF>
+            <dbu:ISTAT>095021</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ada">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.63523472,40.04561108 8.63523472,40.04561108</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>1D99DE7B4BF14A258CEE1FFAB6C7810B</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Paolo</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.63523472,40.04561108</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17946</dbu:HREF>
+            <dbu:ISTAT>095027</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3adb">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.17855015,39.38350283 9.17855015,39.38350283</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>3548E1C2367F4AF59879057D4B7AA123</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Pantaleo</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.17855015,39.38350283</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17846</dbu:HREF>
+            <dbu:ISTAT>092017</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3adc">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.13111661,39.56225845 9.13111661,39.56225845</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>1EF17A1DFDC743878ED1E864741CBE0F</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Pietro</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.13111661,39.56225845</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17872</dbu:HREF>
+            <dbu:ISTAT>092083</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3add">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.57198536,39.09798795 8.57198536,39.09798795</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>23715BF59C3C48E6A3F2B893CF856A12</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Santa Maria</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.57198536,39.09798795</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17906</dbu:HREF>
+            <dbu:ISTAT>107021</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ade">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.8005496,40.42412212 8.8005496,40.42412212</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>F59B650910144E049566B4499F012FAA</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Lorenzo di Rebeccu</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.8005496,40.42412212</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17784</dbu:HREF>
+            <dbu:ISTAT>090013</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3adf">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.56492595,40.67660185 8.56492595,40.67660185</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>4BC8C791D5914AD480C045CDACC582FB</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Santa Vittoria</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.56492595,40.67660185</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17886</dbu:HREF>
+            <dbu:ISTAT>090072</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ae0">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.56140217,40.6784184 8.56140217,40.6784184</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>C8A58D0DCFBE448AA581020D0A528411</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Santa Anastasia</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.56140217,40.6784184</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17890</dbu:HREF>
+            <dbu:ISTAT>090072</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ae1">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.46920339,40.68657002 8.46920339,40.68657002</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>3E742D2136A24E4D8866E2CEDA80B252</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Giorgio di Oliastreto</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.46920339,40.68657002</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17795</dbu:HREF>
+            <dbu:ISTAT>090077</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ae2">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.14259603,40.7318248 9.14259603,40.7318248</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>9505066DECFE47C886F36293B133FCCD</dbu:POIUUID>
+            <dbu:LABEL>Nostra Signora di Otti</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.14259603,40.7318248</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17896</dbu:HREF>
+            <dbu:ISTAT>104018</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ae3">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.38284997,40.64979442 8.38284997,40.64979442</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>0E1CE6772D0E4A73B1A9C9522324568C</dbu:POIUUID>
+            <dbu:LABEL>Nostra Signora di Talia</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.38284997,40.64979442</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17908</dbu:HREF>
+            <dbu:ISTAT>090048</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ae4">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.96992896,39.28630883 8.96992896,39.28630883</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>29E4B920903D49FBB408D1D9E4A9755E</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Santa Maria</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.96992896,39.28630883</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17825</dbu:HREF>
+            <dbu:ISTAT>092090</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ae5">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.15339847,39.2599663 9.15339847,39.2599663</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>2AFDB37699204E4AA104B50B3C5F7008</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Lussorio</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.15339847,39.2599663</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17830</dbu:HREF>
+            <dbu:ISTAT>092068</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ae6">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.16853776,39.2545471 9.16853776,39.2545471</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>12DBF5B6407F424DAC14B9C9D9744DF4</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Giuliano</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.16853776,39.2545471</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17916</dbu:HREF>
+            <dbu:ISTAT>092068</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ae7">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.92919694,39.31551636 8.92919694,39.31551636</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>F06513214F4A4225AB5926BA5BDBF5F2</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Platano</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.92919694,39.31551636</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17878</dbu:HREF>
+            <dbu:ISTAT>092102</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ae8">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.12207289,39.36754629 9.12207289,39.36754629</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>981BC42A10814EC4BA30746D1529311D</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Santa Maria di Sibiola</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.12207289,39.36754629</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17933</dbu:HREF>
+            <dbu:ISTAT>092071</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3ae9">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.54006424,39.97357791 8.54006424,39.97357791</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>F510FCF07C454337BD195B93839A7EE8</dbu:POIUUID>
+            <dbu:LABEL>Chiesa e Battistero di San Giovanni Battista</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.54006424,39.97357791</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17887</dbu:HREF>
+            <dbu:ISTAT>095035</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aea">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.59019066,39.5282055 9.59019066,39.5282055</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>9536A1F2558147C3BED689CF7230FF7B</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Nicola di Quirra</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.59019066,39.5282055</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17871</dbu:HREF>
+            <dbu:ISTAT>092064</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aeb">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.43828378,40.48394769 9.43828378,40.48394769</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>773133D7D4AD436B90D6BB9A43455134</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Pietro</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.43828378,40.48394769</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17907</dbu:HREF>
+            <dbu:ISTAT>091058</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aec">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.24816187,41.0486806 9.24816187,41.0486806</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>4632352CA5CB41A5BC97B028729D43D5</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Leonardo</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">9.24816187,41.0486806</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17905</dbu:HREF>
+            <dbu:ISTAT>104014</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aed">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.66433969,40.17879132 8.66433969,40.17879132</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>2C060F19EF1B4D63A208230FD575EC09</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Leonardo</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.66433969,40.17879132</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17952</dbu:HREF>
+            <dbu:ISTAT>095049</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aee">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.60148995,40.597069 8.60148995,40.597069</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>1F3DA71D8BE441828AB3426BEC2222B6</dbu:POIUUID>
+            <dbu:LABEL>Nostra Signora de Coros o S. Maria di Coros</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.60148995,40.597069</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17927</dbu:HREF>
+            <dbu:ISTAT>090033</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3aef">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.52651088,40.63517887 8.52651088,40.63517887</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>F8769A4D01144DABA38ACD2A4EE541BD</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Nostra Signora di Paulis</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.52651088,40.63517887</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17788</dbu:HREF>
+            <dbu:ISTAT>090033</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3af0">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.88973039,40.29030829 8.88973039,40.29030829</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>82468F1F386948869BC10A7F22D18036</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Lorenzo</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.88973039,40.29030829</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17845</dbu:HREF>
+            <dbu:ISTAT>091083</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3af1">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.65621259,40.29638247 8.65621259,40.29638247</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>02151A2E66024D85AB3B6B33B05D2037</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Pietro</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.65621259,40.29638247</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17861</dbu:HREF>
+            <dbu:ISTAT>091084</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3af2">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.69395674,40.28461229 8.69395674,40.28461229</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>4F8394330AF94FB4A99D09E2B59BF035</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di Santa Maria di Corte</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.69395674,40.28461229</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17866</dbu:HREF>
+            <dbu:ISTAT>091084</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3af3">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.71531391,40.65826499 8.71531391,40.65826499</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>782543A932554BF686356631B675D00C</dbu:POIUUID>
+            <dbu:LABEL>Chiesa di San Michele di Salvenero</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.71531391,40.65826499</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17873</dbu:HREF>
+            <dbu:ISTAT>090026</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
+    </gml:featureMember>
+    <gml:featureMember>
+        <dbu:IDT_OP08V_POI_EXPORT fid="IDT_OP08V_POI_EXPORT.fid--26f3c379_1979c9956ee_3af4">
+            <gml:boundedBy>
+                <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.99129737,40.73299676 8.99129737,40.73299676</gml:coordinates>
+                </gml:Box>
+            </gml:boundedBy>
+            <dbu:POIUUID>0AB9A11817AC4EC7A4BB02955BF4DE1E</dbu:POIUUID>
+            <dbu:LABEL>Nostra Signora de Coros</dbu:LABEL>
+            <dbu:CATEGORY>church</dbu:CATEGORY>
+            <dbu:MACROCATEGORY>building</dbu:MACROCATEGORY>
+            <dbu:GEOGPT>
+                <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+                    <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">8.99129737,40.73299676</gml:coordinates>
+                </gml:Point>
+            </dbu:GEOGPT>
+            <dbu:HREF>http://www.sardegnacultura.it/j/v/253?v=2&amp;c=2488&amp;t=1&amp;s=17748</dbu:HREF>
+            <dbu:ISTAT>090075</dbu:ISTAT>
+        </dbu:IDT_OP08V_POI_EXPORT>
     </gml:featureMember>
 </wfs:FeatureCollection>

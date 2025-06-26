@@ -574,4 +574,10 @@ public class GPWMSGetFeatureInfoStaxGml2ReaderTest extends WMSGetFeatureInfoStax
         logger.info("#######################FEATURE_COLLECTION_WATER_TEMP : {}\n", JACKSON_SUPPORT.getDefaultMapper()
                 .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("WaterTemp.xml"))));
     }
+
+    @Test
+    public void d_y_wmsGetFeatureInfoStaxReaderTest() throws Exception {
+        logger.info("#######################FEATURE_COLLECTION_AIDT_OP08V_POI_EXPORT : {}\n", JACKSON_SUPPORT.getDefaultMapper()
+                .writeValueAsString(wmsGetFeatureInfoStaxReader.read(storage.find("AIDT_OP08V_POI_EXPORT.xml"))));
+    }
 }

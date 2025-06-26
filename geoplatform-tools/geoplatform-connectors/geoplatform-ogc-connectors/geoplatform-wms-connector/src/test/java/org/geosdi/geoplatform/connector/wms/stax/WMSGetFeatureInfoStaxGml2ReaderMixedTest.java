@@ -53,8 +53,7 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Stream.of;
 import static org.geosdi.geoplatform.connector.wms.stax.GPWMSGetFeatureInfoStaxGml2ReaderTest.JACKSON_SUPPORT;
 import static org.geosdi.geoplatform.connector.wms.stax.WMSGetFeatureInfoStaxReaderTest.wmsGetFeatureInfoStaxReader;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;
 
 /**
@@ -88,34 +87,37 @@ public class WMSGetFeatureInfoStaxGml2ReaderMixedTest {
         GPWMSFeatureStore wmsFeatureStore = wmsGetFeatureInfoStaxReader.readAsStore(file);
         List<Feature> alt300A400Features = wmsFeatureStore.getFeaturesByKey("alt_300_a_400");
         assertNotNull(alt300A400Features);
-        assertTrue(alt300A400Features.size() == 2);
+        assertEquals(2, alt300A400Features.size());
         List<Feature> cfZonaRossa = wmsFeatureStore.getFeaturesByKey("CF_zonarossa_mappeinterattive");
         assertNotNull(cfZonaRossa);
-        assertTrue(cfZonaRossa.size() == 1);
+        assertEquals(1, cfZonaRossa.size());
         List<Feature> areaUrbValoreStorico = wmsFeatureStore.getFeaturesByKey("ABR_1_4_1_aree_urb_val_storico");
         assertNotNull(areaUrbValoreStorico);
-        assertTrue(areaUrbValoreStorico.size() == 35);
+        assertEquals(35, areaUrbValoreStorico.size());
         List<Feature> comuniAffCom = wmsFeatureStore.getFeaturesByKey("ABR_4_5_comuni_aff_COM");
         assertNotNull(comuniAffCom);
-        assertTrue(comuniAffCom.size() == 1);
+        assertEquals(1, comuniAffCom.size());
         List<Feature> zonaPianificazione = wmsFeatureStore.getFeaturesByKey("CF_zonepianificazione_mappeinterattive");
         assertNotNull(zonaPianificazione);
-        assertTrue(zonaPianificazione.size() == 1);
+        assertEquals(1, zonaPianificazione.size());
         List<Feature> alt600A700Features = wmsFeatureStore.getFeaturesByKey("alt_600_a_700");
         assertNotNull(alt600A700Features);
-        assertTrue(alt600A700Features.size() == 3);
+        assertEquals(3, alt600A700Features.size());
         List<Feature> pozzuoliAcqueFeatures = wmsFeatureStore.getFeaturesByKey("admin_shp_pozzuoli447so_acque");
         assertNotNull(pozzuoliAcqueFeatures);
-        assertTrue(pozzuoliAcqueFeatures.size() == 6);
+        assertEquals(6, pozzuoliAcqueFeatures.size());
         List<Feature> fluidsReteZKFeature = wmsFeatureStore.getFeaturesByKey("fluids_rete_zk");
         assertNotNull(fluidsReteZKFeature);
-        assertTrue(fluidsReteZKFeature.size() == 20);
+        assertEquals(20, fluidsReteZKFeature.size());
         List<Feature> corsiAcque = wmsFeatureStore.getFeaturesByKey("ait_corsi_acqua_2018");
         assertNotNull(corsiAcque);
-        assertTrue(corsiAcque.size() == 6);
+        assertEquals(6, corsiAcque.size());
         List<Feature> elementiRidotti = wmsFeatureStore.getFeaturesByKey("elem_ridotto_2");
         assertNotNull(elementiRidotti);
-        assertTrue(elementiRidotti.size() == 7);
+        assertEquals(7, elementiRidotti.size());
+        List<Feature> poiExport = wmsFeatureStore.getFeaturesByKey("IDT_OP08V_POI_EXPORT");
+        assertNotNull(poiExport);
+        assertEquals(150, poiExport.size());
         fromIterable(wmsFeatureStore.getStore().entrySet())
                 .doOnComplete(() -> logger.info("@@@@@@@@@@@@@@@@@@RX Terminated its work."))
                 .subscribe(k -> logger.info("###############{} - size : {}\n", k.getKey(), k.getValue().size()));

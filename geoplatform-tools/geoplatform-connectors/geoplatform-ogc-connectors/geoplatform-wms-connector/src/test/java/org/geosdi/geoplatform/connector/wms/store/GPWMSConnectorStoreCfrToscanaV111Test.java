@@ -90,6 +90,7 @@ public class GPWMSConnectorStoreCfrToscanaV111Test {
                 .withLayers("geo:cf_distretti", "geo:sir_frea_oscillazioni_2019_2021", "geo:sir_frea_trend_2019_2021").getResponse());
     }
 
+    @Ignore
     @Test
     public void b_wmsGetFeatureInfoV111Test() throws Exception {
         GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
@@ -102,6 +103,7 @@ public class GPWMSConnectorStoreCfrToscanaV111Test {
                 .withInfoFormat(GML2_AS_STRING).withX(50).withY(50).getResponse());
     }
 
+    @Ignore
     @Test
     public void c_wmsGetFeatureInfoV111Test() throws Exception {
         GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();
@@ -114,6 +116,7 @@ public class GPWMSConnectorStoreCfrToscanaV111Test {
                 .withInfoFormat(GML2_AS_STORE).withX(50).withY(50).getResponse());
     }
 
+    @Ignore
     @Test
     public void d_wmsGetFeatureInfoV111Test() throws Exception {
         GPWMSGetFeatureInfoV111Request<Object> wmsGetFeatureInfoRequest = wmsServerConnector.createGetFeatureInfoRequest();

@@ -134,7 +134,7 @@ public class GPGeocodingServiceTest extends GPBaseConfigTest {
 
     @Test
     public void gpGeocodingTheGoogleplexTest() throws Exception {
-        GeocodingResult[] results = gpGeocodingService.newRequest().address("1600 Amphitheatre Parkway, Mountain View, CA").await();
+        GeocodingResult[] results = gpGeocodingService.newRequest().address("Mountain View, CA").await();
         assertNotNull(results);
         logger.info("@@@@@@@@@@@@@@@@@@@@@@@ADDRESS : {}\n", results[0].formattedAddress);
     }

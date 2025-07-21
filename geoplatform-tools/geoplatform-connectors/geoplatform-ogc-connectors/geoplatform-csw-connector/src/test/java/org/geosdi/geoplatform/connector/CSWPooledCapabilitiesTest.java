@@ -46,7 +46,7 @@ import org.slf4j.Logger;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.net.URL;
+import java.net.URI;
 
 /**
  *
@@ -66,9 +66,9 @@ public class CSWPooledCapabilitiesTest {
     public void cswPooledIspra202GetCapabilitiesTest() throws Exception {
         GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilderPool
                 .newConnector()
-                .withServerUrl(new URL("http://www.geoportale.isprambiente.it"
+                .withServerUrl(new URI("http://www.geoportale.isprambiente.it"
                                 + "/geoportale/csw?request=GetCapabilities"
-                                + "&service=CSW&version=2.0.2")).build();
+                                + "&service=CSW&version=2.0.2").toURL()).build();
         CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
         logger.info("\n\n#######################CSW_GET_CAP_RESPONSE_AS_STRING : {}\n\n", request.getResponseAsString());
     }
@@ -78,9 +78,9 @@ public class CSWPooledCapabilitiesTest {
     public void cswPooledGeoSDI202GetCapabilitiesTest() throws Exception {
         GPCatalogConnectorStore serverConnector = GPCSWConnectorBuilderPool
                 .newConnector()
-                .withServerUrl(new URL("http://catalog.geosdi.org/geonetwork/"
+                .withServerUrl(new URI("http://catalog.geosdi.org/geonetwork/"
                                 + "srv/eng/csw?request=GetCapabilities&service=CSW"
-                                + "&version=2.0.2"))
+                                + "&version=2.0.2").toURL())
                 .build();
         CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
         logger.info("\n\n#######################CSW_GET_CAP_RESPONSE_AS_STRING : {}\n\n", request.getResponseAsString());

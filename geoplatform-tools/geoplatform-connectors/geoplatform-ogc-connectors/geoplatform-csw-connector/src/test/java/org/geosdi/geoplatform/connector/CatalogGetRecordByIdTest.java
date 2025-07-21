@@ -56,6 +56,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.xml.bind.JAXBElement;
 import java.io.FileOutputStream;
+import java.net.URI;
 import java.net.URL;
 import java.util.List;
 
@@ -126,8 +127,8 @@ public class CatalogGetRecordByIdTest {
     public void testTypeFullIspra() throws Exception {
         GPCatalogConnectorStore ispraServerConnector = GPCSWConnectorBuilder
                 .newConnector()
-                .withServerUrl(new URL("http://www.geoportale.isprambiente.it/"
-                        + "geoportale/csw/discovery"))
+                .withServerUrl(new URI("http://www.geoportale.isprambiente.it/"
+                        + "geoportale/csw/discovery").toURL())
                 .build();
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request = ispraServerConnector.createGetRecordByIdRequest();
         request.setId("ispra_rm:20150521:185000");
@@ -176,7 +177,7 @@ public class CatalogGetRecordByIdTest {
     @Ignore(value = "Catalog is DOWN")
     @Test
     public void testOutputGmdIspra() throws Exception {
-        URL url = new URL(ISPRA_URL);
+        URL url = new URI(ISPRA_URL).toURL();
         GPCatalogConnectorStore connector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request = connector.createGetRecordByIdRequest();
@@ -197,7 +198,7 @@ public class CatalogGetRecordByIdTest {
     @Ignore(value = "Catalog is DOWN")
     @Test
     public void testOutputOriginalIspra() throws Exception {
-        URL url = new URL(ISPRA_URL);
+        URL url = new URI(ISPRA_URL).toURL();
         GPCatalogConnectorStore connector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).build();
         CatalogGetRecordByIdRequest<GetRecordByIdResponseType> request = connector.createGetRecordByIdRequest();
@@ -213,7 +214,7 @@ public class CatalogGetRecordByIdTest {
     @Ignore("Require to add the SNIPC certificate into default keystore")
     @Test
     public void testSecureSnipc() throws Exception {
-        URL url = new URL(snipcUrl);
+        URL url = new URI(snipcUrl).toURL();
         GPSecurityConnector securityConnector = new BasicPreemptiveSecurityConnector(
                 snipcUsername, snipcPassword);
         GPCatalogConnectorStore snipcConnector = GPCSWConnectorBuilder.newConnector().
@@ -243,9 +244,8 @@ public class CatalogGetRecordByIdTest {
     @Ignore("Require to add the SNIPC certificate into default keystore")
     @Test
     public void testSecureOutputOriginalSnipc() throws Exception {
-        URL url = new URL(snipcUrl);
-        GPSecurityConnector securityConnector = new BasicPreemptiveSecurityConnector(
-                snipcUsername, snipcPassword);
+        URL url = new URI(snipcUrl).toURL();
+        GPSecurityConnector securityConnector = new BasicPreemptiveSecurityConnector(snipcUsername, snipcPassword);
         GPCatalogConnectorStore snipcConnector = GPCSWConnectorBuilder.newConnector().
                 withServerUrl(url).
                 withClientSecurity(securityConnector).

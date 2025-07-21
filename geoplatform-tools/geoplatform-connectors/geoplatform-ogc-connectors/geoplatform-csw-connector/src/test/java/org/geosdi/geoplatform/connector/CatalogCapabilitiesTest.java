@@ -51,6 +51,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.net.URI;
 import java.net.URL;
 import java.util.List;
 
@@ -113,7 +114,7 @@ public class CatalogCapabilitiesTest {
     @Ignore(value = "There some problems.")
     @Test
     public void testGetCapabilitiesWithConnector() throws Exception {
-        URL url = new URL("http://catalog.geosdi.org/geonetwork/srv/eng/csw");
+        URL url = new URI("http://catalog.geosdi.org/geonetwork/srv/eng/csw").toURL();
         GPCatalogConnectorStore serverConnector = newConnector().withServerUrl(url).build();
         CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
         CapabilitiesType response = request.getResponse();
@@ -141,7 +142,7 @@ public class CatalogCapabilitiesTest {
     @Test
     public void testSecureGetCapabilities() throws Exception {
         GPCatalogConnectorStore serverConnector = newConnector()
-                .withServerUrl(new URL(snipcUrl))
+                .withServerUrl(new URI(snipcUrl).toURL())
                 .withClientSecurity(new BasicPreemptiveSecurityConnector(snipcUsername, snipcPassword))
                 .build();
         CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
@@ -153,7 +154,7 @@ public class CatalogCapabilitiesTest {
     @Test
     public void testGetCapabilitiesRNDTWithConnector() throws Exception {
         GPCatalogConnectorStore serverConnector = newConnector()
-                .withServerUrl(new URL("https://geodati.gov.it/RNDT/csw"))
+                .withServerUrl(new URI("https://geodati.gov.it/RNDT/csw").toURL())
                 .build();
         CatalogGetCapabilitiesRequest<CapabilitiesType> request = serverConnector.createGetCapabilitiesRequest();
         CapabilitiesType response = request.getResponse();

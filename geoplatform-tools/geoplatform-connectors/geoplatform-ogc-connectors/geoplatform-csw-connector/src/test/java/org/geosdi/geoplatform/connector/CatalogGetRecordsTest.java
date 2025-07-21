@@ -58,6 +58,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.xml.bind.JAXBElement;
 import java.math.BigInteger;
+import java.net.URI;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -139,7 +140,7 @@ public class CatalogGetRecordsTest {
     @Ignore("Catalog is down")
     @Test
     public void testCQLTemporalFilterGeomatys() throws Exception {
-        URL url = new URL("http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default");
+        URL url = new URI("http://demo.geomatys.com/mdweb-cnes-labs/WS/csw/default").toURL();
         GPCatalogConnectorStore sc = newConnector().
                 withServerUrl(url).build();
         CatalogGetRecordsRequest<GetRecordsResponseType> request = sc.createGetRecordsRequest();
@@ -168,7 +169,7 @@ public class CatalogGetRecordsTest {
     @Test
     public void testSecureGetRecords() throws Exception {
         GPCatalogConnectorStore snipcServerConnector = newConnector()
-                .withServerUrl(new URL(snipcUrl))
+                .withServerUrl(new URI(snipcUrl).toURL())
                 .withClientSecurity(new BasicPreemptiveSecurityConnector(snipcUsername, snipcPassword))
                 .build();
         CatalogGetRecordsRequest<GetRecordsResponseType> request = snipcServerConnector.createGetRecordsRequest();
@@ -193,7 +194,7 @@ public class CatalogGetRecordsTest {
     @Test
     public void testGetRecordsRNDTWithConnector() throws Exception {
         GPCatalogConnectorStore rndtServerConnector = newConnector()
-                .withServerUrl(new URL("http://www.rndt.gov.it/RNDT/CSW"))
+                .withServerUrl(new URI("http://www.rndt.gov.it/RNDT/CSW").toURL())
                 .build();
         CatalogGetRecordsRequest<GetRecordsResponseType> request = rndtServerConnector.createGetRecordsRequest();
         request.setTypeName(RECORD_V202);
@@ -217,7 +218,7 @@ public class CatalogGetRecordsTest {
     @Test
     public void testInternalGetRecordsTest() throws Exception {
         GPCatalogConnectorStore internalServer = newConnector()
-                .withServerUrl(new URL("http://catalog.geosdi.org:80/geonetwork/srv/eng/csw"))
+                .withServerUrl(new URI("http://catalog.geosdi.org:80/geonetwork/srv/eng/csw").toURL())
                 .build();
         CatalogFinderBean catalogFinder = new CatalogFinderBean();
         TextInfo textInfo = new TextInfo();
@@ -246,7 +247,7 @@ public class CatalogGetRecordsTest {
     @Test
     public void testGetRecordsOurCountAreaItaly() throws Exception {
         GPCatalogConnectorStore internalServer = newConnector()
-                .withServerUrl(new URL("http://catalog.geosdi.org:80/geonetwork/srv/eng/csw"))
+                .withServerUrl(new URI("http://catalog.geosdi.org:80/geonetwork/srv/eng/csw").toURL())
                 .build();
         CatalogFinderBean catalogFinder = new CatalogFinderBean();
         AreaInfo areaInfo = new AreaInfo();

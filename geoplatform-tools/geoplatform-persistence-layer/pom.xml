@@ -130,7 +130,7 @@
     </modules>
 
     <properties>
-        <hibernate-version>7.0.8.Final</hibernate-version>
+        <hibernate-version>7.0.9.Final</hibernate-version>
         <hibernate-commons-annotations-version>7.0.3.Final</hibernate-commons-annotations-version>
         <spring-data-jpa-version>3.5.2</spring-data-jpa-version>
         <hypersistence-utils.version>3.10.3</hypersistence-utils.version>

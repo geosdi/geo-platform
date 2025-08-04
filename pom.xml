@@ -1565,7 +1565,7 @@
         <junit.version>4.13.2</junit.version>
         <maven-surefire.version>3.5.3</maven-surefire.version>
         <gwt-plugin.version>2.10.0</gwt-plugin.version>
-        <univocity.parsers.version>2.10.1</univocity.parsers.version>
+        <univocity.parsers.version>2.10.2</univocity.parsers.version>
 
     </properties>
 

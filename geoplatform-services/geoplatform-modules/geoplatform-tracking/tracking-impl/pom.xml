@@ -97,6 +97,16 @@
             <groupId>net.java.dev.jsr-275</groupId>
             <artifactId>jsr-275</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+        </dependency>
         
         <!-- IGNITE REALTIME SMACK -->
         <dependency>
@@ -160,12 +170,6 @@
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-ws-security</artifactId>
-        </dependency>
-
-        <!-- LOGGER -->
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
         </dependency>
         
         <dependency>

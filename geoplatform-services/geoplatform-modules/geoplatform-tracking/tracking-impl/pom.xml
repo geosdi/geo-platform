@@ -97,6 +97,16 @@
             <groupId>net.java.dev.jsr-275</groupId>
             <artifactId>jsr-275</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+        </dependency>
         
         <!-- IGNITE REALTIME SMACK -->
         <dependency>
@@ -161,6 +171,7 @@
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-ws-security</artifactId>
         </dependency>
+        
         <!-- Velocity (Email templates) -->
         <dependency>
             <groupId>org.apache.velocity</groupId>
@@ -172,12 +183,16 @@
             <artifactId>javax.mail</artifactId>
         </dependency>
 
-        <!-- LOGGER -->
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
+       <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
         </dependency>
-        
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.geosdi</groupId>
             <artifactId>geoplatform-cxf-server-configurator</artifactId>

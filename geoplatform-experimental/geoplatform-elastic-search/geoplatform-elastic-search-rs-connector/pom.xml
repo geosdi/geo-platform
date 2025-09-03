@@ -93,11 +93,9 @@
             <artifactId>elasticsearch-rest-high-level-client</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>2.20.0</version>
         </dependency>
 
         <!-- =========================================================== -->

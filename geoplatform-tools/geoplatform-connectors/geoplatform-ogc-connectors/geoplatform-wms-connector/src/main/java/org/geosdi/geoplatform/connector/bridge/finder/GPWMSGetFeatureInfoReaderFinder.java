@@ -51,6 +51,7 @@ import java.util.Set;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 import static java.lang.Thread.currentThread;
+import static java.util.ServiceLoader.load;
 
 /**
  * @author Giuseppe La Scaleia - CNR IMAA geoSDI Group
@@ -61,8 +62,7 @@ public final class GPWMSGetFeatureInfoReaderFinder<Reader extends GPWMSGetFeatur
 
     private static final Logger logger = LoggerFactory.getLogger(GPWMSGetFeatureInfoReaderFinder.class);
     //
-    private volatile ServiceLoader<GPWMSGetFeatureInfoReader> loader = ServiceLoader.load(GPWMSGetFeatureInfoReader.class,
-            currentThread().getContextClassLoader());
+    private volatile ServiceLoader<GPWMSGetFeatureInfoReader> loader = load(GPWMSGetFeatureInfoReader.class, currentThread().getContextClassLoader());
 
     /**
      * @return {@link Set<GPWMSGetFeatureInfoReader>}
@@ -95,7 +95,7 @@ public final class GPWMSGetFeatureInfoReaderFinder<Reader extends GPWMSGetFeatur
     @Override
     protected <V extends GPImplementor> Set<Reader> loadImplementors(Class<V> type, Boolean all) {
         Iterator<GPWMSGetFeatureInfoReader> readerImplemetors = loader.iterator();
-        return new GPImplementorArraySet<>(new Iterator<Reader>() {
+        return new GPImplementorArraySet<>(new Iterator<>() {
 
             private Reader next;
 

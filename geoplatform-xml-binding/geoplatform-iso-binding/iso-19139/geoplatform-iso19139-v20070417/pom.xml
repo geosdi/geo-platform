@@ -113,7 +113,7 @@
             <plugin>
                 <groupId>org.jvnet.jaxb</groupId>
                 <artifactId>jaxb-maven-plugin</artifactId>
-                <version>4.0.8</version>
+                <version>4.0.10</version>
                 <configuration>
                     <schemaIncludes>
                         <value>iso/19139/*/gco/gco.xsd</value>

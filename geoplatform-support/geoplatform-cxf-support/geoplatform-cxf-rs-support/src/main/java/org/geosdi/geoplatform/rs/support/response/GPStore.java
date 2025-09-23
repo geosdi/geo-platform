@@ -48,10 +48,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static java.lang.Long.valueOf;
+import static java.util.stream.Collectors.toList;
 import static javax.annotation.meta.When.NEVER;
 
 /**
@@ -61,22 +60,16 @@ import static javax.annotation.meta.When.NEVER;
 @Getter
 @ToString
 @XmlTransient
-public abstract class GPStore<V> implements Serializable {
+public abstract class GPStore<V> extends GPCollectionStore<V, List<V>> implements Serializable {
 
     private static final long serialVersionUID = -8603598177950850051L;
-    //
-    private final Long total;
-    private final List<V> values;
 
     /**
      * @param theTotal
      * @param theValues
      */
     protected GPStore(@Nonnull(when = NEVER) Long theTotal, @Nonnull(when = NEVER) List<V> theValues) {
-        checkArgument(theTotal != null, "The Parameter total must not be null.");
-        checkArgument(theValues != null, "The Parameter values must not be null.");
-        this.total = theTotal;
-        this.values = theValues;
+        super(theTotal, theValues);
     }
 
     /**
@@ -87,11 +80,11 @@ public abstract class GPStore<V> implements Serializable {
      */
     public <T> GPSubStore<T> asSubStore(@Nonnull(when = NEVER) Function<V, T> theFunction) throws Exception {
         checkArgument(theFunction != null, "The Parameter function must not be null.");
-        List<T> subValues = this.values.stream()
+        List<T> subValues = this.getValues().stream()
                 .filter(Objects::nonNull)
                 .map(theFunction)
-                .collect(Collectors.toList());
-        return new GPSubStore(valueOf(subValues.size()), subValues);
+                .collect(toList());
+        return new GPSubStore((long) subValues.size(), subValues);
     }
 
     @XmlAccessorType(XmlAccessType.FIELD)

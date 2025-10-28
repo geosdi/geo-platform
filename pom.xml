@@ -1512,7 +1512,7 @@
 
         <aspectj-version>1.8.9</aspectj-version>
         <ubl-version>2.0</ubl-version>
-        <jetty-version>9.4.49.v20220914</jetty-version>
+        <jetty-version>9.4.58.v20250814</jetty-version>
 
         <postgresql-version>42.7.5</postgresql-version>
         <postgis-jdbc-version>2024.1.0</postgis-jdbc-version>
